@@ -42,13 +42,13 @@ ExampleViewController.m
     
     //set parameters
     TokenRequest* tokenRequest = [TokenRequest new];
-    tokenRequest.publicKey = @"pkey_test_xxxxxxxxxxxxxxxxxxx";
-    tokenRequest.card.name = @"JOHN DOE";
-    tokenRequest.card.city = @"Bangkok";
-    tokenRequest.card.postalCode = @"10320";
-    tokenRequest.card.number = @"4242424242424242";
-    tokenRequest.card.expirationMonth = @"11";
-    tokenRequest.card.expirationYear = @"2016";
+    tokenRequest.publicKey = @"pkey_test_xxxxxxxxxxxxxxxxxxx"; //required
+    tokenRequest.card.name = @"JOHN DOE"; //required
+    tokenRequest.card.city = @"Bangkok"; //required
+    tokenRequest.card.postalCode = @"10320"; //required
+    tokenRequest.card.number = @"4242424242424242"; //required
+    tokenRequest.card.expirationMonth = @"11"; //required
+    tokenRequest.card.expirationYear = @"2016"; //required
     
     //request
     Omise* omise = [Omise new];
