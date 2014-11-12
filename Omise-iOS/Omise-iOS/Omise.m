@@ -21,7 +21,7 @@
     mTokenRequest = tokenRequest;
     
     NSURL* url = [NSURL URLWithString:@"https://vault.omise.co/tokens"];
-    NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10];
+    NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:15];
     [req setHTTPMethod:@"POST"];
     
     NSString* body = [NSString stringWithFormat:@"card[name]=%@&card[city]=%@&card[postal_code]=%@&card[number]=%@&card[expiration_month]=%@&card[expiration_year]=%@",
@@ -62,7 +62,7 @@
     }else{
         omiseError = [[NSError alloc]initWithDomain:OmiseErrorDomain
                                                         code:OmiseServerConnectionError
-                                                    userInfo:@{@"Can not connect Omise server": @"Can not connect Omise server"}];
+                                                    userInfo:@{@"Can not connect Omise server": @"Check your parameter and internet connection."}];
     }
     [delegate omiseOnFailed:omiseError];
 }
@@ -99,7 +99,7 @@
     }else{
         NSError* omiseError = [[NSError alloc]initWithDomain:OmiseErrorDomain
                                                         code:OmiseBadRequestError
-                                                    userInfo:@{@"Invalid param": @"Invalid param"}];
+                                                    userInfo:@{@"Invalid param": @"Invalid public key or parameters."}];
         [delegate omiseOnFailed:omiseError];
     }
 }

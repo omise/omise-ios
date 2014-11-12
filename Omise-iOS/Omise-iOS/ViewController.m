@@ -52,7 +52,8 @@
 #pragma OmiseRequestTokenDelegate
 -(void)omiseOnFailed:(NSError *)error
 {
-    tvJson.text = @"Failed.. token:nil";
+    tvJson.text = [NSString stringWithFormat:@"Failed.. %@",error.description];
+    
 }
 
 -(void)omiseOnSucceeded:(Token *)token

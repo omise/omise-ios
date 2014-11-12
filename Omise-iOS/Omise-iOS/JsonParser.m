@@ -18,6 +18,12 @@
                                                                  error:nil];
 
     if(jsonObject){
+        
+        NSString* obj = [jsonObject objectForKey:@"object"];
+        if ([obj isEqualToString:@"error"]) {
+            return nil;
+        }
+        
         Token* token = [Token new];
         
         token.tokenId = [jsonObject objectForKey:@"id"];

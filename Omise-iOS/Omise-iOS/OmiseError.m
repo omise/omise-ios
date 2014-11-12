@@ -2,7 +2,7 @@
 //  OmiseError.m
 //  Omise-iOS
 //
-//  Created by AD-PC92MAC on 2014/11/12.
+//  Created on 2014/11/12.
 //  Copyright (c) 2014年 Omise Co., Ltd. All rights reserved.
 //
 
