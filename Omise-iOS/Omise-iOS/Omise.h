@@ -3,13 +3,14 @@
 //  Omise
 //
 //  Created on 2014/11/10.
-//  Copyright (c) 2014年 Omise Co., Ltd. All rights reserved.
+//  Copyright (c) 2014 Omise Co., Ltd. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "Token.h"
 #import "TokenRequest.h"
 #import "JsonParser.h"
+#import "OmiseError.h"
 
 @protocol OmiseRequestTokenDelegate <NSObject>
 -(void)omiseOnSucceeded:(Token*)token;

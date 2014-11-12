@@ -2,7 +2,7 @@
 //  JsonParser.m
 //  Omise-iOS
 //
-//  Created by AD-PC92MAC on 2014/11/12.
+//  Created on 2014/11/12.
 //  Copyright (c) 2014年 Omise Co., Ltd. All rights reserved.
 //
 
@@ -13,8 +13,6 @@
 
 -(Token*)parseOmiseToken:(NSString *)json
 {
-    json = @"";
-    
     NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding]
                                                                options:NSJSONReadingAllowFragments
                                                                  error:nil];
@@ -22,7 +20,7 @@
     if(jsonObject){
         Token* token = [Token new];
         
-        token.cardId = [jsonObject objectForKey:@"id"];
+        token.tokenId = [jsonObject objectForKey:@"id"];
         token.livemode = [(NSNumber *)[jsonObject objectForKey:@"livemode"]boolValue];
         token.location = [jsonObject objectForKey:@"location"];
         token.used = [(NSNumber *)[jsonObject objectForKey:@"used"]boolValue];
@@ -43,7 +41,6 @@
         token.card.name = [cardObject objectForKey:@"name"];
         token.card.created = [cardObject objectForKey:@"created"];
      
-        NSLog(@"%d",token.livemode);
         return token;
     }
     

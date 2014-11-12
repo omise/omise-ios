@@ -2,7 +2,7 @@
 //  Omise.m
 //
 //  Created on 2014/11/10.
-//  Copyright (c) 2014年 Omise Co., Ltd. All rights reserved.
+//  Copyright (c) 2014 Omise Co., Ltd. All rights reserved.
 //
 
 #import "Omise.h"
@@ -44,47 +44,64 @@
     
 }
 
+
+
+#pragma NSURLConnectionDelegate
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     [data setLength:0];
 }
-
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)d {
     [data appendData:d];
 }
-
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    [delegate omiseOnFailed:error];
+    NSError* omiseError = nil;
+    if (error.code == NSURLErrorTimedOut) {
+        omiseError = [[NSError alloc]initWithDomain:OmiseErrorDomain
+                                                        code:OmiseTimeoutError
+                                                    userInfo:@{@"Request timeout": @"Request timeout"}];
+    }else{
+        omiseError = [[NSError alloc]initWithDomain:OmiseErrorDomain
+                                                        code:OmiseServerConnectionError
+                                                    userInfo:@{@"Can not connect Omise server": @"Can not connect Omise server"}];
+    }
+    [delegate omiseOnFailed:omiseError];
 }
-
-
-
 -(void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
     if (challenge.previousFailureCount > 0) {
         [challenge.sender cancelAuthenticationChallenge:challenge];
         NSError *error = [NSError errorWithDomain:@"error on didReceiveAuthenticationChallenge" code:INT32_MIN userInfo:NULL];
         [self connection:connection didFailWithError:error];
-        [delegate omiseOnFailed:error];
+        
+        
+        NSError* omiseError = [[NSError alloc]initWithDomain:OmiseErrorDomain
+                                                        code:OmiseServerConnectionError
+                                                    userInfo:@{@"Connection error": @"Authentication failed."}];
+        [delegate omiseOnFailed:omiseError];
         return;
     }
     
     NSURLCredential *credential = [NSURLCredential credentialWithUser:mTokenRequest.publicKey
                                                              password:@""
                                                           persistence:NSURLCredentialPersistenceForSession];
-    
     [[challenge sender] useCredential:credential forAuthenticationChallenge:challenge];
 }
-
 -(BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
 {
     return YES;
 }
-
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSString *responseText = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     JsonParser *jsonParser = [JsonParser new];
     Token* token = [jsonParser parseOmiseToken:responseText];
-    [delegate omiseOnSucceeded:token];
+    if (token) {
+        [delegate omiseOnSucceeded:token];
+    }else{
+        NSError* omiseError = [[NSError alloc]initWithDomain:OmiseErrorDomain
+                                                        code:OmiseBadRequestError
+                                                    userInfo:@{@"Invalid param": @"Invalid param"}];
+        [delegate omiseOnFailed:omiseError];
+    }
 }
 
 @end
