@@ -37,19 +37,9 @@
     NSData *plainData = [loginString dataUsingEncoding:NSUTF8StringEncoding];
     NSString *base64String = [plainData base64EncodedStringWithOptions:0];
     NSString *base64LoginData = [NSString stringWithFormat:@"Basic %@",base64String];
-    
-
     [req setValue:base64LoginData forHTTPHeaderField:@"Authorization"];
     
-
-    
-    
-    
-    
-    
-    
     NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:req delegate:self startImmediately:NO];
-    
     [connection start];
     
 }
@@ -71,11 +61,10 @@
 -(void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
     if (challenge.previousFailureCount > 0) {
-        // 失敗していたらエラーとする。
         [challenge.sender cancelAuthenticationChallenge:challenge];
-        NSError *error = [NSError errorWithDomain:@"error on authentication challenge" code:INT32_MIN userInfo:NULL];
+        NSError *error = [NSError errorWithDomain:@"error on didReceiveAuthenticationChallenge" code:INT32_MIN userInfo:NULL];
         [self connection:connection didFailWithError:error];
-        NSLog(@"fail");
+        [delegate omiseOnFailed:error];
         return;
     }
     
@@ -88,14 +77,14 @@
 
 -(BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
 {
-    //return YES to say that we have the necessary credentials to access the requested resource
     return YES;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSString *responseText = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(responseText);
-    
+    JsonParser *jsonParser = [JsonParser new];
+    Token* token = [jsonParser parseOmiseToken:responseText];
+    [delegate omiseOnSucceeded:token];
 }
 
 @end

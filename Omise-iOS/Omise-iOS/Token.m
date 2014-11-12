@@ -17,4 +17,9 @@
 @synthesize card;
 @synthesize created;
 
+-(id)init
+{
+    card = [Card new];
+    return self;
+}
 @end

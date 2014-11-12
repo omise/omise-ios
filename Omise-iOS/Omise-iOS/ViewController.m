@@ -18,12 +18,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     TokenRequest* tokenRequest = [TokenRequest new];
     tokenRequest.publicKey = @"pkey_test_4y144m01arclxagi4gc";
     tokenRequest.card.name = @"JOHN DOE";
@@ -34,16 +28,11 @@
     tokenRequest.card.expirationYear = @"2016";
     
     Omise* omise = [Omise new];
+    omise.delegate = self;
     [omise requestToken:tokenRequest];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-
+#pragma OmiseRequestTokenDelegate
 -(void)omiseOnFailed:(NSError *)error
 {
     

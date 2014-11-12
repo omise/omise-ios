@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Omise.h"
 
-@interface ViewController : UIViewController <RequestTokenDelegate>
+@interface ViewController : UIViewController <OmiseRequestTokenDelegate>
 
 
 @end

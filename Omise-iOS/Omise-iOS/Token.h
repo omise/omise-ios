@@ -12,9 +12,9 @@
 @interface Token : NSObject
 
 @property (nonatomic) NSString* cardId;
-@property (nonatomic) NSString* livemode;
+@property (nonatomic) BOOL livemode;
 @property (nonatomic) NSString* location;
-@property (nonatomic) NSString* used;
+@property (nonatomic) BOOL used;
 @property (nonatomic) Card* card;
 @property (nonatomic) NSString* created;
 

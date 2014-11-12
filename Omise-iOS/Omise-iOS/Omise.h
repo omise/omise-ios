@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "Token.h"
 #import "TokenRequest.h"
+#import "JsonParser.h"
 
-@protocol RequestTokenDelegate <NSObject>
+@protocol OmiseRequestTokenDelegate <NSObject>
 -(void)omiseOnSucceeded:(Token*)token;
 -(void)omiseOnFailed:(NSError*)error;
 @end
@@ -18,7 +19,7 @@
 
 @interface Omise : NSObject <NSURLConnectionDelegate>
 
-@property (nonatomic) id<RequestTokenDelegate> delegate;
+@property (nonatomic) id<OmiseRequestTokenDelegate> delegate;
 
 -(void)requestToken:(TokenRequest*)tokenRequest;
 
