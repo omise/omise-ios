@@ -11,12 +11,12 @@
 #import "TokenRequest.h"
 
 @protocol RequestTokenDelegate <NSObject>
--(void)onSucceeded:(Token*)token;
--(void)onFailed:(NSError*)error;
+-(void)omiseOnSucceeded:(Token*)token;
+-(void)omiseOnFailed:(NSError*)error;
 @end
 
 
-@interface Omise : NSObject
+@interface Omise : NSObject <NSURLConnectionDelegate>
 
 @property (nonatomic) id<RequestTokenDelegate> delegate;
 
