@@ -14,10 +14,12 @@
 		65D0101C1A11B70D00B75F3D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D0101B1A11B70D00B75F3D /* Images.xcassets */; };
 		65D0101F1A11B70D00B75F3D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65D0101D1A11B70D00B75F3D /* LaunchScreen.xib */; };
 		65D0102B1A11B70D00B75F3D /* Omise_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D0102A1A11B70D00B75F3D /* Omise_iOSTests.m */; };
-		65D0103D1A11B74400B75F3D /* Omise.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D010361A11B74400B75F3D /* Omise.m */; };
-		65D0103E1A11B74400B75F3D /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D010381A11B74400B75F3D /* Card.m */; };
-		65D0103F1A11B74400B75F3D /* TokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D0103A1A11B74400B75F3D /* TokenRequest.m */; };
-		65D010401A11B74400B75F3D /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D0103C1A11B74400B75F3D /* Token.m */; };
+		673FCA661A1A0FAB0091D67D /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 673FCA5B1A1A0FAB0091D67D /* Card.m */; };
+		673FCA671A1A0FAB0091D67D /* JsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 673FCA5D1A1A0FAB0091D67D /* JsonParser.m */; };
+		673FCA681A1A0FAB0091D67D /* Omise.m in Sources */ = {isa = PBXBuildFile; fileRef = 673FCA5F1A1A0FAB0091D67D /* Omise.m */; };
+		673FCA691A1A0FAB0091D67D /* OmiseError.m in Sources */ = {isa = PBXBuildFile; fileRef = 673FCA611A1A0FAB0091D67D /* OmiseError.m */; };
+		673FCA6A1A1A0FAB0091D67D /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 673FCA631A1A0FAB0091D67D /* Token.m */; };
+		673FCA6B1A1A0FAB0091D67D /* TokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 673FCA651A1A0FAB0091D67D /* TokenRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,14 +46,18 @@
 		65D010241A11B70D00B75F3D /* Omise-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Omise-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D010291A11B70D00B75F3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65D0102A1A11B70D00B75F3D /* Omise_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Omise_iOSTests.m; sourceTree = "<group>"; };
-		65D010351A11B74400B75F3D /* Omise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Omise.h; sourceTree = "<group>"; };
-		65D010361A11B74400B75F3D /* Omise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Omise.m; sourceTree = "<group>"; };
-		65D010371A11B74400B75F3D /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
-		65D010381A11B74400B75F3D /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
-		65D010391A11B74400B75F3D /* TokenRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenRequest.h; sourceTree = "<group>"; };
-		65D0103A1A11B74400B75F3D /* TokenRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenRequest.m; sourceTree = "<group>"; };
-		65D0103B1A11B74400B75F3D /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
-		65D0103C1A11B74400B75F3D /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
+		673FCA5A1A1A0FAB0091D67D /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Card.h; path = OmiseLib/Card.h; sourceTree = "<group>"; };
+		673FCA5B1A1A0FAB0091D67D /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Card.m; path = OmiseLib/Card.m; sourceTree = "<group>"; };
+		673FCA5C1A1A0FAB0091D67D /* JsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JsonParser.h; path = OmiseLib/JsonParser.h; sourceTree = "<group>"; };
+		673FCA5D1A1A0FAB0091D67D /* JsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JsonParser.m; path = OmiseLib/JsonParser.m; sourceTree = "<group>"; };
+		673FCA5E1A1A0FAB0091D67D /* Omise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Omise.h; path = OmiseLib/Omise.h; sourceTree = "<group>"; };
+		673FCA5F1A1A0FAB0091D67D /* Omise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Omise.m; path = OmiseLib/Omise.m; sourceTree = "<group>"; };
+		673FCA601A1A0FAB0091D67D /* OmiseError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OmiseError.h; path = OmiseLib/OmiseError.h; sourceTree = "<group>"; };
+		673FCA611A1A0FAB0091D67D /* OmiseError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OmiseError.m; path = OmiseLib/OmiseError.m; sourceTree = "<group>"; };
+		673FCA621A1A0FAB0091D67D /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Token.h; path = OmiseLib/Token.h; sourceTree = "<group>"; };
+		673FCA631A1A0FAB0091D67D /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Token.m; path = OmiseLib/Token.m; sourceTree = "<group>"; };
+		673FCA641A1A0FAB0091D67D /* TokenRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TokenRequest.h; path = OmiseLib/TokenRequest.h; sourceTree = "<group>"; };
+		673FCA651A1A0FAB0091D67D /* TokenRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TokenRequest.m; path = OmiseLib/TokenRequest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,14 +142,18 @@
 		65D010341A11B71A00B75F3D /* Omise */ = {
 			isa = PBXGroup;
 			children = (
-				65D010351A11B74400B75F3D /* Omise.h */,
-				65D010361A11B74400B75F3D /* Omise.m */,
-				65D010371A11B74400B75F3D /* Card.h */,
-				65D010381A11B74400B75F3D /* Card.m */,
-				65D010391A11B74400B75F3D /* TokenRequest.h */,
-				65D0103A1A11B74400B75F3D /* TokenRequest.m */,
-				65D0103B1A11B74400B75F3D /* Token.h */,
-				65D0103C1A11B74400B75F3D /* Token.m */,
+				673FCA5A1A1A0FAB0091D67D /* Card.h */,
+				673FCA5B1A1A0FAB0091D67D /* Card.m */,
+				673FCA5C1A1A0FAB0091D67D /* JsonParser.h */,
+				673FCA5D1A1A0FAB0091D67D /* JsonParser.m */,
+				673FCA5E1A1A0FAB0091D67D /* Omise.h */,
+				673FCA5F1A1A0FAB0091D67D /* Omise.m */,
+				673FCA601A1A0FAB0091D67D /* OmiseError.h */,
+				673FCA611A1A0FAB0091D67D /* OmiseError.m */,
+				673FCA621A1A0FAB0091D67D /* Token.h */,
+				673FCA631A1A0FAB0091D67D /* Token.m */,
+				673FCA641A1A0FAB0091D67D /* TokenRequest.h */,
+				673FCA651A1A0FAB0091D67D /* TokenRequest.m */,
 			);
 			name = Omise;
 			path = "Omise-iOS";
@@ -249,13 +259,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65D010401A11B74400B75F3D /* Token.m in Sources */,
-				65D0103E1A11B74400B75F3D /* Card.m in Sources */,
+				673FCA6B1A1A0FAB0091D67D /* TokenRequest.m in Sources */,
 				65D010171A11B70D00B75F3D /* ViewController.m in Sources */,
 				65D010141A11B70D00B75F3D /* AppDelegate.m in Sources */,
-				65D0103F1A11B74400B75F3D /* TokenRequest.m in Sources */,
+				673FCA671A1A0FAB0091D67D /* JsonParser.m in Sources */,
+				673FCA6A1A1A0FAB0091D67D /* Token.m in Sources */,
+				673FCA681A1A0FAB0091D67D /* Omise.m in Sources */,
 				65D010111A11B70D00B75F3D /* main.m in Sources */,
-				65D0103D1A11B74400B75F3D /* Omise.m in Sources */,
+				673FCA691A1A0FAB0091D67D /* OmiseError.m in Sources */,
+				673FCA661A1A0FAB0091D67D /* Card.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +458,7 @@
 				65D010301A11B70D00B75F3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		65D010311A11B70D00B75F3D /* Build configuration list for PBXNativeTarget "Omise-iOSTests" */ = {
 			isa = XCConfigurationList;
@@ -454,6 +467,7 @@
 				65D010331A11B70D00B75F3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
