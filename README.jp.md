@@ -1,33 +1,22 @@
 omise-ios
 =========
-
-omise-ios is a Cocoa library for managing token with Omise API.
-
-By using the token produced by this library, you will be able to securely process credit card without letting sensitive information pass through your server. This token can also be used to create customer card data which will allow re-using of card data for the next payment without entering it again.
-
-All data are transmitted via HTTPS to our PCI-DSS certified server.
+tokenを生成するiOS(Cocoa)のライブラリです。
 
 ## Setup
-
-Please copy all files in {repo root}/Omise-iOS/Omise-iOS/OmiseLib into your project.
+{repo root}/Omise-iOS/Omise-iOS/OmiseLib にある全てのファイルをプロジェクトにコピーしてください。
 
 ## Primary classes
-
 ### Card
-
-A class representing a card information.
+クレジットカードを表現します。
 
 ### TokenRequest
-
-A class encapsulating parameters for requesting token. You will have to set card information as a parameter for this class.
+tokenをリクエストする時に必要なパラメータを取りまとめるクラスです。このクラスのインスタンスに必要なパラメータをセットしてください。
 
 ### Token
-
-A class representing token. This class is what will be passed to the delegate if the request is successful.
+tokenを表現します。リクエストに成功した時、delegateで渡されてくるのはこのクラスのインスタンスです。
 
 ### Omise
-
-A class for requesting token. See also sample code below.
+tokenをリクエストするクラスです。使い方は下記のサンプルコードをご覧ください。
 
 ## Request a token
 
@@ -78,3 +67,9 @@ ExampleViewController.m
 -(void)omiseOnSucceeded:(Token *)token
 {
     //your code here
+    //ex.
+    NSString* brand = token.card.brand;
+    NSString* location = token.location;
+    BOOL livemode = token.livemode;
+}
+```
