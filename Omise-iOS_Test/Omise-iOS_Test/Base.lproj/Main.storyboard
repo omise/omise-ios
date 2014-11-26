@@ -212,10 +212,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BILLING ADDRESS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yfH-Uc-ESU">
-                                        <rect key="frame" x="20" y="101" width="113" height="21"/>
+                                        <rect key="frame" x="20" y="101" width="148" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="Kjy-wO-suS"/>
-                                            <constraint firstAttribute="width" constant="113" id="Pho-MM-N1R"/>
+                                            <constraint firstAttribute="width" constant="148" id="Pho-MM-N1R"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.60392156860000001" green="0.60784313729999995" blue="0.61960784310000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -272,10 +272,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHIPPING METHOD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TkV-Qw-pZH">
-                                        <rect key="frame" x="20" y="282" width="113" height="21"/>
+                                        <rect key="frame" x="20" y="282" width="148" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="nH3-hM-sy1"/>
-                                            <constraint firstAttribute="width" constant="113" id="ps8-mv-vSI"/>
+                                            <constraint firstAttribute="width" constant="148" id="ps8-mv-vSI"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.60392156860000001" green="0.60784313729999995" blue="0.61960784310000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -351,6 +351,7 @@
                                     <constraint firstItem="7cb-iH-wRX" firstAttribute="top" secondItem="DKX-y6-kOq" secondAttribute="top" constant="18" id="Pf0-jU-hbp"/>
                                     <constraint firstItem="xXA-Ic-hQE" firstAttribute="top" secondItem="yfH-Uc-ESU" secondAttribute="bottom" constant="8" symbolic="YES" id="QGe-XQ-S5Q"/>
                                     <constraint firstItem="d4n-qF-Hvd" firstAttribute="leading" secondItem="4YO-Hn-k6l" secondAttribute="trailing" constant="66" id="RSx-R0-EW7"/>
+                                    <constraint firstAttribute="trailing" secondItem="d4n-qF-Hvd" secondAttribute="trailing" constant="8" id="ULC-HB-24v"/>
                                     <constraint firstItem="fnE-jA-Gj2" firstAttribute="top" secondItem="TkV-Qw-pZH" secondAttribute="bottom" constant="27" id="UsF-ja-gt3"/>
                                     <constraint firstItem="yfH-Uc-ESU" firstAttribute="top" secondItem="Oyj-1f-FlW" secondAttribute="bottom" constant="14" id="VyI-oY-uBa"/>
                                     <constraint firstItem="h1z-8u-UEC" firstAttribute="top" secondItem="TkV-Qw-pZH" secondAttribute="bottom" constant="8" id="bcO-Eu-2tH"/>
