@@ -14,14 +14,28 @@
 
 @implementation ViewController
 
+@synthesize btnCheckout;
+@synthesize checkoutBase;
+@synthesize lblIsland;
+@synthesize lblPrice;
+@synthesize stIsland;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    checkoutBase.layer.cornerRadius = 5;
+    checkoutBase.alpha = 0.75;
+    btnCheckout.layer.cornerRadius = 5;
+    btnCheckout.alpha = 0.9;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)stepperValueChanged:(id)sender {
+    lblIsland.text = [NSString stringWithFormat:@"%d", (int)self.stIsland.value];
+    lblPrice.text = [NSString stringWithFormat:@"$ %dm", (int)self.stIsland.value * 2];
+    
 }
 
 @end

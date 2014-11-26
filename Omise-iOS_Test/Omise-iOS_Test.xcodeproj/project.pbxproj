@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6566CDA11A255B0B00452095 /* img_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6566CDA01A255B0B00452095 /* img_bg.png */; };
+		6566CDA31A255C2300452095 /* img_bg2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6566CDA21A255C2300452095 /* img_bg2.png */; };
+		6566CDA61A2564F300452095 /* CheckoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6566CDA51A2564F300452095 /* CheckoutViewController.m */; };
 		6591450A1A2413C20011F142 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 659145091A2413C20011F142 /* main.m */; };
 		6591450D1A2413C20011F142 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6591450C1A2413C20011F142 /* AppDelegate.m */; };
 		659145101A2413C20011F142 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6591450F1A2413C20011F142 /* ViewController.m */; };
@@ -33,6 +36,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6566CDA01A255B0B00452095 /* img_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_bg.png; sourceTree = "<group>"; };
+		6566CDA21A255C2300452095 /* img_bg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_bg2.png; sourceTree = "<group>"; };
+		6566CDA41A2564F300452095 /* CheckoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckoutViewController.h; sourceTree = "<group>"; };
+		6566CDA51A2564F300452095 /* CheckoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckoutViewController.m; sourceTree = "<group>"; };
 		659145041A2413C20011F142 /* Omise-iOS_Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Omise-iOS_Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		659145081A2413C20011F142 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		659145091A2413C20011F142 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -78,6 +85,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6566CD9F1A255B0100452095 /* res */ = {
+			isa = PBXGroup;
+			children = (
+				6566CDA01A255B0B00452095 /* img_bg.png */,
+				6566CDA21A255C2300452095 /* img_bg2.png */,
+			);
+			name = res;
+			sourceTree = "<group>";
+		};
 		659144FB1A2413C10011F142 = {
 			isa = PBXGroup;
 			children = (
@@ -99,11 +115,14 @@
 		659145061A2413C20011F142 /* Omise-iOS_Test */ = {
 			isa = PBXGroup;
 			children = (
+				6566CD9F1A255B0100452095 /* res */,
 				6591452D1A2413E40011F142 /* OmiseLib */,
 				6591450B1A2413C20011F142 /* AppDelegate.h */,
 				6591450C1A2413C20011F142 /* AppDelegate.m */,
 				6591450E1A2413C20011F142 /* ViewController.h */,
 				6591450F1A2413C20011F142 /* ViewController.m */,
+				6566CDA41A2564F300452095 /* CheckoutViewController.h */,
+				6566CDA51A2564F300452095 /* CheckoutViewController.m */,
 				659145111A2413C20011F142 /* Main.storyboard */,
 				659145141A2413C20011F142 /* Images.xcassets */,
 				659145161A2413C20011F142 /* LaunchScreen.xib */,
@@ -237,8 +256,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6566CDA31A255C2300452095 /* img_bg2.png in Resources */,
 				659145131A2413C20011F142 /* Main.storyboard in Resources */,
 				659145181A2413C20011F142 /* LaunchScreen.xib in Resources */,
+				6566CDA11A255B0B00452095 /* img_bg.png in Resources */,
 				659145151A2413C20011F142 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,6 +284,7 @@
 				6591453B1A24140B0011F142 /* JsonParser.m in Sources */,
 				6591453E1A24140B0011F142 /* Token.m in Sources */,
 				6591453C1A24140B0011F142 /* Omise.m in Sources */,
+				6566CDA61A2564F300452095 /* CheckoutViewController.m in Sources */,
 				6591450A1A2413C20011F142 /* main.m in Sources */,
 				6591453D1A24140B0011F142 /* OmiseError.m in Sources */,
 				6591453A1A24140B0011F142 /* Card.m in Sources */,

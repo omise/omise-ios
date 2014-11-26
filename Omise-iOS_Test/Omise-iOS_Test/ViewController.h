@@ -10,6 +10,11 @@
 
 @interface ViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIView *checkoutBase;
+@property (strong, nonatomic) IBOutlet UIButton *btnCheckout;
+@property (strong, nonatomic) IBOutlet UILabel *lblIsland;
+@property (strong, nonatomic) IBOutlet UILabel *lblPrice;
+@property (strong, nonatomic) IBOutlet UIStepper *stIsland;
 
 @end
 
