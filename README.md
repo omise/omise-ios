@@ -29,6 +29,9 @@ A class representing token. This class is what will be passed to the delegate if
 
 A class for requesting token. See also sample code below.
 
+### Test app
+By opening Omise-iOS_Test.xcodeproj and building it on Xcode, the sample application will launch and create a charge token to test.
+
 ## Request a token
 
 ExampleViewController.h
