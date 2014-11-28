@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6536D6B91A28026700B80248 /* AccessOmiseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6536D6B81A28026700B80248 /* AccessOmiseViewController.m */; };
+		6536D6BD1A280EDE00B80248 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6536D6BA1A280EDE00B80248 /* SVProgressHUD.bundle */; };
+		6536D6BE1A280EDE00B80248 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6536D6BC1A280EDE00B80248 /* SVProgressHUD.m */; };
 		6566CDA11A255B0B00452095 /* img_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6566CDA01A255B0B00452095 /* img_bg.png */; };
 		6566CDA61A2564F300452095 /* CheckoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6566CDA51A2564F300452095 /* CheckoutViewController.m */; };
 		6566CEA71A25A86300452095 /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 6566CE941A25A86300452095 /* Icon-40.png */; };
@@ -55,6 +58,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6536D6B71A28026700B80248 /* AccessOmiseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessOmiseViewController.h; sourceTree = "<group>"; };
+		6536D6B81A28026700B80248 /* AccessOmiseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessOmiseViewController.m; sourceTree = "<group>"; };
+		6536D6BA1A280EDE00B80248 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		6536D6BB1A280EDE00B80248 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		6536D6BC1A280EDE00B80248 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		6566CDA01A255B0B00452095 /* img_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_bg.png; sourceTree = "<group>"; };
 		6566CDA41A2564F300452095 /* CheckoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckoutViewController.h; sourceTree = "<group>"; };
 		6566CDA51A2564F300452095 /* CheckoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckoutViewController.m; sourceTree = "<group>"; };
@@ -123,6 +131,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6536D6BF1A280EE200B80248 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				6536D6BA1A280EDE00B80248 /* SVProgressHUD.bundle */,
+				6536D6BB1A280EDE00B80248 /* SVProgressHUD.h */,
+				6536D6BC1A280EDE00B80248 /* SVProgressHUD.m */,
+			);
+			name = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		6566CD9F1A255B0100452095 /* res */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,15 +190,18 @@
 		659145061A2413C20011F142 /* Omise-iOS_Test */ = {
 			isa = PBXGroup;
 			children = (
+				6536D6BF1A280EE200B80248 /* SVProgressHUD */,
 				6566CD9F1A255B0100452095 /* res */,
 				6591452D1A2413E40011F142 /* OmiseLib */,
+				659145111A2413C20011F142 /* Main.storyboard */,
 				6591450B1A2413C20011F142 /* AppDelegate.h */,
 				6591450C1A2413C20011F142 /* AppDelegate.m */,
 				6591450E1A2413C20011F142 /* ViewController.h */,
 				6591450F1A2413C20011F142 /* ViewController.m */,
 				6566CDA41A2564F300452095 /* CheckoutViewController.h */,
 				6566CDA51A2564F300452095 /* CheckoutViewController.m */,
-				659145111A2413C20011F142 /* Main.storyboard */,
+				6536D6B71A28026700B80248 /* AccessOmiseViewController.h */,
+				6536D6B81A28026700B80248 /* AccessOmiseViewController.m */,
 				659145141A2413C20011F142 /* Images.xcassets */,
 				659145161A2413C20011F142 /* LaunchScreen.xib */,
 				659145071A2413C20011F142 /* Supporting Files */,
@@ -313,6 +334,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6536D6BD1A280EDE00B80248 /* SVProgressHUD.bundle in Resources */,
 				659145131A2413C20011F142 /* Main.storyboard in Resources */,
 				659145181A2413C20011F142 /* LaunchScreen.xib in Resources */,
 				6566CDA11A255B0B00452095 /* img_bg.png in Resources */,
@@ -359,8 +381,10 @@
 				6591450D1A2413C20011F142 /* AppDelegate.m in Sources */,
 				6591453B1A24140B0011F142 /* JsonParser.m in Sources */,
 				6591453E1A24140B0011F142 /* Token.m in Sources */,
+				6536D6BE1A280EDE00B80248 /* SVProgressHUD.m in Sources */,
 				6591453C1A24140B0011F142 /* Omise.m in Sources */,
 				6566CDA61A2564F300452095 /* CheckoutViewController.m in Sources */,
+				6536D6B91A28026700B80248 /* AccessOmiseViewController.m in Sources */,
 				6591450A1A2413C20011F142 /* main.m in Sources */,
 				6591453D1A24140B0011F142 /* OmiseError.m in Sources */,
 				6591453A1A24140B0011F142 /* Card.m in Sources */,

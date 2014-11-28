@@ -2,11 +2,12 @@
 //  ViewController.m
 //  Omise-iOS_Test
 //
-//  Created by AD-PC92MAC on 2014/11/25.
+//  Created on 2014/11/25.
 //  Copyright (c) 2014年 Alpha-Do.Inc. All rights reserved.
 //
 
 #import "ViewController.h"
+#import "CheckoutViewController.h"
 
 @interface ViewController ()
 
@@ -28,14 +29,22 @@
     btnCheckout.alpha = 0.9;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [CheckoutViewController setIsClosing:NO];
+
+    [self stepperValueChanged:nil];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)stepperValueChanged:(id)sender {
     lblIsland.text = [NSString stringWithFormat:@"%d", (int)self.stIsland.value];
     lblPrice.text = [NSString stringWithFormat:@"$ %dm", (int)self.stIsland.value * 2];
     
+    [CheckoutViewController setIslandNum:(int)self.stIsland.value];
 }
-
 @end

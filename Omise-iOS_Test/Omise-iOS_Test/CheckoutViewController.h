@@ -2,12 +2,19 @@
 //  CheckoutViewController.h
 //  Omise-iOS_Test
 //
-//  Created by AD-PC92MAC on 2014/11/26.
+//  Created on 2014/11/26.
 //  Copyright (c) 2014年 Alpha-Do.Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface CheckoutViewController : UIViewController
+@interface CheckoutViewController : UIViewController{
+    
+}
+@property (strong, nonatomic) IBOutlet UILabel *lblIslandNum;
+@property (strong, nonatomic) IBOutlet UILabel *lblPrice;
+
++(void)setIslandNum:(int)_islandNum;
++(void)setIsClosing:(BOOL)_isClosing;
 
 @end
