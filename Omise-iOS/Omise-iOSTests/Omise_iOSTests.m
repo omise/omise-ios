@@ -2,7 +2,6 @@
 //  Omise_iOSTests.m
 //  Omise-iOSTests
 //
-//  Created by AD-PC92MAC on 2014/11/11.
 //  Copyright (c) 2014年 Omise Co., Ltd. All rights reserved.
 //
 
