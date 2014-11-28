@@ -81,3 +81,8 @@ ExampleViewController.m
 -(void)omiseOnSucceeded:(Token *)token
 {
     //your code here
+    NSString* brand = token.card.brand;
+    NSString* location = token.location;
+    BOOL livemode = token.livemode;
+}
+```
