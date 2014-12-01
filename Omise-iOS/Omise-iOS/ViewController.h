@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "Omise.h"
+#import "TokenRequest.h"
+#import "ChargeRequest.h"
+#import "Card.h"
+#import "Charge.h"
 
-@interface ViewController : UIViewController <OmiseRequestTokenDelegate, UITextFieldDelegate>
+
+@interface ViewController : UIViewController <OmiseRequestDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextView *tvJson;
 @property (strong, nonatomic) IBOutlet UITextField *tfPublicKey;

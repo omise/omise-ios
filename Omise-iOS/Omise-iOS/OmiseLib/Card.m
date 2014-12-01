@@ -12,6 +12,7 @@
 
 @synthesize cardId;
 @synthesize livemode;
+@synthesize location;
 @synthesize country;
 @synthesize number;
 @synthesize city;

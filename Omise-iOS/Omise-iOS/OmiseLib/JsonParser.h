@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "Token.h"
 #import "Card.h"
+#import "Charge.h"
 
 @interface JsonParser : NSObject
 
 -(Token*)parseOmiseToken:(NSString*)json;
+-(Charge*)parseOmiseCharge:(NSString*)json;
 
 @end

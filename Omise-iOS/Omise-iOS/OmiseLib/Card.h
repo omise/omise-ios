@@ -12,6 +12,7 @@
 
 @property (nonatomic) NSString* cardId;
 @property (nonatomic) BOOL livemode;
+@property (nonatomic) NSString* location;
 @property (nonatomic) NSString* country;
 @property (nonatomic) NSString* number;
 @property (nonatomic) NSString* city;

@@ -7,8 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "TokenRequest.h"
-#import "Card.h"
 
 @interface ViewController ()
 
@@ -21,20 +19,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     tfPublicKey.delegate = self;
-    [self test];
+    [self test:1];
+//    [self test:2];
 }
 
 - (IBAction)onConnectClick:(id)sender {
-    [self test];
+//    [self test:1];
 }
 
 
--(void)test
+-(void)test:(int)api
 {
     tvJson.text = @"connecting...";
     
+    Omise* omise = [Omise new];
+    omise.delegate = self;
+    
+    
     TokenRequest* tokenRequest = [TokenRequest new];
-    //tokenRequest.publicKey = @"pkey_test_4y144m01arclxagi4gc";
+    ChargeRequest* chargeRequest = [ChargeRequest new];
+    
+    /*
     tokenRequest.publicKey = tfPublicKey.text;
     tokenRequest.card.name = @"JOHN DOE";
     tokenRequest.card.city = @"Bangkok";
@@ -42,10 +47,23 @@
     tokenRequest.card.number = @"4242424242424242";
     tokenRequest.card.expirationMonth = @"11";
     tokenRequest.card.expirationYear = @"2016";
-    
-    Omise* omise = [Omise new];
-    omise.delegate = self;
     [omise requestToken:tokenRequest];
+     */
+
+    
+    chargeRequest.secretKey = @"skey_test_4y8nekxw2icd4xo8fi1";
+    chargeRequest.customer = @"cust_test_4y8nip97pty0w917lr0";
+    chargeRequest.amount = 10000;
+    chargeRequest.currency = @"thb";
+    chargeRequest.descriptionOfCharge = @"Order-384";
+    chargeRequest.card = @"card_test_4y8nla3can535zbhzjh";
+    [omise requestCharge:chargeRequest];
+    
+    //tokn_test_4y8nkbui94dp3ohd9da
+    //card_test_4y8nkbugwxctngn2r8v
+    //pkey_test_4y8nekxw3pr6lgvp3nv
+    //skey_test_4y8nekxw2icd4xo8fi1
+    //cust_test_4y8nip97pty0w917lr0
 }
 
 
@@ -56,7 +74,7 @@
     
 }
 
--(void)omiseOnSucceeded:(Token *)token
+-(void)omiseOnSucceededToken:(Token *)token
 {
     tvJson.text = [NSString stringWithFormat:@"token:{\n\ttokenId:%@\n\tlivemode:%d\n\tlocation:%@\n\tused:%d\n\tcard:{\n\t\tcardId:%@\n\t\tlivemode:%d\n\t\tcountry:%@\n\t\tcity:%@\n\t\tpostal_code:%@\n\t\tfinancing:%@\n\t\tlast_digits:%@\n\t\tbrand:%@\n\t\texpiration_month:%@\n\t\texpiration_year:%@\n\t\tfingerprint:%@\n\t\tname:%@\n\t\tcreated:%@\n\t}\n\tcreated:%@\n}",
                    token.tokenId,
@@ -78,6 +96,11 @@
                    token.card.created,
                    token.created
                    ];
+}
+
+-(void)omiseOnSucceededCharge:(Charge *)charge
+{
+    
 }
 
 
