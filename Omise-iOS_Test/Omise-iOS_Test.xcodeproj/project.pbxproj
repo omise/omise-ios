@@ -39,12 +39,14 @@
 		659145151A2413C20011F142 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 659145141A2413C20011F142 /* Images.xcassets */; };
 		659145181A2413C20011F142 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 659145161A2413C20011F142 /* LaunchScreen.xib */; };
 		659145241A2413C20011F142 /* Omise_iOS_TestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 659145231A2413C20011F142 /* Omise_iOS_TestTests.m */; };
-		6591453A1A24140B0011F142 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 6591452F1A24140B0011F142 /* Card.m */; };
-		6591453B1A24140B0011F142 /* JsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 659145311A24140B0011F142 /* JsonParser.m */; };
-		6591453C1A24140B0011F142 /* Omise.m in Sources */ = {isa = PBXBuildFile; fileRef = 659145331A24140B0011F142 /* Omise.m */; };
-		6591453D1A24140B0011F142 /* OmiseError.m in Sources */ = {isa = PBXBuildFile; fileRef = 659145351A24140B0011F142 /* OmiseError.m */; };
-		6591453E1A24140B0011F142 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 659145371A24140B0011F142 /* Token.m */; };
-		6591453F1A24140B0011F142 /* TokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 659145391A24140B0011F142 /* TokenRequest.m */; };
+		6709FD801A2D8B8A000CFFAC /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 6709FD711A2D8B8A000CFFAC /* Card.m */; };
+		6709FD811A2D8B8A000CFFAC /* Charge.m in Sources */ = {isa = PBXBuildFile; fileRef = 6709FD731A2D8B8A000CFFAC /* Charge.m */; };
+		6709FD821A2D8B8A000CFFAC /* ChargeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6709FD751A2D8B8A000CFFAC /* ChargeRequest.m */; };
+		6709FD831A2D8B8A000CFFAC /* JsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6709FD771A2D8B8A000CFFAC /* JsonParser.m */; };
+		6709FD841A2D8B8A000CFFAC /* Omise.m in Sources */ = {isa = PBXBuildFile; fileRef = 6709FD791A2D8B8A000CFFAC /* Omise.m */; };
+		6709FD851A2D8B8A000CFFAC /* OmiseError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6709FD7B1A2D8B8A000CFFAC /* OmiseError.m */; };
+		6709FD861A2D8B8A000CFFAC /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 6709FD7D1A2D8B8A000CFFAC /* Token.m */; };
+		6709FD871A2D8B8A000CFFAC /* TokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6709FD7F1A2D8B8A000CFFAC /* TokenRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,18 +101,22 @@
 		6591451D1A2413C20011F142 /* Omise-iOS_TestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Omise-iOS_TestTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		659145221A2413C20011F142 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		659145231A2413C20011F142 /* Omise_iOS_TestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Omise_iOS_TestTests.m; sourceTree = "<group>"; };
-		6591452E1A24140B0011F142 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Card.h; path = "../../Omise-iOS/Omise-iOS/OmiseLib/Card.h"; sourceTree = "<group>"; };
-		6591452F1A24140B0011F142 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Card.m; path = "../../Omise-iOS/Omise-iOS/OmiseLib/Card.m"; sourceTree = "<group>"; };
-		659145301A24140B0011F142 /* JsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JsonParser.h; path = "../../Omise-iOS/Omise-iOS/OmiseLib/JsonParser.h"; sourceTree = "<group>"; };
-		659145311A24140B0011F142 /* JsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JsonParser.m; path = "../../Omise-iOS/Omise-iOS/OmiseLib/JsonParser.m"; sourceTree = "<group>"; };
-		659145321A24140B0011F142 /* Omise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Omise.h; path = "../../Omise-iOS/Omise-iOS/OmiseLib/Omise.h"; sourceTree = "<group>"; };
-		659145331A24140B0011F142 /* Omise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Omise.m; path = "../../Omise-iOS/Omise-iOS/OmiseLib/Omise.m"; sourceTree = "<group>"; };
-		659145341A24140B0011F142 /* OmiseError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OmiseError.h; path = "../../Omise-iOS/Omise-iOS/OmiseLib/OmiseError.h"; sourceTree = "<group>"; };
-		659145351A24140B0011F142 /* OmiseError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OmiseError.m; path = "../../Omise-iOS/Omise-iOS/OmiseLib/OmiseError.m"; sourceTree = "<group>"; };
-		659145361A24140B0011F142 /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Token.h; path = "../../Omise-iOS/Omise-iOS/OmiseLib/Token.h"; sourceTree = "<group>"; };
-		659145371A24140B0011F142 /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Token.m; path = "../../Omise-iOS/Omise-iOS/OmiseLib/Token.m"; sourceTree = "<group>"; };
-		659145381A24140B0011F142 /* TokenRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TokenRequest.h; path = "../../Omise-iOS/Omise-iOS/OmiseLib/TokenRequest.h"; sourceTree = "<group>"; };
-		659145391A24140B0011F142 /* TokenRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TokenRequest.m; path = "../../Omise-iOS/Omise-iOS/OmiseLib/TokenRequest.m"; sourceTree = "<group>"; };
+		6709FD701A2D8B8A000CFFAC /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Card.h; path = "../../Omise-iOS/Omise-iOS/OmiseLib/Card.h"; sourceTree = "<group>"; };
+		6709FD711A2D8B8A000CFFAC /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Card.m; path = "../../Omise-iOS/Omise-iOS/OmiseLib/Card.m"; sourceTree = "<group>"; };
+		6709FD721A2D8B8A000CFFAC /* Charge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Charge.h; path = "../../Omise-iOS/Omise-iOS/OmiseLib/Charge.h"; sourceTree = "<group>"; };
+		6709FD731A2D8B8A000CFFAC /* Charge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Charge.m; path = "../../Omise-iOS/Omise-iOS/OmiseLib/Charge.m"; sourceTree = "<group>"; };
+		6709FD741A2D8B8A000CFFAC /* ChargeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChargeRequest.h; path = "../../Omise-iOS/Omise-iOS/OmiseLib/ChargeRequest.h"; sourceTree = "<group>"; };
+		6709FD751A2D8B8A000CFFAC /* ChargeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChargeRequest.m; path = "../../Omise-iOS/Omise-iOS/OmiseLib/ChargeRequest.m"; sourceTree = "<group>"; };
+		6709FD761A2D8B8A000CFFAC /* JsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JsonParser.h; path = "../../Omise-iOS/Omise-iOS/OmiseLib/JsonParser.h"; sourceTree = "<group>"; };
+		6709FD771A2D8B8A000CFFAC /* JsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JsonParser.m; path = "../../Omise-iOS/Omise-iOS/OmiseLib/JsonParser.m"; sourceTree = "<group>"; };
+		6709FD781A2D8B8A000CFFAC /* Omise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Omise.h; path = "../../Omise-iOS/Omise-iOS/OmiseLib/Omise.h"; sourceTree = "<group>"; };
+		6709FD791A2D8B8A000CFFAC /* Omise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Omise.m; path = "../../Omise-iOS/Omise-iOS/OmiseLib/Omise.m"; sourceTree = "<group>"; };
+		6709FD7A1A2D8B8A000CFFAC /* OmiseError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OmiseError.h; path = "../../Omise-iOS/Omise-iOS/OmiseLib/OmiseError.h"; sourceTree = "<group>"; };
+		6709FD7B1A2D8B8A000CFFAC /* OmiseError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OmiseError.m; path = "../../Omise-iOS/Omise-iOS/OmiseLib/OmiseError.m"; sourceTree = "<group>"; };
+		6709FD7C1A2D8B8A000CFFAC /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Token.h; path = "../../Omise-iOS/Omise-iOS/OmiseLib/Token.h"; sourceTree = "<group>"; };
+		6709FD7D1A2D8B8A000CFFAC /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Token.m; path = "../../Omise-iOS/Omise-iOS/OmiseLib/Token.m"; sourceTree = "<group>"; };
+		6709FD7E1A2D8B8A000CFFAC /* TokenRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TokenRequest.h; path = "../../Omise-iOS/Omise-iOS/OmiseLib/TokenRequest.h"; sourceTree = "<group>"; };
+		6709FD7F1A2D8B8A000CFFAC /* TokenRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TokenRequest.m; path = "../../Omise-iOS/Omise-iOS/OmiseLib/TokenRequest.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,18 +244,22 @@
 		6591452D1A2413E40011F142 /* OmiseLib */ = {
 			isa = PBXGroup;
 			children = (
-				6591452E1A24140B0011F142 /* Card.h */,
-				6591452F1A24140B0011F142 /* Card.m */,
-				659145301A24140B0011F142 /* JsonParser.h */,
-				659145311A24140B0011F142 /* JsonParser.m */,
-				659145321A24140B0011F142 /* Omise.h */,
-				659145331A24140B0011F142 /* Omise.m */,
-				659145341A24140B0011F142 /* OmiseError.h */,
-				659145351A24140B0011F142 /* OmiseError.m */,
-				659145361A24140B0011F142 /* Token.h */,
-				659145371A24140B0011F142 /* Token.m */,
-				659145381A24140B0011F142 /* TokenRequest.h */,
-				659145391A24140B0011F142 /* TokenRequest.m */,
+				6709FD701A2D8B8A000CFFAC /* Card.h */,
+				6709FD711A2D8B8A000CFFAC /* Card.m */,
+				6709FD721A2D8B8A000CFFAC /* Charge.h */,
+				6709FD731A2D8B8A000CFFAC /* Charge.m */,
+				6709FD741A2D8B8A000CFFAC /* ChargeRequest.h */,
+				6709FD751A2D8B8A000CFFAC /* ChargeRequest.m */,
+				6709FD761A2D8B8A000CFFAC /* JsonParser.h */,
+				6709FD771A2D8B8A000CFFAC /* JsonParser.m */,
+				6709FD781A2D8B8A000CFFAC /* Omise.h */,
+				6709FD791A2D8B8A000CFFAC /* Omise.m */,
+				6709FD7A1A2D8B8A000CFFAC /* OmiseError.h */,
+				6709FD7B1A2D8B8A000CFFAC /* OmiseError.m */,
+				6709FD7C1A2D8B8A000CFFAC /* Token.h */,
+				6709FD7D1A2D8B8A000CFFAC /* Token.m */,
+				6709FD7E1A2D8B8A000CFFAC /* TokenRequest.h */,
+				6709FD7F1A2D8B8A000CFFAC /* TokenRequest.m */,
 			);
 			name = OmiseLib;
 			sourceTree = "<group>";
@@ -376,18 +386,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6591453F1A24140B0011F142 /* TokenRequest.m in Sources */,
 				659145101A2413C20011F142 /* ViewController.m in Sources */,
+				6709FD821A2D8B8A000CFFAC /* ChargeRequest.m in Sources */,
+				6709FD831A2D8B8A000CFFAC /* JsonParser.m in Sources */,
 				6591450D1A2413C20011F142 /* AppDelegate.m in Sources */,
-				6591453B1A24140B0011F142 /* JsonParser.m in Sources */,
-				6591453E1A24140B0011F142 /* Token.m in Sources */,
+				6709FD861A2D8B8A000CFFAC /* Token.m in Sources */,
 				6536D6BE1A280EDE00B80248 /* SVProgressHUD.m in Sources */,
-				6591453C1A24140B0011F142 /* Omise.m in Sources */,
+				6709FD841A2D8B8A000CFFAC /* Omise.m in Sources */,
+				6709FD871A2D8B8A000CFFAC /* TokenRequest.m in Sources */,
+				6709FD851A2D8B8A000CFFAC /* OmiseError.m in Sources */,
 				6566CDA61A2564F300452095 /* CheckoutViewController.m in Sources */,
 				6536D6B91A28026700B80248 /* AccessOmiseViewController.m in Sources */,
+				6709FD811A2D8B8A000CFFAC /* Charge.m in Sources */,
+				6709FD801A2D8B8A000CFFAC /* Card.m in Sources */,
 				6591450A1A2413C20011F142 /* main.m in Sources */,
-				6591453D1A24140B0011F142 /* OmiseError.m in Sources */,
-				6591453A1A24140B0011F142 /* Card.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

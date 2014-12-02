@@ -74,10 +74,14 @@ bool succeeded;
 
 
 #pragma OmiseTokenDelegate
--(void)omiseOnSucceeded:(Token *)token
+-(void)omiseOnSucceededToken:(Token *)token
 {
     [btnToken setTitle:token.tokenId forState:UIControlStateNormal];
     succeeded = YES;
+}
+-(void)omiseOnSucceededCharge:(Charge *)charge
+{
+    
 }
 -(void)omiseOnFailed:(NSError *)error
 {

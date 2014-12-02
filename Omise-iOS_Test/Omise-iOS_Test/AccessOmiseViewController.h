@@ -12,7 +12,7 @@
 #import "Card.h"
 #import "Token.h"
 
-@interface AccessOmiseViewController : UIViewController <OmiseRequestTokenDelegate>
+@interface AccessOmiseViewController : UIViewController <OmiseRequestDelegate>
 
 @property (strong, nonatomic) IBOutlet UIButton *btnToken;
 @property (strong, nonatomic) IBOutlet UIButton *btnReset;
