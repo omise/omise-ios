@@ -25,6 +25,9 @@ A class encapsulating parameters for requesting token. You will have to set card
 
 A class representing token. This class is what will be passed to the delegate if the request is successful.
 
+### Charge
+A class representing charge. This class is what will be passed to the delegate if the request is successful.
+
 ### Omise
 
 A class for requesting token. See also sample code below.
