@@ -14,7 +14,7 @@
 		<string>https://github.com/omise/omise-ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Omise-iOS_Test/Omise-iOS_Test.xcodeproj</string>
+	<string>Omise-iOS_Example/Omise-iOS_Test.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>CE79B60EAF6BF0547AD8884435E6F4A6DF0A7870</key>

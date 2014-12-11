@@ -90,33 +90,19 @@ enum OmiseApi{
     NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:15];
     [req setHTTPMethod:@"POST"];
     
-    //&card[id]=%@&card[livemode]=%@&card[location]=%@&card[country]=%@&card[city]=%@&card[postal_code]=%@&card[financing]=%@&card[last_digits]=%@&card[brand]=%@&card[expiration_month]=%@&card[expiration_year]=%@&card[fingerprint]=%@&card[name]=%@&card[created]=%@&
-    /*
-     mChargeRequest.card.cardId,
-     (mChargeRequest.card.livemode ? @"true" : @"false"),
-     mChargeRequest.card.location,
-     mChargeRequest.card.country,
-     mChargeRequest.card.city,
-     mChargeRequest.card.postalCode,
-     mChargeRequest.card.financing,
-     mChargeRequest.card.lastDigits,
-     mChargeRequest.card.brand,
-     mChargeRequest.card.expirationMonth,
-     mChargeRequest.card.expirationYear,
-     mChargeRequest.card.fingerprint,
-     mChargeRequest.card.name,
-     mChargeRequest.card.created,
+    NSMutableString* body = [NSMutableString new];
+    [body appendFormat:@"card=%@&return_uri=%@&amount=%d&capture=%@&description=%@",mChargeRequest.card,mChargeRequest.returnUri,mChargeRequest.amount,(mChargeRequest.capture ? @"true" : @"false"),mChargeRequest.descriptionOfCharge];
 
-     */
-    NSString* body = [NSString stringWithFormat:@"customer=%@&card=%@&return_uri=%@&amount=%d&currency=%@&capture=%@&description=%@&ip=%@",
-                      mChargeRequest.customer,
-                      mChargeRequest.card,
-                      mChargeRequest.returnUri,
-                      mChargeRequest.amount,
-                      mChargeRequest.currency,
-                      (mChargeRequest.capture ? @"true" : @"false"),
-                      mChargeRequest.descriptionOfCharge,
-                      mChargeRequest.ip];
+    if (mChargeRequest.customer && [mChargeRequest.customer length] > 0) {
+        [body appendFormat:@"&customer=%@",mChargeRequest.customer];
+    }
+    if (mChargeRequest.ip && [mChargeRequest.customer length] > 0) {
+        [body appendFormat:@"&ip=%@",mChargeRequest.ip];
+    }
+    if (mChargeRequest.currency && [mChargeRequest.currency length] > 0) {
+        [body appendFormat:@"&currency=%@",mChargeRequest.currency];
+
+    }
     
     [req setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
     
@@ -128,6 +114,7 @@ enum OmiseApi{
     
     NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:req delegate:self startImmediately:NO];
     [connection start];
+    
 }
 
 
@@ -168,10 +155,17 @@ enum OmiseApi{
         return;
     }
     
-    NSURLCredential *credential = [NSURLCredential credentialWithUser:mTokenRequest.publicKey
-                                                             password:@""
-                                                          persistence:NSURLCredentialPersistenceForSession];
-    [[challenge sender] useCredential:credential forAuthenticationChallenge:challenge];
+    if (requestingApi == OmiseToken) {
+        NSURLCredential *credential = [NSURLCredential credentialWithUser:mTokenRequest.publicKey
+                                                                 password:@""
+                                                              persistence:NSURLCredentialPersistenceForSession];
+        [[challenge sender] useCredential:credential forAuthenticationChallenge:challenge];
+    }else if(requestingApi == OmiseCharge){
+        NSURLCredential *credential = [NSURLCredential credentialWithUser:mChargeRequest.secretKey
+                                                                 password:@""
+                                                              persistence:NSURLCredentialPersistenceForSession];
+        [[challenge sender] useCredential:credential forAuthenticationChallenge:challenge];
+    }
 }
 -(BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
 {

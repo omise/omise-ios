@@ -17,7 +17,7 @@
                                                                options:NSJSONReadingAllowFragments
                                                                  error:nil];
     
-    NSLog(json);
+//    NSLog(json);
     if(jsonObject){
         
         NSString* obj = [jsonObject objectForKey:@"object"];
@@ -59,7 +59,7 @@
     NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding]
                                                                options:NSJSONReadingAllowFragments
                                                                  error:nil];
-    NSLog(json);
+//    NSLog(json);
     if(jsonObject){
         
         NSString* obj = [jsonObject objectForKey:@"object"];

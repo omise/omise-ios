@@ -37,10 +37,8 @@
     
     
     TokenRequest* tokenRequest = [TokenRequest new];
-    ChargeRequest* chargeRequest = [ChargeRequest new];
-    
-    /*
     tokenRequest.publicKey = tfPublicKey.text;
+    tokenRequest.publicKey = @"pkey_test_4ya6kkbjfporhk3gwnt";
     tokenRequest.card.name = @"JOHN DOE";
     tokenRequest.card.city = @"Bangkok";
     tokenRequest.card.postalCode = @"10320";
@@ -48,22 +46,7 @@
     tokenRequest.card.expirationMonth = @"11";
     tokenRequest.card.expirationYear = @"2016";
     [omise requestToken:tokenRequest];
-     */
-
     
-    chargeRequest.secretKey = @"skey_test_4y8nekxw2icd4xo8fi1";
-    chargeRequest.customer = @"cust_test_4y8nip97pty0w917lr0";
-    chargeRequest.amount = 10000;
-    chargeRequest.currency = @"thb";
-    chargeRequest.descriptionOfCharge = @"Order-384";
-    chargeRequest.card = @"card_test_4y8nla3can535zbhzjh";
-    [omise requestCharge:chargeRequest];
-    
-    //tokn_test_4y8nkbui94dp3ohd9da
-    //card_test_4y8nkbugwxctngn2r8v
-    //pkey_test_4y8nekxw3pr6lgvp3nv
-    //skey_test_4y8nekxw2icd4xo8fi1
-    //cust_test_4y8nip97pty0w917lr0
 }
 
 
@@ -71,7 +54,6 @@
 -(void)omiseOnFailed:(NSError *)error
 {
     tvJson.text = [NSString stringWithFormat:@"Failed.. %@",error.description];
-    
 }
 
 -(void)omiseOnSucceededToken:(Token *)token
@@ -96,6 +78,18 @@
                    token.card.created,
                    token.created
                    ];
+    
+    ChargeRequest* chargeRequest = [ChargeRequest new];
+    chargeRequest.secretKey = @"skey_test_4ya6kkbjg5oj9zx2caz";
+    chargeRequest.amount = 12345;
+    chargeRequest.currency = @"thb";
+    chargeRequest.descriptionOfCharge = @"Order-384";
+    chargeRequest.returnUri = @"http://www.example.com/orders/9999/complete";
+    chargeRequest.card = token.tokenId;
+    
+    Omise* omise = [Omise new];
+    omise.delegate = self;
+    [omise requestCharge:chargeRequest];
 }
 
 -(void)omiseOnSucceededCharge:(Charge *)charge
