@@ -20,7 +20,6 @@ static BOOL isClosing;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    islandNum = 1;
     isClosing = NO;
 }
 

@@ -50,7 +50,7 @@
 }
 
 
-#pragma OmiseRequestTokenDelegate
+#pragma OmiseRequestDelegate
 -(void)omiseOnFailed:(NSError *)error
 {
     tvJson.text = [NSString stringWithFormat:@"Failed.. %@",error.description];
