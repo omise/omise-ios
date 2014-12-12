@@ -450,8 +450,8 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="lblIslandNum" destination="4YO-Hn-k6l" id="2qA-n2-kf1"/>
-                        <outlet property="lblPrice" destination="d4n-qF-Hvd" id="MJa-JE-FPX"/>
+                        <outlet property="lblIslandNum" destination="4YO-Hn-k6l" id="7M7-vv-Ncx"/>
+                        <outlet property="lblPrice" destination="d4n-qF-Hvd" id="C5g-hW-Htl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ti4-C5-m1V" userLabel="First Responder" sceneMemberID="firstResponder"/>
