@@ -25,5 +25,6 @@
 @synthesize fingerprint;
 @synthesize name;
 @synthesize created;
+@synthesize securityCodeCheck;
 
 @end

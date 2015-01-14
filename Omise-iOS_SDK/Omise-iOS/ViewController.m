@@ -97,7 +97,10 @@
     
 }
 
-
+-(void)omiseOnSucceededCreateCustomer:(Customer *)customer
+{
+    //todo
+}
 
 
 #pragma tfPublicKey delegate

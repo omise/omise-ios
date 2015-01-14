@@ -59,7 +59,6 @@
     NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding]
                                                                options:NSJSONReadingAllowFragments
                                                                  error:nil];
-//    NSLog(json);
     if(jsonObject){
         
         NSString* obj = [jsonObject objectForKey:@"object"];
@@ -107,41 +106,71 @@
     return nil;
 }
 
-/*
- {
- "object": "charge",
- "id": "chrg_test_4xso2s8ivdej29pqnhz",
- "livemode": false,
- "location": "/charges/chrg_test_4xso2s8ivdej29pqnhz",
- "amount": 100000,
- "currency": "thb",
- "description": "Order-384",
- "capture": true,
- "authorized": false,
- "captured": false,
- "transaction": null,
- "return_uri": "https://example.co.th/orders/384/complete",
- "reference": "9qt1b3n635uv6plypp2spzkpe",
- "authorize_uri": "https://api.omise-gateway.dev/payments/9qt1b3n635uv6plypp2spzkpe/authorize",
- "card": {
- "object": "card",
- "id": "card_test_4xs94086bpvq56tghuo",
- "livemode": false,
- "country": "th",
- "city": "Bangkok",
- "postal_code": "10320",
- "financing": "credit",
- "last_digits": "4242",
- "brand": "Visa",
- "expiration_month": 10,
- "expiration_year": 2018,
- "fingerprint": "/LCaOoTah/+As+qKsohIldZkEfew0Zq2nJKgIObRwMI=",
- "name": "Somchai Prasert",
- "created": "2014-10-20T09:41:56Z"
- },
- "customer": null,
- "ip": "127.0.0.1",
- "created": "2014-10-21T11:12:28Z"
- }
- */
+-(Customer*)parseOmiseCreateCustomer:(NSString*)json
+{
+    
+    
+    
+    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding]
+                                                               options:NSJSONReadingAllowFragments
+                                                                 error:nil];
+    
+    
+    
+    if(jsonObject){
+        
+        NSString* obj = [jsonObject objectForKey:@"object"];
+        if ([obj isEqualToString:@"error"]) {
+            return nil;
+        }
+        
+        Customer* customer = [Customer new];
+        customer._id = [jsonObject objectForKey:@"id"];
+        customer.livemode = [(NSNumber *)[jsonObject objectForKey:@"livemode"]boolValue];
+        customer.location = [jsonObject objectForKey:@"location"];
+        customer.defaultCard = [jsonObject objectForKey:@"default_card"];
+        customer.email = [jsonObject objectForKey:@"email"];
+        customer.descriptionOfCustomer = [jsonObject objectForKey:@"description"];
+        customer.created = [jsonObject objectForKey:@"created"];
+
+        NSDictionary* cardsObject = [jsonObject objectForKey:@"cards"];
+        Cards* cards = [Cards new];
+        cards.from = [cardsObject objectForKey:@"from"];
+        cards.to = [cardsObject objectForKey:@"to"];
+        cards.offset = [[cardsObject objectForKey:@"offset"]intValue];;
+        cards.limit = [[cardsObject objectForKey:@"limit"]intValue];;
+        cards.total = [[cardsObject objectForKey:@"total"]intValue];;
+        cards.location = [cardsObject objectForKey:@"location"];
+        
+        
+        NSMutableArray* cardArray = [NSMutableArray new];
+        NSArray* cardsData = [cardsObject objectForKey:@"data"];
+        for (int i=0; i<(int)cardsData.count; i++) {
+            NSDictionary* cardObject = [cardsData objectAtIndex:i];
+            Card* card = [Card new];
+            card.cardId= [cardObject objectForKey:@"id"];
+            card.livemode = [(NSNumber *)[cardObject objectForKey:@"livemode"]boolValue];
+            card.country = [cardObject objectForKey:@"country"];
+            card.city = [cardObject objectForKey:@"city"];
+            card.postalCode = [cardObject objectForKey:@"postal_code"];
+            card.financing = [cardObject objectForKey:@"financing"];
+            card.lastDigits = [cardObject objectForKey:@"last_digits"];
+            card.brand = [cardObject objectForKey:@"brand"];
+            card.expirationMonth = [cardObject objectForKey:@"expiration_month"];
+            card.expirationYear = [cardObject objectForKey:@"expiration_year"];
+            card.fingerprint = [cardObject objectForKey:@"fingerprint"];
+            card.name = [cardObject objectForKey:@"name"];
+            card.created = [cardObject objectForKey:@"created"];
+            card.securityCodeCheck = [(NSNumber *)[cardObject objectForKey:@"security_code_check"]boolValue];
+            [cardArray addObject:card];
+        }
+        
+        cards.cards = cardArray;
+        customer.cards = cards;
+        
+        return customer;
+    }
+    return nil;
+}
+
 @end
