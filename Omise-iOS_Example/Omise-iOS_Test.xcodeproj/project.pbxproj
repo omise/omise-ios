@@ -40,8 +40,6 @@
 		659145181A2413C20011F142 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 659145161A2413C20011F142 /* LaunchScreen.xib */; };
 		659145241A2413C20011F142 /* Omise_iOS_TestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 659145231A2413C20011F142 /* Omise_iOS_TestTests.m */; };
 		6599767E1A31532000A72085 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 6599766F1A31532000A72085 /* Card.m */; };
-		6599767F1A31532000A72085 /* Charge.m in Sources */ = {isa = PBXBuildFile; fileRef = 659976711A31532000A72085 /* Charge.m */; };
-		659976801A31532000A72085 /* ChargeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 659976731A31532000A72085 /* ChargeRequest.m */; };
 		659976811A31532000A72085 /* JsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 659976751A31532000A72085 /* JsonParser.m */; };
 		659976821A31532000A72085 /* Omise.m in Sources */ = {isa = PBXBuildFile; fileRef = 659976771A31532000A72085 /* Omise.m */; };
 		659976831A31532000A72085 /* OmiseError.m in Sources */ = {isa = PBXBuildFile; fileRef = 659976791A31532000A72085 /* OmiseError.m */; };
@@ -103,10 +101,6 @@
 		659145231A2413C20011F142 /* Omise_iOS_TestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Omise_iOS_TestTests.m; sourceTree = "<group>"; };
 		6599766E1A31532000A72085 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Card.h; path = "../../Omise-iOS_SDK/Omise-iOS/OmiseLib/Card.h"; sourceTree = "<group>"; };
 		6599766F1A31532000A72085 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Card.m; path = "../../Omise-iOS_SDK/Omise-iOS/OmiseLib/Card.m"; sourceTree = "<group>"; };
-		659976701A31532000A72085 /* Charge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Charge.h; path = "../../Omise-iOS_SDK/Omise-iOS/OmiseLib/Charge.h"; sourceTree = "<group>"; };
-		659976711A31532000A72085 /* Charge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Charge.m; path = "../../Omise-iOS_SDK/Omise-iOS/OmiseLib/Charge.m"; sourceTree = "<group>"; };
-		659976721A31532000A72085 /* ChargeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChargeRequest.h; path = "../../Omise-iOS_SDK/Omise-iOS/OmiseLib/ChargeRequest.h"; sourceTree = "<group>"; };
-		659976731A31532000A72085 /* ChargeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChargeRequest.m; path = "../../Omise-iOS_SDK/Omise-iOS/OmiseLib/ChargeRequest.m"; sourceTree = "<group>"; };
 		659976741A31532000A72085 /* JsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JsonParser.h; path = "../../Omise-iOS_SDK/Omise-iOS/OmiseLib/JsonParser.h"; sourceTree = "<group>"; };
 		659976751A31532000A72085 /* JsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JsonParser.m; path = "../../Omise-iOS_SDK/Omise-iOS/OmiseLib/JsonParser.m"; sourceTree = "<group>"; };
 		659976761A31532000A72085 /* Omise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Omise.h; path = "../../Omise-iOS_SDK/Omise-iOS/OmiseLib/Omise.h"; sourceTree = "<group>"; };
@@ -246,10 +240,6 @@
 			children = (
 				6599766E1A31532000A72085 /* Card.h */,
 				6599766F1A31532000A72085 /* Card.m */,
-				659976701A31532000A72085 /* Charge.h */,
-				659976711A31532000A72085 /* Charge.m */,
-				659976721A31532000A72085 /* ChargeRequest.h */,
-				659976731A31532000A72085 /* ChargeRequest.m */,
 				659976741A31532000A72085 /* JsonParser.h */,
 				659976751A31532000A72085 /* JsonParser.m */,
 				659976761A31532000A72085 /* Omise.h */,
@@ -387,7 +377,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				659145101A2413C20011F142 /* ViewController.m in Sources */,
-				659976801A31532000A72085 /* ChargeRequest.m in Sources */,
 				659976811A31532000A72085 /* JsonParser.m in Sources */,
 				6591450D1A2413C20011F142 /* AppDelegate.m in Sources */,
 				659976841A31532000A72085 /* Token.m in Sources */,
@@ -397,7 +386,6 @@
 				659976831A31532000A72085 /* OmiseError.m in Sources */,
 				6566CDA61A2564F300452095 /* CheckoutViewController.m in Sources */,
 				6536D6B91A28026700B80248 /* AccessOmiseViewController.m in Sources */,
-				6599767F1A31532000A72085 /* Charge.m in Sources */,
 				6599767E1A31532000A72085 /* Card.m in Sources */,
 				6591450A1A2413C20011F142 /* main.m in Sources */,
 			);

@@ -7,11 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		65579B001A2C3B9B00FB4894 /* Charge.m in Sources */ = {isa = PBXBuildFile; fileRef = 65579AFF1A2C3B9B00FB4894 /* Charge.m */; };
-		65579B031A2C49A300FB4894 /* ChargeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65579B021A2C49A300FB4894 /* ChargeRequest.m */; };
 		65AD54281A663CFD00719D3E /* Cards.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD54271A663CFD00719D3E /* Cards.m */; };
-		65AD542B1A663DEA00719D3E /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD542A1A663DEA00719D3E /* Customer.m */; };
-		65AD542E1A66403300719D3E /* CustomerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD542D1A66403300719D3E /* CustomerRequest.m */; };
 		65D010111A11B70D00B75F3D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D010101A11B70D00B75F3D /* main.m */; };
 		65D010141A11B70D00B75F3D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D010131A11B70D00B75F3D /* AppDelegate.m */; };
 		65D010171A11B70D00B75F3D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D010161A11B70D00B75F3D /* ViewController.m */; };
@@ -57,16 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		65579AFE1A2C3B9B00FB4894 /* Charge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Charge.h; path = OmiseLib/Charge.h; sourceTree = "<group>"; };
-		65579AFF1A2C3B9B00FB4894 /* Charge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Charge.m; path = OmiseLib/Charge.m; sourceTree = "<group>"; };
-		65579B011A2C49A300FB4894 /* ChargeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChargeRequest.h; path = OmiseLib/ChargeRequest.h; sourceTree = "<group>"; };
-		65579B021A2C49A300FB4894 /* ChargeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChargeRequest.m; path = OmiseLib/ChargeRequest.m; sourceTree = "<group>"; };
 		65AD54261A663CFD00719D3E /* Cards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Cards.h; path = OmiseLib/Cards.h; sourceTree = "<group>"; };
 		65AD54271A663CFD00719D3E /* Cards.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Cards.m; path = OmiseLib/Cards.m; sourceTree = "<group>"; };
-		65AD54291A663DEA00719D3E /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Customer.h; path = OmiseLib/Customer.h; sourceTree = "<group>"; };
-		65AD542A1A663DEA00719D3E /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Customer.m; path = OmiseLib/Customer.m; sourceTree = "<group>"; };
-		65AD542C1A66403300719D3E /* CustomerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomerRequest.h; path = OmiseLib/CustomerRequest.h; sourceTree = "<group>"; };
-		65AD542D1A66403300719D3E /* CustomerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomerRequest.m; path = OmiseLib/CustomerRequest.m; sourceTree = "<group>"; };
 		65D0100B1A11B70D00B75F3D /* Omise-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Omise-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D0100F1A11B70D00B75F3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65D010101A11B70D00B75F3D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -202,10 +190,6 @@
 				673FCA5B1A1A0FAB0091D67D /* Card.m */,
 				65AD54261A663CFD00719D3E /* Cards.h */,
 				65AD54271A663CFD00719D3E /* Cards.m */,
-				65AD54291A663DEA00719D3E /* Customer.h */,
-				65AD542A1A663DEA00719D3E /* Customer.m */,
-				65AD542C1A66403300719D3E /* CustomerRequest.h */,
-				65AD542D1A66403300719D3E /* CustomerRequest.m */,
 				673FCA5C1A1A0FAB0091D67D /* JsonParser.h */,
 				673FCA5D1A1A0FAB0091D67D /* JsonParser.m */,
 				673FCA601A1A0FAB0091D67D /* OmiseError.h */,
@@ -214,10 +198,6 @@
 				673FCA631A1A0FAB0091D67D /* Token.m */,
 				673FCA641A1A0FAB0091D67D /* TokenRequest.h */,
 				673FCA651A1A0FAB0091D67D /* TokenRequest.m */,
-				65579AFE1A2C3B9B00FB4894 /* Charge.h */,
-				65579AFF1A2C3B9B00FB4894 /* Charge.m */,
-				65579B011A2C49A300FB4894 /* ChargeRequest.h */,
-				65579B021A2C49A300FB4894 /* ChargeRequest.m */,
 			);
 			name = Omise;
 			path = "Omise-iOS";
@@ -371,17 +351,13 @@
 				673FCA6B1A1A0FAB0091D67D /* TokenRequest.m in Sources */,
 				65D010171A11B70D00B75F3D /* ViewController.m in Sources */,
 				65D010141A11B70D00B75F3D /* AppDelegate.m in Sources */,
-				65AD542E1A66403300719D3E /* CustomerRequest.m in Sources */,
 				65AD54281A663CFD00719D3E /* Cards.m in Sources */,
 				673FCA671A1A0FAB0091D67D /* JsonParser.m in Sources */,
 				673FCA6A1A1A0FAB0091D67D /* Token.m in Sources */,
 				673FCA681A1A0FAB0091D67D /* Omise.m in Sources */,
 				65D010111A11B70D00B75F3D /* main.m in Sources */,
-				65579B001A2C3B9B00FB4894 /* Charge.m in Sources */,
 				673FCA691A1A0FAB0091D67D /* OmiseError.m in Sources */,
-				65AD542B1A663DEA00719D3E /* Customer.m in Sources */,
 				673FCA661A1A0FAB0091D67D /* Card.m in Sources */,
-				65579B031A2C49A300FB4894 /* ChargeRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

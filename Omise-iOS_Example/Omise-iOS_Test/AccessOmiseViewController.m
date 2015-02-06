@@ -79,10 +79,6 @@ bool succeeded;
     [btnToken setTitle:token.tokenId forState:UIControlStateNormal];
     succeeded = YES;
 }
--(void)omiseOnSucceededCharge:(Charge *)charge
-{
-    
-}
 -(void)omiseOnFailed:(NSError *)error
 {
     [btnToken setTitle:@"Sorry, Please try again.." forState:UIControlStateNormal];

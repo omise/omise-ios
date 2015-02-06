@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Omise.h"
 #import "TokenRequest.h"
-#import "ChargeRequest.h"
 #import "Card.h"
-#import "Charge.h"
 
 
 @interface ViewController : UIViewController <OmiseRequestDelegate, UITextFieldDelegate>

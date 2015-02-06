@@ -80,36 +80,7 @@
     
     Omise* omise = [Omise new];
     omise.delegate = self;
-
-    /*
-    ChargeRequest* chargeRequest = [ChargeRequest new];
-    chargeRequest.secretKey = @"skey_test_4ya6kkbjg5oj9zx2caz";
-    chargeRequest.amount = 12345;
-    chargeRequest.currency = @"thb";
-    chargeRequest.descriptionOfCharge = @"Order-384";
-    chargeRequest.returnUri = @"http://www.example.com/orders/9999/complete";
-    chargeRequest.card = token.tokenId;
-    [omise requestCharge:chargeRequest];
-     */
-    
-    CustomerRequest* customerRequest = [CustomerRequest new];
-    customerRequest.secretKey = @"skey_test_4ypsy7bkk40kirezg28";
-    customerRequest.descriptionOfCustomer = @"ios_test_test_hoge_hoge";
-    customerRequest.email = @"hogehoge@fugafuga.com";
-    customerRequest.card = token.tokenId;
-    [omise requestCreateCustomer:customerRequest];
 }
-
--(void)omiseOnSucceededCharge:(Charge *)charge
-{
-    
-}
-
--(void)omiseOnSucceededCreateCustomer:(Customer *)customer
-{
-    //todo
-}
-
 
 #pragma tfPublicKey delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)sender {

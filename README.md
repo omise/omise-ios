@@ -25,9 +25,6 @@ A class encapsulating parameters for requesting token. You will have to set card
 
 A class representing token. This class is what will be passed to the delegate if the request is successful.
 
-### Charge
-A class representing charge. This class is what will be passed to the delegate if the request is successful.
-
 ### Omise
 
 A class for requesting token. See also sample code below.
@@ -39,34 +36,23 @@ By opening Omise-iOS_Test.xcodeproj and building it on Xcode, the sample applica
 
 ExampleViewController.h
 ```objc
-#import <UIKit/UIKit.h>
-#import "Omise.h"
-#import "TokenRequest.h"
-#import "Card.h"
-
-@interface ExampleViewController : UIViewController <OmiseRequestTokenDelegate>
-@end
-```
-    
-ExampleViewController.m
-```objc
 #import "ExampleViewController.h"
 @implementation ExampleViewController
 
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     //set parameters
     TokenRequest* tokenRequest = [TokenRequest new];
-    tokenRequest.publicKey = @"pkey_test_xxxxxxxxxxxxxxxxxxx"; //required
+    tokenRequest.publicKey = @"pkey_test_4ya6kkbjfporhk3gwnt"; //required
     tokenRequest.card.name = @"JOHN DOE"; //required
     tokenRequest.card.city = @"Bangkok"; //required
     tokenRequest.card.postalCode = @"10320"; //required
     tokenRequest.card.number = @"4242424242424242"; //required
     tokenRequest.card.expirationMonth = @"11"; //required
     tokenRequest.card.expirationYear = @"2016"; //required
-    
+
     //request
     Omise* omise = [Omise new];
     omise.delegate = self;
@@ -74,18 +60,20 @@ ExampleViewController.m
 }
 
 
-#pragma OmiseRequestTokenDelegate
+#pragma OmiseRequestDelegate
 -(void)omiseOnFailed:(NSError *)error
 {
     //handle error
     //see OmiseError.h and .m
 }
 
--(void)omiseOnSucceeded:(Token *)token
+-(void)omiseOnSucceededToken:(Token *)token
 {
     //your code here
+    //ex.
     NSString* brand = token.card.brand;
     NSString* location = token.location;
     BOOL livemode = token.livemode;
 }
+
 ```
