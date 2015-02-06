@@ -9,14 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "Token.h"
 #import "Card.h"
-#import "Charge.h"
-#import "Customer.h"
 #import "Cards.h"
 
 @interface JsonParser : NSObject
 
 -(Token*)parseOmiseToken:(NSString*)json;
--(Charge*)parseOmiseCharge:(NSString*)json;
--(Customer*)parseOmiseCreateCustomer:(NSString*)json;
 
 @end
