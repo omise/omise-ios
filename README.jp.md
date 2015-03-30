@@ -36,7 +36,7 @@ ExampleViewController.h
 @interface ExampleViewController : UIViewController <OmiseRequestTokenDelegate>
 @end
 ```
-    
+
 ExampleViewController.m
 ```objc
 #import "ExampleViewController.h"
@@ -45,7 +45,7 @@ ExampleViewController.m
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     //set parameters
     TokenRequest* tokenRequest = [TokenRequest new];
     tokenRequest.publicKey = @"pkey_test_4ya6kkbjfporhk3gwnt"; //required
@@ -55,7 +55,8 @@ ExampleViewController.m
     tokenRequest.card.number = @"4242424242424242"; //required
     tokenRequest.card.expirationMonth = @"11"; //required
     tokenRequest.card.expirationYear = @"2016"; //required
-    
+    tokenRequest.card.securityCode = @"123"; //required
+
     //request
     Omise* omise = [Omise new];
     omise.delegate = self;
