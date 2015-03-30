@@ -48,13 +48,14 @@ enum OmiseApi{
     NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:15];
     [req setHTTPMethod:@"POST"];
     
-    NSString* body = [NSString stringWithFormat:@"card[name]=%@&card[city]=%@&card[postal_code]=%@&card[number]=%@&card[expiration_month]=%@&card[expiration_year]=%@",
+    NSString* body = [NSString stringWithFormat:@"card[name]=%@&card[city]=%@&card[postal_code]=%@&card[number]=%@&card[expiration_month]=%@&card[expiration_year]=%@&card[security_code]=%@",
                       mTokenRequest.card.name,
                       mTokenRequest.card.city,
                       mTokenRequest.card.postalCode,
                       mTokenRequest.card.number,
                       mTokenRequest.card.expirationMonth,
-                      mTokenRequest.card.expirationYear];
+                      mTokenRequest.card.expirationYear,
+                      mTokenRequest.card.securityCode];
     [req setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
     
     NSString *loginString = [NSString stringWithFormat:@"%@:%@", mTokenRequest.publicKey, @""];

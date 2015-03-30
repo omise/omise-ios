@@ -17,7 +17,6 @@
                                                                options:NSJSONReadingAllowFragments
                                                                  error:nil];
     if(jsonObject){
-        
         NSString* obj = [jsonObject objectForKey:@"object"];
         if ([obj isEqualToString:@"error"]) {
             return nil;
@@ -45,7 +44,8 @@
         token.card.fingerprint = [cardObject objectForKey:@"fingerprint"];
         token.card.name = [cardObject objectForKey:@"name"];
         token.card.created = [cardObject objectForKey:@"created"];
-     
+        token.card.securityCodeCheck = [(NSNumber *)[cardObject objectForKey:@"security_code_check"]boolValue];
+
         return token;
     }
     

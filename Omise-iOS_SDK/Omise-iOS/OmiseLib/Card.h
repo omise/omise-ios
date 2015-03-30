@@ -25,6 +25,7 @@
 @property (nonatomic) NSString* fingerprint;
 @property (nonatomic) NSString* name;
 @property (nonatomic) NSString* created;
+@property (nonatomic) NSString* securityCode;
 @property (nonatomic) BOOL securityCodeCheck;
 
 @end
