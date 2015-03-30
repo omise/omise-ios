@@ -42,6 +42,7 @@ bool succeeded;
     tokenRequest.card.number = @"4242424242424242"; //required
     tokenRequest.card.expirationMonth = @"11"; //required
     tokenRequest.card.expirationYear = @"2016"; //required
+    tokenRequest.card.securityCode = @"123"; //required
     
     Omise* omise = [Omise new];
     omise.delegate = self;
