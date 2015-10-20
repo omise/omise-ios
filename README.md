@@ -1,15 +1,19 @@
 omise-ios
 =========
 
-omise-ios is a Cocoa library for managing token with Omise API.
+omise-ios is a Cocoa library for managing credit cards and payment authorization with the Omise API.
 
-By using the token produced by this library, you will be able to securely process credit card without letting sensitive information pass through your server. This token can also be used to create customer card data which will allow re-using of card data for the next payment without entering it again.
+By using the tokens produced by this library, you will be able to securely process credit cards without letting sensitive information pass through your server. These tokens can also be used to store references to card details which allow customers to reuse cards for their future payments without entering their information again.
 
 All data are transmitted via HTTPS to our PCI-DSS certified server.
 
 ## Setup
 
-Please copy all files in {repo root}/Omise-iOS/Omise-iOS/OmiseLib into your project.
+Omise-iOS-Swift is available through [CocoaPods]. To install it, simply add the following line to your `Podfile`:
+
+    pod 'omise-ios', '~> 1.0'
+
+Alternatively, to install manually, please copy all files in `{repository root}/Omise-iOS/Omise-iOS/OmiseLib` into your project.
 
 ## Primary classes
 
@@ -35,7 +39,20 @@ By opening Omise-iOS_Test.xcodeproj and building it on Xcode, the sample applica
 
 ## Request a token
 
-ExampleViewController.h
+`ExampleViewController.h`:
+
+```objc
+#import <UIKit/UIKit.h>
+#import "Omise.h"
+#import "TokenRequest.h"
+#import "Card.h"
+
+@interface ExampleViewController : UIViewController <OmiseRequestTokenDelegate>
+@end
+```
+
+`ExampleViewController.m`:
+
 ```objc
 #import "ExampleViewController.h"
 @implementation ExampleViewController
@@ -77,5 +94,6 @@ ExampleViewController.h
     NSString* location = token.location;
     BOOL livemode = token.livemode;
 }
-
 ```
+
+[CocoaPods]: http://cocoapods.org/
