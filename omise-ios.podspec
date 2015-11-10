@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'omise-ios'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.summary          = 'Client library for the Omise API'
   s.description      = <<-DESC
     omise-ios is a Cocoa library for managing payment authorization tokens
