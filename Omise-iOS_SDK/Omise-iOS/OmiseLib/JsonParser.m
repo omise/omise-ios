@@ -45,6 +45,7 @@
         token.card.name = [cardObject objectForKey:@"name"];
         token.card.created = [cardObject objectForKey:@"created"];
         token.card.securityCodeCheck = [(NSNumber *)[cardObject objectForKey:@"security_code_check"]boolValue];
+        token.card.bank = [cardObject objectForKey:@"bank"];
 
         return token;
     }

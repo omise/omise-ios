@@ -26,5 +26,6 @@
 @synthesize name;
 @synthesize created;
 @synthesize securityCodeCheck;
+@synthesize bank;
 
 @end

@@ -57,7 +57,7 @@
 
 -(void)omiseOnSucceededToken:(Token *)token
 {
-    tvJson.text = [NSString stringWithFormat:@"token:{\n\ttokenId:%@\n\tlivemode:%d\n\tlocation:%@\n\tused:%d\n\tcard:{\n\t\tcardId:%@\n\t\tlivemode:%d\n\t\tcountry:%@\n\t\tcity:%@\n\t\tpostal_code:%@\n\t\tfinancing:%@\n\t\tlast_digits:%@\n\t\tbrand:%@\n\t\texpiration_month:%@\n\t\texpiration_year:%@\n\t\tfingerprint:%@\n\t\tname:%@\n\t\tcreated:%@\n\t}\n\tcreated:%@\n}",
+    tvJson.text = [NSString stringWithFormat:@"token:{\n\ttokenId:%@\n\tlivemode:%d\n\tlocation:%@\n\tused:%d\n\tcard:{\n\t\tcardId:%@\n\t\tlivemode:%d\n\t\tcountry:%@\n\t\tcity:%@\n\t\tpostal_code:%@\n\t\tfinancing:%@\n\t\tlast_digits:%@\n\t\tbrand:%@\n\t\texpiration_month:%@\n\t\texpiration_year:%@\n\t\tfingerprint:%@\n\t\tname:%@\n\t\tcreated:%@\n\t\tbank:%@\n\t}\n\tcreated:%@\n}",
                    token.tokenId,
                    token.livemode,
                    token.location,
@@ -75,6 +75,7 @@
                    token.card.fingerprint,
                    token.card.name,
                    token.card.created,
+                   token.card.bank,
                    token.created
                    ];
     
