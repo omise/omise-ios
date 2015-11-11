@@ -45,6 +45,7 @@ enum OmiseApi{
     mTokenRequest = tokenRequest;
     
     NSURL* url = [NSURL URLWithString:@"https://vault.omise.co/tokens"];
+    NSString* OMISE_IOS_VERSION = @"1.0.3";
     NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:15];
     [req setHTTPMethod:@"POST"];
     
@@ -62,7 +63,9 @@ enum OmiseApi{
     NSData *plainData = [loginString dataUsingEncoding:NSUTF8StringEncoding];
     NSString *base64String = [plainData base64EncodedStringWithOptions:0];
     NSString *base64LoginData = [NSString stringWithFormat:@"Basic %@",base64String];
+    NSString *userAgentData = [NSString stringWithFormat:@"OmiseIOS/%@",OMISE_IOS_VERSION];
     [req setValue:base64LoginData forHTTPHeaderField:@"Authorization"];
+    [req setValue:userAgentData forHTTPHeaderField:@"User-Agent"];
     
     NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:req delegate:self startImmediately:NO];
     [connection start];
