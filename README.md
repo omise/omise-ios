@@ -1,7 +1,7 @@
-omise-ios
+Omise-iOS
 =========
 
-omise-ios is a Cocoa library for managing credit cards and payment authorization with the Omise API.
+Omise-iOS is a Cocoa library for managing credit cards and payment authorization with the Omise API.
 
 By using the tokens produced by this library, you will be able to securely process credit cards without letting sensitive information pass through your server. These tokens can also be used to store references to card details which allow customers to reuse cards for their future payments without entering their information again.
 
@@ -9,7 +9,7 @@ All data are transmitted via HTTPS to our PCI-DSS certified server.
 
 ## Setup
 
-Omise-iOS-Swift is available through [CocoaPods]. To install it, simply add the following line to your `Podfile`:
+Omise-iOS is available through [CocoaPods]. To install it, simply add the following line to your `Podfile`:
 
     pod 'omise-ios', '~> 1.0'
 
