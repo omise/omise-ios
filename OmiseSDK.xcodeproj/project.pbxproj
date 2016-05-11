@@ -13,7 +13,19 @@
 		985527E41CE3397500FAB3BD /* OmiseToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985527E31CE3397500FAB3BD /* OmiseToken.swift */; };
 		985527E61CE33CA200FAB3BD /* OmiseJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985527E51CE33CA200FAB3BD /* OmiseJsonParser.swift */; };
 		985527E81CE3505300FAB3BD /* OmiseRequestObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985527E71CE3505300FAB3BD /* OmiseRequestObject.swift */; };
+		987A02CC1CE35D5E0035417A /* OmiseSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A02CB1CE35D5E0035417A /* OmiseSDKTests.swift */; };
+		987A02CE1CE35D5E0035417A /* OmiseSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225931181CE3210700841B86 /* OmiseSDK.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		987A02CF1CE35D5E0035417A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2259310F1CE3210700841B86 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 225931171CE3210700841B86;
+			remoteInfo = OmiseSDK;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		225931181CE3210700841B86 /* OmiseSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OmiseSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24,6 +36,9 @@
 		985527E31CE3397500FAB3BD /* OmiseToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseToken.swift; path = Tokenizer/OmiseToken.swift; sourceTree = "<group>"; };
 		985527E51CE33CA200FAB3BD /* OmiseJsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseJsonParser.swift; path = Tokenizer/OmiseJsonParser.swift; sourceTree = "<group>"; };
 		985527E71CE3505300FAB3BD /* OmiseRequestObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseRequestObject.swift; path = Tokenizer/OmiseRequestObject.swift; sourceTree = "<group>"; };
+		987A02C91CE35D5E0035417A /* OmiseSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmiseSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		987A02CB1CE35D5E0035417A /* OmiseSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseSDKTests.swift; sourceTree = "<group>"; };
+		987A02CD1CE35D5E0035417A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +49,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		987A02C61CE35D5E0035417A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				987A02CE1CE35D5E0035417A /* OmiseSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -41,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				2259311A1CE3210700841B86 /* OmiseSDK */,
+				987A02CA1CE35D5E0035417A /* OmiseSDKTests */,
 				225931191CE3210700841B86 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				225931181CE3210700841B86 /* OmiseSDK.framework */,
+				987A02C91CE35D5E0035417A /* OmiseSDKTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,6 +98,15 @@
 				985527E71CE3505300FAB3BD /* OmiseRequestObject.swift */,
 			);
 			name = Tokenizer;
+			sourceTree = "<group>";
+		};
+		987A02CA1CE35D5E0035417A /* OmiseSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				987A02CB1CE35D5E0035417A /* OmiseSDKTests.swift */,
+				987A02CD1CE35D5E0035417A /* Info.plist */,
+			);
+			path = OmiseSDKTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,17 +141,39 @@
 			productReference = 225931181CE3210700841B86 /* OmiseSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		987A02C81CE35D5E0035417A /* OmiseSDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 987A02D31CE35D5E0035417A /* Build configuration list for PBXNativeTarget "OmiseSDKTests" */;
+			buildPhases = (
+				987A02C51CE35D5E0035417A /* Sources */,
+				987A02C61CE35D5E0035417A /* Frameworks */,
+				987A02C71CE35D5E0035417A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				987A02D01CE35D5E0035417A /* PBXTargetDependency */,
+			);
+			name = OmiseSDKTests;
+			productName = OmiseSDKTests;
+			productReference = 987A02C91CE35D5E0035417A /* OmiseSDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		2259310F1CE3210700841B86 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = Omise;
 				TargetAttributes = {
 					225931171CE3210700841B86 = {
 						CreatedOnToolsVersion = 7.3;
+					};
+					987A02C81CE35D5E0035417A = {
+						CreatedOnToolsVersion = 7.3.1;
 					};
 				};
 			};
@@ -134,12 +190,20 @@
 			projectRoot = "";
 			targets = (
 				225931171CE3210700841B86 /* OmiseSDK */,
+				987A02C81CE35D5E0035417A /* OmiseSDKTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		225931161CE3210700841B86 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		987A02C71CE35D5E0035417A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -161,7 +225,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		987A02C51CE35D5E0035417A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				987A02CC1CE35D5E0035417A /* OmiseSDKTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		987A02D01CE35D5E0035417A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 225931171CE3210700841B86 /* OmiseSDK */;
+			targetProxy = 987A02CF1CE35D5E0035417A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		2259311E1CE3210700841B86 /* Debug */ = {
@@ -290,6 +370,26 @@
 			};
 			name = Release;
 		};
+		987A02D11CE35D5E0035417A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = OmiseSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		987A02D21CE35D5E0035417A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = OmiseSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -310,6 +410,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		987A02D31CE35D5E0035417A /* Build configuration list for PBXNativeTarget "OmiseSDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				987A02D11CE35D5E0035417A /* Debug */,
+				987A02D21CE35D5E0035417A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
