@@ -12,6 +12,7 @@
 		985527E21CE3370900FAB3BD /* Omise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985527E11CE3370900FAB3BD /* Omise.swift */; };
 		985527E41CE3397500FAB3BD /* OmiseToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985527E31CE3397500FAB3BD /* OmiseToken.swift */; };
 		985527E61CE33CA200FAB3BD /* OmiseJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985527E51CE33CA200FAB3BD /* OmiseJsonParser.swift */; };
+		985527E81CE3505300FAB3BD /* OmiseRequestObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985527E71CE3505300FAB3BD /* OmiseRequestObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		985527E11CE3370900FAB3BD /* Omise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Omise.swift; path = Tokenizer/Omise.swift; sourceTree = "<group>"; };
 		985527E31CE3397500FAB3BD /* OmiseToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseToken.swift; path = Tokenizer/OmiseToken.swift; sourceTree = "<group>"; };
 		985527E51CE33CA200FAB3BD /* OmiseJsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseJsonParser.swift; path = Tokenizer/OmiseJsonParser.swift; sourceTree = "<group>"; };
+		985527E71CE3505300FAB3BD /* OmiseRequestObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseRequestObject.swift; path = Tokenizer/OmiseRequestObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				985527DE1CE331F700FAB3BD /* OmiseCard.swift */,
 				985527E31CE3397500FAB3BD /* OmiseToken.swift */,
 				985527E51CE33CA200FAB3BD /* OmiseJsonParser.swift */,
+				985527E71CE3505300FAB3BD /* OmiseRequestObject.swift */,
 			);
 			name = Tokenizer;
 			sourceTree = "<group>";
@@ -153,6 +156,7 @@
 				985527E61CE33CA200FAB3BD /* OmiseJsonParser.swift in Sources */,
 				985527DF1CE331F700FAB3BD /* OmiseCard.swift in Sources */,
 				985527E21CE3370900FAB3BD /* Omise.swift in Sources */,
+				985527E81CE3505300FAB3BD /* OmiseRequestObject.swift in Sources */,
 				985527E41CE3397500FAB3BD /* OmiseToken.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
