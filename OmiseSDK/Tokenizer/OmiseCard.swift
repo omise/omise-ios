@@ -12,18 +12,19 @@ public class OmiseCard {
     var livemode: Bool?
     var location: String?
     var country: String?
-    var number: String?
-    var city: String?
-    var postalCode: String?
     var financing: String?
     var lastDigits: String?
     var brand: String?
-    var expirationMonth: String?
-    var expirationYear: String?
     var fingerprint: String?
-    var name: String?
-    var created: String?
-    var securityCode: String?
     var securityCodeCheck: Bool?
-    var bank: String?
+    var created: String?
+    
+    // For create a token
+    var name: String?
+    var number: String?
+    var expirationMonth: Int?
+    var expirationYear: Int?
+    var securityCode: String?
+    var city: String?           // Optional
+    var postalCode: String?     // Optional
 }
