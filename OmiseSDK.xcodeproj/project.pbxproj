@@ -8,12 +8,33 @@
 
 /* Begin PBXBuildFile section */
 		2259311C1CE3210700841B86 /* OmiseSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 2259311B1CE3210700841B86 /* OmiseSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		225931281CE329D800841B86 /* OmiseSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 2259311B1CE3210700841B86 /* OmiseSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2259313B1CE32EAC00841B86 /* Hello.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259313A1CE32EAC00841B86 /* Hello.swift */; };
+		2259313C1CE32EB500841B86 /* Hello.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259313A1CE32EAC00841B86 /* Hello.swift */; };
+		225931441CE3300A00841B86 /* OmiseSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225931431CE3300A00841B86 /* OmiseSDKTests.swift */; };
+		225931461CE3300A00841B86 /* OmiseSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225931181CE3210700841B86 /* OmiseSDK.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		225931471CE3300A00841B86 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2259310F1CE3210700841B86 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 225931171CE3210700841B86;
+			remoteInfo = OmiseSDK;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		225931181CE3210700841B86 /* OmiseSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OmiseSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2259311B1CE3210700841B86 /* OmiseSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OmiseSDK.h; sourceTree = "<group>"; };
 		2259311D1CE3210700841B86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2259312D1CE329D800841B86 /* OmiseSDKSlim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OmiseSDKSlim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2259312E1CE329D800841B86 /* Info-Slim.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Slim.plist"; path = "/Users/chakrit/Documents/omise/omise-ios-sdk/Info-Slim.plist"; sourceTree = "<absolute>"; };
+		2259313A1CE32EAC00841B86 /* Hello.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hello.swift; sourceTree = "<group>"; };
+		225931411CE3300A00841B86 /* OmiseSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmiseSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		225931431CE3300A00841B86 /* OmiseSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseSDKTests.swift; sourceTree = "<group>"; };
+		225931451CE3300A00841B86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -24,6 +45,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		225931261CE329D800841B86 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2259313E1CE3300A00841B86 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				225931461CE3300A00841B86 /* OmiseSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -31,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				2259311A1CE3210700841B86 /* OmiseSDK */,
+				225931421CE3300A00841B86 /* OmiseSDKTests */,
 				225931191CE3210700841B86 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -39,6 +76,8 @@
 			isa = PBXGroup;
 			children = (
 				225931181CE3210700841B86 /* OmiseSDK.framework */,
+				2259312D1CE329D800841B86 /* OmiseSDKSlim.framework */,
+				225931411CE3300A00841B86 /* OmiseSDKTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -47,9 +86,20 @@
 			isa = PBXGroup;
 			children = (
 				2259311B1CE3210700841B86 /* OmiseSDK.h */,
+				2259312E1CE329D800841B86 /* Info-Slim.plist */,
 				2259311D1CE3210700841B86 /* Info.plist */,
+				2259313A1CE32EAC00841B86 /* Hello.swift */,
 			);
 			path = OmiseSDK;
+			sourceTree = "<group>";
+		};
+		225931421CE3300A00841B86 /* OmiseSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				225931451CE3300A00841B86 /* Info.plist */,
+				225931431CE3300A00841B86 /* OmiseSDKTests.swift */,
+			);
+			path = OmiseSDKTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -60,6 +110,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2259311C1CE3210700841B86 /* OmiseSDK.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		225931271CE329D800841B86 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				225931281CE329D800841B86 /* OmiseSDK.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,16 +142,56 @@
 			productReference = 225931181CE3210700841B86 /* OmiseSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		225931241CE329D800841B86 /* OmiseSDKSlim */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2259312A1CE329D800841B86 /* Build configuration list for PBXNativeTarget "OmiseSDKSlim" */;
+			buildPhases = (
+				225931251CE329D800841B86 /* Sources */,
+				225931261CE329D800841B86 /* Frameworks */,
+				225931271CE329D800841B86 /* Headers */,
+				225931291CE329D800841B86 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OmiseSDKSlim;
+			productName = OmiseSDK;
+			productReference = 2259312D1CE329D800841B86 /* OmiseSDKSlim.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		225931401CE3300A00841B86 /* OmiseSDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 225931491CE3300A00841B86 /* Build configuration list for PBXNativeTarget "OmiseSDKTests" */;
+			buildPhases = (
+				2259313D1CE3300A00841B86 /* Sources */,
+				2259313E1CE3300A00841B86 /* Frameworks */,
+				2259313F1CE3300A00841B86 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				225931481CE3300A00841B86 /* PBXTargetDependency */,
+			);
+			name = OmiseSDKTests;
+			productName = OmiseSDKTests;
+			productReference = 225931411CE3300A00841B86 /* OmiseSDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		2259310F1CE3210700841B86 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = Omise;
 				TargetAttributes = {
 					225931171CE3210700841B86 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					225931401CE3300A00841B86 = {
 						CreatedOnToolsVersion = 7.3;
 					};
 				};
@@ -111,12 +209,28 @@
 			projectRoot = "";
 			targets = (
 				225931171CE3210700841B86 /* OmiseSDK */,
+				225931241CE329D800841B86 /* OmiseSDKSlim */,
+				225931401CE3300A00841B86 /* OmiseSDKTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		225931161CE3210700841B86 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		225931291CE329D800841B86 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2259313F1CE3300A00841B86 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -130,10 +244,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2259313B1CE32EAC00841B86 /* Hello.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		225931251CE329D800841B86 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2259313C1CE32EB500841B86 /* Hello.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2259313D1CE3300A00841B86 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				225931441CE3300A00841B86 /* OmiseSDKTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		225931481CE3300A00841B86 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 225931171CE3210700841B86 /* OmiseSDK */;
+			targetProxy = 225931471CE3300A00841B86 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		2259311E1CE3210700841B86 /* Debug */ = {
@@ -230,12 +369,52 @@
 		225931211CE3210700841B86 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = OmiseSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		225931221CE3210700841B86 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = OmiseSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		2259312B1CE329D800841B86 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Info-Slim.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -243,19 +422,40 @@
 			};
 			name = Debug;
 		};
-		225931221CE3210700841B86 /* Release */ = {
+		2259312C1CE329D800841B86 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = OmiseSDK/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Info-Slim.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		2259314A1CE3300A00841B86 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = OmiseSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		2259314B1CE3300A00841B86 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = OmiseSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -279,6 +479,23 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		2259312A1CE329D800841B86 /* Build configuration list for PBXNativeTarget "OmiseSDKSlim" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2259312B1CE329D800841B86 /* Debug */,
+				2259312C1CE329D800841B86 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		225931491CE3300A00841B86 /* Build configuration list for PBXNativeTarget "OmiseSDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2259314A1CE3300A00841B86 /* Debug */,
+				2259314B1CE3300A00841B86 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
