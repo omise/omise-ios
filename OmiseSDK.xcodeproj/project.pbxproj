@@ -9,10 +9,13 @@
 /* Begin PBXBuildFile section */
 		2259311C1CE3210700841B86 /* OmiseSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 2259311B1CE3210700841B86 /* OmiseSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		225931281CE329D800841B86 /* OmiseSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 2259311B1CE3210700841B86 /* OmiseSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2259313B1CE32EAC00841B86 /* Hello.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259313A1CE32EAC00841B86 /* Hello.swift */; };
-		2259313C1CE32EB500841B86 /* Hello.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259313A1CE32EAC00841B86 /* Hello.swift */; };
-		225931441CE3300A00841B86 /* OmiseSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225931431CE3300A00841B86 /* OmiseSDKTests.swift */; };
 		225931461CE3300A00841B86 /* OmiseSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225931181CE3210700841B86 /* OmiseSDK.framework */; };
+		2259314E1CE46E5700841B86 /* CardBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314D1CE46E5700841B86 /* CardBrand.swift */; };
+		225931501CE46F7F00841B86 /* PANUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314F1CE46F7F00841B86 /* PANUtils.swift */; };
+		225931511CE46F8E00841B86 /* CardBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314D1CE46E5700841B86 /* CardBrand.swift */; };
+		225931521CE46F9100841B86 /* PANUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314F1CE46F7F00841B86 /* PANUtils.swift */; };
+		225931551CE4743A00841B86 /* PANUtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225931541CE4743A00841B86 /* PANUtilsTest.swift */; };
+		225931571CE4745200841B86 /* SDKTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225931561CE4745200841B86 /* SDKTestCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,10 +34,12 @@
 		2259311D1CE3210700841B86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2259312D1CE329D800841B86 /* OmiseSDKSlim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OmiseSDKSlim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2259312E1CE329D800841B86 /* Info-Slim.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Slim.plist"; path = "/Users/chakrit/Documents/omise/omise-ios-sdk/Info-Slim.plist"; sourceTree = "<absolute>"; };
-		2259313A1CE32EAC00841B86 /* Hello.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hello.swift; sourceTree = "<group>"; };
 		225931411CE3300A00841B86 /* OmiseSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmiseSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		225931431CE3300A00841B86 /* OmiseSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseSDKTests.swift; sourceTree = "<group>"; };
 		225931451CE3300A00841B86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2259314D1CE46E5700841B86 /* CardBrand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardBrand.swift; sourceTree = "<group>"; };
+		2259314F1CE46F7F00841B86 /* PANUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PANUtils.swift; sourceTree = "<group>"; };
+		225931541CE4743A00841B86 /* PANUtilsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PANUtilsTest.swift; sourceTree = "<group>"; };
+		225931561CE4745200841B86 /* SDKTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKTestCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +93,8 @@
 				2259311B1CE3210700841B86 /* OmiseSDK.h */,
 				2259312E1CE329D800841B86 /* Info-Slim.plist */,
 				2259311D1CE3210700841B86 /* Info.plist */,
-				2259313A1CE32EAC00841B86 /* Hello.swift */,
+				2259314D1CE46E5700841B86 /* CardBrand.swift */,
+				2259314F1CE46F7F00841B86 /* PANUtils.swift */,
 			);
 			path = OmiseSDK;
 			sourceTree = "<group>";
@@ -97,7 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				225931451CE3300A00841B86 /* Info.plist */,
-				225931431CE3300A00841B86 /* OmiseSDKTests.swift */,
+				225931541CE4743A00841B86 /* PANUtilsTest.swift */,
+				225931561CE4745200841B86 /* SDKTestCase.swift */,
 			);
 			path = OmiseSDKTests;
 			sourceTree = "<group>";
@@ -244,7 +251,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2259313B1CE32EAC00841B86 /* Hello.swift in Sources */,
+				225931501CE46F7F00841B86 /* PANUtils.swift in Sources */,
+				2259314E1CE46E5700841B86 /* CardBrand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,7 +260,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2259313C1CE32EB500841B86 /* Hello.swift in Sources */,
+				225931521CE46F9100841B86 /* PANUtils.swift in Sources */,
+				225931511CE46F8E00841B86 /* CardBrand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,7 +269,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				225931441CE3300A00841B86 /* OmiseSDKTests.swift in Sources */,
+				225931571CE4745200841B86 /* SDKTestCase.swift in Sources */,
+				225931551CE4743A00841B86 /* PANUtilsTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
