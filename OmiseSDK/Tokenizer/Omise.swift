@@ -21,7 +21,7 @@ public class Omise: NSObject {
     public func requestToken(requestObject: OmiseRequestObject?) {
         
         let URL = NSURL(string: "https://vault.omise.co/tokens")!
-        let OMISE_IOS_VERSION = "2.0.1"
+        let OMISE_IOS_VERSION = "2.1.0"
         let request = NSMutableURLRequest(URL: URL, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15)
         request.HTTPMethod = "POST"
                 
