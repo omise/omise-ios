@@ -8,6 +8,9 @@
 
 import Foundation
 
-public enum OmiseError: ErrorType {
+public class OmiseError {
     
+    public var location: String?
+    public var code: String?
+    public var message: String?
 }
