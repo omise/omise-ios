@@ -15,20 +15,16 @@ public protocol OmiseTokenizerDelegate {
 
 public class Omise: NSObject {
     
-    var data: NSMutableData?
-    var requestObject: OmiseRequestObject?
-    var delegate: OmiseTokenizerDelegate?
+    public var delegate: OmiseTokenizerDelegate?
     
     // MARK: - Create a Token
-    func requestToken(requestObject: OmiseRequestObject?) {
+    public func requestToken(requestObject: OmiseRequestObject?) {
         
         let URL = NSURL(string: "https://vault.omise.co/tokens")!
-        let OMISE_IOS_VERSION = "2.0.0"
-        let req = NSMutableURLRequest(URL: URL, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15)
-        req.HTTPMethod = "POST"
-        
-        self.requestObject = requestObject
-        
+        let OMISE_IOS_VERSION = "2.0.1"
+        let request = NSMutableURLRequest(URL: URL, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15)
+        request.HTTPMethod = "POST"
+                
         guard let requestObject = requestObject else {
             return
         }
@@ -50,23 +46,36 @@ public class Omise: NSObject {
         
         let body = "card[name]=\(card.name!)&card[city]=\(city)&card[postal_code]=\(postalCode)&card[number]=\(card.number!)&card[expiration_month]=\(card.expirationMonth!)&card[expiration_year]=\(card.expirationYear!)&card[security_code]=\(card.securityCode!)"
         
-        req.HTTPBody = body.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+        request.HTTPBody = body.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
         
         let loginString = "\(requestObject.publicKey!):"
         let plainData = loginString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
         let base64String = plainData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
         let base64LoginData = "Basic \(base64String!)"
         let userAgentData = "OmiseIOSSwift/\(OMISE_IOS_VERSION)"
-        req.setValue(base64LoginData, forHTTPHeaderField: "Authorization")
-        req.setValue(userAgentData, forHTTPHeaderField: "User-Agent")
+        request.setValue(base64LoginData, forHTTPHeaderField: "Authorization")
+        request.setValue(userAgentData, forHTTPHeaderField: "User-Agent")
         
-        let reqSession = NSURLSession.sharedSession()
-        let reqTask = reqSession.dataTaskWithRequest(req) { (data:NSData?, response:NSURLResponse?, error:NSError?) in
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request){
+            (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
             
+            if error != nil {
+                self.requestTokenOnFail(error!)
+            } else {
+                self.requestTokenOnSucceeded(data)
+            }
         }
-        reqTask.resume()
+        
+        task.resume()
     
     }
     
+    private func requestTokenOnSucceeded(data: NSData?) {
     
+    }
+    
+    private func requestTokenOnFail(error: NSError) {
+    
+    }
 }
