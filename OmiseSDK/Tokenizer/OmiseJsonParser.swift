@@ -63,5 +63,31 @@ public class OmiseJsonParser: NSObject {
         
         return token
     }
-
+    
+    public func parseOmiseError(json: NSString) -> OmiseError? {
+        
+        var jsonObject: AnyObject?
+        
+        do {
+            jsonObject = try NSJSONSerialization.JSONObjectWithData(json.dataUsingEncoding(NSUTF8StringEncoding)!, options: NSJSONReadingOptions.AllowFragments)
+        } catch _ {
+            return nil
+        }
+        
+        guard let jsonDict = jsonObject as? NSDictionary else {
+            return nil
+        }
+        
+        let object = jsonDict["object"] as? String
+        if object != "error" {
+            return nil
+        }
+        
+        let error = OmiseError()
+        error.location = jsonDict["location"] as? String
+        error.code = jsonDict["code"] as? String
+        error.message = jsonDict["message"] as? String
+        
+        return error
+    }
 }
