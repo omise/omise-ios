@@ -44,7 +44,12 @@ public class Omise: NSObject {
             postalCode = userPostalCode
         }
         
-        let body = "card[name]=\(card.name!)&card[city]=\(city)&card[postal_code]=\(postalCode)&card[number]=\(card.number!)&card[expiration_month]=\(card.expirationMonth!)&card[expiration_year]=\(card.expirationYear!)&card[security_code]=\(card.securityCode!)"
+        guard let name = card.name, let number = card.number, let expirationMonth = card.expirationMonth, let expirationYear = card.expirationYear, let securityCode = card.securityCode else {
+            print("Please insert card information")
+            return
+        }
+        
+        let body = "card[name]=\(name)&card[city]=\(city)&card[postal_code]=\(postalCode)&card[number]=\(number)&card[expiration_month]=\(expirationMonth)&card[expiration_year]=\(expirationYear)&card[security_code]=\(securityCode)"
         
         request.HTTPBody = body.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
         
