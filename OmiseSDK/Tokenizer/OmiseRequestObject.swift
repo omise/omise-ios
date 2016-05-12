@@ -10,10 +10,10 @@ import Foundation
 
 public class OmiseRequestObject: NSObject {
     
-    var publicKey: String?
-    var card: OmiseCard?
+    public var publicKey: String?
+    public var card: OmiseCard?
     
-    override init() {
+    public override init() {
         card = OmiseCard()
     }
 }
