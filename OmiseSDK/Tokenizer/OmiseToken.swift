@@ -10,12 +10,12 @@ import Foundation
 
 public class OmiseToken: NSObject {
     
-    var tokenId: String?
-    var livemode: Bool?
-    var location: String?
-    var used: Bool?
-    var card: OmiseCard?
-    var created: String?
+    public var tokenId: String?
+    public var livemode: Bool?
+    public var location: String?
+    public var used: Bool?
+    public var card: OmiseCard?
+    public var created: String?
     
     override init() {
         card = OmiseCard()
