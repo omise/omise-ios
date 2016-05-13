@@ -17,7 +17,7 @@ public class OmiseToken: NSObject {
     public var card: OmiseCard?
     public var created: String?
     
-    override init() {
+    public override init() {
         card = OmiseCard()
     }
 }
