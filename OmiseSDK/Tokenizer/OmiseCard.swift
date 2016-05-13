@@ -27,4 +27,6 @@ public class OmiseCard {
     public var securityCode: String?
     public var city: String?           // Optional
     public var postalCode: String?     // Optional
+    
+    public init() {}
 }
