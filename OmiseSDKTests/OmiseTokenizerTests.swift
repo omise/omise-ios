@@ -9,6 +9,33 @@
 import XCTest
 import OmiseSDK
 
+class TestOmiseTokenizerDelegate: OmiseTokenizerDelegate {
+    
+    var delegateAsyncResult: Bool? = .None
+    
+    var asyncExpectation: XCTestExpectation?
+    
+    func OmiseRequestTokenOnFailed(error: NSError?) {
+        
+        guard let expectation = asyncExpectation else {
+            XCTFail("TestOmiseTokenizerDelegate was not setup correctly. Missing XCTExpectation reference")
+            return
+        }
+        delegateAsyncResult = true
+        expectation.fulfill()
+    }
+    
+    func OmiseRequestTokenOnSucceeded(token: OmiseToken?) {
+        
+        guard let expectation = asyncExpectation else {
+            XCTFail("TestOmiseTokenizerDelegate was not setup correctly. Missing XCTExpectation reference")
+            return
+        }
+        delegateAsyncResult = true
+        expectation.fulfill()
+    }
+}
+
 class OmiseTokenizerTests: XCTestCase {
     
     func testOmiseCard() {
@@ -116,6 +143,43 @@ class OmiseTokenizerTests: XCTestCase {
         XCTAssertEqual(error.message, "authentication failed")
     }
     
+    func testRequestToken() {
+        let tokenRequest = OmiseRequestObject()
+        tokenRequest.publicKey = "pkey_test_4y7dh41kuvvawbhslxw" //required
+        tokenRequest.card!.name = "JOHN DOE" //required
+        tokenRequest.card!.city = "Bangkok" //optional
+        tokenRequest.card!.postalCode = "10320" //optional
+        tokenRequest.card!.number = "4242424242424242" //required
+        tokenRequest.card!.expirationMonth = 11 //required
+        tokenRequest.card!.expirationYear = 2016 //required
+        tokenRequest.card!.securityCode = "123" //required
+        
+        let omise = Omise()
+        let testDelegate = TestOmiseTokenizerDelegate()
+        omise.delegate = testDelegate
+        
+        let expectation = expectationWithDescription("Omise calls the delegate as the result of an async method completion")
+        testDelegate.asyncExpectation = expectation
+        
+        // Call Async
+        omise.requestToken(tokenRequest)
+        
+        let timeOut: NSTimeInterval = 15.0
+        waitForExpectationsWithTimeout(timeOut) { error in
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+            
+            guard let result = testDelegate.delegateAsyncResult else {
+                XCTFail("Expected delegate to be called")
+                return
+            }
+            
+            XCTAssertTrue(result)
+        }
+    }
+    
+    // MARK: - Helper for load JSON file to test
     private func fixturesDataFor(filename: String) -> NSData? {
         let bundle = NSBundle(forClass: OmiseTokenizerTests.self)
         guard let path = bundle.pathForResource("Fixtures/objects/\(filename)", ofType: "json") else {
