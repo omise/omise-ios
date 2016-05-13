@@ -77,10 +77,59 @@ public class Omise: NSObject {
     }
     
     private func requestTokenOnSucceeded(data: NSData?) {
-    
+        
+        guard let data = data else {
+            self.handleErrorDataIsEmpty()
+            return
+        }
+        
+        guard let result = NSString(data: data, encoding:
+            NSASCIIStringEncoding) else {
+            self.handleErrorDataEncoding()
+            return
+        }
+        
+        let jsonParser = OmiseJsonParser()
+        guard let token = jsonParser.parseOmiseToken(result) else {
+            
+            if let omiseError = jsonParser.parseOmiseError(result) {
+                
+                let error = OmiseError.errorFromResponse(omiseError)
+                
+                guard let delegate = delegate else { return }
+                delegate.OmiseRequestTokenOnFailed(error)
+            }
+            return
+        }
+        
+        guard let delegate = delegate else { return }
+        delegate.OmiseRequestTokenOnSucceeded(token)
     }
     
     private func requestTokenOnFail(error: NSError) {
+        
+        let requestError = NSError(domain: OmiseErrorDomain, code: error.code, userInfo: error.userInfo)
+        
+        guard let delegate = delegate else {
+            return
+        }
+        
+        delegate.OmiseRequestTokenOnFailed(requestError)
+    }
     
+    private func handleErrorDataIsEmpty() {
+        
+        guard let delegate = delegate else {
+            return
+        }
+        
+        let userInfo: [NSObject: AnyObject] =
+            [ NSLocalizedDescriptionKey:  NSLocalizedString("Response data is null", value: "Response data is null", comment: "") ]
+        let dataError = NSError(domain: OmiseErrorDomain, code: OmiseErrorCode.UnexpectedError.rawValue, userInfo: userInfo)
+        delegate.OmiseRequestTokenOnFailed(dataError)
+    }
+    
+    private func handleErrorDataEncoding() {
+        
     }
 }
