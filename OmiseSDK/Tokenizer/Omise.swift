@@ -56,16 +56,10 @@ public class Omise: NSObject {
             return
         }
         
-        guard let result = NSString(data: data, encoding:
-            NSASCIIStringEncoding) else {
-            self.handleErrorDataEncoding()
-            return
-        }
-        
         let jsonParser = OmiseJsonParser()
-        guard let token = jsonParser.parseOmiseToken(result) else {
+        guard let token = jsonParser.parseOmiseToken(data) else {
             
-            if let omiseError = jsonParser.parseOmiseError(result) {
+            if let omiseError = jsonParser.parseOmiseError(data) {
                 
                 let error = OmiseError.errorFromResponse(omiseError)
                 

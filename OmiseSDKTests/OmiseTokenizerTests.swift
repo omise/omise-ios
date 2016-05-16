@@ -68,14 +68,8 @@ class OmiseTokenizerTests: XCTestCase {
             return
         }
         
-        guard let result = NSString(data: data, encoding:
-            NSASCIIStringEncoding) else {
-            XCTFail("Could not encoding")
-            return
-        }
-        
         let jsonParser = OmiseJsonParser()
-        guard let token = jsonParser.parseOmiseToken(result) else {
+        guard let token = jsonParser.parseOmiseToken(data) else {
             XCTFail("Could not parse token")
             return
         }
@@ -111,14 +105,8 @@ class OmiseTokenizerTests: XCTestCase {
             return
         }
         
-        guard let result = NSString(data: data, encoding:
-            NSASCIIStringEncoding) else {
-                XCTFail("Could not encoding")
-                return
-        }
-        
         let jsonParser = OmiseJsonParser()
-        guard let error = jsonParser.parseOmiseError(result) else {
+        guard let error = jsonParser.parseOmiseError(data) else {
             XCTFail("Could not parse error")
             return
         }

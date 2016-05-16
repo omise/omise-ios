@@ -1,12 +1,8 @@
 import Foundation
 
 public class OmiseJsonParser: NSObject {
-    public func parseOmiseToken(json: NSString) -> OmiseToken? {
-        var jsonObject: AnyObject?
-        
-        do {
-            jsonObject = try NSJSONSerialization.JSONObjectWithData(json.dataUsingEncoding(NSUTF8StringEncoding)!, options: NSJSONReadingOptions.AllowFragments)
-        } catch _ {
+    public func parseOmiseToken(data: NSData) -> OmiseToken? {
+        guard let jsonObject = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) else {
             return nil
         }
         
@@ -54,12 +50,8 @@ public class OmiseJsonParser: NSObject {
         return token
     }
     
-    public func parseOmiseError(json: NSString) -> OmiseError? {
-        var jsonObject: AnyObject?
-        
-        do {
-            jsonObject = try NSJSONSerialization.JSONObjectWithData(json.dataUsingEncoding(NSUTF8StringEncoding)!, options: NSJSONReadingOptions.AllowFragments)
-        } catch _ {
+    public func parseOmiseError(data: NSData) -> OmiseError? {
+        guard let jsonObject = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) else {
             return nil
         }
         
