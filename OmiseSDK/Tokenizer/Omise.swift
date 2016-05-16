@@ -36,73 +36,58 @@ public class Omise: NSObject {
         request.setValue(userAgentData, forHTTPHeaderField: "User-Agent")
         
         let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) {
-            (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
-            
-            if error != nil {
-                self.requestTokenOnFail(error!)
-            } else {
-                self.requestTokenOnSucceeded(data)
-            }
-        }
-        
+        let task = session.dataTaskWithRequest(request, completionHandler: didComplete)
         task.resume()
     
     }
     
-    private func requestTokenOnSucceeded(data: NSData?) {
-        guard let data = data else {
-            self.handleErrorDataIsEmpty()
+    private func didComplete(data: NSData?, response: NSURLResponse?, error: NSError?) {
+        
+        guard let delegate = delegate else {
+            print("Please set delegate before request token")
             return
         }
         
-        let jsonParser = OmiseJsonParser()
-        guard let token = jsonParser.parseOmiseToken(data) else {
-            
-            if let omiseError = jsonParser.parseOmiseError(data) {
-                
-                let error = OmiseError.errorFromResponse(omiseError)
-                
-                guard let delegate = delegate else { return }
-                delegate.OmiseRequestTokenOnFailed(error)
+        if let error = error {
+            return delegate.OmiseRequestTokenOnFailed(error)
+        }
+
+        guard let httpResponse = response as? NSHTTPURLResponse else {
+            let error = OmiseError.UnexpectedError("No error and no response")
+            return delegate.OmiseRequestTokenOnFailed(error)
+        }
+        
+        switch httpResponse.statusCode {
+        case 400..<600:
+            guard let data = data else {
+                let error = OmiseError.UnexpectedError("Error response with no data")
+                return delegate.OmiseRequestTokenOnFailed(error)
             }
-            return
+            
+            guard let errorResponse = OmiseJsonParser().parseOmiseError(data) else {
+                let error = OmiseError.UnexpectedError("Error response deserialization failure")
+                return delegate.OmiseRequestTokenOnFailed(error)
+            }
+            
+            let error = OmiseError.ErrorFromResponse(errorResponse)
+            return delegate.OmiseRequestTokenOnFailed(error)
+            
+        case 200..<300:
+            guard let data = data else {
+                let error = OmiseError.UnexpectedError("HTTP 200 but no data")
+                return delegate.OmiseRequestTokenOnFailed(error)
+            }
+            
+            guard let token = OmiseJsonParser().parseOmiseToken(data) else {
+                let error = OmiseError.UnexpectedError("Error response deserialization failure")
+                return delegate.OmiseRequestTokenOnFailed(error)
+            }
+            
+            return delegate.OmiseRequestTokenOnSucceeded(token)
+        default:
+            print("unrecognized HTTP status code: \(httpResponse.statusCode)")
         }
-        
-        guard let delegate = delegate else { return }
-        delegate.OmiseRequestTokenOnSucceeded(token)
-    }
-    
-    private func requestTokenOnFail(error: NSError) {
-        let requestError = NSError(domain: OmiseErrorDomain, code: error.code, userInfo: error.userInfo)
-        
-        guard let delegate = delegate else {
-            return
-        }
-        
-        delegate.OmiseRequestTokenOnFailed(requestError)
-    }
-    
-    private func handleErrorDataIsEmpty() {
-        guard let delegate = delegate else {
-            return
-        }
-        
-        let userInfo: [NSObject: AnyObject] =
-            [ NSLocalizedDescriptionKey:  NSLocalizedString("Response data is null", value: "Response data is null", comment: "") ]
-        let dataError = NSError(domain: OmiseErrorDomain, code: OmiseErrorCode.UnexpectedError.rawValue, userInfo: userInfo)
-        delegate.OmiseRequestTokenOnFailed(dataError)
-    }
-    
-    private func handleErrorDataEncoding() {
-        guard let delegate = delegate else {
-            return
-        }
-        
-        let userInfo: [NSObject: AnyObject] =
-            [ NSLocalizedDescriptionKey:  NSLocalizedString("Response data can't encoding", value: "Response data can't encoding", comment: "") ]
-        let dataError = NSError(domain: OmiseErrorDomain, code: OmiseErrorCode.UnexpectedError.rawValue, userInfo: userInfo)
-        delegate.OmiseRequestTokenOnFailed(dataError)
+
     }
     
     // MARK: - Carete URLComponents by NSURLQueryItem

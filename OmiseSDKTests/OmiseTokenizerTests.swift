@@ -11,7 +11,7 @@ class TestOmiseTokenizerDelegate: OmiseTokenizerDelegate {
             XCTFail("TestOmiseTokenizerDelegate was not setup correctly. Missing XCTExpectation reference")
             return
         }
-        delegateAsyncResult = true
+        delegateAsyncResult = false
         expectation.fulfill()
     }
     
@@ -147,7 +147,7 @@ class OmiseTokenizerTests: XCTestCase {
                 XCTFail("Expected delegate to be called")
                 return
             }
-            
+
             XCTAssertTrue(result)
         }
     }
