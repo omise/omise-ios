@@ -6,57 +6,31 @@ public protocol OmiseTokenizerDelegate {
 }
 
 public class Omise: NSObject {
+    let OMISE_IOS_VERSION = "2.1.0"
     public var delegate: OmiseTokenizerDelegate?
     
     // MARK: - Create a Token
     public func requestToken(requestObject: OmiseRequestObject?) {
-        let URL = NSURL(string: "https://vault.omise.co/tokens")!
-        let OMISE_IOS_VERSION = "2.1.0"
-        let request = NSMutableURLRequest(URL: URL, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15)
-        request.HTTPMethod = "POST"
-                
         guard let requestObject = requestObject else {
             return
         }
         
-        guard let card = requestObject.card else {
+        guard let URL = createURLComponent(requestObject) else {
             return
         }
         
-        var city = ""
-        var postalCode = ""
+        let request = NSMutableURLRequest(URL: URL, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15)
+        request.HTTPMethod = "POST"
         
-        if let userCity = card.city {
-            city = userCity
-        }
-        
-        if let userPostalCode = card.postalCode {
-            postalCode = userPostalCode
-        }
-        
-        guard let name = card.name, let number = card.number else {
-            print("Card name or number can't be null")
-            return
-        }
-        
-        guard let expirationMonth = card.expirationMonth, let expirationYear = card.expirationYear else {
-            print("Expiration date can't be null")
-            return
-        }
-        
-        guard let securityCode = card.securityCode else {
-            print("Security code can't be null")
-            return
-        }
-        
-        let body = "card[name]=\(name)&card[city]=\(city)&card[postal_code]=\(postalCode)&card[number]=\(number)&card[expiration_month]=\(expirationMonth)&card[expiration_year]=\(expirationYear)&card[security_code]=\(securityCode)"
-        
-        request.HTTPBody = body.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-        
-        let loginString = "\(requestObject.publicKey!):"
+        let loginString = (requestObject.publicKey ?? "")
         let plainData = loginString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-        let base64String = plainData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
-        let base64LoginData = "Basic \(base64String!)"
+        
+        guard let base64String = plainData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0)) else {
+            print("Can't encoding plainData to base64String")
+            return
+        }
+        
+        let base64LoginData = "Basic \(base64String)"
         let userAgentData = "OmiseIOSSwift/\(OMISE_IOS_VERSION)"
         request.setValue(base64LoginData, forHTTPHeaderField: "Authorization")
         request.setValue(userAgentData, forHTTPHeaderField: "User-Agent")
@@ -135,5 +109,44 @@ public class Omise: NSObject {
             [ NSLocalizedDescriptionKey:  NSLocalizedString("Response data can't encoding", value: "Response data can't encoding", comment: "") ]
         let dataError = NSError(domain: OmiseErrorDomain, code: OmiseErrorCode.UnexpectedError.rawValue, userInfo: userInfo)
         delegate.OmiseRequestTokenOnFailed(dataError)
+    }
+    
+    // MARK: - Carete URLComponents by NSURLQueryItem
+    private func createURLComponent(requestObject: OmiseRequestObject) -> NSURL? {
+        guard let card = requestObject.card else {
+            print("Card information can't be null")
+            return nil
+        }
+        
+        guard let name = card.name, let number = card.number else {
+            print("Card name or number can't be null")
+            return nil
+        }
+        
+        guard let expirationMonth = card.expirationMonth, let expirationYear = card.expirationYear else {
+            print("Expiration date can't be null")
+            return nil
+        }
+        
+        guard let securityCode = card.securityCode else {
+            print("Security code can't be null")
+            return nil
+        }
+        
+        let nameQuery = NSURLQueryItem(name: "card[name]", value: name)
+        let numberQuery = NSURLQueryItem(name: "card[number]", value: number)
+        let expirationMonthQuery = NSURLQueryItem(name: "card[expiration_month]", value: String(expirationMonth))
+        let expirationYearQuery = NSURLQueryItem(name: "card[expiration_year]", value: String(expirationYear))
+        let securityCodeQuery = NSURLQueryItem(name: "card[security_code]", value: String(securityCode))
+        let cityQuery = NSURLQueryItem(name: "card[city]", value: (card.city ?? ""))
+        let postalCodeQuery = NSURLQueryItem(name: "card[postal_code]", value: (card.postalCode ?? ""))
+        
+        let urlComponents = NSURLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "vault.omise.co"
+        urlComponents.path = "/tokens"
+        urlComponents.queryItems = [nameQuery, numberQuery, expirationMonthQuery, expirationYearQuery, securityCodeQuery, cityQuery, postalCodeQuery]
+        
+        return urlComponents.URL
     }
 }
