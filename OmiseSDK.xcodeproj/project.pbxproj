@@ -97,10 +97,10 @@
 			children = (
 				985527E11CE3370900FAB3BD /* Omise.swift */,
 				985527DE1CE331F700FAB3BD /* OmiseCard.swift */,
-				985527E31CE3397500FAB3BD /* OmiseToken.swift */,
+				987A03001CE486790035417A /* OmiseError.swift */,
 				985527E51CE33CA200FAB3BD /* OmiseJsonParser.swift */,
 				985527E71CE3505300FAB3BD /* OmiseRequestObject.swift */,
-				987A03001CE486790035417A /* OmiseError.swift */,
+				985527E31CE3397500FAB3BD /* OmiseToken.swift */,
 			);
 			name = Tokenizer;
 			sourceTree = "<group>";
