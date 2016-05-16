@@ -62,7 +62,7 @@ public class Omise: NSObject {
         request.setValue(userAgentData, forHTTPHeaderField: "User-Agent")
         
         let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request){
+        let task = session.dataTaskWithRequest(request) {
             (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
             
             if error != nil {
