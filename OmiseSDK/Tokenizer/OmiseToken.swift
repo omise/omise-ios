@@ -1,7 +1,6 @@
 import Foundation
 
 public class OmiseToken: NSObject {
-    
     public var tokenId: String?
     public var livemode: Bool?
     public var location: String?

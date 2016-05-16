@@ -1,9 +1,7 @@
 import Foundation
 
 public class OmiseJsonParser: NSObject {
-    
     public func parseOmiseToken(json: NSString) -> OmiseToken? {
-        
         var jsonObject: AnyObject?
         
         do {
@@ -57,7 +55,6 @@ public class OmiseJsonParser: NSObject {
     }
     
     public func parseOmiseError(json: NSString) -> OmiseError? {
-        
         var jsonObject: AnyObject?
         
         do {

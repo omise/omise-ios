@@ -9,15 +9,12 @@ public enum OmiseErrorCode: Int {
 }
 
 public class OmiseError {
-    
     public var location: String?
     public var code: String?
     public var message: String?
     
     class func errorFromResponse(error: OmiseError) -> NSError {
-        
         guard let code = error.code, let message = error.message else {
-            
             let userInfo: [NSObject: AnyObject] =
                 [ NSLocalizedDescriptionKey :  NSLocalizedString("UnexpectedError", value: "Unexpected error", comment: "") ]
             

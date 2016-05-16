@@ -6,12 +6,10 @@ public protocol OmiseTokenizerDelegate {
 }
 
 public class Omise: NSObject {
-    
     public var delegate: OmiseTokenizerDelegate?
     
     // MARK: - Create a Token
     public func requestToken(requestObject: OmiseRequestObject?) {
-        
         let URL = NSURL(string: "https://vault.omise.co/tokens")!
         let OMISE_IOS_VERSION = "2.1.0"
         let request = NSMutableURLRequest(URL: URL, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15)
@@ -69,7 +67,6 @@ public class Omise: NSObject {
     }
     
     private func requestTokenOnSucceeded(data: NSData?) {
-        
         guard let data = data else {
             self.handleErrorDataIsEmpty()
             return
@@ -99,7 +96,6 @@ public class Omise: NSObject {
     }
     
     private func requestTokenOnFail(error: NSError) {
-        
         let requestError = NSError(domain: OmiseErrorDomain, code: error.code, userInfo: error.userInfo)
         
         guard let delegate = delegate else {
@@ -110,7 +106,6 @@ public class Omise: NSObject {
     }
     
     private func handleErrorDataIsEmpty() {
-        
         guard let delegate = delegate else {
             return
         }

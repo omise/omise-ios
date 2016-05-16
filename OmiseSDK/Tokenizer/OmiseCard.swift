@@ -1,5 +1,4 @@
 public class OmiseCard {
-    
     public var cardId: String?
     public var livemode: Bool?
     public var location: String?

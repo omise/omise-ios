@@ -2,13 +2,11 @@ import XCTest
 import OmiseSDK
 
 class TestOmiseTokenizerDelegate: OmiseTokenizerDelegate {
-    
     var delegateAsyncResult: Bool? = .None
     
     var asyncExpectation: XCTestExpectation?
     
     func OmiseRequestTokenOnFailed(error: NSError?) {
-        
         guard let expectation = asyncExpectation else {
             XCTFail("TestOmiseTokenizerDelegate was not setup correctly. Missing XCTExpectation reference")
             return
@@ -18,7 +16,6 @@ class TestOmiseTokenizerDelegate: OmiseTokenizerDelegate {
     }
     
     func OmiseRequestTokenOnSucceeded(token: OmiseToken?) {
-        
         guard let expectation = asyncExpectation else {
             XCTFail("TestOmiseTokenizerDelegate was not setup correctly. Missing XCTExpectation reference")
             return
@@ -29,7 +26,6 @@ class TestOmiseTokenizerDelegate: OmiseTokenizerDelegate {
 }
 
 class OmiseTokenizerTests: XCTestCase {
-    
     func testOmiseCard() {
         
         let card = OmiseCard()
@@ -67,7 +63,6 @@ class OmiseTokenizerTests: XCTestCase {
     }
     
     func testOmiseToken() {
-        
         guard let data = fixturesDataFor("token_object") else {
             XCTFail("Could not load token_object")
             return
@@ -86,7 +81,6 @@ class OmiseTokenizerTests: XCTestCase {
         }
         
         guard let card = token.card else {
-            
             XCTFail("Could not parse card from token object")
             return
         }
@@ -112,7 +106,6 @@ class OmiseTokenizerTests: XCTestCase {
     }
     
     func testOmiseError() {
-        
         guard let data = fixturesDataFor("error_object") else {
             XCTFail("Could not load error_object")
             return
