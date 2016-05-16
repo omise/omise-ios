@@ -130,6 +130,13 @@ public class Omise: NSObject {
     }
     
     private func handleErrorDataEncoding() {
+        guard let delegate = delegate else {
+            return
+        }
         
+        let userInfo: [NSObject: AnyObject] =
+            [ NSLocalizedDescriptionKey:  NSLocalizedString("Response data can't encoding", value: "Response data can't encoding", comment: "") ]
+        let dataError = NSError(domain: OmiseErrorDomain, code: OmiseErrorCode.UnexpectedError.rawValue, userInfo: userInfo)
+        delegate.OmiseRequestTokenOnFailed(dataError)
     }
 }
