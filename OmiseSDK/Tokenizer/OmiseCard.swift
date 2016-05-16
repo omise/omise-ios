@@ -1,11 +1,3 @@
-//
-//  OmiseCard.swift
-//  OmiseSDK
-//
-//  Created by Anak Mirasing on 5/11/16.
-//  Copyright © 2016 Omise. All rights reserved.
-//
-
 public class OmiseCard {
     
     public var cardId: String?
