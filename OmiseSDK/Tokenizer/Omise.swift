@@ -34,8 +34,18 @@ public class Omise: NSObject {
             postalCode = userPostalCode
         }
         
-        guard let name = card.name, let number = card.number, let expirationMonth = card.expirationMonth, let expirationYear = card.expirationYear, let securityCode = card.securityCode else {
-            print("Please insert card information")
+        guard let name = card.name, let number = card.number else {
+            print("Card name or number can't be null")
+            return
+        }
+        
+        guard let expirationMonth = card.expirationMonth, let expirationYear = card.expirationYear else {
+            print("Expiration date can't be null")
+            return
+        }
+        
+        guard let securityCode = card.securityCode else {
+            print("Security code can't be null")
             return
         }
         
