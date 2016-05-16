@@ -1,4 +1,4 @@
-public class OmiseCard {
+public class OmiseCard: NSObject {
     public var cardId: String?
     public var livemode: Bool?
     public var location: String?
@@ -19,5 +19,5 @@ public class OmiseCard {
     public var city: String?           // Optional
     public var postalCode: String?     // Optional
     
-    public init() {}
+    public override init() {}
 }
