@@ -8,6 +8,12 @@ public protocol OmiseTokenizerDelegate {
 public class Omise: NSObject {
     let OMISE_IOS_VERSION = "2.1.0"
     public var delegate: OmiseTokenizerDelegate?
+    public let publicKey: String
+    
+    // MARK: - Initial
+    public init(publicKey: String) {
+        self.publicKey = publicKey
+    }
     
     // MARK: - Create a Token
     public func requestToken(requestObject: OmiseRequestObject?) {
@@ -22,7 +28,7 @@ public class Omise: NSObject {
         let request = NSMutableURLRequest(URL: URL, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15)
         request.HTTPMethod = "POST"
         
-        let loginString = (requestObject.publicKey ?? "")
+        let loginString = (self.publicKey ?? "")
         let plainData = loginString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
         
         guard let base64String = plainData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0)) else {
