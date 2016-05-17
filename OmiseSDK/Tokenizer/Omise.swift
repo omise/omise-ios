@@ -16,10 +16,7 @@ public class Omise: NSObject {
     }
     
     // MARK: - Create a Token
-    public func requestToken(requestObject: OmiseRequestObject?) {
-        guard let requestObject = requestObject else {
-            return
-        }
+    public func requestToken(requestObject: OmiseRequestObject) {
         
         guard let URL = createURLComponent(requestObject) else {
             return
@@ -45,6 +42,14 @@ public class Omise: NSObject {
         let task = session.dataTaskWithRequest(request, completionHandler: didComplete)
         task.resume()
     
+    }
+    
+    public func requestToken(requestObject: OmiseRequestObject, onCompletion: (OmiseToken?, NSError?) -> ()) {
+        
+    }
+    
+    public func requestToken(requestObject: OmiseRequestObject, delegate: OmiseTokenizerDelegate) {
+        
     }
     
     private func didComplete(data: NSData?, response: NSURLResponse?, error: NSError?) {
