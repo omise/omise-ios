@@ -48,7 +48,6 @@ public class Omise: NSObject {
     }
     
     private func didComplete(data: NSData?, response: NSURLResponse?, error: NSError?) {
-        
         guard let delegate = delegate else {
             print("Please set delegate before request token")
             return
@@ -98,7 +97,6 @@ public class Omise: NSObject {
     
     // MARK: - Carete URLComponents by NSURLQueryItem
     private func createURLComponent(requestObject: OmiseRequestObject) -> NSURL? {
-        
         let nameQuery = NSURLQueryItem(name: "card[name]", value: requestObject.name)
         let numberQuery = NSURLQueryItem(name: "card[number]", value: requestObject.number)
         let expirationMonthQuery = NSURLQueryItem(name: "card[expiration_month]", value: String(requestObject.expirationMonth))
