@@ -20,7 +20,7 @@ public class OmiseJsonParser: NSObject {
         token.livemode = jsonDict["livemode"] as? Bool
         token.location = jsonDict["location"] as? String
         token.used = jsonDict["used"] as? Bool
-        token.created = jsonDict["created"] as? String
+        token.created = DateConverter.converFromString(jsonDict["created"] as? String) 
         
         guard let cardDict = jsonDict["card"] as? NSDictionary else {
             return nil

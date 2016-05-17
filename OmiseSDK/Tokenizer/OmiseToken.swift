@@ -6,7 +6,7 @@ public class OmiseToken: NSObject {
     public var location: String?
     public var used: Bool?
     public var card: OmiseCard?
-    public var created: String?
+    public var created: NSDate?
     
     public override init() {
         card = OmiseCard()
