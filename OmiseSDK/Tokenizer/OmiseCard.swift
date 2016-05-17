@@ -8,7 +8,7 @@ public class OmiseCard: NSObject {
     public var brand: String?
     public var fingerprint: String?
     public var securityCodeCheck: Bool?
-    public var created: String?
+    public var created: NSDate?
     
     // For create a token
     public var name: String?

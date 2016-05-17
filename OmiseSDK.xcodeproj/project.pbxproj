@@ -17,6 +17,7 @@
 		987A03011CE486790035417A /* OmiseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A03001CE486790035417A /* OmiseError.swift */; };
 		987A03211CE5B7D70035417A /* OmiseTokenizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A03201CE5B7D70035417A /* OmiseTokenizerTests.swift */; };
 		987A03AD1CE5CD450035417A /* Fixtures in Resources */ = {isa = PBXBuildFile; fileRef = 987A03AC1CE5CD450035417A /* Fixtures */; };
+		98A42F861CEB26190036ACB4 /* DateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A42F851CEB26190036ACB4 /* DateConverter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		987A03001CE486790035417A /* OmiseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseError.swift; path = Tokenizer/OmiseError.swift; sourceTree = "<group>"; };
 		987A03201CE5B7D70035417A /* OmiseTokenizerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseTokenizerTests.swift; sourceTree = "<group>"; };
 		987A03AC1CE5CD450035417A /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fixtures; sourceTree = "<group>"; };
+		98A42F851CEB26190036ACB4 /* DateConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateConverter.swift; path = Converters/DateConverter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				2259311B1CE3210700841B86 /* OmiseSDK.h */,
 				2259311D1CE3210700841B86 /* Info.plist */,
 				985527E01CE331FD00FAB3BD /* Tokenizer */,
+				98A42F871CEB261F0036ACB4 /* Converters */,
 			);
 			path = OmiseSDK;
 			sourceTree = "<group>";
@@ -113,6 +116,14 @@
 				987A03201CE5B7D70035417A /* OmiseTokenizerTests.swift */,
 			);
 			path = OmiseSDKTests;
+			sourceTree = "<group>";
+		};
+		98A42F871CEB261F0036ACB4 /* Converters */ = {
+			isa = PBXGroup;
+			children = (
+				98A42F851CEB26190036ACB4 /* DateConverter.swift */,
+			);
+			name = Converters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,6 +235,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98A42F861CEB26190036ACB4 /* DateConverter.swift in Sources */,
 				987A03011CE486790035417A /* OmiseError.swift in Sources */,
 				985527E61CE33CA200FAB3BD /* OmiseJsonParser.swift in Sources */,
 				985527DF1CE331F700FAB3BD /* OmiseCard.swift in Sources */,

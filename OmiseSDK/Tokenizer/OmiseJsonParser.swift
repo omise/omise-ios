@@ -45,7 +45,7 @@ public class OmiseJsonParser: NSObject {
         card.fingerprint = cardDict["fingerprint"] as? String
         card.name = cardDict["name"] as? String
         card.securityCodeCheck = cardDict["security_code_check"] as? Bool
-        card.created = cardDict.objectForKey("created") as? String
+        card.created = DateConverter.converFromString(cardDict.objectForKey("created") as? String)
         
         return token
     }
