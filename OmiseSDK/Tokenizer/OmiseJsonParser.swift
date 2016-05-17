@@ -34,7 +34,6 @@ public class OmiseJsonParser: NSObject {
         card.livemode = cardDict["livemode"] as? Bool
         card.location = cardDict["location"] as? String
         card.country = cardDict["country"] as? String
-        card.number = cardDict["number"] as? String
         card.city = cardDict["city"] as? String
         card.postalCode = cardDict["postal_code"] as? String
         card.financing = cardDict["financing"] as? String
