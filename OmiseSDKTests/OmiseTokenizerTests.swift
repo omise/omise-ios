@@ -117,17 +117,17 @@ class OmiseTokenizerTests: XCTestCase {
     }
     
     func testRequestToken() {
-        let tokenRequest = OmiseRequestObject()
-        tokenRequest.publicKey = "pkey_test_4y7dh41kuvvawbhslxw" //required
-        tokenRequest.card!.name = "JOHN DOE" //required
-        tokenRequest.card!.city = "Bangkok" //optional
-        tokenRequest.card!.postalCode = "10320" //optional
-        tokenRequest.card!.number = "4242424242424242" //required
-        tokenRequest.card!.expirationMonth = 11 //required
-        tokenRequest.card!.expirationYear = 2016 //required
-        tokenRequest.card!.securityCode = "123" //required
+        let request = OmiseRequestObject(
+            name: "JOHN DOE",
+            number: "4242424242424242",
+            expirationMonth: 11,
+            expirationYear: 2016,
+            securityCode: "123",
+            city: nil,  // Optional
+            postalCode: nil // Optional
+        )
         
-        let omise = Omise()
+        let omise = Omise(publicKey: "pkey_test_4y7dh41kuvvawbhslxw")
         let testDelegate = TestOmiseTokenizerDelegate()
         omise.delegate = testDelegate
         
@@ -135,7 +135,7 @@ class OmiseTokenizerTests: XCTestCase {
         testDelegate.asyncExpectation = expectation
         
         // Call Async
-        omise.requestToken(tokenRequest)
+        omise.requestToken(request)
         
         let timeOut: NSTimeInterval = 15.0
         waitForExpectationsWithTimeout(timeOut) { error in

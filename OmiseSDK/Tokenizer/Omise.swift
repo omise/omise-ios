@@ -98,33 +98,15 @@ public class Omise: NSObject {
     
     // MARK: - Carete URLComponents by NSURLQueryItem
     private func createURLComponent(requestObject: OmiseRequestObject) -> NSURL? {
-        guard let card = requestObject.card else {
-            print("Card information can't be null")
-            return nil
-        }
         
-        guard let name = card.name, let number = card.number else {
-            print("Card name or number can't be null")
-            return nil
-        }
-        
-        guard let expirationMonth = card.expirationMonth, let expirationYear = card.expirationYear else {
-            print("Expiration date can't be null")
-            return nil
-        }
-        
-        guard let securityCode = card.securityCode else {
-            print("Security code can't be null")
-            return nil
-        }
-        
-        let nameQuery = NSURLQueryItem(name: "card[name]", value: name)
-        let numberQuery = NSURLQueryItem(name: "card[number]", value: number)
-        let expirationMonthQuery = NSURLQueryItem(name: "card[expiration_month]", value: String(expirationMonth))
-        let expirationYearQuery = NSURLQueryItem(name: "card[expiration_year]", value: String(expirationYear))
-        let securityCodeQuery = NSURLQueryItem(name: "card[security_code]", value: String(securityCode))
-        let cityQuery = NSURLQueryItem(name: "card[city]", value: (card.city ?? ""))
-        let postalCodeQuery = NSURLQueryItem(name: "card[postal_code]", value: (card.postalCode ?? ""))
+        let nameQuery = NSURLQueryItem(name: "card[name]", value: requestObject.name)
+        let numberQuery = NSURLQueryItem(name: "card[number]", value: requestObject.number)
+        let expirationMonthQuery = NSURLQueryItem(name: "card[expiration_month]", value: String(requestObject.expirationMonth))
+        let expirationYearQuery = NSURLQueryItem(name: "card[expiration_year]", value: String(requestObject.expirationYear))
+        let securityCodeQuery = NSURLQueryItem(name: "card[security_code]", value: requestObject.securityCode)
+
+        let cityQuery = NSURLQueryItem(name: "card[city]", value: (requestObject.city ?? ""))
+        let postalCodeQuery = NSURLQueryItem(name: "card[postal_code]", value: (requestObject.postalCode ?? ""))
         
         let urlComponents = NSURLComponents()
         urlComponents.scheme = "https"
