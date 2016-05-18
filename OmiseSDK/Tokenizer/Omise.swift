@@ -87,12 +87,12 @@ public class Omise: NSObject {
                 return (nil, error)
             }
             
-            guard let errorResponse = OmiseJsonParser().parseOmiseError(data) else {
+            guard let omiseError = OmiseJsonParser().parseOmiseError(data) else {
                 let error = OmiseError.UnexpectedError("Error response deserialization failure")
                 return (nil, error)
             }
             
-            let error = errorResponse.error
+            let error = omiseError.nsError
             return (nil, error)
             
         case 200..<300:

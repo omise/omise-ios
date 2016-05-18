@@ -13,7 +13,7 @@ public class OmiseError {
     public var code: String?
     public var message: String?
     
-    var error: NSError {
+    var nsError: NSError {
         guard let code = self.code, let message = self.message, let location = self.message else {
             let userInfo: [NSObject: AnyObject] = [
                 NSLocalizedDescriptionKey :  NSLocalizedString("UnexpectedError", value: "Unexpected error", comment: "")
