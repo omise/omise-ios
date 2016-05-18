@@ -11,7 +11,7 @@ public class OmiseJsonParser: NSObject {
         }
         
         let object = jsonDict["object"] as? String
-        if object == "error" {
+        guard object != "error" else {
             return nil
         }
         
@@ -59,7 +59,7 @@ public class OmiseJsonParser: NSObject {
         }
         
         let object = jsonDict["object"] as? String
-        if object != "error" {
+        guard object == "error" else {
             return nil
         }
         
