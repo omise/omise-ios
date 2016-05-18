@@ -20,7 +20,7 @@ public class OmiseJsonParser: NSObject {
         token.livemode = jsonDict["livemode"] as? Bool
         token.location = jsonDict["location"] as? String
         token.used = jsonDict["used"] as? Bool
-        token.created = DateConverter.converFromString(jsonDict["created"] as? String) 
+        token.created = DateConverter.convertFromString(jsonDict["created"] as? String)
         
         guard let cardDict = jsonDict["card"] as? NSDictionary else {
             return nil
@@ -44,7 +44,7 @@ public class OmiseJsonParser: NSObject {
         card.fingerprint = cardDict["fingerprint"] as? String
         card.name = cardDict["name"] as? String
         card.securityCodeCheck = cardDict["security_code_check"] as? Bool
-        card.created = DateConverter.converFromString(cardDict.objectForKey("created") as? String)
+        card.created = DateConverter.convertFromString(cardDict.objectForKey("created") as? String)
         
         return token
     }

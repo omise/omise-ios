@@ -45,7 +45,7 @@ class OmiseTokenizerTests: XCTestCase {
         card.fingerprint = "ipngANuECUmRKjyxROwFW5IO7TM"
         card.name = "Somchai Prasert"
         card.securityCodeCheck = true
-        card.created = DateConverter.converFromString("2015-06-02T05:41:46Z")
+        card.created = DateConverter.convertFromString("2015-06-02T05:41:46Z")
         
         XCTAssertNotNil(card)
         XCTAssertEqual(card.cardId, "card_test_5086xl7amxfysl0ac5l")
@@ -61,7 +61,7 @@ class OmiseTokenizerTests: XCTestCase {
         XCTAssertEqual(card.fingerprint, "ipngANuECUmRKjyxROwFW5IO7TM")
         XCTAssertEqual(card.name, "Somchai Prasert")
         XCTAssertEqual(card.securityCodeCheck, true)
-        XCTAssertEqual(card.created, DateConverter.converFromString("2015-06-02T05:41:46Z"))
+        XCTAssertEqual(card.created, DateConverter.convertFromString("2015-06-02T05:41:46Z"))
     }
     
     func testOmiseToken() {
@@ -97,7 +97,7 @@ class OmiseTokenizerTests: XCTestCase {
         XCTAssertEqual(card.fingerprint, "mKleiBfwp+PoJWB/ipngANuECUmRKjyxROwFW5IO7TM=")
         XCTAssertEqual(card.name, "Somchai Prasert")
         XCTAssertEqual(card.securityCodeCheck, true)
-        XCTAssertEqual(card.created, DateConverter.converFromString("2015-06-02T05:41:46Z"))
+        XCTAssertEqual(card.created, DateConverter.convertFromString("2015-06-02T05:41:46Z"))
         
     }
     

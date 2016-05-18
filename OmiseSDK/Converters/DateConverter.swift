@@ -1,6 +1,6 @@
 import Foundation
 
-public class DateConverter {
+final public class DateConverter {
     static let formatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
         formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
@@ -8,7 +8,7 @@ public class DateConverter {
         return formatter
     }()
     
-    public static func converFromString(dateString: String?) -> NSDate? {
+    public static func convertFromString(dateString: String?) -> NSDate? {
         guard let dateString = dateString else {
             return nil
         }
