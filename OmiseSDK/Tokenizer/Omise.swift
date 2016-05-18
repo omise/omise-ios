@@ -10,6 +10,9 @@ public class Omise: NSObject {
     public var delegate: OmiseTokenizerDelegate?
     public let publicKey: String
     
+    public typealias Callback = (OmiseToken?, NSError?) -> ()
+    private var callback: Callback? = nil
+    
     // MARK: - Initial
     public init(publicKey: String) {
         self.publicKey = publicKey
@@ -17,42 +20,28 @@ public class Omise: NSObject {
     
     // MARK: - Create a Token
     public func requestToken(requestObject: OmiseRequestObject) {
-        
-        guard let URL = createURLComponent(requestObject) else {
+        guard let request = createURLRequest(requestObject) else {
             return
         }
-        
-        let request = NSMutableURLRequest(URL: URL, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15)
-        request.HTTPMethod = "POST"
-        
-        let loginString = (self.publicKey ?? "")
-        let plainData = loginString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-        
-        guard let base64String = plainData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0)) else {
-            print("Can't encoding plainData to base64String")
-            return
-        }
-        
-        let base64LoginData = "Basic \(base64String)"
-        let userAgentData = "OmiseIOSSwift/\(OMISE_IOS_VERSION)"
-        request.setValue(base64LoginData, forHTTPHeaderField: "Authorization")
-        request.setValue(userAgentData, forHTTPHeaderField: "User-Agent")
         
         let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request, completionHandler: didComplete)
+        let task = session.dataTaskWithRequest(request, completionHandler: didCompleteWithDelegate)
         task.resume()
-    
-    }
-    
-    public func requestToken(requestObject: OmiseRequestObject, onCompletion: (OmiseToken?, NSError?) -> ()) {
         
     }
     
-    public func requestToken(requestObject: OmiseRequestObject, delegate: OmiseTokenizerDelegate) {
+    public func requestToken(requestObject: OmiseRequestObject, onCompletion: Callback)  {
+        guard let urlRequest = createURLRequest(requestObject) else {
+            return
+        }
         
+        let session = NSURLSession.sharedSession()
+        self.callback = onCompletion
+        let task = session.dataTaskWithRequest(urlRequest, completionHandler: didCompleteWithCallBack)
+        task.resume()
     }
     
-    private func didComplete(data: NSData?, response: NSURLResponse?, error: NSError?) {
+    private func didCompleteWithDelegate(data: NSData?, response: NSURLResponse?, error: NSError?) {
         guard let delegate = delegate else {
             print("Please set delegate before request token")
             return
@@ -61,43 +50,67 @@ public class Omise: NSObject {
         if let error = error {
             return delegate.OmiseRequestTokenOnFailed(error)
         }
-
+        
+        let response = buildReturnReponse(data, response: response)
+        guard let token = response.token else {
+            return delegate.OmiseRequestTokenOnFailed(response.error)
+        }
+        
+        delegate.OmiseRequestTokenOnSucceeded(token)
+    }
+    
+    private func didCompleteWithCallBack(data: NSData?, response: NSURLResponse?, error: NSError?) {
+        guard let callback = callback else {
+            print("Callback is null")
+            return
+        }
+        
+        if let error = error {
+            return callback(nil, error)
+        }
+        
+        let reponse = buildReturnReponse(data, response: response)
+        callback(reponse.token, reponse.error)
+        
+    }
+    
+    private func buildReturnReponse(data: NSData?, response: NSURLResponse?) -> (token: OmiseToken?, error: NSError?) {
         guard let httpResponse = response as? NSHTTPURLResponse else {
             let error = OmiseError.UnexpectedError("No error and no response")
-            return delegate.OmiseRequestTokenOnFailed(error)
+            return (nil, error)
         }
         
         switch httpResponse.statusCode {
         case 400..<600:
             guard let data = data else {
                 let error = OmiseError.UnexpectedError("Error response with no data")
-                return delegate.OmiseRequestTokenOnFailed(error)
+                return (nil, error)
             }
             
             guard let errorResponse = OmiseJsonParser().parseOmiseError(data) else {
                 let error = OmiseError.UnexpectedError("Error response deserialization failure")
-                return delegate.OmiseRequestTokenOnFailed(error)
+                return (nil, error)
             }
             
             let error = OmiseError.ErrorFromResponse(errorResponse)
-            return delegate.OmiseRequestTokenOnFailed(error)
+            return (nil, error)
             
         case 200..<300:
             guard let data = data else {
                 let error = OmiseError.UnexpectedError("HTTP 200 but no data")
-                return delegate.OmiseRequestTokenOnFailed(error)
+                return (nil, error)
             }
             
             guard let token = OmiseJsonParser().parseOmiseToken(data) else {
                 let error = OmiseError.UnexpectedError("Error response deserialization failure")
-                return delegate.OmiseRequestTokenOnFailed(error)
+                return (nil, error)
             }
             
-            return delegate.OmiseRequestTokenOnSucceeded(token)
+            return (token, nil)
         default:
             print("unrecognized HTTP status code: \(httpResponse.statusCode)")
+            return (nil,nil)
         }
-
     }
     
     // MARK: - Carete URLComponents by NSURLQueryItem
@@ -107,7 +120,7 @@ public class Omise: NSObject {
         let expirationMonthQuery = NSURLQueryItem(name: "card[expiration_month]", value: String(requestObject.expirationMonth))
         let expirationYearQuery = NSURLQueryItem(name: "card[expiration_year]", value: String(requestObject.expirationYear))
         let securityCodeQuery = NSURLQueryItem(name: "card[security_code]", value: requestObject.securityCode)
-
+        
         let cityQuery = NSURLQueryItem(name: "card[city]", value: (requestObject.city ?? ""))
         let postalCodeQuery = NSURLQueryItem(name: "card[postal_code]", value: (requestObject.postalCode ?? ""))
         
@@ -118,5 +131,29 @@ public class Omise: NSObject {
         urlComponents.queryItems = [nameQuery, numberQuery, expirationMonthQuery, expirationYearQuery, securityCodeQuery, cityQuery, postalCodeQuery]
         
         return urlComponents.URL
+    }
+    
+    private func createURLRequest(requestObject: OmiseRequestObject) -> NSMutableURLRequest? {
+        guard let URL = createURLComponent(requestObject) else {
+            return nil
+        }
+        
+        let request = NSMutableURLRequest(URL: URL, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15)
+        request.HTTPMethod = "POST"
+        
+        let loginString = (self.publicKey ?? "")
+        let plainData = loginString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+        
+        guard let base64String = plainData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0)) else {
+            print("Can't encoding plainData to base64String")
+            return nil
+        }
+        
+        let base64LoginData = "Basic \(base64String)"
+        let userAgentData = "OmiseIOSSwift/\(OMISE_IOS_VERSION)"
+        request.setValue(base64LoginData, forHTTPHeaderField: "Authorization")
+        request.setValue(userAgentData, forHTTPHeaderField: "User-Agent")
+        
+        return request
     }
 }
