@@ -152,6 +152,66 @@ class OmiseTokenizerTests: XCTestCase {
         }
     }
     
+    func testRequestTokenOnCallbackSuccess() {
+        let request = OmiseRequestObject(
+            name: "JOHN DOE",
+            number: "4242424242424242",
+            expirationMonth: 11,
+            expirationYear: 2016,
+            securityCode: "123",
+            city: nil,  // Optional
+            postalCode: nil // Optional
+        )
+        
+        let asyncExpectation = expectationWithDescription("RequestTokenOnCallbackSuccess")
+        
+        var omiseToken: OmiseToken?
+        let omise = Omise(publicKey: "pkey_test_4y7dh41kuvvawbhslxw")
+        omise.requestToken(request) { (token: OmiseToken?, error: NSError?) in
+            omiseToken = token
+            asyncExpectation.fulfill()
+        }
+        
+        let timeOut: NSTimeInterval = 15.0
+        self.waitForExpectationsWithTimeout(timeOut) { error in
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+            
+            XCTAssertNotNil(omiseToken)
+        }
+    }
+    
+    func testRequestTokenOnCallbackFail() {
+        let request = OmiseRequestObject(
+            name: "JOHN DOE",
+            number: "42424242424242421111", // Input wrong card number
+            expirationMonth: 11,
+            expirationYear: 2016,
+            securityCode: "123",
+            city: nil,  // Optional
+            postalCode: nil // Optional
+        )
+        
+        let asyncExpectation = expectationWithDescription("RequestTokenOnCallbackSuccess")
+        
+        var omiseError: NSError?
+        let omise = Omise(publicKey: "pkey_test_4y7dh41kuvvawbhslxw")
+        omise.requestToken(request) { (token: OmiseToken?, error: NSError?) in
+            omiseError = error
+            asyncExpectation.fulfill()
+        }
+        
+        let timeOut: NSTimeInterval = 15.0
+        self.waitForExpectationsWithTimeout(timeOut) { error in
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+            
+            XCTAssertNotNil(omiseError)
+        }
+    }
+    
     // MARK: - Helper for load JSON file to test
     private func fixturesDataFor(filename: String) -> NSData? {
         let bundle = NSBundle(forClass: OmiseTokenizerTests.self)
