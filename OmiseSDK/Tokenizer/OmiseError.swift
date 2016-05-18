@@ -13,8 +13,8 @@ public class OmiseError {
     public var code: String?
     public var message: String?
     
-    class func ErrorFromResponse(error: OmiseError) -> NSError {
-        guard let code = error.code, let message = error.message, let location = error.message else {
+    var error: NSError {
+        guard let code = self.code, let message = self.message, let location = self.message else {
             let userInfo: [NSObject: AnyObject] = [
                 NSLocalizedDescriptionKey :  NSLocalizedString("UnexpectedError", value: "Unexpected error", comment: "")
             ]
@@ -29,7 +29,6 @@ public class OmiseError {
         ]
         
         return NSError(domain: OmiseErrorDomain, code: code.hashValue, userInfo: userInfo)
-        
     }
     
     class func UnexpectedError(message: String) -> NSError {

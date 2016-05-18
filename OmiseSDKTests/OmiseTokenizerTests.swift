@@ -209,7 +209,7 @@ class OmiseTokenizerTests: XCTestCase {
             if let error = error {
                 XCTFail("waitForExpectationsWithTimeout errored: \(error)")
             }
-            
+
             XCTAssertNotNil(omiseError)
         }
     }

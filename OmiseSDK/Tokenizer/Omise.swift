@@ -92,7 +92,7 @@ public class Omise: NSObject {
                 return (nil, error)
             }
             
-            let error = OmiseError.ErrorFromResponse(errorResponse)
+            let error = errorResponse.error
             return (nil, error)
             
         case 200..<300:
@@ -107,6 +107,7 @@ public class Omise: NSObject {
             }
             
             return (token, nil)
+            
         default:
             print("unrecognized HTTP status code: \(httpResponse.statusCode)")
             return (nil,nil)
