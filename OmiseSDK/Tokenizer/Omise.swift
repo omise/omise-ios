@@ -121,20 +121,36 @@ public class Omise: NSObject {
     
     // MARK: - Carete URLComponents by NSURLQueryItem
     private func createURLComponent(requestObject: OmiseRequestObject) -> NSURL? {
+        
+        var queryItems: [NSURLQueryItem] = []
+        let urlComponents = NSURLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "vault.omise.co"
+        urlComponents.path = "/tokens"
+        
         let nameQuery = NSURLQueryItem(name: "card[name]", value: requestObject.name)
         let numberQuery = NSURLQueryItem(name: "card[number]", value: requestObject.number)
         let expirationMonthQuery = NSURLQueryItem(name: "card[expiration_month]", value: String(requestObject.expirationMonth))
         let expirationYearQuery = NSURLQueryItem(name: "card[expiration_year]", value: String(requestObject.expirationYear))
         let securityCodeQuery = NSURLQueryItem(name: "card[security_code]", value: requestObject.securityCode)
         
-        let cityQuery = NSURLQueryItem(name: "card[city]", value: (requestObject.city ?? ""))
-        let postalCodeQuery = NSURLQueryItem(name: "card[postal_code]", value: (requestObject.postalCode ?? ""))
+        if let city = requestObject.city {
+            let cityQuery = NSURLQueryItem(name: "card[city]", value: city)
+            queryItems.append(cityQuery)
+        }
         
-        let urlComponents = NSURLComponents()
-        urlComponents.scheme = "https"
-        urlComponents.host = "vault.omise.co"
-        urlComponents.path = "/tokens"
-        urlComponents.queryItems = [nameQuery, numberQuery, expirationMonthQuery, expirationYearQuery, securityCodeQuery, cityQuery, postalCodeQuery]
+        if let postalCode = requestObject.postalCode {
+            let postalCodeQuery = NSURLQueryItem(name: "card[postal_code]", value: postalCode)
+            queryItems.append(postalCodeQuery)
+        }
+        
+        queryItems.append(nameQuery)
+        queryItems.append(numberQuery)
+        queryItems.append(expirationMonthQuery)
+        queryItems.append(expirationYearQuery)
+        queryItems.append(securityCodeQuery)
+        
+        urlComponents.queryItems = queryItems
         
         return urlComponents.URL
     }
