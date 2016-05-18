@@ -2,7 +2,7 @@ import XCTest
 import OmiseSDK
 
 class TestOmiseTokenizerDelegate: OmiseTokenizerDelegate {
-    var delegateAsyncResult: Bool? = .None
+    var delegateAsyncResult: Bool? = nil
     
     var asyncExpectation: XCTestExpectation?
     
@@ -11,6 +11,7 @@ class TestOmiseTokenizerDelegate: OmiseTokenizerDelegate {
             XCTFail("TestOmiseTokenizerDelegate was not setup correctly. Missing XCTExpectation reference")
             return
         }
+        
         delegateAsyncResult = false
         expectation.fulfill()
     }
@@ -20,6 +21,7 @@ class TestOmiseTokenizerDelegate: OmiseTokenizerDelegate {
             XCTFail("TestOmiseTokenizerDelegate was not setup correctly. Missing XCTExpectation reference")
             return
         }
+        
         delegateAsyncResult = true
         expectation.fulfill()
     }
