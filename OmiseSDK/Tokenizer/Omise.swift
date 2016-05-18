@@ -160,7 +160,7 @@ public class Omise: NSObject {
             return nil
         }
         
-        let request = NSMutableURLRequest(URL: URL, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15)
+        let request = NSMutableURLRequest(URL: URL, cachePolicy: .UseProtocolCachePolicy, timeoutInterval: 15)
         request.HTTPMethod = "POST"
         
         let loginString = (self.publicKey ?? "")
