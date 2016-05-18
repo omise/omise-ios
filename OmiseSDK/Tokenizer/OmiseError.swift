@@ -3,9 +3,9 @@ import Foundation
 let OmiseErrorDomain = "co.omise"
 
 public enum OmiseErrorKey: String {
-    case OmiseErrorLocationKey
-    case OmiseErrorCodeKey
-    case OmiseErrorMessagekey
+    case Location
+    case Code
+    case Message
 }
 
 public class OmiseError {
@@ -23,9 +23,9 @@ public class OmiseError {
         }
         
         let userInfo: [NSObject: AnyObject] = [ NSLocalizedDescriptionKey:  NSLocalizedString(code, value: message, comment: ""),
-            OmiseErrorKey.OmiseErrorLocationKey.rawValue : location,
-            OmiseErrorKey.OmiseErrorCodeKey.rawValue : code,
-            OmiseErrorKey.OmiseErrorMessagekey.rawValue : NSLocalizedString(message, comment: "")
+            OmiseErrorKey.Location.rawValue : location,
+            OmiseErrorKey.Code.rawValue : code,
+            OmiseErrorKey.Message.rawValue : NSLocalizedString(message, comment: "")
         ]
         
         return NSError(domain: OmiseErrorDomain, code: code.hashValue, userInfo: userInfo)
