@@ -1,8 +1,8 @@
 import Foundation
 
 public protocol OmiseTokenizerDelegate {
-    func OmiseRequestTokenOnSucceeded(token: OmiseToken?)
-    func OmiseRequestTokenOnFailed(error: NSError?)
+    func OmiseRequestTokenOnSucceeded(token: OmiseToken)
+    func OmiseRequestTokenOnFailed(error: NSError)
 }
 
 public class Omise: NSObject {
@@ -53,7 +53,12 @@ public class Omise: NSObject {
         
         let response = buildReturnReponse(data, response: response)
         guard let token = response.token else {
-            return delegate.OmiseRequestTokenOnFailed(response.error)
+            if let error = response.error {
+                return delegate.OmiseRequestTokenOnFailed(error)
+            }
+            
+            let error = OmiseError.UnexpectedError("Unexpected error")
+            return delegate.OmiseRequestTokenOnFailed(error)
         }
         
         delegate.OmiseRequestTokenOnSucceeded(token)

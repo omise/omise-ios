@@ -6,7 +6,7 @@ class TestOmiseTokenizerDelegate: OmiseTokenizerDelegate {
     
     var asyncExpectation: XCTestExpectation?
     
-    func OmiseRequestTokenOnFailed(error: NSError?) {
+    func OmiseRequestTokenOnFailed(error: NSError) {
         guard let expectation = asyncExpectation else {
             XCTFail("TestOmiseTokenizerDelegate was not setup correctly. Missing XCTExpectation reference")
             return
@@ -16,12 +16,12 @@ class TestOmiseTokenizerDelegate: OmiseTokenizerDelegate {
         expectation.fulfill()
     }
     
-    func OmiseRequestTokenOnSucceeded(token: OmiseToken?) {
+    func OmiseRequestTokenOnSucceeded(token: OmiseToken) {
         guard let expectation = asyncExpectation else {
             XCTFail("TestOmiseTokenizerDelegate was not setup correctly. Missing XCTExpectation reference")
             return
         }
-        
+
         delegateAsyncResult = true
         expectation.fulfill()
     }

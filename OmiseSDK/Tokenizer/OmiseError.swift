@@ -40,3 +40,6 @@ public class OmiseError {
     }
     
 }
+
+extension OmiseError: ErrorType {
+}
