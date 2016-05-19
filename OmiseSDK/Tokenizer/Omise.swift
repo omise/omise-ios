@@ -8,7 +8,7 @@ public protocol OmiseTokenizerDelegate {
 public class Omise: NSObject {
     let OMISE_IOS_VERSION = "2.1.0"
     let SWIFT_VERSION = "2.2"
-    let IOS_VERSION = UIDevice.currentDevice().systemVersion
+    let IOS_VERSION = NSProcessInfo.processInfo().operatingSystemVersionString
     
     public var delegate: OmiseTokenizerDelegate?
     public let publicKey: String
