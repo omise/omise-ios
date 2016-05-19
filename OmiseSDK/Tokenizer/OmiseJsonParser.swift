@@ -3,15 +3,15 @@ import Foundation
 public class OmiseJsonParser: NSObject {
     public func parseOmiseToken(data: NSData) throws -> OmiseToken? {
         guard let jsonObject = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) else {
-            throw OmiseError.UnexpectedError("Error response deserialization failure")
+            throw OmiseError.Unexpected("Error response deserialization failure")
         }
         
         guard let jsonDict = jsonObject as? NSDictionary else {
-            throw OmiseError.UnexpectedError("Error response object is not dictionary data")
+            throw OmiseError.Unexpected("Error response object is not dictionary data")
         }
         
         guard jsonDict["object"] as? String == "token" else {
-            throw OmiseError.UnexpectedError("Error this object is not token object")
+            throw OmiseError.Unexpected("Error this object is not token object")
         }
         
         let token = OmiseToken()
@@ -22,11 +22,11 @@ public class OmiseJsonParser: NSObject {
         token.created = DateConverter.convertFromString(jsonDict["created"] as? String)
         
         guard let cardDict = jsonDict["card"] as? NSDictionary else {
-            throw OmiseError.UnexpectedError("Error card object is not dictionary data")
+            throw OmiseError.Unexpected("Error card object is not dictionary data")
         }
         
         guard let card = token.card else {
-            throw OmiseError.UnexpectedError("Error card object is empty")
+            throw OmiseError.Unexpected("Error card object is empty")
         }
         
         card.cardId = cardDict["id"] as? String
@@ -50,15 +50,15 @@ public class OmiseJsonParser: NSObject {
     
     public func parseOmiseError(data: NSData) throws -> OmiseError? {
         guard let jsonObject = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) else {
-            throw OmiseError.UnexpectedError("Error response deserialization failure")
+            throw OmiseError.Unexpected("Error response deserialization failure")
         }
         
         guard let jsonDict = jsonObject as? NSDictionary else {
-            throw OmiseError.UnexpectedError("Error response object is not dictionary data")
+            throw OmiseError.Unexpected("Error response object is not dictionary data")
         }
         
         guard jsonDict["object"] as? String == "error" else {
-            throw OmiseError.UnexpectedError("Error this object is not error object")
+            throw OmiseError.Unexpected("Error this object is not error object")
         }
         
         let error = OmiseError()

@@ -25,7 +25,7 @@ public class Omise: NSObject {
     // MARK: - Create a Token
     public func requestToken(requestObject: OmiseTokenRequest, tokenizerDelegate: OmiseTokenizerDelegate) {
         guard let request = createURLRequest(requestObject) else {
-            let error = OmiseError.UnexpectedError("Error can't create url request")
+            let error = OmiseError.Unexpected("Error can't create url request")
             return tokenizerDelegate.OmiseRequestTokenOnFailed(error)
         }
         
@@ -40,7 +40,7 @@ public class Omise: NSObject {
         self.callback = completion
         
         guard let urlRequest = createURLRequest(requestObject) else {
-            let error = OmiseError.UnexpectedError("Error can't create url request")
+            let error = OmiseError.Unexpected("Error can't create url request")
             return completion(nil, error)
         }
         
@@ -65,7 +65,7 @@ public class Omise: NSObject {
                 return delegate.OmiseRequestTokenOnFailed(error)
             }
             
-            let error = OmiseError.UnexpectedError("Unexpected error")
+            let error = OmiseError.Unexpected("Unexpected error")
             return delegate.OmiseRequestTokenOnFailed(error)
         }
         
@@ -88,20 +88,20 @@ public class Omise: NSObject {
     
     private func buildReturnReponse(data: NSData?, response: NSURLResponse?) -> (token: OmiseToken?, error: NSError?) {
         guard let httpResponse = response as? NSHTTPURLResponse else {
-            let error = OmiseError.UnexpectedError("No error and no response")
+            let error = OmiseError.Unexpected("No error and no response")
             return (nil, error)
         }
         
         switch httpResponse.statusCode {
         case 400..<600:
             guard let data = data else {
-                let error = OmiseError.UnexpectedError("Error response with no data")
+                let error = OmiseError.Unexpected("Error response with no data")
                 return (nil, error)
             }
             
             do {
                 guard let omiseError = try OmiseJsonParser().parseOmiseError(data) else {
-                    let error = OmiseError.UnexpectedError("Error response deserialization failure")
+                    let error = OmiseError.Unexpected("Error response deserialization failure")
                     return (nil, error)
                 }
                 
@@ -114,13 +114,13 @@ public class Omise: NSObject {
             
         case 200..<300:
             guard let data = data else {
-                let error = OmiseError.UnexpectedError("HTTP 200 but no data")
+                let error = OmiseError.Unexpected("HTTP 200 but no data")
                 return (nil, error)
             }
             
             do {
                 guard let token = try OmiseJsonParser().parseOmiseToken(data) else {
-                    let error = OmiseError.UnexpectedError("Error response deserialization failure")
+                    let error = OmiseError.Unexpected("Error response deserialization failure")
                     return (nil, error)
                 }
                 
@@ -131,7 +131,7 @@ public class Omise: NSObject {
             }
             
         default:
-            let error = OmiseError.UnexpectedError("Error unrecognized HTTP status code: \(httpResponse.statusCode)")
+            let error = OmiseError.Unexpected("Error unrecognized HTTP status code: \(httpResponse.statusCode)")
             return (nil,error)
         }
     }
