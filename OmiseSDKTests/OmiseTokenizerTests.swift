@@ -131,13 +131,12 @@ class OmiseTokenizerTests: XCTestCase {
         
         let omise = Omise(publicKey: "pkey_test_4y7dh41kuvvawbhslxw")
         let testDelegate = TestOmiseTokenizerDelegate()
-        omise.delegate = testDelegate
         
         let expectation = expectationWithDescription("Omise calls the delegate as the result of an async method completion")
         testDelegate.asyncExpectation = expectation
         
         // Call Async
-        omise.requestToken(request)
+        omise.requestToken(request, tokenizerDelegate: testDelegate)
         
         let timeOut: NSTimeInterval = 15.0
         waitForExpectationsWithTimeout(timeOut) { error in

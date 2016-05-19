@@ -7,6 +7,9 @@ public protocol OmiseTokenizerDelegate {
 
 public class Omise: NSObject {
     let OMISE_IOS_VERSION = "2.1.0"
+    let SWIFT_VERSION = "2.2"
+    let IOS_VERSION = UIDevice.currentDevice().systemVersion
+    
     public var delegate: OmiseTokenizerDelegate?
     public let publicKey: String
     
@@ -177,7 +180,7 @@ public class Omise: NSObject {
         }
         
         let base64LoginData = "Basic \(base64String)"
-        let userAgentData = "OmiseIOSSwift/\(OMISE_IOS_VERSION)"
+        let userAgentData = "OmiseIOSSDK/\(OMISE_IOS_VERSION)/Swift/\(SWIFT_VERSION)/iOS/\(IOS_VERSION)"
         request.setValue(base64LoginData, forHTTPHeaderField: "Authorization")
         request.setValue(userAgentData, forHTTPHeaderField: "User-Agent")
         
