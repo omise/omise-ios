@@ -123,8 +123,8 @@ public class Omise: NSObject {
             return (token, nil)
             
         default:
-            OmiseWarning.SDKWarning("unrecognized HTTP status code: \(httpResponse.statusCode)")
-            return (nil,nil)
+            let error = OmiseError.UnexpectedError("Error unrecognized HTTP status code: \(httpResponse.statusCode)")
+            return (nil,error)
         }
     }
     
