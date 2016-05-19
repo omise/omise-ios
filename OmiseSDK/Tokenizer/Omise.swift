@@ -11,7 +11,7 @@ public class Omise: NSObject {
     let IOS_VERSION = NSProcessInfo.processInfo().operatingSystemVersionString
     let DEVICE = UIDevice.currentDevice().model
     
-    public var delegate: OmiseTokenizerDelegate?
+    private var delegate: OmiseTokenizerDelegate?
     public let publicKey: String
     
     public typealias Callback = (OmiseToken?, NSError?) -> ()
