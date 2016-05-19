@@ -1,7 +1,7 @@
 import Foundation
 
-public class OmiseWarning {
-    public class func SDKWarning(message: String) {
+internal class OmiseWarning {
+    class func SDKWarn(message: String) {
         dump("[omise-ios-sdk] Warning: \(message)")
     }
 }

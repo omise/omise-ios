@@ -52,7 +52,7 @@ public class Omise: NSObject {
     
     private func didCompleteWithDelegate(data: NSData?, response: NSURLResponse?, error: NSError?) {
         guard let delegate = delegate else {
-            OmiseWarning.SDKWarning("Please set delegate before request token")
+            OmiseWarning.SDKWarn("Please set delegate before request token")
             return
         }
         
@@ -75,7 +75,7 @@ public class Omise: NSObject {
     
     private func didCompleteWithCallBack(data: NSData?, response: NSURLResponse?, error: NSError?) {
         guard let callback = callback else {
-            OmiseWarning.SDKWarning("Callback is null")
+            OmiseWarning.SDKWarn("Callback is null")
             return
         }
         
@@ -184,7 +184,7 @@ public class Omise: NSObject {
         let plainData = self.publicKey.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
         
         guard let base64String = plainData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0)) else {
-            OmiseWarning.SDKWarning("Can't encoding plainData to base64String")
+            OmiseWarning.SDKWarn("Can't encoding plainData to base64String")
             return nil
         }
         
