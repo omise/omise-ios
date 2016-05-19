@@ -92,8 +92,8 @@
 				2259311B1CE3210700841B86 /* OmiseSDK.h */,
 				2259311D1CE3210700841B86 /* Info.plist */,
 				98A42F871CEB261F0036ACB4 /* Converters */,
-				985527E01CE331FD00FAB3BD /* Tokenizer */,
 				980D75E41CED8E0C0090A987 /* SDKLog */,
+				985527E01CE331FD00FAB3BD /* Tokenizer */,
 			);
 			path = OmiseSDK;
 			sourceTree = "<group>";
