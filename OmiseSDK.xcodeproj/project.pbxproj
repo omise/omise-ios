@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2259311C1CE3210700841B86 /* OmiseSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 2259311B1CE3210700841B86 /* OmiseSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		980D75E31CED8DF40090A987 /* OmiseSDKWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980D75E21CED8DF40090A987 /* OmiseSDKWarning.swift */; };
 		985527DF1CE331F700FAB3BD /* OmiseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985527DE1CE331F700FAB3BD /* OmiseCard.swift */; };
 		985527E21CE3370900FAB3BD /* Omise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985527E11CE3370900FAB3BD /* Omise.swift */; };
 		985527E41CE3397500FAB3BD /* OmiseToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985527E31CE3397500FAB3BD /* OmiseToken.swift */; };
@@ -34,6 +35,7 @@
 		225931181CE3210700841B86 /* OmiseSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OmiseSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2259311B1CE3210700841B86 /* OmiseSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OmiseSDK.h; sourceTree = "<group>"; };
 		2259311D1CE3210700841B86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		980D75E21CED8DF40090A987 /* OmiseSDKWarning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseSDKWarning.swift; path = SDKLog/OmiseSDKWarning.swift; sourceTree = "<group>"; };
 		985527DE1CE331F700FAB3BD /* OmiseCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseCard.swift; path = Tokenizer/OmiseCard.swift; sourceTree = "<group>"; };
 		985527E11CE3370900FAB3BD /* Omise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Omise.swift; path = Tokenizer/Omise.swift; sourceTree = "<group>"; };
 		985527E31CE3397500FAB3BD /* OmiseToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseToken.swift; path = Tokenizer/OmiseToken.swift; sourceTree = "<group>"; };
@@ -91,8 +93,17 @@
 				2259311D1CE3210700841B86 /* Info.plist */,
 				98A42F871CEB261F0036ACB4 /* Converters */,
 				985527E01CE331FD00FAB3BD /* Tokenizer */,
+				980D75E41CED8E0C0090A987 /* SDKLog */,
 			);
 			path = OmiseSDK;
+			sourceTree = "<group>";
+		};
+		980D75E41CED8E0C0090A987 /* SDKLog */ = {
+			isa = PBXGroup;
+			children = (
+				980D75E21CED8DF40090A987 /* OmiseSDKWarning.swift */,
+			);
+			name = SDKLog;
 			sourceTree = "<group>";
 		};
 		985527E01CE331FD00FAB3BD /* Tokenizer */ = {
@@ -240,6 +251,7 @@
 				985527E61CE33CA200FAB3BD /* OmiseJsonParser.swift in Sources */,
 				985527DF1CE331F700FAB3BD /* OmiseCard.swift in Sources */,
 				985527E21CE3370900FAB3BD /* Omise.swift in Sources */,
+				980D75E31CED8DF40090A987 /* OmiseSDKWarning.swift in Sources */,
 				985527E81CE3505300FAB3BD /* OmiseRequestObject.swift in Sources */,
 				985527E41CE3397500FAB3BD /* OmiseToken.swift in Sources */,
 			);
