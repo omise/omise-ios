@@ -36,8 +36,7 @@ public class Omise: NSObject {
         task.resume()
     }
     
-    public func requestToken(requestObject: OmiseTokenRequest, onCompletion completion: ((OmiseToken?, NSError?) -> Void)) {
-        
+    public func requestToken(requestObject: OmiseTokenRequest, completion: ((OmiseToken?, NSError?) -> Void)) {
         self.callback = completion
         
         guard let urlRequest = createURLRequest(requestObject) else {
