@@ -19,10 +19,13 @@ public class Omise: NSObject {
     }
     
     // MARK: - Create a Token
-    public func requestToken(requestObject: OmiseRequestObject) {
+    public func requestToken(requestObject: OmiseRequestObject, tokenizerDelegate: OmiseTokenizerDelegate) {
         guard let request = createURLRequest(requestObject) else {
-            return
+            let error = OmiseError.UnexpectedError("Error can't create url request")
+            return tokenizerDelegate.OmiseRequestTokenOnFailed(error)
         }
+        
+        self.delegate = tokenizerDelegate
         
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request, completionHandler: didCompleteWithDelegate)
@@ -30,20 +33,23 @@ public class Omise: NSObject {
         
     }
     
-    public func requestToken(requestObject: OmiseRequestObject, onCompletion: Callback)  {
+    public func requestToken(requestObject: OmiseRequestObject, onCompletion completion: ((OmiseToken?, NSError?) -> Void)) {
+        
+        self.callback = completion
+        
         guard let urlRequest = createURLRequest(requestObject) else {
-            return
+            let error = OmiseError.UnexpectedError("Error can't create url request")
+            return completion(nil, error)
         }
         
         let session = NSURLSession.sharedSession()
-        self.callback = onCompletion
         let task = session.dataTaskWithRequest(urlRequest, completionHandler: didCompleteWithCallBack)
         task.resume()
     }
     
     private func didCompleteWithDelegate(data: NSData?, response: NSURLResponse?, error: NSError?) {
         guard let delegate = delegate else {
-            print("Please set delegate before request token")
+            OmiseWarning.SDKWarning("Please set delegate before request token")
             return
         }
         
@@ -66,7 +72,7 @@ public class Omise: NSObject {
     
     private func didCompleteWithCallBack(data: NSData?, response: NSURLResponse?, error: NSError?) {
         guard let callback = callback else {
-            print("Callback is null")
+            OmiseWarning.SDKWarning("Callback is null")
             return
         }
         
@@ -114,7 +120,7 @@ public class Omise: NSObject {
             return (token, nil)
             
         default:
-            print("unrecognized HTTP status code: \(httpResponse.statusCode)")
+            OmiseWarning.SDKWarning("unrecognized HTTP status code: \(httpResponse.statusCode)")
             return (nil,nil)
         }
     }
@@ -163,11 +169,10 @@ public class Omise: NSObject {
         let request = NSMutableURLRequest(URL: URL, cachePolicy: .UseProtocolCachePolicy, timeoutInterval: 15)
         request.HTTPMethod = "POST"
         
-        let loginString = (self.publicKey ?? "")
-        let plainData = loginString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+        let plainData = self.publicKey.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
         
         guard let base64String = plainData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0)) else {
-            print("Can't encoding plainData to base64String")
+            OmiseWarning.SDKWarning("Can't encoding plainData to base64String")
             return nil
         }
         
