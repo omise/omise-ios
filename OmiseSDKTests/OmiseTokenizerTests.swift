@@ -71,34 +71,38 @@ class OmiseTokenizerTests: XCTestCase {
         }
         
         let jsonParser = OmiseJsonParser()
-        guard let token = jsonParser.parseOmiseToken(data) else {
-            XCTFail("Could not parse token")
-            return
+        do {
+            guard let token = try jsonParser.parseOmiseToken(data) else {
+                XCTFail("Could not parse token")
+                return
+            }
+            
+            guard let card = token.card else {
+                XCTFail("Could not parse card from token object")
+                return
+            }
+            
+            XCTAssertEqual(token.tokenId, "tokn_test_5086xl7c9k5rnx35qba")
+            XCTAssertEqual(token.livemode, false)
+            XCTAssertEqual(token.location, "https://vault.omise.co/tokens/tokn_test_5086xl7c9k5rnx35qba")
+            XCTAssertEqual(token.used, false)
+            XCTAssertEqual(card.cardId, "card_test_5086xl7amxfysl0ac5l")
+            XCTAssertEqual(card.livemode, false)
+            XCTAssertEqual(card.country, "us")
+            XCTAssertEqual(card.postalCode, "10320")
+            XCTAssertEqual(card.financing, "")
+            XCTAssertEqual(card.lastDigits, "4242")
+            XCTAssertEqual(card.brand, "Visa")
+            XCTAssertEqual(card.expirationMonth, 10)
+            XCTAssertEqual(card.expirationYear, 2018)
+            XCTAssertEqual(card.fingerprint, "mKleiBfwp+PoJWB/ipngANuECUmRKjyxROwFW5IO7TM=")
+            XCTAssertEqual(card.name, "Somchai Prasert")
+            XCTAssertEqual(card.securityCodeCheck, true)
+            XCTAssertEqual(card.created, DateConverter.convertFromString("2015-06-02T05:41:46Z"))
+            
+        } catch (let error as NSError) {
+            XCTFail(error.localizedDescription)
         }
-        
-        guard let card = token.card else {
-            XCTFail("Could not parse card from token object")
-            return
-        }
-        
-        XCTAssertEqual(token.tokenId, "tokn_test_5086xl7c9k5rnx35qba")
-        XCTAssertEqual(token.livemode, false)
-        XCTAssertEqual(token.location, "https://vault.omise.co/tokens/tokn_test_5086xl7c9k5rnx35qba")
-        XCTAssertEqual(token.used, false)
-        XCTAssertEqual(card.cardId, "card_test_5086xl7amxfysl0ac5l")
-        XCTAssertEqual(card.livemode, false)
-        XCTAssertEqual(card.country, "us")
-        XCTAssertEqual(card.postalCode, "10320")
-        XCTAssertEqual(card.financing, "")
-        XCTAssertEqual(card.lastDigits, "4242")
-        XCTAssertEqual(card.brand, "Visa")
-        XCTAssertEqual(card.expirationMonth, 10)
-        XCTAssertEqual(card.expirationYear, 2018)
-        XCTAssertEqual(card.fingerprint, "mKleiBfwp+PoJWB/ipngANuECUmRKjyxROwFW5IO7TM=")
-        XCTAssertEqual(card.name, "Somchai Prasert")
-        XCTAssertEqual(card.securityCodeCheck, true)
-        XCTAssertEqual(card.created, DateConverter.convertFromString("2015-06-02T05:41:46Z"))
-        
     }
     
     func testOmiseError() {

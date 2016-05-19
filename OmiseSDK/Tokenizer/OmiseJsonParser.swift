@@ -1,18 +1,17 @@
 import Foundation
 
 public class OmiseJsonParser: NSObject {
-    public func parseOmiseToken(data: NSData) -> OmiseToken? {
+    public func parseOmiseToken(data: NSData) throws -> OmiseToken? {
         guard let jsonObject = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) else {
-            return nil
+            throw OmiseError.UnexpectedError("Error response deserialization failure")
         }
         
         guard let jsonDict = jsonObject as? NSDictionary else {
-            return nil
+            throw OmiseError.UnexpectedError("Error response object is not dictionary data")
         }
         
-        let object = jsonDict["object"] as? String
-        guard object != "error" else {
-            return nil
+        guard jsonDict["object"] as? String == "token" else {
+            throw OmiseError.UnexpectedError("Error this object is not token object")
         }
         
         let token = OmiseToken()
@@ -23,11 +22,11 @@ public class OmiseJsonParser: NSObject {
         token.created = DateConverter.convertFromString(jsonDict["created"] as? String)
         
         guard let cardDict = jsonDict["card"] as? NSDictionary else {
-            return nil
+            throw OmiseError.UnexpectedError("Error card object is not dictionary data")
         }
         
         guard let card = token.card else {
-            return nil
+            throw OmiseError.UnexpectedError("Error card object is empty")
         }
         
         card.cardId = cardDict["id"] as? String

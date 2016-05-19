@@ -121,12 +121,17 @@ public class Omise: NSObject {
                 return (nil, error)
             }
             
-            guard let token = OmiseJsonParser().parseOmiseToken(data) else {
-                let error = OmiseError.UnexpectedError("Error response deserialization failure")
+            do {
+                guard let token = try OmiseJsonParser().parseOmiseToken(data) else {
+                    let error = OmiseError.UnexpectedError("Error response deserialization failure")
+                    return (nil, error)
+                }
+                
+                return (token, nil)
+                
+            } catch (let error as NSError) {
                 return (nil, error)
             }
-            
-            return (token, nil)
             
         default:
             let error = OmiseError.UnexpectedError("Error unrecognized HTTP status code: \(httpResponse.statusCode)")
