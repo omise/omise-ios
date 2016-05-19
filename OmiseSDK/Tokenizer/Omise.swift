@@ -34,7 +34,6 @@ public class Omise: NSObject {
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request, completionHandler: didCompleteWithDelegate)
         task.resume()
-        
     }
     
     public func requestToken(requestObject: OmiseTokenRequest, onCompletion completion: ((OmiseToken?, NSError?) -> Void)) {
@@ -86,7 +85,6 @@ public class Omise: NSObject {
         
         let reponse = buildReturnReponse(data, response: response)
         callback(reponse.token, reponse.error)
-        
     }
     
     private func buildReturnReponse(data: NSData?, response: NSURLResponse?) -> (token: OmiseToken?, error: NSError?) {
