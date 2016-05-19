@@ -119,7 +119,7 @@ class OmiseTokenizerTests: XCTestCase {
     }
     
     func testRequestToken() {
-        let request = OmiseRequestObject(
+        let request = OmiseTokenRequest(
             name: "JOHN DOE",
             number: "4242424242424242",
             expirationMonth: 11,
@@ -154,7 +154,7 @@ class OmiseTokenizerTests: XCTestCase {
     }
     
     func testRequestTokenOnCallbackSuccess() {
-        let request = OmiseRequestObject(
+        let request = OmiseTokenRequest(
             name: "JOHN DOE",
             number: "4242424242424242",
             expirationMonth: 11,
@@ -184,7 +184,7 @@ class OmiseTokenizerTests: XCTestCase {
     }
     
     func testRequestTokenOnCallbackFail() {
-        let request = OmiseRequestObject(
+        let request = OmiseTokenRequest(
             name: "JOHN DOE",
             number: "42424242424242421111", // Input wrong card number
             expirationMonth: 11,

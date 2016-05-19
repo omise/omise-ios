@@ -1,6 +1,6 @@
 import Foundation
 
-public class OmiseRequestObject: NSObject {
+public class OmiseTokenRequest: NSObject {
     public var name: String
     public var number: String
     public var expirationMonth: Int
@@ -15,8 +15,7 @@ public class OmiseRequestObject: NSObject {
         self.expirationMonth = expirationMonth
         self.expirationYear = expirationYear
         self.securityCode = securityCode
-        self.city = (city ?? "")
-        self.postalCode = (postalCode ?? "")
+        self.city = city
+        self.postalCode = postalCode
     }
-    
 }

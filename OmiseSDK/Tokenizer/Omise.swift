@@ -23,7 +23,7 @@ public class Omise: NSObject {
     }
     
     // MARK: - Create a Token
-    public func requestToken(requestObject: OmiseRequestObject, tokenizerDelegate: OmiseTokenizerDelegate) {
+    public func requestToken(requestObject: OmiseTokenRequest, tokenizerDelegate: OmiseTokenizerDelegate) {
         guard let request = createURLRequest(requestObject) else {
             let error = OmiseError.UnexpectedError("Error can't create url request")
             return tokenizerDelegate.OmiseRequestTokenOnFailed(error)
@@ -37,7 +37,7 @@ public class Omise: NSObject {
         
     }
     
-    public func requestToken(requestObject: OmiseRequestObject, onCompletion completion: ((OmiseToken?, NSError?) -> Void)) {
+    public func requestToken(requestObject: OmiseTokenRequest, onCompletion completion: ((OmiseToken?, NSError?) -> Void)) {
         
         self.callback = completion
         
@@ -130,7 +130,7 @@ public class Omise: NSObject {
     }
     
     // MARK: - Carete URLComponents by NSURLQueryItem
-    private func createURLComponent(requestObject: OmiseRequestObject) -> NSURL? {
+    private func createURLComponent(requestObject: OmiseTokenRequest) -> NSURL? {
         
         var queryItems: [NSURLQueryItem] = []
         let urlComponents = NSURLComponents()
@@ -165,7 +165,7 @@ public class Omise: NSObject {
         return urlComponents.URL
     }
     
-    private func createURLRequest(requestObject: OmiseRequestObject) -> NSMutableURLRequest? {
+    private func createURLRequest(requestObject: OmiseTokenRequest) -> NSMutableURLRequest? {
         guard let URL = createURLComponent(requestObject) else {
             return nil
         }
