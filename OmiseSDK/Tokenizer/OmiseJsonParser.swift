@@ -49,18 +49,17 @@ public class OmiseJsonParser: NSObject {
         return token
     }
     
-    public func parseOmiseError(data: NSData) -> OmiseError? {
+    public func parseOmiseError(data: NSData) throws -> OmiseError? {
         guard let jsonObject = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) else {
-            return nil
+            throw OmiseError.UnexpectedError("Error response deserialization failure")
         }
         
         guard let jsonDict = jsonObject as? NSDictionary else {
-            return nil
+            throw OmiseError.UnexpectedError("Error response object is not dictionary data")
         }
         
-        let object = jsonDict["object"] as? String
-        guard object == "error" else {
-            return nil
+        guard jsonDict["object"] as? String == "error" else {
+            throw OmiseError.UnexpectedError("Error this object is not error object")
         }
         
         let error = OmiseError()

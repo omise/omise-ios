@@ -107,15 +107,21 @@ class OmiseTokenizerTests: XCTestCase {
             return
         }
         
-        let jsonParser = OmiseJsonParser()
-        guard let error = jsonParser.parseOmiseError(data) else {
-            XCTFail("Could not parse error")
+        do {
+            let jsonParser = OmiseJsonParser()
+            guard let error = try jsonParser.parseOmiseError(data) else {
+                XCTFail("Could not parse error")
+                return
+            }
+            
+            XCTAssertEqual(error.code, "authentication_failure")
+            XCTAssertEqual(error.location, "https://www.omise.co/api-errors#authentication-failure")
+            XCTAssertEqual(error.message, "authentication failed")
+            
+        } catch (let error as NSError) {
+             XCTFail(error.localizedDescription)
             return
         }
-        
-        XCTAssertEqual(error.code, "authentication_failure")
-        XCTAssertEqual(error.location, "https://www.omise.co/api-errors#authentication-failure")
-        XCTAssertEqual(error.message, "authentication failed")
     }
     
     func testRequestToken() {
