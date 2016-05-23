@@ -6,23 +6,23 @@ class TestOmiseTokenizerDelegate: OmiseTokenizerDelegate {
     
     var asyncExpectation: XCTestExpectation?
     
-    func tokenRequestDidFail(error: NSError) {
+    func tokenRequestDidSucceed(request: OmiseTokenRequest, token: OmiseToken) {
         guard let expectation = asyncExpectation else {
             XCTFail("TestOmiseTokenizerDelegate was not setup correctly. Missing XCTExpectation reference")
             return
         }
         
-        delegateAsyncResult = false
+        delegateAsyncResult = true
         expectation.fulfill()
     }
     
-    func tokenRequestDidSucceed(token: OmiseToken) {
+    func tokenRequestDidFail(request: OmiseTokenRequest, error: ErrorType) {
         guard let expectation = asyncExpectation else {
             XCTFail("TestOmiseTokenizerDelegate was not setup correctly. Missing XCTExpectation reference")
             return
         }
 
-        delegateAsyncResult = true
+        delegateAsyncResult = false
         expectation.fulfill()
     }
 }
@@ -137,7 +137,7 @@ class OmiseTokenizerTests: XCTestCase {
         testDelegate.asyncExpectation = expectation
         
         // Call Async
-        omise.requestToken(request, tokenizerDelegate: testDelegate)
+        omise.send(request, delegate: testDelegate)
         
         let timeOut: NSTimeInterval = 15.0
         waitForExpectationsWithTimeout(timeOut) { error in
@@ -169,7 +169,8 @@ class OmiseTokenizerTests: XCTestCase {
         
         var omiseToken: OmiseToken?
         let omise = Omise(publicKey: publicKey)
-        omise.requestToken(request) { (token: OmiseToken?, error: NSError?) in
+        
+        omise.send(request) { (token: OmiseToken?, error: ErrorType?) in
             omiseToken = token
             asyncExpectation.fulfill()
         }
@@ -197,9 +198,9 @@ class OmiseTokenizerTests: XCTestCase {
         
         let asyncExpectation = expectationWithDescription("RequestTokenOnCallbackSuccess")
         
-        var omiseError: NSError?
+        var omiseError: ErrorType?
         let omise = Omise(publicKey: publicKey)
-        omise.requestToken(request) { (token: OmiseToken?, error: NSError?) in
+        omise.send(request) { (token: OmiseToken?, error: ErrorType?) in
             omiseError = error
             asyncExpectation.fulfill()
         }
@@ -209,7 +210,7 @@ class OmiseTokenizerTests: XCTestCase {
             if let error = error {
                 XCTFail("waitForExpectationsWithTimeout errored: \(error)")
             }
-
+            
             XCTAssertNotNil(omiseError)
         }
     }
