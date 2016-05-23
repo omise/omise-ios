@@ -28,6 +28,8 @@ class TestOmiseTokenizerDelegate: OmiseTokenizerDelegate {
 }
 
 class OmiseTokenizerTests: XCTestCase {
+    let publicKey = "pkey_test_543ehdmlevzpxuqkqhu"
+    
     func testOmiseCard() {
         
         let card = OmiseCard()
@@ -139,7 +141,7 @@ class OmiseTokenizerTests: XCTestCase {
             postalCode: nil // Optional
         )
         
-        let omise = Omise(publicKey: "pkey_test_4y7dh41kuvvawbhslxw")
+        let omise = Omise(publicKey: publicKey)
         let testDelegate = TestOmiseTokenizerDelegate()
         
         let expectation = expectationWithDescription("Omise calls the delegate as the result of an async method completion")
@@ -177,7 +179,7 @@ class OmiseTokenizerTests: XCTestCase {
         let asyncExpectation = expectationWithDescription("RequestTokenOnCallbackSuccess")
         
         var omiseToken: OmiseToken?
-        let omise = Omise(publicKey: "pkey_test_4y7dh41kuvvawbhslxw")
+        let omise = Omise(publicKey: publicKey)
         omise.requestToken(request) { (token: OmiseToken?, error: NSError?) in
             omiseToken = token
             asyncExpectation.fulfill()
@@ -207,7 +209,7 @@ class OmiseTokenizerTests: XCTestCase {
         let asyncExpectation = expectationWithDescription("RequestTokenOnCallbackSuccess")
         
         var omiseError: NSError?
-        let omise = Omise(publicKey: "pkey_test_4y7dh41kuvvawbhslxw")
+        let omise = Omise(publicKey: publicKey)
         omise.requestToken(request) { (token: OmiseToken?, error: NSError?) in
             omiseError = error
             asyncExpectation.fulfill()
