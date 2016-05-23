@@ -1,8 +1,8 @@
 import Foundation
 
 public protocol OmiseTokenizerDelegate {
-    func OmiseRequestTokenOnSucceeded(token: OmiseToken)
-    func OmiseRequestTokenOnFailed(error: NSError)
+    func tokenRequestDidSucceed(token: OmiseToken)
+    func tokenRequestDidFail(error: NSError)
 }
 
 public class Omise: NSObject {
@@ -26,7 +26,7 @@ public class Omise: NSObject {
     public func requestToken(requestObject: OmiseTokenRequest, tokenizerDelegate: OmiseTokenizerDelegate) {
         guard let request = createURLRequest(requestObject) else {
             let error = OmiseError.Unexpected("Error can't create url request")
-            return tokenizerDelegate.OmiseRequestTokenOnFailed(error)
+            return tokenizerDelegate.tokenRequestDidFail(error)
         }
         
         self.delegate = tokenizerDelegate
@@ -56,20 +56,20 @@ public class Omise: NSObject {
         }
         
         if let error = error {
-            return delegate.OmiseRequestTokenOnFailed(error)
+            return delegate.tokenRequestDidFail(error)
         }
         
         let response = buildReturnReponse(data, response: response)
         guard let token = response.token else {
             if let error = response.error {
-                return delegate.OmiseRequestTokenOnFailed(error)
+                return delegate.tokenRequestDidFail(error)
             }
             
             let error = OmiseError.Unexpected("Unexpected error")
-            return delegate.OmiseRequestTokenOnFailed(error)
+            return delegate.tokenRequestDidFail(error)
         }
         
-        delegate.OmiseRequestTokenOnSucceeded(token)
+        delegate.tokenRequestDidSucceed(token)
     }
     
     private func didCompleteWithCallBack(data: NSData?, response: NSURLResponse?, error: NSError?) {
