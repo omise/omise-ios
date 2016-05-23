@@ -1,7 +1,7 @@
 import Foundation
 
 public class OmiseJsonParser: NSObject {
-    public func parseOmiseToken(data: NSData) throws -> OmiseToken? {
+    public func parseOmiseToken(data: NSData) throws -> OmiseToken {
         guard let jsonObject = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) else {
             throw OmiseError.Unexpected("Error response deserialization failure")
         }
@@ -48,7 +48,7 @@ public class OmiseJsonParser: NSObject {
         return token
     }
     
-    public func parseOmiseError(data: NSData) throws -> OmiseError? {
+    public func parseOmiseError(data: NSData) throws -> OmiseError {
         guard let jsonObject = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) else {
             throw OmiseError.Unexpected("Error response deserialization failure")
         }
