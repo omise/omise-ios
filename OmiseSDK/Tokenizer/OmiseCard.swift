@@ -1,3 +1,5 @@
+import Foundation
+
 public class OmiseCard: NSObject {
     public var cardId: String?
     public var livemode: Bool?
@@ -14,6 +16,4 @@ public class OmiseCard: NSObject {
     public var name: String?
     public var securityCodeCheck: Bool?
     public var created: NSDate?
-    
-    public override init() {}
 }

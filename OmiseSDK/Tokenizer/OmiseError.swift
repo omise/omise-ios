@@ -2,44 +2,42 @@ import Foundation
 
 let OmiseErrorDomain = "co.omise"
 
-public enum OmiseErrorKey: String {
-    case Location
-    case Code
-    case Message
+public enum OmiseErrorUserInfoKey: String {
+    case Location = "location"
+    case Code = "code"
+    case Message = "message"
+    
+    var nsString: NSString {
+        return rawValue as NSString
+    }
 }
 
-public class OmiseError {
-    public var location: String?
-    public var code: String?
-    public var message: String?
+public enum OmiseError: ErrorType {
+    case API(code: String, message: String, location: String)
+    case Unexpected(message: String, underlying: ErrorType?)
     
     var nsError: NSError {
-        guard let code = self.code, let message = self.message, let location = self.message else {
-            let userInfo: [NSObject: AnyObject] = [
-                NSLocalizedDescriptionKey :  NSLocalizedString("Unexpected", value: "Unexpected error", comment: "")
-            ]
+        switch self {
+        case .API(let code, let message, let location):
+            return NSError(domain: OmiseErrorDomain, code: code.hashValue, userInfo: [
+                OmiseErrorUserInfoKey.Code.nsString: code,
+                OmiseErrorUserInfoKey.Location.nsString: location,
+                OmiseErrorUserInfoKey.Message.nsString: message,
+                NSLocalizedDescriptionKey: message
+                ])
             
-            return NSError(domain: OmiseErrorDomain, code: 0, userInfo: userInfo)
+        case .Unexpected(let message, let underlying):
+            if let underlying = underlying as? AnyObject {
+                return NSError(domain: OmiseErrorDomain, code: 0, userInfo: [
+                    NSLocalizedDescriptionKey: message,
+                    NSUnderlyingErrorKey: underlying
+                    ])
+                
+            } else {
+                return NSError(domain: OmiseErrorDomain, code: 0, userInfo: [
+                    NSLocalizedDescriptionKey: message
+                    ])
+            }
         }
-        
-        let userInfo: [NSObject: AnyObject] = [ NSLocalizedDescriptionKey:  NSLocalizedString(code, value: message, comment: ""),
-            OmiseErrorKey.Location.rawValue : location,
-            OmiseErrorKey.Code.rawValue : code,
-            OmiseErrorKey.Message.rawValue : NSLocalizedString(message, comment: "")
-        ]
-        
-        return NSError(domain: OmiseErrorDomain, code: code.hashValue, userInfo: userInfo)
     }
-    
-    class func Unexpected(message: String) -> NSError {
-        let userInfo: [NSObject: AnyObject] = [
-            NSLocalizedDescriptionKey :  NSLocalizedString("Unexpected", value: message, comment: "")
-        ]
-        
-        return NSError(domain: OmiseErrorDomain, code: 0, userInfo: userInfo)
-    }
-    
-}
-
-extension OmiseError: ErrorType {
 }

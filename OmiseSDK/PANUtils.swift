@@ -1,13 +1,13 @@
 import Foundation
 
-public class PANUtils {
-    public class func brand(pan: String) -> CardBrand? {
+public final class PANUtils {
+    public static func brand(pan: String) -> CardBrand? {
         return CardBrand.all
             .filter({ (brand) -> Bool in pan.rangeOfString(brand.pattern, options: .RegularExpressionSearch, range: nil, locale: nil) != nil })
             .first
     }
     
-    public class func normalize(pan: String) -> String {
+    public static func normalize(pan: String) -> String {
         return pan.stringByReplacingOccurrencesOfString(
             "[^0-9]",
             withString: "",
@@ -15,7 +15,7 @@ public class PANUtils {
             range: nil)
     }
     
-    public class func luhn(pan: String) -> Bool {
+    public static func luhn(pan: String) -> Bool {
         let chars = normalize(pan).characters
         let digits = chars
             .reverse()
@@ -35,7 +35,7 @@ public class PANUtils {
         return sum % 10 == 0
     }
     
-    public class func validate(pan: String) -> Bool {
+    public static func validate(pan: String) -> Bool {
         let normalized = normalize(pan)
         
         guard let brand = brand(normalized) else { return false }
