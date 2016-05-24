@@ -1,34 +1,23 @@
 import Foundation
 
-public class OmiseJsonParser: NSObject {
-    public func parseOmiseToken(data: NSData) throws -> OmiseToken {
-        guard let jsonObject = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) else {
-            throw OmiseError.Unexpected("Error response deserialization failure")
+public final class OmiseJsonParser: NSObject {
+    public static let dateFormatter: NSDateFormatter = {
+        let formatter = NSDateFormatter()
+        formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        return formatter
+    }()
+    
+    public static func parseToken(data: NSData) throws -> OmiseToken {
+        let dict = try parseJSON(data)
+        guard dict["object"] as? String == "token" else {
+            throw OmiseError.Unexpected(message: "Bad JSON response.", underlying: nil)
+        }
+        guard let cardDict = dict["card"] as? NSDictionary else {
+            throw OmiseError.Unexpected(message: "Bad JSON response.", underlying: nil)
         }
         
-        guard let jsonDict = jsonObject as? NSDictionary else {
-            throw OmiseError.Unexpected("Error response object is not dictionary data")
-        }
-        
-        guard jsonDict["object"] as? String == "token" else {
-            throw OmiseError.Unexpected("Error this object is not token object")
-        }
-        
-        let token = OmiseToken()
-        token.tokenId = jsonDict["id"] as? String
-        token.livemode = jsonDict["livemode"] as? Bool
-        token.location = jsonDict["location"] as? String
-        token.used = jsonDict["used"] as? Bool
-        token.created = DateConverter.convertFromString(jsonDict["created"] as? String)
-        
-        guard let cardDict = jsonDict["card"] as? NSDictionary else {
-            throw OmiseError.Unexpected("Error card object is not dictionary data")
-        }
-        
-        guard let card = token.card else {
-            throw OmiseError.Unexpected("Error card object is empty")
-        }
-        
+        let card = OmiseCard()
         card.cardId = cardDict["id"] as? String
         card.livemode = cardDict["livemode"] as? Bool
         card.location = cardDict["location"] as? String
@@ -43,29 +32,51 @@ public class OmiseJsonParser: NSObject {
         card.fingerprint = cardDict["fingerprint"] as? String
         card.name = cardDict["name"] as? String
         card.securityCodeCheck = cardDict["security_code_check"] as? Bool
-        card.created = DateConverter.convertFromString(cardDict.objectForKey("created") as? String)
+        card.created = parseJSONDate(cardDict["created"] as? String)
+        
+        let token = OmiseToken()
+        token.tokenId = dict["id"] as? String
+        token.livemode = dict["livemode"] as? Bool
+        token.location = dict["location"] as? String
+        token.used = dict["used"] as? Bool
+        token.card = card
+        token.created = parseJSONDate(dict["created"] as? String)
         
         return token
     }
     
-    public func parseOmiseError(data: NSData) throws -> OmiseError {
-        guard let jsonObject = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) else {
-            throw OmiseError.Unexpected("Error response deserialization failure")
+    public static func parseError(data: NSData) throws -> OmiseError {
+        let dict = try parseJSON(data)
+        guard dict["object"] as? String == "error" else {
+            throw OmiseError.Unexpected(message: "Unknown API error.", underlying: nil)
+        }
+        
+        guard let location = dict["location"] as? String,
+            let code = dict["code"] as? String,
+            let message = dict["message"] as? String else {
+                throw OmiseError.Unexpected(message: "Unknown API error.", underlying: nil)
+        }
+        
+        return OmiseError.API(code: code, message: message, location: location)
+    }
+    
+    private static func parseJSON(data: NSData) throws -> NSDictionary {
+        let jsonObject: AnyObject
+        do {
+            jsonObject = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
+        } catch let err {
+            throw OmiseError.Unexpected(message: "JSON deserialization failure.", underlying: err)
         }
         
         guard let jsonDict = jsonObject as? NSDictionary else {
-            throw OmiseError.Unexpected("Error response object is not dictionary data")
+            throw OmiseError.Unexpected(message: "Bad JSON response.", underlying: nil)
         }
         
-        guard jsonDict["object"] as? String == "error" else {
-            throw OmiseError.Unexpected("Error this object is not error object")
-        }
-        
-        let error = OmiseError()
-        error.location = jsonDict["location"] as? String
-        error.code = jsonDict["code"] as? String
-        error.message = jsonDict["message"] as? String
-        
-        return error
+        return jsonDict
+    }
+    
+    private static func parseJSONDate(input: String?) -> NSDate? {
+        guard let input = input else { return nil }
+        return dateFormatter.dateFromString(input)
     }
 }
