@@ -1,6 +1,8 @@
 Omise-iOS
 =========
 
+[![Join the chat at https://gitter.im/omise/omise-ios](https://badges.gitter.im/omise/omise-ios.svg)](https://gitter.im/omise/omise-ios?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Omise-iOS is a Cocoa library for managing credit cards and payment authorization with the Omise API.
 
 By using the tokens produced by this library, you will be able to securely process credit cards without letting sensitive information pass through your server. These tokens can also be used to store references to card details which allow customers to reuse cards for their future payments without entering their information again.
