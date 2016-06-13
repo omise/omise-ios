@@ -25,6 +25,11 @@
 		225931501CE46F7F00841B86 /* PANUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314F1CE46F7F00841B86 /* PANUtils.swift */; };
 		225931511CE46F8E00841B86 /* CardBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314D1CE46E5700841B86 /* CardBrand.swift */; };
 		225931521CE46F9100841B86 /* PANUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314F1CE46F7F00841B86 /* PANUtils.swift */; };
+		22D480A01D0EB29C00544CE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D4809F1D0EB29C00544CE1 /* AppDelegate.swift */; };
+		22D480A21D0EB29C00544CE1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D480A11D0EB29C00544CE1 /* ViewController.swift */; };
+		22D480A51D0EB29C00544CE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22D480A31D0EB29C00544CE1 /* Main.storyboard */; };
+		22D480A71D0EB29C00544CE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22D480A61D0EB29C00544CE1 /* Assets.xcassets */; };
+		22D480AA1D0EB29C00544CE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22D480A81D0EB29C00544CE1 /* LaunchScreen.storyboard */; };
 		983BDD481D093A09003AE8CA /* CreditCardPopOverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 983BDD4A1D093A09003AE8CA /* CreditCardPopOverView.xib */; };
 		983BDD4B1D093A0F003AE8CA /* CardNumberFormCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 983BDD4D1D093A0F003AE8CA /* CardNumberFormCell.xib */; };
 		983BDD4E1D093A12003AE8CA /* ExpiryDateFormCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 983BDD501D093A12003AE8CA /* ExpiryDateFormCell.xib */; };
@@ -79,6 +84,13 @@
 		225931541CE4743A00841B86 /* PANUtilsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PANUtilsTest.swift; sourceTree = "<group>"; };
 		225931561CE4745200841B86 /* SDKTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKTestCase.swift; sourceTree = "<group>"; };
 		22C0B0EE1CF44D23002E6683 /* Info-Slim.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Slim.plist"; sourceTree = "<group>"; };
+		22D4809D1D0EB29C00544CE1 /* ExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22D4809F1D0EB29C00544CE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		22D480A11D0EB29C00544CE1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		22D480A41D0EB29C00544CE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		22D480A61D0EB29C00544CE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		22D480A91D0EB29C00544CE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		22D480AB1D0EB29C00544CE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		983BDD5B1D093A61003AE8CA /* th */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = th; path = th.lproj/CardNumberFormCell.xib; sourceTree = "<group>"; };
 		983BDD5C1D093A61003AE8CA /* th */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = th; path = th.lproj/ExpiryDateFormCell.xib; sourceTree = "<group>"; };
 		983BDD5D1D093A61003AE8CA /* th */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = th; path = th.lproj/FormHeaderCell.xib; sourceTree = "<group>"; };
@@ -138,6 +150,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		22D4809A1D0EB29C00544CE1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		987A02C61CE35D5E0035417A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -162,6 +181,7 @@
 		2259310E1CE3210700841B86 = {
 			isa = PBXGroup;
 			children = (
+				22D4809E1D0EB29C00544CE1 /* ExampleApp */,
 				2259311A1CE3210700841B86 /* OmiseSDK */,
 				987A02CA1CE35D5E0035417A /* OmiseSDKTests */,
 				225931191CE3210700841B86 /* Products */,
@@ -174,6 +194,7 @@
 				225931181CE3210700841B86 /* OmiseSDK.framework */,
 				987A02C91CE35D5E0035417A /* OmiseSDKTests.xctest */,
 				2259312D1CE329D800841B86 /* OmiseSDKSlim.framework */,
+				22D4809D1D0EB29C00544CE1 /* ExampleApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -192,6 +213,19 @@
 				9864061F1CFEA0EF004BCF51 /* CreditCardPopOverForm */,
 			);
 			path = OmiseSDK;
+			sourceTree = "<group>";
+		};
+		22D4809E1D0EB29C00544CE1 /* ExampleApp */ = {
+			isa = PBXGroup;
+			children = (
+				22D4809F1D0EB29C00544CE1 /* AppDelegate.swift */,
+				22D480A11D0EB29C00544CE1 /* ViewController.swift */,
+				22D480A31D0EB29C00544CE1 /* Main.storyboard */,
+				22D480A61D0EB29C00544CE1 /* Assets.xcassets */,
+				22D480A81D0EB29C00544CE1 /* LaunchScreen.storyboard */,
+				22D480AB1D0EB29C00544CE1 /* Info.plist */,
+			);
+			path = ExampleApp;
 			sourceTree = "<group>";
 		};
 		985527E01CE331FD00FAB3BD /* TokenRequest */ = {
@@ -326,6 +360,23 @@
 			productReference = 2259312D1CE329D800841B86 /* OmiseSDKSlim.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		22D4809C1D0EB29C00544CE1 /* ExampleApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22D480AE1D0EB29C00544CE1 /* Build configuration list for PBXNativeTarget "ExampleApp" */;
+			buildPhases = (
+				22D480991D0EB29C00544CE1 /* Sources */,
+				22D4809A1D0EB29C00544CE1 /* Frameworks */,
+				22D4809B1D0EB29C00544CE1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ExampleApp;
+			productName = ExampleApp;
+			productReference = 22D4809D1D0EB29C00544CE1 /* ExampleApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 		987A02C81CE35D5E0035417A /* OmiseSDKTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 987A02D31CE35D5E0035417A /* Build configuration list for PBXNativeTarget "OmiseSDKTests" */;
@@ -357,6 +408,9 @@
 					225931171CE3210700841B86 = {
 						CreatedOnToolsVersion = 7.3;
 					};
+					22D4809C1D0EB29C00544CE1 = {
+						CreatedOnToolsVersion = 7.3;
+					};
 					987A02C81CE35D5E0035417A = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -380,6 +434,7 @@
 				225931171CE3210700841B86 /* OmiseSDK */,
 				225931241CE329D800841B86 /* OmiseSDKSlim */,
 				987A02C81CE35D5E0035417A /* OmiseSDKTests */,
+				22D4809C1D0EB29C00544CE1 /* ExampleApp */,
 			);
 		};
 /* End PBXProject section */
@@ -403,6 +458,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22D4809B1D0EB29C00544CE1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22D480AA1D0EB29C00544CE1 /* LaunchScreen.storyboard in Resources */,
+				22D480A71D0EB29C00544CE1 /* Assets.xcassets in Resources */,
+				22D480A51D0EB29C00544CE1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,6 +527,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		22D480991D0EB29C00544CE1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22D480A21D0EB29C00544CE1 /* ViewController.swift in Sources */,
+				22D480A01D0EB29C00544CE1 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		987A02C51CE35D5E0035417A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -485,6 +559,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		22D480A31D0EB29C00544CE1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22D480A41D0EB29C00544CE1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		22D480A81D0EB29C00544CE1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22D480A91D0EB29C00544CE1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		983BDD4A1D093A09003AE8CA /* CreditCardPopOverView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -719,6 +809,28 @@
 			};
 			name = Release;
 		};
+		22D480AC1D0EB29C00544CE1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ExampleApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.omise.ExampleApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		22D480AD1D0EB29C00544CE1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ExampleApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.omise.ExampleApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		987A02D11CE35D5E0035417A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -771,6 +883,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		22D480AE1D0EB29C00544CE1 /* Build configuration list for PBXNativeTarget "ExampleApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22D480AC1D0EB29C00544CE1 /* Debug */,
+				22D480AD1D0EB29C00544CE1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		987A02D31CE35D5E0035417A /* Build configuration list for PBXNativeTarget "OmiseSDKTests" */ = {
 			isa = XCConfigurationList;
