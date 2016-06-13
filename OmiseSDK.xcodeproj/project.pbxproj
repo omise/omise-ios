@@ -20,11 +20,18 @@
 		224460051CF43A1500801D0F /* PANUtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225931541CE4743A00841B86 /* PANUtilsTest.swift */; };
 		224460081CF43FF000801D0F /* OmiseJsonParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224460071CF43FF000801D0F /* OmiseJsonParserTest.swift */; };
 		2244600A1CF441DC00801D0F /* TokenRequestDelegateDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224460091CF441DC00801D0F /* TokenRequestDelegateDummy.swift */; };
+		224E44EA1D0EBF0D00E558E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224E44EC1D0EBF0D00E558E3 /* Main.storyboard */; };
+		224E44ED1D0EBF1200E558E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224E44EF1D0EBF1200E558E3 /* LaunchScreen.storyboard */; };
 		2259311C1CE3210700841B86 /* OmiseSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 2259311B1CE3210700841B86 /* OmiseSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2259314E1CE46E5700841B86 /* CardBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314D1CE46E5700841B86 /* CardBrand.swift */; };
 		225931501CE46F7F00841B86 /* PANUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314F1CE46F7F00841B86 /* PANUtils.swift */; };
 		225931511CE46F8E00841B86 /* CardBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314D1CE46E5700841B86 /* CardBrand.swift */; };
 		225931521CE46F9100841B86 /* PANUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314F1CE46F7F00841B86 /* PANUtils.swift */; };
+		229E14581D0EBAB5000511DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14541D0EBAB5000511DE /* AppDelegate.swift */; };
+		229E14591D0EBAB5000511DE /* CompletePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14551D0EBAB5000511DE /* CompletePaymentViewController.swift */; };
+		229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */; };
+		229E145B1D0EBAB5000511DE /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14571D0EBAB5000511DE /* ProductViewController.swift */; };
+		22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */; };
 		983BDD481D093A09003AE8CA /* CreditCardPopOverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 983BDD4A1D093A09003AE8CA /* CreditCardPopOverView.xib */; };
 		983BDD4B1D093A0F003AE8CA /* CardNumberFormCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 983BDD4D1D093A0F003AE8CA /* CardNumberFormCell.xib */; };
 		983BDD4E1D093A12003AE8CA /* ExpiryDateFormCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 983BDD501D093A12003AE8CA /* ExpiryDateFormCell.xib */; };
@@ -56,6 +63,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		228FABDF1D0EC2BE00B012F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2259310F1CE3210700841B86 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 225931171CE3210700841B86;
+			remoteInfo = OmiseSDK;
+		};
 		987A02CF1CE35D5E0035417A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2259310F1CE3210700841B86 /* Project object */;
@@ -70,6 +84,12 @@
 		22445FFB1CF41DD300801D0F /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		224460071CF43FF000801D0F /* OmiseJsonParserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseJsonParserTest.swift; sourceTree = "<group>"; };
 		224460091CF441DC00801D0F /* TokenRequestDelegateDummy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenRequestDelegateDummy.swift; sourceTree = "<group>"; };
+		224E44EB1D0EBF0D00E558E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		224E44EE1D0EBF1200E558E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		224E44F11D0EBF2500E558E3 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		224E44F31D0EBF2500E558E3 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		224E44F51D0EBF2B00E558E3 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Main.strings; sourceTree = "<group>"; };
+		224E44F71D0EBF2B00E558E3 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		225931181CE3210700841B86 /* OmiseSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OmiseSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2259311B1CE3210700841B86 /* OmiseSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OmiseSDK.h; sourceTree = "<group>"; };
 		2259311D1CE3210700841B86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,7 +98,14 @@
 		2259314F1CE46F7F00841B86 /* PANUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PANUtils.swift; sourceTree = "<group>"; };
 		225931541CE4743A00841B86 /* PANUtilsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PANUtilsTest.swift; sourceTree = "<group>"; };
 		225931561CE4745200841B86 /* SDKTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKTestCase.swift; sourceTree = "<group>"; };
+		229E14541D0EBAB5000511DE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		229E14551D0EBAB5000511DE /* CompletePaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletePaymentViewController.swift; sourceTree = "<group>"; };
+		229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
+		229E14571D0EBAB5000511DE /* ProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		22C0B0EE1CF44D23002E6683 /* Info-Slim.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Slim.plist"; sourceTree = "<group>"; };
+		22D4809D1D0EB29C00544CE1 /* ExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22D480AB1D0EB29C00544CE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		983BDD5B1D093A61003AE8CA /* th */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = th; path = th.lproj/CardNumberFormCell.xib; sourceTree = "<group>"; };
 		983BDD5C1D093A61003AE8CA /* th */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = th; path = th.lproj/ExpiryDateFormCell.xib; sourceTree = "<group>"; };
 		983BDD5D1D093A61003AE8CA /* th */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = th; path = th.lproj/FormHeaderCell.xib; sourceTree = "<group>"; };
@@ -138,6 +165,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		22D4809A1D0EB29C00544CE1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		987A02C61CE35D5E0035417A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -162,6 +196,7 @@
 		2259310E1CE3210700841B86 = {
 			isa = PBXGroup;
 			children = (
+				22D4809E1D0EB29C00544CE1 /* ExampleApp */,
 				2259311A1CE3210700841B86 /* OmiseSDK */,
 				987A02CA1CE35D5E0035417A /* OmiseSDKTests */,
 				225931191CE3210700841B86 /* Products */,
@@ -174,6 +209,7 @@
 				225931181CE3210700841B86 /* OmiseSDK.framework */,
 				987A02C91CE35D5E0035417A /* OmiseSDKTests.xctest */,
 				2259312D1CE329D800841B86 /* OmiseSDKSlim.framework */,
+				22D4809D1D0EB29C00544CE1 /* ExampleApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -192,6 +228,21 @@
 				9864061F1CFEA0EF004BCF51 /* CreditCardPopOverForm */,
 			);
 			path = OmiseSDK;
+			sourceTree = "<group>";
+		};
+		22D4809E1D0EB29C00544CE1 /* ExampleApp */ = {
+			isa = PBXGroup;
+			children = (
+				22D480AB1D0EB29C00544CE1 /* Info.plist */,
+				229E14541D0EBAB5000511DE /* AppDelegate.swift */,
+				229E14551D0EBAB5000511DE /* CompletePaymentViewController.swift */,
+				229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */,
+				229E14571D0EBAB5000511DE /* ProductViewController.swift */,
+				22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */,
+				224E44EF1D0EBF1200E558E3 /* LaunchScreen.storyboard */,
+				224E44EC1D0EBF0D00E558E3 /* Main.storyboard */,
+			);
+			path = ExampleApp;
 			sourceTree = "<group>";
 		};
 		985527E01CE331FD00FAB3BD /* TokenRequest */ = {
@@ -326,6 +377,24 @@
 			productReference = 2259312D1CE329D800841B86 /* OmiseSDKSlim.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		22D4809C1D0EB29C00544CE1 /* ExampleApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22D480AE1D0EB29C00544CE1 /* Build configuration list for PBXNativeTarget "ExampleApp" */;
+			buildPhases = (
+				22D480991D0EB29C00544CE1 /* Sources */,
+				22D4809A1D0EB29C00544CE1 /* Frameworks */,
+				22D4809B1D0EB29C00544CE1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				228FABE01D0EC2BE00B012F7 /* PBXTargetDependency */,
+			);
+			name = ExampleApp;
+			productName = ExampleApp;
+			productReference = 22D4809D1D0EB29C00544CE1 /* ExampleApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 		987A02C81CE35D5E0035417A /* OmiseSDKTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 987A02D31CE35D5E0035417A /* Build configuration list for PBXNativeTarget "OmiseSDKTests" */;
@@ -357,6 +426,9 @@
 					225931171CE3210700841B86 = {
 						CreatedOnToolsVersion = 7.3;
 					};
+					22D4809C1D0EB29C00544CE1 = {
+						CreatedOnToolsVersion = 7.3;
+					};
 					987A02C81CE35D5E0035417A = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -380,6 +452,7 @@
 				225931171CE3210700841B86 /* OmiseSDK */,
 				225931241CE329D800841B86 /* OmiseSDKSlim */,
 				987A02C81CE35D5E0035417A /* OmiseSDKTests */,
+				22D4809C1D0EB29C00544CE1 /* ExampleApp */,
 			);
 		};
 /* End PBXProject section */
@@ -403,6 +476,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22D4809B1D0EB29C00544CE1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				224E44ED1D0EBF1200E558E3 /* LaunchScreen.storyboard in Resources */,
+				22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */,
+				224E44EA1D0EBF0D00E558E3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,6 +545,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		22D480991D0EB29C00544CE1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				229E14591D0EBAB5000511DE /* CompletePaymentViewController.swift in Sources */,
+				229E14581D0EBAB5000511DE /* AppDelegate.swift in Sources */,
+				229E145B1D0EBAB5000511DE /* ProductViewController.swift in Sources */,
+				229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		987A02C51CE35D5E0035417A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -477,6 +571,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		228FABE01D0EC2BE00B012F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 225931171CE3210700841B86 /* OmiseSDK */;
+			targetProxy = 228FABDF1D0EC2BE00B012F7 /* PBXContainerItemProxy */;
+		};
 		987A02D01CE35D5E0035417A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 225931171CE3210700841B86 /* OmiseSDK */;
@@ -485,6 +584,26 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		224E44EC1D0EBF0D00E558E3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				224E44EB1D0EBF0D00E558E3 /* Base */,
+				224E44F51D0EBF2B00E558E3 /* th */,
+				224E44F71D0EBF2B00E558E3 /* ja */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		224E44EF1D0EBF1200E558E3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				224E44EE1D0EBF1200E558E3 /* Base */,
+				224E44F11D0EBF2500E558E3 /* th */,
+				224E44F31D0EBF2500E558E3 /* ja */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		983BDD4A1D093A09003AE8CA /* CreditCardPopOverView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -719,6 +838,31 @@
 			};
 			name = Release;
 		};
+		22D480AC1D0EB29C00544CE1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = ExampleApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.omise.ExampleApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		22D480AD1D0EB29C00544CE1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = ExampleApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.omise.ExampleApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		987A02D11CE35D5E0035417A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -768,6 +912,15 @@
 			buildConfigurations = (
 				2259312B1CE329D800841B86 /* Debug */,
 				2259312C1CE329D800841B86 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22D480AE1D0EB29C00544CE1 /* Build configuration list for PBXNativeTarget "ExampleApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22D480AC1D0EB29C00544CE1 /* Debug */,
+				22D480AD1D0EB29C00544CE1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
