@@ -25,11 +25,10 @@
 		225931501CE46F7F00841B86 /* PANUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314F1CE46F7F00841B86 /* PANUtils.swift */; };
 		225931511CE46F8E00841B86 /* CardBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314D1CE46E5700841B86 /* CardBrand.swift */; };
 		225931521CE46F9100841B86 /* PANUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314F1CE46F7F00841B86 /* PANUtils.swift */; };
-		22D480A01D0EB29C00544CE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D4809F1D0EB29C00544CE1 /* AppDelegate.swift */; };
-		22D480A21D0EB29C00544CE1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D480A11D0EB29C00544CE1 /* ViewController.swift */; };
-		22D480A51D0EB29C00544CE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22D480A31D0EB29C00544CE1 /* Main.storyboard */; };
-		22D480A71D0EB29C00544CE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22D480A61D0EB29C00544CE1 /* Assets.xcassets */; };
-		22D480AA1D0EB29C00544CE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22D480A81D0EB29C00544CE1 /* LaunchScreen.storyboard */; };
+		229E14581D0EBAB5000511DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14541D0EBAB5000511DE /* AppDelegate.swift */; };
+		229E14591D0EBAB5000511DE /* CompletePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14551D0EBAB5000511DE /* CompletePaymentViewController.swift */; };
+		229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */; };
+		229E145B1D0EBAB5000511DE /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14571D0EBAB5000511DE /* ProductViewController.swift */; };
 		983BDD481D093A09003AE8CA /* CreditCardPopOverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 983BDD4A1D093A09003AE8CA /* CreditCardPopOverView.xib */; };
 		983BDD4B1D093A0F003AE8CA /* CardNumberFormCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 983BDD4D1D093A0F003AE8CA /* CardNumberFormCell.xib */; };
 		983BDD4E1D093A12003AE8CA /* ExpiryDateFormCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 983BDD501D093A12003AE8CA /* ExpiryDateFormCell.xib */; };
@@ -83,13 +82,12 @@
 		2259314F1CE46F7F00841B86 /* PANUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PANUtils.swift; sourceTree = "<group>"; };
 		225931541CE4743A00841B86 /* PANUtilsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PANUtilsTest.swift; sourceTree = "<group>"; };
 		225931561CE4745200841B86 /* SDKTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKTestCase.swift; sourceTree = "<group>"; };
+		229E14541D0EBAB5000511DE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		229E14551D0EBAB5000511DE /* CompletePaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletePaymentViewController.swift; sourceTree = "<group>"; };
+		229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
+		229E14571D0EBAB5000511DE /* ProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		22C0B0EE1CF44D23002E6683 /* Info-Slim.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Slim.plist"; sourceTree = "<group>"; };
 		22D4809D1D0EB29C00544CE1 /* ExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		22D4809F1D0EB29C00544CE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		22D480A11D0EB29C00544CE1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		22D480A41D0EB29C00544CE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		22D480A61D0EB29C00544CE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		22D480A91D0EB29C00544CE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22D480AB1D0EB29C00544CE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		983BDD5B1D093A61003AE8CA /* th */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = th; path = th.lproj/CardNumberFormCell.xib; sourceTree = "<group>"; };
 		983BDD5C1D093A61003AE8CA /* th */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = th; path = th.lproj/ExpiryDateFormCell.xib; sourceTree = "<group>"; };
@@ -218,12 +216,11 @@
 		22D4809E1D0EB29C00544CE1 /* ExampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				22D4809F1D0EB29C00544CE1 /* AppDelegate.swift */,
-				22D480A11D0EB29C00544CE1 /* ViewController.swift */,
-				22D480A31D0EB29C00544CE1 /* Main.storyboard */,
-				22D480A61D0EB29C00544CE1 /* Assets.xcassets */,
-				22D480A81D0EB29C00544CE1 /* LaunchScreen.storyboard */,
 				22D480AB1D0EB29C00544CE1 /* Info.plist */,
+				229E14541D0EBAB5000511DE /* AppDelegate.swift */,
+				229E14551D0EBAB5000511DE /* CompletePaymentViewController.swift */,
+				229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */,
+				229E14571D0EBAB5000511DE /* ProductViewController.swift */,
 			);
 			path = ExampleApp;
 			sourceTree = "<group>";
@@ -465,9 +462,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22D480AA1D0EB29C00544CE1 /* LaunchScreen.storyboard in Resources */,
-				22D480A71D0EB29C00544CE1 /* Assets.xcassets in Resources */,
-				22D480A51D0EB29C00544CE1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,8 +525,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22D480A21D0EB29C00544CE1 /* ViewController.swift in Sources */,
-				22D480A01D0EB29C00544CE1 /* AppDelegate.swift in Sources */,
+				229E14591D0EBAB5000511DE /* CompletePaymentViewController.swift in Sources */,
+				229E14581D0EBAB5000511DE /* AppDelegate.swift in Sources */,
+				229E145B1D0EBAB5000511DE /* ProductViewController.swift in Sources */,
+				229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,22 +555,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		22D480A31D0EB29C00544CE1 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				22D480A41D0EB29C00544CE1 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		22D480A81D0EB29C00544CE1 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				22D480A91D0EB29C00544CE1 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		983BDD4A1D093A09003AE8CA /* CreditCardPopOverView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -813,10 +793,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = ExampleApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.ExampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -824,6 +806,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = ExampleApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.ExampleApp;
@@ -891,6 +874,7 @@
 				22D480AD1D0EB29C00544CE1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		987A02D31CE35D5E0035417A /* Build configuration list for PBXNativeTarget "OmiseSDKTests" */ = {
 			isa = XCConfigurationList;

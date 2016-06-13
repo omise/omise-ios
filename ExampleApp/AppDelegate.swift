@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  ExampleApp
+//  OmiseSDKExample
 //
-//  Created by Chakrit Wichian on 6/13/16.
+//  Created by Anak Mirasing on 5/24/16.
 //  Copyright © 2016 Omise. All rights reserved.
 //
 
