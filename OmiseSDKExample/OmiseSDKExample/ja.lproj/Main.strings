@@ -1,0 +1,33 @@
+
+/* Class = "UIButton"; normalTitle = "Close"; ObjectID = "0bE-mf-skW"; */
+"0bE-mf-skW.normalTitle" = "Close";
+
+/* Class = "UILabel"; text = "Thank you for your recent order"; ObjectID = "1Vm-QL-fYr"; */
+"1Vm-QL-fYr.text" = "Thank you for your recent order";
+
+/* Class = "UILabel"; text = "Product"; ObjectID = "6ij-hE-4pL"; */
+"6ij-hE-4pL.text" = "Product";
+
+/* Class = "UILabel"; text = "Complete payment"; ObjectID = "EjB-0Z-4OG"; */
+"EjB-0Z-4OG.text" = "Complete payment";
+
+/* Class = "UIButton"; normalTitle = "Order - OMS8008"; ObjectID = "UHN-cv-0Wm"; */
+"UHN-cv-0Wm.normalTitle" = "Order - OMS8008";
+
+/* Class = "UILabel"; text = "Lensen : Art beyond seeing"; ObjectID = "V65-Ac-a7G"; */
+"V65-Ac-a7G.text" = "Lensen : Art beyond seeing";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "VEj-JF-mN3"; */
+"VEj-JF-mN3.normalTitle" = "Back";
+
+/* Class = "UILabel"; text = "We’ve send you an email with all the details of your order. You can track your order with the link below"; ObjectID = "g89-Bs-50i"; */
+"g89-Bs-50i.text" = "We’ve send you an email with all the details of your order. You can track your order with the link below";
+
+/* Class = "UIButton"; normalTitle = "320 Bath - Buy now"; ObjectID = "gb9-lf-PL0"; */
+"gb9-lf-PL0.normalTitle" = "320 Bath - Buy now";
+
+/* Class = "UITextView"; text = "Creating art that can be felt through your fingertips, Lensen is a tactile drawing kit for you to expand art beyond seeing."; ObjectID = "qNU-f8-LH7"; */
+"qNU-f8-LH7.text" = "Creating art that can be felt through your fingertips, Lensen is a tactile drawing kit for you to expand art beyond seeing.";
+
+/* Class = "UIButton"; normalTitle = "Product detail"; ObjectID = "rUl-ra-Tdr"; */
+"rUl-ra-Tdr.normalTitle" = "Product detail";

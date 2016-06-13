@@ -4,4 +4,7 @@
    <FileRef
       location = "group:OmiseSDK.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:OmiseSDKExample/OmiseSDKExample.xcodeproj">
+   </FileRef>
 </Workspace>

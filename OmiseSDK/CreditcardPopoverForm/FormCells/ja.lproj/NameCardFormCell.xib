@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NameCardFormCell" id="KGk-i7-Jjw" customClass="NameCardFormCell" customModule="OmiseSDK" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カード名義人" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qAL-sy-1cC">
+                        <rect key="frame" x="15" y="8" width="119" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="119" id="1uh-Gz-UKr"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="John Doe" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ouF-SF-xc2" customClass="NameOnCardTextField" customModule="OmiseSDK" customModuleProvider="target">
+                        <rect key="frame" x="142" y="7" width="225" height="30"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="ouF-SF-xc2" secondAttribute="trailing" constant="8" id="9Ov-yy-pOL"/>
+                    <constraint firstItem="qAL-sy-1cC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="AYe-Ns-Eik"/>
+                    <constraint firstAttribute="bottom" secondItem="ouF-SF-xc2" secondAttribute="bottom" constant="6" id="Erg-3w-XOX"/>
+                    <constraint firstItem="ouF-SF-xc2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="P30-fl-RpW"/>
+                    <constraint firstItem="ouF-SF-xc2" firstAttribute="leading" secondItem="qAL-sy-1cC" secondAttribute="trailing" constant="8" id="YWg-9q-epS"/>
+                    <constraint firstAttribute="bottom" secondItem="qAL-sy-1cC" secondAttribute="bottom" constant="8" id="jbb-Fa-VkY"/>
+                    <constraint firstItem="qAL-sy-1cC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="lNV-FI-PXZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="textField" destination="ouF-SF-xc2" id="wmw-Id-pYr"/>
+            </connections>
+            <point key="canvasLocation" x="322.5" y="677"/>
+        </tableViewCell>
+    </objects>
+</document>
