@@ -7,29 +7,29 @@ public protocol CreditCardPopOverViewDelegate {
 
 public class CreditCardPopOverView: UIViewController {
     public struct CCPOAppearance {
-        let kDefaultTitleColor: UIColor
-        let kDefaultNavigationBarColor: UIColor
-        let kDefaultBackgroundColor: UIColor
-        let kDefaultShadowOpacity: CGFloat
-        let kDefaultButtonDisableBackgroundColor: UIColor
-        let kDefaultButtonBackgroundColor: UIColor
-        let kDefaultButtonTextColor: UIColor
+        let defaultTitleColor: UIColor
+        let defaultNavigationBarColor: UIColor
+        let defaultBackgroundColor: UIColor
+        let defaultShadowOpacity: CGFloat
+        let defaultButtonDisableBackgroundColor: UIColor
+        let defaultButtonBackgroundColor: UIColor
+        let defaultButtonTextColor: UIColor
         
-        public init(kDefaultTitleColor: UIColor = UIColor.blackColor(),
-                    kDefaultNavigationBarColor: UIColor = UIColor.whiteColor(),
-                    kDefaultBackgroundColor: UIColor = UIColor(red:239/255, green:239/255, blue:244/255, alpha:1),
-                    kDefaultShadowOpacity: CGFloat = 1.0,
-                    kDefaultButtonDisableBackgroundColor: UIColor = UIColor.lightGrayColor(),
-                    kDefaultButtonBackgroundColor: UIColor = UIColor(red: 74/255, green: 144/255, blue: 226/255, alpha: 1.0),
-                    kDefaultButtonTextColor: UIColor = UIColor.whiteColor()
+        public init(defaultTitleColor: UIColor = UIColor.blackColor(),
+                    defaultNavigationBarColor: UIColor = UIColor.whiteColor(),
+                    defaultBackgroundColor: UIColor = UIColor(red:239/255, green:239/255, blue:244/255, alpha:1),
+                    defaultShadowOpacity: CGFloat = 1.0,
+                    defaultButtonDisableBackgroundColor: UIColor = UIColor.lightGrayColor(),
+                    defaultButtonBackgroundColor: UIColor = UIColor(red: 74/255, green: 144/255, blue: 226/255, alpha: 1.0),
+                    defaultButtonTextColor: UIColor = UIColor.whiteColor()
                     ) {
-            self.kDefaultTitleColor = kDefaultTitleColor
-            self.kDefaultNavigationBarColor = kDefaultNavigationBarColor
-            self.kDefaultBackgroundColor = kDefaultBackgroundColor
-            self.kDefaultShadowOpacity = kDefaultShadowOpacity
-            self.kDefaultButtonDisableBackgroundColor = kDefaultButtonDisableBackgroundColor
-            self.kDefaultButtonBackgroundColor = kDefaultButtonBackgroundColor
-            self.kDefaultButtonTextColor = kDefaultButtonTextColor
+            self.defaultTitleColor = defaultTitleColor
+            self.defaultNavigationBarColor = defaultNavigationBarColor
+            self.defaultBackgroundColor = defaultBackgroundColor
+            self.defaultShadowOpacity = defaultShadowOpacity
+            self.defaultButtonDisableBackgroundColor = defaultButtonDisableBackgroundColor
+            self.defaultButtonBackgroundColor = defaultButtonBackgroundColor
+            self.defaultButtonTextColor = defaultButtonTextColor
         }
     }
     
@@ -42,17 +42,33 @@ public class CreditCardPopOverView: UIViewController {
     @IBOutlet weak var bottomLineHeight: NSLayoutConstraint!
     @IBOutlet weak var errorTextView: UITextView!
     
+    
     public var appearance: CCPOAppearance
     public var delegate: CreditCardPopOverViewDelegate?
     public var autoHandleErrorEnabled: Bool = true
     var client: OmiseSDKClient?
     var request: OmiseTokenRequest?
     private let formButtonTopConstraintSize: CGFloat = 24
-    private let formButtonTopConstraintExpandSize: CGFloat = 100
-    
+    private let formButtonTopConstraintExpandSize: CGFloat = 100    
     private let formCells = [CardNumberFormCell.identifier, NameCardFormCell.identifier, ExpiryDateFormCell.identifier, SecureCodeFormCell.identifier]
     private var formFields = [OmiseTextField]()
     private var formHeaderCell: FormHeaderCell?
+    
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        setup()
+    }
+    
+    public override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if isMovingToParentViewController() {
+            navigationBarView.removeFromSuperview()
+            formTableView.translatesAutoresizingMaskIntoConstraints = false
+            let topConstraint = formTableView.topAnchor.constraintEqualToAnchor(view.topAnchor, constant: 64)
+            let heightConstraint = formTableView.heightAnchor.constraintEqualToAnchor(nil, constant: 240)
+            NSLayoutConstraint.activateConstraints([topConstraint, heightConstraint])
+        }
+    }
     
     // MARK: Initial
     public init(client: OmiseSDKClient) {
@@ -71,24 +87,21 @@ public class CreditCardPopOverView: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public override func viewWillLayoutSubviews() {
-        setup()
-    }
-    
     private func setup() {
         // Setup Appearance
+        title = NSLocalizedString("Credit Card Form", tableName: nil, bundle: NSBundle(forClass: CreditCardPopOverView.self), value: "", comment: "")
         modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
-        view.backgroundColor = appearance.kDefaultBackgroundColor
-        view.backgroundColor?.colorWithAlphaComponent(appearance.kDefaultShadowOpacity)
+        view.backgroundColor = appearance.defaultBackgroundColor
+        view.backgroundColor?.colorWithAlphaComponent(appearance.defaultShadowOpacity)
 
         // Naviagtionbar Title and Navigationbar
-        navigationBarTitleLabel.textColor = appearance.kDefaultTitleColor
-        navigationBarView.backgroundColor = appearance.kDefaultNavigationBarColor
+        navigationBarTitleLabel.textColor = appearance.defaultTitleColor
+        navigationBarView.backgroundColor = appearance.defaultNavigationBarColor
         
         // Form Button
-        formButton.setTitleColor(appearance.kDefaultButtonTextColor, forState: .Normal)
+        formButton.setTitleColor(appearance.defaultButtonTextColor, forState: .Normal)
         formButton.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
-        formButton.backgroundColor = appearance.kDefaultButtonDisableBackgroundColor
+        formButton.backgroundColor = appearance.defaultButtonDisableBackgroundColor
         formButton.enabled = false
         
         // TableView
@@ -310,7 +323,7 @@ extension CreditCardPopOverView: UITableViewDelegate {
 extension CreditCardPopOverView: OmiseFormValidatorDelegate {
     public func textFieldDidValidated(textField: OmiseTextField) {
         if OmiseFormValidator.validateForms(formFields) {
-            formButton.backgroundColor = appearance.kDefaultButtonBackgroundColor
+            formButton.backgroundColor = appearance.defaultButtonBackgroundColor
             formButton.enabled = true
         } else {
             formButton.backgroundColor = UIColor.lightGrayColor()

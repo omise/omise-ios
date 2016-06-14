@@ -45,15 +45,22 @@ public class CardExpiryDateTextField: OmiseTextField {
             return
         }
         
-        let date = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Month], fromDate: date)
-        
-        let thisMonth = components.month
-
-        if Int(month) < thisMonth {
+        guard let year = expirationYear else {
             valid = false
             return
+        }
+        
+        let date = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Month, .Year], fromDate: date)
+        let thisMonth = components.month
+        let thisYear = components.year
+
+        if year == thisYear {
+            if month < thisMonth {
+                valid = false
+                return
+            }
         }
         
         valid = true

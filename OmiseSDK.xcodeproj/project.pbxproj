@@ -32,6 +32,7 @@
 		229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */; };
 		229E145B1D0EBAB5000511DE /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14571D0EBAB5000511DE /* ProductViewController.swift */; };
 		22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */; };
+		981FA5F71D0EDDB0009ECEDC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 981FA5F91D0EDDB0009ECEDC /* Localizable.strings */; };
 		983BDD481D093A09003AE8CA /* CreditCardPopOverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 983BDD4A1D093A09003AE8CA /* CreditCardPopOverView.xib */; };
 		983BDD4B1D093A0F003AE8CA /* CardNumberFormCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 983BDD4D1D093A0F003AE8CA /* CardNumberFormCell.xib */; };
 		983BDD4E1D093A12003AE8CA /* ExpiryDateFormCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 983BDD501D093A12003AE8CA /* ExpiryDateFormCell.xib */; };
@@ -106,6 +107,9 @@
 		22D4809D1D0EB29C00544CE1 /* ExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D480AB1D0EB29C00544CE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		981FA5F81D0EDDB0009ECEDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		981FA5FA1D0EDDD8009ECEDC /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
+		981FA5FB1D0EDDDB009ECEDC /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		983BDD5B1D093A61003AE8CA /* th */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = th; path = th.lproj/CardNumberFormCell.xib; sourceTree = "<group>"; };
 		983BDD5C1D093A61003AE8CA /* th */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = th; path = th.lproj/ExpiryDateFormCell.xib; sourceTree = "<group>"; };
 		983BDD5D1D093A61003AE8CA /* th */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = th; path = th.lproj/FormHeaderCell.xib; sourceTree = "<group>"; };
@@ -226,6 +230,7 @@
 				2259314F1CE46F7F00841B86 /* PANUtils.swift */,
 				985527E01CE331FD00FAB3BD /* TokenRequest */,
 				9864061F1CFEA0EF004BCF51 /* CreditCardPopOverForm */,
+				981FA5F91D0EDDB0009ECEDC /* Localizable.strings */,
 			);
 			path = OmiseSDK;
 			sourceTree = "<group>";
@@ -467,6 +472,7 @@
 				983BDD541D093A19003AE8CA /* NameCardFormCell.xib in Resources */,
 				983BDD4B1D093A0F003AE8CA /* CardNumberFormCell.xib in Resources */,
 				98C076451D054E5800E765BD /* FormAssets.xcassets in Resources */,
+				981FA5F71D0EDDB0009ECEDC /* Localizable.strings in Resources */,
 				983BDD481D093A09003AE8CA /* CreditCardPopOverView.xib in Resources */,
 				983BDD4E1D093A12003AE8CA /* ExpiryDateFormCell.xib in Resources */,
 			);
@@ -602,6 +608,16 @@
 				224E44F31D0EBF2500E558E3 /* ja */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		981FA5F91D0EDDB0009ECEDC /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				981FA5F81D0EDDB0009ECEDC /* Base */,
+				981FA5FA1D0EDDD8009ECEDC /* th */,
+				981FA5FB1D0EDDDB009ECEDC /* ja */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		983BDD4A1D093A09003AE8CA /* CreditCardPopOverView.xib */ = {
