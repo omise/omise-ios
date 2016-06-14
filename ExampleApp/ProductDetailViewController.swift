@@ -14,16 +14,16 @@ class ProductDetailViewController: UIViewController {
     @IBAction func buyNowForModalButtonTapped(sender: AnyObject) {
         let omise = OmiseSDKClient(publicKey: publicKey)
         
-        let creditCardView = CreditCardPopOverView(client: omise)
+        let creditCardView = CreditCardPopoverController(client: omise)
         creditCardView.delegate = self
         creditCardView.autoHandleErrorEnabled = true
-        creditCardView.popOver(self)
+        creditCardView.popover(self)
     }
     
     @IBAction func buyNowButtonTapped(sender: AnyObject) {
         let omise = OmiseSDKClient(publicKey: publicKey)
         
-        let creditCardView = CreditCardPopOverView(client: omise)
+        let creditCardView = CreditCardPopoverController(client: omise)
         creditCardView.delegate = self
         
         self.navigationController?.pushViewController(creditCardView, animated: true)
@@ -39,26 +39,26 @@ class ProductDetailViewController: UIViewController {
     }
 }
 
-extension ProductDetailViewController: CreditCardPopOverViewDelegate {
+extension ProductDetailViewController: CreditCardPopoverDelegate {
     // MARK: CreditCardPopOverViewDelegate
-    func creditCardPopOver(creditCardPopOver: CreditCardPopOverView, didSucceededWithToken token: OmiseToken) {
+    func creditCardPopover(creditCardPopover: CreditCardPopoverController, didSucceededWithToken token: OmiseToken) {
         // Token for create charge
         print("\(token)")
         
         // if charge success
-        creditCardPopOver.dismiss()
+        creditCardPopover.dismiss()
         self.goToCompletePaymentViewController()
         
         // else charge fail
         // func handleChargeError(error)
     }
     
-    func creditCardPopOver(creditCardPopOver: CreditCardPopOverView, didFailWithError error: ErrorType) {
+    func creditCardPopover(creditCardPopover: CreditCardPopoverController, didFailWithError error: ErrorType) {
         // Error from SDK
         print(error)
         
         // Dismiss Form if you want
-        creditCardPopOver.dismiss()
+        creditCardPopover.dismiss()
     }
 }
 

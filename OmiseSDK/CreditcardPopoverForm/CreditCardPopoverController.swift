@@ -1,11 +1,11 @@
 import UIKit
 
-public protocol CreditCardPopOverViewDelegate: class {
-    func creditCardPopOver(creditCardPopOver: CreditCardPopOverView, didSucceededWithToken token: OmiseToken)
-    func creditCardPopOver(creditCardPopOver: CreditCardPopOverView, didFailWithError error: ErrorType)
+public protocol CreditCardPopoverDelegate: class {
+    func creditCardPopover(creditCardPopover: CreditCardPopoverController, didSucceededWithToken token: OmiseToken)
+    func creditCardPopover(creditCardPopover: CreditCardPopoverController, didFailWithError error: ErrorType)
 }
 
-public class CreditCardPopOverView: UIViewController {
+public class CreditCardPopoverController: UIViewController {
     public struct CCPOAppearance {
         let defaultTitleColor: UIColor
         let defaultNavigationBarColor: UIColor
@@ -44,7 +44,7 @@ public class CreditCardPopOverView: UIViewController {
     
     
     public var appearance: CCPOAppearance
-    weak public var delegate: CreditCardPopOverViewDelegate?
+    weak public var delegate: CreditCardPopoverDelegate?
     public var autoHandleErrorEnabled: Bool = true
     var client: OmiseSDKClient?
     var request: OmiseTokenRequest?
@@ -74,13 +74,13 @@ public class CreditCardPopOverView: UIViewController {
     public init(client: OmiseSDKClient) {
         self.client = client
         appearance = CCPOAppearance()
-        super.init(nibName: "CreditCardPopOverView", bundle: NSBundle(forClass: CreditCardPopOverView.self))
+        super.init(nibName: "CreditCardPopoverController", bundle: NSBundle(forClass: CreditCardPopoverController.self))
     }
     
     public init(client: OmiseSDKClient, appearance: CCPOAppearance) {
         self.client = client
         self.appearance = appearance
-        super.init(nibName: "CreditCardPopOverView", bundle: NSBundle(forClass: CreditCardPopOverView.self))
+        super.init(nibName: "CreditCardPopoverController", bundle: NSBundle(forClass: CreditCardPopoverController.self))
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -89,7 +89,7 @@ public class CreditCardPopOverView: UIViewController {
 
     private func setup() {
         // Setup Appearance
-        title = NSLocalizedString("Credit Card Form", tableName: nil, bundle: NSBundle(forClass: CreditCardPopOverView.self), value: "", comment: "")
+        title = NSLocalizedString("Credit Card Form", tableName: nil, bundle: NSBundle(forClass: CreditCardPopoverController.self), value: "", comment: "")
         modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
         view.backgroundColor = appearance.defaultBackgroundColor
         view.backgroundColor?.colorWithAlphaComponent(appearance.defaultShadowOpacity)
@@ -122,7 +122,7 @@ public class CreditCardPopOverView: UIViewController {
         formButton.layer.cornerRadius = 4
         
         // Gesture Recognizer for tapping to hide
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CreditCardPopOverView.tappedOnBaseView(_:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedOnBaseView(_:)))
         view.addGestureRecognizer(tapGesture)
         
         // OMSTextField
@@ -162,7 +162,7 @@ public class CreditCardPopOverView: UIViewController {
     }
     
     // MARK: Display & Hide
-    public func popOver(viewController: UIViewController) {
+    public func popover(viewController: UIViewController) {
         dispatch_async(dispatch_get_main_queue()) {
             viewController.presentViewController(self, animated: true, completion: nil)
         }
@@ -185,7 +185,7 @@ public class CreditCardPopOverView: UIViewController {
                 self.view.layoutIfNeeded()
             }
         } else {
-            delegate?.creditCardPopOver(self, didFailWithError: error)
+            delegate?.creditCardPopover(self, didFailWithError: error)
         }
     }
     
@@ -216,7 +216,7 @@ public class CreditCardPopOverView: UIViewController {
                 if let error = error {
                     self.handleError(error)
                 } else if let token = token {
-                    self.delegate?.creditCardPopOver(self, didSucceededWithToken: token)
+                    self.delegate?.creditCardPopover(self, didSucceededWithToken: token)
                 }
             }
         }
@@ -286,7 +286,7 @@ public class CreditCardPopOverView: UIViewController {
 }
 
 // MARK: - UITableViewDataSource
-extension CreditCardPopOverView: UITableViewDataSource {
+extension CreditCardPopoverController: UITableViewDataSource {
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -304,7 +304,7 @@ extension CreditCardPopOverView: UITableViewDataSource {
 }
 
 // MARK: - UIScrollViewDelegate
-extension CreditCardPopOverView: UITableViewDelegate {
+extension CreditCardPopoverController: UITableViewDelegate {
     public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let  headerCell = tableView.dequeueReusableCellWithIdentifier(FormHeaderCell.identifier) as! FormHeaderCell
         formHeaderCell = headerCell
@@ -320,7 +320,7 @@ extension CreditCardPopOverView: UITableViewDelegate {
     }
 }
 // MARK: - OmiseFormValidatorDelegate
-extension CreditCardPopOverView: OmiseFormValidatorDelegate {
+extension CreditCardPopoverController: OmiseFormValidatorDelegate {
     public func textFieldDidValidated(textField: OmiseTextField) {
         if OmiseFormValidator.validateForms(formFields) {
             formButton.backgroundColor = appearance.defaultButtonBackgroundColor
