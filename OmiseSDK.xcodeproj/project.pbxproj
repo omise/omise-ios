@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		14ACEF831D02D641001C5319 /* CardExpiryDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACEF821D02D641001C5319 /* CardExpiryDatePicker.swift */; };
+		2220F1A91D0FEE85008CD89F /* OmiseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A31D0FEE85008CD89F /* OmiseCard.swift */; };
+		2220F1AA1D0FEE85008CD89F /* OmiseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A41D0FEE85008CD89F /* OmiseError.swift */; };
+		2220F1AB1D0FEE85008CD89F /* OmiseJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A51D0FEE85008CD89F /* OmiseJsonParser.swift */; };
+		2220F1AC1D0FEE85008CD89F /* OmiseSDKClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A61D0FEE85008CD89F /* OmiseSDKClient.swift */; };
+		2220F1AD1D0FEE85008CD89F /* OmiseToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A71D0FEE85008CD89F /* OmiseToken.swift */; };
+		2220F1AE1D0FEE85008CD89F /* OmiseTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */; };
 		2225B3541D0FDD63003EB396 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2225B3531D0FDD63003EB396 /* Assets.xcassets */; };
 		22445FFC1CF41DD300801D0F /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22445FFB1CF41DD300801D0F /* Globals.swift */; };
 		224460041CF43A1200801D0F /* SDKTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225931561CE4745200841B86 /* SDKTestCase.swift */; };
@@ -31,11 +37,6 @@
 		983BDD511D093A15003AE8CA /* FormHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 983BDD531D093A15003AE8CA /* FormHeaderCell.xib */; };
 		983BDD541D093A19003AE8CA /* NameCardFormCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 983BDD561D093A19003AE8CA /* NameCardFormCell.xib */; };
 		983BDD571D093A1C003AE8CA /* SecureCodeFormCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 983BDD591D093A1C003AE8CA /* SecureCodeFormCell.xib */; };
-		985527DF1CE331F700FAB3BD /* OmiseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985527DE1CE331F700FAB3BD /* OmiseCard.swift */; };
-		985527E21CE3370900FAB3BD /* OmiseSDKClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985527E11CE3370900FAB3BD /* OmiseSDKClient.swift */; };
-		985527E41CE3397500FAB3BD /* OmiseToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985527E31CE3397500FAB3BD /* OmiseToken.swift */; };
-		985527E61CE33CA200FAB3BD /* OmiseJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985527E51CE33CA200FAB3BD /* OmiseJsonParser.swift */; };
-		985527E81CE3505300FAB3BD /* OmiseTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985527E71CE3505300FAB3BD /* OmiseTokenRequest.swift */; };
 		986406261CFEA292004BCF51 /* CreditCardPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986406211CFEA292004BCF51 /* CreditCardPopoverController.swift */; };
 		986406301CFEA7E4004BCF51 /* CardCVVTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062A1CFEA7E4004BCF51 /* CardCVVTextField.swift */; };
 		986406311CFEA7E4004BCF51 /* CardExpiryDateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062B1CFEA7E4004BCF51 /* CardExpiryDateTextField.swift */; };
@@ -49,7 +50,6 @@
 		986406471CFEA818004BCF51 /* NameCardFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864063D1CFEA818004BCF51 /* NameCardFormCell.swift */; };
 		986406491CFEA818004BCF51 /* SecureCodeFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864063F1CFEA818004BCF51 /* SecureCodeFormCell.swift */; };
 		987A02CE1CE35D5E0035417A /* OmiseSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225931181CE3210700841B86 /* OmiseSDK.framework */; };
-		987A03011CE486790035417A /* OmiseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A03001CE486790035417A /* OmiseError.swift */; };
 		987A03211CE5B7D70035417A /* OmiseTokenRequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A03201CE5B7D70035417A /* OmiseTokenRequestTest.swift */; };
 		987A03AD1CE5CD450035417A /* Fixtures in Resources */ = {isa = PBXBuildFile; fileRef = 987A03AC1CE5CD450035417A /* Fixtures */; };
 /* End PBXBuildFile section */
@@ -73,6 +73,12 @@
 
 /* Begin PBXFileReference section */
 		14ACEF821D02D641001C5319 /* CardExpiryDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardExpiryDatePicker.swift; path = CreditcardPopoverForm/FormTextFields/CardExpiryDatePicker.swift; sourceTree = "<group>"; };
+		2220F1A31D0FEE85008CD89F /* OmiseCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseCard.swift; sourceTree = "<group>"; };
+		2220F1A41D0FEE85008CD89F /* OmiseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseError.swift; sourceTree = "<group>"; };
+		2220F1A51D0FEE85008CD89F /* OmiseJsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseJsonParser.swift; sourceTree = "<group>"; };
+		2220F1A61D0FEE85008CD89F /* OmiseSDKClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseSDKClient.swift; sourceTree = "<group>"; };
+		2220F1A71D0FEE85008CD89F /* OmiseToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseToken.swift; sourceTree = "<group>"; };
+		2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseTokenRequest.swift; sourceTree = "<group>"; };
 		2225B3531D0FDD63003EB396 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22445FFB1CF41DD300801D0F /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		224460071CF43FF000801D0F /* OmiseJsonParserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseJsonParserTest.swift; sourceTree = "<group>"; };
@@ -119,11 +125,6 @@
 		983BDD761D09474D003AE8CA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CreditCardPopoverController.xib; sourceTree = "<group>"; };
 		983BDD771D094755003AE8CA /* th */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = th; path = th.lproj/CreditCardPopoverController.xib; sourceTree = "<group>"; };
 		983BDD781D094761003AE8CA /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/CreditCardPopoverController.xib; sourceTree = "<group>"; };
-		985527DE1CE331F700FAB3BD /* OmiseCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseCard.swift; path = Tokenizer/OmiseCard.swift; sourceTree = "<group>"; };
-		985527E11CE3370900FAB3BD /* OmiseSDKClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseSDKClient.swift; path = Tokenizer/OmiseSDKClient.swift; sourceTree = "<group>"; };
-		985527E31CE3397500FAB3BD /* OmiseToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseToken.swift; path = Tokenizer/OmiseToken.swift; sourceTree = "<group>"; };
-		985527E51CE33CA200FAB3BD /* OmiseJsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseJsonParser.swift; path = Tokenizer/OmiseJsonParser.swift; sourceTree = "<group>"; };
-		985527E71CE3505300FAB3BD /* OmiseTokenRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseTokenRequest.swift; path = Tokenizer/OmiseTokenRequest.swift; sourceTree = "<group>"; };
 		986406211CFEA292004BCF51 /* CreditCardPopoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreditCardPopoverController.swift; path = CreditcardPopoverForm/CreditCardPopoverController.swift; sourceTree = "<group>"; };
 		9864062A1CFEA7E4004BCF51 /* CardCVVTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardCVVTextField.swift; path = CreditcardPopoverForm/FormTextFields/CardCVVTextField.swift; sourceTree = "<group>"; };
 		9864062B1CFEA7E4004BCF51 /* CardExpiryDateTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardExpiryDateTextField.swift; path = CreditcardPopoverForm/FormTextFields/CardExpiryDateTextField.swift; sourceTree = "<group>"; };
@@ -138,7 +139,6 @@
 		9864063F1CFEA818004BCF51 /* SecureCodeFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecureCodeFormCell.swift; path = CreditcardPopoverForm/FormCells/SecureCodeFormCell.swift; sourceTree = "<group>"; };
 		987A02C91CE35D5E0035417A /* OmiseSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmiseSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		987A02CD1CE35D5E0035417A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		987A03001CE486790035417A /* OmiseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseError.swift; path = Tokenizer/OmiseError.swift; sourceTree = "<group>"; };
 		987A03201CE5B7D70035417A /* OmiseTokenRequestTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseTokenRequestTest.swift; sourceTree = "<group>"; };
 		987A03AC1CE5CD450035417A /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fixtures; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -207,11 +207,15 @@
 				2259314D1CE46E5700841B86 /* CardBrand.swift */,
 				2259314F1CE46F7F00841B86 /* CardNumber.swift */,
 				22445FFB1CF41DD300801D0F /* Globals.swift */,
-				985527E11CE3370900FAB3BD /* OmiseSDKClient.swift */,
+				2220F1A31D0FEE85008CD89F /* OmiseCard.swift */,
+				2220F1A41D0FEE85008CD89F /* OmiseError.swift */,
+				2220F1A51D0FEE85008CD89F /* OmiseJsonParser.swift */,
+				2220F1A61D0FEE85008CD89F /* OmiseSDKClient.swift */,
+				2220F1A71D0FEE85008CD89F /* OmiseToken.swift */,
+				2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */,
 				2225B3531D0FDD63003EB396 /* Assets.xcassets */,
 				9864061F1CFEA0EF004BCF51 /* CreditCardPopOverForm */,
 				981FA5F91D0EDDB0009ECEDC /* Localizable.strings */,
-				985527E01CE331FD00FAB3BD /* TokenRequest */,
 			);
 			path = OmiseSDK;
 			sourceTree = "<group>";
@@ -231,25 +235,11 @@
 			path = ExampleApp;
 			sourceTree = "<group>";
 		};
-		985527E01CE331FD00FAB3BD /* TokenRequest */ = {
-			isa = PBXGroup;
-			children = (
-				985527DE1CE331F700FAB3BD /* OmiseCard.swift */,
-				987A03001CE486790035417A /* OmiseError.swift */,
-				985527E51CE33CA200FAB3BD /* OmiseJsonParser.swift */,
-				985527E31CE3397500FAB3BD /* OmiseToken.swift */,
-				985527E71CE3505300FAB3BD /* OmiseTokenRequest.swift */,
-			);
-			name = TokenRequest;
-			sourceTree = "<group>";
-		};
 		9864061F1CFEA0EF004BCF51 /* CreditCardPopOverForm */ = {
 			isa = PBXGroup;
 			children = (
 				986406211CFEA292004BCF51 /* CreditCardPopoverController.swift */,
 				983BDD4A1D093A09003AE8CA /* CreditCardPopoverController.xib */,
-				986406581CFEA837004BCF51 /* CardBrandImages */,
-				983BDD4A1D093A09003AE8CA /* CreditCardPopOverView.xib */,
 				9864064B1CFEA820004BCF51 /* FormCells */,
 				986406361CFEA7EA004BCF51 /* FormUITextFields */,
 			);
@@ -451,14 +441,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				987A03011CE486790035417A /* OmiseError.swift in Sources */,
-				985527E61CE33CA200FAB3BD /* OmiseJsonParser.swift in Sources */,
-				985527DF1CE331F700FAB3BD /* OmiseCard.swift in Sources */,
 				986406261CFEA292004BCF51 /* CreditCardPopoverController.swift in Sources */,
-				985527E21CE3370900FAB3BD /* OmiseSDKClient.swift in Sources */,
+				2220F1AC1D0FEE85008CD89F /* OmiseSDKClient.swift in Sources */,
+				2220F1AA1D0FEE85008CD89F /* OmiseError.swift in Sources */,
 				986406451CFEA818004BCF51 /* FormHeaderCell.swift in Sources */,
 				986406411CFEA818004BCF51 /* CardNumberFormCell.swift in Sources */,
 				986406351CFEA7E4004BCF51 /* OmiseTextField.swift in Sources */,
+				2220F1AD1D0FEE85008CD89F /* OmiseToken.swift in Sources */,
+				2220F1A91D0FEE85008CD89F /* OmiseCard.swift in Sources */,
 				986406331CFEA7E4004BCF51 /* OmiseFormValidator.swift in Sources */,
 				986406311CFEA7E4004BCF51 /* CardExpiryDateTextField.swift in Sources */,
 				986406341CFEA7E4004BCF51 /* NameOnCardField.swift in Sources */,
@@ -468,9 +458,9 @@
 				986406471CFEA818004BCF51 /* NameCardFormCell.swift in Sources */,
 				986406301CFEA7E4004BCF51 /* CardCVVTextField.swift in Sources */,
 				22445FFC1CF41DD300801D0F /* Globals.swift in Sources */,
+				2220F1AE1D0FEE85008CD89F /* OmiseTokenRequest.swift in Sources */,
+				2220F1AB1D0FEE85008CD89F /* OmiseJsonParser.swift in Sources */,
 				986406321CFEA7E4004BCF51 /* CardNumberTextField.swift in Sources */,
-				985527E81CE3505300FAB3BD /* OmiseTokenRequest.swift in Sources */,
-				985527E41CE3397500FAB3BD /* OmiseToken.swift in Sources */,
 				225931501CE46F7F00841B86 /* CardNumber.swift in Sources */,
 				2259314E1CE46E5700841B86 /* CardBrand.swift in Sources */,
 			);
