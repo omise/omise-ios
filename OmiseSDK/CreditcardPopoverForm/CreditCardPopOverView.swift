@@ -1,6 +1,6 @@
 import UIKit
 
-public protocol CreditCardPopOverViewDelegate {
+public protocol CreditCardPopOverViewDelegate: class {
     func creditCardPopOver(creditCardPopOver: CreditCardPopOverView, didSucceededWithToken token: OmiseToken)
     func creditCardPopOver(creditCardPopOver: CreditCardPopOverView, didFailWithError error: ErrorType)
 }
@@ -44,7 +44,7 @@ public class CreditCardPopOverView: UIViewController {
     
     
     public var appearance: CCPOAppearance
-    public var delegate: CreditCardPopOverViewDelegate?
+    weak public var delegate: CreditCardPopOverViewDelegate?
     public var autoHandleErrorEnabled: Bool = true
     var client: OmiseSDKClient?
     var request: OmiseTokenRequest?
