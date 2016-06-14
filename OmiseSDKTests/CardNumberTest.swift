@@ -3,7 +3,7 @@ import OmiseSDK
 import XCTest
 
 // TODO: More extensive tests.
-class PANUtilsTest: SDKTestCase {
+class CardNumberTest: SDKTestCase {
     func testNormalize() {
         let tests: [String: String] = [
             " 4242 4242-4242 4242 ": "4242424242424242",
@@ -11,7 +11,7 @@ class PANUtilsTest: SDKTestCase {
         ]
         
         tests.forEach { (input, output) in
-            XCTAssertEqual(output, PANUtils.normalize(input))
+            XCTAssertEqual(output, CardNumber.normalize(input))
         }
     }
     
@@ -23,18 +23,18 @@ class PANUtilsTest: SDKTestCase {
         ]
         
         tests.forEach { (brand, number) in
-            XCTAssertEqual(brand, PANUtils.brand(number))
+            XCTAssertEqual(brand, CardNumber.brand(number))
         }
     }
     
     func testLuhn() {
-        XCTAssertTrue(PANUtils.luhn("4242424242424242"))
-        XCTAssertFalse(PANUtils.luhn("4242424242424243"))
+        XCTAssertTrue(CardNumber.luhn("4242424242424242"))
+        XCTAssertFalse(CardNumber.luhn("4242424242424243"))
     }
     
     func testValidate() {
-        XCTAssertTrue(PANUtils.validate(" 4242 4242-4242 4242 "))
-        XCTAssertFalse(PANUtils.validate("4242424242424243"))
-        XCTAssertFalse(PANUtils.validate("1234567812345678"))
+        XCTAssertTrue(CardNumber.validate(" 4242 4242-4242 4242 "))
+        XCTAssertFalse(CardNumber.validate("4242424242424243"))
+        XCTAssertFalse(CardNumber.validate("1234567812345678"))
     }
 }

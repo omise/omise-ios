@@ -1,6 +1,6 @@
 import Foundation
 
-public final class PANUtils {
+public final class CardNumber {
     public static func brand(pan: String) -> CardBrand? {
         return CardBrand.all
             .filter({ (brand) -> Bool in pan.rangeOfString(brand.pattern, options: .RegularExpressionSearch, range: nil, locale: nil) != nil })

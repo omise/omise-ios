@@ -17,16 +17,16 @@
 		224460021CF42DA100801D0F /* OmiseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985527DE1CE331F700FAB3BD /* OmiseCard.swift */; };
 		224460031CF42DA600801D0F /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22445FFB1CF41DD300801D0F /* Globals.swift */; };
 		224460041CF43A1200801D0F /* SDKTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225931561CE4745200841B86 /* SDKTestCase.swift */; };
-		224460051CF43A1500801D0F /* PANUtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225931541CE4743A00841B86 /* PANUtilsTest.swift */; };
+		224460051CF43A1500801D0F /* CardNumberTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225931541CE4743A00841B86 /* CardNumberTest.swift */; };
 		224460081CF43FF000801D0F /* OmiseJsonParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224460071CF43FF000801D0F /* OmiseJsonParserTest.swift */; };
 		2244600A1CF441DC00801D0F /* TokenRequestDelegateDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224460091CF441DC00801D0F /* TokenRequestDelegateDummy.swift */; };
 		224E44EA1D0EBF0D00E558E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224E44EC1D0EBF0D00E558E3 /* Main.storyboard */; };
 		224E44ED1D0EBF1200E558E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224E44EF1D0EBF1200E558E3 /* LaunchScreen.storyboard */; };
 		2259311C1CE3210700841B86 /* OmiseSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 2259311B1CE3210700841B86 /* OmiseSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2259314E1CE46E5700841B86 /* CardBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314D1CE46E5700841B86 /* CardBrand.swift */; };
-		225931501CE46F7F00841B86 /* PANUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314F1CE46F7F00841B86 /* PANUtils.swift */; };
+		225931501CE46F7F00841B86 /* CardNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314F1CE46F7F00841B86 /* CardNumber.swift */; };
 		225931511CE46F8E00841B86 /* CardBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314D1CE46E5700841B86 /* CardBrand.swift */; };
-		225931521CE46F9100841B86 /* PANUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314F1CE46F7F00841B86 /* PANUtils.swift */; };
+		225931521CE46F9100841B86 /* CardNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314F1CE46F7F00841B86 /* CardNumber.swift */; };
 		229E14581D0EBAB5000511DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14541D0EBAB5000511DE /* AppDelegate.swift */; };
 		229E14591D0EBAB5000511DE /* CompletePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14551D0EBAB5000511DE /* CompletePaymentViewController.swift */; };
 		229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */; };
@@ -96,8 +96,8 @@
 		2259311D1CE3210700841B86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2259312D1CE329D800841B86 /* OmiseSDKSlim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OmiseSDKSlim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2259314D1CE46E5700841B86 /* CardBrand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardBrand.swift; sourceTree = "<group>"; };
-		2259314F1CE46F7F00841B86 /* PANUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PANUtils.swift; sourceTree = "<group>"; };
-		225931541CE4743A00841B86 /* PANUtilsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PANUtilsTest.swift; sourceTree = "<group>"; };
+		2259314F1CE46F7F00841B86 /* CardNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumber.swift; sourceTree = "<group>"; };
+		225931541CE4743A00841B86 /* CardNumberTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumberTest.swift; sourceTree = "<group>"; };
 		225931561CE4745200841B86 /* SDKTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKTestCase.swift; sourceTree = "<group>"; };
 		229E14541D0EBAB5000511DE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		229E14551D0EBAB5000511DE /* CompletePaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletePaymentViewController.swift; sourceTree = "<group>"; };
@@ -225,9 +225,9 @@
 				22C0B0EE1CF44D23002E6683 /* Info-Slim.plist */,
 				2259311D1CE3210700841B86 /* Info.plist */,
 				2259314D1CE46E5700841B86 /* CardBrand.swift */,
+				2259314F1CE46F7F00841B86 /* CardNumber.swift */,
 				22445FFB1CF41DD300801D0F /* Globals.swift */,
 				985527E11CE3370900FAB3BD /* OmiseSDKClient.swift */,
-				2259314F1CE46F7F00841B86 /* PANUtils.swift */,
 				9864061F1CFEA0EF004BCF51 /* CreditCardPopOverForm */,
 				981FA5F91D0EDDB0009ECEDC /* Localizable.strings */,
 				985527E01CE331FD00FAB3BD /* TokenRequest */,
@@ -318,7 +318,7 @@
 			children = (
 				987A03AC1CE5CD450035417A /* Fixtures */,
 				987A02CD1CE35D5E0035417A /* Info.plist */,
-				225931541CE4743A00841B86 /* PANUtilsTest.swift */,
+				225931541CE4743A00841B86 /* CardNumberTest.swift */,
 				225931561CE4745200841B86 /* SDKTestCase.swift */,
 				224460061CF43FE300801D0F /* TokenRequest */,
 			);
@@ -530,7 +530,7 @@
 				986406321CFEA7E4004BCF51 /* CardNumberTextField.swift in Sources */,
 				985527E81CE3505300FAB3BD /* OmiseTokenRequest.swift in Sources */,
 				985527E41CE3397500FAB3BD /* OmiseToken.swift in Sources */,
-				225931501CE46F7F00841B86 /* PANUtils.swift in Sources */,
+				225931501CE46F7F00841B86 /* CardNumber.swift in Sources */,
 				2259314E1CE46E5700841B86 /* CardBrand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -542,7 +542,7 @@
 				224460011CF42D9D00801D0F /* OmiseError.swift in Sources */,
 				224460021CF42DA100801D0F /* OmiseCard.swift in Sources */,
 				224460001CF42D9900801D0F /* OmiseJsonParser.swift in Sources */,
-				225931521CE46F9100841B86 /* PANUtils.swift in Sources */,
+				225931521CE46F9100841B86 /* CardNumber.swift in Sources */,
 				22445FFF1CF42D9700801D0F /* OmiseSDKClient.swift in Sources */,
 				22445FFE1CF42D9400801D0F /* OmiseToken.swift in Sources */,
 				22445FFD1CF42D9200801D0F /* OmiseTokenRequest.swift in Sources */,
@@ -569,7 +569,7 @@
 				224460081CF43FF000801D0F /* OmiseJsonParserTest.swift in Sources */,
 				224460041CF43A1200801D0F /* SDKTestCase.swift in Sources */,
 				2244600A1CF441DC00801D0F /* TokenRequestDelegateDummy.swift in Sources */,
-				224460051CF43A1500801D0F /* PANUtilsTest.swift in Sources */,
+				224460051CF43A1500801D0F /* CardNumberTest.swift in Sources */,
 				987A03211CE5B7D70035417A /* OmiseTokenRequestTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
