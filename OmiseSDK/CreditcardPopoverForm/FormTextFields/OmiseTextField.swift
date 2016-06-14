@@ -17,10 +17,6 @@ public class OmiseTextField: UITextField, UITextFieldDelegate {
         setup()
     }
     
-    override public func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     init() {
         super.init(frame: CGRectZero)
         setup()
