@@ -31,9 +31,9 @@ public class CardNumberTextField: OmiseTextField {
     
     override func textField(textField: OmiseTextField, textDidChanged insertedText: String) {
         if insertedText.characters.count > maxLength {
-            cardBrand = PANUtils.brand(insertedText)
-            number = PANUtils.normalize(insertedText)
-            valid = PANUtils.validate(insertedText)
+            cardBrand = CardNumber.brand(insertedText)
+            number = CardNumber.normalize(insertedText)
+            valid = CardNumber.validate(insertedText)
             omiseValidatorDelegate?.textFieldDidValidated(self)
             return
         }
@@ -55,16 +55,16 @@ public class CardNumberTextField: OmiseTextField {
         
         textField.text = cardNumberString
         
-        cardBrand = PANUtils.brand(cardNumberString)
-        number = PANUtils.normalize(cardNumberString)
-        valid = PANUtils.validate(cardNumberString)
+        cardBrand = CardNumber.brand(cardNumberString)
+        number = CardNumber.normalize(cardNumberString)
+        valid = CardNumber.validate(cardNumberString)
         omiseValidatorDelegate?.textFieldDidValidated(self)
     }
     
     override func textField(textField: OmiseTextField, textDidDeleted deletedText: String) {
-        cardBrand = PANUtils.brand(deletedText)
-        number = PANUtils.normalize(deletedText)
-        valid = PANUtils.validate(deletedText)
+        cardBrand = CardNumber.brand(deletedText)
+        number = CardNumber.normalize(deletedText)
+        valid = CardNumber.validate(deletedText)
         omiseValidatorDelegate?.textFieldDidValidated(self)
     }
     
