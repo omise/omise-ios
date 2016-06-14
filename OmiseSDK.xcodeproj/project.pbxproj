@@ -228,9 +228,9 @@
 				22445FFB1CF41DD300801D0F /* Globals.swift */,
 				985527E11CE3370900FAB3BD /* OmiseSDKClient.swift */,
 				2259314F1CE46F7F00841B86 /* PANUtils.swift */,
-				985527E01CE331FD00FAB3BD /* TokenRequest */,
 				9864061F1CFEA0EF004BCF51 /* CreditCardPopOverForm */,
 				981FA5F91D0EDDB0009ECEDC /* Localizable.strings */,
+				985527E01CE331FD00FAB3BD /* TokenRequest */,
 			);
 			path = OmiseSDK;
 			sourceTree = "<group>";
@@ -266,8 +266,8 @@
 			isa = PBXGroup;
 			children = (
 				986406211CFEA292004BCF51 /* CreditCardPopOverView.swift */,
-				983BDD4A1D093A09003AE8CA /* CreditCardPopOverView.xib */,
 				986406581CFEA837004BCF51 /* CardBrandImages */,
+				983BDD4A1D093A09003AE8CA /* CreditCardPopOverView.xib */,
 				9864064B1CFEA820004BCF51 /* FormCells */,
 				986406361CFEA7EA004BCF51 /* FormUITextFields */,
 			);

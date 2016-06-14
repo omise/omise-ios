@@ -16,10 +16,6 @@ public class CardCVVTextField: OmiseTextField {
         setup()
     }
     
-    override public func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     override public init() {
         super.init(frame: CGRectZero)
         setup()

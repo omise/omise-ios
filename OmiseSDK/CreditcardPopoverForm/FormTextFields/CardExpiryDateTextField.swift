@@ -16,10 +16,6 @@ public class CardExpiryDateTextField: OmiseTextField {
         setup()
     }
     
-    override public func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     override init() {
         super.init(frame: CGRectZero)
         setup()

@@ -15,10 +15,6 @@ public class NameOnCardTextField: OmiseTextField {
         setup()
     }
     
-    override public func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     override init() {
         super.init(frame: CGRectZero)
         setup()
