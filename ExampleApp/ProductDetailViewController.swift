@@ -7,7 +7,7 @@ class ProductDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Detail"
+        title = "Product"
     }
     
     // MARK: - Action

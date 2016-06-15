@@ -4,7 +4,7 @@ class ProductViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Product"
+        title = "Home"
         // Do any additional setup after loading the view.
     }
 

@@ -13,14 +13,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="omise_mastercard" translatesAutoresizingMaskIntoConstraints="NO" id="HlL-rc-1lW">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="networkMasterCard" translatesAutoresizingMaskIntoConstraints="NO" id="HlL-rc-1lW">
                         <rect key="frame" x="309" y="40" width="23" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="W0r-zw-P2g"/>
                             <constraint firstAttribute="width" constant="23" id="nRA-G5-Osw"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="omise_visa" translatesAutoresizingMaskIntoConstraints="NO" id="mnp-Ly-NXQ">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="networkVISA" translatesAutoresizingMaskIntoConstraints="NO" id="mnp-Ly-NXQ">
                         <rect key="frame" x="281" y="40" width="20" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="863-6b-RRe"/>
@@ -36,7 +36,7 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="omise_jcb" translatesAutoresizingMaskIntoConstraints="NO" id="dj2-pJ-LaK">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="networkJCB" translatesAutoresizingMaskIntoConstraints="NO" id="dj2-pJ-LaK">
                         <rect key="frame" x="340" y="40" width="20" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="Fz1-5u-Z81"/>
@@ -90,8 +90,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="omise_jcb" width="57" height="43"/>
-        <image name="omise_mastercard" width="61" height="37"/>
-        <image name="omise_visa" width="69" height="45"/>
+        <image name="networkJCB" width="57" height="43"/>
+        <image name="networkMasterCard" width="61" height="37"/>
+        <image name="networkVISA" width="69" height="45"/>
     </resources>
 </document>

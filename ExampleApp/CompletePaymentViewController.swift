@@ -5,6 +5,7 @@ class CompletePaymentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Success"
         navigationItem.hidesBackButton = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .Plain, target: self, action: #selector(closeButtonTapped))
     }

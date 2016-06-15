@@ -88,7 +88,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Dzd-yo-Uzu"/>
                                 </constraints>
-                                <state key="normal" title="320 Bath - Buy now(Display by modal)">
+                                <state key="normal" title="320 Bath - Buy now : Modal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -155,14 +155,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample_product" translatesAutoresizingMaskIntoConstraints="NO" id="T5w-uE-gP9">
-                                <rect key="frame" x="0.0" y="64" width="600" height="336"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample_product2" translatesAutoresizingMaskIntoConstraints="NO" id="aM7-Xy-h95">
-                                <rect key="frame" x="0.0" y="432" width="600" height="168"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_background" translatesAutoresizingMaskIntoConstraints="NO" id="T5w-uE-gP9">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUl-ra-Tdr">
-                                <rect key="frame" x="70" y="408" width="460" height="44"/>
+                                <rect key="frame" x="70" y="436" width="460" height="44"/>
                                 <color key="backgroundColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="MMM-c3-Mxv"/>
@@ -183,17 +180,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="rUl-ra-Tdr" firstAttribute="top" secondItem="T5w-uE-gP9" secondAttribute="bottom" constant="8" id="0CJ-kU-R5B"/>
-                            <constraint firstItem="aM7-Xy-h95" firstAttribute="top" secondItem="T5w-uE-gP9" secondAttribute="bottom" constant="32" id="6X0-2W-gKU"/>
                             <constraint firstItem="T5w-uE-gP9" firstAttribute="top" secondItem="KGM-KT-bUC" secondAttribute="top" constant="64" id="6gL-y2-Xp3"/>
-                            <constraint firstItem="aM7-Xy-h95" firstAttribute="leading" secondItem="KGM-KT-bUC" secondAttribute="leading" id="AAm-bv-5yb"/>
                             <constraint firstAttribute="trailing" secondItem="rUl-ra-Tdr" secondAttribute="trailing" constant="70" id="AHz-PW-nu1"/>
                             <constraint firstItem="rUl-ra-Tdr" firstAttribute="leading" secondItem="KGM-KT-bUC" secondAttribute="leading" constant="70" id="BPY-N9-b5V"/>
-                            <constraint firstItem="J6v-sz-tEZ" firstAttribute="top" secondItem="aM7-Xy-h95" secondAttribute="bottom" id="btk-Ai-b95"/>
+                            <constraint firstItem="J6v-sz-tEZ" firstAttribute="top" secondItem="rUl-ra-Tdr" secondAttribute="bottom" constant="120" id="QCE-9L-8k2"/>
                             <constraint firstItem="T5w-uE-gP9" firstAttribute="leading" secondItem="KGM-KT-bUC" secondAttribute="leading" id="eci-rc-Ufa"/>
-                            <constraint firstAttribute="trailing" secondItem="aM7-Xy-h95" secondAttribute="trailing" id="h7b-7i-8Jm"/>
-                            <constraint firstItem="J6v-sz-tEZ" firstAttribute="top" secondItem="T5w-uE-gP9" secondAttribute="bottom" constant="200" id="jtl-kl-kby"/>
+                            <constraint firstItem="J6v-sz-tEZ" firstAttribute="top" secondItem="T5w-uE-gP9" secondAttribute="bottom" id="jtl-kl-kby"/>
                             <constraint firstAttribute="trailing" secondItem="T5w-uE-gP9" secondAttribute="trailing" id="wtb-TK-MxJ"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="0CJ-kU-R5B"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="Dzp-87-JkD"/>
                     <connections>
@@ -301,8 +300,7 @@
     </scenes>
     <resources>
         <image name="completed" width="135" height="135"/>
+        <image name="home_background" width="751" height="1206"/>
         <image name="product" width="226" height="150"/>
-        <image name="sample_product" width="225" height="268"/>
-        <image name="sample_product2" width="222" height="83"/>
     </resources>
 </document>
