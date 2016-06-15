@@ -5,7 +5,7 @@ public final class CardExpiryDatePicker: UIPickerView {
     private let yearPicker = 1
     public var month: Int = 0
     public var year: Int = 0
-    private let maximumYear = 20
+    private let maximumYear = 21
     private let months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
     private var years = [Int]()
     public var onDateSelected: ((month: Int, year: Int) -> ())?
