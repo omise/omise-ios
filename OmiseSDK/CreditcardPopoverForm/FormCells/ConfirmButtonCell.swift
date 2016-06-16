@@ -7,10 +7,11 @@ public class ConfirmButtonCell: UITableViewCell {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     public override func awakeFromNib() {
+        super.awakeFromNib()
         confirmPaymentLabel.textColor = UIColor.lightGrayColor()
         userInteractionEnabled = false
-        self.preservesSuperviewLayoutMargins = false
-        self.layoutMargins = UIEdgeInsetsZero
+        preservesSuperviewLayoutMargins = false
+        layoutMargins = UIEdgeInsetsZero
     }
     
     func setInteractionEnabled(enabled: Bool) {

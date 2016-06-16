@@ -6,7 +6,8 @@ public class SecureCodeFormCell: UITableViewCell {
     @IBOutlet weak var textField: CardCVVTextField!
     
     public override func awakeFromNib() {
-        self.preservesSuperviewLayoutMargins = false
-        self.layoutMargins = UIEdgeInsetsZero
+        super.awakeFromNib()
+        preservesSuperviewLayoutMargins = false
+        layoutMargins = UIEdgeInsetsZero
     }
 }

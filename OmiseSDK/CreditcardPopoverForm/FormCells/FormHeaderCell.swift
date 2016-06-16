@@ -10,8 +10,8 @@ public class FormHeaderCell: UITableViewCell {
     
     public override func awakeFromNib() {
         super.awakeFromNib()
-        self.preservesSuperviewLayoutMargins = false
-        self.layoutMargins = UIEdgeInsetsZero
+        preservesSuperviewLayoutMargins = false
+        layoutMargins = UIEdgeInsetsZero
     }
     
     func setCardBrand(cardBrand: CardBrand?) {

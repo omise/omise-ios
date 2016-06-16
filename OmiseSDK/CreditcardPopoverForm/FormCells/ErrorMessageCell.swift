@@ -6,8 +6,9 @@ public class ErrorMessageCell: UITableViewCell {
     @IBOutlet weak var errorMessageLabel: UILabel!
     
     public override func awakeFromNib() {
-        self.preservesSuperviewLayoutMargins = false
-        self.layoutMargins = UIEdgeInsetsZero
+        super.awakeFromNib()
+        preservesSuperviewLayoutMargins = false
+        layoutMargins = UIEdgeInsetsZero
     }
         
     func setErrorMessage(message: String) {

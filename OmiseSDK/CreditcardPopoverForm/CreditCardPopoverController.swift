@@ -6,44 +6,17 @@ public protocol CreditCardPopoverDelegate: class {
 }
 
 public class CreditCardPopoverController: UIViewController {
-    public struct CCPOAppearance {
-        let defaultTitleColor: UIColor
-        let defaultNavigationBarColor: UIColor
-        let defaultBackgroundColor: UIColor
-        let defaultShadowOpacity: CGFloat
-        let defaultButtonDisableBackgroundColor: UIColor
-        let defaultButtonBackgroundColor: UIColor
-        let defaultButtonTextColor: UIColor
-        
-        public init(defaultTitleColor: UIColor = UIColor.blackColor(),
-                    defaultNavigationBarColor: UIColor = UIColor.whiteColor(),
-                    defaultBackgroundColor: UIColor = UIColor(red:239/255, green:239/255, blue:244/255, alpha:1),
-                    defaultShadowOpacity: CGFloat = 1.0,
-                    defaultButtonDisableBackgroundColor: UIColor = UIColor.lightGrayColor(),
-                    defaultButtonBackgroundColor: UIColor = UIColor(red: 74/255, green: 144/255, blue: 226/255, alpha: 1.0),
-                    defaultButtonTextColor: UIColor = UIColor.whiteColor()
-                    ) {
-            self.defaultTitleColor = defaultTitleColor
-            self.defaultNavigationBarColor = defaultNavigationBarColor
-            self.defaultBackgroundColor = defaultBackgroundColor
-            self.defaultShadowOpacity = defaultShadowOpacity
-            self.defaultButtonDisableBackgroundColor = defaultButtonDisableBackgroundColor
-            self.defaultButtonBackgroundColor = defaultButtonBackgroundColor
-            self.defaultButtonTextColor = defaultButtonTextColor
-        }
-    }
-    
     @IBOutlet weak public var navigationBarView: UIView!
     @IBOutlet weak public var navigationBarTitleLabel: UILabel!
     @IBOutlet weak public var formTableView: UITableView!
     
-    public var appearance: CCPOAppearance
+    var client: OmiseSDKClient
+    var request: OmiseTokenRequest?
     weak public var delegate: CreditCardPopoverDelegate?
     public var autoHandleErrorEnabled: Bool = true
-    var client: OmiseSDKClient?
-    var request: OmiseTokenRequest?
-    private let formButtonTopConstraintSize: CGFloat = 24
-    private let formButtonTopConstraintExpandSize: CGFloat = 100    
+    public var titleColor = UIColor.blackColor()
+    public var navigationBarColor = UIColor.whiteColor()
+       
     private let formCells = [FormHeaderCell.identifier, CardNumberFormCell.identifier, NameCardFormCell.identifier, ExpiryDateFormCell.identifier, SecureCodeFormCell.identifier, ErrorMessageCell.identifier, ConfirmButtonCell.identifier]
     private let defaultCellHeight: CGFloat = 44.0
     private var formFields = [OmiseTextField]()
@@ -83,13 +56,6 @@ public class CreditCardPopoverController: UIViewController {
     // MARK: Initial
     public init(client: OmiseSDKClient) {
         self.client = client
-        appearance = CCPOAppearance()
-        super.init(nibName: "CreditCardPopoverController", bundle: NSBundle(forClass: CreditCardPopoverController.self))
-    }
-    
-    public init(client: OmiseSDKClient, appearance: CCPOAppearance) {
-        self.client = client
-        self.appearance = appearance
         super.init(nibName: "CreditCardPopoverController", bundle: NSBundle(forClass: CreditCardPopoverController.self))
     }
     
@@ -101,12 +67,10 @@ public class CreditCardPopoverController: UIViewController {
         // Setup Appearance
         title = NSLocalizedString("Credit Card Form", tableName: nil, bundle: NSBundle(forClass: CreditCardPopoverController.self), value: "", comment: "")
         modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
-        view.backgroundColor = appearance.defaultBackgroundColor
-        view.backgroundColor?.colorWithAlphaComponent(appearance.defaultShadowOpacity)
 
         // Naviagtionbar Title and Navigationbar
-        navigationBarTitleLabel.textColor = appearance.defaultTitleColor
-        navigationBarView.backgroundColor = appearance.defaultNavigationBarColor
+        navigationBarTitleLabel.textColor = titleColor
+        navigationBarView.backgroundColor = navigationBarColor
         
         // TableView
         formTableView.delegate = self
@@ -194,12 +158,7 @@ public class CreditCardPopoverController: UIViewController {
             expirationYear: expirationYear(),
             securityCode: cvv()
         )
-        
-        guard let client = client else {
-            OMSFormWarn("OMISE Client is empty.")
-            return
-        }
-        
+
         guard let request = request else {
             OMSFormWarn("OMISE Request is empty.")
             return
@@ -292,19 +251,13 @@ extension CreditCardPopoverController: UITableViewDataSource {
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let identifier = formCells[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
-        
-        if cell.isKindOfClass(FormHeaderCell) {
-            if let headerCell = cell as? FormHeaderCell {
-                self.formHeaderCell = headerCell
-            }
-        } else if cell.isKindOfClass(ErrorMessageCell) {
-            if let errorMessageCell = cell as? ErrorMessageCell {
-                self.errorMessageCell = errorMessageCell
-            }
-        } else if cell.isKindOfClass(ConfirmButtonCell) {
-            if let confirmButtonCell = cell as? ConfirmButtonCell {
-                self.confirmButtonCell = confirmButtonCell
-            }
+
+        if let headerCell = cell as? FormHeaderCell {
+            self.formHeaderCell = headerCell
+        } else if let errorMessageCell = cell as? ErrorMessageCell {
+            self.errorMessageCell = errorMessageCell
+        } else if let confirmButtonCell = cell as? ConfirmButtonCell {
+            self.confirmButtonCell = confirmButtonCell
         }
         
         return cell
@@ -334,11 +287,8 @@ extension CreditCardPopoverController: UITableViewDelegate {
 // MARK: - OmiseFormValidatorDelegate
 extension CreditCardPopoverController: OmiseFormValidatorDelegate {
     public func textFieldDidValidated(textField: OmiseTextField) {
-        if OmiseFormValidator.validateForms(formFields) {
-            confirmButtonCell?.setInteractionEnabled(true)
-        } else {
-            confirmButtonCell?.setInteractionEnabled(false)
-        }
+        let valid = OmiseFormValidator.validateForms(formFields)
+        confirmButtonCell?.setInteractionEnabled(valid)
         
         if textField.isKindOfClass(CardNumberTextField) {
             let cardField = textField as! CardNumberTextField
