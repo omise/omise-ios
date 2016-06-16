@@ -1,13 +1,13 @@
 import Foundation
 
-let OmiseErrorDomain = "co.omise"
+public let OmiseErrorDomain = "co.omise"
 
 public enum OmiseErrorUserInfoKey: String {
     case Location = "location"
     case Code = "code"
     case Message = "message"
     
-    var nsString: NSString {
+    public var nsString: NSString {
         return rawValue as NSString
     }
 }
@@ -16,7 +16,7 @@ public enum OmiseError: ErrorType {
     case API(code: String, message: String, location: String)
     case Unexpected(message: String, underlying: ErrorType?)
     
-    var nsError: NSError {
+    public var nsError: NSError {
         switch self {
         case .API(let code, let message, let location):
             return NSError(domain: OmiseErrorDomain, code: code.hashValue, userInfo: [

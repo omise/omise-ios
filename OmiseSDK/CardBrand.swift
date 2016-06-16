@@ -1,7 +1,7 @@
 import Foundation
 
 public enum CardBrand {
-    static let all: [CardBrand] = [
+    public static let all: [CardBrand] = [
         AMEX,
         Diners,
         JCB,
@@ -21,7 +21,7 @@ public enum CardBrand {
     case Maestro
     case Discover
     
-    var pattern: String {
+    public var pattern: String {
         switch self {
         case .AMEX:
             return "^3[47]"
@@ -42,7 +42,7 @@ public enum CardBrand {
         }
     }
     
-    var validLengths: ClosedInterval<Int> {
+    public var validLengths: ClosedInterval<Int> {
         switch self {
         case .AMEX:
             return 15...15
