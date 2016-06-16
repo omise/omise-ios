@@ -7,15 +7,13 @@ public class FormHeaderCell: UITableViewCell {
     @IBOutlet weak var card_mastercard: UIImageView!
     @IBOutlet weak var card_jcb: UIImageView!
     @IBOutlet weak var headerLabel: UILabel!
-    @IBOutlet weak var topLineHeight: NSLayoutConstraint!
-    @IBOutlet weak var bottomLineHeight: NSLayoutConstraint!
     
-    override public func awakeFromNib() {
+    public override func awakeFromNib() {
         super.awakeFromNib()
-        topLineHeight.constant = 0.5
-        bottomLineHeight.constant = 0.5
+        self.preservesSuperviewLayoutMargins = false
+        self.layoutMargins = UIEdgeInsetsZero
     }
-
+    
     func setCardBrand(cardBrand: CardBrand?) {
         guard let cardBrand = cardBrand else {
             card_visa.alpha = 1.0
