@@ -32,7 +32,7 @@ public class CardCVVTextField: OmiseTextField {
         } else {
             valid = false
         }
-        omiseValidatorDelegate?.textFieldDidValidated(self)
+        validationDelegate?.textField(self, didChangeValidity: valid)
     }
     
     override func textField(textField: OmiseTextField, textDidChanged insertedText: String) {

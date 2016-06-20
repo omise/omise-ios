@@ -33,7 +33,7 @@ public class CardExpiryDateTextField: OmiseTextField {
             self.expirationMonth = month
             self.expirationYear = year
             self.checkValidFromPicker()
-            self.omiseValidatorDelegate?.textFieldDidValidated(self)
+            self.validationDelegate?.textField(self, didChangeValidity: self.valid)
         }
         inputView = expiryDatePicker
     }
@@ -41,7 +41,7 @@ public class CardExpiryDateTextField: OmiseTextField {
     override func textField(textField: OmiseTextField, textDidChanged insertedText: String) {
         if insertedText.characters.count > maxLength {
             checkValidFromTextDidChanged(insertedText)
-            omiseValidatorDelegate?.textFieldDidValidated(self)
+            validationDelegate?.textField(self, didChangeValidity: valid)
             return
         }
         
@@ -62,12 +62,12 @@ public class CardExpiryDateTextField: OmiseTextField {
         
         textField.text = cardExpiryDateString
         checkValidFromTextDidChanged(textField.text)
-        omiseValidatorDelegate?.textFieldDidValidated(self)
+        validationDelegate?.textField(self, didChangeValidity: valid)
     }
     
     override func textField(textField: OmiseTextField, textDidDeleted deletedText: String) {
         checkValidFromTextDidChanged(deletedText)
-        omiseValidatorDelegate?.textFieldDidValidated(self)
+        validationDelegate?.textField(self, didChangeValidity: valid)
     }
 
     private func checkValidFromPicker() {
