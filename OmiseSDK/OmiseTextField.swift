@@ -2,11 +2,11 @@ import Foundation
 import UIKit
 
 public class OmiseTextField: UITextField, UITextFieldDelegate {
-    public var omiseValidatorDelegate: OmiseFormValidatorDelegate?
     private var previousText: String?
     var valid = false
     
-    // MARK: Initial
+    public var omiseValidatorDelegate: OmiseFormValidatorDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -22,7 +22,6 @@ public class OmiseTextField: UITextField, UITextFieldDelegate {
         setup()
     }
     
-    // MARK: Setup
     private func setup() {
         delegate = self
         addTarget(self, action: #selector(OmiseTextField.textChanged), forControlEvents: .EditingChanged)
@@ -51,7 +50,6 @@ public class OmiseTextField: UITextField, UITextFieldDelegate {
         }
     }
         
-    // MARK: UITextFieldDelegate
     public func textFieldDidBeginEditing(textField: UITextField) {
         textField.textColor = UIColor.blackColor()
     }

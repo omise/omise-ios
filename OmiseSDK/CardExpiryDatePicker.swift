@@ -1,16 +1,16 @@
 import Foundation
 
 public final class CardExpiryDatePicker: UIPickerView {
+    private let maximumYear = 21
     private let monthPicker = 0
     private let yearPicker = 1
-    public var month: Int = 0
-    public var year: Int = 0
-    private let maximumYear = 21
     private let months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
     private var years = [Int]()
-    public var onDateSelected: ((month: Int, year: Int) -> ())?
     
-    // MARK: Setup
+    public var onDateSelected: ((month: Int, year: Int) -> ())?
+    public var month: Int = 0
+    public var year: Int = 0
+    
     override public init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -37,7 +37,6 @@ public final class CardExpiryDatePicker: UIPickerView {
     }
 }
 
-// MARK: - UIPickerViewDataSource
 extension CardExpiryDatePicker: UIPickerViewDataSource {
     public func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 2
@@ -55,7 +54,6 @@ extension CardExpiryDatePicker: UIPickerViewDataSource {
     }
 }
 
-// MARK: - UIPickerViewDataSource
 extension CardExpiryDatePicker: UIPickerViewDelegate {
     public func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch component {

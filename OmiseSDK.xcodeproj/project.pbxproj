@@ -548,7 +548,6 @@
 				982237D21D1178F500D266F3 /* ja */,
 			);
 			name = ConfirmButtonCell.xib;
-			path = CreditcardPopoverForm/FormCells;
 			sourceTree = "<group>";
 		};
 		983BDD4A1D093A09003AE8CA /* CreditCardPopoverController.xib */ = {
@@ -559,7 +558,6 @@
 				982237DD1D117CBE00D266F3 /* ja */,
 			);
 			name = CreditCardPopoverController.xib;
-			path = CreditcardPopoverForm;
 			sourceTree = "<group>";
 		};
 		983BDD4D1D093A0F003AE8CA /* CardNumberFormCell.xib */ = {
@@ -570,7 +568,6 @@
 				983BDD671D093CF8003AE8CA /* Base */,
 			);
 			name = CardNumberFormCell.xib;
-			path = CreditcardPopoverForm/FormCells;
 			sourceTree = "<group>";
 		};
 		983BDD501D093A12003AE8CA /* ExpiryDateFormCell.xib */ = {
@@ -581,7 +578,6 @@
 				983BDD681D093CF8003AE8CA /* Base */,
 			);
 			name = ExpiryDateFormCell.xib;
-			path = CreditcardPopoverForm/FormCells;
 			sourceTree = "<group>";
 		};
 		983BDD531D093A15003AE8CA /* FormHeaderCell.xib */ = {
@@ -592,7 +588,6 @@
 				982237D41D1179C700D266F3 /* ja */,
 			);
 			name = FormHeaderCell.xib;
-			path = CreditcardPopoverForm/FormCells;
 			sourceTree = "<group>";
 		};
 		983BDD561D093A19003AE8CA /* NameCardFormCell.xib */ = {
@@ -603,7 +598,6 @@
 				983BDD6A1D093CF8003AE8CA /* Base */,
 			);
 			name = NameCardFormCell.xib;
-			path = CreditcardPopoverForm/FormCells;
 			sourceTree = "<group>";
 		};
 		983BDD591D093A1C003AE8CA /* SecureCodeFormCell.xib */ = {
@@ -614,7 +608,6 @@
 				983BDD6B1D093CF8003AE8CA /* Base */,
 			);
 			name = SecureCodeFormCell.xib;
-			path = CreditcardPopoverForm/FormCells;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

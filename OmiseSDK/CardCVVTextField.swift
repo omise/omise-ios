@@ -2,10 +2,9 @@ import Foundation
 import UIKit
 
 public class CardCVVTextField: OmiseTextField {
-    var cvv: String = ""
     private let maxLength = 3
+    var cvv: String = ""
     
-    // MARK: Initial
     override public init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -21,7 +20,6 @@ public class CardCVVTextField: OmiseTextField {
         setup()
     }
     
-    // MARK: Setup
     func setup() {
         keyboardType = .NumberPad
         placeholder = "123"

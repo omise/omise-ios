@@ -2,14 +2,14 @@ import Foundation
 import UIKit
 
 public class CardExpiryDateTextField: OmiseTextField {
-    var expirationMonth: Int?
-    var expirationYear: Int?
     private let separator = "/"
     private let splitLength = 2
     private let maxLength = 4
     private let maxCreditCardAge = 21
     
-    // MARK: Initial
+    var expirationMonth: Int?
+    var expirationYear: Int?
+    
     override public init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -25,7 +25,6 @@ public class CardExpiryDateTextField: OmiseTextField {
         setup()
     }
     
-    // MARK: Setup
     func setup() {
         placeholder = "MM/YY"
         let expiryDatePicker = CardExpiryDatePicker()
@@ -71,7 +70,6 @@ public class CardExpiryDateTextField: OmiseTextField {
         omiseValidatorDelegate?.textFieldDidValidated(self)
     }
 
-    // MARK: Validator
     private func checkValidFromPicker() {
         valid = false
         guard let month = expirationMonth else { return }
@@ -132,7 +130,6 @@ public class CardExpiryDateTextField: OmiseTextField {
         }
     }
     
-    // MARK: UITextFieldDelegate
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if string == separator{
             return false
