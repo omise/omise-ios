@@ -1,8 +1,6 @@
 import UIKit
 
 public class FormHeaderCell: UITableViewCell {
-    public static let identifier = "FormHeaderCell"
-    public static let cellHeight:CGFloat = 64
     @IBOutlet weak var card_visa: UIImageView!
     @IBOutlet weak var card_mastercard: UIImageView!
     @IBOutlet weak var card_jcb: UIImageView!

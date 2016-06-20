@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		143E0AE11D13B0DD002B6922 /* OmiseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E0AE01D13B0DD002B6922 /* OmiseTableViewCell.swift */; };
 		14ACEF831D02D641001C5319 /* CardExpiryDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACEF821D02D641001C5319 /* CardExpiryDatePicker.swift */; };
 		2220F1A91D0FEE85008CD89F /* OmiseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A31D0FEE85008CD89F /* OmiseCard.swift */; };
 		2220F1AA1D0FEE85008CD89F /* OmiseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A41D0FEE85008CD89F /* OmiseError.swift */; };
@@ -59,6 +60,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		982238061D141B4200D266F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2259310F1CE3210700841B86 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 225931171CE3210700841B86;
+			remoteInfo = OmiseSDK;
+		};
 		987A02CF1CE35D5E0035417A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2259310F1CE3210700841B86 /* Project object */;
@@ -69,6 +77,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		143E0AE01D13B0DD002B6922 /* OmiseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseTableViewCell.swift; path = CreditcardPopoverForm/FormCells/OmiseTableViewCell.swift; sourceTree = "<group>"; };
 		14ACEF821D02D641001C5319 /* CardExpiryDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardExpiryDatePicker.swift; path = CreditcardPopoverForm/FormTextFields/CardExpiryDatePicker.swift; sourceTree = "<group>"; };
 		2220F1A31D0FEE85008CD89F /* OmiseCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseCard.swift; sourceTree = "<group>"; };
 		2220F1A41D0FEE85008CD89F /* OmiseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseError.swift; sourceTree = "<group>"; };
@@ -279,6 +288,7 @@
 				982237C51D1174D300D266F3 /* ConfirmButtonCell.xib */,
 				982237BF1D115BD400D266F3 /* ErrorMessageCell.swift */,
 				982237C01D115BD400D266F3 /* ErrorMessageCell.xib */,
+				143E0AE01D13B0DD002B6922 /* OmiseTableViewCell.swift */,
 			);
 			name = FormCells;
 			sourceTree = "<group>";
@@ -338,6 +348,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				982238071D141B4200D266F3 /* PBXTargetDependency */,
 			);
 			name = ExampleApp;
 			productName = ExampleApp;
@@ -450,6 +461,7 @@
 			files = (
 				982237C11D115BD400D266F3 /* ErrorMessageCell.swift in Sources */,
 				986406261CFEA292004BCF51 /* CreditCardPopoverController.swift in Sources */,
+				143E0AE11D13B0DD002B6922 /* OmiseTableViewCell.swift in Sources */,
 				2220F1AC1D0FEE85008CD89F /* OmiseSDKClient.swift in Sources */,
 				2220F1AA1D0FEE85008CD89F /* OmiseError.swift in Sources */,
 				986406451CFEA818004BCF51 /* FormHeaderCell.swift in Sources */,
@@ -501,6 +513,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		982238071D141B4200D266F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 225931171CE3210700841B86 /* OmiseSDK */;
+			targetProxy = 982238061D141B4200D266F3 /* PBXContainerItemProxy */;
+		};
 		987A02D01CE35D5E0035417A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 225931171CE3210700841B86 /* OmiseSDK */;

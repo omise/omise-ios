@@ -1,8 +1,6 @@
 import UIKit
 
-public class ErrorMessageCell: UITableViewCell {
-    public static let identifier = "ErrorMessageCell"
-    public static let cellHeight:CGFloat = 28
+public class ErrorMessageCell: UITableViewCell {    
     @IBOutlet weak var errorMessageLabel: UILabel!
     
     public override func awakeFromNib() {

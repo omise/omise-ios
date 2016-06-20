@@ -1,8 +1,6 @@
 import UIKit
 
 public class ConfirmButtonCell: UITableViewCell {
-    public static let identifier = "ConfirmButtonCell"
-    
     @IBOutlet weak var confirmPaymentLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     

@@ -14,8 +14,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有効期限" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sc6-5i-EDM">
-                        <rect key="frame" x="15" y="8" width="119" height="27"/>
+                        <rect key="frame" x="15" y="0.0" width="119" height="43"/>
                         <constraints>
+                            <constraint firstAttribute="height" constant="43" id="fuD-Hr-9kX"/>
                             <constraint firstAttribute="width" constant="119" id="uk7-cM-kZi"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -24,6 +25,9 @@
                     </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MM/YY" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iQS-oq-g3a" customClass="CardExpiryDateTextField" customModule="OmiseSDK" customModuleProvider="target">
                         <rect key="frame" x="142" y="7" width="225" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" priority="750" constant="225" id="B0R-Ov-XbC"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     </textField>
@@ -31,12 +35,17 @@
                 <constraints>
                     <constraint firstItem="iQS-oq-g3a" firstAttribute="leading" secondItem="sc6-5i-EDM" secondAttribute="trailing" constant="8" id="4s4-EV-aez"/>
                     <constraint firstAttribute="trailing" secondItem="iQS-oq-g3a" secondAttribute="trailing" constant="8" id="9hi-1t-0vP"/>
-                    <constraint firstAttribute="bottom" secondItem="sc6-5i-EDM" secondAttribute="bottom" constant="8" id="KKg-UE-9Hr"/>
+                    <constraint firstAttribute="bottom" secondItem="sc6-5i-EDM" secondAttribute="bottom" id="KKg-UE-9Hr"/>
                     <constraint firstItem="iQS-oq-g3a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="L8a-Bn-j5D"/>
                     <constraint firstItem="sc6-5i-EDM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Nmn-i6-2aq"/>
                     <constraint firstAttribute="bottom" secondItem="iQS-oq-g3a" secondAttribute="bottom" constant="6" id="f9k-lD-ErF"/>
-                    <constraint firstItem="sc6-5i-EDM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="nTg-vf-ChZ"/>
+                    <constraint firstItem="sc6-5i-EDM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="nTg-vf-ChZ"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="9hi-1t-0vP"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="textField" destination="iQS-oq-g3a" id="sTU-x3-4NH"/>

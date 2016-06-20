@@ -14,7 +14,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カード名義人" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qAL-sy-1cC">
-                        <rect key="frame" x="15" y="8" width="119" height="27"/>
+                        <rect key="frame" x="15" y="0.0" width="119" height="43"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="119" id="1uh-Gz-UKr"/>
                         </constraints>
@@ -24,19 +24,28 @@
                     </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="John Doe" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ouF-SF-xc2" customClass="NameOnCardTextField" customModule="OmiseSDK" customModuleProvider="target">
                         <rect key="frame" x="142" y="7" width="225" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" priority="750" constant="225" id="JMg-Wv-Axq"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="ouF-SF-xc2" secondAttribute="trailing" constant="8" id="9Ov-yy-pOL"/>
-                    <constraint firstItem="qAL-sy-1cC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="AYe-Ns-Eik"/>
+                    <constraint firstItem="qAL-sy-1cC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="AYe-Ns-Eik"/>
                     <constraint firstAttribute="bottom" secondItem="ouF-SF-xc2" secondAttribute="bottom" constant="6" id="Erg-3w-XOX"/>
+                    <constraint firstAttribute="trailing" secondItem="ouF-SF-xc2" secondAttribute="trailing" priority="751" constant="8" id="Hli-KH-cXP"/>
                     <constraint firstItem="ouF-SF-xc2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="P30-fl-RpW"/>
                     <constraint firstItem="ouF-SF-xc2" firstAttribute="leading" secondItem="qAL-sy-1cC" secondAttribute="trailing" constant="8" id="YWg-9q-epS"/>
-                    <constraint firstAttribute="bottom" secondItem="qAL-sy-1cC" secondAttribute="bottom" constant="8" id="jbb-Fa-VkY"/>
+                    <constraint firstAttribute="bottom" secondItem="qAL-sy-1cC" secondAttribute="bottom" id="jbb-Fa-VkY"/>
                     <constraint firstItem="qAL-sy-1cC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="lNV-FI-PXZ"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="9Ov-yy-pOL"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="textField" destination="ouF-SF-xc2" id="wmw-Id-pYr"/>

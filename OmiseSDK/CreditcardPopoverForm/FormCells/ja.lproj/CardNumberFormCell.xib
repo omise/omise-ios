@@ -14,29 +14,39 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カードナンバー" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZdF-Rj-PUR">
-                        <rect key="frame" x="15" y="8" width="119" height="27"/>
+                        <rect key="frame" x="15" y="0.0" width="119" height="43"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="119" id="TE7-BT-sPh"/>
+                            <constraint firstAttribute="height" constant="43" id="p2c-EZ-OB8"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="1234 5678 9012 3456" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YGd-cp-070" customClass="CardNumberTextField" customModule="OmiseSDK" customModuleProvider="target">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="1234 5678 9012 3456" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YGd-cp-070" customClass="CardNumberTextField" customModule="OmiseSDK" customModuleProvider="target">
                         <rect key="frame" x="142" y="7" width="225" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="VaH-KM-YyA"/>
+                            <constraint firstAttribute="width" priority="750" constant="225" id="fJt-iu-uvg"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="ZdF-Rj-PUR" secondAttribute="bottom" constant="8" id="APX-bC-0rW"/>
+                    <constraint firstAttribute="bottom" secondItem="ZdF-Rj-PUR" secondAttribute="bottom" id="APX-bC-0rW"/>
                     <constraint firstItem="YGd-cp-070" firstAttribute="leading" secondItem="ZdF-Rj-PUR" secondAttribute="trailing" constant="8" id="CQ6-CV-LB8"/>
                     <constraint firstItem="ZdF-Rj-PUR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="bPt-Pd-QVg"/>
-                    <constraint firstItem="ZdF-Rj-PUR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="ecZ-xa-Iby"/>
+                    <constraint firstItem="ZdF-Rj-PUR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ecZ-xa-Iby"/>
                     <constraint firstItem="YGd-cp-070" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="llE-a0-kfQ"/>
                     <constraint firstAttribute="trailing" secondItem="YGd-cp-070" secondAttribute="trailing" constant="8" id="ssW-Bu-eNb"/>
                     <constraint firstAttribute="bottom" secondItem="YGd-cp-070" secondAttribute="bottom" constant="6" id="xhC-CY-Pwb"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="ssW-Bu-eNb"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="textField" destination="YGd-cp-070" id="vQf-TO-StR"/>

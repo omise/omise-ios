@@ -6,40 +6,47 @@ public protocol CreditCardPopoverDelegate: class {
 }
 
 public class CreditCardPopoverController: UIViewController {
-    @IBOutlet weak public var navigationBarView: UIView!
-    @IBOutlet weak public var navigationBarTitleLabel: UILabel!
     @IBOutlet weak public var formTableView: UITableView!
     
     var client: OmiseSDKClient
     var request: OmiseTokenRequest?
     weak public var delegate: CreditCardPopoverDelegate?
-    public var autoHandleErrorEnabled: Bool = true
+    public var autoHandleErrorEnabled = true
     public var titleColor = UIColor.blackColor()
     public var navigationBarColor = UIColor.whiteColor()
-       
-    private let formCells = [FormHeaderCell.identifier, CardNumberFormCell.identifier, NameCardFormCell.identifier, ExpiryDateFormCell.identifier, SecureCodeFormCell.identifier, ErrorMessageCell.identifier, ConfirmButtonCell.identifier]
+    public var showCloseButton = true
+    
+    private var formCells:[UITableViewCell] = []
+    
+    private let formCellsType = [
+        FormHeaderCell.self,
+        CardNumberFormCell.self,
+        NameCardFormCell.self,
+        ExpiryDateFormCell.self,
+        SecureCodeFormCell.self,
+        ErrorMessageCell.self,
+        ConfirmButtonCell.self
+    ]
+
     private let defaultCellHeight: CGFloat = 44.0
     private var formFields = [OmiseTextField]()
     private var formHeaderCell: FormHeaderCell?
     private var errorMessageCell: ErrorMessageCell?
     private var confirmButtonCell: ConfirmButtonCell?
     private var hasErrorMessage = false
-    private var errorMessageCellHeight = ErrorMessageCell.cellHeight
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
     
+    override public func viewDidDisappear(animated: Bool) {
+        NSNotificationCenter().removeObserver(self)
+    }
+    
     public override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if isMovingToParentViewController() {
-            navigationBarView.removeFromSuperview()
-            formTableView.translatesAutoresizingMaskIntoConstraints = false
-            let topConstraint = formTableView.topAnchor.constraintEqualToAnchor(view.topAnchor, constant: 64)
-            NSLayoutConstraint.activateConstraints([topConstraint])
-        }
-        
+
         // OMSTextField
         let visibleCells = formTableView.visibleCells
         for cell in visibleCells {
@@ -64,32 +71,32 @@ public class CreditCardPopoverController: UIViewController {
     }
 
     private func setup() {
-        // Setup Appearance
+        // Naviagtionbar Title and Navigationbar
         title = NSLocalizedString("Credit Card Form", tableName: nil, bundle: NSBundle(forClass: CreditCardPopoverController.self), value: "", comment: "")
+        if showCloseButton {
+            let closeBarButtonItem = UIBarButtonItem(title: "Close", style: .Plain, target: self, action: #selector(dismiss))
+            navigationItem.rightBarButtonItem = closeBarButtonItem
+        }
         modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
 
-        // Naviagtionbar Title and Navigationbar
-        navigationBarTitleLabel.textColor = titleColor
-        navigationBarView.backgroundColor = navigationBarColor
-        
         // TableView
+        let bundle = NSBundle(forClass: CreditCardPopoverController.self)
+        formCells = formCellsType.map({ (type) -> UITableViewCell in
+            var identifier = String(type)
+            if identifier.hasPrefix("OmiseSDK.") {
+                let index = identifier.startIndex.advancedBy(9)
+                identifier = identifier.substringFromIndex(index)
+            }
+            
+            let cellNib = UINib(nibName: identifier, bundle: bundle)
+            formTableView.registerNib(cellNib, forCellReuseIdentifier: identifier)
+            return cellNib.instantiateWithOwner(nil, options: nil).first as? UITableViewCell ?? UITableViewCell()
+        })
         formTableView.delegate = self
         formTableView.dataSource = self
         formTableView.tableFooterView = UIView()
-        
-        formTableView.registerNib(UINib(nibName: CardNumberFormCell.identifier, bundle: NSBundle(forClass: CardNumberFormCell.self)), forCellReuseIdentifier: CardNumberFormCell.identifier)
-        
-        formTableView.registerNib(UINib(nibName: NameCardFormCell.identifier, bundle: NSBundle(forClass: NameCardFormCell.self)), forCellReuseIdentifier: NameCardFormCell.identifier)
-        
-        formTableView.registerNib(UINib(nibName: ExpiryDateFormCell.identifier, bundle: NSBundle(forClass: ExpiryDateFormCell.self)), forCellReuseIdentifier: ExpiryDateFormCell.identifier)
-        
-        formTableView.registerNib(UINib(nibName: SecureCodeFormCell.identifier, bundle: NSBundle(forClass: SecureCodeFormCell.self)), forCellReuseIdentifier: SecureCodeFormCell.identifier)
-        
-        formTableView.registerNib(UINib(nibName: FormHeaderCell.identifier, bundle: NSBundle(forClass: FormHeaderCell.self)), forCellReuseIdentifier: FormHeaderCell.identifier)
-        
-        formTableView.registerNib(UINib(nibName: ErrorMessageCell.identifier, bundle: NSBundle(forClass: ErrorMessageCell.self)), forCellReuseIdentifier: ErrorMessageCell.identifier)
-        
-        formTableView.registerNib(UINib(nibName: ConfirmButtonCell.identifier, bundle: NSBundle(forClass: ConfirmButtonCell.self)), forCellReuseIdentifier: ConfirmButtonCell.identifier)
+        formTableView.rowHeight = UITableViewAutomaticDimension
+        formTableView.estimatedRowHeight = defaultCellHeight
         
         //Keyboard
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(keyboardWillAppear(_:)), name: UIKeyboardWillShowNotification, object: nil)
@@ -102,7 +109,6 @@ public class CreditCardPopoverController: UIViewController {
     
     @objc private func keyboardWillAppear(notification: NSNotification){
         if hasErrorMessage {
-            errorMessageCellHeight = ErrorMessageCell.cellHeight
             errorMessageCell?.removeErrorMesssage()
             hasErrorMessage = false
             formTableView.beginUpdates()
@@ -128,23 +134,12 @@ public class CreditCardPopoverController: UIViewController {
             let e = error as! OmiseError
             let errorString = e.nsError.localizedDescription
             errorMessageCell?.setErrorMessage(errorString)
-            setErrorMessageCellHeight(errorString)
             hasErrorMessage = true
             formTableView.beginUpdates()
             formTableView.endUpdates()
         } else {
             delegate?.creditCardPopover(self, didFailWithError: error)
         }
-    }
-    
-    private func setErrorMessageCellHeight(message: String) {
-        let label = UILabel(frame: CGRectMake(0, 0, self.view.frame.width, CGFloat.max))
-        label.numberOfLines = 0
-        label.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        label.font = UIFont.systemFontOfSize(17, weight: UIFontWeightRegular)
-        label.text = message
-        label.sizeToFit()
-        errorMessageCellHeight = label.frame.height + defaultCellHeight
     }
     
     // MARK: Create token request
@@ -249,8 +244,7 @@ extension CreditCardPopoverController: UITableViewDataSource {
     }
     
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let identifier = formCells[indexPath.row]
-        let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
+        let cell = formCells[indexPath.row]
 
         if let headerCell = cell as? FormHeaderCell {
             self.formHeaderCell = headerCell
@@ -267,19 +261,12 @@ extension CreditCardPopoverController: UITableViewDataSource {
 // MARK: - UIScrollViewDelegate
 extension CreditCardPopoverController: UITableViewDelegate {
     public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        switch formCells[indexPath.row] {
-        case FormHeaderCell.identifier:
-            return FormHeaderCell.cellHeight
-        case ErrorMessageCell.identifier:
-            return errorMessageCellHeight
-        default:
-            return defaultCellHeight
-        }
+        return formCells[indexPath.row].systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
     }
     
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if ConfirmButtonCell.identifier == formCells[indexPath.row] {
+        if formCells[indexPath.row].isKindOfClass(ConfirmButtonCell) {
             requestToken()
         }
     }
@@ -290,8 +277,7 @@ extension CreditCardPopoverController: OmiseFormValidatorDelegate {
         let valid = OmiseFormValidator.validateForms(formFields)
         confirmButtonCell?.setInteractionEnabled(valid)
         
-        if textField.isKindOfClass(CardNumberTextField) {
-            let cardField = textField as! CardNumberTextField
+        if let cardField = textField as? CardNumberTextField {
             formHeaderCell?.setCardBrand(cardField.cardBrand)
         }
     }

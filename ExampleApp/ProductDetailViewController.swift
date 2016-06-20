@@ -17,7 +17,9 @@ class ProductDetailViewController: UIViewController {
         let creditCardView = CreditCardPopoverController(client: omise)
         creditCardView.delegate = self
         creditCardView.autoHandleErrorEnabled = true
-        creditCardView.popover(self)
+        
+        let navigationController = UINavigationController(rootViewController: creditCardView)
+        self.presentViewController(navigationController, animated: true, completion: nil)
     }
     
     @IBAction func buyNowButtonTapped(sender: AnyObject) {
@@ -25,6 +27,7 @@ class ProductDetailViewController: UIViewController {
         
         let creditCardView = CreditCardPopoverController(client: omise)
         creditCardView.delegate = self
+        creditCardView.showCloseButton = false
         
         self.navigationController?.pushViewController(creditCardView, animated: true)
     }
