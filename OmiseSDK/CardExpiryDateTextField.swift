@@ -28,12 +28,15 @@ public class CardExpiryDateTextField: OmiseTextField {
     func setup() {
         placeholder = "MM/YY"
         let expiryDatePicker = CardExpiryDatePicker()
-        expiryDatePicker.onDateSelected = { (month: Int, year: Int) in
-            self.text = String(format: "%02d/%d", month, year-2000)
-            self.expirationMonth = month
-            self.expirationYear = year
-            self.checkValidFromPicker()
-            self.validationDelegate?.textField(self, didChangeValidity: self.valid)
+        expiryDatePicker.onDateSelected = {[weak self] (month: Int, year: Int) in
+            guard let s = self else {
+                return
+            }
+            s.text = String(format: "%02d/%d", month, year-2000)
+            s.expirationMonth = month
+            s.expirationYear = year
+            s.checkValidFromPicker()
+            s.validationDelegate?.textField(s, didChangeValidity: s.valid)
         }
         inputView = expiryDatePicker
     }
