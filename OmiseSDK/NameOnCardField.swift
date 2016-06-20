@@ -4,7 +4,6 @@ import UIKit
 public class NameOnCardTextField: OmiseTextField {
     var name: String = ""
     
-    // MARK: Initial
     override public init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -20,7 +19,6 @@ public class NameOnCardTextField: OmiseTextField {
         setup()
     }
     
-    // MARK: Setup
     func setup() {
         keyboardType = .Default
         placeholder = "Full name"

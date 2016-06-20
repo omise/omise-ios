@@ -1,13 +1,13 @@
 import Foundation
 
 public class CardNumberTextField: OmiseTextField {
-    var number: String = ""
-    var cardBrand: CardBrand?
     private let separator = " "
     private let splitLength = 4
     private let maxLength = 18
     
-    // MARK: Initial
+    var number: String = ""
+    var cardBrand: CardBrand?
+    
     override public init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -23,7 +23,6 @@ public class CardNumberTextField: OmiseTextField {
         setup()
     }
     
-    // MARK: Setup
     func setup() {
         keyboardType = .NumberPad
         placeholder = "0123 4567 8910 2345"
@@ -68,7 +67,6 @@ public class CardNumberTextField: OmiseTextField {
         omiseValidatorDelegate?.textFieldDidValidated(self)
     }
     
-    // MARK: UITextFieldDelegate
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if string.characters.count == 0 && range.length == 1 {
             if range.location == maxLength {
