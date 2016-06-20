@@ -1,11 +1,15 @@
 import Foundation
 import UIKit
 
+public protocol OmiseTextFieldDelegate {
+    func textField(field: OmiseTextField, didChangeValidity isValid: Bool)
+}
+
 public class OmiseTextField: UITextField, UITextFieldDelegate {
     private var previousText: String?
     var valid = false
     
-    public var omiseValidatorDelegate: OmiseFormValidatorDelegate?
+    public var validationDelegate: OmiseTextFieldDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

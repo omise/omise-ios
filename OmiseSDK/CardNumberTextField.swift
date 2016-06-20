@@ -33,7 +33,7 @@ public class CardNumberTextField: OmiseTextField {
             cardBrand = CardNumber.brand(insertedText)
             number = CardNumber.normalize(insertedText)
             valid = CardNumber.validate(insertedText)
-            omiseValidatorDelegate?.textFieldDidValidated(self)
+            validationDelegate?.textField(self, didChangeValidity: valid)
             return
         }
         
@@ -57,14 +57,14 @@ public class CardNumberTextField: OmiseTextField {
         cardBrand = CardNumber.brand(cardNumberString)
         number = CardNumber.normalize(cardNumberString)
         valid = CardNumber.validate(cardNumberString)
-        omiseValidatorDelegate?.textFieldDidValidated(self)
+        validationDelegate?.textField(self, didChangeValidity: valid)
     }
     
     override func textField(textField: OmiseTextField, textDidDeleted deletedText: String) {
         cardBrand = CardNumber.brand(deletedText)
         number = CardNumber.normalize(deletedText)
         valid = CardNumber.validate(deletedText)
-        omiseValidatorDelegate?.textFieldDidValidated(self)
+        validationDelegate?.textField(self, didChangeValidity: valid)
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
