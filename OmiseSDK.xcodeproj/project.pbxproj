@@ -77,8 +77,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		143E0AE01D13B0DD002B6922 /* OmiseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseTableViewCell.swift; path = CreditcardPopoverForm/FormCells/OmiseTableViewCell.swift; sourceTree = "<group>"; };
-		14ACEF821D02D641001C5319 /* CardExpiryDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardExpiryDatePicker.swift; path = CreditcardPopoverForm/FormTextFields/CardExpiryDatePicker.swift; sourceTree = "<group>"; };
+		143E0AE01D13B0DD002B6922 /* OmiseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseTableViewCell.swift; sourceTree = "<group>"; };
+		14ACEF821D02D641001C5319 /* CardExpiryDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardExpiryDatePicker.swift; sourceTree = "<group>"; };
 		2220F1A31D0FEE85008CD89F /* OmiseCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseCard.swift; sourceTree = "<group>"; };
 		2220F1A41D0FEE85008CD89F /* OmiseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseError.swift; sourceTree = "<group>"; };
 		2220F1A51D0FEE85008CD89F /* OmiseJsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseJsonParser.swift; sourceTree = "<group>"; };
@@ -112,8 +112,8 @@
 		981FA5F81D0EDDB0009ECEDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		981FA5FA1D0EDDD8009ECEDC /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
 		981FA5FB1D0EDDDB009ECEDC /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		982237BF1D115BD400D266F3 /* ErrorMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorMessageCell.swift; path = CreditcardPopoverForm/FormCells/ErrorMessageCell.swift; sourceTree = "<group>"; };
-		982237C01D115BD400D266F3 /* ErrorMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ErrorMessageCell.xib; path = CreditcardPopoverForm/FormCells/ErrorMessageCell.xib; sourceTree = "<group>"; };
+		982237BF1D115BD400D266F3 /* ErrorMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessageCell.swift; sourceTree = "<group>"; };
+		982237C01D115BD400D266F3 /* ErrorMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorMessageCell.xib; sourceTree = "<group>"; };
 		982237C41D1174D300D266F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ConfirmButtonCell.xib; sourceTree = "<group>"; };
 		982237CF1D1178D700D266F3 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/ConfirmButtonCell.strings; sourceTree = "<group>"; };
 		982237D21D1178F500D266F3 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ConfirmButtonCell.strings; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 		982237D41D1179C700D266F3 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/FormHeaderCell.strings; sourceTree = "<group>"; };
 		982237DB1D117CB900D266F3 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/CreditCardPopoverController.strings; sourceTree = "<group>"; };
 		982237DD1D117CBE00D266F3 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/CreditCardPopoverController.strings; sourceTree = "<group>"; };
-		983BC0BE1D1027A3004505B7 /* ConfirmButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmButtonCell.swift; path = CreditcardPopoverForm/FormCells/ConfirmButtonCell.swift; sourceTree = "<group>"; };
+		983BC0BE1D1027A3004505B7 /* ConfirmButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmButtonCell.swift; sourceTree = "<group>"; };
 		983BDD5B1D093A61003AE8CA /* th */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = th; path = th.lproj/CardNumberFormCell.xib; sourceTree = "<group>"; };
 		983BDD5C1D093A61003AE8CA /* th */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = th; path = th.lproj/ExpiryDateFormCell.xib; sourceTree = "<group>"; };
 		983BDD5E1D093A61003AE8CA /* th */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = th; path = th.lproj/NameCardFormCell.xib; sourceTree = "<group>"; };
@@ -136,18 +136,18 @@
 		983BDD691D093CF8003AE8CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FormHeaderCell.xib; sourceTree = "<group>"; };
 		983BDD6A1D093CF8003AE8CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NameCardFormCell.xib; sourceTree = "<group>"; };
 		983BDD6B1D093CF8003AE8CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SecureCodeFormCell.xib; sourceTree = "<group>"; };
-		986406211CFEA292004BCF51 /* CreditCardPopoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreditCardPopoverController.swift; path = CreditcardPopoverForm/CreditCardPopoverController.swift; sourceTree = "<group>"; };
-		9864062A1CFEA7E4004BCF51 /* CardCVVTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardCVVTextField.swift; path = CreditcardPopoverForm/FormTextFields/CardCVVTextField.swift; sourceTree = "<group>"; };
-		9864062B1CFEA7E4004BCF51 /* CardExpiryDateTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardExpiryDateTextField.swift; path = CreditcardPopoverForm/FormTextFields/CardExpiryDateTextField.swift; sourceTree = "<group>"; };
-		9864062C1CFEA7E4004BCF51 /* CardNumberTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardNumberTextField.swift; path = CreditcardPopoverForm/FormTextFields/CardNumberTextField.swift; sourceTree = "<group>"; };
-		9864062D1CFEA7E4004BCF51 /* OmiseFormValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseFormValidator.swift; path = CreditcardPopoverForm/FormTextFields/OmiseFormValidator.swift; sourceTree = "<group>"; };
-		9864062E1CFEA7E4004BCF51 /* NameOnCardField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameOnCardField.swift; path = CreditcardPopoverForm/FormTextFields/NameOnCardField.swift; sourceTree = "<group>"; };
-		9864062F1CFEA7E4004BCF51 /* OmiseTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OmiseTextField.swift; path = CreditcardPopoverForm/FormTextFields/OmiseTextField.swift; sourceTree = "<group>"; };
-		986406371CFEA818004BCF51 /* CardNumberFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardNumberFormCell.swift; path = CreditcardPopoverForm/FormCells/CardNumberFormCell.swift; sourceTree = "<group>"; };
-		986406391CFEA818004BCF51 /* ExpiryDateFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpiryDateFormCell.swift; path = CreditcardPopoverForm/FormCells/ExpiryDateFormCell.swift; sourceTree = "<group>"; };
-		9864063B1CFEA818004BCF51 /* FormHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormHeaderCell.swift; path = CreditcardPopoverForm/FormCells/FormHeaderCell.swift; sourceTree = "<group>"; };
-		9864063D1CFEA818004BCF51 /* NameCardFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameCardFormCell.swift; path = CreditcardPopoverForm/FormCells/NameCardFormCell.swift; sourceTree = "<group>"; };
-		9864063F1CFEA818004BCF51 /* SecureCodeFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecureCodeFormCell.swift; path = CreditcardPopoverForm/FormCells/SecureCodeFormCell.swift; sourceTree = "<group>"; };
+		986406211CFEA292004BCF51 /* CreditCardPopoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditCardPopoverController.swift; sourceTree = "<group>"; };
+		9864062A1CFEA7E4004BCF51 /* CardCVVTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCVVTextField.swift; sourceTree = "<group>"; };
+		9864062B1CFEA7E4004BCF51 /* CardExpiryDateTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardExpiryDateTextField.swift; sourceTree = "<group>"; };
+		9864062C1CFEA7E4004BCF51 /* CardNumberTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumberTextField.swift; sourceTree = "<group>"; };
+		9864062D1CFEA7E4004BCF51 /* OmiseFormValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseFormValidator.swift; sourceTree = "<group>"; };
+		9864062E1CFEA7E4004BCF51 /* NameOnCardField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameOnCardField.swift; sourceTree = "<group>"; };
+		9864062F1CFEA7E4004BCF51 /* OmiseTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseTextField.swift; sourceTree = "<group>"; };
+		986406371CFEA818004BCF51 /* CardNumberFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumberFormCell.swift; sourceTree = "<group>"; };
+		986406391CFEA818004BCF51 /* ExpiryDateFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpiryDateFormCell.swift; sourceTree = "<group>"; };
+		9864063B1CFEA818004BCF51 /* FormHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormHeaderCell.swift; sourceTree = "<group>"; };
+		9864063D1CFEA818004BCF51 /* NameCardFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameCardFormCell.swift; sourceTree = "<group>"; };
+		9864063F1CFEA818004BCF51 /* SecureCodeFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureCodeFormCell.swift; sourceTree = "<group>"; };
 		987A02C91CE35D5E0035417A /* OmiseSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmiseSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		987A02CD1CE35D5E0035417A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		987A03201CE5B7D70035417A /* OmiseTokenRequestTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseTokenRequestTest.swift; sourceTree = "<group>"; };
@@ -180,16 +180,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		224460061CF43FE300801D0F /* TokenRequest */ = {
-			isa = PBXGroup;
-			children = (
-				224460071CF43FF000801D0F /* OmiseJsonParserTest.swift */,
-				987A03201CE5B7D70035417A /* OmiseTokenRequestTest.swift */,
-				224460091CF441DC00801D0F /* TokenRequestDelegateDummy.swift */,
-			);
-			name = TokenRequest;
-			sourceTree = "<group>";
-		};
 		2259310E1CE3210700841B86 = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +207,7 @@
 				2259311D1CE3210700841B86 /* Info.plist */,
 				2259314D1CE46E5700841B86 /* CardBrand.swift */,
 				2259314F1CE46F7F00841B86 /* CardNumber.swift */,
+				986406211CFEA292004BCF51 /* CreditCardPopoverController.swift */,
 				22445FFB1CF41DD300801D0F /* Globals.swift */,
 				2220F1A31D0FEE85008CD89F /* OmiseCard.swift */,
 				2220F1A41D0FEE85008CD89F /* OmiseError.swift */,
@@ -225,7 +216,9 @@
 				2220F1A71D0FEE85008CD89F /* OmiseToken.swift */,
 				2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */,
 				2225B3531D0FDD63003EB396 /* Assets.xcassets */,
-				9864061F1CFEA0EF004BCF51 /* CreditCardPopOverForm */,
+				9864064B1CFEA820004BCF51 /* Cells */,
+				983BDD4A1D093A09003AE8CA /* CreditCardPopoverController.xib */,
+				986406361CFEA7EA004BCF51 /* Fields */,
 				981FA5F91D0EDDB0009ECEDC /* Localizable.strings */,
 			);
 			path = OmiseSDK;
@@ -246,18 +239,7 @@
 			path = ExampleApp;
 			sourceTree = "<group>";
 		};
-		9864061F1CFEA0EF004BCF51 /* CreditCardPopOverForm */ = {
-			isa = PBXGroup;
-			children = (
-				986406211CFEA292004BCF51 /* CreditCardPopoverController.swift */,
-				983BDD4A1D093A09003AE8CA /* CreditCardPopoverController.xib */,
-				9864064B1CFEA820004BCF51 /* FormCells */,
-				986406361CFEA7EA004BCF51 /* FormUITextFields */,
-			);
-			name = CreditCardPopOverForm;
-			sourceTree = "<group>";
-		};
-		986406361CFEA7EA004BCF51 /* FormUITextFields */ = {
+		986406361CFEA7EA004BCF51 /* Fields */ = {
 			isa = PBXGroup;
 			children = (
 				9864062A1CFEA7E4004BCF51 /* CardCVVTextField.swift */,
@@ -268,10 +250,10 @@
 				9864062D1CFEA7E4004BCF51 /* OmiseFormValidator.swift */,
 				9864062F1CFEA7E4004BCF51 /* OmiseTextField.swift */,
 			);
-			name = FormUITextFields;
+			name = Fields;
 			sourceTree = "<group>";
 		};
-		9864064B1CFEA820004BCF51 /* FormCells */ = {
+		9864064B1CFEA820004BCF51 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				986406371CFEA818004BCF51 /* CardNumberFormCell.swift */,
@@ -290,7 +272,7 @@
 				983BDD561D093A19003AE8CA /* NameCardFormCell.xib */,
 				983BDD591D093A1C003AE8CA /* SecureCodeFormCell.xib */,
 			);
-			name = FormCells;
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		987A02CA1CE35D5E0035417A /* OmiseSDKTests */ = {
@@ -299,8 +281,10 @@
 				987A03AC1CE5CD450035417A /* Fixtures */,
 				987A02CD1CE35D5E0035417A /* Info.plist */,
 				225931541CE4743A00841B86 /* CardNumberTest.swift */,
+				224460071CF43FF000801D0F /* OmiseJsonParserTest.swift */,
+				987A03201CE5B7D70035417A /* OmiseTokenRequestTest.swift */,
 				225931561CE4745200841B86 /* SDKTestCase.swift */,
-				224460061CF43FE300801D0F /* TokenRequest */,
+				224460091CF441DC00801D0F /* TokenRequestDelegateDummy.swift */,
 			);
 			path = OmiseSDKTests;
 			sourceTree = "<group>";
