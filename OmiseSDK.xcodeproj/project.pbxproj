@@ -275,20 +275,20 @@
 			isa = PBXGroup;
 			children = (
 				986406371CFEA818004BCF51 /* CardNumberFormCell.swift */,
+				983BC0BE1D1027A3004505B7 /* ConfirmButtonCell.swift */,
+				982237BF1D115BD400D266F3 /* ErrorMessageCell.swift */,
 				986406391CFEA818004BCF51 /* ExpiryDateFormCell.swift */,
 				9864063B1CFEA818004BCF51 /* FormHeaderCell.swift */,
 				9864063D1CFEA818004BCF51 /* NameCardFormCell.swift */,
+				143E0AE01D13B0DD002B6922 /* OmiseTableViewCell.swift */,
 				9864063F1CFEA818004BCF51 /* SecureCodeFormCell.swift */,
+				982237C01D115BD400D266F3 /* ErrorMessageCell.xib */,
 				983BDD4D1D093A0F003AE8CA /* CardNumberFormCell.xib */,
+				982237C51D1174D300D266F3 /* ConfirmButtonCell.xib */,
 				983BDD501D093A12003AE8CA /* ExpiryDateFormCell.xib */,
 				983BDD531D093A15003AE8CA /* FormHeaderCell.xib */,
 				983BDD561D093A19003AE8CA /* NameCardFormCell.xib */,
 				983BDD591D093A1C003AE8CA /* SecureCodeFormCell.xib */,
-				983BC0BE1D1027A3004505B7 /* ConfirmButtonCell.swift */,
-				982237C51D1174D300D266F3 /* ConfirmButtonCell.xib */,
-				982237BF1D115BD400D266F3 /* ErrorMessageCell.swift */,
-				982237C01D115BD400D266F3 /* ErrorMessageCell.xib */,
-				143E0AE01D13B0DD002B6922 /* OmiseTableViewCell.swift */,
 			);
 			name = FormCells;
 			sourceTree = "<group>";
