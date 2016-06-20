@@ -16,10 +16,14 @@ public class CreditCardPopoverController: UIViewController {
         ErrorMessageCell.self,
         ConfirmButtonCell.self
     ]
-    
+    private let cardNumberCellIndex = 0
+    private let nameOnCardCellIndex = 1
+    private let expiryDateCellIndex = 2
+    private let secureCodeCellIndex = 3
+  
     private var client: OmiseSDKClient
     private var request: OmiseTokenRequest?
-    private var formCells:[UITableViewCell] = []
+    private var formCells = [UITableViewCell]()
     private var formFields = [OmiseTextField]()
     private var formHeaderCell: FormHeaderCell?
     private var errorMessageCell: ErrorMessageCell?
@@ -35,44 +39,23 @@ public class CreditCardPopoverController: UIViewController {
     public var showCloseButton = true
     
     private var cardNumber: String {
-        for case let cardNumberField as CardNumberTextField in formFields {
-            return cardNumberField.number
-        }
-        return ""
+        return (formFields[cardNumberCellIndex] as? CardNumberTextField)?.number ?? ""
     }
     
     private var cardName: String {
-        for case let cardNameField as NameOnCardTextField in formFields {
-            return cardNameField.name
-        }
-        return ""
+        return (formFields[nameOnCardCellIndex] as? NameOnCardTextField)?.name ?? ""
     }
     
     private var expirationMonth: Int {
-        for case let cardExpiryField as CardExpiryDateTextField in formFields {
-            guard let expirationMonth = cardExpiryField.expirationMonth else {
-                return 0
-            }
-            return Int(expirationMonth)
-        }
-        return 0
+        return (formFields[expiryDateCellIndex] as? CardExpiryDateTextField)?.expirationMonth ?? 0
     }
     
     private var expirationYear: Int {
-        for case let cardExpiryField as CardExpiryDateTextField in formFields {
-            guard let expirationYear = cardExpiryField.expirationYear else {
-                return 0
-            }
-            return Int(expirationYear)
-        }
-        return 0
+        return (formFields[expiryDateCellIndex] as? CardExpiryDateTextField)?.expirationYear ?? 0
     }
     
     private var cvv: String {
-        for case let cardCVVField as CardCVVTextField in formFields {
-            return cardCVVField.cvv
-        }
-        return ""
+      return (formFields[secureCodeCellIndex] as? CardCVVTextField)?.cvv ?? ""
     }
     
     public init(client: OmiseSDKClient) {
@@ -83,7 +66,6 @@ public class CreditCardPopoverController: UIViewController {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,11 +111,12 @@ public class CreditCardPopoverController: UIViewController {
                 formFields.append(field)
             }
         }
-        
+      
         OmiseTextField.addInputAccessoryForTextFields(self, textFields: formFields, previousNextable: true)
     }
     
     override public func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
         NSNotificationCenter().removeObserver(self)
     }
     
@@ -186,12 +169,12 @@ public class CreditCardPopoverController: UIViewController {
             expirationYear: expirationYear,
             securityCode: cvv
         )
-
+      
         guard let request = request else {
             sdkWarn("OMISE Request is empty.")
             return
         }
-        
+      
         startActivityIndicator()
         client.send(request) { (token, error) in
             dispatch_async(dispatch_get_main_queue()) {
@@ -221,10 +204,6 @@ public class CreditCardPopoverController: UIViewController {
 }
 
 extension CreditCardPopoverController: UITableViewDataSource {
-    public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return formCells.count
     }

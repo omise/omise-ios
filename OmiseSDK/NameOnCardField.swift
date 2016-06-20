@@ -27,9 +27,11 @@ public class NameOnCardTextField: OmiseTextField {
     override func textField(textField: OmiseTextField, textDidChanged insertedText: String) {
         name = insertedText
         valid = !insertedText.isEmpty
+        omiseValidatorDelegate?.textFieldDidValidated(self)
     }
     
     override func textField(textField: OmiseTextField, textDidDeleted deletedText: String) {
         valid = !deletedText.isEmpty
+        omiseValidatorDelegate?.textFieldDidValidated(self)
     }
 }

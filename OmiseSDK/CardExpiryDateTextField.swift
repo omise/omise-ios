@@ -131,7 +131,7 @@ public class CardExpiryDateTextField: OmiseTextField {
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        if string == separator{
+        if string == separator {
             return false
         }
         
