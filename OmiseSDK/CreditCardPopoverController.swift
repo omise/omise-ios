@@ -260,7 +260,7 @@ extension CreditCardPopoverController: UITableViewDelegate {
 extension CreditCardPopoverController: OmiseFormValidatorDelegate {
     public func textFieldDidValidated(textField: OmiseTextField) {
         let valid = OmiseFormValidator.validateForms(formFields)
-        confirmButtonCell?.setInteractionEnabled(valid)
+        confirmButtonCell?.userInteractionEnabled = valid
         
         if let cardField = textField as? CardNumberTextField {
             formHeaderCell?.setCardBrand(cardField.cardBrand)
