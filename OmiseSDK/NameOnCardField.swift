@@ -2,7 +2,9 @@ import Foundation
 import UIKit
 
 public class NameOnCardTextField: OmiseTextField {
-    var name: String = ""
+    public override var isValid: Bool {
+        return !(text ?? "").isEmpty
+    }
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,16 +24,5 @@ public class NameOnCardTextField: OmiseTextField {
     func setup() {
         keyboardType = .Default
         placeholder = "Full name"
-    }
-    
-    override func textField(textField: OmiseTextField, textDidChanged insertedText: String) {
-        name = insertedText
-        valid = !insertedText.isEmpty
-        validationDelegate?.textField(self, didChangeValidity: valid)
-    }
-    
-    override func textField(textField: OmiseTextField, textDidDeleted deletedText: String) {
-        valid = !deletedText.isEmpty
-        validationDelegate?.textField(self, didChangeValidity: valid)
     }
 }

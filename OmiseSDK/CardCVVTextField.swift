@@ -1,9 +1,12 @@
 import Foundation
 import UIKit
 
-public class CardCVVTextField: OmiseTextField {
+public class CardCVVTextField: OmiseTextField, UITextFieldDelegate {
     private let maxLength = 3
-    var cvv: String = ""
+    
+    public override var isValid: Bool {
+        return text?.characters.count >= maxLength
+    }
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,29 +27,10 @@ public class CardCVVTextField: OmiseTextField {
         keyboardType = .NumberPad
         placeholder = "123"
         secureTextEntry = true
+        delegate = self // TODO: 👈 remove, replace with mask instead
     }
-    
-    func checkValid() {
-        if  cvv.characters.count >= maxLength  {
-            valid = true
-        } else {
-            valid = false
-        }
-        validationDelegate?.textField(self, didChangeValidity: valid)
-    }
-    
-    override func textField(textField: OmiseTextField, textDidChanged insertedText: String) {
-        cvv = insertedText
-        checkValid()
-    }
-    
-    override func textField(textField: OmiseTextField, textDidDeleted deletedText: String) {
-        cvv = deletedText
-        checkValid()
-    }
-        
-    // MARK: UITextFieldDelegate
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+   
+    public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if string.characters.count == 0 && range.length == 1 {
             if range.location == maxLength {
                 deleteBackward()

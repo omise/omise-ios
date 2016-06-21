@@ -38,25 +38,18 @@ public class CreditCardPopoverController: UIViewController {
     public var navigationBarColor = UIColor.whiteColor()
     public var showCloseButton = true
     
-    private var cardNumber: String {
-        return (formFields[cardNumberCellIndex] as? CardNumberTextField)?.number ?? ""
-    }
-    
-    private var cardName: String {
-        return (formFields[nameOnCardCellIndex] as? NameOnCardTextField)?.name ?? ""
-    }
-    
+    private var cardNumber: String { return fieldValueInRow(cardNumberCellIndex) ?? "" }
+    private var cardName: String { return fieldValueInRow(nameOnCardCellIndex) ?? "" }
+    private var cvv: String { return fieldValueInRow(secureCodeCellIndex) ?? "" }
+
     private var expirationMonth: Int {
-        return (formFields[expiryDateCellIndex] as? CardExpiryDateTextField)?.expirationMonth ?? 0
+        return (formFields[expiryDateCellIndex] as? CardExpiryDateTextField)?.selectedMonth ?? 0
     }
     
     private var expirationYear: Int {
-        return (formFields[expiryDateCellIndex] as? CardExpiryDateTextField)?.expirationYear ?? 0
+        return (formFields[expiryDateCellIndex] as? CardExpiryDateTextField)?.selectedYear ?? 0
     }
     
-    private var cvv: String {
-      return (formFields[secureCodeCellIndex] as? CardCVVTextField)?.cvv ?? ""
-    }
     
     public init(client: OmiseSDKClient) {
         self.client = client
@@ -107,7 +100,6 @@ public class CreditCardPopoverController: UIViewController {
         let visibleCells = formTableView.visibleCells
         for cell in visibleCells {
             for case let field as OmiseTextField in cell.contentView.subviews {
-                field.validationDelegate = self
                 formFields.append(field)
             }
         }
@@ -160,6 +152,11 @@ public class CreditCardPopoverController: UIViewController {
         }
     }
     
+    private func validateForm() {
+        let valid = formFields.reduce(true) { (valid, field) -> Bool in valid && field.isValid }
+        confirmButtonCell?.userInteractionEnabled = valid
+    }
+    
     private func requestToken() {
         view.endEditing(true)
         
@@ -187,6 +184,10 @@ public class CreditCardPopoverController: UIViewController {
                 }
             }
         }
+    }
+    
+    private func fieldValueInRow(row: Int) -> String? {
+        return formFields[row].text
     }
     
     private func startActivityIndicator() {
@@ -237,10 +238,9 @@ extension CreditCardPopoverController: UITableViewDelegate {
     }
 }
 
-extension CreditCardPopoverController: OmiseTextFieldDelegate {
+extension CreditCardPopoverController: OmiseTextFieldValidationDelegate {
     public func textField(field: OmiseTextField, didChangeValidity isValid: Bool) {
-        let valid = formFields.reduce(true) { (valid, field) -> Bool in valid && field.valid }
-        confirmButtonCell?.userInteractionEnabled = valid
+        validateForm()
         
         if let cardField = field as? CardNumberTextField {
             formHeaderCell?.setCardBrand(cardField.cardBrand)
