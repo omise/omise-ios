@@ -100,7 +100,7 @@ public class CreditCardPopoverController: UIViewController {
         let visibleCells = formTableView.visibleCells
         for cell in visibleCells {
             for case let field as OmiseTextField in cell.contentView.subviews {
-                field.delegate = self
+                field.addTarget(self, action: #selector(fieldDidChange), forControlEvents: .EditingChanged)
                 formFields.append(field)
             }
         }
@@ -126,6 +126,14 @@ public class CreditCardPopoverController: UIViewController {
         }
     }
     
+    
+    @objc private func fieldDidChange(sender: AnyObject) {
+        validateForm()
+        
+        if let cardNumberField = sender as? CardNumberTextField {
+            formHeaderCell?.setCardBrand(cardNumberField.cardBrand)
+        }
+    }
     
     @IBAction private func closeButtonTapped(sender: AnyObject) {
         dismiss()
@@ -235,16 +243,6 @@ extension CreditCardPopoverController: UITableViewDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if formCells[indexPath.row].isKindOfClass(ConfirmButtonCell) {
             requestToken()
-        }
-    }
-}
-
-extension CreditCardPopoverController: UITextFieldDelegate {
-    public func textFieldDidEndEditing(textField: UITextField) {
-        validateForm()
-        
-        if let cardField = textField as? CardNumberTextField {
-            formHeaderCell?.setCardBrand(cardField.cardBrand)
         }
     }
 }
