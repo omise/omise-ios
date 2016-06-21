@@ -79,7 +79,7 @@ public class CardExpiryDateTextField: OmiseTextField {
         let monthText = textInRange(match.rangeAtIndex(1))
         let yearText = textInRange(match.rangeAtIndex(2))
         month = Int(monthText)
-        year = Int(yearText)
+        year = Int(yearText)?.advancedBy(2000)
     }
     
     private func textInRange(range: NSRange) -> String {
