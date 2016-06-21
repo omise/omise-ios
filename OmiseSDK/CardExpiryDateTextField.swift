@@ -12,11 +12,8 @@ public class CardExpiryDateTextField: OmiseTextField {
         return rx
     }()
     
-    private var month: Int?
-    private var year: Int?
-    
-    public var selectedMonth: Int? { return month }
-    public var selectedYear: Int? { return year }
+    public private(set) var selectedMonth: Int? = nil
+    public private(set) var selectedYear: Int? = nil
     
     public override var isValid: Bool {
         let now = NSDate()
@@ -27,7 +24,7 @@ public class CardExpiryDateTextField: OmiseTextField {
         
         let thisMonth = calendar.component(.Month, fromDate: now)
         let thisYear = calendar.component(.Year, fromDate: now)
-        guard let year = self.year, month = self.month else {
+        guard let year = self.selectedYear, month = self.selectedYear else {
             return false
         }
         
@@ -58,8 +55,6 @@ public class CardExpiryDateTextField: OmiseTextField {
         let expiryDatePicker = CardExpiryDatePicker() // TODO: Use normal picker delegate.
         expiryDatePicker.onDateSelected = { [weak self] (month: Int, year: Int) in
             self?.text = String(format: "%02d/%d", month, year-2000)
-            self?.month = month
-            self?.year = year
         }
         inputView = expiryDatePicker
     }
@@ -71,15 +66,15 @@ public class CardExpiryDateTextField: OmiseTextField {
         let range = NSRange(location: 0, length: text.characters.count)
         let options = NSMatchingOptions(rawValue: 0)
         guard let match = expirationRx.firstMatchInString(text, options: options, range: range) where match.numberOfRanges >= 3 else {
-            month = nil
-            year = nil
+            selectedMonth = nil
+            selectedYear = nil
             return
         }
         
         let monthText = textInRange(match.rangeAtIndex(1))
         let yearText = textInRange(match.rangeAtIndex(2))
-        month = Int(monthText)
-        year = Int(yearText)?.advancedBy(2000)
+        selectedMonth = Int(monthText)
+        selectedYear = Int(yearText)?.advancedBy(2000)
     }
     
     private func textInRange(range: NSRange) -> String {
