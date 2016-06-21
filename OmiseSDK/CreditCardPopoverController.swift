@@ -112,7 +112,8 @@ public class CreditCardPopoverController: UIViewController {
             }
         }
       
-        OmiseTextField.addInputAccessoryForTextFields(self, textFields: formFields, previousNextable: true)
+        let accessoryView = OmiseFormAccessoryView()
+        accessoryView.attachToTextFields(formFields, inViewController: self)
     }
     
     override public func viewDidDisappear(animated: Bool) {

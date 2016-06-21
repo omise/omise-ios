@@ -28,7 +28,7 @@ public class OmiseTextField: UITextField, UITextFieldDelegate {
     
     private func setup() {
         delegate = self
-        addTarget(self, action: #selector(OmiseTextField.textChanged), forControlEvents: .EditingChanged)
+        addTarget(self, action: #selector(textChanged), forControlEvents: .EditingChanged)
     }
     
     @objc private func textChanged() {
@@ -60,43 +60,5 @@ public class OmiseTextField: UITextField, UITextFieldDelegate {
     
     public func textFieldDidEndEditing(textField: UITextField) {
         textFieldUIValidate()
-    }
-    
-    public class func addInputAccessoryForTextFields(viewController: UIViewController, textFields: [UITextField], previousNextable: Bool = true) {
-        for (index, textField) in textFields.enumerate() {
-            let toolbar: UIToolbar = UIToolbar()
-            toolbar.sizeToFit()
-            
-            var items = [UIBarButtonItem]()
-            if previousNextable {
-                let bundle = NSBundle(forClass: self)
-                let previousButton = UIBarButtonItem(image: UIImage(named: "backBarButton", inBundle: bundle, compatibleWithTraitCollection: nil), style: .Plain, target: nil, action: nil)
-                previousButton.width = 30
-                if textField == textFields.first {
-                    previousButton.enabled = false
-                } else {
-                    previousButton.target = textFields[index - 1]
-                    previousButton.action = #selector(UITextField.becomeFirstResponder)
-                }
-                
-                let nextButton = UIBarButtonItem(image: UIImage(named: "nextBarButton", inBundle: bundle, compatibleWithTraitCollection: nil), style: .Plain, target: nil, action: nil)
-                nextButton.width = 30
-                if textField == textFields.last {
-                    nextButton.enabled = false
-                } else {
-                    nextButton.target = textFields[index + 1]
-                    nextButton.action = #selector(UITextField.becomeFirstResponder)
-                }
-                
-                items.appendContentsOf([previousButton, nextButton])
-            }
-            
-            let spacer = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
-            let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: viewController.view, action: #selector(UIView.endEditing))
-            items.appendContentsOf([spacer, doneButton])
-            
-            toolbar.setItems(items, animated: false)
-            textField.inputAccessoryView = toolbar
-        }
     }
 }
