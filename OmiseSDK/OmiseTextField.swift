@@ -6,6 +6,17 @@ public protocol OmiseTextFieldValidationDelegate {
 }
 
 public class OmiseTextField: UITextField {
+    public private(set) var previousText: String?
+    
+    public override var text: String? {
+        get { return super.text }
+        set {
+            previousText = super.text
+            super.text = newValue
+            textDidChange() // HACK: UIControlEvents.ValueChanged doesn't work here.
+        }
+    }
+   
     public var isValid: Bool {
         // child-class override hook to provide validation logic.
         return true
@@ -27,10 +38,9 @@ public class OmiseTextField: UITextField {
     }
     
     private func setup() {
-        // addTarget(self, action: #selector(textChanged), forControlEvents: .EditingChanged)
-        addTarget(self, action: #selector(OmiseTextField.textDidChange), forControlEvents: .EditingChanged)
-        addTarget(self, action: #selector(OmiseTextField.didBeginEditing), forControlEvents: .EditingDidBegin)
-        addTarget(self, action: #selector(OmiseTextField.didEndEditing), forControlEvents: .EditingDidEnd)
+        addTarget(self, action: #selector(textDidChange), forControlEvents: .EditingChanged)
+        addTarget(self, action: #selector(didBeginEditing), forControlEvents: .EditingDidBegin)
+        addTarget(self, action: #selector(didEndEditing), forControlEvents: .EditingDidEnd)
     }
     
     func didBeginEditing() {
