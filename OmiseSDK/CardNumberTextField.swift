@@ -2,10 +2,7 @@ import Foundation
 
 public class CardNumberTextField: OmiseTextField {
     private var updatingText = false
-    
-    private let separator = " "
-    private let splitLength = 4
-    private let maxLength = 18
+    private let maxLength = 19
     
     public var cardBrand: CardBrand? {
         return CardNumber.brand(text ?? "")
@@ -38,6 +35,15 @@ public class CardNumberTextField: OmiseTextField {
     override func textDidChange() {
         super.textDidChange()
         guard !updatingText else { return }
+        
+        if (text?.characters.count ?? 0) > maxLength {
+            updatingText = true
+            defer { updatingText = false }
+            
+            text = previousText
+            text = text // overwrite previousText, since it now contains invalid text.
+            return
+        }
         
         // TODO: Maintain caret position correctly, esp. when in the middle of the text.
         let prevLength = previousText?.characters.count ?? 0
