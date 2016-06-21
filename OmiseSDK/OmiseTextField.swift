@@ -1,17 +1,28 @@
 import Foundation
 import UIKit
 
-public protocol OmiseTextFieldDelegate {
+public protocol OmiseTextFieldValidationDelegate {
     func textField(field: OmiseTextField, didChangeValidity isValid: Bool)
 }
 
-public class OmiseTextField: UITextField, UITextFieldDelegate {
-    private var previousText: String?
-    var valid = false
+public class OmiseTextField: UITextField {
+    public private(set) var previousText: String?
     
-    public var validationDelegate: OmiseTextFieldDelegate?
+    public override var text: String? {
+        get { return super.text }
+        set {
+            previousText = super.text
+            super.text = newValue
+            textDidChange() // HACK: UIControlEvents.ValueChanged doesn't work here.
+        }
+    }
+   
+    public var isValid: Bool {
+        // child-class override hook to provide validation logic.
+        return true
+    }
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
@@ -27,38 +38,20 @@ public class OmiseTextField: UITextField, UITextFieldDelegate {
     }
     
     private func setup() {
-        delegate = self
-        addTarget(self, action: #selector(textChanged), forControlEvents: .EditingChanged)
+        addTarget(self, action: #selector(textDidChange), forControlEvents: .EditingChanged)
+        addTarget(self, action: #selector(didBeginEditing), forControlEvents: .EditingDidBegin)
+        addTarget(self, action: #selector(didEndEditing), forControlEvents: .EditingDidEnd)
     }
     
-    @objc private func textChanged() {
-        if previousText?.characters.count >= text?.characters.count {
-            previousText = text
-            textField(self, textDidDeleted: text!)
-            
-            return
-        }
-        previousText = text
-        textField(self, textDidChanged: text!)
+    func didBeginEditing() {
+        textColor = .blackColor()
     }
     
-    func textField(textField: OmiseTextField, textDidChanged insertedText: String) {}
-    
-    func textField(textField: OmiseTextField, textDidDeleted deletedText: String) {}
-    
-    private func textFieldUIValidate() {
-        if valid {
-            textColor = UIColor.blackColor()
-        } else {
-            textColor = UIColor.redColor()
-        }
-    }
-        
-    public func textFieldDidBeginEditing(textField: UITextField) {
-        textField.textColor = UIColor.blackColor()
+    func didEndEditing() {
+        textColor = isValid ? .blackColor() : .redColor();
     }
     
-    public func textFieldDidEndEditing(textField: UITextField) {
-        textFieldUIValidate()
+    func textDidChange() {
+        // no-op for child overrides
     }
 }
