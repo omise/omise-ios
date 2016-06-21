@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 
 public class CardExpiryDateTextField: OmiseTextField {
+    private let maxCreditCardAge = 21
     private let expirationRx = { () -> NSRegularExpression in
         let options = NSRegularExpressionOptions(rawValue: 0)
         guard let rx = try? NSRegularExpression(pattern: "^(\\d{1,2})/(\\d{1,2})$", options: options) else {
@@ -11,8 +12,6 @@ public class CardExpiryDateTextField: OmiseTextField {
         return rx
     }()
     
-    private let maxCreditCardAge = 21
-    
     private var month: Int?
     private var year: Int?
     
@@ -20,10 +19,23 @@ public class CardExpiryDateTextField: OmiseTextField {
     public var selectedYear: Int? { return year }
     
     public override var isValid: Bool {
-        let range = NSRange(location: 0, length: (text ?? "").characters.count)
-        let options = NSMatchingOptions(rawValue: 0)
-        return expirationRx.numberOfMatchesInString(text ?? "", options: options, range: range) > 0
-        // TODO: Check year>now.year && month > now.month
+        let now = NSDate()
+        guard let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian) else {
+            sdkWarn("gregorian calendar not found.")
+            return false
+        }
+        
+        let thisMonth = calendar.component(.Month, fromDate: now)
+        let thisYear = calendar.component(.Year, fromDate: now)
+        guard let year = self.year, month = self.month else {
+            return false
+        }
+        
+        if (year == thisYear) {
+            return thisMonth <= month
+        } else {
+            return thisYear < year
+        }
     }
     
     override public init() {
@@ -45,9 +57,9 @@ public class CardExpiryDateTextField: OmiseTextField {
         placeholder = "MM/YY"
         let expiryDatePicker = CardExpiryDatePicker() // TODO: Use normal picker delegate.
         expiryDatePicker.onDateSelected = { [weak self] (month: Int, year: Int) in
-            self.text = String(format: "%02d/%d", month, year-2000)
-            self.month = month
-            self.year = year
+            self?.text = String(format: "%02d/%d", month, year-2000)
+            self?.month = month
+            self?.year = year
         }
         inputView = expiryDatePicker
     }
@@ -58,7 +70,7 @@ public class CardExpiryDateTextField: OmiseTextField {
         let text = self.text ?? ""
         let range = NSRange(location: 0, length: text.characters.count)
         let options = NSMatchingOptions(rawValue: 0)
-        guard let match = expirationRx.firstMatchInString(text, options: options, range: range) where match.numberOfRanges < 3 else {
+        guard let match = expirationRx.firstMatchInString(text, options: options, range: range) where match.numberOfRanges >= 3 else {
             month = nil
             year = nil
             return
@@ -68,25 +80,9 @@ public class CardExpiryDateTextField: OmiseTextField {
         let yearText = textInRange(match.rangeAtIndex(2))
         month = Int(monthText)
         year = Int(yearText)
+        
+        dump("month: \(month) year: \(year)")
     }
-    
-//    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-//        if string == separator {
-//            return false
-//        }
-//        
-//        if string.characters.count == 0 && range.length == 1 {
-//            if range.location == maxLength {
-//                deleteBackward()
-//            }
-//        }
-//        
-//        if(range.length + range.location > maxLength) {
-//            return false
-//        }
-//        
-//        return true
-//    }
     
     private func textInRange(range: NSRange) -> String {
         let text = self.text ?? ""
