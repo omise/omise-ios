@@ -100,6 +100,7 @@ public class CreditCardPopoverController: UIViewController {
         let visibleCells = formTableView.visibleCells
         for cell in visibleCells {
             for case let field as OmiseTextField in cell.contentView.subviews {
+                field.delegate = self
                 formFields.append(field)
             }
         }
@@ -238,11 +239,11 @@ extension CreditCardPopoverController: UITableViewDelegate {
     }
 }
 
-extension CreditCardPopoverController: OmiseTextFieldValidationDelegate {
-    public func textField(field: OmiseTextField, didChangeValidity isValid: Bool) {
+extension CreditCardPopoverController: UITextFieldDelegate {
+    public func textFieldDidEndEditing(textField: UITextField) {
         validateForm()
         
-        if let cardField = field as? CardNumberTextField {
+        if let cardField = textField as? CardNumberTextField {
             formHeaderCell?.setCardBrand(cardField.cardBrand)
         }
     }
