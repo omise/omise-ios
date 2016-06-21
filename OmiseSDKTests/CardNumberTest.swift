@@ -27,6 +27,11 @@ class CardNumberTest: SDKTestCase {
         }
     }
     
+    func testFormat() {
+        XCTAssertEqual("4242 42", CardNumber.format("424242"))
+        XCTAssertEqual("4242 4242 4242 4242", CardNumber.format("4242424242424242"))
+    }
+    
     func testLuhn() {
         XCTAssertTrue(CardNumber.luhn("4242424242424242"))
         XCTAssertFalse(CardNumber.luhn("4242424242424243"))

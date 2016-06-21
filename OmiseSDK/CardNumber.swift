@@ -1,18 +1,31 @@
 import Foundation
 
 public final class CardNumber {
-    public static func brand(pan: String) -> CardBrand? {
-        return CardBrand.all
-            .filter({ (brand) -> Bool in pan.rangeOfString(brand.pattern, options: .RegularExpressionSearch, range: nil, locale: nil) != nil })
-            .first
-    }
-    
     public static func normalize(pan: String) -> String {
         return pan.stringByReplacingOccurrencesOfString(
             "[^0-9]",
             withString: "",
             options: .RegularExpressionSearch,
             range: nil)
+    }
+    
+    public static func brand(pan: String) -> CardBrand? {
+        return CardBrand.all
+            .filter({ (brand) -> Bool in pan.rangeOfString(brand.pattern, options: .RegularExpressionSearch, range: nil, locale: nil) != nil })
+            .first
+    }
+    
+    public static func format(pan: String) -> String {
+        var result = ""
+        for (i, digit) in normalize(pan).characters.enumerate() {
+            if i > 0 && i % 4 == 0 {
+                result += " "
+            }
+            
+            result.append(digit)
+        }
+        
+        return result
     }
     
     public static func luhn(pan: String) -> Bool {
