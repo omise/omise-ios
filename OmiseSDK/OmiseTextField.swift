@@ -38,11 +38,10 @@ public class OmiseTextField: UITextField {
     }
     
     func didEndEditing() {
-        // TODO: 👇 unnecessary?
         textColor = isValid ? .blackColor() : .redColor();
     }
     
     func textDidChange() {
-        textColor = isValid ? .blackColor() : .redColor();
+        // no-op for child overrides
     }
 }
