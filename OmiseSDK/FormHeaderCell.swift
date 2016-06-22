@@ -1,12 +1,12 @@
 import UIKit
 
-public class FormHeaderCell: UITableViewCell {
+class FormHeaderCell: UITableViewCell {
     @IBOutlet weak var card_visa: UIImageView!
     @IBOutlet weak var card_mastercard: UIImageView!
     @IBOutlet weak var card_jcb: UIImageView!
     @IBOutlet weak var headerLabel: UILabel!
     
-    public override func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
         preservesSuperviewLayoutMargins = false
         layoutMargins = UIEdgeInsetsZero

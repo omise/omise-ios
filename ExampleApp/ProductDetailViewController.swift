@@ -2,66 +2,40 @@ import UIKit
 import OmiseSDK
 
 class ProductDetailViewController: UIViewController {
-    static let segue = "ProductDetailSegue"
-    private let publicKey = "pkey_test_4y7dh41kuvvawbhslxw"
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "Product"
+    var sdkClient: OmiseSDKClient {
+        return OmiseSDKClient(publicKey: "pkey_test_4y7dh41kuvvawbhslxw")
     }
     
-    // MARK: - Action
-    @IBAction func buyNowForModalButtonTapped(sender: AnyObject) {
-        let omise = OmiseSDKClient(publicKey: publicKey)
-        
-        let creditCardView = CreditCardPopoverController(client: omise)
+    @IBAction func modalBuyNowButtonTapped(sender: AnyObject) {
+        let creditCardView = CreditCardPopoverController(client: sdkClient)
         creditCardView.delegate = self
         creditCardView.autoHandleErrorEnabled = true
+        creditCardView.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .Done, target: self, action: #selector(dismissCreditCardPopover))
         
         let navigationController = UINavigationController(rootViewController: creditCardView)
         self.presentViewController(navigationController, animated: true, completion: nil)
     }
     
     @IBAction func buyNowButtonTapped(sender: AnyObject) {
-        let omise = OmiseSDKClient(publicKey: publicKey)
-        
-        let creditCardView = CreditCardPopoverController(client: omise)
+        let creditCardView = CreditCardPopoverController(client: sdkClient)
         creditCardView.delegate = self
-        creditCardView.showCloseButton = false
         
         self.navigationController?.pushViewController(creditCardView, animated: true)
     }
     
-    // MARK: Navigation
-    func goToCompletePaymentViewController() {
-        self.performSegueWithIdentifier(CompletePaymentViewController.segue, sender: nil)
-    }
-    
-    @IBAction func backButtonTapped(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true)
+    @objc private func dismissCreditCardPopover() {
+        presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 
 extension ProductDetailViewController: CreditCardPopoverDelegate {
-    // MARK: CreditCardPopOverViewDelegate
     func creditCardPopover(creditCardPopover: CreditCardPopoverController, didSucceededWithToken token: OmiseToken) {
-        // Token for create charge
-        print("\(token)")
-        
-        // if charge success
-        creditCardPopover.dismiss()
-        self.goToCompletePaymentViewController()
-        
-        // else charge fail
-        // func handleChargeError(error)
+        dismissCreditCardPopover()
+        performSegueWithIdentifier("CompletePayment", sender: self)
     }
     
     func creditCardPopover(creditCardPopover: CreditCardPopoverController, didFailWithError error: ErrorType) {
-        // Error from SDK
-        print(error)
-        
-        // Dismiss Form if you want
-        creditCardPopover.dismiss()
+        dismissCreditCardPopover()
     }
 }
 

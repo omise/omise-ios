@@ -1,10 +1,10 @@
 import UIKit
 
-public class ConfirmButtonCell: UITableViewCell {
+class ConfirmButtonCell: UITableViewCell {
     @IBOutlet weak var confirmPaymentLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    public override var userInteractionEnabled: Bool {
+    override var userInteractionEnabled: Bool {
         get { return super.userInteractionEnabled }
         set {
             super.userInteractionEnabled = newValue
@@ -14,7 +14,7 @@ public class ConfirmButtonCell: UITableViewCell {
         }
     }
     
-    public override func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
         confirmPaymentLabel.textColor = UIColor.lightGrayColor()
         userInteractionEnabled = false
