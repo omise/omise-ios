@@ -54,17 +54,55 @@ carthage bootstrap
 #### Credit Card Popover
 
 The fastest way to get started with this SDK is to display the provided
-`CreditCardPopoverController` as popover from your application. This view controller
-provides a pre-made credit card form and will automatically [tokenize credit card
- information](https://www.omise.co/security-best-practices) for you. You only need to
-implement the delegate.
+`CreditCardFormController` as popover from your application. The
+`CreditCardFormController` provides a pre-made credit card form and will automatically
+[tokenize credit card information](https://www.omise.co/security-best-practices) for you.
+You only need to implement two delegate methods and a way to display the form.
 
-You can use the controller in popover mode using the `presentViewController` method:
+To use the controller in popover mode, modify your view controller with the following
+additions:
 
 ```swift
-import OmiseSDK
+import OmiseSDK // at the top of the file
 
-@IBAction func displayCreditCardForm() {
+class ViewController: UIViewController {
+  private let publicKey = "pkey_test_123"
+
+  @IBAction func displayCreditCardForm() {
+    let closeButton = UIBarButtonItem(title: "Close", style: .Done, target: self, action: #selector(dismissCreditCardPopover))
+
+    let creditCardView = CreditCardFormController(publicKey: publicKey)
+    creditCardView.delegate = self
+    creditCardView.handleErrors = true
+    creditCardView.navigationItem.rightBarButtonItem = closeButton
+
+    let navigation = UINavigationController(rootViewController: creditCardView)
+    presentViewController(navigation, animated: true, completion: nil)
+  }
+
+  @objc func dismissCreditCardPopover() {
+    presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+  }
+}
+```
+
+Then implement the delegate to receive the `OmiseToken` object after user has entered the
+credit card data:
+
+```swift
+extension ViewController: CreditCardFormDelegate {
+  func creditCardPopover(creditCardPopover: CreditCardPopoverController, didSucceededWithToken token: OmiseToken) {
+    dismissCreditCardPopover()
+
+    // Sends `OmiseToken` to your server for creating a charge, or a customer object.
+  }
+
+  func creditCardPopover(creditCardPopover: CreditCardPopoverController, didFailWithError error: ErrorType) {
+    dismissCreditCardPopover()
+
+    // Only important if we set `handleErrors = false`.
+    // You can send errors to a logging service, or display them to the user here.
+  }
 }
 ```
 
