@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-public class NameOnCardTextField: OmiseTextField {
+public class CardNameTextField: OmiseTextField {
     public override var isValid: Bool {
         return !(text ?? "").isEmpty
     }

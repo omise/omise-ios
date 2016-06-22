@@ -46,7 +46,7 @@
 		986406301CFEA7E4004BCF51 /* CardCVVTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062A1CFEA7E4004BCF51 /* CardCVVTextField.swift */; };
 		986406311CFEA7E4004BCF51 /* CardExpiryDateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062B1CFEA7E4004BCF51 /* CardExpiryDateTextField.swift */; };
 		986406321CFEA7E4004BCF51 /* CardNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062C1CFEA7E4004BCF51 /* CardNumberTextField.swift */; };
-		986406341CFEA7E4004BCF51 /* NameOnCardField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062E1CFEA7E4004BCF51 /* NameOnCardField.swift */; };
+		986406341CFEA7E4004BCF51 /* CardNameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062E1CFEA7E4004BCF51 /* CardNameTextField.swift */; };
 		986406351CFEA7E4004BCF51 /* OmiseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062F1CFEA7E4004BCF51 /* OmiseTextField.swift */; };
 		986406411CFEA818004BCF51 /* CardNumberFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986406371CFEA818004BCF51 /* CardNumberFormCell.swift */; };
 		986406431CFEA818004BCF51 /* ExpiryDateFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986406391CFEA818004BCF51 /* ExpiryDateFormCell.swift */; };
@@ -140,7 +140,7 @@
 		9864062A1CFEA7E4004BCF51 /* CardCVVTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCVVTextField.swift; sourceTree = "<group>"; };
 		9864062B1CFEA7E4004BCF51 /* CardExpiryDateTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardExpiryDateTextField.swift; sourceTree = "<group>"; };
 		9864062C1CFEA7E4004BCF51 /* CardNumberTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumberTextField.swift; sourceTree = "<group>"; };
-		9864062E1CFEA7E4004BCF51 /* NameOnCardField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameOnCardField.swift; sourceTree = "<group>"; };
+		9864062E1CFEA7E4004BCF51 /* CardNameTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNameTextField.swift; sourceTree = "<group>"; };
 		9864062F1CFEA7E4004BCF51 /* OmiseTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseTextField.swift; sourceTree = "<group>"; };
 		986406371CFEA818004BCF51 /* CardNumberFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumberFormCell.swift; sourceTree = "<group>"; };
 		986406391CFEA818004BCF51 /* ExpiryDateFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpiryDateFormCell.swift; sourceTree = "<group>"; };
@@ -246,8 +246,8 @@
 				9864062A1CFEA7E4004BCF51 /* CardCVVTextField.swift */,
 				14ACEF821D02D641001C5319 /* CardExpiryDatePicker.swift */,
 				9864062B1CFEA7E4004BCF51 /* CardExpiryDateTextField.swift */,
+				9864062E1CFEA7E4004BCF51 /* CardNameTextField.swift */,
 				9864062C1CFEA7E4004BCF51 /* CardNumberTextField.swift */,
-				9864062E1CFEA7E4004BCF51 /* NameOnCardField.swift */,
 				9864062F1CFEA7E4004BCF51 /* OmiseTextField.swift */,
 			);
 			name = Fields;
@@ -455,7 +455,7 @@
 				2220F1AD1D0FEE85008CD89F /* OmiseToken.swift in Sources */,
 				2220F1A91D0FEE85008CD89F /* OmiseCard.swift in Sources */,
 				986406311CFEA7E4004BCF51 /* CardExpiryDateTextField.swift in Sources */,
-				986406341CFEA7E4004BCF51 /* NameOnCardField.swift in Sources */,
+				986406341CFEA7E4004BCF51 /* CardNameTextField.swift in Sources */,
 				986406491CFEA818004BCF51 /* SecureCodeFormCell.swift in Sources */,
 				14ACEF831D02D641001C5319 /* CardExpiryDatePicker.swift in Sources */,
 				986406431CFEA818004BCF51 /* ExpiryDateFormCell.swift in Sources */,
