@@ -7,7 +7,7 @@ class ProductDetailViewController: UIViewController {
     @IBAction func modalBuyNowButtonTapped(sender: AnyObject) {
         let creditCardView = CreditCardPopoverController(publicKey: publicKey)
         creditCardView.delegate = self
-        creditCardView.autoHandleErrorEnabled = true
+        creditCardView.handleErrors = true
         creditCardView.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .Done, target: self, action: #selector(dismissCreditCardPopover))
         
         let navigationController = UINavigationController(rootViewController: creditCardView)
