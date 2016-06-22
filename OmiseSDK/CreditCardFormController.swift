@@ -1,11 +1,11 @@
 import UIKit
 
-public protocol CreditCardPopoverDelegate: class {
-    func creditCardPopover(creditCardPopover: CreditCardPopoverController, didSucceededWithToken token: OmiseToken)
-    func creditCardPopover(creditCardPopover: CreditCardPopoverController, didFailWithError error: ErrorType)
+public protocol CreditCardFormDelegate: class {
+    func creditCardForm(controller: CreditCardFormController, didSucceedWithToken token: OmiseToken)
+    func creditCardForm(controller: CreditCardFormController, didFailWithError error: ErrorType)
 }
 
-public class CreditCardPopoverController: UIViewController {
+public class CreditCardFormController: UIViewController {
     private let defaultCellHeight: CGFloat = 44.0
     private let formCellsType = [
         FormHeaderCell.self,
@@ -32,7 +32,7 @@ public class CreditCardPopoverController: UIViewController {
     
     @IBOutlet public weak var formTableView: UITableView!
     
-    public weak var delegate: CreditCardPopoverDelegate?
+    public weak var delegate: CreditCardFormDelegate?
     public var handleErrors = true
     
     private var cardNumber: String { return fieldValueInRow(cardNumberCellIndex) ?? "" }
@@ -49,7 +49,7 @@ public class CreditCardPopoverController: UIViewController {
     
     public init(publicKey: String) {
         self.publicKey = publicKey
-        super.init(nibName: "CreditCardPopoverController", bundle: NSBundle(forClass: CreditCardPopoverController.self))
+        super.init(nibName: "CreditCardFormController", bundle: NSBundle(forClass: CreditCardFormController.self))
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -58,12 +58,12 @@ public class CreditCardPopoverController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Credit Card Form", tableName: nil, bundle: NSBundle(forClass: CreditCardPopoverController.self), value: "", comment: "")
+        title = NSLocalizedString("Credit Card Form", tableName: nil, bundle: NSBundle(forClass: CreditCardFormController.self), value: "", comment: "")
         modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(keyboardWillAppear(_:)), name: UIKeyboardWillShowNotification, object: nil)
         
-        let bundle = NSBundle(forClass: CreditCardPopoverController.self)
+        let bundle = NSBundle(forClass: CreditCardFormController.self)
         formCells = formCellsType.map({ (type) -> UITableViewCell in
             var identifier = String(type)
             if identifier.hasPrefix("OmiseSDK.") {
@@ -123,7 +123,7 @@ public class CreditCardPopoverController: UIViewController {
     
     private func handleError(error: ErrorType) {
         guard handleErrors else {
-            delegate?.creditCardPopover(self, didFailWithError: error)
+            delegate?.creditCardForm(self, didFailWithError: error)
             return
         }
         
@@ -161,7 +161,7 @@ public class CreditCardPopoverController: UIViewController {
                 if let error = error {
                     s.handleError(error)
                 } else if let token = token {
-                    s.delegate?.creditCardPopover(s, didSucceededWithToken: token)
+                    s.delegate?.creditCardForm(s, didSucceedWithToken: token)
                 }
             }
         }
@@ -182,7 +182,7 @@ public class CreditCardPopoverController: UIViewController {
     }
 }
 
-extension CreditCardPopoverController: UITableViewDataSource {
+extension CreditCardFormController: UITableViewDataSource {
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return formCells.count
     }
@@ -202,7 +202,7 @@ extension CreditCardPopoverController: UITableViewDataSource {
     }
 }
 
-extension CreditCardPopoverController: UITableViewDelegate {
+extension CreditCardFormController: UITableViewDelegate {
     public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return formCells[indexPath.row].systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
     }
