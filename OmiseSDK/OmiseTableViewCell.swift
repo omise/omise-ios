@@ -1,6 +1,6 @@
 import UIKit
 
-public class OmiseTableViewCell: UITableViewCell {
+class OmiseTableViewCell: UITableViewCell {
     static var identifier: String {
         return ""
     }

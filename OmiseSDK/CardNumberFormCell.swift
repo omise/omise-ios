@@ -1,5 +1,5 @@
 import UIKit
 
-public class CardNumberFormCell: UITableViewCell {
+class CardNumberFormCell: UITableViewCell {
     @IBOutlet weak var textField: CardNumberTextField!
 }

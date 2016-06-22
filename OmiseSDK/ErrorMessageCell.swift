@@ -1,9 +1,9 @@
 import UIKit
 
-public class ErrorMessageCell: UITableViewCell {    
+class ErrorMessageCell: UITableViewCell {
     @IBOutlet weak var errorMessageLabel: UILabel!
     
-    public override func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
         preservesSuperviewLayoutMargins = false
         layoutMargins = UIEdgeInsetsZero

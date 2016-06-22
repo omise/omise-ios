@@ -36,7 +36,6 @@ public class CreditCardPopoverController: UIViewController {
     public var autoHandleErrorEnabled = true
     public var titleColor = UIColor.blackColor()
     public var navigationBarColor = UIColor.whiteColor()
-    public var showCloseButton = true
     
     private var cardNumber: String { return fieldValueInRow(cardNumberCellIndex) ?? "" }
     private var cardName: String { return fieldValueInRow(nameOnCardCellIndex) ?? "" }
@@ -65,10 +64,6 @@ public class CreditCardPopoverController: UIViewController {
         
         // Navbar
         title = NSLocalizedString("Credit Card Form", tableName: nil, bundle: NSBundle(forClass: CreditCardPopoverController.self), value: "", comment: "")
-        if showCloseButton {
-            let closeBarButtonItem = UIBarButtonItem(title: "Close", style: .Plain, target: self, action: #selector(dismiss))
-            navigationItem.rightBarButtonItem = closeBarButtonItem
-        }
         modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
 
         // TableView
@@ -115,28 +110,12 @@ public class CreditCardPopoverController: UIViewController {
     }
     
     
-    public func dismiss() {
-        view.endEditing(true)
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    public func popover(viewController: UIViewController) {
-        dispatch_async(dispatch_get_main_queue()) {
-            viewController.presentViewController(self, animated: true, completion: nil)
-        }
-    }
-    
-    
     @objc private func fieldDidChange(sender: AnyObject) {
         validateForm()
         
         if let cardNumberField = sender as? CardNumberTextField {
             formHeaderCell?.setCardBrand(cardNumberField.cardBrand)
         }
-    }
-    
-    @IBAction private func closeButtonTapped(sender: AnyObject) {
-        dismiss()
     }
     
     @objc private func keyboardWillAppear(notification: NSNotification){

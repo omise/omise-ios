@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iu0-Jf-pl4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iu0-Jf-pl4">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Product Detail View Controller-->
+        <!--Product-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ProductDetailViewController" customModule="ExampleApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -28,9 +28,6 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Back"/>
-                                        <connections>
-                                            <action selector="backButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xP0-Bj-ASk"/>
-                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ij-hE-4pL">
                                         <rect key="frame" x="270" y="35" width="61" height="21"/>
@@ -70,7 +67,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="buyNowButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qWK-0X-TPd"/>
+                                    <action selector="buyNowButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8FN-et-xeC"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lensen : Art beyond seeing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V65-Ac-a7G">
@@ -97,7 +94,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="buyNowForModalButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1j4-Wt-wKK"/>
+                                    <action selector="modalBuyNowButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gha-Nh-8Lv"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="product" translatesAutoresizingMaskIntoConstraints="NO" id="GkE-vd-q88">
@@ -134,16 +131,16 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="HNP-A6-Yud"/>
+                    <navigationItem key="navigationItem" title="Product" id="HNP-A6-Yud"/>
                     <connections>
-                        <segue destination="TWZ-Mj-mej" kind="show" identifier="CompletePaymentSegue" id="UKD-dD-tkb"/>
+                        <segue destination="TWZ-Mj-mej" kind="show" identifier="CompletePayment" id="UKD-dD-tkb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1007" y="659"/>
         </scene>
-        <!--Product View Controller-->
+        <!--Home-->
         <scene sceneID="Qcr-lm-APl">
             <objects>
                 <viewController id="v0l-Yk-6vi" customClass="ProductViewController" customModule="ExampleApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -194,16 +191,16 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="Dzp-87-JkD"/>
+                    <navigationItem key="navigationItem" title="Home" id="Dzp-87-JkD"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="ProductDetailSegue" id="416-yQ-Fto"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="ProductDetail" id="416-yQ-Fto"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c4U-fb-3Hn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="305" y="659"/>
         </scene>
-        <!--Complete Payment View Controller-->
+        <!--Success-->
         <scene sceneID="79S-SL-zwq">
             <objects>
                 <viewController id="TWZ-Mj-mej" customClass="CompletePaymentViewController" customModule="ExampleApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -275,6 +272,13 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Success" id="HxT-68-c3i">
+                        <barButtonItem key="rightBarButtonItem" title="Done" style="done" id="b2V-Vx-Ixe">
+                            <connections>
+                                <action selector="closeButtonTapped:" destination="TWZ-Mj-mej" id="WrH-oz-ikk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SHh-8a-ic8" userLabel="First Responder" sceneMemberID="firstResponder"/>
