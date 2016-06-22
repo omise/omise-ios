@@ -2,12 +2,10 @@ import UIKit
 import OmiseSDK
 
 class ProductDetailViewController: UIViewController {
-    var sdkClient: OmiseSDKClient {
-        return OmiseSDKClient(publicKey: "pkey_test_4y7dh41kuvvawbhslxw")
-    }
+    private let publicKey = "pkey_test_4y7dh41kuvvawbhslxw"
     
     @IBAction func modalBuyNowButtonTapped(sender: AnyObject) {
-        let creditCardView = CreditCardPopoverController(client: sdkClient)
+        let creditCardView = CreditCardPopoverController(publicKey: publicKey)
         creditCardView.delegate = self
         creditCardView.autoHandleErrorEnabled = true
         creditCardView.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .Done, target: self, action: #selector(dismissCreditCardPopover))
@@ -17,7 +15,7 @@ class ProductDetailViewController: UIViewController {
     }
     
     @IBAction func buyNowButtonTapped(sender: AnyObject) {
-        let creditCardView = CreditCardPopoverController(client: sdkClient)
+        let creditCardView = CreditCardPopoverController(publicKey: publicKey)
         creditCardView.delegate = self
         
         self.navigationController?.pushViewController(creditCardView, animated: true)

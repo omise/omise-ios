@@ -21,8 +21,8 @@ public class CreditCardPopoverController: UIViewController {
     private let expiryDateCellIndex = 2
     private let secureCodeCellIndex = 3
   
-    private var client: OmiseSDKClient
-    private var request: OmiseTokenRequest?
+    private let publicKey: String
+    
     private var formCells = [UITableViewCell]()
     private var formFields = [OmiseTextField]()
     private var formHeaderCell: FormHeaderCell?
@@ -49,9 +49,8 @@ public class CreditCardPopoverController: UIViewController {
         return (formFields[expiryDateCellIndex] as? CardExpiryDateTextField)?.selectedYear ?? 0
     }
     
-    
-    public init(client: OmiseSDKClient) {
-        self.client = client
+    public init(publicKey: String) {
+        self.publicKey = publicKey
         super.init(nibName: "CreditCardPopoverController", bundle: NSBundle(forClass: CreditCardPopoverController.self))
     }
     
@@ -61,12 +60,11 @@ public class CreditCardPopoverController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Navbar
         title = NSLocalizedString("Credit Card Form", tableName: nil, bundle: NSBundle(forClass: CreditCardPopoverController.self), value: "", comment: "")
         modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
 
-        // TableView
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(keyboardWillAppear(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        
         let bundle = NSBundle(forClass: CreditCardPopoverController.self)
         formCells = formCellsType.map({ (type) -> UITableViewCell in
             var identifier = String(type)
@@ -79,14 +77,12 @@ public class CreditCardPopoverController: UIViewController {
             formTableView.registerNib(cellNib, forCellReuseIdentifier: identifier)
             return cellNib.instantiateWithOwner(nil, options: nil).first as? UITableViewCell ?? UITableViewCell()
         })
+        
         formTableView.delegate = self
         formTableView.dataSource = self
         formTableView.tableFooterView = UIView()
         formTableView.rowHeight = UITableViewAutomaticDimension
         formTableView.estimatedRowHeight = defaultCellHeight
-        
-        //Keyboard
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(keyboardWillAppear(_:)), name: UIKeyboardWillShowNotification, object: nil)
     }
     
     public override func viewDidAppear(animated: Bool) {
@@ -147,28 +143,26 @@ public class CreditCardPopoverController: UIViewController {
     
     private func requestToken() {
         view.endEditing(true)
+        startActivityIndicator()
         
-        request = OmiseTokenRequest(
+        let request = OmiseTokenRequest(
             name: cardName,
             number: cardNumber,
             expirationMonth: expirationMonth,
             expirationYear: expirationYear,
             securityCode: cvv
         )
-      
-        guard let request = request else {
-            sdkWarn("OMISE Request is empty.")
-            return
-        }
-      
-        startActivityIndicator()
-        client.send(request) { (token, error) in
+        
+        let client = OmiseSDKClient(publicKey: publicKey)
+        client.send(request) { [weak self] (token, error) in
             dispatch_async(dispatch_get_main_queue()) {
-                self.stopActivityIndicator()
+                guard let s = self else { return }
+                
+                s.stopActivityIndicator()
                 if let error = error {
-                    self.handleError(error)
+                    s.handleError(error)
                 } else if let token = token {
-                    self.delegate?.creditCardPopover(self, didSucceededWithToken: token)
+                    s.delegate?.creditCardPopover(s, didSucceededWithToken: token)
                 }
             }
         }
@@ -179,17 +173,13 @@ public class CreditCardPopoverController: UIViewController {
     }
     
     private func startActivityIndicator() {
-        dispatch_async(dispatch_get_main_queue()) {
-            self.confirmButtonCell?.startActivityIndicator()
-            self.formTableView.userInteractionEnabled = false
-        }
+        confirmButtonCell?.startActivityIndicator()
+        formTableView.userInteractionEnabled = false
     }
     
     private func stopActivityIndicator() {
-        dispatch_async(dispatch_get_main_queue()) {
-            self.confirmButtonCell?.stopActivityIndicator()
-            self.formTableView.userInteractionEnabled = true
-        }
+        confirmButtonCell?.stopActivityIndicator()
+        formTableView.userInteractionEnabled = true
     }
 }
 
