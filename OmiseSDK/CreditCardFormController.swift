@@ -16,35 +16,43 @@ public class CreditCardFormController: UIViewController {
         ErrorMessageCell.self,
         ConfirmButtonCell.self
     ]
-    private let cardNumberCellIndex = 0
-    private let nameOnCardCellIndex = 1
-    private let expiryDateCellIndex = 2
-    private let secureCodeCellIndex = 3
-  
+    
     private let publicKey: String
-    
-    private var formCells = [UITableViewCell]()
-    private var formFields = [OmiseTextField]()
-    private var formHeaderCell: FormHeaderCell?
-    private var errorMessageCell: ErrorMessageCell?
-    private var confirmButtonCell: ConfirmButtonCell?
-    private var hasErrorMessage = false
-    
-    @IBOutlet public weak var formTableView: UITableView!
     
     public weak var delegate: CreditCardFormDelegate?
     public var handleErrors = true
     
-    private var cardNumber: String { return fieldValueInRow(cardNumberCellIndex) ?? "" }
-    private var cardName: String { return fieldValueInRow(nameOnCardCellIndex) ?? "" }
-    private var cvv: String { return fieldValueInRow(secureCodeCellIndex) ?? "" }
-
-    private var expirationMonth: Int {
-        return (formFields[expiryDateCellIndex] as? CardExpiryDateTextField)?.selectedMonth ?? 0
+    private var hasErrorMessage = false
+    @IBOutlet private weak var formTableView: UITableView!
+    private var formCells = [UITableViewCell]()
+    private var formFields = [OmiseTextField]()
+    
+    private var formHeaderCell: FormHeaderCell? {
+        return formCells[0] as? FormHeaderCell
     }
     
-    private var expirationYear: Int {
-        return (formFields[expiryDateCellIndex] as? CardExpiryDateTextField)?.selectedYear ?? 0
+    private var cardNumberCell: CardNumberFormCell? {
+        return formCells[1] as? CardNumberFormCell
+    }
+    
+    private var cardNameCell: NameCardFormCell? {
+        return formCells[2] as? NameCardFormCell
+    }
+    
+    private var expiryDateCell: ExpiryDateFormCell? {
+        return formCells[3] as? ExpiryDateFormCell
+    }
+    
+    private var secureCodeCell: SecureCodeFormCell? {
+        return formCells[4] as? SecureCodeFormCell
+    }
+    
+    private var errorMessageCell: ErrorMessageCell? {
+        return formCells[5] as? ErrorMessageCell
+    }
+    
+    private var confirmButtonCell: ConfirmButtonCell? {
+        return formCells[6] as? ConfirmButtonCell
     }
     
     public init(publicKey: String) {
@@ -61,8 +69,6 @@ public class CreditCardFormController: UIViewController {
         title = NSLocalizedString("Credit Card Form", tableName: nil, bundle: NSBundle(forClass: CreditCardFormController.self), value: "", comment: "")
         modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(keyboardWillAppear(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        
         let bundle = NSBundle(forClass: CreditCardFormController.self)
         formCells = formCellsType.map({ (type) -> UITableViewCell in
             var identifier = String(type)
@@ -72,7 +78,6 @@ public class CreditCardFormController: UIViewController {
             }
             
             let cellNib = UINib(nibName: identifier, bundle: bundle)
-            formTableView.registerNib(cellNib, forCellReuseIdentifier: identifier)
             return cellNib.instantiateWithOwner(nil, options: nil).first as? UITableViewCell ?? UITableViewCell()
         })
         
@@ -96,6 +101,8 @@ public class CreditCardFormController: UIViewController {
       
         let accessoryView = OmiseFormAccessoryView()
         accessoryView.attachToTextFields(formFields, inViewController: self)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(keyboardWillAppear(_:)), name: UIKeyboardWillShowNotification, object: nil)
     }
     
     override public func viewDidDisappear(animated: Bool) {
@@ -145,11 +152,11 @@ public class CreditCardFormController: UIViewController {
         startActivityIndicator()
         
         let request = OmiseTokenRequest(
-            name: cardName,
-            number: cardNumber,
-            expirationMonth: expirationMonth,
-            expirationYear: expirationYear,
-            securityCode: cvv
+            name: cardNameCell?.value ?? "",
+            number: cardNumberCell?.value ?? "",
+            expirationMonth: expiryDateCell?.month ?? 0,
+            expirationYear: expiryDateCell?.year ?? 0,
+            securityCode: secureCodeCell?.value ?? ""
         )
         
         let client = OmiseSDKClient(publicKey: publicKey)
@@ -165,10 +172,6 @@ public class CreditCardFormController: UIViewController {
                 }
             }
         }
-    }
-    
-    private func fieldValueInRow(row: Int) -> String? {
-        return formFields[row].text
     }
     
     private func startActivityIndicator() {
@@ -189,15 +192,6 @@ extension CreditCardFormController: UITableViewDataSource {
     
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = formCells[indexPath.row]
-
-        if let headerCell = cell as? FormHeaderCell {
-            self.formHeaderCell = headerCell
-        } else if let errorMessageCell = cell as? ErrorMessageCell {
-            self.errorMessageCell = errorMessageCell
-        } else if let confirmButtonCell = cell as? ConfirmButtonCell {
-            self.confirmButtonCell = confirmButtonCell
-        }
-        
         return cell
     }
 }
