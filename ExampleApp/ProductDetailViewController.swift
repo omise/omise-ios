@@ -5,7 +5,7 @@ class ProductDetailViewController: UIViewController {
     private let publicKey = "pkey_test_4y7dh41kuvvawbhslxw"
     
     @IBAction func modalBuyNowButtonTapped(sender: AnyObject) {
-        let creditCardView = CreditCardPopoverController(publicKey: publicKey)
+        let creditCardView = CreditCardFormController(publicKey: publicKey)
         creditCardView.delegate = self
         creditCardView.handleErrors = true
         creditCardView.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .Done, target: self, action: #selector(dismissCreditCardPopover))
@@ -15,7 +15,7 @@ class ProductDetailViewController: UIViewController {
     }
     
     @IBAction func buyNowButtonTapped(sender: AnyObject) {
-        let creditCardView = CreditCardPopoverController(publicKey: publicKey)
+        let creditCardView = CreditCardFormController(publicKey: publicKey)
         creditCardView.delegate = self
         
         self.navigationController?.pushViewController(creditCardView, animated: true)
@@ -26,13 +26,13 @@ class ProductDetailViewController: UIViewController {
     }
 }
 
-extension ProductDetailViewController: CreditCardPopoverDelegate {
-    func creditCardPopover(creditCardPopover: CreditCardPopoverController, didSucceededWithToken token: OmiseToken) {
+extension ProductDetailViewController: CreditCardFormDelegate {
+    func creditCardForm(controller: CreditCardFormController, didSucceedWithToken token: OmiseToken) {
         dismissCreditCardPopover()
         performSegueWithIdentifier("CompletePayment", sender: self)
     }
     
-    func creditCardPopover(creditCardPopover: CreditCardPopoverController, didFailWithError error: ErrorType) {
+    func creditCardForm(controller: CreditCardFormController, didFailWithError error: ErrorType) {
         dismissCreditCardPopover()
     }
 }
