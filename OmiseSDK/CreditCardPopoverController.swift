@@ -33,9 +33,7 @@ public class CreditCardPopoverController: UIViewController {
     @IBOutlet public weak var formTableView: UITableView!
     
     public weak var delegate: CreditCardPopoverDelegate?
-    public var autoHandleErrorEnabled = true
-    public var titleColor = UIColor.blackColor()
-    public var navigationBarColor = UIColor.whiteColor()
+    public var handleErrors = true
     
     private var cardNumber: String { return fieldValueInRow(cardNumberCellIndex) ?? "" }
     private var cardName: String { return fieldValueInRow(nameOnCardCellIndex) ?? "" }
@@ -128,16 +126,17 @@ public class CreditCardPopoverController: UIViewController {
     }
     
     private func handleError(error: ErrorType) {
-        if autoHandleErrorEnabled {
-            let e = error as! OmiseError
-            let errorString = e.nsError.localizedDescription
-            errorMessageCell?.setErrorMessage(errorString)
-            hasErrorMessage = true
-            formTableView.beginUpdates()
-            formTableView.endUpdates()
-        } else {
+        guard handleErrors else {
             delegate?.creditCardPopover(self, didFailWithError: error)
+            return
         }
+        
+        let e = error as! OmiseError
+        let errorString = e.nsError.localizedDescription
+        errorMessageCell?.setErrorMessage(errorString)
+        hasErrorMessage = true
+        formTableView.beginUpdates()
+        formTableView.endUpdates()
     }
     
     private func validateForm() {
