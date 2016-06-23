@@ -174,3 +174,8 @@ class Handler: OmiseTokenRequestDelegate {
   }
 }
 ```
+
+## LICENSE
+
+MIT (See the (full license text)[https://github.com/omise/omise-ios/blob/master/LICENSE])
+
