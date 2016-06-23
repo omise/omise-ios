@@ -9,7 +9,7 @@ See [v1 branch](https://github.com/omise/omise-ios/tree/v1) for the previous ver
 Omise is a payment service provider currently operating in Thailand. Omise provides a set
 of clean APIs that helps merchants of any size accept credit cards online.
 
-Omise iOS SDK provides Android bindings for the Omise
+Omise iOS SDK provides bindings for the Omise
 [Tokenization](https://www.omise.co/tokens-api) API so you do not need to pass credit card
 data to your server as well as components for entering credit card information.
 
