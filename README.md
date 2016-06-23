@@ -4,6 +4,8 @@
 [![](https://img.shields.io/gitter/room/omise/omise-ios.svg?style=flat-square)](https://gitter.im/omise/omise-ios)
 [![](https://img.shields.io/badge/email-support-yellow.svg?style=flat-square)](mailto:support@omise.co)
 
+See [v1 branch](https://github.com/omise/omise-ios/tree/v1) for the previous version.
+
 Omise is a payment service provider currently operating in Thailand. Omise provides a set
 of clean APIs that helps merchants of any size accept credit cards online.
 
