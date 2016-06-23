@@ -106,19 +106,71 @@ extension ViewController: CreditCardFormDelegate {
 }
 ```
 
-* CreditCardPopoverController
-  * publicKey
-  * delegate
-  * handleErrors
-  * using UINavigation mode
-  * using UIPopover mode
-* Custom fields.
-  * CardCVVTextField
-  * CardExpiryDatePicker
-  * CardExpiryDateTextField
-  * CardNumberTextField
-  * NameOnCardField
-  * OmiseTextField
-* Low-level Toolkit
-  * OmiseSDKClient && TokenRequest
-  * CardNumber
+Alternatively you can also push the view controller onto a `UINavigationController` stack
+like so:
+
+```swift
+@IBAction func displayCreditCardForm() {
+  let creditCardView = CreditCardFormController(publicKey: publicKey)
+  creditCardView.delegate = self
+  creditCardView.handleErrors = true
+
+  navigationController?.pushViewController(creditCardView, animated: true)
+}
+```
+
+#### Custom Credit Card Form
+
+You can make use of the SDK's text field components to build your own forms:
+
+* `CardNumberTextField` - Provides basic number grouping as the user types.
+* `CardNameTextField`
+* `CardExpiryDatePicker` - `UIPickerView` implementation that have a month and year
+  column.
+* `CardCVVTextField` - Masked number field.
+
+Additionally fields also turns red automatically if their content fails basic validation
+(e.g. alphabets in number field, or content with wrong length)
+
+#### Manual Tokenization
+
+If you build your own credit card form, you will need to use `OmiseSDKClient` to manually
+tokenize the contents. You can do so by first creating and initializing an
+`OmiseTokenRequest` like so:
+
+```swift
+let request = OmiseTokenRequest(
+  name: "John Smith",
+  number: "4242424242424242",
+  expirationMonth: 10,
+  expirationYear: 2019,
+  securityCode: "123"
+)
+```
+
+Then initialize an `OmiseSDKClient` with your public key and send the request:
+
+```swift
+let client = OmiseSDKClient(publicKey: publicKey)
+client.send(request) { [weak self] (token, error) in
+  guard let s = self else { return }
+
+  // check `error` or send `token` to your server.
+}
+```
+
+Alternatively, delegate style is also supported:
+
+```swift
+client.send(request, Handler())
+
+class Handler: OmiseTokenRequestDelegate {
+  func tokenRequest(request: OmiseTokenRequest, didSucceedWithToken token: OmiseToken) {
+    // handles token
+  }
+
+  func tokenRequest(request: OmiseTokenRequest, didFailWithError error: ErrorType) {
+    // handle error if `handleErrors == false`
+  }
+}
+```
