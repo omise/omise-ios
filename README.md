@@ -172,7 +172,7 @@ class Handler: OmiseTokenRequestDelegate {
   }
 
   func tokenRequest(request: OmiseTokenRequest, didFailWithError error: ErrorType) {
-    // handle error if `handleErrors == false`
+    // handle errors
   }
 }
 ```
