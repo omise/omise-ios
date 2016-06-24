@@ -24,7 +24,7 @@ public class CardExpiryDateTextField: OmiseTextField {
         
         let thisMonth = calendar.component(.Month, fromDate: now)
         let thisYear = calendar.component(.Year, fromDate: now)
-        guard let year = self.selectedYear, month = self.selectedYear else {
+        guard let year = self.selectedYear, month = self.selectedMonth else {
             return false
         }
         
