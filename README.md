@@ -177,6 +177,12 @@ class Handler: OmiseTokenRequestDelegate {
 }
 ```
 
+## Contributing
+
+Pull requests and bugfixes are welcome. For larger scope of work, please pop on to our
+[![](https://img.shields.io/gitter/room/omise/omise-ios.svg?style=flat-square)](https://gitter.im/omise/omise-ios)
+chatroom to discuss first.
+
 ## LICENSE
 
 MIT (See the (full license text)[https://github.com/omise/omise-ios/blob/master/LICENSE])
