@@ -2,10 +2,10 @@ import Foundation
 import UIKit
 
 public class CardCVVTextField: OmiseTextField {
-    private let maxLength = 3
+    private let validLengths = 3...4
     
     public override var isValid: Bool {
-        return text?.characters.count >= maxLength
+        return validLengths ~= text?.characters.count ?? 0
     }
     
     override public init(frame: CGRect) {
@@ -27,5 +27,13 @@ public class CardCVVTextField: OmiseTextField {
         keyboardType = .NumberPad
         placeholder = "123"
         secureTextEntry = true
+    }
+    
+    override func textDidChange() {
+        super.textDidChange()
+        if text?.characters.count == 5 {
+            guard let text = text else { return }
+            self.text = String(text.characters.dropLast())
+        }
     }
 }
