@@ -48,7 +48,11 @@ public class OmiseSDKClient: NSObject {
     }
     
     public func send(request: OmiseTokenRequest, callback: OmiseTokenRequest.Callback?) {
-        request.startWith(self, callback: callback)
+        request.startWith(self) { (result) in
+            dispatch_async(dispatch_get_main_queue(), { 
+                callback?(result)
+            })
+        }
     }
     
     public func send(request: OmiseTokenRequest, delegate: OmiseTokenRequestDelegate?) {

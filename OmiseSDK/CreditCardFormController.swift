@@ -161,16 +161,14 @@ public class CreditCardFormController: UIViewController {
         
         let client = OmiseSDKClient(publicKey: publicKey)
         client.send(request) { [weak self] (result) in
-            dispatch_async(dispatch_get_main_queue()) {
-                guard let s = self else { return }
-                
-                s.stopActivityIndicator()
-                switch result {
-                case let .Succeed(token):
-                    s.delegate?.creditCardForm(s, didSucceedWithToken: token)
-                case let .Fail(err):
-                    s.handleError(err)
-                }
+            guard let s = self else { return }
+            
+            s.stopActivityIndicator()
+            switch result {
+            case let .Succeed(token):
+                s.delegate?.creditCardForm(s, didSucceedWithToken: token)
+            case let .Fail(err):
+                s.handleError(err)
             }
         }
     }
