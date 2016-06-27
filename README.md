@@ -40,7 +40,7 @@ having to go through your server.
 Add the following line to your `Cartfile`:
 
 ```
-github "omise/omise-ios" ~> 2.0
+github "omise/omise-ios" ~> 2.1
 ```
 
 And run `carthage bootstrap` or `carthage build` Or run this copy-pastable script for a
