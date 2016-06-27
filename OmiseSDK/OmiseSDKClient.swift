@@ -48,19 +48,20 @@ public class OmiseSDKClient: NSObject {
     }
     
     public func send(request: OmiseTokenRequest, callback: OmiseTokenRequest.Callback?) {
-        request.startWith(self, callback: callback)
+        request.startWith(self) { (result) in
+            dispatch_async(dispatch_get_main_queue(), { 
+                callback?(result)
+            })
+        }
     }
     
     public func send(request: OmiseTokenRequest, delegate: OmiseTokenRequestDelegate?) {
-        send(request) { (token, error) in
-            guard token != nil || error != nil else {
-                return sdkWarn("token request has neither token nor error data, delegate ignored.")
-            }
-            
-            if let token = token {
+        send(request) { (result) in
+            switch result {
+            case let .Succeed(token):
                 delegate?.tokenRequest(request, didSucceedWithToken: token)
-            } else if let error = error {
-                delegate?.tokenRequest(request, didFailWithError: error)
+            case let .Fail(err):
+                delegate?.tokenRequest(request, didFailWithError: err)
             }
         }
     }

@@ -5,8 +5,13 @@ public protocol OmiseTokenRequestDelegate {
     func tokenRequest(request: OmiseTokenRequest, didFailWithError error: ErrorType)
 }
 
+public enum OmiseTokenRequestResult {
+    case Succeed(token: OmiseToken)
+    case Fail(error: ErrorType)
+}
+
 public class OmiseTokenRequest: NSObject {
-    public typealias Callback = (OmiseToken?, ErrorType?) -> ()
+    public typealias Callback = (OmiseTokenRequestResult) -> ()
     
     public let name: String
     public let number: String
@@ -32,7 +37,7 @@ public class OmiseTokenRequest: NSObject {
         do {
             request = try buildURLRequest(client)
         } catch let err {
-            callback?(nil, err)
+            callback?(.Fail(error: err))
             return nil
         }
         
@@ -93,37 +98,44 @@ public class OmiseTokenRequest: NSObject {
             guard let callback = callback else { return } // nobody around to hear the leaf falls
 
             if let error = error {
-                return callback(nil, error)
+                return callback(.Fail(error: error))
             }
+            
             guard let httpResponse = response as? NSHTTPURLResponse else {
-                return callback(nil, OmiseError.Unexpected(message: "no error and no response", underlying: nil))
+                let error = OmiseError.Unexpected(message: "no error and no response.", underlying: nil)
+                return callback(.Fail(error: error))
             }
             
             switch httpResponse.statusCode {
             case 400..<600:
                 guard let data = data else {
-                    return callback(nil, OmiseError.Unexpected(message: "error response with no data", underlying: nil))
+                    let error = OmiseError.Unexpected(message: "error response with no data", underlying: nil)
+                    return callback(.Fail(error: error))
                 }
                 
                 do {
-                    return callback(nil, try OmiseJsonParser.parseError(data))
+                    return callback(.Fail(error: try OmiseJsonParser.parseError(data)))
                 } catch let err {
-                    return callback(nil, OmiseError.Unexpected(message: "error response with invalid JSON", underlying: err))
+                    let error = OmiseError.Unexpected(message: "error response with invalid JSON", underlying: err)
+                    return callback(.Fail(error: error))
                 }
                 
             case 200..<300:
                 guard let data = data else {
-                    return callback(nil, OmiseError.Unexpected(message: "HTTP 200 but no data", underlying: nil))
+                    let error = OmiseError.Unexpected(message: "HTTP 200 but no data", underlying: nil)
+                    return callback(.Fail(error: error))
                 }
                 
                 do {
-                    return callback(try OmiseJsonParser.parseToken(data), nil)
+                    return callback(.Succeed(token: try OmiseJsonParser.parseToken(data)))
                 } catch let err {
-                    return callback(nil, OmiseError.Unexpected(message: "200 response with invalid JSON", underlying: err))
+                    let error = OmiseError.Unexpected(message: "200 response with invalid JSON", underlying: err)
+                    return callback(.Fail(error: error))
                 }
                 
             default:
-                return callback(nil, OmiseError.Unexpected(message: "unrecognized HTTP status code: \(httpResponse.statusCode)", underlying: nil))
+                let error = OmiseError.Unexpected(message: "unrecognized HTTP status code: \(httpResponse.statusCode)", underlying: nil)
+                return callback(.Fail(error: error))
             }
         }
     }
