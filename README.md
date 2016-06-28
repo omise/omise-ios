@@ -53,6 +53,9 @@ carthage bootstrap
 
 ## Usage
 
+If you clone this project to your local hard drive, you can also checkout the `QuickStart`
+playground. Otherwise if you'd like all the details, read on:
+
 #### Credit Card Popover
 
 The fastest way to get started with this SDK is to display the provided
