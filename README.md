@@ -19,7 +19,7 @@ question regarding this SDK and the functionality it provides.
 ## Requirements
 
 * Public key. [Register for an Omise account](https://dashboard.omise.co/signup) to obtain your API keys.
-* iOS 9 or higher deployment target.
+* iOS 8 or higher deployment target.
 * Xcode 7.0 or higher.
 * [Carthage](https://github.com/Carthage/Carthage) dependency manager.
 
