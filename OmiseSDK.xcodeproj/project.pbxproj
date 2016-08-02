@@ -365,6 +365,7 @@
 		2259310F1CE3210700841B86 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = OMS;
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = Omise;
