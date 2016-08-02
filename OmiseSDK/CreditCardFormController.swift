@@ -55,7 +55,7 @@ public class CreditCardFormController: UIViewController {
         return formCells[6] as? ConfirmButtonCell
     }
     
-    public init(publicKey: String) {
+    @objc public init(publicKey: String) {
         self.publicKey = publicKey
         super.init(nibName: "CreditCardFormController", bundle: NSBundle(forClass: CreditCardFormController.self))
     }
@@ -207,3 +207,4 @@ extension CreditCardFormController: UITableViewDelegate {
         }
     }
 }
+
