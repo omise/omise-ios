@@ -56,15 +56,16 @@ carthage bootstrap
 If you clone this project to your local hard drive, you can also checkout the `QuickStart`
 playground. Otherwise if you'd like all the details, read on:
 
-#### Credit Card Popover
+#### Credit Card Form
 
 The fastest way to get started with this SDK is to display the provided
-`CreditCardFormController` as popover from your application. The
+`CreditCardFormController` in your application. The
 `CreditCardFormController` provides a pre-made credit card form and will automatically
 [tokenize credit card information](https://www.omise.co/security-best-practices) for you.
 You only need to implement two delegate methods and a way to display the form.
 
-To use the controller in popover mode, modify your view controller with the following
+##### Use Credit Card Form in code
+To use the controller in your application, modify your view controller with the following
 additions:
 
 ```swift
@@ -74,9 +75,9 @@ class ViewController: UIViewController {
   private let publicKey = "pkey_test_123"
 
   @IBAction func displayCreditCardForm() {
-    let closeButton = UIBarButtonItem(title: "Close", style: .Done, target: self, action: #selector(dismissCreditCardPopover))
+    let closeButton = UIBarButtonItem(title: "Close", style: .Done, target: self, action: #selector(dismissCreditCardForm))
 
-    let creditCardView = CreditCardFormController(publicKey: publicKey)
+    let creditCardView = CreditCardFormController.creditCardFormWithPublicKey(publicKey)
     creditCardView.delegate = self
     creditCardView.handleErrors = true
     creditCardView.navigationItem.rightBarButtonItem = closeButton
@@ -85,8 +86,8 @@ class ViewController: UIViewController {
     presentViewController(navigation, animated: true, completion: nil)
   }
 
-  @objc func dismissCreditCardPopover() {
-    presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+  @objc func dismissCreditCardForm() {
+    dismissViewControllerAnimated(true, completion: nil)
   }
 }
 ```
@@ -96,14 +97,14 @@ credit card data:
 
 ```swift
 extension ViewController: CreditCardFormDelegate {
-  func creditCardPopover(creditCardPopover: CreditCardPopoverController, didSucceededWithToken token: OmiseToken) {
-    dismissCreditCardPopover()
+  func creditCardForm(controller: CreditCardFormController, didSucceedWithToken token: OmiseToken) {
+    dismissCreditCardForm()
 
     // Sends `OmiseToken` to your server for creating a charge, or a customer object.
   }
 
-  func creditCardPopover(creditCardPopover: CreditCardPopoverController, didFailWithError error: ErrorType) {
-    dismissCreditCardPopover()
+  func creditCardForm(controller: CreditCardFormController, didFailWithError error: ErrorType) {
+    dismissCreditCardForm()
 
     // Only important if we set `handleErrors = false`.
     // You can send errors to a logging service, or display them to the user here.
@@ -116,13 +117,31 @@ like so:
 
 ```swift
 @IBAction func displayCreditCardForm() {
-  let creditCardView = CreditCardFormController(publicKey: publicKey)
+  let creditCardView = CreditCardFormController.creditCardFormWithPublicKey(publicKey)
   creditCardView.delegate = self
   creditCardView.handleErrors = true
 
-  navigationController?.pushViewController(creditCardView, animated: true)
+  showViewController(creditCardView, sender: self)
 }
 ```
+
+##### Use Credit Card Form in Storyboard
+`CreditCardFormController` comes with built in storyboard support. You can use `CreditCardFormController` in your storybard by using `Storyboard Reference`. Drag `Storyboard Reference` object onto your canvas and set its bundle identifier to `co.omise.OmiseSDK` and Storyboard to `OmiseSDK`. You can either leave `Referenced ID` empty or use `CreditCardFormController` as a `Referenced ID`
+You can setup `CreditCardFormController` in `UIViewController.prepareForSegue(_:sender:)` method
+```swift
+override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+  if segue.identifier == "PresentCreditFormWithModal",
+    let creditCardFormNavigationController = segue.destinationViewController as? UINavigationController,
+    let creditCardFormController = creditCardFormNavigationController.topViewController as? CreditCardFormController {
+      creditCardFormController.publicKey = publicKey
+      creditCardFormController.handleErrors = true
+      creditCardFormController.delegate = self
+
+      creditCardFormController.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .Done, target: self, action: #selector(dismissCreditCardForm))
+  }
+}
+```
+
 
 #### Custom Credit Card Form
 

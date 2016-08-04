@@ -13,7 +13,7 @@ class ProductDetailViewController: UIViewController {
             creditCardFormController.handleErrors = true
             creditCardFormController.delegate = self
             
-            creditCardFormController.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .Done, target: self, action: #selector(dismissCreditCardPopover))
+            creditCardFormController.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .Done, target: self, action: #selector(dismissCreditCardForm))
         }
     }
     
@@ -24,11 +24,11 @@ class ProductDetailViewController: UIViewController {
         showViewController(creditCardFormController, sender: self)
     }
     
-    @objc private func dismissCreditCardPopover() {
-        dismissCreditCardPopoverWithCompletion(nil)
+    @objc private func dismissCreditCardForm() {
+        dismissCreditCardFormWithCompletion(nil)
     }
     
-    @objc private func dismissCreditCardPopoverWithCompletion(completion: (() -> Void)?) {
+    @objc private func dismissCreditCardFormWithCompletion(completion: (() -> Void)?) {
         if presentedViewController != nil {
             dismissViewControllerAnimated(true, completion: completion)
         } else {
@@ -40,13 +40,13 @@ class ProductDetailViewController: UIViewController {
 
 extension ProductDetailViewController: CreditCardFormDelegate {
     func creditCardForm(controller: CreditCardFormController, didSucceedWithToken token: OmiseToken) {
-        dismissCreditCardPopoverWithCompletion({
+        dismissCreditCardFormWithCompletion({
             self.performSegueWithIdentifier("CompletePayment", sender: self)
         })
     }
     
     func creditCardForm(controller: CreditCardFormController, didFailWithError error: ErrorType) {
-        dismissCreditCardPopover()
+        dismissCreditCardForm()
     }
 }
 
