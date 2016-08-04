@@ -1,14 +1,8 @@
 import UIKit
 
-class ErrorMessageCell: UITableViewCell {
+class ErrorMessageView: UIView {
     @IBOutlet weak var errorMessageLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        preservesSuperviewLayoutMargins = false
-        layoutMargins = UIEdgeInsetsZero
-    }
-        
     func setErrorMessage(message: String) {
         errorMessageLabel.text = message
     }
@@ -17,3 +11,4 @@ class ErrorMessageCell: UITableViewCell {
         errorMessageLabel.text = ""
     }
 }
+

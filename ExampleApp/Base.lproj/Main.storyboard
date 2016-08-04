@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iu0-Jf-pl4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iu0-Jf-pl4">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -67,7 +67,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="buyNowButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8FN-et-xeC"/>
+                                    <action selector="showCreditCardForm:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5kB-Hr-yZZ"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lensen : Art beyond seeing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V65-Ac-a7G">
@@ -94,7 +94,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="modalBuyNowButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gha-Nh-8Lv"/>
+                                    <segue destination="bGC-5U-JNH" kind="presentation" identifier="PresentCreditFormWithModal" id="zYV-yt-uTV"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="product" translatesAutoresizingMaskIntoConstraints="NO" id="GkE-vd-q88">
@@ -285,6 +285,16 @@
             </objects>
             <point key="canvasLocation" x="1699" y="659"/>
         </scene>
+        <!--OmiseSDK Credit Card Form-->
+        <scene sceneID="UEK-Dq-FH1">
+            <objects>
+                <viewControllerPlaceholder storyboardName="OmiseSDK" bundleIdentifier="co.omise.OmiseSDK" id="Rxw-dP-FaG" userLabel="OmiseSDK Credit Card Form" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Mpt-Wt-4ua"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iDk-yg-N5a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1659.5" y="1439"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="gCl-45-gS3">
             <objects>
@@ -300,6 +310,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CfK-s4-HsV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-403" y="659"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="o5m-iZ-3na">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bGC-5U-JNH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hyi-nx-Eru">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Rxw-dP-FaG" kind="relationship" relationship="rootViewController" id="dRk-CO-8T5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v8J-bN-Waw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1007" y="1439"/>
         </scene>
     </scenes>
     <resources>

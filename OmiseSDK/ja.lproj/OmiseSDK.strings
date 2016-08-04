@@ -1,0 +1,36 @@
+
+/* Class = "UITextField"; placeholder = "John Doe"; ObjectID = "1gP-Xv-3DX"; */
+"1gP-Xv-3DX.placeholder" = "John Doe";
+
+/* Class = "UILabel"; text = "CREDIT CARD DETAIL"; ObjectID = "6Bi-Xw-l4X"; */
+"6Bi-Xw-l4X.text" = "クレジットカード情報";
+
+/* Class = "UILabel"; text = "Error message"; ObjectID = "6bh-bL-Kas"; */
+"6bh-bL-Kas.text" = "Error message";
+
+/* Class = "UITextField"; placeholder = "MM/YY"; ObjectID = "Jo2-Jq-1eC"; */
+"Jo2-Jq-1eC.placeholder" = "MM/YY";
+
+/* Class = "UILabel"; text = "Expiry date"; ObjectID = "LlT-Ou-anQ"; */
+"LlT-Ou-anQ.text" = "有効期限";
+
+/* Class = "UITextField"; placeholder = "1234 5678 9012 3456"; ObjectID = "P2L-nA-3Qg"; */
+"P2L-nA-3Qg.placeholder" = "1234 5678 9012 3456";
+
+/* Class = "UITextField"; placeholder = "123"; ObjectID = "eXh-Mb-b98"; */
+"eXh-Mb-b98.placeholder" = "123";
+
+/* Class = "UILabel"; text = "Name on card"; ObjectID = "gMS-Zs-jJl"; */
+"gMS-Zs-jJl.text" = "カード名義";
+
+/* Class = "UILabel"; text = "Security code"; ObjectID = "hUA-yb-3hy"; */
+"hUA-yb-3hy.text" = "セキュリティーコード";
+
+/* Class = "UILabel"; text = "Card number"; ObjectID = "o7p-Gc-gD9"; */
+"o7p-Gc-gD9.text" = "カード番号";
+
+/* Class = "UILabel"; text = "Submit payment"; ObjectID = "v4b-ke-VTp"; */
+"v4b-ke-VTp.text" = "支払う";
+
+/* Class = "UINavigationItem"; title = "Credit Card Form"; ObjectID = "vz0-HS-ms9"; */
+"vz0-HS-ms9.title" = "クレジットカード情報入力";

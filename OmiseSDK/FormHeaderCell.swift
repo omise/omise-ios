@@ -1,16 +1,11 @@
 import UIKit
 
-class FormHeaderCell: UITableViewCell {
+class FormHeaderView: UIView {
     @IBOutlet weak var card_visa: UIImageView!
     @IBOutlet weak var card_mastercard: UIImageView!
     @IBOutlet weak var card_jcb: UIImageView!
     @IBOutlet weak var headerLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        preservesSuperviewLayoutMargins = false
-        layoutMargins = UIEdgeInsetsZero
-    }
     
     func setCardBrand(cardBrand: CardBrand?) {
         guard let cardBrand = cardBrand else {

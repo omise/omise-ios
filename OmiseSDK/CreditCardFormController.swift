@@ -5,126 +5,97 @@ public protocol CreditCardFormDelegate: class {
     func creditCardForm(controller: CreditCardFormController, didFailWithError error: ErrorType)
 }
 
-public class CreditCardFormController: UIViewController {
-    private let defaultCellHeight: CGFloat = 44.0
-    private let formCellsType = [
-        FormHeaderCell.self,
-        CardNumberFormCell.self,
-        NameCardFormCell.self,
-        ExpiryDateFormCell.self,
-        SecureCodeFormCell.self,
-        ErrorMessageCell.self,
-        ConfirmButtonCell.self
-    ]
-    
-    private let publicKey: String
+
+public class CreditCardFormController: UITableViewController {
+    public var publicKey: String?
     
     public weak var delegate: CreditCardFormDelegate?
     public var handleErrors = true
     
     private var hasErrorMessage = false
-    @IBOutlet private weak var formTableView: UITableView!
-    private var formCells = [UITableViewCell]()
-    private var formFields = [OmiseTextField]()
     
-    private var formHeaderCell: FormHeaderCell? {
-        return formCells[0] as? FormHeaderCell
+    
+    @IBOutlet var formHeaderView: FormHeaderView!
+    @IBOutlet var formFields: [OmiseTextField]! {
+        didSet {
+            if isViewLoaded(), let formFields = formFields {
+                accessoryView.attachToTextFields(formFields, inViewController: self)
+            }
+        }
     }
+    @IBOutlet var formCells: [UITableViewCell]!
     
-    private var cardNumberCell: CardNumberFormCell? {
-        return formCells[1] as? CardNumberFormCell
-    }
+    @IBOutlet var formLabels: [UILabel]!
+    @IBOutlet var labelWidthConstraints: [NSLayoutConstraint]!
+    @IBOutlet var cardNumberCell: CardNumberFormCell!
+    @IBOutlet var cardNameCell: NameCardFormCell!
+    @IBOutlet var expiryDateCell: ExpiryDateFormCell!
+    @IBOutlet var secureCodeCell: SecureCodeFormCell!
+    @IBOutlet var confirmButtonCell: ConfirmButtonCell!
     
-    private var cardNameCell: NameCardFormCell? {
-        return formCells[2] as? NameCardFormCell
-    }
+    @IBOutlet var errorMessageView: ErrorMessageView!
+    let accessoryView = OmiseFormAccessoryView()
     
-    private var expiryDateCell: ExpiryDateFormCell? {
-        return formCells[3] as? ExpiryDateFormCell
-    }
-    
-    private var secureCodeCell: SecureCodeFormCell? {
-        return formCells[4] as? SecureCodeFormCell
-    }
-    
-    private var errorMessageCell: ErrorMessageCell? {
-        return formCells[5] as? ErrorMessageCell
-    }
-    
-    private var confirmButtonCell: ConfirmButtonCell? {
-        return formCells[6] as? ConfirmButtonCell
-    }
-    
-    @objc public init(publicKey: String) {
-        self.publicKey = publicKey
-        super.init(nibName: "CreditCardFormController", bundle: NSBundle(forClass: CreditCardFormController.self))
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    public static func creditCardFormWithPublicKey(publicKey: String) -> CreditCardFormController {
+        let omiseBundle = NSBundle(forClass: self)
+        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: omiseBundle)
+        let creditCardForm = storyboard.instantiateInitialViewController() as! CreditCardFormController
+        creditCardForm.publicKey = publicKey
+        
+        return creditCardForm
     }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Credit Card Form", tableName: nil, bundle: NSBundle(forClass: CreditCardFormController.self), value: "", comment: "")
-        modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
-
-        let bundle = NSBundle(forClass: CreditCardFormController.self)
-        formCells = formCellsType.map({ (type) -> UITableViewCell in
-            var identifier = String(type)
-            if identifier.hasPrefix("OmiseSDK.") {
-                let index = identifier.startIndex.advancedBy(9)
-                identifier = identifier.substringFromIndex(index)
-            }
-            
-            let cellNib = UINib(nibName: identifier, bundle: bundle)
-            return cellNib.instantiateWithOwner(nil, options: nil).first as? UITableViewCell ?? UITableViewCell()
-        })
         
-        formTableView.delegate = self
-        formTableView.dataSource = self
-        formTableView.tableFooterView = UIView()
-        formTableView.rowHeight = UITableViewAutomaticDimension
-        formTableView.estimatedRowHeight = defaultCellHeight
+        tableView.tableFooterView = UIView()
+        tableView.estimatedRowHeight = tableView.rowHeight
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        accessoryView.attachToTextFields(formFields, inViewController: self)
+        
+        let preferredWidth = formLabels.reduce(CGFloat.min) { (currentPreferredWidth, label)  in
+            return max(currentPreferredWidth, label.intrinsicContentSize().width)
+        }
+        
+        labelWidthConstraints.forEach { (constraint) in
+            constraint.constant = preferredWidth
+        }
     }
     
     public override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-
-        let visibleCells = formTableView.visibleCells
-        for cell in visibleCells {
-            for case let field as OmiseTextField in cell.contentView.subviews {
-                field.addTarget(self, action: #selector(fieldDidChange), forControlEvents: .EditingChanged)
-                formFields.append(field)
-            }
-        }
-      
-        let accessoryView = OmiseFormAccessoryView()
-        accessoryView.attachToTextFields(formFields, inViewController: self)
+        
+        formFields.forEach({ (field) in
+            field.addTarget(self, action: #selector(fieldDidChange), forControlEvents: .EditingChanged)
+        })
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(keyboardWillAppear(_:)), name: UIKeyboardWillShowNotification, object: nil)
     }
     
     override public func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        NSNotificationCenter().removeObserver(self)
+        
+        formFields.forEach({ (field) in
+            field.removeTarget(self, action: #selector(fieldDidChange), forControlEvents: .EditingChanged)
+        })
+        NSNotificationCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
     }
-    
     
     @objc private func fieldDidChange(sender: AnyObject) {
         validateForm()
         
         if let cardNumberField = sender as? CardNumberTextField {
-            formHeaderCell?.setCardBrand(cardNumberField.cardBrand)
+            formHeaderView?.setCardBrand(cardNumberField.cardBrand)
         }
     }
     
     @objc private func keyboardWillAppear(notification: NSNotification){
         if hasErrorMessage {
-            errorMessageCell?.removeErrorMesssage()
+            errorMessageView?.removeErrorMesssage()
             hasErrorMessage = false
-            formTableView.beginUpdates()
-            formTableView.endUpdates()
+            tableView.beginUpdates()
+            tableView.endUpdates()
         }
     }
     
@@ -134,12 +105,18 @@ public class CreditCardFormController: UIViewController {
             return
         }
         
-        let e = error as! OmiseError
-        let errorString = e.nsError.localizedDescription
-        errorMessageCell?.setErrorMessage(errorString)
+        let errorString: String
+        switch error {
+        case let error as OmiseError:
+            errorString = error.nsError.localizedDescription
+        default:
+            errorString = (error as NSError).localizedDescription
+        }
+        
+        errorMessageView?.setErrorMessage(errorString)
         hasErrorMessage = true
-        formTableView.beginUpdates()
-        formTableView.endUpdates()
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
     
     private func validateForm() {
@@ -149,8 +126,12 @@ public class CreditCardFormController: UIViewController {
     
     private func requestToken() {
         view.endEditing(true)
-        startActivityIndicator()
+        guard let publicKey = publicKey else {
+            assertionFailure("Missing public key information. Please setting the public key before request token.")
+            return
+        }
         
+        startActivityIndicator()
         let request = OmiseTokenRequest(
             name: cardNameCell?.value ?? "",
             number: cardNumberCell?.value ?? "",
@@ -175,34 +156,49 @@ public class CreditCardFormController: UIViewController {
     
     private func startActivityIndicator() {
         confirmButtonCell?.startActivityIndicator()
-        formTableView.userInteractionEnabled = false
+        tableView.userInteractionEnabled = false
     }
     
     private func stopActivityIndicator() {
         confirmButtonCell?.stopActivityIndicator()
-        formTableView.userInteractionEnabled = true
+        tableView.userInteractionEnabled = true
     }
+
 }
 
-extension CreditCardFormController: UITableViewDataSource {
-    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return formCells.count
+extension CreditCardFormController {
+    public override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 0 && handleErrors && hasErrorMessage {
+            return max(
+                44,
+                errorMessageView.systemLayoutSizeFittingSize(CGSize(width: tableView.bounds.height, height: 0.0), withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityFittingSizeLevel).height
+            
+            )
+        } else {
+            return 0.0
+        }
     }
     
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = formCells[indexPath.row]
-        return cell
-    }
-}
-
-extension CreditCardFormController: UITableViewDelegate {
-    public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return formCells[indexPath.row].systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+    public override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == 0 && handleErrors && hasErrorMessage {
+            return errorMessageView
+        } else {
+            return nil
+        }
     }
     
-    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    public override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        if let selectedCell = tableView.cellForRowAtIndexPath(indexPath) where selectedCell == confirmButtonCell {
+            return indexPath
+        } else {
+            return nil
+        }
+    }
+    
+    public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if formCells[indexPath.row].isKindOfClass(ConfirmButtonCell) {
+        
+        if let selectedCell = tableView.cellForRowAtIndexPath(indexPath) where selectedCell == confirmButtonCell {
             requestToken()
         }
     }
