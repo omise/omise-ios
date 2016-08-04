@@ -25,3 +25,4 @@ fastlane/test_output
 playground.xcworkspace
 timeline.xctimeline
 xcuserdata/
+.DS_Store
