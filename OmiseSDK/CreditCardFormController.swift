@@ -36,7 +36,7 @@ public class CreditCardFormController: UITableViewController {
     @IBOutlet var errorMessageView: ErrorMessageView!
     let accessoryView = OmiseFormAccessoryView()
     
-    public static func creditCardFormWithPublicKey(publicKey: String) -> CreditCardFormController {
+    @objc public static func creditCardFormWithPublicKey(publicKey: String) -> CreditCardFormController {
         let omiseBundle = NSBundle(forClass: self)
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: omiseBundle)
         let creditCardForm = storyboard.instantiateInitialViewController() as! CreditCardFormController
