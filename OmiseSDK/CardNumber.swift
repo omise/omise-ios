@@ -1,7 +1,7 @@
 import Foundation
 
-public final class CardNumber {
-    public static func normalize(pan: String) -> String {
+@objc(OMSCardNumber) public final class CardNumber: NSObject {
+    @objc public static func normalize(pan: String) -> String {
         return pan.stringByReplacingOccurrencesOfString(
             "[^0-9]",
             withString: "",
@@ -15,7 +15,11 @@ public final class CardNumber {
             .first
     }
     
-    public static func format(pan: String) -> String {
+    @objc(brandForPan:) public static func __brand(pan: String) -> Int {
+        return brand(pan)?.rawValue ?? NSNotFound
+    }
+    
+    @objc public static func format(pan: String) -> String {
         var result = ""
         for (i, digit) in normalize(pan).characters.enumerate() {
             if i > 0 && i % 4 == 0 {
@@ -28,7 +32,7 @@ public final class CardNumber {
         return result
     }
     
-    public static func luhn(pan: String) -> Bool {
+    @objc public static func luhn(pan: String) -> Bool {
         let chars = normalize(pan).characters
         let digits = chars
             .reverse()
@@ -48,7 +52,7 @@ public final class CardNumber {
         return sum % 10 == 0
     }
     
-    public static func validate(pan: String) -> Bool {
+    @objc public static func validate(pan: String) -> Bool {
         let normalized = normalize(pan)
         
         guard let brand = brand(normalized) else { return false }

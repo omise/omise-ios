@@ -1,14 +1,14 @@
 import Foundation
 
-public final class OmiseJsonParser: NSObject {
-    public static let dateFormatter: NSDateFormatter = {
+@objc(OMSOmiseJsonParser) public final class OmiseJsonParser: NSObject {
+    @objc public static let dateFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
         formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
         return formatter
     }()
     
-    public static func parseToken(data: NSData) throws -> OmiseToken {
+    @objc public static func parseToken(data: NSData) throws -> OmiseToken {
         let dict = try parseJSON(data)
         guard dict["object"] as? String == "token" else {
             throw OmiseError.Unexpected(message: "Bad JSON response.", underlying: nil)
@@ -19,7 +19,7 @@ public final class OmiseJsonParser: NSObject {
         
         let card = OmiseCard()
         card.cardId = cardDict["id"] as? String
-        card.livemode = cardDict["livemode"] as? Bool
+        card.livemode = cardDict["livemode"] as? Bool ?? false
         card.location = cardDict["location"] as? String
         card.country = cardDict["country"] as? String
         card.city = cardDict["city"] as? String
@@ -31,14 +31,14 @@ public final class OmiseJsonParser: NSObject {
         card.expirationYear = cardDict["expiration_year"] as? Int
         card.fingerprint = cardDict["fingerprint"] as? String
         card.name = cardDict["name"] as? String
-        card.securityCodeCheck = cardDict["security_code_check"] as? Bool
+        card.securityCodeCheck = cardDict["security_code_check"] as? Bool ?? false
         card.created = parseJSONDate(cardDict["created"] as? String)
         
         let token = OmiseToken()
         token.tokenId = dict["id"] as? String
-        token.livemode = dict["livemode"] as? Bool
+        token.livemode = dict["livemode"] as? Bool ?? false
         token.location = dict["location"] as? String
-        token.used = dict["used"] as? Bool
+        token.used = dict["used"] as? Bool ?? false
         token.card = card
         token.created = parseJSONDate(dict["created"] as? String)
         
@@ -58,6 +58,10 @@ public final class OmiseJsonParser: NSObject {
         }
         
         return OmiseError.API(code: code, message: message, location: location)
+    }
+    
+    @objc(parseError:error:) public static func __parseError(data: NSData) throws -> NSError {
+        return try parseError(data).nsError
     }
     
     private static func parseJSON(data: NSData) throws -> NSDictionary {

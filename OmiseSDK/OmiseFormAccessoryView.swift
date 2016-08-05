@@ -1,6 +1,6 @@
 import Foundation
 
-public class OmiseFormAccessoryView: UIToolbar {
+@objc(OMSOmiseFormAccessoryView) public class OmiseFormAccessoryView: UIToolbar {
     private var textFields = [UITextField]()
     private var currentTextField: UITextField?
     private var previousButton = UIBarButtonItem()
@@ -29,7 +29,7 @@ public class OmiseFormAccessoryView: UIToolbar {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func attachToTextFields(textFields: [UITextField], inViewController viewController: UIViewController) {
+    @objc public func attachToTextFields(textFields: [UITextField], inViewController viewController: UIViewController) {
         self.textFields = textFields
         
         let spacer = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)

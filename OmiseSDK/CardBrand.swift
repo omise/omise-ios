@@ -1,6 +1,6 @@
 import Foundation
 
-public enum CardBrand {
+@objc(OMSCardBrand) public enum CardBrand: Int {
     public static let all: [CardBrand] = [
         AMEX,
         Diners,
@@ -63,3 +63,17 @@ public enum CardBrand {
         }
     }
 }
+
+
+@objc(OMSCardBrandHelper) public final class __OMSCardBrand: NSObject {
+    @objc(patternForBrand:) public static func __patternForBrand(brand: CardBrand) -> String {
+        return brand.pattern
+    }
+    
+    @objc(validLengthsForBrand:) public static func __validLengthsForBrand(brand: CardBrand) -> NSRange {
+        let range = brand.validLengths
+        
+        return NSRange(location: range.start, length: range.end - range.start)
+    }
+}
+

@@ -5,23 +5,29 @@ public protocol OmiseTokenRequestDelegate {
     func tokenRequest(request: OmiseTokenRequest, didFailWithError error: ErrorType)
 }
 
+@objc public protocol OMSOmiseTokenRequestDelegate {
+    func tokenRequest(request: OmiseTokenRequest, didSucceedWithToken token: OmiseToken)
+    func tokenRequest(request: OmiseTokenRequest, didFailWithError error: NSError)
+}
+
 public enum OmiseTokenRequestResult {
     case Succeed(token: OmiseToken)
     case Fail(error: ErrorType)
 }
 
-public class OmiseTokenRequest: NSObject {
+
+@objc(OMSOmiseTokenRequest) public class OmiseTokenRequest: NSObject {
     public typealias Callback = (OmiseTokenRequestResult) -> ()
     
-    public let name: String
-    public let number: String
-    public let expirationMonth: Int
-    public let expirationYear: Int
-    public let securityCode: String
-    public let city: String?
-    public let postalCode: String?
+    @objc public let name: String
+    @objc public let number: String
+    @objc public let expirationMonth: Int
+    @objc public let expirationYear: Int
+    @objc public let securityCode: String
+    @objc public let city: String?
+    @objc public let postalCode: String?
     
-    public init(name: String, number: String, expirationMonth: Int, expirationYear: Int,
+    @objc public init(name: String, number: String, expirationMonth: Int, expirationYear: Int,
                 securityCode: String, city: String? = nil, postalCode: String? = nil) {
         self.name = name
         self.number = number

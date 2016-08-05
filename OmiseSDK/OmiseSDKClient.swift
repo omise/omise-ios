@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-public class OmiseSDKClient: NSObject {
+@objc(OMSOmiseSDKClient) public class OmiseSDKClient: NSObject {
     let session: NSURLSession
     let queue: NSOperationQueue
     let publicKey: String
@@ -25,7 +25,7 @@ public class OmiseSDKClient: NSObject {
             "Apple/\(currentDevice)"
     }
     
-    public convenience init(publicKey: String) {
+    @objc public convenience init(publicKey: String) {
         let queue = NSOperationQueue()
         let session = NSURLSession(
             configuration: NSURLSessionConfiguration.ephemeralSessionConfiguration(),
@@ -35,7 +35,7 @@ public class OmiseSDKClient: NSObject {
         self.init(publicKey: publicKey, queue: queue, session: session)
     }
     
-    public init(publicKey: String, queue: NSOperationQueue, session: NSURLSession) {
+    @objc public init(publicKey: String, queue: NSOperationQueue, session: NSURLSession) {
         self.queue = queue
         self.session = session
         
@@ -55,6 +55,29 @@ public class OmiseSDKClient: NSObject {
         }
     }
     
+    @objc(sendRequest:callback:) public func __send(request: OmiseTokenRequest, callback: ((OmiseToken?, NSError?) -> ())?) {
+        request.startWith(self) { (result) in
+            dispatch_async(dispatch_get_main_queue(), {
+                let token: OmiseToken?
+                let error: NSError?
+                switch result {
+                case .Succeed(token: let resultToken):
+                    token = resultToken
+                    error = nil
+                case .Fail(error: let requestError):
+                    if let requestError = requestError as? OmiseError {
+                        error = requestError.nsError
+                    } else {
+                        error = requestError as NSError
+                    }
+                    token = nil
+                }
+                
+                callback?(token, error)
+            })
+        }
+    }
+    
     public func send(request: OmiseTokenRequest, delegate: OmiseTokenRequestDelegate?) {
         send(request) { (result) in
             switch result {
@@ -66,4 +89,16 @@ public class OmiseSDKClient: NSObject {
         }
     }
     
+    @objc(sendRequest:delegate:) public func __send(request: OmiseTokenRequest, delegate: OMSOmiseTokenRequestDelegate?) {
+        send(request) { (result) in
+            switch result {
+            case let .Succeed(token):
+                delegate?.tokenRequest(request, didSucceedWithToken: token)
+            case let .Fail(err):
+                let error = err as NSError
+                delegate?.tokenRequest(request, didFailWithError: error)
+            }
+        }
+    }
 }
+
