@@ -23,18 +23,15 @@ public final class CardExpiryDatePicker: UIPickerView {
     }
     
     private func setup() {
-        if years.count == 0 {
-            var year = NSCalendar(identifier: NSCalendarIdentifierGregorian)!.component(.Year, fromDate: NSDate())
-            for _ in 1...maximumYear {
-                years.append(year)
-                year += 1
-            }
+        if years.isEmpty {
+            let currentYear = NSCalendar(identifier: NSCalendarIdentifierGregorian)!.component(.Year, fromDate: NSDate())
+            years = Array(currentYear...(currentYear.advancedBy(maximumYear)))
         }
         
         delegate = self
         dataSource = self
         let month = NSCalendar(identifier: NSCalendarIdentifierGregorian)!.component(.Month, fromDate: NSDate())
-        selectRow(month-1, inComponent: 0, animated: false)
+        selectRow(month - 1, inComponent: 0, animated: false)
     }
 }
 
@@ -68,7 +65,7 @@ extension CardExpiryDatePicker: UIPickerViewDelegate {
     }
     
     public func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let month = selectedRowInComponent(monthPicker)+1
+        let month = selectedRowInComponent(monthPicker) + 1
         let year = years[selectedRowInComponent(yearPicker)]
         if let block = onDateSelected {
             block(month: month, year: year)

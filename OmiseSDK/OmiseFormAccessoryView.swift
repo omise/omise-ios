@@ -1,7 +1,19 @@
 import Foundation
 
 @objc(OMSOmiseFormAccessoryView) public class OmiseFormAccessoryView: UIToolbar {
-    private var textFields = [UITextField]()
+    private var textFields = [UITextField]() {
+        willSet {
+            textFields.forEach { (textField) in
+                textField.removeTarget(self, action: #selector(textFieldDidBeginEditing), forControlEvents: UIControlEvents.EditingDidBegin)
+            }
+        }
+        didSet {
+            textFields.forEach { (textField) in
+                textField.addTarget(self, action: #selector(textFieldDidBeginEditing), forControlEvents: UIControlEvents.EditingDidBegin)
+                textField.inputAccessoryView = self
+            }
+        }
+    }
     private var currentTextField: UITextField?
     private var previousButton = UIBarButtonItem()
     private var nextButton = UIBarButtonItem()
@@ -37,11 +49,6 @@ import Foundation
         
         let items = [previousButton, nextButton, spacer, doneButton]
         self.setItems(items, animated: false)
-        
-        for textField in textFields {
-            textField.addTarget(self, action: #selector(textFieldDidBeginEditing), forControlEvents: UIControlEvents.EditingDidBegin)
-            textField.inputAccessoryView = self
-        }
     }
     
     @objc private func textFieldDidBeginEditing(textField: UITextField) {

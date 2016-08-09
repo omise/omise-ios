@@ -23,6 +23,8 @@ public class CardNameTextField: OmiseTextField {
     
     func setup() {
         keyboardType = .Default
-        placeholder = "Full name"
+        
+        // TODO: Localize place holder
+        placeholder = "John Doe"
     }
 }

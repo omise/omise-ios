@@ -4,8 +4,7 @@ import UIKit
 public class CardExpiryDateTextField: OmiseTextField {
     private let maxCreditCardAge = 21
     private let expirationRx = { () -> NSRegularExpression in
-        let options = NSRegularExpressionOptions(rawValue: 0)
-        guard let rx = try? NSRegularExpression(pattern: "^(\\d{1,2})/(\\d{1,2})$", options: options) else {
+        guard let rx = try? NSRegularExpression(pattern: "^(\\d{1,2})/(\\d{1,2})$", options: []) else {
             return NSRegularExpression()
         }
         

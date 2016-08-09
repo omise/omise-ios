@@ -8,6 +8,18 @@ public class CardCVVTextField: OmiseTextField {
         return validLengths ~= text?.characters.count ?? 0
     }
     
+    public override var keyboardType: UIKeyboardType {
+        didSet {
+            super.keyboardType = .NumberPad
+        }
+    }
+    
+    public override var secureTextEntry: Bool {
+        didSet {
+            super.secureTextEntry = true
+        }
+    }
+    
     override public init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -24,9 +36,9 @@ public class CardCVVTextField: OmiseTextField {
     }
     
     func setup() {
-        keyboardType = .NumberPad
+        super.keyboardType = .NumberPad
         placeholder = "123"
-        secureTextEntry = true
+        super.secureTextEntry = true
     }
     
     override func textDidChange() {

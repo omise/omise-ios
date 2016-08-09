@@ -9,11 +9,12 @@ public class OmiseTextField: UITextField {
     public private(set) var previousText: String?
     
     public override var text: String? {
-        get { return super.text }
-        set {
-            previousText = super.text
-            super.text = newValue
-            textDidChange() // HACK: UIControlEvents.ValueChanged doesn't work here.
+        willSet {
+            previousText = text
+        }
+        didSet {
+            // UITextField doesn't send editing changed control event when we set its text property
+            textDidChange()
         }
     }
    

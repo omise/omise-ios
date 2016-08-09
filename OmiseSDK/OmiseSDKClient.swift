@@ -6,18 +6,14 @@ import UIKit
     let queue: NSOperationQueue
     let publicKey: String
     
-    var version: String {
+    let version: String = {
         let bundle = NSBundle(forClass: OmiseSDKClient.self)
         return bundle.infoDictionary?["CFBundleShortVersionString"] as? String ?? "(n/a)"
-    }
+    }()
     
-    var currentPlatform: String {
-        return NSProcessInfo.processInfo().operatingSystemVersionString
-    }
+    let currentPlatform: String = NSProcessInfo.processInfo().operatingSystemVersionString
     
-    var currentDevice: String {
-        return UIDevice.currentDevice().model
-    }
+    let currentDevice: String = UIDevice.currentDevice().model
     
     var userAgent: String {
         return "OmiseIOSSDK/\(version) " +
