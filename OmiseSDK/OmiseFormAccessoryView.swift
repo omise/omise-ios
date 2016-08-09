@@ -1,6 +1,6 @@
 import Foundation
 
-@objc(OMSOmiseFormAccessoryView) public class OmiseFormAccessoryView: UIToolbar {
+@objc(OMSFormAccessoryView) public class OmiseFormAccessoryView: UIToolbar {
     private var textFields = [UITextField]() {
         willSet {
             textFields.forEach { (textField) in

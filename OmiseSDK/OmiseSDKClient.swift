@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-@objc(OMSOmiseSDKClient) public class OmiseSDKClient: NSObject {
+@objc(OMSSDKClient) public class OmiseSDKClient: NSObject {
     let session: NSURLSession
     let queue: NSOperationQueue
     let publicKey: String

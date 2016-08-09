@@ -1,6 +1,6 @@
 import Foundation
 
-@objc(OMSOmiseCard) public class OmiseCard: NSObject {
+@objc(OMSCard) public class OmiseCard: NSObject {
     @objc public var cardId: String?
     @objc public var livemode: Bool = false
     @objc public var location: String?

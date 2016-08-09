@@ -193,10 +193,10 @@
 				2220F1A71D0FEE85008CD89F /* OmiseToken.swift */,
 				2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */,
 				2225B3531D0FDD63003EB396 /* Assets.xcassets */,
-				8A5D59831D5317DD005D3346 /* OmiseSDK.storyboard */,
 				9864064B1CFEA820004BCF51 /* Cells */,
 				986406361CFEA7EA004BCF51 /* Fields */,
 				981FA5F91D0EDDB0009ECEDC /* Localizable.strings */,
+				8A5D59831D5317DD005D3346 /* OmiseSDK.storyboard */,
 			);
 			path = OmiseSDK;
 			sourceTree = "<group>";
