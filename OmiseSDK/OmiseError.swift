@@ -12,8 +12,12 @@ public enum OmiseErrorUserInfoKey: String {
     }
 }
 
+
+/// An error type used in Omise iOS SDK.
 public enum OmiseError: ErrorType {
+    /// An API error returned from Omise API
     case API(code: String, message: String, location: String)
+    /// An error that occur during requesting to Omise APIß
     case Unexpected(message: String, underlying: ErrorType?)
     
     public var nsError: NSError {

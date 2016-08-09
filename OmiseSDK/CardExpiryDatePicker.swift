@@ -1,15 +1,33 @@
 import Foundation
 
 // TODO: 👇 only the  data source and delegate needed, we don't need this class.
+
+/// A UIPickerView subclass UI for picking the card expiry date.
 public final class CardExpiryDatePicker: UIPickerView {
-    private let maximumYear = 21
+    private static let maximumYear = 21
     private let monthPicker = 0
     private let yearPicker = 1
-    private let months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
-    private var years = [Int]()
+    private let months: [String] = {
+        let validRange = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!.maximumRangeOfUnit(NSCalendarUnit.Month)
+        let validMonthRange = validRange.location..<validRange.location.advancedBy(validRange.length)
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = .DecimalStyle
+        formatter.alwaysShowsDecimalSeparator = false
+        formatter.minimumIntegerDigits = 2
+        
+        return validMonthRange.map({ formatter.stringFromNumber($0)! })
+    }()
+
+    private let years: [Int] = {
+        let currentYear = NSCalendar(identifier: NSCalendarIdentifierGregorian)!.component(.Year, fromDate: NSDate())
+        return Array(currentYear...(currentYear.advancedBy(maximumYear)))
+    }()
     
+    /// A callback closure that will be called when the selected card expiry date is changed. 
     public var onDateSelected: ((month: Int, year: Int) -> ())?
-    public var month: Int = 0
+    /// Currently selected month value
+    public var month: Int = NSCalendar(identifier: NSCalendarIdentifierGregorian)!.component(.Month, fromDate: NSDate())
+    /// Currently selected year value
     public var year: Int = 0
     
     override public init(frame: CGRect) {
@@ -23,14 +41,8 @@ public final class CardExpiryDatePicker: UIPickerView {
     }
     
     private func setup() {
-        if years.isEmpty {
-            let currentYear = NSCalendar(identifier: NSCalendarIdentifierGregorian)!.component(.Year, fromDate: NSDate())
-            years = Array(currentYear...(currentYear.advancedBy(maximumYear)))
-        }
-        
         delegate = self
         dataSource = self
-        let month = NSCalendar(identifier: NSCalendarIdentifierGregorian)!.component(.Month, fromDate: NSDate())
         selectRow(month - 1, inComponent: 0, animated: false)
     }
 }
@@ -75,3 +87,4 @@ extension CardExpiryDatePicker: UIPickerViewDelegate {
         self.year = year
     }
 }
+
