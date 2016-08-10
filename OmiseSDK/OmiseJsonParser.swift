@@ -1,6 +1,6 @@
 import Foundation
 
-@objc(OMSOmiseJsonParser) public final class OmiseJsonParser: NSObject {
+@objc(OMSJSONParser) public final class OmiseJsonParser: NSObject {
     @objc public static let dateFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
         formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")

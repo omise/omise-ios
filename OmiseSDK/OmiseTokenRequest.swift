@@ -5,7 +5,7 @@ public protocol OmiseTokenRequestDelegate {
     func tokenRequest(request: OmiseTokenRequest, didFailWithError error: ErrorType)
 }
 
-@objc public protocol OMSOmiseTokenRequestDelegate {
+@objc public protocol OMSTokenRequestDelegate {
     func tokenRequest(request: OmiseTokenRequest, didSucceedWithToken token: OmiseToken)
     func tokenRequest(request: OmiseTokenRequest, didFailWithError error: NSError)
 }
@@ -16,7 +16,7 @@ public enum OmiseTokenRequestResult {
 }
 
 
-@objc(OMSOmiseTokenRequest) public class OmiseTokenRequest: NSObject {
+@objc(OMSTokenRequest) public class OmiseTokenRequest: NSObject {
     public typealias Callback = (OmiseTokenRequestResult) -> ()
     
     @objc public let name: String

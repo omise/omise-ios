@@ -1,6 +1,6 @@
 import Foundation
 
-@objc(OMSOmiseToken) public class OmiseToken: NSObject {
+@objc(OMSToken) public class OmiseToken: NSObject {
     @objc public var tokenId: String?
     @objc public var livemode: Bool = false
     @objc public var location: String?
