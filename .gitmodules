@@ -1,0 +1,3 @@
+[submodule "Library/card.io"]
+	path = Library/card.io
+	url = https://github.com/card-io/card.io-iOS-SDK.git

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "225931171CE3210700841B86"
+               BlueprintIdentifier = "8A1F38BF1D61C7C200698781"
                BuildableName = "OmiseSDK.framework"
-               BlueprintName = "OmiseSDK"
+               BlueprintName = "OmiseSDK Card.io"
                ReferencedContainer = "container:OmiseSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,26 +28,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "987A02C81CE35D5E0035417A"
-               BuildableName = "OmiseSDKTests.xctest"
-               BlueprintName = "OmiseSDKTests"
-               ReferencedContainer = "container:OmiseSDK.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "225931171CE3210700841B86"
-            BuildableName = "OmiseSDK.framework"
-            BlueprintName = "OmiseSDK"
-            ReferencedContainer = "container:OmiseSDK.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -64,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "225931171CE3210700841B86"
+            BlueprintIdentifier = "8A1F38BF1D61C7C200698781"
             BuildableName = "OmiseSDK.framework"
-            BlueprintName = "OmiseSDK"
+            BlueprintName = "OmiseSDK Card.io"
             ReferencedContainer = "container:OmiseSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -82,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "225931171CE3210700841B86"
+            BlueprintIdentifier = "8A1F38BF1D61C7C200698781"
             BuildableName = "OmiseSDK.framework"
-            BlueprintName = "OmiseSDK"
+            BlueprintName = "OmiseSDK Card.io"
             ReferencedContainer = "container:OmiseSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
