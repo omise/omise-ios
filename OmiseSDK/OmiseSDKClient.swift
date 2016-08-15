@@ -85,7 +85,7 @@ import UIKit
         }
     }
     
-    @objc(sendRequest:delegate:) public func __send(request: OmiseTokenRequest, delegate: OMSOmiseTokenRequestDelegate?) {
+    @objc(sendRequest:delegate:) public func __send(request: OmiseTokenRequest, delegate: OMSTokenRequestDelegate?) {
         send(request) { (result) in
             switch result {
             case let .Succeed(token):
