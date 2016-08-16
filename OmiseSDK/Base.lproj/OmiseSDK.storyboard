@@ -274,6 +274,7 @@
                         <outlet property="expiryDateCell" destination="JXm-Js-QVf" id="7VG-7b-lZs"/>
                         <outlet property="expiryDateTextField" destination="Jo2-Jq-1eC" id="B9Z-Pf-IsM"/>
                         <outlet property="formHeaderView" destination="HTf-gM-q5i" id="Xdi-6P-Ank"/>
+                        <outlet property="openCardIOButton" destination="DFe-Jd-B1q" id="a68-vH-ybd"/>
                         <outlet property="secureCodeCell" destination="bVu-Tp-g1b" id="kSr-b2-erF"/>
                         <outlet property="secureCodeTextField" destination="eXh-Mb-b98" id="SN8-SQ-wkG"/>
                         <outletCollection property="formCells" destination="vFH-O9-cgh" collectionClass="NSMutableArray" id="THL-mZ-FwS"/>
@@ -319,11 +320,20 @@
                         <outlet property="errorMessageLabel" destination="6bh-bL-Kas" id="hxY-eS-sGN"/>
                     </connections>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DFe-Jd-B1q" userLabel="Capture card with Card.io button">
+                    <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="camera"/>
+                    <connections>
+                        <action selector="presentCardIOViewController" destination="wHy-gm-NE0" eventType="touchUpInside" id="FNr-k0-hgY"/>
+                    </connections>
+                </button>
             </objects>
             <point key="canvasLocation" x="857" y="460"/>
         </scene>
     </scenes>
     <resources>
+        <image name="camera" width="25" height="25"/>
         <image name="networkJCB" width="57" height="43"/>
         <image name="networkMasterCard" width="61" height="37"/>
         <image name="networkVISA" width="69" height="45"/>

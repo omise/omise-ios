@@ -19,7 +19,6 @@ public class CreditCardFormController: UITableViewController {
     
     private var hasErrorMessage = false
     
-    
     @IBOutlet var formHeaderView: FormHeaderView!
     @IBOutlet var formFields: [OmiseTextField]! {
       didSet {
@@ -44,8 +43,23 @@ public class CreditCardFormController: UITableViewController {
     @IBOutlet var secureCodeTextField: CardCVVTextField!
     @IBOutlet var confirmButtonCell: ConfirmButtonCell!
     
+    @IBOutlet var openCardIOButton: UIButton!
     @IBOutlet var errorMessageView: ErrorMessageView!
     let accessoryView = OmiseFormAccessoryView()
+    
+    
+    /// A boolean indicates that CreditCardForm should displays capture card information via card.io button.
+    public var cardIOEnabled: Bool = true {
+        didSet {
+            if isViewLoaded() && cardIOAvailable && cardIOEnabled {
+                cardNumberCell?.textField.rightView = openCardIOButton
+                cardNumberCell?.textField.rightViewMode = .Always
+            } else {
+                cardNumberCell?.textField.rightView = nil
+                cardNumberCell?.textField.rightViewMode = .Never
+            }
+        }
+    }
     
     private var cardIOAvailable: Bool {
         #if CardIO
@@ -73,11 +87,8 @@ public class CreditCardFormController: UITableViewController {
         
         accessoryView.attachToTextFields(formFields, inViewController: self)
         
-        if cardIOAvailable {
-            let button = UIButton(type: UIButtonType.ContactAdd)
-            button.addTarget(self, action: #selector(presentCardIOViewController), forControlEvents: .TouchUpInside)
-            
-            cardNumberCell?.textField.rightView = button
+        if cardIOAvailable && cardIOEnabled {
+            cardNumberCell?.textField.rightView = openCardIOButton
             cardNumberCell?.textField.rightViewMode = .Always
         }
         tableView.estimatedRowHeight = tableView.rowHeight
@@ -194,7 +205,7 @@ public class CreditCardFormController: UITableViewController {
         tableView.userInteractionEnabled = true
     }
     
-    func presentCardIOViewController() {
+    @IBAction func presentCardIOViewController() {
         #if CardIO
         let cardIOController = CardIOPaymentViewController(paymentDelegate: self)
         cardIOController.hideCardIOLogo = true
