@@ -176,7 +176,6 @@
 		8A09281B1D544C3F008D393F /* OmiseSDK.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = OmiseSDK.modulemap; sourceTree = "<group>"; };
 		8A1D4C651D51B72200C7837C /* CreditCardFormController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = CreditCardFormController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		8A1F38EC1D61C7C200698781 /* OmiseSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OmiseSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A1F38ED1D61C7C200698781 /* OmiseSDK copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OmiseSDK copy-Info.plist"; path = "/Users/pitiphong.p/Work/omise-ios/OmiseSDK copy-Info.plist"; sourceTree = "<absolute>"; };
 		8A1F38EE1D61C7E400698781 /* libopencv_core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopencv_core.a; sourceTree = "<group>"; };
 		8A1F38EF1D61C7E400698781 /* libopencv_imgproc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopencv_imgproc.a; sourceTree = "<group>"; };
 		8A1F38F01D61C7E400698781 /* libCardIO.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCardIO.a; sourceTree = "<group>"; };
@@ -261,7 +260,6 @@
 				2259311A1CE3210700841B86 /* OmiseSDK */,
 				987A02CA1CE35D5E0035417A /* OmiseSDKTests */,
 				225931191CE3210700841B86 /* Products */,
-				8A1F38ED1D61C7C200698781 /* OmiseSDK copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -940,7 +938,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "OmiseSDK copy-Info.plist";
+				INFOPLIST_FILE = OmiseSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -974,7 +972,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "OmiseSDK copy-Info.plist";
+				INFOPLIST_FILE = OmiseSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
