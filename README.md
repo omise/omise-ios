@@ -199,6 +199,9 @@ class Handler: OmiseTokenRequestDelegate {
 }
 ```
 
+## Card.io support
+[Card.io](https://www.card.io) is an opensource library for scanning credit cards with your iPhone camera. Omise iOS SDK supports Card.io by integrating it into our `Credit Card Form`. If you integrate Omise iOS SDK via `Carthage` then you will get Card.io support for free.
+
 ## Contributing
 
 Pull requests and bugfixes are welcome. For larger scope of work, please pop on to our
@@ -207,5 +210,5 @@ chatroom to discuss first.
 
 ## LICENSE
 
-MIT (See the (full license text)[https://github.com/omise/omise-ios/blob/master/LICENSE])
+MIT [See the full license text](https://github.com/omise/omise-ios/blob/master/LICENSE)
 
