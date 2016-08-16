@@ -1,6 +1,13 @@
 import Foundation
 
+
+/// A utility class for a `Card` number calculation
 @objc(OMSCardNumber) public final class CardNumber: NSObject {
+    
+    /**
+     Normalize the credit card PAN number, remove any characters that are not the number.
+     - returns: Normalized PAN number. eg. *4242424242424242*
+     */
     @objc public static func normalize(pan: String) -> String {
         return pan.stringByReplacingOccurrencesOfString(
             "[^0-9]",
@@ -9,6 +16,11 @@ import Foundation
             range: nil)
     }
     
+    /**
+     Determine the credit card network brand from given credit card number
+     - returns: Credit card network brand, nil if it's not recognized by Omise.
+     - seealso: CardBrand
+     */
     public static func brand(pan: String) -> CardBrand? {
         return CardBrand.all
             .filter({ (brand) -> Bool in pan.rangeOfString(brand.pattern, options: .RegularExpressionSearch, range: nil, locale: nil) != nil })
@@ -19,6 +31,11 @@ import Foundation
         return brand(pan)?.rawValue ?? NSNotFound
     }
     
+    
+    /**
+     Format string of given credit card number.
+     - returns: Return a formatted string of given credit card number. eg. `4242 4242 4242 4242`
+     */
     @objc public static func format(pan: String) -> String {
         var result = ""
         for (i, digit) in normalize(pan).characters.enumerate() {
@@ -32,6 +49,10 @@ import Foundation
         return result
     }
     
+    /**
+     Verify the luhn number of given credit card number
+     - returns: true if the luhn number of given credit card number is valid.
+     */
     @objc public static func luhn(pan: String) -> Bool {
         let chars = normalize(pan).characters
         let digits = chars
@@ -52,6 +73,10 @@ import Foundation
         return sum % 10 == 0
     }
     
+    /**
+     Validate the given credit card number. The validate method will validate the luhn number and the lenght of the credit card.
+     - returns: true if the given credit card number is valid
+     */
     @objc public static func validate(pan: String) -> Bool {
         let normalized = normalize(pan)
         

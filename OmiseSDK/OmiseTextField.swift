@@ -1,9 +1,13 @@
 import Foundation
 import UIKit
 
+
+/// An Omise text field delegate
 public protocol OmiseTextFieldValidationDelegate {
+    /// A delegate method that will be called when the data validity of the text field is changed.
     func textField(field: OmiseTextField, didChangeValidity isValid: Bool)
 }
+
 
 public class OmiseTextField: UITextField {
     public private(set) var previousText: String?
@@ -17,7 +21,8 @@ public class OmiseTextField: UITextField {
             textDidChange()
         }
     }
-   
+    
+    /// A boolean indicates that the current input text data is valid or not.
     public var isValid: Bool {
         // child-class override hook to provide validation logic.
         return true

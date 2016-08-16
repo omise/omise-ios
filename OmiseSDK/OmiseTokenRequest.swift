@@ -1,7 +1,15 @@
 import Foundation
 
+
+
 public protocol OmiseTokenRequestDelegate {
+    /// A delegate method that will be called when the card tokenization is successful.
+    /// - parameter request: A card tokenization request.
+    /// - parameter token: The token that generated from Omise server.
     func tokenRequest(request: OmiseTokenRequest, didSucceedWithToken token: OmiseToken)
+    /// A delegate method that will be called when the card tokenization is failed.
+    /// - parameter request: A card tokenization request.
+    /// - parameter error: The error that occurred during the tokenization.
     func tokenRequest(request: OmiseTokenRequest, didFailWithError error: ErrorType)
 }
 
@@ -10,23 +18,43 @@ public protocol OmiseTokenRequestDelegate {
     func tokenRequest(request: OmiseTokenRequest, didFailWithError error: NSError)
 }
 
+
+/// A card tokenization result data type. This data type consists of 2 cases
+/// - Succeed
+/// - Fail
 public enum OmiseTokenRequestResult {
+    /// Represents that the tokenization is succeed, this case has an associative token value
     case Succeed(token: OmiseToken)
+    /// Represents that the tokenization is failed, this case has an associative error
     case Fail(error: ErrorType)
 }
 
 
+/**
+ A card tokenization request object contains the information that required to perform tokenization
+ - seealso: [The Omise Token API documentation](https://www.omise.co/tokens-api)
+ */
 @objc(OMSTokenRequest) public class OmiseTokenRequest: NSObject {
+  
+    /// A completion callback closure type which has a `OmiseTokenRequestResult` as a parameter.
     public typealias Callback = (OmiseTokenRequestResult) -> ()
     
+    /// A name of the card holder
     @objc public let name: String
+    /// A card number for tokenization
     @objc public let number: String
+    /// The card expiration month (1-12)
     @objc public let expirationMonth: Int
+    /// The card expiration year (in Gregorian)
     @objc public let expirationYear: Int
+    /// The security code (CVV, CVC, etc) printed on the back of the card.
     @objc public let securityCode: String
+    /// The city where the card is issued.
     @objc public let city: String?
+    /// The postal code from the city where the card was issued
     @objc public let postalCode: String?
     
+    /// An initializer to create a tokenization request.
     @objc public init(name: String, number: String, expirationMonth: Int, expirationYear: Int,
                 securityCode: String, city: String? = nil, postalCode: String? = nil) {
         self.name = name
@@ -102,7 +130,7 @@ public enum OmiseTokenRequestResult {
     private func completeRequest(callback: Callback?) -> (NSData?, NSURLResponse?, NSError?) -> () {
         return { (data: NSData?, response: NSURLResponse?, error: NSError?) -> () in
             guard let callback = callback else { return } // nobody around to hear the leaf falls
-
+            
             if let error = error {
                 return callback(.Fail(error: error))
             }

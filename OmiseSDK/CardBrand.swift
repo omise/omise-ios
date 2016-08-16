@@ -1,5 +1,6 @@
 import Foundation
 
+
 @objc(OMSCardBrand) public enum CardBrand: Int {
     public static let all: [CardBrand] = [
         AMEX,
@@ -21,6 +22,7 @@ import Foundation
     case Maestro
     case Discover
     
+    /// A valid card number pattern for card that issued by this card network.
     public var pattern: String {
         switch self {
         case .AMEX:
@@ -42,6 +44,7 @@ import Foundation
         }
     }
     
+    /// A valid card number length for card that issued by this card network.
     public var validLengths: ClosedInterval<Int> {
         switch self {
         case .AMEX:

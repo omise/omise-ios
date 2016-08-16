@@ -1,7 +1,10 @@
 import Foundation
 import UIKit
 
+
+/// A UITextField subclass used for inputing the card holder name.
 public class CardNameTextField: OmiseTextField {
+    /// A boolean value indicates that the current card number holder name is valid or not.
     public override var isValid: Bool {
         return !(text ?? "").isEmpty
     }

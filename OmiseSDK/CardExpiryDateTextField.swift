@@ -1,6 +1,9 @@
 import Foundation
 import UIKit
 
+
+/// A UITextField subclass used for inputing the card holder name.
+/// - note: This text field input view is `CardExpiryDatePicker` class.
 public class CardExpiryDateTextField: OmiseTextField {
     private let maxCreditCardAge = 21
     private let expirationRx = { () -> NSRegularExpression in
@@ -10,10 +13,13 @@ public class CardExpiryDateTextField: OmiseTextField {
         
         return rx
     }()
-    
+  
+    /// Currently selected month value, nil if user hasn't selected any month yet.
     public private(set) var selectedMonth: Int? = nil
+    /// Currently selected year value, nil if user hasn't selected any year yet.
     public private(set) var selectedYear: Int? = nil
     
+    /// A boolean value indicates that the current expiry date is valid or not. 
     public override var isValid: Bool {
         let now = NSDate()
         guard let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian) else {

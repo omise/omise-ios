@@ -1,13 +1,17 @@
 import Foundation
 
+
+/// A UITextField subclass used for inputing the card number.
 public class CardNumberTextField: OmiseTextField {
     private var updatingText = false
     private let maxLength = 19
     
+    /// The card network brand of the current card number.
     public var cardBrand: CardBrand? {
         return CardNumber.brand(text ?? "")
     }
     
+    /// A boolean value indicates that the current card number is valid or not.
     public override var isValid: Bool {
         return CardNumber.validate(text ?? "")
     }

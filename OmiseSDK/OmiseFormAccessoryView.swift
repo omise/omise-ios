@@ -1,5 +1,7 @@
 import Foundation
 
+
+/// A utility input accessory view class which provides a buttons to switch between UITextFields.
 @objc(OMSFormAccessoryView) public class OmiseFormAccessoryView: UIToolbar {
     private var textFields = [UITextField]() {
         willSet {
@@ -41,6 +43,11 @@ import Foundation
         fatalError("init(coder:) has not been implemented")
     }
     
+    /**
+     Attach this accessory view to givens text fields and view controller.
+     - parameter textFields: Attaching text fields. The order of text fields in this parameter indicate the order of responding text field when user tap `next` or `previous` buttons.
+     - parameter viewController: A view controller that will be called `endEditing` on its views when user tap `Done` button.
+     */
     @objc public func attachToTextFields(textFields: [UITextField], inViewController viewController: UIViewController) {
         self.textFields = textFields
         

@@ -261,7 +261,9 @@
 				987A02CA1CE35D5E0035417A /* OmiseSDKTests */,
 				225931191CE3210700841B86 /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		225931191CE3210700841B86 /* Products */ = {
 			isa = PBXGroup;
