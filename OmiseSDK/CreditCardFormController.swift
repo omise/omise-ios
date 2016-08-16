@@ -1,5 +1,10 @@
 import UIKit
 
+#if CardIO
+import OmiseSDK.Private
+#endif
+
+
 public protocol CreditCardFormDelegate: class {
     func creditCardForm(controller: CreditCardFormController, didSucceedWithToken token: OmiseToken)
     func creditCardForm(controller: CreditCardFormController, didFailWithError error: ErrorType)
@@ -14,27 +19,55 @@ public class CreditCardFormController: UITableViewController {
     
     private var hasErrorMessage = false
     
-    
     @IBOutlet var formHeaderView: FormHeaderView!
     @IBOutlet var formFields: [OmiseTextField]! {
-        didSet {
-            if isViewLoaded(), let formFields = formFields {
-                accessoryView.attachToTextFields(formFields, inViewController: self)
-            }
+      didSet {
+        if isViewLoaded(), let formFields = formFields {
+          
+          accessoryView.attachToTextFields(formFields, inViewController: self)
         }
+      }
     }
+    
     @IBOutlet var formCells: [UITableViewCell]!
     
     @IBOutlet var formLabels: [UILabel]!
     @IBOutlet var labelWidthConstraints: [NSLayoutConstraint]!
     @IBOutlet var cardNumberCell: CardNumberFormCell!
+    @IBOutlet var cardNumberTextField: CardNumberTextField!
     @IBOutlet var cardNameCell: NameCardFormCell!
+    @IBOutlet var cardNameTextField: CardNameTextField!
     @IBOutlet var expiryDateCell: ExpiryDateFormCell!
+    @IBOutlet var expiryDateTextField: CardExpiryDateTextField!
     @IBOutlet var secureCodeCell: SecureCodeFormCell!
+    @IBOutlet var secureCodeTextField: CardCVVTextField!
     @IBOutlet var confirmButtonCell: ConfirmButtonCell!
     
+    @IBOutlet var openCardIOButton: UIButton!
     @IBOutlet var errorMessageView: ErrorMessageView!
     let accessoryView = OmiseFormAccessoryView()
+    
+    
+    /// A boolean indicates that CreditCardForm should displays capture card information via card.io button.
+    public var cardIOEnabled: Bool = true {
+        didSet {
+            if isViewLoaded() && cardIOAvailable && cardIOEnabled {
+                cardNumberCell?.textField.rightView = openCardIOButton
+                cardNumberCell?.textField.rightViewMode = .Always
+            } else {
+                cardNumberCell?.textField.rightView = nil
+                cardNumberCell?.textField.rightViewMode = .Never
+            }
+        }
+    }
+    
+    private var cardIOAvailable: Bool {
+        #if CardIO
+            return CardIOUtilities.canReadCardWithCamera()
+        #else
+            return false
+        #endif
+    }
     
     @objc public static func creditCardFormWithPublicKey(publicKey: String) -> CreditCardFormController {
         let omiseBundle = NSBundle(forClass: self)
@@ -54,6 +87,14 @@ public class CreditCardFormController: UITableViewController {
         
         accessoryView.attachToTextFields(formFields, inViewController: self)
         
+        if cardIOAvailable && cardIOEnabled {
+            cardNumberCell?.textField.rightView = openCardIOButton
+            cardNumberCell?.textField.rightViewMode = .Always
+        }
+        tableView.estimatedRowHeight = tableView.rowHeight
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        tableView.tableFooterView = UIView()
         let preferredWidth = formLabels.reduce(CGFloat.min) { (currentPreferredWidth, label)  in
             return max(currentPreferredWidth, label.intrinsicContentSize().width)
         }
@@ -163,6 +204,19 @@ public class CreditCardFormController: UITableViewController {
         confirmButtonCell?.stopActivityIndicator()
         tableView.userInteractionEnabled = true
     }
+    
+    @IBAction func presentCardIOViewController() {
+        #if CardIO
+        let cardIOController = CardIOPaymentViewController(paymentDelegate: self)
+        cardIOController.hideCardIOLogo = true
+        cardIOController.disableManualEntryButtons = true
+        cardIOController.collectCVV = false
+        cardIOController.collectExpiry = true
+        cardIOController.scanExpiry = true
+        cardIOController.suppressScanConfirmation = true
+        presentViewController(cardIOController, animated: true, completion: nil)
+        #endif
+    }
 
 }
 
@@ -203,4 +257,30 @@ extension CreditCardFormController {
         }
     }
 }
+
+#if CardIO
+extension CreditCardFormController: CardIOPaymentViewControllerDelegate {
+    public func userDidCancelPaymentViewController(paymentViewController: CardIOPaymentViewController!) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    public func userDidProvideCreditCardInfo(cardInfo: CardIOCreditCardInfo!, inPaymentViewController paymentViewController: CardIOPaymentViewController!) {
+        if let cardNumber = cardInfo.cardNumber {
+            cardNumberTextField.text = cardNumber
+        }
+        
+        if 1...12 ~= cardInfo.expiryMonth && cardInfo.expiryYear > 0 {
+            expiryDateTextField.text = String(format: "%02d/%d", cardInfo.expiryMonth, cardInfo.expiryYear - 2000)
+        }
+        
+        dismissViewControllerAnimated(true, completion: { _ in
+            if self.cardNameTextField.text?.isEmpty ?? true {
+               self.cardNameTextField.becomeFirstResponder()
+            } else if self.secureCodeTextField.text?.isEmpty ?? true {
+                self.secureCodeTextField.becomeFirstResponder()
+            }
+        })
+    }
+}
+#endif
 

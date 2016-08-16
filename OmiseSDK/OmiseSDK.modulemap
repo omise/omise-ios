@@ -1,0 +1,10 @@
+framework module OmiseSDK {
+    umbrella header "OmiseSDK.h"
+    
+    export *
+    module * { export * }
+    
+    module Private {
+        umbrella header "CardIO.h"
+    }
+}
