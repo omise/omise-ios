@@ -19,6 +19,9 @@ public class OmiseTextField: UITextField {
         didSet {
             // UITextField doesn't send editing changed control event when we set its text property
             textDidChange()
+            if !isFirstResponder() {
+                textColor = isValid ? .blackColor() : .redColor();
+            }
         }
     }
     
