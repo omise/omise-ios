@@ -133,11 +133,7 @@ public class CreditCardFormController: UITableViewController {
     }
     
     @objc private func fieldDidChange(sender: AnyObject) {
-        validateForm()
-        
-        if let cardNumberField = sender as? CardNumberTextField {
-            formHeaderView?.setCardBrand(cardNumberField.cardBrand)
-        }
+        updateSupplementaryUI()
     }
     
     @objc private func keyboardWillAppear(notification: NSNotification){
@@ -169,9 +165,11 @@ public class CreditCardFormController: UITableViewController {
         tableView.endUpdates()
     }
     
-    private func validateForm() {
+    private func updateSupplementaryUI() {
         let valid = formFields.reduce(true) { (valid, field) -> Bool in valid && field.isValid }
         confirmButtonCell?.userInteractionEnabled = valid
+        
+        formHeaderView?.setCardBrand(cardNumberTextField.cardBrand)
     }
     
     private func requestToken() {
@@ -281,6 +279,8 @@ extension CreditCardFormController: CardIOPaymentViewControllerDelegate {
         if 1...12 ~= cardInfo.expiryMonth && cardInfo.expiryYear > 0 {
             expiryDateTextField.text = String(format: "%02d/%d", cardInfo.expiryMonth, cardInfo.expiryYear - 2000)
         }
+        
+        updateSupplementaryUI()
         
         dismissViewControllerAnimated(true, completion: { _ in
             if self.cardNameTextField.text?.isEmpty ?? true {
