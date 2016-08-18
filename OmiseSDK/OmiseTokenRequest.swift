@@ -6,17 +6,17 @@ public protocol OmiseTokenRequestDelegate {
     /// Delegate method for receiving token data when token request succeeds.
     /// - parameter request: Original `OmiseTokenRequest` that was sent.
     /// - parameter token: `OmiseToken` instance created from supplied card data.
-    func tokenRequest(request: OmiseTokenRequest, didSucceedWithToken token: OmiseToken)
+    func tokenRequest(_ request: OmiseTokenRequest, didSucceedWithToken token: OmiseToken)
     
     /// Delegate method for receiving error information when token request failed.
     /// - parameter request: Original `OmiseTokenRequest` that was sent.
     /// - parameter error: The error that occured during the tokenization request.
-    func tokenRequest(request: OmiseTokenRequest, didFailWithError error: ErrorType)
+    func tokenRequest(_ request: OmiseTokenRequest, didFailWithError error: Error)
 }
 
 @objc public protocol OMSTokenRequestDelegate {
-    func tokenRequest(request: OmiseTokenRequest, didSucceedWithToken token: OmiseToken)
-    func tokenRequest(request: OmiseTokenRequest, didFailWithError error: NSError)
+    func tokenRequest(_ request: OmiseTokenRequest, didSucceedWithToken token: OmiseToken)
+    func tokenRequest(_ request: OmiseTokenRequest, didFailWithError error: NSError)
 }
 
 
@@ -26,9 +26,9 @@ public protocol OmiseTokenRequestDelegate {
 /// - Fail: An `ErrorType` value can be obtained to find the request failure reason.
 public enum OmiseTokenRequestResult {
     /// Tokenization is successful, this case has an associated `OmiseToken` value
-    case Succeed(token: OmiseToken)
+    case succeed(token: OmiseToken)
     /// Tokenization, this case has an associated `ErrorType` value.
-    case Fail(error: ErrorType)
+    case fail(error: Error)
 }
 
 
@@ -68,37 +68,37 @@ public enum OmiseTokenRequestResult {
         self.postalCode = postalCode
     }
     
-    func startWith(client: OmiseSDKClient, callback: Callback?) -> NSURLSessionDataTask? {
-        let request: NSURLRequest
+    func start(with client: OmiseSDKClient, callback: Callback?) -> URLSessionDataTask? {
+        let request: URLRequest
         do {
             request = try buildURLRequest(client)
         } catch let err {
-            callback?(.Fail(error: err))
+            callback?(.fail(error: err))
             return nil
         }
         
-        let task = client.session.dataTaskWithRequest(request, completionHandler: completeRequest(callback))
+        let task = client.session.dataTask(with: request, completionHandler: completeRequest(callback))
         task.resume()
         return task
     }
     
-    private func buildURLComponents(client: OmiseSDKClient) -> NSURLComponents {
-        var queryItems: [NSURLQueryItem] = [
-            NSURLQueryItem(name: "card[name]", value: name),
-            NSURLQueryItem(name: "card[number]", value: number),
-            NSURLQueryItem(name: "card[expiration_month]", value: String(expirationMonth)),
-            NSURLQueryItem(name: "card[expiration_year]", value: String(expirationYear)),
-            NSURLQueryItem(name: "card[security_code]", value: securityCode)
+    private func buildURLComponents(_ client: OmiseSDKClient) -> URLComponents {
+        var queryItems: [URLQueryItem] = [
+            URLQueryItem(name: "card[name]", value: name),
+            URLQueryItem(name: "card[number]", value: number),
+            URLQueryItem(name: "card[expiration_month]", value: String(expirationMonth)),
+            URLQueryItem(name: "card[expiration_year]", value: String(expirationYear)),
+            URLQueryItem(name: "card[security_code]", value: securityCode)
         ]
         
         if let city = city {
-            queryItems.append(NSURLQueryItem(name: "card[city]", value: city))
+            queryItems.append(URLQueryItem(name: "card[city]", value: city))
         }
         if let postalCode = postalCode {
-            queryItems.append(NSURLQueryItem(name: "card[postal_code]", value: postalCode))
+            queryItems.append(URLQueryItem(name: "card[postal_code]", value: postalCode))
         }
         
-        let components = NSURLComponents()
+        var components = URLComponents()
         components.scheme = "https"
         components.host = "vault.omise.co"
         components.path = "/tokens"
@@ -107,71 +107,71 @@ public enum OmiseTokenRequestResult {
         return components
     }
     
-    private func buildURLRequest(client: OmiseSDKClient) throws -> NSURLRequest {
-        guard let url = buildURLComponents(client).URL else {
-            throw OmiseError.Unexpected(message: "token request build failure.", underlying: nil)
+    private func buildURLRequest(_ client: OmiseSDKClient) throws -> URLRequest {
+        guard let url = buildURLComponents(client).url else {
+            throw OmiseError.unexpected(message: "token request build failure.", underlying: nil)
         }
         
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "POST"
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "POST"
         request.setValue(try encodeAuthorizationHeader(client.publicKey), forHTTPHeaderField: "Authorization")
         request.setValue(client.userAgent, forHTTPHeaderField: "User-Agent")
         
-        return request
+        return request as URLRequest
     }
     
-    private func encodeAuthorizationHeader(publicKey: String) throws -> String {
-        let data = publicKey.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-        guard let base64 = data?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0)) else {
-            throw OmiseError.Unexpected(message: "public key encoding failure.", underlying: nil)
+    private func encodeAuthorizationHeader(_ publicKey: String) throws -> String {
+        let data = publicKey.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        guard let base64 = data?.base64EncodedString() else {
+            throw OmiseError.unexpected(message: "public key encoding failure.", underlying: nil)
         }
         
         return "Basic \(base64)"
     }
     
-    private func completeRequest(callback: Callback?) -> (NSData?, NSURLResponse?, NSError?) -> () {
-        return { (data: NSData?, response: NSURLResponse?, error: NSError?) -> () in
+    private func completeRequest(_ callback: Callback?) -> (Data?, URLResponse?, Error?) -> () {
+        return { (data: Data?, response: URLResponse?, error: Error?) -> () in
             guard let callback = callback else { return } // nobody around to hear the leaf falls
             
             if let error = error {
-                return callback(.Fail(error: error))
+                return callback(.fail(error: error))
             }
             
-            guard let httpResponse = response as? NSHTTPURLResponse else {
-                let error = OmiseError.Unexpected(message: "no error and no response.", underlying: nil)
-                return callback(.Fail(error: error))
+            guard let httpResponse = response as? HTTPURLResponse else {
+                let error = OmiseError.unexpected(message: "no error and no response.", underlying: nil)
+                return callback(.fail(error: error))
             }
             
             switch httpResponse.statusCode {
             case 400..<600:
                 guard let data = data else {
-                    let error = OmiseError.Unexpected(message: "error response with no data", underlying: nil)
-                    return callback(.Fail(error: error))
+                    let error = OmiseError.unexpected(message: "error response with no data", underlying: nil)
+                    return callback(.fail(error: error))
                 }
                 
                 do {
-                    return callback(.Fail(error: try OmiseJsonParser.parseError(data)))
+                    return callback(.fail(error: try OmiseJsonParser.parseError(from: data)))
                 } catch let err {
-                    let error = OmiseError.Unexpected(message: "error response with invalid JSON", underlying: err)
-                    return callback(.Fail(error: error))
+                    let error = OmiseError.unexpected(message: "error response with invalid JSON", underlying: err)
+                    return callback(.fail(error: error))
                 }
                 
             case 200..<300:
                 guard let data = data else {
-                    let error = OmiseError.Unexpected(message: "HTTP 200 but no data", underlying: nil)
-                    return callback(.Fail(error: error))
+                    let error = OmiseError.unexpected(message: "HTTP 200 but no data", underlying: nil)
+                    return callback(.fail(error: error))
                 }
                 
                 do {
-                    return callback(.Succeed(token: try OmiseJsonParser.parseToken(data)))
+                    return callback(.succeed(token: try OmiseJsonParser.parseToken(from: data)))
                 } catch let err {
-                    let error = OmiseError.Unexpected(message: "200 response with invalid JSON", underlying: err)
-                    return callback(.Fail(error: error))
+                    let error = OmiseError.unexpected(message: "200 response with invalid JSON", underlying: err)
+                    return callback(.fail(error: error))
                 }
                 
             default:
-                let error = OmiseError.Unexpected(message: "unrecognized HTTP status code: \(httpResponse.statusCode)", underlying: nil)
-                return callback(.Fail(error: error))
+                let error = OmiseError.unexpected(message: "unrecognized HTTP status code: \(httpResponse.statusCode)", underlying: nil)
+                return callback(.fail(error: error))
             }
         }
     }

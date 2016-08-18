@@ -9,7 +9,7 @@ public class CardNumberTextField: OmiseTextField {
     
     /// Card brand determined from current input.
     public var cardBrand: CardBrand? {
-        return CardNumber.brand(text ?? "")
+        return CardNumber.brand(of: text ?? "")
     }
     
     /// Boolean indicating wether current input is valid or not.
@@ -28,12 +28,12 @@ public class CardNumberTextField: OmiseTextField {
     }
     
     override init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         setup()
     }
     
     func setup() {
-        keyboardType = .NumberPad
+        keyboardType = .numberPad
         placeholder = "0123 4567 8910 2345"
     }
     

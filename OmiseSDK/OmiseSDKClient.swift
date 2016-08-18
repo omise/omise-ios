@@ -4,17 +4,18 @@ import UIKit
 
 /// Client object as the main entry point for performing Omise API calls.
 @objc(OMSSDKClient) public class OmiseSDKClient: NSObject {
-    let session: NSURLSession
-    let queue: NSOperationQueue
+    let session: URLSession
+    let queue: OperationQueue
     let publicKey: String
     
     let version: String = {
-        let bundle = NSBundle(forClass: OmiseSDKClient.self)
+        let bundle = Bundle(for: OmiseSDKClient.self)
         return bundle.infoDictionary?["CFBundleShortVersionString"] as? String ?? "(n/a)"
     }()
     
-    let currentPlatform: String = NSProcessInfo.processInfo().operatingSystemVersionString
-    let currentDevice: String = UIDevice.currentDevice().model
+    let currentPlatform: String = ProcessInfo.processInfo.operatingSystemVersionString
+    
+    let currentDevice: String = UIDevice.current.model
     
     var userAgent: String {
         return "OmiseIOSSDK/\(version) " +
@@ -30,9 +31,9 @@ import UIKit
      - seealso: init(publicKey:queue:session:)
      */
     @objc public convenience init(publicKey: String) {
-        let queue = NSOperationQueue()
-        let session = NSURLSession(
-            configuration: NSURLSessionConfiguration.ephemeralSessionConfiguration(),
+        let queue = OperationQueue()
+        let session = URLSession(
+            configuration: URLSessionConfiguration.ephemeral,
             delegate: nil,
             delegateQueue: queue)
         
@@ -47,7 +48,7 @@ import UIKit
      - parameter session: `NSURLSession` for performing API calls.
      - seealso: init(publicKey:)
      */
-    @objc public init(publicKey: String, queue: NSOperationQueue, session: NSURLSession) {
+    @objc public init(publicKey: String, queue: OperationQueue, session: URLSession) {
         self.queue = queue
         self.session = session
         
@@ -66,9 +67,9 @@ import UIKit
      - seealso: OmiseTokenRequest
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
-    public func send(request: OmiseTokenRequest, callback: OmiseTokenRequest.Callback?) {
-        request.startWith(self) { (result) in
-            dispatch_async(dispatch_get_main_queue(), { 
+    public func send(_ request: OmiseTokenRequest, callback: OmiseTokenRequest.Callback?) {
+        _ = request.start(with: self) { (result) in
+            DispatchQueue.main.async(execute: { 
                 callback?(result)
             })
         }
@@ -81,16 +82,16 @@ import UIKit
      - seealso: OmiseTokenRequest
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
-    @objc(sendRequest:callback:) public func __send(request: OmiseTokenRequest, callback: ((OmiseToken?, NSError?) -> ())?) {
-        request.startWith(self) { (result) in
-            dispatch_async(dispatch_get_main_queue(), {
+    @objc(sendRequest:callback:) public func __sendRequest(_ request: OmiseTokenRequest, callback: ((OmiseToken?, NSError?) -> ())?) {
+        _ = request.start(with: self) { (result) in
+            DispatchQueue.main.async(execute: {
                 let token: OmiseToken?
                 let error: NSError?
                 switch result {
-                case .Succeed(token: let resultToken):
+                case .succeed(token: let resultToken):
                     token = resultToken
                     error = nil
-                case .Fail(error: let requestError):
+                case .fail(error: let requestError):
                     if let requestError = requestError as? OmiseError {
                         error = requestError.nsError
                     } else {
@@ -112,12 +113,12 @@ import UIKit
      - seealso: OmiseTokenRequest
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
-    public func send(request: OmiseTokenRequest, delegate: OmiseTokenRequestDelegate?) {
+    public func send(_ request: OmiseTokenRequest, delegate: OmiseTokenRequestDelegate?) {
         send(request) { (result) in
             switch result {
-            case let .Succeed(token):
+            case let .succeed(token):
                 delegate?.tokenRequest(request, didSucceedWithToken: token)
-            case let .Fail(err):
+            case let .fail(err):
                 delegate?.tokenRequest(request, didFailWithError: err)
             }
         }
@@ -131,12 +132,12 @@ import UIKit
      - seealso: OmiseTokenRequest
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
-    @objc(sendRequest:delegate:) public func __send(request: OmiseTokenRequest, delegate: OMSTokenRequestDelegate?) {
+    @objc(sendRequest:delegate:) public func __sendRequest(_ request: OmiseTokenRequest, delegate: OMSTokenRequestDelegate?) {
         send(request) { (result) in
             switch result {
-            case let .Succeed(token):
+            case let .succeed(token):
                 delegate?.tokenRequest(request, didSucceedWithToken: token)
-            case let .Fail(err):
+            case let .fail(err):
                 let error = err as NSError
                 delegate?.tokenRequest(request, didFailWithError: error)
             }

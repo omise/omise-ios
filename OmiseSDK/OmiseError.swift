@@ -3,9 +3,9 @@ import Foundation
 public let OmiseErrorDomain = "co.omise"
 
 public enum OmiseErrorUserInfoKey: String {
-    case Location = "location"
-    case Code = "code"
-    case Message = "message"
+    case location = "location"
+    case code = "code"
+    case message = "message"
     
     public var nsString: NSString {
         return rawValue as NSString
@@ -14,24 +14,24 @@ public enum OmiseErrorUserInfoKey: String {
 
 
 /// Represent errors from the Omise iOS SDK.
-public enum OmiseError: ErrorType {
+public enum OmiseError: Error {
     /// API error returned from Omise API
-    case API(code: String, message: String, location: String)
+    case api(code: String, message: String, location: String)
     /// Any unexpected errors that may happen during Omise API requests.
-    case Unexpected(message: String, underlying: ErrorType?)
+    case unexpected(message: String, underlying: Error?)
     
     public var nsError: NSError {
         switch self {
-        case .API(let code, let message, let location):
+        case .api(let code, let message, let location):
             return NSError(domain: OmiseErrorDomain, code: code.hashValue, userInfo: [
-                OmiseErrorUserInfoKey.Code.nsString: code,
-                OmiseErrorUserInfoKey.Location.nsString: location,
-                OmiseErrorUserInfoKey.Message.nsString: message,
+                OmiseErrorUserInfoKey.code.nsString: code,
+                OmiseErrorUserInfoKey.location.nsString: location,
+                OmiseErrorUserInfoKey.message.nsString: message,
                 NSLocalizedDescriptionKey: message
                 ])
             
-        case .Unexpected(let message, let underlying):
-            if let underlying = underlying as? AnyObject {
+        case .unexpected(let message, let underlying):
+            if let underlying = underlying as? NSError {
                 return NSError(domain: OmiseErrorDomain, code: 0, userInfo: [
                     NSLocalizedDescriptionKey: message,
                     NSUnderlyingErrorKey: underlying

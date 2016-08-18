@@ -5,9 +5,9 @@ import Foundation
 @objc(OMSJSONParser) public final class OmiseJsonParser: NSObject {
     /// Date formatter used for formatting the date fields returned from Omise API.
     /// Dates from Omise API follows the ISO8601 standard.
-    @objc public static let dateFormatter: NSDateFormatter = {
-        let formatter = NSDateFormatter()
-        formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+    @objc public static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
         return formatter
     }()
@@ -18,13 +18,13 @@ import Foundation
      - returns: An `OmiseToken` instance parsed from JSON data.
      - throws: `OmiseError.Unexpected` if JSON parsing failed.
      */
-    @objc public static func parseToken(data: NSData) throws -> OmiseToken {
-        let dict = try parseJSON(data)
+    @objc public static func parseToken(from data: Data) throws -> OmiseToken {
+        let dict = try parseJSON(from: data)
         guard dict["object"] as? String == "token" else {
-            throw OmiseError.Unexpected(message: "Bad JSON response.", underlying: nil)
+            throw OmiseError.unexpected(message: "Bad JSON response.", underlying: nil)
         }
         guard let cardDict = dict["card"] as? NSDictionary else {
-            throw OmiseError.Unexpected(message: "Bad JSON response.", underlying: nil)
+            throw OmiseError.unexpected(message: "Bad JSON response.", underlying: nil)
         }
         
         let card = OmiseCard()
@@ -61,42 +61,39 @@ import Foundation
      - returns: `OmiseError` value.
      - throws: `OmiseError.Unexpected` if JSON parsing failed.
      */
-    public static func parseError(data: NSData) throws -> OmiseError {
-        let dict = try parseJSON(data)
+    @objc(parseError:error:) public static func parseError(from data: Data) throws -> Error {
+        let dict = try parseJSON(from: data)
         guard dict["object"] as? String == "error" else {
-            throw OmiseError.Unexpected(message: "Unknown API error.", underlying: nil)
+            throw OmiseError.unexpected(message: "Unknown API error.", underlying: nil)
         }
         
         guard let location = dict["location"] as? String,
             let code = dict["code"] as? String,
             let message = dict["message"] as? String else {
-                throw OmiseError.Unexpected(message: "Unknown API error.", underlying: nil)
+                throw OmiseError.unexpected(message: "Unknown API error.", underlying: nil)
         }
         
-        return OmiseError.API(code: code, message: message, location: location)
+        return OmiseError.api(code: code, message: message, location: location)
     }
     
-    @objc(parseError:error:) public static func __parseError(data: NSData) throws -> NSError {
-        return try parseError(data).nsError
-    }
     
-    private static func parseJSON(data: NSData) throws -> NSDictionary {
-        let jsonObject: AnyObject
+    private static func parseJSON(from data: Data) throws -> NSDictionary {
+        let jsonObject: Any
         do {
-            jsonObject = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
+            jsonObject = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
         } catch let err {
-            throw OmiseError.Unexpected(message: "JSON deserialization failure.", underlying: err)
+            throw OmiseError.unexpected(message: "JSON deserialization failure.", underlying: err)
         }
         
         guard let jsonDict = jsonObject as? NSDictionary else {
-            throw OmiseError.Unexpected(message: "Bad JSON response.", underlying: nil)
+            throw OmiseError.unexpected(message: "Bad JSON response.", underlying: nil)
         }
         
         return jsonDict
     }
     
-    private static func parseJSONDate(input: String?) -> NSDate? {
-        guard let input = input else { return nil }
-        return dateFormatter.dateFromString(input)
+    private static func parseJSONDate(_ input: String?) -> Date? {
+        return input.flatMap(dateFormatter.date(from:))
     }
 }
+

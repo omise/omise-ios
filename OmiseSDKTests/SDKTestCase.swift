@@ -2,14 +2,14 @@ import Foundation
 import XCTest
 
 class SDKTestCase: XCTestCase {
-    func fixturesDataFor(filename: String) -> NSData? {
-        let bundle = NSBundle(forClass: OmiseTokenRequestTest.self)
-        guard let path = bundle.pathForResource("Fixtures/objects/\(filename)", ofType: "json") else {
+    func fixturesDataFor(_ filename: String) -> Data? {
+        let bundle = Bundle(for: OmiseTokenRequestTest.self)
+        guard let path = bundle.url(forResource: "Fixtures/objects/\(filename)", withExtension: "json") else {
             XCTFail("could not load fixtures.")
             return nil
         }
         
-        guard let data = NSData(contentsOfFile: path) else {
+        guard let data = try? Data(contentsOf: path) else {
             XCTFail("could not load fixtures at path: \(path)")
             return nil
         }

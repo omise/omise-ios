@@ -3,7 +3,7 @@ import UIKit
 class ErrorMessageView: UIView {
     @IBOutlet weak var errorMessageLabel: UILabel!
     
-    func setErrorMessage(message: String) {
+    func setErrorMessage(_ message: String) {
         errorMessageLabel.text = message
     }
     

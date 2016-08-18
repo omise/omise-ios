@@ -37,13 +37,13 @@ import Foundation
     @objc public var name: String?
     @objc public var securityCodeCheck: Bool = false
     /// Card's creation time.
-    @objc public var created: NSDate?
+    @objc public var created: Date?
 }
 
-extension NSCalendar {
-    class func creditCardInformationCalendar() -> NSCalendar {
-        return NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-    }
+extension Calendar {
+    static let creditCardInformationCalendar: Calendar = {
+        return Calendar(identifier: .gregorian)
+    }()
 }
 
 
@@ -54,9 +54,7 @@ extension OmiseCard {
             return expirationMonth ?? NSNotFound
         }
         set {
-            let validRange = NSCalendar.creditCardInformationCalendar().maximumRangeOfUnit(NSCalendarUnit.Month)
-            let validMonthRange = validRange.location..<validRange.location.advancedBy(validRange.length)
-            if validMonthRange ~= newValue {
+            if let validRange = Calendar.creditCardInformationCalendar.maximumRange(of: .month), validRange ~= newValue {
                 expirationMonth = newValue
             } else {
                 expirationMonth = nil

@@ -4,31 +4,31 @@ class ConfirmButtonCell: UITableViewCell {
     @IBOutlet weak var confirmPaymentLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    override var userInteractionEnabled: Bool {
-        get { return super.userInteractionEnabled }
+    override var isUserInteractionEnabled: Bool {
+        get { return super.isUserInteractionEnabled }
         set {
-            super.userInteractionEnabled = newValue
+            super.isUserInteractionEnabled = newValue
             confirmPaymentLabel.textColor = newValue ?
                 UIColor(red: 74/255, green: 144/255, blue: 226/255, alpha: 1.0) :
-                UIColor.lightGrayColor()
+                UIColor.lightGray
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        confirmPaymentLabel.textColor = UIColor.lightGrayColor()
-        userInteractionEnabled = false
+        confirmPaymentLabel.textColor = UIColor.lightGray
+        isUserInteractionEnabled = false
         preservesSuperviewLayoutMargins = false
-        layoutMargins = UIEdgeInsetsZero
+        layoutMargins = UIEdgeInsets.zero
     }
     
     func startActivityIndicator() {
-        confirmPaymentLabel.hidden = true
+        confirmPaymentLabel.isHidden = true
         activityIndicator.startAnimating()
     }
     
     func stopActivityIndicator() {
-        confirmPaymentLabel.hidden = false
+        confirmPaymentLabel.isHidden = false
         activityIndicator.stopAnimating()
     }
 }

@@ -7,7 +7,7 @@ class FormHeaderView: UIView {
     @IBOutlet weak var headerLabel: UILabel!
     
     
-    func setCardBrand(cardBrand: CardBrand?) {
+    func setCardBrand(_ cardBrand: CardBrand?) {
         guard let cardBrand = cardBrand else {
             card_visa.alpha = 1.0
             card_mastercard.alpha = 1.0

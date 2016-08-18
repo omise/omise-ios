@@ -1,5 +1,5 @@
 import Foundation
 
-func sdkWarn(message: String) {
+func sdkWarn(_ message: String) {
     dump("[omise-ios-sdk] WARN: \(message)")
 }
