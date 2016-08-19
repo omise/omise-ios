@@ -1,12 +1,11 @@
 import Foundation
 
-
-/// A utility class for a `Card` number calculation
+/// Utility class for working with credit card numbers.
 @objc(OMSCardNumber) public final class CardNumber: NSObject {
     
     /**
-     Normalize the credit card PAN number, remove any characters that are not the number.
-     - returns: Normalized PAN number. eg. *4242424242424242*
+     Normalize credit card number by removing all non-number characters.
+     - returns: String of normalized credit card number. eg. *4242424242424242*
      */
     @objc public static func normalize(pan: String) -> String {
         return pan.stringByReplacingOccurrencesOfString(
@@ -17,8 +16,8 @@ import Foundation
     }
     
     /**
-     Determine the credit card network brand from given credit card number
-     - returns: Credit card network brand, nil if it's not recognized by Omise.
+     Determine credit card brand from given credit card number.
+     - returns: valid `CardBrand` or nil if it cannot be determined.
      - seealso: CardBrand
      */
     public static func brand(pan: String) -> CardBrand? {
@@ -33,8 +32,9 @@ import Foundation
     
     
     /**
-     Format string of given credit card number.
-     - returns: Return a formatted string of given credit card number. eg. `4242 4242 4242 4242`
+     Formats given credit card number into a human-friendly string by inserting spaces
+     after every 4 digits. ex. `4242 4242 4242 4242`
+     - returns: Formatted credit card number string.
      */
     @objc public static func format(pan: String) -> String {
         var result = ""
@@ -50,8 +50,8 @@ import Foundation
     }
     
     /**
-     Verify the luhn number of given credit card number
-     - returns: true if the luhn number of given credit card number is valid.
+     Validate credit card number using the Luhn algorithm.
+     - returns: `true` if the Luhn check passes, otherwise `false`.
      */
     @objc public static func luhn(pan: String) -> Bool {
         let chars = normalize(pan).characters
@@ -74,8 +74,9 @@ import Foundation
     }
     
     /**
-     Validate the given credit card number. The validate method will validate the luhn number and the lenght of the credit card.
-     - returns: true if the given credit card number is valid
+     Validate credit card number by using the Luhn algorithm and checking that the length
+     is within credit card brand's valid range.
+     - returns: `true` if the given credit card number is valid for all available checks, otherwise `false`.
      */
     @objc public static func validate(pan: String) -> Bool {
         let normalized = normalize(pan)

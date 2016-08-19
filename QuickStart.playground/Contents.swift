@@ -4,7 +4,7 @@
  
  # iOS SDK QuickStart
  
- To get going quickly, first make sure our SDK has been properly imported by adding the `import OmiseSDK` to the top of your view controller.
+ To get going quickly, first make sure the SDK can be imported by adding the `import OmiseSDK` to the top of your view controller.
  
  */
 import UIKit
@@ -13,16 +13,16 @@ import OmiseSDK
 
 /*: obtain-public-key
  
- To work with the [Omise Token API](https://www.omise.co/tokens-api) from a mobile application, you will need the public key. If you have not done so already, sign up for an account at [https://omise.co](https://omise.co) and visit your [Keys](https://dashboard.omise.co/test/api-keys) page to obtain the public key.
+ To work with the [Omise Token API](https://www.omise.co/tokens-api) from a mobile application, you will need the public key. If you have not done so already, sign up for an account at [https://omise.co](https://omise.co) and visit your [Keys](https://dashboard.omise.co/test/api-keys) page to obtain it.
  
  */
 let publicKey = "pkey_test_change_me_to_your_test_key"
 
 /*: credit-card-form
  
- To get going quickly, the SDK provides a ready-made credit card form that you can integrate directly into your application's checkout process.
+ To get going quickly, the SDK provides ready-made credit card form that you can integrate directly into your application's checkout process.
  
- Additionally, to provide a nice-looking experience for the form, we recommend wrapping the form in a `UINavigationController` with a close button.
+ Additionally, to provide consistent experience for the form, we recommend wrapping the form in a `UINavigationController` with a close button.
  
  Let's make a simple view checkout button to try this out:
  
@@ -50,7 +50,7 @@ class CheckoutViewController: UIViewController {
     func didTapCheckout() {
         let closeButton = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(didTapCloseForm))
         
-        let creditCardForm = CreditCardFormController(publicKey: publicKey)
+        let creditCardForm = CreditCardFormController.creditCardFormWithPublicKey(publicKey)
         creditCardForm.delegate = self
         creditCardForm.navigationItem.rightBarButtonItem = closeButton
         

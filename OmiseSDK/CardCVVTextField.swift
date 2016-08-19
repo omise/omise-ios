@@ -2,11 +2,11 @@ import Foundation
 import UIKit
 
 
-/// A UITextField subclass used for inputing the card CVV number.
+/// UITextField subclass for entering card's CVV number.
 public class CardCVVTextField: OmiseTextField {
     private let validLengths = 3...4
     
-    /// A boolean value indicates that the current input card number is valid or not.
+    /// Boolean indicating wether current input is valid or not.
     public override var isValid: Bool {
         return validLengths ~= text?.characters.count ?? 0
     }
