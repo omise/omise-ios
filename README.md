@@ -204,6 +204,7 @@ class Handler: OmiseTokenRequestDelegate {
 
 ### Enable Card.io support
 Due to the size of Card.io library, we decided to not to include it as a default. If you want the `Card.io` feature in our `Credit Card Form` you have to integrate our SDK manually without `Carthage`
+
 1. Download or clone Omise iOS SDK from github
 1. Initialize git submodule in Omise iOS SDK directory using `git submodule update --init` command.
 1. Add `OmiseSDK.xcodeproj` project into your Xcode project or workspace
