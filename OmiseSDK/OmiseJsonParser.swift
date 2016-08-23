@@ -1,9 +1,10 @@
 import Foundation
 
 
-/// A utility class for parsing JSON data returned from Omise API.
+/// Utility class for parsing JSON data returned from Omise API.
 @objc(OMSJSONParser) public final class OmiseJsonParser: NSObject {
-    /// Date formatter use to format the date data in Omise API. Omise API use ISO8601 standard to represent dates in string.
+    /// Date formatter used for formatting the date fields returned from Omise API.
+    /// Dates from Omise API follows the ISO8601 standard.
     @objc public static let dateFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
         formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
@@ -12,10 +13,10 @@ import Foundation
     }()
     
     /**
-     Parse the Token returned from Omise API from given JSON data.
-     - parameter data: Token JSON data returned from Omise API.
-     - returns: Token
-     - throws: An OmiseError when the parsing is failed.
+     Parses Token data returned from Omise API.
+     - parameter data: `NSData` with Token JSON returned from Omise API.
+     - returns: An `OmiseToken` instance parsed from JSON data.
+     - throws: `OmiseError.Unexpected` if JSON parsing failed.
      */
     @objc public static func parseToken(data: NSData) throws -> OmiseToken {
         let dict = try parseJSON(data)
@@ -55,10 +56,10 @@ import Foundation
     }
     
     /**
-     Parse an API error returned from Omise API from given JSON data.
-     - parameter data: Token JSON data returned from Omise API.
-     - returns: An API error of type `OmiseError`
-     - throws: An OmiseError when the parsing is failed due to an unexpecting error.
+     Parses an API error object returned from Omise API.
+     - parameter data: `NSData` with Error JSON returned from Omise API.
+     - returns: `OmiseError` value.
+     - throws: `OmiseError.Unexpected` if JSON parsing failed.
      */
     public static func parseError(data: NSData) throws -> OmiseError {
         let dict = try parseJSON(data)

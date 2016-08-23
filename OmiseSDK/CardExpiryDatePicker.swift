@@ -2,7 +2,7 @@ import Foundation
 
 // TODO: 👇 only the  data source and delegate needed, we don't need this class.
 
-/// A UIPickerView subclass UI for picking the card expiry date.
+/// UIPickerView subclass pre-configured for picking card expiration month and year.
 public final class CardExpiryDatePicker: UIPickerView {
     private static let maximumYear = 21
     private let monthPicker = 0
@@ -23,11 +23,11 @@ public final class CardExpiryDatePicker: UIPickerView {
         return Array(currentYear...(currentYear.advancedBy(maximumYear)))
     }()
     
-    /// A callback closure that will be called when the selected card expiry date is changed. 
+    /// Callback function that will be called when picker value changes.
     public var onDateSelected: ((month: Int, year: Int) -> ())?
-    /// Currently selected month value
+    /// Currently selected month.
     public var month: Int = NSCalendar(identifier: NSCalendarIdentifierGregorian)!.component(.Month, fromDate: NSDate())
-    /// Currently selected year value
+    /// Currently selected year.
     public var year: Int = 0
     
     override public init(frame: CGRect) {

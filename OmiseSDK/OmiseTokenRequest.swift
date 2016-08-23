@@ -1,15 +1,16 @@
 import Foundation
 
 
-
+/// Delegate to receive token request events.
 public protocol OmiseTokenRequestDelegate {
-    /// A delegate method that will be called when the card tokenization is successful.
-    /// - parameter request: A card tokenization request.
-    /// - parameter token: The token that generated from Omise server.
+    /// Delegate method for receiving token data when token request succeeds.
+    /// - parameter request: Original `OmiseTokenRequest` that was sent.
+    /// - parameter token: `OmiseToken` instance created from supplied card data.
     func tokenRequest(request: OmiseTokenRequest, didSucceedWithToken token: OmiseToken)
-    /// A delegate method that will be called when the card tokenization is failed.
-    /// - parameter request: A card tokenization request.
-    /// - parameter error: The error that occurred during the tokenization.
+    
+    /// Delegate method for receiving error information when token request failed.
+    /// - parameter request: Original `OmiseTokenRequest` that was sent.
+    /// - parameter error: The error that occured during the tokenization request.
     func tokenRequest(request: OmiseTokenRequest, didFailWithError error: ErrorType)
 }
 
@@ -19,44 +20,45 @@ public protocol OmiseTokenRequestDelegate {
 }
 
 
-/// A card tokenization result data type. This data type consists of 2 cases
-/// - Succeed
-/// - Fail
+/// Contains result of a tokenization request call. `OmiseTokenRequestResult` is an
+/// enumeration consisting of two cases:
+/// - Succeed: An `OmiseToken` instance can be obtained to create charges.
+/// - Fail: An `ErrorType` value can be obtained to find the request failure reason.
 public enum OmiseTokenRequestResult {
-    /// Represents that the tokenization is succeed, this case has an associative token value
+    /// Tokenization is successful, this case has an associated `OmiseToken` value
     case Succeed(token: OmiseToken)
-    /// Represents that the tokenization is failed, this case has an associative error
+    /// Tokenization, this case has an associated `ErrorType` value.
     case Fail(error: ErrorType)
 }
 
 
 /**
- A card tokenization request object contains the information that required to perform tokenization
- - seealso: [The Omise Token API documentation](https://www.omise.co/tokens-api)
+ Encapsulates information required to perform tokenization requests.
+ - seealso: [Tokens API](https://www.omise.co/tokens-api)
  */
 @objc(OMSTokenRequest) public class OmiseTokenRequest: NSObject {
   
-    /// A completion callback closure type which has a `OmiseTokenRequestResult` as a parameter.
+    /// Tokenization request callback function type.
     public typealias Callback = (OmiseTokenRequestResult) -> ()
     
-    /// A name of the card holder
+    /// Card holder's full name.
     @objc public let name: String
-    /// A card number for tokenization
+    /// Card number.
     @objc public let number: String
-    /// The card expiration month (1-12)
+    /// Card expiration month (1-12)
     @objc public let expirationMonth: Int
-    /// The card expiration year (in Gregorian)
+    /// Card expiration year (Gregorian)
     @objc public let expirationYear: Int
-    /// The security code (CVV, CVC, etc) printed on the back of the card.
+    /// Security code (CVV, CVC, etc) printed on the back of the card.
     @objc public let securityCode: String
-    /// The city where the card is issued.
+    /// Issuing city.
     @objc public let city: String?
-    /// The postal code from the city where the card was issued
+    /// Postal code.
     @objc public let postalCode: String?
     
-    /// An initializer to create a tokenization request.
+    /// Initializes new token request.
     @objc public init(name: String, number: String, expirationMonth: Int, expirationYear: Int,
-                securityCode: String, city: String? = nil, postalCode: String? = nil) {
+                      securityCode: String, city: String? = nil, postalCode: String? = nil) {
         self.name = name
         self.number = number
         self.expirationMonth = expirationMonth

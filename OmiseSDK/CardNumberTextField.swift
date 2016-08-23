@@ -1,17 +1,18 @@
 import Foundation
 
 
-/// A UITextField subclass used for inputing the card number.
+/// UITextField subclass for entering the credit card number.
+/// Automatically formats entered number into groups of four.
 public class CardNumberTextField: OmiseTextField {
     private var updatingText = false
     private let maxLength = 19
     
-    /// The card network brand of the current card number.
+    /// Card brand determined from current input.
     public var cardBrand: CardBrand? {
         return CardNumber.brand(text ?? "")
     }
     
-    /// A boolean value indicates that the current card number is valid or not.
+    /// Boolean indicating wether current input is valid or not.
     public override var isValid: Bool {
         return CardNumber.validate(text ?? "")
     }

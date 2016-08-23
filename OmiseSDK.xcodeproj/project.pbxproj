@@ -280,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				2259311B1CE3210700841B86 /* OmiseSDK.h */,
+				8A09281B1D544C3F008D393F /* OmiseSDK.modulemap */,
 				2259311D1CE3210700841B86 /* Info.plist */,
 				2259314D1CE46E5700841B86 /* CardBrand.swift */,
 				2259314F1CE46F7F00841B86 /* CardNumber.swift */,
@@ -295,10 +296,9 @@
 				2225B3531D0FDD63003EB396 /* Assets.xcassets */,
 				9864064B1CFEA820004BCF51 /* Cells */,
 				986406361CFEA7EA004BCF51 /* Fields */,
+				8A0927841D535548008D393F /* Library */,
 				981FA5F91D0EDDB0009ECEDC /* Localizable.strings */,
 				8A5D59831D5317DD005D3346 /* OmiseSDK.storyboard */,
-				8A0927841D535548008D393F /* Library */,
-				8A09281B1D544C3F008D393F /* OmiseSDK.modulemap */,
 			);
 			path = OmiseSDK;
 			sourceTree = "<group>";

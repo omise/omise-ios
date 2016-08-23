@@ -2,39 +2,41 @@ import Foundation
 
 
 /**
- A class represents `credit card` data when exchanging with Omise
- - seealso: [The Omise Card API documentation](https://www.omise.co/cards-api)
+ Represents saved credit card information.
+ - seealso: [Cards API](https://www.omise.co/cards-api)
  */
 @objc(OMSCard) public class OmiseCard: NSObject {
-    /// An id in Omise system of the card.
+    /// Card's ID.
     @objc public var cardId: String?
-    /// A boolean indicates that this card is a live card or a test card.
+    /// Boolean flag indicating wether this card is a live card or a test card.
     @objc public var livemode: Bool = false
-    /// A path to retrivie
+    /// Resource URL that can be used to re-load card information.
     @objc public var location: String?
-    /// The country code based on the card number in ISO3166 standard.
-    /// - note: This information is given for information only and may not always be 100% accurate
+    /// ISO3166 Country code based on the card number.
+    /// - note: This is informational only and may not always be 100% accurate.
     @objc public var country: String?
-    /// The city of the card holder
+    /// Issuing city.
+    /// - note: This is informational only and may not always be 100% accurate.
     @objc public var city: String?
-    /// The postal code of the card holder
+    /// Postal code.
     @objc public var postalCode: String?
-    /// A type of credit card financing (debit or credit)
+    /// Credit card financing type. (debit or credit)
     @objc public var financing: String?
-    /// The last 4 digits of the card number
+    /// Last 4 digits of the card number.
     @objc public var lastDigits: String?
-    /// A network brand name of the card (e.g. Visa, Mastercard, ...)
+    /// Card brand. (e.g. Visa, Mastercard, ...)
     @objc public var brand: String?
     /// Card expiration month (1-12)
     public var expirationMonth: Int?
-    /// Card expiration year (in Gregrorian calendar)
+    /// Card expiration year (Gregrorian)
     public var expirationYear: Int?
-    /// Unique card-based fingerprint. Allows detection of identical cards
+    /// Unique card-based fingerprint. Allows detection of identical cards without
+    /// exposing card numbers directly.
     @objc public var fingerprint: String?
-    /// A card holder full name.
+    /// Card holder's full name.
     @objc public var name: String?
     @objc public var securityCodeCheck: Bool = false
-    /// Creation date of the card in *ISO8601* standard
+    /// Card's creation time.
     @objc public var created: NSDate?
 }
 
