@@ -17,7 +17,7 @@ class ProductDetailViewController: UIViewController {
     }
     
     @IBAction func showCreditCardForm(_ sender: UIButton) {
-        let creditCardFormController = CreditCardFormController.creditCardFormWithPublicKey(publicKey)
+        let creditCardFormController = CreditCardFormController.makeCreditCardForm(withPublicKey: publicKey)
         creditCardFormController.handleErrors = true
         creditCardFormController.delegate = self
         show(creditCardFormController, sender: self)

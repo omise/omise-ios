@@ -85,7 +85,7 @@ public class CreditCardFormController: UITableViewController {
     
     /// Factory method for creating CreditCardFormController with given public key.
     /// - parameter publicKey: Omise public key.
-    @objc public static func creditCardFormWithPublicKey(_ publicKey: String) -> CreditCardFormController {
+    @objc public static func makeCreditCardForm(withPublicKey publicKey: String) -> CreditCardFormController {
         let omiseBundle = Bundle(for: self)
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: omiseBundle)
         let creditCardForm = storyboard.instantiateInitialViewController() as! CreditCardFormController
@@ -161,7 +161,7 @@ public class CreditCardFormController: UITableViewController {
         let errorString: String
         switch error {
         case let error as OmiseError:
-            errorString = error.nsError.localizedDescription
+            errorString = error.localizedDescription
         default:
             errorString = (error as NSError).localizedDescription
         }

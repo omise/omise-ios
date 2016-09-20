@@ -93,7 +93,7 @@ import UIKit
                     error = nil
                 case .fail(error: let requestError):
                     if let requestError = requestError as? OmiseError {
-                        error = requestError.nsError
+                        error = requestError as NSError
                     } else {
                         error = requestError as NSError
                     }
