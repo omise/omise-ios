@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11185.3" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wHy-gm-NE0">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wHy-gm-NE0">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11151.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="HTf-gM-q5i" userLabel="Credit card detail header" customClass="FormHeaderView" customModule="OmiseSDK" customModuleProvider="target">
-                            <frame key="frameInset" width="375" height="64"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="networkMasterCard" translatesAutoresizingMaskIntoConstraints="NO" id="IhW-w9-4Xj">
@@ -314,6 +314,49 @@
                 </button>
             </objects>
             <point key="canvasLocation" x="857" y="460"/>
+        </scene>
+        <!--Omise3DS View Controller-->
+        <scene sceneID="IRy-iA-rF6">
+            <objects>
+                <viewController storyboardIdentifier="Default3DSVerificationController" id="TTh-Qc-TVG" customClass="Omise3DSViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="v42-VO-PGC"/>
+                        <viewControllerLayoutGuide type="bottom" id="rnF-ST-mfm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ctw-dC-Dob">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="YAC-7f-Gdj">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="ihi-mx-8qc">
+                            <connections>
+                                <action selector="cancel3DSProcess:" destination="TTh-Qc-TVG" id="Jcl-9m-JmK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rIy-tz-XIg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1806" y="1183"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Hru-43-qh0">
+            <objects>
+                <navigationController storyboardIdentifier="Default3DSVerificationControllerWithNavigation" automaticallyAdjustsScrollViewInsets="NO" id="qCp-JA-Waq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ggq-Vj-kpA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="TTh-Qc-TVG" kind="relationship" relationship="rootViewController" id="e3D-4z-4MY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e0B-go-Qid" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="866" y="1183"/>
         </scene>
     </scenes>
     <resources>

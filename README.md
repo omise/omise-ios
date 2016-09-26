@@ -218,6 +218,49 @@ Due to the size of Card.io library, we decided to not to include it as a default
 For more information about target dependency and link to frameworks, please refer to Xcode Help `Building Targets in the Correct Order` and `Link to libraries and frameworks`.
 
 
+## 3DS Verification
+Some merchant require their customers to verify themselves with [3-D Secure verification process](https://www.omise.co/fraud-protection#3-d-secure). Omise iOS SDK provide a built in class to do the verification.
+
+### Using built in 3DS view controller
+You can use the built in 3DS verification view controller by creating an instance of `Omise3DSViewController` and set it with `authorized URL` given with the charge.
+
+#### Create an `Omise3DSViewController` by code
+You can create an instance of `Omise3DSViewController` by calling its factory method
+```swift
+let handlerController = Omise3DSViewController.make3DSViewControllerNavigationWithAuthorizedURL(url, delegate: self)
+self.present(handlerController, animated: true, completion: nil)
+```
+
+#### Use `Omise3DSViewController` in Storyboard
+`Omise3DSViewController` also comes with built in storyboard support like `CreditCardFormController`. You can use `Omise3DSViewController` in your storyboard by using `Storyboard Reference`. Drag `Storyboard Reference` object onto your canvas and set its bundle identifier to `co.omise.OmiseSDK` and Storyboard to `OmiseSDK` then use `Default3DSVerificationController` as a `Referenced ID`.
+You can setup `Omise3DSViewController` in `UIViewController.prepare(for:sender:)` method
+```swift
+override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+  if segue.identifier == "3DSVerificationController",
+    let omise3DSController = segue.destination as? Omise3DSViewController {
+      omise3DSController.delegate = self
+      omise3DSController.authorizedURL = authorizedURL
+  }
+}
+```
+
+#### Receive `3DS verification` events via the delegate
+`Omise3DSViewController` send `3DS verification` events to its `delegate` when there's an event occurred.
+
+```swift
+extension ViewController: Omise3DSViewControllerDelegate {
+  func omise3DSViewController(_ viewController: Omise3DSViewController, didFinish3DSProcessWithRedirectedURL redirectedURL: URL?) {
+    // Handle the `redirected URL` here
+  }
+
+  func omise3DSViewControllerDidCancel(_ viewController: Omise3DSViewController) {
+    // Handle the case that user tap cancel button.
+  }
+}
+```
+
+
+
 ## Contributing
 
 Pull requests and bugfixes are welcome. For larger scope of work, please pop on to our
