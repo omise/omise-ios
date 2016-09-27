@@ -3,7 +3,7 @@ import OmiseSDK
 
 class OmiseTokenRequestTest: SDKTestCase {
     private let publicKey = "pkey_test_543ehdmlevzpxuqkqhu"
-    private let timeout: NSTimeInterval = 15.0
+    private let timeout: TimeInterval = 15.0
     
     var testClient: OmiseSDKClient {
         return OmiseSDKClient(publicKey: publicKey)
@@ -32,11 +32,11 @@ class OmiseTokenRequestTest: SDKTestCase {
     }
     
     func testRequestWithDelegate() {
-        let expectation = expectationWithDescription("async delegate calls")
+        let expectation = self.expectation(description: "async delegate calls")
         let delegate = TokenRequestDelegateDummy(expectation: expectation)
-        testClient.send(testRequest, delegate: delegate)
+        testClient.sendRequest(testRequest, delegate: delegate)
         
-        waitForExpectationsWithTimeout(timeout) { (error) in
+        waitForExpectations(timeout: timeout) { (error) in
             if let error = error {
                 return XCTFail("expectation error: \(error)")
             }
@@ -47,22 +47,23 @@ class OmiseTokenRequestTest: SDKTestCase {
     }
     
     func testRequestWithCallback() {
-        let expectation = self.expectationWithDescription("callback")
-        testClient.send(testRequest) { (token, error) in
+        let expectation = self.expectation(description: "callback")
+        testClient.sendRequest(testRequest) { (result) in
             defer { expectation.fulfill() }
-            XCTAssertNil(error)
-            XCTAssertNotNil(token)
+            if case .fail = result {
+                XCTFail("Expected succeed request")
+            }
         }
         
-        waitForExpectationsWithTimeout(timeout, handler: nil)
+        waitForExpectations(timeout: timeout, handler: nil)
     }
     
     func testBadRequestWithDelegate() {
-        let expectation = expectationWithDescription("async delegate calls")
+        let expectation = self.expectation(description: "async delegate calls")
         let delegate = TokenRequestDelegateDummy(expectation: expectation)
-        testClient.send(invalidRequest, delegate: delegate)
+        testClient.sendRequest(invalidRequest, delegate: delegate)
         
-        waitForExpectationsWithTimeout(timeout) { (error) in
+        waitForExpectations(timeout: timeout) { (error) in
             if let error = error {
                 return XCTFail("expectation error: \(error)")
             }
@@ -73,13 +74,14 @@ class OmiseTokenRequestTest: SDKTestCase {
     }
     
     func testBadRequestWithCallback() {
-        let expectation = self.expectationWithDescription("callback")
-        testClient.send(invalidRequest) { (token, error) in
+        let expectation = self.expectation(description: "callback")
+        testClient.sendRequest(invalidRequest) { (result) in
             defer { expectation.fulfill() }
-            XCTAssertNil(token)
-            XCTAssertNotNil(error)
+            if case .succeed = result {
+                XCTFail("Expected failed request")
+            }
         }
         
-        waitForExpectationsWithTimeout(timeout, handler: nil)
+        waitForExpectations(timeout: timeout, handler: nil)
     }
 }

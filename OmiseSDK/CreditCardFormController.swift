@@ -9,27 +9,27 @@ public protocol CreditCardFormDelegate: class {
     /// Delegate method for receiving token data when card tokenization succeeds.
     /// - parameter token: `OmiseToken` instance created from supplied credit card data.
     /// - seealso: [Tokens API](https://www.omise.co/tokens-api)
-    func creditCardForm(controller: CreditCardFormController, didSucceedWithToken token: OmiseToken)
+    func creditCardForm(_ controller: CreditCardFormController, didSucceedWithToken token: OmiseToken)
     
     /// Delegate method for receiving error information when card tokenization failed.
     /// This allows you to have fine-grained control over error handling when setting
     /// `handleErrors` to `false`.
     /// - parameter error: The error that occurred during tokenization.
     /// - note: This delegate method will *never* be called if `handleErrors` property is set to `true`.
-    func creditCardForm(controller: CreditCardFormController, didFailWithError error: ErrorType)
+    func creditCardForm(_ controller: CreditCardFormController, didFailWithError error: Error)
 }
 
 
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.
 public class CreditCardFormController: UITableViewController {
-    private var hasErrorMessage = false
+    fileprivate var hasErrorMessage = false
     
     @IBOutlet var formHeaderView: FormHeaderView!
     @IBOutlet var formFields: [OmiseTextField]! {
-      didSet {
-        if isViewLoaded(), let formFields = formFields {
-          accessoryView.attachToTextFields(formFields, inViewController: self)
+        didSet {
+            if isViewLoaded, let formFields = formFields {
+                accessoryView.attach(to: formFields, in: self)
         }
       }
     }
@@ -65,12 +65,12 @@ public class CreditCardFormController: UITableViewController {
     /// A boolean flag that enables/disables Card.IO integration.
     public var cardIOEnabled: Bool = true {
         didSet {
-            if isViewLoaded() && cardIOAvailable && cardIOEnabled {
+            if isViewLoaded && cardIOAvailable && cardIOEnabled {
                 cardNumberCell?.textField.rightView = openCardIOButton
-                cardNumberCell?.textField.rightViewMode = .Always
+                cardNumberCell?.textField.rightViewMode = .always
             } else {
                 cardNumberCell?.textField.rightView = nil
-                cardNumberCell?.textField.rightViewMode = .Never
+                cardNumberCell?.textField.rightViewMode = .never
             }
         }
     }
@@ -85,8 +85,8 @@ public class CreditCardFormController: UITableViewController {
     
     /// Factory method for creating CreditCardFormController with given public key.
     /// - parameter publicKey: Omise public key.
-    @objc public static func creditCardFormWithPublicKey(publicKey: String) -> CreditCardFormController {
-        let omiseBundle = NSBundle(forClass: self)
+    @objc public static func makeCreditCardForm(withPublicKey publicKey: String) -> CreditCardFormController {
+        let omiseBundle = Bundle(for: self)
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: omiseBundle)
         let creditCardForm = storyboard.instantiateInitialViewController() as! CreditCardFormController
         creditCardForm.publicKey = publicKey
@@ -101,18 +101,18 @@ public class CreditCardFormController: UITableViewController {
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        accessoryView.attachToTextFields(formFields, inViewController: self)
+        accessoryView.attach(to: formFields, in: self)
         
         if cardIOAvailable && cardIOEnabled {
             cardNumberCell?.textField.rightView = openCardIOButton
-            cardNumberCell?.textField.rightViewMode = .Always
+            cardNumberCell?.textField.rightViewMode = .always
         }
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         
         tableView.tableFooterView = UIView()
-        let preferredWidth = formLabels.reduce(CGFloat.min) { (currentPreferredWidth, label)  in
-            return max(currentPreferredWidth, label.intrinsicContentSize().width)
+        let preferredWidth = formLabels.reduce(CGFloat.leastNormalMagnitude) { (currentPreferredWidth, label)  in
+            return max(currentPreferredWidth, label.intrinsicContentSize.width)
         }
         
         labelWidthConstraints.forEach { (constraint) in
@@ -120,30 +120,30 @@ public class CreditCardFormController: UITableViewController {
         }
     }
     
-    public override func viewDidAppear(animated: Bool) {
+    public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         formFields.forEach({ (field) in
-            field.addTarget(self, action: #selector(fieldDidChange), forControlEvents: .EditingChanged)
+            field.addTarget(self, action: #selector(fieldDidChange), for: .editingChanged)
         })
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(keyboardWillAppear(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillAppear(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
-    override public func viewDidDisappear(animated: Bool) {
+    override public func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         formFields.forEach({ (field) in
-            field.removeTarget(self, action: #selector(fieldDidChange), forControlEvents: .EditingChanged)
+            field.removeTarget(self, action: #selector(fieldDidChange), for: .editingChanged)
         })
-        NSNotificationCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NotificationCenter().removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
-    @objc private func fieldDidChange(sender: AnyObject) {
+    @objc private func fieldDidChange(_ sender: AnyObject) {
         updateSupplementaryUI()
     }
     
-    @objc private func keyboardWillAppear(notification: NSNotification){
+    @objc private func keyboardWillAppear(_ notification: Notification){
         if hasErrorMessage {
             errorMessageView?.removeErrorMesssage()
             hasErrorMessage = false
@@ -152,7 +152,7 @@ public class CreditCardFormController: UITableViewController {
         }
     }
     
-    private func handleError(error: ErrorType) {
+    private func handleError(_ error: Error) {
         guard handleErrors else {
             delegate?.creditCardForm(self, didFailWithError: error)
             return
@@ -161,7 +161,7 @@ public class CreditCardFormController: UITableViewController {
         let errorString: String
         switch error {
         case let error as OmiseError:
-            errorString = error.nsError.localizedDescription
+            errorString = error.localizedDescription
         default:
             errorString = (error as NSError).localizedDescription
         }
@@ -172,14 +172,14 @@ public class CreditCardFormController: UITableViewController {
         tableView.endUpdates()
     }
     
-    private func updateSupplementaryUI() {
+    fileprivate func updateSupplementaryUI() {
         let valid = formFields.reduce(true) { (valid, field) -> Bool in valid && field.isValid }
-        confirmButtonCell?.userInteractionEnabled = valid
+        confirmButtonCell?.isUserInteractionEnabled = valid
         
         formHeaderView?.setCardBrand(cardNumberTextField.cardBrand)
     }
     
-    private func requestToken() {
+    fileprivate func requestToken() {
         view.endEditing(true)
         guard let publicKey = publicKey else {
             assertionFailure("Missing public key information. Please setting the public key before request token.")
@@ -201,9 +201,9 @@ public class CreditCardFormController: UITableViewController {
             
             s.stopActivityIndicator()
             switch result {
-            case let .Succeed(token):
+            case let .succeed(token):
                 s.delegate?.creditCardForm(s, didSucceedWithToken: token)
-            case let .Fail(err):
+            case let .fail(err):
                 s.handleError(err)
             }
         }
@@ -211,35 +211,37 @@ public class CreditCardFormController: UITableViewController {
     
     private func startActivityIndicator() {
         confirmButtonCell?.startActivityIndicator()
-        tableView.userInteractionEnabled = false
+        tableView.isUserInteractionEnabled = false
     }
     
     private func stopActivityIndicator() {
         confirmButtonCell?.stopActivityIndicator()
-        tableView.userInteractionEnabled = true
+        tableView.isUserInteractionEnabled = true
     }
     
     @IBAction func presentCardIOViewController() {
         #if CardIO
-        let cardIOController = CardIOPaymentViewController(paymentDelegate: self)
-        cardIOController.hideCardIOLogo = true
-        cardIOController.disableManualEntryButtons = true
-        cardIOController.collectCVV = false
-        cardIOController.collectExpiry = true
-        cardIOController.scanExpiry = true
-        cardIOController.suppressScanConfirmation = true
-        presentViewController(cardIOController, animated: true, completion: nil)
+            guard let cardIOController = CardIOPaymentViewController(paymentDelegate: self) else {
+                return
+            }
+            cardIOController.hideCardIOLogo = true
+            cardIOController.disableManualEntryButtons = true
+            cardIOController.collectCVV = false
+            cardIOController.collectExpiry = true
+            cardIOController.scanExpiry = true
+            cardIOController.suppressScanConfirmation = true
+            present(cardIOController, animated: true, completion: nil)
         #endif
     }
-
+    
 }
 
 extension CreditCardFormController {
-    public override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    public override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 0 && handleErrors && hasErrorMessage {
             return max(
                 44,
-                errorMessageView.systemLayoutSizeFittingSize(CGSize(width: tableView.bounds.height, height: 0.0), withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityFittingSizeLevel).height
+                errorMessageView.systemLayoutSizeFitting(CGSize(width: tableView.bounds.height, height: 0.0), withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityFittingSizeLevel).height
             
             )
         } else {
@@ -247,7 +249,7 @@ extension CreditCardFormController {
         }
     }
     
-    public override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    public override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 0 && handleErrors && hasErrorMessage {
             return errorMessageView
         } else {
@@ -255,18 +257,18 @@ extension CreditCardFormController {
         }
     }
     
-    public override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        if let selectedCell = tableView.cellForRowAtIndexPath(indexPath) where selectedCell == confirmButtonCell {
+    public override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if let selectedCell = tableView.cellForRow(at: indexPath), selectedCell == confirmButtonCell {
             return indexPath
         } else {
             return nil
         }
     }
     
-    public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
-        if let selectedCell = tableView.cellForRowAtIndexPath(indexPath) where selectedCell == confirmButtonCell {
+        if let selectedCell = tableView.cellForRow(at: indexPath), selectedCell == confirmButtonCell {
             requestToken()
         }
     }
@@ -274,11 +276,11 @@ extension CreditCardFormController {
 
 #if CardIO
 extension CreditCardFormController: CardIOPaymentViewControllerDelegate {
-    public func userDidCancelPaymentViewController(paymentViewController: CardIOPaymentViewController!) {
-        dismissViewControllerAnimated(true, completion: nil)
+    public func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
+        dismiss(animated: true, completion: nil)
     }
     
-    public func userDidProvideCreditCardInfo(cardInfo: CardIOCreditCardInfo!, inPaymentViewController paymentViewController: CardIOPaymentViewController!) {
+    public func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
         if let cardNumber = cardInfo.cardNumber {
             cardNumberTextField.text = cardNumber
         }
@@ -289,9 +291,9 @@ extension CreditCardFormController: CardIOPaymentViewControllerDelegate {
         
         updateSupplementaryUI()
         
-        dismissViewControllerAnimated(true, completion: { _ in
+        dismiss(animated: true, completion: { _ in
             if self.cardNameTextField.text?.isEmpty ?? true {
-               self.cardNameTextField.becomeFirstResponder()
+                self.cardNameTextField.becomeFirstResponder()
             } else if self.secureCodeTextField.text?.isEmpty ?? true {
                 self.secureCodeTextField.becomeFirstResponder()
             }

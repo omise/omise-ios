@@ -1,7 +1,7 @@
 import UIKit
 
 class ProductViewController: UIViewController {
-    @IBAction func productDetailButtonTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier("ProductDetail", sender: nil)
+    @IBAction func productDetailButtonTapped(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "ProductDetail", sender: nil)
     }
 }

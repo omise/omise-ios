@@ -44,7 +44,7 @@ import Foundation
     }
     
     /// Range of valid card number lengths for cards issued by the brand.
-    public var validLengths: ClosedInterval<Int> {
+    public var validLengths: ClosedRange<Int> {
         switch self {
         case .AMEX:
             return 15...15
@@ -75,7 +75,7 @@ import Foundation
     @objc(validLengthsForBrand:) public static func __validLengthsForBrand(brand: CardBrand) -> NSRange {
         let range = brand.validLengths
         
-        return NSRange(location: range.start, length: range.end - range.start)
+        return NSRange(location: range.lowerBound, length: range.upperBound - range.lowerBound)
     }
 }
 

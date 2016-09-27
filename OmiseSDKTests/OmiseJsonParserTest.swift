@@ -7,7 +7,7 @@ class OmiseJsonParserTest: SDKTestCase {
             return XCTFail("fixture load failure.")
         }
         
-        let token = try OmiseJsonParser.parseToken(data)
+        let token = try OmiseJsonParser.parseToken(from: data)
         guard let card = token.card else {
             XCTFail("failed to parse card data from token.")
             return
@@ -38,8 +38,8 @@ class OmiseJsonParserTest: SDKTestCase {
             return
         }
 
-        let error = try OmiseJsonParser.parseError(data)
-        guard case let .API(code, message, location) = error else {
+        let error = try OmiseJsonParser.parseError(from: data) as! OmiseError
+        guard case let .api(code, message, location) = error else {
             XCTFail("error is not an API error")
             return
         }

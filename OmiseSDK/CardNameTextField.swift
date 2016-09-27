@@ -20,12 +20,12 @@ public class CardNameTextField: OmiseTextField {
     }
     
     override init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         setup()
     }
     
     func setup() {
-        keyboardType = .Default
+        keyboardType = .default
         
         // TODO: Localize place holder
         placeholder = "John Doe"

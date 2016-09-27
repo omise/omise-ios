@@ -18,6 +18,6 @@ import Foundation
     /// Card information used to generate this token.
     @objc public var card: OmiseCard?
     /// Token's creation time.
-    @objc public var created: NSDate?
+    @objc public var created: Date?
 }
 

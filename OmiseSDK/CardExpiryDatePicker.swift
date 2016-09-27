@@ -4,29 +4,29 @@ import Foundation
 
 /// UIPickerView subclass pre-configured for picking card expiration month and year.
 public final class CardExpiryDatePicker: UIPickerView {
-    private static let maximumYear = 21
-    private let monthPicker = 0
-    private let yearPicker = 1
-    private let months: [String] = {
-        let validRange = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!.maximumRangeOfUnit(NSCalendarUnit.Month)
-        let validMonthRange = validRange.location..<validRange.location.advancedBy(validRange.length)
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = .DecimalStyle
+    fileprivate static let maximumYear = 21
+    fileprivate static let monthPicker = 0
+    fileprivate static let yearPicker = 1
+    fileprivate let months: [String] = {
+        let validRange = Calendar.creditCardInformationCalendar.maximumRange(of: Calendar.Component.month) ?? Range<Int>(1...12)
+        let validMonthRange = validRange.lowerBound...validRange.upperBound
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
         formatter.alwaysShowsDecimalSeparator = false
         formatter.minimumIntegerDigits = 2
         
-        return validMonthRange.map({ formatter.stringFromNumber($0)! })
+        return validMonthRange.map({ formatter.string(from: $0 as NSNumber)! })
     }()
 
-    private let years: [Int] = {
-        let currentYear = NSCalendar(identifier: NSCalendarIdentifierGregorian)!.component(.Year, fromDate: NSDate())
-        return Array(currentYear...(currentYear.advancedBy(maximumYear)))
+    fileprivate let years: [Int] = {
+        let currentYear = Calendar.creditCardInformationCalendar.component(.year, from: Date())
+        return Array(currentYear...(currentYear.advanced(by: maximumYear)))
     }()
     
     /// Callback function that will be called when picker value changes.
-    public var onDateSelected: ((month: Int, year: Int) -> ())?
+    public var onDateSelected: ((_ month: Int, _ year: Int) -> ())?
     /// Currently selected month.
-    public var month: Int = NSCalendar(identifier: NSCalendarIdentifierGregorian)!.component(.Month, fromDate: NSDate())
+    public var month: Int = Calendar.creditCardInformationCalendar.component(.month, from: Date())
     /// Currently selected year.
     public var year: Int = 0
     
@@ -48,15 +48,15 @@ public final class CardExpiryDatePicker: UIPickerView {
 }
 
 extension CardExpiryDatePicker: UIPickerViewDataSource {
-    public func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
     
-    public func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component {
-        case monthPicker:
+        case CardExpiryDatePicker.monthPicker:
             return months.count
-        case yearPicker:
+        case CardExpiryDatePicker.yearPicker:
             return years.count
         default:
             return 0
@@ -65,22 +65,22 @@ extension CardExpiryDatePicker: UIPickerViewDataSource {
 }
 
 extension CardExpiryDatePicker: UIPickerViewDelegate {
-    public func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch component {
-        case monthPicker:
+        case CardExpiryDatePicker.monthPicker:
             return months[row]
-        case yearPicker:
+        case CardExpiryDatePicker.yearPicker:
             return "\(years[row])"
         default:
             return nil
         }
     }
     
-    public func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let month = selectedRowInComponent(monthPicker) + 1
-        let year = years[selectedRowInComponent(yearPicker)]
+    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let month = selectedRow(inComponent: CardExpiryDatePicker.monthPicker) + 1
+        let year = years[selectedRow(inComponent: CardExpiryDatePicker.yearPicker)]
         if let block = onDateSelected {
-            block(month: month, year: year)
+            block(month, year)
         }
         
         self.month = month

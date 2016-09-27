@@ -7,11 +7,11 @@ import Foundation
      Normalize credit card number by removing all non-number characters.
      - returns: String of normalized credit card number. eg. *4242424242424242*
      */
-    @objc public static func normalize(pan: String) -> String {
-        return pan.stringByReplacingOccurrencesOfString(
-            "[^0-9]",
-            withString: "",
-            options: .RegularExpressionSearch,
+    @objc public static func normalize(_ pan: String) -> String {
+        return pan.replacingOccurrences(
+            of: "[^0-9]",
+            with: "",
+            options: .regularExpression,
             range: nil)
     }
     
@@ -20,14 +20,14 @@ import Foundation
      - returns: valid `CardBrand` or nil if it cannot be determined.
      - seealso: CardBrand
      */
-    public static func brand(pan: String) -> CardBrand? {
+    public static func brand(of pan: String) -> CardBrand? {
         return CardBrand.all
-            .filter({ (brand) -> Bool in pan.rangeOfString(brand.pattern, options: .RegularExpressionSearch, range: nil, locale: nil) != nil })
+            .filter({ (brand) -> Bool in pan.range(of: brand.pattern, options: .regularExpression, range: nil, locale: nil) != nil })
             .first
     }
     
-    @objc(brandForPan:) public static func __brand(pan: String) -> Int {
-        return brand(pan)?.rawValue ?? NSNotFound
+    @objc(brandForPan:) public static func __brand(_ pan: String) -> Int {
+        return brand(of: pan)?.rawValue ?? NSNotFound
     }
     
     
@@ -36,9 +36,9 @@ import Foundation
      after every 4 digits. ex. `4242 4242 4242 4242`
      - returns: Formatted credit card number string.
      */
-    @objc public static func format(pan: String) -> String {
+    @objc public static func format(_ pan: String) -> String {
         var result = ""
-        for (i, digit) in normalize(pan).characters.enumerate() {
+        for (i, digit) in normalize(pan).characters.enumerated() {
             if i > 0 && i % 4 == 0 {
                 result += " "
             }
@@ -53,18 +53,18 @@ import Foundation
      Validate credit card number using the Luhn algorithm.
      - returns: `true` if the Luhn check passes, otherwise `false`.
      */
-    @objc public static func luhn(pan: String) -> Bool {
+    @objc public static func luhn(_ pan: String) -> Bool {
         let chars = normalize(pan).characters
         let digits = chars
-            .reverse()
-            .map { (char) -> Int in Int(String(char)) ?? -1 }
+            .reversed()
+            .flatMap { (char) -> Int? in Int(String(char)) }
         
-        guard !digits.contains(-1) else { return false }
+        guard digits.count == chars.count else { return false }
         
-        let oddSum = digits.enumerate()
+        let oddSum = digits.enumerated()
             .filter { (index, digit) -> Bool in index % 2 == 0 }
             .map { (index, digit) -> Int in digit }
-        let evenSum = digits.enumerate()
+        let evenSum = digits.enumerated()
             .filter { (index, digit) -> Bool in index % 2 != 0 }
             .map { (index, digit) -> Int in digit * 2 }
             .map { (sum) -> Int in sum > 9 ? sum - 9 : sum }
@@ -78,10 +78,10 @@ import Foundation
      is within credit card brand's valid range.
      - returns: `true` if the given credit card number is valid for all available checks, otherwise `false`.
      */
-    @objc public static func validate(pan: String) -> Bool {
+    @objc public static func validate(_ pan: String) -> Bool {
         let normalized = normalize(pan)
         
-        guard let brand = brand(normalized) else { return false }
+        guard let brand = brand(of: normalized) else { return false }
         return brand.validLengths ~= normalized.characters.count && luhn(normalized)
     }
 }

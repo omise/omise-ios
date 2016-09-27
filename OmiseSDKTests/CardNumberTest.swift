@@ -23,7 +23,7 @@ class CardNumberTest: SDKTestCase {
         ]
         
         tests.forEach { (brand, number) in
-            XCTAssertEqual(brand, CardNumber.brand(number))
+            XCTAssertEqual(brand, CardNumber.brand(of: number))
         }
     }
     

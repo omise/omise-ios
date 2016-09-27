@@ -5,12 +5,12 @@ import Foundation
     private var textFields = [UITextField]() {
         willSet {
             textFields.forEach { (textField) in
-                textField.removeTarget(self, action: #selector(textFieldDidBeginEditing), forControlEvents: UIControlEvents.EditingDidBegin)
+                textField.removeTarget(self, action: #selector(textFieldDidBeginEditing), for: UIControlEvents.editingDidBegin)
             }
         }
         didSet {
             textFields.forEach { (textField) in
-                textField.addTarget(self, action: #selector(textFieldDidBeginEditing), forControlEvents: UIControlEvents.EditingDidBegin)
+                textField.addTarget(self, action: #selector(textFieldDidBeginEditing), for: UIControlEvents.editingDidBegin)
                 textField.inputAccessoryView = self
             }
         }
@@ -20,19 +20,19 @@ import Foundation
     private var nextButton = UIBarButtonItem()
     
     public init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         self.sizeToFit()
         
-        let bundle = NSBundle(forClass: OmiseFormAccessoryView.self)
+        let bundle = Bundle(for: OmiseFormAccessoryView.self)
         
-        previousButton.image = UIImage(named: "backBarButton", inBundle: bundle, compatibleWithTraitCollection: nil)
-        previousButton.style = .Plain
+        previousButton.image = UIImage(named: "backBarButton", in: bundle, compatibleWith: nil)
+        previousButton.style = .plain
         previousButton.width = 30
         previousButton.target = self
         previousButton.action = #selector(previousButtonTapped)
         
-        nextButton.image = UIImage(named: "nextBarButton", inBundle: bundle, compatibleWithTraitCollection: nil)
-        nextButton.style = .Plain
+        nextButton.image = UIImage(named: "nextBarButton", in: bundle, compatibleWith: nil)
+        nextButton.style = .plain
         nextButton.width = 30
         nextButton.target = self
         nextButton.action = #selector(nextButtonTapped)
@@ -50,24 +50,24 @@ import Foundation
          The view controller's view will be used as target for `endEditing` calls when
          the `Done` button is tapped.
      */
-    @objc public func attachToTextFields(textFields: [UITextField], inViewController viewController: UIViewController) {
+    @objc public func attach(to textFields: [UITextField], in viewController: UIViewController) {
         self.textFields = textFields
         
-        let spacer = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: viewController.view, action: #selector(UIView.endEditing))
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: viewController.view, action: #selector(UIView.endEditing))
         
         let items = [previousButton, nextButton, spacer, doneButton]
         self.setItems(items, animated: false)
     }
     
-    @objc private func textFieldDidBeginEditing(textField: UITextField) {
+    @objc private func textFieldDidBeginEditing(_ textField: UITextField) {
         currentTextField = textField
-        previousButton.enabled = textField != textFields.first
-        nextButton.enabled = textField != textFields.last
+        previousButton.isEnabled = textField != textFields.first
+        nextButton.isEnabled = textField != textFields.last
     }
     
-    @objc private func previousButtonTapped(button: UIBarButtonItem) {
-        guard let currentTextField = currentTextField, let index = textFields.indexOf(currentTextField) else {
+    @objc private func previousButtonTapped(_ button: UIBarButtonItem) {
+        guard let currentTextField = currentTextField, let index = textFields.index(of: currentTextField) else {
             return
         }
         
@@ -76,8 +76,8 @@ import Foundation
         textFields[prevIndex].becomeFirstResponder()
     }
     
-    @objc private func nextButtonTapped(button: UIBarButtonItem) {
-        guard let currentTextField = currentTextField, let index = textFields.indexOf(currentTextField) else {
+    @objc private func nextButtonTapped(_ button: UIBarButtonItem) {
+        guard let currentTextField = currentTextField, let index = textFields.index(of: currentTextField) else {
             return
         }
         

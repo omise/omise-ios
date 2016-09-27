@@ -5,7 +5,7 @@ import UIKit
 /// Delegate for receiving SDK-specific text field events.
 public protocol OmiseTextFieldValidationDelegate {
     /// A delegate method that will be called when the data validity of the text field is changed.
-    func textField(field: OmiseTextField, didChangeValidity isValid: Bool)
+    func textField(_ field: OmiseTextField, didChangeValidity isValid: Bool)
 }
 
 
@@ -20,8 +20,8 @@ public class OmiseTextField: UITextField {
         didSet {
             // UITextField doesn't send editing changed control event when we set its text property
             textDidChange()
-            if !isFirstResponder() {
-                textColor = isValid ? .blackColor() : .redColor();
+            if !isFirstResponder {
+                textColor = isValid ? .black : .red;
             }
         }
     }
@@ -43,22 +43,22 @@ public class OmiseTextField: UITextField {
     }
     
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         setup()
     }
     
     private func setup() {
-        addTarget(self, action: #selector(textDidChange), forControlEvents: .EditingChanged)
-        addTarget(self, action: #selector(didBeginEditing), forControlEvents: .EditingDidBegin)
-        addTarget(self, action: #selector(didEndEditing), forControlEvents: .EditingDidEnd)
+        addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        addTarget(self, action: #selector(didBeginEditing), for: .editingDidBegin)
+        addTarget(self, action: #selector(didEndEditing), for: .editingDidEnd)
     }
     
     func didBeginEditing() {
-        textColor = .blackColor()
+        textColor = .black
     }
     
     func didEndEditing() {
-        textColor = isValid ? .blackColor() : .redColor();
+        textColor = isValid ? .black : .red
     }
     
     func textDidChange() {
