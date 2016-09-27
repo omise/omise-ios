@@ -48,10 +48,15 @@ class OmiseTokenRequestTest: SDKTestCase {
     
     func testRequestWithCallback() {
         let expectation = self.expectationWithDescription("callback")
-        testClient.send(testRequest) { (token, error) in
+        testClient.send(testRequest) { (result) in
             defer { expectation.fulfill() }
-            XCTAssertNil(error)
-            XCTAssertNotNil(token)
+
+            switch result {
+            case .Succeed(let token):
+                XCTAssertNotNil(token)
+            default:
+                break
+            }
         }
         
         waitForExpectationsWithTimeout(timeout, handler: nil)
@@ -74,10 +79,16 @@ class OmiseTokenRequestTest: SDKTestCase {
     
     func testBadRequestWithCallback() {
         let expectation = self.expectationWithDescription("callback")
-        testClient.send(invalidRequest) { (token, error) in
+        
+        testClient.send(testRequest) { (result) in
             defer { expectation.fulfill() }
-            XCTAssertNil(token)
-            XCTAssertNotNil(error)
+            
+            switch result {
+            case .Fail(let error):
+                XCTAssertNotNil(error)
+            default:
+                break
+            }
         }
         
         waitForExpectationsWithTimeout(timeout, handler: nil)
