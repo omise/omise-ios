@@ -79,7 +79,7 @@ class ViewController: UIViewController {
   private let publicKey = "pkey_test_123"
 
   @IBAction func displayCreditCardForm() {
-    let closeButton = UIBarButtonItem(title: "Close", style: .Done, target: self, action: #selector(dismissCreditCardForm))
+    let closeButton = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(dismissCreditCardForm))
 
     let creditCardView = CreditCardFormController.creditCardFormWithPublicKey(publicKey)
     creditCardView.delegate = self
@@ -87,11 +87,11 @@ class ViewController: UIViewController {
     creditCardView.navigationItem.rightBarButtonItem = closeButton
 
     let navigation = UINavigationController(rootViewController: creditCardView)
-    presentViewController(navigation, animated: true, completion: nil)
+    present(navigation, animated: true, completion: nil)
   }
 
   @objc func dismissCreditCardForm() {
-    dismissViewControllerAnimated(true, completion: nil)
+    dismiss(animated: true, completion: completion)
   }
 }
 ```
@@ -101,13 +101,13 @@ credit card data:
 
 ```swift
 extension ViewController: CreditCardFormDelegate {
-  func creditCardForm(controller: CreditCardFormController, didSucceedWithToken token: OmiseToken) {
+  func creditCardForm(_ controller: CreditCardFormController, didSucceedWithToken token: OmiseToken) {
     dismissCreditCardForm()
 
     // Sends `OmiseToken` to your server for creating a charge, or a customer object.
   }
 
-  func creditCardForm(controller: CreditCardFormController, didFailWithError error: ErrorType) {
+  func creditCardForm(_ controller: CreditCardFormController, didFailWithError error: Error) {
     dismissCreditCardForm()
 
     // Only important if we set `handleErrors = false`.
@@ -125,23 +125,23 @@ like so:
   creditCardView.delegate = self
   creditCardView.handleErrors = true
 
-  showViewController(creditCardView, sender: self)
+  show(creditCardView, sender: self)
 }
 ```
 
 ##### Use Credit Card Form in Storyboard
 `CreditCardFormController` comes with built in storyboard support. You can use `CreditCardFormController` in your storybard by using `Storyboard Reference`. Drag `Storyboard Reference` object onto your canvas and set its bundle identifier to `co.omise.OmiseSDK` and Storyboard to `OmiseSDK`. You can either leave `Referenced ID` empty or use `CreditCardFormController` as a `Referenced ID`
-You can setup `CreditCardFormController` in `UIViewController.prepareForSegue(_:sender:)` method
+You can setup `CreditCardFormController` in `UIViewController.prepare(for:sender:)` method
 ```swift
-override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
   if segue.identifier == "PresentCreditFormWithModal",
-    let creditCardFormNavigationController = segue.destinationViewController as? UINavigationController,
+    let creditCardFormNavigationController = segue.destination as? UINavigationController,
     let creditCardFormController = creditCardFormNavigationController.topViewController as? CreditCardFormController {
       creditCardFormController.publicKey = publicKey
       creditCardFormController.handleErrors = true
       creditCardFormController.delegate = self
 
-      creditCardFormController.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .Done, target: self, action: #selector(dismissCreditCardForm))
+      creditCardFormController.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(dismissCreditCardForm))
   }
 }
 ```
@@ -193,11 +193,11 @@ Alternatively, delegate style is also supported:
 client.send(request, Handler())
 
 class Handler: OmiseTokenRequestDelegate {
-  func tokenRequest(request: OmiseTokenRequest, didSucceedWithToken token: OmiseToken) {
+  func tokenRequest(_ request: OmiseTokenRequest, didSucceedWithToken token: OmiseToken) {
     // handles token
   }
 
-  func tokenRequest(request: OmiseTokenRequest, didFailWithError error: ErrorType) {
+  func tokenRequest(_ request: OmiseTokenRequest, didFailWithError error: Error) {
     // handle errors
   }
 }
