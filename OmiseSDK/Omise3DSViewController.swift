@@ -4,8 +4,10 @@ import WebKit
 
 /// Delegate to receive 3DS verification events.
 public protocol Omise3DSViewControllerDelegate: class {
-    
-    func omise3DSViewController(_ viewController: Omise3DSViewController, didFinish3DSProcessWithRedirectedURL redirectedURL: URL?)
+    /// A delegation method called when the 3DS verification process is completed.
+    /// - parameter viewController: The 3DS verification controller that call this method
+    /// - parameter redirectedURL: A URL returned from the 3DS verificataion process.
+    func omise3DSViewController(_ viewController: Omise3DSViewController, didComplete3DSProcessWithRedirectedURL redirectedURL: URL)
     /// A delegation method called when user cancel the 3DS verification process.
     func omise3DSViewControllerDidCancel(_ viewController: Omise3DSViewController)
 }
@@ -13,16 +15,11 @@ public protocol Omise3DSViewControllerDelegate: class {
 
 /**
  Drop-in 3DS verification handler view controller that automatically display the 3DS verification form
- - remark: 
+ - remark:
  This is still an experimental API. If you encountered with any problem with this API, please feel free to report to Omise.
  */
 public class Omise3DSViewController: UIViewController {
-    var webView: WKWebView = {
-        let configuration = WKWebViewConfiguration()
-        let webView = WKWebView(frame: CGRect.zero, configuration: configuration)
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        return webView
-    }()
+    var webView: WKWebView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration())
     
     /// Authorized URL given from Omise in the created `Charge` object.
     public var authorizedURL: URL? {
@@ -34,7 +31,6 @@ public class Omise3DSViewController: UIViewController {
             start3DSProcess()
         }
     }
-    fileprivate var readyToReturn = false
     
     /// A delegate object that will recieved the 3DS verification events.
     public weak var delegate: Omise3DSViewControllerDelegate?
@@ -73,8 +69,8 @@ public class Omise3DSViewController: UIViewController {
     public override func loadView() {
         super.loadView()
         
+        webView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(webView)
-        webView.navigationDelegate = self
         
         if #available(iOS 9.0, *) {
             webView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
@@ -91,7 +87,11 @@ public class Omise3DSViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
+        webView.navigationDelegate = self
+    }
+    
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         start3DSProcess()
     }
     
@@ -117,14 +117,12 @@ public class Omise3DSViewController: UIViewController {
 }
 
 extension Omise3DSViewController: WKNavigationDelegate {
-    public func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Swift.Void) {
-        readyToReturn = navigationResponse.response.url.map(verifyPaymentURL) ?? false
-        decisionHandler(.allow)
-    }
-    
-    public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        if readyToReturn {
-            delegate?.omise3DSViewController(self, didFinish3DSProcessWithRedirectedURL: webView.url)
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
+        if webView.url.map(verifyPaymentURL) ?? false, let url = navigationAction.request.url {
+            decisionHandler(.cancel)
+            delegate?.omise3DSViewController(self, didComplete3DSProcessWithRedirectedURL: url)
+        } else {
+            decisionHandler(.allow)
         }
     }
 }

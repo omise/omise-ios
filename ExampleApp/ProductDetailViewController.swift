@@ -64,7 +64,7 @@ extension ProductDetailViewController: CreditCardFormDelegate {
 }
 
 extension ProductDetailViewController: Omise3DSViewControllerDelegate {
-    public func omise3DSViewController(_ viewController: Omise3DSViewController, didFinish3DSProcessWithRedirectedURL redirectedURL: URL?) {
+    func omise3DSViewController(_ viewController: Omise3DSViewController, didComplete3DSProcessWithRedirectedURL redirectedURL: URL) {
         print(redirectedURL)
         dismiss(animated: true, completion: nil)
     }
