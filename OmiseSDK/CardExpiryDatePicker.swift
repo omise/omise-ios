@@ -8,14 +8,13 @@ public final class CardExpiryDatePicker: UIPickerView {
     fileprivate static let monthPicker = 0
     fileprivate static let yearPicker = 1
     fileprivate let months: [String] = {
-        let validRange = Calendar.creditCardInformationCalendar.maximumRange(of: Calendar.Component.month) ?? Range<Int>(1...12)
-        let validMonthRange = validRange.lowerBound...validRange.upperBound
+        let validRange = CountableRange(Calendar.creditCardInformationCalendar.maximumRange(of: Calendar.Component.month) ?? Range<Int>(1...12))
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.alwaysShowsDecimalSeparator = false
         formatter.minimumIntegerDigits = 2
         
-        return validMonthRange.map({ formatter.string(from: $0 as NSNumber)! })
+        return validRange.map({ formatter.string(from: $0 as NSNumber)! })
     }()
 
     fileprivate let years: [Int] = {
