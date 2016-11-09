@@ -147,10 +147,6 @@
 		224460091CF441DC00801D0F /* TokenRequestDelegateDummy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenRequestDelegateDummy.swift; sourceTree = "<group>"; };
 		224E44EB1D0EBF0D00E558E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		224E44EE1D0EBF1200E558E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		224E44F11D0EBF2500E558E3 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		224E44F31D0EBF2500E558E3 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		224E44F51D0EBF2B00E558E3 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Main.strings; sourceTree = "<group>"; };
-		224E44F71D0EBF2B00E558E3 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		225931181CE3210700841B86 /* OmiseSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OmiseSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2259311B1CE3210700841B86 /* OmiseSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OmiseSDK.h; sourceTree = "<group>"; };
 		2259311D1CE3210700841B86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -188,6 +184,9 @@
 		8A1F38F71D61C84900698781 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		8A1F38FC1D61C85900698781 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		8A1F38FE1D61C86300698781 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		8A55E4B71DA3CF0100AC515A /* Card.io-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Card.io-Info.plist"; sourceTree = "<group>"; };
+		8A55E4B91DA3CF5900AC515A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		8A55E4BA1DA3CF6100AC515A /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Main.strings; sourceTree = "<group>"; };
 		8A5D59821D5317DD005D3346 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/OmiseSDK.storyboard; sourceTree = "<group>"; };
 		8A5D59851D5317E0005D3346 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/OmiseSDK.strings; sourceTree = "<group>"; };
 		8A5D59871D5317E1005D3346 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/OmiseSDK.strings; sourceTree = "<group>"; };
@@ -285,6 +284,7 @@
 				2259311B1CE3210700841B86 /* OmiseSDK.h */,
 				8A09281B1D544C3F008D393F /* OmiseSDK.modulemap */,
 				2259311D1CE3210700841B86 /* Info.plist */,
+				8A55E4B71DA3CF0100AC515A /* Card.io-Info.plist */,
 				8A188BAF1D951E3C00FFF467 /* Omise3DSViewController.swift */,
 				2259314D1CE46E5700841B86 /* CardBrand.swift */,
 				2259314F1CE46F7F00841B86 /* CardNumber.swift */,
@@ -713,8 +713,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				224E44EB1D0EBF0D00E558E3 /* Base */,
-				224E44F51D0EBF2B00E558E3 /* th */,
-				224E44F71D0EBF2B00E558E3 /* ja */,
+				8A55E4B91DA3CF5900AC515A /* ja */,
+				8A55E4BA1DA3CF6100AC515A /* th */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -723,8 +723,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				224E44EE1D0EBF1200E558E3 /* Base */,
-				224E44F11D0EBF2500E558E3 /* th */,
-				224E44F31D0EBF2500E558E3 /* ja */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -956,6 +954,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -964,7 +963,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = OmiseSDK/Info.plist;
+				INFOPLIST_FILE = "OmiseSDK/Card.io-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -989,6 +988,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -997,7 +997,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = OmiseSDK/Info.plist;
+				INFOPLIST_FILE = "OmiseSDK/Card.io-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

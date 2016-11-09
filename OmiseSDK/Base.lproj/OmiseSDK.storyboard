@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wHy-gm-NE0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="nonLocalizable" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wHy-gm-NE0">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -182,7 +182,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="123" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eXh-Mb-b98" userLabel="Security code field" customClass="CardCVVTextField" customModule="OmiseSDK" customModuleProvider="target">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CVV" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eXh-Mb-b98" userLabel="Security code field" customClass="CardCVVTextField" customModule="OmiseSDK" customModuleProvider="target">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
                                                 </textField>
@@ -315,7 +315,7 @@
             </objects>
             <point key="canvasLocation" x="857" y="460"/>
         </scene>
-        <!--Omise3DS View Controller-->
+        <!--Verify with Card Issuer-->
         <scene sceneID="IRy-iA-rF6">
             <objects>
                 <viewController storyboardIdentifier="Default3DSVerificationController" id="TTh-Qc-TVG" customClass="Omise3DSViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
@@ -328,7 +328,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="YAC-7f-Gdj">
+                    <navigationItem key="navigationItem" title="Verify with Card Issuer" id="YAC-7f-Gdj">
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="ihi-mx-8qc">
                             <connections>
                                 <action selector="cancel3DSProcess:" destination="TTh-Qc-TVG" id="Jcl-9m-JmK"/>
