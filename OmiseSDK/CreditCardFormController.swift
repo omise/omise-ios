@@ -5,24 +5,24 @@ import OmiseSDK.Private
 #endif
 
 /// Delegate to receive card tokenization events.
-public protocol CreditCardFormDelegate: class {
+@objc(OMSCreditCardFormDelegate) public protocol CreditCardFormDelegate: class {
     /// Delegate method for receiving token data when card tokenization succeeds.
     /// - parameter token: `OmiseToken` instance created from supplied credit card data.
     /// - seealso: [Tokens API](https://www.omise.co/tokens-api)
-    func creditCardForm(_ controller: CreditCardFormController, didSucceedWithToken token: OmiseToken)
+    @objc func creditCardForm(_ controller: CreditCardFormController, didSucceedWithToken token: OmiseToken)
     
     /// Delegate method for receiving error information when card tokenization failed.
     /// This allows you to have fine-grained control over error handling when setting
     /// `handleErrors` to `false`.
     /// - parameter error: The error that occurred during tokenization.
     /// - note: This delegate method will *never* be called if `handleErrors` property is set to `true`.
-    func creditCardForm(_ controller: CreditCardFormController, didFailWithError error: Error)
+    @objc func creditCardForm(_ controller: CreditCardFormController, didFailWithError error: Error)
 }
 
 
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.
-public class CreditCardFormController: UITableViewController {
+@objc(OMSCreditCardFormController) public class CreditCardFormController: UITableViewController {
     fileprivate var hasErrorMessage = false
     
     @IBOutlet var formHeaderView: FormHeaderView!
@@ -30,8 +30,8 @@ public class CreditCardFormController: UITableViewController {
         didSet {
             if isViewLoaded, let formFields = formFields {
                 accessoryView.attach(to: formFields, in: self)
+            }
         }
-      }
     }
     
     @IBOutlet var formCells: [UITableViewCell]!
@@ -54,16 +54,16 @@ public class CreditCardFormController: UITableViewController {
     let accessoryView = OmiseFormAccessoryView()
     
     /// Omise public key for calling tokenization API.
-    public var publicKey: String?
+    @objc public var publicKey: String?
     
     /// Delegate to receive CreditCardFormController result.
-    public weak var delegate: CreditCardFormDelegate?
+    @objc public weak var delegate: CreditCardFormDelegate?
     
     /// A boolean flag to enables/disables automatic error handling. Defaults to `true`.
-    public var handleErrors = true
+    @objc public var handleErrors = true
     
     /// A boolean flag that enables/disables Card.IO integration.
-    public var cardIOEnabled: Bool = true {
+    @objc public var cardIOEnabled: Bool = true {
         didSet {
             if isViewLoaded && cardIOAvailable && cardIOEnabled {
                 cardNumberCell?.textField.rightView = openCardIOButton
