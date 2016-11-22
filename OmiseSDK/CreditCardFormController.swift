@@ -22,7 +22,7 @@ import OmiseSDK.Private
 
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.
-@objc(OMSCreditCardFormController) public class CreditCardFormController: UITableViewController {
+public class CreditCardFormController: UITableViewController {
     fileprivate var hasErrorMessage = false
     
     @IBOutlet var formHeaderView: FormHeaderView!
