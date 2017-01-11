@@ -3,7 +3,7 @@ import WebKit
 
 
 /// Delegate to receive 3DS verification events.
-public protocol Omise3DSViewControllerDelegate: class {
+@objc public protocol Omise3DSViewControllerDelegate: class {
     /// A delegation method called when the 3DS verification process is completed.
     /// - parameter viewController: The 3DS verification controller that call this method
     /// - parameter redirectedURL: A URL returned from the 3DS verificataion process.
@@ -41,7 +41,7 @@ public class Omise3DSViewController: UIViewController {
     /// - parameter delegate: A delegate object that will recieved 3DS verification events.
     ///
     /// - returns: A UINavigationController with `Omise3DSViewController` as its root view controller
-    public static func make3DSViewControllerNavigationWithAuthorizedURL(_ authorizedURL: URL, delegate: Omise3DSViewControllerDelegate) -> UINavigationController {
+    @objc public static func make3DSViewControllerNavigationWithAuthorizedURL(_ authorizedURL: URL, delegate: Omise3DSViewControllerDelegate) -> UINavigationController {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: Bundle(for: Omise3DSViewController.self))
         let navigationController = storyboard.instantiateViewController(withIdentifier: "Default3DSVerificationControllerWithNavigation") as! UINavigationController
         let viewController = navigationController.topViewController as! Omise3DSViewController
@@ -57,7 +57,7 @@ public class Omise3DSViewController: UIViewController {
     /// - parameter delegate: A delegate object that will recieved 3DS verification events.
     ///
     /// - returns: An `Omise3DSViewController` with given authorized URL and delegate.
-    public static func make3DSViewControllerWithAuthorizedURL(_ authorizedURL: URL, delegate: Omise3DSViewControllerDelegate) -> Omise3DSViewController {
+    @objc public static func make3DSViewControllerWithAuthorizedURL(_ authorizedURL: URL, delegate: Omise3DSViewControllerDelegate) -> Omise3DSViewController {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: Bundle(for: Omise3DSViewController.self))
         let viewController = storyboard.instantiateViewController(withIdentifier: "Default3DSVerificationController") as! Omise3DSViewController
         viewController.authorizedURL = authorizedURL
