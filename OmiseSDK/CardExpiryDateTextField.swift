@@ -4,7 +4,7 @@ import UIKit
 
 /// UITextField subclass used for entering card's expiry date.
 /// `CardExpiryDatePicker` will be set as the default input view.
-public class CardExpiryDateTextField: OmiseTextField {
+@objc public class CardExpiryDateTextField: OmiseTextField {
     private let maxCreditCardAge = 21
     private let expirationRx = { () -> NSRegularExpression in
         guard let rx = try? NSRegularExpression(pattern: "^(\\d{1,2})/(\\d{1,2})$", options: []) else {

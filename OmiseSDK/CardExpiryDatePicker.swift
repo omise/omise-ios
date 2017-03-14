@@ -3,7 +3,7 @@ import Foundation
 // TODO: 👇 only the  data source and delegate needed, we don't need this class.
 
 /// UIPickerView subclass pre-configured for picking card expiration month and year.
-public final class CardExpiryDatePicker: UIPickerView {
+@objc public final class CardExpiryDatePicker: UIPickerView {
     fileprivate static let maximumYear = 21
     fileprivate static let monthPicker = 0
     fileprivate static let yearPicker = 1
