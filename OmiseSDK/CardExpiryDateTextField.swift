@@ -15,9 +15,9 @@ import UIKit
     }()
   
     /// Currently selected month, `nil` if no month has been selected.
-    public private(set) var selectedMonth: Int? = nil
+    public var selectedMonth: Int? = nil
     /// Currently selected year, `nil` if no year has been selected.
-    public private(set) var selectedYear: Int? = nil
+    public var selectedYear: Int? = nil
     
     /// Boolean indicating wether current input is valid or not.
     public override var isValid: Bool {
