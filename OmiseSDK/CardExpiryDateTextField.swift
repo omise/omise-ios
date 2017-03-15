@@ -14,11 +14,17 @@ import UIKit
         return rx
     }()
     
-    /// Currently selected month, `0` if no month has been selected.
-    public var selectedMonth: Int = 0
+    /// Currently selected month, `nil` if no month has been selected.
+    public var selectedMonth: Int? = nil
+    @objc(selectedMonth) public var __selectedMonth: Int {
+        return selectedMonth ?? 0
+    }
     
-    /// Currently selected year, `0` if no year has been selected.
-    public var selectedYear: Int = 0
+    /// Currently selected year, `nil` if no year has been selected.
+    public var selectedYear: Int? = nil
+    @objc(selectedYear) public var __selectedYear: Int {
+        return selectedYear ?? 0
+    }
     
     /// Boolean indicating wether current input is valid or not.
     public override var isValid: Bool {
@@ -26,14 +32,14 @@ import UIKit
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         let thisMonth = calendar.component(.month, from: now)
         let thisYear = calendar.component(.year, from: now)
-        guard self.selectedYear != 0, self.selectedMonth != 0 else {
+        guard let year = self.selectedYear, let month = self.selectedMonth else {
             return false
         }
         
-        if (self.selectedYear == thisYear) {
-            return thisMonth <= self.selectedMonth
+        if (year == thisYear) {
+            return thisMonth <= month
         } else {
-            return thisYear < self.selectedYear
+            return thisYear < year
         }
     }
     
@@ -67,15 +73,15 @@ import UIKit
         let text = self.text ?? ""
         let range = NSRange(location: 0, length: text.characters.count)
         guard let match = expirationRx.firstMatch(in: text, options: [], range: range), match.numberOfRanges >= 3 else {
-            selectedMonth = 0
-            selectedYear = 0
+            selectedMonth = nil
+            selectedYear = nil
             return
         }
         
         let monthText = textInRange(match.rangeAt(1))
         let yearText = textInRange(match.rangeAt(2))
-        selectedMonth = Int(monthText) ?? 0
-        selectedYear = Int(yearText)?.advanced(by: 2000) ?? 0
+        selectedMonth = Int(monthText)
+        selectedYear = Int(yearText)?.advanced(by: 2000)
     }
     
     private func textInRange(_ range: NSRange) -> String {
