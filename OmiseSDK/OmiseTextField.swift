@@ -10,7 +10,7 @@ public protocol OmiseTextFieldValidationDelegate {
 
 
 /// Base UITextField subclass for SDK's text fields.
-public class OmiseTextField: UITextField {
+@objc public class OmiseTextField: UITextField {
     public private(set) var previousText: String?
     
     public override var text: String? {

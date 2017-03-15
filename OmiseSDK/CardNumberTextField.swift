@@ -3,7 +3,7 @@ import Foundation
 
 /// UITextField subclass for entering the credit card number.
 /// Automatically formats entered number into groups of four.
-public class CardNumberTextField: OmiseTextField {
+@objc public class CardNumberTextField: OmiseTextField {
     private var updatingText = false
     private let maxLength = 19
     
