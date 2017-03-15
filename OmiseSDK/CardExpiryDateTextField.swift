@@ -15,13 +15,13 @@ import UIKit
     }()
     
     /// Currently selected month, `nil` if no month has been selected.
-    public var selectedMonth: Int? = nil
+    public private(set) var selectedMonth: Int? = nil
     @objc(selectedMonth) public var __selectedMonth: Int {
         return selectedMonth ?? 0
     }
     
     /// Currently selected year, `nil` if no year has been selected.
-    public var selectedYear: Int? = nil
+    public private(set) var selectedYear: Int? = nil
     @objc(selectedYear) public var __selectedYear: Int {
         return selectedYear ?? 0
     }
