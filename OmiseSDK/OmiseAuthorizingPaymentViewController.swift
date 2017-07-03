@@ -115,8 +115,17 @@ public class OmiseAuthorizingPaymentViewController: UIViewController {
     fileprivate func verifyPaymentURL(_ url: URL) -> Bool {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true), let host = components.host else { return false }
         
-        let pathComponents = components.path.characters.split(separator: "/").map(String.init)
-        return host.hasSuffix("omise.co") && host.hasPrefix("api") && pathComponents.first == "payments" && pathComponents.last == "complete"
+        func verify3DSURL(_ compoments: URLComponents) -> Bool {
+            let pathComponents = components.path.characters.split(separator: "/").map(String.init)
+            return host.hasSuffix("omise.co") && host.hasPrefix("api") && pathComponents.first == "payments" && pathComponents.last == "complete"
+        }
+        
+        func verifyOffsiteURL(_ compoments: URLComponents) -> Bool {
+            let pathComponents = components.path.characters.split(separator: "/").map(String.init)
+            return host.hasSuffix("omise.co") && host.hasPrefix("pay") && pathComponents.first == "offsites" && pathComponents.last == "redirect"
+        }
+        
+        return verify3DSURL(components) || verifyOffsiteURL(components)
     }
     
     @IBAction func cancelAuthorizingPaymentProcess(_ sender: UIBarButtonItem) {
