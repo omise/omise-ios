@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="iu0-Jf-pl4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="iu0-Jf-pl4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -98,9 +98,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Product" id="HNP-A6-Yud">
-                        <barButtonItem key="rightBarButtonItem" title="3DS" id="srI-hM-Saq">
+                        <barButtonItem key="rightBarButtonItem" title="Authorize" id="srI-hM-Saq">
                             <connections>
-                                <action selector="handling3DS:" destination="BYZ-38-t0r" id="rNf-qE-4Fl"/>
+                                <action selector="handlingAuthorizingPayment:" destination="BYZ-38-t0r" id="1zL-us-BW2"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

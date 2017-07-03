@@ -36,15 +36,15 @@ class ProductDetailViewController: UIViewController {
         }
     }
     
-    @IBAction func handling3DS(_ sender: UIBarButtonItem) {
-        let alertController = UIAlertController(title: "3DS verification", message: "Please input your given authorized URL", preferredStyle: .alert)
+    @IBAction func handlingAuthorizingPayment(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: "Authorizing Payment", message: "Please input your given authorized URL", preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
         alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Go", style: UIAlertActionStyle.default, handler: { (_) in
             guard let textField = alertController.textFields?.first, let text = textField.text,
                 let url = URL(string: text) else { return }
 
-            let handlerController = Omise3DSViewController.make3DSViewControllerNavigationWithAuthorizedURL(url, delegate: self)
+            let handlerController = OmiseAuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(url, delegate: self)
             self.present(handlerController, animated: true, completion: nil)
         }))
         present(alertController, animated: true, completion: nil)
@@ -63,13 +63,13 @@ extension ProductDetailViewController: CreditCardFormDelegate {
     }
 }
 
-extension ProductDetailViewController: Omise3DSViewControllerDelegate {
-    func omise3DSViewController(_ viewController: Omise3DSViewController, didComplete3DSProcessWithRedirectedURL redirectedURL: URL) {
+extension ProductDetailViewController: OmiseAuthorizingPaymentViewControllerDelegate {
+    func omiseAuthorizingPaymentViewController(_ viewController: OmiseAuthorizingPaymentViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL) {
         print(redirectedURL)
         dismiss(animated: true, completion: nil)
     }
     
-    func omise3DSViewControllerDidCancel(_ viewController: Omise3DSViewController) {
+    func omiseAuthorizingPaymentViewControllerDidCancel(_ viewController: OmiseAuthorizingPaymentViewController) {
         dismiss(animated: true, completion: nil)
     }
 }

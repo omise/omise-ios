@@ -31,8 +31,8 @@
 		229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */; };
 		229E145B1D0EBAB5000511DE /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14571D0EBAB5000511DE /* ProductViewController.swift */; };
 		22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */; };
-		8A188BB01D951E3C00FFF467 /* Omise3DSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A188BAF1D951E3C00FFF467 /* Omise3DSViewController.swift */; };
-		8A188BB11D951E3C00FFF467 /* Omise3DSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A188BAF1D951E3C00FFF467 /* Omise3DSViewController.swift */; };
+		8A188BB01D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A188BAF1D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift */; };
+		8A188BB11D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A188BAF1D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift */; };
 		8A1D4C661D51B72200C7837C /* CreditCardFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1D4C651D51B72200C7837C /* CreditCardFormController.swift */; };
 		8A1F38DC1D61C7C200698781 /* CardIOUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A09278F1D535548008D393F /* CardIOUtilities.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8A1F38DD1D61C7C200698781 /* CardIOPaymentViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A09278D1D535548008D393F /* CardIOPaymentViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -172,7 +172,7 @@
 		8A0927901D535548008D393F /* CardIOView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOView.h; sourceTree = "<group>"; };
 		8A0927911D535548008D393F /* CardIOViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOViewDelegate.h; sourceTree = "<group>"; };
 		8A09281B1D544C3F008D393F /* OmiseSDK.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = OmiseSDK.modulemap; sourceTree = "<group>"; };
-		8A188BAF1D951E3C00FFF467 /* Omise3DSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Omise3DSViewController.swift; sourceTree = "<group>"; };
+		8A188BAF1D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseAuthorizingPaymentViewController.swift; sourceTree = "<group>"; };
 		8A1D4C651D51B72200C7837C /* CreditCardFormController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = CreditCardFormController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		8A1F38EC1D61C7C200698781 /* OmiseSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OmiseSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A1F38EE1D61C7E400698781 /* libopencv_core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopencv_core.a; sourceTree = "<group>"; };
@@ -289,7 +289,7 @@
 				2259314F1CE46F7F00841B86 /* CardNumber.swift */,
 				8A1D4C651D51B72200C7837C /* CreditCardFormController.swift */,
 				22445FFB1CF41DD300801D0F /* Globals.swift */,
-				8A188BAF1D951E3C00FFF467 /* Omise3DSViewController.swift */,
+				8A188BAF1D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift */,
 				2220F1A31D0FEE85008CD89F /* OmiseCard.swift */,
 				2220F1A41D0FEE85008CD89F /* OmiseError.swift */,
 				98E131731D1809E900E63E18 /* OmiseFormAccessoryView.swift */,
@@ -621,7 +621,7 @@
 				8A1D4C661D51B72200C7837C /* CreditCardFormController.swift in Sources */,
 				986406311CFEA7E4004BCF51 /* CardExpiryDateTextField.swift in Sources */,
 				986406341CFEA7E4004BCF51 /* CardNameTextField.swift in Sources */,
-				8A188BB01D951E3C00FFF467 /* Omise3DSViewController.swift in Sources */,
+				8A188BB01D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift in Sources */,
 				986406491CFEA818004BCF51 /* SecureCodeFormCell.swift in Sources */,
 				14ACEF831D02D641001C5319 /* CardExpiryDatePicker.swift in Sources */,
 				986406431CFEA818004BCF51 /* ExpiryDateFormCell.swift in Sources */,
@@ -665,7 +665,7 @@
 				8A1F391B1D61C8B500698781 /* CardBrand.swift in Sources */,
 				8A1F39191D61C8B500698781 /* CardNumberTextField.swift in Sources */,
 				8A1F390E1D61C8B500698781 /* CardExpiryDateTextField.swift in Sources */,
-				8A188BB11D951E3C00FFF467 /* Omise3DSViewController.swift in Sources */,
+				8A188BB11D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift in Sources */,
 				8A1F390A1D61C8B500698781 /* OmiseTextField.swift in Sources */,
 				8A1F39071D61C8B500698781 /* FormHeaderCell.swift in Sources */,
 				8A1F39181D61C8B500698781 /* OmiseJsonParser.swift in Sources */,
