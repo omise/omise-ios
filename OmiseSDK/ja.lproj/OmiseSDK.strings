@@ -18,7 +18,7 @@
 
 /* Class = "UITextField"; placeholder = "123"; ObjectID = "eXh-Mb-b98"; */
 /* Class = "UINavigationItem"; title = "Verify with Card Issuer"; ObjectID = "YAC-7f-Gdj"; */
-"YAC-7f-Gdj.title" = "カード発行会社にご確認下さい";
+"YAC-7f-Gdj.title" = "決済を認証中";
 
 "eXh-Mb-b98.placeholder" = "123";
 
