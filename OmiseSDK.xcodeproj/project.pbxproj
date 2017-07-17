@@ -154,7 +154,7 @@
 		2259314F1CE46F7F00841B86 /* CardNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumber.swift; sourceTree = "<group>"; };
 		225931541CE4743A00841B86 /* CardNumberTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumberTest.swift; sourceTree = "<group>"; };
 		225931561CE4745200841B86 /* SDKTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKTestCase.swift; sourceTree = "<group>"; };
-		226E16101D2268B400219652 /* QuickStart.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = QuickStart.playground; sourceTree = "<group>"; };
+		226E16101D2268B400219652 /* QuickStart.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = QuickStart.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		229E14541D0EBAB5000511DE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		229E14551D0EBAB5000511DE /* CompletePaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletePaymentViewController.swift; sourceTree = "<group>"; };
 		229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };

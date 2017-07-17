@@ -43,8 +43,9 @@ class ProductDetailViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Go", style: UIAlertActionStyle.default, handler: { (_) in
             guard let textField = alertController.textFields?.first, let text = textField.text,
                 let url = URL(string: text) else { return }
-
-            let handlerController = OmiseAuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(url, delegate: self)
+            
+            let expectedReturnURL = URLComponents(string: "http://www.example.com/orders")!
+            let handlerController = OmiseAuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(url, expectedReturnURLPatterns: [expectedReturnURL], delegate: self)
             self.present(handlerController, animated: true, completion: nil)
         }))
         present(alertController, animated: true, completion: nil)
