@@ -42,14 +42,14 @@ having to go through your server.
 Add the following line to your `Cartfile`:
 
 ```
-github "omise/omise-ios" ~> 2.4
+github "omise/omise-ios" ~> 2.5
 ```
 
 And run `carthage bootstrap` or `carthage build` Or run this copy-pastable script for a
 quick start:
 
 ```
-echo 'github "omise/omise-ios" ~> 2.4' >> Cartfile
+echo 'github "omise/omise-ios" ~> 2.5' >> Cartfile
 carthage bootstrap
 ```
 
