@@ -18,7 +18,7 @@
 
 /* Class = "UITextField"; placeholder = "123"; ObjectID = "eXh-Mb-b98"; */
 /* Class = "UINavigationItem"; title = "Verify with Card Issuer"; ObjectID = "YAC-7f-Gdj"; */
-"YAC-7f-Gdj.title" = "ตรวจสอบกับธนาคารผู้ออกบัตร";
+"YAC-7f-Gdj.title" = "กำลังอนุมัติวงเงิน";
 
 "eXh-Mb-b98.placeholder" = "123";
 
