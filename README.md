@@ -14,7 +14,7 @@ Omise iOS SDK provides bindings for the Omise
 [Tokenization](https://www.omise.co/tokens-api) API so you do not need to pass credit card
 data to your server as well as components for entering credit card information.
 
-Hop into the Gitter chat (click the badge above) or email our support team if you have any
+Hop into our forum (click the badge above) or email our support team if you have any
 question regarding this SDK and the functionality it provides.
 
 ## Requirements
@@ -264,9 +264,7 @@ extension ViewController: Omise3DSViewControllerDelegate {
 
 ## Contributing
 
-Pull requests and bugfixes are welcome. For larger scope of work, please pop on to our
-[![](https://img.shields.io/gitter/room/omise/omise-ios.svg?style=flat-square)](https://gitter.im/omise/omise-ios)
-chatroom to discuss first.
+Pull requests and bugfixes are welcome. For larger scope of work, please pop on to our [forum](https://forum.omise.co) to discuss first.
 
 ## LICENSE
 
