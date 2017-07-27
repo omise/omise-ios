@@ -82,7 +82,7 @@ class ViewController: UIViewController {
   @IBAction func displayCreditCardForm() {
     let closeButton = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(dismissCreditCardForm))
 
-    let creditCardView = CreditCardFormController.creditCardFormWithPublicKey(publicKey)
+    let creditCardView = CreditCardFormController.makeCreditCardForm(withPublicKey: publicKey)
     creditCardView.delegate = self
     creditCardView.handleErrors = true
     creditCardView.navigationItem.rightBarButtonItem = closeButton
