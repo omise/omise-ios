@@ -219,42 +219,43 @@ Due to the size of Card.io library, we decided to not to include it as a default
 For more information about target dependency and link to frameworks, please refer to Xcode Help `Building Targets in the Correct Order` and `Link to libraries and frameworks`.
 
 
-## 3DS Verification
-Some merchant require their customers to verify themselves with [3-D Secure verification process](https://www.omise.co/fraud-protection#3-d-secure). Omise iOS SDK provide a built in class to do the verification.
+## Authorizing Payment
+Some payment method require the customers to authorize the payment via an authorized URL. This includes the [3-D Secure verification](https://www.omise.co/fraud-protection#3-d-secure), [Internet Banking payment](https://www.omise.co/offsite-payment), [Alipay](https://www.omise.co/alipay) and etc. Omise iOS SDK provide a built in class to do the authorization.
 
-### Using built in 3DS view controller
-You can use the built in 3DS verification view controller by creating an instance of `Omise3DSViewController` and set it with `authorized URL` given with the charge.
+### Using built in Authorizing Payment view controller
+You can use the built in Authorizing Payment view controller by creating an instance of `OmiseAuthorizingPaymentViewController` and set it with `authorized URL` given with the charge and expected `return URL` patterns those were created by merchants.
 
-#### Create an `Omise3DSViewController` by code
-You can create an instance of `Omise3DSViewController` by calling its factory method
+#### Create an `OmiseAuthorizingPaymentViewController` by code
+You can create an instance of `OmiseAuthorizingPaymentViewController` by calling its factory method
 ```swift
-let handlerController = Omise3DSViewController.make3DSViewControllerNavigationWithAuthorizedURL(url, delegate: self)
+let handlerController = OmiseAuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(url, expectedReturnURLPatterns: [expectedReturnURL], delegate: self)
 self.present(handlerController, animated: true, completion: nil)
 ```
 
-#### Use `Omise3DSViewController` in Storyboard
-`Omise3DSViewController` also comes with built in storyboard support like `CreditCardFormController`. You can use `Omise3DSViewController` in your storyboard by using `Storyboard Reference`. Drag `Storyboard Reference` object onto your canvas and set its bundle identifier to `co.omise.OmiseSDK` and Storyboard to `OmiseSDK` then use `Default3DSVerificationController` as a `Referenced ID`.
-You can setup `Omise3DSViewController` in `UIViewController.prepare(for:sender:)` method
+#### Use `OmiseAuthorizingPaymentViewController` in Storyboard
+`OmiseAuthorizingPaymentViewController` also comes with built in storyboard support like `CreditCardFormController`. You can use `OmiseAuthorizingPaymentViewController` in your storyboard by using `Storyboard Reference`. Drag `Storyboard Reference` object onto your canvas and set its bundle identifier to `co.omise.OmiseSDK` and Storyboard to `OmiseSDK` then use `DefaultAuthorizingPaymentViewController` as a `Referenced ID`.
+You can setup `OmiseAuthorizingPaymentViewController` in `UIViewController.prepare(for:sender:)` method
 ```swift
 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-  if segue.identifier == "3DSVerificationController",
-    let omise3DSController = segue.destination as? Omise3DSViewController {
-      omise3DSController.delegate = self
-      omise3DSController.authorizedURL = authorizedURL
+  if segue.identifier == "AuthorizingPaymentViewController",
+    let omiseAuthorizingPaymentController = segue.destination as? OmiseAuthorizingPaymentViewController {
+      omiseAuthorizingPaymentController.delegate = self
+      omiseAuthorizingPaymentController.authorizedURL = authorizedURL
+      omiseAuthorizingPaymentController.expectedReturnURLPatterns =  [ URLComponents(string: "http://www.example.com/orders")! ]
   }
 }
 ```
 
-#### Receive `3DS verification` events via the delegate
-`Omise3DSViewController` send `3DS verification` events to its `delegate` when there's an event occurred.
+#### Receive `Authorizing Payment` events via the delegate
+`OmiseAuthorizingPaymentViewController` send `Authorizing Payment` events to its `delegate` when there's an event occurred.
 
 ```swift
-extension ViewController: Omise3DSViewControllerDelegate {
-  func omise3DSViewController(_ viewController: Omise3DSViewController, didFinish3DSProcessWithRedirectedURL redirectedURL: URL?) {
+extension ViewController: OmiseAuthorizingPaymentViewControllerDelegate {
+  func omiseAuthorizingPaymentViewController(_ viewController: OmiseAuthorizingPaymentViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL) {
     // Handle the `redirected URL` here
   }
 
-  func omise3DSViewControllerDidCancel(_ viewController: Omise3DSViewController) {
+  func omiseAuthorizingPaymentViewControllerDidCancel(_ viewController: OmiseAuthorizingPaymentViewController) {
     // Handle the case that user tap cancel button.
   }
 }
