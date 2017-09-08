@@ -71,23 +71,16 @@ import UIKit
         super.textDidChange()
         
         let text = self.text ?? ""
-        let range = NSRange(location: 0, length: text.characters.count)
+        let range =  NSRange(text.startIndex..., in: text)
         guard let match = expirationRx.firstMatch(in: text, options: [], range: range), match.numberOfRanges >= 3 else {
             selectedMonth = nil
             selectedYear = nil
             return
         }
         
-        let monthText = textInRange(match.rangeAt(1))
-        let yearText = textInRange(match.rangeAt(2))
-        selectedMonth = Int(monthText)
-        selectedYear = Int(yearText)?.advanced(by: 2000)
-    }
-    
-    private func textInRange(_ range: NSRange) -> String {
-        let text = self.text ?? ""
-        let start = text.characters.index(text.startIndex, offsetBy: range.location)
-        let end = text.characters.index(start, offsetBy: range.length)
-        return text.substring(with: start..<end)
+        let monthText = Range(match.range(at: 1), in: text).map({ text[$0] })
+        let yearText = Range(match.range(at: 2), in: text).map({ text[$0] })
+        selectedMonth = monthText.map(String.init).flatMap(Int.init)
+        selectedYear = yearText.map(String.init).flatMap(Int.init)?.advanced(by: 2000)
     }
 }

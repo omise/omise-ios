@@ -241,8 +241,8 @@ extension CreditCardFormController {
         if section == 0 && handleErrors && hasErrorMessage {
             return max(
                 44,
-                errorMessageView.systemLayoutSizeFitting(CGSize(width: tableView.bounds.height, height: 0.0), withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityFittingSizeLevel).height
-            
+                errorMessageView.systemLayoutSizeFitting(CGSize(width: tableView.bounds.height, height: 0.0), withHorizontalFittingPriority: UILayoutPriority.required, verticalFittingPriority: UILayoutPriority.fittingSizeLevel).height
+                
             )
         } else {
             return 0.0
@@ -291,7 +291,7 @@ extension CreditCardFormController: CardIOPaymentViewControllerDelegate {
         
         updateSupplementaryUI()
         
-        dismiss(animated: true, completion: { _ in
+        dismiss(animated: true, completion: {
             if self.cardNameTextField.text?.isEmpty ?? true {
                 self.cardNameTextField.becomeFirstResponder()
             } else if self.secureCodeTextField.text?.isEmpty ?? true {
