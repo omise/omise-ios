@@ -21,8 +21,8 @@ question regarding this SDK and the functionality it provides.
 
 * Public key. [Register for an Omise account](https://dashboard.omise.co/signup) to obtain your API keys.
 * iOS 8 or higher deployment target.
-* Xcode 8.0 or higher.
-* Swift 3.0
+* Xcode 9.0 or higher.
+* Swift 4.0
 * [Carthage](https://github.com/Carthage/Carthage) dependency manager.
 
 ## Merchant Compliance
@@ -42,16 +42,19 @@ having to go through your server.
 Add the following line to your `Cartfile`:
 
 ```
-github "omise/omise-ios" ~> 2.5
+github "omise/omise-ios" ~> 2.6
 ```
 
 And run `carthage bootstrap` or `carthage build` Or run this copy-pastable script for a
 quick start:
 
 ```
-echo 'github "omise/omise-ios" ~> 2.5' >> Cartfile
+echo 'github "omise/omise-ios" ~> 2.6' >> Cartfile
 carthage bootstrap
 ```
+
+### Swift 3.x compatible
+You can use `Omise iOS SDK` in Swift 3.2 by using Omise iOS SDK version `2.5`
 
 ### Swift 2.x compatible
 You can use `Omise iOS SDK` in Swift 2.2 by using Omise iOS SDK version `2.3`
