@@ -53,15 +53,15 @@ public protocol OmiseTextFieldValidationDelegate {
         addTarget(self, action: #selector(didEndEditing), for: .editingDidEnd)
     }
     
-    func didBeginEditing() {
+    @objc func didBeginEditing() {
         textColor = .black
     }
     
-    func didEndEditing() {
+    @objc func didEndEditing() {
         textColor = isValid ? .black : .red
     }
     
-    func textDidChange() {
+    @objc func textDidChange() {
         // no-op for child overrides
     }
 }

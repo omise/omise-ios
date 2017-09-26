@@ -34,8 +34,8 @@ class OmiseTokenRequestTest: SDKTestCase {
     func testRequestWithDelegate() {
         let expectation = self.expectation(description: "async delegate calls")
         let delegate = TokenRequestDelegateDummy(expectation: expectation)
-        testClient.sendRequest(testRequest, delegate: delegate)
-        
+        testClient.send(testRequest, delegate: delegate)
+
         waitForExpectations(timeout: timeout) { (error) in
             if let error = error {
                 return XCTFail("expectation error: \(error)")
@@ -48,7 +48,7 @@ class OmiseTokenRequestTest: SDKTestCase {
     
     func testRequestWithCallback() {
         let expectation = self.expectation(description: "callback")
-        testClient.sendRequest(testRequest) { (result) in
+        testClient.send(testRequest) { (result) in
             defer { expectation.fulfill() }
             if case .fail = result {
                 XCTFail("Expected succeed request")
@@ -61,7 +61,7 @@ class OmiseTokenRequestTest: SDKTestCase {
     func testBadRequestWithDelegate() {
         let expectation = self.expectation(description: "async delegate calls")
         let delegate = TokenRequestDelegateDummy(expectation: expectation)
-        testClient.sendRequest(invalidRequest, delegate: delegate)
+        testClient.send(invalidRequest, delegate: delegate)
         
         waitForExpectations(timeout: timeout) { (error) in
             if let error = error {
@@ -75,7 +75,7 @@ class OmiseTokenRequestTest: SDKTestCase {
     
     func testBadRequestWithCallback() {
         let expectation = self.expectation(description: "callback")
-        testClient.sendRequest(invalidRequest) { (result) in
+        testClient.send(invalidRequest) { (result) in
             defer { expectation.fulfill() }
             if case .succeed = result {
                 XCTFail("Expected failed request")
