@@ -184,10 +184,10 @@ Then initialize an `OmiseSDKClient` with your public key and send the request:
 
 ```swift
 let client = OmiseSDKClient(publicKey: publicKey)
-client.send(request) { [weak self] (token, error) in
+client.send(request) { [weak self] (result) in
   guard let s = self else { return }
 
-  // check `error` or send `token` to your server.
+  // switch result { }
 }
 ```
 
