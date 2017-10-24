@@ -16,14 +16,17 @@ class CardNumberTest: SDKTestCase {
     }
     
     func testBrand() {
-        let tests: [CardBrand: String] = [
-            .Visa: "4242424242424242",
-            .MasterCard: "5454545454545454",
-            .JCB: "3566111111111113",
+        let tests: [[CardBrand: String]] = [
+            [.Visa: "4242424242424242"],
+            [.JCB: "3566111111111113"],
+            [.MasterCard: "5454545454545454"],
+            [.MasterCard: "2221001234123456"]
         ]
         
-        tests.forEach { (brand, number) in
-            XCTAssertEqual(brand, CardNumber.brand(of: number))
+        tests.forEach { cards in
+            cards.forEach({ (brand, number) in
+                XCTAssertEqual(brand, CardNumber.brand(of: number))
+            })
         }
     }
     
