@@ -35,7 +35,7 @@ import Foundation
         case .Visa:
             return "^4"
         case .MasterCard:
-            return "^5[1-5]"
+            return "^(5[1-5]|2(2(2[1-9]|[3-9])|[3-6]|7(0|1|20)))"
         case .Maestro:
             return "^(5018|5020|5038|6304|6759|676[1-3])"
         case .Discover:
