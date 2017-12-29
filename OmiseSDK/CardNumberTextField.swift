@@ -9,12 +9,12 @@ import Foundation
     
     /// Card brand determined from current input.
     public var cardBrand: CardBrand? {
-        return CardNumber.brand(of: text ?? "")
+        return CardNumber.brand(of: string)
     }
     
     /// Boolean indicating wether current input is valid or not.
     public override var isValid: Bool {
-        return CardNumber.validate(text ?? "")
+        return CardNumber.validate(string)
     }
     
     override public init(frame: CGRect) {
@@ -40,26 +40,44 @@ import Foundation
     override func textDidChange() {
         super.textDidChange()
         guard !updatingText else { return }
-        
-        if (text?.characters.count ?? 0) > maxLength {
-            updatingText = true
-            defer { updatingText = false }
+        updatingText = true
+        defer { updatingText = false }
+
+        let previousSpaceCount = previousText.split(separator: " ").count
+        let previousStringCount = previousText.count
+        let previousTextRange = selectedTextRange
+        self.text = trim(formattedCardNumber: CardNumber.format(string))
+        self.text = text
+        let newSpaceCount = self.string.split(separator: " ").count
+        let newStringCount = self.string.count
+
+        if let selectedTextRange = previousTextRange {
+            let isDeleting = newSpaceCount < previousSpaceCount || newStringCount < previousStringCount
+            if isDeleting {
+                if let newPosition = self.position(from: selectedTextRange.start, offset: 0) {
+                    self.selectedTextRange = self.textRange(from: newPosition, to: newPosition)
+                    return
+                }
+            } else {
+                if let newPosition = self.position(from: selectedTextRange.start, offset: 0) {
+                    self.selectedTextRange = self.textRange(from: newPosition, to: newPosition)
+                }
+            }
             
-            text = previousText
-            text = text // overwrite previousText, since it now contains invalid text.
-            return
-        }
-        
-        // TODO: Maintain caret position correctly, esp. when in the middle of the text.
-        let prevLength = previousText?.characters.count ?? 0
-        let newLength = text?.characters.count ?? 0
-        
-        if prevLength != newLength {
-            if let text = self.text {
-                updatingText = true
-                defer { updatingText = false }
-                self.text = CardNumber.format(text)
+            if self.characterBeforeCursor() == " " {
+                if let newPosition = self.position(from: selectedTextRange.start, offset: 1) {
+                    self.selectedTextRange = self.textRange(from: newPosition, to: newPosition)
+                }
             }
         }
+    }
+    
+    func trim(formattedCardNumber cardNumber: String) -> String {
+        if cardNumber.count <= maxLength {
+            return cardNumber
+        }
+
+        let endIndex = cardNumber.index(cardNumber.startIndex, offsetBy: maxLength)
+        return String(cardNumber[..<endIndex])
     }
 }

@@ -11,11 +11,11 @@ public protocol OmiseTextFieldValidationDelegate {
 
 /// Base UITextField subclass for SDK's text fields.
 @objc public class OmiseTextField: UITextField {
-    public private(set) var previousText: String?
+    public private(set) var previousText: String = ""
     
     public override var text: String? {
         willSet {
-            previousText = text
+            previousText = string
         }
         didSet {
             // UITextField doesn't send editing changed control event when we set its text property
@@ -24,6 +24,10 @@ public protocol OmiseTextFieldValidationDelegate {
                 textColor = isValid ? .black : .red;
             }
         }
+    }
+    
+    public var string: String {
+        return text ?? ""
     }
     
     /// Boolean indicating wether current input is valid or not.
@@ -63,5 +67,21 @@ public protocol OmiseTextFieldValidationDelegate {
     
     @objc func textDidChange() {
         // no-op for child overrides
+    }
+
+    func characterBeforeCursor() -> String? {
+        guard let selectedTextRange = selectedTextRange else {
+            return nil
+        }
+
+        guard let newPosition = self.position(from: selectedTextRange.start, offset: -1) else {
+            return nil
+        }
+
+        guard let range = textRange(from: newPosition, to: selectedTextRange.start) else {
+            return nil
+        }
+
+        return self.text(in: range)
     }
 }
