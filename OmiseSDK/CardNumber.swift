@@ -38,7 +38,7 @@ import Foundation
      */
     @objc public static func format(_ pan: String) -> String {
         var result = ""
-        for (i, digit) in normalize(pan).characters.enumerated() {
+        for (i, digit) in normalize(pan).enumerated() {
             if i > 0 && i % 4 == 0 {
                 result += " "
             }
@@ -54,10 +54,10 @@ import Foundation
      - returns: `true` if the Luhn check passes, otherwise `false`.
      */
     @objc public static func luhn(_ pan: String) -> Bool {
-        let chars = normalize(pan).characters
+        let chars = normalize(pan)
         let digits = chars
             .reversed()
-            .flatMap { (char) -> Int? in Int(String(char)) }
+            .compactMap { (char) -> Int? in Int(String(char)) }
         
         guard digits.count == chars.count else { return false }
         
@@ -82,6 +82,6 @@ import Foundation
         let normalized = normalize(pan)
         
         guard let brand = brand(of: normalized) else { return false }
-        return brand.validLengths ~= normalized.characters.count && luhn(normalized)
+        return brand.validLengths ~= normalized.count && luhn(normalized)
     }
 }

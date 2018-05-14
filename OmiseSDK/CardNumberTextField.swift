@@ -41,7 +41,7 @@ import Foundation
         super.textDidChange()
         guard !updatingText else { return }
         
-        if (text?.characters.count ?? 0) > maxLength {
+        if (text?.count ?? 0) > maxLength {
             updatingText = true
             defer { updatingText = false }
             
@@ -51,8 +51,8 @@ import Foundation
         }
         
         // TODO: Maintain caret position correctly, esp. when in the middle of the text.
-        let prevLength = previousText?.characters.count ?? 0
-        let newLength = text?.characters.count ?? 0
+        let prevLength = previousText?.count ?? 0
+        let newLength = text?.count ?? 0
         
         if prevLength != newLength {
             if let text = self.text {

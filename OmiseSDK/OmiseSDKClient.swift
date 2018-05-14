@@ -35,7 +35,8 @@ import UIKit
         let session = URLSession(
             configuration: URLSessionConfiguration.ephemeral,
             delegate: nil,
-            delegateQueue: queue)
+            delegateQueue: queue
+        )
         
         self.init(publicKey: publicKey, queue: queue, session: session)
     }

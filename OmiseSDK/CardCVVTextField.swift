@@ -8,7 +8,7 @@ import UIKit
     
     /// Boolean indicating wether current input is valid or not.
     public override var isValid: Bool {
-        return validLengths ~= text?.characters.count ?? 0
+        return validLengths ~= text?.count ?? 0
     }
     
     public override var keyboardType: UIKeyboardType {
@@ -46,9 +46,9 @@ import UIKit
     
     override func textDidChange() {
         super.textDidChange()
-        if text?.characters.count == 5 {
+        if text?.count == 5 {
             guard let text = text else { return }
-            self.text = String(text.characters.dropLast())
+            self.text = String(text.dropLast())
         }
     }
 }
