@@ -16,17 +16,17 @@ class FormHeaderView: UIView {
         }
         
         switch cardBrand {
-        case .Visa:
+        case .visa:
             card_visa.alpha = 1.0
             card_mastercard.alpha = 0.3
             card_jcb.alpha = 0.3
             break
-        case .MasterCard:
+        case .masterCard:
             card_visa.alpha = 0.3
             card_mastercard.alpha = 1.0
             card_jcb.alpha = 0.3
             break
-        case .JCB:
+        case .jcb:
             card_visa.alpha = 0.3
             card_mastercard.alpha = 0.3
             card_jcb.alpha = 1.0
