@@ -365,6 +365,18 @@
 			path = CardIO;
 			sourceTree = "<group>";
 		};
+		8A47173F20AAD6BA0022733A /* Compatability Suite */ = {
+			isa = PBXGroup;
+			children = (
+				225931541CE4743A00841B86 /* CardNumberTest.swift */,
+				224460071CF43FF000801D0F /* OmiseJsonParserTest.swift */,
+				987A03201CE5B7D70035417A /* OmiseTokenRequestTest.swift */,
+				225931561CE4745200841B86 /* SDKTestCase.swift */,
+				224460091CF441DC00801D0F /* TokenRequestDelegateDummy.swift */,
+			);
+			path = "Compatability Suite";
+			sourceTree = "<group>";
+		};
 		986406361CFEA7EA004BCF51 /* Fields */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,11 +410,7 @@
 			children = (
 				987A03AC1CE5CD450035417A /* Fixtures */,
 				987A02CD1CE35D5E0035417A /* Info.plist */,
-				225931541CE4743A00841B86 /* CardNumberTest.swift */,
-				224460071CF43FF000801D0F /* OmiseJsonParserTest.swift */,
-				987A03201CE5B7D70035417A /* OmiseTokenRequestTest.swift */,
-				225931561CE4745200841B86 /* SDKTestCase.swift */,
-				224460091CF441DC00801D0F /* TokenRequestDelegateDummy.swift */,
+				8A47173F20AAD6BA0022733A /* Compatability Suite */,
 			);
 			path = OmiseSDKTests;
 			sourceTree = "<group>";
