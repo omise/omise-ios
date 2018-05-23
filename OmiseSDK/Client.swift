@@ -8,6 +8,8 @@ public class Client {
     
     var userAgent: String?
     
+    public typealias Callback<T: Object> = (RequestResult<T>) -> ()
+
     public convenience init(publicKey: String) {
         let queue = OperationQueue()
         let session = URLSession(
@@ -32,6 +34,17 @@ public class Client {
         }
     }
     
+    public func requestTask<T: Object>(with request: Request<T>, completionHandler: Callback<T>?) -> RequestTask<T> {
+        let dataTask = session.dataTask(with: try! buildURLRequestFor(request), completionHandler: Client.completeRequest(completionHandler))
+        return RequestTask(request: request, dataTask: dataTask)
+    }
+    
+}
+
+
+// MARK: - URL Request related methods
+extension Client {
+    
     private func buildURLRequestFor<T: Object>(_ request: Request<T>) throws -> URLRequest {
         let urlRequest = NSMutableURLRequest(url: T.postURL)
         urlRequest.httpMethod = "POST"
@@ -51,8 +64,60 @@ public class Client {
         
         return "Basic \(base64)"
     }
+    
+    private static func completeRequest<T: Object>(_ callback: Callback<T>?) -> (Data?, URLResponse?, Error?) -> () {
+        return { (data: Data?, response: URLResponse?, error: Error?) -> () in
+            guard let callback = callback else { return } // nobody around to hear the leaf falls
+            
+            if let error = error {
+                return callback(.fail(error))
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                let error = OmiseError.unexpected(message: "no error and no response.", underlying: nil)
+                return callback(.fail(error))
+            }
+            
+            switch httpResponse.statusCode {
+            case 400..<600:
+                guard let data = data else {
+                    let error = OmiseError.unexpected(message: "error response with no data", underlying: nil)
+                    return callback(.fail(error))
+                }
+                
+                do {
+                    return callback(.fail(try OmiseJsonParser.parseError(from: data)))
+                } catch let err {
+                    let error = OmiseError.unexpected(message: "error response with invalid JSON", underlying: err)
+                    return callback(.fail(error))
+                }
+                
+            case 200..<300:
+                guard let data = data else {
+                    let error = OmiseError.unexpected(message: "HTTP 200 but no data", underlying: nil)
+                    return callback(.fail(error))
+                }
+                
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.dateDecodingStrategy = .formatted(Client.jsonDateFormatter)
+                    return callback(.success(try decoder.decode(T.self, from: data)))
+                } catch let err {
+                    let error = OmiseError.unexpected(message: "200 response with invalid JSON", underlying: err)
+                    return callback(.fail(error))
+                }
+                
+            default:
+                let error = OmiseError.unexpected(message: "unrecognized HTTP status code: \(httpResponse.statusCode)", underlying: nil)
+                return callback(.fail(error))
+            }
+        }
+    }
+
 }
 
+
+// MARK: - Constants
 extension Client {
     static let version: String = {
         let bundle = Bundle(for: OmiseSDKClient.self)

@@ -3,7 +3,7 @@ import Foundation
 
 public enum RequestResult<T: Object> {
     case success(T)
-    case fail(OmiseError)
+    case fail(Error)
 }
 
 public struct Request<T: Object> {
