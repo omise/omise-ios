@@ -3,7 +3,7 @@ import OmiseSDK
 import XCTest
 
 // TODO: More extensive tests.
-class CardNumberTest: SDKTestCase {
+class CardNumberTest: XCTestCase {
     func testNormalize() {
         let tests: [String: String] = [
             " 4242 4242-4242 4242 ": "4242424242424242",
@@ -17,10 +17,10 @@ class CardNumberTest: SDKTestCase {
     
     func testBrand() {
         let tests: [[CardBrand: String]] = [
-            [.Visa: "4242424242424242"],
-            [.JCB: "3566111111111113"],
-            [.MasterCard: "5454545454545454"],
-            [.MasterCard: "2221001234123456"]
+            [.visa: "4242424242424242"],
+            [.jcb: "3566111111111113"],
+            [.masterCard: "5454545454545454"],
+            [.masterCard: "2221001234123456"]
         ]
         
         tests.forEach { cards in

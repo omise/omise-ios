@@ -1,7 +1,7 @@
 import XCTest
 import OmiseSDK
 
-class OmiseTokenRequestTest: SDKTestCase {
+class OmiseTokenRequestTest: XCTestCase {
     private let publicKey = "pkey_test_543ehdmlevzpxuqkqhu"
     private let timeout: TimeInterval = 15.0
     

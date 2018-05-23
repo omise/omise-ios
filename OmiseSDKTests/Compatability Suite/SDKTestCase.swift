@@ -1,8 +1,8 @@
 import Foundation
 import XCTest
 
-class SDKTestCase: XCTestCase {
-    func fixturesDataFor(_ filename: String) -> Data? {
+extension XCTestCase {
+    static func fixturesDataFor(_ filename: String) -> Data? {
         let bundle = Bundle(for: OmiseTokenRequestTest.self)
         guard let path = bundle.url(forResource: "Fixtures/objects/\(filename)", withExtension: "json") else {
             XCTFail("could not load fixtures.")

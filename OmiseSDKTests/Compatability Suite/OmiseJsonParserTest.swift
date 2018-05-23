@@ -1,9 +1,9 @@
 import XCTest
 import OmiseSDK
 
-class OmiseJsonParserTest: SDKTestCase {
+class OmiseJsonParserTest: XCTestCase {
     func testParseToken() throws {
-        guard let data = fixturesDataFor("token_object") else {
+        guard let data = XCTestCase.fixturesDataFor("token_object") else {
             return XCTFail("fixture load failure.")
         }
         
@@ -33,7 +33,7 @@ class OmiseJsonParserTest: SDKTestCase {
     }
     
     func testParseError() throws {
-        guard let data = fixturesDataFor("error_object") else {
+        guard let data = XCTestCase.fixturesDataFor("error_object") else {
             XCTFail("fixture load failure.")
             return
         }

@@ -83,6 +83,7 @@
 		8A1F392D1D61D8E900698781 /* OmiseSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A1F38EC1D61C7C200698781 /* OmiseSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8A2BE95520A9A39E000CEB60 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2BE95420A9A39E000CEB60 /* Request.swift */; };
 		8A2BE95620A9A39E000CEB60 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2BE95420A9A39E000CEB60 /* Request.swift */; };
+		8A37E43620B584D300E2DA18 /* ModelTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A37E43520B584D300E2DA18 /* ModelTestCase.swift */; };
 		8A47173A20AAB0F40022733A /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A47173920AAB0F40022733A /* Token.swift */; };
 		8A47173B20AAB0F40022733A /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A47173920AAB0F40022733A /* Token.swift */; };
 		8A47173D20AAB11B0022733A /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A47173C20AAB11B0022733A /* Source.swift */; };
@@ -201,6 +202,7 @@
 		8A1F38FC1D61C85900698781 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		8A1F38FE1D61C86300698781 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		8A2BE95420A9A39E000CEB60 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		8A37E43520B584D300E2DA18 /* ModelTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTestCase.swift; sourceTree = "<group>"; };
 		8A47173920AAB0F40022733A /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		8A47173C20AAB11B0022733A /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		8A4F7CB820A9C0FD001C441A /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 				987A03AC1CE5CD450035417A /* Fixtures */,
 				987A02CD1CE35D5E0035417A /* Info.plist */,
 				8A47173F20AAD6BA0022733A /* Compatability Suite */,
+				8A37E43520B584D300E2DA18 /* ModelTestCase.swift */,
 			);
 			path = OmiseSDKTests;
 			sourceTree = "<group>";
@@ -769,6 +772,7 @@
 				2244600A1CF441DC00801D0F /* TokenRequestDelegateDummy.swift in Sources */,
 				224460051CF43A1500801D0F /* CardNumberTest.swift in Sources */,
 				987A03211CE5B7D70035417A /* OmiseTokenRequestTest.swift in Sources */,
+				8A37E43620B584D300E2DA18 /* ModelTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
