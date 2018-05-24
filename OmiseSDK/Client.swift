@@ -36,6 +36,9 @@ public class Client {
     
     public func requestTask<T: Object>(with request: Request<T>, completionHandler: Callback<T>?) -> RequestTask<T> {
         let dataTask = session.dataTask(with: try! buildURLRequestFor(request), completionHandler: Client.completeRequest(completionHandler))
+        defer {
+            dataTask.resume()
+        }
         return RequestTask(request: request, dataTask: dataTask)
     }
     
