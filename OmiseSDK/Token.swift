@@ -46,6 +46,16 @@ public struct Token: Object {
     public let card: Card
     
     public let createdDate: Date
+    
+    private enum CodingKeys: String, CodingKey {
+        case object
+        case location
+        case id
+        case createdDate = "created"
+        case isLiveMode = "livemode"
+        case isUsed = "used"
+        case card
+    }
 }
 
 public struct Card: Decodable {
