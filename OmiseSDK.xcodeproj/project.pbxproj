@@ -98,6 +98,8 @@
 		8AD0609420B55B3A0074894E /* RequestTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0609220B55B3A0074894E /* RequestTask.swift */; };
 		8AD0609620B55E610074894E /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0609520B55E610074894E /* Client.swift */; };
 		8AD0609720B55E610074894E /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0609520B55E610074894E /* Client.swift */; };
+		8ADAA9A520B6C0AF00DD7CCF /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADAA9A420B6C0AF00DD7CCF /* Currency.swift */; };
+		8ADAA9A620B6C0AF00DD7CCF /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADAA9A420B6C0AF00DD7CCF /* Currency.swift */; };
 		8AFE10BB20B69B39008E741D /* ClientTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE10BA20B69B39008E741D /* ClientTestCase.swift */; };
 		981FA5F71D0EDDB0009ECEDC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 981FA5F91D0EDDB0009ECEDC /* Localizable.strings */; };
 		982237C11D115BD400D266F3 /* ErrorMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982237BF1D115BD400D266F3 /* ErrorMessageCell.swift */; };
@@ -217,6 +219,7 @@
 		8A763B9B20A9774200AE2FEC /* URLQueryItemEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLQueryItemEncoder.swift; sourceTree = "<group>"; };
 		8AD0609220B55B3A0074894E /* RequestTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTask.swift; sourceTree = "<group>"; };
 		8AD0609520B55E610074894E /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		8ADAA9A420B6C0AF00DD7CCF /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		8AFE10BA20B69B39008E741D /* ClientTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTestCase.swift; sourceTree = "<group>"; };
 		981FA5F81D0EDDB0009ECEDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		981FA5FA1D0EDDD8009ECEDC /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -390,8 +393,9 @@
 			isa = PBXGroup;
 			children = (
 				2259314D1CE46E5700841B86 /* CardBrand.swift */,
-				2220F1A41D0FEE85008CD89F /* OmiseError.swift */,
+				8ADAA9A420B6C0AF00DD7CCF /* Currency.swift */,
 				8A4F7CB820A9C0FD001C441A /* Object.swift */,
+				2220F1A41D0FEE85008CD89F /* OmiseError.swift */,
 				8A60619920B2A8D400CF90D5 /* PAN.swift */,
 				8A47173C20AAB11B0022733A /* Source.swift */,
 				8A47173920AAB0F40022733A /* Token.swift */,
@@ -705,6 +709,7 @@
 				98E131741D1809E900E63E18 /* OmiseFormAccessoryView.swift in Sources */,
 				8A47173A20AAB0F40022733A /* Token.swift in Sources */,
 				22445FFC1CF41DD300801D0F /* Globals.swift in Sources */,
+				8ADAA9A520B6C0AF00DD7CCF /* Currency.swift in Sources */,
 				2220F1AE1D0FEE85008CD89F /* OmiseTokenRequest.swift in Sources */,
 				8A4F7CB920A9C0FD001C441A /* Object.swift in Sources */,
 				8AD0609620B55E610074894E /* Client.swift in Sources */,
@@ -760,6 +765,7 @@
 				8A1F39131D61C8B500698781 /* NameCardFormCell.swift in Sources */,
 				8A1F39171D61C8B500698781 /* OmiseTokenRequest.swift in Sources */,
 				8A1F390D1D61C8B500698781 /* CreditCardFormController.swift in Sources */,
+				8ADAA9A620B6C0AF00DD7CCF /* Currency.swift in Sources */,
 				8A1F39111D61C8B500698781 /* CardExpiryDatePicker.swift in Sources */,
 				8A1F390F1D61C8B500698781 /* CardNameTextField.swift in Sources */,
 				8A1F39151D61C8B500698781 /* OmiseFormAccessoryView.swift in Sources */,

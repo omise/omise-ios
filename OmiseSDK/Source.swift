@@ -15,12 +15,12 @@ public struct Source: Object {
     
     public let amount: Int64
     
-    public let currency: String
+    public let currency: Currency
 }
 
 public struct CreateSourceParameter: Encodable {
     public let type: String
     public let amount: Int64
-    public let currency: String
+    public let currency: Currency
 }
 
