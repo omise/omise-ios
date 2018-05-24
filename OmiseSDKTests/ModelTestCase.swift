@@ -22,7 +22,6 @@ class ModelTestCase: XCTestCase {
         let card = try decoder.decode(Card.self, from: cardData)
         
         XCTAssertEqual("card_test_5086xl7amxfysl0ac5l", card.id)
-        XCTAssertEqual("/customers/cust_test_5086xleuh9ft4bn0ac2/cards/card_test_5086xl7amxfysl0ac5l", card.location)
         XCTAssertEqual("4242", card.lastDigits)
         XCTAssertTrue(card.securityCodeCheck)
         XCTAssertEqual(10, card.expirationMonth)

@@ -90,8 +90,6 @@ public struct Card: Decodable {
     public let id: String
     /// Boolean flag indicating wether this card is a live card or a test card.
     public let isLiveMode: Bool
-    /// Resource URL that can be used to re-load card information.
-    public let location: String
     /// Card's creation time.
     public let createdDate: Date
     /// ISO3166 Country code based on the card number.
@@ -127,7 +125,6 @@ public struct Card: Decodable {
         case id
         case isLiveMode = "livemode"
         case createdDate = "created"
-        case location
         case lastDigits = "last_digits"
         case brand
         case name
