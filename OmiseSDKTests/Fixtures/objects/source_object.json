@@ -1,0 +1,8 @@
+{
+  "object": "source",
+  "id": "src_test_59trf2nxk43b5nml8z0",
+  "type": "bill_payment_tesco_lotus",
+  "flow": "offline",
+  "amount": 100000,
+  "currency": "thb"
+}

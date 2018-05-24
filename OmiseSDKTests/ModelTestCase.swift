@@ -33,6 +33,18 @@ class ModelTestCase: XCTestCase {
         XCTAssertEqual("us", card.countryCode)
     }
     
+    func testDecodeSource() throws {
+        let decoder = Client.makeJSONDecoder()
+        let cardData = XCTestCase.fixturesDataFor("source_object")
+        let source = try decoder.decode(Source.self, from: cardData)
+        
+        XCTAssertEqual("src_test_59trf2nxk43b5nml8z0", source.id)
+        XCTAssertEqual(Currency.thb, source.currency)
+        XCTAssertEqual(100000, source.amount)
+        XCTAssertEqual(SourceType.billPaymentTescoLotus, source.type)
+        XCTAssertEqual(Flow.offline, source.flow)
+    }
+    
     func testEncodeTokenParams() throws {
         let encoder = Client.makeJSONEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
@@ -74,6 +86,5 @@ class ModelTestCase: XCTestCase {
                 }
                 """, encodedJSONString)
         }
-
     }
 }
