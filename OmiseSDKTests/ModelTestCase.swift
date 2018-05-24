@@ -87,4 +87,93 @@ class ModelTestCase: XCTestCase {
                 """, encodedJSONString)
         }
     }
+    
+    func testEncodeSourceParameter() throws {
+        let encoder = Client.makeJSONEncoder()
+        encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
+        
+        do {
+            let sourceParameter = Source.CreateParameter(type: SourceType.internetBankingBAY, amount: 10_000_00, currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "currency" : "thb",
+                  "type" : "internet_banking_bay"
+                }
+                """, encodedJSONString)
+        }
+        
+        do {
+            let sourceParameter = Source.CreateParameter(type: SourceType.internetBankingKTB, amount: 100_00, currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 10000,
+                  "currency" : "thb",
+                  "type" : "internet_banking_ktb"
+                }
+                """, encodedJSONString)
+        }
+        
+        do {
+            let sourceParameter = Source.CreateParameter(type: SourceType.internetBankingSCB, amount: 1_000_00, currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 100000,
+                  "currency" : "thb",
+                  "type" : "internet_banking_scb"
+                }
+                """, encodedJSONString)
+        }
+        
+        do {
+            let sourceParameter = Source.CreateParameter(type: SourceType.internetBankingBBL, amount: 10_00, currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000,
+                  "currency" : "thb",
+                  "type" : "internet_banking_bbl"
+                }
+                """, encodedJSONString)
+        }
+        
+        do {
+            let sourceParameter = Source.CreateParameter(type: SourceType.alipay, amount: 300_00, currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 30000,
+                  "currency" : "thb",
+                  "type" : "alipay"
+                }
+                """, encodedJSONString)
+        }
+        
+        do {
+            let sourceParameter = Source.CreateParameter(type: SourceType.billPaymentTescoLotus, amount: 123_45, currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 12345,
+                  "currency" : "thb",
+                  "type" : "bill_payment_tesco_lotus"
+                }
+                """, encodedJSONString)
+        }
+    }
 }
