@@ -84,7 +84,7 @@ public enum Currency: Codable, Hashable {
 extension Currency {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
-        try container.encode(code)
+        try container.encode(code.lowercased())
     }
     
     public init(from decoder: Decoder) throws {
