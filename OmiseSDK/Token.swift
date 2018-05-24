@@ -17,6 +17,33 @@ public struct CreateTokenParameter: Encodable {
     /// Postal code.
     public let postalCode: String?
     
+    private enum TokenCodingKeys: String, CodingKey {
+        case card
+        
+        enum CardCodingKeys: String, CodingKey {
+            case number
+            case name
+            case expirationMonth = "expiration_month"
+            case expirationYear = "expiration_year"
+            case securityCode = "security_code"
+            case city
+            case postalCode = "postal_code"
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var tokenContainer = encoder.container(keyedBy: TokenCodingKeys.self)
+        var cardContainer = tokenContainer.nestedContainer(keyedBy: TokenCodingKeys.CardCodingKeys.self, forKey: .card)
+        
+        try cardContainer.encode(number, forKey: .number)
+        try cardContainer.encodeIfPresent(name, forKey: .name)
+        try cardContainer.encodeIfPresent(expirationMonth, forKey: .expirationMonth)
+        try cardContainer.encodeIfPresent(expirationYear, forKey: .expirationYear)
+        try cardContainer.encodeIfPresent(securityCode, forKey: .securityCode)
+        try cardContainer.encodeIfPresent(city, forKey: .city)
+        try cardContainer.encodeIfPresent(postalCode, forKey: .postalCode)
+    }
+    
     /// Initializes new token request.
     public init(name: String, number: String, expirationMonth: Int, expirationYear: Int,
                 securityCode: String, city: String? = nil, postalCode: String? = nil) {
