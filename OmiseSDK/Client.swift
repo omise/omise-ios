@@ -35,7 +35,7 @@ public class Client {
     }
     
     public func requestTask<T: Object>(with request: Request<T>, completionHandler: Callback<T>?) -> RequestTask<T> {
-        let dataTask = session.dataTask(with: try! buildURLRequestFor(request), completionHandler: Client.completeRequest(completionHandler))
+        let dataTask = session.dataTask(with: buildURLRequestFor(request), completionHandler: Client.completeRequest(completionHandler))
         defer {
             dataTask.resume()
         }
@@ -48,23 +48,20 @@ public class Client {
 // MARK: - URL Request related methods
 extension Client {
     
-    private func buildURLRequestFor<T: Object>(_ request: Request<T>) throws -> URLRequest {
+    private func buildURLRequestFor<T: Object>(_ request: Request<T>) -> URLRequest {
         let urlRequest = NSMutableURLRequest(url: T.postURL)
         urlRequest.httpMethod = "POST"
         let encoder = Client.makeJSONEncoder()
-        urlRequest.httpBody = try encoder.encode(request.parameter)
-        urlRequest.setValue(try Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
+        urlRequest.httpBody = try! encoder.encode(request.parameter)
+        urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
         urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: "User-Agent")
         urlRequest.setValue("application/json; charset=utf8", forHTTPHeaderField: "Content-Type")
         return urlRequest.copy() as! URLRequest
     }
     
-    private static func encodeAuthorizationHeader(_ publicKey: String) throws -> String {
-        let data = publicKey.data(using: String.Encoding.utf8, allowLossyConversion: false)
-        guard let base64 = data?.base64EncodedString() else {
-            throw OmiseError.unexpected(message: "public key encoding failure.", underlying: nil)
-        }
-        
+    private static func encodeAuthorizationHeader(_ publicKey: String) -> String {
+        let data = publicKey.data(using: String.Encoding.utf8, allowLossyConversion: false)!
+        let base64 = data.base64EncodedString()
         return "Basic \(base64)"
     }
     
