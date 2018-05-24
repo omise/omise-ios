@@ -48,8 +48,7 @@ extension Client {
     private func buildURLRequestFor<T: Object>(_ request: Request<T>) throws -> URLRequest {
         let urlRequest = NSMutableURLRequest(url: T.postURL)
         urlRequest.httpMethod = "POST"
-        let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .formatted(Client.jsonDateFormatter)
+        let encoder = Client.makeJSONEncoder()
         urlRequest.httpBody = try encoder.encode(request.parameter)
         urlRequest.setValue(try Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
         urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: "User-Agent")
@@ -63,6 +62,12 @@ extension Client {
         }
         
         return "Basic \(base64)"
+    }
+    
+    static func makeJSONEncoder() -> JSONEncoder {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .formatted(Client.jsonDateFormatter)
+        return encoder
     }
     
     static func makeJSONDecoder() -> JSONDecoder {

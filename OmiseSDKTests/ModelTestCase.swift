@@ -33,4 +33,47 @@ class ModelTestCase: XCTestCase {
         XCTAssertEqual("us", card.countryCode)
     }
     
+    func testEncodeTokenParams() throws {
+        let encoder = Client.makeJSONEncoder()
+        encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
+        
+        do {
+            let tokenParameter = Token.CreateParameter(name: "John Appleseed", number: "4242424242424242", expirationMonth: 6, expirationYear: 2018, securityCode: "123")
+            let encodedJSONString = String(data: try encoder.encode(tokenParameter), encoding: .utf8)
+            
+            XCTAssertEqual(
+                """
+                {
+                  "card" : {
+                    "expiration_month" : 6,
+                    "expiration_year" : 2018,
+                    "name" : "John Appleseed",
+                    "number" : "4242424242424242",
+                    "security_code" : "123"
+                  }
+                }
+                """, encodedJSONString)
+        }
+        
+        do {
+            let tokenParameter = Token.CreateParameter(name: "John Appleseed", number: "4242424242424242", expirationMonth: 6, expirationYear: 2018, securityCode: "123", city: "Bangkok", postalCode: "12345")
+            let encodedJSONString = String(data: try encoder.encode(tokenParameter), encoding: .utf8)
+            
+            XCTAssertEqual(
+                """
+                {
+                  "card" : {
+                    "city" : "Bangkok",
+                    "expiration_month" : 6,
+                    "expiration_year" : 2018,
+                    "name" : "John Appleseed",
+                    "number" : "4242424242424242",
+                    "postal_code" : "12345",
+                    "security_code" : "123"
+                  }
+                }
+                """, encodedJSONString)
+        }
+
+    }
 }
