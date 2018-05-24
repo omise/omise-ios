@@ -24,14 +24,13 @@ class ModelTestCase: XCTestCase {
         XCTAssertEqual("card_test_5086xl7amxfysl0ac5l", card.id)
         XCTAssertEqual("/customers/cust_test_5086xleuh9ft4bn0ac2/cards/card_test_5086xl7amxfysl0ac5l", card.location)
         XCTAssertEqual("4242", card.lastDigits)
-        XCTAssertFalse(card.securityCodeCheck)
+        XCTAssertTrue(card.securityCodeCheck)
         XCTAssertEqual(10, card.expirationMonth)
         XCTAssertEqual(2018, card.expirationYear)
         XCTAssertEqual("Somchai Prasert", card.name)
         XCTAssertEqual("mKleiBfwp+PoJWB/ipngANuECUmRKjyxROwFW5IO7TM=", card.fingerprint)
         XCTAssertEqual(XCTestCase.dateFromJSONString("2015-06-02T05:41:46Z"), card.createdDate)
-        XCTAssertEqual("us", card.country)
-        
+        XCTAssertEqual("us", card.countryCode)
     }
     
 }

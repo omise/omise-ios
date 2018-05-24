@@ -59,7 +59,7 @@ public struct Card: Decodable {
     public let createdDate: Date
     /// ISO3166 Country code based on the card number.
     /// - note: This is informational only and may not always be 100% accurate.
-    public let country: String?
+    public let countryCode: String?
     /// Issuing city.
     /// - note: This is informational only and may not always be 100% accurate.
     public let city: String?
@@ -80,7 +80,30 @@ public struct Card: Decodable {
     public let fingerprint: String?
     /// Card holder's full name.
     public let name: String?
-    public let securityCodeCheck: Bool = false
+    public let securityCodeCheck: Bool
+    
+    public let bankName: String?
+    public let object: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case object
+        case id
+        case isLiveMode = "livemode"
+        case createdDate = "created"
+        case location
+        case lastDigits = "last_digits"
+        case brand
+        case name
+        case bankName = "bank"
+        case postalCode = "postal_code"
+        case countryCode = "country"
+        case city
+        case financing
+        case fingerprint
+        case expirationMonth = "expiration_month"
+        case expirationYear = "expiration_year"
+        case securityCodeCheck = "security_code_check"
+    }
     
 }
 
