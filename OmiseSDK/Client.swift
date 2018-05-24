@@ -52,6 +52,7 @@ extension Client {
         urlRequest.httpBody = try encoder.encode(request.parameter)
         urlRequest.setValue(try Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
         urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: "User-Agent")
+        urlRequest.setValue("application/json; charset=utf8", forHTTPHeaderField: "Content-Type")
         return urlRequest.copy() as! URLRequest
     }
     
