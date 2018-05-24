@@ -65,6 +65,12 @@ extension Client {
         return "Basic \(base64)"
     }
     
+    static func makeJSONDecoder() -> JSONDecoder {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(Client.jsonDateFormatter)
+        return decoder
+    }
+    
     private static func completeRequest<T: Object>(_ callback: Callback<T>?) -> (Data?, URLResponse?, Error?) -> () {
         return { (data: Data?, response: URLResponse?, error: Error?) -> () in
             guard let callback = callback else { return } // nobody around to hear the leaf falls
@@ -99,8 +105,7 @@ extension Client {
                 }
                 
                 do {
-                    let decoder = JSONDecoder()
-                    decoder.dateDecodingStrategy = .formatted(Client.jsonDateFormatter)
+                    let decoder = makeJSONDecoder()
                     return callback(.success(try decoder.decode(T.self, from: data)))
                 } catch let err {
                     let error = OmiseError.unexpected(message: "200 response with invalid JSON", underlying: err)
