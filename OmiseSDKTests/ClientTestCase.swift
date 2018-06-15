@@ -18,7 +18,7 @@ class ClientTestCase: XCTestCase {
     
     func testValidRequestWithCallback() {
         let expectation = self.expectation(description: "Tokenized Reqeust with a valid token data")
-        _ = testClient.requestTask(with: ClientTestCase.makeValidTokenRequest()) { (result) in
+        let task = testClient.requestTask(with: ClientTestCase.makeValidTokenRequest()) { (result) in
             defer { expectation.fulfill() }
             switch result {
             case .success(let token):
@@ -30,17 +30,31 @@ class ClientTestCase: XCTestCase {
             }
         }
         
+        XCTAssertEqual("4242424242424242", task.request.parameter.number)
+        XCTAssertEqual(11, task.request.parameter.expirationMonth)
+        XCTAssertEqual(2019, task.request.parameter.expirationYear)
+        
+        XCTAssertEqual(Token.postURL, task.dataTask.currentRequest?.url)
+        XCTAssertEqual("POST", task.dataTask.currentRequest?.httpMethod)
+        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
     func testInvalidRequestWithCallback() {
         let expectation = self.expectation(description: "Tokenized Reqeust with an invalid token data")
-        _ = testClient.requestTask(with: ClientTestCase.makeInvalidTokenRequest()) { (result) in
+        let task = testClient.requestTask(with: ClientTestCase.makeInvalidTokenRequest()) { (result) in
             defer { expectation.fulfill() }
             if case .success = result {
                 XCTFail("Expected failed request")
             }
         }
+        
+        XCTAssertEqual("4242424242111111", task.request.parameter.number)
+        XCTAssertEqual(11, task.request.parameter.expirationMonth)
+        XCTAssertEqual(2016, task.request.parameter.expirationYear)
+        
+        XCTAssertEqual(Token.postURL, task.dataTask.currentRequest?.url)
+        XCTAssertEqual("POST", task.dataTask.currentRequest?.httpMethod)
         
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -54,18 +68,16 @@ extension ClientTestCase {
             expirationMonth: 11,
             expirationYear: 2019,
             securityCode: "123"
-            )
-        )
+        ))
     }
     static func makeInvalidTokenRequest() -> Request<Token>  {
         return Request.init(parameter: Token.CreateParameter(
             name: "JOHN DOE",
-            number: "4242424242421111",
+            number: "4242424242111111",
             expirationMonth: 11,
             expirationYear: 2016,
             securityCode: "123"
-            )
-        )
+        ))
     }
     
 }

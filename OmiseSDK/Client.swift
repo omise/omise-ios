@@ -7,24 +7,12 @@ public class Client {
     let publicKey: String
     
     var userAgent: String?
+    let sessionDelegate = Client.PublicKeyPinningSessionDelegate()
     
     public typealias Callback<T: Object> = (RequestResult<T>) -> ()
 
-    public convenience init(publicKey: String) {
+    public init(publicKey: String) {
         let queue = OperationQueue()
-        let session = URLSession(
-            configuration: URLSessionConfiguration.ephemeral,
-            delegate: nil,
-            delegateQueue: queue
-        )
-        
-        self.init(publicKey: publicKey, queue: queue, session: session)
-    }
-    
-    public init(publicKey: String, queue: OperationQueue, session: URLSession) {
-        self.queue = queue
-        self.session = session
-        
         if publicKey.hasPrefix("pkey_") {
             self.publicKey = publicKey
         } else {
@@ -32,6 +20,13 @@ public class Client {
             sdkWarn("refusing to initialize sdk client with a non-public key.")
             self.publicKey = ""
         }
+        
+        self.queue = queue
+        self.session = URLSession(
+            configuration: URLSessionConfiguration.ephemeral,
+            delegate: sessionDelegate,
+            delegateQueue: queue
+        )
     }
     
     public func requestTask<T: Object>(with request: Request<T>, completionHandler: Callback<T>?) -> RequestTask<T> {

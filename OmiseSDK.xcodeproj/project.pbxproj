@@ -14,7 +14,6 @@
 		2220F1AB1D0FEE85008CD89F /* OmiseJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A51D0FEE85008CD89F /* OmiseJsonParser.swift */; };
 		2220F1AC1D0FEE85008CD89F /* OmiseSDKClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A61D0FEE85008CD89F /* OmiseSDKClient.swift */; };
 		2220F1AD1D0FEE85008CD89F /* OmiseToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A71D0FEE85008CD89F /* OmiseToken.swift */; };
-		2220F1AE1D0FEE85008CD89F /* OmiseTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */; };
 		2225B3541D0FDD63003EB396 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2225B3531D0FDD63003EB396 /* Assets.xcassets */; };
 		22445FFC1CF41DD300801D0F /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22445FFB1CF41DD300801D0F /* Globals.swift */; };
 		224460041CF43A1200801D0F /* SDKTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225931561CE4745200841B86 /* SDKTestCase.swift */; };
@@ -93,13 +92,15 @@
 		8A5D59811D5317DD005D3346 /* OmiseSDK.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A5D59831D5317DD005D3346 /* OmiseSDK.storyboard */; };
 		8A60619A20B2A8D400CF90D5 /* PAN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A60619920B2A8D400CF90D5 /* PAN.swift */; };
 		8A60619B20B2A8D400CF90D5 /* PAN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A60619920B2A8D400CF90D5 /* PAN.swift */; };
-		8A763B9C20A9774200AE2FEC /* URLQueryItemEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A763B9B20A9774200AE2FEC /* URLQueryItemEncoder.swift */; };
+		8A7F8B0C20C55605008F4D08 /* ClientSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADAA9A720B7194500DD7CCF /* ClientSessionDelegate.swift */; };
+		8A7F8B0D20C55605008F4D08 /* ClientSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADAA9A720B7194500DD7CCF /* ClientSessionDelegate.swift */; };
 		8AD0609320B55B3A0074894E /* RequestTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0609220B55B3A0074894E /* RequestTask.swift */; };
 		8AD0609420B55B3A0074894E /* RequestTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0609220B55B3A0074894E /* RequestTask.swift */; };
 		8AD0609620B55E610074894E /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0609520B55E610074894E /* Client.swift */; };
 		8AD0609720B55E610074894E /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0609520B55E610074894E /* Client.swift */; };
 		8ADAA9A520B6C0AF00DD7CCF /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADAA9A420B6C0AF00DD7CCF /* Currency.swift */; };
 		8ADAA9A620B6C0AF00DD7CCF /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADAA9A420B6C0AF00DD7CCF /* Currency.swift */; };
+		8AFB920F20D39BE50072B185 /* OmiseTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */; };
 		8AFE10BB20B69B39008E741D /* ClientTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE10BA20B69B39008E741D /* ClientTestCase.swift */; };
 		981FA5F71D0EDDB0009ECEDC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 981FA5F91D0EDDB0009ECEDC /* Localizable.strings */; };
 		982237C11D115BD400D266F3 /* ErrorMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982237BF1D115BD400D266F3 /* ErrorMessageCell.swift */; };
@@ -121,12 +122,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8A1F392A1D61D8DE00698781 /* PBXContainerItemProxy */ = {
+		8A7F8B0820C552F0008F4D08 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2259310F1CE3210700841B86 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8A1F38BF1D61C7C200698781;
-			remoteInfo = "OmiseSDK Card.io";
+			remoteGlobalIDString = 22D4809C1D0EB29C00544CE1;
+			remoteInfo = ExampleApp;
+		};
+		8A7F8B0A20C55312008F4D08 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2259310F1CE3210700841B86 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 225931171CE3210700841B86;
+			remoteInfo = OmiseSDK;
 		};
 		987A02CF1CE35D5E0035417A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -216,10 +224,11 @@
 		8A5D59851D5317E0005D3346 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/OmiseSDK.strings; sourceTree = "<group>"; };
 		8A5D59871D5317E1005D3346 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/OmiseSDK.strings; sourceTree = "<group>"; };
 		8A60619920B2A8D400CF90D5 /* PAN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAN.swift; sourceTree = "<group>"; };
-		8A763B9B20A9774200AE2FEC /* URLQueryItemEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLQueryItemEncoder.swift; sourceTree = "<group>"; };
 		8AD0609220B55B3A0074894E /* RequestTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTask.swift; sourceTree = "<group>"; };
 		8AD0609520B55E610074894E /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		8ADAA9A420B6C0AF00DD7CCF /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		8ADAA9A720B7194500DD7CCF /* ClientSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientSessionDelegate.swift; sourceTree = "<group>"; };
+		8ADAA9AC20B71EDA00DD7CCF /* module.map */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
 		8AFE10BA20B69B39008E741D /* ClientTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTestCase.swift; sourceTree = "<group>"; };
 		981FA5F81D0EDDB0009ECEDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		981FA5FA1D0EDDD8009ECEDC /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -318,10 +327,10 @@
 				8A55E4B71DA3CF0100AC515A /* Card.io-Info.plist */,
 				2259311D1CE3210700841B86 /* Info.plist */,
 				8AD0609520B55E610074894E /* Client.swift */,
+				8ADAA9A720B7194500DD7CCF /* ClientSessionDelegate.swift */,
 				22445FFB1CF41DD300801D0F /* Globals.swift */,
 				8A2BE95420A9A39E000CEB60 /* Request.swift */,
 				8AD0609220B55B3A0074894E /* RequestTask.swift */,
-				2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */,
 				2225B3531D0FDD63003EB396 /* Assets.xcassets */,
 				8AD0609120B550B90074894E /* Compatability */,
 				8A0927841D535548008D393F /* Library */,
@@ -351,6 +360,7 @@
 		8A0927841D535548008D393F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				8ADAA9AB20B71EC400DD7CCF /* CommonCrypto */,
 				8A0927851D535548008D393F /* card.io */,
 			);
 			path = Library;
@@ -437,6 +447,14 @@
 				2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */,
 			);
 			path = Compatability;
+			sourceTree = "<group>";
+		};
+		8ADAA9AB20B71EC400DD7CCF /* CommonCrypto */ = {
+			isa = PBXGroup;
+			children = (
+				8ADAA9AC20B71EDA00DD7CCF /* module.map */,
+			);
+			path = CommonCrypto;
 			sourceTree = "<group>";
 		};
 		986406361CFEA7EA004BCF51 /* Fields */ = {
@@ -540,7 +558,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				8A1F392B1D61D8DE00698781 /* PBXTargetDependency */,
+				8A7F8B0B20C55312008F4D08 /* PBXTargetDependency */,
 			);
 			name = ExampleApp;
 			productName = ExampleApp;
@@ -577,6 +595,7 @@
 			);
 			dependencies = (
 				987A02D01CE35D5E0035417A /* PBXTargetDependency */,
+				8A7F8B0920C552F0008F4D08 /* PBXTargetDependency */,
 			);
 			name = OmiseSDKTests;
 			productName = OmiseSDKTests;
@@ -596,7 +615,7 @@
 				TargetAttributes = {
 					225931171CE3210700841B86 = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 0940;
 						ProvisioningStyle = Automatic;
 					};
 					22D4809C1D0EB29C00544CE1 = {
@@ -605,12 +624,13 @@
 						ProvisioningStyle = Automatic;
 					};
 					8A1F38BF1D61C7C200698781 = {
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 0940;
 					};
 					987A02C81CE35D5E0035417A = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
+						TestTargetID = 22D4809C1D0EB29C00544CE1;
 					};
 				};
 			};
@@ -685,12 +705,14 @@
 			files = (
 				982237C11D115BD400D266F3 /* ErrorMessageCell.swift in Sources */,
 				143E0AE11D13B0DD002B6922 /* OmiseTableViewCell.swift in Sources */,
+				8AFB920F20D39BE50072B185 /* OmiseTokenRequest.swift in Sources */,
 				2220F1AC1D0FEE85008CD89F /* OmiseSDKClient.swift in Sources */,
 				8A60619A20B2A8D400CF90D5 /* PAN.swift in Sources */,
 				2220F1AA1D0FEE85008CD89F /* OmiseError.swift in Sources */,
 				986406451CFEA818004BCF51 /* FormHeaderCell.swift in Sources */,
 				8A47173D20AAB11B0022733A /* Source.swift in Sources */,
 				986406411CFEA818004BCF51 /* CardNumberFormCell.swift in Sources */,
+				8A7F8B0C20C55605008F4D08 /* ClientSessionDelegate.swift in Sources */,
 				983BC0C01D1027A3004505B7 /* ConfirmButtonCell.swift in Sources */,
 				986406351CFEA7E4004BCF51 /* OmiseTextField.swift in Sources */,
 				2220F1AD1D0FEE85008CD89F /* OmiseToken.swift in Sources */,
@@ -710,7 +732,6 @@
 				8A47173A20AAB0F40022733A /* Token.swift in Sources */,
 				22445FFC1CF41DD300801D0F /* Globals.swift in Sources */,
 				8ADAA9A520B6C0AF00DD7CCF /* Currency.swift in Sources */,
-				2220F1AE1D0FEE85008CD89F /* OmiseTokenRequest.swift in Sources */,
 				8A4F7CB920A9C0FD001C441A /* Object.swift in Sources */,
 				8AD0609620B55E610074894E /* Client.swift in Sources */,
 				2220F1AB1D0FEE85008CD89F /* OmiseJsonParser.swift in Sources */,
@@ -763,6 +784,7 @@
 				8A1F39101D61C8B500698781 /* SecureCodeFormCell.swift in Sources */,
 				8AD0609720B55E610074894E /* Client.swift in Sources */,
 				8A1F39131D61C8B500698781 /* NameCardFormCell.swift in Sources */,
+				8A7F8B0D20C55605008F4D08 /* ClientSessionDelegate.swift in Sources */,
 				8A1F39171D61C8B500698781 /* OmiseTokenRequest.swift in Sources */,
 				8A1F390D1D61C8B500698781 /* CreditCardFormController.swift in Sources */,
 				8ADAA9A620B6C0AF00DD7CCF /* Currency.swift in Sources */,
@@ -789,10 +811,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8A1F392B1D61D8DE00698781 /* PBXTargetDependency */ = {
+		8A7F8B0920C552F0008F4D08 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8A1F38BF1D61C7C200698781 /* OmiseSDK Card.io */;
-			targetProxy = 8A1F392A1D61D8DE00698781 /* PBXContainerItemProxy */;
+			target = 22D4809C1D0EB29C00544CE1 /* ExampleApp */;
+			targetProxy = 8A7F8B0820C552F0008F4D08 /* PBXContainerItemProxy */;
+		};
+		8A7F8B0B20C55312008F4D08 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 225931171CE3210700841B86 /* OmiseSDK */;
+			targetProxy = 8A7F8B0A20C55312008F4D08 /* PBXContainerItemProxy */;
 		};
 		987A02D01CE35D5E0035417A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -980,6 +1007,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -1016,12 +1044,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ExampleApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)$(LOCAL_LIBRARY_DIR)/card.io/CardIO",
-				);
 				OTHER_LDFLAGS = (
 					"-lc++",
 					"-all_load",
@@ -1041,12 +1065,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ExampleApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)$(LOCAL_LIBRARY_DIR)/card.io/CardIO",
-				);
 				OTHER_LDFLAGS = (
 					"-lc++",
 					"-all_load",
@@ -1087,6 +1107,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK;
 				PRODUCT_NAME = OmiseSDK;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -1135,6 +1156,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ExampleApp.app/ExampleApp";
 			};
 			name = Debug;
 		};
@@ -1150,6 +1172,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ExampleApp.app/ExampleApp";
 			};
 			name = Release;
 		};
