@@ -2,7 +2,7 @@ import Foundation
 
 public let OmiseErrorDomain = "co.omise"
 
-public enum OmiseErrorUserInfoKey: String {
+public enum ErrorUserInfoKey: String {
     case location = "location"
     case code = "code"
     case message = "message"
@@ -42,9 +42,9 @@ public enum OmiseError: CustomNSError, LocalizedError {
         switch self {
         case let .api(code: code, message: message, location: location):
             return [
-                OmiseErrorUserInfoKey.code.rawValue: code,
-                OmiseErrorUserInfoKey.location.rawValue: location,
-                OmiseErrorUserInfoKey.message.rawValue: message,
+                ErrorUserInfoKey.code.rawValue: code,
+                ErrorUserInfoKey.location.rawValue: location,
+                ErrorUserInfoKey.message.rawValue: message,
                 NSLocalizedDescriptionKey: message,
             ]
         case let .unexpected(message: message, underlying: error?):
