@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		143E0AE11D13B0DD002B6922 /* OmiseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E0AE01D13B0DD002B6922 /* OmiseTableViewCell.swift */; };
 		14ACEF831D02D641001C5319 /* CardExpiryDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACEF821D02D641001C5319 /* CardExpiryDatePicker.swift */; };
 		2220F1A91D0FEE85008CD89F /* OmiseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A31D0FEE85008CD89F /* OmiseCard.swift */; };
 		2220F1AA1D0FEE85008CD89F /* OmiseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A41D0FEE85008CD89F /* OmiseError.swift */; };
@@ -54,7 +53,6 @@
 		8A1F38FD1D61C85900698781 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A1F38FC1D61C85900698781 /* AudioToolbox.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8A1F38FF1D61C86300698781 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A1F38FE1D61C86300698781 /* CoreMedia.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8A1F39031D61C8B500698781 /* ErrorMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982237BF1D115BD400D266F3 /* ErrorMessageCell.swift */; };
-		8A1F39041D61C8B500698781 /* OmiseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E0AE01D13B0DD002B6922 /* OmiseTableViewCell.swift */; };
 		8A1F39051D61C8B500698781 /* OmiseSDKClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A61D0FEE85008CD89F /* OmiseSDKClient.swift */; };
 		8A1F39061D61C8B500698781 /* OmiseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A41D0FEE85008CD89F /* OmiseError.swift */; };
 		8A1F39071D61C8B500698781 /* FormHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864063B1CFEA818004BCF51 /* FormHeaderCell.swift */; };
@@ -160,7 +158,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		143E0AE01D13B0DD002B6922 /* OmiseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseTableViewCell.swift; sourceTree = "<group>"; };
 		14ACEF821D02D641001C5319 /* CardExpiryDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardExpiryDatePicker.swift; sourceTree = "<group>"; };
 		2220F1A31D0FEE85008CD89F /* OmiseCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseCard.swift; sourceTree = "<group>"; };
 		2220F1A41D0FEE85008CD89F /* OmiseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseError.swift; sourceTree = "<group>"; };
@@ -479,7 +476,6 @@
 				986406391CFEA818004BCF51 /* ExpiryDateFormCell.swift */,
 				9864063B1CFEA818004BCF51 /* FormHeaderCell.swift */,
 				9864063D1CFEA818004BCF51 /* NameCardFormCell.swift */,
-				143E0AE01D13B0DD002B6922 /* OmiseTableViewCell.swift */,
 				9864063F1CFEA818004BCF51 /* SecureCodeFormCell.swift */,
 			);
 			name = Cells;
@@ -704,7 +700,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				982237C11D115BD400D266F3 /* ErrorMessageCell.swift in Sources */,
-				143E0AE11D13B0DD002B6922 /* OmiseTableViewCell.swift in Sources */,
 				8AFB920F20D39BE50072B185 /* OmiseTokenRequest.swift in Sources */,
 				2220F1AC1D0FEE85008CD89F /* OmiseSDKClient.swift in Sources */,
 				8A60619A20B2A8D400CF90D5 /* PAN.swift in Sources */,
@@ -779,7 +774,6 @@
 				8A1F390A1D61C8B500698781 /* OmiseTextField.swift in Sources */,
 				8A1F39071D61C8B500698781 /* FormHeaderCell.swift in Sources */,
 				8A1F39181D61C8B500698781 /* OmiseJsonParser.swift in Sources */,
-				8A1F39041D61C8B500698781 /* OmiseTableViewCell.swift in Sources */,
 				8A1F390B1D61C8B500698781 /* OmiseToken.swift in Sources */,
 				8A1F39101D61C8B500698781 /* SecureCodeFormCell.swift in Sources */,
 				8AD0609720B55E610074894E /* Client.swift in Sources */,
