@@ -5,7 +5,8 @@ public let OmiseErrorDomain = "co.omise"
 public enum OmiseErrorUserInfoKey: String {
     case location = "location"
     case code = "code"
-    case message = "message"}
+    case message = "message"
+}
 
 
 /// Represent errors from the Omise iOS SDK.
