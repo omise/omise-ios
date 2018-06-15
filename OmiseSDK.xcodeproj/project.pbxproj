@@ -93,6 +93,10 @@
 		8A60619A20B2A8D400CF90D5 /* PAN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A60619920B2A8D400CF90D5 /* PAN.swift */; };
 		8A60619B20B2A8D400CF90D5 /* PAN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A60619920B2A8D400CF90D5 /* PAN.swift */; };
 		8A763B9C20A9774200AE2FEC /* URLQueryItemEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A763B9B20A9774200AE2FEC /* URLQueryItemEncoder.swift */; };
+		8AD0609320B55B3A0074894E /* RequestTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0609220B55B3A0074894E /* RequestTask.swift */; };
+		8AD0609420B55B3A0074894E /* RequestTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0609220B55B3A0074894E /* RequestTask.swift */; };
+		8AD0609620B55E610074894E /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0609520B55E610074894E /* Client.swift */; };
+		8AD0609720B55E610074894E /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0609520B55E610074894E /* Client.swift */; };
 		981FA5F71D0EDDB0009ECEDC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 981FA5F91D0EDDB0009ECEDC /* Localizable.strings */; };
 		982237C11D115BD400D266F3 /* ErrorMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982237BF1D115BD400D266F3 /* ErrorMessageCell.swift */; };
 		983BC0C01D1027A3004505B7 /* ConfirmButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983BC0BE1D1027A3004505B7 /* ConfirmButtonCell.swift */; };
@@ -208,6 +212,8 @@
 		8A5D59871D5317E1005D3346 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/OmiseSDK.strings; sourceTree = "<group>"; };
 		8A60619920B2A8D400CF90D5 /* PAN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAN.swift; sourceTree = "<group>"; };
 		8A763B9B20A9774200AE2FEC /* URLQueryItemEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLQueryItemEncoder.swift; sourceTree = "<group>"; };
+		8AD0609220B55B3A0074894E /* RequestTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTask.swift; sourceTree = "<group>"; };
+		8AD0609520B55E610074894E /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		981FA5F81D0EDDB0009ECEDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		981FA5FA1D0EDDD8009ECEDC /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
 		981FA5FB1D0EDDDB009ECEDC /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -304,14 +310,16 @@
 				8A09281B1D544C3F008D393F /* OmiseSDK.modulemap */,
 				8A55E4B71DA3CF0100AC515A /* Card.io-Info.plist */,
 				2259311D1CE3210700841B86 /* Info.plist */,
+				8AD0609520B55E610074894E /* Client.swift */,
 				22445FFB1CF41DD300801D0F /* Globals.swift */,
 				8A2BE95420A9A39E000CEB60 /* Request.swift */,
+				8AD0609220B55B3A0074894E /* RequestTask.swift */,
 				2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */,
 				2225B3531D0FDD63003EB396 /* Assets.xcassets */,
+				8AD0609120B550B90074894E /* Compatability */,
 				8A0927841D535548008D393F /* Library */,
 				981FA5F91D0EDDB0009ECEDC /* Localizable.strings */,
 				8A2BE95720A9A8F1000CEB60 /* Models */,
-				8AD0609120B550B90074894E /* Compatability */,
 				8A5D59831D5317DD005D3346 /* OmiseSDK.storyboard */,
 				8A2BE95820A9A8FE000CEB60 /* Views */,
 			);
@@ -677,6 +685,7 @@
 				986406351CFEA7E4004BCF51 /* OmiseTextField.swift in Sources */,
 				2220F1AD1D0FEE85008CD89F /* OmiseToken.swift in Sources */,
 				2220F1A91D0FEE85008CD89F /* OmiseCard.swift in Sources */,
+				8AD0609320B55B3A0074894E /* RequestTask.swift in Sources */,
 				8A1D4C661D51B72200C7837C /* CreditCardFormController.swift in Sources */,
 				986406311CFEA7E4004BCF51 /* CardExpiryDateTextField.swift in Sources */,
 				986406341CFEA7E4004BCF51 /* CardNameTextField.swift in Sources */,
@@ -692,6 +701,7 @@
 				22445FFC1CF41DD300801D0F /* Globals.swift in Sources */,
 				2220F1AE1D0FEE85008CD89F /* OmiseTokenRequest.swift in Sources */,
 				8A4F7CB920A9C0FD001C441A /* Object.swift in Sources */,
+				8AD0609620B55E610074894E /* Client.swift in Sources */,
 				2220F1AB1D0FEE85008CD89F /* OmiseJsonParser.swift in Sources */,
 				986406321CFEA7E4004BCF51 /* CardNumberTextField.swift in Sources */,
 				225931501CE46F7F00841B86 /* CardNumber.swift in Sources */,
@@ -722,6 +732,7 @@
 				8A1F390C1D61C8B500698781 /* OmiseCard.swift in Sources */,
 				8A1F39091D61C8B500698781 /* ConfirmButtonCell.swift in Sources */,
 				8A1F391A1D61C8B500698781 /* CardNumber.swift in Sources */,
+				8AD0609420B55B3A0074894E /* RequestTask.swift in Sources */,
 				8A60619B20B2A8D400CF90D5 /* PAN.swift in Sources */,
 				8A47173E20AAB11B0022733A /* Source.swift in Sources */,
 				8A4F7CBA20A9C0FD001C441A /* Object.swift in Sources */,
@@ -739,6 +750,7 @@
 				8A1F39041D61C8B500698781 /* OmiseTableViewCell.swift in Sources */,
 				8A1F390B1D61C8B500698781 /* OmiseToken.swift in Sources */,
 				8A1F39101D61C8B500698781 /* SecureCodeFormCell.swift in Sources */,
+				8AD0609720B55E610074894E /* Client.swift in Sources */,
 				8A1F39131D61C8B500698781 /* NameCardFormCell.swift in Sources */,
 				8A1F39171D61C8B500698781 /* OmiseTokenRequest.swift in Sources */,
 				8A1F390D1D61C8B500698781 /* CreditCardFormController.swift in Sources */,

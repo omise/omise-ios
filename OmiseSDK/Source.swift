@@ -1,7 +1,9 @@
 import Foundation
 
-public struct Source: OmiseObject {
+public struct Source: Object {
     public typealias CreateParameter = CreateSourceParameter
+   
+    public static let postURL: URL = URL(string: "https://api.omise.co/sources")!
     
     public let object: String
     public let id: String
