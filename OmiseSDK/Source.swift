@@ -9,11 +9,9 @@ public struct Source: Object {
     public let id: String
     
     public let type: SourceType
-    
     public let flow: Flow
     
     public let amount: Int64
-    
     public let currency: Currency
 }
 
@@ -50,6 +48,7 @@ public enum SourceType: Codable, Equatable {
     private static let internetBankingBBLValue = "internet_banking_bbl"
     private static let alipayValue = "alipay"
     private static let billPaymentTescoLotusValue = "bill_payment_tesco_lotus"
+    private static let barcodeAlipayValue = "barcode_alipay"
 
     case internetBankingBAY
     case internetBankingKTB
@@ -57,6 +56,7 @@ public enum SourceType: Codable, Equatable {
     case internetBankingBBL
     case alipay
     case billPaymentTescoLotus
+    case barcodeAlipay
     case other(String)
     
     public init(from decoder: Decoder) throws {
@@ -75,6 +75,8 @@ public enum SourceType: Codable, Equatable {
             self = .alipay
         case SourceType.billPaymentTescoLotusValue:
             self = .billPaymentTescoLotus
+        case SourceType.barcodeAlipayValue:
+            self = .barcodeAlipay
         default:
             self = .other(code)
         }
@@ -95,6 +97,8 @@ public enum SourceType: Codable, Equatable {
             value = SourceType.alipayValue
         case .billPaymentTescoLotus:
             value = SourceType.billPaymentTescoLotusValue
+        case .barcodeAlipay:
+            value = SourceType.barcodeAlipayValue
         case .other(let sourceValue):
             value = sourceValue
         }
