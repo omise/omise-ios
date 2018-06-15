@@ -8,7 +8,7 @@
  
  */
 import UIKit
-import XCPlayground
+import PlaygroundSupport
 import OmiseSDK
 
 /*: obtain-public-key
@@ -29,14 +29,14 @@ let publicKey = "pkey_test_change_me_to_your_test_key"
  */
 class CheckoutViewController: UIViewController {
     override func loadView() {
-        let button = UIButton(frame: CGRectMake(10, 10, 300, 44))
-        button.addTarget(self, action: #selector(didTapCheckout), forControlEvents: .TouchUpInside)
-        button.backgroundColor = .blueColor()
-        button.setTitleColor(.whiteColor(), forState: .Normal)
-        button.setTitle("Checkout", forState: .Normal)
+        let button = UIButton(frame: CGRect(x: 10, y: 10,width:  300, height: 44))
+        button.addTarget(self, action: #selector(didTapCheckout), for: .touchUpInside)
+        button.backgroundColor = .blue
+        button.setTitleColor(.white, for: .normal)
+        button.setTitle("Checkout", for: .normal)
         
-        let view = UIView(frame: CGRectMake(0, 0, 320, 480))
-        view.backgroundColor = .whiteColor()
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+        view.backgroundColor = .white
         view.addSubview(button)
         self.view = view
     }
@@ -44,22 +44,22 @@ class CheckoutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Checkout"
-        edgesForExtendedLayout = .None
+        edgesForExtendedLayout = []
     }
     
-    func didTapCheckout() {
-        let closeButton = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(didTapCloseForm))
+    @objc func didTapCheckout() {
+        let closeButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCloseForm))
         
-        let creditCardForm = CreditCardFormController.creditCardFormWithPublicKey(publicKey)
+        let creditCardForm = CreditCardFormController.makeCreditCardForm(withPublicKey: publicKey)
         creditCardForm.delegate = self
         creditCardForm.navigationItem.rightBarButtonItem = closeButton
         
         let navigationController = UINavigationController(rootViewController: creditCardForm)
-        presentViewController(navigationController, animated: true, completion: nil)
+        present(navigationController, animated: true, completion: nil)
     }
     
-    func didTapCloseForm() {
-        presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+    @objc func didTapCloseForm() {
+        presentedViewController?.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -69,20 +69,20 @@ class CheckoutViewController: UIViewController {
  
  */
 extension CheckoutViewController: CreditCardFormDelegate {
-    func creditCardForm(controller: CreditCardFormController, didSucceedWithToken token: OmiseToken) {
+    func creditCardForm(_ controller: CreditCardFormController, didSucceedWithToken token: OmiseToken) {
         didTapCloseForm()
-        print("token created: \(token.tokenId)")
+        print("token created: \(token.tokenId ?? "")")
         
-        let alert = UIAlertController(title: "Token", message: token.tokenId, preferredStyle: .Alert)
-        presentViewController(alert, animated: true, completion: nil)
+        let alert = UIAlertController(title: "Token", message: token.tokenId, preferredStyle: .alert)
+        present(alert, animated: true, completion: nil)
     }
     
-    func creditCardForm(controller: CreditCardFormController, didFailWithError error: ErrorType) {
+    func creditCardForm(_ controller: CreditCardFormController, didFailWithError error: Error) {
         didTapCloseForm()
         print("error: \(error)")
         
-        let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .Alert)
-        presentViewController(alert, animated: true, completion: nil)
+        let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -94,8 +94,9 @@ extension CheckoutViewController: CreditCardFormDelegate {
 let checkoutController = CheckoutViewController()
 let navigationController = UINavigationController(rootViewController: checkoutController)
 
-let window = UIWindow(frame: CGRectMake(0, 0, 320, 480))
+let window = UIWindow(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
 window.rootViewController = navigationController
 window.makeKeyAndVisible()
 
-XCPlaygroundPage.currentPage.liveView = window
+PlaygroundPage.current.liveView = window
+PlaygroundPage.current.needsIndefiniteExecution = true

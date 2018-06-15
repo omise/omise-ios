@@ -60,7 +60,6 @@ extension Client {
             
             let keyHash = sha256(data: serverPublicKeyData)
             if (keyHash == pinnedPublicKeyHash) {
-                // Success! This is our server
                 authChallengeDisposition = .useCredential
                 credential = URLCredential(trust:serverTrust)
             } else {
@@ -72,7 +71,7 @@ extension Client {
         @available(iOS 10.3, *)
         private func extractPubliKeyFrom(_ cerificate: SecCertificate) -> Data? {
             let serverPublicKey = SecCertificateCopyPublicKey(cerificate)
-            return SecKeyCopyExternalRepresentation(serverPublicKey!, nil )! as Data
+            return serverPublicKey.flatMap({ SecKeyCopyExternalRepresentation($0, nil ) as Data? })
         }
         
         private func legacyExtractPubliKeyFrom(_ certificate: SecCertificate) -> Data? {
