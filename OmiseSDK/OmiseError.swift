@@ -2,7 +2,7 @@ import Foundation
 
 public let OmiseErrorDomain = "co.omise"
 
-public enum ErrorUserInfoKey: String {
+public enum ErrorUserInfoKey: String, CodingKey {
     case location = "location"
     case code = "code"
     case message = "message"
@@ -10,7 +10,7 @@ public enum ErrorUserInfoKey: String {
 
 
 /// Represent errors from the Omise iOS SDK.
-public enum OmiseError: CustomNSError, LocalizedError {
+public enum OmiseError: CustomNSError, LocalizedError, Decodable {
     /// API error returned from Omise API
     case api(code: String, message: String, location: String)
     /// Any unexpected errors that may happen during Omise API requests.
@@ -57,5 +57,14 @@ public enum OmiseError: CustomNSError, LocalizedError {
                 NSLocalizedDescriptionKey: message,
             ]
         }
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: ErrorUserInfoKey.self)
+        let code = try container.decode(String.self, forKey: .code)
+        let message = try container.decode(String.self, forKey: .message)
+        let location = try container.decode(String.self, forKey: .location)
+        
+        self = .api(code: code, message: message, location: location)
     }
 }
