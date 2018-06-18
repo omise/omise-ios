@@ -6,90 +6,73 @@ import Foundation
  - seealso: [Cards API](https://www.omise.co/cards-api)
  */
 @objc(OMSCard) public class OmiseCard: NSObject {
+    private let card: Card
     /// Card's ID.
-    @objc public var cardId: String?
+    @objc public var cardId: String? {
+        return card.id
+    }
     /// Boolean flag indicating wether this card is a live card or a test card.
-    @objc public var livemode: Bool = false
-    /// Resource URL that can be used to re-load card information.
-    @objc public var location: String?
+    @objc public var livemode: Bool {
+        return card.isLiveMode
+    }
     /// ISO3166 Country code based on the card number.
     /// - note: This is informational only and may not always be 100% accurate.
-    @objc public var country: String?
+    @objc public var country: String? {
+        return card.countryCode
+    }
     /// Issuing city.
     /// - note: This is informational only and may not always be 100% accurate.
-    @objc public var city: String?
+    @objc public var city: String? {
+        return card.city
+    }
     /// Postal code.
-    @objc public var postalCode: String?
+    @objc public var postalCode: String? {
+        return card.postalCode
+    }
     /// Credit card financing type. (debit or credit)
-    @objc public var financing: String?
+    @objc public var financing: String? {
+        return card.financing
+    }
     /// Last 4 digits of the card number.
-    @objc public var lastDigits: String?
+    @objc public var lastDigits: String? {
+        return card.lastDigits
+    }
     /// Card brand. (e.g. Visa, Mastercard, ...)
-    @objc public var brand: String?
+    @objc public var brand: String? {
+        return card.brand
+    }
     /// Card expiration month (1-12)
-    public var expirationMonth: Int?
+    @objc public var expirationMonth: Int {
+        return card.expirationMonth ?? NSNotFound
+    }
     /// Card expiration year (Gregrorian)
-    public var expirationYear: Int?
+    @objc public var expirationYear: Int {
+        return card.expirationYear ?? NSNotFound
+    }
     /// Unique card-based fingerprint. Allows detection of identical cards without
     /// exposing card numbers directly.
-    @objc public var fingerprint: String?
+    @objc public var fingerprint: String? {
+        return card.financing
+    }
     /// Card holder's full name.
-    @objc public var name: String?
-    @objc public var securityCodeCheck: Bool = false
+    @objc public var name: String? {
+        return card.name
+    }
+    @objc public var securityCodeCheck: Bool {
+        return card.securityCodeCheck
+    }
     /// Card's creation time.
-    @objc public var created: Date?
+    @objc public var created: Date? {
+        return card.createdDate
+    }
     
-    override init() {}
     init(card: Card) {
-        self.cardId = card.id
-        self.livemode = card.isLiveMode
-        self.country = card.countryCode
-        self.city = card.city
-        self.postalCode = card.postalCode
-        self.financing = card.financing
-        self.lastDigits = card.lastDigits
-        self.brand = card.brand
-        self.expirationYear = card.expirationYear
-        self.expirationMonth = card.expirationMonth
-        self.financing = card.financing
-        self.name = card.name
-        self.securityCodeCheck = card.securityCodeCheck
-        self.created = card.createdDate
+        self.card = card
     }
 
 }
 
 extension Calendar {
-    static let creditCardInformationCalendar: Calendar = Calendar(identifier: .gregorian)}
-
-
-extension OmiseCard {
-    /// Card expiration month (1-12)
-    @objc(expirationMonth) public var __expirationMonth: Int {
-        get {
-            return expirationMonth ?? NSNotFound
-        }
-        set {
-            if let validRange = Calendar.creditCardInformationCalendar.maximumRange(of: .month), validRange ~= newValue {
-                expirationMonth = newValue
-            } else {
-                expirationMonth = nil
-            }
-            
-        }
-    }
-    /// Card expiration year (in Gregrorian calendar)
-    @objc(expirationYear) public var __expirationYear: Int {
-        get {
-            return expirationYear ?? NSNotFound
-        }
-        set {
-            if newValue == NSNotFound {
-                expirationYear = nil
-            } else {
-                expirationYear = newValue
-            }
-        }
-    }
+    static let creditCardInformationCalendar: Calendar = Calendar(identifier: .gregorian)
 }
 

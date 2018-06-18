@@ -1,8 +1,10 @@
 import XCTest
 import OmiseSDK
 
+
+@available(*, deprecated)
 class OmiseTokenRequestTest: XCTestCase {
-    private let publicKey = "pkey_test_543ehdmlevzpxuqkqhu"
+    private let publicKey = "pkey_test_58wfnlwoxz1tbkdd993"
     private let timeout: TimeInterval = 15.0
     
     var testClient: OmiseSDKClient {
@@ -14,7 +16,7 @@ class OmiseTokenRequestTest: XCTestCase {
             name: "JOHN DOE",
             number: "4242424242424242",
             expirationMonth: 11,
-            expirationYear: 2016,
+            expirationYear: 2020,
             securityCode: "123"
         )
     }
@@ -24,7 +26,7 @@ class OmiseTokenRequestTest: XCTestCase {
             name: "JOHN DOE",
             number: "42424242424242421111", // invalid number
             expirationMonth: 11,
-            expirationYear: 2016,
+            expirationYear: 2020,
             securityCode: "123",
             city: nil,
             postalCode: nil

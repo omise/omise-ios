@@ -3,7 +3,7 @@ import XCTest
 
 extension XCTestCase {
     static func fixturesDataFor(_ filename: String) -> Data {
-        let bundle = Bundle(for: OmiseTokenRequestTest.self)
+        let bundle = Bundle(for: ClientTestCase.self)
         let path = bundle.url(forResource: "Fixtures/objects/\(filename)", withExtension: "json")!
         let data = try! Data(contentsOf: path)
         

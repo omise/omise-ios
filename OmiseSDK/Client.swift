@@ -96,7 +96,8 @@ extension Client {
                 }
                 
                 do {
-                    return callback(.fail(try OmiseJsonParser.parseError(from: data)))
+                    let decoder = makeJSONDecoder()
+                    return callback(.fail(try decoder.decode(OmiseError.self, from: data)))
                 } catch let err {
                     let error = OmiseError.unexpected(message: "error response with invalid JSON", underlying: err)
                     return callback(.fail(error))
@@ -129,8 +130,9 @@ extension Client {
 // MARK: - Constants
 extension Client {
     static let version: String = {
-        let bundle = Bundle(for: OmiseSDKClient.self)
-        return bundle.infoDictionary?["CFBundleShortVersionString"] as? String ?? "(n/a)"
+        let bundle = Bundle(identifier: "co.omise.OmiseSDK")
+        assert(bundle != nil)
+        return bundle?.infoDictionary?["CFBundleShortVersionString"] as? String ?? "(n/a)"
     }()
     
     static let currentPlatform: String = ProcessInfo.processInfo.operatingSystemVersionString

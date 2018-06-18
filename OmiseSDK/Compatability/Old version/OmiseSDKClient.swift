@@ -1,26 +1,24 @@
 import Foundation
-import UIKit
 
 
 /// Client object as the main entry point for performing Omise API calls.
+@available(*, deprecated, message: "Use the new `Client` type. This class will be removed in the future released", renamed: "Client")
 @objc(OMSSDKClient) public class OmiseSDKClient: NSObject {
-    let session: URLSession
-    let queue: OperationQueue
-    let publicKey: String
+    var client: Client
     
-    let version: String = {
-        let bundle = Bundle(for: OmiseSDKClient.self)
-        return bundle.infoDictionary?["CFBundleShortVersionString"] as? String ?? "(n/a)"
-    }()
+    var session: URLSession {
+        return client.session
+    }
+    var queue: OperationQueue {
+        return client.queue
+    }
     
-    let currentPlatform: String = ProcessInfo.processInfo.operatingSystemVersionString
+    @objc public var publicKey: String {
+        return client.publicKey
+    }
     
-    let currentDevice: String = UIDevice.current.model
-    
-    var userAgent: String {
-        return "OmiseIOSSDK/\(version) " +
-            "iOS/\(currentPlatform) " +
-            "Apple/\(currentDevice)"
+    @objc public var userAgent: String {
+        return client.userAgent ?? Client.defaultUserAgent
     }
     
     /**
@@ -50,15 +48,7 @@ import UIKit
      - seealso: init(publicKey:)
      */
     @objc public init(publicKey: String, queue: OperationQueue, session: URLSession) {
-        self.queue = queue
-        self.session = session
-        
-        if !publicKey.hasPrefix("pkey_") {
-            sdkWarn("refusing to initialize sdk client with a non-public key.")
-            self.publicKey = ""
-        } else {
-            self.publicKey = publicKey
-        }
+        self.client = Client(publicKey: publicKey)
     }
     
     /**
@@ -69,11 +59,18 @@ import UIKit
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
     public func send(_ request: OmiseTokenRequest, callback: OmiseTokenRequest.Callback?) {
-        _ = request.start(with: self) { (result) in
-            DispatchQueue.main.async(execute: { 
-                callback?(result)
+        _ = client.sendRequest(request.request, completionHandler: { (result) in
+            DispatchQueue.main.async(execute: {
+                let tokenRequestResult: OmiseTokenRequestResult
+                switch result {
+                case .success(let token):
+                    tokenRequestResult = .succeed(token: OmiseToken(token: token))
+                case .fail(let error):
+                    tokenRequestResult = .fail(error: error)
+                }
+                callback?(tokenRequestResult)
             })
-        }
+        })
     }
     
     /**

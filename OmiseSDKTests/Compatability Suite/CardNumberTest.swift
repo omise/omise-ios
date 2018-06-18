@@ -2,7 +2,8 @@ import Foundation
 import OmiseSDK
 import XCTest
 
-// TODO: More extensive tests.
+
+@available(*, deprecated)
 class CardNumberTest: XCTestCase {
     func testNormalize() {
         let tests: [String: String] = [
@@ -46,3 +47,4 @@ class CardNumberTest: XCTestCase {
         XCTAssertFalse(CardNumber.validate("1234567812345678"))
     }
 }
+

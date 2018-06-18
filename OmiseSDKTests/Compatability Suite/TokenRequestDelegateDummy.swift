@@ -1,6 +1,8 @@
 import XCTest
 import OmiseSDK
 
+
+@available(*, deprecated)
 class TokenRequestDelegateDummy: OmiseTokenRequestDelegate {
     var request: OmiseTokenRequest? = nil
     var token: OmiseToken? = nil

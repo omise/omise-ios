@@ -10,15 +10,13 @@
 		14ACEF831D02D641001C5319 /* CardExpiryDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACEF821D02D641001C5319 /* CardExpiryDatePicker.swift */; };
 		2220F1A91D0FEE85008CD89F /* OmiseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A31D0FEE85008CD89F /* OmiseCard.swift */; };
 		2220F1AA1D0FEE85008CD89F /* OmiseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A41D0FEE85008CD89F /* OmiseError.swift */; };
-		2220F1AB1D0FEE85008CD89F /* OmiseJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A51D0FEE85008CD89F /* OmiseJsonParser.swift */; };
 		2220F1AC1D0FEE85008CD89F /* OmiseSDKClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A61D0FEE85008CD89F /* OmiseSDKClient.swift */; };
 		2220F1AD1D0FEE85008CD89F /* OmiseToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A71D0FEE85008CD89F /* OmiseToken.swift */; };
 		2225B3541D0FDD63003EB396 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2225B3531D0FDD63003EB396 /* Assets.xcassets */; };
 		22445FFC1CF41DD300801D0F /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22445FFB1CF41DD300801D0F /* Globals.swift */; };
-		224460041CF43A1200801D0F /* SDKTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225931561CE4745200841B86 /* SDKTestCase.swift */; };
-		224460051CF43A1500801D0F /* CardNumberTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225931541CE4743A00841B86 /* CardNumberTest.swift */; };
-		224460081CF43FF000801D0F /* OmiseJsonParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224460071CF43FF000801D0F /* OmiseJsonParserTest.swift */; };
-		2244600A1CF441DC00801D0F /* TokenRequestDelegateDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224460091CF441DC00801D0F /* TokenRequestDelegateDummy.swift */; };
+		224460041CF43A1200801D0F /* SDKTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225931561CE4745200841B86 /* SDKTestCase.swift */; settings = {COMPILER_FLAGS = "-Wnodeprecated-declarations"; }; };
+		224460051CF43A1500801D0F /* CardNumberTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225931541CE4743A00841B86 /* CardNumberTest.swift */; settings = {COMPILER_FLAGS = "-Wnodeprecated-declarations"; }; };
+		2244600A1CF441DC00801D0F /* TokenRequestDelegateDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224460091CF441DC00801D0F /* TokenRequestDelegateDummy.swift */; settings = {COMPILER_FLAGS = "-Wnodeprecated-declarations"; }; };
 		224E44EA1D0EBF0D00E558E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224E44EC1D0EBF0D00E558E3 /* Main.storyboard */; };
 		224E44ED1D0EBF1200E558E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224E44EF1D0EBF1200E558E3 /* LaunchScreen.storyboard */; };
 		2259311C1CE3210700841B86 /* OmiseSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 2259311B1CE3210700841B86 /* OmiseSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -72,7 +70,6 @@
 		8A1F39151D61C8B500698781 /* OmiseFormAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E131731D1809E900E63E18 /* OmiseFormAccessoryView.swift */; };
 		8A1F39161D61C8B500698781 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22445FFB1CF41DD300801D0F /* Globals.swift */; };
 		8A1F39171D61C8B500698781 /* OmiseTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */; };
-		8A1F39181D61C8B500698781 /* OmiseJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A51D0FEE85008CD89F /* OmiseJsonParser.swift */; };
 		8A1F39191D61C8B500698781 /* CardNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062C1CFEA7E4004BCF51 /* CardNumberTextField.swift */; };
 		8A1F391A1D61C8B500698781 /* CardNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314F1CE46F7F00841B86 /* CardNumber.swift */; };
 		8A1F391B1D61C8B500698781 /* CardBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314D1CE46E5700841B86 /* CardBrand.swift */; };
@@ -161,13 +158,11 @@
 		14ACEF821D02D641001C5319 /* CardExpiryDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardExpiryDatePicker.swift; sourceTree = "<group>"; };
 		2220F1A31D0FEE85008CD89F /* OmiseCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseCard.swift; sourceTree = "<group>"; };
 		2220F1A41D0FEE85008CD89F /* OmiseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseError.swift; sourceTree = "<group>"; };
-		2220F1A51D0FEE85008CD89F /* OmiseJsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseJsonParser.swift; sourceTree = "<group>"; };
 		2220F1A61D0FEE85008CD89F /* OmiseSDKClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseSDKClient.swift; sourceTree = "<group>"; };
 		2220F1A71D0FEE85008CD89F /* OmiseToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseToken.swift; sourceTree = "<group>"; };
 		2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseTokenRequest.swift; sourceTree = "<group>"; };
 		2225B3531D0FDD63003EB396 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22445FFB1CF41DD300801D0F /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
-		224460071CF43FF000801D0F /* OmiseJsonParserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseJsonParserTest.swift; sourceTree = "<group>"; };
 		224460091CF441DC00801D0F /* TokenRequestDelegateDummy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenRequestDelegateDummy.swift; sourceTree = "<group>"; };
 		224E44EB1D0EBF0D00E558E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		224E44EE1D0EBF1200E558E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -354,6 +349,16 @@
 			path = ExampleApp;
 			sourceTree = "<group>";
 		};
+		8A01F77E20D7D327003FC11E /* Old version */ = {
+			isa = PBXGroup;
+			children = (
+				2259314F1CE46F7F00841B86 /* CardNumber.swift */,
+				2220F1A61D0FEE85008CD89F /* OmiseSDKClient.swift */,
+				2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */,
+			);
+			path = "Old version";
+			sourceTree = "<group>";
+		};
 		8A0927841D535548008D393F /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,7 +431,6 @@
 			isa = PBXGroup;
 			children = (
 				225931541CE4743A00841B86 /* CardNumberTest.swift */,
-				224460071CF43FF000801D0F /* OmiseJsonParserTest.swift */,
 				987A03201CE5B7D70035417A /* OmiseTokenRequestTest.swift */,
 				224460091CF441DC00801D0F /* TokenRequestDelegateDummy.swift */,
 			);
@@ -436,12 +440,9 @@
 		8AD0609120B550B90074894E /* Compatability */ = {
 			isa = PBXGroup;
 			children = (
-				2259314F1CE46F7F00841B86 /* CardNumber.swift */,
+				8A01F77E20D7D327003FC11E /* Old version */,
 				2220F1A31D0FEE85008CD89F /* OmiseCard.swift */,
-				2220F1A51D0FEE85008CD89F /* OmiseJsonParser.swift */,
-				2220F1A61D0FEE85008CD89F /* OmiseSDKClient.swift */,
 				2220F1A71D0FEE85008CD89F /* OmiseToken.swift */,
-				2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */,
 			);
 			path = Compatability;
 			sourceTree = "<group>";
@@ -729,7 +730,6 @@
 				8ADAA9A520B6C0AF00DD7CCF /* Currency.swift in Sources */,
 				8A4F7CB920A9C0FD001C441A /* Object.swift in Sources */,
 				8AD0609620B55E610074894E /* Client.swift in Sources */,
-				2220F1AB1D0FEE85008CD89F /* OmiseJsonParser.swift in Sources */,
 				986406321CFEA7E4004BCF51 /* CardNumberTextField.swift in Sources */,
 				225931501CE46F7F00841B86 /* CardNumber.swift in Sources */,
 				2259314E1CE46E5700841B86 /* CardBrand.swift in Sources */,
@@ -773,7 +773,6 @@
 				8A188BB11D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift in Sources */,
 				8A1F390A1D61C8B500698781 /* OmiseTextField.swift in Sources */,
 				8A1F39071D61C8B500698781 /* FormHeaderCell.swift in Sources */,
-				8A1F39181D61C8B500698781 /* OmiseJsonParser.swift in Sources */,
 				8A1F390B1D61C8B500698781 /* OmiseToken.swift in Sources */,
 				8A1F39101D61C8B500698781 /* SecureCodeFormCell.swift in Sources */,
 				8AD0609720B55E610074894E /* Client.swift in Sources */,
@@ -793,7 +792,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AFE10BB20B69B39008E741D /* ClientTestCase.swift in Sources */,
-				224460081CF43FF000801D0F /* OmiseJsonParserTest.swift in Sources */,
 				224460041CF43A1200801D0F /* SDKTestCase.swift in Sources */,
 				2244600A1CF441DC00801D0F /* TokenRequestDelegateDummy.swift in Sources */,
 				224460051CF43A1500801D0F /* CardNumberTest.swift in Sources */,

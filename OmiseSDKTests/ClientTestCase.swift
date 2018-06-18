@@ -8,7 +8,7 @@ class ClientTestCase: XCTestCase {
     var testClient: Client!
     override func setUp() {
         super.setUp()
-        testClient = Client(publicKey: "pkey_test_12345")
+        testClient = Client(publicKey: "pkey_test_58wfnlwoxz1tbkdd993")
     }
     
     override func tearDown() {
@@ -18,7 +18,7 @@ class ClientTestCase: XCTestCase {
     
     func testValidRequestWithCallback() {
         let expectation = self.expectation(description: "Tokenized Reqeust with a valid token data")
-        let task = testClient.requestTask(with: ClientTestCase.makeValidTokenRequest()) { (result) in
+        let task = testClient.sendRequest(ClientTestCase.makeValidTokenRequest()) { (result) in
             defer { expectation.fulfill() }
             switch result {
             case .success(let token):
@@ -42,7 +42,7 @@ class ClientTestCase: XCTestCase {
     
     func testInvalidRequestWithCallback() {
         let expectation = self.expectation(description: "Tokenized Reqeust with an invalid token data")
-        let task = testClient.requestTask(with: ClientTestCase.makeInvalidTokenRequest()) { (result) in
+        let task = testClient.sendRequest(ClientTestCase.makeInvalidTokenRequest()) { (result) in
             defer { expectation.fulfill() }
             if case .success = result {
                 XCTFail("Expected failed request")
