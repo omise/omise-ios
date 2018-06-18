@@ -29,10 +29,16 @@ public class Client {
     
     public func requestTask<T: Object>(with request: Request<T>, completionHandler: Request<T>.Callback?) -> RequestTask<T> {
         let dataTask = session.dataTask(with: buildURLRequestFor(request), completionHandler: Client.completeRequest(completionHandler))
-        defer {
-            dataTask.resume()
-        }
         return RequestTask(request: request, dataTask: dataTask)
+    }
+    
+    @discardableResult
+    public func sendRequest<T: Object>(_ request: Request<T>, completionHandler: Request<T>.Callback?) -> RequestTask<T> {
+        let task = requestTask(with: request, completionHandler: completionHandler)
+        defer {
+            task.resume()
+        }
+        return task
     }
 }
 

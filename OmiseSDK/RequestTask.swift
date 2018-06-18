@@ -10,5 +10,9 @@ public class RequestTask<T: Object> {
         self.request = request
         self.dataTask = dataTask
     }
+    
+    public func resume() {
+        dataTask.resume()
+    }
 }
 
