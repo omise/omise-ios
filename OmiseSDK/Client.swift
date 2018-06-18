@@ -9,8 +9,6 @@ public class Client {
     var userAgent: String?
     let sessionDelegate = Client.PublicKeyPinningSessionDelegate()
     
-    public typealias Callback<T: Object> = (RequestResult<T>) -> ()
-
     public init(publicKey: String) {
         let queue = OperationQueue()
         if publicKey.hasPrefix("pkey_") {
@@ -29,14 +27,13 @@ public class Client {
         )
     }
     
-    public func requestTask<T: Object>(with request: Request<T>, completionHandler: Callback<T>?) -> RequestTask<T> {
+    public func requestTask<T: Object>(with request: Request<T>, completionHandler: Request<T>.Callback?) -> RequestTask<T> {
         let dataTask = session.dataTask(with: buildURLRequestFor(request), completionHandler: Client.completeRequest(completionHandler))
         defer {
             dataTask.resume()
         }
         return RequestTask(request: request, dataTask: dataTask)
     }
-    
 }
 
 
@@ -72,7 +69,7 @@ extension Client {
         return decoder
     }
     
-    private static func completeRequest<T: Object>(_ callback: Callback<T>?) -> (Data?, URLResponse?, Error?) -> () {
+    private static func completeRequest<T: Object>(_ callback: Request<T>.Callback?) -> (Data?, URLResponse?, Error?) -> () {
         return { (data: Data?, response: URLResponse?, error: Error?) -> () in
             guard let callback = callback else { return } // nobody around to hear the leaf falls
             
@@ -131,7 +128,6 @@ extension Client {
     }()
     
     static let currentPlatform: String = ProcessInfo.processInfo.operatingSystemVersionString
-    
     static let currentDevice: String = UIDevice.current.model
     
     static let jsonDateFormatter: DateFormatter = {
@@ -147,7 +143,7 @@ extension Client {
         OmiseIOSSDK/\(version) \
         iOS/\(currentPlatform) \
         Apple/\(currentDevice)
-        """
+        """ // OmiseIOSSDK/3.0.0 iOS/12.0.0 Apple/iPhone
     }
 }
 
