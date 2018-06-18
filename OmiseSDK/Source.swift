@@ -19,6 +19,12 @@ public struct CreateSourceParameter: Encodable {
     public let type: SourceType
     public let amount: Int64
     public let currency: Currency
+    
+    public init(type: SourceType, amount: Int64, currency: Currency) {
+        self.type = type
+        self.amount = amount
+        self.currency = currency
+    }
 }
 
 public enum Flow: Decodable, Equatable {
@@ -107,3 +113,14 @@ public enum SourceType: Codable, Equatable {
         try container.encode(value)
     }
 }
+
+
+extension Request where T == Source {
+    public init (sourceType: SourceType, amount: Int64, currency: Currency) {
+        self.init(parameter: CreateSourceParameter(
+            type: sourceType,
+            amount: amount, currency: currency)
+        )
+    }
+}
+

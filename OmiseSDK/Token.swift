@@ -138,7 +138,18 @@ public struct Card: Decodable {
         case expirationYear = "expiration_year"
         case securityCodeCheck = "security_code_check"
     }
-    
 }
 
+
+extension Request where T == Token {
+    public init (name: String, number: String, expirationMonth: Int, expirationYear: Int,
+                 securityCode: String, city: String? = nil, postalCode: String? = nil) {
+        self.init(parameter: CreateTokenParameter(
+            name: name, number: number,
+            expirationMonth: expirationMonth, expirationYear: expirationYear,
+            securityCode: securityCode,
+            city: city, postalCode: postalCode
+        ))
+    }
+}
 
