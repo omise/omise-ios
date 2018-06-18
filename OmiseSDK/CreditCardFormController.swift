@@ -187,7 +187,7 @@ public class CreditCardFormController: UITableViewController {
         }
         
         startActivityIndicator()
-        let request = OmiseTokenRequest(
+        let request = Request<Token>(
             name: cardNameCell?.value ?? "",
             number: cardNumberCell?.value ?? "",
             expirationMonth: expiryDateCell?.month ?? 0,
@@ -195,18 +195,18 @@ public class CreditCardFormController: UITableViewController {
             securityCode: secureCodeCell?.value ?? ""
         )
         
-        let client = OmiseSDKClient(publicKey: publicKey)
-        client.send(request) { [weak self] (result) in
+        let client = Client(publicKey: publicKey)
+        client.sendRequest(request, completionHandler: { [weak self] (result) in
             guard let s = self else { return }
             
             s.stopActivityIndicator()
             switch result {
-            case let .succeed(token):
-                s.delegate?.creditCardForm(s, didSucceedWithToken: token)
+            case let .success(token):
+                s.delegate?.creditCardForm(s, didSucceedWithToken: OmiseToken(token: token))
             case let .fail(err):
                 s.handleError(err)
             }
-        }
+        })
     }
     
     private func startActivityIndicator() {
