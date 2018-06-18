@@ -19,5 +19,17 @@ import Foundation
     @objc public var card: OmiseCard?
     /// Token's creation time.
     @objc public var created: Date?
+
+    init(token: Token) {
+        self.tokenId = token.id
+        self.livemode = token.isLiveMode
+        self.location = token.location
+        self.used = token.isUsed
+        self.card = OmiseCard(card: token.card)
+        self.created = token.createdDate
+    }
+    
+    public override init() {}
 }
+
 

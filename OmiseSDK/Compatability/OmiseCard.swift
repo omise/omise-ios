@@ -38,13 +38,29 @@ import Foundation
     @objc public var securityCodeCheck: Bool = false
     /// Card's creation time.
     @objc public var created: Date?
+    
+    override init() {}
+    init(card: Card) {
+        self.cardId = card.id
+        self.livemode = card.isLiveMode
+        self.country = card.countryCode
+        self.city = card.city
+        self.postalCode = card.postalCode
+        self.financing = card.financing
+        self.lastDigits = card.lastDigits
+        self.brand = card.brand
+        self.expirationYear = card.expirationYear
+        self.expirationMonth = card.expirationMonth
+        self.financing = card.financing
+        self.name = card.name
+        self.securityCodeCheck = card.securityCodeCheck
+        self.created = card.createdDate
+    }
+
 }
 
 extension Calendar {
-    static let creditCardInformationCalendar: Calendar = {
-        return Calendar(identifier: .gregorian)
-    }()
-}
+    static let creditCardInformationCalendar: Calendar = Calendar(identifier: .gregorian)}
 
 
 extension OmiseCard {
