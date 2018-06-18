@@ -62,7 +62,7 @@ import UIKit
         placeholder = "MM/YY"
         let expiryDatePicker = CardExpiryDatePicker() // TODO: Use normal picker delegate.
         expiryDatePicker.onDateSelected = { [weak self] (month: Int, year: Int) in
-            self?.text = String(format: "%02d/%d", month, year-2000)
+            self?.text = String(format: "%02d/%d", month, year - 2000)
         }
         inputView = expiryDatePicker
     }

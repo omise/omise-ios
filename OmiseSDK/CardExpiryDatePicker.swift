@@ -69,7 +69,7 @@ extension CardExpiryDatePicker: UIPickerViewDelegate {
         case CardExpiryDatePicker.monthPicker:
             return months[row]
         case CardExpiryDatePicker.yearPicker:
-            return "\(years[row])"
+            return String(years[row])
         default:
             return nil
         }

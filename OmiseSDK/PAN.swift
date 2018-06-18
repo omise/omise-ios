@@ -17,8 +17,6 @@ public struct PAN {
             .first
     }
     
-    
-    
     public init(_ pan: String) {
         self.pan = pan
     }

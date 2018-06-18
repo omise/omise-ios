@@ -27,7 +27,6 @@ import UIKit
     func setup() {
         keyboardType = .default
         
-        // TODO: Localize place holder
         placeholder = "John Doe"
     }
 }
