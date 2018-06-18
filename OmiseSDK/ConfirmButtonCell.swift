@@ -8,9 +8,7 @@ class ConfirmButtonCell: UITableViewCell {
         get { return super.isUserInteractionEnabled }
         set {
             super.isUserInteractionEnabled = newValue
-            confirmPaymentLabel.textColor = newValue ?
-                UIColor(red: 74/255, green: 144/255, blue: 226/255, alpha: 1.0) :
-                UIColor.lightGray
+            confirmPaymentLabel.textColor = tintColor
         }
     }
     
@@ -30,5 +28,10 @@ class ConfirmButtonCell: UITableViewCell {
     func stopActivityIndicator() {
         confirmPaymentLabel.isHidden = false
         activityIndicator.stopAnimating()
+    }
+    
+    override func tintColorDidChange() {
+        super.tintColorDidChange()
+        confirmPaymentLabel.textColor = tintColor
     }
 }
