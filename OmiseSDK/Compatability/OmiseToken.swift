@@ -5,7 +5,7 @@ import Foundation
  Represents Omise card tokens.
  - seealso: [Tokens API](https://www.omise.co/tokens-api)
  */
-@objc(OMSToken) public class OmiseToken: NSObject {
+@objc(OMSToken) public class __OmiseToken: NSObject {
     private let token: Token
     /// Token's ID.
     @objc public var tokenId: String? {
@@ -25,17 +25,16 @@ import Foundation
         return token.isUsed
     }
     /// Card information used to generate this token.
-    @objc public var card: OmiseCard? {
-        return OmiseCard(card: token.card)
+    @objc public var card: __OmiseCard? {
+        return __OmiseCard(card: token.card)
     }
     /// Token's creation time.
     @objc public var created: Date? {
         return token.createdDate
     }
-
+    
     init(token: Token) {
         self.token = token
     }
 }
-
 

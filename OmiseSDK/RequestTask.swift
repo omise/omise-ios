@@ -2,7 +2,6 @@ import Foundation
 
 
 public class RequestTask<T: Object> {
-    
     public let request: Request<T>
     let dataTask: URLSessionDataTask
     

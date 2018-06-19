@@ -53,7 +53,7 @@ class ProductDetailViewController: UIViewController {
 }
 
 extension ProductDetailViewController: CreditCardFormDelegate {
-    func creditCardForm(_ controller: CreditCardFormController, didSucceedWithToken token: OmiseToken) {
+    func creditCardForm(_ controller: CreditCardFormController, didSucceedWithToken token: __OmiseToken) {
         dismissCreditCardFormWithCompletion({
             self.performSegue(withIdentifier: "CompletePayment", sender: self)
         })

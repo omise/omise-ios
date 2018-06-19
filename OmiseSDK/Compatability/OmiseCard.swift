@@ -5,7 +5,7 @@ import Foundation
  Represents saved credit card information.
  - seealso: [Cards API](https://www.omise.co/cards-api)
  */
-@objc(OMSCard) public class OmiseCard: NSObject {
+@objc(OMSCard) public class __OmiseCard: NSObject {
     private let card: Card
     /// Card's ID.
     @objc public var cardId: String? {
@@ -70,9 +70,5 @@ import Foundation
         self.card = card
     }
 
-}
-
-extension Calendar {
-    static let creditCardInformationCalendar: Calendar = Calendar(identifier: .gregorian)
 }
 

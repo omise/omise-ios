@@ -141,6 +141,17 @@ public struct Card: Decodable {
 }
 
 
+extension Calendar {
+    public static let creditCardInformationCalendar: Calendar = Calendar(identifier: .gregorian)
+}
+
+extension NSCalendar {
+    @objc(creditCardInformationCalendar) public static var __creditCardInformationCalendar: Calendar {
+        return Calendar(identifier: .gregorian)
+    }
+}
+
+
 extension Request where T == Token {
     public init (name: String, number: String, expirationMonth: Int, expirationYear: Int,
                  securityCode: String, city: String? = nil, postalCode: String? = nil) {

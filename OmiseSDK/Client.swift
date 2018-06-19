@@ -1,7 +1,7 @@
 import Foundation
 
 
-public class Client {
+@objc(OMSSDKClient) public class Client: NSObject {
     let session: URLSession
     let queue: OperationQueue
     let publicKey: String
@@ -9,8 +9,7 @@ public class Client {
     var userAgent: String?
     let sessionDelegate = Client.PublicKeyPinningSessionDelegate()
     
-    public init(publicKey: String) {
-        let queue = OperationQueue()
+    @objc public init(publicKey: String, queue: OperationQueue) {
         if publicKey.hasPrefix("pkey_") {
             self.publicKey = publicKey
         } else {
@@ -25,6 +24,10 @@ public class Client {
             delegate: sessionDelegate,
             delegateQueue: queue
         )
+    }
+    
+    @objc public convenience init(publicKey: String) {
+        self.init(publicKey: publicKey, queue: OperationQueue())
     }
     
     public func requestTask<T: Object>(with request: Request<T>, completionHandler: Request<T>.Callback?) -> RequestTask<T> {

@@ -7,20 +7,13 @@ public protocol OmiseTokenRequestDelegate {
     /// Delegate method for receiving token data when token request succeeds.
     /// - parameter request: Original `OmiseTokenRequest` that was sent.
     /// - parameter token: `OmiseToken` instance created from supplied card data.
-    func tokenRequest(_ request: OmiseTokenRequest, didSucceedWithToken token: OmiseToken)
+    func tokenRequest(_ request: OmiseTokenRequest, didSucceedWithToken token: __OmiseToken)
     
     /// Delegate method for receiving error information when token request failed.
     /// - parameter request: Original `OmiseTokenRequest` that was sent.
     /// - parameter error: The error that occured during the tokenization request.
     func tokenRequest(_ request: OmiseTokenRequest, didFailWithError error: Error)
 }
-
-@available(*, deprecated, message: "Use the completion handler pattern in the `Client` instead. This protocol will be removed in the future released")
-@objc public protocol OMSTokenRequestDelegate {
-    func tokenRequest(_ request: OmiseTokenRequest, didSucceedWithToken token: OmiseToken)
-    func tokenRequest(_ request: OmiseTokenRequest, didFailWithError error: NSError)
-}
-
 
 /// Contains result of a tokenization request call. `OmiseTokenRequestResult` is an
 /// enumeration consisting of two cases:
@@ -29,7 +22,7 @@ public protocol OmiseTokenRequestDelegate {
 @available(*, deprecated, message: "Use the new `RequestResult` type. This enum will be removed in the future released", renamed: "RequestResult")
 public enum OmiseTokenRequestResult {
     /// Tokenization is successful, this case has an associated `OmiseToken` value
-    case succeed(token: OmiseToken)
+    case succeed(token: __OmiseToken)
     /// Tokenization, this case has an associated `ErrorType` value.
     case fail(error: Error)
 }
@@ -40,7 +33,7 @@ public enum OmiseTokenRequestResult {
  - seealso: [Tokens API](https://www.omise.co/tokens-api)
  */
 @available(*, deprecated, message: "Use the new `Request<Token>` type. This class will be removed in the future released", renamed: "Request")
-@objc(OMSTokenRequest) public class OmiseTokenRequest: NSObject {
+public class OmiseTokenRequest: NSObject {
     
     let request: Request<Token>
   
@@ -95,7 +88,7 @@ public enum OmiseTokenRequestResult {
             let tokenRequestResult: OmiseTokenRequestResult
             switch result {
             case .success(let token):
-                tokenRequestResult = .succeed(token: OmiseToken(token: token))
+                tokenRequestResult = .succeed(token: __OmiseToken(token: token))
             case .fail(let error):
                 tokenRequestResult = .fail(error: error)
             }

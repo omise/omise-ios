@@ -7,9 +7,6 @@
 NSString * const _Nonnull  publicKey = @"pkey_test_58wfnlwoxz1tbkdd993";
 
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-
 @interface OMSOmiseClientTestCase : OMSSDKTestCase
 
 @property (nonatomic, nullable, strong) OMSSDKClient *testClient;
@@ -31,7 +28,7 @@ NSString * const _Nonnull  publicKey = @"pkey_test_58wfnlwoxz1tbkdd993";
     XCTestExpectation *expectation = [self expectationWithDescription:@"Async delegate callback"];
     OMSTokenRequestDelegateDummy *delegate = [[OMSTokenRequestDelegateDummy alloc] initWithExpectation:expectation];
     
-    [self.testClient sendRequest:[OMSOmiseClientTestCase createValidTestRequest] delegate:delegate];
+    [self.testClient sendTokenRequest:[OMSOmiseClientTestCase createValidTestRequest] delegate:delegate];
     [self waitForExpectationsWithTimeout:15.0 handler:^(NSError * _Nullable error) {
         XCTAssertNotNil(delegate.token);
         XCTAssertNotNil(delegate.request);
@@ -47,7 +44,7 @@ NSString * const _Nonnull  publicKey = @"pkey_test_58wfnlwoxz1tbkdd993";
     XCTestExpectation *expectation = [self expectationWithDescription:@"Async delegate callback"];
     OMSTokenRequestDelegateDummy *delegate = [[OMSTokenRequestDelegateDummy alloc] initWithExpectation:expectation];
 
-    [self.testClient sendRequest:[OMSOmiseClientTestCase createInvalidTestRequest] delegate:delegate];
+    [self.testClient sendTokenRequest:[OMSOmiseClientTestCase createInvalidTestRequest] delegate:delegate];
     [self waitForExpectationsWithTimeout:15.0 handler:^(NSError * _Nullable error) {
         XCTAssertNotNil(delegate.error);
         XCTAssertNotNil(delegate.request);
@@ -58,7 +55,7 @@ NSString * const _Nonnull  publicKey = @"pkey_test_58wfnlwoxz1tbkdd993";
 - (void)testRequestWithCallback {
     XCTestExpectation *expectation = [self expectationWithDescription:@"callback"];
     
-    [self.testClient sendRequest:[OMSOmiseClientTestCase createValidTestRequest] callback:^(OMSToken * _Nullable token, NSError * _Nullable error) {
+    [self.testClient sendTokenRequest:[OMSOmiseClientTestCase createValidTestRequest] callback:^(OMSToken * _Nullable token, NSError * _Nullable error) {
         XCTAssertNil(error);
         XCTAssertNotNil(token);
         
@@ -74,7 +71,7 @@ NSString * const _Nonnull  publicKey = @"pkey_test_58wfnlwoxz1tbkdd993";
 - (void)testBadRequestWithCallback {
     XCTestExpectation *expectation = [self expectationWithDescription:@"callback"];
     
-    [self.testClient sendRequest:[OMSOmiseClientTestCase createInvalidTestRequest] callback:^(OMSToken * _Nullable token, NSError * _Nullable error) {
+    [self.testClient sendTokenRequest:[OMSOmiseClientTestCase createInvalidTestRequest] callback:^(OMSToken * _Nullable token, NSError * _Nullable error) {
         XCTAssertNil(token);
         XCTAssertNotNil(error);
         
@@ -85,15 +82,18 @@ NSString * const _Nonnull  publicKey = @"pkey_test_58wfnlwoxz1tbkdd993";
 
 
 + (OMSTokenRequest *)createInvalidTestRequest {
-    return [[OMSTokenRequest alloc] initWithName:@"JOHN DOE" number:@"42424242424242421111" expirationMonth:11 expirationYear:2019 securityCode:@"123" city:nil postalCode:nil];
+    return [[OMSTokenRequest alloc] initWithName:@"JOHN DOE" number:@"42424242424242421111"
+                                 expirationMonth:6
+                                  expirationYear:[[NSCalendar creditCardInformationCalendar] component:NSCalendarUnitYear fromDate:[NSDate date]] + 1
+                                    securityCode:@"123" city:nil postalCode:nil];
 }
 
 + (OMSTokenRequest *)createValidTestRequest {
-    return [[OMSTokenRequest alloc] initWithName:@"JOHN DOE" number:@"4242424242424242" expirationMonth:11 expirationYear:2019 securityCode:@"123" city:nil postalCode:nil];
+    return [[OMSTokenRequest alloc] initWithName:@"JOHN DOE" number:@"4242424242424242"
+                                 expirationMonth:11
+                                  expirationYear:[[NSCalendar creditCardInformationCalendar] component:NSCalendarUnitYear fromDate:[NSDate date]] + 1
+                                    securityCode:@"123" city:nil postalCode:nil];
 }
 
 @end
-
-#pragma clang diagnostic pop
-
 

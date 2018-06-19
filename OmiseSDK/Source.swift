@@ -27,7 +27,7 @@ public struct CreateSourceParameter: Encodable {
     }
 }
 
-public enum Flow: Decodable, Equatable {
+public enum Flow: RawRepresentable, Decodable, Equatable {
     case redirect
     case offline
     case other(String)
@@ -35,18 +35,33 @@ public enum Flow: Decodable, Equatable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let flow = try container.decode(String.self)
-        switch flow {
+        self.init(rawValue: flow)!
+    }
+    
+    public typealias RawValue = String
+    public var rawValue: String {
+        switch self {
+        case .offline:
+            return "offline"
+        case .redirect:
+            return "redirect"
+        case .other(let value):
+            return value
+        }
+    }
+    public init?(rawValue: String) {
+        switch rawValue {
         case "redirect":
             self = .redirect
         case "offline":
             self = .offline
         default:
-            self = .other(flow)
+            self = .other(rawValue)
         }
     }
 }
 
-public enum SourceType: Codable, Equatable {
+public enum SourceType: RawRepresentable, Codable, Equatable {
     
     private static let internetBankingBAYValue = "internet_banking_bay"
     private static let internetBankingKTBValue = "internet_banking_ktb"
@@ -68,7 +83,18 @@ public enum SourceType: Codable, Equatable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let code = try container.decode(String.self)
-        switch code {
+        self.init(rawValue: code)!
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+    
+    public typealias RawValue = String
+    
+    public init?(rawValue: String) {
+        switch rawValue {
         case SourceType.internetBankingBAYValue:
             self = .internetBankingBAY
         case SourceType.internetBankingKTBValue:
@@ -84,11 +110,11 @@ public enum SourceType: Codable, Equatable {
         case SourceType.barcodeAlipayValue:
             self = .barcodeAlipay
         default:
-            self = .other(code)
+            self = .other(rawValue)
         }
     }
     
-    public func encode(to encoder: Encoder) throws {
+    public var rawValue: String {
         let value: String
         switch self {
         case .internetBankingBAY:
@@ -108,9 +134,7 @@ public enum SourceType: Codable, Equatable {
         case .other(let sourceValue):
             value = sourceValue
         }
-        
-        var container = encoder.singleValueContainer()
-        try container.encode(value)
+        return value
     }
 }
 

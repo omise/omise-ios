@@ -3,7 +3,7 @@ import Foundation
 
 /// Client object as the main entry point for performing Omise API calls.
 @available(*, deprecated, message: "Use the new `Client` type. This class will be removed in the future released", renamed: "Client")
-@objc(OMSSDKClient) public class OmiseSDKClient: NSObject {
+public class OmiseSDKClient: NSObject {
     var client: Client
     
     var session: URLSession {
@@ -28,7 +28,7 @@ import Foundation
          `NSURLSessionConfiguration`.
      - seealso: init(publicKey:queue:session:)
      */
-    @objc public convenience init(publicKey: String) {
+    public convenience init(publicKey: String) {
         let queue = OperationQueue()
         let session = URLSession(
             configuration: URLSessionConfiguration.ephemeral,
@@ -47,7 +47,7 @@ import Foundation
      - parameter session: `NSURLSession` for performing API calls.
      - seealso: init(publicKey:)
      */
-    @objc public init(publicKey: String, queue: OperationQueue, session: URLSession) {
+    public init(publicKey: String, queue: OperationQueue, session: URLSession) {
         self.client = Client(publicKey: publicKey)
     }
     
@@ -60,47 +60,17 @@ import Foundation
      */
     public func send(_ request: OmiseTokenRequest, callback: OmiseTokenRequest.Callback?) {
         _ = client.sendRequest(request.request, completionHandler: { (result) in
-            DispatchQueue.main.async(execute: {
+            DispatchQueue.main.async {
                 let tokenRequestResult: OmiseTokenRequestResult
                 switch result {
                 case .success(let token):
-                    tokenRequestResult = .succeed(token: OmiseToken(token: token))
+                    tokenRequestResult = .succeed(token: __OmiseToken(token: token))
                 case .fail(let error):
                     tokenRequestResult = .fail(error: error)
                 }
                 callback?(tokenRequestResult)
-            })
+            }
         })
-    }
-    
-    /**
-     Send a tokenization request to the Omise API.
-     - parameter request: `OmiseTokenRequest` instance.
-     - parameter callback: Completion callback that will be called when the request is finished.
-     - seealso: OmiseTokenRequest
-     - seealso: [Tokens API](https://www.omise.co/tokens-api)
-     */
-    @objc(sendRequest:callback:) public func __sendRequest(_ request: OmiseTokenRequest, callback: ((OmiseToken?, NSError?) -> ())?) {
-        _ = request.start(with: self) { (result) in
-            DispatchQueue.main.async(execute: {
-                let token: OmiseToken?
-                let error: NSError?
-                switch result {
-                case .succeed(token: let resultToken):
-                    token = resultToken
-                    error = nil
-                case .fail(error: let requestError):
-                    if let requestError = requestError as? OmiseError {
-                        error = requestError as NSError
-                    } else {
-                        error = requestError as NSError
-                    }
-                    token = nil
-                }
-                
-                callback?(token, error)
-            })
-        }
     }
     
     /**
@@ -118,26 +88,6 @@ import Foundation
                 delegate?.tokenRequest(request, didSucceedWithToken: token)
             case let .fail(err):
                 delegate?.tokenRequest(request, didFailWithError: err)
-            }
-        }
-    }
-    
-    /**
-     Send a tokenization request to the Omise API
-     - parameter request: `OmiseTokenRequest` instance.
-     - parameter delegate: An object that implements `OmiseTokenRequestDelegate` where
-         request events delegate methods will be called on.
-     - seealso: OmiseTokenRequest
-     - seealso: [Tokens API](https://www.omise.co/tokens-api)
-     */
-    @objc(sendRequest:delegate:) public func __sendRequest(_ request: OmiseTokenRequest, delegate: OMSTokenRequestDelegate?) {
-        send(request) { (result) in
-            switch result {
-            case let .succeed(token):
-                delegate?.tokenRequest(request, didSucceedWithToken: token)
-            case let .fail(err):
-                let error = err as NSError
-                delegate?.tokenRequest(request, didFailWithError: error)
             }
         }
     }

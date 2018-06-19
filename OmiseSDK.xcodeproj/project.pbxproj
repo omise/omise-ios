@@ -30,6 +30,14 @@
 		8A01F78120D8DB7C003FC11E /* OMSOmiseClientTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78020D8DB7C003FC11E /* OMSOmiseClientTestCase.m */; };
 		8A01F78420D8DD60003FC11E /* OMSSDKTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78320D8DD60003FC11E /* OMSSDKTestCase.m */; };
 		8A01F78920D8E101003FC11E /* OMSTokenRequestDelegateDummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78820D8E101003FC11E /* OMSTokenRequestDelegateDummy.m */; };
+		8A01F78B20D90EC5003FC11E /* Client+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */; };
+		8A01F78C20D90EC5003FC11E /* Client+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */; };
+		8A01F78E20D91091003FC11E /* OMSTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78D20D91091003FC11E /* OMSTokenRequest.swift */; };
+		8A01F78F20D91091003FC11E /* OMSTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78D20D91091003FC11E /* OMSTokenRequest.swift */; };
+		8A01F79120D91356003FC11E /* OMSSourceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F79020D91356003FC11E /* OMSSourceRequest.swift */; };
+		8A01F79220D91356003FC11E /* OMSSourceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F79020D91356003FC11E /* OMSSourceRequest.swift */; };
+		8A01F79420D914A4003FC11E /* OmiseSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F79320D914A4003FC11E /* OmiseSource.swift */; };
+		8A01F79520D914A4003FC11E /* OmiseSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F79320D914A4003FC11E /* OmiseSource.swift */; };
 		8A188BB01D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A188BAF1D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift */; };
 		8A188BB11D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A188BAF1D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift */; };
 		8A1D4C661D51B72200C7837C /* CreditCardFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1D4C651D51B72200C7837C /* CreditCardFormController.swift */; };
@@ -190,6 +198,10 @@
 		8A01F78320D8DD60003FC11E /* OMSSDKTestCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSSDKTestCase.m; sourceTree = "<group>"; };
 		8A01F78720D8E101003FC11E /* OMSTokenRequestDelegateDummy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OMSTokenRequestDelegateDummy.h; sourceTree = "<group>"; };
 		8A01F78820D8E101003FC11E /* OMSTokenRequestDelegateDummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSTokenRequestDelegateDummy.m; sourceTree = "<group>"; };
+		8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+ObjC.swift"; sourceTree = "<group>"; };
+		8A01F78D20D91091003FC11E /* OMSTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMSTokenRequest.swift; sourceTree = "<group>"; };
+		8A01F79020D91356003FC11E /* OMSSourceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMSSourceRequest.swift; sourceTree = "<group>"; };
+		8A01F79320D914A4003FC11E /* OmiseSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseSource.swift; sourceTree = "<group>"; };
 		8A0927891D535548008D393F /* CardIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIO.h; sourceTree = "<group>"; };
 		8A09278A1D535548008D393F /* CardIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardIO.m; sourceTree = "<group>"; };
 		8A09278B1D535548008D393F /* CardIOCreditCardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOCreditCardInfo.h; sourceTree = "<group>"; };
@@ -321,7 +333,6 @@
 		2259311A1CE3210700841B86 /* OmiseSDK */ = {
 			isa = PBXGroup;
 			children = (
-				8A00FEC21F1DE88600246078 /* README.md */,
 				2259311B1CE3210700841B86 /* OmiseSDK.h */,
 				8A00FEC21F1DE88600246078 /* README.md */,
 				8A09281B1D544C3F008D393F /* OmiseSDK.modulemap */,
@@ -332,13 +343,13 @@
 				22445FFB1CF41DD300801D0F /* Globals.swift */,
 				8A2BE95420A9A39E000CEB60 /* Request.swift */,
 				8AD0609220B55B3A0074894E /* RequestTask.swift */,
+				8A0927841D535548008D393F /* Library */,
+				8A2BE95720A9A8F1000CEB60 /* Models */,
+				8A2BE95820A9A8FE000CEB60 /* Views */,
 				2225B3531D0FDD63003EB396 /* Assets.xcassets */,
 				8AD0609120B550B90074894E /* Compatability */,
-				8A0927841D535548008D393F /* Library */,
 				981FA5F91D0EDDB0009ECEDC /* Localizable.strings */,
-				8A2BE95720A9A8F1000CEB60 /* Models */,
 				8A5D59831D5317DD005D3346 /* OmiseSDK.storyboard */,
-				8A2BE95820A9A8FE000CEB60 /* Views */,
 			);
 			path = OmiseSDK;
 			sourceTree = "<group>";
@@ -461,9 +472,13 @@
 		8AD0609120B550B90074894E /* Compatability */ = {
 			isa = PBXGroup;
 			children = (
-				8A01F77E20D7D327003FC11E /* Old version */,
+				8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */,
 				2220F1A31D0FEE85008CD89F /* OmiseCard.swift */,
+				8A01F79320D914A4003FC11E /* OmiseSource.swift */,
 				2220F1A71D0FEE85008CD89F /* OmiseToken.swift */,
+				8A01F79020D91356003FC11E /* OMSSourceRequest.swift */,
+				8A01F78D20D91091003FC11E /* OMSTokenRequest.swift */,
+				8A01F77E20D7D327003FC11E /* Old version */,
 			);
 			path = Compatability;
 			sourceTree = "<group>";
@@ -724,6 +739,7 @@
 			files = (
 				982237C11D115BD400D266F3 /* ErrorMessageCell.swift in Sources */,
 				8AFB920F20D39BE50072B185 /* OmiseTokenRequest.swift in Sources */,
+				8A01F79120D91356003FC11E /* OMSSourceRequest.swift in Sources */,
 				2220F1AC1D0FEE85008CD89F /* OmiseSDKClient.swift in Sources */,
 				8A60619A20B2A8D400CF90D5 /* PAN.swift in Sources */,
 				2220F1AA1D0FEE85008CD89F /* OmiseError.swift in Sources */,
@@ -737,14 +753,17 @@
 				2220F1A91D0FEE85008CD89F /* OmiseCard.swift in Sources */,
 				8AD0609320B55B3A0074894E /* RequestTask.swift in Sources */,
 				8A1D4C661D51B72200C7837C /* CreditCardFormController.swift in Sources */,
+				8A01F78E20D91091003FC11E /* OMSTokenRequest.swift in Sources */,
 				986406311CFEA7E4004BCF51 /* CardExpiryDateTextField.swift in Sources */,
 				986406341CFEA7E4004BCF51 /* CardNameTextField.swift in Sources */,
 				8A188BB01D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift in Sources */,
+				8A01F78B20D90EC5003FC11E /* Client+ObjC.swift in Sources */,
 				986406491CFEA818004BCF51 /* SecureCodeFormCell.swift in Sources */,
 				8A2BE95520A9A39E000CEB60 /* Request.swift in Sources */,
 				14ACEF831D02D641001C5319 /* CardExpiryDatePicker.swift in Sources */,
 				986406431CFEA818004BCF51 /* ExpiryDateFormCell.swift in Sources */,
 				986406471CFEA818004BCF51 /* NameCardFormCell.swift in Sources */,
+				8A01F79420D914A4003FC11E /* OmiseSource.swift in Sources */,
 				986406301CFEA7E4004BCF51 /* CardCVVTextField.swift in Sources */,
 				98E131741D1809E900E63E18 /* OmiseFormAccessoryView.swift in Sources */,
 				8A47173A20AAB0F40022733A /* Token.swift in Sources */,
@@ -775,6 +794,7 @@
 			files = (
 				8A1F39031D61C8B500698781 /* ErrorMessageCell.swift in Sources */,
 				8A1F39051D61C8B500698781 /* OmiseSDKClient.swift in Sources */,
+				8A01F79220D91356003FC11E /* OMSSourceRequest.swift in Sources */,
 				8A1F39081D61C8B500698781 /* CardNumberFormCell.swift in Sources */,
 				8A1F39141D61C8B500698781 /* CardCVVTextField.swift in Sources */,
 				8A2BE95620A9A39E000CEB60 /* Request.swift in Sources */,
@@ -788,14 +808,17 @@
 				8A1F39061D61C8B500698781 /* OmiseError.swift in Sources */,
 				8A1F39121D61C8B500698781 /* ExpiryDateFormCell.swift in Sources */,
 				8A1F39161D61C8B500698781 /* Globals.swift in Sources */,
+				8A01F78F20D91091003FC11E /* OMSTokenRequest.swift in Sources */,
 				8A1F391B1D61C8B500698781 /* CardBrand.swift in Sources */,
 				8A1F39191D61C8B500698781 /* CardNumberTextField.swift in Sources */,
 				8A47173B20AAB0F40022733A /* Token.swift in Sources */,
+				8A01F78C20D90EC5003FC11E /* Client+ObjC.swift in Sources */,
 				8A1F390E1D61C8B500698781 /* CardExpiryDateTextField.swift in Sources */,
 				8A188BB11D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift in Sources */,
 				8A1F390A1D61C8B500698781 /* OmiseTextField.swift in Sources */,
 				8A1F39071D61C8B500698781 /* FormHeaderCell.swift in Sources */,
 				8A1F390B1D61C8B500698781 /* OmiseToken.swift in Sources */,
+				8A01F79520D914A4003FC11E /* OmiseSource.swift in Sources */,
 				8A1F39101D61C8B500698781 /* SecureCodeFormCell.swift in Sources */,
 				8AD0609720B55E610074894E /* Client.swift in Sources */,
 				8A1F39131D61C8B500698781 /* NameCardFormCell.swift in Sources */,

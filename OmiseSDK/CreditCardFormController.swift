@@ -9,7 +9,7 @@ import OmiseSDK.Private
     /// Delegate method for receiving token data when card tokenization succeeds.
     /// - parameter token: `OmiseToken` instance created from supplied credit card data.
     /// - seealso: [Tokens API](https://www.omise.co/tokens-api)
-    @objc func creditCardForm(_ controller: CreditCardFormController, didSucceedWithToken token: OmiseToken)
+    @objc func creditCardForm(_ controller: CreditCardFormController, didSucceedWithToken token: __OmiseToken)
     
     /// Delegate method for receiving error information when card tokenization failed.
     /// This allows you to have fine-grained control over error handling when setting
@@ -202,7 +202,7 @@ public class CreditCardFormController: UITableViewController {
             s.stopActivityIndicator()
             switch result {
             case let .success(token):
-                s.delegate?.creditCardForm(s, didSucceedWithToken: OmiseToken(token: token))
+                s.delegate?.creditCardForm(s, didSucceedWithToken: __OmiseToken(token: token))
             case let .fail(err):
                 s.handleError(err)
             }
