@@ -90,6 +90,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "987A02C81CE35D5E0035417A"
+            BuildableName = "OmiseSDKTests.xctest"
+            BlueprintName = "OmiseSDKTests"
+            ReferencedContainer = "container:OmiseSDK.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

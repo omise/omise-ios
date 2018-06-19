@@ -87,7 +87,7 @@ public enum OmiseTokenRequestResult {
     }
     
     func start(with client: OmiseSDKClient, callback: Callback?) -> URLSessionDataTask? {
-        return client.client.requestTask(with: self.request, completionHandler: OmiseTokenRequest.tokenRequestCallback(from: callback)).dataTask
+        return client.client.sendRequest(self.request, completionHandler: OmiseTokenRequest.tokenRequestCallback(from: callback)).dataTask
     }
     
     static func tokenRequestCallback(from callback: OmiseTokenRequest.Callback?) -> Request<Token>.Callback {

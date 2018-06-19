@@ -27,6 +27,9 @@
 		229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */; };
 		229E145B1D0EBAB5000511DE /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14571D0EBAB5000511DE /* ProductViewController.swift */; };
 		22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */; };
+		8A01F78120D8DB7C003FC11E /* OMSOmiseClientTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78020D8DB7C003FC11E /* OMSOmiseClientTestCase.m */; };
+		8A01F78420D8DD60003FC11E /* OMSSDKTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78320D8DD60003FC11E /* OMSSDKTestCase.m */; };
+		8A01F78920D8E101003FC11E /* OMSTokenRequestDelegateDummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78820D8E101003FC11E /* OMSTokenRequestDelegateDummy.m */; };
 		8A188BB01D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A188BAF1D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift */; };
 		8A188BB11D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A188BAF1D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift */; };
 		8A1D4C661D51B72200C7837C /* CreditCardFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1D4C651D51B72200C7837C /* CreditCardFormController.swift */; };
@@ -182,6 +185,11 @@
 		22D480AB1D0EB29C00544CE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A00FEC21F1DE88600246078 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		8A01F78020D8DB7C003FC11E /* OMSOmiseClientTestCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSOmiseClientTestCase.m; sourceTree = "<group>"; };
+		8A01F78220D8DD60003FC11E /* OMSSDKTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OMSSDKTestCase.h; sourceTree = "<group>"; };
+		8A01F78320D8DD60003FC11E /* OMSSDKTestCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSSDKTestCase.m; sourceTree = "<group>"; };
+		8A01F78720D8E101003FC11E /* OMSTokenRequestDelegateDummy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OMSTokenRequestDelegateDummy.h; sourceTree = "<group>"; };
+		8A01F78820D8E101003FC11E /* OMSTokenRequestDelegateDummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSTokenRequestDelegateDummy.m; sourceTree = "<group>"; };
 		8A0927891D535548008D393F /* CardIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIO.h; sourceTree = "<group>"; };
 		8A09278A1D535548008D393F /* CardIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardIO.m; sourceTree = "<group>"; };
 		8A09278B1D535548008D393F /* CardIOCreditCardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOCreditCardInfo.h; sourceTree = "<group>"; };
@@ -313,6 +321,7 @@
 		2259311A1CE3210700841B86 /* OmiseSDK */ = {
 			isa = PBXGroup;
 			children = (
+				8A00FEC21F1DE88600246078 /* README.md */,
 				2259311B1CE3210700841B86 /* OmiseSDK.h */,
 				8A00FEC21F1DE88600246078 /* README.md */,
 				8A09281B1D544C3F008D393F /* OmiseSDK.modulemap */,
@@ -357,6 +366,18 @@
 				2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */,
 			);
 			path = "Old version";
+			sourceTree = "<group>";
+		};
+		8A01F78620D8E0EB003FC11E /* Objective-C */ = {
+			isa = PBXGroup;
+			children = (
+				8A01F78020D8DB7C003FC11E /* OMSOmiseClientTestCase.m */,
+				8A01F78220D8DD60003FC11E /* OMSSDKTestCase.h */,
+				8A01F78320D8DD60003FC11E /* OMSSDKTestCase.m */,
+				8A01F78720D8E101003FC11E /* OMSTokenRequestDelegateDummy.h */,
+				8A01F78820D8E101003FC11E /* OMSTokenRequestDelegateDummy.m */,
+			);
+			path = "Objective-C";
 			sourceTree = "<group>";
 		};
 		8A0927841D535548008D393F /* Library */ = {
@@ -491,6 +512,7 @@
 				8A37E43520B584D300E2DA18 /* ModelTestCase.swift */,
 				225931561CE4745200841B86 /* SDKTestCase.swift */,
 				8A47173F20AAD6BA0022733A /* Compatability Suite */,
+				8A01F78620D8E0EB003FC11E /* Objective-C */,
 			);
 			path = OmiseSDKTests;
 			sourceTree = "<group>";
@@ -625,7 +647,7 @@
 					};
 					987A02C81CE35D5E0035417A = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 22D4809C1D0EB29C00544CE1;
 					};
@@ -791,9 +813,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A01F78120D8DB7C003FC11E /* OMSOmiseClientTestCase.m in Sources */,
+				8A01F78920D8E101003FC11E /* OMSTokenRequestDelegateDummy.m in Sources */,
 				8AFE10BB20B69B39008E741D /* ClientTestCase.swift in Sources */,
 				224460041CF43A1200801D0F /* SDKTestCase.swift in Sources */,
 				2244600A1CF441DC00801D0F /* TokenRequestDelegateDummy.swift in Sources */,
+				8A01F78420D8DD60003FC11E /* OMSSDKTestCase.m in Sources */,
 				224460051CF43A1500801D0F /* CardNumberTest.swift in Sources */,
 				987A03211CE5B7D70035417A /* OmiseTokenRequestTest.swift in Sources */,
 				8A37E43620B584D300E2DA18 /* ModelTestCase.swift in Sources */,
