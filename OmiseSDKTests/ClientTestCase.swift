@@ -16,7 +16,7 @@ class ClientTestCase: XCTestCase {
         super.tearDown()
     }
     
-    func testValidRequestWithCallback() {
+    func testValidTokenRequestWithCallback() {
         let expectation = self.expectation(description: "Tokenized Reqeust with a valid token data")
         let task = testClient.sendRequest(ClientTestCase.makeValidTokenRequest()) { (result) in
             defer { expectation.fulfill() }
@@ -40,7 +40,7 @@ class ClientTestCase: XCTestCase {
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
-    func testInvalidRequestWithCallback() {
+    func testInvalidTokenRequestWithCallback() {
         let expectation = self.expectation(description: "Tokenized Reqeust with an invalid token data")
         let task = testClient.sendRequest(ClientTestCase.makeInvalidTokenRequest()) { (result) in
             defer { expectation.fulfill() }
@@ -58,9 +58,55 @@ class ClientTestCase: XCTestCase {
         
         waitForExpectations(timeout: timeout, handler: nil)
     }
+    
+    func testValidSourceRequestWithCallback() {
+        let expectation = self.expectation(description: "Source Reqeust with a valid token data")
+        let task = testClient.sendRequest(ClientTestCase.makeValidSourceRequest()) { (result) in
+            defer { expectation.fulfill() }
+            switch result {
+            case .success(let source):
+                XCTAssertEqual(100_00, source.amount)
+                XCTAssertEqual(Currency.thb, source.currency)
+                XCTAssertEqual(Flow.redirect, source.flow)
+                XCTAssertEqual(SourceType.internetBankingBAY, source.type)
+            case .fail(let error):
+                XCTFail("Expected succeed request but it failed with \(error)")
+            }
+        }
+        
+        XCTAssertEqual(100_00, task.request.parameter.amount)
+        XCTAssertEqual(Currency.thb, task.request.parameter.currency)
+        XCTAssertEqual(SourceType.internetBankingBAY, task.request.parameter.type)
+        
+        XCTAssertEqual(Source.postURL, task.dataTask.currentRequest?.url)
+        XCTAssertEqual("POST", task.dataTask.currentRequest?.httpMethod)
+        
+        waitForExpectations(timeout: timeout, handler: nil)
+    }
+    
+    func testInvalidSourceRequestWithCallback() {
+        let expectation = self.expectation(description: "Source Reqeust with an invalid source data")
+        let task = testClient.sendRequest(ClientTestCase.makeInvalidSourceRequest()) { (result) in
+            defer { expectation.fulfill() }
+            if case .success = result {
+                XCTFail("Expected failed request")
+            }
+        }
+        
+        XCTAssertEqual(100_00, task.request.parameter.amount)
+        XCTAssertEqual(Currency.custom(code: "UNSUPPORTED_CURRENCY", factor: 100), task.request.parameter.currency)
+        XCTAssertEqual(SourceType.other("UNSUPPORTED SOURCE"), task.request.parameter.type)
+
+        XCTAssertEqual(Source.postURL, task.dataTask.currentRequest?.url)
+        XCTAssertEqual("POST", task.dataTask.currentRequest?.httpMethod)
+        
+        waitForExpectations(timeout: timeout, handler: nil)
+    }
 }
 
 extension ClientTestCase {
+    
+    // MARK: Request factory methods
     static func makeValidTokenRequest() -> Request<Token>  {
         return Request.init(parameter: Token.CreateParameter(
             name: "JOHN DOE",
@@ -80,5 +126,11 @@ extension ClientTestCase {
         ))
     }
     
+    static func makeValidSourceRequest() -> Request<Source>  {
+        return Request.init(sourceType: SourceType.internetBankingBAY, amount: 100_00, currency: .thb)
+    }
+    static func makeInvalidSourceRequest() -> Request<Source>  {
+        return Request.init(sourceType: SourceType.other("UNSUPPORTED SOURCE"), amount: 100_00, currency: Currency.custom(code: "UNSUPPORTED_CURRENCY", factor: 100))
+    }
 }
 

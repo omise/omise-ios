@@ -15,3 +15,17 @@
 
 @end
 
+
+@interface OMSSourceRequestDelegateDummy : NSObject <OMSSourceRequestDelegate>
+
+@property (nonatomic, nullable, strong) OMSSourceRequest *request;
+@property (nonatomic, nullable, strong) OMSSource *source;
+@property (nonatomic, nullable, strong) NSError *error;
+
+@property (nonatomic, nonnull, strong) XCTestExpectation *expectation;
+
+- (instancetype)initWithExpectation:(XCTestExpectation *)expectation;
+
+@end
+
+

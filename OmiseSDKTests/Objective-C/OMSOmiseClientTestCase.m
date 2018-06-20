@@ -1,13 +1,12 @@
 #import <XCTest/XCTest.h>
 @import OmiseSDK;
-#import "OMSSDKTestCase.h"
-#import "OMSTokenRequestDelegateDummy.h"
+#import "OMSRequestDelegateDummy.h"
 
 
-NSString * const _Nonnull  publicKey = @"pkey_test_58wfnlwoxz1tbkdd993";
+NSString * const _Nonnull publicKey = @"pkey_test_58wfnlwoxz1tbkdd993";
 
 
-@interface OMSOmiseClientTestCase : OMSSDKTestCase
+@interface OMSOmiseClientTestCase : XCTestCase
 
 @property (nonatomic, nullable, strong) OMSSDKClient *testClient;
 
@@ -24,11 +23,13 @@ NSString * const _Nonnull  publicKey = @"pkey_test_58wfnlwoxz1tbkdd993";
     self.testClient = nil;
 }
 
-- (void)testRequestWithDelegate {
+#pragma mark - Token Requests test
+
+- (void)testTokenRequestWithDelegate {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Async delegate callback"];
     OMSTokenRequestDelegateDummy *delegate = [[OMSTokenRequestDelegateDummy alloc] initWithExpectation:expectation];
     
-    [self.testClient sendTokenRequest:[OMSOmiseClientTestCase createValidTestRequest] delegate:delegate];
+    [self.testClient sendTokenRequest:[OMSOmiseClientTestCase createValidTestTokenRequest] delegate:delegate];
     [self waitForExpectationsWithTimeout:15.0 handler:^(NSError * _Nullable error) {
         XCTAssertNotNil(delegate.token);
         XCTAssertNotNil(delegate.request);
@@ -40,11 +41,11 @@ NSString * const _Nonnull  publicKey = @"pkey_test_58wfnlwoxz1tbkdd993";
     }];
 }
 
-- (void)testBadRequestWithDelegate {
+- (void)testBadTokenRequestWithDelegate {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Async delegate callback"];
     OMSTokenRequestDelegateDummy *delegate = [[OMSTokenRequestDelegateDummy alloc] initWithExpectation:expectation];
 
-    [self.testClient sendTokenRequest:[OMSOmiseClientTestCase createInvalidTestRequest] delegate:delegate];
+    [self.testClient sendTokenRequest:[OMSOmiseClientTestCase createInvalidTestTokenRequest] delegate:delegate];
     [self waitForExpectationsWithTimeout:15.0 handler:^(NSError * _Nullable error) {
         XCTAssertNotNil(delegate.error);
         XCTAssertNotNil(delegate.request);
@@ -52,27 +53,27 @@ NSString * const _Nonnull  publicKey = @"pkey_test_58wfnlwoxz1tbkdd993";
     }];
 }
 
-- (void)testRequestWithCallback {
+- (void)testTokenRequestWithCallback {
     XCTestExpectation *expectation = [self expectationWithDescription:@"callback"];
     
-    [self.testClient sendTokenRequest:[OMSOmiseClientTestCase createValidTestRequest] callback:^(OMSToken * _Nullable token, NSError * _Nullable error) {
+    [self.testClient sendTokenRequest:[OMSOmiseClientTestCase createValidTestTokenRequest] callback:^(OMSToken * _Nullable source, NSError * _Nullable error) {
         XCTAssertNil(error);
-        XCTAssertNotNil(token);
+        XCTAssertNotNil(source);
         
-        XCTAssertTrue([@"4242" isEqualToString:token.card.lastDigits]);
-        XCTAssertEqual(11, token.card.expirationMonth);
-        XCTAssertEqual(2019, token.card.expirationYear);
+        XCTAssertTrue([@"4242" isEqualToString:source.card.lastDigits]);
+        XCTAssertEqual(11, source.card.expirationMonth);
+        XCTAssertEqual(2019, source.card.expirationYear);
         
         [expectation fulfill];
     }];
     [self waitForExpectationsWithTimeout:15.0 handler:nil];
 }
 
-- (void)testBadRequestWithCallback {
+- (void)testBadTokenRequestWithCallback {
     XCTestExpectation *expectation = [self expectationWithDescription:@"callback"];
     
-    [self.testClient sendTokenRequest:[OMSOmiseClientTestCase createInvalidTestRequest] callback:^(OMSToken * _Nullable token, NSError * _Nullable error) {
-        XCTAssertNil(token);
+    [self.testClient sendTokenRequest:[OMSOmiseClientTestCase createInvalidTestTokenRequest] callback:^(OMSToken * _Nullable source, NSError * _Nullable error) {
+        XCTAssertNil(source);
         XCTAssertNotNil(error);
         
         [expectation fulfill];
@@ -81,18 +82,94 @@ NSString * const _Nonnull  publicKey = @"pkey_test_58wfnlwoxz1tbkdd993";
 }
 
 
-+ (OMSTokenRequest *)createInvalidTestRequest {
+#pragma mark - Source Requests test
+
+- (void)testSourceRequestWithDelegate {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Async delegate callback"];
+    OMSSourceRequestDelegateDummy *delegate = [[OMSSourceRequestDelegateDummy alloc] initWithExpectation:expectation];
+    
+    [self.testClient sendSourceRequest:[OMSOmiseClientTestCase createValidTestSourceRequest] delegate:delegate];
+    [self waitForExpectationsWithTimeout:15.0 handler:^(NSError * _Nullable error) {
+        XCTAssertNotNil(delegate.source);
+        XCTAssertNotNil(delegate.request);
+        XCTAssertNil(delegate.error);
+        
+        XCTAssertTrue([@"THB" isEqualToString:delegate.source.currencyCode]);
+        XCTAssertEqual(10000, delegate.source.amount);
+    }];
+}
+
+- (void)testBadSourceRequestWithDelegate {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Async delegate callback"];
+    OMSSourceRequestDelegateDummy *delegate = [[OMSSourceRequestDelegateDummy alloc] initWithExpectation:expectation];
+    
+    [self.testClient sendSourceRequest:[OMSOmiseClientTestCase createInvalidTestSourceRequest] delegate:delegate];
+    [self waitForExpectationsWithTimeout:15.0 handler:^(NSError * _Nullable error) {
+        XCTAssertNotNil(delegate.error);
+        XCTAssertNotNil(delegate.request);
+        XCTAssertNil(delegate.source);
+        
+        XCTAssertTrue([delegate.error.localizedDescription containsString:@"not supported"]);
+        XCTAssertTrue([delegate.error.localizedDescription containsString:@"currency"]);
+        XCTAssertTrue([delegate.error.localizedDescription containsString:@"type"]);
+    }];
+}
+
+- (void)testSourceRequestWithCallback {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"callback"];
+    
+    [self.testClient sendSourceRequest:[OMSOmiseClientTestCase createValidTestSourceRequest] callback:^(OMSSource * _Nullable source, NSError * _Nullable error) {
+        XCTAssertNil(error);
+        XCTAssertNotNil(source);
+        
+        XCTAssertTrue([@"THB" isEqualToString:source.currencyCode]);
+        XCTAssertEqual(10000, source.amount);
+        
+        [expectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:15.0 handler:nil];
+}
+
+- (void)testBadSourceRequestWithCallback {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"callback"];
+    
+    [self.testClient sendSourceRequest:[OMSOmiseClientTestCase createInvalidTestSourceRequest] callback:^(OMSSource * _Nullable source, NSError * _Nullable error) {
+        XCTAssertNil(source);
+        XCTAssertNotNil(error);
+        
+        XCTAssertTrue([error.localizedDescription containsString:@"not supported"]);
+        XCTAssertTrue([error.localizedDescription containsString:@"currency"]);
+        XCTAssertTrue([error.localizedDescription containsString:@"type"]);
+        
+        [expectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:15.0 handler:nil];
+}
+
+
+
+#pragma mark - Request builder
+
++ (OMSTokenRequest *)createInvalidTestTokenRequest {
     return [[OMSTokenRequest alloc] initWithName:@"JOHN DOE" number:@"42424242424242421111"
                                  expirationMonth:6
                                   expirationYear:[[NSCalendar creditCardInformationCalendar] component:NSCalendarUnitYear fromDate:[NSDate date]] + 1
                                     securityCode:@"123" city:nil postalCode:nil];
 }
 
-+ (OMSTokenRequest *)createValidTestRequest {
++ (OMSTokenRequest *)createValidTestTokenRequest {
     return [[OMSTokenRequest alloc] initWithName:@"JOHN DOE" number:@"4242424242424242"
                                  expirationMonth:11
                                   expirationYear:[[NSCalendar creditCardInformationCalendar] component:NSCalendarUnitYear fromDate:[NSDate date]] + 1
                                     securityCode:@"123" city:nil postalCode:nil];
+}
+
++ (OMSSourceRequest *)createInvalidTestSourceRequest {
+    return [[OMSSourceRequest alloc] initWithSourceType:@"INVALID SOURCE" amount:0 currencyCode:@"INVALID_CURRENCY"];
+}
+
++ (OMSSourceRequest *)createValidTestSourceRequest {
+    return [[OMSSourceRequest alloc] initWithSourceType:OMSSourceTypeValueInternetBankingBAY amount:10000 currencyCode:OMSSupportedCurrencyCodeTHB];
 }
 
 @end
