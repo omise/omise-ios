@@ -48,7 +48,7 @@ public class OmiseSDKClient: NSObject {
      - seealso: init(publicKey:)
      */
     public init(publicKey: String, queue: OperationQueue, session: URLSession) {
-        self.client = Client(publicKey: publicKey)
+        self.client = Client(publicKey: publicKey, queue: queue)
     }
     
     /**

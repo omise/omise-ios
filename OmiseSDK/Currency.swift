@@ -17,19 +17,19 @@ public enum Currency: Codable, Hashable {
     public var code: String {
         switch self {
         case .thb:
-            return "THB"
+            return OMSSupportedCurrencyCode.THB.rawValue
         case .jpy:
-            return "JPY"
+            return OMSSupportedCurrencyCode.JPY.rawValue
         case .idr:
-            return "IDR"
+            return OMSSupportedCurrencyCode.IDR.rawValue
         case .sgd:
-            return "SGD"
+            return OMSSupportedCurrencyCode.SGD.rawValue
         case .usd:
-            return "USD"
+            return OMSSupportedCurrencyCode.USD.rawValue
         case .gbp:
-            return "GBP"
+            return OMSSupportedCurrencyCode.GBP.rawValue
         case .eur:
-            return "EUR"
+            return OMSSupportedCurrencyCode.EUR.rawValue
         case.custom(code: let code, factor: _):
             return code
         }
@@ -57,19 +57,19 @@ public enum Currency: Codable, Hashable {
     
     public init(code: String) {
         switch code.uppercased() {
-        case "THB":
+        case OMSSupportedCurrencyCode.THB.rawValue:
             self = .thb
-        case "JPY":
+        case OMSSupportedCurrencyCode.JPY.rawValue:
             self = .jpy
-        case "IDR":
+        case OMSSupportedCurrencyCode.IDR.rawValue:
             self = .idr
-        case "SGD":
+        case OMSSupportedCurrencyCode.SGD.rawValue:
             self = .sgd
-        case "USD":
+        case OMSSupportedCurrencyCode.USD.rawValue:
             self = .usd
-        case "GBP":
+        case OMSSupportedCurrencyCode.GBP.rawValue:
             self = .gbp
-        case "EUR":
+        case OMSSupportedCurrencyCode.EUR.rawValue:
             self = .eur
         case let currencyCode:
             let numberFormatter = NumberFormatter()

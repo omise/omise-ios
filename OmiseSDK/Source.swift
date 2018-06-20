@@ -61,16 +61,9 @@ public enum Flow: RawRepresentable, Decodable, Equatable {
     }
 }
 
+
 public enum SourceType: RawRepresentable, Codable, Equatable {
     
-    private static let internetBankingBAYValue = "internet_banking_bay"
-    private static let internetBankingKTBValue = "internet_banking_ktb"
-    private static let internetBankingSCBValue = "internet_banking_scb"
-    private static let internetBankingBBLValue = "internet_banking_bbl"
-    private static let alipayValue = "alipay"
-    private static let billPaymentTescoLotusValue = "bill_payment_tesco_lotus"
-    private static let barcodeAlipayValue = "barcode_alipay"
-
     case internetBankingBAY
     case internetBankingKTB
     case internetBankingSCB
@@ -95,19 +88,19 @@ public enum SourceType: RawRepresentable, Codable, Equatable {
     
     public init?(rawValue: String) {
         switch rawValue {
-        case SourceType.internetBankingBAYValue:
+        case OMSSourceTypeValue.internetBankingBAY.rawValue:
             self = .internetBankingBAY
-        case SourceType.internetBankingKTBValue:
+        case OMSSourceTypeValue.internetBankingKTB.rawValue:
             self = .internetBankingKTB
-        case SourceType.internetBankingSCBValue:
+        case OMSSourceTypeValue.internetBankingSCB.rawValue:
             self = .internetBankingSCB
-        case SourceType.internetBankingBBLValue:
+        case OMSSourceTypeValue.internetBankingBBL.rawValue:
             self = .internetBankingBBL
-        case SourceType.alipayValue:
+        case OMSSourceTypeValue.alipay.rawValue:
             self = .alipay
-        case SourceType.billPaymentTescoLotusValue:
+        case OMSSourceTypeValue.billPaymentTescoLotus.rawValue:
             self = .billPaymentTescoLotus
-        case SourceType.barcodeAlipayValue:
+        case OMSSourceTypeValue.barcodeAlipay.rawValue:
             self = .barcodeAlipay
         default:
             self = .other(rawValue)
@@ -118,19 +111,19 @@ public enum SourceType: RawRepresentable, Codable, Equatable {
         let value: String
         switch self {
         case .internetBankingBAY:
-            value = SourceType.internetBankingBAYValue
+            value = OMSSourceTypeValue.internetBankingBAY.rawValue
         case .internetBankingKTB:
-            value = SourceType.internetBankingKTBValue
+            value = OMSSourceTypeValue.internetBankingKTB.rawValue
         case .internetBankingSCB:
-            value = SourceType.internetBankingSCBValue
+            value = OMSSourceTypeValue.internetBankingSCB.rawValue
         case .internetBankingBBL:
-            value = SourceType.internetBankingBBLValue
+            value = OMSSourceTypeValue.internetBankingBBL.rawValue
         case .alipay:
-            value = SourceType.alipayValue
+            value = OMSSourceTypeValue.alipay.rawValue
         case .billPaymentTescoLotus:
-            value = SourceType.billPaymentTescoLotusValue
+            value = OMSSourceTypeValue.billPaymentTescoLotus.rawValue
         case .barcodeAlipay:
-            value = SourceType.barcodeAlipayValue
+            value = OMSSourceTypeValue.barcodeAlipay.rawValue
         case .other(let sourceValue):
             value = sourceValue
         }
