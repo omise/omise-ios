@@ -8,26 +8,20 @@ import Foundation
 @objc(OMSSource) public class __OmiseSource: NSObject {
     private let source: Source
     
-    @objc public var object: String {
-        return source.object
-    }
-    @objc public var id: String {
-        return source.id
-    }
+    @objc lazy public var object: String = source.object
     
-    @objc public var type: String {
-        return source.type.rawValue
-    }
-    @objc public var flow: String {
-        return source.flow.rawValue
-    }
+    @objc lazy public var id: String = source.id
     
-    @objc public var amount: Int64 {
-        return source.amount
-    }
-    @objc public var currencyCode: String {
-        return source.currency.code
-    }
+    
+    @objc lazy public var type: String = source.type.rawValue
+    
+    @objc lazy public var flow: String = source.flow.rawValue
+    
+    
+    @objc lazy public var amount: Int64 = source.amount
+
+    @objc lazy public var currencyCode: String = source.currency.code
+    
     
     init(source: Source) {
         self.source = source

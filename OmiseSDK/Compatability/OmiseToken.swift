@@ -8,30 +8,23 @@ import Foundation
 @objc(OMSToken) public class __OmiseToken: NSObject {
     private let token: Token
     /// Token's ID.
-    @objc public var tokenId: String? {
-        return token.id
-    }
+    @objc lazy public var tokenId: String? = token.id
+    
     /// Boolean flag indicating wether this card is a live card or a test card.
-    @objc public var livemode: Bool {
-        return token.isLiveMode
-    }
+    @objc lazy public var livemode: Bool = token.isLiveMode
+    
     /// Resource URL that can be used to re-load token information.
-    @objc public var location: String? {
-        return token.location
-    }
+    @objc lazy public var location: String? = token.location
+    
     /// Boolean flag indicating whether the token has been used or not.
     /// Tokens can only be used once to make create a Charge or to create a saved Card record.
-    @objc public var used: Bool {
-        return token.isUsed
-    }
+    @objc lazy public var used: Bool = token.isUsed
+    
     /// Card information used to generate this token.
-    @objc public var card: __OmiseCard? {
-        return __OmiseCard(card: token.card)
-    }
+    @objc lazy public var card: __OmiseCard? = __OmiseCard(card: token.card)
+    
     /// Token's creation time.
-    @objc public var created: Date? {
-        return token.createdDate
-    }
+    @objc lazy public var created: Date? = token.createdDate
     
     init(token: Token) {
         self.token = token

@@ -349,8 +349,8 @@
 				8A0927841D535548008D393F /* Library */,
 				8A2BE95720A9A8F1000CEB60 /* Models */,
 				8A2BE95820A9A8FE000CEB60 /* Views */,
-				2225B3531D0FDD63003EB396 /* Assets.xcassets */,
 				8AD0609120B550B90074894E /* Compatability */,
+				2225B3531D0FDD63003EB396 /* Assets.xcassets */,
 				981FA5F91D0EDDB0009ECEDC /* Localizable.strings */,
 				8A5D59831D5317DD005D3346 /* OmiseSDK.storyboard */,
 			);
@@ -385,8 +385,8 @@
 		8A01F78620D8E0EB003FC11E /* Objective-C */ = {
 			isa = PBXGroup;
 			children = (
-				8A01F78020D8DB7C003FC11E /* OMSOmiseClientTestCase.m */,
 				8A01F78720D8E101003FC11E /* OMSRequestDelegateDummy.h */,
+				8A01F78020D8DB7C003FC11E /* OMSOmiseClientTestCase.m */,
 				8A01F78820D8E101003FC11E /* OMSRequestDelegateDummy.m */,
 			);
 			path = "Objective-C";
@@ -473,14 +473,7 @@
 		8AD0609120B550B90074894E /* Compatability */ = {
 			isa = PBXGroup;
 			children = (
-				8A739D0720DA4DC500217CAB /* OMSConstants.h */,
-				8A739D0820DA4DC500217CAB /* OMSConstants.m */,
-				8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */,
-				2220F1A31D0FEE85008CD89F /* OmiseCard.swift */,
-				8A01F79320D914A4003FC11E /* OmiseSource.swift */,
-				2220F1A71D0FEE85008CD89F /* OmiseToken.swift */,
-				8A01F79020D91356003FC11E /* OMSSourceRequest.swift */,
-				8A01F78D20D91091003FC11E /* OMSTokenRequest.swift */,
+				8AF10BAE20DA6D8B00443A9C /* Objective-C */,
 				8A01F77E20D7D327003FC11E /* Old version */,
 			);
 			path = Compatability;
@@ -492,6 +485,21 @@
 				8ADAA9AC20B71EDA00DD7CCF /* module.map */,
 			);
 			path = CommonCrypto;
+			sourceTree = "<group>";
+		};
+		8AF10BAE20DA6D8B00443A9C /* Objective-C */ = {
+			isa = PBXGroup;
+			children = (
+				8A739D0720DA4DC500217CAB /* OMSConstants.h */,
+				8A739D0820DA4DC500217CAB /* OMSConstants.m */,
+				8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */,
+				2220F1A31D0FEE85008CD89F /* OmiseCard.swift */,
+				8A01F79020D91356003FC11E /* OMSSourceRequest.swift */,
+				8A01F79320D914A4003FC11E /* OmiseSource.swift */,
+				2220F1A71D0FEE85008CD89F /* OmiseToken.swift */,
+				8A01F78D20D91091003FC11E /* OMSTokenRequest.swift */,
+			);
+			name = "Objective-C";
 			sourceTree = "<group>";
 		};
 		986406361CFEA7EA004BCF51 /* Fields */ = {

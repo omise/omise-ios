@@ -1,5 +1,6 @@
 @import Foundation;
 
+
 typedef NSString * OMSSourceTypeValue NS_EXTENSIBLE_STRING_ENUM;
 
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInternetBankingBAY;
