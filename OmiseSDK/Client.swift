@@ -57,6 +57,7 @@ extension Client {
         urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
         urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: "User-Agent")
         urlRequest.setValue("application/json; charset=utf8", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("2017-11-02", forHTTPHeaderField: "Omise-Version")
         return urlRequest.copy() as! URLRequest
     }
     
