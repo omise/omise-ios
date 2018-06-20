@@ -131,13 +131,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8A7F8B0820C552F0008F4D08 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2259310F1CE3210700841B86 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22D4809C1D0EB29C00544CE1;
-			remoteInfo = ExampleApp;
-		};
 		8A7F8B0A20C55312008F4D08 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2259310F1CE3210700841B86 /* Project object */;
@@ -642,7 +635,6 @@
 			);
 			dependencies = (
 				987A02D01CE35D5E0035417A /* PBXTargetDependency */,
-				8A7F8B0920C552F0008F4D08 /* PBXTargetDependency */,
 			);
 			name = OmiseSDKTests;
 			productName = OmiseSDKTests;
@@ -677,7 +669,6 @@
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
-						TestTargetID = 22D4809C1D0EB29C00544CE1;
 					};
 				};
 			};
@@ -865,11 +856,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8A7F8B0920C552F0008F4D08 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22D4809C1D0EB29C00544CE1 /* ExampleApp */;
-			targetProxy = 8A7F8B0820C552F0008F4D08 /* PBXContainerItemProxy */;
-		};
 		8A7F8B0B20C55312008F4D08 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 225931171CE3210700841B86 /* OmiseSDK */;
@@ -1210,7 +1196,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ExampleApp.app/ExampleApp";
 			};
 			name = Debug;
 		};
@@ -1226,7 +1211,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ExampleApp.app/ExampleApp";
 			};
 			name = Release;
 		};
