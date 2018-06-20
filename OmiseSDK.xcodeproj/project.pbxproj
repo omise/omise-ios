@@ -28,7 +28,6 @@
 		229E145B1D0EBAB5000511DE /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14571D0EBAB5000511DE /* ProductViewController.swift */; };
 		22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */; };
 		8A01F78120D8DB7C003FC11E /* OMSOmiseClientTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78020D8DB7C003FC11E /* OMSOmiseClientTestCase.m */; };
-		8A01F78420D8DD60003FC11E /* OMSSDKTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78320D8DD60003FC11E /* OMSSDKTestCase.m */; };
 		8A01F78920D8E101003FC11E /* OMSTokenRequestDelegateDummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78820D8E101003FC11E /* OMSTokenRequestDelegateDummy.m */; };
 		8A01F78B20D90EC5003FC11E /* Client+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */; };
 		8A01F78C20D90EC5003FC11E /* Client+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */; };
@@ -194,8 +193,6 @@
 		22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A00FEC21F1DE88600246078 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		8A01F78020D8DB7C003FC11E /* OMSOmiseClientTestCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSOmiseClientTestCase.m; sourceTree = "<group>"; };
-		8A01F78220D8DD60003FC11E /* OMSSDKTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OMSSDKTestCase.h; sourceTree = "<group>"; };
-		8A01F78320D8DD60003FC11E /* OMSSDKTestCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSSDKTestCase.m; sourceTree = "<group>"; };
 		8A01F78720D8E101003FC11E /* OMSTokenRequestDelegateDummy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OMSTokenRequestDelegateDummy.h; sourceTree = "<group>"; };
 		8A01F78820D8E101003FC11E /* OMSTokenRequestDelegateDummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSTokenRequestDelegateDummy.m; sourceTree = "<group>"; };
 		8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+ObjC.swift"; sourceTree = "<group>"; };
@@ -383,8 +380,6 @@
 			isa = PBXGroup;
 			children = (
 				8A01F78020D8DB7C003FC11E /* OMSOmiseClientTestCase.m */,
-				8A01F78220D8DD60003FC11E /* OMSSDKTestCase.h */,
-				8A01F78320D8DD60003FC11E /* OMSSDKTestCase.m */,
 				8A01F78720D8E101003FC11E /* OMSTokenRequestDelegateDummy.h */,
 				8A01F78820D8E101003FC11E /* OMSTokenRequestDelegateDummy.m */,
 			);
@@ -841,7 +836,6 @@
 				8AFE10BB20B69B39008E741D /* ClientTestCase.swift in Sources */,
 				224460041CF43A1200801D0F /* SDKTestCase.swift in Sources */,
 				2244600A1CF441DC00801D0F /* TokenRequestDelegateDummy.swift in Sources */,
-				8A01F78420D8DD60003FC11E /* OMSSDKTestCase.m in Sources */,
 				224460051CF43A1500801D0F /* CardNumberTest.swift in Sources */,
 				987A03211CE5B7D70035417A /* OmiseTokenRequestTest.swift in Sources */,
 				8A37E43620B584D300E2DA18 /* ModelTestCase.swift in Sources */,
