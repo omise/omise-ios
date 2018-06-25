@@ -6,7 +6,7 @@ import UIKit
 @objc public class CardNameTextField: OmiseTextField {
     /// Boolean indicating wether current input is valid or not.
     public override var isValid: Bool {
-        return !(text ?? "").isEmpty
+        return !text.isNilOrEmpty
     }
     
     override public init(frame: CGRect) {

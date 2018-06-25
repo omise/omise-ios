@@ -45,6 +45,10 @@ class OmiseTokenRequestTest: XCTestCase {
             
             XCTAssertNotNil(delegate.token)
             XCTAssertNil(delegate.error)
+            
+            XCTAssertEqual("4242", delegate.token?.card?.lastDigits)
+            XCTAssertEqual(11, delegate.token?.card?.expirationMonth)
+            XCTAssertEqual(2020, delegate.token?.card?.expirationYear)
         }
     }
     
@@ -52,8 +56,13 @@ class OmiseTokenRequestTest: XCTestCase {
         let expectation = self.expectation(description: "callback")
         testClient.send(testRequest) { (result) in
             defer { expectation.fulfill() }
-            if case .fail = result {
-                XCTFail("Expected succeed request")
+            switch result {
+            case .succeed(token: let token):
+                XCTAssertEqual("4242", token.card?.lastDigits)
+                XCTAssertEqual(11, token.card?.expirationMonth)
+                XCTAssertEqual(2020, token.card?.expirationYear)
+            case .fail(let error):
+                XCTFail("Expected succeed request but failed with \(error)")
             }
         }
         
@@ -87,3 +96,4 @@ class OmiseTokenRequestTest: XCTestCase {
         waitForExpectations(timeout: timeout, handler: nil)
     }
 }
+

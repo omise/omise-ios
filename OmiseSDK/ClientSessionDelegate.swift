@@ -43,7 +43,6 @@ extension Client {
                     return
             }
             
-            
             // Public key pinning
             let extractedServerPublicKeyData: Data?
             if #available(iOS 10.3, *) {

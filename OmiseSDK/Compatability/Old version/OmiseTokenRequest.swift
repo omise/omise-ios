@@ -1,6 +1,10 @@
 import Foundation
 
 
+@available(*, deprecated, message: "Use the new `Token` data type instead. This class will be removed in the future released", renamed: "Token")
+public typealias OmiseToken = __OmiseToken
+
+
 /// Delegate to receive token request events.
 @available(*, deprecated, message: "Use the completion handler pattern in the `Client` instead. This protocol will be removed in the future released")
 public protocol OmiseTokenRequestDelegate {

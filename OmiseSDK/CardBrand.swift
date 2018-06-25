@@ -12,14 +12,14 @@ import Foundation
         discover,
     ]
     
+    case visa
+    case masterCard
+    case jcb
     case amex
     case diners
-    case discover
-    case jcb
     case laser
-    case masterCard
     case maestro
-    case visa
+    case discover
     
     /// Regular expression pattern that can detect cards issued by the brand.
     public var pattern: String {
@@ -33,11 +33,11 @@ import Foundation
         case .amex:
             return "^3[47]"
         case .diners:
-            return "^3(0[0-5]|6)"
+            return "^3(0[0-5]|[6,8-9])|5[4-5]"
         case .laser:
             return "^(6304|670[69]|6771)"
         case .maestro:
-            return "^(5018|5020|5038|6304|6759|676[1-3])"
+            return "^(5[0,6-8]|6304|6759|676[1-3])"
         case .discover:
             return "^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5]|64[4-9])|65)"
         }
@@ -96,7 +96,7 @@ import Foundation
     @objc(validLengthsForBrand:) public static func __validLengthsForBrand(brand: CardBrand) -> NSRange {
         let range = brand.validLengths
         
-        return NSRange(location: range.lowerBound, length: range.upperBound - range.lowerBound)
+        return NSRange(range)
     }
 }
 

@@ -28,7 +28,6 @@ public protocol OmiseTextFieldValidationDelegate {
     
     /// Boolean indicating wether current input is valid or not.
     public var isValid: Bool {
-        // child-class override hook to provide validation logic.
         return true
     }
     
@@ -61,7 +60,5 @@ public protocol OmiseTextFieldValidationDelegate {
         textColor = isValid ? .black : .red
     }
     
-    @objc func textDidChange() {
-        // no-op for child overrides
-    }
+    @objc func textDidChange() {}
 }

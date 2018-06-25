@@ -1,5 +1,6 @@
 import Foundation
 
+
 /// Utility class for working with credit card numbers.
 @objc(OMSCardNumber) public final class CardNumber: NSObject {
     
