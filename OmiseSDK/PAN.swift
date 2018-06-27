@@ -58,6 +58,28 @@ public struct PAN {
         return sum % 10 == 0
     }
     
+    public static func suggestedSpaceFormattedIndexesForPANPrefix(_ panPrefix: String) -> IndexSet {
+        switch PAN(panPrefix) {
+        case CardBrand.amex.pattern, "^5[6-8]":
+            return [ 4, 10 ]
+        case "^50":
+            return [ 4, 8 ]
+        case "^3[0,6,8-9]":
+            return [ 4, 10 ]
+        case "^[0-9]": return [ 4, 8, 12 ]
+        default: return []
+        }
+    }
+}
+
+
+extension PAN {
+    public static func ~=(brand: CardBrand, pan: PAN) -> Bool {
+        return brand.pattern ~= pan
+    }
+    
+    public static func ~=(pattern: String, pan: PAN) -> Bool {
+        return pan.pan.range(of: pattern, options: .regularExpression, range: nil, locale: nil) != nil
     }
 }
 
