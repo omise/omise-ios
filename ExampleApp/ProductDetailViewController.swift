@@ -45,7 +45,10 @@ class ProductDetailViewController: UIViewController {
                 let url = URL(string: text) else { return }
             
             let expectedReturnURL = URLComponents(string: "http://www.example.com/orders")!
-            let handlerController = OmiseAuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(url, expectedReturnURLPatterns: [expectedReturnURL], delegate: self)
+            let handlerController =
+                OmiseAuthorizingPaymentViewController
+                    .makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(
+                        url, expectedReturnURLPatterns: [expectedReturnURL], delegate: self)
             self.present(handlerController, animated: true, completion: nil)
         }))
         present(alertController, animated: true, completion: nil)
@@ -53,7 +56,7 @@ class ProductDetailViewController: UIViewController {
 }
 
 extension ProductDetailViewController: CreditCardFormDelegate {
-    func creditCardForm(_ controller: CreditCardFormController, didSucceedWithToken token: __OmiseToken) {
+    func creditCardForm(_ controller: CreditCardFormController, didSucceedWithToken token: Token) {
         dismissCreditCardFormWithCompletion({
             self.performSegue(withIdentifier: "CompletePayment", sender: self)
         })

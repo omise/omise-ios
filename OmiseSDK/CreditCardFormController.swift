@@ -4,8 +4,26 @@ import UIKit
 import OmiseSDK.Private
 #endif
 
+
+public protocol CreditCardFormControllerDelegate: AnyObject {
+    /// Delegate method for receiving token data when card tokenization succeeds.
+    /// - parameter token: `OmiseToken` instance created from supplied credit card data.
+    /// - seealso: [Tokens API](https://www.omise.co/tokens-api)
+    func creditCardForm(_ controller: CreditCardFormController, didSucceedWithToken token: Token)
+    
+    /// Delegate method for receiving error information when card tokenization failed.
+    /// This allows you to have fine-grained control over error handling when setting
+    /// `handleErrors` to `false`.
+    /// - parameter error: The error that occurred during tokenization.
+    /// - note: This delegate method will *never* be called if `handleErrors` property is set to `true`.
+    func creditCardForm(_ controller: CreditCardFormController, didFailWithError error: Error)
+}
+
 /// Delegate to receive card tokenization events.
-@objc(OMSCreditCardFormDelegate) public protocol CreditCardFormDelegate: class {
+
+public typealias CreditCardFormDelegate = CreditCardFormControllerDelegate
+
+@objc(OMSCreditCardFormDelegate) public protocol OMSCreditCardFormDelegate: AnyObject {
     /// Delegate method for receiving token data when card tokenization succeeds.
     /// - parameter token: `OmiseToken` instance created from supplied credit card data.
     /// - seealso: [Tokens API](https://www.omise.co/tokens-api)
@@ -16,7 +34,7 @@ import OmiseSDK.Private
     /// `handleErrors` to `false`.
     /// - parameter error: The error that occurred during tokenization.
     /// - note: This delegate method will *never* be called if `handleErrors` property is set to `true`.
-    @objc func creditCardForm(_ controller: CreditCardFormController, didFailWithError error: Error)
+    @objc func creditCardForm(_ controller: CreditCardFormController, didFailWithError error: NSError)
 }
 
 
@@ -57,7 +75,8 @@ public class CreditCardFormController: UITableViewController {
     @objc public var publicKey: String?
     
     /// Delegate to receive CreditCardFormController result.
-    @objc public weak var delegate: CreditCardFormDelegate?
+    public weak var delegate: CreditCardFormControllerDelegate?
+    @objc(delegate) public weak var __delegate: OMSCreditCardFormDelegate?
     
     /// A boolean flag to enables/disables automatic error handling. Defaults to `true`.
     @objc public var handleErrors = true
@@ -154,7 +173,11 @@ public class CreditCardFormController: UITableViewController {
     
     private func handleError(_ error: Error) {
         guard handleErrors else {
-            delegate?.creditCardForm(self, didFailWithError: error)
+            if let delegate = self.delegate {
+                delegate.creditCardForm(self, didFailWithError: error)
+            } else {
+                __delegate?.creditCardForm(self, didFailWithError: error as NSError)
+            }
             return
         }
         
@@ -197,14 +220,18 @@ public class CreditCardFormController: UITableViewController {
         
         let client = Client(publicKey: publicKey)
         client.sendRequest(request, completionHandler: { [weak self] (result) in
-            guard let s = self else { return }
+            guard let self = self else { return }
             
-            s.stopActivityIndicator()
+            self.stopActivityIndicator()
             switch result {
             case let .success(token):
-                s.delegate?.creditCardForm(s, didSucceedWithToken: __OmiseToken(token: token))
+                if let delegate = self.delegate {
+                    delegate.creditCardForm(self, didSucceedWithToken: token)
+                } else {
+                    self.__delegate?.creditCardForm(self, didSucceedWithToken: __OmiseToken(token: token))
+                }
             case let .fail(err):
-                s.handleError(err)
+                self.handleError(err)
             }
         })
     }
