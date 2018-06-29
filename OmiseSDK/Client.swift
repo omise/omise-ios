@@ -31,7 +31,11 @@ import Foundation
     }
     
     public func requestTask<T: Object>(with request: Request<T>, completionHandler: Request<T>.Callback?) -> RequestTask<T> {
-        let dataTask = session.dataTask(with: buildURLRequestFor(request), completionHandler: Client.completeRequest(completionHandler))
+        let dataTask = session.dataTask(with: buildURLRequestFor(request), completionHandler: { (data, response, error) in
+            DispatchQueue.main.async {
+                Client.completeRequest(completionHandler)(data, response, error)
+            }
+        })
         return RequestTask(request: request, dataTask: dataTask)
     }
     
