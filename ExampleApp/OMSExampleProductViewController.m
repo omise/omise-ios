@@ -46,7 +46,7 @@ NSString * const OMSPublicKey = @"pkey_test_4y7dh41kuvvawbhslxw";
         NSURL *url = [[NSURL alloc] initWithString:textField.text];
         
         NSURLComponents *expectedReturnURL = [[NSURLComponents alloc] initWithString:@"http://www.example.com/orders"];
-        UINavigationController *authorizingPaymentViewController = [OmiseAuthorizingPaymentViewController makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL:url expectedReturnURLPatterns:@[expectedReturnURL] delegate:self];
+        UINavigationController *authorizingPaymentViewController = [OMSAuthorizingPaymentViewController authorizingPaymentViewControllerNavigationWithAuthorizedURL:url expectedReturnURLPatterns:@[expectedReturnURL] delegate:self];
         [self presentViewController:authorizingPaymentViewController animated:YES completion:nil];
     }]];
 }
@@ -61,12 +61,12 @@ NSString * const OMSPublicKey = @"pkey_test_4y7dh41kuvvawbhslxw";
     [self dismissCreditCardForm];
 }
 
-- (void)omiseAuthorizingPaymentViewController:(OmiseAuthorizingPaymentViewController *)viewController didCompleteAuthorizingPaymentWithRedirectedURL:(NSURL *)redirectedURL {
+- (void)authorizingPaymentViewController:(OMSAuthorizingPaymentViewController *)viewController didCompleteAuthorizingPaymentWithRedirectedURL:(NSURL *)redirectedURL {
     NSLog(@"%@", redirectedURL);
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)omiseAuthorizingPaymentViewControllerDidCancel:(OmiseAuthorizingPaymentViewController *)viewController {
+- (void)authorizingPaymentViewControllerDidCancel:(OMSAuthorizingPaymentViewController *)viewController {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

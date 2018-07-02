@@ -3,20 +3,34 @@ import WebKit
 
 
 /// Delegate to receive authorizing payment events.
-@objc public protocol OmiseAuthorizingPaymentViewControllerDelegate: class {
+@objc(OMSAuthorizingPaymentViewControllerDelegate)
+public protocol AuthorizingPaymentViewControllerDelegate: AnyObject {
     /// A delegation method called when the authorizing payment process is completed.
     /// - parameter viewController: The authorizing payment controller that call this method
     /// - parameter redirectedURL: A URL returned from the authorizing payment process.
-    func omiseAuthorizingPaymentViewController(_ viewController: OmiseAuthorizingPaymentViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL)
+    func authorizingPaymentViewController(_ viewController: AuthorizingPaymentViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL)
     /// A delegation method called when user cancel the authorizing payment process.
-    func omiseAuthorizingPaymentViewControllerDidCancel(_ viewController: OmiseAuthorizingPaymentViewController)
+    func authorizingPaymentViewControllerDidCancel(_ viewController: AuthorizingPaymentViewController)
+    
+    @available(*, unavailable,
+    renamed: "authorizingPaymentViewController(_:didCompleteAuthorizingPaymentWithRedirectedURL:)")
+    func omiseAuthorizingPaymentViewController(_ viewController: AuthorizingPaymentViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL)
+    
+    @available(*, unavailable,
+    renamed: "authorizingPaymentViewControllerDidCancel(_:)")
+    func omiseAuthorizingPaymentViewControllerDidCancel(_ viewController: AuthorizingPaymentViewController)
 }
 
 
-@available(*, renamed: "OmiseAuthorizingPaymentViewController")
-public typealias Omise3DSViewController = OmiseAuthorizingPaymentViewController
-@available(*, renamed: "OmiseAuthorizingPaymentViewControllerDelegate")
-public typealias Omise3DSViewControllerDelegate = OmiseAuthorizingPaymentViewControllerDelegate
+@available(*, deprecated, renamed: "AuthorizingPaymentViewController")
+public typealias Omise3DSViewController = AuthorizingPaymentViewController
+@available(*, deprecated, renamed: "AuthorizingPaymentViewControllerDelegate")
+public typealias Omise3DSViewControllerDelegate = AuthorizingPaymentViewControllerDelegate
+
+@available(*, deprecated, renamed: "AuthorizingPaymentViewController")
+public typealias OmiseAuthorizingPaymentViewController = AuthorizingPaymentViewController
+@available(*, deprecated, renamed: "AuthorizingPaymentViewControllerDelegate")
+public typealias OmiseAuthorizingPaymentViewControllerDelegate = AuthorizingPaymentViewControllerDelegate
 
 
 /*:
@@ -26,7 +40,8 @@ public typealias Omise3DSViewControllerDelegate = OmiseAuthorizingPaymentViewCon
  - remark:
    This is still an experimental API. If you encountered with any problem with this API, please feel free to report to Omise.
  */
-public class OmiseAuthorizingPaymentViewController: UIViewController {
+@objc(OMSAuthorizingPaymentViewController)
+public class AuthorizingPaymentViewController: UIViewController {
     let webView: WKWebView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration())
     
     /// Authorized URL given from Omise in the created `Charge` object.
@@ -47,7 +62,7 @@ public class OmiseAuthorizingPaymentViewController: UIViewController {
     public var expectedReturnURLPatterns: [URLComponents] = []
     
     /// A delegate object that will recieved the authorizing payment events.
-    public weak var delegate: OmiseAuthorizingPaymentViewControllerDelegate?
+    public weak var delegate: AuthorizingPaymentViewControllerDelegate?
     
     /// A factory method for creating a authorizing payment view controller comes in UINavigationController stack.
     ///
@@ -56,15 +71,23 @@ public class OmiseAuthorizingPaymentViewController: UIViewController {
     /// - parameter delegate: A delegate object that will recieved authorizing payment events.
     ///
     /// - returns: A UINavigationController with `OmiseAuthorizingPaymentViewController` as its root view controller
-    @objc public static func makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: OmiseAuthorizingPaymentViewControllerDelegate) -> UINavigationController {
-        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: Bundle(for: OmiseAuthorizingPaymentViewController.self))
+    @objc(authorizingPaymentViewControllerNavigationWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
+    public static func makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> UINavigationController {
+        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: Bundle(for: AuthorizingPaymentViewController.self))
         let navigationController = storyboard.instantiateViewController(withIdentifier: "DefaultAuthorizingPaymentViewControllerWithNavigation") as! UINavigationController
-        let viewController = navigationController.topViewController as! OmiseAuthorizingPaymentViewController
+        let viewController = navigationController.topViewController as! AuthorizingPaymentViewController
         viewController.authorizedURL = authorizedURL
         viewController.expectedReturnURLPatterns = expectedReturnURLPatterns
         viewController.delegate = delegate
         
         return navigationController
+    }
+    
+    @available(*, deprecated,
+    message: "Please use the new method that confrom to Objective-C convention +[AuthorizingPaymentViewController authorizingPaymentViewControllerNavigationWithAuthorizedURL:expectedReturnURLPatterns:delegate:] as of this method will be removed in the future release.")
+    @objc(makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
+    public static func __makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> UINavigationController {
+        return AuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(authorizedURL, expectedReturnURLPatterns: expectedReturnURLPatterns, delegate: delegate)
     }
     
     /// A factory method for creating a authorizing payment view controller comes in UINavigationController stack.
@@ -74,14 +97,22 @@ public class OmiseAuthorizingPaymentViewController: UIViewController {
     /// - parameter delegate: A delegate object that will recieved authorizing payment events.
     ///
     /// - returns: An `OmiseAuthorizingPaymentViewController` with given authorized URL and delegate.
-    @objc public static func makeAuthorizingPaymentViewControllerWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: OmiseAuthorizingPaymentViewControllerDelegate) -> OmiseAuthorizingPaymentViewController {
-        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: Bundle(for: OmiseAuthorizingPaymentViewController.self))
-        let viewController = storyboard.instantiateViewController(withIdentifier: "DefaultAuthorizingPaymentViewController") as! OmiseAuthorizingPaymentViewController
+    @objc(authorizingPaymentViewControllerWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
+    public static func makeAuthorizingPaymentViewControllerWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> AuthorizingPaymentViewController {
+        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: Bundle(for: AuthorizingPaymentViewController.self))
+        let viewController = storyboard.instantiateViewController(withIdentifier: "DefaultAuthorizingPaymentViewController") as! AuthorizingPaymentViewController
         viewController.authorizedURL = authorizedURL
         viewController.expectedReturnURLPatterns = expectedReturnURLPatterns
         viewController.delegate = delegate
         
         return viewController
+    }
+    
+    @available(*, deprecated,
+    message: "Please use the new method that confrom to Objective-C convention +[AuthorizingPaymentViewController authorizingPaymentViewControllernWithAuthorizedURL:expectedReturnURLPatterns:delegate:] as of this method will be removed in the future release.")
+    @objc(makeAuthorizingPaymentViewControllerWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
+    public static func __makeAuthorizingPaymentViewControllerWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> AuthorizingPaymentViewController {
+        return AuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerWithAuthorizedURL(authorizedURL, expectedReturnURLPatterns: expectedReturnURLPatterns, delegate: delegate)
     }
     
     public override func loadView() {
@@ -123,9 +154,9 @@ public class OmiseAuthorizingPaymentViewController: UIViewController {
         webView.load(request)
     }
     
-    fileprivate func verifyPaymentURL(_ url: URL) -> Bool {
+    private func verifyPaymentURL(_ url: URL) -> Bool {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
-                return false
+            return false
         }
         
         return expectedReturnURLPatterns.contains(where: { expectedURLComponents -> Bool in
@@ -134,15 +165,15 @@ public class OmiseAuthorizingPaymentViewController: UIViewController {
     }
     
     @IBAction func cancelAuthorizingPaymentProcess(_ sender: UIBarButtonItem) {
-        delegate?.omiseAuthorizingPaymentViewControllerDidCancel(self)
+        delegate?.authorizingPaymentViewControllerDidCancel(self)
     }
 }
 
-extension OmiseAuthorizingPaymentViewController: WKNavigationDelegate {
+extension AuthorizingPaymentViewController: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         if let url = navigationAction.request.url, verifyPaymentURL(url) {
             decisionHandler(.cancel)
-            delegate?.omiseAuthorizingPaymentViewController(self, didCompleteAuthorizingPaymentWithRedirectedURL: url)
+            delegate?.authorizingPaymentViewController(self, didCompleteAuthorizingPaymentWithRedirectedURL: url)
         } else {
             decisionHandler(.allow)
         }

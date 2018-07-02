@@ -46,7 +46,7 @@ class ProductDetailViewController: UIViewController {
             
             let expectedReturnURL = URLComponents(string: "http://www.example.com/orders")!
             let handlerController =
-                OmiseAuthorizingPaymentViewController
+                AuthorizingPaymentViewController
                     .makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(
                         url, expectedReturnURLPatterns: [expectedReturnURL], delegate: self)
             self.present(handlerController, animated: true, completion: nil)
@@ -67,13 +67,13 @@ extension ProductDetailViewController: CreditCardFormDelegate {
     }
 }
 
-extension ProductDetailViewController: OmiseAuthorizingPaymentViewControllerDelegate {
-    func omiseAuthorizingPaymentViewController(_ viewController: OmiseAuthorizingPaymentViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL) {
+extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate {
+    func authorizingPaymentViewController(_ viewController: AuthorizingPaymentViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL) {
         print(redirectedURL)
         dismiss(animated: true, completion: nil)
     }
     
-    func omiseAuthorizingPaymentViewControllerDidCancel(_ viewController: OmiseAuthorizingPaymentViewController) {
+    func authorizingPaymentViewControllerDidCancel(_ viewController: AuthorizingPaymentViewController) {
         dismiss(animated: true, completion: nil)
     }
 }
