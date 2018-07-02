@@ -99,7 +99,7 @@
 		8A60619A20B2A8D400CF90D5 /* PAN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A60619920B2A8D400CF90D5 /* PAN.swift */; };
 		8A60619B20B2A8D400CF90D5 /* PAN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A60619920B2A8D400CF90D5 /* PAN.swift */; };
 		8A739D0920DA4DC500217CAB /* OMSConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A739D0720DA4DC500217CAB /* OMSConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8A739D0A20DA4DC500217CAB /* OMSConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A739D0720DA4DC500217CAB /* OMSConstants.h */; };
+		8A739D0A20DA4DC500217CAB /* OMSConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A739D0720DA4DC500217CAB /* OMSConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8A739D0B20DA4DC500217CAB /* OMSConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A739D0820DA4DC500217CAB /* OMSConstants.m */; };
 		8A739D0C20DA4DC500217CAB /* OMSConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A739D0820DA4DC500217CAB /* OMSConstants.m */; };
 		8A7F8B0C20C55605008F4D08 /* ClientSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADAA9A720B7194500DD7CCF /* ClientSessionDelegate.swift */; };
@@ -1061,6 +1061,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Library";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1086,6 +1087,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Library";
 			};
 			name = Release;
 		};
@@ -1165,6 +1167,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK;
 				PRODUCT_NAME = OmiseSDK;
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(inherited) $(SRCROOT)/Library";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1200,6 +1203,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK;
 				PRODUCT_NAME = OmiseSDK;
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(inherited) $(SRCROOT)/Library";
 			};
 			name = Release;
 		};

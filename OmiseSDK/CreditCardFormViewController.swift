@@ -256,18 +256,18 @@ public class CreditCardFormViewController: UITableViewController {
         
         let client = Client(publicKey: publicKey)
         client.sendRequest(request, completionHandler: { [weak self] (result) in
-            guard let self = self else { return }
+            guard let strongSelf = self else { return }
             
-            self.stopActivityIndicator()
+            strongSelf.stopActivityIndicator()
             switch result {
             case let .success(token):
-                if let delegate = self.delegate {
-                    delegate.creditCardFormViewController(self, didSucceedWithToken: token)
+                if let delegate = strongSelf.delegate {
+                    delegate.creditCardFormViewController(strongSelf, didSucceedWithToken: token)
                 } else {
-                    self.__delegate?.creditCardFormViewController(self, didSucceedWithToken: __OmiseToken(token: token))
+                    strongSelf.__delegate?.creditCardFormViewController(strongSelf, didSucceedWithToken: __OmiseToken(token: token))
                 }
             case let .fail(err):
-                self.handleError(err)
+                strongSelf.handleError(err)
             }
         })
     }

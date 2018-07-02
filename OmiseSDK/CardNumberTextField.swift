@@ -22,9 +22,9 @@ import Foundation
             let kerningIndexes = IndexSet(PAN.suggestedSpaceFormattedIndexesForPANPrefix(pan).map({ $0 - 1 }))
             
             if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
-                typingAttributes?[NSAttributedString.Key.kern.rawValue] = 5
+                typingAttributes?[NSAttributedStringKey.kern.rawValue] = 5
             } else {
-                typingAttributes?.removeValue(forKey: NSAttributedString.Key.kern.rawValue)
+                typingAttributes?.removeValue(forKey: NSAttributedStringKey.kern.rawValue)
             }
         }
     }
@@ -71,7 +71,7 @@ import Foundation
         
         let kerningIndexes = IndexSet([3, 7, 11])
         kerningIndexes.forEach({
-            formattingAttributedText.addAttribute(NSAttributedString.Key.kern, value: 5, range: NSRange(location: $0, length: 1))
+            formattingAttributedText.addAttribute(NSAttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
         })
         self.attributedPlaceholder = formattingAttributedText
     }
@@ -91,9 +91,9 @@ import Foundation
             
             let kerningIndexes = IndexSet(PAN.suggestedSpaceFormattedIndexesForPANPrefix(pan).map({ $0 - 1 }))
             
-            formattingAttributedText.removeAttribute(NSAttributedString.Key.kern, range: NSRange(location: formattingStartIndex, length: formattingAttributedText.length - formattingStartIndex))
+            formattingAttributedText.removeAttribute(NSAttributedStringKey.kern, range: NSRange(location: formattingStartIndex, length: formattingAttributedText.length - formattingStartIndex))
             kerningIndexes[kerningIndexes.indexRange(in: formattingStartIndex..<formattingAttributedText.length)].forEach({
-                formattingAttributedText.addAttribute(NSAttributedString.Key.kern, value: 5, range: NSRange(location: $0, length: 1))
+                formattingAttributedText.addAttribute(NSAttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
             })
             
             self.attributedText = formattingAttributedText
@@ -104,7 +104,7 @@ import Foundation
     public override func becomeFirstResponder() -> Bool {
         if let kerningIndexes = text.map(PAN.suggestedSpaceFormattedIndexesForPANPrefix), let attributedText = attributedText, kerningIndexes.contains(attributedText.length) {
             let formattingAttributedText = NSMutableAttributedString(attributedString: attributedText)
-            formattingAttributedText.addAttribute(NSAttributedString.Key.kern, value: 5, range: NSRange(location: attributedText.length - 1, length: 1))
+            formattingAttributedText.addAttribute(NSAttributedStringKey.kern, value: 5, range: NSRange(location: attributedText.length - 1, length: 1))
             self.attributedText = formattingAttributedText
         }
         
@@ -118,7 +118,7 @@ import Foundation
     public override func resignFirstResponder() -> Bool {
         if let kerningIndexes = text.map(PAN.suggestedSpaceFormattedIndexesForPANPrefix), let attributedText = attributedText, kerningIndexes.contains(attributedText.length) {
             let formattingAttributedText = NSMutableAttributedString(attributedString: attributedText)
-            formattingAttributedText.removeAttribute(NSAttributedString.Key.kern, range: NSRange(location: attributedText.length - 1, length: 1))
+            formattingAttributedText.removeAttribute(NSAttributedStringKey.kern, range: NSRange(location: attributedText.length - 1, length: 1))
             self.attributedText = formattingAttributedText
         }
         
@@ -146,9 +146,9 @@ import Foundation
         let formattingAttributedText = NSMutableAttributedString(attributedString: attributedText)
         let kerningIndexes = IndexSet(PAN.suggestedSpaceFormattedIndexesForPANPrefix(attributedText.string).map({ $0 - 1 }))
         
-        formattingAttributedText.removeAttribute(NSAttributedString.Key.kern, range: NSRange(location: 0, length: formattingAttributedText.length))
+        formattingAttributedText.removeAttribute(NSAttributedStringKey.kern, range: NSRange(location: 0, length: formattingAttributedText.length))
         kerningIndexes.forEach({
-            formattingAttributedText.addAttribute(NSAttributedString.Key.kern, value: 5, range: NSRange(location: $0, length: 1))
+            formattingAttributedText.addAttribute(NSAttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
         })
         let previousSelectedTextRange = self.selectedTextRange
         self.attributedText = formattingAttributedText
@@ -161,9 +161,9 @@ import Foundation
         }
         let kerningIndexes = IndexSet(PAN.suggestedSpaceFormattedIndexesForPANPrefix(pan).map({ $0 - 1 }))
         if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
-            typingAttributes?[NSAttributedString.Key.kern.rawValue] = 5
+            typingAttributes?[NSAttributedStringKey.kern.rawValue] = 5
         } else {
-            typingAttributes?.removeValue(forKey: NSAttributedString.Key.kern.rawValue)
+            typingAttributes?.removeValue(forKey: NSAttributedStringKey.kern.rawValue)
         }
     }
     
