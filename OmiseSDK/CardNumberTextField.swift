@@ -56,6 +56,11 @@ import Foundation
     
     private func initializeInstance() {
         keyboardType = .numberPad
+        
+        if #available(iOS 10.0, *) {
+            textContentType = .creditCardNumber
+        }
+        
         placeholder = "1234567890123456"
         
         guard let attributedPlaceholder = attributedPlaceholder else {

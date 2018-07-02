@@ -26,7 +26,9 @@ import UIKit
     
     private func initializeInstance() {
         keyboardType = .default
-        
+        if #available(iOS 10.0, *) {
+            textContentType = .name
+        }
         placeholder = "John Doe"
     }
 }
