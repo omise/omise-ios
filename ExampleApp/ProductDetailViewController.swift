@@ -7,7 +7,7 @@ class ProductDetailViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PresentCreditFormWithModal",
             let creditCardFormNavigationController = segue.destination as? UINavigationController,
-            let creditCardFormController = creditCardFormNavigationController.topViewController as? CreditCardFormController {
+            let creditCardFormController = creditCardFormNavigationController.topViewController as? CreditCardFormViewController {
             creditCardFormController.publicKey = publicKey
             creditCardFormController.handleErrors = true
             creditCardFormController.delegate = self
@@ -17,7 +17,7 @@ class ProductDetailViewController: UIViewController {
     }
     
     @IBAction func showCreditCardForm(_ sender: UIButton) {
-        let creditCardFormController = CreditCardFormController.makeCreditCardForm(withPublicKey: publicKey)
+        let creditCardFormController = CreditCardFormViewController.makeCreditCardForm(withPublicKey: publicKey)
         creditCardFormController.handleErrors = true
         creditCardFormController.delegate = self
         show(creditCardFormController, sender: self)
@@ -55,14 +55,14 @@ class ProductDetailViewController: UIViewController {
     }
 }
 
-extension ProductDetailViewController: CreditCardFormDelegate {
-    func creditCardForm(_ controller: CreditCardFormController, didSucceedWithToken token: Token) {
+extension ProductDetailViewController: CreditCardFormViewControllerDelegate {
+    func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
         dismissCreditCardFormWithCompletion({
             self.performSegue(withIdentifier: "CompletePayment", sender: self)
         })
     }
     
-    func creditCardForm(_ controller: CreditCardFormController, didFailWithError error: Error) {
+    func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error) {
         dismissCreditCardForm()
     }
 }

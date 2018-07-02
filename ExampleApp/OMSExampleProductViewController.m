@@ -8,7 +8,7 @@ NSString * const OMSPublicKey = @"pkey_test_4y7dh41kuvvawbhslxw";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"PresentCreditFormWithModal"]) {
-        CreditCardFormController *creditCardFormController = (CreditCardFormController *)((UINavigationController *)segue.destinationViewController).topViewController;
+        OMSCreditCardFormViewController *creditCardFormController = (OMSCreditCardFormViewController *)((UINavigationController *)segue.destinationViewController).topViewController;
         creditCardFormController.publicKey = OMSPublicKey;
         creditCardFormController.handleErrors = YES;
         creditCardFormController.delegate = self;
@@ -31,7 +31,7 @@ NSString * const OMSPublicKey = @"pkey_test_4y7dh41kuvvawbhslxw";
 }
 
 - (IBAction)showCreditCardForm:(id)sender {
-    CreditCardFormController *creditCardFormController = [CreditCardFormController makeCreditCardFormWithPublicKey:OMSPublicKey];
+    OMSCreditCardFormViewController *creditCardFormController = [OMSCreditCardFormViewController makeCreditCardFormWithPublicKey:OMSPublicKey];
     creditCardFormController.handleErrors = YES;
     creditCardFormController.delegate = self;
     [self showViewController:creditCardFormController sender:self];
@@ -51,13 +51,13 @@ NSString * const OMSPublicKey = @"pkey_test_4y7dh41kuvvawbhslxw";
     }]];
 }
 
-- (void)creditCardForm:(CreditCardFormController *)controller didSucceedWithToken:(OMSToken *)token {
+- (void)creditCardFormViewController:(OMSCreditCardFormViewController *)controller didSucceedWithToken:(OMSToken *)token {
     [self dismissCreditCardFormWithCompletion:^{
         [self performSegueWithIdentifier:@"CompletePayment" sender:self];
     }];
 }
 
-- (void)creditCardForm:(CreditCardFormController *)controller didFailWithError:(NSError *)error {
+- (void)creditCardFormViewController:(OMSCreditCardFormViewController *)controller didFailWithError:(NSError *)error {
     [self dismissCreditCardForm];
 }
 

@@ -5,42 +5,76 @@ import OmiseSDK.Private
 #endif
 
 
-public protocol CreditCardFormControllerDelegate: AnyObject {
+public protocol CreditCardFormViewControllerDelegate: AnyObject {
     /// Delegate method for receiving token data when card tokenization succeeds.
     /// - parameter token: `OmiseToken` instance created from supplied credit card data.
     /// - seealso: [Tokens API](https://www.omise.co/tokens-api)
-    func creditCardForm(_ controller: CreditCardFormController, didSucceedWithToken token: Token)
+    func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token)
     
     /// Delegate method for receiving error information when card tokenization failed.
     /// This allows you to have fine-grained control over error handling when setting
     /// `handleErrors` to `false`.
     /// - parameter error: The error that occurred during tokenization.
     /// - note: This delegate method will *never* be called if `handleErrors` property is set to `true`.
+    func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error)
+}
+
+
+/// Delegate to receive card tokenization events.
+@available(*, deprecated, renamed: "CreditCardFormViewControllerDelegate")
+public typealias CreditCardFormControllerDelegate = CreditCardFormViewControllerDelegate
+
+@available(*, unavailable, renamed: "CreditCardFormViewControllerDelegate")
+public protocol CreditCardFormDelegate: CreditCardFormViewControllerDelegate {
+    
+    @available(*, deprecated,
+    renamed: "CreditCardFormViewControllerDelegate.creditCardFormViewController(_:didSucceedWithToken:)")
+    func creditCardForm(_ controller: CreditCardFormController, didSucceedWithToken token: Token)
+    
+    @available(*, deprecated,
+    renamed: "CreditCardFormViewControllerDelegate.creditCardFormViewController(_:didFailWithError:)")
     func creditCardForm(_ controller: CreditCardFormController, didFailWithError error: Error)
 }
 
-/// Delegate to receive card tokenization events.
+@available(*, deprecated,
+message: "This delegate name is deprecated. Please use the new name of `OMSCreditCardFormViewControllerDelegate`",
+renamed: "OMSCreditCardFormViewControllerDelegate")
+@objc public protocol OMSCreditCardFormDelegate: OMSCreditCardFormViewControllerDelegate {}
 
-public typealias CreditCardFormDelegate = CreditCardFormControllerDelegate
 
-@objc(OMSCreditCardFormDelegate) public protocol OMSCreditCardFormDelegate: AnyObject {
+@objc(OMSCreditCardFormViewControllerDelegate)
+public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
     /// Delegate method for receiving token data when card tokenization succeeds.
     /// - parameter token: `OmiseToken` instance created from supplied credit card data.
     /// - seealso: [Tokens API](https://www.omise.co/tokens-api)
-    @objc func creditCardForm(_ controller: CreditCardFormController, didSucceedWithToken token: __OmiseToken)
+    @objc func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: __OmiseToken)
     
     /// Delegate method for receiving error information when card tokenization failed.
     /// This allows you to have fine-grained control over error handling when setting
     /// `handleErrors` to `false`.
     /// - parameter error: The error that occurred during tokenization.
     /// - note: This delegate method will *never* be called if `handleErrors` property is set to `true`.
-    @objc func creditCardForm(_ controller: CreditCardFormController, didFailWithError error: NSError)
+    @objc func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: NSError)
+    
+    @available(*, unavailable,
+    message: "Implement the new -[OMSCreditCardFormViewControllerDelegate creditCardFormViewController:didSucceedWithToken:] instead",
+    renamed: "creditCardFormViewController(_:didSucceedWithToken:)")
+    @objc func creditCardForm(_ controller: CreditCardFormViewController, didSucceedWithToken token: __OmiseToken)
+    
+    @available(*, unavailable,
+    message: "Implement the new -[OMSCreditCardFormViewControllerDelegate creditCardFormViewController:didFailWithError:] instead",
+    renamed: "creditCardFormViewController(_:didFailWithError:)")
+    @objc func creditCardForm(_ controller: CreditCardFormViewController, didFailWithError error: NSError)
 }
 
 
+@available(*, deprecated, renamed: "CreditCardFormViewController")
+public typealias CreditCardFormController = CreditCardFormViewController
+
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.
-public class CreditCardFormController: UITableViewController {
+@objc(OMSCreditCardFormViewController)
+public class CreditCardFormViewController: UITableViewController {
     fileprivate var hasErrorMessage = false
     
     @IBOutlet var formHeaderView: FormHeaderView!
@@ -75,8 +109,8 @@ public class CreditCardFormController: UITableViewController {
     @objc public var publicKey: String?
     
     /// Delegate to receive CreditCardFormController result.
-    public weak var delegate: CreditCardFormControllerDelegate?
-    @objc(delegate) public weak var __delegate: OMSCreditCardFormDelegate?
+    public weak var delegate: CreditCardFormViewControllerDelegate?
+    @objc(delegate) public weak var __delegate: OMSCreditCardFormViewControllerDelegate?
     
     /// A boolean flag to enables/disables automatic error handling. Defaults to `true`.
     @objc public var handleErrors = true
@@ -104,10 +138,10 @@ public class CreditCardFormController: UITableViewController {
     
     /// Factory method for creating CreditCardFormController with given public key.
     /// - parameter publicKey: Omise public key.
-    @objc public static func makeCreditCardForm(withPublicKey publicKey: String) -> CreditCardFormController {
+    @objc public static func makeCreditCardForm(withPublicKey publicKey: String) -> CreditCardFormViewController {
         let omiseBundle = Bundle(for: self)
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: omiseBundle)
-        let creditCardForm = storyboard.instantiateInitialViewController() as! CreditCardFormController
+        let creditCardForm = storyboard.instantiateInitialViewController() as! CreditCardFormViewController
         creditCardForm.publicKey = publicKey
         
         return creditCardForm
@@ -174,9 +208,9 @@ public class CreditCardFormController: UITableViewController {
     private func handleError(_ error: Error) {
         guard handleErrors else {
             if let delegate = self.delegate {
-                delegate.creditCardForm(self, didFailWithError: error)
+                delegate.creditCardFormViewController(self, didFailWithError: error)
             } else {
-                __delegate?.creditCardForm(self, didFailWithError: error as NSError)
+                __delegate?.creditCardFormViewController(self, didFailWithError: error as NSError)
             }
             return
         }
@@ -196,7 +230,9 @@ public class CreditCardFormController: UITableViewController {
     }
     
     fileprivate func updateSupplementaryUI() {
-        let valid = formFields.reduce(true) { (valid, field) -> Bool in valid && field.isValid }
+        let valid = formFields.reduce(into: true, { (valid, field) in
+            valid = valid && field.isValid
+        })
         confirmButtonCell?.isUserInteractionEnabled = valid
         
         formHeaderView?.setCardBrand(cardNumberTextField.cardBrand)
@@ -226,9 +262,9 @@ public class CreditCardFormController: UITableViewController {
             switch result {
             case let .success(token):
                 if let delegate = self.delegate {
-                    delegate.creditCardForm(self, didSucceedWithToken: token)
+                    delegate.creditCardFormViewController(self, didSucceedWithToken: token)
                 } else {
-                    self.__delegate?.creditCardForm(self, didSucceedWithToken: __OmiseToken(token: token))
+                    self.__delegate?.creditCardFormViewController(self, didSucceedWithToken: __OmiseToken(token: token))
                 }
             case let .fail(err):
                 self.handleError(err)
@@ -263,7 +299,7 @@ public class CreditCardFormController: UITableViewController {
     
 }
 
-extension CreditCardFormController {
+extension CreditCardFormViewController {
     public override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 0 && handleErrors && hasErrorMessage {
             return max(
@@ -302,7 +338,7 @@ extension CreditCardFormController {
 }
 
 #if CardIO
-extension CreditCardFormController: CardIOPaymentViewControllerDelegate {
+extension CreditCardFormViewController: CardIOPaymentViewControllerDelegate {
     public func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
         dismiss(animated: true, completion: nil)
     }

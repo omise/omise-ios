@@ -4,7 +4,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OMSExampleProductViewController : UIViewController <OMSCreditCardFormDelegate, OMSAuthorizingPaymentViewControllerDelegate>
+@interface OMSExampleProductViewController : UIViewController <OMSCreditCardFormViewControllerDelegate, OMSAuthorizingPaymentViewControllerDelegate>
 
 @end
 
