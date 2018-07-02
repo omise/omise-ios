@@ -4,15 +4,15 @@ import Foundation
 @objc(OMSFormAccessoryView) public class OmiseFormAccessoryView: UIToolbar {
     private var textFields = [UITextField]() {
         willSet {
-            textFields.forEach { (textField) in
+            textFields.forEach({ (textField) in
                 textField.removeTarget(self, action: #selector(textFieldDidBeginEditing), for: UIControlEvents.editingDidBegin)
-            }
+            })
         }
         didSet {
-            textFields.forEach { (textField) in
+            textFields.forEach({ (textField) in
                 textField.addTarget(self, action: #selector(textFieldDidBeginEditing), for: UIControlEvents.editingDidBegin)
                 textField.inputAccessoryView = self
-            }
+            })
         }
     }
     private var currentTextField: UITextField?

@@ -45,20 +45,20 @@ import UIKit
     
     override public init() {
         super.init(frame: CGRect.zero)
-        setup()
+        initializeInstance()
     }
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
+        initializeInstance()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setup()
+        initializeInstance()
     }
     
-    func setup() {
+    private func initializeInstance() {
         placeholder = "MM/YY"
         let expiryDatePicker = CardExpiryDatePicker() // TODO: Use normal picker delegate.
         expiryDatePicker.onDateSelected = { [weak self] (month: Int, year: Int) in

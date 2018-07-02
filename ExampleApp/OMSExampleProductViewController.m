@@ -12,6 +12,8 @@ NSString * const OMSPublicKey = @"pkey_test_4y7dh41kuvvawbhslxw";
         creditCardFormController.publicKey = OMSPublicKey;
         creditCardFormController.handleErrors = YES;
         creditCardFormController.delegate = self;
+        
+        creditCardFormController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:self action:@selector(dismissCreditCardForm)];
     }
 }
 

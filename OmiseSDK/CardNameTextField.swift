@@ -11,20 +11,20 @@ import UIKit
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
+        initializeInstance()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setup()
+        initializeInstance()
     }
     
     override init() {
         super.init(frame: CGRect.zero)
-        setup()
+        initializeInstance()
     }
     
-    func setup() {
+    private func initializeInstance() {
         keyboardType = .default
         
         placeholder = "John Doe"

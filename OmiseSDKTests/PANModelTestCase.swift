@@ -64,6 +64,21 @@ class PANModelTestCase: XCTestCase {
         }
         
         do {
+            let pan = PAN("42")
+            XCTAssertEqual(pan.number, "42")
+        }
+        
+        do {
+            let pan = PAN("")
+            XCTAssertEqual(pan.number, "")
+        }
+        
+        do {
+            let pan = PAN("42 4242")
+            XCTAssertEqual(pan.number, "XX4242")
+        }
+        
+        do {
             let pan = PAN("4242 4242")
             XCTAssertEqual(pan.number, "XXXX4242")
         }

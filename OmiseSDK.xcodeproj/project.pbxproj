@@ -97,7 +97,6 @@
 		8A4F7CBA20A9C0FD001C441A /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4F7CB820A9C0FD001C441A /* Object.swift */; };
 		8A5D59811D5317DD005D3346 /* OmiseSDK.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A5D59831D5317DD005D3346 /* OmiseSDK.storyboard */; };
 		8A60619A20B2A8D400CF90D5 /* PAN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A60619920B2A8D400CF90D5 /* PAN.swift */; };
-		8AF6A1DA20E4FEBE00AC5625 /* OMSExampleProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF6A1D920E4FEBE00AC5625 /* OMSExampleProductViewController.m */; };
 		8A60619B20B2A8D400CF90D5 /* PAN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A60619920B2A8D400CF90D5 /* PAN.swift */; };
 		8A739D0920DA4DC500217CAB /* OMSConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A739D0720DA4DC500217CAB /* OMSConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8A739D0A20DA4DC500217CAB /* OMSConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A739D0720DA4DC500217CAB /* OMSConstants.h */; };
@@ -111,6 +110,7 @@
 		8AD0609720B55E610074894E /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0609520B55E610074894E /* Client.swift */; };
 		8ADAA9A520B6C0AF00DD7CCF /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADAA9A420B6C0AF00DD7CCF /* Currency.swift */; };
 		8ADAA9A620B6C0AF00DD7CCF /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADAA9A420B6C0AF00DD7CCF /* Currency.swift */; };
+		8AF6A1DA20E4FEBE00AC5625 /* OMSExampleProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF6A1D920E4FEBE00AC5625 /* OMSExampleProductViewController.m */; };
 		8AFB920F20D39BE50072B185 /* OmiseTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */; };
 		8AFE10BB20B69B39008E741D /* ClientTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE10BA20B69B39008E741D /* ClientTestCase.swift */; };
 		981FA5F71D0EDDB0009ECEDC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 981FA5F91D0EDDB0009ECEDC /* Localizable.strings */; };
@@ -233,16 +233,16 @@
 		8A5D59851D5317E0005D3346 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/OmiseSDK.strings; sourceTree = "<group>"; };
 		8A5D59871D5317E1005D3346 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/OmiseSDK.strings; sourceTree = "<group>"; };
 		8A60619920B2A8D400CF90D5 /* PAN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAN.swift; sourceTree = "<group>"; };
-		8AF6A1D720E4FEBE00AC5625 /* ExampleApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExampleApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		8A739D0720DA4DC500217CAB /* OMSConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OMSConstants.h; sourceTree = "<group>"; };
 		8A739D0820DA4DC500217CAB /* OMSConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSConstants.m; sourceTree = "<group>"; };
 		8AD0609220B55B3A0074894E /* RequestTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTask.swift; sourceTree = "<group>"; };
 		8AD0609520B55E610074894E /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
-		8AF6A1D820E4FEBE00AC5625 /* OMSExampleProductViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OMSExampleProductViewController.h; sourceTree = "<group>"; };
-		8AF6A1D920E4FEBE00AC5625 /* OMSExampleProductViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSExampleProductViewController.m; sourceTree = "<group>"; };
 		8ADAA9A420B6C0AF00DD7CCF /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		8ADAA9A720B7194500DD7CCF /* ClientSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientSessionDelegate.swift; sourceTree = "<group>"; };
 		8ADAA9AC20B71EDA00DD7CCF /* module.map */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
+		8AF6A1D720E4FEBE00AC5625 /* ExampleApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExampleApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		8AF6A1D820E4FEBE00AC5625 /* OMSExampleProductViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OMSExampleProductViewController.h; sourceTree = "<group>"; };
+		8AF6A1D920E4FEBE00AC5625 /* OMSExampleProductViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSExampleProductViewController.m; sourceTree = "<group>"; };
 		8AFE10BA20B69B39008E741D /* ClientTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTestCase.swift; sourceTree = "<group>"; };
 		981FA5F81D0EDDB0009ECEDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		981FA5FA1D0EDDD8009ECEDC /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -453,11 +453,11 @@
 		8A2BE95820A9A8FE000CEB60 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentViewController.swift */,
+				8A1D4C651D51B72200C7837C /* CreditCardFormController.swift */,
+				98E131731D1809E900E63E18 /* OmiseFormAccessoryView.swift */,
 				9864064B1CFEA820004BCF51 /* Cells */,
 				986406361CFEA7EA004BCF51 /* Fields */,
-				8A1D4C651D51B72200C7837C /* CreditCardFormController.swift */,
-				8A188BAF1D951E3C00FFF467 /* OmiseAuthorizingPaymentViewController.swift */,
-				98E131731D1809E900E63E18 /* OmiseFormAccessoryView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";

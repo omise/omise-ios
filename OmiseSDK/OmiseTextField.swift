@@ -11,12 +11,8 @@ public protocol OmiseTextFieldValidationDelegate {
 
 /// Base UITextField subclass for SDK's text fields.
 @objc public class OmiseTextField: UITextField {
-    public private(set) var previousText: String?
     
     public override var text: String? {
-        willSet {
-            previousText = text
-        }
         didSet {
             // UITextField doesn't send editing changed control event when we set its text property
             textDidChange()
@@ -33,20 +29,20 @@ public protocol OmiseTextFieldValidationDelegate {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
+        initializeInstance()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setup()
+        initializeInstance()
     }
     
     init() {
         super.init(frame: CGRect.zero)
-        setup()
+        initializeInstance()
     }
     
-    private func setup() {
+    private func initializeInstance() {
         addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         addTarget(self, action: #selector(didBeginEditing), for: .editingDidBegin)
         addTarget(self, action: #selector(didEndEditing), for: .editingDidEnd)

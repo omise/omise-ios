@@ -34,7 +34,8 @@ public struct PAN {
             of: "[^0-9]",
             with: "",
             options: .regularExpression,
-            range: nil)
+            range: nil
+        )
     }
     
     private func validateLuhn() -> Bool {
