@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wHy-gm-NE0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wHy-gm-NE0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -89,7 +88,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="1234 5678 9012 3456" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P2L-nA-3Qg" userLabel="Card number field" customClass="CardNumberTextField" customModule="OmiseSDK" customModuleProvider="target">
-                                                    <rect key="frame" x="134" y="4" width="225" height="35.5"/>
+                                                    <rect key="frame" x="138" y="4" width="221" height="35.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35.5" id="THG-pd-rfY"/>
                                                     </constraints>
@@ -100,7 +99,7 @@
                                             <constraints>
                                                 <constraint firstItem="o7p-Gc-gD9" firstAttribute="leading" secondItem="hEN-QR-fMJ" secondAttribute="leadingMargin" id="9eU-fR-KCV"/>
                                                 <constraint firstAttribute="bottom" secondItem="P2L-nA-3Qg" secondAttribute="bottom" constant="4" id="LFg-4C-zZ8"/>
-                                                <constraint firstItem="P2L-nA-3Qg" firstAttribute="leading" secondItem="o7p-Gc-gD9" secondAttribute="trailing" constant="8" id="NJx-KB-3Cr"/>
+                                                <constraint firstItem="P2L-nA-3Qg" firstAttribute="leading" secondItem="o7p-Gc-gD9" secondAttribute="trailing" constant="12" id="NJx-KB-3Cr"/>
                                                 <constraint firstItem="P2L-nA-3Qg" firstAttribute="top" secondItem="hEN-QR-fMJ" secondAttribute="top" constant="4" id="abR-ka-dqE"/>
                                                 <constraint firstItem="P2L-nA-3Qg" firstAttribute="trailing" secondItem="hEN-QR-fMJ" secondAttribute="trailingMargin" id="yTF-w4-XmR"/>
                                                 <constraint firstItem="P2L-nA-3Qg" firstAttribute="baseline" secondItem="o7p-Gc-gD9" secondAttribute="baseline" id="yt1-G4-Yvs"/>
@@ -127,7 +126,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="John Doe" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1gP-Xv-3DX" userLabel="Card holder name field" customClass="CardNameTextField" customModule="OmiseSDK" customModuleProvider="target">
-                                                    <rect key="frame" x="134" y="4" width="225" height="35.5"/>
+                                                    <rect key="frame" x="138" y="4" width="221" height="35.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35.5" id="DiZ-NT-zSL"/>
                                                     </constraints>
@@ -140,7 +139,7 @@
                                                 <constraint firstItem="1gP-Xv-3DX" firstAttribute="baseline" secondItem="gMS-Zs-jJl" secondAttribute="baseline" id="MHk-71-pU0"/>
                                                 <constraint firstAttribute="bottom" secondItem="1gP-Xv-3DX" secondAttribute="bottom" constant="4" id="Wqt-RJ-mn4"/>
                                                 <constraint firstItem="gMS-Zs-jJl" firstAttribute="leading" secondItem="Khm-De-ObL" secondAttribute="leadingMargin" id="Xue-08-KdY"/>
-                                                <constraint firstItem="1gP-Xv-3DX" firstAttribute="leading" secondItem="gMS-Zs-jJl" secondAttribute="trailing" constant="8" id="at2-aC-456"/>
+                                                <constraint firstItem="1gP-Xv-3DX" firstAttribute="leading" secondItem="gMS-Zs-jJl" secondAttribute="trailing" constant="12" id="at2-aC-456"/>
                                                 <constraint firstItem="1gP-Xv-3DX" firstAttribute="trailing" secondItem="Khm-De-ObL" secondAttribute="trailingMargin" id="nrt-ZM-8Q9"/>
                                                 <constraint firstItem="gMS-Zs-jJl" firstAttribute="centerY" secondItem="Khm-De-ObL" secondAttribute="centerY" id="rFj-ux-2yk"/>
                                             </constraints>
@@ -166,7 +165,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MM/YY" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jo2-Jq-1eC" userLabel="Card expiry field" customClass="CardExpiryDateTextField" customModule="OmiseSDK" customModuleProvider="target">
-                                                    <rect key="frame" x="134" y="4" width="225" height="35.5"/>
+                                                    <rect key="frame" x="138" y="4" width="221" height="35.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35.5" id="e1P-n6-abH"/>
                                                     </constraints>
@@ -180,7 +179,7 @@
                                                 <constraint firstItem="Jo2-Jq-1eC" firstAttribute="baseline" secondItem="LlT-Ou-anQ" secondAttribute="baseline" id="DLa-fQ-2Al"/>
                                                 <constraint firstItem="Jo2-Jq-1eC" firstAttribute="top" secondItem="gG2-qY-He3" secondAttribute="top" constant="4" id="Q8J-SC-u0D"/>
                                                 <constraint firstItem="LlT-Ou-anQ" firstAttribute="centerY" secondItem="gG2-qY-He3" secondAttribute="centerY" id="cgn-Nx-Wsc"/>
-                                                <constraint firstItem="Jo2-Jq-1eC" firstAttribute="leading" secondItem="LlT-Ou-anQ" secondAttribute="trailing" constant="8" id="jnO-kh-iE3"/>
+                                                <constraint firstItem="Jo2-Jq-1eC" firstAttribute="leading" secondItem="LlT-Ou-anQ" secondAttribute="trailing" constant="12" id="jnO-kh-iE3"/>
                                                 <constraint firstAttribute="bottom" secondItem="Jo2-Jq-1eC" secondAttribute="bottom" constant="4" id="lac-lU-BTq"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -205,7 +204,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CVV" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eXh-Mb-b98" userLabel="Security code field" customClass="CardCVVTextField" customModule="OmiseSDK" customModuleProvider="target">
-                                                    <rect key="frame" x="134" y="4" width="225" height="35.5"/>
+                                                    <rect key="frame" x="138" y="4" width="221" height="35.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35.5" id="rv7-bL-KLP"/>
                                                     </constraints>
@@ -216,7 +215,7 @@
                                             <constraints>
                                                 <constraint firstItem="hUA-yb-3hy" firstAttribute="centerY" secondItem="tbv-BF-CYn" secondAttribute="centerY" id="0S9-YR-lEn"/>
                                                 <constraint firstItem="hUA-yb-3hy" firstAttribute="leading" secondItem="tbv-BF-CYn" secondAttribute="leadingMargin" id="FXS-RQ-wyN"/>
-                                                <constraint firstItem="eXh-Mb-b98" firstAttribute="leading" secondItem="hUA-yb-3hy" secondAttribute="trailing" constant="8" id="IOJ-cf-WpA"/>
+                                                <constraint firstItem="eXh-Mb-b98" firstAttribute="leading" secondItem="hUA-yb-3hy" secondAttribute="trailing" constant="12" id="IOJ-cf-WpA"/>
                                                 <constraint firstItem="eXh-Mb-b98" firstAttribute="baseline" secondItem="hUA-yb-3hy" secondAttribute="baseline" id="RjD-6f-QGe"/>
                                                 <constraint firstItem="eXh-Mb-b98" firstAttribute="trailing" secondItem="tbv-BF-CYn" secondAttribute="trailingMargin" id="foK-Hq-vIp"/>
                                                 <constraint firstItem="eXh-Mb-b98" firstAttribute="top" secondItem="tbv-BF-CYn" secondAttribute="top" constant="4" id="rka-X9-WF7"/>
@@ -318,17 +317,17 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Error message" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bh-bL-Kas">
-                            <rect key="frame" x="10" y="8" width="300" height="28"/>
+                            <rect key="frame" x="16" y="8" width="288" height="28"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <color key="textColor" red="1" green="0.25316927779999998" blue="0.20649228410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" red="1" green="0.25490196078431371" blue="0.20784313725490194" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="6bh-bL-Kas" firstAttribute="leading" secondItem="9xY-kU-j8J" secondAttribute="leading" constant="10" id="GFU-WT-pAH"/>
-                        <constraint firstAttribute="trailing" secondItem="6bh-bL-Kas" secondAttribute="trailing" constant="10" id="MMm-0P-WBd"/>
+                        <constraint firstItem="6bh-bL-Kas" firstAttribute="leading" secondItem="9xY-kU-j8J" secondAttribute="leadingMargin" id="GFU-WT-pAH"/>
+                        <constraint firstAttribute="trailingMargin" secondItem="6bh-bL-Kas" secondAttribute="trailing" id="MMm-0P-WBd"/>
                         <constraint firstItem="6bh-bL-Kas" firstAttribute="top" secondItem="9xY-kU-j8J" secondAttribute="topMargin" id="XOl-ko-Hho"/>
                         <constraint firstAttribute="bottomMargin" secondItem="6bh-bL-Kas" secondAttribute="bottom" id="b1Y-0E-1Q6"/>
                     </constraints>

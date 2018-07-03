@@ -17,3 +17,4 @@ OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeSGD = @"SGD";
 OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeUSD = @"USD";
 OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeGBP = @"GBP";
 OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeEUR = @"EUR";
+

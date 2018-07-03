@@ -157,7 +157,7 @@ extension Calendar {
 
 extension NSCalendar {
     @objc(creditCardInformationCalendar) public static var __creditCardInformationCalendar: Calendar {
-        return Calendar(identifier: .gregorian)
+        return Calendar.creditCardInformationCalendar
     }
 }
 

@@ -68,11 +68,14 @@ public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
 @available(*, deprecated, renamed: "CreditCardFormViewController")
 public typealias CreditCardFormController = CreditCardFormViewController
 
+
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.
 @objc(OMSCreditCardFormViewController)
 public class CreditCardFormViewController: UITableViewController {
     fileprivate var hasErrorMessage = false
+    
+    @objc public static let defaultErrorMessageTextColor = UIColor(red: 1.000, green: 0.255, blue: 0.208, alpha: 1.0)
     
     @IBOutlet var formHeaderView: FormHeaderView!
     @IBOutlet var formFields: [OmiseTextField]! {
@@ -111,6 +114,23 @@ public class CreditCardFormViewController: UITableViewController {
     /// A boolean flag to enables/disables automatic error handling. Defaults to `true`.
     @objc public var handleErrors = true
     
+    @IBInspectable @objc
+    var errorMessageTextColor: UIColor! = CreditCardFormViewController.defaultErrorMessageTextColor {
+        didSet {
+            if errorMessageTextColor == nil {
+                errorMessageTextColor = CreditCardFormViewController.defaultErrorMessageTextColor
+            }
+            
+            if isViewLoaded {
+                errorMessageView.errorMessageLabel.textColor = errorMessageTextColor
+                cardNumberTextField.errorTextColor = errorMessageTextColor
+                cardNameTextField.errorTextColor = errorMessageTextColor
+                expiryDateTextField.errorTextColor = errorMessageTextColor
+                secureCodeTextField.errorTextColor = errorMessageTextColor
+            }
+        }
+    }
+    
     /// A boolean flag that enables/disables Card.IO integration.
     @available(*, unavailable, message: "Built in support for Card.ios was removed. You can implement it in your app and call the setCreditCardInformation(number:name:expiration:) method")
     @objc public var cardIOEnabled: Bool = true
@@ -142,6 +162,12 @@ public class CreditCardFormViewController: UITableViewController {
         labelWidthConstraints.forEach({ (constraint) in
             constraint.constant = preferredWidth
         })
+        
+        errorMessageView.errorMessageLabel.textColor = errorMessageTextColor
+        cardNumberTextField.errorTextColor = errorMessageTextColor
+        cardNameTextField.errorTextColor = errorMessageTextColor
+        expiryDateTextField.errorTextColor = errorMessageTextColor
+        secureCodeTextField.errorTextColor = errorMessageTextColor
     }
     
     deinit {

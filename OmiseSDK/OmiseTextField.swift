@@ -12,14 +12,37 @@ public protocol OmiseTextFieldValidationDelegate {
 /// Base UITextField subclass for SDK's text fields.
 @objc public class OmiseTextField: UITextField {
     
+    @IBInspectable @objc var errorTextColor: UIColor! = CreditCardFormViewController.defaultErrorMessageTextColor {
+        didSet {
+            if errorTextColor == nil {
+                errorTextColor = CreditCardFormViewController.defaultErrorMessageTextColor
+            }
+            updateTextColor()
+        }
+    }
+    
+    private var normalTextColor: UIColor?
+    
     public override var text: String? {
         didSet {
             // UITextField doesn't send editing changed control event when we set its text property
             textDidChange()
-            if !isFirstResponder {
-                textColor = isValid ? .black : .red;
-            }
+            updateTextColor()
         }
+    }
+    
+    public override var textColor: UIColor? {
+        get {
+            return normalTextColor
+        }
+        set {
+            normalTextColor = newValue
+            updateTextColor()
+        }
+    }
+    
+    private func updateTextColor() {
+        super.textColor = isValid || isFirstResponder ? normalTextColor ?? .black : errorTextColor;
     }
     
     /// Boolean indicating wether current input is valid or not.
@@ -43,17 +66,19 @@ public protocol OmiseTextFieldValidationDelegate {
     }
     
     private func initializeInstance() {
+        normalTextColor = super.textColor
+        
         addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         addTarget(self, action: #selector(didBeginEditing), for: .editingDidBegin)
         addTarget(self, action: #selector(didEndEditing), for: .editingDidEnd)
     }
     
     @objc func didBeginEditing() {
-        textColor = .black
+        updateTextColor()
     }
     
     @objc func didEndEditing() {
-        textColor = isValid ? .black : .red
+        updateTextColor()
     }
     
     @objc func textDidChange() {}

@@ -129,10 +129,6 @@ import Foundation
         return super.resignFirstResponder()
     }
     
-    public override func replace(_ range: UITextRange, withText text: String) {
-        super.replace(range, withText: text)
-    }
-    
     public override func paste(_ sender: Any?) {
         let pasteboard = UIPasteboard.general
         

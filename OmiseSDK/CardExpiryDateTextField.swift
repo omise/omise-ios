@@ -28,13 +28,14 @@ import UIKit
     
     /// Boolean indicating wether current input is valid or not.
     public override var isValid: Bool {
-        let now = Date()
-        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
-        let thisMonth = calendar.component(.month, from: now)
-        let thisYear = calendar.component(.year, from: now)
         guard let year = self.selectedYear, let month = self.selectedMonth else {
             return false
         }
+        
+        let now = Date()
+        let calendar = Calendar.creditCardInformationCalendar
+        let thisMonth = calendar.component(.month, from: now)
+        let thisYear = calendar.component(.year, from: now)
         
         if (year == thisYear) {
             return thisMonth <= month
@@ -60,7 +61,7 @@ import UIKit
     
     private func initializeInstance() {
         placeholder = "MM/YY"
-        let expiryDatePicker = CardExpiryDatePicker() // TODO: Use normal picker delegate.
+        let expiryDatePicker = CardExpiryDatePicker()
         expiryDatePicker.onDateSelected = { [weak self] (month: Int, year: Int) in
             self?.text = String(format: "%02d/%d", month, year - 2000)
         }
@@ -80,7 +81,8 @@ import UIKit
         
         let monthText = Range(match.range(at: 1), in: text).map({ text[$0] })
         let yearText = Range(match.range(at: 2), in: text).map({ text[$0] })
-        selectedMonth = monthText.map(String.init).flatMap(Int.init)
-        selectedYear = yearText.map(String.init).flatMap(Int.init)?.advanced(by: 2000)
+        selectedMonth = monthText.flatMap({ Int($0) })
+        selectedYear = yearText.flatMap({ Int($0) })?.advanced(by: 2000)
     }
 }
+
