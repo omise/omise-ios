@@ -164,9 +164,9 @@ public class CreditCardFormViewController: UITableViewController {
             return max(currentPreferredWidth, label.intrinsicContentSize.width)
         }
         
-        labelWidthConstraints.forEach { (constraint) in
+        labelWidthConstraints.forEach({ (constraint) in
             constraint.constant = preferredWidth
-        }
+        })
     }
     
     deinit {
@@ -190,6 +190,43 @@ public class CreditCardFormViewController: UITableViewController {
             field.removeTarget(self, action: #selector(fieldDidChange), for: .editingChanged)
         })
         NotificationCenter().removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    }
+    
+    public func setCreditCardInformationWith(number: String?, name: String?, expiration: (month: Int, year: Int)?) {
+        cardNumberTextField.text = number
+        cardNameTextField.text = name
+
+        if let expiration = expiration, 1...12 ~= expiration.month, expiration.year > 0 {
+            expiryDateTextField.text = String(format: "%02d/%d", expiration.month, expiration.year - 2000)
+        }
+        
+        updateSupplementaryUI()
+    }
+    
+    @objc(setCreditCardInformationWithNumber:name:expirationMonth:expirationYear:)
+    public func __setCreditCardInformation(number: String, name: String, expirationMonth: Int, expirationYear: Int) {
+        let month: Int?
+        let year: Int?
+        if 1...12 ~= expirationMonth {
+            month = expirationMonth
+        } else {
+            month = nil
+        }
+        
+        if expirationYear > 0 && expirationYear != NSNotFound {
+            year = expirationYear
+        } else {
+            year = nil
+        }
+        
+        let expiration: (month: Int, year: Int)?
+        if let month = month, let year = year {
+            expiration = (month: month, year: year)
+        } else {
+            expiration = nil
+        }
+
+        self.setCreditCardInformationWith(number: number, name: name, expiration: expiration)
     }
     
     @objc private func fieldDidChange(_ sender: AnyObject) {
@@ -229,7 +266,7 @@ public class CreditCardFormViewController: UITableViewController {
         tableView.endUpdates()
     }
     
-    fileprivate func updateSupplementaryUI() {
+    private func updateSupplementaryUI() {
         let valid = formFields.reduce(into: true, { (valid, field) in
             valid = valid && field.isValid
         })
@@ -344,15 +381,10 @@ extension CreditCardFormViewController: CardIOPaymentViewControllerDelegate {
     }
     
     public func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
-        if let cardNumber = cardInfo.cardNumber {
-            cardNumberTextField.text = cardNumber
-        }
-        
-        if 1...12 ~= cardInfo.expiryMonth && cardInfo.expiryYear > 0 {
-            expiryDateTextField.text = String(format: "%02d/%d", cardInfo.expiryMonth, cardInfo.expiryYear - 2000)
-        }
-        
-        updateSupplementaryUI()
+        setCreditCardInformation(
+            number: cardInfo.cardNumber, name: cardInfo.cardholderName,
+            expiration: (Int(cardInfo.expiryMonth), Int(cardInfo.expiryYear))
+        )
         
         dismiss(animated: true, completion: {
             if self.cardNameTextField.text?.isEmpty ?? true {
