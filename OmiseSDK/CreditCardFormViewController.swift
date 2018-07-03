@@ -1,8 +1,5 @@
 import UIKit
 
-#if CardIO
-import OmiseSDK.Private
-#endif
 
 
 public protocol CreditCardFormViewControllerDelegate: AnyObject {
@@ -100,7 +97,6 @@ public class CreditCardFormViewController: UITableViewController {
     @IBOutlet var secureCodeTextField: CardCVVTextField!
     @IBOutlet var confirmButtonCell: ConfirmButtonCell!
     
-    @IBOutlet var openCardIOButton: UIButton!
     @IBOutlet var errorMessageView: ErrorMessageView!
     
     private let accessoryView = OmiseFormAccessoryView()
@@ -116,25 +112,8 @@ public class CreditCardFormViewController: UITableViewController {
     @objc public var handleErrors = true
     
     /// A boolean flag that enables/disables Card.IO integration.
-    @objc public var cardIOEnabled: Bool = true {
-        didSet {
-            if isViewLoaded && cardIOAvailable && cardIOEnabled {
-                cardNumberCell?.textField.rightView = openCardIOButton
-                cardNumberCell?.textField.rightViewMode = .always
-            } else {
-                cardNumberCell?.textField.rightView = nil
-                cardNumberCell?.textField.rightViewMode = .never
-            }
-        }
-    }
-    
-    private var cardIOAvailable: Bool {
-        #if CardIO
-            return CardIOUtilities.canReadCardWithCamera()
-        #else
-            return false
-        #endif
-    }
+    @available(*, unavailable, message: "Built in support for Card.ios was removed. You can implement it in your app and call the setCreditCardInformation(number:name:expiration:) method")
+    @objc public var cardIOEnabled: Bool = true
     
     /// Factory method for creating CreditCardFormController with given public key.
     /// - parameter publicKey: Omise public key.
@@ -152,10 +131,6 @@ public class CreditCardFormViewController: UITableViewController {
         
         accessoryView.attach(to: formFields, in: self)
         
-        if cardIOAvailable && cardIOEnabled {
-            cardNumberCell?.textField.rightView = openCardIOButton
-            cardNumberCell?.textField.rightViewMode = .always
-        }
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         
@@ -318,22 +293,6 @@ public class CreditCardFormViewController: UITableViewController {
         confirmButtonCell?.stopActivityIndicator()
         tableView.isUserInteractionEnabled = true
     }
-    
-    @IBAction func presentCardIOViewController() {
-        #if CardIO
-            guard let cardIOController = CardIOPaymentViewController(paymentDelegate: self) else {
-                return
-            }
-            cardIOController.hideCardIOLogo = true
-            cardIOController.disableManualEntryButtons = true
-            cardIOController.collectCVV = false
-            cardIOController.collectExpiry = true
-            cardIOController.scanExpiry = true
-            cardIOController.suppressScanConfirmation = true
-            present(cardIOController, animated: true, completion: nil)
-        #endif
-    }
-    
 }
 
 extension CreditCardFormViewController {
@@ -373,27 +332,4 @@ extension CreditCardFormViewController {
         }
     }
 }
-
-#if CardIO
-extension CreditCardFormViewController: CardIOPaymentViewControllerDelegate {
-    public func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    public func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
-        setCreditCardInformation(
-            number: cardInfo.cardNumber, name: cardInfo.cardholderName,
-            expiration: (Int(cardInfo.expiryMonth), Int(cardInfo.expiryYear))
-        )
-        
-        dismiss(animated: true, completion: {
-            if self.cardNameTextField.text?.isEmpty ?? true {
-                self.cardNameTextField.becomeFirstResponder()
-            } else if self.secureCodeTextField.text?.isEmpty ?? true {
-                self.secureCodeTextField.becomeFirstResponder()
-            }
-        })
-    }
-}
-#endif
 
