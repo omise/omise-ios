@@ -17,17 +17,17 @@ class ProductDetailViewController: UIViewController {
     }
     
     @IBAction func showCreditCardForm(_ sender: UIButton) {
-        let creditCardFormController = CreditCardFormViewController.makeCreditCardForm(withPublicKey: publicKey)
+        let creditCardFormController = CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
         creditCardFormController.handleErrors = true
         creditCardFormController.delegate = self
         show(creditCardFormController, sender: self)
     }
     
-    @objc fileprivate func dismissCreditCardForm() {
+    @objc private func dismissCreditCardForm() {
         dismissCreditCardFormWithCompletion(nil)
     }
     
-    @objc fileprivate func dismissCreditCardFormWithCompletion(_ completion: (() -> Void)?) {
+    @objc private func dismissCreditCardFormWithCompletion(_ completion: (() -> Void)?) {
         if presentedViewController != nil {
             dismiss(animated: true, completion: completion)
         } else {

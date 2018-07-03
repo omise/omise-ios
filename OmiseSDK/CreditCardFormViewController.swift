@@ -73,7 +73,7 @@ public typealias CreditCardFormController = CreditCardFormViewController
 /// card information.
 @objc(OMSCreditCardFormViewController)
 public class CreditCardFormViewController: UITableViewController {
-    fileprivate var hasErrorMessage = false
+    private var hasErrorMessage = false
     
     @objc public static let defaultErrorMessageTextColor = UIColor(red: 1.000, green: 0.255, blue: 0.208, alpha: 1.0)
     
@@ -90,6 +90,7 @@ public class CreditCardFormViewController: UITableViewController {
     
     @IBOutlet var formLabels: [UILabel]!
     @IBOutlet var labelWidthConstraints: [NSLayoutConstraint]!
+    
     @IBOutlet var cardNumberCell: CardNumberFormCell!
     @IBOutlet var cardNumberTextField: CardNumberTextField!
     @IBOutlet var cardNameCell: NameCardFormCell!
@@ -115,7 +116,7 @@ public class CreditCardFormViewController: UITableViewController {
     @objc public var handleErrors = true
     
     @IBInspectable @objc
-    var errorMessageTextColor: UIColor! = CreditCardFormViewController.defaultErrorMessageTextColor {
+    public var errorMessageTextColor: UIColor! = CreditCardFormViewController.defaultErrorMessageTextColor {
         didSet {
             if errorMessageTextColor == nil {
                 errorMessageTextColor = CreditCardFormViewController.defaultErrorMessageTextColor
@@ -137,13 +138,21 @@ public class CreditCardFormViewController: UITableViewController {
     
     /// Factory method for creating CreditCardFormController with given public key.
     /// - parameter publicKey: Omise public key.
-    @objc public static func makeCreditCardForm(withPublicKey publicKey: String) -> CreditCardFormViewController {
+    @objc(creditCardFormViewControllerWithPublicKey:)
+    public static func makeCreditCardFormViewController(withPublicKey publicKey: String) -> CreditCardFormViewController {
         let omiseBundle = Bundle(for: self)
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: omiseBundle)
         let creditCardForm = storyboard.instantiateInitialViewController() as! CreditCardFormViewController
         creditCardForm.publicKey = publicKey
         
         return creditCardForm
+    }
+    
+    @available(*, deprecated,
+    message: "Please use the new method that confrom to Objective-C convention +[OMSCreditCardFormViewController creditCardFormViewControllerWithPublicKey:] as of this method will be removed in the future release.",
+    renamed: "makeCreditCardFormViewController(withPublicKey:)")
+    @objc(makeCreditCardFormWithPublicKey:) public static func __makeCreditCardForm(withPublicKey publicKey: String) -> CreditCardFormViewController {
+        return CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
     }
     
     public override func viewDidLoad() {
@@ -155,10 +164,10 @@ public class CreditCardFormViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         
         tableView.tableFooterView = UIView()
+      
         let preferredWidth = formLabels.reduce(CGFloat.leastNormalMagnitude) { (currentPreferredWidth, label)  in
             return max(currentPreferredWidth, label.intrinsicContentSize.width)
         }
-        
         labelWidthConstraints.forEach({ (constraint) in
             constraint.constant = preferredWidth
         })
@@ -181,7 +190,10 @@ public class CreditCardFormViewController: UITableViewController {
             field.addTarget(self, action: #selector(fieldDidChange), for: .editingChanged)
         })
         
-        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillAppear(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(
+            self, selector:#selector(keyboardWillAppear(_:)),
+            name: NSNotification.Name.UIKeyboardWillShow, object: nil
+        )
     }
     
     override public func viewDidDisappear(_ animated: Bool) {
@@ -276,8 +288,9 @@ public class CreditCardFormViewController: UITableViewController {
         formHeaderView?.setCardBrand(cardNumberTextField.cardBrand)
     }
     
-    fileprivate func requestToken() {
+    private func requestToken() {
         view.endEditing(true)
+        
         guard let publicKey = publicKey else {
             assertionFailure("Missing public key information. Please setting the public key before request token.")
             return

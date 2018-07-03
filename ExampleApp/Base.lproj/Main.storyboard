@@ -168,8 +168,8 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="T5w-uE-gP9" firstAttribute="top" secondItem="rFg-Re-wWX" secondAttribute="bottom" id="2UB-2b-Mx6"/>
-                            <constraint firstAttribute="trailing" secondItem="rUl-ra-Tdr" secondAttribute="trailing" priority="999" constant="70" id="AHz-PW-nu1"/>
-                            <constraint firstItem="rUl-ra-Tdr" firstAttribute="leading" secondItem="KGM-KT-bUC" secondAttribute="leading" priority="999" constant="70" id="BPY-N9-b5V"/>
+                            <constraint firstAttribute="trailing" secondItem="rUl-ra-Tdr" secondAttribute="trailing" priority="999" constant="40" id="AHz-PW-nu1"/>
+                            <constraint firstItem="rUl-ra-Tdr" firstAttribute="leading" secondItem="KGM-KT-bUC" secondAttribute="leading" priority="999" constant="40" id="BPY-N9-b5V"/>
                             <constraint firstItem="J6v-sz-tEZ" firstAttribute="top" secondItem="rUl-ra-Tdr" secondAttribute="bottom" constant="120" id="QCE-9L-8k2"/>
                             <constraint firstItem="rUl-ra-Tdr" firstAttribute="centerX" secondItem="T5w-uE-gP9" secondAttribute="centerX" id="ZVE-PG-7EO"/>
                             <constraint firstItem="vPp-dv-dI8" firstAttribute="leading" secondItem="rUl-ra-Tdr" secondAttribute="leading" id="cFt-KJ-MM0"/>

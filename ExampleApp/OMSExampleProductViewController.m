@@ -31,7 +31,7 @@ NSString * const OMSPublicKey = @"pkey_test_4y7dh41kuvvawbhslxw";
 }
 
 - (IBAction)showCreditCardForm:(id)sender {
-    OMSCreditCardFormViewController *creditCardFormController = [OMSCreditCardFormViewController makeCreditCardFormWithPublicKey:OMSPublicKey];
+    OMSCreditCardFormViewController *creditCardFormController = [OMSCreditCardFormViewController creditCardFormViewControllerWithPublicKey:OMSPublicKey];
     creditCardFormController.handleErrors = YES;
     creditCardFormController.delegate = self;
     [self showViewController:creditCardFormController sender:self];
