@@ -4,9 +4,7 @@ import Foundation
 /// UITextField subclass for entering the credit card number.
 /// Automatically formats entered number into groups of four.
 @objc public class CardNumberTextField: OmiseTextField {
-    private var updatingText = false
-    private let maxLength = 19
-    
+
     lazy private var cardNumberStringTokenizer: CardNumberTextField.CreditCardNumberTextInputStringTokenizer = CreditCardNumberTextInputStringTokenizer.init(cardNumberTextField: self)
     
     public override var tokenizer: UITextInputTokenizer {
@@ -15,11 +13,11 @@ import Foundation
     
     override public var selectedTextRange: UITextRange? {
         didSet {
-            guard let pan = text, let selectedTextRange = self.selectedTextRange else {
+            guard let selectedTextRange = self.selectedTextRange else {
                 return
             }
             
-            let kerningIndexes = IndexSet(PAN.suggestedSpaceFormattedIndexesForPANPrefix(pan).map({ $0 - 1 }))
+            let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map({ $0 - 1 }))
             
             if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
                 typingAttributes?[NSAttributedStringKey.kern.rawValue] = 5
@@ -29,14 +27,18 @@ import Foundation
         }
     }
     
+    public var pan: PAN {
+        return PAN(text ?? "")
+    }
+    
     /// Card brand determined from current input.
     public var cardBrand: CardBrand? {
-        return CardNumber.brand(of: text ?? "")
+        return pan.brand
     }
     
     /// Boolean indicating wether current input is valid or not.
     public override var isValid: Bool {
-        return CardNumber.validate(text ?? "")
+        return pan.isValid
     }
     
     override public init(frame: CGRect) {
@@ -79,7 +81,7 @@ import Foundation
     override func textDidChange() {
         super.textDidChange()
         
-        guard let pan = text, let selectedTextRange = self.selectedTextRange else {
+        guard let selectedTextRange = self.selectedTextRange else {
             return
         }
         
@@ -89,7 +91,7 @@ import Foundation
             let formattingAttributedText = NSMutableAttributedString(attributedString: attributedText)
             let formattingStartIndex = self.offset(from: beginningOfDocument, to: self.position(from: selectedTextRange.start, offset: -1) ?? selectedTextRange.start)
             
-            let kerningIndexes = IndexSet(PAN.suggestedSpaceFormattedIndexesForPANPrefix(pan).map({ $0 - 1 }))
+            let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map({ $0 - 1 }))
             
             formattingAttributedText.removeAttribute(NSAttributedStringKey.kern, range: NSRange(location: formattingStartIndex, length: formattingAttributedText.length - formattingStartIndex))
             kerningIndexes[kerningIndexes.indexRange(in: formattingStartIndex..<formattingAttributedText.length)].forEach({
@@ -102,7 +104,8 @@ import Foundation
     }
     
     public override func becomeFirstResponder() -> Bool {
-        if let kerningIndexes = text.map(PAN.suggestedSpaceFormattedIndexesForPANPrefix), let attributedText = attributedText, kerningIndexes.contains(attributedText.length) {
+        let spacingIndexes = pan.suggestedSpaceFormattedIndexes
+        if let attributedText = attributedText, spacingIndexes.contains(attributedText.length) {
             let formattingAttributedText = NSMutableAttributedString(attributedString: attributedText)
             formattingAttributedText.addAttribute(NSAttributedStringKey.kern, value: 5, range: NSRange(location: attributedText.length - 1, length: 1))
             self.attributedText = formattingAttributedText
@@ -116,13 +119,18 @@ import Foundation
     }
     
     public override func resignFirstResponder() -> Bool {
-        if let kerningIndexes = text.map(PAN.suggestedSpaceFormattedIndexesForPANPrefix), let attributedText = attributedText, kerningIndexes.contains(attributedText.length) {
+        let spacingIndexes = pan.suggestedSpaceFormattedIndexes
+        if let attributedText = attributedText, spacingIndexes.contains(attributedText.length) {
             let formattingAttributedText = NSMutableAttributedString(attributedString: attributedText)
             formattingAttributedText.removeAttribute(NSAttributedStringKey.kern, range: NSRange(location: attributedText.length - 1, length: 1))
             self.attributedText = formattingAttributedText
         }
         
         return super.resignFirstResponder()
+    }
+    
+    public override func replace(_ range: UITextRange, withText text: String) {
+        super.replace(range, withText: text)
     }
     
     public override func paste(_ sender: Any?) {
@@ -156,10 +164,10 @@ import Foundation
     }
     
     private func updateTypingAttributes() {
-        guard let pan = text, let selectedTextRange = self.selectedTextRange else {
+        guard let selectedTextRange = self.selectedTextRange else {
             return
         }
-        let kerningIndexes = IndexSet(PAN.suggestedSpaceFormattedIndexesForPANPrefix(pan).map({ $0 - 1 }))
+        let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map({ $0 - 1 }))
         if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
             typingAttributes?[NSAttributedStringKey.kern.rawValue] = 5
         } else {
@@ -177,7 +185,7 @@ import Foundation
         }
         
         override func position(from position: UITextPosition, toBoundary granularity: UITextGranularity, inDirection direction: UITextDirection) -> UITextPosition? {
-            guard granularity == .word, let pan = cardNumberTextField.text else {
+            guard granularity == .word else {
                 return super.position(from: position, toBoundary: granularity, inDirection: direction)
             }
             
@@ -186,7 +194,7 @@ import Foundation
                 return super.position(from: position, toBoundary: granularity, inDirection: direction)
             }
             
-            let spacePositionIndexes = PAN.suggestedSpaceFormattedIndexesForPANPrefix(pan)
+            let spacePositionIndexes = cardNumberTextField.pan.suggestedSpaceFormattedIndexes
             let currentIndex = cardNumberTextField.offset(from: cardNumberTextField.beginningOfDocument, to: position)
             
             if direction == UITextStorageDirection.backward.rawValue {
@@ -198,8 +206,32 @@ import Foundation
             }
         }
         
+        override func isPosition(_ position: UITextPosition, atBoundary granularity: UITextGranularity, inDirection direction: UITextDirection) -> Bool {
+            guard granularity == .word, let panString = cardNumberTextField.text else {
+                return super.isPosition(position, atBoundary: granularity, inDirection: direction)
+            }
+            
+            if position == cardNumberTextField.beginningOfDocument && direction == UITextStorageDirection.backward.rawValue ||
+                position == cardNumberTextField.endOfDocument && direction == UITextStorageDirection.forward.rawValue {
+                return super.isPosition(position, atBoundary: granularity, inDirection: direction)
+            }
+            
+            let spacePositionIndexes = PAN.suggestedSpaceFormattedIndexesForPANPrefix(panString).union([0, panString.count])
+            let currentIndex = cardNumberTextField.offset(from: cardNumberTextField.beginningOfDocument, to: position)
+            
+            return spacePositionIndexes.contains(currentIndex)
+        }
+        
+        override func isPosition(_ position: UITextPosition, withinTextUnit granularity: UITextGranularity, inDirection direction: UITextDirection) -> Bool {
+            guard granularity == .word else {
+                return super.isPosition(position, atBoundary: granularity, inDirection: direction)
+            }
+            
+            return true
+        }
+        
         override func rangeEnclosingPosition(_ position: UITextPosition, with granularity: UITextGranularity, inDirection direction: UITextDirection) -> UITextRange? {
-            guard granularity == .word, let pan = cardNumberTextField.text else {
+            guard granularity == .word, let panString = cardNumberTextField.text else {
                 return super.rangeEnclosingPosition(position, with: granularity, inDirection: direction)
             }
             
@@ -208,7 +240,7 @@ import Foundation
                 return super.rangeEnclosingPosition(position, with: granularity, inDirection: direction)
             }
             
-            let spacePositionIndexes = PAN.suggestedSpaceFormattedIndexesForPANPrefix(pan).union([0, pan.count])
+            let spacePositionIndexes = cardNumberTextField.pan.suggestedSpaceFormattedIndexes.union([0, panString.count])
             let currentIndex = cardNumberTextField.offset(from: cardNumberTextField.beginningOfDocument, to: position)
             
             if let beginningOfGroupTextPosition =

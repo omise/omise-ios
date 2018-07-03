@@ -59,17 +59,22 @@ public struct PAN {
         return sum % 10 == 0
     }
     
-    public static func suggestedSpaceFormattedIndexesForPANPrefix(_ panPrefix: String) -> IndexSet {
-        switch PAN(panPrefix) {
+    public var suggestedSpaceFormattedIndexes: IndexSet {
+        switch self {
         case CardBrand.amex.pattern, "^5[6-8]":
             return [ 4, 10 ]
         case "^50":
             return [ 4, 8 ]
         case "^3[0,6,8-9]":
             return [ 4, 10 ]
-        case "^[0-9]": return [ 4, 8, 12 ]
+        case "^[0-9]":
+            return [ 4, 8, 12 ]
         default: return []
         }
+    }
+    
+    public static func suggestedSpaceFormattedIndexesForPANPrefix(_ panPrefix: String) -> IndexSet {
+        return PAN(panPrefix).suggestedSpaceFormattedIndexes
     }
 }
 

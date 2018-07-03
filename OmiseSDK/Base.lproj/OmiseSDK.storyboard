@@ -13,7 +13,7 @@
         <!--Credit Card Form-->
         <scene sceneID="x6b-Hj-f1R">
             <objects>
-                <tableViewController storyboardIdentifier="CreditCardFormController" id="wHy-gm-NE0" customClass="CreditCardFormViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="CreditCardFormController" id="wHy-gm-NE0" customClass="OMSCreditCardFormViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="ssO-fS-gwM" userLabel="Credit card form table view">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -351,7 +351,7 @@
         <!--Authorizing Payment-->
         <scene sceneID="IRy-iA-rF6">
             <objects>
-                <viewController storyboardIdentifier="DefaultAuthorizingPaymentViewController" id="TTh-Qc-TVG" customClass="AuthorizingPaymentViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DefaultAuthorizingPaymentViewController" id="TTh-Qc-TVG" customClass="OMSAuthorizingPaymentViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="v42-VO-PGC"/>
                         <viewControllerLayoutGuide type="bottom" id="rnF-ST-mfm"/>

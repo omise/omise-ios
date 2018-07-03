@@ -6,6 +6,7 @@ import Foundation
         willSet {
             textFields.forEach({ (textField) in
                 textField.removeTarget(self, action: #selector(textFieldDidBeginEditing), for: UIControlEvents.editingDidBegin)
+                textField.inputAccessoryView = nil
             })
         }
         didSet {
@@ -58,6 +59,10 @@ import Foundation
         
         let items = [previousButton, nextButton, spacer, doneButton]
         self.setItems(items, animated: false)
+    }
+    
+    public func invalidateAttachedTextFields() {
+        self.textFields = []
     }
     
     @objc private func textFieldDidBeginEditing(_ textField: UITextField) {

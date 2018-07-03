@@ -103,7 +103,7 @@ public class CreditCardFormViewController: UITableViewController {
     @IBOutlet var openCardIOButton: UIButton!
     @IBOutlet var errorMessageView: ErrorMessageView!
     
-    let accessoryView = OmiseFormAccessoryView()
+    private let accessoryView = OmiseFormAccessoryView()
     
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String?
@@ -150,10 +150,6 @@ public class CreditCardFormViewController: UITableViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.tableFooterView = UIView()
-        tableView.estimatedRowHeight = tableView.rowHeight
-        tableView.rowHeight = UITableViewAutomaticDimension
-        
         accessoryView.attach(to: formFields, in: self)
         
         if cardIOAvailable && cardIOEnabled {
@@ -171,6 +167,10 @@ public class CreditCardFormViewController: UITableViewController {
         labelWidthConstraints.forEach { (constraint) in
             constraint.constant = preferredWidth
         }
+    }
+    
+    deinit {
+        accessoryView.invalidateAttachedTextFields()
     }
     
     public override func viewDidAppear(_ animated: Bool) {
@@ -248,7 +248,7 @@ public class CreditCardFormViewController: UITableViewController {
         startActivityIndicator()
         let request = Request<Token>(
             name: cardNameCell?.value ?? "",
-            number: cardNumberCell?.value ?? "",
+            pan: cardNumberCell.value,
             expirationMonth: expiryDateCell?.month ?? 0,
             expirationYear: expiryDateCell?.year ?? 0,
             securityCode: secureCodeCell?.value ?? ""

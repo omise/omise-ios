@@ -5,7 +5,12 @@ public struct CreateTokenParameter: Encodable {
     /// Card holder's full name.
     public let name: String
     /// Card number.
-    public let number: String
+    public let pan: PAN
+    
+    public var number: String {
+        return pan.number
+    }
+    
     /// Card expiration month (1-12)
     public let expirationMonth: Int
     /// Card expiration year (Gregorian)
@@ -35,7 +40,7 @@ public struct CreateTokenParameter: Encodable {
         var tokenContainer = encoder.container(keyedBy: TokenCodingKeys.self)
         var cardContainer = tokenContainer.nestedContainer(keyedBy: TokenCodingKeys.CardCodingKeys.self, forKey: .card)
         
-        try cardContainer.encode(number, forKey: .number)
+        try cardContainer.encode(pan.pan, forKey: .number)
         try cardContainer.encodeIfPresent(name, forKey: .name)
         try cardContainer.encodeIfPresent(expirationMonth, forKey: .expirationMonth)
         try cardContainer.encodeIfPresent(expirationYear, forKey: .expirationYear)
@@ -45,15 +50,20 @@ public struct CreateTokenParameter: Encodable {
     }
     
     /// Initializes new token request.
-    public init(name: String, number: String, expirationMonth: Int, expirationYear: Int,
+    public init(name: String, pan: PAN, expirationMonth: Int, expirationYear: Int,
                 securityCode: String, city: String? = nil, postalCode: String? = nil) {
         self.name = name
-        self.number = number
+        self.pan = pan
         self.expirationMonth = expirationMonth
         self.expirationYear = expirationYear
         self.securityCode = securityCode
         self.city = city
         self.postalCode = postalCode
+    }
+    
+    public init(name: String, number: String, expirationMonth: Int, expirationYear: Int,
+                securityCode: String, city: String? = nil, postalCode: String? = nil) {
+        self.init(name: name, pan: PAN(number), expirationMonth: expirationMonth, expirationYear: expirationYear, securityCode: securityCode, city: city, postalCode: postalCode)
     }
 }
 
@@ -153,6 +163,17 @@ extension NSCalendar {
 
 
 extension Request where T == Token {
+    
+    public init (name: String, pan: PAN, expirationMonth: Int, expirationYear: Int,
+                 securityCode: String, city: String? = nil, postalCode: String? = nil) {
+        self.init(parameter: CreateTokenParameter(
+            name: name, pan: pan,
+            expirationMonth: expirationMonth, expirationYear: expirationYear,
+            securityCode: securityCode,
+            city: city, postalCode: postalCode
+        ))
+    }
+    
     public init (name: String, number: String, expirationMonth: Int, expirationYear: Int,
                  securityCode: String, city: String? = nil, postalCode: String? = nil) {
         self.init(parameter: CreateTokenParameter(
