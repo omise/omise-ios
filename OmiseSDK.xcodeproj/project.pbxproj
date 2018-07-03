@@ -972,7 +972,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MODULEMAP_FILE = "$(SRCROOT)/OmiseSDK/OmiseSDK.modulemap";
+				MODULEMAP_FILE = "";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1028,7 +1028,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MODULEMAP_FILE = "$(SRCROOT)/OmiseSDK/OmiseSDK.modulemap";
+				MODULEMAP_FILE = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -1062,6 +1062,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Library";
+				"SWIFT_INCLUDE_PATHS[sdk=iphoneos12.0]" = "";
+				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator12.0]" = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1088,6 +1090,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Library";
+				"SWIFT_INCLUDE_PATHS[sdk=iphoneos12.0]" = "";
+				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator12.0]" = "";
 			};
 			name = Release;
 		};
@@ -1096,6 +1100,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_WARNINGS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
@@ -1119,6 +1124,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_WARNINGS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
@@ -1167,7 +1173,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK;
 				PRODUCT_NAME = OmiseSDK;
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "$(inherited) $(SRCROOT)/Library";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Library";
+				"SWIFT_INCLUDE_PATHS[sdk=iphoneos12.0]" = "";
+				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator12.0]" = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1204,6 +1212,8 @@
 				PRODUCT_NAME = OmiseSDK;
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "$(inherited) $(SRCROOT)/Library";
+				"SWIFT_INCLUDE_PATHS[sdk=iphoneos12.0]" = "";
+				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator12.0]" = "";
 			};
 			name = Release;
 		};
