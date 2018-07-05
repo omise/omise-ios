@@ -69,7 +69,6 @@
 		987A02CE1CE35D5E0035417A /* OmiseSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225931181CE3210700841B86 /* OmiseSDK.framework */; };
 		987A03211CE5B7D70035417A /* OmiseTokenRequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A03201CE5B7D70035417A /* OmiseTokenRequestTest.swift */; };
 		987A03AD1CE5CD450035417A /* Fixtures in Resources */ = {isa = PBXBuildFile; fileRef = 987A03AC1CE5CD450035417A /* Fixtures */; };
-		98E131741D1809E900E63E18 /* OmiseFormAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E131731D1809E900E63E18 /* OmiseFormAccessoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,7 +181,6 @@
 		987A02CD1CE35D5E0035417A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		987A03201CE5B7D70035417A /* OmiseTokenRequestTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseTokenRequestTest.swift; sourceTree = "<group>"; };
 		987A03AC1CE5CD450035417A /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fixtures; sourceTree = "<group>"; };
-		98E131731D1809E900E63E18 /* OmiseFormAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseFormAccessoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,7 +319,6 @@
 			children = (
 				8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentViewController.swift */,
 				8A1D4C651D51B72200C7837C /* CreditCardFormViewController.swift */,
-				98E131731D1809E900E63E18 /* OmiseFormAccessoryView.swift */,
 				9864064B1CFEA820004BCF51 /* Cells */,
 				986406361CFEA7EA004BCF51 /* Fields */,
 			);
@@ -597,7 +594,6 @@
 				986406471CFEA818004BCF51 /* NameCardFormCell.swift in Sources */,
 				8A01F79420D914A4003FC11E /* OmiseSource.swift in Sources */,
 				986406301CFEA7E4004BCF51 /* CardCVVTextField.swift in Sources */,
-				98E131741D1809E900E63E18 /* OmiseFormAccessoryView.swift in Sources */,
 				8A47173A20AAB0F40022733A /* Token.swift in Sources */,
 				22445FFC1CF41DD300801D0F /* Globals.swift in Sources */,
 				8ADAA9A520B6C0AF00DD7CCF /* Currency.swift in Sources */,

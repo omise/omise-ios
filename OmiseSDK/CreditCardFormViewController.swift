@@ -1,7 +1,6 @@
 import UIKit
 
 
-
 public protocol CreditCardFormViewControllerDelegate: AnyObject {
     /// Delegate method for receiving token data when card tokenization succeeds.
     /// - parameter token: `OmiseToken` instance created from supplied credit card data.
@@ -78,13 +77,7 @@ public class CreditCardFormViewController: UITableViewController {
     @objc public static let defaultErrorMessageTextColor = UIColor(red: 1.000, green: 0.255, blue: 0.208, alpha: 1.0)
     
     @IBOutlet var formHeaderView: FormHeaderView!
-    @IBOutlet var formFields: [OmiseTextField]! {
-        didSet {
-            if isViewLoaded, let formFields = formFields {
-                accessoryView.attach(to: formFields, in: self)
-            }
-        }
-    }
+    @IBOutlet var formFields: [OmiseTextField]!
     
     @IBOutlet var formCells: [UITableViewCell]!
     
@@ -103,7 +96,13 @@ public class CreditCardFormViewController: UITableViewController {
     
     @IBOutlet var errorMessageView: ErrorMessageView!
     
-    private let accessoryView = OmiseFormAccessoryView()
+    @IBOutlet var formFieldsAccessoryView: UIToolbar!
+    @IBOutlet var gotoPreviousFieldBarButtonItem: UIBarButtonItem!
+    @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!
+    @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
+    
+    private var currentEditingTextField: OmiseTextField?
+    
     
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String?
@@ -158,7 +157,9 @@ public class CreditCardFormViewController: UITableViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        accessoryView.attach(to: formFields, in: self)
+        formFields.forEach({
+            $0.inputAccessoryView = formFieldsAccessoryView
+        })
         
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -177,10 +178,6 @@ public class CreditCardFormViewController: UITableViewController {
         cardNameTextField.errorTextColor = errorMessageTextColor
         expiryDateTextField.errorTextColor = errorMessageTextColor
         secureCodeTextField.errorTextColor = errorMessageTextColor
-    }
-    
-    deinit {
-        accessoryView.invalidateAttachedTextFields()
     }
     
     public override func viewDidAppear(_ animated: Bool) {
@@ -284,12 +281,13 @@ public class CreditCardFormViewController: UITableViewController {
             valid = valid && field.isValid
         })
         confirmButtonCell?.isUserInteractionEnabled = valid
+        confirmButtonCell.tintAdjustmentMode = valid ? .automatic : .dimmed
         
         formHeaderView?.setCardBrand(cardNumberTextField.cardBrand)
     }
     
     private func requestToken() {
-        view.endEditing(true)
+        doneEditing(nil)
         
         guard let publicKey = publicKey else {
             assertionFailure("Missing public key information. Please setting the public key before request token.")
@@ -369,6 +367,44 @@ extension CreditCardFormViewController {
         if let selectedCell = tableView.cellForRow(at: indexPath), selectedCell == confirmButtonCell {
             requestToken()
         }
+    }
+}
+
+
+// MARK: - Fields Accessory methods
+extension CreditCardFormViewController {
+    @IBAction func textFieldDidBegin(_ sender: OmiseTextField) {
+        guard formFields.contains(sender) else { return }
+        
+        currentEditingTextField = sender
+        gotoPreviousFieldBarButtonItem.isEnabled = sender !== formFields.first
+        gotoNextFieldBarButtonItem.isEnabled = sender !== formFields.last
+
+    }
+    
+    @objc @IBAction private func gotoPreviousField(_ button: UIBarButtonItem) {
+        guard let currentTextField = currentEditingTextField, let index = formFields.index(of: currentTextField) else {
+            return
+        }
+
+        let prevIndex = index - 1
+        guard prevIndex >= 0 else { return }
+        formFields[prevIndex].becomeFirstResponder()
+    }
+    
+    @objc @IBAction private func gotoNextField(_ button: UIBarButtonItem) {
+        guard let currentTextField = currentEditingTextField, let index = formFields.index(of: currentTextField) else {
+            return
+        }
+
+        let nextIndex = index + 1
+        guard nextIndex < formFields.count else { return }
+        formFields[nextIndex].becomeFirstResponder()
+    }
+    
+    
+    @objc @IBAction private func doneEditing(_ button: UIBarButtonItem?) {
+        view.endEditing(true)
     }
 }
 

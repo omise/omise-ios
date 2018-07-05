@@ -23,6 +23,9 @@
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="networkMasterCard" translatesAutoresizingMaskIntoConstraints="NO" id="IhW-w9-4Xj">
                                     <rect key="frame" x="316" y="37" width="23" height="15"/>
+                                    <accessibility key="accessibilityConfiguration">
+                                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                                    </accessibility>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="15" id="eLb-Zk-lVG"/>
                                         <constraint firstAttribute="width" constant="23" id="yVi-Fi-zlb"/>
@@ -30,6 +33,9 @@
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="networkVISA" translatesAutoresizingMaskIntoConstraints="NO" id="kdp-zf-rkO">
                                     <rect key="frame" x="288" y="37" width="20" height="15"/>
+                                    <accessibility key="accessibilityConfiguration">
+                                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                                    </accessibility>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="15" id="W2Q-6u-NMq"/>
                                         <constraint firstAttribute="width" constant="20" id="fT4-QV-vry"/>
@@ -37,6 +43,9 @@
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="networkJCB" translatesAutoresizingMaskIntoConstraints="NO" id="h2j-h5-Et3">
                                     <rect key="frame" x="347" y="37" width="20" height="15"/>
+                                    <accessibility key="accessibilityConfiguration">
+                                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                                    </accessibility>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="20" id="Kco-au-eF0"/>
                                         <constraint firstAttribute="height" constant="15" id="rgJ-ae-Bc1"/>
@@ -44,6 +53,9 @@
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CREDIT CARD DETAIL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Bi-Xw-l4X">
                                     <rect key="frame" x="8" y="39.5" width="130" height="16"/>
+                                    <accessibility key="accessibilityConfiguration">
+                                        <bool key="isElement" value="NO"/>
+                                    </accessibility>
                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                     <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -94,6 +106,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    <connections>
+                                                        <action selector="textFieldDidBegin:" destination="wHy-gm-NE0" eventType="editingDidBegin" id="dCC-eZ-VQr"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -105,6 +120,10 @@
                                                 <constraint firstItem="P2L-nA-3Qg" firstAttribute="baseline" secondItem="o7p-Gc-gD9" secondAttribute="baseline" id="yt1-G4-Yvs"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" label="Card number">
+                                            <accessibilityTraits key="traits" none="YES"/>
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <connections>
                                             <outlet property="textField" destination="P2L-nA-3Qg" id="sk6-nJ-uTj"/>
                                         </connections>
@@ -132,6 +151,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textFieldDidBegin:" destination="wHy-gm-NE0" eventType="editingDidBegin" id="N8w-5h-Kdj"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -144,6 +166,9 @@
                                                 <constraint firstItem="gMS-Zs-jJl" firstAttribute="centerY" secondItem="Khm-De-ObL" secondAttribute="centerY" id="rFj-ux-2yk"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <connections>
                                             <outlet property="textField" destination="1gP-Xv-3DX" id="rSX-gj-ePr"/>
                                         </connections>
@@ -171,6 +196,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    <connections>
+                                                        <action selector="textFieldDidBegin:" destination="wHy-gm-NE0" eventType="editingDidBegin" id="vbj-x2-c05"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -183,6 +211,9 @@
                                                 <constraint firstAttribute="bottom" secondItem="Jo2-Jq-1eC" secondAttribute="bottom" constant="4" id="lac-lU-BTq"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <connections>
                                             <outlet property="textField" destination="Jo2-Jq-1eC" id="Ua3-qo-bK9"/>
                                         </connections>
@@ -210,6 +241,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
+                                                    <connections>
+                                                        <action selector="textFieldDidBegin:" destination="wHy-gm-NE0" eventType="editingDidBegin" id="y6N-34-Od4"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -222,6 +256,9 @@
                                                 <constraint firstAttribute="bottom" secondItem="eXh-Mb-b98" secondAttribute="bottom" constant="4" id="rxy-zU-Zsk"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <connections>
                                             <outlet property="textField" destination="eXh-Mb-b98" id="Y7B-Of-sUJ"/>
                                         </connections>
@@ -241,7 +278,7 @@
                                                     <rect key="frame" x="177.5" y="12" width="20" height="20"/>
                                                 </activityIndicatorView>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Submit payment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4b-ke-VTp">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <bool key="isElement" value="NO"/>
                                                     </accessibility>
@@ -255,11 +292,11 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="v4b-ke-VTp" firstAttribute="top" secondItem="r91-tY-yTj" secondAttribute="top" id="Ezp-Iw-00w"/>
-                                                <constraint firstAttribute="trailing" secondItem="v4b-ke-VTp" secondAttribute="trailing" constant="15" id="LZS-am-dz6"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="v4b-ke-VTp" secondAttribute="trailing" id="LZS-am-dz6"/>
                                                 <constraint firstItem="JZL-Ef-2Bi" firstAttribute="centerY" secondItem="r91-tY-yTj" secondAttribute="centerY" id="kuX-fi-Zts"/>
                                                 <constraint firstItem="JZL-Ef-2Bi" firstAttribute="centerX" secondItem="r91-tY-yTj" secondAttribute="centerX" id="nYc-wD-Mft"/>
                                                 <constraint firstAttribute="bottom" secondItem="v4b-ke-VTp" secondAttribute="bottom" id="srY-TB-9ps"/>
-                                                <constraint firstItem="v4b-ke-VTp" firstAttribute="leading" secondItem="r91-tY-yTj" secondAttribute="leading" constant="15" id="vOp-f3-xnI"/>
+                                                <constraint firstItem="v4b-ke-VTp" firstAttribute="leading" secondItem="r91-tY-yTj" secondAttribute="leadingMargin" id="vOp-f3-xnI"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <accessibility key="accessibilityConfiguration">
@@ -286,10 +323,14 @@
                         <outlet property="cardNumberCell" destination="vFH-O9-cgh" id="RZP-mJ-rA3"/>
                         <outlet property="cardNumberTextField" destination="P2L-nA-3Qg" id="kiv-Zq-LtS"/>
                         <outlet property="confirmButtonCell" destination="Klw-H2-shI" id="Xpw-uV-BUw"/>
+                        <outlet property="doneEditingBarButtonItem" destination="Coa-Tk-zgw" id="dOD-7d-ehv"/>
                         <outlet property="errorMessageView" destination="9xY-kU-j8J" id="gF5-rO-znO"/>
                         <outlet property="expiryDateCell" destination="JXm-Js-QVf" id="7VG-7b-lZs"/>
                         <outlet property="expiryDateTextField" destination="Jo2-Jq-1eC" id="B9Z-Pf-IsM"/>
+                        <outlet property="formFieldsAccessoryView" destination="Bxe-eP-8dK" id="RM6-xB-7Fs"/>
                         <outlet property="formHeaderView" destination="HTf-gM-q5i" id="Xdi-6P-Ank"/>
+                        <outlet property="gotoNextFieldBarButtonItem" destination="UJ7-jb-nkC" id="n72-Dx-bqC"/>
+                        <outlet property="gotoPreviousFieldBarButtonItem" destination="odi-q9-m2c" id="0Ko-Ut-RQJ"/>
                         <outlet property="secureCodeCell" destination="bVu-Tp-g1b" id="kSr-b2-erF"/>
                         <outlet property="secureCodeTextField" destination="eXh-Mb-b98" id="SN8-SQ-wkG"/>
                         <outletCollection property="formCells" destination="vFH-O9-cgh" collectionClass="NSMutableArray" id="THL-mZ-FwS"/>
@@ -335,6 +376,28 @@
                         <outlet property="errorMessageLabel" destination="6bh-bL-Kas" id="hxY-eS-sGN"/>
                     </connections>
                 </view>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Bxe-eP-8dK">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <items>
+                        <barButtonItem image="backBarButton" id="odi-q9-m2c" userLabel="Go to previous field bar button item">
+                            <connections>
+                                <action selector="gotoPreviousField:" destination="wHy-gm-NE0" id="vky-Wa-8Wk"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem image="nextBarButton" width="30" id="UJ7-jb-nkC" userLabel="Go to next field bar button item">
+                            <connections>
+                                <action selector="gotoNextField:" destination="wHy-gm-NE0" id="tC6-zg-epo"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem systemItem="flexibleSpace" id="MoX-Dh-vfR"/>
+                        <barButtonItem systemItem="done" id="Coa-Tk-zgw">
+                            <connections>
+                                <action selector="doneEditing:" destination="wHy-gm-NE0" id="Cow-wK-FOP"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
             </objects>
             <point key="canvasLocation" x="857" y="460"/>
         </scene>
@@ -383,8 +446,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="backBarButton" width="12" height="21"/>
         <image name="networkJCB" width="57" height="43"/>
         <image name="networkMasterCard" width="61" height="37"/>
         <image name="networkVISA" width="69" height="45"/>
+        <image name="nextBarButton" width="12" height="21"/>
     </resources>
 </document>
