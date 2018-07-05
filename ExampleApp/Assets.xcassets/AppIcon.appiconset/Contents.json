@@ -39,8 +39,14 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "omiseSDK copy.png",
+      "filename" : "omiseSDK 180.png",
       "scale" : "3x"
+    },
+    {
+      "size" : "1024x1024",
+      "idiom" : "ios-marketing",
+      "filename" : "Icon1024.png",
+      "scale" : "1x"
     }
   ],
   "info" : {
