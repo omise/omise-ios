@@ -103,7 +103,6 @@ public class CreditCardFormViewController: UITableViewController {
     
     private var currentEditingTextField: OmiseTextField?
     
-    
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String?
     
@@ -165,13 +164,21 @@ public class CreditCardFormViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         
         tableView.tableFooterView = UIView()
-      
-        let preferredWidth = formLabels.reduce(CGFloat.leastNormalMagnitude) { (currentPreferredWidth, label)  in
-            return max(currentPreferredWidth, label.intrinsicContentSize.width)
+        
+        if #available(iOS 10.0, *) {
+            formLabels.forEach({
+                $0.adjustsFontForContentSizeCategory = true
+            })
+            formFields.forEach({
+                $0.adjustsFontForContentSizeCategory = true
+            })
+            
+            errorMessageView.errorMessageLabel.adjustsFontForContentSizeCategory = true
+            confirmButtonCell.confirmPaymentLabel.adjustsFontForContentSizeCategory = true
+            formHeaderView.headerLabel.adjustsFontForContentSizeCategory = true
         }
-        labelWidthConstraints.forEach({ (constraint) in
-            constraint.constant = preferredWidth
-        })
+        
+        updateLabelWidthConstraints()
         
         errorMessageView.errorMessageLabel.textColor = errorMessageTextColor
         cardNumberTextField.errorTextColor = errorMessageTextColor
@@ -329,6 +336,29 @@ public class CreditCardFormViewController: UITableViewController {
     private func stopActivityIndicator() {
         confirmButtonCell?.stopActivityIndicator()
         tableView.isUserInteractionEnabled = true
+    }
+    
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if #available(iOS 10.0, *) {
+            if previousTraitCollection?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
+                view.setNeedsUpdateConstraints()
+            }
+        }
+    }
+    
+    private func updateLabelWidthConstraints() {
+        let preferredWidth = formLabels.reduce(CGFloat.leastNormalMagnitude) { (currentPreferredWidth, label)  in
+            return max(currentPreferredWidth, label.intrinsicContentSize.width)
+        }
+        labelWidthConstraints.forEach({ (constraint) in
+            constraint.constant = preferredWidth
+        })
+    }
+    
+    public override func updateViewConstraints() {
+        super.updateViewConstraints()
+        
+        updateLabelWidthConstraints()
     }
 }
 

@@ -13,7 +13,7 @@
         <scene sceneID="x6b-Hj-f1R">
             <objects>
                 <tableViewController storyboardIdentifier="CreditCardFormController" id="wHy-gm-NE0" customClass="OMSCreditCardFormViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="ssO-fS-gwM" userLabel="Credit card form table view">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" id="ssO-fS-gwM" userLabel="Credit card form table view">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -56,7 +56,7 @@
                                     <accessibility key="accessibilityConfiguration">
                                         <bool key="isElement" value="NO"/>
                                     </accessibility>
-                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                     <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -93,18 +93,19 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7p-Gc-gD9">
                                                     <rect key="frame" x="16" y="11.5" width="110" height="20.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="110" id="mno-AB-S1E"/>
+                                                        <constraint firstAttribute="width" priority="990" constant="110" id="mno-AB-S1E"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="1234 5678 9012 3456" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P2L-nA-3Qg" userLabel="Card number field" customClass="CardNumberTextField" customModule="OmiseSDK" customModuleProvider="target">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="890" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="1234 5678 9012 3456" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P2L-nA-3Qg" userLabel="Card number field" customClass="CardNumberTextField" customModule="OmiseSDK" customModuleProvider="target">
                                                     <rect key="frame" x="138" y="4" width="221" height="35.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35.5" id="THG-pd-rfY"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="35" id="THG-pd-rfY"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="WbX-vK-21M"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
                                                         <action selector="textFieldDidBegin:" destination="wHy-gm-NE0" eventType="editingDidBegin" id="dCC-eZ-VQr"/>
@@ -115,9 +116,9 @@
                                                 <constraint firstItem="o7p-Gc-gD9" firstAttribute="leading" secondItem="hEN-QR-fMJ" secondAttribute="leadingMargin" id="9eU-fR-KCV"/>
                                                 <constraint firstAttribute="bottom" secondItem="P2L-nA-3Qg" secondAttribute="bottom" constant="4" id="LFg-4C-zZ8"/>
                                                 <constraint firstItem="P2L-nA-3Qg" firstAttribute="leading" secondItem="o7p-Gc-gD9" secondAttribute="trailing" constant="12" id="NJx-KB-3Cr"/>
+                                                <constraint firstItem="o7p-Gc-gD9" firstAttribute="firstBaseline" secondItem="P2L-nA-3Qg" secondAttribute="firstBaseline" id="SNu-tv-Rxt"/>
                                                 <constraint firstItem="P2L-nA-3Qg" firstAttribute="top" secondItem="hEN-QR-fMJ" secondAttribute="top" constant="4" id="abR-ka-dqE"/>
                                                 <constraint firstItem="P2L-nA-3Qg" firstAttribute="trailing" secondItem="hEN-QR-fMJ" secondAttribute="trailingMargin" id="yTF-w4-XmR"/>
-                                                <constraint firstItem="P2L-nA-3Qg" firstAttribute="baseline" secondItem="o7p-Gc-gD9" secondAttribute="baseline" id="yt1-G4-Yvs"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <accessibility key="accessibilityConfiguration" label="Card number">
@@ -138,18 +139,19 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name on card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMS-Zs-jJl">
                                                     <rect key="frame" x="16" y="11.5" width="110" height="20.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="110" id="oKU-MZ-VdE"/>
+                                                        <constraint firstAttribute="width" priority="990" constant="110" id="oKU-MZ-VdE"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="John Doe" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1gP-Xv-3DX" userLabel="Card holder name field" customClass="CardNameTextField" customModule="OmiseSDK" customModuleProvider="target">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="890" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="John Doe" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1gP-Xv-3DX" userLabel="Card holder name field" customClass="CardNameTextField" customModule="OmiseSDK" customModuleProvider="target">
                                                     <rect key="frame" x="138" y="4" width="221" height="35.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35.5" id="DiZ-NT-zSL"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="4uT-a9-9lp"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="35" id="DiZ-NT-zSL"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="textFieldDidBegin:" destination="wHy-gm-NE0" eventType="editingDidBegin" id="N8w-5h-Kdj"/>
@@ -163,7 +165,6 @@
                                                 <constraint firstItem="gMS-Zs-jJl" firstAttribute="leading" secondItem="Khm-De-ObL" secondAttribute="leadingMargin" id="Xue-08-KdY"/>
                                                 <constraint firstItem="1gP-Xv-3DX" firstAttribute="leading" secondItem="gMS-Zs-jJl" secondAttribute="trailing" constant="12" id="at2-aC-456"/>
                                                 <constraint firstItem="1gP-Xv-3DX" firstAttribute="trailing" secondItem="Khm-De-ObL" secondAttribute="trailingMargin" id="nrt-ZM-8Q9"/>
-                                                <constraint firstItem="gMS-Zs-jJl" firstAttribute="centerY" secondItem="Khm-De-ObL" secondAttribute="centerY" id="rFj-ux-2yk"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <accessibility key="accessibilityConfiguration">
@@ -183,18 +184,19 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expiry date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LlT-Ou-anQ">
                                                     <rect key="frame" x="16" y="11.5" width="110" height="20.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="110" id="UaF-vy-xbE"/>
+                                                        <constraint firstAttribute="width" priority="990" constant="110" id="UaF-vy-xbE"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MM/YY" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jo2-Jq-1eC" userLabel="Card expiry field" customClass="CardExpiryDateTextField" customModule="OmiseSDK" customModuleProvider="target">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="890" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MM/YY" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jo2-Jq-1eC" userLabel="Card expiry field" customClass="CardExpiryDateTextField" customModule="OmiseSDK" customModuleProvider="target">
                                                     <rect key="frame" x="138" y="4" width="221" height="35.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35.5" id="e1P-n6-abH"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="35" id="e1P-n6-abH"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="o23-P7-s08"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
                                                         <action selector="textFieldDidBegin:" destination="wHy-gm-NE0" eventType="editingDidBegin" id="vbj-x2-c05"/>
@@ -206,7 +208,6 @@
                                                 <constraint firstItem="Jo2-Jq-1eC" firstAttribute="trailing" secondItem="gG2-qY-He3" secondAttribute="trailingMargin" id="8al-Bp-NLZ"/>
                                                 <constraint firstItem="Jo2-Jq-1eC" firstAttribute="baseline" secondItem="LlT-Ou-anQ" secondAttribute="baseline" id="DLa-fQ-2Al"/>
                                                 <constraint firstItem="Jo2-Jq-1eC" firstAttribute="top" secondItem="gG2-qY-He3" secondAttribute="top" constant="4" id="Q8J-SC-u0D"/>
-                                                <constraint firstItem="LlT-Ou-anQ" firstAttribute="centerY" secondItem="gG2-qY-He3" secondAttribute="centerY" id="cgn-Nx-Wsc"/>
                                                 <constraint firstItem="Jo2-Jq-1eC" firstAttribute="leading" secondItem="LlT-Ou-anQ" secondAttribute="trailing" constant="12" id="jnO-kh-iE3"/>
                                                 <constraint firstAttribute="bottom" secondItem="Jo2-Jq-1eC" secondAttribute="bottom" constant="4" id="lac-lU-BTq"/>
                                             </constraints>
@@ -228,18 +229,19 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Security code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUA-yb-3hy">
                                                     <rect key="frame" x="16" y="11.5" width="110" height="20.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="110" id="dqF-b3-JBi"/>
+                                                        <constraint firstAttribute="width" priority="990" constant="110" id="dqF-b3-JBi"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CVV" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eXh-Mb-b98" userLabel="Security code field" customClass="CardCVVTextField" customModule="OmiseSDK" customModuleProvider="target">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="890" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CVV" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eXh-Mb-b98" userLabel="Security code field" customClass="CardCVVTextField" customModule="OmiseSDK" customModuleProvider="target">
                                                     <rect key="frame" x="138" y="4" width="221" height="35.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35.5" id="rv7-bL-KLP"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="ZwR-yG-Phc"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="35" id="rv7-bL-KLP"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
                                                     <connections>
                                                         <action selector="textFieldDidBegin:" destination="wHy-gm-NE0" eventType="editingDidBegin" id="y6N-34-Od4"/>
@@ -247,7 +249,6 @@
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="hUA-yb-3hy" firstAttribute="centerY" secondItem="tbv-BF-CYn" secondAttribute="centerY" id="0S9-YR-lEn"/>
                                                 <constraint firstItem="hUA-yb-3hy" firstAttribute="leading" secondItem="tbv-BF-CYn" secondAttribute="leadingMargin" id="FXS-RQ-wyN"/>
                                                 <constraint firstItem="eXh-Mb-b98" firstAttribute="leading" secondItem="hUA-yb-3hy" secondAttribute="trailing" constant="12" id="IOJ-cf-WpA"/>
                                                 <constraint firstItem="eXh-Mb-b98" firstAttribute="baseline" secondItem="hUA-yb-3hy" secondAttribute="baseline" id="RjD-6f-QGe"/>
@@ -268,7 +269,7 @@
                             <tableViewSection id="eUa-yO-5TN">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Klw-H2-shI" userLabel="Submit payment cell" customClass="ConfirmButtonCell" customModule="OmiseSDK" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="276" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="275" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Klw-H2-shI" id="r91-tY-yTj">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -278,24 +279,24 @@
                                                     <rect key="frame" x="177.5" y="12" width="20" height="20"/>
                                                 </activityIndicatorView>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Submit payment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4b-ke-VTp">
-                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                                    <rect key="frame" x="16" y="11" width="343" height="22"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <bool key="isElement" value="NO"/>
                                                     </accessibility>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="43.5" id="sue-De-w37"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="21.5" id="sue-De-w37"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="v4b-ke-VTp" firstAttribute="top" secondItem="r91-tY-yTj" secondAttribute="top" id="Ezp-Iw-00w"/>
+                                                <constraint firstItem="v4b-ke-VTp" firstAttribute="top" secondItem="r91-tY-yTj" secondAttribute="topMargin" id="Ezp-Iw-00w"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="v4b-ke-VTp" secondAttribute="trailing" id="LZS-am-dz6"/>
                                                 <constraint firstItem="JZL-Ef-2Bi" firstAttribute="centerY" secondItem="r91-tY-yTj" secondAttribute="centerY" id="kuX-fi-Zts"/>
                                                 <constraint firstItem="JZL-Ef-2Bi" firstAttribute="centerX" secondItem="r91-tY-yTj" secondAttribute="centerX" id="nYc-wD-Mft"/>
-                                                <constraint firstAttribute="bottom" secondItem="v4b-ke-VTp" secondAttribute="bottom" id="srY-TB-9ps"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="v4b-ke-VTp" secondAttribute="bottom" id="srY-TB-9ps"/>
                                                 <constraint firstItem="v4b-ke-VTp" firstAttribute="leading" secondItem="r91-tY-yTj" secondAttribute="leadingMargin" id="vOp-f3-xnI"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -360,7 +361,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Error message" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bh-bL-Kas">
                             <rect key="frame" x="16" y="8" width="288" height="28"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <color key="textColor" red="1" green="0.25490196078431371" blue="0.20784313725490194" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>

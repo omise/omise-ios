@@ -4,14 +4,6 @@ class ConfirmButtonCell: UITableViewCell {
     @IBOutlet weak var confirmPaymentLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    override var isUserInteractionEnabled: Bool {
-        get { return super.isUserInteractionEnabled }
-        set {
-            super.isUserInteractionEnabled = newValue
-            confirmPaymentLabel.textColor = tintColor
-        }
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         confirmPaymentLabel.textColor = UIColor.lightGray
