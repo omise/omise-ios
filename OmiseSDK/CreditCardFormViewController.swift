@@ -165,6 +165,14 @@ public class CreditCardFormViewController: UITableViewController {
         
         tableView.tableFooterView = UIView()
         
+        updateLabelWidthConstraints()
+        
+        errorMessageView.errorMessageLabel.textColor = errorMessageTextColor
+        cardNumberTextField.errorTextColor = errorMessageTextColor
+        cardNameTextField.errorTextColor = errorMessageTextColor
+        expiryDateTextField.errorTextColor = errorMessageTextColor
+        secureCodeTextField.errorTextColor = errorMessageTextColor
+        
         if #available(iOS 10.0, *) {
             formLabels.forEach({
                 $0.adjustsFontForContentSizeCategory = true
@@ -176,15 +184,93 @@ public class CreditCardFormViewController: UITableViewController {
             errorMessageView.errorMessageLabel.adjustsFontForContentSizeCategory = true
             confirmButtonCell.confirmPaymentLabel.adjustsFontForContentSizeCategory = true
             formHeaderView.headerLabel.adjustsFontForContentSizeCategory = true
+            
+            let fieldsAccessibilityElements = ([
+                cardNumberTextField.accessibilityElements?.first ?? cardNumberTextField,
+                cardNameTextField.accessibilityElements?.first ?? cardNameTextField,
+                expiryDateTextField.expirationMonthAccessibilityElement,
+                expiryDateTextField.expirationYearAccessibilityElement,
+                secureCodeTextField.accessibilityElements?.first ?? secureCodeTextField,
+            ]).compactMap({ $0 as? NSObjectProtocol })
+            
+            let fields = [
+                cardNumberTextField,
+                cardNameTextField,
+                expiryDateTextField,
+                secureCodeTextField,
+            ] as [OmiseTextField]
+            
+            func accessiblityElementAfter(_ element: NSObjectProtocol?,
+                                          matchingPredicate predicate: (OmiseTextField) -> Bool,
+                                          direction: UIAccessibilityCustomRotor.Direction) -> NSObjectProtocol? {
+                guard let element = element else {
+                    switch direction {
+                    case .next:
+                        return fields.first(where: predicate)?.accessibilityElements?.first as? NSObjectProtocol ?? fields.first(where: predicate)
+                    case .previous:
+                        return fields.last(where: predicate)?.accessibilityElements?.last as? NSObjectProtocol ?? fields.last(where: predicate)
+                    }
+                }
+                
+                let fieldOfElement = fields.first(where: { field in
+                    guard let accessibilityElements = field.accessibilityElements as? [NSObjectProtocol] else {
+                        return element === field
+                    }
+                    
+                    return accessibilityElements.contains(where: { $0 === element })
+                }) ?? cardNumberTextField!
+                
+                func filedAfter(_ field: OmiseTextField,
+                                matchingPredicate predicate: (OmiseTextField) -> Bool,
+                                direction: UIAccessibilityCustomRotor.Direction) -> OmiseTextField? {
+                    guard let indexOfField = fields.firstIndex(of: field) else { return nil }
+                    switch direction {
+                    case .next:
+                        return fields[fields.index(after: indexOfField)...].first(where: predicate)
+                    case .previous:
+                        return fields[fields.startIndex..<indexOfField].last(where: predicate)
+                    }
+                }
+                
+                let nextField = filedAfter(fieldOfElement, matchingPredicate: predicate, direction: direction)
+                
+                guard let currentAccessibilityElements = (fieldOfElement.accessibilityElements as? [NSObjectProtocol]),
+                    let indexOfAccessibilityElement = currentAccessibilityElements.firstIndex(where: { $0 === element }) else {
+                    switch direction {
+                    case .next:
+                        return nextField?.accessibilityElements?.first as? NSObjectProtocol ?? nextField
+                    case .previous:
+                        return nextField?.accessibilityElements?.last as? NSObjectProtocol ?? nextField
+                    }
+                }
+                
+                switch direction {
+                case .next:
+                    if predicate(fieldOfElement) && indexOfAccessibilityElement < currentAccessibilityElements.endIndex - 1 {
+                        return currentAccessibilityElements[currentAccessibilityElements.index(after: indexOfAccessibilityElement)]
+                    } else {
+                        return nextField?.accessibilityElements?.first as? NSObjectProtocol ?? nextField
+                    }
+                case .previous:
+                    if predicate(fieldOfElement) && indexOfAccessibilityElement > currentAccessibilityElements.startIndex {
+                        return currentAccessibilityElements[currentAccessibilityElements.index(before: indexOfAccessibilityElement)]
+                    } else {
+                        return nextField?.accessibilityElements?.last as? NSObjectProtocol ?? nextField
+                    }
+                }
+            }
+            
+            accessibilityCustomRotors = [
+                UIAccessibilityCustomRotor(name: "Fields", itemSearch: { (predicate) -> UIAccessibilityCustomRotorItemResult? in
+                    return accessiblityElementAfter(predicate.currentItem.targetElement, matchingPredicate: { _ in true }, direction: predicate.searchDirection)
+                        .map({ UIAccessibilityCustomRotorItemResult(targetElement: $0, targetRange: nil) })
+                }),
+                UIAccessibilityCustomRotor(name: "Invalid Data Fields", itemSearch: { (predicate) -> UIAccessibilityCustomRotorItemResult? in
+                    return accessiblityElementAfter(predicate.currentItem.targetElement, matchingPredicate: { !$0.isValid }, direction: predicate.searchDirection)
+                        .map({ UIAccessibilityCustomRotorItemResult(targetElement: $0, targetRange: nil) })
+                }),
+            ]
         }
-        
-        updateLabelWidthConstraints()
-        
-        errorMessageView.errorMessageLabel.textColor = errorMessageTextColor
-        cardNumberTextField.errorTextColor = errorMessageTextColor
-        cardNameTextField.errorTextColor = errorMessageTextColor
-        expiryDateTextField.errorTextColor = errorMessageTextColor
-        secureCodeTextField.errorTextColor = errorMessageTextColor
     }
     
     public override func viewDidAppear(_ animated: Bool) {
@@ -409,7 +495,19 @@ extension CreditCardFormViewController {
         currentEditingTextField = sender
         gotoPreviousFieldBarButtonItem.isEnabled = sender !== formFields.first
         gotoNextFieldBarButtonItem.isEnabled = sender !== formFields.last
-
+    }
+    
+    @IBAction func updateAccessibilityValue(_ sender: OmiseTextField) {
+        switch sender {
+        case cardNumberTextField:
+            cardNumberCell.accessibilityValue = "Card ends with \(cardNumberCell.value.lastDigits)"
+        case cardNameTextField:
+            cardNameCell.accessibilityValue = cardNameTextField.text
+        case secureCodeTextField:
+            break
+        default:
+            break
+        }
     }
     
     @objc @IBAction private func gotoPreviousField(_ button: UIBarButtonItem) {
@@ -431,7 +529,6 @@ extension CreditCardFormViewController {
         guard nextIndex < formFields.count else { return }
         formFields[nextIndex].becomeFirstResponder()
     }
-    
     
     @objc @IBAction private func doneEditing(_ button: UIBarButtonItem?) {
         view.endEditing(true)

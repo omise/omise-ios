@@ -29,6 +29,10 @@ public struct PAN {
             .first
     }
     
+    public var lastDigits: String {
+        return String(pan.suffix(4))
+    }
+    
     public init(_ pan: String) {
         self.pan = pan.replacingOccurrences(
             of: "[^0-9]",
