@@ -13,6 +13,8 @@ public protocol CreditCardFormViewControllerDelegate: AnyObject {
     /// - parameter error: The error that occurred during tokenization.
     /// - note: This delegate method will *never* be called if `handleErrors` property is set to `true`.
     func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error)
+    
+    func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController)
 }
 
 
@@ -51,6 +53,8 @@ public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
     /// - parameter error: The error that occurred during tokenization.
     /// - note: This delegate method will *never* be called if `handleErrors` property is set to `true`.
     @objc func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: NSError)
+    
+    @objc optional func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController)
     
     @available(*, unavailable,
     message: "Implement the new -[OMSCreditCardFormViewControllerDelegate creditCardFormViewController:didSucceedWithToken:] instead",
@@ -240,12 +244,28 @@ public class CreditCardFormViewController: UITableViewController {
         self.setCreditCardInformationWith(number: number, name: name, expiration: expiration)
     }
     
-    @objc private func keyboardWillAppear(_ notification: Notification){
+    @objc private func keyboardWillAppear(_ notification: Notification) {
         if hasErrorMessage {
             errorMessageView?.removeErrorMesssage()
             hasErrorMessage = false
             tableView.beginUpdates()
             tableView.endUpdates()
+        }
+    }
+    
+    @IBAction func cancelForm() {
+        _ = performCancelingForm()
+    }
+    
+    private func performCancelingForm() -> Bool {
+        if let delegate = self.delegate {
+            delegate.creditCardFormViewControllerDidCancel(self)
+            return true
+        } else if let delegate = __delegate?.creditCardFormViewControllerDidCancel {
+            delegate(self)
+            return true
+        } else {
+            return false
         }
     }
     
@@ -546,6 +566,10 @@ extension CreditCardFormViewController {
         
         requestToken()
         return true
+    }
+    
+    public override func accessibilityPerformEscape() -> Bool {
+        return performCancelingForm()
     }
 }
 

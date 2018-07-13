@@ -11,8 +11,6 @@ class ProductDetailViewController: UIViewController {
             creditCardFormController.publicKey = publicKey
             creditCardFormController.handleErrors = true
             creditCardFormController.delegate = self
-            
-            creditCardFormController.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(dismissCreditCardForm))
         }
     }
     
@@ -56,6 +54,10 @@ class ProductDetailViewController: UIViewController {
 }
 
 extension ProductDetailViewController: CreditCardFormViewControllerDelegate {
+    func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController) {
+        dismissCreditCardForm()
+    }
+    
     func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
         dismissCreditCardFormWithCompletion({
             self.performSegue(withIdentifier: "CompletePayment", sender: self)

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wHy-gm-NE0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wHy-gm-NE0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -335,7 +335,13 @@
                             <outlet property="delegate" destination="wHy-gm-NE0" id="xld-8o-68T"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Credit Card Form" id="vz0-HS-ms9"/>
+                    <navigationItem key="navigationItem" title="Credit Card Form" id="vz0-HS-ms9">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="xvx-mb-bmP">
+                            <connections>
+                                <action selector="cancelForm" destination="wHy-gm-NE0" id="yan-tF-fnG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="cardNameCell" destination="qrC-dc-j7n" id="69H-L0-pUK"/>
                         <outlet property="cardNameTextField" destination="1gP-Xv-3DX" id="50I-Th-5OQ"/>
