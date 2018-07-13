@@ -217,7 +217,7 @@
                                                     <connections>
                                                         <action selector="textFieldDidBegin:" destination="wHy-gm-NE0" eventType="editingDidBegin" id="vbj-x2-c05"/>
                                                         <action selector="updateAccessibilityValue:" destination="wHy-gm-NE0" eventType="valueChanged" id="2G6-Ga-MZQ"/>
-                                                        <action selector="updateAccessibilityValue:" destination="wHy-gm-NE0" eventType="editingDidEnd" id="d2L-rO-2xb"/>
+                                                        <action selector="updateAccessibilityValue:" destination="wHy-gm-NE0" eventType="editingChanged" id="MYM-ka-sjp"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -265,7 +265,7 @@
                                                     <connections>
                                                         <action selector="textFieldDidBegin:" destination="wHy-gm-NE0" eventType="editingDidBegin" id="y6N-34-Od4"/>
                                                         <action selector="updateAccessibilityValue:" destination="wHy-gm-NE0" eventType="valueChanged" id="0kw-At-iQm"/>
-                                                        <action selector="updateAccessibilityValue:" destination="wHy-gm-NE0" eventType="editingDidEnd" id="vhb-nJ-Dwi"/>
+                                                        <action selector="updateAccessibilityValue:" destination="wHy-gm-NE0" eventType="editingChanged" id="LE7-MN-YaE"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
