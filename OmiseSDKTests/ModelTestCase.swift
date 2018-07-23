@@ -5,7 +5,7 @@ class ModelTestCase: XCTestCase {
     
     func testDecodeToken() throws {
         let decoder = Client.makeJSONDecoder()
-        let tokenData = XCTestCase.fixturesDataFor("token_object")
+        let tokenData = XCTestCase.fixturesData(forFilename: "token_object")
         let token = try decoder.decode(Token.self, from: tokenData)
         
         XCTAssertEqual("tokn_test_5086xl7c9k5rnx35qba", token.id)
@@ -18,7 +18,7 @@ class ModelTestCase: XCTestCase {
     
     func testDecodeCard() throws {
         let decoder = Client.makeJSONDecoder()
-        let cardData = XCTestCase.fixturesDataFor("card_object")
+        let cardData = XCTestCase.fixturesData(forFilename: "card_object")
         let card = try decoder.decode(Card.self, from: cardData)
         
         XCTAssertEqual("card_test_5086xl7amxfysl0ac5l", card.id)
@@ -34,7 +34,7 @@ class ModelTestCase: XCTestCase {
     
     func testDecodeSource() throws {
         let decoder = Client.makeJSONDecoder()
-        let cardData = XCTestCase.fixturesDataFor("source_object")
+        let cardData = XCTestCase.fixturesData(forFilename: "source_object")
         let source = try decoder.decode(Source.self, from: cardData)
         
         XCTAssertEqual("src_test_59trf2nxk43b5nml8z0", source.id)

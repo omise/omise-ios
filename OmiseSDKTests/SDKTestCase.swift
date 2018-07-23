@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 
 extension XCTestCase {
-    @objc static func fixturesDataFor(_ filename: String) -> Data {
+    @objc static func fixturesData(forFilename filename: String) -> Data {
         let bundle = Bundle(for: ClientTestCase.self)
         let path = bundle.url(forResource: "Fixtures/objects/\(filename)", withExtension: "json")!
         let data = try! Data(contentsOf: path)

@@ -31,7 +31,7 @@ import Foundation
     }
     
     public func requestTask<T: Object>(with request: Request<T>, completionHandler: Request<T>.Callback?) -> RequestTask<T> {
-        let dataTask = session.dataTask(with: buildURLRequestFor(request), completionHandler: { (data, response, error) in
+        let dataTask = session.dataTask(with: buildURLRequest(for: request), completionHandler: { (data, response, error) in
             DispatchQueue.main.async {
                 Client.completeRequest(completionHandler)(data, response, error)
             }
@@ -53,7 +53,7 @@ import Foundation
 // MARK: - URL Request related methods
 extension Client {
     
-    private func buildURLRequestFor<T: Object>(_ request: Request<T>) -> URLRequest {
+    private func buildURLRequest<T: Object>(for request: Request<T>) -> URLRequest {
         let urlRequest = NSMutableURLRequest(url: T.postURL)
         urlRequest.httpMethod = "POST"
         let encoder = Client.makeJSONEncoder()
