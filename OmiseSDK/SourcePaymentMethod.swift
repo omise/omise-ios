@@ -67,6 +67,23 @@ public enum PaymentInformation: Codable, Equatable {
         
         public let brand: Brand
         public let numberOfTerms: Int
+        
+        public static func availableTerms(for brand: Brand) -> IndexSet {
+            switch brand {
+            case .bay:
+                return IndexSet([ 3, 4, 6, 9, 10 ])
+            case .firstChoice:
+                return IndexSet([ 3, 4, 6, 9, 10, 12, 18, 24, 36 ])
+            case .bbl:
+                return IndexSet([ 4, 6, 8, 9, 10 ])
+            case .ktc:
+                return IndexSet([ 3, 4, 5, 6, 7, 8, 9, 10 ])
+            case .kBank:
+                return IndexSet([ 3, 4, 6, 10 ])
+            case .other:
+                return IndexSet()
+            }
+        }
     }
     case installment(Installment)
     
