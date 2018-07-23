@@ -40,7 +40,7 @@ class ModelTestCase: XCTestCase {
         XCTAssertEqual("src_test_59trf2nxk43b5nml8z0", source.id)
         XCTAssertEqual(Currency.thb, source.currency)
         XCTAssertEqual(100000, source.amount)
-        XCTAssertEqual(SourceType.billPaymentTescoLotus, source.type)
+        XCTAssertEqual(PaymentInformation.billPayment(.tescoLotus), source.paymentInformation)
         XCTAssertEqual(Flow.offline, source.flow)
     }
     
@@ -92,7 +92,7 @@ class ModelTestCase: XCTestCase {
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
         
         do {
-            let sourceParameter = Source.CreateParameter(type: SourceType.internetBankingBAY, amount: 10_000_00, currency: .thb)
+            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.internetBanking(.bay), amount: 10_000_00, currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             
             XCTAssertEqual(
@@ -106,7 +106,7 @@ class ModelTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = Source.CreateParameter(type: SourceType.internetBankingKTB, amount: 100_00, currency: .thb)
+            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.internetBanking(.ktb), amount: 100_00, currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             
             XCTAssertEqual(
@@ -120,7 +120,7 @@ class ModelTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = Source.CreateParameter(type: SourceType.internetBankingSCB, amount: 1_000_00, currency: .thb)
+            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.internetBanking(.scb), amount: 1_000_00, currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             
             XCTAssertEqual(
@@ -134,7 +134,7 @@ class ModelTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = Source.CreateParameter(type: SourceType.internetBankingBBL, amount: 10_00, currency: .thb)
+            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.internetBanking(.bbl), amount: 10_00, currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             
             XCTAssertEqual(
@@ -148,7 +148,7 @@ class ModelTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = Source.CreateParameter(type: SourceType.alipay, amount: 300_00, currency: .thb)
+            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.alipay, amount: 300_00, currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             
             XCTAssertEqual(
@@ -162,7 +162,7 @@ class ModelTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = Source.CreateParameter(type: SourceType.billPaymentTescoLotus, amount: 123_45, currency: .thb)
+            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.billPayment(.tescoLotus), amount: 123_45, currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             
             XCTAssertEqual(

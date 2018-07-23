@@ -68,7 +68,7 @@ class ClientTestCase: XCTestCase {
                 XCTAssertEqual(100_00, source.amount)
                 XCTAssertEqual(Currency.thb, source.currency)
                 XCTAssertEqual(Flow.redirect, source.flow)
-                XCTAssertEqual(SourceType.internetBankingBAY, source.type)
+                XCTAssertEqual(PaymentInformation.internetBanking(.bay), source.paymentInformation)
             case .fail(let error):
                 XCTFail("Expected succeed request but it failed with \(error)")
             }
@@ -76,7 +76,7 @@ class ClientTestCase: XCTestCase {
         
         XCTAssertEqual(100_00, task.request.parameter.amount)
         XCTAssertEqual(Currency.thb, task.request.parameter.currency)
-        XCTAssertEqual(SourceType.internetBankingBAY, task.request.parameter.type)
+        XCTAssertEqual(PaymentInformation.internetBanking(.bay), task.request.parameter.paymentInformation)
         
         XCTAssertEqual(Source.postURL, task.dataTask.currentRequest?.url)
         XCTAssertEqual("POST", task.dataTask.currentRequest?.httpMethod)
@@ -95,7 +95,7 @@ class ClientTestCase: XCTestCase {
         
         XCTAssertEqual(100_00, task.request.parameter.amount)
         XCTAssertEqual(Currency.custom(code: "UNSUPPORTED_CURRENCY", factor: 100), task.request.parameter.currency)
-        XCTAssertEqual(SourceType.other("UNSUPPORTED SOURCE"), task.request.parameter.type)
+        XCTAssertEqual(PaymentInformation.other("UNSUPPORTED SOURCE"), task.request.parameter.paymentInformation)
 
         XCTAssertEqual(Source.postURL, task.dataTask.currentRequest?.url)
         XCTAssertEqual("POST", task.dataTask.currentRequest?.httpMethod)
@@ -127,10 +127,10 @@ extension ClientTestCase {
     }
     
     static func makeValidSourceRequest() -> Request<Source>  {
-        return Request.init(sourceType: SourceType.internetBankingBAY, amount: 100_00, currency: .thb)
+        return Request.init(sourceType: PaymentInformation.internetBanking(.bay), amount: 100_00, currency: .thb)
     }
     static func makeInvalidSourceRequest() -> Request<Source>  {
-        return Request.init(sourceType: SourceType.other("UNSUPPORTED SOURCE"), amount: 100_00, currency: Currency.custom(code: "UNSUPPORTED_CURRENCY", factor: 100))
+        return Request.init(sourceType: PaymentInformation.other("UNSUPPORTED SOURCE"), amount: 100_00, currency: Currency.custom(code: "UNSUPPORTED_CURRENCY", factor: 100))
     }
 }
 

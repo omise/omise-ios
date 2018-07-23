@@ -13,7 +13,7 @@ import Foundation
     let request: Request<Source>
     
     @objc public var type: String {
-        return request.parameter.type.rawValue
+        return request.parameter.paymentInformation.sourceType
     }
     
     @objc public var amount: Int64 {
@@ -26,8 +26,7 @@ import Foundation
     
     /// Initializes new source request.
     @objc public init(sourceType: String, amount: Int64, currencyCode: String) {
-        self.request = Request<Source>.init(sourceType: SourceType(rawValue: sourceType)!, amount: amount, currency: Currency.init(code: currencyCode))
+        self.request = Request<Source>.init(sourceType: PaymentInformation.alipay, amount: amount, currency: Currency.init(code: currencyCode))
     }
 }
-
 

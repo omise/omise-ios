@@ -10,7 +10,11 @@ extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInternetBankingBBL;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueAlipay;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueBillPaymentTescoLotus;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueBarcodeAlipay;
-
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentBAY;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentFirstChoice;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentBBL;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentKTC;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentKBank;
 
 typedef NSString * OMSSupportedCurrencyCode NS_EXTENSIBLE_STRING_ENUM;
 

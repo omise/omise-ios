@@ -68,3 +68,10 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
         self = .api(code: code, message: message, location: location)
     }
 }
+
+
+public enum OmiseSDKError: CustomNSError, LocalizedError {
+    public static let errorDomain: String = "co.omise.ios"
+    
+    case invalidValue
+}

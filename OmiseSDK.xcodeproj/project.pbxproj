@@ -27,6 +27,7 @@
 		229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */; };
 		229E145B1D0EBAB5000511DE /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14571D0EBAB5000511DE /* ProductViewController.swift */; };
 		22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */; };
+		8A01E48D21059EFF00D73FE6 /* SourcePaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01E48C21059EFF00D73FE6 /* SourcePaymentMethod.swift */; };
 		8A01F78120D8DB7C003FC11E /* OMSOmiseClientTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78020D8DB7C003FC11E /* OMSOmiseClientTestCase.m */; };
 		8A01F78920D8E101003FC11E /* OMSRequestDelegateDummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78820D8E101003FC11E /* OMSRequestDelegateDummy.m */; };
 		8A01F78B20D90EC5003FC11E /* Client+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */; };
@@ -130,6 +131,7 @@
 		22D480AB1D0EB29C00544CE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A00FEC21F1DE88600246078 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		8A01E48C21059EFF00D73FE6 /* SourcePaymentMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcePaymentMethod.swift; sourceTree = "<group>"; };
 		8A01F78020D8DB7C003FC11E /* OMSOmiseClientTestCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSOmiseClientTestCase.m; sourceTree = "<group>"; };
 		8A01F78720D8E101003FC11E /* OMSRequestDelegateDummy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OMSRequestDelegateDummy.h; sourceTree = "<group>"; };
 		8A01F78820D8E101003FC11E /* OMSRequestDelegateDummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSRequestDelegateDummy.m; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				2220F1A41D0FEE85008CD89F /* OmiseError.swift */,
 				8A60619920B2A8D400CF90D5 /* PAN.swift */,
 				8A47173C20AAB11B0022733A /* Source.swift */,
+				8A01E48C21059EFF00D73FE6 /* SourcePaymentMethod.swift */,
 				8A47173920AAB0F40022733A /* Token.swift */,
 			);
 			name = Models;
@@ -600,6 +603,7 @@
 				8A4F7CB920A9C0FD001C441A /* Object.swift in Sources */,
 				8AD0609620B55E610074894E /* Client.swift in Sources */,
 				986406321CFEA7E4004BCF51 /* CardNumberTextField.swift in Sources */,
+				8A01E48D21059EFF00D73FE6 /* SourcePaymentMethod.swift in Sources */,
 				8A739D0B20DA4DC500217CAB /* OMSConstants.m in Sources */,
 				225931501CE46F7F00841B86 /* CardNumber.swift in Sources */,
 				2259314E1CE46E5700841B86 /* CardBrand.swift in Sources */,

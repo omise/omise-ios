@@ -13,7 +13,7 @@ import Foundation
     @objc lazy public var id: String = source.id
     
     
-    @objc lazy public var type: String = source.type.rawValue
+    @objc lazy public var type: String = source.paymentInformation.sourceType
     
     @objc lazy public var flow: String = source.flow.rawValue
     
