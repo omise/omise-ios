@@ -95,7 +95,7 @@ class ClientTestCase: XCTestCase {
         
         XCTAssertEqual(100_00, task.request.parameter.amount)
         XCTAssertEqual(Currency.custom(code: "UNSUPPORTED_CURRENCY", factor: 100), task.request.parameter.currency)
-        XCTAssertEqual(PaymentInformation.other("UNSUPPORTED SOURCE"), task.request.parameter.paymentInformation)
+        XCTAssertEqual(PaymentInformation.other(type: "UNSUPPORTED SOURCE", parameters: [ "client_id": "client_12345", "client_balance": 12345.67, ]), task.request.parameter.paymentInformation)
 
         XCTAssertEqual(Source.postURL, task.dataTask.currentRequest?.url)
         XCTAssertEqual("POST", task.dataTask.currentRequest?.httpMethod)
@@ -130,7 +130,7 @@ extension ClientTestCase {
         return Request.init(sourceType: PaymentInformation.internetBanking(.bay), amount: 100_00, currency: .thb)
     }
     static func makeInvalidSourceRequest() -> Request<Source>  {
-        return Request.init(sourceType: PaymentInformation.other("UNSUPPORTED SOURCE"), amount: 100_00, currency: Currency.custom(code: "UNSUPPORTED_CURRENCY", factor: 100))
+        return Request.init(sourceType: PaymentInformation.other(type: "UNSUPPORTED SOURCE", parameters: [ "client_id": "client_12345", "client_balance": 12345.67, ]), amount: 100_00, currency: Currency.custom(code: "UNSUPPORTED_CURRENCY", factor: 100))
     }
 }
 

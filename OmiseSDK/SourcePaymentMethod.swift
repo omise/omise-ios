@@ -12,7 +12,7 @@ func ~=<T: PaymentMethod>(methodType: T.Type, type: String) -> Bool {
 
 
 public enum PaymentInformation: Codable, Equatable {
-    
+
     public enum InternetBanking: PaymentMethod {
         public static let paymentMethodTypePrefix: String = "internet_banking_"
         
@@ -39,13 +39,13 @@ public enum PaymentInformation: Codable, Equatable {
         public static let paymentMethodTypePrefix: String = "barcode_"
         
         case alipay(AlipayBarcode)
-        case other(String)
+        case other(String, parameters: [String: Any])
         
         public var type: String {
             switch self {
             case .alipay:
                 return Barcode.paymentMethodTypePrefix + "alipay"
-            case .other(let value):
+            case .other(let value, _):
                 return Barcode.paymentMethodTypePrefix + value
             }
         }
@@ -70,7 +70,7 @@ public enum PaymentInformation: Codable, Equatable {
     }
     case installment(Installment)
     
-    case other(String)
+    case other(type: String, parameters: [String: Any])
     
     
     public init(from decoder: Decoder) throws {
@@ -89,7 +89,16 @@ public enum PaymentInformation: Codable, Equatable {
         case "alipay":
             self = .alipay
         case let value:
-            self = .other(value)
+            self = .other(type: value, parameters: try decoder.decodeJSONDictionary().filter({ (key, _) -> Bool in
+                switch key {
+                case CodingKeys.type.stringValue, Source.CodingKeys.object.stringValue,
+                     Source.CodingKeys.id.stringValue, Source.CodingKeys.flow.stringValue,
+                     Source.CodingKeys.currency.stringValue, Source.CodingKeys.amount.stringValue,
+                    "livemode", "location":
+                    return false
+                default: return true
+                }
+            }))
         }
     }
     
@@ -106,15 +115,36 @@ public enum PaymentInformation: Codable, Equatable {
         case .alipay:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode("alipay", forKey: .type)
-        case let value:
+        case .other(type: let type, parameters: let parameters):
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(value, forKey: .type)
+            try container.encode(type, forKey: .type)
+            try encoder.encodeJSONDictionary(parameters)
         }
     }
     
     fileprivate enum CodingKeys: String, CodingKey {
         case type
     }
+    
+    public static func == (lhs: PaymentInformation, rhs: PaymentInformation) -> Bool {
+        switch (lhs, rhs) {
+        case (.internetBanking(let lhsValue), .internetBanking(let rhsValue)):
+            return lhsValue == rhsValue
+        case (.alipay, .alipay):
+            return true
+        case (.billPayment(let lhsValue), .billPayment(let rhsValue)):
+            return lhsValue == rhsValue
+        case (.barcode(let lhsValue), .barcode(let rhsValue)):
+            return lhsValue == rhsValue
+        case (.installment(let lhsValue), .installment(let rhsValue)):
+            return lhsValue == rhsValue
+        case (.other(let lhsType, let lhsParameters), .other(let rhsType, let rhsParameters)):
+            return lhsType == rhsType &&
+                Set(lhsParameters.keys) == Set(rhsParameters.keys)
+        default: return false
+        }
+    }
+    
 }
 
 
@@ -141,7 +171,7 @@ extension PaymentInformation {
             return installment.type
         case .internetBanking(let bank):
             return bank.type
-        case .other(let value):
+        case .other(let value, _):
             return value
         }
     }
@@ -381,7 +411,16 @@ extension PaymentInformation.Barcode {
         case "alipay":
             self = .alipay(try AlipayBarcode.init(from: decoder))
         case let value:
-            self = .other(String(value))
+            self = .other(String(value), parameters: try decoder.decodeJSONDictionary().filter({ (key, _) -> Bool in
+                switch key {
+                case PaymentInformation.CodingKeys.type.stringValue, Source.CodingKeys.object.stringValue,
+                     Source.CodingKeys.id.stringValue, Source.CodingKeys.flow.stringValue,
+                     Source.CodingKeys.currency.stringValue, Source.CodingKeys.amount.stringValue,
+                     "livemode", "location":
+                    return false
+                default: return true
+                }
+            }))
         }
     }
     
@@ -394,6 +433,18 @@ extension PaymentInformation.Barcode {
             try alipay.encode(to: encoder)
         case .other:
             break
+        }
+    }
+    
+    public static func ==(lhs: PaymentInformation.Barcode, rhs: PaymentInformation.Barcode) -> Bool {
+        switch (lhs, rhs) {
+        case let (.alipay(lhsValue), .alipay(rhsValue)):
+            return lhsValue == rhsValue
+        case (.other(let lhsType, let lhsParameters), .other(let rhsType, let rhsParameters)):
+            return lhsType == rhsType &&
+                Set(lhsParameters.keys) == Set(rhsParameters.keys)
+        default:
+            return false
         }
     }
 }

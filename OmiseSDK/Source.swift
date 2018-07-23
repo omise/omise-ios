@@ -14,7 +14,7 @@ public struct Source: Object {
     public let amount: Int64
     public let currency: Currency
     
-    private enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case object
         case id
         case flow
