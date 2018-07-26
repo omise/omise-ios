@@ -1,0 +1,10 @@
+{
+  "object": "source",
+  "id": "src_test_5avnfnqxzzj2yu7a34e",
+  "livemode": false,
+  "location": "/sources/src_test_5avnfnqxzzj2yu7a34e",
+  "type": "alipay",
+  "flow": "redirect",
+  "amount": 100000,
+  "currency": "thb"
+}

@@ -1,0 +1,12 @@
+{
+  "object": "source",
+  "id": "src_test_5cq1ugk8m0un1yefb2u",
+  "livemode": false,
+  "location": "/sources/src_test_5cq1ugk8m0un1yefb2u",
+  "type": "installment_first_choice",
+  "flow": "redirect",
+  "amount": 500000,
+  "currency": "thb",
+  "installment_terms": 6,
+  "absorption_type": "customer"
+}

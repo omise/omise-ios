@@ -272,16 +272,16 @@ extension PaymentInformation.Installment {
         let container = try decoder.container(keyedBy: PaymentInformation.CodingKeys.self)
         let type = try container.decode(String.self, forKey: .type)
         
-        guard type.hasPrefix(PaymentInformation.InternetBanking.paymentMethodTypePrefix),
-            let typePrefixRange = type.range(of: PaymentInformation.InternetBanking.paymentMethodTypePrefix) else {
-                throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Invalid internet banking source type value")
+        guard type.hasPrefix(PaymentInformation.Installment.paymentMethodTypePrefix),
+            let typePrefixRange = type.range(of: PaymentInformation.Installment.paymentMethodTypePrefix) else {
+                throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Invalid installments source type value")
         }
         
         let brand: Brand
         switch type[typePrefixRange.upperBound...] {
         case "bay":
             brand = .bay
-        case "firstChoice":
+        case "first_choice":
             brand = .firstChoice
         case "bbl":
             brand = .bbl
@@ -300,6 +300,8 @@ extension PaymentInformation.Installment {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: PaymentInformation.CodingKeys.self)
         try container.encode(type, forKey: .type)
+        var installmentsContainer = encoder.container(keyedBy: CodingKeys.self)
+        try installmentsContainer.encode(numberOfTerms, forKey: .installmentTerms)
     }
 }
 
@@ -405,7 +407,7 @@ extension PaymentInformation.Barcode {
             try container.encodeIfPresent(terminalID, forKey: .terminalID)
         }
         
-        public init(barcode: String, storeInformation: StoreInformation?, terminalID: String?) {
+        public init(barcode: String, storeInformation: StoreInformation? = nil, terminalID: String? = nil) {
             self.storeInformation = storeInformation
             self.terminalID = terminalID
             self.barcode = barcode
@@ -413,10 +415,6 @@ extension PaymentInformation.Barcode {
         
         public init(barcode: String, storeID: String, storeName: String, terminalID: String?) {
             self.init(barcode: barcode, storeInformation: StoreInformation(storeID: storeID, storeName: storeName), terminalID: terminalID)
-        }
-        
-        public init(barcode: String, terminalID: String?) {
-            self.init(barcode: barcode, storeInformation: nil, terminalID: terminalID)
         }
     }
     
