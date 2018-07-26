@@ -32,7 +32,6 @@ public enum PaymentInformation: Codable, Equatable {
         case tescoLotus
         case other(String)
     }
-    
     case billPayment(BillPayment)
     
     public enum Barcode: PaymentMethod {
@@ -44,7 +43,7 @@ public enum PaymentInformation: Codable, Equatable {
         public var type: String {
             switch self {
             case .alipay:
-                return Barcode.paymentMethodTypePrefix + "alipay"
+                return OMSSourceTypeValue.barcodeAlipay.rawValue
             case .other(let value, _):
                 return Barcode.paymentMethodTypePrefix + value
             }
@@ -83,6 +82,11 @@ public enum PaymentInformation: Codable, Equatable {
             case .other:
                 return IndexSet()
             }
+        }
+        
+        init(brand: Brand, numberOfTerms: Int) {
+            self.brand = brand
+            self.numberOfTerms = numberOfTerms
         }
     }
     case installment(Installment)
@@ -179,7 +183,7 @@ extension PaymentInformation {
     public var sourceType: String {
         switch self {
         case .alipay:
-            return "alipay"
+            return OMSSourceTypeValue.alipay.rawValue
         case .barcode(let barcode):
             return barcode.type
         case .billPayment(let billPayment):
@@ -200,13 +204,13 @@ extension PaymentInformation.InternetBanking {
     public var type: String {
         switch self {
         case .bay:
-            return PaymentInformation.InternetBanking.paymentMethodTypePrefix + "bay"
+            return OMSSourceTypeValue.internetBankingBAY.rawValue
         case .ktb:
-            return PaymentInformation.InternetBanking.paymentMethodTypePrefix + "ktb"
+            return OMSSourceTypeValue.internetBankingKTB.rawValue
         case .scb:
-            return PaymentInformation.InternetBanking.paymentMethodTypePrefix + "scb"
+            return OMSSourceTypeValue.internetBankingSCB.rawValue
         case .bbl:
-            return PaymentInformation.InternetBanking.paymentMethodTypePrefix + "bbl"
+            return OMSSourceTypeValue.internetBankingBBL.rawValue
         case .other(let value):
             return PaymentInformation.InternetBanking.paymentMethodTypePrefix + value
         }
@@ -246,15 +250,15 @@ extension PaymentInformation.Installment {
     public var type: String {
         switch brand {
         case .bay:
-            return PaymentInformation.Installment.paymentMethodTypePrefix + "bay"
+            return OMSSourceTypeValue.installmentBAY.rawValue
         case .firstChoice:
-            return PaymentInformation.Installment.paymentMethodTypePrefix + "first_choice"
+            return OMSSourceTypeValue.installmentFirstChoice.rawValue
         case .bbl:
-            return PaymentInformation.Installment.paymentMethodTypePrefix + "bbl"
+            return OMSSourceTypeValue.installmentBBL.rawValue
         case .ktc:
-            return PaymentInformation.Installment.paymentMethodTypePrefix + "ktc"
+            return OMSSourceTypeValue.installmentKTC.rawValue
         case .kBank:
-            return PaymentInformation.Installment.paymentMethodTypePrefix + "kbank"
+            return OMSSourceTypeValue.installmentKBank.rawValue
         case .other(let value):
             return PaymentInformation.Installment.paymentMethodTypePrefix + value
         }
@@ -304,7 +308,7 @@ extension PaymentInformation.BillPayment {
     public var type: String {
         switch self {
         case .tescoLotus:
-            return PaymentInformation.BillPayment.paymentMethodTypePrefix + "tesco_lotus"
+            return OMSSourceTypeValue.billPaymentTescoLotus.rawValue
         case .other(let value):
             return PaymentInformation.BillPayment.paymentMethodTypePrefix + value
         }

@@ -165,11 +165,13 @@ NSString * const _Nonnull publicKey = @"pkey_test_58wfnlwoxz1tbkdd993";
 }
 
 + (OMSSourceRequest *)createInvalidTestSourceRequest {
-    return [[OMSSourceRequest alloc] initWithSourceType:@"INVALID SOURCE" amount:0 currencyCode:@"INVALID_CURRENCY"];
+    OMSPaymentInformation *customPaymentInformation = [[OMSCustomPaymentInformation alloc] initWithCustomType:@"INVALID SOURCE" parameters:@{}];
+    return [[OMSSourceRequest alloc] initWithPaymentInformation:customPaymentInformation amount:0 currencyCode:@"INVALID_CURRENCY"];
 }
 
 + (OMSSourceRequest *)createValidTestSourceRequest {
-    return [[OMSSourceRequest alloc] initWithSourceType:OMSSourceTypeValueInternetBankingBAY amount:10000 currencyCode:OMSSupportedCurrencyCodeTHB];
+    return [[OMSSourceRequest alloc] initWithPaymentInformation:OMSInternetBankingPaymentInformation.bayInternetBankingPayment
+                                                         amount:10000 currencyCode:OMSSupportedCurrencyCodeTHB];
 }
 
 @end

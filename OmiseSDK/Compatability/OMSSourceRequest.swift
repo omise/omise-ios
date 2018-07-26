@@ -25,8 +25,8 @@ import Foundation
     }
     
     /// Initializes new source request.
-    @objc public init(sourceType: String, amount: Int64, currencyCode: String) {
-        self.request = Request<Source>.init(sourceType: PaymentInformation.alipay, amount: amount, currency: Currency.init(code: currencyCode))
+    @objc public init(paymentInformation: __SourcePaymentInformation, amount: Int64, currencyCode: String) {
+        self.request = Request<Source>.init(sourceType: PaymentInformation(from: paymentInformation), amount: amount, currency: Currency.init(code: currencyCode))
     }
 }
 
