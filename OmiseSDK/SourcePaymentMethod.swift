@@ -287,7 +287,7 @@ extension PaymentInformation.Installment {
             brand = .bbl
         case "ktc":
             brand = .ktc
-        case "kBank":
+        case "kbank":
             brand = .kBank
         case let value:
             brand = .other(String(value))
