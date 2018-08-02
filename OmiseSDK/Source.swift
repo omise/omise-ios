@@ -1,5 +1,7 @@
 import Foundation
 
+
+/// Represents an Omise Source object
 public struct Source: Object {
     public typealias CreateParameter = CreateSourceParameter
    
@@ -34,6 +36,9 @@ public struct Source: Object {
     }
 }
 
+
+/// Parameter for creating a new `Source`
+/// - seealso: Source
 public struct CreateSourceParameter: Encodable {
     public let paymentInformation: PaymentInformation
     public let amount: Int64

@@ -1,6 +1,8 @@
 import Foundation
 
 
+/// Parameter for creating a new `Token`
+/// - seealso: Token
 public struct CreateTokenParameter: Encodable {
     /// Card holder's full name.
     public let name: String
@@ -61,12 +63,15 @@ public struct CreateTokenParameter: Encodable {
         self.postalCode = postalCode
     }
     
+    /// Initializes a new token request.
     public init(name: String, number: String, expirationMonth: Int, expirationYear: Int,
                 securityCode: String, city: String? = nil, postalCode: String? = nil) {
         self.init(name: name, pan: PAN(number), expirationMonth: expirationMonth, expirationYear: expirationYear, securityCode: securityCode, city: city, postalCode: postalCode)
     }
 }
 
+
+/// Represents an Omise Token object
 public struct Token: Object {
     public typealias CreateParameter = CreateTokenParameter
     
@@ -94,6 +99,7 @@ public struct Token: Object {
         case card
     }
 }
+
 
 public struct Card: Decodable {
     /// Card's ID.
@@ -164,6 +170,7 @@ extension NSCalendar {
 
 extension Request where T == Token {
     
+    /// Initializes a new Token Request
     public init (name: String, pan: PAN, expirationMonth: Int, expirationYear: Int,
                  securityCode: String, city: String? = nil, postalCode: String? = nil) {
         self.init(parameter: CreateTokenParameter(
@@ -174,6 +181,7 @@ extension Request where T == Token {
         ))
     }
     
+    /// Initializes a new Token Request
     public init (name: String, number: String, expirationMonth: Int, expirationYear: Int,
                  securityCode: String, city: String? = nil, postalCode: String? = nil) {
         self.init(parameter: CreateTokenParameter(

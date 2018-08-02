@@ -6,6 +6,8 @@ public enum RequestResult<T: Object> {
     case fail(Error)
 }
 
+
+/// Request object for describing a request with the creating parameters
 public struct Request<T: Object> {
     public typealias Callback = (RequestResult<T>) -> Void
     

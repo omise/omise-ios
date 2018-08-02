@@ -1,6 +1,7 @@
 import Foundation
 
 
+
 @objc(OMSSDKClient) public class Client: NSObject {
     let session: URLSession
     let queue: OperationQueue
@@ -9,6 +10,12 @@ import Foundation
     var userAgent: String?
     let sessionDelegate = Client.PublicKeyPinningSessionDelegate()
     
+    
+    /// Initializes a new Client with the given Public Key and Operating OperationQueue
+    ///
+    /// - Parameters:
+    ///   - publicKey: Public Key for this Client used for calling the Omise API. The key must have `pkey` prefix
+    ///   - queue: OperationQueue which the client uses for the network related operations
     @objc public init(publicKey: String, queue: OperationQueue) {
         if publicKey.hasPrefix("pkey_") {
             self.publicKey = publicKey
@@ -26,10 +33,21 @@ import Foundation
         )
     }
     
+    /// Initializes a new Client with the given Public Key
+    ///
+    /// - Parameters:
+    ///   - publicKey: Public Key for this Client used for calling the Omise API. The key must have `pkey` prefix
     @objc public convenience init(publicKey: String) {
         self.init(publicKey: publicKey, queue: OperationQueue())
     }
     
+    /// Create a new Reqeust Task with the given request and compleation handler closure
+    ///
+    /// - Parameters:
+    ///   - request: A Request to create a requrest task
+    ///   - completionHandler: Compleation Handler closure that will be called when the request task is finished.
+    ///     The completion handler will be called on the main queue
+    /// - Returns: A new Request Task
     public func requestTask<T: Object>(with request: Request<T>, completionHandler: Request<T>.Callback?) -> RequestTask<T> {
         let dataTask = session.dataTask(with: buildURLRequest(for: request), completionHandler: { (data, response, error) in
             DispatchQueue.main.async {
@@ -39,6 +57,12 @@ import Foundation
         return RequestTask(request: request, dataTask: dataTask)
     }
     
+    /// Send the given Request to Omise API
+    ///
+    /// - Parameters:
+    ///   - request: Request with a parameter to create a new Omise API object
+    ///   - completionHandler: Compleation Handler closure that will be called when the request task is finished
+    /// - Returns: A new Request Task
     @discardableResult
     public func sendRequest<T: Object>(_ request: Request<T>, completionHandler: Request<T>.Callback?) -> RequestTask<T> {
         let task = requestTask(with: request, completionHandler: completionHandler)
