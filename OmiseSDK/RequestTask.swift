@@ -1,4 +1,5 @@
 import Foundation
+import os
 
 
 public class RequestTask<T: Object> {
@@ -12,6 +13,9 @@ public class RequestTask<T: Object> {
     
     public func resume() {
         dataTask.resume()
+        if #available(iOS 10.0, *) {
+            os_log("Starting/Resuming Request %{public}@", log: sdkLogObject, type: .debug, String(describing: type(of: T.self)))
+        }
     }
 }
 

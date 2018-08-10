@@ -1,4 +1,5 @@
 import UIKit
+import os.log
 
 
 public protocol CreditCardFormViewControllerDelegate: AnyObject {
@@ -216,6 +217,10 @@ public class CreditCardFormViewController: UITableViewController {
         }
         
         updateSupplementaryUI()
+        
+        if #available(iOS 10.0, *) {
+            os_log("The custom credit card information was set - %{private}@", log: uiLogObject, type: .debug, String((number ?? "").suffix(4)))
+        }
     }
     
     @objc(setCreditCardInformationWithNumber:name:expirationMonth:expirationYear:)
@@ -258,25 +263,55 @@ public class CreditCardFormViewController: UITableViewController {
     }
     
     private func performCancelingForm() -> Bool {
+        if #available(iOS 10.0, *) {
+            os_log("Credit Card Form dismissing requested, Asking the delegate what should the form controler do",
+                   log: uiLogObject, type: .default)
+        }
+        
         if let delegate = self.delegate {
             delegate.creditCardFormViewControllerDidCancel(self)
+            if #available(iOS 10.0, *) {
+                os_log("Canceling form delegate notified", log: uiLogObject, type: .default)
+            }
             return true
         } else if let delegate = __delegate?.creditCardFormViewControllerDidCancel {
             delegate(self)
+            if #available(iOS 10.0, *) {
+                os_log("Canceling form delegate notified", log: uiLogObject, type: .default)
+            }
             return true
         } else {
+            if #available(iOS 10.0, *) {
+                os_log("Credit Card Form dismissing requested but there is not delegate to ask. Ignore the request",
+                       log: uiLogObject, type: .default)
+            }
             return false
         }
     }
     
     private func handleError(_ error: Error) {
         guard handleErrors else {
+            if #available(iOS 10.0, *) {
+                os_log("Credit Card Form's Request failed %{private}@, automatically error handling turned off. Trying to notify the delegate", log: uiLogObject, type: .info, error.localizedDescription)
+            }
             if let delegate = self.delegate {
                 delegate.creditCardFormViewController(self, didFailWithError: error)
-            } else {
-                __delegate?.creditCardFormViewController(self, didFailWithError: error as NSError)
+                if #available(iOS 10.0, *) {
+                    os_log("Error handling delegate notified", log: uiLogObject, type: .default)
+                }
+            } else if let delegate = self.__delegate {
+                delegate.creditCardFormViewController(self, didFailWithError: error as NSError)
+                if #available(iOS 10.0, *) {
+                    os_log("Error handling delegate notified", log: uiLogObject, type: .default)
+                }
+            } else if #available(iOS 10.0, *) {
+                os_log("There is no Credit Card Form's delegate to notify about the error", log: uiLogObject, type: .info)
             }
             return
+        }
+        
+        if #available(iOS 10.0, *) {
+            os_log("Credit Card Form's Request failed %{private}@, automatically error handling turned on.", log: uiLogObject, type: .info, error.localizedDescription)
         }
         
         let errorString: String
@@ -312,8 +347,15 @@ public class CreditCardFormViewController: UITableViewController {
         UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, "Submitting payment, please wait")
         
         guard let publicKey = publicKey else {
+            if #available(iOS 10.0, *) {
+                os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.publicKey ?? "")
+            }
             assertionFailure("Missing public key information. Please setting the public key before request token.")
             return
+        }
+        
+        if #available(iOS 10.0, *) {
+            os_log("Requesting token", log: uiLogObject, type: .info)
         }
         
         startActivityIndicator()
@@ -332,10 +374,21 @@ public class CreditCardFormViewController: UITableViewController {
             strongSelf.stopActivityIndicator()
             switch result {
             case let .success(token):
+                if #available(iOS 10.0, *) {
+                    os_log("Credit Card Form's Request succeed %{private}@, trying to notify the delegate", log: uiLogObject, type: .default, token.id)
+                }
                 if let delegate = strongSelf.delegate {
                     delegate.creditCardFormViewController(strongSelf, didSucceedWithToken: token)
-                } else {
-                    strongSelf.__delegate?.creditCardFormViewController(strongSelf, didSucceedWithToken: __OmiseToken(token: token))
+                    if #available(iOS 10.0, *) {
+                        os_log("Create Token succeed delegate notified", log: uiLogObject, type: .default)
+                    }
+                } else if let delegate = strongSelf.__delegate {
+                    delegate.creditCardFormViewController(strongSelf, didSucceedWithToken: __OmiseToken(token: token))
+                    if #available(iOS 10.0, *) {
+                        os_log("Create Token succeed delegate notified", log: uiLogObject, type: .default)
+                    }
+                } else if #available(iOS 10.0, *) {
+                    os_log("There is no Credit Card Form's delegate to notify about the created token", log: uiLogObject, type: .default)
                 }
             case let .fail(err):
                 strongSelf.handleError(err)

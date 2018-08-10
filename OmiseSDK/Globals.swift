@@ -1,8 +1,12 @@
 import Foundation
+import os
 
-func sdkWarn(_ message: String) {
-    dump("[omise-ios-sdk] WARN: \(message)")
-}
+
+@available(iOS 10.0, *)
+let sdkLogObject: OSLog = OSLog(subsystem: "co.omise.ios.sdk", category: "SDK")
+
+@available(iOS 10.0, *)
+let uiLogObject: OSLog = OSLog(subsystem: "co.omise.ios.sdk", category: "UI")
 
 
 extension Optional where Wrapped == String {

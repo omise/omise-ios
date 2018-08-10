@@ -1,5 +1,5 @@
 import Foundation
-
+import os
 
 
 @objc(OMSSDKClient) public class Client: NSObject {
@@ -20,8 +20,10 @@ import Foundation
         if publicKey.hasPrefix("pkey_") {
             self.publicKey = publicKey
         } else {
-            assertionFailure("refusing to initialize sdk client with a non-public key.")
-            sdkWarn("refusing to initialize sdk client with a non-public key.")
+            if #available(iOS 10.0, *) {
+                os_log("Refusing to initialize sdk client with a non-public key: %{private}@", log: sdkLogObject, type: .error, publicKey)
+            }
+            assertionFailure("Refusing to initialize sdk client with a non-public key.")
             self.publicKey = ""
         }
         
@@ -111,47 +113,64 @@ extension Client {
         return { (data: Data?, response: URLResponse?, error: Error?) -> () in
             guard let callback = callback else { return } // nobody around to hear the leaf falls
             
+            let result: RequestResult<T>
+            defer {
+                if #available(iOS 10.0, *) {
+                    switch result {
+                    case .success(let value):
+                        os_log("Request succeed %{private}@", log: sdkLogObject, type: .debug, value.id)
+                    case .fail(let error):
+                        os_log("Request failed %{public}@", log: sdkLogObject, type: .info, error.localizedDescription)
+                    }
+                }
+                callback(result)
+            }
+            
             if let error = error {
-                return callback(.fail(error))
+                result = .fail(error)
+                return
             }
             
             guard let httpResponse = response as? HTTPURLResponse else {
                 let error = OmiseError.unexpected(message: "no error and no response.", underlying: nil)
-                return callback(.fail(error))
+                result = .fail(error)
+                return
             }
             
             switch httpResponse.statusCode {
             case 400..<600:
                 guard let data = data else {
                     let error = OmiseError.unexpected(message: "error response with no data", underlying: nil)
-                    return callback(.fail(error))
+                    result = .fail(error)
+                    return
                 }
                 
                 do {
                     let decoder = makeJSONDecoder()
-                    return callback(.fail(try decoder.decode(OmiseError.self, from: data)))
+                    result = .fail(try decoder.decode(OmiseError.self, from: data))
                 } catch let err {
                     let error = OmiseError.unexpected(message: "error response with invalid JSON", underlying: err)
-                    return callback(.fail(error))
+                    result = .fail(error)
                 }
                 
             case 200..<300:
                 guard let data = data else {
                     let error = OmiseError.unexpected(message: "HTTP 200 but no data", underlying: nil)
-                    return callback(.fail(error))
+                    result = .fail(error)
+                    return
                 }
                 
                 do {
                     let decoder = makeJSONDecoder()
-                    return callback(.success(try decoder.decode(T.self, from: data)))
+                    result = .success(try decoder.decode(T.self, from: data))
                 } catch let err {
                     let error = OmiseError.unexpected(message: "200 response with invalid JSON", underlying: err)
-                    return callback(.fail(error))
+                    result = .fail(error)
                 }
                 
             default:
                 let error = OmiseError.unexpected(message: "unrecognized HTTP status code: \(httpResponse.statusCode)", underlying: nil)
-                return callback(.fail(error))
+                result = .fail(error)
             }
         }
     }
