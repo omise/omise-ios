@@ -1,430 +1,299 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wHy-gm-NE0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ALK-ZP-CXg">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Credit Card Form-->
-        <scene sceneID="x6b-Hj-f1R">
+        <!--Credit Card Form View Controller-->
+        <scene sceneID="dPJ-Ub-Z91">
             <objects>
-                <tableViewController storyboardIdentifier="CreditCardFormController" id="wHy-gm-NE0" customClass="OMSCreditCardFormViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" id="ssO-fS-gwM" userLabel="Credit card form table view">
+                <viewController storyboardIdentifier="CreditCardFormController" id="ALK-ZP-CXg" customClass="OMSCreditCardFormViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iw5-48-6Oe"/>
+                        <viewControllerLayoutGuide type="bottom" id="XzI-Fq-3C5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="k78-5i-gmz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="HTf-gM-q5i" userLabel="Credit card detail header" customClass="FormHeaderView" customModule="OmiseSDK" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="networkMasterCard" translatesAutoresizingMaskIntoConstraints="NO" id="IhW-w9-4Xj">
-                                    <rect key="frame" x="316" y="37" width="23" height="15"/>
-                                    <accessibility key="accessibilityConfiguration">
-                                        <accessibilityTraits key="traits" notEnabled="YES"/>
-                                    </accessibility>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="15" id="eLb-Zk-lVG"/>
-                                        <constraint firstAttribute="width" constant="23" id="yVi-Fi-zlb"/>
-                                    </constraints>
-                                </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="networkVISA" translatesAutoresizingMaskIntoConstraints="NO" id="kdp-zf-rkO">
-                                    <rect key="frame" x="288" y="37" width="20" height="15"/>
-                                    <accessibility key="accessibilityConfiguration">
-                                        <accessibilityTraits key="traits" notEnabled="YES"/>
-                                        <bool key="isElement" value="NO"/>
-                                    </accessibility>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="15" id="W2Q-6u-NMq"/>
-                                        <constraint firstAttribute="width" constant="20" id="fT4-QV-vry"/>
-                                    </constraints>
-                                </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="networkJCB" translatesAutoresizingMaskIntoConstraints="NO" id="h2j-h5-Et3">
-                                    <rect key="frame" x="347" y="37" width="20" height="15"/>
-                                    <accessibility key="accessibilityConfiguration">
-                                        <accessibilityTraits key="traits" notEnabled="YES"/>
-                                    </accessibility>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="20" id="Kco-au-eF0"/>
-                                        <constraint firstAttribute="height" constant="15" id="rgJ-ae-Bc1"/>
-                                    </constraints>
-                                </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CREDIT CARD DETAIL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Bi-Xw-l4X">
-                                    <rect key="frame" x="8" y="40.5" width="123.5" height="14.5"/>
-                                    <accessibility key="accessibilityConfiguration">
-                                        <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
-                                        <bool key="isElement" value="NO"/>
-                                    </accessibility>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                    <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            <accessibility key="accessibilityConfiguration">
-                                <accessibilityTraits key="traits" staticText="YES" notEnabled="YES" header="YES"/>
-                            </accessibility>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="h2j-h5-Et3" secondAttribute="trailing" constant="8" id="5Fm-SD-ncg"/>
-                                <constraint firstItem="IhW-w9-4Xj" firstAttribute="centerY" secondItem="kdp-zf-rkO" secondAttribute="centerY" id="8z8-gI-FPJ"/>
-                                <constraint firstItem="6Bi-Xw-l4X" firstAttribute="baseline" secondItem="h2j-h5-Et3" secondAttribute="bottom" id="FNt-Rb-VQQ"/>
-                                <constraint firstItem="h2j-h5-Et3" firstAttribute="centerY" secondItem="kdp-zf-rkO" secondAttribute="centerY" id="K9L-n4-zZ3"/>
-                                <constraint firstItem="6Bi-Xw-l4X" firstAttribute="leading" secondItem="HTf-gM-q5i" secondAttribute="leadingMargin" id="S8b-O4-6ys"/>
-                                <constraint firstAttribute="bottom" secondItem="h2j-h5-Et3" secondAttribute="bottom" constant="12" id="SDy-c9-4dU"/>
-                                <constraint firstItem="IhW-w9-4Xj" firstAttribute="leading" secondItem="kdp-zf-rkO" secondAttribute="trailing" constant="8" symbolic="YES" id="TC6-mJ-vv3"/>
-                                <constraint firstItem="kdp-zf-rkO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Bi-Xw-l4X" secondAttribute="trailing" constant="8" symbolic="YES" id="VhC-v3-omW"/>
-                                <constraint firstItem="h2j-h5-Et3" firstAttribute="leading" secondItem="IhW-w9-4Xj" secondAttribute="trailing" constant="8" id="npW-jU-HlZ"/>
-                            </constraints>
-                            <connections>
-                                <outlet property="card_jcb" destination="h2j-h5-Et3" id="e1c-gF-BK6"/>
-                                <outlet property="card_mastercard" destination="IhW-w9-4Xj" id="mE0-wf-rzG"/>
-                                <outlet property="card_visa" destination="kdp-zf-rkO" id="G5R-1u-u9M"/>
-                                <outlet property="headerLabel" destination="6Bi-Xw-l4X" id="PSb-Nj-pBO"/>
-                            </connections>
-                        </view>
-                        <sections>
-                            <tableViewSection id="Ijh-R5-yGR" userLabel="Card input form section">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="vFH-O9-cgh" userLabel="Card number cell" customClass="CardNumberFormCell" customModule="OmiseSDK" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="64" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="vFH-O9-cgh" id="hEN-QR-fMJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7p-Gc-gD9">
-                                                    <rect key="frame" x="16" y="11.5" width="110" height="20.5"/>
-                                                    <accessibility key="accessibilityConfiguration">
-                                                        <bool key="isElement" value="NO"/>
-                                                    </accessibility>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" priority="990" constant="110" id="mno-AB-S1E"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="890" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="1234 5678 9012 3456" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P2L-nA-3Qg" userLabel="Card number field" customClass="CardNumberTextField" customModule="OmiseSDK" customModuleProvider="target">
-                                                    <rect key="frame" x="138" y="0.0" width="221" height="43.5"/>
-                                                    <accessibility key="accessibilityConfiguration" label="Card number"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="44" id="THG-pd-rfY"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="WbX-vK-21M"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                                    <connections>
-                                                        <action selector="textFieldDidBegin:" destination="wHy-gm-NE0" eventType="editingDidBegin" id="dCC-eZ-VQr"/>
-                                                        <action selector="updateAccessibilityValue:" destination="wHy-gm-NE0" eventType="editingChanged" id="K48-oz-NBg"/>
-                                                        <action selector="updateAccessibilityValue:" destination="wHy-gm-NE0" eventType="valueChanged" id="Mau-aA-1x6"/>
-                                                    </connections>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="o7p-Gc-gD9" firstAttribute="leading" secondItem="hEN-QR-fMJ" secondAttribute="leadingMargin" id="9eU-fR-KCV"/>
-                                                <constraint firstAttribute="bottom" secondItem="P2L-nA-3Qg" secondAttribute="bottom" id="LFg-4C-zZ8"/>
-                                                <constraint firstItem="P2L-nA-3Qg" firstAttribute="leading" secondItem="o7p-Gc-gD9" secondAttribute="trailing" constant="12" id="NJx-KB-3Cr"/>
-                                                <constraint firstItem="o7p-Gc-gD9" firstAttribute="firstBaseline" secondItem="P2L-nA-3Qg" secondAttribute="firstBaseline" id="SNu-tv-Rxt"/>
-                                                <constraint firstItem="P2L-nA-3Qg" firstAttribute="top" secondItem="hEN-QR-fMJ" secondAttribute="top" id="abR-ka-dqE"/>
-                                                <constraint firstItem="P2L-nA-3Qg" firstAttribute="trailing" secondItem="hEN-QR-fMJ" secondAttribute="trailingMargin" id="yTF-w4-XmR"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="textField" destination="P2L-nA-3Qg" id="sk6-nJ-uTj"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="qrC-dc-j7n" userLabel="Card holder name cell" customClass="NameCardFormCell" customModule="OmiseSDK" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="108" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="qrC-dc-j7n" id="Khm-De-ObL">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name on card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMS-Zs-jJl">
-                                                    <rect key="frame" x="16" y="11.5" width="110" height="20.5"/>
-                                                    <accessibility key="accessibilityConfiguration">
-                                                        <bool key="isElement" value="NO"/>
-                                                    </accessibility>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" priority="990" constant="110" id="oKU-MZ-VdE"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="890" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="John Doe" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1gP-Xv-3DX" userLabel="Card holder name field" customClass="CardNameTextField" customModule="OmiseSDK" customModuleProvider="target">
-                                                    <rect key="frame" x="138" y="0.0" width="221" height="43.5"/>
-                                                    <accessibility key="accessibilityConfiguration" label="Name on card"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="4uT-a9-9lp"/>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="44" id="DiZ-NT-zSL"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <action selector="textFieldDidBegin:" destination="wHy-gm-NE0" eventType="editingDidBegin" id="N8w-5h-Kdj"/>
-                                                        <action selector="updateAccessibilityValue:" destination="wHy-gm-NE0" eventType="editingChanged" id="9RN-G0-9d6"/>
-                                                        <action selector="updateAccessibilityValue:" destination="wHy-gm-NE0" eventType="valueChanged" id="jgC-eE-naG"/>
-                                                    </connections>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="1gP-Xv-3DX" firstAttribute="top" secondItem="Khm-De-ObL" secondAttribute="top" id="6eo-MZ-T1U"/>
-                                                <constraint firstItem="1gP-Xv-3DX" firstAttribute="baseline" secondItem="gMS-Zs-jJl" secondAttribute="baseline" id="MHk-71-pU0"/>
-                                                <constraint firstAttribute="bottom" secondItem="1gP-Xv-3DX" secondAttribute="bottom" id="Wqt-RJ-mn4"/>
-                                                <constraint firstItem="gMS-Zs-jJl" firstAttribute="leading" secondItem="Khm-De-ObL" secondAttribute="leadingMargin" id="Xue-08-KdY"/>
-                                                <constraint firstItem="1gP-Xv-3DX" firstAttribute="leading" secondItem="gMS-Zs-jJl" secondAttribute="trailing" constant="12" id="at2-aC-456"/>
-                                                <constraint firstItem="1gP-Xv-3DX" firstAttribute="trailing" secondItem="Khm-De-ObL" secondAttribute="trailingMargin" id="nrt-ZM-8Q9"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="textField" destination="1gP-Xv-3DX" id="rSX-gj-ePr"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="JXm-Js-QVf" userLabel="Expiry date cell" customClass="ExpiryDateFormCell" customModule="OmiseSDK" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="152" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="JXm-Js-QVf" id="gG2-qY-He3">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expiry date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LlT-Ou-anQ">
-                                                    <rect key="frame" x="16" y="11.5" width="110" height="20.5"/>
-                                                    <accessibility key="accessibilityConfiguration">
-                                                        <bool key="isElement" value="NO"/>
-                                                    </accessibility>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" priority="990" constant="110" id="UaF-vy-xbE"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="890" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MM/YY" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jo2-Jq-1eC" userLabel="Card expiry field" customClass="CardExpiryDateTextField" customModule="OmiseSDK" customModuleProvider="target">
-                                                    <rect key="frame" x="138" y="0.0" width="221" height="43.5"/>
-                                                    <accessibility key="accessibilityConfiguration">
-                                                        <bool key="isElement" value="NO"/>
-                                                    </accessibility>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="44" id="e1P-n6-abH"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="o23-P7-s08"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                                    <connections>
-                                                        <action selector="textFieldDidBegin:" destination="wHy-gm-NE0" eventType="editingDidBegin" id="vbj-x2-c05"/>
-                                                        <action selector="updateAccessibilityValue:" destination="wHy-gm-NE0" eventType="valueChanged" id="2G6-Ga-MZQ"/>
-                                                        <action selector="updateAccessibilityValue:" destination="wHy-gm-NE0" eventType="editingChanged" id="MYM-ka-sjp"/>
-                                                    </connections>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="LlT-Ou-anQ" firstAttribute="leading" secondItem="gG2-qY-He3" secondAttribute="leadingMargin" id="1vR-m9-117"/>
-                                                <constraint firstItem="Jo2-Jq-1eC" firstAttribute="trailing" secondItem="gG2-qY-He3" secondAttribute="trailingMargin" id="8al-Bp-NLZ"/>
-                                                <constraint firstItem="Jo2-Jq-1eC" firstAttribute="baseline" secondItem="LlT-Ou-anQ" secondAttribute="baseline" id="DLa-fQ-2Al"/>
-                                                <constraint firstItem="Jo2-Jq-1eC" firstAttribute="top" secondItem="gG2-qY-He3" secondAttribute="top" id="Q8J-SC-u0D"/>
-                                                <constraint firstItem="Jo2-Jq-1eC" firstAttribute="leading" secondItem="LlT-Ou-anQ" secondAttribute="trailing" constant="12" id="jnO-kh-iE3"/>
-                                                <constraint firstAttribute="bottom" secondItem="Jo2-Jq-1eC" secondAttribute="bottom" id="lac-lU-BTq"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="textField" destination="Jo2-Jq-1eC" id="Ua3-qo-bK9"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="bVu-Tp-g1b" userLabel="Security cell" customClass="SecureCodeFormCell" customModule="OmiseSDK" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="196" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="bVu-Tp-g1b" id="tbv-BF-CYn">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Security code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUA-yb-3hy">
-                                                    <rect key="frame" x="16" y="11.5" width="110" height="20.5"/>
-                                                    <accessibility key="accessibilityConfiguration">
-                                                        <bool key="isElement" value="NO"/>
-                                                    </accessibility>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" priority="990" constant="110" id="dqF-b3-JBi"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="890" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CVV" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eXh-Mb-b98" userLabel="Security code field" customClass="CardCVVTextField" customModule="OmiseSDK" customModuleProvider="target">
-                                                    <rect key="frame" x="138" y="0.0" width="221" height="43.5"/>
-                                                    <accessibility key="accessibilityConfiguration" label="Security code"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="ZwR-yG-Phc"/>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="44" id="rv7-bL-KLP"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
-                                                    <connections>
-                                                        <action selector="textFieldDidBegin:" destination="wHy-gm-NE0" eventType="editingDidBegin" id="y6N-34-Od4"/>
-                                                        <action selector="updateAccessibilityValue:" destination="wHy-gm-NE0" eventType="valueChanged" id="0kw-At-iQm"/>
-                                                        <action selector="updateAccessibilityValue:" destination="wHy-gm-NE0" eventType="editingChanged" id="LE7-MN-YaE"/>
-                                                    </connections>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="hUA-yb-3hy" firstAttribute="leading" secondItem="tbv-BF-CYn" secondAttribute="leadingMargin" id="FXS-RQ-wyN"/>
-                                                <constraint firstItem="eXh-Mb-b98" firstAttribute="leading" secondItem="hUA-yb-3hy" secondAttribute="trailing" constant="12" id="IOJ-cf-WpA"/>
-                                                <constraint firstItem="eXh-Mb-b98" firstAttribute="baseline" secondItem="hUA-yb-3hy" secondAttribute="baseline" id="RjD-6f-QGe"/>
-                                                <constraint firstItem="eXh-Mb-b98" firstAttribute="trailing" secondItem="tbv-BF-CYn" secondAttribute="trailingMargin" id="foK-Hq-vIp"/>
-                                                <constraint firstItem="eXh-Mb-b98" firstAttribute="top" secondItem="tbv-BF-CYn" secondAttribute="top" id="rka-X9-WF7"/>
-                                                <constraint firstAttribute="bottom" secondItem="eXh-Mb-b98" secondAttribute="bottom" id="rxy-zU-Zsk"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="textField" destination="eXh-Mb-b98" id="Y7B-Of-sUJ"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="eUa-yO-5TN">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Klw-H2-shI" userLabel="Submit payment cell" customClass="ConfirmButtonCell" customModule="OmiseSDK" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="275" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Klw-H2-shI" id="r91-tY-yTj">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="JZL-Ef-2Bi">
-                                                    <rect key="frame" x="177.5" y="12" width="20" height="20"/>
-                                                </activityIndicatorView>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Submit payment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4b-ke-VTp">
-                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
-                                                    <accessibility key="accessibilityConfiguration">
-                                                        <bool key="isElement" value="NO"/>
-                                                    </accessibility>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="44" id="sue-De-w37"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="v4b-ke-VTp" firstAttribute="top" secondItem="r91-tY-yTj" secondAttribute="top" id="Ezp-Iw-00w"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="v4b-ke-VTp" secondAttribute="trailing" id="LZS-am-dz6"/>
-                                                <constraint firstItem="JZL-Ef-2Bi" firstAttribute="centerY" secondItem="r91-tY-yTj" secondAttribute="centerY" id="kuX-fi-Zts"/>
-                                                <constraint firstItem="JZL-Ef-2Bi" firstAttribute="centerX" secondItem="r91-tY-yTj" secondAttribute="centerX" id="nYc-wD-Mft"/>
-                                                <constraint firstAttribute="bottom" secondItem="v4b-ke-VTp" secondAttribute="bottom" id="srY-TB-9ps"/>
-                                                <constraint firstItem="v4b-ke-VTp" firstAttribute="leading" secondItem="r91-tY-yTj" secondAttribute="leadingMargin" id="vOp-f3-xnI"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <accessibility key="accessibilityConfiguration" identifier="SubmitButton" label="Submit payment">
-                                            <accessibilityTraits key="traits" button="YES"/>
-                                            <bool key="isElement" value="YES"/>
-                                        </accessibility>
-                                        <connections>
-                                            <outlet property="activityIndicator" destination="JZL-Ef-2Bi" id="amz-eI-v7P"/>
-                                            <outlet property="confirmPaymentLabel" destination="v4b-ke-VTp" id="Znd-Zf-94f"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="wHy-gm-NE0" id="eqg-qS-cwk"/>
-                            <outlet property="delegate" destination="wHy-gm-NE0" id="xld-8o-68T"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Credit Card Form" id="vz0-HS-ms9">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="xvx-mb-bmP">
-                            <connections>
-                                <action selector="cancelForm" destination="wHy-gm-NE0" id="yan-tF-fnG"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CKR-Pl-Ix5">
+                                <rect key="frame" x="16" y="20" width="343" height="18"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <color key="textColor" red="0.61568627450980395" green="0.62352941176470589" blue="0.6470588235294118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name on card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEE-yU-zna">
+                                <rect key="frame" x="16" y="126.5" width="343" height="18"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <color key="textColor" red="0.61568627450000002" green="0.62352941179999999" blue="0.64705882349999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expiry date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuR-9N-gze">
+                                <rect key="frame" x="16" y="233" width="151.5" height="18"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <color key="textColor" red="0.61568627450000002" green="0.62352941179999999" blue="0.64705882349999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Security code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMc-kJ-Ncs">
+                                <rect key="frame" x="207.5" y="233" width="151.5" height="18"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <color key="textColor" red="0.61568627450000002" green="0.62352941179999999" blue="0.64705882349999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="05/22" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Par-EA-T3D" customClass="CardExpiryDateTextField" customModule="OmiseSDK" customModuleProvider="target">
+                                <rect key="frame" x="16" y="257" width="151.5" height="43"/>
+                                <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.89019607840000003" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="textFieldDidBegin:" destination="ALK-ZP-CXg" eventType="editingDidBegin" id="xy0-sD-zuD"/>
+                                    <action selector="updateAccessibilityValue:" destination="ALK-ZP-CXg" eventType="editingChanged" id="6gp-yf-2Wg"/>
+                                    <action selector="updateAccessibilityValue:" destination="ALK-ZP-CXg" eventType="valueChanged" id="KgS-al-dOt"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y1l-QK-aPc" customClass="CardCVVTextField" customModule="OmiseSDK" customModuleProvider="target">
+                                <rect key="frame" x="207.5" y="257" width="151.5" height="43"/>
+                                <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.89019607840000003" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="textFieldDidBegin:" destination="ALK-ZP-CXg" eventType="editingDidBegin" id="D1U-AX-p9z"/>
+                                    <action selector="updateAccessibilityValue:" destination="ALK-ZP-CXg" eventType="editingChanged" id="Byd-gA-7tN"/>
+                                    <action selector="updateAccessibilityValue:" destination="ALK-ZP-CXg" eventType="valueChanged" id="cdn-xf-95h"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="John Appleseed" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AJd-kX-GAq" customClass="CardNameTextField" customModule="OmiseSDK" customModuleProvider="target">
+                                <rect key="frame" x="16" y="150.5" width="343" height="43"/>
+                                <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.89019607840000003" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="textFieldDidBegin:" destination="ALK-ZP-CXg" eventType="editingDidBegin" id="hev-lp-5uk"/>
+                                    <action selector="updateAccessibilityValue:" destination="ALK-ZP-CXg" eventType="valueChanged" id="XKW-dL-80t"/>
+                                    <action selector="updateAccessibilityValue:" destination="ALK-ZP-CXg" eventType="editingChanged" id="YqZ-Gf-f46"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="4242424242424242" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PBr-uW-pM8" customClass="CardNumberTextField" customModule="OmiseSDK" customModuleProvider="target">
+                                <rect key="frame" x="16" y="44" width="343" height="43"/>
+                                <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" textContentType="cc-number"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.89019607840000003" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="textFieldDidBegin:" destination="ALK-ZP-CXg" eventType="editingDidBegin" id="n4L-Vi-VVe"/>
+                                    <action selector="updateAccessibilityValue:" destination="ALK-ZP-CXg" eventType="valueChanged" id="LQS-XC-WfU"/>
+                                    <action selector="updateAccessibilityValue:" destination="ALK-ZP-CXg" eventType="editingChanged" id="YYZ-sz-Bbo"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZPa-NN-y1M" customClass="MainActionButton" customModule="OmiseSDK" customModuleProvider="target">
+                                <rect key="frame" x="16" y="339.5" width="343" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="p5t-Hl-v8s"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pay 1,500 THB">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="defaultBackgroundColor">
+                                        <color key="value" red="0.15294117647058825" green="0.38039215686274508" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="requestToken" destination="ALK-ZP-CXg" eventType="touchUpInside" id="8bA-RH-GhE"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invalid expiry date" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubw-ZT-CVl">
+                                <rect key="frame" x="16" y="306" width="151.5" height="13.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                                <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Empty securiy code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3TR-eT-NNR">
+                                <rect key="frame" x="207.5" y="306" width="151.5" height="13.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                                <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Empty name is not allowed" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="134-RW-VCo">
+                                <rect key="frame" x="16" y="199.5" width="343" height="13.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                                <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card brand not supported" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ox-gC-WRb">
+                                <rect key="frame" x="16" y="93" width="343" height="13.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                                <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="AJd-kX-GAq" firstAttribute="trailing" secondItem="k78-5i-gmz" secondAttribute="trailingMargin" id="0bq-yf-dIV"/>
+                            <constraint firstItem="uuR-9N-gze" firstAttribute="top" relation="greaterThanOrEqual" secondItem="AJd-kX-GAq" secondAttribute="bottom" constant="20" id="10a-2f-BO5"/>
+                            <constraint firstItem="ubw-ZT-CVl" firstAttribute="leading" secondItem="Par-EA-T3D" secondAttribute="leading" id="1El-Tm-VPX"/>
+                            <constraint firstItem="ZPa-NN-y1M" firstAttribute="leading" secondItem="k78-5i-gmz" secondAttribute="leadingMargin" id="1qd-VI-yS9"/>
+                            <constraint firstItem="134-RW-VCo" firstAttribute="top" secondItem="AJd-kX-GAq" secondAttribute="bottom" constant="6" id="4Ao-TJ-I7r"/>
+                            <constraint firstItem="ZPa-NN-y1M" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Par-EA-T3D" secondAttribute="bottom" constant="20" id="4bj-X9-hNb"/>
+                            <constraint firstItem="uuR-9N-gze" firstAttribute="trailing" secondItem="Par-EA-T3D" secondAttribute="trailing" id="5EP-Xm-iGB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="PBr-uW-pM8" secondAttribute="trailing" id="66C-Cu-9kA"/>
+                            <constraint firstItem="AJd-kX-GAq" firstAttribute="top" secondItem="bEE-yU-zna" secondAttribute="bottom" constant="6" id="6Kw-DM-uq3"/>
+                            <constraint firstItem="AJd-kX-GAq" firstAttribute="leading" secondItem="k78-5i-gmz" secondAttribute="leadingMargin" id="6sI-f5-hti"/>
+                            <constraint firstItem="Y1l-QK-aPc" firstAttribute="width" secondItem="Par-EA-T3D" secondAttribute="width" id="85P-vh-SVP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CKR-Pl-Ix5" secondAttribute="trailing" id="8LL-1l-Rq0"/>
+                            <constraint firstItem="ZPa-NN-y1M" firstAttribute="top" secondItem="ubw-ZT-CVl" secondAttribute="bottom" priority="999" constant="20" id="9eK-7s-mcG"/>
+                            <constraint firstItem="bEE-yU-zna" firstAttribute="top" relation="greaterThanOrEqual" secondItem="PBr-uW-pM8" secondAttribute="bottom" constant="20" id="AAk-Po-OHd"/>
+                            <constraint firstItem="3TR-eT-NNR" firstAttribute="leading" secondItem="Y1l-QK-aPc" secondAttribute="leading" id="CNN-7v-vP8"/>
+                            <constraint firstItem="Par-EA-T3D" firstAttribute="leading" secondItem="k78-5i-gmz" secondAttribute="leadingMargin" id="CbM-Eu-Wcj"/>
+                            <constraint firstItem="uuR-9N-gze" firstAttribute="top" secondItem="134-RW-VCo" secondAttribute="bottom" priority="999" constant="20" id="GhR-co-5O5"/>
+                            <constraint firstItem="3TR-eT-NNR" firstAttribute="trailing" secondItem="Y1l-QK-aPc" secondAttribute="trailing" id="ICW-lF-7F9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Y1l-QK-aPc" secondAttribute="trailing" id="JAE-Xt-1je"/>
+                            <constraint firstItem="134-RW-VCo" firstAttribute="trailing" secondItem="AJd-kX-GAq" secondAttribute="trailing" id="Qrg-iC-L8r"/>
+                            <constraint firstItem="Y1l-QK-aPc" firstAttribute="top" secondItem="Par-EA-T3D" secondAttribute="top" id="R3n-O9-dRF"/>
+                            <constraint firstItem="CKR-Pl-Ix5" firstAttribute="top" secondItem="iw5-48-6Oe" secondAttribute="bottom" id="RXU-Wq-HO0"/>
+                            <constraint firstItem="uuR-9N-gze" firstAttribute="leading" secondItem="k78-5i-gmz" secondAttribute="leadingMargin" id="Rxr-YV-JJ1"/>
+                            <constraint firstItem="ubw-ZT-CVl" firstAttribute="top" secondItem="Par-EA-T3D" secondAttribute="bottom" constant="6" id="SUr-sI-4rX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZPa-NN-y1M" secondAttribute="trailing" id="TWp-m0-3QJ"/>
+                            <constraint firstItem="PBr-uW-pM8" firstAttribute="top" secondItem="CKR-Pl-Ix5" secondAttribute="bottom" constant="6" id="UM1-tq-95I"/>
+                            <constraint firstItem="3TR-eT-NNR" firstAttribute="firstBaseline" secondItem="ubw-ZT-CVl" secondAttribute="firstBaseline" id="a06-oN-evZ"/>
+                            <constraint firstItem="vMc-kJ-Ncs" firstAttribute="leading" secondItem="Y1l-QK-aPc" secondAttribute="leading" id="ain-er-X3y"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="PBr-uW-pM8" secondAttribute="leading" id="bQ0-Hq-NYJ"/>
+                            <constraint firstItem="Y1l-QK-aPc" firstAttribute="top" secondItem="vMc-kJ-Ncs" secondAttribute="bottom" constant="6" id="bah-PJ-YDt"/>
+                            <constraint firstItem="bEE-yU-zna" firstAttribute="trailing" secondItem="k78-5i-gmz" secondAttribute="trailingMargin" id="cvU-QH-Ba1"/>
+                            <constraint firstItem="7Ox-gC-WRb" firstAttribute="leading" secondItem="PBr-uW-pM8" secondAttribute="leading" id="dYv-aj-3ba"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="CKR-Pl-Ix5" secondAttribute="leading" id="dlb-nw-Ax0"/>
+                            <constraint firstItem="Par-EA-T3D" firstAttribute="top" secondItem="uuR-9N-gze" secondAttribute="bottom" constant="6" id="fxd-CF-efe"/>
+                            <constraint firstItem="bEE-yU-zna" firstAttribute="top" secondItem="7Ox-gC-WRb" secondAttribute="bottom" priority="999" constant="20" id="gM1-ZQ-wPi"/>
+                            <constraint firstItem="vMc-kJ-Ncs" firstAttribute="trailing" secondItem="k78-5i-gmz" secondAttribute="trailingMargin" id="gbb-AO-OD3"/>
+                            <constraint firstItem="bEE-yU-zna" firstAttribute="leading" secondItem="k78-5i-gmz" secondAttribute="leadingMargin" id="iTK-GK-gEh"/>
+                            <constraint firstItem="134-RW-VCo" firstAttribute="leading" secondItem="AJd-kX-GAq" secondAttribute="leading" id="j01-3a-Ent"/>
+                            <constraint firstItem="7Ox-gC-WRb" firstAttribute="top" secondItem="PBr-uW-pM8" secondAttribute="bottom" constant="6" id="kZF-AP-piL"/>
+                            <constraint firstItem="Y1l-QK-aPc" firstAttribute="leading" secondItem="Par-EA-T3D" secondAttribute="trailing" constant="40" id="lel-kP-nby"/>
+                            <constraint firstItem="ubw-ZT-CVl" firstAttribute="trailing" secondItem="Par-EA-T3D" secondAttribute="trailing" id="wm1-og-h3k"/>
+                            <constraint firstItem="7Ox-gC-WRb" firstAttribute="trailing" secondItem="PBr-uW-pM8" secondAttribute="trailing" id="yh4-MN-xyA"/>
+                        </constraints>
+                    </view>
                     <connections>
-                        <outlet property="cardNameCell" destination="qrC-dc-j7n" id="69H-L0-pUK"/>
-                        <outlet property="cardNameTextField" destination="1gP-Xv-3DX" id="50I-Th-5OQ"/>
-                        <outlet property="cardNumberCell" destination="vFH-O9-cgh" id="RZP-mJ-rA3"/>
-                        <outlet property="cardNumberTextField" destination="P2L-nA-3Qg" id="kiv-Zq-LtS"/>
-                        <outlet property="confirmButtonCell" destination="Klw-H2-shI" id="Xpw-uV-BUw"/>
-                        <outlet property="doneEditingBarButtonItem" destination="Coa-Tk-zgw" id="dOD-7d-ehv"/>
-                        <outlet property="errorMessageView" destination="9xY-kU-j8J" id="gF5-rO-znO"/>
-                        <outlet property="expiryDateCell" destination="JXm-Js-QVf" id="7VG-7b-lZs"/>
-                        <outlet property="expiryDateTextField" destination="Jo2-Jq-1eC" id="B9Z-Pf-IsM"/>
-                        <outlet property="formFieldsAccessoryView" destination="Bxe-eP-8dK" id="RM6-xB-7Fs"/>
-                        <outlet property="formHeaderView" destination="HTf-gM-q5i" id="Xdi-6P-Ank"/>
-                        <outlet property="gotoNextFieldBarButtonItem" destination="UJ7-jb-nkC" id="n72-Dx-bqC"/>
-                        <outlet property="gotoPreviousFieldBarButtonItem" destination="odi-q9-m2c" id="0Ko-Ut-RQJ"/>
-                        <outlet property="secureCodeCell" destination="bVu-Tp-g1b" id="kSr-b2-erF"/>
-                        <outlet property="secureCodeTextField" destination="eXh-Mb-b98" id="SN8-SQ-wkG"/>
-                        <outletCollection property="formCells" destination="vFH-O9-cgh" collectionClass="NSMutableArray" id="THL-mZ-FwS"/>
-                        <outletCollection property="formCells" destination="qrC-dc-j7n" collectionClass="NSMutableArray" id="Die-DW-Ibb"/>
-                        <outletCollection property="formCells" destination="JXm-Js-QVf" collectionClass="NSMutableArray" id="roW-rb-Ils"/>
-                        <outletCollection property="formCells" destination="bVu-Tp-g1b" collectionClass="NSMutableArray" id="I7L-gl-45v"/>
-                        <outletCollection property="formCells" destination="Klw-H2-shI" collectionClass="NSMutableArray" id="bJf-8Z-huv"/>
-                        <outletCollection property="formFields" destination="P2L-nA-3Qg" collectionClass="NSMutableArray" id="qVu-Bt-Efz"/>
-                        <outletCollection property="formFields" destination="1gP-Xv-3DX" collectionClass="NSMutableArray" id="1ae-87-FDc"/>
-                        <outletCollection property="formFields" destination="Jo2-Jq-1eC" collectionClass="NSMutableArray" id="Uzg-QV-qY9"/>
-                        <outletCollection property="formFields" destination="eXh-Mb-b98" collectionClass="NSMutableArray" id="Qpj-Bh-t2X"/>
-                        <outletCollection property="labelWidthConstraints" destination="mno-AB-S1E" collectionClass="NSMutableArray" id="e5d-qY-hOR"/>
-                        <outletCollection property="labelWidthConstraints" destination="oKU-MZ-VdE" collectionClass="NSMutableArray" id="1jM-7P-i9w"/>
-                        <outletCollection property="labelWidthConstraints" destination="UaF-vy-xbE" collectionClass="NSMutableArray" id="0sH-3g-sgr"/>
-                        <outletCollection property="labelWidthConstraints" destination="dqF-b3-JBi" collectionClass="NSMutableArray" id="WIQ-Nq-StE"/>
-                        <outletCollection property="formLabels" destination="o7p-Gc-gD9" collectionClass="NSMutableArray" id="sZQ-2U-rhm"/>
-                        <outletCollection property="formLabels" destination="gMS-Zs-jJl" collectionClass="NSMutableArray" id="RZ9-HG-OiY"/>
-                        <outletCollection property="formLabels" destination="LlT-Ou-anQ" collectionClass="NSMutableArray" id="TiV-F1-oA5"/>
-                        <outletCollection property="formLabels" destination="hUA-yb-3hy" collectionClass="NSMutableArray" id="0aA-l4-ZpQ"/>
+                        <outlet property="cardExpiryDateErrorLabel" destination="ubw-ZT-CVl" id="W2L-vL-4E9"/>
+                        <outlet property="cardHolderNameErrorLabel" destination="134-RW-VCo" id="lcw-94-w2y"/>
+                        <outlet property="cardNameTextField" destination="AJd-kX-GAq" id="og9-3N-hk1"/>
+                        <outlet property="cardNumberTextField" destination="PBr-uW-pM8" id="C6q-86-ad9"/>
+                        <outlet property="cardSecurityCodeErrorLabel" destination="3TR-eT-NNR" id="Dq0-c2-YhU"/>
+                        <outlet property="confirmButton" destination="ZPa-NN-y1M" id="Jul-dW-umM"/>
+                        <outlet property="creditCardNumberErrorLabel" destination="7Ox-gC-WRb" id="K3O-DF-PR8"/>
+                        <outlet property="doneEditingBarButtonItem" destination="ogk-BH-ei9" id="Duv-wy-4oD"/>
+                        <outlet property="expiryDateTextField" destination="Par-EA-T3D" id="Y2M-Nr-AVW"/>
+                        <outlet property="formFieldsAccessoryView" destination="4Xe-Ox-z88" id="HRm-Pk-cOr"/>
+                        <outlet property="gotoNextFieldBarButtonItem" destination="KiA-g5-vrj" id="oiz-dQ-7xc"/>
+                        <outlet property="gotoPreviousFieldBarButtonItem" destination="eqN-ee-jna" id="SP8-H8-7F1"/>
+                        <outlet property="secureCodeTextField" destination="Y1l-QK-aPc" id="YHf-Pb-fLh"/>
+                        <outletCollection property="formFields" destination="PBr-uW-pM8" collectionClass="NSMutableArray" id="NbP-dK-VP2"/>
+                        <outletCollection property="formFields" destination="AJd-kX-GAq" collectionClass="NSMutableArray" id="gD5-TW-8pl"/>
+                        <outletCollection property="formFields" destination="Par-EA-T3D" collectionClass="NSMutableArray" id="ZRN-Fe-wDJ"/>
+                        <outletCollection property="formFields" destination="Y1l-QK-aPc" collectionClass="NSMutableArray" id="NC5-WX-Vx0"/>
+                        <outletCollection property="formLabels" destination="CKR-Pl-Ix5" collectionClass="NSMutableArray" id="H8K-bu-DYv"/>
+                        <outletCollection property="formLabels" destination="bEE-yU-zna" collectionClass="NSMutableArray" id="0pJ-Ls-TlI"/>
+                        <outletCollection property="formLabels" destination="uuR-9N-gze" collectionClass="NSMutableArray" id="RWK-nS-z3R"/>
+                        <outletCollection property="formLabels" destination="vMc-kJ-Ncs" collectionClass="NSMutableArray" id="M6A-nq-XZS"/>
+                        <outletCollection property="errorLabels" destination="7Ox-gC-WRb" collectionClass="NSMutableArray" id="PKF-pB-ReE"/>
+                        <outletCollection property="errorLabels" destination="134-RW-VCo" collectionClass="NSMutableArray" id="wls-04-GS7"/>
+                        <outletCollection property="errorLabels" destination="ubw-ZT-CVl" collectionClass="NSMutableArray" id="Qb2-c0-tLA"/>
+                        <outletCollection property="errorLabels" destination="3TR-eT-NNR" collectionClass="NSMutableArray" id="xwc-Ub-Lkv"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YxM-Xe-lXS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="9xY-kU-j8J" customClass="ErrorMessageView" customModule="OmiseSDK" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Error message" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bh-bL-Kas">
-                            <rect key="frame" x="16" y="8" width="288" height="28"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                            <color key="textColor" red="1" green="0.25490196078431371" blue="0.20784313725490194" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstItem="6bh-bL-Kas" firstAttribute="leading" secondItem="9xY-kU-j8J" secondAttribute="leadingMargin" id="GFU-WT-pAH"/>
-                        <constraint firstAttribute="trailingMargin" secondItem="6bh-bL-Kas" secondAttribute="trailing" id="MMm-0P-WBd"/>
-                        <constraint firstItem="6bh-bL-Kas" firstAttribute="top" secondItem="9xY-kU-j8J" secondAttribute="topMargin" id="XOl-ko-Hho"/>
-                        <constraint firstAttribute="bottomMargin" secondItem="6bh-bL-Kas" secondAttribute="bottom" id="b1Y-0E-1Q6"/>
-                    </constraints>
-                    <connections>
-                        <outlet property="errorMessageLabel" destination="6bh-bL-Kas" id="hxY-eS-sGN"/>
-                    </connections>
-                </view>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Bxe-eP-8dK">
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fOp-XO-X6S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="4Xe-Ox-z88">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <items>
-                        <barButtonItem image="backBarButton" id="odi-q9-m2c" userLabel="Go to previous field bar button item">
+                        <barButtonItem image="backBarButton" id="eqN-ee-jna" userLabel="Go to previous field bar button item">
                             <connections>
-                                <action selector="gotoPreviousField:" destination="wHy-gm-NE0" id="vky-Wa-8Wk"/>
+                                <action selector="gotoPreviousField:" destination="ALK-ZP-CXg" id="eGC-cu-ymC"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem image="nextBarButton" width="30" id="UJ7-jb-nkC" userLabel="Go to next field bar button item">
+                        <barButtonItem image="nextBarButton" width="30" id="KiA-g5-vrj" userLabel="Go to next field bar button item">
                             <connections>
-                                <action selector="gotoNextField:" destination="wHy-gm-NE0" id="tC6-zg-epo"/>
+                                <action selector="gotoNextField:" destination="ALK-ZP-CXg" id="rgN-Gl-XMO"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem systemItem="flexibleSpace" id="MoX-Dh-vfR"/>
-                        <barButtonItem systemItem="done" id="Coa-Tk-zgw">
+                        <barButtonItem systemItem="flexibleSpace" id="LjO-UP-hBo"/>
+                        <barButtonItem systemItem="done" id="ogk-BH-ei9">
                             <connections>
-                                <action selector="doneEditing:" destination="wHy-gm-NE0" id="Cow-wK-FOP"/>
+                                <action selector="doneEditing:" destination="ALK-ZP-CXg" id="IvG-e3-UVG"/>
                             </connections>
                         </barButtonItem>
                     </items>
                 </toolbar>
             </objects>
-            <point key="canvasLocation" x="857" y="460"/>
+            <point key="canvasLocation" x="865" y="376"/>
         </scene>
         <!--Authorizing Payment-->
         <scene sceneID="IRy-iA-rF6">
@@ -472,9 +341,6 @@
     </scenes>
     <resources>
         <image name="backBarButton" width="12" height="21"/>
-        <image name="networkJCB" width="57" height="43"/>
-        <image name="networkMasterCard" width="61" height="37"/>
-        <image name="networkVISA" width="69" height="45"/>
         <image name="nextBarButton" width="12" height="21"/>
     </resources>
 </document>

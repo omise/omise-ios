@@ -17,12 +17,6 @@ import UIKit
         }
     }
     
-    public override var isSecureTextEntry: Bool {
-        didSet {
-            super.isSecureTextEntry = true
-        }
-    }
-    
     override public init(frame: CGRect) {
         super.init(frame: frame)
         initializeInstance()
@@ -40,7 +34,6 @@ import UIKit
     
     private func initializeInstance() {
         super.keyboardType = .numberPad
-        super.isSecureTextEntry = true
         placeholder = "123"
     }
     

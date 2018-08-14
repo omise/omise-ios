@@ -215,3 +215,9 @@ extension UnkeyedEncodingContainer {
     }
 }
 
+
+extension UIControlState: Hashable {
+    public var hashValue: Int {
+        return rawValue.hashValue
+    }
+}

@@ -9,8 +9,49 @@ public protocol OmiseTextFieldValidationDelegate {
 }
 
 
+public enum TextFieldStyle {
+    case plain
+    case border(width: CGFloat)
+}
+
 /// Base UITextField subclass for SDK's text fields.
-@objc public class OmiseTextField: UITextField {
+@objc @IBDesignable public class OmiseTextField: UITextField {
+    public var style: TextFieldStyle = .plain {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+    
+    @objc @IBInspectable var borderWidth: CGFloat {
+        get {
+            switch style {
+            case .plain:
+                return 0
+            case .border(width: let width):
+                return width
+            }
+        }
+        set {
+            switch newValue {
+            case 0:
+                style = .plain
+            case let value:
+                style = .border(width: value)
+            }
+        }
+    }
+    
+    @objc @IBInspectable var borderColor: UIColor? {
+        didSet {
+            updateBorder()
+        }
+    }
+    
+    @objc @IBInspectable var cornerRadius: CGFloat = 0 {
+        didSet {
+            updateBorder()
+        }
+    }
     
     @IBInspectable @objc var errorTextColor: UIColor! = CreditCardFormViewController.defaultErrorMessageTextColor {
         didSet {
@@ -42,7 +83,7 @@ public protocol OmiseTextFieldValidationDelegate {
     }
     
     private func updateTextColor() {
-        super.textColor = isValid || isFirstResponder ? normalTextColor ?? .black : errorTextColor;
+        super.textColor = isValid || isFirstResponder ? normalTextColor ?? .black : errorTextColor
     }
     
     /// Boolean indicating wether current input is valid or not.
@@ -83,3 +124,49 @@ public protocol OmiseTextFieldValidationDelegate {
     
     @objc func textDidChange() {}
 }
+
+extension OmiseTextField {
+    private var overallInsets: UIEdgeInsets {
+        let edgeInsets: UIEdgeInsets
+        switch style {
+        case .plain:
+            edgeInsets = UIEdgeInsets.zero
+        case .border(width: let width):
+            edgeInsets = UIEdgeInsetsMake(
+                layoutMargins.top + width,
+                layoutMargins.left + width,
+                layoutMargins.bottom + width,
+                layoutMargins.right + width
+            )
+        }
+        
+        return edgeInsets
+    }
+    
+    public override func borderRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds
+    }
+    
+    public override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return super.textRect(forBounds: textAreaViewRect(forBounds: bounds))
+    }
+    
+    open override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return super.editingRect(forBounds: textAreaViewRect(forBounds: bounds))
+    }
+    
+    open override func clearButtonRect(forBounds bounds: CGRect) -> CGRect {
+        return super.clearButtonRect(forBounds: textAreaViewRect(forBounds: bounds))
+    }
+    
+    func textAreaViewRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds, overallInsets)
+    }
+    
+    private func updateBorder() {
+        layer.borderWidth = borderWidth
+        layer.cornerRadius = cornerRadius
+        layer.borderColor = borderColor?.cgColor
+    }
+}
+
