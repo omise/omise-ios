@@ -128,11 +128,6 @@ public class CreditCardFormViewController: UIViewController {
             }
             
             if isViewLoaded {
-                cardNumberTextField.errorTextColor = errorMessageTextColor
-                cardNameTextField.errorTextColor = errorMessageTextColor
-                expiryDateTextField.errorTextColor = errorMessageTextColor
-                secureCodeTextField.errorTextColor = errorMessageTextColor
-                
                 errorLabels.forEach({
                     $0.textColor = errorMessageTextColor
                 })
@@ -169,11 +164,6 @@ public class CreditCardFormViewController: UIViewController {
         formFields.forEach({
             $0.inputAccessoryView = formFieldsAccessoryView
         })
-        
-        cardNumberTextField.errorTextColor = errorMessageTextColor
-        cardNameTextField.errorTextColor = errorMessageTextColor
-        expiryDateTextField.errorTextColor = errorMessageTextColor
-        secureCodeTextField.errorTextColor = errorMessageTextColor
         
         errorLabels.forEach({
             $0.textColor = errorMessageTextColor

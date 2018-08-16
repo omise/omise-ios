@@ -53,11 +53,8 @@ public enum TextFieldStyle {
         }
     }
     
-    @IBInspectable @objc var errorTextColor: UIColor! = CreditCardFormViewController.defaultErrorMessageTextColor {
+    @IBInspectable @objc var errorTextColor: UIColor? {
         didSet {
-            if errorTextColor == nil {
-                errorTextColor = CreditCardFormViewController.defaultErrorMessageTextColor
-            }
             updateTextColor()
         }
     }
