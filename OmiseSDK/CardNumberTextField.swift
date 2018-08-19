@@ -36,11 +36,6 @@ import Foundation
         return pan.brand
     }
     
-    /// Boolean indicating wether current input is valid or not.
-    public override var isValid: Bool {
-        return pan.isValid
-    }
-    
     override public init(frame: CGRect) {
         super.init(frame: frame)
         initializeInstance()
@@ -76,6 +71,13 @@ import Foundation
             formattingAttributedText.addAttribute(NSAttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
         })
         self.attributedPlaceholder = formattingAttributedText
+    }
+    
+    public override func validate() throws {
+        try super.validate()
+        if !pan.isValid {
+            throw OmiseTextFieldValidationError.invalidData
+        }
     }
     
     override func textDidChange() {

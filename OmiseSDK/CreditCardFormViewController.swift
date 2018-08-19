@@ -242,9 +242,10 @@ public class CreditCardFormViewController: UIViewController {
     }
     
     @IBAction func cancelForm() {
-        _ = performCancelingForm()
+        performCancelingForm()
     }
     
+    @discardableResult
     private func performCancelingForm() -> Bool {
         if #available(iOS 10.0, *) {
             os_log("Credit Card Form dismissing requested, Asking the delegate what should the form controler do",

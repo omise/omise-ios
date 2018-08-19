@@ -6,11 +6,6 @@ import UIKit
 @objc public class CardCVVTextField: OmiseTextField {
     private let validLengths = 3...4
     
-    /// Boolean indicating wether current input is valid or not.
-    public override var isValid: Bool {
-        return validLengths ~= text?.count ?? 0
-    }
-    
     public override var keyboardType: UIKeyboardType {
         didSet {
             super.keyboardType = .numberPad
@@ -35,6 +30,17 @@ import UIKit
     private func initializeInstance() {
         super.keyboardType = .numberPad
         placeholder = "123"
+    }
+    
+    public override func validate() throws {
+        try super.validate()
+        
+        guard let text = self.text else {
+            throw OmiseTextFieldValidationError.emptyText
+        }
+        if !(validLengths ~= text.count) {
+            throw OmiseTextFieldValidationError.invalidData
+        }
     }
     
     override func textDidChange() {

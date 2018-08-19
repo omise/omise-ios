@@ -34,24 +34,6 @@ import UIKit
         return selectedYear ?? 0
     }
     
-    /// Boolean indicating wether current input is valid or not.
-    public override var isValid: Bool {
-        guard let year = self.selectedYear, let month = self.selectedMonth else {
-            return false
-        }
-        
-        let now = Date()
-        let calendar = Calendar.creditCardInformationCalendar
-        let thisMonth = calendar.component(.month, from: now)
-        let thisYear = calendar.component(.year, from: now)
-        
-        if year == thisYear {
-            return thisMonth <= month
-        } else {
-            return thisYear < year
-        }
-    }
-    
     public var expirationMonthAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
     public var expirationYearAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
     
@@ -94,6 +76,23 @@ import UIKit
             return [expirationMonthAccessibilityElement, expirationYearAccessibilityElement]
         }
         set {}
+    }
+    
+    public override func validate() throws {
+        try super.validate()
+        
+        guard let year = self.selectedYear, let month = self.selectedMonth else {
+            throw OmiseTextFieldValidationError.invalidData
+        }
+        
+        let now = Date()
+        let calendar = Calendar.creditCardInformationCalendar
+        let thisMonth = calendar.component(.month, from: now)
+        let thisYear = calendar.component(.year, from: now)
+        
+        if (year == thisYear && thisMonth > month) || thisYear > year {
+            throw OmiseTextFieldValidationError.invalidData
+        }
     }
     
     override func textDidChange() {
@@ -170,7 +169,6 @@ extension CardExpiryDateTextField {
                 UIAccessibilityConvertFrameToScreenCoordinates(expirationYearFrameInTextfield.integral, self)
         }
     }
-
     
     public class InfoAccessibilityElement: UIAccessibilityElement {
         enum Component {

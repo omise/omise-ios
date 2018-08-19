@@ -2,16 +2,14 @@ import Foundation
 import UIKit
 
 
-/// Delegate for receiving SDK-specific text field events.
-public protocol OmiseTextFieldValidationDelegate {
-    /// A delegate method that will be called when the data validity of the text field is changed.
-    func textField(_ field: OmiseTextField, didChangeValidity isValid: Bool)
-}
-
-
 public enum TextFieldStyle {
     case plain
     case border(width: CGFloat)
+}
+
+public enum OmiseTextFieldValidationError: Error {
+    case emptyText
+    case invalidData
 }
 
 /// Base UITextField subclass for SDK's text fields.
@@ -85,7 +83,12 @@ public enum TextFieldStyle {
     
     /// Boolean indicating wether current input is valid or not.
     public var isValid: Bool {
-        return true
+        do {
+            try validate()
+            return true
+        } catch {
+            return false
+        }
     }
     
     public override init(frame: CGRect) {
@@ -103,12 +106,19 @@ public enum TextFieldStyle {
         initializeInstance()
     }
     
+    @objc public func validate() throws {
+        if text.isNilOrEmpty {
+            throw OmiseTextFieldValidationError.emptyText
+        }
+    }
+    
     private func initializeInstance() {
         normalTextColor = super.textColor
         
         addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         addTarget(self, action: #selector(didBeginEditing), for: .editingDidBegin)
         addTarget(self, action: #selector(didEndEditing), for: .editingDidEnd)
+        updateBorder()
     }
     
     @objc func didBeginEditing() {
