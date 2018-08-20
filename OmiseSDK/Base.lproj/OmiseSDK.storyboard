@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CKR-Pl-Ix5">
-                                <rect key="frame" x="16" y="20" width="343" height="18"/>
+                                <rect key="frame" x="16" y="40" width="343" height="18"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
@@ -31,7 +31,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name on card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEE-yU-zna">
-                                <rect key="frame" x="16" y="126.5" width="343" height="18"/>
+                                <rect key="frame" x="16" y="150.5" width="343" height="18"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
@@ -40,7 +40,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expiry date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuR-9N-gze">
-                                <rect key="frame" x="16" y="233" width="151.5" height="18"/>
+                                <rect key="frame" x="16" y="261" width="151.5" height="18"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
@@ -49,7 +49,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Security code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMc-kJ-Ncs">
-                                <rect key="frame" x="207.5" y="233" width="151.5" height="18"/>
+                                <rect key="frame" x="207.5" y="261" width="151.5" height="18"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
@@ -58,10 +58,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="05/22" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Par-EA-T3D" customClass="CardExpiryDateTextField" customModule="OmiseSDK" customModuleProvider="target">
-                                <rect key="frame" x="16" y="257" width="151.5" height="43"/>
+                                <rect key="frame" x="16" y="285" width="151.5" height="47"/>
                                 <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -75,16 +75,17 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="textFieldDidBegin:" destination="ALK-ZP-CXg" eventType="editingDidBegin" id="xy0-sD-zuD"/>
                                     <action selector="updateAccessibilityValue:" destination="ALK-ZP-CXg" eventType="editingChanged" id="6gp-yf-2Wg"/>
                                     <action selector="updateAccessibilityValue:" destination="ALK-ZP-CXg" eventType="valueChanged" id="KgS-al-dOt"/>
+                                    <action selector="updateInputAccessoryViewFor:" destination="ALK-ZP-CXg" eventType="editingDidBegin" id="xy0-sD-zuD"/>
+                                    <action selector="validateTextFieldDataOf:" destination="ALK-ZP-CXg" eventType="editingDidEnd" id="5fL-3c-xl0"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y1l-QK-aPc" customClass="CardCVVTextField" customModule="OmiseSDK" customModuleProvider="target">
-                                <rect key="frame" x="207.5" y="257" width="151.5" height="43"/>
+                                <rect key="frame" x="207.5" y="285" width="151.5" height="47"/>
                                 <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -98,16 +99,17 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="textFieldDidBegin:" destination="ALK-ZP-CXg" eventType="editingDidBegin" id="D1U-AX-p9z"/>
                                     <action selector="updateAccessibilityValue:" destination="ALK-ZP-CXg" eventType="editingChanged" id="Byd-gA-7tN"/>
                                     <action selector="updateAccessibilityValue:" destination="ALK-ZP-CXg" eventType="valueChanged" id="cdn-xf-95h"/>
+                                    <action selector="updateInputAccessoryViewFor:" destination="ALK-ZP-CXg" eventType="editingDidBegin" id="D1U-AX-p9z"/>
+                                    <action selector="validateTextFieldDataOf:" destination="ALK-ZP-CXg" eventType="editingDidEnd" id="17j-R2-Pw3"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="John Appleseed" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AJd-kX-GAq" customClass="CardNameTextField" customModule="OmiseSDK" customModuleProvider="target">
-                                <rect key="frame" x="16" y="150.5" width="343" height="43"/>
+                                <rect key="frame" x="16" y="174.5" width="343" height="47"/>
                                 <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -121,16 +123,17 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="textFieldDidBegin:" destination="ALK-ZP-CXg" eventType="editingDidBegin" id="hev-lp-5uk"/>
                                     <action selector="updateAccessibilityValue:" destination="ALK-ZP-CXg" eventType="valueChanged" id="XKW-dL-80t"/>
                                     <action selector="updateAccessibilityValue:" destination="ALK-ZP-CXg" eventType="editingChanged" id="YqZ-Gf-f46"/>
+                                    <action selector="updateInputAccessoryViewFor:" destination="ALK-ZP-CXg" eventType="editingDidBegin" id="hev-lp-5uk"/>
+                                    <action selector="validateTextFieldDataOf:" destination="ALK-ZP-CXg" eventType="editingDidEnd" id="Qhj-Qx-gAl"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="4242424242424242" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PBr-uW-pM8" customClass="CardNumberTextField" customModule="OmiseSDK" customModuleProvider="target">
-                                <rect key="frame" x="16" y="44" width="343" height="43"/>
+                                <rect key="frame" x="16" y="64" width="343" height="47"/>
                                 <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" textContentType="cc-number"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -144,13 +147,14 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="textFieldDidBegin:" destination="ALK-ZP-CXg" eventType="editingDidBegin" id="n4L-Vi-VVe"/>
                                     <action selector="updateAccessibilityValue:" destination="ALK-ZP-CXg" eventType="valueChanged" id="LQS-XC-WfU"/>
                                     <action selector="updateAccessibilityValue:" destination="ALK-ZP-CXg" eventType="editingChanged" id="YYZ-sz-Bbo"/>
+                                    <action selector="updateInputAccessoryViewFor:" destination="ALK-ZP-CXg" eventType="editingDidBegin" id="n4L-Vi-VVe"/>
+                                    <action selector="validateTextFieldDataOf:" destination="ALK-ZP-CXg" eventType="editingDidEnd" id="ant-R8-Q9L"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZPa-NN-y1M" customClass="MainActionButton" customModule="OmiseSDK" customModuleProvider="target">
-                                <rect key="frame" x="16" y="339.5" width="343" height="44"/>
+                                <rect key="frame" x="16" y="371.5" width="343" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="p5t-Hl-v8s"/>
                                 </constraints>
@@ -165,31 +169,34 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="disabledBackgroundColor">
+                                        <color key="value" red="0.83921568629999999" green="0.83921568629999999" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="requestToken" destination="ALK-ZP-CXg" eventType="touchUpInside" id="8bA-RH-GhE"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invalid expiry date" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubw-ZT-CVl">
-                                <rect key="frame" x="16" y="306" width="151.5" height="13.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubw-ZT-CVl">
+                                <rect key="frame" x="16" y="338" width="151.5" height="13.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                 <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Empty securiy code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3TR-eT-NNR">
-                                <rect key="frame" x="207.5" y="306" width="151.5" height="13.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3TR-eT-NNR">
+                                <rect key="frame" x="207.5" y="338" width="151.5" height="13.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                 <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Empty name is not allowed" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="134-RW-VCo">
-                                <rect key="frame" x="16" y="199.5" width="343" height="13.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="134-RW-VCo">
+                                <rect key="frame" x="16" y="227.5" width="343" height="13.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                 <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card brand not supported" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ox-gC-WRb">
-                                <rect key="frame" x="16" y="93" width="343" height="13.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ox-gC-WRb">
+                                <rect key="frame" x="16" y="117" width="343" height="13.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                 <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -218,7 +225,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Y1l-QK-aPc" secondAttribute="trailing" id="JAE-Xt-1je"/>
                             <constraint firstItem="134-RW-VCo" firstAttribute="trailing" secondItem="AJd-kX-GAq" secondAttribute="trailing" id="Qrg-iC-L8r"/>
                             <constraint firstItem="Y1l-QK-aPc" firstAttribute="top" secondItem="Par-EA-T3D" secondAttribute="top" id="R3n-O9-dRF"/>
-                            <constraint firstItem="CKR-Pl-Ix5" firstAttribute="top" secondItem="iw5-48-6Oe" secondAttribute="bottom" id="RXU-Wq-HO0"/>
+                            <constraint firstItem="CKR-Pl-Ix5" firstAttribute="top" secondItem="iw5-48-6Oe" secondAttribute="bottom" constant="20" id="RXU-Wq-HO0"/>
                             <constraint firstItem="uuR-9N-gze" firstAttribute="leading" secondItem="k78-5i-gmz" secondAttribute="leadingMargin" id="Rxr-YV-JJ1"/>
                             <constraint firstItem="ubw-ZT-CVl" firstAttribute="top" secondItem="Par-EA-T3D" secondAttribute="bottom" constant="6" id="SUr-sI-4rX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ZPa-NN-y1M" secondAttribute="trailing" id="TWp-m0-3QJ"/>

@@ -303,8 +303,7 @@ public class CreditCardFormViewController: UIViewController {
     
     private func updateSupplementaryUI() {
         let valid = isInputDataValid
-        confirmButton?.isUserInteractionEnabled = valid
-        confirmButton.tintAdjustmentMode = valid ? .automatic : .dimmed
+        confirmButton?.isEnabled = valid
         if valid {
             confirmButton.accessibilityTraits &= ~UIAccessibilityTraitNotEnabled
         } else {
@@ -375,6 +374,96 @@ public class CreditCardFormViewController: UIViewController {
         view.isUserInteractionEnabled = true
     }
     
+    fileprivate func associatedErrorLabelOf(_ textField: OmiseTextField) -> UILabel? {
+        switch textField {
+        case cardNumberTextField:
+            return creditCardNumberErrorLabel
+        case cardNameTextField:
+            return cardHolderNameErrorLabel
+        case expiryDateTextField:
+            return cardExpiryDateErrorLabel
+        case secureCodeTextField:
+            return cardSecurityCodeErrorLabel
+        default:
+            return nil
+        }
+    }
+    
+    private func validateField(_ textField: OmiseTextField) {
+        guard let errorLabel = associatedErrorLabelOf(textField) else {
+            return
+        }
+        do {
+            try textField.validate()
+            errorLabel.alpha = 0.0
+        } catch {
+            let omiseBundle = Bundle(for: CreditCardFormViewController.self)
+            switch (error, textField) {
+            case (OmiseTextFieldValidationError.emptyText, cardNumberTextField):
+                errorLabel.text = NSLocalizedString(
+                    "credit-card-form.card-number-field.empty-text.error.text", tableName: "Error", bundle: omiseBundle,
+                    value: "Credit card number cannot be empty",
+                    comment: "An error text displayed when the credit card number is empty"
+                )
+            case (OmiseTextFieldValidationError.emptyText, cardNameTextField):
+                errorLabel.text = NSLocalizedString(
+                    "credit-card-form.card-holder-name-field.empty-text.error.text", tableName: "Error", bundle: omiseBundle,
+                    value: "Card holder name cannot be empty",
+                    comment: "An error text displayed when the card holder name is empty"
+                )
+            case (OmiseTextFieldValidationError.emptyText, expiryDateTextField):
+                errorLabel.text = NSLocalizedString(
+                    "credit-card-form.expiry-date-field.empty-text.error.text", tableName: "Error", bundle: omiseBundle,
+                    value: "Card expiry date cannot be empty",
+                    comment: "An error text displayed when the expiry date is empty"
+                )
+            case (OmiseTextFieldValidationError.emptyText, secureCodeTextField):
+                errorLabel.text = NSLocalizedString(
+                    "credit-card-form.security-code-field.empty-text.error.text", tableName: "Error", bundle: omiseBundle,
+                    value: "CVV code cannot be empty",
+                    comment: "An error text displayed when the security code is empty"
+                )
+                
+            case (OmiseTextFieldValidationError.invalidData, cardNumberTextField):
+                errorLabel.text = NSLocalizedString(
+                    "credit-card-form.card-number-field.invalid-data.error.text", tableName: "Error", bundle: omiseBundle,
+                    value: "Credit card number is invalid",
+                    comment: "An error text displayed when the credit card number is invalid"
+                )
+            case (OmiseTextFieldValidationError.invalidData, cardNameTextField):
+                errorLabel.text = NSLocalizedString(
+                    "credit-card-form.card-holder-name-field.invalid-data.error.text", tableName: "Error", bundle: omiseBundle,
+                    value: "Card holder name is invalid",
+                    comment: "An error text displayed when the card holder name is invalid"
+                )
+            case (OmiseTextFieldValidationError.invalidData, expiryDateTextField):
+                errorLabel.text = NSLocalizedString(
+                    "credit-card-form.expiry-date-field.invalid-data.error.text", tableName: "Error", bundle: omiseBundle,
+                    value: "Card expiry date is invalid",
+                    comment: "An error text displayed when the expiry date is invalid"
+                )
+            case (OmiseTextFieldValidationError.invalidData, secureCodeTextField):
+                errorLabel.text = NSLocalizedString(
+                    "credit-card-form.security-code-field.invalid-data.error.text", tableName: "Error", bundle: omiseBundle,
+                    value: "CVV code is invalid",
+                    comment: "An error text displayed when the security code is invalid"
+                )
+                
+            case (_, cardNumberTextField):
+                errorLabel.text = error.localizedDescription
+            case (_, cardNameTextField):
+                errorLabel.text = error.localizedDescription
+            case (_, expiryDateTextField):
+                errorLabel.text = error.localizedDescription
+            case (_, secureCodeTextField):
+                errorLabel.text = error.localizedDescription
+            default:
+                break
+            }
+            errorLabel.alpha = 1.0
+        }
+    }
+    
     public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if #available(iOS 10.0, *) {
             if previousTraitCollection?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
@@ -387,7 +476,28 @@ public class CreditCardFormViewController: UIViewController {
 
 // MARK: - Fields Accessory methods
 extension CreditCardFormViewController {
-    @IBAction func textFieldDidBegin(_ sender: OmiseTextField) {
+    
+    @IBAction func validateTextFieldDataOf(_ sender: OmiseTextField) {
+        let duration = TimeInterval(UINavigationControllerHideShowBarDuration)
+        UIView.animate(
+            withDuration: duration, delay: 0.0,
+            options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
+            animations: {
+                self.validateField(sender)
+        })
+    }
+    
+    @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
+        if let errorLabel = associatedErrorLabelOf(sender) {
+            let duration = TimeInterval(UINavigationControllerHideShowBarDuration)
+            UIView.animate(
+                withDuration: duration, delay: 0.0,
+                options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
+                animations: {
+                    errorLabel.alpha = 0.0
+            })
+        }
+        
         guard formFields.contains(sender) else { return }
         
         currentEditingTextField = sender
