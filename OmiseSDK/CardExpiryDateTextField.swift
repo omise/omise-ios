@@ -56,7 +56,7 @@ import UIKit
         placeholder = "MM/YY"
         let expiryDatePicker = CardExpiryDatePicker()
         expiryDatePicker.onDateSelected = { [weak self] (month: Int, year: Int) in
-            self?.text = String(format: "%02d/%d", month, year - 2000)
+            self?.text = String(format: "%02d/%d", month, year % 100)
             self?.sendActions(for: UIControlEvents.valueChanged)
         }
         
@@ -126,6 +126,9 @@ extension CardExpiryDateTextField {
     private func updateAccessibilityFrames() {
         let expirationMonthFrameInTextfield: CGRect
         let expirationYearFrameInTextfield: CGRect
+        
+        let bounds = textRect(forBounds: self.bounds)
+        
         if let text = text, text.count >= 5,
             let endOfMonthRange = position(from: beginningOfDocument, offset: 2),
             let startOfYearRange = position(from: endOfMonthRange, offset: 1),
@@ -133,8 +136,8 @@ extension CardExpiryDateTextField {
             let yearRange = textRange(from: startOfYearRange, to: endOfDocument) {
             let monthRect = firstRect(for: monthRange)
             let yearRect = firstRect(for: yearRange)
-            expirationMonthFrameInTextfield = CGRect(x: monthRect.origin.x, y: bounds.minY, width: monthRect.width, height: bounds.height)
-            expirationYearFrameInTextfield = CGRect(x: yearRect.origin.x, y: bounds.minY, width: yearRect.width, height: bounds.height)
+            expirationMonthFrameInTextfield = CGRect(x: monthRect.origin.x + bounds.minX, y: bounds.minY, width: monthRect.width, height: bounds.height)
+            expirationYearFrameInTextfield = CGRect(x: yearRect.origin.x + bounds.minX, y: bounds.minY, width: yearRect.width, height: bounds.height)
         } else if let expiryDateTextFieldAttributedPlaceholder = attributedPlaceholder, expiryDateTextFieldAttributedPlaceholder.length >= 5 {
             let mmSize = expiryDateTextFieldAttributedPlaceholder.attributedSubstring(from: NSRange(location: 0, length: 2)).size()
             let slashSize = expiryDateTextFieldAttributedPlaceholder.attributedSubstring(from: NSRange(location: 2, length: 1)).size()
@@ -211,7 +214,7 @@ extension CardExpiryDateTextField {
         let month = selectedMonth ?? Calendar.creditCardInformationCalendar.component(.month, from: Date())
         let year = selectedYear ?? Calendar.creditCardInformationCalendar.component(.year, from: Date())
         
-        text = String(format: "%02d/%d", month, year - 2000)
+        text = String(format: "%02d/%02d", month, year % 100)
         sendActions(for: UIControlEvents.valueChanged)
         
         updateAccessibilityFrames()
