@@ -103,7 +103,11 @@ public class CreditCardFormViewController: UIViewController {
     @IBOutlet weak var cardHolderNameErrorLabel: UILabel!
     @IBOutlet weak var cardExpiryDateErrorLabel: UILabel!
     @IBOutlet weak var cardSecurityCodeErrorLabel: UILabel!
-  
+    
+    @IBOutlet var processingErrorBannerView: UIView!
+    @IBOutlet var processingErrorLabel: UILabel!
+    @IBOutlet var hidingProcessingErrorBannerConstraint: NSLayoutConstraint!
+    
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String?
     
@@ -299,6 +303,8 @@ public class CreditCardFormViewController: UIViewController {
         }
         
         hasErrorMessage = true
+        processingErrorLabel.text = error.localizedDescription
+        //TODO: Animate the error banner
     }
     
     private func updateSupplementaryUI() {
