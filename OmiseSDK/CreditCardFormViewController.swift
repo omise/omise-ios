@@ -85,6 +85,8 @@ public class CreditCardFormViewController: UIViewController {
     @IBOutlet var formLabels: [UILabel]!
     @IBOutlet var errorLabels: [UILabel]!
   
+    @IBOutlet var contentView: UIScrollView!
+    
     @IBOutlet var cardNumberTextField: CardNumberTextField!
     @IBOutlet var cardNameTextField: CardNameTextField!
     @IBOutlet var expiryDateTextField: CardExpiryDateTextField!
@@ -186,6 +188,15 @@ public class CreditCardFormViewController: UIViewController {
         cardNumberTextField.rightView = cardBrandIconImageView
         secureCodeTextField.rightView = cvvInfoButton
         secureCodeTextField.rightViewMode = .always
+        
+        NotificationCenter.default.addObserver(
+            self, selector:#selector(keyboardWillChangeFrame(_:)),
+            name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self, selector:#selector(keyboardWillHide(_:)),
+            name: NSNotification.Name.UIKeyboardWillHide, object: nil
+        )
     }
     
     public override func viewDidAppear(_ animated: Bool) {
@@ -208,7 +219,7 @@ public class CreditCardFormViewController: UIViewController {
         cardNameTextField.text = name
 
         if let expiration = expiration, 1...12 ~= expiration.month, expiration.year > 0 {
-            expiryDateTextField.text = String(format: "%02d/%d", expiration.month, expiration.year - 2000)
+            expiryDateTextField.text = String(format: "%02d/%d", expiration.month, expiration.year % 100)
         }
         
         updateSupplementaryUI()
@@ -249,6 +260,30 @@ public class CreditCardFormViewController: UIViewController {
         if hasErrorMessage {
             hasErrorMessage = false
         }
+    }
+    
+    @objc func keyboardWillChangeFrame(_ notification: NSNotification) {
+        guard let frameEnd = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect,
+            let frameStart = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? CGRect,
+            frameEnd != frameStart else {
+                return
+        }
+        
+        let intersectedFrame = contentView.convert(frameEnd, from: nil)
+        
+        contentView.contentInset.bottom = intersectedFrame.height
+        let bottomScrollIndicatorInset: CGFloat
+        if #available(iOS 11.0, *) {
+            bottomScrollIndicatorInset = intersectedFrame.height - contentView.safeAreaInsets.bottom
+        } else {
+            bottomScrollIndicatorInset = intersectedFrame.height
+        }
+        contentView.scrollIndicatorInsets.bottom = bottomScrollIndicatorInset
+    }
+    
+    @objc func keyboardWillHide(_ notification: NSNotification) {
+        contentView.contentInset.bottom = 0.0
+        contentView.scrollIndicatorInsets.bottom = 0.0
     }
     
     @IBAction func cancelForm() {
