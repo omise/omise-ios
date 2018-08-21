@@ -108,6 +108,7 @@ public class CreditCardFormViewController: UIViewController {
     @IBOutlet var processingErrorLabel: UILabel!
     @IBOutlet var hidingProcessingErrorBannerConstraint: NSLayoutConstraint!
     @IBOutlet var cardBrandIconImageView: UIImageView!
+    @IBOutlet var cvvInfoButton: UIButton!
     
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String?
@@ -183,6 +184,8 @@ public class CreditCardFormViewController: UIViewController {
         }
         
         cardNumberTextField.rightView = cardBrandIconImageView
+        secureCodeTextField.rightView = cvvInfoButton
+        secureCodeTextField.rightViewMode = .always
     }
     
     public override func viewDidAppear(_ animated: Bool) {
