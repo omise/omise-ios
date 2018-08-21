@@ -285,6 +285,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cardBrandIconImageView" destination="N60-a9-ZyW" id="tkI-ce-pr1"/>
                         <outlet property="cardExpiryDateErrorLabel" destination="ubw-ZT-CVl" id="W2L-vL-4E9"/>
                         <outlet property="cardHolderNameErrorLabel" destination="134-RW-VCo" id="lcw-94-w2y"/>
                         <outlet property="cardNameTextField" destination="AJd-kX-GAq" id="og9-3N-hk1"/>
@@ -338,6 +339,10 @@
                         </barButtonItem>
                     </items>
                 </toolbar>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Visa" id="N60-a9-ZyW">
+                    <rect key="frame" x="0.0" y="0.0" width="40" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </objects>
             <point key="canvasLocation" x="864.79999999999995" y="375.56221889055473"/>
         </scene>
@@ -386,6 +391,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Visa" width="40" height="22"/>
         <image name="backBarButton" width="12" height="21"/>
         <image name="nextBarButton" width="12" height="21"/>
     </resources>

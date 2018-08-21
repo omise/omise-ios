@@ -166,6 +166,14 @@ extension OmiseTextField {
         return super.clearButtonRect(forBounds: textAreaViewRect(forBounds: bounds))
     }
     
+    public override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        return super.rightViewRect(forBounds: textAreaViewRect(forBounds: bounds))
+    }
+    
+    public override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+        return super.leftViewRect(forBounds: textAreaViewRect(forBounds: bounds))
+    }
+    
     func textAreaViewRect(forBounds bounds: CGRect) -> CGRect {
         return UIEdgeInsetsInsetRect(bounds, overallInsets)
     }

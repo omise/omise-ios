@@ -107,6 +107,7 @@ public class CreditCardFormViewController: UIViewController {
     @IBOutlet var processingErrorBannerView: UIView!
     @IBOutlet var processingErrorLabel: UILabel!
     @IBOutlet var hidingProcessingErrorBannerConstraint: NSLayoutConstraint!
+    @IBOutlet var cardBrandIconImageView: UIImageView!
     
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String?
@@ -180,6 +181,8 @@ public class CreditCardFormViewController: UIViewController {
         if #available(iOS 10.0, *) {
             configureAccessibility()
         }
+        
+        cardNumberTextField.rightView = cardBrandIconImageView
     }
     
     public override func viewDidAppear(_ animated: Bool) {
@@ -315,6 +318,24 @@ public class CreditCardFormViewController: UIViewController {
         } else {
             confirmButton.accessibilityTraits |= UIAccessibilityTraitNotEnabled
         }
+        
+        let cardBrandIcon: UIImage?
+        switch cardNumberTextField.cardBrand {
+        case .visa?:
+            cardBrandIcon = UIImage(named: "Visa", in: Bundle.omiseSDKBundle, compatibleWith: nil)
+        case .masterCard?:
+            cardBrandIcon = UIImage(named: "Mastercard", in: Bundle.omiseSDKBundle, compatibleWith: nil)
+        case .jcb?:
+            cardBrandIcon = UIImage(named: "JCB", in: Bundle.omiseSDKBundle, compatibleWith: nil)
+        case .amex?:
+            cardBrandIcon = UIImage(named: "AMEX", in: Bundle.omiseSDKBundle, compatibleWith: nil)
+        case .diners?:
+            cardBrandIcon = UIImage(named: "Diners", in: Bundle.omiseSDKBundle, compatibleWith: nil)
+        default:
+            cardBrandIcon = nil
+        }
+        cardBrandIconImageView.image = cardBrandIcon
+        cardNumberTextField.rightViewMode = cardBrandIconImageView.image != nil ? .always : .never
     }
     
     @IBAction private func requestToken() {

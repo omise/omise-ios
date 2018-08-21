@@ -221,3 +221,7 @@ extension UIControlState: Hashable {
         return rawValue.hashValue
     }
 }
+
+extension Bundle {
+    public static let omiseSDKBundle = Bundle(for: CreditCardFormViewController.self)
+}
