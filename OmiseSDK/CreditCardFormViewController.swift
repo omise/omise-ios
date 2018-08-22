@@ -259,6 +259,7 @@ public class CreditCardFormViewController: UIViewController {
     @objc private func keyboardWillAppear(_ notification: Notification) {
         if hasErrorMessage {
             hasErrorMessage = false
+            setShowsErrorBanner(false, animated: true)
         }
     }
     
@@ -345,7 +346,23 @@ public class CreditCardFormViewController: UIViewController {
         
         hasErrorMessage = true
         processingErrorLabel.text = error.localizedDescription
-        //TODO: Animate the error banner
+        
+        setShowsErrorBanner(true)
+    }
+    
+    private func setShowsErrorBanner(_ showsErrorBanner: Bool, animated: Bool = true) {
+        hidingProcessingErrorBannerConstraint.isActive = !showsErrorBanner
+        
+        let animationBlock = {
+            self.processingErrorBannerView.alpha = showsErrorBanner ? 1.0 : 0.0
+            self.contentView.layoutIfNeeded()
+        }
+        
+        if animated {
+            UIView.animate(withDuration: TimeInterval(UINavigationControllerHideShowBarDuration), delay: 0.0, options: [.layoutSubviews], animations: animationBlock)
+        } else {
+            animationBlock()
+        }
     }
     
     private func updateSupplementaryUI() {
