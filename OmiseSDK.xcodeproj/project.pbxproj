@@ -45,6 +45,7 @@
 		8A43454720DBAE76005C5C94 /* PANModelTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A43454620DBAE76005C5C94 /* PANModelTestCase.swift */; };
 		8A47173A20AAB0F40022733A /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A47173920AAB0F40022733A /* Token.swift */; };
 		8A47173D20AAB11B0022733A /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A47173C20AAB11B0022733A /* Source.swift */; };
+		8A4AEB1020F707CA00D2C1DE /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 8A4AEB0F20F707CA00D2C1DE /* Localizable.stringsdict */; };
 		8A4F7CB920A9C0FD001C441A /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4F7CB820A9C0FD001C441A /* Object.swift */; };
 		8A5D59811D5317DD005D3346 /* OmiseSDK.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A5D59831D5317DD005D3346 /* OmiseSDK.storyboard */; };
 		8A60619A20B2A8D400CF90D5 /* PAN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A60619920B2A8D400CF90D5 /* PAN.swift */; };
@@ -54,6 +55,7 @@
 		8AD0609320B55B3A0074894E /* RequestTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0609220B55B3A0074894E /* RequestTask.swift */; };
 		8AD0609620B55E610074894E /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0609520B55E610074894E /* Client.swift */; };
 		8ADAA9A520B6C0AF00DD7CCF /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADAA9A420B6C0AF00DD7CCF /* Currency.swift */; };
+		8AE23AAE20F8CA8800BC9D8F /* PaymentSourceChooserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE23AAD20F8CA8800BC9D8F /* PaymentSourceChooserTableViewController.swift */; };
 		8AF6A1DA20E4FEBE00AC5625 /* OMSExampleProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF6A1D920E4FEBE00AC5625 /* OMSExampleProductViewController.m */; };
 		8AFB920F20D39BE50072B185 /* OmiseTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */; };
 		8AFE10BB20B69B39008E741D /* ClientTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE10BA20B69B39008E741D /* ClientTestCase.swift */; };
@@ -152,6 +154,7 @@
 		8A43454620DBAE76005C5C94 /* PANModelTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PANModelTestCase.swift; sourceTree = "<group>"; };
 		8A47173920AAB0F40022733A /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		8A47173C20AAB11B0022733A /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
+		8A4AEB0F20F707CA00D2C1DE /* Localizable.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		8A4F7CB820A9C0FD001C441A /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
 		8A55E4B91DA3CF5900AC515A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		8A55E4BA1DA3CF6100AC515A /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Main.strings; sourceTree = "<group>"; };
@@ -166,6 +169,7 @@
 		8ADAA9A420B6C0AF00DD7CCF /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		8ADAA9A720B7194500DD7CCF /* ClientSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientSessionDelegate.swift; sourceTree = "<group>"; };
 		8ADAA9AC20B71EDA00DD7CCF /* module.map */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
+		8AE23AAD20F8CA8800BC9D8F /* PaymentSourceChooserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSourceChooserTableViewController.swift; sourceTree = "<group>"; };
 		8AF6A1D720E4FEBE00AC5625 /* ExampleApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExampleApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		8AF6A1D820E4FEBE00AC5625 /* OMSExampleProductViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OMSExampleProductViewController.h; sourceTree = "<group>"; };
 		8AF6A1D920E4FEBE00AC5625 /* OMSExampleProductViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSExampleProductViewController.m; sourceTree = "<group>"; };
@@ -259,6 +263,7 @@
 				8A38F4A82129A14E0084F093 /* Error.strings */,
 				981FA5F91D0EDDB0009ECEDC /* Localizable.strings */,
 				8A5D59831D5317DD005D3346 /* OmiseSDK.storyboard */,
+				8A4AEB0F20F707CA00D2C1DE /* Localizable.stringsdict */,
 			);
 			path = OmiseSDK;
 			sourceTree = "<group>";
@@ -330,6 +335,7 @@
 				8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentViewController.swift */,
 				8A1D4C651D51B72200C7837C /* CreditCardFormViewController.swift */,
 				8A275CBB21241E4500C5716F /* MainActionButton.swift */,
+				8AE23AAD20F8CA8800BC9D8F /* PaymentSourceChooserTableViewController.swift */,
 				9864064B1CFEA820004BCF51 /* Cells */,
 				986406361CFEA7EA004BCF51 /* Fields */,
 			);
@@ -548,6 +554,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A5D59811D5317DD005D3346 /* OmiseSDK.storyboard in Resources */,
+				8A4AEB1020F707CA00D2C1DE /* Localizable.stringsdict in Resources */,
 				981FA5F71D0EDDB0009ECEDC /* Localizable.strings in Resources */,
 				2225B3541D0FDD63003EB396 /* Assets.xcassets in Resources */,
 				8A38F4A92129A14E0084F093 /* Error.strings in Resources */,
@@ -599,6 +606,7 @@
 				8A01F78E20D91091003FC11E /* OMSTokenRequest.swift in Sources */,
 				986406311CFEA7E4004BCF51 /* CardExpiryDateTextField.swift in Sources */,
 				986406341CFEA7E4004BCF51 /* CardNameTextField.swift in Sources */,
+				8AE23AAE20F8CA8800BC9D8F /* PaymentSourceChooserTableViewController.swift in Sources */,
 				8A188BB01D951E3C00FFF467 /* AuthorizingPaymentViewController.swift in Sources */,
 				8A01F78B20D90EC5003FC11E /* Client+ObjC.swift in Sources */,
 				986406491CFEA818004BCF51 /* SecureCodeFormCell.swift in Sources */,
