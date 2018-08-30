@@ -97,6 +97,17 @@ public enum PaymentInformation: Codable, Equatable {
     /// Installments Payment Source
     case installment(Installment)
     
+    public struct EContext: PaymentMethod, Codable, Equatable {
+        public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.eContext.rawValue
+        
+        public let type: String = OMSSourceTypeValue.eContext.rawValue
+        
+        public let name: String
+        public let email: String
+        public let phoneNumber: String
+    }
+    case eContext(EContext)
+    
     case other(type: String, parameters: [String: Any])
     
     
@@ -113,7 +124,7 @@ public enum PaymentInformation: Codable, Equatable {
             self = .barcode(try Barcode(from: decoder))
         case PaymentInformation.Installment.self:
             self = .installment(try Installment(from: decoder))
-        case "alipay":
+        case OMSSourceTypeValue.alipay.rawValue:
             self = .alipay
         case let value:
             self = .other(type: value, parameters: try decoder.decodeJSONDictionary().filter({ (key, _) -> Bool in
@@ -141,7 +152,9 @@ public enum PaymentInformation: Codable, Equatable {
             try value.encode(to: encoder)
         case .alipay:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode("alipay", forKey: .type)
+            try container.encode(OMSSourceTypeValue.alipay.rawValue, forKey: .type)
+        case .eContext(let eContext):
+            try eContext.encode(to: encoder)
         case .other(type: let type, parameters: let parameters):
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(type, forKey: .type)
@@ -199,6 +212,8 @@ extension PaymentInformation {
             return installment.type
         case .internetBanking(let bank):
             return bank.type
+        case .eContext:
+            return OMSSourceTypeValue.eContext.rawValue
         case .other(let value, _):
             return value
         }
@@ -435,8 +450,8 @@ extension PaymentInformation.Barcode {
             let typePrefixRange = type.range(of: PaymentInformation.Barcode.paymentMethodTypePrefix) else {
                 throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Invalid barcode source type value")
         }
-        switch type[typePrefixRange.upperBound...] {
-        case "alipay":
+        switch String(type[typePrefixRange.upperBound...]) {
+        case OMSSourceTypeValue.alipay.rawValue:
             self = .alipay(try AlipayBarcode.init(from: decoder))
         case let value:
             self = .other(String(value), parameters: try decoder.decodeJSONDictionary().filter({ (key, _) -> Bool in

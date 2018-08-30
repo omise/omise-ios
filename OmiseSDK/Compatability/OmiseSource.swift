@@ -12,13 +12,11 @@ import Foundation
     
     @objc lazy public var id: String = source.id
     
-    
     @objc lazy public var type: String = source.paymentInformation.sourceType
     
     @objc lazy public var paymentInformation: __SourcePaymentInformation = __SourcePaymentInformation.makeSourcePaymentInformation(from: source.paymentInformation)
     
     @objc lazy public var flow: String = source.flow.rawValue
-    
     
     @objc lazy public var amount: Int64 = source.amount
     
@@ -126,7 +124,21 @@ public class __SourceInstallmentsPayment: __SourcePaymentInformation {
     @objc public static func installmentKBankPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
         return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentKBank, numberOfTerms: numberOfTerms)!
     }
+}
+
+@objc(OMSEContextPaymentInformation)
+@objcMembers
+public class __SourceEContextPayment: __SourcePaymentInformation {
+    public let name: String
+    public let email: String
+    public let phoneNumber: String
     
+    public init(name: String, email: String, phoneNumber: String) {
+        self.name = name
+        self.email = email
+        self.phoneNumber = phoneNumber
+        super.init(type: OMSSourceTypeValue.eContext)!
+    }
 }
 
 @objc(OMSCustomPaymentInformation)
@@ -262,6 +274,8 @@ extension __SourcePaymentInformation {
             case .other(let type):
                 return __CustomSourcePayment(customType: type, parameters: [:])
             }
+        case .eContext(let eContext):
+            return __SourceEContextPayment(name: eContext.name, email: eContext.email, phoneNumber: eContext.phoneNumber)
         case .other(type: let type, parameters: let parameters):
             return __CustomSourcePayment(customType: type, parameters: parameters)
         }
