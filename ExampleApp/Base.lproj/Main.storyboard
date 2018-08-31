@@ -164,18 +164,39 @@
                                     <segue destination="Lyj-4i-Vcj" kind="show" identifier="ProductDetail-Objective-C" id="TkZ-LU-FU0"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qn8-OP-4EI">
+                                <rect key="frame" x="40" y="555" width="295" height="44"/>
+                                <color key="backgroundColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="ptj-xo-WjR"/>
+                                </constraints>
+                                <state key="normal" title="Choose how to pay">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="Now-PS-SNB" kind="presentation" id="FeA-I9-qzE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="T5w-uE-gP9" firstAttribute="top" secondItem="rFg-Re-wWX" secondAttribute="bottom" id="2UB-2b-Mx6"/>
                             <constraint firstAttribute="trailing" secondItem="rUl-ra-Tdr" secondAttribute="trailing" priority="999" constant="40" id="AHz-PW-nu1"/>
                             <constraint firstItem="rUl-ra-Tdr" firstAttribute="leading" secondItem="KGM-KT-bUC" secondAttribute="leading" priority="999" constant="40" id="BPY-N9-b5V"/>
-                            <constraint firstItem="J6v-sz-tEZ" firstAttribute="top" secondItem="rUl-ra-Tdr" secondAttribute="bottom" constant="120" id="QCE-9L-8k2"/>
+                            <constraint firstItem="qn8-OP-4EI" firstAttribute="trailing" secondItem="rUl-ra-Tdr" secondAttribute="trailing" id="JM7-uI-VVE"/>
+                            <constraint firstItem="qn8-OP-4EI" firstAttribute="top" secondItem="T5w-uE-gP9" secondAttribute="bottom" constant="-112" id="Pap-fg-Kpy"/>
                             <constraint firstItem="rUl-ra-Tdr" firstAttribute="centerX" secondItem="T5w-uE-gP9" secondAttribute="centerX" id="ZVE-PG-7EO"/>
                             <constraint firstItem="vPp-dv-dI8" firstAttribute="leading" secondItem="rUl-ra-Tdr" secondAttribute="leading" id="cFt-KJ-MM0"/>
                             <constraint firstItem="T5w-uE-gP9" firstAttribute="leading" secondItem="KGM-KT-bUC" secondAttribute="leading" id="eci-rc-Ufa"/>
                             <constraint firstItem="J6v-sz-tEZ" firstAttribute="top" secondItem="T5w-uE-gP9" secondAttribute="bottom" id="jtl-kl-kby"/>
                             <constraint firstItem="vPp-dv-dI8" firstAttribute="trailing" secondItem="rUl-ra-Tdr" secondAttribute="trailing" id="lgm-Ft-eDM"/>
+                            <constraint firstItem="qn8-OP-4EI" firstAttribute="top" secondItem="rUl-ra-Tdr" secondAttribute="bottom" constant="8" id="mfe-Q4-j6S"/>
+                            <constraint firstItem="qn8-OP-4EI" firstAttribute="leading" secondItem="rUl-ra-Tdr" secondAttribute="leading" id="wnM-kl-b94"/>
                             <constraint firstAttribute="trailing" secondItem="T5w-uE-gP9" secondAttribute="trailing" id="wtb-TK-MxJ"/>
                             <constraint firstItem="rUl-ra-Tdr" firstAttribute="top" secondItem="vPp-dv-dI8" secondAttribute="bottom" constant="8" id="yLx-OV-tzr"/>
                         </constraints>
@@ -185,6 +206,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c4U-fb-3Hn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-191" y="1439"/>
+        </scene>
+        <!--PaymentSourceChooserController-->
+        <scene sceneID="Sgp-QY-wO1">
+            <objects>
+                <viewControllerPlaceholder storyboardName="OmiseSDK" bundleIdentifier="co.omise.OmiseSDK" referencedIdentifier="PaymentSourceChooserController" id="OVI-jW-DQg" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="qGS-49-PsU"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c6D-lq-giu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="622" y="2338"/>
         </scene>
         <!--Success-->
         <scene sceneID="79S-SL-zwq">
@@ -274,10 +305,10 @@
         <!--OmiseSDK Credit Card Form-->
         <scene sceneID="UEK-Dq-FH1">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iDk-yg-N5a" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="OmiseSDK" bundleIdentifier="co.omise.OmiseSDK" id="Rxw-dP-FaG" userLabel="OmiseSDK Credit Card Form" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Mpt-Wt-4ua"/>
                 </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iDk-yg-N5a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1659.5" y="1439"/>
         </scene>
@@ -417,7 +448,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rqi-f8-4Zx" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1052" y="2215"/>
+            <point key="canvasLocation" x="1991.2" y="2214.2428785607199"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="syc-pj-A6B">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Now-PS-SNB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vGv-vn-iX9">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="OVI-jW-DQg" kind="relationship" relationship="rootViewController" id="eCY-zG-gDe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0iY-8o-Drk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-191" y="2338"/>
         </scene>
     </scenes>
     <resources>
