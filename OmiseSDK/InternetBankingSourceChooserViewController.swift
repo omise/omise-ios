@@ -1,7 +1,8 @@
 import UIKit
 
-class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking> {
-
+class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>, PaymentCreator {
+    var coordinator: PaymentCreatorTrampoline?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -20,6 +21,7 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
             preconditionFailure("This value is not supported for built-in chooser")
         }
     }
+    
 }
 
 

@@ -1,6 +1,7 @@
 import UIKit
 
-class InstallmentsNumberOfTermsChooserViewController: UITableViewController {
+class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentCreator {
+    var coordinator: PaymentCreatorTrampoline?
     
     var installmentBrand: PaymentInformation.Installment.Brand? {
         didSet {

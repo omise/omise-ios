@@ -1,6 +1,8 @@
 import UIKit
 
-class EContextInformationInputViewController: UIViewController {
+class EContextInformationInputViewController: UIViewController, PaymentCreator {
+    
+    var coordinator: PaymentCreatorTrampoline?
     
     @IBOutlet var fullNameTextField: OmiseTextField!
     @IBOutlet var emailTextField: OmiseTextField!

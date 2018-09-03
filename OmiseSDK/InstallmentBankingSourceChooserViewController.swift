@@ -1,7 +1,8 @@
 import UIKit
 
 
-class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand> {
+class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>, PaymentCreator {
+    var coordinator: PaymentCreatorTrampoline?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,7 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
             installmentTermsChooserViewController.installmentBrand = selectedBrand
         }
     }
+    
 }
 
 #if swift(>=4.2)
