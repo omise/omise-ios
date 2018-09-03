@@ -24,9 +24,58 @@ class PaymentCreatorTrampoline {
     
 }
 
-protocol PaymentCreator {
+protocol PaymentSourceCreator {
     var coordinator: PaymentCreatorTrampoline? { get }
-    var client: Client? { get }
+    
+    var client: Client? { get set }
+    var paymentAmount: Int64? { get set }
+    var paymentCurrency: Currency? { get set }
+}
+
+extension PaymentSourceCreator where Self: UIViewController {
+    func validateRequiredProperties() -> Bool {
+        let waringMessageTitle: String
+        let waringMessageMessage: String
+        
+        if self.client == nil {
+            if #available(iOS 10.0, *) {
+                os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.client ?? "")
+            }
+            waringMessageTitle = "Missing public key information."
+            waringMessageMessage = "Please setting the public key before request token or source."
+        } else if self.paymentAmount == nil || self.paymentCurrency == nil {
+            if #available(iOS 10.0, *) {
+                os_log("Missing payment information - %{private}d %{private}@", log: uiLogObject, type: .error, self.paymentAmount ?? 0, self.paymentCurrency?.code ?? "-")
+            }
+            waringMessageTitle = "Missing payment information."
+            waringMessageMessage = "Please setting both of the payment information (amount and currency) before request source/"
+        } else {
+            return true
+        }
+        
+        #if DEBUG
+        let alertController = UIAlertController(title: waringMessageTitle, message: waringMessageMessage, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
+        #endif
+        assertionFailure("\(waringMessageTitle): \(waringMessageMessage)")
+        return false
+    }
+    
+    func requestCreateSource(_ sourceType: PaymentInformation) {
+        guard validateRequiredProperties(), let client = self.client, let amount = paymentAmount, let currency = paymentCurrency else {
+            return
+        }
+        
+        client.sendRequest(Request<Source>(sourceType: sourceType, amount: amount, currency: currency)) { (result) in
+            switch result {
+            case .success(let source):
+                self.coordinator?.handleCreatedSource(source)
+            case .fail(let error):
+                self.coordinator?.handleFailedError(error)
+            }
+        }
+    }
 }
 
 
@@ -64,7 +113,7 @@ public protocol PaymentChooserViewControllerDelegate: AnyObject {
 
 
 @objc(OMSPaymentChooserViewController)
-public class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentCreator {
+public class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceCreator {
     
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String? {
@@ -82,6 +131,8 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     }
     
     var client: Client?
+    public var paymentAmount: Int64?
+    public var paymentCurrency: Currency?
     
     let coordinator: PaymentCreatorTrampoline? = PaymentCreatorTrampoline()
     
@@ -137,11 +188,20 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         case ("GoToInternetBankingChooserSegue"?, let controller as InternetBankingSourceChooserViewController):
             controller.showingValues = allowedPaymentMethods.compactMap({ $0.internetBankingSource })
             controller.coordinator = self.coordinator
+            controller.client = self.client
+            controller.paymentAmount = self.paymentAmount
+            controller.paymentCurrency = self.paymentCurrency
         case ("GoToInstallmentBrandChooserSegue"?, let controller as InstallmentBankingSourceChooserViewController):
             controller.showingValues = allowedPaymentMethods.compactMap({ $0.installmentBrand })
             controller.coordinator = self.coordinator
+            controller.client = self.client
+            controller.paymentAmount = self.paymentAmount
+            controller.paymentCurrency = self.paymentCurrency
         case (_, let controller as EContextInformationInputViewController):
             controller.coordinator = self.coordinator
+            controller.client = self.client
+            controller.paymentAmount = self.paymentAmount
+            controller.paymentCurrency = self.paymentCurrency
         default:
             break
         }
@@ -149,13 +209,14 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     }
     
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         switch element(forUIIndexPath: indexPath) {
         case .alipay:
-            break
+            requestCreateSource(.alipay)
         case .tescoLotus:
-            break
+            requestCreateSource(.billPayment(.tescoLotus))
         default:
-            super.tableView(tableView, didSelectRowAt: indexPath)
+            break
         }
     }
     
@@ -179,7 +240,6 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
             return IndexPath(row: 7, section: 0)
         }
     }
-    
 }
 
 extension PaymentChooserViewController: PaymentCreatorTrampolineDelegate {

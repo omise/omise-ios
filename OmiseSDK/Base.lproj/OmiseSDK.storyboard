@@ -368,7 +368,7 @@
         <!--Payment Methods-->
         <scene sceneID="gNp-vh-6ON">
             <objects>
-                <tableViewController storyboardIdentifier="PaymentSourceChooserController" id="2c1-84-F03" customClass="OMSPaymentChooserViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PaymentChooserController" id="2c1-84-F03" customClass="OMSPaymentChooserViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Gba-I0-J0M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -628,7 +628,7 @@
         <!--Internet Banking-->
         <scene sceneID="GWD-3m-vXf">
             <objects>
-                <tableViewController id="u3o-zY-Nfp" customClass="InternetBankingSourceChooserTableViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="u3o-zY-Nfp" customClass="OMSInternetBankingSourceChooserViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6Up-qh-f82">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -743,7 +743,7 @@
         <!--Installments-->
         <scene sceneID="dNp-Dn-cY2">
             <objects>
-                <tableViewController id="lhd-VO-2kZ" customClass="InstallmentBankingSourceChooserViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="lhd-VO-2kZ" customClass="OMSInstallmentBankingSourceChooserViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="SqW-bG-UTj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -879,10 +879,10 @@
             </objects>
             <point key="canvasLocation" x="3257" y="375"/>
         </scene>
-        <!--Installments Number Of Terms Chooser Table View Controller-->
+        <!--Installments Number Of Terms Chooser View Controller-->
         <scene sceneID="CWW-iT-nyZ">
             <objects>
-                <tableViewController id="I6Y-g7-xLU" customClass="InstallmentsNumberOfTermsChooserTableViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="I6Y-g7-xLU" customClass="InstallmentsNumberOfTermsChooserViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="r1g-0M-p88">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

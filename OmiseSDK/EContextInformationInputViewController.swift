@@ -1,9 +1,11 @@
 import UIKit
 
-class EContextInformationInputViewController: UIViewController, PaymentCreator {
+class EContextInformationInputViewController: UIViewController, PaymentSourceCreator {
     
     var coordinator: PaymentCreatorTrampoline?
     var client: Client?
+    var paymentAmount: Int64?
+    var paymentCurrency: Currency?
     
     @IBOutlet var fullNameTextField: OmiseTextField!
     @IBOutlet var emailTextField: OmiseTextField!
@@ -17,6 +19,13 @@ class EContextInformationInputViewController: UIViewController, PaymentCreator {
     }
     
     @IBAction func submitEContextForm(_ sender: UIButton) {
+        guard let fullname = fullNameTextField.text, let email = emailTextField.text,
+            let phoneNumber = phoneNumberTextField.text else {
+                return
+        }
+        
+        let eContextInformation = PaymentInformation.EContext(name: fullname, email: email, phoneNumber: phoneNumber)
+        requestCreateSource(PaymentInformation.eContext(eContextInformation))
     }
     
 }

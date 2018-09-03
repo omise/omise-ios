@@ -1,8 +1,11 @@
 import UIKit
 
-class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>, PaymentCreator {
+@objc(OMSInternetBankingSourceChooserViewController)
+class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>, PaymentSourceCreator {
     var coordinator: PaymentCreatorTrampoline?
     var client: Client?
+    var paymentAmount: Int64?
+    var paymentCurrency: Currency?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +26,11 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         }
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let bank = element(forUIIndexPath: indexPath)
+        requestCreateSource(PaymentInformation.internetBanking(bank))
+    }
 }
 
 

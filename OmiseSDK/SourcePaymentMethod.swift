@@ -105,6 +105,12 @@ public enum PaymentInformation: Codable, Equatable {
         public let name: String
         public let email: String
         public let phoneNumber: String
+        
+        public init(name: String, email: String, phoneNumber: String) {
+            self.name = name
+            self.email = email
+            self.phoneNumber = phoneNumber
+        }
     }
     case eContext(EContext)
     

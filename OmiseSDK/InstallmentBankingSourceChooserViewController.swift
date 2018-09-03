@@ -1,9 +1,11 @@
 import UIKit
 
-
-class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>, PaymentCreator {
+@objc(OMSInstallmentBankingSourceChooserViewController)
+class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>, PaymentSourceCreator {
     var coordinator: PaymentCreatorTrampoline?
     var client: Client?
+    var paymentAmount: Int64?
+    var paymentCurrency: Currency?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +44,10 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
         if segue.identifier == "GoToInstallmentTermsChooserSegue",
             let installmentTermsChooserViewController = segue.destination as? InstallmentsNumberOfTermsChooserViewController {
             installmentTermsChooserViewController.installmentBrand = selectedBrand
+            installmentTermsChooserViewController.coordinator = self.coordinator
+            installmentTermsChooserViewController.client = self.client
+            installmentTermsChooserViewController.paymentAmount = self.paymentAmount
+            installmentTermsChooserViewController.paymentCurrency = self.paymentCurrency
         }
     }
     
