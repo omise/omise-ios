@@ -2,6 +2,7 @@ import UIKit
 
 class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentCreator {
     var coordinator: PaymentCreatorTrampoline?
+    var client: Client?
     
     var installmentBrand: PaymentInformation.Installment.Brand? {
         didSet {

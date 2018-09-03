@@ -3,6 +3,7 @@ import UIKit
 
 class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>, PaymentCreator {
     var coordinator: PaymentCreatorTrampoline?
+    var client: Client?
     
     override func viewDidLoad() {
         super.viewDidLoad()

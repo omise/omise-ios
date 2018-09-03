@@ -1,4 +1,5 @@
 import UIKit
+import os
 
 
 protocol PaymentCreatorTrampolineDelegate: AnyObject {
@@ -25,6 +26,7 @@ class PaymentCreatorTrampoline {
 
 protocol PaymentCreator {
     var coordinator: PaymentCreatorTrampoline? { get }
+    var client: Client? { get }
 }
 
 
@@ -63,7 +65,24 @@ public protocol PaymentChooserViewControllerDelegate: AnyObject {
 
 @objc(OMSPaymentChooserViewController)
 public class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentCreator {
-   
+    
+    /// Omise public key for calling tokenization API.
+    @objc public var publicKey: String? {
+        didSet {
+            guard let publicKey = publicKey else {
+                if #available(iOS 10.0, *) {
+                    os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.publicKey ?? "")
+                }
+                assertionFailure("Missing public key information. Please setting the public key before request token.")
+                return
+            }
+            
+            self.client = Client(publicKey: publicKey)
+        }
+    }
+    
+    var client: Client?
+    
     let coordinator: PaymentCreatorTrampoline? = PaymentCreatorTrampoline()
     
     weak var delegate: PaymentChooserViewControllerDelegate?
@@ -127,6 +146,17 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
             break
         }
         
+    }
+    
+    public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch element(forUIIndexPath: indexPath) {
+        case .alipay:
+            break
+        case .tescoLotus:
+            break
+        default:
+            super.tableView(tableView, didSelectRowAt: indexPath)
+        }
     }
     
     public override func staticIndexPath(forValue value: PaymentChooserOption) -> IndexPath {

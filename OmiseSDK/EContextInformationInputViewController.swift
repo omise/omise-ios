@@ -3,6 +3,7 @@ import UIKit
 class EContextInformationInputViewController: UIViewController, PaymentCreator {
     
     var coordinator: PaymentCreatorTrampoline?
+    var client: Client?
     
     @IBOutlet var fullNameTextField: OmiseTextField!
     @IBOutlet var emailTextField: OmiseTextField!

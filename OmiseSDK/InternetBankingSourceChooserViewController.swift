@@ -2,6 +2,7 @@ import UIKit
 
 class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>, PaymentCreator {
     var coordinator: PaymentCreatorTrampoline?
+    var client: Client?
     
     override func viewDidLoad() {
         super.viewDidLoad()
