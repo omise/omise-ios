@@ -52,24 +52,24 @@ public enum PaymentChooserOption: StaticElementIterable, Equatable {
     }
 }
 
-public protocol PaymentSourceChooserViewControllerDelegate: AnyObject {
-    func paymentSourceChooserViewController(_ paymentSourceChooserViewController: PaymentSourceChooserViewController,
+public protocol PaymentChooserViewControllerDelegate: AnyObject {
+    func paymentChooserViewController(_ paymentChooserViewController: PaymentChooserViewController,
                                             didCreateSource source: Source)
-    func paymentSourceChooserViewController(_ paymentSourceChooserViewController: PaymentSourceChooserViewController,
+    func paymentChooserViewController(_ paymentChooserViewController: PaymentChooserViewController,
                                             didFailedToCreateSourceWithError error: Error)
-    func paymentSourceChooserViewControllerDidCancel(_ paymentSourceChooserViewController: PaymentSourceChooserViewController)
+    func paymentChooserViewControllerDidCancel(_ paymentChooserViewController: PaymentChooserViewController)
 }
 
 
-@objc(OMSPaymentSourceChooserViewController)
-public class PaymentSourceChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentCreator {
+@objc(OMSPaymentChooserViewController)
+public class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentCreator {
    
     let coordinator: PaymentCreatorTrampoline? = PaymentCreatorTrampoline()
     
-    weak var delegate: PaymentSourceChooserViewControllerDelegate?
+    weak var delegate: PaymentChooserViewControllerDelegate?
     
     @objc public var showsCreditCardPayment: Bool = true
-    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentSourceChooserViewController.defaultAvailablePaymentMethods {
+    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentChooserViewController.defaultAvailablePaymentMethods {
         didSet {
             showingValues = PaymentChooserOption.allCases.filter({
                 switch $0 {
@@ -152,17 +152,17 @@ public class PaymentSourceChooserViewController: AdaptableStaticTableViewControl
     
 }
 
-extension PaymentSourceChooserViewController: PaymentCreatorTrampolineDelegate {
+extension PaymentChooserViewController: PaymentCreatorTrampolineDelegate {
     func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, isRequestedToHandleCreatedSource source: Source) {
-        delegate?.paymentSourceChooserViewController(self, didCreateSource: source)
+        delegate?.paymentChooserViewController(self, didCreateSource: source)
     }
     
     func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, isRequestedToHandleError error: Error) {
-        delegate?.paymentSourceChooserViewController(self, didFailedToCreateSourceWithError: error)
+        delegate?.paymentChooserViewController(self, didFailedToCreateSourceWithError: error)
     }
     
     func paymentCreatorTrampolineIsRequestedToCancel(_ trampoline: PaymentCreatorTrampoline) {
-        delegate?.paymentSourceChooserViewControllerDidCancel(self)
+        delegate?.paymentChooserViewControllerDidCancel(self)
     }
     
 }
@@ -191,7 +191,7 @@ extension Array where Element == OMSSourceTypeValue {
 }
 
 
-extension PaymentSourceChooserViewController {
+extension PaymentChooserViewController {
     public static let defaultAvailablePaymentMethods: [OMSSourceTypeValue] = [
         .internetBankingBAY,
         .internetBankingKTB,

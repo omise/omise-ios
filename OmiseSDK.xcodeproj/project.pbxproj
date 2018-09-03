@@ -35,7 +35,7 @@
 		8A01F79120D91356003FC11E /* OMSSourceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F79020D91356003FC11E /* OMSSourceRequest.swift */; };
 		8A01F79420D914A4003FC11E /* OmiseSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F79320D914A4003FC11E /* OmiseSource.swift */; };
 		8A0A67E72137EE49006356B7 /* AdaptableStaticTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0A67E62137EE49006356B7 /* AdaptableStaticTableViewController.swift */; };
-		8A0A67E821383614006356B7 /* PaymentSourceChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE23AAD20F8CA8800BC9D8F /* PaymentSourceChooserViewController.swift */; };
+		8A0A67E821383614006356B7 /* PaymentChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE23AAD20F8CA8800BC9D8F /* PaymentChooserViewController.swift */; };
 		8A188BB01D951E3C00FFF467 /* AuthorizingPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentViewController.swift */; };
 		8A1D4C661D51B72200C7837C /* CreditCardFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1D4C651D51B72200C7837C /* CreditCardFormViewController.swift */; };
 		8A25E92A213CF6F300D48252 /* EContextInformationInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A25E929213CF6F300D48252 /* EContextInformationInputViewController.swift */; };
@@ -170,7 +170,7 @@
 		8ADAA9A420B6C0AF00DD7CCF /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		8ADAA9A720B7194500DD7CCF /* ClientSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientSessionDelegate.swift; sourceTree = "<group>"; };
 		8ADAA9AC20B71EDA00DD7CCF /* module.map */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
-		8AE23AAD20F8CA8800BC9D8F /* PaymentSourceChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSourceChooserViewController.swift; sourceTree = "<group>"; };
+		8AE23AAD20F8CA8800BC9D8F /* PaymentChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentChooserViewController.swift; sourceTree = "<group>"; };
 		8AF6A1D720E4FEBE00AC5625 /* ExampleApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExampleApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		8AF6A1D820E4FEBE00AC5625 /* OMSExampleProductViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OMSExampleProductViewController.h; sourceTree = "<group>"; };
 		8AF6A1D920E4FEBE00AC5625 /* OMSExampleProductViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSExampleProductViewController.m; sourceTree = "<group>"; };
@@ -333,7 +333,7 @@
 				8AC1D3A6213941C80051F966 /* InstallmentsNumberOfTermsChooserViewController.swift */,
 				8AC1D3A22139224D0051F966 /* InternetBankingSourceChooserViewController.swift */,
 				8A275CBB21241E4500C5716F /* MainActionButton.swift */,
-				8AE23AAD20F8CA8800BC9D8F /* PaymentSourceChooserViewController.swift */,
+				8AE23AAD20F8CA8800BC9D8F /* PaymentChooserViewController.swift */,
 				986406361CFEA7EA004BCF51 /* Fields */,
 			);
 			name = Views;
@@ -573,7 +573,7 @@
 				2220F1AC1D0FEE85008CD89F /* OmiseSDKClient.swift in Sources */,
 				8A60619A20B2A8D400CF90D5 /* PAN.swift in Sources */,
 				2220F1AA1D0FEE85008CD89F /* OmiseError.swift in Sources */,
-				8A0A67E821383614006356B7 /* PaymentSourceChooserViewController.swift in Sources */,
+				8A0A67E821383614006356B7 /* PaymentChooserViewController.swift in Sources */,
 				8A25E92A213CF6F300D48252 /* EContextInformationInputViewController.swift in Sources */,
 				8A47173D20AAB11B0022733A /* Source.swift in Sources */,
 				8A7F8B0C20C55605008F4D08 /* ClientSessionDelegate.swift in Sources */,
