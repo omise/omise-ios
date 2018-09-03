@@ -1,6 +1,6 @@
 import UIKit
 
-class InternetBankingSourceChooserTableViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking> {
+class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking> {
 
     override func viewDidLoad() {
         super.viewDidLoad()

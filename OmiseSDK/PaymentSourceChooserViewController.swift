@@ -1,7 +1,36 @@
 import UIKit
 
 
-public enum PaymentChooserCell: StaticElementIterable, Equatable {
+protocol PaymentCreatorTrampolineDelegate: AnyObject {
+    func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, isRequestedToHandleCreatedSource source: Source)
+    func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, isRequestedToHandleError error: Error)
+    func paymentCreatorTrampolineIsRequestedToCancel(_ trampoline: PaymentCreatorTrampoline)
+}
+
+class PaymentCreatorTrampoline {
+    weak var delegate: PaymentCreatorTrampolineDelegate?
+    func handleCreatedSource(_ source: Source) {
+        delegate?.paymentCreatorTrampoline(self, isRequestedToHandleCreatedSource: source)
+    }
+    
+    func handleFailedError(_ error: Error) {
+        delegate?.paymentCreatorTrampoline(self, isRequestedToHandleError: error)
+    }
+    
+    func requestToCancel() {
+        delegate?.paymentCreatorTrampolineIsRequestedToCancel(self)
+    }
+    
+}
+
+protocol PaymentCreator {
+    var coordinator: PaymentCreatorTrampoline { get }
+    
+    func performCreatePayment()
+}
+
+
+public enum PaymentChooserOption: StaticElementIterable, Equatable {
     case creditCard
     case installment
     case internetBanking
@@ -11,7 +40,7 @@ public enum PaymentChooserCell: StaticElementIterable, Equatable {
     case netBanking
     case alipay
     
-    public static var allCases: [PaymentChooserCell] {
+    public static var allCases: [PaymentChooserOption] {
         return [
             .creditCard,
             .installment,
@@ -25,14 +54,22 @@ public enum PaymentChooserCell: StaticElementIterable, Equatable {
     }
 }
 
+public protocol PaymentSourceChooserViewControllerDelegate {
+    func paymentSourceChooserViewController(_ paymentSourceChooserViewController: PaymentSourceChooserViewController,
+                                            didCreateSource source: Source)
+    
+}
 
-@objc(OMSPaymentSourceChooserTableViewController)
-public class PaymentSourceChooserTableViewController: AdaptableStaticTableViewController<PaymentChooserCell> {
+
+@objc(OMSPaymentSourceChooserViewController)
+public class PaymentSourceChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption> {
    
+    let createPaymentProcessTrampoline = PaymentCreatorTrampoline()
+    
     @objc public var showsCreditCardPayment: Bool = true
-    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentSourceChooserTableViewController.defaultAvailablePaymentMethods {
+    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentSourceChooserViewController.defaultAvailablePaymentMethods {
         didSet {
-            showingValues = PaymentChooserCell.allCases.filter({
+            showingValues = PaymentChooserOption.allCases.filter({
                 switch $0 {
                 case .creditCard:
                     return showsCreditCardPayment
@@ -54,7 +91,9 @@ public class PaymentSourceChooserTableViewController: AdaptableStaticTableViewCo
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        showingValues = PaymentChooserCell.allCases.filter({
+        createPaymentProcessTrampoline.delegate = self
+        
+        showingValues = PaymentChooserOption.allCases.filter({
             switch $0 {
             case .creditCard:
                 return showsCreditCardPayment
@@ -74,20 +113,19 @@ public class PaymentSourceChooserTableViewController: AdaptableStaticTableViewCo
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch (segue.identifier, segue.destination) {
-        case ("GoToInternetBankingChooserSegue"?, let controller as InternetBankingSourceChooserTableViewController):
+        case ("GoToInternetBankingChooserSegue"?, let controller as InternetBankingSourceChooserViewController):
             controller.showingValues = allowedPaymentMethods.compactMap({ $0.internetBankingSource })
-        case ("GoToInstallmentBrandChooserSegue"?, let controller as InstallmentBankingSourceChooserTableViewController):
+        case ("GoToInstallmentBrandChooserSegue"?, let controller as InstallmentBankingSourceChooserViewController):
             controller.showingValues = allowedPaymentMethods.compactMap({ $0.installmentBrand })
-        case (_, let controller as InternetBankingSourceChooserTableViewController):
-            controller.showingValues = []
-            
+        case (_, is EContextInformationInputViewController):
+            break
         default:
             break
         }
         
     }
     
-    public override func staticIndexPath(forValue value: PaymentChooserCell) -> IndexPath {
+    public override func staticIndexPath(forValue value: PaymentChooserOption) -> IndexPath {
         switch value {
         case .creditCard:
             return IndexPath(row: 0, section: 0)
@@ -107,6 +145,21 @@ public class PaymentSourceChooserTableViewController: AdaptableStaticTableViewCo
             return IndexPath(row: 7, section: 0)
         }
     }
+}
+
+extension PaymentSourceChooserViewController: PaymentCreatorTrampolineDelegate {
+    func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, isRequestedToHandleCreatedSource source: Source) {
+        
+    }
+    
+    func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, isRequestedToHandleError error: Error) {
+        
+    }
+    
+    func paymentCreatorTrampolineIsRequestedToCancel(_ trampoline: PaymentCreatorTrampoline) {
+        
+    }
+    
 }
 
 
@@ -133,7 +186,7 @@ extension Array where Element == OMSSourceTypeValue {
 }
 
 
-extension PaymentSourceChooserTableViewController {
+extension PaymentSourceChooserViewController {
     public static let defaultAvailablePaymentMethods: [OMSSourceTypeValue] = [
         .internetBankingBAY,
         .internetBankingKTB,

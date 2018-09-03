@@ -1,7 +1,7 @@
 import UIKit
 
 
-class InstallmentBankingSourceChooserTableViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand> {
+class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,7 @@ class InstallmentBankingSourceChooserTableViewController: AdaptableStaticTableVi
         }
         let selectedBrand = element(forUIIndexPath: indexPath)
         if segue.identifier == "GoToInstallmentTermsChooserSegue",
-            let installmentTermsChooserViewController = segue.destination as? InstallmentsNumberOfTermsChooserTableViewController {
+            let installmentTermsChooserViewController = segue.destination as? InstallmentsNumberOfTermsChooserViewController {
             installmentTermsChooserViewController.installmentBrand = selectedBrand
         }
     }
