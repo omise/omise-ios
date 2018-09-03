@@ -30,7 +30,12 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NumberOfTermCell", for: indexPath)
-        cell.textLabel?.text = "\(numberOfTerms[indexPath.row])"
+        let numberOfTermsTitleFormat = NSLocalizedString(
+            "installments.number-of-terms-chooser.number-of-terms-cell.label.text",
+            bundle: Bundle.omiseSDKBundle, value: "%d months",
+            comment: "Number of terms option text displayed as a title of the number of terms option cell in number of terms chooser scene"
+        )
+        cell.textLabel?.text = String.localizedStringWithFormat(numberOfTermsTitleFormat, numberOfTerms[indexPath.row])
         return cell
     }
     
