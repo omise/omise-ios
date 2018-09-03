@@ -23,6 +23,25 @@ class InstallmentBankingSourceChooserTableViewController: AdaptableStaticTableVi
             preconditionFailure("This value is not supported for built-in chooser")
         }
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) else {
+            return
+        }
+        
+        performSegue(withIdentifier: "GoToInstallmentTermsChooserSegue", sender: cell)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+        let selectedBrand = element(forUIIndexPath: indexPath)
+        if segue.identifier == "GoToInstallmentTermsChooserSegue",
+            let installmentTermsChooserViewController = segue.destination as? InstallmentsNumberOfTermsChooserTableViewController {
+            installmentTermsChooserViewController.installmentBrand = selectedBrand
+        }
+    }
 }
 
 #if swift(>=4.2)

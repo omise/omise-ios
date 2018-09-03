@@ -2,7 +2,18 @@ import UIKit
 
 class InstallmentsNumberOfTermsChooserTableViewController: UITableViewController {
     
-    var numberOfTerms: [Int] = []
+    var installmentBrand: PaymentInformation.Installment.Brand? {
+        didSet {
+            numberOfTerms = installmentBrand.map(PaymentInformation.Installment.availableTerms(for:)).map(Array.init) ?? []
+        }
+    }
+    var numberOfTerms: [Int] = [] {
+        didSet {
+            if isViewLoaded {
+                tableView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,3 +31,4 @@ class InstallmentsNumberOfTermsChooserTableViewController: UITableViewController
     }
     
 }
+

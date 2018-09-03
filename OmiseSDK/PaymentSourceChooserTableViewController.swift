@@ -30,7 +30,7 @@ public enum PaymentChooserCell: StaticElementIterable, Equatable {
 public class PaymentSourceChooserTableViewController: AdaptableStaticTableViewController<PaymentChooserCell> {
    
     @objc public var showsCreditCardPayment: Bool = true
-    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = [OMSSourceTypeValue.internetBankingBBL, .internetBankingKTB] + [OMSSourceTypeValue.eContext] {
+    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentSourceChooserTableViewController.defaultAvailablePaymentMethods {
         didSet {
             showingValues = PaymentChooserCell.allCases.filter({
                 switch $0 {

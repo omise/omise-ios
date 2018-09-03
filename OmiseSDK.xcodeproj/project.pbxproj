@@ -38,6 +38,7 @@
 		8A0A67E821383614006356B7 /* PaymentSourceChooserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE23AAD20F8CA8800BC9D8F /* PaymentSourceChooserTableViewController.swift */; };
 		8A188BB01D951E3C00FFF467 /* AuthorizingPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentViewController.swift */; };
 		8A1D4C661D51B72200C7837C /* CreditCardFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1D4C651D51B72200C7837C /* CreditCardFormViewController.swift */; };
+		8A25E92A213CF6F300D48252 /* EContextInformationInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A25E929213CF6F300D48252 /* EContextInformationInputViewController.swift */; };
 		8A275CBC21241E4500C5716F /* MainActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A275CBB21241E4500C5716F /* MainActionButton.swift */; };
 		8A2BE95520A9A39E000CEB60 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2BE95420A9A39E000CEB60 /* Request.swift */; };
 		8A2C451920ECC7A60033E2EB /* OmiseSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 225931181CE3210700841B86 /* OmiseSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -63,18 +64,11 @@
 		8AFB920F20D39BE50072B185 /* OmiseTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */; };
 		8AFE10BB20B69B39008E741D /* ClientTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE10BA20B69B39008E741D /* ClientTestCase.swift */; };
 		981FA5F71D0EDDB0009ECEDC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 981FA5F91D0EDDB0009ECEDC /* Localizable.strings */; };
-		982237C11D115BD400D266F3 /* ErrorMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982237BF1D115BD400D266F3 /* ErrorMessageCell.swift */; };
-		983BC0C01D1027A3004505B7 /* ConfirmButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983BC0BE1D1027A3004505B7 /* ConfirmButtonCell.swift */; };
 		986406301CFEA7E4004BCF51 /* CardCVVTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062A1CFEA7E4004BCF51 /* CardCVVTextField.swift */; };
 		986406311CFEA7E4004BCF51 /* CardExpiryDateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062B1CFEA7E4004BCF51 /* CardExpiryDateTextField.swift */; };
 		986406321CFEA7E4004BCF51 /* CardNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062C1CFEA7E4004BCF51 /* CardNumberTextField.swift */; };
 		986406341CFEA7E4004BCF51 /* CardNameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062E1CFEA7E4004BCF51 /* CardNameTextField.swift */; };
 		986406351CFEA7E4004BCF51 /* OmiseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062F1CFEA7E4004BCF51 /* OmiseTextField.swift */; };
-		986406411CFEA818004BCF51 /* CardNumberFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986406371CFEA818004BCF51 /* CardNumberFormCell.swift */; };
-		986406431CFEA818004BCF51 /* ExpiryDateFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986406391CFEA818004BCF51 /* ExpiryDateFormCell.swift */; };
-		986406451CFEA818004BCF51 /* FormHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864063B1CFEA818004BCF51 /* FormHeaderCell.swift */; };
-		986406471CFEA818004BCF51 /* NameCardFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864063D1CFEA818004BCF51 /* NameCardFormCell.swift */; };
-		986406491CFEA818004BCF51 /* SecureCodeFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864063F1CFEA818004BCF51 /* SecureCodeFormCell.swift */; };
 		987A02CE1CE35D5E0035417A /* OmiseSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225931181CE3210700841B86 /* OmiseSDK.framework */; };
 		987A03211CE5B7D70035417A /* OmiseTokenRequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A03201CE5B7D70035417A /* OmiseTokenRequestTest.swift */; };
 		987A03AD1CE5CD450035417A /* Fixtures in Resources */ = {isa = PBXBuildFile; fileRef = 987A03AC1CE5CD450035417A /* Fixtures */; };
@@ -150,6 +144,7 @@
 		8A0A67E62137EE49006356B7 /* AdaptableStaticTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptableStaticTableViewController.swift; sourceTree = "<group>"; };
 		8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizingPaymentViewController.swift; sourceTree = "<group>"; };
 		8A1D4C651D51B72200C7837C /* CreditCardFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = CreditCardFormViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
+		8A25E929213CF6F300D48252 /* EContextInformationInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EContextInformationInputViewController.swift; sourceTree = "<group>"; };
 		8A275CBB21241E4500C5716F /* MainActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainActionButton.swift; sourceTree = "<group>"; };
 		8A2BE95420A9A39E000CEB60 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		8A37E43520B584D300E2DA18 /* ModelTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTestCase.swift; sourceTree = "<group>"; };
@@ -183,18 +178,11 @@
 		981FA5F81D0EDDB0009ECEDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		981FA5FA1D0EDDD8009ECEDC /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
 		981FA5FB1D0EDDDB009ECEDC /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		982237BF1D115BD400D266F3 /* ErrorMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessageCell.swift; sourceTree = "<group>"; };
-		983BC0BE1D1027A3004505B7 /* ConfirmButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmButtonCell.swift; sourceTree = "<group>"; };
 		9864062A1CFEA7E4004BCF51 /* CardCVVTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCVVTextField.swift; sourceTree = "<group>"; };
 		9864062B1CFEA7E4004BCF51 /* CardExpiryDateTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardExpiryDateTextField.swift; sourceTree = "<group>"; };
 		9864062C1CFEA7E4004BCF51 /* CardNumberTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumberTextField.swift; sourceTree = "<group>"; };
 		9864062E1CFEA7E4004BCF51 /* CardNameTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNameTextField.swift; sourceTree = "<group>"; };
 		9864062F1CFEA7E4004BCF51 /* OmiseTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseTextField.swift; sourceTree = "<group>"; };
-		986406371CFEA818004BCF51 /* CardNumberFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumberFormCell.swift; sourceTree = "<group>"; };
-		986406391CFEA818004BCF51 /* ExpiryDateFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpiryDateFormCell.swift; sourceTree = "<group>"; };
-		9864063B1CFEA818004BCF51 /* FormHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormHeaderCell.swift; sourceTree = "<group>"; };
-		9864063D1CFEA818004BCF51 /* NameCardFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameCardFormCell.swift; sourceTree = "<group>"; };
-		9864063F1CFEA818004BCF51 /* SecureCodeFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureCodeFormCell.swift; sourceTree = "<group>"; };
 		987A02C91CE35D5E0035417A /* OmiseSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmiseSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		987A02CD1CE35D5E0035417A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		987A03201CE5B7D70035417A /* OmiseTokenRequestTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseTokenRequestTest.swift; sourceTree = "<group>"; };
@@ -340,12 +328,12 @@
 				8A0A67E62137EE49006356B7 /* AdaptableStaticTableViewController.swift */,
 				8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentViewController.swift */,
 				8A1D4C651D51B72200C7837C /* CreditCardFormViewController.swift */,
+				8A25E929213CF6F300D48252 /* EContextInformationInputViewController.swift */,
 				8AC1D3A4213922570051F966 /* InstallmentBankingSourceChooserTableViewController.swift */,
 				8AC1D3A6213941C80051F966 /* InstallmentsNumberOfTermsChooserTableViewController.swift */,
 				8AC1D3A22139224D0051F966 /* InternetBankingSourceChooserTableViewController.swift */,
 				8A275CBB21241E4500C5716F /* MainActionButton.swift */,
 				8AE23AAD20F8CA8800BC9D8F /* PaymentSourceChooserTableViewController.swift */,
-				9864064B1CFEA820004BCF51 /* Cells */,
 				986406361CFEA7EA004BCF51 /* Fields */,
 			);
 			name = Views;
@@ -404,20 +392,6 @@
 				9864062F1CFEA7E4004BCF51 /* OmiseTextField.swift */,
 			);
 			name = Fields;
-			sourceTree = "<group>";
-		};
-		9864064B1CFEA820004BCF51 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				986406371CFEA818004BCF51 /* CardNumberFormCell.swift */,
-				983BC0BE1D1027A3004505B7 /* ConfirmButtonCell.swift */,
-				982237BF1D115BD400D266F3 /* ErrorMessageCell.swift */,
-				986406391CFEA818004BCF51 /* ExpiryDateFormCell.swift */,
-				9864063B1CFEA818004BCF51 /* FormHeaderCell.swift */,
-				9864063D1CFEA818004BCF51 /* NameCardFormCell.swift */,
-				9864063F1CFEA818004BCF51 /* SecureCodeFormCell.swift */,
-			);
-			name = Cells;
 			sourceTree = "<group>";
 		};
 		987A02CA1CE35D5E0035417A /* OmiseSDKTests */ = {
@@ -594,18 +568,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				982237C11D115BD400D266F3 /* ErrorMessageCell.swift in Sources */,
 				8AFB920F20D39BE50072B185 /* OmiseTokenRequest.swift in Sources */,
 				8A01F79120D91356003FC11E /* OMSSourceRequest.swift in Sources */,
 				2220F1AC1D0FEE85008CD89F /* OmiseSDKClient.swift in Sources */,
 				8A60619A20B2A8D400CF90D5 /* PAN.swift in Sources */,
 				2220F1AA1D0FEE85008CD89F /* OmiseError.swift in Sources */,
 				8A0A67E821383614006356B7 /* PaymentSourceChooserTableViewController.swift in Sources */,
-				986406451CFEA818004BCF51 /* FormHeaderCell.swift in Sources */,
+				8A25E92A213CF6F300D48252 /* EContextInformationInputViewController.swift in Sources */,
 				8A47173D20AAB11B0022733A /* Source.swift in Sources */,
-				986406411CFEA818004BCF51 /* CardNumberFormCell.swift in Sources */,
 				8A7F8B0C20C55605008F4D08 /* ClientSessionDelegate.swift in Sources */,
-				983BC0C01D1027A3004505B7 /* ConfirmButtonCell.swift in Sources */,
 				986406351CFEA7E4004BCF51 /* OmiseTextField.swift in Sources */,
 				2220F1AD1D0FEE85008CD89F /* OmiseToken.swift in Sources */,
 				8AC1D3A32139224D0051F966 /* InternetBankingSourceChooserTableViewController.swift in Sources */,
@@ -619,11 +590,8 @@
 				986406341CFEA7E4004BCF51 /* CardNameTextField.swift in Sources */,
 				8A188BB01D951E3C00FFF467 /* AuthorizingPaymentViewController.swift in Sources */,
 				8A01F78B20D90EC5003FC11E /* Client+ObjC.swift in Sources */,
-				986406491CFEA818004BCF51 /* SecureCodeFormCell.swift in Sources */,
 				8A2BE95520A9A39E000CEB60 /* Request.swift in Sources */,
 				14ACEF831D02D641001C5319 /* CardExpiryDatePicker.swift in Sources */,
-				986406431CFEA818004BCF51 /* ExpiryDateFormCell.swift in Sources */,
-				986406471CFEA818004BCF51 /* NameCardFormCell.swift in Sources */,
 				8A01F79420D914A4003FC11E /* OmiseSource.swift in Sources */,
 				986406301CFEA7E4004BCF51 /* CardCVVTextField.swift in Sources */,
 				8A47173A20AAB0F40022733A /* Token.swift in Sources */,
