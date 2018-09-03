@@ -107,6 +107,8 @@ public protocol PaymentChooserViewControllerDelegate: AnyObject {
     func paymentChooserViewController(_ paymentChooserViewController: PaymentChooserViewController,
                                             didCreateSource source: Source)
     func paymentChooserViewController(_ paymentChooserViewController: PaymentChooserViewController,
+                                      didCreateToken token: Token)
+    func paymentChooserViewController(_ paymentChooserViewController: PaymentChooserViewController,
                                             didFailedToCreateSourceWithError error: Error)
     func paymentChooserViewControllerDidCancel(_ paymentChooserViewController: PaymentChooserViewController)
 }
@@ -185,6 +187,9 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch (segue.identifier, segue.destination) {
+        case ("GoToCreditCardFormSegue"?, let controller as CreditCardFormViewController):
+            controller.delegate = self
+            controller.publicKey = self.publicKey
         case ("GoToInternetBankingChooserSegue"?, let controller as InternetBankingSourceChooserViewController):
             controller.showingValues = allowedPaymentMethods.compactMap({ $0.internetBankingSource })
             controller.coordinator = self.coordinator
@@ -255,6 +260,20 @@ extension PaymentChooserViewController: PaymentCreatorTrampolineDelegate {
         delegate?.paymentChooserViewControllerDidCancel(self)
     }
     
+}
+
+extension PaymentChooserViewController: CreditCardFormViewControllerDelegate {
+    public func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
+        delegate?.paymentChooserViewController(self, didCreateToken: token)
+    }
+    
+    public func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error) {
+        delegate?.paymentChooserViewController(self, didFailedToCreateSourceWithError: error)
+    }
+    
+    public func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController) {
+        delegate?.paymentChooserViewControllerDidCancel(self)
+    }
 }
 
 

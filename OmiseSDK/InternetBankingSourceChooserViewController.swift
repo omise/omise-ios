@@ -21,8 +21,8 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
             return IndexPath(row: 2, section: 0)
         case .ktb:
             return IndexPath(row: 3, section: 0)
-        case .other(_):
-            preconditionFailure("This value is not supported for built-in chooser")
+        case .other:
+            preconditionFailure("This value is not supported for the built-in chooser")
         }
     }
     
