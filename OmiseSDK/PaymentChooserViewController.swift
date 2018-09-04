@@ -111,18 +111,21 @@ public enum PaymentChooserOption: StaticElementIterable, Equatable {
 
 public protocol PaymentChooserViewControllerDelegate: AnyObject {
     func paymentChooserViewController(_ paymentChooserViewController: PaymentChooserViewController,
-                                            didCreateSource source: Source)
+                                      didCreatePayment payment: Payment)
     func paymentChooserViewController(_ paymentChooserViewController: PaymentChooserViewController,
-                                      didCreateToken token: Token)
-    func paymentChooserViewController(_ paymentChooserViewController: PaymentChooserViewController,
-                                            didFailedToCreateSourceWithError error: Error)
+                                      didFailWithError error: Error)
     func paymentChooserViewControllerDidCancel(_ paymentChooserViewController: PaymentChooserViewController)
+}
+
+
+public enum Payment {
+    case token(Token)
+    case source(Source)
 }
 
 
 @objc(OMSPaymentChooserViewController)
 public class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceCreator {
-    
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String? {
         didSet {
@@ -144,7 +147,7 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     
     let coordinator: PaymentCreatorTrampoline? = PaymentCreatorTrampoline()
     
-    weak var delegate: PaymentChooserViewControllerDelegate?
+    public weak var delegate: PaymentChooserViewControllerDelegate?
     
     @objc public var showsCreditCardPayment: Bool = true
     @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentChooserViewController.defaultAvailablePaymentMethods + [OMSSourceTypeValue.eContext] {
@@ -271,11 +274,11 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
 
 extension PaymentChooserViewController: PaymentCreatorTrampolineDelegate {
     func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, isRequestedToHandleCreatedSource source: Source) {
-        delegate?.paymentChooserViewController(self, didCreateSource: source)
+        delegate?.paymentChooserViewController(self, didCreatePayment: Payment.source(source))
     }
     
     func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, isRequestedToHandleError error: Error) {
-        delegate?.paymentChooserViewController(self, didFailedToCreateSourceWithError: error)
+        delegate?.paymentChooserViewController(self, didFailWithError: error)
     }
     
     func paymentCreatorTrampolineIsRequestedToCancel(_ trampoline: PaymentCreatorTrampoline) {
@@ -286,11 +289,11 @@ extension PaymentChooserViewController: PaymentCreatorTrampolineDelegate {
 
 extension PaymentChooserViewController: CreditCardFormViewControllerDelegate {
     public func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
-        delegate?.paymentChooserViewController(self, didCreateToken: token)
+        delegate?.paymentChooserViewController(self, didCreatePayment: Payment.token(token))
     }
     
     public func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error) {
-        delegate?.paymentChooserViewController(self, didFailedToCreateSourceWithError: error)
+        delegate?.paymentChooserViewController(self, didFailWithError: error)
     }
     
     public func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController) {
