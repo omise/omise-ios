@@ -42,13 +42,13 @@ extension PaymentSourceCreator where Self: UIViewController {
                 os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.client ?? "")
             }
             waringMessageTitle = "Missing public key information."
-            waringMessageMessage = "Please setting the public key before request token or source."
+            waringMessageMessage = "Please set the public key before request token or source."
         } else if self.paymentAmount == nil || self.paymentCurrency == nil {
             if #available(iOS 10.0, *) {
                 os_log("Missing payment information - %{private}d %{private}@", log: uiLogObject, type: .error, self.paymentAmount ?? 0, self.paymentCurrency?.code ?? "-")
             }
             waringMessageTitle = "Missing payment information."
-            waringMessageMessage = "Please setting both of the payment information (amount and currency) before request source/"
+            waringMessageMessage = "Please set both of the payment information (amount and currency) before request source/"
         } else {
             return true
         }
@@ -62,12 +62,18 @@ extension PaymentSourceCreator where Self: UIViewController {
         return false
     }
     
-    func requestCreateSource(_ sourceType: PaymentInformation) {
-        guard validateRequiredProperties(), let client = self.client, let amount = paymentAmount, let currency = paymentCurrency else {
+    func requestCreateSource(_ sourceType: PaymentInformation, completionHandler: ((RequestResult<Source>) -> Void)?) {
+        guard validateRequiredProperties(), let client = self.client,
+          let amount = paymentAmount, let currency = paymentCurrency else {
             return
         }
         
         client.sendRequest(Request<Source>(sourceType: sourceType, amount: amount, currency: currency)) { (result) in
+            defer {
+                DispatchQueue.main.async {
+                    completionHandler?(result)
+                }
+            }
             switch result {
             case .success(let source):
                 self.coordinator?.handleCreatedSource(source)
@@ -124,7 +130,7 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
                 if #available(iOS 10.0, *) {
                     os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.publicKey ?? "")
                 }
-                assertionFailure("Missing public key information. Please setting the public key before request token.")
+                assertionFailure("Missing public key information. Please set the public key before request token.")
                 return
             }
             
@@ -141,7 +147,7 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     weak var delegate: PaymentChooserViewControllerDelegate?
     
     @objc public var showsCreditCardPayment: Bool = true
-    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentChooserViewController.defaultAvailablePaymentMethods {
+    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentChooserViewController.defaultAvailablePaymentMethods + [OMSSourceTypeValue.eContext] {
         didSet {
             showingValues = PaymentChooserOption.allCases.filter({
                 switch $0 {
@@ -205,8 +211,8 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         case (_, let controller as EContextInformationInputViewController):
             controller.coordinator = self.coordinator
             controller.client = self.client
-            controller.paymentAmount = self.paymentAmount
-            controller.paymentCurrency = self.paymentCurrency
+            controller.paymentAmount = 5000
+            controller.paymentCurrency = .jpy
         default:
             break
         }
@@ -214,15 +220,29 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     }
     
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
+        let payment: PaymentInformation
+        
         switch element(forUIIndexPath: indexPath) {
         case .alipay:
-            requestCreateSource(.alipay)
+            payment = .alipay
         case .tescoLotus:
-            requestCreateSource(.billPayment(.tescoLotus))
+            payment = .billPayment(.tescoLotus)
+            
         default:
-            break
+            return
         }
+        
+        let oldAccessoryView = cell?.accessoryView
+        let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        loadingIndicator.color = #colorLiteral(red: 0.3065422177, green: 0.3197538555, blue: 0.3728331327, alpha: 1)
+        cell?.accessoryView = loadingIndicator
+        loadingIndicator.startAnimating()
+        
+        requestCreateSource(payment, completionHandler: { _ in
+            cell?.accessoryView = oldAccessoryView
+        })
     }
     
     public override func staticIndexPath(forValue value: PaymentChooserOption) -> IndexPath {

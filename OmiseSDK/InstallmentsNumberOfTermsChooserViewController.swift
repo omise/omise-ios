@@ -40,13 +40,24 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
         guard let brand = installmentBrand else {
             return
         }
         
+        let oldAccessoryView = cell?.accessoryView
+        let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        loadingIndicator.color = #colorLiteral(red: 0.3065422177, green: 0.3197538555, blue: 0.3728331327, alpha: 1)
+        cell?.accessoryView = loadingIndicator
+        loadingIndicator.startAnimating()
+
         let numberOfTerms = self.numberOfTerms[indexPath.row]
-        requestCreateSource(PaymentInformation.installment(PaymentInformation.Installment(brand: brand, numberOfTerms: numberOfTerms)))
+        requestCreateSource(
+            .installment(PaymentInformation.Installment(brand: brand, numberOfTerms: numberOfTerms)),
+            completionHandler: { _ in
+                cell?.accessoryView = oldAccessoryView
+        })
     }
 }
 

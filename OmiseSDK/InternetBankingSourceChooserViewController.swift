@@ -27,9 +27,19 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
         let bank = element(forUIIndexPath: indexPath)
-        requestCreateSource(PaymentInformation.internetBanking(bank))
+   
+        let oldAccessoryView = cell?.accessoryView
+        let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        loadingIndicator.color = #colorLiteral(red: 0.3065422177, green: 0.3197538555, blue: 0.3728331327, alpha: 1)
+        cell?.accessoryView = loadingIndicator
+        loadingIndicator.startAnimating()
+
+        requestCreateSource(.internetBanking(bank), completionHandler: { _ in
+            cell?.accessoryView = oldAccessoryView
+        })
     }
 }
 

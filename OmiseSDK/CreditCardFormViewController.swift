@@ -402,7 +402,7 @@ public class CreditCardFormViewController: UIViewController {
             if #available(iOS 10.0, *) {
                 os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.publicKey ?? "")
             }
-            assertionFailure("Missing public key information. Please setting the public key before request token.")
+            assertionFailure("Missing public key information. Please set the public key before request token.")
             return
         }
         

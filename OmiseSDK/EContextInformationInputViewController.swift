@@ -11,6 +11,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCre
     @IBOutlet var emailTextField: OmiseTextField!
     @IBOutlet var phoneNumberTextField: OmiseTextField!
     @IBOutlet var submitButton: MainActionButton!
+    @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +26,10 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCre
         }
         
         let eContextInformation = PaymentInformation.EContext(name: fullname, email: email, phoneNumber: phoneNumber)
-        requestCreateSource(PaymentInformation.eContext(eContextInformation))
+        requestingIndicatorView.startAnimating()
+        requestCreateSource(PaymentInformation.eContext(eContextInformation), completionHandler: { _ in
+            self.requestingIndicatorView.stopAnimating()
+        })
     }
     
 }
