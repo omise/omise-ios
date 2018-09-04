@@ -106,6 +106,12 @@ public enum PaymentInformation: Codable, Equatable {
         public let email: String
         public let phoneNumber: String
         
+        private enum CodingKeys: String, CodingKey {
+            case name
+            case email
+            case phoneNumber = "phone_number"
+        }
+        
         public init(name: String, email: String, phoneNumber: String) {
             self.name = name
             self.email = email
@@ -130,6 +136,8 @@ public enum PaymentInformation: Codable, Equatable {
             self = .barcode(try Barcode(from: decoder))
         case PaymentInformation.Installment.self:
             self = .installment(try Installment(from: decoder))
+        case PaymentInformation.EContext.self:
+            self = .eContext(try EContext(from: decoder))
         case OMSSourceTypeValue.alipay.rawValue:
             self = .alipay
         case let value:
@@ -160,6 +168,8 @@ public enum PaymentInformation: Codable, Equatable {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.alipay.rawValue, forKey: .type)
         case .eContext(let eContext):
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.eContext.rawValue, forKey: .type)
             try eContext.encode(to: encoder)
         case .other(type: let type, parameters: let parameters):
             var container = encoder.container(keyedBy: CodingKeys.self)
@@ -183,6 +193,8 @@ public enum PaymentInformation: Codable, Equatable {
         case (.barcode(let lhsValue), .barcode(let rhsValue)):
             return lhsValue == rhsValue
         case (.installment(let lhsValue), .installment(let rhsValue)):
+            return lhsValue == rhsValue
+        case (.eContext(let lhsValue), .eContext(let rhsValue)):
             return lhsValue == rhsValue
         case (.other(let lhsType, let lhsParameters), .other(let rhsType, let rhsParameters)):
             return lhsType == rhsType &&
