@@ -218,6 +218,31 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
             controller.client = self.client
             controller.paymentAmount = 5000
             controller.paymentCurrency = .jpy
+            if let element = (sender as? UITableViewCell).flatMap(tableView.indexPath(for:)).map(element(forUIIndexPath:)) {
+                switch element {
+                case .conbini:
+                    controller.navigationItem.title = NSLocalizedString(
+                        "econtext.convenience-store.navigation-item.title",
+                        bundle: Bundle.omiseSDKBundle, value: "Convenience Store",
+                        comment: "A navigaiton title for the EContext screen when the `Convenience Store` is selected"
+                    )
+                case .netBanking:
+                    controller.navigationItem.title = NSLocalizedString(
+                        "econtext.netbanking.navigation-item.title",
+                        bundle: Bundle.omiseSDKBundle, value: "Netbanking",
+                        comment: "A navigaiton title for the EContext screen when the `Netbanking` is selected"
+                    )
+                case .payEasy:
+                    controller.navigationItem.title = NSLocalizedString(
+                        "econtext.pay-easy.navigation-item.title",
+                        bundle: Bundle.omiseSDKBundle, value: "Pay-easy",
+                        comment: "A navigaiton title for the EContext screen when the `Pay-easy` is selected"
+                    )
+                default:
+                    break
+                }
+            }
+            
         default:
             break
         }

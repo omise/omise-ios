@@ -9,8 +9,51 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
     var installmentBrand: PaymentInformation.Installment.Brand? {
         didSet {
             numberOfTerms = installmentBrand.map(PaymentInformation.Installment.availableTerms(for:)).map(Array.init) ?? []
+            
+            let title: String
+            switch installmentBrand {
+            case .bay?:
+                title = NSLocalizedString(
+                    "installment-number-of-terms-choosers.bbl.navigation-item.title",
+                    bundle: Bundle.omiseSDKBundle, value: "Krungsri",
+                    comment:"A navigation title for the choosing installment terms screen with the `Krungsri` selected"
+                )
+            case .firstChoice?:
+                title = NSLocalizedString(
+                    "installment-number-of-terms-choosers.ktc.navigation-item.title",
+                    bundle: Bundle.omiseSDKBundle, value: "Krungsri First Choice",
+                    comment:"A navigation title for the choosing installment terms screen with the `Krungsri First Choice` selected"
+                )
+            case .bbl?:
+                title = NSLocalizedString(
+                    "installment-number-of-terms-choosers.bay.navigation-item.title",
+                    bundle: Bundle.omiseSDKBundle, value: "Bangkok Bank",
+                    comment:"A navigation title for the choosing installment terms screen with the `Bangkok Bank` selected"
+                )
+            case .ktc?:
+                title = NSLocalizedString(
+                    "installment-number-of-terms-choosers.k-bank.navigation-item.title",
+                    bundle: Bundle.omiseSDKBundle, value: "KTC",
+                    comment:"A navigation title for the choosing installment terms screen with the `KTC` selected"
+                )
+            case .kBank?:
+                title = NSLocalizedString(
+                    "installment-number-of-terms-choosers.first-choice.navigation-item.title",
+                    bundle: Bundle.omiseSDKBundle, value: "Kasikorn",
+                    comment:"A navigation title for the choosing installment terms screen with the `Kasikorn` selected"
+                )
+            case .other?, nil:
+                title = NSLocalizedString(
+                    "installment-number-of-terms-choosers.default.navigation-item.title",
+                    bundle: Bundle.omiseSDKBundle, value: "Installments Terms",
+                    comment:"A navigation title for the choosing installment terms screen with the `Installments Terms` selected"
+                )
+            }
+            
+            navigationItem.title = title
         }
     }
+    
     var numberOfTerms: [Int] = [] {
         didSet {
             if isViewLoaded {
