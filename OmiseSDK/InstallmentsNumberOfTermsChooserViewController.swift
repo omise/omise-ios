@@ -21,7 +21,7 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -16,7 +16,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCre
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     @IBAction func submitEContextForm(_ sender: UIButton) {

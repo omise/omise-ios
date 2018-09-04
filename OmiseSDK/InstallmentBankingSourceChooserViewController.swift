@@ -9,6 +9,7 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     override func staticIndexPath(forValue value: PaymentInformation.Installment.Brand) -> IndexPath {

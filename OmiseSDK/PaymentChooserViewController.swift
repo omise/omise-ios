@@ -173,6 +173,8 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         
         coordinator?.delegate = self
         
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
         showingValues = PaymentChooserOption.allCases.filter({
             switch $0 {
             case .creditCard:
