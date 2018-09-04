@@ -269,9 +269,11 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         loadingIndicator.color = #colorLiteral(red: 0.3065422177, green: 0.3197538555, blue: 0.3728331327, alpha: 1)
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
+        view.isUserInteractionEnabled = false
         
         requestCreateSource(payment, completionHandler: { _ in
             cell?.accessoryView = oldAccessoryView
+            self.view.isUserInteractionEnabled = true
         })
     }
     

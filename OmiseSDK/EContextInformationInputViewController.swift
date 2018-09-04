@@ -27,8 +27,14 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCre
         
         let eContextInformation = PaymentInformation.EContext(name: fullname, email: email, phoneNumber: phoneNumber)
         requestingIndicatorView.startAnimating()
+        view.isUserInteractionEnabled = false
+        view.tintAdjustmentMode = .dimmed
+        sender.isEnabled = false
         requestCreateSource(PaymentInformation.eContext(eContextInformation), completionHandler: { _ in
             self.requestingIndicatorView.stopAnimating()
+            self.view.isUserInteractionEnabled = true
+            self.view.tintAdjustmentMode = .automatic
+            sender.isEnabled = true
         })
     }
     

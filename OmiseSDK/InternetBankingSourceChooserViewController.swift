@@ -31,15 +31,17 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
         let bank = element(forUIIndexPath: indexPath)
-   
+        
         let oldAccessoryView = cell?.accessoryView
         let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
         loadingIndicator.color = #colorLiteral(red: 0.3065422177, green: 0.3197538555, blue: 0.3728331327, alpha: 1)
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
-
+        view.isUserInteractionEnabled = false
+        
         requestCreateSource(.internetBanking(bank), completionHandler: { _ in
             cell?.accessoryView = oldAccessoryView
+            self.view.isUserInteractionEnabled = true
         })
     }
 }

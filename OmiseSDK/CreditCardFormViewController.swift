@@ -112,6 +112,8 @@ public class CreditCardFormViewController: UIViewController {
     @IBOutlet var cardBrandIconImageView: UIImageView!
     @IBOutlet var cvvInfoButton: UIButton!
     
+    @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
+    
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String?
     
@@ -449,10 +451,14 @@ public class CreditCardFormViewController: UIViewController {
     }
     
     private func startActivityIndicator() {
+        requestingIndicatorView.startAnimating()
+        confirmButton.isEnabled = false
         view.isUserInteractionEnabled = false
     }
     
     private func stopActivityIndicator() {
+        requestingIndicatorView.stopAnimating()
+        confirmButton.isEnabled = true
         view.isUserInteractionEnabled = true
     }
     

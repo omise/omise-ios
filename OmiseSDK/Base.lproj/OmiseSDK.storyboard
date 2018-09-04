@@ -233,6 +233,10 @@
                                         </constraints>
                                         <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
                                     </view>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="8qh-Fc-Sh9">
+                                        <rect key="frame" x="177.66666666666666" y="363" width="20" height="20"/>
+                                        <color key="color" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="FQr-5a-JA5" secondAttribute="trailing" id="1Hz-Qd-pz0"/>
@@ -241,8 +245,10 @@
                                     <constraint firstItem="FQr-5a-JA5" firstAttribute="leading" secondItem="qhe-bV-kzv" secondAttribute="leading" id="7yR-eE-9tD"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ZPa-NN-y1M" secondAttribute="bottom" constant="20" id="8kj-th-UWb"/>
                                     <constraint firstItem="Y1l-QK-aPc" firstAttribute="leading" secondItem="Par-EA-T3D" secondAttribute="trailing" constant="40" id="BDv-Go-TwL"/>
+                                    <constraint firstItem="8qh-Fc-Sh9" firstAttribute="centerX" secondItem="ZPa-NN-y1M" secondAttribute="centerX" id="DJj-gh-Cmu"/>
                                     <constraint firstItem="3TR-eT-NNR" firstAttribute="trailing" secondItem="Y1l-QK-aPc" secondAttribute="trailing" id="Dom-T6-fhX"/>
                                     <constraint firstItem="uuR-9N-gze" firstAttribute="trailing" secondItem="Par-EA-T3D" secondAttribute="trailing" id="EOU-H8-CjL"/>
+                                    <constraint firstItem="8qh-Fc-Sh9" firstAttribute="centerY" secondItem="ZPa-NN-y1M" secondAttribute="centerY" id="FLL-u1-ZfD"/>
                                     <constraint firstItem="bEE-yU-zna" firstAttribute="leading" secondItem="qhe-bV-kzv" secondAttribute="leadingMargin" id="HEb-QC-Syk"/>
                                     <constraint firstAttribute="leadingMargin" secondItem="CKR-Pl-Ix5" secondAttribute="leading" id="HdQ-3A-mnn"/>
                                     <constraint firstItem="uuR-9N-gze" firstAttribute="top" relation="greaterThanOrEqual" secondItem="AJd-kX-GAq" secondAttribute="bottom" constant="20" id="Ju2-MZ-vIW"/>
@@ -316,6 +322,7 @@
                         <outlet property="hidingProcessingErrorBannerConstraint" destination="21J-1B-Odz" id="KDn-1f-TvY"/>
                         <outlet property="processingErrorBannerView" destination="FQr-5a-JA5" id="Kf6-c2-WXN"/>
                         <outlet property="processingErrorLabel" destination="Cmp-y6-FKF" id="jPa-Ou-DyK"/>
+                        <outlet property="requestingIndicatorView" destination="8qh-Fc-Sh9" id="eiI-zy-9G4"/>
                         <outlet property="secureCodeTextField" destination="Y1l-QK-aPc" id="YHf-Pb-fLh"/>
                         <outletCollection property="formLabels" destination="CKR-Pl-Ix5" collectionClass="NSMutableArray" id="H8K-bu-DYv"/>
                         <outletCollection property="formLabels" destination="bEE-yU-zna" collectionClass="NSMutableArray" id="0pJ-Ls-TlI"/>
