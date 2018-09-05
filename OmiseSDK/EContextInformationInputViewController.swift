@@ -7,6 +7,8 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCre
     var paymentAmount: Int64?
     var paymentCurrency: Currency?
     
+    @IBOutlet var contentView: UIScrollView!
+    
     @IBOutlet var fullNameTextField: OmiseTextField!
     @IBOutlet var emailTextField: OmiseTextField!
     @IBOutlet var phoneNumberTextField: OmiseTextField!
@@ -27,10 +29,18 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCre
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-        
         formFields.forEach({
             $0.inputAccessoryView = formFieldsAccessoryView
         })
+        
+        NotificationCenter.default.addObserver(
+            self, selector:#selector(keyboardWillChangeFrame(_:)),
+            name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self, selector:#selector(keyboardWillHide(_:)),
+            name: NSNotification.Name.UIKeyboardWillHide, object: nil
+        )
     }
     
     @IBAction func submitEContextForm(_ sender: AnyObject) {
@@ -82,6 +92,30 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCre
     
     @objc @IBAction private func doneEditing(_ button: UIBarButtonItem?) {
         view.endEditing(true)
+    }
+
+    @objc func keyboardWillChangeFrame(_ notification: NSNotification) {
+        guard let frameEnd = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect,
+            let frameStart = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? CGRect,
+            frameEnd != frameStart else {
+                return
+        }
+        
+        let intersectedFrame = contentView.convert(frameEnd, from: nil)
+        
+        contentView.contentInset.bottom = intersectedFrame.height
+        let bottomScrollIndicatorInset: CGFloat
+        if #available(iOS 11.0, *) {
+            bottomScrollIndicatorInset = intersectedFrame.height - contentView.safeAreaInsets.bottom
+        } else {
+            bottomScrollIndicatorInset = intersectedFrame.height
+        }
+        contentView.scrollIndicatorInsets.bottom = bottomScrollIndicatorInset
+    }
+    
+    @objc func keyboardWillHide(_ notification: NSNotification) {
+        contentView.contentInset.bottom = 0.0
+        contentView.scrollIndicatorInsets.bottom = 0.0
     }
 }
 
