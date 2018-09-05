@@ -113,7 +113,7 @@ extension Client {
         return { (data: Data?, response: URLResponse?, error: Error?) -> () in
             guard let callback = callback else { return } // nobody around to hear the leaf falls
             
-            let result: RequestResult<T>
+            var result: RequestResult<T>
             defer {
                 if #available(iOS 10.0, *) {
                     switch result {
