@@ -60,7 +60,7 @@
                                         <color key="textColor" red="0.61568627450000002" green="0.62352941179999999" blue="0.64705882349999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Par-EA-T3D" customClass="CardExpiryDateTextField" customModule="OmiseSDK" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Par-EA-T3D" customClass="CardExpiryDateTextField" customModule="OmiseSDK" customModuleProvider="target">
                                         <rect key="frame" x="16" y="264.66666666666669" width="151.66666666666666" height="47"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <nil key="textColor"/>
@@ -84,7 +84,7 @@
                                             <action selector="validateTextFieldDataOf:" destination="ALK-ZP-CXg" eventType="editingDidEnd" id="5fL-3c-xl0"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y1l-QK-aPc" customClass="CardCVVTextField" customModule="OmiseSDK" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y1l-QK-aPc" customClass="CardCVVTextField" customModule="OmiseSDK" customModuleProvider="target">
                                         <rect key="frame" x="207.66666666666663" y="264.66666666666669" width="151.33333333333337" height="47"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <nil key="textColor"/>
@@ -108,7 +108,7 @@
                                             <action selector="validateTextFieldDataOf:" destination="ALK-ZP-CXg" eventType="editingDidEnd" id="17j-R2-Pw3"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AJd-kX-GAq" customClass="CardNameTextField" customModule="OmiseSDK" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AJd-kX-GAq" customClass="CardNameTextField" customModule="OmiseSDK" customModuleProvider="target">
                                         <rect key="frame" x="16" y="154.33333333333334" width="343" height="47"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <nil key="textColor"/>
@@ -132,7 +132,7 @@
                                             <action selector="validateTextFieldDataOf:" destination="ALK-ZP-CXg" eventType="editingDidEnd" id="Qhj-Qx-gAl"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="999" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PBr-uW-pM8" customClass="CardNumberTextField" customModule="OmiseSDK" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="999" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PBr-uW-pM8" customClass="CardNumberTextField" customModule="OmiseSDK" customModuleProvider="target">
                                         <rect key="frame" x="16" y="44" width="343" height="47"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -159,10 +159,10 @@
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZPa-NN-y1M" customClass="MainActionButton" customModule="OmiseSDK" customModuleProvider="target">
                                         <rect key="frame" x="16" y="351" width="343" height="44"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="p5t-Hl-v8s"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="p5t-Hl-v8s"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Pay 1,500 THB">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <state key="normal" title="Pay">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -259,7 +259,7 @@
                                     <constraint firstItem="uuR-9N-gze" firstAttribute="top" secondItem="134-RW-VCo" secondAttribute="bottom" constant="20" id="M7y-Up-i2F"/>
                                     <constraint firstItem="uuR-9N-gze" firstAttribute="leading" secondItem="qhe-bV-kzv" secondAttribute="leadingMargin" id="NXg-06-pPK"/>
                                     <constraint firstItem="ZPa-NN-y1M" firstAttribute="top" secondItem="ubw-ZT-CVl" secondAttribute="bottom" constant="20" id="OD9-Xw-mSO"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="ZPa-NN-y1M" secondAttribute="trailing" id="Oj7-W7-Lrr"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="ZPa-NN-y1M" secondAttribute="trailing" priority="999" id="Oj7-W7-Lrr"/>
                                     <constraint firstItem="134-RW-VCo" firstAttribute="trailing" secondItem="AJd-kX-GAq" secondAttribute="trailing" id="QXb-2d-54T"/>
                                     <constraint firstItem="PBr-uW-pM8" firstAttribute="top" secondItem="CKR-Pl-Ix5" secondAttribute="bottom" constant="6" id="RoZ-HA-I9d"/>
                                     <constraint firstItem="7Ox-gC-WRb" firstAttribute="top" secondItem="PBr-uW-pM8" secondAttribute="bottom" constant="6" id="S80-Y4-6wJ"/>
@@ -285,7 +285,7 @@
                                     <constraint firstItem="bEE-yU-zna" firstAttribute="trailing" secondItem="qhe-bV-kzv" secondAttribute="trailingMargin" id="rbU-6U-7HW"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="Y1l-QK-aPc" secondAttribute="trailing" id="toa-Sn-6LQ"/>
                                     <constraint firstAttribute="bottom" secondItem="ZPa-NN-y1M" secondAttribute="bottom" priority="240" constant="20" id="vDK-od-k37"/>
-                                    <constraint firstItem="ZPa-NN-y1M" firstAttribute="leading" secondItem="qhe-bV-kzv" secondAttribute="leadingMargin" id="vRD-aD-ebZ"/>
+                                    <constraint firstItem="ZPa-NN-y1M" firstAttribute="leading" secondItem="qhe-bV-kzv" secondAttribute="leadingMargin" priority="999" id="vRD-aD-ebZ"/>
                                     <constraint firstItem="Y1l-QK-aPc" firstAttribute="top" secondItem="vMc-kJ-Ncs" secondAttribute="bottom" constant="6" id="wT0-4C-xUw"/>
                                     <constraint firstItem="vMc-kJ-Ncs" firstAttribute="leading" secondItem="Y1l-QK-aPc" secondAttribute="leading" id="xKJ-AC-xWO"/>
                                     <constraint firstAttribute="leadingMargin" secondItem="PBr-uW-pM8" secondAttribute="leading" id="yEv-rk-Dyv"/>
@@ -656,7 +656,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="crM-Be-ivc">
-                            <rect key="frame" x="0.0" y="256" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="256" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -799,7 +799,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="cLe-gI-PaB">
-                            <rect key="frame" x="0.0" y="320" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="320" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -938,7 +938,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="a65-Dy-ml5">
-                            <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="92" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -976,7 +976,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ufg-fP-hxE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4447" y="375"/>
+            <point key="canvasLocation" x="4446" y="375"/>
         </scene>
         <!--Convenience Store-->
         <scene sceneID="etS-JC-UOV">
@@ -1089,9 +1089,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mE3-3u-rvg" customClass="MainActionButton" customModule="OmiseSDK" customModuleProvider="target">
                                         <rect key="frame" x="25" y="326" width="325" height="44"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="WOU-ZA-4eO"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="WOU-ZA-4eO"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <state key="normal" title="Next">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -1202,6 +1202,9 @@
                         <outletCollection property="formFields" destination="OTm-3S-Jk9" collectionClass="NSMutableArray" id="5yI-eF-WtB"/>
                         <outletCollection property="formFields" destination="CD2-gj-4i6" collectionClass="NSMutableArray" id="4Wy-go-p4r"/>
                         <outletCollection property="formFields" destination="y98-SD-aEV" collectionClass="NSMutableArray" id="plb-lH-a5Y"/>
+                        <outletCollection property="formLabels" destination="uG7-np-PQF" collectionClass="NSMutableArray" id="lUD-fG-uMF"/>
+                        <outletCollection property="formLabels" destination="0JH-Mm-x0b" collectionClass="NSMutableArray" id="aYj-8e-XZf"/>
+                        <outletCollection property="formLabels" destination="aL6-Ey-d8I" collectionClass="NSMutableArray" id="2Z4-U3-Lqg"/>
                     </connections>
                 </viewController>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="T8V-pC-vbh">

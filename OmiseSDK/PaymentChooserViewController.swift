@@ -242,11 +242,9 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
                     break
                 }
             }
-            
         default:
             break
         }
-        
     }
     
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -259,7 +257,6 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
             payment = .alipay
         case .tescoLotus:
             payment = .billPayment(.tescoLotus)
-            
         default:
             return
         }

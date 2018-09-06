@@ -15,6 +15,8 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCre
     @IBOutlet var submitButton: MainActionButton!
     @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
     
+    
+    @IBOutlet var formLabels: [UILabel]!
     @IBOutlet var formFields: [OmiseTextField]!
     @IBOutlet var formFieldsAccessoryView: UIToolbar!
     @IBOutlet var gotoPreviousFieldBarButtonItem: UIBarButtonItem!
@@ -32,6 +34,16 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCre
         formFields.forEach({
             $0.inputAccessoryView = formFieldsAccessoryView
         })
+        
+        if #available(iOS 10.0, *) {
+            formFields.forEach({
+                $0.adjustsFontForContentSizeCategory = true
+            })
+            formLabels.forEach({
+                $0.adjustsFontForContentSizeCategory = true
+            })
+            submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
+        }
         
         NotificationCenter.default.addObserver(
             self, selector:#selector(keyboardWillChangeFrame(_:)),

@@ -68,7 +68,6 @@ public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
     @objc func creditCardForm(_ controller: CreditCardFormViewController, didFailWithError error: NSError)
 }
 
-
 @available(*, deprecated, renamed: "CreditCardFormViewController")
 public typealias CreditCardFormController = CreditCardFormViewController
 
@@ -185,6 +184,13 @@ public class CreditCardFormViewController: UIViewController {
         
         if #available(iOS 10.0, *) {
             configureAccessibility()
+            formFields.forEach({
+                $0.adjustsFontForContentSizeCategory = true
+            })
+            formLabels.forEach({
+                $0.adjustsFontForContentSizeCategory = true
+            })
+            confirmButton.titleLabel?.adjustsFontForContentSizeCategory = true
         }
         
         cardNumberTextField.rightView = cardBrandIconImageView
