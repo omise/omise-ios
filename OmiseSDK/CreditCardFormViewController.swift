@@ -84,34 +84,34 @@ public class CreditCardFormViewController: UIViewController, PaymentSourceChoose
     @IBOutlet var formLabels: [UILabel]!
     @IBOutlet var errorLabels: [UILabel]!
   
-    @IBOutlet var contentView: UIScrollView!
+    @IBOutlet public var contentView: UIScrollView!
     
-    @IBOutlet var cardNumberTextField: CardNumberTextField!
-    @IBOutlet var cardNameTextField: CardNameTextField!
-    @IBOutlet var expiryDateTextField: CardExpiryDateTextField!
-    @IBOutlet var secureCodeTextField: CardCVVTextField!
+    @IBOutlet public var cardNumberTextField: CardNumberTextField!
+    @IBOutlet public var cardNameTextField: CardNameTextField!
+    @IBOutlet public var expiryDateTextField: CardExpiryDateTextField!
+    @IBOutlet public var secureCodeTextField: CardCVVTextField!
     
-    @IBOutlet weak var confirmButton: MainActionButton!
+    @IBOutlet public weak var confirmButton: MainActionButton!
     
-    @IBOutlet var formFieldsAccessoryView: UIToolbar!
-    @IBOutlet var gotoPreviousFieldBarButtonItem: UIBarButtonItem!
-    @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!
-    @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
+    @IBOutlet public var formFieldsAccessoryView: UIToolbar!
+    @IBOutlet public var gotoPreviousFieldBarButtonItem: UIBarButtonItem!
+    @IBOutlet public var gotoNextFieldBarButtonItem: UIBarButtonItem!
+    @IBOutlet public var doneEditingBarButtonItem: UIBarButtonItem!
     
     private var currentEditingTextField: OmiseTextField?
     
-    @IBOutlet weak var creditCardNumberErrorLabel: UILabel!
-    @IBOutlet weak var cardHolderNameErrorLabel: UILabel!
-    @IBOutlet weak var cardExpiryDateErrorLabel: UILabel!
-    @IBOutlet weak var cardSecurityCodeErrorLabel: UILabel!
+    @IBOutlet public weak var creditCardNumberErrorLabel: UILabel!
+    @IBOutlet public weak var cardHolderNameErrorLabel: UILabel!
+    @IBOutlet public weak var cardExpiryDateErrorLabel: UILabel!
+    @IBOutlet public weak var cardSecurityCodeErrorLabel: UILabel!
     
-    @IBOutlet var processingErrorBannerView: UIView!
-    @IBOutlet var processingErrorLabel: UILabel!
+    @IBOutlet public var processingErrorBannerView: UIView!
+    @IBOutlet public var processingErrorLabel: UILabel!
     @IBOutlet var hidingProcessingErrorBannerConstraint: NSLayoutConstraint!
-    @IBOutlet var cardBrandIconImageView: UIImageView!
-    @IBOutlet var cvvInfoButton: UIButton!
+    @IBOutlet public var cardBrandIconImageView: UIImageView!
+    @IBOutlet public var cvvInfoButton: UIButton!
     
-    @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
+    @IBOutlet public var requestingIndicatorView: UIActivityIndicatorView!
     
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String?
@@ -397,22 +397,22 @@ public class CreditCardFormViewController: UIViewController, PaymentSourceChoose
             confirmButton.accessibilityTraits |= UIAccessibilityTraitNotEnabled
         }
         
-        let cardBrandIcon: UIImage?
+        let cardBrandIconName: String?
         switch cardNumberTextField.cardBrand {
         case .visa?:
-            cardBrandIcon = UIImage(named: "Visa", in: Bundle.omiseSDKBundle, compatibleWith: nil)
+            cardBrandIconName = "Visa"
         case .masterCard?:
-            cardBrandIcon = UIImage(named: "Mastercard", in: Bundle.omiseSDKBundle, compatibleWith: nil)
+            cardBrandIconName = "Mastercard"
         case .jcb?:
-            cardBrandIcon = UIImage(named: "JCB", in: Bundle.omiseSDKBundle, compatibleWith: nil)
+            cardBrandIconName = "JCB"
         case .amex?:
-            cardBrandIcon = UIImage(named: "AMEX", in: Bundle.omiseSDKBundle, compatibleWith: nil)
+            cardBrandIconName = "AMEX"
         case .diners?:
-            cardBrandIcon = UIImage(named: "Diners", in: Bundle.omiseSDKBundle, compatibleWith: nil)
+            cardBrandIconName = "Diners"
         default:
-            cardBrandIcon = nil
+            cardBrandIconName = nil
         }
-        cardBrandIconImageView.image = cardBrandIcon
+        cardBrandIconImageView.image = cardBrandIconName.flatMap({ UIImage(named: $0, in: Bundle.omiseSDKBundle, compatibleWith: nil) })
         cardNumberTextField.rightViewMode = cardBrandIconImageView.image != nil ? .always : .never
     }
     
