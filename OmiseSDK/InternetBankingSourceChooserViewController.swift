@@ -9,6 +9,8 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
     
     @IBOutlet var internetBankingNameLabels: [UILabel]!
     @IBOutlet var redirectIconImageView: [UIImageView]!
+    @IBOutlet var errorBannerView: UIView!
+    @IBOutlet var errorMessageLabel: UILabel!
     
     @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
         didSet {

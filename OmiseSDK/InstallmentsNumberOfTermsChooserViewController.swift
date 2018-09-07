@@ -6,6 +6,9 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
     var paymentAmount: Int64?
     var paymentCurrency: Currency?
     
+    @IBOutlet var errorBannerView: UIView!
+    @IBOutlet var errorMessageLabel: UILabel!
+    
     @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()

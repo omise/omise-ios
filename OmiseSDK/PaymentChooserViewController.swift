@@ -173,6 +173,9 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     
     public weak var delegate: PaymentChooserViewControllerDelegate?
     
+    @IBOutlet var errorBannerView: UIView!
+    @IBOutlet var errorMessageLabel: UILabel!
+    
     @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
@@ -287,6 +290,8 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     }
     
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        setShowsErrorBanner(false)
+        
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
         let payment: PaymentInformation
@@ -353,6 +358,32 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
             $0.tintColor = currentSecondaryColor
         })
     }
+    
+    private func setShowsErrorBanner(_ showsErrorBanner: Bool, animated: Bool = true) {
+        let animationBlock = {
+            self.errorBannerView.alpha = showsErrorBanner ? 1.0 : 0.0
+            
+            let height: CGFloat
+            if showsErrorBanner {
+                let preferredHeight = self.errorBannerView.systemLayoutSizeFitting(
+                    CGSize(width: self.view.bounds.width, height: 48.0),
+                    withHorizontalFittingPriority: UILayoutPriority.required, verticalFittingPriority:
+                    UILayoutPriority.fittingSizeLevel
+                    ).height
+                height = max(preferredHeight, 48.0)
+            } else {
+                height = 0.0
+            }
+            self.errorBannerView.frame.size.height = height
+            self.tableView.tableHeaderView = self.errorBannerView
+        }
+        
+        if animated {
+            UIView.animate(withDuration: TimeInterval(UINavigationControllerHideShowBarDuration), delay: 0.0, options: [.layoutSubviews], animations: animationBlock)
+        } else {
+            animationBlock()
+        }
+    }
 }
 
 extension PaymentChooserViewController: PaymentCreatorTrampolineDelegate {
@@ -362,6 +393,7 @@ extension PaymentChooserViewController: PaymentCreatorTrampolineDelegate {
     
     func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, isRequestedToHandleError error: Error) {
         delegate?.paymentChooserViewController(self, didFailWithError: error)
+        setShowsErrorBanner(true)
     }
     
     func paymentCreatorTrampolineIsRequestedToCancel(_ trampoline: PaymentCreatorTrampoline) {

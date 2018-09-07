@@ -24,7 +24,11 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCre
     @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
     
     private var currentEditingTextField: OmiseTextField?
-    
+  
+    @IBOutlet var errorBannerView: UIView!
+    @IBOutlet var errorMessageLabel: UILabel!
+    @IBOutlet var hidingBannerConstraint: NSLayoutConstraint!
+  
     @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
