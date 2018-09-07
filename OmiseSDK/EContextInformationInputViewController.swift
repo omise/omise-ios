@@ -1,6 +1,6 @@
 import UIKit
 
-class EContextInformationInputViewController: UIViewController, PaymentSourceCreator {
+class EContextInformationInputViewController: UIViewController, PaymentSourceCreator, PaymentSourceChooserUI {
     
     var coordinator: PaymentCreatorTrampoline?
     var client: Client?
@@ -25,10 +25,23 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCre
     
     private var currentEditingTextField: OmiseTextField?
     
+    @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
+        didSet {
+            applyPrimaryColor()
+        }
+    }
+    
+    @IBInspectable @objc public var preferredSecondaryColor: UIColor? {
+        didSet {
+            applySecondaryColor()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        applyPrimaryColor()
+        applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         formFields.forEach({
@@ -128,6 +141,29 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCre
     @objc func keyboardWillHide(_ notification: NSNotification) {
         contentView.contentInset.bottom = 0.0
         contentView.scrollIndicatorInsets.bottom = 0.0
+    }
+    
+    private func applyPrimaryColor() {
+        guard isViewLoaded else {
+            return
+        }
+        
+        formFields.forEach({
+            $0.textColor = currentPrimaryColor
+        })
+    }
+    
+    private func applySecondaryColor() {
+        guard isViewLoaded else {
+            return
+        }
+        
+        formLabels.forEach({
+            $0.textColor = currentSecondaryColor
+        })
+        formFields.forEach({
+            $0.borderColor = currentSecondaryColor
+        })
     }
 }
 

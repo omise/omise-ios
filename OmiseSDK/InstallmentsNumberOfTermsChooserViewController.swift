@@ -1,10 +1,22 @@
 import UIKit
 
-class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentSourceCreator {
+class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentSourceCreator, PaymentSourceChooserUI {
     var coordinator: PaymentCreatorTrampoline?
     var client: Client?
     var paymentAmount: Int64?
     var paymentCurrency: Currency?
+    
+    @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
+        didSet {
+            applyPrimaryColor()
+        }
+    }
+    
+    @IBInspectable @objc public var preferredSecondaryColor: UIColor? {
+        didSet {
+            applySecondaryColor()
+        }
+    }
     
     var installmentBrand: PaymentInformation.Installment.Brand? {
         didSet {
@@ -64,6 +76,8 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        applyPrimaryColor()
+        applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
@@ -79,6 +93,8 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
             comment: "Number of terms option text displayed as a title of the number of terms option cell in number of terms chooser scene"
         )
         cell.textLabel?.text = String.localizedStringWithFormat(numberOfTermsTitleFormat, numberOfTerms[indexPath.row])
+        cell.textLabel?.textColor = currentPrimaryColor
+        cell.accessoryView?.tintColor = currentSecondaryColor
         return cell
     }
     
@@ -91,7 +107,7 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
         
         let oldAccessoryView = cell?.accessoryView
         let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
-        loadingIndicator.color = #colorLiteral(red: 0.3065422177, green: 0.3197538555, blue: 0.3728331327, alpha: 1)
+        loadingIndicator.color = currentSecondaryColor
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
@@ -104,5 +120,9 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
                 self.view.isUserInteractionEnabled = true
         })
     }
+    
+    private func applyPrimaryColor() {}
+    
+    private func applySecondaryColor() {}
 }
 

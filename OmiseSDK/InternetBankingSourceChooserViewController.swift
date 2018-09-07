@@ -1,14 +1,31 @@
 import UIKit
 
 @objc(OMSInternetBankingSourceChooserViewController)
-class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>, PaymentSourceCreator {
+class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>, PaymentSourceCreator, PaymentSourceChooserUI {
     var coordinator: PaymentCreatorTrampoline?
     var client: Client?
     var paymentAmount: Int64?
     var paymentCurrency: Currency?
     
+    @IBOutlet var internetBankingNameLabels: [UILabel]!
+    @IBOutlet var redirectIconImageView: [UIImageView]!
+    
+    @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
+        didSet {
+            applyPrimaryColor()
+        }
+    }
+    
+    @IBInspectable @objc public var preferredSecondaryColor: UIColor? {
+        didSet {
+            applySecondaryColor()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        applyPrimaryColor()
+        applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
@@ -34,7 +51,7 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         
         let oldAccessoryView = cell?.accessoryView
         let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
-        loadingIndicator.color = #colorLiteral(red: 0.3065422177, green: 0.3197538555, blue: 0.3728331327, alpha: 1)
+        loadingIndicator.color = currentSecondaryColor
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
@@ -42,6 +59,26 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         requestCreateSource(.internetBanking(bank), completionHandler: { _ in
             cell?.accessoryView = oldAccessoryView
             self.view.isUserInteractionEnabled = true
+        })
+    }
+    
+    private func applyPrimaryColor() {
+        guard isViewLoaded else {
+            return
+        }
+        
+        internetBankingNameLabels.forEach({
+            $0.textColor = currentPrimaryColor
+        })
+    }
+    
+    private func applySecondaryColor() {
+        guard isViewLoaded else {
+            return
+        }
+        
+        redirectIconImageView.forEach({
+            $0.tintColor = currentSecondaryColor
         })
     }
 }

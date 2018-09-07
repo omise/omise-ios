@@ -75,7 +75,7 @@ public typealias CreditCardFormController = CreditCardFormViewController
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.
 @objc(OMSCreditCardFormViewController)
-public class CreditCardFormViewController: UIViewController {
+public class CreditCardFormViewController: UIViewController, PaymentSourceChooserUI {
     private var hasErrorMessage = false
     
     @objc public static let defaultErrorMessageTextColor = UIColor(red: 1.000, green: 0.255, blue: 0.208, alpha: 1.0)
@@ -129,6 +129,18 @@ public class CreditCardFormViewController: UIViewController {
         })
     }
     
+    @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
+        didSet {
+            applyPrimaryColor()
+        }
+    }
+    
+    @IBInspectable @objc public var preferredSecondaryColor: UIColor? {
+        didSet {
+            applySecondaryColor()
+        }
+    }
+    
     @IBInspectable @objc
     public var errorMessageTextColor: UIColor! = CreditCardFormViewController.defaultErrorMessageTextColor {
         didSet {
@@ -169,6 +181,9 @@ public class CreditCardFormViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        
+        applyPrimaryColor()
+        applySecondaryColor()
         
         formFields.forEach({
             $0.inputAccessoryView = formFieldsAccessoryView
@@ -466,6 +481,29 @@ public class CreditCardFormViewController: UIViewController {
         requestingIndicatorView.stopAnimating()
         confirmButton.isEnabled = true
         view.isUserInteractionEnabled = true
+    }
+    
+    private func applyPrimaryColor() {
+        guard isViewLoaded else {
+            return
+        }
+        
+        formFields.forEach({
+            $0.textColor = currentPrimaryColor
+        })
+    }
+    
+    private func applySecondaryColor() {
+        guard isViewLoaded else {
+            return
+        }
+        
+        formLabels.forEach({
+            $0.textColor = currentSecondaryColor
+        })
+        formFields.forEach({
+            $0.borderColor = currentSecondaryColor
+        })
     }
     
     fileprivate func associatedErrorLabelOf(_ textField: OmiseTextField) -> UILabel? {

@@ -1,14 +1,30 @@
 import UIKit
 
 @objc(OMSInstallmentBankingSourceChooserViewController)
-class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>, PaymentSourceCreator {
+class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>, PaymentSourceCreator, PaymentSourceChooserUI {
     var coordinator: PaymentCreatorTrampoline?
     var client: Client?
     var paymentAmount: Int64?
     var paymentCurrency: Currency?
     
+    @IBOutlet var bankNameLabels: [UILabel]!
+    
+    @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
+        didSet {
+            applyPrimaryColor()
+        }
+    }
+    
+    @IBInspectable @objc public var preferredSecondaryColor: UIColor? {
+        didSet {
+            applySecondaryColor()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        applyPrimaryColor()
+        applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
@@ -49,9 +65,23 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
             installmentTermsChooserViewController.client = self.client
             installmentTermsChooserViewController.paymentAmount = self.paymentAmount
             installmentTermsChooserViewController.paymentCurrency = self.paymentCurrency
+            installmentTermsChooserViewController.preferredPrimaryColor = self.preferredPrimaryColor
+            installmentTermsChooserViewController.preferredSecondaryColor = self.preferredSecondaryColor
         }
     }
     
+    private func applyPrimaryColor() {
+        guard isViewLoaded else {
+            return
+        }
+        
+        bankNameLabels.forEach({
+            $0.textColor = currentPrimaryColor
+        })
+    }
+    
+    private func applySecondaryColor() {
+    }
 }
 
 #if swift(>=4.2)

@@ -24,13 +24,34 @@ class PaymentCreatorTrampoline {
     
 }
 
-protocol PaymentSourceCreator {
+protocol PaymentSourceCreator: AnyObject {
     var coordinator: PaymentCreatorTrampoline? { get }
     
     var client: Client? { get set }
     var paymentAmount: Int64? { get set }
     var paymentCurrency: Currency? { get set }
 }
+
+
+let defaultPaymentChooserUIPrimaryColor = #colorLiteral(red:0.24, green:0.25, blue:0.3, alpha:1)
+let defaultPaymentChooserUISecondaryColor = #colorLiteral(red:0.89, green:0.91, blue:0.93, alpha:1)
+
+
+protocol PaymentSourceChooserUI: AnyObject {
+    var preferredPrimaryColor: UIColor? { get set }
+    var preferredSecondaryColor: UIColor? { get set }
+}
+
+extension PaymentSourceChooserUI {
+    var currentPrimaryColor: UIColor {
+        return preferredPrimaryColor ?? defaultPaymentChooserUIPrimaryColor
+    }
+    
+    var currentSecondaryColor: UIColor {
+        return preferredSecondaryColor ?? defaultPaymentChooserUISecondaryColor
+    }
+}
+
 
 extension PaymentSourceCreator where Self: UIViewController {
     func validateRequiredProperties() -> Bool {
@@ -125,7 +146,7 @@ public enum Payment {
 
 
 @objc(OMSPaymentChooserViewController)
-public class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceCreator {
+public class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceCreator, PaymentSourceChooserUI {
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String? {
         didSet {
@@ -145,9 +166,24 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     public var paymentAmount: Int64?
     public var paymentCurrency: Currency?
     
+    @IBOutlet var paymentMethodNameLables: [UILabel]!
+    @IBOutlet var redirectMethodIconImageView: [UIImageView]!
+    
     let coordinator: PaymentCreatorTrampoline? = PaymentCreatorTrampoline()
     
     public weak var delegate: PaymentChooserViewControllerDelegate?
+    
+    @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
+        didSet {
+            applyPrimaryColor()
+        }
+    }
+    
+    @IBInspectable @objc public var preferredSecondaryColor: UIColor? {
+        didSet {
+            applySecondaryColor()
+        }
+    }
     
     @objc public var showsCreditCardPayment: Bool = true
     @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentChooserViewController.defaultAvailablePaymentMethods + [OMSSourceTypeValue.eContext] {
@@ -176,6 +212,8 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         
         coordinator?.delegate = self
         
+        applyPrimaryColor()
+        applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         showingValues = PaymentChooserOption.allCases.filter({
@@ -204,18 +242,11 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         case ("GoToInternetBankingChooserSegue"?, let controller as InternetBankingSourceChooserViewController):
             controller.showingValues = allowedPaymentMethods.compactMap({ $0.internetBankingSource })
             controller.coordinator = self.coordinator
-            controller.client = self.client
-            controller.paymentAmount = self.paymentAmount
-            controller.paymentCurrency = self.paymentCurrency
         case ("GoToInstallmentBrandChooserSegue"?, let controller as InstallmentBankingSourceChooserViewController):
             controller.showingValues = allowedPaymentMethods.compactMap({ $0.installmentBrand })
             controller.coordinator = self.coordinator
-            controller.client = self.client
-            controller.paymentAmount = self.paymentAmount
-            controller.paymentCurrency = self.paymentCurrency
         case (_, let controller as EContextInformationInputViewController):
             controller.coordinator = self.coordinator
-            controller.client = self.client
             controller.paymentAmount = 5000
             controller.paymentCurrency = .jpy
             if let element = (sender as? UITableViewCell).flatMap(tableView.indexPath(for:)).map(element(forUIIndexPath:)) {
@@ -238,12 +269,20 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
                         bundle: Bundle.omiseSDKBundle, value: "Pay-easy",
                         comment: "A navigaiton title for the EContext screen when the `Pay-easy` is selected"
                     )
-                default:
-                    break
+                default: break
                 }
             }
-        default:
-            break
+        default: break
+        }
+        
+        if let paymentSourceCreator = segue.destination as? PaymentSourceCreator {
+            paymentSourceCreator.client = self.client
+            paymentSourceCreator.paymentAmount = self.paymentAmount
+            paymentSourceCreator.paymentCurrency = self.paymentCurrency
+        }
+        if let paymentShourceChooserUI = segue.destination as? PaymentSourceChooserUI {
+            paymentShourceChooserUI.preferredPrimaryColor = self.preferredPrimaryColor
+            paymentShourceChooserUI.preferredSecondaryColor = self.preferredSecondaryColor
         }
     }
     
@@ -263,7 +302,7 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         
         let oldAccessoryView = cell?.accessoryView
         let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
-        loadingIndicator.color = #colorLiteral(red: 0.3065422177, green: 0.3197538555, blue: 0.3728331327, alpha: 1)
+        loadingIndicator.color = currentSecondaryColor
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
@@ -293,6 +332,26 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         case .alipay:
             return IndexPath(row: 7, section: 0)
         }
+    }
+    
+    private func applyPrimaryColor() {
+        guard isViewLoaded else {
+            return
+        }
+        
+        paymentMethodNameLables.forEach({
+            $0.textColor = currentPrimaryColor
+        })
+    }
+    
+    private func applySecondaryColor() {
+        guard isViewLoaded else {
+            return
+        }
+        
+        redirectMethodIconImageView.forEach({
+            $0.tintColor = currentSecondaryColor
+        })
     }
 }
 

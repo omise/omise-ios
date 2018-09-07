@@ -78,7 +78,7 @@ public enum OmiseTextFieldValidationError: Error {
     }
     
     private func updateTextColor() {
-        super.textColor = isValid || isFirstResponder ? normalTextColor ?? .black : errorTextColor
+        super.textColor = isValid || isFirstResponder ? (normalTextColor ?? .black) : (errorTextColor ?? normalTextColor ?? .black)
     }
     
     /// Boolean indicating wether current input is valid or not.
