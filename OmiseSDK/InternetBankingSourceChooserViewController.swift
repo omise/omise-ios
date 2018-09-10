@@ -1,7 +1,7 @@
 import UIKit
 
 @objc(OMSInternetBankingSourceChooserViewController)
-class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>, PaymentSourceCreator, PaymentSourceChooserUI {
+class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>, PaymentSourceCreator, PaymentCreatorUI {
     var coordinator: PaymentCreatorTrampoline?
     var client: Client?
     var paymentAmount: Int64?
@@ -62,6 +62,14 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
             cell?.accessoryView = oldAccessoryView
             self.view.isUserInteractionEnabled = true
         })
+    }
+    
+    func displayErrorMessage(_ errorMessage: String, animated: Bool) {
+        
+    }
+    
+    func dismissErrorBanner(animated: Bool) {
+        
     }
     
     private func applyPrimaryColor() {

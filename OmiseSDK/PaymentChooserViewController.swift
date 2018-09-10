@@ -2,20 +2,20 @@ import UIKit
 import os
 
 
-protocol PaymentCreatorTrampolineDelegate: AnyObject {
+internal protocol PaymentCreatorTrampolineDelegate: AnyObject {
     func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, isRequestedToHandleCreatedSource source: Source)
-    func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, isRequestedToHandleError error: Error)
+    func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, paymentCreatorController: UIViewController & PaymentCreatorUI, isRequestedToHandleError error: Error)
     func paymentCreatorTrampolineIsRequestedToCancel(_ trampoline: PaymentCreatorTrampoline)
 }
 
-class PaymentCreatorTrampoline {
+internal class PaymentCreatorTrampoline {
     weak var delegate: PaymentCreatorTrampolineDelegate?
     func handleCreatedSource(_ source: Source) {
         delegate?.paymentCreatorTrampoline(self, isRequestedToHandleCreatedSource: source)
     }
     
-    func handleFailedError(_ error: Error) {
-        delegate?.paymentCreatorTrampoline(self, isRequestedToHandleError: error)
+    func handleFailedError(_ error: Error, sender: UIViewController & PaymentCreatorUI) {
+        delegate?.paymentCreatorTrampoline(self, paymentCreatorController: sender, isRequestedToHandleError: error)
     }
     
     func requestToCancel() {
@@ -24,7 +24,7 @@ class PaymentCreatorTrampoline {
     
 }
 
-protocol PaymentSourceCreator: AnyObject {
+internal protocol PaymentSourceCreator: AnyObject {
     var coordinator: PaymentCreatorTrampoline? { get }
     
     var client: Client? { get set }
@@ -37,12 +37,17 @@ let defaultPaymentChooserUIPrimaryColor = #colorLiteral(red:0.24, green:0.25, bl
 let defaultPaymentChooserUISecondaryColor = #colorLiteral(red:0.89, green:0.91, blue:0.93, alpha:1)
 
 
-protocol PaymentSourceChooserUI: AnyObject {
+public protocol PaymentChooserUI: AnyObject {
     var preferredPrimaryColor: UIColor? { get set }
     var preferredSecondaryColor: UIColor? { get set }
 }
 
-extension PaymentSourceChooserUI {
+public protocol PaymentCreatorUI: PaymentChooserUI {
+    func displayErrorMessage(_ errorMessage: String, animated: Bool)
+    func dismissErrorBanner(animated: Bool)
+}
+
+extension PaymentChooserUI {
     var currentPrimaryColor: UIColor {
         return preferredPrimaryColor ?? defaultPaymentChooserUIPrimaryColor
     }
@@ -53,7 +58,7 @@ extension PaymentSourceChooserUI {
 }
 
 
-extension PaymentSourceCreator where Self: UIViewController {
+extension PaymentSourceCreator where Self: UIViewController & PaymentCreatorUI {
     func validateRequiredProperties() -> Bool {
         let waringMessageTitle: String
         let waringMessageMessage: String
@@ -69,7 +74,7 @@ extension PaymentSourceCreator where Self: UIViewController {
                 os_log("Missing payment information - %{private}d %{private}@", log: uiLogObject, type: .error, self.paymentAmount ?? 0, self.paymentCurrency?.code ?? "-")
             }
             waringMessageTitle = "Missing payment information."
-            waringMessageMessage = "Please set both of the payment information (amount and currency) before request source/"
+            waringMessageMessage = "Please set both of the payment information (amount and currency) before request source"
         } else {
             return true
         }
@@ -99,7 +104,7 @@ extension PaymentSourceCreator where Self: UIViewController {
             case .success(let source):
                 self.coordinator?.handleCreatedSource(source)
             case .fail(let error):
-                self.coordinator?.handleFailedError(error)
+                self.coordinator?.handleFailedError(error, sender: self)
             }
         }
     }
@@ -134,6 +139,7 @@ public protocol PaymentChooserViewControllerDelegate: AnyObject {
     func paymentChooserViewController(_ paymentChooserViewController: PaymentChooserViewController,
                                       didCreatePayment payment: Payment)
     func paymentChooserViewController(_ paymentChooserViewController: PaymentChooserViewController,
+                                      paymentCreatorController: UIViewController & PaymentCreatorUI,
                                       didFailWithError error: Error)
     func paymentChooserViewControllerDidCancel(_ paymentChooserViewController: PaymentChooserViewController)
 }
@@ -146,7 +152,7 @@ public enum Payment {
 
 
 @objc(OMSPaymentChooserViewController)
-public class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceCreator, PaymentSourceChooserUI {
+public class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceCreator, PaymentCreatorUI {
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String? {
         didSet {
@@ -175,6 +181,9 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     
     @IBOutlet var errorBannerView: UIView!
     @IBOutlet var errorMessageLabel: UILabel!
+    
+    /// A boolean flag to enables/disables automatic error handling. Defaults to `true`.
+    @objc public var handleErrors = true
     
     @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
         didSet {
@@ -283,7 +292,7 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
             paymentSourceCreator.paymentAmount = self.paymentAmount
             paymentSourceCreator.paymentCurrency = self.paymentCurrency
         }
-        if let paymentShourceChooserUI = segue.destination as? PaymentSourceChooserUI {
+        if let paymentShourceChooserUI = segue.destination as? PaymentChooserUI {
             paymentShourceChooserUI.preferredPrimaryColor = self.preferredPrimaryColor
             paymentShourceChooserUI.preferredSecondaryColor = self.preferredSecondaryColor
         }
@@ -339,6 +348,14 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         }
     }
     
+    public func displayErrorMessage(_ errorMessage: String, animated: Bool) {
+        
+    }
+    
+    public func dismissErrorBanner(animated: Bool) {
+        
+    }
+    
     private func applyPrimaryColor() {
         guard isViewLoaded else {
             return
@@ -391,8 +408,8 @@ extension PaymentChooserViewController: PaymentCreatorTrampolineDelegate {
         delegate?.paymentChooserViewController(self, didCreatePayment: Payment.source(source))
     }
     
-    func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, isRequestedToHandleError error: Error) {
-        delegate?.paymentChooserViewController(self, didFailWithError: error)
+    func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, paymentCreatorController: UIViewController & PaymentCreatorUI, isRequestedToHandleError error: Error) {
+        delegate?.paymentChooserViewController(self, paymentCreatorController: paymentCreatorController, didFailWithError: error)
         setShowsErrorBanner(true)
     }
     
@@ -408,7 +425,7 @@ extension PaymentChooserViewController: CreditCardFormViewControllerDelegate {
     }
     
     public func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error) {
-        delegate?.paymentChooserViewController(self, didFailWithError: error)
+        delegate?.paymentChooserViewController(self, paymentCreatorController: controller, didFailWithError: error)
     }
     
     public func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController) {

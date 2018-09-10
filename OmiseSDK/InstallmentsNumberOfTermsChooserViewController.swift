@@ -1,6 +1,6 @@
 import UIKit
 
-class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentSourceCreator, PaymentSourceChooserUI {
+class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentSourceCreator, PaymentCreatorUI {
     var coordinator: PaymentCreatorTrampoline?
     var client: Client?
     var paymentAmount: Int64?
@@ -122,6 +122,14 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
                 cell?.accessoryView = oldAccessoryView
                 self.view.isUserInteractionEnabled = true
         })
+    }
+    
+    func displayErrorMessage(_ errorMessage: String, animated: Bool) {
+        
+    }
+    
+    func dismissErrorBanner(animated: Bool) {
+        
     }
     
     private func applyPrimaryColor() {}

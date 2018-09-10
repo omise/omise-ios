@@ -1,7 +1,7 @@
 import UIKit
 
 @objc(OMSInstallmentBankingSourceChooserViewController)
-class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>, PaymentSourceCreator, PaymentSourceChooserUI {
+class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>, PaymentSourceCreator, PaymentChooserUI {
     var coordinator: PaymentCreatorTrampoline?
     var client: Client?
     var paymentAmount: Int64?

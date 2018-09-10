@@ -75,7 +75,7 @@ public typealias CreditCardFormController = CreditCardFormViewController
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.
 @objc(OMSCreditCardFormViewController)
-public class CreditCardFormViewController: UIViewController, PaymentSourceChooserUI {
+public class CreditCardFormViewController: UIViewController, PaymentCreatorUI {
     private var hasErrorMessage = false
     
     @objc public static let defaultErrorMessageTextColor = UIColor(red: 1.000, green: 0.255, blue: 0.208, alpha: 1.0)
@@ -277,6 +277,14 @@ public class CreditCardFormViewController: UIViewController, PaymentSourceChoose
         }
 
         self.setCreditCardInformationWith(number: number, name: name, expiration: expiration)
+    }
+    
+    public func displayErrorMessage(_ errorMessage: String, animated: Bool) {
+        
+    }
+    
+    public func dismissErrorBanner(animated: Bool) {
+        
     }
     
     @objc private func keyboardWillAppear(_ notification: Notification) {

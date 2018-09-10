@@ -1,6 +1,6 @@
 import UIKit
 
-class EContextInformationInputViewController: UIViewController, PaymentSourceCreator, PaymentSourceChooserUI {
+class EContextInformationInputViewController: UIViewController, PaymentSourceCreator, PaymentCreatorUI {
     
     var coordinator: PaymentCreatorTrampoline?
     var client: Client?
@@ -89,6 +89,14 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCre
             self.view.tintAdjustmentMode = .automatic
             self.submitButton.isEnabled = true
         })
+    }
+    
+    func displayErrorMessage(_ errorMessage: String, animated: Bool) {
+        
+    }
+    
+    func dismissErrorBanner(animated: Bool) {
+        
     }
     
     @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
