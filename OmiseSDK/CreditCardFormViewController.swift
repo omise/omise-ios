@@ -123,6 +123,8 @@ public class CreditCardFormViewController: UIViewController, PaymentCreatorUI {
     /// A boolean flag to enables/disables automatic error handling. Defaults to `true`.
     @objc public var handleErrors = true
     
+    private lazy var overlayTransitionDelegate = OverlayPanelTransitioningDelegate()
+    
     var isInputDataValid: Bool {
         return formFields.reduce(into: true, { (valid, field) in
             valid = valid && field.isValid
@@ -277,6 +279,17 @@ public class CreditCardFormViewController: UIViewController, PaymentCreatorUI {
         }
 
         self.setCreditCardInformationWith(number: number, name: name, expiration: expiration)
+    }
+    
+    @IBAction func displayMoreCVVInfo(_ sender: UIButton) {
+        guard let moreInformationOnCVVViewController = storyboard?.instantiateViewController(withIdentifier: "MoreInformationOnCVVViewController") as? MoreInformationOnCVVViewController else {
+            return
+        }
+        
+        moreInformationOnCVVViewController.delegate = self
+        moreInformationOnCVVViewController.modalPresentationStyle = .custom
+        moreInformationOnCVVViewController.transitioningDelegate = overlayTransitionDelegate
+        present(moreInformationOnCVVViewController, animated: true, completion: nil)
     }
     
     public func displayErrorMessage(_ errorMessage: String, animated: Bool) {
@@ -787,6 +800,13 @@ extension CreditCardFormViewController {
     
     public override func accessibilityPerformEscape() -> Bool {
         return performCancelingForm()
+    }
+}
+
+
+extension CreditCardFormViewController: MoreInformationOnCVVViewControllerDelegate {
+    func moreInformationOnCVVViewControllerDidAskToClose(_ controller: MoreInformationOnCVVViewController) {
+        dismiss(animated: true, completion: nil)
     }
 }
 
