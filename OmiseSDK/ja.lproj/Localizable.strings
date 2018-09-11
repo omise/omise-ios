@@ -1,0 +1,30 @@
+/* A navigaiton title for the EContext screen when the `Convenience Store` is selected */
+"econtext.convenience-store.navigation-item.title" = "コンビニエンスストア";
+
+/* A navigaiton title for the EContext screen when the `Netbanking` is selected */
+"econtext.netbanking.navigation-item.title" = "ネットバンク";
+
+/* A navigaiton title for the EContext screen when the `Pay-easy` is selected */
+"econtext.pay-easy.navigation-item.title" = "ペイジー";
+
+/* A navigation title for the choosing installment terms screen with the `Bangkok Bank` selected */
+"installment-number-of-terms-choosers.bay.navigation-item.title" = "バンコク銀行";
+
+/* A navigation title for the choosing installment terms screen with the `Krungsri` selected */
+"installment-number-of-terms-choosers.bbl.navigation-item.title" = "クルンシィ";
+
+/* A navigation title for the choosing installment terms screen with the `Installments Terms` selected */
+"installment-number-of-terms-choosers.default.navigation-item.title" = "分割払い条件";
+
+/* A navigation title for the choosing installment terms screen with the `Kasikorn` selected */
+"installment-number-of-terms-choosers.first-choice.navigation-item.title" = "カシコン";
+
+/* A navigation title for the choosing installment terms screen with the `KTC` selected */
+"installment-number-of-terms-choosers.k-bank.navigation-item.title" = "クルンタイカード";
+
+/* A navigation title for the choosing installment terms screen with the `Krungsri First Choice` selected */
+"installment-number-of-terms-choosers.ktc.navigation-item.title" = "クルンシィ・ファーストチョイス";
+
+/* Number of terms option text displayed as a title of the number of terms option cell in number of terms chooser scene */
+"installments.number-of-terms-chooser.number-of-terms-cell.label.text" = "%d 月々";
+

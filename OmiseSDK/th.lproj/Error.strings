@@ -1,0 +1,24 @@
+/* An error text displayed when the card holder name is empty */
+"credit-card-form.card-holder-name-field.empty-text.error.text" = "กรุณากรอกชื่อบนบัตร";
+
+/* An error text displayed when the card holder name is invalid */
+"credit-card-form.card-holder-name-field.invalid-data.error.text" = "ชื่อบนบัตรไม่ถูกต้อง";
+
+/* An error text displayed when the credit card number is empty */
+"credit-card-form.card-number-field.empty-text.error.text" = "กรุณากรอกหมายเลขบัตร";
+
+/* An error text displayed when the credit card number is invalid */
+"credit-card-form.card-number-field.invalid-data.error.text" = "หมายเลขบัตรไม่ถูกต้อง";
+
+/* An error text displayed when the expiry date is empty */
+"credit-card-form.expiry-date-field.empty-text.error.text" = "กรุณากรอกวันหมดอายุ";
+
+/* An error text displayed when the expiry date is invalid */
+"credit-card-form.expiry-date-field.invalid-data.error.text" = "วันหมดอายุของบัตรไม่ถูกต้อง";
+
+/* An error text displayed when the security code is empty */
+"credit-card-form.security-code-field.empty-text.error.text" = "กรุณากรอก CVV";
+
+/* An error text displayed when the security code is invalid */
+"credit-card-form.security-code-field.invalid-data.error.text" = "CVV ไม่ถุกต้อง";
+

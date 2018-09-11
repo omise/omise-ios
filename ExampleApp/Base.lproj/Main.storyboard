@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="iu0-Jf-pl4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="iu0-Jf-pl4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -188,15 +188,15 @@
                             <constraint firstItem="T5w-uE-gP9" firstAttribute="top" secondItem="rFg-Re-wWX" secondAttribute="bottom" id="2UB-2b-Mx6"/>
                             <constraint firstAttribute="trailing" secondItem="rUl-ra-Tdr" secondAttribute="trailing" priority="999" constant="40" id="AHz-PW-nu1"/>
                             <constraint firstItem="rUl-ra-Tdr" firstAttribute="leading" secondItem="KGM-KT-bUC" secondAttribute="leading" priority="999" constant="40" id="BPY-N9-b5V"/>
-                            <constraint firstItem="qn8-OP-4EI" firstAttribute="trailing" secondItem="rUl-ra-Tdr" secondAttribute="trailing" id="JM7-uI-VVE"/>
+                            <constraint firstItem="qn8-OP-4EI" firstAttribute="trailing" secondItem="rUl-ra-Tdr" secondAttribute="trailing" priority="999" id="JM7-uI-VVE"/>
                             <constraint firstItem="qn8-OP-4EI" firstAttribute="top" secondItem="T5w-uE-gP9" secondAttribute="bottom" constant="-112" id="Pap-fg-Kpy"/>
                             <constraint firstItem="rUl-ra-Tdr" firstAttribute="centerX" secondItem="T5w-uE-gP9" secondAttribute="centerX" id="ZVE-PG-7EO"/>
-                            <constraint firstItem="vPp-dv-dI8" firstAttribute="leading" secondItem="rUl-ra-Tdr" secondAttribute="leading" id="cFt-KJ-MM0"/>
+                            <constraint firstItem="vPp-dv-dI8" firstAttribute="leading" secondItem="rUl-ra-Tdr" secondAttribute="leading" priority="999" id="cFt-KJ-MM0"/>
                             <constraint firstItem="T5w-uE-gP9" firstAttribute="leading" secondItem="KGM-KT-bUC" secondAttribute="leading" id="eci-rc-Ufa"/>
                             <constraint firstItem="J6v-sz-tEZ" firstAttribute="top" secondItem="T5w-uE-gP9" secondAttribute="bottom" id="jtl-kl-kby"/>
-                            <constraint firstItem="vPp-dv-dI8" firstAttribute="trailing" secondItem="rUl-ra-Tdr" secondAttribute="trailing" id="lgm-Ft-eDM"/>
+                            <constraint firstItem="vPp-dv-dI8" firstAttribute="trailing" secondItem="rUl-ra-Tdr" secondAttribute="trailing" priority="999" id="lgm-Ft-eDM"/>
                             <constraint firstItem="qn8-OP-4EI" firstAttribute="top" secondItem="rUl-ra-Tdr" secondAttribute="bottom" constant="8" id="mfe-Q4-j6S"/>
-                            <constraint firstItem="qn8-OP-4EI" firstAttribute="leading" secondItem="rUl-ra-Tdr" secondAttribute="leading" id="wnM-kl-b94"/>
+                            <constraint firstItem="qn8-OP-4EI" firstAttribute="leading" secondItem="rUl-ra-Tdr" secondAttribute="leading" priority="999" id="wnM-kl-b94"/>
                             <constraint firstAttribute="trailing" secondItem="T5w-uE-gP9" secondAttribute="trailing" id="wtb-TK-MxJ"/>
                             <constraint firstItem="rUl-ra-Tdr" firstAttribute="top" secondItem="vPp-dv-dI8" secondAttribute="bottom" constant="8" id="yLx-OV-tzr"/>
                         </constraints>
@@ -207,10 +207,10 @@
             </objects>
             <point key="canvasLocation" x="-191" y="1439"/>
         </scene>
-        <!--PaymentSourceChooserController-->
+        <!--PaymentChooserController-->
         <scene sceneID="Sgp-QY-wO1">
             <objects>
-                <viewControllerPlaceholder storyboardName="OmiseSDK" bundleIdentifier="co.omise.OmiseSDK" referencedIdentifier="PaymentSourceChooserController" id="OVI-jW-DQg" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="OmiseSDK" bundleIdentifier="co.omise.OmiseSDK" referencedIdentifier="PaymentChooserController" id="OVI-jW-DQg" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="qGS-49-PsU"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c6D-lq-giu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -475,7 +475,7 @@
         <image name="product" width="226" height="150"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zYV-yt-uTV"/>
-        <segue reference="UKD-dD-tkb"/>
+        <segue reference="O5X-Hn-KCp"/>
+        <segue reference="1fO-ry-KDl"/>
     </inferredMetricsTieBreakers>
 </document>

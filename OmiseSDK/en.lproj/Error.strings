@@ -1,0 +1,9 @@
+"credit-card-form.card-number-field.empty-text.error.text" = "Please fill in the card number";
+"credit-card-form.card-holder-name-field.empty-text.error.text" = "Please fill in the cardholder's name";
+"credit-card-form.expiry-date-field.empty-text.error.text" = "Please fill in the card's expiry date";
+"credit-card-form.security-code-field.empty-text.error.text" = "Please fill in the CVV code";
+
+"credit-card-form.card-number-field.invalid-data.error.text" = "Credit card number is invalid";
+"credit-card-form.card-holder-name-field.invalid-data.error.text" = "Card holder name is invalid";
+"credit-card-form.expiry-date-field.invalid-data.error.text" = "Card expiry date is invalid";
+"credit-card-form.security-code-field.invalid-data.error.text" = "CVV code is invalid";

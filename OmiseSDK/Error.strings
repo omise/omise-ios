@@ -1,9 +1,0 @@
-"credit-card-form.card-number-field.empty-text.error.text" = "Credit card number cannot be empty";
-"credit-card-form.card-holder-name-field.empty-text.error.text" = "Card holder name cannot be empty";
-"credit-card-form.expiry-date-field.empty-text.error.text" = "Card expiry date cannot be empty";
-"credit-card-form.security-code-field.empty-text.error.text" = "CVV code cannot be empty";
-
-"credit-card-form.card-number-field.invalid-data.error.text" = "Credit card number is invalid";
-"credit-card-form.card-holder-name-field.invalid-data.error.text" = "Card holder name is invalid";
-"credit-card-form.expiry-date-field.invalid-data.error.text" = "Card expiry date is invalid";
-"credit-card-form.security-code-field.invalid-data.error.text" = "CVV code is invalid";

@@ -1,0 +1,24 @@
+/* An error text displayed when the card holder name is empty */
+"credit-card-form.card-holder-name-field.empty-text.error.text" = "必須のクレジットカード所有者名";
+
+/* An error text displayed when the card holder name is invalid */
+"credit-card-form.card-holder-name-field.invalid-data.error.text" = "クレジットカード所有者名が無効です";
+
+/* An error text displayed when the credit card number is empty */
+"credit-card-form.card-number-field.empty-text.error.text" = "必須のクレジットカード番号";
+
+/* An error text displayed when the credit card number is invalid */
+"credit-card-form.card-number-field.invalid-data.error.text" = "クレジットカード番号が無効です";
+
+/* An error text displayed when the expiry date is empty */
+"credit-card-form.expiry-date-field.empty-text.error.text" = "必須のクレジットカード有効期限";
+
+/* An error text displayed when the expiry date is invalid */
+"credit-card-form.expiry-date-field.invalid-data.error.text" = "クレジットカードの有効期限が無効です";
+
+/* An error text displayed when the security code is empty */
+"credit-card-form.security-code-field.empty-text.error.text" = "必須のCVVコード";
+
+/* An error text displayed when the security code is invalid */
+"credit-card-form.security-code-field.invalid-data.error.text" = "CVVコードが無効です";
+

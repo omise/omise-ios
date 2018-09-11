@@ -1,7 +1,7 @@
 "installments.number-of-terms-chooser.number-of-terms-cell.label.text" = "%d months";
 
 "econtext.convenience-store.navigation-item.title" = "Convenience Store";
-"econtext.netbanking.navigation-item.title" = "Netbanking";
+"econtext.netbanking.navigation-item.title" = "Net bank";
 "econtext.pay-easy.navigation-item.title" = "Pay-easy";
 
 
@@ -10,4 +10,4 @@
 "installment-number-of-terms-choosers.bbl.navigation-item.title" = "Krungsri";
 "installment-number-of-terms-choosers.ktc.navigation-item.title" = "Krungsri First Choice";
 "installment-number-of-terms-choosers.k-bank.navigation-item.title" = "KTC";
-"installment-number-of-terms-choosers.default.navigation-item.title" = "Installments Terms";
+"installment-number-of-terms-choosers.default.navigation-item.title" = "Installment terms";
