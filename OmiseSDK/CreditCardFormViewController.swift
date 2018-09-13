@@ -75,16 +75,16 @@ public typealias CreditCardFormController = CreditCardFormViewController
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.
 @objc(OMSCreditCardFormViewController)
-public class CreditCardFormViewController: UIViewController, PaymentCreatorUI {
+public class CreditCardFormViewController: UIViewController, PaymentCreatorUI, PaymentFormUIController {
     private var hasErrorMessage = false
     
     @objc public static let defaultErrorMessageTextColor = UIColor(red: 1.000, green: 0.255, blue: 0.208, alpha: 1.0)
     
     @IBOutlet var formFields: [OmiseTextField]!
     @IBOutlet var formLabels: [UILabel]!
-    @IBOutlet var errorLabels: [UILabel]!
+    @IBOutlet public var errorLabels: [UILabel]!
   
-    @IBOutlet public var contentView: UIScrollView!
+    @IBOutlet var contentView: UIScrollView!
     
     @IBOutlet public var cardNumberTextField: CardNumberTextField!
     @IBOutlet public var cardNameTextField: CardNameTextField!
@@ -93,21 +93,21 @@ public class CreditCardFormViewController: UIViewController, PaymentCreatorUI {
     
     @IBOutlet public weak var confirmButton: MainActionButton!
     
-    @IBOutlet public var formFieldsAccessoryView: UIToolbar!
-    @IBOutlet public var gotoPreviousFieldBarButtonItem: UIBarButtonItem!
-    @IBOutlet public var gotoNextFieldBarButtonItem: UIBarButtonItem!
-    @IBOutlet public var doneEditingBarButtonItem: UIBarButtonItem!
+    @IBOutlet var formFieldsAccessoryView: UIToolbar!
+    @IBOutlet var gotoPreviousFieldBarButtonItem: UIBarButtonItem!
+    @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!
+    @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
     
-    private var currentEditingTextField: OmiseTextField?
+    var currentEditingTextField: OmiseTextField?
     
     @IBOutlet public weak var creditCardNumberErrorLabel: UILabel!
     @IBOutlet public weak var cardHolderNameErrorLabel: UILabel!
     @IBOutlet public weak var cardExpiryDateErrorLabel: UILabel!
     @IBOutlet public weak var cardSecurityCodeErrorLabel: UILabel!
     
-    @IBOutlet public var processingErrorBannerView: UIView!
-    @IBOutlet public var processingErrorLabel: UILabel!
-    @IBOutlet var hidingProcessingErrorBannerConstraint: NSLayoutConstraint!
+    @IBOutlet public var errorBannerView: UIView!
+    @IBOutlet public var errorMessageLabel: UILabel!
+    @IBOutlet public var hidingErrorBannerConstraint: NSLayoutConstraint!
     @IBOutlet public var cardBrandIconImageView: UIImageView!
     @IBOutlet public var cvvInfoButton: UIButton!
     
@@ -293,17 +293,18 @@ public class CreditCardFormViewController: UIViewController, PaymentCreatorUI {
     }
     
     public func displayErrorMessage(_ errorMessage: String, animated: Bool) {
-        
+        errorMessageLabel.text = errorMessage
+        setShowsErrorBanner(true, animated: animated)
     }
     
     public func dismissErrorBanner(animated: Bool) {
-        
+        setShowsErrorBanner(false, animated: animated)
     }
     
     @objc private func keyboardWillAppear(_ notification: Notification) {
         if hasErrorMessage {
             hasErrorMessage = false
-            setShowsErrorBanner(false, animated: true)
+            dismissErrorBanner(animated: true)
         }
     }
     
@@ -389,25 +390,9 @@ public class CreditCardFormViewController: UIViewController, PaymentCreatorUI {
         }
         
         hasErrorMessage = true
-        processingErrorLabel.text = error.localizedDescription
-        
-        setShowsErrorBanner(true)
+        displayErrorMessage(error.localizedDescription, animated: true)
     }
     
-    private func setShowsErrorBanner(_ showsErrorBanner: Bool, animated: Bool = true) {
-        hidingProcessingErrorBannerConstraint.isActive = !showsErrorBanner
-        
-        let animationBlock = {
-            self.processingErrorBannerView.alpha = showsErrorBanner ? 1.0 : 0.0
-            self.contentView.layoutIfNeeded()
-        }
-        
-        if animated {
-            UIView.animate(withDuration: TimeInterval(UINavigationControllerHideShowBarDuration), delay: 0.0, options: [.layoutSubviews], animations: animationBlock)
-        } else {
-            animationBlock()
-        }
-    }
     
     private func updateSupplementaryUI() {
         let valid = isInputDataValid
@@ -651,35 +636,19 @@ extension CreditCardFormViewController {
             })
         }
         
-        guard formFields.contains(sender) else { return }
-        
-        currentEditingTextField = sender
-        gotoPreviousFieldBarButtonItem.isEnabled = sender !== formFields.first
-        gotoNextFieldBarButtonItem.isEnabled = sender !== formFields.last
+        updateInputAccessoryViewWithFirstResponder(sender)
     }
     
     @objc @IBAction private func gotoPreviousField(_ button: UIBarButtonItem) {
-        guard let currentTextField = currentEditingTextField, let index = formFields.index(of: currentTextField) else {
-            return
-        }
-
-        let prevIndex = index - 1
-        guard prevIndex >= 0 else { return }
-        formFields[prevIndex].becomeFirstResponder()
+        gotoPreviousField()
     }
     
     @objc @IBAction private func gotoNextField(_ button: UIBarButtonItem) {
-        guard let currentTextField = currentEditingTextField, let index = formFields.index(of: currentTextField) else {
-            return
-        }
-
-        let nextIndex = index + 1
-        guard nextIndex < formFields.count else { return }
-        formFields[nextIndex].becomeFirstResponder()
+        gotoNextField()
     }
     
     @objc @IBAction private func doneEditing(_ button: UIBarButtonItem?) {
-        view.endEditing(true)
+        doneEditing()
     }
 }
 

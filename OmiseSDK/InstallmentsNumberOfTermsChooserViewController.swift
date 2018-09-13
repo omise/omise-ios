@@ -1,7 +1,7 @@
 import UIKit
 
-class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentSourceCreator, PaymentCreatorUI {
-    var coordinator: PaymentCreatorTrampoline?
+class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentSourceChooser, PaymentCreatorUI, ErrorDisplayableUI {
+    var flowSession: PaymentSourceCreatorFlowSession?
     var client: Client?
     var paymentAmount: Int64?
     var paymentCurrency: Currency?
@@ -116,20 +116,12 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
         view.isUserInteractionEnabled = false
         
         let numberOfTerms = self.numberOfTerms[indexPath.row]
-        requestCreateSource(
+        flowSession?.requestCreateSource(
             .installment(PaymentInformation.Installment(brand: brand, numberOfTerms: numberOfTerms)),
             completionHandler: { _ in
                 cell?.accessoryView = oldAccessoryView
                 self.view.isUserInteractionEnabled = true
         })
-    }
-    
-    func displayErrorMessage(_ errorMessage: String, animated: Bool) {
-        
-    }
-    
-    func dismissErrorBanner(animated: Bool) {
-        
     }
     
     private func applyPrimaryColor() {}

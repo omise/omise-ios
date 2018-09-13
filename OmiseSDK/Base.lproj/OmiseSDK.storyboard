@@ -315,13 +315,13 @@
                         <outlet property="creditCardNumberErrorLabel" destination="7Ox-gC-WRb" id="K3O-DF-PR8"/>
                         <outlet property="cvvInfoButton" destination="8dw-KO-4eq" id="Wea-xK-iEA"/>
                         <outlet property="doneEditingBarButtonItem" destination="ogk-BH-ei9" id="Duv-wy-4oD"/>
+                        <outlet property="errorBannerView" destination="FQr-5a-JA5" id="O3i-3y-pEE"/>
+                        <outlet property="errorMessageLabel" destination="Cmp-y6-FKF" id="wy6-Ns-Lb4"/>
                         <outlet property="expiryDateTextField" destination="Par-EA-T3D" id="Y2M-Nr-AVW"/>
                         <outlet property="formFieldsAccessoryView" destination="4Xe-Ox-z88" id="HRm-Pk-cOr"/>
                         <outlet property="gotoNextFieldBarButtonItem" destination="KiA-g5-vrj" id="oiz-dQ-7xc"/>
                         <outlet property="gotoPreviousFieldBarButtonItem" destination="eqN-ee-jna" id="SP8-H8-7F1"/>
-                        <outlet property="hidingProcessingErrorBannerConstraint" destination="21J-1B-Odz" id="KDn-1f-TvY"/>
-                        <outlet property="processingErrorBannerView" destination="FQr-5a-JA5" id="Kf6-c2-WXN"/>
-                        <outlet property="processingErrorLabel" destination="Cmp-y6-FKF" id="jPa-Ou-DyK"/>
+                        <outlet property="hidingErrorBannerConstraint" destination="21J-1B-Odz" id="QCb-Kt-U4k"/>
                         <outlet property="requestingIndicatorView" destination="8qh-Fc-Sh9" id="eiI-zy-9G4"/>
                         <outlet property="secureCodeTextField" destination="Y1l-QK-aPc" id="YHf-Pb-fLh"/>
                         <outletCollection property="formLabels" destination="CKR-Pl-Ix5" collectionClass="NSMutableArray" id="H8K-bu-DYv"/>
@@ -467,7 +467,7 @@
                         <sections>
                             <tableViewSection id="Xcr-fj-310">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="WSh-Xk-FbG" imageView="7u2-fI-LRY" rowHeight="64" style="IBUITableViewCellStyleDefault" id="2Ws-Wo-wm0">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="WSh-Xk-FbG" imageView="YJi-pu-PV8" rowHeight="64" style="IBUITableViewCellStyleDefault" id="2Ws-Wo-wm0">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Ws-Wo-wm0" id="ffF-gt-oBM">
@@ -481,7 +481,7 @@
                                                     <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="Card" id="7u2-fI-LRY">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="Card" id="YJi-pu-PV8">
                                                     <rect key="frame" x="16" y="15" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -696,7 +696,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zoe-8g-RM3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1806" y="375"/>
+            <point key="canvasLocation" x="2748" y="374.6305418719212"/>
         </scene>
         <!--Authorizing Payment-->
         <scene sceneID="IRy-iA-rF6">
@@ -749,7 +749,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="GSG-uZ-2Df">
+                        <view key="tableHeaderView" alpha="0.0" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="GSG-uZ-2Df">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -783,7 +783,7 @@
                         <sections>
                             <tableViewSection id="zL1-N5-B0Q">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="XnR-SW-SnL" imageView="obG-fM-9kj" rowHeight="64" style="IBUITableViewCellStyleDefault" id="790-KL-PJN">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="XnR-SW-SnL" imageView="mmD-jI-DtJ" rowHeight="64" style="IBUITableViewCellStyleDefault" id="790-KL-PJN">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="790-KL-PJN" id="Sas-ZP-rIm">
@@ -797,14 +797,14 @@
                                                     <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="BBL" id="obG-fM-9kj">
-                                                    <rect key="frame" x="16" y="15" width="32" height="32"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Redirect" translatesAutoresizingMaskIntoConstraints="NO" id="Aq9-Ba-57u">
                                                     <rect key="frame" x="345" y="23" width="16" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="tintColor" red="0.89019607840000003" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </imageView>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="BBL" id="mmD-jI-DtJ">
+                                                    <rect key="frame" x="16" y="15" width="32" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -942,7 +942,7 @@
                         <sections>
                             <tableViewSection id="f76-dL-yhN">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="8lH-Rp-Dhb" imageView="pY1-6f-1dU" rowHeight="64" style="IBUITableViewCellStyleDefault" id="kbi-vf-GSK">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="8lH-Rp-Dhb" imageView="MRg-Wp-bLM" rowHeight="64" style="IBUITableViewCellStyleDefault" id="kbi-vf-GSK">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kbi-vf-GSK" id="aXx-tI-Y7g">
@@ -956,7 +956,7 @@
                                                     <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="BBL" id="pY1-6f-1dU">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="BBL" id="MRg-Wp-bLM">
                                                     <rect key="frame" x="16" y="15" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -1068,7 +1068,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YPe-g0-cyP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3257" y="375"/>
+            <point key="canvasLocation" x="4199.1999999999998" y="374.6305418719212"/>
         </scene>
         <!--Installments Number Of Terms Chooser View Controller-->
         <scene sceneID="CWW-iT-nyZ">
@@ -1148,7 +1148,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ufg-fP-hxE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4446" y="375"/>
+            <point key="canvasLocation" x="5308" y="374.6305418719212"/>
         </scene>
         <!--EContext Information Input-->
         <scene sceneID="etS-JC-UOV">
@@ -1369,7 +1369,7 @@
                         <outlet property="fullNameTextField" destination="OTm-3S-Jk9" id="cy5-8D-S77"/>
                         <outlet property="gotoNextFieldBarButtonItem" destination="Bcj-yW-ddO" id="LPb-Zz-Mi9"/>
                         <outlet property="gotoPreviousFieldBarButtonItem" destination="zwn-Vs-ojI" id="Uhu-nc-7Bd"/>
-                        <outlet property="hidingBannerConstraint" destination="J6Q-HK-oCk" id="VXZ-9u-7bm"/>
+                        <outlet property="hidingErrorBannerConstraint" destination="J6Q-HK-oCk" id="VXZ-9u-7bm"/>
                         <outlet property="phoneNumberTextField" destination="y98-SD-aEV" id="Qjs-Yy-BrD"/>
                         <outlet property="requestingIndicatorView" destination="rJf-bk-LgV" id="D1k-Nj-Awa"/>
                         <outlet property="submitButton" destination="mE3-3u-rvg" id="I8k-3n-SZP"/>
@@ -1406,6 +1406,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ji9-p8-DDL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3257" y="1182"/>
+        </scene>
+        <!--Payment Creator Controller-->
+        <scene sceneID="6ey-jn-QkA">
+            <objects>
+                <navigationController storyboardIdentifier="PaymentCreatorController" automaticallyAdjustsScrollViewInsets="NO" id="HXY-oA-L9Y" customClass="PaymentCreatorController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aV8-zC-zfe">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2c1-84-F03" kind="relationship" relationship="rootViewController" id="8CR-eK-9oy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mhX-1C-4BZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1805.5999999999999" y="374.6305418719212"/>
         </scene>
     </scenes>
     <resources>

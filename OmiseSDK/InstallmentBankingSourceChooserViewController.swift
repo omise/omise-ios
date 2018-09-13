@@ -1,8 +1,8 @@
 import UIKit
 
 @objc(OMSInstallmentBankingSourceChooserViewController)
-class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>, PaymentSourceCreator, PaymentChooserUI {
-    var coordinator: PaymentCreatorTrampoline?
+class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>, PaymentSourceChooser, PaymentChooserUI {
+    var flowSession: PaymentSourceCreatorFlowSession?
     var client: Client?
     var paymentAmount: Int64?
     var paymentCurrency: Currency?
@@ -61,7 +61,7 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
         if segue.identifier == "GoToInstallmentTermsChooserSegue",
             let installmentTermsChooserViewController = segue.destination as? InstallmentsNumberOfTermsChooserViewController {
             installmentTermsChooserViewController.installmentBrand = selectedBrand
-            installmentTermsChooserViewController.coordinator = self.coordinator
+            installmentTermsChooserViewController.flowSession = self.flowSession
             installmentTermsChooserViewController.client = self.client
             installmentTermsChooserViewController.paymentAmount = self.paymentAmount
             installmentTermsChooserViewController.paymentCurrency = self.paymentCurrency

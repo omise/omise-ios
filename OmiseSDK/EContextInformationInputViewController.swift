@@ -1,8 +1,7 @@
 import UIKit
 
-class EContextInformationInputViewController: UIViewController, PaymentSourceCreator, PaymentCreatorUI {
-    
-    var coordinator: PaymentCreatorTrampoline?
+class EContextInformationInputViewController: UIViewController, PaymentSourceChooser, PaymentCreatorUI, PaymentFormUIController {
+    var flowSession: PaymentSourceCreatorFlowSession?
     var client: Client?
     var paymentAmount: Int64?
     var paymentCurrency: Currency?
@@ -23,11 +22,11 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCre
     @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!
     @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
     
-    private var currentEditingTextField: OmiseTextField?
+    var currentEditingTextField: OmiseTextField?
   
     @IBOutlet var errorBannerView: UIView!
     @IBOutlet var errorMessageLabel: UILabel!
-    @IBOutlet var hidingBannerConstraint: NSLayoutConstraint!
+    @IBOutlet var hidingErrorBannerConstraint: NSLayoutConstraint!
   
     @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
         didSet {
@@ -72,6 +71,15 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCre
         )
     }
     
+    func displayErrorMessage(_ errorMessage: String, animated: Bool) {
+        errorMessageLabel.text = errorMessage
+        setShowsErrorBanner(true, animated: animated)
+    }
+    
+    func dismissErrorBanner(animated: Bool) {
+        setShowsErrorBanner(false, animated: animated)
+    }
+    
     @IBAction func submitEContextForm(_ sender: AnyObject) {
         guard let fullname = fullNameTextField.text, let email = emailTextField.text,
             let phoneNumber = phoneNumberTextField.text else {
@@ -83,7 +91,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCre
         view.isUserInteractionEnabled = false
         view.tintAdjustmentMode = .dimmed
         submitButton.isEnabled = false
-        requestCreateSource(PaymentInformation.eContext(eContextInformation), completionHandler: { _ in
+        flowSession?.requestCreateSource(PaymentInformation.eContext(eContextInformation), completionHandler: { _ in
             self.requestingIndicatorView.stopAnimating()
             self.view.isUserInteractionEnabled = true
             self.view.tintAdjustmentMode = .automatic
@@ -91,44 +99,20 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCre
         })
     }
     
-    func displayErrorMessage(_ errorMessage: String, animated: Bool) {
-        
-    }
-    
-    func dismissErrorBanner(animated: Bool) {
-        
-    }
-    
     @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
-        guard formFields.contains(sender) else { return }
-        
-        currentEditingTextField = sender
-        gotoPreviousFieldBarButtonItem.isEnabled = sender !== formFields.first
-        gotoNextFieldBarButtonItem.isEnabled = sender !== formFields.last
+        updateInputAccessoryViewWithFirstResponder(sender)
     }
     
     @objc @IBAction private func gotoPreviousField(_ button: UIBarButtonItem) {
-        guard let currentTextField = currentEditingTextField, let index = formFields.index(of: currentTextField) else {
-            return
-        }
-        
-        let prevIndex = index - 1
-        guard prevIndex >= 0 else { return }
-        formFields[prevIndex].becomeFirstResponder()
+        gotoPreviousField()
     }
     
     @objc @IBAction private func gotoNextField(_ sender: AnyObject) {
-        guard let currentTextField = currentEditingTextField, let index = formFields.index(of: currentTextField) else {
-            return
-        }
-        
-        let nextIndex = index + 1
-        guard nextIndex < formFields.count else { return }
-        formFields[nextIndex].becomeFirstResponder()
+        gotoNextField()
     }
     
     @objc @IBAction private func doneEditing(_ button: UIBarButtonItem?) {
-        view.endEditing(true)
+        doneEditing()
     }
 
     @objc func keyboardWillChangeFrame(_ notification: NSNotification) {
@@ -155,27 +139,6 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCre
         contentView.scrollIndicatorInsets.bottom = 0.0
     }
     
-    private func applyPrimaryColor() {
-        guard isViewLoaded else {
-            return
-        }
-        
-        formFields.forEach({
-            $0.textColor = currentPrimaryColor
-        })
-    }
-    
-    private func applySecondaryColor() {
-        guard isViewLoaded else {
-            return
-        }
-        
-        formLabels.forEach({
-            $0.textColor = currentSecondaryColor
-        })
-        formFields.forEach({
-            $0.borderColor = currentSecondaryColor
-        })
-    }
+   
 }
 

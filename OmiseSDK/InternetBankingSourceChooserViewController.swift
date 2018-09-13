@@ -1,8 +1,8 @@
 import UIKit
 
 @objc(OMSInternetBankingSourceChooserViewController)
-class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>, PaymentSourceCreator, PaymentCreatorUI {
-    var coordinator: PaymentCreatorTrampoline?
+class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>, PaymentSourceChooser, PaymentCreatorUI, ErrorDisplayableUI {
+    var flowSession: PaymentSourceCreatorFlowSession?
     var client: Client?
     var paymentAmount: Int64?
     var paymentCurrency: Currency?
@@ -58,18 +58,10 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
         
-        requestCreateSource(.internetBanking(bank), completionHandler: { _ in
+        flowSession?.requestCreateSource(.internetBanking(bank), completionHandler: { _ in
             cell?.accessoryView = oldAccessoryView
             self.view.isUserInteractionEnabled = true
         })
-    }
-    
-    func displayErrorMessage(_ errorMessage: String, animated: Bool) {
-        
-    }
-    
-    func dismissErrorBanner(animated: Bool) {
-        
     }
     
     private func applyPrimaryColor() {

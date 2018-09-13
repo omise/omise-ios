@@ -2,157 +2,14 @@ import UIKit
 import os
 
 
-internal protocol PaymentCreatorTrampolineDelegate: AnyObject {
-    func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, isRequestedToHandleCreatedSource source: Source)
-    func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, paymentCreatorController: UIViewController & PaymentCreatorUI, isRequestedToHandleError error: Error)
-    func paymentCreatorTrampolineIsRequestedToCancel(_ trampoline: PaymentCreatorTrampoline)
-}
-
-internal class PaymentCreatorTrampoline {
-    weak var delegate: PaymentCreatorTrampolineDelegate?
-    func handleCreatedSource(_ source: Source) {
-        delegate?.paymentCreatorTrampoline(self, isRequestedToHandleCreatedSource: source)
-    }
-    
-    func handleFailedError(_ error: Error, sender: UIViewController & PaymentCreatorUI) {
-        delegate?.paymentCreatorTrampoline(self, paymentCreatorController: sender, isRequestedToHandleError: error)
-    }
-    
-    func requestToCancel() {
-        delegate?.paymentCreatorTrampolineIsRequestedToCancel(self)
-    }
-    
-}
-
-internal protocol PaymentSourceCreator: AnyObject {
-    var coordinator: PaymentCreatorTrampoline? { get }
-    
-    var client: Client? { get set }
-    var paymentAmount: Int64? { get set }
-    var paymentCurrency: Currency? { get set }
-}
-
-
-let defaultPaymentChooserUIPrimaryColor = #colorLiteral(red:0.24, green:0.25, blue:0.3, alpha:1)
-let defaultPaymentChooserUISecondaryColor = #colorLiteral(red:0.89, green:0.91, blue:0.93, alpha:1)
-
-
-public protocol PaymentChooserUI: AnyObject {
-    var preferredPrimaryColor: UIColor? { get set }
-    var preferredSecondaryColor: UIColor? { get set }
-}
-
 public protocol PaymentCreatorUI: PaymentChooserUI {
     func displayErrorMessage(_ errorMessage: String, animated: Bool)
     func dismissErrorBanner(animated: Bool)
 }
 
-extension PaymentChooserUI {
-    var currentPrimaryColor: UIColor {
-        return preferredPrimaryColor ?? defaultPaymentChooserUIPrimaryColor
-    }
-    
-    var currentSecondaryColor: UIColor {
-        return preferredSecondaryColor ?? defaultPaymentChooserUISecondaryColor
-    }
-}
-
-
-extension PaymentSourceCreator where Self: UIViewController & PaymentCreatorUI {
-    func validateRequiredProperties() -> Bool {
-        let waringMessageTitle: String
-        let waringMessageMessage: String
-        
-        if self.client == nil {
-            if #available(iOS 10.0, *) {
-                os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.client ?? "")
-            }
-            waringMessageTitle = "Missing public key information."
-            waringMessageMessage = "Please set the public key before request token or source."
-        } else if self.paymentAmount == nil || self.paymentCurrency == nil {
-            if #available(iOS 10.0, *) {
-                os_log("Missing payment information - %{private}d %{private}@", log: uiLogObject, type: .error, self.paymentAmount ?? 0, self.paymentCurrency?.code ?? "-")
-            }
-            waringMessageTitle = "Missing payment information."
-            waringMessageMessage = "Please set both of the payment information (amount and currency) before request source"
-        } else {
-            return true
-        }
-        
-        #if DEBUG
-        let alertController = UIAlertController(title: waringMessageTitle, message: waringMessageMessage, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
-        present(alertController, animated: true, completion: nil)
-        #endif
-        assertionFailure("\(waringMessageTitle): \(waringMessageMessage)")
-        return false
-    }
-    
-    func requestCreateSource(_ sourceType: PaymentInformation, completionHandler: ((RequestResult<Source>) -> Void)?) {
-        guard validateRequiredProperties(), let client = self.client,
-          let amount = paymentAmount, let currency = paymentCurrency else {
-            return
-        }
-        
-        client.sendRequest(Request<Source>(sourceType: sourceType, amount: amount, currency: currency)) { (result) in
-            defer {
-                DispatchQueue.main.async {
-                    completionHandler?(result)
-                }
-            }
-            switch result {
-            case .success(let source):
-                self.coordinator?.handleCreatedSource(source)
-            case .fail(let error):
-                self.coordinator?.handleFailedError(error, sender: self)
-            }
-        }
-    }
-}
-
-
-public enum PaymentChooserOption: StaticElementIterable, Equatable {
-    case creditCard
-    case installment
-    case internetBanking
-    case tescoLotus
-    case conbini
-    case payEasy
-    case netBanking
-    case alipay
-    
-    public static var allCases: [PaymentChooserOption] {
-        return [
-            .creditCard,
-            .installment,
-            .internetBanking,
-            .tescoLotus,
-            .conbini,
-            .payEasy,
-            .netBanking,
-            .alipay,
-        ]
-    }
-}
-
-public protocol PaymentChooserViewControllerDelegate: AnyObject {
-    func paymentChooserViewController(_ paymentChooserViewController: PaymentChooserViewController,
-                                      didCreatePayment payment: Payment)
-    func paymentChooserViewController(_ paymentChooserViewController: PaymentChooserViewController,
-                                      paymentCreatorController: UIViewController & PaymentCreatorUI,
-                                      didFailWithError error: Error)
-    func paymentChooserViewControllerDidCancel(_ paymentChooserViewController: PaymentChooserViewController)
-}
-
-
-public enum Payment {
-    case token(Token)
-    case source(Source)
-}
-
 
 @objc(OMSPaymentChooserViewController)
-public class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceCreator, PaymentCreatorUI {
+public class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceChooser, PaymentCreatorUI, ErrorDisplayableUI {
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String? {
         didSet {
@@ -175,12 +32,10 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     @IBOutlet var paymentMethodNameLables: [UILabel]!
     @IBOutlet var redirectMethodIconImageView: [UIImageView]!
     
-    let coordinator: PaymentCreatorTrampoline? = PaymentCreatorTrampoline()
+    var flowSession: PaymentSourceCreatorFlowSession?
     
-    public weak var delegate: PaymentChooserViewControllerDelegate?
-    
-    @IBOutlet var errorBannerView: UIView!
-    @IBOutlet var errorMessageLabel: UILabel!
+    @IBOutlet public var errorBannerView: UIView!
+    @IBOutlet public var errorMessageLabel: UILabel!
     
     /// A boolean flag to enables/disables automatic error handling. Defaults to `true`.
     @objc public var handleErrors = true
@@ -198,7 +53,7 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     }
     
     @objc public var showsCreditCardPayment: Bool = true
-    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentChooserViewController.defaultAvailablePaymentMethods + [OMSSourceTypeValue.eContext] {
+    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentCreatorController.defaultAvailablePaymentMethods + [OMSSourceTypeValue.eContext] {
         didSet {
             showingValues = PaymentChooserOption.allCases.filter({
                 switch $0 {
@@ -222,7 +77,7 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        coordinator?.delegate = self
+//        flowSession?.delegate = self
         
         applyPrimaryColor()
         applySecondaryColor()
@@ -249,16 +104,16 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch (segue.identifier, segue.destination) {
         case ("GoToCreditCardFormSegue"?, let controller as CreditCardFormViewController):
-            controller.delegate = self
+//            controller.delegate = self
             controller.publicKey = self.publicKey
         case ("GoToInternetBankingChooserSegue"?, let controller as InternetBankingSourceChooserViewController):
             controller.showingValues = allowedPaymentMethods.compactMap({ $0.internetBankingSource })
-            controller.coordinator = self.coordinator
+            controller.flowSession = self.flowSession
         case ("GoToInstallmentBrandChooserSegue"?, let controller as InstallmentBankingSourceChooserViewController):
             controller.showingValues = allowedPaymentMethods.compactMap({ $0.installmentBrand })
-            controller.coordinator = self.coordinator
+            controller.flowSession = self.flowSession
         case (_, let controller as EContextInformationInputViewController):
-            controller.coordinator = self.coordinator
+            controller.flowSession = self.flowSession
             controller.paymentAmount = 5000
             controller.paymentCurrency = .jpy
             if let element = (sender as? UITableViewCell).flatMap(tableView.indexPath(for:)).map(element(forUIIndexPath:)) {
@@ -287,11 +142,6 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         default: break
         }
         
-        if let paymentSourceCreator = segue.destination as? PaymentSourceCreator {
-            paymentSourceCreator.client = self.client
-            paymentSourceCreator.paymentAmount = self.paymentAmount
-            paymentSourceCreator.paymentCurrency = self.paymentCurrency
-        }
         if let paymentShourceChooserUI = segue.destination as? PaymentChooserUI {
             paymentShourceChooserUI.preferredPrimaryColor = self.preferredPrimaryColor
             paymentShourceChooserUI.preferredSecondaryColor = self.preferredSecondaryColor
@@ -299,7 +149,7 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     }
     
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        setShowsErrorBanner(false)
+        dismissErrorBanner(animated: true)
         
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
@@ -321,7 +171,7 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
         
-        requestCreateSource(payment, completionHandler: { _ in
+        flowSession?.requestCreateSource(payment, completionHandler: { _ in
             cell?.accessoryView = oldAccessoryView
             self.view.isUserInteractionEnabled = true
         })
@@ -348,14 +198,6 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         }
     }
     
-    public func displayErrorMessage(_ errorMessage: String, animated: Bool) {
-        
-    }
-    
-    public func dismissErrorBanner(animated: Bool) {
-        
-    }
-    
     private func applyPrimaryColor() {
         guard isViewLoaded else {
             return
@@ -376,62 +218,37 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         })
     }
     
-    private func setShowsErrorBanner(_ showsErrorBanner: Bool, animated: Bool = true) {
-        let animationBlock = {
-            self.errorBannerView.alpha = showsErrorBanner ? 1.0 : 0.0
-            
-            let height: CGFloat
-            if showsErrorBanner {
-                let preferredHeight = self.errorBannerView.systemLayoutSizeFitting(
-                    CGSize(width: self.view.bounds.width, height: 48.0),
-                    withHorizontalFittingPriority: UILayoutPriority.required, verticalFittingPriority:
-                    UILayoutPriority.fittingSizeLevel
-                    ).height
-                height = max(preferredHeight, 48.0)
-            } else {
-                height = 0.0
-            }
-            self.errorBannerView.frame.size.height = height
-            self.tableView.tableHeaderView = self.errorBannerView
-        }
-        
-        if animated {
-            UIView.animate(withDuration: TimeInterval(UINavigationControllerHideShowBarDuration), delay: 0.0, options: [.layoutSubviews], animations: animationBlock)
-        } else {
-            animationBlock()
-        }
-    }
 }
+//
+//extension PaymentChooserViewController: PaymentCreatorTrampolineDelegate {
+//    func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, isRequestedToHandleCreatedSource source: Source) {
+//        delegate?.paymentChooserViewController(self, didCreatePayment: Payment.source(source))
+//    }
+//
+//    func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, paymentCreatorController: UIViewController & PaymentCreatorUI, isRequestedToHandleError error: Error) {
+//        delegate?.paymentChooserViewController(self, paymentCreatorController: paymentCreatorController, didFailWithError: error)
+//        displayErrorMessage(error.localizedDescription, animated: true)
+//    }
+//
+//    func paymentCreatorTrampolineIsRequestedToCancel(_ trampoline: PaymentCreatorTrampoline) {
+//        delegate?.paymentChooserViewControllerDidCancel(self)
+//    }
+//
+//}
 
-extension PaymentChooserViewController: PaymentCreatorTrampolineDelegate {
-    func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, isRequestedToHandleCreatedSource source: Source) {
-        delegate?.paymentChooserViewController(self, didCreatePayment: Payment.source(source))
-    }
-    
-    func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, paymentCreatorController: UIViewController & PaymentCreatorUI, isRequestedToHandleError error: Error) {
-        delegate?.paymentChooserViewController(self, paymentCreatorController: paymentCreatorController, didFailWithError: error)
-        setShowsErrorBanner(true)
-    }
-    
-    func paymentCreatorTrampolineIsRequestedToCancel(_ trampoline: PaymentCreatorTrampoline) {
-        delegate?.paymentChooserViewControllerDidCancel(self)
-    }
-    
-}
-
-extension PaymentChooserViewController: CreditCardFormViewControllerDelegate {
-    public func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
-        delegate?.paymentChooserViewController(self, didCreatePayment: Payment.token(token))
-    }
-    
-    public func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error) {
-        delegate?.paymentChooserViewController(self, paymentCreatorController: controller, didFailWithError: error)
-    }
-    
-    public func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController) {
-        delegate?.paymentChooserViewControllerDidCancel(self)
-    }
-}
+//extension PaymentChooserViewController: CreditCardFormViewControllerDelegate {
+//    public func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
+//        delegate?.paymentChooserViewController(self, didCreatePayment: Payment.token(token))
+//    }
+//
+//    public func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error) {
+//        delegate?.paymentChooserViewController(self, paymentCreatorController: controller, didFailWithError: error)
+//    }
+//
+//    public func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController) {
+//        delegate?.paymentChooserViewControllerDidCancel(self)
+//    }
+//}
 
 
 extension Array where Element == OMSSourceTypeValue {
@@ -453,101 +270,6 @@ extension Array where Element == OMSSourceTypeValue {
     
     public var hasEContextSource: Bool {
         return self.contains(.eContext)
-    }
-}
-
-
-extension PaymentChooserViewController {
-    public static let defaultAvailablePaymentMethods: [OMSSourceTypeValue] = [
-        .internetBankingBAY,
-        .internetBankingKTB,
-        .internetBankingSCB,
-        .internetBankingBBL,
-        .alipay,
-        .billPaymentTescoLotus,
-        .installmentBAY,
-        .installmentFirstChoice,
-        .installmentBBL,
-        .installmentKTC,
-        .installmentKBank,
-    ]
-    
-    public static let internetBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
-        .internetBankingBAY,
-        .internetBankingKTB,
-        .internetBankingSCB,
-        .internetBankingBBL,
-    ]
-    
-    public static let installmentsBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
-        .installmentBAY,
-        .installmentFirstChoice,
-        .installmentBBL,
-        .installmentKTC,
-        .installmentKBank,
-    ]
-    
-    public static let billPaymentAvailablePaymentMethods: [OMSSourceTypeValue] = [
-        .billPaymentTescoLotus,
-    ]
-    
-    public static let barcodeAvailablePaymentMethods: [OMSSourceTypeValue] = [
-        .barcodeAlipay,
-    ]
-}
-
-
-extension OMSSourceTypeValue {
-    
-    var installmentBrand: PaymentInformation.Installment.Brand? {
-        switch self {
-        case .installmentBAY:
-            return .bay
-        case .installmentFirstChoice:
-            return .firstChoice
-        case .installmentBBL:
-            return .bbl
-        case .installmentKTC:
-            return .ktc
-        case .installmentKBank:
-            return .kBank
-        default:
-            return nil
-        }
-    }
-    
-    var isInstallmentSource: Bool {
-        switch self {
-        case .installmentBAY, .installmentFirstChoice, .installmentBBL, .installmentKTC, .installmentKBank:
-            return true
-        default:
-            return false
-        }
-
-    }
-    
-    var internetBankingSource: PaymentInformation.InternetBanking? {
-        switch self {
-        case .internetBankingBAY:
-            return .bay
-        case .internetBankingKTB:
-            return .ktb
-        case .internetBankingSCB:
-            return .scb
-        case .internetBankingBBL:
-            return .bbl
-        default:
-            return nil
-        }
-    }
-    
-    var isInternetBankingSource: Bool {
-        switch self {
-        case .internetBankingBAY, .internetBankingKTB, .internetBankingSCB, .internetBankingBBL:
-            return true
-        default:
-            return false
-        }
     }
 }
 
