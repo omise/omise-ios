@@ -1,16 +1,11 @@
 import UIKit
 
 @objc(OMSInternetBankingSourceChooserViewController)
-class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>, PaymentSourceChooser, PaymentCreatorUI, ErrorDisplayableUI {
+class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>, PaymentSourceChooser, PaymentChooserUI {
     var flowSession: PaymentSourceCreatorFlowSession?
-    var client: Client?
-    var paymentAmount: Int64?
-    var paymentCurrency: Currency?
     
     @IBOutlet var internetBankingNameLabels: [UILabel]!
     @IBOutlet var redirectIconImageView: [UIImageView]!
-    @IBOutlet var errorBannerView: UIView!
-    @IBOutlet var errorMessageLabel: UILabel!
     
     @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
         didSet {

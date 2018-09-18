@@ -62,9 +62,6 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
             let installmentTermsChooserViewController = segue.destination as? InstallmentsNumberOfTermsChooserViewController {
             installmentTermsChooserViewController.installmentBrand = selectedBrand
             installmentTermsChooserViewController.flowSession = self.flowSession
-            installmentTermsChooserViewController.client = self.client
-            installmentTermsChooserViewController.paymentAmount = self.paymentAmount
-            installmentTermsChooserViewController.paymentCurrency = self.paymentCurrency
             installmentTermsChooserViewController.preferredPrimaryColor = self.preferredPrimaryColor
             installmentTermsChooserViewController.preferredSecondaryColor = self.preferredSecondaryColor
         }

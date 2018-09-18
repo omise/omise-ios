@@ -1,6 +1,6 @@
 import UIKit
 
-class EContextInformationInputViewController: UIViewController, PaymentSourceChooser, PaymentCreatorUI, PaymentFormUIController {
+class EContextInformationInputViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
     var flowSession: PaymentSourceCreatorFlowSession?
     var client: Client?
     var paymentAmount: Int64?
@@ -23,11 +23,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
     
     var currentEditingTextField: OmiseTextField?
-  
-    @IBOutlet var errorBannerView: UIView!
-    @IBOutlet var errorMessageLabel: UILabel!
-    @IBOutlet var hidingErrorBannerConstraint: NSLayoutConstraint!
-  
+
     @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
@@ -69,15 +65,6 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
             self, selector:#selector(keyboardWillHide(_:)),
             name: NSNotification.Name.UIKeyboardWillHide, object: nil
         )
-    }
-    
-    func displayErrorMessage(_ errorMessage: String, animated: Bool) {
-        errorMessageLabel.text = errorMessage
-        setShowsErrorBanner(true, animated: animated)
-    }
-    
-    func dismissErrorBanner(animated: Bool) {
-        setShowsErrorBanner(false, animated: animated)
     }
     
     @IBAction func submitEContextForm(_ sender: AnyObject) {

@@ -2,43 +2,14 @@ import UIKit
 import os
 
 
-public protocol PaymentCreatorUI: PaymentChooserUI {
-    func displayErrorMessage(_ errorMessage: String, animated: Bool)
-    func dismissErrorBanner(animated: Bool)
-}
-
 
 @objc(OMSPaymentChooserViewController)
-public class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceChooser, PaymentCreatorUI, ErrorDisplayableUI {
-    /// Omise public key for calling tokenization API.
-    @objc public var publicKey: String? {
-        didSet {
-            guard let publicKey = publicKey else {
-                if #available(iOS 10.0, *) {
-                    os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.publicKey ?? "")
-                }
-                assertionFailure("Missing public key information. Please set the public key before request token.")
-                return
-            }
-            
-            self.client = Client(publicKey: publicKey)
-        }
-    }
-    
-    var client: Client?
-    public var paymentAmount: Int64?
-    public var paymentCurrency: Currency?
+public class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceChooser, PaymentChooserUI {
     
     @IBOutlet var paymentMethodNameLables: [UILabel]!
     @IBOutlet var redirectMethodIconImageView: [UIImageView]!
     
     var flowSession: PaymentSourceCreatorFlowSession?
-    
-    @IBOutlet public var errorBannerView: UIView!
-    @IBOutlet public var errorMessageLabel: UILabel!
-    
-    /// A boolean flag to enables/disables automatic error handling. Defaults to `true`.
-    @objc public var handleErrors = true
     
     @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
         didSet {
@@ -104,8 +75,7 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch (segue.identifier, segue.destination) {
         case ("GoToCreditCardFormSegue"?, let controller as CreditCardFormViewController):
-//            controller.delegate = self
-            controller.publicKey = self.publicKey
+            controller.publicKey = flowSession?.client?.publicKey
         case ("GoToInternetBankingChooserSegue"?, let controller as InternetBankingSourceChooserViewController):
             controller.showingValues = allowedPaymentMethods.compactMap({ $0.internetBankingSource })
             controller.flowSession = self.flowSession
@@ -149,8 +119,6 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     }
     
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        dismissErrorBanner(animated: true)
-        
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
         let payment: PaymentInformation
@@ -219,37 +187,6 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     }
     
 }
-//
-//extension PaymentChooserViewController: PaymentCreatorTrampolineDelegate {
-//    func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, isRequestedToHandleCreatedSource source: Source) {
-//        delegate?.paymentChooserViewController(self, didCreatePayment: Payment.source(source))
-//    }
-//
-//    func paymentCreatorTrampoline(_ trampoline: PaymentCreatorTrampoline, paymentCreatorController: UIViewController & PaymentCreatorUI, isRequestedToHandleError error: Error) {
-//        delegate?.paymentChooserViewController(self, paymentCreatorController: paymentCreatorController, didFailWithError: error)
-//        displayErrorMessage(error.localizedDescription, animated: true)
-//    }
-//
-//    func paymentCreatorTrampolineIsRequestedToCancel(_ trampoline: PaymentCreatorTrampoline) {
-//        delegate?.paymentChooserViewControllerDidCancel(self)
-//    }
-//
-//}
-
-//extension PaymentChooserViewController: CreditCardFormViewControllerDelegate {
-//    public func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
-//        delegate?.paymentChooserViewController(self, didCreatePayment: Payment.token(token))
-//    }
-//
-//    public func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error) {
-//        delegate?.paymentChooserViewController(self, paymentCreatorController: controller, didFailWithError: error)
-//    }
-//
-//    public func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController) {
-//        delegate?.paymentChooserViewControllerDidCancel(self)
-//    }
-//}
-
 
 extension Array where Element == OMSSourceTypeValue {
     public var hasInternetBankingSource: Bool {

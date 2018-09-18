@@ -78,6 +78,17 @@ public class PaymentCreatorController : UINavigationController {
         }
     }
     
+    @objc public var showsCreditCardPayment: Bool = true {
+        didSet {
+            paymentChooserViewController.showsCreditCardPayment = showsCreditCardPayment
+        }
+    }
+    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentCreatorController.defaultAvailablePaymentMethods + [OMSSourceTypeValue.eContext] {
+        didSet {
+            paymentChooserViewController.allowedPaymentMethods = allowedPaymentMethods
+        }
+    }
+    
     public var preferredPrimaryColor: UIColor?
     public var preferredSecondaryColor: UIColor?
     
@@ -85,10 +96,17 @@ public class PaymentCreatorController : UINavigationController {
     
     private let paymentSourceCreatorFlowSession = PaymentSourceCreatorFlowSession()
     
-    private let displayingNoticeView: UIView = {
+    private var paymentChooserViewController: PaymentChooserViewController {
+        return topViewController as! PaymentChooserViewController
+    }
+    
+    private var noticeViewHeightConstraint: NSLayoutConstraint!
+    private let displayingNoticeView: NoticeView = {
         let bundle = Bundle.omiseSDKBundle
         let noticeViewNib = UINib(nibName: "NoticeView", bundle: bundle)
-        return noticeViewNib.instantiate(withOwner: nil, options: nil).first as! UIView
+        let noticeView = noticeViewNib.instantiate(withOwner: nil, options: nil).first as! NoticeView
+        noticeView.translatesAutoresizingMaskIntoConstraints = false
+        return noticeView
     }()
     
     public override func pushViewController(_ viewController: UIViewController, animated: Bool) {
@@ -113,33 +131,119 @@ public class PaymentCreatorController : UINavigationController {
         super.addChildViewController(childController)
     }
     
+    public init() {
+        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: Bundle.omiseSDKBundle)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "PaymentChooserController")
+        
+        guard let paymentChooserViewController = viewController as? PaymentChooserViewController else {
+            preconditionFailure("This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller")
+        }
+        
+        super.init(rootViewController: paymentChooserViewController)
+      
+        initializeWithPaymentChooserViewController(paymentChooserViewController)
+    }
+    
+    @available(iOS, unavailable)
     public override init(rootViewController: UIViewController) {
+        guard let rootViewController = rootViewController as? PaymentChooserViewController else {
+            preconditionFailure("This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller")
+        }
         super.init(rootViewController: rootViewController)
-        if let rootViewController = rootViewController as? PaymentChooserUI {
-            rootViewController.preferredPrimaryColor = preferredPrimaryColor
-            rootViewController.preferredSecondaryColor = preferredSecondaryColor
-        }
-        
-        if let viewController = rootViewController as? PaymentChooserViewController {
-            viewController.flowSession = self.paymentSourceCreatorFlowSession
-        }
-        
-        self.paymentSourceCreatorFlowSession.delegate = self
+
+        initializeWithPaymentChooserViewController(rootViewController)
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        if let rootViewController = topViewController as? PaymentChooserUI {
-            rootViewController.preferredPrimaryColor = preferredPrimaryColor
-            rootViewController.preferredSecondaryColor = preferredSecondaryColor
+        guard let rootViewController = topViewController as? PaymentChooserViewController else {
+            preconditionFailure("This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller")
+        }
+        initializeWithPaymentChooserViewController(rootViewController)
+    }
+    
+    public override var viewControllers: [UIViewController] {
+        willSet {
+            if !(viewControllers.first is PaymentChooserViewController) {
+                preconditionFailure("This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller")
+            }
+        }
+    }
+    
+    private func initializeWithPaymentChooserViewController(_ viewController: PaymentChooserViewController) {
+        viewController.preferredPrimaryColor = preferredPrimaryColor
+        viewController.preferredSecondaryColor = preferredSecondaryColor
+        
+        viewController.flowSession = paymentSourceCreatorFlowSession
+        viewController.allowedPaymentMethods = allowedPaymentMethods
+        viewController.showsCreditCardPayment = showsCreditCardPayment
+        paymentSourceCreatorFlowSession.delegate = self
+        
+        if #available(iOS 9.0, *) {
+            noticeViewHeightConstraint = displayingNoticeView.heightAnchor.constraint(equalToConstant: 0)
+        } else {
+            noticeViewHeightConstraint = NSLayoutConstraint(item: displayingNoticeView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 0)
+        }
+        noticeViewHeightConstraint.isActive = true
+        
+        let dismissErrorBannerTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissErrorMessageBanner(_:)))
+        displayingNoticeView.addGestureRecognizer(dismissErrorBannerTapGestureRecognizer)
+    }
+    
+    override func displayErrorMessage(_ message: String, animated: Bool, sender: AnyObject) {
+        displayingNoticeView.detailLabel.text = message
+        view.insertSubview(self.displayingNoticeView, belowSubview: navigationBar)
+        
+        if #available(iOS 9.0, *) {
+            NSLayoutConstraint.activate([
+                displayingNoticeView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
+                displayingNoticeView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                displayingNoticeView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                ])
+        } else {
+            let views = ["displayingNoticeView": displayingNoticeView] as [String: UIView]
+            let constraints = NSLayoutConstraint.constraints(withVisualFormat: "|[displayingNoticeView]|", options: [], metrics: nil, views: views) +
+                [ NSLayoutConstraint(item: displayingNoticeView, attribute: .top, relatedBy: .equal, toItem: navigationBar, attribute: .bottom, multiplier: 1.0, constant: 0)]
+            view.addConstraints(constraints)
         }
         
-        if let viewController = topViewController as? PaymentChooserViewController {
-            viewController.flowSession = self.paymentSourceCreatorFlowSession
+        noticeViewHeightConstraint.isActive = true
+        view.layoutIfNeeded()
+        
+        let animationBlock = {
+            self.noticeViewHeightConstraint.isActive = false
+            self.view.layoutIfNeeded()
         }
-
-        self.paymentSourceCreatorFlowSession.delegate = self
+        
+        if animated {
+            UIView.animate(withDuration: TimeInterval(UINavigationControllerHideShowBarDuration) + 0.07, delay: 0.0, options: [.layoutSubviews], animations: animationBlock)
+        } else {
+            animationBlock()
+        }
+    }
+    
+    override func dismissErrorMessage(animated: Bool, sender: AnyObject) {
+        let animationBlock = {
+            self.noticeViewHeightConstraint.isActive = true
+            self.view.layoutIfNeeded()
+        }
+        
+        if animated {
+            UIView.animate(
+                withDuration: TimeInterval(UINavigationControllerHideShowBarDuration), delay: 0.0,
+                options: [.layoutSubviews], animations: animationBlock,
+                completion: { _ in
+                    self.displayingNoticeView.removeFromSuperview()
+            })
+        } else {
+            animationBlock()
+            self.displayingNoticeView.removeFromSuperview()
+        }
+    }
+    
+    @objc func dismissErrorMessageBanner(_ sender: AnyObject) {
+        dismissErrorMessage(animated: true, sender: sender)
     }
 }
 
@@ -150,6 +254,7 @@ extension PaymentCreatorController : PaymentSourceCreatorFlowSessionDelegate {
     }
     
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentSourceCreatorFlowSession, didFailWithError error: Error) {
+        displayErrorMessage(error.localizedDescription, animated: true, sender: self)
         paymentDelegate?.paymentCreatorController(self, didFailWithError: error)
     }
 }
@@ -195,9 +300,9 @@ extension PaymentCreatorController {
 }
 
 
-public class NoticeView: UIView {
+class NoticeView: UIView {
     
-    @IBOutlet public weak var iconImageView: UIImageView!
-    @IBOutlet public weak var detailLabel: UILabel!
+    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var detailLabel: UILabel!
 
 }

@@ -85,12 +85,7 @@ extension PaymentChooserUI {
     }
 }
 
-public protocol ErrorDisplayableUI: AnyObject {
-    var errorBannerView: UIView! { get }
-    var errorMessageLabel: UILabel! { get }
-}
-
-protocol PaymentFormUIController: ErrorDisplayableUI {
+protocol PaymentFormUIController : AnyObject {
     var formLabels: [UILabel]! { get }
     var formFields: [OmiseTextField]! { get }
     var formFieldsAccessoryView: UIToolbar! { get }
@@ -101,26 +96,30 @@ protocol PaymentFormUIController: ErrorDisplayableUI {
     var currentEditingTextField: OmiseTextField? { get set }
     
     var contentView: UIScrollView! { get }
-    var hidingErrorBannerConstraint: NSLayoutConstraint! { get }
+}
+
+extension UIViewController {
+    @objc func displayErrorMessage(_ message: String, animated: Bool, sender: AnyObject) {
+        let targetController = self.targetViewController(forAction: #selector(UIViewController.displayErrorMessage(_:animated:sender:)), sender: sender)
+        if let targetController = targetController {
+            targetController.displayErrorMessage(message, animated: animated, sender: sender)
+        } else {
+            
+        }
+    }
+    
+    @objc func dismissErrorMessage(animated: Bool, sender: AnyObject) {
+        let targetController = self.targetViewController(forAction: #selector(UIViewController.dismissErrorMessage(animated:sender:)), sender: sender)
+        if let targetController = targetController {
+            targetController.dismissErrorMessage(animated: animated, sender: sender)
+        } else {
+            
+        }
+    }
 }
 
 
 extension PaymentFormUIController where Self: UIViewController {
-    func setShowsErrorBanner(_ showsErrorBanner: Bool, animated: Bool = true) {
-        hidingErrorBannerConstraint.isActive = !showsErrorBanner
-        
-        let animationBlock = {
-            self.errorBannerView.alpha = showsErrorBanner ? 1.0 : 0.0
-            self.contentView.layoutIfNeeded()
-        }
-        
-        if animated {
-            UIView.animate(withDuration: TimeInterval(UINavigationControllerHideShowBarDuration), delay: 0.0, options: [.layoutSubviews], animations: animationBlock)
-        } else {
-            animationBlock()
-        }
-    }
-    
     func updateInputAccessoryViewWithFirstResponder(_ firstResponder: OmiseTextField) {
         guard formFields.contains(firstResponder) else { return }
         
@@ -151,44 +150,6 @@ extension PaymentFormUIController where Self: UIViewController {
     
     func doneEditing() {
         view.endEditing(true)
-    }
-}
-
-
-extension ErrorDisplayableUI where Self: UITableViewController {
-    private func setShowsErrorBanner(_ showsErrorBanner: Bool, animated: Bool = true) {
-        let animationBlock = {
-            self.errorBannerView.alpha = showsErrorBanner ? 1.0 : 0.0
-            
-            let height: CGFloat
-            if showsErrorBanner {
-                let preferredHeight = self.errorBannerView.systemLayoutSizeFitting(
-                    CGSize(width: self.view.bounds.width, height: 48.0),
-                    withHorizontalFittingPriority: UILayoutPriority.required, verticalFittingPriority:
-                    UILayoutPriority.fittingSizeLevel
-                    ).height
-                height = max(preferredHeight, 48.0)
-            } else {
-                height = 0.0
-            }
-            self.errorBannerView.frame.size.height = height
-            self.tableView.tableHeaderView = self.errorBannerView
-        }
-        
-        if animated {
-            UIView.animate(withDuration: TimeInterval(UINavigationControllerHideShowBarDuration), delay: 0.0, options: [.layoutSubviews], animations: animationBlock)
-        } else {
-            animationBlock()
-        }
-    }
-    
-    public func displayErrorMessage(_ errorMessage: String, animated: Bool) {
-        errorMessageLabel.text = errorMessage
-        setShowsErrorBanner(true, animated: animated)
-    }
-    
-    public func dismissErrorBanner(animated: Bool) {
-        setShowsErrorBanner(false, animated: animated)
     }
 }
 
