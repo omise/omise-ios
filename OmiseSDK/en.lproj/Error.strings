@@ -7,3 +7,31 @@
 "credit-card-form.card-holder-name-field.invalid-data.error.text" = "Card holder name is invalid";
 "credit-card-form.expiry-date-field.invalid-data.error.text" = "Card expiry date is invalid";
 "credit-card-form.security-code-field.invalid-data.error.text" = "CVV code is invalid";
+
+
+"error.api.invalid_card.message" = "Invalid card data";
+"error.api.bad_request.message" = "Bad request";
+"error.api.authentication_failure.message" = "Authentication failure";
+"error.api.service_not_found.message" = "Service not found";
+
+"error.unexpected.no-error-norresponse.message" = "No error nor response";
+"error.unexpected.http-error-with-no-data.message" = "No error data in the error response";
+"error.unexpected.http-error-response-with-invalid-data.message" = "Invalid error data in the error response";
+"error.unexpected.http-succeess-with-no-data.message" = "No data in the success response";
+"error.unexpected.http-succeess-with-invalid-data.message" = "Invalid data in the success response";
+"error.unexpected.unrecognized-HTTP-status-code.message" = "Unrecognized/unsupported HTTP status code with code %d";
+
+
+"error.api.invalid_card.recovery-suggestion" = "Please review your credit card information";
+"error.api.bad_request.recovery-suggestion" = "Please contact the merchant";
+"error.api.authentication_failure.recovery-suggestion" = "Please contact the merchant";
+"error.api.service_not_found.recovery-suggestion" = "Please contact the merchant";
+
+"error.unexpected.no-error-norresponse.recovery-suggestion" = "";
+"error.unexpected.http-error-with-no-data.recovery-suggestion" = "";
+"error.unexpected.http-error-response-with-invalid-data.recovery-suggestion" = "";
+"error.unexpected.http-succeess-with-no-data.recovery-suggestion" = "";
+"error.unexpected.http-succeess-with-invalid-data.recovery-suggestion" = "";
+"error.unexpected.unrecognized-HTTP-status-code.recovery-suggestion" = "";
+
+

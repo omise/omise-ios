@@ -132,7 +132,7 @@ extension Client {
             }
             
             guard let httpResponse = response as? HTTPURLResponse else {
-                let error = OmiseError.unexpected(message: "no error and no response.", underlying: nil)
+                let error = OmiseError.unexpected(error: .noErrorNorResponse, underlying: nil)
                 result = .fail(error)
                 return
             }
@@ -140,7 +140,7 @@ extension Client {
             switch httpResponse.statusCode {
             case 400..<600:
                 guard let data = data else {
-                    let error = OmiseError.unexpected(message: "error response with no data", underlying: nil)
+                    let error = OmiseError.unexpected(error: .httpErrorWithNoData, underlying: nil)
                     result = .fail(error)
                     return
                 }
@@ -149,13 +149,13 @@ extension Client {
                     let decoder = makeJSONDecoder()
                     result = .fail(try decoder.decode(OmiseError.self, from: data))
                 } catch let err {
-                    let error = OmiseError.unexpected(message: "error response with invalid JSON", underlying: err)
+                    let error = OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: err)
                     result = .fail(error)
                 }
                 
             case 200..<300:
                 guard let data = data else {
-                    let error = OmiseError.unexpected(message: "HTTP 200 but no data", underlying: nil)
+                    let error = OmiseError.unexpected(error: .httpSucceessWithNoData, underlying: nil)
                     result = .fail(error)
                     return
                 }
@@ -164,12 +164,12 @@ extension Client {
                     let decoder = makeJSONDecoder()
                     result = .success(try decoder.decode(T.self, from: data))
                 } catch let err {
-                    let error = OmiseError.unexpected(message: "200 response with invalid JSON", underlying: err)
+                    let error = OmiseError.unexpected(error: .httpSucceessWithInvalidData, underlying: err)
                     result = .fail(error)
                 }
                 
             default:
-                let error = OmiseError.unexpected(message: "unrecognized HTTP status code: \(httpResponse.statusCode)", underlying: nil)
+                let error = OmiseError.unexpected(error: .unrecognizedHTTPStatusCode(code: httpResponse.statusCode), underlying: nil)
                 result = .fail(error)
             }
         }
