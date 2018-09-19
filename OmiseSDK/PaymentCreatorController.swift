@@ -92,6 +92,8 @@ public class PaymentCreatorController : UINavigationController {
     public var preferredPrimaryColor: UIColor?
     public var preferredSecondaryColor: UIColor?
     
+    public var handleErrors: Bool = true
+    
     public weak var paymentDelegate: PaymentCreatorControllerDelegate?
     
     private let paymentSourceCreatorFlowSession = PaymentSourceCreatorFlowSession()
@@ -191,7 +193,7 @@ public class PaymentCreatorController : UINavigationController {
         displayingNoticeView.addGestureRecognizer(dismissErrorBannerTapGestureRecognizer)
     }
     
-    override func displayErrorMessage(_ message: String, animated: Bool, sender: AnyObject) {
+    override func displayErrorMessage(_ message: String, animated: Bool, sender: Any?) {
         displayingNoticeView.detailLabel.text = message
         view.insertSubview(self.displayingNoticeView, belowSubview: navigationBar)
         
@@ -223,7 +225,11 @@ public class PaymentCreatorController : UINavigationController {
         }
     }
     
-    override func dismissErrorMessage(animated: Bool, sender: AnyObject) {
+    override func dismissErrorMessage(animated: Bool, sender: Any?) {
+        guard self.displayingNoticeView.superview != nil else {
+            return
+        }
+        
         let animationBlock = {
             self.noticeViewHeightConstraint.isActive = true
             self.view.layoutIfNeeded()
@@ -249,13 +255,20 @@ public class PaymentCreatorController : UINavigationController {
 
 
 extension PaymentCreatorController : PaymentSourceCreatorFlowSessionDelegate {
+    func paymentCreatorFlowSessionWillCreateSource(_ paymentSourceCreatorFlowSession: PaymentSourceCreatorFlowSession) {
+        dismissErrorMessage(animated: true, sender: self)
+    }
+    
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentSourceCreatorFlowSession, didCreatedSource source: Source) {
         paymentDelegate?.paymentCreatorController(self, didCreatePayment: Payment.source(source))
     }
     
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentSourceCreatorFlowSession, didFailWithError error: Error) {
-        displayErrorMessage(error.localizedDescription, animated: true, sender: self)
-        paymentDelegate?.paymentCreatorController(self, didFailWithError: error)
+        if handleErrors {
+            displayErrorMessage(error.localizedDescription, animated: true, sender: self)
+        } else {
+            paymentDelegate?.paymentCreatorController(self, didFailWithError: error)
+        }
     }
 }
 

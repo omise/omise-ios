@@ -112,15 +112,14 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
                     comment: "A descriptive message representing an `Invalid data in the success response` error during the operation in the client"
                 )
             case .unrecognizedHTTPStatusCode(let statusCode):
-                return String.localizedStringWithFormat(
-                    NSLocalizedString(
-                        "error.unexpected.unrecognized-HTTP-status-code.message",
-                        tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                        value: "Unrecognized/unsupported HTTP status code",
-                        comment: "A descriptive message representing an `Unrecognized/unsupported HTTP status code` error during the operation in the client"
-                    ),
-                    statusCode
+                let messageFormat = NSLocalizedString(
+                    "error.unexpected.unrecognized-HTTP-status-code.message",
+                    tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                    value: "Unrecognized/unsupported HTTP status code",
+                    comment: "A descriptive message representing an `Unrecognized/unsupported HTTP status code` error during the operation in the client"
                 )
+                
+                return String.localizedStringWithFormat(messageFormat, statusCode)
             case .other(let message):
                 return message
             }
@@ -221,7 +220,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
                 ErrorUserInfoKey.code.rawValue: code,
                 ErrorUserInfoKey.location.rawValue: location,
                 ErrorUserInfoKey.message.rawValue: message,
-                NSLocalizedDescriptionKey: message,
+                NSLocalizedDescriptionKey: errorDescription ?? "",
             ]
         case let .unexpected(error: _, underlying: error?):
             return [

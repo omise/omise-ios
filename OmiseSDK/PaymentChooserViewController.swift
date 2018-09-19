@@ -48,8 +48,6 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-//        flowSession?.delegate = self
-        
         applyPrimaryColor()
         applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -120,6 +118,7 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
+        dismissErrorMessage(animated: true, sender: cell)
         tableView.deselectRow(at: indexPath, animated: true)
         let payment: PaymentInformation
         

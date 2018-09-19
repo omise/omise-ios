@@ -7,6 +7,7 @@ let defaultPaymentChooserUISecondaryColor = #colorLiteral(red:0.89, green:0.91, 
 
 
 internal protocol PaymentSourceCreatorFlowSessionDelegate : AnyObject {
+    func paymentCreatorFlowSessionWillCreateSource(_ paymentSourceCreatorFlowSession: PaymentSourceCreatorFlowSession)
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentSourceCreatorFlowSession,
                                    didCreatedSource source: Source)
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentSourceCreatorFlowSession,
@@ -55,6 +56,7 @@ internal class PaymentSourceCreatorFlowSession {
                 return
         }
         
+        delegate?.paymentCreatorFlowSessionWillCreateSource(self)
         client.sendRequest(Request<Source>(sourceType: sourceType, amount: amount, currency: currency)) { (result) in
             defer {
                 DispatchQueue.main.async {
@@ -99,7 +101,7 @@ protocol PaymentFormUIController : AnyObject {
 }
 
 extension UIViewController {
-    @objc func displayErrorMessage(_ message: String, animated: Bool, sender: AnyObject) {
+    @objc func displayErrorMessage(_ message: String, animated: Bool, sender: Any?) {
         let targetController = self.targetViewController(forAction: #selector(UIViewController.displayErrorMessage(_:animated:sender:)), sender: sender)
         if let targetController = targetController {
             targetController.displayErrorMessage(message, animated: animated, sender: sender)
@@ -108,7 +110,7 @@ extension UIViewController {
         }
     }
     
-    @objc func dismissErrorMessage(animated: Bool, sender: AnyObject) {
+    @objc func dismissErrorMessage(animated: Bool, sender: Any?) {
         let targetController = self.targetViewController(forAction: #selector(UIViewController.dismissErrorMessage(animated:sender:)), sender: sender)
         if let targetController = targetController {
             targetController.dismissErrorMessage(animated: animated, sender: sender)
