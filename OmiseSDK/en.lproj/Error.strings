@@ -9,8 +9,26 @@
 "credit-card-form.security-code-field.invalid-data.error.text" = "CVV code is invalid";
 
 
-"error.api.invalid_card.message" = "Invalid card data";
-"error.api.bad_request.message" = "Bad request";
+"error.api.invalid_card.invalid-card-number.message" = "Invalid card number";
+"error.api.invalid_card.invalid-expiration-date.message" = "Invalid card expiration date";
+"error.api.invalid_card.empty-card-holder-name.message" = "Invalid card holder name";
+"error.api.invalid_card.unsupported-brand.message" = "Unsupported card brand";
+"error.api.invalid_card.other.message" = "Invalid card data with \"%@\" message";
+
+"error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.message" = "Amount is less than the valid amount of %d subunit";
+"error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.message" = "Amount is less than the valid amount";
+"error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.message" = "Amount is greater than the valid amount of %d subunit";
+"error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.message" = "Amount is greater than the valid amount";
+"error.api.bad_request.invalid-currency.message" = "The currency is invalid";
+"error.api.bad_request.empty-name.message" = "The customer name is empty";
+"error.api.bad_request.name-is-too-long.with-valid-length.message" = "The customer name is longer than the valid length of %d characters";
+"error.api.bad_request.name-is-too-long.without-valid-length.message" = "The customer name is too long";
+"error.api.bad_request.invalid-email.message" = "The customer email is invalid";
+"error.api.bad_request.invalid-phone-number.message" = "The customer phone number is invalid";
+"error.api.bad_request.type-not-supported.message" = "The source type is not supported for this account";
+"error.api.bad_request.currency-not-supported.message" = "The currency is not supported for this account";
+"error.api.bad_request.other.message" = "Bad request: %@";
+
 "error.api.authentication_failure.message" = "Authentication failure";
 "error.api.service_not_found.message" = "Service not found";
 
@@ -22,8 +40,27 @@
 "error.unexpected.unrecognized-HTTP-status-code.message" = "Unrecognized/unsupported HTTP status code with code %d";
 
 
-"error.api.invalid_card.recovery-suggestion" = "Please review your credit card information";
+"error.api.invalid_card.invalid-card-number.recovery-suggestion" = "Please review the card number";
+"error.api.invalid_card.invalid-expiration-date.recovery-suggestion" = "Please review the card expiration date";
+"error.api.invalid_card.empty-card-holder-name.recovery-suggestion" = "Please review the card holder name";
+"error.api.invalid_card.unsupported-brand.recovery-suggestion" = "Please use other credit card";
+"error.api.invalid_card.other.recovery-suggestion" = "Please review your credit card information";
+
+"error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.recovery-suggestion" = "Please create a source with amount more than %d subunit";
+"error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.recovery-suggestion" = "Please create a source with more amount";
+"error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.recovery-suggestion" = "Please create a source with amount less than %d subunit";
+"error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.recovery-suggestion" = "Please create a source with less amount";
+"error.api.bad_request.invalid-currency.recovery-suggestion" = "Bad request";
+"error.api.bad_request.empty-name.recovery-suggestion" = "Please specify the customer name";
+"error.api.bad_request.name-is-too-long.with-valid-length.recovery-suggestion" = "Please specify the customer name with less than %d characters";
+"error.api.bad_request.name-is-too-long.without-valid-length.recovery-suggestion" = "Please specify the shorter customer name";
+"error.api.bad_request.invalid-email.recovery-suggestion" = "Please review the customer email";
+"error.api.bad_request.invalid-phone-number.recovery-suggestion" = "Please review the customer phone number";
+"error.api.bad_request.type-not-supported.recovery-suggestion" = "Please review the source type";
+"error.api.bad_request.currency-not-supported.recovery-suggestion" = "Please review the currency";
+"error.api.bad_request.other.recovery-suggestion" = "Bad request";
 "error.api.bad_request.recovery-suggestion" = "Please contact the merchant";
+
 "error.api.authentication_failure.recovery-suggestion" = "Please contact the merchant";
 "error.api.service_not_found.recovery-suggestion" = "Please contact the merchant";
 
@@ -35,3 +72,25 @@
 "error.unexpected.unrecognized-HTTP-status-code.recovery-suggestion" = "";
 
 
+"payment-creator.error.api.invalid_card.invalid-card-number.message" = "Invalid card number. Please review the card number again.";
+"payment-creator.error.api.invalid_card.invalid-expiration-date.message" = "Invalid card expiration date. Please review the card expiration date again.";
+"payment-creator.error.api.invalid_card.empty-card-holder-name.message" = "Invalid card holder name. Please review the card holder name again.";
+"payment-creator.error.api.invalid_card.unsupported-brand.message" = "Unsupported card brand. Please use other card.";
+"payment-creator.error.api.invalid_card.other.message" = "Unknown error occurred. Please try again later.";
+"payment-creator.error.unexpected.message" = "Unexpected error. Please try again later.";
+
+"payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.message" = "Amount is less than the valid amount of %@";
+"payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.message" = "Amount is less than the valid amount";
+"payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.message" = "Amount is greater than the valid amount of %@";
+"payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.message" = "Amount is greater than the valid amount";
+"payment-creator.error.api.bad_request.invalid-currency.message" = "The currency is invalid. Please choose other currency or contact the support";
+"payment-creator.error.api.bad_request.empty-name.message" = "The customer name is empty. Please fill the custemer name";
+"payment-creator.error.api.bad_request.name-is-too-long.with-valid-length.message" = "The customer name is longer than %d characters";
+"payment-creator.error.api.bad_request.name-is-too-long.without-valid-length.message" = "The customer name is too long.";
+"payment-creator.error.api.bad_request.invalid-email.message" = "The customer email is invalid. Please review the email.";
+"payment-creator.error.api.bad_request.invalid-phone-number.message" = "The customer phone number is invalid. Please review the phone number.";
+"payment-creator.error.api.bad_request.type-not-supported.message" = "The source type is not supported for this account. Please contact the support.";
+"payment-creator.error.api.bad_request.currency-not-supported.message" = "The currency is not supported for this account. Please choose other currency.";
+"payment-creator.error.api.bad_request.other.message" = "Unknown error occurred. Please try again later.";
+
+"payment-creator.error.api.unknown.message" = "Unknown error occured. Please try again later.";

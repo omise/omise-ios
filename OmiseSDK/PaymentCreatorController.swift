@@ -264,14 +264,205 @@ extension PaymentCreatorController : PaymentSourceCreatorFlowSessionDelegate {
     }
     
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentSourceCreatorFlowSession, didFailWithError error: Error) {
-        if handleErrors {
-            displayErrorMessage(error.localizedDescription, animated: true, sender: self)
-        } else {
+        if !handleErrors {
             paymentDelegate?.paymentCreatorController(self, didFailWithError: error)
+        } else if let error = error as? OmiseError {
+            displayErrorMessage(paymentSourceCreatorFlowSession.localizedErrorMessageFor(error), animated: true, sender: self)
+        } else {
+            displayErrorMessage(error.localizedDescription, animated: true, sender: self)
         }
     }
 }
 
+
+extension PaymentSourceCreatorFlowSession {
+    func localizedErrorMessageFor(_ error: OmiseError) -> String {
+        switch error {
+        case .api(code: let code, message: _, location: _):
+            switch code {
+            case .invalidCard(let invalidCardReasons):
+                switch invalidCardReasons.first {
+                case .invalidCardNumber?:
+                    return NSLocalizedString(
+                        "payment-creator.error.api.invalid_card.invalid-card-number.message",
+                        tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                        value: "Invalid card number. Please review the card number again.",
+                        comment: "The displaying message showing in the error banner when there is the `invalid-card-number` API error occured"
+                    )
+                case .invalidExpirationDate?:
+                    return NSLocalizedString(
+                        "payment-creator.error.api.invalid_card.invalid-expiration-date.message",
+                        tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                        value: "Invalid card expiration date. Please review the card expiration date again.",
+                        comment: "The displaying message showing in the error banner when there is the `invalid-expiration-date` API error occured"
+                    )
+                case .emptyCardHolderName?:
+                    return NSLocalizedString(
+                        "payment-creator.error.api.invalid_card.empty-card-holder-name.message",
+                        tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                        value: "Invalid card holder name. Please review the card holder name again.",
+                        comment: "The displaying message showing in the error banner when there is the `empty-card-holder-name` API error occured"
+                    )
+                case .unsupportedBrand?:
+                    return NSLocalizedString(
+                        "payment-creator.error.api.invalid_card.unsupported-brand.message",
+                        tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                        value: "Unsupported card brand. Please use other card.",
+                        comment: "The displaying message showing in the error banner when there is the `unsupported-brand` API error occured"
+                    )
+                case .other?, nil:
+                    return NSLocalizedString(
+                        "payment-creator.error.api.invalid_card.other.message",
+                        tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                        value: "Unknown error occurred. Please try again later.",
+                        comment: "The displaying message showing in the error banner when there is the `other` API error occured"
+                    )
+                }
+            case .badRequest(let badRequestReasons):
+                switch badRequestReasons.first {
+                case .amountIsLessThanValidAmount(validAmount: let validAmount)?:
+                    if let validAmount = validAmount {
+                        let preferredErrorDescriptionFormat = NSLocalizedString(
+                            "payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.message",
+                            tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                            value: "Amount is less than the valid amount of %@",
+                            comment: "The displaying message showing in the error banner an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend has occurred"
+                        )
+                        let formatter = NumberFormatter()
+                        formatter.currencyCode = self.paymentCurrency?.code
+                        return String.localizedStringWithFormat(preferredErrorDescriptionFormat, formatter.string(from: NSNumber(value: validAmount)) ?? "\(validAmount)")
+                    } else {
+                        return NSLocalizedString(
+                            "payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.message",
+                            tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                            value: "Amount is less than the valid amount",
+                            comment: "The displaying message showing in the error banner an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend has occurred"
+                        )
+                    }
+                case .amountIsGreaterThanValidAmount(validAmount: let validAmount)?:
+                    if let validAmount = validAmount {
+                        let preferredErrorDescriptionFormat = NSLocalizedString(
+                            "payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.message",
+                            tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                            value: "Amount is greater than the valid amount of %@",
+                            comment: "The displaying message showing in the error banner an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend has occurred"
+                        )
+                        let formatter = NumberFormatter()
+                        formatter.currencyCode = self.paymentCurrency?.code
+                        return String.localizedStringWithFormat(preferredErrorDescriptionFormat, formatter.string(from: NSNumber(value: validAmount)) ?? "\(validAmount)")
+                    } else {
+                        return NSLocalizedString(
+                            "payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.message",
+                            tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                            value: "Amount is greater than the valid amount",
+                            comment: "The displaying message showing in the error banner an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend has occurred"
+                        )
+                    }
+                case .invalidCurrency?:
+                    return NSLocalizedString(
+                        "payment-creator.error.api.bad_request.invalid-currency.message",
+                        tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                        value: "The currency is invalid. Please choose other currency or contact the support",
+                        comment: "The displaying message showing in the error banner an `Bad request` error with `invalid-currency` from the backend has occurred"
+                    )
+                    
+                case .emptyName?:
+                    return NSLocalizedString(
+                        "payment-creator.error.api.bad_request.empty-name.message",
+                        tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                        value: "The customer name is empty. Please fill the custemer name",
+                        comment: "The displaying message showing in the error banner an `Bad request` error with `empty-name` from the backend has occurred"
+                    )
+                    
+                case .nameIsTooLong(maximum: let maximumLength)?:
+                    if let maximumLength = maximumLength {
+                        let preferredErrorDescriptionFormat = NSLocalizedString(
+                            "payment-creator.error.api.bad_request.name-is-too-long.with-valid-length.message",
+                            tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                            value: "The customer name is longer than %d characters",
+                            comment: "The displaying message showing in the error banner an `Bad request` error with `name-is-too-long.with-valid-length` from the backend has occurred"
+                        )
+                        return String.localizedStringWithFormat(preferredErrorDescriptionFormat, maximumLength)
+                    } else {
+                        return NSLocalizedString(
+                            "payment-creator.error.api.bad_request.name-is-too-long.without-valid-length.message",
+                            tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                            value: "The customer name is too long.",
+                            comment: "The displaying message showing in the error banner an `Bad request` error with `name-is-too-long.without-valid-length` from the backend has occurred"
+                        )
+                    }
+                case .invalidName?:
+                    return NSLocalizedString(
+                        "payment-creator.error.api.bad_request.invalid-name.message",
+                        tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                        value: "The customer name is invalid. Please review the custemer name",
+                        comment: "The displaying message showing in the error banner an `Bad request` error with `invalid-name` from the backend has occurred"
+                    )
+                    
+                case .invalidEmail?:
+                    return NSLocalizedString(
+                        "payment-creator.error.api.bad_request.invalid-email.message",
+                        tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                        value: "The customer email is invalid. Please review the email.",
+                        comment: "The displaying message showing in the error banner an `Bad request` error with `invalid-email` from the backend has occurred"
+                    )
+                    
+                case .invalidPhoneNumber?:
+                    return NSLocalizedString(
+                        "payment-creator.error.api.bad_request.invalid-phone-number.message",
+                        tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                        value: "The customer phone number is invalid. Please review the phone number.",
+                        comment: "The displaying message showing in the error banner an `Bad request` error with `invalid-phone-number` from the backend has occurred"
+                    )
+                    
+                case .typeNotSupported?:
+                    return NSLocalizedString(
+                        "payment-creator.error.api.bad_request.type-not-supported.message",
+                        tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                        value: "The source type is not supported for this account. Please contact the support.",
+                        comment: "The displaying message showing in the error banner an `Bad request` error with `type-not-supported` from the backend has occurred"
+                    )
+                    
+                case .currencyNotSupported?:
+                    return NSLocalizedString(
+                        "payment-creator.error.api.bad_request.currency-not-supported.message",
+                        tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                        value: "The currency is not supported for this account. Please choose other currency.",
+                        comment: "The displaying message showing in the error banner an `Bad request` error with `currency-not-supported` from the backend has occurred"
+                    )
+                case .other?, nil:
+                    return NSLocalizedString(
+                        "payment-creator.error.api.bad_request.other.message",
+                        tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                        value: "Unknown error occurred. Please try again later.",
+                        comment: "The displaying message showing in the error banner an `Bad request` error with `other` from the backend has occurred"
+                    )
+                }
+            case .authenticationFailure, .serviceNotFound:
+                return NSLocalizedString(
+                    "payment-creator.error.api.unexpected.message",
+                    tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                    value: "Unexpected error Please try again later.",
+                    comment: "The displaying message showing in the error banner when there is the `unexpected` API error occured"
+                )
+            case .other:
+                return NSLocalizedString(
+                    "payment-creator.error.api.unknown.message",
+                    tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                    value: "Unknown error occured. Please try again later.",
+                    comment: "The displaying message showing in the error banner when there is an `unknown` API error occured"
+                )
+            }
+        case .unexpected:
+            return NSLocalizedString(
+                "payment-creator.error.unexpected.message",
+                tableName: "Error", bundle: Bundle.omiseSDKBundle,
+                value: "Unexpected error",
+                comment: "The displaying message showing in the error banner when there is the `unexpected` error occured"
+            )
+        }
+    }
+}
 
 extension PaymentCreatorController {
     public static let defaultAvailablePaymentMethods: [OMSSourceTypeValue] = [
