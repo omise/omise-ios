@@ -23,24 +23,25 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="999" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" image="Close Mini" translatesAutoresizingMaskIntoConstraints="NO" id="ybq-pi-bpb">
-                    <rect key="frame" x="343" y="12" width="16" height="16"/>
+                <button userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="999" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYb-EK-syQ">
+                    <rect key="frame" x="343" y="9" width="16" height="22"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </imageView>
+                    <state key="normal" image="Close Mini"/>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.95294117649999999" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Sfj-f5-Puk" firstAttribute="leading" secondItem="M6I-Pd-x6s" secondAttribute="trailing" constant="12" id="0nE-PB-rci"/>
                 <constraint firstItem="M6I-Pd-x6s" firstAttribute="centerY" secondItem="12c-pc-Yfl" secondAttribute="centerY" priority="950" id="14b-Tx-DXA"/>
+                <constraint firstItem="aYb-EK-syQ" firstAttribute="centerY" secondItem="M6I-Pd-x6s" secondAttribute="centerY" id="6lv-DI-8s5"/>
                 <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="200" constant="40" id="LAl-WY-rTV"/>
+                <constraint firstAttribute="trailingMargin" secondItem="aYb-EK-syQ" secondAttribute="trailing" id="PUG-LT-kVg"/>
                 <constraint firstItem="Sfj-f5-Puk" firstAttribute="centerY" secondItem="M6I-Pd-x6s" secondAttribute="centerY" priority="999" id="Pex-Gn-Aew"/>
                 <constraint firstItem="Sfj-f5-Puk" firstAttribute="top" relation="greaterThanOrEqual" secondItem="12c-pc-Yfl" secondAttribute="top" priority="450" constant="10" id="cL7-35-ctQ"/>
-                <constraint firstAttribute="trailingMargin" secondItem="ybq-pi-bpb" secondAttribute="trailing" id="hGc-UE-ZcJ"/>
-                <constraint firstItem="ybq-pi-bpb" firstAttribute="centerY" secondItem="M6I-Pd-x6s" secondAttribute="centerY" id="hb3-tI-aLo"/>
+                <constraint firstItem="aYb-EK-syQ" firstAttribute="leading" secondItem="Sfj-f5-Puk" secondAttribute="trailing" constant="12" id="dc1-zt-PGE"/>
                 <constraint firstAttribute="bottom" secondItem="Sfj-f5-Puk" secondAttribute="bottom" priority="999" constant="10" id="kWm-6r-drU"/>
                 <constraint firstItem="M6I-Pd-x6s" firstAttribute="leading" secondItem="12c-pc-Yfl" secondAttribute="leadingMargin" id="qOD-B5-rZP"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Sfj-f5-Puk" secondAttribute="bottom" priority="950" constant="10" id="yED-aw-fmY"/>
-                <constraint firstItem="ybq-pi-bpb" firstAttribute="leading" secondItem="Sfj-f5-Puk" secondAttribute="trailing" constant="12" id="yZv-3h-Lq0"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

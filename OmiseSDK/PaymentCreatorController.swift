@@ -65,12 +65,30 @@ public class PaymentCreatorController : UINavigationController {
         }
     }
     
+    @objc public var __paymentAmount: Int {
+        get {
+            return paymentAmount.map(Int.init) ?? 0
+        }
+        set {
+            paymentAmount = newValue > 0 ? Int64(newValue) : nil
+        }
+    }
+    
+    @objc public var __paymentCurrencyCode: String? {
+        get {
+            return paymentCurrency?.code
+        }
+        set {
+            paymentCurrency = newValue.map(Currency.init(code:))
+        }
+    }
+    
     @objc public var showsCreditCardPayment: Bool = true {
         didSet {
             paymentChooserViewController.showsCreditCardPayment = showsCreditCardPayment
         }
     }
-    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentCreatorController.defaultAvailablePaymentMethods + [OMSSourceTypeValue.eContext] {
+    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentCreatorController.thailandDefaultAvailableSourceMethods {
         didSet {
             paymentChooserViewController.allowedPaymentMethods = allowedPaymentMethods
         }
@@ -223,6 +241,9 @@ public class PaymentCreatorController : UINavigationController {
         let animationBlock = {
             self.noticeViewHeightConstraint.isActive = false
             self.view.layoutIfNeeded()
+            if #available(iOS 11, *) {
+                self.additionalSafeAreaInsets.top = self.displayingNoticeView.bounds.height
+            }
         }
         
         if animated {
@@ -240,6 +261,9 @@ public class PaymentCreatorController : UINavigationController {
         let animationBlock = {
             self.noticeViewHeightConstraint.isActive = true
             self.view.layoutIfNeeded()
+            if #available(iOS 11, *) {
+                self.additionalSafeAreaInsets.top = 0
+            }
         }
         
         if animated {
@@ -257,6 +281,16 @@ public class PaymentCreatorController : UINavigationController {
     
     @objc func dismissErrorMessageBanner(_ sender: AnyObject) {
         dismissErrorMessage(animated: true, sender: sender)
+    }
+  
+    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        if #available(iOS 11, *), self.displayingNoticeView.superview != nil {
+            coordinator.animate(alongsideTransition: { (context) in
+                self.additionalSafeAreaInsets.top = self.displayingNoticeView.bounds.height
+            }, completion: nil)
+        }
     }
 }
 
@@ -488,7 +522,7 @@ extension PaymentCreatorFlowSession {
 }
 
 extension PaymentCreatorController {
-    public static let defaultAvailablePaymentMethods: [OMSSourceTypeValue] = [
+    public static let thailandDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
         .internetBankingBAY,
         .internetBankingKTB,
         .internetBankingSCB,
@@ -500,6 +534,10 @@ extension PaymentCreatorController {
         .installmentBBL,
         .installmentKTC,
         .installmentKBank,
+        ]
+    
+    public static let japanDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
+        OMSSourceTypeValue.eContext,
         ]
     
     public static let internetBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
