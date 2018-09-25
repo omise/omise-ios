@@ -2,7 +2,7 @@ import UIKit
 
 @objc(OMSInstallmentBankingSourceChooserViewController)
 class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>, PaymentSourceChooser, PaymentChooserUI {
-    var flowSession: PaymentSourceCreatorFlowSession?
+    var flowSession: PaymentCreatorFlowSession?
     var client: Client?
     var paymentAmount: Int64?
     var paymentCurrency: Currency?

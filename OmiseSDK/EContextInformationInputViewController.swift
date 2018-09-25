@@ -1,7 +1,7 @@
 import UIKit
 
 class EContextInformationInputViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
-    var flowSession: PaymentSourceCreatorFlowSession?
+    var flowSession: PaymentCreatorFlowSession?
     var client: Client?
     var paymentAmount: Int64?
     var paymentCurrency: Currency?

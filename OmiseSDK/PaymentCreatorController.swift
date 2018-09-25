@@ -11,28 +11,14 @@ public protocol PaymentCreatorControllerDelegate: NSObjectProtocol {
 }
 
 
-public enum PaymentChooserOption: StaticElementIterable, Equatable {
-    case creditCard
-    case installment
-    case internetBanking
-    case tescoLotus
-    case conbini
-    case payEasy
-    case netBanking
-    case alipay
-    
-    public static var allCases: [PaymentChooserOption] {
-        return [
-            .creditCard,
-            .installment,
-            .internetBanking,
-            .tescoLotus,
-            .conbini,
-            .payEasy,
-            .netBanking,
-            .alipay,
-        ]
-    }
+@objc public protocol OMSPaymentCreatorControllerDelegate: NSObjectProtocol {
+    @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
+                                  didCreateToken token: __OmiseToken)
+    @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
+                                  didCreateSource source: __OmiseSource)
+    @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
+                                  didFailWithError error: Error)
+    @objc optional func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController)
 }
 
 
@@ -46,6 +32,7 @@ public protocol PaymentChooserUI: AnyObject {
     var preferredSecondaryColor: UIColor? { get set }
 }
 
+@objc(OMSPaymentCreatorController)
 public class PaymentCreatorController : UINavigationController {
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String? {
@@ -89,14 +76,15 @@ public class PaymentCreatorController : UINavigationController {
         }
     }
     
-    public var preferredPrimaryColor: UIColor?
-    public var preferredSecondaryColor: UIColor?
+    @objc @IBInspectable public var preferredPrimaryColor: UIColor?
+    @objc @IBInspectable public var preferredSecondaryColor: UIColor?
     
-    public var handleErrors: Bool = true
+    @objc public var handleErrors: Bool = true
     
     public weak var paymentDelegate: PaymentCreatorControllerDelegate?
+    @objc(paymentDelegate) public weak var __paymentDelegate: OMSPaymentCreatorControllerDelegate?
     
-    private let paymentSourceCreatorFlowSession = PaymentSourceCreatorFlowSession()
+    private let paymentSourceCreatorFlowSession = PaymentCreatorFlowSession()
     
     private var paymentChooserViewController: PaymentChooserViewController {
         return topViewController as! PaymentChooserViewController
@@ -165,6 +153,24 @@ public class PaymentCreatorController : UINavigationController {
         initializeWithPaymentChooserViewController(rootViewController)
     }
     
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        guard let rootViewController = topViewController as? PaymentChooserViewController else {
+            preconditionFailure("This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller")
+        }
+        initializeWithPaymentChooserViewController(rootViewController)
+    }
+    
+    public override init(navigationBarClass: AnyClass?, toolbarClass: AnyClass?) {
+        super.init(navigationBarClass: navigationBarClass, toolbarClass: toolbarClass)
+        
+        guard let rootViewController = topViewController as? PaymentChooserViewController else {
+            preconditionFailure("This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller")
+        }
+        initializeWithPaymentChooserViewController(rootViewController)
+    }
+    
     public override var viewControllers: [UIViewController] {
         willSet {
             if !(viewControllers.first is PaymentChooserViewController) {
@@ -180,6 +186,7 @@ public class PaymentCreatorController : UINavigationController {
         viewController.flowSession = paymentSourceCreatorFlowSession
         viewController.allowedPaymentMethods = allowedPaymentMethods
         viewController.showsCreditCardPayment = showsCreditCardPayment
+        
         paymentSourceCreatorFlowSession.delegate = self
         
         if #available(iOS 9.0, *) {
@@ -254,18 +261,34 @@ public class PaymentCreatorController : UINavigationController {
 }
 
 
-extension PaymentCreatorController : PaymentSourceCreatorFlowSessionDelegate {
-    func paymentCreatorFlowSessionWillCreateSource(_ paymentSourceCreatorFlowSession: PaymentSourceCreatorFlowSession) {
+extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
+    func paymentCreatorFlowSessionWillCreateSource(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession) {
         dismissErrorMessage(animated: true, sender: self)
     }
     
-    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentSourceCreatorFlowSession, didCreatedSource source: Source) {
-        paymentDelegate?.paymentCreatorController(self, didCreatePayment: Payment.source(source))
+    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreateToken token: Token) {
+        if let paymentDelegate = self.paymentDelegate {
+            paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.token(token))
+        } else if let paymentDelegate = self.__paymentDelegate {
+            paymentDelegate.paymentCreatorController(self, didCreateToken: __OmiseToken(token: token))
+        }
     }
     
-    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentSourceCreatorFlowSession, didFailWithError error: Error) {
+    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreatedSource source: Source) {
+        if let paymentDelegate = self.paymentDelegate {
+            paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.source(source))
+        } else if let paymentDelegate = self.__paymentDelegate {
+            paymentDelegate.paymentCreatorController(self, didCreateSource: __OmiseSource(source: source))
+        }
+    }
+    
+    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didFailWithError error: Error) {
         if !handleErrors {
-            paymentDelegate?.paymentCreatorController(self, didFailWithError: error)
+            if let paymentDelegate = self.paymentDelegate {
+                paymentDelegate.paymentCreatorController(self, didFailWithError: error)
+            } else if let paymentDelegate = self.__paymentDelegate {
+                paymentDelegate.paymentCreatorController(self, didFailWithError: error)
+            }
         } else if let error = error as? OmiseError {
             displayErrorMessage(paymentSourceCreatorFlowSession.localizedErrorMessageFor(error), animated: true, sender: self)
         } else {
@@ -275,7 +298,7 @@ extension PaymentCreatorController : PaymentSourceCreatorFlowSessionDelegate {
 }
 
 
-extension PaymentSourceCreatorFlowSession {
+extension PaymentCreatorFlowSession {
     func localizedErrorMessageFor(_ error: OmiseError) -> String {
         switch error {
         case .api(code: let code, message: _, location: _):

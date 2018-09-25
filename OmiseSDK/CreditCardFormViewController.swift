@@ -41,7 +41,7 @@ renamed: "OMSCreditCardFormViewControllerDelegate")
 @objc public protocol OMSCreditCardFormDelegate: OMSCreditCardFormViewControllerDelegate {}
 
 
-@objc(OMSCreditCardFormViewControllerDelegate)
+@objc
 public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
     /// Delegate method for receiving token data when card tokenization succeeds.
     /// - parameter token: `OmiseToken` instance created from supplied credit card data.

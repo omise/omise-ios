@@ -3,13 +3,38 @@ import os
 
 
 
+public enum PaymentChooserOption: StaticElementIterable, Equatable {
+    case creditCard
+    case installment
+    case internetBanking
+    case tescoLotus
+    case conbini
+    case payEasy
+    case netBanking
+    case alipay
+    
+    public static var allCases: [PaymentChooserOption] {
+        return [
+            .creditCard,
+            .installment,
+            .internetBanking,
+            .tescoLotus,
+            .conbini,
+            .payEasy,
+            .netBanking,
+            .alipay,
+        ]
+    }
+}
+
+
 @objc(OMSPaymentChooserViewController)
 public class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceChooser, PaymentChooserUI {
     
     @IBOutlet var paymentMethodNameLables: [UILabel]!
     @IBOutlet var redirectMethodIconImageView: [UIImageView]!
     
-    var flowSession: PaymentSourceCreatorFlowSession?
+    var flowSession: PaymentCreatorFlowSession?
     
     @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
         didSet {
@@ -74,6 +99,7 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         switch (segue.identifier, segue.destination) {
         case ("GoToCreditCardFormSegue"?, let controller as CreditCardFormViewController):
             controller.publicKey = flowSession?.client?.publicKey
+            controller.delegate = flowSession
         case ("GoToInternetBankingChooserSegue"?, let controller as InternetBankingSourceChooserViewController):
             controller.showingValues = allowedPaymentMethods.compactMap({ $0.internetBankingSource })
             controller.flowSession = self.flowSession
@@ -184,8 +210,8 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
             $0.tintColor = currentSecondaryColor
         })
     }
-    
 }
+
 
 extension Array where Element == OMSSourceTypeValue {
     public var hasInternetBankingSource: Bool {

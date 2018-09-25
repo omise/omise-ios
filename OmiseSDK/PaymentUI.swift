@@ -6,20 +6,22 @@ let defaultPaymentChooserUIPrimaryColor = #colorLiteral(red:0.24, green:0.25, bl
 let defaultPaymentChooserUISecondaryColor = #colorLiteral(red:0.89, green:0.91, blue:0.93, alpha:1)
 
 
-internal protocol PaymentSourceCreatorFlowSessionDelegate : AnyObject {
-    func paymentCreatorFlowSessionWillCreateSource(_ paymentSourceCreatorFlowSession: PaymentSourceCreatorFlowSession)
-    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentSourceCreatorFlowSession,
+internal protocol PaymentCreatorFlowSessionDelegate : AnyObject {
+    func paymentCreatorFlowSessionWillCreateSource(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession)
+    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession,
+                                   didCreateToken token: Token)
+    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession,
                                    didCreatedSource source: Source)
-    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentSourceCreatorFlowSession,
+    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession,
                                    didFailWithError error: Error)
 }
 
-internal class PaymentSourceCreatorFlowSession {
+internal class PaymentCreatorFlowSession {
     var client: Client?
     var paymentAmount: Int64?
     var paymentCurrency: Currency?
     
-    weak var delegate: PaymentSourceCreatorFlowSessionDelegate?
+    weak var delegate: PaymentCreatorFlowSessionDelegate?
     
     func validateRequiredProperties() -> Bool {
         let waringMessageTitle: String
@@ -73,8 +75,20 @@ internal class PaymentSourceCreatorFlowSession {
     }
 }
 
+extension PaymentCreatorFlowSession : CreditCardFormViewControllerDelegate {
+    func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
+        delegate?.paymentCreatorFlowSession(self, didCreateToken: token)
+    }
+    
+    func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error) {
+        delegate?.paymentCreatorFlowSession(self, didFailWithError: error)
+    }
+    
+    func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController) {}
+}
+
 protocol PaymentSourceChooser {
-    var flowSession: PaymentSourceCreatorFlowSession? { get set }
+    var flowSession: PaymentCreatorFlowSession? { get set }
 }
 
 extension PaymentChooserUI {
@@ -105,8 +119,6 @@ extension UIViewController {
         let targetController = self.targetViewController(forAction: #selector(UIViewController.displayErrorMessage(_:animated:sender:)), sender: sender)
         if let targetController = targetController {
             targetController.displayErrorMessage(message, animated: animated, sender: sender)
-        } else {
-            
         }
     }
     
@@ -114,8 +126,6 @@ extension UIViewController {
         let targetController = self.targetViewController(forAction: #selector(UIViewController.dismissErrorMessage(animated:sender:)), sender: sender)
         if let targetController = targetController {
             targetController.dismissErrorMessage(animated: animated, sender: sender)
-        } else {
-            
         }
     }
 }

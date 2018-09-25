@@ -2,7 +2,7 @@ import UIKit
 
 @objc(OMSInternetBankingSourceChooserViewController)
 class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>, PaymentSourceChooser, PaymentChooserUI {
-    var flowSession: PaymentSourceCreatorFlowSession?
+    var flowSession: PaymentCreatorFlowSession?
     
     @IBOutlet var internetBankingNameLabels: [UILabel]!
     @IBOutlet var redirectIconImageView: [UIImageView]!

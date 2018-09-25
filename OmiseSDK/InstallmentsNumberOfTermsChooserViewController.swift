@@ -1,7 +1,7 @@
 import UIKit
 
 class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentSourceChooser, PaymentChooserUI {
-    var flowSession: PaymentSourceCreatorFlowSession?
+    var flowSession: PaymentCreatorFlowSession?
     
     @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
         didSet {
