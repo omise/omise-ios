@@ -57,6 +57,12 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
             submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
         }
         
+        if  #available(iOS 11, *) {
+            // We'll leave the job for iOS 11 and later to the layoutMargins + safeAreaInsets here
+        } else {
+            automaticallyAdjustsScrollViewInsets = true
+        }
+        
         NotificationCenter.default.addObserver(
             self, selector:#selector(keyboardWillChangeFrame(_:)),
             name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil

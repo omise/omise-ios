@@ -16,7 +16,8 @@ public enum OmiseTextFieldValidationError: Error {
 @objc @IBDesignable public class OmiseTextField: UITextField {
     public var style: TextFieldStyle = .plain {
         didSet {
-            setNeedsLayout()
+            updateBorder()
+            invalidateIntrinsicContentSize()
         }
     }
     
