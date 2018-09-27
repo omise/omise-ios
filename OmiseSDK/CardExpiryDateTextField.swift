@@ -122,6 +122,10 @@ import UIKit
             self.selectedYear = 2000 + expiryYear
         }
         
+        if text.count > 5 {
+            self.text = String(text[text.startIndex..<text.index(text.startIndex, offsetBy: 5)])
+        }
+        
         updateAccessibilityFrames()
     }
     

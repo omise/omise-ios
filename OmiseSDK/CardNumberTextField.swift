@@ -103,6 +103,10 @@ import Foundation
             self.attributedText = formattingAttributedText
             self.selectedTextRange = selectedTextRange
         }
+        
+        if let attributedText = self.attributedText, attributedText.length > (pan.brand?.validLengths.upperBound ?? 16) {
+            self.attributedText = attributedText.attributedSubstring(from: NSRange(location: 0, length: (pan.brand?.validLengths.upperBound ?? 16)))
+        }
     }
     
     public override func becomeFirstResponder() -> Bool {
