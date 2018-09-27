@@ -549,30 +549,8 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         } catch {
             let omiseBundle = Bundle(for: CreditCardFormViewController.self)
             switch (error, textField) {
-            case (OmiseTextFieldValidationError.emptyText, cardNumberTextField):
-                errorLabel.text = NSLocalizedString(
-                    "credit-card-form.card-number-field.empty-text.error.text", tableName: "Error", bundle: omiseBundle,
-                    value: "Credit card number cannot be empty",
-                    comment: "An error text displayed when the credit card number is empty"
-                )
-            case (OmiseTextFieldValidationError.emptyText, cardNameTextField):
-                errorLabel.text = NSLocalizedString(
-                    "credit-card-form.card-holder-name-field.empty-text.error.text", tableName: "Error", bundle: omiseBundle,
-                    value: "Card holder name cannot be empty",
-                    comment: "An error text displayed when the card holder name is empty"
-                )
-            case (OmiseTextFieldValidationError.emptyText, expiryDateTextField):
-                errorLabel.text = NSLocalizedString(
-                    "credit-card-form.expiry-date-field.empty-text.error.text", tableName: "Error", bundle: omiseBundle,
-                    value: "Card expiry date cannot be empty",
-                    comment: "An error text displayed when the expiry date is empty"
-                )
-            case (OmiseTextFieldValidationError.emptyText, secureCodeTextField):
-                errorLabel.text = NSLocalizedString(
-                    "credit-card-form.security-code-field.empty-text.error.text", tableName: "Error", bundle: omiseBundle,
-                    value: "CVV code cannot be empty",
-                    comment: "An error text displayed when the security code is empty"
-                )
+            case (OmiseTextFieldValidationError.emptyText, _):
+                errorLabel.text = "-" // We need to set the error label some string in order to have it retains its height
                 
             case (OmiseTextFieldValidationError.invalidData, cardNumberTextField):
                 errorLabel.text = NSLocalizedString(
@@ -608,9 +586,9 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             case (_, secureCodeTextField):
                 errorLabel.text = error.localizedDescription
             default:
-                break
+                errorLabel.text = "-"
             }
-            errorLabel.alpha = 1.0
+            errorLabel.alpha = errorLabel.text != "-" ? 1.0 : 0.0
         }
     }
     
