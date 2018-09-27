@@ -17,6 +17,17 @@ class MoreInformationOnCVVViewController: UIViewController {
 }
 
 
+class ExpandedHitAreaButton: UIButton {
+    var hitAreaSize = CGSize(width: 44, height: 44)
+    
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let horizontalInset = max(0, (hitAreaSize.width - bounds.width)) / 2
+        let verticalInset = max(0, (hitAreaSize.height - bounds.height)) / 2
+        return bounds.insetBy(dx: -horizontalInset, dy: -verticalInset).contains(point)
+    }
+}
+
+
 class OverlayPanelTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
     var alertPresentationController: OverlayPanelPresentationController?
     
@@ -46,6 +57,15 @@ class OverlayPanelPresentationController: UIPresentationController {
         
         return view
     }()
+    
+    let dismissTapGestureRecognizer = UITapGestureRecognizer()
+    
+    override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
+        super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
+        dismissTapGestureRecognizer.addTarget(self, action: #selector(requestToDismiss(_:)))
+        dimmingView.addGestureRecognizer(dismissTapGestureRecognizer)
+        dismissTapGestureRecognizer.isEnabled = false
+    }
     
     override func presentationTransitionWillBegin() {
         guard let containerView = containerView else {
@@ -78,6 +98,8 @@ class OverlayPanelPresentationController: UIPresentationController {
         coordinator.animate(alongsideTransition: { _ in
             self.dimmingView.alpha = 1.0
         })
+        
+        dismissTapGestureRecognizer.isEnabled = true
     }
     
     override func dismissalTransitionWillBegin() {
@@ -89,6 +111,7 @@ class OverlayPanelPresentationController: UIPresentationController {
         coordinator.animate(alongsideTransition: { _ in
             self.dimmingView.alpha = 0.0
         })
+        dismissTapGestureRecognizer.isEnabled = false
     }
     
     override var frameOfPresentedViewInContainerView: CGRect {
@@ -150,6 +173,14 @@ class OverlayPanelPresentationController: UIPresentationController {
         
         UIView.animate(withDuration: 0.18) { 
             container.view.frame = self.frameOfPresentedViewInContainerView
+        }
+    }
+    
+    @objc func requestToDismiss(_ sender: AnyObject) {
+        if let presentedViewController = presentedViewController as? MoreInformationOnCVVViewController {
+            presentedViewController.askToClose(sender)
+        } else {
+            presentingViewController.dismiss(animated: true, completion: nil)
         }
     }
 }

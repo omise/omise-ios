@@ -400,7 +400,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMV-0E-5pR">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMV-0E-5pR" customClass="ExpandedHitAreaButton" customModule="OmiseSDK" customModuleProvider="target">
                                 <rect key="frame" x="208" y="16" width="16" height="22"/>
                                 <color key="tintColor" red="0.015686274509803921" green="0.027450980392156862" blue="0.050980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="Close Mini"/>
