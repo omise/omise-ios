@@ -211,7 +211,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         }
         
         if  #available(iOS 11, *) {
-            // We'll leave the job for iOS 11 and later to the layoutMargins + safeAreaInsets here
+            // We'll leave the adjusting scroll view insets job for iOS 11 and later to the layoutMargins + safeAreaInsets here
         } else {
             automaticallyAdjustsScrollViewInsets = true
         }

@@ -32,7 +32,6 @@ public enum PaymentChooserOption: StaticElementIterable, Equatable {
 public class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceChooser, PaymentChooserUI {
     
     @IBOutlet var paymentMethodNameLables: [UILabel]!
-    @IBOutlet var redirectMethodIconImageView: [UIImageView]!
     
     var flowSession: PaymentCreatorFlowSession?
     
@@ -199,15 +198,7 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         })
     }
     
-    private func applySecondaryColor() {
-        guard isViewLoaded else {
-            return
-        }
-        
-        redirectMethodIconImageView.forEach({
-            $0.tintColor = currentSecondaryColor
-        })
-    }
+    private func applySecondaryColor() {}
 }
 
 

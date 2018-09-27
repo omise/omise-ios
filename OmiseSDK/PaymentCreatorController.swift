@@ -218,6 +218,11 @@ public class PaymentCreatorController : UINavigationController {
         displayingNoticeView.addGestureRecognizer(dismissErrorBannerTapGestureRecognizer)
     }
     
+    public override func loadView() {
+        super.loadView()
+        view.backgroundColor = .white
+    }
+    
     override func displayErrorMessage(_ message: String, animated: Bool, sender: Any?) {
         displayingNoticeView.detailLabel.text = message
         view.insertSubview(self.displayingNoticeView, belowSubview: navigationBar)

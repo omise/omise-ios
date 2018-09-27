@@ -5,7 +5,6 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
     var flowSession: PaymentCreatorFlowSession?
     
     @IBOutlet var internetBankingNameLabels: [UILabel]!
-    @IBOutlet var redirectIconImageView: [UIImageView]!
     
     @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
         didSet {
@@ -69,15 +68,7 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         })
     }
     
-    private func applySecondaryColor() {
-        guard isViewLoaded else {
-            return
-        }
-        
-        redirectIconImageView.forEach({
-            $0.tintColor = currentSecondaryColor
-        })
-    }
+    private func applySecondaryColor() {}
 }
 
 

@@ -91,7 +91,6 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
         )
         cell.textLabel?.text = String.localizedStringWithFormat(numberOfTermsTitleFormat, numberOfTerms[indexPath.row])
         cell.textLabel?.textColor = currentPrimaryColor
-        cell.accessoryView?.tintColor = currentSecondaryColor
         return cell
     }
     
