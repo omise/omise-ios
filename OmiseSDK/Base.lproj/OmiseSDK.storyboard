@@ -526,6 +526,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="accessoryView" destination="5dj-XN-gI7" id="ulx-hS-1Bp"/>
                                             <segue destination="lhd-VO-2kZ" kind="show" identifier="GoToInstallmentBrandChooserSegue" id="IrZ-YO-P8Z"/>
                                         </connections>
                                     </tableViewCell>
