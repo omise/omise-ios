@@ -49,7 +49,7 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     }
     
     @objc public var showsCreditCardPayment: Bool = true
-    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentCreatorController.defaultAvailablePaymentMethods + [OMSSourceTypeValue.eContext] {
+    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = [] {
         didSet {
             showingValues = PaymentChooserOption.allCases.filter({
                 switch $0 {
@@ -108,8 +108,6 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
             controller.flowSession = self.flowSession
         case (_, let controller as EContextInformationInputViewController):
             controller.flowSession = self.flowSession
-            controller.paymentAmount = 5000
-            controller.paymentCurrency = .jpy
             if let element = (sender as? UITableViewCell).flatMap(tableView.indexPath(for:)).map(element(forUIIndexPath:)) {
                 switch element {
                 case .conbini:

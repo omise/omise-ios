@@ -179,7 +179,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="Now-PS-SNB" kind="presentation" id="FeA-I9-qzE"/>
+                                    <segue destination="OVI-jW-DQg" kind="presentation" identifier="PresentPaymentCreator" id="9ek-jH-YME"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -207,15 +207,15 @@
             </objects>
             <point key="canvasLocation" x="-191" y="1439"/>
         </scene>
-        <!--PaymentChooserController-->
+        <!--PaymentCreatorController-->
         <scene sceneID="Sgp-QY-wO1">
             <objects>
-                <viewControllerPlaceholder storyboardName="OmiseSDK" bundleIdentifier="co.omise.OmiseSDK" referencedIdentifier="PaymentChooserController" id="OVI-jW-DQg" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="OmiseSDK" bundleIdentifier="co.omise.OmiseSDK" referencedIdentifier="PaymentCreatorController" id="OVI-jW-DQg" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="qGS-49-PsU"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c6D-lq-giu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="622" y="2338"/>
+            <point key="canvasLocation" x="-232" y="2266"/>
         </scene>
         <!--Success-->
         <scene sceneID="79S-SL-zwq">
@@ -450,24 +450,6 @@
             </objects>
             <point key="canvasLocation" x="1991.2" y="2214.2428785607199"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="syc-pj-A6B">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Now-PS-SNB" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vGv-vn-iX9">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="OVI-jW-DQg" kind="relationship" relationship="rootViewController" id="eCY-zG-gDe"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0iY-8o-Drk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-191" y="2338"/>
-        </scene>
     </scenes>
     <resources>
         <image name="completed" width="135" height="135"/>
@@ -475,7 +457,7 @@
         <image name="product" width="226" height="150"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="O5X-Hn-KCp"/>
-        <segue reference="1fO-ry-KDl"/>
+        <segue reference="zYV-yt-uTV"/>
+        <segue reference="UKD-dD-tkb"/>
     </inferredMetricsTieBreakers>
 </document>
