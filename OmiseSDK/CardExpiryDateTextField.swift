@@ -34,8 +34,14 @@ import UIKit
         return selectedYear ?? 0
     }
     
-    public var expirationMonthAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
-    public var expirationYearAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
+    public override var keyboardType: UIKeyboardType {
+        didSet {
+            super.keyboardType = .numberPad
+        }
+    }
+    
+    @objc private(set) public var expirationMonthAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
+    @objc private(set) public var expirationYearAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
     
     override public init() {
         super.init(frame: CGRect.zero)
@@ -54,13 +60,7 @@ import UIKit
     
     private func initializeInstance() {
         placeholder = "MM/YY"
-        let expiryDatePicker = CardExpiryDatePicker()
-        expiryDatePicker.onDateSelected = { [weak self] (month: Int, year: Int) in
-            self?.text = String(format: "%02d/%d", month, year % 100)
-            self?.sendActions(for: UIControlEvents.valueChanged)
-        }
         
-        inputView = expiryDatePicker
         
         expirationMonthAccessibilityElement = CardExpiryDateTextField.InfoAccessibilityElement(expiryDateTextField: self, component: .month)
         expirationMonthAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitAdjustable
@@ -95,23 +95,48 @@ import UIKit
         }
     }
     
+    private var isDeletingDateSeparator = false
+    
     override func textDidChange() {
         super.textDidChange()
         
-        let text = self.text ?? ""
-        let range =  NSRange(text.startIndex..., in: text)
-        guard let match = expirationRegularExpression.firstMatch(in: text, options: [], range: range), match.numberOfRanges >= 3 else {
-            selectedMonth = nil
-            selectedYear = nil
-            return
+        guard let text = self.text?.replacingOccurrences(of: "[^\\d/]", with: "", options: String.CompareOptions.regularExpression, range: nil),
+            !isDeletingDateSeparator else {
+                return
         }
         
-        let monthText = Range(match.range(at: 1), in: text).map({ text[$0] })
-        let yearText = Range(match.range(at: 2), in: text).map({ text[$0] })
-        selectedMonth = monthText.flatMap({ Int($0) })
-        selectedYear = yearText.flatMap({ Int($0) })?.advanced(by: 2000)
+        let expiryDateComponents = text.split(separator: "/")
+        let parsedExpiryMonth = expiryDateComponents.first.flatMap({ Int.init(String($0)) })
+        let parsedExpiryYear = expiryDateComponents.count > 1 ? expiryDateComponents.last.flatMap({ Int.init(String($0)) }) : nil
+        
+        if let expiryMonth = parsedExpiryMonth, expiryMonth > 0 {
+            self.selectedMonth = expiryMonth
+            
+            let expectedDisplayingExpiryMonthText = String(format: "%02d/", expiryMonth)
+            if (text != expectedDisplayingExpiryMonthText && parsedExpiryYear == nil)  &&
+                (expiryMonth != 1 || expiryDateComponents[0].count == 2) {
+                self.text = String(format: "%02d/", expiryMonth)
+            }
+        }
+        if let expiryYear = parsedExpiryYear {
+            self.selectedYear = 2000 + expiryYear
+        }
         
         updateAccessibilityFrames()
+    }
+    
+    public override func deleteBackward() {
+        if text?.last == "/" {
+            isDeletingDateSeparator = true
+            defer {
+                isDeletingDateSeparator = false
+            }
+            super.deleteBackward()
+        }
+        super.deleteBackward()
+        if text == "0" {
+            super.deleteBackward()
+        }
     }
     
     public override func layoutSubviews() {
