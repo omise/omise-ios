@@ -82,14 +82,15 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
             name: NSNotification.Name.UIKeyboardWillHide, object: nil
         )
         
-        fullNameTextField.validator = try! NSRegularExpression(pattern: "\\A[\\w\\s]{1,10}\\z", options: [])
-        emailTextField.validator = try! NSRegularExpression(pattern: "\\A[\\w\\-\\.]+@[\\w\\-\\.]+\\z", options: [])
-        phoneNumberTextField.validator = try! NSRegularExpression(pattern: "\\d{10,11}", options: [])
+        fullNameTextField.validator = try! NSRegularExpression(pattern: "\\A[\\w\\s]{1,10}\\s?\\z", options: [])
+        emailTextField.validator = try! NSRegularExpression(pattern: "\\A[\\w\\-\\.]+@[\\w\\-\\.]+\\s?\\z", options: [])
+        phoneNumberTextField.validator = try! NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
     }
     
     @IBAction func submitEContextForm(_ sender: AnyObject) {
-        guard let fullname = fullNameTextField.text, let email = emailTextField.text,
-            let phoneNumber = phoneNumberTextField.text else {
+        guard let fullname = fullNameTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces),
+            let email = emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces),
+            let phoneNumber = phoneNumberTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
                 return
         }
         
@@ -202,19 +203,19 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
                 errorLabel.text = NSLocalizedString(
                     "econtext-info-form.full-name-field.invalid-data.error.text", tableName: "Error", bundle: omiseBundle,
                     value: "Customer name is invalid",
-                    comment: "An error text displayed when the credit card number is invalid"
+                    comment: "An error text in the E-Context information input displayed when the customer name is invalid"
                 )
             case (OmiseTextFieldValidationError.invalidData, emailTextField):
                 errorLabel.text = NSLocalizedString(
                     "econtext-info-form.email-name-field.invalid-data.error.text", tableName: "Error", bundle: omiseBundle,
                     value: "Email is invalid",
-                    comment: "An error text displayed when the card holder name is invalid"
+                    comment: "An error text in the E-Context information input displayed when the email is invalid"
                 )
             case (OmiseTextFieldValidationError.invalidData, phoneNumberTextField):
                 errorLabel.text = NSLocalizedString(
                     "econtext-info-form.phone-number-field.invalid-data.error.text", tableName: "Error", bundle: omiseBundle,
                     value: "Phone number is invalid",
-                    comment: "An error text displayed when the expiry date is invalid"
+                    comment: "An error text in the E-Context information input displayed when the phone number is invalid"
                 )
                 
             case (_, fullNameTextField):
@@ -229,7 +230,5 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
             errorLabel.alpha = errorLabel.text != "-" ? 1.0 : 0.0
         }
     }
-    
-
 }
 
