@@ -32,6 +32,7 @@ public protocol PaymentChooserUI: AnyObject {
     var preferredSecondaryColor: UIColor? { get set }
 }
 
+
 @objc(OMSPaymentCreatorController)
 public class PaymentCreatorController : UINavigationController {
     /// Omise public key for calling tokenization API.
@@ -88,7 +89,7 @@ public class PaymentCreatorController : UINavigationController {
             paymentChooserViewController.showsCreditCardPayment = showsCreditCardPayment
         }
     }
-    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentCreatorController.thailandDefaultAvailableSourceMethods {
+    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentCreatorController.thailandDefaultAvailableSourceMethods + [.eContext] {
         didSet {
             paymentChooserViewController.allowedPaymentMethods = allowedPaymentMethods
         }

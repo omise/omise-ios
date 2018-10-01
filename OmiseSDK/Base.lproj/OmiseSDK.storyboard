@@ -1251,6 +1251,7 @@
                                         <connections>
                                             <action selector="gotoNextField:" destination="hC0-5j-tkj" eventType="editingDidEndOnExit" id="Cd1-Oy-xUa"/>
                                             <action selector="updateInputAccessoryViewFor:" destination="hC0-5j-tkj" eventType="editingDidBegin" id="dsY-fx-rT2"/>
+                                            <action selector="validateFieldData:" destination="hC0-5j-tkj" eventType="editingChanged" id="f30-cy-4cf"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CD2-gj-4i6" customClass="OmiseTextField" customModule="OmiseSDK" customModuleProvider="target">
@@ -1273,6 +1274,7 @@
                                         <connections>
                                             <action selector="gotoNextField:" destination="hC0-5j-tkj" eventType="editingDidEndOnExit" id="Z1a-oE-VeL"/>
                                             <action selector="updateInputAccessoryViewFor:" destination="hC0-5j-tkj" eventType="editingDidBegin" id="icI-bK-CEx"/>
+                                            <action selector="validateFieldData:" destination="hC0-5j-tkj" eventType="editingChanged" id="Cfw-NW-0Tj"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="999" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OTm-3S-Jk9" customClass="OmiseTextField" customModule="OmiseSDK" customModuleProvider="target">
@@ -1295,6 +1297,7 @@
                                         <connections>
                                             <action selector="gotoNextField:" destination="hC0-5j-tkj" eventType="editingDidEndOnExit" id="lUL-0g-hvo"/>
                                             <action selector="updateInputAccessoryViewFor:" destination="hC0-5j-tkj" eventType="editingDidBegin" id="Arz-bi-Nvw"/>
+                                            <action selector="validateFieldData:" destination="hC0-5j-tkj" eventType="editingChanged" id="5Tk-XT-QYi"/>
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mE3-3u-rvg" customClass="MainActionButton" customModule="OmiseSDK" customModuleProvider="target">

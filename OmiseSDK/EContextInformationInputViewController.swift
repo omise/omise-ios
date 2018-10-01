@@ -23,7 +23,13 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
     
     var currentEditingTextField: OmiseTextField?
-
+    
+    var isInputDataValid: Bool {
+        return formFields.reduce(into: true, { (valid, field) in
+            valid = valid && field.isValid
+        })
+    }
+    
     @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
@@ -38,7 +44,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         applyPrimaryColor()
         applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -71,6 +77,10 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
             self, selector:#selector(keyboardWillHide(_:)),
             name: NSNotification.Name.UIKeyboardWillHide, object: nil
         )
+        
+        fullNameTextField.validator = try! NSRegularExpression(pattern: "[\\w\\s]{1,10}", options: [])
+        emailTextField.validator = try! NSRegularExpression(pattern: "\\A[\\w\\-\\.]+@[\\w\\-\\.]+\\z", options: [])
+        phoneNumberTextField.validator = try! NSRegularExpression(pattern: "\\d{10,11}", options: [])
     }
     
     @IBAction func submitEContextForm(_ sender: AnyObject) {
@@ -107,7 +117,11 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     @objc @IBAction private func doneEditing(_ button: UIBarButtonItem?) {
         doneEditing()
     }
-
+    
+    @IBAction func validateFieldData(_ textField: OmiseTextField) {
+        submitButton.isEnabled = isInputDataValid
+    }
+    
     @objc func keyboardWillChangeFrame(_ notification: NSNotification) {
         guard let frameEnd = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect,
             let frameStart = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? CGRect,
@@ -132,6 +146,6 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         contentView.scrollIndicatorInsets.bottom = 0.0
     }
     
-   
+    
 }
 
