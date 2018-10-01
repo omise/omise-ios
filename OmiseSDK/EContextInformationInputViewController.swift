@@ -14,9 +14,13 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     @IBOutlet var submitButton: MainActionButton!
     @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
     
+    @IBOutlet var fullNameErrorLabel: UILabel!
+    @IBOutlet var emailErrorLabel: UILabel!
+    @IBOutlet var phoneNumberErrorLabel: UILabel!
     
     @IBOutlet var formLabels: [UILabel]!
     @IBOutlet var formFields: [OmiseTextField]!
+    @IBOutlet var errorLabels: [UILabel]!
     @IBOutlet var formFieldsAccessoryView: UIToolbar!
     @IBOutlet var gotoPreviousFieldBarButtonItem: UIBarButtonItem!
     @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!
@@ -78,7 +82,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
             name: NSNotification.Name.UIKeyboardWillHide, object: nil
         )
         
-        fullNameTextField.validator = try! NSRegularExpression(pattern: "[\\w\\s]{1,10}", options: [])
+        fullNameTextField.validator = try! NSRegularExpression(pattern: "\\A[\\w\\s]{1,10}\\z", options: [])
         emailTextField.validator = try! NSRegularExpression(pattern: "\\A[\\w\\-\\.]+@[\\w\\-\\.]+\\z", options: [])
         phoneNumberTextField.validator = try! NSRegularExpression(pattern: "\\d{10,11}", options: [])
     }
@@ -103,7 +107,18 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     }
     
     @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
+        if let errorLabel = associatedErrorLabelOf(sender) {
+            let duration = TimeInterval(UINavigationControllerHideShowBarDuration)
+            UIView.animate(
+                withDuration: duration, delay: 0.0,
+                options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
+                animations: {
+                    errorLabel.alpha = 0.0
+            })
+        }
+        
         updateInputAccessoryViewWithFirstResponder(sender)
+        sender.borderColor = view.tintColor
     }
     
     @objc @IBAction private func gotoPreviousField(_ button: UIBarButtonItem) {
@@ -120,6 +135,17 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     
     @IBAction func validateFieldData(_ textField: OmiseTextField) {
         submitButton.isEnabled = isInputDataValid
+    }
+    
+    @IBAction func validateTextFieldDataOf(_ sender: OmiseTextField) {
+        let duration = TimeInterval(UINavigationControllerHideShowBarDuration)
+        UIView.animate(
+            withDuration: duration, delay: 0.0,
+            options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
+            animations: {
+                self.validateField(sender)
+        })
+        sender.borderColor = currentSecondaryColor
     }
     
     @objc func keyboardWillChangeFrame(_ notification: NSNotification) {
@@ -146,6 +172,64 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         contentView.scrollIndicatorInsets.bottom = 0.0
     }
     
+    fileprivate func associatedErrorLabelOf(_ textField: OmiseTextField) -> UILabel? {
+        switch textField {
+        case fullNameTextField:
+            return fullNameErrorLabel
+        case emailTextField:
+            return emailErrorLabel
+        case phoneNumberTextField:
+            return phoneNumberErrorLabel
+        default:
+            return nil
+        }
+    }
     
+    private func validateField(_ textField: OmiseTextField) {
+        guard let errorLabel = associatedErrorLabelOf(textField) else {
+            return
+        }
+        do {
+            try textField.validate()
+            errorLabel.alpha = 0.0
+        } catch {
+            let omiseBundle = Bundle(for: CreditCardFormViewController.self)
+            switch (error, textField) {
+            case (OmiseTextFieldValidationError.emptyText, _):
+                errorLabel.text = "-" // We need to set the error label some string in order to have it retains its height
+                
+            case (OmiseTextFieldValidationError.invalidData, fullNameTextField):
+                errorLabel.text = NSLocalizedString(
+                    "econtext-info-form.full-name-field.invalid-data.error.text", tableName: "Error", bundle: omiseBundle,
+                    value: "Customer name is invalid",
+                    comment: "An error text displayed when the credit card number is invalid"
+                )
+            case (OmiseTextFieldValidationError.invalidData, emailTextField):
+                errorLabel.text = NSLocalizedString(
+                    "econtext-info-form.email-name-field.invalid-data.error.text", tableName: "Error", bundle: omiseBundle,
+                    value: "Email is invalid",
+                    comment: "An error text displayed when the card holder name is invalid"
+                )
+            case (OmiseTextFieldValidationError.invalidData, phoneNumberTextField):
+                errorLabel.text = NSLocalizedString(
+                    "econtext-info-form.phone-number-field.invalid-data.error.text", tableName: "Error", bundle: omiseBundle,
+                    value: "Phone number is invalid",
+                    comment: "An error text displayed when the expiry date is invalid"
+                )
+                
+            case (_, fullNameTextField):
+                errorLabel.text = error.localizedDescription
+            case (_, emailTextField):
+                errorLabel.text = error.localizedDescription
+            case (_, phoneNumberTextField):
+                errorLabel.text = error.localizedDescription
+            default:
+                errorLabel.text = "-"
+            }
+            errorLabel.alpha = errorLabel.text != "-" ? 1.0 : 0.0
+        }
+    }
+    
+
 }
 

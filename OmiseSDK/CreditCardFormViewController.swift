@@ -509,6 +509,9 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         formFields.forEach({
             $0.textColor = currentPrimaryColor
         })
+        formLabels.forEach({
+            $0.textColor = currentPrimaryColor
+        })
     }
     
     private func applySecondaryColor() {
@@ -516,9 +519,6 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             return
         }
         
-        formLabels.forEach({
-            $0.textColor = currentSecondaryColor
-        })
         formFields.forEach({
             $0.borderColor = currentSecondaryColor
         })
@@ -613,6 +613,7 @@ extension CreditCardFormViewController {
             animations: {
                 self.validateField(sender)
         })
+        sender.borderColor = currentSecondaryColor
     }
     
     @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
@@ -626,6 +627,7 @@ extension CreditCardFormViewController {
             })
         }
         
+        sender.borderColor = view.tintColor
         updateInputAccessoryViewWithFirstResponder(sender)
     }
     

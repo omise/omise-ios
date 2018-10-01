@@ -22,7 +22,7 @@ public enum OmiseTextFieldValidationError: Error {
         }
     }
     
-    @objc @IBInspectable var borderWidth: CGFloat {
+    @IBInspectable @objc var borderWidth: CGFloat {
         get {
             switch style {
             case .plain:
@@ -41,13 +41,13 @@ public enum OmiseTextFieldValidationError: Error {
         }
     }
     
-    @objc @IBInspectable var borderColor: UIColor? {
+    @IBInspectable @objc var borderColor: UIColor? {
         didSet {
             updateBorder()
         }
     }
     
-    @objc @IBInspectable var cornerRadius: CGFloat = 0 {
+    @IBInspectable @objc var cornerRadius: CGFloat = 0 {
         didSet {
             updateBorder()
         }
@@ -56,6 +56,18 @@ public enum OmiseTextFieldValidationError: Error {
     @IBInspectable @objc var errorTextColor: UIColor? {
         didSet {
             updateTextColor()
+        }
+    }
+    
+    @IBInspectable @objc var placeholderTextColor: UIColor? {
+        didSet {
+            updatePlaceholderTextColor()
+        }
+    }
+    
+    public override var placeholder: String? {
+        didSet {
+            updatePlaceholderTextColor()
         }
     }
     
@@ -81,6 +93,19 @@ public enum OmiseTextFieldValidationError: Error {
     
     private func updateTextColor() {
         super.textColor = isValid || isFirstResponder ? (normalTextColor ?? .black) : (errorTextColor ?? normalTextColor ?? .black)
+    }
+    
+    func updatePlaceholderTextColor() {
+        if let attributedPlaceholder = attributedPlaceholder, let placeholderColor = self.placeholderTextColor {
+            let formattingAttributedText = NSMutableAttributedString(attributedString: attributedPlaceholder)
+
+            let formattingPlaceholderString = formattingAttributedText.string
+            formattingAttributedText.addAttribute(
+                NSAttributedStringKey.foregroundColor, value: placeholderColor,
+                range: NSRange(formattingPlaceholderString.startIndex..<formattingPlaceholderString.endIndex, in: formattingPlaceholderString)
+            )
+            super.attributedPlaceholder = (formattingAttributedText.copy() as! NSAttributedString)
+        }
     }
     
     /// Boolean indicating wether current input is valid or not.

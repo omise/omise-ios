@@ -57,20 +57,6 @@ import Foundation
         if #available(iOS 10.0, *) {
             textContentType = .creditCardNumber
         }
-        
-        placeholder = "1234567890123456"
-        
-        guard let attributedPlaceholder = attributedPlaceholder else {
-            placeholder = "1234 5678 9012 3456"
-            return
-        }
-        let formattingAttributedText = NSMutableAttributedString(attributedString: attributedPlaceholder)
-        
-        let kerningIndexes = IndexSet([3, 7, 11])
-        kerningIndexes.forEach({
-            formattingAttributedText.addAttribute(NSAttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
-        })
-        self.attributedPlaceholder = formattingAttributedText
     }
     
     public override func validate() throws {
@@ -78,6 +64,28 @@ import Foundation
         if !pan.isValid {
             throw OmiseTextFieldValidationError.invalidData
         }
+    }
+    
+    override func updatePlaceholderTextColor() {
+        guard let attributedPlaceholder = attributedPlaceholder ?? placeholder.map(NSAttributedString.init(string:)) else {
+            return
+        }
+        
+        let formattingAttributedText = NSMutableAttributedString(attributedString: attributedPlaceholder)
+        if let placeholderColor = self.placeholderTextColor {
+            
+            let formattingPlaceholderString = formattingAttributedText.string
+            formattingAttributedText.addAttribute(
+                NSAttributedStringKey.foregroundColor, value: placeholderColor,
+                range: NSRange(formattingPlaceholderString.startIndex..<formattingPlaceholderString.endIndex, in: formattingPlaceholderString)
+            )
+        }
+        let kerningIndexes = IndexSet([3, 7, 11])
+        kerningIndexes.forEach({
+            formattingAttributedText.addAttribute(NSAttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
+        })
+
+        super.attributedPlaceholder = (formattingAttributedText.copy() as! NSAttributedString)
     }
     
     override func textDidChange() {

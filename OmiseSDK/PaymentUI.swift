@@ -2,8 +2,8 @@ import Foundation
 import os
 
 
-let defaultPaymentChooserUIPrimaryColor = #colorLiteral(red:0.24, green:0.25, blue:0.3, alpha:1)
-let defaultPaymentChooserUISecondaryColor = #colorLiteral(red:0.89, green:0.91, blue:0.93, alpha:1)
+let defaultPaymentChooserUIPrimaryColor = #colorLiteral(red: 0.2352941176, green: 0.2549019608, blue: 0.3019607843, alpha: 1)
+let defaultPaymentChooserUISecondaryColor = #colorLiteral(red: 0.8941176471, green: 0.9058823529, blue: 0.9294117647, alpha: 1)
 
 
 internal protocol PaymentCreatorFlowSessionDelegate : AnyObject {
@@ -175,6 +175,9 @@ extension PaymentFormUIController where Self: UIViewController & PaymentChooserU
         formFields.forEach({
             $0.textColor = currentPrimaryColor
         })
+        formLabels.forEach({
+            $0.textColor = currentPrimaryColor
+        })
     }
     
     func applySecondaryColor() {
@@ -182,9 +185,6 @@ extension PaymentFormUIController where Self: UIViewController & PaymentChooserU
             return
         }
         
-        formLabels.forEach({
-            $0.textColor = currentSecondaryColor
-        })
         formFields.forEach({
             $0.borderColor = currentSecondaryColor
         })
