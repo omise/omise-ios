@@ -91,6 +91,11 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
         )
         cell.textLabel?.text = String.localizedStringWithFormat(numberOfTermsTitleFormat, numberOfTerms[indexPath.row])
         cell.textLabel?.textColor = currentPrimaryColor
+        
+        if let cell = cell as? PaymentOptionTableViewCell {
+            cell.separatorView.backgroundColor = currentSecondaryColor
+        }
+        
         return cell
     }
     

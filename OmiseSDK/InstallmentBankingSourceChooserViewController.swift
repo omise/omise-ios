@@ -45,6 +45,15 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
         }
     }
     
+    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        
+        if let cell = cell as? PaymentOptionTableViewCell {
+            cell.separatorView.backgroundColor = currentSecondaryColor
+        }
+        return cell
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) else {
             return
