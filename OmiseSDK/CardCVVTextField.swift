@@ -30,6 +30,8 @@ import UIKit
     private func initializeInstance() {
         super.keyboardType = .numberPad
         placeholder = "123"
+        
+        validator = try! NSRegularExpression(pattern: "\\d{3,4}", options: [])
     }
     
     public override func validate() throws {

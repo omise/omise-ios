@@ -12,6 +12,7 @@ public enum OmiseTextFieldValidationError: Error {
     case invalidData
 }
 
+
 /// Base UITextField subclass for SDK's text fields.
 @objc @IBDesignable public class OmiseTextField: UITextField {
     public var style: TextFieldStyle = .plain {
@@ -92,6 +93,8 @@ public enum OmiseTextFieldValidationError: Error {
         }
     }
     
+    var validator: FieldValidator?
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         initializeInstance()
@@ -108,9 +111,18 @@ public enum OmiseTextFieldValidationError: Error {
     }
     
     @objc public func validate() throws {
-        if text.isNilOrEmpty {
+        guard let text = self.text else {
             throw OmiseTextFieldValidationError.emptyText
         }
+        if text.isEmpty {
+            throw OmiseTextFieldValidationError.emptyText
+        }
+        
+        
+        if let validator = self.validator {
+            try validator.validate(text)
+        }
+        
     }
     
     private func initializeInstance() {
@@ -132,6 +144,7 @@ public enum OmiseTextFieldValidationError: Error {
     
     @objc func textDidChange() {}
 }
+
 
 extension OmiseTextField {
     private var overallInsets: UIEdgeInsets {
@@ -183,6 +196,19 @@ extension OmiseTextField {
         layer.borderWidth = borderWidth
         layer.cornerRadius = cornerRadius
         layer.borderColor = borderColor?.cgColor
+    }
+}
+
+
+protocol FieldValidator {
+    func validate(_ text: String) throws
+}
+
+extension NSRegularExpression : FieldValidator {
+    func validate(_ text: String) throws {
+        if self.numberOfMatches(in: text, options: [], range: NSRange(text.startIndex..<text.endIndex, in: text)) == 0 {
+            throw OmiseTextFieldValidationError.invalidData
+        }
     }
 }
 

@@ -6,7 +6,6 @@ import UIKit
 /// `CardExpiryDatePicker` will be set as the default input view.
 @objc public class CardExpiryDateTextField: OmiseTextField {
     private let maxCreditCardAge = 21
-    private let expirationRegularExpression = try! NSRegularExpression(pattern: "^(\\d{1,2})/(\\d{1,2})$", options: [])
     
     private static let spellingOutDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -69,6 +68,8 @@ import UIKit
         expirationYearAccessibilityElement = CardExpiryDateTextField.InfoAccessibilityElement(expiryDateTextField: self, component: .year)
         expirationYearAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitAdjustable
         expirationYearAccessibilityElement.accessibilityLabel = "Expiration year"
+        
+        validator = try! NSRegularExpression(pattern: "^(\\d{1,2})/(\\d{1,2})$", options: [])
     }
     
     public override var accessibilityElements: [Any]? {
