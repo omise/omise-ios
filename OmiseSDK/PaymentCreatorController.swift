@@ -335,6 +335,10 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
             displayErrorMessage(error.localizedDescription, animated: true, sender: self)
         }
     }
+    
+    func paymentCreatorFlowSessionDidCancel(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession) {
+        paymentDelegate?.paymentCreatorControllerDidCancel(self)
+    }
 }
 
 

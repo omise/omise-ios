@@ -208,6 +208,10 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
     }
     
     private func applySecondaryColor() {}
+    
+    @IBAction func requestToClose(_ sender: Any) {
+        flowSession?.requestToCancel()
+    }
 }
 
 

@@ -14,6 +14,7 @@ internal protocol PaymentCreatorFlowSessionDelegate : AnyObject {
                                    didCreatedSource source: Source)
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession,
                                    didFailWithError error: Error)
+    func paymentCreatorFlowSessionDidCancel(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession)
 }
 
 internal class PaymentCreatorFlowSession {
@@ -72,6 +73,10 @@ internal class PaymentCreatorFlowSession {
                 self.delegate?.paymentCreatorFlowSession(self, didFailWithError: error)
             }
         }
+    }
+    
+    func requestToCancel() {
+        delegate?.paymentCreatorFlowSessionDidCancel(self)
     }
 }
 
