@@ -2,7 +2,7 @@ import UIKit
 import OmiseSDK
 
 class ProductDetailViewController: UIViewController {
-    private let publicKey = "pkey_test_4y7dh41kuvvawbhslxw"
+    private let publicKey = "<#Omise Public Key#>"
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PresentCreditFormWithModal",
