@@ -50,6 +50,14 @@ import UIKit
     @objc private(set) public var expirationMonthAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
     @objc private(set) public var expirationYearAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
     
+    @available(iOS, unavailable)
+    public override var delegate: UITextFieldDelegate? {
+        get {
+            return self
+        }
+        set {}
+    }
+    
     override public init() {
         super.init(frame: CGRect.zero)
         initializeInstance()
@@ -68,6 +76,7 @@ import UIKit
     private func initializeInstance() {
         placeholder = "MM/YY"
         
+        super.delegate = self
         
         expirationMonthAccessibilityElement = CardExpiryDateTextField.InfoAccessibilityElement(expiryDateTextField: self, component: .month)
         expirationMonthAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitAdjustable
@@ -159,6 +168,10 @@ import UIKit
     }
     
     static let monthStringRegularExpression = try! NSRegularExpression(pattern: "^([0-1]?\\d)", options: [])
+    
+    public override func replace(_ range: UITextRange, withText text: String) {
+        super.replace(range, withText: text)
+    }
 
     public override func paste(_ sender: Any?) {
         let pasteboard = UIPasteboard.general
@@ -178,7 +191,6 @@ import UIKit
         guard !text.isNilOrEmpty, let text = self.text else {
             return
         }
-        
         
         let currentAttributes = defaultTextAttributes
         defer {
@@ -343,6 +355,18 @@ extension CardExpiryDateTextField {
         sendActions(for: UIControlEvents.valueChanged)
         
         updateAccessibilityFrames()
+    }
+}
+
+
+extension CardExpiryDateTextField: UITextFieldDelegate {
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard range.length >= 0 else {
+            return true
+        }
+        let maxLength = 5
+        
+        return maxLength >= (self.text?.count ?? 0) - range.length + string.count
     }
 }
 

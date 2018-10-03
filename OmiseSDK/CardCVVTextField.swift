@@ -6,6 +6,14 @@ import UIKit
 @objc public class CardCVVTextField: OmiseTextField {
     private let validLengths = 3...4
     
+    @available(iOS, unavailable)
+    public override var delegate: UITextFieldDelegate? {
+        get {
+            return self
+        }
+        set {}
+    }
+    
     public override var keyboardType: UIKeyboardType {
         didSet {
             super.keyboardType = .numberPad
@@ -30,6 +38,7 @@ import UIKit
     private func initializeInstance() {
         super.keyboardType = .numberPad
         placeholder = "123"
+        super.delegate = self
         
         validator = try! NSRegularExpression(pattern: "\\d{3,4}", options: [])
     }
@@ -44,12 +53,16 @@ import UIKit
             throw OmiseTextFieldValidationError.invalidData
         }
     }
-    
-    override func textDidChange() {
-        super.textDidChange()
-        if text?.count == 5 {
-            guard let text = text else { return }
-            self.text = String(text.dropLast())
+}
+
+extension CardCVVTextField: UITextFieldDelegate {
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard range.length >= 0 else {
+            return true
         }
+        let maxLength = 4
+        
+        return maxLength >= (self.text?.count ?? 0) - range.length + string.count
     }
 }
+

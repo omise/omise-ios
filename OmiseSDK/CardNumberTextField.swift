@@ -31,6 +31,14 @@ import Foundation
         return PAN(text ?? "")
     }
     
+    @available(iOS, unavailable)
+    public override var delegate: UITextFieldDelegate? {
+        get {
+            return self
+        }
+        set {}
+    }
+    
     /// Card brand determined from current input.
     public var cardBrand: CardBrand? {
         return pan.brand
@@ -54,6 +62,8 @@ import Foundation
     private func initializeInstance() {
         keyboardType = .numberPad
         
+        super.delegate = self
+        
         if #available(iOS 10.0, *) {
             textContentType = .creditCardNumber
         }
@@ -73,7 +83,6 @@ import Foundation
         
         let formattingAttributedText = NSMutableAttributedString(attributedString: attributedPlaceholder)
         if let placeholderColor = self.placeholderTextColor {
-            
             let formattingPlaceholderString = formattingAttributedText.string
             formattingAttributedText.addAttribute(
                 NSAttributedStringKey.foregroundColor, value: placeholderColor,
@@ -81,7 +90,7 @@ import Foundation
             )
         }
         let kerningIndexes = IndexSet([3, 7, 11])
-        kerningIndexes.forEach({
+        kerningIndexes[kerningIndexes.indexRange(in: 0..<formattingAttributedText.length)].forEach({
             formattingAttributedText.addAttribute(NSAttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
         })
 
@@ -110,10 +119,6 @@ import Foundation
             
             self.attributedText = formattingAttributedText
             self.selectedTextRange = selectedTextRange
-        }
-        
-        if let attributedText = self.attributedText, attributedText.length > (pan.brand?.validLengths.upperBound ?? 16) {
-            self.attributedText = attributedText.attributedSubstring(from: NSRange(location: 0, length: (pan.brand?.validLengths.upperBound ?? 16)))
         }
     }
     
@@ -149,13 +154,19 @@ import Foundation
         guard let copiedText = pasteboard.string, let selectedTextRange = selectedTextRange else {
             return
         }
+        
+        let selectedTextLength = self.offset(from: selectedTextRange.start, to: selectedTextRange.end)
         let pan = copiedText.replacingOccurrences(
             of: "[^0-9]",
             with: "",
             options: .regularExpression,
             range: nil)
         
-        replace(selectedTextRange, withText: pan)
+        let maxPastingPANLength = min(pan.count, (self.pan.brand?.validLengths.upperBound ?? 16) - (self.text?.count ?? 0) + selectedTextLength)
+        guard maxPastingPANLength > 0 else {
+            return
+        }
+        replace(selectedTextRange, withText: String(pan[pan.startIndex..<pan.index(pan.startIndex, offsetBy: maxPastingPANLength)]))
         
         guard let attributedText = attributedText else {
             return
@@ -165,7 +176,7 @@ import Foundation
         let kerningIndexes = IndexSet(PAN.suggestedSpaceFormattedIndexesForPANPrefix(attributedText.string).map({ $0 - 1 }))
         
         formattingAttributedText.removeAttribute(NSAttributedStringKey.kern, range: NSRange(location: 0, length: formattingAttributedText.length))
-        kerningIndexes.forEach({
+        kerningIndexes[kerningIndexes.indexRange(in: 0..<attributedText.length)].forEach({
             formattingAttributedText.addAttribute(NSAttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
         })
         let previousSelectedTextRange = self.selectedTextRange
@@ -262,6 +273,17 @@ import Foundation
                 return super.rangeEnclosingPosition(position, with: granularity, inDirection: direction)
             }
         }
+    }
+}
+
+extension CardNumberTextField: UITextFieldDelegate {
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard range.length >= 0 else {
+            return true
+        }
+        let maxLength = (pan.brand?.validLengths.upperBound ?? 16)
+        
+        return maxLength >= (self.text?.count ?? 0) - range.length + string.count
     }
 }
 
