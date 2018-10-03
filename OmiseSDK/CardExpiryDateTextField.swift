@@ -133,13 +133,13 @@ import UIKit
             let expectedDisplayingExpiryMonthText = String(format: "%02d/", expiryMonth)
             if (text != expectedDisplayingExpiryMonthText && parsedExpiryYear == nil)  &&
                 (expiryMonth != 1 || expiryDateComponents[0].count == 2) {
+                let currentAttributes = defaultTextAttributes
+                let attributedText = NSMutableAttributedString(string: String(format: "%02d/", expiryMonth), attributes: Dictionary(uniqueKeysWithValues: self.defaultTextAttributes.map({ (NSAttributedStringKey(rawValue: $0.key), $0.value) })))
                 if let separatorTextColor = self.dateSeparatorTextColor {
-                    let currentAttributes = defaultTextAttributes
-                    let attributedText = NSMutableAttributedString(string: String(format: "%02d/", expiryMonth), attributes: Dictionary(uniqueKeysWithValues: self.defaultTextAttributes.map({ (NSAttributedStringKey(rawValue: $0.key), $0.value) })))
                     attributedText.addAttribute(.foregroundColor, value: separatorTextColor, range: NSRange(location: attributedText.length - 1, length: 1))
-                    self.attributedText = attributedText
-                    typingAttributes = currentAttributes
                 }
+                self.attributedText = attributedText
+                typingAttributes = currentAttributes
             }
         }
         if let expiryYear = parsedExpiryYear {

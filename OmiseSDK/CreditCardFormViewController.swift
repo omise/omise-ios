@@ -522,8 +522,6 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         formFields.forEach({
             $0.borderColor = currentSecondaryColor
         })
-        
-        expiryDateTextField.dateSeparatorTextColor = currentSecondaryColor
     }
     
     fileprivate func associatedErrorLabelOf(_ textField: OmiseTextField) -> UILabel? {
