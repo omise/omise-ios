@@ -159,6 +159,7 @@ public struct Card: Decodable {
 
 extension Calendar {
     public static let creditCardInformationCalendar: Calendar = Calendar(identifier: .gregorian)
+    public static let validExpiryMonthRange: Range<Int> = Calendar.creditCardInformationCalendar.maximumRange(of: .month)!
 }
 
 extension NSCalendar {

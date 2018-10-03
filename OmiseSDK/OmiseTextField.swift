@@ -92,7 +92,10 @@ public enum OmiseTextFieldValidationError: Error {
     }
     
     private func updateTextColor() {
-        super.textColor = isValid || isFirstResponder ? (normalTextColor ?? .black) : (errorTextColor ?? normalTextColor ?? .black)
+        guard let errorTextColor = errorTextColor else {
+            return
+        }
+        super.textColor = isValid || isFirstResponder ? (normalTextColor ?? .black) : errorTextColor
     }
     
     func updatePlaceholderTextColor() {
@@ -147,7 +150,6 @@ public enum OmiseTextFieldValidationError: Error {
         if let validator = self.validator {
             try validator.validate(text)
         }
-        
     }
     
     private func initializeInstance() {
