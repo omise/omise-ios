@@ -152,7 +152,7 @@ class OverlayPanelPresentationController: UIPresentationController {
         let preferredContentSizeWidth = MoreInformationOnCVVViewController.preferredWidth
         
         let calculatedPreferredContentSize = viewController.view.systemLayoutSizeFitting(
-            CGSize(width: min(preferredContentSizeWidth, parentSize.width), height: UIView.layoutFittingCompressedSize.height),
+            CGSize(width: min(preferredContentSizeWidth, parentSize.width), height: ViewLayoutFittingCompressedSize.height),
             withHorizontalFittingPriority: UILayoutPriority.required,
             verticalFittingPriority: UILayoutPriority.fittingSizeLevel
         )
@@ -217,7 +217,7 @@ extension OverlayPanelPresentationController: UIViewControllerAnimatedTransition
         
         let initialAlpha: CGFloat = isPresenting ? 0.0 : 1.0
         let finalAlpha: CGFloat = isPresenting ? 1.0 : 0.0
-        let options = isPresenting ? UIView.AnimationOptions.curveEaseOut : .curveEaseIn
+        let options = isPresenting ? ViewAnimationOptions.curveEaseOut : .curveEaseIn
         
         let animationDuration = transitionDuration(using: transitionContext)
         controller.view.frame = initialFrame

@@ -75,11 +75,11 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         
         NotificationCenter.default.addObserver(
             self, selector:#selector(keyboardWillChangeFrame(_:)),
-            name: UIResponder.keyboardWillChangeFrameNotification, object: nil
+            name: NotificationKeyboardWillChangeFrameNotification, object: nil
         )
         NotificationCenter.default.addObserver(
             self, selector:#selector(keyboardWillHide(_:)),
-            name: UIResponder.keyboardWillHideNotification, object: nil
+            name: NotificationKeyboardWillHideFrameNotification, object: nil
         )
         
         fullNameTextField.validator = try! NSRegularExpression(pattern: "\\A[\\w\\s]{1,10}\\s?\\z", options: [])
@@ -109,7 +109,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     
     @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
         if let errorLabel = associatedErrorLabelOf(sender) {
-            let duration = TimeInterval(UINavigationController.hideShowBarDuration)
+            let duration = TimeInterval(NavigationControllerHideShowBarDuration)
             UIView.animate(
                 withDuration: duration, delay: 0.0,
                 options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
@@ -139,7 +139,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     }
     
     @IBAction func validateTextFieldDataOf(_ sender: OmiseTextField) {
-        let duration = TimeInterval(UINavigationController.hideShowBarDuration)
+        let duration = TimeInterval(NavigationControllerHideShowBarDuration)
         UIView.animate(
             withDuration: duration, delay: 0.0,
             options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
@@ -150,8 +150,8 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     }
     
     @objc func keyboardWillChangeFrame(_ notification: NSNotification) {
-        guard let frameEnd = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
-            let frameStart = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? CGRect,
+        guard let frameEnd = notification.userInfo?[NotificationKeyboardFrameEndUserInfoKey] as? CGRect,
+            let frameStart = notification.userInfo?[NotificationKeyboardFrameBeginUserInfoKey] as? CGRect,
             frameEnd != frameStart else {
                 return
         }

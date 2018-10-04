@@ -20,18 +20,15 @@ import Foundation
             let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map({ $0 - 1 }))
             
             #if swift(>=4.2)
-            if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
-                typingAttributes?[NSAttributedString.Key.kern] = 5
-            } else {
-                typingAttributes?.removeValue(forKey: NSAttributedString.Key.kern)
-            }
+            let kerningKey = AttributedStringKey.kern
             #else
-            if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
-                typingAttributes?[NSAttributedStringKey.kern.rawValue] = 5
-            } else {
-                typingAttributes?.removeValue(forKey: NSAttributedStringKey.kern.rawValue)
-            }
+            let kerningKey = AttributedStringKey.kern.rawValue
             #endif
+            if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
+                typingAttributes?[kerningKey] = 5
+            } else {
+                typingAttributes?.removeValue(forKey: kerningKey)
+            }
         }
     }
     
@@ -93,13 +90,13 @@ import Foundation
         if let placeholderColor = self.placeholderTextColor {
             let formattingPlaceholderString = formattingAttributedText.string
             formattingAttributedText.addAttribute(
-                NSAttributedString.Key.foregroundColor, value: placeholderColor,
+                AttributedStringKey.foregroundColor, value: placeholderColor,
                 range: NSRange(formattingPlaceholderString.startIndex..<formattingPlaceholderString.endIndex, in: formattingPlaceholderString)
             )
         }
         let kerningIndexes = IndexSet([3, 7, 11])
         kerningIndexes[kerningIndexes.indexRange(in: 0..<formattingAttributedText.length)].forEach({
-            formattingAttributedText.addAttribute(NSAttributedString.Key.kern, value: 5, range: NSRange(location: $0, length: 1))
+            formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
         })
 
         super.attributedPlaceholder = (formattingAttributedText.copy() as! NSAttributedString)
@@ -120,9 +117,9 @@ import Foundation
             
             let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map({ $0 - 1 }))
             
-            formattingAttributedText.removeAttribute(NSAttributedString.Key.kern, range: NSRange(location: formattingStartIndex, length: formattingAttributedText.length - formattingStartIndex))
+            formattingAttributedText.removeAttribute(AttributedStringKey.kern, range: NSRange(location: formattingStartIndex, length: formattingAttributedText.length - formattingStartIndex))
             kerningIndexes[kerningIndexes.indexRange(in: formattingStartIndex..<formattingAttributedText.length)].forEach({
-                formattingAttributedText.addAttribute(NSAttributedString.Key.kern, value: 5, range: NSRange(location: $0, length: 1))
+                formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
             })
             
             self.attributedText = formattingAttributedText
@@ -134,7 +131,7 @@ import Foundation
         let spacingIndexes = pan.suggestedSpaceFormattedIndexes
         if let attributedText = attributedText, spacingIndexes.contains(attributedText.length) {
             let formattingAttributedText = NSMutableAttributedString(attributedString: attributedText)
-            formattingAttributedText.addAttribute(NSAttributedString.Key.kern, value: 5, range: NSRange(location: attributedText.length - 1, length: 1))
+            formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: attributedText.length - 1, length: 1))
             self.attributedText = formattingAttributedText
         }
         
@@ -149,7 +146,7 @@ import Foundation
         let spacingIndexes = pan.suggestedSpaceFormattedIndexes
         if let attributedText = attributedText, spacingIndexes.contains(attributedText.length) {
             let formattingAttributedText = NSMutableAttributedString(attributedString: attributedText)
-            formattingAttributedText.removeAttribute(NSAttributedString.Key.kern, range: NSRange(location: attributedText.length - 1, length: 1))
+            formattingAttributedText.removeAttribute(AttributedStringKey.kern, range: NSRange(location: attributedText.length - 1, length: 1))
             self.attributedText = formattingAttributedText
         }
         
@@ -183,9 +180,9 @@ import Foundation
         let formattingAttributedText = NSMutableAttributedString(attributedString: attributedText)
         let kerningIndexes = IndexSet(PAN.suggestedSpaceFormattedIndexesForPANPrefix(attributedText.string).map({ $0 - 1 }))
         
-        formattingAttributedText.removeAttribute(NSAttributedString.Key.kern, range: NSRange(location: 0, length: formattingAttributedText.length))
+        formattingAttributedText.removeAttribute(AttributedStringKey.kern, range: NSRange(location: 0, length: formattingAttributedText.length))
         kerningIndexes[kerningIndexes.indexRange(in: 0..<attributedText.length)].forEach({
-            formattingAttributedText.addAttribute(NSAttributedString.Key.kern, value: 5, range: NSRange(location: $0, length: 1))
+            formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
         })
         let previousSelectedTextRange = self.selectedTextRange
         self.attributedText = formattingAttributedText
@@ -198,23 +195,28 @@ import Foundation
         }
         let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map({ $0 - 1 }))
         
+        #if swift(>=4.2)
+        let kerningKey = AttributedStringKey.kern
+        #else
+        let kerningKey = AttributedStringKey.kern.rawValue
+        #endif
         if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
-            typingAttributes?[NSAttributedStringKey.kern.rawValue] = 5
+            typingAttributes?[kerningKey] = 5
         } else {
-            typingAttributes?.removeValue(forKey: NSAttributedStringKey.kern.rawValue)
+            typingAttributes?.removeValue(forKey: kerningKey)
         }
 
         #if swift(>=4.2)
         if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
-            typingAttributes?[NSAttributedString.Key.kern] = 5
+            typingAttributes?[AttributedStringKey.kern] = 5
         } else {
-            typingAttributes?.removeValue(forKey: NSAttributedString.Key.kern)
+            typingAttributes?.removeValue(forKey: AttributedStringKey.kern)
         }
         #else
         if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
-            typingAttributes?[NSAttributedString.Key.kern.rawValue] = 5
+            typingAttributes?[AttributedStringKey.kern.rawValue] = 5
         } else {
-            typingAttributes?.removeValue(forKey: NSAttributedString.Key.kern.rawValue)
+            typingAttributes?.removeValue(forKey: AttributedStringKey.kern.rawValue)
         }
         #endif
     }
@@ -233,17 +235,22 @@ import Foundation
                 return super.position(from: position, toBoundary: granularity, inDirection: direction)
             }
             
-            if position == cardNumberTextField.beginningOfDocument && direction.rawValue == UITextStorageDirection.backward.rawValue ||
-                position == cardNumberTextField.endOfDocument && direction.rawValue == UITextStorageDirection.forward.rawValue {
+            #if swift(>=4.2)
+            let directionValue = direction.rawValue
+            #else
+            let directionValue = direction
+            #endif
+            if position == cardNumberTextField.beginningOfDocument && directionValue == UITextStorageDirection.backward.rawValue ||
+                position == cardNumberTextField.endOfDocument && directionValue == UITextStorageDirection.forward.rawValue {
                 return super.position(from: position, toBoundary: granularity, inDirection: direction)
             }
             
             let spacePositionIndexes = cardNumberTextField.pan.suggestedSpaceFormattedIndexes
             let currentIndex = cardNumberTextField.offset(from: cardNumberTextField.beginningOfDocument, to: position)
             
-            if direction.rawValue == UITextStorageDirection.backward.rawValue {
+            if directionValue == UITextStorageDirection.backward.rawValue {
                 return spacePositionIndexes.integerLessThan(currentIndex).flatMap({ cardNumberTextField.position(from: cardNumberTextField.beginningOfDocument, offset: $0) }) ?? cardNumberTextField.beginningOfDocument
-            } else if direction.rawValue == UITextStorageDirection.forward.rawValue {
+            } else if directionValue == UITextStorageDirection.forward.rawValue {
                 return spacePositionIndexes.integerGreaterThan(currentIndex).flatMap({ cardNumberTextField.position(from: cardNumberTextField.beginningOfDocument, offset: $0) }) ?? cardNumberTextField.endOfDocument
             } else {
                 return super.position(from: position, toBoundary: granularity, inDirection: direction)
@@ -255,8 +262,13 @@ import Foundation
                 return super.isPosition(position, atBoundary: granularity, inDirection: direction)
             }
             
-            if position == cardNumberTextField.beginningOfDocument && direction.rawValue == UITextStorageDirection.backward.rawValue ||
-                position == cardNumberTextField.endOfDocument && direction.rawValue == UITextStorageDirection.forward.rawValue {
+            #if swift(>=4.2)
+            let directionValue = direction.rawValue
+            #else
+            let directionValue = direction
+            #endif
+            if position == cardNumberTextField.beginningOfDocument && directionValue == UITextStorageDirection.backward.rawValue ||
+                position == cardNumberTextField.endOfDocument && directionValue == UITextStorageDirection.forward.rawValue {
                 return super.isPosition(position, atBoundary: granularity, inDirection: direction)
             }
             
@@ -279,8 +291,13 @@ import Foundation
                 return super.rangeEnclosingPosition(position, with: granularity, inDirection: direction)
             }
             
-            if position == cardNumberTextField.beginningOfDocument && direction.rawValue == UITextStorageDirection.backward.rawValue ||
-                position == cardNumberTextField.endOfDocument && direction.rawValue == UITextStorageDirection.forward.rawValue {
+            #if swift(>=4.2)
+            let directionValue = direction.rawValue
+            #else
+            let directionValue = direction
+            #endif
+            if position == cardNumberTextField.beginningOfDocument && directionValue == UITextStorageDirection.backward.rawValue ||
+                position == cardNumberTextField.endOfDocument && directionValue == UITextStorageDirection.forward.rawValue {
                 return super.rangeEnclosingPosition(position, with: granularity, inDirection: direction)
             }
             

@@ -129,6 +129,7 @@ public class PaymentCreatorController : UINavigationController {
         super.pushViewController(viewController, animated: animated)
     }
     
+    #if swift(>=4.2)
     public override func addChild(_ childController: UIViewController) {
         if let viewController = childController as? PaymentChooserUI {
             viewController.preferredPrimaryColor = preferredPrimaryColor
@@ -139,6 +140,18 @@ public class PaymentCreatorController : UINavigationController {
         }
         super.addChild(childController)
     }
+    #else
+    public override func addChildViewController(_ childController: UIViewController) {
+        if let viewController = childController as? PaymentChooserUI {
+            viewController.preferredPrimaryColor = preferredPrimaryColor
+            viewController.preferredSecondaryColor = preferredSecondaryColor
+        }
+        if let viewController = childController as? PaymentChooserViewController {
+            viewController.flowSession = self.paymentSourceCreatorFlowSession
+        }
+        super.addChildViewController(childController)
+    }
+    #endif
     
     public init() {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: Bundle.omiseSDKBundle)
@@ -163,7 +176,7 @@ public class PaymentCreatorController : UINavigationController {
         initializeWithPaymentChooserViewController(rootViewController)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         guard let rootViewController = topViewController as? PaymentChooserViewController else {
@@ -253,7 +266,7 @@ public class PaymentCreatorController : UINavigationController {
         }
         
         if animated {
-            UIView.animate(withDuration: TimeInterval(UINavigationController.hideShowBarDuration) + 0.07, delay: 0.0, options: [.layoutSubviews], animations: animationBlock)
+            UIView.animate(withDuration: TimeInterval(NavigationControllerHideShowBarDuration) + 0.07, delay: 0.0, options: [.layoutSubviews], animations: animationBlock)
         } else {
             animationBlock()
         }
@@ -274,7 +287,7 @@ public class PaymentCreatorController : UINavigationController {
         
         if animated {
             UIView.animate(
-                withDuration: TimeInterval(UINavigationController.hideShowBarDuration), delay: 0.0,
+                withDuration: TimeInterval(NavigationControllerHideShowBarDuration), delay: 0.0,
                 options: [.layoutSubviews], animations: animationBlock,
                 completion: { _ in
                     self.displayingNoticeView.removeFromSuperview()

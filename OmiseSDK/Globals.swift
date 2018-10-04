@@ -215,8 +215,7 @@ extension UnkeyedEncodingContainer {
     }
 }
 
-
-extension UIControl.State: Hashable {
+extension ControlState: Hashable {
     public var hashValue: Int {
         return rawValue.hashValue
     }

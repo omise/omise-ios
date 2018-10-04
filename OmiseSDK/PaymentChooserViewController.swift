@@ -164,7 +164,11 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         }
         
         let oldAccessoryView = cell?.accessoryView
+        #if swift(>=4.2)
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+        #else
+        let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        #endif
         loadingIndicator.color = currentSecondaryColor
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()

@@ -35,7 +35,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
             case other(String)
         }
         
-        public enum BadRequestReason : Hashable{
+        public enum BadRequestReason : Hashable {            
             case amountIsLessThanValidAmount(validAmount: Int64?)
             case amountIsGreaterThanValidAmount(validAmount: Int64?)
             
@@ -777,4 +777,36 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
         return preferredRecoverySuggestionMessage.isEmpty ? nil : preferredRecoverySuggestionMessage
     }
 }
+
+#if swift(>=4.2)
+#else
+extension OmiseError.APIErrorCode.BadRequestReason {
+    public var hashValue: Int {
+        switch self {
+        case .amountIsLessThanValidAmount(validAmount: let amount):
+            return ~"amountIsLessThanValidAmount".hashValue ^ (amount?.hashValue ?? 0)
+        case .amountIsGreaterThanValidAmount(validAmount: let amount):
+            return ~"amountIsGreaterThanValidAmount".hashValue ^ (amount?.hashValue ?? 0)
+        case .invalidCurrency:
+            return ~"invalidCurrency".hashValue
+        case .emptyName:
+            return ~"emptyName".hashValue
+        case .nameIsTooLong(maximum: let length):
+            return ~"nameIsTooLong".hashValue ^ (length?.hashValue ?? 0)
+        case .invalidName:
+            return ~"invalidName".hashValue
+        case .invalidEmail:
+            return ~"invalidEmail".hashValue
+        case .invalidPhoneNumber:
+            return ~"invalidPhoneNumber".hashValue
+        case .typeNotSupported:
+            return ~"typeNotSupported".hashValue
+        case .currencyNotSupported:
+            return ~"currencyNotSupported".hashValue
+        case .other(let message):
+            return ~message.hashValue
+        }
+    }
+}
+#endif
 

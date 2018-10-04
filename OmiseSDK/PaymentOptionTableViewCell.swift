@@ -5,7 +5,7 @@ class PaymentOptionTableViewCell: UITableViewCell {
     let separatorView: UIView = UIView()
     @IBInspectable var separatorHeight: CGFloat = 1
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    override init(style: TableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(separatorView)
     }

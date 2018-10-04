@@ -104,7 +104,7 @@ public enum OmiseTextFieldValidationError: Error {
 
             let formattingPlaceholderString = formattingAttributedText.string
             formattingAttributedText.addAttribute(
-                NSAttributedString.Key.foregroundColor, value: placeholderColor,
+                AttributedStringKey.foregroundColor, value: placeholderColor,
                 range: NSRange(formattingPlaceholderString.startIndex..<formattingPlaceholderString.endIndex, in: formattingPlaceholderString)
             )
             super.attributedPlaceholder = (formattingAttributedText.copy() as! NSAttributedString)

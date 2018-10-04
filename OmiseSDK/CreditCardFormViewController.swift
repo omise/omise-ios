@@ -222,11 +222,11 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         
         NotificationCenter.default.addObserver(
             self, selector:#selector(keyboardWillChangeFrame(_:)),
-            name: UIResponder.keyboardWillChangeFrameNotification, object: nil
+            name: NotificationKeyboardWillChangeFrameNotification, object: nil
         )
         NotificationCenter.default.addObserver(
             self, selector:#selector(keyboardWillHide(_:)),
-            name: UIResponder.keyboardWillHideNotification, object: nil
+            name: NotificationKeyboardWillHideFrameNotification, object: nil
         )
     }
     
@@ -250,14 +250,14 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         
         NotificationCenter.default.addObserver(
             self, selector:#selector(keyboardWillAppear(_:)),
-            name: UIResponder.keyboardWillShowNotification, object: nil
+            name: NotificationKeyboardWillShowFrameNotification, object: nil
         )
     }
     
     override public func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        NotificationCenter().removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter().removeObserver(self, name: NotificationKeyboardWillShowFrameNotification, object: nil)
     }
     
     public func setCreditCardInformationWith(number: String?, name: String?, expiration: (month: Int, year: Int)?) {
@@ -321,8 +321,8 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     }
     
     @objc func keyboardWillChangeFrame(_ notification: NSNotification) {
-        guard let frameEnd = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
-            let frameStart = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? CGRect,
+        guard let frameEnd = notification.userInfo?[NotificationKeyboardFrameEndUserInfoKey] as? CGRect,
+            let frameStart = notification.userInfo?[NotificationKeyboardFrameBeginUserInfoKey] as? CGRect,
             frameEnd != frameStart else {
                 return
         }
@@ -409,11 +409,20 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     private func updateSupplementaryUI() {
         let valid = isInputDataValid
         confirmButton?.isEnabled = valid
+        
+        #if swift(>=4.2)
         if valid {
             confirmButton.accessibilityTraits.remove(UIAccessibilityTraits.notEnabled)
         } else {
             confirmButton.accessibilityTraits.insert(UIAccessibilityTraits.notEnabled)
         }
+        #else
+        if valid {
+            confirmButton.accessibilityTraits &= ~UIAccessibilityTraitNotEnabled
+        } else {
+            confirmButton.accessibilityTraits |= UIAccessibilityTraitNotEnabled
+        }
+        #endif
         
         let cardBrandIconName: String?
         switch cardNumberTextField.cardBrand {
@@ -437,7 +446,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     @IBAction private func requestToken() {
         doneEditing(nil)
         
-        UIAccessibility.post(notification: UIAccessibility.Notification.announcement, argument: "Submitting payment, please wait")
+        UIAccessibility.post(notification: AccessibilityNotificationAnnouncement, argument: "Submitting payment, please wait")
         
         guard let publicKey = publicKey else {
             if #available(iOS 10.0, *) {
@@ -606,7 +615,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
 extension CreditCardFormViewController {
     
     @IBAction func validateTextFieldDataOf(_ sender: OmiseTextField) {
-        let duration = TimeInterval(UINavigationController.hideShowBarDuration)
+        let duration = TimeInterval(NavigationControllerHideShowBarDuration)
         UIView.animate(
             withDuration: duration, delay: 0.0,
             options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
@@ -618,7 +627,7 @@ extension CreditCardFormViewController {
     
     @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
         if let errorLabel = associatedErrorLabelOf(sender) {
-            let duration = TimeInterval(UINavigationController.hideShowBarDuration)
+            let duration = TimeInterval(NavigationControllerHideShowBarDuration)
             UIView.animate(
                 withDuration: duration, delay: 0.0,
                 options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
@@ -680,7 +689,7 @@ extension CreditCardFormViewController {
         
         func accessiblityElementAfter(_ element: NSObjectProtocol?,
                                       matchingPredicate predicate: (OmiseTextField) -> Bool,
-                                      direction: UIAccessibilityCustomRotor.Direction) -> NSObjectProtocol? {
+                                      direction: AccessibilityCustomRotorDirection) -> NSObjectProtocol? {
             guard let element = element else {
                 switch direction {
                 case .next:
@@ -700,7 +709,7 @@ extension CreditCardFormViewController {
             
             func filedAfter(_ field: OmiseTextField,
                             matchingPredicate predicate: (OmiseTextField) -> Bool,
-                            direction: UIAccessibilityCustomRotor.Direction) -> OmiseTextField? {
+                            direction: AccessibilityCustomRotorDirection) -> OmiseTextField? {
                 guard let indexOfField = fields.index(of: field) else { return nil }
                 switch direction {
                 case .next:

@@ -67,6 +67,8 @@
 		8A7A9EBD2166160300F12D86 /* PaymentSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */; };
 		8A7A9EBE2166160300F12D86 /* PaymentSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */; };
 		8A7A9EC0216642D100F12D86 /* Swift Version Compatability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatability.swift */; };
+		8A7A9EC12166578700F12D86 /* Swift Version Compatability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatability.swift */; };
+		8A7A9EC22166578800F12D86 /* Swift Version Compatability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatability.swift */; };
 		8A7F8B0C20C55605008F4D08 /* ClientSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADAA9A720B7194500DD7CCF /* ClientSessionDelegate.swift */; };
 		8AC1D3A32139224D0051F966 /* InternetBankingSourceChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC1D3A22139224D0051F966 /* InternetBankingSourceChooserViewController.swift */; };
 		8AC1D3A5213922570051F966 /* InstallmentBankingSourceChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC1D3A4213922570051F966 /* InstallmentBankingSourceChooserViewController.swift */; };
@@ -594,7 +596,7 @@
 				TargetAttributes = {
 					225931171CE3210700841B86 = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0940;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 					22D4809C1D0EB29C00544CE1 = {
@@ -605,6 +607,7 @@
 					};
 					8A723A502164D7B100D902F5 = {
 						DevelopmentTeam = AWD3VR6J7J;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 					987A02C81CE35D5E0035417A = {
@@ -741,6 +744,7 @@
 				229E145B1D0EBAB5000511DE /* ProductViewController.swift in Sources */,
 				229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */,
 				8A7A9EBD2166160300F12D86 /* PaymentSettingTableViewController.swift in Sources */,
+				8A7A9EC12166578700F12D86 /* Swift Version Compatability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -751,6 +755,7 @@
 				8A723A692164D87B00D902F5 /* OMSExampleProductViewController.m in Sources */,
 				8A7A9EBE2166160300F12D86 /* PaymentSettingTableViewController.swift in Sources */,
 				8A723A552164D7B100D902F5 /* CompletePaymentViewController.swift in Sources */,
+				8A7A9EC22166578800F12D86 /* Swift Version Compatability.swift in Sources */,
 				8A723A562164D7B100D902F5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -908,7 +913,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -962,7 +967,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";

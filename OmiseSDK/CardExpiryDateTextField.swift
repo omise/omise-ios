@@ -143,7 +143,7 @@ import UIKit
                 #if swift(>=4.2)
                 let attributedText = NSMutableAttributedString(string: String(format: "%02d/", expiryMonth), attributes: Dictionary(uniqueKeysWithValues: self.defaultTextAttributes.map({ ($0.key, $0.value) })))
                 #else
-                let attributedText = NSMutableAttributedString(string: String(format: "%02d/", expiryMonth), attributes: Dictionary(uniqueKeysWithValues: self.defaultTextAttributes.map({ (NSAttributedStringKey(rawValue: $0.key), $0.value) })))
+                let attributedText = NSMutableAttributedString(string: String(format: "%02d/", expiryMonth), attributes: Dictionary(uniqueKeysWithValues: self.defaultTextAttributes.map({ (AttributedStringKey(rawValue: $0.key), $0.value) })))
                 #endif
                 if let separatorTextColor = self.dateSeparatorTextColor {
                     attributedText.addAttribute(.foregroundColor, value: separatorTextColor, range: NSRange(location: attributedText.length - 1, length: 1))
