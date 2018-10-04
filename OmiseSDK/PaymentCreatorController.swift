@@ -129,7 +129,7 @@ public class PaymentCreatorController : UINavigationController {
         super.pushViewController(viewController, animated: animated)
     }
     
-    public override func addChildViewController(_ childController: UIViewController) {
+    public override func addChild(_ childController: UIViewController) {
         if let viewController = childController as? PaymentChooserUI {
             viewController.preferredPrimaryColor = preferredPrimaryColor
             viewController.preferredSecondaryColor = preferredSecondaryColor
@@ -137,7 +137,7 @@ public class PaymentCreatorController : UINavigationController {
         if let viewController = childController as? PaymentChooserViewController {
             viewController.flowSession = self.paymentSourceCreatorFlowSession
         }
-        super.addChildViewController(childController)
+        super.addChild(childController)
     }
     
     public init() {
@@ -253,7 +253,7 @@ public class PaymentCreatorController : UINavigationController {
         }
         
         if animated {
-            UIView.animate(withDuration: TimeInterval(UINavigationControllerHideShowBarDuration) + 0.07, delay: 0.0, options: [.layoutSubviews], animations: animationBlock)
+            UIView.animate(withDuration: TimeInterval(UINavigationController.hideShowBarDuration) + 0.07, delay: 0.0, options: [.layoutSubviews], animations: animationBlock)
         } else {
             animationBlock()
         }
@@ -274,7 +274,7 @@ public class PaymentCreatorController : UINavigationController {
         
         if animated {
             UIView.animate(
-                withDuration: TimeInterval(UINavigationControllerHideShowBarDuration), delay: 0.0,
+                withDuration: TimeInterval(UINavigationController.hideShowBarDuration), delay: 0.0,
                 options: [.layoutSubviews], animations: animationBlock,
                 completion: { _ in
                     self.displayingNoticeView.removeFromSuperview()

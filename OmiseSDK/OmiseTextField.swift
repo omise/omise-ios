@@ -104,7 +104,7 @@ public enum OmiseTextFieldValidationError: Error {
 
             let formattingPlaceholderString = formattingAttributedText.string
             formattingAttributedText.addAttribute(
-                NSAttributedStringKey.foregroundColor, value: placeholderColor,
+                NSAttributedString.Key.foregroundColor, value: placeholderColor,
                 range: NSRange(formattingPlaceholderString.startIndex..<formattingPlaceholderString.endIndex, in: formattingPlaceholderString)
             )
             super.attributedPlaceholder = (formattingAttributedText.copy() as! NSAttributedString)
@@ -180,11 +180,11 @@ extension OmiseTextField {
         case .plain:
             edgeInsets = UIEdgeInsets.zero
         case .border(width: let width):
-            edgeInsets = UIEdgeInsetsMake(
-                layoutMargins.top + width,
-                layoutMargins.left + width,
-                layoutMargins.bottom + width,
-                layoutMargins.right + width
+            edgeInsets = UIEdgeInsets(
+                top: layoutMargins.top + width,
+                left: layoutMargins.left + width,
+                bottom: layoutMargins.bottom + width,
+                right: layoutMargins.right + width
             )
         }
         
@@ -216,7 +216,7 @@ extension OmiseTextField {
     }
     
     func textAreaViewRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, overallInsets)
+        return bounds.inset(by: overallInsets)
     }
     
     private func updateBorder() {

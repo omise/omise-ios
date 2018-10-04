@@ -239,7 +239,11 @@ extension PaymentInformation {
 }
 
 
-extension PaymentInformation.InternetBanking {
+extension PaymentInformation.InternetBanking : StaticElementIterable {
+    public typealias AllCases = Array<PaymentInformation.InternetBanking>
+    public static var allCases: PaymentInformation.InternetBanking.AllCases = [
+        .bay, .ktb, .scb, .bbl
+    ]
     
     public var type: String {
         switch self {
@@ -286,7 +290,6 @@ extension PaymentInformation.InternetBanking {
 }
 
 extension PaymentInformation.Installment {
-    
     public var type: String {
         switch brand {
         case .bay:
@@ -343,6 +346,13 @@ extension PaymentInformation.Installment {
         var installmentsContainer = encoder.container(keyedBy: CodingKeys.self)
         try installmentsContainer.encode(numberOfTerms, forKey: .installmentTerms)
     }
+}
+
+extension PaymentInformation.Installment.Brand : StaticElementIterable {
+    public typealias AllCases = Array<PaymentInformation.Installment.Brand>
+    public static var allCases: PaymentInformation.Installment.Brand.AllCases = [
+        .bay, .firstChoice, .bbl, .ktc, .kBank
+    ]
 }
 
 extension PaymentInformation.BillPayment {

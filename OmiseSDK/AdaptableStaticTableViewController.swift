@@ -2,7 +2,7 @@ import UIKit
 
 
 #if swift(>=4.2)
-typealias StaticElementIterable = CaseIterable
+public typealias StaticElementIterable = CaseIterable
 #else
 public protocol StaticElementIterable {
     /// A type that can represent a collection of all values of this type.

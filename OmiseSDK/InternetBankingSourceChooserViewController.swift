@@ -55,7 +55,7 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         let bank = element(forUIIndexPath: indexPath)
         
         let oldAccessoryView = cell?.accessoryView
-        let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
         loadingIndicator.color = currentSecondaryColor
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
@@ -80,15 +80,3 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
     private func applySecondaryColor() {}
 }
 
-
-#if swift(>=4.2)
-#else
-extension PaymentInformation.InternetBanking: StaticElementIterable {
-    public static let allCases: [PaymentInformation.InternetBanking] = [
-        .bay,
-        .ktb,
-        .scb,
-        .bbl,
-        ]
-}
-#endif

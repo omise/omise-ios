@@ -9,7 +9,7 @@ import UIKit
         }
     }
     
-    private var backgroundColors: [UIControlState: UIColor] = [:]
+    private var backgroundColors: [UIControl.State: UIColor] = [:]
     
     @IBInspectable public var defaultBackgroundColor: UIColor? {
         didSet {
@@ -77,11 +77,11 @@ import UIKit
         super.backgroundColor = self.backgroundColor
     }
     
-    public func backgroundColor(for state: UIControlState) -> UIColor? {
+    public func backgroundColor(for state: UIControl.State) -> UIColor? {
         return backgroundColors[state]
     }
     
-    public func setBackgroundColor(_ color: UIColor?, for state: UIControlState) {
+    public func setBackgroundColor(_ color: UIColor?, for state: UIControl.State) {
         backgroundColors[state] = color
         updateBackgroundColor()
     }

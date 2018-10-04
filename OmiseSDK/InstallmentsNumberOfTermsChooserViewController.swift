@@ -107,7 +107,7 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
         }
         
         let oldAccessoryView = cell?.accessoryView
-        let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
         loadingIndicator.color = currentSecondaryColor
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()

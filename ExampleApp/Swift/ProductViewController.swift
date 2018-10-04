@@ -4,7 +4,7 @@ import OmiseSDK
 
 @objc(OMSExampleProductViewController)
 class ProductViewController: UIViewController {
-    private let publicKey = "<#Omise Public Key#>"
+    private let publicKey = "pkey_test_54oojsyhv5uq1kzf4g4"
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PresentPaymentCreator",
@@ -26,7 +26,11 @@ extension ProductViewController: PaymentCreatorControllerDelegate {
     
     func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didFailWithError error: Error) {
         let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        #if swift(>=4.2)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
+        #else
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+        #endif
         alertController.addAction(okAction)
         paymentCreatorController.present(alertController, animated: true, completion: nil)
     }

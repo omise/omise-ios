@@ -67,8 +67,8 @@ class ProductDetailViewController: UIViewController {
     @IBAction func handlingAuthorizingPayment(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Authorizing Payment", message: "Please input your given authorized URL", preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
-        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "Go", style: UIAlertActionStyle.default, handler: { (_) in
+        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Go", style: UIAlertAction.Style.default, handler: { (_) in
             guard let textField = alertController.textFields?.first, let text = textField.text,
                 let url = URL(string: text) else { return }
             
@@ -119,7 +119,7 @@ extension ProductDetailViewController: PaymentCreatorControllerDelegate {
     
     func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didFailWithError error: Error) {
         let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(okAction)
         paymentCreatorController.present(alertController, animated: true, completion: nil)
     }

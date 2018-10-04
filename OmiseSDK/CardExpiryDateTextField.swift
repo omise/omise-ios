@@ -79,12 +79,18 @@ import UIKit
         super.delegate = self
         
         expirationMonthAccessibilityElement = CardExpiryDateTextField.InfoAccessibilityElement(expiryDateTextField: self, component: .month)
-        expirationMonthAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitAdjustable
         expirationMonthAccessibilityElement.accessibilityLabel = "Expiration month"
         
         expirationYearAccessibilityElement = CardExpiryDateTextField.InfoAccessibilityElement(expiryDateTextField: self, component: .year)
-        expirationYearAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitAdjustable
         expirationYearAccessibilityElement.accessibilityLabel = "Expiration year"
+        
+        #if swift(>=4.2)
+        expirationMonthAccessibilityElement.accessibilityTraits.insert(UIAccessibilityTraits.adjustable)
+        expirationYearAccessibilityElement.accessibilityTraits.insert(UIAccessibilityTraits.adjustable)        
+        #else
+        expirationMonthAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitAdjustable
+        expirationYearAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitAdjustable
+        #endif
         
         validator = try! NSRegularExpression(pattern: "^([0-1]?\\d)/(\\d{1,2})$", options: [])
     }
@@ -134,7 +140,11 @@ import UIKit
             if (text != expectedDisplayingExpiryMonthText && parsedExpiryYear == nil)  &&
                 (expiryMonth != 1 || expiryDateComponents[0].count == 2) {
                 let currentAttributes = defaultTextAttributes
+                #if swift(>=4.2)
+                let attributedText = NSMutableAttributedString(string: String(format: "%02d/", expiryMonth), attributes: Dictionary(uniqueKeysWithValues: self.defaultTextAttributes.map({ ($0.key, $0.value) })))
+                #else
                 let attributedText = NSMutableAttributedString(string: String(format: "%02d/", expiryMonth), attributes: Dictionary(uniqueKeysWithValues: self.defaultTextAttributes.map({ (NSAttributedStringKey(rawValue: $0.key), $0.value) })))
+                #endif
                 if let separatorTextColor = self.dateSeparatorTextColor {
                     attributedText.addAttribute(.foregroundColor, value: separatorTextColor, range: NSRange(location: attributedText.length - 1, length: 1))
                 }
@@ -298,9 +308,9 @@ extension CardExpiryDateTextField {
             expirationYearAccessibilityElement.accessibilityFrameInContainerSpace = expirationYearFrameInTextfield.integral
         } else {
             expirationMonthAccessibilityElement.accessibilityFrame =
-                UIAccessibilityConvertFrameToScreenCoordinates(expirationMonthFrameInTextfield.integral, self)
+                UIAccessibility.convertToScreenCoordinates(expirationMonthFrameInTextfield.integral, in: self)
             expirationYearAccessibilityElement.accessibilityFrame =
-                UIAccessibilityConvertFrameToScreenCoordinates(expirationYearFrameInTextfield.integral, self)
+                UIAccessibility.convertToScreenCoordinates(expirationYearFrameInTextfield.integral, in: self)
         }
     }
     
@@ -352,7 +362,7 @@ extension CardExpiryDateTextField {
             self.attributedText = attributedText
         }
         
-        sendActions(for: UIControlEvents.valueChanged)
+        sendActions(for: .valueChanged)
         
         updateAccessibilityFrames()
     }

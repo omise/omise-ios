@@ -90,15 +90,3 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
     }
 }
 
-#if swift(>=4.2)
-#else
-extension PaymentInformation.Installment.Brand: StaticElementIterable {
-    public static let allCases: [PaymentInformation.Installment.Brand] = [
-        .bbl,
-        .kBank,
-        .bay,
-        .firstChoice,
-        .ktc,
-        ]
-}
-#endif

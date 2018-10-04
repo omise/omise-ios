@@ -66,6 +66,7 @@
 		8A776647214A5FC60029D166 /* NoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A776646214A5FC60029D166 /* NoticeView.xib */; };
 		8A7A9EBD2166160300F12D86 /* PaymentSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */; };
 		8A7A9EBE2166160300F12D86 /* PaymentSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */; };
+		8A7A9EC0216642D100F12D86 /* Swift Version Compatability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatability.swift */; };
 		8A7F8B0C20C55605008F4D08 /* ClientSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADAA9A720B7194500DD7CCF /* ClientSessionDelegate.swift */; };
 		8AC1D3A32139224D0051F966 /* InternetBankingSourceChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC1D3A22139224D0051F966 /* InternetBankingSourceChooserViewController.swift */; };
 		8AC1D3A5213922570051F966 /* InstallmentBankingSourceChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC1D3A4213922570051F966 /* InstallmentBankingSourceChooserViewController.swift */; };
@@ -204,6 +205,7 @@
 		8A776657214AA4E70029D166 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ja; path = ja.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		8A776658214AA4F10029D166 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Error.strings; sourceTree = "<group>"; };
 		8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSettingTableViewController.swift; sourceTree = "<group>"; };
+		8A7A9EBF216642D100F12D86 /* Swift Version Compatability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift Version Compatability.swift"; sourceTree = "<group>"; };
 		8AC1D3A22139224D0051F966 /* InternetBankingSourceChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetBankingSourceChooserViewController.swift; sourceTree = "<group>"; };
 		8AC1D3A4213922570051F966 /* InstallmentBankingSourceChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentBankingSourceChooserViewController.swift; sourceTree = "<group>"; };
 		8AC1D3A6213941C80051F966 /* InstallmentsNumberOfTermsChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentsNumberOfTermsChooserViewController.swift; sourceTree = "<group>"; };
@@ -431,6 +433,7 @@
 			children = (
 				8AF10BAE20DA6D8B00443A9C /* Objective-C */,
 				8A01F77E20D7D327003FC11E /* Old version */,
+				8A7A9EBF216642D100F12D86 /* Swift Version Compatability.swift */,
 			);
 			path = Compatability;
 			sourceTree = "<group>";
@@ -689,6 +692,7 @@
 				2220F1AC1D0FEE85008CD89F /* OmiseSDKClient.swift in Sources */,
 				8A60619A20B2A8D400CF90D5 /* PAN.swift in Sources */,
 				2220F1AA1D0FEE85008CD89F /* OmiseError.swift in Sources */,
+				8A7A9EC0216642D100F12D86 /* Swift Version Compatability.swift in Sources */,
 				8A0A67E821383614006356B7 /* PaymentChooserViewController.swift in Sources */,
 				8A25E92A213CF6F300D48252 /* EContextInformationInputViewController.swift in Sources */,
 				8A72CD5E2162358400F14F76 /* PaymentOptionTableViewCell.swift in Sources */,
@@ -904,7 +908,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -958,7 +962,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";

@@ -7,7 +7,7 @@ import Foundation
     private static let monthPicker = 0
     private static let yearPicker = 1
     private let months: [String] = {
-        let validRange = CountableRange(Calendar.creditCardInformationCalendar.maximumRange(of: Calendar.Component.month) ?? Range<Int>(1...12))
+        let validRange = Calendar.creditCardInformationCalendar.maximumRange(of: Calendar.Component.month) ?? Range<Int>(1...12)
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.alwaysShowsDecimalSeparator = false
