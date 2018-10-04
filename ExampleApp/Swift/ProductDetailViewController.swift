@@ -1,8 +1,14 @@
 import UIKit
 import OmiseSDK
 
+
+@objc(OMSExampleProductDetailViewController)
 class ProductDetailViewController: UIViewController {
     private let publicKey = "<#Omise Public Key#>"
+    
+    var paymentAmount: Int64 = 5_000_00
+    var paymentCurrency: Currency = .thb
+    var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentCreatorController.thailandDefaultAvailableSourceMethods
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PresentCreditFormWithModal",
@@ -11,6 +17,19 @@ class ProductDetailViewController: UIViewController {
             creditCardFormController.publicKey = publicKey
             creditCardFormController.handleErrors = true
             creditCardFormController.delegate = self
+        } else if segue.identifier == "PresentPaymentCreator",
+            let paymentCreatorController = segue.destination as? PaymentCreatorController {
+            paymentCreatorController.publicKey = self.publicKey
+            paymentCreatorController.paymentAmount = paymentAmount
+            paymentCreatorController.paymentCurrency = paymentCurrency
+            paymentCreatorController.allowedPaymentMethods = allowedPaymentMethods
+            paymentCreatorController.paymentDelegate = self
+        } else if segue.identifier == "PresentPaymentSettingScene",
+            let settingNavigationController = segue.destination as? UINavigationController,
+            let settingViewController = settingNavigationController.topViewController as? PaymentSettingTableViewController {
+            settingViewController.currentAmount = paymentAmount
+            settingViewController.currentCurrency = paymentCurrency
+            settingViewController.allowedPaymentMethods = Set(allowedPaymentMethods)
         }
     }
     
@@ -32,6 +51,17 @@ class ProductDetailViewController: UIViewController {
             _ = navigationController?.popToViewController(self, animated: true)
             completion?()
         }
+    }
+    
+    @objc(updatePaymentInformationFromSetting:)
+    @IBAction private func updatePaymentInformation(fromSetting sender: UIStoryboardSegue) {
+        guard let settingViewController = sender.source as? PaymentSettingTableViewController else {
+            return
+        }
+        
+        paymentAmount = settingViewController.currentAmount
+        paymentCurrency = settingViewController.currentCurrency
+        allowedPaymentMethods = Array(settingViewController.allowedPaymentMethods)
     }
     
     @IBAction func handlingAuthorizingPayment(_ sender: UIBarButtonItem) {
@@ -78,6 +108,26 @@ extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate 
     func authorizingPaymentViewControllerDidCancel(_ viewController: AuthorizingPaymentViewController) {
         dismiss(animated: true, completion: nil)
     }
+}
+
+
+extension ProductDetailViewController: PaymentCreatorControllerDelegate {
+    
+    func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didCreatePayment payment: Payment) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didFailWithError error: Error) {
+        let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+        alertController.addAction(okAction)
+        paymentCreatorController.present(alertController, animated: true, completion: nil)
+    }
+    
+    func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 

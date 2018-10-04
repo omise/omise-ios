@@ -2,6 +2,7 @@ import UIKit
 import OmiseSDK
 
 
+@objc(OMSExampleProductViewController)
 class ProductViewController: UIViewController {
     private let publicKey = "<#Omise Public Key#>"
     
