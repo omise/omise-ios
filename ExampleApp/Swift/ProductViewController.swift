@@ -4,7 +4,7 @@ import OmiseSDK
 
 @objc(OMSExampleProductViewController)
 class ProductViewController: UIViewController {
-    private let publicKey = "pkey_test_54oojsyhv5uq1kzf4g4"
+    private let publicKey = "<#Omise Public Key#>"
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PresentPaymentCreator",

@@ -3,7 +3,7 @@
 #import "OMSRequestDelegateDummy.h"
 
 
-NSString * const _Nonnull publicKey = @"pkey_test_58wfnlwoxz1tbkdd993";
+NSString * const _Nonnull publicKey = @"<#Omise Public Key#>";
 
 
 @interface OMSOmiseClientTestCase : XCTestCase

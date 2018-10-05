@@ -8,7 +8,7 @@ class ClientTestCase: XCTestCase {
     var testClient: Client!
     override func setUp() {
         super.setUp()
-        testClient = Client(publicKey: "pkey_test_58wfnlwoxz1tbkdd993")
+        testClient = Client(publicKey: "<#Omise Public Key#>")
     }
     
     override func tearDown() {

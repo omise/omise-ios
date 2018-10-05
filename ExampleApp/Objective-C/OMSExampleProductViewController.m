@@ -1,7 +1,7 @@
 #import "OMSExampleProductViewController.h"
 
 
-NSString * const OMSPublicKey = @"pkey_test_4y7dh41kuvvawbhslxw";
+NSString * const OMSPublicKey = @"<#Omise Public Key#>";
 
 
 @implementation OMSExampleProductViewController
