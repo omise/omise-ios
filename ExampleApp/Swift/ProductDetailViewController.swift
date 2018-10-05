@@ -2,13 +2,40 @@ import UIKit
 import OmiseSDK
 
 
+struct PaymentPreset {
+    var paymentAmount: Int64
+    var paymentCurrency: Currency
+    var allowedPaymentMethods: [OMSSourceTypeValue]
+    
+    static let thailandPreset = PaymentPreset(
+        paymentAmount: 5_00_00, paymentCurrency: .thb,
+        allowedPaymentMethods: PaymentCreatorController.thailandDefaultAvailableSourceMethods
+    )
+    
+    static let japanPreset = PaymentPreset(
+        paymentAmount: 5_000, paymentCurrency: .jpy,
+        allowedPaymentMethods: PaymentCreatorController.japanDefaultAvailableSourceMethods
+    )
+}
+
+
 @objc(OMSExampleProductDetailViewController)
 class ProductDetailViewController: UIViewController {
     private let publicKey = "<#Omise Public Key#>"
+
+    var paymentAmount: Int64 = PaymentPreset.thailandPreset.paymentAmount
+    var paymentCurrency: Currency = PaymentPreset.thailandPreset.paymentCurrency
+    var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentPreset.thailandPreset.allowedPaymentMethods
     
-    var paymentAmount: Int64 = 5_000_00
-    var paymentCurrency: Currency = .thb
-    var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentCreatorController.thailandDefaultAvailableSourceMethods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if Locale.current.regionCode == "JP" {
+            paymentAmount = PaymentPreset.japanPreset.paymentAmount
+            paymentCurrency = PaymentPreset.japanPreset.paymentCurrency
+            allowedPaymentMethods = PaymentPreset.japanPreset.allowedPaymentMethods
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PresentCreditFormWithModal",

@@ -125,6 +125,23 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBAction func finishEditingAmount(_ sender: Any) {
         amountField.resignFirstResponder()
     }
+    
+    @IBAction func showPresetChooser(_ sender: Any) {
+        let presetChooserAlertController = UIAlertController(title: "Preset", message: nil, preferredStyle: .actionSheet)
+        presetChooserAlertController.addAction(UIAlertAction(title: "Thailand", style: .default, handler: { (_) in
+            self.currentAmount = PaymentPreset.thailandPreset.paymentAmount
+            self.currentCurrency = PaymentPreset.thailandPreset.paymentCurrency
+            self.allowedPaymentMethods = Set(PaymentPreset.thailandPreset.allowedPaymentMethods)
+        }))
+        presetChooserAlertController.addAction(UIAlertAction(title: "Japan", style: .default, handler: { (_) in
+            self.currentAmount = PaymentPreset.japanPreset.paymentAmount
+            self.currentCurrency = PaymentPreset.japanPreset.paymentCurrency
+            self.allowedPaymentMethods = Set(PaymentPreset.japanPreset.allowedPaymentMethods)
+        }))
+        
+        presetChooserAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(presetChooserAlertController, animated: true, completion: nil)
+    }
 }
 
 extension PaymentSettingTableViewController : UITextFieldDelegate {

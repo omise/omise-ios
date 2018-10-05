@@ -24,7 +24,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gb9-lf-PL0">
                                 <rect key="frame" x="16" y="551" width="343" height="44"/>
                                 <color key="backgroundColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="320 Bath - Buy now">
+                                <state key="normal" title="320 Bath - Push">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -137,7 +137,7 @@
         <!--Setup-->
         <scene sceneID="B79-3J-Pbe">
             <objects>
-                <tableViewController id="9af-Wv-9QW" customClass="PaymentSettingTableViewController" customModule="ExampleApp__Objective_C_" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="9af-Wv-9QW" customClass="PaymentSettingTableViewController" customModule="ExampleApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="IQu-Jd-aGH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -449,6 +449,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Setup" id="FXz-KA-zGe">
+                        <barButtonItem key="leftBarButtonItem" title="Preset" id="KNk-gK-jWw">
+                            <connections>
+                                <action selector="showPresetChooser:" destination="9af-Wv-9QW" id="sEa-gg-XCo"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="KdY-p7-4m8">
                             <connections>
                                 <segue destination="8aA-P6-UKw" kind="unwind" unwindAction="updatePaymentInformationFromSetting:" id="bvQ-h7-WrW"/>
@@ -506,7 +511,7 @@
         <!--Success-->
         <scene sceneID="79S-SL-zwq">
             <objects>
-                <viewController id="TWZ-Mj-mej" customClass="CompletePaymentViewController" customModule="ExampleApp__Objective_C_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="TWZ-Mj-mej" customClass="CompletePaymentViewController" customModule="ExampleApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pcb-7a-MnU"/>
                         <viewControllerLayoutGuide type="bottom" id="AqI-nN-Ylm"/>
