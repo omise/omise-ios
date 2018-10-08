@@ -50,7 +50,7 @@ class CheckoutViewController: UIViewController {
     @objc func didTapCheckout() {
         let closeButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCloseForm))
         
-        let creditCardForm = CreditCardFormController.makeCreditCardForm(withPublicKey: publicKey)
+        let creditCardForm = CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
         creditCardForm.delegate = self
         creditCardForm.navigationItem.rightBarButtonItem = closeButton
         
@@ -68,21 +68,27 @@ class CheckoutViewController: UIViewController {
  The form will automatically tokenizes credit card data for you as the user click on the submit button. To receive the resulting token data, implement the `CreditCardFormDelegate` methods on your view controller.
  
  */
-extension CheckoutViewController: CreditCardFormDelegate {
-    func creditCardForm(_ controller: CreditCardFormController, didSucceedWithToken token: OmiseToken) {
+extension CheckoutViewController: CreditCardFormViewControllerDelegate {
+    func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
         didTapCloseForm()
-        print("token created: \(token.tokenId ?? "")")
+        print("token created: \(token.id )")
         
-        let alert = UIAlertController(title: "Token", message: token.tokenId, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Token", message: token.id, preferredStyle: .alert)
         present(alert, animated: true, completion: nil)
+
     }
     
-    func creditCardForm(_ controller: CreditCardFormController, didFailWithError error: Error) {
+    func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error) {
         didTapCloseForm()
         print("error: \(error)")
         
         let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
         present(alert, animated: true, completion: nil)
+
+    }
+    
+    func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController) {
+        
     }
 }
 

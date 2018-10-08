@@ -280,7 +280,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     public func __setCreditCardInformation(number: String, name: String, expirationMonth: Int, expirationYear: Int) {
         let month: Int?
         let year: Int?
-        if 1...12 ~= expirationMonth {
+        if Calendar.validExpiryMonthRange ~= expirationMonth {
             month = expirationMonth
         } else {
             month = nil
