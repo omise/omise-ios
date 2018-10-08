@@ -118,6 +118,40 @@ public class PaymentCreatorController : UINavigationController {
         return noticeView
     }()
     
+    
+    /// Factory method for creating CreditCardFormController with given public key.
+    /// - parameter publicKey: Omise public key.
+    public static func makePaymentCreatorControllerWith(
+        publicKey: String, amount: Int64, currency: Currency,
+        allowedPaymentMethods: [OMSSourceTypeValue],
+        paymentDelegate: PaymentCreatorControllerDelegate?) -> PaymentCreatorController {
+        let omiseBundle = Bundle(for: self)
+        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: omiseBundle)
+        let paymentCreatorController = storyboard.instantiateViewController(withIdentifier: "PaymentCreatorController") as! PaymentCreatorController
+        paymentCreatorController.publicKey = publicKey
+        paymentCreatorController.paymentAmount = amount
+        paymentCreatorController.paymentCurrency = currency
+        paymentCreatorController.allowedPaymentMethods = allowedPaymentMethods
+        paymentCreatorController.paymentDelegate = paymentDelegate
+        
+        return paymentCreatorController
+    }
+    
+    /// Factory method for creating CreditCardFormController with given public key.
+    /// - parameter publicKey: Omise public key.
+    @objc(paymentCreatorControllerWithPublicKey:amount:currency:allowedPaymentMethods:paymentDelegate:)
+    public static func __makePaymentCreatorViewControllerWith(
+        publicKey: String, amount: Int64, currencyCode: String,
+        allowedPaymentMethods: [OMSSourceTypeValue],
+        paymentDelegate: OMSPaymentCreatorControllerDelegate) -> PaymentCreatorController {
+        let controller = PaymentCreatorController.makePaymentCreatorControllerWith(
+            publicKey: publicKey, amount: amount, currency: Currency(code: currencyCode),
+            allowedPaymentMethods: allowedPaymentMethods,
+            paymentDelegate: nil)
+        controller.__paymentDelegate = paymentDelegate
+        return controller
+    }
+    
     public override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         if let viewController = viewController as? PaymentChooserUI {
             viewController.preferredPrimaryColor = preferredPrimaryColor
@@ -224,7 +258,11 @@ public class PaymentCreatorController : UINavigationController {
         if #available(iOS 9.0, *) {
             noticeViewHeightConstraint = displayingNoticeView.heightAnchor.constraint(equalToConstant: 0)
         } else {
-            noticeViewHeightConstraint = NSLayoutConstraint(item: displayingNoticeView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 0)
+            noticeViewHeightConstraint = NSLayoutConstraint(
+                item: displayingNoticeView, attribute: .height, relatedBy: .equal,
+                toItem: nil, attribute: .notAnAttribute,
+                multiplier: 1.0, constant: 0
+            )
         }
         noticeViewHeightConstraint.isActive = true
         
