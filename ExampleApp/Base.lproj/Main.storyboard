@@ -209,7 +209,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhu-eD-4oi">
-                                                    <rect key="frame" x="20" y="11.5" width="60" height="21"/>
+                                                    <rect key="frame" x="20" y="11.5" width="60" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -228,7 +228,9 @@
                                                 <constraint firstItem="bhu-eD-4oi" firstAttribute="centerY" secondItem="4uV-ex-Od6" secondAttribute="centerY" id="LUa-MR-K3t"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="nIQ-I3-Eea" secondAttribute="trailing" id="VUq-Rb-Bvb"/>
                                                 <constraint firstItem="nIQ-I3-Eea" firstAttribute="firstBaseline" secondItem="bhu-eD-4oi" secondAttribute="firstBaseline" id="WZW-VU-4fD"/>
+                                                <constraint firstItem="bhu-eD-4oi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="4uV-ex-Od6" secondAttribute="topMargin" id="XLS-XM-INq"/>
                                                 <constraint firstItem="nIQ-I3-Eea" firstAttribute="leading" secondItem="bhu-eD-4oi" secondAttribute="trailing" constant="12" id="aKI-Nl-9oi"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="bhu-eD-4oi" secondAttribute="bottom" id="iye-kY-Ktf"/>
                                                 <constraint firstAttribute="leadingMargin" secondItem="bhu-eD-4oi" secondAttribute="leading" id="mxi-xW-i6l"/>
                                             </constraints>
                                         </tableViewCellContentView>
