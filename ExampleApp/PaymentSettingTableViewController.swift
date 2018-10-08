@@ -2,22 +2,6 @@ import UIKit
 import OmiseSDK
 
 
-struct PaymentPreset {
-    var paymentAmount: Int64
-    var paymentCurrency: Currency
-    var allowedPaymentMethods: [OMSSourceTypeValue]
-    
-    static let thailandPreset = PaymentPreset(
-        paymentAmount: 5_00_00, paymentCurrency: .thb,
-        allowedPaymentMethods: PaymentCreatorController.thailandDefaultAvailableSourceMethods
-    )
-    
-    static let japanPreset = PaymentPreset(
-        paymentAmount: 5_000, paymentCurrency: .jpy,
-        allowedPaymentMethods: PaymentCreatorController.japanDefaultAvailableSourceMethods
-    )
-}
-
 
 class PaymentSettingTableViewController: UITableViewController {
     
@@ -49,7 +33,8 @@ class PaymentSettingTableViewController: UITableViewController {
             amountField.text = amountFormatter.string(from: NSNumber(value: currentCurrency.convert(fromSubunit: currentAmount)))
         }
     }
-    @objc var __currentCurrencyCode: String {
+    @objc(currentCurrencyCode)
+    var __currentCurrencyCode: String {
         get {
             return currentCurrency.code
         }

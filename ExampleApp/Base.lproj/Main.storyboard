@@ -181,6 +181,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="heroImageView" destination="SF8-2v-UIb" id="jlD-nk-bj8"/>
                         <outlet property="modeChooser" destination="Wsb-Gf-EIX" id="82F-8B-HBU"/>
                         <segue destination="TWZ-Mj-mej" kind="show" identifier="CompletePayment" id="UKD-dD-tkb"/>
                     </connections>
