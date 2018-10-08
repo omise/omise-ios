@@ -66,16 +66,16 @@ public class PaymentCreatorController : UINavigationController {
         }
     }
     
-    @objc public var __paymentAmount: Int {
+    @objc(paymentAmount) public var __paymentAmount: Int64 {
         get {
-            return paymentAmount.map(Int.init) ?? 0
+            return paymentAmount ?? 0
         }
         set {
             paymentAmount = newValue > 0 ? Int64(newValue) : nil
         }
     }
     
-    @objc public var __paymentCurrencyCode: String? {
+    @objc(paymentCurrencyCode) public var __paymentCurrencyCode: String? {
         get {
             return paymentCurrency?.code
         }
@@ -388,7 +388,11 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
     }
     
     func paymentCreatorFlowSessionDidCancel(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession) {
-        paymentDelegate?.paymentCreatorControllerDidCancel(self)
+        if let paymentDelegate = self.paymentDelegate {
+            paymentDelegate.paymentCreatorControllerDidCancel(self)
+        } else if let paymentDidCancelDelegateMethod = self.__paymentDelegate?.paymentCreatorControllerDidCancel {
+            paymentDidCancelDelegateMethod(self)
+        }
     }
 }
 

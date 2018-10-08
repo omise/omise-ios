@@ -1,10 +1,12 @@
 @import UIKit;
 @import OmiseSDK;
 
+#import "OMSBaseViewController.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OMSExampleProductDetailViewController : UIViewController <OMSCreditCardFormViewControllerDelegate, OMSAuthorizingPaymentViewControllerDelegate>
+@interface OMSExampleProductDetailViewController : OMSBaseViewController 
 
 @end
 

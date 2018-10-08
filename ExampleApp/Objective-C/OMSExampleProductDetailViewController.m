@@ -6,39 +6,13 @@ NSString * const OMSPublicKey = @"<#Omise Public Key#>";
 
 
 
-@interface OMSExampleProductDetailViewController ()
-
-@property (strong, nonatomic) IBOutlet UISegmentedControl *modeChooser;
-@property (strong, nonatomic) IBOutlet ProductHeroImageView *heroImageView;
-
-@property (assign, nonatomic) int64_t currentAmount;
-@property (copy, nonatomic) NSString *currentCurrencyCode;
-@property (copy, nonatomic) NSArray<OMSSourceTypeValue> *allowedPaymentMethods;
+@interface OMSExampleProductDetailViewController () <OMSCreditCardFormViewControllerDelegate,
+OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate>
 
 @end
 
 
 @implementation OMSExampleProductDetailViewController
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-        [self initializeInstance];
-    }
-    return self;
-}
-
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        [self initializeInstance];
-    }
-    return self;
-}
-
-- (void)initializeInstance {
-    self.currentAmount = Tool.thailandPaymentAmount;
-    self.currentCurrencyCode = Tool.thailandPaymentCurrency;
-    self.allowedPaymentMethods = Tool.thailandAllowedPaymentMethods;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,38 +22,57 @@ NSString * const OMSPublicKey = @"<#Omise Public Key#>";
     self.navigationController.navigationBar.shadowImage = emptyImage;
 }
 
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    if ([identifier isEqualToString:@"PresentCreditFormWithModal"]
+        || [identifier isEqualToString:@"ShowCreditForm"]
+            || [identifier isEqualToString:@"PresentPaymentCreator"]) {
+        return self.currentCodePathMode == OMSCodePathModeStoryboard;
+    }
+    
+    return YES;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"PresentCreditFormWithModal"]) {
         OMSCreditCardFormViewController *creditCardFormController = (OMSCreditCardFormViewController *)((UINavigationController *)segue.destinationViewController).topViewController;
         creditCardFormController.publicKey = OMSPublicKey;
         creditCardFormController.handleErrors = YES;
         creditCardFormController.delegate = self;
-        
-        creditCardFormController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:self action:@selector(dismissCreditCardForm)];
-    }
-}
-
-- (void)dismissCreditCardForm {
-    [self dismissCreditCardFormWithCompletion:nil];
-}
-
-- (void)dismissCreditCardFormWithCompletion:(void(^)(void))completion {
-    if (self.presentedViewController != nil) {
-        [self dismissViewControllerAnimated:YES completion:completion];
-    } else {
-        [self.navigationController popToViewController:self animated:YES];
-        completion();
+    } else if ([segue.identifier isEqualToString:@"ShowCreditForm"]) {
+        OMSCreditCardFormViewController *creditCardFormController = (OMSCreditCardFormViewController *)segue.destinationViewController;
+        creditCardFormController.publicKey = OMSPublicKey;
+        creditCardFormController.handleErrors = YES;
+        creditCardFormController.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"PresentPaymentCreator"]) {
+        OMSPaymentCreatorController *paymentCreatorController = (OMSPaymentCreatorController *)segue.destinationViewController;
+        paymentCreatorController.publicKey = OMSPublicKey;
+        paymentCreatorController.paymentAmount = self.paymentAmount;
+        paymentCreatorController.paymentCurrencyCode = self.paymentCurrencyCode;
+        paymentCreatorController.allowedPaymentMethods = self.allowedPaymentMethods;
+        paymentCreatorController.paymentDelegate = self;
+    } else if ([segue.identifier isEqualToString:@"PresentPaymentSettingScene"]) {
+        PaymentSettingTableViewController *settingViewController = (PaymentSettingTableViewController *)((UINavigationController *)segue.destinationViewController).topViewController;
+        settingViewController.currentAmount = self.paymentAmount;
+        settingViewController.currentCurrencyCode = self.paymentCurrencyCode;
+        settingViewController.allowedPaymentMethods = [NSSet setWithArray:self.allowedPaymentMethods];
     }
 }
 
 - (IBAction)showModalCreditCardForm:(id)sender {
-  OMSCreditCardFormViewController *creditCardFormController = [OMSCreditCardFormViewController creditCardFormViewControllerWithPublicKey:OMSPublicKey];
-  creditCardFormController.handleErrors = YES;
-  creditCardFormController.delegate = self;
-  [self showViewController:creditCardFormController sender:self];
+    if (self.currentCodePathMode == OMSCodePathModeStoryboard) {
+        return;
+    }
+    OMSCreditCardFormViewController *creditCardFormController = [OMSCreditCardFormViewController creditCardFormViewControllerWithPublicKey:OMSPublicKey];
+    creditCardFormController.handleErrors = YES;
+    creditCardFormController.delegate = self;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:creditCardFormController];
+    [self presentViewController:navigationController animated:YES completion:NULL];
 }
 
 - (IBAction)showCreditCardForm:(id)sender {
+    if (self.currentCodePathMode == OMSCodePathModeStoryboard) {
+        return;
+    }
     OMSCreditCardFormViewController *creditCardFormController = [OMSCreditCardFormViewController creditCardFormViewControllerWithPublicKey:OMSPublicKey];
     creditCardFormController.handleErrors = YES;
     creditCardFormController.delegate = self;
@@ -87,10 +80,12 @@ NSString * const OMSPublicKey = @"<#Omise Public Key#>";
 }
 
 - (IBAction)showModalPaymentCreator:(id)sender {
-  OMSCreditCardFormViewController *creditCardFormController = [OMSCreditCardFormViewController creditCardFormViewControllerWithPublicKey:OMSPublicKey];
-  creditCardFormController.handleErrors = YES;
-  creditCardFormController.delegate = self;
-  [self showViewController:creditCardFormController sender:self];
+    if (self.currentCodePathMode == OMSCodePathModeStoryboard) {
+        return;
+    }
+    OMSPaymentCreatorController *paymentCreatorController = [OMSPaymentCreatorController
+                                                             paymentCreatorControllerWithPublicKey:OMSPublicKey amount:self.paymentAmount currency:self.paymentCurrencyCode allowedPaymentMethods:self.allowedPaymentMethods paymentDelegate:self];
+    [self presentViewController:paymentCreatorController animated:YES completion:NULL];
 }
 
 - (IBAction)authorizingPayment:(UIBarButtonItem *)sender {
@@ -107,30 +102,47 @@ NSString * const OMSPublicKey = @"<#Omise Public Key#>";
     }]];
 }
 
-
-
-- (IBAction)codePathModeChangedHandler:(id)sender {
-  
-}
-
 - (void)creditCardFormViewController:(OMSCreditCardFormViewController *)controller didSucceedWithToken:(OMSToken *)token {
-    [self dismissCreditCardFormWithCompletion:^{
+    [self dismissFormWithCompletion:^{
         [self performSegueWithIdentifier:@"CompletePayment" sender:self];
     }];
 }
 
 - (void)creditCardFormViewController:(OMSCreditCardFormViewController *)controller didFailWithError:(NSError *)error {
-    [self dismissCreditCardForm];
+    [self dismissForm];
+}
+
+- (void)creditCardFormViewControllerDidCancel:(OMSCreditCardFormViewController *)controller {
+    [self dismissForm];
 }
 
 - (void)authorizingPaymentViewController:(OMSAuthorizingPaymentViewController *)viewController didCompleteAuthorizingPaymentWithRedirectedURL:(NSURL *)redirectedURL {
     NSLog(@"%@", redirectedURL);
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissForm];
 }
 
 - (void)authorizingPaymentViewControllerDidCancel:(OMSAuthorizingPaymentViewController *)viewController {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissForm];
 }
+
+
+- (void)paymentCreatorControllerDidCancel:(OMSPaymentCreatorController *)paymentCreatorController {
+    [self dismissForm];
+}
+
+- (void)paymentCreatorController:(OMSPaymentCreatorController *)paymentCreatorController didCreateToken:(OMSToken *)token {
+    [self dismissForm];
+}
+
+- (void)paymentCreatorController:(OMSPaymentCreatorController *)paymentCreatorController didCreateSource:(OMSSource * _Nonnull)source {
+    [self dismissForm];
+}
+
+- (void)paymentCreatorController:(OMSPaymentCreatorController *)paymentCreatorController didFailWithError:(NSError *)error {
+    [self dismissForm];
+}
+
+
 
 @end
 
