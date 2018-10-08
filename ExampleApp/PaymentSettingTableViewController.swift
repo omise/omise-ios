@@ -1,6 +1,24 @@
 import UIKit
 import OmiseSDK
 
+
+struct PaymentPreset {
+    var paymentAmount: Int64
+    var paymentCurrency: Currency
+    var allowedPaymentMethods: [OMSSourceTypeValue]
+    
+    static let thailandPreset = PaymentPreset(
+        paymentAmount: 5_00_00, paymentCurrency: .thb,
+        allowedPaymentMethods: PaymentCreatorController.thailandDefaultAvailableSourceMethods
+    )
+    
+    static let japanPreset = PaymentPreset(
+        paymentAmount: 5_000, paymentCurrency: .jpy,
+        allowedPaymentMethods: PaymentCreatorController.japanDefaultAvailableSourceMethods
+    )
+}
+
+
 class PaymentSettingTableViewController: UITableViewController {
     
     let amountFormatter: NumberFormatter = {

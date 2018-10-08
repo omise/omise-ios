@@ -2,33 +2,76 @@ import UIKit
 import OmiseSDK
 
 
-struct PaymentPreset {
-    var paymentAmount: Int64
-    var paymentCurrency: Currency
-    var allowedPaymentMethods: [OMSSourceTypeValue]
-    
-    static let thailandPreset = PaymentPreset(
-        paymentAmount: 5_00_00, paymentCurrency: .thb,
-        allowedPaymentMethods: PaymentCreatorController.thailandDefaultAvailableSourceMethods
-    )
-    
-    static let japanPreset = PaymentPreset(
-        paymentAmount: 5_000, paymentCurrency: .jpy,
-        allowedPaymentMethods: PaymentCreatorController.japanDefaultAvailableSourceMethods
-    )
-}
-
 
 @objc(OMSExampleProductDetailViewController)
 class ProductDetailViewController: UIViewController {
     private let publicKey = "<#Omise Public Key#>"
-
+    
+    private enum CodePathMode {
+        case storyboard
+        case code
+    }
+    
+    private var currentCodePathMode = CodePathMode.storyboard
+    
+    @IBOutlet var heroImageView: ProductHeroImageView!
+    @IBOutlet var modeChooser: UISegmentedControl!
+    
     var paymentAmount: Int64 = PaymentPreset.thailandPreset.paymentAmount
     var paymentCurrency: Currency = PaymentPreset.thailandPreset.paymentCurrency
     var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentPreset.thailandPreset.allowedPaymentMethods
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let emptyImage = Tool.imageWith(size: CGSize(width: 1, height: 1), color: .white)?.resizableImage(withCapInsets: .zero)
+        navigationController?.navigationBar.setBackgroundImage(
+            emptyImage, for: .default
+        )
+        navigationController?.navigationBar.setBackgroundImage(
+            emptyImage, for: .compact
+        )
+        navigationController?.navigationBar.setBackgroundImage(
+            emptyImage, for: .defaultPrompt
+        )
+        
+        navigationController?.navigationBar.shadowImage = emptyImage
+        
+        let selectedModeBackgroundImage = Tool
+            .imageWith(size: CGSize(width: 1, height: 41), actions: { (context) in
+                context.setFillColor(UIColor.white.cgColor)
+                context.fill(CGRect(x: 0, y: 0, width: 1, height: 40))
+                context.setFillColor(view.tintColor.cgColor)
+                context.fill(CGRect(x: 0, y: 40, width: 1, height: 1))
+            })?
+            .resizableImage(withCapInsets: UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0))
+        let backgroundImage = Tool.imageWith(size: CGSize(width: 1, height: 41), color: .white)?.resizableImage(withCapInsets: .zero)
+        
+        modeChooser.setBackgroundImage(selectedModeBackgroundImage, for: .selected, barMetrics: .default)
+        modeChooser.setBackgroundImage(selectedModeBackgroundImage, for: .highlighted, barMetrics: .default)
+        modeChooser.setBackgroundImage(backgroundImage, for: [.selected, .highlighted], barMetrics: .default)
+        modeChooser.setBackgroundImage(backgroundImage, for: .normal, barMetrics: .default)
+        
+        modeChooser.setDividerImage(backgroundImage, forLeftSegmentState: .selected, rightSegmentState: .normal, barMetrics: .default)
+        modeChooser.setDividerImage(backgroundImage, forLeftSegmentState: .normal, rightSegmentState: .selected, barMetrics: .default)
+        modeChooser.setDividerImage(backgroundImage, forLeftSegmentState: .highlighted, rightSegmentState: .normal, barMetrics: .default)
+        modeChooser.setDividerImage(backgroundImage, forLeftSegmentState: .normal, rightSegmentState: .highlighted, barMetrics: .default)
+        modeChooser.setDividerImage(backgroundImage, forLeftSegmentState: .selected, rightSegmentState: .highlighted, barMetrics: .default)
+        modeChooser.setDividerImage(backgroundImage, forLeftSegmentState: .highlighted, rightSegmentState: .selected, barMetrics: .default)
+        modeChooser.setDividerImage(backgroundImage, forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+        
+        let highlightedTitleAttributes = [
+            NSAttributedString.Key.foregroundColor: view.tintColor!,
+            .font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.callout)
+        ]
+        let normalTitleAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.darkText,
+            .font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.callout)
+        ]
+        modeChooser.setTitleTextAttributes(normalTitleAttributes, for: .normal)
+        modeChooser.setTitleTextAttributes(normalTitleAttributes, for: .highlighted)
+        modeChooser.setTitleTextAttributes(highlightedTitleAttributes, for: .selected)
+        modeChooser.setTitleTextAttributes(highlightedTitleAttributes, for: [.selected, .highlighted])
         
         if Locale.current.regionCode == "JP" {
             paymentAmount = PaymentPreset.japanPreset.paymentAmount
@@ -37,10 +80,24 @@ class ProductDetailViewController: UIViewController {
         }
     }
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "PresentCreditFormWithModal" || identifier == "ShowCreditForm"
+            || identifier == "PresentPaymentCreator" {
+            return currentCodePathMode == .storyboard
+        }
+        
+        return true
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PresentCreditFormWithModal",
             let creditCardFormNavigationController = segue.destination as? UINavigationController,
             let creditCardFormController = creditCardFormNavigationController.topViewController as? CreditCardFormViewController {
+            creditCardFormController.publicKey = publicKey
+            creditCardFormController.handleErrors = true
+            creditCardFormController.delegate = self
+        } else if segue.identifier == "ShowCreditForm",
+            let creditCardFormController = segue.destination as? CreditCardFormViewController {
             creditCardFormController.publicKey = publicKey
             creditCardFormController.handleErrors = true
             creditCardFormController.delegate = self
@@ -60,11 +117,33 @@ class ProductDetailViewController: UIViewController {
         }
     }
     
+    @IBAction func showModalCreditCardForm(_ sender: Any) {
+        guard currentCodePathMode == .code else {
+            return
+        }
+        let creditCardFormController = CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
+        creditCardFormController.handleErrors = true
+        creditCardFormController.delegate = self
+        let navigationController = UINavigationController(rootViewController: creditCardFormController)
+        present(navigationController, animated: true, completion: nil)
+    }
+    
     @IBAction func showCreditCardForm(_ sender: UIButton) {
+        guard currentCodePathMode == .code else {
+            return
+        }
         let creditCardFormController = CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
         creditCardFormController.handleErrors = true
         creditCardFormController.delegate = self
         show(creditCardFormController, sender: self)
+    }
+    
+    @IBAction func showModalPaymentCreator(_ sender: Any) {
+        guard currentCodePathMode == .code else {
+            return
+        }
+        let paymentCreatorController = PaymentCreatorController.makePaymentCreatorControllerWith(publicKey: publicKey, amount: paymentAmount, currency: paymentCurrency, allowedPaymentMethods: allowedPaymentMethods, paymentDelegate: self)
+        present(paymentCreatorController, animated: true, completion: nil)
     }
     
     @objc private func dismissCreditCardForm() {
@@ -108,6 +187,18 @@ class ProductDetailViewController: UIViewController {
         }))
         present(alertController, animated: true, completion: nil)
     }
+    
+    @IBAction func codePathModeChangedHandler(_ sender: UISegmentedControl) {
+        let codePathMode: CodePathMode
+        
+        if sender.selectedSegmentIndex == 1 {
+            codePathMode = .code
+        } else {
+            codePathMode = .storyboard
+        }
+        
+        self.currentCodePathMode = codePathMode
+    }
 }
 
 extension ProductDetailViewController: CreditCardFormViewControllerDelegate {
@@ -141,7 +232,7 @@ extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate 
 extension ProductDetailViewController: PaymentCreatorControllerDelegate {
     
     func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didCreatePayment payment: Payment) {
-        dismiss(animated: true, completion: nil)
+        dismissCreditCardForm()
     }
     
     func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didFailWithError error: Error) {
@@ -152,9 +243,8 @@ extension ProductDetailViewController: PaymentCreatorControllerDelegate {
     }
     
     func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController) {
-        dismiss(animated: true, completion: nil)
+        dismissCreditCardForm()
     }
-    
 }
 
 
