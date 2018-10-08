@@ -79,7 +79,7 @@
     [self.modeChooser setTitleTextAttributes:highlightedTitleAttributes
                                     forState:UIControlStateHighlighted | UIControlStateSelected];
     
-    if ([NSLocale.currentLocale.countryCode isEqualToString:@"JP"]) {
+    if ([[NSLocale.currentLocale objectForKey:NSLocaleCountryCode] isEqualToString:@"JP"]) {
         self.paymentAmount = Tool.japanPaymentAmount;
         self.paymentCurrencyCode = Tool.japanPaymentCurrency;
         self.allowedPaymentMethods = Tool.japanAllowedPaymentMethods;
