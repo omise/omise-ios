@@ -4,7 +4,7 @@ import OmiseSDK
 
 @objc(OMSExampleProductDetailViewController)
 class ProductDetailViewController: OMSBaseViewController {
-    private let publicKey = "<#Omise Public Key#>"
+    private let publicKey = "pkey_test_12345"
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "PresentCreditFormWithModal" || identifier == "ShowCreditForm"
@@ -91,6 +91,9 @@ class ProductDetailViewController: OMSBaseViewController {
     }
 }
 
+
+// MARK: - Credit Card Form View Controller Delegate
+
 extension ProductDetailViewController: CreditCardFormViewControllerDelegate {
     func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController) {
         dismissForm()
@@ -107,6 +110,9 @@ extension ProductDetailViewController: CreditCardFormViewControllerDelegate {
     }
 }
 
+
+// MARK: - Authorizing Payment View Controller Delegate
+
 extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate {
     func authorizingPaymentViewController(_ viewController: AuthorizingPaymentViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL) {
         print(redirectedURL)
@@ -118,6 +124,8 @@ extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate 
     }
 }
 
+
+// MARK: - Payment Creator Controller Delegate
 
 extension ProductDetailViewController: PaymentCreatorControllerDelegate {
     

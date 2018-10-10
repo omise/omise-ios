@@ -58,12 +58,14 @@ extension Client {
         })
     }
     
-    @available(*, deprecated, message: "Please use the new -[OMSClient sendTokenRequest:callback:] method", renamed: "sendTokenRequest")
+    @available(*, deprecated, message: "Please use the new -[OMSClient sendTokenRequest:callback:] method",
+    renamed: "sendTokenRequest(_:completionHandler:)")
     @objc(sendRequest:callback:) public func ___sendRequest(_ request: __OMSTokenRequest, callback: ((__OmiseToken?, NSError?) -> ())?) {
         self.__sendRequest(request, callback: callback)
     }
     
-    @available(*, deprecated, message: "Please use the new -[OMSClient sendTokenRequest:callback:] method", renamed: "sendTokenRequest")
+    @available(*, deprecated, message: "Please use the new -[OMSClient sendTokenRequest:callback:] method",
+    renamed: "sendTokenRequest(_:completionHandler:)")
     @objc(sendRequest:delegate:) public func ___sendRequest(_ request: __OMSTokenRequest, delegate: OMSTokenRequestDelegate?) {
         self.__sendRequest(request, delegate: delegate)
     }

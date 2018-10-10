@@ -332,18 +332,13 @@
 			isa = PBXGroup;
 			children = (
 				8AF6A1D720E4FEBE00AC5625 /* ExampleApp-Bridging-Header.h */,
-				8A6AA06A216B957D00E49E5E /* OMSBaseViewController.h */,
-				8A6AA06B216B957D00E49E5E /* OMSBaseViewController.m */,
 				22D480AB1D0EB29C00544CE1 /* Info.plist */,
 				229E14541D0EBAB5000511DE /* AppDelegate.swift */,
-				229E14551D0EBAB5000511DE /* CompletePaymentViewController.swift */,
-				8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */,
-				8AA250CE216B41A500E43828 /* ProductHeroImageView.swift */,
-				8A40DA2A216B53E900749F45 /* Tools.swift */,
 				22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */,
 				224E44EF1D0EBF1200E558E3 /* LaunchScreen.storyboard */,
 				224E44EC1D0EBF0D00E558E3 /* Main.storyboard */,
 				8A723A682164D80C00D902F5 /* Objective-C */,
+				8AB3B85F216DCF5C006497B5 /* Shared */,
 				8A723A672164D80200D902F5 /* Swift */,
 			);
 			path = ExampleApp;
@@ -439,6 +434,19 @@
 				8AF6A1D920E4FEBE00AC5625 /* OMSExampleProductDetailViewController.m */,
 			);
 			path = "Objective-C";
+			sourceTree = "<group>";
+		};
+		8AB3B85F216DCF5C006497B5 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				8A6AA06A216B957D00E49E5E /* OMSBaseViewController.h */,
+				8A6AA06B216B957D00E49E5E /* OMSBaseViewController.m */,
+				229E14551D0EBAB5000511DE /* CompletePaymentViewController.swift */,
+				8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */,
+				8AA250CE216B41A500E43828 /* ProductHeroImageView.swift */,
+				8A40DA2A216B53E900749F45 /* Tools.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		8AD0609120B550B90074894E /* Compatability */ = {

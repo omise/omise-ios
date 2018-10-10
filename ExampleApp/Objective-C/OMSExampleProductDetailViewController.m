@@ -102,6 +102,9 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
     }]];
 }
 
+
+#pragma mark - Credit Card Form Controller Delegate methods
+
 - (void)creditCardFormViewController:(OMSCreditCardFormViewController *)controller didSucceedWithToken:(OMSToken *)token {
     [self dismissFormWithCompletion:^{
         [self performSegueWithIdentifier:@"CompletePayment" sender:self];
@@ -116,6 +119,9 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
     [self dismissForm];
 }
 
+
+#pragma mark - Payment Creator Controller Delegate methods
+
 - (void)authorizingPaymentViewController:(OMSAuthorizingPaymentViewController *)viewController didCompleteAuthorizingPaymentWithRedirectedURL:(NSURL *)redirectedURL {
     NSLog(@"%@", redirectedURL);
     [self dismissForm];
@@ -125,6 +131,8 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
     [self dismissForm];
 }
 
+
+#pragma mark - Payment Creator Controller Delegate methods
 
 - (void)paymentCreatorControllerDidCancel:(OMSPaymentCreatorController *)paymentCreatorController {
     [self dismissForm];

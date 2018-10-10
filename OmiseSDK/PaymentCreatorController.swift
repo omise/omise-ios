@@ -196,7 +196,7 @@ public class PaymentCreatorController : UINavigationController {
         }
         
         super.init(rootViewController: paymentChooserViewController)
-      
+        
         initializeWithPaymentChooserViewController(paymentChooserViewController)
     }
     
@@ -215,6 +215,7 @@ public class PaymentCreatorController : UINavigationController {
         
         guard let rootViewController = topViewController as? PaymentChooserViewController else {
             preconditionFailure("This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller")
+            return nil
         }
         initializeWithPaymentChooserViewController(rootViewController)
     }

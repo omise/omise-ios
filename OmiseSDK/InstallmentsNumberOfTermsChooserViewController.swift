@@ -1,5 +1,7 @@
 import UIKit
 
+
+@objc(OMSInstallmentsNumberOfTermsChooserViewController)
 class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentSourceChooser, PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
     

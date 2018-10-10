@@ -1,5 +1,7 @@
 import UIKit
 
+
+@objc(OMSEContextInformationInputViewController)
 class EContextInformationInputViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
     var flowSession: PaymentCreatorFlowSession?
     var client: Client?
@@ -85,6 +87,21 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         fullNameTextField.validator = try! NSRegularExpression(pattern: "\\A[\\w\\s]{1,10}\\s?\\z", options: [])
         emailTextField.validator = try! NSRegularExpression(pattern: "\\A[\\w\\-\\.]+@[\\w\\-\\.]+\\s?\\z", options: [])
         phoneNumberTextField.validator = try! NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
+    }
+    
+    public override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        if #available(iOS 11, *) {
+            // There's a bug in iOS 10 and earlier which the text field's intrinsicContentSize is returned the value
+            // that doesn't take the result of textRect(forBounds:) method into an account for the initial value
+            // So we need to invalidate the intrinsic content size here to ask those text fields to calculate their
+            // intrinsic content size again
+        } else {
+            formFields.forEach({
+                $0.invalidateIntrinsicContentSize()
+            })
+        }
     }
     
     @IBAction func submitEContextForm(_ sender: AnyObject) {

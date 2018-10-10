@@ -51,6 +51,5 @@ struct PaymentPreset {
             return UIGraphicsGetImageFromCurrentImageContext()
         }
     }
-    
-    
 }
+
