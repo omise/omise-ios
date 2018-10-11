@@ -248,7 +248,7 @@ extension OverlayPanelPresentationController: UIViewControllerAnimatedTransition
 
 
 extension CGRect {
-    public func centeredRectWithSize(_ size: CGSize) -> CGRect {
+    func centeredRectWithSize(_ size: CGSize) -> CGRect {
         let origin = CGPoint(
             x: midX - (size.width / 2),
             y: midY - (size.height / 2)

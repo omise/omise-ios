@@ -18,6 +18,14 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
     /// Any unexpected errors that may happen during Omise API requests.
     case unexpected(error: UnexpectedError, underlying: Error?)
     
+    
+    /// The error code of the Omise API error
+    ///
+    /// - invalidCard: The card informaitn is invalid
+    /// - badRequest: The request is invalid
+    /// - authenticationFailure: The given authentication key is wrong
+    /// - serviceNotFound: The requested service is not available for this account
+    /// - other: Other error code
     public enum APIErrorCode {
         case invalidCard([InvalidCardReason])
         case badRequest([BadRequestReason])
@@ -26,6 +34,13 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
         
         case other(String)
         
+        /// The reason of the Invalid Card error
+        ///
+        /// - invalidCardNumber: The card number is invalid
+        /// - invalidExpirationDate: The card expiration date is invalid
+        /// - emptyCardHolderName: Card holder name is empty
+        /// - unsupportedBrand: The card brand is not supported
+        /// - other: Other invalid card reason
         public enum InvalidCardReason : Hashable {
             case invalidCardNumber
             case invalidExpirationDate
@@ -35,7 +50,20 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
             case other(String)
         }
         
-        public enum BadRequestReason : Hashable {            
+        /// The reason of the Bad Request error
+        ///
+        /// - amountIsLessThanValidAmount: The given amount is less than the valid amount
+        /// - amountIsGreaterThanValidAmount: The given amount is greater than the valid amount
+        /// - invalidCurrency: The given currency is invalid
+        /// - emptyName: The customer name is empty
+        /// - nameIsTooLong: The customer name is too long
+        /// - invalidName: The customer name is invalid
+        /// - invalidEmail: The customer email is invalid
+        /// - invalidPhoneNumber: The customer phone number is invalid
+        /// - typeNotSupported: The given Source Type is not supported on this account
+        /// - currencyNotSupported: The currency is not supported on this account
+        /// - other: Other bad request reason
+        public enum BadRequestReason : Hashable {
             case amountIsLessThanValidAmount(validAmount: Int64?)
             case amountIsGreaterThanValidAmount(validAmount: Int64?)
             
@@ -54,6 +82,16 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
         }
     }
     
+    
+    /// The reason of an unexpected error
+    ///
+    /// - noErrorNorResponse: API returns without both error nor response
+    /// - httpErrorWithNoData: API returns with HTTP error code but there is no response data
+    /// - httpErrorResponseWithInvalidData: API returns with HTTP error code but the returned data is invalid
+    /// - httpSucceessWithNoData: API returns with HTTP success code but there is no response data
+    /// - httpSucceessWithInvalidData: API returns with HTTP success code but the returned data is invalid
+    /// - unrecognizedHTTPStatusCode: API returnes with unrecognized HTTP status code
+    /// - other: Other expected error reason
     public enum UnexpectedError {
         case noErrorNorResponse
         case httpErrorWithNoData
@@ -737,7 +775,7 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
             }
         case .invalidName:
             preferredRecoverySuggestionMessage = NSLocalizedString(
-                "error.api.bad_request.empty-name.recovery-suggestion",
+                "error.api.bad_request.invalid-name.recovery-suggestion",
                 tableName: "Error", bundle: Bundle.omiseSDKBundle,
                 value: "Please review the customer name",
                 comment: "A descriptive message representing an `Bad request` error with `invalid-name` from the backend"

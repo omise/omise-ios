@@ -25,7 +25,7 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
-    public override func staticIndexPath(forValue value: PaymentInformation.InternetBanking) -> IndexPath {
+    override func staticIndexPath(forValue value: PaymentInformation.InternetBanking) -> IndexPath {
         switch value {
         case .bbl:
             return IndexPath(row: 0, section: 0)
@@ -40,7 +40,7 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         }
     }
     
-    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         if let cell = cell as? PaymentOptionTableViewCell {

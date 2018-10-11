@@ -3,7 +3,7 @@ import os
 
 
 
-public enum PaymentChooserOption: StaticElementIterable, Equatable {
+enum PaymentChooserOption: StaticElementIterable, Equatable {
     case creditCard
     case installment
     case internetBanking
@@ -13,7 +13,7 @@ public enum PaymentChooserOption: StaticElementIterable, Equatable {
     case netBanking
     case alipay
     
-    public static var allCases: [PaymentChooserOption] {
+    static var allCases: [PaymentChooserOption] {
         return [
             .creditCard,
             .installment,
@@ -29,26 +29,26 @@ public enum PaymentChooserOption: StaticElementIterable, Equatable {
 
 
 @objc(OMSPaymentChooserViewController)
-public class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceChooser, PaymentChooserUI {
+class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceChooser, PaymentChooserUI {
     
     @IBOutlet var paymentMethodNameLables: [UILabel]!
     
     var flowSession: PaymentCreatorFlowSession?
     
-    @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
+    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc public var preferredSecondaryColor: UIColor? {
+    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
     }
     
-    @objc public var showsCreditCardPayment: Bool = true
-    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = [] {
+    @objc var showsCreditCardPayment: Bool = true
+    @objc var allowedPaymentMethods: [OMSSourceTypeValue] = [] {
         didSet {
             showingValues = PaymentChooserOption.allCases.filter({
                 switch $0 {
@@ -69,7 +69,7 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         }
     }
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         applyPrimaryColor()
@@ -94,7 +94,7 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         })
     }
     
-    public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch (segue.identifier, segue.destination) {
         case ("GoToCreditCardFormSegue"?, let controller as CreditCardFormViewController):
             controller.publicKey = flowSession?.client?.publicKey
@@ -139,7 +139,7 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         }
     }
     
-    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         if let cell = cell as? PaymentOptionTableViewCell {
@@ -148,7 +148,7 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         return cell
     }
     
-    public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         dismissErrorMessage(animated: true, sender: cell)
         tableView.deselectRow(at: indexPath, animated: true)
@@ -180,7 +180,7 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
         })
     }
     
-    public override func staticIndexPath(forValue value: PaymentChooserOption) -> IndexPath {
+    override func staticIndexPath(forValue value: PaymentChooserOption) -> IndexPath {
         switch value {
         case .creditCard:
             return IndexPath(row: 0, section: 0)
@@ -220,23 +220,23 @@ public class PaymentChooserViewController: AdaptableStaticTableViewController<Pa
 
 
 extension Array where Element == OMSSourceTypeValue {
-    public var hasInternetBankingSource: Bool {
+    var hasInternetBankingSource: Bool {
         return self.contains(where: { $0.isInternetBankingSource })
     }
     
-    public var hasInstallmentSource: Bool {
+    var hasInstallmentSource: Bool {
         return self.contains(where: { $0.isInstallmentSource })
     }
     
-    public var hasTescoLotusSource: Bool {
+    var hasTescoLotusSource: Bool {
         return self.contains(.billPaymentTescoLotus)
     }
     
-    public var hasAlipaySource: Bool {
+    var hasAlipaySource: Bool {
         return self.contains(.alipay)
     }
     
-    public var hasEContextSource: Bool {
+    var hasEContextSource: Bool {
         return self.contains(.eContext)
     }
 }

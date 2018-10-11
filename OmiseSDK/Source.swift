@@ -8,12 +8,19 @@ public struct Source: Object {
     public static let postURL: URL = URL(string: "https://api.omise.co/sources")!
     
     public let object: String
+    /// Omise Source ID
     public let id: String
     
+    /// The payment information of this source describes how the payment is processed
     public let paymentInformation: PaymentInformation
+    
+    /// Processing Flow of this source
+    /// - SeeAlso: Flow
     public let flow: Flow
     
+    /// Payment amount of this Source
     public let amount: Int64
+    /// Payment currency of this Source
     public let currency: Currency
     
     enum CodingKeys: String, CodingKey {
@@ -38,10 +45,13 @@ public struct Source: Object {
 
 
 /// Parameter for creating a new `Source`
-/// - seealso: Source
+/// - SeeAlso: Source
 public struct CreateSourceParameter: Encodable {
+    /// The payment information that is used to create a new Source
     public let paymentInformation: PaymentInformation
+    /// The amount of the creating Source
     public let amount: Int64
+    /// The currench of the creating Source
     public let currency: Currency
     
     private enum CodingKeys: String, CodingKey {
@@ -49,6 +59,12 @@ public struct CreateSourceParameter: Encodable {
         case currency
     }
     
+    /// Create a new `Create Source Parameter` that will be used to create a new Source
+    ///
+    /// - Parameters:
+    ///   - paymentInformation: The payment informaiton of the creating Source
+    ///   - amount: The amount of the creating Source
+    ///   - currency: The currency of the creating Source
     public init(paymentInformation: PaymentInformation, amount: Int64, currency: Currency) {
         self.paymentInformation = paymentInformation
         self.amount = amount
@@ -63,6 +79,11 @@ public struct CreateSourceParameter: Encodable {
     }
 }
 
+/// The processing flow of a Source
+///
+/// - redirect: The customer need to be redirected to another URL in order to process the source
+/// - offline: The customer need to do something in offline in order to process the source
+/// - other: Other processing flow
 public enum Flow: RawRepresentable, Decodable, Equatable {
     case redirect
     case offline

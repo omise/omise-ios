@@ -14,6 +14,7 @@ func ~=<T: PaymentMethod>(methodType: T.Type, type: String) -> Bool {
 /// Represents the payment information of a Source
 public enum PaymentInformation: Codable, Equatable {
 
+    /// The code of the bank for the Internet Bankning Payment
     public enum InternetBanking: PaymentMethod {
         public static let paymentMethodTypePrefix: String = "internet_banking_"
         
@@ -29,6 +30,7 @@ public enum PaymentInformation: Codable, Equatable {
     /// Online Alipay Payment Source
     case alipay
     
+    /// The name of the supported services to process the Bill Payment
     public enum BillPayment: PaymentMethod {
         public static let paymentMethodTypePrefix: String = "bill_payment_"
         
@@ -38,6 +40,7 @@ public enum PaymentInformation: Codable, Equatable {
     /// Bill Payment Payment Source
     case billPayment(BillPayment)
     
+    /// The name of the supported Barcode Payment services
     public enum Barcode: PaymentMethod {
         public static let paymentMethodTypePrefix: String = "barcode_"
         
@@ -56,9 +59,11 @@ public enum PaymentInformation: Codable, Equatable {
     /// Barcode Payment Source
     case barcode(Barcode)
     
+    /// The Installments information
     public struct Installment: PaymentMethod {
         public static let paymentMethodTypePrefix: String = "installment_"
         
+        /// The code of the supported Installment payment banks
         public enum Brand: Equatable {
             case bay
             case firstChoice
@@ -68,11 +73,16 @@ public enum PaymentInformation: Codable, Equatable {
             case other(String)
         }
         
+        /// The brand of the bank of the installment
         public let brand: Brand
         /// A number of terms to do the installment
         public let numberOfTerms: Int
         
-        public static func availableTerms(for brand: Brand) -> IndexSet {
+        /// Method for query the default list of the brand's available number of terms
+        ///
+        /// - Parameter brand: The brand that want to query ask
+        /// - Returns: The numbers of available terms for installment payment
+        static func availableTerms(for brand: Brand) -> IndexSet {
             switch brand {
             case .bay:
                 return IndexSet([ 3, 4, 6, 9, 10 ])
@@ -97,13 +107,17 @@ public enum PaymentInformation: Codable, Equatable {
     /// Installments Payment Source
     case installment(Installment)
     
+    /// The EContext customer information
     public struct EContext: PaymentMethod, Codable, Equatable {
         public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.eContext.rawValue
         
         public let type: String = OMSSourceTypeValue.eContext.rawValue
         
+        /// Customer name. The name cannot be longer than 10 characters
         public let name: String
+        /// Customer email
         public let email: String
+        /// Customer phone number. The phone number must contains only digit characters and has 10 or 11 characters
         public let phoneNumber: String
         
         private enum CodingKeys: String, CodingKey {
@@ -112,14 +126,22 @@ public enum PaymentInformation: Codable, Equatable {
             case phoneNumber = "phone_number"
         }
         
+        /// Creates a new EContext customer information with the given info
+        ///
+        /// - Parameters:
+        ///   - name: Customer name
+        ///   - email: Customer email
+        ///   - phoneNumber: Customer phone number
         public init(name: String, email: String, phoneNumber: String) {
             self.name = name
             self.email = email
             self.phoneNumber = phoneNumber
         }
     }
+    /// E-Context Payment Source
     case eContext(EContext)
     
+    /// Other Payment Source
     case other(type: String, parameters: [String: Any])
     
     
@@ -218,6 +240,7 @@ extension Request where T == Source {
 
 
 extension PaymentInformation {
+    /// Omise Source Type value using in the Omise API
     public var sourceType: String {
         switch self {
         case .alipay:
@@ -245,6 +268,7 @@ extension PaymentInformation.InternetBanking : StaticElementIterable {
         .bay, .ktb, .scb, .bbl
     ]
     
+    /// Omise Source Type value using in the Omise API
     public var type: String {
         switch self {
         case .bay:
@@ -290,6 +314,7 @@ extension PaymentInformation.InternetBanking : StaticElementIterable {
 }
 
 extension PaymentInformation.Installment {
+    /// Omise Source Type value using in the Omise API
     public var type: String {
         switch brand {
         case .bay:
@@ -356,7 +381,7 @@ extension PaymentInformation.Installment.Brand : StaticElementIterable {
 }
 
 extension PaymentInformation.BillPayment {
-    
+    /// Omise Source Type value using in the Omise API
     public var type: String {
         switch self {
         case .tescoLotus:
@@ -391,12 +416,16 @@ extension PaymentInformation.BillPayment {
 
 
 extension PaymentInformation.Barcode {
+    /// Alipay Barcode Payment Information
     public struct AlipayBarcode: Codable, Equatable {
         /// Barcode value generated by the customer's Alipay app
         public let barcode: String
         
+        /// The Store Information for the Alipay Barcode Payement
         public struct StoreInformation: Codable, Equatable {
+            /// Store ID registering with Omise or Alipay
             public let storeID: String
+            /// Store Name registering with Omise or Alipay
             public let storeName: String
             
             public init(storeID: String, storeName: String) {
@@ -408,14 +437,17 @@ extension PaymentInformation.Barcode {
         /// Store Information where the source is being created, optional.
         public let storeInformation: StoreInformation?
         
+        /// Store ID registering with Omise or Alipay
         public var storeID: String? {
             return storeInformation?.storeID
         }
         
+        /// Store Name registering with Omise or Alipay
         public var storeName: String? {
             return storeInformation?.storeName
         }
         
+        /// ID of the Terminal where the source is being created
         public let terminalID: String?
         private enum CodingKeys: String, CodingKey {
             case barcode

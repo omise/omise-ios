@@ -9,6 +9,7 @@ public struct CreateTokenParameter: Encodable {
     /// Card number.
     public let pan: PAN
     
+    /// Masked PAN number
     public var number: String {
         return pan.number
     }
@@ -78,15 +79,21 @@ public struct Token: Object {
     public static let postURL: URL = URL(string: "https://vault.omise.co/tokens")!
     
     public let object: String
+    /// Omise ID of the token
     public let id: String
     
+    /// Boolean indicates that if this Token is in the live mode
     public let isLiveMode: Bool
     
+    /// URL for fetching the Token data
     public let location: String
+    /// Boolean indicates that if this token is already used for creating a charge already
     public var isUsed: Bool
     
+    /// Card that is used for creating this Token
     public let card: Card
     
+    /// Date that this Token was created
     public let createdDate: Date
     
     private enum CodingKeys: String, CodingKey {
@@ -131,6 +138,7 @@ public struct Card: Decodable {
     public let fingerprint: String?
     /// Card holder's full name.
     public let name: String?
+    /// Boolean indicates that whether that the card is passed the security code check
     public let securityCodeCheck: Bool
     
     public let bankName: String?
@@ -158,11 +166,14 @@ public struct Card: Decodable {
 
 
 extension Calendar {
+    /// Calendar used in the Credit Card information which is Gregorian Calendar
     public static let creditCardInformationCalendar: Calendar = Calendar(identifier: .gregorian)
-    public static let validExpiryMonthRange: Range<Int> = Calendar.creditCardInformationCalendar.maximumRange(of: .month)!
+    /// Range contains the valid range of the expiration month value
+    public static let validExpirationMonthRange: Range<Int> = Calendar.creditCardInformationCalendar.maximumRange(of: .month)!
 }
 
 extension NSCalendar {
+    /// Calendar used in the Credit Card information which is Gregorian Calendar
     @objc(creditCardInformationCalendar) public static var __creditCardInformationCalendar: Calendar {
         return Calendar.creditCardInformationCalendar
     }
@@ -171,7 +182,7 @@ extension NSCalendar {
 
 extension Request where T == Token {
     
-    /// Initializes a new Token Request
+    /// Initializes a new Token Request with the given information
     public init (name: String, pan: PAN, expirationMonth: Int, expirationYear: Int,
                  securityCode: String, city: String? = nil, postalCode: String? = nil) {
         self.init(parameter: CreateTokenParameter(
@@ -182,7 +193,7 @@ extension Request where T == Token {
         ))
     }
     
-    /// Initializes a new Token Request
+    /// Initializes a new Token Request with the given information
     public init (name: String, number: String, expirationMonth: Int, expirationYear: Int,
                  securityCode: String, city: String? = nil, postalCode: String? = nil) {
         self.init(parameter: CreateTokenParameter(

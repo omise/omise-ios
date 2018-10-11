@@ -11,6 +11,7 @@ public enum RequestResult<T: Object> {
 public struct Request<T: Object> {
     public typealias Callback = (RequestResult<T>) -> Void
     
+    /// Parameter of this request
     public let parameter: T.CreateParameter
     
     public init(parameter: T.CreateParameter) {

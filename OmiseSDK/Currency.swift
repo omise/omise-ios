@@ -47,14 +47,26 @@ public enum Currency: Codable, Hashable {
         }
     }
     
+    /// Convert the given subunit amount to the unit amount
+    ///
+    /// - Parameter value: Value in subunit (Satang in THB for example)
+    /// - Returns: Value in unit (Baht in THB for example)
     public func convert(fromSubunit value: Int64) -> Double {
         return Double(value) / Double(factor)
     }
     
+    /// Convert the given unit amount to the subunit amount
+    ///
+    /// - Parameter value: Value in unit (Baht in THB for example)
+    /// - Returns: Value in subunit (Satang in THB for example)
     public func convert(toSubunit value: Double) -> Int64 {
         return Int64(value * Double(factor))
     }
     
+    
+    /// Create a currency with the given `ISO 4217` currency code
+    ///
+    /// - Parameter code: The ISO 4217 currency code for the creating Currency that will be created
     public init(code: String) {
         switch code.uppercased() {
         case OMSSupportedCurrencyCode.THB.rawValue:

@@ -1,7 +1,9 @@
 import Foundation
 
 
-@objc(OMSCardBrand) public enum CardBrand: Int, CustomStringConvertible {
+@objc(OMSCardBrand)
+public enum CardBrand: Int, CustomStringConvertible {
+    
     public static let all: [CardBrand] = [
         visa,
         masterCard,

@@ -2,6 +2,7 @@ import Foundation
 import os
 
 
+/// The class represents the task of a request to the Omise API
 public class RequestTask<T: Object> {
     public let request: Request<T>
     let dataTask: URLSessionDataTask

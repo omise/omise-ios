@@ -2,6 +2,7 @@ import UIKit
 import os
 
 
+
 public protocol PaymentCreatorControllerDelegate: NSObjectProtocol {
     func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
                                   didCreatePayment payment: Payment)
@@ -33,6 +34,7 @@ public protocol PaymentChooserUI: AnyObject {
 }
 
 
+/// Drop-in UI flow controller that let user choose the payment method with the given payment options
 @objc(OMSPaymentCreatorController)
 public class PaymentCreatorController : UINavigationController {
     /// Omise public key for calling tokenization API.
@@ -55,17 +57,20 @@ public class PaymentCreatorController : UINavigationController {
             paymentSourceCreatorFlowSession.client = client
         }
     }
+    /// Amount to create a Source payment
     public var paymentAmount: Int64? {
         didSet {
             paymentSourceCreatorFlowSession.paymentAmount = paymentAmount
         }
     }
+    /// Currency to create a Source payment
     public var paymentCurrency: Currency? {
         didSet {
             paymentSourceCreatorFlowSession.paymentCurrency = paymentCurrency
         }
     }
     
+    /// Amount to create a Source payment
     @objc(paymentAmount) public var __paymentAmount: Int64 {
         get {
             return paymentAmount ?? 0
@@ -75,6 +80,7 @@ public class PaymentCreatorController : UINavigationController {
         }
     }
     
+    /// Currency to create a Source payment
     @objc(paymentCurrencyCode) public var __paymentCurrencyCode: String? {
         get {
             return paymentCurrency?.code
@@ -84,12 +90,16 @@ public class PaymentCreatorController : UINavigationController {
         }
     }
     
+    /// Boolean indicates that the form should show the Credit Card payment option or not
     @objc public var showsCreditCardPayment: Bool = true {
         didSet {
             paymentChooserViewController.showsCreditCardPayment = showsCreditCardPayment
         }
     }
-    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentCreatorController.thailandDefaultAvailableSourceMethods + [.eContext] {
+    
+    /// Available Source payment options to let user to choose.
+    /// The default value is the default available payment method for merchant in Thailand
+    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentCreatorController.thailandDefaultAvailableSourceMethods {
         didSet {
             paymentChooserViewController.allowedPaymentMethods = allowedPaymentMethods
         }
@@ -98,9 +108,16 @@ public class PaymentCreatorController : UINavigationController {
     @objc @IBInspectable public var preferredPrimaryColor: UIColor?
     @objc @IBInspectable public var preferredSecondaryColor: UIColor?
     
+    /// A boolean flag to enables or disables automatic error handling.
+    ///
+    /// The controller will show an error alert in the UI if the value is true,
+    /// otherwise the controller will ask its delegate.
+    /// Defaults to `true`.
     @objc public var handleErrors: Bool = true
     
+    /// Delegate to receive CreditCardFormController result.
     public weak var paymentDelegate: PaymentCreatorControllerDelegate?
+    /// Delegate to receive CreditCardFormController result.
     @objc(paymentDelegate) public weak var __paymentDelegate: OMSPaymentCreatorControllerDelegate?
     
     private let paymentSourceCreatorFlowSession = PaymentCreatorFlowSession()
@@ -276,7 +293,14 @@ public class PaymentCreatorController : UINavigationController {
         view.backgroundColor = .white
     }
     
-    override func displayErrorMessage(_ message: String, animated: Bool, sender: Any?) {
+    
+    /// Displays an error banner at the top of the UI with the given error message.
+    ///
+    /// - Parameters:
+    ///   - message: Message to be displayed in the banner
+    ///   - animated: Pass true to animate the presentation; otherwise, pass false
+    ///   - sender: The object that initiated the request
+    public override func displayErrorMessage(_ message: String, animated: Bool, sender: Any?) {
         displayingNoticeView.detailLabel.text = message
         view.insertSubview(self.displayingNoticeView, belowSubview: navigationBar)
         

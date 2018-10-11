@@ -82,16 +82,16 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     
     @IBOutlet var formFields: [OmiseTextField]!
     @IBOutlet var formLabels: [UILabel]!
-    @IBOutlet public var errorLabels: [UILabel]!
+    @IBOutlet var errorLabels: [UILabel]!
   
     @IBOutlet var contentView: UIScrollView!
     
-    @IBOutlet public var cardNumberTextField: CardNumberTextField!
-    @IBOutlet public var cardNameTextField: CardNameTextField!
-    @IBOutlet public var expiryDateTextField: CardExpiryDateTextField!
-    @IBOutlet public var secureCodeTextField: CardCVVTextField!
+    @IBOutlet var cardNumberTextField: CardNumberTextField!
+    @IBOutlet var cardNameTextField: CardNameTextField!
+    @IBOutlet var expiryDateTextField: CardExpiryDateTextField!
+    @IBOutlet var secureCodeTextField: CardCVVTextField!
     
-    @IBOutlet public weak var confirmButton: MainActionButton!
+    @IBOutlet weak var confirmButton: MainActionButton!
     
     @IBOutlet var formFieldsAccessoryView: UIToolbar!
     @IBOutlet var gotoPreviousFieldBarButtonItem: UIBarButtonItem!
@@ -100,24 +100,25 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     
     var currentEditingTextField: OmiseTextField?
     
-    @IBOutlet public weak var creditCardNumberErrorLabel: UILabel!
-    @IBOutlet public weak var cardHolderNameErrorLabel: UILabel!
-    @IBOutlet public weak var cardExpiryDateErrorLabel: UILabel!
-    @IBOutlet public weak var cardSecurityCodeErrorLabel: UILabel!
+    @IBOutlet weak var creditCardNumberErrorLabel: UILabel!
+    @IBOutlet weak var cardHolderNameErrorLabel: UILabel!
+    @IBOutlet weak var cardExpiryDateErrorLabel: UILabel!
+    @IBOutlet weak var cardSecurityCodeErrorLabel: UILabel!
     
-    @IBOutlet public var errorBannerView: UIView!
-    @IBOutlet public var errorMessageLabel: UILabel!
-    @IBOutlet public var hidingErrorBannerConstraint: NSLayoutConstraint!
-    @IBOutlet public var cardBrandIconImageView: UIImageView!
-    @IBOutlet public var cvvInfoButton: UIButton!
+    @IBOutlet var errorBannerView: UIView!
+    @IBOutlet var errorMessageLabel: UILabel!
+    @IBOutlet var hidingErrorBannerConstraint: NSLayoutConstraint!
+    @IBOutlet var cardBrandIconImageView: UIImageView!
+    @IBOutlet var cvvInfoButton: UIButton!
     
-    @IBOutlet public var requestingIndicatorView: UIActivityIndicatorView!
+    @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
     
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String?
     
     /// Delegate to receive CreditCardFormController result.
     public weak var delegate: CreditCardFormViewControllerDelegate?
+    /// Delegate to receive CreditCardFormController result.
     @objc(delegate) public weak var __delegate: OMSCreditCardFormViewControllerDelegate?
     
     /// A boolean flag to enables/disables automatic error handling. Defaults to `true`.
@@ -280,7 +281,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     public func __setCreditCardInformation(number: String, name: String, expirationMonth: Int, expirationYear: Int) {
         let month: Int?
         let year: Int?
-        if Calendar.validExpiryMonthRange ~= expirationMonth {
+        if Calendar.validExpirationMonthRange ~= expirationMonth {
             month = expirationMonth
         } else {
             month = nil

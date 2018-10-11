@@ -19,7 +19,7 @@ import UIKit
             guard let selectedMonth = self.selectedMonth else {
                 return
             }
-            if !(Calendar.validExpiryMonthRange ~= selectedMonth) {
+            if !(Calendar.validExpirationMonthRange ~= selectedMonth) {
                 self.selectedMonth = nil
             }
             expirationMonthAccessibilityElement.accessibilityValue = self.selectedMonth.map({ CardExpiryDateTextField.spellingOutDateFormatter.monthSymbols[$0 - 1] })
