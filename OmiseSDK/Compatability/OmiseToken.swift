@@ -6,7 +6,6 @@ import Foundation
  - seealso: [Tokens API](https://www.omise.co/tokens-api)
  */
 @objc(OMSToken) public class __OmiseToken: NSObject {
-    private let token: Token
     /// Token's ID.
     @objc lazy public var tokenId: String? = token.id
     
@@ -25,6 +24,8 @@ import Foundation
     
     /// Token's creation time.
     @objc lazy public var created: Date? = token.createdDate
+    
+    private let token: Token
     
     init(token: Token) {
         self.token = token

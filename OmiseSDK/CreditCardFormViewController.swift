@@ -76,42 +76,6 @@ public typealias CreditCardFormController = CreditCardFormViewController
 /// card information.
 @objc(OMSCreditCardFormViewController)
 public class CreditCardFormViewController: UIViewController, PaymentChooserUI, PaymentFormUIController {
-    private var hasErrorMessage = false
-    
-    @objc public static let defaultErrorMessageTextColor = UIColor(red: 1.000, green: 0.255, blue: 0.208, alpha: 1.0)
-    
-    @IBOutlet var formFields: [OmiseTextField]!
-    @IBOutlet var formLabels: [UILabel]!
-    @IBOutlet var errorLabels: [UILabel]!
-  
-    @IBOutlet var contentView: UIScrollView!
-    
-    @IBOutlet var cardNumberTextField: CardNumberTextField!
-    @IBOutlet var cardNameTextField: CardNameTextField!
-    @IBOutlet var expiryDateTextField: CardExpiryDateTextField!
-    @IBOutlet var secureCodeTextField: CardCVVTextField!
-    
-    @IBOutlet weak var confirmButton: MainActionButton!
-    
-    @IBOutlet var formFieldsAccessoryView: UIToolbar!
-    @IBOutlet var gotoPreviousFieldBarButtonItem: UIBarButtonItem!
-    @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!
-    @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
-    
-    var currentEditingTextField: OmiseTextField?
-    
-    @IBOutlet weak var creditCardNumberErrorLabel: UILabel!
-    @IBOutlet weak var cardHolderNameErrorLabel: UILabel!
-    @IBOutlet weak var cardExpiryDateErrorLabel: UILabel!
-    @IBOutlet weak var cardSecurityCodeErrorLabel: UILabel!
-    
-    @IBOutlet var errorBannerView: UIView!
-    @IBOutlet var errorMessageLabel: UILabel!
-    @IBOutlet var hidingErrorBannerConstraint: NSLayoutConstraint!
-    @IBOutlet var cardBrandIconImageView: UIImageView!
-    @IBOutlet var cvvInfoButton: UIButton!
-    
-    @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
     
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String?
@@ -123,14 +87,6 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     
     /// A boolean flag to enables/disables automatic error handling. Defaults to `true`.
     @objc public var handleErrors = true
-    
-    private lazy var overlayTransitionDelegate = OverlayPanelTransitioningDelegate()
-    
-    var isInputDataValid: Bool {
-        return formFields.reduce(into: true, { (valid, field) in
-            valid = valid && field.isValid
-        })
-    }
     
     @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
         didSet {
@@ -159,6 +115,50 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         }
     }
     
+    private lazy var overlayTransitionDelegate = OverlayPanelTransitioningDelegate()
+    
+    var isInputDataValid: Bool {
+        return formFields.reduce(into: true, { (valid, field) in
+            valid = valid && field.isValid
+        })
+    }
+    
+    var currentEditingTextField: OmiseTextField?
+    private var hasErrorMessage = false
+    
+    
+    @IBOutlet var formFields: [OmiseTextField]!
+    @IBOutlet var formLabels: [UILabel]!
+    @IBOutlet var errorLabels: [UILabel]!
+  
+    @IBOutlet var contentView: UIScrollView!
+    
+    @IBOutlet var cardNumberTextField: CardNumberTextField!
+    @IBOutlet var cardNameTextField: CardNameTextField!
+    @IBOutlet var expiryDateTextField: CardExpiryDateTextField!
+    @IBOutlet var secureCodeTextField: CardCVVTextField!
+    
+    @IBOutlet var confirmButton: MainActionButton!
+    
+    @IBOutlet var formFieldsAccessoryView: UIToolbar!
+    @IBOutlet var gotoPreviousFieldBarButtonItem: UIBarButtonItem!
+    @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!
+    @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
+    
+    @IBOutlet var creditCardNumberErrorLabel: UILabel!
+    @IBOutlet var cardHolderNameErrorLabel: UILabel!
+    @IBOutlet var cardExpiryDateErrorLabel: UILabel!
+    @IBOutlet var cardSecurityCodeErrorLabel: UILabel!
+    
+    @IBOutlet var errorBannerView: UIView!
+    @IBOutlet var errorMessageLabel: UILabel!
+    @IBOutlet var hidingErrorBannerConstraint: NSLayoutConstraint!
+    @IBOutlet var cardBrandIconImageView: UIImageView!
+    @IBOutlet var cvvInfoButton: UIButton!
+    
+    @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
+    @objc public static let defaultErrorMessageTextColor = UIColor(red: 1.000, green: 0.255, blue: 0.208, alpha: 1.0)
+
     /// A boolean flag that enables/disables Card.IO integration.
     @available(*, unavailable, message: "Built in support for Card.ios was removed. You can implement it in your app and call the setCreditCardInformation(number:name:expiration:) method")
     @objc public var cardIOEnabled: Bool = true
@@ -182,6 +182,48 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         return CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
     }
     
+    public func setCreditCardInformationWith(number: String?, name: String?, expiration: (month: Int, year: Int)?) {
+        cardNumberTextField.text = number
+        cardNameTextField.text = name
+        
+        if let expiration = expiration, 1...12 ~= expiration.month, expiration.year > 0 {
+            expiryDateTextField.text = String(format: "%02d/%d", expiration.month, expiration.year % 100)
+        }
+        
+        updateSupplementaryUI()
+        
+        if #available(iOS 10.0, *) {
+            os_log("The custom credit card information was set - %{private}@",
+                   log: uiLogObject, type: .debug, String((number ?? "").suffix(4)))
+        }
+    }
+    
+    @objc(setCreditCardInformationWithNumber:name:expirationMonth:expirationYear:)
+    public func __setCreditCardInformation(number: String, name: String, expirationMonth: Int, expirationYear: Int) {
+        let month: Int?
+        let year: Int?
+        if Calendar.validExpirationMonthRange ~= expirationMonth {
+            month = expirationMonth
+        } else {
+            month = nil
+        }
+        
+        if expirationYear > 0 && expirationYear != NSNotFound {
+            year = expirationYear
+        } else {
+            year = nil
+        }
+        
+        let expiration: (month: Int, year: Int)?
+        if let month = month, let year = year {
+            expiration = (month: month, year: year)
+        } else {
+            expiration = nil
+        }
+        
+        self.setCreditCardInformationWith(number: number, name: name, expiration: expiration)
+    }
+
     public override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -261,46 +303,12 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         NotificationCenter().removeObserver(self, name: NotificationKeyboardWillShowFrameNotification, object: nil)
     }
     
-    public func setCreditCardInformationWith(number: String?, name: String?, expiration: (month: Int, year: Int)?) {
-        cardNumberTextField.text = number
-        cardNameTextField.text = name
-
-        if let expiration = expiration, 1...12 ~= expiration.month, expiration.year > 0 {
-            expiryDateTextField.text = String(format: "%02d/%d", expiration.month, expiration.year % 100)
-        }
-        
-        updateSupplementaryUI()
-        
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if #available(iOS 10.0, *) {
-            os_log("The custom credit card information was set - %{private}@",
-                   log: uiLogObject, type: .debug, String((number ?? "").suffix(4)))
+            if previousTraitCollection?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
+                view.setNeedsUpdateConstraints()
+            }
         }
-    }
-    
-    @objc(setCreditCardInformationWithNumber:name:expirationMonth:expirationYear:)
-    public func __setCreditCardInformation(number: String, name: String, expirationMonth: Int, expirationYear: Int) {
-        let month: Int?
-        let year: Int?
-        if Calendar.validExpirationMonthRange ~= expirationMonth {
-            month = expirationMonth
-        } else {
-            month = nil
-        }
-        
-        if expirationYear > 0 && expirationYear != NSNotFound {
-            year = expirationYear
-        } else {
-            year = nil
-        }
-        
-        let expiration: (month: Int, year: Int)?
-        if let month = month, let year = year {
-            expiration = (month: month, year: year)
-        } else {
-            expiration = nil
-        }
-
-        self.setCreditCardInformationWith(number: number, name: name, expiration: expiration)
     }
     
     @IBAction func displayMoreCVVInfo(_ sender: UIButton) {
@@ -312,37 +320,6 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         moreInformationOnCVVViewController.modalPresentationStyle = .custom
         moreInformationOnCVVViewController.transitioningDelegate = overlayTransitionDelegate
         present(moreInformationOnCVVViewController, animated: true, completion: nil)
-    }
-    
-    @objc private func keyboardWillAppear(_ notification: Notification) {
-        if hasErrorMessage {
-            hasErrorMessage = false
-            dismissErrorMessage(animated: true, sender: self)
-        }
-    }
-    
-    @objc func keyboardWillChangeFrame(_ notification: NSNotification) {
-        guard let frameEnd = notification.userInfo?[NotificationKeyboardFrameEndUserInfoKey] as? CGRect,
-            let frameStart = notification.userInfo?[NotificationKeyboardFrameBeginUserInfoKey] as? CGRect,
-            frameEnd != frameStart else {
-                return
-        }
-        
-        let intersectedFrame = contentView.convert(frameEnd, from: nil)
-        
-        contentView.contentInset.bottom = intersectedFrame.height
-        let bottomScrollIndicatorInset: CGFloat
-        if #available(iOS 11.0, *) {
-            bottomScrollIndicatorInset = intersectedFrame.height - contentView.safeAreaInsets.bottom
-        } else {
-            bottomScrollIndicatorInset = intersectedFrame.height
-        }
-        contentView.scrollIndicatorInsets.bottom = bottomScrollIndicatorInset
-    }
-    
-    @objc func keyboardWillHide(_ notification: NSNotification) {
-        contentView.contentInset.bottom = 0.0
-        contentView.scrollIndicatorInsets.bottom = 0.0
     }
     
     @IBAction func cancelForm() {
@@ -375,6 +352,92 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             }
             return false
         }
+    }
+    
+    @IBAction private func requestToken() {
+        doneEditing(nil)
+        
+        UIAccessibility.post(notification: AccessibilityNotificationAnnouncement, argument: "Submitting payment, please wait")
+        
+        guard let publicKey = publicKey else {
+            if #available(iOS 10.0, *) {
+                os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.publicKey ?? "")
+            }
+            assertionFailure("Missing public key information. Please set the public key before request token.")
+            return
+        }
+        
+        if #available(iOS 10.0, *) {
+            os_log("Requesting token", log: uiLogObject, type: .info)
+        }
+        
+        startActivityIndicator()
+        let request = Request<Token>(
+            name: cardNameTextField.text ?? "",
+            pan: cardNumberTextField.pan,
+            expirationMonth: expiryDateTextField.selectedMonth ?? 0,
+            expirationYear: expiryDateTextField.selectedYear ?? 0,
+            securityCode: secureCodeTextField.text ?? ""
+        )
+        
+        let client = Client(publicKey: publicKey)
+        client.sendRequest(request, completionHandler: { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            
+            strongSelf.stopActivityIndicator()
+            switch result {
+            case let .success(token):
+                if #available(iOS 10.0, *) {
+                    os_log("Credit Card Form's Request succeed %{private}@, trying to notify the delegate", log: uiLogObject, type: .default, token.id)
+                }
+                if let delegate = strongSelf.delegate {
+                    delegate.creditCardFormViewController(strongSelf, didSucceedWithToken: token)
+                    if #available(iOS 10.0, *) {
+                        os_log("Create Token succeed delegate notified", log: uiLogObject, type: .default)
+                    }
+                } else if let delegate = strongSelf.__delegate {
+                    delegate.creditCardFormViewController(strongSelf, didSucceedWithToken: __OmiseToken(token: token))
+                    if #available(iOS 10.0, *) {
+                        os_log("Create Token succeed delegate notified", log: uiLogObject, type: .default)
+                    }
+                } else if #available(iOS 10.0, *) {
+                    os_log("There is no Credit Card Form's delegate to notify about the created token", log: uiLogObject, type: .default)
+                }
+            case let .fail(err):
+                strongSelf.handleError(err)
+            }
+        })
+    }
+    
+    @objc private func keyboardWillAppear(_ notification: Notification) {
+        if hasErrorMessage {
+            hasErrorMessage = false
+            dismissErrorMessage(animated: true, sender: self)
+        }
+    }
+    
+    @objc func keyboardWillChangeFrame(_ notification: NSNotification) {
+        guard let frameEnd = notification.userInfo?[NotificationKeyboardFrameEndUserInfoKey] as? CGRect,
+            let frameStart = notification.userInfo?[NotificationKeyboardFrameBeginUserInfoKey] as? CGRect,
+            frameEnd != frameStart else {
+                return
+        }
+        
+        let intersectedFrame = contentView.convert(frameEnd, from: nil)
+        
+        contentView.contentInset.bottom = intersectedFrame.height
+        let bottomScrollIndicatorInset: CGFloat
+        if #available(iOS 11.0, *) {
+            bottomScrollIndicatorInset = intersectedFrame.height - contentView.safeAreaInsets.bottom
+        } else {
+            bottomScrollIndicatorInset = intersectedFrame.height
+        }
+        contentView.scrollIndicatorInsets.bottom = bottomScrollIndicatorInset
+    }
+    
+    @objc func keyboardWillHide(_ notification: NSNotification) {
+        contentView.contentInset.bottom = 0.0
+        contentView.scrollIndicatorInsets.bottom = 0.0
     }
     
     private func handleError(_ error: Error) {
@@ -442,61 +505,6 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         }
         cardBrandIconImageView.image = cardBrandIconName.flatMap({ UIImage(named: $0, in: Bundle.omiseSDKBundle, compatibleWith: nil) })
         cardNumberTextField.rightViewMode = cardBrandIconImageView.image != nil ? .always : .never
-    }
-    
-    @IBAction private func requestToken() {
-        doneEditing(nil)
-        
-        UIAccessibility.post(notification: AccessibilityNotificationAnnouncement, argument: "Submitting payment, please wait")
-        
-        guard let publicKey = publicKey else {
-            if #available(iOS 10.0, *) {
-                os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.publicKey ?? "")
-            }
-            assertionFailure("Missing public key information. Please set the public key before request token.")
-            return
-        }
-        
-        if #available(iOS 10.0, *) {
-            os_log("Requesting token", log: uiLogObject, type: .info)
-        }
-        
-        startActivityIndicator()
-        let request = Request<Token>(
-            name: cardNameTextField.text ?? "",
-            pan: cardNumberTextField.pan,
-            expirationMonth: expiryDateTextField.selectedMonth ?? 0,
-            expirationYear: expiryDateTextField.selectedYear ?? 0,
-            securityCode: secureCodeTextField.text ?? ""
-        )
-        
-        let client = Client(publicKey: publicKey)
-        client.sendRequest(request, completionHandler: { [weak self] (result) in
-            guard let strongSelf = self else { return }
-            
-            strongSelf.stopActivityIndicator()
-            switch result {
-            case let .success(token):
-                if #available(iOS 10.0, *) {
-                    os_log("Credit Card Form's Request succeed %{private}@, trying to notify the delegate", log: uiLogObject, type: .default, token.id)
-                }
-                if let delegate = strongSelf.delegate {
-                    delegate.creditCardFormViewController(strongSelf, didSucceedWithToken: token)
-                    if #available(iOS 10.0, *) {
-                        os_log("Create Token succeed delegate notified", log: uiLogObject, type: .default)
-                    }
-                } else if let delegate = strongSelf.__delegate {
-                    delegate.creditCardFormViewController(strongSelf, didSucceedWithToken: __OmiseToken(token: token))
-                    if #available(iOS 10.0, *) {
-                        os_log("Create Token succeed delegate notified", log: uiLogObject, type: .default)
-                    }
-                } else if #available(iOS 10.0, *) {
-                    os_log("There is no Credit Card Form's delegate to notify about the created token", log: uiLogObject, type: .default)
-                }
-            case let .fail(err):
-                strongSelf.handleError(err)
-            }
-        })
     }
     
     private func startActivityIndicator() {
@@ -599,14 +607,6 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
                 errorLabel.text = "-"
             }
             errorLabel.alpha = errorLabel.text != "-" ? 1.0 : 0.0
-        }
-    }
-    
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        if #available(iOS 10.0, *) {
-            if previousTraitCollection?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
-                view.setNeedsUpdateConstraints()
-            }
         }
     }
 }

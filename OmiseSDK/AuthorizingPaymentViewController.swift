@@ -43,8 +43,6 @@ public typealias OmiseAuthorizingPaymentViewControllerDelegate = AuthorizingPaym
  */
 @objc(OMSAuthorizingPaymentViewController)
 public class AuthorizingPaymentViewController: UIViewController {
-    let webView: WKWebView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration())
-    
     /// Authorized URL given from Omise in the created `Charge` object.
     public var authorizedURL: URL? {
         didSet {
@@ -64,6 +62,9 @@ public class AuthorizingPaymentViewController: UIViewController {
     
     /// A delegate object that will recieved the authorizing payment events.
     public weak var delegate: AuthorizingPaymentViewControllerDelegate?
+    
+    let webView: WKWebView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration())
+    
     
     /// A factory method for creating a authorizing payment view controller comes in UINavigationController stack.
     ///
@@ -147,6 +148,16 @@ public class AuthorizingPaymentViewController: UIViewController {
         startAuthorizingPaymentProcess()
     }
     
+    @IBAction func cancelAuthorizingPaymentProcess(_ sender: UIBarButtonItem) {
+        if #available(iOS 10.0, *) {
+            os_log("Authorization process was cancelled, trying to notify the delegate", log: uiLogObject, type: .info)
+        }
+        delegate?.authorizingPaymentViewControllerDidCancel(self)
+        if delegate == nil, #available(iOS 10.0, *) {
+            os_log("Authorization process was cancelled but no delegate to be notified", log: uiLogObject, type: .default)
+        }
+    }
+    
     private func startAuthorizingPaymentProcess() {
         guard let authorizedURL = authorizedURL, !expectedReturnURLPatterns.isEmpty else {
             assertionFailure("Insufficient authorizing payment information")
@@ -172,15 +183,6 @@ public class AuthorizingPaymentViewController: UIViewController {
         })
     }
     
-    @IBAction func cancelAuthorizingPaymentProcess(_ sender: UIBarButtonItem) {
-        if #available(iOS 10.0, *) {
-            os_log("Authorization process was cancelled, trying to notify the delegate", log: uiLogObject, type: .info)
-        }
-        delegate?.authorizingPaymentViewControllerDidCancel(self)
-        if delegate == nil, #available(iOS 10.0, *) {
-            os_log("Authorization process was cancelled but no delegate to be notified", log: uiLogObject, type: .default)
-        }
-    }
 }
 
 extension AuthorizingPaymentViewController: WKNavigationDelegate {

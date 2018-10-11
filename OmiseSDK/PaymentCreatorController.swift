@@ -52,11 +52,6 @@ public class PaymentCreatorController : UINavigationController {
         }
     }
     
-    var client: Client? {
-        didSet {
-            paymentSourceCreatorFlowSession.client = client
-        }
-    }
     /// Amount to create a Source payment
     public var paymentAmount: Int64? {
         didSet {
@@ -104,11 +99,8 @@ public class PaymentCreatorController : UINavigationController {
             paymentChooserViewController.allowedPaymentMethods = allowedPaymentMethods
         }
     }
-    
-    @objc @IBInspectable public var preferredPrimaryColor: UIColor?
-    @objc @IBInspectable public var preferredSecondaryColor: UIColor?
-    
-    /// A boolean flag to enables or disables automatic error handling.
+ 
+        /// A boolean flag to enables or disables automatic error handling.
     ///
     /// The controller will show an error alert in the UI if the value is true,
     /// otherwise the controller will ask its delegate.
@@ -119,6 +111,12 @@ public class PaymentCreatorController : UINavigationController {
     public weak var paymentDelegate: PaymentCreatorControllerDelegate?
     /// Delegate to receive CreditCardFormController result.
     @objc(paymentDelegate) public weak var __paymentDelegate: OMSPaymentCreatorControllerDelegate?
+
+    var client: Client? {
+        didSet {
+            paymentSourceCreatorFlowSession.client = client
+        }
+    }
     
     private let paymentSourceCreatorFlowSession = PaymentCreatorFlowSession()
     
@@ -136,6 +134,9 @@ public class PaymentCreatorController : UINavigationController {
     }()
     
     
+    @objc @IBInspectable public var preferredPrimaryColor: UIColor?
+    @objc @IBInspectable public var preferredSecondaryColor: UIColor?
+
     /// Factory method for creating CreditCardFormController with given public key.
     /// - parameter publicKey: Omise public key.
     public static func makePaymentCreatorControllerWith(
@@ -168,42 +169,7 @@ public class PaymentCreatorController : UINavigationController {
         controller.__paymentDelegate = paymentDelegate
         return controller
     }
-    
-    public override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        if let viewController = viewController as? PaymentChooserUI {
-            viewController.preferredPrimaryColor = preferredPrimaryColor
-            viewController.preferredSecondaryColor = preferredSecondaryColor
-        }
-        if let viewController = viewController as? PaymentChooserViewController {
-            viewController.flowSession = self.paymentSourceCreatorFlowSession
-        }
-        super.pushViewController(viewController, animated: animated)
-    }
-    
-    #if swift(>=4.2)
-    public override func addChild(_ childController: UIViewController) {
-        if let viewController = childController as? PaymentChooserUI {
-            viewController.preferredPrimaryColor = preferredPrimaryColor
-            viewController.preferredSecondaryColor = preferredSecondaryColor
-        }
-        if let viewController = childController as? PaymentChooserViewController {
-            viewController.flowSession = self.paymentSourceCreatorFlowSession
-        }
-        super.addChild(childController)
-    }
-    #else
-    public override func addChildViewController(_ childController: UIViewController) {
-        if let viewController = childController as? PaymentChooserUI {
-            viewController.preferredPrimaryColor = preferredPrimaryColor
-            viewController.preferredSecondaryColor = preferredSecondaryColor
-        }
-        if let viewController = childController as? PaymentChooserViewController {
-            viewController.flowSession = self.paymentSourceCreatorFlowSession
-        }
-        super.addChildViewController(childController)
-    }
-    #endif
-    
+
     public init() {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: Bundle.omiseSDKBundle)
         let viewController = storyboard.instantiateViewController(withIdentifier: "PaymentChooserController")
@@ -288,11 +254,6 @@ public class PaymentCreatorController : UINavigationController {
         displayingNoticeView.addGestureRecognizer(dismissErrorBannerTapGestureRecognizer)
     }
     
-    public override func loadView() {
-        super.loadView()
-        view.backgroundColor = .white
-    }
-    
     
     /// Displays an error banner at the top of the UI with the given error message.
     ///
@@ -361,10 +322,47 @@ public class PaymentCreatorController : UINavigationController {
         }
     }
     
-    @objc func dismissErrorMessageBanner(_ sender: AnyObject) {
-        dismissErrorMessage(animated: true, sender: sender)
+    
+    public override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        if let viewController = viewController as? PaymentChooserUI {
+            viewController.preferredPrimaryColor = preferredPrimaryColor
+            viewController.preferredSecondaryColor = preferredSecondaryColor
+        }
+        if let viewController = viewController as? PaymentChooserViewController {
+            viewController.flowSession = self.paymentSourceCreatorFlowSession
+        }
+        super.pushViewController(viewController, animated: animated)
     }
-  
+    
+    #if swift(>=4.2)
+    public override func addChild(_ childController: UIViewController) {
+        if let viewController = childController as? PaymentChooserUI {
+            viewController.preferredPrimaryColor = preferredPrimaryColor
+            viewController.preferredSecondaryColor = preferredSecondaryColor
+        }
+        if let viewController = childController as? PaymentChooserViewController {
+            viewController.flowSession = self.paymentSourceCreatorFlowSession
+        }
+        super.addChild(childController)
+    }
+    #else
+    public override func addChildViewController(_ childController: UIViewController) {
+        if let viewController = childController as? PaymentChooserUI {
+            viewController.preferredPrimaryColor = preferredPrimaryColor
+            viewController.preferredSecondaryColor = preferredSecondaryColor
+        }
+            if let viewController = childController as? PaymentChooserViewController {
+            viewController.flowSession = self.paymentSourceCreatorFlowSession
+        }
+        super.addChildViewController(childController)
+    }
+    #endif
+    
+    public override func loadView() {
+        super.loadView()
+        view.backgroundColor = .white
+    }
+    
     public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
@@ -373,6 +371,11 @@ public class PaymentCreatorController : UINavigationController {
                 self.additionalSafeAreaInsets.top = self.displayingNoticeView.bounds.height
             }, completion: nil)
         }
+    }
+    
+    
+    @objc func dismissErrorMessageBanner(_ sender: AnyObject) {
+        dismissErrorMessage(animated: true, sender: sender)
     }
 }
 
@@ -657,7 +660,7 @@ extension PaymentCreatorController {
 
 class NoticeView: UIView {
     
-    @IBOutlet weak var iconImageView: UIImageView!
-    @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet var iconImageView: UIImageView!
+    @IBOutlet var detailLabel: UILabel!
 
 }

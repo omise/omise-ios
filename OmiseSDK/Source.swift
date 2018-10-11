@@ -89,13 +89,8 @@ public enum Flow: RawRepresentable, Decodable, Equatable {
     case offline
     case other(String)
     
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        let flow = try container.decode(String.self)
-        self.init(rawValue: flow)!
-    }
-    
     public typealias RawValue = String
+    
     public var rawValue: String {
         switch self {
         case .offline:
@@ -106,6 +101,13 @@ public enum Flow: RawRepresentable, Decodable, Equatable {
             return value
         }
     }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let flow = try container.decode(String.self)
+        self.init(rawValue: flow)!
+    }
+    
     public init?(rawValue: String) {
         switch rawValue {
         case "redirect":

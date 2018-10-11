@@ -5,13 +5,21 @@ import Foundation
 /// Automatically formats entered number into groups of four.
 @objc public class CardNumberTextField: OmiseTextField {
 
-    lazy private var cardNumberStringTokenizer: CardNumberTextField.CreditCardNumberTextInputStringTokenizer = CreditCardNumberTextInputStringTokenizer.init(cardNumberTextField: self)
+    /// The current PAN
+    public var pan: PAN {
+        return PAN(text ?? "")
+    }
+    
+    /// Card brand determined from current input.
+    public var cardBrand: CardBrand? {
+        return pan.brand
+    }
     
     public override var tokenizer: UITextInputTokenizer {
         return cardNumberStringTokenizer
     }
     
-    override public var selectedTextRange: UITextRange? {
+    public override var selectedTextRange: UITextRange? {
         didSet {
             guard let selectedTextRange = self.selectedTextRange else {
                 return
@@ -32,10 +40,6 @@ import Foundation
         }
     }
     
-    public var pan: PAN {
-        return PAN(text ?? "")
-    }
-    
     @available(iOS, unavailable)
     public override var delegate: UITextFieldDelegate? {
         get {
@@ -44,11 +48,8 @@ import Foundation
         set {}
     }
     
-    /// Card brand determined from current input.
-    public var cardBrand: CardBrand? {
-        return pan.brand
-    }
-    
+    lazy private var cardNumberStringTokenizer: CardNumberTextField.CreditCardNumberTextInputStringTokenizer = CreditCardNumberTextInputStringTokenizer.init(cardNumberTextField: self)
+
     override public init(frame: CGRect) {
         super.init(frame: frame)
         initializeInstance()
@@ -78,52 +79,6 @@ import Foundation
         try super.validate()
         if !pan.isValid {
             throw OmiseTextFieldValidationError.invalidData
-        }
-    }
-    
-    override func updatePlaceholderTextColor() {
-        guard let attributedPlaceholder = attributedPlaceholder ?? placeholder.map(NSAttributedString.init(string:)) else {
-            return
-        }
-        
-        let formattingAttributedText = NSMutableAttributedString(attributedString: attributedPlaceholder)
-        if let placeholderColor = self.placeholderTextColor {
-            let formattingPlaceholderString = formattingAttributedText.string
-            formattingAttributedText.addAttribute(
-                AttributedStringKey.foregroundColor, value: placeholderColor,
-                range: NSRange(formattingPlaceholderString.startIndex..<formattingPlaceholderString.endIndex, in: formattingPlaceholderString)
-            )
-        }
-        let kerningIndexes = IndexSet([3, 7, 11])
-        kerningIndexes[kerningIndexes.indexRange(in: 0..<formattingAttributedText.length)].forEach({
-            formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
-        })
-
-        super.attributedPlaceholder = (formattingAttributedText.copy() as! NSAttributedString)
-    }
-    
-    override func textDidChange() {
-        super.textDidChange()
-        
-        guard let selectedTextRange = self.selectedTextRange else {
-            return
-        }
-        
-        updateTypingAttributes()
-        
-        if compare(selectedTextRange.start, to: endOfDocument) == ComparisonResult.orderedAscending, let attributedText = attributedText {
-            let formattingAttributedText = NSMutableAttributedString(attributedString: attributedText)
-            let formattingStartIndex = self.offset(from: beginningOfDocument, to: self.position(from: selectedTextRange.start, offset: -1) ?? selectedTextRange.start)
-            
-            let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map({ $0 - 1 }))
-            
-            formattingAttributedText.removeAttribute(AttributedStringKey.kern, range: NSRange(location: formattingStartIndex, length: formattingAttributedText.length - formattingStartIndex))
-            kerningIndexes[kerningIndexes.indexRange(in: formattingStartIndex..<formattingAttributedText.length)].forEach({
-                formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
-            })
-            
-            self.attributedText = formattingAttributedText
-            self.selectedTextRange = selectedTextRange
         }
     }
     
@@ -187,6 +142,52 @@ import Foundation
         let previousSelectedTextRange = self.selectedTextRange
         self.attributedText = formattingAttributedText
         self.selectedTextRange = previousSelectedTextRange
+    }
+    
+    override func updatePlaceholderTextColor() {
+        guard let attributedPlaceholder = attributedPlaceholder ?? placeholder.map(NSAttributedString.init(string:)) else {
+            return
+        }
+        
+        let formattingAttributedText = NSMutableAttributedString(attributedString: attributedPlaceholder)
+        if let placeholderColor = self.placeholderTextColor {
+            let formattingPlaceholderString = formattingAttributedText.string
+            formattingAttributedText.addAttribute(
+                AttributedStringKey.foregroundColor, value: placeholderColor,
+                range: NSRange(formattingPlaceholderString.startIndex..<formattingPlaceholderString.endIndex, in: formattingPlaceholderString)
+            )
+        }
+        let kerningIndexes = IndexSet([3, 7, 11])
+        kerningIndexes[kerningIndexes.indexRange(in: 0..<formattingAttributedText.length)].forEach({
+            formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
+        })
+        
+        super.attributedPlaceholder = (formattingAttributedText.copy() as! NSAttributedString)
+    }
+    
+    override func textDidChange() {
+        super.textDidChange()
+        
+        guard let selectedTextRange = self.selectedTextRange else {
+            return
+        }
+        
+        updateTypingAttributes()
+        
+        if compare(selectedTextRange.start, to: endOfDocument) == ComparisonResult.orderedAscending, let attributedText = attributedText {
+            let formattingAttributedText = NSMutableAttributedString(attributedString: attributedText)
+            let formattingStartIndex = self.offset(from: beginningOfDocument, to: self.position(from: selectedTextRange.start, offset: -1) ?? selectedTextRange.start)
+            
+            let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map({ $0 - 1 }))
+            
+            formattingAttributedText.removeAttribute(AttributedStringKey.kern, range: NSRange(location: formattingStartIndex, length: formattingAttributedText.length - formattingStartIndex))
+            kerningIndexes[kerningIndexes.indexRange(in: formattingStartIndex..<formattingAttributedText.length)].forEach({
+                formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
+            })
+            
+            self.attributedText = formattingAttributedText
+            self.selectedTextRange = selectedTextRange
+        }
     }
     
     private func updateTypingAttributes() {

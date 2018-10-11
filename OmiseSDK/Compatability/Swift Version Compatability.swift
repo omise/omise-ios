@@ -25,7 +25,6 @@ let NotificationKeyboardFrameEndUserInfoKey = UIResponder.keyboardFrameEndUserIn
 let NotificationKeyboardFrameBeginUserInfoKey = UIResponder.keyboardFrameBeginUserInfoKey
 
 let AccessibilityNotificationAnnouncement = UIAccessibility.Notification.announcement
-
 #else
 public typealias ControlState = UIControlState
 typealias AttributedStringKey = NSAttributedStringKey

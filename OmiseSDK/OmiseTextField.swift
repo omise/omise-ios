@@ -71,6 +71,16 @@ public enum OmiseTextFieldValidationError: Error {
         }
     }
     
+    /// Boolean indicating wether current input is valid or not.
+    public var isValid: Bool {
+        do {
+            try validate()
+            return true
+        } catch {
+            return false
+        }
+    }
+    
     private var normalTextColor: UIColor?
     
     public override var text: String? {
@@ -108,16 +118,6 @@ public enum OmiseTextFieldValidationError: Error {
                 range: NSRange(formattingPlaceholderString.startIndex..<formattingPlaceholderString.endIndex, in: formattingPlaceholderString)
             )
             super.attributedPlaceholder = (formattingAttributedText.copy() as! NSAttributedString)
-        }
-    }
-    
-    /// Boolean indicating wether current input is valid or not.
-    public var isValid: Bool {
-        do {
-            try validate()
-            return true
-        } catch {
-            return false
         }
     }
     

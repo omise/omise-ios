@@ -3,9 +3,19 @@ import Foundation
 
 /// UIPickerView subclass pre-configured for picking card expiration month and year.
 @objc public final class CardExpiryDatePicker: UIPickerView {
+    
+    /// Callback function that will be called when picker value changes.
+    public var onDateSelected: ((_ month: Int, _ year: Int) -> ())?
+    /// Currently selected month.
+    public var month: Int = Calendar.creditCardInformationCalendar.component(.month, from: Date())
+    /// Currently selected year.
+    public var year: Int = 0
+    
+    
     private static let maximumYear = 21
     private static let monthPicker = 0
     private static let yearPicker = 1
+    
     private let months: [String] = {
         let validRange = Calendar.creditCardInformationCalendar.maximumRange(of: Calendar.Component.month) ?? Range<Int>(1...12)
         let formatter = NumberFormatter()
@@ -18,18 +28,11 @@ import Foundation
         return Array(validRange.lowerBound..<validRange.upperBound).map({ formatter.string(from: $0 as NSNumber)! })
         #endif
     }()
-
+    
     private let years: [Int] = {
         let currentYear = Calendar.creditCardInformationCalendar.component(.year, from: Date())
         return Array(currentYear...(currentYear.advanced(by: maximumYear)))
     }()
-    
-    /// Callback function that will be called when picker value changes.
-    public var onDateSelected: ((_ month: Int, _ year: Int) -> ())?
-    /// Currently selected month.
-    public var month: Int = Calendar.creditCardInformationCalendar.component(.month, from: Date())
-    /// Currently selected year.
-    public var year: Int = 0
     
     override public init(frame: CGRect) {
         super.init(frame: frame)

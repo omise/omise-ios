@@ -31,21 +31,7 @@ enum PaymentChooserOption: StaticElementIterable, Equatable {
 @objc(OMSPaymentChooserViewController)
 class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceChooser, PaymentChooserUI {
     
-    @IBOutlet var paymentMethodNameLables: [UILabel]!
-    
     var flowSession: PaymentCreatorFlowSession?
-    
-    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
-        didSet {
-            applyPrimaryColor()
-        }
-    }
-    
-    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
-        didSet {
-            applySecondaryColor()
-        }
-    }
     
     @objc var showsCreditCardPayment: Bool = true
     @objc var allowedPaymentMethods: [OMSSourceTypeValue] = [] {
@@ -66,6 +52,20 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                     return allowedPaymentMethods.hasAlipaySource
                 }
             })
+        }
+    }
+    
+    @IBOutlet var paymentMethodNameLables: [UILabel]!
+    
+    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
+        didSet {
+            applyPrimaryColor()
+        }
+    }
+    
+    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
+        didSet {
+            applySecondaryColor()
         }
     }
     

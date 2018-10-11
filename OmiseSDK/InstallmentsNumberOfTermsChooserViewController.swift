@@ -5,18 +5,6 @@ import UIKit
 class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentSourceChooser, PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
     
-    @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
-        didSet {
-            applyPrimaryColor()
-        }
-    }
-    
-    @IBInspectable @objc public var preferredSecondaryColor: UIColor? {
-        didSet {
-            applySecondaryColor()
-        }
-    }
-    
     var installmentBrand: PaymentInformation.Installment.Brand? {
         didSet {
             numberOfTerms = installmentBrand.map(PaymentInformation.Installment.availableTerms(for:)).map(Array.init) ?? []
@@ -70,6 +58,19 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
             if isViewLoaded {
                 tableView.reloadData()
             }
+        }
+    }
+    
+    
+    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
+        didSet {
+            applyPrimaryColor()
+        }
+    }
+    
+    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
+        didSet {
+            applySecondaryColor()
         }
     }
     

@@ -311,31 +311,6 @@ extension OmiseError.APIErrorCode : Decodable {
 
 extension OmiseError.APIErrorCode.InvalidCardReason : Decodable {
     
-    static func parseInvalidCardReasonsFromMessage(_ message: String) throws -> [OmiseError.APIErrorCode.InvalidCardReason] {
-        let reasonMessages = message.components(separatedBy: ", and ").flatMap({ $0.components(separatedBy: ", ") })
-        var parsedReasons = Set(try reasonMessages.map(OmiseError.APIErrorCode.InvalidCardReason.init(message:)))
-        
-        if parsedReasons.contains(.invalidCardNumber) {
-            parsedReasons.remove(.unsupportedBrand)
-        }
-        return parsedReasons.sorted(by: {
-            switch ($0, $1) {
-            case (.invalidCardNumber, _):
-                return true
-            case (.invalidExpirationDate, .emptyCardHolderName):
-                return true
-            case (.invalidExpirationDate, .unsupportedBrand):
-                return true
-            case (.emptyCardHolderName, .unsupportedBrand):
-                return true
-            case (_, .other):
-                return true
-
-            default: return false
-            }
-        })
-    }
-    
     init(message: String) throws {
         if message.contains("number") {
             self = .invalidCardNumber
@@ -436,6 +411,31 @@ extension OmiseError.APIErrorCode.InvalidCardReason : Decodable {
         
         return preferredRecoverySuggestionMessage.isEmpty ? nil : preferredRecoverySuggestionMessage
     }
+    
+    static func parseInvalidCardReasonsFromMessage(_ message: String) throws -> [OmiseError.APIErrorCode.InvalidCardReason] {
+        let reasonMessages = message.components(separatedBy: ", and ").flatMap({ $0.components(separatedBy: ", ") })
+        var parsedReasons = Set(try reasonMessages.map(OmiseError.APIErrorCode.InvalidCardReason.init(message:)))
+        
+        if parsedReasons.contains(.invalidCardNumber) {
+            parsedReasons.remove(.unsupportedBrand)
+        }
+        return parsedReasons.sorted(by: {
+            switch ($0, $1) {
+            case (.invalidCardNumber, _):
+                return true
+            case (.invalidExpirationDate, .emptyCardHolderName):
+                return true
+            case (.invalidExpirationDate, .unsupportedBrand):
+                return true
+            case (.emptyCardHolderName, .unsupportedBrand):
+                return true
+            case (_, .other):
+                return true
+                
+            default: return false
+            }
+        })
+    }
 }
 
 
@@ -446,91 +446,6 @@ let amountLessThanValidAmountErrorMessageRegularExpression = try! NSRegularExpre
 let nameIsTooLongErrorMessageRegularExpression = try! NSRegularExpression(pattern: "name is too long \\(maximum is ([\\d]+) characters\\)", options: [])
 
 extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
-    
-    static func parseBadRequestReasonsFromMessage(_ message: String) throws -> [OmiseError.APIErrorCode.BadRequestReason] {
-        let reasonMessages = message.components(separatedBy: ", and ").flatMap({ $0.components(separatedBy: ", ") }).flatMap({ $0.components(separatedBy: " and ") })
-        let parsedReasons = Set(try reasonMessages.map(OmiseError.APIErrorCode.BadRequestReason.init(message:)))
-        
-        return parsedReasons.sorted(by: {
-            switch $0 {
-            case .amountIsLessThanValidAmount:
-                return true
-            case .other:
-                return false
-                
-            case .amountIsGreaterThanValidAmount:
-                switch $1 {
-                case .amountIsGreaterThanValidAmount, .invalidCurrency, .emptyName, .nameIsTooLong, .invalidName,
-                     .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
-                    return true
-                case .amountIsLessThanValidAmount, .other:
-                    return false
-                }
-            case .invalidCurrency:
-                switch $1 {
-                case .invalidCurrency, .emptyName, .nameIsTooLong, .invalidName, .invalidEmail,
-                     .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
-                    return true
-                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .other:
-                    return false
-                }
-            case .emptyName:
-                switch $1 {
-                case .emptyName, .nameIsTooLong, .invalidName, .invalidEmail, .invalidPhoneNumber,
-                     .typeNotSupported, .currencyNotSupported:
-                    return true
-                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency, .other:
-                    return false
-                }
-            case .nameIsTooLong:
-                switch $1 {
-                case  .nameIsTooLong, .invalidName, .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
-                    return true
-                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency, .emptyName, .other:
-                    return false
-                }
-            case .invalidName:
-                switch $1 {
-                case .invalidName, .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
-                    return true
-                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency, .emptyName, .nameIsTooLong, .other:
-                    return false
-                }
-            case .invalidEmail:
-                switch $1 {
-                case .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
-                    return true
-                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount,
-                     .invalidCurrency, .emptyName, .nameIsTooLong, .invalidName, .other:
-                    return false
-                }
-            case .invalidPhoneNumber:
-                switch $1 {
-                case .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
-                    return true
-                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency,
-                     .emptyName, .nameIsTooLong, .invalidEmail, .invalidName, .other:
-                    return false
-                }
-            case .typeNotSupported:
-                switch $1 {
-                case .typeNotSupported, .currencyNotSupported:
-                    return true
-                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency,
-                     .emptyName, .nameIsTooLong, .invalidEmail, .invalidName, .invalidPhoneNumber, .other:
-                    return false
-                }
-            case .currencyNotSupported:
-                switch $1 {
-                case  .currencyNotSupported:
-                    return true
-                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency, .emptyName,
-                     .nameIsTooLong, .invalidName, .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .other:
-                    return false
-                }
-            }
-        })
-    }
     
     init(message: String) throws {
         if message.hasPrefix("amount must be ") {
@@ -814,6 +729,93 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
         
         return preferredRecoverySuggestionMessage.isEmpty ? nil : preferredRecoverySuggestionMessage
     }
+    
+    static func parseBadRequestReasonsFromMessage(_ message: String) throws -> [OmiseError.APIErrorCode.BadRequestReason] {
+        let reasonMessages = message.components(separatedBy: ", and ").flatMap({ $0.components(separatedBy: ", ") }).flatMap({ $0.components(separatedBy: " and ") })
+        let parsedReasons = Set(try reasonMessages.map(OmiseError.APIErrorCode.BadRequestReason.init(message:)))
+        
+        return parsedReasons.sorted(by: {
+            switch $0 {
+            case .amountIsLessThanValidAmount:
+                return true
+            case .other:
+                return false
+                
+            case .amountIsGreaterThanValidAmount:
+                switch $1 {
+                case .amountIsGreaterThanValidAmount, .invalidCurrency, .emptyName, .nameIsTooLong, .invalidName,
+                     .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
+                    return true
+                case .amountIsLessThanValidAmount, .other:
+                    return false
+                }
+            case .invalidCurrency:
+                switch $1 {
+                case .invalidCurrency, .emptyName, .nameIsTooLong, .invalidName, .invalidEmail,
+                     .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
+                    return true
+                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .other:
+                    return false
+                }
+            case .emptyName:
+                switch $1 {
+                case .emptyName, .nameIsTooLong, .invalidName, .invalidEmail, .invalidPhoneNumber,
+                     .typeNotSupported, .currencyNotSupported:
+                    return true
+                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency, .other:
+                    return false
+                }
+            case .nameIsTooLong:
+                switch $1 {
+                case  .nameIsTooLong, .invalidName, .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
+                    return true
+                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency, .emptyName, .other:
+                    return false
+                }
+            case .invalidName:
+                switch $1 {
+                case .invalidName, .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
+                    return true
+                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency, .emptyName, .nameIsTooLong, .other:
+                    return false
+                }
+            case .invalidEmail:
+                switch $1 {
+                case .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
+                    return true
+                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount,
+                     .invalidCurrency, .emptyName, .nameIsTooLong, .invalidName, .other:
+                    return false
+                }
+            case .invalidPhoneNumber:
+                switch $1 {
+                case .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
+                    return true
+                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency,
+                     .emptyName, .nameIsTooLong, .invalidEmail, .invalidName, .other:
+                    return false
+                }
+            case .typeNotSupported:
+                switch $1 {
+                case .typeNotSupported, .currencyNotSupported:
+                    return true
+                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency,
+                     .emptyName, .nameIsTooLong, .invalidEmail, .invalidName, .invalidPhoneNumber, .other:
+                    return false
+                }
+            case .currencyNotSupported:
+                switch $1 {
+                case  .currencyNotSupported:
+                    return true
+                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency, .emptyName,
+                     .nameIsTooLong, .invalidName, .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .other:
+                    return false
+                }
+            }
+        })
+    }
+    
+
 }
 
 #if swift(>=4.2)

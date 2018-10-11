@@ -9,13 +9,13 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
     
     @IBOutlet var bankNameLabels: [UILabel]!
     
-    @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
+    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc public var preferredSecondaryColor: UIColor? {
+    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }

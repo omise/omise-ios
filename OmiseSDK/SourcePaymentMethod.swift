@@ -145,6 +145,10 @@ public enum PaymentInformation: Codable, Equatable {
     case other(type: String, parameters: [String: Any])
     
     
+    fileprivate enum CodingKeys: String, CodingKey {
+        case type
+    }
+    
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let typeValue = try container.decode(String.self, forKey: .type)
@@ -198,10 +202,6 @@ public enum PaymentInformation: Codable, Equatable {
             try container.encode(type, forKey: .type)
             try encoder.encodeJSONDictionary(parameters)
         }
-    }
-    
-    fileprivate enum CodingKeys: String, CodingKey {
-        case type
     }
     
     public static func == (lhs: PaymentInformation, rhs: PaymentInformation) -> Bool {
@@ -456,6 +456,16 @@ extension PaymentInformation.Barcode {
             case terminalID = "terminal_id"
         }
         
+        public init(barcode: String, storeInformation: StoreInformation? = nil, terminalID: String? = nil) {
+            self.storeInformation = storeInformation
+            self.terminalID = terminalID
+            self.barcode = barcode
+        }
+        
+        public init(barcode: String, storeID: String, storeName: String, terminalID: String?) {
+            self.init(barcode: barcode, storeInformation: StoreInformation(storeID: storeID, storeName: storeName), terminalID: terminalID)
+        }
+        
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
@@ -489,16 +499,6 @@ extension PaymentInformation.Barcode {
             try container.encodeIfPresent(storeInformation?.storeID, forKey: .storeID)
             try container.encodeIfPresent(storeInformation?.storeName, forKey: .storeName)
             try container.encodeIfPresent(terminalID, forKey: .terminalID)
-        }
-        
-        public init(barcode: String, storeInformation: StoreInformation? = nil, terminalID: String? = nil) {
-            self.storeInformation = storeInformation
-            self.terminalID = terminalID
-            self.barcode = barcode
-        }
-        
-        public init(barcode: String, storeID: String, storeName: String, terminalID: String?) {
-            self.init(barcode: barcode, storeInformation: StoreInformation(storeID: storeID, storeName: storeName), terminalID: terminalID)
         }
     }
     

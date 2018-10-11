@@ -49,6 +49,8 @@ class OverlayPanelTransitioningDelegate: NSObject, UIViewControllerTransitioning
 
 class OverlayPanelPresentationController: UIPresentationController {
     var isPresenting = false
+    let dismissTapGestureRecognizer = UITapGestureRecognizer()
+    
     fileprivate let dimmingView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -58,7 +60,13 @@ class OverlayPanelPresentationController: UIPresentationController {
         return view
     }()
     
-    let dismissTapGestureRecognizer = UITapGestureRecognizer()
+    override var frameOfPresentedViewInContainerView: CGRect {
+        guard let containerView = containerView else {
+            return super.frameOfPresentedViewInContainerView
+        }
+        let presentedViewSize = size(forChildContentContainer: presentedViewController, withParentContainerSize: containerView.bounds.size)
+        return containerView.bounds.centeredRectWithSize(presentedViewSize)
+    }
     
     override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
@@ -112,14 +120,6 @@ class OverlayPanelPresentationController: UIPresentationController {
             self.dimmingView.alpha = 0.0
         })
         dismissTapGestureRecognizer.isEnabled = false
-    }
-    
-    override var frameOfPresentedViewInContainerView: CGRect {
-        guard let containerView = containerView else {
-            return super.frameOfPresentedViewInContainerView
-        }
-        let presentedViewSize = size(forChildContentContainer: presentedViewController, withParentContainerSize: containerView.bounds.size)
-        return containerView.bounds.centeredRectWithSize(presentedViewSize)
     }
     
     override func containerViewWillLayoutSubviews() {

@@ -47,22 +47,6 @@ public enum Currency: Codable, Hashable {
         }
     }
     
-    /// Convert the given subunit amount to the unit amount
-    ///
-    /// - Parameter value: Value in subunit (Satang in THB for example)
-    /// - Returns: Value in unit (Baht in THB for example)
-    public func convert(fromSubunit value: Int64) -> Double {
-        return Double(value) / Double(factor)
-    }
-    
-    /// Convert the given unit amount to the subunit amount
-    ///
-    /// - Parameter value: Value in unit (Baht in THB for example)
-    /// - Returns: Value in subunit (Satang in THB for example)
-    public func convert(toSubunit value: Double) -> Int64 {
-        return Int64(value * Double(factor))
-    }
-    
     
     /// Create a currency with the given `ISO 4217` currency code
     ///
@@ -90,6 +74,23 @@ public enum Currency: Codable, Hashable {
             let factor = Int(pow(10, Double(numberFormatter.maximumFractionDigits)))
             self = .custom(code: currencyCode, factor: factor)
         }
+    }
+    
+    
+    /// Convert the given subunit amount to the unit amount
+    ///
+    /// - Parameter value: Value in subunit (Satang in THB for example)
+    /// - Returns: Value in unit (Baht in THB for example)
+    public func convert(fromSubunit value: Int64) -> Double {
+        return Double(value) / Double(factor)
+    }
+    
+    /// Convert the given unit amount to the subunit amount
+    ///
+    /// - Parameter value: Value in unit (Baht in THB for example)
+    /// - Returns: Value in subunit (Satang in THB for example)
+    public func convert(toSubunit value: Double) -> Int64 {
+        return Int64(value * Double(factor))
     }
 }
 

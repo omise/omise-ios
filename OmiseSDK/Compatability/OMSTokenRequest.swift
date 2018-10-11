@@ -10,8 +10,6 @@ import Foundation
 
 @objc(OMSTokenRequest) public class __OMSTokenRequest: NSObject {
     
-    let request: Request<Token>
-    
     /// Card holder's full name.
     @objc public var name: String {
         return request.parameter.name
@@ -40,6 +38,8 @@ import Foundation
     @objc public var postalCode: String? {
         return request.parameter.postalCode
     }
+    
+    let request: Request<Token>
     
     /// Initializes new token request.
     @objc public init(name: String, number: String, expirationMonth: Int, expirationYear: Int,

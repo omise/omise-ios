@@ -5,13 +5,6 @@ import UIKit
 /// UITextField subclass used for entering card's expiry date.
 /// `CardExpiryDatePicker` will be set as the default input view.
 @objc public class CardExpiryDateTextField: OmiseTextField {
-    private let maxCreditCardAge = 21
-    
-    private static let spellingOutDateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.calendar = Calendar.creditCardInformationCalendar
-        return dateFormatter
-    }()
     
     /// Currently selected month, `nil` if no month has been selected.
     public private(set) var selectedMonth: Int? = nil {
@@ -39,16 +32,17 @@ import UIKit
         return selectedYear ?? 0
     }
     
-    public override var keyboardType: UIKeyboardType {
-        didSet {
-            super.keyboardType = .numberPad
-        }
-    }
     
     public var dateSeparatorTextColor: UIColor?
     
     @objc private(set) public var expirationMonthAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
     @objc private(set) public var expirationYearAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
+    
+    public override var keyboardType: UIKeyboardType {
+        didSet {
+            super.keyboardType = .numberPad
+        }
+    }
     
     @available(iOS, unavailable)
     public override var delegate: UITextFieldDelegate? {
@@ -57,6 +51,15 @@ import UIKit
         }
         set {}
     }
+    
+    private let maxCreditCardAge = 21
+    
+    private static let spellingOutDateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar.creditCardInformationCalendar
+        return dateFormatter
+    }()
+    
     
     override public init() {
         super.init(frame: CGRect.zero)

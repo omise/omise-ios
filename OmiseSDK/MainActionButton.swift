@@ -74,14 +74,6 @@ class MainActionButton: UIButton {
         updateBackgroundColor()
     }
     
-    private func updateBackgroundColor() {
-        super.backgroundColor = self.backgroundColor
-    }
-    
-    public func backgroundColor(for state: ControlState) -> UIColor? {
-        return backgroundColors[state]
-    }
-    
     public func setBackgroundColor(_ color: UIColor?, for state: ControlState) {
         backgroundColors[state] = color
         updateBackgroundColor()
@@ -103,5 +95,14 @@ class MainActionButton: UIButton {
             setBackgroundColor(.purple, for: [.selected, .highlighted])
         }
     }
+    
+    private func updateBackgroundColor() {
+        super.backgroundColor = self.backgroundColor
+    }
+    
+    public func backgroundColor(for state: ControlState) -> UIColor? {
+        return backgroundColors[state]
+    }
+    
 }
 

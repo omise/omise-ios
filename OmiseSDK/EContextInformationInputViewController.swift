@@ -8,6 +8,26 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     var paymentAmount: Int64?
     var paymentCurrency: Currency?
     
+    var currentEditingTextField: OmiseTextField?
+    
+    var isInputDataValid: Bool {
+        return formFields.reduce(into: true, { (valid, field) in
+            valid = valid && field.isValid
+        })
+    }
+    
+    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
+        didSet {
+            applyPrimaryColor()
+        }
+    }
+    
+    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
+        didSet {
+            applySecondaryColor()
+        }
+    }
+    
     @IBOutlet var contentView: UIScrollView!
     
     @IBOutlet var fullNameTextField: OmiseTextField!
@@ -28,25 +48,6 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!
     @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
     
-    var currentEditingTextField: OmiseTextField?
-    
-    var isInputDataValid: Bool {
-        return formFields.reduce(into: true, { (valid, field) in
-            valid = valid && field.isValid
-        })
-    }
-    
-    @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
-        didSet {
-            applyPrimaryColor()
-        }
-    }
-    
-    @IBInspectable @objc public var preferredSecondaryColor: UIColor? {
-        didSet {
-            applySecondaryColor()
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,15 +140,15 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         sender.borderColor = view.tintColor
     }
     
-    @objc @IBAction private func gotoPreviousField(_ button: UIBarButtonItem) {
+    @IBAction private func gotoPreviousField(_ button: UIBarButtonItem) {
         gotoPreviousField()
     }
     
-    @objc @IBAction private func gotoNextField(_ sender: AnyObject) {
+    @IBAction private func gotoNextField(_ sender: AnyObject) {
         gotoNextField()
     }
     
-    @objc @IBAction private func doneEditing(_ button: UIBarButtonItem?) {
+    @IBAction private func doneEditing(_ button: UIBarButtonItem?) {
         doneEditing()
     }
     
