@@ -400,14 +400,14 @@ extension OmiseError.APIErrorCode.InvalidCardReason : Decodable {
             preferredRecoverySuggestionMessage = NSLocalizedString(
                 "error.api.invalid_card.unsupported-brand.recovery-suggestion",
                 tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                value: "Please use other credit card",
+                value: "Please use another credit card",
                 comment: "A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Unsupported card brand` message from the backend which a merchant may show this message to their user"
             )
         case .other:
             preferredRecoverySuggestionMessage = NSLocalizedString(
                 "error.api.invalid_card.other.recovery-suggestion",
                 tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                value: "Please review your credit card information",
+                value: "Please review credit card information",
                 comment: "A descriptive suggestion message to recovery from the `Invalid card data` error from the backend which a merchant may show this message to their user"
             )
         }
@@ -529,7 +529,7 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
                 let preferredErrorDescriptionFormat = NSLocalizedString(
                     "error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.message",
                     tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                    value: "Amount is greater than the valid amount of %d subunit",
+                    value: "Amount exceeds the valid amount of %@",
                     comment: "A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user"
                 )
                 let formatter = NumberFormatter.makeAmountFormatter(for: currency)
@@ -538,7 +538,7 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
                 preferredErrorDescription = NSLocalizedString(
                     "error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.message",
                     tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                    value: "Amount is greater than the valid amount",
+                    value: "Amount exceeds the valid amount",
                     comment: "A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user"
                 )
             }
@@ -563,7 +563,7 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
                 let preferredErrorDescriptionFormat = NSLocalizedString(
                     "error.api.bad_request.name-is-too-long.with-valid-length.message",
                     tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                    value: "The customer name is longer than the valid length of %d characters",
+                    value: "The customer name exceeds the %d character limit",
                     comment: "A default descriptive message representing an `Bad request` error with `name-is-too-long.with-valid-length` from the backend which a merchant may show this message to their user"
                 )
                 preferredErrorDescription = String.localizedStringWithFormat(preferredErrorDescriptionFormat, maximumLength)
@@ -602,7 +602,7 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
             preferredErrorDescription = NSLocalizedString(
                 "error.api.bad_request.type-not-supported.message",
                 tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                value: "The source type is not supported for this account",
+                value: "The source type is not supported by this account",
                 comment: "A default descriptive message representing an `Bad request` error with `type-not-supported` from the backend which a merchant may show this message to their user"
             )
             
@@ -610,7 +610,7 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
             preferredErrorDescription = NSLocalizedString(
                 "error.api.bad_request.currency-not-supported.message",
                 tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                value: "The currency is not supported for this account",
+                value: "The currency is not supported by this account",
                 comment: "A default descriptive message representing an `Bad request` error with `currency-not-supported` from the backend which a merchant may show this message to their user"
             )
         case .other(let value):
@@ -634,7 +634,7 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
                 let preferredRecoverySuggestionMessageFormat = NSLocalizedString(
                     "error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.recovery-suggestion",
                     tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                    value: "Please create a source with amount more than %d subunit",
+                    value: "Please create a source with an amount that is greater than %@",
                     comment: "A default descriptive message representing an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user"
                 )
                 let formatter = NumberFormatter.makeAmountFormatter(for: currency)
@@ -643,7 +643,7 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
                 preferredRecoverySuggestionMessage = NSLocalizedString(
                     "error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.recovery-suggestion",
                     tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                    value: "Please create a source with more amount",
+                    value: "Please create a source with a greater amount",
                     comment: "A default descriptive message representing an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user"
                 )
             }
@@ -652,7 +652,7 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
                 let preferredRecoverySuggestionMessageFormat = NSLocalizedString(
                     "error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.recovery-suggestion",
                     tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                    value: "Please create a source with amount less than %d subunit",
+                    value: "Please create a source with an amount which is less than %@",
                     comment: "A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user"
                 )
                 let formatter = NumberFormatter.makeAmountFormatter(for: currency)
@@ -677,7 +677,7 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
             preferredRecoverySuggestionMessage = NSLocalizedString(
                 "error.api.bad_request.empty-name.recovery-suggestion",
                 tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                value: "Please specify the customer name",
+                value: "Please input customer name",
                 comment: "A default descriptive message representing an `Bad request` error with `empty-name` from the backend which a merchant may show this message to their user"
             )
         case .nameIsTooLong(maximum: let maximumLength):
@@ -685,7 +685,7 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
                 let preferredRecoverySuggestionMessageFormat = NSLocalizedString(
                     "error.api.bad_request.name-is-too-long.with-valid-length.recovery-suggestion",
                     tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                    value: "Please specify the customer name with less than %d characters",
+                    value: "Please input customer name which is no longer than %d characters",
                     comment: "A default descriptive message representing an `Bad request` error with `name-is-too-long.with-valid-length` from the backend which a merchant may show this message to their user"
                 )
                 preferredRecoverySuggestionMessage = String.localizedStringWithFormat(preferredRecoverySuggestionMessageFormat, maximumLength)
@@ -693,7 +693,7 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
                 preferredRecoverySuggestionMessage = NSLocalizedString(
                     "error.api.bad_request.name-is-too-long.without-valid-length.recovery-suggestion",
                     tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                    value: "Please specify the shorter customer name",
+                    value: "Please input shorter customer name",
                     comment: "A default descriptive message representing an `Bad request` error with `name-is-too-long.without-valid-length` from the backend which a merchant may show this message to their user"
                 )
             }
@@ -729,7 +729,7 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
             preferredRecoverySuggestionMessage = NSLocalizedString(
                 "error.api.bad_request.currency-not-supported.recovery-suggestion",
                 tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                value: "Please review the currency",
+                value: "Please choose another currency",
                 comment: "A default descriptive message representing an `Bad request` error with `currency-not-supported` from the backend which a merchant may show this message to their user"
             )
         case .other(let value):

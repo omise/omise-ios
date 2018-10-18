@@ -17,8 +17,6 @@
 		224460041CF43A1200801D0F /* SDKTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225931561CE4745200841B86 /* SDKTestCase.swift */; settings = {COMPILER_FLAGS = "-Wnodeprecated-declarations"; }; };
 		224460051CF43A1500801D0F /* CardNumberTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225931541CE4743A00841B86 /* CardNumberTest.swift */; settings = {COMPILER_FLAGS = "-Wnodeprecated-declarations"; }; };
 		2244600A1CF441DC00801D0F /* TokenRequestDelegateDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224460091CF441DC00801D0F /* TokenRequestDelegateDummy.swift */; settings = {COMPILER_FLAGS = "-Wnodeprecated-declarations"; }; };
-		224E44EA1D0EBF0D00E558E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224E44EC1D0EBF0D00E558E3 /* Main.storyboard */; };
-		224E44ED1D0EBF1200E558E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224E44EF1D0EBF1200E558E3 /* LaunchScreen.storyboard */; };
 		2259311C1CE3210700841B86 /* OmiseSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 2259311B1CE3210700841B86 /* OmiseSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2259314E1CE46E5700841B86 /* CardBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314D1CE46E5700841B86 /* CardBrand.swift */; };
 		225931501CE46F7F00841B86 /* CardNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314F1CE46F7F00841B86 /* CardNumber.swift */; };
@@ -58,14 +56,17 @@
 		8A6AA06E216B9DAE00E49E5E /* OMSBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6AA06B216B957D00E49E5E /* OMSBaseViewController.m */; };
 		8A723A552164D7B100D902F5 /* CompletePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14551D0EBAB5000511DE /* CompletePaymentViewController.swift */; };
 		8A723A562164D7B100D902F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14541D0EBAB5000511DE /* AppDelegate.swift */; };
-		8A723A5B2164D7B100D902F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224E44EF1D0EBF1200E558E3 /* LaunchScreen.storyboard */; };
 		8A723A5C2164D7B100D902F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */; };
-		8A723A5D2164D7B100D902F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224E44EC1D0EBF0D00E558E3 /* Main.storyboard */; };
 		8A723A5F2164D7B100D902F5 /* OmiseSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 225931181CE3210700841B86 /* OmiseSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8A723A692164D87B00D902F5 /* OMSExampleProductDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF6A1D920E4FEBE00AC5625 /* OMSExampleProductDetailViewController.m */; };
 		8A72CD5E2162358400F14F76 /* PaymentOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A72CD5D2162358400F14F76 /* PaymentOptionTableViewCell.swift */; };
 		8A739D0920DA4DC500217CAB /* OMSConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A739D0720DA4DC500217CAB /* OMSConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8A739D0B20DA4DC500217CAB /* OMSConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A739D0820DA4DC500217CAB /* OMSConstants.m */; };
+		8A7567652178956800C684C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7567642178956800C684C9 /* Main.storyboard */; };
+		8A7567662178956800C684C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7567642178956800C684C9 /* Main.storyboard */; };
+		8A7567682178959400C684C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7567672178959400C684C9 /* LaunchScreen.storyboard */; };
+		8A7567692178959400C684C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7567672178959400C684C9 /* LaunchScreen.storyboard */; };
+		8A75676D2178963B00C684C9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A75676B2178963B00C684C9 /* Localizable.strings */; };
 		8A76791F214663560085DE3C /* PaymentUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A76791E214663560085DE3C /* PaymentUI.swift */; };
 		8A776647214A5FC60029D166 /* NoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A776646214A5FC60029D166 /* NoticeView.xib */; };
 		8A7A9EBE2166160300F12D86 /* PaymentSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */; };
@@ -87,7 +88,6 @@
 		8AF985732147CC3D007E18ED /* Error.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8AF985752147CC3D007E18ED /* Error.strings */; };
 		8AFB920F20D39BE50072B185 /* OmiseTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */; };
 		8AFE10BB20B69B39008E741D /* ClientTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE10BA20B69B39008E741D /* ClientTestCase.swift */; };
-		981FA5F71D0EDDB0009ECEDC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 981FA5F91D0EDDB0009ECEDC /* Localizable.strings */; };
 		986406301CFEA7E4004BCF51 /* CardCVVTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062A1CFEA7E4004BCF51 /* CardCVVTextField.swift */; };
 		986406311CFEA7E4004BCF51 /* CardExpiryDateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062B1CFEA7E4004BCF51 /* CardExpiryDateTextField.swift */; };
 		986406321CFEA7E4004BCF51 /* CardNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062C1CFEA7E4004BCF51 /* CardNumberTextField.swift */; };
@@ -157,8 +157,6 @@
 		2225B3531D0FDD63003EB396 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22445FFB1CF41DD300801D0F /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		224460091CF441DC00801D0F /* TokenRequestDelegateDummy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenRequestDelegateDummy.swift; sourceTree = "<group>"; };
-		224E44EB1D0EBF0D00E558E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		224E44EE1D0EBF1200E558E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		225931181CE3210700841B86 /* OmiseSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OmiseSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2259311B1CE3210700841B86 /* OmiseSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OmiseSDK.h; sourceTree = "<group>"; };
 		2259311D1CE3210700841B86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -209,6 +207,11 @@
 		8A72CD5D2162358400F14F76 /* PaymentOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentOptionTableViewCell.swift; sourceTree = "<group>"; };
 		8A739D0720DA4DC500217CAB /* OMSConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OMSConstants.h; sourceTree = "<group>"; };
 		8A739D0820DA4DC500217CAB /* OMSConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSConstants.m; sourceTree = "<group>"; };
+		8A7567642178956800C684C9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8A7567672178959400C684C9 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8A75676C2178963B00C684C9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8A75676E2178964000C684C9 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8A75676F2178964700C684C9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8A76791E214663560085DE3C /* PaymentUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentUI.swift; sourceTree = "<group>"; };
 		8A776646214A5FC60029D166 /* NoticeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeView.xib; sourceTree = "<group>"; };
 		8A776657214AA4E70029D166 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ja; path = ja.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
@@ -233,9 +236,6 @@
 		8AF985762147CF3B007E18ED /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Error.strings; sourceTree = "<group>"; };
 		8AF985772147CF3B007E18ED /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = th; path = th.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		8AFE10BA20B69B39008E741D /* ClientTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTestCase.swift; sourceTree = "<group>"; };
-		981FA5F81D0EDDB0009ECEDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		981FA5FA1D0EDDD8009ECEDC /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
-		981FA5FB1D0EDDDB009ECEDC /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9864062A1CFEA7E4004BCF51 /* CardCVVTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCVVTextField.swift; sourceTree = "<group>"; };
 		9864062B1CFEA7E4004BCF51 /* CardExpiryDateTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardExpiryDateTextField.swift; sourceTree = "<group>"; };
 		9864062C1CFEA7E4004BCF51 /* CardNumberTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumberTextField.swift; sourceTree = "<group>"; };
@@ -321,7 +321,7 @@
 				8AD0609120B550B90074894E /* Compatability */,
 				2225B3531D0FDD63003EB396 /* Assets.xcassets */,
 				8AF985752147CC3D007E18ED /* Error.strings */,
-				981FA5F91D0EDDB0009ECEDC /* Localizable.strings */,
+				8A75676B2178963B00C684C9 /* Localizable.strings */,
 				8AF5517C213D4C0100D61C98 /* Localizable.stringsdict */,
 				8A5D59831D5317DD005D3346 /* OmiseSDK.storyboard */,
 			);
@@ -335,8 +335,8 @@
 				22D480AB1D0EB29C00544CE1 /* Info.plist */,
 				229E14541D0EBAB5000511DE /* AppDelegate.swift */,
 				22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */,
-				224E44EF1D0EBF1200E558E3 /* LaunchScreen.storyboard */,
-				224E44EC1D0EBF0D00E558E3 /* Main.storyboard */,
+				8A7567642178956800C684C9 /* Main.storyboard */,
+				8A7567672178959400C684C9 /* LaunchScreen.storyboard */,
 				8A723A682164D80C00D902F5 /* Objective-C */,
 				8AB3B85F216DCF5C006497B5 /* Shared */,
 				8A723A672164D80200D902F5 /* Swift */,
@@ -665,7 +665,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A5D59811D5317DD005D3346 /* OmiseSDK.storyboard in Resources */,
-				981FA5F71D0EDDB0009ECEDC /* Localizable.strings in Resources */,
+				8A75676D2178963B00C684C9 /* Localizable.strings in Resources */,
 				8A776647214A5FC60029D166 /* NoticeView.xib in Resources */,
 				2225B3541D0FDD63003EB396 /* Assets.xcassets in Resources */,
 				8AF5517A213D4C0100D61C98 /* Localizable.stringsdict in Resources */,
@@ -677,9 +677,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				224E44ED1D0EBF1200E558E3 /* LaunchScreen.storyboard in Resources */,
+				8A7567682178959400C684C9 /* LaunchScreen.storyboard in Resources */,
+				8A7567652178956800C684C9 /* Main.storyboard in Resources */,
 				22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */,
-				224E44EA1D0EBF0D00E558E3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,9 +687,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A723A5B2164D7B100D902F5 /* LaunchScreen.storyboard in Resources */,
+				8A7567692178959400C684C9 /* LaunchScreen.storyboard in Resources */,
+				8A7567662178956800C684C9 /* Main.storyboard in Resources */,
 				8A723A5C2164D7B100D902F5 /* Assets.xcassets in Resources */,
-				8A723A5D2164D7B100D902F5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -824,22 +824,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		224E44EC1D0EBF0D00E558E3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				224E44EB1D0EBF0D00E558E3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		224E44EF1D0EBF1200E558E3 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				224E44EE1D0EBF1200E558E3 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		8A5D59831D5317DD005D3346 /* OmiseSDK.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -848,6 +832,16 @@
 				8A5D59871D5317E1005D3346 /* ja */,
 			);
 			name = OmiseSDK.storyboard;
+			sourceTree = "<group>";
+		};
+		8A75676B2178963B00C684C9 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8A75676C2178963B00C684C9 /* en */,
+				8A75676E2178964000C684C9 /* th */,
+				8A75676F2178964700C684C9 /* ja */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		8AF5517C213D4C0100D61C98 /* Localizable.stringsdict */ = {
@@ -868,16 +862,6 @@
 				8A776658214AA4F10029D166 /* ja */,
 			);
 			name = Error.strings;
-			sourceTree = "<group>";
-		};
-		981FA5F91D0EDDB0009ECEDC /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				981FA5F81D0EDDB0009ECEDC /* Base */,
-				981FA5FA1D0EDDD8009ECEDC /* th */,
-				981FA5FB1D0EDDDB009ECEDC /* ja */,
-			);
-			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
