@@ -5,7 +5,7 @@ import XCTest
 class ModelTestCase: XCTestCase {
     
     func testDecodeToken() throws {
-        let decoder = Client.makeJSONDecoder()
+        let decoder = Client.makeJSONDecoder(for: Request<Token>?.none)
         let tokenData = XCTestCase.fixturesData(forFilename: "token_object")
         let token = try decoder.decode(Token.self, from: tokenData)
         
@@ -18,7 +18,7 @@ class ModelTestCase: XCTestCase {
     }
     
     func testDecodeCard() throws {
-        let decoder = Client.makeJSONDecoder()
+        let decoder = Client.makeJSONDecoder(for: Request<Token>?.none)
         let cardData = XCTestCase.fixturesData(forFilename: "card_object")
         let card = try decoder.decode(Card.self, from: cardData)
         
@@ -34,7 +34,7 @@ class ModelTestCase: XCTestCase {
     }
     
     func testDecodeSource() throws {
-        let decoder = Client.makeJSONDecoder()
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
         
         do {
             let sourceData = XCTestCase.fixturesData(forFilename: "source_alipay_object")
@@ -51,7 +51,7 @@ class ModelTestCase: XCTestCase {
     }
     
     func testBillPaymentSource() throws {
-        let decoder = Client.makeJSONDecoder()
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
         
         do {
             let sourceData = XCTestCase.fixturesData(forFilename: "source_bill_payment/tesco_lotus")
@@ -68,7 +68,7 @@ class ModelTestCase: XCTestCase {
     }
     
     func testDecodeBarcodeSource() throws {
-        let decoder = Client.makeJSONDecoder()
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
         
         do {
             let sourceData = XCTestCase.fixturesData(forFilename: "source_barcode/alipay")
@@ -85,7 +85,7 @@ class ModelTestCase: XCTestCase {
     }
     
     func testDecodeInstallmentsSource() throws {
-        let decoder = Client.makeJSONDecoder()
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
         
         do {
             let sourceData = XCTestCase.fixturesData(forFilename: "source_installments/first_choice")
@@ -154,7 +154,7 @@ class ModelTestCase: XCTestCase {
     }
     
     func testDecodeInternetBankingSource() throws {
-        let decoder = Client.makeJSONDecoder()
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
         
         do {
             let sourceData = XCTestCase.fixturesData(forFilename: "source_internet_banking/bay")

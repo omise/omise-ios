@@ -14,9 +14,9 @@
 "error.api.invalid_card.unsupported-brand.message" = "Unsupported card brand";
 "error.api.invalid_card.other.message" = "Invalid card data with \"%@\" message";
 
-"error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.message" = "Amount is less than the valid amount of %d subunit";
+"error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.message" = "Amount is less than the valid amount of %@";
 "error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.message" = "Amount is less than the valid amount";
-"error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.message" = "Amount is greater than the valid amount of %d subunit";
+"error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.message" = "Amount is greater than the valid amount of %@";
 "error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.message" = "Amount is greater than the valid amount";
 "error.api.bad_request.invalid-currency.message" = "The currency is invalid";
 "error.api.bad_request.empty-name.message" = "The customer name is empty";
@@ -45,9 +45,9 @@
 "error.api.invalid_card.unsupported-brand.recovery-suggestion" = "Please use other credit card";
 "error.api.invalid_card.other.recovery-suggestion" = "Please review your credit card information";
 
-"error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.recovery-suggestion" = "Please create a source with amount more than %d subunit";
+"error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.recovery-suggestion" = "Please create a source with amount more than %@";
 "error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.recovery-suggestion" = "Please create a source with more amount";
-"error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.recovery-suggestion" = "Please create a source with amount less than %d subunit";
+"error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.recovery-suggestion" = "Please create a source with amount less than %@";
 "error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.recovery-suggestion" = "Please create a source with less amount";
 "error.api.bad_request.invalid-currency.recovery-suggestion" = "Bad request";
 "error.api.bad_request.empty-name.recovery-suggestion" = "Please specify the customer name";

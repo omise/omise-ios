@@ -53,7 +53,7 @@ import os
     public func requestTask<T: Object>(with request: Request<T>, completionHandler: Request<T>.Callback?) -> RequestTask<T> {
         let dataTask = session.dataTask(with: buildURLRequest(for: request), completionHandler: { (data, response, error) in
             DispatchQueue.main.async {
-                Client.completeRequest(completionHandler)(data, response, error)
+                Client.completeRequest(request, callback: completionHandler)(data, response, error)
             }
         })
         return RequestTask(request: request, dataTask: dataTask)
@@ -103,13 +103,16 @@ extension Client {
         return encoder
     }
     
-    static func makeJSONDecoder() -> JSONDecoder {
+    static func makeJSONDecoder<T>(for request: Request<T>?) -> JSONDecoder {
         let decoder = JSONDecoder()
+        if let request = request as? Request<Source> {
+            decoder.userInfo[sourceParameterCodingsUserInfoKey] = request.parameter
+        }
         decoder.dateDecodingStrategy = .formatted(Client.jsonDateFormatter)
         return decoder
     }
     
-    private static func completeRequest<T: Object>(_ callback: Request<T>.Callback?) -> (Data?, URLResponse?, Error?) -> () {
+    private static func completeRequest<T: Object>(_ request: Request<T>, callback: Request<T>.Callback?) -> (Data?, URLResponse?, Error?) -> () {
         return { (data: Data?, response: URLResponse?, error: Error?) -> () in
             guard let callback = callback else { return } // nobody around to hear the leaf falls
             
@@ -146,7 +149,7 @@ extension Client {
                 }
                 
                 do {
-                    let decoder = makeJSONDecoder()
+                    let decoder = makeJSONDecoder(for: request)
                     result = .fail(try decoder.decode(OmiseError.self, from: data))
                 } catch let err {
                     let error = OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: err)
@@ -161,7 +164,7 @@ extension Client {
                 }
                 
                 do {
-                    let decoder = makeJSONDecoder()
+                    let decoder = makeJSONDecoder(for: request)
                     result = .success(try decoder.decode(T.self, from: data))
                 } catch let err {
                     let error = OmiseError.unexpected(error: .httpSucceessWithInvalidData, underlying: err)

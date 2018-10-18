@@ -14,10 +14,12 @@ class BadRequestAPIErrorParsingTestCase: XCTestCase {
                 }
                 """
             
+            let sourceParameter = CreateSourceParameter(paymentInformation: PaymentInformation.alipay, amount: 60_000, currency: .thb)
             let decoder = JSONDecoder()
+            decoder.userInfo[sourceParameterCodingsUserInfoKey] = sourceParameter
             let parsedError = try decoder.decode(OmiseError.self, from: Data(errorJSONString.utf8))
             if case .api(code: .badRequest(let reasons), message: _, location: _) = parsedError {
-                XCTAssertEqual(reasons, [OmiseError.APIErrorCode.BadRequestReason.amountIsGreaterThanValidAmount(validAmount: 50000)])
+                XCTAssertEqual(reasons, [OmiseError.APIErrorCode.BadRequestReason.amountIsGreaterThanValidAmount(validAmount: 50000, currency: .thb)])
             } else {
                 XCTFail("Parsing results with the wrong code")
             }
@@ -32,11 +34,12 @@ class BadRequestAPIErrorParsingTestCase: XCTestCase {
                   "message": "amount must be at least 150"
                 }
                 """
-            
+            let sourceParameter = CreateSourceParameter(paymentInformation: PaymentInformation.alipay, amount: 100, currency: .jpy)
             let decoder = JSONDecoder()
+            decoder.userInfo[sourceParameterCodingsUserInfoKey] = sourceParameter
             let parsedError = try decoder.decode(OmiseError.self, from: Data(errorJSONString.utf8))
             if case .api(code: .badRequest(let reasons), message: _, location: _) = parsedError {
-                XCTAssertEqual(reasons, [OmiseError.APIErrorCode.BadRequestReason.amountIsLessThanValidAmount(validAmount: 150)])
+                XCTAssertEqual(reasons, [OmiseError.APIErrorCode.BadRequestReason.amountIsLessThanValidAmount(validAmount: 150, currency: .jpy )])
             } else {
                 XCTFail("Parsing results with the wrong code")
             }
@@ -51,11 +54,12 @@ class BadRequestAPIErrorParsingTestCase: XCTestCase {
                   "message": "amount must be greater than 500000"
                 }
                 """
-            
+            let sourceParameter = CreateSourceParameter(paymentInformation: PaymentInformation.alipay, amount: 60_000, currency: .thb)
             let decoder = JSONDecoder()
+            decoder.userInfo[sourceParameterCodingsUserInfoKey] = sourceParameter
             let parsedError = try decoder.decode(OmiseError.self, from: Data(errorJSONString.utf8))
             if case .api(code: .badRequest(let reasons), message: _, location: _) = parsedError {
-                XCTAssertEqual(reasons, [OmiseError.APIErrorCode.BadRequestReason.amountIsLessThanValidAmount(validAmount: 500000)])
+                XCTAssertEqual(reasons, [OmiseError.APIErrorCode.BadRequestReason.amountIsLessThanValidAmount(validAmount: 500000, currency: .thb)])
             } else {
                 XCTFail("Parsing results with the wrong code")
             }
@@ -212,10 +216,12 @@ class BadRequestAPIErrorParsingTestCase: XCTestCase {
                 }
                 """
             
+            let sourceParameter = CreateSourceParameter(paymentInformation: PaymentInformation.alipay, amount: 60_000, currency: .thb)
             let decoder = JSONDecoder()
+            decoder.userInfo[sourceParameterCodingsUserInfoKey] = sourceParameter
             let parsedError = try decoder.decode(OmiseError.self, from: Data(errorJSONString.utf8))
             if case .api(code: .badRequest(let reasons), message: _, location: _) = parsedError {
-                XCTAssertEqual(reasons, [OmiseError.APIErrorCode.BadRequestReason.amountIsGreaterThanValidAmount(validAmount: 50000), .invalidCurrency])
+                XCTAssertEqual(reasons, [OmiseError.APIErrorCode.BadRequestReason.amountIsGreaterThanValidAmount(validAmount: 50000, currency: .thb), .invalidCurrency])
             } else {
                 XCTFail("Parsing results with the wrong code")
             }
