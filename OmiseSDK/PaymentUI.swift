@@ -120,10 +120,10 @@ protocol PaymentFormUIController : AnyObject {
 }
 
 extension UIViewController {
-    @objc func displayErrorMessage(_ message: String, animated: Bool, sender: Any?) {
-        let targetController = self.targetViewController(forAction: #selector(UIViewController.displayErrorMessage(_:animated:sender:)), sender: sender)
+    @objc func displayErrorWith(title: String, message: String?, animated: Bool, sender: Any?) {
+        let targetController = targetViewController(forAction: #selector(UIViewController.displayErrorWith(title:message:animated:sender:)), sender: sender)
         if let targetController = targetController {
-            targetController.displayErrorMessage(message, animated: animated, sender: sender)
+            targetController.displayErrorWith(title: title, message: message, animated: animated, sender: sender)
         }
     }
     

@@ -258,10 +258,12 @@ public class PaymentCreatorController : UINavigationController {
     /// Displays an error banner at the top of the UI with the given error message.
     ///
     /// - Parameters:
-    ///   - message: Message to be displayed in the banner
+    ///   - title: Title message to be displayed in the banner
+    ///   - message: Subtitle message to be displayed in the banner
     ///   - animated: Pass true to animate the presentation; otherwise, pass false
     ///   - sender: The object that initiated the request
-    public override func displayErrorMessage(_ message: String, animated: Bool, sender: Any?) {
+    public override func displayErrorWith(title: String, message: String?, animated: Bool, sender: Any?) {
+        displayingNoticeView.titleLabel.text = title
         displayingNoticeView.detailLabel.text = message
         view.insertSubview(self.displayingNoticeView, belowSubview: navigationBar)
         
@@ -409,9 +411,11 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
                 paymentDelegate.paymentCreatorController(self, didFailWithError: error)
             }
         } else if let error = error as? OmiseError {
-            displayErrorMessage(paymentSourceCreatorFlowSession.localizedErrorMessageFor(error), animated: true, sender: self)
+            displayErrorWith(title: error.bannerErrorDescription, message: error.bannerErrorRecoverySuggestion, animated: true, sender: self)
+        } else if let error = error as? LocalizedError {
+            displayErrorWith(title: error.localizedDescription, message: error.recoverySuggestion, animated: true, sender: self)
         } else {
-            displayErrorMessage(error.localizedDescription, animated: true, sender: self)
+            displayErrorWith(title: error.localizedDescription, message: nil, animated: true, sender: self)
         }
     }
     
@@ -472,6 +476,7 @@ extension PaymentCreatorController {
 class NoticeView: UIView {
     
     @IBOutlet var iconImageView: UIImageView!
+    @IBOutlet var titleLabel: UILabel!
     @IBOutlet var detailLabel: UILabel!
-
+  
 }

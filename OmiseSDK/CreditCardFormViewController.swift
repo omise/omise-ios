@@ -151,8 +151,10 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     @IBOutlet var cardSecurityCodeErrorLabel: UILabel!
     
     @IBOutlet var errorBannerView: UIView!
+    @IBOutlet var errorTitleLabel: UILabel!
     @IBOutlet var errorMessageLabel: UILabel!
     @IBOutlet var hidingErrorBannerConstraint: NSLayoutConstraint!
+    @IBOutlet var emptyErrorMessageConstraint: NSLayoutConstraint!
     @IBOutlet var cardBrandIconImageView: UIImageView!
     @IBOutlet var cvvInfoButton: UIButton!
     
@@ -465,10 +467,63 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             os_log("Credit Card Form's Request failed %{private}@, automatically error handling turned on.", log: uiLogObject, type: .info, error.localizedDescription)
         }
         
+        displayError(error)
         hasErrorMessage = true
-        displayErrorMessage(error.localizedDescription, animated: true, sender: self)
     }
     
+    private func displayError(_ error: Error) {
+        let targetController = targetViewController(forAction: #selector(UIViewController.displayErrorWith(title:message:animated:sender:)), sender: self)
+        if let targetController = targetController, targetController !== self {
+            if let error = error as? OmiseError {
+                targetController.displayErrorWith(title: error.bannerErrorDescription, message: error.bannerErrorRecoverySuggestion, animated: true, sender: self)
+            } else if let error = error as? LocalizedError {
+                targetController.displayErrorWith(title: error.localizedDescription, message: error.recoverySuggestion, animated: true, sender: self)
+            } else {
+                targetController.displayErrorWith(title: error.localizedDescription, message: nil, animated: true, sender: self)
+            }
+        } else {
+            let errorTitle: String
+            let errorMessage: String?
+            if let error = error as? OmiseError {
+                errorTitle = error.bannerErrorDescription
+                errorMessage = error.bannerErrorRecoverySuggestion
+            } else if let error = error as? LocalizedError {
+                errorTitle = error.localizedDescription
+                errorMessage = error.recoverySuggestion
+            } else {
+                errorTitle = error.localizedDescription
+                errorMessage = nil
+            }
+            
+            errorTitleLabel.text = errorTitle
+            errorMessageLabel.text = errorMessage
+            
+            errorMessageLabel.isHidden = errorMessage == nil
+            emptyErrorMessageConstraint.priority = errorMessage == nil ? UILayoutPriority(999) : UILayoutPriority(1)
+            errorBannerView.layoutIfNeeded()
+            
+            setShowsErrorBanner(true)
+        }
+    }
+    
+    private func setShowsErrorBanner(_ showsErrorBanner: Bool, animated: Bool = true) {
+        hidingErrorBannerConstraint.isActive = !showsErrorBanner
+        
+        let animationBlock = {
+            self.errorBannerView.alpha = showsErrorBanner ? 1.0 : 0.0
+            self.contentView.layoutIfNeeded()
+        }
+        
+        if animated {
+            UIView.animate(withDuration: TimeInterval(NavigationControllerHideShowBarDuration), delay: 0.0, options: [.layoutSubviews], animations: animationBlock)
+        } else {
+            animationBlock()
+        }
+    }
+    
+    @IBAction func dismissErrorBanner(_ sender: Any) {
+        setShowsErrorBanner(false)
+    }
     
     private func updateSupplementaryUI() {
         let valid = isInputDataValid
