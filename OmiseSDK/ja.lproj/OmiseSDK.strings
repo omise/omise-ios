@@ -52,9 +52,6 @@
 /* Class = "UINavigationItem"; title = "Convenience Store"; ObjectID = "GZJ-TR-erg"; */
 "GZJ-TR-erg.title" = "コンビニエンスストア";
 
-/* Class = "UILabel"; text = "-"; ObjectID = "iCZ-PD-PIK"; */
-"iCZ-PD-PIK.text" = "-";
-
 /* Class = "UILabel"; text = "Siam Commercial Bank"; ObjectID = "iiE-Ff-NCh"; */
 "iiE-Ff-NCh.text" = "サイアム・コマーシャル銀行 ";
 
@@ -117,9 +114,6 @@
 
 /* Class = "UILabel"; text = "Kasikorn"; ObjectID = "yHg-il-ZhG"; */
 "yHg-il-ZhG.text" = "カシコン";
-
-/* Class = "UILabel"; text = "-"; ObjectID = "z0d-Kb-PLG"; */
-"z0d-Kb-PLG.text" = "-";
 
 /* Class = "UILabel"; text = "Installments"; ObjectID = "zli-mo-sUQ"; */
 "zli-mo-sUQ.text" = "分割払い";
