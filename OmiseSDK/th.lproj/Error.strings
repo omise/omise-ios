@@ -1,24 +1,150 @@
-/* An error text displayed when the card holder name is empty */
-"credit-card-form.card-holder-name-field.empty-text.error.text" = "กรุณากรอกชื่อบนบัตร";
-
 /* An error text displayed when the card holder name is invalid */
-"credit-card-form.card-holder-name-field.invalid-data.error.text" = "ชื่อบนบัตรไม่ถูกต้อง";
-
-/* An error text displayed when the credit card number is empty */
-"credit-card-form.card-number-field.empty-text.error.text" = "กรุณากรอกหมายเลขบัตร";
+"credit-card-form.card-holder-name-field.invalid-data.error.text" = "ชื่อผู้ถือบัตรไม่ถูกต้อง";
 
 /* An error text displayed when the credit card number is invalid */
 "credit-card-form.card-number-field.invalid-data.error.text" = "หมายเลขบัตรไม่ถูกต้อง";
 
-/* An error text displayed when the expiry date is empty */
-"credit-card-form.expiry-date-field.empty-text.error.text" = "กรุณากรอกวันหมดอายุ";
-
 /* An error text displayed when the expiry date is invalid */
 "credit-card-form.expiry-date-field.invalid-data.error.text" = "วันหมดอายุของบัตรไม่ถูกต้อง";
 
-/* An error text displayed when the security code is empty */
-"credit-card-form.security-code-field.empty-text.error.text" = "กรุณากรอก CVV";
-
 /* An error text displayed when the security code is invalid */
-"credit-card-form.security-code-field.invalid-data.error.text" = "CVV ไม่ถุกต้อง";
+"credit-card-form.security-code-field.invalid-data.error.text" = "หมายเลข CVV ไม่ถูกต้อง";
+
+/* An error text in the E-Context information input displayed when the email is invalid */
+"econtext-info-form.email-name-field.invalid-data.error.text" = "อีเมล์ไม่ถูกต้อง";
+
+/* An error text in the E-Context information input displayed when the customer name is invalid */
+"econtext-info-form.full-name-field.invalid-data.error.text" = "ชื่อผู้ซื้อไม่ถูกต้อง";
+
+/* An error text in the E-Context information input displayed when the phone number is invalid */
+"econtext-info-form.phone-number-field.invalid-data.error.text" = "หมายเลขโทรศัพท์ไม่ถูกต้อง";
+
+/* A default descriptive message representing an `Authentication failure` error from the backend which a merchant may show this message to their user */
+"error.api.authentication_failure.message" = "การยืนยันตัวตนของร้านค้าไม่ถูกต้อง";
+
+/* A default descriptive suggestion message to recovery from the `Authentication failure` error from the backend which a merchant may show this message to their user */
+"error.api.authentication_failure.recovery-suggestion" = "กรุณาติดต่อเจ้าหน้าที่ของร้านค้า";
+
+/* A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.recovery-suggestion" = "กรุณาสร้าง source ด้วยจำนวนที่น้อยลง";
+
+/* A default descriptive message representing an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.message" = "ยอดเงินมีจำนวนน้อยกว่าที่กำหนดไว้";
+
+/* A default descriptive message representing an `Bad request` error with `empty-name` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.empty-name.message" = "ไม่มีข้อมูลชื่อผู้ซื้อ";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-currency` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-currency.message" = "สกุลเงินไม่ถูกต้อง";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-currency` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-currency.recovery-suggestion" = "Bad request";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-email` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-email.message" = "อีเมล์ผู้ซื้อไม่ถูกต้อง";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-email` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-email.recovery-suggestion" = "กรุณาตรวจสอบอีเมล์ผู้ซื้ออีกครั้ง";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-name` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-name.message" = "ชื่อผู้ซื้อไม่ถูกต้อง";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-name` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-name.recovery-suggestion" = "กรุณาตรวจสอบชื่อและตัวสะกดทั้งหมดอีกครั้ง";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-phone-number` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-phone-number.message" = "หมายเลขโทรศัพท์ผู้ซื้อไม่ถูกต้อง";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-phone-number` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-phone-number.recovery-suggestion" = "กรุณาตรวจสอบหมายเลขโทรศัพท์ผู้ซื้ออีกครั้ง";
+
+/* A default descriptive message representing an `Bad request` error with `name-is-too-long.without-valid-length` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.name-is-too-long.without-valid-length.message" = "ชื่อผู้ซื้อยาวเกินจำนวนตัวอักษรที่กำหนด";
+
+/* A default descriptive message representing an `Bad request` error with `other` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.other.message" = "Bad request: %@";
+
+/* A default descriptive message representing an `Bad request` error with `type-not-supported` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.type-not-supported.recovery-suggestion" = "กรุณาแก้ไข source type";
+
+/* A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Invalid card holder name` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.empty-card-holder-name.recovery-suggestion" = "กรุณาตรวจสอบความถูกต้องของชื่อและตัวสะกดทั้งหมดอีกครั้ง";
+
+/* A default descriptive message representing an `Invalid card data` error with the `Invalid card holder name` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.empty-card-holderName.message" = "ชื่อผู้ถือบัตรไม่ถูกต้อง";
+
+/* A default descriptive message representing an `Invalid card data` error with the `Invalid card number` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.invalid-card-number.message" = "หมายเลขบัตรไม่ถูกต้อง";
+
+/* A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Invalid card number` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.invalid-card-number.recovery-suggestion" = "กรุณาตรวจสอบความถูกต้องของหมายเลขบัตรอีกครั้ง";
+
+/* A default descriptive message representing an `Invalid card data` error with the `Invalid card expiration date` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.invalid-expiration-date.message" = "วันหมดอายุบัตรไม่ถูกต้อง";
+
+/* A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Invalid card expiration date` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.invalid-expiration-date.recovery-suggestion" = "กรุณาตรวจสอบความถูกต้องของวันหมดอายุบัตรอีกครั้ง";
+
+/* A default descriptive message representing an `Invalid card data` error with the `Unsupported card brand` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.unsupported-brand.message" = "บัตรเครดิตไม่รองรับ";
+
+/* A default descriptive message representing an `Service not found` error from the backend which a merchant may show this message to their user */
+"error.api.service_not_found.message" = "ไม่พบบริการ";
+
+/* A default descriptive suggestion message to recovery from the `Service not found` error from the backend which a merchant may show this message to their user */
+"error.api.service_not_found.recovery-suggestion" = "กรุณาติดต่อเจ้าหน้าที่ของร้านค้า";
+
+/* A descriptive message representing an `Invalid error data in the error response` error during the operation in the client */
+"error.unexpected.http-error-response-with-invalid-data.message" = "ผลลัพธ์แสดงว่าคำสั่งไม่สำเร็จและพบว่าข้อมูลชี้แจงข้อขัดข้องไม่ถูกต้อง";
+
+/* A descriptive message representing an `No error data in the error response` error during the operation in the client */
+"error.unexpected.http-error-with-no-data.message" = "ผลลัพธ์แสดงว่าคำสั่งไม่สำเร็จและไม่พบข้อมูลชี้แจงข้อขัดข้อง";
+
+/* A descriptive message representing an `Invalid data in the success response` error during the operation in the client */
+"error.unexpected.http-succeess-with-invalid-data.message" = "ผลลัพธ์แสดงว่าคำสั่งสำเร็จ แต่พบว่าข้อมูลชี้แจงข้อขัดข้องไม่ถูกต้อง";
+
+/* A descriptive message representing an `No data in the success response` error during the operation in the client */
+"error.unexpected.http-succeess-with-no-data.message" = "ผลลัพธ์แสดงว่าคำสั่งสำเร็จ แต่ไม่พบข้อมูล";
+
+/* A descriptive message representing an `No error nor response` error during the operation in the client */
+"error.unexpected.no-error-norresponse.message" = "ไม่พบข้อขัดข้องหรือผลลัพธ์";
+
+/* A descriptive message representing an `Unrecognized/unsupported HTTP status code` error during the operation in the client */
+"error.unexpected.unrecognized-HTTP-status-code.message" = "ไม่พบข้อมูล/ไม่รองรับรหัสสถานะ HTTP ";
+
+/* The displaying message showing in the error banner an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.message" = "ยอดมีจำนวนมากกว่าที่กำหนดไว้ ซึ่งต้องไม่เกิน %@";
+
+/* The displaying message showing in the error banner an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.message" = "ยอดเงินมีจำนวนมากกว่าที่กำหนดไว้";
+
+/* The displaying message showing in the error banner an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.message" = "ยอดมีจำนวนน้อยกว่าที่กำหนดไว้ ซึ่งต้องไม่ต่ำกว่า %@";
+
+/* The displaying message showing in the error banner an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.message" = "ยอดเงินมีจำนวนน้อยกว่าที่กำหนดไว้";
+
+/* The displaying message showing in the error banner an `Bad request` error with `currency-not-supported` from the backend has occurred */
+"payment-creator.error.api.bad_request.currency-not-supported.message" = "บัญชีผู้ใช้นี้ไม่รองรับสกุลเงินดังกล่าว";
+
+/* The displaying message showing in the error banner an `Bad request` error with `empty-name` from the backend has occurred */
+"payment-creator.error.api.bad_request.empty-name.message" = "ไม่มีข้อมูลชื่อผู้ซื้อ";
+
+/* The displaying message showing in the error banner an `Bad request` error with `invalid-currency` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-currency.message" = "สกุลเงินไม่ถูกต้อง";
+
+/* The displaying message showing in the error banner an `Bad request` error with `invalid-email` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-email.message" = "อีเมล์ผู้ซื้อไม่ถูกต้อง";
+
+/* The displaying message showing in the error banner an `Bad request` error with `invalid-name` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-name.message" = "ชื่อผู้ซื้อไม่ถูกต้อง";
+
+/* The displaying message showing in the error banner an `Bad request` error with `invalid-phone-number` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-phone-number.message" = "หมายเลขโทรศัพท์ผู้ซื้อไม่ถูกต้อง";
+
+/* The displaying message showing in the error banner an `Bad request` error with `other` from the backend has occurred */
+"payment-creator.error.api.bad_request.other.message" = "พบข้อขัดข้อง";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator in the built-in Payment Creator when there is the `invalid-expiration-date` API error occured */
+"payment-creator.error.api.invalid_card.invalid-expiration-date.recovery-suggestion" = "กรุณาตรวจสอบความถูกต้องของวันหมดอายุบัตรอีกครั้ง";
 

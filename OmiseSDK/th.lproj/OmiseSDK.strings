@@ -8,7 +8,7 @@
 "5nI-An-cjo.title" = "ผ่อนชำระ";
 
 /* Class = "UINavigationItem"; title = "Internet Banking"; ObjectID = "6eY-CH-eim"; */
-"6eY-CH-eim.title" = "อินเทอร์เน็ตแบงก์กิง";
+"6eY-CH-eim.title" = "อินเทอร์เน็ตแบงก์กิ้ง";
 
 /* Class = "UILabel"; text = "-"; ObjectID = "7Ox-gC-WRb"; */
 "7Ox-gC-WRb.text" = "-";
@@ -18,9 +18,6 @@
 
 /* Class = "UILabel"; text = "-"; ObjectID = "134-RW-VCo"; */
 "134-RW-VCo.text" = "-";
-
-/* Class = "UILabel"; text = "Net bank"; ObjectID = "cSc-cs-8vb"; */
-"cSc-cs-8vb.text" = "เน็ตแบงก์";
 
 /* Class = "UILabel"; text = "Pay-easy"; ObjectID = "A0v-NW-KLo"; */
 "A0v-NW-KLo.text" = "เพย์อีซี";
@@ -37,8 +34,8 @@
 /* Class = "UILabel"; text = "Card number"; ObjectID = "CKR-Pl-Ix5"; */
 "CKR-Pl-Ix5.text" = "หมายเลขบัตร";
 
-/* Class = "UILabel"; text = "-"; ObjectID = "Cmp-y6-FKF"; */
-"Cmp-y6-FKF.text" = "-";
+/* Class = "UILabel"; text = "Net bank"; ObjectID = "cSc-cs-8vb"; */
+"cSc-cs-8vb.text" = "เน็ตแบงก์";
 
 /* Class = "UILabel"; text = "KTC"; ObjectID = "d1t-A5-fA9"; */
 "d1t-A5-fA9.text" = "เคทีซี";
@@ -51,9 +48,6 @@
 
 /* Class = "UINavigationItem"; title = "Convenience Store"; ObjectID = "GZJ-TR-erg"; */
 "GZJ-TR-erg.title" = "ร้านสะดวกซื้อ";
-
-/* Class = "UILabel"; text = "-"; ObjectID = "iCZ-PD-PIK"; */
-"iCZ-PD-PIK.text" = "-";
 
 /* Class = "UILabel"; text = "Siam Commercial Bank"; ObjectID = "iiE-Ff-NCh"; */
 "iiE-Ff-NCh.text" = "ธนาคารไทยพาณิชย์";
@@ -73,8 +67,14 @@
 /* Class = "UINavigationItem"; title = "Payment Methods"; ObjectID = "opb-54-CDJ"; */
 "opb-54-CDJ.title" = "ช่องทางชำระเงิน";
 
+/* Class = "UITextField"; placeholder = "MM/YY"; ObjectID = "Par-EA-T3D"; */
+"Par-EA-T3D.placeholder" = "ดด/ปป";
+
+/* Class = "UITextField"; placeholder = "1234567890123456"; ObjectID = "PBr-uW-pM8"; */
+"PBr-uW-pM8.placeholder" = "";
+
 /* Class = "UILabel"; text = "Internet Banking"; ObjectID = "pFQ-Pc-BCP"; */
-"pFQ-Pc-BCP.text" = "อินเทอร์เน็ตแบงก์กิง";
+"pFQ-Pc-BCP.text" = "อินเทอร์เน็ตแบงก์กิ้ง";
 
 /* Class = "UILabel"; text = "3 Months"; ObjectID = "Pqt-3W-dy1"; */
 "Pqt-3W-dy1.text" = "3 เดือน";
@@ -98,7 +98,7 @@
 "V59-D4-sqA.text" = "ธนาคารกรุงศรี";
 
 /* Class = "UILabel"; text = "Security code"; ObjectID = "vMc-kJ-Ncs"; */
-"vMc-kJ-Ncs.text" = "";
+"vMc-kJ-Ncs.text" = "รหัสความปลอดภัย";
 
 /* Class = "UILabel"; text = "-"; ObjectID = "ws5-ue-ec8"; */
 "ws5-ue-ec8.text" = "-";
@@ -109,14 +109,23 @@
 /* Class = "UILabel"; text = "Bangkok Bank"; ObjectID = "XnR-SW-SnL"; */
 "XnR-SW-SnL.text" = "ธนาคารกรุงเทพ";
 
+/* Class = "UITextField"; placeholder = "749"; ObjectID = "Y1l-QK-aPc"; */
+"Y1l-QK-aPc.placeholder" = "749";
+
 /* Class = "UINavigationItem"; title = "Authorizing Payment"; ObjectID = "YAC-7f-Gdj"; */
 "YAC-7f-Gdj.title" = "กำลังอนุมัติวงเงิน";
+
+/* Class = "UILabel"; text = "3-4 digit number on the back of your card"; ObjectID = "yfq-Iv-IBe"; */
+"yfq-Iv-IBe.text" = "หมายเลข CVV ด้านหลังบัตร";
 
 /* Class = "UILabel"; text = "Kasikorn"; ObjectID = "yHg-il-ZhG"; */
 "yHg-il-ZhG.text" = "ธนาคารกสิกรไทย";
 
-/* Class = "UILabel"; text = "-"; ObjectID = "z0d-Kb-PLG"; */
-"z0d-Kb-PLG.text" = "-";
+/* Class = "UILabel"; text = "-"; ObjectID = "yQ7-lv-7H1"; */
+"yQ7-lv-7H1.text" = "-";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "zj7-kT-7a4"; */
+"zj7-kT-7a4.text" = "-";
 
 /* Class = "UILabel"; text = "Installments"; ObjectID = "zli-mo-sUQ"; */
 "zli-mo-sUQ.text" = "ผ่อนชำระ";
