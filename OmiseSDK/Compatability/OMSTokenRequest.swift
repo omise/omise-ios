@@ -8,6 +8,7 @@ import Foundation
 }
 
 
+/// Request object for describing a request to create a new token with the creating parameters
 @objc(OMSTokenRequest) public class __OMSTokenRequest: NSObject {
     
     /// Card holder's full name.

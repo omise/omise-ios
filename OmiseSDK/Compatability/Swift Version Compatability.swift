@@ -3,7 +3,7 @@ import UIKit
 
 
 #if swift(>=4.2)
-public typealias ControlState = UIControl.State
+typealias ControlState = UIControl.State
 typealias AttributedStringKey = NSAttributedString.Key
 typealias ViewAnimationOptions = UIView.AnimationOptions
 typealias TableViewCellStyle = UITableViewCell.CellStyle
@@ -26,7 +26,7 @@ let NotificationKeyboardFrameBeginUserInfoKey = UIResponder.keyboardFrameBeginUs
 
 let AccessibilityNotificationAnnouncement = UIAccessibility.Notification.announcement
 #else
-public typealias ControlState = UIControlState
+typealias ControlState = UIControlState
 typealias AttributedStringKey = NSAttributedStringKey
 typealias ViewAnimationOptions = UIViewAnimationOptions
 typealias TableViewCellStyle = UITableViewCellStyle

@@ -474,9 +474,9 @@
 				8A739D0820DA4DC500217CAB /* OMSConstants.m */,
 				8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */,
 				2220F1A31D0FEE85008CD89F /* OmiseCard.swift */,
-				8A01F79020D91356003FC11E /* OMSSourceRequest.swift */,
 				8A01F79320D914A4003FC11E /* OmiseSource.swift */,
 				2220F1A71D0FEE85008CD89F /* OmiseToken.swift */,
+				8A01F79020D91356003FC11E /* OMSSourceRequest.swift */,
 				8A01F78D20D91091003FC11E /* OMSTokenRequest.swift */,
 			);
 			name = "Objective-C";

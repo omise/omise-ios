@@ -1,8 +1,26 @@
 import Foundation
 
 
+/// Brand of the Card Network
 @objc(OMSCardBrand)
 public enum CardBrand: Int, CustomStringConvertible {
+    
+    /// VISA card newtwork brand
+    case visa
+    /// Master Card card newtwork brand
+    case masterCard
+    /// jcb card newtwork brand
+    case jcb
+    /// AMEX card newtwork brand
+    case amex
+    /// Diners card newtwork brand
+    case diners
+    /// Laser card newtwork brand
+    case laser
+    /// Maestro card newtwork brand
+    case maestro
+    /// Discover card newtwork brand
+    case discover
     
     public static let all: [CardBrand] = [
         visa,
@@ -14,15 +32,6 @@ public enum CardBrand: Int, CustomStringConvertible {
         maestro,
         discover,
     ]
-    
-    case visa
-    case masterCard
-    case jcb
-    case amex
-    case diners
-    case laser
-    case maestro
-    case discover
     
     /// Regular expression pattern that can detect cards issued by the brand.
     public var pattern: String {

@@ -1,9 +1,16 @@
 import Foundation
 
+
+/// Default error domain for the Omise Error
 public let OmiseErrorDomain = "co.omise"
 
 let sourceParameterCodingsUserInfoKey = CodingUserInfoKey.init(rawValue: "sourceParameter")!
 
+/// Coding Key for decoding the Error data returned in the Omise API
+///
+/// - location: URL location for the error information page
+/// - code: Omise Error Code
+/// - message: Error message
 public enum ErrorUserInfoKey: String, CodingKey {
     case location = "location"
     case code = "code"
@@ -104,6 +111,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
         case other(String)
     }
     
+    /// A localized message describing what error occurred.
     public var errorDescription: String? {
         switch self {
         case .api(code: let errorCode, message: let message, location: _):
@@ -182,6 +190,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
         }
     }
     
+    /// A localized message describing how one might recover from the failure.
     public var recoverySuggestion: String? {
         let recoverySuggestionMessage: String?
         switch self {
@@ -259,6 +268,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
         return recoverySuggestionMessage.isNilOrEmpty ? nil : recoverySuggestionMessage
     }
     
+    /// Storage for values or objects related to this notification.
     public var errorUserInfo: [String : Any] {
         switch self {
         case let .api(code: code, message: message, location: location):

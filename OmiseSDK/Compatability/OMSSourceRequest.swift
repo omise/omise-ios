@@ -8,18 +8,23 @@ import Foundation
 }
 
 
+/// Request object for describing a request to create a new source with the creating parameters
 @objc(OMSSourceRequest) public class __OMSSourceRequest: NSObject {
     
     let request: Request<Source>
     
+    
+    /// The source type that is used to create a new Source
     @objc public var type: String {
         return request.parameter.paymentInformation.sourceType
     }
     
+    /// The amount of the creating Source
     @objc public var amount: Int64 {
         return request.parameter.amount
     }
     
+    /// The currench of the creating Source
     @objc public var currency: String {
         return request.parameter.currency.code
     }
