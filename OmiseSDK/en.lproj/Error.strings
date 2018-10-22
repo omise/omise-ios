@@ -157,6 +157,9 @@
 /* A default descriptive suggestion message to recovery from the `Invalid data in the success response` error during the operation in the client which a merchant may show this message to their user */
 "error.unexpected.http-succeess-with-invalid-data.recovery-suggestion" = "Please try again later. If the same problem persists please contact customer support.";
 
+/* A default descriptive suggestion message to recovery from the `Invalid data in the success response` error during the operation in the client which a merchant may show this message to their user */
+"error.unexpected.unrecognized-HTTP-status-code.recovery-suggestion" = "Please try again later. If the same problem persists please contact customer support.";
+
 /* A descriptive message representing an `No data in the success response` error during the operation in the client */
 "error.unexpected.http-succeess-with-no-data.message" = "No data in the success response";
 
@@ -188,13 +191,13 @@
 "payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.message" = "Amount is less than the valid amount of %@";
 
 /* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend has occurred */
-"payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.recovery-suggestion" = "The payment amount is too low. Please contact the merchant.";
+"payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.recovery-suggestion" = "The payment amount is too low. Please contact the merchant";
 
 /* The displaying message showing in the error banner an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend has occurred */
 "payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.message" = "Amount is less than the valid amount";
 
 /* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend has occurred */
-"payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.recovery-suggestion" = "The payment amount is too low. Please contact the merchant.";
+"payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.recovery-suggestion" = "The payment amount is too low. Please contact the merchant";
 
 /* The displaying message showing in the error banner an `Bad request` error with `currency-not-supported` from the backend has occurred */
 "payment-creator.error.api.bad_request.currency-not-supported.message" = "The currency is not supported for this account";

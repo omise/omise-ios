@@ -410,7 +410,7 @@ extension OmiseError {
                 return NSLocalizedString(
                     "payment-creator.error.api.unknown.message",
                     tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                    value: ">An unknown error occured",
+                    value: "An unknown error occured",
                     comment: "The displaying message showing in the error banner when there is an `unknown` API error occured"
                 )
             }
@@ -418,7 +418,7 @@ extension OmiseError {
             return NSLocalizedString(
                 "payment-creator.error.unexpected.message",
                 tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                value: ">An unexpected error occurred",
+                value: "An unexpected error occurred",
                 comment: "The displaying message showing in the error banner when there is the `unexpected` error occured"
             )
         }
@@ -473,7 +473,7 @@ extension OmiseError {
                         let preferredErrorDescriptionFormat = NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.recovery-suggestion",
                             tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                            value: "",
+                            value: "The payment amount is too low. Please contact the merchant",
                             comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend has occurred"
                         )
                         let formatter = NumberFormatter.makeAmountFormatter(for: currency)
@@ -482,7 +482,7 @@ extension OmiseError {
                         return NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.recovery-suggestion",
                             tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                            value: "",
+                            value: "The payment amount is too low. Please contact the merchant",
                             comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend has occurred"
                         )
                     }
@@ -491,7 +491,7 @@ extension OmiseError {
                         let preferredErrorDescriptionFormat = NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.recovery-suggestion",
                             tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                            value: "",
+                            value: "The payment amount is too high. Please contact the merchant.",
                             comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend has occurred"
                         )
                         let formatter = NumberFormatter.makeAmountFormatter(for: currency)
@@ -500,7 +500,7 @@ extension OmiseError {
                         return NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.recovery-suggestion",
                             tableName: "Error", bundle: Bundle.omiseSDKBundle,
-                            value: "",
+                            value: "The payment amount is too high. Please contact the merchant.",
                             comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend has occurred"
                         )
                     }
