@@ -3,7 +3,7 @@ import os
 
 
 
-enum PaymentChooserOption: StaticElementIterable, Equatable {
+enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvertible {
     case creditCard
     case installment
     case internetBanking
@@ -25,6 +25,27 @@ enum PaymentChooserOption: StaticElementIterable, Equatable {
             .alipay,
         ]
     }
+    
+    var description: String {
+        switch self {
+        case .creditCard:
+            return "Credit Card"
+        case .installment:
+            return "Installment"
+        case .internetBanking:
+            return "InternetBanking"
+        case .tescoLotus:
+            return "Tesco Lotus"
+        case .conbini:
+            return "Conbini"
+        case .payEasy:
+            return "PayEasy"
+        case .netBanking:
+            return "NetBanking"
+        case .alipay:
+            return "Alipay"
+        }
+    }
 }
 
 
@@ -33,25 +54,14 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     
     var flowSession: PaymentCreatorFlowSession?
     
-    @objc var showsCreditCardPayment: Bool = true
+    @objc var showsCreditCardPayment: Bool = true {
+        didSet {
+            updateShowingValues()
+        }
+    }
     @objc var allowedPaymentMethods: [OMSSourceTypeValue] = [] {
         didSet {
-            showingValues = PaymentChooserOption.allCases.filter({
-                switch $0 {
-                case .creditCard:
-                    return showsCreditCardPayment
-                case .installment:
-                    return allowedPaymentMethods.hasInstallmentSource
-                case .internetBanking:
-                    return allowedPaymentMethods.hasInternetBankingSource
-                case .tescoLotus:
-                    return allowedPaymentMethods.hasTescoLotusSource
-                case .conbini, .payEasy, .netBanking:
-                    return allowedPaymentMethods.hasEContextSource
-                case .alipay:
-                    return allowedPaymentMethods.hasAlipaySource
-                }
-            })
+            updateShowingValues()
         }
     }
     
@@ -154,7 +164,12 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         tableView.deselectRow(at: indexPath, animated: true)
         let payment: PaymentInformation
         
-        switch element(forUIIndexPath: indexPath) {
+        let selectedType = element(forUIIndexPath: indexPath)
+        
+        if #available(iOS 10, *) {
+            os_log("Payment Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedType.description)
+        }
+        switch selectedType {
         case .alipay:
             payment = .alipay
         case .tescoLotus:
@@ -212,6 +227,29 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     }
     
     private func applySecondaryColor() {}
+    
+    private func updateShowingValues() {
+        showingValues = PaymentChooserOption.allCases.filter({
+            switch $0 {
+            case .creditCard:
+                return showsCreditCardPayment
+            case .installment:
+                return allowedPaymentMethods.hasInstallmentSource
+            case .internetBanking:
+                return allowedPaymentMethods.hasInternetBankingSource
+            case .tescoLotus:
+                return allowedPaymentMethods.hasTescoLotusSource
+            case .conbini, .payEasy, .netBanking:
+                return allowedPaymentMethods.hasEContextSource
+            case .alipay:
+                return allowedPaymentMethods.hasAlipaySource
+            }
+        })
+        
+        if #available(iOS 10, *) {
+            os_log("Payment Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
+        }
+    }
     
     @IBAction func requestToClose(_ sender: Any) {
         flowSession?.requestToCancel()

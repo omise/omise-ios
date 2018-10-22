@@ -70,7 +70,7 @@ import Foundation
         
         super.delegate = self
         
-        if #available(iOS 10.0, *) {
+        if #available(iOSApplicationExtension 10.0, *) {
             textContentType = .creditCardNumber
         }
     }

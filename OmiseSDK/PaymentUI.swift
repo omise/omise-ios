@@ -29,13 +29,13 @@ internal class PaymentCreatorFlowSession {
         let waringMessageMessage: String
         
         if self.client == nil {
-            if #available(iOS 10.0, *) {
+            if #available(iOSApplicationExtension 10.0, *) {
                 os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.client ?? "")
             }
             waringMessageTitle = "Missing public key information."
             waringMessageMessage = "Please set the public key before request token or source."
         } else if self.paymentAmount == nil || self.paymentCurrency == nil {
-            if #available(iOS 10.0, *) {
+            if #available(iOSApplicationExtension 10.0, *) {
                 os_log("Missing payment information - %{private}d %{private}@", log: uiLogObject, type: .error, self.paymentAmount ?? 0, self.paymentCurrency?.code ?? "-")
             }
             waringMessageTitle = "Missing payment information."
@@ -59,6 +59,10 @@ internal class PaymentCreatorFlowSession {
                 return
         }
         
+        if #available(iOSApplicationExtension 10.0, *) {
+            os_log("Request to create a new source", log: uiLogObject, type: .info)
+        }
+        
         delegate?.paymentCreatorFlowSessionWillCreateSource(self)
         client.sendRequest(Request<Source>(sourceType: sourceType, amount: amount, currency: currency)) { (result) in
             defer {
@@ -66,6 +70,7 @@ internal class PaymentCreatorFlowSession {
                     completionHandler?(result)
                 }
             }
+            
             switch result {
             case .success(let source):
                 self.delegate?.paymentCreatorFlowSession(self, didCreatedSource: source)

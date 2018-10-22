@@ -262,7 +262,7 @@ extension PaymentInformation {
 }
 
 
-extension PaymentInformation.InternetBanking : StaticElementIterable {
+extension PaymentInformation.InternetBanking : StaticElementIterable, CustomStringConvertible {
     public typealias AllCases = Array<PaymentInformation.InternetBanking>
     public static var allCases: PaymentInformation.InternetBanking.AllCases = [
         .bay, .ktb, .scb, .bbl
@@ -281,6 +281,21 @@ extension PaymentInformation.InternetBanking : StaticElementIterable {
             return OMSSourceTypeValue.internetBankingBBL.rawValue
         case .other(let value):
             return PaymentInformation.InternetBanking.paymentMethodTypePrefix + value
+        }
+    }
+    
+    public var description: String {
+        switch self {
+        case .bay:
+            return "BAY"
+        case .ktb:
+            return "KTB"
+        case .scb:
+            return "SCB"
+        case .bbl:
+            return "BBL"
+        case .other(let value):
+            return value
         }
     }
     
@@ -373,11 +388,28 @@ extension PaymentInformation.Installment {
     }
 }
 
-extension PaymentInformation.Installment.Brand : StaticElementIterable {
+extension PaymentInformation.Installment.Brand : StaticElementIterable, CustomStringConvertible {
     public typealias AllCases = Array<PaymentInformation.Installment.Brand>
     public static var allCases: PaymentInformation.Installment.Brand.AllCases = [
         .bay, .firstChoice, .bbl, .ktc, .kBank
     ]
+    
+    public var description: String {
+        switch self {
+        case .bay:
+            return "BAY"
+        case .firstChoice:
+            return "First Choice"
+        case .bbl:
+            return "BBL"
+        case .ktc:
+            return "KTC"
+        case .kBank:
+            return "K-Bank"
+        case .other(let value):
+            return value
+        }
+    }
 }
 
 extension PaymentInformation.BillPayment {

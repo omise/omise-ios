@@ -1,8 +1,19 @@
 import UIKit
+import os
+
 
 @objc(OMSInternetBankingSourceChooserViewController)
 class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>, PaymentSourceChooser, PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
+    
+    override var showingValues: [PaymentInformation.InternetBanking] {
+        didSet {
+            if #available(iOSApplicationExtension 10.0, *) {
+                os_log("Internet Banking Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
+            }
+        }
+    }
+    
     
     @IBOutlet var internetBankingNameLabels: [UILabel]!
     
@@ -53,6 +64,10 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
         let bank = element(forUIIndexPath: indexPath)
+        
+        if #available(iOSApplicationExtension 10.0, *) {
+            os_log("Internet Banking Chooser: %{private}@ was selected", log: uiLogObject, type: .info, bank.description)
+        }
         
         let oldAccessoryView = cell?.accessoryView
         #if swift(>=4.2)

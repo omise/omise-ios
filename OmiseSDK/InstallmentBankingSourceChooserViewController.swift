@@ -1,11 +1,18 @@
 import UIKit
+import os
+
 
 @objc(OMSInstallmentBankingSourceChooserViewController)
 class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>, PaymentSourceChooser, PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
-    var client: Client?
-    var paymentAmount: Int64?
-    var paymentCurrency: Currency?
+    
+    override var showingValues: [PaymentInformation.Installment.Brand] {
+        didSet {
+            if #available(iOSApplicationExtension 10.0, *) {
+                os_log("Installment Brand Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
+            }
+        }
+    }
     
     @IBOutlet var bankNameLabels: [UILabel]!
     
@@ -57,6 +64,11 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) else {
             return
+        }
+        
+        let selectedBrand = element(forUIIndexPath: indexPath)
+        if #available(iOSApplicationExtension 10.0, *) {
+            os_log("Installment Brand Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedBrand.description)
         }
         
         performSegue(withIdentifier: "GoToInstallmentTermsChooserSegue", sender: cell)
