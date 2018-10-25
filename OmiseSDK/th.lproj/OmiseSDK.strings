@@ -67,11 +67,14 @@
 /* Class = "UINavigationItem"; title = "Payment Methods"; ObjectID = "opb-54-CDJ"; */
 "opb-54-CDJ.title" = "ช่องทางชำระเงิน";
 
+/* Class = "UILabel"; text = "-"; ObjectID = "ozY-Yg-Xy1"; */
+"ozY-Yg-Xy1.text" = "-";
+
 /* Class = "UITextField"; placeholder = "MM/YY"; ObjectID = "Par-EA-T3D"; */
 "Par-EA-T3D.placeholder" = "ดด/ปป";
 
 /* Class = "UITextField"; placeholder = "1234567890123456"; ObjectID = "PBr-uW-pM8"; */
-"PBr-uW-pM8.placeholder" = "";
+"PBr-uW-pM8.placeholder" = "1234567890123456";
 
 /* Class = "UILabel"; text = "Internet Banking"; ObjectID = "pFQ-Pc-BCP"; */
 "pFQ-Pc-BCP.text" = "อินเทอร์เน็ตแบงก์กิ้ง";
