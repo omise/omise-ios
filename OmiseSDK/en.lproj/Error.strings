@@ -157,9 +157,6 @@
 /* A default descriptive suggestion message to recovery from the `Invalid data in the success response` error during the operation in the client which a merchant may show this message to their user */
 "error.unexpected.http-succeess-with-invalid-data.recovery-suggestion" = "Please try again later. If the same problem persists please contact customer support.";
 
-/* A default descriptive suggestion message to recovery from the `Invalid data in the success response` error during the operation in the client which a merchant may show this message to their user */
-"error.unexpected.unrecognized-HTTP-status-code.recovery-suggestion" = "Please try again later. If the same problem persists please contact customer support.";
-
 /* A descriptive message representing an `No data in the success response` error during the operation in the client */
 "error.unexpected.http-succeess-with-no-data.message" = "No data in the success response";
 
@@ -174,6 +171,9 @@
 
 /* A descriptive message representing an `Unrecognized/unsupported HTTP status code` error during the operation in the client */
 "error.unexpected.unrecognized-HTTP-status-code.message" = "Unrecognized/unsupported HTTP status code";
+
+/* A default descriptive suggestion message to recovery from the `Invalid data in the success response` error during the operation in the client which a merchant may show this message to their user */
+"error.unexpected.unrecognized-HTTP-status-code.recovery-suggestion" = "Please try again later. If the same problem persists please contact customer support.";
 
 /* The displaying message showing in the error banner an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend has occurred */
 "payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.message" = "Amount is greater than the valid amount of %@";
@@ -292,8 +292,14 @@
 /* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator when there is the `unexpected` API error occured */
 "payment-creator.error.api.unexpected.recovery-suggestion" = "Please try again later";
 
+/* The displaying message showing in the error banner when there is an `unknown` API error occured */
+"payment-creator.error.api.unknown.message" = "An unknown error occured";
+
 /* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator when there is an `unknown` API error occured */
 "payment-creator.error.api.unknown.recovery-suggestion" = "Please try again later";
+
+/* The displaying message showing in the error banner when there is the `unexpected` error occured */
+"payment-creator.error.unexpected.message" = "An unexpected error occurred";
 
 /* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator when there is the `unexpected` error occured */
 "payment-creator.error.unexpected.recovery-suggestion" = "Please try again later";

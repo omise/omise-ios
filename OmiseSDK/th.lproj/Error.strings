@@ -98,7 +98,7 @@
 "error.api.bad_request.name-is-too-long.without-valid-length.recovery-suggestion" = "กรุณากรอกชื่อผู้ซื้อ";
 
 /* A default descriptive message representing an `Bad request` error with `other` from the backend which a merchant may show this message to their user */
-"error.api.bad_request.other.message" = "Bad request: %@";
+"error.api.bad_request.other.message" = "พบข้อขัดข้อง: %@";
 
 /* A default descriptive message representing an `Bad request` error with `type-not-supported` from the backend which a merchant may show this message to their user */
 "error.api.bad_request.type-not-supported.message" = "บัญชีผู้ใช้นี้ไม่รองรับ source ที่ระบุ";
@@ -172,6 +172,9 @@
 /* A descriptive message representing an `Unrecognized/unsupported HTTP status code` error during the operation in the client */
 "error.unexpected.unrecognized-HTTP-status-code.message" = "ไม่พบข้อมูล/ไม่รองรับรหัสสถานะ HTTP ";
 
+/* A default descriptive suggestion message to recovery from the `Invalid data in the success response` error during the operation in the client which a merchant may show this message to their user */
+"error.unexpected.unrecognized-HTTP-status-code.recovery-suggestion" = "กรุณาลองทำรายการอีกครั้งในภายหลัง หากยังพบข้อขัดข้องเดิมกรุณาติดต่อเจ้าหน้าที่";
+
 /* The displaying message showing in the error banner an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend has occurred */
 "payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.message" = "ยอดมีจำนวนมากกว่าที่กำหนดไว้ ซึ่งต้องไม่เกิน %@";
 
@@ -242,7 +245,7 @@
 "payment-creator.error.api.bad_request.name-is-too-long.without-valid-length.message" = "ชื่อผู้ซื้อยาวเกินจำนวนตัวอักษรที่กำหนด";
 
 /* The displaying message showing in the error banner an `Bad request` error with `other` from the backend has occurred */
-"payment-creator.error.api.bad_request.other.message" = "พบข้อขัดข้อง";
+"payment-creator.error.api.bad_request.other.message" = "พบข้อขัดข้อง: %@";
 
 /* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `other` from the backend has occurred */
 "payment-creator.error.api.bad_request.other.recovery-suggestion" = "กรุณาลองทำรายการอีกครั้งในภายหลัง";
