@@ -66,7 +66,7 @@ import os
     ///   - completionHandler: Compleation Handler closure that will be called when the request task is finished
     /// - Returns: A new Request Task
     @discardableResult
-    public func sendRequest<T: Object>(_ request: Request<T>, completionHandler: Request<T>.Callback?) -> RequestTask<T> {
+    public func send<T: Object>(_ request: Request<T>, completionHandler: Request<T>.Callback?) -> RequestTask<T> {
         let task = requestTask(with: request, completionHandler: completionHandler)
         defer {
             task.resume()

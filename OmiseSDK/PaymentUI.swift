@@ -53,7 +53,7 @@ internal class PaymentCreatorFlowSession {
         return false
     }
     
-    func requestCreateSource(_ sourceType: PaymentInformation, completionHandler: ((RequestResult<Source>) -> Void)?) {
+    func requestCreateSource(_ paymentInformation: PaymentInformation, completionHandler: ((RequestResult<Source>) -> Void)?) {
         guard validateRequiredProperties(), let client = self.client,
             let amount = paymentAmount, let currency = paymentCurrency else {
                 return
@@ -64,7 +64,7 @@ internal class PaymentCreatorFlowSession {
         }
         
         delegate?.paymentCreatorFlowSessionWillCreateSource(self)
-        client.sendRequest(Request<Source>(sourceType: sourceType, amount: amount, currency: currency)) { (result) in
+        client.send(Request<Source>(paymentInformation: paymentInformation, amount: amount, currency: currency)) { (result) in
             defer {
                 DispatchQueue.main.async {
                     completionHandler?(result)

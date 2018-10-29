@@ -4,7 +4,7 @@ import OmiseSDK
 
 @objc(OMSExampleProductDetailViewController)
 class ProductDetailViewController: OMSBaseViewController {
-    private let publicKey = "pkey_test_12345"
+    private let publicKey = "pkey_test_5dhrv65onpi4pl74vvy"
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "PresentCreditFormWithModal" || identifier == "ShowCreditForm"

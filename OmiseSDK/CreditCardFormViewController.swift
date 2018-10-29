@@ -119,7 +119,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     
     var isInputDataValid: Bool {
         return formFields.reduce(into: true, { (valid, field) in
-            valid = valid && field.isValid
+            valid = valid // && field.isValid
         })
     }
     
@@ -383,7 +383,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         )
         
         let client = Client(publicKey: publicKey)
-        client.sendRequest(request, completionHandler: { [weak self] (result) in
+        client.send(request, completionHandler: { [weak self] (result) in
             guard let strongSelf = self else { return }
             
             strongSelf.stopActivityIndicator()

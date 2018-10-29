@@ -17,7 +17,7 @@ extension Client {
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
     @objc(sendTokenRequest:callback:) public func __sendRequest(_ request: __OMSTokenRequest, callback: ((__OmiseToken?, NSError?) -> ())?) {
-        self.sendRequest(request.request, completionHandler: { result in
+        self.send(request.request, completionHandler: { result in
             let token: __OmiseToken?
             let error: NSError?
             
@@ -47,7 +47,7 @@ extension Client {
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
     @objc(sendTokenRequest:delegate:) public func __sendRequest(_ request: __OMSTokenRequest, delegate: OMSTokenRequestDelegate?) {
-        self.sendRequest(request.request, completionHandler: { result in
+        self.send(request.request, completionHandler: { result in
             switch result {
             case let .success(token):
                 delegate?.tokenRequest(request, didSucceedWithToken: __OmiseToken(token: token))
@@ -78,7 +78,7 @@ extension Client {
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
     @objc(sendSourceRequest:callback:) public func __sendRequest(_ request: __OMSSourceRequest, callback: ((__OmiseSource?, NSError?) -> ())?) {
-        self.sendRequest(request.request, completionHandler: { result in
+        self.send(request.request, completionHandler: { result in
             let token: __OmiseSource?
             let error: NSError?
             
@@ -108,7 +108,7 @@ extension Client {
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
     @objc(sendSourceRequest:delegate:) public func __sendRequest(_ request: __OMSSourceRequest, delegate: OMSSourceRequestDelegate?) {
-        self.sendRequest(request.request, completionHandler: { result in
+        self.send(request.request, completionHandler: { result in
             switch result {
             case let .success(token):
                 delegate?.sourceRequest(request, didSucceedWithSource: __OmiseSource(source: token))

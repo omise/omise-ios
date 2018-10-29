@@ -18,7 +18,7 @@ class ClientTestCase: XCTestCase {
     
     func testValidTokenRequestWithCallback() {
         let expectation = self.expectation(description: "Tokenized Reqeust with a valid token data")
-        let task = testClient.sendRequest(ClientTestCase.makeValidTokenRequest()) { (result) in
+        let task = testClient.send(ClientTestCase.makeValidTokenRequest()) { (result) in
             defer { expectation.fulfill() }
             switch result {
             case .success(let token):
@@ -42,7 +42,7 @@ class ClientTestCase: XCTestCase {
     
     func testInvalidTokenRequestWithCallback() {
         let expectation = self.expectation(description: "Tokenized Reqeust with an invalid token data")
-        let task = testClient.sendRequest(ClientTestCase.makeInvalidTokenRequest()) { (result) in
+        let task = testClient.send(ClientTestCase.makeInvalidTokenRequest()) { (result) in
             defer { expectation.fulfill() }
             if case .success = result {
                 XCTFail("Expected failed request")
@@ -61,7 +61,7 @@ class ClientTestCase: XCTestCase {
     
     func testValidSourceRequestWithCallback() {
         let expectation = self.expectation(description: "Source Reqeust with a valid token data")
-        let task = testClient.sendRequest(ClientTestCase.makeValidSourceRequest()) { (result) in
+        let task = testClient.send(ClientTestCase.makeValidSourceRequest()) { (result) in
             defer { expectation.fulfill() }
             switch result {
             case .success(let source):
@@ -86,7 +86,7 @@ class ClientTestCase: XCTestCase {
     
     func testInvalidSourceRequestWithCallback() {
         let expectation = self.expectation(description: "Source Reqeust with an invalid source data")
-        let task = testClient.sendRequest(ClientTestCase.makeInvalidSourceRequest()) { (result) in
+        let task = testClient.send(ClientTestCase.makeInvalidSourceRequest()) { (result) in
             defer { expectation.fulfill() }
             if case .success = result {
                 XCTFail("Expected failed request")

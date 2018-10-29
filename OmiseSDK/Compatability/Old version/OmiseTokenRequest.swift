@@ -84,7 +84,7 @@ public class OmiseTokenRequest: NSObject {
     }
     
     func start(with client: OmiseSDKClient, callback: Callback?) -> URLSessionDataTask? {
-        return client.client.sendRequest(self.request, completionHandler: OmiseTokenRequest.tokenRequestCallback(from: callback)).dataTask
+        return client.client.send(self.request, completionHandler: OmiseTokenRequest.tokenRequestCallback(from: callback)).dataTask
     }
     
     static func tokenRequestCallback(from callback: OmiseTokenRequest.Callback?) -> Request<Token>.Callback {

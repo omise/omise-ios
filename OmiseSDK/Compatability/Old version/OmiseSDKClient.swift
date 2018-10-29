@@ -59,7 +59,7 @@ public class OmiseSDKClient: NSObject {
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
     public func send(_ request: OmiseTokenRequest, callback: OmiseTokenRequest.Callback?) {
-        _ = client.sendRequest(request.request, completionHandler: { (result) in
+        _ = client.send(request.request, completionHandler: { (result) in
             DispatchQueue.main.async {
                 let tokenRequestResult: OmiseTokenRequestResult
                 switch result {
