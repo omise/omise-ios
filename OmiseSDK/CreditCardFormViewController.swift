@@ -119,7 +119,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     
     var isInputDataValid: Bool {
         return formFields.reduce(into: true, { (valid, field) in
-            valid = valid // && field.isValid
+            valid = valid && field.isValid
         })
     }
     
