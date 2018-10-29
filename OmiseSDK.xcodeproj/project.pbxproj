@@ -21,7 +21,6 @@
 		2259314E1CE46E5700841B86 /* CardBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314D1CE46E5700841B86 /* CardBrand.swift */; };
 		225931501CE46F7F00841B86 /* CardNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259314F1CE46F7F00841B86 /* CardNumber.swift */; };
 		229E14581D0EBAB5000511DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14541D0EBAB5000511DE /* AppDelegate.swift */; };
-		229E14591D0EBAB5000511DE /* CompletePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14551D0EBAB5000511DE /* CompletePaymentViewController.swift */; };
 		229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */; };
 		22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */; };
 		8A01E48D21059EFF00D73FE6 /* SourcePaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01E48C21059EFF00D73FE6 /* SourcePaymentMethod.swift */; };
@@ -54,7 +53,6 @@
 		8A60619A20B2A8D400CF90D5 /* PAN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A60619920B2A8D400CF90D5 /* PAN.swift */; };
 		8A6AA06D216B958100E49E5E /* OMSBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6AA06B216B957D00E49E5E /* OMSBaseViewController.m */; };
 		8A6AA06E216B9DAE00E49E5E /* OMSBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6AA06B216B957D00E49E5E /* OMSBaseViewController.m */; };
-		8A723A552164D7B100D902F5 /* CompletePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14551D0EBAB5000511DE /* CompletePaymentViewController.swift */; };
 		8A723A562164D7B100D902F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14541D0EBAB5000511DE /* AppDelegate.swift */; };
 		8A723A5C2164D7B100D902F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */; };
 		8A723A5F2164D7B100D902F5 /* OmiseSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 225931181CE3210700841B86 /* OmiseSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -166,7 +164,6 @@
 		225931561CE4745200841B86 /* SDKTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKTestCase.swift; sourceTree = "<group>"; };
 		226E16101D2268B400219652 /* QuickStart.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = QuickStart.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		229E14541D0EBAB5000511DE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		229E14551D0EBAB5000511DE /* CompletePaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletePaymentViewController.swift; sourceTree = "<group>"; };
 		229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		22D4809D1D0EB29C00544CE1 /* ExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D480AB1D0EB29C00544CE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -441,7 +438,6 @@
 			children = (
 				8A6AA06A216B957D00E49E5E /* OMSBaseViewController.h */,
 				8A6AA06B216B957D00E49E5E /* OMSBaseViewController.m */,
-				229E14551D0EBAB5000511DE /* CompletePaymentViewController.swift */,
 				8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */,
 				8AA250CE216B41A500E43828 /* ProductHeroImageView.swift */,
 				8A40DA2A216B53E900749F45 /* Tools.swift */,
@@ -758,7 +754,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				229E14591D0EBAB5000511DE /* CompletePaymentViewController.swift in Sources */,
 				8A40DA29216B441E00749F45 /* PaymentSettingTableViewController.swift in Sources */,
 				229E14581D0EBAB5000511DE /* AppDelegate.swift in Sources */,
 				8A6AA06E216B9DAE00E49E5E /* OMSBaseViewController.m in Sources */,
@@ -777,7 +772,6 @@
 				8A7A9EBE2166160300F12D86 /* PaymentSettingTableViewController.swift in Sources */,
 				8AA250D0216B41A500E43828 /* ProductHeroImageView.swift in Sources */,
 				8A6AA06D216B958100E49E5E /* OMSBaseViewController.m in Sources */,
-				8A723A552164D7B100D902F5 /* CompletePaymentViewController.swift in Sources */,
 				8A40DA2C216B53E900749F45 /* Tools.swift in Sources */,
 				8A7A9EC22166578800F12D86 /* Swift Version Compatability.swift in Sources */,
 				8A723A562164D7B100D902F5 /* AppDelegate.swift in Sources */,

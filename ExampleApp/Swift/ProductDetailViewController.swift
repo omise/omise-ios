@@ -101,7 +101,14 @@ extension ProductDetailViewController: CreditCardFormViewControllerDelegate {
     
     func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
         dismissForm(completion: {
-            self.performSegue(withIdentifier: "CompletePayment", sender: self)
+            let alertController = UIAlertController(
+                title: "Token Created",
+                message: "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge.",
+                preferredStyle: .alert
+            )
+            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
         })
     }
     
@@ -130,8 +137,28 @@ extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate 
 extension ProductDetailViewController: PaymentCreatorControllerDelegate {
     
     func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didCreatePayment payment: Payment) {
-        dismissForm()
-    }
+        dismissForm(completion: {
+            let title: String
+            let message: String
+            
+            switch payment {
+            case .token(let token):
+                title = "Token Created"
+                message = "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge."
+            case .source(let source):
+                title = "Token Created"
+                message = "A source with id of \(source.id) was successfully created. Please send this id to server to create a charge."
+            }
+            
+            let alertController = UIAlertController(
+                title: title,
+                message: message,
+                preferredStyle: .alert
+            )
+            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+        })    }
     
     func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didFailWithError error: Error) {
         let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)

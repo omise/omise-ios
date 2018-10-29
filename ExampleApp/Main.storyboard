@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Product-->
+        <!--SDK Example-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="OMSExampleProductDetailViewController" sceneMemberID="viewController">
@@ -24,35 +24,20 @@
                             <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hEr-df-bfx">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Satellite Smart Speaker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QGB-E1-3DY">
-                                        <rect key="frame" x="20" y="238.5" width="374" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Omise iOS SDK Example" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QGB-E1-3DY">
+                                        <rect key="frame" x="20" y="8" width="374" height="21"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pt6-Zr-Dfr">
-                                        <rect key="frame" x="20" y="267" width="374" height="62.5"/>
-                                        <string key="text">Want a small Smart Speaker every where in your house? Let the Satellite Smart Speaker helps you. The Satellite Smart Speaker can do what the Main Smart Speaker can in a much smaller package suitable for placing it every where you want in the house</string>
+                                        <rect key="frame" x="20" y="37" width="374" height="78.5"/>
+                                        <string key="text">Here's an Omise iOS SDK example screen. Please see the below options for how to present the forms built into the SDK.
+You can present via either Storyboard or Code and you can see the code in the ExampleApp targets. The example also has both the Swift and Objective-C versions.</string>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SF8-2v-UIb" customClass="ProductHeroImageView" customModule="ExampleApp" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="8" width="374" height="210.5"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="SF8-2v-UIb" secondAttribute="height" multiplier="3000:1687" id="Qii-dY-VVU"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="image" keyPath="image" value="product"/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
                                     <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yo3-3X-JMB">
                                         <rect key="frame" x="0.0" y="578" width="414" height="230"/>
                                         <subviews>
@@ -141,16 +126,13 @@
                                     <constraint firstAttribute="trailingMargin" secondItem="Wsb-Gf-EIX" secondAttribute="trailing" id="Avf-TF-kmN"/>
                                     <constraint firstItem="yo3-3X-JMB" firstAttribute="leading" secondItem="hEr-df-bfx" secondAttribute="leading" id="DSU-4w-vPA"/>
                                     <constraint firstItem="Pt6-Zr-Dfr" firstAttribute="trailing" secondItem="QGB-E1-3DY" secondAttribute="trailing" id="Erm-6n-GeL"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="SF8-2v-UIb" secondAttribute="trailing" id="OSw-51-Nrt"/>
+                                    <constraint firstItem="QGB-E1-3DY" firstAttribute="top" secondItem="hEr-df-bfx" secondAttribute="topMargin" id="LB7-tQ-4Us"/>
                                     <constraint firstItem="Wsb-Gf-EIX" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Pt6-Zr-Dfr" secondAttribute="bottom" constant="8" symbolic="YES" id="RwF-p4-c6s"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="QGB-E1-3DY" secondAttribute="trailing" id="WCO-gv-XWO"/>
                                     <constraint firstAttribute="bottom" secondItem="yo3-3X-JMB" secondAttribute="bottom" id="Y33-1K-piQ"/>
-                                    <constraint firstItem="SF8-2v-UIb" firstAttribute="top" secondItem="hEr-df-bfx" secondAttribute="top" constant="8" id="ZLc-xC-x7r"/>
                                     <constraint firstItem="QGB-E1-3DY" firstAttribute="leading" secondItem="hEr-df-bfx" secondAttribute="leadingMargin" id="fea-C8-vxp"/>
                                     <constraint firstItem="yo3-3X-JMB" firstAttribute="top" secondItem="Wsb-Gf-EIX" secondAttribute="bottom" id="jAo-06-XuN"/>
-                                    <constraint firstItem="QGB-E1-3DY" firstAttribute="top" secondItem="SF8-2v-UIb" secondAttribute="bottom" constant="20" id="kVq-03-pkR"/>
-                                    <constraint firstItem="Pt6-Zr-Dfr" firstAttribute="top" secondItem="QGB-E1-3DY" secondAttribute="bottom" constant="7.5" id="mQA-Gx-HwM"/>
-                                    <constraint firstItem="SF8-2v-UIb" firstAttribute="leading" secondItem="hEr-df-bfx" secondAttribute="leadingMargin" id="nl7-uY-wsZ"/>
+                                    <constraint firstItem="Pt6-Zr-Dfr" firstAttribute="top" secondItem="QGB-E1-3DY" secondAttribute="bottom" constant="8" symbolic="YES" id="mQA-Gx-HwM"/>
                                     <constraint firstAttribute="trailing" secondItem="yo3-3X-JMB" secondAttribute="trailing" id="qHo-r1-mD6"/>
                                     <constraint firstItem="Wsb-Gf-EIX" firstAttribute="top" secondItem="Pt6-Zr-Dfr" secondAttribute="bottom" priority="10" constant="8" symbolic="YES" id="rtT-O7-bF2"/>
                                     <constraint firstItem="Wsb-Gf-EIX" firstAttribute="leading" secondItem="hEr-df-bfx" secondAttribute="leadingMargin" id="zVD-wJ-44q"/>
@@ -167,7 +149,7 @@
                             <constraint firstItem="hEr-df-bfx" firstAttribute="leading" secondItem="rB7-5O-yfJ" secondAttribute="leading" id="qPo-ge-YUM"/>
                         </constraints>
                     </scrollView>
-                    <navigationItem key="navigationItem" title="Product" id="HNP-A6-Yud">
+                    <navigationItem key="navigationItem" title="SDK Example" id="HNP-A6-Yud">
                         <barButtonItem key="leftBarButtonItem" title="Setup" id="Y6y-JF-GGB">
                             <connections>
                                 <action selector="handlingAuthorizingPayment:" destination="BYZ-38-t0r" id="HSD-x0-YKO"/>
@@ -181,9 +163,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="heroImageView" destination="SF8-2v-UIb" id="jlD-nk-bj8"/>
                         <outlet property="modeChooser" destination="Wsb-Gf-EIX" id="82F-8B-HBU"/>
-                        <segue destination="TWZ-Mj-mej" kind="show" identifier="CompletePayment" id="UKD-dD-tkb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -566,91 +546,6 @@
             </objects>
             <point key="canvasLocation" x="-130" y="1949"/>
         </scene>
-        <!--Success-->
-        <scene sceneID="79S-SL-zwq">
-            <objects>
-                <viewController id="TWZ-Mj-mej" customClass="CompletePaymentViewController" customModule="ExampleApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="pcb-7a-MnU"/>
-                        <viewControllerLayoutGuide type="bottom" id="AqI-nN-Ylm"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="4MX-Z9-q3W">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="completed" translatesAutoresizingMaskIntoConstraints="NO" id="DvZ-z8-e0r">
-                                <rect key="frame" x="172" y="32" width="70" height="70"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="IJB-1c-zrW"/>
-                                    <constraint firstAttribute="height" constant="70" id="rk3-J7-OPP"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you for your recent order" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Vm-QL-fYr">
-                                <rect key="frame" x="107" y="134" width="200" height="80"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="0mr-xm-4Io"/>
-                                    <constraint firstAttribute="height" constant="80" id="jrY-Xg-z3b"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We’ve send you an email with all the details of your order. You can track your order with the link below" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g89-Bs-50i">
-                                <rect key="frame" x="57" y="216" width="300" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="FSn-M4-GrT"/>
-                                    <constraint firstAttribute="width" constant="300" id="OUC-cn-1X6"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UHN-cv-0Wm">
-                                <rect key="frame" x="20" y="334" width="374" height="44"/>
-                                <color key="backgroundColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="tNw-rw-aDX"/>
-                                </constraints>
-                                <state key="normal" title="Order - OMS8008">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="orderDetailButtonTapped:" destination="TWZ-Mj-mej" eventType="touchUpInside" id="RtG-Fg-w9m"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="DvZ-z8-e0r" firstAttribute="centerX" secondItem="4MX-Z9-q3W" secondAttribute="centerX" id="DjF-Mc-eH2"/>
-                            <constraint firstItem="g89-Bs-50i" firstAttribute="top" secondItem="1Vm-QL-fYr" secondAttribute="bottom" constant="2" id="E8Z-My-ims"/>
-                            <constraint firstItem="1Vm-QL-fYr" firstAttribute="centerX" secondItem="4MX-Z9-q3W" secondAttribute="centerX" id="G4a-3S-mdk"/>
-                            <constraint firstAttribute="trailing" secondItem="UHN-cv-0Wm" secondAttribute="trailing" constant="20" id="Ltw-Ik-Exa"/>
-                            <constraint firstItem="UHN-cv-0Wm" firstAttribute="top" secondItem="g89-Bs-50i" secondAttribute="bottom" constant="18" id="WEd-ms-YIU"/>
-                            <constraint firstItem="DvZ-z8-e0r" firstAttribute="top" secondItem="pcb-7a-MnU" secondAttribute="bottom" constant="32" id="bLE-vQ-pvX"/>
-                            <constraint firstItem="UHN-cv-0Wm" firstAttribute="leading" secondItem="4MX-Z9-q3W" secondAttribute="leading" constant="20" id="dkh-nP-X1x"/>
-                            <constraint firstItem="1Vm-QL-fYr" firstAttribute="top" secondItem="DvZ-z8-e0r" secondAttribute="bottom" constant="32" id="e5d-ju-IzG"/>
-                            <constraint firstItem="g89-Bs-50i" firstAttribute="centerX" secondItem="4MX-Z9-q3W" secondAttribute="centerX" id="lfm-ZX-KdK"/>
-                        </constraints>
-                    </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Success" id="HxT-68-c3i">
-                        <barButtonItem key="rightBarButtonItem" title="Done" style="done" id="b2V-Vx-Ixe">
-                            <connections>
-                                <action selector="closeButtonTapped:" destination="TWZ-Mj-mej" id="WrH-oz-ikk"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SHh-8a-ic8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="414" y="2274"/>
-        </scene>
         <!--OmiseSDK Credit Card Form-->
         <scene sceneID="UEK-Dq-FH1">
             <objects>
@@ -715,10 +610,6 @@
             <point key="canvasLocation" x="1052" y="637"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="completed" width="135" height="135"/>
-        <image name="product" width="1500" height="844"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="E9r-cu-PMc"/>
     </inferredMetricsTieBreakers>

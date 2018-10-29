@@ -107,7 +107,9 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
 
 - (void)creditCardFormViewController:(OMSCreditCardFormViewController *)controller didSucceedWithToken:(OMSToken *)token {
     [self dismissFormWithCompletion:^{
-        [self performSegueWithIdentifier:@"CompletePayment" sender:self];
+        NSString *alertMessage = [NSString stringWithFormat:@"The token with id of %@ was successfuly created. Please send this id to server to create a charge.", token.tokenId];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Token created" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
     }];
 }
 
@@ -139,12 +141,18 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
 }
 
 - (void)paymentCreatorController:(OMSPaymentCreatorController *)paymentCreatorController didCreateToken:(OMSToken *)token {
-    [self dismissForm];
-}
+    [self dismissFormWithCompletion:^{
+        NSString *alertMessage = [NSString stringWithFormat:@"The token with id of %@ was successfuly created. Please send this id to server to create a charge.", token.tokenId];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Token created" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
+    }];}
 
 - (void)paymentCreatorController:(OMSPaymentCreatorController *)paymentCreatorController didCreateSource:(OMSSource * _Nonnull)source {
-    [self dismissForm];
-}
+    [self dismissFormWithCompletion:^{
+        NSString *alertMessage = [NSString stringWithFormat:@"The source with id of %@ was successfuly created. Please send this id to server to create a charge.", source.tokenId];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Source created" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
+    }];}
 
 - (void)paymentCreatorController:(OMSPaymentCreatorController *)paymentCreatorController didFailWithError:(NSError *)error {
     [self dismissForm];
