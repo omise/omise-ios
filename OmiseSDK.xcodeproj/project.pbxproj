@@ -892,7 +892,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -953,7 +953,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1000,8 +1000,12 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Library";
-				"SWIFT_INCLUDE_PATHS[sdk=iphoneos12.0]" = "";
-				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator12.0]" = "";
+				"SWIFT_INCLUDE_PATHS[sdk=iphoneos*]" = "";
+				"SWIFT_INCLUDE_PATHS[sdk=iphoneos10*]" = "$(SRCROOT)/Library";
+				"SWIFT_INCLUDE_PATHS[sdk=iphoneos11*]" = "$(SRCROOT)/Library";
+				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator*]" = "";
+				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator10*]" = "$(SRCROOT)/Library";
+				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator11*]" = "$(SRCROOT)/Library";
 			};
 			name = Debug;
 		};
