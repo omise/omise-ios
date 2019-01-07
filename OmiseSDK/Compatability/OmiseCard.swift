@@ -69,6 +69,5 @@ import Foundation
     init(card: Card) {
         self.card = card
     }
-
 }
 

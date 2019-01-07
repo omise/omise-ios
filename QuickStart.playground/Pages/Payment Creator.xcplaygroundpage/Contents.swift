@@ -2,7 +2,7 @@ import UIKit
 import OmiseSDK
 import PlaygroundSupport
 
-let publicKey = "pkey_test_<#Omise Public Key#>"
+let publicKey = "pkey_test_3409854390"
 
 /*: payment-creator
  
@@ -66,7 +66,7 @@ extension CheckoutViewController: CheckoutViewControllerDelegate {
     let paymentCreatorController = PaymentCreatorController.makePaymentCreatorControllerWith(
       publicKey: publicKey,
       amount: 5_000_00, currency: .thb,
-      allowedPaymentMethods: PaymentCreatorController.thailandDefaultAvailableSourceMethods,
+      allowedPaymentMethods: PaymentCreatorController.japanDefaultAvailableSourceMethods,
       paymentDelegate: self
     )
     
