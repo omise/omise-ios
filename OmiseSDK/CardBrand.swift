@@ -1,44 +1,56 @@
 import Foundation
 
-@objc(OMSCardBrand) public enum CardBrand: Int {
-    public static let all: [CardBrand] = [
-        AMEX,
-        Diners,
-        JCB,
-        Laser,
-        Visa,
-        MasterCard,
-        Maestro,
-        Discover
-    ]
+
+/// Brand of the Card Network
+@objc(OMSCardBrand)
+public enum CardBrand: Int, CustomStringConvertible {
     
-    case AMEX
-    case Diners
-    case JCB
-    case Laser
-    case Visa
-    case MasterCard
-    case Maestro
-    case Discover
+    /// VISA card newtwork brand
+    case visa
+    /// Master Card card newtwork brand
+    case masterCard
+    /// jcb card newtwork brand
+    case jcb
+    /// AMEX card newtwork brand
+    case amex
+    /// Diners card newtwork brand
+    case diners
+    /// Laser card newtwork brand
+    case laser
+    /// Maestro card newtwork brand
+    case maestro
+    /// Discover card newtwork brand
+    case discover
+    
+    public static let all: [CardBrand] = [
+        visa,
+        masterCard,
+        jcb,
+        amex,
+        diners,
+        laser,
+        maestro,
+        discover,
+    ]
     
     /// Regular expression pattern that can detect cards issued by the brand.
     public var pattern: String {
         switch self {
-        case .AMEX:
-            return "^3[47]"
-        case .Diners:
-            return "^3(0[0-5]|6)"
-        case .JCB:
-            return "^35(2[89]|[3-8])"
-        case .Laser:
-            return "^(6304|670[69]|6771)"
-        case .Visa:
+        case .visa:
             return "^4"
-        case .MasterCard:
+        case .masterCard:
             return "^(5[1-5]|2(2(2[1-9]|[3-9])|[3-6]|7(0|1|20)))"
-        case .Maestro:
-            return "^(5018|5020|5038|6304|6759|676[1-3])"
-        case .Discover:
+        case .jcb:
+            return "^35(2[89]|[3-8])"
+        case .amex:
+            return "^3[47]"
+        case .diners:
+            return "^3(0[0-5]|[6,8-9])|5[4-5]"
+        case .laser:
+            return "^(6304|670[69]|6771)"
+        case .maestro:
+            return "^(5[0,6-8]|6304|6759|676[1-3])"
+        case .discover:
             return "^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5]|64[4-9])|65)"
         }
     }
@@ -46,22 +58,43 @@ import Foundation
     /// Range of valid card number lengths for cards issued by the brand.
     public var validLengths: ClosedRange<Int> {
         switch self {
-        case .AMEX:
+        case .visa:
+            return 16...16
+        case .masterCard:
+            return 16...16
+        case .jcb:
+            return 16...16
+        case .amex:
             return 15...15
-        case .Diners:
+        case .diners:
             return 14...14
-        case .JCB:
-            return 16...16
-        case .Laser:
+        case .laser:
             return 16...19
-        case .Visa:
-            return 16...16
-        case .MasterCard:
-            return 16...16
-        case .Maestro:
+        case .maestro:
             return 12...19
-        case .Discover:
+        case .discover:
             return 16...16
+        }
+    }
+    
+    public var description: String {
+        switch self {
+        case .visa:
+            return "Visa"
+        case .masterCard:
+            return "MasterCard"
+        case .jcb:
+            return "JCB"
+        case .amex:
+            return "AMEX"
+        case .diners:
+            return "Diners"
+        case .discover:
+            return "Discover"
+        case .laser:
+            return "Laser"
+        case .maestro:
+            return "Maestro"
         }
     }
 }
@@ -75,7 +108,7 @@ import Foundation
     @objc(validLengthsForBrand:) public static func __validLengthsForBrand(brand: CardBrand) -> NSRange {
         let range = brand.validLengths
         
-        return NSRange(location: range.lowerBound, length: range.upperBound - range.lowerBound)
+        return NSRange(range)
     }
 }
 

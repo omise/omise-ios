@@ -1,0 +1,12 @@
+{
+  "object": "source",
+  "id": "src_test_5cs0totfv87k1i6y45l",
+  "livemode": false,
+  "location": "/sources/src_test_5cs0totfv87k1i6y45l",
+  "type": "installment_kbank",
+  "flow": "redirect",
+  "amount": 500000,
+  "currency": "thb",
+  "installment_terms": 6,
+  "absorption_type": "customer"
+}

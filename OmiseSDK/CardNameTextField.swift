@@ -6,28 +6,29 @@ import UIKit
 @objc public class CardNameTextField: OmiseTextField {
     /// Boolean indicating wether current input is valid or not.
     public override var isValid: Bool {
-        return !(text ?? "").isEmpty
+        return !text.isNilOrEmpty
     }
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
+        initializeInstance()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setup()
+        initializeInstance()
     }
     
     override init() {
         super.init(frame: CGRect.zero)
-        setup()
+        initializeInstance()
     }
     
-    func setup() {
+    private func initializeInstance() {
         keyboardType = .default
-        
-        // TODO: Localize place holder
         placeholder = "John Doe"
+        if #available(iOSApplicationExtension 10.0, *) {
+            textContentType = .name
+        }
     }
 }

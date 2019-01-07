@@ -1,26 +1,8 @@
 import Foundation
 
-// TODO: 👇 only the  data source and delegate needed, we don't need this class.
 
 /// UIPickerView subclass pre-configured for picking card expiration month and year.
 @objc public final class CardExpiryDatePicker: UIPickerView {
-    fileprivate static let maximumYear = 21
-    fileprivate static let monthPicker = 0
-    fileprivate static let yearPicker = 1
-    fileprivate let months: [String] = {
-        let validRange = CountableRange(Calendar.creditCardInformationCalendar.maximumRange(of: Calendar.Component.month) ?? Range<Int>(1...12))
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.alwaysShowsDecimalSeparator = false
-        formatter.minimumIntegerDigits = 2
-        
-        return validRange.map({ formatter.string(from: $0 as NSNumber)! })
-    }()
-
-    fileprivate let years: [Int] = {
-        let currentYear = Calendar.creditCardInformationCalendar.component(.year, from: Date())
-        return Array(currentYear...(currentYear.advanced(by: maximumYear)))
-    }()
     
     /// Callback function that will be called when picker value changes.
     public var onDateSelected: ((_ month: Int, _ year: Int) -> ())?
@@ -29,17 +11,40 @@ import Foundation
     /// Currently selected year.
     public var year: Int = 0
     
+    
+    private static let maximumYear = 21
+    private static let monthPicker = 0
+    private static let yearPicker = 1
+    
+    private let months: [String] = {
+        let validRange = Calendar.creditCardInformationCalendar.maximumRange(of: Calendar.Component.month) ?? Range<Int>(1...12)
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.alwaysShowsDecimalSeparator = false
+        formatter.minimumIntegerDigits = 2
+        #if swift(>=4.2)
+        return validRange.map({ formatter.string(from: $0 as NSNumber)! })
+        #else
+        return Array(validRange.lowerBound..<validRange.upperBound).map({ formatter.string(from: $0 as NSNumber)! })
+        #endif
+    }()
+    
+    private let years: [Int] = {
+        let currentYear = Calendar.creditCardInformationCalendar.component(.year, from: Date())
+        return Array(currentYear...(currentYear.advanced(by: maximumYear)))
+    }()
+    
     override public init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
+        initializeInstance()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setup()
+        initializeInstance()
     }
     
-    private func setup() {
+    private func initializeInstance() {
         delegate = self
         dataSource = self
         selectRow(month - 1, inComponent: 0, animated: false)
@@ -69,7 +74,7 @@ extension CardExpiryDatePicker: UIPickerViewDelegate {
         case CardExpiryDatePicker.monthPicker:
             return months[row]
         case CardExpiryDatePicker.yearPicker:
-            return "\(years[row])"
+            return String(years[row])
         default:
             return nil
         }

@@ -1,0 +1,285 @@
+/* An error text displayed when the card holder name is invalid */
+"credit-card-form.card-holder-name-field.invalid-data.error.text" = "クレジットカード所有者名が無効です";
+
+/* An error text displayed when the credit card number is invalid */
+"credit-card-form.card-number-field.invalid-data.error.text" = "クレジットカード番号が無効です";
+
+/* An error text displayed when the expiry date is invalid */
+"credit-card-form.expiry-date-field.invalid-data.error.text" = "クレジットカードの有効期限が無効です";
+
+/* An error text displayed when the security code is invalid */
+"credit-card-form.security-code-field.invalid-data.error.text" = "CVVコードが無効です";
+
+/* An error text in the E-Context information input displayed when the email is invalid */
+"econtext-info-form.email-name-field.invalid-data.error.text" = "メールが無効です";
+
+/* An error text in the E-Context information input displayed when the customer name is invalid */
+"econtext-info-form.full-name-field.invalid-data.error.text" = "顧客名が無効です";
+
+/* An error text in the E-Context information input displayed when the phone number is invalid */
+"econtext-info-form.phone-number-field.invalid-data.error.text" = "電話番号が無効です";
+
+/* A default descriptive message representing an `Authentication failure` error from the backend which a merchant may show this message to their user */
+"error.api.authentication_failure.message" = "認証失敗";
+
+/* A default descriptive suggestion message to recovery from the `Authentication failure` error from the backend which a merchant may show this message to their user */
+"error.api.authentication_failure.recovery-suggestion" = "加盟店までご連絡ください";
+
+/* A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.message" = "金額が%dの有効金額を超過しています";
+
+/* A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.recovery-suggestion" = "%d未満の金額でソースを作成してください";
+
+/* A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.message" = "金額が有効金額を超過しています";
+
+/* A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.recovery-suggestion" = "これより少ない金額でソースを作成してください";
+
+/* A default descriptive message representing an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.recovery-suggestion" = "%d以上の金額でソースを作成してください";
+
+/* A default descriptive message representing an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.message" = "金額が有効金額以下です";
+
+/* A default descriptive message representing an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.recovery-suggestion" = "それ以上の金額でソースを作成してください";
+
+/* A default descriptive message representing an `Bad request` error with `currency-not-supported` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.currency-not-supported.message" = "このアカウントでこちらの通貨はサポートされていません";
+
+/* A default descriptive message representing an `Bad request` error with `currency-not-supported` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.currency-not-supported.recovery-suggestion" = "通貨をご確認ください";
+
+/* A default descriptive message representing an `Bad request` error with `empty-name` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.empty-name.message" = "顧客名が空白です";
+
+/* A default descriptive message representing an `Bad request` error with `empty-name` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.empty-name.recovery-suggestion" = "顧客名を指定してください";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-currency` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-currency.message" = "この通貨は無効です";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-currency` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-currency.recovery-suggestion" = "不正なリクエスト";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-email` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-email.message" = "顧客のメールが無効です";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-email` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-email.recovery-suggestion" = "顧客のメールをご確認ください";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-name` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-name.message" = "顧客名が無効です";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-name` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-name.recovery-suggestion" = "顧客名をご確認ください";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-phone-number` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-phone-number.message" = "顧客の電話番号が無効です";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-phone-number` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-phone-number.recovery-suggestion" = "顧客の電話番号をご確認ください";
+
+/* A default descriptive message representing an `Bad request` error with `name-is-too-long.with-valid-length` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.name-is-too-long.with-valid-length.message" = "顧客名が%d文字の有効数を超過しています";
+
+/* A default descriptive message representing an `Bad request` error with `name-is-too-long.with-valid-length` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.name-is-too-long.with-valid-length.recovery-suggestion" = "%d文字数より少ない顧客名を指定してください";
+
+/* A default descriptive message representing an `Bad request` error with `name-is-too-long.without-valid-length` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.name-is-too-long.without-valid-length.message" = "顧客の名前が長すぎます";
+
+/* A default descriptive message representing an `Bad request` error with `name-is-too-long.without-valid-length` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.name-is-too-long.without-valid-length.recovery-suggestion" = "顧客の名前を短くしご指定ください";
+
+/* A default descriptive message representing an `Bad request` error with `other` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.other.message" = "不正なリクエスト: %@";
+
+/* (No Comment) */
+"error.api.bad_request.other.recovery-suggestion" = "不正なリクエスト";
+
+/* (No Comment) */
+"error.api.bad_request.recovery-suggestion" = "加盟店までご連絡ください";
+
+/* A default descriptive message representing an `Bad request` error with `type-not-supported` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.type-not-supported.message" = "このアカウントでこちらのソースタイプはサポートされていません";
+
+/* A default descriptive message representing an `Bad request` error with `type-not-supported` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.type-not-supported.recovery-suggestion" = "このソースタイプをご確認ください";
+
+/* (No Comment) */
+"error.api.invalid_card.empty-card-holder-name.message" = "無効なカード所有者名";
+
+/* A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Invalid card holder name` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.empty-card-holder-name.recovery-suggestion" = "カード所有者名をご確認ください";
+
+/* A default descriptive message representing an `Invalid card data` error with the `Invalid card holder name` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.empty-card-holderName.message" = "無効なカード所有者名";
+
+/* A default descriptive message representing an `Invalid card data` error with the `Invalid card number` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.invalid-card-number.message" = "無効なカード番号";
+
+/* A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Invalid card number` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.invalid-card-number.recovery-suggestion" = "こちらのカード番号をご確認ください";
+
+/* A default descriptive message representing an `Invalid card data` error with the `Invalid card expiration date` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.invalid-expiration-date.message" = "無効なカード有効期限";
+
+/* A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Invalid card expiration date` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.invalid-expiration-date.recovery-suggestion" = "カード有効期限をご確認ください";
+
+/* (No Comment) */
+"error.api.invalid_card.other.message" = "\"%@\"メッセージ付きの無効なカードデータ";
+
+/* A descriptive suggestion message to recovery from the `Invalid card data` error from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.other.recovery-suggestion" = "クレジットカード情報をご確認ください";
+
+/* A default descriptive message representing an `Invalid card data` error with the `Unsupported card brand` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.unsupported-brand.message" = "サポートされていないカード会社";
+
+/* A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Unsupported card brand` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.unsupported-brand.recovery-suggestion" = "他のクレジットカードをご利用ください";
+
+/* A default descriptive message representing an `Service not found` error from the backend which a merchant may show this message to their user */
+"error.api.service_not_found.message" = "サービスが見つかりません";
+
+/* A default descriptive suggestion message to recovery from the `Service not found` error from the backend which a merchant may show this message to their user */
+"error.api.service_not_found.recovery-suggestion" = "加盟店までご連絡ください";
+
+/* A descriptive message representing an `Invalid error data in the error response` error during the operation in the client */
+"error.unexpected.http-error-response-with-invalid-data.message" = "エラー応答の無効なエラーデータ";
+
+/* A descriptive message representing an `No error data in the error response` error during the operation in the client */
+"error.unexpected.http-error-with-no-data.message" = "エラー応答のエラーデータ無し";
+
+/* A descriptive message representing an `Invalid data in the success response` error during the operation in the client */
+"error.unexpected.http-succeess-with-invalid-data.message" = "成功応答の無効なデータ";
+
+/* A descriptive message representing an `No data in the success response` error during the operation in the client */
+"error.unexpected.http-succeess-with-no-data.message" = "成功応答のデータ無し";
+
+/* A descriptive message representing an `No error nor response` error during the operation in the client */
+"error.unexpected.no-error-norresponse.message" = "エラーや応答無し";
+
+/* A descriptive message representing an `Unrecognized/unsupported HTTP status code` error during the operation in the client */
+"error.unexpected.unrecognized-HTTP-status-code.message" = "認識されない、もしくはサポートされていないHTTPステータスコード";
+
+/* The displaying message showing in the error banner an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.message" = "金額が%@の有効金額を超過しています";
+
+/* The displaying message showing in the error banner an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.message" = "金額が有効金額を超過しています";
+
+/* The displaying message showing in the error banner an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.message" = "金額が%dの有効金額以下です";
+
+/* The displaying message showing in the error banner an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.message" = "金額が有効金額以下です";
+
+/* The displaying message showing in the error banner an `Bad request` error with `currency-not-supported` from the backend has occurred */
+"payment-creator.error.api.bad_request.currency-not-supported.message" = "このアカウントでこちらの通貨はサポートされていません";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `currency-not-supported` from the backend has occurred */
+"payment-creator.error.api.bad_request.currency-not-supported.recovery-suggestion" = "他の通貨を選択してください";
+
+/* The displaying message showing in the error banner an `Bad request` error with `empty-name` from the backend has occurred */
+"payment-creator.error.api.bad_request.empty-name.message" = "顧客名が空白です";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `empty-name` from the backend has occurred */
+"payment-creator.error.api.bad_request.empty-name.recovery-suggestion" = "顧客名が空白です";
+
+/* The displaying message showing in the error banner an `Bad request` error with `invalid-currency` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-currency.message" = "この通貨は無効です";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `invalid-currency` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-currency.recovery-suggestion" = "他の通貨を選択するか、サポートまでご連絡ください";
+
+/* The displaying message showing in the error banner an `Bad request` error with `invalid-email` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-email.message" = "顧客メールが無効です";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `invalid-email` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-email.recovery-suggestion" = "メールをご確認ください";
+
+/* The displaying message showing in the error banner an `Bad request` error with `invalid-name` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-name.message" = "顧客名が無効です";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `invalid-name` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-name.recovery-suggestion" = "顧客名をご確認ください";
+
+/* The displaying message showing in the error banner an `Bad request` error with `invalid-phone-number` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-phone-number.message" = "顧客の電話番号が無効です";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `invalid-phone-number` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-phone-number.recovery-suggestion" = "電話番号をご確認ください";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `name-is-too-long.without-valid-length` from the backend has occurred */
+"payment-creator.error.api.bad_request.name-is-too-long.recovery-suggestion" = "顧客名をご確認ください";
+
+/* The displaying message showing in the error banner an `Bad request` error with `name-is-too-long.with-valid-length` from the backend has occurred */
+"payment-creator.error.api.bad_request.name-is-too-long.with-valid-length.message" = "顧客の名前が%d文字数より長すぎます";
+
+/* The displaying message showing in the error banner an `Bad request` error with `name-is-too-long.without-valid-length` from the backend has occurred */
+"payment-creator.error.api.bad_request.name-is-too-long.without-valid-length.message" = "顧客の名前が長すぎます";
+
+/* The displaying message showing in the error banner an `Bad request` error with `other` from the backend has occurred */
+"payment-creator.error.api.bad_request.other.message" = "不明なエラーが発生しました";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `other` from the backend has occurred */
+"payment-creator.error.api.bad_request.other.recovery-suggestion" = "後ほどお試しください";
+
+/* The displaying message showing in the error banner an `Bad request` error with `type-not-supported` from the backend has occurred */
+"payment-creator.error.api.bad_request.type-not-supported.message" = "このアカウントでこちらのソースタイプはサポートされていません";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `type-not-supported` from the backend has occurred */
+"payment-creator.error.api.bad_request.type-not-supported.recovery-suggestion" = "サポートまでご連絡ください";
+
+/* The displaying message showing in the error banner in the built-in Payment Creator when there is the `empty-card-holder-name` API error occured */
+"payment-creator.error.api.invalid_card.empty-card-holder-name.message" = "カード所有者名が無効です";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator in the built-in Payment Creator when there is the `empty-card-holder-name` API error occured */
+"payment-creator.error.api.invalid_card.empty-card-holder-name.recovery-suggestion" = "カード所有者名をご確認ください";
+
+/* The displaying message showing in the error banner in the built-in Payment Creator when there is the `invalid-card-number` API error occured */
+"payment-creator.error.api.invalid_card.invalid-card-number.message" = "カード番号が無効です";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator in the built-in Payment Creator when there is the `invalid-card-number` API error occured */
+"payment-creator.error.api.invalid_card.invalid-card-number.recovery-suggestion" = "カード番号をご確認ください";
+
+/* The displaying message showing in the error banner in the built-in Payment Creator when there is the `invalid-expiration-date` API error occured */
+"payment-creator.error.api.invalid_card.invalid-expiration-date.message" = "カード有効期限が無効です";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator in the built-in Payment Creator when there is the `invalid-expiration-date` API error occured */
+"payment-creator.error.api.invalid_card.invalid-expiration-date.recovery-suggestion" = "カード有効期限をご確認ください";
+
+/* The displaying message showing in the error banner in the built-in Payment Creator when there is the `other` API error occured */
+"payment-creator.error.api.invalid_card.other.message" = "不明なエラーが発生しました";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator in the built-in Payment Creator when there is the `other` API error occured */
+"payment-creator.error.api.invalid_card.other.recovery-suggestion" = "後ほどお試しください";
+
+/* The displaying message showing in the error banner in the built-in Payment Creator when there is the `unsupported-brand` API error occured */
+"payment-creator.error.api.invalid_card.unsupported-brand.message" = "サポートされていないカード会社です";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator in the built-in Payment Creator when there is the `unsupported-brand` API error occured */
+"payment-creator.error.api.invalid_card.unsupported-brand.recovery-suggestion" = "他のカードをご利用ください";
+
+/* The displaying message showing in the error banner in the built-in Payment Creator when there is the `unexpected` API error occured */
+"payment-creator.error.api.unexpected.message" = "予期しないエラーです";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator when there is the `unexpected` API error occured */
+"payment-creator.error.api.unexpected.recovery-suggestion" = "後ほどお試しください";
+
+/* The displaying message showing in the error banner when there is an `unknown` API error occured */
+"payment-creator.error.api.unknown.message" = "不明なエラーが発生しました";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator when there is an `unknown` API error occured */
+"payment-creator.error.api.unknown.recovery-suggestion" = "後ほどお試しください";
+
+/* The displaying message showing in the error banner when there is the `unexpected` error occured */
+"payment-creator.error.unexpected.message" = "予期しないエラー";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator when there is the `unexpected` error occured */
+"payment-creator.error.unexpected.recovery-suggestion" = "予期しないエラー";
+

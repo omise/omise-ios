@@ -12,6 +12,7 @@
     "city": "Bangkok",
     "postal_code": "10320",
     "financing": "",
+    "bank": "Card Bank",
     "last_digits": "4242",
     "brand": "Visa",
     "expiration_month": 10,

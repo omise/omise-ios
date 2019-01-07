@@ -1,0 +1,306 @@
+/* An error text displayed when the card holder name is invalid */
+"credit-card-form.card-holder-name-field.invalid-data.error.text" = "Card holder name is invalid";
+
+/* An error text displayed when the credit card number is invalid */
+"credit-card-form.card-number-field.invalid-data.error.text" = "Credit card number is invalid";
+
+/* An error text displayed when the expiry date is invalid */
+"credit-card-form.expiry-date-field.invalid-data.error.text" = "Card expiry date is invalid";
+
+/* An error text displayed when the security code is invalid */
+"credit-card-form.security-code-field.invalid-data.error.text" = "CVV code is invalid";
+
+/* An error text in the E-Context information input displayed when the email is invalid */
+"econtext-info-form.email-name-field.invalid-data.error.text" = "Email is invalid";
+
+/* An error text in the E-Context information input displayed when the customer name is invalid */
+"econtext-info-form.full-name-field.invalid-data.error.text" = "Customer name is invalid";
+
+/* An error text in the E-Context information input displayed when the phone number is invalid */
+"econtext-info-form.phone-number-field.invalid-data.error.text" = "Phone number is invalid";
+
+/* A default descriptive message representing an `Authentication failure` error from the backend which a merchant may show this message to their user */
+"error.api.authentication_failure.message" = "Authentication failure";
+
+/* A default descriptive suggestion message to recovery from the `Authentication failure` error from the backend which a merchant may show this message to their user */
+"error.api.authentication_failure.recovery-suggestion" = "Please contact the merchant";
+
+/* A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.message" = "Amount exceeds the valid amount of %@";
+
+/* A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.recovery-suggestion" = "Please create a source with an amount which is less than %@";
+
+/* A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.message" = "Amount exceeds the valid amount";
+
+/* A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.recovery-suggestion" = "Please create a source with less amount";
+
+/* A default descriptive message representing an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.message" = "Amount is less than the valid amount of %@";
+
+/* A default descriptive message representing an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.recovery-suggestion" = "Please create a source with an amount that is greater than %@";
+
+/* A default descriptive message representing an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.message" = "Amount is less than the valid amount";
+
+/* A default descriptive message representing an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.recovery-suggestion" = "Please create a source with a greater amount";
+
+/* A default descriptive message representing an `Bad request` error with `currency-not-supported` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.currency-not-supported.message" = "The currency is not supported by this account";
+
+/* A default descriptive message representing an `Bad request` error with `currency-not-supported` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.currency-not-supported.recovery-suggestion" = "Please choose another currency";
+
+/* A default descriptive message representing an `Bad request` error with `empty-name` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.empty-name.message" = "The customer name is empty";
+
+/* A default descriptive message representing an `Bad request` error with `empty-name` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.empty-name.recovery-suggestion" = "Please input customer name";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-currency` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-currency.message" = "The currency is invalid";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-currency` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-currency.recovery-suggestion" = "Bad request";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-email` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-email.message" = "The customer email is invalid";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-email` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-email.recovery-suggestion" = "Please review the customer email";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-name` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-name.message" = "The customer name is invalid";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-name` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-name.recovery-suggestion" = "Please review the customer name";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-phone-number` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-phone-number.message" = "The customer phone number is invalid";
+
+/* A default descriptive message representing an `Bad request` error with `invalid-phone-number` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.invalid-phone-number.recovery-suggestion" = "Please review the customer phone number";
+
+/* A default descriptive message representing an `Bad request` error with `name-is-too-long.with-valid-length` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.name-is-too-long.with-valid-length.message" = "The customer name exceeds the %d character limit";
+
+/* A default descriptive message representing an `Bad request` error with `name-is-too-long.with-valid-length` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.name-is-too-long.with-valid-length.recovery-suggestion" = "Please input customer name which is no longer than %d characters";
+
+/* A default descriptive message representing an `Bad request` error with `name-is-too-long.without-valid-length` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.name-is-too-long.without-valid-length.message" = "The customer name is too long";
+
+/* A default descriptive message representing an `Bad request` error with `name-is-too-long.without-valid-length` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.name-is-too-long.without-valid-length.recovery-suggestion" = "Please input shorter customer name";
+
+/* A default descriptive message representing an `Bad request` error with `other` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.other.message" = "Bad request: %@";
+
+/* A default descriptive message representing an `Bad request` error with `type-not-supported` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.type-not-supported.message" = "The source type is not supported by this account";
+
+/* A default descriptive message representing an `Bad request` error with `type-not-supported` from the backend which a merchant may show this message to their user */
+"error.api.bad_request.type-not-supported.recovery-suggestion" = "Please review the source type";
+
+/* A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Invalid card holder name` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.empty-card-holder-name.recovery-suggestion" = "Please review the card holder name";
+
+/* A default descriptive message representing an `Invalid card data` error with the `Invalid card holder name` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.empty-card-holderName.message" = "Invalid card holder name";
+
+/* A default descriptive message representing an `Invalid card data` error with the `Invalid card number` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.invalid-card-number.message" = "Invalid card number";
+
+/* A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Invalid card number` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.invalid-card-number.recovery-suggestion" = "Please review the card number";
+
+/* A default descriptive message representing an `Invalid card data` error with the `Invalid card expiration date` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.invalid-expiration-date.message" = "Invalid card expiration date";
+
+/* A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Invalid card expiration date` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.invalid-expiration-date.recovery-suggestion" = "Please review the card expiration date";
+
+/* A descriptive suggestion message to recovery from the `Invalid card data` error from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.other.recovery-suggestion" = "Please review credit card information";
+
+/* A default descriptive message representing an `Invalid card data` error with the `Unsupported card brand` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.unsupported-brand.message" = "Unsupported card brand";
+
+/* A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Unsupported card brand` message from the backend which a merchant may show this message to their user */
+"error.api.invalid_card.unsupported-brand.recovery-suggestion" = "Please use another credit card";
+
+/* A default descriptive message representing an `Service not found` error from the backend which a merchant may show this message to their user */
+"error.api.service_not_found.message" = "Service not found";
+
+/* A default descriptive suggestion message to recovery from the `Service not found` error from the backend which a merchant may show this message to their user */
+"error.api.service_not_found.recovery-suggestion" = "Please contact the merchant";
+
+/* A descriptive message representing an `Invalid error data in the error response` error during the operation in the client */
+"error.unexpected.http-error-response-with-invalid-data.message" = "Invalid error data in the error response";
+
+/* A default descriptive suggestion message to recovery from the `Invalid error data in the error response` error during the operation in the client which a merchant may show this message to their user */
+"error.unexpected.http-error-response-with-invalid-data.recovery-suggestion" = "Please try again later. If the same problem persists please contact customer support.";
+
+/* A descriptive message representing an `No error data in the error response` error during the operation in the client */
+"error.unexpected.http-error-with-no-data.message" = "No error data in the error response";
+
+/* A default descriptive suggestion message to recovery from the `No error data in the error response` error during the operation in the client which a merchant may show this message to their user */
+"error.unexpected.http-error-with-no-data.recovery-suggestion" = "Please try again later. If the same problem persists please contact customer support.";
+
+/* A descriptive message representing an `Invalid data in the success response` error during the operation in the client */
+"error.unexpected.http-succeess-with-invalid-data.message" = "Invalid data in the success response";
+
+/* A default descriptive suggestion message to recovery from the `Invalid data in the success response` error during the operation in the client which a merchant may show this message to their user */
+"error.unexpected.http-succeess-with-invalid-data.recovery-suggestion" = "Please try again later. If the same problem persists please contact customer support.";
+
+/* A descriptive message representing an `No data in the success response` error during the operation in the client */
+"error.unexpected.http-succeess-with-no-data.message" = "No data in the success response";
+
+/* A default descriptive suggestion message to recovery from the `No data in the success response` error during the operation in the client which a merchant may show this message to their user */
+"error.unexpected.http-succeess-with-no-data.recovery-suggestion" = "Please try again later. If the same problem persists please contact customer support.";
+
+/* A descriptive message representing an `No error nor response` error during the operation in the client */
+"error.unexpected.no-error-norresponse.message" = "No error nor response";
+
+/* A default descriptive suggestion message to recovery from the `No error nor response` error during the operation in the client which a merchant may show this message to their user */
+"error.unexpected.no-error-norresponse.recovery-suggestion" = "Please try again later. If the same problem persists please contact customer support.";
+
+/* A descriptive message representing an `Unrecognized/unsupported HTTP status code` error during the operation in the client */
+"error.unexpected.unrecognized-HTTP-status-code.message" = "Unrecognized/unsupported HTTP status code";
+
+/* A default descriptive suggestion message to recovery from the `Invalid data in the success response` error during the operation in the client which a merchant may show this message to their user */
+"error.unexpected.unrecognized-HTTP-status-code.recovery-suggestion" = "Please try again later. If the same problem persists please contact customer support.";
+
+/* The displaying message showing in the error banner an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.message" = "Amount is greater than the valid amount of %@";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.recovery-suggestion" = "The payment amount is too high. Please make a payment with a higher amount.";
+
+/* The displaying message showing in the error banner an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.message" = "Amount is greater than the valid amount";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.recovery-suggestion" = "The payment amount is too high. Please make a payment with a higher amount.";
+
+/* The displaying message showing in the error banner an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.message" = "Amount is less than the valid amount of %@";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.recovery-suggestion" = "The payment amount is too high. Please make a payment with a lower amount";
+
+/* The displaying message showing in the error banner an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.message" = "Amount is less than the valid amount";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.recovery-suggestion" = "The payment amount is too high. Please make a payment with a lower amount";
+
+/* The displaying message showing in the error banner an `Bad request` error with `currency-not-supported` from the backend has occurred */
+"payment-creator.error.api.bad_request.currency-not-supported.message" = "The currency is not supported for this account";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `currency-not-supported` from the backend has occurred */
+"payment-creator.error.api.bad_request.currency-not-supported.recovery-suggestion" = "Please choose another currency";
+
+/* The displaying message showing in the error banner an `Bad request` error with `empty-name` from the backend has occurred */
+"payment-creator.error.api.bad_request.empty-name.message" = "The customer name is empty";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `empty-name` from the backend has occurred */
+"payment-creator.error.api.bad_request.empty-name.recovery-suggestion" = "Please fill in the customer name";
+
+/* The displaying message showing in the error banner an `Bad request` error with `invalid-currency` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-currency.message" = "The currency is invalid";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `invalid-currency` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-currency.recovery-suggestion" = "Please choose another currency or contact customer support";
+
+/* The displaying message showing in the error banner an `Bad request` error with `invalid-email` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-email.message" = "The customer email is invalid";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `invalid-email` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-email.recovery-suggestion" = "Please review the email";
+
+/* The displaying message showing in the error banner an `Bad request` error with `invalid-name` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-name.message" = "The customer name is invalid";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `invalid-name` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-name.recovery-suggestion" = "Please review the customer name";
+
+/* The displaying message showing in the error banner an `Bad request` error with `invalid-phone-number` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-phone-number.message" = "The customer phone number is invalid";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `invalid-phone-number` from the backend has occurred */
+"payment-creator.error.api.bad_request.invalid-phone-number.recovery-suggestion" = "Please review the phone number";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `name-is-too-long.without-valid-length` from the backend has occurred */
+"payment-creator.error.api.bad_request.name-is-too-long.recovery-suggestion" = "Please review the customer name";
+
+/* The displaying message showing in the error banner an `Bad request` error with `name-is-too-long.with-valid-length` from the backend has occurred */
+"payment-creator.error.api.bad_request.name-is-too-long.with-valid-length.message" = "The customer name exceeds %d characters";
+
+/* The displaying message showing in the error banner an `Bad request` error with `name-is-too-long.without-valid-length` from the backend has occurred */
+"payment-creator.error.api.bad_request.name-is-too-long.without-valid-length.message" = "The customer name is too long";
+
+/* The displaying message showing in the error banner an `Bad request` error with `other` from the backend has occurred */
+"payment-creator.error.api.bad_request.other.message" = "Unknown error occurred";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `other` from the backend has occurred */
+"payment-creator.error.api.bad_request.other.recovery-suggestion" = "Please try again later";
+
+/* The displaying message showing in the error banner an `Bad request` error with `type-not-supported` from the backend has occurred */
+"payment-creator.error.api.bad_request.type-not-supported.message" = "The source type is not supported by this account";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `type-not-supported` from the backend has occurred */
+"payment-creator.error.api.bad_request.type-not-supported.recovery-suggestion" = "Please contact customer support";
+
+/* The displaying message showing in the error banner in the built-in Payment Creator when there is the `empty-card-holder-name` API error occured */
+"payment-creator.error.api.invalid_card.empty-card-holder-name.message" = "Invalid card holder name";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator in the built-in Payment Creator when there is the `empty-card-holder-name` API error occured */
+"payment-creator.error.api.invalid_card.empty-card-holder-name.recovery-suggestion" = "Please review the card holder name";
+
+/* The displaying message showing in the error banner in the built-in Payment Creator when there is the `invalid-card-number` API error occured */
+"payment-creator.error.api.invalid_card.invalid-card-number.message" = "Invalid card number";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator in the built-in Payment Creator when there is the `invalid-card-number` API error occured */
+"payment-creator.error.api.invalid_card.invalid-card-number.recovery-suggestion" = "Please review the card number";
+
+/* The displaying message showing in the error banner in the built-in Payment Creator when there is the `invalid-expiration-date` API error occured */
+"payment-creator.error.api.invalid_card.invalid-expiration-date.message" = "Invalid card expiration date";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator in the built-in Payment Creator when there is the `invalid-expiration-date` API error occured */
+"payment-creator.error.api.invalid_card.invalid-expiration-date.recovery-suggestion" = "Please review the card expiration date again.";
+
+/* The displaying message showing in the error banner in the built-in Payment Creator when there is the `other` API error occured */
+"payment-creator.error.api.invalid_card.other.message" = "An unknown error occured";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator in the built-in Payment Creator when there is the `other` API error occured */
+"payment-creator.error.api.invalid_card.other.recovery-suggestion" = "Please try again later";
+
+/* The displaying message showing in the error banner in the built-in Payment Creator when there is the `unsupported-brand` API error occured */
+"payment-creator.error.api.invalid_card.unsupported-brand.message" = "Unsupported card brand";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator in the built-in Payment Creator when there is the `unsupported-brand` API error occured */
+"payment-creator.error.api.invalid_card.unsupported-brand.recovery-suggestion" = "Please use another card";
+
+/* The displaying message showing in the error banner in the built-in Payment Creator when there is the `unexpected` API error occured */
+"payment-creator.error.api.unexpected.message" = "An unexpected error occured";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator when there is the `unexpected` API error occured */
+"payment-creator.error.api.unexpected.recovery-suggestion" = "Please try again later";
+
+/* The displaying message showing in the error banner when there is an `unknown` API error occured */
+"payment-creator.error.api.unknown.message" = "An unknown error occured";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator when there is an `unknown` API error occured */
+"payment-creator.error.api.unknown.recovery-suggestion" = "Please try again later";
+
+/* The displaying message showing in the error banner when there is the `unexpected` error occured */
+"payment-creator.error.unexpected.message" = "An unexpected error occurred";
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator when there is the `unexpected` error occured */
+"payment-creator.error.unexpected.recovery-suggestion" = "Please try again later";
+
