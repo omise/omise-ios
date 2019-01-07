@@ -1032,8 +1032,12 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Library";
-				"SWIFT_INCLUDE_PATHS[sdk=iphoneos12.0]" = "";
-				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator12.0]" = "";
+				"SWIFT_INCLUDE_PATHS[sdk=iphoneos*]" = "";
+				"SWIFT_INCLUDE_PATHS[sdk=iphoneos10*]" = "$(SRCROOT)/Library";
+				"SWIFT_INCLUDE_PATHS[sdk=iphoneos11*]" = "$(SRCROOT)/Library";
+				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator*]" = "";
+				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator10*]" = "$(SRCROOT)/Library";
+				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator11*]" = "$(SRCROOT)/Library";
 			};
 			name = Release;
 		};
