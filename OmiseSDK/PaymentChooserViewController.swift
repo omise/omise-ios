@@ -217,6 +217,35 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         }
     }
     
+    public func applyPaymentMethods(from capability: Capability) {
+        showsCreditCardPayment = capability.creditCardBackend != nil
+        allowedPaymentMethods = capability.supportedBackends.compactMap({
+            switch $0.payment {
+            case .alipay:
+                return OMSSourceTypeValue.alipay
+            case .installment(let brand, availableNumberOfTerms: _):
+                return OMSSourceTypeValue(brand.type)
+            case .internetBanking(let bank):
+                return OMSSourceTypeValue(bank.type)
+            case .card, .unknownSource:
+                return nil
+            }
+        })
+        
+        updateShowingValues()
+    }
+    
+    private func loadCapabilityData() {
+        flowSession?.client?.requestCapabilityDataWithCompletionHandler({ (result) in
+            switch result {
+            case .success(let capability):
+                self.applyPaymentMethods(from: capability)
+            case .failure:
+                break
+            }
+        })
+    }
+    
     private func applyPrimaryColor() {
         guard isViewLoaded else {
             return

@@ -74,7 +74,7 @@ public struct CreateTokenParameter: Encodable {
 
 
 /// Represents an Omise Token object
-public struct Token: Object {
+public struct Token: CreatableObject {
     public typealias CreateParameter = CreateTokenParameter
     
     public static let postURL: URL = URL(string: "https://vault.omise.co/tokens")!

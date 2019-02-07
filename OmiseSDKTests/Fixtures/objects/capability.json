@@ -1,0 +1,187 @@
+{
+  "object": "capability",
+  "location": "/capability",
+  "banks": [
+    "test",
+    "bbl",
+    "kbank",
+    "rbs",
+    "ktb",
+    "jpm",
+    "mufg",
+    "tmb",
+    "scb",
+    "citi",
+    "smbc",
+    "sc",
+    "cimb",
+    "uob",
+    "bay",
+    "mega",
+    "boa",
+    "cacib",
+    "gsb",
+    "hsbc",
+    "db",
+    "ghb",
+    "baac",
+    "mb",
+    "bnp",
+    "tbank",
+    "ibank",
+    "tisco",
+    "kk",
+    "icbc",
+    "tcrb",
+    "lhb"
+  ],
+  "limits": {
+    "charge_amount": {
+      "max": 100000000,
+      "min": 2000
+    },
+    "transfer_amount": {
+      "max": 1000000000,
+      "min": 3000
+    }
+  },
+  "payment_backends": [
+    {
+      "credit_card": {
+        "type": "card",
+        "currencies": [
+          "THB",
+          "JPY",
+          "USD",
+          "EUR",
+          "GBP",
+          "SGD"
+        ],
+        "brands": [
+          
+        ]
+      }
+    },
+    {
+      "installment_bay": {
+        "type": "installment",
+        "currencies": [
+          "THB"
+        ],
+        "allowed_installment_terms": [
+          3,
+          4,
+          6,
+          9,
+          10
+        ],
+        "amount": {
+          "min": 2000,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "installment_first_choice": {
+        "type": "installment",
+        "currencies": [
+          "THB"
+        ],
+        "allowed_installment_terms": [
+          3,
+          4,
+          6,
+          9,
+          10,
+          12,
+          18,
+          24,
+          36
+        ],
+        "amount": {
+          "min": 2000,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "installment_kbank": {
+        "type": "installment",
+        "currencies": [
+          "THB"
+        ],
+        "allowed_installment_terms": [
+          3,
+          4,
+          6,
+          10
+        ],
+        "amount": {
+          "min": 2000,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "installment_bbl": {
+        "type": "installment",
+        "currencies": [
+          "THB"
+        ],
+        "allowed_installment_terms": [
+          4,
+          6,
+          8,
+          9,
+          10
+        ],
+        "amount": {
+          "min": 2000,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "installment_ktc": {
+        "type": "installment",
+        "currencies": [
+          "THB"
+        ],
+        "allowed_installment_terms": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "amount": {
+          "min": 2000,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "internet_banking_scb": {
+        "type": "internet_banking",
+        "currencies": ["thb"],
+        "amount": {
+          "min": 500000,
+          "max": 10000000
+        }
+      }
+    },
+    {
+      "internet_banking_ktb": {
+        "type": "internet_banking",
+        "currencies": ["thb"],
+        "amount": {
+          "min": 500000,
+          "max": 10000000
+        }
+      }
+    }
+  ]
+}

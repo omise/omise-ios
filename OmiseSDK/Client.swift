@@ -50,7 +50,7 @@ import os
     ///   - completionHandler: Compleation Handler closure that will be called when the request task is finished.
     ///     The completion handler will be called on the main queue
     /// - Returns: A new Request Task
-    public func requestTask<T: Object>(with request: Request<T>, completionHandler: Request<T>.Callback?) -> RequestTask<T> {
+    public func requestTask<T: CreatableObject>(with request: Request<T>, completionHandler: Request<T>.Callback?) -> RequestTask<T> {
         let dataTask = session.dataTask(with: buildURLRequest(for: request), completionHandler: { (data, response, error) in
             DispatchQueue.main.async {
                 Client.completeRequest(request, callback: completionHandler)(data, response, error)
@@ -72,6 +72,76 @@ import os
             task.resume()
         }
         return task
+    }
+    
+    public func requestCapabilityDataWithCompletionHandler(_ completionHandler: ((RequestResult<Capability>) -> Void)?) {
+        let dataTask = session.dataTask(with: buildCapabilityAPIURLRequest(), completionHandler: { (data, response, error) in
+            guard let completionHandler = completionHandler else { return } // nobody around to hear the leaf falls
+            
+            var result: RequestResult<Capability>
+            defer {
+                if #available(iOSApplicationExtension 10.0, *) {
+                    switch result {
+                    case .success(let value):
+                        os_log("Request succeed: Capability", log: sdkLogObject, type: .debug)
+                    case .failure(let error):
+                        os_log("Request failed %{public}@", log: sdkLogObject, type: .info, error.localizedDescription)
+                    }
+                }
+                DispatchQueue.main.async {
+                    completionHandler(result)
+                }
+            }
+            
+            if let error = error {
+                result = .failure(error)
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                let error = OmiseError.unexpected(error: .noErrorNorResponse, underlying: nil)
+                result = .failure(error)
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(Client.jsonDateFormatter)
+            
+            switch httpResponse.statusCode {
+            case 400..<600:
+                guard let data = data else {
+                    let error = OmiseError.unexpected(error: .httpErrorWithNoData, underlying: nil)
+                    result = .failure(error)
+                    return
+                }
+                
+                do {
+                    result = .failure(try decoder.decode(OmiseError.self, from: data))
+                } catch let err {
+                    let error = OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: err)
+                    result = .failure(error)
+                }
+                
+            case 200..<300:
+                guard let data = data else {
+                    let error = OmiseError.unexpected(error: .httpSucceessWithNoData, underlying: nil)
+                    result = .failure(error)
+                    return
+                }
+                
+                do {
+                    result = .success(try decoder.decode(Capability.self, from: data))
+                } catch let err {
+                    let error = OmiseError.unexpected(error: .httpSucceessWithInvalidData, underlying: err)
+                    result = .failure(error)
+                }
+                
+            default:
+                let error = OmiseError.unexpected(error: .unrecognizedHTTPStatusCode(code: httpResponse.statusCode), underlying: nil)
+                result = .failure(error)
+            }
+        })
+        dataTask.resume()
     }
 }
 

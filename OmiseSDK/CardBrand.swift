@@ -3,7 +3,7 @@ import Foundation
 
 /// Brand of the Card Network
 @objc(OMSCardBrand)
-public enum CardBrand: Int, CustomStringConvertible {
+public enum CardBrand: Int, CustomStringConvertible, Codable {
     
     /// VISA card newtwork brand
     case visa

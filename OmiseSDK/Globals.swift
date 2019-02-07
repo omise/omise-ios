@@ -16,7 +16,7 @@ extension Optional where Wrapped == String {
 }
 
 
-private struct JSONCodingKeys: CodingKey {
+struct JSONCodingKeys: CodingKey {
     var stringValue: String
     
     init?(stringValue: String) {
@@ -32,6 +32,95 @@ private struct JSONCodingKeys: CodingKey {
     init?(intValue: Int) {
         self.init(stringValue: "\(intValue)")
         self.intValue = intValue
+    }
+}
+
+
+enum CombineCodingKeys<Left: CodingKey, Right: CodingKey> : CodingKey {
+    var stringValue: String {
+        switch self {
+        case .left(let left):
+            return left.stringValue
+        case .right(let right):
+            return right.stringValue
+        }
+    }
+    
+    var intValue: Int? {
+        switch self {
+        case .left(let left):
+            return left.intValue
+        case .right(let right):
+            return right.intValue
+        }
+    }
+    
+    init?(stringValue: String) {
+        if let left = Left(stringValue: stringValue) {
+            self = .left(left)
+        } else if let right = Right(stringValue: stringValue) {
+            self = .right(right)
+        } else {
+            return nil
+        }
+    }
+    
+    init?(intValue: Int) {
+        if let left = Left(intValue: intValue) {
+            self = .left(left)
+        } else if let right = Right(intValue: intValue) {
+            self = .right(right)
+        } else {
+            return nil
+        }
+    }
+    
+    case left(Left)
+    case right(Right)
+}
+
+struct SkippingKeyCodingKeys<Key: CodingKey> : CodingKey {
+    let stringValue: String
+    
+    init?(stringValue: String) {
+        guard Key(stringValue: stringValue) == nil else {
+            return nil
+        }
+        
+        self.stringValue = stringValue
+        self.intValue = Int(stringValue)
+    }
+    
+    let intValue: Int?
+    
+    init?(intValue: Int) {
+        guard Key(intValue: intValue) == nil else {
+            return nil
+        }
+        
+        self.intValue = intValue
+        self.stringValue = String(intValue)
+    }
+}
+
+extension OMSSourceTypeValue {
+    var sourceTypePrefix: String {
+        switch self {
+        case .internetBankingBAY, .internetBankingKTB, .internetBankingSCB, .internetBankingBBL:
+            return "internet_banking"
+        case .alipay:
+            return "alipay"
+        case .billPaymentTescoLotus:
+            return "bill_payment"
+        case .barcodeAlipay:
+            return "barcode"
+        case .installmentBAY, .installmentFirstChoice, .installmentBBL, .installmentKTC, .installmentKBank:
+            return "installment"
+        case .eContext:
+            return "econtext"
+        default:
+            return self.rawValue
+        }
     }
 }
 
