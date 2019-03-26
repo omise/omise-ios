@@ -40,7 +40,7 @@ import UIKit
         placeholder = "123"
         super.delegate = self
         
-        validator = try! NSRegularExpression(pattern: "\\d{3,4}", options: [])
+        validator = try! NSRegularExpression(pattern: #"\d{3,4}"#, options: [])
     }
     
     public override func validate() throws {

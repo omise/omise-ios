@@ -729,11 +729,11 @@ extension CreditCardFormViewController {
         confirmButton.titleLabel?.adjustsFontForContentSizeCategory = true
         
         let fieldsAccessibilityElements = ([
-            cardNumberTextField.accessibilityElements?.first ?? cardNumberTextField,
-            cardNameTextField.accessibilityElements?.first ?? cardNameTextField,
-            expiryDateTextField.expirationMonthAccessibilityElement,
-            expiryDateTextField.expirationYearAccessibilityElement,
-            secureCodeTextField.accessibilityElements?.first ?? secureCodeTextField,
+            cardNumberTextField.accessibilityElements?.first ?? cardNumberTextField as Any,
+            cardNameTextField.accessibilityElements?.first ?? cardNameTextField as Any,
+            expiryDateTextField.expirationMonthAccessibilityElement as Any,
+            expiryDateTextField.expirationYearAccessibilityElement as Any,
+            secureCodeTextField.accessibilityElements?.first ?? secureCodeTextField as Any,
             ]).compactMap({ $0 as? NSObjectProtocol })
         
         let fields = [
@@ -748,10 +748,11 @@ extension CreditCardFormViewController {
                                       direction: AccessibilityCustomRotorDirection) -> NSObjectProtocol? {
             guard let element = element else {
                 switch direction {
-                case .next:
-                    return fields.first(where: predicate)?.accessibilityElements?.first as? NSObjectProtocol ?? fields.first(where: predicate)
                 case .previous:
                     return fields.reversed().first(where: predicate)?.accessibilityElements?.last as? NSObjectProtocol ?? fields.reversed().first(where: predicate)
+                case .next: fallthrough
+                @unknown default:
+                    return fields.first(where: predicate)?.accessibilityElements?.first as? NSObjectProtocol ?? fields.first(where: predicate)
                 }
             }
             
@@ -766,39 +767,42 @@ extension CreditCardFormViewController {
             func filedAfter(_ field: OmiseTextField,
                             matchingPredicate predicate: (OmiseTextField) -> Bool,
                             direction: AccessibilityCustomRotorDirection) -> OmiseTextField? {
-                guard let indexOfField = fields.index(of: field) else { return nil }
+                guard let indexOfField = fields.firstIndex(of: field) else { return nil }
                 switch direction {
-                case .next:
-                    return fields[fields.index(after: indexOfField)...].first(where: predicate)
                 case .previous:
                     return fields[fields.startIndex..<indexOfField].reversed().first(where: predicate)
+                case .next: fallthrough
+                @unknown default:
+                    return fields[fields.index(after: indexOfField)...].first(where: predicate)
                 }
             }
             
             let nextField = filedAfter(fieldOfElement, matchingPredicate: predicate, direction: direction)
             
             guard let currentAccessibilityElements = (fieldOfElement.accessibilityElements as? [NSObjectProtocol]),
-                let indexOfAccessibilityElement = currentAccessibilityElements.index(where: { $0 === element }) else {
+                let indexOfAccessibilityElement = currentAccessibilityElements.firstIndex(where: { $0 === element }) else {
                     switch direction {
-                    case .next:
-                        return nextField?.accessibilityElements?.first as? NSObjectProtocol ?? nextField
                     case .previous:
                         return nextField?.accessibilityElements?.last as? NSObjectProtocol ?? nextField
+                    case .next: fallthrough
+                    @unknown default:
+                        return nextField?.accessibilityElements?.first as? NSObjectProtocol ?? nextField
                     }
             }
             
             switch direction {
-            case .next:
-                if predicate(fieldOfElement) && indexOfAccessibilityElement < currentAccessibilityElements.endIndex - 1 {
-                    return currentAccessibilityElements[currentAccessibilityElements.index(after: indexOfAccessibilityElement)]
-                } else {
-                    return nextField?.accessibilityElements?.first as? NSObjectProtocol ?? nextField
-                }
             case .previous:
                 if predicate(fieldOfElement) && indexOfAccessibilityElement > currentAccessibilityElements.startIndex {
                     return currentAccessibilityElements[currentAccessibilityElements.index(before: indexOfAccessibilityElement)]
                 } else {
                     return nextField?.accessibilityElements?.last as? NSObjectProtocol ?? nextField
+                }
+            case .next: fallthrough
+            @unknown default:
+                if predicate(fieldOfElement) && indexOfAccessibilityElement < currentAccessibilityElements.endIndex - 1 {
+                    return currentAccessibilityElements[currentAccessibilityElements.index(after: indexOfAccessibilityElement)]
+                } else {
+                    return nextField?.accessibilityElements?.first as? NSObjectProtocol ?? nextField
                 }
             }
         }

@@ -151,7 +151,7 @@ extension PaymentFormUIController where Self: UIViewController {
     }
     
     func gotoPreviousField() {
-        guard let currentTextField = currentEditingTextField, let index = formFields.index(of: currentTextField) else {
+        guard let currentTextField = currentEditingTextField, let index = formFields.firstIndex(of: currentTextField) else {
             return
         }
         
@@ -161,7 +161,7 @@ extension PaymentFormUIController where Self: UIViewController {
     }
     
     func gotoNextField() {
-        guard let currentTextField = currentEditingTextField, let index = formFields.index(of: currentTextField) else {
+        guard let currentTextField = currentEditingTextField, let index = formFields.firstIndex(of: currentTextField) else {
             return
         }
         
