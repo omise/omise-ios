@@ -36,7 +36,7 @@ let task = client.requestTask(with: request) { (result) in
   switch result {
   case .success(let source):
     print(source.id)
-  case .fail(let error):
+  case .failure(let error):
     print(error)
   }
 }

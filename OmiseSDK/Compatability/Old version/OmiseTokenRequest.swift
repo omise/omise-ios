@@ -93,7 +93,7 @@ public class OmiseTokenRequest: NSObject {
             switch result {
             case .success(let token):
                 tokenRequestResult = .succeed(token: __OmiseToken(token: token))
-            case .fail(let error):
+            case .failure(let error):
                 tokenRequestResult = .fail(error: error)
             }
             callback?(tokenRequestResult)

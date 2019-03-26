@@ -74,7 +74,7 @@ internal class PaymentCreatorFlowSession {
             switch result {
             case .success(let source):
                 self.delegate?.paymentCreatorFlowSession(self, didCreatedSource: source)
-            case .fail(let error):
+            case .failure(let error):
                 self.delegate?.paymentCreatorFlowSession(self, didFailWithError: error)
             }
         }

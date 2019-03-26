@@ -405,7 +405,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
                 } else if #available(iOSApplicationExtension 10.0, *) {
                     os_log("There is no Credit Card Form's delegate to notify about the created token", log: uiLogObject, type: .default)
                 }
-            case let .fail(err):
+            case let .failure(err):
                 strongSelf.handleError(err)
             }
         })
