@@ -95,7 +95,7 @@ import UIKit
         expirationYearAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitAdjustable
         #endif
         
-        validator = try! NSRegularExpression(pattern: #"^([0-1]?\d)/(\d{1,2})$"#, options: [])
+        validator = try! NSRegularExpression(pattern: "^([0-1]?\\d)/(\\d{1,2})$", options: [])
     }
     
     public override var accessibilityElements: [Any]? {
@@ -127,7 +127,8 @@ import UIKit
     override func textDidChange() {
         super.textDidChange()
         
-        guard let text = self.text?.replacingOccurrences(of: #"[^\d/]"#, with: "", options: String.CompareOptions.regularExpression, range: nil),
+        let replacedText = self.text?.replacingOccurrences(of: "[^\\d/]", with: "", options: String.CompareOptions.regularExpression, range: nil)
+        guard let text = replacedText,
             !isDeletingDateSeparator else {
                 return
         }
@@ -180,7 +181,7 @@ import UIKit
         }
     }
     
-    static let monthStringRegularExpression = try! NSRegularExpression(pattern: #"^([0-1]?\d)"#, options: [])
+    static let monthStringRegularExpression = try! NSRegularExpression(pattern: "^([0-1]?\\d)", options: [])
     
     public override func replace(_ range: UITextRange, withText text: String) {
         super.replace(range, withText: text)

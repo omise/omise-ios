@@ -750,7 +750,8 @@ extension CreditCardFormViewController {
                 switch direction {
                 case .previous:
                     return fields.reversed().first(where: predicate)?.accessibilityElements?.last as? NSObjectProtocol ?? fields.reversed().first(where: predicate)
-                case .next: fallthrough
+                case .next:
+                    fallthrough
                 @unknown default:
                     return fields.first(where: predicate)?.accessibilityElements?.first as? NSObjectProtocol ?? fields.first(where: predicate)
                 }
@@ -784,7 +785,8 @@ extension CreditCardFormViewController {
                     switch direction {
                     case .previous:
                         return nextField?.accessibilityElements?.last as? NSObjectProtocol ?? nextField
-                    case .next: fallthrough
+                    case .next:
+                        fallthrough
                     @unknown default:
                         return nextField?.accessibilityElements?.first as? NSObjectProtocol ?? nextField
                     }
@@ -797,7 +799,8 @@ extension CreditCardFormViewController {
                 } else {
                     return nextField?.accessibilityElements?.last as? NSObjectProtocol ?? nextField
                 }
-            case .next: fallthrough
+            case .next:
+                fallthrough
             @unknown default:
                 if predicate(fieldOfElement) && indexOfAccessibilityElement < currentAccessibilityElements.endIndex - 1 {
                     return currentAccessibilityElements[currentAccessibilityElements.index(after: indexOfAccessibilityElement)]
