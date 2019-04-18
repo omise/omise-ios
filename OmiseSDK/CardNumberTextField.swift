@@ -3,7 +3,8 @@ import Foundation
 
 /// UITextField subclass for entering the credit card number.
 /// Automatically formats entered number into groups of four.
-@objc public class CardNumberTextField: OmiseTextField {
+@objc(OMSCardNumberTextField) @IBDesignable
+public class CardNumberTextField: OmiseTextField {
 
     /// The current PAN
     public var pan: PAN {

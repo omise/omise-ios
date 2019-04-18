@@ -2,7 +2,8 @@ import Foundation
 
 
 /// UIPickerView subclass pre-configured for picking card expiration month and year.
-@objc public final class CardExpiryDatePicker: UIPickerView {
+@objc(OMSCardExpiryDatePicker) public
+class CardExpiryDatePicker: UIPickerView {
     
     /// Callback function that will be called when picker value changes.
     public var onDateSelected: ((_ month: Int, _ year: Int) -> ())?
