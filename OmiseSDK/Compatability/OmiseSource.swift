@@ -11,7 +11,7 @@ import Foundation
     @objc lazy public var object: String = source.object
     
     /// Omise Source ID
-    @objc lazy public var id: String = source.id
+    @objc lazy public var sourcdID: String = source.id
     
     /// Omise Source Type value using in the Omise API
     @objc lazy public var type: String = source.paymentInformation.sourceType

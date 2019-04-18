@@ -3,7 +3,8 @@ import UIKit
 
 
 /// UITextField subclass for entering card holder's name.
-@objc public class CardNameTextField: OmiseTextField {
+@objc(OMSCardNameTextField) @IBDesignable
+public class CardNameTextField: OmiseTextField {
     /// Boolean indicating wether current input is valid or not.
     public override var isValid: Bool {
         return !text.isNilOrEmpty

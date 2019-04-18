@@ -4,7 +4,8 @@ import UIKit
 
 /// UITextField subclass used for entering card's expiry date.
 /// `CardExpiryDatePicker` will be set as the default input view.
-@objc public class CardExpiryDateTextField: OmiseTextField {
+@objc(OMSCardExpiryDateTextField) @IBDesignable
+public class CardExpiryDateTextField: OmiseTextField {
     
     /// Currently selected month, `nil` if no month has been selected.
     public private(set) var selectedMonth: Int? = nil {

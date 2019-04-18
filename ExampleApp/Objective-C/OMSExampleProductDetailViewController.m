@@ -107,7 +107,7 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
 
 - (void)creditCardFormViewController:(OMSCreditCardFormViewController *)controller didSucceedWithToken:(OMSToken *)token {
     [self dismissFormWithCompletion:^{
-        NSString *alertMessage = [NSString stringWithFormat:@"The token with id of %@ was successfuly created. Please send this id to server to create a charge.", token.tokenId];
+        NSString *alertMessage = [NSString stringWithFormat:@"The token with id of %@ was successfuly created. Please send this id to server to create a charge.", token.tokenID];
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Token created" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
     }];
@@ -142,14 +142,14 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
 
 - (void)paymentCreatorController:(OMSPaymentCreatorController *)paymentCreatorController didCreateToken:(OMSToken *)token {
     [self dismissFormWithCompletion:^{
-        NSString *alertMessage = [NSString stringWithFormat:@"The token with id of %@ was successfuly created. Please send this id to server to create a charge.", token.tokenId];
+        NSString *alertMessage = [NSString stringWithFormat:@"The token with id of %@ was successfuly created. Please send this id to server to create a charge.", token.tokenID];
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Token created" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
     }];}
 
 - (void)paymentCreatorController:(OMSPaymentCreatorController *)paymentCreatorController didCreateSource:(OMSSource * _Nonnull)source {
     [self dismissFormWithCompletion:^{
-        NSString *alertMessage = [NSString stringWithFormat:@"The source with id of %@ was successfuly created. Please send this id to server to create a charge.", source.tokenId];
+        NSString *alertMessage = [NSString stringWithFormat:@"The source with id of %@ was successfuly created. Please send this id to server to create a charge.", source.sourcdID];
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Source created" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
     }];}
