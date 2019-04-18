@@ -61,7 +61,7 @@ class OmiseTokenRequestTest: XCTestCase {
                 XCTAssertEqual("4242", token.card?.lastDigits)
                 XCTAssertEqual(11, token.card?.expirationMonth)
                 XCTAssertEqual(2020, token.card?.expirationYear)
-            case .fail(let error):
+            case .failure(let error):
                 XCTFail("Expected succeed request but failed with \(error)")
             }
         }

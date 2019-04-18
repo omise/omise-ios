@@ -25,7 +25,7 @@ class ClientTestCase: XCTestCase {
                 XCTAssertEqual("4242", token.card.lastDigits)
                 XCTAssertEqual(11, token.card.expirationMonth)
                 XCTAssertEqual(2019, token.card.expirationYear)
-            case .fail(let error):
+            case .failure(let error):
                 XCTFail("Expected succeed request but it failed with \(error)")
             }
         }
@@ -69,7 +69,7 @@ class ClientTestCase: XCTestCase {
                 XCTAssertEqual(Currency.thb, source.currency)
                 XCTAssertEqual(Flow.redirect, source.flow)
                 XCTAssertEqual(PaymentInformation.internetBanking(.bay), source.paymentInformation)
-            case .fail(let error):
+            case .failure(let error):
                 XCTFail("Expected succeed request but it failed with \(error)")
             }
         }

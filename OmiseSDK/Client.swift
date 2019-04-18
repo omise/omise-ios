@@ -122,7 +122,7 @@ extension Client {
                     switch result {
                     case .success(let value):
                         os_log("Request succeed %{private}@", log: sdkLogObject, type: .debug, value.id)
-                    case .fail(let error):
+                    case .failure(let error):
                         os_log("Request failed %{public}@", log: sdkLogObject, type: .info, error.localizedDescription)
                     }
                 }
@@ -130,13 +130,13 @@ extension Client {
             }
             
             if let error = error {
-                result = .fail(error)
+                result = .failure(error)
                 return
             }
             
             guard let httpResponse = response as? HTTPURLResponse else {
                 let error = OmiseError.unexpected(error: .noErrorNorResponse, underlying: nil)
-                result = .fail(error)
+                result = .failure(error)
                 return
             }
             
@@ -144,22 +144,22 @@ extension Client {
             case 400..<600:
                 guard let data = data else {
                     let error = OmiseError.unexpected(error: .httpErrorWithNoData, underlying: nil)
-                    result = .fail(error)
+                    result = .failure(error)
                     return
                 }
                 
                 do {
                     let decoder = makeJSONDecoder(for: request)
-                    result = .fail(try decoder.decode(OmiseError.self, from: data))
+                    result = .failure(try decoder.decode(OmiseError.self, from: data))
                 } catch let err {
                     let error = OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: err)
-                    result = .fail(error)
+                    result = .failure(error)
                 }
                 
             case 200..<300:
                 guard let data = data else {
                     let error = OmiseError.unexpected(error: .httpSucceessWithNoData, underlying: nil)
-                    result = .fail(error)
+                    result = .failure(error)
                     return
                 }
                 
@@ -168,12 +168,12 @@ extension Client {
                     result = .success(try decoder.decode(T.self, from: data))
                 } catch let err {
                     let error = OmiseError.unexpected(error: .httpSucceessWithInvalidData, underlying: err)
-                    result = .fail(error)
+                    result = .failure(error)
                 }
                 
             default:
                 let error = OmiseError.unexpected(error: .unrecognizedHTTPStatusCode(code: httpResponse.statusCode), underlying: nil)
-                result = .fail(error)
+                result = .failure(error)
             }
         }
     }

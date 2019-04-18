@@ -13,12 +13,23 @@ let rsa2048Asn1Header:[UInt8] = [
 ]
 
 private func sha256(data : Data) -> String {
+    #if swift(>=5.0)
+    var keyWithHeader = Data(rsa2048Asn1Header)
+    #else
     var keyWithHeader = Data(bytes: rsa2048Asn1Header)
+    #endif
     keyWithHeader.append(data)
     var hash = [UInt8](repeating: 0,  count: Int(CC_SHA256_DIGEST_LENGTH))
+    #if swift(>=5.0)
+    keyWithHeader.withUnsafeBytes({ (bytes: UnsafeRawBufferPointer) -> Void in
+        guard let bytesPointer = bytes.baseAddress else { return }
+        _ = CC_SHA256(bytesPointer, CC_LONG(keyWithHeader.count), &hash)
+    })
+    #else
     keyWithHeader.withUnsafeBytes {
         _ = CC_SHA256($0, CC_LONG(keyWithHeader.count), &hash)
     }
+    #endif
     return Data(hash).base64EncodedString()
 }
 
@@ -89,13 +100,13 @@ extension Client {
                 kSecAttrApplicationTag: omiseKeychainPublicKeyTag,
                 kSecValueRef: publicKey as Any,
                 kSecAttrAccessible: String(kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly),
-                kSecReturnData: kCFBooleanTrue,
+                kSecReturnData: kCFBooleanTrue as Any,
                 ] as [String: Any]
             
             let peerPublicKeyDelete = [
                 kSecClass: String(kSecClassKey),
                 kSecAttrApplicationTag: omiseKeychainPublicKeyTag as CFString,
-                kSecReturnData: kCFBooleanTrue,
+                kSecReturnData: kCFBooleanTrue as Any,
                 ] as [String: Any]
             
             var publicKeyDataType: CFTypeRef?

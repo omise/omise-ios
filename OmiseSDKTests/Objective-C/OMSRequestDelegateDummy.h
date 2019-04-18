@@ -11,7 +11,7 @@
 
 @property (nonatomic, nonnull, strong) XCTestExpectation *expectation;
 
-- (instancetype)initWithExpectation:(XCTestExpectation *)expectation;
+- (instancetype _Nonnull)initWithExpectation:(XCTestExpectation * _Nonnull)expectation;
 
 @end
 
@@ -24,7 +24,7 @@
 
 @property (nonatomic, nonnull, strong) XCTestExpectation *expectation;
 
-- (instancetype)initWithExpectation:(XCTestExpectation *)expectation;
+- (instancetype _Nonnull)initWithExpectation:(XCTestExpectation * _Nonnull)expectation;
 
 @end
 

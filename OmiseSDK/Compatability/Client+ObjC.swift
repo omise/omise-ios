@@ -25,7 +25,7 @@ extension Client {
             case .success(let resultToken):
                 token = __OmiseToken(token: resultToken)
                 error = nil
-            case .fail(let requestError):
+            case .failure(let requestError):
                 if let requestError = requestError as? OmiseError {
                     error = requestError as NSError
                 } else {
@@ -51,7 +51,7 @@ extension Client {
             switch result {
             case let .success(token):
                 delegate?.tokenRequest(request, didSucceedWithToken: __OmiseToken(token: token))
-            case let .fail(err):
+            case let .failure(err):
                 let error = err as NSError
                 delegate?.tokenRequest(request, didFailWithError: error)
             }
@@ -86,7 +86,7 @@ extension Client {
             case .success(let resultToken):
                 token = __OmiseSource(source: resultToken)
                 error = nil
-            case .fail(let requestError):
+            case .failure(let requestError):
                 if let requestError = requestError as? OmiseError {
                     error = requestError as NSError
                 } else {
@@ -112,7 +112,7 @@ extension Client {
             switch result {
             case let .success(token):
                 delegate?.sourceRequest(request, didSucceedWithSource: __OmiseSource(source: token))
-            case let .fail(err):
+            case let .failure(err):
                 let error = err as NSError
                 delegate?.sourceRequest(request, didFailWithError: error)
             }

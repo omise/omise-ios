@@ -39,7 +39,7 @@ public class AdaptableStaticTableViewController<Element: StaticElementIterable &
     
     public func staticIndexPath(forValue value: Element) -> IndexPath {
         let allCases = Element.allCases
-        let index = allCases.index(of: value)!
+        let index = allCases.firstIndex(of: value)!
         return IndexPath(row: allCases.distance(from: allCases.startIndex, to: index), section: 0)
     }
     

@@ -100,7 +100,7 @@ import UIKit
     
     public override var accessibilityElements: [Any]? {
         get {
-            return [expirationMonthAccessibilityElement, expirationYearAccessibilityElement]
+            return [expirationMonthAccessibilityElement as Any, expirationYearAccessibilityElement as Any]
         }
         set {}
     }
@@ -127,7 +127,8 @@ import UIKit
     override func textDidChange() {
         super.textDidChange()
         
-        guard let text = self.text?.replacingOccurrences(of: "[^\\d/]", with: "", options: String.CompareOptions.regularExpression, range: nil),
+        let replacedText = self.text?.replacingOccurrences(of: "[^\\d/]", with: "", options: String.CompareOptions.regularExpression, range: nil)
+        guard let text = replacedText,
             !isDeletingDateSeparator else {
                 return
         }

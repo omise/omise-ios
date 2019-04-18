@@ -74,7 +74,7 @@ internal class PaymentCreatorFlowSession {
             switch result {
             case .success(let source):
                 self.delegate?.paymentCreatorFlowSession(self, didCreatedSource: source)
-            case .fail(let error):
+            case .failure(let error):
                 self.delegate?.paymentCreatorFlowSession(self, didFailWithError: error)
             }
         }
@@ -151,7 +151,7 @@ extension PaymentFormUIController where Self: UIViewController {
     }
     
     func gotoPreviousField() {
-        guard let currentTextField = currentEditingTextField, let index = formFields.index(of: currentTextField) else {
+        guard let currentTextField = currentEditingTextField, let index = formFields.firstIndex(of: currentTextField) else {
             return
         }
         
@@ -161,7 +161,7 @@ extension PaymentFormUIController where Self: UIViewController {
     }
     
     func gotoNextField() {
-        guard let currentTextField = currentEditingTextField, let index = formFields.index(of: currentTextField) else {
+        guard let currentTextField = currentEditingTextField, let index = formFields.firstIndex(of: currentTextField) else {
             return
         }
         

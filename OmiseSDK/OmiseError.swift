@@ -458,6 +458,7 @@ let amountLessThanValidAmountErrorMessageRegularExpression = try! NSRegularExpre
 
 let nameIsTooLongErrorMessageRegularExpression = try! NSRegularExpression(pattern: "name is too long \\(maximum is ([\\d]+) characters\\)", options: [])
 
+
 extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
     
     init(message: String, currency: Currency?) throws {
