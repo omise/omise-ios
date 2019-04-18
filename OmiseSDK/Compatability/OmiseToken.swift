@@ -7,6 +7,9 @@ import Foundation
  */
 @objc(OMSToken) public class __OmiseToken: NSObject {
     /// Token's ID.
+    @objc lazy public var tokenID: String? = token.id
+    
+    @available(*, deprecated, message: "Use the `__OmiseToken.tokenID` property instead")
     @objc lazy public var tokenId: String? = token.id
     
     /// Boolean flag indicating wether this card is a live card or a test card.
