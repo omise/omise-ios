@@ -2,7 +2,6 @@ import UIKit
 import os
 
 
-
 enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvertible {
     case creditCard
     case installment
@@ -86,22 +85,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-        showingValues = PaymentChooserOption.allCases.filter({
-            switch $0 {
-            case .creditCard:
-                return showsCreditCardPayment
-            case .installment:
-                return allowedPaymentMethods.hasInstallmentSource
-            case .internetBanking:
-                return allowedPaymentMethods.hasInternetBankingSource
-            case .tescoLotus:
-                return allowedPaymentMethods.hasTescoLotusSource
-            case .conbini, .payEasy, .netBanking:
-                return allowedPaymentMethods.hasEContextSource
-            case .alipay:
-                return allowedPaymentMethods.hasAlipaySource
-            }
-        })
+        updateShowingValues()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -277,7 +261,11 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         })
         
         if #available(iOS 10, *) {
-            os_log("Payment Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
+            os_log(
+                "Payment Chooser: Showing options - %{private}@",
+                log: uiLogObject, type: .info,
+                showingValues.map({ $0.description }).joined(separator: ", ")
+            )
         }
     }
     

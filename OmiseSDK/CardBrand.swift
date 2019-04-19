@@ -97,6 +97,35 @@ public enum CardBrand: Int, CustomStringConvertible, Codable {
             return "Maestro"
         }
     }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(description)
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        switch try container.decode(String.self) {
+        case "Visa":
+            self = .visa
+        case "MasterCard":
+            self = .masterCard
+        case "JCB":
+            self = .jcb
+        case "AMEX":
+            self = .amex
+        case "Diners":
+            self = .diners
+        case "Discover":
+            self = .discover
+        case "Laser":
+            self = .laser
+        case "Maestro":
+            self = .maestro
+        default:
+            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid Card Brand value")
+        }
+    }
 }
 
 

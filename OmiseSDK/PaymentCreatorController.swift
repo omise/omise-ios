@@ -98,8 +98,8 @@ public class PaymentCreatorController : UINavigationController {
             paymentChooserViewController.allowedPaymentMethods = allowedPaymentMethods
         }
     }
- 
-        /// A boolean flag to enables or disables automatic error handling.
+    
+    /// A boolean flag to enables or disables automatic error handling.
     ///
     /// The controller will show an error alert in the UI if the value is true,
     /// otherwise the controller will ask its delegate.
@@ -120,7 +120,7 @@ public class PaymentCreatorController : UINavigationController {
     private let paymentSourceCreatorFlowSession = PaymentCreatorFlowSession()
     
     private var paymentChooserViewController: PaymentChooserViewController {
-        return topViewController as! PaymentChooserViewController
+        return viewControllers[0] as! PaymentChooserViewController
     }
     
     private var noticeViewHeightConstraint: NSLayoutConstraint!
@@ -226,6 +226,10 @@ public class PaymentCreatorController : UINavigationController {
                 preconditionFailure("This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller")
             }
         }
+    }
+    
+    public func applyPaymentMethods(from capability: Capability) {
+        paymentChooserViewController.applyPaymentMethods(from: capability)
     }
     
     private func initializeWithPaymentChooserViewController(_ viewController: PaymentChooserViewController) {
@@ -352,7 +356,7 @@ public class PaymentCreatorController : UINavigationController {
             viewController.preferredPrimaryColor = preferredPrimaryColor
             viewController.preferredSecondaryColor = preferredSecondaryColor
         }
-            if let viewController = childController as? PaymentChooserViewController {
+        if let viewController = childController as? PaymentChooserViewController {
             viewController.flowSession = self.paymentSourceCreatorFlowSession
         }
         super.addChildViewController(childController)
