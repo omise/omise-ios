@@ -43,6 +43,17 @@ class PaymentSettingTableViewController: UITableViewController {
         }
     }
     
+    @objc var usesCapabilityDataForPaymentMethods: Bool = true {
+        didSet {
+            guard isViewLoaded else {
+                return
+            }
+            
+            useCapabilityAPIValuesCell.accessoryType = usesCapabilityDataForPaymentMethods ? .checkmark : .none
+            useSpecifiedValuesCell.accessoryType = usesCapabilityDataForPaymentMethods ? .none : .checkmark
+        }
+    }
+    
     @objc var allowedPaymentMethods: Set<OMSSourceTypeValue> = [] {
         willSet {
             guard isViewLoaded else {
@@ -84,6 +95,9 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet var installmentKBankPaymentCell: UITableViewCell!
     @IBOutlet var eContextPaymentCell: UITableViewCell!
     
+    @IBOutlet var useCapabilityAPIValuesCell: UITableViewCell!
+    @IBOutlet var useSpecifiedValuesCell: UITableViewCell!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -94,6 +108,9 @@ class PaymentSettingTableViewController: UITableViewController {
         
         amountField.text = amountFormatter.string(from: NSNumber(value: currentCurrency.convert(fromSubunit: currentAmount)))
         amountField.inputAccessoryView = amountFieldInputAccessoryView
+        
+        useCapabilityAPIValuesCell.accessoryType = usesCapabilityDataForPaymentMethods ? .checkmark : .none
+        useSpecifiedValuesCell.accessoryType = usesCapabilityDataForPaymentMethods ? .none : .checkmark
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -111,6 +128,14 @@ class PaymentSettingTableViewController: UITableViewController {
             
             currentCurrency = currency
         case 2:
+            switch tableView.cellForRow(at: indexPath) {
+            case useCapabilityAPIValuesCell:
+                usesCapabilityDataForPaymentMethods = true
+            case useSpecifiedValuesCell:
+                usesCapabilityDataForPaymentMethods = false
+            default: break
+            }
+        case 3:
             guard let cell = tableView.cellForRow(at: indexPath),
                 let sourceType = paymentSource(for: cell) else {
                     assertionFailure("Invalid cell configuration in the Setting scene")

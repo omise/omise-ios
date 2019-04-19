@@ -8,6 +8,19 @@
 @implementation OMSBaseViewController
 
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    self.usesCapabilityDataForPaymentMethods = YES;
+    return self;
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self.usesCapabilityDataForPaymentMethods = YES;
+    return self;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -90,6 +103,20 @@
     }
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [super prepareForSegue:segue sender:sender];
+    
+    if ([segue.identifier isEqualToString:@"PresentPaymentSettingScene"]) {
+        UINavigationController *settingNavigationController = (UINavigationController *)segue.destinationViewController;
+        PaymentSettingTableViewController *settingViewController = (PaymentSettingTableViewController *)settingNavigationController.topViewController;
+        
+        settingViewController.currentAmount = self.paymentAmount;
+        settingViewController.currentCurrencyCode = self.paymentCurrencyCode;
+        settingViewController.usesCapabilityDataForPaymentMethods = self.usesCapabilityDataForPaymentMethods;
+        settingViewController.allowedPaymentMethods = [NSSet setWithArray:self.allowedPaymentMethods];
+    }
+}
+
 - (void)dismissForm {
     [self dismissFormWithCompletion:NULL];
 }
@@ -113,6 +140,7 @@
     PaymentSettingTableViewController *settingViewController = (PaymentSettingTableViewController *)sender.sourceViewController;
     self.paymentAmount = settingViewController.currentAmount;
     self.paymentCurrencyCode = settingViewController.currentCurrencyCode;
+    self.usesCapabilityDataForPaymentMethods = settingViewController.usesCapabilityDataForPaymentMethods;
     self.allowedPaymentMethods = settingViewController.allowedPaymentMethods.allObjects;
 }
 

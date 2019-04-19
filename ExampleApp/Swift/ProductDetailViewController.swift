@@ -6,6 +6,19 @@ import OmiseSDK
 class ProductDetailViewController: OMSBaseViewController {
     private let publicKey = "pkey_test_<#Omise Public Key#>"
     
+    private var capability: Capability? = nil
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let client = Client(publicKey: publicKey)
+        client.requestCapabilityDataWithCompletionHandler { (result) in
+            if case .success(let capability) = result {
+                self.capability = capability
+            }
+        }
+    }
+    
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "PresentCreditFormWithModal" ||
             identifier == "ShowCreditForm" ||
@@ -18,6 +31,8 @@ class ProductDetailViewController: OMSBaseViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
         if segue.identifier == "PresentCreditFormWithModal",
             let creditCardFormNavigationController = segue.destination as? UINavigationController,
             let creditCardFormController = creditCardFormNavigationController.topViewController as? CreditCardFormViewController {
@@ -34,17 +49,12 @@ class ProductDetailViewController: OMSBaseViewController {
             paymentCreatorController.publicKey = self.publicKey
             paymentCreatorController.paymentAmount = paymentAmount
             paymentCreatorController.paymentCurrency = Currency(code: paymentCurrencyCode)
-            paymentCreatorController.allowedPaymentMethods = allowedPaymentMethods
+            if usesCapabilityDataForPaymentMethods, let capability = self.capability {
+                paymentCreatorController.applyPaymentMethods(from: capability)
+            } else {
+                paymentCreatorController.allowedPaymentMethods = allowedPaymentMethods
+            }
             paymentCreatorController.paymentDelegate = self
-        } else if segue.identifier == "PresentPaymentSettingScene",
-            let settingNavigationController = segue.destination as? UINavigationController,
-            let settingViewController = settingNavigationController.topViewController as? PaymentSettingTableViewController {
-            settingViewController.currentAmount = paymentAmount
-            settingViewController.currentCurrency = Currency(code: paymentCurrencyCode)
-            settingViewController.allowedPaymentMethods = Set(allowedPaymentMethods)
-        } else if segue.identifier == "ShowCreditFormWithCustomFields",
-            let customCreditCardFormViewController = segue.destination as? CustomCreditCardFormViewController {
-            customCreditCardFormViewController.delegate = self
         }
     }
     
