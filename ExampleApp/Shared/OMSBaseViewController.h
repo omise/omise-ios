@@ -7,8 +7,6 @@ typedef NS_ENUM(NSInteger, OMSCodePathMode) {
     OMSCodePathModeCode
 };
 
-@class ProductHeroImageView;
-
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *paymentCurrencyCode;
 @property (strong, nonatomic) NSArray<OMSSourceTypeValue> *allowedPaymentMethods;
 
-@property (strong, nonatomic) IBOutlet ProductHeroImageView  *heroImageView;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *modeChooser;
 
 

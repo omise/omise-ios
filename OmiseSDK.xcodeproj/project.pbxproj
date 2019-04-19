@@ -71,8 +71,6 @@
 		8A7A9EC12166578700F12D86 /* Swift Version Compatability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatability.swift */; };
 		8A7A9EC22166578800F12D86 /* Swift Version Compatability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatability.swift */; };
 		8A7F8B0C20C55605008F4D08 /* ClientSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADAA9A720B7194500DD7CCF /* ClientSessionDelegate.swift */; };
-		8AA250CF216B41A500E43828 /* ProductHeroImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA250CE216B41A500E43828 /* ProductHeroImageView.swift */; };
-		8AA250D0216B41A500E43828 /* ProductHeroImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA250CE216B41A500E43828 /* ProductHeroImageView.swift */; };
 		8AC1D3A32139224D0051F966 /* InternetBankingSourceChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC1D3A22139224D0051F966 /* InternetBankingSourceChooserViewController.swift */; };
 		8AC1D3A5213922570051F966 /* InstallmentBankingSourceChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC1D3A4213922570051F966 /* InstallmentBankingSourceChooserViewController.swift */; };
 		8AC1D3A7213941C80051F966 /* InstallmentsNumberOfTermsChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC1D3A6213941C80051F966 /* InstallmentsNumberOfTermsChooserViewController.swift */; };
@@ -216,7 +214,6 @@
 		8A776658214AA4F10029D166 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Error.strings; sourceTree = "<group>"; };
 		8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSettingTableViewController.swift; sourceTree = "<group>"; };
 		8A7A9EBF216642D100F12D86 /* Swift Version Compatability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift Version Compatability.swift"; sourceTree = "<group>"; };
-		8AA250CE216B41A500E43828 /* ProductHeroImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductHeroImageView.swift; sourceTree = "<group>"; };
 		8AC1D3A22139224D0051F966 /* InternetBankingSourceChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetBankingSourceChooserViewController.swift; sourceTree = "<group>"; };
 		8AC1D3A4213922570051F966 /* InstallmentBankingSourceChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentBankingSourceChooserViewController.swift; sourceTree = "<group>"; };
 		8AC1D3A6213941C80051F966 /* InstallmentsNumberOfTermsChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentsNumberOfTermsChooserViewController.swift; sourceTree = "<group>"; };
@@ -442,7 +439,6 @@
 				8A6AA06A216B957D00E49E5E /* OMSBaseViewController.h */,
 				8A6AA06B216B957D00E49E5E /* OMSBaseViewController.m */,
 				8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */,
-				8AA250CE216B41A500E43828 /* ProductHeroImageView.swift */,
 				8A40DA2A216B53E900749F45 /* Tools.swift */,
 			);
 			path = Shared;
@@ -762,7 +758,6 @@
 				8A40DA29216B441E00749F45 /* PaymentSettingTableViewController.swift in Sources */,
 				229E14581D0EBAB5000511DE /* AppDelegate.swift in Sources */,
 				8A6AA06E216B9DAE00E49E5E /* OMSBaseViewController.m in Sources */,
-				8AA250CF216B41A500E43828 /* ProductHeroImageView.swift in Sources */,
 				8A40DA2B216B53E900749F45 /* Tools.swift in Sources */,
 				229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */,
 				8A7A9EC12166578700F12D86 /* Swift Version Compatability.swift in Sources */,
@@ -775,7 +770,6 @@
 			files = (
 				8A723A692164D87B00D902F5 /* OMSExampleProductDetailViewController.m in Sources */,
 				8A7A9EBE2166160300F12D86 /* PaymentSettingTableViewController.swift in Sources */,
-				8AA250D0216B41A500E43828 /* ProductHeroImageView.swift in Sources */,
 				8A6AA06D216B958100E49E5E /* OMSBaseViewController.m in Sources */,
 				8A40DA2C216B53E900749F45 /* Tools.swift in Sources */,
 				8A7A9EC22166578800F12D86 /* Swift Version Compatability.swift in Sources */,
