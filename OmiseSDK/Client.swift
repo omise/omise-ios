@@ -149,6 +149,9 @@ import os
 // MARK: - URL Request related methods
 extension Client {
     
+    private static let omiseAPIContentType = "application/json; charset=utf8"
+    private static let omiseAPIVersion = "2017-11-02"
+    
     private func buildURLRequest<T: Object>(for request: Request<T>) -> URLRequest {
         let urlRequest = NSMutableURLRequest(url: T.postURL)
         urlRequest.httpMethod = "POST"
@@ -156,8 +159,18 @@ extension Client {
         urlRequest.httpBody = try! encoder.encode(request.parameter)
         urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
         urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: "User-Agent")
-        urlRequest.setValue("application/json; charset=utf8", forHTTPHeaderField: "Content-Type")
-        urlRequest.setValue("2017-11-02", forHTTPHeaderField: "Omise-Version")
+        urlRequest.setValue(Client.omiseAPIContentType, forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue(Client.omiseAPIVersion, forHTTPHeaderField: "Omise-Version")
+        return urlRequest.copy() as! URLRequest
+    }
+    
+    private func buildCapabilityAPIURLRequest() -> URLRequest {
+        let urlRequest = NSMutableURLRequest(url: URL(string: "https://api.omise.co/capability")!)
+        urlRequest.httpMethod = "GET"
+        urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
+        urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: "User-Agent")
+        urlRequest.setValue(Client.omiseAPIContentType, forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue(Client.omiseAPIVersion, forHTTPHeaderField: "Omise-Version")
         return urlRequest.copy() as! URLRequest
     }
     
@@ -182,7 +195,7 @@ extension Client {
         return decoder
     }
     
-    private static func completeRequest<T: Object>(_ request: Request<T>, callback: Request<T>.Callback?) -> (Data?, URLResponse?, Error?) -> () {
+    private static func completeRequest<T: Object>(_ request: Request<T>, callback: Request<T>.Callback?) -> ((Data?, URLResponse?, Error?) -> ()) {
         return { (data: Data?, response: URLResponse?, error: Error?) -> () in
             guard let callback = callback else { return } // nobody around to hear the leaf falls
             
@@ -247,7 +260,6 @@ extension Client {
             }
         }
     }
-
 }
 
 
