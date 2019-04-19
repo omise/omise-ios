@@ -80,6 +80,7 @@
 		8AEF7804224CABF800787470 /* EContextInformationInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A25E929213CF6F300D48252 /* EContextInformationInputViewController.swift */; };
 		8AF5517A213D4C0100D61C98 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 8AF5517C213D4C0100D61C98 /* Localizable.stringsdict */; };
 		8AF56E602268650D0097CFEE /* OmiseTextFieldCompatability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF56E5F2268650D0097CFEE /* OmiseTextFieldCompatability.swift */; };
+		8AF56E62226878070097CFEE /* CustomCreditCardFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF56E61226878070097CFEE /* CustomCreditCardFormViewController.swift */; };
 		8AF9857121479F38007E18ED /* MoreInformationOnCVVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3150AD2146B6C300A4F429 /* MoreInformationOnCVVViewController.swift */; };
 		8AF9857221479F72007E18ED /* CreditCardFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1D4C651D51B72200C7837C /* CreditCardFormViewController.swift */; };
 		8AF985732147CC3D007E18ED /* Error.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8AF985752147CC3D007E18ED /* Error.strings */; };
@@ -225,6 +226,7 @@
 		8AE23AAD20F8CA8800BC9D8F /* PaymentChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentChooserViewController.swift; sourceTree = "<group>"; };
 		8AF5517B213D4C0100D61C98 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		8AF56E5F2268650D0097CFEE /* OmiseTextFieldCompatability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseTextFieldCompatability.swift; sourceTree = "<group>"; };
+		8AF56E61226878070097CFEE /* CustomCreditCardFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCreditCardFormViewController.swift; sourceTree = "<group>"; };
 		8AF6A1D720E4FEBE00AC5625 /* ExampleApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExampleApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		8AF6A1D820E4FEBE00AC5625 /* OMSExampleProductDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OMSExampleProductDetailViewController.h; sourceTree = "<group>"; };
 		8AF6A1D920E4FEBE00AC5625 /* OMSExampleProductDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSExampleProductDetailViewController.m; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */,
+				8AF56E61226878070097CFEE /* CustomCreditCardFormViewController.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -760,6 +763,7 @@
 				8A6AA06E216B9DAE00E49E5E /* OMSBaseViewController.m in Sources */,
 				8A40DA2B216B53E900749F45 /* Tools.swift in Sources */,
 				229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */,
+				8AF56E62226878070097CFEE /* CustomCreditCardFormViewController.swift in Sources */,
 				8A7A9EC12166578700F12D86 /* Swift Version Compatability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
