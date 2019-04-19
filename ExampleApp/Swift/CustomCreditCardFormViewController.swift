@@ -113,6 +113,7 @@ class CustomCreditCardFormViewController: UIViewController {
         if storyboard == nil {
             let saveButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.proceed))
             navigationItem.rightBarButtonItem = saveButtonItem
+            self.doneButton = saveButtonItem
             navigationItem.title = "Custom Credit Card Form"
         }
     }

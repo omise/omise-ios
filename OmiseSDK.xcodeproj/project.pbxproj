@@ -45,6 +45,7 @@
 		8A40DA2C216B53E900749F45 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A40DA2A216B53E900749F45 /* Tools.swift */; };
 		8A429E7B2109A3AE007C230F /* PaymentInformationTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A429E7A2109A3AE007C230F /* PaymentInformationTestCase.swift */; };
 		8A43454720DBAE76005C5C94 /* PANModelTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A43454620DBAE76005C5C94 /* PANModelTestCase.swift */; };
+		8A43FEAA2269BD8A002E89EC /* CustomCreditCardFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A43FEA92269BD8A002E89EC /* CustomCreditCardFormViewController.m */; };
 		8A47173A20AAB0F40022733A /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A47173920AAB0F40022733A /* Token.swift */; };
 		8A47173D20AAB11B0022733A /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A47173C20AAB11B0022733A /* Source.swift */; };
 		8A4F7CB920A9C0FD001C441A /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4F7CB820A9C0FD001C441A /* Object.swift */; };
@@ -191,6 +192,8 @@
 		8A40DA2A216B53E900749F45 /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		8A429E7A2109A3AE007C230F /* PaymentInformationTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInformationTestCase.swift; sourceTree = "<group>"; };
 		8A43454620DBAE76005C5C94 /* PANModelTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PANModelTestCase.swift; sourceTree = "<group>"; };
+		8A43FEA82269BD8A002E89EC /* CustomCreditCardFormViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomCreditCardFormViewController.h; sourceTree = "<group>"; };
+		8A43FEA92269BD8A002E89EC /* CustomCreditCardFormViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomCreditCardFormViewController.m; sourceTree = "<group>"; };
 		8A47173920AAB0F40022733A /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		8A47173C20AAB11B0022733A /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		8A4F7CB820A9C0FD001C441A /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
@@ -432,6 +435,8 @@
 			children = (
 				8AF6A1D820E4FEBE00AC5625 /* OMSExampleProductDetailViewController.h */,
 				8AF6A1D920E4FEBE00AC5625 /* OMSExampleProductDetailViewController.m */,
+				8A43FEA82269BD8A002E89EC /* CustomCreditCardFormViewController.h */,
+				8A43FEA92269BD8A002E89EC /* CustomCreditCardFormViewController.m */,
 			);
 			path = "Objective-C";
 			sourceTree = "<group>";
@@ -776,6 +781,7 @@
 				8A7A9EBE2166160300F12D86 /* PaymentSettingTableViewController.swift in Sources */,
 				8A6AA06D216B958100E49E5E /* OMSBaseViewController.m in Sources */,
 				8A40DA2C216B53E900749F45 /* Tools.swift in Sources */,
+				8A43FEAA2269BD8A002E89EC /* CustomCreditCardFormViewController.m in Sources */,
 				8A7A9EC22166578800F12D86 /* Swift Version Compatability.swift in Sources */,
 				8A723A562164D7B100D902F5 /* AppDelegate.swift in Sources */,
 			);
