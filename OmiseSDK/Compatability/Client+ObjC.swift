@@ -26,11 +26,7 @@ extension Client {
                 token = __OmiseToken(token: resultToken)
                 error = nil
             case .failure(let requestError):
-                if let requestError = requestError as? OmiseError {
-                    error = requestError as NSError
-                } else {
-                    error = requestError as NSError
-                }
+                error = requestError as NSError
                 token = nil
             }
             
@@ -87,11 +83,7 @@ extension Client {
                 token = __OmiseSource(source: resultToken)
                 error = nil
             case .failure(let requestError):
-                if let requestError = requestError as? OmiseError {
-                    error = requestError as NSError
-                } else {
-                    error = requestError as NSError
-                }
+                error = requestError as NSError
                 token = nil
             }
             
@@ -117,6 +109,17 @@ extension Client {
                 delegate?.sourceRequest(request, didFailWithError: error)
             }
         })
+    }
+    
+    @objc(capabilityDataWithCompletionHandler:) public func __capabilityDataWithCompletionHandler(_ completionHandler: ((__OmiseCapability?, NSError?) -> Void)?) {
+        self.capabilityDataWithCompletionHandler { (result) in
+            switch result {
+            case .success(let capability):
+                completionHandler?(__OmiseCapability(capability: capability), nil)
+            case .failure(let error):
+                completionHandler?(nil, error as NSError)
+            }
+        }
     }
 }
 
