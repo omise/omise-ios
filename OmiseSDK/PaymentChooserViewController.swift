@@ -220,7 +220,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     }
     
     private func loadCapabilityData() {
-        flowSession?.client?.requestCapabilityDataWithCompletionHandler({ (result) in
+        flowSession?.client?.capabilityDataWithCompletionHandler({ (result) in
             switch result {
             case .success(let capability):
                 self.applyPaymentMethods(from: capability)

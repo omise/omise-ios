@@ -74,7 +74,7 @@ import os
         return task
     }
     
-    public func requestCapabilityDataWithCompletionHandler(_ completionHandler: ((RequestResult<Capability>) -> Void)?) {
+    public func capabilityDataWithCompletionHandler(_ completionHandler: ((RequestResult<Capability>) -> Void)?) {
         let dataTask = session.dataTask(with: buildCapabilityAPIURLRequest(), completionHandler: { (data, response, error) in
             guard let completionHandler = completionHandler else { return } // nobody around to hear the leaf falls
             

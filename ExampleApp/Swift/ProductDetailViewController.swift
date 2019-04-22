@@ -12,7 +12,7 @@ class ProductDetailViewController: OMSBaseViewController {
         super.viewDidLoad()
         
         let client = Client(publicKey: publicKey)
-        client.requestCapabilityDataWithCompletionHandler { (result) in
+        client.capabilityDataWithCompletionHandler { (result) in
             if case .success(let capability) = result {
                 self.capability = capability
             }
