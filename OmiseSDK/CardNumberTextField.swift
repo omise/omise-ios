@@ -71,6 +71,8 @@ public class CardNumberTextField: OmiseTextField {
         
         super.delegate = self
         
+        placeholder = placeholder
+        
         if #available(iOSApplicationExtension 10.0, *) {
             textContentType = .creditCardNumber
         }

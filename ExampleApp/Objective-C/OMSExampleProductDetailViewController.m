@@ -1,5 +1,6 @@
 #import "OMSExampleProductDetailViewController.h"
 #import <ExampleApp-Swift.h>
+#import "CustomCreditCardFormViewController.h"
 
 
 NSString * const OMSPublicKey = @"<#Omise Public Key#>";
@@ -7,7 +8,7 @@ NSString * const OMSPublicKey = @"<#Omise Public Key#>";
 
 
 @interface OMSExampleProductDetailViewController () <OMSCreditCardFormViewControllerDelegate,
-OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate>
+OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate, OMSCustomCreditCardFormViewControllerDelegate>
 
 @end
 
@@ -23,9 +24,10 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
 }
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-    if ([identifier isEqualToString:@"PresentCreditFormWithModal"]
-        || [identifier isEqualToString:@"ShowCreditForm"]
-            || [identifier isEqualToString:@"PresentPaymentCreator"]) {
+    if ([identifier isEqualToString:@"PresentCreditFormWithModal"] ||
+        [identifier isEqualToString:@"ShowCreditForm"] ||
+        [identifier isEqualToString:@"PresentPaymentCreator"] ||
+        [identifier isEqualToString:@"ShowCreditFormWithCustomFields"]) {
         return self.currentCodePathMode == OMSCodePathModeStoryboard;
     }
     
@@ -55,6 +57,9 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
         settingViewController.currentAmount = self.paymentAmount;
         settingViewController.currentCurrencyCode = self.paymentCurrencyCode;
         settingViewController.allowedPaymentMethods = [NSSet setWithArray:self.allowedPaymentMethods];
+    } else if ([segue.identifier isEqualToString:@"ShowCreditFormWithCustomFields"]) {
+        CustomCreditCardFormViewController *customCreditCardFormViewController = (CustomCreditCardFormViewController *)segue.destinationViewController;
+        customCreditCardFormViewController.delegate = self;
     }
 }
 
@@ -88,6 +93,16 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
     [self presentViewController:paymentCreatorController animated:YES completion:NULL];
 }
 
+- (IBAction)showCustomCreditCardForm:(UIButton *)sender {
+    if (self.currentCodePathMode == OMSCodePathModeStoryboard) {
+        return;
+    }
+    
+    CustomCreditCardFormViewController *customCreditCardFormViewController = [[CustomCreditCardFormViewController alloc] init];
+    customCreditCardFormViewController.delegate = self;
+    [self showViewController:customCreditCardFormViewController sender:sender];
+}
+
 - (IBAction)authorizingPayment:(UIBarButtonItem *)sender {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Authorizing Payment" message:@"Please input your given authorized URL" preferredStyle:UIAlertControllerStyleAlert];
     [alertController addTextFieldWithConfigurationHandler:nil];
@@ -114,6 +129,7 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
 }
 
 - (void)creditCardFormViewController:(OMSCreditCardFormViewController *)controller didFailWithError:(NSError *)error {
+    NSLog(@"%@", error.localizedDescription);
     [self dismissForm];
 }
 
@@ -158,6 +174,21 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
     [self dismissForm];
 }
 
+
+#pragma mark - Custom Credit Card Form Controller Delegate methods
+
+- (void)customCreditCardFormViewController:(CustomCreditCardFormViewController *)controller didSucceedWithToken:(OMSToken *)token {
+    [self dismissFormWithCompletion:^{
+        NSString *alertMessage = [NSString stringWithFormat:@"The token with id of %@ was successfuly created. Please send this id to server to create a charge.", token.tokenID];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Token created" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
+    }];
+}
+
+- (void)customCreditCardFormViewController:(CustomCreditCardFormViewController *)controller didFailWithError:(NSError *)error {
+    NSLog(@"%@", error.localizedDescription);
+    [self dismissForm];
+}
 
 
 @end

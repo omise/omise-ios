@@ -34,7 +34,7 @@ public class OmiseTextField: UITextField {
         }
         set {
             switch newValue {
-            case 0:
+            case let value where value <= 0:
                 style = .plain
             case let value:
                 style = .border(width: value)

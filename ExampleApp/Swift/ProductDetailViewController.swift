@@ -4,11 +4,13 @@ import OmiseSDK
 
 @objc(OMSExampleProductDetailViewController)
 class ProductDetailViewController: OMSBaseViewController {
-    private let publicKey = "pkey_test_5dhrv65onpi4pl74vvy"
+    private let publicKey = "pkey_test_<#Omise Public Key#>"
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "PresentCreditFormWithModal" || identifier == "ShowCreditForm"
-            || identifier == "PresentPaymentCreator" {
+        if identifier == "PresentCreditFormWithModal" ||
+            identifier == "ShowCreditForm" ||
+            identifier == "PresentPaymentCreator" ||
+            identifier == "ShowCreditFormWithCustomFields" {
             return currentCodePathMode == .storyboard
         }
         
@@ -40,6 +42,9 @@ class ProductDetailViewController: OMSBaseViewController {
             settingViewController.currentAmount = paymentAmount
             settingViewController.currentCurrency = Currency(code: paymentCurrencyCode)
             settingViewController.allowedPaymentMethods = Set(allowedPaymentMethods)
+        } else if segue.identifier == "ShowCreditFormWithCustomFields",
+            let customCreditCardFormViewController = segue.destination as? CustomCreditCardFormViewController {
+            customCreditCardFormViewController.delegate = self
         }
     }
     
@@ -70,6 +75,15 @@ class ProductDetailViewController: OMSBaseViewController {
         }
         let paymentCreatorController = PaymentCreatorController.makePaymentCreatorControllerWith(publicKey: publicKey, amount: paymentAmount, currency: Currency(code: paymentCurrencyCode), allowedPaymentMethods: allowedPaymentMethods, paymentDelegate: self)
         present(paymentCreatorController, animated: true, completion: nil)
+    }
+    
+    @IBAction func showCustomCreditCardForm(_ sender: Any) {
+        guard currentCodePathMode == .code else {
+            return
+        }
+        let customCreditCardFormController = CustomCreditCardFormViewController(nibName: nil, bundle: nil)
+        customCreditCardFormController.delegate = self
+        show(customCreditCardFormController, sender: sender)
     }
     
     @IBAction func handlingAuthorizingPayment(_ sender: UIBarButtonItem) {
@@ -113,7 +127,16 @@ extension ProductDetailViewController: CreditCardFormViewControllerDelegate {
     }
     
     func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error) {
-        dismissForm()
+        dismissForm(completion: {
+            let alertController = UIAlertController(
+                title: "Error",
+                message: error.localizedDescription,
+                preferredStyle: .alert
+            )
+            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+        })
     }
 }
 
@@ -172,4 +195,34 @@ extension ProductDetailViewController: PaymentCreatorControllerDelegate {
     }
 }
 
+
+// MARK: - Custom Credit Card Form View Controller Delegate
+
+extension ProductDetailViewController: CustomCreditCardFormViewControllerDelegate {
+    func creditCardFormViewController(_ controller: CustomCreditCardFormViewController, didSucceedWithToken token: Token) {
+        dismissForm(completion: {
+            let alertController = UIAlertController(
+                title: "Token Created",
+                message: "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge.",
+                preferredStyle: .alert
+            )
+            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+        })
+    }
+    
+    func creditCardFormViewController(_ controller: CustomCreditCardFormViewController, didFailWithError error: Error) {
+        dismissForm(completion: {
+            let alertController = UIAlertController(
+                title: "Error",
+                message: error.localizedDescription,
+                preferredStyle: .alert
+            )
+            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+        })
+    }
+}
 

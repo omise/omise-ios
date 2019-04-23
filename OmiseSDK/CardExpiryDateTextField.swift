@@ -78,7 +78,7 @@ public class CardExpiryDateTextField: OmiseTextField {
     }
     
     private func initializeInstance() {
-        placeholder = "MM/YY"
+        placeholder = placeholder ?? "MM/YY"
         
         super.delegate = self
         

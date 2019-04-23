@@ -2,7 +2,7 @@ import UIKit
 import OmiseSDK
 import PlaygroundSupport
 
-let publicKey = "pkey_test_3409854390"
+let publicKey = "pkey_test_<#Omise Public Key#>"
 
 /*: payment-creator
  
