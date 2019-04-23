@@ -40,7 +40,7 @@ public class PaymentCreatorController : UINavigationController {
     @objc public var publicKey: String? {
         didSet {
             guard let publicKey = publicKey else {
-                  if #available(iOSApplicationExtension 10.0, *) {
+                if #available(iOSApplicationExtension 10.0, *) {
                     os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.publicKey ?? "")
                 }
                 assertionFailure("Missing public key information. Please set the public key before request token.")
@@ -230,6 +230,11 @@ public class PaymentCreatorController : UINavigationController {
     
     public func applyPaymentMethods(from capability: Capability) {
         paymentChooserViewController.applyPaymentMethods(from: capability)
+    }
+    
+    @objc(applyPaymentMethodsFrom:)
+    public func __applyPaymentMethods(from capability: __OmiseCapability) {
+        applyPaymentMethods(from: capability.capability)
     }
     
     private func initializeWithPaymentChooserViewController(_ viewController: PaymentChooserViewController) {

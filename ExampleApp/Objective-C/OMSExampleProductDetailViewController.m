@@ -10,6 +10,8 @@ NSString * const OMSPublicKey = @"<#Omise Public Key#>";
 @interface OMSExampleProductDetailViewController () <OMSCreditCardFormViewControllerDelegate,
 OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate, OMSCustomCreditCardFormViewControllerDelegate>
 
+@property (strong, nonatomic, nullable) OMSCapability *capability;
+
 @end
 
 
@@ -21,6 +23,11 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
     UIImage *emptyImage = [Tool imageWithSize:CGSizeMake(1, 1) color:UIColor.whiteColor];
     [self.navigationController.navigationBar setBackgroundImage:emptyImage forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = emptyImage;
+    
+    OMSSDKClient *client = [[OMSSDKClient alloc] initWithPublicKey:OMSPublicKey];
+    [client capabilityDataWithCompletionHandler:^(OMSCapability * _Nullable capability, NSError * _Nullable error) {
+        self.capability = capability;
+    }];
 }
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
@@ -50,16 +57,17 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
         paymentCreatorController.publicKey = OMSPublicKey;
         paymentCreatorController.paymentAmount = self.paymentAmount;
         paymentCreatorController.paymentCurrencyCode = self.paymentCurrencyCode;
-        paymentCreatorController.allowedPaymentMethods = self.allowedPaymentMethods;
+        if (self.usesCapabilityDataForPaymentMethods && self.capability) {
+            [paymentCreatorController applyPaymentMethodsFrom:self.capability];
+        } else {
+            paymentCreatorController.allowedPaymentMethods = self.allowedPaymentMethods;
+        }
         paymentCreatorController.paymentDelegate = self;
-    } else if ([segue.identifier isEqualToString:@"PresentPaymentSettingScene"]) {
-        PaymentSettingTableViewController *settingViewController = (PaymentSettingTableViewController *)((UINavigationController *)segue.destinationViewController).topViewController;
-        settingViewController.currentAmount = self.paymentAmount;
-        settingViewController.currentCurrencyCode = self.paymentCurrencyCode;
-        settingViewController.allowedPaymentMethods = [NSSet setWithArray:self.allowedPaymentMethods];
     } else if ([segue.identifier isEqualToString:@"ShowCreditFormWithCustomFields"]) {
         CustomCreditCardFormViewController *customCreditCardFormViewController = (CustomCreditCardFormViewController *)segue.destinationViewController;
         customCreditCardFormViewController.delegate = self;
+    } else {
+        [super prepareForSegue:segue sender:sender];
     }
 }
 
