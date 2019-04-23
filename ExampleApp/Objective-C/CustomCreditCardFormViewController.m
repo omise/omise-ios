@@ -30,7 +30,7 @@
         self.cardNameField.placeholder = @"John Appleseed";
         self.cardExpiryField = [[OMSCardExpiryDateTextField alloc] init];
         self.cardExpiryField.translatesAutoresizingMaskIntoConstraints = false;
-        self.cardExpiryField.placeholder = @"mm/YY";
+        self.cardExpiryField.placeholder = @"MM/yy Date Format";
         self.cardCVVField = [[OMSCardCVVTextField alloc] init];
         self.cardCVVField.translatesAutoresizingMaskIntoConstraints = false;
         self.cardCVVField.placeholder = @"321";

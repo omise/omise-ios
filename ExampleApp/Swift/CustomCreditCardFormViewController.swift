@@ -44,7 +44,7 @@ class CustomCreditCardFormViewController: UIViewController {
             cardNameField.placeholder = "John Appleseed"
             cardExpiryField = CardExpiryDateTextField()
             cardExpiryField.translatesAutoresizingMaskIntoConstraints = false
-            cardExpiryField.placeholder = "mm/YY"
+            cardExpiryField.placeholder = "MM/yy Date Format"
             cardCVVField = CardCVVTextField()
             cardCVVField.translatesAutoresizingMaskIntoConstraints = false
             cardCVVField.placeholder = "321"
