@@ -23,4 +23,11 @@ OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeSGD = @"SGD";
 OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeUSD = @"USD";
 OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeGBP = @"GBP";
 OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeEUR = @"EUR";
+OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeMYR = @"MYR";
 
+OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeAUD = @"AUD";
+OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeCAD = @"CAD";
+OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeCHF = @"CHF";
+OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeCNY = @"CNY";
+OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeDKK = @"DKK";
+OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeHKD = @"HKD";

@@ -12,6 +12,15 @@ public enum Currency: Codable, Hashable {
     case usd
     case gbp
     case eur
+    case myr
+    
+    case aud
+    case cad
+    case chf
+    case cny
+    case dkk
+    case hkd
+    
     case custom(code: String, factor: Int)
     
     public var code: String {
@@ -30,6 +39,20 @@ public enum Currency: Codable, Hashable {
             return OMSSupportedCurrencyCode.GBP.rawValue
         case .eur:
             return OMSSupportedCurrencyCode.EUR.rawValue
+        case .myr:
+            return OMSSupportedCurrencyCode.MYR.rawValue
+        case .aud:
+            return OMSSupportedCurrencyCode.AUD.rawValue
+        case .cad:
+            return OMSSupportedCurrencyCode.CAD.rawValue
+        case .chf:
+            return OMSSupportedCurrencyCode.CHF.rawValue
+        case .cny:
+            return OMSSupportedCurrencyCode.CNY.rawValue
+        case .dkk:
+            return OMSSupportedCurrencyCode.DKK.rawValue
+        case .hkd:
+            return OMSSupportedCurrencyCode.HKD.rawValue
         case.custom(code: let code, factor: _):
             return code
         }
@@ -38,7 +61,7 @@ public enum Currency: Codable, Hashable {
     /// A convertion factor represents how much Omise amount equals to 1 unit of this currency. eg. THB's factor is equals to 100.
     public var factor: Int {
         switch self {
-        case .thb, .idr, .sgd, .usd, .gbp, .eur:
+        case .thb, .idr, .sgd, .usd, .gbp, .eur, .myr, .aud, .cad, .chf, .cny, .dkk, .hkd:
             return centBasedCurrencyFactor
         case .jpy:
             return identicalBasedCurrencyFactor
@@ -67,6 +90,20 @@ public enum Currency: Codable, Hashable {
             self = .gbp
         case OMSSupportedCurrencyCode.EUR.rawValue:
             self = .eur
+        case OMSSupportedCurrencyCode.MYR.rawValue:
+            self = .myr
+        case OMSSupportedCurrencyCode.AUD.rawValue:
+            self = .aud
+        case OMSSupportedCurrencyCode.CAD.rawValue:
+            self = .cad
+        case OMSSupportedCurrencyCode.CHF.rawValue:
+            self = .chf
+        case OMSSupportedCurrencyCode.CNY.rawValue:
+            self = .cny
+        case OMSSupportedCurrencyCode.DKK.rawValue:
+            self = .dkk
+        case OMSSupportedCurrencyCode.HKD.rawValue:
+            self = .hkd
         case let currencyCode:
             let numberFormatter = NumberFormatter()
             numberFormatter.numberStyle = .currency
