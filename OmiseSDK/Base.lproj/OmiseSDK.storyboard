@@ -87,7 +87,7 @@
                                             <action selector="validateTextFieldDataOf:" destination="ALK-ZP-CXg" eventType="editingDidEnd" id="5fL-3c-xl0"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="749" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y1l-QK-aPc" customClass="OMSCardCVVTextField">
+                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y1l-QK-aPc" customClass="OMSCardCVVTextField">
                                         <rect key="frame" x="207.66666666666663" y="264.66666666666669" width="151.33333333333337" height="47"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -114,7 +114,7 @@
                                             <action selector="validateTextFieldDataOf:" destination="ALK-ZP-CXg" eventType="editingDidEnd" id="17j-R2-Pw3"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="John Appleseed" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AJd-kX-GAq" customClass="OMSCardNameTextField">
+                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AJd-kX-GAq" customClass="OMSCardNameTextField">
                                         <rect key="frame" x="16" y="154.33333333333334" width="343" height="47"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -141,7 +141,7 @@
                                             <action selector="validateTextFieldDataOf:" destination="ALK-ZP-CXg" eventType="editingDidEnd" id="Qhj-Qx-gAl"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="1234567890123456" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PBr-uW-pM8" customClass="OMSCardNumberTextField">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PBr-uW-pM8" customClass="OMSCardNumberTextField">
                                         <rect key="frame" x="16" y="44" width="343" height="47"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
