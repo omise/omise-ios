@@ -109,6 +109,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         case ("GoToCreditCardFormSegue"?, let controller as CreditCardFormViewController):
             controller.publicKey = flowSession?.client?.publicKey
             controller.delegate = flowSession
+            controller.navigationItem.rightBarButtonItem = nil
         case ("GoToInternetBankingChooserSegue"?, let controller as InternetBankingSourceChooserViewController):
             controller.showingValues = allowedPaymentMethods.compactMap({ $0.internetBankingSource })
             controller.flowSession = self.flowSession
