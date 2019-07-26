@@ -13,3 +13,6 @@
 
 /* A navigation title for the choosing installment terms screen with the `Installments Terms` selected */
 "installment-number-of-terms-choosers.default.navigation-item.title" = "Installment terms";
+
+"more-info.cvv-location.amex.text" = "4 digit number on the front of your card";
+"more-info.cvv-location.default.text" = "3 digit number on the back of your card";

@@ -28,3 +28,6 @@
 /* Number of terms option text displayed as a title of the number of terms option cell in number of terms chooser scene */
 "installments.number-of-terms-chooser.number-of-terms-cell.label.text" = "%d 月々";
 
+"more-info.cvv-location.amex.text" = "カード表面の4桁の番号";
+"more-info.cvv-location.default.text" = "カード裏面の3桁の番号";
+

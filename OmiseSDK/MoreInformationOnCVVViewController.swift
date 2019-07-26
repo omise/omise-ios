@@ -9,10 +9,45 @@ protocol MoreInformationOnCVVViewControllerDelegate: AnyObject {
 class MoreInformationOnCVVViewController: UIViewController {
     static let preferredWidth: CGFloat = 240
     
+    @IBOutlet var cvvLocationImageView: UIImageView!
+    @IBOutlet var cvvLocationDescriptionLabel: UILabel!
+    
+    var preferredCardBrand: CardBrand? {
+        didSet {
+            guard isViewLoaded else {
+                return
+            }
+            updateUI()
+        }
+    }
+    
     weak var delegate: MoreInformationOnCVVViewControllerDelegate?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        updateUI()
+    }
     
     @IBAction func askToClose(_ sender: AnyObject) {
         delegate?.moreInformationOnCVVViewControllerDidAskToClose(self)
+    }
+    
+    private func updateUI() {
+        switch preferredCardBrand {
+        case .amex?:
+            cvvLocationImageView.image = UIImage(named: "CVV AMEX", in: Bundle.omiseSDKBundle, compatibleWith: nil)
+            cvvLocationDescriptionLabel.text = NSLocalizedString(
+                "more-info.cvv-location.amex.text", bundle: Bundle.omiseSDKBundle,
+                value: "4 digit number on the front of your card",
+                comment: "A descriptive text telling the location of CVV on the AMEX card")
+        default:
+            cvvLocationImageView.image = UIImage(named: "CVV", in: Bundle.omiseSDKBundle, compatibleWith: nil)
+            cvvLocationDescriptionLabel.text = NSLocalizedString(
+                "more-info.cvv-location.default.text", bundle: Bundle.omiseSDKBundle,
+                value: "3 digit number on the back of your card",
+                comment: "A descriptive text telling the location of CVV on the typical credit card")
+        }
     }
 }
 
