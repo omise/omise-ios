@@ -641,10 +641,9 @@
 			};
 			buildConfigurationList = 225931121CE3210700841B86 /* Build configuration list for PBXProject "OmiseSDK" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				th,
 				ja,
