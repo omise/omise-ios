@@ -45,7 +45,7 @@ public enum CardBrand: Int, CustomStringConvertible, Codable {
         case .amex:
             return "^3[47]"
         case .diners:
-            return "^3(0[0-5]|[6,8-9])|5[4-5]"
+            return "^3(0[0-5]|[6,8-9])|^5[4-5]"
         case .laser:
             return "^(6304|670[69]|6771)"
         case .maestro:

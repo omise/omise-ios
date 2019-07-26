@@ -27,8 +27,8 @@ public struct Source: CreatableObject {
         case object
         case id
         case flow
-        case amount
         case currency
+        case amount
     }
     
     public init(from decoder: Decoder) throws {

@@ -9,8 +9,6 @@ class __OmiseCapability: NSObject {
     @objc lazy public var object: String = capability.object
     
     @objc lazy public var supportedBanks: Set<String> = capability.supportedBanks
-    @objc lazy public var chargeLimit: NSRange = NSRange(capability.chargeLimit)
-    @objc lazy public var transferLimit: NSRange = NSRange(capability.transferLimit)
     
     @objc lazy public var supportedBackends: [__OmiseCapabilityBackend] =
         capability.supportedBackends.map(__OmiseCapabilityBackend.init)
@@ -28,7 +26,6 @@ class __OmiseCapabilityBackend: NSObject {
     @objc lazy public var payment: __OmiseCapabilityBackendPayment =
         __OmiseCapabilityBackendPayment.makeCapabilityBackend(from: backend.payment)
     @objc lazy public var supportedCurrencyCodes: Set<String> = Set(backend.supportedCurrencies.map({ $0.code }))
-    @objc lazy public var limit: NSRange = backend.limit.map({ NSRange($0.range) }) ?? NSRange(location: 0, length: 0)
     
     required init(_ backend: Capability.Backend) {
         self.backend = backend
@@ -100,12 +97,6 @@ extension __OmiseCapabilityBackendPayment {
         case .unknownSource(let type, let configurations):
             return __OmiseCapabilityUnknownSourceBackendPayment(sourceType: type, parameters: configurations)
         }
-    }
-}
-
-extension NSRange {
-    init(_ limit: Capability.Limit) {
-        self.init(limit.range)
     }
 }
 

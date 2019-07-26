@@ -3,7 +3,7 @@
 #import "OMSRequestDelegateDummy.h"
 
 
-NSString * const _Nonnull publicKey = @"<#Omise Public Key#>";
+NSString * const _Nonnull publicKey = @"pkey_test_58wfnlwoxz1tbkdd993";
 
 
 @interface OMSOmiseClientTestCase : XCTestCase
@@ -37,7 +37,7 @@ NSString * const _Nonnull publicKey = @"<#Omise Public Key#>";
         
         XCTAssertTrue([@"4242" isEqualToString:delegate.token.card.lastDigits]);
         XCTAssertEqual(11, delegate.token.card.expirationMonth);
-        XCTAssertEqual(2019, delegate.token.card.expirationYear);
+        XCTAssertEqual(2020, delegate.token.card.expirationYear);
     }];
 }
 
@@ -62,7 +62,7 @@ NSString * const _Nonnull publicKey = @"<#Omise Public Key#>";
         
         XCTAssertTrue([@"4242" isEqualToString:source.card.lastDigits]);
         XCTAssertEqual(11, source.card.expirationMonth);
-        XCTAssertEqual(2019, source.card.expirationYear);
+        XCTAssertEqual(2020, source.card.expirationYear);
         
         [expectation fulfill];
     }];
@@ -110,7 +110,7 @@ NSString * const _Nonnull publicKey = @"<#Omise Public Key#>";
         XCTAssertNil(delegate.source);
         
         XCTAssertTrue([delegate.error.localizedDescription containsString:@"not supported"]);
-        XCTAssertTrue([delegate.error.localizedDescription containsString:@"currency"]);
+        XCTAssertTrue([delegate.error.localizedDescription containsString:@"source"]);
         XCTAssertTrue([delegate.error.localizedDescription containsString:@"type"]);
     }];
 }
@@ -138,7 +138,7 @@ NSString * const _Nonnull publicKey = @"<#Omise Public Key#>";
         XCTAssertNotNil(error);
         
         XCTAssertTrue([error.localizedDescription containsString:@"not supported"]);
-        XCTAssertTrue([error.localizedDescription containsString:@"currency"]);
+        XCTAssertTrue([error.localizedDescription containsString:@"source"]);
         XCTAssertTrue([error.localizedDescription containsString:@"type"]);
         
         [expectation fulfill];

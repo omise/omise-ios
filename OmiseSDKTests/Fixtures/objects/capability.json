@@ -35,153 +35,111 @@
     "tcrb",
     "lhb"
   ],
-  "limits": {
-    "charge_amount": {
-      "max": 100000000,
-      "min": 2000
+  "payment_methods": [
+    {
+      "object": "payment_method",
+      "name": "card",
+      "currencies": [
+        "THB",
+        "JPY",
+        "USD",
+        "EUR",
+        "GBP",
+        "SGD",
+        "AUD",
+        "CHF",
+        "CNY",
+        "DKK",
+        "HKD"
+      ],
+      "card_brands": [
+        "JCB",
+        "Visa",
+        "MasterCard"
+      ],
+      "installment_terms": null
     },
-    "transfer_amount": {
-      "max": 1000000000,
-      "min": 3000
+    {
+      "object": "payment_method",
+      "name": "installment_bay",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": [
+        3,
+        4,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "object": "payment_method",
+      "name": "installment_first_choice",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": [
+        3,
+        4,
+        6,
+        9,
+        10,
+        12,
+        18,
+        24,
+        36
+      ]
+    },
+    {
+      "object": "payment_method",
+      "name": "installment_kbank",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": [
+        3,
+        4,
+        6,
+        10
+      ]
+    },
+    {
+      "object": "payment_method",
+      "name": "installment_bbl",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": [
+        4,
+        6,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "object": "payment_method",
+      "name": "installment_ktc",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
     }
-  },
-  "payment_backends": [
-    {
-      "credit_card": {
-        "type": "card",
-        "currencies": [
-          "THB",
-          "JPY",
-          "USD",
-          "EUR",
-          "GBP",
-          "SGD"
-        ],
-        "brands": [
-          
-        ]
-      }
-    },
-    {
-      "installment_bay": {
-        "type": "installment",
-        "currencies": [
-          "THB"
-        ],
-        "allowed_installment_terms": [
-          3,
-          4,
-          6,
-          9,
-          10
-        ],
-        "amount": {
-          "min": 2000,
-          "max": 100000000
-        }
-      }
-    },
-    {
-      "installment_first_choice": {
-        "type": "installment",
-        "currencies": [
-          "THB"
-        ],
-        "allowed_installment_terms": [
-          3,
-          4,
-          6,
-          9,
-          10,
-          12,
-          18,
-          24,
-          36
-        ],
-        "amount": {
-          "min": 2000,
-          "max": 100000000
-        }
-      }
-    },
-    {
-      "installment_kbank": {
-        "type": "installment",
-        "currencies": [
-          "THB"
-        ],
-        "allowed_installment_terms": [
-          3,
-          4,
-          6,
-          10
-        ],
-        "amount": {
-          "min": 2000,
-          "max": 100000000
-        }
-      }
-    },
-    {
-      "installment_bbl": {
-        "type": "installment",
-        "currencies": [
-          "THB"
-        ],
-        "allowed_installment_terms": [
-          4,
-          6,
-          8,
-          9,
-          10
-        ],
-        "amount": {
-          "min": 2000,
-          "max": 100000000
-        }
-      }
-    },
-    {
-      "installment_ktc": {
-        "type": "installment",
-        "currencies": [
-          "THB"
-        ],
-        "allowed_installment_terms": [
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10
-        ],
-        "amount": {
-          "min": 2000,
-          "max": 100000000
-        }
-      }
-    },
-    {
-      "internet_banking_scb": {
-        "type": "internet_banking",
-        "currencies": ["thb"],
-        "amount": {
-          "min": 500000,
-          "max": 10000000
-        }
-      }
-    },
-    {
-      "internet_banking_ktb": {
-        "type": "internet_banking",
-        "currencies": ["thb"],
-        "amount": {
-          "min": 500000,
-          "max": 10000000
-        }
-      }
-    }
-  ]
+  ],
+  "zero_interest_installments": false
 }

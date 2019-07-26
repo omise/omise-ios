@@ -348,7 +348,7 @@ extension PaymentInformation.Installment {
     }
     
     private enum CodingKeys: String, CodingKey {
-        case installmentTerms = "installment_terms"
+        case installmentTerms = "installment_term"
     }
     
     public init(from decoder: Decoder) throws {

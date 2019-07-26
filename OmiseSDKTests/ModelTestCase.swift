@@ -10,9 +10,9 @@ class ModelTestCase: XCTestCase {
         let token = try decoder.decode(Token.self, from: tokenData)
         
         XCTAssertEqual("tokn_test_5086xl7c9k5rnx35qba", token.id)
-        XCTAssertEqual("https://vault.omise.co/tokens/tokn_test_5086xl7c9k5rnx35qba", token.location)
+        XCTAssertEqual("/tokens/tokn_test_5086xl7c9k5rnx35qba", token.location)
         XCTAssertFalse(token.isLiveMode)
-        XCTAssertEqual(XCTestCase.dateFromJSONString("2015-06-02T05:41:46Z"), token.createdDate)
+        XCTAssertEqual(XCTestCase.dateFromJSONString("2019-07-26T05:45:20Z"), token.createdDate)
         XCTAssertFalse(token.isUsed)
         XCTAssertEqual("card_test_5086xl7amxfysl0ac5l", token.card.id)
     }
@@ -25,12 +25,12 @@ class ModelTestCase: XCTestCase {
         XCTAssertEqual("card_test_5086xl7amxfysl0ac5l", card.id)
         XCTAssertEqual("4242", card.lastDigits)
         XCTAssertTrue(card.securityCodeCheck)
-        XCTAssertEqual(10, card.expirationMonth)
-        XCTAssertEqual(2018, card.expirationYear)
-        XCTAssertEqual("Somchai Prasert", card.name)
+        XCTAssertEqual(12, card.expirationMonth)
+        XCTAssertEqual(2020, card.expirationYear)
+        XCTAssertEqual("John Doe", card.name)
         XCTAssertEqual("mKleiBfwp+PoJWB/ipngANuECUmRKjyxROwFW5IO7TM=", card.fingerprint)
-        XCTAssertEqual(XCTestCase.dateFromJSONString("2015-06-02T05:41:46Z"), card.createdDate)
-        XCTAssertEqual("us", card.countryCode)
+        XCTAssertEqual(XCTestCase.dateFromJSONString("2019-07-26T05:45:20Z"), card.createdDate)
+        XCTAssertEqual("gb", card.countryCode)
     }
     
     func testDecodeSource() throws {
@@ -42,7 +42,7 @@ class ModelTestCase: XCTestCase {
             
             XCTAssertEqual("src_test_5avnfnqxzzj2yu7a34e", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
-            XCTAssertEqual(100000, source.amount)
+            XCTAssertEqual(1000000, source.amount)
             XCTAssertEqual(PaymentInformation.alipay, source.paymentInformation)
             XCTAssertEqual(Flow.redirect, source.flow)
         } catch {
@@ -59,7 +59,7 @@ class ModelTestCase: XCTestCase {
             
             XCTAssertEqual("src_test_59trf2nxk43b5nml8z0", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
-            XCTAssertEqual(100000, source.amount)
+            XCTAssertEqual(1000000, source.amount)
             XCTAssertEqual(PaymentInformation.billPayment(.tescoLotus), source.paymentInformation)
             XCTAssertEqual(Flow.offline, source.flow)
         } catch {
@@ -201,7 +201,7 @@ class ModelTestCase: XCTestCase {
             
             XCTAssertEqual("src_test_5avnh1p1dt3hkh161ac", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
-            XCTAssertEqual(1000_00, source.amount)
+            XCTAssertEqual(1000000, source.amount)
             XCTAssertEqual(PaymentInformation.internetBanking(.scb), source.paymentInformation)
             XCTAssertEqual(Flow.redirect, source.flow)
         } catch {

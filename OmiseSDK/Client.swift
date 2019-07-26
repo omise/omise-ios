@@ -150,7 +150,7 @@ import os
 extension Client {
     
     private static let omiseAPIContentType = "application/json; charset=utf8"
-    private static let omiseAPIVersion = "2017-11-02"
+    private static let omiseAPIVersion = "2019-05-29"
     
     private func buildURLRequest<T: Object>(for request: Request<T>) -> URLRequest {
         let urlRequest = NSMutableURLRequest(url: T.postURL)
