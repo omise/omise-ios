@@ -28,3 +28,6 @@
 /* Number of terms option text displayed as a title of the number of terms option cell in number of terms chooser scene */
 "installments.number-of-terms-chooser.number-of-terms-cell.label.text" = "%d เดือน";
 
+
+"more-info.cvv-location.amex.text" = "หมายเลข 4 หลักบนหน้าบัตร";
+"more-info.cvv-location.default.text" = "หมายเลข 3 หลักด้านหลังบัตร";

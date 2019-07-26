@@ -318,6 +318,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             return
         }
         
+        moreInformationOnCVVViewController.preferredCardBrand = cardNumberTextField.cardBrand
         moreInformationOnCVVViewController.delegate = self
         moreInformationOnCVVViewController.modalPresentationStyle = .custom
         moreInformationOnCVVViewController.transitioningDelegate = overlayTransitionDelegate
