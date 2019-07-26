@@ -38,7 +38,6 @@ public class CardCVVTextField: OmiseTextField {
     
     private func initializeInstance() {
         super.keyboardType = .numberPad
-        placeholder = placeholder ?? "123"
         super.delegate = self
         
         validator = try! NSRegularExpression(pattern: "\\d{3,4}", options: [])

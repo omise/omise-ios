@@ -77,9 +77,7 @@ public class CardExpiryDateTextField: OmiseTextField {
         initializeInstance()
     }
     
-    private func initializeInstance() {
-        placeholder = placeholder ?? "MM/YY"
-        
+    private func initializeInstance() {        
         super.delegate = self
         
         expirationMonthAccessibilityElement = CardExpiryDateTextField.InfoAccessibilityElement(expiryDateTextField: self, component: .month)
