@@ -74,7 +74,7 @@ public struct CreateTokenParameter: Encodable {
 
 
 /// Represents an Omise Token object
-public struct Token: Object {
+public struct Token: CreatableObject {
     public typealias CreateParameter = CreateTokenParameter
     
     public static let postURL: URL = URL(string: "https://vault.omise.co/tokens")!
@@ -101,7 +101,7 @@ public struct Token: Object {
         case object
         case location
         case id
-        case createdDate = "created"
+        case createdDate = "created_at"
         case isLiveMode = "livemode"
         case isUsed = "used"
         case card
@@ -149,7 +149,7 @@ public struct Card: Decodable {
         case object
         case id
         case isLiveMode = "livemode"
-        case createdDate = "created"
+        case createdDate = "created_at"
         case lastDigits = "last_digits"
         case brand
         case name

@@ -3,7 +3,7 @@ import Foundation
 
 /// Brand of the Card Network
 @objc(OMSCardBrand)
-public enum CardBrand: Int, CustomStringConvertible {
+public enum CardBrand: Int, CustomStringConvertible, Codable {
     
     /// VISA card newtwork brand
     case visa
@@ -45,7 +45,7 @@ public enum CardBrand: Int, CustomStringConvertible {
         case .amex:
             return "^3[47]"
         case .diners:
-            return "^3(0[0-5]|[6,8-9])|5[4-5]"
+            return "^3(0[0-5]|[6,8-9])|^5[4-5]"
         case .laser:
             return "^(6304|670[69]|6771)"
         case .maestro:
@@ -95,6 +95,35 @@ public enum CardBrand: Int, CustomStringConvertible {
             return "Laser"
         case .maestro:
             return "Maestro"
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(description)
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        switch try container.decode(String.self) {
+        case "Visa":
+            self = .visa
+        case "MasterCard":
+            self = .masterCard
+        case "JCB":
+            self = .jcb
+        case "AMEX":
+            self = .amex
+        case "Diners":
+            self = .diners
+        case "Discover":
+            self = .discover
+        case "Laser":
+            self = .laser
+        case "Maestro":
+            self = .maestro
+        default:
+            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid Card Brand value")
         }
     }
 }

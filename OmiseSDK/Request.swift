@@ -11,7 +11,7 @@ public enum RequestResult<T: Object> {
 
 
 /// Request object for describing a request with the creating parameters
-public struct Request<T: Object> {
+public struct Request<T: CreatableObject> {
     public typealias Callback = (RequestResult<T>) -> Void
     
     /// Parameter of this request

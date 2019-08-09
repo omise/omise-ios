@@ -348,7 +348,7 @@ extension PaymentInformation.Installment {
     }
     
     private enum CodingKeys: String, CodingKey {
-        case installmentTerms = "installment_terms"
+        case installmentTerms = "installment_term"
     }
     
     public init(from decoder: Decoder) throws {
@@ -406,6 +406,23 @@ extension PaymentInformation.Installment.Brand : StaticElementIterable, CustomSt
             return "KTC"
         case .kBank:
             return "K-Bank"
+        case .other(let value):
+            return value
+        }
+    }
+    
+    public var type: String {
+        switch self {
+        case .bay:
+            return OMSSourceTypeValue.installmentBAY.rawValue
+        case .firstChoice:
+            return OMSSourceTypeValue.installmentFirstChoice.rawValue
+        case .bbl:
+            return OMSSourceTypeValue.installmentBBL.rawValue
+        case .ktc:
+            return OMSSourceTypeValue.installmentKTC.rawValue
+        case .kBank:
+            return OMSSourceTypeValue.installmentKBank.rawValue
         case .other(let value):
             return value
         }

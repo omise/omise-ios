@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (assign, nonatomic) int64_t paymentAmount;
 @property (strong, nonatomic) NSString *paymentCurrencyCode;
+@property (assign, nonatomic) BOOL usesCapabilityDataForPaymentMethods;
 @property (strong, nonatomic) NSArray<OMSSourceTypeValue> *allowedPaymentMethods;
 
 @property (strong, nonatomic) IBOutlet UISegmentedControl *modeChooser;

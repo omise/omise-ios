@@ -8,7 +8,7 @@ class ClientTestCase: XCTestCase {
     var testClient: Client!
     override func setUp() {
         super.setUp()
-        testClient = Client(publicKey: "<#Omise Public Key#>")
+        testClient = Client(publicKey: "pkey_test_58wfnlwoxz1tbkdd993")
     }
     
     override func tearDown() {
@@ -30,7 +30,7 @@ class ClientTestCase: XCTestCase {
             }
         }
         
-        XCTAssertEqual("4242424242424242", task.request.parameter.number)
+        XCTAssertEqual("424242XXXXXX4242", task.request.parameter.number)
         XCTAssertEqual(11, task.request.parameter.expirationMonth)
         XCTAssertEqual(2019, task.request.parameter.expirationYear)
         
@@ -49,7 +49,7 @@ class ClientTestCase: XCTestCase {
             }
         }
         
-        XCTAssertEqual("4242424242111111", task.request.parameter.number)
+        XCTAssertEqual("424242XXXXXX1111", task.request.parameter.number)
         XCTAssertEqual(11, task.request.parameter.expirationMonth)
         XCTAssertEqual(2016, task.request.parameter.expirationYear)
         

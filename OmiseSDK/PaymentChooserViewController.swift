@@ -2,7 +2,6 @@ import UIKit
 import os
 
 
-
 enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvertible {
     case creditCard
     case installment
@@ -86,22 +85,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-        showingValues = PaymentChooserOption.allCases.filter({
-            switch $0 {
-            case .creditCard:
-                return showsCreditCardPayment
-            case .installment:
-                return allowedPaymentMethods.hasInstallmentSource
-            case .internetBanking:
-                return allowedPaymentMethods.hasInternetBankingSource
-            case .tescoLotus:
-                return allowedPaymentMethods.hasTescoLotusSource
-            case .conbini, .payEasy, .netBanking:
-                return allowedPaymentMethods.hasEContextSource
-            case .alipay:
-                return allowedPaymentMethods.hasAlipaySource
-            }
-        })
+        updateShowingValues()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -217,6 +201,35 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         }
     }
     
+    public func applyPaymentMethods(from capability: Capability) {
+        showsCreditCardPayment = capability.creditCardBackend != nil
+        allowedPaymentMethods = capability.supportedBackends.compactMap({
+            switch $0.payment {
+            case .alipay:
+                return OMSSourceTypeValue.alipay
+            case .installment(let brand, availableNumberOfTerms: _):
+                return OMSSourceTypeValue(brand.type)
+            case .internetBanking(let bank):
+                return OMSSourceTypeValue(bank.type)
+            case .card, .unknownSource:
+                return nil
+            }
+        })
+        
+        updateShowingValues()
+    }
+    
+    private func loadCapabilityData() {
+        flowSession?.client?.capabilityDataWithCompletionHandler({ (result) in
+            switch result {
+            case .success(let capability):
+                self.applyPaymentMethods(from: capability)
+            case .failure:
+                break
+            }
+        })
+    }
+    
     private func applyPrimaryColor() {
         guard isViewLoaded else {
             return
@@ -248,7 +261,11 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         })
         
         if #available(iOS 10, *) {
-            os_log("Payment Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
+            os_log(
+                "Payment Chooser: Showing options - %{private}@",
+                log: uiLogObject, type: .info,
+                showingValues.map({ $0.description }).joined(separator: ", ")
+            )
         }
     }
     
