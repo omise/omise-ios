@@ -373,7 +373,7 @@ extension OmiseError {
             case .badRequest(let badRequestReasons):
                 switch badRequestReasons.first {
                 case .amountIsLessThanValidAmount(validAmount: let validAmount, currency: let currency)?:
-                    if let validAmount = validAmount {
+                    if let validAmount = validAmount, let currency = currency {
                         let preferredErrorDescriptionFormat = NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.message",
                             tableName: "Error", bundle: Bundle.omiseSDKBundle,
@@ -381,7 +381,9 @@ extension OmiseError {
                             comment: "The displaying message showing in the error banner an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend has occurred"
                         )
                         let formatter = NumberFormatter.makeAmountFormatter(for: currency)
-                        return String.localizedStringWithFormat(preferredErrorDescriptionFormat, formatter.string(from: NSNumber(value: validAmount)) ?? "\(validAmount)")
+                        return String.localizedStringWithFormat(
+                            preferredErrorDescriptionFormat,
+                            formatter.string(from: NSNumber(value: currency.convert(fromSubunit: validAmount))) ?? "\(currency.convert(fromSubunit: validAmount))")
                     } else {
                         return NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.message",
@@ -391,7 +393,7 @@ extension OmiseError {
                         )
                     }
                 case .amountIsGreaterThanValidAmount(validAmount: let validAmount, currency: let currency)?:
-                    if let validAmount = validAmount {
+                    if let validAmount = validAmount, let currency = currency {
                         let preferredErrorDescriptionFormat = NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.message",
                             tableName: "Error", bundle: Bundle.omiseSDKBundle,
@@ -399,7 +401,9 @@ extension OmiseError {
                             comment: "The displaying message showing in the error banner an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend has occurred"
                         )
                         let formatter = NumberFormatter.makeAmountFormatter(for: currency)
-                        return String.localizedStringWithFormat(preferredErrorDescriptionFormat, formatter.string(from: NSNumber(value: validAmount)) ?? "\(validAmount)")
+                        return String.localizedStringWithFormat(
+                            preferredErrorDescriptionFormat,
+                            formatter.string(from: NSNumber(value: currency.convert(fromSubunit: validAmount))) ?? "\(currency.convert(fromSubunit: validAmount))")
                     } else {
                         return NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.message",
@@ -558,7 +562,7 @@ extension OmiseError {
             case .badRequest(let badRequestReasons):
                 switch badRequestReasons.first {
                 case .amountIsLessThanValidAmount(validAmount: let validAmount, currency: let currency)?:
-                    if let validAmount = validAmount {
+                    if let validAmount = validAmount, let currency = currency {
                         let preferredErrorDescriptionFormat = NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.recovery-suggestion",
                             tableName: "Error", bundle: Bundle.omiseSDKBundle,
@@ -566,7 +570,9 @@ extension OmiseError {
                             comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend has occurred"
                         )
                         let formatter = NumberFormatter.makeAmountFormatter(for: currency)
-                        return String.localizedStringWithFormat(preferredErrorDescriptionFormat, formatter.string(from: NSNumber(value: validAmount)) ?? "\(validAmount)")
+                        return String.localizedStringWithFormat(
+                            preferredErrorDescriptionFormat,
+                            formatter.string(from: NSNumber(value: currency.convert(fromSubunit: validAmount))) ?? "\(currency.convert(fromSubunit: validAmount))")
                     } else {
                         return NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.recovery-suggestion",
@@ -576,7 +582,7 @@ extension OmiseError {
                         )
                     }
                 case .amountIsGreaterThanValidAmount(validAmount: let validAmount, currency: let currency)?:
-                    if let validAmount = validAmount {
+                    if let validAmount = validAmount, let currency = currency {
                         let preferredErrorDescriptionFormat = NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.recovery-suggestion",
                             tableName: "Error", bundle: Bundle.omiseSDKBundle,
@@ -584,7 +590,9 @@ extension OmiseError {
                             comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend has occurred"
                         )
                         let formatter = NumberFormatter.makeAmountFormatter(for: currency)
-                        return String.localizedStringWithFormat(preferredErrorDescriptionFormat, formatter.string(from: NSNumber(value: validAmount)) ?? "\(validAmount)")
+                        return String.localizedStringWithFormat(
+                            preferredErrorDescriptionFormat,
+                            formatter.string(from: NSNumber(value: currency.convert(fromSubunit: validAmount))) ?? "\(currency.convert(fromSubunit: validAmount))")
                     } else {
                         return NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.recovery-suggestion",
