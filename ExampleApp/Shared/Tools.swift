@@ -8,7 +8,7 @@ struct PaymentPreset {
     var allowedPaymentMethods: [OMSSourceTypeValue]
     
     static let thailandPreset = PaymentPreset(
-        paymentAmount: 5_00_00, paymentCurrency: .thb,
+        paymentAmount: 5_000_00, paymentCurrency: .thb,
         allowedPaymentMethods: PaymentCreatorController.thailandDefaultAvailableSourceMethods
     )
     
