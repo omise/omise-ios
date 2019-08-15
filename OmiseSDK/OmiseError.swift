@@ -526,7 +526,9 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
                     comment: "A default descriptive message representing an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user"
                 )
                 let formatter = NumberFormatter.makeAmountFormatter(for: currency)
-                preferredErrorDescription = String.localizedStringWithFormat(preferredErrorDescriptionFormat, formatter.string(from: NSNumber(value: validAmount)) ?? "\(validAmount)")
+                preferredErrorDescription = String.localizedStringWithFormat(
+                    preferredErrorDescriptionFormat, 
+                    formatter.string(from: NSNumber(value: currency.convert(fromSubunit: validAmount))) ?? "\(currency.convert(fromSubunit: validAmount))")
             } else {
                 preferredErrorDescription = NSLocalizedString(
                     "error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.message",
@@ -544,7 +546,9 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
                     comment: "A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user"
                 )
                 let formatter = NumberFormatter.makeAmountFormatter(for: currency)
-                preferredErrorDescription = String.localizedStringWithFormat(preferredErrorDescriptionFormat, formatter.string(from: NSNumber(value: validAmount)) ?? "\(validAmount)")
+                preferredErrorDescription = String.localizedStringWithFormat(
+                    preferredErrorDescriptionFormat,
+                    formatter.string(from: NSNumber(value: currency.convert(fromSubunit: validAmount))) ?? "\(currency.convert(fromSubunit: validAmount))")
             } else {
                 preferredErrorDescription = NSLocalizedString(
                     "error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.message",
