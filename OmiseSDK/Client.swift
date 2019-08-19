@@ -7,9 +7,7 @@ import os
     let queue: OperationQueue
     let publicKey: String
     
-    var userAgent: String?
-    let sessionDelegate = Client.PublicKeyPinningSessionDelegate()
-    
+    var userAgent: String?    
     
     /// Initializes a new Client with the given Public Key and Operating OperationQueue
     ///
@@ -30,7 +28,7 @@ import os
         self.queue = queue
         self.session = URLSession(
             configuration: URLSessionConfiguration.ephemeral,
-            delegate: sessionDelegate,
+            delegate: nil,
             delegateQueue: queue
         )
     }
