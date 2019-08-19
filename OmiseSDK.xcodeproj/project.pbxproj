@@ -73,7 +73,6 @@
 		8A7A9EC0216642D100F12D86 /* Swift Version Compatability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatability.swift */; };
 		8A7A9EC12166578700F12D86 /* Swift Version Compatability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatability.swift */; };
 		8A7A9EC22166578800F12D86 /* Swift Version Compatability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatability.swift */; };
-		8A7F8B0C20C55605008F4D08 /* ClientSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADAA9A720B7194500DD7CCF /* ClientSessionDelegate.swift */; };
 		8A87DBCB226DA404001596F1 /* OmiseCapability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A87DBCA226DA404001596F1 /* OmiseCapability.swift */; };
 		8AC1D3A32139224D0051F966 /* InternetBankingSourceChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC1D3A22139224D0051F966 /* InternetBankingSourceChooserViewController.swift */; };
 		8AC1D3A5213922570051F966 /* InstallmentBankingSourceChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC1D3A4213922570051F966 /* InstallmentBankingSourceChooserViewController.swift */; };
@@ -230,7 +229,6 @@
 		8AD0609220B55B3A0074894E /* RequestTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTask.swift; sourceTree = "<group>"; };
 		8AD0609520B55E610074894E /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		8ADAA9A420B6C0AF00DD7CCF /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
-		8ADAA9A720B7194500DD7CCF /* ClientSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientSessionDelegate.swift; sourceTree = "<group>"; };
 		8ADAA9AC20B71EDA00DD7CCF /* module.map */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
 		8AE23AAD20F8CA8800BC9D8F /* PaymentChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentChooserViewController.swift; sourceTree = "<group>"; };
 		8AF5517B213D4C0100D61C98 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
@@ -318,7 +316,6 @@
 				8A00FEC21F1DE88600246078 /* README.md */,
 				2259311D1CE3210700841B86 /* Info.plist */,
 				8AD0609520B55E610074894E /* Client.swift */,
-				8ADAA9A720B7194500DD7CCF /* ClientSessionDelegate.swift */,
 				22445FFB1CF41DD300801D0F /* Globals.swift */,
 				8A2BE95420A9A39E000CEB60 /* Request.swift */,
 				8AD0609220B55B3A0074894E /* RequestTask.swift */,
@@ -729,7 +726,6 @@
 				8A0A67E821383614006356B7 /* PaymentChooserViewController.swift in Sources */,
 				8A72CD5E2162358400F14F76 /* PaymentOptionTableViewCell.swift in Sources */,
 				8A47173D20AAB11B0022733A /* Source.swift in Sources */,
-				8A7F8B0C20C55605008F4D08 /* ClientSessionDelegate.swift in Sources */,
 				986406351CFEA7E4004BCF51 /* OmiseTextField.swift in Sources */,
 				2220F1AD1D0FEE85008CD89F /* OmiseToken.swift in Sources */,
 				8AF9857221479F72007E18ED /* CreditCardFormViewController.swift in Sources */,
