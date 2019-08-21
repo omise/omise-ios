@@ -7,13 +7,22 @@ class PaymentOptionTableViewCell: UITableViewCell {
     
     override init(style: TableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addSubview(separatorView)
-    }
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        addSubview(separatorView)
+        initializeInstance()
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        initializeInstance()
+    }
+    
+    private func initializeInstance() {
+        addSubview(separatorView)
+        
+        let selectedBackgroundView = UIView()
+        selectedBackgroundView.backgroundColor = UIColor.selectedCellBackgroundColor
+        self.selectedBackgroundView = selectedBackgroundView
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         

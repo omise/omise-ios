@@ -159,7 +159,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     @IBOutlet var cvvInfoButton: UIButton!
     
     @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
-    @objc public static let defaultErrorMessageTextColor = UIColor(red: 1.000, green: 0.255, blue: 0.208, alpha: 1.0)
+    @objc public static let defaultErrorMessageTextColor = UIColor.error
 
     /// A boolean flag that enables/disables Card.IO integration.
     @available(*, unavailable, message: "Built in support for Card.ios was removed. You can implement it in your app and call the setCreditCardInformation(number:name:expiration:) method")
@@ -225,7 +225,42 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         
         self.setCreditCardInformationWith(number: number, name: name, expiration: expiration)
     }
-
+    
+    public override func loadView() {
+        super.loadView()
+        
+        view.backgroundColor = UIColor.background
+        confirmButton.defaultBackgroundColor = view.tintColor
+        confirmButton.disabledBackgroundColor = .line
+        
+        cvvInfoButton.tintColor = .badgeBackground
+        formFieldsAccessoryView.barTintColor = .formAccessoryBarTintColor
+        
+        if #available(iOS 13, *) {
+            let appearance = navigationItem.standardAppearance ?? UINavigationBarAppearance(idiom: .phone)
+            appearance.configureWithOpaqueBackground()
+            appearance.titleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: UIColor.headings
+            ]
+            appearance.largeTitleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: UIColor.headings
+            ]
+            let renderer = UIGraphicsImageRenderer(size: CGSize(width: 1, height: 1))
+            let image = renderer.image { (context) in
+                context.cgContext.setFillColor(UIColor.line.cgColor)
+                context.fill(CGRect(origin: .zero, size: CGSize(width: 1, height: 1)))
+            }
+            appearance.shadowImage = image.resizableImage(withCapInsets: UIEdgeInsets.zero)
+                .withRenderingMode(.alwaysTemplate)
+            appearance.shadowColor = preferredSecondaryColor ?? defaultPaymentChooserUISecondaryColor
+            navigationItem.standardAppearance = appearance
+            
+            let scrollEdgeAppearance = appearance.copy()
+            appearance.shadowColor = preferredSecondaryColor ?? defaultPaymentChooserUISecondaryColor
+            navigationItem.scrollEdgeAppearance = scrollEdgeAppearance
+        }
+    }
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -322,6 +357,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         moreInformationOnCVVViewController.delegate = self
         moreInformationOnCVVViewController.modalPresentationStyle = .custom
         moreInformationOnCVVViewController.transitioningDelegate = overlayTransitionDelegate
+        moreInformationOnCVVViewController.view.tintColor = view.tintColor
         present(moreInformationOnCVVViewController, animated: true, completion: nil)
     }
     
@@ -595,6 +631,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         
         formFields.forEach({
             $0.borderColor = currentSecondaryColor
+            $0.placeholderTextColor = currentSecondaryColor
         })
     }
     

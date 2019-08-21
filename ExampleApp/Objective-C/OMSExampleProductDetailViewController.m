@@ -1,10 +1,10 @@
 #import "OMSExampleProductDetailViewController.h"
 #import <ExampleApp-Swift.h>
 #import "CustomCreditCardFormViewController.h"
+#import <objc/message.h>
 
 
 NSString * const OMSPublicKey = @"<#Omise Public Key#>";
-
 
 
 @interface OMSExampleProductDetailViewController () <OMSCreditCardFormViewControllerDelegate,

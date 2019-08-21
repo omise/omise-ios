@@ -129,12 +129,21 @@ public class PaymentCreatorController : UINavigationController {
         let noticeViewNib = UINib(nibName: "NoticeView", bundle: bundle)
         let noticeView = noticeViewNib.instantiate(withOwner: nil, options: nil).first as! NoticeView
         noticeView.translatesAutoresizingMaskIntoConstraints = false
+        noticeView.backgroundColor = .error
         return noticeView
     }()
     
     
     @objc @IBInspectable public var preferredPrimaryColor: UIColor?
-    @objc @IBInspectable public var preferredSecondaryColor: UIColor?
+    @objc @IBInspectable public var preferredSecondaryColor: UIColor? {
+        didSet {
+            if #available(iOS 13, *) {
+                let appearance = UINavigationBarAppearance(barAppearance: navigationBar.standardAppearance)
+                appearance.shadowColor = preferredSecondaryColor ?? defaultPaymentChooserUISecondaryColor
+                navigationBar.standardAppearance = appearance
+            }
+        }
+    }
 
     /// Factory method for creating CreditCardFormController with given public key.
     /// - parameter publicKey: Omise public key.
@@ -238,6 +247,8 @@ public class PaymentCreatorController : UINavigationController {
     }
     
     private func initializeWithPaymentChooserViewController(_ viewController: PaymentChooserViewController) {
+        view.tintColor = .omise
+        
         viewController.preferredPrimaryColor = preferredPrimaryColor
         viewController.preferredSecondaryColor = preferredSecondaryColor
         
@@ -280,7 +291,7 @@ public class PaymentCreatorController : UINavigationController {
                 displayingNoticeView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
                 displayingNoticeView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 displayingNoticeView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                ])
+            ])
         } else {
             let views = ["displayingNoticeView": displayingNoticeView] as [String: UIView]
             let constraints = NSLayoutConstraint.constraints(withVisualFormat: "|[displayingNoticeView]|", options: [], metrics: nil, views: views) +
@@ -294,13 +305,16 @@ public class PaymentCreatorController : UINavigationController {
         let animationBlock = {
             self.noticeViewHeightConstraint.isActive = false
             self.view.layoutIfNeeded()
-            if #available(iOS 11, *) {
+            if #available(iOS 13, *) {
+                self.topViewController?.additionalSafeAreaInsets.top = self.displayingNoticeView.bounds.height
+            } else if #available(iOS 11, *) {
                 self.additionalSafeAreaInsets.top = self.displayingNoticeView.bounds.height
             }
         }
         
         if animated {
-            UIView.animate(withDuration: TimeInterval(NavigationControllerHideShowBarDuration) + 0.07, delay: 0.0, options: [.layoutSubviews], animations: animationBlock)
+            UIView.animate(withDuration: TimeInterval(NavigationControllerHideShowBarDuration) + 0.07, delay: 0.0,
+                           options: [.layoutSubviews], animations: animationBlock)
         } else {
             animationBlock()
         }
@@ -314,7 +328,9 @@ public class PaymentCreatorController : UINavigationController {
         let animationBlock = {
             self.noticeViewHeightConstraint.isActive = true
             self.view.layoutIfNeeded()
-            if #available(iOS 11, *) {
+            if #available(iOS 13, *) {
+                self.topViewController?.additionalSafeAreaInsets.top = 0
+            } else if #available(iOS 11, *) {
                 self.additionalSafeAreaInsets.top = 0
             }
         }
@@ -370,15 +386,43 @@ public class PaymentCreatorController : UINavigationController {
     
     public override func loadView() {
         super.loadView()
-        view.backgroundColor = .white
+        view.backgroundColor = .background
+        
+        if #available(iOS 13, *) {
+            let appearance = UINavigationBarAppearance(barAppearance: navigationBar.standardAppearance)
+            appearance.configureWithOpaqueBackground()
+            appearance.titleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: UIColor.headings
+            ]
+            appearance.largeTitleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: UIColor.headings
+            ]
+            let renderer = UIGraphicsImageRenderer(size: CGSize(width: 1, height: 1))
+            let image = renderer.image { (context) in
+                context.cgContext.setFillColor(UIColor.line.cgColor)
+                context.fill(CGRect(origin: .zero, size: CGSize(width: 1, height: 1)))
+            }
+            appearance.shadowImage = image.resizableImage(withCapInsets: UIEdgeInsets.zero)
+                .withRenderingMode(.alwaysTemplate)
+            appearance.shadowColor = preferredSecondaryColor ?? defaultPaymentChooserUISecondaryColor
+            navigationBar.standardAppearance = appearance
+            
+            let scrollEdgeAppearance = UINavigationBarAppearance(barAppearance: navigationBar.standardAppearance)
+            appearance.shadowColor = preferredSecondaryColor ?? defaultPaymentChooserUISecondaryColor
+            navigationBar.scrollEdgeAppearance = scrollEdgeAppearance
+        }
     }
     
     public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        if #available(iOS 11, *), self.displayingNoticeView.superview != nil {
+        if self.displayingNoticeView.superview != nil {
             coordinator.animate(alongsideTransition: { (context) in
-                self.additionalSafeAreaInsets.top = self.displayingNoticeView.bounds.height
+                if #available(iOS 13, *) {
+                    self.additionalSafeAreaInsets.top = 0
+                } else if #available(iOS 11, *) {
+                    self.additionalSafeAreaInsets.top = self.displayingNoticeView.bounds.height
+                }
             }, completion: nil)
         }
     }
@@ -446,11 +490,14 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
                 os_log("There is no Payment Creator delegate to notify about the error", log: uiLogObject, type: .default)
             }
         } else if let error = error as? OmiseError {
-            displayErrorWith(title: error.bannerErrorDescription, message: error.bannerErrorRecoverySuggestion, animated: true, sender: self)
+            displayErrorWith(title: error.bannerErrorDescription, message: error.bannerErrorRecoverySuggestion,
+                             animated: true, sender: self)
         } else if let error = error as? LocalizedError {
-            displayErrorWith(title: error.localizedDescription, message: error.recoverySuggestion, animated: true, sender: self)
+            displayErrorWith(title: error.localizedDescription, message: error.recoverySuggestion,
+                             animated: true, sender: self)
         } else {
-            displayErrorWith(title: error.localizedDescription, message: nil, animated: true, sender: self)
+            displayErrorWith(title: error.localizedDescription, message: nil,
+                             animated: true, sender: self)
         }
         
         if #available(iOSApplicationExtension 10.0, *) {
@@ -488,18 +535,18 @@ extension PaymentCreatorController {
         .installmentBBL,
         .installmentKTC,
         .installmentKBank,
-        ]
+    ]
     
     public static let japanDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
         OMSSourceTypeValue.eContext,
-        ]
+    ]
     
     public static let internetBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
         .internetBankingBAY,
         .internetBankingKTB,
         .internetBankingSCB,
         .internetBankingBBL,
-        ]
+    ]
     
     public static let installmentsBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
         .installmentBAY,
@@ -507,15 +554,15 @@ extension PaymentCreatorController {
         .installmentBBL,
         .installmentKTC,
         .installmentKBank,
-        ]
+    ]
     
     public static let billPaymentAvailablePaymentMethods: [OMSSourceTypeValue] = [
         .billPaymentTescoLotus,
-        ]
+    ]
     
     public static let barcodeAvailablePaymentMethods: [OMSSourceTypeValue] = [
         .barcodeAlipay,
-        ]
+    ]
 }
 
 
@@ -524,5 +571,5 @@ class NoticeView: UIView {
     @IBOutlet var iconImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var detailLabel: UILabel!
-  
+    
 }
