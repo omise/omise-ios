@@ -27,8 +27,8 @@ you can't find an answer there, post a question in our
 
 * Omise API public key. [Register for an Omise account](https://dashboard.omise.co/signup) to obtain your API keys.
 * iOS 8 or higher deployment target.
-* Xcode 9.0 or higher (Xcode 10 is recommended)
-* Swift 4.0 or higher (Swift 4.2 is recommended)
+* Xcode 9.0 or higher (Xcode 11 is recommended)
+* Swift 4.0 or higher (Swift 5.0 is recommended)
 * [Carthage](https://github.com/Carthage/Carthage) dependency manager.
 
 ## Merchant Compliance
@@ -78,7 +78,7 @@ data.  You can tokenize credit card data by creating and initializing
 a `Request<Token>` like so:
 
 ```swift
-let tokenParameter = Source.CreateParameter(
+let tokenParameter = Token.CreateParameter(
     name: "JOHN DOE",
     number: "4242424242424242",
     expirationMonth: 11,
@@ -364,6 +364,17 @@ However due to the Swift syntax limitation, Omise SDK couldn't provide the bridg
 The developer need to migrate this by themselves. We are sorry that this happened but we think this change will pay itself back in the future since the Swift.Result type would be a standard type for representing the Result of an operation.
 
 If you have any questions or problems during your migration, please feel free to post a question in our [forum](https://forum.omise.co) or [email our support team](mailto:support@omise.co).
+
+### Note on Version 2.7.0
+
+We encourage merchants to adopt the 3.0.0 version since it introduced many new features including Source API and a built-in Payment Creator form.
+
+To help merchants to adopt the 3.0.0 version, we decided to add version 2.7.0 which is the same one as 3.0.0 and remove the old versions from the releases.
+The Omise iOS SDK version 3.0.0 comes with the great compatibility with the version 2 this means that merchants should have little work to migrate to the new version.
+We believe this would help merchants in the long term.
+
+We also highly recommend merchants to fully adopt Omise iOS SDK version 3 to receive the new update in the future.
+
 
 ## Contributing
 
