@@ -247,8 +247,6 @@ public class PaymentCreatorController : UINavigationController {
     }
     
     private func initializeWithPaymentChooserViewController(_ viewController: PaymentChooserViewController) {
-        view.tintColor = .omise
-        
         viewController.preferredPrimaryColor = preferredPrimaryColor
         viewController.preferredSecondaryColor = preferredSecondaryColor
         

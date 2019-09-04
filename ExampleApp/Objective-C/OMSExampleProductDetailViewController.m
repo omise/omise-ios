@@ -20,10 +20,6 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIImage *emptyImage = [Tool imageWithSize:CGSizeMake(1, 1) color:UIColor.whiteColor];
-    [self.navigationController.navigationBar setBackgroundImage:emptyImage forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = emptyImage;
-    
     OMSSDKClient *client = [[OMSSDKClient alloc] initWithPublicKey:OMSPublicKey];
     [client capabilityDataWithCompletionHandler:^(OMSCapability * _Nullable capability, NSError * _Nullable error) {
         self.capability = capability;
