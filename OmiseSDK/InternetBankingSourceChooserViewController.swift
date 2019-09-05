@@ -57,6 +57,7 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         if let cell = cell as? PaymentOptionTableViewCell {
             cell.separatorView.backgroundColor = currentSecondaryColor
         }
+        cell.accessoryView?.tintColor = currentSecondaryColor
         return cell
     }
     
