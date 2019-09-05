@@ -7,7 +7,7 @@ import UIKit
 public class CardNameTextField: OmiseTextField {
     /// Boolean indicating wether current input is valid or not.
     public override var isValid: Bool {
-        return !text.isNilOrEmpty
+        return !text.isNilOrEmpty && (text ?? "").rangeOfCharacter(from: .decimalDigits) == nil
     }
     
     override public init(frame: CGRect) {
