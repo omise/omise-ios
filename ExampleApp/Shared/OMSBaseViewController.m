@@ -64,11 +64,16 @@
 
 - (void)updateUIColors {
     UIColor *modeChooserDefaultBackgroundColor = nil;
+    
+#ifdef __IPHONE_13_0
     if (@available(iOS 13.0, *)) {
         modeChooserDefaultBackgroundColor = UIColor.systemBackgroundColor;
     } else {
         modeChooserDefaultBackgroundColor = UIColor.whiteColor;
     }
+#else
+    modeChooserDefaultBackgroundColor = UIColor.whiteColor;
+#endif
     
     UIImage *emptyImage = [Tool imageWithSize:CGSizeMake(1, 1) color:modeChooserDefaultBackgroundColor];
     [self.navigationController.navigationBar setBackgroundImage:emptyImage forBarMetrics:UIBarMetricsDefault];
@@ -123,18 +128,25 @@
         NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleCallout]
     };
     NSDictionary<NSAttributedStringKey,id> *normalTitleAttributes = nil;
+
+#ifdef __IPHONE_13_0
     if (@available(iOS 13.0, *)) {
         normalTitleAttributes = @{
             NSForegroundColorAttributeName: UIColor.labelColor,
             NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleCallout]
         };
-        
     } else {
         normalTitleAttributes = @{
             NSForegroundColorAttributeName: UIColor.darkTextColor,
             NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleCallout]
         };
     }
+#else
+    normalTitleAttributes = @{
+            NSForegroundColorAttributeName: UIColor.darkTextColor,
+            NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleCallout]
+    };
+#endif
     [self.modeChooser setTitleTextAttributes:normalTitleAttributes
                                     forState:UIControlStateNormal];
     [self.modeChooser setTitleTextAttributes:normalTitleAttributes

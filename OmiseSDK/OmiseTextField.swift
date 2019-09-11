@@ -175,9 +175,11 @@ public class OmiseTextField: UITextField {
     public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
+        #if compiler(>=5.1)
         if #available(iOS 13, *), traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
             updateBorder()
         }
+        #endif
     }
 }
 

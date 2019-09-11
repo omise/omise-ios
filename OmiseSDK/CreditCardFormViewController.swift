@@ -236,6 +236,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         cvvInfoButton.tintColor = .badgeBackground
         formFieldsAccessoryView.barTintColor = .formAccessoryBarTintColor
         
+        #if compiler(>=5.1)
         if #available(iOS 13, *) {
             let appearance = navigationItem.standardAppearance ?? UINavigationBarAppearance(idiom: .phone)
             appearance.configureWithOpaqueBackground()
@@ -259,6 +260,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             appearance.shadowColor = preferredSecondaryColor ?? defaultPaymentChooserUISecondaryColor
             navigationItem.scrollEdgeAppearance = scrollEdgeAppearance
         }
+        #endif
     }
     
     public override func viewDidLoad() {
