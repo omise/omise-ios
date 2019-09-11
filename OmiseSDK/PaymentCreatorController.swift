@@ -137,11 +137,13 @@ public class PaymentCreatorController : UINavigationController {
     @objc @IBInspectable public var preferredPrimaryColor: UIColor?
     @objc @IBInspectable public var preferredSecondaryColor: UIColor? {
         didSet {
+            #if compiler(>=5.1)
             if #available(iOS 13, *) {
                 let appearance = UINavigationBarAppearance(barAppearance: navigationBar.standardAppearance)
                 appearance.shadowColor = preferredSecondaryColor ?? defaultPaymentChooserUISecondaryColor
                 navigationBar.standardAppearance = appearance
             }
+            #endif
         }
     }
 
@@ -386,6 +388,7 @@ public class PaymentCreatorController : UINavigationController {
         super.loadView()
         view.backgroundColor = .background
         
+        #if compiler(>=5.1)
         if #available(iOS 13, *) {
             let appearance = UINavigationBarAppearance(barAppearance: navigationBar.standardAppearance)
             appearance.configureWithOpaqueBackground()
@@ -409,6 +412,7 @@ public class PaymentCreatorController : UINavigationController {
             appearance.shadowColor = preferredSecondaryColor ?? defaultPaymentChooserUISecondaryColor
             navigationBar.scrollEdgeAppearance = scrollEdgeAppearance
         }
+        #endif
     }
     
     public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
