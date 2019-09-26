@@ -24,13 +24,64 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIImage *emptyImage = [Tool imageWithSize:CGSizeMake(1, 1) color:UIColor.whiteColor];
+    // Workaround of iOS 12 bug on the tint color
+    self.view.tintColor = nil;
+    self.navigationController.navigationBar.tintColor = nil;
+    
+    [self updateUIColors];
+    
+    if ([[NSLocale.currentLocale objectForKey:NSLocaleCountryCode] isEqualToString:@"JP"]) {
+        self.paymentAmount = Tool.japanPaymentAmount;
+        self.paymentCurrencyCode = Tool.japanPaymentCurrency;
+        self.allowedPaymentMethods = Tool.japanAllowedPaymentMethods;
+    } else {
+        self.paymentAmount = Tool.thailandPaymentAmount;
+        self.paymentCurrencyCode = Tool.thailandPaymentCurrency;
+        self.allowedPaymentMethods = Tool.thailandAllowedPaymentMethods;
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [super prepareForSegue:segue sender:sender];
+    
+    if ([segue.identifier isEqualToString:@"PresentPaymentSettingScene"]) {
+        UINavigationController *settingNavigationController = (UINavigationController *)segue.destinationViewController;
+        PaymentSettingTableViewController *settingViewController = (PaymentSettingTableViewController *)settingNavigationController.topViewController;
+        
+        settingViewController.currentAmount = self.paymentAmount;
+        settingViewController.currentCurrencyCode = self.paymentCurrencyCode;
+        settingViewController.usesCapabilityDataForPaymentMethods = self.usesCapabilityDataForPaymentMethods;
+        settingViewController.allowedPaymentMethods = [NSSet setWithArray:self.allowedPaymentMethods];
+    }
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    
+    [self updateUIColors];
+}
+
+
+- (void)updateUIColors {
+    UIColor *modeChooserDefaultBackgroundColor = nil;
+    
+#ifdef __IPHONE_13_0
+    if (@available(iOS 13.0, *)) {
+        modeChooserDefaultBackgroundColor = UIColor.systemBackgroundColor;
+    } else {
+        modeChooserDefaultBackgroundColor = UIColor.whiteColor;
+    }
+#else
+    modeChooserDefaultBackgroundColor = UIColor.whiteColor;
+#endif
+    
+    UIImage *emptyImage = [Tool imageWithSize:CGSizeMake(1, 1) color:modeChooserDefaultBackgroundColor];
     [self.navigationController.navigationBar setBackgroundImage:emptyImage forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setBackgroundImage:emptyImage forBarMetrics:UIBarMetricsCompact];
     self.navigationController.navigationBar.shadowImage = emptyImage;
     
     UIImage *selectedModeBackgroundImage = [Tool imageWithSize:CGSizeMake(1, 41) actions:^(CGContextRef _Nonnull context) {
-        CGContextSetFillColorWithColor(context, UIColor.whiteColor.CGColor);
+        CGContextSetFillColorWithColor(context, modeChooserDefaultBackgroundColor.CGColor);
         CGContextFillRect(context, CGRectMake(0, 0, 1, 40));
         CGContextSetFillColorWithColor(context, self.view.tintColor.CGColor);
         CGContextFillRect(context, CGRectMake(0, 40, 1, 1));
@@ -38,7 +89,7 @@
     
     [self.modeChooser setBackgroundImage:selectedModeBackgroundImage forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
     
-    UIImage *normalModeBackgroundImage = [Tool imageWithSize:CGSizeMake(1, 41) color:UIColor.whiteColor];
+    UIImage *normalModeBackgroundImage = [Tool imageWithSize:CGSizeMake(1, 41) color:modeChooserDefaultBackgroundColor];
     [self.modeChooser setBackgroundImage:normalModeBackgroundImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [self.modeChooser setBackgroundImage:normalModeBackgroundImage forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
     [self.modeChooser setBackgroundImage:normalModeBackgroundImage forState:UIControlStateSelected | UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
@@ -72,17 +123,30 @@
                     rightSegmentState:UIControlStateNormal
                            barMetrics:UIBarMetricsDefault];
     
-    NSDictionary<NSAttributedStringKey,id> *highlightedTitleAttributes =
-    @{
-      NSForegroundColorAttributeName: self.view.tintColor,
-      NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleCallout]
-      };
-    NSDictionary<NSAttributedStringKey,id> *normalTitleAttributes =
-    @{
-      NSForegroundColorAttributeName: UIColor.darkTextColor,
-      NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleCallout]
-      };
-    
+    NSDictionary<NSAttributedStringKey,id> *highlightedTitleAttributes = @{
+        NSForegroundColorAttributeName: self.view.tintColor,
+        NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleCallout]
+    };
+    NSDictionary<NSAttributedStringKey,id> *normalTitleAttributes = nil;
+
+#ifdef __IPHONE_13_0
+    if (@available(iOS 13.0, *)) {
+        normalTitleAttributes = @{
+            NSForegroundColorAttributeName: UIColor.labelColor,
+            NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleCallout]
+        };
+    } else {
+        normalTitleAttributes = @{
+            NSForegroundColorAttributeName: UIColor.darkTextColor,
+            NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleCallout]
+        };
+    }
+#else
+    normalTitleAttributes = @{
+            NSForegroundColorAttributeName: UIColor.darkTextColor,
+            NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleCallout]
+    };
+#endif
     [self.modeChooser setTitleTextAttributes:normalTitleAttributes
                                     forState:UIControlStateNormal];
     [self.modeChooser setTitleTextAttributes:normalTitleAttributes
@@ -91,30 +155,6 @@
                                     forState:UIControlStateSelected];
     [self.modeChooser setTitleTextAttributes:highlightedTitleAttributes
                                     forState:UIControlStateHighlighted | UIControlStateSelected];
-    
-    if ([[NSLocale.currentLocale objectForKey:NSLocaleCountryCode] isEqualToString:@"JP"]) {
-        self.paymentAmount = Tool.japanPaymentAmount;
-        self.paymentCurrencyCode = Tool.japanPaymentCurrency;
-        self.allowedPaymentMethods = Tool.japanAllowedPaymentMethods;
-    } else {
-        self.paymentAmount = Tool.thailandPaymentAmount;
-        self.paymentCurrencyCode = Tool.thailandPaymentCurrency;
-        self.allowedPaymentMethods = Tool.thailandAllowedPaymentMethods;
-    }
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    [super prepareForSegue:segue sender:sender];
-    
-    if ([segue.identifier isEqualToString:@"PresentPaymentSettingScene"]) {
-        UINavigationController *settingNavigationController = (UINavigationController *)segue.destinationViewController;
-        PaymentSettingTableViewController *settingViewController = (PaymentSettingTableViewController *)settingNavigationController.topViewController;
-        
-        settingViewController.currentAmount = self.paymentAmount;
-        settingViewController.currentCurrencyCode = self.paymentCurrencyCode;
-        settingViewController.usesCapabilityDataForPaymentMethods = self.usesCapabilityDataForPaymentMethods;
-        settingViewController.allowedPaymentMethods = [NSSet setWithArray:self.allowedPaymentMethods];
-    }
 }
 
 - (void)dismissForm {

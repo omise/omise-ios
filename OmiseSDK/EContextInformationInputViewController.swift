@@ -48,6 +48,15 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!
     @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
     
+    override func loadView() {
+        super.loadView()
+        
+        view.backgroundColor = .background
+        formFieldsAccessoryView.barTintColor = .formAccessoryBarTintColor
+        
+        submitButton.defaultBackgroundColor = .omise
+        submitButton.disabledBackgroundColor = .line
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -1,4 +1,3 @@
-import Foundation
 import UIKit
 
 
@@ -104,6 +103,7 @@ public class OmiseTextField: UITextField {
     
     private func updateTextColor() {
         guard let errorTextColor = errorTextColor else {
+            super.textColor = normalTextColor ?? .black
             return
         }
         super.textColor = isValid || isFirstResponder ? (normalTextColor ?? .black) : errorTextColor
@@ -171,6 +171,16 @@ public class OmiseTextField: UITextField {
     }
     
     @objc func textDidChange() {}
+    
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        #if compiler(>=5.1)
+        if #available(iOS 13, *), traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            updateBorder()
+        }
+        #endif
+    }
 }
 
 

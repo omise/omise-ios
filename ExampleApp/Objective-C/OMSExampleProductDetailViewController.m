@@ -1,10 +1,10 @@
 #import "OMSExampleProductDetailViewController.h"
 #import <ExampleApp-Swift.h>
 #import "CustomCreditCardFormViewController.h"
+#import <objc/message.h>
 
 
 NSString * const OMSPublicKey = @"<#Omise Public Key#>";
-
 
 
 @interface OMSExampleProductDetailViewController () <OMSCreditCardFormViewControllerDelegate,
@@ -19,10 +19,6 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    UIImage *emptyImage = [Tool imageWithSize:CGSizeMake(1, 1) color:UIColor.whiteColor];
-    [self.navigationController.navigationBar setBackgroundImage:emptyImage forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = emptyImage;
     
     OMSSDKClient *client = [[OMSSDKClient alloc] initWithPublicKey:OMSPublicKey];
     [client capabilityDataWithCompletionHandler:^(OMSCapability * _Nullable capability, NSError * _Nullable error) {

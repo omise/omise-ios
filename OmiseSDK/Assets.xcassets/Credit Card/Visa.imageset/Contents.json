@@ -3,6 +3,16 @@
     {
       "idiom" : "universal",
       "filename" : "Visa.pdf"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "Visa_White.pdf",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ]
     }
   ],
   "info" : {
