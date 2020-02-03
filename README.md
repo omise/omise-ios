@@ -51,7 +51,16 @@ To get started, add the following line to your `Cartfile`:
 github "omise/omise-ios" ~> 3.0
 ```
 
-Then run `carthage bootstrap` or `carthage build`.
+Then run `carthage update`:
+
+``` bash
+$ carthage update
+*** Fetching omise-ios
+*** Checking out omise-ios at "v3.3.0"
+*** xcodebuild output can be found in /var/folders/sd/ccsbmstn2vbbqd7nk4fgkd040000gn/T/carthage-xcodebuild.X7ZfYB.log
+*** Building scheme "OmiseSDK" in OmiseSDK.xcodeproj
+
+```
 
 ## Usage
 
@@ -64,13 +73,22 @@ details, read on:
 The Omise iOS SDK provides an easy-to-use library for calling the
 Omise API. The main class for the Omise iOS SDK is `Client` through
 which all requests to the Omise API will be sent. Creating a new
-`Client` object requires an Omise public key. The SDK currently
+`Client` object requires an Omise public key.
+
+``` swift
+import OmiseSDK
+
+let client = OmiseSDK.Client.init(publicKey: "omise_public_key")
+```
+
+
+The SDK currently
 supports 2 main categories of the requests: **Tokenizing a Credit
 Card** and **Creating a Payment Source**.
 
-#### Tokenizing a Credit Card
+#### Creating a Card Token
 
-Normally, merchants must not send credit card data to their own
+Normally, merchants must not send credit or debit card data to their own
 servers. So, in order to collect a credit card payment from a
 customer, merchants will need to *tokenize* the credit card data using
 Omise API first and then use the generated token in place of the card
@@ -78,7 +96,7 @@ data.  You can tokenize credit card data by creating and initializing
 a `Request<Token>` like so:
 
 ```swift
-let tokenParameter = Token.CreateParameter(
+let tokenParameters = Token.CreateParameter(
     name: "JOHN DOE",
     number: "4242424242424242",
     expirationMonth: 11,
@@ -86,7 +104,7 @@ let tokenParameter = Token.CreateParameter(
     securityCode: "123"
 )
 
-let request = Request<Token>(parameter: tokenParameter)
+let request = Request<Token>(parameter: tokenParameters)
 ```
 
 #### Creating a Payment Source
@@ -111,7 +129,7 @@ let request = Request<Source>(parameter: sourceParameter)
 
 #### Sending the Request
 
-Whether you are charging a source or a credit card, sending the
+Whether you are charging a source or a card, sending the
 request is the same.  Create a new `requestTask` on a `Client` object
 with the completion handler block and call `resume` on the
 requestTask:
@@ -129,6 +147,22 @@ client.send(request) { [weak self] (result) in
   guard let s = self else { return }
 
   // switch result { }
+}
+```
+
+#### Creating the completion handler
+
+A simple completion handler for a token looks like this.
+
+``` swift
+func completionHandler(tokenResult: Result<Token, Error>) -> Void {
+    switch tokenResult {
+    case .success(let value):
+        // do something with Token id
+        print(value.id)
+    case .failure(let error):
+        print(error)
+    }
 }
 ```
 
@@ -358,7 +392,7 @@ The intention is that developer shouldn't have to put much effort into upgrading
 However, there are a few exceptions where the SDK and compiler cannot give developer automated "Fix-it" dialogs due to limitations in Swift or compiler itself especially in the Objective-C codebase.
 We worked with the Swift Open Source Project to fix issues related to Objective-C headers. The fix should be in the Swift 5 compiler.
 
-Omise SDK version 3.1.0 was migrated to adopt Swift 5.0 which introduces the official Result enum value type in Swift starndard library. 
+Omise SDK version 3.1.0 was migrated to adopt Swift 5.0 which introduces the official Result enum value type in Swift starndard library.
 Omise SDK has adopted the type and replace the existed RequestResult with it and Omise SDK provides the typealias cause which should help on the compatiblity.
 However due to the Swift syntax limitation, Omise SDK couldn't provide the bridge for `fail` to `Swift.Result.failure` case in pattern matching statements.
 The developer need to migrate this by themselves. We are sorry that this happened but we think this change will pay itself back in the future since the Swift.Result type would be a standard type for representing the Result of an operation.
