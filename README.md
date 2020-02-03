@@ -59,7 +59,6 @@ $ carthage update
 *** Checking out omise-ios at "v3.3.0"
 *** xcodebuild output can be found in /var/folders/sd/ccsbmstn2vbbqd7nk4fgkd040000gn/T/carthage-xcodebuild.X7ZfYB.log
 *** Building scheme "OmiseSDK" in OmiseSDK.xcodeproj
-
 ```
 
 ## Usage
@@ -392,7 +391,7 @@ The intention is that developer shouldn't have to put much effort into upgrading
 However, there are a few exceptions where the SDK and compiler cannot give developer automated "Fix-it" dialogs due to limitations in Swift or compiler itself especially in the Objective-C codebase.
 We worked with the Swift Open Source Project to fix issues related to Objective-C headers. The fix should be in the Swift 5 compiler.
 
-Omise SDK version 3.1.0 was migrated to adopt Swift 5.0 which introduces the official Result enum value type in Swift starndard library.
+Omise SDK version 3.1.0 was migrated to adopt Swift 5.0 which introduces the official Result enum value type in Swift standard library.
 Omise SDK has adopted the type and replace the existed RequestResult with it and Omise SDK provides the typealias cause which should help on the compatiblity.
 However due to the Swift syntax limitation, Omise SDK couldn't provide the bridge for `fail` to `Swift.Result.failure` case in pattern matching statements.
 The developer need to migrate this by themselves. We are sorry that this happened but we think this change will pay itself back in the future since the Swift.Result type would be a standard type for representing the Result of an operation.
