@@ -52,7 +52,7 @@ import Foundation
     /// Unique card-based fingerprint. Allows detection of identical cards without
     /// exposing card numbers directly.
     @objc public var fingerprint: String? {
-        return card.financing
+        return card.fingerprint
     }
     /// Card holder's full name.
     @objc public var name: String? {
