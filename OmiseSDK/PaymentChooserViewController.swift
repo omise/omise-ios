@@ -11,6 +11,7 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
     case payEasy
     case netBanking
     case alipay
+    case promptpay
     
     static var allCases: [PaymentChooserOption] {
         return [
@@ -22,6 +23,7 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
             .payEasy,
             .netBanking,
             .alipay,
+            .promptpay
         ]
     }
     
@@ -43,6 +45,8 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
             return "NetBanking"
         case .alipay:
             return "Alipay"
+        case .promptpay:
+            return "PromptPay"
         }
     }
 }
@@ -175,6 +179,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .alipay
         case .tescoLotus:
             payment = .billPayment(.tescoLotus)
+        case .promptpay:
+            payment = .promptpay
         default:
             return
         }
@@ -214,6 +220,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 6, section: 0)
         case .alipay:
             return IndexPath(row: 7, section: 0)
+        case .promptpay:
+            return IndexPath(row: 8, section: 0)
         }
     }
     
@@ -223,6 +231,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             switch $0.payment {
             case .alipay:
                 return OMSSourceTypeValue.alipay
+            case .promptpay:
+                return OMSSourceTypeValue.promptPay
             case .installment(let brand, availableNumberOfTerms: _):
                 return OMSSourceTypeValue(brand.type)
             case .internetBanking(let bank):
@@ -273,6 +283,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return allowedPaymentMethods.hasEContextSource
             case .alipay:
                 return allowedPaymentMethods.hasAlipaySource
+            case .promptpay:
+                return allowedPaymentMethods.hasPromptPaySource
             }
         })
         
@@ -310,6 +322,10 @@ extension Array where Element == OMSSourceTypeValue {
     
     var hasEContextSource: Bool {
         return self.contains(.eContext)
+    }
+    
+    var hasPromptPaySource: Bool {
+        return self.contains(.promptPay)
     }
 }
 

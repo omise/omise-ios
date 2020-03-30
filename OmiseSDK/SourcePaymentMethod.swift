@@ -141,6 +141,9 @@ public enum PaymentInformation: Codable, Equatable {
     /// E-Context Payment Source
     case eContext(EContext)
     
+    /// PromptPay Payment Source
+    case promptpay
+    
     /// Other Payment Source
     case other(type: String, parameters: [String: Any])
     
@@ -166,6 +169,8 @@ public enum PaymentInformation: Codable, Equatable {
             self = .eContext(try EContext(from: decoder))
         case OMSSourceTypeValue.alipay.rawValue:
             self = .alipay
+        case OMSSourceTypeValue.promptPay.rawValue:
+            self = .promptpay
         case let value:
             self = .other(type: value, parameters: try decoder.decodeJSONDictionary().filter({ (key, _) -> Bool in
                 switch key {
@@ -197,6 +202,9 @@ public enum PaymentInformation: Codable, Equatable {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.eContext.rawValue, forKey: .type)
             try eContext.encode(to: encoder)
+        case .promptpay:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.promptPay.rawValue, forKey: .type)
         case .other(type: let type, parameters: let parameters):
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(type, forKey: .type)
@@ -208,7 +216,7 @@ public enum PaymentInformation: Codable, Equatable {
         switch (lhs, rhs) {
         case (.internetBanking(let lhsValue), .internetBanking(let rhsValue)):
             return lhsValue == rhsValue
-        case (.alipay, .alipay):
+        case (.alipay, .alipay), (.promptpay, .promptpay):
             return true
         case (.billPayment(let lhsValue), .billPayment(let rhsValue)):
             return lhsValue == rhsValue
@@ -255,6 +263,8 @@ extension PaymentInformation {
             return bank.type
         case .eContext:
             return OMSSourceTypeValue.eContext.rawValue
+        case .promptpay:
+            return OMSSourceTypeValue.promptPay.rawValue
         case .other(let value, _):
             return value
         }

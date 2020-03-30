@@ -14,6 +14,7 @@ OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentBBL = @"installme
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentKTC = @"installment_ktc";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentKBank = @"installment_kbank";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueEContext = @"econtext";
+OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePromptPay = @"promptpay";
 
 
 OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeTHB = @"THB";

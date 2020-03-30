@@ -94,6 +94,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet var installmentKTCPaymentCell: UITableViewCell!
     @IBOutlet var installmentKBankPaymentCell: UITableViewCell!
     @IBOutlet var eContextPaymentCell: UITableViewCell!
+    @IBOutlet var promptpayPaymentCell: UITableViewCell!
     
     @IBOutlet var useCapabilityAPIValuesCell: UITableViewCell!
     @IBOutlet var useSpecifiedValuesCell: UITableViewCell!
@@ -247,6 +248,8 @@ extension PaymentSettingTableViewController {
             return .installmentKBank
         case eContextPaymentCell:
             return .eContext
+        case promptpayPaymentCell:
+            return .promptPay
         default:
             return nil
         }
@@ -278,6 +281,8 @@ extension PaymentSettingTableViewController {
             return installmentKBankPaymentCell
         case .eContext:
             return eContextPaymentCell
+        case .promptPay:
+            return promptpayPaymentCell
         default:
             return nil
         }
