@@ -120,6 +120,8 @@ extension OMSSourceTypeValue {
             return "econtext"
         case .promptPay:
             return "promptpay"
+        case .payNow:
+            return "paynow"
         default:
             return self.rawValue
         }

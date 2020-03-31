@@ -53,6 +53,9 @@ public class __SourcePaymentInformation: NSObject {
     
     /// Payment Information for an PromptPay Payment
     public static let promptPayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.promptPay)!
+    
+    /// Payment Information for an PayNow Payment
+    public static let payNowPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.promptPay)!
 }
 
 /// Internet Bankning Source Payment Information
@@ -363,6 +366,9 @@ extension __SourcePaymentInformation {
         
         case .promptpay:
             return __SourcePaymentInformation.promptPayPayment
+            
+        case .paynow:
+            return __SourcePaymentInformation.payNowPayment
             
         case .other(type: let type, parameters: let parameters):
             return __CustomSourcePayment(customType: type, parameters: parameters)

@@ -81,6 +81,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet var thbCurrencyCell: UITableViewCell!
     @IBOutlet var jpyCurrencyCell: UITableViewCell!
     @IBOutlet var usdCurrencyCell: UITableViewCell!
+    @IBOutlet var sgdCurrencyCell: UITableViewCell!
     
     @IBOutlet var internetBankingBAYPaymentCell: UITableViewCell!
     @IBOutlet var internetBankingKTBPaymentCell: UITableViewCell!
@@ -95,6 +96,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet var installmentKBankPaymentCell: UITableViewCell!
     @IBOutlet var eContextPaymentCell: UITableViewCell!
     @IBOutlet var promptpayPaymentCell: UITableViewCell!
+    @IBOutlet var paynowPaymentCell: UITableViewCell!
     
     @IBOutlet var useCapabilityAPIValuesCell: UITableViewCell!
     @IBOutlet var useSpecifiedValuesCell: UITableViewCell!
@@ -167,6 +169,11 @@ class PaymentSettingTableViewController: UITableViewController {
             self.currentCurrency = PaymentPreset.japanPreset.paymentCurrency
             self.allowedPaymentMethods = Set(PaymentPreset.japanPreset.allowedPaymentMethods)
         }))
+        presetChooserAlertController.addAction(UIAlertAction(title: "Singapore", style: .default, handler: { (_) in
+            self.currentAmount = PaymentPreset.singaporePreset.paymentAmount
+            self.currentCurrency = PaymentPreset.singaporePreset.paymentCurrency
+            self.allowedPaymentMethods = Set(PaymentPreset.singaporePreset.allowedPaymentMethods)
+        }))
         
         presetChooserAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(presetChooserAlertController, animated: true, completion: nil)
@@ -205,6 +212,8 @@ extension PaymentSettingTableViewController {
             return .jpy
         case usdCurrencyCell:
             return .usd
+        case sgdCurrencyCell:
+            return .sgd
         default:
             return nil
         }
@@ -218,6 +227,8 @@ extension PaymentSettingTableViewController {
             return jpyCurrencyCell
         case .usd:
             return usdCurrencyCell
+        case .sgd:
+            return sgdCurrencyCell
         default: return nil
         }
     }
@@ -250,6 +261,8 @@ extension PaymentSettingTableViewController {
             return .eContext
         case promptpayPaymentCell:
             return .promptPay
+        case paynowPaymentCell:
+            return .payNow
         default:
             return nil
         }
@@ -283,6 +296,8 @@ extension PaymentSettingTableViewController {
             return eContextPaymentCell
         case .promptPay:
             return promptpayPaymentCell
+        case .payNow:
+            return paynowPaymentCell
         default:
             return nil
         }

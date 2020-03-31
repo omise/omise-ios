@@ -63,6 +63,7 @@ extension Capability {
             case internetBanking(PaymentInformation.InternetBanking)
             case alipay
             case promptpay
+            case paynow
             case unknownSource(String, configurations: [String: Any])
         }
     }
@@ -92,7 +93,9 @@ extension Capability.Backend {
 extension Capability.Backend.Payment {
     public static func == (lhs: Capability.Backend.Payment, rhs: Capability.Backend.Payment) -> Bool {
         switch (lhs, rhs) {
-        case (.card, .card), (.alipay, .alipay), (.promptpay, .promptpay):
+        case (.card, .card), (.alipay, .alipay):
+            return true
+        case (.promptpay, .promptpay), (.paynow, .paynow):
             return true
         case (.installment(let lhsValue), .installment(let rhsValue)):
             return lhsValue == rhsValue
@@ -160,6 +163,8 @@ extension Capability.Backend {
             self.payment = .internetBanking(value.internetBankingSource!)
         case .source(.promptPay):
             self.payment = .promptpay
+        case .source(.payNow):
+            self.payment = .paynow
         case .source(let value):
             let configurations = try container.decodeJSONDictionary()
             self.payment = .unknownSource(value.rawValue, configurations: configurations)
@@ -181,7 +186,7 @@ extension Capability.Backend {
         case .unknownSource(_, configurations: let configurations):
             try encoder.encodeJSONDictionary(configurations)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
-        case .internetBanking, .alipay, .promptpay:
+        case .internetBanking, .alipay, .promptpay, .paynow:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
     }
@@ -231,6 +236,8 @@ extension Capability.Backend {
                 self = .source(.init(sourceType))
             case .promptpay:
                 self = .source(.promptPay)
+            case .paynow:
+                self = .source(.payNow)
             }
         }
         

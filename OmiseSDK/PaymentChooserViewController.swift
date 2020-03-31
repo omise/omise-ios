@@ -12,6 +12,7 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
     case netBanking
     case alipay
     case promptpay
+    case paynow
     
     static var allCases: [PaymentChooserOption] {
         return [
@@ -23,7 +24,8 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
             .payEasy,
             .netBanking,
             .alipay,
-            .promptpay
+            .promptpay,
+            .paynow
         ]
     }
     
@@ -47,6 +49,8 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
             return "Alipay"
         case .promptpay:
             return "PromptPay"
+        case .paynow:
+            return "PayNow"
         }
     }
 }
@@ -84,6 +88,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         applyPrimaryColor()
         applySecondaryColor()
@@ -181,6 +186,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .billPayment(.tescoLotus)
         case .promptpay:
             payment = .promptpay
+        case .paynow:
+            payment = .paynow
         default:
             return
         }
@@ -222,6 +229,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 7, section: 0)
         case .promptpay:
             return IndexPath(row: 8, section: 0)
+        case .paynow:
+            return IndexPath(row: 9, section: 0)
         }
     }
     
@@ -233,6 +242,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue.alipay
             case .promptpay:
                 return OMSSourceTypeValue.promptPay
+            case .paynow:
+                return OMSSourceTypeValue.payNow
             case .installment(let brand, availableNumberOfTerms: _):
                 return OMSSourceTypeValue(brand.type)
             case .internetBanking(let bank):
@@ -285,6 +296,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return allowedPaymentMethods.hasAlipaySource
             case .promptpay:
                 return allowedPaymentMethods.hasPromptPaySource
+            case .paynow:
+                return allowedPaymentMethods.hasPayNowSource
             }
         })
         
@@ -326,6 +339,10 @@ extension Array where Element == OMSSourceTypeValue {
     
     var hasPromptPaySource: Bool {
         return self.contains(.promptPay)
+    }
+    
+    var hasPayNowSource: Bool {
+        return self.contains(.payNow)
     }
 }
 

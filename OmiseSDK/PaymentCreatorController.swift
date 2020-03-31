@@ -541,7 +541,11 @@ extension PaymentCreatorController {
     ]
     
     public static let japanDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
-        OMSSourceTypeValue.eContext,
+        .eContext,
+    ]
+    
+    public static let singaporeDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
+        .payNow,
     ]
     
     public static let internetBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
