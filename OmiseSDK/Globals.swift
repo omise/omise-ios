@@ -118,6 +118,10 @@ extension OMSSourceTypeValue {
             return "installment"
         case .eContext:
             return "econtext"
+        case .promptPay:
+            return "promptpay"
+        case .payNow:
+            return "paynow"
         default:
             return self.rawValue
         }

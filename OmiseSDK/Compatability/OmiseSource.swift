@@ -47,8 +47,15 @@ public class __SourcePaymentInformation: NSObject {
     
     /// Payment Information for an Alipay Payment
     public static let alipayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.alipay)!
+    
     /// Payment Information for a Tesco Lotus Bill Payment Payment
     public static let tescoLotusBillPaymentPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.billPaymentTescoLotus)!
+    
+    /// Payment Information for an PromptPay Payment
+    public static let promptPayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.promptPay)!
+    
+    /// Payment Information for an PayNow Payment
+    public static let payNowPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.promptPay)!
 }
 
 /// Internet Bankning Source Payment Information
@@ -296,6 +303,8 @@ extension PaymentInformation {
         case let value as __SourceBarcodePayment:
             let rangeOfPrefix = value.type.rawValue.range(of: PaymentInformation.Barcode.paymentMethodTypePrefix)!
             self = .barcode(PaymentInformation.Barcode.other(String(value.type.rawValue[rangeOfPrefix.upperBound...]), parameters: [:]))
+        case let value where value.type == OMSSourceTypeValue.promptPay:
+            self = .promptpay
         case let value as __CustomSourcePayment:
             self = .other(type: value.type.rawValue, parameters: value.parameters)
         default:
@@ -354,6 +363,13 @@ extension __SourcePaymentInformation {
             }
         case .eContext(let eContext):
             return __SourceEContextPayment(name: eContext.name, email: eContext.email, phoneNumber: eContext.phoneNumber)
+        
+        case .promptpay:
+            return __SourcePaymentInformation.promptPayPayment
+            
+        case .paynow:
+            return __SourcePaymentInformation.payNowPayment
+            
         case .other(type: let type, parameters: let parameters):
             return __CustomSourcePayment(customType: type, parameters: parameters)
         }

@@ -209,6 +209,40 @@ class ModelTestCase: XCTestCase {
         }
     }
     
+    func testDecodePromptPayQRSource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        
+        do {
+            let sourceData = XCTestCase.fixturesData(forFilename: "source_qr_payment/promptpay")
+            let source = try decoder.decode(Source.self, from: sourceData)
+            
+            XCTAssertEqual("src_test_5jb2cjjyjea25nps3ya", source.id)
+            XCTAssertEqual(100000, source.amount)
+            XCTAssertEqual(Currency.thb, source.currency)
+            XCTAssertEqual(PaymentInformation.promptpay, source.paymentInformation)
+            XCTAssertEqual(Flow.offline, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
+    
+    func testDecodePayNowQRSource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        
+        do {
+            let sourceData = XCTestCase.fixturesData(forFilename: "source_qr_payment/paynow")
+            let source = try decoder.decode(Source.self, from: sourceData)
+            
+            XCTAssertEqual("src_test_5iso4taobco8j5jehx5", source.id)
+            XCTAssertEqual(100000, source.amount)
+            XCTAssertEqual(Currency.sgd, source.currency)
+            XCTAssertEqual(PaymentInformation.paynow, source.paymentInformation)
+            XCTAssertEqual(Flow.offline, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
+    
     func testEncodeTokenParams() throws {
         let encoder = Client.makeJSONEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]

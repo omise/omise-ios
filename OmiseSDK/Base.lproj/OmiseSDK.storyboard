@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ALK-ZP-CXg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ALK-ZP-CXg">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -507,7 +507,7 @@
                             <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="g6L-kx-hv0">
-                            <rect key="frame" x="0.0" y="568" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="696" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -750,6 +750,64 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="accessoryView" destination="TVy-0x-ceQ" id="8U2-Pb-cQj"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="JmT-Us-3lW" imageView="fgh-el-WUb" rowHeight="64" style="IBUITableViewCellStyleDefault" id="Hqq-CZ-Yv0" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="540" width="375" height="64"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hqq-CZ-Yv0" id="YLb-3z-kZw">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="PromptPay" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JmT-Us-3lW">
+                                                    <rect key="frame" x="63" y="0.0" width="296" height="64"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="PromptPay" id="fgh-el-WUb">
+                                                    <rect key="frame" x="16" y="16" width="32" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Redirect" translatesAutoresizingMaskIntoConstraints="NO" id="kXM-af-2vc">
+                                                    <rect key="frame" x="345" y="23" width="16" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <color key="tintColor" red="0.89019607840000003" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="accessoryView" destination="kXM-af-2vc" id="Qw1-7q-khE"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="8kj-Ed-2eS" imageView="lwL-Kb-6aU" rowHeight="64" style="IBUITableViewCellStyleDefault" id="RFW-ok-vpg" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="604" width="375" height="64"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RFW-ok-vpg" id="8D5-tW-sLQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="PayNow" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8kj-Ed-2eS">
+                                                    <rect key="frame" x="63" y="0.0" width="296" height="64"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="PayNow" id="lwL-Kb-6aU">
+                                                    <rect key="frame" x="16" y="16" width="32" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Redirect" translatesAutoresizingMaskIntoConstraints="NO" id="ul0-fZ-536">
+                                                    <rect key="frame" x="345" y="23" width="16" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <color key="tintColor" red="0.89019607840000003" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="accessoryView" destination="ul0-fZ-536" id="4ab-qy-gJe"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -1545,7 +1603,9 @@
         <image name="Netbank" width="32" height="32"/>
         <image name="Next" width="16" height="16"/>
         <image name="Next Field" width="24" height="24"/>
+        <image name="PayNow" width="32" height="32"/>
         <image name="Payeasy" width="32" height="32"/>
+        <image name="PromptPay" width="32" height="32"/>
         <image name="Redirect" width="16" height="16"/>
         <image name="SCB" width="32" height="32"/>
         <image name="Tesco" width="32" height="32"/>
