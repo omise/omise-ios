@@ -64,6 +64,7 @@ extension Capability {
             case alipay
             case promptpay
             case paynow
+            case truemoney
             case unknownSource(String, configurations: [String: Any])
         }
     }
@@ -96,6 +97,8 @@ extension Capability.Backend.Payment {
         case (.card, .card), (.alipay, .alipay):
             return true
         case (.promptpay, .promptpay), (.paynow, .paynow):
+            return true
+        case (.truemoney, .truemoney):
             return true
         case (.installment(let lhsValue), .installment(let rhsValue)):
             return lhsValue == rhsValue
@@ -165,6 +168,8 @@ extension Capability.Backend {
             self.payment = .promptpay
         case .source(.payNow):
             self.payment = .paynow
+        case .source(.trueMoney):
+            self.payment = .truemoney
         case .source(let value):
             let configurations = try container.decodeJSONDictionary()
             self.payment = .unknownSource(value.rawValue, configurations: configurations)
@@ -186,7 +191,7 @@ extension Capability.Backend {
         case .unknownSource(_, configurations: let configurations):
             try encoder.encodeJSONDictionary(configurations)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
-        case .internetBanking, .alipay, .promptpay, .paynow:
+        case .internetBanking, .alipay, .promptpay, .paynow, .truemoney:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
     }
@@ -238,6 +243,8 @@ extension Capability.Backend {
                 self = .source(.promptPay)
             case .paynow:
                 self = .source(.payNow)
+            case .truemoney:
+                self = .source(.trueMoney)
             }
         }
         

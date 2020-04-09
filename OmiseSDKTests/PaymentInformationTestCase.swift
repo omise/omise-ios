@@ -199,6 +199,25 @@ class PaymentInformationTestCase: XCTestCase {
         }
     }
     
+    func testEncodeTrueMoneySourceParameter() throws {
+        let encoder = PaymentInformationTestCase.makeJSONEncoder()
+        
+        do {
+            let paymentInformation = PaymentInformation.truemoney(.init(phoneNumber: "0123456789"))
+            let sourceParameter = Source.CreateParameter(paymentInformation: paymentInformation, amount: 10_000_00, currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "currency" : "THB",
+                  "phone_number" : "0123456789",
+                  "type" : "truemoney"
+                }
+                """, encodedJSONString)
+        }
+    }
+    
     func testOtherPaymentInfromation() throws {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
         

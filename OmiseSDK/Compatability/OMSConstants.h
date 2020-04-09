@@ -18,6 +18,7 @@ extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentKBank;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueEContext;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePromptPay;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePayNow;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueTrueMoney;
 
 
 typedef NSString * OMSSupportedCurrencyCode NS_EXTENSIBLE_STRING_ENUM;

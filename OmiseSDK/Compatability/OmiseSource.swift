@@ -219,6 +219,23 @@ public class __SourceEContextPayment: __SourcePaymentInformation {
     }
 }
 
+/// The TrueMoney customer information
+@objc(OMSTrueMoneyPaymentInformation)
+@objcMembers
+public class __SourceTrueMoneyPayment: __SourcePaymentInformation {
+    /// The customers phone number. Contains only digits and has 10 or 11 characters
+    public let phoneNumber: String
+    
+    /// Creates a new TrueMoney source with the given customer information
+    ///
+    /// - Parameters:
+    ///   - phoneNumber: The customers phone number
+    @objc public init(phoneNumber: String) {
+        self.phoneNumber = phoneNumber
+        super.init(type: OMSSourceTypeValue.trueMoney)!
+    }
+}
+
 /// CustomSource Source Payment Information
 @objc(OMSCustomPaymentInformation)
 @objcMembers
@@ -305,6 +322,8 @@ extension PaymentInformation {
             self = .barcode(PaymentInformation.Barcode.other(String(value.type.rawValue[rangeOfPrefix.upperBound...]), parameters: [:]))
         case let value where value.type == OMSSourceTypeValue.promptPay:
             self = .promptpay
+        case let value as __SourceTrueMoneyPayment:
+            self = .truemoney(TrueMoney(phoneNumber: value.phoneNumber))
         case let value as __CustomSourcePayment:
             self = .other(type: value.type.rawValue, parameters: value.parameters)
         default:
@@ -369,6 +388,9 @@ extension __SourcePaymentInformation {
             
         case .paynow:
             return __SourcePaymentInformation.payNowPayment
+            
+        case .truemoney(let trueMoney):
+            return __SourceTrueMoneyPayment(phoneNumber: trueMoney.phoneNumber)
             
         case .other(type: let type, parameters: let parameters):
             return __CustomSourcePayment(customType: type, parameters: parameters)

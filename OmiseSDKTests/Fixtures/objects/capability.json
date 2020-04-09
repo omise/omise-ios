@@ -139,6 +139,15 @@
         9,
         10
       ]
+    },
+    {
+      "object": "payment_method",
+      "name": "truemoney",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null
     }
   ],
   "zero_interest_installments": false
