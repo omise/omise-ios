@@ -19,6 +19,9 @@
 /* An error text in the E-Context information input displayed when the phone number is invalid */
 "econtext-info-form.phone-number-field.invalid-data.error.text" = "Phone number is invalid";
 
+/* An error text in the TrueMoney form displayed when the phone number is invalid */
+"truemoney-form.phone-number-field.invalid-data.error.text" = "Phone number is invalid";
+
 /* A default descriptive message representing an `Authentication failure` error from the backend which a merchant may show this message to their user */
 "error.api.authentication_failure.message" = "Authentication failure";
 

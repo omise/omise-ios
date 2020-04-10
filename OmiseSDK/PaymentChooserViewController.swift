@@ -13,6 +13,7 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
     case alipay
     case promptpay
     case paynow
+    case truemoney
     
     static var allCases: [PaymentChooserOption] {
         return [
@@ -25,7 +26,8 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
             .netBanking,
             .alipay,
             .promptpay,
-            .paynow
+            .paynow,
+            .truemoney
         ]
     }
     
@@ -51,6 +53,8 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
             return "PromptPay"
         case .paynow:
             return "PayNow"
+        case .truemoney:
+            return "TrueMoney"
         }
     }
 }
@@ -149,6 +153,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 default: break
                 }
             }
+        case ("GoToTrueMoneyFormSegue"?, let controller as TrueMoneyFormViewController):
+            controller.flowSession = self.flowSession
         default: break
         }
         
@@ -231,6 +237,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 8, section: 0)
         case .paynow:
             return IndexPath(row: 9, section: 0)
+        case .truemoney:
+            return IndexPath(row: 10, section: 0)
         }
     }
     
@@ -300,6 +308,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return allowedPaymentMethods.hasPromptPaySource
             case .paynow:
                 return allowedPaymentMethods.hasPayNowSource
+            case .truemoney:
+                return allowedPaymentMethods.hasTrueMoneySource
             }
         })
         
@@ -345,6 +355,10 @@ extension Array where Element == OMSSourceTypeValue {
     
     var hasPayNowSource: Bool {
         return self.contains(.payNow)
+    }
+    
+    var hasTrueMoneySource: Bool {
+        return self.contains(.trueMoney)
     }
 }
 
