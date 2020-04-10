@@ -97,6 +97,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet var eContextPaymentCell: UITableViewCell!
     @IBOutlet var promptpayPaymentCell: UITableViewCell!
     @IBOutlet var paynowPaymentCell: UITableViewCell!
+    @IBOutlet var truemoneyPaymentCell: UITableViewCell!
     
     @IBOutlet var useCapabilityAPIValuesCell: UITableViewCell!
     @IBOutlet var useSpecifiedValuesCell: UITableViewCell!
@@ -263,6 +264,8 @@ extension PaymentSettingTableViewController {
             return .promptPay
         case paynowPaymentCell:
             return .payNow
+        case truemoneyPaymentCell:
+            return .trueMoney
         default:
             return nil
         }
@@ -298,6 +301,8 @@ extension PaymentSettingTableViewController {
             return promptpayPaymentCell
         case .payNow:
             return paynowPaymentCell
+        case .trueMoney:
+            return truemoneyPaymentCell
         default:
             return nil
         }
