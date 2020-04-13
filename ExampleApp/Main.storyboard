@@ -594,6 +594,23 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="204-5J-Qdj" style="IBUITableViewCellStyleDefault" id="bRK-Ye-kiB">
+                                        <rect key="frame" x="0.0" y="1303" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bRK-Ye-kiB" id="2qM-Md-2k9">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Pay with Citi Rewards Points" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="204-5J-Qdj">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -631,6 +648,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                         <outlet property="internetBankingSCBPaymentCell" destination="7DD-kw-9qP" id="Q9v-ob-2rU"/>
                         <outlet property="jpyCurrencyCell" destination="fFD-Tp-gVe" id="hzX-E4-xAV"/>
                         <outlet property="paynowPaymentCell" destination="wvG-o9-5Gh" id="pyK-wk-dMT"/>
+                        <outlet property="pointsCitiCell" destination="bRK-Ye-kiB" id="dMQ-hY-VLa"/>
                         <outlet property="promptpayPaymentCell" destination="U9s-UF-rSk" id="PoF-ou-CKy"/>
                         <outlet property="sgdCurrencyCell" destination="cTx-rP-PCR" id="w16-VE-Ly1"/>
                         <outlet property="thbCurrencyCell" destination="oo5-ze-ROP" id="2th-xW-mHD"/>
@@ -849,4 +867,9 @@ You can present via either Storyboard or Code and you can see the code in the Ex
         <segue reference="E9r-cu-PMc"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="App Tint"/>
+    <resources>
+        <namedColor name="App Tint">
+            <color red="0.10196078431372549" green="0.33725490196078434" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
