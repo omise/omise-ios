@@ -254,6 +254,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue.payNow
             case .truemoney:
                 return OMSSourceTypeValue.trueMoney
+            case .points(let points):
+                return OMSSourceTypeValue(points.type)
             case .installment(let brand, availableNumberOfTerms: _):
                 return OMSSourceTypeValue(brand.type)
             case .internetBanking(let bank):

@@ -65,6 +65,7 @@ extension Capability {
             case promptpay
             case paynow
             case truemoney
+            case points(PaymentInformation.Points)
             case unknownSource(String, configurations: [String: Any])
         }
     }
@@ -100,6 +101,8 @@ extension Capability.Backend.Payment {
             return true
         case (.truemoney, .truemoney):
             return true
+        case (.points(let lhsValue), .points(let rhsValue)):
+            return lhsValue == rhsValue
         case (.installment(let lhsValue), .installment(let rhsValue)):
             return lhsValue == rhsValue
         case (.internetBanking(let lhsValue), .internetBanking(let rhsValue)):
@@ -170,6 +173,8 @@ extension Capability.Backend {
             self.payment = .paynow
         case .source(.trueMoney):
             self.payment = .truemoney
+        case .source(.pointsCiti):
+            self.payment = .points(.citiPoints)
         case .source(let value):
             let configurations = try container.decodeJSONDictionary()
             self.payment = .unknownSource(value.rawValue, configurations: configurations)
@@ -191,7 +196,7 @@ extension Capability.Backend {
         case .unknownSource(_, configurations: let configurations):
             try encoder.encodeJSONDictionary(configurations)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
-        case .internetBanking, .alipay, .promptpay, .paynow, .truemoney:
+        case .internetBanking, .alipay, .promptpay, .paynow, .truemoney, .points:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
     }
@@ -245,6 +250,8 @@ extension Capability.Backend {
                 self = .source(.payNow)
             case .truemoney:
                 self = .source(.trueMoney)
+            case .points(let points):
+                self = .source(OMSSourceTypeValue(points.type))
             }
         }
         

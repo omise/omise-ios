@@ -218,6 +218,23 @@ class PaymentInformationTestCase: XCTestCase {
         }
     }
     
+    func testEncodePointsSourceParameter() throws {
+        let encoder = PaymentInformationTestCase.makeJSONEncoder()
+        
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .points(.citiPoints), amount: 10_000_00, currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "currency" : "THB",
+                  "type" : "points_citi"
+                }
+                """, encodedJSONString)
+        }
+    }
+    
     func testOtherPaymentInfromation() throws {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
         

@@ -19,6 +19,7 @@ extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueEContext;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePromptPay;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePayNow;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueTrueMoney;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePointsCiti;
 
 
 typedef NSString * OMSSupportedCurrencyCode NS_EXTENSIBLE_STRING_ENUM;

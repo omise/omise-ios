@@ -124,6 +124,8 @@ extension OMSSourceTypeValue {
             return "paynow"
         case .trueMoney:
             return "truemoney"
+        case .pointsCiti:
+            return "points"
         default:
             return self.rawValue
         }
