@@ -14,6 +14,7 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
     case promptpay
     case paynow
     case truemoney
+    case citiPoints
     
     static var allCases: [PaymentChooserOption] {
         return [
@@ -27,7 +28,8 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
             .alipay,
             .promptpay,
             .paynow,
-            .truemoney
+            .truemoney,
+            .citiPoints
         ]
     }
     
@@ -55,6 +57,8 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
             return "PayNow"
         case .truemoney:
             return "TrueMoney"
+        case .citiPoints:
+            return "CitiPoints"
         }
     }
 }
@@ -194,6 +198,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .promptpay
         case .paynow:
             payment = .paynow
+        case .citiPoints:
+            payment = .points(.citiPoints)
         default:
             return
         }
@@ -239,6 +245,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 9, section: 0)
         case .truemoney:
             return IndexPath(row: 10, section: 0)
+        case .citiPoints:
+            return IndexPath(row: 11, section: 0)
         }
     }
     
@@ -312,6 +320,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return allowedPaymentMethods.hasPayNowSource
             case .truemoney:
                 return allowedPaymentMethods.hasTrueMoneySource
+            case .citiPoints:
+                return allowedPaymentMethods.hasCityPointsSource
             }
         })
         
@@ -361,6 +371,10 @@ extension Array where Element == OMSSourceTypeValue {
     
     var hasTrueMoneySource: Bool {
         return self.contains(.trueMoney)
+    }
+    
+    var hasCityPointsSource: Bool {
+        return self.contains(.pointsCiti)
     }
 }
 
