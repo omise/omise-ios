@@ -20,16 +20,16 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
         return [
             .creditCard,
             .installment,
+            .truemoney,
+            .promptpay,
+            .citiPoints,
+            .alipay,
             .internetBanking,
             .tescoLotus,
+            .paynow,
             .conbini,
             .payEasy,
-            .netBanking,
-            .alipay,
-            .promptpay,
-            .paynow,
-            .truemoney,
-            .citiPoints
+            .netBanking
         ]
     }
     
@@ -227,25 +227,25 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 0, section: 0)
         case .installment:
             return IndexPath(row: 1, section: 0)
-        case .internetBanking:
-            return IndexPath(row: 2, section: 0)
-        case .tescoLotus:
-            return IndexPath(row: 3, section: 0)
-        case .conbini:
-            return IndexPath(row: 4, section: 0)
-        case .payEasy:
-            return IndexPath(row: 5, section: 0)
-        case .netBanking:
-            return IndexPath(row: 6, section: 0)
-        case .alipay:
-            return IndexPath(row: 7, section: 0)
-        case .promptpay:
-            return IndexPath(row: 8, section: 0)
-        case .paynow:
-            return IndexPath(row: 9, section: 0)
         case .truemoney:
-            return IndexPath(row: 10, section: 0)
+            return IndexPath(row: 2, section: 0)
+        case .promptpay:
+            return IndexPath(row: 3, section: 0)
         case .citiPoints:
+            return IndexPath(row: 4, section: 0)
+        case .alipay:
+            return IndexPath(row: 5, section: 0)
+        case .internetBanking:
+            return IndexPath(row: 6, section: 0)
+        case .tescoLotus:
+            return IndexPath(row: 7, section: 0)
+        case .paynow:
+            return IndexPath(row: 8, section: 0)
+        case .conbini:
+            return IndexPath(row: 9, section: 0)
+        case .payEasy:
+            return IndexPath(row: 10, section: 0)
+        case .netBanking:
             return IndexPath(row: 11, section: 0)
         }
     }
