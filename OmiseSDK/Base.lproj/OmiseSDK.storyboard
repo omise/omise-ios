@@ -894,6 +894,10 @@
                         <outletCollection property="paymentMethodNameLables" destination="A0v-NW-KLo" collectionClass="NSMutableArray" id="eId-Uk-NDj"/>
                         <outletCollection property="paymentMethodNameLables" destination="cSc-cs-8vb" collectionClass="NSMutableArray" id="H6M-yX-sZ1"/>
                         <outletCollection property="paymentMethodNameLables" destination="tXy-nx-P4n" collectionClass="NSMutableArray" id="dGQ-4E-bhq"/>
+                        <outletCollection property="paymentMethodNameLables" destination="JmT-Us-3lW" collectionClass="NSMutableArray" id="54i-Aj-Yk1"/>
+                        <outletCollection property="paymentMethodNameLables" destination="8kj-Ed-2eS" collectionClass="NSMutableArray" id="Mqn-fj-fcf"/>
+                        <outletCollection property="paymentMethodNameLables" destination="ewt-LA-vRb" collectionClass="NSMutableArray" id="rYn-xG-eTD"/>
+                        <outletCollection property="paymentMethodNameLables" destination="zmw-2Y-WAX" collectionClass="NSMutableArray" id="dgu-0i-wQw"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zoe-8g-RM3" userLabel="First Responder" sceneMemberID="firstResponder"/>
