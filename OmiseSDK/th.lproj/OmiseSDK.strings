@@ -34,7 +34,7 @@
 /* Class = "UILabel"; text = "Card number"; ObjectID = "CKR-Pl-Ix5"; */
 "CKR-Pl-Ix5.text" = "หมายเลขบัตร";
 
-/* Class = "UILabel"; text = "Net bank"; ObjectID = "cSc-cs-8vb"; */
+/* Class = "UILabel"; text = "Net Bank"; ObjectID = "cSc-cs-8vb"; */
 "cSc-cs-8vb.text" = "เน็ตแบงก์";
 
 /* Class = "UILabel"; text = "KTC"; ObjectID = "d1t-A5-fA9"; */
@@ -46,7 +46,7 @@
 /* Class = "UILabel"; text = "-"; ObjectID = "EWE-r0-1RF"; */
 "EWE-r0-1RF.text" = "-";
 
-/* Class = "UINavigationItem"; title = "Convenience Store"; ObjectID = "GZJ-TR-erg"; */
+/* Class = "UINavigationItem"; title = "Konbini"; ObjectID = "GZJ-TR-erg"; */
 "GZJ-TR-erg.title" = "ร้านสะดวกซื้อ";
 
 /* Class = "UILabel"; text = "Siam Commercial Bank"; ObjectID = "iiE-Ff-NCh"; */
@@ -82,7 +82,7 @@
 /* Class = "UILabel"; text = "3 Months"; ObjectID = "Pqt-3W-dy1"; */
 "Pqt-3W-dy1.text" = "3 เดือน";
 
-/* Class = "UILabel"; text = "Convenience Store"; ObjectID = "Qzd-8E-gal"; */
+/* Class = "UILabel"; text = "Konbini"; ObjectID = "Qzd-8E-gal"; */
 "Qzd-8E-gal.text" = "ร้านสะดวกซื้อ";
 
 /* Class = "UILabel"; text = "Alipay"; ObjectID = "tXy-nx-P4n"; */
@@ -136,3 +136,23 @@
 /* Class = "UIButton"; normalTitle = "Pay"; ObjectID = "ZPa-NN-y1M"; */
 "ZPa-NN-y1M.normalTitle" = "ชำระเงิน";
 
+/* Class = "UINavigationItem"; title = "TrueMoney Wallet"; ObjectID = "TBH-7l-kiP"; */
+"TBH-7l-kiP.title" = "ทรูมันนี่วอลเล็ท";
+
+/* Class = "UILabel"; text = "Phone"; ObjectID = "Ify-gZ-e2F"; */
+"Ify-gZ-e2F.text" = "โทร.";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "1dv-2d-6Zi"; */
+"1dv-2d-6Zi.normalTitle" = "ถัดไป";
+
+/* Class = "UILabel"; text = "TrueMoney Wallet"; ObjectID = "ewt-LA-vRb"; */
+"ewt-LA-vRb.text" = "ทรูมันนี่วอลเล็ท";
+
+/* Class = "UILabel"; text = "Pay with Citi Rewards Points"; ObjectID = "zmw-2Y-WAX"; */
+"zmw-2Y-WAX.text" = "ชำระด้วยคะแนนซิตี้รีวอร์ด";
+
+/* Class = "UILabel"; text = "PromptPay"; ObjectID = "JmT-Us-3lW"; */
+"JmT-Us-3lW.text" = "พร้อมเพย์";
+
+/* Class = "UILabel"; text = "PayNow"; ObjectID = "8kj-Ed-2eS"; */
+"8kj-Ed-2eS.text" = "เพย์นาว";

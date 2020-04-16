@@ -139,14 +139,14 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 case .conbini:
                     controller.navigationItem.title = NSLocalizedString(
                         "econtext.convenience-store.navigation-item.title",
-                        bundle: Bundle.omiseSDKBundle, value: "Convenience Store",
-                        comment: "A navigaiton title for the EContext screen when the `Convenience Store` is selected"
+                        bundle: Bundle.omiseSDKBundle, value: "Konbini",
+                        comment: "A navigaiton title for the EContext screen when the `Konbini` is selected"
                     )
                 case .netBanking:
                     controller.navigationItem.title = NSLocalizedString(
                         "econtext.netbanking.navigation-item.title",
-                        bundle: Bundle.omiseSDKBundle, value: "Netbanking",
-                        comment: "A navigaiton title for the EContext screen when the `Netbanking` is selected"
+                        bundle: Bundle.omiseSDKBundle, value: "Net Bank",
+                        comment: "A navigaiton title for the EContext screen when the `Net Bank` is selected"
                     )
                 case .payEasy:
                     controller.navigationItem.title = NSLocalizedString(

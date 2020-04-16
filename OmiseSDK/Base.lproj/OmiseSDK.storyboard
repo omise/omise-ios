@@ -786,7 +786,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Convenience Store" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qzd-8E-gal">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Konbini" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qzd-8E-gal">
                                                     <rect key="frame" x="63" y="0.0" width="296" height="64"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
@@ -846,7 +846,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Net bank" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cSc-cs-8vb">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Net Bank" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cSc-cs-8vb">
                                                     <rect key="frame" x="63" y="0.0" width="296" height="64"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
@@ -929,7 +929,7 @@
             </objects>
             <point key="canvasLocation" x="1806" y="1183"/>
         </scene>
-        <!--TrueMoney-->
+        <!--TrueMoney Wallet-->
         <scene sceneID="B8a-pv-rKr">
             <objects>
                 <viewController id="Qrb-nZ-3ze" customClass="OMSTrueMoneyFormViewController" sceneMemberID="viewController">
@@ -1042,7 +1042,7 @@
                             <constraint firstItem="Dcl-ay-c0h" firstAttribute="top" secondItem="uZR-T2-T31" secondAttribute="top" id="vUU-AM-dr4"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="TrueMoney" largeTitleDisplayMode="never" id="TBH-7l-kiP"/>
+                    <navigationItem key="navigationItem" title="TrueMoney Wallet" largeTitleDisplayMode="never" id="TBH-7l-kiP"/>
                     <connections>
                         <outlet property="contentView" destination="Dcl-ay-c0h" id="pD8-D3-NCU"/>
                         <outlet property="doneEditingBarButtonItem" destination="8I7-ZQ-f7U" id="7bE-uK-W2u"/>
@@ -1727,7 +1727,7 @@
                             <constraint firstAttribute="trailing" secondItem="OTl-UL-Thi" secondAttribute="trailing" id="zGJ-Ov-qRK"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Convenience Store" largeTitleDisplayMode="never" id="GZJ-TR-erg"/>
+                    <navigationItem key="navigationItem" title="Konbini" largeTitleDisplayMode="never" id="GZJ-TR-erg"/>
                     <connections>
                         <outlet property="contentView" destination="OTl-UL-Thi" id="4mG-fV-Fr1"/>
                         <outlet property="doneEditingBarButtonItem" destination="vqh-dT-d1g" id="ThG-hw-Zwp"/>
