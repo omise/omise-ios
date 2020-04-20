@@ -63,6 +63,35 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
     }
 }
 
+extension PaymentChooserOption {
+    fileprivate static func paymentOptions(for sourceType: OMSSourceTypeValue) -> [PaymentChooserOption] {
+        switch sourceType {
+        case .trueMoney:
+            return [.truemoney]
+        case .installmentFirstChoice, .installmentKBank, .installmentKTC, .installmentBBL, .installmentBAY:
+            return [.installment]
+        case .billPaymentTescoLotus:
+            return [.tescoLotus]
+        case .eContext:
+            return [.conbini, .payEasy, .netBanking]
+        case .alipay:
+            return [.alipay]
+        case .internetBankingBAY, .internetBankingKTB, .internetBankingBBL, .internetBankingSCB:
+            return [.internetBanking]
+        case .payNow:
+            return [.paynow]
+        case .promptPay:
+            return [.promptpay]
+        case .pointsCiti:
+            return [.citiPoints]
+        case .barcodeAlipay:
+            return []
+        default:
+            return []
+        }
+    }
+}
+
 
 @objc(OMSPaymentChooserViewController)
 class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceChooser, PaymentChooserUI {
@@ -300,30 +329,18 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     private func applySecondaryColor() {}
     
     private func updateShowingValues() {
-        showingValues = PaymentChooserOption.allCases.filter({
-            switch $0 {
-            case .creditCard:
-                return showsCreditCardPayment
-            case .installment:
-                return allowedPaymentMethods.hasInstallmentSource
-            case .internetBanking:
-                return allowedPaymentMethods.hasInternetBankingSource
-            case .tescoLotus:
-                return allowedPaymentMethods.hasTescoLotusSource
-            case .conbini, .payEasy, .netBanking:
-                return allowedPaymentMethods.hasEContextSource
-            case .alipay:
-                return allowedPaymentMethods.hasAlipaySource
-            case .promptpay:
-                return allowedPaymentMethods.hasPromptPaySource
-            case .paynow:
-                return allowedPaymentMethods.hasPayNowSource
-            case .truemoney:
-                return allowedPaymentMethods.hasTrueMoneySource
-            case .citiPoints:
-                return allowedPaymentMethods.hasCityPointsSource
+        var paymentMethodsToShow: [PaymentChooserOption] = allowedPaymentMethods.reduce(into: []) { (result, sourceType) in
+            let paymentOptions = PaymentChooserOption.paymentOptions(for: sourceType)
+            for paymentOption in paymentOptions where !result.contains(paymentOption) {
+                result.append(paymentOption)
             }
-        })
+        }
+        
+        if showsCreditCardPayment {
+            paymentMethodsToShow.insert(.creditCard, at: 0)
+        }
+        
+        showingValues = paymentMethodsToShow
         
         if #available(iOS 10, *) {
             os_log(
@@ -338,44 +355,3 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         flowSession?.requestToCancel()
     }
 }
-
-
-extension Array where Element == OMSSourceTypeValue {
-    var hasInternetBankingSource: Bool {
-        return self.contains(where: { $0.isInternetBankingSource })
-    }
-    
-    var hasInstallmentSource: Bool {
-        return self.contains(where: { $0.isInstallmentSource })
-    }
-    
-    var hasTescoLotusSource: Bool {
-        return self.contains(.billPaymentTescoLotus)
-    }
-    
-    var hasAlipaySource: Bool {
-        return self.contains(.alipay)
-    }
-    
-    var hasEContextSource: Bool {
-        return self.contains(.eContext)
-    }
-    
-    var hasPromptPaySource: Bool {
-        return self.contains(.promptPay)
-    }
-    
-    var hasPayNowSource: Bool {
-        return self.contains(.payNow)
-    }
-    
-    var hasTrueMoneySource: Bool {
-        return self.contains(.trueMoney)
-    }
-    
-    var hasCityPointsSource: Bool {
-        return self.contains(.pointsCiti)
-    }
-}
-
-
