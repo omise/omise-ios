@@ -81,7 +81,31 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
             automaticallyAdjustsScrollViewInsets = true
         }
         
+        NotificationCenter.default.addObserver(
+            self, selector:#selector(keyboardWillChangeFrame(_:)),
+            name: NotificationKeyboardWillChangeFrameNotification, object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self, selector:#selector(keyboardWillHide(_:)),
+            name: NotificationKeyboardWillHideFrameNotification, object: nil
+        )
+        
         phoneNumberTextField.validator = try! NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
+    }
+    
+    public override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        if #available(iOS 11, *) {
+            // There's a bug in iOS 10 and earlier which the text field's intrinsicContentSize is returned the value
+            // that doesn't take the result of textRect(forBounds:) method into an account for the initial value
+            // So we need to invalidate the intrinsic content size here to ask those text fields to calculate their
+            // intrinsic content size again
+        } else {
+            formFields.forEach({
+                $0.invalidateIntrinsicContentSize()
+            })
+        }
     }
 
     @IBAction func submitForm(_ sender: AnyObject) {
@@ -156,6 +180,30 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
             }
             errorLabel.alpha = errorLabel.text != "-" ? 1.0 : 0.0
         }
+    }
+    
+    @objc func keyboardWillChangeFrame(_ notification: NSNotification) {
+        guard let frameEnd = notification.userInfo?[NotificationKeyboardFrameEndUserInfoKey] as? CGRect,
+            let frameStart = notification.userInfo?[NotificationKeyboardFrameBeginUserInfoKey] as? CGRect,
+            frameEnd != frameStart else {
+                return
+        }
+        
+        let intersectedFrame = contentView.convert(frameEnd, from: nil)
+        
+        contentView.contentInset.bottom = intersectedFrame.height
+        let bottomScrollIndicatorInset: CGFloat
+        if #available(iOS 11.0, *) {
+            bottomScrollIndicatorInset = intersectedFrame.height - contentView.safeAreaInsets.bottom
+        } else {
+            bottomScrollIndicatorInset = intersectedFrame.height
+        }
+        contentView.scrollIndicatorInsets.bottom = bottomScrollIndicatorInset
+    }
+    
+    @objc func keyboardWillHide(_ notification: NSNotification) {
+        contentView.contentInset.bottom = 0.0
+        contentView.scrollIndicatorInsets.bottom = 0.0
     }
     
 }

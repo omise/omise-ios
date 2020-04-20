@@ -3,7 +3,7 @@
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -944,8 +944,8 @@
                             <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dcl-ay-c0h">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ify-gZ-e2F">
-                                        <rect key="frame" x="16" y="20" width="343" height="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Phone number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ify-gZ-e2F">
+                                        <rect key="frame" x="16" y="212.33333333333331" width="343" height="18"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
@@ -954,7 +954,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wXP-YQ-VDL" customClass="OmiseTextField">
-                                        <rect key="frame" x="16" y="43" width="343" height="22"/>
+                                        <rect key="frame" x="16" y="235.33333333333331" width="343" height="22"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -977,13 +977,13 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGf-ji-5is">
-                                        <rect key="frame" x="16" y="70" width="343" height="13.333333333333329"/>
+                                        <rect key="frame" x="16" y="262.33333333333331" width="343" height="13.333333333333314"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1dv-2d-6Zi" customClass="OMSMainActionButton">
-                                        <rect key="frame" x="16" y="103.33333333333334" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="295.66666666666669" width="343" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="5XS-Ra-w18"/>
                                         </constraints>
@@ -1008,25 +1008,39 @@
                                         </connections>
                                     </button>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="yzO-VF-k6J">
-                                        <rect key="frame" x="177.66666666666666" y="115.33333333333334" width="20" height="20"/>
+                                        <rect key="frame" x="177.66666666666666" y="307.66666666666669" width="20" height="20"/>
                                         <color key="color" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     </activityIndicatorView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TrueMoney_Big" translatesAutoresizingMaskIntoConstraints="NO" id="tBg-MZ-hz4">
+                                        <rect key="frame" x="135" y="30" width="105" height="80"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please input mobile number connected to your TrueMoney Wallet account" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="diJ-Qj-8Op">
+                                        <rect key="frame" x="16" y="140" width="343" height="42.333333333333343"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="wXP-YQ-VDL" firstAttribute="top" secondItem="Ify-gZ-e2F" secondAttribute="bottom" constant="5" id="2gz-a9-aUc"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="XGf-ji-5is" secondAttribute="trailing" id="33O-WQ-yfg"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="Ify-gZ-e2F" secondAttribute="trailing" id="4Xz-wX-1na"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="wXP-YQ-VDL" secondAttribute="trailing" id="AB9-Cu-tJZ"/>
+                                    <constraint firstItem="diJ-Qj-8Op" firstAttribute="top" secondItem="tBg-MZ-hz4" secondAttribute="bottom" constant="30" id="BbW-mt-DX9"/>
+                                    <constraint firstItem="tBg-MZ-hz4" firstAttribute="top" secondItem="Dcl-ay-c0h" secondAttribute="top" constant="30" id="Cei-qV-ulS"/>
+                                    <constraint firstItem="diJ-Qj-8Op" firstAttribute="leading" secondItem="Dcl-ay-c0h" secondAttribute="leadingMargin" id="CtX-Rf-Po2"/>
                                     <constraint firstItem="yzO-VF-k6J" firstAttribute="centerY" secondItem="1dv-2d-6Zi" secondAttribute="centerY" id="EEA-Cv-jgg"/>
                                     <constraint firstItem="1dv-2d-6Zi" firstAttribute="top" secondItem="XGf-ji-5is" secondAttribute="bottom" constant="20" id="LQd-Us-2da"/>
                                     <constraint firstItem="XGf-ji-5is" firstAttribute="leading" secondItem="Dcl-ay-c0h" secondAttribute="leadingMargin" id="PBf-Fa-KJ0"/>
                                     <constraint firstAttribute="bottom" secondItem="1dv-2d-6Zi" secondAttribute="bottom" constant="20" id="Q7G-NM-qER"/>
+                                    <constraint firstItem="Ify-gZ-e2F" firstAttribute="top" secondItem="diJ-Qj-8Op" secondAttribute="bottom" constant="30" id="Tl9-zI-2zj"/>
                                     <constraint firstItem="XGf-ji-5is" firstAttribute="top" secondItem="wXP-YQ-VDL" secondAttribute="bottom" constant="5" id="U5X-ez-DJx"/>
                                     <constraint firstItem="1dv-2d-6Zi" firstAttribute="leading" secondItem="Dcl-ay-c0h" secondAttribute="leadingMargin" id="VT2-Ub-Bzq"/>
+                                    <constraint firstItem="tBg-MZ-hz4" firstAttribute="centerX" secondItem="Dcl-ay-c0h" secondAttribute="centerX" id="c3l-hu-uFr"/>
                                     <constraint firstItem="yzO-VF-k6J" firstAttribute="centerX" secondItem="1dv-2d-6Zi" secondAttribute="centerX" id="dKN-Yj-oFN"/>
                                     <constraint firstItem="wXP-YQ-VDL" firstAttribute="leading" secondItem="Dcl-ay-c0h" secondAttribute="leadingMargin" id="kFf-L3-ql2"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="diJ-Qj-8Op" secondAttribute="trailing" id="qcM-n0-Dt8"/>
                                     <constraint firstItem="Ify-gZ-e2F" firstAttribute="leading" secondItem="Dcl-ay-c0h" secondAttribute="leadingMargin" id="tJJ-YU-HTv"/>
-                                    <constraint firstItem="Ify-gZ-e2F" firstAttribute="top" secondItem="Dcl-ay-c0h" secondAttribute="top" constant="20" id="txb-g2-4KN"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="1dv-2d-6Zi" secondAttribute="trailing" id="xdp-pD-xOO"/>
                                 </constraints>
                                 <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
@@ -1081,7 +1095,7 @@
                     </items>
                 </toolbar>
             </objects>
-            <point key="canvasLocation" x="3974" y="1934"/>
+            <point key="canvasLocation" x="3973.5999999999999" y="1933.7438423645322"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Hru-43-qh0">
@@ -1831,6 +1845,7 @@
         <image name="SCB" width="32" height="32"/>
         <image name="Tesco" width="32" height="32"/>
         <image name="TrueMoney" width="32" height="32"/>
+        <image name="TrueMoney_Big" width="105" height="80"/>
         <image name="Visa" width="40" height="22"/>
     </resources>
 </document>

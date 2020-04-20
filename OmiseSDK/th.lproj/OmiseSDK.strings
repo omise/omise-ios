@@ -139,6 +139,9 @@
 /* Class = "UINavigationItem"; title = "TrueMoney Wallet"; ObjectID = "TBH-7l-kiP"; */
 "TBH-7l-kiP.title" = "ทรูมันนี่วอลเล็ท";
 
+/* Class = "UILabel"; text = "Please input mobile number connected to your TrueMoney Wallet account"; ObjectID = "diJ-Qj-8Op"; */
+"diJ-Qj-8Op.text" = "กรุณากรอกหมายเลขโทรศัพท์ที่ผูกกับบัญชีทรูมันนี่วอลเล็ท";
+
 /* Class = "UILabel"; text = "Phone"; ObjectID = "Ify-gZ-e2F"; */
 "Ify-gZ-e2F.text" = "โทร.";
 

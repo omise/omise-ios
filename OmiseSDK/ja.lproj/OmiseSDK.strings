@@ -124,6 +124,9 @@
 /* Class = "UINavigationItem"; title = "TrueMoney Wallet"; ObjectID = "TBH-7l-kiP"; */
 "TBH-7l-kiP.title" = "TrueMoneyウォレット";
 
+/* Class = "UILabel"; text = "Please input mobile number connected to your TrueMoney Wallet account"; ObjectID = "diJ-Qj-8Op"; */
+"diJ-Qj-8Op.text" = "TrueMoney ウォレットアカウントに登録されている携帯電話番号を入力してください";
+
 /* Class = "UILabel"; text = "Phone"; ObjectID = "Ify-gZ-e2F"; */
 "Ify-gZ-e2F.text" = "電話";
 
