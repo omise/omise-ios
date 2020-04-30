@@ -37,7 +37,7 @@
 /* Class = "UILabel"; text = "-"; ObjectID = "Cmp-y6-FKF"; */
 "Cmp-y6-FKF.text" = "-";
 
-/* Class = "UILabel"; text = "Net bank"; ObjectID = "cSc-cs-8vb"; */
+/* Class = "UILabel"; text = "Net Bank"; ObjectID = "cSc-cs-8vb"; */
 "cSc-cs-8vb.text" = "ネットバンク";
 
 /* Class = "UILabel"; text = "KTC"; ObjectID = "d1t-A5-fA9"; */
@@ -49,8 +49,8 @@
 /* Class = "UILabel"; text = "-"; ObjectID = "EWE-r0-1RF"; */
 "EWE-r0-1RF.text" = "-";
 
-/* Class = "UINavigationItem"; title = "Convenience Store"; ObjectID = "GZJ-TR-erg"; */
-"GZJ-TR-erg.title" = "コンビニエンスストア";
+/* Class = "UINavigationItem"; title = "Konbini"; ObjectID = "GZJ-TR-erg"; */
+"GZJ-TR-erg.title" = "コンビニ";
 
 /* Class = "UILabel"; text = "Siam Commercial Bank"; ObjectID = "iiE-Ff-NCh"; */
 "iiE-Ff-NCh.text" = "サイアム・コマーシャル銀行 ";
@@ -76,8 +76,8 @@
 /* Class = "UILabel"; text = "3 Months"; ObjectID = "Pqt-3W-dy1"; */
 "Pqt-3W-dy1.text" = "3ヶ月";
 
-/* Class = "UILabel"; text = "Convenience Store"; ObjectID = "Qzd-8E-gal"; */
-"Qzd-8E-gal.text" = "コンビニエンスストア";
+/* Class = "UILabel"; text = "Konbini"; ObjectID = "Qzd-8E-gal"; */
+"Qzd-8E-gal.text" = "コンビニ";
 
 /* Class = "UILabel"; text = "Alipay"; ObjectID = "tXy-nx-P4n"; */
 "tXy-nx-P4n.text" = "アリペイ";
@@ -121,3 +121,26 @@
 /* Class = "UIButton"; normalTitle = "Pay"; ObjectID = "ZPa-NN-y1M"; */
 "ZPa-NN-y1M.normalTitle" = "支払う";
 
+/* Class = "UINavigationItem"; title = "TrueMoney Wallet"; ObjectID = "TBH-7l-kiP"; */
+"TBH-7l-kiP.title" = "TrueMoneyウォレット";
+
+/* Class = "UILabel"; text = "Please input mobile number connected to your TrueMoney Wallet account"; ObjectID = "diJ-Qj-8Op"; */
+"diJ-Qj-8Op.text" = "TrueMoney ウォレットアカウントに登録されている携帯電話番号を入力してください";
+
+/* Class = "UILabel"; text = "Phone"; ObjectID = "Ify-gZ-e2F"; */
+"Ify-gZ-e2F.text" = "電話";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "1dv-2d-6Zi"; */
+"1dv-2d-6Zi.normalTitle" = "次";
+
+/* Class = "UILabel"; text = "TrueMoney Wallet"; ObjectID = "ewt-LA-vRb"; */
+"ewt-LA-vRb.text" = "TrueMoneyウォレット";
+
+/* Class = "UILabel"; text = "Pay with Citi Rewards Points"; ObjectID = "zmw-2Y-WAX"; */
+"zmw-2Y-WAX.text" = "Citi Rewardsポイント";
+
+/* Class = "UILabel"; text = "PromptPay"; ObjectID = "JmT-Us-3lW"; */
+"JmT-Us-3lW.text" = "プロンプトペイ";
+
+/* Class = "UILabel"; text = "PayNow"; ObjectID = "8kj-Ed-2eS"; */
+"8kj-Ed-2eS.text" = "PayNow";

@@ -139,6 +139,24 @@
         9,
         10
       ]
+    },
+    {
+      "object": "payment_method",
+      "name": "truemoney",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null
+    },
+    {
+      "object": "payment_method",
+      "name": "points_citi",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null
     }
   ],
   "zero_interest_installments": false

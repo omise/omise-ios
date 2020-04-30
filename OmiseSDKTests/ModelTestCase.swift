@@ -243,6 +243,40 @@ class ModelTestCase: XCTestCase {
         }
     }
     
+    func testDecodeTrueMoneySource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        
+        do {
+            let sourceData = XCTestCase.fixturesData(forFilename: "source_truemoney_object")
+            let source = try decoder.decode(Source.self, from: sourceData)
+            
+            XCTAssertEqual("src_test_5jhmesi7s4at1qctloy", source.id)
+            XCTAssertEqual(100000, source.amount)
+            XCTAssertEqual(Currency.thb, source.currency)
+            XCTAssertEqual(PaymentInformation.truemoney(.init(phoneNumber: "0123456789")), source.paymentInformation)
+            XCTAssertEqual(Flow.redirect, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
+    
+    func testDecodePointsSource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        
+        do {
+            let sourceData = XCTestCase.fixturesData(forFilename: "source_points/city_points")
+            let source = try decoder.decode(Source.self, from: sourceData)
+            
+            XCTAssertEqual("src_test_5ji0d5y5w8xd9ll3loh", source.id)
+            XCTAssertEqual(100000, source.amount)
+            XCTAssertEqual(Currency.thb, source.currency)
+            XCTAssertEqual(PaymentInformation.points(.citiPoints), source.paymentInformation)
+            XCTAssertEqual(Flow.redirect, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
+    
     func testEncodeTokenParams() throws {
         let encoder = Client.makeJSONEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]

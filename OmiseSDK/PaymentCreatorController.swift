@@ -537,7 +537,9 @@ extension PaymentCreatorController {
         .installmentBBL,
         .installmentKTC,
         .installmentKBank,
-        .promptPay
+        .promptPay,
+        .trueMoney,
+        .pointsCiti
     ]
     
     public static let japanDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [

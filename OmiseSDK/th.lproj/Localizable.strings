@@ -1,7 +1,7 @@
-/* A navigaiton title for the EContext screen when the `Convenience Store` is selected */
+/* A navigaiton title for the EContext screen when the `Konbini` is selected */
 "econtext.convenience-store.navigation-item.title" = "ร้านสะดวกซื้อ";
 
-/* A navigaiton title for the EContext screen when the `Netbanking` is selected */
+/* A navigaiton title for the EContext screen when the `Net Bank` is selected */
 "econtext.netbanking.navigation-item.title" = "เน็ตแบงก์";
 
 /* A navigaiton title for the EContext screen when the `Pay-easy` is selected */

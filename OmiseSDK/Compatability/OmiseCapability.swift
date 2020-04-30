@@ -62,6 +62,12 @@ class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
     static let paynowSourceBackendPayment =
     __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.payNow)
     
+    static let truemoneySourceBackendPayment =
+    __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.trueMoney)
+    
+    static let cityPointsSourceBackendPayment =
+    __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.pointsCiti)
+    
     static func makeInternetBankingSourceBackendPayment(
         bank: PaymentInformation.InternetBanking
         ) -> __OmiseCapabilitySourceBackendPayment {
@@ -105,6 +111,10 @@ extension __OmiseCapabilityBackendPayment {
             return __OmiseCapabilitySourceBackendPayment.promptpaySourceBackendPayment
         case .paynow:
             return __OmiseCapabilitySourceBackendPayment.paynowSourceBackendPayment
+        case .truemoney:
+            return __OmiseCapabilitySourceBackendPayment.truemoneySourceBackendPayment
+        case .points(let points):
+            return __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue(points.type))
         case .unknownSource(let type, let configurations):
             return __OmiseCapabilityUnknownSourceBackendPayment(sourceType: type, parameters: configurations)
         }

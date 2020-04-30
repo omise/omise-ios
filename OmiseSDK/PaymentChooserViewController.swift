@@ -13,19 +13,23 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
     case alipay
     case promptpay
     case paynow
+    case truemoney
+    case citiPoints
     
     static var allCases: [PaymentChooserOption] {
         return [
             .creditCard,
             .installment,
+            .truemoney,
+            .promptpay,
+            .citiPoints,
+            .alipay,
             .internetBanking,
             .tescoLotus,
+            .paynow,
             .conbini,
             .payEasy,
-            .netBanking,
-            .alipay,
-            .promptpay,
-            .paynow
+            .netBanking
         ]
     }
     
@@ -51,6 +55,39 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
             return "PromptPay"
         case .paynow:
             return "PayNow"
+        case .truemoney:
+            return "TrueMoney"
+        case .citiPoints:
+            return "CitiPoints"
+        }
+    }
+}
+
+extension PaymentChooserOption {
+    fileprivate static func paymentOptions(for sourceType: OMSSourceTypeValue) -> [PaymentChooserOption] {
+        switch sourceType {
+        case .trueMoney:
+            return [.truemoney]
+        case .installmentFirstChoice, .installmentKBank, .installmentKTC, .installmentBBL, .installmentBAY:
+            return [.installment]
+        case .billPaymentTescoLotus:
+            return [.tescoLotus]
+        case .eContext:
+            return [.conbini, .payEasy, .netBanking]
+        case .alipay:
+            return [.alipay]
+        case .internetBankingBAY, .internetBankingKTB, .internetBankingBBL, .internetBankingSCB:
+            return [.internetBanking]
+        case .payNow:
+            return [.paynow]
+        case .promptPay:
+            return [.promptpay]
+        case .pointsCiti:
+            return [.citiPoints]
+        case .barcodeAlipay:
+            return []
+        default:
+            return []
         }
     }
 }
@@ -131,14 +168,14 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 case .conbini:
                     controller.navigationItem.title = NSLocalizedString(
                         "econtext.convenience-store.navigation-item.title",
-                        bundle: Bundle.omiseSDKBundle, value: "Convenience Store",
-                        comment: "A navigaiton title for the EContext screen when the `Convenience Store` is selected"
+                        bundle: Bundle.omiseSDKBundle, value: "Konbini",
+                        comment: "A navigaiton title for the EContext screen when the `Konbini` is selected"
                     )
                 case .netBanking:
                     controller.navigationItem.title = NSLocalizedString(
                         "econtext.netbanking.navigation-item.title",
-                        bundle: Bundle.omiseSDKBundle, value: "Netbanking",
-                        comment: "A navigaiton title for the EContext screen when the `Netbanking` is selected"
+                        bundle: Bundle.omiseSDKBundle, value: "Net Bank",
+                        comment: "A navigaiton title for the EContext screen when the `Net Bank` is selected"
                     )
                 case .payEasy:
                     controller.navigationItem.title = NSLocalizedString(
@@ -149,6 +186,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 default: break
                 }
             }
+        case ("GoToTrueMoneyFormSegue"?, let controller as TrueMoneyFormViewController):
+            controller.flowSession = self.flowSession
         default: break
         }
         
@@ -188,6 +227,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .promptpay
         case .paynow:
             payment = .paynow
+        case .citiPoints:
+            payment = .points(.citiPoints)
         default:
             return
         }
@@ -215,22 +256,26 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 0, section: 0)
         case .installment:
             return IndexPath(row: 1, section: 0)
-        case .internetBanking:
+        case .truemoney:
             return IndexPath(row: 2, section: 0)
-        case .tescoLotus:
-            return IndexPath(row: 3, section: 0)
-        case .conbini:
-            return IndexPath(row: 4, section: 0)
-        case .payEasy:
-            return IndexPath(row: 5, section: 0)
-        case .netBanking:
-            return IndexPath(row: 6, section: 0)
-        case .alipay:
-            return IndexPath(row: 7, section: 0)
         case .promptpay:
-            return IndexPath(row: 8, section: 0)
+            return IndexPath(row: 3, section: 0)
+        case .citiPoints:
+            return IndexPath(row: 4, section: 0)
+        case .alipay:
+            return IndexPath(row: 5, section: 0)
+        case .internetBanking:
+            return IndexPath(row: 6, section: 0)
+        case .tescoLotus:
+            return IndexPath(row: 7, section: 0)
         case .paynow:
+            return IndexPath(row: 8, section: 0)
+        case .conbini:
             return IndexPath(row: 9, section: 0)
+        case .payEasy:
+            return IndexPath(row: 10, section: 0)
+        case .netBanking:
+            return IndexPath(row: 11, section: 0)
         }
     }
     
@@ -244,6 +289,10 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue.promptPay
             case .paynow:
                 return OMSSourceTypeValue.payNow
+            case .truemoney:
+                return OMSSourceTypeValue.trueMoney
+            case .points(let points):
+                return OMSSourceTypeValue(points.type)
             case .installment(let brand, availableNumberOfTerms: _):
                 return OMSSourceTypeValue(brand.type)
             case .internetBanking(let bank):
@@ -280,26 +329,18 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     private func applySecondaryColor() {}
     
     private func updateShowingValues() {
-        showingValues = PaymentChooserOption.allCases.filter({
-            switch $0 {
-            case .creditCard:
-                return showsCreditCardPayment
-            case .installment:
-                return allowedPaymentMethods.hasInstallmentSource
-            case .internetBanking:
-                return allowedPaymentMethods.hasInternetBankingSource
-            case .tescoLotus:
-                return allowedPaymentMethods.hasTescoLotusSource
-            case .conbini, .payEasy, .netBanking:
-                return allowedPaymentMethods.hasEContextSource
-            case .alipay:
-                return allowedPaymentMethods.hasAlipaySource
-            case .promptpay:
-                return allowedPaymentMethods.hasPromptPaySource
-            case .paynow:
-                return allowedPaymentMethods.hasPayNowSource
+        var paymentMethodsToShow: [PaymentChooserOption] = allowedPaymentMethods.reduce(into: []) { (result, sourceType) in
+            let paymentOptions = PaymentChooserOption.paymentOptions(for: sourceType)
+            for paymentOption in paymentOptions where !result.contains(paymentOption) {
+                result.append(paymentOption)
             }
-        })
+        }
+        
+        if showsCreditCardPayment {
+            paymentMethodsToShow.insert(.creditCard, at: 0)
+        }
+        
+        showingValues = paymentMethodsToShow
         
         if #available(iOS 10, *) {
             os_log(
@@ -314,36 +355,3 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         flowSession?.requestToCancel()
     }
 }
-
-
-extension Array where Element == OMSSourceTypeValue {
-    var hasInternetBankingSource: Bool {
-        return self.contains(where: { $0.isInternetBankingSource })
-    }
-    
-    var hasInstallmentSource: Bool {
-        return self.contains(where: { $0.isInstallmentSource })
-    }
-    
-    var hasTescoLotusSource: Bool {
-        return self.contains(.billPaymentTescoLotus)
-    }
-    
-    var hasAlipaySource: Bool {
-        return self.contains(.alipay)
-    }
-    
-    var hasEContextSource: Bool {
-        return self.contains(.eContext)
-    }
-    
-    var hasPromptPaySource: Bool {
-        return self.contains(.promptPay)
-    }
-    
-    var hasPayNowSource: Bool {
-        return self.contains(.payNow)
-    }
-}
-
-

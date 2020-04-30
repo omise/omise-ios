@@ -147,6 +147,44 @@ public enum PaymentInformation: Codable, Equatable {
     /// PayNow Payment Source
     case paynow
     
+    /// The TrueMoney customer information
+    public struct TrueMoney: PaymentMethod {
+        
+        public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.trueMoney.rawValue
+        
+        public var type: String = OMSSourceTypeValue.trueMoney.rawValue
+        
+        /// The customers phone number. Contains only digits and has 10 or 11 characters
+        public let phoneNumber: String
+        
+        private enum CodingKeys: String, CodingKey {
+            case phoneNumber = "phone_number"
+        }
+        
+        /// Creates a new TrueMoney source with the given customer information
+        ///
+        /// - Parameters:
+        ///   - phoneNumber:  The customers phone number
+        public init(phoneNumber: String) {
+            self.phoneNumber = phoneNumber
+        }
+        
+    }
+    
+    /// TrueMoney Payment Source
+    case truemoney(TrueMoney)
+    
+    /// The name of the supported services to process the Points Payment
+    public enum Points: PaymentMethod {
+        public static let paymentMethodTypePrefix: String = "points_"
+        
+        case citiPoints
+        case other(String)
+    }
+    
+    /// Points Payment Source
+    case points(Points)
+    
     /// Other Payment Source
     case other(type: String, parameters: [String: Any])
     
@@ -176,6 +214,10 @@ public enum PaymentInformation: Codable, Equatable {
             self = .promptpay
         case OMSSourceTypeValue.payNow.rawValue:
             self = .paynow
+        case OMSSourceTypeValue.trueMoney.rawValue:
+            self = .truemoney(try TrueMoney(from: decoder))
+        case PaymentInformation.Points.self:
+            self = .points(try Points(from: decoder))
         case let value:
             self = .other(type: value, parameters: try decoder.decodeJSONDictionary().filter({ (key, _) -> Bool in
                 switch key {
@@ -213,6 +255,12 @@ public enum PaymentInformation: Codable, Equatable {
         case .paynow:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.payNow.rawValue, forKey: .type)
+        case .truemoney(let trueMoney):
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.trueMoney.rawValue, forKey: .type)
+            try trueMoney.encode(to: encoder)
+        case .points(let points):
+            try points.encode(to: encoder)
         case .other(type: let type, parameters: let parameters):
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(type, forKey: .type)
@@ -228,6 +276,8 @@ public enum PaymentInformation: Codable, Equatable {
             return true
         case (.promptpay, .promptpay), (.paynow, .paynow):
             return true
+        case (.truemoney(let lhsValue), .truemoney(let rhsValue)):
+            return lhsValue == rhsValue
         case (.billPayment(let lhsValue), .billPayment(let rhsValue)):
             return lhsValue == rhsValue
         case (.barcode(let lhsValue), .barcode(let rhsValue)):
@@ -235,6 +285,8 @@ public enum PaymentInformation: Codable, Equatable {
         case (.installment(let lhsValue), .installment(let rhsValue)):
             return lhsValue == rhsValue
         case (.eContext(let lhsValue), .eContext(let rhsValue)):
+            return lhsValue == rhsValue
+        case (.points(let lhsValue), .points(let rhsValue)):
             return lhsValue == rhsValue
         case (.other(let lhsType, let lhsParameters), .other(let rhsType, let rhsParameters)):
             return lhsType == rhsType &&
@@ -277,6 +329,10 @@ extension PaymentInformation {
             return OMSSourceTypeValue.promptPay.rawValue
         case .paynow:
             return OMSSourceTypeValue.payNow.rawValue
+        case .truemoney:
+            return OMSSourceTypeValue.trueMoney.rawValue
+        case .points(let points):
+            return points.type
         case .other(let value, _):
             return value
         }
@@ -621,5 +677,40 @@ extension PaymentInformation.Barcode {
             return false
         }
     }
+}
+
+extension PaymentInformation.Points {
+    /// Omise Source Type value using in the Omise API
+    public var type: String {
+        switch self {
+        case .citiPoints:
+            return OMSSourceTypeValue.pointsCiti.rawValue
+        case .other(let value):
+            return PaymentInformation.Points.paymentMethodTypePrefix + value
+        }
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: PaymentInformation.CodingKeys.self)
+        let type = try container.decode(String.self, forKey: .type)
+        
+        guard type.hasPrefix(PaymentInformation.Points.paymentMethodTypePrefix),
+            let typePrefixRange = type.range(of: PaymentInformation.Points.paymentMethodTypePrefix) else {
+                throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Invalid points payment source type value")
+        }
+        
+        switch type[typePrefixRange.upperBound...] {
+        case "citi":
+            self = .citiPoints
+        case let value:
+            self = .other(String(value))
+        }
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: PaymentInformation.CodingKeys.self)
+        try container.encode(type, forKey: .type)
+    }
+    
 }
 

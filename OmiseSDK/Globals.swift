@@ -122,6 +122,10 @@ extension OMSSourceTypeValue {
             return "promptpay"
         case .payNow:
             return "paynow"
+        case .trueMoney:
+            return "truemoney"
+        case .pointsCiti:
+            return "points"
         default:
             return self.rawValue
         }
