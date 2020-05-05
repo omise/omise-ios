@@ -105,6 +105,8 @@ extension __OmiseCapabilityBackendPayment {
             )
         case .internetBanking(let bank):
             return __OmiseCapabilitySourceBackendPayment.makeInternetBankingSourceBackendPayment(bank: bank)
+        case .billPayment(let billPayment):
+            return __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue(billPayment.type))
         case .alipay:
             return __OmiseCapabilitySourceBackendPayment.alipaySourceBackendPayment
         case .promptpay:

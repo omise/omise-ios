@@ -61,6 +61,7 @@ extension Capability {
             case card(Set<CardBrand>)
             case installment(PaymentInformation.Installment.Brand, availableNumberOfTerms: IndexSet)
             case internetBanking(PaymentInformation.InternetBanking)
+            case billPayment(PaymentInformation.BillPayment)
             case alipay
             case promptpay
             case paynow
@@ -106,6 +107,8 @@ extension Capability.Backend.Payment {
         case (.installment(let lhsValue), .installment(let rhsValue)):
             return lhsValue == rhsValue
         case (.internetBanking(let lhsValue), .internetBanking(let rhsValue)):
+            return lhsValue == rhsValue
+        case (.billPayment(let lhsValue), .billPayment(let rhsValue)):
             return lhsValue == rhsValue
         default:
             return false
@@ -175,6 +178,8 @@ extension Capability.Backend {
             self.payment = .truemoney
         case .source(.pointsCiti):
             self.payment = .points(.citiPoints)
+        case .source(.billPaymentTescoLotus):
+            self.payment = .billPayment(.tescoLotus)
         case .source(let value):
             let configurations = try container.decodeJSONDictionary()
             self.payment = .unknownSource(value.rawValue, configurations: configurations)
@@ -196,7 +201,7 @@ extension Capability.Backend {
         case .unknownSource(_, configurations: let configurations):
             try encoder.encodeJSONDictionary(configurations)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
-        case .internetBanking, .alipay, .promptpay, .paynow, .truemoney, .points:
+        case .internetBanking, .alipay, .promptpay, .paynow, .truemoney, .points, .billPayment:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
     }
@@ -242,6 +247,8 @@ extension Capability.Backend {
                 self = .source(OMSSourceTypeValue(brand.type))
             case .internetBanking(let banking):
                 self = .source(OMSSourceTypeValue(banking.type))
+            case .billPayment(let billPayment):
+                self = .source(OMSSourceTypeValue(billPayment.type))
             case .unknownSource(let sourceType, configurations: _):
                 self = .source(.init(sourceType))
             case .promptpay:
