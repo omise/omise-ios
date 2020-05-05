@@ -299,6 +299,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue(bank.type)
             case .billPayment(let billPayment):
                 return OMSSourceTypeValue(billPayment.type)
+            case .eContext:
+                return OMSSourceTypeValue.eContext
             case .card, .unknownSource:
                 return nil
             }
