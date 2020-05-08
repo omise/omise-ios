@@ -172,14 +172,28 @@
 /* The displaying message showing in the error banner an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend has occurred */
 "payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.message" = "金額が%@の有効金額を超過しています";
 
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.recovery-suggestion" = "決済金額が高すぎます。より低額で決済を行ってください。";
+
 /* The displaying message showing in the error banner an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend has occurred */
 "payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.message" = "金額が有効金額を超過しています";
+
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.recovery-suggestion" = "決済金額が高すぎます。より低額で決済を行ってください。";
 
 /* The displaying message showing in the error banner an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend has occurred */
 "payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.message" = "金額が%dの有効金額以下です";
 
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.recovery-suggestion" = "決済金額が低すぎます。より高額で決済を行ってください。";
+
 /* The displaying message showing in the error banner an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend has occurred */
 "payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.message" = "金額が有効金額以下です";
+
+
+/* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend has occurred */
+"payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.recovery-suggestion" = "決済金額が低すぎます。より高額で決済を行ってください。";
 
 /* The displaying message showing in the error banner an `Bad request` error with `currency-not-supported` from the backend has occurred */
 "payment-creator.error.api.bad_request.currency-not-supported.message" = "このアカウントでこちらの通貨はサポートされていません";
