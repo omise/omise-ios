@@ -61,11 +61,13 @@ extension Capability {
             case card(Set<CardBrand>)
             case installment(PaymentInformation.Installment.Brand, availableNumberOfTerms: IndexSet)
             case internetBanking(PaymentInformation.InternetBanking)
+            case billPayment(PaymentInformation.BillPayment)
             case alipay
             case promptpay
             case paynow
             case truemoney
             case points(PaymentInformation.Points)
+            case eContext
             case unknownSource(String, configurations: [String: Any])
         }
     }
@@ -101,11 +103,15 @@ extension Capability.Backend.Payment {
             return true
         case (.truemoney, .truemoney):
             return true
+        case (.eContext, .eContext):
+            return true
         case (.points(let lhsValue), .points(let rhsValue)):
             return lhsValue == rhsValue
         case (.installment(let lhsValue), .installment(let rhsValue)):
             return lhsValue == rhsValue
         case (.internetBanking(let lhsValue), .internetBanking(let rhsValue)):
+            return lhsValue == rhsValue
+        case (.billPayment(let lhsValue), .billPayment(let rhsValue)):
             return lhsValue == rhsValue
         default:
             return false
@@ -175,6 +181,10 @@ extension Capability.Backend {
             self.payment = .truemoney
         case .source(.pointsCiti):
             self.payment = .points(.citiPoints)
+        case .source(.billPaymentTescoLotus):
+            self.payment = .billPayment(.tescoLotus)
+        case .source(.eContext):
+            self.payment = .eContext
         case .source(let value):
             let configurations = try container.decodeJSONDictionary()
             self.payment = .unknownSource(value.rawValue, configurations: configurations)
@@ -196,7 +206,7 @@ extension Capability.Backend {
         case .unknownSource(_, configurations: let configurations):
             try encoder.encodeJSONDictionary(configurations)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
-        case .internetBanking, .alipay, .promptpay, .paynow, .truemoney, .points:
+        case .internetBanking, .alipay, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
     }
@@ -242,6 +252,8 @@ extension Capability.Backend {
                 self = .source(OMSSourceTypeValue(brand.type))
             case .internetBanking(let banking):
                 self = .source(OMSSourceTypeValue(banking.type))
+            case .billPayment(let billPayment):
+                self = .source(OMSSourceTypeValue(billPayment.type))
             case .unknownSource(let sourceType, configurations: _):
                 self = .source(.init(sourceType))
             case .promptpay:
@@ -252,6 +264,8 @@ extension Capability.Backend {
                 self = .source(.trueMoney)
             case .points(let points):
                 self = .source(OMSSourceTypeValue(points.type))
+            case .eContext:
+                self = .source(.eContext)
             }
         }
         
