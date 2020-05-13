@@ -14,7 +14,7 @@
 			<string>%d 月々</string>
 		</dict>
 		<key>NSStringLocalizedFormatKey</key>
-		<string>％＃＠月々@</string>
+		<string>%#@MONTHs@</string>
 	</dict>
 </dict>
 </plist>
