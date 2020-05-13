@@ -56,7 +56,7 @@ Then run `carthage update`:
 ``` bash
 $ carthage update
 *** Fetching omise-ios
-*** Checking out omise-ios at "v3.3.0"
+*** Checking out omise-ios at "v3.5.0"
 *** xcodebuild output can be found in /var/folders/sd/ccsbmstn2vbbqd7nk4fgkd040000gn/T/carthage-xcodebuild.X7ZfYB.log
 *** Building scheme "OmiseSDK" in OmiseSDK.xcodeproj
 ```
