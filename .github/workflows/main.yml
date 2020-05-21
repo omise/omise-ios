@@ -16,7 +16,7 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: macos-latest
-    
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -25,3 +25,5 @@ jobs:
     # Runs a single command using the runners shell
     - name: Run xcodebuild
       run: xcodebuild build-for-testing -scheme OmiseSDK -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.4.1' -project OmiseSDK.xcodeproj
+    - name: Run xcodebuild with tests
+      run: xcodebuild test -scheme OmiseSDKTests -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.4.1'
