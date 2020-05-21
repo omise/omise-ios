@@ -37,7 +37,7 @@ NSString * const _Nonnull publicKey = @"pkey_test_58wfnlwoxz1tbkdd993";
         
         XCTAssertTrue([@"4242" isEqualToString:delegate.token.card.lastDigits]);
         XCTAssertEqual(11, delegate.token.card.expirationMonth);
-        XCTAssertEqual(2020, delegate.token.card.expirationYear);
+        XCTAssertEqual(2030, delegate.token.card.expirationYear);
     }];
 }
 
@@ -62,7 +62,7 @@ NSString * const _Nonnull publicKey = @"pkey_test_58wfnlwoxz1tbkdd993";
         
         XCTAssertTrue([@"4242" isEqualToString:source.card.lastDigits]);
         XCTAssertEqual(11, source.card.expirationMonth);
-        XCTAssertEqual(2020, source.card.expirationYear);
+        XCTAssertEqual(2030, source.card.expirationYear);
         
         [expectation fulfill];
     }];
@@ -153,14 +153,14 @@ NSString * const _Nonnull publicKey = @"pkey_test_58wfnlwoxz1tbkdd993";
 + (OMSTokenRequest *)createInvalidTestTokenRequest {
     return [[OMSTokenRequest alloc] initWithName:@"JOHN DOE" number:@"42424242424242421111"
                                  expirationMonth:6
-                                  expirationYear:[[NSCalendar creditCardInformationCalendar] component:NSCalendarUnitYear fromDate:[NSDate date]] + 1
+                                  expirationYear:2016
                                     securityCode:@"123" city:nil postalCode:nil];
 }
 
 + (OMSTokenRequest *)createValidTestTokenRequest {
     return [[OMSTokenRequest alloc] initWithName:@"JOHN DOE" number:@"4242424242424242"
                                  expirationMonth:11
-                                  expirationYear:[[NSCalendar creditCardInformationCalendar] component:NSCalendarUnitYear fromDate:[NSDate date]] + 1
+                                  expirationYear:2030
                                     securityCode:@"123" city:nil postalCode:nil];
 }
 

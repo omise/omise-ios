@@ -24,7 +24,7 @@ class ClientTestCase: XCTestCase {
             case .success(let token):
                 XCTAssertEqual("4242", token.card.lastDigits)
                 XCTAssertEqual(11, token.card.expirationMonth)
-                XCTAssertEqual(2019, token.card.expirationYear)
+                XCTAssertEqual(2030, token.card.expirationYear)
             case .failure(let error):
                 XCTFail("Expected succeed request but it failed with \(error)")
             }
@@ -32,7 +32,7 @@ class ClientTestCase: XCTestCase {
         
         XCTAssertEqual("424242XXXXXX4242", task.request.parameter.number)
         XCTAssertEqual(11, task.request.parameter.expirationMonth)
-        XCTAssertEqual(2019, task.request.parameter.expirationYear)
+        XCTAssertEqual(2030, task.request.parameter.expirationYear)
         
         XCTAssertEqual(Token.postURL, task.dataTask.currentRequest?.url)
         XCTAssertEqual("POST", task.dataTask.currentRequest?.httpMethod)
@@ -112,7 +112,7 @@ extension ClientTestCase {
             name: "JOHN DOE",
             number: "4242424242424242",
             expirationMonth: 11,
-            expirationYear: 2019,
+            expirationYear: 2030,
             securityCode: "123"
         ))
     }
