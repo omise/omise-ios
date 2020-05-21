@@ -4,7 +4,7 @@ import OmiseSDK
 
 @available(*, deprecated)
 class OmiseTokenRequestTest: XCTestCase {
-    private let publicKey = "<#Omise Public Key#>"
+    private let publicKey = "pkey_test_58wfnlwoxz1tbkdd993"
     private let timeout: TimeInterval = 15.0
     
     var testClient: OmiseSDKClient {
