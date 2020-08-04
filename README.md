@@ -99,7 +99,7 @@ let tokenParameters = Token.CreateParameter(
     name: "JOHN DOE",
     number: "4242424242424242",
     expirationMonth: 11,
-    expirationYear: 2019,
+    expirationYear: 2022,
     securityCode: "123"
 )
 
@@ -191,7 +191,7 @@ class ViewController: UIViewController {
     creditCardView.delegate = self
     creditCardView.handleErrors = true
 
-	present(navigation, animated: true, completion: nil)
+    present(creditCardView, animated: true, completion: nil)
   }
 }
 ```
@@ -200,7 +200,7 @@ Then implement the delegate to receive the `Token` object after user has entered
 credit card data:
 
 ```swift
-extension ViewController: CreditCardFormDelegate {
+extension ViewController: CreditCardFormViewControllerDelegate {
   func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
     dismissCreditCardForm()
 
@@ -253,7 +253,7 @@ You can create your own credit card form if you want to but please keep in mind 
 Omise iOS SDK provides some built-in credit card UI components to make it easier to create your own credit card form:
 
 * `CardNumberTextField` - Provides basic number grouping as the user types.
-* `CardNameTextField`
+* `CardNameTextField` - Cardholder name field.
 * `CardExpiryDateTextField` - Provides card expiration date input and styling
 * `CardExpiryDatePicker` - `UIPickerView` implementation that has a month and year column.
 * `CardCVVTextField` - CVV number field.
@@ -279,7 +279,8 @@ let allowedPaymentMethods = PaymentCreatorController.thailandDefaultAvailableSou
 
 let paymentCreatorController = PaymentCreatorController.makePaymentCreatorControllerWith(
   publicKey: publicKey,
-  amount: paymentAmount, currency: Currency(code: paymentCurrencyCode),
+  amount: paymentAmount, 
+  currency: Currency(code: paymentCurrencyCode),
   allowedPaymentMethods: allowedPaymentMethods,
   paymentDelegate: self
 )
@@ -307,7 +308,7 @@ extension ProductDetailViewController: PaymentCreatorControllerDelegate {
   }
 
   func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController) {
-  	dismissForm()
+    dismissForm()
   }
 }
 ```
