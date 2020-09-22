@@ -15,6 +15,7 @@ class ModelTestCase: XCTestCase {
         XCTAssertEqual(XCTestCase.dateFromJSONString("2019-07-26T05:45:20Z"), token.createdDate)
         XCTAssertFalse(token.isUsed)
         XCTAssertEqual("card_test_5086xl7amxfysl0ac5l", token.card.id)
+        XCTAssertEqual(ChargeStatus.unknown, token.chargeStatus)
     }
     
     func testDecodeCard() throws {
