@@ -72,6 +72,15 @@ public struct CreateTokenParameter: Encodable {
     }
 }
 
+/// Represents an Charge status
+public enum ChargeStatus: String, Codable {
+    case unknown
+    case failed
+    case expired
+    case pending
+    case reversed
+    case successful
+}
 
 /// Represents an Omise Token object
 public struct Token: CreatableObject {
@@ -88,6 +97,7 @@ public struct Token: CreatableObject {
     
     /// URL for fetching the Token data
     public let location: String
+    
     /// Boolean indicates that if this token is already used for creating a charge already
     public var isUsed: Bool
     
@@ -97,6 +107,9 @@ public struct Token: CreatableObject {
     /// Date that this Token was created
     public let createdDate: Date
     
+    /// Status of charge created using this token
+    public let chargeStatus: ChargeStatus
+    
     private enum CodingKeys: String, CodingKey {
         case object
         case location
@@ -105,6 +118,7 @@ public struct Token: CreatableObject {
         case isLiveMode = "livemode"
         case isUsed = "used"
         case card
+        case chargeStatus = "charge_status"
     }
 }
 
