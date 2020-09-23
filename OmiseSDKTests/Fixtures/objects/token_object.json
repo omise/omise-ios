@@ -5,6 +5,7 @@
   "location": "/tokens/tokn_test_5086xl7c9k5rnx35qba",
   "created_at": "2019-07-26T05:45:20Z",
   "used": false,
+  "charge_status": "unknown",
   "card": {
     "object": "card",
     "id": "card_test_5086xl7amxfysl0ac5l",
