@@ -102,7 +102,7 @@ public struct Token: CreatableObject {
     public var isUsed: Bool
     
     /// Card that is used for creating this Token
-    public let card: Card
+    public let card: Card?
     
     /// Date that this Token was created
     public let createdDate: Date

@@ -1,0 +1,11 @@
+{
+  "object": "token",
+  "id": "tokn_test_5086xl7c9k5rnx35qba",
+  "livemode": false,
+  "location": "/tokens/tokn_test_5086xl7c9k5rnx35qba",
+  "created_at": "2019-07-26T05:45:20Z",
+  "used": false,
+  "charge_status": "pending",
+  "card": null
+}
+
