@@ -22,9 +22,9 @@ class ClientTestCase: XCTestCase {
             defer { expectation.fulfill() }
             switch result {
             case .success(let token):
-                XCTAssertEqual("4242", token.card.lastDigits)
-                XCTAssertEqual(11, token.card.expirationMonth)
-                XCTAssertEqual(2030, token.card.expirationYear)
+                XCTAssertEqual("4242", token.card?.lastDigits)
+                XCTAssertEqual(11, token.card?.expirationMonth)
+                XCTAssertEqual(2030, token.card?.expirationYear)
             case .failure(let error):
                 XCTFail("Expected succeed request but it failed with \(error)")
             }

@@ -14,8 +14,22 @@ class ModelTestCase: XCTestCase {
         XCTAssertFalse(token.isLiveMode)
         XCTAssertEqual(XCTestCase.dateFromJSONString("2019-07-26T05:45:20Z"), token.createdDate)
         XCTAssertFalse(token.isUsed)
-        XCTAssertEqual("card_test_5086xl7amxfysl0ac5l", token.card.id)
+        XCTAssertEqual("card_test_5086xl7amxfysl0ac5l", token.card?.id)
         XCTAssertEqual(ChargeStatus.unknown, token.chargeStatus)
+    }
+    
+    func testDecodeTokenWithoutCard() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Token>?.none)
+        let tokenData = XCTestCase.fixturesData(forFilename: "token_with_empty_card_object")
+        let token = try decoder.decode(Token.self, from: tokenData)
+
+        XCTAssertEqual("tokn_test_5086xl7c9k5rnx35qba", token.id)
+        XCTAssertEqual("/tokens/tokn_test_5086xl7c9k5rnx35qba", token.location)
+        XCTAssertFalse(token.isLiveMode)
+        XCTAssertEqual(XCTestCase.dateFromJSONString("2019-07-26T05:45:20Z"), token.createdDate)
+        XCTAssertFalse(token.isUsed)
+        XCTAssertEqual(ChargeStatus.pending, token.chargeStatus)
+        XCTAssertNil(token.card)
     }
     
     func testDecodeCard() throws {
