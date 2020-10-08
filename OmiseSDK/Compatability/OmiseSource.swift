@@ -195,7 +195,7 @@ public class __SourceInstallmentsPayment: __SourcePaymentInformation {
     /// Create a SCB Installment payment with the given number of terms
     ///
     /// - Parameter numberOfTerms: Number of plan of the installment plan
-    /// - Returns: KBank Installment payment with the specified number of terms
+    /// - Returns: SCB Installment payment with the specified number of terms
     @objc public static func installmentSCBPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
         return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentSCB, numberOfTerms: numberOfTerms)!
     }
