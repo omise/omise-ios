@@ -41,6 +41,12 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
                     bundle: Bundle.omiseSDKBundle, value: "Kasikorn",
                     comment:"A navigation title for the choosing installment terms screen with the `Kasikorn` selected"
                 )
+            case .scb?:
+                title = NSLocalizedString(
+                    "installment-number-of-terms-choosers.scb.navigation-item.title",
+                    bundle: Bundle.omiseSDKBundle, value: "SCB",
+                    comment:"A navigation title for the choosing installment terms screen with the `SCB` selected"
+                )
             case .other?, nil:
                 title = NSLocalizedString(
                     "installment-number-of-terms-choosers.default.navigation-item.title",
