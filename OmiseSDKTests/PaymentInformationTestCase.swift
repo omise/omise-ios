@@ -9,7 +9,7 @@ class PaymentInformationTestCase: XCTestCase {
         return encoder
     }
     
-    func testEncodeInternetBankingSourceParameter() throws {
+    func testEncodeInstallmentsSourceParameter() throws {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
         
         do {
@@ -86,9 +86,25 @@ class PaymentInformationTestCase: XCTestCase {
                 }
                 """, encodedJSONString)
         }
+
+        
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.installment(PaymentInformation.Installment(brand: PaymentInformation.Installment.Brand.scb, numberOfTerms: 9)), amount: 30_00, currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 3000,
+                  "currency" : "THB",
+                  "installment_term" : 9,
+                  "type" : "installment_scb"
+                }
+                """, encodedJSONString)
+        }
     }
     
-    func testEncodeInstallmentsSourceParameter() throws {
+    func testEncodeInternetBankingSourceParameter() throws {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
         
         do {
