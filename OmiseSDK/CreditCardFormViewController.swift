@@ -767,15 +767,6 @@ extension CreditCardFormViewController {
         })
         
         confirmButton.titleLabel?.adjustsFontForContentSizeCategory = true
-   
-//      Not used
-//        let fieldsAccessibilityElements = ([
-//            cardNumberTextField.accessibilityElements?.first ?? cardNumberTextField as Any,
-//            cardNameTextField.accessibilityElements?.first ?? cardNameTextField as Any,
-//            expiryDateTextField.expirationMonthAccessibilityElement as Any,
-//            expiryDateTextField.expirationYearAccessibilityElement as Any,
-//            secureCodeTextField.accessibilityElements?.first ?? secureCodeTextField as Any,
-//            ]).compactMap({ $0 as? NSObjectProtocol })
         
         let fields = [
             cardNumberTextField,
