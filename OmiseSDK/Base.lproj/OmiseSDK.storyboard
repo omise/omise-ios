@@ -1502,6 +1502,7 @@
                         <outletCollection property="bankNameLabels" destination="V59-D4-sqA" collectionClass="NSMutableArray" id="4DA-Hh-Y5C"/>
                         <outletCollection property="bankNameLabels" destination="ccD-Ly-DnI" collectionClass="NSMutableArray" id="WQ5-Ld-cRT"/>
                         <outletCollection property="bankNameLabels" destination="d1t-A5-fA9" collectionClass="NSMutableArray" id="b54-Iy-3dY"/>
+                        <outletCollection property="bankNameLabels" destination="r9n-CR-zhg" collectionClass="NSMutableArray" id="WbQ-Bx-qyE"/>
                         <segue destination="I6Y-g7-xLU" kind="show" identifier="GoToInstallmentTermsChooserSegue" id="ljr-Fd-sHA"/>
                     </connections>
                 </tableViewController>

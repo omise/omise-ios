@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17503.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="iu0-Jf-pl4">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17502"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -553,7 +552,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Internet Banking - SCB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xKN-cR-6FV">
-                                                    <rect key="frame" x="15" y="0.0" width="391" height="44"/>
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -570,7 +569,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Internet Banking - BBL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XJK-z0-VSM">
-                                                    <rect key="frame" x="15" y="0.0" width="391" height="44"/>
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -661,6 +660,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                         <outlet property="installmentFirstChoicePaymentCell" destination="Mlc-1u-0r8" id="CHU-I5-qYm"/>
                         <outlet property="installmentKBankPaymentCell" destination="D8l-8j-XVp" id="WcB-cH-aTN"/>
                         <outlet property="installmentKTCPaymentCell" destination="Etx-Pd-SmH" id="hlk-Fc-hR1"/>
+                        <outlet property="installmentSCBPaymentCell" destination="1s9-pD-vUM" id="rDd-Kf-vZW"/>
                         <outlet property="internetBankingBAYPaymentCell" destination="9DX-Jg-2uE" id="j3E-NZ-xCW"/>
                         <outlet property="internetBankingBBLPaymentCell" destination="UET-A5-nkj" id="tqq-wQ-IrK"/>
                         <outlet property="internetBankingKTBPaymentCell" destination="Y6M-7t-Dc7" id="0j0-Bl-0Dz"/>
@@ -897,7 +897,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="E9r-cu-PMc"/>
+        <segue reference="dRk-CO-8T5"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="App Tint"/>
     <resources>
