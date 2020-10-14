@@ -70,6 +70,7 @@ public enum PaymentInformation: Codable, Equatable {
             case bbl
             case ktc
             case kBank
+            case scb
             case other(String)
         }
         
@@ -94,6 +95,8 @@ public enum PaymentInformation: Codable, Equatable {
                 return IndexSet([ 3, 4, 5, 6, 7, 8, 9, 10 ])
             case .kBank:
                 return IndexSet([ 3, 4, 6, 10 ])
+            case .scb:
+                return IndexSet([ 3, 4, 6, 9, 10 ])
             case .other:
                 return IndexSet(1...60)
             }
@@ -420,6 +423,8 @@ extension PaymentInformation.Installment {
             return OMSSourceTypeValue.installmentKTC.rawValue
         case .kBank:
             return OMSSourceTypeValue.installmentKBank.rawValue
+        case .scb:
+            return OMSSourceTypeValue.installmentSCB.rawValue
         case .other(let value):
             return PaymentInformation.Installment.paymentMethodTypePrefix + value
         }
@@ -450,6 +455,8 @@ extension PaymentInformation.Installment {
             brand = .ktc
         case "kbank":
             brand = .kBank
+        case "scb":
+            brand = .scb
         case let value:
             brand = .other(String(value))
         }
@@ -469,7 +476,7 @@ extension PaymentInformation.Installment {
 extension PaymentInformation.Installment.Brand : StaticElementIterable, CustomStringConvertible {
     public typealias AllCases = Array<PaymentInformation.Installment.Brand>
     public static var allCases: PaymentInformation.Installment.Brand.AllCases = [
-        .bay, .firstChoice, .bbl, .ktc, .kBank
+        .bay, .firstChoice, .bbl, .ktc, .kBank, .scb
     ]
     
     public var description: String {
@@ -484,6 +491,8 @@ extension PaymentInformation.Installment.Brand : StaticElementIterable, CustomSt
             return "KTC"
         case .kBank:
             return "K-Bank"
+        case .scb:
+            return "SCB"
         case .other(let value):
             return value
         }
@@ -501,6 +510,8 @@ extension PaymentInformation.Installment.Brand : StaticElementIterable, CustomSt
             return OMSSourceTypeValue.installmentKTC.rawValue
         case .kBank:
             return OMSSourceTypeValue.installmentKBank.rawValue
+        case .scb:
+            return OMSSourceTypeValue.installmentSCB.rawValue
         case .other(let value):
             return value
         }

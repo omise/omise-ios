@@ -537,6 +537,7 @@ extension PaymentCreatorController {
         .installmentBBL,
         .installmentKTC,
         .installmentKBank,
+        .installmentSCB,
         .promptPay,
         .trueMoney,
         .pointsCiti
@@ -563,6 +564,7 @@ extension PaymentCreatorController {
         .installmentBBL,
         .installmentKTC,
         .installmentKBank,
+        .installmentSCB,
     ]
     
     public static let billPaymentAvailablePaymentMethods: [OMSSourceTypeValue] = [

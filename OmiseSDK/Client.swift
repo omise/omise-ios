@@ -80,7 +80,7 @@ import os
             defer {
                 if #available(iOSApplicationExtension 10.0, *) {
                     switch result {
-                    case .success(let value):
+                    case .success:
                         os_log("Request succeed: Capability", log: sdkLogObject, type: .debug)
                     case .failure(let error):
                         os_log("Request failed %{public}@", log: sdkLogObject, type: .info, error.localizedDescription)

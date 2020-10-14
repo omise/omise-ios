@@ -114,7 +114,7 @@ extension OMSSourceTypeValue {
             return "bill_payment"
         case .barcodeAlipay:
             return "barcode"
-        case .installmentBAY, .installmentFirstChoice, .installmentBBL, .installmentKTC, .installmentKBank:
+        case .installmentBAY, .installmentFirstChoice, .installmentBBL, .installmentKTC, .installmentKBank, .installmentSCB:
             return "installment"
         case .eContext:
             return "econtext"

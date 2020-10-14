@@ -205,7 +205,6 @@ public class CardExpiryDateTextField: OmiseTextField {
             return
         }
         
-        let currentAttributes = defaultTextAttributes
         defer {
             typingAttributes = defaultTextAttributes
         }

@@ -25,6 +25,9 @@
 /* A navigation title for the choosing installment terms screen with the `Krungsri First Choice` selected */
 "installment-number-of-terms-choosers.ktc.navigation-item.title" = "กรุงศรีเฟิร์สช้อยส์";
 
+/* A navigation title for the choosing installment terms screen with the `Siam Commercial Bank` selected */
+"installment-number-of-terms-choosers.scb.navigation-item.title" = "ธนาคารไทยพาณิชย์";
+
 /* Number of terms option text displayed as a title of the number of terms option cell in number of terms chooser scene */
 "installments.number-of-terms-chooser.number-of-terms-cell.label.text" = "%d เดือน";
 
