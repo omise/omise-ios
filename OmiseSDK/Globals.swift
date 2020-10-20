@@ -2,10 +2,10 @@ import Foundation
 import os
 
 
-@available(iOS 10.0, *)
+@available(iOS 11.0, *)
 let sdkLogObject: OSLog = OSLog(subsystem: "co.omise.ios.sdk", category: "SDK")
 
-@available(iOS 10.0, *)
+@available(iOS 11.0, *)
 let uiLogObject: OSLog = OSLog(subsystem: "co.omise.ios.sdk", category: "UI")
 
 

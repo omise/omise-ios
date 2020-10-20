@@ -146,7 +146,7 @@ public class AuthorizingPaymentViewController: UIViewController {
             os_log("Authorization process was cancelled, trying to notify the delegate", log: uiLogObject, type: .info)
         }
         delegate?.authorizingPaymentViewControllerDidCancel(self)
-        if delegate == nil, #available(iOS 10.0, *) {
+        if delegate == nil, #available(iOS 11.0, *) {
             os_log("Authorization process was cancelled but no delegate to be notified", log: uiLogObject, type: .default)
         }
     }
@@ -186,7 +186,7 @@ extension AuthorizingPaymentViewController: WKNavigationDelegate {
             }
             decisionHandler(.cancel)
             delegate?.authorizingPaymentViewController(self, didCompleteAuthorizingPaymentWithRedirectedURL: url)
-            if delegate == nil, #available(iOS 10.0, *) {
+            if delegate == nil, #available(iOS 11.0, *) {
                 os_log("Redirected to expected %{private}@ URL but no delegate to be notified", log: uiLogObject, type: .default, url.absoluteString)
             }
         } else {

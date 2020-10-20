@@ -215,7 +215,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         
         let selectedType = element(forUIIndexPath: indexPath)
         
-        if #available(iOS 10, *) {
+        if #available(iOS 11, *) {
             os_log("Payment Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedType.description)
         }
         switch selectedType {
@@ -346,7 +346,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         
         showingValues = paymentMethodsToShow
         
-        if #available(iOS 10, *) {
+        if #available(iOS 11, *) {
             os_log(
                 "Payment Chooser: Showing options - %{private}@",
                 log: uiLogObject, type: .info,

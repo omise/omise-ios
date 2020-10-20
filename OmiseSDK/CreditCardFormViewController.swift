@@ -757,7 +757,7 @@ extension CreditCardFormViewController {
         updateSupplementaryUI()
     }
     
-    @available(iOS 10, *)
+    @available(iOS 11, *)
     private func configureAccessibility() {
         formLabels.forEach({
             $0.adjustsFontForContentSizeCategory = true

@@ -46,7 +46,7 @@ struct PaymentPreset {
     }
     
     @objc static func imageWith(size: CGSize, actions: (CGContext) -> Void) -> UIImage? {
-        if #available(iOS 10.0, *) {
+        if #available(iOS 11.0, *) {
             let renderer = UIGraphicsImageRenderer(size: size)
             return renderer.image(actions: { context in
                 actions(context.cgContext)

@@ -444,15 +444,15 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
         
         if let paymentDelegate = self.paymentDelegate {
             paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.source(source))
-            if #available(iOS 10, *) {
+            if #available(iOS 11, *) {
                 os_log("Payment Creator Created Source succeed delegate notified", log: uiLogObject, type: .default)
             }
         } else if let paymentDelegate = self.__paymentDelegate {
             paymentDelegate.paymentCreatorController(self, didCreateSource: __OmiseSource(source: source))
-            if #available(iOS 10, *) {
+            if #available(iOS 11, *) {
                 os_log("Payment Creator Created Source succeed delegate notified", log: uiLogObject, type: .default)
             }
-        } else if #available(iOS 10, *) {
+        } else if #available(iOS 11, *) {
             os_log("There is no Payment Creator delegate to notify about the created source", log: uiLogObject, type: .default)
         }
     }
@@ -501,7 +501,7 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
             paymentDelegate.paymentCreatorControllerDidCancel(self)
         } else if let paymentDidCancelDelegateMethod = self.__paymentDelegate?.paymentCreatorControllerDidCancel {
             paymentDidCancelDelegateMethod(self)
-        } else if #available(iOS 10, *) {
+        } else if #available(iOS 11, *) {
             os_log("Payment Creator dismissal requested but there is no delegate to ask. Ignore the request", log: uiLogObject, type: .default)
         }
     }
