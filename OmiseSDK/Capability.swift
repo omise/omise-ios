@@ -107,7 +107,7 @@ extension Capability.Backend.Payment {
             return true
         case (.points(let lhsValue), .points(let rhsValue)):
             return lhsValue == rhsValue
-        case (.installment(let lhsValue), .installment(let rhsValue)):
+        case (.installment(let lhsValue, _), .installment(let rhsValue, _)):
             return lhsValue == rhsValue
         case (.internetBanking(let lhsValue), .internetBanking(let rhsValue)):
             return lhsValue == rhsValue
