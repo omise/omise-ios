@@ -258,15 +258,7 @@ public class PaymentCreatorController : UINavigationController {
         
         paymentSourceCreatorFlowSession.delegate = self
         
-        if #available(iOS 9.0, *) {
-            noticeViewHeightConstraint = displayingNoticeView.heightAnchor.constraint(equalToConstant: 0)
-        } else {
-            noticeViewHeightConstraint = NSLayoutConstraint(
-                item: displayingNoticeView, attribute: .height, relatedBy: .equal,
-                toItem: nil, attribute: .notAnAttribute,
-                multiplier: 1.0, constant: 0
-            )
-        }
+        noticeViewHeightConstraint = displayingNoticeView.heightAnchor.constraint(equalToConstant: 0)
         noticeViewHeightConstraint.isActive = true
         
         let dismissErrorBannerTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissErrorMessageBanner(_:)))
@@ -286,19 +278,11 @@ public class PaymentCreatorController : UINavigationController {
         displayingNoticeView.detailLabel.text = message
         view.insertSubview(self.displayingNoticeView, belowSubview: navigationBar)
         
-        if #available(iOS 9.0, *) {
-            NSLayoutConstraint.activate([
-                displayingNoticeView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
-                displayingNoticeView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                displayingNoticeView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            ])
-        } else {
-            let views = ["displayingNoticeView": displayingNoticeView] as [String: UIView]
-            let constraints = NSLayoutConstraint.constraints(withVisualFormat: "|[displayingNoticeView]|", options: [], metrics: nil, views: views) +
-                [ NSLayoutConstraint(item: displayingNoticeView, attribute: .top, relatedBy: .equal, toItem: navigationBar, attribute: .bottom, multiplier: 1.0, constant: 0)]
-            view.addConstraints(constraints)
-        }
-        
+        NSLayoutConstraint.activate([
+            displayingNoticeView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
+            displayingNoticeView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            displayingNoticeView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
         noticeViewHeightConstraint.isActive = true
         view.layoutIfNeeded()
         
