@@ -194,7 +194,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         
         updateSupplementaryUI()
         
-        if #available(iOSApplicationExtension 10.0, *) {
+        if #available(iOSApplicationExtension 11.0, *) {
             os_log("The custom credit card information was set - %{private}@",
                    log: uiLogObject, type: .debug, String((number ?? "").suffix(4)))
         }
@@ -281,7 +281,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         
         updateSupplementaryUI()
         
-        if #available(iOSApplicationExtension 10.0, *) {
+        if #available(iOSApplicationExtension 11.0, *) {
             configureAccessibility()
             formFields.forEach({
                 $0.adjustsFontForContentSizeCategory = true
@@ -343,7 +343,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     }
     
     public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        if #available(iOSApplicationExtension 10.0, *) {
+        if #available(iOSApplicationExtension 11.0, *) {
             if previousTraitCollection?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
                 view.setNeedsUpdateConstraints()
             }
@@ -369,25 +369,25 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     
     @discardableResult
     private func performCancelingForm() -> Bool {
-        if #available(iOSApplicationExtension 10.0, *) {
+        if #available(iOSApplicationExtension 11.0, *) {
             os_log("Credit Card Form dismissing requested, Asking the delegate what should the form controler do",
                    log: uiLogObject, type: .default)
         }
         
         if let delegate = self.delegate {
             delegate.creditCardFormViewControllerDidCancel(self)
-            if #available(iOSApplicationExtension 10.0, *) {
+            if #available(iOSApplicationExtension 11.0, *) {
                 os_log("Canceling form delegate notified", log: uiLogObject, type: .default)
             }
             return true
         } else if let delegateMethod = __delegate?.creditCardFormViewControllerDidCancel {
             delegateMethod(self)
-            if #available(iOSApplicationExtension 10.0, *) {
+            if #available(iOSApplicationExtension 11.0, *) {
                 os_log("Canceling form delegate notified", log: uiLogObject, type: .default)
             }
             return true
         } else {
-            if #available(iOSApplicationExtension 10.0, *) {
+            if #available(iOSApplicationExtension 11.0, *) {
                 os_log("Credit Card Form dismissing requested but there is not delegate to ask. Ignore the request",
                        log: uiLogObject, type: .default)
             }
@@ -401,14 +401,14 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         UIAccessibility.post(notification: AccessibilityNotificationAnnouncement, argument: "Submitting payment, please wait")
         
         guard let publicKey = publicKey else {
-            if #available(iOSApplicationExtension 10.0, *) {
+            if #available(iOSApplicationExtension 11.0, *) {
                 os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.publicKey ?? "")
             }
             assertionFailure("Missing public key information. Please set the public key before request token.")
             return
         }
         
-        if #available(iOSApplicationExtension 10.0, *) {
+        if #available(iOSApplicationExtension 11.0, *) {
             os_log("Requesting to create token", log: uiLogObject, type: .info)
         }
         
@@ -428,20 +428,20 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             strongSelf.stopActivityIndicator()
             switch result {
             case let .success(token):
-                if #available(iOSApplicationExtension 10.0, *) {
+                if #available(iOSApplicationExtension 11.0, *) {
                     os_log("Credit Card Form's Request succeed %{private}@, trying to notify the delegate", log: uiLogObject, type: .default, token.id)
                 }
                 if let delegate = strongSelf.delegate {
                     delegate.creditCardFormViewController(strongSelf, didSucceedWithToken: token)
-                    if #available(iOSApplicationExtension 10.0, *) {
+                    if #available(iOSApplicationExtension 11.0, *) {
                         os_log("Credit Card Form Create Token succeed delegate notified", log: uiLogObject, type: .default)
                     }
                 } else if let delegate = strongSelf.__delegate {
                     delegate.creditCardFormViewController(strongSelf, didSucceedWithToken: __OmiseToken(token: token))
-                    if #available(iOSApplicationExtension 10.0, *) {
+                    if #available(iOSApplicationExtension 11.0, *) {
                         os_log("Credit Card Form Create Token succeed delegate notified", log: uiLogObject, type: .default)
                     }
-                } else if #available(iOSApplicationExtension 10.0, *) {
+                } else if #available(iOSApplicationExtension 11.0, *) {
                     os_log("There is no Credit Card Form's delegate to notify about the created token", log: uiLogObject, type: .default)
                 }
             case let .failure(err):
@@ -483,26 +483,26 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     
     private func handleError(_ error: Error) {
         guard handleErrors else {
-            if #available(iOSApplicationExtension 10.0, *) {
+            if #available(iOSApplicationExtension 11.0, *) {
                 os_log("Credit Card Form's Request failed %{private}@, automatically error handling turned off. Trying to notify the delegate", log: uiLogObject, type: .info, error.localizedDescription)
             }
             if let delegate = self.delegate {
                 delegate.creditCardFormViewController(self, didFailWithError: error)
-                if #available(iOSApplicationExtension 10.0, *) {
+                if #available(iOSApplicationExtension 11.0, *) {
                     os_log("Error handling delegate notified", log: uiLogObject, type: .default)
                 }
             } else if let delegate = self.__delegate {
                 delegate.creditCardFormViewController(self, didFailWithError: error as NSError)
-                if #available(iOSApplicationExtension 10.0, *) {
+                if #available(iOSApplicationExtension 11.0, *) {
                     os_log("Error handling delegate notified", log: uiLogObject, type: .default)
                 }
-            } else if #available(iOSApplicationExtension 10.0, *) {
+            } else if #available(iOSApplicationExtension 11.0, *) {
                 os_log("There is no Credit Card Form's delegate to notify about the error", log: uiLogObject, type: .default)
             }
             return
         }
         
-        if #available(iOSApplicationExtension 10.0, *) {
+        if #available(iOSApplicationExtension 11.0, *) {
             os_log("Credit Card Form's Request failed %{private}@, automatically error handling turned on.", log: uiLogObject, type: .default, error.localizedDescription)
         }
         

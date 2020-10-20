@@ -305,7 +305,7 @@ extension CardExpiryDateTextField {
             expirationYearFrameInTextfield = yearFrame
         }
         
-        if #available(iOSApplicationExtension 10.0, *) {
+        if #available(iOSApplicationExtension 11.0, *) {
             expirationMonthAccessibilityElement.accessibilityFrameInContainerSpace = expirationMonthFrameInTextfield.integral
             expirationYearAccessibilityElement.accessibilityFrameInContainerSpace = expirationYearFrameInTextfield.integral
         } else {

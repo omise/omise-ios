@@ -18,7 +18,7 @@ import os
         if publicKey.hasPrefix("pkey_") {
             self.publicKey = publicKey
         } else {
-            if #available(iOSApplicationExtension 10.0, *) {
+            if #available(iOSApplicationExtension 11.0, *) {
                 os_log("Refusing to initialize sdk client with a non-public key: %{private}@", log: sdkLogObject, type: .error, publicKey)
             }
             assertionFailure("Refusing to initialize sdk client with a non-public key.")
@@ -78,7 +78,7 @@ import os
             
             var result: RequestResult<Capability>
             defer {
-                if #available(iOSApplicationExtension 10.0, *) {
+                if #available(iOSApplicationExtension 11.0, *) {
                     switch result {
                     case .success:
                         os_log("Request succeed: Capability", log: sdkLogObject, type: .debug)
@@ -199,7 +199,7 @@ extension Client {
             
             var result: RequestResult<T>
             defer {
-                if #available(iOSApplicationExtension 10.0, *) {
+                if #available(iOSApplicationExtension 11.0, *) {
                     switch result {
                     case .success(let value):
                         os_log("Request succeed %{private}@", log: sdkLogObject, type: .debug, value.id)

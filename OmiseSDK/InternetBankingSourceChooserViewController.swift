@@ -8,7 +8,7 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
     
     override var showingValues: [PaymentInformation.InternetBanking] {
         didSet {
-            if #available(iOSApplicationExtension 10.0, *) {
+            if #available(iOSApplicationExtension 11.0, *) {
                 os_log("Internet Banking Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
             }
         }
@@ -66,7 +66,7 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         tableView.deselectRow(at: indexPath, animated: true)
         let bank = element(forUIIndexPath: indexPath)
         
-        if #available(iOSApplicationExtension 10.0, *) {
+        if #available(iOSApplicationExtension 11.0, *) {
             os_log("Internet Banking Chooser: %{private}@ was selected", log: uiLogObject, type: .info, bank.description)
         }
         

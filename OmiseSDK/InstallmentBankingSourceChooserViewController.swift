@@ -8,7 +8,7 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
     
     override var showingValues: [PaymentInformation.Installment.Brand] {
         didSet {
-            if #available(iOSApplicationExtension 10.0, *) {
+            if #available(iOSApplicationExtension 11.0, *) {
                 os_log("Installment Brand Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
             }
         }
@@ -70,7 +70,7 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
         }
         
         let selectedBrand = element(forUIIndexPath: indexPath)
-        if #available(iOSApplicationExtension 10.0, *) {
+        if #available(iOSApplicationExtension 11.0, *) {
             os_log("Installment Brand Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedBrand.description)
         }
         

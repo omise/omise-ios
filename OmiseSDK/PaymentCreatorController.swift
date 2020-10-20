@@ -40,7 +40,7 @@ public class PaymentCreatorController : UINavigationController {
     @objc public var publicKey: String? {
         didSet {
             guard let publicKey = publicKey else {
-                if #available(iOSApplicationExtension 10.0, *) {
+                if #available(iOSApplicationExtension 11.0, *) {
                     os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.publicKey ?? "")
                 }
                 assertionFailure("Missing public key information. Please set the public key before request token.")
@@ -426,7 +426,7 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
     }
     
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreateToken token: Token) {
-        if #available(iOSApplicationExtension 10.0, *) {
+        if #available(iOSApplicationExtension 11.0, *) {
             os_log("Credit Card Form in Payment Createor - Request succeed %{private}@, trying to notify the delegate", log: uiLogObject, type: .default, token.id)
         }
         
@@ -438,7 +438,7 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
     }
     
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreatedSource source: Source) {
-        if #available(iOSApplicationExtension 10.0, *) {
+        if #available(iOSApplicationExtension 11.0, *) {
             os_log("Payment Creator Create Source Request succeed %{private}@, trying to notify the delegate", log: uiLogObject, type: .default, source.id)
         }
         
@@ -459,20 +459,20 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
     
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didFailWithError error: Error) {
         if !handleErrors {
-            if #available(iOSApplicationExtension 10.0, *) {
+            if #available(iOSApplicationExtension 11.0, *) {
                 os_log("Payment Creator Request failed %{private}@, automatically error handling turned off. Trying to notify the delegate", log: uiLogObject, type: .info, error.localizedDescription)
             }
             if let paymentDelegate = self.paymentDelegate {
                 paymentDelegate.paymentCreatorController(self, didFailWithError: error)
-                if #available(iOSApplicationExtension 10.0, *) {
+                if #available(iOSApplicationExtension 11.0, *) {
                     os_log("Payment Creator error handling delegate notified", log: uiLogObject, type: .default)
                 }
             } else if let paymentDelegate = self.__paymentDelegate {
                 paymentDelegate.paymentCreatorController(self, didFailWithError: error)
-                if #available(iOSApplicationExtension 10.0, *) {
+                if #available(iOSApplicationExtension 11.0, *) {
                     os_log("Payment Creator error handling delegate notified", log: uiLogObject, type: .default)
                 }
-            } else if #available(iOSApplicationExtension 10.0, *) {
+            } else if #available(iOSApplicationExtension 11.0, *) {
                 os_log("There is no Payment Creator delegate to notify about the error", log: uiLogObject, type: .default)
             }
         } else if let error = error as? OmiseError {
@@ -486,13 +486,13 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
                              animated: true, sender: self)
         }
         
-        if #available(iOSApplicationExtension 10.0, *) {
+        if #available(iOSApplicationExtension 11.0, *) {
             os_log("Payment Creator Request failed %{private}@, automatically error handling turned on.", log: uiLogObject, type: .default, error.localizedDescription)
         }
     }
     
     func paymentCreatorFlowSessionDidCancel(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession) {
-        if #available(iOSApplicationExtension 10.0, *) {
+        if #available(iOSApplicationExtension 11.0, *) {
             os_log("Payment Creator dismissal requested. Asking the delegate what should the controler do",
                    log: uiLogObject, type: .default)
         }

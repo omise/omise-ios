@@ -14,7 +14,7 @@ public class RequestTask<T: CreatableObject> {
     
     public func resume() {
         dataTask.resume()
-        if #available(iOSApplicationExtension 10.0, *) {
+        if #available(iOSApplicationExtension 11.0, *) {
             os_log("Starting/Resuming Request %{public}@", log: sdkLogObject, type: .debug, String(describing: type(of: T.self)))
         }
     }

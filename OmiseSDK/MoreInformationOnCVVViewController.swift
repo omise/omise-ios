@@ -287,7 +287,7 @@ extension OverlayPanelPresentationController: UIViewControllerAnimatedTransition
             controller.view.alpha = finalAlpha
         }
 
-        if #available(iOSApplicationExtension 10.0, *) {
+        if #available(iOSApplicationExtension 11.0, *) {
             let animator = UIViewPropertyAnimator(duration: animationDuration, timingParameters: UISpringTimingParameters())
             animator.addAnimations(animationBlock)
             animator.addCompletion({ position in
