@@ -10,18 +10,6 @@ public protocol PaymentCreatorControllerDelegate: NSObjectProtocol {
     func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController)
 }
 
-
-@objc public protocol OMSPaymentCreatorControllerDelegate: NSObjectProtocol {
-    @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
-                                  didCreateToken token: __OmiseToken)
-    @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
-                                  didCreateSource source: __OmiseSource)
-    @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
-                                  didFailWithError error: Error)
-    @objc optional func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController)
-}
-
-
 public enum Payment {
     case token(Token)
     case source(Source)
@@ -93,7 +81,7 @@ public class PaymentCreatorController : UINavigationController {
     
     /// Available Source payment options to let user to choose.
     /// The default value is the default available payment method for merchant in Thailand
-    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentCreatorController.thailandDefaultAvailableSourceMethods {
+    public var allowedPaymentMethods: [SourceType] = PaymentCreatorController.thailandDefaultAvailableSourceMethods {
         didSet {
             paymentChooserViewController.allowedPaymentMethods = allowedPaymentMethods
         }
@@ -108,8 +96,6 @@ public class PaymentCreatorController : UINavigationController {
     
     /// Delegate to receive CreditCardFormController result.
     public weak var paymentDelegate: PaymentCreatorControllerDelegate?
-    /// Delegate to receive CreditCardFormController result.
-    @objc(paymentDelegate) public weak var __paymentDelegate: OMSPaymentCreatorControllerDelegate?
 
     var client: Client? {
         didSet {
@@ -151,7 +137,7 @@ public class PaymentCreatorController : UINavigationController {
     /// - parameter publicKey: Omise public key.
     public static func makePaymentCreatorControllerWith(
         publicKey: String, amount: Int64, currency: Currency,
-        allowedPaymentMethods: [OMSSourceTypeValue],
+        allowedPaymentMethods: [SourceType],
         paymentDelegate: PaymentCreatorControllerDelegate?) -> PaymentCreatorController {
         let omiseBundle = Bundle(for: self)
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: omiseBundle)
@@ -163,21 +149,6 @@ public class PaymentCreatorController : UINavigationController {
         paymentCreatorController.paymentDelegate = paymentDelegate
         
         return paymentCreatorController
-    }
-    
-    /// Factory method for creating CreditCardFormController with given public key.
-    /// - parameter publicKey: Omise public key.
-    @objc(paymentCreatorControllerWithPublicKey:amount:currency:allowedPaymentMethods:paymentDelegate:)
-    public static func __makePaymentCreatorViewControllerWith(
-        publicKey: String, amount: Int64, currencyCode: String,
-        allowedPaymentMethods: [OMSSourceTypeValue],
-        paymentDelegate: OMSPaymentCreatorControllerDelegate) -> PaymentCreatorController {
-        let controller = PaymentCreatorController.makePaymentCreatorControllerWith(
-            publicKey: publicKey, amount: amount, currency: Currency(code: currencyCode),
-            allowedPaymentMethods: allowedPaymentMethods,
-            paymentDelegate: nil)
-        controller.__paymentDelegate = paymentDelegate
-        return controller
     }
 
     public init() {
@@ -242,12 +213,7 @@ public class PaymentCreatorController : UINavigationController {
     public func applyPaymentMethods(from capability: Capability) {
         paymentChooserViewController.applyPaymentMethods(from: capability)
     }
-    
-    @objc(applyPaymentMethodsFrom:)
-    public func __applyPaymentMethods(from capability: __OmiseCapability) {
-        applyPaymentMethods(from: capability.capability)
-    }
-    
+        
     private func initializeWithPaymentChooserViewController(_ viewController: PaymentChooserViewController) {
         viewController.preferredPrimaryColor = preferredPrimaryColor
         viewController.preferredSecondaryColor = preferredSecondaryColor
@@ -432,8 +398,6 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
         
         if let paymentDelegate = self.paymentDelegate {
             paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.token(token))
-        } else if let paymentDelegate = self.__paymentDelegate {
-            paymentDelegate.paymentCreatorController(self, didCreateToken: __OmiseToken(token: token))
         }
     }
     
@@ -444,11 +408,6 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
         
         if let paymentDelegate = self.paymentDelegate {
             paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.source(source))
-            if #available(iOS 11, *) {
-                os_log("Payment Creator Created Source succeed delegate notified", log: uiLogObject, type: .default)
-            }
-        } else if let paymentDelegate = self.__paymentDelegate {
-            paymentDelegate.paymentCreatorController(self, didCreateSource: __OmiseSource(source: source))
             if #available(iOS 11, *) {
                 os_log("Payment Creator Created Source succeed delegate notified", log: uiLogObject, type: .default)
             }
@@ -463,11 +422,6 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
                 os_log("Payment Creator Request failed %{private}@, automatically error handling turned off. Trying to notify the delegate", log: uiLogObject, type: .info, error.localizedDescription)
             }
             if let paymentDelegate = self.paymentDelegate {
-                paymentDelegate.paymentCreatorController(self, didFailWithError: error)
-                if #available(iOSApplicationExtension 11.0, *) {
-                    os_log("Payment Creator error handling delegate notified", log: uiLogObject, type: .default)
-                }
-            } else if let paymentDelegate = self.__paymentDelegate {
                 paymentDelegate.paymentCreatorController(self, didFailWithError: error)
                 if #available(iOSApplicationExtension 11.0, *) {
                     os_log("Payment Creator error handling delegate notified", log: uiLogObject, type: .default)
@@ -499,8 +453,6 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
         
         if let paymentDelegate = self.paymentDelegate {
             paymentDelegate.paymentCreatorControllerDidCancel(self)
-        } else if let paymentDidCancelDelegateMethod = self.__paymentDelegate?.paymentCreatorControllerDidCancel {
-            paymentDidCancelDelegateMethod(self)
         } else if #available(iOS 11, *) {
             os_log("Payment Creator dismissal requested but there is no delegate to ask. Ignore the request", log: uiLogObject, type: .default)
         }
@@ -509,7 +461,7 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
 
 
 extension PaymentCreatorController {
-    public static let thailandDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
+    public static let thailandDefaultAvailableSourceMethods: [SourceType] = [
         .internetBankingBAY,
         .internetBankingKTB,
         .internetBankingSCB,
@@ -522,27 +474,27 @@ extension PaymentCreatorController {
         .installmentKTC,
         .installmentKBank,
         .installmentSCB,
-        .promptPay,
-        .trueMoney,
+        .promptpay,
+        .truemoney,
         .pointsCiti
     ]
     
-    public static let japanDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
-        .eContext,
+    public static let japanDefaultAvailableSourceMethods: [SourceType] = [
+        .econtext,
     ]
     
-    public static let singaporeDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
-        .payNow,
+    public static let singaporeDefaultAvailableSourceMethods: [SourceType] = [
+        .paynow,
     ]
     
-    public static let internetBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
+    public static let internetBankingAvailablePaymentMethods: [SourceType] = [
         .internetBankingBAY,
         .internetBankingKTB,
         .internetBankingSCB,
         .internetBankingBBL,
     ]
     
-    public static let installmentsBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
+    public static let installmentsBankingAvailablePaymentMethods: [SourceType] = [
         .installmentBAY,
         .installmentFirstChoice,
         .installmentBBL,
@@ -551,11 +503,11 @@ extension PaymentCreatorController {
         .installmentSCB,
     ]
     
-    public static let billPaymentAvailablePaymentMethods: [OMSSourceTypeValue] = [
+    public static let billPaymentAvailablePaymentMethods: [SourceType] = [
         .billPaymentTescoLotus,
     ]
     
-    public static let barcodeAvailablePaymentMethods: [OMSSourceTypeValue] = [
+    public static let barcodeAvailablePaymentMethods: [SourceType] = [
         .barcodeAlipay,
     ]
 }
