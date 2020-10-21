@@ -103,35 +103,6 @@ struct SkippingKeyCodingKeys<Key: CodingKey> : CodingKey {
     }
 }
 
-extension OMSSourceTypeValue {
-    var sourceTypePrefix: String {
-        switch self {
-        case .internetBankingBAY, .internetBankingKTB, .internetBankingSCB, .internetBankingBBL:
-            return "internet_banking"
-        case .alipay:
-            return "alipay"
-        case .billPaymentTescoLotus:
-            return "bill_payment"
-        case .barcodeAlipay:
-            return "barcode"
-        case .installmentBAY, .installmentFirstChoice, .installmentBBL, .installmentKTC, .installmentKBank, .installmentSCB:
-            return "installment"
-        case .eContext:
-            return "econtext"
-        case .promptPay:
-            return "promptpay"
-        case .payNow:
-            return "paynow"
-        case .trueMoney:
-            return "truemoney"
-        case .pointsCiti:
-            return "points"
-        default:
-            return self.rawValue
-        }
-    }
-}
-
 extension Decoder {
     func decodeJSONDictionary() throws -> Dictionary<String, Any> {
         let container = try self.container(keyedBy: JSONCodingKeys.self)
