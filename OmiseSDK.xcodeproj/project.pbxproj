@@ -90,6 +90,8 @@
 		8AF985732147CC3D007E18ED /* Error.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8AF985752147CC3D007E18ED /* Error.strings */; };
 		8AFB920F20D39BE50072B185 /* OmiseTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A81D0FEE85008CD89F /* OmiseTokenRequest.swift */; };
 		8AFE10BB20B69B39008E741D /* ClientTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE10BA20B69B39008E741D /* ClientTestCase.swift */; };
+		98201F17253FF27B00054237 /* SourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98201F16253FF27B00054237 /* SourceType.swift */; };
+		9823EF5C2540279100BCDEAA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9823EF5B2540279100BCDEAA /* BaseViewController.swift */; };
 		986406301CFEA7E4004BCF51 /* CardCVVTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062A1CFEA7E4004BCF51 /* CardCVVTextField.swift */; };
 		986406311CFEA7E4004BCF51 /* CardExpiryDateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062B1CFEA7E4004BCF51 /* CardExpiryDateTextField.swift */; };
 		986406321CFEA7E4004BCF51 /* CardNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062C1CFEA7E4004BCF51 /* CardNumberTextField.swift */; };
@@ -244,6 +246,8 @@
 		8AF985762147CF3B007E18ED /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Error.strings; sourceTree = "<group>"; };
 		8AF985772147CF3B007E18ED /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = th; path = th.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		8AFE10BA20B69B39008E741D /* ClientTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTestCase.swift; sourceTree = "<group>"; };
+		98201F16253FF27B00054237 /* SourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceType.swift; sourceTree = "<group>"; };
+		9823EF5B2540279100BCDEAA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		9864062A1CFEA7E4004BCF51 /* CardCVVTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCVVTextField.swift; sourceTree = "<group>"; };
 		9864062B1CFEA7E4004BCF51 /* CardExpiryDateTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardExpiryDateTextField.swift; sourceTree = "<group>"; };
 		9864062C1CFEA7E4004BCF51 /* CardNumberTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumberTextField.swift; sourceTree = "<group>"; };
@@ -393,6 +397,7 @@
 				8A47173C20AAB11B0022733A /* Source.swift */,
 				8A01E48C21059EFF00D73FE6 /* SourcePaymentMethod.swift */,
 				8A47173920AAB0F40022733A /* Token.swift */,
+				98201F16253FF27B00054237 /* SourceType.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -436,6 +441,7 @@
 			children = (
 				229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */,
 				8AF56E61226878070097CFEE /* CustomCreditCardFormViewController.swift */,
+				9823EF5B2540279100BCDEAA /* BaseViewController.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -735,6 +741,7 @@
 				8A47173D20AAB11B0022733A /* Source.swift in Sources */,
 				986406351CFEA7E4004BCF51 /* OmiseTextField.swift in Sources */,
 				2220F1AD1D0FEE85008CD89F /* OmiseToken.swift in Sources */,
+				98201F17253FF27B00054237 /* SourceType.swift in Sources */,
 				8AF9857221479F72007E18ED /* CreditCardFormViewController.swift in Sources */,
 				8AC1D3A32139224D0051F966 /* InternetBankingSourceChooserViewController.swift in Sources */,
 				2220F1A91D0FEE85008CD89F /* OmiseCard.swift in Sources */,
@@ -780,6 +787,7 @@
 				8A6AA06E216B9DAE00E49E5E /* OMSBaseViewController.m in Sources */,
 				8A40DA2B216B53E900749F45 /* Tools.swift in Sources */,
 				229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */,
+				9823EF5C2540279100BCDEAA /* BaseViewController.swift in Sources */,
 				8AF56E62226878070097CFEE /* CustomCreditCardFormViewController.swift in Sources */,
 				8A7A9EC12166578700F12D86 /* Swift Version Compatability.swift in Sources */,
 			);
