@@ -1,4 +1,5 @@
 import UIKit
+import OmiseSDK
 
 protocol CustomCreditCardFormViewControllerDelegate: AnyObject {
     /// Delegate method for receiving token data when card tokenization succeeds.
