@@ -15,7 +15,7 @@ public struct Capability: Object {
         return backends[.card]
     }
     
-    public subscript(type: OMSSourceTypeValue) -> Capability.Backend? {
+    public subscript(type: SourceType) -> Capability.Backend? {
         return backends[.source(type)]
     }
 }
@@ -24,7 +24,7 @@ public struct Capability: Object {
 extension Capability {
     public static func ~=(lhs: Capability, rhs: CreateSourceParameter) -> Bool {
         func backend(from capability: Capability, for payment: PaymentInformation) -> Backend? {
-            let paymentSourceType = OMSSourceTypeValue(payment.sourceType)
+            let paymentSourceType = SourceType(payment.sourceType)
             return capability[paymentSourceType]
         }
         
@@ -166,28 +166,28 @@ extension Capability.Backend {
         case .card:
             let supportedBrand = try container.decode(Set<CardBrand>.self, forKey: .cardBrands)
             self.payment = .card(supportedBrand)
-        case .source(let value) where value.isInstallmentSource:
+        case .source(let sourceType) where sourceType.isInstallmentSource:
             let allowedInstallmentTerms = IndexSet(try container.decode(Array<Int>.self, forKey: .allowedInstallmentTerms))
-            self.payment = .installment(value.installmentBrand!, availableNumberOfTerms: allowedInstallmentTerms)
+            self.payment = .installment(sourceType.installmentBrand!, availableNumberOfTerms: allowedInstallmentTerms)
         case .source(.alipay):
             self.payment = .alipay
-        case .source(let value) where value.isInternetBankingSource:
-            self.payment = .internetBanking(value.internetBankingSource!)
-        case .source(.promptPay):
+        case .source(let sourceType) where sourceType.isInternetBankingSource:
+            self.payment = .internetBanking(sourceType.internetBankingSource!)
+        case .source(.promptpay):
             self.payment = .promptpay
-        case .source(.payNow):
+        case .source(.paynow):
             self.payment = .paynow
-        case .source(.trueMoney):
+        case .source(.truemoney):
             self.payment = .truemoney
         case .source(.pointsCiti):
             self.payment = .points(.citiPoints)
         case .source(.billPaymentTescoLotus):
             self.payment = .billPayment(.tescoLotus)
-        case .source(.eContext):
+        case .source(.econtext):
             self.payment = .eContext
-        case .source(let value):
+        case .source(let sourceType):
             let configurations = try container.decodeJSONDictionary()
-            self.payment = .unknownSource(value.rawValue, configurations: configurations)
+            self.payment = .unknownSource(sourceType.value, configurations: configurations)
         }
     }
     
@@ -217,7 +217,7 @@ private let creditCardBackendTypeValue = "card"
 extension Capability.Backend {
     fileprivate enum BackendType: Codable, Hashable {
         case card
-        case source(OMSSourceTypeValue)
+        case source(SourceType)
         
         init(from decoder: Decoder) throws {
             let container = try decoder.singleValueContainer()
@@ -225,7 +225,7 @@ extension Capability.Backend {
             case creditCardBackendTypeValue:
                 self = .card
             case let value:
-                self = .source(OMSSourceTypeValue(value))
+                self = .source(SourceType(value))
             }
         }
         
@@ -236,7 +236,7 @@ extension Capability.Backend {
             case .card:
                 type = creditCardBackendTypeValue
             case .source(let sourceType):
-                type = sourceType.rawValue
+                type = sourceType.value
             }
 
             try container.encode(type)
@@ -249,23 +249,23 @@ extension Capability.Backend {
             case .alipay:
                 self = .source(.alipay)
             case .installment(let brand, availableNumberOfTerms: _):
-                self = .source(OMSSourceTypeValue(brand.type))
+                self = .source(SourceType(brand.type))
             case .internetBanking(let banking):
-                self = .source(OMSSourceTypeValue(banking.type))
+                self = .source(SourceType(banking.type))
             case .billPayment(let billPayment):
-                self = .source(OMSSourceTypeValue(billPayment.type))
+                self = .source(SourceType(billPayment.type))
             case .unknownSource(let sourceType, configurations: _):
                 self = .source(.init(sourceType))
             case .promptpay:
-                self = .source(.promptPay)
+                self = .source(.promptpay)
             case .paynow:
-                self = .source(.payNow)
+                self = .source(.paynow)
             case .truemoney:
-                self = .source(.trueMoney)
+                self = .source(.truemoney)
             case .points(let points):
-                self = .source(OMSSourceTypeValue(points.type))
+                self = .source(SourceType(points.type))
             case .eContext:
-                self = .source(.eContext)
+                self = .source(.econtext)
             }
         }
         
@@ -274,7 +274,7 @@ extension Capability.Backend {
             case .card:
                 return "card"
             case .source(let sourceType):
-                let sourceTypeValuePrefix = sourceType.sourceTypePrefix
+                let sourceTypeValuePrefix = sourceType.prefix
                 if sourceTypeValuePrefix.hasSuffix("_") {
                     return sourceTypeValuePrefix.lastIndex(of: "_").map(sourceTypeValuePrefix.prefix(upTo:)).map(String.init) ?? sourceTypeValuePrefix
                 } else {
