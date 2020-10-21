@@ -21,23 +21,3 @@ extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePromptPay;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePayNow;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueTrueMoney;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePointsCiti;
-
-
-typedef NSString * OMSSupportedCurrencyCode NS_EXTENSIBLE_STRING_ENUM;
-
-extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeTHB;
-extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeJPY;
-extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeIDR;
-extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeSGD;
-extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeUSD;
-extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeGBP;
-extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeEUR;
-extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeMYR;
-
-extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeAUD;
-extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeCAD;
-extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeCHF;
-extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeCNY;
-extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeDKK;
-extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeHKD;
-
