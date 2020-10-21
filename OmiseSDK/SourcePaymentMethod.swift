@@ -50,7 +50,7 @@ public enum PaymentInformation: Codable, Equatable {
         public var type: String {
             switch self {
             case .alipay:
-                return OMSSourceTypeValue.barcodeAlipay.rawValue
+                return SourceType.barcodeAlipay.value
             case .other(let value, _):
                 return Barcode.paymentMethodTypePrefix + value
             }
@@ -112,9 +112,9 @@ public enum PaymentInformation: Codable, Equatable {
     
     /// The EContext customer information
     public struct EContext: PaymentMethod, Codable, Equatable {
-        public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.eContext.rawValue
+        public static var paymentMethodTypePrefix: String = SourceType.econtext.value
         
-        public let type: String = OMSSourceTypeValue.eContext.rawValue
+        public let type: String = SourceType.econtext.value
         
         /// Customer name. The name cannot be longer than 10 characters
         public let name: String
@@ -153,9 +153,9 @@ public enum PaymentInformation: Codable, Equatable {
     /// The TrueMoney customer information
     public struct TrueMoney: PaymentMethod {
         
-        public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.trueMoney.rawValue
+        public static var paymentMethodTypePrefix: String = SourceType.truemoney.value
         
-        public var type: String = OMSSourceTypeValue.trueMoney.rawValue
+        public var type: String = SourceType.truemoney.value
         
         /// The customers phone number. Contains only digits and has 10 or 11 characters
         public let phoneNumber: String
@@ -211,13 +211,13 @@ public enum PaymentInformation: Codable, Equatable {
             self = .installment(try Installment(from: decoder))
         case PaymentInformation.EContext.self:
             self = .eContext(try EContext(from: decoder))
-        case OMSSourceTypeValue.alipay.rawValue:
+        case SourceType.alipay.value:
             self = .alipay
-        case OMSSourceTypeValue.promptPay.rawValue:
+        case SourceType.promptpay.value:
             self = .promptpay
-        case OMSSourceTypeValue.payNow.rawValue:
+        case SourceType.paynow.value:
             self = .paynow
-        case OMSSourceTypeValue.trueMoney.rawValue:
+        case SourceType.truemoney.value:
             self = .truemoney(try TrueMoney(from: decoder))
         case PaymentInformation.Points.self:
             self = .points(try Points(from: decoder))
@@ -247,20 +247,20 @@ public enum PaymentInformation: Codable, Equatable {
             try value.encode(to: encoder)
         case .alipay:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.alipay.rawValue, forKey: .type)
+            try container.encode(SourceType.alipay.value, forKey: .type)
         case .eContext(let eContext):
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.eContext.rawValue, forKey: .type)
+            try container.encode(SourceType.econtext.value, forKey: .type)
             try eContext.encode(to: encoder)
         case .promptpay:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.promptPay.rawValue, forKey: .type)
+            try container.encode(SourceType.promptpay.value, forKey: .type)
         case .paynow:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.payNow.rawValue, forKey: .type)
+            try container.encode(SourceType.paynow.value, forKey: .type)
         case .truemoney(let trueMoney):
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.trueMoney.rawValue, forKey: .type)
+            try container.encode(SourceType.truemoney.value, forKey: .type)
             try trueMoney.encode(to: encoder)
         case .points(let points):
             try points.encode(to: encoder)
@@ -317,7 +317,7 @@ extension PaymentInformation {
     public var sourceType: String {
         switch self {
         case .alipay:
-            return OMSSourceTypeValue.alipay.rawValue
+            return SourceType.alipay.value
         case .barcode(let barcode):
             return barcode.type
         case .billPayment(let billPayment):
@@ -327,13 +327,13 @@ extension PaymentInformation {
         case .internetBanking(let bank):
             return bank.type
         case .eContext:
-            return OMSSourceTypeValue.eContext.rawValue
+            return SourceType.econtext.value
         case .promptpay:
-            return OMSSourceTypeValue.promptPay.rawValue
+            return SourceType.promptpay.value
         case .paynow:
-            return OMSSourceTypeValue.payNow.rawValue
+            return SourceType.paynow.value
         case .truemoney:
-            return OMSSourceTypeValue.trueMoney.rawValue
+            return SourceType.truemoney.value
         case .points(let points):
             return points.type
         case .other(let value, _):
@@ -353,13 +353,13 @@ extension PaymentInformation.InternetBanking : StaticElementIterable, CustomStri
     public var type: String {
         switch self {
         case .bay:
-            return OMSSourceTypeValue.internetBankingBAY.rawValue
+            return SourceType.internetBankingBAY.value
         case .ktb:
-            return OMSSourceTypeValue.internetBankingKTB.rawValue
+            return SourceType.internetBankingKTB.value
         case .scb:
-            return OMSSourceTypeValue.internetBankingSCB.rawValue
+            return SourceType.internetBankingSCB.value
         case .bbl:
-            return OMSSourceTypeValue.internetBankingBBL.rawValue
+            return SourceType.internetBankingBBL.value
         case .other(let value):
             return PaymentInformation.InternetBanking.paymentMethodTypePrefix + value
         }
@@ -414,17 +414,17 @@ extension PaymentInformation.Installment {
     public var type: String {
         switch brand {
         case .bay:
-            return OMSSourceTypeValue.installmentBAY.rawValue
+            return SourceType.installmentBAY.value
         case .firstChoice:
-            return OMSSourceTypeValue.installmentFirstChoice.rawValue
+            return SourceType.installmentFirstChoice.value
         case .bbl:
-            return OMSSourceTypeValue.installmentBBL.rawValue
+            return SourceType.installmentBBL.value
         case .ktc:
-            return OMSSourceTypeValue.installmentKTC.rawValue
+            return SourceType.installmentKTC.value
         case .kBank:
-            return OMSSourceTypeValue.installmentKBank.rawValue
+            return SourceType.installmentKBank.value
         case .scb:
-            return OMSSourceTypeValue.installmentSCB.rawValue
+            return SourceType.installmentSCB.value
         case .other(let value):
             return PaymentInformation.Installment.paymentMethodTypePrefix + value
         }
@@ -501,17 +501,17 @@ extension PaymentInformation.Installment.Brand : StaticElementIterable, CustomSt
     public var type: String {
         switch self {
         case .bay:
-            return OMSSourceTypeValue.installmentBAY.rawValue
+            return SourceType.installmentBAY.value
         case .firstChoice:
-            return OMSSourceTypeValue.installmentFirstChoice.rawValue
+            return SourceType.installmentFirstChoice.value
         case .bbl:
-            return OMSSourceTypeValue.installmentBBL.rawValue
+            return SourceType.installmentBBL.value
         case .ktc:
-            return OMSSourceTypeValue.installmentKTC.rawValue
+            return SourceType.installmentKTC.value
         case .kBank:
-            return OMSSourceTypeValue.installmentKBank.rawValue
+            return SourceType.installmentKBank.value
         case .scb:
-            return OMSSourceTypeValue.installmentSCB.rawValue
+            return SourceType.installmentSCB.value
         case .other(let value):
             return value
         }
@@ -523,7 +523,7 @@ extension PaymentInformation.BillPayment {
     public var type: String {
         switch self {
         case .tescoLotus:
-            return OMSSourceTypeValue.billPaymentTescoLotus.rawValue
+            return SourceType.billPaymentTescoLotus.value
         case .other(let value):
             return PaymentInformation.BillPayment.paymentMethodTypePrefix + value
         }
@@ -649,7 +649,7 @@ extension PaymentInformation.Barcode {
                 throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Invalid barcode source type value")
         }
         switch String(type[typePrefixRange.upperBound...]) {
-        case OMSSourceTypeValue.alipay.rawValue:
+        case SourceType.alipay.value:
             self = .alipay(try AlipayBarcode.init(from: decoder))
         case let value:
             self = .other(String(value), parameters: try decoder.decodeJSONDictionary().filter({ (key, _) -> Bool in
@@ -695,7 +695,7 @@ extension PaymentInformation.Points {
     public var type: String {
         switch self {
         case .citiPoints:
-            return OMSSourceTypeValue.pointsCiti.rawValue
+            return SourceType.pointsCiti.value
         case .other(let value):
             return PaymentInformation.Points.paymentMethodTypePrefix + value
         }
