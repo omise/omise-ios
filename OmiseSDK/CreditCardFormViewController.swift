@@ -35,39 +35,6 @@ public protocol CreditCardFormDelegate: CreditCardFormViewControllerDelegate {
     func creditCardForm(_ controller: CreditCardFormController, didFailWithError error: Error)
 }
 
-@available(*, deprecated,
-message: "This delegate name is deprecated. Please use the new name of `OMSCreditCardFormViewControllerDelegate`",
-renamed: "OMSCreditCardFormViewControllerDelegate")
-@objc public protocol OMSCreditCardFormDelegate: OMSCreditCardFormViewControllerDelegate {}
-
-
-@objc
-public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
-    /// Delegate method for receiving token data when card tokenization succeeds.
-    /// - parameter token: `OmiseToken` instance created from supplied credit card data.
-    /// - seealso: [Tokens API](https://www.omise.co/tokens-api)
-    @objc func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: __OmiseToken)
-    
-    /// Delegate method for receiving error information when card tokenization failed.
-    /// This allows you to have fine-grained control over error handling when setting
-    /// `handleErrors` to `false`.
-    /// - parameter error: The error that occurred during tokenization.
-    /// - note: This delegate method will *never* be called if `handleErrors` property is set to `true`.
-    @objc func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: NSError)
-    
-    @objc optional func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController)
-    
-    @available(*, unavailable,
-    message: "Implement the new -[OMSCreditCardFormViewControllerDelegate creditCardFormViewController:didSucceedWithToken:] instead",
-    renamed: "creditCardFormViewController(_:didSucceedWithToken:)")
-    @objc func creditCardForm(_ controller: CreditCardFormViewController, didSucceedWithToken token: __OmiseToken)
-    
-    @available(*, unavailable,
-    message: "Implement the new -[OMSCreditCardFormViewControllerDelegate creditCardFormViewController:didFailWithError:] instead",
-    renamed: "creditCardFormViewController(_:didFailWithError:)")
-    @objc func creditCardForm(_ controller: CreditCardFormViewController, didFailWithError error: NSError)
-}
-
 @available(*, deprecated, renamed: "CreditCardFormViewController")
 public typealias CreditCardFormController = CreditCardFormViewController
 
@@ -82,8 +49,6 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     
     /// Delegate to receive CreditCardFormController result.
     public weak var delegate: CreditCardFormViewControllerDelegate?
-    /// Delegate to receive CreditCardFormController result.
-    @objc(delegate) public weak var __delegate: OMSCreditCardFormViewControllerDelegate?
     
     /// A boolean flag to enables/disables automatic error handling. Defaults to `true`.
     @objc public var handleErrors = true
@@ -380,12 +345,6 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
                 os_log("Canceling form delegate notified", log: uiLogObject, type: .default)
             }
             return true
-        } else if let delegateMethod = __delegate?.creditCardFormViewControllerDidCancel {
-            delegateMethod(self)
-            if #available(iOSApplicationExtension 11.0, *) {
-                os_log("Canceling form delegate notified", log: uiLogObject, type: .default)
-            }
-            return true
         } else {
             if #available(iOSApplicationExtension 11.0, *) {
                 os_log("Credit Card Form dismissing requested but there is not delegate to ask. Ignore the request",
@@ -436,11 +395,6 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
                     if #available(iOSApplicationExtension 11.0, *) {
                         os_log("Credit Card Form Create Token succeed delegate notified", log: uiLogObject, type: .default)
                     }
-                } else if let delegate = strongSelf.__delegate {
-                    delegate.creditCardFormViewController(strongSelf, didSucceedWithToken: __OmiseToken(token: token))
-                    if #available(iOSApplicationExtension 11.0, *) {
-                        os_log("Credit Card Form Create Token succeed delegate notified", log: uiLogObject, type: .default)
-                    }
                 } else if #available(iOSApplicationExtension 11.0, *) {
                     os_log("There is no Credit Card Form's delegate to notify about the created token", log: uiLogObject, type: .default)
                 }
@@ -488,11 +442,6 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             }
             if let delegate = self.delegate {
                 delegate.creditCardFormViewController(self, didFailWithError: error)
-                if #available(iOSApplicationExtension 11.0, *) {
-                    os_log("Error handling delegate notified", log: uiLogObject, type: .default)
-                }
-            } else if let delegate = self.__delegate {
-                delegate.creditCardFormViewController(self, didFailWithError: error as NSError)
                 if #available(iOSApplicationExtension 11.0, *) {
                     os_log("Error handling delegate notified", log: uiLogObject, type: .default)
                 }
