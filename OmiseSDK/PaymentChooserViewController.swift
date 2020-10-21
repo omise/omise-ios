@@ -64,23 +64,23 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
 }
 
 extension PaymentChooserOption {
-    fileprivate static func paymentOptions(for sourceType: OMSSourceTypeValue) -> [PaymentChooserOption] {
+    fileprivate static func paymentOptions(for sourceType: SourceType) -> [PaymentChooserOption] {
         switch sourceType {
-        case .trueMoney:
+        case .truemoney:
             return [.truemoney]
         case .installmentFirstChoice, .installmentKBank, .installmentKTC, .installmentBBL, .installmentBAY, .installmentSCB:
             return [.installment]
         case .billPaymentTescoLotus:
             return [.tescoLotus]
-        case .eContext:
+        case .econtext:
             return [.conbini, .payEasy, .netBanking]
         case .alipay:
             return [.alipay]
         case .internetBankingBAY, .internetBankingKTB, .internetBankingBBL, .internetBankingSCB:
             return [.internetBanking]
-        case .payNow:
+        case .paynow:
             return [.paynow]
-        case .promptPay:
+        case .promptpay:
             return [.promptpay]
         case .pointsCiti:
             return [.citiPoints]
@@ -103,7 +103,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             updateShowingValues()
         }
     }
-    @objc var allowedPaymentMethods: [OMSSourceTypeValue] = [] {
+    var allowedPaymentMethods: [SourceType] = [] {
         didSet {
             updateShowingValues()
         }
@@ -284,23 +284,23 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         allowedPaymentMethods = capability.supportedBackends.compactMap({
             switch $0.payment {
             case .alipay:
-                return OMSSourceTypeValue.alipay
+                return SourceType.alipay
             case .promptpay:
-                return OMSSourceTypeValue.promptPay
+                return SourceType.promptpay
             case .paynow:
-                return OMSSourceTypeValue.payNow
+                return SourceType.paynow
             case .truemoney:
-                return OMSSourceTypeValue.trueMoney
+                return SourceType.truemoney
             case .points(let points):
-                return OMSSourceTypeValue(points.type)
+                return SourceType(points.type)
             case .installment(let brand, availableNumberOfTerms: _):
-                return OMSSourceTypeValue(brand.type)
+                return SourceType(brand.type)
             case .internetBanking(let bank):
-                return OMSSourceTypeValue(bank.type)
+                return SourceType(bank.type)
             case .billPayment(let billPayment):
-                return OMSSourceTypeValue(billPayment.type)
+                return SourceType(billPayment.type)
             case .eContext:
-                return OMSSourceTypeValue.eContext
+                return SourceType.econtext
             case .card, .unknownSource:
                 return nil
             }
@@ -333,6 +333,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     private func applySecondaryColor() {}
     
     private func updateShowingValues() {
+        print(allowedPaymentMethods)
         var paymentMethodsToShow: [PaymentChooserOption] = allowedPaymentMethods.reduce(into: []) { (result, sourceType) in
             let paymentOptions = PaymentChooserOption.paymentOptions(for: sourceType)
             for paymentOption in paymentOptions where !result.contains(paymentOption) {
