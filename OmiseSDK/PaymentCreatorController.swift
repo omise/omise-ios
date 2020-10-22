@@ -22,10 +22,9 @@ public protocol PaymentChooserUI: AnyObject {
 
 
 /// Drop-in UI flow controller that let user choose the payment method with the given payment options
-@objc(OMSPaymentCreatorController)
 public class PaymentCreatorController : UINavigationController {
     /// Omise public key for calling tokenization API.
-    @objc public var publicKey: String? {
+    public var publicKey: String? {
         didSet {
             guard let publicKey = publicKey else {
                 if #available(iOSApplicationExtension 11.0, *) {
@@ -51,29 +50,9 @@ public class PaymentCreatorController : UINavigationController {
             paymentSourceCreatorFlowSession.paymentCurrency = paymentCurrency
         }
     }
-    
-    /// Amount to create a Source payment
-    @objc(paymentAmount) public var __paymentAmount: Int64 {
-        get {
-            return paymentAmount ?? 0
-        }
-        set {
-            paymentAmount = newValue > 0 ? Int64(newValue) : nil
-        }
-    }
-    
-    /// Currency to create a Source payment
-    @objc(paymentCurrencyCode) public var __paymentCurrencyCode: String? {
-        get {
-            return paymentCurrency?.code
-        }
-        set {
-            paymentCurrency = newValue.map(Currency.init(code:))
-        }
-    }
-    
+
     /// Boolean indicates that the form should show the Credit Card payment option or not
-    @objc public var showsCreditCardPayment: Bool = true {
+    public var showsCreditCardPayment: Bool = true {
         didSet {
             paymentChooserViewController.showsCreditCardPayment = showsCreditCardPayment
         }
@@ -92,7 +71,7 @@ public class PaymentCreatorController : UINavigationController {
     /// The controller will show an error alert in the UI if the value is true,
     /// otherwise the controller will ask its delegate.
     /// Defaults to `true`.
-    @objc public var handleErrors: Bool = true
+    public var handleErrors: Bool = true
     
     /// Delegate to receive CreditCardFormController result.
     public weak var paymentDelegate: PaymentCreatorControllerDelegate?
@@ -120,8 +99,8 @@ public class PaymentCreatorController : UINavigationController {
     }()
     
     
-    @objc @IBInspectable public var preferredPrimaryColor: UIColor?
-    @objc @IBInspectable public var preferredSecondaryColor: UIColor? {
+    @IBInspectable public var preferredPrimaryColor: UIColor?
+    @IBInspectable public var preferredSecondaryColor: UIColor? {
         didSet {
             #if compiler(>=5.1)
             if #available(iOS 13, *) {

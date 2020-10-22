@@ -1,7 +1,6 @@
 import UIKit
 
 
-@objc(OMSInstallmentsNumberOfTermsChooserViewController)
 class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentSourceChooser, PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
     
@@ -68,13 +67,13 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
     }
     
     
-    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
+    @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
+    @IBInspectable var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }

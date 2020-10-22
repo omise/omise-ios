@@ -92,13 +92,11 @@ extension PaymentChooserOption {
     }
 }
 
-
-@objc(OMSPaymentChooserViewController)
 class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceChooser, PaymentChooserUI {
     
     var flowSession: PaymentCreatorFlowSession?
     
-    @objc var showsCreditCardPayment: Bool = true {
+    var showsCreditCardPayment: Bool = true {
         didSet {
             updateShowingValues()
         }
@@ -111,19 +109,19 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     
     @IBOutlet var paymentMethodNameLables: [UILabel]!
     
-    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
+    @IBInspectable public var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
+    @IBInspectable public var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         
@@ -149,7 +147,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         updateShowingValues()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch (segue.identifier, segue.destination) {
         case ("GoToCreditCardFormSegue"?, let controller as CreditCardFormViewController):
             controller.publicKey = flowSession?.client?.publicKey
@@ -197,7 +195,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         }
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         if let cell = cell as? PaymentOptionTableViewCell {
@@ -207,7 +205,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         dismissErrorMessage(animated: true, sender: cell)
         tableView.deselectRow(at: indexPath, animated: true)
@@ -333,7 +331,6 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     private func applySecondaryColor() {}
     
     private func updateShowingValues() {
-        print(allowedPaymentMethods)
         var paymentMethodsToShow: [PaymentChooserOption] = allowedPaymentMethods.reduce(into: []) { (result, sourceType) in
             let paymentOptions = PaymentChooserOption.paymentOptions(for: sourceType)
             for paymentOption in paymentOptions where !result.contains(paymentOption) {

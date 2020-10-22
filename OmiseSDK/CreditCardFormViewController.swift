@@ -41,32 +41,30 @@ public typealias CreditCardFormController = CreditCardFormViewController
 
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.
-@objc(OMSCreditCardFormViewController)
 public class CreditCardFormViewController: UIViewController, PaymentChooserUI, PaymentFormUIController {
     
     /// Omise public key for calling tokenization API.
-    @objc public var publicKey: String?
+    public var publicKey: String?
     
     /// Delegate to receive CreditCardFormController result.
     public weak var delegate: CreditCardFormViewControllerDelegate?
     
     /// A boolean flag to enables/disables automatic error handling. Defaults to `true`.
-    @objc public var handleErrors = true
+    public var handleErrors = true
     
-    @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
+    @IBInspectable public var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc public var preferredSecondaryColor: UIColor? {
+    @IBInspectable public var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
     }
-    
-    @IBInspectable @objc
-    public var errorMessageTextColor: UIColor! = CreditCardFormViewController.defaultErrorMessageTextColor {
+
+    @IBInspectable public var errorMessageTextColor: UIColor! = CreditCardFormViewController.defaultErrorMessageTextColor {
         didSet {
             if errorMessageTextColor == nil {
                 errorMessageTextColor = CreditCardFormViewController.defaultErrorMessageTextColor
@@ -124,15 +122,11 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     @IBOutlet var cvvInfoButton: UIButton!
     
     @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
-    @objc public static let defaultErrorMessageTextColor = UIColor.error
+    public static let defaultErrorMessageTextColor = UIColor.error
 
-    /// A boolean flag that enables/disables Card.IO integration.
-    @available(*, unavailable, message: "Built in support for Card.ios was removed. You can implement it in your app and call the setCreditCardInformation(number:name:expiration:) method")
-    @objc public var cardIOEnabled: Bool = true
-    
+
     /// Factory method for creating CreditCardFormController with given public key.
     /// - parameter publicKey: Omise public key.
-    @objc(creditCardFormViewControllerWithPublicKey:)
     public static func makeCreditCardFormViewController(withPublicKey publicKey: String) -> CreditCardFormViewController {
         let omiseBundle = Bundle(for: self)
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: omiseBundle)
@@ -141,14 +135,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         
         return creditCardForm
     }
-    
-    @available(*, deprecated,
-    message: "Please use the new method that confrom to Objective-C convention +[OMSCreditCardFormViewController creditCardFormViewControllerWithPublicKey:] as of this method will be removed in the future release.",
-    renamed: "makeCreditCardFormViewController(withPublicKey:)")
-    @objc(makeCreditCardFormWithPublicKey:) public static func __makeCreditCardForm(withPublicKey publicKey: String) -> CreditCardFormViewController {
-        return CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
-    }
-    
+
     public func setCreditCardInformationWith(number: String?, name: String?, expiration: (month: Int, year: Int)?) {
         cardNumberTextField.text = number
         cardNameTextField.text = name
@@ -164,33 +151,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
                    log: uiLogObject, type: .debug, String((number ?? "").suffix(4)))
         }
     }
-    
-    @objc(setCreditCardInformationWithNumber:name:expirationMonth:expirationYear:)
-    public func __setCreditCardInformation(number: String, name: String, expirationMonth: Int, expirationYear: Int) {
-        let month: Int?
-        let year: Int?
-        if Calendar.validExpirationMonthRange ~= expirationMonth {
-            month = expirationMonth
-        } else {
-            month = nil
-        }
-        
-        if expirationYear > 0 && expirationYear != NSNotFound {
-            year = expirationYear
-        } else {
-            year = nil
-        }
-        
-        let expiration: (month: Int, year: Int)?
-        if let month = month, let year = year {
-            expiration = (month: month, year: year)
-        } else {
-            expiration = nil
-        }
-        
-        self.setCreditCardInformationWith(number: number, name: name, expiration: expiration)
-    }
-    
+
     public override func loadView() {
         super.loadView()
         

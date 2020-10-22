@@ -2,7 +2,6 @@ import UIKit
 import os
 
 
-@objc(OMSInternetBankingSourceChooserViewController)
 class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>, PaymentSourceChooser, PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
     
@@ -17,13 +16,13 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
     
     @IBOutlet var internetBankingNameLabels: [UILabel]!
     
-    @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
+    @IBInspectable public var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc public var preferredSecondaryColor: UIColor? {
+    @IBInspectable public var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }

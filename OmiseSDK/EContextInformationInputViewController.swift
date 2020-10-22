@@ -1,7 +1,6 @@
 import UIKit
 
 
-@objc(OMSEContextInformationInputViewController)
 class EContextInformationInputViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
     var flowSession: PaymentCreatorFlowSession?
     var client: Client?
@@ -16,13 +15,13 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         })
     }
     
-    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
+    @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
+    @IBInspectable var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }

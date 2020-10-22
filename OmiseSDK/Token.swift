@@ -187,13 +187,6 @@ extension Calendar {
     public static let validExpirationMonthRange: Range<Int> = Calendar.creditCardInformationCalendar.maximumRange(of: .month)!
 }
 
-extension NSCalendar {
-    /// Calendar used in the Credit Card information which is Gregorian Calendar
-    @objc(creditCardInformationCalendar) public static var __creditCardInformationCalendar: Calendar {
-        return Calendar.creditCardInformationCalendar
-    }
-}
-
 
 extension Request where T == Token {
     

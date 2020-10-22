@@ -2,13 +2,13 @@ import Foundation
 
 
 /// Utility class for working with credit card numbers.
-@objc(OMSCardNumber) public final class CardNumber: NSObject {
+public final class CardNumber: NSObject {
     
     /**
      Normalize credit card number by removing all non-number characters.
      - returns: String of normalized credit card number. eg. *4242424242424242*
      */
-    @objc public static func normalize(_ pan: String) -> String {
+    public static func normalize(_ pan: String) -> String {
         return pan.replacingOccurrences(
             of: "[^0-9]",
             with: "",
@@ -27,17 +27,12 @@ import Foundation
             .first
     }
     
-    @objc(brandForPan:) public static func __brand(_ pan: String) -> Int {
-        return brand(of: pan)?.rawValue ?? NSNotFound
-    }
-    
-    
     /**
      Formats given credit card number into a human-friendly string by inserting spaces
      after every 4 digits. ex. `4242 4242 4242 4242`
      - returns: Formatted credit card number string.
      */
-    @objc public static func format(_ pan: String) -> String {
+    public static func format(_ pan: String) -> String {
         var result = ""
         for (i, digit) in normalize(pan).enumerated() {
             if i > 0 && i % 4 == 0 {
@@ -54,7 +49,7 @@ import Foundation
      Validate credit card number using the Luhn algorithm.
      - returns: `true` if the Luhn check passes, otherwise `false`.
      */
-    @objc public static func luhn(_ pan: String) -> Bool {
+    public static func luhn(_ pan: String) -> Bool {
         let chars = normalize(pan)
         let digits = chars
             .reversed()
@@ -79,7 +74,7 @@ import Foundation
      is within credit card brand's valid range.
      - returns: `true` if the given credit card number is valid for all available checks, otherwise `false`.
      */
-    @objc public static func validate(_ pan: String) -> Bool {
+    public static func validate(_ pan: String) -> Bool {
         let normalized = normalize(pan)
         
         guard let brand = brand(of: normalized) else { return false }
