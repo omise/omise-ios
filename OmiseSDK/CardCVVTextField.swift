@@ -3,7 +3,6 @@ import UIKit
 
 
 /// UITextField subclass for entering card's CVV number.
-@objc(OMSCardCVVTextField) @IBDesignable
 public class CardCVVTextField: OmiseTextField {
     private let validLengths = 3...4
     

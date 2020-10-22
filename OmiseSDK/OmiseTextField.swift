@@ -13,8 +13,7 @@ public enum OmiseTextFieldValidationError: Error {
 
 
 /// Base UITextField subclass for SDK's text fields.
-@objc(OMSOmiseTextField) @IBDesignable
-public class OmiseTextField: UITextField {
+@IBDesignable public class OmiseTextField: UITextField {
     public var style: TextFieldStyle = .plain {
         didSet {
             updateBorder()
@@ -22,7 +21,7 @@ public class OmiseTextField: UITextField {
         }
     }
     
-    @IBInspectable @objc var borderWidth: CGFloat {
+    @IBInspectable var borderWidth: CGFloat {
         get {
             switch style {
             case .plain:
@@ -41,25 +40,25 @@ public class OmiseTextField: UITextField {
         }
     }
     
-    @IBInspectable @objc var borderColor: UIColor? {
+    @IBInspectable var borderColor: UIColor? {
         didSet {
             updateBorder()
         }
     }
     
-    @IBInspectable @objc var cornerRadius: CGFloat = 0 {
+    @IBInspectable var cornerRadius: CGFloat = 0 {
         didSet {
             updateBorder()
         }
     }
     
-    @IBInspectable @objc var errorTextColor: UIColor? {
+    @IBInspectable var errorTextColor: UIColor? {
         didSet {
             updateTextColor()
         }
     }
     
-    @IBInspectable @objc var placeholderTextColor: UIColor? {
+    @IBInspectable var placeholderTextColor: UIColor? {
         didSet {
             updatePlaceholderTextColor()
         }
@@ -139,7 +138,7 @@ public class OmiseTextField: UITextField {
         initializeInstance()
     }
     
-    @objc public func validate() throws {
+    public func validate() throws {
         guard let text = self.text else {
             throw OmiseTextFieldValidationError.emptyText
         }
