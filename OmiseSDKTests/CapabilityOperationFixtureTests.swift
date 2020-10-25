@@ -20,7 +20,7 @@ class CapabilityOperationFixtureTests: XCTestCase {
                 XCTFail("Capability doesn't have the Credit Card backend")
             }
             
-            if let bayInstallmentBackend = capability[OMSSourceTypeValue.installmentBAY] {
+            if let bayInstallmentBackend = capability[SourceType.installmentBAY] {
                 XCTAssertEqual(
                     bayInstallmentBackend.payment,
                     .installment(.bay, availableNumberOfTerms: IndexSet(arrayLiteral: 3, 4, 6, 9, 10))
@@ -30,13 +30,13 @@ class CapabilityOperationFixtureTests: XCTestCase {
                 XCTFail("Capability doesn't have the BAY Installment backend")
             }
             
-            if let trueMoneyBackend = capability[OMSSourceTypeValue.trueMoney] {
+            if let trueMoneyBackend = capability[SourceType.truemoney] {
                 XCTAssertEqual(trueMoneyBackend.supportedCurrencies, [.thb])
             } else {
                XCTFail("Capability doesn't have the TrueMoney backend")
             }
             
-            if let citiPointsBackend = capability[OMSSourceTypeValue.pointsCiti] {
+            if let citiPointsBackend = capability[SourceType.pointsCiti] {
                 XCTAssertEqual(citiPointsBackend.supportedCurrencies, [.thb])
             } else {
                XCTFail("Capability doesn't have the Citi Points backend")
