@@ -24,51 +24,14 @@ public enum SourceType {
     
     case other(value: String)
     
-    var value: String {
-        switch self {
-        case .internetBankingBAY:
-            return "internet_banking_bay"
-        case .internetBankingKTB:
-            return "internet_banking_ktb"
-        case .internetBankingSCB:
-            return "internet_banking_scb"
-        case .internetBankingBBL:
-            return "internet_banking_bbl"
-            
-        case .installmentBAY:
-            return "installment_bay"
-        case .installmentFirstChoice:
-            return "installment_first_choice"
-        case .installmentBBL:
-            return "installment_bbl"
-        case .installmentKTC:
-            return "installment_ktc"
-        case .installmentKBank:
-            return "installment_kbank"
-        case .installmentSCB:
-            return "installment_scb"
-        
-        case .alipay:
-            return "alipay"
-        case .barcodeAlipay:
-            return "barcode_alipay"
-        case .billPaymentTescoLotus:
-            return "bill_payment_tesco_lotus"
-        case .econtext:
-            return "econtext"
-        case .promptpay:
-            return "promptpay"
-        case .paynow:
-            return "paynow"
-        case .truemoney:
-            return "truemoney"
-        case .pointsCiti:
-            return "points_citi"
-        case .other(let value):
-            return value
-        }
+    public init(_ value: String) {
+        self.init(rawValue: value)
     }
-    
+}
+
+extension SourceType: Hashable { }
+
+extension SourceType {
     var prefix: String {
         switch self {
         case .internetBankingBAY, .internetBankingKTB, .internetBankingSCB, .internetBankingBBL:
@@ -95,57 +58,7 @@ public enum SourceType {
             return ""
         }
     }
-    
-    init(_ value: String) {
-        switch value {
-        case SourceType.internetBankingBAY.value:
-            self = .internetBankingBAY
-        case SourceType.internetBankingKTB.value:
-            self = .internetBankingKTB
-        case SourceType.internetBankingSCB.value:
-            self = .internetBankingSCB
-        case SourceType.internetBankingBBL.value:
-            self = .internetBankingBBL
-            
-        case SourceType.installmentBAY.value:
-            self = .installmentBAY
-        case SourceType.installmentFirstChoice.value:
-            self = .installmentFirstChoice
-        case SourceType.installmentBBL.value:
-            self = .installmentBBL
-        case SourceType.installmentKTC.value:
-            self = .installmentKTC
-        case SourceType.installmentKBank.value:
-            self = .installmentKBank
-        case SourceType.installmentSCB.value:
-            self = .installmentSCB
-            
-        case SourceType.alipay.value:
-            self = .alipay
-        case SourceType.barcodeAlipay.value:
-            self = .barcodeAlipay
-        case SourceType.billPaymentTescoLotus.value:
-            self = .billPaymentTescoLotus
-        case SourceType.econtext.value:
-            self = .econtext
-        case SourceType.promptpay.value:
-            self = .promptpay
-        case SourceType.paynow.value:
-            self = .paynow
-        case SourceType.truemoney.value:
-            self = .truemoney
-        case SourceType.pointsCiti.value:
-            self = .pointsCiti
-            
-        default:
-            self = .other(value: value)
-        }
-    }
-}
 
-extension SourceType: Hashable { }
-
-extension SourceType {
     var installmentBrand: PaymentInformation.Installment.Brand? {
         switch self {
         case .installmentBAY:
@@ -196,6 +109,102 @@ extension SourceType {
             return true
         default:
             return false
+        }
+    }
+}
+
+extension SourceType: RawRepresentable {
+    public typealias RawValue = String
+
+    public var rawValue: String {
+        switch self {
+        case .internetBankingBAY:
+            return "internet_banking_bay"
+        case .internetBankingKTB:
+            return "internet_banking_ktb"
+        case .internetBankingSCB:
+            return "internet_banking_scb"
+        case .internetBankingBBL:
+            return "internet_banking_bbl"
+
+        case .installmentBAY:
+            return "installment_bay"
+        case .installmentFirstChoice:
+            return "installment_first_choice"
+        case .installmentBBL:
+            return "installment_bbl"
+        case .installmentKTC:
+            return "installment_ktc"
+        case .installmentKBank:
+            return "installment_kbank"
+        case .installmentSCB:
+            return "installment_scb"
+
+        case .alipay:
+            return "alipay"
+        case .barcodeAlipay:
+            return "barcode_alipay"
+        case .billPaymentTescoLotus:
+            return "bill_payment_tesco_lotus"
+        case .econtext:
+            return "econtext"
+        case .promptpay:
+            return "promptpay"
+        case .paynow:
+            return "paynow"
+        case .truemoney:
+            return "truemoney"
+        case .pointsCiti:
+            return "points_citi"
+
+        case .other(let value):
+            return value
+        }
+    }
+
+    public init(rawValue: RawValue) {
+        switch rawValue {
+        case SourceType.internetBankingBAY.rawValue:
+            self = .internetBankingBAY
+        case SourceType.internetBankingKTB.rawValue:
+            self = .internetBankingKTB
+        case SourceType.internetBankingSCB.rawValue:
+            self = .internetBankingSCB
+        case SourceType.internetBankingBBL.rawValue:
+            self = .internetBankingBBL
+
+        case SourceType.installmentBAY.rawValue:
+            self = .installmentBAY
+        case SourceType.installmentFirstChoice.rawValue:
+            self = .installmentFirstChoice
+        case SourceType.installmentBBL.rawValue:
+            self = .installmentBBL
+        case SourceType.installmentKTC.rawValue:
+            self = .installmentKTC
+        case SourceType.installmentKBank.rawValue:
+            self = .installmentKBank
+        case SourceType.installmentSCB.rawValue:
+            self = .installmentSCB
+
+        case SourceType.alipay.rawValue:
+            self = .alipay
+        case SourceType.barcodeAlipay.rawValue:
+            self = .barcodeAlipay
+        case SourceType.billPaymentTescoLotus.rawValue:
+            self = .billPaymentTescoLotus
+        case SourceType.econtext.rawValue:
+            self = .econtext
+        case SourceType.promptpay.rawValue:
+            self = .promptpay
+        case SourceType.paynow.rawValue:
+            self = .paynow
+        case SourceType.truemoney.rawValue:
+            self = .truemoney
+        case SourceType.pointsCiti.rawValue:
+            self = .pointsCiti
+
+        default:
+            self = .other(value: rawValue)
         }
     }
 }

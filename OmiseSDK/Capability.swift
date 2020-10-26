@@ -187,7 +187,7 @@ extension Capability.Backend {
             self.payment = .eContext
         case .source(let sourceType):
             let configurations = try container.decodeJSONDictionary()
-            self.payment = .unknownSource(sourceType.value, configurations: configurations)
+            self.payment = .unknownSource(sourceType.rawValue, configurations: configurations)
         }
     }
     
@@ -236,7 +236,7 @@ extension Capability.Backend {
             case .card:
                 type = creditCardBackendTypeValue
             case .source(let sourceType):
-                type = sourceType.value
+                type = sourceType.rawValue
             }
 
             try container.encode(type)

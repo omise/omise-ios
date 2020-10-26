@@ -50,7 +50,7 @@ public enum PaymentInformation: Codable, Equatable {
         public var type: String {
             switch self {
             case .alipay:
-                return SourceType.barcodeAlipay.value
+                return SourceType.barcodeAlipay.rawValue
             case .other(let value, _):
                 return Barcode.paymentMethodTypePrefix + value
             }
@@ -112,9 +112,9 @@ public enum PaymentInformation: Codable, Equatable {
     
     /// The EContext customer information
     public struct EContext: PaymentMethod, Codable, Equatable {
-        public static var paymentMethodTypePrefix: String = SourceType.econtext.value
+        public static var paymentMethodTypePrefix: String = SourceType.econtext.rawValue
         
-        public let type: String = SourceType.econtext.value
+        public let type: String = SourceType.econtext.rawValue
         
         /// Customer name. The name cannot be longer than 10 characters
         public let name: String
@@ -153,9 +153,9 @@ public enum PaymentInformation: Codable, Equatable {
     /// The TrueMoney customer information
     public struct TrueMoney: PaymentMethod {
         
-        public static var paymentMethodTypePrefix: String = SourceType.truemoney.value
+        public static var paymentMethodTypePrefix: String = SourceType.truemoney.rawValue
         
-        public var type: String = SourceType.truemoney.value
+        public var type: String = SourceType.truemoney.rawValue
         
         /// The customers phone number. Contains only digits and has 10 or 11 characters
         public let phoneNumber: String
@@ -211,13 +211,13 @@ public enum PaymentInformation: Codable, Equatable {
             self = .installment(try Installment(from: decoder))
         case PaymentInformation.EContext.self:
             self = .eContext(try EContext(from: decoder))
-        case SourceType.alipay.value:
+        case SourceType.alipay.rawValue:
             self = .alipay
-        case SourceType.promptpay.value:
+        case SourceType.promptpay.rawValue:
             self = .promptpay
-        case SourceType.paynow.value:
+        case SourceType.paynow.rawValue:
             self = .paynow
-        case SourceType.truemoney.value:
+        case SourceType.truemoney.rawValue:
             self = .truemoney(try TrueMoney(from: decoder))
         case PaymentInformation.Points.self:
             self = .points(try Points(from: decoder))
@@ -247,20 +247,20 @@ public enum PaymentInformation: Codable, Equatable {
             try value.encode(to: encoder)
         case .alipay:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(SourceType.alipay.value, forKey: .type)
+            try container.encode(SourceType.alipay.rawValue, forKey: .type)
         case .eContext(let eContext):
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(SourceType.econtext.value, forKey: .type)
+            try container.encode(SourceType.econtext.rawValue, forKey: .type)
             try eContext.encode(to: encoder)
         case .promptpay:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(SourceType.promptpay.value, forKey: .type)
+            try container.encode(SourceType.promptpay.rawValue, forKey: .type)
         case .paynow:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(SourceType.paynow.value, forKey: .type)
+            try container.encode(SourceType.paynow.rawValue, forKey: .type)
         case .truemoney(let trueMoney):
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(SourceType.truemoney.value, forKey: .type)
+            try container.encode(SourceType.truemoney.rawValue, forKey: .type)
             try trueMoney.encode(to: encoder)
         case .points(let points):
             try points.encode(to: encoder)
@@ -317,7 +317,7 @@ extension PaymentInformation {
     public var sourceType: String {
         switch self {
         case .alipay:
-            return SourceType.alipay.value
+            return SourceType.alipay.rawValue
         case .barcode(let barcode):
             return barcode.type
         case .billPayment(let billPayment):
@@ -327,13 +327,13 @@ extension PaymentInformation {
         case .internetBanking(let bank):
             return bank.type
         case .eContext:
-            return SourceType.econtext.value
+            return SourceType.econtext.rawValue
         case .promptpay:
-            return SourceType.promptpay.value
+            return SourceType.promptpay.rawValue
         case .paynow:
-            return SourceType.paynow.value
+            return SourceType.paynow.rawValue
         case .truemoney:
-            return SourceType.truemoney.value
+            return SourceType.truemoney.rawValue
         case .points(let points):
             return points.type
         case .other(let value, _):
@@ -353,13 +353,13 @@ extension PaymentInformation.InternetBanking : StaticElementIterable, CustomStri
     public var type: String {
         switch self {
         case .bay:
-            return SourceType.internetBankingBAY.value
+            return SourceType.internetBankingBAY.rawValue
         case .ktb:
-            return SourceType.internetBankingKTB.value
+            return SourceType.internetBankingKTB.rawValue
         case .scb:
-            return SourceType.internetBankingSCB.value
+            return SourceType.internetBankingSCB.rawValue
         case .bbl:
-            return SourceType.internetBankingBBL.value
+            return SourceType.internetBankingBBL.rawValue
         case .other(let value):
             return PaymentInformation.InternetBanking.paymentMethodTypePrefix + value
         }
@@ -414,17 +414,17 @@ extension PaymentInformation.Installment {
     public var type: String {
         switch brand {
         case .bay:
-            return SourceType.installmentBAY.value
+            return SourceType.installmentBAY.rawValue
         case .firstChoice:
-            return SourceType.installmentFirstChoice.value
+            return SourceType.installmentFirstChoice.rawValue
         case .bbl:
-            return SourceType.installmentBBL.value
+            return SourceType.installmentBBL.rawValue
         case .ktc:
-            return SourceType.installmentKTC.value
+            return SourceType.installmentKTC.rawValue
         case .kBank:
-            return SourceType.installmentKBank.value
+            return SourceType.installmentKBank.rawValue
         case .scb:
-            return SourceType.installmentSCB.value
+            return SourceType.installmentSCB.rawValue
         case .other(let value):
             return PaymentInformation.Installment.paymentMethodTypePrefix + value
         }
@@ -501,17 +501,17 @@ extension PaymentInformation.Installment.Brand : StaticElementIterable, CustomSt
     public var type: String {
         switch self {
         case .bay:
-            return SourceType.installmentBAY.value
+            return SourceType.installmentBAY.rawValue
         case .firstChoice:
-            return SourceType.installmentFirstChoice.value
+            return SourceType.installmentFirstChoice.rawValue
         case .bbl:
-            return SourceType.installmentBBL.value
+            return SourceType.installmentBBL.rawValue
         case .ktc:
-            return SourceType.installmentKTC.value
+            return SourceType.installmentKTC.rawValue
         case .kBank:
-            return SourceType.installmentKBank.value
+            return SourceType.installmentKBank.rawValue
         case .scb:
-            return SourceType.installmentSCB.value
+            return SourceType.installmentSCB.rawValue
         case .other(let value):
             return value
         }
@@ -523,7 +523,7 @@ extension PaymentInformation.BillPayment {
     public var type: String {
         switch self {
         case .tescoLotus:
-            return SourceType.billPaymentTescoLotus.value
+            return SourceType.billPaymentTescoLotus.rawValue
         case .other(let value):
             return PaymentInformation.BillPayment.paymentMethodTypePrefix + value
         }
@@ -649,7 +649,7 @@ extension PaymentInformation.Barcode {
                 throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Invalid barcode source type value")
         }
         switch String(type[typePrefixRange.upperBound...]) {
-        case SourceType.alipay.value:
+        case SourceType.alipay.rawValue:
             self = .alipay(try AlipayBarcode.init(from: decoder))
         case let value:
             self = .other(String(value), parameters: try decoder.decodeJSONDictionary().filter({ (key, _) -> Bool in
@@ -695,7 +695,7 @@ extension PaymentInformation.Points {
     public var type: String {
         switch self {
         case .citiPoints:
-            return SourceType.pointsCiti.value
+            return SourceType.pointsCiti.rawValue
         case .other(let value):
             return PaymentInformation.Points.paymentMethodTypePrefix + value
         }
