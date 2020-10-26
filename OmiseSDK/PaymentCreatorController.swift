@@ -336,7 +336,7 @@ public class PaymentCreatorController : UINavigationController {
             coordinator.animate(alongsideTransition: { (context) in
                 if #available(iOS 13, *) {
                     self.additionalSafeAreaInsets.top = 0
-                } else if #available(iOS 11, *) {
+                } else {
                     self.additionalSafeAreaInsets.top = self.displayingNoticeView.bounds.height
                 }
             }, completion: nil)
