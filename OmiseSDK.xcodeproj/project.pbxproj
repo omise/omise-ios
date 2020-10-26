@@ -286,6 +286,7 @@
 				8A2BE95720A9A8F1000CEB60 /* Models */,
 				8A2BE95820A9A8FE000CEB60 /* Views */,
 				8AD0609120B550B90074894E /* Compatability */,
+				F3BCFBDD25467C13006D5736 /* Utils */,
 				2225B3531D0FDD63003EB396 /* Assets.xcassets */,
 				8AF985752147CC3D007E18ED /* Error.strings */,
 				8A75676B2178963B00C684C9 /* Localizable.strings */,
@@ -308,14 +309,6 @@
 				8A723A672164D80200D902F5 /* Swift */,
 			);
 			path = ExampleApp;
-			sourceTree = "<group>";
-		};
-		8A01F77E20D7D327003FC11E /* Old version */ = {
-			isa = PBXGroup;
-			children = (
-				2259314F1CE46F7F00841B86 /* CardNumber.swift */,
-			);
-			path = "Old version";
 			sourceTree = "<group>";
 		};
 		8A0927841D535548008D393F /* Library */ = {
@@ -389,7 +382,6 @@
 		8AD0609120B550B90074894E /* Compatability */ = {
 			isa = PBXGroup;
 			children = (
-				8A01F77E20D7D327003FC11E /* Old version */,
 				8A7A9EBF216642D100F12D86 /* Swift Version Compatability.swift */,
 			);
 			path = Compatability;
@@ -431,6 +423,14 @@
 				225931561CE4745200841B86 /* SDKTestCase.swift */,
 			);
 			path = OmiseSDKTests;
+			sourceTree = "<group>";
+		};
+		F3BCFBDD25467C13006D5736 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2259314F1CE46F7F00841B86 /* CardNumber.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
