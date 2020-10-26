@@ -383,11 +383,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         
         contentView.contentInset.bottom = intersectedFrame.height
         let bottomScrollIndicatorInset: CGFloat
-        if #available(iOS 11.0, *) {
-            bottomScrollIndicatorInset = intersectedFrame.height - contentView.safeAreaInsets.bottom
-        } else {
-            bottomScrollIndicatorInset = intersectedFrame.height
-        }
+        bottomScrollIndicatorInset = intersectedFrame.height - contentView.safeAreaInsets.bottom
         contentView.scrollIndicatorInsets.bottom = bottomScrollIndicatorInset
     }
     

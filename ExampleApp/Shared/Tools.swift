@@ -45,19 +45,10 @@ class Tool : NSObject {
     }
     
     static func imageWith(size: CGSize, actions: (CGContext) -> Void) -> UIImage? {
-        if #available(iOS 11.0, *) {
-            let renderer = UIGraphicsImageRenderer(size: size)
-            return renderer.image(actions: { context in
-                actions(context.cgContext)
-            })
-        } else {
-            UIGraphicsBeginImageContextWithOptions(size, true, 0.0)
-            let context = UIGraphicsGetCurrentContext()
-            if let context = context {
-                actions(context)
-            }
-            return UIGraphicsGetImageFromCurrentImageContext()
-        }
+        let renderer = UIGraphicsImageRenderer(size: size)
+        return renderer.image(actions: { context in
+            actions(context.cgContext)
+        })
     }
 }
 

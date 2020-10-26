@@ -10,7 +10,6 @@ typealias TableViewCellStyle = UITableViewCell.CellStyle
 typealias ApplicationLaunchOptionsKey = UIApplication.LaunchOptionsKey
 typealias AlertActionStyle = UIAlertAction.Style
 
-@available(iOS 11.0, *)
 typealias AccessibilityCustomRotorDirection = UIAccessibilityCustomRotor.Direction
 
 let ViewLayoutFittingCompressedSize = UIView.layoutFittingCompressedSize
