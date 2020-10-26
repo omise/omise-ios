@@ -275,32 +275,22 @@ extension OverlayPanelPresentationController: UIViewControllerAnimatedTransition
         
         let initialAlpha: CGFloat = isPresenting ? 0.0 : 1.0
         let finalAlpha: CGFloat = isPresenting ? 1.0 : 0.0
-        let options = isPresenting ? ViewAnimationOptions.curveEaseOut : .curveEaseIn
         
         let animationDuration = transitionDuration(using: transitionContext)
         controller.view.frame = initialFrame
         controller.view.alpha = initialAlpha
-        
         
         let animationBlock: () -> () = {
             controller.view.frame = finalFrame
             controller.view.alpha = finalAlpha
         }
 
-        if #available(iOSApplicationExtension 11.0, *) {
-            let animator = UIViewPropertyAnimator(duration: animationDuration, timingParameters: UISpringTimingParameters())
-            animator.addAnimations(animationBlock)
-            animator.addCompletion({ position in
-                transitionContext.completeTransition(position == UIViewAnimatingPosition.end)
-            })
-            animator.startAnimation()
-        } else {
-            UIView.animate(
-                withDuration: animationDuration, delay: 0.0, options: options, animations: animationBlock,
-                completion: { finished in
-                    transitionContext.completeTransition(finished)
-            })
-        }
+        let animator = UIViewPropertyAnimator(duration: animationDuration, timingParameters: UISpringTimingParameters())
+        animator.addAnimations(animationBlock)
+        animator.addCompletion({ position in
+            transitionContext.completeTransition(position == UIViewAnimatingPosition.end)
+        })
+        animator.startAnimation()
     }
 }
 

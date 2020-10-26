@@ -72,9 +72,7 @@ import Foundation
         
         placeholder = placeholder
         
-        if #available(iOSApplicationExtension 11.0, *) {
-            textContentType = .creditCardNumber
-        }
+        textContentType = .creditCardNumber
     }
     
     public override func validate() throws {

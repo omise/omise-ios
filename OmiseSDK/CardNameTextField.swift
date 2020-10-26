@@ -26,8 +26,6 @@ import UIKit
     
     private func initializeInstance() {
         keyboardType = .default
-        if #available(iOSApplicationExtension 11.0, *) {
-            textContentType = .name
-        }
+        textContentType = .name
     }
 }

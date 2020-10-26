@@ -63,23 +63,14 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
         formFields.forEach({
             $0.inputAccessoryView = formFieldsAccessoryView
         })
-        
-        if #available(iOSApplicationExtension 11.0, *) {
-            formFields.forEach({
-                $0.adjustsFontForContentSizeCategory = true
-            })
-            formLabels.forEach({
-                $0.adjustsFontForContentSizeCategory = true
-            })
-            submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
-        }
-        
-        if  #available(iOS 11, *) {
-            // We'll leave the adjusting scroll view insets job for iOS 11 and later to the layoutMargins + safeAreaInsets here
-        } else {
-            automaticallyAdjustsScrollViewInsets = true
-        }
-        
+        formFields.forEach({
+            $0.adjustsFontForContentSizeCategory = true
+        })
+        formLabels.forEach({
+            $0.adjustsFontForContentSizeCategory = true
+        })
+        submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
+
         NotificationCenter.default.addObserver(
             self, selector:#selector(keyboardWillChangeFrame(_:)),
             name: NotificationKeyboardWillChangeFrameNotification, object: nil
@@ -90,21 +81,6 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
         )
         
         phoneNumberTextField.validator = try! NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
-    }
-    
-    public override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        if #available(iOS 11, *) {
-            // There's a bug in iOS 10 and earlier which the text field's intrinsicContentSize is returned the value
-            // that doesn't take the result of textRect(forBounds:) method into an account for the initial value
-            // So we need to invalidate the intrinsic content size here to ask those text fields to calculate their
-            // intrinsic content size again
-        } else {
-            formFields.forEach({
-                $0.invalidateIntrinsicContentSize()
-            })
-        }
     }
 
     @IBAction func submitForm(_ sender: AnyObject) {
