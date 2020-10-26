@@ -213,9 +213,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         
         let selectedType = element(forUIIndexPath: indexPath)
         
-        if #available(iOS 11, *) {
-            os_log("Payment Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedType.description)
-        }
+        os_log("Payment Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedType.description)
+
         switch selectedType {
         case .alipay:
             payment = .alipay
@@ -340,13 +339,11 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         
         showingValues = paymentMethodsToShow
         
-        if #available(iOS 11, *) {
-            os_log(
-                "Payment Chooser: Showing options - %{private}@",
-                log: uiLogObject, type: .info,
-                showingValues.map({ $0.description }).joined(separator: ", ")
-            )
-        }
+        os_log(
+            "Payment Chooser: Showing options - %{private}@",
+            log: uiLogObject, type: .info,
+            showingValues.map({ $0.description }).joined(separator: ", ")
+        )
     }
     
     @IBAction func requestToClose(_ sender: Any) {

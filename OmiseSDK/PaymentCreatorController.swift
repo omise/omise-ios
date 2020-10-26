@@ -234,7 +234,7 @@ public class PaymentCreatorController : UINavigationController {
             self.view.layoutIfNeeded()
             if #available(iOS 13, *) {
                 self.topViewController?.additionalSafeAreaInsets.top = self.displayingNoticeView.bounds.height
-            } else if #available(iOS 11, *) {
+            } else {
                 self.additionalSafeAreaInsets.top = self.displayingNoticeView.bounds.height
             }
         }
@@ -257,7 +257,7 @@ public class PaymentCreatorController : UINavigationController {
             self.view.layoutIfNeeded()
             if #available(iOS 13, *) {
                 self.topViewController?.additionalSafeAreaInsets.top = 0
-            } else if #available(iOS 11, *) {
+            } else {
                 self.additionalSafeAreaInsets.top = 0
             }
         }
@@ -368,10 +368,8 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
         
         if let paymentDelegate = self.paymentDelegate {
             paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.source(source))
-            if #available(iOS 11, *) {
-                os_log("Payment Creator Created Source succeed delegate notified", log: uiLogObject, type: .default)
-            }
-        } else if #available(iOS 11, *) {
+            os_log("Payment Creator Created Source succeed delegate notified", log: uiLogObject, type: .default)
+        } else {
             os_log("There is no Payment Creator delegate to notify about the created source", log: uiLogObject, type: .default)
         }
     }
