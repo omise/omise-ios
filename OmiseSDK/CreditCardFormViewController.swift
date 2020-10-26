@@ -427,19 +427,11 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         let valid = isInputDataValid
         confirmButton?.isEnabled = valid
         
-        #if swift(>=4.2)
         if valid {
             confirmButton.accessibilityTraits.remove(UIAccessibilityTraits.notEnabled)
         } else {
             confirmButton.accessibilityTraits.insert(UIAccessibilityTraits.notEnabled)
         }
-        #else
-        if valid {
-            confirmButton.accessibilityTraits &= ~UIAccessibilityTraitNotEnabled
-        } else {
-            confirmButton.accessibilityTraits |= UIAccessibilityTraitNotEnabled
-        }
-        #endif
         
         let cardBrandIconName: String?
         switch cardNumberTextField.cardBrand {

@@ -287,7 +287,6 @@ public class PaymentCreatorController : UINavigationController {
         super.pushViewController(viewController, animated: animated)
     }
     
-    #if swift(>=4.2)
     public override func addChild(_ childController: UIViewController) {
         if let viewController = childController as? PaymentChooserUI {
             viewController.preferredPrimaryColor = preferredPrimaryColor
@@ -298,18 +297,6 @@ public class PaymentCreatorController : UINavigationController {
         }
         super.addChild(childController)
     }
-    #else
-    public override func addChildViewController(_ childController: UIViewController) {
-        if let viewController = childController as? PaymentChooserUI {
-            viewController.preferredPrimaryColor = preferredPrimaryColor
-            viewController.preferredSecondaryColor = preferredSecondaryColor
-        }
-        if let viewController = childController as? PaymentChooserViewController {
-            viewController.flowSession = self.paymentSourceCreatorFlowSession
-        }
-        super.addChildViewController(childController)
-    }
-    #endif
     
     public override func loadView() {
         super.loadView()
