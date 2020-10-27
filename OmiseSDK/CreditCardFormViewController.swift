@@ -35,73 +35,36 @@ public protocol CreditCardFormDelegate: CreditCardFormViewControllerDelegate {
     func creditCardForm(_ controller: CreditCardFormController, didFailWithError error: Error)
 }
 
-@available(*, deprecated,
-message: "This delegate name is deprecated. Please use the new name of `OMSCreditCardFormViewControllerDelegate`",
-renamed: "OMSCreditCardFormViewControllerDelegate")
-@objc public protocol OMSCreditCardFormDelegate: OMSCreditCardFormViewControllerDelegate {}
-
-
-@objc
-public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
-    /// Delegate method for receiving token data when card tokenization succeeds.
-    /// - parameter token: `OmiseToken` instance created from supplied credit card data.
-    /// - seealso: [Tokens API](https://www.omise.co/tokens-api)
-    @objc func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: __OmiseToken)
-    
-    /// Delegate method for receiving error information when card tokenization failed.
-    /// This allows you to have fine-grained control over error handling when setting
-    /// `handleErrors` to `false`.
-    /// - parameter error: The error that occurred during tokenization.
-    /// - note: This delegate method will *never* be called if `handleErrors` property is set to `true`.
-    @objc func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: NSError)
-    
-    @objc optional func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController)
-    
-    @available(*, unavailable,
-    message: "Implement the new -[OMSCreditCardFormViewControllerDelegate creditCardFormViewController:didSucceedWithToken:] instead",
-    renamed: "creditCardFormViewController(_:didSucceedWithToken:)")
-    @objc func creditCardForm(_ controller: CreditCardFormViewController, didSucceedWithToken token: __OmiseToken)
-    
-    @available(*, unavailable,
-    message: "Implement the new -[OMSCreditCardFormViewControllerDelegate creditCardFormViewController:didFailWithError:] instead",
-    renamed: "creditCardFormViewController(_:didFailWithError:)")
-    @objc func creditCardForm(_ controller: CreditCardFormViewController, didFailWithError error: NSError)
-}
-
 @available(*, deprecated, renamed: "CreditCardFormViewController")
 public typealias CreditCardFormController = CreditCardFormViewController
 
 
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.
-@objc(OMSCreditCardFormViewController)
 public class CreditCardFormViewController: UIViewController, PaymentChooserUI, PaymentFormUIController {
     
     /// Omise public key for calling tokenization API.
-    @objc public var publicKey: String?
+    public var publicKey: String?
     
     /// Delegate to receive CreditCardFormController result.
     public weak var delegate: CreditCardFormViewControllerDelegate?
-    /// Delegate to receive CreditCardFormController result.
-    @objc(delegate) public weak var __delegate: OMSCreditCardFormViewControllerDelegate?
     
     /// A boolean flag to enables/disables automatic error handling. Defaults to `true`.
-    @objc public var handleErrors = true
+    public var handleErrors = true
     
-    @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
+    @IBInspectable public var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc public var preferredSecondaryColor: UIColor? {
+    @IBInspectable public var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
     }
-    
-    @IBInspectable @objc
-    public var errorMessageTextColor: UIColor! = CreditCardFormViewController.defaultErrorMessageTextColor {
+
+    @IBInspectable public var errorMessageTextColor: UIColor! = CreditCardFormViewController.defaultErrorMessageTextColor {
         didSet {
             if errorMessageTextColor == nil {
                 errorMessageTextColor = CreditCardFormViewController.defaultErrorMessageTextColor
@@ -159,15 +122,11 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     @IBOutlet var cvvInfoButton: UIButton!
     
     @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
-    @objc public static let defaultErrorMessageTextColor = UIColor.error
+    public static let defaultErrorMessageTextColor = UIColor.error
 
-    /// A boolean flag that enables/disables Card.IO integration.
-    @available(*, unavailable, message: "Built in support for Card.ios was removed. You can implement it in your app and call the setCreditCardInformation(number:name:expiration:) method")
-    @objc public var cardIOEnabled: Bool = true
-    
+
     /// Factory method for creating CreditCardFormController with given public key.
     /// - parameter publicKey: Omise public key.
-    @objc(creditCardFormViewControllerWithPublicKey:)
     public static func makeCreditCardFormViewController(withPublicKey publicKey: String) -> CreditCardFormViewController {
         let omiseBundle = Bundle(for: self)
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: omiseBundle)
@@ -176,14 +135,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         
         return creditCardForm
     }
-    
-    @available(*, deprecated,
-    message: "Please use the new method that confrom to Objective-C convention +[OMSCreditCardFormViewController creditCardFormViewControllerWithPublicKey:] as of this method will be removed in the future release.",
-    renamed: "makeCreditCardFormViewController(withPublicKey:)")
-    @objc(makeCreditCardFormWithPublicKey:) public static func __makeCreditCardForm(withPublicKey publicKey: String) -> CreditCardFormViewController {
-        return CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
-    }
-    
+
     public func setCreditCardInformationWith(number: String?, name: String?, expiration: (month: Int, year: Int)?) {
         cardNumberTextField.text = number
         cardNameTextField.text = name
@@ -194,38 +146,10 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         
         updateSupplementaryUI()
         
-        if #available(iOSApplicationExtension 10.0, *) {
-            os_log("The custom credit card information was set - %{private}@",
-                   log: uiLogObject, type: .debug, String((number ?? "").suffix(4)))
-        }
+        os_log("The custom credit card information was set - %{private}@",
+               log: uiLogObject, type: .debug, String((number ?? "").suffix(4)))
     }
-    
-    @objc(setCreditCardInformationWithNumber:name:expirationMonth:expirationYear:)
-    public func __setCreditCardInformation(number: String, name: String, expirationMonth: Int, expirationYear: Int) {
-        let month: Int?
-        let year: Int?
-        if Calendar.validExpirationMonthRange ~= expirationMonth {
-            month = expirationMonth
-        } else {
-            month = nil
-        }
-        
-        if expirationYear > 0 && expirationYear != NSNotFound {
-            year = expirationYear
-        } else {
-            year = nil
-        }
-        
-        let expiration: (month: Int, year: Int)?
-        if let month = month, let year = year {
-            expiration = (month: month, year: year)
-        } else {
-            expiration = nil
-        }
-        
-        self.setCreditCardInformationWith(number: number, name: name, expiration: expiration)
-    }
-    
+
     public override func loadView() {
         super.loadView()
         
@@ -281,23 +205,15 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         
         updateSupplementaryUI()
         
-        if #available(iOSApplicationExtension 10.0, *) {
-            configureAccessibility()
-            formFields.forEach({
-                $0.adjustsFontForContentSizeCategory = true
-            })
-            formLabels.forEach({
-                $0.adjustsFontForContentSizeCategory = true
-            })
-            confirmButton.titleLabel?.adjustsFontForContentSizeCategory = true
-        }
-        
-        if  #available(iOS 11, *) {
-            // We'll leave the adjusting scroll view insets job for iOS 11 and later to the layoutMargins + safeAreaInsets here
-        } else {
-            automaticallyAdjustsScrollViewInsets = true
-        }
-        
+        configureAccessibility()
+        formFields.forEach({
+            $0.adjustsFontForContentSizeCategory = true
+        })
+        formLabels.forEach({
+            $0.adjustsFontForContentSizeCategory = true
+        })
+        confirmButton.titleLabel?.adjustsFontForContentSizeCategory = true
+
         cardNumberTextField.rightView = cardBrandIconImageView
         secureCodeTextField.rightView = cvvInfoButton
         secureCodeTextField.rightViewMode = .always
@@ -310,21 +226,6 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             self, selector:#selector(keyboardWillHide(_:)),
             name: NotificationKeyboardWillHideFrameNotification, object: nil
         )
-    }
-    
-    public override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        if #available(iOS 11, *) {
-            // There's a bug in iOS 10 and earlier which the text field's intrinsicContentSize is returned the value
-            // that doesn't take the result of textRect(forBounds:) method into an account for the initial value
-            // So we need to invalidate the intrinsic content size here to ask those text fields to calculate their
-            // intrinsic content size again
-        } else {
-            formFields.forEach({
-                $0.invalidateIntrinsicContentSize()
-            })
-        }
     }
     
     public override func viewDidAppear(_ animated: Bool) {
@@ -343,10 +244,8 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     }
     
     public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        if #available(iOSApplicationExtension 10.0, *) {
-            if previousTraitCollection?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
-                view.setNeedsUpdateConstraints()
-            }
+        if previousTraitCollection?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
+            view.setNeedsUpdateConstraints()
         }
     }
     
@@ -369,28 +268,16 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     
     @discardableResult
     private func performCancelingForm() -> Bool {
-        if #available(iOSApplicationExtension 10.0, *) {
-            os_log("Credit Card Form dismissing requested, Asking the delegate what should the form controler do",
-                   log: uiLogObject, type: .default)
-        }
+        os_log("Credit Card Form dismissing requested, Asking the delegate what should the form controler do",
+               log: uiLogObject, type: .default)
         
         if let delegate = self.delegate {
             delegate.creditCardFormViewControllerDidCancel(self)
-            if #available(iOSApplicationExtension 10.0, *) {
-                os_log("Canceling form delegate notified", log: uiLogObject, type: .default)
-            }
-            return true
-        } else if let delegateMethod = __delegate?.creditCardFormViewControllerDidCancel {
-            delegateMethod(self)
-            if #available(iOSApplicationExtension 10.0, *) {
-                os_log("Canceling form delegate notified", log: uiLogObject, type: .default)
-            }
+            os_log("Canceling form delegate notified", log: uiLogObject, type: .default)
             return true
         } else {
-            if #available(iOSApplicationExtension 10.0, *) {
-                os_log("Credit Card Form dismissing requested but there is not delegate to ask. Ignore the request",
-                       log: uiLogObject, type: .default)
-            }
+            os_log("Credit Card Form dismissing requested but there is not delegate to ask. Ignore the request",
+                   log: uiLogObject, type: .default)
             return false
         }
     }
@@ -401,16 +288,12 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         UIAccessibility.post(notification: AccessibilityNotificationAnnouncement, argument: "Submitting payment, please wait")
         
         guard let publicKey = publicKey else {
-            if #available(iOSApplicationExtension 10.0, *) {
-                os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.publicKey ?? "")
-            }
+            os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.publicKey ?? "")
             assertionFailure("Missing public key information. Please set the public key before request token.")
             return
         }
         
-        if #available(iOSApplicationExtension 10.0, *) {
-            os_log("Requesting to create token", log: uiLogObject, type: .info)
-        }
+        os_log("Requesting to create token", log: uiLogObject, type: .info)
         
         startActivityIndicator()
         let request = Request<Token>(
@@ -428,20 +311,11 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             strongSelf.stopActivityIndicator()
             switch result {
             case let .success(token):
-                if #available(iOSApplicationExtension 10.0, *) {
-                    os_log("Credit Card Form's Request succeed %{private}@, trying to notify the delegate", log: uiLogObject, type: .default, token.id)
-                }
+                os_log("Credit Card Form's Request succeed %{private}@, trying to notify the delegate", log: uiLogObject, type: .default, token.id)
                 if let delegate = strongSelf.delegate {
                     delegate.creditCardFormViewController(strongSelf, didSucceedWithToken: token)
-                    if #available(iOSApplicationExtension 10.0, *) {
-                        os_log("Credit Card Form Create Token succeed delegate notified", log: uiLogObject, type: .default)
-                    }
-                } else if let delegate = strongSelf.__delegate {
-                    delegate.creditCardFormViewController(strongSelf, didSucceedWithToken: __OmiseToken(token: token))
-                    if #available(iOSApplicationExtension 10.0, *) {
-                        os_log("Credit Card Form Create Token succeed delegate notified", log: uiLogObject, type: .default)
-                    }
-                } else if #available(iOSApplicationExtension 10.0, *) {
+                    os_log("Credit Card Form Create Token succeed delegate notified", log: uiLogObject, type: .default)
+                } else {
                     os_log("There is no Credit Card Form's delegate to notify about the created token", log: uiLogObject, type: .default)
                 }
             case let .failure(err):
@@ -468,11 +342,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         
         contentView.contentInset.bottom = intersectedFrame.height
         let bottomScrollIndicatorInset: CGFloat
-        if #available(iOS 11.0, *) {
-            bottomScrollIndicatorInset = intersectedFrame.height - contentView.safeAreaInsets.bottom
-        } else {
-            bottomScrollIndicatorInset = intersectedFrame.height
-        }
+        bottomScrollIndicatorInset = intersectedFrame.height - contentView.safeAreaInsets.bottom
         contentView.scrollIndicatorInsets.bottom = bottomScrollIndicatorInset
     }
     
@@ -483,28 +353,17 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     
     private func handleError(_ error: Error) {
         guard handleErrors else {
-            if #available(iOSApplicationExtension 10.0, *) {
-                os_log("Credit Card Form's Request failed %{private}@, automatically error handling turned off. Trying to notify the delegate", log: uiLogObject, type: .info, error.localizedDescription)
-            }
+            os_log("Credit Card Form's Request failed %{private}@, automatically error handling turned off. Trying to notify the delegate", log: uiLogObject, type: .info, error.localizedDescription)
             if let delegate = self.delegate {
                 delegate.creditCardFormViewController(self, didFailWithError: error)
-                if #available(iOSApplicationExtension 10.0, *) {
-                    os_log("Error handling delegate notified", log: uiLogObject, type: .default)
-                }
-            } else if let delegate = self.__delegate {
-                delegate.creditCardFormViewController(self, didFailWithError: error as NSError)
-                if #available(iOSApplicationExtension 10.0, *) {
-                    os_log("Error handling delegate notified", log: uiLogObject, type: .default)
-                }
-            } else if #available(iOSApplicationExtension 10.0, *) {
+                os_log("Error handling delegate notified", log: uiLogObject, type: .default)
+            } else {
                 os_log("There is no Credit Card Form's delegate to notify about the error", log: uiLogObject, type: .default)
             }
             return
         }
         
-        if #available(iOSApplicationExtension 10.0, *) {
-            os_log("Credit Card Form's Request failed %{private}@, automatically error handling turned on.", log: uiLogObject, type: .default, error.localizedDescription)
-        }
+        os_log("Credit Card Form's Request failed %{private}@, automatically error handling turned on.", log: uiLogObject, type: .default, error.localizedDescription)
         
         displayError(error)
         hasErrorMessage = true
@@ -568,19 +427,11 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         let valid = isInputDataValid
         confirmButton?.isEnabled = valid
         
-        #if swift(>=4.2)
         if valid {
             confirmButton.accessibilityTraits.remove(UIAccessibilityTraits.notEnabled)
         } else {
             confirmButton.accessibilityTraits.insert(UIAccessibilityTraits.notEnabled)
         }
-        #else
-        if valid {
-            confirmButton.accessibilityTraits &= ~UIAccessibilityTraitNotEnabled
-        } else {
-            confirmButton.accessibilityTraits |= UIAccessibilityTraitNotEnabled
-        }
-        #endif
         
         let cardBrandIconName: String?
         switch cardNumberTextField.cardBrand {
@@ -757,7 +608,6 @@ extension CreditCardFormViewController {
         updateSupplementaryUI()
     }
     
-    @available(iOS 10, *)
     private func configureAccessibility() {
         formLabels.forEach({
             $0.adjustsFontForContentSizeCategory = true

@@ -26,33 +26,33 @@ public enum Currency: Codable, Hashable {
     public var code: String {
         switch self {
         case .thb:
-            return OMSSupportedCurrencyCode.THB.rawValue
+            return "THB"
         case .jpy:
-            return OMSSupportedCurrencyCode.JPY.rawValue
+            return "JPY"
         case .idr:
-            return OMSSupportedCurrencyCode.IDR.rawValue
+            return "IDR"
         case .sgd:
-            return OMSSupportedCurrencyCode.SGD.rawValue
+            return "SGD"
         case .usd:
-            return OMSSupportedCurrencyCode.USD.rawValue
+            return "USD"
         case .gbp:
-            return OMSSupportedCurrencyCode.GBP.rawValue
+            return "GBP"
         case .eur:
-            return OMSSupportedCurrencyCode.EUR.rawValue
+            return "EUR"
         case .myr:
-            return OMSSupportedCurrencyCode.MYR.rawValue
+            return "MYR"
         case .aud:
-            return OMSSupportedCurrencyCode.AUD.rawValue
+            return "AUD"
         case .cad:
-            return OMSSupportedCurrencyCode.CAD.rawValue
+            return "CAD"
         case .chf:
-            return OMSSupportedCurrencyCode.CHF.rawValue
+            return "CHF"
         case .cny:
-            return OMSSupportedCurrencyCode.CNY.rawValue
+            return "CNY"
         case .dkk:
-            return OMSSupportedCurrencyCode.DKK.rawValue
+            return "DKK"
         case .hkd:
-            return OMSSupportedCurrencyCode.HKD.rawValue
+            return "HKD"
         case.custom(code: let code, factor: _):
             return code
         }
@@ -76,33 +76,33 @@ public enum Currency: Codable, Hashable {
     /// - Parameter code: The ISO 4217 currency code for the creating Currency that will be created
     public init(code: String) {
         switch code.uppercased() {
-        case OMSSupportedCurrencyCode.THB.rawValue:
+        case Currency.thb.code:
             self = .thb
-        case OMSSupportedCurrencyCode.JPY.rawValue:
+        case Currency.jpy.code:
             self = .jpy
-        case OMSSupportedCurrencyCode.IDR.rawValue:
+        case Currency.idr.code:
             self = .idr
-        case OMSSupportedCurrencyCode.SGD.rawValue:
+        case Currency.sgd.code:
             self = .sgd
-        case OMSSupportedCurrencyCode.USD.rawValue:
+        case Currency.usd.code:
             self = .usd
-        case OMSSupportedCurrencyCode.GBP.rawValue:
+        case Currency.gbp.code:
             self = .gbp
-        case OMSSupportedCurrencyCode.EUR.rawValue:
+        case Currency.eur.code:
             self = .eur
-        case OMSSupportedCurrencyCode.MYR.rawValue:
+        case Currency.myr.code:
             self = .myr
-        case OMSSupportedCurrencyCode.AUD.rawValue:
+        case Currency.aud.code:
             self = .aud
-        case OMSSupportedCurrencyCode.CAD.rawValue:
+        case Currency.cad.code:
             self = .cad
-        case OMSSupportedCurrencyCode.CHF.rawValue:
+        case Currency.chf.code:
             self = .chf
-        case OMSSupportedCurrencyCode.CNY.rawValue:
+        case Currency.cny.code:
             self = .cny
-        case OMSSupportedCurrencyCode.DKK.rawValue:
+        case Currency.dkk.code:
             self = .dkk
-        case OMSSupportedCurrencyCode.HKD.rawValue:
+        case Currency.hkd.code:
             self = .hkd
         case let currencyCode:
             let numberFormatter = NumberFormatter()

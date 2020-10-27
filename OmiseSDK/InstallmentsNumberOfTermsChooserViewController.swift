@@ -1,7 +1,6 @@
 import UIKit
 
 
-@objc(OMSInstallmentsNumberOfTermsChooserViewController)
 class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentSourceChooser, PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
     
@@ -68,13 +67,13 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
     }
     
     
-    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
+    @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
+    @IBInspectable var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
@@ -117,11 +116,7 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
         }
         
         let oldAccessoryView = cell?.accessoryView
-        #if swift(>=4.2)
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
-        #else
-        let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
-        #endif
         loadingIndicator.color = currentSecondaryColor
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()

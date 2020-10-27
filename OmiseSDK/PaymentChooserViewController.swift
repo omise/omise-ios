@@ -64,23 +64,23 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
 }
 
 extension PaymentChooserOption {
-    fileprivate static func paymentOptions(for sourceType: OMSSourceTypeValue) -> [PaymentChooserOption] {
+    fileprivate static func paymentOptions(for sourceType: SourceType) -> [PaymentChooserOption] {
         switch sourceType {
-        case .trueMoney:
+        case .truemoney:
             return [.truemoney]
         case .installmentFirstChoice, .installmentKBank, .installmentKTC, .installmentBBL, .installmentBAY, .installmentSCB:
             return [.installment]
         case .billPaymentTescoLotus:
             return [.tescoLotus]
-        case .eContext:
+        case .econtext:
             return [.conbini, .payEasy, .netBanking]
         case .alipay:
             return [.alipay]
         case .internetBankingBAY, .internetBankingKTB, .internetBankingBBL, .internetBankingSCB:
             return [.internetBanking]
-        case .payNow:
+        case .paynow:
             return [.paynow]
-        case .promptPay:
+        case .promptpay:
             return [.promptpay]
         case .pointsCiti:
             return [.citiPoints]
@@ -92,18 +92,16 @@ extension PaymentChooserOption {
     }
 }
 
-
-@objc(OMSPaymentChooserViewController)
 class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceChooser, PaymentChooserUI {
     
     var flowSession: PaymentCreatorFlowSession?
     
-    @objc var showsCreditCardPayment: Bool = true {
+    var showsCreditCardPayment: Bool = true {
         didSet {
             updateShowingValues()
         }
     }
-    @objc var allowedPaymentMethods: [OMSSourceTypeValue] = [] {
+    var allowedPaymentMethods: [SourceType] = [] {
         didSet {
             updateShowingValues()
         }
@@ -111,19 +109,19 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     
     @IBOutlet var paymentMethodNameLables: [UILabel]!
     
-    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
+    @IBInspectable public var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
+    @IBInspectable public var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         
@@ -149,7 +147,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         updateShowingValues()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch (segue.identifier, segue.destination) {
         case ("GoToCreditCardFormSegue"?, let controller as CreditCardFormViewController):
             controller.publicKey = flowSession?.client?.publicKey
@@ -197,7 +195,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         }
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         if let cell = cell as? PaymentOptionTableViewCell {
@@ -207,7 +205,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         dismissErrorMessage(animated: true, sender: cell)
         tableView.deselectRow(at: indexPath, animated: true)
@@ -215,9 +213,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         
         let selectedType = element(forUIIndexPath: indexPath)
         
-        if #available(iOS 10, *) {
-            os_log("Payment Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedType.description)
-        }
+        os_log("Payment Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedType.description)
+
         switch selectedType {
         case .alipay:
             payment = .alipay
@@ -234,11 +231,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         }
         
         let oldAccessoryView = cell?.accessoryView
-        #if swift(>=4.2)
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
-        #else
-        let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
-        #endif
         loadingIndicator.color = currentSecondaryColor
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
@@ -284,23 +277,23 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         allowedPaymentMethods = capability.supportedBackends.compactMap({
             switch $0.payment {
             case .alipay:
-                return OMSSourceTypeValue.alipay
+                return SourceType.alipay
             case .promptpay:
-                return OMSSourceTypeValue.promptPay
+                return SourceType.promptpay
             case .paynow:
-                return OMSSourceTypeValue.payNow
+                return SourceType.paynow
             case .truemoney:
-                return OMSSourceTypeValue.trueMoney
+                return SourceType.truemoney
             case .points(let points):
-                return OMSSourceTypeValue(points.type)
+                return SourceType(points.type)
             case .installment(let brand, availableNumberOfTerms: _):
-                return OMSSourceTypeValue(brand.type)
+                return SourceType(brand.type)
             case .internetBanking(let bank):
-                return OMSSourceTypeValue(bank.type)
+                return SourceType(bank.type)
             case .billPayment(let billPayment):
-                return OMSSourceTypeValue(billPayment.type)
+                return SourceType(billPayment.type)
             case .eContext:
-                return OMSSourceTypeValue.eContext
+                return SourceType.econtext
             case .card, .unknownSource:
                 return nil
             }
@@ -346,13 +339,11 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         
         showingValues = paymentMethodsToShow
         
-        if #available(iOS 10, *) {
-            os_log(
-                "Payment Chooser: Showing options - %{private}@",
-                log: uiLogObject, type: .info,
-                showingValues.map({ $0.description }).joined(separator: ", ")
-            )
-        }
+        os_log(
+            "Payment Chooser: Showing options - %{private}@",
+            log: uiLogObject, type: .info,
+            showingValues.map({ $0.description }).joined(separator: ", ")
+        )
     }
     
     @IBAction func requestToClose(_ sender: Any) {

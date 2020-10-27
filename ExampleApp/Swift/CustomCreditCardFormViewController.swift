@@ -1,4 +1,5 @@
 import UIKit
+import OmiseSDK
 
 protocol CustomCreditCardFormViewControllerDelegate: AnyObject {
     /// Delegate method for receiving token data when card tokenization succeeds.
@@ -15,8 +16,6 @@ protocol CustomCreditCardFormViewControllerDelegate: AnyObject {
 }
 
 
-@objc(CustomCreditCardFormViewController)
-@objcMembers
 class CustomCreditCardFormViewController: UIViewController {
     
     let omiseClient = Client(publicKey: "pkey_test_<#Omise Public Key#>")

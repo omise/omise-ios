@@ -2,7 +2,7 @@ import Foundation
 import os
 
 
-@objc(OMSSDKClient) public class Client: NSObject {
+public class Client: NSObject {
     let session: URLSession
     let queue: OperationQueue
     let publicKey: String
@@ -14,13 +14,11 @@ import os
     /// - Parameters:
     ///   - publicKey: Public Key for this Client used for calling the Omise API. The key must have `pkey` prefix
     ///   - queue: OperationQueue which the client uses for the network related operations
-    @objc public init(publicKey: String, queue: OperationQueue) {
+    public init(publicKey: String, queue: OperationQueue) {
         if publicKey.hasPrefix("pkey_") {
             self.publicKey = publicKey
         } else {
-            if #available(iOSApplicationExtension 10.0, *) {
-                os_log("Refusing to initialize sdk client with a non-public key: %{private}@", log: sdkLogObject, type: .error, publicKey)
-            }
+            os_log("Refusing to initialize sdk client with a non-public key: %{private}@", log: sdkLogObject, type: .error, publicKey)
             assertionFailure("Refusing to initialize sdk client with a non-public key.")
             self.publicKey = ""
         }
@@ -37,7 +35,7 @@ import os
     ///
     /// - Parameters:
     ///   - publicKey: Public Key for this Client used for calling the Omise API. The key must have `pkey` prefix
-    @objc public convenience init(publicKey: String) {
+    public convenience init(publicKey: String) {
         self.init(publicKey: publicKey, queue: OperationQueue())
     }
     
@@ -78,14 +76,13 @@ import os
             
             var result: RequestResult<Capability>
             defer {
-                if #available(iOSApplicationExtension 10.0, *) {
-                    switch result {
-                    case .success:
-                        os_log("Request succeed: Capability", log: sdkLogObject, type: .debug)
-                    case .failure(let error):
-                        os_log("Request failed %{public}@", log: sdkLogObject, type: .info, error.localizedDescription)
-                    }
+                switch result {
+                case .success:
+                    os_log("Request succeed: Capability", log: sdkLogObject, type: .debug)
+                case .failure(let error):
+                    os_log("Request failed %{public}@", log: sdkLogObject, type: .info, error.localizedDescription)
                 }
+
                 DispatchQueue.main.async {
                     completionHandler(result)
                 }
@@ -199,14 +196,13 @@ extension Client {
             
             var result: RequestResult<T>
             defer {
-                if #available(iOSApplicationExtension 10.0, *) {
-                    switch result {
-                    case .success(let value):
-                        os_log("Request succeed %{private}@", log: sdkLogObject, type: .debug, value.id)
-                    case .failure(let error):
-                        os_log("Request failed %{public}@", log: sdkLogObject, type: .info, error.localizedDescription)
-                    }
+                switch result {
+                case .success(let value):
+                    os_log("Request succeed %{private}@", log: sdkLogObject, type: .debug, value.id)
+                case .failure(let error):
+                    os_log("Request failed %{public}@", log: sdkLogObject, type: .info, error.localizedDescription)
                 }
+                
                 callback(result)
             }
             

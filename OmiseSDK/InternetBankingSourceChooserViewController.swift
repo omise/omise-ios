@@ -2,28 +2,25 @@ import UIKit
 import os
 
 
-@objc(OMSInternetBankingSourceChooserViewController)
 class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>, PaymentSourceChooser, PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
     
     override var showingValues: [PaymentInformation.InternetBanking] {
         didSet {
-            if #available(iOSApplicationExtension 10.0, *) {
-                os_log("Internet Banking Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
-            }
+            os_log("Internet Banking Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
         }
     }
     
     
     @IBOutlet var internetBankingNameLabels: [UILabel]!
     
-    @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
+    @IBInspectable public var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc public var preferredSecondaryColor: UIColor? {
+    @IBInspectable public var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
@@ -66,16 +63,10 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         tableView.deselectRow(at: indexPath, animated: true)
         let bank = element(forUIIndexPath: indexPath)
         
-        if #available(iOSApplicationExtension 10.0, *) {
-            os_log("Internet Banking Chooser: %{private}@ was selected", log: uiLogObject, type: .info, bank.description)
-        }
-        
+        os_log("Internet Banking Chooser: %{private}@ was selected", log: uiLogObject, type: .info, bank.description)
+
         let oldAccessoryView = cell?.accessoryView
-        #if swift(>=4.2)
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
-        #else
-        let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
-        #endif
         loadingIndicator.color = currentSecondaryColor
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()

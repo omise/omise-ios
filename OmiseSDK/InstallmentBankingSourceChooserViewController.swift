@@ -2,27 +2,24 @@ import UIKit
 import os
 
 
-@objc(OMSInstallmentBankingSourceChooserViewController)
 class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>, PaymentSourceChooser, PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
     
     override var showingValues: [PaymentInformation.Installment.Brand] {
         didSet {
-            if #available(iOSApplicationExtension 10.0, *) {
-                os_log("Installment Brand Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
-            }
+            os_log("Installment Brand Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
         }
     }
     
     @IBOutlet var bankNameLabels: [UILabel]!
     
-    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
+    @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
+    @IBInspectable var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
@@ -70,9 +67,7 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
         }
         
         let selectedBrand = element(forUIIndexPath: indexPath)
-        if #available(iOSApplicationExtension 10.0, *) {
-            os_log("Installment Brand Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedBrand.description)
-        }
+        os_log("Installment Brand Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedBrand.description)
         
         performSegue(withIdentifier: "GoToInstallmentTermsChooserSegue", sender: cell)
     }

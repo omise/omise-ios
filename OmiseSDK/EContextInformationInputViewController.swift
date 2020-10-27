@@ -1,7 +1,6 @@
 import UIKit
 
 
-@objc(OMSEContextInformationInputViewController)
 class EContextInformationInputViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
     var flowSession: PaymentCreatorFlowSession?
     var client: Client?
@@ -16,13 +15,13 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         })
     }
     
-    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
+    @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
+    @IBInspectable var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
@@ -69,22 +68,14 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
             $0.inputAccessoryView = formFieldsAccessoryView
         })
         
-        if #available(iOSApplicationExtension 10.0, *) {
-            formFields.forEach({
-                $0.adjustsFontForContentSizeCategory = true
-            })
-            formLabels.forEach({
-                $0.adjustsFontForContentSizeCategory = true
-            })
-            submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
-        }
-        
-        if  #available(iOS 11, *) {
-            // We'll leave the adjusting scroll view insets job for iOS 11 and later to the layoutMargins + safeAreaInsets here
-        } else {
-            automaticallyAdjustsScrollViewInsets = true
-        }
-        
+        formFields.forEach({
+            $0.adjustsFontForContentSizeCategory = true
+        })
+        formLabels.forEach({
+            $0.adjustsFontForContentSizeCategory = true
+        })
+        submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
+
         NotificationCenter.default.addObserver(
             self, selector:#selector(keyboardWillChangeFrame(_:)),
             name: NotificationKeyboardWillChangeFrameNotification, object: nil
@@ -97,21 +88,6 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         fullNameTextField.validator = try! NSRegularExpression(pattern: "\\A[\\w\\s]{1,10}\\s?\\z", options: [])
         emailTextField.validator = try! NSRegularExpression(pattern: "\\A[\\w\\-\\.]+@[\\w\\-\\.]+\\s?\\z", options: [])
         phoneNumberTextField.validator = try! NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
-    }
-    
-    public override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        if #available(iOS 11, *) {
-            // There's a bug in iOS 10 and earlier which the text field's intrinsicContentSize is returned the value
-            // that doesn't take the result of textRect(forBounds:) method into an account for the initial value
-            // So we need to invalidate the intrinsic content size here to ask those text fields to calculate their
-            // intrinsic content size again
-        } else {
-            formFields.forEach({
-                $0.invalidateIntrinsicContentSize()
-            })
-        }
     }
     
     @IBAction func submitEContextForm(_ sender: AnyObject) {
@@ -187,11 +163,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         
         contentView.contentInset.bottom = intersectedFrame.height
         let bottomScrollIndicatorInset: CGFloat
-        if #available(iOS 11.0, *) {
-            bottomScrollIndicatorInset = intersectedFrame.height - contentView.safeAreaInsets.bottom
-        } else {
-            bottomScrollIndicatorInset = intersectedFrame.height
-        }
+        bottomScrollIndicatorInset = intersectedFrame.height - contentView.safeAreaInsets.bottom
         contentView.scrollIndicatorInsets.bottom = bottomScrollIndicatorInset
     }
     

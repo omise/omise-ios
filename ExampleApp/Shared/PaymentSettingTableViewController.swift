@@ -13,7 +13,7 @@ class PaymentSettingTableViewController: UITableViewController {
         return numberFormatter
     }()
     
-    @objc var currentAmount: Int64 = 0
+    var currentAmount: Int64 = 0
     var currentCurrency: Currency = .thb {
         willSet {
             guard isViewLoaded else {
@@ -33,8 +33,8 @@ class PaymentSettingTableViewController: UITableViewController {
             amountField.text = amountFormatter.string(from: NSNumber(value: currentCurrency.convert(fromSubunit: currentAmount)))
         }
     }
-    @objc(currentCurrencyCode)
-    var __currentCurrencyCode: String {
+
+    var currentCurrencyCode: String {
         get {
             return currentCurrency.code
         }
@@ -43,7 +43,7 @@ class PaymentSettingTableViewController: UITableViewController {
         }
     }
     
-    @objc var usesCapabilityDataForPaymentMethods: Bool = true {
+    var usesCapabilityDataForPaymentMethods: Bool = true {
         didSet {
             guard isViewLoaded else {
                 return
@@ -54,7 +54,7 @@ class PaymentSettingTableViewController: UITableViewController {
         }
     }
     
-    @objc var allowedPaymentMethods: Set<OMSSourceTypeValue> = [] {
+    var allowedPaymentMethods: Set<SourceType> = [] {
         willSet {
             guard isViewLoaded else {
                 return
@@ -185,15 +185,9 @@ class PaymentSettingTableViewController: UITableViewController {
 
 extension PaymentSettingTableViewController : UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        #if swift(>=4.2)
         return string.allSatisfy({ (character) -> Bool in
             return "0"..."9" ~= character || (currentCurrency.factor > 1 && "." == character)
         })
-        #else
-        return !string.contains(where: { (character) -> Bool in
-            return !("0"..."9" ~= character || (currentCurrency.factor > 1 && "." == character))
-        })
-        #endif
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -236,7 +230,7 @@ extension PaymentSettingTableViewController {
         }
     }
     
-    func paymentSource(for cell: UITableViewCell) -> OMSSourceTypeValue? {
+    func paymentSource(for cell: UITableViewCell) -> SourceType? {
         switch cell {
         case internetBankingBAYPaymentCell:
             return .internetBankingBAY
@@ -263,13 +257,13 @@ extension PaymentSettingTableViewController {
         case installmentSCBPaymentCell:
             return .installmentSCB
         case eContextPaymentCell:
-            return .eContext
+            return .econtext
         case promptpayPaymentCell:
-            return .promptPay
+            return .promptpay
         case paynowPaymentCell:
-            return .payNow
+            return .paynow
         case truemoneyPaymentCell:
-            return .trueMoney
+            return .truemoney
         case pointsCitiCell:
             return .pointsCiti
         default:
@@ -277,7 +271,7 @@ extension PaymentSettingTableViewController {
         }
     }
     
-    func cell(for paymentSource: OMSSourceTypeValue) -> UITableViewCell? {
+    func cell(for paymentSource: SourceType) -> UITableViewCell? {
         switch paymentSource {
         case .internetBankingBAY:
             return internetBankingBAYPaymentCell
@@ -303,13 +297,13 @@ extension PaymentSettingTableViewController {
             return installmentKBankPaymentCell
         case .installmentSCB:
             return installmentSCBPaymentCell
-        case .eContext:
+        case .econtext:
             return eContextPaymentCell
-        case .promptPay:
+        case .promptpay:
             return promptpayPaymentCell
-        case .payNow:
+        case .paynow:
             return paynowPaymentCell
-        case .trueMoney:
+        case .truemoney:
             return truemoneyPaymentCell
         case .pointsCiti:
             return pointsCitiCell

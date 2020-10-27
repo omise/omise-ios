@@ -10,18 +10,6 @@ public protocol PaymentCreatorControllerDelegate: NSObjectProtocol {
     func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController)
 }
 
-
-@objc public protocol OMSPaymentCreatorControllerDelegate: NSObjectProtocol {
-    @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
-                                  didCreateToken token: __OmiseToken)
-    @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
-                                  didCreateSource source: __OmiseSource)
-    @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
-                                  didFailWithError error: Error)
-    @objc optional func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController)
-}
-
-
 public enum Payment {
     case token(Token)
     case source(Source)
@@ -34,15 +22,12 @@ public protocol PaymentChooserUI: AnyObject {
 
 
 /// Drop-in UI flow controller that let user choose the payment method with the given payment options
-@objc(OMSPaymentCreatorController)
 public class PaymentCreatorController : UINavigationController {
     /// Omise public key for calling tokenization API.
-    @objc public var publicKey: String? {
+    public var publicKey: String? {
         didSet {
             guard let publicKey = publicKey else {
-                if #available(iOSApplicationExtension 10.0, *) {
-                    os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.publicKey ?? "")
-                }
+                os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.publicKey ?? "")
                 assertionFailure("Missing public key information. Please set the public key before request token.")
                 return
             }
@@ -63,29 +48,9 @@ public class PaymentCreatorController : UINavigationController {
             paymentSourceCreatorFlowSession.paymentCurrency = paymentCurrency
         }
     }
-    
-    /// Amount to create a Source payment
-    @objc(paymentAmount) public var __paymentAmount: Int64 {
-        get {
-            return paymentAmount ?? 0
-        }
-        set {
-            paymentAmount = newValue > 0 ? Int64(newValue) : nil
-        }
-    }
-    
-    /// Currency to create a Source payment
-    @objc(paymentCurrencyCode) public var __paymentCurrencyCode: String? {
-        get {
-            return paymentCurrency?.code
-        }
-        set {
-            paymentCurrency = newValue.map(Currency.init(code:))
-        }
-    }
-    
+
     /// Boolean indicates that the form should show the Credit Card payment option or not
-    @objc public var showsCreditCardPayment: Bool = true {
+    public var showsCreditCardPayment: Bool = true {
         didSet {
             paymentChooserViewController.showsCreditCardPayment = showsCreditCardPayment
         }
@@ -93,7 +58,7 @@ public class PaymentCreatorController : UINavigationController {
     
     /// Available Source payment options to let user to choose.
     /// The default value is the default available payment method for merchant in Thailand
-    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentCreatorController.thailandDefaultAvailableSourceMethods {
+    public var allowedPaymentMethods: [SourceType] = PaymentCreatorController.thailandDefaultAvailableSourceMethods {
         didSet {
             paymentChooserViewController.allowedPaymentMethods = allowedPaymentMethods
         }
@@ -104,12 +69,10 @@ public class PaymentCreatorController : UINavigationController {
     /// The controller will show an error alert in the UI if the value is true,
     /// otherwise the controller will ask its delegate.
     /// Defaults to `true`.
-    @objc public var handleErrors: Bool = true
+    public var handleErrors: Bool = true
     
     /// Delegate to receive CreditCardFormController result.
     public weak var paymentDelegate: PaymentCreatorControllerDelegate?
-    /// Delegate to receive CreditCardFormController result.
-    @objc(paymentDelegate) public weak var __paymentDelegate: OMSPaymentCreatorControllerDelegate?
 
     var client: Client? {
         didSet {
@@ -134,8 +97,8 @@ public class PaymentCreatorController : UINavigationController {
     }()
     
     
-    @objc @IBInspectable public var preferredPrimaryColor: UIColor?
-    @objc @IBInspectable public var preferredSecondaryColor: UIColor? {
+    @IBInspectable public var preferredPrimaryColor: UIColor?
+    @IBInspectable public var preferredSecondaryColor: UIColor? {
         didSet {
             #if compiler(>=5.1)
             if #available(iOS 13, *) {
@@ -151,7 +114,7 @@ public class PaymentCreatorController : UINavigationController {
     /// - parameter publicKey: Omise public key.
     public static func makePaymentCreatorControllerWith(
         publicKey: String, amount: Int64, currency: Currency,
-        allowedPaymentMethods: [OMSSourceTypeValue],
+        allowedPaymentMethods: [SourceType],
         paymentDelegate: PaymentCreatorControllerDelegate?) -> PaymentCreatorController {
         let omiseBundle = Bundle(for: self)
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: omiseBundle)
@@ -163,21 +126,6 @@ public class PaymentCreatorController : UINavigationController {
         paymentCreatorController.paymentDelegate = paymentDelegate
         
         return paymentCreatorController
-    }
-    
-    /// Factory method for creating CreditCardFormController with given public key.
-    /// - parameter publicKey: Omise public key.
-    @objc(paymentCreatorControllerWithPublicKey:amount:currency:allowedPaymentMethods:paymentDelegate:)
-    public static func __makePaymentCreatorViewControllerWith(
-        publicKey: String, amount: Int64, currencyCode: String,
-        allowedPaymentMethods: [OMSSourceTypeValue],
-        paymentDelegate: OMSPaymentCreatorControllerDelegate) -> PaymentCreatorController {
-        let controller = PaymentCreatorController.makePaymentCreatorControllerWith(
-            publicKey: publicKey, amount: amount, currency: Currency(code: currencyCode),
-            allowedPaymentMethods: allowedPaymentMethods,
-            paymentDelegate: nil)
-        controller.__paymentDelegate = paymentDelegate
-        return controller
     }
 
     public init() {
@@ -242,12 +190,7 @@ public class PaymentCreatorController : UINavigationController {
     public func applyPaymentMethods(from capability: Capability) {
         paymentChooserViewController.applyPaymentMethods(from: capability)
     }
-    
-    @objc(applyPaymentMethodsFrom:)
-    public func __applyPaymentMethods(from capability: __OmiseCapability) {
-        applyPaymentMethods(from: capability.capability)
-    }
-    
+        
     private func initializeWithPaymentChooserViewController(_ viewController: PaymentChooserViewController) {
         viewController.preferredPrimaryColor = preferredPrimaryColor
         viewController.preferredSecondaryColor = preferredSecondaryColor
@@ -258,15 +201,7 @@ public class PaymentCreatorController : UINavigationController {
         
         paymentSourceCreatorFlowSession.delegate = self
         
-        if #available(iOS 9.0, *) {
-            noticeViewHeightConstraint = displayingNoticeView.heightAnchor.constraint(equalToConstant: 0)
-        } else {
-            noticeViewHeightConstraint = NSLayoutConstraint(
-                item: displayingNoticeView, attribute: .height, relatedBy: .equal,
-                toItem: nil, attribute: .notAnAttribute,
-                multiplier: 1.0, constant: 0
-            )
-        }
+        noticeViewHeightConstraint = displayingNoticeView.heightAnchor.constraint(equalToConstant: 0)
         noticeViewHeightConstraint.isActive = true
         
         let dismissErrorBannerTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissErrorMessageBanner(_:)))
@@ -286,19 +221,11 @@ public class PaymentCreatorController : UINavigationController {
         displayingNoticeView.detailLabel.text = message
         view.insertSubview(self.displayingNoticeView, belowSubview: navigationBar)
         
-        if #available(iOS 9.0, *) {
-            NSLayoutConstraint.activate([
-                displayingNoticeView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
-                displayingNoticeView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                displayingNoticeView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            ])
-        } else {
-            let views = ["displayingNoticeView": displayingNoticeView] as [String: UIView]
-            let constraints = NSLayoutConstraint.constraints(withVisualFormat: "|[displayingNoticeView]|", options: [], metrics: nil, views: views) +
-                [ NSLayoutConstraint(item: displayingNoticeView, attribute: .top, relatedBy: .equal, toItem: navigationBar, attribute: .bottom, multiplier: 1.0, constant: 0)]
-            view.addConstraints(constraints)
-        }
-        
+        NSLayoutConstraint.activate([
+            displayingNoticeView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
+            displayingNoticeView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            displayingNoticeView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
         noticeViewHeightConstraint.isActive = true
         view.layoutIfNeeded()
         
@@ -307,7 +234,7 @@ public class PaymentCreatorController : UINavigationController {
             self.view.layoutIfNeeded()
             if #available(iOS 13, *) {
                 self.topViewController?.additionalSafeAreaInsets.top = self.displayingNoticeView.bounds.height
-            } else if #available(iOS 11, *) {
+            } else {
                 self.additionalSafeAreaInsets.top = self.displayingNoticeView.bounds.height
             }
         }
@@ -330,7 +257,7 @@ public class PaymentCreatorController : UINavigationController {
             self.view.layoutIfNeeded()
             if #available(iOS 13, *) {
                 self.topViewController?.additionalSafeAreaInsets.top = 0
-            } else if #available(iOS 11, *) {
+            } else {
                 self.additionalSafeAreaInsets.top = 0
             }
         }
@@ -360,7 +287,6 @@ public class PaymentCreatorController : UINavigationController {
         super.pushViewController(viewController, animated: animated)
     }
     
-    #if swift(>=4.2)
     public override func addChild(_ childController: UIViewController) {
         if let viewController = childController as? PaymentChooserUI {
             viewController.preferredPrimaryColor = preferredPrimaryColor
@@ -371,18 +297,6 @@ public class PaymentCreatorController : UINavigationController {
         }
         super.addChild(childController)
     }
-    #else
-    public override func addChildViewController(_ childController: UIViewController) {
-        if let viewController = childController as? PaymentChooserUI {
-            viewController.preferredPrimaryColor = preferredPrimaryColor
-            viewController.preferredSecondaryColor = preferredSecondaryColor
-        }
-        if let viewController = childController as? PaymentChooserViewController {
-            viewController.flowSession = self.paymentSourceCreatorFlowSession
-        }
-        super.addChildViewController(childController)
-    }
-    #endif
     
     public override func loadView() {
         super.loadView()
@@ -422,7 +336,7 @@ public class PaymentCreatorController : UINavigationController {
             coordinator.animate(alongsideTransition: { (context) in
                 if #available(iOS 13, *) {
                     self.additionalSafeAreaInsets.top = 0
-                } else if #available(iOS 11, *) {
+                } else {
                     self.additionalSafeAreaInsets.top = self.displayingNoticeView.bounds.height
                 }
             }, completion: nil)
@@ -442,53 +356,31 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
     }
     
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreateToken token: Token) {
-        if #available(iOSApplicationExtension 10.0, *) {
-            os_log("Credit Card Form in Payment Createor - Request succeed %{private}@, trying to notify the delegate", log: uiLogObject, type: .default, token.id)
-        }
+        os_log("Credit Card Form in Payment Createor - Request succeed %{private}@, trying to notify the delegate", log: uiLogObject, type: .default, token.id)
         
         if let paymentDelegate = self.paymentDelegate {
             paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.token(token))
-        } else if let paymentDelegate = self.__paymentDelegate {
-            paymentDelegate.paymentCreatorController(self, didCreateToken: __OmiseToken(token: token))
         }
     }
     
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreatedSource source: Source) {
-        if #available(iOSApplicationExtension 10.0, *) {
-            os_log("Payment Creator Create Source Request succeed %{private}@, trying to notify the delegate", log: uiLogObject, type: .default, source.id)
-        }
+        os_log("Payment Creator Create Source Request succeed %{private}@, trying to notify the delegate", log: uiLogObject, type: .default, source.id)
         
         if let paymentDelegate = self.paymentDelegate {
             paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.source(source))
-            if #available(iOS 10, *) {
-                os_log("Payment Creator Created Source succeed delegate notified", log: uiLogObject, type: .default)
-            }
-        } else if let paymentDelegate = self.__paymentDelegate {
-            paymentDelegate.paymentCreatorController(self, didCreateSource: __OmiseSource(source: source))
-            if #available(iOS 10, *) {
-                os_log("Payment Creator Created Source succeed delegate notified", log: uiLogObject, type: .default)
-            }
-        } else if #available(iOS 10, *) {
+            os_log("Payment Creator Created Source succeed delegate notified", log: uiLogObject, type: .default)
+        } else {
             os_log("There is no Payment Creator delegate to notify about the created source", log: uiLogObject, type: .default)
         }
     }
     
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didFailWithError error: Error) {
         if !handleErrors {
-            if #available(iOSApplicationExtension 10.0, *) {
-                os_log("Payment Creator Request failed %{private}@, automatically error handling turned off. Trying to notify the delegate", log: uiLogObject, type: .info, error.localizedDescription)
-            }
+            os_log("Payment Creator Request failed %{private}@, automatically error handling turned off. Trying to notify the delegate", log: uiLogObject, type: .info, error.localizedDescription)
             if let paymentDelegate = self.paymentDelegate {
                 paymentDelegate.paymentCreatorController(self, didFailWithError: error)
-                if #available(iOSApplicationExtension 10.0, *) {
-                    os_log("Payment Creator error handling delegate notified", log: uiLogObject, type: .default)
-                }
-            } else if let paymentDelegate = self.__paymentDelegate {
-                paymentDelegate.paymentCreatorController(self, didFailWithError: error)
-                if #available(iOSApplicationExtension 10.0, *) {
-                    os_log("Payment Creator error handling delegate notified", log: uiLogObject, type: .default)
-                }
-            } else if #available(iOSApplicationExtension 10.0, *) {
+                os_log("Payment Creator error handling delegate notified", log: uiLogObject, type: .default)
+            } else {
                 os_log("There is no Payment Creator delegate to notify about the error", log: uiLogObject, type: .default)
             }
         } else if let error = error as? OmiseError {
@@ -502,22 +394,16 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
                              animated: true, sender: self)
         }
         
-        if #available(iOSApplicationExtension 10.0, *) {
-            os_log("Payment Creator Request failed %{private}@, automatically error handling turned on.", log: uiLogObject, type: .default, error.localizedDescription)
-        }
+        os_log("Payment Creator Request failed %{private}@, automatically error handling turned on.", log: uiLogObject, type: .default, error.localizedDescription)
     }
     
     func paymentCreatorFlowSessionDidCancel(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession) {
-        if #available(iOSApplicationExtension 10.0, *) {
-            os_log("Payment Creator dismissal requested. Asking the delegate what should the controler do",
-                   log: uiLogObject, type: .default)
-        }
+        os_log("Payment Creator dismissal requested. Asking the delegate what should the controler do",
+               log: uiLogObject, type: .default)
         
         if let paymentDelegate = self.paymentDelegate {
             paymentDelegate.paymentCreatorControllerDidCancel(self)
-        } else if let paymentDidCancelDelegateMethod = self.__paymentDelegate?.paymentCreatorControllerDidCancel {
-            paymentDidCancelDelegateMethod(self)
-        } else if #available(iOS 10, *) {
+        } else {
             os_log("Payment Creator dismissal requested but there is no delegate to ask. Ignore the request", log: uiLogObject, type: .default)
         }
     }
@@ -525,7 +411,7 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
 
 
 extension PaymentCreatorController {
-    public static let thailandDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
+    public static let thailandDefaultAvailableSourceMethods: [SourceType] = [
         .internetBankingBAY,
         .internetBankingKTB,
         .internetBankingSCB,
@@ -538,27 +424,27 @@ extension PaymentCreatorController {
         .installmentKTC,
         .installmentKBank,
         .installmentSCB,
-        .promptPay,
-        .trueMoney,
+        .promptpay,
+        .truemoney,
         .pointsCiti
     ]
     
-    public static let japanDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
-        .eContext,
+    public static let japanDefaultAvailableSourceMethods: [SourceType] = [
+        .econtext,
     ]
     
-    public static let singaporeDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
-        .payNow,
+    public static let singaporeDefaultAvailableSourceMethods: [SourceType] = [
+        .paynow,
     ]
     
-    public static let internetBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
+    public static let internetBankingAvailablePaymentMethods: [SourceType] = [
         .internetBankingBAY,
         .internetBankingKTB,
         .internetBankingSCB,
         .internetBankingBBL,
     ]
     
-    public static let installmentsBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
+    public static let installmentsBankingAvailablePaymentMethods: [SourceType] = [
         .installmentBAY,
         .installmentFirstChoice,
         .installmentBBL,
@@ -567,11 +453,11 @@ extension PaymentCreatorController {
         .installmentSCB,
     ]
     
-    public static let billPaymentAvailablePaymentMethods: [OMSSourceTypeValue] = [
+    public static let billPaymentAvailablePaymentMethods: [SourceType] = [
         .billPaymentTescoLotus,
     ]
     
-    public static let barcodeAvailablePaymentMethods: [OMSSourceTypeValue] = [
+    public static let barcodeAvailablePaymentMethods: [SourceType] = [
         .barcodeAlipay,
     ]
 }
