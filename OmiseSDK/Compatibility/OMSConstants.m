@@ -4,6 +4,7 @@
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInternetBankingBAY = @"internet_banking_bay";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInternetBankingKTB = @"internet_banking_ktb";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInternetBankingSCB = @"internet_banking_scb";
+OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingSCB = @"mobile_banking_scb";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInternetBankingBBL = @"internet_banking_bbl";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueAlipay = @"alipay";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueBillPaymentTescoLotus = @"bill_payment_tesco_lotus";

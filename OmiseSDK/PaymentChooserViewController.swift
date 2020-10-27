@@ -6,6 +6,7 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
     case creditCard
     case installment
     case internetBanking
+    case mobileBanking
     case tescoLotus
     case conbini
     case payEasy
@@ -25,6 +26,7 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
             .citiPoints,
             .alipay,
             .internetBanking,
+            .mobileBanking,
             .tescoLotus,
             .paynow,
             .conbini,
@@ -41,6 +43,8 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
             return "Installment"
         case .internetBanking:
             return "InternetBanking"
+        case .mobileBanking:
+            return "MobileBanking"
         case .tescoLotus:
             return "Tesco Lotus"
         case .conbini:
@@ -70,6 +74,8 @@ extension PaymentChooserOption {
             return [.truemoney]
         case .installmentFirstChoice, .installmentKBank, .installmentKTC, .installmentBBL, .installmentBAY, .installmentSCB:
             return [.installment]
+        case .mobileBankingSCB:
+            return [.mobileBanking]
         case .billPaymentTescoLotus:
             return [.tescoLotus]
         case .eContext:

@@ -294,6 +294,8 @@ extension PaymentInformation {
                 bank = .ktb
             case .internetBankingSCB:
                 bank = .scb
+            case .mobileBankingSCB:
+                bank = .scb
             case .internetBankingBBL:
                 bank = .bbl
             case let type:

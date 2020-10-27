@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Mobile Banking.pdf",
+      "idiom" : "universal"
+    } 
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
