@@ -71,6 +71,9 @@ class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
     static let eContextSourceBackendPayment =
     __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.eContext)
     
+    static let mobileBankingSourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.mobileBankingSCB)
+    
     static func makeInternetBankingSourceBackendPayment(
         bank: PaymentInformation.InternetBanking
         ) -> __OmiseCapabilitySourceBackendPayment {
@@ -122,6 +125,8 @@ extension __OmiseCapabilityBackendPayment {
             return __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue(points.type))
         case .eContext:
             return __OmiseCapabilitySourceBackendPayment.eContextSourceBackendPayment
+        case .mobileBanking:
+            return __OmiseCapabilitySourceBackendPayment.mobileBankingSourceBackendPayment
         case .unknownSource(let type, let configurations):
             return __OmiseCapabilityUnknownSourceBackendPayment(sourceType: type, parameters: configurations)
         }

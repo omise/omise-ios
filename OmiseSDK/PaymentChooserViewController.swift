@@ -282,6 +282,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 10, section: 0)
         case .netBanking:
             return IndexPath(row: 11, section: 0)
+        case .mobileBanking:
+            return IndexPath(row: 12, section: 0)
         }
     }
     
@@ -307,6 +309,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue(billPayment.type)
             case .eContext:
                 return OMSSourceTypeValue.eContext
+            case .mobileBanking:
+                return OMSSourceTypeValue.mobileBankingSCB
             case .card, .unknownSource:
                 return nil
             }

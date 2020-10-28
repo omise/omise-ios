@@ -61,6 +61,7 @@ extension Capability {
             case card(Set<CardBrand>)
             case installment(PaymentInformation.Installment.Brand, availableNumberOfTerms: IndexSet)
             case internetBanking(PaymentInformation.InternetBanking)
+            case mobileBanking
             case billPayment(PaymentInformation.BillPayment)
             case alipay
             case promptpay
@@ -206,7 +207,7 @@ extension Capability.Backend {
         case .unknownSource(_, configurations: let configurations):
             try encoder.encodeJSONDictionary(configurations)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
-        case .internetBanking, .alipay, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext:
+        case .internetBanking, .alipay, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
     }
@@ -266,6 +267,8 @@ extension Capability.Backend {
                 self = .source(OMSSourceTypeValue(points.type))
             case .eContext:
                 self = .source(.eContext)
+            case .mobileBanking:
+                self = .source(.mobileBankingSCB)
             }
         }
         
