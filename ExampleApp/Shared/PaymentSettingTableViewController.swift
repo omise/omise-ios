@@ -95,7 +95,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet var installmentKTCPaymentCell: UITableViewCell!
     @IBOutlet var installmentKBankPaymentCell: UITableViewCell!
     @IBOutlet var installmentSCBPaymentCell: UITableViewCell!
-    @IBOutlet var mobileBankingSCBPaymentCell: UITableView!
+    @IBOutlet var mobileBankingSCBPaymentCell: UITableViewCell!
     @IBOutlet var eContextPaymentCell: UITableViewCell!
     @IBOutlet var promptpayPaymentCell: UITableViewCell!
     @IBOutlet var paynowPaymentCell: UITableViewCell!
