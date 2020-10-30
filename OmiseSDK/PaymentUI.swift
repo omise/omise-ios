@@ -257,6 +257,24 @@ extension OMSSourceTypeValue {
             return false
         }
     }
+
+    var mobileBankingSource: PaymentInformation.MobileBanking? {
+        switch self {
+        case .mobileBankingSCB:
+            return .scb
+        default:
+            return nil
+        }
+    }
+
+    var isMobileBankingSource: Bool {
+        switch self {
+        case .mobileBankingSCB:
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 

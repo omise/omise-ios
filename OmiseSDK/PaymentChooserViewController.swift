@@ -74,8 +74,6 @@ extension PaymentChooserOption {
             return [.truemoney]
         case .installmentFirstChoice, .installmentKBank, .installmentKTC, .installmentBBL, .installmentBAY, .installmentSCB:
             return [.installment]
-        case .mobileBankingSCB:
-            return [.mobileBanking]
         case .billPaymentTescoLotus:
             return [.tescoLotus]
         case .eContext:
@@ -84,6 +82,8 @@ extension PaymentChooserOption {
             return [.alipay]
         case .internetBankingBAY, .internetBankingKTB, .internetBankingBBL, .internetBankingSCB:
             return [.internetBanking]
+        case .mobileBankingSCB:
+            return [.mobileBanking]
         case .payNow:
             return [.paynow]
         case .promptPay:
@@ -163,6 +163,9 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             controller.navigationItem.rightBarButtonItem = nil
         case ("GoToInternetBankingChooserSegue"?, let controller as InternetBankingSourceChooserViewController):
             controller.showingValues = allowedPaymentMethods.compactMap({ $0.internetBankingSource })
+            controller.flowSession = self.flowSession
+        case ("GoToMobileBankingChooserSegue"?, let controller as MobileBankingSourceChooserViewController):
+            controller.showingValues = allowedPaymentMethods.compactMap({ $0.mobileBankingSource })
             controller.flowSession = self.flowSession
         case ("GoToInstallmentBrandChooserSegue"?, let controller as InstallmentBankingSourceChooserViewController):
             controller.showingValues = allowedPaymentMethods.compactMap({ $0.installmentBrand })
@@ -309,8 +312,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue(billPayment.type)
             case .eContext:
                 return OMSSourceTypeValue.eContext
-            case .mobileBanking:
-                return OMSSourceTypeValue.mobileBankingSCB
+            case .mobileBanking(let bank):
+                return OMSSourceTypeValue(bank.type)
             case .card, .unknownSource:
                 return nil
             }
