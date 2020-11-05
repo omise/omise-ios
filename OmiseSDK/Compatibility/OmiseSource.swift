@@ -263,6 +263,26 @@ public class __SourcePointsPayment: __SourcePaymentInformation {
     }
 }
 
+/// Mobile Bankning Source Payment Information
+@objc(OMSMobileBankingPaymentInformation)
+@objcMembers
+public class __SourceMobileBankingPayment: __SourcePaymentInformation {
+
+    /// Payment Information for a SCB Mobile Banking Payment
+    public static let scbMobileBankingPayment = __SourceMobileBankingPayment(type: OMSSourceTypeValue.mobileBankingSCB)!
+
+    /// Create an Mobile Banking payment with the given source type value
+    ///
+    /// - Parameter type: Source type of the source to be created
+    /// - Precondition: type must have a prefix of `internet_banking`
+    @objc public override init?(type: OMSSourceTypeValue) {
+        guard type.rawValue.hasPrefix(PaymentInformation.MobileBanking.paymentMethodTypePrefix) else {
+            return nil
+        }
+        super.init(type: type)
+    }
+}
+
 /// CustomSource Source Payment Information
 @objc(OMSCustomPaymentInformation)
 @objcMembers
@@ -293,6 +313,8 @@ extension PaymentInformation {
             case .internetBankingKTB:
                 bank = .ktb
             case .internetBankingSCB:
+                bank = .scb
+            case .mobileBankingSCB:
                 bank = .scb
             case .internetBankingBBL:
                 bank = .bbl
@@ -440,7 +462,15 @@ extension __SourcePaymentInformation {
             case .other(let type):
                 return __CustomSourcePayment(customType: type, parameters: [:])
             }
-            
+
+        case .mobileBanking(let bank):
+            switch bank {
+            case .scb:
+                return __SourceMobileBankingPayment.scbMobileBankingPayment
+            case .other(let type):
+                return __CustomSourcePayment(customType: type, parameters: [:])
+            }
+
         case .other(type: let type, parameters: let parameters):
             return __CustomSourcePayment(customType: type, parameters: parameters)
         }

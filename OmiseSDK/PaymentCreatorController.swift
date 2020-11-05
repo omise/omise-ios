@@ -530,6 +530,7 @@ extension PaymentCreatorController {
         .internetBankingKTB,
         .internetBankingSCB,
         .internetBankingBBL,
+        .mobileBankingSCB,
         .alipay,
         .billPaymentTescoLotus,
         .installmentBAY,
@@ -573,6 +574,10 @@ extension PaymentCreatorController {
     
     public static let barcodeAvailablePaymentMethods: [OMSSourceTypeValue] = [
         .barcodeAlipay,
+    ]
+
+    public static let mobileBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
+        .mobileBankingSCB
     ]
 }
 

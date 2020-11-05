@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17503.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ALK-ZP-CXg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ALK-ZP-CXg">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17502"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -508,7 +508,7 @@
                             <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="g6L-kx-hv0">
-                            <rect key="frame" x="0.0" y="824" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="888" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -868,6 +868,36 @@
                                         <connections>
                                             <outlet property="accessoryView" destination="LfD-dg-Nbx" id="bVB-LJ-meg"/>
                                             <segue destination="hC0-5j-tkj" kind="show" id="t2g-nU-nna"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="drr-nc-RA8" imageView="d9T-D0-QRl" rowHeight="64" style="IBUITableViewCellStyleDefault" id="byf-aE-2pb" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="796" width="375" height="64"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="byf-aE-2pb" id="VEt-Vg-mwc">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Mobile Banking" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="drr-nc-RA8">
+                                                    <rect key="frame" x="63" y="0.0" width="296" height="64"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="MobileBanking" id="d9T-D0-QRl">
+                                                    <rect key="frame" x="16" y="16" width="32" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Next" translatesAutoresizingMaskIntoConstraints="NO" id="99V-bg-sIB">
+                                                    <rect key="frame" x="345" y="23" width="16" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <color key="tintColor" red="0.89019607840000003" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="accessoryView" destination="99V-bg-sIB" id="DJu-Tc-z6j"/>
+                                            <segue destination="9Up-v5-UpG" kind="show" identifier="GoToMobileBankingChooserSegue" id="X8s-2E-OzW"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -1843,6 +1873,95 @@
             </objects>
             <point key="canvasLocation" x="1805.5999999999999" y="374.6305418719212"/>
         </scene>
+        <!--Mobile Banking-->
+        <scene sceneID="pFJ-pw-u2Z">
+            <objects>
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="9Up-v5-UpG" customClass="OMSMobileBankingSourceChooserViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="XKU-sg-sJh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableHeaderView" alpha="0.0" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="TjT-zH-QQx">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" verticalHuggingPriority="499" horizontalCompressionResistancePriority="950" verticalCompressionResistancePriority="950" image="Alert" translatesAutoresizingMaskIntoConstraints="NO" id="pu3-C1-6F9">
+                                    <rect key="frame" x="16" y="-15" width="30" height="30"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="499" horizontalCompressionResistancePriority="949" verticalCompressionResistancePriority="950" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAF-XE-M8X">
+                                    <rect key="frame" x="58" y="0.0" width="301" height="0.0"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstItem="pu3-C1-6F9" firstAttribute="leading" secondItem="TjT-zH-QQx" secondAttribute="leadingMargin" id="7LP-6b-CK2"/>
+                                <constraint firstItem="pu3-C1-6F9" firstAttribute="centerY" secondItem="TjT-zH-QQx" secondAttribute="centerY" id="Kfz-rE-uDw"/>
+                                <constraint firstItem="iAF-XE-M8X" firstAttribute="top" relation="greaterThanOrEqual" secondItem="TjT-zH-QQx" secondAttribute="top" priority="975" constant="10" id="ktd-7l-R2L"/>
+                                <constraint firstItem="iAF-XE-M8X" firstAttribute="leading" secondItem="pu3-C1-6F9" secondAttribute="trailing" constant="12" id="lHM-EJ-WJa"/>
+                                <constraint firstItem="iAF-XE-M8X" firstAttribute="centerY" secondItem="pu3-C1-6F9" secondAttribute="centerY" id="mwP-BZ-5zw"/>
+                                <constraint firstAttribute="trailingMargin" secondItem="iAF-XE-M8X" secondAttribute="trailing" id="py5-8e-EwJ"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="iAF-XE-M8X" secondAttribute="bottom" priority="975" constant="10" id="yLv-Vb-Ai9"/>
+                            </constraints>
+                            <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
+                        </view>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="LOX-Rh-ZY1">
+                            <rect key="frame" x="0.0" y="120" width="375" height="0.0"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <sections>
+                            <tableViewSection id="Ii8-Zv-zbp">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="EQF-26-ssb" imageView="HqK-eY-xEE" rowHeight="64" style="IBUITableViewCellStyleDefault" id="FLo-QG-lwc" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="64"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FLo-QG-lwc" id="oKa-NJ-5pR">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Siam Commercial Bank" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EQF-26-ssb">
+                                                    <rect key="frame" x="63" y="0.0" width="296" height="64"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="SCB" id="HqK-eY-xEE">
+                                                    <rect key="frame" x="16" y="16" width="32" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Redirect" translatesAutoresizingMaskIntoConstraints="NO" id="qiT-U0-zh4">
+                                                    <rect key="frame" x="345" y="23" width="16" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="tintColor" red="0.89019607840000003" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="accessoryView" destination="qiT-U0-zh4" id="Ugh-CP-OQR"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="9Up-v5-UpG" id="giQ-Lm-v58"/>
+                            <outlet property="delegate" destination="9Up-v5-UpG" id="d1R-3t-EcR"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Mobile Banking" largeTitleDisplayMode="never" id="agh-p8-Mln"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outletCollection property="mobileBankingNameLabels" destination="EQF-26-ssb" collectionClass="NSMutableArray" id="CWh-hU-24g"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k5m-Wj-xWF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4692" y="-350"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="1dv-2d-6Zi">
@@ -1888,6 +2007,7 @@
         <image name="KTB" width="32" height="32"/>
         <image name="KTC" width="32" height="32"/>
         <image name="Kasikorn" width="32" height="32"/>
+        <image name="MobileBanking" width="32" height="32"/>
         <image name="More Info" width="16" height="16"/>
         <image name="Netbank" width="32" height="32"/>
         <image name="Next" width="16" height="16"/>

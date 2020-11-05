@@ -70,9 +70,9 @@
 		8A76791F214663560085DE3C /* PaymentUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A76791E214663560085DE3C /* PaymentUI.swift */; };
 		8A776647214A5FC60029D166 /* NoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A776646214A5FC60029D166 /* NoticeView.xib */; };
 		8A7A9EBE2166160300F12D86 /* PaymentSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */; };
-		8A7A9EC0216642D100F12D86 /* Swift Version Compatability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatability.swift */; };
-		8A7A9EC12166578700F12D86 /* Swift Version Compatability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatability.swift */; };
-		8A7A9EC22166578800F12D86 /* Swift Version Compatability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatability.swift */; };
+		8A7A9EC0216642D100F12D86 /* Swift Version Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatibility.swift */; };
+		8A7A9EC12166578700F12D86 /* Swift Version Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatibility.swift */; };
+		8A7A9EC22166578800F12D86 /* Swift Version Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatibility.swift */; };
 		8A87DBCB226DA404001596F1 /* OmiseCapability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A87DBCA226DA404001596F1 /* OmiseCapability.swift */; };
 		8AC1D3A32139224D0051F966 /* InternetBankingSourceChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC1D3A22139224D0051F966 /* InternetBankingSourceChooserViewController.swift */; };
 		8AC1D3A5213922570051F966 /* InstallmentBankingSourceChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC1D3A4213922570051F966 /* InstallmentBankingSourceChooserViewController.swift */; };
@@ -98,6 +98,7 @@
 		987A02CE1CE35D5E0035417A /* OmiseSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225931181CE3210700841B86 /* OmiseSDK.framework */; };
 		987A03211CE5B7D70035417A /* OmiseTokenRequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A03201CE5B7D70035417A /* OmiseTokenRequestTest.swift */; };
 		987A03AD1CE5CD450035417A /* Fixtures in Resources */ = {isa = PBXBuildFile; fileRef = 987A03AC1CE5CD450035417A /* Fixtures */; };
+		F3497368254C067000D05C7B /* MobileBankingSourceChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3497367254C066F00D05C7B /* MobileBankingSourceChooserViewController.swift */; };
 		F6614CD6243DB8E7005B656E /* TrueMoneyFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6614CD5243DB8E7005B656E /* TrueMoneyFormViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -223,7 +224,7 @@
 		8A776657214AA4E70029D166 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ja; path = ja.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		8A776658214AA4F10029D166 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Error.strings; sourceTree = "<group>"; };
 		8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSettingTableViewController.swift; sourceTree = "<group>"; };
-		8A7A9EBF216642D100F12D86 /* Swift Version Compatability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift Version Compatability.swift"; sourceTree = "<group>"; };
+		8A7A9EBF216642D100F12D86 /* Swift Version Compatibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift Version Compatibility.swift"; sourceTree = "<group>"; };
 		8A87DBCA226DA404001596F1 /* OmiseCapability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseCapability.swift; sourceTree = "<group>"; };
 		8AC1D3A22139224D0051F966 /* InternetBankingSourceChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetBankingSourceChooserViewController.swift; sourceTree = "<group>"; };
 		8AC1D3A4213922570051F966 /* InstallmentBankingSourceChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentBankingSourceChooserViewController.swift; sourceTree = "<group>"; };
@@ -253,6 +254,7 @@
 		987A02CD1CE35D5E0035417A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		987A03201CE5B7D70035417A /* OmiseTokenRequestTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseTokenRequestTest.swift; sourceTree = "<group>"; };
 		987A03AC1CE5CD450035417A /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fixtures; sourceTree = "<group>"; };
+		F3497367254C066F00D05C7B /* MobileBankingSourceChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileBankingSourceChooserViewController.swift; sourceTree = "<group>"; };
 		F6614CD5243DB8E7005B656E /* TrueMoneyFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrueMoneyFormViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -326,7 +328,7 @@
 				8A0927841D535548008D393F /* Library */,
 				8A2BE95720A9A8F1000CEB60 /* Models */,
 				8A2BE95820A9A8FE000CEB60 /* Views */,
-				8AD0609120B550B90074894E /* Compatability */,
+				8AD0609120B550B90074894E /* Compatibility */,
 				2225B3531D0FDD63003EB396 /* Assets.xcassets */,
 				8AF985752147CC3D007E18ED /* Error.strings */,
 				8A75676B2178963B00C684C9 /* Localizable.strings */,
@@ -409,6 +411,7 @@
 				8AC1D3A4213922570051F966 /* InstallmentBankingSourceChooserViewController.swift */,
 				8AC1D3A6213941C80051F966 /* InstallmentsNumberOfTermsChooserViewController.swift */,
 				8AC1D3A22139224D0051F966 /* InternetBankingSourceChooserViewController.swift */,
+				F3497367254C066F00D05C7B /* MobileBankingSourceChooserViewController.swift */,
 				8A275CBB21241E4500C5716F /* MainActionButton.swift */,
 				8A3150AD2146B6C300A4F429 /* MoreInformationOnCVVViewController.swift */,
 				8AE23AAD20F8CA8800BC9D8F /* PaymentChooserViewController.swift */,
@@ -462,14 +465,14 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		8AD0609120B550B90074894E /* Compatability */ = {
+		8AD0609120B550B90074894E /* Compatibility */ = {
 			isa = PBXGroup;
 			children = (
 				8AF10BAE20DA6D8B00443A9C /* Objective-C */,
 				8A01F77E20D7D327003FC11E /* Old version */,
-				8A7A9EBF216642D100F12D86 /* Swift Version Compatability.swift */,
+				8A7A9EBF216642D100F12D86 /* Swift Version Compatibility.swift */,
 			);
-			path = Compatability;
+			path = Compatibility;
 			sourceTree = "<group>";
 		};
 		8ADAA9AB20B71EC400DD7CCF /* CommonCrypto */ = {
@@ -728,13 +731,14 @@
 				8AF56E602268650D0097CFEE /* OmiseTextFieldCompatability.swift in Sources */,
 				8A60619A20B2A8D400CF90D5 /* PAN.swift in Sources */,
 				2220F1AA1D0FEE85008CD89F /* OmiseError.swift in Sources */,
-				8A7A9EC0216642D100F12D86 /* Swift Version Compatability.swift in Sources */,
+				8A7A9EC0216642D100F12D86 /* Swift Version Compatibility.swift in Sources */,
 				8A0A67E821383614006356B7 /* PaymentChooserViewController.swift in Sources */,
 				8A72CD5E2162358400F14F76 /* PaymentOptionTableViewCell.swift in Sources */,
 				8AD391B1230C05BC00383286 /* Colors.swift in Sources */,
 				8A47173D20AAB11B0022733A /* Source.swift in Sources */,
 				986406351CFEA7E4004BCF51 /* OmiseTextField.swift in Sources */,
 				2220F1AD1D0FEE85008CD89F /* OmiseToken.swift in Sources */,
+				F3497368254C067000D05C7B /* MobileBankingSourceChooserViewController.swift in Sources */,
 				8AF9857221479F72007E18ED /* CreditCardFormViewController.swift in Sources */,
 				8AC1D3A32139224D0051F966 /* InternetBankingSourceChooserViewController.swift in Sources */,
 				2220F1A91D0FEE85008CD89F /* OmiseCard.swift in Sources */,
@@ -781,7 +785,7 @@
 				8A40DA2B216B53E900749F45 /* Tools.swift in Sources */,
 				229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */,
 				8AF56E62226878070097CFEE /* CustomCreditCardFormViewController.swift in Sources */,
-				8A7A9EC12166578700F12D86 /* Swift Version Compatability.swift in Sources */,
+				8A7A9EC12166578700F12D86 /* Swift Version Compatibility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -794,7 +798,7 @@
 				8A6AA06D216B958100E49E5E /* OMSBaseViewController.m in Sources */,
 				8A40DA2C216B53E900749F45 /* Tools.swift in Sources */,
 				8A43FEAA2269BD8A002E89EC /* CustomCreditCardFormViewController.m in Sources */,
-				8A7A9EC22166578800F12D86 /* Swift Version Compatability.swift in Sources */,
+				8A7A9EC22166578800F12D86 /* Swift Version Compatibility.swift in Sources */,
 				8A723A562164D7B100D902F5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1019,7 +1023,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 3.5.0;
+				MARKETING_VERSION = 3.7.0;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1052,7 +1056,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 3.5.0;
+				MARKETING_VERSION = 3.7.0;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";

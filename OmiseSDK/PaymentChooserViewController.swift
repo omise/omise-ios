@@ -6,6 +6,7 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
     case creditCard
     case installment
     case internetBanking
+    case mobileBanking
     case tescoLotus
     case conbini
     case payEasy
@@ -25,6 +26,7 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
             .citiPoints,
             .alipay,
             .internetBanking,
+            .mobileBanking,
             .tescoLotus,
             .paynow,
             .conbini,
@@ -41,6 +43,8 @@ enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvert
             return "Installment"
         case .internetBanking:
             return "InternetBanking"
+        case .mobileBanking:
+            return "MobileBanking"
         case .tescoLotus:
             return "Tesco Lotus"
         case .conbini:
@@ -78,6 +82,8 @@ extension PaymentChooserOption {
             return [.alipay]
         case .internetBankingBAY, .internetBankingKTB, .internetBankingBBL, .internetBankingSCB:
             return [.internetBanking]
+        case .mobileBankingSCB:
+            return [.mobileBanking]
         case .payNow:
             return [.paynow]
         case .promptPay:
@@ -157,6 +163,9 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             controller.navigationItem.rightBarButtonItem = nil
         case ("GoToInternetBankingChooserSegue"?, let controller as InternetBankingSourceChooserViewController):
             controller.showingValues = allowedPaymentMethods.compactMap({ $0.internetBankingSource })
+            controller.flowSession = self.flowSession
+        case ("GoToMobileBankingChooserSegue"?, let controller as MobileBankingSourceChooserViewController):
+            controller.showingValues = allowedPaymentMethods.compactMap({ $0.mobileBankingSource })
             controller.flowSession = self.flowSession
         case ("GoToInstallmentBrandChooserSegue"?, let controller as InstallmentBankingSourceChooserViewController):
             controller.showingValues = allowedPaymentMethods.compactMap({ $0.installmentBrand })
@@ -276,6 +285,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 10, section: 0)
         case .netBanking:
             return IndexPath(row: 11, section: 0)
+        case .mobileBanking:
+            return IndexPath(row: 12, section: 0)
         }
     }
     
@@ -301,6 +312,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue(billPayment.type)
             case .eContext:
                 return OMSSourceTypeValue.eContext
+            case .mobileBanking(let bank):
+                return OMSSourceTypeValue(bank.type)
             case .card, .unknownSource:
                 return nil
             }

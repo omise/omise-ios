@@ -61,6 +61,7 @@ extension Capability {
             case card(Set<CardBrand>)
             case installment(PaymentInformation.Installment.Brand, availableNumberOfTerms: IndexSet)
             case internetBanking(PaymentInformation.InternetBanking)
+            case mobileBanking(PaymentInformation.MobileBanking)
             case billPayment(PaymentInformation.BillPayment)
             case alipay
             case promptpay
@@ -110,6 +111,8 @@ extension Capability.Backend.Payment {
         case (.installment(let lhsValue), .installment(let rhsValue)):
             return lhsValue == rhsValue
         case (.internetBanking(let lhsValue), .internetBanking(let rhsValue)):
+            return lhsValue == rhsValue
+        case (.mobileBanking(let lhsValue), .mobileBanking(let rhsValue)):
             return lhsValue == rhsValue
         case (.billPayment(let lhsValue), .billPayment(let rhsValue)):
             return lhsValue == rhsValue
@@ -173,6 +176,8 @@ extension Capability.Backend {
             self.payment = .alipay
         case .source(let value) where value.isInternetBankingSource:
             self.payment = .internetBanking(value.internetBankingSource!)
+        case .source(let value) where value.isMobileBankingSource:
+            self.payment = .mobileBanking(value.mobileBankingSource!)
         case .source(.promptPay):
             self.payment = .promptpay
         case .source(.payNow):
@@ -206,7 +211,7 @@ extension Capability.Backend {
         case .unknownSource(_, configurations: let configurations):
             try encoder.encodeJSONDictionary(configurations)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
-        case .internetBanking, .alipay, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext:
+        case .internetBanking, .alipay, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
     }
@@ -251,6 +256,8 @@ extension Capability.Backend {
             case .installment(let brand, availableNumberOfTerms: _):
                 self = .source(OMSSourceTypeValue(brand.type))
             case .internetBanking(let banking):
+                self = .source(OMSSourceTypeValue(banking.type))
+            case .mobileBanking(let banking):
                 self = .source(OMSSourceTypeValue(banking.type))
             case .billPayment(let billPayment):
                 self = .source(OMSSourceTypeValue(billPayment.type))

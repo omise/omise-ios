@@ -7,6 +7,7 @@ extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInternetBankingBAY;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInternetBankingKTB;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInternetBankingSCB;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInternetBankingBBL;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingSCB;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueAlipay;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueBillPaymentTescoLotus;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueBarcodeAlipay;

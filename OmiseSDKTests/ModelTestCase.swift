@@ -223,6 +223,23 @@ class ModelTestCase: XCTestCase {
             XCTFail("Cannot decode the source \(error)")
         }
     }
+
+    func testDecodeMobileBankingSource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+
+        do {
+            let sourceData = XCTestCase.fixturesData(forFilename: "source_mobile_banking/scb")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_test_5cs0sm8u8h8nqo5zasd", source.id)
+            XCTAssertEqual(Currency.thb, source.currency)
+            XCTAssertEqual(1000000, source.amount)
+            XCTAssertEqual(PaymentInformation.mobileBanking(.scb), source.paymentInformation)
+            XCTAssertEqual(Flow.redirect, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
     
     func testDecodePromptPayQRSource() throws {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)

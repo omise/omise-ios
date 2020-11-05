@@ -187,6 +187,17 @@ public enum PaymentInformation: Codable, Equatable {
     
     /// Points Payment Source
     case points(Points)
+
+    /// The code of the bank for the Internet Bankning Payment
+    public enum MobileBanking: PaymentMethod {
+        public static let paymentMethodTypePrefix: String = "mobile_banking_"
+
+        case scb
+        case other(String)
+    }
+
+    /// Mobile Banking Payment Source
+    case mobileBanking(MobileBanking)
     
     /// Other Payment Source
     case other(type: String, parameters: [String: Any])
@@ -221,6 +232,8 @@ public enum PaymentInformation: Codable, Equatable {
             self = .truemoney(try TrueMoney(from: decoder))
         case PaymentInformation.Points.self:
             self = .points(try Points(from: decoder))
+        case PaymentInformation.MobileBanking.self:
+            self = .mobileBanking(try PaymentInformation.MobileBanking(from: decoder))
         case let value:
             self = .other(type: value, parameters: try decoder.decodeJSONDictionary().filter({ (key, _) -> Bool in
                 switch key {
@@ -264,6 +277,8 @@ public enum PaymentInformation: Codable, Equatable {
             try trueMoney.encode(to: encoder)
         case .points(let points):
             try points.encode(to: encoder)
+        case .mobileBanking(let value):
+            try value.encode(to: encoder)
         case .other(type: let type, parameters: let parameters):
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(type, forKey: .type)
@@ -290,6 +305,8 @@ public enum PaymentInformation: Codable, Equatable {
         case (.eContext(let lhsValue), .eContext(let rhsValue)):
             return lhsValue == rhsValue
         case (.points(let lhsValue), .points(let rhsValue)):
+            return lhsValue == rhsValue
+        case (.mobileBanking(let lhsValue), .mobileBanking(let rhsValue)):
             return lhsValue == rhsValue
         case (.other(let lhsType, let lhsParameters), .other(let rhsType, let rhsParameters)):
             return lhsType == rhsType &&
@@ -336,6 +353,8 @@ extension PaymentInformation {
             return OMSSourceTypeValue.trueMoney.rawValue
         case .points(let points):
             return points.type
+        case .mobileBanking(let bank):
+            return bank.type
         case .other(let value, _):
             return value
         }
@@ -723,5 +742,53 @@ extension PaymentInformation.Points {
         try container.encode(type, forKey: .type)
     }
     
+}
+
+extension PaymentInformation.MobileBanking: StaticElementIterable, CustomStringConvertible {
+    public typealias AllCases = Array<PaymentInformation.MobileBanking>
+    public static var allCases: PaymentInformation.MobileBanking.AllCases = [
+        .scb
+    ]
+
+    /// Omise Source Type value using in the Omise API
+    public var type: String {
+        switch self {
+        case .scb:
+            return OMSSourceTypeValue.mobileBankingSCB.rawValue
+        case .other(let value):
+            return PaymentInformation.MobileBanking.paymentMethodTypePrefix + value
+        }
+    }
+
+    public var description: String {
+        switch self {
+        case .scb:
+            return "SCB"
+        case .other(let value):
+            return value
+        }
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: PaymentInformation.CodingKeys.self)
+        let type = try container.decode(String.self, forKey: .type)
+
+        guard type.hasPrefix(PaymentInformation.MobileBanking.paymentMethodTypePrefix),
+            let typePrefixRange = type.range(of: PaymentInformation.MobileBanking.paymentMethodTypePrefix) else {
+                throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Invalid mobile banking source type value")
+        }
+
+        switch type[typePrefixRange.upperBound...] {
+        case "scb":
+            self = .scb
+        case let value:
+            self = .other(String(value))
+        }
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: PaymentInformation.CodingKeys.self)
+        try container.encode(type, forKey: .type)
+    }
 }
 
