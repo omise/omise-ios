@@ -1,18 +1,7 @@
 import UIKit
 
 
-#if swift(>=4.2)
 public typealias StaticElementIterable = CaseIterable
-#else
-public protocol StaticElementIterable {
-    /// A type that can represent a collection of all values of this type.
-    associatedtype AllCases : Collection where Self.AllCases.Element == Self
-    
-    /// A collection of all values of this type.
-    static var allCases: Self.AllCases { get }
-}
-#endif
-
 
 public class AdaptableStaticTableViewController<Element: StaticElementIterable & Equatable>: UITableViewController {
     

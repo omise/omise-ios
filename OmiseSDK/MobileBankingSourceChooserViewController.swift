@@ -61,11 +61,7 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
         os_log("Mobile Banking Chooser: %{private}@ was selected", log: uiLogObject, type: .info, bank.description)
 
         let oldAccessoryView = cell?.accessoryView
-        #if swift(>=4.2)
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
-        #else
-        let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
-        #endif
         loadingIndicator.color = currentSecondaryColor
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
