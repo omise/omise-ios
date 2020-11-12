@@ -305,15 +305,8 @@ extension CardExpiryDateTextField {
             expirationYearFrameInTextfield = yearFrame
         }
         
-        if #available(iOSApplicationExtension 10.0, *) {
-            expirationMonthAccessibilityElement.accessibilityFrameInContainerSpace = expirationMonthFrameInTextfield.integral
-            expirationYearAccessibilityElement.accessibilityFrameInContainerSpace = expirationYearFrameInTextfield.integral
-        } else {
-            expirationMonthAccessibilityElement.accessibilityFrame =
-                UIAccessibility.convertToScreenCoordinates(expirationMonthFrameInTextfield.integral, in: self)
-            expirationYearAccessibilityElement.accessibilityFrame =
-                UIAccessibility.convertToScreenCoordinates(expirationYearFrameInTextfield.integral, in: self)
-        }
+        expirationMonthAccessibilityElement.accessibilityFrameInContainerSpace = expirationMonthFrameInTextfield.integral
+        expirationYearAccessibilityElement.accessibilityFrameInContainerSpace = expirationYearFrameInTextfield.integral
     }
     
     public class InfoAccessibilityElement: UIAccessibilityElement {

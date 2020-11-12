@@ -73,9 +73,7 @@ public class CardNumberTextField: OmiseTextField {
         
         placeholder = placeholder
         
-        if #available(iOSApplicationExtension 10.0, *) {
-            textContentType = .creditCardNumber
-        }
+        textContentType = .creditCardNumber
     }
     
     public override func validate() throws {

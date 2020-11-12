@@ -29,15 +29,11 @@ internal class PaymentCreatorFlowSession {
         let waringMessageMessage: String
         
         if self.client == nil {
-            if #available(iOSApplicationExtension 10.0, *) {
-                os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.client ?? "")
-            }
+            os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.client ?? "")
             waringMessageTitle = "Missing public key information."
             waringMessageMessage = "Please set the public key before request token or source."
         } else if self.paymentAmount == nil || self.paymentCurrency == nil {
-            if #available(iOSApplicationExtension 10.0, *) {
-                os_log("Missing payment information - %{private}d %{private}@", log: uiLogObject, type: .error, self.paymentAmount ?? 0, self.paymentCurrency?.code ?? "-")
-            }
+            os_log("Missing payment information - %{private}d %{private}@", log: uiLogObject, type: .error, self.paymentAmount ?? 0, self.paymentCurrency?.code ?? "-")
             waringMessageTitle = "Missing payment information."
             waringMessageMessage = "Please set both of the payment information (amount and currency) before request source"
         } else {
@@ -59,9 +55,7 @@ internal class PaymentCreatorFlowSession {
                 return
         }
         
-        if #available(iOSApplicationExtension 10.0, *) {
-            os_log("Request to create a new source", log: uiLogObject, type: .info)
-        }
+        os_log("Request to create a new source", log: uiLogObject, type: .info)
         
         delegate?.paymentCreatorFlowSessionWillCreateSource(self)
         client.send(Request<Source>(paymentInformation: paymentInformation, amount: amount, currency: currency)) { (result) in

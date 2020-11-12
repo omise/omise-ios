@@ -8,9 +8,7 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
 
     override var showingValues: [PaymentInformation.MobileBanking] {
         didSet {
-            if #available(iOSApplicationExtension 10.0, *) {
-                os_log("Mobile Banking Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
-            }
+            os_log("Mobile Banking Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
         }
     }
 
@@ -60,9 +58,7 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
         tableView.deselectRow(at: indexPath, animated: true)
         let bank = element(forUIIndexPath: indexPath)
 
-        if #available(iOSApplicationExtension 10.0, *) {
-            os_log("Mobile Banking Chooser: %{private}@ was selected", log: uiLogObject, type: .info, bank.description)
-        }
+        os_log("Mobile Banking Chooser: %{private}@ was selected", log: uiLogObject, type: .info, bank.description)
 
         let oldAccessoryView = cell?.accessoryView
         #if swift(>=4.2)
