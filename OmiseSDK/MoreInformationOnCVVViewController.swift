@@ -140,19 +140,12 @@ class OverlayPanelPresentationController: UIPresentationController {
         if dimmingView.superview !== containerView {
             containerView.insertSubview(dimmingView, at: 0)
             
-            if #available(iOS 9.0, *) {
-                NSLayoutConstraint.activate([
-                    dimmingView.topAnchor.constraint(equalTo: containerView.topAnchor),
-                    dimmingView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-                    dimmingView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-                    dimmingView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-                    ])
-            } else {
-                let views = ["dimmingView": dimmingView] as [String: UIView]
-                let constraints = NSLayoutConstraint.constraints(withVisualFormat: "|[dimmingView]|", options: [], metrics: nil, views: views) +
-                    NSLayoutConstraint.constraints(withVisualFormat: "V:|[dimmingView]|", options: [], metrics: nil, views: views)
-                containerView.addConstraints(constraints)
-            }
+            NSLayoutConstraint.activate([
+                dimmingView.topAnchor.constraint(equalTo: containerView.topAnchor),
+                dimmingView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+                dimmingView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+                dimmingView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+                ])
         }
         
         guard let coordinator = presentedViewController.transitionCoordinator else {
