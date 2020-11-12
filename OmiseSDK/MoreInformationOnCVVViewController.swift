@@ -275,7 +275,6 @@ extension OverlayPanelPresentationController: UIViewControllerAnimatedTransition
         
         let initialAlpha: CGFloat = isPresenting ? 0.0 : 1.0
         let finalAlpha: CGFloat = isPresenting ? 1.0 : 0.0
-        let options = isPresenting ? ViewAnimationOptions.curveEaseOut : .curveEaseIn
         
         let animationDuration = transitionDuration(using: transitionContext)
         controller.view.frame = initialFrame
