@@ -2,7 +2,7 @@ import UIKit
 import os
 
 
-enum PaymentChooserOption: StaticElementIterable, Equatable, CustomStringConvertible {
+enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case creditCard
     case installment
     case internetBanking

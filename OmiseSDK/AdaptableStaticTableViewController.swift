@@ -1,9 +1,7 @@
 import UIKit
 
 
-public typealias StaticElementIterable = CaseIterable
-
-public class AdaptableStaticTableViewController<Element: StaticElementIterable & Equatable>: UITableViewController {
+public class AdaptableStaticTableViewController<Element: CaseIterable & Equatable>: UITableViewController {
     
     public var showingValues: [Element] = [] {
         didSet {
