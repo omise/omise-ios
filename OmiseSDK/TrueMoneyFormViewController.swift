@@ -65,15 +65,13 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
             $0.inputAccessoryView = formFieldsAccessoryView
         })
         
-        if #available(iOSApplicationExtension 10.0, *) {
-            formFields.forEach({
-                $0.adjustsFontForContentSizeCategory = true
-            })
-            formLabels.forEach({
-                $0.adjustsFontForContentSizeCategory = true
-            })
-            submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
-        }
+        formFields.forEach({
+            $0.adjustsFontForContentSizeCategory = true
+        })
+        formLabels.forEach({
+            $0.adjustsFontForContentSizeCategory = true
+        })
+        submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
         
         if  #available(iOS 11, *) {
             // We'll leave the adjusting scroll view insets job for iOS 11 and later to the layoutMargins + safeAreaInsets here

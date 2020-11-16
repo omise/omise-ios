@@ -140,19 +140,12 @@ class OverlayPanelPresentationController: UIPresentationController {
         if dimmingView.superview !== containerView {
             containerView.insertSubview(dimmingView, at: 0)
             
-            if #available(iOS 9.0, *) {
-                NSLayoutConstraint.activate([
-                    dimmingView.topAnchor.constraint(equalTo: containerView.topAnchor),
-                    dimmingView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-                    dimmingView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-                    dimmingView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-                    ])
-            } else {
-                let views = ["dimmingView": dimmingView] as [String: UIView]
-                let constraints = NSLayoutConstraint.constraints(withVisualFormat: "|[dimmingView]|", options: [], metrics: nil, views: views) +
-                    NSLayoutConstraint.constraints(withVisualFormat: "V:|[dimmingView]|", options: [], metrics: nil, views: views)
-                containerView.addConstraints(constraints)
-            }
+            NSLayoutConstraint.activate([
+                dimmingView.topAnchor.constraint(equalTo: containerView.topAnchor),
+                dimmingView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+                dimmingView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+                dimmingView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+                ])
         }
         
         guard let coordinator = presentedViewController.transitionCoordinator else {
@@ -282,7 +275,6 @@ extension OverlayPanelPresentationController: UIViewControllerAnimatedTransition
         
         let initialAlpha: CGFloat = isPresenting ? 0.0 : 1.0
         let finalAlpha: CGFloat = isPresenting ? 1.0 : 0.0
-        let options = isPresenting ? ViewAnimationOptions.curveEaseOut : .curveEaseIn
         
         let animationDuration = transitionDuration(using: transitionContext)
         controller.view.frame = initialFrame
@@ -294,20 +286,12 @@ extension OverlayPanelPresentationController: UIViewControllerAnimatedTransition
             controller.view.alpha = finalAlpha
         }
 
-        if #available(iOSApplicationExtension 10.0, *) {
-            let animator = UIViewPropertyAnimator(duration: animationDuration, timingParameters: UISpringTimingParameters())
-            animator.addAnimations(animationBlock)
-            animator.addCompletion({ position in
-                transitionContext.completeTransition(position == UIViewAnimatingPosition.end)
-            })
-            animator.startAnimation()
-        } else {
-            UIView.animate(
-                withDuration: animationDuration, delay: 0.0, options: options, animations: animationBlock,
-                completion: { finished in
-                    transitionContext.completeTransition(finished)
-            })
-        }
+        let animator = UIViewPropertyAnimator(duration: animationDuration, timingParameters: UISpringTimingParameters())
+        animator.addAnimations(animationBlock)
+        animator.addCompletion({ position in
+            transitionContext.completeTransition(position == UIViewAnimatingPosition.end)
+        })
+        animator.startAnimation()
     }
 }
 

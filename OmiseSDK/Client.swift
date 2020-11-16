@@ -18,9 +18,7 @@ import os
         if publicKey.hasPrefix("pkey_") {
             self.publicKey = publicKey
         } else {
-            if #available(iOSApplicationExtension 10.0, *) {
-                os_log("Refusing to initialize sdk client with a non-public key: %{private}@", log: sdkLogObject, type: .error, publicKey)
-            }
+            os_log("Refusing to initialize sdk client with a non-public key: %{private}@", log: sdkLogObject, type: .error, publicKey)
             assertionFailure("Refusing to initialize sdk client with a non-public key.")
             self.publicKey = ""
         }
@@ -78,14 +76,13 @@ import os
             
             var result: RequestResult<Capability>
             defer {
-                if #available(iOSApplicationExtension 10.0, *) {
-                    switch result {
-                    case .success:
-                        os_log("Request succeed: Capability", log: sdkLogObject, type: .debug)
-                    case .failure(let error):
-                        os_log("Request failed %{public}@", log: sdkLogObject, type: .info, error.localizedDescription)
-                    }
+                switch result {
+                case .success:
+                    os_log("Request succeed: Capability", log: sdkLogObject, type: .debug)
+                case .failure(let error):
+                    os_log("Request failed %{public}@", log: sdkLogObject, type: .info, error.localizedDescription)
                 }
+                
                 DispatchQueue.main.async {
                     completionHandler(result)
                 }
@@ -199,14 +196,13 @@ extension Client {
             
             var result: RequestResult<T>
             defer {
-                if #available(iOSApplicationExtension 10.0, *) {
-                    switch result {
-                    case .success(let value):
-                        os_log("Request succeed %{private}@", log: sdkLogObject, type: .debug, value.id)
-                    case .failure(let error):
-                        os_log("Request failed %{public}@", log: sdkLogObject, type: .info, error.localizedDescription)
-                    }
+                switch result {
+                case .success(let value):
+                    os_log("Request succeed %{private}@", log: sdkLogObject, type: .debug, value.id)
+                case .failure(let error):
+                    os_log("Request failed %{public}@", log: sdkLogObject, type: .info, error.localizedDescription)
                 }
+                
                 callback(result)
             }
             

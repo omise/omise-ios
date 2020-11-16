@@ -125,17 +125,10 @@ public class AuthorizingPaymentViewController: UIViewController {
         webView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(webView)
         
-        if #available(iOS 9.0, *) {
-            webView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
-            webView.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
-            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        } else {
-            let views = ["webView": webView] as [String: UIView]
-            let constraints = NSLayoutConstraint.constraints(withVisualFormat: "|[webView]|", options: [], metrics: nil, views: views) +
-                NSLayoutConstraint.constraints(withVisualFormat: "V:|[webView]|", options: [], metrics: nil, views: views)
-            view.addConstraints(constraints)
-        }
+        webView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
+        webView.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
+        webView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        webView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
     public override func viewDidLoad() {
@@ -149,11 +142,9 @@ public class AuthorizingPaymentViewController: UIViewController {
     }
     
     @IBAction func cancelAuthorizingPaymentProcess(_ sender: UIBarButtonItem) {
-        if #available(iOSApplicationExtension 10.0, *) {
-            os_log("Authorization process was cancelled, trying to notify the delegate", log: uiLogObject, type: .info)
-        }
+        os_log("Authorization process was cancelled, trying to notify the delegate", log: uiLogObject, type: .info)
         delegate?.authorizingPaymentViewControllerDidCancel(self)
-        if delegate == nil, #available(iOS 10.0, *) {
+        if delegate == nil {
             os_log("Authorization process was cancelled but no delegate to be notified", log: uiLogObject, type: .default)
         }
     }
@@ -161,14 +152,11 @@ public class AuthorizingPaymentViewController: UIViewController {
     private func startAuthorizingPaymentProcess() {
         guard let authorizedURL = authorizedURL, !expectedReturnURLPatterns.isEmpty else {
             assertionFailure("Insufficient authorizing payment information")
-            if #available(iOSApplicationExtension 10.0, *) {
-                os_log("Refusing to initialize sdk client with a non-public key: %{private}@", log: uiLogObject, type: .error)
-            }
+            os_log("Refusing to initialize sdk client with a non-public key: %{private}@", log: uiLogObject, type: .error)
             return
         }
-        if #available(iOSApplicationExtension 10.0, *) {
-            os_log("Starting the authorizing process with %{private}@ URL", log: uiLogObject, type: .info, authorizedURL.absoluteString)
-        }
+        
+        os_log("Starting the authorizing process with %{private}@ URL", log: uiLogObject, type: .info, authorizedURL.absoluteString)
         let request = URLRequest(url: authorizedURL, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 60.0)
         webView.load(request)
     }
@@ -188,18 +176,14 @@ public class AuthorizingPaymentViewController: UIViewController {
 extension AuthorizingPaymentViewController: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         if let url = navigationAction.request.url, verifyPaymentURL(url) {
-            if #available(iOSApplicationExtension 10.0, *) {
-                os_log("Redirected to expected %{private}@ URL, trying to notify the delegate", log: uiLogObject, type: .info, url.absoluteString)
-            }
+            os_log("Redirected to expected %{private}@ URL, trying to notify the delegate", log: uiLogObject, type: .info, url.absoluteString)
             decisionHandler(.cancel)
             delegate?.authorizingPaymentViewController(self, didCompleteAuthorizingPaymentWithRedirectedURL: url)
-            if delegate == nil, #available(iOS 10.0, *) {
+            if delegate == nil {
                 os_log("Redirected to expected %{private}@ URL but no delegate to be notified", log: uiLogObject, type: .default, url.absoluteString)
             }
         } else {
-            if #available(iOSApplicationExtension 10.0, *) {
-                os_log("Redirected to non-expected %{private}@ URL", log: uiLogObject, type: .debug, navigationAction.request.url?.absoluteString ?? "<empty>")
-            }
+            os_log("Redirected to non-expected %{private}@ URL", log: uiLogObject, type: .debug, navigationAction.request.url?.absoluteString ?? "<empty>")
             decisionHandler(.allow)
         }
     }

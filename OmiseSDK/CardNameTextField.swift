@@ -27,8 +27,6 @@ public class CardNameTextField: OmiseTextField {
     
     private func initializeInstance() {
         keyboardType = .default
-        if #available(iOSApplicationExtension 10.0, *) {
-            textContentType = .name
-        }
+        textContentType = .name
     }
 }

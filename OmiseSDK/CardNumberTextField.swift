@@ -28,11 +28,7 @@ public class CardNumberTextField: OmiseTextField {
             
             let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map({ $0 - 1 }))
             
-            #if swift(>=4.2)
             let kerningKey = AttributedStringKey.kern
-            #else
-            let kerningKey = AttributedStringKey.kern.rawValue
-            #endif
             if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
                 typingAttributes?[kerningKey] = 5
             } else {
@@ -73,9 +69,7 @@ public class CardNumberTextField: OmiseTextField {
         
         placeholder = placeholder
         
-        if #available(iOSApplicationExtension 10.0, *) {
-            textContentType = .creditCardNumber
-        }
+        textContentType = .creditCardNumber
     }
     
     public override func validate() throws {
@@ -199,30 +193,18 @@ public class CardNumberTextField: OmiseTextField {
         }
         let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map({ $0 - 1 }))
         
-        #if swift(>=4.2)
         let kerningKey = AttributedStringKey.kern
-        #else
-        let kerningKey = AttributedStringKey.kern.rawValue
-        #endif
         if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
             typingAttributes?[kerningKey] = 5
         } else {
             typingAttributes?.removeValue(forKey: kerningKey)
         }
 
-        #if swift(>=4.2)
         if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
             typingAttributes?[AttributedStringKey.kern] = 5
         } else {
             typingAttributes?.removeValue(forKey: AttributedStringKey.kern)
         }
-        #else
-        if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
-            typingAttributes?[AttributedStringKey.kern.rawValue] = 5
-        } else {
-            typingAttributes?.removeValue(forKey: AttributedStringKey.kern.rawValue)
-        }
-        #endif
     }
     
     class CreditCardNumberTextInputStringTokenizer: UITextInputStringTokenizer {
@@ -239,11 +221,7 @@ public class CardNumberTextField: OmiseTextField {
                 return super.position(from: position, toBoundary: granularity, inDirection: direction)
             }
             
-            #if swift(>=4.2)
             let directionValue = direction.rawValue
-            #else
-            let directionValue = direction
-            #endif
             if position == cardNumberTextField.beginningOfDocument && directionValue == UITextStorageDirection.backward.rawValue ||
                 position == cardNumberTextField.endOfDocument && directionValue == UITextStorageDirection.forward.rawValue {
                 return super.position(from: position, toBoundary: granularity, inDirection: direction)
@@ -266,11 +244,7 @@ public class CardNumberTextField: OmiseTextField {
                 return super.isPosition(position, atBoundary: granularity, inDirection: direction)
             }
             
-            #if swift(>=4.2)
             let directionValue = direction.rawValue
-            #else
-            let directionValue = direction
-            #endif
             if position == cardNumberTextField.beginningOfDocument && directionValue == UITextStorageDirection.backward.rawValue ||
                 position == cardNumberTextField.endOfDocument && directionValue == UITextStorageDirection.forward.rawValue {
                 return super.isPosition(position, atBoundary: granularity, inDirection: direction)
@@ -295,11 +269,7 @@ public class CardNumberTextField: OmiseTextField {
                 return super.rangeEnclosingPosition(position, with: granularity, inDirection: direction)
             }
             
-            #if swift(>=4.2)
             let directionValue = direction.rawValue
-            #else
-            let directionValue = direction
-            #endif
             if position == cardNumberTextField.beginningOfDocument && directionValue == UITextStorageDirection.backward.rawValue ||
                 position == cardNumberTextField.endOfDocument && directionValue == UITextStorageDirection.forward.rawValue {
                 return super.rangeEnclosingPosition(position, with: granularity, inDirection: direction)

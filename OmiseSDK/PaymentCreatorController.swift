@@ -40,9 +40,7 @@ public class PaymentCreatorController : UINavigationController {
     @objc public var publicKey: String? {
         didSet {
             guard let publicKey = publicKey else {
-                if #available(iOSApplicationExtension 10.0, *) {
-                    os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.publicKey ?? "")
-                }
+                os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.publicKey ?? "")
                 assertionFailure("Missing public key information. Please set the public key before request token.")
                 return
             }
@@ -258,15 +256,7 @@ public class PaymentCreatorController : UINavigationController {
         
         paymentSourceCreatorFlowSession.delegate = self
         
-        if #available(iOS 9.0, *) {
-            noticeViewHeightConstraint = displayingNoticeView.heightAnchor.constraint(equalToConstant: 0)
-        } else {
-            noticeViewHeightConstraint = NSLayoutConstraint(
-                item: displayingNoticeView, attribute: .height, relatedBy: .equal,
-                toItem: nil, attribute: .notAnAttribute,
-                multiplier: 1.0, constant: 0
-            )
-        }
+        noticeViewHeightConstraint = displayingNoticeView.heightAnchor.constraint(equalToConstant: 0)
         noticeViewHeightConstraint.isActive = true
         
         let dismissErrorBannerTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissErrorMessageBanner(_:)))
@@ -286,18 +276,11 @@ public class PaymentCreatorController : UINavigationController {
         displayingNoticeView.detailLabel.text = message
         view.insertSubview(self.displayingNoticeView, belowSubview: navigationBar)
         
-        if #available(iOS 9.0, *) {
-            NSLayoutConstraint.activate([
-                displayingNoticeView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
-                displayingNoticeView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                displayingNoticeView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            ])
-        } else {
-            let views = ["displayingNoticeView": displayingNoticeView] as [String: UIView]
-            let constraints = NSLayoutConstraint.constraints(withVisualFormat: "|[displayingNoticeView]|", options: [], metrics: nil, views: views) +
-                [ NSLayoutConstraint(item: displayingNoticeView, attribute: .top, relatedBy: .equal, toItem: navigationBar, attribute: .bottom, multiplier: 1.0, constant: 0)]
-            view.addConstraints(constraints)
-        }
+        NSLayoutConstraint.activate([
+            displayingNoticeView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
+            displayingNoticeView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            displayingNoticeView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
         
         noticeViewHeightConstraint.isActive = true
         view.layoutIfNeeded()
@@ -360,7 +343,6 @@ public class PaymentCreatorController : UINavigationController {
         super.pushViewController(viewController, animated: animated)
     }
     
-    #if swift(>=4.2)
     public override func addChild(_ childController: UIViewController) {
         if let viewController = childController as? PaymentChooserUI {
             viewController.preferredPrimaryColor = preferredPrimaryColor
@@ -371,18 +353,6 @@ public class PaymentCreatorController : UINavigationController {
         }
         super.addChild(childController)
     }
-    #else
-    public override func addChildViewController(_ childController: UIViewController) {
-        if let viewController = childController as? PaymentChooserUI {
-            viewController.preferredPrimaryColor = preferredPrimaryColor
-            viewController.preferredSecondaryColor = preferredSecondaryColor
-        }
-        if let viewController = childController as? PaymentChooserViewController {
-            viewController.flowSession = self.paymentSourceCreatorFlowSession
-        }
-        super.addChildViewController(childController)
-    }
-    #endif
     
     public override func loadView() {
         super.loadView()
@@ -442,9 +412,7 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
     }
     
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreateToken token: Token) {
-        if #available(iOSApplicationExtension 10.0, *) {
-            os_log("Credit Card Form in Payment Createor - Request succeed %{private}@, trying to notify the delegate", log: uiLogObject, type: .default, token.id)
-        }
+        os_log("Credit Card Form in Payment Createor - Request succeed %{private}@, trying to notify the delegate", log: uiLogObject, type: .default, token.id)
         
         if let paymentDelegate = self.paymentDelegate {
             paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.token(token))
@@ -454,41 +422,29 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
     }
     
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreatedSource source: Source) {
-        if #available(iOSApplicationExtension 10.0, *) {
-            os_log("Payment Creator Create Source Request succeed %{private}@, trying to notify the delegate", log: uiLogObject, type: .default, source.id)
-        }
+        os_log("Payment Creator Create Source Request succeed %{private}@, trying to notify the delegate", log: uiLogObject, type: .default, source.id)
         
         if let paymentDelegate = self.paymentDelegate {
             paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.source(source))
-            if #available(iOS 10, *) {
-                os_log("Payment Creator Created Source succeed delegate notified", log: uiLogObject, type: .default)
-            }
+            os_log("Payment Creator Created Source succeed delegate notified", log: uiLogObject, type: .default)
         } else if let paymentDelegate = self.__paymentDelegate {
             paymentDelegate.paymentCreatorController(self, didCreateSource: __OmiseSource(source: source))
-            if #available(iOS 10, *) {
-                os_log("Payment Creator Created Source succeed delegate notified", log: uiLogObject, type: .default)
-            }
-        } else if #available(iOS 10, *) {
+            os_log("Payment Creator Created Source succeed delegate notified", log: uiLogObject, type: .default)
+        } else {
             os_log("There is no Payment Creator delegate to notify about the created source", log: uiLogObject, type: .default)
         }
     }
     
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didFailWithError error: Error) {
         if !handleErrors {
-            if #available(iOSApplicationExtension 10.0, *) {
-                os_log("Payment Creator Request failed %{private}@, automatically error handling turned off. Trying to notify the delegate", log: uiLogObject, type: .info, error.localizedDescription)
-            }
+            os_log("Payment Creator Request failed %{private}@, automatically error handling turned off. Trying to notify the delegate", log: uiLogObject, type: .info, error.localizedDescription)
             if let paymentDelegate = self.paymentDelegate {
                 paymentDelegate.paymentCreatorController(self, didFailWithError: error)
-                if #available(iOSApplicationExtension 10.0, *) {
-                    os_log("Payment Creator error handling delegate notified", log: uiLogObject, type: .default)
-                }
+                os_log("Payment Creator error handling delegate notified", log: uiLogObject, type: .default)
             } else if let paymentDelegate = self.__paymentDelegate {
                 paymentDelegate.paymentCreatorController(self, didFailWithError: error)
-                if #available(iOSApplicationExtension 10.0, *) {
-                    os_log("Payment Creator error handling delegate notified", log: uiLogObject, type: .default)
-                }
-            } else if #available(iOSApplicationExtension 10.0, *) {
+                os_log("Payment Creator error handling delegate notified", log: uiLogObject, type: .default)
+            } else {
                 os_log("There is no Payment Creator delegate to notify about the error", log: uiLogObject, type: .default)
             }
         } else if let error = error as? OmiseError {
@@ -502,22 +458,17 @@ extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
                              animated: true, sender: self)
         }
         
-        if #available(iOSApplicationExtension 10.0, *) {
-            os_log("Payment Creator Request failed %{private}@, automatically error handling turned on.", log: uiLogObject, type: .default, error.localizedDescription)
-        }
+        os_log("Payment Creator Request failed %{private}@, automatically error handling turned on.", log: uiLogObject, type: .default, error.localizedDescription)
     }
     
     func paymentCreatorFlowSessionDidCancel(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession) {
-        if #available(iOSApplicationExtension 10.0, *) {
-            os_log("Payment Creator dismissal requested. Asking the delegate what should the controler do",
-                   log: uiLogObject, type: .default)
-        }
+        os_log("Payment Creator dismissal requested. Asking the delegate what should the controler do", log: uiLogObject, type: .default)
         
         if let paymentDelegate = self.paymentDelegate {
             paymentDelegate.paymentCreatorControllerDidCancel(self)
         } else if let paymentDidCancelDelegateMethod = self.__paymentDelegate?.paymentCreatorControllerDidCancel {
             paymentDidCancelDelegateMethod(self)
-        } else if #available(iOS 10, *) {
+        } else {
             os_log("Payment Creator dismissal requested but there is no delegate to ask. Ignore the request", log: uiLogObject, type: .default)
         }
     }

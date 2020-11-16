@@ -86,13 +86,8 @@ public class CardExpiryDateTextField: OmiseTextField {
         expirationYearAccessibilityElement = CardExpiryDateTextField.InfoAccessibilityElement(expiryDateTextField: self, component: .year)
         expirationYearAccessibilityElement.accessibilityLabel = "Expiration year"
         
-        #if swift(>=4.2)
         expirationMonthAccessibilityElement.accessibilityTraits.insert(UIAccessibilityTraits.adjustable)
-        expirationYearAccessibilityElement.accessibilityTraits.insert(UIAccessibilityTraits.adjustable)        
-        #else
-        expirationMonthAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitAdjustable
-        expirationYearAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitAdjustable
-        #endif
+        expirationYearAccessibilityElement.accessibilityTraits.insert(UIAccessibilityTraits.adjustable)
         
         validator = try! NSRegularExpression(pattern: "^([0-1]?\\d)/(\\d{1,2})$", options: [])
     }
@@ -143,11 +138,7 @@ public class CardExpiryDateTextField: OmiseTextField {
             if (text != expectedDisplayingExpiryMonthText && parsedExpiryYear == nil)  &&
                 (expiryMonth != 1 || expiryDateComponents[0].count == 2) {
                 let currentAttributes = defaultTextAttributes
-                #if swift(>=4.2)
                 let attributedText = NSMutableAttributedString(string: String(format: "%02d/", expiryMonth), attributes: Dictionary(uniqueKeysWithValues: self.defaultTextAttributes.map({ ($0.key, $0.value) })))
-                #else
-                let attributedText = NSMutableAttributedString(string: String(format: "%02d/", expiryMonth), attributes: Dictionary(uniqueKeysWithValues: self.defaultTextAttributes.map({ (AttributedStringKey(rawValue: $0.key), $0.value) })))
-                #endif
                 if let separatorTextColor = self.dateSeparatorTextColor {
                     attributedText.addAttribute(.foregroundColor, value: separatorTextColor, range: NSRange(location: attributedText.length - 1, length: 1))
                 }
@@ -305,15 +296,8 @@ extension CardExpiryDateTextField {
             expirationYearFrameInTextfield = yearFrame
         }
         
-        if #available(iOSApplicationExtension 10.0, *) {
-            expirationMonthAccessibilityElement.accessibilityFrameInContainerSpace = expirationMonthFrameInTextfield.integral
-            expirationYearAccessibilityElement.accessibilityFrameInContainerSpace = expirationYearFrameInTextfield.integral
-        } else {
-            expirationMonthAccessibilityElement.accessibilityFrame =
-                UIAccessibility.convertToScreenCoordinates(expirationMonthFrameInTextfield.integral, in: self)
-            expirationYearAccessibilityElement.accessibilityFrame =
-                UIAccessibility.convertToScreenCoordinates(expirationYearFrameInTextfield.integral, in: self)
-        }
+        expirationMonthAccessibilityElement.accessibilityFrameInContainerSpace = expirationMonthFrameInTextfield.integral
+        expirationYearAccessibilityElement.accessibilityFrameInContainerSpace = expirationYearFrameInTextfield.integral
     }
     
     public class InfoAccessibilityElement: UIAccessibilityElement {
