@@ -24,7 +24,8 @@ public protocol AuthorizingPaymentViewControllerDelegate: AnyObject {
     /// - parameter message: The message to be displayed.
     /// - parameter frame: Information about the frame whose JavaScript process initiated this call.
     /// - parameter completionHandler: The completion handler to call after the confirm panel has been dismissed. Pass true if the user chose OK, and pass false if the user chose Cancel.
-    @objc optional func authorizingPaymentViewController(_ viewController: AuthorizingPaymentViewController, rrunJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void)
+    @objc optional func authorizingPaymentViewController(_ viewController: AuthorizingPaymentViewController,
+                                                         runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void)
     
     /// A delegation method called when authorizing website page displays a JavaScript text input panel.
     /// - parameter prompt: The message to be displayed.
@@ -220,7 +221,7 @@ extension AuthorizingPaymentViewController: WKUIDelegate {
     }
     
     public func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
-        delegate?.authorizingPaymentViewController?(self, rrunJavaScriptConfirmPanelWithMessage: message, initiatedByFrame: frame, completionHandler: completionHandler)
+        delegate?.authorizingPaymentViewController?(self, runJavaScriptConfirmPanelWithMessage: message, initiatedByFrame: frame, completionHandler: completionHandler)
         if delegate == nil {
             os_log("Run JavaScript confirm panel with message but no delegate to be notified", log: uiLogObject, type: .default)
             completionHandler(false)
