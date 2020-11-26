@@ -155,18 +155,6 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
     [self dismissForm];
 }
 
-- (void)authorizingPaymentViewController:(OMSAuthorizingPaymentViewController *)viewController runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Title" message:message preferredStyle: UIAlertControllerStyleAlert];
-    
-    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        completionHandler();
-    }];
-    [alertController addAction:okButton];
-    
-    // NOTE: Must present an UIAlertController on AuthorizingPaymentViewController
-    [viewController presentViewController:alertController animated:YES completion:nil];
-}
-
 
 #pragma mark - Payment Creator Controller Delegate methods
 

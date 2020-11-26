@@ -1,6 +1,5 @@
 import UIKit
 import OmiseSDK
-import WebKit
 
 @objc(OMSExampleProductDetailViewController)
 class ProductDetailViewController: OMSBaseViewController {
@@ -161,20 +160,6 @@ extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate 
     
     func authorizingPaymentViewControllerDidCancel(_ viewController: AuthorizingPaymentViewController) {
         dismiss(animated: true, completion: nil)
-    }
-    
-    func authorizingPaymentViewController(_ viewController: AuthorizingPaymentViewController, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
-
-        let alertController = UIAlertController(title: "Title", message: message, preferredStyle: .alert)
-        let title = NSLocalizedString("Ok", comment: "Ok Button")
-        let ok = UIAlertAction(title: title, style: .default) { (action: UIAlertAction) -> Void in
-            alertController.dismiss(animated: true, completion: nil)
-            completionHandler()
-        }
-        alertController.addAction(ok)
-        
-        // NOTE: Must present an UIAlertController on AuthorizingPaymentViewController
-        viewController.present(alertController, animated: true)
     }
 }
 
