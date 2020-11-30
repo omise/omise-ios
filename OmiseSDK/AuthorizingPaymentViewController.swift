@@ -7,9 +7,10 @@ import os
 @objc(OMSAuthorizingPaymentViewControllerDelegate)
 public protocol AuthorizingPaymentViewControllerDelegate: AnyObject {
     /// A delegation method called when the authorizing payment process is completed.
-    /// - parameter viewController: The authorizing payment controller that call this method
+    /// - parameter viewController: The authorizing payment controller that call this method.
     /// - parameter redirectedURL: A URL returned from the authorizing payment process.
     func authorizingPaymentViewController(_ viewController: AuthorizingPaymentViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL)
+    
     /// A delegation method called when user cancel the authorizing payment process.
     func authorizingPaymentViewControllerDidCancel(_ viewController: AuthorizingPaymentViewController)
     
@@ -64,7 +65,9 @@ public class AuthorizingPaymentViewController: UIViewController {
     public weak var delegate: AuthorizingPaymentViewControllerDelegate?
     
     let webView: WKWebView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration())
-    
+    let okButtonTitle = NSLocalizedString("OK", comment: "OK button for JavaScript panel")
+    let confirmButtonTitle = NSLocalizedString("Confirm", comment: "Confirm button for JavaScript panel")
+    let cancelButtonTitle = NSLocalizedString("Cancel", comment: "Cancel button for JavaScript panel")
     
     /// A factory method for creating a authorizing payment view controller comes in UINavigationController stack.
     ///
@@ -134,6 +137,7 @@ public class AuthorizingPaymentViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         webView.navigationDelegate = self
+        webView.uiDelegate = self
     }
     
     public override func viewDidAppear(_ animated: Bool) {
@@ -186,6 +190,62 @@ extension AuthorizingPaymentViewController: WKNavigationDelegate {
             os_log("Redirected to non-expected %{private}@ URL", log: uiLogObject, type: .debug, navigationAction.request.url?.absoluteString ?? "<empty>")
             decisionHandler(.allow)
         }
+    }
+}
+
+extension AuthorizingPaymentViewController: WKUIDelegate {
+    public func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
+
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: okButtonTitle, style: .default) { (action: UIAlertAction) -> Void in
+            alertController.dismiss(animated: true, completion: nil)
+            completionHandler()
+        }
+        
+        alertController.addAction(okAction)
+        
+        // NOTE: Must present an UIAlertController on AuthorizingPaymentViewController
+        self.present(alertController, animated: true)
+    }
+    
+    public func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
+                
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: confirmButtonTitle, style: .default, handler: { (action) in
+            completionHandler(true)
+        })
+        let cancelAction = UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: { (action) in
+            completionHandler(false)
+        })
+        
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+
+        // NOTE: Must present an UIAlertController on AuthorizingPaymentViewController
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    public func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {        
+        let alertController = UIAlertController(title: nil, message: prompt, preferredStyle: .alert)
+        alertController.addTextField { (textField) in
+            textField.text = defaultText
+        }
+        let okAction = UIAlertAction(title: okButtonTitle, style: .default, handler: { (action) in
+            if let text = alertController.textFields?.first?.text {
+                completionHandler(text)
+            } else {
+                completionHandler(defaultText)
+            }
+        })
+        let cancelAction = UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: { (action) in
+            completionHandler(nil)
+        })
+        
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        
+        // NOTE: Must present an UIAlertController on AuthorizingPaymentViewController
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 
