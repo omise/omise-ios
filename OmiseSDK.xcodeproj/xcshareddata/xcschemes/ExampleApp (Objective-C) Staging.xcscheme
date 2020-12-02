@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "225931171CE3210700841B86"
-               BuildableName = "OmiseSDK.framework"
-               BlueprintName = "OmiseSDK"
-               ReferencedContainer = "container:OmiseSDK.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "987A02C81CE35D5E0035417A"
-               BuildableName = "OmiseSDKTests.xctest"
-               BlueprintName = "OmiseSDKTests"
+               BlueprintIdentifier = "8A723A502164D7B100D902F5"
+               BuildableName = "ExampleApp.app"
+               BlueprintName = "ExampleApp (Objective-C)"
                ReferencedContainer = "container:OmiseSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,9 +30,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "225931171CE3210700841B86"
-            BuildableName = "OmiseSDK.framework"
-            BlueprintName = "OmiseSDK"
+            BlueprintIdentifier = "8A723A502164D7B100D902F5"
+            BuildableName = "ExampleApp.app"
+            BlueprintName = "ExampleApp (Objective-C)"
             ReferencedContainer = "container:OmiseSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,15 +49,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "225931171CE3210700841B86"
-            BuildableName = "OmiseSDK.framework"
-            BlueprintName = "OmiseSDK"
+            BlueprintIdentifier = "8A723A502164D7B100D902F5"
+            BuildableName = "ExampleApp.app"
+            BlueprintName = "ExampleApp (Objective-C)"
             ReferencedContainer = "container:OmiseSDK.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -79,15 +66,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "225931171CE3210700841B86"
-            BuildableName = "OmiseSDK.framework"
-            BlueprintName = "OmiseSDK"
+            BlueprintIdentifier = "8A723A502164D7B100D902F5"
+            BuildableName = "ExampleApp.app"
+            BlueprintName = "ExampleApp (Objective-C)"
             ReferencedContainer = "container:OmiseSDK.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug (Staging)">
