@@ -20,5 +20,7 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>Configuration</key>
+	<string>$(CONFIGURATION)</string>
 </dict>
 </plist>
