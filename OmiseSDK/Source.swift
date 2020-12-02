@@ -4,8 +4,9 @@ import Foundation
 /// Represents an Omise Source object
 public struct Source: CreatableObject {
     public typealias CreateParameter = CreateSourceParameter
-   
-    public static let postURL: URL = URL(string: "https://api.omise.co/sources")!
+    
+    private static let configuration = Configuration()
+    public static let postURL: URL = configuration.environment.sourceURL
     
     public let object: String
     /// Omise Source ID

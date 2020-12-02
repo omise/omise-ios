@@ -160,7 +160,8 @@ extension Client {
     }
     
     private func buildCapabilityAPIURLRequest() -> URLRequest {
-        let urlRequest = NSMutableURLRequest(url: URL(string: "https://api.omise.co/capability")!)
+        let configuration = Configuration()
+        let urlRequest = NSMutableURLRequest(url: configuration.environment.capabilityURL)
         urlRequest.httpMethod = "GET"
         urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
         urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: "User-Agent")
