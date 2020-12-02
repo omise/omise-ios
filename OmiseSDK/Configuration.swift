@@ -6,14 +6,14 @@ enum Environment {
     
     private var vaultBaseURL: URL {
         switch self {
-        case .staging: return URL(string: "")!
+        case .staging: return URL(string: "[STAGING_URL]")!
         case .production: return URL(string: "https://vault.omise.co")!
         }
     }
     
     private var apiBaseURL: URL {
         switch self {
-        case .staging: return URL(string: "")!
+        case .staging: return URL(string: "[STAGING_URL]")!
         case .production: return URL(string: "https://api.omise.co")!
         }
     }
