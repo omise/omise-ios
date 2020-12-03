@@ -86,8 +86,7 @@ public enum ChargeStatus: String, Codable {
 public struct Token: CreatableObject {
     public typealias CreateParameter = CreateTokenParameter
     
-    private static let configuration = Configuration()
-    public static let postURL: URL = configuration.environment.tokenURL
+    public static let postURL: URL = Configuration.default.environment.tokenURL
     
     public let object: String
     /// Omise ID of the token

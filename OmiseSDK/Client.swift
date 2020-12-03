@@ -160,8 +160,7 @@ extension Client {
     }
     
     private func buildCapabilityAPIURLRequest() -> URLRequest {
-        let configuration = Configuration()
-        let urlRequest = NSMutableURLRequest(url: configuration.environment.capabilityURL)
+        let urlRequest = NSMutableURLRequest(url: Configuration.default.environment.capabilityURL)
         urlRequest.httpMethod = "GET"
         urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
         urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: "User-Agent")

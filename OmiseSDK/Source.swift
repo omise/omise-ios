@@ -5,8 +5,7 @@ import Foundation
 public struct Source: CreatableObject {
     public typealias CreateParameter = CreateSourceParameter
     
-    private static let configuration = Configuration()
-    public static let postURL: URL = configuration.environment.sourceURL
+    public static let postURL: URL = Configuration.default.environment.sourceURL
     
     public let object: String
     /// Omise Source ID
