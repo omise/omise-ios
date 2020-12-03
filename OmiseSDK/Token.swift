@@ -86,7 +86,7 @@ public enum ChargeStatus: String, Codable {
 public struct Token: CreatableObject {
     public typealias CreateParameter = CreateTokenParameter
     
-    public static let postURL: URL = URL(string: "https://vault.omise.co/tokens")!
+    public static let postURL: URL = Configuration.default.environment.tokenURL
     
     public let object: String
     /// Omise ID of the token

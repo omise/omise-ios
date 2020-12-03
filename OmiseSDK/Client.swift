@@ -148,7 +148,7 @@ extension Client {
     private static let omiseAPIVersion = "2019-05-29"
     
     private func buildURLRequest<T: Object>(for request: Request<T>) -> URLRequest {
-        let urlRequest = NSMutableURLRequest(url: T.postURL)
+        var urlRequest = URLRequest(url: T.postURL)
         urlRequest.httpMethod = "POST"
         let encoder = Client.makeJSONEncoder()
         urlRequest.httpBody = try! encoder.encode(request.parameter)
@@ -156,17 +156,17 @@ extension Client {
         urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: "User-Agent")
         urlRequest.setValue(Client.omiseAPIContentType, forHTTPHeaderField: "Content-Type")
         urlRequest.setValue(Client.omiseAPIVersion, forHTTPHeaderField: "Omise-Version")
-        return urlRequest.copy() as! URLRequest
+        return urlRequest
     }
     
     private func buildCapabilityAPIURLRequest() -> URLRequest {
-        let urlRequest = NSMutableURLRequest(url: URL(string: "https://api.omise.co/capability")!)
+        var urlRequest = URLRequest(url: Configuration.default.environment.capabilityURL)
         urlRequest.httpMethod = "GET"
         urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
         urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: "User-Agent")
         urlRequest.setValue(Client.omiseAPIContentType, forHTTPHeaderField: "Content-Type")
         urlRequest.setValue(Client.omiseAPIVersion, forHTTPHeaderField: "Omise-Version")
-        return urlRequest.copy() as! URLRequest
+        return urlRequest
     }
     
     private static func encodeAuthorizationHeader(_ publicKey: String) -> String {
