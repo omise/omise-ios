@@ -138,6 +138,128 @@ import os
         })
         dataTask.resume()
     }
+
+    public func retrieveChargeStatusWithCompletionHandler(from tokenID: String, completionHandler: (((ChargeStatus, Error?)) -> Void)?) {
+        let dataTask = session.dataTask(with: buildRetrieveTokenURLRquest(from: tokenID)) { (data, response, error) in
+            guard let completionHandler = completionHandler else { return } // nobody around to hear the leaf falls
+
+            var result: (ChargeStatus, Error?)
+            defer {
+                DispatchQueue.main.async {
+                    completionHandler(result)
+                }
+            }
+
+            if let error = error {
+                result = (.unknown, error)
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+                let error = OmiseError.unexpected(error: .noErrorNorResponse, underlying: nil)
+                result = (.unknown, error)
+                return
+            }
+
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(Client.jsonDateFormatter)
+
+            switch httpResponse.statusCode {
+            case 400..<600:
+                guard let data = data else {
+                    let error = OmiseError.unexpected(error: .httpErrorWithNoData, underlying: nil)
+                    result = (.unknown, error)
+                    return
+                }
+
+                do {
+                    result = (.unknown, try decoder.decode(OmiseError.self, from: data))
+                } catch let err {
+                    let error = OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: err)
+                    result = (.unknown, error)
+                }
+
+            case 200..<300:
+                guard let data = data else {
+                    let error = OmiseError.unexpected(error: .httpSucceessWithNoData, underlying: nil)
+                    result = (.unknown, error)
+                    return
+                }
+
+                do {
+                    let token = try decoder.decode(Token.self, from: data)
+                    result = (token.chargeStatus, nil)
+                } catch let err {
+                    let error = OmiseError.unexpected(error: .httpSucceessWithInvalidData, underlying: err)
+                    result = (.unknown, error)
+                }
+
+            default:
+                let error = OmiseError.unexpected(error: .unrecognizedHTTPStatusCode(code: httpResponse.statusCode), underlying: nil)
+                result = (.unknown, error)
+            }
+        }
+        dataTask.resume()
+    }
+    
+    public func pollingChargeStatusWithCompletionHandler(from tokenID: String, completionHandler: @escaping (ChargeStatus, Error?) -> Void) {
+        enum PollingStatus {
+            case starting
+            case checking
+            case checked
+        }
+        
+        let maximumNumberOfPollingAttempts = 10
+        var currentPollingAttempt = 0
+
+        var currentChargeStatus: ChargeStatus = .unknown
+        var pollingStatus: PollingStatus = .starting
+        
+        Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { (timer) in
+            guard currentPollingAttempt < maximumNumberOfPollingAttempts else {
+                timer.invalidate()
+                completionHandler(currentChargeStatus, nil)
+                return
+            }
+            
+            currentPollingAttempt += 1
+            
+            // checking charge status by polling
+            switch pollingStatus {
+            case .starting:
+                // Change observing status state to `checking`
+                pollingStatus = .checking
+                self.retrieveChargeStatusWithCompletionHandler(from: tokenID) { (latestChargeStatus, error) in
+                    pollingStatus = .checked
+                    
+                    if let error = error {
+                        timer.invalidate()
+                        completionHandler(currentChargeStatus, error)
+                    }
+                    
+                    switch latestChargeStatus {
+                    case .successful, .failed, .expired, .reversed:
+                        timer.invalidate()
+                        completionHandler(latestChargeStatus, nil)
+                    case .unknown:
+                        currentChargeStatus = .unknown
+                    case .pending:
+                        currentChargeStatus = .pending
+                    }
+                }
+                
+            case .checking:
+                // Checking state. Do nothing, just chill and wait
+                break
+                
+            case .checked:
+                // Change observing status state back to `starting` for re-checking
+                pollingStatus = .starting
+            }
+        }
+        
+        completionHandler(.unknown, nil)
+    }
 }
 
 
@@ -161,6 +283,16 @@ extension Client {
     
     private func buildCapabilityAPIURLRequest() -> URLRequest {
         var urlRequest = URLRequest(url: Configuration.default.environment.capabilityURL)
+        urlRequest.httpMethod = "GET"
+        urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
+        urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: "User-Agent")
+        urlRequest.setValue(Client.omiseAPIContentType, forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue(Client.omiseAPIVersion, forHTTPHeaderField: "Omise-Version")
+        return urlRequest
+    }
+
+    private func buildRetrieveTokenURLRquest(from tokenID: String) -> URLRequest {
+        var urlRequest = URLRequest(url: Configuration.default.environment.tokenURL.appendingPathComponent(tokenID))
         urlRequest.httpMethod = "GET"
         urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
         urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: "User-Agent")
