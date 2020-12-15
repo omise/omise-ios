@@ -4,6 +4,7 @@
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat-square)](https://github.com/Carthage/Carthage)
 [![](https://img.shields.io/badge/email-support-yellow.svg?style=flat-square)](mailto:support@omise.co)
+![CI](https://github.com/omise/omise-ios/workflows/CI/badge.svg?branch=master)
 
 [Omise](https://www.omise.co/) is a payment service provider operating
 in Thailand, Japan, and Singapore. Omise provides a set of APIs that
