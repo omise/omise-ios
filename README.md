@@ -25,7 +25,7 @@ you can't find an answer there, post a question in our
 ## Requirements
 
 * Omise API public key. [Register for an Omise account](https://dashboard.omise.co/signup) to obtain your API keys.
-* iOS 8 or higher deployment target.
+* iOS 10 or higher deployment target.
 * Xcode 10.0 or higher (Xcode 11 is recommended)
 * Swift 5.0 or higher (Swift 5.1 is recommended)
 * [Carthage](https://github.com/Carthage/Carthage) dependency manager.
