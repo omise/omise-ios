@@ -257,8 +257,6 @@ import os
                 pollingStatus = .starting
             }
         }
-        
-        completionHandler(.unknown, nil)
     }
 }
 
