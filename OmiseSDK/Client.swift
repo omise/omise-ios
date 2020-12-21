@@ -203,60 +203,47 @@ import os
     }
     
     public func pollingChargeStatusWithCompletionHandler(from tokenID: String, completionHandler: @escaping (ChargeStatus, Error?) -> Void) {
-        enum PollingStatus {
-            case starting
-            case checking
-            case checked
-        }
-        
         let maximumNumberOfPollingAttempts = 10
         var currentPollingAttempt = 0
 
-        var currentChargeStatus: ChargeStatus = .unknown
-        var pollingStatus: PollingStatus = .starting
+        var isPolling = true
         
-        Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { (timer) in
-            guard currentPollingAttempt < maximumNumberOfPollingAttempts else {
-                timer.invalidate()
-                completionHandler(currentChargeStatus, nil)
-                return
-            }
-            
-            currentPollingAttempt += 1
-            
-            // checking charge status by polling
-            switch pollingStatus {
-            case .starting:
-                // Change observing status state to `checking`
-                pollingStatus = .checking
-                self.retrieveChargeStatusWithCompletionHandler(from: tokenID) { (latestChargeStatus, error) in
-                    pollingStatus = .checked
-                    
-                    if let error = error {
-                        timer.invalidate()
-                        completionHandler(currentChargeStatus, error)
-                    }
-                    
-                    switch latestChargeStatus {
-                    case .successful, .failed, .expired, .reversed:
-                        timer.invalidate()
-                        completionHandler(latestChargeStatus, nil)
-                    case .unknown:
-                        currentChargeStatus = .unknown
-                    case .pending:
-                        currentChargeStatus = .pending
-                    }
-                }
-                
-            case .checking:
-                // Checking state. Do nothing, just chill and wait
-                break
-                
-            case .checked:
-                // Change observing status state back to `starting` for re-checking
-                pollingStatus = .starting
+        let timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { (timer) in
+            if !isPolling {
+                firePolling(with: timer)
             }
         }
+        
+        func firePolling(with timer: Timer) {
+            currentPollingAttempt += 1
+            isPolling = true
+            
+            retrieveChargeStatusWithCompletionHandler(from: tokenID) { (latestChargeStatus, error) in
+                isPolling = false
+                
+                if let error = error {
+                    timer.invalidate()
+                    completionHandler(latestChargeStatus, error)
+                    return
+                }
+
+                switch latestChargeStatus {
+                case .successful, .failed, .expired, .reversed:
+                    timer.invalidate()
+                    completionHandler(latestChargeStatus, nil)
+                default:
+                    break
+                }
+
+                if currentPollingAttempt == maximumNumberOfPollingAttempts {
+                    timer.invalidate()
+                    completionHandler(latestChargeStatus, nil)
+                }
+            }
+        }
+        
+        // Start polling
+        firePolling(with: timer)
     }
 }
 
