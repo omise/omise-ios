@@ -139,10 +139,8 @@ import os
         dataTask.resume()
     }
     
-    public func retrieveChargeStatusWithCompletionHandler(from tokenID: String, completionHandler: ((Result<ChargeStatus, Error>) -> Void)?) {
+    public func retrieveChargeStatusWithCompletionHandler(from tokenID: String, completionHandler: @escaping ((Result<ChargeStatus, Error>) -> Void)) {
         let dataTask = session.dataTask(with: buildRetrieveTokenURLRquest(from: tokenID)) { (data, response, error) in
-            guard let completionHandler = completionHandler else { return } // nobody around to hear the leaf falls
-
             var result: Result<ChargeStatus, Error>
             defer {
                 DispatchQueue.main.async {
