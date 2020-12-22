@@ -119,7 +119,7 @@ import os
                 
             case 200..<300:
                 guard let data = data else {
-                    let error = OmiseError.unexpected(error: .httpSucceessWithNoData, underlying: nil)
+                    let error = OmiseError.unexpected(error: .httpSuccessWithNoData, underlying: nil)
                     result = .failure(error)
                     return
                 }
@@ -127,7 +127,7 @@ import os
                 do {
                     result = .success(try decoder.decode(Capability.self, from: data))
                 } catch let err {
-                    let error = OmiseError.unexpected(error: .httpSucceessWithInvalidData, underlying: err)
+                    let error = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: err)
                     result = .failure(error)
                 }
                 
@@ -140,7 +140,7 @@ import os
     }
     
     public func retrieveChargeStatusWithCompletionHandler(from tokenID: String, completionHandler: @escaping ((Result<ChargeStatus, Error>) -> Void)) {
-        let dataTask = session.dataTask(with: buildRetrieveTokenURLRquest(from: tokenID)) { (data, response, error) in
+        let dataTask = session.dataTask(with: buildRetrieveTokenURLRequest(from: tokenID)) { (data, response, error) in
             var result: Result<ChargeStatus, Error>
             defer {
                 DispatchQueue.main.async {
@@ -179,7 +179,7 @@ import os
 
             case 200..<300:
                 guard let data = data else {
-                    let error = OmiseError.unexpected(error: .httpSucceessWithNoData, underlying: nil)
+                    let error = OmiseError.unexpected(error: .httpSuccessWithNoData, underlying: nil)
                     result = .failure(error)
                     return
                 }
@@ -188,7 +188,7 @@ import os
                     let token = try decoder.decode(Token.self, from: data)
                     result = .success(token.chargeStatus)
                 } catch let err {
-                    let error = OmiseError.unexpected(error: .httpSucceessWithInvalidData, underlying: err)
+                    let error = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: err)
                     result = .failure(error)
                 }
 
@@ -274,7 +274,7 @@ extension Client {
         return urlRequest
     }
 
-    private func buildRetrieveTokenURLRquest(from tokenID: String) -> URLRequest {
+    private func buildRetrieveTokenURLRequest(from tokenID: String) -> URLRequest {
         var urlRequest = URLRequest(url: Configuration.default.environment.tokenURL.appendingPathComponent(tokenID))
         urlRequest.httpMethod = "GET"
         urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
@@ -350,7 +350,7 @@ extension Client {
                 
             case 200..<300:
                 guard let data = data else {
-                    let error = OmiseError.unexpected(error: .httpSucceessWithNoData, underlying: nil)
+                    let error = OmiseError.unexpected(error: .httpSuccessWithNoData, underlying: nil)
                     result = .failure(error)
                     return
                 }
@@ -359,7 +359,7 @@ extension Client {
                     let decoder = makeJSONDecoder(for: request)
                     result = .success(try decoder.decode(T.self, from: data))
                 } catch let err {
-                    let error = OmiseError.unexpected(error: .httpSucceessWithInvalidData, underlying: err)
+                    let error = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: err)
                     result = .failure(error)
                 }
                 
