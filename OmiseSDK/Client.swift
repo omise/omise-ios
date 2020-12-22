@@ -138,12 +138,12 @@ import os
         })
         dataTask.resume()
     }
-
-    public func retrieveChargeStatusWithCompletionHandler(from tokenID: String, completionHandler: (((ChargeStatus, Error?)) -> Void)?) {
+    
+    public func retrieveChargeStatusWithCompletionHandler(from tokenID: String, completionHandler: ((Result<ChargeStatus, Error>) -> Void)?) {
         let dataTask = session.dataTask(with: buildRetrieveTokenURLRquest(from: tokenID)) { (data, response, error) in
             guard let completionHandler = completionHandler else { return } // nobody around to hear the leaf falls
 
-            var result: (ChargeStatus, Error?)
+            var result: Result<ChargeStatus, Error>
             defer {
                 DispatchQueue.main.async {
                     completionHandler(result)
@@ -151,13 +151,13 @@ import os
             }
 
             if let error = error {
-                result = (.unknown, error)
+                result = .failure(error)
                 return
             }
 
             guard let httpResponse = response as? HTTPURLResponse else {
                 let error = OmiseError.unexpected(error: .noErrorNorResponse, underlying: nil)
-                result = (.unknown, error)
+                result = .failure(error)
                 return
             }
 
@@ -168,41 +168,41 @@ import os
             case 400..<600:
                 guard let data = data else {
                     let error = OmiseError.unexpected(error: .httpErrorWithNoData, underlying: nil)
-                    result = (.unknown, error)
+                    result = .failure(error)
                     return
                 }
 
                 do {
-                    result = (.unknown, try decoder.decode(OmiseError.self, from: data))
+                    result = .failure(try decoder.decode(OmiseError.self, from: data))
                 } catch let err {
                     let error = OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: err)
-                    result = (.unknown, error)
+                    result = .failure(error)
                 }
 
             case 200..<300:
                 guard let data = data else {
                     let error = OmiseError.unexpected(error: .httpSucceessWithNoData, underlying: nil)
-                    result = (.unknown, error)
+                    result = .failure(error)
                     return
                 }
 
                 do {
                     let token = try decoder.decode(Token.self, from: data)
-                    result = (token.chargeStatus, nil)
+                    result = .success(token.chargeStatus)
                 } catch let err {
                     let error = OmiseError.unexpected(error: .httpSucceessWithInvalidData, underlying: err)
-                    result = (.unknown, error)
+                    result = .failure(error)
                 }
 
             default:
                 let error = OmiseError.unexpected(error: .unrecognizedHTTPStatusCode(code: httpResponse.statusCode), underlying: nil)
-                result = (.unknown, error)
+                result = .failure(error)
             }
         }
         dataTask.resume()
     }
-    
-    public func pollingChargeStatusWithCompletionHandler(from tokenID: String, completionHandler: @escaping (ChargeStatus, Error?) -> Void) {
+
+    public func pollingChargeStatusWithCompletionHandler(from tokenID: String, completionHandler: @escaping (Result<ChargeStatus, Error>) -> Void) {
         let maximumNumberOfPollingAttempts = 10
         var currentPollingAttempt = 0
 
@@ -218,26 +218,26 @@ import os
             currentPollingAttempt += 1
             isPolling = true
             
-            retrieveChargeStatusWithCompletionHandler(from: tokenID) { (latestChargeStatus, error) in
+            retrieveChargeStatusWithCompletionHandler(from: tokenID) { (result) in
                 isPolling = false
                 
-                if let error = error {
+                switch result {
+                case .success(let latestChargeStatus):
+                    switch latestChargeStatus {
+                    case .successful, .failed, .expired, .reversed:
+                        timer.invalidate()
+                        completionHandler(.success(latestChargeStatus))
+                    default:
+                        break
+                    }
+                    
+                    if currentPollingAttempt == maximumNumberOfPollingAttempts {
+                        timer.invalidate()
+                        completionHandler(.success(latestChargeStatus))
+                    }
+                case .failure(let error):
                     timer.invalidate()
-                    completionHandler(latestChargeStatus, error)
-                    return
-                }
-
-                switch latestChargeStatus {
-                case .successful, .failed, .expired, .reversed:
-                    timer.invalidate()
-                    completionHandler(latestChargeStatus, nil)
-                default:
-                    break
-                }
-
-                if currentPollingAttempt == maximumNumberOfPollingAttempts {
-                    timer.invalidate()
-                    completionHandler(latestChargeStatus, nil)
+                    completionHandler(.failure(error))
                 }
             }
         }
