@@ -1210,7 +1210,7 @@
 			};
 			name = Release;
 		};
-		98FF99B3257773EB00476487 /* Debug (Production) */ = {
+		98FF99B3257773EB00476487 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1270,9 +1270,9 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = "Debug (Production)";
+			name = Debug;
 		};
-		98FF99B4257773EB00476487 /* Debug (Production) */ = {
+		98FF99B4257773EB00476487 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
@@ -1304,9 +1304,9 @@
 				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator10*]" = "$(SRCROOT)/Library";
 				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator11*]" = "$(SRCROOT)/Library";
 			};
-			name = "Debug (Production)";
+			name = Debug;
 		};
-		98FF99B5257773EB00476487 /* Debug (Production) */ = {
+		98FF99B5257773EB00476487 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -1317,9 +1317,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = "Debug (Production)";
+			name = Debug;
 		};
-		98FF99B6257773EB00476487 /* Debug (Production) */ = {
+		98FF99B6257773EB00476487 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -1343,9 +1343,9 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "ExampleApp/ExampleApp-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
-			name = "Debug (Production)";
+			name = Debug;
 		};
-		98FF99B7257773EB00476487 /* Debug (Production) */ = {
+		98FF99B7257773EB00476487 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -1369,7 +1369,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "ExampleApp/ExampleApp-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
-			name = "Debug (Production)";
+			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1378,7 +1378,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2259311E1CE3210700841B86 /* Debug (Staging) */,
-				98FF99B3257773EB00476487 /* Debug (Production) */,
+				98FF99B3257773EB00476487 /* Debug */,
 				2259311F1CE3210700841B86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1388,7 +1388,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				225931211CE3210700841B86 /* Debug (Staging) */,
-				98FF99B4257773EB00476487 /* Debug (Production) */,
+				98FF99B4257773EB00476487 /* Debug */,
 				225931221CE3210700841B86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1398,7 +1398,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22D480AC1D0EB29C00544CE1 /* Debug (Staging) */,
-				98FF99B6257773EB00476487 /* Debug (Production) */,
+				98FF99B6257773EB00476487 /* Debug */,
 				22D480AD1D0EB29C00544CE1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1408,7 +1408,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A723A612164D7B100D902F5 /* Debug (Staging) */,
-				98FF99B7257773EB00476487 /* Debug (Production) */,
+				98FF99B7257773EB00476487 /* Debug */,
 				8A723A622164D7B100D902F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1418,7 +1418,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				987A02D11CE35D5E0035417A /* Debug (Staging) */,
-				98FF99B5257773EB00476487 /* Debug (Production) */,
+				98FF99B5257773EB00476487 /* Debug */,
 				987A02D21CE35D5E0035417A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

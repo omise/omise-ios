@@ -119,7 +119,7 @@ import os
                 
             case 200..<300:
                 guard let data = data else {
-                    let error = OmiseError.unexpected(error: .httpSucceessWithNoData, underlying: nil)
+                    let error = OmiseError.unexpected(error: .httpSuccessWithNoData, underlying: nil)
                     result = .failure(error)
                     return
                 }
@@ -127,7 +127,7 @@ import os
                 do {
                     result = .success(try decoder.decode(Capability.self, from: data))
                 } catch let err {
-                    let error = OmiseError.unexpected(error: .httpSucceessWithInvalidData, underlying: err)
+                    let error = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: err)
                     result = .failure(error)
                 }
                 
@@ -137,6 +137,111 @@ import os
             }
         })
         dataTask.resume()
+    }
+    
+    public func retrieveChargeStatusWithCompletionHandler(from tokenID: String, completionHandler: @escaping ((Result<ChargeStatus, Error>) -> Void)) {
+        let dataTask = session.dataTask(with: buildRetrieveTokenURLRequest(from: tokenID)) { (data, response, error) in
+            var result: Result<ChargeStatus, Error>
+            defer {
+                DispatchQueue.main.async {
+                    completionHandler(result)
+                }
+            }
+
+            if let error = error {
+                result = .failure(error)
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+                let error = OmiseError.unexpected(error: .noErrorNorResponse, underlying: nil)
+                result = .failure(error)
+                return
+            }
+
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(Client.jsonDateFormatter)
+
+            switch httpResponse.statusCode {
+            case 400..<600:
+                guard let data = data else {
+                    let error = OmiseError.unexpected(error: .httpErrorWithNoData, underlying: nil)
+                    result = .failure(error)
+                    return
+                }
+
+                do {
+                    result = .failure(try decoder.decode(OmiseError.self, from: data))
+                } catch let err {
+                    let error = OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: err)
+                    result = .failure(error)
+                }
+
+            case 200..<300:
+                guard let data = data else {
+                    let error = OmiseError.unexpected(error: .httpSuccessWithNoData, underlying: nil)
+                    result = .failure(error)
+                    return
+                }
+
+                do {
+                    let token = try decoder.decode(Token.self, from: data)
+                    result = .success(token.chargeStatus)
+                } catch let err {
+                    let error = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: err)
+                    result = .failure(error)
+                }
+
+            default:
+                let error = OmiseError.unexpected(error: .unrecognizedHTTPStatusCode(code: httpResponse.statusCode), underlying: nil)
+                result = .failure(error)
+            }
+        }
+        dataTask.resume()
+    }
+
+    public func pollingChargeStatusWithCompletionHandler(from tokenID: String, completionHandler: @escaping (Result<ChargeStatus, Error>) -> Void) {
+        let maximumNumberOfPollingAttempts = 10
+        var currentPollingAttempt = 0
+
+        var isPolling = true
+        
+        let timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { (timer) in
+            if !isPolling {
+                firePolling(with: timer)
+            }
+        }
+        
+        func firePolling(with timer: Timer) {
+            currentPollingAttempt += 1
+            isPolling = true
+            
+            retrieveChargeStatusWithCompletionHandler(from: tokenID) { (result) in
+                isPolling = false
+                
+                switch result {
+                case .success(let latestChargeStatus):
+                    switch latestChargeStatus {
+                    case .successful, .failed, .expired, .reversed:
+                        timer.invalidate()
+                        completionHandler(.success(latestChargeStatus))
+                    default:
+                        break
+                    }
+                    
+                    if currentPollingAttempt == maximumNumberOfPollingAttempts {
+                        timer.invalidate()
+                        completionHandler(.success(latestChargeStatus))
+                    }
+                case .failure(let error):
+                    timer.invalidate()
+                    completionHandler(.failure(error))
+                }
+            }
+        }
+        
+        // Start polling
+        firePolling(with: timer)
     }
 }
 
@@ -161,6 +266,16 @@ extension Client {
     
     private func buildCapabilityAPIURLRequest() -> URLRequest {
         var urlRequest = URLRequest(url: Configuration.default.environment.capabilityURL)
+        urlRequest.httpMethod = "GET"
+        urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
+        urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: "User-Agent")
+        urlRequest.setValue(Client.omiseAPIContentType, forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue(Client.omiseAPIVersion, forHTTPHeaderField: "Omise-Version")
+        return urlRequest
+    }
+
+    private func buildRetrieveTokenURLRequest(from tokenID: String) -> URLRequest {
+        var urlRequest = URLRequest(url: Configuration.default.environment.tokenURL.appendingPathComponent(tokenID))
         urlRequest.httpMethod = "GET"
         urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
         urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: "User-Agent")
@@ -235,7 +350,7 @@ extension Client {
                 
             case 200..<300:
                 guard let data = data else {
-                    let error = OmiseError.unexpected(error: .httpSucceessWithNoData, underlying: nil)
+                    let error = OmiseError.unexpected(error: .httpSuccessWithNoData, underlying: nil)
                     result = .failure(error)
                     return
                 }
@@ -244,7 +359,7 @@ extension Client {
                     let decoder = makeJSONDecoder(for: request)
                     result = .success(try decoder.decode(T.self, from: data))
                 } catch let err {
-                    let error = OmiseError.unexpected(error: .httpSucceessWithInvalidData, underlying: err)
+                    let error = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: err)
                     result = .failure(error)
                 }
                 

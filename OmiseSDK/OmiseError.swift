@@ -105,8 +105,8 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
         case noErrorNorResponse
         case httpErrorWithNoData
         case httpErrorResponseWithInvalidData
-        case httpSucceessWithNoData
-        case httpSucceessWithInvalidData
+        case httpSuccessWithNoData
+        case httpSuccessWithInvalidData
         case unrecognizedHTTPStatusCode(code: Int)
         case other(String)
     }
@@ -162,14 +162,14 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
                     value: "Invalid error data in the error response",
                     comment: "A descriptive message representing an `Invalid error data in the error response` error during the operation in the client"
                 )
-            case .httpSucceessWithNoData:
+            case .httpSuccessWithNoData:
                 return NSLocalizedString(
                     "error.unexpected.http-succeess-with-no-data.message",
                     tableName: "Error", bundle: Bundle.omiseSDKBundle,
                     value: "No data in the success response",
                     comment: "A descriptive message representing an `No data in the success response` error during the operation in the client"
                 )
-            case .httpSucceessWithInvalidData:
+            case .httpSuccessWithInvalidData:
                 return NSLocalizedString(
                     "error.unexpected.http-succeess-with-invalid-data.message",
                     tableName: "Error", bundle: Bundle.omiseSDKBundle,
@@ -240,14 +240,14 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
                     value: "Please try again later. If the same problem persists please contact customer support.",
                     comment: "A default descriptive suggestion message to recovery from the `Invalid error data in the error response` error during the operation in the client which a merchant may show this message to their user"
                 )
-            case .httpSucceessWithNoData:
+            case .httpSuccessWithNoData:
                 recoverySuggestionMessage = NSLocalizedString(
                     "error.unexpected.http-succeess-with-no-data.recovery-suggestion",
                     tableName: "Error", bundle: Bundle.omiseSDKBundle,
                     value: "Please try again later. If the same problem persists please contact customer support.",
                     comment: "A default descriptive suggestion message to recovery from the `No data in the success response` error during the operation in the client which a merchant may show this message to their user"
                 )
-            case .httpSucceessWithInvalidData:
+            case .httpSuccessWithInvalidData:
                 recoverySuggestionMessage = NSLocalizedString(
                     "error.unexpected.http-succeess-with-invalid-data.recovery-suggestion",
                     tableName: "Error", bundle: Bundle.omiseSDKBundle,
