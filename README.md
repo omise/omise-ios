@@ -380,6 +380,10 @@ extension ViewController: OmiseAuthorizingPaymentViewControllerDelegate {
 }
 ```
 
+### 3D Secure 2
+
+To support 3D Secure 2, you can check out the [3D Secure guide](docs/3d-secure-v2.md).
+
 ## Objective-C Compatibility
 
 Omise iOS SDK comes with full Objective-C support. The SDK is designed with the Swift language as a first-class citizen and adopts Swift-only features in the SDK, but it also provides an Objective-C counterpart for those features.
