@@ -51,7 +51,7 @@ To get started, add the following line to your `Cartfile`:
 github "omise/omise-ios" ~> 4.1.0
 ```
 
-Then run `carthage update`:
+Then run `carthage update --use-xcframeworks`:
 
 ``` bash
 $ carthage update
