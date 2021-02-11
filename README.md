@@ -48,7 +48,7 @@ through your server.
 To get started, add the following line to your `Cartfile`:
 
 ```
-github "omise/omise-ios" ~> 3.0
+github "omise/omise-ios" ~> 4.1
 ```
 
 Then run `carthage update`:
@@ -56,7 +56,7 @@ Then run `carthage update`:
 ``` bash
 $ carthage update
 *** Fetching omise-ios
-*** Checking out omise-ios at "v3.5.0"
+*** Checking out omise-ios at "..."
 *** xcodebuild output can be found in /var/folders/sd/ccsbmstn2vbbqd7nk4fgkd040000gn/T/carthage-xcodebuild.X7ZfYB.log
 *** Building scheme "OmiseSDK" in OmiseSDK.xcodeproj
 ```
