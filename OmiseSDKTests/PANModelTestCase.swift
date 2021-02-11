@@ -6,7 +6,7 @@ class PANModelTestCase: XCTestCase {
     
     func testCreatePANs() {
         do {
-            let pan = PAN("4242424242424241")
+            let pan = PAN("4242424242424242")
             XCTAssertEqual(pan.pan, "4242424242424242")
         }
         
