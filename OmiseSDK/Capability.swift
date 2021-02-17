@@ -52,11 +52,11 @@ extension Capability {
 
 
 extension Capability {
-    
     public struct Backend: Codable, Equatable {
         public let payment: Payment
         public let supportedCurrencies: Set<Currency>
-        
+        public let banks: [Bank]?
+
         public enum Payment : Equatable {
             case card(Set<CardBrand>)
             case installment(PaymentInformation.Installment.Brand, availableNumberOfTerms: IndexSet)
@@ -69,7 +69,14 @@ extension Capability {
             case truemoney
             case points(PaymentInformation.Points)
             case eContext
+            case fpx
             case unknownSource(String, configurations: [String: Any])
+        }
+
+        public struct Bank: Codable, Equatable {
+            public let name: String
+            public let code: String
+            public let active: Bool
         }
     }
 }
@@ -92,6 +99,7 @@ extension Capability.Backend {
         case supportedCurrencies = "currencies"
         case allowedInstallmentTerms = "installment_terms"
         case cardBrands = "card_brands"
+        case banks
     }
 }
 
@@ -116,11 +124,12 @@ extension Capability.Backend.Payment {
             return lhsValue == rhsValue
         case (.billPayment(let lhsValue), .billPayment(let rhsValue)):
             return lhsValue == rhsValue
+        case (.fpx, .fpx):
+            return true
         default:
             return false
         }
     }
-    
 }
 
 extension Capability {
@@ -190,10 +199,14 @@ extension Capability.Backend {
             self.payment = .billPayment(.tescoLotus)
         case .source(.eContext):
             self.payment = .eContext
+        case .source(.FPX):
+            self.payment = .fpx
         case .source(let value):
             let configurations = try container.decodeJSONDictionary()
             self.payment = .unknownSource(value.rawValue, configurations: configurations)
         }
+
+        banks = try? container.decode([Bank].self, forKey: .banks)
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -211,7 +224,7 @@ extension Capability.Backend {
         case .unknownSource(_, configurations: let configurations):
             try encoder.encodeJSONDictionary(configurations)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
-        case .internetBanking, .alipay, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking:
+        case .internetBanking, .alipay, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
     }
@@ -273,6 +286,8 @@ extension Capability.Backend {
                 self = .source(OMSSourceTypeValue(points.type))
             case .eContext:
                 self = .source(.eContext)
+            case .fpx:
+                self = .source(.FPX)
             }
         }
         

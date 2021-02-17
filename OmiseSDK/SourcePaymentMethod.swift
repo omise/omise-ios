@@ -199,6 +199,31 @@ public enum PaymentInformation: Codable, Equatable {
     /// Mobile Banking Payment Source
     case mobileBanking(MobileBanking)
     
+    /// Internet Banking FPX
+    public struct FPX: PaymentMethod {
+        public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.FPX.rawValue
+
+        public var type: String = OMSSourceTypeValue.FPX.rawValue
+
+        /// The customer's bank name
+        public let bank: String
+
+        private enum CodingKeys: String, CodingKey {
+            case bank = "bank"
+        }
+
+        /// Creates a new FPX source with the given bank name
+        ///
+        /// - Parameters:
+        ///   - bank:  Internet banking name e.g. uob
+        public init(bank: String) {
+            self.bank = bank
+        }
+    }
+
+    /// Internet Banking FPX
+    case fpx(FPX)
+
     /// Other Payment Source
     case other(type: String, parameters: [String: Any])
     
@@ -234,6 +259,8 @@ public enum PaymentInformation: Codable, Equatable {
             self = .points(try Points(from: decoder))
         case PaymentInformation.MobileBanking.self:
             self = .mobileBanking(try PaymentInformation.MobileBanking(from: decoder))
+        case PaymentInformation.FPX.self:
+            self = .fpx(try FPX(from: decoder))
         case let value:
             self = .other(type: value, parameters: try decoder.decodeJSONDictionary().filter({ (key, _) -> Bool in
                 switch key {
@@ -279,6 +306,10 @@ public enum PaymentInformation: Codable, Equatable {
             try points.encode(to: encoder)
         case .mobileBanking(let value):
             try value.encode(to: encoder)
+        case .fpx(let fpx):
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.FPX.rawValue, forKey: .type)
+            try fpx.encode(to: encoder)
         case .other(type: let type, parameters: let parameters):
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(type, forKey: .type)
@@ -307,6 +338,8 @@ public enum PaymentInformation: Codable, Equatable {
         case (.points(let lhsValue), .points(let rhsValue)):
             return lhsValue == rhsValue
         case (.mobileBanking(let lhsValue), .mobileBanking(let rhsValue)):
+            return lhsValue == rhsValue
+        case (.fpx(let lhsValue), .fpx(let rhsValue)):
             return lhsValue == rhsValue
         case (.other(let lhsType, let lhsParameters), .other(let rhsType, let rhsParameters)):
             return lhsType == rhsType &&
@@ -354,6 +387,8 @@ extension PaymentInformation {
         case .points(let points):
             return points.type
         case .mobileBanking(let bank):
+            return bank.type
+        case .fpx(let bank):
             return bank.type
         case .other(let value, _):
             return value

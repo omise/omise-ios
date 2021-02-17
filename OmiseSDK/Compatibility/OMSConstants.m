@@ -20,6 +20,7 @@ OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePromptPay = @"promptpay";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePayNow = @"paynow";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueTrueMoney = @"truemoney";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePointsCiti = @"points_citi";
+OMSSourceTypeValue const _Nonnull OMSSourceTypeValueFPX = @"fpx";
 
 
 OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeTHB = @"THB";

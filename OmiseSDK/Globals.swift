@@ -124,6 +124,8 @@ extension OMSSourceTypeValue {
             return "truemoney"
         case .pointsCiti:
             return "points"
+        case .FPX:
+            return "fpx"
         default:
             return self.rawValue
         }

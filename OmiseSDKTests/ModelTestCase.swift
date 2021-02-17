@@ -309,6 +309,23 @@ class ModelTestCase: XCTestCase {
         }
     }
     
+    func testDecodeFPXSource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        
+        do {
+            let sourceData = XCTestCase.fixturesData(forFilename: "source_fpx")
+            let source = try decoder.decode(Source.self, from: sourceData)
+            
+            XCTAssertEqual("src_test_5jhmesi7s4at1qctloz", source.id)
+            XCTAssertEqual(100000, source.amount)
+            XCTAssertEqual(Currency.myr, source.currency)
+            XCTAssertEqual(PaymentInformation.fpx(.init(bank: "uob")), source.paymentInformation)
+            XCTAssertEqual(Flow.redirect, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
+    
     func testEncodeTokenParams() throws {
         let encoder = Client.makeJSONEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
