@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 
 /// UITextField subclass for entering the credit card number.
