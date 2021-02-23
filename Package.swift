@@ -1,0 +1,33 @@
+// swift-tools-version:5.3
+
+import PackageDescription
+
+let package = Package(
+    name: "OmiseSDK",
+    defaultLocalization: "en",
+    platforms: [
+        .iOS(.v10),
+        .macOS(.v10_15)
+    ],
+    products: [
+        .library(
+            name: "OmiseSDK",
+            type: .dynamic,
+            targets: ["OmiseSDK"]
+        ),
+    ],
+    targets: [
+        .target(
+            name: "OmiseSDKObjc",
+            path: "OmiseSDKObjc",
+            publicHeadersPath: ""
+        ),
+        .target(
+            name: "OmiseSDK",
+            dependencies: ["OmiseSDKObjc"],
+            path: "OmiseSDK",
+            exclude: ["Info.plist"],
+            resources: [.process("Resources")]
+        )
+    ]
+)
