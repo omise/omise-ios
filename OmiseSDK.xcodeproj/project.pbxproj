@@ -332,11 +332,7 @@
 				8A2BE95720A9A8F1000CEB60 /* Models */,
 				8A2BE95820A9A8FE000CEB60 /* Views */,
 				8AD0609120B550B90074894E /* Compatibility */,
-				2225B3531D0FDD63003EB396 /* Assets.xcassets */,
-				8AF985752147CC3D007E18ED /* Error.strings */,
-				8A75676B2178963B00C684C9 /* Localizable.strings */,
-				8AF5517C213D4C0100D61C98 /* Localizable.stringsdict */,
-				8A5D59831D5317DD005D3346 /* OmiseSDK.storyboard */,
+				F6FE863F25E49BC900C7A4DE /* Resources */,
 				98FF99BA2577789800476487 /* Configuration.swift */,
 			);
 			path = OmiseSDK;
@@ -422,7 +418,6 @@
 				8A30FB7C214929C900DC09DC /* PaymentCreatorController.swift */,
 				8A72CD5D2162358400F14F76 /* PaymentOptionTableViewCell.swift */,
 				8A76791E214663560085DE3C /* PaymentUI.swift */,
-				8A776646214A5FC60029D166 /* NoticeView.xib */,
 				986406361CFEA7EA004BCF51 /* Fields */,
 			);
 			name = Views;
@@ -533,6 +528,19 @@
 				8A01F78620D8E0EB003FC11E /* Objective-C */,
 			);
 			path = OmiseSDKTests;
+			sourceTree = "<group>";
+		};
+		F6FE863F25E49BC900C7A4DE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2225B3531D0FDD63003EB396 /* Assets.xcassets */,
+				8A5D59831D5317DD005D3346 /* OmiseSDK.storyboard */,
+				8A776646214A5FC60029D166 /* NoticeView.xib */,
+				8AF5517C213D4C0100D61C98 /* Localizable.stringsdict */,
+				8A75676B2178963B00C684C9 /* Localizable.strings */,
+				8AF985752147CC3D007E18ED /* Error.strings */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
