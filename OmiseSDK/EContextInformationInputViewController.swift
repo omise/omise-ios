@@ -219,26 +219,25 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
             try textField.validate()
             errorLabel.alpha = 0.0
         } catch {
-            let omiseBundle = Bundle(for: CreditCardFormViewController.self)
             switch (error, textField) {
             case (OmiseTextFieldValidationError.emptyText, _):
                 errorLabel.text = "-" // We need to set the error label some string in order to have it retains its height
                 
             case (OmiseTextFieldValidationError.invalidData, fullNameTextField):
                 errorLabel.text = NSLocalizedString(
-                    "econtext-info-form.full-name-field.invalid-data.error.text", tableName: "Error", bundle: omiseBundle,
+                    "econtext-info-form.full-name-field.invalid-data.error.text", tableName: "Error", bundle: .module,
                     value: "Customer name is invalid",
                     comment: "An error text in the E-Context information input displayed when the customer name is invalid"
                 )
             case (OmiseTextFieldValidationError.invalidData, emailTextField):
                 errorLabel.text = NSLocalizedString(
-                    "econtext-info-form.email-name-field.invalid-data.error.text", tableName: "Error", bundle: omiseBundle,
+                    "econtext-info-form.email-name-field.invalid-data.error.text", tableName: "Error", bundle: .module,
                     value: "Email is invalid",
                     comment: "An error text in the E-Context information input displayed when the email is invalid"
                 )
             case (OmiseTextFieldValidationError.invalidData, phoneNumberTextField):
                 errorLabel.text = NSLocalizedString(
-                    "econtext-info-form.phone-number-field.invalid-data.error.text", tableName: "Error", bundle: omiseBundle,
+                    "econtext-info-form.phone-number-field.invalid-data.error.text", tableName: "Error", bundle: .module,
                     value: "Phone number is invalid",
                     comment: "An error text in the E-Context information input displayed when the phone number is invalid"
                 )

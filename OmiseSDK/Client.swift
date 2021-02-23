@@ -375,9 +375,7 @@ extension Client {
 // MARK: - Constants
 extension Client {
     static let version: String = {
-        let bundle = Bundle(identifier: "co.omise.OmiseSDK")
-        assert(bundle != nil)
-        return bundle?.infoDictionary?["CFBundleShortVersionString"] as? String ?? "(n/a)"
+        return Bundle.module.infoDictionary?["CFBundleShortVersionString"] as? String ?? "(n/a)"
     }()
     
     static let currentPlatform: String = ProcessInfo.processInfo.operatingSystemVersionString
