@@ -102,7 +102,7 @@ public enum PaymentInformation: Codable, Equatable {
             }
         }
         
-        init(brand: Brand, numberOfTerms: Int) {
+        public init(brand: Brand, numberOfTerms: Int) {
             self.brand = brand
             self.numberOfTerms = numberOfTerms
         }
