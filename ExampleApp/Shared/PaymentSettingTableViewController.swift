@@ -82,6 +82,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet var jpyCurrencyCell: UITableViewCell!
     @IBOutlet var usdCurrencyCell: UITableViewCell!
     @IBOutlet var sgdCurrencyCell: UITableViewCell!
+    @IBOutlet var myrCurrencyCell: UITableViewCell!
     
     @IBOutlet var internetBankingBAYPaymentCell: UITableViewCell!
     @IBOutlet var internetBankingKTBPaymentCell: UITableViewCell!
@@ -101,6 +102,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet var paynowPaymentCell: UITableViewCell!
     @IBOutlet var truemoneyPaymentCell: UITableViewCell!
     @IBOutlet var pointsCitiCell: UITableViewCell!
+    @IBOutlet var fpxCell: UITableViewCell!
     
     @IBOutlet var useCapabilityAPIValuesCell: UITableViewCell!
     @IBOutlet var useSpecifiedValuesCell: UITableViewCell!
@@ -212,6 +214,8 @@ extension PaymentSettingTableViewController {
             return .usd
         case sgdCurrencyCell:
             return .sgd
+        case myrCurrencyCell:
+            return .myr
         default:
             return nil
         }
@@ -227,6 +231,8 @@ extension PaymentSettingTableViewController {
             return usdCurrencyCell
         case .sgd:
             return sgdCurrencyCell
+        case .myr:
+            return myrCurrencyCell
         default: return nil
         }
     }
@@ -269,6 +275,8 @@ extension PaymentSettingTableViewController {
             return .trueMoney
         case pointsCitiCell:
             return .pointsCiti
+        case fpxCell:
+            return .FPX
         default:
             return nil
         }
@@ -312,6 +320,8 @@ extension PaymentSettingTableViewController {
             return truemoneyPaymentCell
         case .pointsCiti:
             return pointsCitiCell
+        case .FPX:
+            return fpxCell
         default:
             return nil
         }

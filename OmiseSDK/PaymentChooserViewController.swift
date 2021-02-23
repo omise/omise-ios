@@ -16,6 +16,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case paynow
     case truemoney
     case citiPoints
+    case fpx
     
     static var allCases: [PaymentChooserOption] {
         return [
@@ -31,7 +32,8 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             .paynow,
             .conbini,
             .payEasy,
-            .netBanking
+            .netBanking,
+            .fpx
         ]
     }
     
@@ -63,6 +65,8 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "TrueMoney"
         case .citiPoints:
             return "CitiPoints"
+        case .fpx:
+            return "FPX"
         }
     }
 }
@@ -92,6 +96,8 @@ extension PaymentChooserOption {
             return [.citiPoints]
         case .barcodeAlipay:
             return []
+        case .FPX:
+            return [.fpx]
         default:
             return []
         }
@@ -101,7 +107,7 @@ extension PaymentChooserOption {
 
 @objc(OMSPaymentChooserViewController)
 class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceChooser, PaymentChooserUI {
-    
+    var capability: Capability?
     var flowSession: PaymentCreatorFlowSession?
     
     @objc var showsCreditCardPayment: Bool = true {
@@ -197,6 +203,9 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             }
         case ("GoToTrueMoneyFormSegue"?, let controller as TrueMoneyFormViewController):
             controller.flowSession = self.flowSession
+        case ("GoToFPXBankChooserSegue"?, let controller as FPXBankChooserViewController):
+            controller.showingValues = capability?[.FPX]?.banks ?? []
+            controller.flowSession = self.flowSession
         default: break
         }
         
@@ -281,10 +290,13 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 11, section: 0)
         case .mobileBanking:
             return IndexPath(row: 12, section: 0)
+        case .fpx:
+            return IndexPath(row: 13, section: 0)
         }
     }
     
     public func applyPaymentMethods(from capability: Capability) {
+        self.capability = capability
         showsCreditCardPayment = capability.creditCardBackend != nil
         allowedPaymentMethods = capability.supportedBackends.compactMap({
             switch $0.payment {

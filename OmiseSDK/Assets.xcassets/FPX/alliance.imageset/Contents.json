@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "alliance.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
