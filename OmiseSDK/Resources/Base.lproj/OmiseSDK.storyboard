@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ALK-ZP-CXg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ALK-ZP-CXg">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,7 +33,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Name on card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEE-yU-zna">
-                                        <rect key="frame" x="16" y="130.33333333333334" width="343" height="18"/>
+                                        <rect key="frame" x="16" y="105.33333333333334" width="343" height="18"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
@@ -42,7 +42,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Expiry date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuR-9N-gze">
-                                        <rect key="frame" x="16" y="240.66666666666669" width="151.66666666666666" height="18"/>
+                                        <rect key="frame" x="16" y="190.66666666666669" width="151.66666666666666" height="18"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
@@ -51,7 +51,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Security code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMc-kJ-Ncs">
-                                        <rect key="frame" x="207.66666666666663" y="240.66666666666669" width="151.33333333333337" height="18"/>
+                                        <rect key="frame" x="207.66666666666663" y="190.66666666666669" width="151.33333333333337" height="18"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
@@ -60,7 +60,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MM/YY" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Par-EA-T3D" customClass="OMSCardExpiryDateTextField">
-                                        <rect key="frame" x="16" y="264.66666666666669" width="151.66666666666666" height="47"/>
+                                        <rect key="frame" x="16" y="214.66666666666669" width="151.66666666666666" height="22"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -87,7 +87,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y1l-QK-aPc" customClass="OMSCardCVVTextField">
-                                        <rect key="frame" x="207.66666666666663" y="264.66666666666669" width="151.33333333333337" height="47"/>
+                                        <rect key="frame" x="207.66666666666663" y="214.66666666666669" width="151.33333333333337" height="22"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -114,7 +114,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AJd-kX-GAq" customClass="OMSCardNameTextField">
-                                        <rect key="frame" x="16" y="154.33333333333334" width="343" height="47"/>
+                                        <rect key="frame" x="16" y="129.33333333333334" width="343" height="22"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -141,7 +141,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PBr-uW-pM8" customClass="OMSCardNumberTextField">
-                                        <rect key="frame" x="16" y="44" width="343" height="47"/>
+                                        <rect key="frame" x="16" y="44" width="343" height="22"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -168,7 +168,7 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZPa-NN-y1M" customClass="OMSMainActionButton">
-                                        <rect key="frame" x="16" y="351" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="276" width="343" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="p5t-Hl-v8s"/>
                                         </constraints>
@@ -192,30 +192,30 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubw-ZT-CVl">
-                                        <rect key="frame" x="16" y="317.66666666666669" width="151.66666666666666" height="13.333333333333314"/>
+                                        <rect key="frame" x="16" y="242.66666666666669" width="151.66666666666666" height="13.333333333333314"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3TR-eT-NNR">
-                                        <rect key="frame" x="207.66666666666663" y="317.66666666666669" width="151.33333333333337" height="13.333333333333314"/>
+                                        <rect key="frame" x="207.66666666666663" y="242.66666666666669" width="151.33333333333337" height="13.333333333333314"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="134-RW-VCo">
-                                        <rect key="frame" x="16" y="207.33333333333331" width="343" height="13.333333333333343"/>
+                                        <rect key="frame" x="16" y="157.33333333333334" width="343" height="13.333333333333343"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ox-gC-WRb">
-                                        <rect key="frame" x="16" y="97" width="343" height="13.333333333333329"/>
+                                        <rect key="frame" x="16" y="72" width="343" height="13.333333333333329"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8mp-XL-4Ok" customClass="NoticeView" customModule="OmiseSDK" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8mp-XL-4Ok" customClass="NoticeView" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="999" verticalHuggingPriority="999" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="Alert" translatesAutoresizingMaskIntoConstraints="NO" id="HN3-6a-ogS">
@@ -264,7 +264,7 @@
                                         </connections>
                                     </view>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="8qh-Fc-Sh9">
-                                        <rect key="frame" x="177.66666666666666" y="363" width="20" height="20"/>
+                                        <rect key="frame" x="177.66666666666666" y="288" width="20" height="20"/>
                                         <color key="color" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     </activityIndicatorView>
                                 </subviews>
@@ -424,7 +424,7 @@
         <!--More Information OnCVV View Controller-->
         <scene sceneID="rj6-oc-qQw">
             <objects>
-                <viewController storyboardIdentifier="MoreInformationOnCVVViewController" id="upG-eE-jlo" customClass="MoreInformationOnCVVViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MoreInformationOnCVVViewController" id="upG-eE-jlo" customClass="MoreInformationOnCVVViewController" customModule="OmiseSDK" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MXu-6C-agz"/>
                         <viewControllerLayoutGuide type="bottom" id="y6l-9h-nJf"/>
@@ -515,7 +515,7 @@
                         <sections>
                             <tableViewSection id="Xcr-fj-310">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="WSh-Xk-FbG" imageView="YJi-pu-PV8" rowHeight="64" style="IBUITableViewCellStyleDefault" id="2Ws-Wo-wm0" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="WSh-Xk-FbG" imageView="YJi-pu-PV8" rowHeight="64" style="IBUITableViewCellStyleDefault" id="2Ws-Wo-wm0" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Ws-Wo-wm0" id="ffF-gt-oBM">
@@ -545,7 +545,7 @@
                                             <segue destination="ALK-ZP-CXg" kind="show" identifier="GoToCreditCardFormSegue" id="FOz-FE-sXm"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="zli-mo-sUQ" imageView="EKb-ek-xVb" rowHeight="64" style="IBUITableViewCellStyleDefault" id="agW-z0-gqE" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="zli-mo-sUQ" imageView="EKb-ek-xVb" rowHeight="64" style="IBUITableViewCellStyleDefault" id="agW-z0-gqE" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="92" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="agW-z0-gqE" id="dNq-OT-ycc">
@@ -575,7 +575,7 @@
                                             <segue destination="lhd-VO-2kZ" kind="show" identifier="GoToInstallmentBrandChooserSegue" id="IrZ-YO-P8Z"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="ewt-LA-vRb" imageView="zdf-hJ-8dN" rowHeight="64" style="IBUITableViewCellStyleDefault" id="AAg-A1-JKC" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="ewt-LA-vRb" imageView="zdf-hJ-8dN" rowHeight="64" style="IBUITableViewCellStyleDefault" id="AAg-A1-JKC" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="156" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AAg-A1-JKC" id="XIj-v2-ec7">
@@ -605,7 +605,7 @@
                                             <segue destination="Qrb-nZ-3ze" kind="show" identifier="GoToTrueMoneyFormSegue" id="j5F-vG-wvV"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="JmT-Us-3lW" imageView="fgh-el-WUb" rowHeight="64" style="IBUITableViewCellStyleDefault" id="Hqq-CZ-Yv0" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="JmT-Us-3lW" imageView="fgh-el-WUb" rowHeight="64" style="IBUITableViewCellStyleDefault" id="Hqq-CZ-Yv0" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="220" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hqq-CZ-Yv0" id="YLb-3z-kZw">
@@ -634,7 +634,7 @@
                                             <outlet property="accessoryView" destination="kXM-af-2vc" id="Qw1-7q-khE"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="zmw-2Y-WAX" imageView="Yel-Bd-mnc" rowHeight="64" style="IBUITableViewCellStyleDefault" id="rcY-yZ-2x2" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="zmw-2Y-WAX" imageView="Yel-Bd-mnc" rowHeight="64" style="IBUITableViewCellStyleDefault" id="rcY-yZ-2x2" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="284" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rcY-yZ-2x2" id="iZG-7h-53W">
@@ -663,7 +663,7 @@
                                             <outlet property="accessoryView" destination="JvC-Hd-UTi" id="meG-25-Uic"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="tXy-nx-P4n" imageView="xJM-hX-KBM" rowHeight="64" style="IBUITableViewCellStyleDefault" id="vdk-oV-yyo" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="tXy-nx-P4n" imageView="xJM-hX-KBM" rowHeight="64" style="IBUITableViewCellStyleDefault" id="vdk-oV-yyo" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="348" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vdk-oV-yyo" id="LpP-Uw-LjY">
@@ -692,7 +692,7 @@
                                             <outlet property="accessoryView" destination="TVy-0x-ceQ" id="8U2-Pb-cQj"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="pFQ-Pc-BCP" imageView="xDm-CX-iVx" rowHeight="64" style="IBUITableViewCellStyleDefault" id="B9q-7B-xJ3" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="pFQ-Pc-BCP" imageView="xDm-CX-iVx" rowHeight="64" style="IBUITableViewCellStyleDefault" id="B9q-7B-xJ3" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="412" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="B9q-7B-xJ3" id="A9c-Te-ADe">
@@ -722,7 +722,7 @@
                                             <segue destination="u3o-zY-Nfp" kind="show" identifier="GoToInternetBankingChooserSegue" id="F0T-lW-co8"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="LpC-UH-uPc" imageView="KaP-cV-sMD" rowHeight="64" style="IBUITableViewCellStyleDefault" id="cSe-4o-lCX" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="LpC-UH-uPc" imageView="KaP-cV-sMD" rowHeight="64" style="IBUITableViewCellStyleDefault" id="cSe-4o-lCX" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="476" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cSe-4o-lCX" id="36g-lT-AeD">
@@ -751,7 +751,7 @@
                                             <outlet property="accessoryView" destination="9zy-aH-aov" id="fBc-ia-cCe"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="8kj-Ed-2eS" imageView="lwL-Kb-6aU" rowHeight="64" style="IBUITableViewCellStyleDefault" id="RFW-ok-vpg" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="8kj-Ed-2eS" imageView="lwL-Kb-6aU" rowHeight="64" style="IBUITableViewCellStyleDefault" id="RFW-ok-vpg" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="540" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RFW-ok-vpg" id="8D5-tW-sLQ">
@@ -780,7 +780,7 @@
                                             <outlet property="accessoryView" destination="ul0-fZ-536" id="4ab-qy-gJe"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Qzd-8E-gal" imageView="8Se-FQ-PUT" rowHeight="64" style="IBUITableViewCellStyleDefault" id="mIi-rJ-T3T" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Qzd-8E-gal" imageView="8Se-FQ-PUT" rowHeight="64" style="IBUITableViewCellStyleDefault" id="mIi-rJ-T3T" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="604" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mIi-rJ-T3T" id="ZiI-Cr-bDl">
@@ -810,7 +810,7 @@
                                             <segue destination="hC0-5j-tkj" kind="show" id="5Dy-nJ-QYC"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="A0v-NW-KLo" imageView="aXa-Pv-ykR" rowHeight="64" style="IBUITableViewCellStyleDefault" id="PrW-n7-AJf" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="A0v-NW-KLo" imageView="aXa-Pv-ykR" rowHeight="64" style="IBUITableViewCellStyleDefault" id="PrW-n7-AJf" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="668" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PrW-n7-AJf" id="ofd-Bo-qeo">
@@ -840,7 +840,7 @@
                                             <segue destination="hC0-5j-tkj" kind="show" id="HBs-Jb-J60"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="cSc-cs-8vb" imageView="bEi-qj-pQS" rowHeight="64" style="IBUITableViewCellStyleDefault" id="fCT-ag-yPy" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="cSc-cs-8vb" imageView="bEi-qj-pQS" rowHeight="64" style="IBUITableViewCellStyleDefault" id="fCT-ag-yPy" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="732" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fCT-ag-yPy" id="7Ni-t4-CIn">
@@ -870,7 +870,7 @@
                                             <segue destination="hC0-5j-tkj" kind="show" id="t2g-nU-nna"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="drr-nc-RA8" imageView="d9T-D0-QRl" rowHeight="64" style="IBUITableViewCellStyleDefault" id="byf-aE-2pb" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="drr-nc-RA8" imageView="d9T-D0-QRl" rowHeight="64" style="IBUITableViewCellStyleDefault" id="byf-aE-2pb" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="796" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="byf-aE-2pb" id="VEt-Vg-mwc">
@@ -1189,7 +1189,7 @@
                         <sections>
                             <tableViewSection id="zL1-N5-B0Q">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="XnR-SW-SnL" imageView="mmD-jI-DtJ" rowHeight="64" style="IBUITableViewCellStyleDefault" id="790-KL-PJN" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="XnR-SW-SnL" imageView="mmD-jI-DtJ" rowHeight="64" style="IBUITableViewCellStyleDefault" id="790-KL-PJN" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="790-KL-PJN" id="Sas-ZP-rIm">
@@ -1218,7 +1218,7 @@
                                             <outlet property="accessoryView" destination="Aq9-Ba-57u" id="usR-bw-jpZ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="iiE-Ff-NCh" imageView="yYD-cB-qCi" rowHeight="64" style="IBUITableViewCellStyleDefault" id="NLg-p5-2qF" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="iiE-Ff-NCh" imageView="yYD-cB-qCi" rowHeight="64" style="IBUITableViewCellStyleDefault" id="NLg-p5-2qF" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="92" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NLg-p5-2qF" id="9r1-fd-mgE">
@@ -1247,7 +1247,7 @@
                                             <outlet property="accessoryView" destination="lEY-0l-s3s" id="tYo-PP-IEb"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="kUY-b1-dmD" imageView="7za-41-ybx" rowHeight="64" style="IBUITableViewCellStyleDefault" id="vLM-RF-7eG" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="kUY-b1-dmD" imageView="7za-41-ybx" rowHeight="64" style="IBUITableViewCellStyleDefault" id="vLM-RF-7eG" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="156" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vLM-RF-7eG" id="bP2-9j-Xdk">
@@ -1276,7 +1276,7 @@
                                             <outlet property="accessoryView" destination="Kq4-XT-e6P" id="rwh-Jg-pj2"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="EbR-kz-Obr" imageView="szq-p3-dbR" rowHeight="64" style="IBUITableViewCellStyleDefault" id="cgp-yb-N8K" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="EbR-kz-Obr" imageView="szq-p3-dbR" rowHeight="64" style="IBUITableViewCellStyleDefault" id="cgp-yb-N8K" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="220" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cgp-yb-N8K" id="1fy-rP-l4q">
@@ -1342,7 +1342,7 @@
                         <sections>
                             <tableViewSection id="f76-dL-yhN">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="8lH-Rp-Dhb" imageView="MRg-Wp-bLM" rowHeight="64" style="IBUITableViewCellStyleDefault" id="kbi-vf-GSK" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="8lH-Rp-Dhb" imageView="MRg-Wp-bLM" rowHeight="64" style="IBUITableViewCellStyleDefault" id="kbi-vf-GSK" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kbi-vf-GSK" id="aXx-tI-Y7g">
@@ -1371,7 +1371,7 @@
                                             <outlet property="accessoryView" destination="TFx-b8-PIp" id="1Qc-LP-3xt"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="yHg-il-ZhG" imageView="Lb0-8j-Dy8" rowHeight="64" style="IBUITableViewCellStyleDefault" id="ecN-NI-zSq" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="yHg-il-ZhG" imageView="Lb0-8j-Dy8" rowHeight="64" style="IBUITableViewCellStyleDefault" id="ecN-NI-zSq" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="92" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ecN-NI-zSq" id="4u7-Oo-fdo">
@@ -1400,7 +1400,7 @@
                                             <outlet property="accessoryView" destination="oPw-3U-Tkq" id="aQP-Ki-RmK"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="V59-D4-sqA" imageView="tma-Bx-TQt" rowHeight="64" style="IBUITableViewCellStyleDefault" id="Enh-JP-gI0" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="V59-D4-sqA" imageView="tma-Bx-TQt" rowHeight="64" style="IBUITableViewCellStyleDefault" id="Enh-JP-gI0" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="156" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Enh-JP-gI0" id="N52-2T-a9c">
@@ -1429,7 +1429,7 @@
                                             <outlet property="accessoryView" destination="nLz-b3-FrU" id="xhd-c9-18Y"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="ccD-Ly-DnI" imageView="NRh-UU-W2U" rowHeight="64" style="IBUITableViewCellStyleDefault" id="2Gh-8l-fFk" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="ccD-Ly-DnI" imageView="NRh-UU-W2U" rowHeight="64" style="IBUITableViewCellStyleDefault" id="2Gh-8l-fFk" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="220" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Gh-8l-fFk" id="XT4-BU-0p1">
@@ -1458,7 +1458,7 @@
                                             <outlet property="accessoryView" destination="pTo-rC-1h4" id="md4-JP-kOu"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="d1t-A5-fA9" imageView="zZM-Ez-6ou" rowHeight="64" style="IBUITableViewCellStyleDefault" id="dci-ZX-sjt" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="d1t-A5-fA9" imageView="zZM-Ez-6ou" rowHeight="64" style="IBUITableViewCellStyleDefault" id="dci-ZX-sjt" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="284" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dci-ZX-sjt" id="f2S-oJ-lte">
@@ -1487,7 +1487,7 @@
                                             <outlet property="accessoryView" destination="Vmz-9C-AJj" id="iF6-Xz-Q7r"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="r9n-CR-zhg" imageView="e7P-TK-rvW" rowHeight="64" style="IBUITableViewCellStyleDefault" id="5LR-Ge-58O" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="r9n-CR-zhg" imageView="e7P-TK-rvW" rowHeight="64" style="IBUITableViewCellStyleDefault" id="5LR-Ge-58O" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="348" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5LR-Ge-58O" id="0es-LZ-trt">
@@ -1554,7 +1554,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NumberOfTermCell" textLabel="Pqt-3W-dy1" rowHeight="64" style="IBUITableViewCellStyleDefault" id="YQv-W8-Cy3" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NumberOfTermCell" textLabel="Pqt-3W-dy1" rowHeight="64" style="IBUITableViewCellStyleDefault" id="YQv-W8-Cy3" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                 <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YQv-W8-Cy3" id="V8I-GJ-QXO">
@@ -1915,7 +1915,7 @@
                         <sections>
                             <tableViewSection id="Ii8-Zv-zbp">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="EQF-26-ssb" imageView="HqK-eY-xEE" rowHeight="64" style="IBUITableViewCellStyleDefault" id="FLo-QG-lwc" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="EQF-26-ssb" imageView="HqK-eY-xEE" rowHeight="64" style="IBUITableViewCellStyleDefault" id="FLo-QG-lwc" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FLo-QG-lwc" id="oKa-NJ-5pR">
@@ -1963,29 +1963,6 @@
             <point key="canvasLocation" x="4692" y="-350"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="1dv-2d-6Zi">
-            <size key="intrinsicContentSize" width="38" height="33"/>
-        </designable>
-        <designable name="AJd-kX-GAq">
-            <size key="intrinsicContentSize" width="23" height="48"/>
-        </designable>
-        <designable name="PBr-uW-pM8">
-            <size key="intrinsicContentSize" width="23" height="48"/>
-        </designable>
-        <designable name="Par-EA-T3D">
-            <size key="intrinsicContentSize" width="73.666666666666671" height="48"/>
-        </designable>
-        <designable name="Y1l-QK-aPc">
-            <size key="intrinsicContentSize" width="23" height="48"/>
-        </designable>
-        <designable name="ZPa-NN-y1M">
-            <size key="intrinsicContentSize" width="30" height="33"/>
-        </designable>
-        <designable name="mE3-3u-rvg">
-            <size key="intrinsicContentSize" width="38" height="33"/>
-        </designable>
-    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="t2g-nU-nna"/>
     </inferredMetricsTieBreakers>
