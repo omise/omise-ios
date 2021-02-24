@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
-FOUNDATION_EXPORT double OmiseSDKObjcVersionNumber;
-FOUNDATION_EXPORT const unsigned char OmiseSDKObjcVersionString[];
+FOUNDATION_EXPORT double OmiseSDKVersionNumber;
+FOUNDATION_EXPORT const unsigned char OmiseSDKVersionString[];
 
 
 #import <OmiseSDK/OMSConstants.h>
