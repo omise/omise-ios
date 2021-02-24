@@ -25,7 +25,7 @@ let package = Package(
             name: "OmiseSDK",
             dependencies: ["OmiseSDKObjc"],
             path: "OmiseSDK",
-            exclude: ["Info.plist"],
+            exclude: ["Info.plist", "OmiseSDK.h"],
             resources: [.process("Resources")]
         )
     ]
