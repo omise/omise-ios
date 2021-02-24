@@ -203,7 +203,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             }
         case ("GoToTrueMoneyFormSegue"?, let controller as TrueMoneyFormViewController):
             controller.flowSession = self.flowSession
-        case ("GoToFPXBankChooserSegue"?, let controller as FPXBankChooserViewController):
+        case ("GoToFPXFormSegue"?, let controller as FPXFormViewController):
             controller.showingValues = capability?[.FPX]?.banks ?? []
             controller.flowSession = self.flowSession
         default: break

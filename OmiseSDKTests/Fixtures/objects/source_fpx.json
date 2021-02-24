@@ -8,5 +8,6 @@
   "flow": "redirect",
   "amount": 100000,
   "currency": "MYR",
-  "bank": "uob"
+  "bank": "uob",
+  "email": "support@omise.co"
 }

@@ -208,16 +208,22 @@ public enum PaymentInformation: Codable, Equatable {
         /// The customer's bank name
         public let bank: String
 
+        /// Customer email
+        public let email: String
+
         private enum CodingKeys: String, CodingKey {
-            case bank = "bank"
+            case bank
+            case email
         }
 
         /// Creates a new FPX source with the given bank name
         ///
         /// - Parameters:
         ///   - bank:  Internet banking name e.g. uob
-        public init(bank: String) {
+        ///   - email: Customer email
+        public init(bank: String, email: String) {
             self.bank = bank
+            self.email = email
         }
     }
 

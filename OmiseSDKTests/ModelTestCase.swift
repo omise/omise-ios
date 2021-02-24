@@ -319,7 +319,7 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual("src_test_5jhmesi7s4at1qctloz", source.id)
             XCTAssertEqual(100000, source.amount)
             XCTAssertEqual(Currency.myr, source.currency)
-            XCTAssertEqual(PaymentInformation.fpx(.init(bank: "uob")), source.paymentInformation)
+            XCTAssertEqual(PaymentInformation.fpx(.init(bank: "uob", email: "support@omise.co")), source.paymentInformation)
             XCTAssertEqual(Flow.redirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")

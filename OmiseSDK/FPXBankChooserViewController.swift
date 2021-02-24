@@ -4,6 +4,7 @@ import os
 
 @objc(OMSFPXBankChooserViewController)
 class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capability.Backend.Bank>, PaymentSourceChooser, PaymentChooserUI {
+    var email: String?
     var flowSession: PaymentCreatorFlowSession?
     var defaultImage: String = "FPX/unknown"
 
@@ -52,39 +53,35 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
             return
         }
 
-        let selectedBrand = element(forUIIndexPath: indexPath)
-        os_log("FPX Bank Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedBrand.name)
+        let selectedBank = element(forUIIndexPath: indexPath)
+        let paymentInformation = PaymentInformation.FPX(bank: selectedBank.code, email: email!)
 
-        performSegue(withIdentifier: "GoToInstallmentTermsChooserSegue", sender: cell)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else {
-            return
-        }
-//        let selectedBrand = element(forUIIndexPath: indexPath)
-//        if segue.identifier == "GoToInstallmentTermsChooserSegue",
-//            let installmentTermsChooserViewController = segue.destination as? InstallmentsNumberOfTermsChooserViewController {
-//            installmentTermsChooserViewController.installmentBrand = selectedBrand
-//            installmentTermsChooserViewController.flowSession = self.flowSession
-//            installmentTermsChooserViewController.preferredPrimaryColor = self.preferredPrimaryColor
-//            installmentTermsChooserViewController.preferredSecondaryColor = self.preferredSecondaryColor
-//        }
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        os_log("FPX Banking Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedBank.name)
+
+        let oldAccessoryView = cell.accessoryView
+        let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+        loadingIndicator.color = currentSecondaryColor
+        cell.accessoryView = loadingIndicator
+        loadingIndicator.startAnimating()
+        view.isUserInteractionEnabled = false
+
+        flowSession?.requestCreateSource(.fpx(paymentInformation), completionHandler: { _ in
+            cell.accessoryView = oldAccessoryView
+            self.view.isUserInteractionEnabled = true
+        })
     }
     
     private func applyPrimaryColor() {
         guard isViewLoaded else {
             return
         }
-        
-//        bankNameLabels.forEach({
-//            $0.textColor = currentPrimaryColor
-//        })
     }
-    
+
     private func applySecondaryColor() {
     }
-    
+
     private func bankImage(bank: String) -> UIImage {
         if let image = UIImage(named: "FPX/" + bank, in: Bundle.omiseSDKBundle, compatibleWith: nil) {
             return image
