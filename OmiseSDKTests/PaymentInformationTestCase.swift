@@ -282,6 +282,7 @@ class PaymentInformationTestCase: XCTestCase {
                   "amount" : 1000000,
                   "bank" : "uob",
                   "currency" : "MYR",
+                  "email" : "support@omise.co",
                   "type" : "fpx"
                 }
                 """, encodedJSONString)
