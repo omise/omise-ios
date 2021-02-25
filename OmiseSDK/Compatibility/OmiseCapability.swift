@@ -75,7 +75,7 @@ class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
         __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.mobileBankingSCB)
 
     static let FPXSourceBackendPayment =
-        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.FPX)
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.fpx)
     
     static func makeInternetBankingSourceBackendPayment(
         bank: PaymentInformation.InternetBanking

@@ -301,7 +301,7 @@ public class __SourceFPXPayment: __SourcePaymentInformation {
     @objc public init(bank: String, email: String) {
         self.bank = bank
         self.email = email
-        super.init(type: OMSSourceTypeValue.FPX)!
+        super.init(type: OMSSourceTypeValue.fpx)!
     }
 }
 

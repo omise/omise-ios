@@ -199,7 +199,7 @@ extension Capability.Backend {
             self.payment = .billPayment(.tescoLotus)
         case .source(.eContext):
             self.payment = .eContext
-        case .source(.FPX):
+        case .source(.fpx):
             self.payment = .fpx
         case .source(let value):
             let configurations = try container.decodeJSONDictionary()
@@ -287,7 +287,7 @@ extension Capability.Backend {
             case .eContext:
                 self = .source(.eContext)
             case .fpx:
-                self = .source(.FPX)
+                self = .source(.fpx)
             }
         }
         

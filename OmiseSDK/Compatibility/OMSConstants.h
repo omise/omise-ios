@@ -22,7 +22,7 @@ extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePromptPay;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePayNow;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueTrueMoney;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePointsCiti;
-extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueFPX;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueFpx;
 
 
 typedef NSString * OMSSupportedCurrencyCode NS_EXTENSIBLE_STRING_ENUM;

@@ -276,7 +276,7 @@ extension PaymentSettingTableViewController {
         case pointsCitiCell:
             return .pointsCiti
         case fpxCell:
-            return .FPX
+            return .fpx
         default:
             return nil
         }
@@ -320,7 +320,7 @@ extension PaymentSettingTableViewController {
             return truemoneyPaymentCell
         case .pointsCiti:
             return pointsCitiCell
-        case .FPX:
+        case .fpx:
             return fpxCell
         default:
             return nil

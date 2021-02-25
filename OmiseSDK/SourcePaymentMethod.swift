@@ -201,9 +201,9 @@ public enum PaymentInformation: Codable, Equatable {
     
     /// Internet Banking FPX
     public struct FPX: PaymentMethod {
-        public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.FPX.rawValue
+        public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.fpx.rawValue
 
-        public var type: String = OMSSourceTypeValue.FPX.rawValue
+        public var type: String = OMSSourceTypeValue.fpx.rawValue
 
         /// The customer's bank name
         public let bank: String
@@ -314,7 +314,7 @@ public enum PaymentInformation: Codable, Equatable {
             try value.encode(to: encoder)
         case .fpx(let fpx):
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.FPX.rawValue, forKey: .type)
+            try container.encode(OMSSourceTypeValue.fpx.rawValue, forKey: .type)
             try fpx.encode(to: encoder)
         case .other(type: let type, parameters: let parameters):
             var container = encoder.container(keyedBy: CodingKeys.self)

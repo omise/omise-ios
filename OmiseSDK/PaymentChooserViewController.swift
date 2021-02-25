@@ -96,7 +96,7 @@ extension PaymentChooserOption {
             return [.citiPoints]
         case .barcodeAlipay:
             return []
-        case .FPX:
+        case .fpx:
             return [.fpx]
         default:
             return []
@@ -204,7 +204,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         case ("GoToTrueMoneyFormSegue"?, let controller as TrueMoneyFormViewController):
             controller.flowSession = self.flowSession
         case ("GoToFPXFormSegue"?, let controller as FPXFormViewController):
-            controller.showingValues = capability?[.FPX]?.banks ?? []
+            controller.showingValues = capability?[.fpx]?.banks ?? []
             controller.flowSession = self.flowSession
         default: break
         }
@@ -321,7 +321,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             case .mobileBanking(let bank):
                 return OMSSourceTypeValue(bank.type)
             case .fpx:
-                return OMSSourceTypeValue.FPX
+                return OMSSourceTypeValue.fpx
             case .card, .unknownSource:
                 return nil
             }

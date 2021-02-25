@@ -42,7 +42,7 @@ class CapabilityOperationFixtureTests: XCTestCase {
                XCTFail("Capability doesn't have the Citi Points backend")
             }
             
-            if let fpxBackend = capability[OMSSourceTypeValue.FPX] {
+            if let fpxBackend = capability[OMSSourceTypeValue.fpx] {
                 XCTAssertEqual(fpxBackend.banks, [
                     Capability.Backend.Bank(name: "UOB", code: "uob", active: true)
                 ])
