@@ -7,19 +7,20 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
     var email: String?
     var flowSession: PaymentCreatorFlowSession?
     var defaultImage: String = "FPX/unknown"
+    var disabledColor: UIColor = #colorLiteral(red: 0.9300388694, green: 0.9301946759, blue: 0.9300183654, alpha: 1)
 
     override var showingValues: [Capability.Backend.Bank] {
         didSet {
             os_log("FPX Bank Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.name }).joined(separator: ", "))
         }
     }
-    
+
     @IBInspectable @objc var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
-    
+
     @IBInspectable @objc var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
@@ -45,9 +46,13 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         cell.textLabel?.text = bank.name
         cell.imageView?.image = bankImage(bank: bank.code)
 
+        if !bank.active {
+            disalbeCell(cell: cell)
+        }
+
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) else {
             return
@@ -88,6 +93,13 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         } else {
             return UIImage(named: defaultImage, in: Bundle.omiseSDKBundle, compatibleWith: nil)!
         }
+    }
+
+    private func disalbeCell(cell: UITableViewCell) {
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        cell.backgroundColor = disabledColor
+        cell.contentView.alpha = 0.5
+        cell.isUserInteractionEnabled = false
     }
 }
 

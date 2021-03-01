@@ -209,7 +209,7 @@ public enum PaymentInformation: Codable, Equatable {
         public let bank: String
 
         /// Customer email
-        public let email: String
+        public let email: String?
 
         private enum CodingKeys: String, CodingKey {
             case bank
@@ -221,7 +221,7 @@ public enum PaymentInformation: Codable, Equatable {
         /// - Parameters:
         ///   - bank:  Internet banking name e.g. uob
         ///   - email: Customer email
-        public init(bank: String, email: String) {
+        public init(bank: String, email: String?) {
             self.bank = bank
             self.email = email
         }

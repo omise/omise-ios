@@ -12,9 +12,15 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
     private var client: Client?
 
     private var isInputDataValid: Bool {
-        return formFields.reduce(into: true, { (valid, field) in
+        let valid = formFields.reduce(into: true, { (valid, field) in
             valid = valid && field.isValid
         })
+
+        return valid || isEmailInputEmpty
+    }
+
+    private var isEmailInputEmpty: Bool {
+        return emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) == ""
     }
 
     @IBInspectable @objc var preferredPrimaryColor: UIColor? {
@@ -92,6 +98,9 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
         )
 
         emailTextField.validator = try! NSRegularExpression(pattern: "\\A[\\w\\-\\.]+@[\\w\\-\\.]+\\.+[\\w\\-\\.]+\\s?\\z", options: [])
+
+        // check for 1st time
+        validateFieldData(emailTextField)
     }
 
     public override func viewWillLayoutSubviews() {
@@ -110,11 +119,7 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
     }
 
     @IBAction func submitForm(_ sender: AnyObject) {
-        guard let email = emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
-            return
-        }
-
-        emailValue = email
+        emailValue = emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces)
 
         performSegue(withIdentifier: destinationSegue, sender: sender)
     }

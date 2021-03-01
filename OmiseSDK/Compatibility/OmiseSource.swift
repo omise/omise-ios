@@ -291,14 +291,14 @@ public class __SourceFPXPayment: __SourcePaymentInformation {
     public let bank: String
 
     /// The customer's email
-    public let email: String
+    public let email: String?
 
     /// Creates a new FPX source with the given customer information
     ///
     /// - Parameters:
     ///   - bank:  Internet banking name e.g. uob
     ///   - email:  Customer's email
-    @objc public init(bank: String, email: String) {
+    @objc public init(bank: String, email: String?) {
         self.bank = bank
         self.email = email
         super.init(type: OMSSourceTypeValue.fpx)!
