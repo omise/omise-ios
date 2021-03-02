@@ -47,7 +47,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         cell.imageView?.image = bankImage(bank: bank.code)
 
         if !bank.active {
-            disalbeCell(cell: cell)
+            disableCell(cell: cell)
         }
 
         return cell
@@ -95,7 +95,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         }
     }
 
-    private func disalbeCell(cell: UITableViewCell) {
+    private func disableCell(cell: UITableViewCell) {
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.backgroundColor = disabledColor
         cell.contentView.alpha = 0.5
