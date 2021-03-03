@@ -6,8 +6,8 @@ import os
 class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capability.Backend.Bank>, PaymentSourceChooser, PaymentChooserUI {
     var email: String?
     var flowSession: PaymentCreatorFlowSession?
-    var defaultImage: String = "FPX/unknown"
-    var disabledColor: UIColor = #colorLiteral(red: 0.9300388694, green: 0.9301946759, blue: 0.9300183654, alpha: 1)
+    private let defaultImage: String = "FPX/unknown"
+    private let disabledColor: UIColor = #colorLiteral(red: 0.9300388694, green: 0.9301946759, blue: 0.9300183654, alpha: 1)
 
     override var showingValues: [Capability.Backend.Bank] {
         didSet {

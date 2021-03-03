@@ -4,10 +4,10 @@ import UIKit
 @objc(OMSFPXFormViewController)
 class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
 
-    var destinationSegue: String = "GoToFPXBankChooserSegue"
+    private let destinationSegue: String = "GoToFPXBankChooserSegue"
     var flowSession: PaymentCreatorFlowSession?
     var showingValues: [Capability.Backend.Bank]?
-    var emailValue: String?
+    private var emailValue: String?
 
     private var client: Client?
 
