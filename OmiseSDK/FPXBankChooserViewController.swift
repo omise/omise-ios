@@ -7,7 +7,6 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
     var email: String?
     var flowSession: PaymentCreatorFlowSession?
     private let defaultImage: String = "FPX/unknown"
-    private let disabledColor: UIColor = #colorLiteral(red: 0.9300388694, green: 0.9301946759, blue: 0.9300183654, alpha: 1)
 
     override var showingValues: [Capability.Backend.Bank] {
         didSet {
@@ -45,6 +44,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         cell.accessoryView?.tintColor = currentSecondaryColor
         cell.textLabel?.text = bank.name
         cell.imageView?.image = bankImage(bank: bank.code)
+        cell.textLabel?.textColor = currentPrimaryColor
 
         if !bank.active {
             disableCell(cell: cell)
@@ -97,7 +97,6 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
 
     private func disableCell(cell: UITableViewCell) {
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        cell.backgroundColor = disabledColor
         cell.contentView.alpha = 0.5
         cell.isUserInteractionEnabled = false
     }
