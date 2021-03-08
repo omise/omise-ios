@@ -504,6 +504,10 @@ extension PaymentCreatorController {
         .payNow,
     ]
     
+    public static let malaysiaDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
+        .fpx,
+    ]
+
     public static let internetBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
         .internetBankingBAY,
         .internetBankingKTB,

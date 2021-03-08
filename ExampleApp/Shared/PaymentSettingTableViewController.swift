@@ -180,6 +180,11 @@ class PaymentSettingTableViewController: UITableViewController {
             self.currentCurrency = PaymentPreset.singaporePreset.paymentCurrency
             self.allowedPaymentMethods = Set(PaymentPreset.singaporePreset.allowedPaymentMethods)
         }))
+        presetChooserAlertController.addAction(UIAlertAction(title: "Malaysia", style: .default, handler: { (_) in
+            self.currentAmount = PaymentPreset.malaysiaPreset.paymentAmount
+            self.currentCurrency = PaymentPreset.malaysiaPreset.paymentCurrency
+            self.allowedPaymentMethods = Set(PaymentPreset.malaysiaPreset.allowedPaymentMethods)
+        }))
         
         presetChooserAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(presetChooserAlertController, animated: true, completion: nil)

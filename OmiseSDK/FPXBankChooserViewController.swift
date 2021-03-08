@@ -7,6 +7,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
     var email: String?
     var flowSession: PaymentCreatorFlowSession?
     private let defaultImage: String = "FPX/unknown"
+    private let message = "Cannot retrieve list of banks.\nPlease try again later."
 
     override var showingValues: [Capability.Backend.Bank] {
         didSet {
@@ -32,6 +33,12 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         applySecondaryColor()
 
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
+        if showingValues.count == 0 {
+            displayEmptyMessage()
+        } else {
+            restore()
+        }
     }
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,6 +106,26 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.contentView.alpha = 0.5
         cell.isUserInteractionEnabled = false
+    }
+
+    private func displayEmptyMessage() {
+        let label = UILabel(
+            frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height)
+        )
+
+        label.text = message
+        label.textColor = currentPrimaryColor
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.sizeToFit()
+
+        tableView.backgroundView = label
+        tableView.separatorStyle = .none
+    }
+
+    private func restore() {
+        tableView.backgroundView = nil
+        tableView.separatorStyle = .singleLine
     }
 }
 
