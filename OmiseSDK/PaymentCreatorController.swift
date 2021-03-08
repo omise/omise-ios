@@ -493,7 +493,6 @@ extension PaymentCreatorController {
         .promptPay,
         .trueMoney,
         .pointsCiti,
-        .fpx
     ]
     
     public static let japanDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
