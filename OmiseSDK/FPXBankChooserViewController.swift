@@ -7,7 +7,12 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
     var email: String?
     var flowSession: PaymentCreatorFlowSession?
     private let defaultImage: String = "FPX/unknown"
-    private let message = "Cannot retrieve list of banks.\nPlease try again later."
+    private let message = NSLocalizedString(
+        "fpx.bank-chooser.no-banks-available.text",
+        bundle: Bundle.omiseSDKBundle,
+        value: "Cannot retrieve list of banks.\nPlease try again later.",
+        comment: "A descriptive text telling the user when there's no banks available"
+    )
 
     override var showingValues: [Capability.Backend.Bank] {
         didSet {
@@ -94,11 +99,11 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
     private func applySecondaryColor() {
     }
 
-    private func bankImage(bank: String) -> UIImage {
+    private func bankImage(bank: String) -> UIImage? {
         if let image = UIImage(named: "FPX/" + bank, in: Bundle.omiseSDKBundle, compatibleWith: nil) {
             return image
         } else {
-            return UIImage(named: defaultImage, in: Bundle.omiseSDKBundle, compatibleWith: nil)!
+            return UIImage(named: defaultImage, in: Bundle.omiseSDKBundle, compatibleWith: nil)
         }
     }
 

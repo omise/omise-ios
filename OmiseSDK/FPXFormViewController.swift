@@ -97,7 +97,7 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
             name: NotificationKeyboardWillHideFrameNotification, object: nil
         )
 
-        emailTextField.validator = try! NSRegularExpression(pattern: "\\A[\\w.+-]+@[a-z\\d.-]+\\.[a-z]{2,}\\z", options: [.caseInsensitive])
+        emailTextField.validator = try? NSRegularExpression(pattern: "\\A[\\w.+-]+@[a-z\\d.-]+\\.[a-z]{2,}\\z", options: [.caseInsensitive])
 
         // check for 1st time
         validateFieldData(emailTextField)
