@@ -44,7 +44,7 @@ class CapabilityOperationFixtureTests: XCTestCase {
             
             if let fpxBackend = capability[OMSSourceTypeValue.fpx] {
                 XCTAssertEqual(fpxBackend.banks, [
-                    Capability.Backend.Bank(name: "UOB", code: "uob", active: true)
+                    Capability.Backend.Bank(name: "UOB", code: "uob", isActive: true)
                 ])
             } else {
                XCTFail("Capability doesn't have the FPX backend")

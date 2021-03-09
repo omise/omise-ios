@@ -74,9 +74,14 @@ extension Capability {
         }
 
         public struct Bank: Codable, Equatable {
+            enum CodingKeys: String, CodingKey {
+                case name, code
+                case isActive = "active"
+            }
+
             public let name: String
             public let code: String
-            public let active: Bool
+            public let isActive: Bool
         }
     }
 }

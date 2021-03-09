@@ -58,7 +58,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         cell.imageView?.image = bankImage(bank: bank.code)
         cell.textLabel?.textColor = currentPrimaryColor
 
-        if !bank.active {
+        if !bank.isActive {
             disableCell(cell: cell)
         }
 
