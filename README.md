@@ -27,9 +27,8 @@ you can't find an answer there, post a question in our
 
 * Omise API public key. [Register for an Omise account](https://dashboard.omise.co/signup) to obtain your API keys.
 * iOS 10 or higher deployment target.
-* Xcode 10.0 or higher (Xcode 11 is recommended)
-* Swift 5.0 or higher (Swift 5.1 is recommended)
-* [Carthage](https://github.com/Carthage/Carthage) dependency manager.
+* Xcode 10.2 or higher (Xcode 12 is recommended)
+* Swift 5.0 or higher (Swift 5.3 is recommended)
 
 ## Merchant Compliance
 
@@ -45,10 +44,12 @@ through your server.
 
 ## Installation
 
-To get started, add the following line to your `Cartfile`:
+### Carthage
+
+To integrate the OmiseSDK into your Xcode project using [Carthage](https://github.com/Carthage/Carthage), add the following line to your `Cartfile`:
 
 ```
-github "omise/omise-ios" ~> 4.1.0
+github "omise/omise-ios"
 ```
 
 Then run `carthage update --use-xcframeworks`:
@@ -60,6 +61,14 @@ $ carthage update
 *** xcodebuild output can be found in /var/folders/sd/ccsbmstn2vbbqd7nk4fgkd040000gn/T/carthage-xcodebuild.X7ZfYB.log
 *** Building scheme "OmiseSDK" in OmiseSDK.xcodeproj
 ```
+
+### Swift Package Manager (Xcode 12+)
+
+To integrate the OmiseSDK into your Xcode project using the [Swift Package Manager](https://swift.org/package-manager/), proceed with the following steps:
+
+1. In Xcode, select `File` > `Swift Packages` > `Add Package Dependency...`.
+2. Enter the URL for this repository `https://github.com/omise/omise-ios.git`
+3. Choose a minimum semantic version of `v4.3.0`
 
 ## Usage
 
