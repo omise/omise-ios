@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 import os
 
 
@@ -40,11 +40,6 @@ internal class PaymentCreatorFlowSession {
             return true
         }
         
-        #if DEBUG
-        let alertController = UIAlertController(title: waringMessageTitle, message: waringMessageMessage, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
-        present(alertController, animated: true, completion: nil)
-        #endif
         assertionFailure("\(waringMessageTitle) \(waringMessageMessage)")
         return false
     }

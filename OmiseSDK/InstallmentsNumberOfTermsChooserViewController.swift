@@ -14,43 +14,43 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
             case .bay?:
                 title = NSLocalizedString(
                     "installment-number-of-terms-choosers.bbl.navigation-item.title",
-                    bundle: Bundle.omiseSDKBundle, value: "Krungsri",
+                    bundle: .module, value: "Krungsri",
                     comment:"A navigation title for the choosing installment terms screen with the `Krungsri` selected"
                 )
             case .firstChoice?:
                 title = NSLocalizedString(
                     "installment-number-of-terms-choosers.ktc.navigation-item.title",
-                    bundle: Bundle.omiseSDKBundle, value: "Krungsri First Choice",
+                    bundle: .module, value: "Krungsri First Choice",
                     comment:"A navigation title for the choosing installment terms screen with the `Krungsri First Choice` selected"
                 )
             case .bbl?:
                 title = NSLocalizedString(
                     "installment-number-of-terms-choosers.bay.navigation-item.title",
-                    bundle: Bundle.omiseSDKBundle, value: "Bangkok Bank",
+                    bundle: .module, value: "Bangkok Bank",
                     comment:"A navigation title for the choosing installment terms screen with the `Bangkok Bank` selected"
                 )
             case .ktc?:
                 title = NSLocalizedString(
                     "installment-number-of-terms-choosers.k-bank.navigation-item.title",
-                    bundle: Bundle.omiseSDKBundle, value: "KTC",
+                    bundle: .module, value: "KTC",
                     comment:"A navigation title for the choosing installment terms screen with the `KTC` selected"
                 )
             case .kBank?:
                 title = NSLocalizedString(
                     "installment-number-of-terms-choosers.first-choice.navigation-item.title",
-                    bundle: Bundle.omiseSDKBundle, value: "Kasikorn",
+                    bundle: .module, value: "Kasikorn",
                     comment:"A navigation title for the choosing installment terms screen with the `Kasikorn` selected"
                 )
             case .scb?:
                 title = NSLocalizedString(
                     "installment-number-of-terms-choosers.scb.navigation-item.title",
-                    bundle: Bundle.omiseSDKBundle, value: "SCB",
+                    bundle: .module, value: "SCB",
                     comment:"A navigation title for the choosing installment terms screen with the `SCB` selected"
                 )
             case .other?, nil:
                 title = NSLocalizedString(
                     "installment-number-of-terms-choosers.default.navigation-item.title",
-                    bundle: Bundle.omiseSDKBundle, value: "Installments Terms",
+                    bundle: .module, value: "Installments Terms",
                     comment:"A navigation title for the choosing installment terms screen with the `Installments Terms` selected"
                 )
             }
@@ -95,7 +95,7 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
         let cell = tableView.dequeueReusableCell(withIdentifier: "NumberOfTermCell", for: indexPath)
         let numberOfTermsTitleFormat = NSLocalizedString(
             "installments.number-of-terms-chooser.number-of-terms-cell.label.text",
-            bundle: Bundle.omiseSDKBundle, value: "%d months",
+            bundle: .module, value: "%d months",
             comment: "Number of terms option text displayed as a title of the number of terms option cell in number of terms chooser scene"
         )
         cell.textLabel?.text = String.localizedStringWithFormat(numberOfTermsTitleFormat, numberOfTerms[indexPath.row])

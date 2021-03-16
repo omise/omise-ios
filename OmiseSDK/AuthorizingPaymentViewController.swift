@@ -78,7 +78,7 @@ public class AuthorizingPaymentViewController: UIViewController {
     /// - returns: A UINavigationController with `OmiseAuthorizingPaymentViewController` as its root view controller
     @objc(authorizingPaymentViewControllerNavigationWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
     public static func makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> UINavigationController {
-        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: Bundle(for: AuthorizingPaymentViewController.self))
+        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
         let navigationController = storyboard.instantiateViewController(withIdentifier: "DefaultAuthorizingPaymentViewControllerWithNavigation") as! UINavigationController
         let viewController = navigationController.topViewController as! AuthorizingPaymentViewController
         viewController.authorizedURL = authorizedURL
@@ -105,7 +105,7 @@ public class AuthorizingPaymentViewController: UIViewController {
     /// - returns: An `OmiseAuthorizingPaymentViewController` with given authorized URL and delegate.
     @objc(authorizingPaymentViewControllerWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
     public static func makeAuthorizingPaymentViewControllerWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> AuthorizingPaymentViewController {
-        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: Bundle(for: AuthorizingPaymentViewController.self))
+        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
         let viewController = storyboard.instantiateViewController(withIdentifier: "DefaultAuthorizingPaymentViewController") as! AuthorizingPaymentViewController
         viewController.authorizedURL = authorizedURL
         viewController.expectedReturnURLPatterns = expectedReturnURLPatterns

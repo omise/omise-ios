@@ -172,14 +172,13 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
             try textField.validate()
             errorLabel.alpha = 0.0
         } catch {
-            let omiseBundle = Bundle(for: CreditCardFormViewController.self)
             switch error {
             case OmiseTextFieldValidationError.emptyText:
                 errorLabel.text = "-" // We need to set the error label some string in order to have it retains its height
 
             case OmiseTextFieldValidationError.invalidData:
                 errorLabel.text = NSLocalizedString(
-                    "payment-creator.error.api.bad_request.invalid-email.message", tableName: "Error", bundle: omiseBundle,
+                    "payment-creator.error.api.bad_request.invalid-email.message", tableName: "Error", bundle: .module,
                     value: "Email is invalid",
                     comment: "An error text in the FPX form displayed when the email is invalid"
                 )

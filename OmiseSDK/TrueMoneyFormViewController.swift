@@ -161,14 +161,13 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
             try textField.validate()
             errorLabel.alpha = 0.0
         } catch {
-            let omiseBundle = Bundle(for: CreditCardFormViewController.self)
             switch error {
             case OmiseTextFieldValidationError.emptyText:
                 errorLabel.text = "-" // We need to set the error label some string in order to have it retains its height
                 
             case OmiseTextFieldValidationError.invalidData:
                 errorLabel.text = NSLocalizedString(
-                    "truemoney-form.phone-number-field.invalid-data.error.text", tableName: "Error", bundle: omiseBundle,
+                    "truemoney-form.phone-number-field.invalid-data.error.text", tableName: "Error", bundle: .module,
                     value: "Phone number is invalid",
                     comment: "An error text in the TrueMoney form displayed when the phone number is invalid"
                 )

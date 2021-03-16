@@ -169,8 +169,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     /// - parameter publicKey: Omise public key.
     @objc(creditCardFormViewControllerWithPublicKey:)
     public static func makeCreditCardFormViewController(withPublicKey publicKey: String) -> CreditCardFormViewController {
-        let omiseBundle = Bundle(for: self)
-        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: omiseBundle)
+        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
         let creditCardForm = storyboard.instantiateInitialViewController() as! CreditCardFormViewController
         creditCardForm.publicKey = publicKey
         
@@ -554,7 +553,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         default:
             cardBrandIconName = nil
         }
-        cardBrandIconImageView.image = cardBrandIconName.flatMap({ UIImage(named: $0, in: Bundle.omiseSDKBundle, compatibleWith: nil) })
+        cardBrandIconImageView.image = cardBrandIconName.flatMap({ UIImage(named: $0, in: .module, compatibleWith: nil) })
         cardNumberTextField.rightViewMode = cardBrandIconImageView.image != nil ? .always : .never
     }
     
@@ -617,32 +616,31 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             try textField.validate()
             errorLabel.alpha = 0.0
         } catch {
-            let omiseBundle = Bundle(for: CreditCardFormViewController.self)
             switch (error, textField) {
             case (OmiseTextFieldValidationError.emptyText, _):
                 errorLabel.text = "-" // We need to set the error label some string in order to have it retains its height
                 
             case (OmiseTextFieldValidationError.invalidData, cardNumberTextField):
                 errorLabel.text = NSLocalizedString(
-                    "credit-card-form.card-number-field.invalid-data.error.text", tableName: "Error", bundle: omiseBundle,
+                    "credit-card-form.card-number-field.invalid-data.error.text", tableName: "Error", bundle: .module,
                     value: "Credit card number is invalid",
                     comment: "An error text displayed when the credit card number is invalid"
                 )
             case (OmiseTextFieldValidationError.invalidData, cardNameTextField):
                 errorLabel.text = NSLocalizedString(
-                    "credit-card-form.card-holder-name-field.invalid-data.error.text", tableName: "Error", bundle: omiseBundle,
+                    "credit-card-form.card-holder-name-field.invalid-data.error.text", tableName: "Error", bundle: .module,
                     value: "Card holder name is invalid",
                     comment: "An error text displayed when the card holder name is invalid"
                 )
             case (OmiseTextFieldValidationError.invalidData, expiryDateTextField):
                 errorLabel.text = NSLocalizedString(
-                    "credit-card-form.expiry-date-field.invalid-data.error.text", tableName: "Error", bundle: omiseBundle,
+                    "credit-card-form.expiry-date-field.invalid-data.error.text", tableName: "Error", bundle: .module,
                     value: "Card expiry date is invalid",
                     comment: "An error text displayed when the expiry date is invalid"
                 )
             case (OmiseTextFieldValidationError.invalidData, secureCodeTextField):
                 errorLabel.text = NSLocalizedString(
-                    "credit-card-form.security-code-field.invalid-data.error.text", tableName: "Error", bundle: omiseBundle,
+                    "credit-card-form.security-code-field.invalid-data.error.text", tableName: "Error", bundle: .module,
                     value: "CVV code is invalid",
                     comment: "An error text displayed when the security code is invalid"
                 )

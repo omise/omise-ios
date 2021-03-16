@@ -9,7 +9,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
     private let defaultImage: String = "FPX/unknown"
     private let message = NSLocalizedString(
         "fpx.bank-chooser.no-banks-available.text",
-        bundle: Bundle.omiseSDKBundle,
+        bundle: .module,
         value: "Cannot retrieve list of banks.\nPlease try again later.",
         comment: "A descriptive text telling the user when there's no banks available"
     )
@@ -36,7 +36,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         super.viewDidLoad()
         applyPrimaryColor()
         applySecondaryColor()
-
+        
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         if showingValues.count == 0 {
@@ -100,10 +100,10 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
     }
 
     private func bankImage(bank: String) -> UIImage? {
-        if let image = UIImage(named: "FPX/" + bank, in: Bundle.omiseSDKBundle, compatibleWith: nil) {
+        if let image = UIImage(named: "FPX/" + bank, in: .module, compatibleWith: nil) {
             return image
         } else {
-            return UIImage(named: defaultImage, in: Bundle.omiseSDKBundle, compatibleWith: nil)
+            return UIImage(named: defaultImage, in: .module, compatibleWith: nil)
         }
     }
 
