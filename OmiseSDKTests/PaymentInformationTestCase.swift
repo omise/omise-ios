@@ -269,6 +269,26 @@ class PaymentInformationTestCase: XCTestCase {
         }
     }
     
+    func testEncodeFPXSourceParameter() throws {
+        let encoder = PaymentInformationTestCase.makeJSONEncoder()
+
+        do {
+            let paymentInformation = PaymentInformation.fpx(.init(bank: "uob", email: "support@omise.co"))
+            let sourceParameter = Source.CreateParameter(paymentInformation: paymentInformation, amount: 10_000_00, currency: .myr)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "bank" : "uob",
+                  "currency" : "MYR",
+                  "email" : "support@omise.co",
+                  "type" : "fpx"
+                }
+                """, encodedJSONString)
+        }
+    }
+
     func testOtherPaymentInfromation() throws {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
         

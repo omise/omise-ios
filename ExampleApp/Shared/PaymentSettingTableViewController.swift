@@ -82,6 +82,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet var jpyCurrencyCell: UITableViewCell!
     @IBOutlet var usdCurrencyCell: UITableViewCell!
     @IBOutlet var sgdCurrencyCell: UITableViewCell!
+    @IBOutlet var myrCurrencyCell: UITableViewCell!
     
     @IBOutlet var internetBankingBAYPaymentCell: UITableViewCell!
     @IBOutlet var internetBankingKTBPaymentCell: UITableViewCell!
@@ -101,6 +102,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet var paynowPaymentCell: UITableViewCell!
     @IBOutlet var truemoneyPaymentCell: UITableViewCell!
     @IBOutlet var pointsCitiCell: UITableViewCell!
+    @IBOutlet var fpxCell: UITableViewCell!
     
     @IBOutlet var useCapabilityAPIValuesCell: UITableViewCell!
     @IBOutlet var useSpecifiedValuesCell: UITableViewCell!
@@ -178,6 +180,11 @@ class PaymentSettingTableViewController: UITableViewController {
             self.currentCurrency = PaymentPreset.singaporePreset.paymentCurrency
             self.allowedPaymentMethods = Set(PaymentPreset.singaporePreset.allowedPaymentMethods)
         }))
+        presetChooserAlertController.addAction(UIAlertAction(title: "Malaysia", style: .default, handler: { (_) in
+            self.currentAmount = PaymentPreset.malaysiaPreset.paymentAmount
+            self.currentCurrency = PaymentPreset.malaysiaPreset.paymentCurrency
+            self.allowedPaymentMethods = Set(PaymentPreset.malaysiaPreset.allowedPaymentMethods)
+        }))
         
         presetChooserAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(presetChooserAlertController, animated: true, completion: nil)
@@ -212,6 +219,8 @@ extension PaymentSettingTableViewController {
             return .usd
         case sgdCurrencyCell:
             return .sgd
+        case myrCurrencyCell:
+            return .myr
         default:
             return nil
         }
@@ -227,6 +236,8 @@ extension PaymentSettingTableViewController {
             return usdCurrencyCell
         case .sgd:
             return sgdCurrencyCell
+        case .myr:
+            return myrCurrencyCell
         default: return nil
         }
     }
@@ -269,6 +280,8 @@ extension PaymentSettingTableViewController {
             return .trueMoney
         case pointsCitiCell:
             return .pointsCiti
+        case fpxCell:
+            return .fpx
         default:
             return nil
         }
@@ -312,6 +325,8 @@ extension PaymentSettingTableViewController {
             return truemoneyPaymentCell
         case .pointsCiti:
             return pointsCitiCell
+        case .fpx:
+            return fpxCell
         default:
             return nil
         }
