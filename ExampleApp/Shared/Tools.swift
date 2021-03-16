@@ -21,6 +21,11 @@ struct PaymentPreset {
         paymentAmount: 5_000_00, paymentCurrency: .sgd,
         allowedPaymentMethods: PaymentCreatorController.singaporeDefaultAvailableSourceMethods
     )
+
+    static let malaysiaPreset = PaymentPreset(
+        paymentAmount: 5_000_00, paymentCurrency: .myr,
+        allowedPaymentMethods: PaymentCreatorController.malaysiaDefaultAvailableSourceMethods
+    )
 }
 
 
@@ -37,6 +42,10 @@ struct PaymentPreset {
     @objc static let singaporePaymentAmount: Int64 = PaymentPreset.singaporePreset.paymentAmount
     @objc static let singaporePaymentCurrency: String = PaymentPreset.singaporePreset.paymentCurrency.code
     @objc static let singaporeAllowedPaymentMethods: [OMSSourceTypeValue] = PaymentPreset.singaporePreset.allowedPaymentMethods
+
+    @objc static let malaysiaPaymentAmount: Int64 = PaymentPreset.malaysiaPreset.paymentAmount
+    @objc static let malaysiaPaymentCurrency: String = PaymentPreset.malaysiaPreset.paymentCurrency.code
+    @objc static let malaysiaAllowedPaymentMethods: [OMSSourceTypeValue] = PaymentPreset.malaysiaPreset.allowedPaymentMethods
     
     @objc static func imageWith(size: CGSize, color: UIColor) -> UIImage? {
         return Tool.imageWith(size: size, actions: { (context) in

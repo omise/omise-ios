@@ -492,7 +492,7 @@ extension PaymentCreatorController {
         .installmentSCB,
         .promptPay,
         .trueMoney,
-        .pointsCiti
+        .pointsCiti,
     ]
     
     public static let japanDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
@@ -503,6 +503,10 @@ extension PaymentCreatorController {
         .payNow,
     ]
     
+    public static let malaysiaDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
+        .fpx,
+    ]
+
     public static let internetBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
         .internetBankingBAY,
         .internetBankingKTB,

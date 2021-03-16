@@ -283,6 +283,28 @@ public class __SourceMobileBankingPayment: __SourcePaymentInformation {
     }
 }
 
+/// The FPX Source Payment information
+@objc(OMSFPXPaymentInformation)
+@objcMembers
+public class __SourceFPXPayment: __SourcePaymentInformation {
+    /// The customer's bank name
+    public let bank: String
+
+    /// The customer's email
+    public let email: String?
+
+    /// Creates a new FPX source with the given customer information
+    ///
+    /// - Parameters:
+    ///   - bank:  Internet banking name e.g. uob
+    ///   - email:  Customer's email
+    @objc public init(bank: String, email: String?) {
+        self.bank = bank
+        self.email = email
+        super.init(type: OMSSourceTypeValue.fpx)!
+    }
+}
+
 /// CustomSource Source Payment Information
 @objc(OMSCustomPaymentInformation)
 @objcMembers
@@ -470,6 +492,9 @@ extension __SourcePaymentInformation {
             case .other(let type):
                 return __CustomSourcePayment(customType: type, parameters: [:])
             }
+
+        case .fpx(let fpx):
+            return __SourceFPXPayment(bank: fpx.bank, email: fpx.email)
 
         case .other(type: let type, parameters: let parameters):
             return __CustomSourcePayment(customType: type, parameters: parameters)
