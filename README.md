@@ -48,7 +48,7 @@ through your server.
 To get started, add the following line to your `Cartfile`:
 
 ```
-github "omise/omise-ios" ~> 4.1
+github "omise/omise-ios"
 ```
 
 Then run `carthage update --use-xcframeworks`:
@@ -388,7 +388,7 @@ If you found an API that is not available in Objective-C, please don't hestitate
 
 ## Contributing
 
-Pull requests, issues, and bugfixes are welcome! For larger changes, please pop on to our [forum](https://forum.omise.co) to discuss first.
+Pull requests, issues, and bugfixes are welcome!
 
 ## LICENSE
 
