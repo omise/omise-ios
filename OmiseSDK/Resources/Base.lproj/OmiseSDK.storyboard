@@ -960,6 +960,7 @@
                         <outletCollection property="paymentMethodNameLables" destination="ewt-LA-vRb" collectionClass="NSMutableArray" id="rYn-xG-eTD"/>
                         <outletCollection property="paymentMethodNameLables" destination="zmw-2Y-WAX" collectionClass="NSMutableArray" id="dgu-0i-wQw"/>
                         <outletCollection property="paymentMethodNameLables" destination="3Ch-6f-IHn" collectionClass="NSMutableArray" id="jHo-rX-VF2"/>
+                        <outletCollection property="paymentMethodNameLables" destination="drr-nc-RA8" collectionClass="NSMutableArray" id="13O-qc-zJ5"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zoe-8g-RM3" userLabel="First Responder" sceneMemberID="firstResponder"/>
