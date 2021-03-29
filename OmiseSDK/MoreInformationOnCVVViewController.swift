@@ -281,7 +281,7 @@ extension OverlayPanelPresentationController: UIViewControllerAnimatedTransition
         controller.view.alpha = initialAlpha
         
         
-        let animationBlock: () -> () = {
+        let animationBlock: () -> Void = {
             controller.view.frame = finalFrame
             controller.view.alpha = finalAlpha
         }

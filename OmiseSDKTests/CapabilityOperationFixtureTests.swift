@@ -23,7 +23,7 @@ class CapabilityOperationFixtureTests: XCTestCase {
             if let bayInstallmentBackend = capability[OMSSourceTypeValue.installmentBAY] {
                 XCTAssertEqual(
                     bayInstallmentBackend.payment,
-                    .installment(.bay, availableNumberOfTerms: IndexSet(arrayLiteral: 3, 4, 6, 9, 10))
+                    .installment(.bay, availableNumberOfTerms: IndexSet([3, 4, 6, 9, 10]))
                 )
                 XCTAssertEqual(bayInstallmentBackend.supportedCurrencies, [.thb])
             } else {

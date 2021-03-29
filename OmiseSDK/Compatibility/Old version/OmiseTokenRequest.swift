@@ -42,7 +42,7 @@ public class OmiseTokenRequest: NSObject {
     let request: Request<Token>
   
     /// Tokenization request callback function type.
-    public typealias Callback = (OmiseTokenRequestResult) -> ()
+    public typealias Callback = (OmiseTokenRequestResult) -> Void
     
     /// Card holder's full name.
     @objc public var name: String {

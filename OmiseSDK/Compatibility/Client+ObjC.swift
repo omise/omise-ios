@@ -17,7 +17,7 @@ extension Client {
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
     @objc(sendTokenRequest:callback:) public
-    func __sendRequest(_ request: __OMSTokenRequest, callback: ((__OmiseToken?, NSError?) -> ())?) {
+    func __sendRequest(_ request: __OMSTokenRequest, callback: ((__OmiseToken?, NSError?) -> Void)?) {
         self.send(request.request, completionHandler: { result in
             let token: __OmiseToken?
             let error: NSError?
@@ -59,7 +59,7 @@ extension Client {
     @available(*, deprecated, message: "Please use the new -[OMSClient sendTokenRequest:callback:] method",
     renamed: "sendTokenRequest(_:completionHandler:)")
     @objc(sendRequest:callback:) public
-    func ___sendRequest(_ request: __OMSTokenRequest, callback: ((__OmiseToken?, NSError?) -> ())?) {
+    func ___sendRequest(_ request: __OMSTokenRequest, callback: ((__OmiseToken?, NSError?) -> Void)?) {
         self.__sendRequest(request, callback: callback)
     }
     
@@ -78,7 +78,7 @@ extension Client {
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
     @objc(sendSourceRequest:callback:) public
-    func __sendRequest(_ request: __OMSSourceRequest, callback: ((__OmiseSource?, NSError?) -> ())?) {
+    func __sendRequest(_ request: __OMSSourceRequest, callback: ((__OmiseSource?, NSError?) -> Void)?) {
         self.send(request.request, completionHandler: { result in
             let token: __OmiseSource?
             let error: NSError?

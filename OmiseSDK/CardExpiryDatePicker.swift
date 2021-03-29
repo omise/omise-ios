@@ -6,7 +6,7 @@ import UIKit
 class CardExpiryDatePicker: UIPickerView {
     
     /// Callback function that will be called when picker value changes.
-    public var onDateSelected: ((_ month: Int, _ year: Int) -> ())?
+    public var onDateSelected: ((_ month: Int, _ year: Int) -> Void)?
     /// Currently selected month.
     public var month: Int = Calendar.creditCardInformationCalendar.component(.month, from: Date())
     /// Currently selected year.

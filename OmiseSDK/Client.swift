@@ -305,8 +305,8 @@ extension Client {
         return decoder
     }
     
-    private static func completeRequest<T: Object>(_ request: Request<T>, callback: Request<T>.Callback?) -> ((Data?, URLResponse?, Error?) -> ()) {
-        return { (data: Data?, response: URLResponse?, error: Error?) -> () in
+    private static func completeRequest<T: Object>(_ request: Request<T>, callback: Request<T>.Callback?) -> ((Data?, URLResponse?, Error?) -> Void) {
+        return { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             guard let callback = callback else { return } // nobody around to hear the leaf falls
             
             var result: RequestResult<T>
