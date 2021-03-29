@@ -219,4 +219,3 @@ extension Request where T == Token {
         ))
     }
 }
-

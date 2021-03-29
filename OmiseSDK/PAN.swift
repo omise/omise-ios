@@ -119,4 +119,3 @@ extension PAN: CustomDebugStringConvertible, CustomStringConvertible {
         return "PAN: \(number)"
     }
 }
-

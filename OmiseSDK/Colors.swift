@@ -318,4 +318,3 @@ extension UIColor {
         #endif
     }()
 }
-

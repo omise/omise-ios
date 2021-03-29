@@ -832,4 +832,3 @@ extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertibl
         try container.encode(type, forKey: .type)
     }
 }
-

@@ -397,4 +397,3 @@ extension Client {
         """ // OmiseIOSSDK/3.0.0 iOS/12.0.0 Apple/iPhone
     }
 }
-

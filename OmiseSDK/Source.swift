@@ -119,4 +119,3 @@ public enum Flow: RawRepresentable, Decodable, Equatable {
         }
     }
 }
-

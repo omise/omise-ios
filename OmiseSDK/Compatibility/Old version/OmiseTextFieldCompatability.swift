@@ -14,4 +14,3 @@ import Foundation
 @objc(CardNumberTextField) public class __CardNumberTextField: CardNumberTextField {}
 @available(*, deprecated, message: "Use the new `OMSCardNameTextField` data type instead. This class will be removed in the future released", renamed: "CardNameTextField")
 @objc(CardNameTextField) public class __CardNameTextField: CardNameTextField {}
-

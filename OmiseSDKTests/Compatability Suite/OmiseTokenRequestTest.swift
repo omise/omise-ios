@@ -96,4 +96,3 @@ class OmiseTokenRequestTest: XCTestCase {
         waitForExpectations(timeout: timeout, handler: nil)
     }
 }
-

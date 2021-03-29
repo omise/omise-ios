@@ -143,4 +143,3 @@ extension Currency {
         self.init(code: code)
     }
 }
-

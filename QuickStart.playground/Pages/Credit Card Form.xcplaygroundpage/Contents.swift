@@ -63,4 +63,3 @@ extension CheckoutViewController: CheckoutViewControllerDelegate {
     present(navigationController, animated: true, completion: nil)
   }
 }
-

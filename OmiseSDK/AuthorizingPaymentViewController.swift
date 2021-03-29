@@ -248,4 +248,3 @@ extension AuthorizingPaymentViewController: WKUIDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
 }
-

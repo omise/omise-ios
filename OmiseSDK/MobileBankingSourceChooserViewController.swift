@@ -85,5 +85,3 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
 
     private func applySecondaryColor() {}
 }
-
-

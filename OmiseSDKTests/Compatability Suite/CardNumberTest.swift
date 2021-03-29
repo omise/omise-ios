@@ -47,4 +47,3 @@ class CardNumberTest: XCTestCase {
         XCTAssertFalse(CardNumber.validate("1234567812345678"))
     }
 }
-

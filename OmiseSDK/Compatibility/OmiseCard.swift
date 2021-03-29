@@ -70,4 +70,3 @@ import Foundation
         self.card = card
     }
 }
-

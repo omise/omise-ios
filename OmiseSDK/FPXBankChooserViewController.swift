@@ -133,4 +133,3 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         tableView.separatorStyle = .singleLine
     }
 }
-

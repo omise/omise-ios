@@ -136,4 +136,3 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
     
     private func applySecondaryColor() {}
 }
-

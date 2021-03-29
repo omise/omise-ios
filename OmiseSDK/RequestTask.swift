@@ -17,4 +17,3 @@ public class RequestTask<T: CreatableObject> {
         os_log("Starting/Resuming Request %{public}@", log: sdkLogObject, type: .debug, String(describing: type(of: T.self)))
     }
 }
-

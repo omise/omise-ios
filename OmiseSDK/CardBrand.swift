@@ -140,4 +140,3 @@ public enum CardBrand: Int, CustomStringConvertible, Codable {
         return NSRange(range)
     }
 }
-

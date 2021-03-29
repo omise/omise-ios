@@ -133,4 +133,3 @@ extension ClientTestCase {
         return Request.init(paymentInformation: PaymentInformation.other(type: "UNSUPPORTED SOURCE", parameters: [ "client_id": "client_12345", "client_balance": 12345.67]), amount: 100_00, currency: Currency.custom(code: "UNSUPPORTED_CURRENCY", factor: 100))
     }
 }
-

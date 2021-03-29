@@ -100,4 +100,3 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
     private func applySecondaryColor() {
     }
 }
-

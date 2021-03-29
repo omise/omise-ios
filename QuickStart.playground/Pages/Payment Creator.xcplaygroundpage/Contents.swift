@@ -73,4 +73,3 @@ extension CheckoutViewController: CheckoutViewControllerDelegate {
     present(paymentCreatorController, animated: true, completion: nil)
   }
 }
-

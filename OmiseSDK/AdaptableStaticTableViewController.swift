@@ -34,4 +34,3 @@ public class AdaptableStaticTableViewController<Element: CaseIterable & Equatabl
         return showingValues[indexPath.row]
     }
 }
-

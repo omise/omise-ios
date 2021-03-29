@@ -19,4 +19,3 @@ public class AdaptableDynamicTableViewController<Element: Equatable>: UITableVie
         return showingValues[indexPath.row]
     }
 }
-

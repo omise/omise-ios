@@ -34,4 +34,3 @@ import Foundation
         self.request = Request<Source>.init(paymentInformation: PaymentInformation(from: paymentInformation), amount: amount, currency: Currency.init(code: currencyCode))
     }
 }
-

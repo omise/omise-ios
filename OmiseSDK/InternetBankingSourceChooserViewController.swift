@@ -91,4 +91,3 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
     
     private func applySecondaryColor() {}
 }
-

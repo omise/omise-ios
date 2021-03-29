@@ -34,4 +34,3 @@ import Foundation
         self.token = token
     }
 }
-

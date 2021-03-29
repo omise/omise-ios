@@ -80,4 +80,3 @@ class CapabilityOperationFixtureTests: XCTestCase {
                        decodedCapability[.installmentBAY]?.payment)
     }
 }
-
