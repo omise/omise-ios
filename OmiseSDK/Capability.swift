@@ -71,6 +71,7 @@ extension Capability {
         }
 
         public struct Bank: Codable, Equatable {
+            // swiftlint:disable nesting
             enum CodingKeys: String, CodingKey {
                 case name, code
                 case isActive = "active"

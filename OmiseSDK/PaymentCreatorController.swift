@@ -1,3 +1,5 @@
+// swiftlint:disable file_length
+
 import UIKit
 import os
 
@@ -29,6 +31,7 @@ public protocol PaymentChooserUI: AnyObject {
     var preferredSecondaryColor: UIColor? { get set }
 }
 
+// swiftlint:disable type_body_length
 /// Drop-in UI flow controller that let user choose the payment method with the given payment options
 @objc(OMSPaymentCreatorController)
 public class PaymentCreatorController: UINavigationController {

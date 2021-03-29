@@ -1,3 +1,5 @@
+// swiftlint:disable file_length
+
 import Foundation
 
 public protocol PaymentMethod: Equatable, Codable {
@@ -9,6 +11,7 @@ func ~=<T: PaymentMethod>(methodType: T.Type, type: String) -> Bool {
     return type.hasPrefix(methodType.paymentMethodTypePrefix)
 }
 
+// swiftlint:disable type_body_length
 /// Represents the payment information of a Source
 public enum PaymentInformation: Codable, Equatable {
 

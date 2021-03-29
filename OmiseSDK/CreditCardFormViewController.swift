@@ -1,3 +1,5 @@
+// swiftlint:disable file_length
+
 import UIKit
 import os.log
 
@@ -68,6 +70,7 @@ public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
 @available(*, deprecated, renamed: "CreditCardFormViewController")
 public typealias CreditCardFormController = CreditCardFormViewController
 
+// swiftlint:disable type_body_length
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.
 @objc(OMSCreditCardFormViewController)
