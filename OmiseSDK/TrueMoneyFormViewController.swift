@@ -116,7 +116,7 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
         view.isUserInteractionEnabled = false
         view.tintAdjustmentMode = .dimmed
         submitButton.isEnabled = false
-        flowSession?.requestCreateSource(.truemoney(trueMoneyInformation), completionHandler: { (result) in
+        flowSession?.requestCreateSource(.truemoney(trueMoneyInformation), completionHandler: { _ in
             self.requestingIndicatorView.stopAnimating()
             self.view.isUserInteractionEnabled = true
             self.view.tintAdjustmentMode = .automatic

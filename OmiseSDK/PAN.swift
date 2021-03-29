@@ -78,11 +78,11 @@ public struct PAN {
         guard digits.count == pan.count else { return false }
         
         let oddSum = digits.enumerated()
-            .filter({ (index, digit) -> Bool in index % 2 == 0 })
-            .map({ (index, digit) -> Int in digit })
+            .filter({ (index, _) -> Bool in index % 2 == 0 })
+            .map({ (_, digit) -> Int in digit })
         let evenSum = digits.enumerated()
-            .filter({ (index, digit) -> Bool in index % 2 != 0 })
-            .map({ (index, digit) -> Int in
+            .filter({ (index, _) -> Bool in index % 2 != 0 })
+            .map({ (_, digit) -> Int in
                 let sum = digit * 2
                 return sum > 9 ? sum - 9 : sum
             })

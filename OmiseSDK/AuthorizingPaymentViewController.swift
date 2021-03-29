@@ -197,7 +197,7 @@ extension AuthorizingPaymentViewController: WKUIDelegate {
     public func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
 
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: okButtonTitle, style: .default) { (action: UIAlertAction) -> Void in
+        let okAction = UIAlertAction(title: okButtonTitle, style: .default) { _ in
             alertController.dismiss(animated: true, completion: nil)
             completionHandler()
         }
@@ -211,10 +211,10 @@ extension AuthorizingPaymentViewController: WKUIDelegate {
     public func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
                 
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: confirmButtonTitle, style: .default, handler: { (action) in
+        let confirmAction = UIAlertAction(title: confirmButtonTitle, style: .default, handler: { _ in
             completionHandler(true)
         })
-        let cancelAction = UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: { (action) in
+        let cancelAction = UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: { _ in
             completionHandler(false)
         })
         
@@ -230,14 +230,14 @@ extension AuthorizingPaymentViewController: WKUIDelegate {
         alertController.addTextField { (textField) in
             textField.text = defaultText
         }
-        let okAction = UIAlertAction(title: okButtonTitle, style: .default, handler: { (action) in
+        let okAction = UIAlertAction(title: okButtonTitle, style: .default, handler: { _ in
             if let text = alertController.textFields?.first?.text {
                 completionHandler(text)
             } else {
                 completionHandler(defaultText)
             }
         })
-        let cancelAction = UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: { (action) in
+        let cancelAction = UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: { _ in
             completionHandler(nil)
         })
         

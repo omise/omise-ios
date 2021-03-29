@@ -13,11 +13,11 @@ public protocol PaymentCreatorControllerDelegate: NSObjectProtocol {
 
 @objc public protocol OMSPaymentCreatorControllerDelegate: NSObjectProtocol {
     @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
-                                  didCreateToken token: __OmiseToken)
+                                        didCreateToken token: __OmiseToken)
     @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
-                                  didCreateSource source: __OmiseSource)
+                                        didCreateSource source: __OmiseSource)
     @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
-                                  didFailWithError error: Error)
+                                        didFailWithError error: Error)
     @objc optional func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController)
 }
 
@@ -387,7 +387,7 @@ public class PaymentCreatorController: UINavigationController {
         super.viewWillTransition(to: size, with: coordinator)
         
         if self.displayingNoticeView.superview != nil {
-            coordinator.animate(alongsideTransition: { (context) in
+            coordinator.animate(alongsideTransition: { _ in
                 if #available(iOS 13, *) {
                     self.additionalSafeAreaInsets.top = 0
                 } else if #available(iOS 11, *) {

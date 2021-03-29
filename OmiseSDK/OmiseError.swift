@@ -12,9 +12,9 @@ let sourceParameterCodingsUserInfoKey = CodingUserInfoKey.init(rawValue: "source
 /// - code: Omise Error Code
 /// - message: Error message
 public enum ErrorUserInfoKey: String, CodingKey {
-    case location = "location"
-    case code = "code"
-    case message = "message"
+    case location
+    case code
+    case message
 }
 
 
