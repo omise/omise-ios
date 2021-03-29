@@ -13,13 +13,13 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
 
     @IBOutlet var mobileBankingNameLabels: [UILabel]!
 
-    @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
+    @IBInspectable public var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
 
-    @IBInspectable @objc public var preferredSecondaryColor: UIColor? {
+    @IBInspectable public var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }

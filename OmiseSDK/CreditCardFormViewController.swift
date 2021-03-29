@@ -84,19 +84,19 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     /// A boolean flag to enables/disables automatic error handling. Defaults to `true`.
     @objc public var handleErrors = true
     
-    @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
+    @IBInspectable public var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc public var preferredSecondaryColor: UIColor? {
+    @IBInspectable public var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
     }
     
-    @IBInspectable @objc
+    @IBInspectable
     public var errorMessageTextColor: UIColor! = CreditCardFormViewController.defaultErrorMessageTextColor {
         didSet {
             if errorMessageTextColor == nil {
@@ -685,15 +685,15 @@ extension CreditCardFormViewController {
         updateInputAccessoryViewWithFirstResponder(sender)
     }
     
-    @objc @IBAction private func gotoPreviousField(_ button: UIBarButtonItem) {
+    @IBAction private func gotoPreviousField(_ button: UIBarButtonItem) {
         gotoPreviousField()
     }
     
-    @objc @IBAction private func gotoNextField(_ button: UIBarButtonItem) {
+    @IBAction private func gotoNextField(_ button: UIBarButtonItem) {
         gotoNextField()
     }
     
-    @objc @IBAction private func doneEditing(_ button: UIBarButtonItem?) {
+    @IBAction private func doneEditing(_ button: UIBarButtonItem?) {
         doneEditing()
     }
 }

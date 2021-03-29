@@ -20,7 +20,7 @@ public class OmiseTextField: UITextField {
         }
     }
     
-    @IBInspectable @objc var borderWidth: CGFloat {
+    @IBInspectable var borderWidth: CGFloat {
         get {
             switch style {
             case .plain:
@@ -39,25 +39,25 @@ public class OmiseTextField: UITextField {
         }
     }
     
-    @IBInspectable @objc var borderColor: UIColor? {
+    @IBInspectable var borderColor: UIColor? {
         didSet {
             updateBorder()
         }
     }
     
-    @IBInspectable @objc var cornerRadius: CGFloat = 0 {
+    @IBInspectable var cornerRadius: CGFloat = 0 {
         didSet {
             updateBorder()
         }
     }
     
-    @IBInspectable @objc var errorTextColor: UIColor? {
+    @IBInspectable var errorTextColor: UIColor? {
         didSet {
             updateTextColor()
         }
     }
     
-    @IBInspectable @objc var placeholderTextColor: UIColor? {
+    @IBInspectable var placeholderTextColor: UIColor? {
         didSet {
             updatePlaceholderTextColor()
         }

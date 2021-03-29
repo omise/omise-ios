@@ -121,13 +121,13 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     
     @IBOutlet var paymentMethodNameLables: [UILabel]!
     
-    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
+    @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
+    @IBInspectable var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }

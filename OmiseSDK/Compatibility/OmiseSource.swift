@@ -36,7 +36,7 @@ import Foundation
 @objc(OMSPaymentInformation)
 @objcMembers
 public class __SourcePaymentInformation: NSObject {
-    @objc public let type: OMSSourceTypeValue
+    public let type: OMSSourceTypeValue
     
     init?(type: OMSSourceTypeValue) {
         self.type = type
@@ -73,7 +73,7 @@ public class __SourceInternetBankingPayment: __SourcePaymentInformation {
     ///
     /// - Parameter type: Source type of the source to be created
     /// - Precondition: type must have a prefix of `internet_banking`
-    @objc public override init?(type: OMSSourceTypeValue) {
+    public override init?(type: OMSSourceTypeValue) {
         guard type.rawValue.hasPrefix(PaymentInformation.InternetBanking.paymentMethodTypePrefix) else {
             return nil
         }
@@ -99,7 +99,7 @@ public class __SourceAlipayBarcodePayment: __SourceBarcodePayment {
     ///   - storeID: ID of the Store registered with Omise
     ///   - storeName: Name of the Store registered with Omise
     ///   - terminalID: ID of the terminal which creates this charge
-    @objc public init(barcode: String, storeID: String?, storeName: String?, terminalID: String?) {
+    public init(barcode: String, storeID: String?, storeName: String?, terminalID: String?) {
         let storeInformation: PaymentInformation.Barcode.AlipayBarcode.StoreInformation?
         
         if let storeID = storeID, let storeName = storeName {
@@ -127,7 +127,7 @@ public class __SourceCustomBarcodePayment: __SourceBarcodePayment {
     /// - Parameters:
     ///   - customType: The type of a source to be created
     ///   - parameters: Parameters of a source to be created
-    @objc public init(customType: String, parameters: [String: Any]) {
+    public init(customType: String, parameters: [String: Any]) {
         self.parameters = parameters
         super.init(type: OMSSourceTypeValue(rawValue: customType))!
     }
@@ -145,7 +145,7 @@ public class __SourceInstallmentsPayment: __SourcePaymentInformation {
     /// - Parameters:
     ///   - type: The type of a source to be created
     ///   - numberOfTerms: Number of terms of the installment plan
-    @objc public init?(type: OMSSourceTypeValue, numberOfTerms: Int) {
+    public init?(type: OMSSourceTypeValue, numberOfTerms: Int) {
         guard type.rawValue.hasPrefix(PaymentInformation.Installment.paymentMethodTypePrefix) else {
             return nil
         }
@@ -157,42 +157,42 @@ public class __SourceInstallmentsPayment: __SourcePaymentInformation {
     ///
     /// - Parameter numberOfTerms: Number of plan of the installment plan
     /// - Returns: BAY Installment payment with the specified number of terms
-    @objc public static func installmentBAYPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
+    public static func installmentBAYPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
         return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentBAY, numberOfTerms: numberOfTerms)!
     }
     /// Create a FirstChoice Installment payment with the given number of terms
     ///
     /// - Parameter numberOfTerms: Number of plan of the installment plan
     /// - Returns: FirstChoice Installment payment with the specified number of terms
-    @objc public static func installmentFirstChoicePayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
+    public static func installmentFirstChoicePayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
         return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentFirstChoice, numberOfTerms: numberOfTerms)!
     }
     /// Create a BBL Installment payment with the given number of terms
     ///
     /// - Parameter numberOfTerms: Number of plan of the installment plan
     /// - Returns: BBL Installment payment with the specified number of terms
-    @objc public static func installmentBBLPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
+    public static func installmentBBLPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
         return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentBBL, numberOfTerms: numberOfTerms)!
     }
     /// Create a KTC Installment payment with the given number of terms
     ///
     /// - Parameter numberOfTerms: Number of plan of the installment plan
     /// - Returns: KTC Installment payment with the specified number of terms
-    @objc public static func installmentKTCPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
+    public static func installmentKTCPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
         return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentKTC, numberOfTerms: numberOfTerms)!
     }
     /// Create a KBank Installment payment with the given number of terms
     ///
     /// - Parameter numberOfTerms: Number of plan of the installment plan
     /// - Returns: KBank Installment payment with the specified number of terms
-    @objc public static func installmentKBankPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
+    public static func installmentKBankPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
         return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentKBank, numberOfTerms: numberOfTerms)!
     }
     /// Create a SCB Installment payment with the given number of terms
     ///
     /// - Parameter numberOfTerms: Number of plan of the installment plan
     /// - Returns: SCB Installment payment with the specified number of terms
-    @objc public static func installmentSCBPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
+    public static func installmentSCBPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
         return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentSCB, numberOfTerms: numberOfTerms)!
     }
 }
@@ -214,7 +214,7 @@ public class __SourceEContextPayment: __SourcePaymentInformation {
     ///   - name: Name of the payer
     ///   - email: Email of the payer
     ///   - phoneNumber: Phone number of the payer
-    @objc public init(name: String, email: String, phoneNumber: String) {
+    public init(name: String, email: String, phoneNumber: String) {
         self.name = name
         self.email = email
         self.phoneNumber = phoneNumber
@@ -233,7 +233,7 @@ public class __SourceTrueMoneyPayment: __SourcePaymentInformation {
     ///
     /// - Parameters:
     ///   - phoneNumber: The customers phone number
-    @objc public init(phoneNumber: String) {
+    public init(phoneNumber: String) {
         self.phoneNumber = phoneNumber
         super.init(type: OMSSourceTypeValue.trueMoney)!
     }
@@ -251,7 +251,7 @@ public class __SourcePointsPayment: __SourcePaymentInformation {
     ///
     /// - Parameter type: Source type of the source to be created
     /// - Precondition: type must have a prefix of `points`
-    @objc public override init?(type: OMSSourceTypeValue) {
+    public override init?(type: OMSSourceTypeValue) {
         guard type.rawValue.hasPrefix(PaymentInformation.Points.paymentMethodTypePrefix) else {
             return nil
         }
@@ -271,7 +271,7 @@ public class __SourceMobileBankingPayment: __SourcePaymentInformation {
     ///
     /// - Parameter type: Source type of the source to be created
     /// - Precondition: type must have a prefix of `internet_banking`
-    @objc public override init?(type: OMSSourceTypeValue) {
+    public override init?(type: OMSSourceTypeValue) {
         guard type.rawValue.hasPrefix(PaymentInformation.MobileBanking.paymentMethodTypePrefix) else {
             return nil
         }
@@ -294,7 +294,7 @@ public class __SourceFPXPayment: __SourcePaymentInformation {
     /// - Parameters:
     ///   - bank:  Internet banking name e.g. uob
     ///   - email:  Customer's email
-    @objc public init(bank: String, email: String?) {
+    public init(bank: String, email: String?) {
         self.bank = bank
         self.email = email
         super.init(type: OMSSourceTypeValue.fpx)!
@@ -313,7 +313,7 @@ public class __CustomSourcePayment: __SourcePaymentInformation {
     /// - Parameters:
     ///   - customType: The source type of the payment source
     ///   - parameters: The parameter of the payment source
-    @objc public init(customType: String, parameters: [String: Any]) {
+    public init(customType: String, parameters: [String: Any]) {
         self.parameters = parameters
         super.init(type: OMSSourceTypeValue(rawValue: customType))!
     }

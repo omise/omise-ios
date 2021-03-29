@@ -22,13 +22,13 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
         return emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) == ""
     }
 
-    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
+    @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
 
-    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
+    @IBInspectable var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }

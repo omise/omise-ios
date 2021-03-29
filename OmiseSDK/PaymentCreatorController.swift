@@ -126,8 +126,8 @@ public class PaymentCreatorController: UINavigationController {
         return noticeView
     }()
     
-    @objc @IBInspectable public var preferredPrimaryColor: UIColor?
-    @objc @IBInspectable public var preferredSecondaryColor: UIColor? {
+    @IBInspectable public var preferredPrimaryColor: UIColor?
+    @IBInspectable public var preferredSecondaryColor: UIColor? {
         didSet {
             #if compiler(>=5.1)
             if #available(iOS 13, *) {
