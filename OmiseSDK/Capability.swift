@@ -143,7 +143,7 @@ extension Capability {
         
         var backendsContainer = try container.nestedUnkeyedContainer(forKey: .paymentBackends)
         
-        var backends: Array<Capability.Backend> = []
+        var backends: [Capability.Backend] = []
         while !backendsContainer.isAtEnd {
             backends.append(try backendsContainer.decode(Capability.Backend.self))
         }
