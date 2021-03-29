@@ -7,7 +7,7 @@ import os
     let queue: OperationQueue
     let publicKey: String
     
-    var userAgent: String?    
+    var userAgent: String?
     
     /// Initializes a new Client with the given Public Key and Operating OperationQueue
     ///

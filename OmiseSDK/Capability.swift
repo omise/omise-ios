@@ -1,7 +1,7 @@
 import Foundation
 
 
-public struct Capability: Object {    
+public struct Capability: Object {
     public let location: String
     public let object: String
     
@@ -22,7 +22,7 @@ public struct Capability: Object {
 
 
 extension Capability {
-    public static func ~=(lhs: Capability, rhs: CreateSourceParameter) -> Bool {
+    public static func ~= (lhs: Capability, rhs: CreateSourceParameter) -> Bool {
         func backend(from capability: Capability, for payment: PaymentInformation) -> Backend? {
             let paymentSourceType = OMSSourceTypeValue(payment.sourceType)
             return capability[paymentSourceType]

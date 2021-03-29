@@ -225,7 +225,7 @@ extension AuthorizingPaymentViewController: WKUIDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    public func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {        
+    public func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
         let alertController = UIAlertController(title: nil, message: prompt, preferredStyle: .alert)
         alertController.addTextField { (textField) in
             textField.text = defaultText

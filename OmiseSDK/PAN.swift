@@ -100,11 +100,11 @@ public struct PAN {
 
 
 extension PAN {
-    static func ~=(brand: CardBrand, pan: PAN) -> Bool {
+    static func ~= (brand: CardBrand, pan: PAN) -> Bool {
         return brand.pattern ~= pan
     }
     
-    static func ~=(pattern: String, pan: PAN) -> Bool {
+    static func ~= (pattern: String, pan: PAN) -> Bool {
         return pan.pan.range(of: pattern, options: .regularExpression, range: nil, locale: nil) != nil
     }
 }

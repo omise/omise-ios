@@ -277,7 +277,7 @@ public class PaymentCreatorController: UINavigationController {
         NSLayoutConstraint.activate([
             displayingNoticeView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
             displayingNoticeView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            displayingNoticeView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            displayingNoticeView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
         noticeViewHeightConstraint.isActive = true
@@ -490,26 +490,26 @@ extension PaymentCreatorController {
         .installmentSCB,
         .promptPay,
         .trueMoney,
-        .pointsCiti,
+        .pointsCiti
     ]
     
     public static let japanDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
-        .eContext,
+        .eContext
     ]
     
     public static let singaporeDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
-        .payNow,
+        .payNow
     ]
     
     public static let malaysiaDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
-        .fpx,
+        .fpx
     ]
 
     public static let internetBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
         .internetBankingBAY,
         .internetBankingKTB,
         .internetBankingSCB,
-        .internetBankingBBL,
+        .internetBankingBBL
     ]
     
     public static let installmentsBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
@@ -518,15 +518,15 @@ extension PaymentCreatorController {
         .installmentBBL,
         .installmentKTC,
         .installmentKBank,
-        .installmentSCB,
+        .installmentSCB
     ]
     
     public static let billPaymentAvailablePaymentMethods: [OMSSourceTypeValue] = [
-        .billPaymentTescoLotus,
+        .billPaymentTescoLotus
     ]
     
     public static let barcodeAvailablePaymentMethods: [OMSSourceTypeValue] = [
-        .barcodeAlipay,
+        .barcodeAlipay
     ]
 
     public static let mobileBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [

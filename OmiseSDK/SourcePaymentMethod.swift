@@ -737,7 +737,7 @@ extension PaymentInformation.Barcode {
         }
     }
     
-    public static func ==(lhs: PaymentInformation.Barcode, rhs: PaymentInformation.Barcode) -> Bool {
+    public static func == (lhs: PaymentInformation.Barcode, rhs: PaymentInformation.Barcode) -> Bool {
         switch (lhs, rhs) {
         case let (.alipay(lhsValue), .alipay(rhsValue)):
             return lhsValue == rhsValue

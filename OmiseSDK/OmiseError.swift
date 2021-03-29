@@ -277,16 +277,16 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
                 ErrorUserInfoKey.location.rawValue: location,
                 ErrorUserInfoKey.message.rawValue: message,
                 NSLocalizedDescriptionKey: errorDescription ?? "",
-                NSLocalizedRecoverySuggestionErrorKey: recoverySuggestion ?? "",
+                NSLocalizedRecoverySuggestionErrorKey: recoverySuggestion ?? ""
             ]
         case let .unexpected(error: _, underlying: error?):
             return [
                 NSLocalizedDescriptionKey: error.localizedDescription,
-                NSUnderlyingErrorKey: error,
+                NSUnderlyingErrorKey: error
             ]
         case .unexpected(error: _, underlying: nil):
             return [
-                NSLocalizedDescriptionKey: errorDescription ?? "",
+                NSLocalizedDescriptionKey: errorDescription ?? ""
             ]
         }
     }
@@ -527,7 +527,7 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
                 )
                 let formatter = NumberFormatter.makeAmountFormatter(for: currency)
                 preferredErrorDescription = String.localizedStringWithFormat(
-                    preferredErrorDescriptionFormat, 
+                    preferredErrorDescriptionFormat,
                     formatter.string(from: NSNumber(value: currency.convert(fromSubunit: validAmount))) ?? "\(currency.convert(fromSubunit: validAmount))")
             } else {
                 preferredErrorDescription = NSLocalizedString(

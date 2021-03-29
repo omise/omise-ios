@@ -30,7 +30,7 @@ public enum CardBrand: Int, CustomStringConvertible, Codable {
         diners,
         laser,
         maestro,
-        discover,
+        discover
     ]
     
     /// Regular expression pattern that can detect cards issued by the brand.

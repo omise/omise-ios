@@ -144,7 +144,7 @@ class OverlayPanelPresentationController: UIPresentationController {
                 dimmingView.topAnchor.constraint(equalTo: containerView.topAnchor),
                 dimmingView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
                 dimmingView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-                dimmingView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+                dimmingView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
                 ])
         }
         
@@ -221,7 +221,7 @@ class OverlayPanelPresentationController: UIPresentationController {
                 return
         }
         
-        UIView.animate(withDuration: 0.18) { 
+        UIView.animate(withDuration: 0.18) {
             container.view.frame = self.frameOfPresentedViewInContainerView
         }
     }

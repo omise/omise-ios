@@ -726,7 +726,7 @@ extension CreditCardFormViewController {
             cardNumberTextField,
             cardNameTextField,
             expiryDateTextField,
-            secureCodeTextField,
+            secureCodeTextField
             ] as [OmiseTextField]
         
         func accessiblityElementAfter(_ element: NSObjectProtocol?,
@@ -804,7 +804,7 @@ extension CreditCardFormViewController {
             UIAccessibilityCustomRotor(name: "Invalid Data Fields", itemSearch: { (predicate) -> UIAccessibilityCustomRotorItemResult? in
                 return accessiblityElementAfter(predicate.currentItem.targetElement, matchingPredicate: { !$0.isValid }, direction: predicate.searchDirection)
                     .map({ UIAccessibilityCustomRotorItemResult(targetElement: $0, targetRange: nil) })
-            }),
+            })
         ]
     }
     

@@ -102,7 +102,7 @@ class CustomCreditCardFormViewController: UIViewController {
                 stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
                 stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
                 stackView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 20),
-                stackView.bottomAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.bottomAnchor),
+                stackView.bottomAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.bottomAnchor)
                 ])
         }
     }
