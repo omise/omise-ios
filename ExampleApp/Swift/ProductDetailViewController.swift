@@ -5,7 +5,7 @@ import OmiseSDK
 class ProductDetailViewController: OMSBaseViewController {
     private let publicKey = "pkey_test_<#Omise Public Key#>"
     
-    private var capability: Capability? = nil
+    private var capability: Capability?
     
     override func viewDidLoad() {
         super.viewDidLoad()

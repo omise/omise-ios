@@ -10,7 +10,7 @@ public class CheckoutViewController: UIViewController {
   public weak var delegate: CheckoutViewControllerDelegate?
   
   public override func loadView() {
-    let button = UIButton(frame: CGRect(x: 10, y: 10, width:  300, height: 44))
+    let button = UIButton(frame: CGRect(x: 10, y: 10, width: 300, height: 44))
     button.autoresizingMask = .flexibleWidth
     button.addTarget(self, action: #selector(didTapCheckout), for: .touchUpInside)
     button.backgroundColor = #colorLiteral(red: 0.1960784314, green: 0.3960784314, blue: 0.8784313725, alpha: 1)

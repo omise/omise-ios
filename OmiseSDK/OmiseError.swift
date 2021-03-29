@@ -50,7 +50,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
         /// - emptyCardHolderName: Card holder name is empty
         /// - unsupportedBrand: The card brand is not supported
         /// - other: Other invalid card reason
-        public enum InvalidCardReason : Hashable {
+        public enum InvalidCardReason: Hashable {
             case invalidCardNumber
             case invalidExpirationDate
             case emptyCardHolderName
@@ -72,7 +72,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
         /// - typeNotSupported: The given Source Type is not supported on this account
         /// - currencyNotSupported: The currency is not supported on this account
         /// - other: Other bad request reason
-        public enum BadRequestReason : Hashable {
+        public enum BadRequestReason: Hashable {
             case amountIsLessThanValidAmount(validAmount: Int64?, currency: Currency?)
             case amountIsGreaterThanValidAmount(validAmount: Int64?, currency: Currency?)
             
@@ -269,7 +269,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
     }
     
     /// Storage for values or objects related to this notification.
-    public var errorUserInfo: [String : Any] {
+    public var errorUserInfo: [String: Any] {
         switch self {
         case let .api(code: code, message: message, location: location):
             return [
@@ -300,7 +300,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
     }
 }
 
-extension OmiseError.APIErrorCode : Decodable {
+extension OmiseError.APIErrorCode: Decodable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: ErrorUserInfoKey.self)
         let codeValue = try container.decode(String.self, forKey: .code)
@@ -322,7 +322,7 @@ extension OmiseError.APIErrorCode : Decodable {
     }
 }
 
-extension OmiseError.APIErrorCode.InvalidCardReason : Decodable {
+extension OmiseError.APIErrorCode.InvalidCardReason: Decodable {
     
     init(message: String) throws {
         if message.contains("number") {
@@ -459,7 +459,7 @@ let amountLessThanValidAmountErrorMessageRegularExpression = try! NSRegularExpre
 let nameIsTooLongErrorMessageRegularExpression = try! NSRegularExpression(pattern: "name is too long \\(maximum is ([\\d]+) characters\\)", options: [])
 
 
-extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
+extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
     
     init(message: String, currency: Currency?) throws {
         if message.hasPrefix("amount must be ") {

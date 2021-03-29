@@ -191,7 +191,7 @@ class PaymentSettingTableViewController: UITableViewController {
     }
 }
 
-extension PaymentSettingTableViewController : UITextFieldDelegate {
+extension PaymentSettingTableViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return string.allSatisfy({ (character) -> Bool in
             return "0"..."9" ~= character || (currentCurrency.factor > 1 && "." == character)

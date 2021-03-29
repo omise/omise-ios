@@ -96,7 +96,7 @@ class OverlayPanelPresentationController: UIPresentationController {
     let dismissTapGestureRecognizer = UITapGestureRecognizer()
     
     private static let defaultDimmingViewColor: UIColor = {
-        let defaultLightAppearanceColor = UIColor(red:0.26, green:0.27, blue:0.28, alpha:0.5)
+        let defaultLightAppearanceColor = UIColor(red: 0.26, green: 0.27, blue: 0.28, alpha: 0.5)
         #if compiler(>=5.1)
         if #available(iOS 13, *) {
             return UIColor.black.withAlphaComponent(0.5)
@@ -187,9 +187,9 @@ class OverlayPanelPresentationController: UIPresentationController {
         presentedLayer.shadowRadius = 4
         presentedLayer.shadowOpacity = 1.0
         if #available(iOS 13, *) {
-            presentedLayer.shadowColor = traitCollection.userInterfaceStyle == .dark ? UIColor.black.cgColor : UIColor(red:0.27, green:0.29, blue:0.32, alpha:0.25).cgColor
+            presentedLayer.shadowColor = traitCollection.userInterfaceStyle == .dark ? UIColor.black.cgColor : UIColor(red: 0.27, green: 0.29, blue: 0.32, alpha: 0.25).cgColor
         } else {
-            presentedLayer.shadowColor = UIColor(red:0.27, green:0.29, blue:0.32, alpha:0.25).cgColor
+            presentedLayer.shadowColor = UIColor(red: 0.27, green: 0.29, blue: 0.32, alpha: 0.25).cgColor
         }
         presentedLayer.shadowPath = UIBezierPath(
             roundedRect: CGRect(origin: .zero, size: frameOfPresentedViewInContainerView.size),
@@ -230,7 +230,7 @@ class OverlayPanelPresentationController: UIPresentationController {
         super.traitCollectionDidChange(previousTraitCollection)
         
         if #available(iOS 13, *), let presentedView = self.presentedView {
-            presentedView.layer.shadowColor = traitCollection.userInterfaceStyle == .dark ? UIColor.black.cgColor : UIColor(red:0.27, green:0.29, blue:0.32, alpha:0.25).cgColor
+            presentedView.layer.shadowColor = traitCollection.userInterfaceStyle == .dark ? UIColor.black.cgColor : UIColor(red: 0.27, green: 0.29, blue: 0.32, alpha: 0.25).cgColor
         }
     }
     

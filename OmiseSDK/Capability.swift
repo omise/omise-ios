@@ -57,7 +57,7 @@ extension Capability {
         public let supportedCurrencies: Set<Currency>
         public let banks: [Bank]?
 
-        public enum Payment : Equatable {
+        public enum Payment: Equatable {
             case card(Set<CardBrand>)
             case installment(PaymentInformation.Installment.Brand, availableNumberOfTerms: IndexSet)
             case internetBanking(PaymentInformation.InternetBanking)

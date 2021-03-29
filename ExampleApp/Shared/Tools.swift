@@ -29,7 +29,7 @@ struct PaymentPreset {
 }
 
 
-@objc class Tool : NSObject {
+@objc class Tool: NSObject {
     
     @objc static let thailandPaymentAmount: Int64 = PaymentPreset.thailandPreset.paymentAmount
     @objc static let thailandPaymentCurrency: String = PaymentPreset.thailandPreset.paymentCurrency.code

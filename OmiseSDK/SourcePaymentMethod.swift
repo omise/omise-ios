@@ -403,7 +403,7 @@ extension PaymentInformation {
 }
 
 
-extension PaymentInformation.InternetBanking : CaseIterable, CustomStringConvertible {
+extension PaymentInformation.InternetBanking: CaseIterable, CustomStringConvertible {
     public typealias AllCases = Array<PaymentInformation.InternetBanking>
     public static var allCases: PaymentInformation.InternetBanking.AllCases = [
         .bay, .ktb, .scb, .bbl
@@ -533,7 +533,7 @@ extension PaymentInformation.Installment {
     }
 }
 
-extension PaymentInformation.Installment.Brand : CaseIterable, CustomStringConvertible {
+extension PaymentInformation.Installment.Brand: CaseIterable, CustomStringConvertible {
     public typealias AllCases = Array<PaymentInformation.Installment.Brand>
     public static var allCases: PaymentInformation.Installment.Brand.AllCases = [
         .bay, .firstChoice, .bbl, .ktc, .kBank, .scb

@@ -242,7 +242,7 @@ protocol FieldValidator {
     func validate(_ text: String) throws
 }
 
-extension NSRegularExpression : FieldValidator {
+extension NSRegularExpression: FieldValidator {
     func validate(_ text: String) throws {
         if self.numberOfMatches(in: text, options: [], range: NSRange(text.startIndex..<text.endIndex, in: text)) == 0 {
             throw OmiseTextFieldValidationError.invalidData

@@ -89,11 +89,11 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
         }
 
         NotificationCenter.default.addObserver(
-            self, selector:#selector(keyboardWillChangeFrame(_:)),
+            self, selector: #selector(keyboardWillChangeFrame(_:)),
             name: NotificationKeyboardWillChangeFrameNotification, object: nil
         )
         NotificationCenter.default.addObserver(
-            self, selector:#selector(keyboardWillHide(_:)),
+            self, selector: #selector(keyboardWillHide(_:)),
             name: NotificationKeyboardWillHideFrameNotification, object: nil
         )
 

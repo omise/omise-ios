@@ -35,7 +35,7 @@ public protocol PaymentChooserUI: AnyObject {
 
 /// Drop-in UI flow controller that let user choose the payment method with the given payment options
 @objc(OMSPaymentCreatorController)
-public class PaymentCreatorController : UINavigationController {
+public class PaymentCreatorController: UINavigationController {
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String? {
         didSet {
@@ -404,7 +404,7 @@ public class PaymentCreatorController : UINavigationController {
 }
 
 
-extension PaymentCreatorController : PaymentCreatorFlowSessionDelegate {
+extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
     func paymentCreatorFlowSessionWillCreateSource(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession) {
         dismissErrorMessage(animated: true, sender: self)
     }

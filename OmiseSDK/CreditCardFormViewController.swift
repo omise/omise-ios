@@ -297,11 +297,11 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         secureCodeTextField.rightViewMode = .always
         
         NotificationCenter.default.addObserver(
-            self, selector:#selector(keyboardWillChangeFrame(_:)),
+            self, selector: #selector(keyboardWillChangeFrame(_:)),
             name: NotificationKeyboardWillChangeFrameNotification, object: nil
         )
         NotificationCenter.default.addObserver(
-            self, selector:#selector(keyboardWillHide(_:)),
+            self, selector: #selector(keyboardWillHide(_:)),
             name: NotificationKeyboardWillHideFrameNotification, object: nil
         )
     }
@@ -325,7 +325,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         super.viewDidAppear(animated)
         
         NotificationCenter.default.addObserver(
-            self, selector:#selector(keyboardWillAppear(_:)),
+            self, selector: #selector(keyboardWillAppear(_:)),
             name: NotificationKeyboardWillShowFrameNotification, object: nil
         )
     }

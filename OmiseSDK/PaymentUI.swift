@@ -6,7 +6,7 @@ let defaultPaymentChooserUIPrimaryColor = UIColor.body
 let defaultPaymentChooserUISecondaryColor = UIColor.line
 
 
-internal protocol PaymentCreatorFlowSessionDelegate : AnyObject {
+internal protocol PaymentCreatorFlowSessionDelegate: AnyObject {
     func paymentCreatorFlowSessionWillCreateSource(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession)
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession,
                                    didCreateToken token: Token)
@@ -74,7 +74,7 @@ internal class PaymentCreatorFlowSession {
     }
 }
 
-extension PaymentCreatorFlowSession : CreditCardFormViewControllerDelegate {
+extension PaymentCreatorFlowSession: CreditCardFormViewControllerDelegate {
     func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
         delegate?.paymentCreatorFlowSession(self, didCreateToken: token)
     }
@@ -100,7 +100,7 @@ extension PaymentChooserUI {
     }
 }
 
-protocol PaymentFormUIController : AnyObject {
+protocol PaymentFormUIController: AnyObject {
     var formLabels: [UILabel]! { get }
     var formFields: [OmiseTextField]! { get }
     var formFieldsAccessoryView: UIToolbar! { get }
