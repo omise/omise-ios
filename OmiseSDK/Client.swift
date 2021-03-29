@@ -1,7 +1,6 @@
 import UIKit
 import os
 
-
 @objc(OMSSDKClient) public class Client: NSObject {
     let session: URLSession
     let queue: OperationQueue
@@ -245,7 +244,6 @@ import os
     }
 }
 
-
 // MARK: - URL Request related methods
 extension Client {
     
@@ -370,7 +368,6 @@ extension Client {
         }
     }
 }
-
 
 // MARK: - Constants
 extension Client {

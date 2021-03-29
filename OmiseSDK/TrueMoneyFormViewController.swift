@@ -1,6 +1,5 @@
 import UIKit
 
-
 @objc(OMSTrueMoneyFormViewController)
 class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
     

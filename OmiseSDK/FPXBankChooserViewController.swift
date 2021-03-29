@@ -1,7 +1,6 @@
 import UIKit
 import os
 
-
 @objc(OMSFPXBankChooserViewController)
 class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capability.Backend.Bank>, PaymentSourceChooser, PaymentChooserUI {
     var email: String?

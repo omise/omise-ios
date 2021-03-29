@@ -1,6 +1,5 @@
 import UIKit
 
-
 public class AdaptableStaticTableViewController<Element: CaseIterable & Equatable>: UITableViewController {
     
     public var showingValues: [Element] = [] {

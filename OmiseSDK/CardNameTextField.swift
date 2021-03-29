@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 /// UITextField subclass for entering card holder's name.
 @objc(OMSCardNameTextField) @IBDesignable
 public class CardNameTextField: OmiseTextField {

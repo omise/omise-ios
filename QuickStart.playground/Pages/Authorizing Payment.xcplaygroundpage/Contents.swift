@@ -2,7 +2,6 @@ import UIKit
 import OmiseSDK
 import PlaygroundSupport
 
-
 /*: authorizing-payment
  Some payment method or credit card need customer to verify their payment with the issuer provider.
  In most case, customers need to visit a website. So Omise iOS SDK provides a built-in class for that.
@@ -17,7 +16,6 @@ let expectedURLPatterns = [
   URLComponents(string: "https://example.com/returned")!
 ]
 
-
 let checkoutController = CheckoutViewController()
 checkoutController.delegate = checkoutController
 
@@ -25,8 +23,6 @@ let navigationController = UINavigationController(rootViewController: checkoutCo
 
 PlaygroundPage.current.liveView = navigationController
 PlaygroundPage.current.needsIndefiniteExecution = true
-
-
 
 /*: implement-delegate
  
@@ -48,7 +44,6 @@ extension CheckoutViewController: AuthorizingPaymentViewControllerDelegate {
     dismiss(animated: true, completion: nil)
   }
 }
-
 
 extension CheckoutViewController: CheckoutViewControllerDelegate {
   public func checkoutViewControllerDidTapCheckout(_ checkoutViewController: CheckoutViewController) {

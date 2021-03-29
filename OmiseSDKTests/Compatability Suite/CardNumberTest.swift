@@ -2,7 +2,6 @@ import Foundation
 import OmiseSDK
 import XCTest
 
-
 @available(*, deprecated)
 class CardNumberTest: XCTestCase {
     func testNormalize() {

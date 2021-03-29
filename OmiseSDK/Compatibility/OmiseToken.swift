@@ -1,6 +1,5 @@
 import Foundation
 
-
 /**
  Represents Omise card tokens.
  - seealso: [Tokens API](https://www.omise.co/tokens-api)

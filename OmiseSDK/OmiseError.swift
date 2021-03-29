@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// Default error domain for the Omise Error
 public let OmiseErrorDomain = "co.omise"
 
@@ -17,7 +16,6 @@ public enum ErrorUserInfoKey: String, CodingKey {
     case message
 }
 
-
 /// Represent errors from the Omise iOS SDK.
 public enum OmiseError: CustomNSError, LocalizedError, Decodable {
     public static let errorDomain: String = "co.omise.ios"
@@ -26,7 +24,6 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
     case api(code: APIErrorCode, message: String, location: String)
     /// Any unexpected errors that may happen during Omise API requests.
     case unexpected(error: UnexpectedError, underlying: Error?)
-    
     
     /// The error code of the Omise API error
     ///
@@ -90,7 +87,6 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
             case other(String)
         }
     }
-    
     
     /// The reason of an unexpected error
     ///
@@ -451,13 +447,11 @@ extension OmiseError.APIErrorCode.InvalidCardReason: Decodable {
     }
 }
 
-
 let amountAtLeastValidAmountErrorMessageRegularExpression = try! NSRegularExpression(pattern: "amount must be at least ([\\d]+)", options: [])
 let amountGreaterThanValidAmountErrorMessageRegularExpression = try! NSRegularExpression(pattern: "amount must be less than ([\\d]+)", options: [])
 let amountLessThanValidAmountErrorMessageRegularExpression = try! NSRegularExpression(pattern: "amount must be greater than ([\\d]+)", options: [])
 
 let nameIsTooLongErrorMessageRegularExpression = try! NSRegularExpression(pattern: "name is too long \\(maximum is ([\\d]+) characters\\)", options: [])
-
 
 extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
     
@@ -841,5 +835,4 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
         })
     }
     
-
 }

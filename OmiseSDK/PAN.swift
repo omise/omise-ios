@@ -1,11 +1,8 @@
 import Foundation
 
-
-
 /// A credit card `PAN` value.
 public struct PAN {
     let pan: String
-    
     
     /// Returns true if the PAN is a valid PAN number
     public var isValid: Bool {
@@ -15,7 +12,6 @@ public struct PAN {
         
         return brand.validLengths ~= pan.count && validateLuhn()
     }
-    
     
     /// The masked PAN number.
     ///
@@ -98,7 +94,6 @@ public struct PAN {
     }
 }
 
-
 extension PAN {
     static func ~= (brand: CardBrand, pan: PAN) -> Bool {
         return brand.pattern ~= pan
@@ -108,7 +103,6 @@ extension PAN {
         return pan.pan.range(of: pattern, options: .regularExpression, range: nil, locale: nil) != nil
     }
 }
-
 
 extension PAN: CustomDebugStringConvertible, CustomStringConvertible {
     public var debugDescription: String {

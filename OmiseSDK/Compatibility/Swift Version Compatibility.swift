@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 typealias ControlState = UIControl.State
 typealias AttributedStringKey = NSAttributedString.Key
 typealias ViewAnimationOptions = UIView.AnimationOptions

@@ -1,8 +1,6 @@
 import UIKit
 import OmiseSDK
 
-
-
 class PaymentSettingTableViewController: UITableViewController {
     
     let amountFormatter: NumberFormatter = {
@@ -206,7 +204,6 @@ extension PaymentSettingTableViewController: UITextFieldDelegate {
         textField.text = amountFormatter.string(from: NSNumber(value: amount))
     }
 }
-
 
 extension PaymentSettingTableViewController {
     func currency(for cell: UITableViewCell) -> Currency? {

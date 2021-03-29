@@ -1,6 +1,5 @@
 import UIKit
 
-
 public enum TextFieldStyle {
     case plain
     case border(width: CGFloat)
@@ -10,7 +9,6 @@ public enum OmiseTextFieldValidationError: Error {
     case emptyText
     case invalidData
 }
-
 
 /// Base UITextField subclass for SDK's text fields.
 @objc(OMSOmiseTextField) @IBDesignable
@@ -147,7 +145,6 @@ public class OmiseTextField: UITextField {
             throw OmiseTextFieldValidationError.emptyText
         }
         
-        
         if let validator = self.validator {
             try validator.validate(text)
         }
@@ -182,7 +179,6 @@ public class OmiseTextField: UITextField {
         #endif
     }
 }
-
 
 extension OmiseTextField {
     private var overallInsets: UIEdgeInsets {
@@ -236,7 +232,6 @@ extension OmiseTextField {
         layer.borderColor = borderColor?.cgColor
     }
 }
-
 
 protocol FieldValidator {
     func validate(_ text: String) throws

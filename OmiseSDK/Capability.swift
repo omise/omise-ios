@@ -1,6 +1,5 @@
 import Foundation
 
-
 public struct Capability: Object {
     public let location: String
     public let object: String
@@ -19,7 +18,6 @@ public struct Capability: Object {
         return backends[.source(type)]
     }
 }
-
 
 extension Capability {
     public static func ~= (lhs: Capability, rhs: CreateSourceParameter) -> Bool {
@@ -49,7 +47,6 @@ extension Capability {
         return isValidValue && isPaymentValid
     }
 }
-
 
 extension Capability {
     public struct Backend: Codable, Equatable {
@@ -86,7 +83,6 @@ extension Capability {
     }
 }
 
-
 extension Capability: Codable {
     private enum CodingKeys: String, CodingKey {
         case object
@@ -95,7 +91,6 @@ extension Capability: Codable {
         case paymentBackends = "payment_methods"
     }
 }
-
 
 extension Capability.Backend {
     private enum CodingKeys: String, CodingKey {
@@ -234,7 +229,6 @@ extension Capability.Backend {
         }
     }
 }
-
 
 private let creditCardBackendTypeValue = "card"
 extension Capability.Backend {

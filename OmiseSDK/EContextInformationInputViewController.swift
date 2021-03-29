@@ -1,6 +1,5 @@
 import UIKit
 
-
 @objc(OMSEContextInformationInputViewController)
 class EContextInformationInputViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
     var flowSession: PaymentCreatorFlowSession?

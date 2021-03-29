@@ -1,6 +1,5 @@
 import UIKit
 
-
 extension UIColor {
     
     private static let defaultBackground: UIColor = UIColor.white

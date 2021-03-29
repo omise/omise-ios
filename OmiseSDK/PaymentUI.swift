@@ -1,10 +1,8 @@
 import UIKit
 import os
 
-
 let defaultPaymentChooserUIPrimaryColor = UIColor.body
 let defaultPaymentChooserUISecondaryColor = UIColor.line
-
 
 internal protocol PaymentCreatorFlowSessionDelegate: AnyObject {
     func paymentCreatorFlowSessionWillCreateSource(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession)
@@ -129,7 +127,6 @@ extension UIViewController {
     }
 }
 
-
 extension PaymentFormUIController where Self: UIViewController {
     func updateInputAccessoryViewWithFirstResponder(_ firstResponder: OmiseTextField) {
         guard formFields.contains(firstResponder) else { return }
@@ -164,7 +161,6 @@ extension PaymentFormUIController where Self: UIViewController {
     }
 }
 
-
 extension PaymentFormUIController where Self: UIViewController & PaymentChooserUI {
     func applyPrimaryColor() {
         guard isViewLoaded else {
@@ -190,7 +186,6 @@ extension PaymentFormUIController where Self: UIViewController & PaymentChooserU
         })
     }
 }
-
 
 extension OMSSourceTypeValue {
     

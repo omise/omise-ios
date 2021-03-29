@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// Parameter for creating a new `Token`
 /// - seealso: Token
 public struct CreateTokenParameter: Encodable {
@@ -38,7 +37,6 @@ public struct CreateTokenParameter: Encodable {
             case postalCode = "postal_code"
         }
     }
-    
     
     /// Initializes new token request.
     public init(name: String, pan: PAN, expirationMonth: Int, expirationYear: Int,
@@ -122,7 +120,6 @@ public struct Token: CreatableObject {
     }
 }
 
-
 public struct Card: Decodable {
     /// Card's ID.
     public let id: String
@@ -179,7 +176,6 @@ public struct Card: Decodable {
     }
 }
 
-
 extension Calendar {
     /// Calendar used in the Credit Card information which is Gregorian Calendar
     public static let creditCardInformationCalendar: Calendar = Calendar(identifier: .gregorian)
@@ -193,7 +189,6 @@ extension NSCalendar {
         return Calendar.creditCardInformationCalendar
     }
 }
-
 
 extension Request where T == Token {
     

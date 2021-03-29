@@ -1,7 +1,6 @@
 import Foundation
 import os
 
-
 let sdkLogObject: OSLog = OSLog(subsystem: "co.omise.ios.sdk", category: "SDK")
 let uiLogObject: OSLog = OSLog(subsystem: "co.omise.ios.sdk", category: "UI")
 
@@ -10,7 +9,6 @@ extension Optional where Wrapped == String {
         return self?.isEmpty ?? true
     }
 }
-
 
 struct JSONCodingKeys: CodingKey {
     var stringValue: String
@@ -30,7 +28,6 @@ struct JSONCodingKeys: CodingKey {
         self.intValue = intValue
     }
 }
-
 
 enum CombineCodingKeys<Left: CodingKey, Right: CodingKey>: CodingKey {
     var stringValue: String {
@@ -218,7 +215,6 @@ extension UnkeyedDecodingContainer {
     }
 }
 
-
 extension Encoder {
     func encodeJSONDictionary(_ jsonDictionary: Dictionary<String, Any>) throws {
         var container = self.container(keyedBy: JSONCodingKeys.self)
@@ -335,7 +331,6 @@ extension NumberFormatter {
         return formatter
     }
 }
-
 
 extension OmiseError {
     var bannerErrorDescription: String {

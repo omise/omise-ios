@@ -1,6 +1,5 @@
 import UIKit
 
-
 /// UIPickerView subclass pre-configured for picking card expiration month and year.
 @objc(OMSCardExpiryDatePicker) public
 class CardExpiryDatePicker: UIPickerView {
@@ -11,7 +10,6 @@ class CardExpiryDatePicker: UIPickerView {
     public var month: Int = Calendar.creditCardInformationCalendar.component(.month, from: Date())
     /// Currently selected year.
     public var year: Int = 0
-    
     
     private static let maximumYear = 21
     private static let monthPicker = 0

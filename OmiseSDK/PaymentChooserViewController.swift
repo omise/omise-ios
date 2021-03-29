@@ -1,7 +1,6 @@
 import UIKit
 import os
 
-
 enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case creditCard
     case installment
@@ -104,7 +103,6 @@ extension PaymentChooserOption {
     }
 }
 
-
 @objc(OMSPaymentChooserViewController)
 class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceChooser, PaymentChooserUI {
     var capability: Capability?
@@ -137,7 +135,6 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         applyPrimaryColor()
         applySecondaryColor()

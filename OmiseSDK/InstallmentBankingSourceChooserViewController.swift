@@ -1,7 +1,6 @@
 import UIKit
 import os
 
-
 @objc(OMSInstallmentBankingSourceChooserViewController)
 class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>, PaymentSourceChooser, PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?

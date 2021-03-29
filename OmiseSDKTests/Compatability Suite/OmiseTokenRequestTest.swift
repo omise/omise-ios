@@ -1,7 +1,6 @@
 import XCTest
 import OmiseSDK
 
-
 @available(*, deprecated)
 class OmiseTokenRequestTest: XCTestCase {
     private let publicKey = "pkey_test_58wfnlwoxz1tbkdd993"

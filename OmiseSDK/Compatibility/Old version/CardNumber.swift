@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// Utility class for working with credit card numbers.
 @objc(OMSCardNumber) public final class CardNumber: NSObject {
     
@@ -30,7 +29,6 @@ import Foundation
     @objc(brandForPan:) public static func __brand(_ pan: String) -> Int {
         return brand(of: pan)?.rawValue ?? NSNotFound
     }
-    
     
     /**
      Formats given credit card number into a human-friendly string by inserting spaces

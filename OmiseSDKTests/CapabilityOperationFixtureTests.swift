@@ -1,7 +1,6 @@
 import XCTest
 @testable import OmiseSDK
 
-
 class CapabilityOperationFixtureTests: XCTestCase {
     
     func testCapabilityRetrieve() {
@@ -63,7 +62,6 @@ class CapabilityOperationFixtureTests: XCTestCase {
         encoder.dateEncodingStrategy = .iso8601
         let encodedData = try encoder.encode(capability)
 
-        
         let decodedCapability = try decoder.decode(Capability.self, from: encodedData)
         XCTAssertEqual(capability.supportedBackends.count, decodedCapability.supportedBackends.count)
 

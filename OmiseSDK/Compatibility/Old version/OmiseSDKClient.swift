@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// Client object as the main entry point for performing Omise API calls.
 @available(*, deprecated, message: "Use the new `Client` type. This class will be removed in the future released", renamed: "Client")
 public class OmiseSDKClient: NSObject {

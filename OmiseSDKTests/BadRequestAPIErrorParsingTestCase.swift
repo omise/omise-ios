@@ -144,7 +144,6 @@ class BadRequestAPIErrorParsingTestCase: XCTestCase {
         }
     }
     
-    
     func testParseBadRequestParameters() throws {
         do {
             let errorJSONString = """
@@ -203,7 +202,6 @@ class BadRequestAPIErrorParsingTestCase: XCTestCase {
         }
         
     }
-    
     
     func testParseMultipleReasons() throws {
         do {

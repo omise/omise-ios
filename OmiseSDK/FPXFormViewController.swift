@@ -1,6 +1,5 @@
 import UIKit
 
-
 @objc(OMSFPXFormViewController)
 class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
 

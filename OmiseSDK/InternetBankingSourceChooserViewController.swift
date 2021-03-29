@@ -1,7 +1,6 @@
 import UIKit
 import os
 
-
 @objc(OMSInternetBankingSourceChooserViewController)
 class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>, PaymentSourceChooser, PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
@@ -11,7 +10,6 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
             os_log("Internet Banking Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
         }
     }
-    
     
     @IBOutlet var internetBankingNameLabels: [UILabel]!
     

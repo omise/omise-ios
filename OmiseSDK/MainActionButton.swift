@@ -1,6 +1,5 @@
 import UIKit
 
-
 @IBDesignable @objc(OMSMainActionButton)
 class MainActionButton: UIButton {
     

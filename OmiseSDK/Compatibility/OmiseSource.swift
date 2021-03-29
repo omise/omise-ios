@@ -1,6 +1,5 @@
 import Foundation
 
-
 /**
  Represents Omise card sources.
  - seealso: [Sources API](https://www.omise.co/sources-api)
@@ -28,12 +27,10 @@ import Foundation
     /// Payment currency of this Source
     @objc lazy public var currencyCode: String = source.currency.code
     
-    
     init(source: Source) {
         self.source = source
     }
 }
-
 
 /// Based type of the Source Payment Information type
 @objc(OMSPaymentInformation)
@@ -88,7 +85,6 @@ public class __SourceInternetBankingPayment: __SourcePaymentInformation {
 @objc(OMSBarcodePaymentInformation)
 @objcMembers
 public class __SourceBarcodePayment: __SourcePaymentInformation {}
-
 
 /// AlipayBarcode Source Payment Information
 @objc(OMSAlipayBarcodePaymentInformation)
@@ -323,7 +319,6 @@ public class __CustomSourcePayment: __SourcePaymentInformation {
     }
 }
 
-
 extension PaymentInformation {
     init(from paymentInformation: __SourcePaymentInformation) {
         switch paymentInformation {
@@ -414,7 +409,6 @@ extension PaymentInformation {
         }
     }
 }
-
 
 extension __SourcePaymentInformation {
     static func makeSourcePaymentInformation(from paymentInformation: PaymentInformation) -> __SourcePaymentInformation {

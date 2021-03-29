@@ -2,7 +2,6 @@ import Foundation
 import WebKit
 import os
 
-
 /// Delegate to receive authorizing payment events.
 @objc(OMSAuthorizingPaymentViewControllerDelegate)
 public protocol AuthorizingPaymentViewControllerDelegate: AnyObject {
@@ -23,7 +22,6 @@ public protocol AuthorizingPaymentViewControllerDelegate: AnyObject {
     func omiseAuthorizingPaymentViewControllerDidCancel(_ viewController: AuthorizingPaymentViewController)
 }
 
-
 @available(*, deprecated, renamed: "AuthorizingPaymentViewController")
 public typealias Omise3DSViewController = AuthorizingPaymentViewController
 @available(*, deprecated, renamed: "AuthorizingPaymentViewControllerDelegate")
@@ -33,7 +31,6 @@ public typealias Omise3DSViewControllerDelegate = AuthorizingPaymentViewControll
 public typealias OmiseAuthorizingPaymentViewController = AuthorizingPaymentViewController
 @available(*, deprecated, renamed: "AuthorizingPaymentViewControllerDelegate")
 public typealias OmiseAuthorizingPaymentViewControllerDelegate = AuthorizingPaymentViewControllerDelegate
-
 
 /*:
  Drop-in authorizing payment handler view controller that automatically display the authorizing payment verification form

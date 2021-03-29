@@ -1,6 +1,5 @@
 import UIKit
 
-
 /// UITextField subclass for entering the credit card number.
 /// Automatically formats entered number into groups of four.
 @objc(OMSCardNumberTextField) @IBDesignable

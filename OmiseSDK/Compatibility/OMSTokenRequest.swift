@@ -1,12 +1,10 @@
 import Foundation
 
-
 /// Delegate to receive token request events.
 @objc public protocol OMSTokenRequestDelegate {
     func tokenRequest(_ request: __OMSTokenRequest, didSucceedWithToken token: __OmiseToken)
     func tokenRequest(_ request: __OMSTokenRequest, didFailWithError error: NSError)
 }
-
 
 /// Request object for describing a request to create a new token with the creating parameters
 @objc(OMSTokenRequest) public class __OMSTokenRequest: NSObject {

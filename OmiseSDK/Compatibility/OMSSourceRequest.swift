@@ -1,18 +1,15 @@
 import Foundation
 
-
 /// Delegate to receive source request events.
 @objc public protocol OMSSourceRequestDelegate {
     func sourceRequest(_ request: __OMSSourceRequest, didSucceedWithSource source: __OmiseSource)
     func sourceRequest(_ request: __OMSSourceRequest, didFailWithError error: NSError)
 }
 
-
 /// Request object for describing a request to create a new source with the creating parameters
 @objc(OMSSourceRequest) public class __OMSSourceRequest: NSObject {
     
     let request: Request<Source>
-    
     
     /// The source type that is used to create a new Source
     @objc public var type: String {

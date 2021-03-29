@@ -1,6 +1,5 @@
 import Foundation
 
-
 @objc(OMSCapability) public
 class __OmiseCapability: NSObject {
     let capability: Capability
@@ -18,7 +17,6 @@ class __OmiseCapability: NSObject {
     }
 }
 
-
 @objc(OMSCapabilityBackend) public
 class __OmiseCapabilityBackend: NSObject {
     private let backend: Capability.Backend
@@ -34,7 +32,6 @@ class __OmiseCapabilityBackend: NSObject {
 
 @objc(OMSCapabilityBackendPayment) public
 class __OmiseCapabilityBackendPayment: NSObject {}
-
 
 @objc(OMSCapabilityCardBackend) public
 class __OmiseCapabilityCardBackendPayment: __OmiseCapabilityBackendPayment {

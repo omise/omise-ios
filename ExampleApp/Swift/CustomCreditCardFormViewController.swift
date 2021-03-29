@@ -14,7 +14,6 @@ protocol CustomCreditCardFormViewControllerDelegate: AnyObject {
     func creditCardFormViewController(_ controller: CustomCreditCardFormViewController, didFailWithError error: Error)
 }
 
-
 @objc(CustomCreditCardFormViewController)
 @objcMembers
 class CustomCreditCardFormViewController: UIViewController {
@@ -88,7 +87,6 @@ class CustomCreditCardFormViewController: UIViewController {
             lowerRowStackView.distribution = .fillEqually
             lowerRowStackView.alignment = .fill
             lowerRowStackView.spacing = 10
-            
             
             let stackView = UIStackView(arrangedSubviews: [cardNumberStackView, cardNameStackView, lowerRowStackView])
             stackView.translatesAutoresizingMaskIntoConstraints = false

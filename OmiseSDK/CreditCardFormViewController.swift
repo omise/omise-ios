@@ -1,7 +1,6 @@
 import UIKit
 import os.log
 
-
 public protocol CreditCardFormViewControllerDelegate: AnyObject {
     /// Delegate method for receiving token data when card tokenization succeeds.
     /// - parameter token: `OmiseToken` instance created from supplied credit card data.
@@ -17,7 +16,6 @@ public protocol CreditCardFormViewControllerDelegate: AnyObject {
     
     func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController)
 }
-
 
 /// Delegate to receive card tokenization events.
 @available(*, deprecated, renamed: "CreditCardFormViewControllerDelegate")
@@ -39,7 +37,6 @@ public protocol CreditCardFormDelegate: CreditCardFormViewControllerDelegate {
 message: "This delegate name is deprecated. Please use the new name of `OMSCreditCardFormViewControllerDelegate`",
 renamed: "OMSCreditCardFormViewControllerDelegate")
 @objc public protocol OMSCreditCardFormDelegate: OMSCreditCardFormViewControllerDelegate {}
-
 
 @objc
 public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
@@ -70,7 +67,6 @@ public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
 
 @available(*, deprecated, renamed: "CreditCardFormViewController")
 public typealias CreditCardFormController = CreditCardFormViewController
-
 
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.
@@ -125,7 +121,6 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     
     var currentEditingTextField: OmiseTextField?
     private var hasErrorMessage = false
-    
     
     @IBOutlet var formFields: [OmiseTextField]!
     @IBOutlet var formLabels: [UILabel]!
@@ -661,7 +656,6 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     }
 }
 
-
 // MARK: - Fields Accessory methods
 extension CreditCardFormViewController {
     
@@ -703,7 +697,6 @@ extension CreditCardFormViewController {
         doneEditing()
     }
 }
-
 
 // MARK: - Accessibility
 extension CreditCardFormViewController {
@@ -821,7 +814,6 @@ extension CreditCardFormViewController {
         return performCancelingForm()
     }
 }
-
 
 extension CreditCardFormViewController: MoreInformationOnCVVViewControllerDelegate {
     func moreInformationOnCVVViewControllerDidAskToClose(_ controller: MoreInformationOnCVVViewController) {

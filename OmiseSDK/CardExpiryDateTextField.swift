@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 /// UITextField subclass used for entering card's expiry date.
 /// `CardExpiryDatePicker` will be set as the default input view.
 @objc(OMSCardExpiryDateTextField) @IBDesignable
@@ -33,7 +32,6 @@ public class CardExpiryDateTextField: OmiseTextField {
         return selectedYear ?? 0
     }
     
-    
     public var dateSeparatorTextColor: UIColor?
     
     @objc private(set) public var expirationMonthAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
@@ -60,7 +58,6 @@ public class CardExpiryDateTextField: OmiseTextField {
         dateFormatter.calendar = Calendar.creditCardInformationCalendar
         return dateFormatter
     }()
-    
     
     override public init() {
         super.init(frame: CGRect.zero)
@@ -353,7 +350,6 @@ extension CardExpiryDateTextField {
         updateAccessibilityFrames()
     }
 }
-
 
 extension CardExpiryDateTextField: UITextFieldDelegate {
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

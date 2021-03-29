@@ -1,6 +1,5 @@
 import UIKit
 
-
 public protocol CheckoutViewControllerDelegate: AnyObject {
   func checkoutViewControllerDidTapCheckout(_ checkoutViewController: CheckoutViewController)
 }

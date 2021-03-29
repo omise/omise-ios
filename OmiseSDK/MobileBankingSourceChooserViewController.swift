@@ -1,7 +1,6 @@
 import UIKit
 import os
 
-
 @objc(OMSMobileBankingSourceChooserViewController)
 class MobileBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.MobileBanking>, PaymentSourceChooser, PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
@@ -11,7 +10,6 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
             os_log("Mobile Banking Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
         }
     }
-
 
     @IBOutlet var mobileBankingNameLabels: [UILabel]!
 

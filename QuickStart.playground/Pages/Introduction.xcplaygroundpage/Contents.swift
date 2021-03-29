@@ -8,8 +8,6 @@
  
  */
 
-
-
 /*: obtain-public-key
  
  ## Omise Public Key Note

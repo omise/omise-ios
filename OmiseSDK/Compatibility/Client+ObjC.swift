@@ -1,6 +1,5 @@
 import Foundation
 
-
 extension Client {
     
     @available(*, deprecated, renamed: "init(publicKey:queue:)")
@@ -8,7 +7,6 @@ extension Client {
         self.init(publicKey: publicKey, queue: OperationQueue())
     }
 
-    
     /**
      Send a tokenization request to the Omise API.
      - parameter request: `OmiseTokenRequest` instance.

@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// Brand of the Card Network
 @objc(OMSCardBrand)
 public enum CardBrand: Int, CustomStringConvertible, Codable {
@@ -127,7 +126,6 @@ public enum CardBrand: Int, CustomStringConvertible, Codable {
         }
     }
 }
-
 
 @objc(OMSCardBrandHelper) public final class __OMSCardBrand: NSObject {
     @objc(patternForBrand:) public static func __patternForBrand(brand: CardBrand) -> String {

@@ -114,7 +114,6 @@ class ProductDetailViewController: OMSBaseViewController {
     }
 }
 
-
 // MARK: - Credit Card Form View Controller Delegate
 
 extension ProductDetailViewController: CreditCardFormViewControllerDelegate {
@@ -149,7 +148,6 @@ extension ProductDetailViewController: CreditCardFormViewControllerDelegate {
     }
 }
 
-
 // MARK: - Authorizing Payment View Controller Delegate
 
 extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate {
@@ -162,7 +160,6 @@ extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate 
         dismiss(animated: true, completion: nil)
     }
 }
-
 
 // MARK: - Payment Creator Controller Delegate
 
@@ -203,7 +200,6 @@ extension ProductDetailViewController: PaymentCreatorControllerDelegate {
         dismissForm()
     }
 }
-
 
 // MARK: - Custom Credit Card Form View Controller Delegate
 

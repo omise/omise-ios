@@ -1,6 +1,5 @@
 import Foundation
 
-
 public protocol PaymentMethod: Equatable, Codable {
     static var paymentMethodTypePrefix: String { get }
     var type: String { get }
@@ -9,7 +8,6 @@ public protocol PaymentMethod: Equatable, Codable {
 func ~=<T: PaymentMethod>(methodType: T.Type, type: String) -> Bool {
     return type.hasPrefix(methodType.paymentMethodTypePrefix)
 }
-
 
 /// Represents the payment information of a Source
 public enum PaymentInformation: Codable, Equatable {
@@ -233,7 +231,6 @@ public enum PaymentInformation: Codable, Equatable {
     /// Other Payment Source
     case other(type: String, parameters: [String: Any])
     
-    
     fileprivate enum CodingKeys: String, CodingKey {
         case type
     }
@@ -356,7 +353,6 @@ public enum PaymentInformation: Codable, Equatable {
     
 }
 
-
 extension Request where T == Source {
     /// Initializes a new Source Request
     public init (paymentInformation: PaymentInformation, amount: Int64, currency: Currency) {
@@ -366,7 +362,6 @@ extension Request where T == Source {
         )
     }
 }
-
 
 extension PaymentInformation {
     /// Omise Source Type value using in the Omise API
@@ -401,7 +396,6 @@ extension PaymentInformation {
         }
     }
 }
-
 
 extension PaymentInformation.InternetBanking: CaseIterable, CustomStringConvertible {
     public typealias AllCases = Array<PaymentInformation.InternetBanking>
@@ -611,7 +605,6 @@ extension PaymentInformation.BillPayment {
         try container.encode(type, forKey: .type)
     }
 }
-
 
 extension PaymentInformation.Barcode {
     /// Alipay Barcode Payment Information

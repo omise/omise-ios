@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 /// UITextField subclass for entering card's CVV number.
 @objc(OMSCardCVVTextField) @IBDesignable
 public class CardCVVTextField: OmiseTextField {

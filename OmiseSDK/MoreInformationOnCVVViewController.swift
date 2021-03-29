@@ -1,10 +1,8 @@
 import UIKit
 
-
 protocol MoreInformationOnCVVViewControllerDelegate: AnyObject {
     func moreInformationOnCVVViewControllerDidAskToClose(_ controller: MoreInformationOnCVVViewController)
 }
-
 
 class MoreInformationOnCVVViewController: UIViewController {
     static let preferredWidth: CGFloat = 240
@@ -60,7 +58,6 @@ class MoreInformationOnCVVViewController: UIViewController {
     }
 }
 
-
 class ExpandedHitAreaButton: UIButton {
     var hitAreaSize = CGSize(width: 44, height: 44)
     
@@ -70,7 +67,6 @@ class ExpandedHitAreaButton: UIButton {
         return bounds.insetBy(dx: -horizontalInset, dy: -verticalInset).contains(point)
     }
 }
-
 
 class OverlayPanelTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
     var alertPresentationController: OverlayPanelPresentationController?
@@ -243,7 +239,6 @@ class OverlayPanelPresentationController: UIPresentationController {
     }
 }
 
-
 extension OverlayPanelPresentationController: UIAdaptivePresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .overCurrentContext
@@ -280,7 +275,6 @@ extension OverlayPanelPresentationController: UIViewControllerAnimatedTransition
         controller.view.frame = initialFrame
         controller.view.alpha = initialAlpha
         
-        
         let animationBlock: () -> Void = {
             controller.view.frame = finalFrame
             controller.view.alpha = finalAlpha
@@ -294,7 +288,6 @@ extension OverlayPanelPresentationController: UIViewControllerAnimatedTransition
         animator.startAnimation()
     }
 }
-
 
 extension CGRect {
     func centeredRectWithSize(_ size: CGSize) -> CGRect {

@@ -1,6 +1,5 @@
 import UIKit
 
-
 public class AdaptableDynamicTableViewController<Element: Equatable>: UITableViewController {
     
     public var showingValues: [Element] = [] {

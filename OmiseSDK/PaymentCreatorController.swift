@@ -1,7 +1,6 @@
 import UIKit
 import os
 
-
 public protocol PaymentCreatorControllerDelegate: NSObjectProtocol {
     func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
                                   didCreatePayment payment: Payment)
@@ -9,7 +8,6 @@ public protocol PaymentCreatorControllerDelegate: NSObjectProtocol {
                                   didFailWithError error: Error)
     func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController)
 }
-
 
 @objc public protocol OMSPaymentCreatorControllerDelegate: NSObjectProtocol {
     @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
@@ -21,7 +19,6 @@ public protocol PaymentCreatorControllerDelegate: NSObjectProtocol {
     @objc optional func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController)
 }
 
-
 public enum Payment {
     case token(Token)
     case source(Source)
@@ -31,7 +28,6 @@ public protocol PaymentChooserUI: AnyObject {
     var preferredPrimaryColor: UIColor? { get set }
     var preferredSecondaryColor: UIColor? { get set }
 }
-
 
 /// Drop-in UI flow controller that let user choose the payment method with the given payment options
 @objc(OMSPaymentCreatorController)
@@ -129,7 +125,6 @@ public class PaymentCreatorController: UINavigationController {
         noticeView.backgroundColor = .error
         return noticeView
     }()
-    
     
     @objc @IBInspectable public var preferredPrimaryColor: UIColor?
     @objc @IBInspectable public var preferredSecondaryColor: UIColor? {
@@ -261,7 +256,6 @@ public class PaymentCreatorController: UINavigationController {
         displayingNoticeView.addGestureRecognizer(dismissErrorBannerTapGestureRecognizer)
     }
     
-    
     /// Displays an error banner at the top of the UI with the given error message.
     ///
     /// - Parameters:
@@ -328,7 +322,6 @@ public class PaymentCreatorController: UINavigationController {
             self.displayingNoticeView.removeFromSuperview()
         }
     }
-    
     
     public override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         if let viewController = viewController as? PaymentChooserUI {
@@ -397,12 +390,10 @@ public class PaymentCreatorController: UINavigationController {
         }
     }
     
-    
     @objc func dismissErrorMessageBanner(_ sender: AnyObject) {
         dismissErrorMessage(animated: true, sender: sender)
     }
 }
-
 
 extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
     func paymentCreatorFlowSessionWillCreateSource(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession) {
@@ -472,7 +463,6 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
     }
 }
 
-
 extension PaymentCreatorController {
     public static let thailandDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
         .internetBankingBAY,
@@ -533,7 +523,6 @@ extension PaymentCreatorController {
         .mobileBankingSCB
     ]
 }
-
 
 class NoticeView: UIView {
     

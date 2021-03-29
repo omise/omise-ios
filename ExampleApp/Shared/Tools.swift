@@ -1,7 +1,6 @@
 import UIKit
 import OmiseSDK
 
-
 struct PaymentPreset {
     var paymentAmount: Int64
     var paymentCurrency: Currency
@@ -27,7 +26,6 @@ struct PaymentPreset {
         allowedPaymentMethods: PaymentCreatorController.malaysiaDefaultAvailableSourceMethods
     )
 }
-
 
 @objc class Tool: NSObject {
     

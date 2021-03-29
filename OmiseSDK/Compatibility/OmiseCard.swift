@@ -1,6 +1,5 @@
 import Foundation
 
-
 /**
  Represents saved credit card information.
  - seealso: [Cards API](https://www.omise.co/cards-api)
