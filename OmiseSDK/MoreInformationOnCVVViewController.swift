@@ -7,9 +7,9 @@ protocol MoreInformationOnCVVViewControllerDelegate: AnyObject {
 class MoreInformationOnCVVViewController: UIViewController {
     static let preferredWidth: CGFloat = 240
     
-    @IBOutlet var cvvLocationImageView: UIImageView!
-    @IBOutlet var cvvLocationDescriptionLabel: UILabel!
-    @IBOutlet var closeButton: ExpandedHitAreaButton!
+    @IBOutlet private var cvvLocationImageView: UIImageView!
+    @IBOutlet private var cvvLocationDescriptionLabel: UILabel!
+    @IBOutlet private var closeButton: ExpandedHitAreaButton!
     
     var preferredCardBrand: CardBrand? {
         didSet {
@@ -34,6 +34,7 @@ class MoreInformationOnCVVViewController: UIViewController {
         updateUI()
     }
     
+    // swiftlint:disable:next private_action
     @IBAction func askToClose(_ sender: AnyObject) {
         delegate?.moreInformationOnCVVViewControllerDidAskToClose(self)
     }

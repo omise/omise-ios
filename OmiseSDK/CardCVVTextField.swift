@@ -11,7 +11,7 @@ import UIKit
         get {
             return self
         }
-        set {}
+        set {} // swiftlint:disable:this unused_setter_value
     }
     
     public override var keyboardType: UIKeyboardType {

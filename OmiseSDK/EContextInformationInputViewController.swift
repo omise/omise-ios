@@ -29,15 +29,15 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     
     @IBOutlet var contentView: UIScrollView!
     
-    @IBOutlet var fullNameTextField: OmiseTextField!
-    @IBOutlet var emailTextField: OmiseTextField!
-    @IBOutlet var phoneNumberTextField: OmiseTextField!
-    @IBOutlet var submitButton: MainActionButton!
-    @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
+    @IBOutlet private var fullNameTextField: OmiseTextField!
+    @IBOutlet private var emailTextField: OmiseTextField!
+    @IBOutlet private var phoneNumberTextField: OmiseTextField!
+    @IBOutlet private var submitButton: MainActionButton!
+    @IBOutlet private var requestingIndicatorView: UIActivityIndicatorView!
     
-    @IBOutlet var fullNameErrorLabel: UILabel!
-    @IBOutlet var emailErrorLabel: UILabel!
-    @IBOutlet var phoneNumberErrorLabel: UILabel!
+    @IBOutlet private var fullNameErrorLabel: UILabel!
+    @IBOutlet private var emailErrorLabel: UILabel!
+    @IBOutlet private var phoneNumberErrorLabel: UILabel!
     
     @IBOutlet var formLabels: [UILabel]!
     @IBOutlet var formFields: [OmiseTextField]!
@@ -113,7 +113,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         }
     }
     
-    @IBAction func submitEContextForm(_ sender: AnyObject) {
+    @IBAction private func submitEContextForm(_ sender: AnyObject) {
         guard let fullname = fullNameTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces),
             let email = emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces),
             let phoneNumber = phoneNumberTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
@@ -133,7 +133,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         }
     }
     
-    @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
+    @IBAction private func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
         if let errorLabel = associatedErrorLabelOf(sender) {
             let duration = TimeInterval(NavigationControllerHideShowBarDuration)
             UIView.animate(withDuration: duration,
@@ -159,11 +159,11 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         doneEditing()
     }
     
-    @IBAction func validateFieldData(_ textField: OmiseTextField) {
+    @IBAction private func validateFieldData(_ textField: OmiseTextField) {
         submitButton.isEnabled = isInputDataValid
     }
     
-    @IBAction func validateTextFieldDataOf(_ sender: OmiseTextField) {
+    @IBAction private func validateTextFieldDataOf(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
         UIView.animate(withDuration: duration,
                        delay: 0.0,

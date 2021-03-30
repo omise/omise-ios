@@ -73,37 +73,37 @@ class PaymentSettingTableViewController: UITableViewController {
         }
     }
     
-    @IBOutlet var amountField: UITextField!
-    @IBOutlet var amountFieldInputAccessoryView: UIToolbar!
+    @IBOutlet private var amountField: UITextField!
+    @IBOutlet private var amountFieldInputAccessoryView: UIToolbar!
     
-    @IBOutlet var thbCurrencyCell: UITableViewCell!
-    @IBOutlet var jpyCurrencyCell: UITableViewCell!
-    @IBOutlet var usdCurrencyCell: UITableViewCell!
-    @IBOutlet var sgdCurrencyCell: UITableViewCell!
-    @IBOutlet var myrCurrencyCell: UITableViewCell!
+    @IBOutlet private var thbCurrencyCell: UITableViewCell!
+    @IBOutlet private var jpyCurrencyCell: UITableViewCell!
+    @IBOutlet private var usdCurrencyCell: UITableViewCell!
+    @IBOutlet private var sgdCurrencyCell: UITableViewCell!
+    @IBOutlet private var myrCurrencyCell: UITableViewCell!
     
-    @IBOutlet var internetBankingBAYPaymentCell: UITableViewCell!
-    @IBOutlet var internetBankingKTBPaymentCell: UITableViewCell!
-    @IBOutlet var internetBankingSCBPaymentCell: UITableViewCell!
-    @IBOutlet var internetBankingBBLPaymentCell: UITableViewCell!
-    @IBOutlet var alipayPaymentCell: UITableViewCell!
-    @IBOutlet var billPaymentTescoLotusPaymentCell: UITableViewCell!
-    @IBOutlet var installmentBAYPaymentCell: UITableViewCell!
-    @IBOutlet var installmentFirstChoicePaymentCell: UITableViewCell!
-    @IBOutlet var installmentBBLPaymentCell: UITableViewCell!
-    @IBOutlet var installmentKTCPaymentCell: UITableViewCell!
-    @IBOutlet var installmentKBankPaymentCell: UITableViewCell!
-    @IBOutlet var installmentSCBPaymentCell: UITableViewCell!
-    @IBOutlet var mobileBankingSCBPaymentCell: UITableViewCell!
-    @IBOutlet var eContextPaymentCell: UITableViewCell!
-    @IBOutlet var promptpayPaymentCell: UITableViewCell!
-    @IBOutlet var paynowPaymentCell: UITableViewCell!
-    @IBOutlet var truemoneyPaymentCell: UITableViewCell!
-    @IBOutlet var pointsCitiCell: UITableViewCell!
-    @IBOutlet var fpxCell: UITableViewCell!
+    @IBOutlet private var internetBankingBAYPaymentCell: UITableViewCell!
+    @IBOutlet private var internetBankingKTBPaymentCell: UITableViewCell!
+    @IBOutlet private var internetBankingSCBPaymentCell: UITableViewCell!
+    @IBOutlet private var internetBankingBBLPaymentCell: UITableViewCell!
+    @IBOutlet private var alipayPaymentCell: UITableViewCell!
+    @IBOutlet private var billPaymentTescoLotusPaymentCell: UITableViewCell!
+    @IBOutlet private var installmentBAYPaymentCell: UITableViewCell!
+    @IBOutlet private var installmentFirstChoicePaymentCell: UITableViewCell!
+    @IBOutlet private var installmentBBLPaymentCell: UITableViewCell!
+    @IBOutlet private var installmentKTCPaymentCell: UITableViewCell!
+    @IBOutlet private var installmentKBankPaymentCell: UITableViewCell!
+    @IBOutlet private var installmentSCBPaymentCell: UITableViewCell!
+    @IBOutlet private var mobileBankingSCBPaymentCell: UITableViewCell!
+    @IBOutlet private var eContextPaymentCell: UITableViewCell!
+    @IBOutlet private var promptpayPaymentCell: UITableViewCell!
+    @IBOutlet private var paynowPaymentCell: UITableViewCell!
+    @IBOutlet private var truemoneyPaymentCell: UITableViewCell!
+    @IBOutlet private var pointsCitiCell: UITableViewCell!
+    @IBOutlet private var fpxCell: UITableViewCell!
     
-    @IBOutlet var useCapabilityAPIValuesCell: UITableViewCell!
-    @IBOutlet var useSpecifiedValuesCell: UITableViewCell!
+    @IBOutlet private var useCapabilityAPIValuesCell: UITableViewCell!
+    @IBOutlet private var useSpecifiedValuesCell: UITableViewCell!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -157,11 +157,11 @@ class PaymentSettingTableViewController: UITableViewController {
             break
         }
     }
-    @IBAction func finishEditingAmount(_ sender: Any) {
+    @IBAction private func finishEditingAmount(_ sender: Any) {
         amountField.resignFirstResponder()
     }
     
-    @IBAction func showPresetChooser(_ sender: Any) {
+    @IBAction private func showPresetChooser(_ sender: Any) {
         let presetChooserAlertController = UIAlertController(title: "Preset", message: nil, preferredStyle: .actionSheet)
         presetChooserAlertController.addAction(UIAlertAction(title: "Thailand", style: .default) { (_) in
             self.currentAmount = PaymentPreset.thailandPreset.paymentAmount

@@ -29,11 +29,11 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
     
     @IBOutlet var contentView: UIScrollView!
     
-    @IBOutlet var phoneNumberTextField: OmiseTextField!
-    @IBOutlet var submitButton: MainActionButton!
-    @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
+    @IBOutlet private var phoneNumberTextField: OmiseTextField!
+    @IBOutlet private var submitButton: MainActionButton!
+    @IBOutlet private var requestingIndicatorView: UIActivityIndicatorView!
     
-    @IBOutlet var errorLabel: UILabel!
+    @IBOutlet private var errorLabel: UILabel!
     
     @IBOutlet var formLabels: [UILabel]!
     @IBOutlet var formFields: [OmiseTextField]!
@@ -107,7 +107,7 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
         }
     }
 
-    @IBAction func submitForm(_ sender: AnyObject) {
+    @IBAction private func submitForm(_ sender: AnyObject) {
         guard let phoneNumber = phoneNumberTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
             return
         }
@@ -125,11 +125,11 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
         }
     }
     
-    @IBAction func validateFieldData(_ textField: OmiseTextField) {
+    @IBAction private func validateFieldData(_ textField: OmiseTextField) {
         submitButton.isEnabled = isInputDataValid
     }
     
-    @IBAction func validateTextFieldDataOf(_ sender: OmiseTextField) {
+    @IBAction private func validateTextFieldDataOf(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
         UIView.animate(withDuration: duration,
                        delay: 0.0,
@@ -139,7 +139,7 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
         sender.borderColor = currentSecondaryColor
     }
     
-    @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
+    @IBAction private func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
         UIView.animate(withDuration: duration,
                        delay: 0.0,

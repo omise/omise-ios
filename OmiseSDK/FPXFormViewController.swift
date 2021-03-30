@@ -38,11 +38,11 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
 
     @IBOutlet var contentView: UIScrollView!
 
-    @IBOutlet var emailTextField: OmiseTextField!
-    @IBOutlet var submitButton: MainActionButton!
-    @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
+    @IBOutlet private var emailTextField: OmiseTextField!
+    @IBOutlet private var submitButton: MainActionButton!
+    @IBOutlet private var requestingIndicatorView: UIActivityIndicatorView!
 
-    @IBOutlet var errorLabel: UILabel!
+    @IBOutlet private var errorLabel: UILabel!
 
     @IBOutlet var formLabels: [UILabel]!
     @IBOutlet var formFields: [OmiseTextField]!
@@ -119,7 +119,7 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
         }
     }
 
-    @IBAction func submitForm(_ sender: AnyObject) {
+    @IBAction private func submitForm(_ sender: AnyObject) {
         emailValue = emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces)
 
         performSegue(withIdentifier: destinationSegue, sender: sender)
@@ -136,11 +136,11 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
         }
     }
 
-    @IBAction func validateFieldData(_ textField: OmiseTextField) {
+    @IBAction private func validateFieldData(_ textField: OmiseTextField) {
         submitButton.isEnabled = isInputDataValid
     }
 
-    @IBAction func validateTextFieldDataOf(_ sender: OmiseTextField) {
+    @IBAction private func validateTextFieldDataOf(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
         UIView.animate(withDuration: duration,
                        delay: 0.0,
@@ -150,7 +150,7 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
         sender.borderColor = currentSecondaryColor
     }
 
-    @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
+    @IBAction private func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
         UIView.animate(withDuration: duration,
                        delay: 0.0,

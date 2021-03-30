@@ -5,7 +5,7 @@ public typealias OmiseToken = __OmiseToken
 
 /// Delegate to receive token request events.
 @available(*, deprecated, message: "Use the completion handler pattern in the `Client` instead. This protocol will be removed in the future released")
-public protocol OmiseTokenRequestDelegate {
+public protocol OmiseTokenRequestDelegate { // swiftlint:disable:this class_delegate_protocol
     /// Delegate method for receiving token data when token request succeeds.
     /// - parameter request: Original `OmiseTokenRequest` that was sent.
     /// - parameter token: `OmiseToken` instance created from supplied card data.

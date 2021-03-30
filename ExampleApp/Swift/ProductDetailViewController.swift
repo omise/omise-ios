@@ -57,7 +57,7 @@ class ProductDetailViewController: OMSBaseViewController {
         }
     }
     
-    @IBAction func showModalCreditCardForm(_ sender: Any) {
+    @IBAction private func showModalCreditCardForm(_ sender: Any) {
         guard currentCodePathMode == .code else {
             return
         }
@@ -68,7 +68,7 @@ class ProductDetailViewController: OMSBaseViewController {
         present(navigationController, animated: true, completion: nil)
     }
     
-    @IBAction func showCreditCardForm(_ sender: UIButton) {
+    @IBAction private func showCreditCardForm(_ sender: UIButton) {
         guard currentCodePathMode == .code else {
             return
         }
@@ -78,7 +78,7 @@ class ProductDetailViewController: OMSBaseViewController {
         show(creditCardFormController, sender: self)
     }
     
-    @IBAction func showModalPaymentCreator(_ sender: Any) {
+    @IBAction private func showModalPaymentCreator(_ sender: Any) {
         guard currentCodePathMode == .code else {
             return
         }
@@ -86,7 +86,7 @@ class ProductDetailViewController: OMSBaseViewController {
         present(paymentCreatorController, animated: true, completion: nil)
     }
     
-    @IBAction func showCustomCreditCardForm(_ sender: Any) {
+    @IBAction private func showCustomCreditCardForm(_ sender: Any) {
         guard currentCodePathMode == .code else {
             return
         }
@@ -95,7 +95,7 @@ class ProductDetailViewController: OMSBaseViewController {
         show(customCreditCardFormController, sender: sender)
     }
     
-    @IBAction func handlingAuthorizingPayment(_ sender: UIBarButtonItem) {
+    @IBAction private func handlingAuthorizingPayment(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Authorizing Payment", message: "Please input your given authorized URL", preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
         alertController.addAction(UIAlertAction(title: "Cancel", style: AlertActionStyle.cancel, handler: nil))

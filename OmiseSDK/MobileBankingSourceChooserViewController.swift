@@ -11,7 +11,7 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
         }
     }
 
-    @IBOutlet var mobileBankingNameLabels: [UILabel]!
+    @IBOutlet private var mobileBankingNameLabels: [UILabel]!
 
     @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {

@@ -119,7 +119,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         }
     }
     
-    @IBOutlet var paymentMethodNameLables: [UILabel]!
+    @IBOutlet private var paymentMethodNameLables: [UILabel]!
     
     @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
@@ -373,7 +373,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         os_log("Payment Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map { $0.description }.joined(separator: ", "))
     }
     
-    @IBAction func requestToClose(_ sender: Any) {
+    @IBAction private func requestToClose(_ sender: Any) {
         flowSession?.requestToCancel()
     }
 }

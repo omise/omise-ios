@@ -20,12 +20,12 @@ class CustomCreditCardFormViewController: UIViewController {
     
     let omiseClient = Client(publicKey: "pkey_test_<#Omise Public Key#>")
     
-    @IBOutlet var cardNumberField: CardNumberTextField!
-    @IBOutlet var cardNameField: CardNameTextField!
-    @IBOutlet var cardExpiryField: CardExpiryDateTextField!
-    @IBOutlet var cardCVVField: CardCVVTextField!
+    @IBOutlet private var cardNumberField: CardNumberTextField!
+    @IBOutlet private var cardNameField: CardNameTextField!
+    @IBOutlet private var cardExpiryField: CardExpiryDateTextField!
+    @IBOutlet private var cardCVVField: CardCVVTextField!
   
-    @IBOutlet var doneButton: UIBarButtonItem!
+    @IBOutlet private var doneButton: UIBarButtonItem!
     
     weak var delegate: CustomCreditCardFormViewControllerDelegate?
     
@@ -115,7 +115,7 @@ class CustomCreditCardFormViewController: UIViewController {
         }
     }
     
-    @IBAction func proceed(_ sender: UIBarButtonItem) {
+    @IBAction private func proceed(_ sender: UIBarButtonItem) {
         guard let name = cardNameField.text, cardNumberField.isValid,
             let expiryMonth = cardExpiryField.selectedMonth, let expiryYear = cardExpiryField.selectedYear,
             let cvv = cardCVVField.text else {

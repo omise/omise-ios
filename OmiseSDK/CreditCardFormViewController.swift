@@ -113,7 +113,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         }
     }
     
-    private lazy var overlayTransitionDelegate = OverlayPanelTransitioningDelegate()
+    private lazy var overlayTransitionDelegate = OverlayPanelTransitioningDelegate() // swiftlint:disable:this weak_delegate
     
     var isInputDataValid: Bool {
         return formFields.reduce(into: true) { (valid, field) in
@@ -130,32 +130,32 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
   
     @IBOutlet var contentView: UIScrollView!
     
-    @IBOutlet var cardNumberTextField: CardNumberTextField!
-    @IBOutlet var cardNameTextField: CardNameTextField!
-    @IBOutlet var expiryDateTextField: CardExpiryDateTextField!
-    @IBOutlet var secureCodeTextField: CardCVVTextField!
+    @IBOutlet private var cardNumberTextField: CardNumberTextField!
+    @IBOutlet private var cardNameTextField: CardNameTextField!
+    @IBOutlet private var expiryDateTextField: CardExpiryDateTextField!
+    @IBOutlet private var secureCodeTextField: CardCVVTextField!
     
-    @IBOutlet var confirmButton: MainActionButton!
+    @IBOutlet private var confirmButton: MainActionButton!
     
     @IBOutlet var formFieldsAccessoryView: UIToolbar!
     @IBOutlet var gotoPreviousFieldBarButtonItem: UIBarButtonItem!
     @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!
     @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
     
-    @IBOutlet var creditCardNumberErrorLabel: UILabel!
-    @IBOutlet var cardHolderNameErrorLabel: UILabel!
-    @IBOutlet var cardExpiryDateErrorLabel: UILabel!
-    @IBOutlet var cardSecurityCodeErrorLabel: UILabel!
+    @IBOutlet private var creditCardNumberErrorLabel: UILabel!
+    @IBOutlet private var cardHolderNameErrorLabel: UILabel!
+    @IBOutlet private var cardExpiryDateErrorLabel: UILabel!
+    @IBOutlet private var cardSecurityCodeErrorLabel: UILabel!
     
-    @IBOutlet var errorBannerView: UIView!
-    @IBOutlet var errorTitleLabel: UILabel!
-    @IBOutlet var errorMessageLabel: UILabel!
-    @IBOutlet var hidingErrorBannerConstraint: NSLayoutConstraint!
-    @IBOutlet var emptyErrorMessageConstraint: NSLayoutConstraint!
-    @IBOutlet var cardBrandIconImageView: UIImageView!
-    @IBOutlet var cvvInfoButton: UIButton!
+    @IBOutlet private var errorBannerView: UIView!
+    @IBOutlet private var errorTitleLabel: UILabel!
+    @IBOutlet private var errorMessageLabel: UILabel!
+    @IBOutlet private var hidingErrorBannerConstraint: NSLayoutConstraint!
+    @IBOutlet private var emptyErrorMessageConstraint: NSLayoutConstraint!
+    @IBOutlet private var cardBrandIconImageView: UIImageView!
+    @IBOutlet private var cvvInfoButton: UIButton!
     
-    @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
+    @IBOutlet private var requestingIndicatorView: UIActivityIndicatorView!
     @objc public static let defaultErrorMessageTextColor = UIColor.error
 
     /// A boolean flag that enables/disables Card.IO integration.
@@ -343,7 +343,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         }
     }
     
-    @IBAction func displayMoreCVVInfo(_ sender: UIButton) {
+    @IBAction private func displayMoreCVVInfo(_ sender: UIButton) {
         guard let moreInformationOnCVVViewController = storyboard?.instantiateViewController(withIdentifier: "MoreInformationOnCVVViewController") as? MoreInformationOnCVVViewController else {
             return
         }
@@ -356,7 +356,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         present(moreInformationOnCVVViewController, animated: true, completion: nil)
     }
     
-    @IBAction func cancelForm() {
+    @IBAction private func cancelForm() {
         performCancelingForm()
     }
     
@@ -525,7 +525,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         }
     }
     
-    @IBAction func dismissErrorBanner(_ sender: Any) {
+    @IBAction private func dismissErrorBanner(_ sender: Any) {
         setShowsErrorBanner(false)
     }
     
@@ -674,7 +674,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
 // MARK: - Fields Accessory methods
 extension CreditCardFormViewController {
     
-    @IBAction func validateTextFieldDataOf(_ sender: OmiseTextField) {
+    @IBAction private func validateTextFieldDataOf(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
         UIView.animate(withDuration: duration,
                        delay: 0.0,
@@ -684,7 +684,7 @@ extension CreditCardFormViewController {
         sender.borderColor = currentSecondaryColor
     }
     
-    @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
+    @IBAction private func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
         if let errorLabel = associatedErrorLabelOf(sender) {
             let duration = TimeInterval(NavigationControllerHideShowBarDuration)
             UIView.animate(withDuration: duration,
@@ -714,7 +714,7 @@ extension CreditCardFormViewController {
 // MARK: - Accessibility
 extension CreditCardFormViewController {
     
-    @IBAction func updateAccessibilityValue(_ sender: OmiseTextField) {
+    @IBAction private func updateAccessibilityValue(_ sender: OmiseTextField) {
         updateSupplementaryUI()
     }
     

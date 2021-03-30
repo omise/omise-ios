@@ -142,7 +142,7 @@ public class AuthorizingPaymentViewController: UIViewController {
         startAuthorizingPaymentProcess()
     }
     
-    @IBAction func cancelAuthorizingPaymentProcess(_ sender: UIBarButtonItem) {
+    @IBAction private func cancelAuthorizingPaymentProcess(_ sender: UIBarButtonItem) {
         os_log("Authorization process was cancelled, trying to notify the delegate", log: uiLogObject, type: .info)
         delegate?.authorizingPaymentViewControllerDidCancel(self)
         if delegate == nil {
