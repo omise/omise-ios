@@ -44,7 +44,7 @@ import UIKit
         set {} // swiftlint:disable:this unused_setter_value
     }
     
-    private lazy var cardNumberStringTokenizer: CardNumberTextField.CreditCardNumberTextInputStringTokenizer = CreditCardNumberTextInputStringTokenizer(cardNumberTextField: self)
+    private lazy var cardNumberStringTokenizer = CreditCardNumberTextInputStringTokenizer(cardNumberTextField: self)
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -82,7 +82,8 @@ import UIKit
         let spacingIndexes = pan.suggestedSpaceFormattedIndexes
         if let attributedText = attributedText, spacingIndexes.contains(attributedText.length) {
             let formattingAttributedText = NSMutableAttributedString(attributedString: attributedText)
-            formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: attributedText.length - 1, length: 1))
+            let range = NSRange(location: attributedText.length - 1, length: 1)
+            formattingAttributedText.addAttribute(.kern, value: 5, range: range)
             self.attributedText = formattingAttributedText
         }
         
@@ -97,7 +98,8 @@ import UIKit
         let spacingIndexes = pan.suggestedSpaceFormattedIndexes
         if let attributedText = attributedText, spacingIndexes.contains(attributedText.length) {
             let formattingAttributedText = NSMutableAttributedString(attributedString: attributedText)
-            formattingAttributedText.removeAttribute(AttributedStringKey.kern, range: NSRange(location: attributedText.length - 1, length: 1))
+            let range = NSRange(location: attributedText.length - 1, length: 1)
+            formattingAttributedText.removeAttribute(.kern, range: range)
             self.attributedText = formattingAttributedText
         }
         
@@ -118,7 +120,8 @@ import UIKit
             options: .regularExpression,
             range: nil)
         
-        let maxPastingPANLength = min(pan.count, (self.pan.brand?.validLengths.upperBound ?? 16) - (self.text?.count ?? 0) + selectedTextLength)
+        let panLength = (self.pan.brand?.validLengths.upperBound ?? 16) - (self.text?.count ?? 0) + selectedTextLength
+        let maxPastingPANLength = min(pan.count, panLength)
         guard maxPastingPANLength > 0 else {
             return
         }
@@ -131,7 +134,8 @@ import UIKit
         let formattingAttributedText = NSMutableAttributedString(attributedString: attributedText)
         let kerningIndexes = IndexSet(PAN.suggestedSpaceFormattedIndexesForPANPrefix(attributedText.string).map { $0 - 1 })
         
-        formattingAttributedText.removeAttribute(AttributedStringKey.kern, range: NSRange(location: 0, length: formattingAttributedText.length))
+        let range = NSRange(location: 0, length: formattingAttributedText.length)
+        formattingAttributedText.removeAttribute(.kern, range: range)
         kerningIndexes[kerningIndexes.indexRange(in: 0..<attributedText.length)].forEach {
             formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
         }
@@ -148,11 +152,9 @@ import UIKit
         let formattingAttributedText = NSMutableAttributedString(attributedString: attributedPlaceholder)
         if let placeholderColor = self.placeholderTextColor {
             let formattingPlaceholderString = formattingAttributedText.string
-            formattingAttributedText.addAttribute(
-                AttributedStringKey.foregroundColor,
-                value: placeholderColor,
-                range: NSRange(formattingPlaceholderString.startIndex..<formattingPlaceholderString.endIndex, in: formattingPlaceholderString)
-            )
+            let range = NSRange(formattingPlaceholderString.startIndex..<formattingPlaceholderString.endIndex,
+                                in: formattingPlaceholderString)
+            formattingAttributedText.addAttribute(.foregroundColor, value: placeholderColor, range: range)
         }
         let kerningIndexes = IndexSet([3, 7, 11])
         kerningIndexes[kerningIndexes.indexRange(in: 0..<formattingAttributedText.length)].forEach {
@@ -173,13 +175,15 @@ import UIKit
         
         if compare(selectedTextRange.start, to: endOfDocument) == ComparisonResult.orderedAscending, let attributedText = attributedText {
             let formattingAttributedText = NSMutableAttributedString(attributedString: attributedText)
-            let formattingStartIndex = self.offset(from: beginningOfDocument, to: self.position(from: selectedTextRange.start, offset: -1) ?? selectedTextRange.start)
+            let formattingStartIndex = self.offset(from: beginningOfDocument,
+                                                   to: self.position(from: selectedTextRange.start, offset: -1) ?? selectedTextRange.start)
             
             let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map { $0 - 1 })
             
-            formattingAttributedText.removeAttribute(AttributedStringKey.kern, range: NSRange(location: formattingStartIndex, length: formattingAttributedText.length - formattingStartIndex))
+            let range = NSRange(location: formattingStartIndex, length: formattingAttributedText.length - formattingStartIndex)
+            formattingAttributedText.removeAttribute(.kern, range: range)
             kerningIndexes[kerningIndexes.indexRange(in: formattingStartIndex..<formattingAttributedText.length)].forEach {
-                formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
+                formattingAttributedText.addAttribute(.kern, value: 5, range: NSRange(location: $0, length: 1))
             }
             
             self.attributedText = formattingAttributedText
@@ -231,9 +235,13 @@ import UIKit
             let currentIndex = cardNumberTextField.offset(from: cardNumberTextField.beginningOfDocument, to: position)
             
             if directionValue == UITextStorageDirection.backward.rawValue {
-                return spacePositionIndexes.integerLessThan(currentIndex).flatMap { cardNumberTextField.position(from: cardNumberTextField.beginningOfDocument, offset: $0) } ?? cardNumberTextField.beginningOfDocument
+                return spacePositionIndexes.integerLessThan(currentIndex).flatMap {
+                    cardNumberTextField.position(from: cardNumberTextField.beginningOfDocument, offset: $0)
+                } ?? cardNumberTextField.beginningOfDocument
             } else if directionValue == UITextStorageDirection.forward.rawValue {
-                return spacePositionIndexes.integerGreaterThan(currentIndex).flatMap({ cardNumberTextField.position(from: cardNumberTextField.beginningOfDocument, offset: $0) }) ?? cardNumberTextField.endOfDocument
+                return spacePositionIndexes.integerGreaterThan(currentIndex).flatMap {
+                    cardNumberTextField.position(from: cardNumberTextField.beginningOfDocument, offset: $0)
+                } ?? cardNumberTextField.endOfDocument
             } else {
                 return super.position(from: position, toBoundary: granularity, inDirection: direction)
             }
@@ -278,10 +286,14 @@ import UIKit
             let spacePositionIndexes = cardNumberTextField.pan.suggestedSpaceFormattedIndexes.union([0, panString.count])
             let currentIndex = cardNumberTextField.offset(from: cardNumberTextField.beginningOfDocument, to: position)
             
-            if let beginningOfGroupTextPosition =
-                spacePositionIndexes.integerLessThanOrEqualTo(currentIndex).flatMap({ cardNumberTextField.position(from: cardNumberTextField.beginningOfDocument, offset: $0) }),
-                let endOfGroupTextPosition =
-                spacePositionIndexes.integerGreaterThan(currentIndex).flatMap({ cardNumberTextField.position(from: cardNumberTextField.beginningOfDocument, offset: $0) }) {
+            let beginningOfGroupTextPosition = spacePositionIndexes.integerLessThanOrEqualTo(currentIndex).flatMap {
+                cardNumberTextField.position(from: cardNumberTextField.beginningOfDocument, offset: $0)
+            }
+            let endOfGroupTextPosition = spacePositionIndexes.integerGreaterThan(currentIndex).flatMap {
+                cardNumberTextField.position(from: cardNumberTextField.beginningOfDocument, offset: $0)
+            }
+            
+            if let beginningOfGroupTextPosition = beginningOfGroupTextPosition, let endOfGroupTextPosition = endOfGroupTextPosition {
                 return cardNumberTextField.textRange(from: beginningOfGroupTextPosition, to: endOfGroupTextPosition)
             } else {
                 return super.rangeEnclosingPosition(position, with: granularity, inDirection: direction)

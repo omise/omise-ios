@@ -157,7 +157,7 @@ class InvalidCardAPIErrorParsingTestCase: XCTestCase {
             let decoder = JSONDecoder()
             let parsedError = try decoder.decode(OmiseError.self, from: Data(errorJSONString.utf8))
             if case .api(code: .invalidCard(let reasons), message: _, location: _) = parsedError {
-                XCTAssertEqual(reasons, [OmiseError.APIErrorCode.InvalidCardReason.invalidCardNumber, .invalidExpirationDate])
+                XCTAssertEqual(reasons, [.invalidCardNumber, .invalidExpirationDate])
             } else {
                 XCTFail("Parsing results with the wrong code")
             }
@@ -176,13 +176,14 @@ class InvalidCardAPIErrorParsingTestCase: XCTestCase {
             let decoder = JSONDecoder()
             let parsedError = try decoder.decode(OmiseError.self, from: Data(errorJSONString.utf8))
             if case .api(code: .invalidCard(let reasons), message: _, location: _) = parsedError {
-                XCTAssertEqual(reasons, [OmiseError.APIErrorCode.InvalidCardReason.invalidCardNumber, .invalidExpirationDate, .emptyCardHolderName])
+                XCTAssertEqual(reasons, [.invalidCardNumber, .invalidExpirationDate, .emptyCardHolderName])
             } else {
                 XCTFail("Parsing results with the wrong code")
             }
         }
         
         do {
+            // swiftlint:disable line_length
             let errorJSONString = """
                 {
                   "object": "error",
@@ -195,7 +196,7 @@ class InvalidCardAPIErrorParsingTestCase: XCTestCase {
             let decoder = JSONDecoder()
             let parsedError = try decoder.decode(OmiseError.self, from: Data(errorJSONString.utf8))
             if case .api(code: .invalidCard(let reasons), message: _, location: _) = parsedError {
-                XCTAssertEqual(reasons, [OmiseError.APIErrorCode.InvalidCardReason.invalidCardNumber, .invalidExpirationDate, .emptyCardHolderName])
+                XCTAssertEqual(reasons, [.invalidCardNumber, .invalidExpirationDate, .emptyCardHolderName])
             } else {
                 XCTFail("Parsing results with the wrong code")
             }

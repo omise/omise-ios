@@ -15,7 +15,9 @@ import UIKit
             if !(Calendar.validExpirationMonthRange ~= selectedMonth) {
                 self.selectedMonth = nil
             }
-            expirationMonthAccessibilityElement.accessibilityValue = self.selectedMonth.map { CardExpiryDateTextField.spellingOutDateFormatter.monthSymbols[$0 - 1] }
+            expirationMonthAccessibilityElement.accessibilityValue = self.selectedMonth.map {
+                CardExpiryDateTextField.spellingOutDateFormatter.monthSymbols[$0 - 1]
+            }
         }
     }
     @objc(selectedMonth) public var __selectedMonth: Int { // swiftlint:disable:this identifier_name
@@ -25,7 +27,9 @@ import UIKit
     /// Currently selected year, `nil` if no year has been selected.
     public private(set) var selectedYear: Int? = nil {
         didSet {
-            expirationYearAccessibilityElement.accessibilityValue = selectedYear.map { NumberFormatter.localizedString(from: NSNumber(value: $0), number: NumberFormatter.Style.spellOut) }
+            expirationYearAccessibilityElement.accessibilityValue = selectedYear.map {
+                NumberFormatter.localizedString(from: NSNumber(value: $0), number: NumberFormatter.Style.spellOut)
+            }
         }
     }
     @objc(selectedYear) public var __selectedYear: Int { // swiftlint:disable:this identifier_name
@@ -118,7 +122,12 @@ import UIKit
     override func textDidChange() {
         super.textDidChange()
         
-        let replacedText = self.text?.replacingOccurrences(of: "[^\\d/]", with: "", options: String.CompareOptions.regularExpression, range: nil)
+        let replacedText = self.text?.replacingOccurrences(
+            of: "[^\\d/]",
+            with: "",
+            options: String.CompareOptions.regularExpression,
+            range: nil
+        )
         guard let text = replacedText,
             !isDeletingDateSeparator else {
                 return
@@ -135,9 +144,11 @@ import UIKit
             if (text != expectedDisplayingExpiryMonthText && parsedExpiryYear == nil)  &&
                 (expiryMonth != 1 || expiryDateComponents[0].count == 2) {
                 let currentAttributes = defaultTextAttributes
-                let attributedText = NSMutableAttributedString(string: String(format: "%02d/", expiryMonth), attributes: Dictionary(uniqueKeysWithValues: self.defaultTextAttributes.map { ($0.key, $0.value) }))
+                let stringAttributes = Dictionary(uniqueKeysWithValues: self.defaultTextAttributes.map { ($0.key, $0.value) })
+                let attributedText = NSMutableAttributedString(string: String(format: "%02d/", expiryMonth), attributes: stringAttributes)
                 if let separatorTextColor = self.dateSeparatorTextColor {
-                    attributedText.addAttribute(.foregroundColor, value: separatorTextColor, range: NSRange(location: attributedText.length - 1, length: 1))
+                    let range = NSRange(location: attributedText.length - 1, length: 1)
+                    attributedText.addAttribute(.foregroundColor, value: separatorTextColor, range: range)
                 }
                 self.attributedText = attributedText
                 typingAttributes = currentAttributes
@@ -148,7 +159,8 @@ import UIKit
         }
         
         if text.count > 5 {
-            self.attributedText = self.attributedText?.attributedSubstring(from: NSRange(text.startIndex..<text.index(text.startIndex, offsetBy: 5), in: text))
+            let range = NSRange(text.startIndex..<text.index(text.startIndex, offsetBy: 5), in: text)
+            self.attributedText = self.attributedText?.attributedSubstring(from: range)
         }
         
         updateAccessibilityFrames()
@@ -168,7 +180,8 @@ import UIKit
         }
     }
     
-    static let monthStringRegularExpression = try! NSRegularExpression(pattern: "^([0-1]?\\d)", options: []) // swiftlint:disable:this force_try
+    // swiftlint:disable:next force_try
+    static let monthStringRegularExpression = try! NSRegularExpression(pattern: "^([0-1]?\\d)", options: [])
     
     public override func replace(_ range: UITextRange, withText text: String) {
         super.replace(range, withText: text)
@@ -219,8 +232,9 @@ import UIKit
             if separatorIndex != text.endIndex {
                 parsedSelectedYear = Int(text[text.index(after: separatorIndex)...])
             }
-        } else if let match = CardExpiryDateTextField.monthStringRegularExpression.firstMatch(in: text, options: [], range: NSRange(text.startIndex..., in: text)),
-            match.numberOfRanges == 2 {
+        } else if let match = CardExpiryDateTextField.monthStringRegularExpression
+                    .firstMatch(in: text, options: [], range: NSRange(text.startIndex..., in: text)),
+                  match.numberOfRanges == 2 {
             let monthStringNSRange = match.range(at: 1)
             guard let monthStringRange = Range(monthStringNSRange, in: text) else {
                 return
@@ -239,9 +253,11 @@ import UIKit
             }
         }
         
-        if let attributedText = self.attributedText.map(NSMutableAttributedString.init(attributedString:)), let separatorTextColor = self.dateSeparatorTextColor,
-            let dateSeparatorIndex = attributedText.string.firstIndex(of: "/") {
-            attributedText.addAttribute(.foregroundColor, value: separatorTextColor, range: NSRange(dateSeparatorIndex...dateSeparatorIndex, in: attributedText.string))
+        if let attributedText = self.attributedText.map(NSMutableAttributedString.init(attributedString:)),
+           let separatorTextColor = self.dateSeparatorTextColor,
+           let dateSeparatorIndex = attributedText.string.firstIndex(of: "/") {
+            let range = NSRange(dateSeparatorIndex...dateSeparatorIndex, in: attributedText.string)
+            attributedText.addAttribute(.foregroundColor, value: separatorTextColor, range: range)
             self.attributedText = attributedText
         }
     }
@@ -268,9 +284,16 @@ extension CardExpiryDateTextField {
             let yearRange = textRange(from: startOfYearRange, to: endOfDocument) {
             let monthRect = firstRect(for: monthRange)
             let yearRect = firstRect(for: yearRange)
-            expirationMonthFrameInTextfield = CGRect(x: monthRect.origin.x + bounds.minX, y: bounds.minY, width: monthRect.width, height: bounds.height)
-            expirationYearFrameInTextfield = CGRect(x: yearRect.origin.x + bounds.minX, y: bounds.minY, width: yearRect.width, height: bounds.height)
-        } else if let expiryDateTextFieldAttributedPlaceholder = attributedPlaceholder, expiryDateTextFieldAttributedPlaceholder.length >= 5 {
+            expirationMonthFrameInTextfield = CGRect(x: monthRect.origin.x + bounds.minX,
+                                                     y: bounds.minY,
+                                                     width: monthRect.width,
+                                                     height: bounds.height)
+            expirationYearFrameInTextfield = CGRect(x: yearRect.origin.x + bounds.minX,
+                                                    y: bounds.minY,
+                                                    width: yearRect.width,
+                                                    height: bounds.height)
+        } else if let expiryDateTextFieldAttributedPlaceholder = attributedPlaceholder,
+                  expiryDateTextFieldAttributedPlaceholder.length >= 5 {
             let mmSize = expiryDateTextFieldAttributedPlaceholder.attributedSubstring(from: NSRange(location: 0, length: 2)).size()
             let slashSize = expiryDateTextFieldAttributedPlaceholder.attributedSubstring(from: NSRange(location: 2, length: 1)).size()
             let yySize = expiryDateTextFieldAttributedPlaceholder.attributedSubstring(from: NSRange(location: 3, length: 2)).size()
@@ -317,9 +340,12 @@ extension CardExpiryDateTextField {
         public override func accessibilityIncrement() {
             switch component {
             case .month:
-                expiryDateTextField.selectedMonth = min(12, (expiryDateTextField.selectedMonth ?? Calendar.creditCardInformationCalendar.component(.month, from: Date())) + 1)
+                let selectedMonth = expiryDateTextField.selectedMonth
+                    ?? Calendar.creditCardInformationCalendar.component(.month, from: Date())
+                expiryDateTextField.selectedMonth = min(12, selectedMonth + 1)
             case .year:
-                expiryDateTextField.selectedYear = (expiryDateTextField.selectedYear ?? Calendar.creditCardInformationCalendar.component(.year, from: Date())) + 1
+                let selectedYear = expiryDateTextField.selectedYear ?? Calendar.creditCardInformationCalendar.component(.year, from: Date())
+                expiryDateTextField.selectedYear = selectedYear + 1
             }
             expiryDateTextField.updateText()
         }
@@ -327,9 +353,12 @@ extension CardExpiryDateTextField {
         public override func accessibilityDecrement() {
             switch component {
             case .month:
-                expiryDateTextField.selectedMonth = max(1, (expiryDateTextField.selectedMonth ?? Calendar.creditCardInformationCalendar.component(.month, from: Date())) - 1)
+                let selectedMonth = expiryDateTextField.selectedMonth
+                    ?? Calendar.creditCardInformationCalendar.component(.month, from: Date())
+                expiryDateTextField.selectedMonth = max(1, selectedMonth - 1)
             case .year:
-                expiryDateTextField.selectedYear = (expiryDateTextField.selectedYear ?? Calendar.creditCardInformationCalendar.component(.year, from: Date())) - 1
+                let selectedYear = expiryDateTextField.selectedYear ?? Calendar.creditCardInformationCalendar.component(.year, from: Date())
+                expiryDateTextField.selectedYear = selectedYear - 1
             }
             expiryDateTextField.updateText()
         }
@@ -340,9 +369,11 @@ extension CardExpiryDateTextField {
         let year = selectedYear ?? Calendar.creditCardInformationCalendar.component(.year, from: Date())
         
         text = String(format: "%02d/%02d", month, year % 100)
-        if let attributedText = self.attributedText.map(NSMutableAttributedString.init(attributedString:)), let separatorTextColor = self.dateSeparatorTextColor,
-            let dateSeparatorIndex = attributedText.string.firstIndex(of: "/") {
-            attributedText.addAttribute(.foregroundColor, value: separatorTextColor, range: NSRange(dateSeparatorIndex...dateSeparatorIndex, in: attributedText.string))
+        if let attributedText = self.attributedText.map(NSMutableAttributedString.init(attributedString:)),
+           let separatorTextColor = self.dateSeparatorTextColor,
+           let dateSeparatorIndex = attributedText.string.firstIndex(of: "/") {
+            let range = NSRange(dateSeparatorIndex...dateSeparatorIndex, in: attributedText.string)
+            attributedText.addAttribute(.foregroundColor, value: separatorTextColor, range: range)
             self.attributedText = attributedText
         }
         

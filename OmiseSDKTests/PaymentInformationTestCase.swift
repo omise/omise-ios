@@ -14,7 +14,10 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
         
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.installment(PaymentInformation.Installment(brand: PaymentInformation.Installment.Brand.bay, numberOfTerms: 6)), amount: 10_000_00, currency: .thb)
+            let installment = PaymentInformation.Installment(brand: .bay, numberOfTerms: 6)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
+                                                         amount: 10_000_00,
+                                                         currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             
             XCTAssertEqual(
@@ -29,7 +32,10 @@ class PaymentInformationTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.installment(PaymentInformation.Installment(brand: PaymentInformation.Installment.Brand.firstChoice, numberOfTerms: 6)), amount: 100_00, currency: .thb)
+            let installment = PaymentInformation.Installment(brand: .firstChoice, numberOfTerms: 6)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
+                                                         amount: 100_00,
+                                                         currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             
             XCTAssertEqual(
@@ -44,7 +50,10 @@ class PaymentInformationTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.installment(PaymentInformation.Installment(brand: PaymentInformation.Installment.Brand.bbl, numberOfTerms: 6)), amount: 1_000_00, currency: .thb)
+            let installment = PaymentInformation.Installment(brand: .bbl, numberOfTerms: 6)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
+                                                         amount: 1_000_00,
+                                                         currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             
             XCTAssertEqual(
@@ -59,7 +68,10 @@ class PaymentInformationTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.installment(PaymentInformation.Installment(brand: PaymentInformation.Installment.Brand.ktc, numberOfTerms: 6)), amount: 10_00, currency: .thb)
+            let installment = PaymentInformation.Installment(brand: .ktc, numberOfTerms: 6)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
+                                                         amount: 10_00,
+                                                         currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             
             XCTAssertEqual(
@@ -74,7 +86,10 @@ class PaymentInformationTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.installment(PaymentInformation.Installment(brand: PaymentInformation.Installment.Brand.kBank, numberOfTerms: 6)), amount: 10_00, currency: .thb)
+            let installment = PaymentInformation.Installment(brand: .kBank, numberOfTerms: 6)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
+                                                         amount: 10_00,
+                                                         currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             
             XCTAssertEqual(
@@ -89,7 +104,10 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.installment(PaymentInformation.Installment(brand: PaymentInformation.Installment.Brand.scb, numberOfTerms: 9)), amount: 30_00, currency: .thb)
+            let installment = PaymentInformation.Installment(brand: .scb, numberOfTerms: 9)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
+                                                         amount: 30_00,
+                                                         currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             
             XCTAssertEqual(
@@ -108,7 +126,9 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
         
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.internetBanking(.bay), amount: 10_000_00, currency: .thb)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .internetBanking(.bay),
+                                                         amount: 10_000_00,
+                                                         currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             
             XCTAssertEqual(
@@ -122,7 +142,9 @@ class PaymentInformationTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.internetBanking(.ktb), amount: 100_00, currency: .thb)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .internetBanking(.ktb),
+                                                         amount: 100_00,
+                                                         currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             
             XCTAssertEqual(
@@ -136,7 +158,9 @@ class PaymentInformationTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.internetBanking(.scb), amount: 1_000_00, currency: .thb)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .internetBanking(.scb),
+                                                         amount: 1_000_00,
+                                                         currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             
             XCTAssertEqual(
@@ -150,7 +174,9 @@ class PaymentInformationTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.internetBanking(.bbl), amount: 10_00, currency: .thb)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .internetBanking(.bbl),
+                                                         amount: 10_00,
+                                                         currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             
             XCTAssertEqual(
@@ -168,7 +194,9 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.mobileBanking(.scb), amount: 10_000_00, currency: .thb)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .mobileBanking(.scb),
+                                                         amount: 10_000_00,
+                                                         currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
 
             XCTAssertEqual(
@@ -186,8 +214,14 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
         
         do {
-            let storeInformation = PaymentInformation.Barcode.AlipayBarcode.StoreInformation(storeID: "store_id_1", storeName: "Store Name")
-            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.barcode(.alipay(PaymentInformation.Barcode.AlipayBarcode(barcode: "barcode", storeInformation: storeInformation, terminalID: "Terminal 1"))), amount: 10_000_00, currency: .thb)
+            typealias AlipayBarcode = PaymentInformation.Barcode.AlipayBarcode
+            let storeInformation = AlipayBarcode.StoreInformation(storeID: "store_id_1", storeName: "Store Name")
+            let barcode = AlipayBarcode(barcode: "barcode",
+                                        storeInformation: storeInformation,
+                                        terminalID: "Terminal 1")
+            let sourceParameter = Source.CreateParameter(paymentInformation: .barcode(.alipay(barcode)),
+                                                         amount: 10_000_00,
+                                                         currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             XCTAssertEqual(
                 """
@@ -204,7 +238,10 @@ class PaymentInformationTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.barcode(.alipay(PaymentInformation.Barcode.AlipayBarcode(barcode: "barcode", terminalID: "Terminal 1"))), amount: 10_000_00, currency: .thb)
+            let barcode = PaymentInformation.Barcode.AlipayBarcode(barcode: "barcode", terminalID: "Terminal 1")
+            let sourceParameter = Source.CreateParameter(paymentInformation: .barcode(.alipay(barcode)),
+                                                         amount: 10_000_00,
+                                                         currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             XCTAssertEqual(
                 """
@@ -219,7 +256,10 @@ class PaymentInformationTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.barcode(.alipay(PaymentInformation.Barcode.AlipayBarcode(barcode: "barcode", terminalID: nil))), amount: 10_000_00, currency: .thb)
+            let barcode = PaymentInformation.Barcode.AlipayBarcode(barcode: "barcode", terminalID: nil)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .barcode(.alipay(barcode)),
+                                                         amount: 10_000_00,
+                                                         currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             XCTAssertEqual(
                 """
@@ -237,8 +277,10 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
         
         do {
-            let paymentInformation = PaymentInformation.truemoney(.init(phoneNumber: "0123456789"))
-            let sourceParameter = Source.CreateParameter(paymentInformation: paymentInformation, amount: 10_000_00, currency: .thb)
+            let trueMoney = PaymentInformation.TrueMoney(phoneNumber: "0123456789")
+            let sourceParameter = Source.CreateParameter(paymentInformation: .truemoney(trueMoney),
+                                                         amount: 10_000_00,
+                                                         currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             XCTAssertEqual(
                 """
@@ -256,7 +298,9 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
         
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: .points(.citiPoints), amount: 10_000_00, currency: .thb)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .points(.citiPoints),
+                                                         amount: 10_000_00,
+                                                         currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             XCTAssertEqual(
                 """
@@ -273,8 +317,10 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let paymentInformation = PaymentInformation.fpx(.init(bank: "uob", email: "support@omise.co"))
-            let sourceParameter = Source.CreateParameter(paymentInformation: paymentInformation, amount: 10_000_00, currency: .myr)
+            let fpx = PaymentInformation.FPX(bank: "uob", email: "support@omise.co")
+            let sourceParameter = Source.CreateParameter(paymentInformation: .fpx(fpx),
+                                                         amount: 10_000_00,
+                                                         currency: .myr)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             XCTAssertEqual(
                 """
@@ -293,7 +339,9 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
         
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.alipay, amount: 300_00, currency: .thb)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .alipay,
+                                                         amount: 300_00,
+                                                         currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             
             XCTAssertEqual(
@@ -307,7 +355,9 @@ class PaymentInformationTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.billPayment(.tescoLotus), amount: 123_45, currency: .thb)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .billPayment(.tescoLotus),
+                                                         amount: 123_45,
+                                                         currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             
             XCTAssertEqual(

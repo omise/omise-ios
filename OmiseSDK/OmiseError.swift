@@ -1,4 +1,4 @@
-// swiftlint:disable file_length
+// swiftlint:disable file_length line_length
 
 import Foundation
 
@@ -805,7 +805,9 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
     
     // swiftlint:disable function_body_length
     static func parseBadRequestReasonsFromMessage(_ message: String, currency: Currency?) throws -> [OmiseError.APIErrorCode.BadRequestReason] {
-        let reasonMessages = message.components(separatedBy: ", and ").flatMap { $0.components(separatedBy: ", ") }.flatMap { $0.components(separatedBy: " and ") }
+        let reasonMessages = message.components(separatedBy: ", and ")
+            .flatMap { $0.components(separatedBy: ", ") }
+            .flatMap { $0.components(separatedBy: " and ") }
         let parsedReasons = Set(try reasonMessages.map {
             try OmiseError.APIErrorCode.BadRequestReason(message: $0, currency: currency)
         })

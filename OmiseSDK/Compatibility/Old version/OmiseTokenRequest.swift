@@ -1,3 +1,4 @@
+// swiftlint:disable line_length
 import Foundation
 
 @available(*, deprecated, message: "Use the new `Token` data type instead. This class will be removed in the future released", renamed: "Token")

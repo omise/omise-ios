@@ -15,7 +15,10 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
 
     override var showingValues: [Capability.Backend.Bank] {
         didSet {
-            os_log("FPX Bank Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map { $0.name }.joined(separator: ", "))
+            os_log("FPX Bank Chooser: Showing options - %{private}@",
+                   log: uiLogObject,
+                   type: .info,
+                   showingValues.map { $0.name }.joined(separator: ", "))
         }
     }
 

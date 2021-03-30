@@ -2,12 +2,17 @@ import UIKit
 import os
 
 @objc(OMSMobileBankingSourceChooserViewController)
-class MobileBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.MobileBanking>, PaymentSourceChooser, PaymentChooserUI {
+class MobileBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.MobileBanking>,
+                                                PaymentSourceChooser,
+                                                PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
 
     override var showingValues: [PaymentInformation.MobileBanking] {
         didSet {
-            os_log("Mobile Banking Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map { $0.description }.joined(separator: ", "))
+            os_log("Mobile Banking Chooser: Showing options - %{private}@",
+                   log: uiLogObject,
+                   type: .info,
+                   showingValues.map { $0.description }.joined(separator: ", "))
         }
     }
 

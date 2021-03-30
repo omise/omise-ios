@@ -244,7 +244,8 @@ extension KeyedEncodingContainerProtocol where Key == JSONCodingKeys {
             case Optional<Any>.none: // swiftlint:disable:this syntactic_sugar
                 try encodeNil(forKey: key)
             default:
-                throw EncodingError.invalidValue(value, EncodingError.Context(codingPath: codingPath + [key], debugDescription: "Invalid JSON value"))
+                let context = EncodingError.Context(codingPath: codingPath + [key], debugDescription: "Invalid JSON value")
+                throw EncodingError.invalidValue(value, context)
             }
         }
     }
@@ -294,7 +295,8 @@ extension UnkeyedEncodingContainer {
                 try encodeNil()
             default:
                 let keys = JSONCodingKeys(intValue: index).map({ [ $0 ] }) ?? []
-                throw EncodingError.invalidValue(value, EncodingError.Context(codingPath: codingPath + keys, debugDescription: "Invalid JSON value"))
+                let context = EncodingError.Context(codingPath: codingPath + keys, debugDescription: "Invalid JSON value")
+                throw EncodingError.invalidValue(value, context)
             }
         }
     }
@@ -335,6 +337,7 @@ extension NumberFormatter {
 }
 
 extension OmiseError {
+    // swiftlint:disable line_length
     var bannerErrorDescription: String {
         switch self {
         case .api(code: let code, message: _, location: _):

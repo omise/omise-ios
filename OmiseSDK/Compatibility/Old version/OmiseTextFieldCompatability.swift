@@ -1,4 +1,4 @@
-// swiftlint:disable type_name
+// swiftlint:disable type_name line_length
 import Foundation
 
 @available(*, deprecated, message: "Use the new `OMSOmiseTextField` data type instead. This class will be removed in the future released", renamed: "OmiseTextField")

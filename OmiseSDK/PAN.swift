@@ -19,7 +19,9 @@ public struct PAN {
     /// This helps prevent the unintentional leaked PAN number in the log or system
     public var number: String {
         // NNNN-NNXX-XXXX-NNNN
-        let replacingRange = (pan.index(pan.startIndex, offsetBy: max(0, pan.count - 10))..<pan.index(pan.endIndex, offsetBy: max(-pan.count, -4)))
+        let startIndex = pan.index(pan.startIndex, offsetBy: max(0, pan.count - 10))
+        let endEndex = pan.index(pan.endIndex, offsetBy: max(-pan.count, -4))
+        let replacingRange = startIndex..<endEndex
         return pan.replacingOccurrences(
             of: "[0-9]",
             with: "X",

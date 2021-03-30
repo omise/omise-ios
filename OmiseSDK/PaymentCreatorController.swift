@@ -147,7 +147,9 @@ public class PaymentCreatorController: UINavigationController {
         paymentDelegate: PaymentCreatorControllerDelegate?
     ) -> PaymentCreatorController {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
-        let paymentCreatorController = storyboard.instantiateViewController(withIdentifier: "PaymentCreatorController") as! PaymentCreatorController // swiftlint:disable:this force_cast
+        let paymentCreatorController = storyboard.instantiateViewController(
+            withIdentifier: "PaymentCreatorController"
+        ) as! PaymentCreatorController // swiftlint:disable:this force_cast
         paymentCreatorController.publicKey = publicKey
         paymentCreatorController.paymentAmount = amount
         paymentCreatorController.paymentCurrency = currency
@@ -182,7 +184,9 @@ public class PaymentCreatorController: UINavigationController {
         let viewController = storyboard.instantiateViewController(withIdentifier: "PaymentChooserController")
         
         guard let paymentChooserViewController = viewController as? PaymentChooserViewController else {
-            preconditionFailure("This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller")
+            preconditionFailure(
+                "This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller"
+            )
         }
         
         super.init(rootViewController: paymentChooserViewController)
@@ -193,7 +197,9 @@ public class PaymentCreatorController: UINavigationController {
     @available(iOS, unavailable)
     public override init(rootViewController: UIViewController) {
         guard let rootViewController = rootViewController as? PaymentChooserViewController else {
-            preconditionFailure("This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller")
+            preconditionFailure(
+                "This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller"
+            )
         }
         super.init(rootViewController: rootViewController)
 
@@ -204,7 +210,9 @@ public class PaymentCreatorController: UINavigationController {
         super.init(coder: aDecoder)
         
         guard let rootViewController = topViewController as? PaymentChooserViewController else {
-            preconditionFailure("This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller")
+            preconditionFailure(
+                "This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller"
+            )
             return nil
         }
         initializeWithPaymentChooserViewController(rootViewController)
@@ -214,7 +222,9 @@ public class PaymentCreatorController: UINavigationController {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
         guard let rootViewController = topViewController as? PaymentChooserViewController else {
-            preconditionFailure("This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller")
+            preconditionFailure(
+                "This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller"
+            )
         }
         initializeWithPaymentChooserViewController(rootViewController)
     }
@@ -223,7 +233,9 @@ public class PaymentCreatorController: UINavigationController {
         super.init(navigationBarClass: navigationBarClass, toolbarClass: toolbarClass)
         
         guard let rootViewController = topViewController as? PaymentChooserViewController else {
-            preconditionFailure("This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller")
+            preconditionFailure(
+                "This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller"
+            )
         }
         initializeWithPaymentChooserViewController(rootViewController)
     }
@@ -231,7 +243,9 @@ public class PaymentCreatorController: UINavigationController {
     public override var viewControllers: [UIViewController] {
         willSet {
             if !(viewControllers.first is PaymentChooserViewController) {
-                preconditionFailure("This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller")
+                preconditionFailure(
+                    "This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller"
+                )
             }
         }
     }
@@ -258,7 +272,8 @@ public class PaymentCreatorController: UINavigationController {
         noticeViewHeightConstraint = displayingNoticeView.heightAnchor.constraint(equalToConstant: 0)
         noticeViewHeightConstraint.isActive = true
         
-        let dismissErrorBannerTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissErrorMessageBanner(_:)))
+        let dismissErrorBannerTapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                                            action: #selector(self.dismissErrorMessageBanner(_:)))
         displayingNoticeView.addGestureRecognizer(dismissErrorBannerTapGestureRecognizer)
     }
     
@@ -408,7 +423,10 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
     }
     
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreateToken token: Token) {
-        os_log("Credit Card Form in Payment Createor - Request succeed %{private}@, trying to notify the delegate", log: uiLogObject, type: .default, token.id)
+        os_log("Credit Card Form in Payment Createor - Request succeed %{private}@, trying to notify the delegate",
+               log: uiLogObject,
+               type: .default,
+               token.id)
         
         if let paymentDelegate = self.paymentDelegate {
             paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.token(token))
@@ -418,7 +436,10 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
     }
     
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreatedSource source: Source) {
-        os_log("Payment Creator Create Source Request succeed %{private}@, trying to notify the delegate", log: uiLogObject, type: .default, source.id)
+        os_log("Payment Creator Create Source Request succeed %{private}@, trying to notify the delegate",
+               log: uiLogObject,
+               type: .default,
+               source.id)
         
         if let paymentDelegate = self.paymentDelegate {
             paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.source(source))
@@ -433,7 +454,10 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
     
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didFailWithError error: Error) {
         if !handleErrors {
-            os_log("Payment Creator Request failed %{private}@, automatically error handling turned off. Trying to notify the delegate", log: uiLogObject, type: .info, error.localizedDescription)
+            os_log("Payment Creator Request failed %{private}@, automatically error handling turned off. Trying to notify the delegate",
+                   log: uiLogObject,
+                   type: .info,
+                   error.localizedDescription)
             if let paymentDelegate = self.paymentDelegate {
                 paymentDelegate.paymentCreatorController(self, didFailWithError: error)
                 os_log("Payment Creator error handling delegate notified", log: uiLogObject, type: .default)
@@ -460,7 +484,10 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
                              sender: self)
         }
         
-        os_log("Payment Creator Request failed %{private}@, automatically error handling turned on.", log: uiLogObject, type: .default, error.localizedDescription)
+        os_log("Payment Creator Request failed %{private}@, automatically error handling turned on.",
+               log: uiLogObject,
+               type: .default,
+               error.localizedDescription)
     }
     
     func paymentCreatorFlowSessionDidCancel(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession) {
@@ -471,7 +498,9 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
         } else if let paymentDidCancelDelegateMethod = self.__paymentDelegate?.paymentCreatorControllerDidCancel {
             paymentDidCancelDelegateMethod(self)
         } else {
-            os_log("Payment Creator dismissal requested but there is no delegate to ask. Ignore the request", log: uiLogObject, type: .default)
+            os_log("Payment Creator dismissal requested but there is no delegate to ask. Ignore the request",
+                   log: uiLogObject,
+                   type: .default)
         }
     }
 }

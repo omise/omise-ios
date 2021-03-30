@@ -30,7 +30,8 @@ public typealias Omise3DSViewControllerDelegate = AuthorizingPaymentViewControll
 @available(*, deprecated, renamed: "AuthorizingPaymentViewController")
 public typealias OmiseAuthorizingPaymentViewController = AuthorizingPaymentViewController
 @available(*, deprecated, renamed: "AuthorizingPaymentViewControllerDelegate")
-public typealias OmiseAuthorizingPaymentViewControllerDelegate = AuthorizingPaymentViewControllerDelegate // swiftlint:disable:this type_name
+// swiftlint:disable:next type_name
+public typealias OmiseAuthorizingPaymentViewControllerDelegate = AuthorizingPaymentViewControllerDelegate
 
 /*:
  Drop-in authorizing payment handler view controller that automatically display the authorizing payment verification form
@@ -76,8 +77,11 @@ public class AuthorizingPaymentViewController: UIViewController {
     @objc(authorizingPaymentViewControllerNavigationWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
     public static func makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> UINavigationController {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
-        let navigationController = storyboard.instantiateViewController(withIdentifier: "DefaultAuthorizingPaymentViewControllerWithNavigation") as! UINavigationController // swiftlint:disable:this force_cast
-        let viewController = navigationController.topViewController as! AuthorizingPaymentViewController // swiftlint:disable:this force_cast
+        let navigationController = storyboard.instantiateViewController(
+            withIdentifier: "DefaultAuthorizingPaymentViewControllerWithNavigation"
+        ) as! UINavigationController // swiftlint:disable:this force_cast
+        // swiftlint:disable:next force_cast
+        let viewController = navigationController.topViewController as! AuthorizingPaymentViewController
         viewController.authorizedURL = authorizedURL
         viewController.expectedReturnURLPatterns = expectedReturnURLPatterns
         viewController.delegate = delegate
@@ -86,12 +90,16 @@ public class AuthorizingPaymentViewController: UIViewController {
     }
     
     @available(*, deprecated,
-    message: "Please use the new method that confrom to Objective-C convention +[AuthorizingPaymentViewController authorizingPaymentViewControllerNavigationWithAuthorizedURL:expectedReturnURLPatterns:delegate:] as of this method will be removed in the future release.",
+    message: "Please use the new method that confrom to Objective-C convention +[AuthorizingPaymentViewController authorizingPaymentViewControllerNavigationWithAuthorizedURL:expectedReturnURLPatterns:delegate:] as of this method will be removed in the future release.", // swiftlint:disable:this line_length
     renamed: "makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(_:expectedReturnURLPatterns:delegate:)")
     @objc(makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
     // swiftlint:disable:next identifier_name
     public static func __makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> UINavigationController {
-        return AuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(authorizedURL, expectedReturnURLPatterns: expectedReturnURLPatterns, delegate: delegate)
+        return AuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(
+            authorizedURL,
+            expectedReturnURLPatterns: expectedReturnURLPatterns,
+            delegate: delegate
+        )
     }
     
     /// A factory method for creating a authorizing payment view controller comes in UINavigationController stack.
@@ -104,7 +112,9 @@ public class AuthorizingPaymentViewController: UIViewController {
     @objc(authorizingPaymentViewControllerWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
     public static func makeAuthorizingPaymentViewControllerWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> AuthorizingPaymentViewController {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "DefaultAuthorizingPaymentViewController") as! AuthorizingPaymentViewController // swiftlint:disable:this force_cast
+        let viewController = storyboard.instantiateViewController(
+            withIdentifier: "DefaultAuthorizingPaymentViewController"
+        ) as! AuthorizingPaymentViewController // swiftlint:disable:this force_cast
         viewController.authorizedURL = authorizedURL
         viewController.expectedReturnURLPatterns = expectedReturnURLPatterns
         viewController.delegate = delegate
@@ -113,12 +123,16 @@ public class AuthorizingPaymentViewController: UIViewController {
     }
     
     @available(*, deprecated,
-    message: "Please use the new method that confrom to Objective-C convention +[AuthorizingPaymentViewController authorizingPaymentViewControllernWithAuthorizedURL:expectedReturnURLPatterns:delegate:] as of this method will be removed in the future release.",
+    message: "Please use the new method that confrom to Objective-C convention +[AuthorizingPaymentViewController authorizingPaymentViewControllernWithAuthorizedURL:expectedReturnURLPatterns:delegate:] as of this method will be removed in the future release.",  // swiftlint:disable:this line_length
     renamed: "makeAuthorizingPaymentViewControllerWithAuthorizedURL(_:expectedReturnURLPatterns:delegate:)")
     @objc(makeAuthorizingPaymentViewControllerWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
     // swiftlint:disable:next identifier_name
     public static func __makeAuthorizingPaymentViewControllerWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> AuthorizingPaymentViewController {
-        return AuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerWithAuthorizedURL(authorizedURL, expectedReturnURLPatterns: expectedReturnURLPatterns, delegate: delegate)
+        return AuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerWithAuthorizedURL(
+            authorizedURL,
+            expectedReturnURLPatterns: expectedReturnURLPatterns,
+            delegate: delegate
+        )
     }
     
     public override func loadView() {
@@ -168,7 +182,9 @@ public class AuthorizingPaymentViewController: UIViewController {
         }
         
         return expectedReturnURLPatterns.contains { expectedURLComponents -> Bool in
-            return expectedURLComponents.scheme == components.scheme && expectedURLComponents.host == components.host && components.path.hasPrefix(expectedURLComponents.path)
+            return expectedURLComponents.scheme == components.scheme
+                && expectedURLComponents.host == components.host
+                && components.path.hasPrefix(expectedURLComponents.path)
         }
     }
     
@@ -177,14 +193,23 @@ public class AuthorizingPaymentViewController: UIViewController {
 extension AuthorizingPaymentViewController: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         if let url = navigationAction.request.url, verifyPaymentURL(url) {
-            os_log("Redirected to expected %{private}@ URL, trying to notify the delegate", log: uiLogObject, type: .info, url.absoluteString)
+            os_log("Redirected to expected %{private}@ URL, trying to notify the delegate",
+                   log: uiLogObject,
+                   type: .info,
+                   url.absoluteString)
             decisionHandler(.cancel)
             delegate?.authorizingPaymentViewController(self, didCompleteAuthorizingPaymentWithRedirectedURL: url)
             if delegate == nil {
-                os_log("Redirected to expected %{private}@ URL but no delegate to be notified", log: uiLogObject, type: .default, url.absoluteString)
+                os_log("Redirected to expected %{private}@ URL but no delegate to be notified",
+                       log: uiLogObject,
+                       type: .default,
+                       url.absoluteString)
             }
         } else {
-            os_log("Redirected to non-expected %{private}@ URL", log: uiLogObject, type: .debug, navigationAction.request.url?.absoluteString ?? "<empty>")
+            os_log("Redirected to non-expected %{private}@ URL",
+                   log: uiLogObject,
+                   type: .debug,
+                   navigationAction.request.url?.absoluteString ?? "<empty>")
             decisionHandler(.allow)
         }
     }

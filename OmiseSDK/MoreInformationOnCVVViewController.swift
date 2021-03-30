@@ -184,7 +184,12 @@ class OverlayPanelPresentationController: UIPresentationController {
         presentedLayer.shadowRadius = 4
         presentedLayer.shadowOpacity = 1.0
         if #available(iOS 13, *) {
-            presentedLayer.shadowColor = traitCollection.userInterfaceStyle == .dark ? UIColor.black.cgColor : UIColor(red: 0.27, green: 0.29, blue: 0.32, alpha: 0.25).cgColor
+            switch traitCollection.userInterfaceStyle {
+            case .dark:
+                presentedLayer.shadowColor = UIColor.black.cgColor
+            default:
+                presentedLayer.shadowColor = UIColor(red: 0.27, green: 0.29, blue: 0.32, alpha: 0.25).cgColor
+            }
         } else {
             presentedLayer.shadowColor = UIColor(red: 0.27, green: 0.29, blue: 0.32, alpha: 0.25).cgColor
         }
@@ -227,7 +232,12 @@ class OverlayPanelPresentationController: UIPresentationController {
         super.traitCollectionDidChange(previousTraitCollection)
         
         if #available(iOS 13, *), let presentedView = self.presentedView {
-            presentedView.layer.shadowColor = traitCollection.userInterfaceStyle == .dark ? UIColor.black.cgColor : UIColor(red: 0.27, green: 0.29, blue: 0.32, alpha: 0.25).cgColor
+            switch traitCollection.userInterfaceStyle {
+            case .dark:
+                presentedView.layer.shadowColor = UIColor.black.cgColor
+            default:
+                presentedView.layer.shadowColor = UIColor(red: 0.27, green: 0.29, blue: 0.32, alpha: 0.25).cgColor
+            }
         }
     }
     

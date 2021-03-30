@@ -28,7 +28,11 @@ internal class PaymentCreatorFlowSession {
             waringMessageTitle = "Missing public key information."
             waringMessageMessage = "Please set the public key before request token or source."
         } else if self.paymentAmount == nil || self.paymentCurrency == nil {
-            os_log("Missing payment information - %{private}d %{private}@", log: uiLogObject, type: .error, self.paymentAmount ?? 0, self.paymentCurrency?.code ?? "-")
+            os_log("Missing payment information - %{private}d %{private}@",
+                   log: uiLogObject,
+                   type: .error,
+                   self.paymentAmount ?? 0,
+                   self.paymentCurrency?.code ?? "-")
             waringMessageTitle = "Missing payment information."
             waringMessageMessage = "Please set both of the payment information (amount and currency) before request source"
         } else {
@@ -110,14 +114,20 @@ protocol PaymentFormUIController: AnyObject {
 
 extension UIViewController {
     @objc func displayErrorWith(title: String, message: String?, animated: Bool, sender: Any?) {
-        let targetController = targetViewController(forAction: #selector(UIViewController.displayErrorWith(title:message:animated:sender:)), sender: sender)
+        let targetController = targetViewController(
+            forAction: #selector(UIViewController.displayErrorWith(title:message:animated:sender:)),
+            sender: sender
+        )
         if let targetController = targetController {
             targetController.displayErrorWith(title: title, message: message, animated: animated, sender: sender)
         }
     }
     
     @objc func dismissErrorMessage(animated: Bool, sender: Any?) {
-        let targetController = self.targetViewController(forAction: #selector(UIViewController.dismissErrorMessage(animated:sender:)), sender: sender)
+        let targetController = self.targetViewController(
+            forAction: #selector(UIViewController.dismissErrorMessage(animated:sender:)),
+            sender: sender
+        )
         if let targetController = targetController {
             targetController.dismissErrorMessage(animated: animated, sender: sender)
         }

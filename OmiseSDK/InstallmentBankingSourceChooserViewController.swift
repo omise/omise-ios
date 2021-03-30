@@ -2,12 +2,18 @@ import UIKit
 import os
 
 @objc(OMSInstallmentBankingSourceChooserViewController)
-class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>, PaymentSourceChooser, PaymentChooserUI { // swiftlint:disable:this type_name
+// swiftlint:disable:next type_name
+class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>,
+                                                     PaymentSourceChooser,
+                                                     PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
     
     override var showingValues: [PaymentInformation.Installment.Brand] {
         didSet {
-            os_log("Installment Brand Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map { $0.description }.joined(separator: ", "))
+            os_log("Installment Brand Chooser: Showing options - %{private}@",
+                   log: uiLogObject,
+                   type: .info,
+                   showingValues.map { $0.description }.joined(separator: ", "))
         }
     }
     

@@ -103,8 +103,11 @@ extension PaymentChooserOption {
     }
 }
 
+// swiftlint:disable type_body_length
 @objc(OMSPaymentChooserViewController)
-class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceChooser, PaymentChooserUI {
+class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>,
+                                    PaymentSourceChooser,
+                                    PaymentChooserUI {
     var capability: Capability?
     var flowSession: PaymentCreatorFlowSession?
     
@@ -370,7 +373,10 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         
         showingValues = paymentMethodsToShow
         
-        os_log("Payment Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map { $0.description }.joined(separator: ", "))
+        os_log("Payment Chooser: Showing options - %{private}@",
+               log: uiLogObject,
+               type: .info,
+               showingValues.map { $0.description }.joined(separator: ", "))
     }
     
     @IBAction private func requestToClose(_ sender: Any) {

@@ -421,7 +421,10 @@ extension __SourcePaymentInformation {
             return __SourcePaymentInformation.alipayPayment
             
         case .barcode(PaymentInformation.Barcode.alipay(let alipayInformation)):
-            return __SourceAlipayBarcodePayment(barcode: alipayInformation.barcode, storeID: alipayInformation.storeID, storeName: alipayInformation.storeName, terminalID: alipayInformation.terminalID)
+            return __SourceAlipayBarcodePayment(barcode: alipayInformation.barcode,
+                                                storeID: alipayInformation.storeID,
+                                                storeName: alipayInformation.storeName,
+                                                terminalID: alipayInformation.terminalID)
         case .barcode(PaymentInformation.Barcode.other(let type, parameters: let parameters)):
             return __SourceCustomBarcodePayment(customType: type, parameters: parameters)
             

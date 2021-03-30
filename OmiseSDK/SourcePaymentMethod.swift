@@ -443,7 +443,11 @@ extension PaymentInformation.InternetBanking: CaseIterable, CustomStringConverti
         
         guard type.hasPrefix(PaymentInformation.InternetBanking.paymentMethodTypePrefix),
             let typePrefixRange = type.range(of: PaymentInformation.InternetBanking.paymentMethodTypePrefix) else {
-                throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Invalid internet banking source type value")
+                throw DecodingError.dataCorruptedError(
+                    forKey: .type,
+                    in: container,
+                    debugDescription: "Invalid internet banking source type value"
+                )
         }
         
         switch type[typePrefixRange.upperBound...] {
@@ -497,7 +501,11 @@ extension PaymentInformation.Installment {
         
         guard type.hasPrefix(PaymentInformation.Installment.paymentMethodTypePrefix),
             let typePrefixRange = type.range(of: PaymentInformation.Installment.paymentMethodTypePrefix) else {
-                throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Invalid installments source type value")
+                throw DecodingError.dataCorruptedError(
+                    forKey: .type,
+                    in: container,
+                    debugDescription: "Invalid installments source type value"
+                )
         }
         
         let brand: Brand
@@ -592,7 +600,11 @@ extension PaymentInformation.BillPayment {
         
         guard type.hasPrefix(PaymentInformation.BillPayment.paymentMethodTypePrefix),
             let typePrefixRange = type.range(of: PaymentInformation.BillPayment.paymentMethodTypePrefix) else {
-                throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Invalid bill payment source type value")
+                throw DecodingError.dataCorruptedError(
+                    forKey: .type,
+                    in: container,
+                    debugDescription: "Invalid bill payment source type value"
+                )
         }
         
         switch type[typePrefixRange.upperBound...] {
@@ -677,9 +689,17 @@ extension PaymentInformation.Barcode {
             case (nil, nil):
                 storeInformation = nil
             case (nil, .some):
-                throw DecodingError.keyNotFound(CodingKeys.storeID, DecodingError.Context(codingPath: container.codingPath, debugDescription: "Alipay Barcode store name is present but store id informaiton is missing"))
+                let context = DecodingError.Context(
+                    codingPath: container.codingPath,
+                    debugDescription: "Alipay Barcode store name is present but store id informaiton is missing"
+                )
+                throw DecodingError.keyNotFound(CodingKeys.storeID, context)
             case (.some, nil):
-                throw DecodingError.keyNotFound(CodingKeys.storeName, DecodingError.Context(codingPath: container.codingPath, debugDescription: "Alipay Barcode store id is present but store name informaiton is missing"))
+                let context = DecodingError.Context(
+                    codingPath: container.codingPath,
+                    debugDescription: "Alipay Barcode store id is present but store name informaiton is missing"
+                )
+                throw DecodingError.keyNotFound(CodingKeys.storeName, context)
             }
             
             self.init(barcode: barcode, storeInformation: storeInformation, terminalID: terminalID)
@@ -763,7 +783,11 @@ extension PaymentInformation.Points {
         
         guard type.hasPrefix(PaymentInformation.Points.paymentMethodTypePrefix),
             let typePrefixRange = type.range(of: PaymentInformation.Points.paymentMethodTypePrefix) else {
-                throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Invalid points payment source type value")
+                throw DecodingError.dataCorruptedError(
+                    forKey: .type,
+                    in: container,
+                    debugDescription: "Invalid points payment source type value"
+                )
         }
         
         switch type[typePrefixRange.upperBound...] {
@@ -812,7 +836,11 @@ extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertibl
 
         guard type.hasPrefix(PaymentInformation.MobileBanking.paymentMethodTypePrefix),
             let typePrefixRange = type.range(of: PaymentInformation.MobileBanking.paymentMethodTypePrefix) else {
-                throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Invalid mobile banking source type value")
+                throw DecodingError.dataCorruptedError(
+                    forKey: .type,
+                    in: container,
+                    debugDescription: "Invalid mobile banking source type value"
+                )
         }
 
         switch type[typePrefixRange.upperBound...] {

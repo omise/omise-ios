@@ -49,7 +49,11 @@ extension CheckoutViewController: AuthorizingPaymentViewControllerDelegate {
 
 extension CheckoutViewController: CheckoutViewControllerDelegate {
   public func checkoutViewControllerDidTapCheckout(_ checkoutViewController: CheckoutViewController) {
-    let navigationController = AuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(authroizedURL, expectedReturnURLPatterns: expectedURLPatterns, delegate: self)
+    let navigationController = AuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(
+        authroizedURL,
+        expectedReturnURLPatterns: expectedURLPatterns,
+        delegate: self
+    )
     present(navigationController, animated: true, completion: nil)
   }
 }

@@ -150,7 +150,8 @@ extension Capability {
         }
         self.supportedBackends = backends
         
-        self.backends = Dictionary(uniqueKeysWithValues: zip(backends.map { Capability.Backend.BackendType(payment: $0.payment) }, backends))
+        let backendTypes = backends.map { Capability.Backend.BackendType(payment: $0.payment) }
+        self.backends = Dictionary(uniqueKeysWithValues: zip(backendTypes, backends))
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -181,7 +182,8 @@ extension Capability.Backend {
             self.payment = .card(supportedBrand)
         case .source(let value) where value.isInstallmentSource:
             let allowedInstallmentTerms = IndexSet(try container.decode(Array<Int>.self, forKey: .allowedInstallmentTerms))
-            self.payment = .installment(value.installmentBrand!, availableNumberOfTerms: allowedInstallmentTerms) // swiftlint:disable:this force_unwrapping
+            // swiftlint:disable:next force_unwrapping
+            self.payment = .installment(value.installmentBrand!, availableNumberOfTerms: allowedInstallmentTerms)
         case .source(.alipay):
             self.payment = .alipay
         case .source(let value) where value.isInternetBankingSource:
@@ -298,7 +300,10 @@ extension Capability.Backend {
             case .source(let sourceType):
                 let sourceTypeValuePrefix = sourceType.sourceTypePrefix
                 if sourceTypeValuePrefix.hasSuffix("_") {
-                    return sourceTypeValuePrefix.lastIndex(of: "_").map(sourceTypeValuePrefix.prefix(upTo:)).map(String.init) ?? sourceTypeValuePrefix
+                    return sourceTypeValuePrefix
+                        .lastIndex(of: "_")
+                        .map(sourceTypeValuePrefix.prefix(upTo:))
+                        .map(String.init) ?? sourceTypeValuePrefix
                 } else {
                     return sourceTypeValuePrefix
                 }

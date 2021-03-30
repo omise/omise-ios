@@ -28,6 +28,10 @@ import Foundation
     
     /// Initializes new source request.
     @objc public init(paymentInformation: __SourcePaymentInformation, amount: Int64, currencyCode: String) {
-        self.request = Request<Source>(paymentInformation: PaymentInformation(from: paymentInformation), amount: amount, currency: Currency(code: currencyCode))
+        self.request = Request<Source>(
+            paymentInformation: PaymentInformation(from: paymentInformation),
+            amount: amount,
+            currency: Currency(code: currencyCode)
+        )
     }
 }

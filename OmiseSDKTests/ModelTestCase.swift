@@ -89,10 +89,15 @@ class ModelTestCase: XCTestCase {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_barcode/alipay")
             let source = try decoder.decode(Source.self, from: sourceData)
             
+            let expectedBarcode = PaymentInformation.Barcode.AlipayBarcode(barcode: "1234567890123456",
+                                                                           storeID: "1",
+                                                                           storeName: "Main Store",
+                                                                           terminalID: nil)
+            
             XCTAssertEqual("src_test_5cq1tilrnz7d62t8y87", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
             XCTAssertEqual(100000, source.amount)
-            XCTAssertEqual(PaymentInformation.barcode(.alipay(PaymentInformation.Barcode.AlipayBarcode(barcode: "1234567890123456", storeID: "1", storeName: "Main Store", terminalID: nil))), source.paymentInformation)
+            XCTAssertEqual(.barcode(.alipay(expectedBarcode)), source.paymentInformation)
             XCTAssertEqual(Flow.offline, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
@@ -109,7 +114,7 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual("src_test_5cq1ugk8m0un1yefb2u", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
             XCTAssertEqual(5000_00, source.amount)
-            XCTAssertEqual(PaymentInformation.installment(PaymentInformation.Installment(brand: .firstChoice, numberOfTerms: 6)), source.paymentInformation)
+            XCTAssertEqual(.installment(.init(brand: .firstChoice, numberOfTerms: 6)), source.paymentInformation)
             XCTAssertEqual(Flow.redirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
@@ -122,7 +127,7 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual("src_test_5cs0t6x8n0z8rcfrsfi", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
             XCTAssertEqual(5000_00, source.amount)
-            XCTAssertEqual(PaymentInformation.installment(PaymentInformation.Installment(brand: .bay, numberOfTerms: 6)), source.paymentInformation)
+            XCTAssertEqual(.installment(.init(brand: .bay, numberOfTerms: 6)), source.paymentInformation)
             XCTAssertEqual(Flow.redirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
@@ -135,7 +140,7 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual("src_test_5cs0tdinbyypg6kn1fa", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
             XCTAssertEqual(5000_00, source.amount)
-            XCTAssertEqual(PaymentInformation.installment(PaymentInformation.Installment(brand: .bbl, numberOfTerms: 6)), source.paymentInformation)
+            XCTAssertEqual(.installment(.init(brand: .bbl, numberOfTerms: 6)), source.paymentInformation)
             XCTAssertEqual(Flow.redirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
@@ -148,7 +153,7 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual("src_test_5cs0tk7m2e5ivctrq30", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
             XCTAssertEqual(5000_00, source.amount)
-            XCTAssertEqual(PaymentInformation.installment(PaymentInformation.Installment(brand: .ktc, numberOfTerms: 6)), source.paymentInformation)
+            XCTAssertEqual(.installment(.init(brand: .ktc, numberOfTerms: 6)), source.paymentInformation)
             XCTAssertEqual(Flow.redirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
@@ -161,7 +166,7 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual("src_test_5cs0totfv87k1i6y45l", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
             XCTAssertEqual(5000_00, source.amount)
-            XCTAssertEqual(PaymentInformation.installment(PaymentInformation.Installment(brand: .kBank, numberOfTerms: 6)), source.paymentInformation)
+            XCTAssertEqual(.installment(.init(brand: .kBank, numberOfTerms: 6)), source.paymentInformation)
             XCTAssertEqual(Flow.redirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
@@ -331,7 +336,11 @@ class ModelTestCase: XCTestCase {
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
         
         do {
-            let tokenParameter = Token.CreateParameter(name: "John Appleseed", number: "4242424242424242", expirationMonth: 6, expirationYear: 2018, securityCode: "123")
+            let tokenParameter = Token.CreateParameter(name: "John Appleseed",
+                                                       number: "4242424242424242",
+                                                       expirationMonth: 6,
+                                                       expirationYear: 2018,
+                                                       securityCode: "123")
             let encodedJSONString = String(data: try encoder.encode(tokenParameter), encoding: .utf8)
             
             XCTAssertEqual(
@@ -349,7 +358,13 @@ class ModelTestCase: XCTestCase {
         }
         
         do {
-            let tokenParameter = Token.CreateParameter(name: "John Appleseed", number: "4242424242424242", expirationMonth: 6, expirationYear: 2018, securityCode: "123", city: "Bangkok", postalCode: "12345")
+            let tokenParameter = Token.CreateParameter(name: "John Appleseed",
+                                                       number: "4242424242424242",
+                                                       expirationMonth: 6,
+                                                       expirationYear: 2018,
+                                                       securityCode: "123",
+                                                       city: "Bangkok",
+                                                       postalCode: "12345")
             let encodedJSONString = String(data: try encoder.encode(tokenParameter), encoding: .utf8)
             
             XCTAssertEqual(

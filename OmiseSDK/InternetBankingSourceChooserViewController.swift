@@ -2,12 +2,18 @@ import UIKit
 import os
 
 @objc(OMSInternetBankingSourceChooserViewController)
-class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>, PaymentSourceChooser, PaymentChooserUI { // swiftlint:disable:this type_name
+// swiftlint:disable:next type_name
+class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>,
+                                                  PaymentSourceChooser,
+                                                  PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
     
     override var showingValues: [PaymentInformation.InternetBanking] {
         didSet {
-            os_log("Internet Banking Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map { $0.description }.joined(separator: ", "))
+            os_log("Internet Banking Chooser: Showing options - %{private}@",
+                   log: uiLogObject,
+                   type: .info,
+                   showingValues.map { $0.description }.joined(separator: ", "))
         }
     }
     

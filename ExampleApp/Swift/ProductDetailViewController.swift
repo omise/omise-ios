@@ -82,7 +82,13 @@ class ProductDetailViewController: OMSBaseViewController {
         guard currentCodePathMode == .code else {
             return
         }
-        let paymentCreatorController = PaymentCreatorController.makePaymentCreatorControllerWith(publicKey: publicKey, amount: paymentAmount, currency: Currency(code: paymentCurrencyCode), allowedPaymentMethods: allowedPaymentMethods, paymentDelegate: self)
+        let paymentCreatorController = PaymentCreatorController.makePaymentCreatorControllerWith(
+            publicKey: publicKey,
+            amount: paymentAmount,
+            currency: Currency(code: paymentCurrencyCode),
+            allowedPaymentMethods: allowedPaymentMethods,
+            paymentDelegate: self
+        )
         present(paymentCreatorController, animated: true, completion: nil)
     }
     
@@ -96,7 +102,9 @@ class ProductDetailViewController: OMSBaseViewController {
     }
     
     @IBAction private func handlingAuthorizingPayment(_ sender: UIBarButtonItem) {
-        let alertController = UIAlertController(title: "Authorizing Payment", message: "Please input your given authorized URL", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Authorizing Payment",
+                                                message: "Please input your given authorized URL",
+                                                preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
         alertController.addAction(UIAlertAction(title: "Cancel", style: AlertActionStyle.cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Go", style: AlertActionStyle.default) { (_) in

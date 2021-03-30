@@ -159,7 +159,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     @objc public static let defaultErrorMessageTextColor = UIColor.error
 
     /// A boolean flag that enables/disables Card.IO integration.
-    @available(*, unavailable, message: "Built in support for Card.ios was removed. You can implement it in your app and call the setCreditCardInformation(number:name:expiration:) method")
+    @available(*, unavailable, message: "Built in support for Card.ios was removed. You can implement it in your app and call the setCreditCardInformation(number:name:expiration:) method") // swiftlint:disable:this line_length
     @objc public var cardIOEnabled: Bool = true
     
     /// Factory method for creating CreditCardFormController with given public key.
@@ -167,14 +167,15 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     @objc(creditCardFormViewControllerWithPublicKey:)
     public static func makeCreditCardFormViewController(withPublicKey publicKey: String) -> CreditCardFormViewController {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
-        let creditCardForm = storyboard.instantiateInitialViewController() as! CreditCardFormViewController // swiftlint:disable:this force_cast
+        // swiftlint:disable:next force_cast
+        let creditCardForm = storyboard.instantiateInitialViewController() as! CreditCardFormViewController
         creditCardForm.publicKey = publicKey
         
         return creditCardForm
     }
     
     @available(*, deprecated,
-    message: "Please use the new method that confrom to Objective-C convention +[OMSCreditCardFormViewController creditCardFormViewControllerWithPublicKey:] as of this method will be removed in the future release.",
+    message: "Please use the new method that confrom to Objective-C convention +[OMSCreditCardFormViewController creditCardFormViewControllerWithPublicKey:] as of this method will be removed in the future release.", // swiftlint:disable:this line_length
     renamed: "makeCreditCardFormViewController(withPublicKey:)")
     @objc(makeCreditCardFormWithPublicKey:) public static func __makeCreditCardForm(withPublicKey publicKey: String) -> CreditCardFormViewController { // swiftlint:disable:this identifier_name
         return CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
@@ -344,7 +345,8 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     }
     
     @IBAction private func displayMoreCVVInfo(_ sender: UIButton) {
-        guard let moreInformationOnCVVViewController = storyboard?.instantiateViewController(withIdentifier: "MoreInformationOnCVVViewController") as? MoreInformationOnCVVViewController else {
+        guard let viewController = storyboard?.instantiateViewController(withIdentifier: "MoreInformationOnCVVViewController"),
+              let moreInformationOnCVVViewController = viewController as? MoreInformationOnCVVViewController else {
             return
         }
         
@@ -362,7 +364,9 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     
     @discardableResult
     private func performCancelingForm() -> Bool {
-        os_log("Credit Card Form dismissing requested, Asking the delegate what should the form controler do", log: uiLogObject, type: .default)
+        os_log("Credit Card Form dismissing requested, Asking the delegate what should the form controler do",
+               log: uiLogObject,
+               type: .default)
         
         if let delegate = self.delegate {
             delegate.creditCardFormViewControllerDidCancel(self)
@@ -373,7 +377,9 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             os_log("Canceling form delegate notified", log: uiLogObject, type: .default)
             return true
         } else {
-            os_log("Credit Card Form dismissing requested but there is not delegate to ask. Ignore the request", log: uiLogObject, type: .default)
+            os_log("Credit Card Form dismissing requested but there is not delegate to ask. Ignore the request",
+                   log: uiLogObject,
+                   type: .default)
             return false
         }
     }
@@ -456,7 +462,10 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     
     private func handleError(_ error: Error) {
         guard handleErrors else {
-            os_log("Credit Card Form's Request failed %{private}@, automatically error handling turned off. Trying to notify the delegate", log: uiLogObject, type: .info, error.localizedDescription)
+            os_log("Credit Card Form's Request failed %{private}@, automatically error handling turned off. Trying to notify the delegate",
+                   log: uiLogObject,
+                   type: .info,
+                   error.localizedDescription)
             if let delegate = self.delegate {
                 delegate.creditCardFormViewController(self, didFailWithError: error)
                 os_log("Error handling delegate notified", log: uiLogObject, type: .default)
@@ -469,21 +478,34 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             return
         }
         
-        os_log("Credit Card Form's Request failed %{private}@, automatically error handling turned on.", log: uiLogObject, type: .default, error.localizedDescription)
+        os_log("Credit Card Form's Request failed %{private}@, automatically error handling turned on.",
+               log: uiLogObject,
+               type: .default,
+               error.localizedDescription)
         
         displayError(error)
         hasErrorMessage = true
     }
     
     private func displayError(_ error: Error) {
-        let targetController = targetViewController(forAction: #selector(UIViewController.displayErrorWith(title:message:animated:sender:)), sender: self)
+        let targetController = targetViewController(forAction: #selector(UIViewController.displayErrorWith(title:message:animated:sender:)),
+                                                    sender: self)
         if let targetController = targetController, targetController !== self {
             if let error = error as? OmiseError {
-                targetController.displayErrorWith(title: error.bannerErrorDescription, message: error.bannerErrorRecoverySuggestion, animated: true, sender: self)
+                targetController.displayErrorWith(title: error.bannerErrorDescription,
+                                                  message: error.bannerErrorRecoverySuggestion,
+                                                  animated: true,
+                                                  sender: self)
             } else if let error = error as? LocalizedError {
-                targetController.displayErrorWith(title: error.localizedDescription, message: error.recoverySuggestion, animated: true, sender: self)
+                targetController.displayErrorWith(title: error.localizedDescription,
+                                                  message: error.recoverySuggestion,
+                                                  animated: true,
+                                                  sender: self)
             } else {
-                targetController.displayErrorWith(title: error.localizedDescription, message: nil, animated: true, sender: self)
+                targetController.displayErrorWith(title: error.localizedDescription,
+                                                  message: nil,
+                                                  animated: true,
+                                                  sender: self)
             }
         } else {
             let errorTitle: String
@@ -519,7 +541,10 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         }
         
         if animated {
-            UIView.animate(withDuration: TimeInterval(NavigationControllerHideShowBarDuration), delay: 0.0, options: [.layoutSubviews], animations: animationBlock)
+            UIView.animate(withDuration: TimeInterval(NavigationControllerHideShowBarDuration),
+                           delay: 0.0,
+                           options: [.layoutSubviews],
+                           animations: animationBlock)
         } else {
             animationBlock()
         }
@@ -744,11 +769,13 @@ extension CreditCardFormViewController {
             guard let element = element else {
                 switch direction {
                 case .previous:
-                    return fields.reversed().first(where: predicate)?.accessibilityElements?.last as? NSObjectProtocol ?? fields.reversed().first(where: predicate)
+                    return fields.reversed().first(where: predicate)?.accessibilityElements?.last as? NSObjectProtocol
+                        ?? fields.reversed().first(where: predicate)
                 case .next:
                     fallthrough
                 @unknown default:
-                    return fields.first(where: predicate)?.accessibilityElements?.first as? NSObjectProtocol ?? fields.first(where: predicate)
+                    return fields.first(where: predicate)?.accessibilityElements?.first as? NSObjectProtocol
+                        ?? fields.first(where: predicate)
                 }
             }
             
@@ -809,11 +836,15 @@ extension CreditCardFormViewController {
         
         accessibilityCustomRotors = [
             UIAccessibilityCustomRotor(name: "Fields") { (predicate) -> UIAccessibilityCustomRotorItemResult? in
-                return accessiblityElementAfter(predicate.currentItem.targetElement, matchingPredicate: { _ in true }, direction: predicate.searchDirection)
+                return accessiblityElementAfter(predicate.currentItem.targetElement,
+                                                matchingPredicate: { _ in true },
+                                                direction: predicate.searchDirection)
                     .map { UIAccessibilityCustomRotorItemResult(targetElement: $0, targetRange: nil) }
             },
             UIAccessibilityCustomRotor(name: "Invalid Data Fields") { (predicate) -> UIAccessibilityCustomRotorItemResult? in
-                return accessiblityElementAfter(predicate.currentItem.targetElement, matchingPredicate: { !$0.isValid }, direction: predicate.searchDirection)
+                return accessiblityElementAfter(predicate.currentItem.targetElement,
+                                                matchingPredicate: { !$0.isValid },
+                                                direction: predicate.searchDirection)
                     .map { UIAccessibilityCustomRotorItemResult(targetElement: $0, targetRange: nil) }
             }
         ]
