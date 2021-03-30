@@ -23,8 +23,6 @@ class MoreInformationOnCVVViewController: UIViewController {
     weak var delegate: MoreInformationOnCVVViewControllerDelegate?
     
     override func loadView() {
-        super.loadView()
-        
         view.backgroundColor = .background
         cvvLocationDescriptionLabel.textColor = .body
         cvvLocationImageView.tintColor = .body

@@ -127,7 +127,7 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
             completionHandler: { _ in
                 cell?.accessoryView = oldAccessoryView
                 self.view.isUserInteractionEnabled = true
-        })
+            })
     }
     
     private func applyPrimaryColor() {}

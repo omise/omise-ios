@@ -31,8 +31,6 @@ class CustomCreditCardFormViewController: UIViewController {
     
     // swiftlint:disable function_body_length
     override func loadView() {
-        super.loadView()
-        
         if storyboard == nil {
             view.backgroundColor = .white
             

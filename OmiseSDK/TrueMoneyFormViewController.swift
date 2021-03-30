@@ -44,8 +44,6 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
     @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
     
     override func loadView() {
-        super.loadView()
-        
         view.backgroundColor = .background
         formFieldsAccessoryView.barTintColor = .formAccessoryBarTintColor
         
@@ -134,7 +132,7 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
             options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
             animations: {
                 self.validateField(sender)
-        })
+            })
         sender.borderColor = currentSecondaryColor
     }
     
@@ -145,7 +143,7 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
             options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
             animations: {
                 self.errorLabel.alpha = 0.0
-        })
+            })
         
         updateInputAccessoryViewWithFirstResponder(sender)
         sender.borderColor = view.tintColor

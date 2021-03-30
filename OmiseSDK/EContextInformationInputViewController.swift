@@ -48,8 +48,6 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
     
     override func loadView() {
-        super.loadView()
-        
         view.backgroundColor = .background
         formFieldsAccessoryView.barTintColor = .formAccessoryBarTintColor
         
@@ -139,7 +137,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
                 options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
                 animations: {
                     errorLabel.alpha = 0.0
-            })
+                })
         }
         
         updateInputAccessoryViewWithFirstResponder(sender)
@@ -169,7 +167,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
             options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
             animations: {
                 self.validateField(sender)
-        })
+            })
         sender.borderColor = currentSecondaryColor
     }
     

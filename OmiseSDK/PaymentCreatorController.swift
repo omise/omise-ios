@@ -319,7 +319,7 @@ public class PaymentCreatorController: UINavigationController {
                 options: [.layoutSubviews], animations: animationBlock,
                 completion: { _ in
                     self.displayingNoticeView.removeFromSuperview()
-            })
+                })
         } else {
             animationBlock()
             self.displayingNoticeView.removeFromSuperview()
@@ -349,7 +349,6 @@ public class PaymentCreatorController: UINavigationController {
     }
     
     public override func loadView() {
-        super.loadView()
         view.backgroundColor = .background
         
         #if compiler(>=5.1)

@@ -53,8 +53,6 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
     @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
 
     override func loadView() {
-        super.loadView()
-
         view.backgroundColor = .background
         formFieldsAccessoryView.barTintColor = .formAccessoryBarTintColor
 
@@ -145,7 +143,7 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
             options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
             animations: {
                 self.validateField(sender)
-        })
+            })
         sender.borderColor = currentSecondaryColor
     }
 
@@ -156,7 +154,7 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
             options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
             animations: {
                 self.errorLabel.alpha = 0.0
-        })
+            })
 
         updateInputAccessoryViewWithFirstResponder(sender)
         sender.borderColor = view.tintColor

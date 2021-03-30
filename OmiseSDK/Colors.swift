@@ -1,5 +1,6 @@
 import UIKit
 
+// swiftlint:disable discouraged_object_literal
 extension UIColor {
     
     private static let defaultBackground: UIColor = .white

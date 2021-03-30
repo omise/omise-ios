@@ -12,7 +12,7 @@ public class CheckoutViewController: UIViewController {
     let button = UIButton(frame: CGRect(x: 10, y: 10, width: 300, height: 44))
     button.autoresizingMask = .flexibleWidth
     button.addTarget(self, action: #selector(didTapCheckout), for: .touchUpInside)
-    button.backgroundColor = #colorLiteral(red: 0.1960784314, green: 0.3960784314, blue: 0.8784313725, alpha: 1)
+    button.backgroundColor = UIColor(red: 0.1960784314, green: 0.3960784314, blue: 0.8784313725, alpha: 1)
     button.setTitleColor(.white, for: .normal)
     button.setTitle("Checkout", for: .normal)
     

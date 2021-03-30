@@ -220,8 +220,6 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     }
     
     public override func loadView() {
-        super.loadView()
-        
         view.backgroundColor = UIColor.background
         confirmButton.defaultBackgroundColor = view.tintColor
         confirmButton.disabledBackgroundColor = .line
@@ -668,7 +666,7 @@ extension CreditCardFormViewController {
             options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
             animations: {
                 self.validateField(sender)
-        })
+            })
         sender.borderColor = currentSecondaryColor
     }
     
@@ -680,7 +678,7 @@ extension CreditCardFormViewController {
                 options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
                 animations: {
                     errorLabel.alpha = 0.0
-            })
+                })
         }
         
         sender.borderColor = view.tintColor

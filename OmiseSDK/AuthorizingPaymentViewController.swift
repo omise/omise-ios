@@ -122,8 +122,6 @@ public class AuthorizingPaymentViewController: UIViewController {
     }
     
     public override func loadView() {
-        super.loadView()
-        
         webView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(webView)
         
