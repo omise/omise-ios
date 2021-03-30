@@ -29,6 +29,7 @@ class CustomCreditCardFormViewController: UIViewController {
     
     weak var delegate: CustomCreditCardFormViewControllerDelegate?
     
+    // swiftlint:disable function_body_length
     override func loadView() {
         super.loadView()
         

@@ -158,6 +158,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         updateShowingValues()
     }
     
+    // swiftlint:disable function_body_length
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch (segue.identifier, segue.destination) {
         case ("GoToCreditCardFormSegue"?, let controller as CreditCardFormViewController):

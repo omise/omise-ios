@@ -239,6 +239,7 @@ extension PaymentSettingTableViewController {
         }
     }
     
+    // swiftlint:disable function_body_length
     func paymentSource(for cell: UITableViewCell) -> OMSSourceTypeValue? {
         switch cell {
         case internetBankingBAYPaymentCell:
@@ -284,6 +285,7 @@ extension PaymentSettingTableViewController {
         }
     }
     
+    // swiftlint:disable function_body_length
     func cell(for paymentSource: OMSSourceTypeValue) -> UITableViewCell? {
         switch paymentSource {
         case .internetBankingBAY:

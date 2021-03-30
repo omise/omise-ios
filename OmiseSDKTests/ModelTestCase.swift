@@ -1,7 +1,7 @@
 import XCTest
 @testable import OmiseSDK
 
-// swiftlint:disable type_body_length
+// swiftlint:disable type_body_length function_body_length
 class ModelTestCase: XCTestCase {
     
     func testDecodeToken() throws {

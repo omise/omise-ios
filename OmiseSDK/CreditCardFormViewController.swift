@@ -708,6 +708,7 @@ extension CreditCardFormViewController {
         updateSupplementaryUI()
     }
     
+    // swiftlint:disable function_body_length
     private func configureAccessibility() {
         formLabels.forEach({
             $0.adjustsFontForContentSizeCategory = true

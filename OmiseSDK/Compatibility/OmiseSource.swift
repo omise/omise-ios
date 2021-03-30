@@ -322,6 +322,7 @@ public class __CustomSourcePayment: __SourcePaymentInformation {
 }
 
 extension PaymentInformation {
+    // swiftlint:disable function_body_length
     init(from paymentInformation: __SourcePaymentInformation) {
         switch paymentInformation {
         case let value as __SourceInternetBankingPayment:
@@ -413,6 +414,7 @@ extension PaymentInformation {
 }
 
 extension __SourcePaymentInformation {
+    // swiftlint:disable function_body_length
     static func makeSourcePaymentInformation(from paymentInformation: PaymentInformation) -> __SourcePaymentInformation {
         switch paymentInformation {
         case .alipay:

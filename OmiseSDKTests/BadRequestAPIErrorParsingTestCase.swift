@@ -1,6 +1,7 @@
 import XCTest
 @testable import OmiseSDK
 
+// swiftlint:disable function_body_length
 class BadRequestAPIErrorParsingTestCase: XCTestCase {
     
     func testParseInvalidAmount() throws {

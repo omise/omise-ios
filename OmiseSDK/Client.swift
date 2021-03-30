@@ -69,6 +69,7 @@ import os
         return task
     }
     
+    // swiftlint:disable function_body_length
     public func capabilityDataWithCompletionHandler(_ completionHandler: ((RequestResult<Capability>) -> Void)?) {
         let dataTask = session.dataTask(with: buildCapabilityAPIURLRequest(), completionHandler: { (data, response, error) in
             guard let completionHandler = completionHandler else { return } // nobody around to hear the leaf falls
