@@ -25,7 +25,7 @@ public class AdaptableStaticTableViewController<Element: CaseIterable & Equatabl
     
     public func staticIndexPath(forValue value: Element) -> IndexPath {
         let allCases = Element.allCases
-        let index = allCases.firstIndex(of: value)!
+        let index = allCases.firstIndex(of: value)! // swiftlint:disable:this force_unwrapping
         return IndexPath(row: allCases.distance(from: allCases.startIndex, to: index), section: 0)
     }
     

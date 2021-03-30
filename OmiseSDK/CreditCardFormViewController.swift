@@ -758,7 +758,7 @@ extension CreditCardFormViewController {
                 }
                 
                 return accessibilityElements.contains { $0 === element }
-            } ?? cardNumberTextField!
+            } ?? cardNumberTextField! // swiftlint:disable:this force_unwrapping
             
             func filedAfter(
                 _ field: OmiseTextField,

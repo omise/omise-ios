@@ -181,13 +181,13 @@ extension Capability.Backend {
             self.payment = .card(supportedBrand)
         case .source(let value) where value.isInstallmentSource:
             let allowedInstallmentTerms = IndexSet(try container.decode(Array<Int>.self, forKey: .allowedInstallmentTerms))
-            self.payment = .installment(value.installmentBrand!, availableNumberOfTerms: allowedInstallmentTerms)
+            self.payment = .installment(value.installmentBrand!, availableNumberOfTerms: allowedInstallmentTerms) // swiftlint:disable:this force_unwrapping
         case .source(.alipay):
             self.payment = .alipay
         case .source(let value) where value.isInternetBankingSource:
-            self.payment = .internetBanking(value.internetBankingSource!)
+            self.payment = .internetBanking(value.internetBankingSource!) // swiftlint:disable:this force_unwrapping
         case .source(let value) where value.isMobileBankingSource:
-            self.payment = .mobileBanking(value.mobileBankingSource!)
+            self.payment = .mobileBanking(value.mobileBankingSource!) // swiftlint:disable:this force_unwrapping
         case .source(.promptPay):
             self.payment = .promptpay
         case .source(.payNow):

@@ -129,7 +129,7 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
         if segue.identifier == destinationSegue,
             let fpxBankChooserViewController = segue.destination as? FPXBankChooserViewController {
             fpxBankChooserViewController.email = emailValue
-            fpxBankChooserViewController.showingValues = showingValues!
+            fpxBankChooserViewController.showingValues = showingValues ?? []
             fpxBankChooserViewController.flowSession = self.flowSession
             fpxBankChooserViewController.preferredPrimaryColor = self.preferredPrimaryColor
             fpxBankChooserViewController.preferredSecondaryColor = self.preferredSecondaryColor

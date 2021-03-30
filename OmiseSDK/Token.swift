@@ -202,7 +202,7 @@ extension Calendar {
     /// Calendar used in the Credit Card information which is Gregorian Calendar
     public static let creditCardInformationCalendar = Calendar(identifier: .gregorian)
     /// Range contains the valid range of the expiration month value
-    public static let validExpirationMonthRange: Range<Int> = Calendar.creditCardInformationCalendar.maximumRange(of: .month)!
+    public static let validExpirationMonthRange: Range<Int> = Calendar.creditCardInformationCalendar.maximumRange(of: .month)! // swiftlint:disable:this force_unwrapping
 }
 
 extension NSCalendar {

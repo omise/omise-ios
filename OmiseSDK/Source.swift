@@ -103,7 +103,7 @@ public enum Flow: RawRepresentable, Decodable, Equatable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let flow = try container.decode(String.self)
-        self.init(rawValue: flow)!
+        self.init(rawValue: flow)! // swiftlint:disable:this force_unwrapping
     }
     
     public init?(rawValue: String) {

@@ -100,10 +100,11 @@ class ProductDetailViewController: OMSBaseViewController {
         alertController.addTextField(configurationHandler: nil)
         alertController.addAction(UIAlertAction(title: "Cancel", style: AlertActionStyle.cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Go", style: AlertActionStyle.default) { (_) in
-            guard let textField = alertController.textFields?.first, let text = textField.text,
-                let url = URL(string: text) else { return }
+            guard let textField = alertController.textFields?.first,
+                  let text = textField.text,
+                  let url = URL(string: text),
+                  let expectedReturnURL = URLComponents(string: "http://www.example.com/orders") else { return }
             
-            let expectedReturnURL = URLComponents(string: "http://www.example.com/orders")!
             let handlerController =
                 AuthorizingPaymentViewController
                     .makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(

@@ -299,6 +299,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     func applyPaymentMethods(from capability: Capability) {
         self.capability = capability
         showsCreditCardPayment = capability.creditCardBackend != nil
+        
+        // swiftlint:disable closure_body_length
         allowedPaymentMethods = capability.supportedBackends.compactMap {
             switch $0.payment {
             case .alipay:

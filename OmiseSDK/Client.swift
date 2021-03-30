@@ -71,6 +71,7 @@ import os
     
     // swiftlint:disable function_body_length
     public func capabilityDataWithCompletionHandler(_ completionHandler: ((RequestResult<Capability>) -> Void)?) {
+        // swiftlint:disable:next closure_body_length
         let dataTask = session.dataTask(with: buildCapabilityAPIURLRequest()) { (data, response, error) in
             guard let completionHandler = completionHandler else { return } // nobody around to hear the leaf falls
             
@@ -140,6 +141,7 @@ import os
     }
     
     public func retrieveChargeStatusWithCompletionHandler(from tokenID: String, completionHandler: @escaping ((Result<ChargeStatus, Error>) -> Void)) {
+        // swiftlint:disable:next closure_body_length
         let dataTask = session.dataTask(with: buildRetrieveTokenURLRequest(from: tokenID)) { (data, response, error) in
             var result: Result<ChargeStatus, Error>
             defer {
@@ -284,7 +286,7 @@ extension Client {
     }
     
     private static func encodeAuthorizationHeader(_ publicKey: String) -> String {
-        let data = publicKey.data(using: String.Encoding.utf8, allowLossyConversion: false)!
+        let data = publicKey.data(using: String.Encoding.utf8, allowLossyConversion: false)! // swiftlint:disable:this force_unwrapping
         let base64 = data.base64EncodedString()
         return "Basic \(base64)"
     }
@@ -305,6 +307,7 @@ extension Client {
     }
     
     private static func completeRequest<T: Object>(_ request: Request<T>, callback: Request<T>.Callback?) -> ((Data?, URLResponse?, Error?) -> Void) {
+        // swiftlint:disable closure_body_length
         return { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             guard let callback = callback else { return } // nobody around to hear the leaf falls
             
@@ -382,7 +385,7 @@ extension Client {
     static let jsonDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(identifier: "UTC")!
+        formatter.timeZone = TimeZone(identifier: "UTC")
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
         return formatter
     }()

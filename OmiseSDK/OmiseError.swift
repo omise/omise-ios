@@ -5,7 +5,7 @@ import Foundation
 /// Default error domain for the Omise Error
 public let OmiseErrorDomain = "co.omise" // swiftlint:disable:this identifier_name
 
-let sourceParameterCodingsUserInfoKey = CodingUserInfoKey(rawValue: "sourceParameter")!
+let sourceParameterCodingsUserInfoKey = CodingUserInfoKey(rawValue: "sourceParameter")! // swiftlint:disable:this force_unwrapping
 
 /// Coding Key for decoding the Error data returned in the Omise API
 ///
@@ -810,6 +810,7 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
             try OmiseError.APIErrorCode.BadRequestReason(message: $0, currency: currency)
         })
         
+        // swiftlint:disable closure_body_length
         return parsedReasons.sorted {
             switch $0 {
             case .amountIsLessThanValidAmount:

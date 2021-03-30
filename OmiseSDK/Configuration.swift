@@ -3,7 +3,8 @@ import Foundation
 enum Environment {
     case staging
     case production
-    
+        
+    // swiftlint:disable force_unwrapping
     private var vaultBaseURL: URL {
         switch self {
         case .staging: return URL(string: "[STAGING_URL]")!
@@ -11,6 +12,7 @@ enum Environment {
         }
     }
     
+    // swiftlint:disable force_unwrapping
     private var apiBaseURL: URL {
         switch self {
         case .staging: return URL(string: "[STAGING_URL]")!
