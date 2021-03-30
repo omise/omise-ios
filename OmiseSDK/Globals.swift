@@ -3,8 +3,8 @@
 import Foundation
 import os
 
-let sdkLogObject: OSLog = OSLog(subsystem: "co.omise.ios.sdk", category: "SDK")
-let uiLogObject: OSLog = OSLog(subsystem: "co.omise.ios.sdk", category: "UI")
+let sdkLogObject = OSLog(subsystem: "co.omise.ios.sdk", category: "SDK")
+let uiLogObject = OSLog(subsystem: "co.omise.ios.sdk", category: "UI")
 
 extension Optional where Wrapped == String {
     public var isNilOrEmpty: Bool {
@@ -318,7 +318,7 @@ extension ControlState: Hashable {
 
 extension Bundle {
     #if !SWIFT_PACKAGE
-    static var module: Bundle = Bundle(for: CreditCardFormViewController.self)
+    static var module = Bundle(for: CreditCardFormViewController.self)
     #endif
 }
 

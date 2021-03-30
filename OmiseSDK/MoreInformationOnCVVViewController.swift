@@ -141,7 +141,7 @@ class OverlayPanelPresentationController: UIPresentationController {
                 dimmingView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
                 dimmingView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
                 dimmingView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
-                ])
+            ])
         }
         
         guard let coordinator = presentedViewController.transitionCoordinator else {

@@ -112,9 +112,9 @@ import os
                 
                 do {
                     result = .failure(try decoder.decode(OmiseError.self, from: data))
-                } catch let err {
-                    let error = OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: err)
-                    result = .failure(error)
+                } catch {
+                    let omiseError = OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: error)
+                    result = .failure(omiseError)
                 }
                 
             case 200..<300:
@@ -126,9 +126,9 @@ import os
                 
                 do {
                     result = .success(try decoder.decode(Capability.self, from: data))
-                } catch let err {
-                    let error = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: err)
-                    result = .failure(error)
+                } catch {
+                    let omiseError = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: error)
+                    result = .failure(omiseError)
                 }
                 
             default:
@@ -172,9 +172,9 @@ import os
 
                 do {
                     result = .failure(try decoder.decode(OmiseError.self, from: data))
-                } catch let err {
-                    let error = OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: err)
-                    result = .failure(error)
+                } catch {
+                    let omiseError = OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: error)
+                    result = .failure(omiseError)
                 }
 
             case 200..<300:
@@ -187,9 +187,9 @@ import os
                 do {
                     let token = try decoder.decode(Token.self, from: data)
                     result = .success(token.chargeStatus)
-                } catch let err {
-                    let error = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: err)
-                    result = .failure(error)
+                } catch {
+                    let omiseError = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: error)
+                    result = .failure(omiseError)
                 }
 
             default:
@@ -342,9 +342,9 @@ extension Client {
                 do {
                     let decoder = makeJSONDecoder(for: request)
                     result = .failure(try decoder.decode(OmiseError.self, from: data))
-                } catch let err {
-                    let error = OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: err)
-                    result = .failure(error)
+                } catch {
+                    let omiseError = OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: error)
+                    result = .failure(omiseError)
                 }
                 
             case 200..<300:
@@ -357,9 +357,9 @@ extension Client {
                 do {
                     let decoder = makeJSONDecoder(for: request)
                     result = .success(try decoder.decode(T.self, from: data))
-                } catch let err {
-                    let error = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: err)
-                    result = .failure(error)
+                } catch {
+                    let omiseError = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: error)
+                    result = .failure(omiseError)
                 }
                 
             default:

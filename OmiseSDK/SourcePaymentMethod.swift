@@ -7,6 +7,7 @@ public protocol PaymentMethod: Equatable, Codable {
     var type: String { get }
 }
 
+// swiftlint:disable:next static_operator
 func ~=<T: PaymentMethod>(methodType: T.Type, type: String) -> Bool {
     return type.hasPrefix(methodType.paymentMethodTypePrefix)
 }

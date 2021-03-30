@@ -723,7 +723,7 @@ extension CreditCardFormViewController {
             cardNameTextField,
             expiryDateTextField,
             secureCodeTextField
-            ] as [OmiseTextField]
+        ] as [OmiseTextField]
         
         func accessiblityElementAfter(_ element: NSObjectProtocol?,
                                       matchingPredicate predicate: (OmiseTextField) -> Bool,

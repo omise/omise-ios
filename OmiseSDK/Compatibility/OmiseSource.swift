@@ -18,7 +18,7 @@ import Foundation
     @objc lazy public var type: String = source.paymentInformation.sourceType
     
     /// The payment information of this source describes how the payment is processed
-    @objc lazy public var paymentInformation: __SourcePaymentInformation = __SourcePaymentInformation.makeSourcePaymentInformation(from: source.paymentInformation)
+    @objc lazy public var paymentInformation = __SourcePaymentInformation.makeSourcePaymentInformation(from: source.paymentInformation)
     
     /// Processing Flow of this source
     @objc lazy public var flow: String = source.flow.rawValue

@@ -2,7 +2,7 @@ import UIKit
 
 extension UIColor {
     
-    private static let defaultBackground: UIColor = UIColor.white
+    private static let defaultBackground: UIColor = .white
     public static let background: UIColor = {
         #if compiler(>=5.1)
         if #available(iOS 13, *) {
@@ -15,7 +15,7 @@ extension UIColor {
         #endif
     }()
     
-    private static let defaultFormAccessoryBarTintColor: UIColor = UIColor.background
+    private static let defaultFormAccessoryBarTintColor: UIColor = .background
     public static let formAccessoryBarTintColor: UIColor = {
         #if compiler(>=5.1)
         if #available(iOS 13, *) {

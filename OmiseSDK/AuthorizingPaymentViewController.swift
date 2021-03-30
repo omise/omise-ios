@@ -61,7 +61,7 @@ public class AuthorizingPaymentViewController: UIViewController {
     /// A delegate object that will recieved the authorizing payment events.
     public weak var delegate: AuthorizingPaymentViewControllerDelegate?
     
-    let webView: WKWebView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration())
+    let webView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration())
     let okButtonTitle = NSLocalizedString("OK", comment: "OK button for JavaScript panel")
     let confirmButtonTitle = NSLocalizedString("Confirm", comment: "Confirm button for JavaScript panel")
     let cancelButtonTitle = NSLocalizedString("Cancel", comment: "Cancel button for JavaScript panel")

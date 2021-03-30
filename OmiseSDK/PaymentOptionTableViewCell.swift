@@ -2,7 +2,7 @@ import UIKit
 
 class PaymentOptionTableViewCell: UITableViewCell {
     
-    let separatorView: UIView = UIView()
+    let separatorView = UIView()
     @IBInspectable var separatorHeight: CGFloat = 1
     
     override init(style: TableViewCellStyle, reuseIdentifier: String?) {
