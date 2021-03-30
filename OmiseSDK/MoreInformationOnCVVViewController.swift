@@ -43,13 +43,15 @@ class MoreInformationOnCVVViewController: UIViewController {
         case .amex?:
             cvvLocationImageView.image = UIImage(named: "CVV AMEX", in: .module, compatibleWith: nil)
             cvvLocationDescriptionLabel.text = NSLocalizedString(
-                "more-info.cvv-location.amex.text", bundle: .module,
+                "more-info.cvv-location.amex.text",
+                bundle: .module,
                 value: "4 digit number on the front of your card",
                 comment: "A descriptive text telling the location of CVV on the AMEX card")
         default:
             cvvLocationImageView.image = UIImage(named: "CVV", in: .module, compatibleWith: nil)
             cvvLocationDescriptionLabel.text = NSLocalizedString(
-                "more-info.cvv-location.default.text", bundle: .module,
+                "more-info.cvv-location.default.text",
+                bundle: .module,
                 value: "3 digit number on the back of your card",
                 comment: "A descriptive text telling the location of CVV on the typical credit card")
         }

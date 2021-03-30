@@ -113,7 +113,8 @@ public enum OmiseTextFieldValidationError: Error {
 
             let formattingPlaceholderString = formattingAttributedText.string
             formattingAttributedText.addAttribute(
-                AttributedStringKey.foregroundColor, value: placeholderColor,
+                AttributedStringKey.foregroundColor,
+                value: placeholderColor,
                 range: NSRange(formattingPlaceholderString.startIndex..<formattingPlaceholderString.endIndex, in: formattingPlaceholderString)
             )
             super.attributedPlaceholder = (formattingAttributedText.copy() as! NSAttributedString) // swiftlint:disable:this force_cast

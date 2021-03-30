@@ -7,22 +7,26 @@ struct PaymentPreset {
     var allowedPaymentMethods: [OMSSourceTypeValue]
     
     static let thailandPreset = PaymentPreset(
-        paymentAmount: 5_000_00, paymentCurrency: .thb,
+        paymentAmount: 5_000_00,
+        paymentCurrency: .thb,
         allowedPaymentMethods: PaymentCreatorController.thailandDefaultAvailableSourceMethods
     )
     
     static let japanPreset = PaymentPreset(
-        paymentAmount: 5_000, paymentCurrency: .jpy,
+        paymentAmount: 5_000,
+        paymentCurrency: .jpy,
         allowedPaymentMethods: PaymentCreatorController.japanDefaultAvailableSourceMethods
     )
     
     static let singaporePreset = PaymentPreset(
-        paymentAmount: 5_000_00, paymentCurrency: .sgd,
+        paymentAmount: 5_000_00,
+        paymentCurrency: .sgd,
         allowedPaymentMethods: PaymentCreatorController.singaporeDefaultAvailableSourceMethods
     )
 
     static let malaysiaPreset = PaymentPreset(
-        paymentAmount: 5_000_00, paymentCurrency: .myr,
+        paymentAmount: 5_000_00,
+        paymentCurrency: .myr,
         allowedPaymentMethods: PaymentCreatorController.malaysiaDefaultAvailableSourceMethods
     )
 }

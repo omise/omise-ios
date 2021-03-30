@@ -21,7 +21,8 @@ public struct PAN {
         // NNNN-NNXX-XXXX-NNNN
         let replacingRange = (pan.index(pan.startIndex, offsetBy: max(0, pan.count - 10))..<pan.index(pan.endIndex, offsetBy: max(-pan.count, -4)))
         return pan.replacingOccurrences(
-            of: "[0-9]", with: "X",
+            of: "[0-9]",
+            with: "X",
             options: String.CompareOptions.regularExpression,
             range: replacingRange
         )

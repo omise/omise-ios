@@ -86,12 +86,16 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
         }
 
         NotificationCenter.default.addObserver(
-            self, selector: #selector(keyboardWillChangeFrame(_:)),
-            name: NotificationKeyboardWillChangeFrameNotification, object: nil
+            self,
+            selector: #selector(keyboardWillChangeFrame(_:)),
+            name: NotificationKeyboardWillChangeFrameNotification,
+            object: nil
         )
         NotificationCenter.default.addObserver(
-            self, selector: #selector(keyboardWillHide(_:)),
-            name: NotificationKeyboardWillHideFrameNotification, object: nil
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: NotificationKeyboardWillHideFrameNotification,
+            object: nil
         )
 
         emailTextField.validator = try? NSRegularExpression(pattern: "\\A[\\w.+-]+@[a-z\\d.-]+\\.[a-z]{2,}\\z", options: [.caseInsensitive])
@@ -138,7 +142,8 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
 
     @IBAction func validateTextFieldDataOf(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-        UIView.animate(withDuration: duration, delay: 0.0,
+        UIView.animate(withDuration: duration,
+                       delay: 0.0,
                        options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
             self.validateField(sender)
         }
@@ -147,7 +152,8 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
 
     @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-        UIView.animate(withDuration: duration, delay: 0.0,
+        UIView.animate(withDuration: duration,
+                       delay: 0.0,
                        options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
             self.errorLabel.alpha = 0.0
         }
@@ -171,7 +177,9 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
 
             case OmiseTextFieldValidationError.invalidData:
                 errorLabel.text = NSLocalizedString(
-                    "payment-creator.error.api.bad_request.invalid-email.message", tableName: "Error", bundle: .module,
+                    "payment-creator.error.api.bad_request.invalid-email.message",
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Email is invalid",
                     comment: "An error text in the FPX form displayed when the email is invalid"
                 )

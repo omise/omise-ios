@@ -20,7 +20,8 @@ let client = Client(publicKey: publicKey)
 let request = Request<Token>(parameter: CreateTokenParameter(
   name: "Customer Name",
   number: "4242424242424242",
-  expirationMonth: 12, expirationYear: 2022,
+  expirationMonth: 12,
+  expirationYear: 2022,
   securityCode: "123")
 )
 

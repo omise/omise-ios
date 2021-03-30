@@ -77,12 +77,16 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
         }
         
         NotificationCenter.default.addObserver(
-            self, selector: #selector(keyboardWillChangeFrame(_:)),
-            name: NotificationKeyboardWillChangeFrameNotification, object: nil
+            self,
+            selector: #selector(keyboardWillChangeFrame(_:)),
+            name: NotificationKeyboardWillChangeFrameNotification,
+            object: nil
         )
         NotificationCenter.default.addObserver(
-            self, selector: #selector(keyboardWillHide(_:)),
-            name: NotificationKeyboardWillHideFrameNotification, object: nil
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: NotificationKeyboardWillHideFrameNotification,
+            object: nil
         )
         
         phoneNumberTextField.validator = try? NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
@@ -127,7 +131,8 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
     
     @IBAction func validateTextFieldDataOf(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-        UIView.animate(withDuration: duration, delay: 0.0,
+        UIView.animate(withDuration: duration,
+                       delay: 0.0,
                        options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
             self.validateField(sender)
         }
@@ -161,7 +166,9 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
                 
             case OmiseTextFieldValidationError.invalidData:
                 errorLabel.text = NSLocalizedString(
-                    "truemoney-form.phone-number-field.invalid-data.error.text", tableName: "Error", bundle: .module,
+                    "truemoney-form.phone-number-field.invalid-data.error.text",
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Phone number is invalid",
                     comment: "An error text in the TrueMoney form displayed when the phone number is invalid"
                 )

@@ -167,7 +167,9 @@ public class PaymentCreatorController: UINavigationController {
         allowedPaymentMethods: [OMSSourceTypeValue],
         paymentDelegate: OMSPaymentCreatorControllerDelegate) -> PaymentCreatorController {
         let controller = PaymentCreatorController.makePaymentCreatorControllerWith(
-            publicKey: publicKey, amount: amount, currency: Currency(code: currencyCode),
+            publicKey: publicKey,
+            amount: amount,
+            currency: Currency(code: currencyCode),
             allowedPaymentMethods: allowedPaymentMethods,
             paymentDelegate: nil)
         controller.__paymentDelegate = paymentDelegate
@@ -291,8 +293,10 @@ public class PaymentCreatorController: UINavigationController {
         }
         
         if animated {
-            UIView.animate(withDuration: TimeInterval(NavigationControllerHideShowBarDuration) + 0.07, delay: 0.0,
-                           options: [.layoutSubviews], animations: animationBlock)
+            UIView.animate(withDuration: TimeInterval(NavigationControllerHideShowBarDuration) + 0.07,
+                           delay: 0.0,
+                           options: [.layoutSubviews],
+                           animations: animationBlock)
         } else {
             animationBlock()
         }
@@ -316,7 +320,8 @@ public class PaymentCreatorController: UINavigationController {
         if animated {
             UIView.animate(withDuration: TimeInterval(NavigationControllerHideShowBarDuration),
                            delay: 0.0,
-                           options: [.layoutSubviews], animations: animationBlock) { _ in
+                           options: [.layoutSubviews],
+                           animations: animationBlock) { _ in
                 self.displayingNoticeView.removeFromSuperview()
             }
         } else {
@@ -438,14 +443,20 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
                 os_log("There is no Payment Creator delegate to notify about the error", log: uiLogObject, type: .default)
             }
         } else if let error = error as? OmiseError {
-            displayErrorWith(title: error.bannerErrorDescription, message: error.bannerErrorRecoverySuggestion,
-                             animated: true, sender: self)
+            displayErrorWith(title: error.bannerErrorDescription,
+                             message: error.bannerErrorRecoverySuggestion,
+                             animated: true,
+                             sender: self)
         } else if let error = error as? LocalizedError {
-            displayErrorWith(title: error.localizedDescription, message: error.recoverySuggestion,
-                             animated: true, sender: self)
+            displayErrorWith(title: error.localizedDescription,
+                             message: error.recoverySuggestion,
+                             animated: true,
+                             sender: self)
         } else {
-            displayErrorWith(title: error.localizedDescription, message: nil,
-                             animated: true, sender: self)
+            displayErrorWith(title: error.localizedDescription,
+                             message: nil,
+                             animated: true,
+                             sender: self)
         }
         
         os_log("Payment Creator Request failed %{private}@, automatically error handling turned on.", log: uiLogObject, type: .default, error.localizedDescription)

@@ -74,9 +74,13 @@ public class OmiseTokenRequest: NSObject {
     @objc public init(name: String, number: String, expirationMonth: Int, expirationYear: Int,
                       securityCode: String, city: String? = nil, postalCode: String? = nil) {
         self.request = Request<Token>(
-            name: name, number: number,
-            expirationMonth: expirationMonth, expirationYear: expirationYear,
-            securityCode: securityCode, city: city, postalCode: postalCode
+            name: name,
+            number: number,
+            expirationMonth: expirationMonth,
+            expirationYear: expirationYear,
+            securityCode: securityCode,
+            city: city,
+            postalCode: postalCode
         )
     }
     

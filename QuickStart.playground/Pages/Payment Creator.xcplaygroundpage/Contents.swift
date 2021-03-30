@@ -62,7 +62,8 @@ extension CheckoutViewController: CheckoutViewControllerDelegate {
   public func checkoutViewControllerDidTapCheckout(_ checkoutViewController: CheckoutViewController) {
     let paymentCreatorController = PaymentCreatorController.makePaymentCreatorControllerWith(
       publicKey: publicKey,
-      amount: 5_000_00, currency: .thb,
+      amount: 5_000_00,
+      currency: .thb,
       allowedPaymentMethods: PaymentCreatorController.japanDefaultAvailableSourceMethods,
       paymentDelegate: self
     )

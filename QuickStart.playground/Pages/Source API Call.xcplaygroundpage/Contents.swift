@@ -19,7 +19,8 @@ let client = Client(publicKey: publicKey)
  */
 let request = Request<Source>(parameter: CreateSourceParameter(
   paymentInformation: PaymentInformation.internetBanking(.bbl),
-  amount: 50_000_00, currency: .thb
+  amount: 50_000_00,
+  currency: .thb
   )
 )
 

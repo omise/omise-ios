@@ -122,8 +122,10 @@ class CustomCreditCardFormViewController: UIViewController {
                 return
         }
         let tokenRequest = Request<Token>(
-            name: name, pan: cardNumberField.pan,
-            expirationMonth: expiryMonth, expirationYear: expiryYear,
+            name: name,
+            pan: cardNumberField.pan,
+            expirationMonth: expiryMonth,
+            expirationYear: expiryYear,
             securityCode: cvv
         )
         omiseClient.send(tokenRequest) { (result) in

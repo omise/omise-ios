@@ -360,9 +360,8 @@ public enum PaymentInformation: Codable, Equatable {
 extension Request where T == Source {
     /// Initializes a new Source Request
     public init (paymentInformation: PaymentInformation, amount: Int64, currency: Currency) {
-        self.init(parameter: CreateSourceParameter(
-            paymentInformation: paymentInformation,
-            amount: amount, currency: currency)
+        self.init(
+            parameter: CreateSourceParameter(paymentInformation: paymentInformation, amount: amount, currency: currency)
         )
     }
 }

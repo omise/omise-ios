@@ -149,7 +149,8 @@ import UIKit
         if let placeholderColor = self.placeholderTextColor {
             let formattingPlaceholderString = formattingAttributedText.string
             formattingAttributedText.addAttribute(
-                AttributedStringKey.foregroundColor, value: placeholderColor,
+                AttributedStringKey.foregroundColor,
+                value: placeholderColor,
                 range: NSRange(formattingPlaceholderString.startIndex..<formattingPlaceholderString.endIndex, in: formattingPlaceholderString)
             )
         }

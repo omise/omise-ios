@@ -292,12 +292,16 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         secureCodeTextField.rightViewMode = .always
         
         NotificationCenter.default.addObserver(
-            self, selector: #selector(keyboardWillChangeFrame(_:)),
-            name: NotificationKeyboardWillChangeFrameNotification, object: nil
+            self,
+            selector: #selector(keyboardWillChangeFrame(_:)),
+            name: NotificationKeyboardWillChangeFrameNotification,
+            object: nil
         )
         NotificationCenter.default.addObserver(
-            self, selector: #selector(keyboardWillHide(_:)),
-            name: NotificationKeyboardWillHideFrameNotification, object: nil
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: NotificationKeyboardWillHideFrameNotification,
+            object: nil
         )
     }
     
@@ -320,8 +324,10 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         super.viewDidAppear(animated)
         
         NotificationCenter.default.addObserver(
-            self, selector: #selector(keyboardWillAppear(_:)),
-            name: NotificationKeyboardWillShowFrameNotification, object: nil
+            self,
+            selector: #selector(keyboardWillAppear(_:)),
+            name: NotificationKeyboardWillShowFrameNotification,
+            object: nil
         )
     }
     
@@ -603,6 +609,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         }
     }
     
+    // swiftlint:disable function_body_length
     private func validateField(_ textField: OmiseTextField) {
         guard let errorLabel = associatedErrorLabelOf(textField) else {
             return
@@ -617,25 +624,33 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
                 
             case (OmiseTextFieldValidationError.invalidData, cardNumberTextField):
                 errorLabel.text = NSLocalizedString(
-                    "credit-card-form.card-number-field.invalid-data.error.text", tableName: "Error", bundle: .module,
+                    "credit-card-form.card-number-field.invalid-data.error.text",
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Credit card number is invalid",
                     comment: "An error text displayed when the credit card number is invalid"
                 )
             case (OmiseTextFieldValidationError.invalidData, cardNameTextField):
                 errorLabel.text = NSLocalizedString(
-                    "credit-card-form.card-holder-name-field.invalid-data.error.text", tableName: "Error", bundle: .module,
+                    "credit-card-form.card-holder-name-field.invalid-data.error.text",
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Card holder name is invalid",
                     comment: "An error text displayed when the card holder name is invalid"
                 )
             case (OmiseTextFieldValidationError.invalidData, expiryDateTextField):
                 errorLabel.text = NSLocalizedString(
-                    "credit-card-form.expiry-date-field.invalid-data.error.text", tableName: "Error", bundle: .module,
+                    "credit-card-form.expiry-date-field.invalid-data.error.text",
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Card expiry date is invalid",
                     comment: "An error text displayed when the expiry date is invalid"
                 )
             case (OmiseTextFieldValidationError.invalidData, secureCodeTextField):
                 errorLabel.text = NSLocalizedString(
-                    "credit-card-form.security-code-field.invalid-data.error.text", tableName: "Error", bundle: .module,
+                    "credit-card-form.security-code-field.invalid-data.error.text",
+                    tableName: "Error",
+                    bundle: .module,
                     value: "CVV code is invalid",
                     comment: "An error text displayed when the security code is invalid"
                 )
@@ -661,7 +676,8 @@ extension CreditCardFormViewController {
     
     @IBAction func validateTextFieldDataOf(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-        UIView.animate(withDuration: duration, delay: 0.0,
+        UIView.animate(withDuration: duration,
+                       delay: 0.0,
                        options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
             self.validateField(sender)
         }
@@ -671,7 +687,8 @@ extension CreditCardFormViewController {
     @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
         if let errorLabel = associatedErrorLabelOf(sender) {
             let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-            UIView.animate(withDuration: duration, delay: 0.0,
+            UIView.animate(withDuration: duration,
+                           delay: 0.0,
                            options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
                 errorLabel.alpha = 0.0
             }

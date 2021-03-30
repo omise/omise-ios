@@ -81,12 +81,16 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         }
         
         NotificationCenter.default.addObserver(
-            self, selector: #selector(keyboardWillChangeFrame(_:)),
-            name: NotificationKeyboardWillChangeFrameNotification, object: nil
+            self,
+            selector: #selector(keyboardWillChangeFrame(_:)),
+            name: NotificationKeyboardWillChangeFrameNotification,
+            object: nil
         )
         NotificationCenter.default.addObserver(
-            self, selector: #selector(keyboardWillHide(_:)),
-            name: NotificationKeyboardWillHideFrameNotification, object: nil
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: NotificationKeyboardWillHideFrameNotification,
+            object: nil
         )
         
         fullNameTextField.validator = try? NSRegularExpression(pattern: "\\A[\\w\\s]{1,10}\\s?\\z", options: [])
@@ -161,7 +165,8 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     
     @IBAction func validateTextFieldDataOf(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-        UIView.animate(withDuration: duration, delay: 0.0,
+        UIView.animate(withDuration: duration,
+                       delay: 0.0,
                        options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
             self.validateField(sender)
         }
@@ -219,19 +224,25 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
                 
             case (OmiseTextFieldValidationError.invalidData, fullNameTextField):
                 errorLabel.text = NSLocalizedString(
-                    "econtext-info-form.full-name-field.invalid-data.error.text", tableName: "Error", bundle: .module,
+                    "econtext-info-form.full-name-field.invalid-data.error.text",
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Customer name is invalid",
                     comment: "An error text in the E-Context information input displayed when the customer name is invalid"
                 )
             case (OmiseTextFieldValidationError.invalidData, emailTextField):
                 errorLabel.text = NSLocalizedString(
-                    "econtext-info-form.email-name-field.invalid-data.error.text", tableName: "Error", bundle: .module,
+                    "econtext-info-form.email-name-field.invalid-data.error.text",
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Email is invalid",
                     comment: "An error text in the E-Context information input displayed when the email is invalid"
                 )
             case (OmiseTextFieldValidationError.invalidData, phoneNumberTextField):
                 errorLabel.text = NSLocalizedString(
-                    "econtext-info-form.phone-number-field.invalid-data.error.text", tableName: "Error", bundle: .module,
+                    "econtext-info-form.phone-number-field.invalid-data.error.text",
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Phone number is invalid",
                     comment: "An error text in the E-Context information input displayed when the phone number is invalid"
                 )

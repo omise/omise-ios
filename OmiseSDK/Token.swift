@@ -196,10 +196,13 @@ extension Request where T == Token {
     public init (name: String, pan: PAN, expirationMonth: Int, expirationYear: Int,
                  securityCode: String, city: String? = nil, postalCode: String? = nil) {
         self.init(parameter: CreateTokenParameter(
-            name: name, pan: pan,
-            expirationMonth: expirationMonth, expirationYear: expirationYear,
+            name: name,
+            pan: pan,
+            expirationMonth: expirationMonth,
+            expirationYear: expirationYear,
             securityCode: securityCode,
-            city: city, postalCode: postalCode
+            city: city,
+            postalCode: postalCode
         ))
     }
     
@@ -207,10 +210,13 @@ extension Request where T == Token {
     public init (name: String, number: String, expirationMonth: Int, expirationYear: Int,
                  securityCode: String, city: String? = nil, postalCode: String? = nil) {
         self.init(parameter: CreateTokenParameter(
-            name: name, number: number,
-            expirationMonth: expirationMonth, expirationYear: expirationYear,
+            name: name,
+            number: number,
+            expirationMonth: expirationMonth,
+            expirationYear: expirationYear,
             securityCode: securityCode,
-            city: city, postalCode: postalCode
+            city: city,
+            postalCode: postalCode
         ))
     }
 }
