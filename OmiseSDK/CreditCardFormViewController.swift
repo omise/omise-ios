@@ -736,9 +736,11 @@ extension CreditCardFormViewController {
             secureCodeTextField
         ] as [OmiseTextField]
         
-        func accessiblityElementAfter(_ element: NSObjectProtocol?,
-                                      matchingPredicate predicate: (OmiseTextField) -> Bool,
-                                      direction: AccessibilityCustomRotorDirection) -> NSObjectProtocol? {
+        func accessiblityElementAfter(
+            _ element: NSObjectProtocol?,
+            matchingPredicate predicate: (OmiseTextField) -> Bool,
+            direction: AccessibilityCustomRotorDirection
+        ) -> NSObjectProtocol? {
             guard let element = element else {
                 switch direction {
                 case .previous:
@@ -758,9 +760,11 @@ extension CreditCardFormViewController {
                 return accessibilityElements.contains { $0 === element }
             } ?? cardNumberTextField!
             
-            func filedAfter(_ field: OmiseTextField,
-                            matchingPredicate predicate: (OmiseTextField) -> Bool,
-                            direction: AccessibilityCustomRotorDirection) -> OmiseTextField? {
+            func filedAfter(
+                _ field: OmiseTextField,
+                matchingPredicate predicate: (OmiseTextField) -> Bool,
+                direction: AccessibilityCustomRotorDirection
+            ) -> OmiseTextField? {
                 guard let indexOfField = fields.firstIndex(of: field) else { return nil }
                 switch direction {
                 case .previous:

@@ -4,20 +4,15 @@ import UIKit
 import os
 
 public protocol PaymentCreatorControllerDelegate: NSObjectProtocol {
-    func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
-                                  didCreatePayment payment: Payment)
-    func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
-                                  didFailWithError error: Error)
+    func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didCreatePayment payment: Payment)
+    func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didFailWithError error: Error)
     func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController)
 }
 
 @objc public protocol OMSPaymentCreatorControllerDelegate: NSObjectProtocol {
-    @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
-                                        didCreateToken token: __OmiseToken)
-    @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
-                                        didCreateSource source: __OmiseSource)
-    @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController,
-                                        didFailWithError error: Error)
+    @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didCreateToken token: __OmiseToken)
+    @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didCreateSource source: __OmiseSource)
+    @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didFailWithError error: Error)
     @objc optional func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController)
 }
 
@@ -145,9 +140,12 @@ public class PaymentCreatorController: UINavigationController {
     /// Factory method for creating CreditCardFormController with given public key.
     /// - parameter publicKey: Omise public key.
     public static func makePaymentCreatorControllerWith(
-        publicKey: String, amount: Int64, currency: Currency,
+        publicKey: String,
+        amount: Int64,
+        currency: Currency,
         allowedPaymentMethods: [OMSSourceTypeValue],
-        paymentDelegate: PaymentCreatorControllerDelegate?) -> PaymentCreatorController {
+        paymentDelegate: PaymentCreatorControllerDelegate?
+    ) -> PaymentCreatorController {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
         let paymentCreatorController = storyboard.instantiateViewController(withIdentifier: "PaymentCreatorController") as! PaymentCreatorController // swiftlint:disable:this force_cast
         paymentCreatorController.publicKey = publicKey
@@ -163,9 +161,12 @@ public class PaymentCreatorController: UINavigationController {
     /// - parameter publicKey: Omise public key.
     @objc(paymentCreatorControllerWithPublicKey:amount:currency:allowedPaymentMethods:paymentDelegate:)
     public static func __makePaymentCreatorViewControllerWith( // swiftlint:disable:this identifier_name
-        publicKey: String, amount: Int64, currencyCode: String,
+        publicKey: String,
+        amount: Int64,
+        currencyCode: String,
         allowedPaymentMethods: [OMSSourceTypeValue],
-        paymentDelegate: OMSPaymentCreatorControllerDelegate) -> PaymentCreatorController {
+        paymentDelegate: OMSPaymentCreatorControllerDelegate
+    ) -> PaymentCreatorController {
         let controller = PaymentCreatorController.makePaymentCreatorControllerWith(
             publicKey: publicKey,
             amount: amount,

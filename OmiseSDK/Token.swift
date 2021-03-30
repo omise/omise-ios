@@ -39,8 +39,15 @@ public struct CreateTokenParameter: Encodable {
     }
     
     /// Initializes new token request.
-    public init(name: String, pan: PAN, expirationMonth: Int, expirationYear: Int,
-                securityCode: String, city: String? = nil, postalCode: String? = nil) {
+    public init(
+        name: String,
+        pan: PAN,
+        expirationMonth: Int,
+        expirationYear: Int,
+        securityCode: String,
+        city: String? = nil,
+        postalCode: String? = nil
+    ) {
         self.name = name
         self.pan = pan
         self.expirationMonth = expirationMonth
@@ -51,9 +58,24 @@ public struct CreateTokenParameter: Encodable {
     }
     
     /// Initializes a new token request.
-    public init(name: String, number: String, expirationMonth: Int, expirationYear: Int,
-                securityCode: String, city: String? = nil, postalCode: String? = nil) {
-        self.init(name: name, pan: PAN(number), expirationMonth: expirationMonth, expirationYear: expirationYear, securityCode: securityCode, city: city, postalCode: postalCode)
+    public init(
+        name: String,
+        number: String,
+        expirationMonth: Int,
+        expirationYear: Int,
+        securityCode: String,
+        city: String? = nil,
+        postalCode: String? = nil
+    ) {
+        self.init(
+            name: name,
+            pan: PAN(number),
+            expirationMonth: expirationMonth,
+            expirationYear: expirationYear,
+            securityCode: securityCode,
+            city: city,
+            postalCode: postalCode
+        )
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -193,8 +215,15 @@ extension NSCalendar {
 extension Request where T == Token {
     
     /// Initializes a new Token Request with the given information
-    public init (name: String, pan: PAN, expirationMonth: Int, expirationYear: Int,
-                 securityCode: String, city: String? = nil, postalCode: String? = nil) {
+    public init(
+        name: String,
+        pan: PAN,
+        expirationMonth: Int,
+        expirationYear: Int,
+        securityCode: String,
+        city: String? = nil,
+        postalCode: String? = nil
+    ) {
         self.init(parameter: CreateTokenParameter(
             name: name,
             pan: pan,
@@ -207,8 +236,15 @@ extension Request where T == Token {
     }
     
     /// Initializes a new Token Request with the given information
-    public init (name: String, number: String, expirationMonth: Int, expirationYear: Int,
-                 securityCode: String, city: String? = nil, postalCode: String? = nil) {
+    public init(
+        name: String,
+        number: String,
+        expirationMonth: Int,
+        expirationYear: Int,
+        securityCode: String,
+        city: String? = nil,
+        postalCode: String? = nil
+    ) {
         self.init(parameter: CreateTokenParameter(
             name: name,
             number: number,
