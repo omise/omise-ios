@@ -52,7 +52,11 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
     @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!
     @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
 
+    // need to refactor loadView, removing super results in crash
+    // swiftlint:disable prohibited_super_call
     override func loadView() {
+        super.loadView()
+        
         view.backgroundColor = .background
         formFieldsAccessoryView.barTintColor = .formAccessoryBarTintColor
 

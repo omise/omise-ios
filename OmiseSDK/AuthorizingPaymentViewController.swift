@@ -135,7 +135,11 @@ public class AuthorizingPaymentViewController: UIViewController {
         )
     }
     
+    // need to refactor loadView, removing super results in crash
+    // swiftlint:disable prohibited_super_call
     public override func loadView() {
+        super.loadView()
+        
         webView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(webView)
         

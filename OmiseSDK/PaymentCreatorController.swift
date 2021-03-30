@@ -368,7 +368,11 @@ public class PaymentCreatorController: UINavigationController {
         super.addChild(childController)
     }
     
+    // need to refactor loadView, removing super results in crash
+    // swiftlint:disable prohibited_super_call
     public override func loadView() {
+        super.loadView()
+        
         view.backgroundColor = .background
         
         #if compiler(>=5.1)

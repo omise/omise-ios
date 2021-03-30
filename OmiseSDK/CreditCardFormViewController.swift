@@ -220,7 +220,11 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         self.setCreditCardInformationWith(number: number, name: name, expiration: expiration)
     }
     
+    // need to refactor loadView, removing super results in crash
+    // swiftlint:disable prohibited_super_call
     public override func loadView() {
+        super.loadView()
+        
         view.backgroundColor = UIColor.background
         confirmButton.defaultBackgroundColor = view.tintColor
         confirmButton.disabledBackgroundColor = .line
