@@ -5,7 +5,7 @@ import Foundation
 /// Default error domain for the Omise Error
 public let OmiseErrorDomain = "co.omise" // swiftlint:disable:this identifier_name
 
-let sourceParameterCodingsUserInfoKey = CodingUserInfoKey.init(rawValue: "sourceParameter")!
+let sourceParameterCodingsUserInfoKey = CodingUserInfoKey(rawValue: "sourceParameter")!
 
 /// Coding Key for decoding the Error data returned in the Omise API
 ///
@@ -294,7 +294,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
         let message = try container.decode(String.self, forKey: .message)
         let location = try container.decode(String.self, forKey: .location)
         
-        self = .api(code: try OmiseError.APIErrorCode.init(from: decoder), message: message, location: location)
+        self = .api(code: try OmiseError.APIErrorCode(from: decoder), message: message, location: location)
     }
 }
 
@@ -463,17 +463,17 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
             if let lessThanValidAmountMatch = amountLessThanValidAmountErrorMessageRegularExpression
                 .firstMatch(in: message, range: NSRange(message.startIndex..<message.endIndex, in: message)),
                 lessThanValidAmountMatch.numberOfRanges == 2,
-                let amountRange = Range.init(lessThanValidAmountMatch.range(at: 1), in: message) {
+                let amountRange = Range(lessThanValidAmountMatch.range(at: 1), in: message) {
                 self = .amountIsLessThanValidAmount(validAmount: Int64(message[amountRange]), currency: currency)
             } else if let greaterThanValidAmountMatch = amountGreaterThanValidAmountErrorMessageRegularExpression
                 .firstMatch(in: message, range: NSRange(message.startIndex..<message.endIndex, in: message)),
                 greaterThanValidAmountMatch.numberOfRanges == 2,
-                let amountRange = Range.init(greaterThanValidAmountMatch.range(at: 1), in: message) {
+                let amountRange = Range(greaterThanValidAmountMatch.range(at: 1), in: message) {
                 self = .amountIsGreaterThanValidAmount(validAmount: Int64(message[amountRange]), currency: currency)
             } else if let atLeastValidAmountMatch = amountAtLeastValidAmountErrorMessageRegularExpression
                 .firstMatch(in: message, range: NSRange(message.startIndex..<message.endIndex, in: message)),
                 atLeastValidAmountMatch.numberOfRanges == 2,
-                let amountRange = Range.init(atLeastValidAmountMatch.range(at: 1), in: message) {
+                let amountRange = Range(atLeastValidAmountMatch.range(at: 1), in: message) {
                 self = .amountIsLessThanValidAmount(validAmount: Int64(message[amountRange]), currency: currency)
             } else {
                 self = .other(message)
@@ -490,7 +490,7 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
             let lessThanValidAmountMatch = nameIsTooLongErrorMessageRegularExpression
                 .firstMatch(in: message, range: NSRange(message.startIndex..<message.endIndex, in: message)),
             lessThanValidAmountMatch.numberOfRanges == 2,
-            let amountRange = Range.init(lessThanValidAmountMatch.range(at: 1), in: message) {
+            let amountRange = Range(lessThanValidAmountMatch.range(at: 1), in: message) {
             self = .nameIsTooLong(maximum: Int(message[amountRange]))
         } else if message.contains("name") {
             self = .nameIsTooLong(maximum: nil)

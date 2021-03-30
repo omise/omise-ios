@@ -3,8 +3,8 @@ import UIKit
 
 /// UITextField subclass used for entering card's expiry date.
 /// `CardExpiryDatePicker` will be set as the default input view.
-@objc(OMSCardExpiryDateTextField) @IBDesignable
-public class CardExpiryDateTextField: OmiseTextField {
+@IBDesignable
+@objc(OMSCardExpiryDateTextField) public class CardExpiryDateTextField: OmiseTextField {
     
     /// Currently selected month, `nil` if no month has been selected.
     public private(set) var selectedMonth: Int? = nil {
@@ -125,8 +125,8 @@ public class CardExpiryDateTextField: OmiseTextField {
         }
         
         let expiryDateComponents = text.split(separator: "/")
-        let parsedExpiryMonth = expiryDateComponents.first.flatMap({ Int.init(String($0)) })
-        let parsedExpiryYear = expiryDateComponents.count > 1 ? expiryDateComponents.last.flatMap({ Int.init(String($0)) }) : nil
+        let parsedExpiryMonth = expiryDateComponents.first.flatMap({ Int(String($0)) })
+        let parsedExpiryYear = expiryDateComponents.count > 1 ? expiryDateComponents.last.flatMap({ Int(String($0)) }) : nil
         
         if let expiryMonth = parsedExpiryMonth, expiryMonth > 0 {
             self.selectedMonth = expiryMonth

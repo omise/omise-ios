@@ -2,8 +2,8 @@ import UIKit
 
 /// UITextField subclass for entering the credit card number.
 /// Automatically formats entered number into groups of four.
-@objc(OMSCardNumberTextField) @IBDesignable
-public class CardNumberTextField: OmiseTextField {
+@IBDesignable
+@objc(OMSCardNumberTextField) public class CardNumberTextField: OmiseTextField {
 
     /// The current PAN
     public var pan: PAN {
@@ -44,7 +44,7 @@ public class CardNumberTextField: OmiseTextField {
         set {}
     }
     
-    lazy private var cardNumberStringTokenizer: CardNumberTextField.CreditCardNumberTextInputStringTokenizer = CreditCardNumberTextInputStringTokenizer.init(cardNumberTextField: self)
+    lazy private var cardNumberStringTokenizer: CardNumberTextField.CreditCardNumberTextInputStringTokenizer = CreditCardNumberTextInputStringTokenizer(cardNumberTextField: self)
 
     override public init(frame: CGRect) {
         super.init(frame: frame)

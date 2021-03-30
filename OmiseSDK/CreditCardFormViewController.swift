@@ -99,8 +99,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         }
     }
     
-    @IBInspectable
-    public var errorMessageTextColor: UIColor! = CreditCardFormViewController.defaultErrorMessageTextColor {
+    @IBInspectable public var errorMessageTextColor: UIColor! = CreditCardFormViewController.defaultErrorMessageTextColor {
         didSet {
             if errorMessageTextColor == nil {
                 errorMessageTextColor = CreditCardFormViewController.defaultErrorMessageTextColor

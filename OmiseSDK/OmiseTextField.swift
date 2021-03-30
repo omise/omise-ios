@@ -11,8 +11,8 @@ public enum OmiseTextFieldValidationError: Error {
 }
 
 /// Base UITextField subclass for SDK's text fields.
-@objc(OMSOmiseTextField) @IBDesignable
-public class OmiseTextField: UITextField {
+@IBDesignable
+@objc(OMSOmiseTextField) public class OmiseTextField: UITextField {
     public var style: TextFieldStyle = .plain {
         didSet {
             updateBorder()

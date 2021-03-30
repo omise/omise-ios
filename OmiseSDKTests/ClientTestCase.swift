@@ -108,7 +108,7 @@ extension ClientTestCase {
     
     // MARK: Request factory methods
     static func makeValidTokenRequest() -> Request<Token> {
-        return Request.init(parameter: Token.CreateParameter(
+        return Request(parameter: Token.CreateParameter(
             name: "JOHN DOE",
             number: "4242424242424242",
             expirationMonth: 11,
@@ -117,7 +117,7 @@ extension ClientTestCase {
         ))
     }
     static func makeInvalidTokenRequest() -> Request<Token> {
-        return Request.init(parameter: Token.CreateParameter(
+        return Request(parameter: Token.CreateParameter(
             name: "JOHN DOE",
             number: "4242424242111111",
             expirationMonth: 11,
@@ -127,9 +127,9 @@ extension ClientTestCase {
     }
     
     static func makeValidSourceRequest() -> Request<Source> {
-        return Request.init(paymentInformation: PaymentInformation.internetBanking(.bay), amount: 100_00, currency: .thb)
+        return Request(paymentInformation: PaymentInformation.internetBanking(.bay), amount: 100_00, currency: .thb)
     }
     static func makeInvalidSourceRequest() -> Request<Source> {
-        return Request.init(paymentInformation: PaymentInformation.other(type: "UNSUPPORTED SOURCE", parameters: [ "client_id": "client_12345", "client_balance": 12345.67]), amount: 100_00, currency: Currency.custom(code: "UNSUPPORTED_CURRENCY", factor: 100))
+        return Request(paymentInformation: PaymentInformation.other(type: "UNSUPPORTED SOURCE", parameters: [ "client_id": "client_12345", "client_balance": 12345.67]), amount: 100_00, currency: Currency.custom(code: "UNSUPPORTED_CURRENCY", factor: 100))
     }
 }

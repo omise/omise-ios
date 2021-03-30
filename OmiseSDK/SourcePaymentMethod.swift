@@ -706,7 +706,7 @@ extension PaymentInformation.Barcode {
         }
         switch String(type[typePrefixRange.upperBound...]) {
         case OMSSourceTypeValue.alipay.rawValue:
-            self = .alipay(try AlipayBarcode.init(from: decoder))
+            self = .alipay(try AlipayBarcode(from: decoder))
         case let value:
             self = .other(String(value), parameters: try decoder.decodeJSONDictionary().filter({ (key, _) -> Bool in
                 switch key {

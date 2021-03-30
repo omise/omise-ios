@@ -38,7 +38,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
-        if showingValues.count == 0 {
+        if showingValues.isEmpty {
             displayEmptyMessage()
         } else {
             restore()

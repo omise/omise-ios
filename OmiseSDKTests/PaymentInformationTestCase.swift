@@ -187,7 +187,7 @@ class PaymentInformationTestCase: XCTestCase {
         
         do {
             let storeInformation = PaymentInformation.Barcode.AlipayBarcode.StoreInformation(storeID: "store_id_1", storeName: "Store Name")
-            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.barcode(.alipay(PaymentInformation.Barcode.AlipayBarcode.init(barcode: "barcode", storeInformation: storeInformation, terminalID: "Terminal 1"))), amount: 10_000_00, currency: .thb)
+            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.barcode(.alipay(PaymentInformation.Barcode.AlipayBarcode(barcode: "barcode", storeInformation: storeInformation, terminalID: "Terminal 1"))), amount: 10_000_00, currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             XCTAssertEqual(
                 """
@@ -204,7 +204,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.barcode(.alipay(PaymentInformation.Barcode.AlipayBarcode.init(barcode: "barcode", terminalID: "Terminal 1"))), amount: 10_000_00, currency: .thb)
+            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.barcode(.alipay(PaymentInformation.Barcode.AlipayBarcode(barcode: "barcode", terminalID: "Terminal 1"))), amount: 10_000_00, currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             XCTAssertEqual(
                 """
@@ -219,7 +219,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.barcode(.alipay(PaymentInformation.Barcode.AlipayBarcode.init(barcode: "barcode", terminalID: nil))), amount: 10_000_00, currency: .thb)
+            let sourceParameter = Source.CreateParameter(paymentInformation: PaymentInformation.barcode(.alipay(PaymentInformation.Barcode.AlipayBarcode(barcode: "barcode", terminalID: nil))), amount: 10_000_00, currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             XCTAssertEqual(
                 """
