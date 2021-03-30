@@ -18,7 +18,7 @@ public class CardExpiryDateTextField: OmiseTextField {
             expirationMonthAccessibilityElement.accessibilityValue = self.selectedMonth.map({ CardExpiryDateTextField.spellingOutDateFormatter.monthSymbols[$0 - 1] })
         }
     }
-    @objc(selectedMonth) public var __selectedMonth: Int {
+    @objc(selectedMonth) public var __selectedMonth: Int { // swiftlint:disable:this identifier_name
         return selectedMonth ?? 0
     }
     
@@ -28,7 +28,7 @@ public class CardExpiryDateTextField: OmiseTextField {
             expirationYearAccessibilityElement.accessibilityValue = selectedYear.map({ NumberFormatter.localizedString(from: NSNumber(value: $0), number: NumberFormatter.Style.spellOut) })
         }
     }
-    @objc(selectedYear) public var __selectedYear: Int {
+    @objc(selectedYear) public var __selectedYear: Int { // swiftlint:disable:this identifier_name
         return selectedYear ?? 0
     }
     

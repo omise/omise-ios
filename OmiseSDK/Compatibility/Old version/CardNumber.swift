@@ -26,7 +26,7 @@ import Foundation
             .first
     }
     
-    @objc(brandForPan:) public static func __brand(_ pan: String) -> Int {
+    @objc(brandForPan:) public static func __brand(_ pan: String) -> Int { // swiftlint:disable:this identifier_name
         return brand(of: pan)?.rawValue ?? NSNotFound
     }
     

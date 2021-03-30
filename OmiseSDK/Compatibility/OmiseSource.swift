@@ -1,4 +1,4 @@
-// swiftlint:disable file_length
+// swiftlint:disable file_length type_name
 
 import Foundation
 

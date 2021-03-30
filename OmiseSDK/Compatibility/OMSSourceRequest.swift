@@ -7,7 +7,7 @@ import Foundation
 }
 
 /// Request object for describing a request to create a new source with the creating parameters
-@objc(OMSSourceRequest) public class __OMSSourceRequest: NSObject {
+@objc(OMSSourceRequest) public class __OMSSourceRequest: NSObject { // swiftlint:disable:this type_name
     
     let request: Request<Source>
     

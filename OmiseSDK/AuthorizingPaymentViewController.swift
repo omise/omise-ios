@@ -30,7 +30,7 @@ public typealias Omise3DSViewControllerDelegate = AuthorizingPaymentViewControll
 @available(*, deprecated, renamed: "AuthorizingPaymentViewController")
 public typealias OmiseAuthorizingPaymentViewController = AuthorizingPaymentViewController
 @available(*, deprecated, renamed: "AuthorizingPaymentViewControllerDelegate")
-public typealias OmiseAuthorizingPaymentViewControllerDelegate = AuthorizingPaymentViewControllerDelegate
+public typealias OmiseAuthorizingPaymentViewControllerDelegate = AuthorizingPaymentViewControllerDelegate // swiftlint:disable:this type_name
 
 /*:
  Drop-in authorizing payment handler view controller that automatically display the authorizing payment verification form
@@ -89,6 +89,7 @@ public class AuthorizingPaymentViewController: UIViewController {
     message: "Please use the new method that confrom to Objective-C convention +[AuthorizingPaymentViewController authorizingPaymentViewControllerNavigationWithAuthorizedURL:expectedReturnURLPatterns:delegate:] as of this method will be removed in the future release.",
     renamed: "makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(_:expectedReturnURLPatterns:delegate:)")
     @objc(makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
+    // swiftlint:disable:next identifier_name
     public static func __makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> UINavigationController {
         return AuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(authorizedURL, expectedReturnURLPatterns: expectedReturnURLPatterns, delegate: delegate)
     }
@@ -115,6 +116,7 @@ public class AuthorizingPaymentViewController: UIViewController {
     message: "Please use the new method that confrom to Objective-C convention +[AuthorizingPaymentViewController authorizingPaymentViewControllernWithAuthorizedURL:expectedReturnURLPatterns:delegate:] as of this method will be removed in the future release.",
     renamed: "makeAuthorizingPaymentViewControllerWithAuthorizedURL(_:expectedReturnURLPatterns:delegate:)")
     @objc(makeAuthorizingPaymentViewControllerWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
+    // swiftlint:disable:next identifier_name
     public static func __makeAuthorizingPaymentViewControllerWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> AuthorizingPaymentViewController {
         return AuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerWithAuthorizedURL(authorizedURL, expectedReturnURLPatterns: expectedReturnURLPatterns, delegate: delegate)
     }

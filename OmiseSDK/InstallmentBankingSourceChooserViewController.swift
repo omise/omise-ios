@@ -2,7 +2,7 @@ import UIKit
 import os
 
 @objc(OMSInstallmentBankingSourceChooserViewController)
-class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>, PaymentSourceChooser, PaymentChooserUI {
+class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>, PaymentSourceChooser, PaymentChooserUI { // swiftlint:disable:this type_name
     var flowSession: PaymentCreatorFlowSession?
     
     override var showingValues: [PaymentInformation.Installment.Brand] {

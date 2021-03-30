@@ -1,3 +1,4 @@
+// swiftlint:disable type_name
 import Foundation
 
 @objc(OMSCapability) public

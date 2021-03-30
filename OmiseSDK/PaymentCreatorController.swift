@@ -62,7 +62,7 @@ public class PaymentCreatorController: UINavigationController {
     }
     
     /// Amount to create a Source payment
-    @objc(paymentAmount) public var __paymentAmount: Int64 {
+    @objc(paymentAmount) public var __paymentAmount: Int64 { // swiftlint:disable:this identifier_name
         get {
             return paymentAmount ?? 0
         }
@@ -72,7 +72,7 @@ public class PaymentCreatorController: UINavigationController {
     }
     
     /// Currency to create a Source payment
-    @objc(paymentCurrencyCode) public var __paymentCurrencyCode: String? {
+    @objc(paymentCurrencyCode) public var __paymentCurrencyCode: String? { // swiftlint:disable:this identifier_name
         get {
             return paymentCurrency?.code
         }
@@ -106,7 +106,7 @@ public class PaymentCreatorController: UINavigationController {
     /// Delegate to receive CreditCardFormController result.
     public weak var paymentDelegate: PaymentCreatorControllerDelegate?
     /// Delegate to receive CreditCardFormController result.
-    @objc(paymentDelegate) public weak var __paymentDelegate: OMSPaymentCreatorControllerDelegate?
+    @objc(paymentDelegate) public weak var __paymentDelegate: OMSPaymentCreatorControllerDelegate? // swiftlint:disable:this identifier_name
 
     var client: Client? {
         didSet {
@@ -162,7 +162,7 @@ public class PaymentCreatorController: UINavigationController {
     /// Factory method for creating CreditCardFormController with given public key.
     /// - parameter publicKey: Omise public key.
     @objc(paymentCreatorControllerWithPublicKey:amount:currency:allowedPaymentMethods:paymentDelegate:)
-    public static func __makePaymentCreatorViewControllerWith(
+    public static func __makePaymentCreatorViewControllerWith( // swiftlint:disable:this identifier_name
         publicKey: String, amount: Int64, currencyCode: String,
         allowedPaymentMethods: [OMSSourceTypeValue],
         paymentDelegate: OMSPaymentCreatorControllerDelegate) -> PaymentCreatorController {
@@ -238,7 +238,7 @@ public class PaymentCreatorController: UINavigationController {
     }
     
     @objc(applyPaymentMethodsFrom:)
-    public func __applyPaymentMethods(from capability: __OmiseCapability) {
+    public func __applyPaymentMethods(from capability: __OmiseCapability) { // swiftlint:disable:this identifier_name
         applyPaymentMethods(from: capability.capability)
     }
     
@@ -505,6 +505,7 @@ extension PaymentCreatorController {
         .internetBankingBBL
     ]
     
+    // swiftlint:disable:next identifier_name
     public static let installmentsBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
         .installmentBAY,
         .installmentFirstChoice,

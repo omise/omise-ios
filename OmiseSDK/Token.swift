@@ -185,7 +185,7 @@ extension Calendar {
 
 extension NSCalendar {
     /// Calendar used in the Credit Card information which is Gregorian Calendar
-    @objc(creditCardInformationCalendar) public static var __creditCardInformationCalendar: Calendar {
+    @objc(creditCardInformationCalendar) public static var __creditCardInformationCalendar: Calendar { // swiftlint:disable:this identifier_name
         return Calendar.creditCardInformationCalendar
     }
 }

@@ -4,7 +4,7 @@ import Foundation
  Represents Omise card tokens.
  - seealso: [Tokens API](https://www.omise.co/tokens-api)
  */
-@objc(OMSToken) public class __OmiseToken: NSObject {
+@objc(OMSToken) public class __OmiseToken: NSObject { // swiftlint:disable:this type_name
     /// Token's ID.
     @objc lazy public var tokenID: String? = token.id
     

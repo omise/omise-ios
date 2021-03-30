@@ -82,7 +82,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     /// Delegate to receive CreditCardFormController result.
     public weak var delegate: CreditCardFormViewControllerDelegate?
     /// Delegate to receive CreditCardFormController result.
-    @objc(delegate) public weak var __delegate: OMSCreditCardFormViewControllerDelegate?
+    @objc(delegate) public weak var __delegate: OMSCreditCardFormViewControllerDelegate? // swiftlint:disable:this identifier_name
     
     /// A boolean flag to enables/disables automatic error handling. Defaults to `true`.
     @objc public var handleErrors = true
@@ -177,7 +177,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     @available(*, deprecated,
     message: "Please use the new method that confrom to Objective-C convention +[OMSCreditCardFormViewController creditCardFormViewControllerWithPublicKey:] as of this method will be removed in the future release.",
     renamed: "makeCreditCardFormViewController(withPublicKey:)")
-    @objc(makeCreditCardFormWithPublicKey:) public static func __makeCreditCardForm(withPublicKey publicKey: String) -> CreditCardFormViewController {
+    @objc(makeCreditCardFormWithPublicKey:) public static func __makeCreditCardForm(withPublicKey publicKey: String) -> CreditCardFormViewController { // swiftlint:disable:this identifier_name
         return CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
     }
     
@@ -195,7 +195,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     }
     
     @objc(setCreditCardInformationWithNumber:name:expirationMonth:expirationYear:)
-    public func __setCreditCardInformation(number: String, name: String, expirationMonth: Int, expirationYear: Int) {
+    public func __setCreditCardInformation(number: String, name: String, expirationMonth: Int, expirationYear: Int) { // swiftlint:disable:this identifier_name
         let month: Int?
         let year: Int?
         if Calendar.validExpirationMonthRange ~= expirationMonth {

@@ -3,7 +3,7 @@
 import Foundation
 
 /// Default error domain for the Omise Error
-public let OmiseErrorDomain = "co.omise"
+public let OmiseErrorDomain = "co.omise" // swiftlint:disable:this identifier_name
 
 let sourceParameterCodingsUserInfoKey = CodingUserInfoKey.init(rawValue: "sourceParameter")!
 
@@ -449,11 +449,11 @@ extension OmiseError.APIErrorCode.InvalidCardReason: Decodable {
     }
 }
 
-let amountAtLeastValidAmountErrorMessageRegularExpression = try! NSRegularExpression(pattern: "amount must be at least ([\\d]+)", options: []) // swiftlint:disable:this force_try
-let amountGreaterThanValidAmountErrorMessageRegularExpression = try! NSRegularExpression(pattern: "amount must be less than ([\\d]+)", options: []) // swiftlint:disable:this force_try
-let amountLessThanValidAmountErrorMessageRegularExpression = try! NSRegularExpression(pattern: "amount must be greater than ([\\d]+)", options: []) // swiftlint:disable:this force_try
+let amountAtLeastValidAmountErrorMessageRegularExpression = try! NSRegularExpression(pattern: "amount must be at least ([\\d]+)", options: []) // swiftlint:disable:this force_try identifier_name
+let amountGreaterThanValidAmountErrorMessageRegularExpression = try! NSRegularExpression(pattern: "amount must be less than ([\\d]+)", options: []) // swiftlint:disable:this force_try identifier_name
+let amountLessThanValidAmountErrorMessageRegularExpression = try! NSRegularExpression(pattern: "amount must be greater than ([\\d]+)", options: []) // swiftlint:disable:this force_try identifier_name
 
-let nameIsTooLongErrorMessageRegularExpression = try! NSRegularExpression(pattern: "name is too long \\(maximum is ([\\d]+) characters\\)", options: []) // swiftlint:disable:this force_try
+let nameIsTooLongErrorMessageRegularExpression = try! NSRegularExpression(pattern: "name is too long \\(maximum is ([\\d]+) characters\\)", options: []) // swiftlint:disable:this force_try identifier_name
 
 extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
     

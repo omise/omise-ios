@@ -7,7 +7,7 @@ import Foundation
 }
 
 /// Request object for describing a request to create a new token with the creating parameters
-@objc(OMSTokenRequest) public class __OMSTokenRequest: NSObject {
+@objc(OMSTokenRequest) public class __OMSTokenRequest: NSObject { // swiftlint:disable:this type_name
     
     /// Card holder's full name.
     @objc public var name: String {

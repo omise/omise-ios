@@ -127,6 +127,7 @@ public enum CardBrand: Int, CustomStringConvertible, Codable {
     }
 }
 
+// swiftlint:disable identifier_name type_name
 @objc(OMSCardBrandHelper) public final class __OMSCardBrand: NSObject {
     @objc(patternForBrand:) public static func __patternForBrand(brand: CardBrand) -> String {
         return brand.pattern
