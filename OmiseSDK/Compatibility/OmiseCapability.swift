@@ -5,12 +5,12 @@ import Foundation
 class __OmiseCapability: NSObject {
     let capability: Capability
     
-    @objc lazy public var location: String = capability.location
-    @objc lazy public var object: String = capability.object
+    @objc public lazy var location: String = capability.location
+    @objc public lazy var object: String = capability.object
     
-    @objc lazy public var supportedBanks: Set<String> = capability.supportedBanks
+    @objc public lazy var supportedBanks: Set<String> = capability.supportedBanks
     
-    @objc lazy public var supportedBackends: [__OmiseCapabilityBackend] =
+    @objc public lazy var supportedBackends: [__OmiseCapabilityBackend] =
         capability.supportedBackends.map(__OmiseCapabilityBackend.init)
     
     init(capability: Capability) {
@@ -22,9 +22,9 @@ class __OmiseCapability: NSObject {
 class __OmiseCapabilityBackend: NSObject {
     private let backend: Capability.Backend
     
-    @objc lazy public var payment: __OmiseCapabilityBackendPayment =
+    @objc public lazy var payment: __OmiseCapabilityBackendPayment =
         __OmiseCapabilityBackendPayment.makeCapabilityBackend(from: backend.payment)
-    @objc lazy public var supportedCurrencyCodes: Set<String> = Set(backend.supportedCurrencies.map({ $0.code }))
+    @objc public lazy var supportedCurrencyCodes: Set<String> = Set(backend.supportedCurrencies.map({ $0.code }))
     
     required init(_ backend: Capability.Backend) {
         self.backend = backend

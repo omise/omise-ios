@@ -45,7 +45,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         }
     }
     
-    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         if let cell = cell as? PaymentOptionTableViewCell {

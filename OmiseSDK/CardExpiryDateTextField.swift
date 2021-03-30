@@ -34,8 +34,8 @@ import UIKit
     
     public var dateSeparatorTextColor: UIColor?
     
-    @objc private(set) public var expirationMonthAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
-    @objc private(set) public var expirationYearAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
+    @objc public private(set) var expirationMonthAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
+    @objc public private(set) var expirationYearAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
     
     public override var keyboardType: UIKeyboardType {
         didSet {
@@ -59,17 +59,17 @@ import UIKit
         return dateFormatter
     }()
     
-    override public init() {
+    public override init() {
         super.init(frame: CGRect.zero)
         initializeInstance()
     }
     
-    override public init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         initializeInstance()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initializeInstance()
     }

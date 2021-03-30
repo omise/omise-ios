@@ -325,7 +325,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         )
     }
     
-    override public func viewDidDisappear(_ animated: Bool) {
+    public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         NotificationCenter().removeObserver(self, name: NotificationKeyboardWillShowFrameNotification, object: nil)

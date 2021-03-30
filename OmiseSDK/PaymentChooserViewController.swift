@@ -293,7 +293,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         }
     }
     
-    public func applyPaymentMethods(from capability: Capability) {
+    func applyPaymentMethods(from capability: Capability) {
         self.capability = capability
         showsCreditCardPayment = capability.creditCardBackend != nil
         allowedPaymentMethods = capability.supportedBackends.compactMap({

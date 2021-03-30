@@ -9,25 +9,25 @@ import Foundation
 @objc(OMSSource) public class __OmiseSource: NSObject {
     private let source: Source
     
-    @objc lazy public var object: String = source.object
+    @objc public lazy var object: String = source.object
     
     /// Omise Source ID
-    @objc lazy public var sourcdID: String = source.id
+    @objc public lazy var sourcdID: String = source.id
     
     /// Omise Source Type value using in the Omise API
-    @objc lazy public var type: String = source.paymentInformation.sourceType
+    @objc public lazy var type: String = source.paymentInformation.sourceType
     
     /// The payment information of this source describes how the payment is processed
-    @objc lazy public var paymentInformation = __SourcePaymentInformation.makeSourcePaymentInformation(from: source.paymentInformation)
+    @objc public lazy var paymentInformation = __SourcePaymentInformation.makeSourcePaymentInformation(from: source.paymentInformation)
     
     /// Processing Flow of this source
-    @objc lazy public var flow: String = source.flow.rawValue
+    @objc public lazy var flow: String = source.flow.rawValue
     
     /// Payment amount of this Source
-    @objc lazy public var amount: Int64 = source.amount
+    @objc public lazy var amount: Int64 = source.amount
     
     /// Payment currency of this Source
-    @objc lazy public var currencyCode: String = source.currency.code
+    @objc public lazy var currencyCode: String = source.currency.code
     
     init(source: Source) {
         self.source = source

@@ -94,7 +94,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         phoneNumberTextField.validator = try? NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
     }
     
-    public override func viewWillLayoutSubviews() {
+    override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
         if #available(iOS 11, *) {

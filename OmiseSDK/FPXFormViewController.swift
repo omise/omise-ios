@@ -100,7 +100,7 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
         validateFieldData(emailTextField)
     }
 
-    public override func viewWillLayoutSubviews() {
+    override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
         if #available(iOS 11, *) {
