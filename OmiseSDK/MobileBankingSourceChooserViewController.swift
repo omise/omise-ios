@@ -7,7 +7,7 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
 
     override var showingValues: [PaymentInformation.MobileBanking] {
         didSet {
-            os_log("Mobile Banking Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
+            os_log("Mobile Banking Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map { $0.description }.joined(separator: ", "))
         }
     }
 
@@ -65,10 +65,10 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
 
-        flowSession?.requestCreateSource(.mobileBanking(bank), completionHandler: { _ in
+        flowSession?.requestCreateSource(.mobileBanking(bank)) { _ in
             cell?.accessoryView = oldAccessoryView
             self.view.isUserInteractionEnabled = true
-        })
+        }
     }
 
     private func applyPrimaryColor() {
@@ -76,9 +76,9 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
             return
         }
 
-        mobileBankingNameLabels.forEach({
+        mobileBankingNameLabels.forEach {
             $0.textColor = currentPrimaryColor
-        })
+        }
     }
 
     private func applySecondaryColor() {}

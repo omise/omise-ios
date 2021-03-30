@@ -122,12 +122,10 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
         view.isUserInteractionEnabled = false
         
         let numberOfTerms = self.numberOfTerms[indexPath.row]
-        flowSession?.requestCreateSource(
-            .installment(PaymentInformation.Installment(brand: brand, numberOfTerms: numberOfTerms)),
-            completionHandler: { _ in
-                cell?.accessoryView = oldAccessoryView
-                self.view.isUserInteractionEnabled = true
-            })
+        flowSession?.requestCreateSource(.installment(PaymentInformation.Installment(brand: brand, numberOfTerms: numberOfTerms))) { _ in
+            cell?.accessoryView = oldAccessoryView
+            self.view.isUserInteractionEnabled = true
+        }
     }
     
     private func applyPrimaryColor() {}

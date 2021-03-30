@@ -424,13 +424,13 @@ extension OmiseError.APIErrorCode.InvalidCardReason: Decodable {
     }
     
     static func parseInvalidCardReasonsFromMessage(_ message: String) throws -> [OmiseError.APIErrorCode.InvalidCardReason] {
-        let reasonMessages = message.components(separatedBy: ", and ").flatMap({ $0.components(separatedBy: ", ") })
+        let reasonMessages = message.components(separatedBy: ", and ").flatMap { $0.components(separatedBy: ", ") }
         var parsedReasons = Set(try reasonMessages.map(OmiseError.APIErrorCode.InvalidCardReason.init(message:)))
         
         if parsedReasons.contains(.invalidCardNumber) {
             parsedReasons.remove(.unsupportedBrand)
         }
-        return parsedReasons.sorted(by: {
+        return parsedReasons.sorted {
             switch ($0, $1) {
             case (.invalidCardNumber, _):
                 return true
@@ -445,7 +445,7 @@ extension OmiseError.APIErrorCode.InvalidCardReason: Decodable {
                 
             default: return false
             }
-        })
+        }
     }
 }
 
@@ -753,12 +753,12 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
     
     // swiftlint:disable function_body_length
     static func parseBadRequestReasonsFromMessage(_ message: String, currency: Currency?) throws -> [OmiseError.APIErrorCode.BadRequestReason] {
-        let reasonMessages = message.components(separatedBy: ", and ").flatMap({ $0.components(separatedBy: ", ") }).flatMap({ $0.components(separatedBy: " and ") })
-        let parsedReasons = Set(try reasonMessages.map({
+        let reasonMessages = message.components(separatedBy: ", and ").flatMap { $0.components(separatedBy: ", ") }.flatMap { $0.components(separatedBy: " and ") }
+        let parsedReasons = Set(try reasonMessages.map {
             try OmiseError.APIErrorCode.BadRequestReason(message: $0, currency: currency)
-        }))
+        })
         
-        return parsedReasons.sorted(by: {
+        return parsedReasons.sorted {
             switch $0 {
             case .amountIsLessThanValidAmount:
                 return true
@@ -836,7 +836,7 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
                     return false
                 }
             }
-        })
+        }
     }
     
 }

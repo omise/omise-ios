@@ -226,7 +226,7 @@ extension Encoder {
 
 extension KeyedEncodingContainerProtocol where Key == JSONCodingKeys {
     mutating func encodeJSONDictionary(_ value: [String: Any]) throws {
-        try value.forEach({ (key, value) in
+        try value.forEach { (key, value) in
             let key = JSONCodingKeys(key: key)
             switch value {
             case let value as Bool:
@@ -246,7 +246,7 @@ extension KeyedEncodingContainerProtocol where Key == JSONCodingKeys {
             default:
                 throw EncodingError.invalidValue(value, EncodingError.Context(codingPath: codingPath + [key], debugDescription: "Invalid JSON value"))
             }
-        })
+        }
     }
 }
 
@@ -276,7 +276,7 @@ extension KeyedEncodingContainerProtocol {
 
 extension UnkeyedEncodingContainer {
     mutating func encodeJSONArray(_ value: [Any]) throws {
-        try value.enumerated().forEach({ (index, value) in
+        try value.enumerated().forEach { (index, value) in
             switch value {
             case let value as Bool:
                 try encode(value)
@@ -296,7 +296,7 @@ extension UnkeyedEncodingContainer {
                 let keys = JSONCodingKeys(intValue: index).map({ [ $0 ] }) ?? []
                 throw EncodingError.invalidValue(value, EncodingError.Context(codingPath: codingPath + keys, debugDescription: "Invalid JSON value"))
             }
-        })
+        }
     }
     
     private mutating func encodeArrayElement(_ value: [Any]) throws {

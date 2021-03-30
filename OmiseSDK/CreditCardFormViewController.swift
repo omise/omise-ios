@@ -106,9 +106,9 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             }
             
             if isViewLoaded {
-                errorLabels.forEach({
+                errorLabels.forEach {
                     $0.textColor = errorMessageTextColor
-                })
+                }
             }
         }
     }
@@ -116,9 +116,9 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     private lazy var overlayTransitionDelegate = OverlayPanelTransitioningDelegate()
     
     var isInputDataValid: Bool {
-        return formFields.reduce(into: true, { (valid, field) in
+        return formFields.reduce(into: true) { (valid, field) in
             valid = valid && field.isValid
-        })
+        }
     }
     
     var currentEditingTextField: OmiseTextField?
@@ -260,25 +260,25 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         applyPrimaryColor()
         applySecondaryColor()
         
-        formFields.forEach({
+        formFields.forEach {
             $0.inputAccessoryView = formFieldsAccessoryView
-        })
+        }
         
-        errorLabels.forEach({
+        errorLabels.forEach {
             $0.textColor = errorMessageTextColor
-        })
+        }
         
         formFields.forEach(self.updateAccessibilityValue)
         
         updateSupplementaryUI()
         
         configureAccessibility()
-        formFields.forEach({
+        formFields.forEach {
             $0.adjustsFontForContentSizeCategory = true
-        })
-        formLabels.forEach({
+        }
+        formLabels.forEach {
             $0.adjustsFontForContentSizeCategory = true
-        })
+        }
         confirmButton.titleLabel?.adjustsFontForContentSizeCategory = true
         
         if  #available(iOS 11, *) {
@@ -310,9 +310,9 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             // So we need to invalidate the intrinsic content size here to ask those text fields to calculate their
             // intrinsic content size again
         } else {
-            formFields.forEach({
+            formFields.forEach {
                 $0.invalidateIntrinsicContentSize()
-            })
+            }
         }
     }
     
@@ -395,7 +395,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         )
         
         let client = Client(publicKey: publicKey)
-        client.send(request, completionHandler: { [weak self] (result) in
+        client.send(request) { [weak self] (result) in
             guard let strongSelf = self else { return }
             
             strongSelf.stopActivityIndicator()
@@ -414,7 +414,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             case let .failure(err):
                 strongSelf.handleError(err)
             }
-        })
+        }
     }
     
     @objc private func keyboardWillAppear(_ notification: Notification) {
@@ -548,7 +548,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         default:
             cardBrandIconName = nil
         }
-        cardBrandIconImageView.image = cardBrandIconName.flatMap({ UIImage(named: $0, in: .module, compatibleWith: nil) })
+        cardBrandIconImageView.image = cardBrandIconName.flatMap { UIImage(named: $0, in: .module, compatibleWith: nil) }
         cardNumberTextField.rightViewMode = cardBrandIconImageView.image != nil ? .always : .never
     }
     
@@ -569,12 +569,12 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             return
         }
         
-        formFields.forEach({
+        formFields.forEach {
             $0.textColor = currentPrimaryColor
-        })
-        formLabels.forEach({
+        }
+        formLabels.forEach {
             $0.textColor = currentPrimaryColor
-        })
+        }
     }
     
     private func applySecondaryColor() {
@@ -582,10 +582,10 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             return
         }
         
-        formFields.forEach({
+        formFields.forEach {
             $0.borderColor = currentSecondaryColor
             $0.placeholderTextColor = currentSecondaryColor
-        })
+        }
     }
     
     fileprivate func associatedErrorLabelOf(_ textField: OmiseTextField) -> UILabel? {
@@ -661,24 +661,20 @@ extension CreditCardFormViewController {
     
     @IBAction func validateTextFieldDataOf(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-        UIView.animate(
-            withDuration: duration, delay: 0.0,
-            options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
-            animations: {
-                self.validateField(sender)
-            })
+        UIView.animate(withDuration: duration, delay: 0.0,
+                       options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
+            self.validateField(sender)
+        }
         sender.borderColor = currentSecondaryColor
     }
     
     @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
         if let errorLabel = associatedErrorLabelOf(sender) {
             let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-            UIView.animate(
-                withDuration: duration, delay: 0.0,
-                options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
-                animations: {
-                    errorLabel.alpha = 0.0
-                })
+            UIView.animate(withDuration: duration, delay: 0.0,
+                           options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
+                errorLabel.alpha = 0.0
+            }
         }
         
         sender.borderColor = view.tintColor
@@ -707,12 +703,12 @@ extension CreditCardFormViewController {
     
     // swiftlint:disable function_body_length
     private func configureAccessibility() {
-        formLabels.forEach({
+        formLabels.forEach {
             $0.adjustsFontForContentSizeCategory = true
-        })
-        formFields.forEach({
+        }
+        formFields.forEach {
             $0.adjustsFontForContentSizeCategory = true
-        })
+        }
         
         confirmButton.titleLabel?.adjustsFontForContentSizeCategory = true
         
@@ -737,13 +733,13 @@ extension CreditCardFormViewController {
                 }
             }
             
-            let fieldOfElement = fields.first(where: { field in
+            let fieldOfElement = fields.first { field in
                 guard let accessibilityElements = field.accessibilityElements as? [NSObjectProtocol] else {
                     return element === field
                 }
                 
-                return accessibilityElements.contains(where: { $0 === element })
-            }) ?? cardNumberTextField!
+                return accessibilityElements.contains { $0 === element }
+            } ?? cardNumberTextField!
             
             func filedAfter(_ field: OmiseTextField,
                             matchingPredicate predicate: (OmiseTextField) -> Bool,
@@ -791,14 +787,14 @@ extension CreditCardFormViewController {
         }
         
         accessibilityCustomRotors = [
-            UIAccessibilityCustomRotor(name: "Fields", itemSearch: { (predicate) -> UIAccessibilityCustomRotorItemResult? in
+            UIAccessibilityCustomRotor(name: "Fields") { (predicate) -> UIAccessibilityCustomRotorItemResult? in
                 return accessiblityElementAfter(predicate.currentItem.targetElement, matchingPredicate: { _ in true }, direction: predicate.searchDirection)
-                    .map({ UIAccessibilityCustomRotorItemResult(targetElement: $0, targetRange: nil) })
-            }),
-            UIAccessibilityCustomRotor(name: "Invalid Data Fields", itemSearch: { (predicate) -> UIAccessibilityCustomRotorItemResult? in
+                    .map { UIAccessibilityCustomRotorItemResult(targetElement: $0, targetRange: nil) }
+            },
+            UIAccessibilityCustomRotor(name: "Invalid Data Fields") { (predicate) -> UIAccessibilityCustomRotorItemResult? in
                 return accessiblityElementAfter(predicate.currentItem.targetElement, matchingPredicate: { !$0.isValid }, direction: predicate.searchDirection)
-                    .map({ UIAccessibilityCustomRotorItemResult(targetElement: $0, targetRange: nil) })
-            })
+                    .map { UIAccessibilityCustomRotorItemResult(targetElement: $0, targetRange: nil) }
+            }
         ]
     }
     

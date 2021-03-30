@@ -15,7 +15,7 @@ import UIKit
             if !(Calendar.validExpirationMonthRange ~= selectedMonth) {
                 self.selectedMonth = nil
             }
-            expirationMonthAccessibilityElement.accessibilityValue = self.selectedMonth.map({ CardExpiryDateTextField.spellingOutDateFormatter.monthSymbols[$0 - 1] })
+            expirationMonthAccessibilityElement.accessibilityValue = self.selectedMonth.map { CardExpiryDateTextField.spellingOutDateFormatter.monthSymbols[$0 - 1] }
         }
     }
     @objc(selectedMonth) public var __selectedMonth: Int { // swiftlint:disable:this identifier_name
@@ -25,7 +25,7 @@ import UIKit
     /// Currently selected year, `nil` if no year has been selected.
     public private(set) var selectedYear: Int? = nil {
         didSet {
-            expirationYearAccessibilityElement.accessibilityValue = selectedYear.map({ NumberFormatter.localizedString(from: NSNumber(value: $0), number: NumberFormatter.Style.spellOut) })
+            expirationYearAccessibilityElement.accessibilityValue = selectedYear.map { NumberFormatter.localizedString(from: NSNumber(value: $0), number: NumberFormatter.Style.spellOut) }
         }
     }
     @objc(selectedYear) public var __selectedYear: Int { // swiftlint:disable:this identifier_name
@@ -125,8 +125,8 @@ import UIKit
         }
         
         let expiryDateComponents = text.split(separator: "/")
-        let parsedExpiryMonth = expiryDateComponents.first.flatMap({ Int(String($0)) })
-        let parsedExpiryYear = expiryDateComponents.count > 1 ? expiryDateComponents.last.flatMap({ Int(String($0)) }) : nil
+        let parsedExpiryMonth = expiryDateComponents.first.flatMap { Int(String($0)) }
+        let parsedExpiryYear = expiryDateComponents.count > 1 ? expiryDateComponents.last.flatMap { Int(String($0)) } : nil
         
         if let expiryMonth = parsedExpiryMonth, expiryMonth > 0 {
             self.selectedMonth = expiryMonth
@@ -135,7 +135,7 @@ import UIKit
             if (text != expectedDisplayingExpiryMonthText && parsedExpiryYear == nil)  &&
                 (expiryMonth != 1 || expiryDateComponents[0].count == 2) {
                 let currentAttributes = defaultTextAttributes
-                let attributedText = NSMutableAttributedString(string: String(format: "%02d/", expiryMonth), attributes: Dictionary(uniqueKeysWithValues: self.defaultTextAttributes.map({ ($0.key, $0.value) })))
+                let attributedText = NSMutableAttributedString(string: String(format: "%02d/", expiryMonth), attributes: Dictionary(uniqueKeysWithValues: self.defaultTextAttributes.map { ($0.key, $0.value) }))
                 if let separatorTextColor = self.dateSeparatorTextColor {
                     attributedText.addAttribute(.foregroundColor, value: separatorTextColor, range: NSRange(location: attributedText.length - 1, length: 1))
                 }

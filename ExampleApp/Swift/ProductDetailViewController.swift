@@ -99,7 +99,7 @@ class ProductDetailViewController: OMSBaseViewController {
         let alertController = UIAlertController(title: "Authorizing Payment", message: "Please input your given authorized URL", preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
         alertController.addAction(UIAlertAction(title: "Cancel", style: AlertActionStyle.cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "Go", style: AlertActionStyle.default, handler: { (_) in
+        alertController.addAction(UIAlertAction(title: "Go", style: AlertActionStyle.default) { (_) in
             guard let textField = alertController.textFields?.first, let text = textField.text,
                 let url = URL(string: text) else { return }
             
@@ -109,7 +109,7 @@ class ProductDetailViewController: OMSBaseViewController {
                     .makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(
                         url, expectedReturnURLPatterns: [expectedReturnURL], delegate: self)
             self.present(handlerController, animated: true, completion: nil)
-        }))
+        })
         present(alertController, animated: true, completion: nil)
     }
 }
@@ -122,7 +122,7 @@ extension ProductDetailViewController: CreditCardFormViewControllerDelegate {
     }
     
     func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
-        dismissForm(completion: {
+        dismissForm {
             let alertController = UIAlertController(
                 title: "Token Created",
                 message: "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge.",
@@ -131,11 +131,11 @@ extension ProductDetailViewController: CreditCardFormViewControllerDelegate {
             let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
-        })
+        }
     }
     
     func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error) {
-        dismissForm(completion: {
+        dismissForm {
             let alertController = UIAlertController(
                 title: "Error",
                 message: error.localizedDescription,
@@ -144,7 +144,7 @@ extension ProductDetailViewController: CreditCardFormViewControllerDelegate {
             let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
-        })
+        }
     }
 }
 
@@ -166,7 +166,7 @@ extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate 
 extension ProductDetailViewController: PaymentCreatorControllerDelegate {
     
     func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didCreatePayment payment: Payment) {
-        dismissForm(completion: {
+        dismissForm {
             let title: String
             let message: String
             
@@ -187,7 +187,8 @@ extension ProductDetailViewController: PaymentCreatorControllerDelegate {
             let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
-        })    }
+        }
+    }
     
     func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didFailWithError error: Error) {
         let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
@@ -205,7 +206,7 @@ extension ProductDetailViewController: PaymentCreatorControllerDelegate {
 
 extension ProductDetailViewController: CustomCreditCardFormViewControllerDelegate {
     func creditCardFormViewController(_ controller: CustomCreditCardFormViewController, didSucceedWithToken token: Token) {
-        dismissForm(completion: {
+        dismissForm {
             let alertController = UIAlertController(
                 title: "Token Created",
                 message: "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge.",
@@ -214,11 +215,11 @@ extension ProductDetailViewController: CustomCreditCardFormViewControllerDelegat
             let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
-        })
+        }
     }
     
     func creditCardFormViewController(_ controller: CustomCreditCardFormViewController, didFailWithError error: Error) {
-        dismissForm(completion: {
+        dismissForm {
             let alertController = UIAlertController(
                 title: "Error",
                 message: error.localizedDescription,
@@ -227,6 +228,6 @@ extension ProductDetailViewController: CustomCreditCardFormViewControllerDelegat
             let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
-        })
+        }
     }
 }

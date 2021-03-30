@@ -17,7 +17,7 @@ extension Client {
      */
     @objc(sendTokenRequest:callback:) public
     func __sendRequest(_ request: __OMSTokenRequest, callback: ((__OmiseToken?, NSError?) -> Void)?) {
-        self.send(request.request, completionHandler: { result in
+        self.send(request.request) { result in
             let token: __OmiseToken?
             let error: NSError?
             
@@ -31,7 +31,7 @@ extension Client {
             }
             
             callback?(token, error)
-        })
+        }
     }
     
     /**
@@ -44,7 +44,7 @@ extension Client {
      */
     @objc(sendTokenRequest:delegate:) public
     func __sendRequest(_ request: __OMSTokenRequest, delegate: OMSTokenRequestDelegate?) {
-        self.send(request.request, completionHandler: { result in
+        self.send(request.request) { result in
             switch result {
             case let .success(token):
                 delegate?.tokenRequest(request, didSucceedWithToken: __OmiseToken(token: token))
@@ -52,7 +52,7 @@ extension Client {
                 let error = err as NSError
                 delegate?.tokenRequest(request, didFailWithError: error)
             }
-        })
+        }
     }
     
     @available(*, deprecated, message: "Please use the new -[OMSClient sendTokenRequest:callback:] method",
@@ -78,7 +78,7 @@ extension Client {
      */
     @objc(sendSourceRequest:callback:) public
     func __sendRequest(_ request: __OMSSourceRequest, callback: ((__OmiseSource?, NSError?) -> Void)?) {
-        self.send(request.request, completionHandler: { result in
+        self.send(request.request) { result in
             let token: __OmiseSource?
             let error: NSError?
             
@@ -92,7 +92,7 @@ extension Client {
             }
             
             callback?(token, error)
-        })
+        }
     }
     
     /**
@@ -105,7 +105,7 @@ extension Client {
      */
     @objc(sendSourceRequest:delegate:) public
     func __sendRequest(_ request: __OMSSourceRequest, delegate: OMSSourceRequestDelegate?) {
-        self.send(request.request, completionHandler: { result in
+        self.send(request.request) { result in
             switch result {
             case let .success(token):
                 delegate?.sourceRequest(request, didSucceedWithSource: __OmiseSource(source: token))
@@ -113,7 +113,7 @@ extension Client {
                 let error = err as NSError
                 delegate?.sourceRequest(request, didFailWithError: error)
             }
-        })
+        }
     }
     
     @objc(capabilityDataWithCompletionHandler:) public

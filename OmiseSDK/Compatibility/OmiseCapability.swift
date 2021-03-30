@@ -24,7 +24,7 @@ class __OmiseCapabilityBackend: NSObject {
     
     @objc public lazy var payment: __OmiseCapabilityBackendPayment =
         __OmiseCapabilityBackendPayment.makeCapabilityBackend(from: backend.payment)
-    @objc public lazy var supportedCurrencyCodes: Set<String> = Set(backend.supportedCurrencies.map({ $0.code }))
+    @objc public lazy var supportedCurrencyCodes: Set<String> = Set(backend.supportedCurrencies.map { $0.code })
     
     required init(_ backend: Capability.Backend) {
         self.backend = backend

@@ -150,7 +150,7 @@ extension Capability {
         }
         self.supportedBackends = backends
         
-        self.backends = Dictionary(uniqueKeysWithValues: zip(backends.map({ Capability.Backend.BackendType(payment: $0.payment) }), backends))
+        self.backends = Dictionary(uniqueKeysWithValues: zip(backends.map { Capability.Backend.BackendType(payment: $0.payment) }, backends))
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -162,9 +162,9 @@ extension Capability {
         try container.encode(supportedBanks, forKey: .supportedBanks)
         
         var backendsContainer = container.nestedUnkeyedContainer(forKey: .paymentBackends)
-        try supportedBackends.forEach({ backend in
+        try supportedBackends.forEach { backend in
             try backendsContainer.encode(backend)
-        })
+        }
     }
 }
 

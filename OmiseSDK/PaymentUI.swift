@@ -167,12 +167,12 @@ extension PaymentFormUIController where Self: UIViewController & PaymentChooserU
             return
         }
         
-        formFields.forEach({
+        formFields.forEach {
             $0.textColor = currentPrimaryColor
-        })
-        formLabels.forEach({
+        }
+        formLabels.forEach {
             $0.textColor = currentPrimaryColor
-        })
+        }
     }
     
     func applySecondaryColor() {
@@ -180,10 +180,10 @@ extension PaymentFormUIController where Self: UIViewController & PaymentChooserU
             return
         }
         
-        formFields.forEach({
+        formFields.forEach {
             $0.borderColor = currentSecondaryColor
             $0.placeholderTextColor = currentSecondaryColor
-        })
+        }
     }
 }
 

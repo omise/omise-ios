@@ -25,7 +25,7 @@ import UIKit
                 return
             }
             
-            let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map({ $0 - 1 }))
+            let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map { $0 - 1 })
             
             let kerningKey = AttributedStringKey.kern
             if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
@@ -129,12 +129,12 @@ import UIKit
         }
         
         let formattingAttributedText = NSMutableAttributedString(attributedString: attributedText)
-        let kerningIndexes = IndexSet(PAN.suggestedSpaceFormattedIndexesForPANPrefix(attributedText.string).map({ $0 - 1 }))
+        let kerningIndexes = IndexSet(PAN.suggestedSpaceFormattedIndexesForPANPrefix(attributedText.string).map { $0 - 1 })
         
         formattingAttributedText.removeAttribute(AttributedStringKey.kern, range: NSRange(location: 0, length: formattingAttributedText.length))
-        kerningIndexes[kerningIndexes.indexRange(in: 0..<attributedText.length)].forEach({
+        kerningIndexes[kerningIndexes.indexRange(in: 0..<attributedText.length)].forEach {
             formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
-        })
+        }
         let previousSelectedTextRange = self.selectedTextRange
         self.attributedText = formattingAttributedText
         self.selectedTextRange = previousSelectedTextRange
@@ -154,9 +154,9 @@ import UIKit
             )
         }
         let kerningIndexes = IndexSet([3, 7, 11])
-        kerningIndexes[kerningIndexes.indexRange(in: 0..<formattingAttributedText.length)].forEach({
+        kerningIndexes[kerningIndexes.indexRange(in: 0..<formattingAttributedText.length)].forEach {
             formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
-        })
+        }
         
         super.attributedPlaceholder = (formattingAttributedText.copy() as! NSAttributedString) // swiftlint:disable:this force_cast
     }
@@ -174,12 +174,12 @@ import UIKit
             let formattingAttributedText = NSMutableAttributedString(attributedString: attributedText)
             let formattingStartIndex = self.offset(from: beginningOfDocument, to: self.position(from: selectedTextRange.start, offset: -1) ?? selectedTextRange.start)
             
-            let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map({ $0 - 1 }))
+            let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map { $0 - 1 })
             
             formattingAttributedText.removeAttribute(AttributedStringKey.kern, range: NSRange(location: formattingStartIndex, length: formattingAttributedText.length - formattingStartIndex))
-            kerningIndexes[kerningIndexes.indexRange(in: formattingStartIndex..<formattingAttributedText.length)].forEach({
+            kerningIndexes[kerningIndexes.indexRange(in: formattingStartIndex..<formattingAttributedText.length)].forEach {
                 formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
-            })
+            }
             
             self.attributedText = formattingAttributedText
             self.selectedTextRange = selectedTextRange
@@ -190,7 +190,7 @@ import UIKit
         guard let selectedTextRange = self.selectedTextRange else {
             return
         }
-        let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map({ $0 - 1 }))
+        let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map { $0 - 1 })
         
         let kerningKey = AttributedStringKey.kern
         if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
@@ -230,7 +230,7 @@ import UIKit
             let currentIndex = cardNumberTextField.offset(from: cardNumberTextField.beginningOfDocument, to: position)
             
             if directionValue == UITextStorageDirection.backward.rawValue {
-                return spacePositionIndexes.integerLessThan(currentIndex).flatMap({ cardNumberTextField.position(from: cardNumberTextField.beginningOfDocument, offset: $0) }) ?? cardNumberTextField.beginningOfDocument
+                return spacePositionIndexes.integerLessThan(currentIndex).flatMap { cardNumberTextField.position(from: cardNumberTextField.beginningOfDocument, offset: $0) } ?? cardNumberTextField.beginningOfDocument
             } else if directionValue == UITextStorageDirection.forward.rawValue {
                 return spacePositionIndexes.integerGreaterThan(currentIndex).flatMap({ cardNumberTextField.position(from: cardNumberTextField.beginningOfDocument, offset: $0) }) ?? cardNumberTextField.endOfDocument
             } else {

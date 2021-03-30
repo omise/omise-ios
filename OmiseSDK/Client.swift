@@ -46,11 +46,11 @@ import os
     ///     The completion handler will be called on the main queue
     /// - Returns: A new Request Task
     public func requestTask<T: CreatableObject>(with request: Request<T>, completionHandler: Request<T>.Callback?) -> RequestTask<T> {
-        let dataTask = session.dataTask(with: buildURLRequest(for: request), completionHandler: { (data, response, error) in
+        let dataTask = session.dataTask(with: buildURLRequest(for: request)) { (data, response, error) in
             DispatchQueue.main.async {
                 Client.completeRequest(request, callback: completionHandler)(data, response, error)
             }
-        })
+        }
         return RequestTask(request: request, dataTask: dataTask)
     }
     
@@ -71,7 +71,7 @@ import os
     
     // swiftlint:disable function_body_length
     public func capabilityDataWithCompletionHandler(_ completionHandler: ((RequestResult<Capability>) -> Void)?) {
-        let dataTask = session.dataTask(with: buildCapabilityAPIURLRequest(), completionHandler: { (data, response, error) in
+        let dataTask = session.dataTask(with: buildCapabilityAPIURLRequest()) { (data, response, error) in
             guard let completionHandler = completionHandler else { return } // nobody around to hear the leaf falls
             
             var result: RequestResult<Capability>
@@ -135,7 +135,7 @@ import os
                 let error = OmiseError.unexpected(error: .unrecognizedHTTPStatusCode(code: httpResponse.statusCode), underlying: nil)
                 result = .failure(error)
             }
-        })
+        }
         dataTask.resume()
     }
     

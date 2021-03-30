@@ -147,9 +147,9 @@ class OverlayPanelPresentationController: UIPresentationController {
             return
         }
         
-        coordinator.animate(alongsideTransition: { _ in
+        coordinator.animate { _ in
             self.dimmingView.alpha = 1.0
-        })
+        }
         
         dismissTapGestureRecognizer.isEnabled = true
     }
@@ -160,9 +160,9 @@ class OverlayPanelPresentationController: UIPresentationController {
             return
         }
         
-        coordinator.animate(alongsideTransition: { _ in
+        coordinator.animate { _ in
             self.dimmingView.alpha = 0.0
-        })
+        }
         dismissTapGestureRecognizer.isEnabled = false
     }
     
@@ -280,9 +280,9 @@ extension OverlayPanelPresentationController: UIViewControllerAnimatedTransition
 
         let animator = UIViewPropertyAnimator(duration: animationDuration, timingParameters: UISpringTimingParameters())
         animator.addAnimations(animationBlock)
-        animator.addCompletion({ position in
+        animator.addCompletion { position in
             transitionContext.completeTransition(position == UIViewAnimatingPosition.end)
-        })
+        }
         animator.startAnimation()
     }
 }

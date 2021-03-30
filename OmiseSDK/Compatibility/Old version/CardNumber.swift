@@ -21,9 +21,9 @@ import Foundation
      - seealso: CardBrand
      */
     public static func brand(of pan: String) -> CardBrand? {
-        return CardBrand.all.first(where: { brand -> Bool in
+        return CardBrand.all.first { brand -> Bool in
             pan.range(of: brand.pattern, options: .regularExpression, range: nil, locale: nil) != nil
-        })
+        }
     }
     
     @objc(brandForPan:) public static func __brand(_ pan: String) -> Int { // swiftlint:disable:this identifier_name

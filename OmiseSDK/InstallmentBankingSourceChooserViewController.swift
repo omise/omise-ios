@@ -7,7 +7,7 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
     
     override var showingValues: [PaymentInformation.Installment.Brand] {
         didSet {
-            os_log("Installment Brand Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
+            os_log("Installment Brand Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map { $0.description }.joined(separator: ", "))
         }
     }
     
@@ -91,9 +91,9 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
             return
         }
         
-        bankNameLabels.forEach({
+        bankNameLabels.forEach {
             $0.textColor = currentPrimaryColor
-        })
+        }
     }
     
     private func applySecondaryColor() {

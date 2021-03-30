@@ -11,9 +11,9 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
     private var client: Client?
 
     private var isInputDataValid: Bool {
-        let valid = formFields.reduce(into: true, { (valid, field) in
+        let valid = formFields.reduce(into: true) { (valid, field) in
             valid = valid && field.isValid
-        })
+        }
 
         return valid || isEmailInputEmpty
     }
@@ -67,16 +67,16 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
         applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
-        formFields.forEach({
+        formFields.forEach {
             $0.inputAccessoryView = formFieldsAccessoryView
-        })
+        }
 
-        formFields.forEach({
+        formFields.forEach {
             $0.adjustsFontForContentSizeCategory = true
-        })
-        formLabels.forEach({
+        }
+        formLabels.forEach {
             $0.adjustsFontForContentSizeCategory = true
-        })
+        }
         submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
 
         if  #available(iOS 11, *) {
@@ -109,9 +109,9 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
             // So we need to invalidate the intrinsic content size here to ask those text fields to calculate their
             // intrinsic content size again
         } else {
-            formFields.forEach({
+            formFields.forEach {
                 $0.invalidateIntrinsicContentSize()
-            })
+            }
         }
     }
 
@@ -138,23 +138,19 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
 
     @IBAction func validateTextFieldDataOf(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-        UIView.animate(
-            withDuration: duration, delay: 0.0,
-            options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
-            animations: {
-                self.validateField(sender)
-            })
+        UIView.animate(withDuration: duration, delay: 0.0,
+                       options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
+            self.validateField(sender)
+        }
         sender.borderColor = currentSecondaryColor
     }
 
     @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-        UIView.animate(
-            withDuration: duration, delay: 0.0,
-            options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
-            animations: {
-                self.errorLabel.alpha = 0.0
-            })
+        UIView.animate(withDuration: duration, delay: 0.0,
+                       options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
+            self.errorLabel.alpha = 0.0
+        }
 
         updateInputAccessoryViewWithFirstResponder(sender)
         sender.borderColor = view.tintColor

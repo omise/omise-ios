@@ -314,12 +314,11 @@ public class PaymentCreatorController: UINavigationController {
         }
         
         if animated {
-            UIView.animate(
-                withDuration: TimeInterval(NavigationControllerHideShowBarDuration), delay: 0.0,
-                options: [.layoutSubviews], animations: animationBlock,
-                completion: { _ in
-                    self.displayingNoticeView.removeFromSuperview()
-                })
+            UIView.animate(withDuration: TimeInterval(NavigationControllerHideShowBarDuration),
+                           delay: 0.0,
+                           options: [.layoutSubviews], animations: animationBlock) { _ in
+                self.displayingNoticeView.removeFromSuperview()
+            }
         } else {
             animationBlock()
             self.displayingNoticeView.removeFromSuperview()

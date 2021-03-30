@@ -8,9 +8,9 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
     private var client: Client?
     
     private var isInputDataValid: Bool {
-        return formFields.reduce(into: true, { (valid, field) in
+        return formFields.reduce(into: true) { (valid, field) in
             valid = valid && field.isValid
-        })
+        }
     }
     
     @IBInspectable var preferredPrimaryColor: UIColor? {
@@ -58,16 +58,16 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
         applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-        formFields.forEach({
+        formFields.forEach {
             $0.inputAccessoryView = formFieldsAccessoryView
-        })
+        }
         
-        formFields.forEach({
+        formFields.forEach {
             $0.adjustsFontForContentSizeCategory = true
-        })
-        formLabels.forEach({
+        }
+        formLabels.forEach {
             $0.adjustsFontForContentSizeCategory = true
-        })
+        }
         submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
         
         if  #available(iOS 11, *) {
@@ -97,9 +97,9 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
             // So we need to invalidate the intrinsic content size here to ask those text fields to calculate their
             // intrinsic content size again
         } else {
-            formFields.forEach({
+            formFields.forEach {
                 $0.invalidateIntrinsicContentSize()
-            })
+            }
         }
     }
 
@@ -113,12 +113,12 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
         view.isUserInteractionEnabled = false
         view.tintAdjustmentMode = .dimmed
         submitButton.isEnabled = false
-        flowSession?.requestCreateSource(.truemoney(trueMoneyInformation), completionHandler: { _ in
+        flowSession?.requestCreateSource(.truemoney(trueMoneyInformation)) { _ in
             self.requestingIndicatorView.stopAnimating()
             self.view.isUserInteractionEnabled = true
             self.view.tintAdjustmentMode = .automatic
             self.submitButton.isEnabled = true
-        })
+        }
     }
     
     @IBAction func validateFieldData(_ textField: OmiseTextField) {
@@ -127,23 +127,20 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
     
     @IBAction func validateTextFieldDataOf(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-        UIView.animate(
-            withDuration: duration, delay: 0.0,
-            options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
-            animations: {
-                self.validateField(sender)
-            })
+        UIView.animate(withDuration: duration, delay: 0.0,
+                       options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
+            self.validateField(sender)
+        }
         sender.borderColor = currentSecondaryColor
     }
     
     @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-        UIView.animate(
-            withDuration: duration, delay: 0.0,
-            options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
-            animations: {
-                self.errorLabel.alpha = 0.0
-            })
+        UIView.animate(withDuration: duration,
+                       delay: 0.0,
+                       options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
+            self.errorLabel.alpha = 0.0
+        }
         
         updateInputAccessoryViewWithFirstResponder(sender)
         sender.borderColor = view.tintColor

@@ -29,9 +29,9 @@ public struct PAN {
     
     /// A card network brand of this PAN
     public var brand: CardBrand? {
-        return CardBrand.all.first(where: { brand -> Bool in
+        return CardBrand.all.first { brand -> Bool in
             pan.range(of: brand.pattern, options: .regularExpression, range: nil, locale: nil) != nil
-        })
+        }
     }
     
     /// The suggested of where the space should be displayed string indexes
@@ -67,21 +67,21 @@ public struct PAN {
     private func validateLuhn() -> Bool {
         let digits = pan
             .reversed()
-            .compactMap({ Int(String($0)) })
+            .compactMap { Int(String($0)) }
         
         guard digits.count == pan.count else { return false }
         
         let oddSum = digits.enumerated()
-            .filter({ (index, _) -> Bool in index.isMultiple(of: 2) })
-            .map({ (_, digit) -> Int in digit })
+            .filter { (index, _) -> Bool in index.isMultiple(of: 2) }
+            .map { (_, digit) -> Int in digit }
         let evenSum = digits.enumerated()
-            .filter({ (index, _) -> Bool in !index.isMultiple(of: 2) })
-            .map({ (_, digit) -> Int in
+            .filter { (index, _) -> Bool in !index.isMultiple(of: 2) }
+            .map { (_, digit) -> Int in
                 let sum = digit * 2
                 return sum > 9 ? sum - 9 : sum
-            })
+            }
         
-        let sum = (oddSum + evenSum).reduce(into: 0, { (acc, digit) in acc += digit })
+        let sum = (oddSum + evenSum).reduce(into: 0) { (acc, digit) in acc += digit }
         return sum.isMultiple(of: 10)
     }
     

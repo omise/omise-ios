@@ -46,16 +46,16 @@ struct PaymentPreset {
     @objc static let malaysiaAllowedPaymentMethods: [OMSSourceTypeValue] = PaymentPreset.malaysiaPreset.allowedPaymentMethods
     
     @objc static func imageWith(size: CGSize, color: UIColor) -> UIImage? {
-        return Tool.imageWith(size: size, actions: { (context) in
+        return Tool.imageWith(size: size) { (context) in
             context.setFillColor(color.cgColor)
             context.fill(CGRect(origin: .zero, size: size))
-        })
+        }
     }
     
     @objc static func imageWith(size: CGSize, actions: (CGContext) -> Void) -> UIImage? {
         let renderer = UIGraphicsImageRenderer(size: size)
-        return renderer.image(actions: { context in
+        return renderer.image { context in
             actions(context.cgContext)
-        })
+        }
     }
 }

@@ -21,7 +21,7 @@ class CardExpiryDatePicker: UIPickerView {
         formatter.numberStyle = .decimal
         formatter.alwaysShowsDecimalSeparator = false
         formatter.minimumIntegerDigits = 2
-        return validRange.map({ formatter.string(from: $0 as NSNumber)! })
+        return validRange.map { formatter.string(from: $0 as NSNumber)! }
     }()
     
     private let years: [Int] = {

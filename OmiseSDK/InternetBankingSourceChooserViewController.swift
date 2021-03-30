@@ -7,7 +7,7 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
     
     override var showingValues: [PaymentInformation.InternetBanking] {
         didSet {
-            os_log("Internet Banking Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
+            os_log("Internet Banking Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map { $0.description }.joined(separator: ", "))
         }
     }
     
@@ -71,10 +71,10 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
         
-        flowSession?.requestCreateSource(.internetBanking(bank), completionHandler: { _ in
+        flowSession?.requestCreateSource(.internetBanking(bank)) { _ in
             cell?.accessoryView = oldAccessoryView
             self.view.isUserInteractionEnabled = true
-        })
+        }
     }
     
     private func applyPrimaryColor() {
@@ -82,9 +82,9 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
             return
         }
         
-        internetBankingNameLabels.forEach({
+        internetBankingNameLabels.forEach {
             $0.textColor = currentPrimaryColor
-        })
+        }
     }
     
     private func applySecondaryColor() {}

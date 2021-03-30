@@ -24,9 +24,9 @@ class CardNumberTest: XCTestCase {
         ]
         
         tests.forEach { cards in
-            cards.forEach({ (brand, number) in
+            cards.forEach { (brand, number) in
                 XCTAssertEqual(brand, CardNumber.brand(of: number))
-            })
+            }
         }
     }
     

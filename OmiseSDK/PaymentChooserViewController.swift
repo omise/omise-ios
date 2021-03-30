@@ -254,10 +254,10 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
         
-        flowSession?.requestCreateSource(payment, completionHandler: { _ in
+        flowSession?.requestCreateSource(payment) { _ in
             cell?.accessoryView = oldAccessoryView
             self.view.isUserInteractionEnabled = true
-        })
+        }
     }
     
     override func staticIndexPath(forValue value: PaymentChooserOption) -> IndexPath {
@@ -296,7 +296,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     func applyPaymentMethods(from capability: Capability) {
         self.capability = capability
         showsCreditCardPayment = capability.creditCardBackend != nil
-        allowedPaymentMethods = capability.supportedBackends.compactMap({
+        allowedPaymentMethods = capability.supportedBackends.compactMap {
             switch $0.payment {
             case .alipay:
                 return OMSSourceTypeValue.alipay
@@ -323,20 +323,20 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             case .card, .unknownSource:
                 return nil
             }
-        })
+        }
         
         updateShowingValues()
     }
     
     private func loadCapabilityData() {
-        flowSession?.client?.capabilityDataWithCompletionHandler({ (result) in
+        flowSession?.client?.capabilityDataWithCompletionHandler { (result) in
             switch result {
             case .success(let capability):
                 self.applyPaymentMethods(from: capability)
             case .failure:
                 break
             }
-        })
+        }
     }
     
     private func applyPrimaryColor() {
@@ -344,9 +344,9 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return
         }
         
-        paymentMethodNameLables.forEach({
+        paymentMethodNameLables.forEach {
             $0.textColor = currentPrimaryColor
-        })
+        }
     }
     
     private func applySecondaryColor() {}
@@ -365,7 +365,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         
         showingValues = paymentMethodsToShow
         
-        os_log("Payment Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
+        os_log("Payment Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map { $0.description }.joined(separator: ", "))
     }
     
     @IBAction func requestToClose(_ sender: Any) {

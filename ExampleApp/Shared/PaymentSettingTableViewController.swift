@@ -58,18 +58,18 @@ class PaymentSettingTableViewController: UITableViewController {
                 return
             }
             let removingPaymentMethods = allowedPaymentMethods.subtracting(newValue)
-            removingPaymentMethods.compactMap(self.cell(for:)).forEach({
+            removingPaymentMethods.compactMap(self.cell(for:)).forEach {
                 $0.accessoryType = .none
-            })
+            }
         }
         didSet {
             guard isViewLoaded else {
                 return
             }
             let addingPaymentMethods = allowedPaymentMethods.subtracting(oldValue)
-            addingPaymentMethods.compactMap(self.cell(for:)).forEach({
+            addingPaymentMethods.compactMap(self.cell(for:)).forEach {
                 $0.accessoryType = .checkmark
-            })
+            }
         }
     }
     
@@ -109,9 +109,9 @@ class PaymentSettingTableViewController: UITableViewController {
         super.viewDidLoad()
         
         cell(for: currentCurrency)?.accessoryType = .checkmark
-        allowedPaymentMethods.compactMap(self.cell(for:)).forEach({
+        allowedPaymentMethods.compactMap(self.cell(for:)).forEach {
             $0.accessoryType = .checkmark
-        })
+        }
         
         amountField.text = amountFormatter.string(from: NSNumber(value: currentCurrency.convert(fromSubunit: currentAmount)))
         amountField.inputAccessoryView = amountFieldInputAccessoryView
@@ -163,26 +163,26 @@ class PaymentSettingTableViewController: UITableViewController {
     
     @IBAction func showPresetChooser(_ sender: Any) {
         let presetChooserAlertController = UIAlertController(title: "Preset", message: nil, preferredStyle: .actionSheet)
-        presetChooserAlertController.addAction(UIAlertAction(title: "Thailand", style: .default, handler: { (_) in
+        presetChooserAlertController.addAction(UIAlertAction(title: "Thailand", style: .default) { (_) in
             self.currentAmount = PaymentPreset.thailandPreset.paymentAmount
             self.currentCurrency = PaymentPreset.thailandPreset.paymentCurrency
             self.allowedPaymentMethods = Set(PaymentPreset.thailandPreset.allowedPaymentMethods)
-        }))
-        presetChooserAlertController.addAction(UIAlertAction(title: "Japan", style: .default, handler: { (_) in
+        })
+        presetChooserAlertController.addAction(UIAlertAction(title: "Japan", style: .default) { (_) in
             self.currentAmount = PaymentPreset.japanPreset.paymentAmount
             self.currentCurrency = PaymentPreset.japanPreset.paymentCurrency
             self.allowedPaymentMethods = Set(PaymentPreset.japanPreset.allowedPaymentMethods)
-        }))
-        presetChooserAlertController.addAction(UIAlertAction(title: "Singapore", style: .default, handler: { (_) in
+        })
+        presetChooserAlertController.addAction(UIAlertAction(title: "Singapore", style: .default) { (_) in
             self.currentAmount = PaymentPreset.singaporePreset.paymentAmount
             self.currentCurrency = PaymentPreset.singaporePreset.paymentCurrency
             self.allowedPaymentMethods = Set(PaymentPreset.singaporePreset.allowedPaymentMethods)
-        }))
-        presetChooserAlertController.addAction(UIAlertAction(title: "Malaysia", style: .default, handler: { (_) in
+        })
+        presetChooserAlertController.addAction(UIAlertAction(title: "Malaysia", style: .default) { (_) in
             self.currentAmount = PaymentPreset.malaysiaPreset.paymentAmount
             self.currentCurrency = PaymentPreset.malaysiaPreset.paymentCurrency
             self.allowedPaymentMethods = Set(PaymentPreset.malaysiaPreset.allowedPaymentMethods)
-        }))
+        })
         
         presetChooserAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(presetChooserAlertController, animated: true, completion: nil)
@@ -191,9 +191,9 @@ class PaymentSettingTableViewController: UITableViewController {
 
 extension PaymentSettingTableViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        return string.allSatisfy({ (character) -> Bool in
+        return string.allSatisfy { (character) -> Bool in
             return "0"..."9" ~= character || (currentCurrency.factor > 1 && "." == character)
-        })
+        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
