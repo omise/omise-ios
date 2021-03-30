@@ -255,7 +255,7 @@ extension Client {
         var urlRequest = URLRequest(url: T.postURL)
         urlRequest.httpMethod = "POST"
         let encoder = Client.makeJSONEncoder()
-        urlRequest.httpBody = try! encoder.encode(request.parameter)
+        urlRequest.httpBody = try? encoder.encode(request.parameter)
         urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
         urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: "User-Agent")
         urlRequest.setValue(Client.omiseAPIContentType, forHTTPHeaderField: "Content-Type")

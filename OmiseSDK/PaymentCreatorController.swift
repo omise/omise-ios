@@ -117,13 +117,13 @@ public class PaymentCreatorController: UINavigationController {
     private let paymentSourceCreatorFlowSession = PaymentCreatorFlowSession()
     
     private var paymentChooserViewController: PaymentChooserViewController {
-        return viewControllers[0] as! PaymentChooserViewController
+        return viewControllers[0] as! PaymentChooserViewController // swiftlint:disable:this force_cast
     }
     
     private var noticeViewHeightConstraint: NSLayoutConstraint!
     private let displayingNoticeView: NoticeView = {
         let noticeViewNib = UINib(nibName: "NoticeView", bundle: .module)
-        let noticeView = noticeViewNib.instantiate(withOwner: nil, options: nil).first as! NoticeView
+        let noticeView = noticeViewNib.instantiate(withOwner: nil, options: nil).first as! NoticeView // swiftlint:disable:this force_cast
         noticeView.translatesAutoresizingMaskIntoConstraints = false
         noticeView.backgroundColor = .error
         return noticeView
@@ -149,7 +149,7 @@ public class PaymentCreatorController: UINavigationController {
         allowedPaymentMethods: [OMSSourceTypeValue],
         paymentDelegate: PaymentCreatorControllerDelegate?) -> PaymentCreatorController {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
-        let paymentCreatorController = storyboard.instantiateViewController(withIdentifier: "PaymentCreatorController") as! PaymentCreatorController
+        let paymentCreatorController = storyboard.instantiateViewController(withIdentifier: "PaymentCreatorController") as! PaymentCreatorController // swiftlint:disable:this force_cast
         paymentCreatorController.publicKey = publicKey
         paymentCreatorController.paymentAmount = amount
         paymentCreatorController.paymentCurrency = currency

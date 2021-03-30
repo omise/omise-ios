@@ -116,7 +116,7 @@ public class OmiseTextField: UITextField {
                 AttributedStringKey.foregroundColor, value: placeholderColor,
                 range: NSRange(formattingPlaceholderString.startIndex..<formattingPlaceholderString.endIndex, in: formattingPlaceholderString)
             )
-            super.attributedPlaceholder = (formattingAttributedText.copy() as! NSAttributedString)
+            super.attributedPlaceholder = (formattingAttributedText.copy() as! NSAttributedString) // swiftlint:disable:this force_cast
         }
     }
     

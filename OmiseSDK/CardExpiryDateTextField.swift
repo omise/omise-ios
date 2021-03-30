@@ -86,7 +86,7 @@ public class CardExpiryDateTextField: OmiseTextField {
         expirationMonthAccessibilityElement.accessibilityTraits.insert(UIAccessibilityTraits.adjustable)
         expirationYearAccessibilityElement.accessibilityTraits.insert(UIAccessibilityTraits.adjustable)
         
-        validator = try! NSRegularExpression(pattern: "^([0-1]?\\d)/(\\d{1,2})$", options: [])
+        validator = try? NSRegularExpression(pattern: "^([0-1]?\\d)/(\\d{1,2})$", options: [])
     }
     
     public override var accessibilityElements: [Any]? {
@@ -168,7 +168,7 @@ public class CardExpiryDateTextField: OmiseTextField {
         }
     }
     
-    static let monthStringRegularExpression = try! NSRegularExpression(pattern: "^([0-1]?\\d)", options: [])
+    static let monthStringRegularExpression = try! NSRegularExpression(pattern: "^([0-1]?\\d)", options: []) // swiftlint:disable:this force_try
     
     public override func replace(_ range: UITextRange, withText text: String) {
         super.replace(range, withText: text)

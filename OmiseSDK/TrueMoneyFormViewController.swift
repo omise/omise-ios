@@ -87,7 +87,7 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
             name: NotificationKeyboardWillHideFrameNotification, object: nil
         )
         
-        phoneNumberTextField.validator = try! NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
+        phoneNumberTextField.validator = try? NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
     }
     
     public override func viewWillLayoutSubviews() {

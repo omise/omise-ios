@@ -158,7 +158,7 @@ public class CardNumberTextField: OmiseTextField {
             formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
         })
         
-        super.attributedPlaceholder = (formattingAttributedText.copy() as! NSAttributedString)
+        super.attributedPlaceholder = (formattingAttributedText.copy() as! NSAttributedString) // swiftlint:disable:this force_cast
     }
     
     override func textDidChange() {

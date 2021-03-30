@@ -168,7 +168,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     @objc(creditCardFormViewControllerWithPublicKey:)
     public static func makeCreditCardFormViewController(withPublicKey publicKey: String) -> CreditCardFormViewController {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
-        let creditCardForm = storyboard.instantiateInitialViewController() as! CreditCardFormViewController
+        let creditCardForm = storyboard.instantiateInitialViewController() as! CreditCardFormViewController // swiftlint:disable:this force_cast
         creditCardForm.publicKey = publicKey
         
         return creditCardForm

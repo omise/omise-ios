@@ -7,7 +7,7 @@ class CapabilityOperationFixtureTests: XCTestCase {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
         
         do {
-            let capabilityData = XCTestCase.fixturesData(forFilename: "capability")
+            let capabilityData = try XCTestCase.fixturesData(forFilename: "capability")
             let capability = try decoder.decode(Capability.self, from: capabilityData)
             
             XCTAssertEqual(capability.supportedBackends.count, 9)
@@ -55,7 +55,7 @@ class CapabilityOperationFixtureTests: XCTestCase {
     
     func testEncodeCapabilityRetrieve() throws {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
-        let capabilityData = XCTestCase.fixturesData(forFilename: "capability")
+        let capabilityData = try XCTestCase.fixturesData(forFilename: "capability")
         let capability = try decoder.decode(Capability.self, from: capabilityData)
 
         let encoder = JSONEncoder()
