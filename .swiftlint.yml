@@ -1,0 +1,95 @@
+# 
+# Rule Directory Reference: https://realm.github.io/SwiftLint/rule-directory.html
+# 
+
+excluded:
+  - QuickStart.playground
+
+opt_in_rules:
+  - anyobject_protocol
+  - attributes
+  - closure_body_length
+  - closure_end_indentation
+  - closure_spacing
+  - collection_alignment
+  - contains_over_first_not_nil
+  - convenience_type
+  - discouraged_object_literal
+  - discouraged_optional_boolean
+  - empty_collection_literal
+  - empty_count
+  - empty_string
+  - empty_xctest_method
+  - explicit_init
+  - fatal_error_message
+  - first_where
+  - force_unwrapping
+  - identical_operands
+  - joined_default_parameter
+  - last_where
+  - legacy_multiple
+  - legacy_random
+  - literal_expression_end_indentation
+  - lower_acl_than_parent
+  - modifier_order
+  - multiline_arguments
+  - multiline_function_chains
+  - multiline_literal_brackets
+  - multiline_parameters
+  - multiline_parameters_brackets
+  - operator_usage_whitespace
+  - overridden_super_call
+  - override_in_extension
+  - prefer_self_type_over_type_of_self
+  - private_action
+  # - private_outlet
+  - prohibited_super_call
+  - redundant_nil_coalescing
+  - redundant_type_annotation
+  - sorted_first_last
+  - static_operator
+  - strong_iboutlet
+  - toggle_bool
+  - trailing_closure
+  - unowned_variable_capture
+  - untyped_error_in_catch
+  - unused_import
+  - vertical_parameter_alignment_on_call
+  - xct_specific_matcher
+  - yoda_condition
+  
+attributes:
+  always_on_same_line:
+    - '@objc'
+    - '@IBAction'
+cyclomatic_complexity:
+  ignores_case_statements: true
+identifier_name:
+  min_length:
+    warning: 1
+  excluded:
+    - id
+line_length:
+  ignores_urls: true
+  ignores_function_declarations: true
+  ignores_comments: true
+  ignores_interpolated_strings: true
+  warning: 140
+modifier_order:
+  preferred_modifier_order:
+    - acl
+    - setterACL
+    - override
+    - dynamic
+    - mutators
+    - lazy
+    - final
+    - required
+    - convenience
+    - typeMethods
+    - owned
+nesting:
+  type_level:
+    warning: 2
+trailing_whitespace:
+  ignores_empty_lines: true
