@@ -77,7 +77,7 @@ public class PaymentCreatorController: UINavigationController {
     }
     
     /// Boolean indicates that the form should show the Credit Card payment option or not
-    @objc public var showsCreditCardPayment: Bool = true {
+    @objc public var showsCreditCardPayment = true {
         didSet {
             paymentChooserViewController.showsCreditCardPayment = showsCreditCardPayment
         }
@@ -96,7 +96,7 @@ public class PaymentCreatorController: UINavigationController {
     /// The controller will show an error alert in the UI if the value is true,
     /// otherwise the controller will ask its delegate.
     /// Defaults to `true`.
-    @objc public var handleErrors: Bool = true
+    @objc public var handleErrors = true
     
     /// Delegate to receive CreditCardFormController result.
     public weak var paymentDelegate: PaymentCreatorControllerDelegate?

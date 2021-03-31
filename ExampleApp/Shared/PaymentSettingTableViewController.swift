@@ -41,7 +41,7 @@ class PaymentSettingTableViewController: UITableViewController {
         }
     }
     
-    @objc var usesCapabilityDataForPaymentMethods: Bool = true {
+    @objc var usesCapabilityDataForPaymentMethods = true {
         didSet {
             guard isViewLoaded else {
                 return

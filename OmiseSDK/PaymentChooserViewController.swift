@@ -110,7 +110,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     var capability: Capability?
     var flowSession: PaymentCreatorFlowSession?
     
-    @objc var showsCreditCardPayment: Bool = true {
+    @objc var showsCreditCardPayment = true {
         didSet {
             updateShowingValues()
         }
