@@ -161,7 +161,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
 
     /// A boolean flag that enables/disables Card.IO integration.
     @available(*, unavailable, message: "Built in support for Card.ios was removed. You can implement it in your app and call the setCreditCardInformation(number:name:expiration:) method") // swiftlint:disable:this line_length
-    @objc public var cardIOEnabled: Bool = true
+    @objc public var cardIOEnabled = true
     
     /// Factory method for creating CreditCardFormController with given public key.
     /// - parameter publicKey: Omise public key.
@@ -418,7 +418,10 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             strongSelf.stopActivityIndicator()
             switch result {
             case let .success(token):
-                os_log("Credit Card Form's Request succeed %{private}@, trying to notify the delegate", log: uiLogObject, type: .default, token.id)
+                os_log("Credit Card Form's Request succeed %{private}@, trying to notify the delegate",
+                       log: uiLogObject,
+                       type: .default,
+                       token.id)
                 if let delegate = strongSelf.delegate {
                     delegate.creditCardFormViewController(strongSelf, didSucceedWithToken: token)
                     os_log("Credit Card Form Create Token succeed delegate notified", log: uiLogObject, type: .default)
