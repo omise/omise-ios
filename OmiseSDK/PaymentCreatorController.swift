@@ -311,7 +311,7 @@ public class PaymentCreatorController: UINavigationController {
         if animated {
             UIView.animate(withDuration: TimeInterval(NavigationControllerHideShowBarDuration) + 0.07,
                            delay: 0.0,
-                           options: [.layoutSubviews],
+                           options: [.layoutSubviews, .beginFromCurrentState],
                            animations: animationBlock)
         } else {
             animationBlock()
@@ -334,10 +334,22 @@ public class PaymentCreatorController: UINavigationController {
         }
         
         if animated {
-            UIView.animate(withDuration: TimeInterval(NavigationControllerHideShowBarDuration),
-                           delay: 0.0,
-                           options: [.layoutSubviews],
-                           animations: animationBlock) { _ in
+            UIView.animate(
+                withDuration: TimeInterval(NavigationControllerHideShowBarDuration),
+                delay: 0.0,
+                options: [.layoutSubviews],
+                animations: animationBlock
+            ) { _ in
+                var isCompleted: Bool {
+                    if #available(iOS 13, *) {
+                        return self.topViewController?.additionalSafeAreaInsets.top == 0
+                    } else if #available(iOS 11, *) {
+                        return self.additionalSafeAreaInsets.top == 0
+                    } else {
+                        return true
+                    }
+                }
+                guard isCompleted else { return }
                 self.displayingNoticeView.removeFromSuperview()
             }
         } else {
@@ -347,6 +359,8 @@ public class PaymentCreatorController: UINavigationController {
     }
     
     public override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        dismissErrorMessage(animated: false, sender: self)
+        
         if let viewController = viewController as? PaymentChooserUI {
             viewController.preferredPrimaryColor = preferredPrimaryColor
             viewController.preferredSecondaryColor = preferredSecondaryColor
@@ -355,6 +369,11 @@ public class PaymentCreatorController: UINavigationController {
             viewController.flowSession = self.paymentSourceCreatorFlowSession
         }
         super.pushViewController(viewController, animated: animated)
+    }
+    
+    public override func popViewController(animated: Bool) -> UIViewController? {
+        dismissErrorMessage(animated: false, sender: self)
+        return super.popViewController(animated: animated)
     }
     
     public override func addChild(_ childController: UIViewController) {

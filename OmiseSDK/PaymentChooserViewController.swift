@@ -103,7 +103,6 @@ extension PaymentChooserOption {
     }
 }
 
-// swiftlint:disable type_body_length
 @objc(OMSPaymentChooserViewController)
 class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>,
                                     PaymentSourceChooser,
@@ -231,7 +230,6 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
-        dismissErrorMessage(animated: true, sender: cell)
         tableView.deselectRow(at: indexPath, animated: true)
         let payment: PaymentInformation
         
