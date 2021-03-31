@@ -113,7 +113,8 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         }
     }
     
-    private lazy var overlayTransitionDelegate = OverlayPanelTransitioningDelegate() // swiftlint:disable:this weak_delegate
+    // swiftlint:disable:next weak_delegate
+    private lazy var overlayTransitionDelegate = OverlayPanelTransitioningDelegate()
     
     var isInputDataValid: Bool {
         return formFields.reduce(into: true) { (valid, field) in
@@ -638,7 +639,6 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         }
     }
     
-    // swiftlint:disable function_body_length
     private func validateField(_ textField: OmiseTextField) {
         guard let errorLabel = associatedErrorLabelOf(textField) else {
             return
@@ -647,55 +647,56 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             try textField.validate()
             errorLabel.alpha = 0.0
         } catch {
-            switch (error, textField) {
-            case (OmiseTextFieldValidationError.emptyText, _):
-                errorLabel.text = "-" // We need to set the error label some string in order to have it retains its height
-                
-            case (OmiseTextFieldValidationError.invalidData, cardNumberTextField):
-                errorLabel.text = NSLocalizedString(
-                    "credit-card-form.card-number-field.invalid-data.error.text",
-                    tableName: "Error",
-                    bundle: .module,
-                    value: "Credit card number is invalid",
-                    comment: "An error text displayed when the credit card number is invalid"
-                )
-            case (OmiseTextFieldValidationError.invalidData, cardNameTextField):
-                errorLabel.text = NSLocalizedString(
-                    "credit-card-form.card-holder-name-field.invalid-data.error.text",
-                    tableName: "Error",
-                    bundle: .module,
-                    value: "Card holder name is invalid",
-                    comment: "An error text displayed when the card holder name is invalid"
-                )
-            case (OmiseTextFieldValidationError.invalidData, expiryDateTextField):
-                errorLabel.text = NSLocalizedString(
-                    "credit-card-form.expiry-date-field.invalid-data.error.text",
-                    tableName: "Error",
-                    bundle: .module,
-                    value: "Card expiry date is invalid",
-                    comment: "An error text displayed when the expiry date is invalid"
-                )
-            case (OmiseTextFieldValidationError.invalidData, secureCodeTextField):
-                errorLabel.text = NSLocalizedString(
-                    "credit-card-form.security-code-field.invalid-data.error.text",
-                    tableName: "Error",
-                    bundle: .module,
-                    value: "CVV code is invalid",
-                    comment: "An error text displayed when the security code is invalid"
-                )
-                
-            case (_, cardNumberTextField):
-                errorLabel.text = error.localizedDescription
-            case (_, cardNameTextField):
-                errorLabel.text = error.localizedDescription
-            case (_, expiryDateTextField):
-                errorLabel.text = error.localizedDescription
-            case (_, secureCodeTextField):
-                errorLabel.text = error.localizedDescription
-            default:
-                errorLabel.text = "-"
-            }
+            errorLabel.text = validationErrorText(for: textField, error: error)
             errorLabel.alpha = errorLabel.text != "-" ? 1.0 : 0.0
+        }
+    }
+    
+    private func validationErrorText(for textField: UITextField, error: Error) -> String {
+        switch (error, textField) {
+        case (OmiseTextFieldValidationError.emptyText, _):
+            return "-" // We need to set the error label some string in order to have it retains its height
+            
+        case (OmiseTextFieldValidationError.invalidData, cardNumberTextField):
+            return NSLocalizedString(
+                "credit-card-form.card-number-field.invalid-data.error.text",
+                tableName: "Error",
+                bundle: .module,
+                value: "Credit card number is invalid",
+                comment: "An error text displayed when the credit card number is invalid"
+            )
+        case (OmiseTextFieldValidationError.invalidData, cardNameTextField):
+            return NSLocalizedString(
+                "credit-card-form.card-holder-name-field.invalid-data.error.text",
+                tableName: "Error",
+                bundle: .module,
+                value: "Card holder name is invalid",
+                comment: "An error text displayed when the card holder name is invalid"
+            )
+        case (OmiseTextFieldValidationError.invalidData, expiryDateTextField):
+            return NSLocalizedString(
+                "credit-card-form.expiry-date-field.invalid-data.error.text",
+                tableName: "Error",
+                bundle: .module,
+                value: "Card expiry date is invalid",
+                comment: "An error text displayed when the expiry date is invalid"
+            )
+        case (OmiseTextFieldValidationError.invalidData, secureCodeTextField):
+            return NSLocalizedString(
+                "credit-card-form.security-code-field.invalid-data.error.text",
+                tableName: "Error",
+                bundle: .module,
+                value: "CVV code is invalid",
+                comment: "An error text displayed when the security code is invalid"
+            )
+            
+        case (_, cardNumberTextField),
+             (_, cardNameTextField),
+             (_, expiryDateTextField),
+             (_, secureCodeTextField):
+            return error.localizedDescription
+        default:
+            return "-"
         }
     }
 }

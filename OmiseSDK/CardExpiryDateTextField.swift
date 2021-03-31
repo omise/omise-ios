@@ -180,8 +180,7 @@ import UIKit
         }
     }
     
-    // swiftlint:disable:next force_try
-    static let monthStringRegularExpression = try! NSRegularExpression(pattern: "^([0-1]?\\d)", options: [])
+    static let monthStringRegularExpression: NSRegularExpression! = try? NSRegularExpression(pattern: "^([0-1]?\\d)", options: [])
     
     public override func replace(_ range: UITextRange, withText text: String) {
         super.replace(range, withText: text)

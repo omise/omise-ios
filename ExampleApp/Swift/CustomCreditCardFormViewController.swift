@@ -29,8 +29,11 @@ class CustomCreditCardFormViewController: UIViewController {
     
     weak var delegate: CustomCreditCardFormViewControllerDelegate?
     
-    // swiftlint:disable function_body_length
+    // need to refactor loadView, removing super results in crash
+    // swiftlint:disable prohibited_super_call function_body_length
     override func loadView() {
+        super.loadView()
+        
         if storyboard == nil {
             view.backgroundColor = .white
             

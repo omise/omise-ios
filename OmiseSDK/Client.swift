@@ -286,9 +286,9 @@ extension Client {
     }
     
     private static func encodeAuthorizationHeader(_ publicKey: String) -> String {
-        let data = publicKey.data(using: String.Encoding.utf8, allowLossyConversion: false)! // swiftlint:disable:this force_unwrapping
-        let base64 = data.base64EncodedString()
-        return "Basic \(base64)"
+        let data = publicKey.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        let base64 = data?.base64EncodedString()
+        return "Basic \(base64 ?? "")"
     }
     
     static func makeJSONEncoder() -> JSONEncoder {

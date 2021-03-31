@@ -161,7 +161,7 @@ import UIKit
             formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
         }
         
-        super.attributedPlaceholder = (formattingAttributedText.copy() as! NSAttributedString) // swiftlint:disable:this force_cast
+        super.attributedPlaceholder = formattingAttributedText.copy() as? NSAttributedString
     }
     
     override func textDidChange() {

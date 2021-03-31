@@ -73,7 +73,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         }
 
         let selectedBank = element(forUIIndexPath: indexPath)
-        let paymentInformation = PaymentInformation.FPX(bank: selectedBank.code, email: email!) // swiftlint:disable:this force_unwrapping
+        let paymentInformation = PaymentInformation.FPX(bank: selectedBank.code, email: email)
 
         tableView.deselectRow(at: indexPath, animated: true)
 

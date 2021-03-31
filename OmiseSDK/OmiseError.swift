@@ -474,28 +474,29 @@ extension OmiseError.APIErrorCode.InvalidCardReason: Decodable {
     }
 }
 
-let amountAtLeastValidAmountErrorMessageRegularExpression = try! NSRegularExpression(pattern: "amount must be at least ([\\d]+)", options: []) // swiftlint:disable:this force_try identifier_name
-let amountGreaterThanValidAmountErrorMessageRegularExpression = try! NSRegularExpression(pattern: "amount must be less than ([\\d]+)", options: []) // swiftlint:disable:this force_try identifier_name
-let amountLessThanValidAmountErrorMessageRegularExpression = try! NSRegularExpression(pattern: "amount must be greater than ([\\d]+)", options: []) // swiftlint:disable:this force_try identifier_name
-
-let nameIsTooLongErrorMessageRegularExpression = try! NSRegularExpression(pattern: "name is too long \\(maximum is ([\\d]+) characters\\)", options: []) // swiftlint:disable:this force_try identifier_name
-
 extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
+    
+    private enum ErrorMessageRegularExpression {
+        static let amountAtLeastValidAmount: NSRegularExpression! = try? NSRegularExpression(pattern: "amount must be at least ([\\d]+)", options: [])
+        static let amountGreaterThanValidAmount: NSRegularExpression! = try? NSRegularExpression(pattern: "amount must be less than ([\\d]+)", options: [])
+        static let amountLessThanValidAmount: NSRegularExpression! = try? NSRegularExpression(pattern: "amount must be greater than ([\\d]+)", options: [])
+        static let nameIsTooLong: NSRegularExpression! = try? NSRegularExpression(pattern: "name is too long \\(maximum is ([\\d]+) characters\\)", options: [])
+    }
     
     // swiftlint:disable cyclomatic_complexity
     init(message: String, currency: Currency?) throws {
         if message.hasPrefix("amount must be ") {
-            if let lessThanValidAmountMatch = amountLessThanValidAmountErrorMessageRegularExpression
+            if let lessThanValidAmountMatch = ErrorMessageRegularExpression.amountLessThanValidAmount
                 .firstMatch(in: message, range: NSRange(message.startIndex..<message.endIndex, in: message)),
                 lessThanValidAmountMatch.numberOfRanges == 2,
                 let amountRange = Range(lessThanValidAmountMatch.range(at: 1), in: message) {
                 self = .amountIsLessThanValidAmount(validAmount: Int64(message[amountRange]), currency: currency)
-            } else if let greaterThanValidAmountMatch = amountGreaterThanValidAmountErrorMessageRegularExpression
+            } else if let greaterThanValidAmountMatch = ErrorMessageRegularExpression.amountGreaterThanValidAmount
                 .firstMatch(in: message, range: NSRange(message.startIndex..<message.endIndex, in: message)),
                 greaterThanValidAmountMatch.numberOfRanges == 2,
                 let amountRange = Range(greaterThanValidAmountMatch.range(at: 1), in: message) {
                 self = .amountIsGreaterThanValidAmount(validAmount: Int64(message[amountRange]), currency: currency)
-            } else if let atLeastValidAmountMatch = amountAtLeastValidAmountErrorMessageRegularExpression
+            } else if let atLeastValidAmountMatch = ErrorMessageRegularExpression.amountAtLeastValidAmount
                 .firstMatch(in: message, range: NSRange(message.startIndex..<message.endIndex, in: message)),
                 atLeastValidAmountMatch.numberOfRanges == 2,
                 let amountRange = Range(atLeastValidAmountMatch.range(at: 1), in: message) {
@@ -512,7 +513,7 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
         } else if message.contains("name") && message.contains("blank") {
             self = .emptyName
         } else if message.hasPrefix("name is too long"),
-            let lessThanValidAmountMatch = nameIsTooLongErrorMessageRegularExpression
+                  let lessThanValidAmountMatch = ErrorMessageRegularExpression.nameIsTooLong
                 .firstMatch(in: message, range: NSRange(message.startIndex..<message.endIndex, in: message)),
             lessThanValidAmountMatch.numberOfRanges == 2,
             let amountRange = Range(lessThanValidAmountMatch.range(at: 1), in: message) {

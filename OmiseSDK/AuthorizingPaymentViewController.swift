@@ -80,6 +80,7 @@ public class AuthorizingPaymentViewController: UIViewController {
         let navigationController = storyboard.instantiateViewController(
             withIdentifier: "DefaultAuthorizingPaymentViewControllerWithNavigation"
         ) as! UINavigationController // swiftlint:disable:this force_cast
+
         // swiftlint:disable:next force_cast
         let viewController = navigationController.topViewController as! AuthorizingPaymentViewController
         viewController.authorizedURL = authorizedURL

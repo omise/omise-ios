@@ -187,9 +187,11 @@ extension Capability.Backend {
         case .source(.alipay):
             self.payment = .alipay
         case .source(let value) where value.isInternetBankingSource:
-            self.payment = .internetBanking(value.internetBankingSource!) // swiftlint:disable:this force_unwrapping
+            // swiftlint:disable:next force_unwrapping
+            self.payment = .internetBanking(value.internetBankingSource!)
         case .source(let value) where value.isMobileBankingSource:
-            self.payment = .mobileBanking(value.mobileBankingSource!) // swiftlint:disable:this force_unwrapping
+            // swiftlint:disable:next force_unwrapping
+            self.payment = .mobileBanking(value.mobileBankingSource!)
         case .source(.promptPay):
             self.payment = .promptpay
         case .source(.payNow):

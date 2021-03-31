@@ -9,9 +9,8 @@ import PlaygroundSupport
  The expected URL patterns is an array of URL Components which the contains a scheme, host and prefix of your defined return URL(s)
  */
 
-let authroizedURL = URL(string: "https://authorized-url")! // swiftlint:disable:this force_unwrapping
+let authroizedURL = URL(string: "https://authorized-url")!
 
-// swiftlint:disable force_unwrapping
 let expectedURLPatterns = [
     URLComponents(string: "https://example.com")!,
     URLComponents(string: "https://omise.co")!,
