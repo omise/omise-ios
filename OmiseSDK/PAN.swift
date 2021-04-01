@@ -1,11 +1,8 @@
 import Foundation
 
-
-
 /// A credit card `PAN` value.
 public struct PAN {
     let pan: String
-    
     
     /// Returns true if the PAN is a valid PAN number
     public var isValid: Bool {
@@ -16,16 +13,18 @@ public struct PAN {
         return brand.validLengths ~= pan.count && validateLuhn()
     }
     
-    
     /// The masked PAN number.
     ///
     /// The returned number will be masked the numbers in the middle of the PAN.
     /// This helps prevent the unintentional leaked PAN number in the log or system
     public var number: String {
         // NNNN-NNXX-XXXX-NNNN
-        let replacingRange = (pan.index(pan.startIndex, offsetBy: max(0, pan.count - 10))..<pan.index(pan.endIndex, offsetBy: max(-pan.count, -4)))
+        let startIndex = pan.index(pan.startIndex, offsetBy: max(0, pan.count - 10))
+        let endEndex = pan.index(pan.endIndex, offsetBy: max(-pan.count, -4))
+        let replacingRange = startIndex..<endEndex
         return pan.replacingOccurrences(
-            of: "[0-9]", with: "X",
+            of: "[0-9]",
+            with: "X",
             options: String.CompareOptions.regularExpression,
             range: replacingRange
         )
@@ -33,11 +32,9 @@ public struct PAN {
     
     /// A card network brand of this PAN
     public var brand: CardBrand? {
-        return CardBrand.all
-            .filter({ (brand) -> Bool in
-                pan.range(of: brand.pattern, options: .regularExpression, range: nil, locale: nil) != nil
-            })
-            .first
+        return CardBrand.all.first { brand -> Bool in
+            pan.range(of: brand.pattern, options: .regularExpression, range: nil, locale: nil) != nil
+        }
     }
     
     /// The suggested of where the space should be displayed string indexes
@@ -73,22 +70,22 @@ public struct PAN {
     private func validateLuhn() -> Bool {
         let digits = pan
             .reversed()
-            .compactMap({ Int(String($0)) })
+            .compactMap { Int(String($0)) }
         
         guard digits.count == pan.count else { return false }
         
         let oddSum = digits.enumerated()
-            .filter({ (index, digit) -> Bool in index % 2 == 0 })
-            .map({ (index, digit) -> Int in digit })
+            .filter { (index, _) -> Bool in index.isMultiple(of: 2) }
+            .map { (_, digit) -> Int in digit }
         let evenSum = digits.enumerated()
-            .filter({ (index, digit) -> Bool in index % 2 != 0 })
-            .map({ (index, digit) -> Int in
+            .filter { (index, _) -> Bool in !index.isMultiple(of: 2) }
+            .map { (_, digit) -> Int in
                 let sum = digit * 2
                 return sum > 9 ? sum - 9 : sum
-            })
+            }
         
-        let sum = (oddSum + evenSum).reduce(into: 0, { (acc, digit) in acc += digit })
-        return sum % 10 == 0
+        let sum = (oddSum + evenSum).reduce(into: 0) { (acc, digit) in acc += digit }
+        return sum.isMultiple(of: 10)
     }
     
     /// The suggested of where the space should be displayed string indexes for a given PAN string
@@ -98,17 +95,15 @@ public struct PAN {
     }
 }
 
-
 extension PAN {
-    static func ~=(brand: CardBrand, pan: PAN) -> Bool {
+    static func ~= (brand: CardBrand, pan: PAN) -> Bool {
         return brand.pattern ~= pan
     }
     
-    static func ~=(pattern: String, pan: PAN) -> Bool {
+    static func ~= (pattern: String, pan: PAN) -> Bool {
         return pan.pan.range(of: pattern, options: .regularExpression, range: nil, locale: nil) != nil
     }
 }
-
 
 extension PAN: CustomDebugStringConvertible, CustomStringConvertible {
     public var debugDescription: String {
@@ -119,4 +114,3 @@ extension PAN: CustomDebugStringConvertible, CustomStringConvertible {
         return "PAN: \(number)"
     }
 }
-

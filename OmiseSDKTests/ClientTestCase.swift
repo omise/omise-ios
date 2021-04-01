@@ -95,7 +95,10 @@ class ClientTestCase: XCTestCase {
         
         XCTAssertEqual(100_00, task.request.parameter.amount)
         XCTAssertEqual(Currency.custom(code: "UNSUPPORTED_CURRENCY", factor: 100), task.request.parameter.currency)
-        XCTAssertEqual(PaymentInformation.other(type: "UNSUPPORTED SOURCE", parameters: [ "client_id": "client_12345", "client_balance": 12345.67, ]), task.request.parameter.paymentInformation)
+        XCTAssertEqual(
+            PaymentInformation.other(type: "UNSUPPORTED SOURCE", parameters: [ "client_id": "client_12345", "client_balance": 12345.67]),
+            task.request.parameter.paymentInformation
+        )
 
         XCTAssertEqual(Source.postURL, task.dataTask.currentRequest?.url)
         XCTAssertEqual("POST", task.dataTask.currentRequest?.httpMethod)
@@ -107,8 +110,8 @@ class ClientTestCase: XCTestCase {
 extension ClientTestCase {
     
     // MARK: Request factory methods
-    static func makeValidTokenRequest() -> Request<Token>  {
-        return Request.init(parameter: Token.CreateParameter(
+    static func makeValidTokenRequest() -> Request<Token> {
+        return Request(parameter: Token.CreateParameter(
             name: "JOHN DOE",
             number: "4242424242424242",
             expirationMonth: 11,
@@ -116,8 +119,8 @@ extension ClientTestCase {
             securityCode: "123"
         ))
     }
-    static func makeInvalidTokenRequest() -> Request<Token>  {
-        return Request.init(parameter: Token.CreateParameter(
+    static func makeInvalidTokenRequest() -> Request<Token> {
+        return Request(parameter: Token.CreateParameter(
             name: "JOHN DOE",
             number: "4242424242111111",
             expirationMonth: 11,
@@ -126,11 +129,14 @@ extension ClientTestCase {
         ))
     }
     
-    static func makeValidSourceRequest() -> Request<Source>  {
-        return Request.init(paymentInformation: PaymentInformation.internetBanking(.bay), amount: 100_00, currency: .thb)
+    static func makeValidSourceRequest() -> Request<Source> {
+        return Request(paymentInformation: PaymentInformation.internetBanking(.bay), amount: 100_00, currency: .thb)
     }
-    static func makeInvalidSourceRequest() -> Request<Source>  {
-        return Request.init(paymentInformation: PaymentInformation.other(type: "UNSUPPORTED SOURCE", parameters: [ "client_id": "client_12345", "client_balance": 12345.67, ]), amount: 100_00, currency: Currency.custom(code: "UNSUPPORTED_CURRENCY", factor: 100))
+    static func makeInvalidSourceRequest() -> Request<Source> {
+        return Request(
+            paymentInformation: .other(type: "UNSUPPORTED SOURCE", parameters: [ "client_id": "client_12345", "client_balance": 12345.67]),
+            amount: 100_00,
+            currency: Currency.custom(code: "UNSUPPORTED_CURRENCY", factor: 100)
+        )
     }
 }
-

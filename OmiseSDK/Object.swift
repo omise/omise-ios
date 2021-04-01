@@ -1,6 +1,5 @@
 import Foundation
 
-
 public protocol Object: Decodable {
     var object: String { get }
 }

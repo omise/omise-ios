@@ -22,8 +22,6 @@ let navigationController = UINavigationController(rootViewController: checkoutCo
 PlaygroundPage.current.liveView = navigationController
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-
-
 /*: implement-delegate
  
  The form will automatically tokenizes credit card data for you as the user click on the submit button. To receive the resulting token data, implement the `CreditCardFormDelegate` methods on your view controller.
@@ -53,7 +51,6 @@ extension CheckoutViewController: CreditCardFormViewControllerDelegate {
   }
 }
 
-
 extension CheckoutViewController: CheckoutViewControllerDelegate {
   public func checkoutViewControllerDidTapCheckout(_ checkoutViewController: CheckoutViewController) {
     let creditCardForm = CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
@@ -63,4 +60,3 @@ extension CheckoutViewController: CheckoutViewControllerDelegate {
     present(navigationController, animated: true, completion: nil)
   }
 }
-

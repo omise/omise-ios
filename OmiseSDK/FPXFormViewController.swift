@@ -1,6 +1,5 @@
 import UIKit
 
-
 @objc(OMSFPXFormViewController)
 class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
 
@@ -12,9 +11,9 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
     private var client: Client?
 
     private var isInputDataValid: Bool {
-        let valid = formFields.reduce(into: true, { (valid, field) in
+        let valid = formFields.reduce(into: true) { (valid, field) in
             valid = valid && field.isValid
-        })
+        }
 
         return valid || isEmailInputEmpty
     }
@@ -23,13 +22,13 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
         return emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) == ""
     }
 
-    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
+    @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
 
-    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
+    @IBInspectable var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
@@ -39,11 +38,11 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
 
     @IBOutlet var contentView: UIScrollView!
 
-    @IBOutlet var emailTextField: OmiseTextField!
-    @IBOutlet var submitButton: MainActionButton!
-    @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
+    @IBOutlet private var emailTextField: OmiseTextField!
+    @IBOutlet private var submitButton: MainActionButton!
+    @IBOutlet private var requestingIndicatorView: UIActivityIndicatorView!
 
-    @IBOutlet var errorLabel: UILabel!
+    @IBOutlet private var errorLabel: UILabel!
 
     @IBOutlet var formLabels: [UILabel]!
     @IBOutlet var formFields: [OmiseTextField]!
@@ -53,9 +52,11 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
     @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!
     @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
 
+    // need to refactor loadView, removing super results in crash
+    // swiftlint:disable prohibited_super_call
     override func loadView() {
         super.loadView()
-
+        
         view.backgroundColor = .background
         formFieldsAccessoryView.barTintColor = .formAccessoryBarTintColor
 
@@ -70,16 +71,16 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
         applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
-        formFields.forEach({
+        formFields.forEach {
             $0.inputAccessoryView = formFieldsAccessoryView
-        })
+        }
 
-        formFields.forEach({
+        formFields.forEach {
             $0.adjustsFontForContentSizeCategory = true
-        })
-        formLabels.forEach({
+        }
+        formLabels.forEach {
             $0.adjustsFontForContentSizeCategory = true
-        })
+        }
         submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
 
         if  #available(iOS 11, *) {
@@ -89,12 +90,16 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
         }
 
         NotificationCenter.default.addObserver(
-            self, selector:#selector(keyboardWillChangeFrame(_:)),
-            name: NotificationKeyboardWillChangeFrameNotification, object: nil
+            self,
+            selector: #selector(keyboardWillChangeFrame(_:)),
+            name: NotificationKeyboardWillChangeFrameNotification,
+            object: nil
         )
         NotificationCenter.default.addObserver(
-            self, selector:#selector(keyboardWillHide(_:)),
-            name: NotificationKeyboardWillHideFrameNotification, object: nil
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: NotificationKeyboardWillHideFrameNotification,
+            object: nil
         )
 
         emailTextField.validator = try? NSRegularExpression(pattern: "\\A[\\w.+-]+@[a-z\\d.-]+\\.[a-z]{2,}\\z", options: [.caseInsensitive])
@@ -103,7 +108,7 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
         validateFieldData(emailTextField)
     }
 
-    public override func viewWillLayoutSubviews() {
+    override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
         if #available(iOS 11, *) {
@@ -112,13 +117,13 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
             // So we need to invalidate the intrinsic content size here to ask those text fields to calculate their
             // intrinsic content size again
         } else {
-            formFields.forEach({
+            formFields.forEach {
                 $0.invalidateIntrinsicContentSize()
-            })
+            }
         }
     }
 
-    @IBAction func submitForm(_ sender: AnyObject) {
+    @IBAction private func submitForm(_ sender: AnyObject) {
         emailValue = emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces)
 
         performSegue(withIdentifier: destinationSegue, sender: sender)
@@ -128,36 +133,34 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
         if segue.identifier == destinationSegue,
             let fpxBankChooserViewController = segue.destination as? FPXBankChooserViewController {
             fpxBankChooserViewController.email = emailValue
-            fpxBankChooserViewController.showingValues = showingValues!
+            fpxBankChooserViewController.showingValues = showingValues ?? []
             fpxBankChooserViewController.flowSession = self.flowSession
             fpxBankChooserViewController.preferredPrimaryColor = self.preferredPrimaryColor
             fpxBankChooserViewController.preferredSecondaryColor = self.preferredSecondaryColor
         }
     }
 
-    @IBAction func validateFieldData(_ textField: OmiseTextField) {
+    @IBAction private func validateFieldData(_ textField: OmiseTextField) {
         submitButton.isEnabled = isInputDataValid
     }
 
-    @IBAction func validateTextFieldDataOf(_ sender: OmiseTextField) {
+    @IBAction private func validateTextFieldDataOf(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-        UIView.animate(
-            withDuration: duration, delay: 0.0,
-            options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
-            animations: {
-                self.validateField(sender)
-        })
+        UIView.animate(withDuration: duration,
+                       delay: 0.0,
+                       options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
+            self.validateField(sender)
+        }
         sender.borderColor = currentSecondaryColor
     }
 
-    @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
+    @IBAction private func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-        UIView.animate(
-            withDuration: duration, delay: 0.0,
-            options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
-            animations: {
-                self.errorLabel.alpha = 0.0
-        })
+        UIView.animate(withDuration: duration,
+                       delay: 0.0,
+                       options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
+            self.errorLabel.alpha = 0.0
+        }
 
         updateInputAccessoryViewWithFirstResponder(sender)
         sender.borderColor = view.tintColor
@@ -178,7 +181,9 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
 
             case OmiseTextFieldValidationError.invalidData:
                 errorLabel.text = NSLocalizedString(
-                    "payment-creator.error.api.bad_request.invalid-email.message", tableName: "Error", bundle: .module,
+                    "payment-creator.error.api.bad_request.invalid-email.message",
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Email is invalid",
                     comment: "An error text in the FPX form displayed when the email is invalid"
                 )

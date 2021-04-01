@@ -1,13 +1,12 @@
+// swiftlint:disable line_length
 import Foundation
-
 
 @available(*, deprecated, message: "Use the new `Token` data type instead. This class will be removed in the future released", renamed: "Token")
 public typealias OmiseToken = __OmiseToken
 
-
 /// Delegate to receive token request events.
 @available(*, deprecated, message: "Use the completion handler pattern in the `Client` instead. This protocol will be removed in the future released")
-public protocol OmiseTokenRequestDelegate {
+public protocol OmiseTokenRequestDelegate { // swiftlint:disable:this class_delegate_protocol
     /// Delegate method for receiving token data when token request succeeds.
     /// - parameter request: Original `OmiseTokenRequest` that was sent.
     /// - parameter token: `OmiseToken` instance created from supplied card data.
@@ -31,7 +30,6 @@ public enum OmiseTokenRequestResult {
     case fail(error: Error)
 }
 
-
 /**
  Encapsulates information required to perform tokenization requests.
  - seealso: [Tokens API](https://www.omise.co/tokens-api)
@@ -42,7 +40,7 @@ public class OmiseTokenRequest: NSObject {
     let request: Request<Token>
   
     /// Tokenization request callback function type.
-    public typealias Callback = (OmiseTokenRequestResult) -> ()
+    public typealias Callback = (OmiseTokenRequestResult) -> Void
     
     /// Card holder's full name.
     @objc public var name: String {
@@ -74,12 +72,23 @@ public class OmiseTokenRequest: NSObject {
     }
     
     /// Initializes new token request.
-    @objc public init(name: String, number: String, expirationMonth: Int, expirationYear: Int,
-                      securityCode: String, city: String? = nil, postalCode: String? = nil) {
+    @objc public init(
+        name: String,
+        number: String,
+        expirationMonth: Int,
+        expirationYear: Int,
+        securityCode: String,
+        city: String? = nil,
+        postalCode: String? = nil
+    ) {
         self.request = Request<Token>(
-            name: name, number: number,
-            expirationMonth: expirationMonth, expirationYear: expirationYear,
-            securityCode: securityCode, city: city, postalCode: postalCode
+            name: name,
+            number: number,
+            expirationMonth: expirationMonth,
+            expirationYear: expirationYear,
+            securityCode: securityCode,
+            city: city,
+            postalCode: postalCode
         )
     }
     

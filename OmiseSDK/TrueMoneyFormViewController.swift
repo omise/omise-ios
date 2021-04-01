@@ -1,6 +1,5 @@
 import UIKit
 
-
 @objc(OMSTrueMoneyFormViewController)
 class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
     
@@ -9,18 +8,18 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
     private var client: Client?
     
     private var isInputDataValid: Bool {
-        return formFields.reduce(into: true, { (valid, field) in
+        return formFields.reduce(into: true) { (valid, field) in
             valid = valid && field.isValid
-        })
+        }
     }
     
-    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
+    @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
+    @IBInspectable var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
@@ -30,11 +29,11 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
     
     @IBOutlet var contentView: UIScrollView!
     
-    @IBOutlet var phoneNumberTextField: OmiseTextField!
-    @IBOutlet var submitButton: MainActionButton!
-    @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
+    @IBOutlet private var phoneNumberTextField: OmiseTextField!
+    @IBOutlet private var submitButton: MainActionButton!
+    @IBOutlet private var requestingIndicatorView: UIActivityIndicatorView!
     
-    @IBOutlet var errorLabel: UILabel!
+    @IBOutlet private var errorLabel: UILabel!
     
     @IBOutlet var formLabels: [UILabel]!
     @IBOutlet var formFields: [OmiseTextField]!
@@ -44,6 +43,8 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
     @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!
     @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
     
+    // need to refactor loadView, removing super results in crash
+    // swiftlint:disable prohibited_super_call
     override func loadView() {
         super.loadView()
         
@@ -61,16 +62,16 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
         applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-        formFields.forEach({
+        formFields.forEach {
             $0.inputAccessoryView = formFieldsAccessoryView
-        })
+        }
         
-        formFields.forEach({
+        formFields.forEach {
             $0.adjustsFontForContentSizeCategory = true
-        })
-        formLabels.forEach({
+        }
+        formLabels.forEach {
             $0.adjustsFontForContentSizeCategory = true
-        })
+        }
         submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
         
         if  #available(iOS 11, *) {
@@ -80,18 +81,22 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
         }
         
         NotificationCenter.default.addObserver(
-            self, selector:#selector(keyboardWillChangeFrame(_:)),
-            name: NotificationKeyboardWillChangeFrameNotification, object: nil
+            self,
+            selector: #selector(keyboardWillChangeFrame(_:)),
+            name: NotificationKeyboardWillChangeFrameNotification,
+            object: nil
         )
         NotificationCenter.default.addObserver(
-            self, selector:#selector(keyboardWillHide(_:)),
-            name: NotificationKeyboardWillHideFrameNotification, object: nil
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: NotificationKeyboardWillHideFrameNotification,
+            object: nil
         )
         
-        phoneNumberTextField.validator = try! NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
+        phoneNumberTextField.validator = try? NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
     }
     
-    public override func viewWillLayoutSubviews() {
+    override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
         if #available(iOS 11, *) {
@@ -100,13 +105,13 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
             // So we need to invalidate the intrinsic content size here to ask those text fields to calculate their
             // intrinsic content size again
         } else {
-            formFields.forEach({
+            formFields.forEach {
                 $0.invalidateIntrinsicContentSize()
-            })
+            }
         }
     }
 
-    @IBAction func submitForm(_ sender: AnyObject) {
+    @IBAction private func submitForm(_ sender: AnyObject) {
         guard let phoneNumber = phoneNumberTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
             return
         }
@@ -116,37 +121,35 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
         view.isUserInteractionEnabled = false
         view.tintAdjustmentMode = .dimmed
         submitButton.isEnabled = false
-        flowSession?.requestCreateSource(.truemoney(trueMoneyInformation), completionHandler: { (result) in
+        flowSession?.requestCreateSource(.truemoney(trueMoneyInformation)) { _ in
             self.requestingIndicatorView.stopAnimating()
             self.view.isUserInteractionEnabled = true
             self.view.tintAdjustmentMode = .automatic
             self.submitButton.isEnabled = true
-        })
+        }
     }
     
-    @IBAction func validateFieldData(_ textField: OmiseTextField) {
+    @IBAction private func validateFieldData(_ textField: OmiseTextField) {
         submitButton.isEnabled = isInputDataValid
     }
     
-    @IBAction func validateTextFieldDataOf(_ sender: OmiseTextField) {
+    @IBAction private func validateTextFieldDataOf(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-        UIView.animate(
-            withDuration: duration, delay: 0.0,
-            options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
-            animations: {
-                self.validateField(sender)
-        })
+        UIView.animate(withDuration: duration,
+                       delay: 0.0,
+                       options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
+            self.validateField(sender)
+        }
         sender.borderColor = currentSecondaryColor
     }
     
-    @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
+    @IBAction private func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-        UIView.animate(
-            withDuration: duration, delay: 0.0,
-            options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
-            animations: {
-                self.errorLabel.alpha = 0.0
-        })
+        UIView.animate(withDuration: duration,
+                       delay: 0.0,
+                       options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
+            self.errorLabel.alpha = 0.0
+        }
         
         updateInputAccessoryViewWithFirstResponder(sender)
         sender.borderColor = view.tintColor
@@ -167,7 +170,9 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
                 
             case OmiseTextFieldValidationError.invalidData:
                 errorLabel.text = NSLocalizedString(
-                    "truemoney-form.phone-number-field.invalid-data.error.text", tableName: "Error", bundle: .module,
+                    "truemoney-form.phone-number-field.invalid-data.error.text",
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Phone number is invalid",
                     comment: "An error text in the TrueMoney form displayed when the phone number is invalid"
                 )

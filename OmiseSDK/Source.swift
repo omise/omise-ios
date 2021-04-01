@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// Represents an Omise Source object
 public struct Source: CreatableObject {
     public typealias CreateParameter = CreateSourceParameter
@@ -42,7 +41,6 @@ public struct Source: CreatableObject {
         amount = try container.decode(Int64.self, forKey: .amount)
     }
 }
-
 
 /// Parameter for creating a new `Source`
 /// - SeeAlso: Source
@@ -105,7 +103,7 @@ public enum Flow: RawRepresentable, Decodable, Equatable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let flow = try container.decode(String.self)
-        self.init(rawValue: flow)!
+        self.init(rawValue: flow)! // swiftlint:disable:this force_unwrapping
     }
     
     public init?(rawValue: String) {
@@ -119,4 +117,3 @@ public enum Flow: RawRepresentable, Decodable, Equatable {
         }
     }
 }
-

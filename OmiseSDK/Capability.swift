@@ -1,7 +1,6 @@
 import Foundation
 
-
-public struct Capability: Object {    
+public struct Capability: Object {
     public let location: String
     public let object: String
     
@@ -20,9 +19,8 @@ public struct Capability: Object {
     }
 }
 
-
 extension Capability {
-    public static func ~=(lhs: Capability, rhs: CreateSourceParameter) -> Bool {
+    public static func ~= (lhs: Capability, rhs: CreateSourceParameter) -> Bool {
         func backend(from capability: Capability, for payment: PaymentInformation) -> Backend? {
             let paymentSourceType = OMSSourceTypeValue(payment.sourceType)
             return capability[paymentSourceType]
@@ -50,14 +48,13 @@ extension Capability {
     }
 }
 
-
 extension Capability {
     public struct Backend: Codable, Equatable {
         public let payment: Payment
         public let supportedCurrencies: Set<Currency>
         public let banks: [Bank]?
 
-        public enum Payment : Equatable {
+        public enum Payment: Equatable {
             case card(Set<CardBrand>)
             case installment(PaymentInformation.Installment.Brand, availableNumberOfTerms: IndexSet)
             case internetBanking(PaymentInformation.InternetBanking)
@@ -74,6 +71,7 @@ extension Capability {
         }
 
         public struct Bank: Codable, Equatable {
+            // swiftlint:disable nesting
             enum CodingKeys: String, CodingKey {
                 case name, code
                 case isActive = "active"
@@ -86,7 +84,6 @@ extension Capability {
     }
 }
 
-
 extension Capability: Codable {
     private enum CodingKeys: String, CodingKey {
         case object
@@ -95,7 +92,6 @@ extension Capability: Codable {
         case paymentBackends = "payment_methods"
     }
 }
-
 
 extension Capability.Backend {
     private enum CodingKeys: String, CodingKey {
@@ -148,13 +144,14 @@ extension Capability {
         
         var backendsContainer = try container.nestedUnkeyedContainer(forKey: .paymentBackends)
         
-        var backends: Array<Capability.Backend> = []
+        var backends: [Capability.Backend] = []
         while !backendsContainer.isAtEnd {
             backends.append(try backendsContainer.decode(Capability.Backend.self))
         }
         self.supportedBackends = backends
         
-        self.backends = Dictionary(uniqueKeysWithValues: zip(backends.map({ Capability.Backend.BackendType(payment: $0.payment) }), backends))
+        let backendTypes = backends.map { Capability.Backend.BackendType(payment: $0.payment) }
+        self.backends = Dictionary(uniqueKeysWithValues: zip(backendTypes, backends))
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -166,9 +163,9 @@ extension Capability {
         try container.encode(supportedBanks, forKey: .supportedBanks)
         
         var backendsContainer = container.nestedUnkeyedContainer(forKey: .paymentBackends)
-        try supportedBackends.forEach({ backend in
+        try supportedBackends.forEach { backend in
             try backendsContainer.encode(backend)
-        })
+        }
     }
 }
 
@@ -185,12 +182,15 @@ extension Capability.Backend {
             self.payment = .card(supportedBrand)
         case .source(let value) where value.isInstallmentSource:
             let allowedInstallmentTerms = IndexSet(try container.decode(Array<Int>.self, forKey: .allowedInstallmentTerms))
+            // swiftlint:disable:next force_unwrapping
             self.payment = .installment(value.installmentBrand!, availableNumberOfTerms: allowedInstallmentTerms)
         case .source(.alipay):
             self.payment = .alipay
         case .source(let value) where value.isInternetBankingSource:
+            // swiftlint:disable:next force_unwrapping
             self.payment = .internetBanking(value.internetBankingSource!)
         case .source(let value) where value.isMobileBankingSource:
+            // swiftlint:disable:next force_unwrapping
             self.payment = .mobileBanking(value.mobileBankingSource!)
         case .source(.promptPay):
             self.payment = .promptpay
@@ -234,7 +234,6 @@ extension Capability.Backend {
         }
     }
 }
-
 
 private let creditCardBackendTypeValue = "card"
 extension Capability.Backend {
@@ -303,7 +302,10 @@ extension Capability.Backend {
             case .source(let sourceType):
                 let sourceTypeValuePrefix = sourceType.sourceTypePrefix
                 if sourceTypeValuePrefix.hasSuffix("_") {
-                    return sourceTypeValuePrefix.lastIndex(of: "_").map(sourceTypeValuePrefix.prefix(upTo:)).map(String.init) ?? sourceTypeValuePrefix
+                    return sourceTypeValuePrefix
+                        .lastIndex(of: "_")
+                        .map(sourceTypeValuePrefix.prefix(upTo:))
+                        .map(String.init) ?? sourceTypeValuePrefix
                 } else {
                     return sourceTypeValuePrefix
                 }
@@ -311,4 +313,3 @@ extension Capability.Backend {
         }
     }
 }
-

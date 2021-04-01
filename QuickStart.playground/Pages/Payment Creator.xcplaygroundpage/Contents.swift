@@ -17,8 +17,6 @@ let navigationController = UINavigationController(rootViewController: checkoutCo
 PlaygroundPage.current.liveView = navigationController
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-
-
 /*: implement-delegate
  
  The controller will automatically tokenizes credit card data or create a payment source for you. To receive the result data, implement the `PaymentCreatorControllerDelegate` methods on your view controller.
@@ -60,12 +58,12 @@ extension CheckoutViewController: PaymentCreatorControllerDelegate {
   }
 }
 
-
 extension CheckoutViewController: CheckoutViewControllerDelegate {
   public func checkoutViewControllerDidTapCheckout(_ checkoutViewController: CheckoutViewController) {
     let paymentCreatorController = PaymentCreatorController.makePaymentCreatorControllerWith(
       publicKey: publicKey,
-      amount: 5_000_00, currency: .thb,
+      amount: 5_000_00,
+      currency: .thb,
       allowedPaymentMethods: PaymentCreatorController.japanDefaultAvailableSourceMethods,
       paymentDelegate: self
     )
@@ -73,4 +71,3 @@ extension CheckoutViewController: CheckoutViewControllerDelegate {
     present(paymentCreatorController, animated: true, completion: nil)
   }
 }
-

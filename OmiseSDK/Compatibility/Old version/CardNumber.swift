@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// Utility class for working with credit card numbers.
 @objc(OMSCardNumber) public final class CardNumber: NSObject {
     
@@ -22,15 +21,14 @@ import Foundation
      - seealso: CardBrand
      */
     public static func brand(of pan: String) -> CardBrand? {
-        return CardBrand.all
-            .filter({ (brand) -> Bool in pan.range(of: brand.pattern, options: .regularExpression, range: nil, locale: nil) != nil })
-            .first
+        return CardBrand.all.first { brand -> Bool in
+            pan.range(of: brand.pattern, options: .regularExpression, range: nil, locale: nil) != nil
+        }
     }
     
-    @objc(brandForPan:) public static func __brand(_ pan: String) -> Int {
+    @objc(brandForPan:) public static func __brand(_ pan: String) -> Int { // swiftlint:disable:this identifier_name
         return brand(of: pan)?.rawValue ?? NSNotFound
     }
-    
     
     /**
      Formats given credit card number into a human-friendly string by inserting spaces
@@ -40,7 +38,7 @@ import Foundation
     @objc public static func format(_ pan: String) -> String {
         var result = ""
         for (i, digit) in normalize(pan).enumerated() {
-            if i > 0 && i % 4 == 0 {
+            if i > 0 && i.isMultiple(of: 4) {
                 result += " "
             }
             
@@ -63,15 +61,15 @@ import Foundation
         guard digits.count == chars.count else { return false }
         
         let oddSum = digits.enumerated()
-            .filter { (index, digit) -> Bool in index % 2 == 0 }
-            .map { (index, digit) -> Int in digit }
+            .filter { (index, _) -> Bool in index.isMultiple(of: 2) }
+            .map { (_, digit) -> Int in digit }
         let evenSum = digits.enumerated()
-            .filter { (index, digit) -> Bool in index % 2 != 0 }
-            .map { (index, digit) -> Int in digit * 2 }
+            .filter { (index, _) -> Bool in !index.isMultiple(of: 2) }
+            .map { (_, digit) -> Int in digit * 2 }
             .map { (sum) -> Int in sum > 9 ? sum - 9 : sum }
         
         let sum = (oddSum + evenSum).reduce(0) { (acc, digit) -> Int in acc + digit }
-        return sum % 10 == 0
+        return sum.isMultiple(of: 10)
     }
     
     /**

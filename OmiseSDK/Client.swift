@@ -1,13 +1,12 @@
 import UIKit
 import os
 
-
 @objc(OMSSDKClient) public class Client: NSObject {
     let session: URLSession
     let queue: OperationQueue
     let publicKey: String
     
-    var userAgent: String?    
+    var userAgent: String?
     
     /// Initializes a new Client with the given Public Key and Operating OperationQueue
     ///
@@ -47,11 +46,11 @@ import os
     ///     The completion handler will be called on the main queue
     /// - Returns: A new Request Task
     public func requestTask<T: CreatableObject>(with request: Request<T>, completionHandler: Request<T>.Callback?) -> RequestTask<T> {
-        let dataTask = session.dataTask(with: buildURLRequest(for: request), completionHandler: { (data, response, error) in
+        let dataTask = session.dataTask(with: buildURLRequest(for: request)) { (data, response, error) in
             DispatchQueue.main.async {
                 Client.completeRequest(request, callback: completionHandler)(data, response, error)
             }
-        })
+        }
         return RequestTask(request: request, dataTask: dataTask)
     }
     
@@ -70,8 +69,10 @@ import os
         return task
     }
     
+    // swiftlint:disable function_body_length
     public func capabilityDataWithCompletionHandler(_ completionHandler: ((RequestResult<Capability>) -> Void)?) {
-        let dataTask = session.dataTask(with: buildCapabilityAPIURLRequest(), completionHandler: { (data, response, error) in
+        // swiftlint:disable:next closure_body_length
+        let dataTask = session.dataTask(with: buildCapabilityAPIURLRequest()) { (data, response, error) in
             guard let completionHandler = completionHandler else { return } // nobody around to hear the leaf falls
             
             var result: RequestResult<Capability>
@@ -112,9 +113,9 @@ import os
                 
                 do {
                     result = .failure(try decoder.decode(OmiseError.self, from: data))
-                } catch let err {
-                    let error = OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: err)
-                    result = .failure(error)
+                } catch {
+                    let omiseError = OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: error)
+                    result = .failure(omiseError)
                 }
                 
             case 200..<300:
@@ -126,20 +127,21 @@ import os
                 
                 do {
                     result = .success(try decoder.decode(Capability.self, from: data))
-                } catch let err {
-                    let error = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: err)
-                    result = .failure(error)
+                } catch {
+                    let omiseError = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: error)
+                    result = .failure(omiseError)
                 }
                 
             default:
                 let error = OmiseError.unexpected(error: .unrecognizedHTTPStatusCode(code: httpResponse.statusCode), underlying: nil)
                 result = .failure(error)
             }
-        })
+        }
         dataTask.resume()
     }
     
     public func retrieveChargeStatusWithCompletionHandler(from tokenID: String, completionHandler: @escaping ((Result<ChargeStatus, Error>) -> Void)) {
+        // swiftlint:disable:next closure_body_length
         let dataTask = session.dataTask(with: buildRetrieveTokenURLRequest(from: tokenID)) { (data, response, error) in
             var result: Result<ChargeStatus, Error>
             defer {
@@ -172,9 +174,9 @@ import os
 
                 do {
                     result = .failure(try decoder.decode(OmiseError.self, from: data))
-                } catch let err {
-                    let error = OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: err)
-                    result = .failure(error)
+                } catch {
+                    let omiseError = OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: error)
+                    result = .failure(omiseError)
                 }
 
             case 200..<300:
@@ -187,9 +189,9 @@ import os
                 do {
                     let token = try decoder.decode(Token.self, from: data)
                     result = .success(token.chargeStatus)
-                } catch let err {
-                    let error = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: err)
-                    result = .failure(error)
+                } catch {
+                    let omiseError = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: error)
+                    result = .failure(omiseError)
                 }
 
             default:
@@ -245,7 +247,6 @@ import os
     }
 }
 
-
 // MARK: - URL Request related methods
 extension Client {
     
@@ -256,7 +257,7 @@ extension Client {
         var urlRequest = URLRequest(url: T.postURL)
         urlRequest.httpMethod = "POST"
         let encoder = Client.makeJSONEncoder()
-        urlRequest.httpBody = try! encoder.encode(request.parameter)
+        urlRequest.httpBody = try? encoder.encode(request.parameter)
         urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
         urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: "User-Agent")
         urlRequest.setValue(Client.omiseAPIContentType, forHTTPHeaderField: "Content-Type")
@@ -285,9 +286,9 @@ extension Client {
     }
     
     private static func encodeAuthorizationHeader(_ publicKey: String) -> String {
-        let data = publicKey.data(using: String.Encoding.utf8, allowLossyConversion: false)!
-        let base64 = data.base64EncodedString()
-        return "Basic \(base64)"
+        let data = publicKey.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        let base64 = data?.base64EncodedString()
+        return "Basic \(base64 ?? "")"
     }
     
     static func makeJSONEncoder() -> JSONEncoder {
@@ -305,8 +306,9 @@ extension Client {
         return decoder
     }
     
-    private static func completeRequest<T: Object>(_ request: Request<T>, callback: Request<T>.Callback?) -> ((Data?, URLResponse?, Error?) -> ()) {
-        return { (data: Data?, response: URLResponse?, error: Error?) -> () in
+    private static func completeRequest<T: Object>(_ request: Request<T>, callback: Request<T>.Callback?) -> ((Data?, URLResponse?, Error?) -> Void) {
+        // swiftlint:disable closure_body_length
+        return { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             guard let callback = callback else { return } // nobody around to hear the leaf falls
             
             var result: RequestResult<T>
@@ -343,9 +345,9 @@ extension Client {
                 do {
                     let decoder = makeJSONDecoder(for: request)
                     result = .failure(try decoder.decode(OmiseError.self, from: data))
-                } catch let err {
-                    let error = OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: err)
-                    result = .failure(error)
+                } catch {
+                    let omiseError = OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: error)
+                    result = .failure(omiseError)
                 }
                 
             case 200..<300:
@@ -358,9 +360,9 @@ extension Client {
                 do {
                     let decoder = makeJSONDecoder(for: request)
                     result = .success(try decoder.decode(T.self, from: data))
-                } catch let err {
-                    let error = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: err)
-                    result = .failure(error)
+                } catch {
+                    let omiseError = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: error)
+                    result = .failure(omiseError)
                 }
                 
             default:
@@ -370,7 +372,6 @@ extension Client {
         }
     }
 }
-
 
 // MARK: - Constants
 extension Client {
@@ -384,7 +385,7 @@ extension Client {
     static let jsonDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(identifier: "UTC")!
+        formatter.timeZone = TimeZone(identifier: "UTC")
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
         return formatter
     }()
@@ -397,4 +398,3 @@ extension Client {
         """ // OmiseIOSSDK/3.0.0 iOS/12.0.0 Apple/iPhone
     }
 }
-

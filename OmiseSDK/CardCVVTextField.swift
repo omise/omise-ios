@@ -1,10 +1,9 @@
 import Foundation
 import UIKit
 
-
 /// UITextField subclass for entering card's CVV number.
-@objc(OMSCardCVVTextField) @IBDesignable
-public class CardCVVTextField: OmiseTextField {
+@IBDesignable
+@objc(OMSCardCVVTextField) public class CardCVVTextField: OmiseTextField {
     private let validLengths = 3...4
     
     @available(iOS, unavailable)
@@ -12,7 +11,7 @@ public class CardCVVTextField: OmiseTextField {
         get {
             return self
         }
-        set {}
+        set {} // swiftlint:disable:this unused_setter_value
     }
     
     public override var keyboardType: UIKeyboardType {
@@ -21,17 +20,17 @@ public class CardCVVTextField: OmiseTextField {
         }
     }
     
-    override public init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         initializeInstance()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initializeInstance()
     }
     
-    override public init() {
+    public override init() {
         super.init(frame: CGRect.zero)
         initializeInstance()
     }
@@ -40,7 +39,7 @@ public class CardCVVTextField: OmiseTextField {
         super.keyboardType = .numberPad
         super.delegate = self
         
-        validator = try! NSRegularExpression(pattern: "\\d{3,4}", options: [])
+        validator = try? NSRegularExpression(pattern: "\\d{3,4}", options: [])
     }
     
     public override func validate() throws {
@@ -65,4 +64,3 @@ extension CardCVVTextField: UITextFieldDelegate {
         return maxLength >= (self.text?.count ?? 0) - range.length + string.count
     }
 }
-

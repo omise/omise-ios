@@ -1,14 +1,13 @@
 import XCTest
 @testable import OmiseSDK
 
-
 class CapabilityOperationFixtureTests: XCTestCase {
     
     func testCapabilityRetrieve() {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
         
         do {
-            let capabilityData = XCTestCase.fixturesData(forFilename: "capability")
+            let capabilityData = try XCTestCase.fixturesData(forFilename: "capability")
             let capability = try decoder.decode(Capability.self, from: capabilityData)
             
             XCTAssertEqual(capability.supportedBackends.count, 9)
@@ -23,7 +22,7 @@ class CapabilityOperationFixtureTests: XCTestCase {
             if let bayInstallmentBackend = capability[OMSSourceTypeValue.installmentBAY] {
                 XCTAssertEqual(
                     bayInstallmentBackend.payment,
-                    .installment(.bay, availableNumberOfTerms: IndexSet(arrayLiteral: 3, 4, 6, 9, 10))
+                    .installment(.bay, availableNumberOfTerms: IndexSet([3, 4, 6, 9, 10]))
                 )
                 XCTAssertEqual(bayInstallmentBackend.supportedCurrencies, [.thb])
             } else {
@@ -56,14 +55,13 @@ class CapabilityOperationFixtureTests: XCTestCase {
     
     func testEncodeCapabilityRetrieve() throws {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
-        let capabilityData = XCTestCase.fixturesData(forFilename: "capability")
+        let capabilityData = try XCTestCase.fixturesData(forFilename: "capability")
         let capability = try decoder.decode(Capability.self, from: capabilityData)
 
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         let encodedData = try encoder.encode(capability)
 
-        
         let decodedCapability = try decoder.decode(Capability.self, from: encodedData)
         XCTAssertEqual(capability.supportedBackends.count, decodedCapability.supportedBackends.count)
 
@@ -80,4 +78,3 @@ class CapabilityOperationFixtureTests: XCTestCase {
                        decodedCapability[.installmentBAY]?.payment)
     }
 }
-

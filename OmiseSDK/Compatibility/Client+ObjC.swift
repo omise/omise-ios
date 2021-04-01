@@ -1,5 +1,5 @@
+// swiftlint:disable identifier_name
 import Foundation
-
 
 extension Client {
     
@@ -8,7 +8,6 @@ extension Client {
         self.init(publicKey: publicKey, queue: OperationQueue())
     }
 
-    
     /**
      Send a tokenization request to the Omise API.
      - parameter request: `OmiseTokenRequest` instance.
@@ -17,8 +16,8 @@ extension Client {
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
     @objc(sendTokenRequest:callback:) public
-    func __sendRequest(_ request: __OMSTokenRequest, callback: ((__OmiseToken?, NSError?) -> ())?) {
-        self.send(request.request, completionHandler: { result in
+    func __sendRequest(_ request: __OMSTokenRequest, callback: ((__OmiseToken?, NSError?) -> Void)?) {
+        self.send(request.request) { result in
             let token: __OmiseToken?
             let error: NSError?
             
@@ -32,7 +31,7 @@ extension Client {
             }
             
             callback?(token, error)
-        })
+        }
     }
     
     /**
@@ -45,7 +44,7 @@ extension Client {
      */
     @objc(sendTokenRequest:delegate:) public
     func __sendRequest(_ request: __OMSTokenRequest, delegate: OMSTokenRequestDelegate?) {
-        self.send(request.request, completionHandler: { result in
+        self.send(request.request) { result in
             switch result {
             case let .success(token):
                 delegate?.tokenRequest(request, didSucceedWithToken: __OmiseToken(token: token))
@@ -53,13 +52,13 @@ extension Client {
                 let error = err as NSError
                 delegate?.tokenRequest(request, didFailWithError: error)
             }
-        })
+        }
     }
     
     @available(*, deprecated, message: "Please use the new -[OMSClient sendTokenRequest:callback:] method",
     renamed: "sendTokenRequest(_:completionHandler:)")
     @objc(sendRequest:callback:) public
-    func ___sendRequest(_ request: __OMSTokenRequest, callback: ((__OmiseToken?, NSError?) -> ())?) {
+    func ___sendRequest(_ request: __OMSTokenRequest, callback: ((__OmiseToken?, NSError?) -> Void)?) {
         self.__sendRequest(request, callback: callback)
     }
     
@@ -78,8 +77,8 @@ extension Client {
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
     @objc(sendSourceRequest:callback:) public
-    func __sendRequest(_ request: __OMSSourceRequest, callback: ((__OmiseSource?, NSError?) -> ())?) {
-        self.send(request.request, completionHandler: { result in
+    func __sendRequest(_ request: __OMSSourceRequest, callback: ((__OmiseSource?, NSError?) -> Void)?) {
+        self.send(request.request) { result in
             let token: __OmiseSource?
             let error: NSError?
             
@@ -93,7 +92,7 @@ extension Client {
             }
             
             callback?(token, error)
-        })
+        }
     }
     
     /**
@@ -106,7 +105,7 @@ extension Client {
      */
     @objc(sendSourceRequest:delegate:) public
     func __sendRequest(_ request: __OMSSourceRequest, delegate: OMSSourceRequestDelegate?) {
-        self.send(request.request, completionHandler: { result in
+        self.send(request.request) { result in
             switch result {
             case let .success(token):
                 delegate?.sourceRequest(request, didSucceedWithSource: __OmiseSource(source: token))
@@ -114,7 +113,7 @@ extension Client {
                 let error = err as NSError
                 delegate?.sourceRequest(request, didFailWithError: error)
             }
-        })
+        }
     }
     
     @objc(capabilityDataWithCompletionHandler:) public
@@ -129,4 +128,3 @@ extension Client {
         }
     }
 }
-

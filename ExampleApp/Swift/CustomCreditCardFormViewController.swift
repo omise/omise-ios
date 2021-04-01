@@ -14,22 +14,23 @@ protocol CustomCreditCardFormViewControllerDelegate: AnyObject {
     func creditCardFormViewController(_ controller: CustomCreditCardFormViewController, didFailWithError error: Error)
 }
 
-
 @objc(CustomCreditCardFormViewController)
 @objcMembers
 class CustomCreditCardFormViewController: UIViewController {
     
     let omiseClient = Client(publicKey: "pkey_test_<#Omise Public Key#>")
     
-    @IBOutlet var cardNumberField: CardNumberTextField!
-    @IBOutlet var cardNameField: CardNameTextField!
-    @IBOutlet var cardExpiryField: CardExpiryDateTextField!
-    @IBOutlet var cardCVVField: CardCVVTextField!
+    @IBOutlet private var cardNumberField: CardNumberTextField!
+    @IBOutlet private var cardNameField: CardNameTextField!
+    @IBOutlet private var cardExpiryField: CardExpiryDateTextField!
+    @IBOutlet private var cardCVVField: CardCVVTextField!
   
-    @IBOutlet var doneButton: UIBarButtonItem!
+    @IBOutlet private var doneButton: UIBarButtonItem!
     
     weak var delegate: CustomCreditCardFormViewControllerDelegate?
     
+    // need to refactor loadView, removing super results in crash
+    // swiftlint:disable prohibited_super_call function_body_length
     override func loadView() {
         super.loadView()
         
@@ -89,7 +90,6 @@ class CustomCreditCardFormViewController: UIViewController {
             lowerRowStackView.alignment = .fill
             lowerRowStackView.spacing = 10
             
-            
             let stackView = UIStackView(arrangedSubviews: [cardNumberStackView, cardNameStackView, lowerRowStackView])
             stackView.translatesAutoresizingMaskIntoConstraints = false
             stackView.axis = .vertical
@@ -102,8 +102,8 @@ class CustomCreditCardFormViewController: UIViewController {
                 stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
                 stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
                 stackView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 20),
-                stackView.bottomAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.bottomAnchor),
-                ])
+                stackView.bottomAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.bottomAnchor)
+            ])
         }
     }
     
@@ -118,15 +118,17 @@ class CustomCreditCardFormViewController: UIViewController {
         }
     }
     
-    @IBAction func proceed(_ sender: UIBarButtonItem) {
+    @IBAction private func proceed(_ sender: UIBarButtonItem) {
         guard let name = cardNameField.text, cardNumberField.isValid,
             let expiryMonth = cardExpiryField.selectedMonth, let expiryYear = cardExpiryField.selectedYear,
             let cvv = cardCVVField.text else {
                 return
         }
         let tokenRequest = Request<Token>(
-            name: name, pan: cardNumberField.pan,
-            expirationMonth: expiryMonth, expirationYear: expiryYear,
+            name: name,
+            pan: cardNumberField.pan,
+            expirationMonth: expiryMonth,
+            expirationYear: expiryYear,
             securityCode: cvv
         )
         omiseClient.send(tokenRequest) { (result) in

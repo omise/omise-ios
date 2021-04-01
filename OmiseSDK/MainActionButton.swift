@@ -1,10 +1,9 @@
 import UIKit
 
-
-@IBDesignable @objc(OMSMainActionButton)
-class MainActionButton: UIButton {
+@IBDesignable
+@objc(OMSMainActionButton) class MainActionButton: UIButton {
     
-    @IBInspectable public var cornerRadius: CGFloat = 0.0 {
+    @IBInspectable var cornerRadius: CGFloat = 0.0 {
         didSet {
             layer.cornerRadius = cornerRadius
         }
@@ -12,49 +11,49 @@ class MainActionButton: UIButton {
     
     private var backgroundColors: [ControlState: UIColor] = [:]
     
-    @IBInspectable public var defaultBackgroundColor: UIColor? {
+    @IBInspectable var defaultBackgroundColor: UIColor? {
         didSet {
             setBackgroundColor(defaultBackgroundColor, for: .normal)
         }
     }
     
-    @IBInspectable public var highlightedBackgroundColor: UIColor? {
+    @IBInspectable var highlightedBackgroundColor: UIColor? {
         didSet {
             setBackgroundColor(highlightedBackgroundColor, for: .highlighted)
         }
     }
     
-    @IBInspectable public var selectedBackgroundColor: UIColor? {
+    @IBInspectable var selectedBackgroundColor: UIColor? {
         didSet {
             setBackgroundColor(selectedBackgroundColor, for: .selected)
         }
     }
     
-    @IBInspectable public var disabledBackgroundColor: UIColor? {
+    @IBInspectable var disabledBackgroundColor: UIColor? {
         didSet {
             setBackgroundColor(disabledBackgroundColor, for: .disabled)
         }
     }
     
-    public override var isEnabled: Bool {
+    override var isEnabled: Bool {
         didSet {
             updateBackgroundColor()
         }
     }
     
-    public override var isSelected: Bool {
+    override var isSelected: Bool {
         didSet {
             updateBackgroundColor()
         }
     }
     
-    public override var isHighlighted: Bool {
+    override var isHighlighted: Bool {
         didSet {
             updateBackgroundColor()
         }
     }
     
-    public override var backgroundColor: UIColor? {
+    override var backgroundColor: UIColor? {
         get {
             return backgroundColors[state] ?? backgroundColors[.normal] ?? self.defaultBackgroundColor
         }
@@ -64,22 +63,22 @@ class MainActionButton: UIButton {
         }
     }
     
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         updateBackgroundColor()
     }
     
-    public required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         updateBackgroundColor()
     }
     
-    public func setBackgroundColor(_ color: UIColor?, for state: ControlState) {
+    func setBackgroundColor(_ color: UIColor?, for state: ControlState) {
         backgroundColors[state] = color
         updateBackgroundColor()
     }
     
-    public override func prepareForInterfaceBuilder() {
+    override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         
         if backgroundColor(for: .disabled) == nil {
@@ -100,9 +99,8 @@ class MainActionButton: UIButton {
         super.backgroundColor = self.backgroundColor
     }
     
-    public func backgroundColor(for state: ControlState) -> UIColor? {
+    func backgroundColor(for state: ControlState) -> UIColor? {
         return backgroundColors[state]
     }
     
 }
-

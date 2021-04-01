@@ -1,7 +1,6 @@
 import UIKit
 import os
 
-
 enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case creditCard
     case installment
@@ -104,13 +103,14 @@ extension PaymentChooserOption {
     }
 }
 
-
 @objc(OMSPaymentChooserViewController)
-class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>, PaymentSourceChooser, PaymentChooserUI {
+class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>,
+                                    PaymentSourceChooser,
+                                    PaymentChooserUI {
     var capability: Capability?
     var flowSession: PaymentCreatorFlowSession?
     
-    @objc var showsCreditCardPayment: Bool = true {
+    @objc var showsCreditCardPayment = true {
         didSet {
             updateShowingValues()
         }
@@ -121,15 +121,15 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         }
     }
     
-    @IBOutlet var paymentMethodNameLables: [UILabel]!
+    @IBOutlet private var paymentMethodNameLables: [UILabel]!
     
-    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
+    @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
+    @IBInspectable var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
@@ -137,7 +137,6 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         applyPrimaryColor()
         applySecondaryColor()
@@ -161,6 +160,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         updateShowingValues()
     }
     
+    // swiftlint:disable function_body_length
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch (segue.identifier, segue.destination) {
         case ("GoToCreditCardFormSegue"?, let controller as CreditCardFormViewController):
@@ -183,19 +183,22 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 case .conbini:
                     controller.navigationItem.title = NSLocalizedString(
                         "econtext.convenience-store.navigation-item.title",
-                        bundle: .module, value: "Konbini",
+                        bundle: .module,
+                        value: "Konbini",
                         comment: "A navigaiton title for the EContext screen when the `Konbini` is selected"
                     )
                 case .netBanking:
                     controller.navigationItem.title = NSLocalizedString(
                         "econtext.netbanking.navigation-item.title",
-                        bundle: .module, value: "Net Bank",
+                        bundle: .module,
+                        value: "Net Bank",
                         comment: "A navigaiton title for the EContext screen when the `Net Bank` is selected"
                     )
                 case .payEasy:
                     controller.navigationItem.title = NSLocalizedString(
                         "econtext.pay-easy.navigation-item.title",
-                        bundle: .module, value: "Pay-easy",
+                        bundle: .module,
+                        value: "Pay-easy",
                         comment: "A navigaiton title for the EContext screen when the `Pay-easy` is selected"
                     )
                 default: break
@@ -255,10 +258,10 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
         
-        flowSession?.requestCreateSource(payment, completionHandler: { _ in
+        flowSession?.requestCreateSource(payment) { _ in
             cell?.accessoryView = oldAccessoryView
             self.view.isUserInteractionEnabled = true
-        })
+        }
     }
     
     override func staticIndexPath(forValue value: PaymentChooserOption) -> IndexPath {
@@ -294,10 +297,12 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         }
     }
     
-    public func applyPaymentMethods(from capability: Capability) {
+    func applyPaymentMethods(from capability: Capability) {
         self.capability = capability
         showsCreditCardPayment = capability.creditCardBackend != nil
-        allowedPaymentMethods = capability.supportedBackends.compactMap({
+        
+        // swiftlint:disable closure_body_length
+        allowedPaymentMethods = capability.supportedBackends.compactMap {
             switch $0.payment {
             case .alipay:
                 return OMSSourceTypeValue.alipay
@@ -324,20 +329,20 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             case .card, .unknownSource:
                 return nil
             }
-        })
+        }
         
         updateShowingValues()
     }
     
     private func loadCapabilityData() {
-        flowSession?.client?.capabilityDataWithCompletionHandler({ (result) in
+        flowSession?.client?.capabilityDataWithCompletionHandler { (result) in
             switch result {
             case .success(let capability):
                 self.applyPaymentMethods(from: capability)
             case .failure:
                 break
             }
-        })
+        }
     }
     
     private func applyPrimaryColor() {
@@ -345,9 +350,9 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return
         }
         
-        paymentMethodNameLables.forEach({
+        paymentMethodNameLables.forEach {
             $0.textColor = currentPrimaryColor
-        })
+        }
     }
     
     private func applySecondaryColor() {}
@@ -366,10 +371,13 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         
         showingValues = paymentMethodsToShow
         
-        os_log("Payment Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
+        os_log("Payment Chooser: Showing options - %{private}@",
+               log: uiLogObject,
+               type: .info,
+               showingValues.map { $0.description }.joined(separator: ", "))
     }
     
-    @IBAction func requestToClose(_ sender: Any) {
+    @IBAction private func requestToClose(_ sender: Any) {
         flowSession?.requestToCancel()
     }
 }

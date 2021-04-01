@@ -13,4 +13,3 @@ public struct Request<T: CreatableObject> {
         self.parameter = parameter
     }
 }
-

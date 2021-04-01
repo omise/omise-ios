@@ -1,17 +1,15 @@
 import UIKit
 
-
 protocol MoreInformationOnCVVViewControllerDelegate: AnyObject {
     func moreInformationOnCVVViewControllerDidAskToClose(_ controller: MoreInformationOnCVVViewController)
 }
 
-
 class MoreInformationOnCVVViewController: UIViewController {
     static let preferredWidth: CGFloat = 240
     
-    @IBOutlet var cvvLocationImageView: UIImageView!
-    @IBOutlet var cvvLocationDescriptionLabel: UILabel!
-    @IBOutlet var closeButton: ExpandedHitAreaButton!
+    @IBOutlet private var cvvLocationImageView: UIImageView!
+    @IBOutlet private var cvvLocationDescriptionLabel: UILabel!
+    @IBOutlet private var closeButton: ExpandedHitAreaButton!
     
     var preferredCardBrand: CardBrand? {
         didSet {
@@ -24,6 +22,8 @@ class MoreInformationOnCVVViewController: UIViewController {
     
     weak var delegate: MoreInformationOnCVVViewControllerDelegate?
     
+    // need to refactor loadView, removing super results in crash
+    // swiftlint:disable prohibited_super_call
     override func loadView() {
         super.loadView()
         
@@ -38,6 +38,7 @@ class MoreInformationOnCVVViewController: UIViewController {
         updateUI()
     }
     
+    // swiftlint:disable:next private_action
     @IBAction func askToClose(_ sender: AnyObject) {
         delegate?.moreInformationOnCVVViewControllerDidAskToClose(self)
     }
@@ -47,19 +48,20 @@ class MoreInformationOnCVVViewController: UIViewController {
         case .amex?:
             cvvLocationImageView.image = UIImage(named: "CVV AMEX", in: .module, compatibleWith: nil)
             cvvLocationDescriptionLabel.text = NSLocalizedString(
-                "more-info.cvv-location.amex.text", bundle: .module,
+                "more-info.cvv-location.amex.text",
+                bundle: .module,
                 value: "4 digit number on the front of your card",
                 comment: "A descriptive text telling the location of CVV on the AMEX card")
         default:
             cvvLocationImageView.image = UIImage(named: "CVV", in: .module, compatibleWith: nil)
             cvvLocationDescriptionLabel.text = NSLocalizedString(
-                "more-info.cvv-location.default.text", bundle: .module,
+                "more-info.cvv-location.default.text",
+                bundle: .module,
                 value: "3 digit number on the back of your card",
                 comment: "A descriptive text telling the location of CVV on the typical credit card")
         }
     }
 }
-
 
 class ExpandedHitAreaButton: UIButton {
     var hitAreaSize = CGSize(width: 44, height: 44)
@@ -70,7 +72,6 @@ class ExpandedHitAreaButton: UIButton {
         return bounds.insetBy(dx: -horizontalInset, dy: -verticalInset).contains(point)
     }
 }
-
 
 class OverlayPanelTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
     var alertPresentationController: OverlayPanelPresentationController?
@@ -96,7 +97,7 @@ class OverlayPanelPresentationController: UIPresentationController {
     let dismissTapGestureRecognizer = UITapGestureRecognizer()
     
     private static let defaultDimmingViewColor: UIColor = {
-        let defaultLightAppearanceColor = UIColor(red:0.26, green:0.27, blue:0.28, alpha:0.5)
+        let defaultLightAppearanceColor = UIColor(red: 0.26, green: 0.27, blue: 0.28, alpha: 0.5)
         #if compiler(>=5.1)
         if #available(iOS 13, *) {
             return UIColor.black.withAlphaComponent(0.5)
@@ -144,8 +145,8 @@ class OverlayPanelPresentationController: UIPresentationController {
                 dimmingView.topAnchor.constraint(equalTo: containerView.topAnchor),
                 dimmingView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
                 dimmingView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-                dimmingView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-                ])
+                dimmingView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+            ])
         }
         
         guard let coordinator = presentedViewController.transitionCoordinator else {
@@ -153,9 +154,9 @@ class OverlayPanelPresentationController: UIPresentationController {
             return
         }
         
-        coordinator.animate(alongsideTransition: { _ in
+        coordinator.animate { _ in
             self.dimmingView.alpha = 1.0
-        })
+        }
         
         dismissTapGestureRecognizer.isEnabled = true
     }
@@ -166,9 +167,9 @@ class OverlayPanelPresentationController: UIPresentationController {
             return
         }
         
-        coordinator.animate(alongsideTransition: { _ in
+        coordinator.animate { _ in
             self.dimmingView.alpha = 0.0
-        })
+        }
         dismissTapGestureRecognizer.isEnabled = false
     }
     
@@ -187,9 +188,14 @@ class OverlayPanelPresentationController: UIPresentationController {
         presentedLayer.shadowRadius = 4
         presentedLayer.shadowOpacity = 1.0
         if #available(iOS 13, *) {
-            presentedLayer.shadowColor = traitCollection.userInterfaceStyle == .dark ? UIColor.black.cgColor : UIColor(red:0.27, green:0.29, blue:0.32, alpha:0.25).cgColor
+            switch traitCollection.userInterfaceStyle {
+            case .dark:
+                presentedLayer.shadowColor = UIColor.black.cgColor
+            default:
+                presentedLayer.shadowColor = UIColor(red: 0.27, green: 0.29, blue: 0.32, alpha: 0.25).cgColor
+            }
         } else {
-            presentedLayer.shadowColor = UIColor(red:0.27, green:0.29, blue:0.32, alpha:0.25).cgColor
+            presentedLayer.shadowColor = UIColor(red: 0.27, green: 0.29, blue: 0.32, alpha: 0.25).cgColor
         }
         presentedLayer.shadowPath = UIBezierPath(
             roundedRect: CGRect(origin: .zero, size: frameOfPresentedViewInContainerView.size),
@@ -221,7 +227,7 @@ class OverlayPanelPresentationController: UIPresentationController {
                 return
         }
         
-        UIView.animate(withDuration: 0.18) { 
+        UIView.animate(withDuration: 0.18) {
             container.view.frame = self.frameOfPresentedViewInContainerView
         }
     }
@@ -230,7 +236,12 @@ class OverlayPanelPresentationController: UIPresentationController {
         super.traitCollectionDidChange(previousTraitCollection)
         
         if #available(iOS 13, *), let presentedView = self.presentedView {
-            presentedView.layer.shadowColor = traitCollection.userInterfaceStyle == .dark ? UIColor.black.cgColor : UIColor(red:0.27, green:0.29, blue:0.32, alpha:0.25).cgColor
+            switch traitCollection.userInterfaceStyle {
+            case .dark:
+                presentedView.layer.shadowColor = UIColor.black.cgColor
+            default:
+                presentedView.layer.shadowColor = UIColor(red: 0.27, green: 0.29, blue: 0.32, alpha: 0.25).cgColor
+            }
         }
     }
     
@@ -242,7 +253,6 @@ class OverlayPanelPresentationController: UIPresentationController {
         }
     }
 }
-
 
 extension OverlayPanelPresentationController: UIAdaptivePresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
@@ -280,21 +290,19 @@ extension OverlayPanelPresentationController: UIViewControllerAnimatedTransition
         controller.view.frame = initialFrame
         controller.view.alpha = initialAlpha
         
-        
-        let animationBlock: () -> () = {
+        let animationBlock: () -> Void = {
             controller.view.frame = finalFrame
             controller.view.alpha = finalAlpha
         }
 
         let animator = UIViewPropertyAnimator(duration: animationDuration, timingParameters: UISpringTimingParameters())
         animator.addAnimations(animationBlock)
-        animator.addCompletion({ position in
+        animator.addCompletion { position in
             transitionContext.completeTransition(position == UIViewAnimatingPosition.end)
-        })
+        }
         animator.startAnimation()
     }
 }
-
 
 extension CGRect {
     func centeredRectWithSize(_ size: CGSize) -> CGRect {
@@ -306,4 +314,3 @@ extension CGRect {
         return CGRect(origin: origin, size: size)
     }
 }
-

@@ -2,14 +2,12 @@ import Foundation
 import OmiseSDK
 import PlaygroundSupport
 
-
 let publicKey = "pkey_test_<#Omise Public Key#>"
 
 /*: tokenization-api-call
  
  You can do manual credit card tokenization by using our Token Request API.
  */
-
 
 /*: create-a-client-step
  You need a `Client` object for comminucating with Omise API
@@ -22,7 +20,8 @@ let client = Client(publicKey: publicKey)
 let request = Request<Token>(parameter: CreateTokenParameter(
   name: "Customer Name",
   number: "4242424242424242",
-  expirationMonth: 12, expirationYear: 2022,
+  expirationMonth: 12,
+  expirationYear: 2022,
   securityCode: "123")
 )
 
@@ -44,6 +43,4 @@ let task = client.requestTask(with: request) { (result) in
 
 task.resume()
 
-
 PlaygroundPage.current.needsIndefiniteExecution = true
-

@@ -1,10 +1,11 @@
+// swiftlint:disable file_length line_length
+
 import Foundation
 
-
 /// Default error domain for the Omise Error
-public let OmiseErrorDomain = "co.omise"
+public let OmiseErrorDomain = "co.omise" // swiftlint:disable:this identifier_name
 
-let sourceParameterCodingsUserInfoKey = CodingUserInfoKey.init(rawValue: "sourceParameter")!
+let sourceParameterCodingsUserInfoKey = CodingUserInfoKey(rawValue: "sourceParameter")! // swiftlint:disable:this force_unwrapping
 
 /// Coding Key for decoding the Error data returned in the Omise API
 ///
@@ -12,21 +13,19 @@ let sourceParameterCodingsUserInfoKey = CodingUserInfoKey.init(rawValue: "source
 /// - code: Omise Error Code
 /// - message: Error message
 public enum ErrorUserInfoKey: String, CodingKey {
-    case location = "location"
-    case code = "code"
-    case message = "message"
+    case location
+    case code
+    case message
 }
 
-
 /// Represent errors from the Omise iOS SDK.
-public enum OmiseError: CustomNSError, LocalizedError, Decodable {
+public enum OmiseError: CustomNSError, LocalizedError, Decodable { // swiftlint:disable:this type_body_length
     public static let errorDomain: String = "co.omise.ios"
-    
+
     /// API error returned from Omise API
     case api(code: APIErrorCode, message: String, location: String)
     /// Any unexpected errors that may happen during Omise API requests.
     case unexpected(error: UnexpectedError, underlying: Error?)
-    
     
     /// The error code of the Omise API error
     ///
@@ -50,7 +49,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
         /// - emptyCardHolderName: Card holder name is empty
         /// - unsupportedBrand: The card brand is not supported
         /// - other: Other invalid card reason
-        public enum InvalidCardReason : Hashable {
+        public enum InvalidCardReason: Hashable {
             case invalidCardNumber
             case invalidExpirationDate
             case emptyCardHolderName
@@ -72,7 +71,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
         /// - typeNotSupported: The given Source Type is not supported on this account
         /// - currencyNotSupported: The currency is not supported on this account
         /// - other: Other bad request reason
-        public enum BadRequestReason : Hashable {
+        public enum BadRequestReason: Hashable {
             case amountIsLessThanValidAmount(validAmount: Int64?, currency: Currency?)
             case amountIsGreaterThanValidAmount(validAmount: Int64?, currency: Currency?)
             
@@ -90,7 +89,6 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
             case other(String)
         }
     }
-    
     
     /// The reason of an unexpected error
     ///
@@ -123,14 +121,16 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
             case .authenticationFailure:
                 return NSLocalizedString(
                     "error.api.authentication_failure.message",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Authentication failure",
                     comment: "A default descriptive message representing an `Authentication failure` error from the backend which a merchant may show this message to their user"
                 )
             case .serviceNotFound:
                 return NSLocalizedString(
                     "error.api.service_not_found.message",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Service not found",
                     comment: "A default descriptive message representing an `Service not found` error from the backend which a merchant may show this message to their user"
                 )
@@ -144,42 +144,48 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
             case .noErrorNorResponse:
                 return NSLocalizedString(
                     "error.unexpected.no-error-norresponse.message",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "No error nor response",
                     comment: "A descriptive message representing an `No error nor response` error during the operation in the client"
                 )
             case .httpErrorWithNoData:
                 return NSLocalizedString(
                     "error.unexpected.http-error-with-no-data.message",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "No error data in the error response",
                     comment: "A descriptive message representing an `No error data in the error response` error during the operation in the client"
                 )
             case .httpErrorResponseWithInvalidData:
                 return NSLocalizedString(
                     "error.unexpected.http-error-response-with-invalid-data.message",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Invalid error data in the error response",
                     comment: "A descriptive message representing an `Invalid error data in the error response` error during the operation in the client"
                 )
             case .httpSuccessWithNoData:
                 return NSLocalizedString(
                     "error.unexpected.http-succeess-with-no-data.message",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "No data in the success response",
                     comment: "A descriptive message representing an `No data in the success response` error during the operation in the client"
                 )
             case .httpSuccessWithInvalidData:
                 return NSLocalizedString(
                     "error.unexpected.http-succeess-with-invalid-data.message",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Invalid data in the success response",
                     comment: "A descriptive message representing an `Invalid data in the success response` error during the operation in the client"
                 )
             case .unrecognizedHTTPStatusCode(let statusCode):
                 let messageFormat = NSLocalizedString(
                     "error.unexpected.unrecognized-HTTP-status-code.message",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Unrecognized/unsupported HTTP status code",
                     comment: "A descriptive message representing an `Unrecognized/unsupported HTTP status code` error during the operation in the client"
                 )
@@ -203,14 +209,16 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
             case .authenticationFailure:
                 recoverySuggestionMessage = NSLocalizedString(
                     "error.api.authentication_failure.recovery-suggestion",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Please contact the merchant",
                     comment: "A default descriptive suggestion message to recovery from the `Authentication failure` error from the backend which a merchant may show this message to their user"
                 )
             case .serviceNotFound:
                 recoverySuggestionMessage = NSLocalizedString(
                     "error.api.service_not_found.recovery-suggestion",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Please contact the merchant",
                     comment: "A default descriptive suggestion message to recovery from the `Service not found` error from the backend which a merchant may show this message to their user"
                 )
@@ -222,42 +230,48 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
             case .noErrorNorResponse:
                 recoverySuggestionMessage = NSLocalizedString(
                     "error.unexpected.no-error-norresponse.recovery-suggestion",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Please try again later. If the same problem persists please contact customer support.",
                     comment: "A default descriptive suggestion message to recovery from the `No error nor response` error during the operation in the client which a merchant may show this message to their user"
                 )
             case .httpErrorWithNoData:
                 recoverySuggestionMessage = NSLocalizedString(
                     "error.unexpected.http-error-with-no-data.recovery-suggestion",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Please try again later. If the same problem persists please contact customer support.",
                     comment: "A default descriptive suggestion message to recovery from the `No error data in the error response` error during the operation in the client which a merchant may show this message to their user"
                 )
             case .httpErrorResponseWithInvalidData:
                 recoverySuggestionMessage = NSLocalizedString(
                     "error.unexpected.http-error-response-with-invalid-data.recovery-suggestion",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Please try again later. If the same problem persists please contact customer support.",
                     comment: "A default descriptive suggestion message to recovery from the `Invalid error data in the error response` error during the operation in the client which a merchant may show this message to their user"
                 )
             case .httpSuccessWithNoData:
                 recoverySuggestionMessage = NSLocalizedString(
                     "error.unexpected.http-succeess-with-no-data.recovery-suggestion",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Please try again later. If the same problem persists please contact customer support.",
                     comment: "A default descriptive suggestion message to recovery from the `No data in the success response` error during the operation in the client which a merchant may show this message to their user"
                 )
             case .httpSuccessWithInvalidData:
                 recoverySuggestionMessage = NSLocalizedString(
                     "error.unexpected.http-succeess-with-invalid-data.recovery-suggestion",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Please try again later. If the same problem persists please contact customer support.",
                     comment: "A default descriptive suggestion message to recovery from the `Invalid data in the success response` error during the operation in the client which a merchant may show this message to their user"
                 )
             case .unrecognizedHTTPStatusCode:
                 recoverySuggestionMessage = NSLocalizedString(
                     "error.unexpected.unrecognized-HTTP-status-code.recovery-suggestion",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Please try again later. If the same problem persists please contact customer support.",
                     comment: "A default descriptive suggestion message to recovery from the `Unrecognized/unsupported HTTP status code` error during the operation in the client which a merchant may show this message to their user"
                 )
@@ -269,7 +283,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
     }
     
     /// Storage for values or objects related to this notification.
-    public var errorUserInfo: [String : Any] {
+    public var errorUserInfo: [String: Any] {
         switch self {
         case let .api(code: code, message: message, location: location):
             return [
@@ -277,16 +291,16 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
                 ErrorUserInfoKey.location.rawValue: location,
                 ErrorUserInfoKey.message.rawValue: message,
                 NSLocalizedDescriptionKey: errorDescription ?? "",
-                NSLocalizedRecoverySuggestionErrorKey: recoverySuggestion ?? "",
+                NSLocalizedRecoverySuggestionErrorKey: recoverySuggestion ?? ""
             ]
         case let .unexpected(error: _, underlying: error?):
             return [
                 NSLocalizedDescriptionKey: error.localizedDescription,
-                NSUnderlyingErrorKey: error,
+                NSUnderlyingErrorKey: error
             ]
         case .unexpected(error: _, underlying: nil):
             return [
-                NSLocalizedDescriptionKey: errorDescription ?? "",
+                NSLocalizedDescriptionKey: errorDescription ?? ""
             ]
         }
     }
@@ -296,11 +310,11 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
         let message = try container.decode(String.self, forKey: .message)
         let location = try container.decode(String.self, forKey: .location)
         
-        self = .api(code: try OmiseError.APIErrorCode.init(from: decoder), message: message, location: location)
+        self = .api(code: try OmiseError.APIErrorCode(from: decoder), message: message, location: location)
     }
 }
 
-extension OmiseError.APIErrorCode : Decodable {
+extension OmiseError.APIErrorCode: Decodable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: ErrorUserInfoKey.self)
         let codeValue = try container.decode(String.self, forKey: .code)
@@ -322,7 +336,7 @@ extension OmiseError.APIErrorCode : Decodable {
     }
 }
 
-extension OmiseError.APIErrorCode.InvalidCardReason : Decodable {
+extension OmiseError.APIErrorCode.InvalidCardReason: Decodable {
     
     init(message: String) throws {
         if message.contains("number") {
@@ -350,28 +364,32 @@ extension OmiseError.APIErrorCode.InvalidCardReason : Decodable {
         case .invalidCardNumber:
             preferredErrorDescription = NSLocalizedString(
                 "error.api.invalid_card.invalid-card-number.message",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "Invalid card number",
                 comment: "A default descriptive message representing an `Invalid card data` error with the `Invalid card number` message from the backend which a merchant may show this message to their user"
             )
         case .invalidExpirationDate:
             preferredErrorDescription = NSLocalizedString(
                 "error.api.invalid_card.invalid-expiration-date.message",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "Invalid card expiration date",
                 comment: "A default descriptive message representing an `Invalid card data` error with the `Invalid card expiration date` message from the backend which a merchant may show this message to their user"
             )
         case .emptyCardHolderName:
             preferredErrorDescription = NSLocalizedString(
                 "error.api.invalid_card.empty-card-holderName.message",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "Invalid card holder name",
                 comment: "A default descriptive message representing an `Invalid card data` error with the `Invalid card holder name` message from the backend which a merchant may show this message to their user"
             )
         case .unsupportedBrand:
             preferredErrorDescription = NSLocalizedString(
                 "error.api.invalid_card.unsupported-brand.message",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "Unsupported card brand",
                 comment: "A default descriptive message representing an `Invalid card data` error with the `Unsupported card brand` message from the backend which a merchant may show this message to their user"
             )
@@ -388,35 +406,40 @@ extension OmiseError.APIErrorCode.InvalidCardReason : Decodable {
         case .invalidCardNumber:
             preferredRecoverySuggestionMessage = NSLocalizedString(
                 "error.api.invalid_card.invalid-card-number.recovery-suggestion",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "Please review the card number",
                 comment: "A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Invalid card number` message from the backend which a merchant may show this message to their user"
             )
         case .invalidExpirationDate:
             preferredRecoverySuggestionMessage = NSLocalizedString(
                 "error.api.invalid_card.invalid-expiration-date.recovery-suggestion",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "Please review the card expiration date",
                 comment: "A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Invalid card expiration date` message from the backend which a merchant may show this message to their user"
             )
         case .emptyCardHolderName:
             preferredRecoverySuggestionMessage = NSLocalizedString(
                 "error.api.invalid_card.empty-card-holder-name.recovery-suggestion",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "Please review the card holder name",
                 comment: "A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Invalid card holder name` message from the backend which a merchant may show this message to their user"
             )
         case .unsupportedBrand:
             preferredRecoverySuggestionMessage = NSLocalizedString(
                 "error.api.invalid_card.unsupported-brand.recovery-suggestion",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "Please use another credit card",
                 comment: "A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Unsupported card brand` message from the backend which a merchant may show this message to their user"
             )
         case .other:
             preferredRecoverySuggestionMessage = NSLocalizedString(
                 "error.api.invalid_card.other.recovery-suggestion",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "Please review credit card information",
                 comment: "A descriptive suggestion message to recovery from the `Invalid card data` error from the backend which a merchant may show this message to their user"
             )
@@ -426,13 +449,13 @@ extension OmiseError.APIErrorCode.InvalidCardReason : Decodable {
     }
     
     static func parseInvalidCardReasonsFromMessage(_ message: String) throws -> [OmiseError.APIErrorCode.InvalidCardReason] {
-        let reasonMessages = message.components(separatedBy: ", and ").flatMap({ $0.components(separatedBy: ", ") })
+        let reasonMessages = message.components(separatedBy: ", and ").flatMap { $0.components(separatedBy: ", ") }
         var parsedReasons = Set(try reasonMessages.map(OmiseError.APIErrorCode.InvalidCardReason.init(message:)))
         
         if parsedReasons.contains(.invalidCardNumber) {
             parsedReasons.remove(.unsupportedBrand)
         }
-        return parsedReasons.sorted(by: {
+        return parsedReasons.sorted {
             switch ($0, $1) {
             case (.invalidCardNumber, _):
                 return true
@@ -447,36 +470,36 @@ extension OmiseError.APIErrorCode.InvalidCardReason : Decodable {
                 
             default: return false
             }
-        })
+        }
     }
 }
 
-
-let amountAtLeastValidAmountErrorMessageRegularExpression = try! NSRegularExpression(pattern: "amount must be at least ([\\d]+)", options: [])
-let amountGreaterThanValidAmountErrorMessageRegularExpression = try! NSRegularExpression(pattern: "amount must be less than ([\\d]+)", options: [])
-let amountLessThanValidAmountErrorMessageRegularExpression = try! NSRegularExpression(pattern: "amount must be greater than ([\\d]+)", options: [])
-
-let nameIsTooLongErrorMessageRegularExpression = try! NSRegularExpression(pattern: "name is too long \\(maximum is ([\\d]+) characters\\)", options: [])
-
-
-extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
+extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
     
+    private enum ErrorMessageRegularExpression {
+        static let amountAtLeastValidAmount: NSRegularExpression! = try? NSRegularExpression(pattern: "amount must be at least ([\\d]+)", options: [])
+        static let amountGreaterThanValidAmount: NSRegularExpression! = try? NSRegularExpression(pattern: "amount must be less than ([\\d]+)", options: [])
+        static let amountLessThanValidAmount: NSRegularExpression! = try? NSRegularExpression(pattern: "amount must be greater than ([\\d]+)", options: [])
+        static let nameIsTooLong: NSRegularExpression! = try? NSRegularExpression(pattern: "name is too long \\(maximum is ([\\d]+) characters\\)", options: [])
+    }
+    
+    // swiftlint:disable cyclomatic_complexity
     init(message: String, currency: Currency?) throws {
         if message.hasPrefix("amount must be ") {
-            if let lessThanValidAmountMatch = amountLessThanValidAmountErrorMessageRegularExpression
+            if let lessThanValidAmountMatch = ErrorMessageRegularExpression.amountLessThanValidAmount
                 .firstMatch(in: message, range: NSRange(message.startIndex..<message.endIndex, in: message)),
                 lessThanValidAmountMatch.numberOfRanges == 2,
-                let amountRange = Range.init(lessThanValidAmountMatch.range(at: 1), in: message) {
+                let amountRange = Range(lessThanValidAmountMatch.range(at: 1), in: message) {
                 self = .amountIsLessThanValidAmount(validAmount: Int64(message[amountRange]), currency: currency)
-            } else if let greaterThanValidAmountMatch = amountGreaterThanValidAmountErrorMessageRegularExpression
+            } else if let greaterThanValidAmountMatch = ErrorMessageRegularExpression.amountGreaterThanValidAmount
                 .firstMatch(in: message, range: NSRange(message.startIndex..<message.endIndex, in: message)),
                 greaterThanValidAmountMatch.numberOfRanges == 2,
-                let amountRange = Range.init(greaterThanValidAmountMatch.range(at: 1), in: message) {
+                let amountRange = Range(greaterThanValidAmountMatch.range(at: 1), in: message) {
                 self = .amountIsGreaterThanValidAmount(validAmount: Int64(message[amountRange]), currency: currency)
-            } else if let atLeastValidAmountMatch = amountAtLeastValidAmountErrorMessageRegularExpression
+            } else if let atLeastValidAmountMatch = ErrorMessageRegularExpression.amountAtLeastValidAmount
                 .firstMatch(in: message, range: NSRange(message.startIndex..<message.endIndex, in: message)),
                 atLeastValidAmountMatch.numberOfRanges == 2,
-                let amountRange = Range.init(atLeastValidAmountMatch.range(at: 1), in: message) {
+                let amountRange = Range(atLeastValidAmountMatch.range(at: 1), in: message) {
                 self = .amountIsLessThanValidAmount(validAmount: Int64(message[amountRange]), currency: currency)
             } else {
                 self = .other(message)
@@ -490,10 +513,10 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
         } else if message.contains("name") && message.contains("blank") {
             self = .emptyName
         } else if message.hasPrefix("name is too long"),
-            let lessThanValidAmountMatch = nameIsTooLongErrorMessageRegularExpression
+                  let lessThanValidAmountMatch = ErrorMessageRegularExpression.nameIsTooLong
                 .firstMatch(in: message, range: NSRange(message.startIndex..<message.endIndex, in: message)),
             lessThanValidAmountMatch.numberOfRanges == 2,
-            let amountRange = Range.init(lessThanValidAmountMatch.range(at: 1), in: message) {
+            let amountRange = Range(lessThanValidAmountMatch.range(at: 1), in: message) {
             self = .nameIsTooLong(maximum: Int(message[amountRange]))
         } else if message.contains("name") {
             self = .nameIsTooLong(maximum: nil)
@@ -521,18 +544,20 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
             if let validAmount = validAmount, let currency = currency {
                 let preferredErrorDescriptionFormat = NSLocalizedString(
                     "error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.message",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Amount is less than the valid amount of %@",
                     comment: "A default descriptive message representing an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user"
                 )
                 let formatter = NumberFormatter.makeAmountFormatter(for: currency)
                 preferredErrorDescription = String.localizedStringWithFormat(
-                    preferredErrorDescriptionFormat, 
+                    preferredErrorDescriptionFormat,
                     formatter.string(from: NSNumber(value: currency.convert(fromSubunit: validAmount))) ?? "\(currency.convert(fromSubunit: validAmount))")
             } else {
                 preferredErrorDescription = NSLocalizedString(
                     "error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.message",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Amount is less than the valid amount",
                     comment: "A default descriptive message representing an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user"
                 )
@@ -541,7 +566,8 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
             if let validAmount = validAmount, let currency = currency {
                 let preferredErrorDescriptionFormat = NSLocalizedString(
                     "error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.message",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Amount exceeds the valid amount of %@",
                     comment: "A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user"
                 )
@@ -552,7 +578,8 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
             } else {
                 preferredErrorDescription = NSLocalizedString(
                     "error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.message",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Amount exceeds the valid amount",
                     comment: "A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user"
                 )
@@ -560,7 +587,8 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
         case .invalidCurrency:
             preferredErrorDescription = NSLocalizedString(
                 "error.api.bad_request.invalid-currency.message",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "The currency is invalid",
                 comment: "A default descriptive message representing an `Bad request` error with `invalid-currency` from the backend which a merchant may show this message to their user"
             )
@@ -568,7 +596,8 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
         case .emptyName:
             preferredErrorDescription = NSLocalizedString(
                 "error.api.bad_request.empty-name.message",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "The customer name is empty",
                 comment: "A default descriptive message representing an `Bad request` error with `empty-name` from the backend which a merchant may show this message to their user"
             )
@@ -577,7 +606,8 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
             if let maximumLength = maximumLength {
                 let preferredErrorDescriptionFormat = NSLocalizedString(
                     "error.api.bad_request.name-is-too-long.with-valid-length.message",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "The customer name exceeds the %d character limit",
                     comment: "A default descriptive message representing an `Bad request` error with `name-is-too-long.with-valid-length` from the backend which a merchant may show this message to their user"
                 )
@@ -585,7 +615,8 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
             } else {
                 preferredErrorDescription = NSLocalizedString(
                     "error.api.bad_request.name-is-too-long.without-valid-length.message",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "The customer name is too long",
                     comment: "A default descriptive message representing an `Bad request` error with `name-is-too-long.without-valid-length` from the backend which a merchant may show this message to their user"
                 )
@@ -593,14 +624,16 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
         case .invalidName:
             preferredErrorDescription = NSLocalizedString(
                 "error.api.bad_request.invalid-name.message",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "The customer name is invalid",
                 comment: "A default descriptive message representing an `Bad request` error with `invalid-name` from the backend which a merchant may show this message to their user"
             )
         case .invalidEmail:
             preferredErrorDescription = NSLocalizedString(
                 "error.api.bad_request.invalid-email.message",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "The customer email is invalid",
                 comment: "A default descriptive message representing an `Bad request` error with `invalid-email` from the backend which a merchant may show this message to their user"
             )
@@ -608,7 +641,8 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
         case .invalidPhoneNumber:
             preferredErrorDescription = NSLocalizedString(
                 "error.api.bad_request.invalid-phone-number.message",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "The customer phone number is invalid",
                 comment: "A default descriptive message representing an `Bad request` error with `invalid-phone-number` from the backend which a merchant may show this message to their user"
             )
@@ -616,7 +650,8 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
         case .typeNotSupported:
             preferredErrorDescription = NSLocalizedString(
                 "error.api.bad_request.type-not-supported.message",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "The source type is not supported by this account",
                 comment: "A default descriptive message representing an `Bad request` error with `type-not-supported` from the backend which a merchant may show this message to their user"
             )
@@ -624,14 +659,16 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
         case .currencyNotSupported:
             preferredErrorDescription = NSLocalizedString(
                 "error.api.bad_request.currency-not-supported.message",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "The currency is not supported by this account",
                 comment: "A default descriptive message representing an `Bad request` error with `currency-not-supported` from the backend which a merchant may show this message to their user"
             )
         case .other(let value):
             let preferredErrorDescriptionFormat = NSLocalizedString(
                 "error.api.bad_request.other.message",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "Bad request: %@",
                 comment: "A default descriptive message representing an `Bad request` error with `other` from the backend which a merchant may show this message to their user"
             )
@@ -648,7 +685,8 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
             if let validAmount = validAmount, let currency = currency {
                 let preferredRecoverySuggestionMessageFormat = NSLocalizedString(
                     "error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.recovery-suggestion",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Please create a source with an amount that is greater than %@",
                     comment: "A default descriptive message representing an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user"
                 )
@@ -657,7 +695,8 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
             } else {
                 preferredRecoverySuggestionMessage = NSLocalizedString(
                     "error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.recovery-suggestion",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Please create a source with a greater amount",
                     comment: "A default descriptive message representing an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user"
                 )
@@ -666,7 +705,8 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
             if let validAmount = validAmount, let currency = currency {
                 let preferredRecoverySuggestionMessageFormat = NSLocalizedString(
                     "error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.recovery-suggestion",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Please create a source with an amount which is less than %@",
                     comment: "A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user"
                 )
@@ -675,7 +715,8 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
             } else {
                 preferredRecoverySuggestionMessage = NSLocalizedString(
                     "error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.recovery-suggestion",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Please create a source with less amount",
                     comment: "A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user"
                 )
@@ -683,7 +724,8 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
         case .invalidCurrency:
             preferredRecoverySuggestionMessage = NSLocalizedString(
                 "error.api.bad_request.invalid-currency.recovery-suggestion",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "Bad request",
                 comment: "A default descriptive message representing an `Bad request` error with `invalid-currency` from the backend which a merchant may show this message to their user"
             )
@@ -691,7 +733,8 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
         case .emptyName:
             preferredRecoverySuggestionMessage = NSLocalizedString(
                 "error.api.bad_request.empty-name.recovery-suggestion",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "Please input customer name",
                 comment: "A default descriptive message representing an `Bad request` error with `empty-name` from the backend which a merchant may show this message to their user"
             )
@@ -699,7 +742,8 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
             if let maximumLength = maximumLength {
                 let preferredRecoverySuggestionMessageFormat = NSLocalizedString(
                     "error.api.bad_request.name-is-too-long.with-valid-length.recovery-suggestion",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Please input customer name which is no longer than %d characters",
                     comment: "A default descriptive message representing an `Bad request` error with `name-is-too-long.with-valid-length` from the backend which a merchant may show this message to their user"
                 )
@@ -707,7 +751,8 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
             } else {
                 preferredRecoverySuggestionMessage = NSLocalizedString(
                     "error.api.bad_request.name-is-too-long.without-valid-length.recovery-suggestion",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Please input shorter customer name",
                     comment: "A default descriptive message representing an `Bad request` error with `name-is-too-long.without-valid-length` from the backend which a merchant may show this message to their user"
                 )
@@ -715,35 +760,40 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
         case .invalidName:
             preferredRecoverySuggestionMessage = NSLocalizedString(
                 "error.api.bad_request.invalid-name.recovery-suggestion",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "Please review the customer name",
                 comment: "A default descriptive message representing an `Bad request` error with `invalid-name` from the backend which a merchant may show this message to their user"
             )
         case .invalidEmail:
             preferredRecoverySuggestionMessage = NSLocalizedString(
                 "error.api.bad_request.invalid-email.recovery-suggestion",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "Please review the customer email",
                 comment: "A default descriptive message representing an `Bad request` error with `invalid-email` from the backend which a merchant may show this message to their user"
             )
         case .invalidPhoneNumber:
             preferredRecoverySuggestionMessage = NSLocalizedString(
                 "error.api.bad_request.invalid-phone-number.recovery-suggestion",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "Please review the customer phone number",
                 comment: "A default descriptive message representing an `Bad request` error with `invalid-phone-number` from the backend which a merchant may show this message to their user"
             )
         case .typeNotSupported:
             preferredRecoverySuggestionMessage = NSLocalizedString(
                 "error.api.bad_request.type-not-supported.recovery-suggestion",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "Please review the source type",
                 comment: "A default descriptive message representing an `Bad request` error with `type-not-supported` from the backend which a merchant may show this message to their user"
             )
         case .currencyNotSupported:
             preferredRecoverySuggestionMessage = NSLocalizedString(
                 "error.api.bad_request.currency-not-supported.recovery-suggestion",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "Please choose another currency",
                 comment: "A default descriptive message representing an `Bad request` error with `currency-not-supported` from the backend which a merchant may show this message to their user"
             )
@@ -754,13 +804,17 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
         return preferredRecoverySuggestionMessage.isEmpty ? nil : preferredRecoverySuggestionMessage
     }
     
+    // swiftlint:disable function_body_length
     static func parseBadRequestReasonsFromMessage(_ message: String, currency: Currency?) throws -> [OmiseError.APIErrorCode.BadRequestReason] {
-        let reasonMessages = message.components(separatedBy: ", and ").flatMap({ $0.components(separatedBy: ", ") }).flatMap({ $0.components(separatedBy: " and ") })
-        let parsedReasons = Set(try reasonMessages.map({
+        let reasonMessages = message.components(separatedBy: ", and ")
+            .flatMap { $0.components(separatedBy: ", ") }
+            .flatMap { $0.components(separatedBy: " and ") }
+        let parsedReasons = Set(try reasonMessages.map {
             try OmiseError.APIErrorCode.BadRequestReason(message: $0, currency: currency)
-        }))
+        })
         
-        return parsedReasons.sorted(by: {
+        // swiftlint:disable closure_body_length
+        return parsedReasons.sorted {
             switch $0 {
             case .amountIsLessThanValidAmount:
                 return true
@@ -838,9 +892,7 @@ extension OmiseError.APIErrorCode.BadRequestReason : Decodable {
                     return false
                 }
             }
-        })
+        }
     }
     
-
 }
-

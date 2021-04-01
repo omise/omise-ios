@@ -1,15 +1,13 @@
 import Foundation
 
-
 /// Delegate to receive token request events.
 @objc public protocol OMSTokenRequestDelegate {
     func tokenRequest(_ request: __OMSTokenRequest, didSucceedWithToken token: __OmiseToken)
     func tokenRequest(_ request: __OMSTokenRequest, didFailWithError error: NSError)
 }
 
-
 /// Request object for describing a request to create a new token with the creating parameters
-@objc(OMSTokenRequest) public class __OMSTokenRequest: NSObject {
+@objc(OMSTokenRequest) public class __OMSTokenRequest: NSObject { // swiftlint:disable:this type_name
     
     /// Card holder's full name.
     @objc public var name: String {
@@ -43,13 +41,23 @@ import Foundation
     let request: Request<Token>
     
     /// Initializes new token request.
-    @objc public init(name: String, number: String, expirationMonth: Int, expirationYear: Int,
-                      securityCode: String, city: String? = nil, postalCode: String? = nil) {
+    @objc public init(
+        name: String,
+        number: String,
+        expirationMonth: Int,
+        expirationYear: Int,
+        securityCode: String,
+        city: String? = nil,
+        postalCode: String? = nil
+    ) {
         self.request = Request<Token>(
-            name: name, number: number,
-            expirationMonth: expirationMonth, expirationYear: expirationYear,
-            securityCode: securityCode, city: city, postalCode: postalCode
+            name: name,
+            number: number,
+            expirationMonth: expirationMonth,
+            expirationYear: expirationYear,
+            securityCode: securityCode,
+            city: city,
+            postalCode: postalCode
         )
     }
 }
-

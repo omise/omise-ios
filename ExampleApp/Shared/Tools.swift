@@ -1,35 +1,37 @@
 import UIKit
 import OmiseSDK
 
-
 struct PaymentPreset {
     var paymentAmount: Int64
     var paymentCurrency: Currency
     var allowedPaymentMethods: [OMSSourceTypeValue]
     
     static let thailandPreset = PaymentPreset(
-        paymentAmount: 5_000_00, paymentCurrency: .thb,
+        paymentAmount: 5_000_00,
+        paymentCurrency: .thb,
         allowedPaymentMethods: PaymentCreatorController.thailandDefaultAvailableSourceMethods
     )
     
     static let japanPreset = PaymentPreset(
-        paymentAmount: 5_000, paymentCurrency: .jpy,
+        paymentAmount: 5_000,
+        paymentCurrency: .jpy,
         allowedPaymentMethods: PaymentCreatorController.japanDefaultAvailableSourceMethods
     )
     
     static let singaporePreset = PaymentPreset(
-        paymentAmount: 5_000_00, paymentCurrency: .sgd,
+        paymentAmount: 5_000_00,
+        paymentCurrency: .sgd,
         allowedPaymentMethods: PaymentCreatorController.singaporeDefaultAvailableSourceMethods
     )
 
     static let malaysiaPreset = PaymentPreset(
-        paymentAmount: 5_000_00, paymentCurrency: .myr,
+        paymentAmount: 5_000_00,
+        paymentCurrency: .myr,
         allowedPaymentMethods: PaymentCreatorController.malaysiaDefaultAvailableSourceMethods
     )
 }
 
-
-@objc class Tool : NSObject {
+@objc class Tool: NSObject {
     
     @objc static let thailandPaymentAmount: Int64 = PaymentPreset.thailandPreset.paymentAmount
     @objc static let thailandPaymentCurrency: String = PaymentPreset.thailandPreset.paymentCurrency.code
@@ -48,17 +50,16 @@ struct PaymentPreset {
     @objc static let malaysiaAllowedPaymentMethods: [OMSSourceTypeValue] = PaymentPreset.malaysiaPreset.allowedPaymentMethods
     
     @objc static func imageWith(size: CGSize, color: UIColor) -> UIImage? {
-        return Tool.imageWith(size: size, actions: { (context) in
+        return Tool.imageWith(size: size) { (context) in
             context.setFillColor(color.cgColor)
             context.fill(CGRect(origin: .zero, size: size))
-        })
+        }
     }
     
     @objc static func imageWith(size: CGSize, actions: (CGContext) -> Void) -> UIImage? {
         let renderer = UIGraphicsImageRenderer(size: size)
-        return renderer.image(actions: { context in
+        return renderer.image { context in
             actions(context.cgContext)
-        })
+        }
     }
 }
-

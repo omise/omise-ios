@@ -1,6 +1,5 @@
 import UIKit
 
-
 public enum TextFieldStyle {
     case plain
     case border(width: CGFloat)
@@ -11,10 +10,9 @@ public enum OmiseTextFieldValidationError: Error {
     case invalidData
 }
 
-
 /// Base UITextField subclass for SDK's text fields.
-@objc(OMSOmiseTextField) @IBDesignable
-public class OmiseTextField: UITextField {
+@IBDesignable
+@objc(OMSOmiseTextField) public class OmiseTextField: UITextField {
     public var style: TextFieldStyle = .plain {
         didSet {
             updateBorder()
@@ -22,7 +20,7 @@ public class OmiseTextField: UITextField {
         }
     }
     
-    @IBInspectable @objc var borderWidth: CGFloat {
+    @IBInspectable var borderWidth: CGFloat {
         get {
             switch style {
             case .plain:
@@ -41,25 +39,25 @@ public class OmiseTextField: UITextField {
         }
     }
     
-    @IBInspectable @objc var borderColor: UIColor? {
+    @IBInspectable var borderColor: UIColor? {
         didSet {
             updateBorder()
         }
     }
     
-    @IBInspectable @objc var cornerRadius: CGFloat = 0 {
+    @IBInspectable var cornerRadius: CGFloat = 0 {
         didSet {
             updateBorder()
         }
     }
     
-    @IBInspectable @objc var errorTextColor: UIColor? {
+    @IBInspectable var errorTextColor: UIColor? {
         didSet {
             updateTextColor()
         }
     }
     
-    @IBInspectable @objc var placeholderTextColor: UIColor? {
+    @IBInspectable var placeholderTextColor: UIColor? {
         didSet {
             updatePlaceholderTextColor()
         }
@@ -114,11 +112,10 @@ public class OmiseTextField: UITextField {
             let formattingAttributedText = NSMutableAttributedString(attributedString: attributedPlaceholder)
 
             let formattingPlaceholderString = formattingAttributedText.string
-            formattingAttributedText.addAttribute(
-                AttributedStringKey.foregroundColor, value: placeholderColor,
-                range: NSRange(formattingPlaceholderString.startIndex..<formattingPlaceholderString.endIndex, in: formattingPlaceholderString)
-            )
-            super.attributedPlaceholder = (formattingAttributedText.copy() as! NSAttributedString)
+            let range = NSRange(formattingPlaceholderString.startIndex..<formattingPlaceholderString.endIndex,
+                                in: formattingPlaceholderString)
+            formattingAttributedText.addAttribute(.foregroundColor, value: placeholderColor, range: range)
+            super.attributedPlaceholder = formattingAttributedText.copy() as? NSAttributedString
         }
     }
     
@@ -129,7 +126,7 @@ public class OmiseTextField: UITextField {
         initializeInstance()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initializeInstance()
     }
@@ -146,7 +143,6 @@ public class OmiseTextField: UITextField {
         if text.isEmpty {
             throw OmiseTextFieldValidationError.emptyText
         }
-        
         
         if let validator = self.validator {
             try validator.validate(text)
@@ -182,7 +178,6 @@ public class OmiseTextField: UITextField {
         #endif
     }
 }
-
 
 extension OmiseTextField {
     private var overallInsets: UIEdgeInsets {
@@ -237,16 +232,14 @@ extension OmiseTextField {
     }
 }
 
-
 protocol FieldValidator {
     func validate(_ text: String) throws
 }
 
-extension NSRegularExpression : FieldValidator {
+extension NSRegularExpression: FieldValidator {
     func validate(_ text: String) throws {
         if self.numberOfMatches(in: text, options: [], range: NSRange(text.startIndex..<text.endIndex, in: text)) == 0 {
             throw OmiseTextFieldValidationError.invalidData
         }
     }
 }
-

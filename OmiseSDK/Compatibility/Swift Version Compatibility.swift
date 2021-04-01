@@ -1,6 +1,6 @@
+// swiftlint:disable identifier_name
 import Foundation
 import UIKit
-
 
 typealias ControlState = UIControl.State
 typealias AttributedStringKey = NSAttributedString.Key

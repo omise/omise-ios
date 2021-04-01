@@ -1,7 +1,6 @@
 import UIKit
 import os
 
-
 @objc(OMSFPXBankChooserViewController)
 class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capability.Backend.Bank>, PaymentSourceChooser, PaymentChooserUI {
     var email: String?
@@ -16,17 +15,20 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
 
     override var showingValues: [Capability.Backend.Bank] {
         didSet {
-            os_log("FPX Bank Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.name }).joined(separator: ", "))
+            os_log("FPX Bank Chooser: Showing options - %{private}@",
+                   log: uiLogObject,
+                   type: .info,
+                   showingValues.map { $0.name }.joined(separator: ", "))
         }
     }
 
-    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
+    @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
 
-    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
+    @IBInspectable var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
@@ -39,14 +41,14 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
-        if showingValues.count == 0 {
+        if showingValues.isEmpty {
             displayEmptyMessage()
         } else {
             restore()
         }
     }
     
-    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         if let cell = cell as? PaymentOptionTableViewCell {
@@ -71,7 +73,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         }
 
         let selectedBank = element(forUIIndexPath: indexPath)
-        let paymentInformation = PaymentInformation.FPX(bank: selectedBank.code, email: email!)
+        let paymentInformation = PaymentInformation.FPX(bank: selectedBank.code, email: email)
 
         tableView.deselectRow(at: indexPath, animated: true)
 
@@ -84,10 +86,10 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
 
-        flowSession?.requestCreateSource(.fpx(paymentInformation), completionHandler: { _ in
+        flowSession?.requestCreateSource(.fpx(paymentInformation)) { _ in
             cell.accessoryView = oldAccessoryView
             self.view.isUserInteractionEnabled = true
-        })
+        }
     }
     
     private func applyPrimaryColor() {
@@ -133,4 +135,3 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         tableView.separatorStyle = .singleLine
     }
 }
-

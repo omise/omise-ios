@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// Brand of the Card Network
 @objc(OMSCardBrand)
 public enum CardBrand: Int, CustomStringConvertible, Codable {
@@ -30,7 +29,7 @@ public enum CardBrand: Int, CustomStringConvertible, Codable {
         diners,
         laser,
         maestro,
-        discover,
+        discover
     ]
     
     /// Regular expression pattern that can detect cards issued by the brand.
@@ -128,7 +127,7 @@ public enum CardBrand: Int, CustomStringConvertible, Codable {
     }
 }
 
-
+// swiftlint:disable identifier_name type_name
 @objc(OMSCardBrandHelper) public final class __OMSCardBrand: NSObject {
     @objc(patternForBrand:) public static func __patternForBrand(brand: CardBrand) -> String {
         return brand.pattern
@@ -140,4 +139,3 @@ public enum CardBrand: Int, CustomStringConvertible, Codable {
         return NSRange(range)
     }
 }
-

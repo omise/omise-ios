@@ -1,8 +1,6 @@
 import UIKit
 import OmiseSDK
 
-
-
 class PaymentSettingTableViewController: UITableViewController {
     
     let amountFormatter: NumberFormatter = {
@@ -34,7 +32,7 @@ class PaymentSettingTableViewController: UITableViewController {
         }
     }
     @objc(currentCurrencyCode)
-    var __currentCurrencyCode: String {
+    var __currentCurrencyCode: String { // swiftlint:disable:this identifier_name
         get {
             return currentCurrency.code
         }
@@ -43,7 +41,7 @@ class PaymentSettingTableViewController: UITableViewController {
         }
     }
     
-    @objc var usesCapabilityDataForPaymentMethods: Bool = true {
+    @objc var usesCapabilityDataForPaymentMethods = true {
         didSet {
             guard isViewLoaded else {
                 return
@@ -60,60 +58,60 @@ class PaymentSettingTableViewController: UITableViewController {
                 return
             }
             let removingPaymentMethods = allowedPaymentMethods.subtracting(newValue)
-            removingPaymentMethods.compactMap(self.cell(for:)).forEach({
+            removingPaymentMethods.compactMap(self.cell(for:)).forEach {
                 $0.accessoryType = .none
-            })
+            }
         }
         didSet {
             guard isViewLoaded else {
                 return
             }
             let addingPaymentMethods = allowedPaymentMethods.subtracting(oldValue)
-            addingPaymentMethods.compactMap(self.cell(for:)).forEach({
+            addingPaymentMethods.compactMap(self.cell(for:)).forEach {
                 $0.accessoryType = .checkmark
-            })
+            }
         }
     }
     
-    @IBOutlet var amountField: UITextField!
-    @IBOutlet var amountFieldInputAccessoryView: UIToolbar!
+    @IBOutlet private var amountField: UITextField!
+    @IBOutlet private var amountFieldInputAccessoryView: UIToolbar!
     
-    @IBOutlet var thbCurrencyCell: UITableViewCell!
-    @IBOutlet var jpyCurrencyCell: UITableViewCell!
-    @IBOutlet var usdCurrencyCell: UITableViewCell!
-    @IBOutlet var sgdCurrencyCell: UITableViewCell!
-    @IBOutlet var myrCurrencyCell: UITableViewCell!
+    @IBOutlet private var thbCurrencyCell: UITableViewCell!
+    @IBOutlet private var jpyCurrencyCell: UITableViewCell!
+    @IBOutlet private var usdCurrencyCell: UITableViewCell!
+    @IBOutlet private var sgdCurrencyCell: UITableViewCell!
+    @IBOutlet private var myrCurrencyCell: UITableViewCell!
     
-    @IBOutlet var internetBankingBAYPaymentCell: UITableViewCell!
-    @IBOutlet var internetBankingKTBPaymentCell: UITableViewCell!
-    @IBOutlet var internetBankingSCBPaymentCell: UITableViewCell!
-    @IBOutlet var internetBankingBBLPaymentCell: UITableViewCell!
-    @IBOutlet var alipayPaymentCell: UITableViewCell!
-    @IBOutlet var billPaymentTescoLotusPaymentCell: UITableViewCell!
-    @IBOutlet var installmentBAYPaymentCell: UITableViewCell!
-    @IBOutlet var installmentFirstChoicePaymentCell: UITableViewCell!
-    @IBOutlet var installmentBBLPaymentCell: UITableViewCell!
-    @IBOutlet var installmentKTCPaymentCell: UITableViewCell!
-    @IBOutlet var installmentKBankPaymentCell: UITableViewCell!
-    @IBOutlet var installmentSCBPaymentCell: UITableViewCell!
-    @IBOutlet var mobileBankingSCBPaymentCell: UITableViewCell!
-    @IBOutlet var eContextPaymentCell: UITableViewCell!
-    @IBOutlet var promptpayPaymentCell: UITableViewCell!
-    @IBOutlet var paynowPaymentCell: UITableViewCell!
-    @IBOutlet var truemoneyPaymentCell: UITableViewCell!
-    @IBOutlet var pointsCitiCell: UITableViewCell!
-    @IBOutlet var fpxCell: UITableViewCell!
+    @IBOutlet private var internetBankingBAYPaymentCell: UITableViewCell!
+    @IBOutlet private var internetBankingKTBPaymentCell: UITableViewCell!
+    @IBOutlet private var internetBankingSCBPaymentCell: UITableViewCell!
+    @IBOutlet private var internetBankingBBLPaymentCell: UITableViewCell!
+    @IBOutlet private var alipayPaymentCell: UITableViewCell!
+    @IBOutlet private var billPaymentTescoLotusPaymentCell: UITableViewCell!
+    @IBOutlet private var installmentBAYPaymentCell: UITableViewCell!
+    @IBOutlet private var installmentFirstChoicePaymentCell: UITableViewCell!
+    @IBOutlet private var installmentBBLPaymentCell: UITableViewCell!
+    @IBOutlet private var installmentKTCPaymentCell: UITableViewCell!
+    @IBOutlet private var installmentKBankPaymentCell: UITableViewCell!
+    @IBOutlet private var installmentSCBPaymentCell: UITableViewCell!
+    @IBOutlet private var mobileBankingSCBPaymentCell: UITableViewCell!
+    @IBOutlet private var eContextPaymentCell: UITableViewCell!
+    @IBOutlet private var promptpayPaymentCell: UITableViewCell!
+    @IBOutlet private var paynowPaymentCell: UITableViewCell!
+    @IBOutlet private var truemoneyPaymentCell: UITableViewCell!
+    @IBOutlet private var pointsCitiCell: UITableViewCell!
+    @IBOutlet private var fpxCell: UITableViewCell!
     
-    @IBOutlet var useCapabilityAPIValuesCell: UITableViewCell!
-    @IBOutlet var useSpecifiedValuesCell: UITableViewCell!
+    @IBOutlet private var useCapabilityAPIValuesCell: UITableViewCell!
+    @IBOutlet private var useSpecifiedValuesCell: UITableViewCell!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         cell(for: currentCurrency)?.accessoryType = .checkmark
-        allowedPaymentMethods.compactMap(self.cell(for:)).forEach({
+        allowedPaymentMethods.compactMap(self.cell(for:)).forEach {
             $0.accessoryType = .checkmark
-        })
+        }
         
         amountField.text = amountFormatter.string(from: NSNumber(value: currentCurrency.convert(fromSubunit: currentAmount)))
         amountField.inputAccessoryView = amountFieldInputAccessoryView
@@ -159,43 +157,43 @@ class PaymentSettingTableViewController: UITableViewController {
             break
         }
     }
-    @IBAction func finishEditingAmount(_ sender: Any) {
+    @IBAction private func finishEditingAmount(_ sender: Any) {
         amountField.resignFirstResponder()
     }
     
-    @IBAction func showPresetChooser(_ sender: Any) {
+    @IBAction private func showPresetChooser(_ sender: Any) {
         let presetChooserAlertController = UIAlertController(title: "Preset", message: nil, preferredStyle: .actionSheet)
-        presetChooserAlertController.addAction(UIAlertAction(title: "Thailand", style: .default, handler: { (_) in
+        presetChooserAlertController.addAction(UIAlertAction(title: "Thailand", style: .default) { (_) in
             self.currentAmount = PaymentPreset.thailandPreset.paymentAmount
             self.currentCurrency = PaymentPreset.thailandPreset.paymentCurrency
             self.allowedPaymentMethods = Set(PaymentPreset.thailandPreset.allowedPaymentMethods)
-        }))
-        presetChooserAlertController.addAction(UIAlertAction(title: "Japan", style: .default, handler: { (_) in
+        })
+        presetChooserAlertController.addAction(UIAlertAction(title: "Japan", style: .default) { (_) in
             self.currentAmount = PaymentPreset.japanPreset.paymentAmount
             self.currentCurrency = PaymentPreset.japanPreset.paymentCurrency
             self.allowedPaymentMethods = Set(PaymentPreset.japanPreset.allowedPaymentMethods)
-        }))
-        presetChooserAlertController.addAction(UIAlertAction(title: "Singapore", style: .default, handler: { (_) in
+        })
+        presetChooserAlertController.addAction(UIAlertAction(title: "Singapore", style: .default) { (_) in
             self.currentAmount = PaymentPreset.singaporePreset.paymentAmount
             self.currentCurrency = PaymentPreset.singaporePreset.paymentCurrency
             self.allowedPaymentMethods = Set(PaymentPreset.singaporePreset.allowedPaymentMethods)
-        }))
-        presetChooserAlertController.addAction(UIAlertAction(title: "Malaysia", style: .default, handler: { (_) in
+        })
+        presetChooserAlertController.addAction(UIAlertAction(title: "Malaysia", style: .default) { (_) in
             self.currentAmount = PaymentPreset.malaysiaPreset.paymentAmount
             self.currentCurrency = PaymentPreset.malaysiaPreset.paymentCurrency
             self.allowedPaymentMethods = Set(PaymentPreset.malaysiaPreset.allowedPaymentMethods)
-        }))
+        })
         
         presetChooserAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(presetChooserAlertController, animated: true, completion: nil)
     }
 }
 
-extension PaymentSettingTableViewController : UITextFieldDelegate {
+extension PaymentSettingTableViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        return string.allSatisfy({ (character) -> Bool in
+        return string.allSatisfy { (character) -> Bool in
             return "0"..."9" ~= character || (currentCurrency.factor > 1 && "." == character)
-        })
+        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -206,7 +204,6 @@ extension PaymentSettingTableViewController : UITextFieldDelegate {
         textField.text = amountFormatter.string(from: NSNumber(value: amount))
     }
 }
-
 
 extension PaymentSettingTableViewController {
     func currency(for cell: UITableViewCell) -> Currency? {
@@ -242,6 +239,7 @@ extension PaymentSettingTableViewController {
         }
     }
     
+    // swiftlint:disable function_body_length
     func paymentSource(for cell: UITableViewCell) -> OMSSourceTypeValue? {
         switch cell {
         case internetBankingBAYPaymentCell:
@@ -287,6 +285,7 @@ extension PaymentSettingTableViewController {
         }
     }
     
+    // swiftlint:disable function_body_length
     func cell(for paymentSource: OMSSourceTypeValue) -> UITableViewCell? {
         switch paymentSource {
         case .internetBankingBAY:
@@ -332,4 +331,3 @@ extension PaymentSettingTableViewController {
         }
     }
 }
-

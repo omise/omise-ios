@@ -1,12 +1,11 @@
 import XCTest
 import OmiseSDK
 
-
 @available(*, deprecated)
 class TokenRequestDelegateDummy: OmiseTokenRequestDelegate {
-    var request: OmiseTokenRequest? = nil
-    var token: __OmiseToken? = nil
-    var error: Error? = nil
+    var request: OmiseTokenRequest?
+    var token: __OmiseToken?
+    var error: Error?
     
     let expectation: XCTestExpectation
     

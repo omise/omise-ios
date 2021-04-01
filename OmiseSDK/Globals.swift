@@ -1,16 +1,16 @@
+// swiftlint:disable file_length
+
 import Foundation
 import os
 
-
-let sdkLogObject: OSLog = OSLog(subsystem: "co.omise.ios.sdk", category: "SDK")
-let uiLogObject: OSLog = OSLog(subsystem: "co.omise.ios.sdk", category: "UI")
+let sdkLogObject = OSLog(subsystem: "co.omise.ios.sdk", category: "SDK")
+let uiLogObject = OSLog(subsystem: "co.omise.ios.sdk", category: "UI")
 
 extension Optional where Wrapped == String {
     public var isNilOrEmpty: Bool {
         return self?.isEmpty ?? true
     }
 }
-
 
 struct JSONCodingKeys: CodingKey {
     var stringValue: String
@@ -31,8 +31,7 @@ struct JSONCodingKeys: CodingKey {
     }
 }
 
-
-enum CombineCodingKeys<Left: CodingKey, Right: CodingKey> : CodingKey {
+enum CombineCodingKeys<Left: CodingKey, Right: CodingKey>: CodingKey {
     var stringValue: String {
         switch self {
         case .left(let left):
@@ -75,7 +74,7 @@ enum CombineCodingKeys<Left: CodingKey, Right: CodingKey> : CodingKey {
     case right(Right)
 }
 
-struct SkippingKeyCodingKeys<Key: CodingKey> : CodingKey {
+struct SkippingKeyCodingKeys<Key: CodingKey>: CodingKey {
     let stringValue: String
     
     init?(stringValue: String) {
@@ -133,39 +132,39 @@ extension OMSSourceTypeValue {
 }
 
 extension Decoder {
-    func decodeJSONDictionary() throws -> Dictionary<String, Any> {
+    func decodeJSONDictionary() throws -> [String: Any] {
         let container = try self.container(keyedBy: JSONCodingKeys.self)
         return try container.decodeJSONDictionary()
     }
 }
 
 extension KeyedDecodingContainerProtocol {
-    func decode(_ type: Dictionary<String, Any>.Type, forKey key: Key) throws -> Dictionary<String, Any> {
+    func decode(_ type: [String: Any].Type, forKey key: Key) throws -> [String: Any] {
         let container = try self.nestedContainer(keyedBy: JSONCodingKeys.self, forKey: key)
         return try container.decodeJSONDictionary()
     }
     
-    func decodeIfPresent(_ type: Dictionary<String, Any>.Type, forKey key: Key) throws -> Dictionary<String, Any>? {
+    func decodeIfPresent(_ type: [String: Any].Type, forKey key: Key) throws -> [String: Any]? {
         guard contains(key) else {
             return nil
         }
         return try decode(type, forKey: key)
     }
     
-    func decode(_ type: Array<Any>.Type, forKey key: Key) throws -> Array<Any> {
+    func decode(_ type: [Any].Type, forKey key: Key) throws -> [Any] {
         var container = try self.nestedUnkeyedContainer(forKey: key)
         return try container.decodeJSONArray()
     }
     
-    func decodeIfPresent(_ type: Array<Any>.Type, forKey key: Key) throws -> Array<Any>? {
+    func decodeIfPresent(_ type: [Any].Type, forKey key: Key) throws -> [Any]? {
         guard contains(key) else {
             return nil
         }
         return try decode(type, forKey: key)
     }
     
-    func decodeJSONDictionary() throws -> Dictionary<String, Any> {
-        var dictionary = Dictionary<String, Any>()
+    func decodeJSONDictionary() throws -> [String: Any] {
+        var dictionary = [String: Any]()
         
         for key in allKeys {
             if let boolValue = try? decode(Bool.self, forKey: key) {
@@ -189,7 +188,7 @@ extension KeyedDecodingContainerProtocol {
 }
 
 extension UnkeyedDecodingContainer {
-    mutating func decodeJSONArray() throws -> Array<Any> {
+    mutating func decodeJSONArray() throws -> [Any] {
         var array: [Any] = []
         while isAtEnd == false {
             if let value = try? decode(Bool.self) {
@@ -198,7 +197,7 @@ extension UnkeyedDecodingContainer {
                 array.append(value)
             } else if let value = try? decode(String.self) {
                 array.append(value)
-            } else if let nestedDictionary = try? decode(Dictionary<String, Any>.self) {
+            } else if let nestedDictionary = try? decode([String: Any].self) {
                 array.append(nestedDictionary)
             } else if let nestedArray = try? decodeArrayElement() {
                 array.append(nestedArray)
@@ -207,28 +206,27 @@ extension UnkeyedDecodingContainer {
         return array
     }
     
-    private mutating func decodeArrayElement() throws -> Array<Any> {
+    private mutating func decodeArrayElement() throws -> [Any] {
         var nestedContainer = try self.nestedUnkeyedContainer()
         return try nestedContainer.decodeJSONArray()
     }
     
-    mutating func decode(_ type: Dictionary<String, Any>.Type) throws -> Dictionary<String, Any> {
+    mutating func decode(_ type: [String: Any].Type) throws -> [String: Any] {
         let nestedContainer = try self.nestedContainer(keyedBy: JSONCodingKeys.self)
         return try nestedContainer.decodeJSONDictionary()
     }
 }
 
-
 extension Encoder {
-    func encodeJSONDictionary(_ jsonDictionary: Dictionary<String, Any>) throws {
+    func encodeJSONDictionary(_ jsonDictionary: [String: Any]) throws {
         var container = self.container(keyedBy: JSONCodingKeys.self)
         try container.encodeJSONDictionary(jsonDictionary)
     }
 }
 
 extension KeyedEncodingContainerProtocol where Key == JSONCodingKeys {
-    mutating func encodeJSONDictionary(_ value: Dictionary<String, Any>) throws {
-        try value.forEach({ (key, value) in
+    mutating func encodeJSONDictionary(_ value: [String: Any]) throws {
+        try value.forEach { (key, value) in
             let key = JSONCodingKeys(key: key)
             switch value {
             case let value as Bool:
@@ -239,37 +237,38 @@ extension KeyedEncodingContainerProtocol where Key == JSONCodingKeys {
                 try encode(value, forKey: key)
             case let value as Double:
                 try encode(value, forKey: key)
-            case let value as Dictionary<String, Any>:
+            case let value as [String: Any]:
                 try encode(value, forKey: key)
-            case let value as Array<Any>:
+            case let value as [Any]:
                 try encode(value, forKey: key)
-            case Optional<Any>.none:
+            case Optional<Any>.none: // swiftlint:disable:this syntactic_sugar
                 try encodeNil(forKey: key)
             default:
-                throw EncodingError.invalidValue(value, EncodingError.Context(codingPath: codingPath + [key], debugDescription: "Invalid JSON value"))
+                let context = EncodingError.Context(codingPath: codingPath + [key], debugDescription: "Invalid JSON value")
+                throw EncodingError.invalidValue(value, context)
             }
-        })
+        }
     }
 }
 
 extension KeyedEncodingContainerProtocol {
-    mutating func encode(_ value: Dictionary<String, Any>, forKey key: Key) throws {
+    mutating func encode(_ value: [String: Any], forKey key: Key) throws {
         var container = self.nestedContainer(keyedBy: JSONCodingKeys.self, forKey: key)
         try container.encodeJSONDictionary(value)
     }
     
-    mutating func encodeIfPresent(_ value: Dictionary<String, Any>?, forKey key: Key) throws {
+    mutating func encodeIfPresent(_ value: [String: Any]?, forKey key: Key) throws {
         if let value = value {
             try encode(value, forKey: key)
         }
     }
     
-    mutating func encode(_ value: Array<Any>, forKey key: Key) throws {
+    mutating func encode(_ value: [Any], forKey key: Key) throws {
         var container = self.nestedUnkeyedContainer(forKey: key)
         try container.encodeJSONArray(value)
     }
     
-    mutating func encodeIfPresent(_ value: Array<Any>?, forKey key: Key) throws {
+    mutating func encodeIfPresent(_ value: [Any]?, forKey key: Key) throws {
         if let value = value {
             try encode(value, forKey: key)
         }
@@ -277,8 +276,8 @@ extension KeyedEncodingContainerProtocol {
 }
 
 extension UnkeyedEncodingContainer {
-    mutating func encodeJSONArray(_ value: Array<Any>) throws {
-        try value.enumerated().forEach({ (index, value) in
+    mutating func encodeJSONArray(_ value: [Any]) throws {
+        try value.enumerated().forEach { (index, value) in
             switch value {
             case let value as Bool:
                 try encode(value)
@@ -288,39 +287,40 @@ extension UnkeyedEncodingContainer {
                 try encode(value)
             case let value as Double:
                 try encode(value)
-            case let value as Dictionary<String, Any>:
+            case let value as [String: Any]:
                 try encodeJSONDictionary(value)
-            case let value as Array<Any>:
+            case let value as [Any]:
                 try encodeArrayElement(value)
-            case Optional<Any>.none:
+            case Optional<Any>.none: // swiftlint:disable:this syntactic_sugar
                 try encodeNil()
             default:
                 let keys = JSONCodingKeys(intValue: index).map({ [ $0 ] }) ?? []
-                throw EncodingError.invalidValue(value, EncodingError.Context(codingPath: codingPath + keys, debugDescription: "Invalid JSON value"))
+                let context = EncodingError.Context(codingPath: codingPath + keys, debugDescription: "Invalid JSON value")
+                throw EncodingError.invalidValue(value, context)
             }
-        })
+        }
     }
     
-    private mutating func encodeArrayElement(_ value: Array<Any>) throws {
+    private mutating func encodeArrayElement(_ value: [Any]) throws {
         var nestedContainer = self.nestedUnkeyedContainer()
         try nestedContainer.encodeJSONArray(value)
     }
     
-    mutating func encodeJSONDictionary(_ value: Dictionary<String, Any>) throws {
+    mutating func encodeJSONDictionary(_ value: [String: Any]) throws {
         var nestedContainer = self.nestedContainer(keyedBy: JSONCodingKeys.self)
         try nestedContainer.encodeJSONDictionary(value)
     }
 }
 
 extension ControlState: Hashable {
-    public var hashValue: Int {
-        return rawValue.hashValue
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(rawValue)
     }
 }
 
 extension Bundle {
     #if !SWIFT_PACKAGE
-    static var module: Bundle = Bundle(for: CreditCardFormViewController.self)
+    static var module = Bundle(for: CreditCardFormViewController.self)
     #endif
 }
 
@@ -336,8 +336,8 @@ extension NumberFormatter {
     }
 }
 
-
 extension OmiseError {
+    // swiftlint:disable line_length
     var bannerErrorDescription: String {
         switch self {
         case .api(code: let code, message: _, location: _):
@@ -347,35 +347,40 @@ extension OmiseError {
                 case .invalidCardNumber?:
                     return NSLocalizedString(
                         "payment-creator.error.api.invalid_card.invalid-card-number.message",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "Invalid card number",
                         comment: "The displaying message showing in the error banner in the built-in Payment Creator when there is the `invalid-card-number` API error occured"
                     )
                 case .invalidExpirationDate?:
                     return NSLocalizedString(
                         "payment-creator.error.api.invalid_card.invalid-expiration-date.message",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "Invalid card expiration date",
                         comment: "The displaying message showing in the error banner in the built-in Payment Creator when there is the `invalid-expiration-date` API error occured"
                     )
                 case .emptyCardHolderName?:
                     return NSLocalizedString(
                         "payment-creator.error.api.invalid_card.empty-card-holder-name.message",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "Invalid card holder name",
                         comment: "The displaying message showing in the error banner in the built-in Payment Creator when there is the `empty-card-holder-name` API error occured"
                     )
                 case .unsupportedBrand?:
                     return NSLocalizedString(
                         "payment-creator.error.api.invalid_card.unsupported-brand.message",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "Unsupported card brand",
                         comment: "The displaying message showing in the error banner in the built-in Payment Creator when there is the `unsupported-brand` API error occured"
                     )
                 case .other?, nil:
                     return NSLocalizedString(
                         "payment-creator.error.api.invalid_card.other.message",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "An unknown error occured",
                         comment: "The displaying message showing in the error banner in the built-in Payment Creator when there is the `other` API error occured"
                     )
@@ -386,7 +391,8 @@ extension OmiseError {
                     if let validAmount = validAmount, let currency = currency {
                         let preferredErrorDescriptionFormat = NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.message",
-                            tableName: "Error", bundle: .module,
+                            tableName: "Error",
+                            bundle: .module,
                             value: "Amount is less than the valid amount of %@",
                             comment: "The displaying message showing in the error banner an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend has occurred"
                         )
@@ -397,7 +403,8 @@ extension OmiseError {
                     } else {
                         return NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.message",
-                            tableName: "Error", bundle: .module,
+                            tableName: "Error",
+                            bundle: .module,
                             value: "Amount is less than the valid amount",
                             comment: "The displaying message showing in the error banner an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend has occurred"
                         )
@@ -406,7 +413,8 @@ extension OmiseError {
                     if let validAmount = validAmount, let currency = currency {
                         let preferredErrorDescriptionFormat = NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.message",
-                            tableName: "Error", bundle: .module,
+                            tableName: "Error",
+                            bundle: .module,
                             value: "Amount is greater than the valid amount of %@",
                             comment: "The displaying message showing in the error banner an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend has occurred"
                         )
@@ -417,7 +425,8 @@ extension OmiseError {
                     } else {
                         return NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.message",
-                            tableName: "Error", bundle: .module,
+                            tableName: "Error",
+                            bundle: .module,
                             value: "Amount is greater than the valid amount",
                             comment: "The displaying message showing in the error banner an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend has occurred"
                         )
@@ -425,7 +434,8 @@ extension OmiseError {
                 case .invalidCurrency?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.invalid-currency.message",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "The currency is invalid",
                         comment: "The displaying message showing in the error banner an `Bad request` error with `invalid-currency` from the backend has occurred"
                     )
@@ -433,7 +443,8 @@ extension OmiseError {
                 case .emptyName?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.empty-name.message",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "The customer name is empty",
                         comment: "The displaying message showing in the error banner an `Bad request` error with `empty-name` from the backend has occurred"
                     )
@@ -442,7 +453,8 @@ extension OmiseError {
                     if let maximumLength = maximumLength {
                         let preferredErrorDescriptionFormat = NSLocalizedString(
                             "payment-creator.error.api.bad_request.name-is-too-long.with-valid-length.message",
-                            tableName: "Error", bundle: .module,
+                            tableName: "Error",
+                            bundle: .module,
                             value: "The customer name exceeds %d characters",
                             comment: "The displaying message showing in the error banner an `Bad request` error with `name-is-too-long.with-valid-length` from the backend has occurred"
                         )
@@ -450,7 +462,8 @@ extension OmiseError {
                     } else {
                         return NSLocalizedString(
                             "payment-creator.error.api.bad_request.name-is-too-long.without-valid-length.message",
-                            tableName: "Error", bundle: .module,
+                            tableName: "Error",
+                            bundle: .module,
                             value: "The customer name is too long",
                             comment: "The displaying message showing in the error banner an `Bad request` error with `name-is-too-long.without-valid-length` from the backend has occurred"
                         )
@@ -458,7 +471,8 @@ extension OmiseError {
                 case .invalidName?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.invalid-name.message",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "The customer name is invalid",
                         comment: "The displaying message showing in the error banner an `Bad request` error with `invalid-name` from the backend has occurred"
                     )
@@ -466,7 +480,8 @@ extension OmiseError {
                 case .invalidEmail?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.invalid-email.message",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "The customer email is invalid",
                         comment: "The displaying message showing in the error banner an `Bad request` error with `invalid-email` from the backend has occurred"
                     )
@@ -474,7 +489,8 @@ extension OmiseError {
                 case .invalidPhoneNumber?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.invalid-phone-number.message",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "The customer phone number is invalid",
                         comment: "The displaying message showing in the error banner an `Bad request` error with `invalid-phone-number` from the backend has occurred"
                     )
@@ -482,7 +498,8 @@ extension OmiseError {
                 case .typeNotSupported?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.type-not-supported.message",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "The source type is not supported by this account",
                         comment: "The displaying message showing in the error banner an `Bad request` error with `type-not-supported` from the backend has occurred"
                     )
@@ -490,14 +507,16 @@ extension OmiseError {
                 case .currencyNotSupported?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.currency-not-supported.message",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "The currency is not supported for this account",
                         comment: "The displaying message showing in the error banner an `Bad request` error with `currency-not-supported` from the backend has occurred"
                     )
                 case .other?, nil:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.other.message",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "Unknown error occurred",
                         comment: "The displaying message showing in the error banner an `Bad request` error with `other` from the backend has occurred"
                     )
@@ -505,14 +524,16 @@ extension OmiseError {
             case .authenticationFailure, .serviceNotFound:
                 return NSLocalizedString(
                     "payment-creator.error.api.unexpected.message",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "An unexpected error occured",
                     comment: "The displaying message showing in the error banner in the built-in Payment Creator when there is the `unexpected` API error occured"
                 )
             case .other:
                 return NSLocalizedString(
                     "payment-creator.error.api.unknown.message",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "An unknown error occured",
                     comment: "The displaying message showing in the error banner when there is an `unknown` API error occured"
                 )
@@ -520,7 +541,8 @@ extension OmiseError {
         case .unexpected:
             return NSLocalizedString(
                 "payment-creator.error.unexpected.message",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "An unexpected error occurred",
                 comment: "The displaying message showing in the error banner when there is the `unexpected` error occured"
             )
@@ -536,35 +558,40 @@ extension OmiseError {
                 case .invalidCardNumber?:
                     return NSLocalizedString(
                         "payment-creator.error.api.invalid_card.invalid-card-number.recovery-suggestion",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "Please review the card number",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator in the built-in Payment Creator when there is the `invalid-card-number` API error occured"
                     )
                 case .invalidExpirationDate?:
                     return NSLocalizedString(
                         "payment-creator.error.api.invalid_card.invalid-expiration-date.recovery-suggestion",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "Please review the card expiration date again.",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator in the built-in Payment Creator when there is the `invalid-expiration-date` API error occured"
                     )
                 case .emptyCardHolderName?:
                     return NSLocalizedString(
                         "payment-creator.error.api.invalid_card.empty-card-holder-name.recovery-suggestion",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "Please review the card holder name",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator in the built-in Payment Creator when there is the `empty-card-holder-name` API error occured"
                     )
                 case .unsupportedBrand?:
                     return NSLocalizedString(
                         "payment-creator.error.api.invalid_card.unsupported-brand.recovery-suggestion",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "Please use another card",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator in the built-in Payment Creator when there is the `unsupported-brand` API error occured"
                     )
                 case .other?, nil:
                     return NSLocalizedString(
                         "payment-creator.error.api.invalid_card.other.recovery-suggestion",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "Please try again later",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator in the built-in Payment Creator when there is the `other` API error occured"
                     )
@@ -575,7 +602,8 @@ extension OmiseError {
                     if let validAmount = validAmount, let currency = currency {
                         let preferredErrorDescriptionFormat = NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.recovery-suggestion",
-                            tableName: "Error", bundle: .module,
+                            tableName: "Error",
+                            bundle: .module,
                             value: "The payment amount is too low. Please make a payment with a higher amount.",
                             comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend has occurred"
                         )
@@ -586,7 +614,8 @@ extension OmiseError {
                     } else {
                         return NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.recovery-suggestion",
-                            tableName: "Error", bundle: .module,
+                            tableName: "Error",
+                            bundle: .module,
                             value: "The payment amount is too low. Please make a payment with a higher amount.",
                             comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend has occurred"
                         )
@@ -595,7 +624,8 @@ extension OmiseError {
                     if let validAmount = validAmount, let currency = currency {
                         let preferredErrorDescriptionFormat = NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.recovery-suggestion",
-                            tableName: "Error", bundle: .module,
+                            tableName: "Error",
+                            bundle: .module,
                             value: "The payment amount is too high. Please make a payment with a lower amount.",
                             comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend has occurred"
                         )
@@ -606,7 +636,8 @@ extension OmiseError {
                     } else {
                         return NSLocalizedString(
                             "payment-creator.error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.recovery-suggestion",
-                            tableName: "Error", bundle: .module,
+                            tableName: "Error",
+                            bundle: .module,
                             value: "The payment amount is too high. Please make a payment with a lower amount.",
                             comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend has occurred"
                         )
@@ -614,7 +645,8 @@ extension OmiseError {
                 case .invalidCurrency?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.invalid-currency.recovery-suggestion",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "Please choose another currency or contact customer support",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `invalid-currency` from the backend has occurred"
                     )
@@ -622,7 +654,8 @@ extension OmiseError {
                 case .emptyName?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.empty-name.recovery-suggestion",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "Please fill in the customer name",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `empty-name` from the backend has occurred"
                     )
@@ -630,14 +663,16 @@ extension OmiseError {
                 case .nameIsTooLong(maximum: _)?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.name-is-too-long.recovery-suggestion",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "Please review the customer name",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `name-is-too-long.without-valid-length` from the backend has occurred"
                     )
                 case .invalidName?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.invalid-name.recovery-suggestion",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "Please review the customer name",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `invalid-name` from the backend has occurred"
                     )
@@ -645,7 +680,8 @@ extension OmiseError {
                 case .invalidEmail?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.invalid-email.recovery-suggestion",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "Please review the email",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `invalid-email` from the backend has occurred"
                     )
@@ -653,7 +689,8 @@ extension OmiseError {
                 case .invalidPhoneNumber?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.invalid-phone-number.recovery-suggestion",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "Please review the phone number",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `invalid-phone-number` from the backend has occurred"
                     )
@@ -661,7 +698,8 @@ extension OmiseError {
                 case .typeNotSupported?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.type-not-supported.recovery-suggestion",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "Please contact customer support",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `type-not-supported` from the backend has occurred"
                     )
@@ -669,14 +707,16 @@ extension OmiseError {
                 case .currencyNotSupported?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.currency-not-supported.recovery-suggestion",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "Please choose another currency",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `currency-not-supported` from the backend has occurred"
                     )
                 case .other?, nil:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.other.recovery-suggestion",
-                        tableName: "Error", bundle: .module,
+                        tableName: "Error",
+                        bundle: .module,
                         value: "Please try again later",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `other` from the backend has occurred"
                     )
@@ -684,14 +724,16 @@ extension OmiseError {
             case .authenticationFailure, .serviceNotFound:
                 return NSLocalizedString(
                     "payment-creator.error.api.unexpected.recovery-suggestion",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Please try again later",
                     comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator when there is the `unexpected` API error occured"
                 )
             case .other:
                 return NSLocalizedString(
                     "payment-creator.error.api.unknown.recovery-suggestion",
-                    tableName: "Error", bundle: .module,
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Please try again later",
                     comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator when there is an `unknown` API error occured"
                 )
@@ -699,11 +741,11 @@ extension OmiseError {
         case .unexpected:
             return NSLocalizedString(
                 "payment-creator.error.unexpected.recovery-suggestion",
-                tableName: "Error", bundle: .module,
+                tableName: "Error",
+                bundle: .module,
                 value: "Please try again later",
                 comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator when there is the `unexpected` error occured"
             )
         }
     }
 }
-

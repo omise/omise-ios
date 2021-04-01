@@ -1,7 +1,6 @@
 import XCTest
 @testable import OmiseSDK
 
-
 class PANModelTestCase: XCTestCase {
     
     func testCreatePANs() {
@@ -84,6 +83,7 @@ class PANModelTestCase: XCTestCase {
         }
     }
     
+    // swiftlint:disable function_body_length
     func testBrandChecking() {
         do {
             let pan = PAN("4242424242424242")
@@ -114,7 +114,6 @@ class PANModelTestCase: XCTestCase {
             let pan = PAN("3566111111111113")
             XCTAssertEqual(CardBrand.jcb, pan.brand)
         }
-        
         
         do {
             let pan = PAN("3782 8224 6310 005")
@@ -177,8 +176,6 @@ class PANModelTestCase: XCTestCase {
             let pan = PAN("4242424242424241")
             XCTAssertFalse(pan.isValid)
         }
-        
-        
     }
     
 }

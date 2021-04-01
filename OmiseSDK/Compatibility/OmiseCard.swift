@@ -1,11 +1,10 @@
 import Foundation
 
-
 /**
  Represents saved credit card information.
  - seealso: [Cards API](https://www.omise.co/cards-api)
  */
-@objc(OMSCard) public class __OmiseCard: NSObject {
+@objc(OMSCard) public class __OmiseCard: NSObject { // swiftlint:disable:this type_name
     private let card: Card?
     /// Card's ID.
     @objc public var cardId: String? {
@@ -70,4 +69,3 @@ import Foundation
         self.card = card
     }
 }
-

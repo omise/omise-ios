@@ -1,27 +1,31 @@
 import UIKit
 import os
 
-
 @objc(OMSInternetBankingSourceChooserViewController)
-class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>, PaymentSourceChooser, PaymentChooserUI {
+// swiftlint:disable:next type_name
+class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>,
+                                                  PaymentSourceChooser,
+                                                  PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
     
     override var showingValues: [PaymentInformation.InternetBanking] {
         didSet {
-            os_log("Internet Banking Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
+            os_log("Internet Banking Chooser: Showing options - %{private}@",
+                   log: uiLogObject,
+                   type: .info,
+                   showingValues.map { $0.description }.joined(separator: ", "))
         }
     }
     
-    
     @IBOutlet var internetBankingNameLabels: [UILabel]!
     
-    @IBInspectable @objc public var preferredPrimaryColor: UIColor? {
+    @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc public var preferredSecondaryColor: UIColor? {
+    @IBInspectable var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
@@ -73,10 +77,10 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
         
-        flowSession?.requestCreateSource(.internetBanking(bank), completionHandler: { _ in
+        flowSession?.requestCreateSource(.internetBanking(bank)) { _ in
             cell?.accessoryView = oldAccessoryView
             self.view.isUserInteractionEnabled = true
-        })
+        }
     }
     
     private func applyPrimaryColor() {
@@ -84,11 +88,10 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
             return
         }
         
-        internetBankingNameLabels.forEach({
+        internetBankingNameLabels.forEach {
             $0.textColor = currentPrimaryColor
-        })
+        }
     }
     
     private func applySecondaryColor() {}
 }
-

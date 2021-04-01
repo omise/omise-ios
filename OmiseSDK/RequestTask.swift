@@ -1,7 +1,6 @@
 import Foundation
 import os
 
-
 /// The class represents the task of a request to the Omise API
 public class RequestTask<T: CreatableObject> {
     public let request: Request<T>
@@ -17,4 +16,3 @@ public class RequestTask<T: CreatableObject> {
         os_log("Starting/Resuming Request %{public}@", log: sdkLogObject, type: .debug, String(describing: type(of: T.self)))
     }
 }
-

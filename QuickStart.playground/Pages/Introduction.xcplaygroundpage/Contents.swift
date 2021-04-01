@@ -8,8 +8,6 @@
  
  */
 
-
-
 /*: obtain-public-key
  
  ## Omise Public Key Note
@@ -35,6 +33,3 @@
  [Source API Call](Source%20API%20Call)
  
  */
-
-
-

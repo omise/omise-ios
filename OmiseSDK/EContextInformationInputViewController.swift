@@ -1,6 +1,5 @@
 import UIKit
 
-
 @objc(OMSEContextInformationInputViewController)
 class EContextInformationInputViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
     var flowSession: PaymentCreatorFlowSession?
@@ -11,18 +10,18 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     var currentEditingTextField: OmiseTextField?
     
     var isInputDataValid: Bool {
-        return formFields.reduce(into: true, { (valid, field) in
+        return formFields.reduce(into: true) { (valid, field) in
             valid = valid && field.isValid
-        })
+        }
     }
     
-    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
+    @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
+    @IBInspectable var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
@@ -30,15 +29,15 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     
     @IBOutlet var contentView: UIScrollView!
     
-    @IBOutlet var fullNameTextField: OmiseTextField!
-    @IBOutlet var emailTextField: OmiseTextField!
-    @IBOutlet var phoneNumberTextField: OmiseTextField!
-    @IBOutlet var submitButton: MainActionButton!
-    @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
+    @IBOutlet private var fullNameTextField: OmiseTextField!
+    @IBOutlet private var emailTextField: OmiseTextField!
+    @IBOutlet private var phoneNumberTextField: OmiseTextField!
+    @IBOutlet private var submitButton: MainActionButton!
+    @IBOutlet private var requestingIndicatorView: UIActivityIndicatorView!
     
-    @IBOutlet var fullNameErrorLabel: UILabel!
-    @IBOutlet var emailErrorLabel: UILabel!
-    @IBOutlet var phoneNumberErrorLabel: UILabel!
+    @IBOutlet private var fullNameErrorLabel: UILabel!
+    @IBOutlet private var emailErrorLabel: UILabel!
+    @IBOutlet private var phoneNumberErrorLabel: UILabel!
     
     @IBOutlet var formLabels: [UILabel]!
     @IBOutlet var formFields: [OmiseTextField]!
@@ -48,6 +47,8 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!
     @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
     
+    // need to refactor loadView, removing super results in crash
+    // swiftlint:disable prohibited_super_call
     override func loadView() {
         super.loadView()
         
@@ -65,16 +66,16 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-        formFields.forEach({
+        formFields.forEach {
             $0.inputAccessoryView = formFieldsAccessoryView
-        })
+        }
         
-        formFields.forEach({
+        formFields.forEach {
             $0.adjustsFontForContentSizeCategory = true
-        })
-        formLabels.forEach({
+        }
+        formLabels.forEach {
             $0.adjustsFontForContentSizeCategory = true
-        })
+        }
         submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
         
         if  #available(iOS 11, *) {
@@ -84,20 +85,24 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         }
         
         NotificationCenter.default.addObserver(
-            self, selector:#selector(keyboardWillChangeFrame(_:)),
-            name: NotificationKeyboardWillChangeFrameNotification, object: nil
+            self,
+            selector: #selector(keyboardWillChangeFrame(_:)),
+            name: NotificationKeyboardWillChangeFrameNotification,
+            object: nil
         )
         NotificationCenter.default.addObserver(
-            self, selector:#selector(keyboardWillHide(_:)),
-            name: NotificationKeyboardWillHideFrameNotification, object: nil
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: NotificationKeyboardWillHideFrameNotification,
+            object: nil
         )
         
-        fullNameTextField.validator = try! NSRegularExpression(pattern: "\\A[\\w\\s]{1,10}\\s?\\z", options: [])
-        emailTextField.validator = try! NSRegularExpression(pattern: "\\A[\\w\\-\\.]+@[\\w\\-\\.]+\\s?\\z", options: [])
-        phoneNumberTextField.validator = try! NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
+        fullNameTextField.validator = try? NSRegularExpression(pattern: "\\A[\\w\\s]{1,10}\\s?\\z", options: [])
+        emailTextField.validator = try? NSRegularExpression(pattern: "\\A[\\w\\-\\.]+@[\\w\\-\\.]+\\s?\\z", options: [])
+        phoneNumberTextField.validator = try? NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
     }
     
-    public override func viewWillLayoutSubviews() {
+    override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
         if #available(iOS 11, *) {
@@ -106,13 +111,13 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
             // So we need to invalidate the intrinsic content size here to ask those text fields to calculate their
             // intrinsic content size again
         } else {
-            formFields.forEach({
+            formFields.forEach {
                 $0.invalidateIntrinsicContentSize()
-            })
+            }
         }
     }
     
-    @IBAction func submitEContextForm(_ sender: AnyObject) {
+    @IBAction private func submitEContextForm(_ sender: AnyObject) {
         guard let fullname = fullNameTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces),
             let email = emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces),
             let phoneNumber = phoneNumberTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
@@ -124,23 +129,22 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         view.isUserInteractionEnabled = false
         view.tintAdjustmentMode = .dimmed
         submitButton.isEnabled = false
-        flowSession?.requestCreateSource(PaymentInformation.eContext(eContextInformation), completionHandler: { _ in
+        flowSession?.requestCreateSource(PaymentInformation.eContext(eContextInformation)) { _ in
             self.requestingIndicatorView.stopAnimating()
             self.view.isUserInteractionEnabled = true
             self.view.tintAdjustmentMode = .automatic
             self.submitButton.isEnabled = true
-        })
+        }
     }
     
-    @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
+    @IBAction private func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
         if let errorLabel = associatedErrorLabelOf(sender) {
             let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-            UIView.animate(
-                withDuration: duration, delay: 0.0,
-                options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
-                animations: {
-                    errorLabel.alpha = 0.0
-            })
+            UIView.animate(withDuration: duration,
+                           delay: 0.0,
+                           options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
+                errorLabel.alpha = 0.0
+            }
         }
         
         updateInputAccessoryViewWithFirstResponder(sender)
@@ -159,18 +163,17 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         doneEditing()
     }
     
-    @IBAction func validateFieldData(_ textField: OmiseTextField) {
+    @IBAction private func validateFieldData(_ textField: OmiseTextField) {
         submitButton.isEnabled = isInputDataValid
     }
     
-    @IBAction func validateTextFieldDataOf(_ sender: OmiseTextField) {
+    @IBAction private func validateTextFieldDataOf(_ sender: OmiseTextField) {
         let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-        UIView.animate(
-            withDuration: duration, delay: 0.0,
-            options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews],
-            animations: {
-                self.validateField(sender)
-        })
+        UIView.animate(withDuration: duration,
+                       delay: 0.0,
+                       options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
+            self.validateField(sender)
+        }
         sender.borderColor = currentSecondaryColor
     }
     
@@ -225,19 +228,25 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
                 
             case (OmiseTextFieldValidationError.invalidData, fullNameTextField):
                 errorLabel.text = NSLocalizedString(
-                    "econtext-info-form.full-name-field.invalid-data.error.text", tableName: "Error", bundle: .module,
+                    "econtext-info-form.full-name-field.invalid-data.error.text",
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Customer name is invalid",
                     comment: "An error text in the E-Context information input displayed when the customer name is invalid"
                 )
             case (OmiseTextFieldValidationError.invalidData, emailTextField):
                 errorLabel.text = NSLocalizedString(
-                    "econtext-info-form.email-name-field.invalid-data.error.text", tableName: "Error", bundle: .module,
+                    "econtext-info-form.email-name-field.invalid-data.error.text",
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Email is invalid",
                     comment: "An error text in the E-Context information input displayed when the email is invalid"
                 )
             case (OmiseTextFieldValidationError.invalidData, phoneNumberTextField):
                 errorLabel.text = NSLocalizedString(
-                    "econtext-info-form.phone-number-field.invalid-data.error.text", tableName: "Error", bundle: .module,
+                    "econtext-info-form.phone-number-field.invalid-data.error.text",
+                    tableName: "Error",
+                    bundle: .module,
                     value: "Phone number is invalid",
                     comment: "An error text in the E-Context information input displayed when the phone number is invalid"
                 )
@@ -255,4 +264,3 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         }
     }
 }
-

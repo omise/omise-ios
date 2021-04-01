@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// Client object as the main entry point for performing Omise API calls.
 @available(*, deprecated, message: "Use the new `Client` type. This class will be removed in the future released", renamed: "Client")
 public class OmiseSDKClient: NSObject {
@@ -59,7 +58,7 @@ public class OmiseSDKClient: NSObject {
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
     public func send(_ request: OmiseTokenRequest, callback: OmiseTokenRequest.Callback?) {
-        _ = client.send(request.request, completionHandler: { (result) in
+        _ = client.send(request.request) { (result) in
             DispatchQueue.main.async {
                 let tokenRequestResult: OmiseTokenRequestResult
                 switch result {
@@ -70,7 +69,7 @@ public class OmiseSDKClient: NSObject {
                 }
                 callback?(tokenRequestResult)
             }
-        })
+        }
     }
     
     /**
@@ -92,4 +91,3 @@ public class OmiseSDKClient: NSObject {
         }
     }
 }
-

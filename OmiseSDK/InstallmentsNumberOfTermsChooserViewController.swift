@@ -1,7 +1,7 @@
 import UIKit
 
-
 @objc(OMSInstallmentsNumberOfTermsChooserViewController)
+// swiftlint:disable:next type_name
 class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentSourceChooser, PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
     
@@ -14,44 +14,51 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
             case .bay?:
                 title = NSLocalizedString(
                     "installment-number-of-terms-choosers.bbl.navigation-item.title",
-                    bundle: .module, value: "Krungsri",
-                    comment:"A navigation title for the choosing installment terms screen with the `Krungsri` selected"
+                    bundle: .module,
+                    value: "Krungsri",
+                    comment: "A navigation title for the choosing installment terms screen with the `Krungsri` selected"
                 )
             case .firstChoice?:
                 title = NSLocalizedString(
                     "installment-number-of-terms-choosers.ktc.navigation-item.title",
-                    bundle: .module, value: "Krungsri First Choice",
-                    comment:"A navigation title for the choosing installment terms screen with the `Krungsri First Choice` selected"
+                    bundle: .module,
+                    value: "Krungsri First Choice",
+                    comment: "A navigation title for the choosing installment terms screen with the `Krungsri First Choice` selected"
                 )
             case .bbl?:
                 title = NSLocalizedString(
                     "installment-number-of-terms-choosers.bay.navigation-item.title",
-                    bundle: .module, value: "Bangkok Bank",
-                    comment:"A navigation title for the choosing installment terms screen with the `Bangkok Bank` selected"
+                    bundle: .module,
+                    value: "Bangkok Bank",
+                    comment: "A navigation title for the choosing installment terms screen with the `Bangkok Bank` selected"
                 )
             case .ktc?:
                 title = NSLocalizedString(
                     "installment-number-of-terms-choosers.k-bank.navigation-item.title",
-                    bundle: .module, value: "KTC",
-                    comment:"A navigation title for the choosing installment terms screen with the `KTC` selected"
+                    bundle: .module,
+                    value: "KTC",
+                    comment: "A navigation title for the choosing installment terms screen with the `KTC` selected"
                 )
             case .kBank?:
                 title = NSLocalizedString(
                     "installment-number-of-terms-choosers.first-choice.navigation-item.title",
-                    bundle: .module, value: "Kasikorn",
-                    comment:"A navigation title for the choosing installment terms screen with the `Kasikorn` selected"
+                    bundle: .module,
+                    value: "Kasikorn",
+                    comment: "A navigation title for the choosing installment terms screen with the `Kasikorn` selected"
                 )
             case .scb?:
                 title = NSLocalizedString(
                     "installment-number-of-terms-choosers.scb.navigation-item.title",
-                    bundle: .module, value: "SCB",
-                    comment:"A navigation title for the choosing installment terms screen with the `SCB` selected"
+                    bundle: .module,
+                    value: "SCB",
+                    comment: "A navigation title for the choosing installment terms screen with the `SCB` selected"
                 )
             case .other?, nil:
                 title = NSLocalizedString(
                     "installment-number-of-terms-choosers.default.navigation-item.title",
-                    bundle: .module, value: "Installments Terms",
-                    comment:"A navigation title for the choosing installment terms screen with the `Installments Terms` selected"
+                    bundle: .module,
+                    value: "Installments Terms",
+                    comment: "A navigation title for the choosing installment terms screen with the `Installments Terms` selected"
                 )
             }
             
@@ -67,14 +74,13 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
         }
     }
     
-    
-    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
+    @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
+    @IBInspectable var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
@@ -95,7 +101,8 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
         let cell = tableView.dequeueReusableCell(withIdentifier: "NumberOfTermCell", for: indexPath)
         let numberOfTermsTitleFormat = NSLocalizedString(
             "installments.number-of-terms-chooser.number-of-terms-cell.label.text",
-            bundle: .module, value: "%d months",
+            bundle: .module,
+            value: "%d months",
             comment: "Number of terms option text displayed as a title of the number of terms option cell in number of terms chooser scene"
         )
         cell.textLabel?.text = String.localizedStringWithFormat(numberOfTermsTitleFormat, numberOfTerms[indexPath.row])
@@ -124,16 +131,13 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
         view.isUserInteractionEnabled = false
         
         let numberOfTerms = self.numberOfTerms[indexPath.row]
-        flowSession?.requestCreateSource(
-            .installment(PaymentInformation.Installment(brand: brand, numberOfTerms: numberOfTerms)),
-            completionHandler: { _ in
-                cell?.accessoryView = oldAccessoryView
-                self.view.isUserInteractionEnabled = true
-        })
+        flowSession?.requestCreateSource(.installment(PaymentInformation.Installment(brand: brand, numberOfTerms: numberOfTerms))) { _ in
+            cell?.accessoryView = oldAccessoryView
+            self.view.isUserInteractionEnabled = true
+        }
     }
     
     private func applyPrimaryColor() {}
     
     private func applySecondaryColor() {}
 }
-

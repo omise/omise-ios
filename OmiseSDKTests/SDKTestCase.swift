@@ -2,10 +2,10 @@ import Foundation
 import XCTest
 
 extension XCTestCase {
-    @objc static func fixturesData(forFilename filename: String) -> Data {
+    @objc static func fixturesData(forFilename filename: String) throws -> Data {
         let bundle = Bundle(for: ClientTestCase.self)
-        let path = bundle.url(forResource: "Fixtures/objects/\(filename)", withExtension: "json")!
-        let data = try! Data(contentsOf: path)
+        let path = try XCTUnwrap(bundle.url(forResource: "Fixtures/objects/\(filename)", withExtension: "json"))
+        let data = try Data(contentsOf: path)
         
         return data
     }
@@ -13,7 +13,7 @@ extension XCTestCase {
     static let jsonDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(identifier: "UTC")!
+        formatter.timeZone = TimeZone(identifier: "UTC")
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
         return formatter
     }()

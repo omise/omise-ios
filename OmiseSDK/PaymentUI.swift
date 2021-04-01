@@ -1,19 +1,14 @@
 import UIKit
 import os
 
-
 let defaultPaymentChooserUIPrimaryColor = UIColor.body
 let defaultPaymentChooserUISecondaryColor = UIColor.line
 
-
-internal protocol PaymentCreatorFlowSessionDelegate : AnyObject {
+internal protocol PaymentCreatorFlowSessionDelegate: AnyObject {
     func paymentCreatorFlowSessionWillCreateSource(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession)
-    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession,
-                                   didCreateToken token: Token)
-    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession,
-                                   didCreatedSource source: Source)
-    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession,
-                                   didFailWithError error: Error)
+    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreateToken token: Token)
+    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreatedSource source: Source)
+    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didFailWithError error: Error)
     func paymentCreatorFlowSessionDidCancel(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession)
 }
 
@@ -33,7 +28,11 @@ internal class PaymentCreatorFlowSession {
             waringMessageTitle = "Missing public key information."
             waringMessageMessage = "Please set the public key before request token or source."
         } else if self.paymentAmount == nil || self.paymentCurrency == nil {
-            os_log("Missing payment information - %{private}d %{private}@", log: uiLogObject, type: .error, self.paymentAmount ?? 0, self.paymentCurrency?.code ?? "-")
+            os_log("Missing payment information - %{private}d %{private}@",
+                   log: uiLogObject,
+                   type: .error,
+                   self.paymentAmount ?? 0,
+                   self.paymentCurrency?.code ?? "-")
             waringMessageTitle = "Missing payment information."
             waringMessageMessage = "Please set both of the payment information (amount and currency) before request source"
         } else {
@@ -74,7 +73,7 @@ internal class PaymentCreatorFlowSession {
     }
 }
 
-extension PaymentCreatorFlowSession : CreditCardFormViewControllerDelegate {
+extension PaymentCreatorFlowSession: CreditCardFormViewControllerDelegate {
     func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
         delegate?.paymentCreatorFlowSession(self, didCreateToken: token)
     }
@@ -100,7 +99,7 @@ extension PaymentChooserUI {
     }
 }
 
-protocol PaymentFormUIController : AnyObject {
+protocol PaymentFormUIController: AnyObject {
     var formLabels: [UILabel]! { get }
     var formFields: [OmiseTextField]! { get }
     var formFieldsAccessoryView: UIToolbar! { get }
@@ -115,20 +114,25 @@ protocol PaymentFormUIController : AnyObject {
 
 extension UIViewController {
     @objc func displayErrorWith(title: String, message: String?, animated: Bool, sender: Any?) {
-        let targetController = targetViewController(forAction: #selector(UIViewController.displayErrorWith(title:message:animated:sender:)), sender: sender)
+        let targetController = targetViewController(
+            forAction: #selector(UIViewController.displayErrorWith(title:message:animated:sender:)),
+            sender: sender
+        )
         if let targetController = targetController {
             targetController.displayErrorWith(title: title, message: message, animated: animated, sender: sender)
         }
     }
     
     @objc func dismissErrorMessage(animated: Bool, sender: Any?) {
-        let targetController = self.targetViewController(forAction: #selector(UIViewController.dismissErrorMessage(animated:sender:)), sender: sender)
+        let targetController = self.targetViewController(
+            forAction: #selector(UIViewController.dismissErrorMessage(animated:sender:)),
+            sender: sender
+        )
         if let targetController = targetController {
             targetController.dismissErrorMessage(animated: animated, sender: sender)
         }
     }
 }
-
 
 extension PaymentFormUIController where Self: UIViewController {
     func updateInputAccessoryViewWithFirstResponder(_ firstResponder: OmiseTextField) {
@@ -164,19 +168,18 @@ extension PaymentFormUIController where Self: UIViewController {
     }
 }
 
-
 extension PaymentFormUIController where Self: UIViewController & PaymentChooserUI {
     func applyPrimaryColor() {
         guard isViewLoaded else {
             return
         }
         
-        formFields.forEach({
+        formFields.forEach {
             $0.textColor = currentPrimaryColor
-        })
-        formLabels.forEach({
+        }
+        formLabels.forEach {
             $0.textColor = currentPrimaryColor
-        })
+        }
     }
     
     func applySecondaryColor() {
@@ -184,13 +187,12 @@ extension PaymentFormUIController where Self: UIViewController & PaymentChooserU
             return
         }
         
-        formFields.forEach({
+        formFields.forEach {
             $0.borderColor = currentSecondaryColor
             $0.placeholderTextColor = currentSecondaryColor
-        })
+        }
     }
 }
-
 
 extension OMSSourceTypeValue {
     
@@ -265,6 +267,3 @@ extension OMSSourceTypeValue {
         }
     }
 }
-
-
-

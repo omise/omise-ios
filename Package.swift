@@ -13,7 +13,7 @@ let package = Package(
             name: "OmiseSDK",
             type: .dynamic,
             targets: ["OmiseSDK"]
-        ),
+        )
     ],
     targets: [
         .target(

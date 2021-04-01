@@ -1,17 +1,15 @@
 import UIKit
 
-
 /// UIPickerView subclass pre-configured for picking card expiration month and year.
 @objc(OMSCardExpiryDatePicker) public
 class CardExpiryDatePicker: UIPickerView {
     
     /// Callback function that will be called when picker value changes.
-    public var onDateSelected: ((_ month: Int, _ year: Int) -> ())?
+    public var onDateSelected: ((_ month: Int, _ year: Int) -> Void)?
     /// Currently selected month.
     public var month: Int = Calendar.creditCardInformationCalendar.component(.month, from: Date())
     /// Currently selected year.
     public var year: Int = 0
-    
     
     private static let maximumYear = 21
     private static let monthPicker = 0
@@ -23,7 +21,7 @@ class CardExpiryDatePicker: UIPickerView {
         formatter.numberStyle = .decimal
         formatter.alwaysShowsDecimalSeparator = false
         formatter.minimumIntegerDigits = 2
-        return validRange.map({ formatter.string(from: $0 as NSNumber)! })
+        return validRange.map { formatter.string(from: $0 as NSNumber)! } // swiftlint:disable:this force_unwrapping
     }()
     
     private let years: [Int] = {
@@ -31,12 +29,12 @@ class CardExpiryDatePicker: UIPickerView {
         return Array(currentYear...(currentYear.advanced(by: maximumYear)))
     }()
     
-    override public init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         initializeInstance()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initializeInstance()
     }
@@ -88,4 +86,3 @@ extension CardExpiryDatePicker: UIPickerViewDelegate {
         self.year = year
     }
 }
-

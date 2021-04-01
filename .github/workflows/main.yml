@@ -11,3 +11,12 @@ jobs:
     - uses: actions/checkout@v2
     - name: Run xcodebuild with tests
       run: xcodebuild test -quiet -scheme OmiseSDKTests -destination 'platform=iOS Simulator,name=iPhone 12,OS=latest' ENABLE_TESTABILITY=yes
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run linting
+      uses: norio-nomura/action-swiftlint@3.2.1
+      with:
+        args: --strict

@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// Parameter for creating a new `Token`
 /// - seealso: Token
 public struct CreateTokenParameter: Encodable {
@@ -39,10 +38,16 @@ public struct CreateTokenParameter: Encodable {
         }
     }
     
-    
     /// Initializes new token request.
-    public init(name: String, pan: PAN, expirationMonth: Int, expirationYear: Int,
-                securityCode: String, city: String? = nil, postalCode: String? = nil) {
+    public init(
+        name: String,
+        pan: PAN,
+        expirationMonth: Int,
+        expirationYear: Int,
+        securityCode: String,
+        city: String? = nil,
+        postalCode: String? = nil
+    ) {
         self.name = name
         self.pan = pan
         self.expirationMonth = expirationMonth
@@ -53,9 +58,24 @@ public struct CreateTokenParameter: Encodable {
     }
     
     /// Initializes a new token request.
-    public init(name: String, number: String, expirationMonth: Int, expirationYear: Int,
-                securityCode: String, city: String? = nil, postalCode: String? = nil) {
-        self.init(name: name, pan: PAN(number), expirationMonth: expirationMonth, expirationYear: expirationYear, securityCode: securityCode, city: city, postalCode: postalCode)
+    public init(
+        name: String,
+        number: String,
+        expirationMonth: Int,
+        expirationYear: Int,
+        securityCode: String,
+        city: String? = nil,
+        postalCode: String? = nil
+    ) {
+        self.init(
+            name: name,
+            pan: PAN(number),
+            expirationMonth: expirationMonth,
+            expirationYear: expirationYear,
+            securityCode: securityCode,
+            city: city,
+            postalCode: postalCode
+        )
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -122,7 +142,6 @@ public struct Token: CreatableObject {
     }
 }
 
-
 public struct Card: Decodable {
     /// Card's ID.
     public let id: String
@@ -179,44 +198,63 @@ public struct Card: Decodable {
     }
 }
 
-
 extension Calendar {
     /// Calendar used in the Credit Card information which is Gregorian Calendar
-    public static let creditCardInformationCalendar: Calendar = Calendar(identifier: .gregorian)
+    public static let creditCardInformationCalendar = Calendar(identifier: .gregorian)
     /// Range contains the valid range of the expiration month value
     public static let validExpirationMonthRange: Range<Int> = Calendar.creditCardInformationCalendar.maximumRange(of: .month)!
+    // swiftlint:disable:previous force_unwrapping
 }
 
 extension NSCalendar {
     /// Calendar used in the Credit Card information which is Gregorian Calendar
     @objc(creditCardInformationCalendar) public static var __creditCardInformationCalendar: Calendar {
+        // swiftlint:disable:previous identifier_name
         return Calendar.creditCardInformationCalendar
     }
 }
 
-
 extension Request where T == Token {
     
     /// Initializes a new Token Request with the given information
-    public init (name: String, pan: PAN, expirationMonth: Int, expirationYear: Int,
-                 securityCode: String, city: String? = nil, postalCode: String? = nil) {
+    public init(
+        name: String,
+        pan: PAN,
+        expirationMonth: Int,
+        expirationYear: Int,
+        securityCode: String,
+        city: String? = nil,
+        postalCode: String? = nil
+    ) {
         self.init(parameter: CreateTokenParameter(
-            name: name, pan: pan,
-            expirationMonth: expirationMonth, expirationYear: expirationYear,
+            name: name,
+            pan: pan,
+            expirationMonth: expirationMonth,
+            expirationYear: expirationYear,
             securityCode: securityCode,
-            city: city, postalCode: postalCode
+            city: city,
+            postalCode: postalCode
         ))
     }
     
     /// Initializes a new Token Request with the given information
-    public init (name: String, number: String, expirationMonth: Int, expirationYear: Int,
-                 securityCode: String, city: String? = nil, postalCode: String? = nil) {
+    public init(
+        name: String,
+        number: String,
+        expirationMonth: Int,
+        expirationYear: Int,
+        securityCode: String,
+        city: String? = nil,
+        postalCode: String? = nil
+    ) {
         self.init(parameter: CreateTokenParameter(
-            name: name, number: number,
-            expirationMonth: expirationMonth, expirationYear: expirationYear,
+            name: name,
+            number: number,
+            expirationMonth: expirationMonth,
+            expirationYear: expirationYear,
             securityCode: securityCode,
-            city: city, postalCode: postalCode
+            city: city,
+            postalCode: postalCode
         ))
     }
 }
-

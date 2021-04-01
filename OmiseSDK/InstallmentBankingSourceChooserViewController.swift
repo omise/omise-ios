@@ -1,26 +1,31 @@
 import UIKit
 import os
 
-
 @objc(OMSInstallmentBankingSourceChooserViewController)
-class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>, PaymentSourceChooser, PaymentChooserUI {
+// swiftlint:disable:next type_name
+class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>,
+                                                     PaymentSourceChooser,
+                                                     PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
     
     override var showingValues: [PaymentInformation.Installment.Brand] {
         didSet {
-            os_log("Installment Brand Chooser: Showing options - %{private}@", log: uiLogObject, type: .info, showingValues.map({ $0.description }).joined(separator: ", "))
+            os_log("Installment Brand Chooser: Showing options - %{private}@",
+                   log: uiLogObject,
+                   type: .info,
+                   showingValues.map { $0.description }.joined(separator: ", "))
         }
     }
     
     @IBOutlet var bankNameLabels: [UILabel]!
     
-    @IBInspectable @objc var preferredPrimaryColor: UIColor? {
+    @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
     
-    @IBInspectable @objc var preferredSecondaryColor: UIColor? {
+    @IBInspectable var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
@@ -47,12 +52,12 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
             return IndexPath(row: 4, section: 0)
         case .scb:
             return IndexPath(row: 5, section: 0)
-        case .other(_):
+        case .other:
             preconditionFailure("This value is not supported for built-in chooser")
         }
     }
     
-    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         if let cell = cell as? PaymentOptionTableViewCell {
@@ -92,12 +97,11 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
             return
         }
         
-        bankNameLabels.forEach({
+        bankNameLabels.forEach {
             $0.textColor = currentPrimaryColor
-        })
+        }
     }
     
     private func applySecondaryColor() {
     }
 }
-

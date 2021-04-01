@@ -2,7 +2,6 @@ import Foundation
 import OmiseSDK
 import XCTest
 
-
 @available(*, deprecated)
 class CardNumberTest: XCTestCase {
     func testNormalize() {
@@ -25,9 +24,9 @@ class CardNumberTest: XCTestCase {
         ]
         
         tests.forEach { cards in
-            cards.forEach({ (brand, number) in
+            cards.forEach { (brand, number) in
                 XCTAssertEqual(brand, CardNumber.brand(of: number))
-            })
+            }
         }
     }
     
@@ -47,4 +46,3 @@ class CardNumberTest: XCTestCase {
         XCTAssertFalse(CardNumber.validate("1234567812345678"))
     }
 }
-

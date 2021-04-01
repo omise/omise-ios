@@ -3,7 +3,6 @@ import Foundation
 public let centBasedCurrencyFactor = 100
 public let identicalBasedCurrencyFactor = 1
 
-
 public enum Currency: Codable, Hashable {
     case thb
     case jpy
@@ -70,7 +69,6 @@ public enum Currency: Codable, Hashable {
         }
     }
     
-    
     /// Create a currency with the given `ISO 4217` currency code
     ///
     /// - Parameter code: The ISO 4217 currency code for the creating Currency that will be created
@@ -113,7 +111,6 @@ public enum Currency: Codable, Hashable {
         }
     }
     
-    
     /// Convert the given subunit amount to the unit amount
     ///
     /// - Parameter value: Value in subunit (Satang in THB for example)
@@ -143,4 +140,3 @@ extension Currency {
         self.init(code: code)
     }
 }
-
