@@ -9,7 +9,7 @@ class CardExpiryDatePicker: UIPickerView {
     /// Currently selected month.
     public var month: Int = Calendar.creditCardInformationCalendar.component(.month, from: Date())
     /// Currently selected year.
-    public var year: Int = 0
+    public var year: Int = Calendar.creditCardInformationCalendar.component(.year, from: Date())
     
     private static let maximumYear = 21
     private static let monthPicker = 0

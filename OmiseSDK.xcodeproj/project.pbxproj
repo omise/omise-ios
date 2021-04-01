@@ -102,6 +102,7 @@
 		98FF99BB2577789800476487 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FF99BA2577789800476487 /* Configuration.swift */; };
 		98FF99BE25777E1B00476487 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FF99BA2577789800476487 /* Configuration.swift */; };
 		F3497368254C067000D05C7B /* MobileBankingSourceChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3497367254C066F00D05C7B /* MobileBankingSourceChooserViewController.swift */; };
+		F615CBF8261565D600E1A2D9 /* CardExpiryDatePickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F615CBF7261565D600E1A2D9 /* CardExpiryDatePickerTests.swift */; };
 		F6614CD6243DB8E7005B656E /* TrueMoneyFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6614CD5243DB8E7005B656E /* TrueMoneyFormViewController.swift */; };
 		F6FE862C25E3B02300C7A4DE /* OMSConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = F6FE862A25E3B02300C7A4DE /* OMSConstants.m */; };
 		F6FE862D25E3B02300C7A4DE /* OMSConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = F6FE862B25E3B02300C7A4DE /* OMSConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -262,6 +263,7 @@
 		987A03AC1CE5CD450035417A /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fixtures; sourceTree = "<group>"; };
 		98FF99BA2577789800476487 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		F3497367254C066F00D05C7B /* MobileBankingSourceChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileBankingSourceChooserViewController.swift; sourceTree = "<group>"; };
+		F615CBF7261565D600E1A2D9 /* CardExpiryDatePickerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardExpiryDatePickerTests.swift; sourceTree = "<group>"; };
 		F6614CD5243DB8E7005B656E /* TrueMoneyFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrueMoneyFormViewController.swift; sourceTree = "<group>"; };
 		F6FE862A25E3B02300C7A4DE /* OMSConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OMSConstants.m; path = OmiseSDKObjc/OMSConstants.m; sourceTree = SOURCE_ROOT; };
 		F6FE862B25E3B02300C7A4DE /* OMSConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OMSConstants.h; path = OmiseSDKObjc/OMSConstants.h; sourceTree = SOURCE_ROOT; };
@@ -535,10 +537,19 @@
 				8A43454620DBAE76005C5C94 /* PANModelTestCase.swift */,
 				8A429E7A2109A3AE007C230F /* PaymentInformationTestCase.swift */,
 				225931561CE4745200841B86 /* SDKTestCase.swift */,
+				F615CBFB2615696100E1A2D9 /* Views */,
 				8A47173F20AAD6BA0022733A /* Compatability Suite */,
 				8A01F78620D8E0EB003FC11E /* Objective-C */,
 			);
 			path = OmiseSDKTests;
+			sourceTree = "<group>";
+		};
+		F615CBFB2615696100E1A2D9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F615CBF7261565D600E1A2D9 /* CardExpiryDatePickerTests.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F6FE863425E3B0AE00C7A4DE /* OmiseSDKObjc */ = {
@@ -852,6 +863,7 @@
 				8A429E7B2109A3AE007C230F /* PaymentInformationTestCase.swift in Sources */,
 				224460041CF43A1200801D0F /* SDKTestCase.swift in Sources */,
 				8A3C10582159FCE900BEFD8A /* BadRequestAPIErrorParsingTestCase.swift in Sources */,
+				F615CBF8261565D600E1A2D9 /* CardExpiryDatePickerTests.swift in Sources */,
 				2244600A1CF441DC00801D0F /* TokenRequestDelegateDummy.swift in Sources */,
 				224460051CF43A1500801D0F /* CardNumberTest.swift in Sources */,
 				987A03211CE5B7D70035417A /* OmiseTokenRequestTest.swift in Sources */,
