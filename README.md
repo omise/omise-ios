@@ -20,8 +20,7 @@ payments within apps.
 If you run into any issues regarding this SDK and the functionality it
 provides, consult the frequently asked questions in our
 [comprehensive support documents](https://www.omise.co/support).  If
-you can't find an answer there, post a question in our
-[forum](https://forum.omise.co/c/development) or feel free to
+you can't find an answer there, feel free to
 [email our support team](mailto:support@omise.co).
 
 ## Requirements
