@@ -75,7 +75,8 @@ extension PaymentChooserOption {
         switch sourceType {
         case .trueMoney:
             return [.truemoney]
-        case .installmentFirstChoice, .installmentEzypay, .installmentKBank, .installmentKTC, .installmentBBL, .installmentBAY, .installmentSCB:
+        case .installmentFirstChoice, .installmentEzypay, .installmentKBank, .installmentKTC,
+             .installmentBBL, .installmentBAY, .installmentSCB:
             return [.installment]
         case .billPaymentTescoLotus:
             return [.tescoLotus]
