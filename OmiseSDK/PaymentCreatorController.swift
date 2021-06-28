@@ -540,6 +540,7 @@ extension PaymentCreatorController {
         .installmentBAY,
         .installmentFirstChoice,
         .installmentBBL,
+        .installmentEzypay,
         .installmentKTC,
         .installmentKBank,
         .installmentSCB,
@@ -572,6 +573,7 @@ extension PaymentCreatorController {
         .installmentBAY,
         .installmentFirstChoice,
         .installmentBBL,
+        .installmentEzypay,
         .installmentKTC,
         .installmentKBank,
         .installmentSCB
