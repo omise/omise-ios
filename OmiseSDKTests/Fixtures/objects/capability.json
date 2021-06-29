@@ -124,6 +124,19 @@
     },
     {
       "object": "payment_method",
+      "name": "installment_ezypay",
+      "currencies": [
+        "MYR"
+      ],
+      "card_brands": null,
+      "installment_terms": [
+        6,
+        12,
+        24
+      ]
+    },
+    {
+      "object": "payment_method",
       "name": "installment_ktc",
       "currencies": [
         "THB"

@@ -10,7 +10,7 @@ class CapabilityOperationFixtureTests: XCTestCase {
             let capabilityData = try XCTestCase.fixturesData(forFilename: "capability")
             let capability = try decoder.decode(Capability.self, from: capabilityData)
             
-            XCTAssertEqual(capability.supportedBackends.count, 9)
+            XCTAssertEqual(capability.supportedBackends.count, 10)
             
             if let creditCardBackend = capability.creditCardBackend {
                 XCTAssertEqual(creditCardBackend.payment, .card([]))
