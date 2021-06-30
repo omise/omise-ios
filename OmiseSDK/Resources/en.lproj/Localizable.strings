@@ -10,6 +10,7 @@
 "installment-number-of-terms-choosers.bbl.navigation-item.title" = "Krungsri";
 "installment-number-of-terms-choosers.ktc.navigation-item.title" = "Krungsri First Choice";
 "installment-number-of-terms-choosers.k-bank.navigation-item.title" = "KTC";
+"installment-number-of-terms-choosers.ezypay.navigation-item.title" = "MayBank Ezypay";
 "installment-number-of-terms-choosers.scb.navigation-item.title" = "Siam Commercial Bank";
 
 /* A navigation title for the choosing installment terms screen with the `Installments Terms` selected */

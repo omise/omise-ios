@@ -176,6 +176,14 @@ public class __SourceInstallmentsPayment: __SourcePaymentInformation {
     public static func installmentBBLPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
         return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentBBL, numberOfTerms: numberOfTerms)!
     }
+    
+    /// Create a Ezypay Installment payment with the given number of terms
+    ///
+    /// - Parameter numberOfTerms: Number of plan of the installment plan
+    /// - Returns: Ezypay Installment payment with the specified number of terms
+    public static func installmentEzypayPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
+        return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentEzypay, numberOfTerms: numberOfTerms)!
+    }
     /// Create a KTC Installment payment with the given number of terms
     ///
     /// - Parameter numberOfTerms: Number of plan of the installment plan
@@ -352,6 +360,8 @@ extension PaymentInformation {
                 brand = .firstChoice
             case .installmentBBL:
                 brand = .bbl
+            case .installmentEzypay:
+                brand = .ezypay
             case .installmentKTC:
                 brand = .ktc
             case .installmentKBank:
@@ -455,6 +465,8 @@ extension __SourcePaymentInformation {
                 return __SourceInstallmentsPayment.installmentFirstChoicePayment(withNumberOfTerms: installment.numberOfTerms)
             case .bbl:
                 return __SourceInstallmentsPayment.installmentBBLPayment(withNumberOfTerms: installment.numberOfTerms)
+            case .ezypay:
+                return __SourceInstallmentsPayment.installmentEzypayPayment(withNumberOfTerms: installment.numberOfTerms)
             case .ktc:
                 return __SourceInstallmentsPayment.installmentKTCPayment(withNumberOfTerms: installment.numberOfTerms)
             case .kBank:

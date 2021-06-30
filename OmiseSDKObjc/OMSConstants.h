@@ -14,6 +14,7 @@ extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueBarcodeAlipay;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentBAY;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentFirstChoice;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentBBL;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentEzypay;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentKTC;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentKBank;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentSCB;

@@ -68,6 +68,24 @@ class PaymentInformationTestCase: XCTestCase {
         }
         
         do {
+            let installment = PaymentInformation.Installment(brand: .ezypay, numberOfTerms: 6)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
+                                                         amount: 5_000_00,
+                                                         currency: .myr)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 500000,
+                  "currency" : "MYR",
+                  "installment_term" : 6,
+                  "type" : "installment_ezypay"
+                }
+                """, encodedJSONString)
+        }
+        
+        do {
             let installment = PaymentInformation.Installment(brand: .ktc, numberOfTerms: 6)
             let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 10_00,

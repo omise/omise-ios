@@ -12,6 +12,7 @@ OMSSourceTypeValue const _Nonnull OMSSourceTypeValueBarcodeAlipay = @"barcode_al
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentBAY = @"installment_bay";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentFirstChoice = @"installment_first_choice";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentBBL = @"installment_bbl";
+OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentEzypay = @"installment_ezypay";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentKTC = @"installment_ktc";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentKBank = @"installment_kbank";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentSCB = @"installment_scb";
