@@ -47,6 +47,24 @@ public class __SourcePaymentInformation: NSObject {
     /// Payment Information for an Alipay Payment
     public static let alipayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.alipay)!
     
+    /// Payment Information for an Alipay+ CN Wallet Payment
+    public static let alipayCNPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.alipayCN)!
+    
+    /// Payment Information for an Alipay+ HK Wallet Payment
+    public static let alipayHKPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.alipayHK)!
+    
+    /// Payment Information for an Alipay+ DANA Wallet Payment
+    public static let danaPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.dana)!
+    
+    /// Payment Information for an Alipay+ GCash Wallet Payment
+    public static let gcashPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.gcash)!
+    
+    /// Payment Information for an Alipay+ KakaoPay Wallet Payment
+    public static let kakaoPayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.kakaoPay)!
+    
+    /// Payment Information for an Alipay+ Touch N Go Wallet Payment
+    public static let touchNGoPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.touchNGo)!
+    
     /// Payment Information for a Tesco Lotus Bill Payment Payment
     public static let tescoLotusBillPaymentPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.billPaymentTescoLotus)!
     
@@ -429,6 +447,18 @@ extension __SourcePaymentInformation {
         switch paymentInformation {
         case .alipay:
             return __SourcePaymentInformation.alipayPayment
+        case .alipayCN:
+            return __SourcePaymentInformation.alipayCNPayment
+        case .alipayHK:
+            return __SourcePaymentInformation.alipayHKPayment
+        case .dana:
+            return __SourcePaymentInformation.danaPayment
+        case .gcash:
+            return __SourcePaymentInformation.gcashPayment
+        case .kakaoPay:
+            return __SourcePaymentInformation.kakaoPayPayment
+        case .touchNGo:
+            return __SourcePaymentInformation.touchNGoPayment
             
         case .barcode(PaymentInformation.Barcode.alipay(let alipayInformation)):
             return __SourceAlipayBarcodePayment(barcode: alipayInformation.barcode,

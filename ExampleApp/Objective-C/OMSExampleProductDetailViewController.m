@@ -4,7 +4,7 @@
 #import <objc/message.h>
 
 
-NSString * const OMSPublicKey = @"<#Omise Public Key#>";
+NSString * const OMSPublicKey = @"pkey_5kh8rgs336duvg5ezf8";
 
 
 @interface OMSExampleProductDetailViewController () <OMSCreditCardFormViewControllerDelegate,

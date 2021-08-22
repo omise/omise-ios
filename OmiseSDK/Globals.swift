@@ -126,6 +126,18 @@ extension OMSSourceTypeValue {
             return "points"
         case .fpx:
             return "fpx"
+        case .alipayCN:
+            return "alipay_cn"
+        case .alipayHK:
+            return "alipay_hk"
+        case .dana:
+            return "dana"
+        case .gcash:
+            return "gcash"
+        case .kakaoPay:
+            return "kakaopay"
+        case .touchNGo:
+            return "touch_n_go"
         default:
             return self.rawValue
         }

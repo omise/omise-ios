@@ -87,6 +87,12 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var internetBankingSCBPaymentCell: UITableViewCell!
     @IBOutlet private var internetBankingBBLPaymentCell: UITableViewCell!
     @IBOutlet private var alipayPaymentCell: UITableViewCell!
+    @IBOutlet private var alipayCNPaymentCell: UITableViewCell!
+    @IBOutlet private var alipayHKPaymentCell: UITableViewCell!
+    @IBOutlet private var danaPaymentCell: UITableViewCell!
+    @IBOutlet private var gcashPaymentCell: UITableViewCell!
+    @IBOutlet private var kakaoPayPaymentCell: UITableViewCell!
+    @IBOutlet private var touchNGoPaymentCell: UITableViewCell!
     @IBOutlet private var billPaymentTescoLotusPaymentCell: UITableViewCell!
     @IBOutlet private var installmentBAYPaymentCell: UITableViewCell!
     @IBOutlet private var installmentFirstChoicePaymentCell: UITableViewCell!
@@ -253,6 +259,18 @@ extension PaymentSettingTableViewController {
             return .internetBankingBBL
         case alipayPaymentCell:
             return .alipay
+        case alipayCNPaymentCell:
+            return .alipayCN
+        case alipayHKPaymentCell:
+            return .alipayHK
+        case danaPaymentCell:
+            return .dana
+        case gcashPaymentCell:
+            return .gcash
+        case kakaoPayPaymentCell:
+            return .kakaoPay
+        case touchNGoPaymentCell:
+            return .touchNGo
         case billPaymentTescoLotusPaymentCell:
             return .billPaymentTescoLotus
         case installmentBAYPaymentCell:
@@ -301,6 +319,18 @@ extension PaymentSettingTableViewController {
             return internetBankingBBLPaymentCell
         case .alipay:
             return alipayPaymentCell
+        case .alipayCN:
+            return alipayCNPaymentCell
+        case .alipayHK:
+            return alipayHKPaymentCell
+        case .dana:
+            return danaPaymentCell
+        case .gcash:
+            return gcashPaymentCell
+        case .kakaoPay:
+            return kakaoPayPaymentCell
+        case .touchNGo:
+            return touchNGoPaymentCell
         case .billPaymentTescoLotus:
             return billPaymentTescoLotusPaymentCell
         case .installmentBAY:

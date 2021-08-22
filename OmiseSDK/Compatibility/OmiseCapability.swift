@@ -53,6 +53,24 @@ class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
     
     static let alipaySourceBackendPayment =
         __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.alipay)
+    
+    static let alipayCNSourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.alipayCN)
+
+    static let alipayHKSourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.alipayHK)
+
+    static let danaSourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.dana)
+
+    static let gcashSourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.gcash)
+
+    static let kakaoPaySourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.kakaoPay)
+
+    static let touchNGoSourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.touchNGo)
 
     static let promptpaySourceBackendPayment =
     __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.promptPay)
@@ -116,6 +134,18 @@ extension __OmiseCapabilityBackendPayment {
             return __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue(billPayment.type))
         case .alipay:
             return __OmiseCapabilitySourceBackendPayment.alipaySourceBackendPayment
+        case .alipayCN:
+            return __OmiseCapabilitySourceBackendPayment.alipayCNSourceBackendPayment
+        case .alipayHK:
+            return __OmiseCapabilitySourceBackendPayment.alipayHKSourceBackendPayment
+        case .dana:
+            return __OmiseCapabilitySourceBackendPayment.danaSourceBackendPayment
+        case .gcash:
+            return __OmiseCapabilitySourceBackendPayment.gcashSourceBackendPayment
+        case .kakaoPay:
+            return __OmiseCapabilitySourceBackendPayment.kakaoPaySourceBackendPayment
+        case .touchNGo:
+            return __OmiseCapabilitySourceBackendPayment.touchNGoSourceBackendPayment
         case .promptpay:
             return __OmiseCapabilitySourceBackendPayment.promptpaySourceBackendPayment
         case .paynow:

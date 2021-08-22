@@ -7,7 +7,7 @@ enum Environment {
     // swiftlint:disable force_unwrapping
     private var vaultBaseURL: URL {
         switch self {
-        case .staging: return URL(string: "[STAGING_URL]")!
+        case .staging: return URL(string: "https://vault.staging-omise.co")!
         case .production: return URL(string: "https://vault.omise.co")!
         }
     }
@@ -15,7 +15,7 @@ enum Environment {
     // swiftlint:disable force_unwrapping
     private var apiBaseURL: URL {
         switch self {
-        case .staging: return URL(string: "[STAGING_URL]")!
+        case .staging: return URL(string: "https://api.staging-omise.co")!
         case .production: return URL(string: "https://api.omise.co")!
         }
     }
