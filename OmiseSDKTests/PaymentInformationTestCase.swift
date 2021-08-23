@@ -371,6 +371,112 @@ class PaymentInformationTestCase: XCTestCase {
         }
     }
 
+    func testEncodeAlipayPlusSourceParameter() throws {
+        let encoder = PaymentInformationTestCase.makeJSONEncoder()
+
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .alipayCN,
+                                                         amount: 10_000_00,
+                                                         currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "currency" : "THB",
+                  "platform_type" : "IOS",
+                  "type" : "alipay_cn"
+                }
+                """, encodedJSONString)
+        }
+        
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .alipayHK,
+                                                         amount: 10_000_00,
+                                                         currency: .hkd)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "currency" : "HKD",
+                  "platform_type" : "IOS",
+                  "type" : "alipay_hk"
+                }
+                """, encodedJSONString)
+        }
+        
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .dana,
+                                                         amount: 10_000_00,
+                                                         currency: .jpy)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "currency" : "JPY",
+                  "platform_type" : "IOS",
+                  "type" : "dana"
+                }
+                """, encodedJSONString)
+        }
+        
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .gcash,
+                                                         amount: 10_000_00,
+                                                         currency: .usd)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "currency" : "USD",
+                  "platform_type" : "IOS",
+                  "type" : "gcash"
+                }
+                """, encodedJSONString)
+        }
+        
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .kakaoPay,
+                                                         amount: 10_000_00,
+                                                         currency: .usd)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "currency" : "USD",
+                  "platform_type" : "IOS",
+                  "type" : "kakaopay"
+                }
+                """, encodedJSONString)
+        }
+        
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .touchNGo,
+                                                         amount: 10_000_00,
+                                                         currency: .sgd)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "currency" : "SGD",
+                  "platform_type" : "IOS",
+                  "type" : "touch_n_go"
+                }
+                """, encodedJSONString)
+        }
+    }
+
     func testOtherPaymentInfromation() throws {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
         
