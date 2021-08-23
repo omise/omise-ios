@@ -26,6 +26,7 @@ class PaymentInformationTestCase: XCTestCase {
                   "amount" : 1000000,
                   "currency" : "THB",
                   "installment_term" : 6,
+                  "platform_type" : "IOS",
                   "type" : "installment_bay"
                 }
                 """, encodedJSONString)
@@ -44,6 +45,7 @@ class PaymentInformationTestCase: XCTestCase {
                   "amount" : 10000,
                   "currency" : "THB",
                   "installment_term" : 6,
+                  "platform_type" : "IOS",
                   "type" : "installment_first_choice"
                 }
                 """, encodedJSONString)
@@ -62,6 +64,7 @@ class PaymentInformationTestCase: XCTestCase {
                   "amount" : 100000,
                   "currency" : "THB",
                   "installment_term" : 6,
+                  "platform_type" : "IOS",
                   "type" : "installment_bbl"
                 }
                 """, encodedJSONString)
@@ -80,6 +83,7 @@ class PaymentInformationTestCase: XCTestCase {
                   "amount" : 500000,
                   "currency" : "MYR",
                   "installment_term" : 6,
+                  "platform_type" : "IOS",
                   "type" : "installment_ezypay"
                 }
                 """, encodedJSONString)
@@ -98,6 +102,7 @@ class PaymentInformationTestCase: XCTestCase {
                   "amount" : 1000,
                   "currency" : "THB",
                   "installment_term" : 6,
+                  "platform_type" : "IOS",
                   "type" : "installment_ktc"
                 }
                 """, encodedJSONString)
@@ -116,6 +121,7 @@ class PaymentInformationTestCase: XCTestCase {
                   "amount" : 1000,
                   "currency" : "THB",
                   "installment_term" : 6,
+                  "platform_type" : "IOS",
                   "type" : "installment_kbank"
                 }
                 """, encodedJSONString)
@@ -134,6 +140,7 @@ class PaymentInformationTestCase: XCTestCase {
                   "amount" : 3000,
                   "currency" : "THB",
                   "installment_term" : 9,
+                  "platform_type" : "IOS",
                   "type" : "installment_scb"
                 }
                 """, encodedJSONString)
@@ -154,6 +161,7 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "THB",
+                  "platform_type" : "IOS",
                   "type" : "internet_banking_bay"
                 }
                 """, encodedJSONString)
@@ -170,6 +178,7 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 10000,
                   "currency" : "THB",
+                  "platform_type" : "IOS",
                   "type" : "internet_banking_ktb"
                 }
                 """, encodedJSONString)
@@ -186,6 +195,7 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 100000,
                   "currency" : "THB",
+                  "platform_type" : "IOS",
                   "type" : "internet_banking_scb"
                 }
                 """, encodedJSONString)
@@ -202,6 +212,7 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000,
                   "currency" : "THB",
+                  "platform_type" : "IOS",
                   "type" : "internet_banking_bbl"
                 }
                 """, encodedJSONString)
@@ -222,6 +233,7 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "THB",
+                  "platform_type" : "IOS",
                   "type" : "mobile_banking_scb"
                 }
                 """, encodedJSONString)
@@ -247,6 +259,7 @@ class PaymentInformationTestCase: XCTestCase {
                   "amount" : 1000000,
                   "barcode" : "barcode",
                   "currency" : "THB",
+                  "platform_type" : "IOS",
                   "store_id" : "store_id_1",
                   "store_name" : "Store Name",
                   "terminal_id" : "Terminal 1",
@@ -267,6 +280,7 @@ class PaymentInformationTestCase: XCTestCase {
                   "amount" : 1000000,
                   "barcode" : "barcode",
                   "currency" : "THB",
+                  "platform_type" : "IOS",
                   "terminal_id" : "Terminal 1",
                   "type" : "barcode_alipay"
                 }
@@ -285,6 +299,7 @@ class PaymentInformationTestCase: XCTestCase {
                   "amount" : 1000000,
                   "barcode" : "barcode",
                   "currency" : "THB",
+                  "platform_type" : "IOS",
                   "type" : "barcode_alipay"
                 }
                 """, encodedJSONString)
@@ -306,6 +321,7 @@ class PaymentInformationTestCase: XCTestCase {
                   "amount" : 1000000,
                   "currency" : "THB",
                   "phone_number" : "0123456789",
+                  "platform_type" : "IOS",
                   "type" : "truemoney"
                 }
                 """, encodedJSONString)
@@ -325,6 +341,7 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "THB",
+                  "platform_type" : "IOS",
                   "type" : "points_citi"
                 }
                 """, encodedJSONString)
@@ -347,6 +364,7 @@ class PaymentInformationTestCase: XCTestCase {
                   "bank" : "uob",
                   "currency" : "MYR",
                   "email" : "support@omise.co",
+                  "platform_type" : "IOS",
                   "type" : "fpx"
                 }
                 """, encodedJSONString)
@@ -367,6 +385,7 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 30000,
                   "currency" : "THB",
+                  "platform_type" : "IOS",
                   "type" : "alipay"
                 }
                 """, encodedJSONString)
@@ -383,6 +402,7 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 12345,
                   "currency" : "THB",
+                  "platform_type" : "IOS",
                   "type" : "bill_payment_tesco_lotus"
                 }
                 """, encodedJSONString)
