@@ -1,3 +1,4 @@
+// swiftlint:disable file_length
 import UIKit
 import os
 
@@ -141,6 +142,7 @@ extension PaymentChooserOption {
 }
 
 @objc(OMSPaymentChooserViewController)
+// swiftlint:disable function_body_length
 class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>,
                                     PaymentSourceChooser,
                                     PaymentChooserUI {

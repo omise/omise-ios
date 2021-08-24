@@ -113,7 +113,9 @@ extension Capability.Backend {
 extension Capability.Backend.Payment {
     public static func == (lhs: Capability.Backend.Payment, rhs: Capability.Backend.Payment) -> Bool {
         switch (lhs, rhs) {
-        case (.card, .card), (.alipay, .alipay), (.alipayCN, .alipayCN), (.alipayHK, .alipayHK), (.dana, .dana), (.gcash, .gcash), (.kakaoPay, .kakaoPay), (.touchNGo, .touchNGo):
+        case (.card, .card), (.alipay, .alipay), (.alipayCN, .alipayCN), (.alipayHK, .alipayHK):
+            return true
+        case (.dana, .dana), (.gcash, .gcash), (.kakaoPay, .kakaoPay), (.touchNGo, .touchNGo):
             return true
         case (.promptpay, .promptpay), (.paynow, .paynow):
             return true
@@ -176,6 +178,7 @@ extension Capability {
 }
 
 extension Capability.Backend {
+    // swiftlint:disable function_body_length
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
@@ -247,6 +250,7 @@ extension Capability.Backend {
         case .unknownSource(_, configurations: let configurations):
             try encoder.encodeJSONDictionary(configurations)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
+        // swiftlint:disable line_length
         case .internetBanking, .alipay, .alipayCN, .alipayHK, .dana, .gcash, .kakaoPay, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
