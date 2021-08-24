@@ -85,9 +85,9 @@ public enum CardBrand: Int, CustomStringConvertible, Codable {
         case .jcb:
             return "JCB"
         case .amex:
-            return "AMEX"
+            return "American Express"
         case .diners:
-            return "Diners"
+            return "Diners Club"
         case .discover:
             return "Discover"
         case .laser:
@@ -111,9 +111,9 @@ public enum CardBrand: Int, CustomStringConvertible, Codable {
             self = .masterCard
         case "JCB":
             self = .jcb
-        case "AMEX":
+        case "American Express":
             self = .amex
-        case "Diners":
+        case "Diners Club":
             self = .diners
         case "Discover":
             self = .discover
