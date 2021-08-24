@@ -53,7 +53,7 @@ public struct CreateSourceParameter: Encodable {
     /// The currench of the creating Source
     public let currency: Currency
     
-    public let platformType: String
+    private let platformType: String
 
     private enum CodingKeys: String, CodingKey {
         case amount
