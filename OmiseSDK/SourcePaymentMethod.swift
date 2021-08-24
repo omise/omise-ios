@@ -260,7 +260,7 @@ public enum PaymentInformation: Codable, Equatable {
         case type
     }
     
-    // swiftlint:disable type_body_length
+    // swiftlint:disable function_body_length
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let typeValue = try container.decode(String.self, forKey: .type)
@@ -316,7 +316,6 @@ public enum PaymentInformation: Codable, Equatable {
         }
     }
 
-    // swiftlint:disable type_body_length
     public func encode(to encoder: Encoder) throws {
         switch self {
         case .internetBanking(let value):
