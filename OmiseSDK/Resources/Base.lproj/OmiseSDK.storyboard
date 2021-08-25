@@ -1021,7 +1021,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <color key="tintColor" red="0.89019607840000003" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="DANA" id="WUk-Bc-47Y">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="dana" id="WUk-Bc-47Y">
                                                     <rect key="frame" x="16" y="16" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -1057,7 +1057,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <color key="tintColor" red="0.89019607840000003" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="GCash" id="mXe-KC-etu">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="gcash" id="mXe-KC-etu">
                                                     <rect key="frame" x="16" y="16" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -2519,13 +2519,11 @@
         <image name="Close" width="24" height="24"/>
         <image name="Close Mini" width="16" height="16"/>
         <image name="Conbini" width="32" height="32"/>
-        <image name="DANA" width="32" height="32"/>
         <image name="FPX" width="32" height="32"/>
         <image name="FPX/maybank" width="30" height="30"/>
         <image name="FPX/uob" width="30" height="30"/>
         <image name="FPX_Big" width="105" height="80"/>
         <image name="First Choice" width="32" height="32"/>
-        <image name="GCash" width="32" height="32"/>
         <image name="Installment" width="32" height="32"/>
         <image name="KBANK" width="32" height="32"/>
         <image name="KTB" width="32" height="32"/>
@@ -2544,6 +2542,8 @@
         <image name="TrueMoney" width="32" height="32"/>
         <image name="TrueMoney_Big" width="105" height="80"/>
         <image name="Visa" width="40" height="22"/>
+        <image name="dana" width="32" height="32"/>
+        <image name="gcash" width="32" height="32"/>
         <image name="kakaopay" width="32" height="32"/>
         <image name="touch-n-go" width="32" height="32"/>
         <systemColor name="systemBackgroundColor">
