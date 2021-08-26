@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "touch-n-go.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

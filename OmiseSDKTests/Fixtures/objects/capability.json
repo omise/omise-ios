@@ -186,6 +186,93 @@
               "active": true
           }
       ]
+    },
+    {
+      "object": "payment_method",
+      "name": "alipay_cn",
+      "currencies": [
+        "USD",
+        "EUR",
+        "JPY",
+        "GBP",
+        "CAD",
+        "AUD",
+        "SGD",
+        "CHF",
+        "SEK",
+        "DKK",
+        "NOK",
+        "NZD", 
+        "THB",
+        "HKD",
+        "CNY"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "banks": []
+    },
+    {
+      "object": "payment_method",
+      "name": "alipay_hk",
+      "currencies": [
+        "USD",
+        "JPY",
+        "CAD",
+        "SGD",
+        "HKD"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "banks": []
+    },
+    {
+      "object": "payment_method",
+      "name": "dana",
+      "currencies": [
+        "JPY",
+        "IDR"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "banks": []
+    },
+    {
+      "object": "payment_method",
+      "name": "gcash",
+      "currencies": [
+        "USD",
+        "JPY",
+        "CAD",
+        "SGD",
+        "PHP"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "banks": []
+    },
+    {
+      "object": "payment_method",
+      "name": "kakaopay",
+      "currencies": [
+        "USD",
+        "JPY",
+        "KRW"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "banks": []
+    },
+    {
+      "object": "payment_method",
+      "name": "touch_n_go",
+      "currencies": [
+        "JPY",
+        "SGD",
+        "MYR"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "banks": []
     }
   ],
   "zero_interest_installments": false

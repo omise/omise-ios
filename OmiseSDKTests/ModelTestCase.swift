@@ -1,3 +1,4 @@
+// swiftlint:disable file_length
 import XCTest
 @testable import OmiseSDK
 
@@ -258,7 +259,109 @@ class ModelTestCase: XCTestCase {
             XCTFail("Cannot decode the source \(error)")
         }
     }
-    
+
+    func testDecodeAlipayCNSource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_alipay_plus/alipay_cn")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_test_5owftw9kjhjisssm0n2", source.id)
+            XCTAssertEqual(Currency.thb, source.currency)
+            XCTAssertEqual(5000_00, source.amount)
+            XCTAssertEqual(PaymentInformation.alipayCN, source.paymentInformation)
+            XCTAssertEqual("app_redirect", source.flow.rawValue)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
+
+    func testDecodeAlipayHKSource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_alipay_plus/alipay_hk")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_test_5oxesy9ovpgawobhf6n", source.id)
+            XCTAssertEqual(Currency.hkd, source.currency)
+            XCTAssertEqual(5000_00, source.amount)
+            XCTAssertEqual(PaymentInformation.alipayHK, source.paymentInformation)
+            XCTAssertEqual("app_redirect", source.flow.rawValue)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
+
+    func testDecodeDANASource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_alipay_plus/dana")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_test_5oxew5l8jxhss03ybfb", source.id)
+            XCTAssertEqual(Currency.jpy, source.currency)
+            XCTAssertEqual(5000_00, source.amount)
+            XCTAssertEqual(PaymentInformation.dana, source.paymentInformation)
+            XCTAssertEqual("app_redirect", source.flow.rawValue)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
+
+    func testDecodeGCashSource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_alipay_plus/gcash")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_test_5oxesgzoekdn5nukcdf", source.id)
+            XCTAssertEqual(Currency.usd, source.currency)
+            XCTAssertEqual(5000_00, source.amount)
+            XCTAssertEqual(PaymentInformation.gcash, source.paymentInformation)
+            XCTAssertEqual("app_redirect", source.flow.rawValue)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
+
+    func testDecodeKakaoPaySource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_alipay_plus/kakaopay")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_test_5oxetau2owhu0rbzg7y", source.id)
+            XCTAssertEqual(Currency.usd, source.currency)
+            XCTAssertEqual(5000_00, source.amount)
+            XCTAssertEqual(PaymentInformation.kakaoPay, source.paymentInformation)
+            XCTAssertEqual("app_redirect", source.flow.rawValue)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
+
+    func testDecodeTouchNGoSource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_alipay_plus/touch_n_go")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_test_5oxet335rx3xzdyn06g", source.id)
+            XCTAssertEqual(Currency.sgd, source.currency)
+            XCTAssertEqual(5000_00, source.amount)
+            XCTAssertEqual(PaymentInformation.touchNGo, source.paymentInformation)
+            XCTAssertEqual("app_redirect", source.flow.rawValue)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
+
     func testDecodePromptPayQRSource() throws {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
         

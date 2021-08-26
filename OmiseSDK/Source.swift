@@ -28,6 +28,7 @@ public struct Source: CreatableObject {
         case flow
         case currency
         case amount
+        case platformType = "platform_type"
     }
     
     public init(from decoder: Decoder) throws {
@@ -52,9 +53,12 @@ public struct CreateSourceParameter: Encodable {
     /// The currench of the creating Source
     public let currency: Currency
     
+    private let platformType: String
+
     private enum CodingKeys: String, CodingKey {
         case amount
         case currency
+        case platformType = "platform_type"
     }
     
     /// Create a new `Create Source Parameter` that will be used to create a new Source
@@ -67,6 +71,7 @@ public struct CreateSourceParameter: Encodable {
         self.paymentInformation = paymentInformation
         self.amount = amount
         self.currency = currency
+        self.platformType = "IOS"
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -74,6 +79,7 @@ public struct CreateSourceParameter: Encodable {
         try container.encode(amount, forKey: .amount)
         try container.encode(currency, forKey: .currency)
         try paymentInformation.encode(to: encoder)
+        try container.encode(platformType, forKey: .platformType)
     }
 }
 

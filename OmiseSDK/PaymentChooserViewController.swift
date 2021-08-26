@@ -1,3 +1,4 @@
+// swiftlint:disable file_length
 import UIKit
 import os
 
@@ -11,6 +12,12 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case payEasy
     case netBanking
     case alipay
+    case alipayCN
+    case alipayHK
+    case dana
+    case gcash
+    case kakaoPay
+    case touchNGo
     case promptpay
     case paynow
     case truemoney
@@ -25,6 +32,12 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             .promptpay,
             .citiPoints,
             .alipay,
+            .alipayCN,
+            .alipayHK,
+            .dana,
+            .gcash,
+            .kakaoPay,
+            .touchNGo,
             .internetBanking,
             .mobileBanking,
             .tescoLotus,
@@ -56,6 +69,18 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "NetBanking"
         case .alipay:
             return "Alipay"
+        case .alipayCN:
+            return "Alipay CN"
+        case .alipayHK:
+            return "Alipay HK"
+        case .dana:
+            return "DANA"
+        case .gcash:
+            return "GCash"
+        case .kakaoPay:
+            return "Kakao Pay"
+        case .touchNGo:
+            return "TNG eWallet"
         case .promptpay:
             return "PromptPay"
         case .paynow:
@@ -84,6 +109,18 @@ extension PaymentChooserOption {
             return [.conbini, .payEasy, .netBanking]
         case .alipay:
             return [.alipay]
+        case .alipayCN:
+            return [.alipayCN]
+        case .alipayHK:
+            return [.alipayHK]
+        case .dana:
+            return [.dana]
+        case .gcash:
+            return [.gcash]
+        case .kakaoPay:
+            return [.kakaoPay]
+        case .touchNGo:
+            return [.touchNGo]
         case .internetBankingBAY, .internetBankingKTB, .internetBankingBBL, .internetBankingSCB:
             return [.internetBanking]
         case .mobileBankingSCB:
@@ -105,6 +142,7 @@ extension PaymentChooserOption {
 }
 
 @objc(OMSPaymentChooserViewController)
+// swiftlint:disable type_body_length
 class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>,
                                     PaymentSourceChooser,
                                     PaymentChooserUI {
@@ -240,6 +278,18 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         switch selectedType {
         case .alipay:
             payment = .alipay
+        case .alipayCN:
+            payment = .alipayCN
+        case .alipayHK:
+            payment = .alipayHK
+        case .dana:
+            payment = .dana
+        case .gcash:
+            payment = .gcash
+        case .kakaoPay:
+            payment = .kakaoPay
+        case .touchNGo:
+            payment = .touchNGo
         case .tescoLotus:
             payment = .billPayment(.tescoLotus)
         case .promptpay:
@@ -295,6 +345,19 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 12, section: 0)
         case .fpx:
             return IndexPath(row: 13, section: 0)
+        case .alipayCN:
+            return IndexPath(row: 14, section: 0)
+        case .alipayHK:
+            return IndexPath(row: 15, section: 0)
+        case .dana:
+            return IndexPath(row: 16, section: 0)
+        case .gcash:
+            return IndexPath(row: 17, section: 0)
+        case .kakaoPay:
+            return IndexPath(row: 18, section: 0)
+        case .touchNGo:
+            return IndexPath(row: 19, section: 0)
+
         }
     }
     
@@ -307,6 +370,18 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             switch $0.payment {
             case .alipay:
                 return OMSSourceTypeValue.alipay
+            case .alipayCN:
+                return OMSSourceTypeValue.alipayCN
+            case .alipayHK:
+                return OMSSourceTypeValue.alipayHK
+            case .dana:
+                return OMSSourceTypeValue.dana
+            case .gcash:
+                return OMSSourceTypeValue.gcash
+            case .kakaoPay:
+                return OMSSourceTypeValue.kakaoPay
+            case .touchNGo:
+                return OMSSourceTypeValue.touchNGo
             case .promptpay:
                 return OMSSourceTypeValue.promptPay
             case .paynow:

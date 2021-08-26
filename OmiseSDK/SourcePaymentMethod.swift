@@ -32,6 +32,24 @@ public enum PaymentInformation: Codable, Equatable {
     /// Online Alipay Payment Source
     case alipay
     
+    /// Online Alipay + China Wallet Payment Source
+    case alipayCN
+    
+    /// Online Alipay + Hongkong Wallet Payment Source
+    case alipayHK
+    
+    /// Online Alipay + Dana Wallet Payment Source
+    case dana
+    
+    /// Online Alipay + Gcash Wallet Payment Source
+    case gcash
+    
+    /// Online Alipay + KakaoPay Wallet Payment Source
+    case kakaoPay
+    
+    /// Online Alipay + Touch N Go Wallet Payment Source
+    case touchNGo
+    
     /// The name of the supported services to process the Bill Payment
     public enum BillPayment: PaymentMethod {
         public static let paymentMethodTypePrefix: String = "bill_payment_"
@@ -242,6 +260,7 @@ public enum PaymentInformation: Codable, Equatable {
         case type
     }
     
+    // swiftlint:disable function_body_length
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let typeValue = try container.decode(String.self, forKey: .type)
@@ -259,6 +278,18 @@ public enum PaymentInformation: Codable, Equatable {
             self = .eContext(try EContext(from: decoder))
         case OMSSourceTypeValue.alipay.rawValue:
             self = .alipay
+        case OMSSourceTypeValue.alipayCN.rawValue:
+            self = .alipayCN
+        case OMSSourceTypeValue.alipayHK.rawValue:
+            self = .alipayHK
+        case OMSSourceTypeValue.dana.rawValue:
+            self = .dana
+        case OMSSourceTypeValue.gcash.rawValue:
+            self = .gcash
+        case OMSSourceTypeValue.kakaoPay.rawValue:
+            self = .kakaoPay
+        case OMSSourceTypeValue.touchNGo.rawValue:
+            self = .touchNGo
         case OMSSourceTypeValue.promptPay.rawValue:
             self = .promptpay
         case OMSSourceTypeValue.payNow.rawValue:
@@ -284,7 +315,7 @@ public enum PaymentInformation: Codable, Equatable {
             }))
         }
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         switch self {
         case .internetBanking(let value):
@@ -298,6 +329,24 @@ public enum PaymentInformation: Codable, Equatable {
         case .alipay:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.alipay.rawValue, forKey: .type)
+        case .alipayCN:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.alipayCN.rawValue, forKey: .type)
+        case .alipayHK:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.alipayHK.rawValue, forKey: .type)
+        case .dana:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.dana.rawValue, forKey: .type)
+        case .gcash:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.gcash.rawValue, forKey: .type)
+        case .kakaoPay:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.kakaoPay.rawValue, forKey: .type)
+        case .touchNGo:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.touchNGo.rawValue, forKey: .type)
         case .eContext(let eContext):
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.eContext.rawValue, forKey: .type)
@@ -332,6 +381,18 @@ public enum PaymentInformation: Codable, Equatable {
         case (.internetBanking(let lhsValue), .internetBanking(let rhsValue)):
             return lhsValue == rhsValue
         case (.alipay, .alipay):
+            return true
+        case (.alipayCN, .alipayCN):
+            return true
+        case (.alipayHK, .alipayHK):
+            return true
+        case (.dana, .dana):
+            return true
+        case (.gcash, .gcash):
+            return true
+        case (.kakaoPay, .kakaoPay):
+            return true
+        case (.touchNGo, .touchNGo):
             return true
         case (.promptpay, .promptpay), (.paynow, .paynow):
             return true
@@ -375,6 +436,18 @@ extension PaymentInformation {
         switch self {
         case .alipay:
             return OMSSourceTypeValue.alipay.rawValue
+        case .alipayCN:
+            return OMSSourceTypeValue.alipayCN.rawValue
+        case .alipayHK:
+            return OMSSourceTypeValue.alipayHK.rawValue
+        case .dana:
+            return OMSSourceTypeValue.dana.rawValue
+        case .gcash:
+            return OMSSourceTypeValue.gcash.rawValue
+        case .kakaoPay:
+            return OMSSourceTypeValue.kakaoPay.rawValue
+        case .touchNGo:
+            return OMSSourceTypeValue.touchNGo.rawValue
         case .barcode(let barcode):
             return barcode.type
         case .billPayment(let billPayment):
