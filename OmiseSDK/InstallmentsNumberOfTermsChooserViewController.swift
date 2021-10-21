@@ -60,6 +60,13 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
                     value: "SCB",
                     comment: "A navigation title for the choosing installment terms screen with the `SCB` selected"
                 )
+            case .citi?:
+                title = NSLocalizedString(
+                    "installment-number-of-terms-choosers.citi.navigation-item.title",
+                    bundle: .module,
+                    value: "Citi",
+                    comment: "A navigation title for the choosing installment terms screen with the `Citi` selected"
+                )
             case .other?, nil:
                 title = NSLocalizedString(
                     "installment-number-of-terms-choosers.default.navigation-item.title",

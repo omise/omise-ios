@@ -22,6 +22,7 @@ OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentEzypay = @"instal
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentKTC = @"installment_ktc";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentKBank = @"installment_kbank";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentSCB = @"installment_scb";
+OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentCiti = @"installment_citi";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueEContext = @"econtext";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePromptPay = @"promptpay";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePayNow = @"paynow";

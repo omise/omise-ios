@@ -22,6 +22,7 @@ extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentEzypay;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentKTC;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentKBank;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentSCB;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentCiti;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueKakaoPay;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueEContext;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePromptPay;

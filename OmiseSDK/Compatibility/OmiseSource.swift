@@ -223,6 +223,13 @@ public class __SourceInstallmentsPayment: __SourcePaymentInformation {
     public static func installmentSCBPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
         return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentSCB, numberOfTerms: numberOfTerms)!
     }
+    /// Create a Citi Installment payment with the given number of terms
+    ///
+    /// - Parameter numberOfTerms: Number of plan of the installment plan
+    /// - Returns: Citi Installment payment with the specified number of terms
+    public static func installmentCitiPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
+        return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentCiti, numberOfTerms: numberOfTerms)!
+    }
 }
 
 /// EContext Source Payment Information
@@ -386,6 +393,8 @@ extension PaymentInformation {
                 brand = .kBank
             case .installmentSCB:
                 brand = .scb
+            case .installmentCiti:
+                brand = .citi
             case let type:
                 let range = type.rawValue.range(of: PaymentInformation.Installment.paymentMethodTypePrefix)!
                 brand = .other(String(type.rawValue[range.upperBound...]))
@@ -503,6 +512,8 @@ extension __SourcePaymentInformation {
                 return __SourceInstallmentsPayment.installmentKBankPayment(withNumberOfTerms: installment.numberOfTerms)
             case .scb:
                 return __SourceInstallmentsPayment.installmentSCBPayment(withNumberOfTerms: installment.numberOfTerms)
+            case .citi:
+                return __SourceInstallmentsPayment.installmentCitiPayment(withNumberOfTerms: installment.numberOfTerms)
             case .other(let type) where type.hasPrefix(PaymentInformation.Installment.paymentMethodTypePrefix):
                 return __SourceInstallmentsPayment.init(type: OMSSourceTypeValue(type), numberOfTerms: installment.numberOfTerms)!
             case .other(let type):

@@ -101,7 +101,7 @@ extension PaymentChooserOption {
         case .trueMoney:
             return [.truemoney]
         case .installmentFirstChoice, .installmentEzypay, .installmentKBank, .installmentKTC,
-             .installmentBBL, .installmentBAY, .installmentSCB:
+             .installmentBBL, .installmentBAY, .installmentSCB, .installmentCiti:
             return [.installment]
         case .billPaymentTescoLotus:
             return [.tescoLotus]
@@ -160,6 +160,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         }
     }
     
+    @IBOutlet var paymentMethodLabelNames: [UILabel]!
     @IBOutlet private var paymentMethodNameLables: [UILabel]!
     
     @IBInspectable var preferredPrimaryColor: UIColor? {

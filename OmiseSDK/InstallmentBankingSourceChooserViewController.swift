@@ -54,6 +54,8 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
             return IndexPath(row: 5, section: 0)
         case .scb:
             return IndexPath(row: 6, section: 0)
+        case .citi:
+            return IndexPath(row: 7, section: 0)
         case .other:
             preconditionFailure("This value is not supported for built-in chooser")
         }
