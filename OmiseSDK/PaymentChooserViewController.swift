@@ -160,7 +160,6 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         }
     }
     
-    @IBOutlet var paymentMethodLabelNames: [UILabel]!
     @IBOutlet private var paymentMethodNameLables: [UILabel]!
     
     @IBInspectable var preferredPrimaryColor: UIColor? {
