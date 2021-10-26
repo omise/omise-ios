@@ -28,6 +28,15 @@
 /* A navigation title for the choosing installment terms screen with the `Siam Commercial Bank` selected */
 "installment-number-of-terms-choosers.scb.navigation-item.title" = "ธนาคารไทยพาณิชย์";
 
+/* A navigation title for the choosing installment terms screen with the `Citibank` selected */
+"installment-number-of-terms-choosers.scb.navigation-item.title" = "ธนาคารซิตี้แบงก์";
+
+/* A navigation title for the choosing installment terms screen with the `TTB Bank` selected */
+"installment-number-of-terms-choosers.scb.navigation-item.title" = "ธนาคารทีเอ็มบีธนชาต";
+
+/* A navigation title for the choosing installment terms screen with the `UOB Bank` selected */
+"installment-number-of-terms-choosers.scb.navigation-item.title" = "ธนาคารยูโอบี";
+
 /* Number of terms option text displayed as a title of the number of terms option cell in number of terms chooser scene */
 "installments.number-of-terms-chooser.number-of-terms-cell.label.text" = "%d เดือน";
 
