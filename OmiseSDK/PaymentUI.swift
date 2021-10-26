@@ -214,6 +214,10 @@ extension OMSSourceTypeValue {
             return .scb
         case .installmentCiti:
             return .citi
+        case .installmentTTB:
+            return .ttb
+        case .installmentUOB:
+            return .uob
         default:
             return nil
         }
@@ -222,7 +226,7 @@ extension OMSSourceTypeValue {
     var isInstallmentSource: Bool {
         switch self {
         case .installmentBAY, .installmentEzypay, .installmentFirstChoice, .installmentBBL,
-             .installmentKTC, .installmentKBank, .installmentSCB, .installmentCiti:
+             .installmentKTC, .installmentKBank, .installmentSCB, .installmentCiti, .installmentTTB, .installmentUOB:
             return true
         default:
             return false

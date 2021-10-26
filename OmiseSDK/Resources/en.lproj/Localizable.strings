@@ -13,6 +13,8 @@
 "installment-number-of-terms-choosers.ezypay.navigation-item.title" = "MayBank Ezypay";
 "installment-number-of-terms-choosers.scb.navigation-item.title" = "Siam Commercial Bank";
 "installment-number-of-terms-choosers.citi.navigation-item.title" = "Citi";
+"installment-number-of-terms-choosers.ttb.navigation-item.title" = "TTB";
+"installment-number-of-terms-choosers.uob.navigation-item.title" = "UOB";
 
 /* A navigation title for the choosing installment terms screen with the `Installments Terms` selected */
 "installment-number-of-terms-choosers.default.navigation-item.title" = "Installment terms";

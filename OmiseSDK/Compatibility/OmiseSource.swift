@@ -230,6 +230,20 @@ public class __SourceInstallmentsPayment: __SourcePaymentInformation {
     public static func installmentCitiPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
         return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentCiti, numberOfTerms: numberOfTerms)!
     }
+    /// Create a TTB Installment payment with the given number of terms
+    ///
+    /// - Parameter numberOfTerms: Number of plan of the installment plan
+    /// - Returns: TTB Installment payment with the specified number of terms
+    public static func installmentTTBPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
+        return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentTTB, numberOfTerms: numberOfTerms)!
+    }
+    /// Create a UOB Installment payment with the given number of terms
+    ///
+    /// - Parameter numberOfTerms: Number of plan of the installment plan
+    /// - Returns: UOB Installment payment with the specified number of terms
+    public static func installmentUOBPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
+        return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentUOB, numberOfTerms: numberOfTerms)!
+    }
 }
 
 /// EContext Source Payment Information
@@ -395,6 +409,10 @@ extension PaymentInformation {
                 brand = .scb
             case .installmentCiti:
                 brand = .citi
+            case .installmentTTB:
+                brand = .ttb
+            case .installmentUOB:
+                brand = .uob
             case let type:
                 let range = type.rawValue.range(of: PaymentInformation.Installment.paymentMethodTypePrefix)!
                 brand = .other(String(type.rawValue[range.upperBound...]))
@@ -514,6 +532,10 @@ extension __SourcePaymentInformation {
                 return __SourceInstallmentsPayment.installmentSCBPayment(withNumberOfTerms: installment.numberOfTerms)
             case .citi:
                 return __SourceInstallmentsPayment.installmentCitiPayment(withNumberOfTerms: installment.numberOfTerms)
+            case .ttb:
+                return __SourceInstallmentsPayment.installmentTTBPayment(withNumberOfTerms: installment.numberOfTerms)
+            case .uob:
+                return __SourceInstallmentsPayment.installmentUOBPayment(withNumberOfTerms: installment.numberOfTerms)
             case .other(let type) where type.hasPrefix(PaymentInformation.Installment.paymentMethodTypePrefix):
                 return __SourceInstallmentsPayment.init(type: OMSSourceTypeValue(type), numberOfTerms: installment.numberOfTerms)!
             case .other(let type):

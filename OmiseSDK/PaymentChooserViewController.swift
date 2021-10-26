@@ -101,7 +101,7 @@ extension PaymentChooserOption {
         case .trueMoney:
             return [.truemoney]
         case .installmentFirstChoice, .installmentEzypay, .installmentKBank, .installmentKTC,
-             .installmentBBL, .installmentBAY, .installmentSCB, .installmentCiti:
+             .installmentBBL, .installmentBAY, .installmentSCB, .installmentCiti, .installmentTTB, .installmentUOB:
             return [.installment]
         case .billPaymentTescoLotus:
             return [.tescoLotus]
