@@ -32,7 +32,7 @@
 "installment-number-of-terms-choosers.citi.navigation-item.title" = "ธนาคารซิตี้แบงก์";
 
 /* A navigation title for the choosing installment terms screen with the `TTB Bank` selected */
-"installment-number-of-terms-choosers.scb.navigation-item.title" = "ธนาคารทีเอ็มบีธนชาต";
+"installment-number-of-terms-choosers.ttb.navigation-item.title" = "ธนาคารทีเอ็มบีธนชาต";
 
 /* A navigation title for the choosing installment terms screen with the `UOB Bank` selected */
 "installment-number-of-terms-choosers.scb.navigation-item.title" = "ธนาคารยูโอบี";
