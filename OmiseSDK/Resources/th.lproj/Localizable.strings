@@ -35,7 +35,7 @@
 "installment-number-of-terms-choosers.ttb.navigation-item.title" = "ธนาคารทีเอ็มบีธนชาต";
 
 /* A navigation title for the choosing installment terms screen with the `UOB Bank` selected */
-"installment-number-of-terms-choosers.scb.navigation-item.title" = "ธนาคารยูโอบี";
+"installment-number-of-terms-choosers.uob.navigation-item.title" = "ธนาคารยูโอบี";
 
 /* Number of terms option text displayed as a title of the number of terms option cell in number of terms chooser scene */
 "installments.number-of-terms-chooser.number-of-terms-cell.label.text" = "%d เดือน";
