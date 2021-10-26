@@ -3,7 +3,7 @@ import OmiseSDK
 
 @objc(OMSExampleProductDetailViewController)
 class ProductDetailViewController: OMSBaseViewController {
-    private let publicKey = "pkey_5n54bddcaydqys04vcy"
+    private let publicKey = "pkey_test_<#Omise Public Key#>"
     
     private var capability: Capability?
     
