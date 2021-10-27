@@ -159,3 +159,12 @@
 
 /* Class = "UILabel"; text = "PayNow"; ObjectID = "8kj-Ed-2eS"; */
 "8kj-Ed-2eS.text" = "เพย์นาว";
+
+/* Class = "UILabel"; text = "Citibank"; ObjectID = "ZWa-M2-fVM"; */
+"zmw-2Y-WAX.text" = "ธนาคารซิตี้แบงก์";
+
+/* Class = "UILabel"; text = "TMBThanachart Bank"; ObjectID = "NkN-Zz-kdw"; */
+"NkN-Zz-kdw.text" = "ธนาคารทีเอ็มบีธนชาต";
+
+/* Class = "UILabel"; text = "Union Overseas Bank"; ObjectID = "pV0-oM-DuD; */
+"pV0-oM-DuD.text" = "ธนาคารยูโอบี";
