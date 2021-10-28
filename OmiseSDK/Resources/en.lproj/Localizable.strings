@@ -14,7 +14,7 @@
 "installment-number-of-terms-choosers.scb.navigation-item.title" = "Siam Commercial Bank";
 "installment-number-of-terms-choosers.citi.navigation-item.title" = "Citibank";
 "installment-number-of-terms-choosers.ttb.navigation-item.title" = "TMBThanachart Bank";
-"installment-number-of-terms-choosers.uob.navigation-item.title" = "Union Overseas Bank";
+"installment-number-of-terms-choosers.uob.navigation-item.title" = "United Overseas Bank";
 
 /* A navigation title for the choosing installment terms screen with the `Installments Terms` selected */
 "installment-number-of-terms-choosers.default.navigation-item.title" = "Installment terms";
