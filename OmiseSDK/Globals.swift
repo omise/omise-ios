@@ -112,7 +112,7 @@ extension OMSSourceTypeValue {
         case .barcodeAlipay:
             return "barcode"
         case .installmentBAY, .installmentEzypay, .installmentFirstChoice, .installmentBBL,
-             .installmentKTC, .installmentKBank, .installmentSCB:
+             .installmentKTC, .installmentKBank, .installmentSCB, .installmentCiti, .installmentTTB, .installmentUOB:
             return "installment"
         case .eContext:
             return "econtext"

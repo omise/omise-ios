@@ -190,3 +190,12 @@
 
 /* Class = "UILabel"; text = "Pay with Citi Rewards Points"; ObjectID = "zmw-2Y-WAX"; */
 "zmw-2Y-WAX.text" = "Pay with Citi Rewards Points";
+
+/* Class = "UILabel"; text = "Citibank"; ObjectID = "ZWa-M2-fVM"; */
+"zmw-2Y-WAX.text" = "Citibank";
+
+/* Class = "UILabel"; text = "TMBThanachart Bank"; ObjectID = "NkN-Zz-kdw"; */
+"NkN-Zz-kdw.text" = "TMBThanachart Bank";
+
+/* Class = "UILabel"; text = "United Overseas Bank"; ObjectID = "pV0-oM-DuD; */
+"pV0-oM-DuD.text" = "United Overseas Bank";

@@ -144,3 +144,12 @@
 
 /* Class = "UILabel"; text = "PayNow"; ObjectID = "8kj-Ed-2eS"; */
 "8kj-Ed-2eS.text" = "PayNow";
+
+/* Class = "UILabel"; text = "Citibank"; ObjectID = "ZWa-M2-fVM"; */
+"ZWa-M2-fVM.text" = "シティバンク";
+
+/* Class = "UILabel"; text = "TMBThanachart Bank"; ObjectID = "NkN-Zz-kdw"; */
+"NkN-Zz-kdw.text" = "TMBタナチャート銀行";
+
+/* Class = "UILabel"; text = "United Overseas Bank"; ObjectID = "pV0-oM-DuD; */
+"pV0-oM-DuD.text" = "ユナイテッド・オーバーシーズ銀行";

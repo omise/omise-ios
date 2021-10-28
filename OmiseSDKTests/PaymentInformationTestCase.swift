@@ -146,6 +146,63 @@ class PaymentInformationTestCase: XCTestCase {
                 }
                 """, encodedJSONString)
         }
+
+        do {
+            let installment = PaymentInformation.Installment(brand: .citi, numberOfTerms: 6)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
+                                                         amount: 30_00,
+                                                         currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 3000,
+                  "currency" : "THB",
+                  "installment_term" : 6,
+                  "platform_type" : "IOS",
+                  "type" : "installment_citi"
+                }
+                """, encodedJSONString)
+        }
+
+        do {
+            let installment = PaymentInformation.Installment(brand: .ttb, numberOfTerms: 6)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
+                                                         amount: 30_00,
+                                                         currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 3000,
+                  "currency" : "THB",
+                  "installment_term" : 6,
+                  "platform_type" : "IOS",
+                  "type" : "installment_ttb"
+                }
+                """, encodedJSONString)
+        }
+
+        do {
+            let installment = PaymentInformation.Installment(brand: .uob, numberOfTerms: 6)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
+                                                         amount: 30_00,
+                                                         currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 3000,
+                  "currency" : "THB",
+                  "installment_term" : 6,
+                  "platform_type" : "IOS",
+                  "type" : "installment_uob"
+                }
+                """, encodedJSONString)
+        }
     }
     
     func testEncodeInternetBankingSourceParameter() throws {
