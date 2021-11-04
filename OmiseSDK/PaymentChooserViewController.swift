@@ -23,7 +23,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case truemoney
     case citiPoints
     case fpx
-    
+
     static var allCases: [PaymentChooserOption] {
         return [
             .creditCard,
@@ -48,7 +48,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             .fpx
         ]
     }
-    
+
     var description: String {
         switch self {
         case .creditCard:
@@ -123,7 +123,7 @@ extension PaymentChooserOption {
             return [.touchNGo]
         case .internetBankingBAY, .internetBankingKTB, .internetBankingBBL, .internetBankingSCB:
             return [.internetBanking]
-        case .mobileBankingSCB:
+        case .mobileBankingSCB, .mobileBankingKBank:
             return [.mobileBanking]
         case .payNow:
             return [.paynow]
@@ -148,7 +148,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                                     PaymentChooserUI {
     var capability: Capability?
     var flowSession: PaymentCreatorFlowSession?
-    
+
     @objc var showsCreditCardPayment = true {
         didSet {
             updateShowingValues()
@@ -159,28 +159,28 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             updateShowingValues()
         }
     }
-    
+
     @IBOutlet private var paymentMethodNameLables: [UILabel]!
-    
+
     @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
-    
+
     @IBInspectable var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         applyPrimaryColor()
         applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        
+
         #if compiler(>=5.1)
         if #available(iOS 13, *) {
             let appearance = navigationItem.scrollEdgeAppearance ?? UINavigationBarAppearance(idiom: .phone)
@@ -195,10 +195,10 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             navigationItem.scrollEdgeAppearance = appearance
         }
         #endif
-        
+
         updateShowingValues()
     }
-    
+
     // swiftlint:disable function_body_length
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch (segue.identifier, segue.destination) {
@@ -250,30 +250,30 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             controller.flowSession = self.flowSession
         default: break
         }
-        
+
         if let paymentShourceChooserUI = segue.destination as? PaymentChooserUI {
             paymentShourceChooserUI.preferredPrimaryColor = self.preferredPrimaryColor
             paymentShourceChooserUI.preferredSecondaryColor = self.preferredSecondaryColor
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
-        
+
         if let cell = cell as? PaymentOptionTableViewCell {
             cell.separatorView.backgroundColor = currentSecondaryColor
         }
         cell.accessoryView?.tintColor = currentSecondaryColor
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
         let payment: PaymentInformation
-        
+
         let selectedType = element(forUIIndexPath: indexPath)
-        
+
         os_log("Payment Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedType.description)
         switch selectedType {
         case .alipay:
@@ -301,20 +301,20 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         default:
             return
         }
-        
+
         let oldAccessoryView = cell?.accessoryView
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
         loadingIndicator.color = currentSecondaryColor
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
-        
+
         flowSession?.requestCreateSource(payment) { _ in
             cell?.accessoryView = oldAccessoryView
             self.view.isUserInteractionEnabled = true
         }
     }
-    
+
     override func staticIndexPath(forValue value: PaymentChooserOption) -> IndexPath {
         switch value {
         case .creditCard:
@@ -360,11 +360,11 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
 
         }
     }
-    
+
     func applyPaymentMethods(from capability: Capability) {
         self.capability = capability
         showsCreditCardPayment = capability.creditCardBackend != nil
-        
+
         // swiftlint:disable closure_body_length
         allowedPaymentMethods = capability.supportedBackends.compactMap {
             switch $0.payment {
@@ -406,10 +406,10 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return nil
             }
         }
-        
+
         updateShowingValues()
     }
-    
+
     private func loadCapabilityData() {
         flowSession?.client?.capabilityDataWithCompletionHandler { (result) in
             switch result {
@@ -420,19 +420,19 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             }
         }
     }
-    
+
     private func applyPrimaryColor() {
         guard isViewLoaded else {
             return
         }
-        
+
         paymentMethodNameLables.forEach {
             $0.textColor = currentPrimaryColor
         }
     }
-    
+
     private func applySecondaryColor() {}
-    
+
     private func updateShowingValues() {
         var paymentMethodsToShow: [PaymentChooserOption] = allowedPaymentMethods.reduce(into: []) { (result, sourceType) in
             let paymentOptions = PaymentChooserOption.paymentOptions(for: sourceType)
@@ -440,19 +440,19 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 result.append(paymentOption)
             }
         }
-        
+
         if showsCreditCardPayment {
             paymentMethodsToShow.insert(.creditCard, at: 0)
         }
-        
+
         showingValues = paymentMethodsToShow
-        
+
         os_log("Payment Chooser: Showing options - %{private}@",
                log: uiLogObject,
                type: .info,
                showingValues.map { $0.description }.joined(separator: ", "))
     }
-    
+
     @IBAction private func requestToClose(_ sender: Any) {
         flowSession?.requestToCancel()
     }
