@@ -596,7 +596,7 @@ extension PaymentCreatorController {
 
     public static let mobileBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
         .mobileBankingSCB,
-        .mobileBankingKBank,
+        .mobileBankingKBank
     ]
 }
 
