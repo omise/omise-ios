@@ -261,7 +261,7 @@
         "SEK",
         "DKK",
         "NOK",
-        "NZD", 
+        "NZD",
         "THB",
         "HKD",
         "CNY"
@@ -332,6 +332,15 @@
       "card_brands": null,
       "installment_terms": null,
       "banks": []
+    },
+    {
+      "object": "payment_method",
+      "name": "mobile_banking_kbank",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null
     }
   ],
   "zero_interest_installments": false
