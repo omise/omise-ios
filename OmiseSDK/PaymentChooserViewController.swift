@@ -123,7 +123,7 @@ extension PaymentChooserOption {
             return [.touchNGo]
         case .internetBankingBAY, .internetBankingKTB, .internetBankingBBL, .internetBankingSCB:
             return [.internetBanking]
-        case .mobileBankingSCB:
+        case .mobileBankingSCB, .mobileBankingOCBCPAO:
             return [.mobileBanking]
         case .payNow:
             return [.paynow]

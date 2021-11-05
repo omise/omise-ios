@@ -315,7 +315,10 @@ public class __SourceMobileBankingPayment: __SourcePaymentInformation {
 
     /// Payment Information for a SCB Mobile Banking Payment
     public static let scbMobileBankingPayment = __SourceMobileBankingPayment(type: OMSSourceTypeValue.mobileBankingSCB)!
-
+    
+    /// Payment Information for a OCBC PAO Mobile Banking Payment
+        public static let ocbcPaoMobileBankingPayment = __SourceMobileBankingPayment(type: OMSSourceTypeValue.mobileBankingOCBCPAO)!
+    
     /// Create an Mobile Banking payment with the given source type value
     ///
     /// - Parameter type: Source type of the source to be created
@@ -565,6 +568,8 @@ extension __SourcePaymentInformation {
             switch bank {
             case .scb:
                 return __SourceMobileBankingPayment.scbMobileBankingPayment
+            case .ocbcPao:
+                return __SourceMobileBankingPayment.ocbcPaoMobileBankingPayment
             case .other(let type):
                 return __CustomSourcePayment(customType: type, parameters: [:])
             }

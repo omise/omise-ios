@@ -298,6 +298,23 @@ class ModelTestCase: XCTestCase {
             XCTFail("Cannot decode the source \(error)")
         }
     }
+    
+    func testDecodeMobileBankingOCBCPAOSource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_mobile_banking/ocbcPao")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_test_5pqcjr6tu4xvqut5nh5", source.id)
+            XCTAssertEqual(Currency.sgd, source.currency)
+            XCTAssertEqual(1000000, source.amount)
+            XCTAssertEqual(PaymentInformation.mobileBanking(.ocbcPao), source.paymentInformation)
+            XCTAssertEqual("app_redirect", source.flow.rawValue)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
 
     func testDecodeAlipayCNSource() throws {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)

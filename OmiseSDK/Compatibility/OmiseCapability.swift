@@ -87,8 +87,13 @@ class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
     static let eContextSourceBackendPayment =
     __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.eContext)
     
-    static let mobileBankingSourceBackendPayment =
-        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.mobileBankingSCB)
+//    static let mobileBankingSourceBackendPayment =
+//        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.mobileBankingSCB)
+    static func makeMobileBankingSourceBackendPayment(
+        bank: PaymentInformation.MobileBanking
+        ) -> __OmiseCapabilitySourceBackendPayment {
+        return __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue(bank.type))
+    }
 
     static let FPXSourceBackendPayment =
         __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.fpx)
@@ -156,8 +161,8 @@ extension __OmiseCapabilityBackendPayment {
             return __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue(points.type))
         case .eContext:
             return __OmiseCapabilitySourceBackendPayment.eContextSourceBackendPayment
-        case .mobileBanking:
-            return __OmiseCapabilitySourceBackendPayment.mobileBankingSourceBackendPayment
+        case .mobileBanking(let bank):
+            return __OmiseCapabilitySourceBackendPayment.makeMobileBankingSourceBackendPayment(bank: bank)
         case .fpx:
             return __OmiseCapabilitySourceBackendPayment.FPXSourceBackendPayment
         case .unknownSource(let type, let configurations):
