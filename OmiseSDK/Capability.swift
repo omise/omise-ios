@@ -3,17 +3,17 @@ import Foundation
 public struct Capability: Object {
     public let location: String
     public let object: String
-    
+
     public let supportedBanks: Set<String>
-    
+
     public let supportedBackends: [Backend]
-    
+
     private let backends: [Capability.Backend.BackendType: Backend]
-    
+
     public var creditCardBackend: Capability.Backend? {
         return backends[.card]
     }
-    
+
     public subscript(type: OMSSourceTypeValue) -> Capability.Backend? {
         return backends[.source(type)]
     }
@@ -25,13 +25,13 @@ extension Capability {
             let paymentSourceType = OMSSourceTypeValue(payment.sourceType)
             return capability[paymentSourceType]
         }
-        
+
         guard let backend = backend(from: lhs, for: rhs.paymentInformation) else {
             return false
         }
-        
+
         let isValidValue = backend.supportedCurrencies.contains(rhs.currency)
-        
+
         let isPaymentValid: Bool
         switch backend.payment {
         case .installment(_, availableNumberOfTerms: let availableNumberofTerms):
@@ -43,7 +43,7 @@ extension Capability {
         default:
             isPaymentValid = true
         }
-        
+
         return isValidValue && isPaymentValid
     }
 }
@@ -144,32 +144,32 @@ extension Capability.Backend.Payment {
 extension Capability {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
+
         location = try container.decode(String.self, forKey: .location)
         object = try container.decode(String.self, forKey: .object)
-        
+
         supportedBanks = try container.decode(Set<String>.self, forKey: .supportedBanks)
-        
+
         var backendsContainer = try container.nestedUnkeyedContainer(forKey: .paymentBackends)
-        
+
         var backends: [Capability.Backend] = []
         while !backendsContainer.isAtEnd {
             backends.append(try backendsContainer.decode(Capability.Backend.self))
         }
         self.supportedBackends = backends
-        
+
         let backendTypes = backends.map { Capability.Backend.BackendType(payment: $0.payment) }
         self.backends = Dictionary(uniqueKeysWithValues: zip(backendTypes, backends))
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        
+
         try container.encode(location, forKey: .location)
         try container.encode(object, forKey: .object)
-        
+
         try container.encode(supportedBanks, forKey: .supportedBanks)
-        
+
         var backendsContainer = container.nestedUnkeyedContainer(forKey: .paymentBackends)
         try supportedBackends.forEach { backend in
             try backendsContainer.encode(backend)
@@ -181,7 +181,7 @@ extension Capability.Backend {
     // swiftlint:disable function_body_length
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
+
         let type = try container.decode(BackendType.self, forKey: .name)
         supportedCurrencies = try container.decode(Set<Currency>.self, forKey: .supportedCurrencies)
 
@@ -234,12 +234,12 @@ extension Capability.Backend {
 
         banks = try? container.decode([Bank].self, forKey: .banks)
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        
+
         try container.encode(BackendType(payment: payment), forKey: .name)
-        
+
         switch payment {
         case .card(let brands):
             try container.encode(brands, forKey: .cardBrands)
@@ -262,7 +262,7 @@ extension Capability.Backend {
     fileprivate enum BackendType: Codable, Hashable {
         case card
         case source(OMSSourceTypeValue)
-        
+
         init(from decoder: Decoder) throws {
             let container = try decoder.singleValueContainer()
             switch try container.decode(String.self) {
@@ -272,7 +272,7 @@ extension Capability.Backend {
                 self = .source(OMSSourceTypeValue(value))
             }
         }
-        
+
         func encode(to encoder: Encoder) throws {
             var container = encoder.singleValueContainer()
             let type: String
@@ -285,7 +285,7 @@ extension Capability.Backend {
 
             try container.encode(type)
         }
-        
+
         init(payment: Capability.Backend.Payment) {
             switch payment {
             case .card:
@@ -328,7 +328,7 @@ extension Capability.Backend {
                 self = .source(.fpx)
             }
         }
-        
+
         var type: String {
             switch self {
             case .card:

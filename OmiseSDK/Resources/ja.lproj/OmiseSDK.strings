@@ -53,7 +53,7 @@
 "GZJ-TR-erg.title" = "コンビニ";
 
 /* Class = "UILabel"; text = "Siam Commercial Bank"; ObjectID = "iiE-Ff-NCh"; */
-"iiE-Ff-NCh.text" = "サイアム・コマーシャル銀行 ";
+"iiE-Ff-NCh.text" = "サイアム・コマーシャル銀行";
 
 /* Class = "UINavigationItem"; title = "Credit Card"; ObjectID = "jOQ-fG-jaE"; */
 "jOQ-fG-jaE.title" = "クレジットカード";
@@ -112,8 +112,14 @@
 /* Class = "UILabel"; text = "3-4 digit number on the back of your card"; ObjectID = "yfq-Iv-IBe"; */
 "yfq-Iv-IBe.text" = "クレジットカード裏面に記載された3-4桁の番号";
 
-/* Class = "UILabel"; text = "Kasikorn"; ObjectID = "yHg-il-ZhG"; */
-"yHg-il-ZhG.text" = "カシコン";
+/* Class = "UILabel"; text = "Kasikorn Bank"; ObjectID = "yHg-il-ZhG"; */
+"yHg-il-ZhG.text" = "カシコン銀行";
+
+/* Class = "UILabel"; text = "Kasikorn Bank"; ObjectID = "bDJ-ih-QYr"; */
+"bDJ-ih-QYr.text" = "カシコン銀行";
+
+/* Class = "UILabel"; text = "Siam Commercial Bank"; ObjectID = "EQF-26-ssb"; */
+"EQF-26-ssb.text" = "サイアム・コマーシャル銀行";
 
 /* Class = "UILabel"; text = "Installments"; ObjectID = "zli-mo-sUQ"; */
 "zli-mo-sUQ.text" = "分割払い";

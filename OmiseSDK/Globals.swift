@@ -14,17 +14,17 @@ extension Optional where Wrapped == String {
 
 struct JSONCodingKeys: CodingKey {
     var stringValue: String
-    
+
     init?(stringValue: String) {
         self.init(key: stringValue)
     }
-    
+
     init(key: String) {
         self.stringValue = key
     }
-    
+
     var intValue: Int?
-    
+
     init?(intValue: Int) {
         self.init(stringValue: "\(intValue)")
         self.intValue = intValue
@@ -40,7 +40,7 @@ enum CombineCodingKeys<Left: CodingKey, Right: CodingKey>: CodingKey {
             return right.stringValue
         }
     }
-    
+
     var intValue: Int? {
         switch self {
         case .left(let left):
@@ -49,7 +49,7 @@ enum CombineCodingKeys<Left: CodingKey, Right: CodingKey>: CodingKey {
             return right.intValue
         }
     }
-    
+
     init?(stringValue: String) {
         if let left = Left(stringValue: stringValue) {
             self = .left(left)
@@ -59,7 +59,7 @@ enum CombineCodingKeys<Left: CodingKey, Right: CodingKey>: CodingKey {
             return nil
         }
     }
-    
+
     init?(intValue: Int) {
         if let left = Left(intValue: intValue) {
             self = .left(left)
@@ -69,30 +69,30 @@ enum CombineCodingKeys<Left: CodingKey, Right: CodingKey>: CodingKey {
             return nil
         }
     }
-    
+
     case left(Left)
     case right(Right)
 }
 
 struct SkippingKeyCodingKeys<Key: CodingKey>: CodingKey {
     let stringValue: String
-    
+
     init?(stringValue: String) {
         guard Key(stringValue: stringValue) == nil else {
             return nil
         }
-        
+
         self.stringValue = stringValue
         self.intValue = Int(stringValue)
     }
-    
+
     let intValue: Int?
-    
+
     init?(intValue: Int) {
         guard Key(intValue: intValue) == nil else {
             return nil
         }
-        
+
         self.intValue = intValue
         self.stringValue = String(intValue)
     }
@@ -103,7 +103,7 @@ extension OMSSourceTypeValue {
         switch self {
         case .internetBankingBAY, .internetBankingKTB, .internetBankingSCB, .internetBankingBBL:
             return "internet_banking"
-        case .mobileBankingSCB, .mobileBankingOCBCPAO:
+        case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingOCBCPAO:
             return "mobile_banking"
         case .alipay:
             return "alipay"
@@ -156,29 +156,29 @@ extension KeyedDecodingContainerProtocol {
         let container = try self.nestedContainer(keyedBy: JSONCodingKeys.self, forKey: key)
         return try container.decodeJSONDictionary()
     }
-    
+
     func decodeIfPresent(_ type: [String: Any].Type, forKey key: Key) throws -> [String: Any]? {
         guard contains(key) else {
             return nil
         }
         return try decode(type, forKey: key)
     }
-    
+
     func decode(_ type: [Any].Type, forKey key: Key) throws -> [Any] {
         var container = try self.nestedUnkeyedContainer(forKey: key)
         return try container.decodeJSONArray()
     }
-    
+
     func decodeIfPresent(_ type: [Any].Type, forKey key: Key) throws -> [Any]? {
         guard contains(key) else {
             return nil
         }
         return try decode(type, forKey: key)
     }
-    
+
     func decodeJSONDictionary() throws -> [String: Any] {
         var dictionary = [String: Any]()
-        
+
         for key in allKeys {
             if let boolValue = try? decode(Bool.self, forKey: key) {
                 dictionary[key.stringValue] = boolValue
@@ -218,12 +218,12 @@ extension UnkeyedDecodingContainer {
         }
         return array
     }
-    
+
     private mutating func decodeArrayElement() throws -> [Any] {
         var nestedContainer = try self.nestedUnkeyedContainer()
         return try nestedContainer.decodeJSONArray()
     }
-    
+
     mutating func decode(_ type: [String: Any].Type) throws -> [String: Any] {
         let nestedContainer = try self.nestedContainer(keyedBy: JSONCodingKeys.self)
         return try nestedContainer.decodeJSONDictionary()
@@ -269,18 +269,18 @@ extension KeyedEncodingContainerProtocol {
         var container = self.nestedContainer(keyedBy: JSONCodingKeys.self, forKey: key)
         try container.encodeJSONDictionary(value)
     }
-    
+
     mutating func encodeIfPresent(_ value: [String: Any]?, forKey key: Key) throws {
         if let value = value {
             try encode(value, forKey: key)
         }
     }
-    
+
     mutating func encode(_ value: [Any], forKey key: Key) throws {
         var container = self.nestedUnkeyedContainer(forKey: key)
         try container.encodeJSONArray(value)
     }
-    
+
     mutating func encodeIfPresent(_ value: [Any]?, forKey key: Key) throws {
         if let value = value {
             try encode(value, forKey: key)
@@ -313,12 +313,12 @@ extension UnkeyedEncodingContainer {
             }
         }
     }
-    
+
     private mutating func encodeArrayElement(_ value: [Any]) throws {
         var nestedContainer = self.nestedUnkeyedContainer()
         try nestedContainer.encodeJSONArray(value)
     }
-    
+
     mutating func encodeJSONDictionary(_ value: [String: Any]) throws {
         var nestedContainer = self.nestedContainer(keyedBy: JSONCodingKeys.self)
         try nestedContainer.encodeJSONDictionary(value)
@@ -452,7 +452,7 @@ extension OmiseError {
                         value: "The currency is invalid",
                         comment: "The displaying message showing in the error banner an `Bad request` error with `invalid-currency` from the backend has occurred"
                     )
-                    
+
                 case .emptyName?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.empty-name.message",
@@ -461,7 +461,7 @@ extension OmiseError {
                         value: "The customer name is empty",
                         comment: "The displaying message showing in the error banner an `Bad request` error with `empty-name` from the backend has occurred"
                     )
-                    
+
                 case .nameIsTooLong(maximum: let maximumLength)?:
                     if let maximumLength = maximumLength {
                         let preferredErrorDescriptionFormat = NSLocalizedString(
@@ -489,7 +489,7 @@ extension OmiseError {
                         value: "The customer name is invalid",
                         comment: "The displaying message showing in the error banner an `Bad request` error with `invalid-name` from the backend has occurred"
                     )
-                    
+
                 case .invalidEmail?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.invalid-email.message",
@@ -498,7 +498,7 @@ extension OmiseError {
                         value: "The customer email is invalid",
                         comment: "The displaying message showing in the error banner an `Bad request` error with `invalid-email` from the backend has occurred"
                     )
-                    
+
                 case .invalidPhoneNumber?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.invalid-phone-number.message",
@@ -507,7 +507,7 @@ extension OmiseError {
                         value: "The customer phone number is invalid",
                         comment: "The displaying message showing in the error banner an `Bad request` error with `invalid-phone-number` from the backend has occurred"
                     )
-                    
+
                 case .typeNotSupported?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.type-not-supported.message",
@@ -516,7 +516,7 @@ extension OmiseError {
                         value: "The source type is not supported by this account",
                         comment: "The displaying message showing in the error banner an `Bad request` error with `type-not-supported` from the backend has occurred"
                     )
-                    
+
                 case .currencyNotSupported?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.currency-not-supported.message",
@@ -561,7 +561,7 @@ extension OmiseError {
             )
         }
     }
-    
+
     var bannerErrorRecoverySuggestion: String {
         switch self {
         case .api(code: let code, message: _, location: _):
@@ -663,7 +663,7 @@ extension OmiseError {
                         value: "Please choose another currency or contact customer support",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `invalid-currency` from the backend has occurred"
                     )
-                    
+
                 case .emptyName?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.empty-name.recovery-suggestion",
@@ -672,7 +672,7 @@ extension OmiseError {
                         value: "Please fill in the customer name",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `empty-name` from the backend has occurred"
                     )
-                    
+
                 case .nameIsTooLong(maximum: _)?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.name-is-too-long.recovery-suggestion",
@@ -689,7 +689,7 @@ extension OmiseError {
                         value: "Please review the customer name",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `invalid-name` from the backend has occurred"
                     )
-                    
+
                 case .invalidEmail?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.invalid-email.recovery-suggestion",
@@ -698,7 +698,7 @@ extension OmiseError {
                         value: "Please review the email",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `invalid-email` from the backend has occurred"
                     )
-                    
+
                 case .invalidPhoneNumber?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.invalid-phone-number.recovery-suggestion",
@@ -707,7 +707,7 @@ extension OmiseError {
                         value: "Please review the phone number",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `invalid-phone-number` from the backend has occurred"
                     )
-                    
+
                 case .typeNotSupported?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.type-not-supported.recovery-suggestion",
@@ -716,7 +716,7 @@ extension OmiseError {
                         value: "Please contact customer support",
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `type-not-supported` from the backend has occurred"
                     )
-                    
+
                 case .currencyNotSupported?:
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.currency-not-supported.recovery-suggestion",

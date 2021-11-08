@@ -16,13 +16,13 @@ internal class PaymentCreatorFlowSession {
     var client: Client?
     var paymentAmount: Int64?
     var paymentCurrency: Currency?
-    
+
     weak var delegate: PaymentCreatorFlowSessionDelegate?
-    
+
     func validateRequiredProperties() -> Bool {
         let waringMessageTitle: String
         let waringMessageMessage: String
-        
+
         if self.client == nil {
             os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.client ?? "")
             waringMessageTitle = "Missing public key information."
@@ -38,19 +38,19 @@ internal class PaymentCreatorFlowSession {
         } else {
             return true
         }
-        
+
         assertionFailure("\(waringMessageTitle) \(waringMessageMessage)")
         return false
     }
-    
+
     func requestCreateSource(_ paymentInformation: PaymentInformation, completionHandler: ((RequestResult<Source>) -> Void)?) {
         guard validateRequiredProperties(), let client = self.client,
             let amount = paymentAmount, let currency = paymentCurrency else {
                 return
         }
-        
+
         os_log("Request to create a new source", log: uiLogObject, type: .info)
-        
+
         delegate?.paymentCreatorFlowSessionWillCreateSource(self)
         client.send(Request<Source>(paymentInformation: paymentInformation, amount: amount, currency: currency)) { (result) in
             defer {
@@ -58,7 +58,7 @@ internal class PaymentCreatorFlowSession {
                     completionHandler?(result)
                 }
             }
-            
+
             switch result {
             case .success(let source):
                 self.delegate?.paymentCreatorFlowSession(self, didCreatedSource: source)
@@ -67,7 +67,7 @@ internal class PaymentCreatorFlowSession {
             }
         }
     }
-    
+
     func requestToCancel() {
         delegate?.paymentCreatorFlowSessionDidCancel(self)
     }
@@ -77,11 +77,11 @@ extension PaymentCreatorFlowSession: CreditCardFormViewControllerDelegate {
     func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
         delegate?.paymentCreatorFlowSession(self, didCreateToken: token)
     }
-    
+
     func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error) {
         delegate?.paymentCreatorFlowSession(self, didFailWithError: error)
     }
-    
+
     func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController) {}
 }
 
@@ -93,7 +93,7 @@ extension PaymentChooserUI {
     var currentPrimaryColor: UIColor {
         return preferredPrimaryColor ?? defaultPaymentChooserUIPrimaryColor
     }
-    
+
     var currentSecondaryColor: UIColor {
         return preferredSecondaryColor ?? defaultPaymentChooserUISecondaryColor
     }
@@ -106,9 +106,9 @@ protocol PaymentFormUIController: AnyObject {
     var gotoPreviousFieldBarButtonItem: UIBarButtonItem! { get }
     var gotoNextFieldBarButtonItem: UIBarButtonItem! { get }
     var doneEditingBarButtonItem: UIBarButtonItem! { get }
-    
+
     var currentEditingTextField: OmiseTextField? { get set }
-    
+
     var contentView: UIScrollView! { get }
 }
 
@@ -122,7 +122,7 @@ extension UIViewController {
             targetController.displayErrorWith(title: title, message: message, animated: animated, sender: sender)
         }
     }
-    
+
     @objc func dismissErrorMessage(animated: Bool, sender: Any?) {
         let targetController = self.targetViewController(
             forAction: #selector(UIViewController.dismissErrorMessage(animated:sender:)),
@@ -137,32 +137,32 @@ extension UIViewController {
 extension PaymentFormUIController where Self: UIViewController {
     func updateInputAccessoryViewWithFirstResponder(_ firstResponder: OmiseTextField) {
         guard formFields.contains(firstResponder) else { return }
-        
+
         currentEditingTextField = firstResponder
         gotoPreviousFieldBarButtonItem.isEnabled = firstResponder !== formFields.first
         gotoNextFieldBarButtonItem.isEnabled = firstResponder !== formFields.last
     }
-    
+
     func gotoPreviousField() {
         guard let currentTextField = currentEditingTextField, let index = formFields.firstIndex(of: currentTextField) else {
             return
         }
-        
+
         let prevIndex = index - 1
         guard prevIndex >= 0 else { return }
         formFields[prevIndex].becomeFirstResponder()
     }
-    
+
     func gotoNextField() {
         guard let currentTextField = currentEditingTextField, let index = formFields.firstIndex(of: currentTextField) else {
             return
         }
-        
+
         let nextIndex = index + 1
         guard nextIndex < formFields.count else { return }
         formFields[nextIndex].becomeFirstResponder()
     }
-    
+
     func doneEditing() {
         view.endEditing(true)
     }
@@ -173,7 +173,7 @@ extension PaymentFormUIController where Self: UIViewController & PaymentChooserU
         guard isViewLoaded else {
             return
         }
-        
+
         formFields.forEach {
             $0.textColor = currentPrimaryColor
         }
@@ -181,12 +181,12 @@ extension PaymentFormUIController where Self: UIViewController & PaymentChooserU
             $0.textColor = currentPrimaryColor
         }
     }
-    
+
     func applySecondaryColor() {
         guard isViewLoaded else {
             return
         }
-        
+
         formFields.forEach {
             $0.borderColor = currentSecondaryColor
             $0.placeholderTextColor = currentSecondaryColor
@@ -195,7 +195,7 @@ extension PaymentFormUIController where Self: UIViewController & PaymentChooserU
 }
 
 extension OMSSourceTypeValue {
-    
+
     var installmentBrand: PaymentInformation.Installment.Brand? {
         switch self {
         case .installmentBAY:
@@ -222,7 +222,7 @@ extension OMSSourceTypeValue {
             return nil
         }
     }
-    
+
     var isInstallmentSource: Bool {
         switch self {
         case .installmentBAY, .installmentEzypay, .installmentFirstChoice, .installmentBBL,
@@ -231,9 +231,9 @@ extension OMSSourceTypeValue {
         default:
             return false
         }
-        
+
     }
-    
+
     var internetBankingSource: PaymentInformation.InternetBanking? {
         switch self {
         case .internetBankingBAY:
@@ -248,7 +248,7 @@ extension OMSSourceTypeValue {
             return nil
         }
     }
-    
+
     var isInternetBankingSource: Bool {
         switch self {
         case .internetBankingBAY, .internetBankingKTB, .internetBankingSCB, .internetBankingBBL:
@@ -264,6 +264,8 @@ extension OMSSourceTypeValue {
             return .scb
         case .mobileBankingOCBCPAO:
             return .ocbcPao
+        case .mobileBankingKBank:
+            return .kbank
         default:
             return nil
         }
@@ -271,7 +273,7 @@ extension OMSSourceTypeValue {
 
     var isMobileBankingSource: Bool {
         switch self {
-        case .mobileBankingSCB, .mobileBankingOCBCPAO:
+        case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingOCBCPAO:
             return true
         default:
             return false

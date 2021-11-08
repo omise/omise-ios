@@ -8,27 +8,27 @@ import Foundation
  */
 @objc(OMSSource) public class __OmiseSource: NSObject {
     private let source: Source
-    
+
     @objc public lazy var object: String = source.object
-    
+
     /// Omise Source ID
     @objc public lazy var sourcdID: String = source.id
-    
+
     /// Omise Source Type value using in the Omise API
     @objc public lazy var type: String = source.paymentInformation.sourceType
-    
+
     /// The payment information of this source describes how the payment is processed
     @objc public lazy var paymentInformation = __SourcePaymentInformation.makeSourcePaymentInformation(from: source.paymentInformation)
-    
+
     /// Processing Flow of this source
     @objc public lazy var flow: String = source.flow.rawValue
-    
+
     /// Payment amount of this Source
     @objc public lazy var amount: Int64 = source.amount
-    
+
     /// Payment currency of this Source
     @objc public lazy var currencyCode: String = source.currency.code
-    
+
     init(source: Source) {
         self.source = source
     }
@@ -39,38 +39,38 @@ import Foundation
 @objcMembers
 public class __SourcePaymentInformation: NSObject {
     public let type: OMSSourceTypeValue
-    
+
     init?(type: OMSSourceTypeValue) {
         self.type = type
     }
-    
+
     /// Payment Information for an Alipay Payment
     public static let alipayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.alipay)!
-    
+
     /// Payment Information for an Alipay+ CN Wallet Payment
     public static let alipayCNPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.alipayCN)!
-    
+
     /// Payment Information for an Alipay+ HK Wallet Payment
     public static let alipayHKPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.alipayHK)!
-    
+
     /// Payment Information for an Alipay+ DANA Wallet Payment
     public static let danaPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.dana)!
-    
+
     /// Payment Information for an Alipay+ GCash Wallet Payment
     public static let gcashPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.gcash)!
-    
+
     /// Payment Information for an Alipay+ KakaoPay Wallet Payment
     public static let kakaoPayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.kakaoPay)!
-    
+
     /// Payment Information for an Alipay+ Touch N Go Wallet Payment
     public static let touchNGoPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.touchNGo)!
-    
+
     /// Payment Information for a Tesco Lotus Bill Payment Payment
     public static let tescoLotusBillPaymentPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.billPaymentTescoLotus)!
-    
+
     /// Payment Information for an PromptPay Payment
     public static let promptPayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.promptPay)!
-    
+
     /// Payment Information for an PayNow Payment
     public static let payNowPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.promptPay)!
 }
@@ -79,7 +79,7 @@ public class __SourcePaymentInformation: NSObject {
 @objc(OMSInternetBankingPaymentInformation)
 @objcMembers
 public class __SourceInternetBankingPayment: __SourcePaymentInformation {
-    
+
     /// Payment Information for a BAY Internet Banking Payment
     public static let bayInternetBankingPayment = __SourceInternetBankingPayment(type: OMSSourceTypeValue.internetBankingBAY)!
     /// Payment Information for a KTB Internet Banking Payment
@@ -88,7 +88,7 @@ public class __SourceInternetBankingPayment: __SourcePaymentInformation {
     public static let scbInternetBankingPayment = __SourceInternetBankingPayment(type: OMSSourceTypeValue.internetBankingSCB)!
     /// Payment Information for a BBL Internet Banking Payment
     public static let bblInternetBankingPayment = __SourceInternetBankingPayment(type: OMSSourceTypeValue.internetBankingBBL)!
-    
+
     /// Create an Internet Banking payment with the given source type value
     ///
     /// - Parameter type: Source type of the source to be created
@@ -111,7 +111,7 @@ public class __SourceBarcodePayment: __SourcePaymentInformation {}
 @objcMembers
 public class __SourceAlipayBarcodePayment: __SourceBarcodePayment {
     let alipayBarcodeInformation: PaymentInformation.Barcode.AlipayBarcode
-    
+
     /// Create an Alipay Barcode payment with the given information
     ///
     /// - Parameters:
@@ -121,17 +121,17 @@ public class __SourceAlipayBarcodePayment: __SourceBarcodePayment {
     ///   - terminalID: ID of the terminal which creates this charge
     public init(barcode: String, storeID: String?, storeName: String?, terminalID: String?) {
         let storeInformation: PaymentInformation.Barcode.AlipayBarcode.StoreInformation?
-        
+
         if let storeID = storeID, let storeName = storeName {
             storeInformation = PaymentInformation.Barcode.AlipayBarcode.StoreInformation(storeID: storeID, storeName: storeName)
         } else {
             storeInformation = nil
         }
-        
+
         self.alipayBarcodeInformation = PaymentInformation.Barcode.AlipayBarcode(
             barcode: barcode, storeInformation: storeInformation, terminalID: terminalID
         )
-        
+
         super.init(type: OMSSourceTypeValue.barcodeAlipay)!
     }
 }
@@ -141,7 +141,7 @@ public class __SourceAlipayBarcodePayment: __SourceBarcodePayment {
 @objcMembers
 public class __SourceCustomBarcodePayment: __SourceBarcodePayment {
     let parameters: [String: Any]
-    
+
     /// Create a Barcode payment with the given source type and information
     ///
     /// - Parameters:
@@ -159,7 +159,7 @@ public class __SourceCustomBarcodePayment: __SourceBarcodePayment {
 public class __SourceInstallmentsPayment: __SourcePaymentInformation {
     /// Number of terms of the installment plan
     public let numberOfTerms: Int
-    
+
     /// Create an Installment paymment with the given source type and number of terms
     ///
     /// - Parameters:
@@ -172,7 +172,7 @@ public class __SourceInstallmentsPayment: __SourcePaymentInformation {
         self.numberOfTerms = numberOfTerms
         super.init(type: type)
     }
-    
+
     /// Create a BAY Installment payment with the given number of terms
     ///
     /// - Parameter numberOfTerms: Number of plan of the installment plan
@@ -194,7 +194,7 @@ public class __SourceInstallmentsPayment: __SourcePaymentInformation {
     public static func installmentBBLPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
         return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentBBL, numberOfTerms: numberOfTerms)!
     }
-    
+
     /// Create a Ezypay Installment payment with the given number of terms
     ///
     /// - Parameter numberOfTerms: Number of plan of the installment plan
@@ -256,7 +256,7 @@ public class __SourceEContextPayment: __SourcePaymentInformation {
     public let email: String
     /// Phone number of the payer
     public let phoneNumber: String
-    
+
     /// Create an E-Context payment with the given payer information
     ///
     /// - Parameters:
@@ -277,7 +277,7 @@ public class __SourceEContextPayment: __SourcePaymentInformation {
 public class __SourceTrueMoneyPayment: __SourcePaymentInformation {
     /// The customers phone number. Contains only digits and has 10 or 11 characters
     public let phoneNumber: String
-    
+
     /// Creates a new TrueMoney source with the given customer information
     ///
     /// - Parameters:
@@ -292,10 +292,10 @@ public class __SourceTrueMoneyPayment: __SourcePaymentInformation {
 @objc(OMSPointsPaymentInformation)
 @objcMembers
 public class __SourcePointsPayment: __SourcePaymentInformation {
-    
+
     /// Payment Information for a Citi Points Payment
     public static let citiPoints = __SourcePointsPayment(type: OMSSourceTypeValue.pointsCiti)!
-    
+
     /// Create a Points payment with the given source type value
     ///
     /// - Parameter type: Source type of the source to be created
@@ -318,7 +318,10 @@ public class __SourceMobileBankingPayment: __SourcePaymentInformation {
     
     /// Payment Information for a OCBC PAO Mobile Banking Payment
     public static let ocbcPaoMobileBankingPayment = __SourceMobileBankingPayment(type: OMSSourceTypeValue.mobileBankingOCBCPAO)!
-    
+
+    /// Payment Information for a KBank PayPlus Mobile Banking Payment
+    public static let kbankMobileBankingPayment = __SourceMobileBankingPayment(type: OMSSourceTypeValue.mobileBankingKBank)!
+
     /// Create an Mobile Banking payment with the given source type value
     ///
     /// - Parameter type: Source type of the source to be created
@@ -359,7 +362,7 @@ public class __SourceFPXPayment: __SourcePaymentInformation {
 public class __CustomSourcePayment: __SourcePaymentInformation {
     /// Parameter of the payment source in a JSON data type
     public let parameters: [String: Any]
-    
+
     /// Create a payment source with the given type and source parameter
     ///
     /// - Parameters:
@@ -489,7 +492,7 @@ extension __SourcePaymentInformation {
             return __SourcePaymentInformation.kakaoPayPayment
         case .touchNGo:
             return __SourcePaymentInformation.touchNGoPayment
-            
+
         case .barcode(PaymentInformation.Barcode.alipay(let alipayInformation)):
             return __SourceAlipayBarcodePayment(barcode: alipayInformation.barcode,
                                                 storeID: alipayInformation.storeID,
@@ -497,7 +500,7 @@ extension __SourcePaymentInformation {
                                                 terminalID: alipayInformation.terminalID)
         case .barcode(PaymentInformation.Barcode.other(let type, parameters: let parameters)):
             return __SourceCustomBarcodePayment(customType: type, parameters: parameters)
-            
+
         case .billPayment(PaymentInformation.BillPayment.tescoLotus):
             return __SourcePaymentInformation.tescoLotusBillPaymentPayment
         case .billPayment(PaymentInformation.BillPayment.other(let type)):
@@ -546,16 +549,16 @@ extension __SourcePaymentInformation {
             }
         case .eContext(let eContext):
             return __SourceEContextPayment(name: eContext.name, email: eContext.email, phoneNumber: eContext.phoneNumber)
-        
+
         case .promptpay:
             return __SourcePaymentInformation.promptPayPayment
-            
+
         case .paynow:
             return __SourcePaymentInformation.payNowPayment
-            
+
         case .truemoney(let trueMoney):
             return __SourceTrueMoneyPayment(phoneNumber: trueMoney.phoneNumber)
-            
+
         case .points(let points):
             switch points {
             case .citiPoints:
@@ -570,6 +573,8 @@ extension __SourcePaymentInformation {
                 return __SourceMobileBankingPayment.scbMobileBankingPayment
             case .ocbcPao:
                 return __SourceMobileBankingPayment.ocbcPaoMobileBankingPayment
+            case .kbank:
+                return __SourceMobileBankingPayment.kbankMobileBankingPayment
             case .other(let type):
                 return __CustomSourcePayment(customType: type, parameters: [:])
             }
