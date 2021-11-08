@@ -225,6 +225,7 @@ public enum PaymentInformation: Codable, Equatable {
         public static let paymentMethodTypePrefix: String = "mobile_banking_"
 
         case scb
+        case ocbcPao
         case kbank
         case other(String)
     }
@@ -926,7 +927,7 @@ extension PaymentInformation.Points {
 extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertible {
     public typealias AllCases = [PaymentInformation.MobileBanking]
     public static var allCases: PaymentInformation.MobileBanking.AllCases = [
-        .scb, .kbank
+        .scb, .kbank, .ocbcPao
     ]
 
     /// Omise Source Type value using in the Omise API
@@ -934,6 +935,8 @@ extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertibl
         switch self {
         case .scb:
             return OMSSourceTypeValue.mobileBankingSCB.rawValue
+        case .ocbcPao:
+            return OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue
         case .kbank:
             return OMSSourceTypeValue.mobileBankingKBank.rawValue
         case .other(let value):
@@ -945,6 +948,8 @@ extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertibl
         switch self {
         case .scb:
             return "SCB"
+        case .ocbcPao:
+            return "OCBC PAO"
         case .kbank:
             return "KBank"
         case .other(let value):
@@ -968,6 +973,8 @@ extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertibl
         switch type[typePrefixRange.upperBound...] {
         case "scb":
             self = .scb
+        case "ocbc_pao":
+            self = .ocbcPao
         case "kbank":
             self = .kbank
         case let value:

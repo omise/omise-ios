@@ -319,6 +319,26 @@ class PaymentInformationTestCase: XCTestCase {
         }
     }
 
+    func testEncodeMobileBankingOCBCPAOSourceParameter() throws {
+        let encoder = PaymentInformationTestCase.makeJSONEncoder()
+
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .mobileBanking(.ocbcPao),
+                                                         amount: 10_000_00,
+                                                         currency: .sgd)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "currency" : "SGD",
+                  "platform_type" : "IOS",
+                  "type" : "mobile_banking_ocbc_pao"
+                }
+                """, encodedJSONString)
+        }
+    }
     func testEncodeBarcodeAlipaySourceParameter() throws {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 

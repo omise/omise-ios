@@ -341,6 +341,16 @@
       ],
       "card_brands": null,
       "installment_terms": null
+    },
+    {
+      "object": "payment_method",
+      "name": "mobile_banking_ocbc_pao",
+      "currencies": [
+          "SGD"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "banks": []
     }
   ],
   "zero_interest_installments": false

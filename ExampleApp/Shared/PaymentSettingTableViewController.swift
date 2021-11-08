@@ -112,6 +112,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var truemoneyPaymentCell: UITableViewCell!
     @IBOutlet private var pointsCitiCell: UITableViewCell!
     @IBOutlet private var fpxCell: UITableViewCell!
+    @IBOutlet private var mobileBankingOCBCPAOPaymentCell: UITableViewCell!
 
     @IBOutlet private var useCapabilityAPIValuesCell: UITableViewCell!
     @IBOutlet private var useSpecifiedValuesCell: UITableViewCell!
@@ -301,6 +302,8 @@ extension PaymentSettingTableViewController {
             return .eContext
         case mobileBankingSCBPaymentCell:
             return .mobileBankingSCB
+        case mobileBankingOCBCPAOPaymentCell:
+            return .mobileBankingOCBCPAO
         case mobileBankingKBankPaymentCell:
             return .mobileBankingKBank
         case promptpayPaymentCell:
@@ -367,6 +370,8 @@ extension PaymentSettingTableViewController {
             return installmentUOBPaymentCell
         case .mobileBankingSCB:
             return mobileBankingSCBPaymentCell
+        case .mobileBankingOCBCPAO:
+            return mobileBankingOCBCPAOPaymentCell
         case .mobileBankingKBank:
             return mobileBankingKBankPaymentCell
         case .eContext:

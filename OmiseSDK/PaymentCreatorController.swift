@@ -557,7 +557,8 @@ extension PaymentCreatorController {
     ]
 
     public static let singaporeDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
-        .payNow
+        .payNow,
+        .mobileBankingOCBCPAO
     ]
 
     public static let malaysiaDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
