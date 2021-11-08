@@ -121,8 +121,14 @@
 /* Class = "UILabel"; text = "3-4 digit number on the back of your card"; ObjectID = "yfq-Iv-IBe"; */
 "yfq-Iv-IBe.text" = "หมายเลข CVV ด้านหลังบัตร";
 
-/* Class = "UILabel"; text = "Kasikorn"; ObjectID = "yHg-il-ZhG"; */
+/* Class = "UILabel"; text = "Siam Commercial Bank"; ObjectID = "EQF-26-ssb"; */
+"EQF-26-ssb.text" = "ธนาคารไทยพาณิชย์";
+
+/* Class = "UILabel"; text = "Kasikorn Bank"; ObjectID = "yHg-il-ZhG"; */
 "yHg-il-ZhG.text" = "ธนาคารกสิกรไทย";
+
+/* Class = "UILabel"; text = "Kasikorn Bank"; ObjectID = "bDJ-ih-QYr"; */
+"bDJ-ih-QYr.text" = "ธนาคารกสิกรไทย";
 
 /* Class = "UILabel"; text = "-"; ObjectID = "yQ7-lv-7H1"; */
 "yQ7-lv-7H1.text" = "-";

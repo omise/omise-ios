@@ -6,6 +6,7 @@ OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInternetBankingKTB = @"inter
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInternetBankingSCB = @"internet_banking_scb";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInternetBankingBBL = @"internet_banking_bbl";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingSCB = @"mobile_banking_scb";
+OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingKBank = @"mobile_banking_kbank";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueAlipay = @"alipay";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueAlipayCN = @"alipay_cn";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueAlipayHK = @"alipay_hk";
@@ -31,7 +32,6 @@ OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePayNow = @"paynow";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueTrueMoney = @"truemoney";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePointsCiti = @"points_citi";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueFpx = @"fpx";
-
 
 OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeTHB = @"THB";
 OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeJPY = @"JPY";

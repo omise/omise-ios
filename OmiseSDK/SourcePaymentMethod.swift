@@ -19,7 +19,7 @@ public enum PaymentInformation: Codable, Equatable {
     /// The code of the bank for the Internet Bankning Payment
     public enum InternetBanking: PaymentMethod {
         public static let paymentMethodTypePrefix: String = "internet_banking_"
-        
+
         case bay
         case ktb
         case scb
@@ -28,45 +28,45 @@ public enum PaymentInformation: Codable, Equatable {
     }
     /// Internet Banking Payment Source
     case internetBanking(InternetBanking)
-    
+
     /// Online Alipay Payment Source
     case alipay
-    
+
     /// Online Alipay + China Wallet Payment Source
     case alipayCN
-    
+
     /// Online Alipay + Hongkong Wallet Payment Source
     case alipayHK
-    
+
     /// Online Alipay + Dana Wallet Payment Source
     case dana
-    
+
     /// Online Alipay + Gcash Wallet Payment Source
     case gcash
-    
+
     /// Online Alipay + KakaoPay Wallet Payment Source
     case kakaoPay
-    
+
     /// Online Alipay + Touch N Go Wallet Payment Source
     case touchNGo
-    
+
     /// The name of the supported services to process the Bill Payment
     public enum BillPayment: PaymentMethod {
         public static let paymentMethodTypePrefix: String = "bill_payment_"
-        
+
         case tescoLotus
         case other(String)
     }
     /// Bill Payment Payment Source
     case billPayment(BillPayment)
-    
+
     /// The name of the supported Barcode Payment services
     public enum Barcode: PaymentMethod {
         public static let paymentMethodTypePrefix: String = "barcode_"
-        
+
         case alipay(AlipayBarcode)
         case other(String, parameters: [String: Any])
-        
+
         public var type: String {
             switch self {
             case .alipay:
@@ -78,11 +78,11 @@ public enum PaymentInformation: Codable, Equatable {
     }
     /// Barcode Payment Source
     case barcode(Barcode)
-    
+
     /// The Installments information
     public struct Installment: PaymentMethod {
         public static let paymentMethodTypePrefix: String = "installment_"
-        
+
         /// The code of the supported Installment payment banks
         public enum Brand: Equatable {
             case bay
@@ -97,12 +97,12 @@ public enum PaymentInformation: Codable, Equatable {
             case uob
             case other(String)
         }
-        
+
         /// The brand of the bank of the installment
         public let brand: Brand
         /// A number of terms to do the installment
         public let numberOfTerms: Int
-        
+
         /// Method for query the default list of the brand's available number of terms
         ///
         /// - Parameter brand: The brand that want to query ask
@@ -133,7 +133,7 @@ public enum PaymentInformation: Codable, Equatable {
                 return IndexSet(1...60)
             }
         }
-        
+
         public init(brand: Brand, numberOfTerms: Int) {
             self.brand = brand
             self.numberOfTerms = numberOfTerms
@@ -141,26 +141,26 @@ public enum PaymentInformation: Codable, Equatable {
     }
     /// Installments Payment Source
     case installment(Installment)
-    
+
     /// The EContext customer information
     public struct EContext: PaymentMethod, Codable, Equatable {
         public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.eContext.rawValue
-        
+
         public let type: String = OMSSourceTypeValue.eContext.rawValue
-        
+
         /// Customer name. The name cannot be longer than 10 characters
         public let name: String
         /// Customer email
         public let email: String
         /// Customer phone number. The phone number must contains only digit characters and has 10 or 11 characters
         public let phoneNumber: String
-        
+
         private enum CodingKeys: String, CodingKey {
             case name
             case email
             case phoneNumber = "phone_number"
         }
-        
+
         /// Creates a new EContext customer information with the given info
         ///
         /// - Parameters:
@@ -175,27 +175,27 @@ public enum PaymentInformation: Codable, Equatable {
     }
     /// E-Context Payment Source
     case eContext(EContext)
-    
+
     /// PromptPay Payment Source
     case promptpay
-    
+
     /// PayNow Payment Source
     case paynow
-    
+
     /// The TrueMoney customer information
     public struct TrueMoney: PaymentMethod {
-        
+
         public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.trueMoney.rawValue
-        
+
         public var type: String = OMSSourceTypeValue.trueMoney.rawValue
-        
+
         /// The customers phone number. Contains only digits and has 10 or 11 characters
         public let phoneNumber: String
-        
+
         private enum CodingKeys: String, CodingKey {
             case phoneNumber = "phone_number"
         }
-        
+
         /// Creates a new TrueMoney source with the given customer information
         ///
         /// - Parameters:
@@ -203,20 +203,20 @@ public enum PaymentInformation: Codable, Equatable {
         public init(phoneNumber: String) {
             self.phoneNumber = phoneNumber
         }
-        
+
     }
-    
+
     /// TrueMoney Payment Source
     case truemoney(TrueMoney)
-    
+
     /// The name of the supported services to process the Points Payment
     public enum Points: PaymentMethod {
         public static let paymentMethodTypePrefix: String = "points_"
-        
+
         case citiPoints
         case other(String)
     }
-    
+
     /// Points Payment Source
     case points(Points)
 
@@ -225,12 +225,13 @@ public enum PaymentInformation: Codable, Equatable {
         public static let paymentMethodTypePrefix: String = "mobile_banking_"
 
         case scb
+        case kbank
         case other(String)
     }
 
     /// Mobile Banking Payment Source
     case mobileBanking(MobileBanking)
-    
+
     /// Internet Banking FPX
     public struct FPX: PaymentMethod {
         public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.fpx.rawValue
@@ -264,16 +265,16 @@ public enum PaymentInformation: Codable, Equatable {
 
     /// Other Payment Source
     case other(type: String, parameters: [String: Any])
-    
+
     fileprivate enum CodingKeys: String, CodingKey {
         case type
     }
-    
+
     // swiftlint:disable function_body_length
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let typeValue = try container.decode(String.self, forKey: .type)
-        
+
         switch typeValue {
         case PaymentInformation.InternetBanking.self:
             self = .internetBanking(try PaymentInformation.InternetBanking(from: decoder))
@@ -384,7 +385,7 @@ public enum PaymentInformation: Codable, Equatable {
             try encoder.encodeJSONDictionary(parameters)
         }
     }
-    
+
     public static func == (lhs: PaymentInformation, rhs: PaymentInformation) -> Bool {
         switch (lhs, rhs) {
         case (.internetBanking(let lhsValue), .internetBanking(let rhsValue)):
@@ -427,7 +428,7 @@ public enum PaymentInformation: Codable, Equatable {
         default: return false
         }
     }
-    
+
 }
 
 extension Request where T == Source {
@@ -490,7 +491,7 @@ extension PaymentInformation.InternetBanking: CaseIterable, CustomStringConverti
     public static var allCases: PaymentInformation.InternetBanking.AllCases = [
         .bay, .ktb, .scb, .bbl
     ]
-    
+
     /// Omise Source Type value using in the Omise API
     public var type: String {
         switch self {
@@ -506,7 +507,7 @@ extension PaymentInformation.InternetBanking: CaseIterable, CustomStringConverti
             return PaymentInformation.InternetBanking.paymentMethodTypePrefix + value
         }
     }
-    
+
     public var description: String {
         switch self {
         case .bay:
@@ -521,11 +522,11 @@ extension PaymentInformation.InternetBanking: CaseIterable, CustomStringConverti
             return value
         }
     }
-    
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: PaymentInformation.CodingKeys.self)
         let type = try container.decode(String.self, forKey: .type)
-        
+
         guard type.hasPrefix(PaymentInformation.InternetBanking.paymentMethodTypePrefix),
             let typePrefixRange = type.range(of: PaymentInformation.InternetBanking.paymentMethodTypePrefix) else {
                 throw DecodingError.dataCorruptedError(
@@ -534,7 +535,7 @@ extension PaymentInformation.InternetBanking: CaseIterable, CustomStringConverti
                     debugDescription: "Invalid internet banking source type value"
                 )
         }
-        
+
         switch type[typePrefixRange.upperBound...] {
         case "bay":
             self = .bay
@@ -548,7 +549,7 @@ extension PaymentInformation.InternetBanking: CaseIterable, CustomStringConverti
             self = .other(String(value))
         }
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: PaymentInformation.CodingKeys.self)
         try container.encode(type, forKey: .type)
@@ -583,15 +584,15 @@ extension PaymentInformation.Installment {
             return PaymentInformation.Installment.paymentMethodTypePrefix + value
         }
     }
-    
+
     private enum CodingKeys: String, CodingKey {
         case installmentTerms = "installment_term"
     }
-    
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: PaymentInformation.CodingKeys.self)
         let type = try container.decode(String.self, forKey: .type)
-        
+
         guard type.hasPrefix(PaymentInformation.Installment.paymentMethodTypePrefix),
             let typePrefixRange = type.range(of: PaymentInformation.Installment.paymentMethodTypePrefix) else {
                 throw DecodingError.dataCorruptedError(
@@ -600,7 +601,7 @@ extension PaymentInformation.Installment {
                     debugDescription: "Invalid installments source type value"
                 )
         }
-        
+
         let brand: Brand
         switch type[typePrefixRange.upperBound...] {
         case "bay":
@@ -626,11 +627,11 @@ extension PaymentInformation.Installment {
         case let value:
             brand = .other(String(value))
         }
-        
+
         let installmentContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(brand: brand, numberOfTerms: try installmentContainer.decode(Int.self, forKey: .installmentTerms))
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: PaymentInformation.CodingKeys.self)
         try container.encode(type, forKey: .type)
@@ -644,7 +645,7 @@ extension PaymentInformation.Installment.Brand: CaseIterable, CustomStringConver
     public static var allCases: PaymentInformation.Installment.Brand.AllCases = [
         .bay, .firstChoice, .bbl, .ktc, .kBank, .scb
     ]
-    
+
     public var description: String {
         switch self {
         case .bay:
@@ -671,7 +672,7 @@ extension PaymentInformation.Installment.Brand: CaseIterable, CustomStringConver
             return value
         }
     }
-    
+
     public var type: String {
         switch self {
         case .bay:
@@ -710,11 +711,11 @@ extension PaymentInformation.BillPayment {
             return PaymentInformation.BillPayment.paymentMethodTypePrefix + value
         }
     }
-    
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: PaymentInformation.CodingKeys.self)
         let type = try container.decode(String.self, forKey: .type)
-        
+
         guard type.hasPrefix(PaymentInformation.BillPayment.paymentMethodTypePrefix),
             let typePrefixRange = type.range(of: PaymentInformation.BillPayment.paymentMethodTypePrefix) else {
                 throw DecodingError.dataCorruptedError(
@@ -723,7 +724,7 @@ extension PaymentInformation.BillPayment {
                     debugDescription: "Invalid bill payment source type value"
                 )
         }
-        
+
         switch type[typePrefixRange.upperBound...] {
         case "tesco_lotus":
             self = .tescoLotus
@@ -731,7 +732,7 @@ extension PaymentInformation.BillPayment {
             self = .other(String(value))
         }
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: PaymentInformation.CodingKeys.self)
         try container.encode(type, forKey: .type)
@@ -743,33 +744,33 @@ extension PaymentInformation.Barcode {
     public struct AlipayBarcode: Codable, Equatable {
         /// Barcode value generated by the customer's Alipay app
         public let barcode: String
-        
+
         /// The Store Information for the Alipay Barcode Payement
         public struct StoreInformation: Codable, Equatable {
             /// Store ID registering with Omise or Alipay
             public let storeID: String
             /// Store Name registering with Omise or Alipay
             public let storeName: String
-            
+
             public init(storeID: String, storeName: String) {
                 self.storeID = storeID
                 self.storeName = storeName
             }
         }
-        
+
         /// Store Information where the source is being created, optional.
         public let storeInformation: StoreInformation?
-        
+
         /// Store ID registering with Omise or Alipay
         public var storeID: String? {
             return storeInformation?.storeID
         }
-        
+
         /// Store Name registering with Omise or Alipay
         public var storeName: String? {
             return storeInformation?.storeName
         }
-        
+
         /// ID of the Terminal where the source is being created
         public let terminalID: String?
         private enum CodingKeys: String, CodingKey {
@@ -778,27 +779,27 @@ extension PaymentInformation.Barcode {
             case storeName = "store_name"
             case terminalID = "terminal_id"
         }
-        
+
         public init(barcode: String, storeInformation: StoreInformation? = nil, terminalID: String? = nil) {
             self.storeInformation = storeInformation
             self.terminalID = terminalID
             self.barcode = barcode
         }
-        
+
         public init(barcode: String, storeID: String, storeName: String, terminalID: String?) {
             self.init(barcode: barcode, storeInformation: StoreInformation(storeID: storeID, storeName: storeName), terminalID: terminalID)
         }
-        
+
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
-            
+
             let barcode = try container.decode(String.self, forKey: .barcode)
-            
+
             let storeID = try container.decodeIfPresent(String.self, forKey: .storeID)
             let storeName = try container.decodeIfPresent(String.self, forKey: .storeName)
-            
+
             let terminalID = try container.decodeIfPresent(String.self, forKey: .terminalID)
-            
+
             let storeInformation: StoreInformation?
             switch (storeID, storeName) {
             case let (storeID?, storeName?):
@@ -818,25 +819,25 @@ extension PaymentInformation.Barcode {
                 )
                 throw DecodingError.keyNotFound(CodingKeys.storeName, context)
             }
-            
+
             self.init(barcode: barcode, storeInformation: storeInformation, terminalID: terminalID)
         }
-        
+
         public func encode(to encoder: Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            
+
             try container.encode(barcode, forKey: .barcode)
-            
+
             try container.encodeIfPresent(storeInformation?.storeID, forKey: .storeID)
             try container.encodeIfPresent(storeInformation?.storeName, forKey: .storeName)
             try container.encodeIfPresent(terminalID, forKey: .terminalID)
         }
     }
-    
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: PaymentInformation.CodingKeys.self)
         let type = try container.decode(String.self, forKey: .type)
-        
+
         guard type.hasPrefix(PaymentInformation.Barcode.paymentMethodTypePrefix),
             let typePrefixRange = type.range(of: PaymentInformation.Barcode.paymentMethodTypePrefix) else {
                 throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Invalid barcode source type value")
@@ -857,11 +858,11 @@ extension PaymentInformation.Barcode {
             }))
         }
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: PaymentInformation.CodingKeys.self)
         try container.encode(type, forKey: .type)
-        
+
         switch self {
         case .alipay(let alipay):
             try alipay.encode(to: encoder)
@@ -869,7 +870,7 @@ extension PaymentInformation.Barcode {
             break
         }
     }
-    
+
     public static func == (lhs: PaymentInformation.Barcode, rhs: PaymentInformation.Barcode) -> Bool {
         switch (lhs, rhs) {
         case let (.alipay(lhsValue), .alipay(rhsValue)):
@@ -893,11 +894,11 @@ extension PaymentInformation.Points {
             return PaymentInformation.Points.paymentMethodTypePrefix + value
         }
     }
-    
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: PaymentInformation.CodingKeys.self)
         let type = try container.decode(String.self, forKey: .type)
-        
+
         guard type.hasPrefix(PaymentInformation.Points.paymentMethodTypePrefix),
             let typePrefixRange = type.range(of: PaymentInformation.Points.paymentMethodTypePrefix) else {
                 throw DecodingError.dataCorruptedError(
@@ -906,7 +907,7 @@ extension PaymentInformation.Points {
                     debugDescription: "Invalid points payment source type value"
                 )
         }
-        
+
         switch type[typePrefixRange.upperBound...] {
         case "citi":
             self = .citiPoints
@@ -919,13 +920,13 @@ extension PaymentInformation.Points {
         var container = encoder.container(keyedBy: PaymentInformation.CodingKeys.self)
         try container.encode(type, forKey: .type)
     }
-    
+
 }
 
 extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertible {
     public typealias AllCases = [PaymentInformation.MobileBanking]
     public static var allCases: PaymentInformation.MobileBanking.AllCases = [
-        .scb
+        .scb, .kbank
     ]
 
     /// Omise Source Type value using in the Omise API
@@ -933,6 +934,8 @@ extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertibl
         switch self {
         case .scb:
             return OMSSourceTypeValue.mobileBankingSCB.rawValue
+        case .kbank:
+            return OMSSourceTypeValue.mobileBankingKBank.rawValue
         case .other(let value):
             return PaymentInformation.MobileBanking.paymentMethodTypePrefix + value
         }
@@ -942,6 +945,8 @@ extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertibl
         switch self {
         case .scb:
             return "SCB"
+        case .kbank:
+            return "KBank"
         case .other(let value):
             return value
         }
@@ -963,6 +968,8 @@ extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertibl
         switch type[typePrefixRange.upperBound...] {
         case "scb":
             self = .scb
+        case "kbank":
+            self = .kbank
         case let value:
             self = .other(String(value))
         }
