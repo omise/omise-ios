@@ -87,8 +87,6 @@ class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
     static let eContextSourceBackendPayment =
     __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.eContext)
     
-//    static let mobileBankingSourceBackendPayment =
-//        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.mobileBankingSCB)
     static func makeMobileBankingSourceBackendPayment(
         bank: PaymentInformation.MobileBanking
         ) -> __OmiseCapabilitySourceBackendPayment {

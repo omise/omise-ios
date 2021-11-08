@@ -317,7 +317,7 @@ public class __SourceMobileBankingPayment: __SourcePaymentInformation {
     public static let scbMobileBankingPayment = __SourceMobileBankingPayment(type: OMSSourceTypeValue.mobileBankingSCB)!
     
     /// Payment Information for a OCBC PAO Mobile Banking Payment
-        public static let ocbcPaoMobileBankingPayment = __SourceMobileBankingPayment(type: OMSSourceTypeValue.mobileBankingOCBCPAO)!
+    public static let ocbcPaoMobileBankingPayment = __SourceMobileBankingPayment(type: OMSSourceTypeValue.mobileBankingOCBCPAO)!
     
     /// Create an Mobile Banking payment with the given source type value
     ///

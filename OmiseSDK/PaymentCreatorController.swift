@@ -535,7 +535,6 @@ extension PaymentCreatorController {
         .internetBankingSCB,
         .internetBankingBBL,
         .mobileBankingSCB,
-        .mobileBankingOCBCPAO,
         .alipay,
         .billPaymentTescoLotus,
         .installmentBAY,
@@ -557,7 +556,8 @@ extension PaymentCreatorController {
     ]
     
     public static let singaporeDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
-        .payNow
+        .payNow,
+        .mobileBankingOCBCPAO
     ]
     
     public static let malaysiaDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
