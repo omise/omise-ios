@@ -7,7 +7,7 @@ import UIKit
 @objc(OMSCardExpiryDateTextField) public class CardExpiryDateTextField: OmiseTextField {
     
     /// Currently selected month, `nil` if no month has been selected.
-    public private(set) var selectedMonth: Int? = nil {
+    public private(set) var selectedMonth: Int? {
         didSet {
             guard let selectedMonth = self.selectedMonth else {
                 return
@@ -25,7 +25,7 @@ import UIKit
     }
     
     /// Currently selected year, `nil` if no year has been selected.
-    public private(set) var selectedYear: Int? = nil {
+    public private(set) var selectedYear: Int? {
         didSet {
             expirationYearAccessibilityElement.accessibilityValue = selectedYear.map {
                 NumberFormatter.localizedString(from: NSNumber(value: $0), number: NumberFormatter.Style.spellOut)
