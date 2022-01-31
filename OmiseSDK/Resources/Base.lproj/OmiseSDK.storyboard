@@ -1589,7 +1589,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="cLe-gI-PaB">
-                            <rect key="frame" x="0.0" y="707.33333206176769" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="707.33333206176758" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -2419,6 +2419,7 @@
                         <outletCollection property="mobileBankingNameLabels" destination="EQF-26-ssb" collectionClass="NSMutableArray" id="CWh-hU-24g"/>
                         <outletCollection property="mobileBankingNameLabels" destination="bDJ-ih-QYr" collectionClass="NSMutableArray" id="dAI-RQ-n6c"/>
                         <outletCollection property="mobileBankingNameLabels" destination="TKO-Qj-ZdV" collectionClass="NSMutableArray" id="2KT-u5-gt4"/>
+                        <outletCollection property="mobileBankingNameLabels" destination="Hk2-sB-8C8" collectionClass="NSMutableArray" id="869-zg-jm0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k5m-Wj-xWF" userLabel="First Responder" sceneMemberID="firstResponder"/>
