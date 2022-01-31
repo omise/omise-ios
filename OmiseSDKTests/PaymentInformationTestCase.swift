@@ -339,6 +339,28 @@ class PaymentInformationTestCase: XCTestCase {
                 """, encodedJSONString)
         }
     }
+    
+    func testEncodeMobileBankingBBLSourceParameter() throws {
+        let encoder = PaymentInformationTestCase.makeJSONEncoder()
+
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .mobileBanking(.bbl),
+                                                         amount: 10_000_00,
+                                                         currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "currency" : "THB",
+                  "platform_type" : "IOS",
+                  "type" : "mobile_banking_bbl"
+                }
+                """, encodedJSONString)
+        }
+    }
+    
     func testEncodeBarcodeAlipaySourceParameter() throws {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 

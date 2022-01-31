@@ -351,6 +351,16 @@
       "card_brands": null,
       "installment_terms": null,
       "banks": []
+    },
+    {
+      "object": "payment_method",
+      "name": "mobile_banking_bbl",
+      "currencies": [
+          "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "banks": []
     }
   ],
   "zero_interest_installments": false

@@ -332,6 +332,23 @@ class ModelTestCase: XCTestCase {
             XCTFail("Cannot decode the source \(error)")
         }
     }
+    
+    func testDecodeMobileBankingBBLSource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_mobile_banking/bbl")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_test_5cs0sm8u8h8nqo5zasd", source.id)
+            XCTAssertEqual(Currency.thb, source.currency)
+            XCTAssertEqual(1000000, source.amount)
+            XCTAssertEqual(PaymentInformation.mobileBanking(.bbl), source.paymentInformation)
+            XCTAssertEqual(Flow.redirect, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
 
     func testDecodeAlipayCNSource() throws {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)

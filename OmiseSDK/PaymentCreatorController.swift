@@ -536,6 +536,7 @@ extension PaymentCreatorController {
         .internetBankingBBL,
         .mobileBankingSCB,
         .mobileBankingKBank,
+        .mobileBankingBBL,
         .alipay,
         .billPaymentTescoLotus,
         .installmentBAY,
