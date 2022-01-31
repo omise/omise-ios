@@ -267,7 +267,7 @@ extension OMSSourceTypeValue {
         case .mobileBankingKBank:
             return .kbank
         case .mobileBankingBBL:
-            return .bbl 
+            return .bbl
         default:
             return nil
         }
