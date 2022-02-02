@@ -52,7 +52,7 @@ import UIKit
         get {
             return self
         }
-        set {} // swiftlint:disable:this unused_setter_value
+        set {}
     }
     
     private let maxCreditCardAge = 21
@@ -97,7 +97,7 @@ import UIKit
         get {
             return [expirationMonthAccessibilityElement as Any, expirationYearAccessibilityElement as Any]
         }
-        set {} // swiftlint:disable:this unused_setter_value
+        set {}
     }
     
     public override func validate() throws {
