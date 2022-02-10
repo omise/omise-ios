@@ -64,6 +64,9 @@
 /* Class = "UILabel"; text = "Bank of Ayudhya"; ObjectID = "kUY-b1-dmD"; */
 "kUY-b1-dmD.text" = "ธนาคารกรุงศรีอยุธยา";
 
+/* Class = "UILabel"; text = "Bank of Ayudhya"; ObjectID = "GtH-Gd-0AK"; */
+"GtH-Gd-0AK.text" = "ธนาคารกรุงศรีอยุธยา";
+
 /* Class = "UILabel"; text = "Tesco Lotus"; ObjectID = "LpC-UH-uPc"; */
 "LpC-UH-uPc.text" = "เทสโก้โลตัส";
 

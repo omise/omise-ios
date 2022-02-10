@@ -297,11 +297,7 @@ class ModelTestCase: XCTestCase {
         } catch {
             XCTFail("Cannot decode the source \(error)")
         }
-    }
-    
-    func testDecodeMobileBankingOCBCPAOSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
-
+        
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_mobile_banking/ocbcPao")
             let source = try decoder.decode(Source.self, from: sourceData)
@@ -314,10 +310,6 @@ class ModelTestCase: XCTestCase {
         } catch {
             XCTFail("Cannot decode the source \(error)")
         }
-    }
-
-    func testDecodeMobileBankingKBankSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_mobile_banking/kbank")
@@ -327,6 +319,19 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual(Currency.thb, source.currency)
             XCTAssertEqual(1000000, source.amount)
             XCTAssertEqual(PaymentInformation.mobileBanking(.kbank), source.paymentInformation)
+            XCTAssertEqual(Flow.redirect, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+        
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_mobile_banking/bay")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_test_5cs0sm8u8h8nqo5zasd", source.id)
+            XCTAssertEqual(Currency.thb, source.currency)
+            XCTAssertEqual(1000000, source.amount)
+            XCTAssertEqual(PaymentInformation.mobileBanking(.bay), source.paymentInformation)
             XCTAssertEqual(Flow.redirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
