@@ -39,13 +39,13 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
 
     override func staticIndexPath(forValue value: PaymentInformation.MobileBanking) -> IndexPath {
         switch value {
-        case .scb:
+        case .bay:
             return IndexPath(row: 0, section: 0)
         case .kbank:
             return IndexPath(row: 1, section: 0)
-        case .ocbcPao:
+        case .scb:
             return IndexPath(row: 2, section: 0)
-        case .bay:
+        case .ocbcPao:
             return IndexPath(row: 3, section: 0)
         case .other:
             preconditionFailure("This value is not supported for the built-in chooser")

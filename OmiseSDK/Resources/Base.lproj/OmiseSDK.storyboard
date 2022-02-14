@@ -2289,25 +2289,25 @@
                         <sections>
                             <tableViewSection id="Ii8-Zv-zbp">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="EQF-26-ssb" imageView="HqK-eY-xEE" rowHeight="64" style="IBUITableViewCellStyleDefault" id="FLo-QG-lwc" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="eci-dP-WLC" imageView="SKE-IE-4US" rowHeight="64" style="IBUITableViewCellStyleDefault" id="GtH-Gd-0AK" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FLo-QG-lwc" id="oKa-NJ-5pR">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GtH-Gd-0AK" id="Y5r-jM-aVC">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Siam Commercial Bank" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EQF-26-ssb">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Bank of Ayudhya" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eci-dP-WLC">
                                                     <rect key="frame" x="63" y="0.0" width="296" height="64"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="SCB" id="HqK-eY-xEE">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="BAY" id="SKE-IE-4US">
                                                     <rect key="frame" x="16" y="16" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Redirect" translatesAutoresizingMaskIntoConstraints="NO" id="qiT-U0-zh4">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Redirect" translatesAutoresizingMaskIntoConstraints="NO" id="TES-Rg-aHw">
                                                     <rect key="frame" x="345" y="23" width="16" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="tintColor" red="0.89019607840000003" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2315,7 +2315,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="accessoryView" destination="qiT-U0-zh4" id="Ugh-CP-OQR"/>
+                                            <outlet property="accessoryView" destination="TES-Rg-aHw" id="YVy-YC-CGN"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="bDJ-ih-QYr" imageView="jtd-sd-Ccq" rowHeight="64" style="IBUITableViewCellStyleDefault" id="VQP-oU-hTX" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
@@ -2347,8 +2347,37 @@
                                             <outlet property="accessoryView" destination="eIl-PS-wt9" id="rWh-ut-5cw"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="TKO-Qj-ZdV" imageView="4p1-UW-sDv" rowHeight="64" style="IBUITableViewCellStyleDefault" id="HuE-CU-KZR" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="EQF-26-ssb" imageView="HqK-eY-xEE" rowHeight="64" style="IBUITableViewCellStyleDefault" id="FLo-QG-lwc" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
                                         <rect key="frame" x="0.0" y="172.66666603088379" width="375" height="64"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FLo-QG-lwc" id="oKa-NJ-5pR">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Siam Commercial Bank" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EQF-26-ssb">
+                                                    <rect key="frame" x="63" y="0.0" width="296" height="64"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="SCB" id="HqK-eY-xEE">
+                                                    <rect key="frame" x="16" y="16" width="32" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Redirect" translatesAutoresizingMaskIntoConstraints="NO" id="qiT-U0-zh4">
+                                                    <rect key="frame" x="345" y="23" width="16" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="tintColor" red="0.89019607840000003" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="accessoryView" destination="qiT-U0-zh4" id="Ugh-CP-OQR"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="TKO-Qj-ZdV" imageView="4p1-UW-sDv" rowHeight="64" style="IBUITableViewCellStyleDefault" id="HuE-CU-KZR" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
+                                        <rect key="frame" x="0.0" y="236.66666603088379" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HuE-CU-KZR" id="7iW-hY-OAb">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -2374,35 +2403,6 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="accessoryView" destination="xWZ-PA-fhO" id="AdS-gb-aYe"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="eci-dP-WLC" imageView="SKE-IE-4US" rowHeight="64" style="IBUITableViewCellStyleDefault" id="GtH-Gd-0AK" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
-                                        <rect key="frame" x="0.0" y="236.66666603088379" width="375" height="64"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GtH-Gd-0AK" id="Y5r-jM-aVC">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Bank of Ayudhya" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eci-dP-WLC">
-                                                    <rect key="frame" x="63" y="0.0" width="296" height="64"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                    <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="BAY" id="SKE-IE-4US">
-                                                    <rect key="frame" x="16" y="16" width="32" height="32"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Redirect" translatesAutoresizingMaskIntoConstraints="NO" id="TES-Rg-aHw">
-                                                    <rect key="frame" x="345" y="23" width="16" height="16"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="tintColor" red="0.89019607840000003" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </imageView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="accessoryView" destination="TES-Rg-aHw" id="YVy-YC-CGN"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
