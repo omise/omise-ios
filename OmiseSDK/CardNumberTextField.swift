@@ -41,7 +41,7 @@ import UIKit
         get {
             return self
         }
-        set {} // swiftlint:disable:this unused_setter_value
+        set {}
     }
     
     private lazy var cardNumberStringTokenizer = CreditCardNumberTextInputStringTokenizer(cardNumberTextField: self)
