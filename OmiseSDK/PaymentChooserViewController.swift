@@ -100,6 +100,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
 }
 
 extension PaymentChooserOption {
+    // swiftlint:disable function_body_length
     fileprivate static func paymentOptions(for sourceType: OMSSourceTypeValue) -> [PaymentChooserOption] {
         switch sourceType {
         case .trueMoney:

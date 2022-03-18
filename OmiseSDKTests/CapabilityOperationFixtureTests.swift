@@ -3,6 +3,7 @@ import XCTest
 
 class CapabilityOperationFixtureTests: XCTestCase {
 
+    // swiftlint:disable function_body_length
     func testCapabilityRetrieve() {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
 
@@ -41,18 +42,18 @@ class CapabilityOperationFixtureTests: XCTestCase {
                 XCTFail("Capability doesn't have the Citi Points backend")
             }
 
+            if let rabbitLinePayBackend = capability[OMSSourceTypeValue.rabbitLinepay] {
+                XCTAssertEqual(rabbitLinePayBackend.supportedCurrencies, [.thb])
+            } else {
+                XCTFail("Capability doesn't have the Rabbit LINE Pay backend")
+            }
+
             if let fpxBackend = capability[OMSSourceTypeValue.fpx] {
                 XCTAssertEqual(fpxBackend.banks, [
                     Capability.Backend.Bank(name: "UOB", code: "uob", isActive: true)
                 ])
             } else {
                XCTFail("Capability doesn't have the FPX backend")
-            }
-            
-            if let rabbitLinePayBackend = capability[OMSSourceTypeValue.rabbitLinepay] {
-                XCTAssertEqual(rabbitLinePayBackend.supportedCurrencies, [.thb])
-            } else {
-                XCTFail("Capability doesn't have the Rabbit LINE Pay backend")
             }
 
             if let mobileBankingKBankBackend = capability[OMSSourceTypeValue.mobileBankingKBank] {
