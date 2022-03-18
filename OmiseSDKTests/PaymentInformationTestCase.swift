@@ -594,8 +594,8 @@ class PaymentInformationTestCase: XCTestCase {
             XCTAssertEqual(
                 """
                 {
-                  "amount" : 500000,
-                  "currency" : "SGD",
+                  "amount" : 5000000,
+                  "currency" : "THB",
                   "platform_type" : "IOS",
                   "type" : "rabbit_linepay"
                 }
