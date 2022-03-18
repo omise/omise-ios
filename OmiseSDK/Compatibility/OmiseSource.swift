@@ -73,6 +73,9 @@ public class __SourcePaymentInformation: NSObject {
 
     /// Payment Information for an PayNow Payment
     public static let payNowPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.promptPay)!
+    
+    /// Payment Information for an Rabbit LINE Pay Payment
+    public static let rabbitLinepayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.rabbitLinepay)!
 }
 
 /// Internet Bankning Source Payment Information
@@ -558,6 +561,9 @@ extension __SourcePaymentInformation {
 
         case .paynow:
             return __SourcePaymentInformation.payNowPayment
+            
+        case .rabbitLinepay:
+            return __SourcePaymentInformation.rabbitLinepayPayment
 
         case .truemoney(let trueMoney):
             return __SourceTrueMoneyPayment(phoneNumber: trueMoney.phoneNumber)

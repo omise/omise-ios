@@ -10,7 +10,7 @@ class CapabilityOperationFixtureTests: XCTestCase {
             let capabilityData = try XCTestCase.fixturesData(forFilename: "capability")
             let capability = try decoder.decode(Capability.self, from: capabilityData)
 
-            XCTAssertEqual(capability.supportedBackends.count, 22)
+            XCTAssertEqual(capability.supportedBackends.count, 23)
 
             if let creditCardBackend = capability.creditCardBackend {
                 XCTAssertEqual(creditCardBackend.payment, .card([]))
@@ -47,6 +47,12 @@ class CapabilityOperationFixtureTests: XCTestCase {
                 ])
             } else {
                XCTFail("Capability doesn't have the FPX backend")
+            }
+            
+            if let rabbitLinePayBackend = capability[OMSSourceTypeValue.rabbitLinepay] {
+                XCTAssertEqual(rabbitLinePayBackend.supportedCurrencies, [.thb])
+            } else {
+                XCTFail("Capability doesn't have the Rabbit LINE Pay backend")
             }
 
             if let mobileBankingKBankBackend = capability[OMSSourceTypeValue.mobileBankingKBank] {

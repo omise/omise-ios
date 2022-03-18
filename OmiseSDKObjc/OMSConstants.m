@@ -34,6 +34,7 @@ OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePayNow = @"paynow";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueTrueMoney = @"truemoney";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePointsCiti = @"points_citi";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueFpx = @"fpx";
+OMSSourceTypeValue const _Nonnull OMSSourceTypeValueRabbitLinepay = @"rabbit_linepay";
 
 OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeTHB = @"THB";
 OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeJPY = @"JPY";

@@ -36,6 +36,7 @@ extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueTrueMoney;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePointsCiti;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueFpx;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingKBank;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueRabbitLinepay;
 
 
 typedef NSString * OMSSupportedCurrencyCode NS_EXTENSIBLE_STRING_ENUM;
