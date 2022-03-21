@@ -138,6 +138,8 @@ extension OMSSourceTypeValue {
             return "kakaopay"
         case .touchNGo:
             return "touch_n_go"
+        case .rabbitLinepay:
+            return "rabbit_linepay"
         default:
             return self.rawValue
         }

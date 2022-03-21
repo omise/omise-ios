@@ -23,6 +23,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case truemoney
     case citiPoints
     case fpx
+    case rabbitLinepay
 
     static var allCases: [PaymentChooserOption] {
         return [
@@ -45,7 +46,8 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             .conbini,
             .payEasy,
             .netBanking,
-            .fpx
+            .fpx,
+            .rabbitLinepay
         ]
     }
 
@@ -91,11 +93,14 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "CitiPoints"
         case .fpx:
             return "FPX"
+        case .rabbitLinepay:
+            return "Rabbit LINE Pay"
         }
     }
 }
 
 extension PaymentChooserOption {
+    // swiftlint:disable function_body_length
     fileprivate static func paymentOptions(for sourceType: OMSSourceTypeValue) -> [PaymentChooserOption] {
         switch sourceType {
         case .trueMoney:
@@ -135,6 +140,8 @@ extension PaymentChooserOption {
             return []
         case .fpx:
             return [.fpx]
+        case .rabbitLinepay:
+            return [.rabbitLinepay]
         default:
             return []
         }
@@ -298,6 +305,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .paynow
         case .citiPoints:
             payment = .points(.citiPoints)
+        case .rabbitLinepay:
+            payment = .rabbitLinepay
         default:
             return
         }
@@ -357,6 +366,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 18, section: 0)
         case .touchNGo:
             return IndexPath(row: 19, section: 0)
+        case .rabbitLinepay:
+            return IndexPath(row: 20, section: 0)
 
         }
     }
@@ -402,6 +413,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue(bank.type)
             case .fpx:
                 return OMSSourceTypeValue.fpx
+            case .rabbitLinepay:
+                return OMSSourceTypeValue.rabbitLinepay
             case .card, .unknownSource:
                 return nil
             }

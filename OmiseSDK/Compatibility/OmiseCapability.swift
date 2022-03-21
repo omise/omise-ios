@@ -89,6 +89,9 @@ class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
 
     static let FPXSourceBackendPayment =
         __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.fpx)
+    
+    static let rabbitLinepaySourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.rabbitLinepay)
 
     static func makeInternetBankingSourceBackendPayment(
         bank: PaymentInformation.InternetBanking
@@ -123,6 +126,7 @@ class __OmiseCapabilityUnknownSourceBackendPayment: __OmiseCapabilitySourceBacke
 }
 
 extension __OmiseCapabilityBackendPayment {
+    // swiftlint:disable function_body_length
     static func makeCapabilityBackend(from payment: Capability.Backend.Payment) -> __OmiseCapabilityBackendPayment {
         switch payment {
         case .card(let brands):
@@ -163,6 +167,8 @@ extension __OmiseCapabilityBackendPayment {
             return __OmiseCapabilitySourceBackendPayment.eContextSourceBackendPayment
         case .fpx:
             return __OmiseCapabilitySourceBackendPayment.FPXSourceBackendPayment
+        case .rabbitLinepay:
+            return __OmiseCapabilitySourceBackendPayment.rabbitLinepaySourceBackendPayment
         case .unknownSource(let type, let configurations):
             return __OmiseCapabilityUnknownSourceBackendPayment(sourceType: type, parameters: configurations)
         }

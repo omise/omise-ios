@@ -264,6 +264,9 @@ public enum PaymentInformation: Codable, Equatable {
 
     /// Internet Banking FPX
     case fpx(FPX)
+    
+    // Rabbit LINE Pay
+    case rabbitLinepay
 
     /// Other Payment Source
     case other(type: String, parameters: [String: Any])
@@ -308,6 +311,8 @@ public enum PaymentInformation: Codable, Equatable {
             self = .paynow
         case OMSSourceTypeValue.trueMoney.rawValue:
             self = .truemoney(try TrueMoney(from: decoder))
+        case OMSSourceTypeValue.rabbitLinepay.rawValue:
+            self = .rabbitLinepay
         case PaymentInformation.Points.self:
             self = .points(try Points(from: decoder))
         case PaymentInformation.MobileBanking.self:
@@ -381,6 +386,9 @@ public enum PaymentInformation: Codable, Equatable {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.fpx.rawValue, forKey: .type)
             try fpx.encode(to: encoder)
+        case .rabbitLinepay:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.rabbitLinepay.rawValue, forKey: .type)
         case .other(type: let type, parameters: let parameters):
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(type, forKey: .type)
@@ -408,6 +416,8 @@ public enum PaymentInformation: Codable, Equatable {
             return true
         case (.promptpay, .promptpay), (.paynow, .paynow):
             return true
+        case (.rabbitLinepay, .rabbitLinepay):
+            return true
         case (.truemoney(let lhsValue), .truemoney(let rhsValue)):
             return lhsValue == rhsValue
         case (.billPayment(let lhsValue), .billPayment(let rhsValue)):
@@ -424,6 +434,7 @@ public enum PaymentInformation: Codable, Equatable {
             return lhsValue == rhsValue
         case (.fpx(let lhsValue), .fpx(let rhsValue)):
             return lhsValue == rhsValue
+
         case (.other(let lhsType, let lhsParameters), .other(let rhsType, let rhsParameters)):
             return lhsType == rhsType &&
                 Set(lhsParameters.keys) == Set(rhsParameters.keys)
@@ -476,6 +487,8 @@ extension PaymentInformation {
             return OMSSourceTypeValue.payNow.rawValue
         case .truemoney:
             return OMSSourceTypeValue.trueMoney.rawValue
+        case .rabbitLinepay:
+            return OMSSourceTypeValue.rabbitLinepay.rawValue
         case .points(let points):
             return points.type
         case .mobileBanking(let bank):
