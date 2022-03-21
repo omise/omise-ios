@@ -90,7 +90,8 @@ class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
     static let FPXSourceBackendPayment =
         __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.fpx)
     
-    static let rabbitLinepaySourceBackendPayment = __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.rabbitLinepay)
+    static let rabbitLinepaySourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.rabbitLinepay)
 
     static func makeInternetBankingSourceBackendPayment(
         bank: PaymentInformation.InternetBanking
