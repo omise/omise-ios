@@ -2390,7 +2390,7 @@
                                                     <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="SCB Easy" id="HqK-eY-xEE">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="SCB_Easy" id="HqK-eY-xEE">
                                                     <rect key="frame" x="16" y="16" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -2750,7 +2750,7 @@
         <image name="RabbitLinePay" width="32" height="32"/>
         <image name="Redirect" width="16" height="16"/>
         <image name="SCB" width="32" height="32"/>
-        <image name="SCB Easy" width="32" height="32"/>
+        <image name="SCB_Easy" width="32" height="32"/>
         <image name="Tesco" width="32" height="32"/>
         <image name="TrueMoney" width="32" height="32"/>
         <image name="TrueMoney_Big" width="105" height="80"/>
