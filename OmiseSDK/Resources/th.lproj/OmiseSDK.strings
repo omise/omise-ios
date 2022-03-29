@@ -65,7 +65,7 @@
 "kUY-b1-dmD.text" = "ธนาคารกรุงศรีอยุธยา";
 
 /* Class = "UILabel"; text = "Bank of Ayudhya"; ObjectID = "eci-dP-WLC"; */
-"eci-dP-WLC.text" = "ธนาคารกรุงศรีอยุธยา";
+"eci-dP-WLC.text" = "KMA";
 
 /* Class = "UILabel"; text = "Tesco Lotus"; ObjectID = "LpC-UH-uPc"; */
 "LpC-UH-uPc.text" = "เทสโก้โลตัส";
@@ -131,13 +131,13 @@
 "yfq-Iv-IBe.text" = "หมายเลข CVV ด้านหลังบัตร";
 
 /* Class = "UILabel"; text = "Siam Commercial Bank"; ObjectID = "EQF-26-ssb"; */
-"EQF-26-ssb.text" = "ธนาคารไทยพาณิชย์";
+"EQF-26-ssb.text" = "SCB EASY";
 
 /* Class = "UILabel"; text = "Kasikorn Bank"; ObjectID = "yHg-il-ZhG"; */
 "yHg-il-ZhG.text" = "ธนาคารกสิกรไทย";
 
 /* Class = "UILabel"; text = "Kasikorn Bank"; ObjectID = "bDJ-ih-QYr"; */
-"bDJ-ih-QYr.text" = "ธนาคารกสิกรไทย";
+"bDJ-ih-QYr.text" = "K PLUS";
 
 /* Class = "UILabel"; text = "-"; ObjectID = "yQ7-lv-7H1"; */
 "yQ7-lv-7H1.text" = "-";

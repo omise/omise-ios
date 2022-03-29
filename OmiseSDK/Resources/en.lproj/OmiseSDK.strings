@@ -39,7 +39,7 @@
 "CKR-Pl-Ix5.text" = "Card number";
 
 /* Class = "UILabel"; text = "Siam Commercial Bank"; ObjectID = "EQF-26-ssb"; */
-"EQF-26-ssb.text" = "Siam Commercial Bank";
+"EQF-26-ssb.text" = "SCB EASY";
 
 /* Class = "UILabel"; text = "-"; ObjectID = "EWE-r0-1RF"; */
 "EWE-r0-1RF.text" = "-";
@@ -135,7 +135,7 @@
 "kUY-b1-dmD.text" = "Bank of Ayudhya";
 
 /* Class = "UILabel"; text = "Bank of Ayudhya"; ObjectID = "eci-dP-WLC"; */
-"eci-dP-WLC.text" = "Bank of Ayudhya";
+"eci-dP-WLC.text" = "KMA";
 
 /* Class = "UIButton"; normalTitle = "Next"; ObjectID = "mE3-3u-rvg"; */
 "mE3-3u-rvg.normalTitle" = "Next";
@@ -180,7 +180,7 @@
 "yHg-il-ZhG.text" = "Kasikorn Bank";
 
 /* Class = "UILabel"; text = "Kasikorn Bank"; ObjectID = "bDJ-ih-QYr"; */
-"bDJ-ih-QYr.text" = "Kasikorn Bank";
+"bDJ-ih-QYr.text" = "K PLUS";
 
 /* Class = "UILabel"; text = "-"; ObjectID = "yQ7-lv-7H1"; */
 "yQ7-lv-7H1.text" = "-";

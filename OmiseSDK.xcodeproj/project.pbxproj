@@ -593,9 +593,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 225931201CE3210700841B86 /* Build configuration list for PBXNativeTarget "OmiseSDK" */;
 			buildPhases = (
+				225931151CE3210700841B86 /* Headers */,
 				225931131CE3210700841B86 /* Sources */,
 				225931141CE3210700841B86 /* Frameworks */,
-				225931151CE3210700841B86 /* Headers */,
 				225931161CE3210700841B86 /* Resources */,
 			);
 			buildRules = (
