@@ -336,10 +336,6 @@ class ModelTestCase: XCTestCase {
         } catch {
             XCTFail("Cannot decode the source \(error)")
         }
-    }
-    
-    func testDecodeMobileBankingBBLSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_mobile_banking/bbl")
