@@ -296,11 +296,7 @@ class PaymentInformationTestCase: XCTestCase {
                 }
                 """, encodedJSONString)
         }
-    }
-
-    func testEncodeMobileBankingKBankSourceParameter() throws {
-        let encoder = PaymentInformationTestCase.makeJSONEncoder()
-
+        
         do {
             let sourceParameter = Source.CreateParameter(paymentInformation: .mobileBanking(.kbank),
                                                          amount: 10_000_00,
@@ -317,11 +313,7 @@ class PaymentInformationTestCase: XCTestCase {
                 }
                 """, encodedJSONString)
         }
-    }
-
-    func testEncodeMobileBankingOCBCPAOSourceParameter() throws {
-        let encoder = PaymentInformationTestCase.makeJSONEncoder()
-
+        
         do {
             let sourceParameter = Source.CreateParameter(paymentInformation: .mobileBanking(.ocbcPao),
                                                          amount: 10_000_00,
@@ -338,11 +330,24 @@ class PaymentInformationTestCase: XCTestCase {
                 }
                 """, encodedJSONString)
         }
-    }
-    
-    func testEncodeMobileBankingBBLSourceParameter() throws {
-        let encoder = PaymentInformationTestCase.makeJSONEncoder()
+        
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .mobileBanking(.bay),
+                                                         amount: 10_000_00,
+                                                         currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
 
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "currency" : "THB",
+                  "platform_type" : "IOS",
+                  "type" : "mobile_banking_bay"
+                }
+                """, encodedJSONString)
+        }
+        
         do {
             let sourceParameter = Source.CreateParameter(paymentInformation: .mobileBanking(.bbl),
                                                          amount: 10_000_00,
@@ -360,7 +365,7 @@ class PaymentInformationTestCase: XCTestCase {
                 """, encodedJSONString)
         }
     }
-    
+
     func testEncodeBarcodeAlipaySourceParameter() throws {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
@@ -593,6 +598,23 @@ class PaymentInformationTestCase: XCTestCase {
                   "currency" : "SGD",
                   "platform_type" : "IOS",
                   "type" : "touch_n_go"
+                }
+                """, encodedJSONString)
+        }
+        
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .rabbitLinepay,
+                                                         amount: 50_000_00,
+                                                         currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 5000000,
+                  "currency" : "THB",
+                  "platform_type" : "IOS",
+                  "type" : "rabbit_linepay"
                 }
                 """, encodedJSONString)
         }

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "rabbit_linepay.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

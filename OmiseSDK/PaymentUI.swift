@@ -266,6 +266,8 @@ extension OMSSourceTypeValue {
             return .ocbcPao
         case .mobileBankingKBank:
             return .kbank
+        case .mobileBankingBAY:
+            return .bay
         case .mobileBankingBBL:
             return .bbl
         default:
@@ -275,7 +277,7 @@ extension OMSSourceTypeValue {
 
     var isMobileBankingSource: Bool {
         switch self {
-        case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingOCBCPAO, .mobileBankingBBL:
+        case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingOCBCPAO, .mobileBankingBAY, .mobileBankingBBL:
             return true
         default:
             return false

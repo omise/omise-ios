@@ -3,6 +3,7 @@ import XCTest
 
 class CapabilityOperationFixtureTests: XCTestCase {
 
+    // swiftlint:disable function_body_length
     func testCapabilityRetrieve() {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
 
@@ -10,7 +11,7 @@ class CapabilityOperationFixtureTests: XCTestCase {
             let capabilityData = try XCTestCase.fixturesData(forFilename: "capability")
             let capability = try decoder.decode(Capability.self, from: capabilityData)
 
-            XCTAssertEqual(capability.supportedBackends.count, 22)
+            XCTAssertEqual(capability.supportedBackends.count, 24)
 
             if let creditCardBackend = capability.creditCardBackend {
                 XCTAssertEqual(creditCardBackend.payment, .card([]))
@@ -39,6 +40,12 @@ class CapabilityOperationFixtureTests: XCTestCase {
                 XCTAssertEqual(citiPointsBackend.supportedCurrencies, [.thb])
             } else {
                 XCTFail("Capability doesn't have the Citi Points backend")
+            }
+
+            if let rabbitLinePayBackend = capability[OMSSourceTypeValue.rabbitLinepay] {
+                XCTAssertEqual(rabbitLinePayBackend.supportedCurrencies, [.thb])
+            } else {
+                XCTFail("Capability doesn't have the Rabbit LINE Pay backend")
             }
 
             if let fpxBackend = capability[OMSSourceTypeValue.fpx] {

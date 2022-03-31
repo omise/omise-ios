@@ -227,6 +227,7 @@ public enum PaymentInformation: Codable, Equatable {
         case scb
         case ocbcPao
         case kbank
+        case bay
         case bbl
         case other(String)
     }
@@ -264,6 +265,9 @@ public enum PaymentInformation: Codable, Equatable {
 
     /// Internet Banking FPX
     case fpx(FPX)
+    
+    // Rabbit LINE Pay
+    case rabbitLinepay
 
     /// Other Payment Source
     case other(type: String, parameters: [String: Any])
@@ -308,6 +312,8 @@ public enum PaymentInformation: Codable, Equatable {
             self = .paynow
         case OMSSourceTypeValue.trueMoney.rawValue:
             self = .truemoney(try TrueMoney(from: decoder))
+        case OMSSourceTypeValue.rabbitLinepay.rawValue:
+            self = .rabbitLinepay
         case PaymentInformation.Points.self:
             self = .points(try Points(from: decoder))
         case PaymentInformation.MobileBanking.self:
@@ -381,6 +387,9 @@ public enum PaymentInformation: Codable, Equatable {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.fpx.rawValue, forKey: .type)
             try fpx.encode(to: encoder)
+        case .rabbitLinepay:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.rabbitLinepay.rawValue, forKey: .type)
         case .other(type: let type, parameters: let parameters):
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(type, forKey: .type)
@@ -408,6 +417,8 @@ public enum PaymentInformation: Codable, Equatable {
             return true
         case (.promptpay, .promptpay), (.paynow, .paynow):
             return true
+        case (.rabbitLinepay, .rabbitLinepay):
+            return true
         case (.truemoney(let lhsValue), .truemoney(let rhsValue)):
             return lhsValue == rhsValue
         case (.billPayment(let lhsValue), .billPayment(let rhsValue)):
@@ -424,6 +435,7 @@ public enum PaymentInformation: Codable, Equatable {
             return lhsValue == rhsValue
         case (.fpx(let lhsValue), .fpx(let rhsValue)):
             return lhsValue == rhsValue
+
         case (.other(let lhsType, let lhsParameters), .other(let rhsType, let rhsParameters)):
             return lhsType == rhsType &&
                 Set(lhsParameters.keys) == Set(rhsParameters.keys)
@@ -476,6 +488,8 @@ extension PaymentInformation {
             return OMSSourceTypeValue.payNow.rawValue
         case .truemoney:
             return OMSSourceTypeValue.trueMoney.rawValue
+        case .rabbitLinepay:
+            return OMSSourceTypeValue.rabbitLinepay.rawValue
         case .points(let points):
             return points.type
         case .mobileBanking(let bank):
@@ -928,7 +942,7 @@ extension PaymentInformation.Points {
 extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertible {
     public typealias AllCases = [PaymentInformation.MobileBanking]
     public static var allCases: PaymentInformation.MobileBanking.AllCases = [
-        .scb, .kbank, .ocbcPao, .bbl
+        .scb, .kbank, .ocbcPao, .bay, .bbl
     ]
 
     /// Omise Source Type value using in the Omise API
@@ -940,6 +954,8 @@ extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertibl
             return OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue
         case .kbank:
             return OMSSourceTypeValue.mobileBankingKBank.rawValue
+        case .bay:
+            return OMSSourceTypeValue.mobileBankingBAY.rawValue
         case .bbl:
             return OMSSourceTypeValue.mobileBankingBBL.rawValue
         case .other(let value):
@@ -955,6 +971,8 @@ extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertibl
             return "OCBC PAO"
         case .kbank:
             return "KBank"
+        case .bay:
+            return "BAY"
         case .bbl:
             return "BBL"
         case .other(let value):
@@ -982,6 +1000,8 @@ extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertibl
             self = .ocbcPao
         case "kbank":
             self = .kbank
+        case "bay":
+            self = .bay
         case "bbl":
             self = .bbl
         case let value:

@@ -536,6 +536,7 @@ extension PaymentCreatorController {
         .internetBankingBBL,
         .mobileBankingSCB,
         .mobileBankingKBank,
+        .mobileBankingBAY,
         .mobileBankingBBL,
         .alipay,
         .billPaymentTescoLotus,
@@ -598,7 +599,8 @@ extension PaymentCreatorController {
 
     public static let mobileBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
         .mobileBankingSCB,
-        .mobileBankingKBank
+        .mobileBankingKBank,
+        .mobileBankingBAY
     ]
 }
 
