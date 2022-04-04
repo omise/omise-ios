@@ -593,10 +593,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 225931201CE3210700841B86 /* Build configuration list for PBXNativeTarget "OmiseSDK" */;
 			buildPhases = (
-				225931131CE3210700841B86 /* Sources */,
-				225931141CE3210700841B86 /* Frameworks */,
 				225931151CE3210700841B86 /* Headers */,
 				225931161CE3210700841B86 /* Resources */,
+				225931131CE3210700841B86 /* Sources */,
+				225931141CE3210700841B86 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -611,9 +611,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22D480AE1D0EB29C00544CE1 /* Build configuration list for PBXNativeTarget "ExampleApp (Swift)" */;
 			buildPhases = (
+				22D4809B1D0EB29C00544CE1 /* Resources */,
 				22D480991D0EB29C00544CE1 /* Sources */,
 				22D4809A1D0EB29C00544CE1 /* Frameworks */,
-				22D4809B1D0EB29C00544CE1 /* Resources */,
 				8A0928211D545455008D393F /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -649,9 +649,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 987A02D31CE35D5E0035417A /* Build configuration list for PBXNativeTarget "OmiseSDKTests" */;
 			buildPhases = (
+				987A02C71CE35D5E0035417A /* Resources */,
 				987A02C51CE35D5E0035417A /* Sources */,
 				987A02C61CE35D5E0035417A /* Frameworks */,
-				987A02C71CE35D5E0035417A /* Resources */,
 			);
 			buildRules = (
 			);
