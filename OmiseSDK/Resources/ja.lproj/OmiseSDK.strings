@@ -121,6 +121,9 @@
 /* Class = "UILabel"; text = "Kasikorn Bank"; ObjectID = "bDJ-ih-QYr"; */
 "bDJ-ih-QYr.text" = "K PLUS";
 
+/* Class = "UILabel"; text = "Bangkok Bank"; ObjectID = "Hk2-sB-8C8"; */
+"Hk2-sB-8C8.text" = "Bualuang mBanking";
+
 /* Class = "UILabel"; text = "Siam Commercial Bank"; ObjectID = "EQF-26-ssb"; */
 "EQF-26-ssb.text" = "SCB EASY";
 

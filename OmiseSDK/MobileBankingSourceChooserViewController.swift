@@ -41,12 +41,14 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
         switch value {
         case .bay:
             return IndexPath(row: 0, section: 0)
-        case .kbank:
+        case .bbl:
             return IndexPath(row: 1, section: 0)
-        case .scb:
+        case .kbank:
             return IndexPath(row: 2, section: 0)
         case .ocbcPao:
             return IndexPath(row: 3, section: 0)
+        case .scb:
+            return IndexPath(row: 4, section: 0)
         case .other:
             preconditionFailure("This value is not supported for the built-in chooser")
         }

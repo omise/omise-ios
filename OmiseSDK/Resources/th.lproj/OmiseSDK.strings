@@ -139,6 +139,9 @@
 /* Class = "UILabel"; text = "Kasikorn Bank"; ObjectID = "bDJ-ih-QYr"; */
 "bDJ-ih-QYr.text" = "K PLUS";
 
+/* Class = "UILabel"; text = "Bangkok Bank"; ObjectID = "Hk2-sB-8C8"; */
+"Hk2-sB-8C8.text" = "Bualuang mBanking";
+
 /* Class = "UILabel"; text = "-"; ObjectID = "yQ7-lv-7H1"; */
 "yQ7-lv-7H1.text" = "-";
 
