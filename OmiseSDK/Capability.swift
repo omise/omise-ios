@@ -74,6 +74,7 @@ extension Capability {
             case eContext
             case fpx
             case rabbitLinepay
+            case ocbcPao
             case unknownSource(String, configurations: [String: Any])
         }
 
@@ -137,6 +138,8 @@ extension Capability.Backend.Payment {
         case (.fpx, .fpx):
             return true
         case (.rabbitLinepay, .rabbitLinepay):
+            return true
+        case (.ocbcPao, .ocbcPao):
             return true
         default:
             return false
@@ -232,6 +235,8 @@ extension Capability.Backend {
             self.payment = .fpx
         case .source(.rabbitLinepay):
             self.payment = .rabbitLinepay
+        case .source(.mobileBankingOCBCPAO):
+            self.payment = .ocbcPao
         case .source(let value):
             let configurations = try container.decodeJSONDictionary()
             self.payment = .unknownSource(value.rawValue, configurations: configurations)
@@ -256,7 +261,7 @@ extension Capability.Backend {
             try encoder.encodeJSONDictionary(configurations)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         // swiftlint:disable line_length
-        case .internetBanking, .alipay, .alipayCN, .alipayHK, .dana, .gcash, .kakaoPay, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay:
+        case .internetBanking, .alipay, .alipayCN, .alipayHK, .dana, .gcash, .kakaoPay, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
     }
@@ -333,6 +338,8 @@ extension Capability.Backend {
                 self = .source(.fpx)
             case .rabbitLinepay:
                 self = .source(.rabbitLinepay)
+            case .ocbcPao:
+                self = .source(.mobileBankingOCBCPAO)
             }
         }
 

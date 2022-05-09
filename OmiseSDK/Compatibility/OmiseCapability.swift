@@ -92,6 +92,9 @@ class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
     
     static let rabbitLinepaySourceBackendPayment =
         __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.rabbitLinepay)
+    
+    static let ocbcPaoSourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.mobileBankingOCBCPAO)
 
     static func makeInternetBankingSourceBackendPayment(
         bank: PaymentInformation.InternetBanking
@@ -169,6 +172,8 @@ extension __OmiseCapabilityBackendPayment {
             return __OmiseCapabilitySourceBackendPayment.FPXSourceBackendPayment
         case .rabbitLinepay:
             return __OmiseCapabilitySourceBackendPayment.rabbitLinepaySourceBackendPayment
+        case .ocbcPao:
+            return __OmiseCapabilitySourceBackendPayment.ocbcPaoSourceBackendPayment
         case .unknownSource(let type, let configurations):
             return __OmiseCapabilityUnknownSourceBackendPayment(sourceType: type, parameters: configurations)
         }

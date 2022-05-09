@@ -4,7 +4,7 @@
   "livemode": false,
   "location": "/sources/src_test_5avnh1p1dt3hkh161ac",
   "type": "mobile_banking_scb",
-  "flow": "redirect",
+  "flow": "app_redirect",
   "amount": 1000000,
   "currency": "THB"
 }

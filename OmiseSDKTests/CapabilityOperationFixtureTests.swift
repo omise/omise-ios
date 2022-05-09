@@ -47,6 +47,12 @@ class CapabilityOperationFixtureTests: XCTestCase {
             } else {
                 XCTFail("Capability doesn't have the Rabbit LINE Pay backend")
             }
+            
+            if let ocbcPaoBackend = capability[OMSSourceTypeValue.mobileBankingOCBCPAO] {
+                XCTAssertEqual(ocbcPaoBackend.supportedCurrencies, [.sgd])
+            } else {
+                XCTFail("Capability doesn't have the OCBC Pay Anyone backend")
+            }
 
             if let fpxBackend = capability[OMSSourceTypeValue.fpx] {
                 XCTAssertEqual(fpxBackend.banks, [

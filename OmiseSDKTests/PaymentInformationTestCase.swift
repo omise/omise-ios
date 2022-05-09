@@ -315,7 +315,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: .mobileBanking(.ocbcPao),
+            let sourceParameter = Source.CreateParameter(paymentInformation: .ocbcPao,
                                                          amount: 10_000_00,
                                                          currency: .sgd)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)

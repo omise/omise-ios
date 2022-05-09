@@ -24,6 +24,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case citiPoints
     case fpx
     case rabbitLinepay
+    case ocbcPao
 
     static var allCases: [PaymentChooserOption] {
         return [
@@ -47,7 +48,8 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             .payEasy,
             .netBanking,
             .fpx,
-            .rabbitLinepay
+            .rabbitLinepay,
+            .ocbcPao
         ]
     }
 
@@ -95,6 +97,8 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "FPX"
         case .rabbitLinepay:
             return "Rabbit LINE Pay"
+        case .ocbcPao:
+            return "OCBC Pay Anyone"
         }
     }
 }
@@ -128,7 +132,7 @@ extension PaymentChooserOption {
             return [.touchNGo]
         case .internetBankingBAY, .internetBankingKTB, .internetBankingBBL, .internetBankingSCB:
             return [.internetBanking]
-        case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingOCBCPAO, .mobileBankingBAY, .mobileBankingBBL:
+        case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingBAY, .mobileBankingBBL:
             return [.mobileBanking]
         case .payNow:
             return [.paynow]
@@ -142,6 +146,8 @@ extension PaymentChooserOption {
             return [.fpx]
         case .rabbitLinepay:
             return [.rabbitLinepay]
+        case .mobileBankingOCBCPAO:
+            return [.ocbcPao]
         default:
             return []
         }
@@ -307,6 +313,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .points(.citiPoints)
         case .rabbitLinepay:
             payment = .rabbitLinepay
+        case .ocbcPao:
+            payment = .ocbcPao
         default:
             return
         }
@@ -368,6 +376,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 19, section: 0)
         case .rabbitLinepay:
             return IndexPath(row: 20, section: 0)
+        case .ocbcPao:
+            return IndexPath(row: 21, section: 0)
 
         }
     }
@@ -415,6 +425,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue.fpx
             case .rabbitLinepay:
                 return OMSSourceTypeValue.rabbitLinepay
+            case .ocbcPao:
+                return OMSSourceTypeValue.mobileBankingOCBCPAO
             case .card, .unknownSource:
                 return nil
             }
