@@ -307,8 +307,6 @@ extension PaymentSettingTableViewController {
             return .eContext
         case mobileBankingSCBPaymentCell:
             return .mobileBankingSCB
-        case OCBCPAOPaymentCell:
-            return .mobileBankingOCBCPAO
         case mobileBankingKBankPaymentCell:
             return .mobileBankingKBank
         case mobileBankingBBLPaymentCell:
