@@ -91,7 +91,7 @@ public struct CreateSourceParameter: Encodable {
 public enum Flow: RawRepresentable, Decodable, Equatable {
     case redirect
     case offline
-    case appredirect
+    case appRedirect
     case other(String)
     
     public typealias RawValue = String
@@ -102,7 +102,7 @@ public enum Flow: RawRepresentable, Decodable, Equatable {
             return "offline"
         case .redirect:
             return "redirect"
-        case .appredirect:
+        case .appRedirect:
             return "app_redirect"
         case .other(let value):
             return value
@@ -122,7 +122,7 @@ public enum Flow: RawRepresentable, Decodable, Equatable {
         case "offline":
             self = .offline
         case "app_redirect":
-            self = .appredirect
+            self = .appRedirect
         default:
             self = .other(rawValue)
         }

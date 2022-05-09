@@ -293,7 +293,7 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual(Currency.thb, source.currency)
             XCTAssertEqual(1000000, source.amount)
             XCTAssertEqual(PaymentInformation.mobileBanking(.scb), source.paymentInformation)
-            XCTAssertEqual(Flow.appredirect, source.flow)
+            XCTAssertEqual(Flow.appRedirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
         }
@@ -306,7 +306,7 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual(Currency.thb, source.currency)
             XCTAssertEqual(1000000, source.amount)
             XCTAssertEqual(PaymentInformation.mobileBanking(.kbank), source.paymentInformation)
-            XCTAssertEqual(Flow.appredirect, source.flow)
+            XCTAssertEqual(Flow.appRedirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
         }
@@ -319,7 +319,7 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual(Currency.thb, source.currency)
             XCTAssertEqual(1000000, source.amount)
             XCTAssertEqual(PaymentInformation.mobileBanking(.bay), source.paymentInformation)
-            XCTAssertEqual(Flow.appredirect, source.flow)
+            XCTAssertEqual(Flow.appRedirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
         }
@@ -332,7 +332,7 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual(Currency.thb, source.currency)
             XCTAssertEqual(1000000, source.amount)
             XCTAssertEqual(PaymentInformation.mobileBanking(.bbl), source.paymentInformation)
-            XCTAssertEqual(Flow.appredirect, source.flow)
+            XCTAssertEqual(Flow.appRedirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
         }
@@ -349,7 +349,7 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual(Currency.thb, source.currency)
             XCTAssertEqual(5000_00, source.amount)
             XCTAssertEqual(PaymentInformation.alipayCN, source.paymentInformation)
-            XCTAssertEqual(Flow.appredirect, source.flow)
+            XCTAssertEqual(Flow.appRedirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
         }
@@ -366,7 +366,7 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual(Currency.hkd, source.currency)
             XCTAssertEqual(5000_00, source.amount)
             XCTAssertEqual(PaymentInformation.alipayHK, source.paymentInformation)
-            XCTAssertEqual(Flow.appredirect, source.flow)
+            XCTAssertEqual(Flow.appRedirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
         }
@@ -383,7 +383,7 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual(Currency.jpy, source.currency)
             XCTAssertEqual(5000_00, source.amount)
             XCTAssertEqual(PaymentInformation.dana, source.paymentInformation)
-            XCTAssertEqual(Flow.appredirect, source.flow)
+            XCTAssertEqual(Flow.appRedirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
         }
@@ -400,7 +400,7 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual(Currency.usd, source.currency)
             XCTAssertEqual(5000_00, source.amount)
             XCTAssertEqual(PaymentInformation.gcash, source.paymentInformation)
-            XCTAssertEqual(Flow.appredirect, source.flow)
+            XCTAssertEqual(Flow.appRedirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
         }
@@ -417,7 +417,7 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual(Currency.usd, source.currency)
             XCTAssertEqual(5000_00, source.amount)
             XCTAssertEqual(PaymentInformation.kakaoPay, source.paymentInformation)
-            XCTAssertEqual(Flow.appredirect, source.flow)
+            XCTAssertEqual(Flow.appRedirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
         }
@@ -434,7 +434,7 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual(Currency.sgd, source.currency)
             XCTAssertEqual(5000_00, source.amount)
             XCTAssertEqual(PaymentInformation.touchNGo, source.paymentInformation)
-            XCTAssertEqual(Flow.appredirect, source.flow)
+            XCTAssertEqual(Flow.appRedirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
         }
@@ -519,7 +519,7 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual(1000000, source.amount)
             XCTAssertEqual(Currency.sgd, source.currency)
             XCTAssertEqual(PaymentInformation.ocbcPao, source.paymentInformation)
-            XCTAssertEqual(Flow.appredirect, source.flow)
+            XCTAssertEqual(Flow.appRedirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
         }
