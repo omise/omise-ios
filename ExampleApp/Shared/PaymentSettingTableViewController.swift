@@ -108,7 +108,6 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var installmentUOBPaymentCell: UITableViewCell!
     @IBOutlet private var mobileBankingSCBPaymentCell: UITableViewCell!
     @IBOutlet private var mobileBankingKBankPaymentCell: UITableViewCell!
-    @IBOutlet private var mobileBankingOCBCPAOPaymentCell: UITableViewCell!
     @IBOutlet private var mobileBankingBBLPaymentCell: UITableViewCell!
     @IBOutlet private var mobileBankingBAYPaymentCell: UITableViewCell!
     @IBOutlet private var eContextPaymentCell: UITableViewCell!
@@ -118,6 +117,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var pointsCitiCell: UITableViewCell!
     @IBOutlet private var fpxCell: UITableViewCell!
     @IBOutlet private var rabbitLinepayCell: UITableViewCell!
+    @IBOutlet private var OCBCPAOPaymentCell: UITableViewCell!
     
     @IBOutlet private var useCapabilityAPIValuesCell: UITableViewCell!
     @IBOutlet private var useSpecifiedValuesCell: UITableViewCell!
@@ -307,7 +307,7 @@ extension PaymentSettingTableViewController {
             return .eContext
         case mobileBankingSCBPaymentCell:
             return .mobileBankingSCB
-        case mobileBankingOCBCPAOPaymentCell:
+        case OCBCPAOPaymentCell:
             return .mobileBankingOCBCPAO
         case mobileBankingKBankPaymentCell:
             return .mobileBankingKBank
@@ -327,6 +327,8 @@ extension PaymentSettingTableViewController {
             return .fpx
         case rabbitLinepayCell:
             return .rabbitLinepay
+        case OCBCPAOPaymentCell:
+            return .mobileBankingOCBCPAO
         default:
             return nil
         }
@@ -382,7 +384,7 @@ extension PaymentSettingTableViewController {
         case .mobileBankingSCB:
             return mobileBankingSCBPaymentCell
         case .mobileBankingOCBCPAO:
-            return mobileBankingOCBCPAOPaymentCell
+            return OCBCPAOPaymentCell
         case .mobileBankingKBank:
             return mobileBankingKBankPaymentCell
         case .mobileBankingBBL:

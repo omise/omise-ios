@@ -103,7 +103,7 @@ extension OMSSourceTypeValue {
         switch self {
         case .internetBankingBAY, .internetBankingKTB, .internetBankingSCB, .internetBankingBBL:
             return "internet_banking"
-        case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingOCBCPAO, .mobileBankingBAY, .mobileBankingBBL:
+        case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingBAY, .mobileBankingBBL:
             return "mobile_banking"
         case .alipay:
             return "alipay"
@@ -140,6 +140,8 @@ extension OMSSourceTypeValue {
             return "touch_n_go"
         case .rabbitLinepay:
             return "rabbit_linepay"
+        case .mobileBankingOCBCPAO:
+            return "mobile_banking_ocbc_pao"
         default:
             return self.rawValue
         }

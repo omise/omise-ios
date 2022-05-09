@@ -76,6 +76,9 @@ public class __SourcePaymentInformation: NSObject {
     
     /// Payment Information for an Rabbit LINE Pay Payment
     public static let rabbitLinepayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.rabbitLinepay)!
+    
+    /// Payment Information for an OCBC Pay Anyone
+    public static let ocbcPaoPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.mobileBankingOCBCPAO)!
 }
 
 /// Internet Bankning Source Payment Information
@@ -319,9 +322,6 @@ public class __SourceMobileBankingPayment: __SourcePaymentInformation {
     /// Payment Information for a SCB Mobile Banking Payment
     public static let scbMobileBankingPayment = __SourceMobileBankingPayment(type: OMSSourceTypeValue.mobileBankingSCB)!
     
-    /// Payment Information for a OCBC PAO Mobile Banking Payment
-    public static let ocbcPaoMobileBankingPayment = __SourceMobileBankingPayment(type: OMSSourceTypeValue.mobileBankingOCBCPAO)!
-
     /// Payment Information for a KBank PayPlus Mobile Banking Payment
     public static let kbankMobileBankingPayment = __SourceMobileBankingPayment(type: OMSSourceTypeValue.mobileBankingKBank)!
 
@@ -568,6 +568,9 @@ extension __SourcePaymentInformation {
         case .rabbitLinepay:
             return __SourcePaymentInformation.rabbitLinepayPayment
 
+        case .ocbcPao:
+            return __SourcePaymentInformation.ocbcPaoPayment
+            
         case .truemoney(let trueMoney):
             return __SourceTrueMoneyPayment(phoneNumber: trueMoney.phoneNumber)
 
@@ -583,8 +586,6 @@ extension __SourcePaymentInformation {
             switch bank {
             case .scb:
                 return __SourceMobileBankingPayment.scbMobileBankingPayment
-            case .ocbcPao:
-                return __SourceMobileBankingPayment.ocbcPaoMobileBankingPayment
             case .kbank:
                 return __SourceMobileBankingPayment.kbankMobileBankingPayment
             case .bay:
