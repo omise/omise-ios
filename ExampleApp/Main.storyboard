@@ -1297,7 +1297,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
     </scenes>
     <designables>
         <designable name="5Ul-WN-gFb">
-            <size key="intrinsicContentSize" width="132" height="18.5"/>
+            <size key="intrinsicContentSize" width="147" height="18.5"/>
         </designable>
         <designable name="Iw8-Ab-h7Y">
             <size key="intrinsicContentSize" width="23.5" height="18.5"/>
