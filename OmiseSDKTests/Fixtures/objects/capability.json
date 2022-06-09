@@ -381,6 +381,56 @@
         "card_brands": null,
         "installment_terms": null,
         "banks": []
+    },
+    {
+        "object": "payment_method",
+        "name": "boost",
+        "currencies": [
+            "MYR"
+        ],
+        "card_brands": null,
+        "installment_terms": null,
+        "banks": []
+    },
+    {
+        "object": "payment_method",
+        "name": "shopeePay",
+        "currencies": [
+            "MYR"
+        ],
+        "card_brands": null,
+        "installment_terms": null,
+        "banks": []
+    },
+    {
+        "object": "payment_method",
+        "name": "maybank_qrpay",
+        "currencies": [
+            "MYR"
+        ],
+        "card_brands": null,
+        "installment_terms": null,
+        "banks": []
+    },
+    {
+        "object": "payment_method",
+        "name": "duitnow_qr",
+        "currencies": [
+            "MYR"
+        ],
+        "card_brands": null,
+        "installment_terms": null,
+        "banks": []
+    },
+    {
+        "object": "payment_method",
+        "name": "duitnow_obw",
+        "currencies": [
+            "MYR"
+        ],
+        "card_brands": null,
+        "installment_terms": null,
+        "banks": []
     }
   ],
   "zero_interest_installments": false

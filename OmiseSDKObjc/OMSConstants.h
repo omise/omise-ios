@@ -38,6 +38,11 @@ extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePointsCiti;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueFpx;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingKBank;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueRabbitLinepay;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueBoost;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueShopeePay;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMaybankQRPay;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueDuitNowQR;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueDuitNowOBW;
 
 
 typedef NSString * OMSSupportedCurrencyCode NS_EXTENSIBLE_STRING_ENUM;

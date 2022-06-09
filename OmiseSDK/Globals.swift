@@ -142,6 +142,16 @@ extension OMSSourceTypeValue {
             return "rabbit_linepay"
         case .mobileBankingOCBCPAO:
             return "mobile_banking_ocbc_pao"
+        case .boost:
+            return "boost"
+        case .shopeePay:
+            return "shopeepay"
+        case .maybankQRPay:
+            return "maybank_qr"
+        case .duitNowQR:
+            return "duitnow_qr"
+        case .duitNowOBW:
+            return "duitnow_obw"
         default:
             return self.rawValue
         }

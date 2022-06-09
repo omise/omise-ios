@@ -1,0 +1,11 @@
+{
+  "object": "source",
+  "id": "src_5pqcjr6tu4xvqut5nh5",
+  "livemode": true,
+  "location": "/sources/src_5pqcjr6tu4xvqut5nh5",
+  "type": "duitnow_obw",
+  "flow": "redirect",
+  "amount": 100000,
+  "currency": "MYR",
+  "bank": "affin"
+}

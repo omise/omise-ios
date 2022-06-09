@@ -559,6 +559,91 @@ class ModelTestCase: XCTestCase {
         }
     }
 
+    func testDecodeBoostSource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_boost")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_5pqcjr6tu4xvqut5nh5", source.id)
+            XCTAssertEqual(100000, source.amount)
+            XCTAssertEqual(Currency.myr, source.currency)
+            XCTAssertEqual(PaymentInformation.boost, source.paymentInformation)
+            XCTAssertEqual(Flow.redirect, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
+    
+    func testDecodeShopeePaySource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_shopeepay")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_5pqcjr6tu4xvqut5nh5", source.id)
+            XCTAssertEqual(100000, source.amount)
+            XCTAssertEqual(Currency.myr, source.currency)
+            XCTAssertEqual(PaymentInformation.shopeePay, source.paymentInformation)
+            XCTAssertEqual(Flow.redirect, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
+    
+    func testDecodeMaybankQRPaySource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_maybank_qrpay")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_5pqcjr6tu4xvqut5nh5", source.id)
+            XCTAssertEqual(100000, source.amount)
+            XCTAssertEqual(Currency.myr, source.currency)
+            XCTAssertEqual(PaymentInformation.maybankQRPay, source.paymentInformation)
+            XCTAssertEqual(Flow.redirect, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
+    
+    func testDecodeDuitNowQRSource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_duitnow_qr")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_5pqcjr6tu4xvqut5nh5", source.id)
+            XCTAssertEqual(100000, source.amount)
+            XCTAssertEqual(Currency.myr, source.currency)
+            XCTAssertEqual(PaymentInformation.duitNowQR, source.paymentInformation)
+            XCTAssertEqual(Flow.redirect, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
+    
+    func testDecodeDuitNowOBWSource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_duitnow_obw")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_5pqcjr6tu4xvqut5nh5", source.id)
+            XCTAssertEqual(100000, source.amount)
+            XCTAssertEqual(Currency.myr, source.currency)
+            XCTAssertEqual(PaymentInformation.duitNowOBW(.init(bank: "affin")), source.paymentInformation)
+            XCTAssertEqual(Flow.redirect, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
+    
     func testEncodeTokenParams() throws {
         let encoder = Client.makeJSONEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]

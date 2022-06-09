@@ -95,7 +95,22 @@ class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
     
     static let ocbcPaoSourceBackendPayment =
         __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.mobileBankingOCBCPAO)
-
+    
+    static let boostSourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.boost)
+    
+    static let shopeePaySourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.shopeePay)
+    
+    static let maybankQRPaySourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.maybankQRPay)
+    
+    static let duitNowQRSourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.duitNowQR)
+    
+    static let duitNowOBWSourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.duitNowOBW)
+    
     static func makeInternetBankingSourceBackendPayment(
         bank: PaymentInformation.InternetBanking
         ) -> __OmiseCapabilitySourceBackendPayment {
@@ -174,6 +189,16 @@ extension __OmiseCapabilityBackendPayment {
             return __OmiseCapabilitySourceBackendPayment.rabbitLinepaySourceBackendPayment
         case .ocbcPao:
             return __OmiseCapabilitySourceBackendPayment.ocbcPaoSourceBackendPayment
+        case .boost:
+            return __OmiseCapabilitySourceBackendPayment.boostSourceBackendPayment
+        case .shopeePay:
+            return __OmiseCapabilitySourceBackendPayment.shopeePaySourceBackendPayment
+        case .maybankQRPay:
+            return __OmiseCapabilitySourceBackendPayment.maybankQRPaySourceBackendPayment
+        case .duitNowQR:
+            return __OmiseCapabilitySourceBackendPayment.duitNowQRSourceBackendPayment
+        case .duitNowOBW:
+            return __OmiseCapabilitySourceBackendPayment.duitNowOBWSourceBackendPayment
         case .unknownSource(let type, let configurations):
             return __OmiseCapabilityUnknownSourceBackendPayment(sourceType: type, parameters: configurations)
         }

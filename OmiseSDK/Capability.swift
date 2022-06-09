@@ -75,6 +75,11 @@ extension Capability {
             case fpx
             case rabbitLinepay
             case ocbcPao
+            case boost
+            case shopeePay
+            case maybankQRPay
+            case duitNowQR
+            case duitNowOBW
             case unknownSource(String, configurations: [String: Any])
         }
 
@@ -140,6 +145,16 @@ extension Capability.Backend.Payment {
         case (.rabbitLinepay, .rabbitLinepay):
             return true
         case (.ocbcPao, .ocbcPao):
+            return true
+        case (.boost, .boost):
+            return true
+        case (.shopeePay, .shopeePay):
+            return true
+        case (.maybankQRPay, .maybankQRPay):
+            return true
+        case (.duitNowQR, .duitNowQR):
+            return true
+        case (.duitNowOBW, .duitNowOBW):
             return true
         default:
             return false
@@ -237,6 +252,16 @@ extension Capability.Backend {
             self.payment = .rabbitLinepay
         case .source(.mobileBankingOCBCPAO):
             self.payment = .ocbcPao
+        case .source(.boost):
+            self.payment = .boost
+        case .source(.shopeePay):
+            self.payment = .shopeePay
+        case .source(.maybankQRPay):
+            self.payment = .maybankQRPay
+        case .source(.duitNowQR):
+            self.payment = .duitNowQR
+        case .source(.duitNowOBW):
+            self.payment = .duitNowOBW
         case .source(let value):
             let configurations = try container.decodeJSONDictionary()
             self.payment = .unknownSource(value.rawValue, configurations: configurations)
@@ -261,7 +286,7 @@ extension Capability.Backend {
             try encoder.encodeJSONDictionary(configurations)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         // swiftlint:disable line_length
-        case .internetBanking, .alipay, .alipayCN, .alipayHK, .dana, .gcash, .kakaoPay, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao:
+        case .internetBanking, .alipay, .alipayCN, .alipayHK, .dana, .gcash, .kakaoPay, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .boost, .shopeePay, .maybankQRPay, .duitNowQR, .duitNowOBW:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
     }
@@ -340,6 +365,16 @@ extension Capability.Backend {
                 self = .source(.rabbitLinepay)
             case .ocbcPao:
                 self = .source(.mobileBankingOCBCPAO)
+            case .boost:
+                self = .source(.boost)
+            case .shopeePay:
+                self = .source(.shopeePay)
+            case .maybankQRPay:
+                self = .source(.maybankQRPay)
+            case .duitNowQR:
+                self = .source(.duitNowQR)
+            case .duitNowOBW:
+                self = .source(.duitNowOBW)
             }
         }
 

@@ -25,6 +25,11 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case fpx
     case rabbitLinepay
     case ocbcPao
+    case boost
+    case shopeePay
+    case maybankQRPay
+    case duitNowQR
+    case duitNowOBW
 
     static var allCases: [PaymentChooserOption] {
         return [
@@ -49,7 +54,12 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             .netBanking,
             .fpx,
             .rabbitLinepay,
-            .ocbcPao
+            .ocbcPao,
+            .boost,
+            .shopeePay,
+            .maybankQRPay,
+            .duitNowQR,
+            .duitNowOBW
         ]
     }
 
@@ -99,6 +109,16 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "Rabbit LINE Pay"
         case .ocbcPao:
             return "OCBC Pay Anyone"
+        case .boost:
+            return "Boost"
+        case .shopeePay:
+            return "ShopeePay"
+        case .maybankQRPay:
+            return "Maybank QRPay"
+        case .duitNowQR:
+            return "DuitNow QR"
+        case .duitNowOBW:
+            return "DuitNow OBW"
         }
     }
 }
@@ -148,6 +168,16 @@ extension PaymentChooserOption {
             return [.rabbitLinepay]
         case .mobileBankingOCBCPAO:
             return [.ocbcPao]
+        case .boost:
+            return [.boost]
+        case .shopeePay:
+            return [.shopeePay]
+        case .maybankQRPay:
+            return [.maybankQRPay]
+        case .duitNowQR:
+            return [.duitNowQR]
+        case .duitNowOBW:
+            return [.duitNowOBW]
         default:
             return []
         }
@@ -161,6 +191,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                                     PaymentChooserUI {
     var capability: Capability?
     var flowSession: PaymentCreatorFlowSession?
+    var duitNowOBWBanks: [PaymentInformation.DuitNowOBW.Bank] = PaymentInformation.DuitNowOBW.Bank.allCases
 
     @objc var showsCreditCardPayment = true {
         didSet {
@@ -261,6 +292,9 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         case ("GoToFPXFormSegue"?, let controller as FPXFormViewController):
             controller.showingValues = capability?[.fpx]?.banks ?? []
             controller.flowSession = self.flowSession
+        case ("GoToDuitNowOBWBankChooserSegue"?, let controller as DuitNowOBWBankChooserViewController):
+            controller.showingValues = duitNowOBWBanks
+            controller.flowSession = self.flowSession
         default: break
         }
 
@@ -315,6 +349,14 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .rabbitLinepay
         case .ocbcPao:
             payment = .ocbcPao
+        case .boost:
+            payment = .boost
+        case .shopeePay:
+            payment = .shopeePay
+        case .maybankQRPay:
+            payment = .maybankQRPay
+        case .duitNowQR:
+            payment = .duitNowQR
         default:
             return
         }
@@ -378,6 +420,16 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 20, section: 0)
         case .ocbcPao:
             return IndexPath(row: 21, section: 0)
+        case .boost:
+            return IndexPath(row: 22, section: 0)
+        case .shopeePay:
+            return IndexPath(row: 23, section: 0)
+        case .maybankQRPay:
+            return IndexPath(row: 24, section: 0)
+        case .duitNowQR:
+            return IndexPath(row: 25, section: 0)
+        case .duitNowOBW:
+            return IndexPath(row: 26, section: 0)
 
         }
     }
@@ -427,6 +479,16 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue.rabbitLinepay
             case .ocbcPao:
                 return OMSSourceTypeValue.mobileBankingOCBCPAO
+            case .boost:
+                return OMSSourceTypeValue.boost
+            case .shopeePay:
+                return OMSSourceTypeValue.shopeePay
+            case .maybankQRPay:
+                return OMSSourceTypeValue.maybankQRPay
+            case .duitNowQR:
+                return OMSSourceTypeValue.duitNowQR
+            case .duitNowOBW:
+                return OMSSourceTypeValue.duitNowOBW
             case .card, .unknownSource:
                 return nil
             }
