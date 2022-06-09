@@ -75,6 +75,7 @@ extension Capability {
             case fpx
             case rabbitLinepay
             case ocbcPao
+            case grabPay
             case unknownSource(String, configurations: [String: Any])
         }
 
@@ -140,6 +141,8 @@ extension Capability.Backend.Payment {
         case (.rabbitLinepay, .rabbitLinepay):
             return true
         case (.ocbcPao, .ocbcPao):
+            return true
+        case (.grabPay, .grabPay):
             return true
         default:
             return false
@@ -237,6 +240,8 @@ extension Capability.Backend {
             self.payment = .rabbitLinepay
         case .source(.mobileBankingOCBCPAO):
             self.payment = .ocbcPao
+        case .source(.grabPay):
+            self.payment = .grabPay
         case .source(let value):
             let configurations = try container.decodeJSONDictionary()
             self.payment = .unknownSource(value.rawValue, configurations: configurations)
@@ -261,7 +266,7 @@ extension Capability.Backend {
             try encoder.encodeJSONDictionary(configurations)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         // swiftlint:disable line_length
-        case .internetBanking, .alipay, .alipayCN, .alipayHK, .dana, .gcash, .kakaoPay, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao:
+        case .internetBanking, .alipay, .alipayCN, .alipayHK, .dana, .gcash, .kakaoPay, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .grabPay:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
     }
@@ -340,6 +345,8 @@ extension Capability.Backend {
                 self = .source(.rabbitLinepay)
             case .ocbcPao:
                 self = .source(.mobileBankingOCBCPAO)
+            case .grabPay:
+                self = .source(.grabPay)
             }
         }
 

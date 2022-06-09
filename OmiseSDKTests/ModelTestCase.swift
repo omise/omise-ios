@@ -524,6 +524,23 @@ class ModelTestCase: XCTestCase {
             XCTFail("Cannot decode the source \(error)")
         }
     }
+
+    func testDecodeGrabPaySource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_grabpay")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_test_5pqcjr6tu4xvqut5nh5", source.id)
+            XCTAssertEqual(100000, source.amount)
+            XCTAssertEqual(Currency.sgd, source.currency)
+            XCTAssertEqual(PaymentInformation.grabPay, source.paymentInformation)
+            XCTAssertEqual(Flow.redirect, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
     
     func testDecodePointsSource() throws {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)

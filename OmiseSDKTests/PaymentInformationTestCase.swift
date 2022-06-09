@@ -618,6 +618,23 @@ class PaymentInformationTestCase: XCTestCase {
                 }
                 """, encodedJSONString)
         }
+
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .grabPay,
+                                                         amount: 1_000_00,
+                                                         currency: .sgd)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 100000,
+                  "currency" : "SGD",
+                  "platform_type" : "IOS",
+                  "type" : "grabpay"
+                }
+                """, encodedJSONString)
+        }
     }
 
     func testOtherPaymentInfromation() throws {

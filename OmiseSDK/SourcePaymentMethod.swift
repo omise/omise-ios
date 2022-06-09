@@ -271,6 +271,9 @@ public enum PaymentInformation: Codable, Equatable {
     /// OCBC Pay Anyone Payment Source
     case ocbcPao
 
+    // GrabPay
+    case grabPay
+
     /// Other Payment Source
     case other(type: String, parameters: [String: Any])
 
@@ -318,6 +321,8 @@ public enum PaymentInformation: Codable, Equatable {
             self = .rabbitLinepay
         case OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue:
             self = .ocbcPao
+        case OMSSourceTypeValue.grabPay.rawValue:
+            self = .grabPay
         case PaymentInformation.Points.self:
             self = .points(try Points(from: decoder))
         case PaymentInformation.MobileBanking.self:
@@ -397,6 +402,9 @@ public enum PaymentInformation: Codable, Equatable {
         case .ocbcPao:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue, forKey: .type)
+        case .grabPay:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.grabPay.rawValue, forKey: .type)
         case .other(type: let type, parameters: let parameters):
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(type, forKey: .type)
@@ -427,6 +435,8 @@ public enum PaymentInformation: Codable, Equatable {
         case (.rabbitLinepay, .rabbitLinepay):
             return true
         case (.ocbcPao, .ocbcPao):
+            return true
+        case (.grabPay, .grabPay):
             return true
         case (.truemoney(let lhsValue), .truemoney(let rhsValue)):
             return lhsValue == rhsValue
@@ -501,6 +511,8 @@ extension PaymentInformation {
             return OMSSourceTypeValue.rabbitLinepay.rawValue
         case .ocbcPao:
             return OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue
+        case .grabPay:
+            return OMSSourceTypeValue.grabPay.rawValue
         case .points(let points):
             return points.type
         case .mobileBanking(let bank):

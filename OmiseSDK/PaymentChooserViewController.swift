@@ -25,6 +25,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case fpx
     case rabbitLinepay
     case ocbcPao
+    case grabPay
 
     static var allCases: [PaymentChooserOption] {
         return [
@@ -49,7 +50,8 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             .netBanking,
             .fpx,
             .rabbitLinepay,
-            .ocbcPao
+            .ocbcPao,
+            .grabPay
         ]
     }
 
@@ -99,6 +101,8 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "Rabbit LINE Pay"
         case .ocbcPao:
             return "OCBC Pay Anyone"
+        case .grabPay:
+            return "Grab"
         }
     }
 }
@@ -148,6 +152,8 @@ extension PaymentChooserOption {
             return [.rabbitLinepay]
         case .mobileBankingOCBCPAO:
             return [.ocbcPao]
+        case .grabPay:
+            return [.grabPay]
         default:
             return []
         }
@@ -315,6 +321,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .rabbitLinepay
         case .ocbcPao:
             payment = .ocbcPao
+        case .grabPay:
+            payment = .grabPay
         default:
             return
         }
@@ -378,7 +386,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 20, section: 0)
         case .ocbcPao:
             return IndexPath(row: 21, section: 0)
-
+        case .grabPay:
+            return IndexPath(row: 22, section: 0)
         }
     }
 
@@ -427,6 +436,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue.rabbitLinepay
             case .ocbcPao:
                 return OMSSourceTypeValue.mobileBankingOCBCPAO
+            case .grabPay:
+                return OMSSourceTypeValue.grabPay
             case .card, .unknownSource:
                 return nil
             }
