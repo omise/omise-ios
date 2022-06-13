@@ -386,6 +386,7 @@
       "object": "payment_method",
       "name": "grabpay",
       "currencies": [
+          "MYR",
           "SGD"
       ],
       "card_brands": null,

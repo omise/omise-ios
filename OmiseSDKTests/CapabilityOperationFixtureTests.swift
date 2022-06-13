@@ -71,7 +71,7 @@ class CapabilityOperationFixtureTests: XCTestCase {
             }
 
             if let grabPayBackend = capability[OMSSourceTypeValue.grabPay] {
-                XCTAssertEqual(grabPayBackend.supportedCurrencies, [.sgd])
+                XCTAssertEqual(grabPayBackend.supportedCurrencies, [.sgd, .myr])
             } else {
                 XCTFail("Capability doesn't have the GrabPay backend")
             }
