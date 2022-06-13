@@ -36,6 +36,7 @@ OMSSourceTypeValue const _Nonnull OMSSourceTypeValueTrueMoney = @"truemoney";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePointsCiti = @"points_citi";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueFpx = @"fpx";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueRabbitLinepay = @"rabbit_linepay";
+OMSSourceTypeValue const _Nonnull OMSSourceTypeValueGrabPay = @"grabpay";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueBoost = @"boost";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueShopeePay = @"shopeepay";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMaybankQRPay = @"maybank_qr";

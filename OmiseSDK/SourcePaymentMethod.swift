@@ -331,6 +331,9 @@ public enum PaymentInformation: Codable, Equatable {
     /// DuitNow OBW Payment Source
     case duitNowOBW(DuitNowOBW)
 
+    // GrabPay
+    case grabPay
+
     /// Other Payment Source
     case other(type: String, parameters: [String: Any])
 
@@ -378,6 +381,8 @@ public enum PaymentInformation: Codable, Equatable {
             self = .rabbitLinepay
         case OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue:
             self = .ocbcPao
+        case OMSSourceTypeValue.grabPay.rawValue:
+            self = .grabPay
         case OMSSourceTypeValue.boost.rawValue:
             self = .boost
         case OMSSourceTypeValue.shopeePay.rawValue:
@@ -467,6 +472,9 @@ public enum PaymentInformation: Codable, Equatable {
         case .ocbcPao:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue, forKey: .type)
+        case .grabPay:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.grabPay.rawValue, forKey: .type)
         case .boost:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.boost.rawValue, forKey: .type)
@@ -513,6 +521,8 @@ public enum PaymentInformation: Codable, Equatable {
         case (.rabbitLinepay, .rabbitLinepay):
             return true
         case (.ocbcPao, .ocbcPao):
+            return true
+        case (.grabPay, .grabPay):
             return true
         case (.boost, .boost):
             return true
@@ -596,6 +606,8 @@ extension PaymentInformation {
             return OMSSourceTypeValue.rabbitLinepay.rawValue
         case .ocbcPao:
             return OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue
+        case .grabPay:
+            return OMSSourceTypeValue.grabPay.rawValue
         case .boost:
             return OMSSourceTypeValue.boost.rawValue
         case .shopeePay:

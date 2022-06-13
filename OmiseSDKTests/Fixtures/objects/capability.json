@@ -383,6 +383,16 @@
         "banks": []
     },
     {
+      "object": "payment_method",
+      "name": "grabpay",
+      "currencies": [
+          "SGD"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "banks": []
+    },
+    {
         "object": "payment_method",
         "name": "boost",
         "currencies": [

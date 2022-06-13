@@ -75,6 +75,7 @@ extension Capability {
             case fpx
             case rabbitLinepay
             case ocbcPao
+            case grabPay
             case boost
             case shopeePay
             case maybankQRPay
@@ -145,6 +146,8 @@ extension Capability.Backend.Payment {
         case (.rabbitLinepay, .rabbitLinepay):
             return true
         case (.ocbcPao, .ocbcPao):
+            return true
+        case (.grabPay, .grabPay):
             return true
         case (.boost, .boost):
             return true
@@ -252,6 +255,8 @@ extension Capability.Backend {
             self.payment = .rabbitLinepay
         case .source(.mobileBankingOCBCPAO):
             self.payment = .ocbcPao
+        case .source(.grabPay):
+            self.payment = .grabPay
         case .source(.boost):
             self.payment = .boost
         case .source(.shopeePay):
@@ -286,7 +291,7 @@ extension Capability.Backend {
             try encoder.encodeJSONDictionary(configurations)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         // swiftlint:disable line_length
-        case .internetBanking, .alipay, .alipayCN, .alipayHK, .dana, .gcash, .kakaoPay, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .boost, .shopeePay, .maybankQRPay, .duitNowQR, .duitNowOBW:
+        case .internetBanking, .alipay, .alipayCN, .alipayHK, .dana, .gcash, .kakaoPay, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .grabPay, .boost, .shopeePay, .maybankQRPay, .duitNowQR, .duitNowOBW:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
     }
@@ -365,6 +370,8 @@ extension Capability.Backend {
                 self = .source(.rabbitLinepay)
             case .ocbcPao:
                 self = .source(.mobileBankingOCBCPAO)
+            case .grabPay:
+                self = .source(.grabPay)
             case .boost:
                 self = .source(.boost)
             case .shopeePay:

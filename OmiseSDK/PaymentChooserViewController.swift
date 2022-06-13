@@ -25,6 +25,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case fpx
     case rabbitLinepay
     case ocbcPao
+    case grabPay
     case boost
     case shopeePay
     case maybankQRPay
@@ -55,6 +56,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             .fpx,
             .rabbitLinepay,
             .ocbcPao,
+            .grabPay,
             .boost,
             .shopeePay,
             .maybankQRPay,
@@ -109,6 +111,8 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "Rabbit LINE Pay"
         case .ocbcPao:
             return "OCBC Pay Anyone"
+        case .grabPay:
+            return "Grab"
         case .boost:
             return "Boost"
         case .shopeePay:
@@ -168,6 +172,8 @@ extension PaymentChooserOption {
             return [.rabbitLinepay]
         case .mobileBankingOCBCPAO:
             return [.ocbcPao]
+        case .grabPay:
+            return [.grabPay]
         case .boost:
             return [.boost]
         case .shopeePay:
@@ -349,6 +355,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .rabbitLinepay
         case .ocbcPao:
             payment = .ocbcPao
+        case .grabPay:
+            payment = .grabPay
         case .boost:
             payment = .boost
         case .shopeePay:
@@ -420,17 +428,18 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 20, section: 0)
         case .ocbcPao:
             return IndexPath(row: 21, section: 0)
-        case .boost:
+        case .grabPay:
             return IndexPath(row: 22, section: 0)
-        case .shopeePay:
+        case .boost:
             return IndexPath(row: 23, section: 0)
-        case .maybankQRPay:
+        case .shopeePay:
             return IndexPath(row: 24, section: 0)
-        case .duitNowQR:
+        case .maybankQRPay:
             return IndexPath(row: 25, section: 0)
-        case .duitNowOBW:
+        case .duitNowQR:
             return IndexPath(row: 26, section: 0)
-
+        case .duitNowOBW:
+            return IndexPath(row: 27, section: 0)
         }
     }
 
@@ -479,6 +488,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue.rabbitLinepay
             case .ocbcPao:
                 return OMSSourceTypeValue.mobileBankingOCBCPAO
+            case .grabPay:
+                return OMSSourceTypeValue.grabPay
             case .boost:
                 return OMSSourceTypeValue.boost
             case .shopeePay:

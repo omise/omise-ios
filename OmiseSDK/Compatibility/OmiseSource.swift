@@ -80,6 +80,9 @@ public class __SourcePaymentInformation: NSObject {
     /// Payment Information for an OCBC Pay Anyone
     public static let ocbcPaoPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.mobileBankingOCBCPAO)!
     
+    /// Payment Information for a GrabPay Payment
+    public static let grabPayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.grabPay)!
+    
     /// Payment Information for an Boost
     public static let boostPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.boost)!
     
@@ -602,6 +605,9 @@ extension __SourcePaymentInformation {
 
         case .ocbcPao:
             return __SourcePaymentInformation.ocbcPaoPayment
+
+        case .grabPay:
+            return __SourcePaymentInformation.grabPayPayment
             
         case .boost:
             return __SourcePaymentInformation.boostPayment
