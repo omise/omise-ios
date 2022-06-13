@@ -597,7 +597,7 @@ class ModelTestCase: XCTestCase {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
 
         do {
-            let sourceData = try XCTestCase.fixturesData(forFilename: "source_maybank_qrpay")
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_maybank_qr")
             let source = try decoder.decode(Source.self, from: sourceData)
 
             XCTAssertEqual("src_5pqcjr6tu4xvqut5nh5", source.id)

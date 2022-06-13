@@ -725,7 +725,7 @@ class PaymentInformationTestCase: XCTestCase {
                   "amount" : 12345,
                   "currency" : "MYR",
                   "platform_type" : "IOS",
-                  "type" : "maybank_qrpay"
+                  "type" : "maybank_qr"
                 }
                 """, encodedJSONString)
         }

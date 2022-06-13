@@ -404,7 +404,7 @@
     },
     {
         "object": "payment_method",
-        "name": "maybank_qrpay",
+        "name": "maybank_qr",
         "currencies": [
             "MYR"
         ],

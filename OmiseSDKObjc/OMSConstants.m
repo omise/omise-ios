@@ -38,7 +38,7 @@ OMSSourceTypeValue const _Nonnull OMSSourceTypeValueFpx = @"fpx";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueRabbitLinepay = @"rabbit_linepay";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueBoost = @"boost";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueShopeePay = @"shopeepay";
-OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMaybankQRPay = @"maybank_qrpay";
+OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMaybankQRPay = @"maybank_qr";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueDuitNowQR = @"duitnow_qr";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueDuitNowOBW = @"duitnow_obw";
 
