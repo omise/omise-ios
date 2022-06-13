@@ -373,14 +373,24 @@
       "banks": []
     },
     {
-        "object": "payment_method",
-        "name": "rabbit_linepay",
-        "currencies": [
-            "THB"
-        ],
-        "card_brands": null,
-        "installment_terms": null,
-        "banks": []
+      "object": "payment_method",
+      "name": "rabbit_linepay",
+      "currencies": [
+          "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "banks": []
+    },
+    {
+      "object": "payment_method",
+      "name": "grabpay",
+      "currencies": [
+          "SGD"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "banks": []
     }
   ],
   "zero_interest_installments": false
