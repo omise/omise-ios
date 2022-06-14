@@ -2899,7 +2899,7 @@
             </objects>
             <point key="canvasLocation" x="2748" y="1189.6551724137933"/>
         </scene>
-        <!--DuitNow OBW Bank List-->
+        <!--DuitNow Online Banking/Wallets Bank List-->
         <scene sceneID="jFb-XV-emt">
             <objects>
                 <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="fVC-FK-sgo" customClass="OMSDuitNowOBWBankChooserViewController" sceneMemberID="viewController">
@@ -2981,14 +2981,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Agrobank" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BpV-Ue-Yk1">
-                                                    <rect key="frame" x="61" y="0.0" width="298" height="64"/>
+                                                    <rect key="frame" x="63" y="0.0" width="296" height="64"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="FPX/unknown" id="koV-a8-FIo">
-                                                    <rect key="frame" x="16" y="17" width="30" height="30"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="agrobank" id="koV-a8-FIo">
+                                                    <rect key="frame" x="16" y="16" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Next" translatesAutoresizingMaskIntoConstraints="NO" id="czi-j1-mWn">
@@ -3445,7 +3445,7 @@
                             <outlet property="delegate" destination="fVC-FK-sgo" id="RGN-kM-jbb"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="DuitNow OBW Bank List" largeTitleDisplayMode="never" id="dSE-g2-bGt"/>
+                    <navigationItem key="navigationItem" title="DuitNow Online Banking/Wallets Bank List" largeTitleDisplayMode="never" id="dSE-g2-bGt"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outletCollection property="bankNameLabels" destination="h0I-F3-yih" collectionClass="NSMutableArray" id="OEj-iW-5PS"/>
@@ -3541,7 +3541,6 @@
         <image name="FPX/rakyat" width="30" height="30"/>
         <image name="FPX/rhb" width="30" height="30"/>
         <image name="FPX/sc" width="30" height="30"/>
-        <image name="FPX/unknown" width="30" height="30"/>
         <image name="FPX/uob" width="30" height="30"/>
         <image name="FPX_Big" width="105" height="80"/>
         <image name="First Choice" width="32" height="32"/>
@@ -3569,6 +3568,7 @@
         <image name="TrueMoney" width="32" height="32"/>
         <image name="TrueMoney_Big" width="105" height="80"/>
         <image name="Visa" width="40" height="22"/>
+        <image name="agrobank" width="32" height="32"/>
         <image name="dana" width="32" height="32"/>
         <image name="gcash" width="32" height="32"/>
         <image name="kakaopay" width="32" height="32"/>
