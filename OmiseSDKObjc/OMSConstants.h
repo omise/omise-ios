@@ -64,3 +64,7 @@ extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeCNY;
 extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeDKK;
 extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeHKD;
 
+typedef NSString * OMSProviderValue NS_EXTENSIBLE_STRING_ENUM;
+
+extern OMSProviderValue const _Nonnull OMSProviderValueAlipayPlus;
+extern OMSProviderValue const _Nonnull OMSProviderValueRMS;

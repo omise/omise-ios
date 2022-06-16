@@ -38,6 +38,10 @@
         self.paymentAmount = Tool.singaporePaymentAmount;
         self.paymentCurrencyCode = Tool.singaporePaymentCurrency;
         self.allowedPaymentMethods = Tool.singaporeAllowedPaymentMethods;
+    } else if ([[NSLocale.currentLocale objectForKey:NSLocaleCountryCode] isEqualToString:@"MY"]) {
+        self.paymentAmount = Tool.malaysiaPaymentAmount;
+        self.paymentCurrencyCode = Tool.malaysiaPaymentCurrency;
+        self.allowedPaymentMethods = Tool.malaysiaAllowedPaymentMethods;
     } else {
         self.paymentAmount = Tool.thailandPaymentAmount;
         self.paymentCurrencyCode = Tool.thailandPaymentCurrency;

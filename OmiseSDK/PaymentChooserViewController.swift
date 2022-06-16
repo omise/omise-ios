@@ -31,6 +31,8 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case maybankQRPay
     case duitNowQR
     case duitNowOBW
+    case touchNGoRms
+    case grabPayRms
 
     static var allCases: [PaymentChooserOption] {
         return [
@@ -61,7 +63,9 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             .shopeePay,
             .maybankQRPay,
             .duitNowQR,
-            .duitNowOBW
+            .duitNowOBW,
+            .touchNGoRms,
+            .grabPayRms
         ]
     }
 
@@ -123,6 +127,10 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "DuitNow QR"
         case .duitNowOBW:
             return "DuitNow OBW"
+        case .touchNGoRms:
+            return "Touch 'n Go"
+        case .grabPayRms:
+            return "GrabPay"
         }
     }
 }
@@ -130,6 +138,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
 extension PaymentChooserOption {
     // swiftlint:disable function_body_length
     fileprivate static func paymentOptions(for sourceType: OMSSourceTypeValue) -> [PaymentChooserOption] {
+    //fileprivate static func paymentOptions(for sourceType: OMSSourceTypeValue, provider: OMSProviderValue? = nil) -> [PaymentChooserOption] {
         switch sourceType {
         case .trueMoney:
             return [.truemoney]
@@ -153,7 +162,11 @@ extension PaymentChooserOption {
         case .kakaoPay:
             return [.kakaoPay]
         case .touchNGo:
-            return [.touchNGo]
+            //if provider == .alipayPlus {
+                return [.touchNGo]
+            //} else {
+            //    return [.touchNGoRms]
+            //}
         case .internetBankingBAY, .internetBankingKTB, .internetBankingBBL, .internetBankingSCB:
             return [.internetBanking]
         case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingBAY, .mobileBankingBBL:
@@ -173,7 +186,11 @@ extension PaymentChooserOption {
         case .mobileBankingOCBCPAO:
             return [.ocbcPao]
         case .grabPay:
-            return [.grabPay]
+            //if provider == .RMS {
+            //    return [.grabPayRms]
+            //} else {
+                return [.grabPay]
+            //}
         case .boost:
             return [.boost]
         case .shopeePay:
@@ -440,6 +457,10 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 26, section: 0)
         case .duitNowOBW:
             return IndexPath(row: 27, section: 0)
+        case .touchNGoRms:
+            return IndexPath(row: 28, section: 0)
+        case .grabPayRms:
+            return IndexPath(row: 29, section: 0)
         }
     }
 
@@ -462,7 +483,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue.gcash
             case .kakaoPay:
                 return OMSSourceTypeValue.kakaoPay
-            case .touchNGo:
+            case .touchNGo, .touchNGoRms:
                 return OMSSourceTypeValue.touchNGo
             case .promptpay:
                 return OMSSourceTypeValue.promptPay
@@ -488,7 +509,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue.rabbitLinepay
             case .ocbcPao:
                 return OMSSourceTypeValue.mobileBankingOCBCPAO
-            case .grabPay:
+            case .grabPay, .grabPayRms:
                 return OMSSourceTypeValue.grabPay
             case .boost:
                 return OMSSourceTypeValue.boost
@@ -534,6 +555,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     private func updateShowingValues() {
         var paymentMethodsToShow: [PaymentChooserOption] = allowedPaymentMethods.reduce(into: []) { (result, sourceType) in
             let paymentOptions = PaymentChooserOption.paymentOptions(for: sourceType)
+            //let paymentOptions = PaymentChooserOption.paymentOptions(for: sourceType, provider: nil)
             for paymentOption in paymentOptions where !result.contains(paymentOption) {
                 result.append(paymentOption)
             }

@@ -58,3 +58,6 @@ OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeCHF = @"CHF";
 OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeCNY = @"CNY";
 OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeDKK = @"DKK";
 OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeHKD = @"HKD";
+
+OMSProviderValue const _Nonnull OMSProviderValueAlipayPlus = @"Alipay_plus";
+OMSProviderValue const _Nonnull OMSProviderValueRMS = @"RMS";

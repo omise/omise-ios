@@ -160,6 +160,20 @@ extension OMSSourceTypeValue {
     }
 }
 
+extension OMSProviderValue {
+    var providerPrefix: String {
+        switch self {
+        case .alipayPlus:
+            return "Alipay_plus"
+        case .RMS:
+            return "RMS"
+        default:
+            return self.rawValue
+        }
+    }
+}
+
+
 extension Decoder {
     func decodeJSONDictionary() throws -> [String: Any] {
         let container = try self.container(keyedBy: JSONCodingKeys.self)
