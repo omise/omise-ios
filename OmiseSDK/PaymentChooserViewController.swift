@@ -138,7 +138,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
 extension PaymentChooserOption {
     // swiftlint:disable function_body_length
     fileprivate static func paymentOptions(for sourceType: OMSSourceTypeValue) -> [PaymentChooserOption] {
-    //fileprivate static func paymentOptions(for sourceType: OMSSourceTypeValue, provider: OMSProviderValue? = nil) -> [PaymentChooserOption] {
+    // fileprivate static func paymentOptions(for sourceType: OMSSourceTypeValue, provider: OMSProviderValue? = nil) -> [PaymentChooserOption] {
         switch sourceType {
         case .trueMoney:
             return [.truemoney]
@@ -162,11 +162,11 @@ extension PaymentChooserOption {
         case .kakaoPay:
             return [.kakaoPay]
         case .touchNGo:
-            //if provider == .alipayPlus {
+            // if provider == .alipayPlus {
                 return [.touchNGo]
-            //} else {
-            //    return [.touchNGoRms]
-            //}
+            // } else {
+            //     return [.touchNGoRms]
+            // }
         case .internetBankingBAY, .internetBankingKTB, .internetBankingBBL, .internetBankingSCB:
             return [.internetBanking]
         case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingBAY, .mobileBankingBBL:

@@ -214,7 +214,7 @@ extension Capability.Backend {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         let type = try container.decode(BackendType.self, forKey: .name)
-        //let provider = try container.decode(ProviderType?.self, forKey: .provider)
+        // let provider = try container.decode(ProviderType?.self, forKey: .provider)
         supportedCurrencies = try container.decode(Set<Currency>.self, forKey: .supportedCurrencies)
 
         switch type {
@@ -238,12 +238,12 @@ extension Capability.Backend {
         case .source(.kakaoPay):
             self.payment = .kakaoPay
         case .source(.touchNGo):
-            //switch provider {
-            //case .provider(.alipayPlus):
+            // switch provider {
+            // case .provider(.alipayPlus):
                 self.payment = .touchNGo
-            //default:
-            //    self.payment = .touchNGoRms
-            //}
+            // default:
+            //     self.payment = .touchNGoRms
+            // }
         case .source(let value) where value.isInternetBankingSource:
             // swiftlint:disable:next force_unwrapping
             self.payment = .internetBanking(value.internetBankingSource!)
@@ -269,12 +269,12 @@ extension Capability.Backend {
         case .source(.mobileBankingOCBCPAO):
             self.payment = .ocbcPao
         case .source(.grabPay):
-            //switch provider {
-            //case .provider(.RMS):
-            //    self.payment = .grabPayRms
-            //default:
+            // switch provider {
+            // case .provider(.RMS):
+            //     self.payment = .grabPayRms
+            // default:
                 self.payment = .grabPay
-            //}
+            // }
         case .source(.boost):
             self.payment = .boost
         case .source(.shopeePay):

@@ -119,11 +119,11 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var rabbitLinepayCell: UITableViewCell!
     @IBOutlet private var OCBCPAOPaymentCell: UITableViewCell!
     @IBOutlet private var grabPayPaymentCell: UITableViewCell!
-    @IBOutlet private var BoostPaymentCell: UITableViewCell!
-    @IBOutlet private var ShopeePayPaymentCell: UITableViewCell!
-    @IBOutlet private var MaybankQRPayPaymentCell: UITableViewCell!
-    @IBOutlet private var DuitNowQRPaymentCell: UITableViewCell!
-    @IBOutlet private var DuitNowOBWPaymentCell: UITableViewCell!
+    @IBOutlet private var boostPaymentCell: UITableViewCell!
+    @IBOutlet private var shopeePayPaymentCell: UITableViewCell!
+    @IBOutlet private var maybankQRPayPaymentCell: UITableViewCell!
+    @IBOutlet private var duitNowQRPaymentCell: UITableViewCell!
+    @IBOutlet private var duitNowOBWPaymentCell: UITableViewCell!
     
     @IBOutlet private var useCapabilityAPIValuesCell: UITableViewCell!
     @IBOutlet private var useSpecifiedValuesCell: UITableViewCell!
@@ -335,15 +335,15 @@ extension PaymentSettingTableViewController {
             return .mobileBankingOCBCPAO
         case grabPayPaymentCell:
             return .grabPay
-        case BoostPaymentCell:
+        case boostPaymentCell:
             return .boost
-        case ShopeePayPaymentCell:
+        case shopeePayPaymentCell:
             return .shopeePay
-        case MaybankQRPayPaymentCell:
+        case maybankQRPayPaymentCell:
             return .maybankQRPay
-        case DuitNowQRPaymentCell:
+        case duitNowQRPaymentCell:
             return .duitNowQR
-        case DuitNowOBWPaymentCell:
+        case duitNowOBWPaymentCell:
             return .duitNowOBW
         default:
             return nil
@@ -424,15 +424,15 @@ extension PaymentSettingTableViewController {
         case .grabPay:
             return grabPayPaymentCell
         case .boost:
-            return BoostPaymentCell
+            return boostPaymentCell
         case .shopeePay:
-            return ShopeePayPaymentCell
+            return shopeePayPaymentCell
         case .maybankQRPay:
-            return MaybankQRPayPaymentCell
+            return maybankQRPayPaymentCell
         case .duitNowQR:
-            return DuitNowQRPaymentCell
+            return duitNowQRPaymentCell
         case .duitNowOBW:
-            return DuitNowOBWPaymentCell
+            return duitNowOBWPaymentCell
         default:
             return nil
         }
