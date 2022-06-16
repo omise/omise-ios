@@ -79,22 +79,22 @@ public class __SourcePaymentInformation: NSObject {
     
     /// Payment Information for an OCBC Pay Anyone
     public static let ocbcPaoPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.mobileBankingOCBCPAO)!
-    
+
     /// Payment Information for a GrabPay Payment
     public static let grabPayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.grabPay)!
-    
+
     /// Payment Information for an Boost
     public static let boostPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.boost)!
-    
+
     /// Payment Information for an ShopeePay
     public static let shopeePayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.shopeePay)!
-    
+
     /// Payment Information for an Maybank QRPay
     public static let maybankQRPayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.maybankQRPay)!
-    
+
     /// Payment Information for an DuitNow QR
     public static let duitNowQRPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.duitNowQR)!
-    
+
     /// Payment Information for an DuitNow OBW
     public static let duitNowOBWPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.duitNowOBW)!
 }

@@ -1139,7 +1139,9 @@ extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertibl
 
 extension PaymentInformation.DuitNowOBW.Bank: CaseIterable, CustomStringConvertible {
     public typealias AllCases = [PaymentInformation.DuitNowOBW.Bank]
-    public static var allCases: PaymentInformation.DuitNowOBW.Bank.AllCases = [.affin, .alliance, .agro, .ambank, .cimb, .islam, .rakyat, .muamalat, .bsn, .hongleong, .hsbc, .kfh, .maybank2u, .ocbc, .publicBank, .rhb, .sc, .uob]
+    public static var allCases: PaymentInformation.DuitNowOBW.Bank.AllCases = [
+        .affin, .alliance, .agro, .ambank, .cimb, .islam, .rakyat, .muamalat, .bsn,
+        .hongleong, .hsbc, .kfh, .maybank2u, .ocbc, .publicBank, .rhb, .sc, .uob]
     
     public var description: String {
         switch self {

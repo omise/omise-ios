@@ -2,7 +2,6 @@ import UIKit
 import os
 
 @objc(OMSDuitNowOBWBankChooserViewController)
-// swiftlint:disable:next type_name
 class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<PaymentInformation.DuitNowOBW.Bank>,
                                                   PaymentSourceChooser,
                                                   PaymentChooserUI {

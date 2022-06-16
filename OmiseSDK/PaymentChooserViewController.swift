@@ -186,11 +186,11 @@ extension PaymentChooserOption {
         case .mobileBankingOCBCPAO:
             return [.ocbcPao]
         case .grabPay:
-            //if provider == .RMS {
-            //    return [.grabPayRms]
-            //} else {
+            // if provider == .RMS {
+            //     return [.grabPayRms]
+            // } else {
                 return [.grabPay]
-            //}
+            // }
         case .boost:
             return [.boost]
         case .shopeePay:
@@ -555,7 +555,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     private func updateShowingValues() {
         var paymentMethodsToShow: [PaymentChooserOption] = allowedPaymentMethods.reduce(into: []) { (result, sourceType) in
             let paymentOptions = PaymentChooserOption.paymentOptions(for: sourceType)
-            //let paymentOptions = PaymentChooserOption.paymentOptions(for: sourceType, provider: nil)
+            // let paymentOptions = PaymentChooserOption.paymentOptions(for: sourceType, provider: nil)
             for paymentOption in paymentOptions where !result.contains(paymentOption) {
                 result.append(paymentOption)
             }

@@ -173,7 +173,6 @@ extension OMSProviderValue {
     }
 }
 
-
 extension Decoder {
     func decodeJSONDictionary() throws -> [String: Any] {
         let container = try self.container(keyedBy: JSONCodingKeys.self)
