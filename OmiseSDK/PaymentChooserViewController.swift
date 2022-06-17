@@ -17,7 +17,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case dana
     case gcash
     case kakaoPay
-    case touchNGo
+    case touchNGoAlipayPlus
     case promptpay
     case paynow
     case truemoney
@@ -31,7 +31,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case maybankQRPay
     case duitNowQR
     case duitNowOBW
-    case touchNGoRms
+    case touchNGo
     case grabPayRms
 
     static var allCases: [PaymentChooserOption] {
@@ -47,7 +47,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             .dana,
             .gcash,
             .kakaoPay,
-            .touchNGo,
+            .touchNGoAlipayPlus,
             .internetBanking,
             .mobileBanking,
             .tescoLotus,
@@ -64,7 +64,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             .maybankQRPay,
             .duitNowQR,
             .duitNowOBW,
-            .touchNGoRms,
+            .touchNGo,
             .grabPayRms
         ]
     }
@@ -99,7 +99,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "GCash"
         case .kakaoPay:
             return "Kakao Pay"
-        case .touchNGo:
+        case .touchNGoAlipayPlus:
             return "TNG eWallet"
         case .promptpay:
             return "PromptPay"
@@ -127,7 +127,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "DuitNow QR"
         case .duitNowOBW:
             return "DuitNow OBW"
-        case .touchNGoRms:
+        case .touchNGo:
             return "Touch 'n Go"
         case .grabPayRms:
             return "GrabPay"
@@ -161,12 +161,10 @@ extension PaymentChooserOption {
             return [.gcash]
         case .kakaoPay:
             return [.kakaoPay]
+        case .touchNGoAlipayPlus:
+            return [.touchNGoAlipayPlus]
         case .touchNGo:
-            // if provider == .alipayPlus {
-                return [.touchNGo]
-            // } else {
-            //     return [.touchNGoRms]
-            // }
+            return [.touchNGo]
         case .internetBankingBAY, .internetBankingKTB, .internetBankingBBL, .internetBankingSCB:
             return [.internetBanking]
         case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingBAY, .mobileBankingBBL:
@@ -186,11 +184,9 @@ extension PaymentChooserOption {
         case .mobileBankingOCBCPAO:
             return [.ocbcPao]
         case .grabPay:
-            // if provider == .RMS {
-            //     return [.grabPayRms]
-            // } else {
-                return [.grabPay]
-            // }
+            return [.grabPay]
+        case .grabPayRms:
+            return [.grabPayRms]
         case .boost:
             return [.boost]
         case .shopeePay:
@@ -358,7 +354,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .gcash
         case .kakaoPay:
             payment = .kakaoPay
-        case .touchNGo:
+        case .touchNGoAlipayPlus, .touchNGo:
             payment = .touchNGo
         case .tescoLotus:
             payment = .billPayment(.tescoLotus)
@@ -372,7 +368,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .rabbitLinepay
         case .ocbcPao:
             payment = .ocbcPao
-        case .grabPay:
+        case .grabPay, .grabPayRms:
             payment = .grabPay
         case .boost:
             payment = .boost
@@ -439,7 +435,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 17, section: 0)
         case .kakaoPay:
             return IndexPath(row: 18, section: 0)
-        case .touchNGo:
+        case .touchNGoAlipayPlus:
             return IndexPath(row: 19, section: 0)
         case .rabbitLinepay:
             return IndexPath(row: 20, section: 0)
@@ -457,7 +453,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 26, section: 0)
         case .duitNowOBW:
             return IndexPath(row: 27, section: 0)
-        case .touchNGoRms:
+        case .touchNGo:
             return IndexPath(row: 28, section: 0)
         case .grabPayRms:
             return IndexPath(row: 29, section: 0)
@@ -483,7 +479,9 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue.gcash
             case .kakaoPay:
                 return OMSSourceTypeValue.kakaoPay
-            case .touchNGo, .touchNGoRms:
+            case .touchNGoAlipayPlus:
+                return OMSSourceTypeValue.touchNGoAlipayPlus
+            case .touchNGo:
                 return OMSSourceTypeValue.touchNGo
             case .promptpay:
                 return OMSSourceTypeValue.promptPay
@@ -509,8 +507,10 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue.rabbitLinepay
             case .ocbcPao:
                 return OMSSourceTypeValue.mobileBankingOCBCPAO
-            case .grabPay, .grabPayRms:
+            case .grabPay:
                 return OMSSourceTypeValue.grabPay
+            case .grabPayRms:
+                return OMSSourceTypeValue.grabPayRms
             case .boost:
                 return OMSSourceTypeValue.boost
             case .shopeePay:
@@ -555,7 +555,6 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     private func updateShowingValues() {
         var paymentMethodsToShow: [PaymentChooserOption] = allowedPaymentMethods.reduce(into: []) { (result, sourceType) in
             let paymentOptions = PaymentChooserOption.paymentOptions(for: sourceType)
-            // let paymentOptions = PaymentChooserOption.paymentOptions(for: sourceType, provider: nil)
             for paymentOption in paymentOptions where !result.contains(paymentOption) {
                 result.append(paymentOption)
             }

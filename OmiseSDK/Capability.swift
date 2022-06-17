@@ -66,8 +66,8 @@ extension Capability {
             case dana
             case gcash
             case kakaoPay
+            case touchNGoAlipayPlus
             case touchNGo
-            case touchNGoRms
             case promptpay
             case paynow
             case truemoney
@@ -126,9 +126,9 @@ extension Capability.Backend.Payment {
         switch (lhs, rhs) {
         case (.card, .card), (.alipay, .alipay), (.alipayCN, .alipayCN), (.alipayHK, .alipayHK):
             return true
-        case (.dana, .dana), (.gcash, .gcash), (.kakaoPay, .kakaoPay), (.touchNGo, .touchNGo):
+        case (.dana, .dana), (.gcash, .gcash), (.kakaoPay, .kakaoPay), (.touchNGoAlipayPlus, .touchNGoAlipayPlus):
             return true
-        case (.touchNGoRms, .touchNGoRms):
+        case (.touchNGo, .touchNGo):
             return true
         case (.promptpay, .promptpay), (.paynow, .paynow):
             return true
@@ -214,7 +214,7 @@ extension Capability.Backend {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         let type = try container.decode(BackendType.self, forKey: .name)
-        // let provider = try container.decode(ProviderType?.self, forKey: .provider)
+        let provider = try container.decodeIfPresent(Provider.self, forKey: .provider)
         supportedCurrencies = try container.decode(Set<Currency>.self, forKey: .supportedCurrencies)
 
         switch type {
@@ -238,12 +238,12 @@ extension Capability.Backend {
         case .source(.kakaoPay):
             self.payment = .kakaoPay
         case .source(.touchNGo):
-            // switch provider {
-            // case .provider(.alipayPlus):
+            switch provider {
+            case .alipayPlus:
+                self.payment = .touchNGoAlipayPlus
+            default:
                 self.payment = .touchNGo
-            // default:
-            //     self.payment = .touchNGoRms
-            // }
+            }
         case .source(let value) where value.isInternetBankingSource:
             // swiftlint:disable:next force_unwrapping
             self.payment = .internetBanking(value.internetBankingSource!)
@@ -269,12 +269,12 @@ extension Capability.Backend {
         case .source(.mobileBankingOCBCPAO):
             self.payment = .ocbcPao
         case .source(.grabPay):
-            // switch provider {
-            // case .provider(.RMS):
-            //     self.payment = .grabPayRms
-            // default:
+            switch provider {
+            case .rms:
+                self.payment = .grabPayRms
+            default:
                 self.payment = .grabPay
-            // }
+            }
         case .source(.boost):
             self.payment = .boost
         case .source(.shopeePay):
@@ -309,7 +309,7 @@ extension Capability.Backend {
             try encoder.encodeJSONDictionary(configurations)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         // swiftlint:disable line_length
-        case .internetBanking, .alipay, .alipayCN, .alipayHK, .dana, .gcash, .kakaoPay, .touchNGo, .touchNGoRms, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .grabPay, .grabPayRms, .boost, .shopeePay, .maybankQRPay, .duitNowQR, .duitNowOBW:
+        case .internetBanking, .alipay, .alipayCN, .alipayHK, .dana, .gcash, .kakaoPay, .touchNGoAlipayPlus, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .grabPay, .grabPayRms, .boost, .shopeePay, .maybankQRPay, .duitNowQR, .duitNowOBW:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
     }
@@ -360,7 +360,9 @@ extension Capability.Backend {
                 self = .source(.gcash)
             case .kakaoPay:
                 self = .source(.kakaoPay)
-            case .touchNGo, .touchNGoRms:
+            case .touchNGoAlipayPlus:
+                self = .source(.touchNGoAlipayPlus)
+            case .touchNGo:
                 self = .source(.touchNGo)
             case .installment(let brand, availableNumberOfTerms: _):
                 self = .source(OMSSourceTypeValue(brand.type))
@@ -388,8 +390,10 @@ extension Capability.Backend {
                 self = .source(.rabbitLinepay)
             case .ocbcPao:
                 self = .source(.mobileBankingOCBCPAO)
-            case .grabPay, .grabPayRms:
+            case .grabPay:
                 self = .source(.grabPay)
+            case .grabPayRms:
+                self = .source(.grabPayRms)
             case .boost:
                 self = .source(.boost)
             case .shopeePay:
@@ -423,28 +427,8 @@ extension Capability.Backend {
 }
 
 extension Capability.Backend {
-    fileprivate enum ProviderType: Codable, Hashable {
-        case provider(OMSProviderValue)
-
-        init(from decoder: Decoder) throws {
-            let container = try decoder.singleValueContainer()
-            switch try container.decode(String.self) {
-            case let value:
-                self = .provider(OMSProviderValue(value))
-            }
-        }
-
-        func encode(to encoder: Encoder) throws {
-            var container = encoder.singleValueContainer()
-            let type: String?
-            switch self {
-            case nil:
-                type = nil
-            case .provider(let providerType):
-                type = providerType.rawValue
-            }
-
-            try container.encode(type)
-        }
+    fileprivate enum Provider: String, Codable, Hashable {
+        case alipayPlus = "Alipay_plus"
+        case rms = "RMS"
     }
 }

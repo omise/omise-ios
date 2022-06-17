@@ -174,7 +174,7 @@ extension __OmiseCapabilityBackendPayment {
             return __OmiseCapabilitySourceBackendPayment.gcashSourceBackendPayment
         case .kakaoPay:
             return __OmiseCapabilitySourceBackendPayment.kakaoPaySourceBackendPayment
-        case .touchNGo, .touchNGoRms:
+        case .touchNGoAlipayPlus, .touchNGo:
             return __OmiseCapabilitySourceBackendPayment.touchNGoSourceBackendPayment
         case .promptpay:
             return __OmiseCapabilitySourceBackendPayment.promptpaySourceBackendPayment
