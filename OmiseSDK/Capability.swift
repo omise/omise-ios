@@ -1,3 +1,4 @@
+// swiftlint:disable file_length
 import Foundation
 
 public struct Capability: Object {
@@ -121,6 +122,7 @@ extension Capability.Backend {
     }
 }
 
+// swiftlint:disable function_body_length
 extension Capability.Backend.Payment {
     public static func == (lhs: Capability.Backend.Payment, rhs: Capability.Backend.Payment) -> Bool {
         switch (lhs, rhs) {

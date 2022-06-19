@@ -1141,7 +1141,8 @@ extension PaymentInformation.DuitNowOBW.Bank: CaseIterable, CustomStringConverti
     public typealias AllCases = [PaymentInformation.DuitNowOBW.Bank]
     public static var allCases: PaymentInformation.DuitNowOBW.Bank.AllCases = [
         .affin, .alliance, .agro, .ambank, .cimb, .islam, .rakyat, .muamalat, .bsn,
-        .hongleong, .hsbc, .kfh, .maybank2u, .ocbc, .publicBank, .rhb, .sc, .uob]
+        .hongleong, .hsbc, .kfh, .maybank2u, .ocbc, .publicBank, .rhb, .sc, .uob
+    ]
     
     public var description: String {
         switch self {
