@@ -126,9 +126,9 @@ public enum PaymentInformation: Codable, Equatable {
             case .citi:
                 return IndexSet([ 4, 6, 9, 12, 15, 17 ])
             case .ttb:
-                return IndexSet([ 3, 6, 10 ])
+                return IndexSet([ 3, 4, 6, 10, 12 ])
             case .uob:
-                return IndexSet([ 3, 6, 10 ])
+                return IndexSet([ 3, 4, 6, 10 ])
             case .other:
                 return IndexSet(1...60)
             }
