@@ -73,7 +73,7 @@ To integrate the OmiseSDK into your Xcode project using the [Swift Package Manag
 
 1. In Xcode, select `File` > `Swift Packages` > `Add Package Dependency...`
 2. Enter the URL for this repository `https://github.com/omise/omise-ios.git`
-3. Choose a minimum semantic version of `v4.12.2`
+3. Choose a minimum semantic version of `v4.13.0`
 
 ## Usage
 
