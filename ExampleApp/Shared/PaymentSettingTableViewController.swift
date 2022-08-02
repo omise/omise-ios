@@ -119,6 +119,11 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var rabbitLinepayCell: UITableViewCell!
     @IBOutlet private var OCBCPAOPaymentCell: UITableViewCell!
     @IBOutlet private var grabPayPaymentCell: UITableViewCell!
+    @IBOutlet private var boostPaymentCell: UITableViewCell!
+    @IBOutlet private var shopeePayPaymentCell: UITableViewCell!
+    @IBOutlet private var maybankQRPayPaymentCell: UITableViewCell!
+    @IBOutlet private var duitNowQRPaymentCell: UITableViewCell!
+    @IBOutlet private var duitNowOBWPaymentCell: UITableViewCell!
     
     @IBOutlet private var useCapabilityAPIValuesCell: UITableViewCell!
     @IBOutlet private var useSpecifiedValuesCell: UITableViewCell!
@@ -330,6 +335,16 @@ extension PaymentSettingTableViewController {
             return .mobileBankingOCBCPAO
         case grabPayPaymentCell:
             return .grabPay
+        case boostPaymentCell:
+            return .boost
+        case shopeePayPaymentCell:
+            return .shopeePay
+        case maybankQRPayPaymentCell:
+            return .maybankQRPay
+        case duitNowQRPaymentCell:
+            return .duitNowQR
+        case duitNowOBWPaymentCell:
+            return .duitNowOBW
         default:
             return nil
         }
@@ -408,6 +423,16 @@ extension PaymentSettingTableViewController {
             return rabbitLinepayCell
         case .grabPay:
             return grabPayPaymentCell
+        case .boost:
+            return boostPaymentCell
+        case .shopeePay:
+            return shopeePayPaymentCell
+        case .maybankQRPay:
+            return maybankQRPayPaymentCell
+        case .duitNowQR:
+            return duitNowQRPaymentCell
+        case .duitNowOBW:
+            return duitNowOBWPaymentCell
         default:
             return nil
         }

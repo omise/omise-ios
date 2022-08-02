@@ -11,7 +11,7 @@ class CapabilityOperationFixtureTests: XCTestCase {
             let capabilityData = try XCTestCase.fixturesData(forFilename: "capability")
             let capability = try decoder.decode(Capability.self, from: capabilityData)
 
-            XCTAssertEqual(capability.supportedBackends.count, 25)
+            XCTAssertEqual(capability.supportedBackends.count, 30)
 
             if let creditCardBackend = capability.creditCardBackend {
                 XCTAssertEqual(creditCardBackend.payment, .card([]))
@@ -71,7 +71,7 @@ class CapabilityOperationFixtureTests: XCTestCase {
             }
 
             if let grabPayBackend = capability[OMSSourceTypeValue.grabPay] {
-                XCTAssertEqual(grabPayBackend.supportedCurrencies, [.sgd])
+                XCTAssertEqual(grabPayBackend.supportedCurrencies, [.sgd, .myr])
             } else {
                 XCTFail("Capability doesn't have the GrabPay backend")
             }

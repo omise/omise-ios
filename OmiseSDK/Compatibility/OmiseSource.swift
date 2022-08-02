@@ -62,7 +62,7 @@ public class __SourcePaymentInformation: NSObject {
     /// Payment Information for an Alipay+ KakaoPay Wallet Payment
     public static let kakaoPayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.kakaoPay)!
 
-    /// Payment Information for an Alipay+ Touch N Go Wallet Payment
+    /// Payment Information for an Touch N Go Wallet Payment
     public static let touchNGoPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.touchNGo)!
 
     /// Payment Information for a Tesco Lotus Bill Payment Payment
@@ -82,6 +82,21 @@ public class __SourcePaymentInformation: NSObject {
 
     /// Payment Information for a GrabPay Payment
     public static let grabPayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.grabPay)!
+
+    /// Payment Information for an Boost
+    public static let boostPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.boost)!
+
+    /// Payment Information for an ShopeePay
+    public static let shopeePayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.shopeePay)!
+
+    /// Payment Information for an Maybank QRPay
+    public static let maybankQRPayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.maybankQRPay)!
+
+    /// Payment Information for an DuitNow QR
+    public static let duitNowQRPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.duitNowQR)!
+
+    /// Payment Information for an DuitNow OBW
+    public static let duitNowOBWPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.duitNowOBW)!
 }
 
 /// Internet Bankning Source Payment Information
@@ -368,6 +383,23 @@ public class __SourceFPXPayment: __SourcePaymentInformation {
     }
 }
 
+/// The DuitNow OBW Source Payment information
+@objc(OMSDuitNowOBWPaymentInformation)
+@objcMembers
+public class __SourceDuitNowOBWPayment: __SourcePaymentInformation {
+    /// The customer's bank name
+    public let bank: String
+
+    /// Creates a new FPX source with the given customer information
+    ///
+    /// - Parameters:
+    ///   - bank:  Internet banking name e.g. uob
+    public init(bank: String) {
+        self.bank = bank
+        super.init(type: OMSSourceTypeValue.duitNowOBW)!
+    }
+}
+
 /// CustomSource Source Payment Information
 @objc(OMSCustomPaymentInformation)
 @objcMembers
@@ -577,6 +609,18 @@ extension __SourcePaymentInformation {
         case .grabPay:
             return __SourcePaymentInformation.grabPayPayment
             
+        case .boost:
+            return __SourcePaymentInformation.boostPayment
+            
+        case .shopeePay:
+            return __SourcePaymentInformation.shopeePayPayment
+            
+        case .maybankQRPay:
+            return __SourcePaymentInformation.maybankQRPayPayment
+            
+        case .duitNowQR:
+            return __SourcePaymentInformation.duitNowQRPayment
+            
         case .truemoney(let trueMoney):
             return __SourceTrueMoneyPayment(phoneNumber: trueMoney.phoneNumber)
 
@@ -604,7 +648,10 @@ extension __SourcePaymentInformation {
 
         case .fpx(let fpx):
             return __SourceFPXPayment(bank: fpx.bank, email: fpx.email)
-
+            
+        case .duitNowOBW(let duitNowOBW):
+            return __SourceDuitNowOBWPayment(bank: duitNowOBW.bank)
+            
         case .other(type: let type, parameters: let parameters):
             return __CustomSourcePayment(customType: type, parameters: parameters)
         }

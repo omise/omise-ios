@@ -33,12 +33,19 @@ extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueEContext;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePromptPay;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePayNow;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueTouchNGo;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueTouchNGoAlipayPlus;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueTrueMoney;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePointsCiti;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueFpx;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingKBank;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueRabbitLinepay;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueGrabPay;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueGrabPayRms;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueBoost;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueShopeePay;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMaybankQRPay;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueDuitNowQR;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueDuitNowOBW;
 
 
 typedef NSString * OMSSupportedCurrencyCode NS_EXTENSIBLE_STRING_ENUM;
@@ -58,4 +65,3 @@ extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeCHF;
 extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeCNY;
 extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeDKK;
 extern OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeHKD;
-

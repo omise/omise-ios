@@ -136,14 +136,24 @@ extension OMSSourceTypeValue {
             return "gcash"
         case .kakaoPay:
             return "kakaopay"
-        case .touchNGo:
+        case .touchNGo, .touchNGoAlipayPlus:
             return "touch_n_go"
         case .rabbitLinepay:
             return "rabbit_linepay"
         case .mobileBankingOCBCPAO:
             return "mobile_banking_ocbc_pao"
-        case .grabPay:
+        case .grabPay, .grabPayRms:
             return "grabpay"
+        case .boost:
+            return "boost"
+        case .shopeePay:
+            return "shopeepay"
+        case .maybankQRPay:
+            return "maybank_qr"
+        case .duitNowQR:
+            return "duitnow_qr"
+        case .duitNowOBW:
+            return "duitnow_obw"
         default:
             return self.rawValue
         }

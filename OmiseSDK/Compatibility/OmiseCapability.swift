@@ -99,6 +99,21 @@ class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
     static let grabPaySourceBackendPayment =
         __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.grabPay)
 
+    static let boostSourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.boost)
+
+    static let shopeePaySourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.shopeePay)
+
+    static let maybankQRPaySourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.maybankQRPay)
+
+    static let duitNowQRSourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.duitNowQR)
+
+    static let duitNowOBWSourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.duitNowOBW)
+
     static func makeInternetBankingSourceBackendPayment(
         bank: PaymentInformation.InternetBanking
         ) -> __OmiseCapabilitySourceBackendPayment {
@@ -159,7 +174,7 @@ extension __OmiseCapabilityBackendPayment {
             return __OmiseCapabilitySourceBackendPayment.gcashSourceBackendPayment
         case .kakaoPay:
             return __OmiseCapabilitySourceBackendPayment.kakaoPaySourceBackendPayment
-        case .touchNGo:
+        case .touchNGoAlipayPlus, .touchNGo:
             return __OmiseCapabilitySourceBackendPayment.touchNGoSourceBackendPayment
         case .promptpay:
             return __OmiseCapabilitySourceBackendPayment.promptpaySourceBackendPayment
@@ -177,8 +192,18 @@ extension __OmiseCapabilityBackendPayment {
             return __OmiseCapabilitySourceBackendPayment.rabbitLinepaySourceBackendPayment
         case .ocbcPao:
             return __OmiseCapabilitySourceBackendPayment.ocbcPaoSourceBackendPayment
-        case .grabPay:
+        case .grabPay, .grabPayRms:
             return __OmiseCapabilitySourceBackendPayment.grabPaySourceBackendPayment
+        case .boost:
+            return __OmiseCapabilitySourceBackendPayment.boostSourceBackendPayment
+        case .shopeePay:
+            return __OmiseCapabilitySourceBackendPayment.shopeePaySourceBackendPayment
+        case .maybankQRPay:
+            return __OmiseCapabilitySourceBackendPayment.maybankQRPaySourceBackendPayment
+        case .duitNowQR:
+            return __OmiseCapabilitySourceBackendPayment.duitNowQRSourceBackendPayment
+        case .duitNowOBW:
+            return __OmiseCapabilitySourceBackendPayment.duitNowOBWSourceBackendPayment
         case .unknownSource(let type, let configurations):
             return __OmiseCapabilityUnknownSourceBackendPayment(sourceType: type, parameters: configurations)
         }

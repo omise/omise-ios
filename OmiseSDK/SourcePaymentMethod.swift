@@ -270,6 +270,66 @@ public enum PaymentInformation: Codable, Equatable {
     
     /// OCBC Pay Anyone Payment Source
     case ocbcPao
+    
+    /// Boost Payment Source
+    case boost
+    
+    /// ShopeePay Payment Source
+    case shopeePay
+    
+    /// Maybank QRPay Payment Source
+    case maybankQRPay
+    
+    /// DuitNow QR Payment Source
+    case duitNowQR
+    
+    /// DuitNow OBW
+    public struct DuitNowOBW: PaymentMethod {
+        public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.duitNowOBW.rawValue
+
+        public var type: String = OMSSourceTypeValue.duitNowOBW.rawValue
+
+        /// The code of the supported Installment payment banks
+        public enum Bank: Equatable {
+            case affin
+            case alliance
+            case agro
+            case ambank
+            case cimb
+            case islam
+            case rakyat
+            case muamalat
+            case bsn
+            case hongleong
+            case hsbc
+            case kfh
+            case maybank2u
+            case ocbc
+            case publicBank
+            case rhb
+            case sc
+            case uob
+            case other(String)
+        }
+        
+        /// The customer's bank name
+        public let bank: String
+
+        private enum CodingKeys: String, CodingKey {
+            case bank
+        }
+        
+        /// Creates a new DuitNow OBW source with the given bank name
+        ///
+        /// - Parameters:
+        ///   - bank:  bank name e.g. affin
+        public init(bank: String) {
+            self.bank = bank
+        }
+    }
+
+    /// DuitNow OBW Payment Source
+    case duitNowOBW(DuitNowOBW)
 
     // GrabPay
     case grabPay
@@ -323,12 +383,22 @@ public enum PaymentInformation: Codable, Equatable {
             self = .ocbcPao
         case OMSSourceTypeValue.grabPay.rawValue:
             self = .grabPay
+        case OMSSourceTypeValue.boost.rawValue:
+            self = .boost
+        case OMSSourceTypeValue.shopeePay.rawValue:
+            self = .shopeePay
+        case OMSSourceTypeValue.maybankQRPay.rawValue:
+            self = .maybankQRPay
+        case OMSSourceTypeValue.duitNowQR.rawValue:
+            self = .duitNowQR
         case PaymentInformation.Points.self:
             self = .points(try Points(from: decoder))
         case PaymentInformation.MobileBanking.self:
             self = .mobileBanking(try PaymentInformation.MobileBanking(from: decoder))
         case PaymentInformation.FPX.self:
             self = .fpx(try FPX(from: decoder))
+        case PaymentInformation.DuitNowOBW.self:
+            self = .duitNowOBW(try DuitNowOBW(from: decoder))
         case let value:
             self = .other(type: value, parameters: try decoder.decodeJSONDictionary().filter({ (key, _) -> Bool in
                 switch key {
@@ -405,6 +475,22 @@ public enum PaymentInformation: Codable, Equatable {
         case .grabPay:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.grabPay.rawValue, forKey: .type)
+        case .boost:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.boost.rawValue, forKey: .type)
+        case .shopeePay:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.shopeePay.rawValue, forKey: .type)
+        case .maybankQRPay:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.maybankQRPay.rawValue, forKey: .type)
+        case .duitNowQR:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.duitNowQR.rawValue, forKey: .type)
+        case .duitNowOBW(let duitNowOBW):
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.duitNowOBW.rawValue, forKey: .type)
+            try duitNowOBW.encode(to: encoder)
         case .other(type: let type, parameters: let parameters):
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(type, forKey: .type)
@@ -438,6 +524,14 @@ public enum PaymentInformation: Codable, Equatable {
             return true
         case (.grabPay, .grabPay):
             return true
+        case (.boost, .boost):
+            return true
+        case (.shopeePay, .shopeePay):
+            return true
+        case (.maybankQRPay, .maybankQRPay):
+            return true
+        case (.duitNowQR, .duitNowQR):
+            return true
         case (.truemoney(let lhsValue), .truemoney(let rhsValue)):
             return lhsValue == rhsValue
         case (.billPayment(let lhsValue), .billPayment(let rhsValue)):
@@ -454,7 +548,8 @@ public enum PaymentInformation: Codable, Equatable {
             return lhsValue == rhsValue
         case (.fpx(let lhsValue), .fpx(let rhsValue)):
             return lhsValue == rhsValue
-
+        case (.duitNowOBW(let lhsValue), .duitNowOBW(let rhsValue)):
+            return lhsValue == rhsValue
         case (.other(let lhsType, let lhsParameters), .other(let rhsType, let rhsParameters)):
             return lhsType == rhsType &&
                 Set(lhsParameters.keys) == Set(rhsParameters.keys)
@@ -513,11 +608,21 @@ extension PaymentInformation {
             return OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue
         case .grabPay:
             return OMSSourceTypeValue.grabPay.rawValue
+        case .boost:
+            return OMSSourceTypeValue.boost.rawValue
+        case .shopeePay:
+            return OMSSourceTypeValue.shopeePay.rawValue
+        case .maybankQRPay:
+            return OMSSourceTypeValue.maybankQRPay.rawValue
+        case .duitNowQR:
+            return OMSSourceTypeValue.duitNowQR.rawValue
         case .points(let points):
             return points.type
         case .mobileBanking(let bank):
             return bank.type
         case .fpx(let bank):
+            return bank.type
+        case .duitNowOBW(let bank):
             return bank.type
         case .other(let value, _):
             return value
@@ -1029,5 +1134,56 @@ extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertibl
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: PaymentInformation.CodingKeys.self)
         try container.encode(type, forKey: .type)
+    }
+}
+
+extension PaymentInformation.DuitNowOBW.Bank: CaseIterable, CustomStringConvertible {
+    public typealias AllCases = [PaymentInformation.DuitNowOBW.Bank]
+    public static var allCases: PaymentInformation.DuitNowOBW.Bank.AllCases = [
+        .affin, .alliance, .agro, .ambank, .cimb, .islam, .rakyat, .muamalat, .bsn,
+        .hongleong, .hsbc, .kfh, .maybank2u, .ocbc, .publicBank, .rhb, .sc, .uob
+    ]
+    
+    public var description: String {
+        switch self {
+        case .affin:
+            return "affin"
+        case .alliance:
+            return "alliance"
+        case .agro:
+            return "agro"
+        case .ambank:
+            return "ambank"
+        case .cimb:
+            return "cimb"
+        case .islam:
+            return "islam"
+        case .rakyat:
+            return "rakyat"
+        case .muamalat:
+            return "muamalat"
+        case .bsn:
+            return "bsn"
+        case .hongleong:
+            return "hongleong"
+        case .hsbc:
+            return "hsbc"
+        case .kfh:
+            return "kfh"
+        case .maybank2u:
+            return "maybank2u"
+        case .ocbc:
+            return "ocbc"
+        case .publicBank:
+            return "public"
+        case .rhb:
+            return "rhb"
+        case .sc:
+            return "sc"
+        case .uob:
+            return "uob"
+        case .other(let value):
+            return value
+        }
     }
 }

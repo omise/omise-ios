@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1121F44028523BED0003EE4F /* DuitNowOBWBankChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1121F43F28523BED0003EE4F /* DuitNowOBWBankChooserViewController.swift */; };
 		14ACEF831D02D641001C5319 /* CardExpiryDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACEF821D02D641001C5319 /* CardExpiryDatePicker.swift */; };
 		2220F1A91D0FEE85008CD89F /* OmiseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A31D0FEE85008CD89F /* OmiseCard.swift */; };
 		2220F1AA1D0FEE85008CD89F /* OmiseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220F1A41D0FEE85008CD89F /* OmiseError.swift */; };
@@ -158,6 +159,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1121F43F28523BED0003EE4F /* DuitNowOBWBankChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuitNowOBWBankChooserViewController.swift; sourceTree = "<group>"; };
 		14ACEF821D02D641001C5319 /* CardExpiryDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardExpiryDatePicker.swift; sourceTree = "<group>"; };
 		2220F1A31D0FEE85008CD89F /* OmiseCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseCard.swift; sourceTree = "<group>"; };
 		2220F1A41D0FEE85008CD89F /* OmiseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseError.swift; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 				8AC1D3A6213941C80051F966 /* InstallmentsNumberOfTermsChooserViewController.swift */,
 				8AC1D3A22139224D0051F966 /* InternetBankingSourceChooserViewController.swift */,
 				F3497367254C066F00D05C7B /* MobileBankingSourceChooserViewController.swift */,
+				1121F43F28523BED0003EE4F /* DuitNowOBWBankChooserViewController.swift */,
 				8A275CBB21241E4500C5716F /* MainActionButton.swift */,
 				8A3150AD2146B6C300A4F429 /* MoreInformationOnCVVViewController.swift */,
 				8AE23AAD20F8CA8800BC9D8F /* PaymentChooserViewController.swift */,
@@ -782,6 +785,7 @@
 				8AD391B1230C05BC00383286 /* Colors.swift in Sources */,
 				8A47173D20AAB11B0022733A /* Source.swift in Sources */,
 				986406351CFEA7E4004BCF51 /* OmiseTextField.swift in Sources */,
+				1121F44028523BED0003EE4F /* DuitNowOBWBankChooserViewController.swift in Sources */,
 				73F9BA4725E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift in Sources */,
 				2220F1AD1D0FEE85008CD89F /* OmiseToken.swift in Sources */,
 				F3497368254C067000D05C7B /* MobileBankingSourceChooserViewController.swift in Sources */,

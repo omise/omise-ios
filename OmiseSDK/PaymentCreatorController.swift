@@ -565,7 +565,14 @@ extension PaymentCreatorController {
 
     public static let malaysiaDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
         .fpx,
-        .installmentEzypay
+        .installmentEzypay,
+        .touchNGo,
+        .grabPay,
+        .boost,
+        .shopeePay,
+        .maybankQRPay,
+        .duitNowQR,
+        .duitNowOBW
     ]
 
     public static let internetBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [

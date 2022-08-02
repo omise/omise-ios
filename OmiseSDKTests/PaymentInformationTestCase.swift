@@ -637,7 +637,29 @@ class PaymentInformationTestCase: XCTestCase {
         }
     }
 
-    func testOtherPaymentInfromation() throws {
+    func testEncodeDuitNowOBWSourceParameter() throws {
+        let encoder = PaymentInformationTestCase.makeJSONEncoder()
+
+        do {
+            let duitNowOBW = PaymentInformation.DuitNowOBW(bank: "affin")
+            let sourceParameter = Source.CreateParameter(paymentInformation: .duitNowOBW(duitNowOBW),
+                                                         amount: 10_000_00,
+                                                         currency: .myr)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "bank" : "affin",
+                  "currency" : "MYR",
+                  "platform_type" : "IOS",
+                  "type" : "duitnow_obw"
+                }
+                """, encodedJSONString)
+        }
+    }
+    
+    func testOtherPaymentInformation() throws {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
@@ -670,6 +692,74 @@ class PaymentInformationTestCase: XCTestCase {
                   "currency" : "THB",
                   "platform_type" : "IOS",
                   "type" : "bill_payment_tesco_lotus"
+                }
+                """, encodedJSONString)
+        }
+        
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .boost,
+                                                         amount: 123_45,
+                                                         currency: .myr)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 12345,
+                  "currency" : "MYR",
+                  "platform_type" : "IOS",
+                  "type" : "boost"
+                }
+                """, encodedJSONString)
+        }
+        
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .shopeePay,
+                                                         amount: 123_45,
+                                                         currency: .myr)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 12345,
+                  "currency" : "MYR",
+                  "platform_type" : "IOS",
+                  "type" : "shopeepay"
+                }
+                """, encodedJSONString)
+        }
+        
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .maybankQRPay,
+                                                         amount: 123_45,
+                                                         currency: .myr)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 12345,
+                  "currency" : "MYR",
+                  "platform_type" : "IOS",
+                  "type" : "maybank_qr"
+                }
+                """, encodedJSONString)
+        }
+        
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .duitNowQR,
+                                                         amount: 123_45,
+                                                         currency: .myr)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 12345,
+                  "currency" : "MYR",
+                  "platform_type" : "IOS",
+                  "type" : "duitnow_qr"
                 }
                 """, encodedJSONString)
         }

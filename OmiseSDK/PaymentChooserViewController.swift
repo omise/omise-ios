@@ -17,7 +17,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case dana
     case gcash
     case kakaoPay
-    case touchNGo
+    case touchNGoAlipayPlus
     case promptpay
     case paynow
     case truemoney
@@ -26,6 +26,13 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case rabbitLinepay
     case ocbcPao
     case grabPay
+    case boost
+    case shopeePay
+    case maybankQRPay
+    case duitNowQR
+    case duitNowOBW
+    case touchNGo
+    case grabPayRms
 
     static var allCases: [PaymentChooserOption] {
         return [
@@ -40,7 +47,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             .dana,
             .gcash,
             .kakaoPay,
-            .touchNGo,
+            .touchNGoAlipayPlus,
             .internetBanking,
             .mobileBanking,
             .tescoLotus,
@@ -51,7 +58,14 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             .fpx,
             .rabbitLinepay,
             .ocbcPao,
-            .grabPay
+            .grabPay,
+            .boost,
+            .shopeePay,
+            .maybankQRPay,
+            .duitNowQR,
+            .duitNowOBW,
+            .touchNGo,
+            .grabPayRms
         ]
     }
 
@@ -85,7 +99,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "GCash"
         case .kakaoPay:
             return "Kakao Pay"
-        case .touchNGo:
+        case .touchNGoAlipayPlus:
             return "TNG eWallet"
         case .promptpay:
             return "PromptPay"
@@ -103,6 +117,20 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "OCBC Pay Anyone"
         case .grabPay:
             return "Grab"
+        case .boost:
+            return "Boost"
+        case .shopeePay:
+            return "ShopeePay"
+        case .maybankQRPay:
+            return "Maybank QRPay"
+        case .duitNowQR:
+            return "DuitNow QR"
+        case .duitNowOBW:
+            return "DuitNow OBW"
+        case .touchNGo:
+            return "Touch 'n Go"
+        case .grabPayRms:
+            return "GrabPay"
         }
     }
 }
@@ -132,6 +160,8 @@ extension PaymentChooserOption {
             return [.gcash]
         case .kakaoPay:
             return [.kakaoPay]
+        case .touchNGoAlipayPlus:
+            return [.touchNGoAlipayPlus]
         case .touchNGo:
             return [.touchNGo]
         case .internetBankingBAY, .internetBankingKTB, .internetBankingBBL, .internetBankingSCB:
@@ -154,6 +184,18 @@ extension PaymentChooserOption {
             return [.ocbcPao]
         case .grabPay:
             return [.grabPay]
+        case .grabPayRms:
+            return [.grabPayRms]
+        case .boost:
+            return [.boost]
+        case .shopeePay:
+            return [.shopeePay]
+        case .maybankQRPay:
+            return [.maybankQRPay]
+        case .duitNowQR:
+            return [.duitNowQR]
+        case .duitNowOBW:
+            return [.duitNowOBW]
         default:
             return []
         }
@@ -167,6 +209,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                                     PaymentChooserUI {
     var capability: Capability?
     var flowSession: PaymentCreatorFlowSession?
+    var duitNowOBWBanks: [PaymentInformation.DuitNowOBW.Bank] = PaymentInformation.DuitNowOBW.Bank.allCases
 
     @objc var showsCreditCardPayment = true {
         didSet {
@@ -267,6 +310,9 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         case ("GoToFPXFormSegue"?, let controller as FPXFormViewController):
             controller.showingValues = capability?[.fpx]?.banks ?? []
             controller.flowSession = self.flowSession
+        case ("GoToDuitNowOBWBankChooserSegue"?, let controller as DuitNowOBWBankChooserViewController):
+            controller.showingValues = duitNowOBWBanks
+            controller.flowSession = self.flowSession
         default: break
         }
 
@@ -307,7 +353,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .gcash
         case .kakaoPay:
             payment = .kakaoPay
-        case .touchNGo:
+        case .touchNGoAlipayPlus, .touchNGo:
             payment = .touchNGo
         case .tescoLotus:
             payment = .billPayment(.tescoLotus)
@@ -321,8 +367,16 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .rabbitLinepay
         case .ocbcPao:
             payment = .ocbcPao
-        case .grabPay:
+        case .grabPay, .grabPayRms:
             payment = .grabPay
+        case .boost:
+            payment = .boost
+        case .shopeePay:
+            payment = .shopeePay
+        case .maybankQRPay:
+            payment = .maybankQRPay
+        case .duitNowQR:
+            payment = .duitNowQR
         default:
             return
         }
@@ -380,7 +434,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 17, section: 0)
         case .kakaoPay:
             return IndexPath(row: 18, section: 0)
-        case .touchNGo:
+        case .touchNGoAlipayPlus:
             return IndexPath(row: 19, section: 0)
         case .rabbitLinepay:
             return IndexPath(row: 20, section: 0)
@@ -388,6 +442,20 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 21, section: 0)
         case .grabPay:
             return IndexPath(row: 22, section: 0)
+        case .boost:
+            return IndexPath(row: 23, section: 0)
+        case .shopeePay:
+            return IndexPath(row: 24, section: 0)
+        case .maybankQRPay:
+            return IndexPath(row: 25, section: 0)
+        case .duitNowQR:
+            return IndexPath(row: 26, section: 0)
+        case .duitNowOBW:
+            return IndexPath(row: 27, section: 0)
+        case .touchNGo:
+            return IndexPath(row: 28, section: 0)
+        case .grabPayRms:
+            return IndexPath(row: 29, section: 0)
         }
     }
 
@@ -410,6 +478,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue.gcash
             case .kakaoPay:
                 return OMSSourceTypeValue.kakaoPay
+            case .touchNGoAlipayPlus:
+                return OMSSourceTypeValue.touchNGoAlipayPlus
             case .touchNGo:
                 return OMSSourceTypeValue.touchNGo
             case .promptpay:
@@ -438,6 +508,18 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue.mobileBankingOCBCPAO
             case .grabPay:
                 return OMSSourceTypeValue.grabPay
+            case .grabPayRms:
+                return OMSSourceTypeValue.grabPayRms
+            case .boost:
+                return OMSSourceTypeValue.boost
+            case .shopeePay:
+                return OMSSourceTypeValue.shopeePay
+            case .maybankQRPay:
+                return OMSSourceTypeValue.maybankQRPay
+            case .duitNowQR:
+                return OMSSourceTypeValue.duitNowQR
+            case .duitNowOBW:
+                return OMSSourceTypeValue.duitNowOBW
             case .card, .unknownSource:
                 return nil
             }
