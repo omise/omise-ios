@@ -124,7 +124,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
         case .shopeePay:
             return "ShopeePay"
         case .shopeePayJumpApp:
-            return "ShopeePay JumpApp"
+            return "ShopeePay"
         case .maybankQRPay:
             return "Maybank QRPay"
         case .duitNowQR:
@@ -523,10 +523,10 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             case .shopeePay:
                 // using ShopeePay Jump app as first priority ShopeePay source
                 let isShopeePayJumpAppExist = capability.supportedBackends.contains(
-                    where: {$0.payment == Capability.Backend.Payment.shopeePayJumpApp}
-                    )
+                  where: { $0.payment == Capability.Backend.Payment.shopeePayJumpApp }
+                )
                 if !isShopeePayJumpAppExist {
-                    return OMSSourceTypeValue.shopeePay
+                  return OMSSourceTypeValue.shopeePay
                 }
                 return nil
             case .shopeePayJumpApp:

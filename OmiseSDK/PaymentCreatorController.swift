@@ -552,7 +552,7 @@ extension PaymentCreatorController {
         .promptPay,
         .trueMoney,
         .pointsCiti,
-        .shopeePayJumpApp,
+        .shopeePayJumpApp
     ]
 
     public static let japanDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
@@ -562,7 +562,7 @@ extension PaymentCreatorController {
     public static let singaporeDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
         .payNow,
         .mobileBankingOCBCPAO,
-        .shopeePayJumpApp,
+        .shopeePayJumpApp
     ]
 
     public static let malaysiaDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
