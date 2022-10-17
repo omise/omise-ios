@@ -523,7 +523,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             case .shopeePay:
                 // using ShopeePay Jump app as first priority ShopeePay source
                 let isShopeePayJumpAppExist = capability.supportedBackends.contains(
-                        where: {$0.payment == Capability.Backend.Payment.shopeePayJumpApp}
+                    where: {$0.payment == Capability.Backend.Payment.shopeePayJumpApp}
                     )
                 if !isShopeePayJumpAppExist {
                     return OMSSourceTypeValue.shopeePay
