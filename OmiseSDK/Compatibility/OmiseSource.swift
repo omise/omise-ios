@@ -88,6 +88,9 @@ public class __SourcePaymentInformation: NSObject {
 
     /// Payment Information for an ShopeePay
     public static let shopeePayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.shopeePay)!
+    
+    /// Payment Information for an ShopeePay Jump App
+    public static let shopeePayJumpAppPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.shopeePayJumpApp)!
 
     /// Payment Information for an Maybank QRPay
     public static let maybankQRPayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.maybankQRPay)!
@@ -614,7 +617,10 @@ extension __SourcePaymentInformation {
             
         case .shopeePay:
             return __SourcePaymentInformation.shopeePayPayment
-            
+
+        case .shopeePayJumpApp:
+            return __SourcePaymentInformation.shopeePayJumpAppPayment
+
         case .maybankQRPay:
             return __SourcePaymentInformation.maybankQRPayPayment
             

@@ -104,6 +104,9 @@ class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
 
     static let shopeePaySourceBackendPayment =
         __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.shopeePay)
+    
+    static let shopeePayJumpAppSourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.shopeePayJumpApp)
 
     static let maybankQRPaySourceBackendPayment =
         __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.maybankQRPay)
@@ -198,6 +201,8 @@ extension __OmiseCapabilityBackendPayment {
             return __OmiseCapabilitySourceBackendPayment.boostSourceBackendPayment
         case .shopeePay:
             return __OmiseCapabilitySourceBackendPayment.shopeePaySourceBackendPayment
+        case .shopeePayJumpApp:
+            return __OmiseCapabilitySourceBackendPayment.shopeePayJumpAppSourceBackendPayment
         case .maybankQRPay:
             return __OmiseCapabilitySourceBackendPayment.maybankQRPaySourceBackendPayment
         case .duitNowQR:

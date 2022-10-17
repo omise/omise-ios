@@ -610,6 +610,23 @@ class ModelTestCase: XCTestCase {
         }
     }
     
+    func testDecodeShopeePayJumpAppSource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_shopeepay_jumpapp")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_5pqcjr6tu4xvqut5nh5", source.id)
+            XCTAssertEqual(100000, source.amount)
+            XCTAssertEqual(Currency.myr, source.currency)
+            XCTAssertEqual(PaymentInformation.shopeePayJumpApp, source.paymentInformation)
+            XCTAssertEqual(Flow.redirect, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
+    
     func testDecodeMaybankQRPaySource() throws {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
 

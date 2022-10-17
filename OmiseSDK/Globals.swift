@@ -148,6 +148,8 @@ extension OMSSourceTypeValue {
             return "boost"
         case .shopeePay:
             return "shopeepay"
+        case .shopeePayJumpApp:
+            return "shopeepay_jumpapp"
         case .maybankQRPay:
             return "maybank_qr"
         case .duitNowQR:

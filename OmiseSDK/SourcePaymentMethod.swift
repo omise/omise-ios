@@ -277,6 +277,9 @@ public enum PaymentInformation: Codable, Equatable {
     /// ShopeePay Payment Source
     case shopeePay
     
+    /// ShopeePayJumpApp Payment Source
+    case shopeePayJumpApp
+    
     /// Maybank QRPay Payment Source
     case maybankQRPay
     
@@ -387,6 +390,8 @@ public enum PaymentInformation: Codable, Equatable {
             self = .boost
         case OMSSourceTypeValue.shopeePay.rawValue:
             self = .shopeePay
+        case OMSSourceTypeValue.shopeePayJumpApp.rawValue:
+            self = .shopeePayJumpApp
         case OMSSourceTypeValue.maybankQRPay.rawValue:
             self = .maybankQRPay
         case OMSSourceTypeValue.duitNowQR.rawValue:
@@ -481,6 +486,9 @@ public enum PaymentInformation: Codable, Equatable {
         case .shopeePay:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.shopeePay.rawValue, forKey: .type)
+        case .shopeePayJumpApp:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.shopeePayJumpApp.rawValue, forKey: .type)
         case .maybankQRPay:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.maybankQRPay.rawValue, forKey: .type)
@@ -527,6 +535,8 @@ public enum PaymentInformation: Codable, Equatable {
         case (.boost, .boost):
             return true
         case (.shopeePay, .shopeePay):
+            return true
+        case (.shopeePayJumpApp, .shopeePayJumpApp):
             return true
         case (.maybankQRPay, .maybankQRPay):
             return true
@@ -612,6 +622,8 @@ extension PaymentInformation {
             return OMSSourceTypeValue.boost.rawValue
         case .shopeePay:
             return OMSSourceTypeValue.shopeePay.rawValue
+        case .shopeePayJumpApp:
+            return OMSSourceTypeValue.shopeePayJumpApp.rawValue
         case .maybankQRPay:
             return OMSSourceTypeValue.maybankQRPay.rawValue
         case .duitNowQR:

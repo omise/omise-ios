@@ -28,6 +28,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case grabPay
     case boost
     case shopeePay
+    case shopeePayJumpApp
     case maybankQRPay
     case duitNowQR
     case duitNowOBW
@@ -61,6 +62,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             .grabPay,
             .boost,
             .shopeePay,
+            .shopeePayJumpApp,
             .maybankQRPay,
             .duitNowQR,
             .duitNowOBW,
@@ -121,6 +123,8 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "Boost"
         case .shopeePay:
             return "ShopeePay"
+        case .shopeePayJumpApp:
+            return "ShopeePay JumpApp"
         case .maybankQRPay:
             return "Maybank QRPay"
         case .duitNowQR:
@@ -190,6 +194,8 @@ extension PaymentChooserOption {
             return [.boost]
         case .shopeePay:
             return [.shopeePay]
+        case .shopeePayJumpApp:
+            return [.shopeePayJumpApp]
         case .maybankQRPay:
             return [.maybankQRPay]
         case .duitNowQR:
@@ -373,6 +379,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .boost
         case .shopeePay:
             payment = .shopeePay
+        case .shopeePayJumpApp:
+            payment = .shopeePayJumpApp
         case .maybankQRPay:
             payment = .maybankQRPay
         case .duitNowQR:
@@ -444,7 +452,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 22, section: 0)
         case .boost:
             return IndexPath(row: 23, section: 0)
-        case .shopeePay:
+        case .shopeePay, .shopeePayJumpApp:
             return IndexPath(row: 24, section: 0)
         case .maybankQRPay:
             return IndexPath(row: 25, section: 0)
@@ -513,7 +521,14 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             case .boost:
                 return OMSSourceTypeValue.boost
             case .shopeePay:
-                return OMSSourceTypeValue.shopeePay
+                // using ShopeePay Jump app as first priority ShopeePay source
+                let isShopeePayJumpAppExist = capability.supportedBackends.contains(where: {$0.payment == Capability.Backend.Payment.shopeePayJumpApp})
+                if !isShopeePayJumpAppExist {
+                    return OMSSourceTypeValue.shopeePay
+                }
+                return nil
+            case .shopeePayJumpApp:
+                return OMSSourceTypeValue.shopeePayJumpApp
             case .maybankQRPay:
                 return OMSSourceTypeValue.maybankQRPay
             case .duitNowQR:
