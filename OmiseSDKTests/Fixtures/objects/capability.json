@@ -446,7 +446,7 @@
     },
     {
         "object": "payment_method",
-        "name": "shopeepay_jumpappass",
+        "name": "shopeepay_jumpapp",
         "currencies": [
             "SGD",
             "MYR",
@@ -454,7 +454,7 @@
         ],
         "card_brands": null,
         "installment_terms": null,
-        "banks": [],
+        "banks": []
      }
   ],
   "zero_interest_installments": false
