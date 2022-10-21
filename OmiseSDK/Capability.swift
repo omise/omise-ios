@@ -84,6 +84,7 @@ extension Capability {
             case maybankQRPay
             case duitNowQR
             case duitNowOBW
+            case payPay
             case unknownSource(String, configurations: [String: Any])
         }
 
@@ -167,6 +168,8 @@ extension Capability.Backend.Payment {
         case (.duitNowQR, .duitNowQR):
             return true
         case (.duitNowOBW, .duitNowOBW):
+            return true
+        case (.payPay, .payPay):
             return true
         default:
             return false
@@ -287,6 +290,8 @@ extension Capability.Backend {
             self.payment = .duitNowQR
         case .source(.duitNowOBW):
             self.payment = .duitNowOBW
+        case .source(.payPay):
+            self.payment = .payPay
         case .source(let value):
             let configurations = try container.decodeJSONDictionary()
             self.payment = .unknownSource(value.rawValue, configurations: configurations)
@@ -311,7 +316,7 @@ extension Capability.Backend {
             try encoder.encodeJSONDictionary(configurations)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         // swiftlint:disable line_length
-        case .internetBanking, .alipay, .alipayCN, .alipayHK, .dana, .gcash, .kakaoPay, .touchNGoAlipayPlus, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .grabPay, .grabPayRms, .boost, .shopeePay, .maybankQRPay, .duitNowQR, .duitNowOBW:
+        case .internetBanking, .alipay, .alipayCN, .alipayHK, .dana, .gcash, .kakaoPay, .touchNGoAlipayPlus, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .grabPay, .grabPayRms, .boost, .shopeePay, .maybankQRPay, .duitNowQR, .duitNowOBW, .payPay:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
     }
@@ -406,6 +411,8 @@ extension Capability.Backend {
                 self = .source(.duitNowQR)
             case .duitNowOBW:
                 self = .source(.duitNowOBW)
+            case .payPay:
+                self = .source(.payPay)
             }
         }
 

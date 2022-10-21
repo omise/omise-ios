@@ -97,6 +97,9 @@ public class __SourcePaymentInformation: NSObject {
 
     /// Payment Information for an DuitNow OBW
     public static let duitNowOBWPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.duitNowOBW)!
+
+    /// Payment Information for a PayPay Payment
+    public static let paypayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.payPay)!
 }
 
 /// Internet Bankning Source Payment Information
@@ -621,6 +624,9 @@ extension __SourcePaymentInformation {
         case .duitNowQR:
             return __SourcePaymentInformation.duitNowQRPayment
             
+        case .payPay:
+            return __SourcePaymentInformation.paypayPayment
+
         case .truemoney(let trueMoney):
             return __SourceTrueMoneyPayment(phoneNumber: trueMoney.phoneNumber)
 

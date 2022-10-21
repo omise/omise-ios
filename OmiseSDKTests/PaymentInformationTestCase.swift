@@ -659,6 +659,26 @@ class PaymentInformationTestCase: XCTestCase {
         }
     }
     
+    func testEncodePayPaySourceParameter() throws {
+        let encoder = PaymentInformationTestCase.makeJSONEncoder()
+
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .payPay,
+                                                         amount: 10_000_00,
+                                                         currency: .jpy)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "currency" : "JPY",
+                  "platform_type" : "IOS",
+                  "type" : "paypay"
+                }
+                """, encodedJSONString)
+        }
+    }
+
     func testOtherPaymentInformation() throws {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 

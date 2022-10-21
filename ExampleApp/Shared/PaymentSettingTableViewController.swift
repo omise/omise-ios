@@ -124,6 +124,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var maybankQRPayPaymentCell: UITableViewCell!
     @IBOutlet private var duitNowQRPaymentCell: UITableViewCell!
     @IBOutlet private var duitNowOBWPaymentCell: UITableViewCell!
+    @IBOutlet private var payPayPaymentCell: UITableViewCell!
     
     @IBOutlet private var useCapabilityAPIValuesCell: UITableViewCell!
     @IBOutlet private var useSpecifiedValuesCell: UITableViewCell!
@@ -345,6 +346,8 @@ extension PaymentSettingTableViewController {
             return .duitNowQR
         case duitNowOBWPaymentCell:
             return .duitNowOBW
+        case payPayPaymentCell:
+            return .payPay
         default:
             return nil
         }
@@ -433,6 +436,8 @@ extension PaymentSettingTableViewController {
             return duitNowQRPaymentCell
         case .duitNowOBW:
             return duitNowOBWPaymentCell
+        case .payPay:
+            return payPayPaymentCell
         default:
             return nil
         }

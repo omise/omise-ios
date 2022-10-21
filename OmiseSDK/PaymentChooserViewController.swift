@@ -33,6 +33,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case duitNowOBW
     case touchNGo
     case grabPayRms
+    case payPay
 
     static var allCases: [PaymentChooserOption] {
         return [
@@ -65,7 +66,8 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             .duitNowQR,
             .duitNowOBW,
             .touchNGo,
-            .grabPayRms
+            .grabPayRms,
+            .payPay
         ]
     }
 
@@ -131,6 +133,8 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "Touch 'n Go"
         case .grabPayRms:
             return "GrabPay"
+        case .payPay:
+            return "PayPay"
         }
     }
 }
@@ -196,6 +200,8 @@ extension PaymentChooserOption {
             return [.duitNowQR]
         case .duitNowOBW:
             return [.duitNowOBW]
+        case .payPay:
+            return [.payPay]
         default:
             return []
         }
@@ -377,6 +383,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .maybankQRPay
         case .duitNowQR:
             payment = .duitNowQR
+        case .payPay:
+            payment = .payPay
         default:
             return
         }
@@ -456,6 +464,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 28, section: 0)
         case .grabPayRms:
             return IndexPath(row: 29, section: 0)
+        case .payPay:
+            return IndexPath(row: 30, section: 0)
         }
     }
 
@@ -520,6 +530,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue.duitNowQR
             case .duitNowOBW:
                 return OMSSourceTypeValue.duitNowOBW
+            case .payPay:
+                return OMSSourceTypeValue.payPay
             case .card, .unknownSource:
                 return nil
             }
