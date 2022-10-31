@@ -551,7 +551,8 @@ extension PaymentCreatorController {
         .installmentUOB,
         .promptPay,
         .trueMoney,
-        .pointsCiti
+        .pointsCiti,
+        .shopeePayJumpApp
     ]
 
     public static let japanDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
@@ -560,7 +561,8 @@ extension PaymentCreatorController {
 
     public static let singaporeDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
         .payNow,
-        .mobileBankingOCBCPAO
+        .mobileBankingOCBCPAO,
+        .shopeePayJumpApp
     ]
 
     public static let malaysiaDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
@@ -570,6 +572,7 @@ extension PaymentCreatorController {
         .grabPay,
         .boost,
         .shopeePay,
+        .shopeePayJumpApp,
         .maybankQRPay,
         .duitNowQR,
         .duitNowOBW

@@ -43,6 +43,7 @@ extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueGrabPay;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueGrabPayRms;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueBoost;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueShopeePay;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueShopeePayJumpApp;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMaybankQRPay;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueDuitNowQR;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueDuitNowOBW;

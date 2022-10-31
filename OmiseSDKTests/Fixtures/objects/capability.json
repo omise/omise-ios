@@ -443,7 +443,19 @@
         "card_brands": null,
         "installment_terms": null,
         "banks": []
-    }
+    },
+    {
+        "object": "payment_method",
+        "name": "shopeepay_jumpapp",
+        "currencies": [
+            "SGD",
+            "MYR",
+            "THB"
+        ],
+        "card_brands": null,
+        "installment_terms": null,
+        "banks": []
+     }
   ],
   "zero_interest_installments": false
 }

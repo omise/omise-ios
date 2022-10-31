@@ -763,6 +763,23 @@ class PaymentInformationTestCase: XCTestCase {
                 }
                 """, encodedJSONString)
         }
+
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .shopeePayJumpApp,
+                                                         amount: 123_45,
+                                                         currency: .myr)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 12345,
+                  "currency" : "MYR",
+                  "platform_type" : "IOS",
+                  "type" : "shopeepay_jumpapp"
+                }
+                """, encodedJSONString)
+        }
     }
 
 }
