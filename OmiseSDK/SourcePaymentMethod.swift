@@ -116,7 +116,7 @@ public enum PaymentInformation: Codable, Equatable {
             case .bbl:
                 return IndexSet([ 4, 6, 8, 9, 10 ])
             case .mbb:
-                return IndexSet([ 6, 12, 24 ])
+                return IndexSet([ 6, 12, 18, 24 ])
             case .ktc:
                 return IndexSet([ 3, 4, 5, 6, 7, 8, 9, 10 ])
             case .kBank:
