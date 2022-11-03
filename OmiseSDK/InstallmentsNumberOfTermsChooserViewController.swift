@@ -32,12 +32,12 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
                     value: "Bangkok Bank",
                     comment: "A navigation title for the choosing installment terms screen with the `Bangkok Bank` selected"
                 )
-            case .ezypay?:
+            case .mbb?:
                 title = NSLocalizedString(
-                    "installment-number-of-terms-choosers.ezypay.navigation-item.title",
+                    "installment-number-of-terms-choosers.mbb.navigation-item.title",
                     bundle: .module,
-                    value: "Ezypay",
-                    comment: "A navigation title for the choosing installment terms screen with the `Ezypay` selected"
+                    value: "MBB",
+                    comment: "A navigation title for the choosing installment terms screen with the `MBB` selected"
                 )
             case .ktc?:
                 title = NSLocalizedString(

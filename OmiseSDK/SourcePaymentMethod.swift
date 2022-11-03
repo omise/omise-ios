@@ -88,7 +88,7 @@ public enum PaymentInformation: Codable, Equatable {
             case bay
             case firstChoice
             case bbl
-            case ezypay
+            case mbb
             case ktc
             case kBank
             case scb
@@ -115,7 +115,7 @@ public enum PaymentInformation: Codable, Equatable {
                 return IndexSet([ 3, 4, 6, 9, 10, 12, 18, 24, 36 ])
             case .bbl:
                 return IndexSet([ 4, 6, 8, 9, 10 ])
-            case .ezypay:
+            case .mbb:
                 return IndexSet([ 6, 12, 24 ])
             case .ktc:
                 return IndexSet([ 3, 4, 5, 6, 7, 8, 9, 10 ])
@@ -722,8 +722,8 @@ extension PaymentInformation.Installment {
             return OMSSourceTypeValue.installmentFirstChoice.rawValue
         case .bbl:
             return OMSSourceTypeValue.installmentBBL.rawValue
-        case .ezypay:
-            return OMSSourceTypeValue.installmentEzypay.rawValue
+        case .mbb:
+            return OMSSourceTypeValue.installmentMBB.rawValue
         case .ktc:
             return OMSSourceTypeValue.installmentKTC.rawValue
         case .kBank:
@@ -766,8 +766,8 @@ extension PaymentInformation.Installment {
             brand = .firstChoice
         case "bbl":
             brand = .bbl
-        case "ezypay":
-            brand = .ezypay
+        case "mbb":
+            brand = .mbb
         case "ktc":
             brand = .ktc
         case "kbank":
@@ -810,8 +810,8 @@ extension PaymentInformation.Installment.Brand: CaseIterable, CustomStringConver
             return "First Choice"
         case .bbl:
             return "BBL"
-        case .ezypay:
-            return "Ezypay"
+        case .mbb:
+            return "MBB"
         case .ktc:
             return "KTC"
         case .kBank:
@@ -837,8 +837,8 @@ extension PaymentInformation.Installment.Brand: CaseIterable, CustomStringConver
             return OMSSourceTypeValue.installmentFirstChoice.rawValue
         case .bbl:
             return OMSSourceTypeValue.installmentBBL.rawValue
-        case .ezypay:
-            return OMSSourceTypeValue.installmentEzypay.rawValue
+        case .mbb:
+            return OMSSourceTypeValue.installmentMBB.rawValue
         case .ktc:
             return OMSSourceTypeValue.installmentKTC.rawValue
         case .kBank:

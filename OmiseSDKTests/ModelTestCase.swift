@@ -148,13 +148,13 @@ class ModelTestCase: XCTestCase {
         }
 
         do {
-            let sourceData = try XCTestCase.fixturesData(forFilename: "source_installments/ezypay")
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_installments/mbb")
             let source = try decoder.decode(Source.self, from: sourceData)
 
             XCTAssertEqual("src_test_5obr9opqz5huc6tefw8", source.id)
             XCTAssertEqual(Currency.myr, source.currency)
             XCTAssertEqual(5000_00, source.amount)
-            XCTAssertEqual(.installment(.init(brand: .ezypay, numberOfTerms: 6)), source.paymentInformation)
+            XCTAssertEqual(.installment(.init(brand: .mbb, numberOfTerms: 6)), source.paymentInformation)
             XCTAssertEqual(Flow.redirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")

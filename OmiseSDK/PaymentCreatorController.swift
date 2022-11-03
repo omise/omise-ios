@@ -567,7 +567,7 @@ extension PaymentCreatorController {
 
     public static let malaysiaDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
         .fpx,
-        .installmentEzypay,
+        .installmentMBB,
         .touchNGo,
         .grabPay,
         .boost,
@@ -590,7 +590,7 @@ extension PaymentCreatorController {
         .installmentBAY,
         .installmentFirstChoice,
         .installmentBBL,
-        .installmentEzypay,
+        .installmentMBB,
         .installmentKTC,
         .installmentKBank,
         .installmentSCB,
