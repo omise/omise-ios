@@ -124,7 +124,7 @@
     },
     {
       "object": "payment_method",
-      "name": "installment_ezypay",
+      "name": "installment_mbb",
       "currencies": [
         "MYR"
       ],
@@ -132,6 +132,7 @@
       "installment_terms": [
         6,
         12,
+        18,
         24
       ]
     },

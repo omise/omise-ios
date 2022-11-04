@@ -222,12 +222,12 @@ public class __SourceInstallmentsPayment: __SourcePaymentInformation {
         return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentBBL, numberOfTerms: numberOfTerms)!
     }
 
-    /// Create a Ezypay Installment payment with the given number of terms
+    /// Create a MBB Installment payment with the given number of terms
     ///
     /// - Parameter numberOfTerms: Number of plan of the installment plan
-    /// - Returns: Ezypay Installment payment with the specified number of terms
-    public static func installmentEzypayPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
-        return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentEzypay, numberOfTerms: numberOfTerms)!
+    /// - Returns: MBB Installment payment with the specified number of terms
+    public static func installmentMBBPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
+        return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentMBB, numberOfTerms: numberOfTerms)!
     }
     /// Create a KTC Installment payment with the given number of terms
     ///
@@ -452,8 +452,8 @@ extension PaymentInformation {
                 brand = .firstChoice
             case .installmentBBL:
                 brand = .bbl
-            case .installmentEzypay:
-                brand = .ezypay
+            case .installmentMBB:
+                brand = .mbb
             case .installmentKTC:
                 brand = .ktc
             case .installmentKBank:
@@ -575,8 +575,8 @@ extension __SourcePaymentInformation {
                 return __SourceInstallmentsPayment.installmentFirstChoicePayment(withNumberOfTerms: installment.numberOfTerms)
             case .bbl:
                 return __SourceInstallmentsPayment.installmentBBLPayment(withNumberOfTerms: installment.numberOfTerms)
-            case .ezypay:
-                return __SourceInstallmentsPayment.installmentEzypayPayment(withNumberOfTerms: installment.numberOfTerms)
+            case .mbb:
+                return __SourceInstallmentsPayment.installmentMBBPayment(withNumberOfTerms: installment.numberOfTerms)
             case .ktc:
                 return __SourceInstallmentsPayment.installmentKTCPayment(withNumberOfTerms: installment.numberOfTerms)
             case .kBank:

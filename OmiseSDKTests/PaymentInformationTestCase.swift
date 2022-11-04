@@ -72,7 +72,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let installment = PaymentInformation.Installment(brand: .ezypay, numberOfTerms: 6)
+            let installment = PaymentInformation.Installment(brand: .mbb, numberOfTerms: 6)
             let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 5_000_00,
                                                          currency: .myr)
@@ -85,7 +85,7 @@ class PaymentInformationTestCase: XCTestCase {
                   "currency" : "MYR",
                   "installment_term" : 6,
                   "platform_type" : "IOS",
-                  "type" : "installment_ezypay"
+                  "type" : "installment_mbb"
                 }
                 """, encodedJSONString)
         }

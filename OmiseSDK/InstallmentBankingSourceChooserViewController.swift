@@ -50,7 +50,7 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
             return IndexPath(row: 3, section: 0)
         case .ktc:
             return IndexPath(row: 4, section: 0)
-        case .ezypay:
+        case .mbb:
             return IndexPath(row: 5, section: 0)
         case .scb:
             return IndexPath(row: 6, section: 0)
