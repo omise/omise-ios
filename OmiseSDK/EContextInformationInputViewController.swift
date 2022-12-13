@@ -1,6 +1,7 @@
 import UIKit
 
 @objc(OMSEContextInformationInputViewController)
+// swiftlint:disable attributes
 class EContextInformationInputViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
     var flowSession: PaymentCreatorFlowSession?
     var client: Client?

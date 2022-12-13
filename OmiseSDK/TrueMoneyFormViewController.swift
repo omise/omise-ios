@@ -1,6 +1,7 @@
 import UIKit
 
 @objc(OMSTrueMoneyFormViewController)
+// swiftlint:disable attributes
 class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
     
     var flowSession: PaymentCreatorFlowSession?

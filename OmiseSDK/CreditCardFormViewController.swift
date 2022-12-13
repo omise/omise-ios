@@ -40,8 +40,7 @@ message: "This delegate name is deprecated. Please use the new name of `OMSCredi
 renamed: "OMSCreditCardFormViewControllerDelegate")
 @objc public protocol OMSCreditCardFormDelegate: OMSCreditCardFormViewControllerDelegate {}
 
-@objc
-public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
+@objc public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
     /// Delegate method for receiving token data when card tokenization succeeds.
     /// - parameter token: `OmiseToken` instance created from supplied credit card data.
     /// - seealso: [Tokens API](https://www.omise.co/tokens-api)
@@ -70,7 +69,7 @@ public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
 @available(*, deprecated, renamed: "CreditCardFormViewController")
 public typealias CreditCardFormController = CreditCardFormViewController
 
-// swiftlint:disable type_body_length
+// swiftlint:disable type_body_length attributes
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.
 @objc(OMSCreditCardFormViewController)
@@ -165,8 +164,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     
     /// Factory method for creating CreditCardFormController with given public key.
     /// - parameter publicKey: Omise public key.
-    @objc(creditCardFormViewControllerWithPublicKey:)
-    public static func makeCreditCardFormViewController(withPublicKey publicKey: String) -> CreditCardFormViewController {
+    @objc(creditCardFormViewControllerWithPublicKey:) public static func makeCreditCardFormViewController(withPublicKey publicKey: String) -> CreditCardFormViewController {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
         // swiftlint:disable:next force_cast
         let creditCardForm = storyboard.instantiateInitialViewController() as! CreditCardFormViewController

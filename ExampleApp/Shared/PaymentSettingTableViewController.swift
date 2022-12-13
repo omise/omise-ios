@@ -33,8 +33,7 @@ class PaymentSettingTableViewController: UITableViewController {
             amountField.text = amountFormatter.string(from: NSNumber(value: currentCurrency.convert(fromSubunit: currentAmount)))
         }
     }
-    @objc(currentCurrencyCode)
-    var __currentCurrencyCode: String { // swiftlint:disable:this identifier_name
+    @objc(currentCurrencyCode) var __currentCurrencyCode: String { // swiftlint:disable:this identifier_name
         get {
             return currentCurrency.code
         }
