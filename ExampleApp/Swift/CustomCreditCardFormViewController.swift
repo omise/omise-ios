@@ -1,5 +1,6 @@
 import UIKit
 
+// swiftlint:disable:next type_name
 protocol CustomCreditCardFormViewControllerDelegate: AnyObject {
     /// Delegate method for receiving token data when card tokenization succeeds.
     /// - parameter token: `OmiseToken` instance created from supplied credit card data.
