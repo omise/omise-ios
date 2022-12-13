@@ -2,7 +2,7 @@ import UIKit
 import os
 
 @objc(OMSFPXBankChooserViewController)
-// swiftlint:disable attributes
+// swiftlint:disable:next attributes
 class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capability.Backend.Bank>, PaymentSourceChooser, PaymentChooserUI {
     var email: String?
     var flowSession: PaymentCreatorFlowSession?

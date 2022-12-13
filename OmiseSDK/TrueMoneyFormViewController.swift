@@ -1,7 +1,7 @@
 import UIKit
 
 @objc(OMSTrueMoneyFormViewController)
-// swiftlint:disable attributes
+// swiftlint:disable:next attributes
 class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
     
     var flowSession: PaymentCreatorFlowSession?

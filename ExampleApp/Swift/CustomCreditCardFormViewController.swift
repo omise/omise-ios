@@ -17,6 +17,7 @@ protocol CustomCreditCardFormViewControllerDelegate: AnyObject {
 
 @objc(CustomCreditCardFormViewController)
 @objcMembers
+// swiftlint:disable:next attributes
 class CustomCreditCardFormViewController: UIViewController {
     
     let omiseClient = Client(publicKey: "pkey_test_<#Omise Public Key#>")

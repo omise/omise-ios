@@ -1,4 +1,4 @@
-// swiftlint:disable file_length type_name force_unwrapping
+// swiftlint:disable file_length type_name force_unwrapping attributes
 
 import Foundation
 
