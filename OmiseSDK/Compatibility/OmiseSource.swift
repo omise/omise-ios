@@ -36,8 +36,7 @@ import Foundation
 
 /// Based type of the Source Payment Information type
 @objc(OMSPaymentInformation)
-@objcMembers
-public class __SourcePaymentInformation: NSObject {
+@objcMembers public class __SourcePaymentInformation: NSObject {
     public let type: OMSSourceTypeValue
 
     init?(type: OMSSourceTypeValue) {
