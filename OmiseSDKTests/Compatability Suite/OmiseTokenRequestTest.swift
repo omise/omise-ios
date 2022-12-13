@@ -15,7 +15,7 @@ class OmiseTokenRequestTest: XCTestCase {
             name: "JOHN DOE",
             number: "4242424242424242",
             expirationMonth: 11,
-            expirationYear: 2022,
+            expirationYear: 2030,
             securityCode: "123"
         )
     }
@@ -47,7 +47,7 @@ class OmiseTokenRequestTest: XCTestCase {
             
             XCTAssertEqual("4242", delegate.token?.card?.lastDigits)
             XCTAssertEqual(11, delegate.token?.card?.expirationMonth)
-            XCTAssertEqual(2022, delegate.token?.card?.expirationYear)
+            XCTAssertEqual(2030, delegate.token?.card?.expirationYear)
         }
     }
     
@@ -59,7 +59,7 @@ class OmiseTokenRequestTest: XCTestCase {
             case .succeed(token: let token):
                 XCTAssertEqual("4242", token.card?.lastDigits)
                 XCTAssertEqual(11, token.card?.expirationMonth)
-                XCTAssertEqual(2022, token.card?.expirationYear)
+                XCTAssertEqual(2030, token.card?.expirationYear)
             case .fail(let error):
                 XCTFail("Expected succeed request but failed with \(error)")
             }
