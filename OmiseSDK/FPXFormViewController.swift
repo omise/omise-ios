@@ -19,7 +19,7 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
     }
 
     private var isEmailInputEmpty: Bool {
-        return emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) == ""
+        return emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty
     }
 
     @IBInspectable var preferredPrimaryColor: UIColor? {
