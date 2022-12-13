@@ -35,8 +35,7 @@ import Foundation
 }
 
 /// Based type of the Source Payment Information type
-@objc(OMSPaymentInformation)
-@objcMembers public class __SourcePaymentInformation: NSObject {
+@objc(OMSPaymentInformation) @objcMembers public class __SourcePaymentInformation: NSObject {
     public let type: OMSSourceTypeValue
 
     init?(type: OMSSourceTypeValue) {
@@ -72,10 +71,10 @@ import Foundation
 
     /// Payment Information for an PayNow Payment
     public static let payNowPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.promptPay)!
-    
+
     /// Payment Information for an Rabbit LINE Pay Payment
     public static let rabbitLinepayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.rabbitLinepay)!
-    
+
     /// Payment Information for an OCBC Pay Anyone
     public static let ocbcPaoPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.mobileBankingOCBCPAO)!
 
@@ -87,7 +86,7 @@ import Foundation
 
     /// Payment Information for an ShopeePay
     public static let shopeePayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.shopeePay)!
-    
+
     /// Payment Information for an ShopeePay Jump App
     public static let shopeePayJumpAppPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.shopeePayJumpApp)!
 
@@ -341,7 +340,7 @@ public class __SourceMobileBankingPayment: __SourcePaymentInformation {
 
     /// Payment Information for a SCB Mobile Banking Payment
     public static let scbMobileBankingPayment = __SourceMobileBankingPayment(type: OMSSourceTypeValue.mobileBankingSCB)!
-    
+
     /// Payment Information for a KBank PayPlus Mobile Banking Payment
     public static let kbankMobileBankingPayment = __SourceMobileBankingPayment(type: OMSSourceTypeValue.mobileBankingKBank)!
 
@@ -601,7 +600,7 @@ extension __SourcePaymentInformation {
 
         case .paynow:
             return __SourcePaymentInformation.payNowPayment
-            
+
         case .rabbitLinepay:
             return __SourcePaymentInformation.rabbitLinepayPayment
 
@@ -610,10 +609,10 @@ extension __SourcePaymentInformation {
 
         case .grabPay:
             return __SourcePaymentInformation.grabPayPayment
-            
+
         case .boost:
             return __SourcePaymentInformation.boostPayment
-            
+
         case .shopeePay:
             return __SourcePaymentInformation.shopeePayPayment
 
@@ -622,10 +621,10 @@ extension __SourcePaymentInformation {
 
         case .maybankQRPay:
             return __SourcePaymentInformation.maybankQRPayPayment
-            
+
         case .duitNowQR:
             return __SourcePaymentInformation.duitNowQRPayment
-            
+
         case .truemoney(let trueMoney):
             return __SourceTrueMoneyPayment(phoneNumber: trueMoney.phoneNumber)
 
@@ -653,10 +652,10 @@ extension __SourcePaymentInformation {
 
         case .fpx(let fpx):
             return __SourceFPXPayment(bank: fpx.bank, email: fpx.email)
-            
+
         case .duitNowOBW(let duitNowOBW):
             return __SourceDuitNowOBWPayment(bank: duitNowOBW.bank)
-            
+
         case .other(type: let type, parameters: let parameters):
             return __CustomSourcePayment(customType: type, parameters: parameters)
         }
