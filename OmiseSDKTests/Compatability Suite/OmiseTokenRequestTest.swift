@@ -15,7 +15,7 @@ class OmiseTokenRequestTest: XCTestCase {
             name: "JOHN DOE",
             number: "4242424242424242",
             expirationMonth: 11,
-            expirationYear: 2022,
+            expirationYear: 2030,
             securityCode: "123"
         )
     }
