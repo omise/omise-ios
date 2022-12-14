@@ -11,6 +11,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     var currentEditingTextField: OmiseTextField?
     
     var isInputDataValid: Bool {
+        // swiftlint:disable:next reduce_boolean
         return formFields.reduce(into: true) { (valid, field) in
             valid = valid && field.isValid
         }

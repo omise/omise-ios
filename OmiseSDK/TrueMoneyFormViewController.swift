@@ -9,6 +9,7 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
     private var client: Client?
     
     private var isInputDataValid: Bool {
+        // swiftlint:disable:next reduce_boolean
         return formFields.reduce(into: true) { (valid, field) in
             valid = valid && field.isValid
         }

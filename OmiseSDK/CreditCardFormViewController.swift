@@ -116,6 +116,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     private lazy var overlayTransitionDelegate = OverlayPanelTransitioningDelegate()
     
     var isInputDataValid: Bool {
+        // swiftlint:disable:next reduce_boolean
         return formFields.reduce(into: true) { (valid, field) in
             valid = valid && field.isValid
         }

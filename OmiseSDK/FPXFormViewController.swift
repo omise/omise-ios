@@ -12,6 +12,7 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
     private var client: Client?
 
     private var isInputDataValid: Bool {
+        // swiftlint:disable:next reduce_boolean
         let valid = formFields.reduce(into: true) { (valid, field) in
             valid = valid && field.isValid
         }
