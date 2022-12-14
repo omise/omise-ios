@@ -73,7 +73,7 @@ To integrate the OmiseSDK into your Xcode project using the [Swift Package Manag
 
 1. In Xcode, select `File` > `Swift Packages` > `Add Package Dependency...`
 2. Enter the URL for this repository `https://github.com/omise/omise-ios.git`
-3. Choose a minimum semantic version of `v4.16.0`
+3. Choose a minimum semantic version of `v4.17.0`
 
 ## Usage
 
@@ -113,7 +113,7 @@ let tokenParameters = Token.CreateParameter(
     name: "JOHN DOE",
     number: "4242424242424242",
     expirationMonth: 11,
-    expirationYear: 2022,
+    expirationYear: 2030,
     securityCode: "123"
 )
 
