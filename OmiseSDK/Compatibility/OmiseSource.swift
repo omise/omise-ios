@@ -52,6 +52,9 @@ public class __SourcePaymentInformation: NSObject {
 
     /// Payment Information for an Alipay+ HK Wallet Payment
     public static let alipayHKPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.alipayHK)!
+    
+    /// Payment Information for an Atome Payment
+    public static let atomePayment = __SourcePaymentInformation(type: OMSSourceTypeValue.atome)!
 
     /// Payment Information for an Alipay+ DANA Wallet Payment
     public static let danaPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.dana)!
@@ -531,6 +534,9 @@ extension __SourcePaymentInformation {
             return __SourcePaymentInformation.alipayCNPayment
         case .alipayHK:
             return __SourcePaymentInformation.alipayHKPayment
+        case .atome:
+            return
+                __SourcePaymentInformation.atomePayment
         case .dana:
             return __SourcePaymentInformation.danaPayment
         case .gcash:

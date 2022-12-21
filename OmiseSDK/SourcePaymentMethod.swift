@@ -37,6 +37,9 @@ public enum PaymentInformation: Codable, Equatable {
 
     /// Online Alipay + Hongkong Wallet Payment Source
     case alipayHK
+    
+    /// Online Atome Payment Source
+    case atome
 
     /// Online Alipay + Dana Wallet Payment Source
     case dana
@@ -366,6 +369,8 @@ public enum PaymentInformation: Codable, Equatable {
             self = .alipayCN
         case OMSSourceTypeValue.alipayHK.rawValue:
             self = .alipayHK
+        case OMSSourceTypeValue.atome.rawValue:
+            self = .atome
         case OMSSourceTypeValue.dana.rawValue:
             self = .dana
         case OMSSourceTypeValue.gcash.rawValue:
@@ -437,6 +442,9 @@ public enum PaymentInformation: Codable, Equatable {
         case .alipayHK:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.alipayHK.rawValue, forKey: .type)
+        case .atome:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.atome.rawValue, forKey: .type)
         case .dana:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.dana.rawValue, forKey: .type)
@@ -516,6 +524,8 @@ public enum PaymentInformation: Codable, Equatable {
             return true
         case (.alipayHK, .alipayHK):
             return true
+        case (.atome, .atome):
+            return true
         case (.dana, .dana):
             return true
         case (.gcash, .gcash):
@@ -588,6 +598,8 @@ extension PaymentInformation {
             return OMSSourceTypeValue.alipayCN.rawValue
         case .alipayHK:
             return OMSSourceTypeValue.alipayHK.rawValue
+        case .atome:
+            return OMSSourceTypeValue.atome.rawValue
         case .dana:
             return OMSSourceTypeValue.dana.rawValue
         case .gcash:

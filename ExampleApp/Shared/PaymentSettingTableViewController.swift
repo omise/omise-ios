@@ -124,6 +124,9 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var maybankQRPayPaymentCell: UITableViewCell!
     @IBOutlet private var duitNowQRPaymentCell: UITableViewCell!
     @IBOutlet private var duitNowOBWPaymentCell: UITableViewCell!
+    @IBOutlet private var
+        atomePaymentCell:
+        UITableViewCell!
     
     @IBOutlet private var useCapabilityAPIValuesCell: UITableViewCell!
     @IBOutlet private var useSpecifiedValuesCell: UITableViewCell!
@@ -279,6 +282,8 @@ extension PaymentSettingTableViewController {
             return .alipayCN
         case alipayHKPaymentCell:
             return .alipayHK
+        case atomePaymentCell:
+            return .atome
         case danaPaymentCell:
             return .dana
         case gcashPaymentCell:
@@ -367,6 +372,8 @@ extension PaymentSettingTableViewController {
             return alipayCNPaymentCell
         case .alipayHK:
             return alipayHKPaymentCell
+        case .atome:
+            return atomePaymentCell
         case .dana:
             return danaPaymentCell
         case .gcash:
