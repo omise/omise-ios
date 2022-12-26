@@ -29,7 +29,13 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
     
     @IBOutlet var contentView: UIScrollView!
     
+    @IBOutlet private var nameTextField: OmiseTextField!
+    @IBOutlet private var emailTextField: OmiseTextField!
     @IBOutlet private var phoneNumberTextField: OmiseTextField!
+    @IBOutlet private var shippingStreetTextField: OmiseTextField!
+    @IBOutlet private var shippingCityTextField: OmiseTextField!
+    @IBOutlet private var shippingCountryCodeTextField: OmiseTextField!
+    @IBOutlet private var shippingPostalCodeTextField: OmiseTextField!
     @IBOutlet private var submitButton: MainActionButton!
     @IBOutlet private var requestingIndicatorView: UIActivityIndicatorView!
     
@@ -112,11 +118,35 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
     }
 
     @IBAction private func submitForm(_ sender: AnyObject) {
+        guard let name = nameTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+            return
+        }
+        
+        guard let email = emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+            return
+        }
+        
         guard let phoneNumber = phoneNumberTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
             return
         }
         
-        let atomeInformation = PaymentInformation.Atome(phoneNumber: phoneNumber)
+        guard let shippingStreet = shippingStreetTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+            return
+        }
+        
+        guard let shippingCity = shippingCityTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+            return
+        }
+        
+        guard let shippingCountryCode = shippingCountryCodeTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+            return
+        }
+        
+        guard let shippingPostalCode = shippingPostalCodeTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+            return
+        }
+        
+        let atomeInformation = PaymentInformation.Atome(name: name, email: email, phoneNumber: phoneNumber, shippingStreet: shippingStreet, shippingCity: shippingCity, shippingCountryCode: shippingCountryCode, shippingPostalCode: shippingPostalCode)
         requestingIndicatorView.startAnimating()
         view.isUserInteractionEnabled = false
         view.tintAdjustmentMode = .dimmed

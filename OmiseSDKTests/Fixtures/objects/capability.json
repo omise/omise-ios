@@ -289,11 +289,10 @@
       "object": "payment_method",
       "name": "atome",
       "currencies": [
-        "USD",
         "JPY",
-        "CAD",
+        "MYR",
         "SGD",
-        "PHP"
+        "THB"
       ],
       "card_brands": null,
       "installment_terms": null,

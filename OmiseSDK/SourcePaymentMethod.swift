@@ -46,18 +46,40 @@ public enum PaymentInformation: Codable, Equatable {
         public var type: String = OMSSourceTypeValue.atome.rawValue
 
         /// The customers phone number. Contains only digits and has 10 or 11 characters
+        public let name: String
+        public let email: String
         public let phoneNumber: String
+        public let shippingStreet: String
+        public let shippingCity: String
+        public let shippingCountryCode: String
+        public let shippingPostalCode: String
 
         private enum CodingKeys: String, CodingKey {
+            case name
+            case email
             case phoneNumber = "phone_number"
+            case shippingStreet = "shipping_street"
+            case shippingCity = "shipping_city"
+            case shippingCountryCode = "shipping_country_code"
+            case shippingPostalCode = "shipping_postal_code"
         }
 
         /// Creates a new TrueMoney source with the given customer information
         ///
         /// - Parameters:
         ///   - phoneNumber:  The customers phone number
-        public init(phoneNumber: String) {
+        public init(name: String, email: String, phoneNumber: String,
+                    shippingStreet: String,
+                    shippingCity: String,
+                    shippingCountryCode: String,
+                    shippingPostalCode: String) {
+            self.name = name
+            self.email = email
             self.phoneNumber = phoneNumber
+            self.shippingStreet = shippingStreet
+            self.shippingCity = shippingCity
+            self.shippingCountryCode = shippingCountryCode
+            self.shippingPostalCode = shippingPostalCode
         }
 
     }
