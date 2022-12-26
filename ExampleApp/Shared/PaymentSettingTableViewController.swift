@@ -91,6 +91,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var alipayPaymentCell: UITableViewCell!
     @IBOutlet private var alipayCNPaymentCell: UITableViewCell!
     @IBOutlet private var alipayHKPaymentCell: UITableViewCell!
+    @IBOutlet private var atomePaymentCell: UITableViewCell!
     @IBOutlet private var danaPaymentCell: UITableViewCell!
     @IBOutlet private var gcashPaymentCell: UITableViewCell!
     @IBOutlet private var kakaoPayPaymentCell: UITableViewCell!
@@ -124,9 +125,6 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var maybankQRPayPaymentCell: UITableViewCell!
     @IBOutlet private var duitNowQRPaymentCell: UITableViewCell!
     @IBOutlet private var duitNowOBWPaymentCell: UITableViewCell!
-    @IBOutlet private var
-        atomePaymentCell:
-        UITableViewCell!
     
     @IBOutlet private var useCapabilityAPIValuesCell: UITableViewCell!
     @IBOutlet private var useSpecifiedValuesCell: UITableViewCell!

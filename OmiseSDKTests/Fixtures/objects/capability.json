@@ -287,6 +287,20 @@
     },
     {
       "object": "payment_method",
+      "name": "atome",
+      "currencies": [
+        "USD",
+        "JPY",
+        "CAD",
+        "SGD",
+        "PHP"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "banks": []
+    },
+    {
+      "object": "payment_method",
       "name": "dana",
       "currencies": [
         "JPY",

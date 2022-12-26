@@ -535,8 +535,7 @@ extension __SourcePaymentInformation {
         case .alipayHK:
             return __SourcePaymentInformation.alipayHKPayment
         case .atome:
-            return
-                __SourcePaymentInformation.atomePayment
+            return __SourcePaymentInformation.atomePayment
         case .dana:
             return __SourcePaymentInformation.danaPayment
         case .gcash:

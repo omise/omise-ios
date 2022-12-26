@@ -38,8 +38,32 @@ public enum PaymentInformation: Codable, Equatable {
     /// Online Alipay + Hongkong Wallet Payment Source
     case alipayHK
     
+    /// The Atome customer information
+    public struct Atome: PaymentMethod {
+
+        public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.atome.rawValue
+
+        public var type: String = OMSSourceTypeValue.atome.rawValue
+
+        /// The customers phone number. Contains only digits and has 10 or 11 characters
+        public let phoneNumber: String
+
+        private enum CodingKeys: String, CodingKey {
+            case phoneNumber = "phone_number"
+        }
+
+        /// Creates a new TrueMoney source with the given customer information
+        ///
+        /// - Parameters:
+        ///   - phoneNumber:  The customers phone number
+        public init(phoneNumber: String) {
+            self.phoneNumber = phoneNumber
+        }
+
+    }
+    
     /// Online Atome Payment Source
-    case atome
+    case atome(Atome)
 
     /// Online Alipay + Dana Wallet Payment Source
     case dana
@@ -370,7 +394,7 @@ public enum PaymentInformation: Codable, Equatable {
         case OMSSourceTypeValue.alipayHK.rawValue:
             self = .alipayHK
         case OMSSourceTypeValue.atome.rawValue:
-            self = .atome
+            self = .atome(try Atome(from: decoder))
         case OMSSourceTypeValue.dana.rawValue:
             self = .dana
         case OMSSourceTypeValue.gcash.rawValue:
