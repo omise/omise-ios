@@ -256,7 +256,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Atome" translatesAutoresizingMaskIntoConstraints="NO" id="wEU-MF-7bJ">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Atome_Big" translatesAutoresizingMaskIntoConstraints="NO" id="wEU-MF-7bJ">
                                         <rect key="frame" x="148.33333333333334" y="38" width="72" height="72"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rWc-FJ-SkW" userLabel="Postal Code Text Field" customClass="OmiseTextField">
@@ -1858,14 +1858,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Atome" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gf2-Jc-sHw">
-                                                    <rect key="frame" x="87.333333333333314" y="0.0" width="279.66666666666669" height="64"/>
+                                                    <rect key="frame" x="55" y="0.0" width="312" height="64"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" image="Atome" highlighted="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" id="gUN-Th-8Zg">
-                                                    <rect key="frame" x="8" y="0.0" width="64.333333333333314" height="64"/>
+                                                    <rect key="frame" x="8" y="16" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Next" translatesAutoresizingMaskIntoConstraints="NO" id="Iq9-Qm-u5d">
@@ -4010,7 +4010,8 @@
         <image name="Alipay" width="32" height="32"/>
         <image name="AlipayCN" width="32" height="32"/>
         <image name="AlipayHK" width="32" height="32"/>
-        <image name="Atome" width="72" height="72"/>
+        <image name="Atome" width="32" height="32"/>
+        <image name="Atome_Big" width="72" height="72"/>
         <image name="BAY" width="32" height="32"/>
         <image name="BBL" width="32" height="32"/>
         <image name="BBL M" width="32" height="32"/>
