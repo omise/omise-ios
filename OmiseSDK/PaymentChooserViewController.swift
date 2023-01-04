@@ -359,8 +359,6 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .alipayCN
         case .alipayHK:
             payment = .alipayHK
-//        case .atome:
-//            payment = .atome
         case .dana:
             payment = .dana
         case .gcash:
