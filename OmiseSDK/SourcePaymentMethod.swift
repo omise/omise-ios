@@ -45,14 +45,14 @@ public enum PaymentInformation: Codable, Equatable {
 
         public var type: String = OMSSourceTypeValue.atome.rawValue
 
-        public let name: String
-        public let email: String
         /// The customers phone number. Contains only digits and has 10 or 11 characters
         public let phoneNumber: String
-        public let shippingStreet: String
-        public let shippingCity: String
-        public let shippingCountryCode: String
-        public let shippingPostalCode: String
+        public let name: String?
+        public let email: String?
+        public let shippingStreet: String?
+        public let shippingCity: String?
+        public let shippingCountryCode: String?
+        public let shippingPostalCode: String?
 
         private enum CodingKeys: String, CodingKey {
             case name
@@ -68,11 +68,13 @@ public enum PaymentInformation: Codable, Equatable {
         ///
         /// - Parameters:
         ///   - phoneNumber:  The customers phone number
-        public init(name: String, email: String, phoneNumber: String,
-                    shippingStreet: String,
-                    shippingCity: String,
-                    shippingCountryCode: String,
-                    shippingPostalCode: String) {
+        public init(phoneNumber: String,
+                name: String? = nil,
+                email: String? = nil,
+                shippingStreet: String? = nil,
+                shippingCity: String? = nil,
+                shippingCountryCode: String? = nil,
+                shippingPostalCode: String? = nil) {
             self.name = name
             self.email = email
             self.phoneNumber = phoneNumber

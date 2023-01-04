@@ -664,9 +664,9 @@ class PaymentInformationTestCase: XCTestCase {
 
         do {
             let atome = PaymentInformation.Atome(
+                phoneNumber: "66800000101",
                 name: "name",
                 email: "test_user@opn.ooo",
-                phoneNumber: "66800000101",
                 shippingStreet: "Sukhumvit",
                 shippingCity: "Bangkok",
                 shippingCountryCode: "TH",

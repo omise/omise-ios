@@ -11,6 +11,7 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
         return formFields.reduce(into: true) { (valid, field) in
             valid = valid && field.isValid
         }
+        return true;
     }
     
     @IBInspectable var preferredPrimaryColor: UIColor? {
@@ -116,7 +117,7 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
             }
         }
     }
-
+   
     @IBAction private func submitForm(_ sender: AnyObject) {
         guard let name = nameTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
             return
@@ -146,7 +147,7 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
             return
         }
         
-        let atomeInformation = PaymentInformation.Atome(name: name, email: email, phoneNumber: phoneNumber, shippingStreet: shippingStreet, shippingCity: shippingCity, shippingCountryCode: shippingCountryCode, shippingPostalCode: shippingPostalCode)
+        let atomeInformation = PaymentInformation.Atome(phoneNumber: phoneNumber, name: name, email: email, shippingStreet: shippingStreet, shippingCity: shippingCity, shippingCountryCode: shippingCountryCode, shippingPostalCode: shippingPostalCode)
         requestingIndicatorView.startAnimating()
         view.isUserInteractionEnabled = false
         view.tintAdjustmentMode = .dimmed
@@ -200,7 +201,7 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
 
             case OmiseTextFieldValidationError.invalidData:
                 errorLabel.text = NSLocalizedString(
-                    "atome-form.phone-number-field.invalid-data.error.text",
+                    "atome-form.phone_number-field.invalid-data.error.text",
                     tableName: "Error",
                     bundle: .module,
                     value: "Phone number is invalid",
