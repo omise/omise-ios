@@ -730,4 +730,27 @@ class ModelTestCase: XCTestCase {
                 """, encodedJSONString)
         }
     }
+    
+//    func testDecodeAtomeSource() throws {
+//        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+//
+//        do {
+//            let sourceData = try XCTestCase.fixturesData(forFilename: "source_atome")
+//            let source = try decoder.decode(Source.self, from: sourceData)
+//
+//            XCTAssertEqual("src_test_5pqcjr6tu4xvqut5nh5", source.id)
+//            XCTAssertEqual(100000, source.amount)
+//            XCTAssertEqual(Currency.sgd, source.currency)
+//            XCTAssertEqual(PaymentInformation.atome(.init(name: "name",
+//                                                          email: "test_user@opn.ooo",
+//                                                          phoneNumber: "66800000101",
+//                                                          shippingStreet: "Sukhumvit",
+//                                                          shippingCity: "Bangkok",
+//                                                          shippingCountryCode: "TH",
+//                                                          shippingPostalCode: "10200")), source.paymentInformation)
+//            XCTAssertEqual(Flow.redirect, source.flow)
+//        } catch {
+//            XCTFail("Cannot decode the source \(error)")
+//        }
+//    }
 }

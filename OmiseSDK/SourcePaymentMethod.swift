@@ -45,9 +45,9 @@ public enum PaymentInformation: Codable, Equatable {
 
         public var type: String = OMSSourceTypeValue.atome.rawValue
 
-        /// The customers phone number. Contains only digits and has 10 or 11 characters
         public let name: String
         public let email: String
+        /// The customers phone number. Contains only digits and has 10 or 11 characters
         public let phoneNumber: String
         public let shippingStreet: String
         public let shippingCity: String
@@ -64,7 +64,7 @@ public enum PaymentInformation: Codable, Equatable {
             case shippingPostalCode = "shipping_postal_code"
         }
 
-        /// Creates a new TrueMoney source with the given customer information
+        /// Creates a new Atome source with the given customer information
         ///
         /// - Parameters:
         ///   - phoneNumber:  The customers phone number
