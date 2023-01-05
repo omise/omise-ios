@@ -74,7 +74,7 @@ line_length:
   ignores_function_declarations: true
   ignores_comments: true
   ignores_interpolated_strings: true
-  warning: 250
+  warning: 140
 modifier_order:
   preferred_modifier_order:
     - acl
