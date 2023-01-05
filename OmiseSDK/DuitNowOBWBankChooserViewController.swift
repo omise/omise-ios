@@ -1,8 +1,7 @@
 import UIKit
 import os
 
-@objc(OMSDuitNowOBWBankChooserViewController)
-class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<PaymentInformation.DuitNowOBW.Bank>,
+@objc(OMSDuitNowOBWBankChooserViewController)class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<PaymentInformation.DuitNowOBW.Bank>,
                                                   PaymentSourceChooser,
                                                   PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?

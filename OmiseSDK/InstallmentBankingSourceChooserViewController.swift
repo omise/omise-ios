@@ -2,7 +2,7 @@ import UIKit
 import os
 
 @objc(OMSInstallmentBankingSourceChooserViewController)
-// swiftlint:disable:next type_name
+// swiftlint:disable:next type_name attributes
 class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>,
                                                      PaymentSourceChooser,
                                                      PaymentChooserUI {

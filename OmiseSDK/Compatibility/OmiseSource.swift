@@ -1,4 +1,4 @@
-// swiftlint:disable file_length type_name force_unwrapping
+// swiftlint:disable file_length type_name force_unwrapping attributes
 
 import Foundation
 
@@ -35,9 +35,7 @@ import Foundation
 }
 
 /// Based type of the Source Payment Information type
-@objc(OMSPaymentInformation)
-@objcMembers
-public class __SourcePaymentInformation: NSObject {
+@objc(OMSPaymentInformation) @objcMembers public class __SourcePaymentInformation: NSObject {
     public let type: OMSSourceTypeValue
 
     init?(type: OMSSourceTypeValue) {
@@ -103,9 +101,7 @@ public class __SourcePaymentInformation: NSObject {
 }
 
 /// Internet Bankning Source Payment Information
-@objc(OMSInternetBankingPaymentInformation)
-@objcMembers
-public class __SourceInternetBankingPayment: __SourcePaymentInformation {
+@objc(OMSInternetBankingPaymentInformation) @objcMembers public class __SourceInternetBankingPayment: __SourcePaymentInformation {
 
     /// Payment Information for a BAY Internet Banking Payment
     public static let bayInternetBankingPayment = __SourceInternetBankingPayment(type: OMSSourceTypeValue.internetBankingBAY)!
@@ -129,14 +125,10 @@ public class __SourceInternetBankingPayment: __SourcePaymentInformation {
 }
 
 /// Barcode Source Payment Information
-@objc(OMSBarcodePaymentInformation)
-@objcMembers
-public class __SourceBarcodePayment: __SourcePaymentInformation {}
+@objc(OMSBarcodePaymentInformation) @objcMembers public class __SourceBarcodePayment: __SourcePaymentInformation {}
 
 /// AlipayBarcode Source Payment Information
-@objc(OMSAlipayBarcodePaymentInformation)
-@objcMembers
-public class __SourceAlipayBarcodePayment: __SourceBarcodePayment {
+@objc(OMSAlipayBarcodePaymentInformation) @objcMembers public class __SourceAlipayBarcodePayment: __SourceBarcodePayment {
     let alipayBarcodeInformation: PaymentInformation.Barcode.AlipayBarcode
 
     /// Create an Alipay Barcode payment with the given information
@@ -164,9 +156,7 @@ public class __SourceAlipayBarcodePayment: __SourceBarcodePayment {
 }
 
 /// CustomBarcode Source Payment Information
-@objc(OMSCustomBarcodePaymentInformation)
-@objcMembers
-public class __SourceCustomBarcodePayment: __SourceBarcodePayment {
+@objc(OMSCustomBarcodePaymentInformation) @objcMembers public class __SourceCustomBarcodePayment: __SourceBarcodePayment {
     let parameters: [String: Any]
 
     /// Create a Barcode payment with the given source type and information
@@ -181,9 +171,7 @@ public class __SourceCustomBarcodePayment: __SourceBarcodePayment {
 }
 
 /// Installments Source Payment Information
-@objc(OMSInstallmentsPaymentInformation)
-@objcMembers
-public class __SourceInstallmentsPayment: __SourcePaymentInformation {
+@objc(OMSInstallmentsPaymentInformation) @objcMembers public class __SourceInstallmentsPayment: __SourcePaymentInformation {
     /// Number of terms of the installment plan
     public let numberOfTerms: Int
 
@@ -274,9 +262,7 @@ public class __SourceInstallmentsPayment: __SourcePaymentInformation {
 }
 
 /// EContext Source Payment Information
-@objc(OMSEContextPaymentInformation)
-@objcMembers
-public class __SourceEContextPayment: __SourcePaymentInformation {
+@objc(OMSEContextPaymentInformation) @objcMembers public class __SourceEContextPayment: __SourcePaymentInformation {
     /// Name of the payer
     public let name: String
     /// Email of the payer
@@ -299,9 +285,7 @@ public class __SourceEContextPayment: __SourcePaymentInformation {
 }
 
 /// The TrueMoney customer information
-@objc(OMSTrueMoneyPaymentInformation)
-@objcMembers
-public class __SourceTrueMoneyPayment: __SourcePaymentInformation {
+@objc(OMSTrueMoneyPaymentInformation) @objcMembers public class __SourceTrueMoneyPayment: __SourcePaymentInformation {
     /// The customers phone number. Contains only digits and has 10 or 11 characters
     public let phoneNumber: String
 
@@ -316,9 +300,7 @@ public class __SourceTrueMoneyPayment: __SourcePaymentInformation {
 }
 
 /// Points Source Payment Information
-@objc(OMSPointsPaymentInformation)
-@objcMembers
-public class __SourcePointsPayment: __SourcePaymentInformation {
+@objc(OMSPointsPaymentInformation) @objcMembers public class __SourcePointsPayment: __SourcePaymentInformation {
 
     /// Payment Information for a Citi Points Payment
     public static let citiPoints = __SourcePointsPayment(type: OMSSourceTypeValue.pointsCiti)!
@@ -336,9 +318,7 @@ public class __SourcePointsPayment: __SourcePaymentInformation {
 }
 
 /// Mobile Bankning Source Payment Information
-@objc(OMSMobileBankingPaymentInformation)
-@objcMembers
-public class __SourceMobileBankingPayment: __SourcePaymentInformation {
+@objc(OMSMobileBankingPaymentInformation) @objcMembers public class __SourceMobileBankingPayment: __SourcePaymentInformation {
 
     /// Payment Information for a SCB Mobile Banking Payment
     public static let scbMobileBankingPayment = __SourceMobileBankingPayment(type: OMSSourceTypeValue.mobileBankingSCB)!
@@ -365,9 +345,7 @@ public class __SourceMobileBankingPayment: __SourcePaymentInformation {
 }
 
 /// The FPX Source Payment information
-@objc(OMSFPXPaymentInformation)
-@objcMembers
-public class __SourceFPXPayment: __SourcePaymentInformation {
+@objc(OMSFPXPaymentInformation) @objcMembers public class __SourceFPXPayment: __SourcePaymentInformation {
     /// The customer's bank name
     public let bank: String
 
@@ -387,9 +365,7 @@ public class __SourceFPXPayment: __SourcePaymentInformation {
 }
 
 /// The DuitNow OBW Source Payment information
-@objc(OMSDuitNowOBWPaymentInformation)
-@objcMembers
-public class __SourceDuitNowOBWPayment: __SourcePaymentInformation {
+@objc(OMSDuitNowOBWPaymentInformation) @objcMembers public class __SourceDuitNowOBWPayment: __SourcePaymentInformation {
     /// The customer's bank name
     public let bank: String
 
@@ -404,9 +380,7 @@ public class __SourceDuitNowOBWPayment: __SourcePaymentInformation {
 }
 
 /// CustomSource Source Payment Information
-@objc(OMSCustomPaymentInformation)
-@objcMembers
-public class __CustomSourcePayment: __SourcePaymentInformation {
+@objc(OMSCustomPaymentInformation) @objcMembers public class __CustomSourcePayment: __SourcePaymentInformation {
     /// Parameter of the payment source in a JSON data type
     public let parameters: [String: Any]
 

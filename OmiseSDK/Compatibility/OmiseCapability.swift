@@ -1,8 +1,7 @@
 // swiftlint:disable type_name
 import Foundation
 
-@objc(OMSCapability) public
-class __OmiseCapability: NSObject {
+@objc(OMSCapability) public class __OmiseCapability: NSObject {
     let capability: Capability
 
     @objc public lazy var location: String = capability.location
@@ -18,8 +17,7 @@ class __OmiseCapability: NSObject {
     }
 }
 
-@objc(OMSCapabilityBackend) public
-class __OmiseCapabilityBackend: NSObject {
+@objc(OMSCapabilityBackend) public class __OmiseCapabilityBackend: NSObject {
     private let backend: Capability.Backend
 
     @objc public lazy var payment: __OmiseCapabilityBackendPayment =
@@ -31,11 +29,9 @@ class __OmiseCapabilityBackend: NSObject {
     }
 }
 
-@objc(OMSCapabilityBackendPayment) public
-class __OmiseCapabilityBackendPayment: NSObject {}
+@objc(OMSCapabilityBackendPayment) public class __OmiseCapabilityBackendPayment: NSObject {}
 
-@objc(OMSCapabilityCardBackend) public
-class __OmiseCapabilityCardBackendPayment: __OmiseCapabilityBackendPayment {
+@objc(OMSCapabilityCardBackend) public class __OmiseCapabilityCardBackendPayment: __OmiseCapabilityBackendPayment {
     @objc public let supportedBrands: Set<String>
 
     init(supportedBrands: Set<String>) {
@@ -43,8 +39,7 @@ class __OmiseCapabilityCardBackendPayment: __OmiseCapabilityBackendPayment {
     }
 }
 
-@objc(OMSCapabilitySourceBackend) public
-class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
+@objc(OMSCapabilitySourceBackend) public class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
     @objc public let type: OMSSourceTypeValue
 
     init(sourceType: OMSSourceTypeValue) {
@@ -130,8 +125,7 @@ class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
     }
 }
 
-@objc(OMSCapabilityInstallmentBackend) public
-class __OmiseCapabilityInstallmentBackendPayment: __OmiseCapabilitySourceBackendPayment {
+@objc(OMSCapabilityInstallmentBackend) public class __OmiseCapabilityInstallmentBackendPayment: __OmiseCapabilitySourceBackendPayment {
     @objc public let availableNumberOfTerms: IndexSet
 
     init(sourceType: OMSSourceTypeValue, availableNumberOfTerms: IndexSet) {
@@ -140,8 +134,7 @@ class __OmiseCapabilityInstallmentBackendPayment: __OmiseCapabilitySourceBackend
     }
 }
 
-@objc(OMSCapabilityUnknownSourceBackend) public
-class __OmiseCapabilityUnknownSourceBackendPayment: __OmiseCapabilitySourceBackendPayment {
+@objc(OMSCapabilityUnknownSourceBackend) public class __OmiseCapabilityUnknownSourceBackendPayment: __OmiseCapabilitySourceBackendPayment {
     @objc public let parameters: [String: Any]
     init(sourceType: String, parameters: [String: Any]) {
         self.parameters = parameters

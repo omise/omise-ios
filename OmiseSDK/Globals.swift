@@ -272,7 +272,7 @@ extension KeyedEncodingContainerProtocol where Key == JSONCodingKeys {
                 try encode(value, forKey: key)
             case let value as [Any]:
                 try encode(value, forKey: key)
-            case Optional<Any>.none: // swiftlint:disable:this syntactic_sugar
+            case Optional<Any>.none:
                 try encodeNil(forKey: key)
             default:
                 let context = EncodingError.Context(codingPath: codingPath + [key], debugDescription: "Invalid JSON value")
@@ -322,7 +322,7 @@ extension UnkeyedEncodingContainer {
                 try encodeJSONDictionary(value)
             case let value as [Any]:
                 try encodeArrayElement(value)
-            case Optional<Any>.none: // swiftlint:disable:this syntactic_sugar
+            case Optional<Any>.none:
                 try encodeNil()
             default:
                 let keys = JSONCodingKeys(intValue: index).map({ [ $0 ] }) ?? []
