@@ -141,8 +141,7 @@ import UIKit
             self.selectedMonth = expiryMonth
             
             let expectedDisplayingExpiryMonthText = String(format: "%02d/", expiryMonth)
-            if (text != expectedDisplayingExpiryMonthText && parsedExpiryYear == nil)  &&
-                (expiryMonth != 1 || expiryDateComponents[0].count == 2) {
+            if (text != expectedDisplayingExpiryMonthText && parsedExpiryYear == nil) && (expiryMonth != 1 || expiryDateComponents[0].count == 2) {
                 let currentAttributes = defaultTextAttributes
                 let stringAttributes = Dictionary(uniqueKeysWithValues: self.defaultTextAttributes.map { ($0.key, $0.value) })
                 let attributedText = NSMutableAttributedString(string: String(format: "%02d/", expiryMonth), attributes: stringAttributes)
