@@ -10,5 +10,9 @@
   "currency": "THB",
   "phone_number": "66800000101",
   "name": "name surname",
-  "email": "test_user@opn.ooo"
+  "email": "test_user@opn.ooo",
+  "shipping_street": "4 Sukhumvit 103 rd.",
+  "shipping_city": "Bangkok",
+  "shipping_country_code": "TH",
+  "shipping_postal_code": "10260"
 }

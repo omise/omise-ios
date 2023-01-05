@@ -49,10 +49,10 @@ public enum PaymentInformation: Codable, Equatable {
         public let phoneNumber: String
         public let name: String?
         public let email: String?
-        public let shippingStreet: String?
-        public let shippingCity: String?
-        public let shippingCountryCode: String?
-        public let shippingPostalCode: String?
+        public let shippingStreet: String
+        public let shippingCity: String
+        public let shippingCountryCode: String
+        public let shippingPostalCode: String
 
         private enum CodingKeys: String, CodingKey {
             case name
