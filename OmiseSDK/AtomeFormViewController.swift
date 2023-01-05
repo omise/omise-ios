@@ -11,7 +11,6 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
         return formFields.reduce(into: true) { (valid, field) in
             valid = valid && field.isValid
         }
-        return true;
     }
     
     @IBInspectable var preferredPrimaryColor: UIColor? {
