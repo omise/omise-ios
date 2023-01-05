@@ -68,13 +68,7 @@ public enum PaymentInformation: Codable, Equatable {
         ///
         /// - Parameters:
         ///   - phoneNumber:  The customers phone number
-        public init(phoneNumber: String,
-                name: String? = nil,
-                email: String? = nil,
-                shippingStreet: String? = nil,
-                shippingCity: String? = nil,
-                shippingCountryCode: String? = nil,
-                shippingPostalCode: String? = nil) {
+        public init(phoneNumber: String, shippingStreet: String, shippingCity: String, shippingCountryCode: String, shippingPostalCode: String, name: String? = nil, email: String? = nil) {
             self.name = name
             self.email = email
             self.phoneNumber = phoneNumber

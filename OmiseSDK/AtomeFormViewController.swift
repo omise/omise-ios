@@ -126,32 +126,32 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
             return
         }
         
-        guard let phoneNumber = phoneNumberTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+        guard let phone = phoneNumberTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
             return
         }
         
-        guard let shippingStreet = shippingStreetTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+        guard let street = shippingStreetTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
             return
         }
         
-        guard let shippingCity = shippingCityTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+        guard let city = shippingCityTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
             return
         }
         
-        guard let shippingCountryCode = shippingCountryCodeTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+        guard let country = shippingCountryCodeTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
             return
         }
         
-        guard let shippingPostalCode = shippingPostalCodeTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+        guard let postcode = shippingPostalCodeTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
             return
         }
         
-        let atomeInformation = PaymentInformation.Atome(phoneNumber: phoneNumber, name: name, email: email, shippingStreet: shippingStreet, shippingCity: shippingCity, shippingCountryCode: shippingCountryCode, shippingPostalCode: shippingPostalCode)
+        let atomeInfo = PaymentInformation.Atome(phoneNumber: phone, shippingStreet: street, shippingCity: city, shippingCountryCode: country, shippingPostalCode: postcode, name: name, email: email)
         requestingIndicatorView.startAnimating()
         view.isUserInteractionEnabled = false
         view.tintAdjustmentMode = .dimmed
         submitButton.isEnabled = false
-        flowSession?.requestCreateSource(.atome(atomeInformation)) { _ in
+        flowSession?.requestCreateSource(.atome(atomeInfo)) { _ in
             self.requestingIndicatorView.stopAnimating()
             self.view.isUserInteractionEnabled = true
             self.view.tintAdjustmentMode = .automatic

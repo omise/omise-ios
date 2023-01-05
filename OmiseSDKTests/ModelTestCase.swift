@@ -383,7 +383,13 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual(100000, source.amount)
             XCTAssertEqual(Currency.thb, source.currency)
           XCTAssertEqual(PaymentInformation.atome(.init(
-            phoneNumber: "66800000101", name: "name surname", email: "test_user@opn.ooo")), source.paymentInformation)
+            phoneNumber: "66800000101",
+            shippingStreet: "4 Sukhumvit 103 rd.",
+            shippingCity: "Bangkok",
+            shippingCountryCode: "TH",
+            shippingPostalCode: "10260",
+            name: "name surname",
+            email: "test_user@opn.ooo")), source.paymentInformation)
             XCTAssertEqual(Flow.redirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")

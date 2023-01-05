@@ -665,12 +665,12 @@ class PaymentInformationTestCase: XCTestCase {
         do {
             let atome = PaymentInformation.Atome(
                 phoneNumber: "66800000101",
-                name: "name",
-                email: "test_user@opn.ooo",
-                shippingStreet: "Sukhumvit",
+                shippingStreet: "4 Sukhumvit 103 rd.",
                 shippingCity: "Bangkok",
                 shippingCountryCode: "TH",
-                shippingPostalCode: "10200")
+                shippingPostalCode: "10200",
+                name: "name",
+                email: "test_user@opn.ooo")
             let sourceParameter = Source.CreateParameter(paymentInformation: .atome(atome),
                                                          amount: 10_000_00,
                                                          currency: .thb)
