@@ -238,10 +238,6 @@ extension OMSSourceTypeValue {
         switch self {
         case .internetBankingBAY:
             return .bay
-        case .internetBankingKTB:
-            return .ktb
-        case .internetBankingSCB:
-            return .scb
         case .internetBankingBBL:
             return .bbl
         default:
@@ -251,7 +247,7 @@ extension OMSSourceTypeValue {
 
     var isInternetBankingSource: Bool {
         switch self {
-        case .internetBankingBAY, .internetBankingKTB, .internetBankingSCB, .internetBankingBBL:
+        case .internetBankingBAY, .internetBankingBBL:
             return true
         default:
             return false

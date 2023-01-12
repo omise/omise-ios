@@ -101,7 +101,7 @@ struct SkippingKeyCodingKeys<Key: CodingKey>: CodingKey {
 extension OMSSourceTypeValue {
     var sourceTypePrefix: String {
         switch self {
-        case .internetBankingBAY, .internetBankingKTB, .internetBankingSCB, .internetBankingBBL:
+        case .internetBankingBAY, .internetBankingBBL:
             return "internet_banking"
         case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingBAY, .mobileBankingBBL:
             return "mobile_banking"

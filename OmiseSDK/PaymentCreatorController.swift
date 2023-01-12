@@ -531,8 +531,6 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
 extension PaymentCreatorController {
     public static let thailandDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
         .internetBankingBAY,
-        .internetBankingKTB,
-        .internetBankingSCB,
         .internetBankingBBL,
         .mobileBankingSCB,
         .mobileBankingKBank,
@@ -580,8 +578,6 @@ extension PaymentCreatorController {
 
     public static let internetBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
         .internetBankingBAY,
-        .internetBankingKTB,
-        .internetBankingSCB,
         .internetBankingBBL
     ]
 
