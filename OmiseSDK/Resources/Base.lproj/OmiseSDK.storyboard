@@ -61,7 +61,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q1m-6E-D05" customClass="OmiseTextField">
-                                        <rect key="frame" x="16" y="303" width="336" height="47"/>
+                                        <rect key="frame" x="16" y="303" width="335" height="47"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="47" id="Huv-pN-ild"/>
                                         </constraints>
@@ -82,7 +82,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opw-Lb-RTk">
-                                        <rect key="frame" x="19" y="375" width="354" height="18"/>
+                                        <rect key="frame" x="19" y="375" width="353" height="18"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
@@ -91,7 +91,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g2N-5w-2eO" userLabel="Phone Number Text Field" customClass="OmiseTextField">
-                                        <rect key="frame" x="16" y="393" width="336" height="50"/>
+                                        <rect key="frame" x="16" y="393" width="335" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="q95-Vk-vhJ"/>
                                         </constraints>
@@ -112,7 +112,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPn-lR-eH6" customClass="OMSMainActionButton">
-                                        <rect key="frame" x="8" y="841" width="353" height="44"/>
+                                        <rect key="frame" x="8" y="849" width="353" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="Tkb-Ta-fcs"/>
                                         </constraints>
@@ -181,7 +181,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fec-yU-cjb">
-                                        <rect key="frame" x="16" y="579" width="355" height="18"/>
+                                        <rect key="frame" x="16" y="590" width="354" height="18"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
@@ -190,7 +190,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Do8-iZ-oUZ" userLabel="City Text Field" customClass="OmiseTextField">
-                                        <rect key="frame" x="16" y="601" width="336" height="50"/>
+                                        <rect key="frame" x="16" y="609" width="335" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="YMm-L9-cAe"/>
                                         </constraints>
@@ -221,7 +221,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PsE-x4-Dcs" userLabel="Country Code Text Field" customClass="OmiseTextField">
-                                        <rect key="frame" x="14" y="685" width="342" height="50"/>
+                                        <rect key="frame" x="14" y="681" width="342" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="eFU-6a-7zG"/>
                                         </constraints>
@@ -242,7 +242,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Postal code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dza-qR-Pv2" userLabel="Postal Code">
-                                        <rect key="frame" x="16" y="743" width="344" height="18"/>
+                                        <rect key="frame" x="16" y="751" width="344" height="18"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
@@ -260,7 +260,7 @@
                                         <rect key="frame" x="146.66666666666669" y="38" width="72" height="72"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rWc-FJ-SkW" userLabel="Postal Code Text Field" customClass="OmiseTextField">
-                                        <rect key="frame" x="15" y="769" width="340" height="50"/>
+                                        <rect key="frame" x="15" y="777" width="340" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="AyM-qK-0I9"/>
                                         </constraints>
@@ -280,36 +280,34 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email Error Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jW3-TS-2cF" userLabel="Email Error Label">
-                                        <rect key="frame" x="17" y="354" width="337" height="13.333333333333258"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Error Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jW3-TS-2cF" userLabel="Email Error Label">
+                                        <rect key="frame" x="17" y="354" width="336" height="13.333333333333314"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shipping Street Error Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDS-cR-u4E" userLabel="Shipping Streeet Error Label">
-                                        <rect key="frame" x="17" y="554" width="337" height="13.333333333333314"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shipping Street Error Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDS-cR-u4E" userLabel="Shipping Streeet Error Label">
+                                        <rect key="frame" x="17" y="578" width="336" height="13.333333333333371"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shipping Country Error Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="auP-ch-jTc" userLabel="Shipping Country Error Label">
-                                        <rect key="frame" x="19" y="721" width="337" height="13.333333333333334"/>
+                                        <rect key="frame" x="19" y="735" width="337" height="13.333333333333371"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shipping Postal Code Error Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gjo-KU-eOJ" userLabel="Shipping Postal Code Error Label">
-                                        <rect key="frame" x="18" y="819" width="337" height="13.333333333333334"/>
+                                        <rect key="frame" x="17" y="823" width="337" height="13.333333333333371"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shipping City Error Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GhX-9B-plM" userLabel="Shipping City Error Label">
-                                        <rect key="frame" x="19" y="639" width="337" height="13.333333333333334"/>
+                                        <rect key="frame" x="19" y="650" width="337" height="13.333333333333371"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -331,7 +329,7 @@
                                     <constraint firstItem="Dza-qR-Pv2" firstAttribute="centerX" secondItem="hJY-Tc-9Kd" secondAttribute="centerX" constant="3" id="A0w-0A-dU4"/>
                                     <constraint firstItem="zjZ-Kq-23p" firstAttribute="top" secondItem="opw-Lb-RTk" secondAttribute="bottom" constant="-344" id="AkY-yM-sqv"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="370" id="EnH-Mx-LSJ"/>
-                                    <constraint firstItem="Do8-iZ-oUZ" firstAttribute="top" secondItem="fec-yU-cjb" secondAttribute="bottom" constant="4" id="FJw-Ug-DvP"/>
+                                    <constraint firstItem="Do8-iZ-oUZ" firstAttribute="top" secondItem="fec-yU-cjb" secondAttribute="bottom" constant="1" id="FJw-Ug-DvP"/>
                                     <constraint firstItem="fec-yU-cjb" firstAttribute="leading" secondItem="g2N-5w-2eO" secondAttribute="leading" id="JQF-g4-AEf"/>
                                     <constraint firstItem="Izx-Dp-ebc" firstAttribute="top" secondItem="wEU-MF-7bJ" secondAttribute="bottom" constant="10" id="KL4-lW-Vw5"/>
                                     <constraint firstItem="JPn-lR-eH6" firstAttribute="leading" secondItem="hJY-Tc-9Kd" secondAttribute="leading" constant="8" id="KNw-hr-lch"/>
@@ -339,10 +337,12 @@
                                     <constraint firstItem="hLJ-Za-MCf" firstAttribute="top" secondItem="lqn-RL-nha" secondAttribute="bottom" constant="236" id="MFP-ru-AMW"/>
                                     <constraint firstItem="Zpq-ng-a7k" firstAttribute="leading" secondItem="hJY-Tc-9Kd" secondAttribute="leading" constant="18" id="N0n-wZ-M3N"/>
                                     <constraint firstItem="rWc-FJ-SkW" firstAttribute="leading" secondItem="hJY-Tc-9Kd" secondAttribute="leading" constant="15" id="NYl-nL-GnR"/>
+                                    <constraint firstItem="Do8-iZ-oUZ" firstAttribute="top" secondItem="uDS-cR-u4E" secondAttribute="bottom" constant="17.666666666666629" id="Ns4-Gn-0An"/>
                                     <constraint firstItem="JPn-lR-eH6" firstAttribute="top" secondItem="hJY-Tc-9Kd" secondAttribute="top" constant="841" id="O2H-Bg-hFw"/>
                                     <constraint firstItem="hLJ-Za-MCf" firstAttribute="top" secondItem="hJY-Tc-9Kd" secondAttribute="top" constant="448" id="PGB-7E-TSQ"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="370" id="Q13-4W-74f"/>
                                     <constraint firstItem="g2N-5w-2eO" firstAttribute="top" secondItem="opw-Lb-RTk" secondAttribute="bottom" id="Rtd-Ra-3aL"/>
+                                    <constraint firstItem="JPn-lR-eH6" firstAttribute="top" secondItem="gjo-KU-eOJ" secondAttribute="bottom" constant="10.67" id="RxT-dq-6pR"/>
                                     <constraint firstAttribute="trailing" secondItem="Zpq-ng-a7k" secondAttribute="trailing" constant="-5" id="Sfk-Uf-g6R"/>
                                     <constraint firstItem="JPn-lR-eH6" firstAttribute="leading" secondItem="hJY-Tc-9Kd" secondAttribute="leading" constant="8" id="TWr-yS-UJZ"/>
                                     <constraint firstItem="lqn-RL-nha" firstAttribute="trailing" secondItem="eIh-p8-ZEB" secondAttribute="trailing" id="TZl-RT-kDs"/>
@@ -353,9 +353,10 @@
                                     <constraint firstItem="JPn-lR-eH6" firstAttribute="top" secondItem="rWc-FJ-SkW" secondAttribute="bottom" constant="22" id="XQW-Ti-JbR"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Izx-Dp-ebc" secondAttribute="trailing" constant="20" symbolic="YES" id="Xjr-B4-JnL"/>
                                     <constraint firstItem="Izx-Dp-ebc" firstAttribute="leading" secondItem="hJY-Tc-9Kd" secondAttribute="leading" constant="11" id="YFG-dJ-frP"/>
-                                    <constraint firstItem="JPn-lR-eH6" firstAttribute="top" secondItem="fec-yU-cjb" secondAttribute="bottom" constant="244" id="ayc-MW-ce2"/>
+                                    <constraint firstItem="JPn-lR-eH6" firstAttribute="top" secondItem="fec-yU-cjb" secondAttribute="bottom" constant="241" id="ayc-MW-ce2"/>
                                     <constraint firstItem="ctO-eW-0Kr" firstAttribute="leading" secondItem="eIh-p8-ZEB" secondAttribute="leading" id="b3R-ii-niC"/>
-                                    <constraint firstItem="PsE-x4-Dcs" firstAttribute="top" secondItem="Dek-0A-o15" secondAttribute="bottom" constant="6" id="bSD-yS-dkI"/>
+                                    <constraint firstItem="rWc-FJ-SkW" firstAttribute="centerX" secondItem="jW3-TS-2cF" secondAttribute="centerX" id="bJb-cI-zpZ"/>
+                                    <constraint firstItem="PsE-x4-Dcs" firstAttribute="top" secondItem="Dek-0A-o15" secondAttribute="bottom" constant="2" id="bSD-yS-dkI"/>
                                     <constraint firstItem="fec-yU-cjb" firstAttribute="trailing" secondItem="opw-Lb-RTk" secondAttribute="trailing" constant="-2" id="c3a-ZT-PCI"/>
                                     <constraint firstItem="fec-yU-cjb" firstAttribute="trailing" secondItem="Q1m-6E-D05" secondAttribute="trailing" constant="19" id="cqp-i7-rKT"/>
                                     <constraint firstItem="hLJ-Za-MCf" firstAttribute="leading" secondItem="hJY-Tc-9Kd" secondAttribute="leading" constant="19" id="d74-LM-AzF"/>
@@ -366,17 +367,22 @@
                                     <constraint firstItem="ctO-eW-0Kr" firstAttribute="trailing" secondItem="eIh-p8-ZEB" secondAttribute="trailing" id="hBb-fp-Clh"/>
                                     <constraint firstItem="hLJ-Za-MCf" firstAttribute="top" secondItem="opw-Lb-RTk" secondAttribute="bottom" constant="55" id="hGo-hH-qE6"/>
                                     <constraint firstAttribute="bottom" secondItem="JPn-lR-eH6" secondAttribute="bottom" constant="8" id="hjy-ww-gg0"/>
+                                    <constraint firstItem="rWc-FJ-SkW" firstAttribute="centerX" secondItem="uDS-cR-u4E" secondAttribute="centerX" id="iBN-ZW-8Xl"/>
                                     <constraint firstAttribute="trailing" secondItem="JPn-lR-eH6" secondAttribute="trailing" constant="8" id="idy-7c-KlJ"/>
                                     <constraint firstItem="hLJ-Za-MCf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hJY-Tc-9Kd" secondAttribute="trailingMargin" id="igb-fr-oND"/>
                                     <constraint firstItem="lqn-RL-nha" firstAttribute="leading" secondItem="hJY-Tc-9Kd" secondAttribute="leading" constant="16" id="im4-Ms-RyW"/>
+                                    <constraint firstItem="Dza-qR-Pv2" firstAttribute="top" secondItem="auP-ch-jTc" secondAttribute="bottom" constant="2.6666666666666288" id="jdX-t3-M3p"/>
                                     <constraint firstItem="fec-yU-cjb" firstAttribute="trailing" secondItem="g2N-5w-2eO" secondAttribute="trailing" constant="19" id="lhE-NZ-a4W"/>
-                                    <constraint firstAttribute="trailing" secondItem="fec-yU-cjb" secondAttribute="trailing" constant="-2" id="mT4-PN-d7z"/>
+                                    <constraint firstItem="jW3-TS-2cF" firstAttribute="trailing" secondItem="hJY-Tc-9Kd" secondAttribute="trailingMargin" id="mKJ-oP-Akd"/>
+                                    <constraint firstAttribute="trailing" secondItem="fec-yU-cjb" secondAttribute="trailing" constant="-1" id="mT4-PN-d7z"/>
                                     <constraint firstItem="Dza-qR-Pv2" firstAttribute="leading" secondItem="hJY-Tc-9Kd" secondAttribute="leading" constant="16" id="nKD-gr-Es9"/>
+                                    <constraint firstItem="jW3-TS-2cF" firstAttribute="leading" secondItem="uDS-cR-u4E" secondAttribute="leading" id="o26-NG-33A"/>
                                     <constraint firstAttribute="trailing" secondItem="rWc-FJ-SkW" secondAttribute="trailing" constant="14" id="oXy-Ut-EI9"/>
                                     <constraint firstItem="wEU-MF-7bJ" firstAttribute="top" secondItem="hJY-Tc-9Kd" secondAttribute="top" constant="38" id="omM-F5-URu"/>
                                     <constraint firstItem="fec-yU-cjb" firstAttribute="leading" secondItem="Q1m-6E-D05" secondAttribute="leading" id="s3O-a3-ysw"/>
                                     <constraint firstItem="lqn-RL-nha" firstAttribute="leading" secondItem="hJY-Tc-9Kd" secondAttribute="leading" constant="16" id="sNt-Sy-ZZe"/>
                                     <constraint firstItem="fec-yU-cjb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hLJ-Za-MCf" secondAttribute="leading" constant="-3" id="sde-ZL-vcO"/>
+                                    <constraint firstItem="jW3-TS-2cF" firstAttribute="top" secondItem="Q1m-6E-D05" secondAttribute="bottom" constant="4" id="vEd-Q1-3Ns"/>
                                     <constraint firstItem="Do8-iZ-oUZ" firstAttribute="trailing" secondItem="fec-yU-cjb" secondAttribute="trailing" constant="-19" id="vnR-KI-CHf"/>
                                     <constraint firstItem="Do8-iZ-oUZ" firstAttribute="leading" secondItem="fec-yU-cjb" secondAttribute="leading" id="yfB-VF-wSE"/>
                                 </constraints>
@@ -479,7 +485,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Name on card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEE-yU-zna">
-                                        <rect key="frame" x="16" y="105.33333333333334" width="343" height="18"/>
+                                        <rect key="frame" x="16" y="131.33333333333334" width="343" height="18"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
@@ -488,7 +494,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Expiry date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuR-9N-gze">
-                                        <rect key="frame" x="16" y="190.66666666666669" width="151.66666666666666" height="18"/>
+                                        <rect key="frame" x="16" y="242.66666666666669" width="151.66666666666666" height="18"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
@@ -497,7 +503,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Security code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMc-kJ-Ncs">
-                                        <rect key="frame" x="207.66666666666663" y="190.66666666666669" width="151.33333333333337" height="18"/>
+                                        <rect key="frame" x="207.66666666666663" y="242.66666666666669" width="151.33333333333337" height="18"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
@@ -506,7 +512,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MM/YY" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Par-EA-T3D" customClass="OMSCardExpiryDateTextField">
-                                        <rect key="frame" x="16" y="214.66666666666669" width="151.66666666666666" height="22"/>
+                                        <rect key="frame" x="16" y="266.66666666666669" width="151.66666666666666" height="48"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -533,7 +539,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y1l-QK-aPc" customClass="OMSCardCVVTextField">
-                                        <rect key="frame" x="207.66666666666663" y="214.66666666666669" width="151.33333333333337" height="22"/>
+                                        <rect key="frame" x="207.66666666666663" y="266.66666666666669" width="151.33333333333337" height="48"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -560,7 +566,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AJd-kX-GAq" customClass="OMSCardNameTextField">
-                                        <rect key="frame" x="16" y="129.33333333333334" width="343" height="22"/>
+                                        <rect key="frame" x="16" y="155.33333333333334" width="343" height="48"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -587,7 +593,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PBr-uW-pM8" customClass="OMSCardNumberTextField">
-                                        <rect key="frame" x="16" y="44" width="343" height="22"/>
+                                        <rect key="frame" x="16" y="44" width="343" height="48"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -614,7 +620,7 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZPa-NN-y1M" customClass="OMSMainActionButton">
-                                        <rect key="frame" x="16" y="276" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="354" width="343" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="p5t-Hl-v8s"/>
                                         </constraints>
@@ -638,25 +644,25 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubw-ZT-CVl">
-                                        <rect key="frame" x="16" y="242.66666666666669" width="151.66666666666666" height="13.333333333333314"/>
+                                        <rect key="frame" x="16" y="320.66666666666669" width="151.66666666666666" height="13.333333333333314"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3TR-eT-NNR">
-                                        <rect key="frame" x="207.66666666666663" y="242.66666666666669" width="151.33333333333337" height="13.333333333333314"/>
+                                        <rect key="frame" x="207.66666666666663" y="320.66666666666669" width="151.33333333333337" height="13.333333333333314"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="134-RW-VCo">
-                                        <rect key="frame" x="16" y="157.33333333333334" width="343" height="13.333333333333343"/>
+                                        <rect key="frame" x="16" y="209.33333333333331" width="343" height="13.333333333333343"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ox-gC-WRb">
-                                        <rect key="frame" x="16" y="72" width="343" height="13.333333333333329"/>
+                                        <rect key="frame" x="16" y="98" width="343" height="13.333333333333329"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -710,7 +716,7 @@
                                         </connections>
                                     </view>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="8qh-Fc-Sh9">
-                                        <rect key="frame" x="177.66666666666666" y="288" width="20" height="20"/>
+                                        <rect key="frame" x="177.66666666666666" y="366" width="20" height="20"/>
                                         <color key="color" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     </activityIndicatorView>
                                 </subviews>
@@ -954,7 +960,7 @@
                             <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="g6L-kx-hv0">
-                            <rect key="frame" x="0.0" y="1662" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="2062" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -3293,7 +3299,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1JF-Jq-C50" customClass="OMSOmiseTextField">
-                                        <rect key="frame" x="16" y="213.33333333333331" width="343" height="22"/>
+                                        <rect key="frame" x="16" y="213.33333333333331" width="343" height="48"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -3316,13 +3322,13 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGT-xf-88M">
-                                        <rect key="frame" x="16" y="240.33333333333331" width="343" height="13.333333333333343"/>
+                                        <rect key="frame" x="16" y="266.33333333333331" width="343" height="13.333333333333314"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tI6-gP-6iQ" customClass="OMSMainActionButton">
-                                        <rect key="frame" x="16" y="273.66666666666669" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="299.66666666666669" width="343" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="XG2-qP-KC2"/>
                                         </constraints>
@@ -3346,7 +3352,7 @@
                                         </connections>
                                     </button>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="6Il-GW-Zuc">
-                                        <rect key="frame" x="177.66666666666666" y="285.66666666666669" width="20" height="20"/>
+                                        <rect key="frame" x="177.66666666666666" y="311.66666666666669" width="20" height="20"/>
                                         <color key="color" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please input your email address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYp-YV-pCx">

@@ -93,10 +93,10 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
         
         phoneNumberTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEndOnExit)
         emailTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEndOnExit)
-        shippingStreetTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEndOnExit)
-        shippingCountryCodeTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEndOnExit)
-        shippingCityTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEndOnExit)
-        shippingPostalCodeTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEndOnExit)
+        shippingStreetTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEnd)
+        shippingCountryCodeTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEnd)
+        shippingCityTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEnd)
+        shippingPostalCodeTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEnd)
 
         NotificationCenter.default.addObserver(
             self,
@@ -232,15 +232,11 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
         guard let errorLabel = associatedErrorLabelOf(textField) else {
             return
         }
-        
         do {
             try textField.validate()
             errorLabel.alpha = 0.0
         } catch {
             switch (error, textField) {
-            case (OmiseTextFieldValidationError.emptyText, _):
-                errorLabel.text = "-" // We need to set the error label some string in order to have it retains its height
-                
             case (OmiseTextFieldValidationError.invalidData, phoneNumberTextField):
                 errorLabel.text = NSLocalizedString(
                     "atome-info-form.phone-number-field.invalid-data.error.text",
@@ -265,7 +261,7 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
                     value: "Shipping street is required",
                     comment: "An error text in the Atome information input displayed when the shipping street is empty"
                 )
-            case (OmiseTextFieldValidationError.invalidData, shippingCityTextField):
+            case (OmiseTextFieldValidationError.emptyText, shippingCityTextField):
                 errorLabel.text = NSLocalizedString(
                     "atome-info-form.shipping-city-field.invalid-data.error.text",
                     tableName: "Error",
@@ -273,7 +269,7 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
                     value: "Shipping city is required",
                     comment: "An error text in the Atome information input displayed when the shipping city is empty"
                 )
-            case (OmiseTextFieldValidationError.invalidData, shippingCountryCodeTextField):
+            case (OmiseTextFieldValidationError.emptyText, shippingCountryCodeTextField):
                 errorLabel.text = NSLocalizedString(
                     "atome-info-form.shipping-country-code-field.invalid-data.error.text",
                     tableName: "Error",
@@ -281,7 +277,7 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
                     value: "Shipping country is required",
                     comment: "An error text in the Atome information input displayed when the shipping country is empty"
                 )
-            case (OmiseTextFieldValidationError.invalidData, shippingPostalCodeErrorLabel):
+            case (OmiseTextFieldValidationError.emptyText, shippingPostalCodeTextField):
                 errorLabel.text = NSLocalizedString(
                     "atome-info-form.shipping-postal_code-field.invalid-data.error.text",
                     tableName: "Error",
