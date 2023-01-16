@@ -64,7 +64,7 @@
 /* Class = "UILabel"; text = "Bank of Ayudhya"; ObjectID = "eci-dP-WLC"; */
 "eci-dP-WLC.text" = "KMA";
 
-/* Class = "UILabel"; text = "Lotus Bill Payment"; ObjectID = "LpC-UH-uPc"; */
+/* Class = "UILabel"; text = "Lotus's Bill Payment"; ObjectID = "LpC-UH-uPc"; */
 "LpC-UH-uPc.text" = "ロータス";
 
 /* Class = "UIButton"; normalTitle = "Next"; ObjectID = "mE3-3u-rvg"; */
