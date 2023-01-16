@@ -9,8 +9,9 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
     
     private var isInputDataValid: Bool {
         return formFields.reduce(into: true) { (valid, field) in
-            valid = true
+            valid = valid && field.isValid
         }
+
     }
     
     @IBInspectable var preferredPrimaryColor: UIColor? {
@@ -92,7 +93,7 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
         }
         
         phoneNumberTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEndOnExit)
-        emailTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEndOnExit)
+        emailTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEnd)
         shippingStreetTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEnd)
         shippingCountryCodeTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEnd)
         shippingCityTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEnd)
@@ -112,7 +113,8 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
         )
 
         phoneNumberTextField.validator = try? NSRegularExpression(pattern: "^[0-9+]{0,1}+\\d{10,11}?", options: [])
-        emailTextField.validator = try? NSRegularExpression(pattern: "\\A[\\w\\-\\.]+@[\\w\\-\\.]+\\s?\\z", options: [])
+        
+        emailTextField.validator = try? NSRegularExpression(pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}", options: [])
     }
     
     override func viewWillLayoutSubviews() {
@@ -286,8 +288,6 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
                     comment: "An error text in the Atome information input displayed when the shipping postal code is empty"
                 )
             case (_, phoneNumberTextField):
-                errorLabel.text = error.localizedDescription
-            case (_, emailTextField):
                 errorLabel.text = error.localizedDescription
             case (_, shippingStreetTextField):
                 errorLabel.text = error.localizedDescription
