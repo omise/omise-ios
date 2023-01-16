@@ -242,7 +242,7 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
                     "atome-info-form.phone-number-field.invalid-data.error.text",
                     tableName: "Error",
                     bundle: .module,
-                    value: "Phone number is invalid",
+                    value: "Please enter valid phone number",
                     comment: "An error text in the Atome information input displayed when the phone number is invalid"
                 )
             case (OmiseTextFieldValidationError.invalidData, emailTextField):
@@ -263,7 +263,7 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
                 )
             case (OmiseTextFieldValidationError.emptyText, shippingCityTextField):
                 errorLabel.text = NSLocalizedString(
-                    "atome-info-form.shipping-city-field.invalid-data.error.text",
+                    "atome-info-form.shipping-city-field.empty-text.error.text",
                     tableName: "Error",
                     bundle: .module,
                     value: "Shipping city is required",
@@ -271,7 +271,7 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
                 )
             case (OmiseTextFieldValidationError.emptyText, shippingCountryCodeTextField):
                 errorLabel.text = NSLocalizedString(
-                    "atome-info-form.shipping-country-code-field.invalid-data.error.text",
+                    "atome-info-form.shipping-country-code-field.empty-text.error.text",
                     tableName: "Error",
                     bundle: .module,
                     value: "Shipping country is required",
@@ -279,7 +279,7 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
                 )
             case (OmiseTextFieldValidationError.emptyText, shippingPostalCodeTextField):
                 errorLabel.text = NSLocalizedString(
-                    "atome-info-form.shipping-postal_code-field.invalid-data.error.text",
+                    "atome-info-form.shipping-postal_code-field.empty-text.error.text",
                     tableName: "Error",
                     bundle: .module,
                     value: "Shipping postal code is required",
@@ -295,7 +295,7 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
                 errorLabel.text = error.localizedDescription
             case (_, shippingCountryCodeTextField):
                 errorLabel.text = error.localizedDescription
-            case (_, shippingPostalCodeErrorLabel):
+            case (_, shippingPostalCodeTextField):
                 errorLabel.text = error.localizedDescription
             default:
                 errorLabel.text = "-"

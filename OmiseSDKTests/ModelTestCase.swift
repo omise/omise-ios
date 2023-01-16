@@ -383,7 +383,7 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual(100000, source.amount)
             XCTAssertEqual(Currency.thb, source.currency)
           XCTAssertEqual(PaymentInformation.atome(.init(
-            phoneNumber: "66800000101",
+            phoneNumber: "+66800000101",
             shippingStreet: "4 Sukhumvit 103 rd.",
             shippingCity: "Bangkok",
             shippingCountryCode: "TH",
