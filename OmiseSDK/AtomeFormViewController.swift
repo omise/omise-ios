@@ -9,7 +9,7 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
     
     private var isInputDataValid: Bool {
         return formFields.reduce(into: true) { (valid, field) in
-            valid = valid && field.isValid
+            valid = true
         }
     }
     
@@ -90,6 +90,13 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
         } else {
             automaticallyAdjustsScrollViewInsets = true
         }
+        
+        phoneNumberTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEndOnExit)
+        emailTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEndOnExit)
+        shippingStreetTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEndOnExit)
+        shippingCountryCodeTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEndOnExit)
+        shippingCityTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEndOnExit)
+        shippingPostalCodeTextField.addTarget(self, action: #selector(validateForm), for: .editingDidEndOnExit)
 
         NotificationCenter.default.addObserver(
             self,
@@ -104,7 +111,7 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
             object: nil
         )
 
-        phoneNumberTextField.validator = try? NSRegularExpression(pattern: "\\d{10,11}?", options: [])
+        phoneNumberTextField.validator = try? NSRegularExpression(pattern: "^[0-9+]{0,1}+\\d{10,11}?", options: [])
         emailTextField.validator = try? NSRegularExpression(pattern: "\\A[\\w\\-\\.]+@[\\w\\-\\.]+\\s?\\z", options: [])
     }
     
@@ -216,10 +223,16 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
         }
     }
     
+    @objc func validateForm(_ textField: OmiseTextField) {
+        validateField(textField)
+        validateFieldData(textField)
+    }
+    
     private func validateField(_ textField: OmiseTextField) {
         guard let errorLabel = associatedErrorLabelOf(textField) else {
             return
         }
+        
         do {
             try textField.validate()
             errorLabel.alpha = 0.0
@@ -244,37 +257,37 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
                     value: "Email is invalid",
                     comment: "An error text in the Atome information input displayed when the email is invalid"
                 )
-            case (OmiseTextFieldValidationError.invalidData, shippingStreetTextField):
+            case (OmiseTextFieldValidationError.emptyText, shippingStreetTextField):
                 errorLabel.text = NSLocalizedString(
-                    "atome-info-form.shipping-street-field.invalid-data.error.text",
+                    "atome-info-form.shipping-street-field.empty-text.error.text",
                     tableName: "Error",
                     bundle: .module,
-                    value: "Shipping street is invalid",
-                    comment: "An error text in the Atome information input displayed when the shipping street is invalid"
+                    value: "Shipping street is required",
+                    comment: "An error text in the Atome information input displayed when the shipping street is empty"
                 )
             case (OmiseTextFieldValidationError.invalidData, shippingCityTextField):
                 errorLabel.text = NSLocalizedString(
                     "atome-info-form.shipping-city-field.invalid-data.error.text",
                     tableName: "Error",
                     bundle: .module,
-                    value: "Shipping city is invalid",
-                    comment: "An error text in the Atome information input displayed when the shipping city is invalid"
+                    value: "Shipping city is required",
+                    comment: "An error text in the Atome information input displayed when the shipping city is empty"
                 )
             case (OmiseTextFieldValidationError.invalidData, shippingCountryCodeTextField):
                 errorLabel.text = NSLocalizedString(
                     "atome-info-form.shipping-country-code-field.invalid-data.error.text",
                     tableName: "Error",
                     bundle: .module,
-                    value: "Shipping country is invalid",
-                    comment: "An error text in the Atome information input displayed when the shipping country is invalid"
+                    value: "Shipping country is required",
+                    comment: "An error text in the Atome information input displayed when the shipping country is empty"
                 )
             case (OmiseTextFieldValidationError.invalidData, shippingPostalCodeErrorLabel):
                 errorLabel.text = NSLocalizedString(
                     "atome-info-form.shipping-postal_code-field.invalid-data.error.text",
                     tableName: "Error",
                     bundle: .module,
-                    value: "Shipping postal code is invalid",
-                    comment: "An error text in the Atome information input displayed when the shipping postal code is invalid"
+                    value: "Shipping postal code is required",
+                    comment: "An error text in the Atome information input displayed when the shipping postal code is empty"
                 )
             case (_, phoneNumberTextField):
                 errorLabel.text = error.localizedDescription
@@ -293,6 +306,8 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
             }
             errorLabel.alpha = errorLabel.text != "-" ? 1.0 : 0.0
         }
+        
+        
     }
     
     @objc func keyboardWillChangeFrame(_ notification: NSNotification) {
