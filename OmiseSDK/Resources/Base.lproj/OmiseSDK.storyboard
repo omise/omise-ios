@@ -1181,7 +1181,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Lotus Bill Payment" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LpC-UH-uPc">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Lotus's Bill Payment" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LpC-UH-uPc">
                                                     <rect key="frame" x="67" y="0.0" width="288" height="64"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
@@ -3451,7 +3451,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="rLy-XG-aKO">
-                            <rect key="frame" x="0.0" y="1090" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="1230" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -4025,9 +4025,6 @@
         </designable>
         <designable name="AJd-kX-GAq">
             <size key="intrinsicContentSize" width="23" height="48"/>
-        </designable>
-        <designable name="JPn-lR-eH6">
-            <size key="intrinsicContentSize" width="38" height="33"/>
         </designable>
         <designable name="PBr-uW-pM8">
             <size key="intrinsicContentSize" width="23" height="48"/>

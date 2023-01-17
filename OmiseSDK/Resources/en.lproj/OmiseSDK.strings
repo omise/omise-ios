@@ -56,8 +56,8 @@
 /* Class = "UILabel"; text = "PromptPay"; ObjectID = "JmT-Us-3lW"; */
 "JmT-Us-3lW.text" = "PromptPay";
 
-/* Class = "UILabel"; text = "Lotus Bill Payment"; ObjectID = "LpC-UH-uPc"; */
-"LpC-UH-uPc.text" = "Lotus Bill Payment";
+/* Class = "UILabel"; text = "Lotus's Bill Payment"; ObjectID = "LpC-UH-uPc"; */
+"LpC-UH-uPc.text" = "Lotus's Bill Payment";
 
 /* Class = "UITextField"; placeholder = " "; ObjectID = "OTm-3S-Jk9"; */
 "OTm-3S-Jk9.placeholder" = " ";

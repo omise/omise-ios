@@ -68,7 +68,7 @@ public class __SourcePaymentInformation: NSObject {
     /// Payment Information for an Touch N Go Wallet Payment
     public static let touchNGoPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.touchNGo)!
 
-    /// Payment Information for a Tesco Lotus Bill Payment Payment
+    /// Payment Information for a Lotus's Bill Payment Payment
     public static let tescoLotusBillPaymentPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.billPaymentTescoLotus)!
 
     /// Payment Information for an PromptPay Payment

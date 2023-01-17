@@ -4,6 +4,7 @@ import os
 
 /// Delegate to receive authorizing payment events.
 @objc(OMSAuthorizingPaymentViewControllerDelegate)
+@available(iOSApplicationExtension, unavailable)
 public protocol AuthorizingPaymentViewControllerDelegate: AnyObject {
     /// A delegation method called when the authorizing payment process is completed.
     /// - parameter viewController: The authorizing payment controller that call this method.
@@ -23,13 +24,19 @@ public protocol AuthorizingPaymentViewControllerDelegate: AnyObject {
 }
 
 @available(*, deprecated, renamed: "AuthorizingPaymentViewController")
+@available(iOSApplicationExtension, unavailable)
 public typealias Omise3DSViewController = AuthorizingPaymentViewController
+
+@available(iOSApplicationExtension, unavailable)
 @available(*, deprecated, renamed: "AuthorizingPaymentViewControllerDelegate")
 public typealias Omise3DSViewControllerDelegate = AuthorizingPaymentViewControllerDelegate
 
 @available(*, deprecated, renamed: "AuthorizingPaymentViewController")
+@available(iOSApplicationExtension, unavailable)
 public typealias OmiseAuthorizingPaymentViewController = AuthorizingPaymentViewController
+
 @available(*, deprecated, renamed: "AuthorizingPaymentViewControllerDelegate")
+@available(iOSApplicationExtension, unavailable)
 // swiftlint:disable:next type_name
 public typealias OmiseAuthorizingPaymentViewControllerDelegate = AuthorizingPaymentViewControllerDelegate
 
@@ -41,6 +48,7 @@ public typealias OmiseAuthorizingPaymentViewControllerDelegate = AuthorizingPaym
    This is still an experimental API. If you encountered with any problem with this API, please feel free to report to Omise.
  */
 @objc(OMSAuthorizingPaymentViewController)
+@available(iOSApplicationExtension, unavailable)
 public class AuthorizingPaymentViewController: UIViewController {
     /// Authorized URL given from Omise in the created `Charge` object.
     public var authorizedURL: URL? {
@@ -195,6 +203,7 @@ public class AuthorizingPaymentViewController: UIViewController {
     
 }
 
+@available(iOSApplicationExtension, unavailable)
 extension AuthorizingPaymentViewController: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         if let url = navigationAction.request.url, verifyPaymentURL(url) {
@@ -210,6 +219,14 @@ extension AuthorizingPaymentViewController: WKNavigationDelegate {
                        type: .default,
                        url.absoluteString)
             }
+        } else if let url = navigationAction.request.url, let scheme = url.scheme?.lowercased(), (scheme != "https" && scheme != "http") {
+            os_log("Redirected to custom-scheme %{private}@ URL",
+                   log: uiLogObject,
+                   type: .debug,
+                   navigationAction.request.url?.absoluteString ?? "<empty>")
+            
+            UIApplication.shared.open(url)
+            decisionHandler(.cancel)
         } else {
             os_log("Redirected to non-expected %{private}@ URL",
                    log: uiLogObject,
@@ -220,6 +237,7 @@ extension AuthorizingPaymentViewController: WKNavigationDelegate {
     }
 }
 
+@available(iOSApplicationExtension, unavailable)
 extension AuthorizingPaymentViewController: WKUIDelegate {
     public func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
 
