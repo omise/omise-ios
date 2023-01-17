@@ -4,6 +4,7 @@ import os
 
 /// Delegate to receive authorizing payment events.
 @objc(OMSAuthorizingPaymentViewControllerDelegate)
+@available(iOSApplicationExtension, unavailable)
 public protocol AuthorizingPaymentViewControllerDelegate: AnyObject {
     /// A delegation method called when the authorizing payment process is completed.
     /// - parameter viewController: The authorizing payment controller that call this method.
@@ -23,13 +24,19 @@ public protocol AuthorizingPaymentViewControllerDelegate: AnyObject {
 }
 
 @available(*, deprecated, renamed: "AuthorizingPaymentViewController")
+@available(iOSApplicationExtension, unavailable)
 public typealias Omise3DSViewController = AuthorizingPaymentViewController
+
+@available(iOSApplicationExtension, unavailable)
 @available(*, deprecated, renamed: "AuthorizingPaymentViewControllerDelegate")
 public typealias Omise3DSViewControllerDelegate = AuthorizingPaymentViewControllerDelegate
 
 @available(*, deprecated, renamed: "AuthorizingPaymentViewController")
+@available(iOSApplicationExtension, unavailable)
 public typealias OmiseAuthorizingPaymentViewController = AuthorizingPaymentViewController
+
 @available(*, deprecated, renamed: "AuthorizingPaymentViewControllerDelegate")
+@available(iOSApplicationExtension, unavailable)
 // swiftlint:disable:next type_name
 public typealias OmiseAuthorizingPaymentViewControllerDelegate = AuthorizingPaymentViewControllerDelegate
 
@@ -41,6 +48,7 @@ public typealias OmiseAuthorizingPaymentViewControllerDelegate = AuthorizingPaym
    This is still an experimental API. If you encountered with any problem with this API, please feel free to report to Omise.
  */
 @objc(OMSAuthorizingPaymentViewController)
+@available(iOSApplicationExtension, unavailable)
 public class AuthorizingPaymentViewController: UIViewController {
     /// Authorized URL given from Omise in the created `Charge` object.
     public var authorizedURL: URL? {
@@ -152,9 +160,7 @@ public class AuthorizingPaymentViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        if let navigationDelegate = self as? WKNavigationDelegate {
-            webView.navigationDelegate = navigationDelegate
-        }
+        webView.navigationDelegate = self
         webView.uiDelegate = self
     }
     
@@ -231,6 +237,7 @@ extension AuthorizingPaymentViewController: WKNavigationDelegate {
     }
 }
 
+@available(iOSApplicationExtension, unavailable)
 extension AuthorizingPaymentViewController: WKUIDelegate {
     public func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
 
