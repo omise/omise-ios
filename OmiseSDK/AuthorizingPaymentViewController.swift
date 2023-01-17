@@ -152,7 +152,9 @@ public class AuthorizingPaymentViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        webView.navigationDelegate = self
+        if let navigationDelegate = self as? WKNavigationDelegate {
+            webView.navigationDelegate = navigationDelegate
+        }
         webView.uiDelegate = self
     }
     
@@ -195,6 +197,7 @@ public class AuthorizingPaymentViewController: UIViewController {
     
 }
 
+@available(iOSApplicationExtension, unavailable)
 extension AuthorizingPaymentViewController: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         if let url = navigationAction.request.url, verifyPaymentURL(url) {
