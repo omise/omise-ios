@@ -112,8 +112,7 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
             object: nil
         )
 
-        phoneNumberTextField.validator = try? NSRegularExpression(pattern: "^[0-9+]{0,1}+\\d{10,11}?", options: [])
-        
+        phoneNumberTextField.validator = try? NSRegularExpression(pattern: "^(\\+\\d{2}|0)\\d{9}$", options: [])
         emailTextField.validator = try? NSRegularExpression(pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}", options: [])
     }
     
