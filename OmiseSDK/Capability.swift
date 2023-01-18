@@ -64,6 +64,7 @@ extension Capability {
             case alipay
             case alipayCN
             case alipayHK
+            case atome
             case dana
             case gcash
             case kakaoPay
@@ -128,6 +129,8 @@ extension Capability.Backend.Payment {
     public static func == (lhs: Capability.Backend.Payment, rhs: Capability.Backend.Payment) -> Bool {
         switch (lhs, rhs) {
         case (.card, .card), (.alipay, .alipay), (.alipayCN, .alipayCN), (.alipayHK, .alipayHK):
+            return true
+        case (.atome, .atome):
             return true
         case (.dana, .dana), (.gcash, .gcash), (.kakaoPay, .kakaoPay), (.touchNGoAlipayPlus, .touchNGoAlipayPlus):
             return true
@@ -236,6 +239,8 @@ extension Capability.Backend {
             self.payment = .alipayCN
         case .source(.alipayHK):
             self.payment = .alipayHK
+        case .source(.atome):
+            self.payment = .atome
         case .source(.dana):
             self.payment = .dana
         case .source(.gcash):
@@ -316,7 +321,7 @@ extension Capability.Backend {
             try encoder.encodeJSONDictionary(configurations)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         // swiftlint:disable line_length
-        case .internetBanking, .alipay, .alipayCN, .alipayHK, .dana, .gcash, .kakaoPay, .touchNGoAlipayPlus, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .grabPay, .grabPayRms, .boost, .shopeePay, .shopeePayJumpApp, .maybankQRPay, .duitNowQR, .duitNowOBW:
+        case .internetBanking, .alipay, .alipayCN, .alipayHK, .atome, .dana, .gcash, .kakaoPay, .touchNGoAlipayPlus, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .grabPay, .grabPayRms, .boost, .shopeePay, .shopeePayJumpApp, .maybankQRPay, .duitNowQR, .duitNowOBW:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
     }
@@ -361,6 +366,8 @@ extension Capability.Backend {
                 self = .source(.alipayCN)
             case .alipayHK:
                 self = .source(.alipayHK)
+            case .atome:
+                self = .source(.atome)
             case .dana:
                 self = .source(.dana)
             case .gcash:

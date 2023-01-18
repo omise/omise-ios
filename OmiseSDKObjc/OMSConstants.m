@@ -45,6 +45,7 @@ OMSSourceTypeValue const _Nonnull OMSSourceTypeValueShopeePayJumpApp = @"shopeep
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMaybankQRPay = @"maybank_qr";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueDuitNowQR = @"duitnow_qr";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueDuitNowOBW = @"duitnow_obw";
+OMSSourceTypeValue const _Nonnull OMSSourceTypeValueAtome = @"atome";
 
 OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeTHB = @"THB";
 OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeJPY = @"JPY";

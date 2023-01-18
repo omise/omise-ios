@@ -14,6 +14,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case alipay
     case alipayCN
     case alipayHK
+    case atome
     case dana
     case gcash
     case kakaoPay
@@ -45,6 +46,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             .alipay,
             .alipayCN,
             .alipayHK,
+            .atome,
             .dana,
             .gcash,
             .kakaoPay,
@@ -95,6 +97,8 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "Alipay CN"
         case .alipayHK:
             return "Alipay HK"
+        case .atome:
+            return "Atome"
         case .dana:
             return "DANA"
         case .gcash:
@@ -158,6 +162,8 @@ extension PaymentChooserOption {
             return [.alipayCN]
         case .alipayHK:
             return [.alipayHK]
+        case .atome:
+            return [.atome]
         case .dana:
             return [.dana]
         case .gcash:
@@ -229,7 +235,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     }
 
     @IBOutlet private var paymentMethodNameLables: [UILabel]!
-
+    
     @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
@@ -464,6 +470,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 28, section: 0)
         case .grabPayRms:
             return IndexPath(row: 29, section: 0)
+        case .atome:
+            return IndexPath(row: 30, section: 0)
         }
     }
 
@@ -480,6 +488,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue.alipayCN
             case .alipayHK:
                 return OMSSourceTypeValue.alipayHK
+            case .atome:
+                return OMSSourceTypeValue.atome
             case .dana:
                 return OMSSourceTypeValue.dana
             case .gcash:
