@@ -59,6 +59,9 @@ class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
 
     static let alipayHKSourceBackendPayment =
         __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.alipayHK)
+    
+    static let atomeSourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.atome)
 
     static let danaSourceBackendPayment =
         __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.dana)
@@ -171,6 +174,8 @@ extension __OmiseCapabilityBackendPayment {
             return __OmiseCapabilitySourceBackendPayment.alipayCNSourceBackendPayment
         case .alipayHK:
             return __OmiseCapabilitySourceBackendPayment.alipayHKSourceBackendPayment
+        case .atome:
+            return __OmiseCapabilitySourceBackendPayment.atomeSourceBackendPayment
         case .dana:
             return __OmiseCapabilitySourceBackendPayment.danaSourceBackendPayment
         case .gcash:

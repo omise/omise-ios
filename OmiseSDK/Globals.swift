@@ -107,6 +107,8 @@ extension OMSSourceTypeValue {
             return "mobile_banking"
         case .alipay:
             return "alipay"
+        case .atome:
+            return "atome"
         case .billPaymentTescoLotus:
             return "bill_payment"
         case .barcodeAlipay:

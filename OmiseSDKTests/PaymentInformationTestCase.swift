@@ -625,6 +625,34 @@ class PaymentInformationTestCase: XCTestCase {
         }
     }
     
+    func testEncodeAtomeSourceParameter() throws {
+        let encoder = PaymentInformationTestCase.makeJSONEncoder()
+
+        do {
+            let atome = PaymentInformation.Atome(
+                phoneNumber: "+66800000101",
+                shippingStreet: "4 Sukhumvit 103 rd.",
+                shippingCity: "Bangkok",
+                shippingCountryCode: "TH",
+                shippingPostalCode: "10200",
+                name: "name",
+                email: "test_user@opn.ooo")
+            let sourceParameter = Source.CreateParameter(paymentInformation: .atome(atome),
+                                                         amount: 10_000_00,
+                                                         currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "currency" : "THB",
+                  "platform_type" : "IOS",
+                  "type" : "atome"
+                }
+                """, encodedJSONString)
+        }
+    }
+    
     func testOtherPaymentInformation() throws {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
