@@ -47,6 +47,8 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
             return IndexPath(row: 2, section: 0)
         case .scb:
             return IndexPath(row: 3, section: 0)
+        case .ktb:
+            return IndexPath(row: 4, section: 0)
         case .other:
             preconditionFailure("This value is not supported for the built-in chooser")
         }

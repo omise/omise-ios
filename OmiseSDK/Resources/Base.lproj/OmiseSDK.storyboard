@@ -960,7 +960,7 @@
                             <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="g6L-kx-hv0">
-                            <rect key="frame" x="0.0" y="2062" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="1662" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -1182,14 +1182,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Lotus's Bill Payment" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LpC-UH-uPc">
-                                                    <rect key="frame" x="67" y="0.0" width="288" height="64"/>
+                                                    <rect key="frame" x="68" y="0.0" width="287" height="64"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="Tesco" id="KaP-cV-sMD">
-                                                    <rect key="frame" x="20" y="16" width="32" height="32"/>
+                                                    <rect key="frame" x="20" y="15.333333333333336" width="33" height="33"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Redirect" translatesAutoresizingMaskIntoConstraints="NO" id="9zy-aH-aov">
@@ -3073,7 +3073,7 @@
                             <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="LOX-Rh-ZY1">
-                            <rect key="frame" x="0.0" y="334" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="398" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -3194,6 +3194,35 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="accessoryView" destination="qiT-U0-zh4" id="Ugh-CP-OQR"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="SaV-b4-qjD" imageView="JjS-uV-0DX" rowHeight="64" style="IBUITableViewCellStyleDefault" id="rxC-tV-6MJ" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
+                                        <rect key="frame" x="0.0" y="306" width="375" height="64"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rxC-tV-6MJ" id="9Po-GD-qQx">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Krungthai Next" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SaV-b4-qjD">
+                                                    <rect key="frame" x="68" y="0.0" width="287" height="64"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="KTB Next" id="JjS-uV-0DX">
+                                                    <rect key="frame" x="20" y="15.333333333333336" width="33" height="33"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Redirect" translatesAutoresizingMaskIntoConstraints="NO" id="Dvr-uk-O4p">
+                                                    <rect key="frame" x="345" y="23" width="16" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="tintColor" red="0.89019607840000003" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="accessoryView" destination="Dvr-uk-O4p" id="Hur-lv-eUP"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -4026,6 +4055,9 @@
         <designable name="AJd-kX-GAq">
             <size key="intrinsicContentSize" width="23" height="48"/>
         </designable>
+        <designable name="JPn-lR-eH6">
+            <size key="intrinsicContentSize" width="38" height="33"/>
+        </designable>
         <designable name="PBr-uW-pM8">
             <size key="intrinsicContentSize" width="23" height="48"/>
         </designable>
@@ -4095,6 +4127,7 @@
         <image name="KMA" width="32" height="32"/>
         <image name="KPlus" width="32" height="32"/>
         <image name="KTB" width="32" height="32"/>
+        <image name="KTB Next" width="33" height="33"/>
         <image name="KTC" width="32" height="32"/>
         <image name="MAE-maybank" width="32" height="32"/>
         <image name="MobileBanking" width="32" height="32"/>
@@ -4109,7 +4142,7 @@
         <image name="Redirect" width="16" height="16"/>
         <image name="SCB" width="32" height="32"/>
         <image name="Shopeepay" width="32" height="32"/>
-        <image name="Tesco" width="32" height="32"/>
+        <image name="Tesco" width="33" height="33"/>
         <image name="TrueMoney" width="32" height="32"/>
         <image name="TrueMoney_Big" width="105" height="80"/>
         <image name="Visa" width="40" height="22"/>
