@@ -10,6 +10,7 @@ OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingOCBCPAO = @"mob
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingKBank = @"mobile_banking_kbank";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingBAY = @"mobile_banking_bay";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingBBL = @"mobile_banking_bbl";
+OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingKTB = @"mobile_banking_ktb";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueAlipay = @"alipay";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueAlipayCN = @"alipay_cn";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueAlipayHK = @"alipay_hk";

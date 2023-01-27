@@ -133,6 +133,9 @@
 /* Class = "UILabel"; text = "Siam Commercial Bank"; ObjectID = "EQF-26-ssb"; */
 "EQF-26-ssb.text" = "SCB EASY";
 
+/* Class = "UILabel"; text = "Krungthai NEXT"; ObjectID = "SaV-b4-qjD"; */
+"SaV-b4-qjD.text" = "Krungthai NEXT";
+
 /* Class = "UILabel"; text = "Kasikorn Bank"; ObjectID = "yHg-il-ZhG"; */
 "yHg-il-ZhG.text" = "ธนาคารกสิกรไทย";
 

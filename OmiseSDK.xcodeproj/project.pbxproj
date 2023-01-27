@@ -266,13 +266,13 @@
 		987A03201CE5B7D70035417A /* OmiseTokenRequestTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseTokenRequestTest.swift; sourceTree = "<group>"; };
 		987A03AC1CE5CD450035417A /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fixtures; sourceTree = "<group>"; };
 		98FF99BA2577789800476487 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		C2ED0BC3298237EA00D985A8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OmiseSDK.strings; sourceTree = "<group>"; };
 		F3497367254C066F00D05C7B /* MobileBankingSourceChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileBankingSourceChooserViewController.swift; sourceTree = "<group>"; };
 		F615CBF7261565D600E1A2D9 /* CardExpiryDatePickerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardExpiryDatePickerTests.swift; sourceTree = "<group>"; };
 		F6614CD5243DB8E7005B656E /* TrueMoneyFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrueMoneyFormViewController.swift; sourceTree = "<group>"; };
 		F6FE862A25E3B02300C7A4DE /* OMSConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OMSConstants.m; path = OmiseSDKObjc/OMSConstants.m; sourceTree = SOURCE_ROOT; };
 		F6FE862B25E3B02300C7A4DE /* OMSConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OMSConstants.h; path = OmiseSDKObjc/OMSConstants.h; sourceTree = SOURCE_ROOT; };
 		F6FE863925E3B19A00C7A4DE /* OMSConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OMSConstants.swift; sourceTree = "<group>"; };
-		F6FE867625E4A34600C7A4DE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OmiseSDK.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -907,7 +907,7 @@
 				8A5D59821D5317DD005D3346 /* Base */,
 				8A5D59851D5317E0005D3346 /* th */,
 				8A5D59871D5317E1005D3346 /* ja */,
-				F6FE867625E4A34600C7A4DE /* en */,
+				C2ED0BC3298237EA00D985A8 /* en */,
 			);
 			name = OmiseSDK.storyboard;
 			sourceTree = "<group>";
