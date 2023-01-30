@@ -478,12 +478,10 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 28, section: 0)
         case .grabPayRms:
             return IndexPath(row: 29, section: 0)
-<<<<<<< HEAD
         case .payPay:
-=======
-        case .atome:
->>>>>>> master
             return IndexPath(row: 30, section: 0)
+        case .atome:
+            return IndexPath(row: 31, section: 0)
         }
     }
 
