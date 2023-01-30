@@ -200,8 +200,8 @@ extension OMSSourceTypeValue {
         switch self {
         case .installmentBAY:
             return .bay
-        case .installmentEzypay:
-            return .ezypay
+        case .installmentMBB:
+            return .mbb
         case .installmentFirstChoice:
             return .firstChoice
         case .installmentBBL:
@@ -225,7 +225,7 @@ extension OMSSourceTypeValue {
 
     var isInstallmentSource: Bool {
         switch self {
-        case .installmentBAY, .installmentEzypay, .installmentFirstChoice, .installmentBBL,
+        case .installmentBAY, .installmentMBB, .installmentFirstChoice, .installmentBBL,
              .installmentKTC, .installmentKBank, .installmentSCB, .installmentCiti, .installmentTTB, .installmentUOB:
             return true
         default:
@@ -268,6 +268,8 @@ extension OMSSourceTypeValue {
             return .bay
         case .mobileBankingBBL:
             return .bbl
+        case .mobileBankingKTB:
+            return .ktb
         default:
             return nil
         }
@@ -275,7 +277,7 @@ extension OMSSourceTypeValue {
 
     var isMobileBankingSource: Bool {
         switch self {
-        case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingBAY, .mobileBankingBBL:
+        case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingBAY, .mobileBankingBBL, .mobileBankingKTB:
             return true
         default:
             return false

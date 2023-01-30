@@ -72,7 +72,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let installment = PaymentInformation.Installment(brand: .ezypay, numberOfTerms: 6)
+            let installment = PaymentInformation.Installment(brand: .mbb, numberOfTerms: 6)
             let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 5_000_00,
                                                          currency: .myr)
@@ -85,7 +85,7 @@ class PaymentInformationTestCase: XCTestCase {
                   "currency" : "MYR",
                   "installment_term" : 6,
                   "platform_type" : "IOS",
-                  "type" : "installment_ezypay"
+                  "type" : "installment_mbb"
                 }
                 """, encodedJSONString)
         }
@@ -361,6 +361,23 @@ class PaymentInformationTestCase: XCTestCase {
                   "currency" : "THB",
                   "platform_type" : "IOS",
                   "type" : "mobile_banking_bbl"
+                }
+                """, encodedJSONString)
+        }
+        
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .mobileBanking(.ktb),
+                                                         amount: 10_000_00,
+                                                         currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "currency" : "THB",
+                  "platform_type" : "IOS",
+                  "type" : "mobile_banking_ktb"
                 }
                 """, encodedJSONString)
         }
@@ -678,6 +695,34 @@ class PaymentInformationTestCase: XCTestCase {
                 """, encodedJSONString)
         }
     }
+    
+    func testEncodeAtomeSourceParameter() throws {
+        let encoder = PaymentInformationTestCase.makeJSONEncoder()
+
+        do {
+            let atome = PaymentInformation.Atome(
+                phoneNumber: "+66800000101",
+                shippingStreet: "4 Sukhumvit 103 rd.",
+                shippingCity: "Bangkok",
+                shippingCountryCode: "TH",
+                shippingPostalCode: "10200",
+                name: "name",
+                email: "test_user@opn.ooo")
+            let sourceParameter = Source.CreateParameter(paymentInformation: .atome(atome),
+                                                         amount: 10_000_00,
+                                                         currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "currency" : "THB",
+                  "platform_type" : "IOS",
+                  "type" : "atome"
+                }
+                """, encodedJSONString)
+        }
+    }
 
     func testOtherPaymentInformation() throws {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
@@ -780,6 +825,23 @@ class PaymentInformationTestCase: XCTestCase {
                   "currency" : "MYR",
                   "platform_type" : "IOS",
                   "type" : "duitnow_qr"
+                }
+                """, encodedJSONString)
+        }
+
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .shopeePayJumpApp,
+                                                         amount: 123_45,
+                                                         currency: .myr)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 12345,
+                  "currency" : "MYR",
+                  "platform_type" : "IOS",
+                  "type" : "shopeepay_jumpapp"
                 }
                 """, encodedJSONString)
         }

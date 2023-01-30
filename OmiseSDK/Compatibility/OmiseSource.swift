@@ -52,6 +52,9 @@ public class __SourcePaymentInformation: NSObject {
 
     /// Payment Information for an Alipay+ HK Wallet Payment
     public static let alipayHKPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.alipayHK)!
+    
+    /// Payment Information for an Atome Payment
+    public static let atomePayment = __SourcePaymentInformation(type: OMSSourceTypeValue.atome)!
 
     /// Payment Information for an Alipay+ DANA Wallet Payment
     public static let danaPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.dana)!
@@ -65,7 +68,7 @@ public class __SourcePaymentInformation: NSObject {
     /// Payment Information for an Touch N Go Wallet Payment
     public static let touchNGoPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.touchNGo)!
 
-    /// Payment Information for a Tesco Lotus Bill Payment Payment
+    /// Payment Information for a Lotus's Bill Payment Payment
     public static let tescoLotusBillPaymentPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.billPaymentTescoLotus)!
 
     /// Payment Information for an PromptPay Payment
@@ -88,6 +91,9 @@ public class __SourcePaymentInformation: NSObject {
 
     /// Payment Information for an ShopeePay
     public static let shopeePayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.shopeePay)!
+    
+    /// Payment Information for an ShopeePay Jump App
+    public static let shopeePayJumpAppPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.shopeePayJumpApp)!
 
     /// Payment Information for an Maybank QRPay
     public static let maybankQRPayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.maybankQRPay)!
@@ -222,12 +228,12 @@ public class __SourceInstallmentsPayment: __SourcePaymentInformation {
         return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentBBL, numberOfTerms: numberOfTerms)!
     }
 
-    /// Create a Ezypay Installment payment with the given number of terms
+    /// Create a MBB Installment payment with the given number of terms
     ///
     /// - Parameter numberOfTerms: Number of plan of the installment plan
-    /// - Returns: Ezypay Installment payment with the specified number of terms
-    public static func installmentEzypayPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
-        return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentEzypay, numberOfTerms: numberOfTerms)!
+    /// - Returns: MBB Installment payment with the specified number of terms
+    public static func installmentMBBPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
+        return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentMBB, numberOfTerms: numberOfTerms)!
     }
     /// Create a KTC Installment payment with the given number of terms
     ///
@@ -352,6 +358,9 @@ public class __SourceMobileBankingPayment: __SourcePaymentInformation {
     /// Payment Information for a BBL Mobile Banking Payment
     public static let bblMobileBankingPayment = __SourceMobileBankingPayment(type: OMSSourceTypeValue.mobileBankingBBL)!
 
+    /// Payment Information for a KTB Mobile Banking Payment
+    public static let ktbMobileBankingPayment = __SourceMobileBankingPayment(type: OMSSourceTypeValue.mobileBankingKTB)!
+
     /// Create an Mobile Banking payment with the given source type value
     ///
     /// - Parameter type: Source type of the source to be created
@@ -452,8 +461,8 @@ extension PaymentInformation {
                 brand = .firstChoice
             case .installmentBBL:
                 brand = .bbl
-            case .installmentEzypay:
-                brand = .ezypay
+            case .installmentMBB:
+                brand = .mbb
             case .installmentKTC:
                 brand = .ktc
             case .installmentKBank:
@@ -531,6 +540,8 @@ extension __SourcePaymentInformation {
             return __SourcePaymentInformation.alipayCNPayment
         case .alipayHK:
             return __SourcePaymentInformation.alipayHKPayment
+        case .atome:
+            return __SourcePaymentInformation.atomePayment
         case .dana:
             return __SourcePaymentInformation.danaPayment
         case .gcash:
@@ -575,8 +586,8 @@ extension __SourcePaymentInformation {
                 return __SourceInstallmentsPayment.installmentFirstChoicePayment(withNumberOfTerms: installment.numberOfTerms)
             case .bbl:
                 return __SourceInstallmentsPayment.installmentBBLPayment(withNumberOfTerms: installment.numberOfTerms)
-            case .ezypay:
-                return __SourceInstallmentsPayment.installmentEzypayPayment(withNumberOfTerms: installment.numberOfTerms)
+            case .mbb:
+                return __SourceInstallmentsPayment.installmentMBBPayment(withNumberOfTerms: installment.numberOfTerms)
             case .ktc:
                 return __SourceInstallmentsPayment.installmentKTCPayment(withNumberOfTerms: installment.numberOfTerms)
             case .kBank:
@@ -617,7 +628,10 @@ extension __SourcePaymentInformation {
             
         case .shopeePay:
             return __SourcePaymentInformation.shopeePayPayment
-            
+
+        case .shopeePayJumpApp:
+            return __SourcePaymentInformation.shopeePayJumpAppPayment
+
         case .maybankQRPay:
             return __SourcePaymentInformation.maybankQRPayPayment
             
@@ -648,6 +662,8 @@ extension __SourcePaymentInformation {
                 return __SourceMobileBankingPayment.bayMobileBankingPayment
             case .bbl:
                 return __SourceMobileBankingPayment.bblMobileBankingPayment
+            case .ktb:
+                return __SourceMobileBankingPayment.ktbMobileBankingPayment
             case .other(let type):
                 return __CustomSourcePayment(customType: type, parameters: [:])
             }

@@ -148,13 +148,13 @@ class ModelTestCase: XCTestCase {
         }
 
         do {
-            let sourceData = try XCTestCase.fixturesData(forFilename: "source_installments/ezypay")
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_installments/mbb")
             let source = try decoder.decode(Source.self, from: sourceData)
 
             XCTAssertEqual("src_test_5obr9opqz5huc6tefw8", source.id)
             XCTAssertEqual(Currency.myr, source.currency)
             XCTAssertEqual(5000_00, source.amount)
-            XCTAssertEqual(.installment(.init(brand: .ezypay, numberOfTerms: 6)), source.paymentInformation)
+            XCTAssertEqual(.installment(.init(brand: .mbb, numberOfTerms: 6)), source.paymentInformation)
             XCTAssertEqual(Flow.redirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
@@ -336,6 +336,19 @@ class ModelTestCase: XCTestCase {
         } catch {
             XCTFail("Cannot decode the source \(error)")
         }
+        
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_mobile_banking/ktb")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_test_5cs0sm8u8h8nqo5zasd", source.id)
+            XCTAssertEqual(Currency.thb, source.currency)
+            XCTAssertEqual(1000000, source.amount)
+            XCTAssertEqual(PaymentInformation.mobileBanking(.ktb), source.paymentInformation)
+            XCTAssertEqual(Flow.appRedirect, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
     }
 
     func testDecodeAlipayCNSource() throws {
@@ -367,6 +380,30 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual(5000_00, source.amount)
             XCTAssertEqual(PaymentInformation.alipayHK, source.paymentInformation)
             XCTAssertEqual(Flow.appRedirect, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
+    
+    func testDecodeAtomeSource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_atome")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_test_5jhmesi7s4at1qctloy", source.id)
+            XCTAssertEqual(100000, source.amount)
+            XCTAssertEqual(Currency.thb, source.currency)
+          XCTAssertEqual(PaymentInformation.atome(.init(
+            phoneNumber: "+66800000101",
+            shippingStreet: "4 Sukhumvit 103 rd.",
+            shippingCity: "Bangkok",
+            shippingCountryCode: "TH",
+            shippingPostalCode: "10260",
+            name: "name surname",
+            email: "test_user@opn.ooo")), source.paymentInformation)
+            XCTAssertEqual(Flow.redirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")
         }
@@ -604,6 +641,23 @@ class ModelTestCase: XCTestCase {
             XCTAssertEqual(100000, source.amount)
             XCTAssertEqual(Currency.myr, source.currency)
             XCTAssertEqual(PaymentInformation.shopeePay, source.paymentInformation)
+            XCTAssertEqual(Flow.redirect, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+    }
+    
+    func testDecodeShopeePayJumpAppSource() throws {
+        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_shopeepay_jumpapp")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_5pqcjr6tu4xvqut5nh5", source.id)
+            XCTAssertEqual(100000, source.amount)
+            XCTAssertEqual(Currency.myr, source.currency)
+            XCTAssertEqual(PaymentInformation.shopeePayJumpApp, source.paymentInformation)
             XCTAssertEqual(Flow.redirect, source.flow)
         } catch {
             XCTFail("Cannot decode the source \(error)")

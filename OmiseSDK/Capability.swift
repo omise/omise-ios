@@ -64,6 +64,7 @@ extension Capability {
             case alipay
             case alipayCN
             case alipayHK
+            case atome
             case dana
             case gcash
             case kakaoPay
@@ -81,6 +82,7 @@ extension Capability {
             case grabPayRms
             case boost
             case shopeePay
+            case shopeePayJumpApp
             case maybankQRPay
             case duitNowQR
             case duitNowOBW
@@ -129,6 +131,8 @@ extension Capability.Backend.Payment {
         switch (lhs, rhs) {
         case (.card, .card), (.alipay, .alipay), (.alipayCN, .alipayCN), (.alipayHK, .alipayHK):
             return true
+        case (.atome, .atome):
+            return true
         case (.dana, .dana), (.gcash, .gcash), (.kakaoPay, .kakaoPay), (.touchNGoAlipayPlus, .touchNGoAlipayPlus):
             return true
         case (.touchNGo, .touchNGo):
@@ -162,6 +166,8 @@ extension Capability.Backend.Payment {
         case (.boost, .boost):
             return true
         case (.shopeePay, .shopeePay):
+            return true
+        case (.shopeePayJumpApp, .shopeePayJumpApp):
             return true
         case (.maybankQRPay, .maybankQRPay):
             return true
@@ -236,6 +242,8 @@ extension Capability.Backend {
             self.payment = .alipayCN
         case .source(.alipayHK):
             self.payment = .alipayHK
+        case .source(.atome):
+            self.payment = .atome
         case .source(.dana):
             self.payment = .dana
         case .source(.gcash):
@@ -284,6 +292,8 @@ extension Capability.Backend {
             self.payment = .boost
         case .source(.shopeePay):
             self.payment = .shopeePay
+        case .source(.shopeePayJumpApp):
+            self.payment = .shopeePayJumpApp
         case .source(.maybankQRPay):
             self.payment = .maybankQRPay
         case .source(.duitNowQR):
@@ -316,7 +326,11 @@ extension Capability.Backend {
             try encoder.encodeJSONDictionary(configurations)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         // swiftlint:disable line_length
+<<<<<<< HEAD
         case .internetBanking, .alipay, .alipayCN, .alipayHK, .dana, .gcash, .kakaoPay, .touchNGoAlipayPlus, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .grabPay, .grabPayRms, .boost, .shopeePay, .maybankQRPay, .duitNowQR, .duitNowOBW, .payPay:
+=======
+        case .internetBanking, .alipay, .alipayCN, .alipayHK, .atome, .dana, .gcash, .kakaoPay, .touchNGoAlipayPlus, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .grabPay, .grabPayRms, .boost, .shopeePay, .shopeePayJumpApp, .maybankQRPay, .duitNowQR, .duitNowOBW:
+>>>>>>> master
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
     }
@@ -361,6 +375,8 @@ extension Capability.Backend {
                 self = .source(.alipayCN)
             case .alipayHK:
                 self = .source(.alipayHK)
+            case .atome:
+                self = .source(.atome)
             case .dana:
                 self = .source(.dana)
             case .gcash:
@@ -405,6 +421,8 @@ extension Capability.Backend {
                 self = .source(.boost)
             case .shopeePay:
                 self = .source(.shopeePay)
+            case .shopeePayJumpApp:
+                self = .source(.shopeePayJumpApp)
             case .maybankQRPay:
                 self = .source(.maybankQRPay)
             case .duitNowQR:

@@ -59,6 +59,9 @@ class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
 
     static let alipayHKSourceBackendPayment =
         __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.alipayHK)
+    
+    static let atomeSourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.atome)
 
     static let danaSourceBackendPayment =
         __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.dana)
@@ -104,6 +107,9 @@ class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
 
     static let shopeePaySourceBackendPayment =
         __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.shopeePay)
+    
+    static let shopeePayJumpAppSourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.shopeePayJumpApp)
 
     static let maybankQRPaySourceBackendPayment =
         __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.maybankQRPay)
@@ -171,6 +177,8 @@ extension __OmiseCapabilityBackendPayment {
             return __OmiseCapabilitySourceBackendPayment.alipayCNSourceBackendPayment
         case .alipayHK:
             return __OmiseCapabilitySourceBackendPayment.alipayHKSourceBackendPayment
+        case .atome:
+            return __OmiseCapabilitySourceBackendPayment.atomeSourceBackendPayment
         case .dana:
             return __OmiseCapabilitySourceBackendPayment.danaSourceBackendPayment
         case .gcash:
@@ -201,6 +209,8 @@ extension __OmiseCapabilityBackendPayment {
             return __OmiseCapabilitySourceBackendPayment.boostSourceBackendPayment
         case .shopeePay:
             return __OmiseCapabilitySourceBackendPayment.shopeePaySourceBackendPayment
+        case .shopeePayJumpApp:
+            return __OmiseCapabilitySourceBackendPayment.shopeePayJumpAppSourceBackendPayment
         case .maybankQRPay:
             return __OmiseCapabilitySourceBackendPayment.maybankQRPaySourceBackendPayment
         case .duitNowQR:

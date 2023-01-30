@@ -538,6 +538,7 @@ extension PaymentCreatorController {
         .mobileBankingKBank,
         .mobileBankingBAY,
         .mobileBankingBBL,
+        .mobileBankingKTB,
         .alipay,
         .billPaymentTescoLotus,
         .installmentBAY,
@@ -551,7 +552,8 @@ extension PaymentCreatorController {
         .installmentUOB,
         .promptPay,
         .trueMoney,
-        .pointsCiti
+        .pointsCiti,
+        .shopeePayJumpApp
     ]
 
     public static let japanDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
@@ -560,16 +562,18 @@ extension PaymentCreatorController {
 
     public static let singaporeDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
         .payNow,
-        .mobileBankingOCBCPAO
+        .mobileBankingOCBCPAO,
+        .shopeePayJumpApp
     ]
 
     public static let malaysiaDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
         .fpx,
-        .installmentEzypay,
+        .installmentMBB,
         .touchNGo,
         .grabPay,
         .boost,
         .shopeePay,
+        .shopeePayJumpApp,
         .maybankQRPay,
         .duitNowQR,
         .duitNowOBW
@@ -587,7 +591,7 @@ extension PaymentCreatorController {
         .installmentBAY,
         .installmentFirstChoice,
         .installmentBBL,
-        .installmentEzypay,
+        .installmentMBB,
         .installmentKTC,
         .installmentKBank,
         .installmentSCB,
@@ -607,7 +611,8 @@ extension PaymentCreatorController {
     public static let mobileBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
         .mobileBankingSCB,
         .mobileBankingKBank,
-        .mobileBankingBAY
+        .mobileBankingBAY,
+        .mobileBankingKTB
     ]
 }
 

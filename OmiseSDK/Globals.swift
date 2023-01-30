@@ -103,15 +103,17 @@ extension OMSSourceTypeValue {
         switch self {
         case .internetBankingBAY, .internetBankingKTB, .internetBankingSCB, .internetBankingBBL:
             return "internet_banking"
-        case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingBAY, .mobileBankingBBL:
+        case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingBAY, .mobileBankingBBL, .mobileBankingKTB:
             return "mobile_banking"
         case .alipay:
             return "alipay"
+        case .atome:
+            return "atome"
         case .billPaymentTescoLotus:
             return "bill_payment"
         case .barcodeAlipay:
             return "barcode"
-        case .installmentBAY, .installmentEzypay, .installmentFirstChoice, .installmentBBL,
+        case .installmentBAY, .installmentMBB, .installmentFirstChoice, .installmentBBL,
              .installmentKTC, .installmentKBank, .installmentSCB, .installmentCiti, .installmentTTB, .installmentUOB:
             return "installment"
         case .eContext:
@@ -148,6 +150,8 @@ extension OMSSourceTypeValue {
             return "boost"
         case .shopeePay:
             return "shopeepay"
+        case .shopeePayJumpApp:
+            return "shopeepay_jumpapp"
         case .maybankQRPay:
             return "maybank_qr"
         case .duitNowQR:

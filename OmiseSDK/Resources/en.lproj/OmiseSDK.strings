@@ -41,6 +41,9 @@
 /* Class = "UILabel"; text = "Siam Commercial Bank"; ObjectID = "EQF-26-ssb"; */
 "EQF-26-ssb.text" = "SCB EASY";
 
+/* Class = "UILabel"; text = "Krungthai NEXT"; ObjectID = "SaV-b4-qjD"; */
+"SaV-b4-qjD.text" = "Krungthai NEXT";
+
 /* Class = "UILabel"; text = "-"; ObjectID = "EWE-r0-1RF"; */
 "EWE-r0-1RF.text" = "-";
 
@@ -56,8 +59,8 @@
 /* Class = "UILabel"; text = "PromptPay"; ObjectID = "JmT-Us-3lW"; */
 "JmT-Us-3lW.text" = "PromptPay";
 
-/* Class = "UILabel"; text = "Tesco Lotus"; ObjectID = "LpC-UH-uPc"; */
-"LpC-UH-uPc.text" = "Tesco Lotus";
+/* Class = "UILabel"; text = "Lotus's Bill Payment"; ObjectID = "LpC-UH-uPc"; */
+"LpC-UH-uPc.text" = "Lotus's Bill Payment";
 
 /* Class = "UITextField"; placeholder = " "; ObjectID = "OTm-3S-Jk9"; */
 "OTm-3S-Jk9.placeholder" = " ";

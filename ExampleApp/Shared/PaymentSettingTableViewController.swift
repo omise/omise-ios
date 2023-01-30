@@ -91,6 +91,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var alipayPaymentCell: UITableViewCell!
     @IBOutlet private var alipayCNPaymentCell: UITableViewCell!
     @IBOutlet private var alipayHKPaymentCell: UITableViewCell!
+    @IBOutlet private var atomePaymentCell: UITableViewCell!
     @IBOutlet private var danaPaymentCell: UITableViewCell!
     @IBOutlet private var gcashPaymentCell: UITableViewCell!
     @IBOutlet private var kakaoPayPaymentCell: UITableViewCell!
@@ -99,7 +100,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var installmentBAYPaymentCell: UITableViewCell!
     @IBOutlet private var installmentFirstChoicePaymentCell: UITableViewCell!
     @IBOutlet private var installmentBBLPaymentCell: UITableViewCell!
-    @IBOutlet private var installmentEzypayPaymentCell: UITableViewCell!
+    @IBOutlet private var installmentMBBPaymentCell: UITableViewCell!
     @IBOutlet private var installmentKTCPaymentCell: UITableViewCell!
     @IBOutlet private var installmentKBankPaymentCell: UITableViewCell!
     @IBOutlet private var installmentSCBPaymentCell: UITableViewCell!
@@ -110,6 +111,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var mobileBankingKBankPaymentCell: UITableViewCell!
     @IBOutlet private var mobileBankingBBLPaymentCell: UITableViewCell!
     @IBOutlet private var mobileBankingBAYPaymentCell: UITableViewCell!
+    @IBOutlet private var mobileBankingKTBPaymentCell: UITableViewCell!
     @IBOutlet private var eContextPaymentCell: UITableViewCell!
     @IBOutlet private var promptpayPaymentCell: UITableViewCell!
     @IBOutlet private var paynowPaymentCell: UITableViewCell!
@@ -280,6 +282,8 @@ extension PaymentSettingTableViewController {
             return .alipayCN
         case alipayHKPaymentCell:
             return .alipayHK
+        case atomePaymentCell:
+            return .atome
         case danaPaymentCell:
             return .dana
         case gcashPaymentCell:
@@ -296,8 +300,8 @@ extension PaymentSettingTableViewController {
             return .installmentFirstChoice
         case installmentBBLPaymentCell:
             return .installmentBBL
-        case installmentEzypayPaymentCell:
-            return .installmentEzypay
+        case installmentMBBPaymentCell:
+            return .installmentMBB
         case installmentKTCPaymentCell:
             return .installmentKTC
         case installmentKBankPaymentCell:
@@ -320,6 +324,8 @@ extension PaymentSettingTableViewController {
             return .mobileBankingBBL
         case mobileBankingBAYPaymentCell:
             return .mobileBankingBAY
+        case mobileBankingKTBPaymentCell:
+            return .mobileBankingKTB
         case promptpayPaymentCell:
             return .promptPay
         case paynowPaymentCell:
@@ -370,6 +376,8 @@ extension PaymentSettingTableViewController {
             return alipayCNPaymentCell
         case .alipayHK:
             return alipayHKPaymentCell
+        case .atome:
+            return atomePaymentCell
         case .dana:
             return danaPaymentCell
         case .gcash:
@@ -386,8 +394,8 @@ extension PaymentSettingTableViewController {
             return installmentFirstChoicePaymentCell
         case .installmentBBL:
             return installmentBBLPaymentCell
-        case .installmentEzypay:
-            return installmentEzypayPaymentCell
+        case .installmentMBB:
+            return installmentMBBPaymentCell
         case .installmentKTC:
             return installmentKTCPaymentCell
         case .installmentKBank:
@@ -410,6 +418,8 @@ extension PaymentSettingTableViewController {
             return mobileBankingBBLPaymentCell
         case .mobileBankingBAY:
             return mobileBankingBAYPaymentCell
+        case .mobileBankingKTB:
+            return mobileBankingKTBPaymentCell
         case .eContext:
             return eContextPaymentCell
         case .promptPay:

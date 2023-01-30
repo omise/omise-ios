@@ -14,6 +14,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case alipay
     case alipayCN
     case alipayHK
+    case atome
     case dana
     case gcash
     case kakaoPay
@@ -28,6 +29,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case grabPay
     case boost
     case shopeePay
+    case shopeePayJumpApp
     case maybankQRPay
     case duitNowQR
     case duitNowOBW
@@ -45,6 +47,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             .alipay,
             .alipayCN,
             .alipayHK,
+            .atome,
             .dana,
             .gcash,
             .kakaoPay,
@@ -62,6 +65,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             .grabPay,
             .boost,
             .shopeePay,
+            .shopeePayJumpApp,
             .maybankQRPay,
             .duitNowQR,
             .duitNowOBW,
@@ -95,6 +99,8 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "Alipay CN"
         case .alipayHK:
             return "Alipay HK"
+        case .atome:
+            return "Atome"
         case .dana:
             return "DANA"
         case .gcash:
@@ -123,6 +129,8 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "Boost"
         case .shopeePay:
             return "ShopeePay"
+        case .shopeePayJumpApp:
+            return "ShopeePay"
         case .maybankQRPay:
             return "Maybank QRPay"
         case .duitNowQR:
@@ -145,7 +153,7 @@ extension PaymentChooserOption {
         switch sourceType {
         case .trueMoney:
             return [.truemoney]
-        case .installmentFirstChoice, .installmentEzypay, .installmentKBank, .installmentKTC,
+        case .installmentFirstChoice, .installmentMBB, .installmentKBank, .installmentKTC,
              .installmentBBL, .installmentBAY, .installmentSCB, .installmentCiti, .installmentTTB, .installmentUOB:
             return [.installment]
         case .billPaymentTescoLotus:
@@ -158,6 +166,8 @@ extension PaymentChooserOption {
             return [.alipayCN]
         case .alipayHK:
             return [.alipayHK]
+        case .atome:
+            return [.atome]
         case .dana:
             return [.dana]
         case .gcash:
@@ -170,7 +180,7 @@ extension PaymentChooserOption {
             return [.touchNGo]
         case .internetBankingBAY, .internetBankingKTB, .internetBankingBBL, .internetBankingSCB:
             return [.internetBanking]
-        case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingBAY, .mobileBankingBBL:
+        case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingBAY, .mobileBankingBBL, .mobileBankingKTB:
             return [.mobileBanking]
         case .payNow:
             return [.paynow]
@@ -194,6 +204,8 @@ extension PaymentChooserOption {
             return [.boost]
         case .shopeePay:
             return [.shopeePay]
+        case .shopeePayJumpApp:
+            return [.shopeePayJumpApp]
         case .maybankQRPay:
             return [.maybankQRPay]
         case .duitNowQR:
@@ -229,7 +241,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     }
 
     @IBOutlet private var paymentMethodNameLables: [UILabel]!
-
+    
     @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
@@ -379,6 +391,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .boost
         case .shopeePay:
             payment = .shopeePay
+        case .shopeePayJumpApp:
+            payment = .shopeePayJumpApp
         case .maybankQRPay:
             payment = .maybankQRPay
         case .duitNowQR:
@@ -452,7 +466,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 22, section: 0)
         case .boost:
             return IndexPath(row: 23, section: 0)
-        case .shopeePay:
+        case .shopeePay, .shopeePayJumpApp:
             return IndexPath(row: 24, section: 0)
         case .maybankQRPay:
             return IndexPath(row: 25, section: 0)
@@ -464,7 +478,11 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 28, section: 0)
         case .grabPayRms:
             return IndexPath(row: 29, section: 0)
+<<<<<<< HEAD
         case .payPay:
+=======
+        case .atome:
+>>>>>>> master
             return IndexPath(row: 30, section: 0)
         }
     }
@@ -482,6 +500,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue.alipayCN
             case .alipayHK:
                 return OMSSourceTypeValue.alipayHK
+            case .atome:
+                return OMSSourceTypeValue.atome
             case .dana:
                 return OMSSourceTypeValue.dana
             case .gcash:
@@ -523,7 +543,16 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             case .boost:
                 return OMSSourceTypeValue.boost
             case .shopeePay:
-                return OMSSourceTypeValue.shopeePay
+                // using ShopeePay Jump app as first priority ShopeePay source
+                let isShopeePayJumpAppExist = capability.supportedBackends.contains(
+                  where: { $0.payment == Capability.Backend.Payment.shopeePayJumpApp }
+                )
+                if !isShopeePayJumpAppExist {
+                  return OMSSourceTypeValue.shopeePay
+                }
+                return nil
+            case .shopeePayJumpApp:
+                return OMSSourceTypeValue.shopeePayJumpApp
             case .maybankQRPay:
                 return OMSSourceTypeValue.maybankQRPay
             case .duitNowQR:

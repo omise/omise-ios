@@ -37,6 +37,51 @@ public enum PaymentInformation: Codable, Equatable {
 
     /// Online Alipay + Hongkong Wallet Payment Source
     case alipayHK
+    
+    /// The Atome customer information
+    public struct Atome: PaymentMethod {
+
+        public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.atome.rawValue
+
+        public var type: String = OMSSourceTypeValue.atome.rawValue
+
+        /// The customers phone number. Contains only digits and has 10 or 11 characters
+        public let phoneNumber: String
+        public let name: String?
+        public let email: String?
+        public let shippingStreet: String
+        public let shippingCity: String
+        public let shippingCountryCode: String
+        public let shippingPostalCode: String
+
+        private enum CodingKeys: String, CodingKey {
+            case name
+            case email
+            case phoneNumber = "phone_number"
+            case shippingStreet = "shipping_street"
+            case shippingCity = "shipping_city"
+            case shippingCountryCode = "shipping_country_code"
+            case shippingPostalCode = "shipping_postal_code"
+        }
+
+        /// Creates a new Atome source with the given customer information
+        ///
+        /// - Parameters:
+        ///   - phoneNumber:  The customers phone number
+        public init(phoneNumber: String, shippingStreet: String, shippingCity: String, shippingCountryCode: String, shippingPostalCode: String, name: String? = nil, email: String? = nil) {
+            self.name = name
+            self.email = email
+            self.phoneNumber = phoneNumber
+            self.shippingStreet = shippingStreet
+            self.shippingCity = shippingCity
+            self.shippingCountryCode = shippingCountryCode
+            self.shippingPostalCode = shippingPostalCode
+        }
+
+    }
+    
+    /// Online Atome Payment Source
+    case atome(Atome)
 
     /// Online Alipay + Dana Wallet Payment Source
     case dana
@@ -88,7 +133,7 @@ public enum PaymentInformation: Codable, Equatable {
             case bay
             case firstChoice
             case bbl
-            case ezypay
+            case mbb
             case ktc
             case kBank
             case scb
@@ -115,8 +160,8 @@ public enum PaymentInformation: Codable, Equatable {
                 return IndexSet([ 3, 4, 6, 9, 10, 12, 18, 24, 36 ])
             case .bbl:
                 return IndexSet([ 4, 6, 8, 9, 10 ])
-            case .ezypay:
-                return IndexSet([ 6, 12, 24 ])
+            case .mbb:
+                return IndexSet([ 6, 12, 18, 24 ])
             case .ktc:
                 return IndexSet([ 3, 4, 5, 6, 7, 8, 9, 10 ])
             case .kBank:
@@ -228,6 +273,7 @@ public enum PaymentInformation: Codable, Equatable {
         case kbank
         case bay
         case bbl
+        case ktb
         case other(String)
     }
 
@@ -276,6 +322,9 @@ public enum PaymentInformation: Codable, Equatable {
     
     /// ShopeePay Payment Source
     case shopeePay
+    
+    /// ShopeePayJumpApp Payment Source
+    case shopeePayJumpApp
     
     /// Maybank QRPay Payment Source
     case maybankQRPay
@@ -366,6 +415,8 @@ public enum PaymentInformation: Codable, Equatable {
             self = .alipayCN
         case OMSSourceTypeValue.alipayHK.rawValue:
             self = .alipayHK
+        case OMSSourceTypeValue.atome.rawValue:
+            self = .atome(try Atome(from: decoder))
         case OMSSourceTypeValue.dana.rawValue:
             self = .dana
         case OMSSourceTypeValue.gcash.rawValue:
@@ -390,6 +441,8 @@ public enum PaymentInformation: Codable, Equatable {
             self = .boost
         case OMSSourceTypeValue.shopeePay.rawValue:
             self = .shopeePay
+        case OMSSourceTypeValue.shopeePayJumpApp.rawValue:
+            self = .shopeePayJumpApp
         case OMSSourceTypeValue.maybankQRPay.rawValue:
             self = .maybankQRPay
         case OMSSourceTypeValue.duitNowQR.rawValue:
@@ -437,6 +490,9 @@ public enum PaymentInformation: Codable, Equatable {
         case .alipayHK:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.alipayHK.rawValue, forKey: .type)
+        case .atome:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.atome.rawValue, forKey: .type)
         case .dana:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.dana.rawValue, forKey: .type)
@@ -486,6 +542,9 @@ public enum PaymentInformation: Codable, Equatable {
         case .shopeePay:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.shopeePay.rawValue, forKey: .type)
+        case .shopeePayJumpApp:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.shopeePayJumpApp.rawValue, forKey: .type)
         case .maybankQRPay:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.maybankQRPay.rawValue, forKey: .type)
@@ -516,6 +575,8 @@ public enum PaymentInformation: Codable, Equatable {
             return true
         case (.alipayHK, .alipayHK):
             return true
+        case (.atome, .atome):
+            return true
         case (.dana, .dana):
             return true
         case (.gcash, .gcash):
@@ -535,6 +596,8 @@ public enum PaymentInformation: Codable, Equatable {
         case (.boost, .boost):
             return true
         case (.shopeePay, .shopeePay):
+            return true
+        case (.shopeePayJumpApp, .shopeePayJumpApp):
             return true
         case (.maybankQRPay, .maybankQRPay):
             return true
@@ -588,6 +651,8 @@ extension PaymentInformation {
             return OMSSourceTypeValue.alipayCN.rawValue
         case .alipayHK:
             return OMSSourceTypeValue.alipayHK.rawValue
+        case .atome:
+            return OMSSourceTypeValue.atome.rawValue
         case .dana:
             return OMSSourceTypeValue.dana.rawValue
         case .gcash:
@@ -622,6 +687,8 @@ extension PaymentInformation {
             return OMSSourceTypeValue.boost.rawValue
         case .shopeePay:
             return OMSSourceTypeValue.shopeePay.rawValue
+        case .shopeePayJumpApp:
+            return OMSSourceTypeValue.shopeePayJumpApp.rawValue
         case .maybankQRPay:
             return OMSSourceTypeValue.maybankQRPay.rawValue
         case .duitNowQR:
@@ -722,8 +789,8 @@ extension PaymentInformation.Installment {
             return OMSSourceTypeValue.installmentFirstChoice.rawValue
         case .bbl:
             return OMSSourceTypeValue.installmentBBL.rawValue
-        case .ezypay:
-            return OMSSourceTypeValue.installmentEzypay.rawValue
+        case .mbb:
+            return OMSSourceTypeValue.installmentMBB.rawValue
         case .ktc:
             return OMSSourceTypeValue.installmentKTC.rawValue
         case .kBank:
@@ -766,8 +833,8 @@ extension PaymentInformation.Installment {
             brand = .firstChoice
         case "bbl":
             brand = .bbl
-        case "ezypay":
-            brand = .ezypay
+        case "mbb":
+            brand = .mbb
         case "ktc":
             brand = .ktc
         case "kbank":
@@ -810,8 +877,8 @@ extension PaymentInformation.Installment.Brand: CaseIterable, CustomStringConver
             return "First Choice"
         case .bbl:
             return "BBL"
-        case .ezypay:
-            return "Ezypay"
+        case .mbb:
+            return "MBB"
         case .ktc:
             return "KTC"
         case .kBank:
@@ -837,8 +904,8 @@ extension PaymentInformation.Installment.Brand: CaseIterable, CustomStringConver
             return OMSSourceTypeValue.installmentFirstChoice.rawValue
         case .bbl:
             return OMSSourceTypeValue.installmentBBL.rawValue
-        case .ezypay:
-            return OMSSourceTypeValue.installmentEzypay.rawValue
+        case .mbb:
+            return OMSSourceTypeValue.installmentMBB.rawValue
         case .ktc:
             return OMSSourceTypeValue.installmentKTC.rawValue
         case .kBank:
@@ -1082,7 +1149,7 @@ extension PaymentInformation.Points {
 extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertible {
     public typealias AllCases = [PaymentInformation.MobileBanking]
     public static var allCases: PaymentInformation.MobileBanking.AllCases = [
-        .scb, .kbank, .bay, .bbl
+        .scb, .kbank, .bay, .bbl, .ktb
     ]
 
     /// Omise Source Type value using in the Omise API
@@ -1096,6 +1163,8 @@ extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertibl
             return OMSSourceTypeValue.mobileBankingBAY.rawValue
         case .bbl:
             return OMSSourceTypeValue.mobileBankingBBL.rawValue
+        case .ktb:
+            return OMSSourceTypeValue.mobileBankingKTB.rawValue
         case .other(let value):
             return PaymentInformation.MobileBanking.paymentMethodTypePrefix + value
         }
@@ -1111,6 +1180,8 @@ extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertibl
             return "BAY"
         case .bbl:
             return "BBL"
+        case .ktb:
+            return "KTB"
         case .other(let value):
             return value
         }
@@ -1138,6 +1209,8 @@ extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertibl
             self = .bay
         case "bbl":
             self = .bbl
+        case "ktb":
+            self = .ktb
         case let value:
             self = .other(String(value))
         }
