@@ -351,6 +351,9 @@ public class __SourceMobileBankingPayment: __SourcePaymentInformation {
     /// Payment Information for a BBL Mobile Banking Payment
     public static let bblMobileBankingPayment = __SourceMobileBankingPayment(type: OMSSourceTypeValue.mobileBankingBBL)!
 
+    /// Payment Information for a KTB Mobile Banking Payment
+    public static let ktbMobileBankingPayment = __SourceMobileBankingPayment(type: OMSSourceTypeValue.mobileBankingKTB)!
+
     /// Create an Mobile Banking payment with the given source type value
     ///
     /// - Parameter type: Source type of the source to be created
@@ -639,6 +642,8 @@ extension __SourcePaymentInformation {
                 return __SourceMobileBankingPayment.bayMobileBankingPayment
             case .bbl:
                 return __SourceMobileBankingPayment.bblMobileBankingPayment
+            case .ktb:
+                return __SourceMobileBankingPayment.ktbMobileBankingPayment
             case .other(let type):
                 return __CustomSourcePayment(customType: type, parameters: [:])
             }

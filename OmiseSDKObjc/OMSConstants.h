@@ -9,6 +9,7 @@ extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingSCB;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingOCBCPAO;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingBAY;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingBBL;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingKTB;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueAlipay;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueAlipayCN;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueAlipayHK;
