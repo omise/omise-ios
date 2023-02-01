@@ -112,10 +112,6 @@ public class __SourceInternetBankingPayment: __SourcePaymentInformation {
 
     /// Payment Information for a BAY Internet Banking Payment
     public static let bayInternetBankingPayment = __SourceInternetBankingPayment(type: OMSSourceTypeValue.internetBankingBAY)!
-    /// Payment Information for a KTB Internet Banking Payment
-    public static let ktbInternetBankingPayment = __SourceInternetBankingPayment(type: OMSSourceTypeValue.internetBankingKTB)!
-    /// Payment Information for a SCB Internet Banking Payment
-    public static let scbInternetBankingPayment = __SourceInternetBankingPayment(type: OMSSourceTypeValue.internetBankingSCB)!
     /// Payment Information for a BBL Internet Banking Payment
     public static let bblInternetBankingPayment = __SourceInternetBankingPayment(type: OMSSourceTypeValue.internetBankingBBL)!
 
@@ -436,12 +432,6 @@ extension PaymentInformation {
             switch value.type {
             case .internetBankingBAY:
                 bank = .bay
-            case .internetBankingKTB:
-                bank = .ktb
-            case .internetBankingSCB:
-                bank = .scb
-            case .mobileBankingSCB:
-                bank = .scb
             case .internetBankingBBL:
                 bank = .bbl
             case let type:
@@ -564,10 +554,6 @@ extension __SourcePaymentInformation {
             switch bank {
             case .bay:
                 return __SourceInternetBankingPayment.bayInternetBankingPayment
-            case .ktb:
-                return __SourceInternetBankingPayment.ktbInternetBankingPayment
-            case .scb:
-                return __SourceInternetBankingPayment.scbInternetBankingPayment
             case .bbl:
                 return __SourceInternetBankingPayment.bblInternetBankingPayment
             case .other(let type) where type.hasPrefix(PaymentInformation.InternetBanking.paymentMethodTypePrefix):
