@@ -254,6 +254,32 @@ class ModelTestCase: XCTestCase {
         } catch {
             XCTFail("Cannot decode the source \(error)")
         }
+
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_internet_banking/ktb")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_test_5cs0swjx9zguxt0kd0z", source.id)
+            XCTAssertEqual(Currency.thb, source.currency)
+            XCTAssertEqual(1000_00, source.amount)
+            XCTAssertEqual(PaymentInformation.internetBanking(.ktb), source.paymentInformation)
+            XCTAssertEqual(Flow.redirect, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
+
+        do {
+            let sourceData = try XCTestCase.fixturesData(forFilename: "source_internet_banking/scb")
+            let source = try decoder.decode(Source.self, from: sourceData)
+
+            XCTAssertEqual("src_test_5avnh1p1dt3hkh161ac", source.id)
+            XCTAssertEqual(Currency.thb, source.currency)
+            XCTAssertEqual(1000000, source.amount)
+            XCTAssertEqual(PaymentInformation.internetBanking(.scb), source.paymentInformation)
+            XCTAssertEqual(Flow.redirect, source.flow)
+        } catch {
+            XCTFail("Cannot decode the source \(error)")
+        }
     }
 
     func testDecodeMobileBankingSource() throws {

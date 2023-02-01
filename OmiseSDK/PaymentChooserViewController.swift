@@ -178,7 +178,7 @@ extension PaymentChooserOption {
             return [.touchNGoAlipayPlus]
         case .touchNGo:
             return [.touchNGo]
-        case .internetBankingBAY, .internetBankingBBL:
+        case .internetBankingBAY, .internetBankingKTB, .internetBankingBBL, .internetBankingSCB:
             return [.internetBanking]
         case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingBAY, .mobileBankingBBL, .mobileBankingKTB:
             return [.mobileBanking]
