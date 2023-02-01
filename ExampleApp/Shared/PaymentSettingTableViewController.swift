@@ -85,8 +85,6 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var myrCurrencyCell: UITableViewCell!
 
     @IBOutlet private var internetBankingBAYPaymentCell: UITableViewCell!
-    @IBOutlet private var internetBankingKTBPaymentCell: UITableViewCell!
-    @IBOutlet private var internetBankingSCBPaymentCell: UITableViewCell!
     @IBOutlet private var internetBankingBBLPaymentCell: UITableViewCell!
     @IBOutlet private var alipayPaymentCell: UITableViewCell!
     @IBOutlet private var alipayCNPaymentCell: UITableViewCell!
@@ -270,10 +268,6 @@ extension PaymentSettingTableViewController {
         switch cell {
         case internetBankingBAYPaymentCell:
             return .internetBankingBAY
-        case internetBankingKTBPaymentCell:
-            return .internetBankingKTB
-        case internetBankingSCBPaymentCell:
-            return .internetBankingSCB
         case internetBankingBBLPaymentCell:
             return .internetBankingBBL
         case alipayPaymentCell:
@@ -364,10 +358,6 @@ extension PaymentSettingTableViewController {
         switch paymentSource {
         case .internetBankingBAY:
             return internetBankingBAYPaymentCell
-        case .internetBankingKTB:
-            return internetBankingKTBPaymentCell
-        case .internetBankingSCB:
-            return internetBankingSCBPaymentCell
         case .internetBankingBBL:
             return internetBankingBBLPaymentCell
         case .alipay:
