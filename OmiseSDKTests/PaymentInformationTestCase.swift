@@ -226,40 +226,6 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: .internetBanking(.ktb),
-                                                         amount: 100_00,
-                                                         currency: .thb)
-            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
-
-            XCTAssertEqual(
-                """
-                {
-                  "amount" : 10000,
-                  "currency" : "THB",
-                  "platform_type" : "IOS",
-                  "type" : "internet_banking_ktb"
-                }
-                """, encodedJSONString)
-        }
-
-        do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: .internetBanking(.scb),
-                                                         amount: 1_000_00,
-                                                         currency: .thb)
-            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
-
-            XCTAssertEqual(
-                """
-                {
-                  "amount" : 100000,
-                  "currency" : "THB",
-                  "platform_type" : "IOS",
-                  "type" : "internet_banking_scb"
-                }
-                """, encodedJSONString)
-        }
-
-        do {
             let sourceParameter = Source.CreateParameter(paymentInformation: .internetBanking(.bbl),
                                                          amount: 10_00,
                                                          currency: .thb)
