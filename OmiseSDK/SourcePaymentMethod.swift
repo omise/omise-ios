@@ -380,6 +380,9 @@ public enum PaymentInformation: Codable, Equatable {
 
     // GrabPay
     case grabPay
+    
+    // PayPay
+    case payPay
 
     /// Other Payment Source
     case other(type: String, parameters: [String: Any])
@@ -450,6 +453,8 @@ public enum PaymentInformation: Codable, Equatable {
             self = .fpx(try FPX(from: decoder))
         case PaymentInformation.DuitNowOBW.self:
             self = .duitNowOBW(try DuitNowOBW(from: decoder))
+        case OMSSourceTypeValue.payPay.rawValue:
+            self = .payPay
         case let value:
             self = .other(type: value, parameters: try decoder.decodeJSONDictionary().filter({ (key, _) -> Bool in
                 switch key {
@@ -548,6 +553,9 @@ public enum PaymentInformation: Codable, Equatable {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.duitNowOBW.rawValue, forKey: .type)
             try duitNowOBW.encode(to: encoder)
+        case .payPay:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.payPay.rawValue, forKey: .type)
         case .other(type: let type, parameters: let parameters):
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(type, forKey: .type)
@@ -611,6 +619,8 @@ public enum PaymentInformation: Codable, Equatable {
             return lhsValue == rhsValue
         case (.duitNowOBW(let lhsValue), .duitNowOBW(let rhsValue)):
             return lhsValue == rhsValue
+        case (.payPay, .payPay):
+            return true
         case (.other(let lhsType, let lhsParameters), .other(let rhsType, let rhsParameters)):
             return lhsType == rhsType &&
                 Set(lhsParameters.keys) == Set(rhsParameters.keys)
@@ -689,6 +699,8 @@ extension PaymentInformation {
             return bank.type
         case .duitNowOBW(let bank):
             return bank.type
+        case .payPay:
+            return OMSSourceTypeValue.payPay.rawValue
         case .other(let value, _):
             return value
         }

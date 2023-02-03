@@ -90,6 +90,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var alipayCNPaymentCell: UITableViewCell!
     @IBOutlet private var alipayHKPaymentCell: UITableViewCell!
     @IBOutlet private var atomePaymentCell: UITableViewCell!
+    @IBOutlet private var payPayPaymentCell: UITableViewCell!
     @IBOutlet private var danaPaymentCell: UITableViewCell!
     @IBOutlet private var gcashPaymentCell: UITableViewCell!
     @IBOutlet private var kakaoPayPaymentCell: UITableViewCell!
@@ -321,6 +322,8 @@ extension PaymentSettingTableViewController {
             return .mobileBankingKTB
         case promptpayPaymentCell:
             return .promptPay
+        case payPayPaymentCell:
+            return .payPay
         case paynowPaymentCell:
             return .payNow
         case truemoneyPaymentCell:
@@ -413,6 +416,8 @@ extension PaymentSettingTableViewController {
             return promptpayPaymentCell
         case .payNow:
             return paynowPaymentCell
+        case .payPay:
+            return payPayPaymentCell
         case .trueMoney:
             return truemoneyPaymentCell
         case .pointsCiti:
