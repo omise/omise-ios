@@ -158,6 +158,8 @@ extension OMSSourceTypeValue {
             return "duitnow_qr"
         case .duitNowOBW:
             return "duitnow_obw"
+        case .payPay:
+            return "paypay"
         default:
             return self.rawValue
         }
