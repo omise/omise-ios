@@ -749,7 +749,7 @@ class ModelTestCase: XCTestCase {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_paypay")
             let source = try decoder.decode(Source.self, from: sourceData)
 
-            XCTAssertEqual("src_test_5pqcjr6tu4xvqut5nh5", source.id)
+            XCTAssertEqual("src_5pqcjr6tu4xvqut5nh5", source.id)
             XCTAssertEqual(100000, source.amount)
             XCTAssertEqual(Currency.jpy, source.currency)
             XCTAssertEqual(PaymentInformation.payPay, source.paymentInformation)
