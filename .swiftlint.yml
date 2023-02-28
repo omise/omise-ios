@@ -53,7 +53,6 @@ opt_in_rules:
   - trailing_closure
   - unowned_variable_capture
   - untyped_error_in_catch
-  - unused_import
   - vertical_parameter_alignment_on_call
   - xct_specific_matcher
   - yoda_condition
@@ -93,3 +92,6 @@ nesting:
     warning: 2
 trailing_whitespace:
   ignores_empty_lines: true
+
+analyzer_rules:
+  - unused_import
