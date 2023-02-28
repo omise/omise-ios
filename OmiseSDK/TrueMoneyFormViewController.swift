@@ -9,9 +9,7 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
     private var client: Client?
     
     private var isInputDataValid: Bool {
-        return formFields.reduce(into: true) { (valid, field) in
-            valid = valid && field.isValid
-        }
+        return formFields.allSatisfy { $0.isValid }
     }
     
     @IBInspectable var preferredPrimaryColor: UIColor? {

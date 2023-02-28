@@ -12,11 +12,7 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
     private var client: Client?
 
     private var isInputDataValid: Bool {
-        let valid = formFields.reduce(into: true) { (valid, field) in
-            valid = valid && field.isValid
-        }
-
-        return valid || isEmailInputEmpty
+        return formFields.allSatisfy { $0.isValid } || isEmailInputEmpty
     }
 
     private var isEmailInputEmpty: Bool {

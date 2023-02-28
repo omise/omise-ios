@@ -119,9 +119,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     private lazy var overlayTransitionDelegate = OverlayPanelTransitioningDelegate()
     
     var isInputDataValid: Bool {
-        return formFields.reduce(into: true) { (valid, field) in
-            valid = valid && field.isValid
-        }
+        return formFields.allSatisfy { $0.isValid }
     }
     
     var currentEditingTextField: OmiseTextField?

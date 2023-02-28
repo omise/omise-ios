@@ -11,9 +11,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     var currentEditingTextField: OmiseTextField?
     
     var isInputDataValid: Bool {
-        return formFields.reduce(into: true) { (valid, field) in
-            valid = valid && field.isValid
-        }
+        return formFields.allSatisfy { $0.isValid }
     }
     
     @IBInspectable var preferredPrimaryColor: UIColor? {
