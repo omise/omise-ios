@@ -19,7 +19,7 @@ public enum ErrorUserInfoKey: String, CodingKey {
 }
 
 /// Represent errors from the Omise iOS SDK.
-public enum OmiseError: CustomNSError, LocalizedError, Decodable { // swiftlint:disable:this type_body_length
+public enum OmiseError: CustomNSError, LocalizedError, Decodable {
     public static let errorDomain: String = "co.omise.ios"
 
     /// API error returned from Omise API

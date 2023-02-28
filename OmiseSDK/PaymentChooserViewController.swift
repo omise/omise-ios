@@ -221,7 +221,7 @@ extension PaymentChooserOption {
 }
 
 @objc(OMSPaymentChooserViewController)
-// swiftlint:disable type_body_length
+// swiftlint:disable type_body_length attributes
 class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>,
                                     PaymentSourceChooser,
                                     PaymentChooserUI {

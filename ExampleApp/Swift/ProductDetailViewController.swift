@@ -2,6 +2,7 @@ import UIKit
 import OmiseSDK
 
 @objc(OMSExampleProductDetailViewController)
+// swiftlint:disable:next attributes
 class ProductDetailViewController: OMSBaseViewController {
     private let publicKey = "pkey_test_<#Omise Public Key#>"
     

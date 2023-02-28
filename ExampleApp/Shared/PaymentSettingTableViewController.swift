@@ -34,7 +34,8 @@ class PaymentSettingTableViewController: UITableViewController {
         }
     }
     @objc(currentCurrencyCode)
-    var __currentCurrencyCode: String { // swiftlint:disable:this identifier_name
+    // swiftlint:disable:next attributes identifier_name
+    var __currentCurrencyCode: String {
         get {
             return currentCurrency.code
         }

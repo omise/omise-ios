@@ -2,6 +2,7 @@ import UIKit
 import os
 
 @objc(OMSMobileBankingSourceChooserViewController)
+// swiftlint:disable:next attributes
 class MobileBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.MobileBanking>,
                                                 PaymentSourceChooser,
                                                 PaymentChooserUI {

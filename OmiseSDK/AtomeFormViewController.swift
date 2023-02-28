@@ -1,6 +1,7 @@
 import UIKit
 
 @objc(OMSAtomeFormViewController)
+// swiftlint:disable:next attributes
 class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
     
     var flowSession: PaymentCreatorFlowSession?
@@ -86,9 +87,8 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
         }
         submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
         
-        if  #available(iOS 11, *) {
+        if  #unavailable(iOS 11) {
             // We'll leave the adjusting scroll view insets job for iOS 11 and later to the layoutMargins + safeAreaInsets here
-        } else {
             automaticallyAdjustsScrollViewInsets = true
         }
         
@@ -119,92 +119,18 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        if #available(iOS 11, *) {
+        if #unavailable(iOS 11) {
             // There's a bug in iOS 10 and earlier which the text field's intrinsicContentSize is returned the value
             // that doesn't take the result of textRect(forBounds:) method into an account for the initial value
             // So we need to invalidate the intrinsic content size here to ask those text fields to calculate their
             // intrinsic content size again
-        } else {
+
             formFields.forEach {
                 $0.invalidateIntrinsicContentSize()
             }
         }
     }
-   
-    @IBAction private func submitForm(_ sender: AnyObject) {
-        guard let name = nameTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
-            return
-        }
-        
-        guard let email = emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
-            return
-        }
-        
-        guard let phone = phoneNumberTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
-            return
-        }
-        
-        guard let street = shippingStreetTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
-            return
-        }
-        
-        guard let city = shippingCityTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
-            return
-        }
-        
-        guard let country = shippingCountryCodeTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
-            return
-        }
-        
-        guard let postcode = shippingPostalCodeTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
-            return
-        }
-        
-        let atomeInfo = PaymentInformation.Atome(phoneNumber: phone, shippingStreet: street, shippingCity: city, shippingCountryCode: country, shippingPostalCode: postcode, name: name, email: email)
-        requestingIndicatorView.startAnimating()
-        view.isUserInteractionEnabled = false
-        view.tintAdjustmentMode = .dimmed
-        submitButton.isEnabled = false
-        flowSession?.requestCreateSource(.atome(atomeInfo)) { _ in
-            self.requestingIndicatorView.stopAnimating()
-            self.view.isUserInteractionEnabled = true
-            self.view.tintAdjustmentMode = .automatic
-            self.submitButton.isEnabled = true
-        }
-    }
-    
-    @IBAction private func validateFieldData(_ textField: OmiseTextField) {
-        submitButton.isEnabled = isInputDataValid
-    }
-    
-    @IBAction private func validateTextFieldDataOf(_ sender: OmiseTextField) {
-        let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-        UIView.animate(withDuration: duration,
-                       delay: 0.0,
-                       options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
-            self.validateField(sender)
-        }
-        sender.borderColor = currentSecondaryColor
-    }
 
-    @IBAction private func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
-        if let errorLabel = associatedErrorLabelOf(sender) {
-            let duration = TimeInterval(NavigationControllerHideShowBarDuration)
-            UIView.animate(withDuration: duration,
-                           delay: 0.0,
-                           options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
-                errorLabel.alpha = 0.0
-            }
-        }
-        
-        updateInputAccessoryViewWithFirstResponder(sender)
-        sender.borderColor = view.tintColor
-    }
-
-    @IBAction private func doneEditing(_ button: UIBarButtonItem?) {
-        doneEditing()
-    }
-    
     fileprivate func associatedErrorLabelOf(_ textField: OmiseTextField) -> UILabel? {
         switch textField {
         case phoneNumberTextField:
@@ -229,7 +155,114 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
         validateFieldData(textField)
     }
     
-    private func validateField(_ textField: OmiseTextField) {
+    @objc func keyboardWillChangeFrame(_ notification: NSNotification) {
+        guard let frameEnd = notification.userInfo?[NotificationKeyboardFrameEndUserInfoKey] as? CGRect,
+            let frameStart = notification.userInfo?[NotificationKeyboardFrameBeginUserInfoKey] as? CGRect,
+            frameEnd != frameStart else {
+                return
+        }
+
+        let intersectedFrame = contentView.convert(frameEnd, from: nil)
+
+        contentView.contentInset.bottom = intersectedFrame.height
+        let bottomScrollIndicatorInset: CGFloat
+        if #available(iOS 11.0, *) {
+            bottomScrollIndicatorInset = intersectedFrame.height - contentView.safeAreaInsets.bottom
+        } else {
+            bottomScrollIndicatorInset = intersectedFrame.height
+        }
+        contentView.scrollIndicatorInsets.bottom = bottomScrollIndicatorInset
+    }
+    
+    @objc func keyboardWillHide(_ notification: NSNotification) {
+        contentView.contentInset.bottom = 0.0
+        contentView.scrollIndicatorInsets.bottom = 0.0
+    }
+}
+
+private extension AtomeFormViewController {
+    @IBAction func submitForm(_ sender: AnyObject) {
+        guard let name = nameTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+            return
+        }
+
+        guard let email = emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+            return
+        }
+
+        guard let phone = phoneNumberTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+            return
+        }
+
+        guard let street = shippingStreetTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+            return
+        }
+
+        guard let city = shippingCityTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+            return
+        }
+
+        guard let country = shippingCountryCodeTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+            return
+        }
+
+        guard let postcode = shippingPostalCodeTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+            return
+        }
+
+        let atomeInfo = PaymentInformation.Atome(phoneNumber: phone,
+                                                 shippingStreet: street,
+                                                 shippingCity: city,
+                                                 shippingCountryCode: country,
+                                                 shippingPostalCode: postcode,
+                                                 name: name,
+                                                 email: email)
+        requestingIndicatorView.startAnimating()
+        view.isUserInteractionEnabled = false
+        view.tintAdjustmentMode = .dimmed
+        submitButton.isEnabled = false
+        flowSession?.requestCreateSource(.atome(atomeInfo)) { _ in
+            self.requestingIndicatorView.stopAnimating()
+            self.view.isUserInteractionEnabled = true
+            self.view.tintAdjustmentMode = .automatic
+            self.submitButton.isEnabled = true
+        }
+    }
+
+    @IBAction func validateFieldData(_ textField: OmiseTextField) {
+        submitButton.isEnabled = isInputDataValid
+    }
+
+    @IBAction func validateTextFieldDataOf(_ sender: OmiseTextField) {
+        let duration = TimeInterval(NavigationControllerHideShowBarDuration)
+        UIView.animate(withDuration: duration,
+                       delay: 0.0,
+                       options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
+            self.validateField(sender)
+        }
+        sender.borderColor = currentSecondaryColor
+    }
+
+    @IBAction func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
+        if let errorLabel = associatedErrorLabelOf(sender) {
+            let duration = TimeInterval(NavigationControllerHideShowBarDuration)
+            UIView.animate(withDuration: duration,
+                           delay: 0.0,
+                           options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
+                errorLabel.alpha = 0.0
+            }
+        }
+
+        updateInputAccessoryViewWithFirstResponder(sender)
+        sender.borderColor = view.tintColor
+    }
+
+    @IBAction func doneEditing(_ button: UIBarButtonItem?) {
+        doneEditing()
+    }
+
+    // swiftlint:disable:next function_body_length
+    func validateField(_ textField: OmiseTextField) {
         guard let errorLabel = associatedErrorLabelOf(textField) else {
             return
         }
@@ -301,32 +334,5 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
             }
             errorLabel.alpha = errorLabel.text != "-" ? 1.0 : 0.0
         }
-        
-        
     }
-    
-    @objc func keyboardWillChangeFrame(_ notification: NSNotification) {
-        guard let frameEnd = notification.userInfo?[NotificationKeyboardFrameEndUserInfoKey] as? CGRect,
-            let frameStart = notification.userInfo?[NotificationKeyboardFrameBeginUserInfoKey] as? CGRect,
-            frameEnd != frameStart else {
-                return
-        }
-
-        let intersectedFrame = contentView.convert(frameEnd, from: nil)
-
-        contentView.contentInset.bottom = intersectedFrame.height
-        let bottomScrollIndicatorInset: CGFloat
-        if #available(iOS 11.0, *) {
-            bottomScrollIndicatorInset = intersectedFrame.height - contentView.safeAreaInsets.bottom
-        } else {
-            bottomScrollIndicatorInset = intersectedFrame.height
-        }
-        contentView.scrollIndicatorInsets.bottom = bottomScrollIndicatorInset
-    }
-    
-    @objc func keyboardWillHide(_ notification: NSNotification) {
-        contentView.contentInset.bottom = 0.0
-        contentView.scrollIndicatorInsets.bottom = 0.0
-    }
-    
 }

@@ -1,5 +1,6 @@
 import UIKit
 
+// swiftlint:disable:next type_name
 protocol MoreInformationOnCVVViewControllerDelegate: AnyObject {
     func moreInformationOnCVVViewControllerDidAskToClose(_ controller: MoreInformationOnCVVViewController)
 }

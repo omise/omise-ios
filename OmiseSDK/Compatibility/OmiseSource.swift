@@ -37,6 +37,7 @@ import Foundation
 /// Based type of the Source Payment Information type
 @objc(OMSPaymentInformation)
 @objcMembers
+// swiftlint:disable:next attributes
 public class __SourcePaymentInformation: NSObject {
     public let type: OMSSourceTypeValue
 
@@ -111,6 +112,7 @@ public class __SourcePaymentInformation: NSObject {
 /// Internet Bankning Source Payment Information
 @objc(OMSInternetBankingPaymentInformation)
 @objcMembers
+// swiftlint:disable:next attributes
 public class __SourceInternetBankingPayment: __SourcePaymentInformation {
 
     /// Payment Information for a BAY Internet Banking Payment
@@ -133,11 +135,13 @@ public class __SourceInternetBankingPayment: __SourcePaymentInformation {
 /// Barcode Source Payment Information
 @objc(OMSBarcodePaymentInformation)
 @objcMembers
+// swiftlint:disable:next attributes
 public class __SourceBarcodePayment: __SourcePaymentInformation {}
 
 /// AlipayBarcode Source Payment Information
 @objc(OMSAlipayBarcodePaymentInformation)
 @objcMembers
+// swiftlint:disable:next attributes
 public class __SourceAlipayBarcodePayment: __SourceBarcodePayment {
     let alipayBarcodeInformation: PaymentInformation.Barcode.AlipayBarcode
 
@@ -168,6 +172,7 @@ public class __SourceAlipayBarcodePayment: __SourceBarcodePayment {
 /// CustomBarcode Source Payment Information
 @objc(OMSCustomBarcodePaymentInformation)
 @objcMembers
+// swiftlint:disable:next attributes
 public class __SourceCustomBarcodePayment: __SourceBarcodePayment {
     let parameters: [String: Any]
 
@@ -185,6 +190,7 @@ public class __SourceCustomBarcodePayment: __SourceBarcodePayment {
 /// Installments Source Payment Information
 @objc(OMSInstallmentsPaymentInformation)
 @objcMembers
+// swiftlint:disable:next attributes
 public class __SourceInstallmentsPayment: __SourcePaymentInformation {
     /// Number of terms of the installment plan
     public let numberOfTerms: Int
@@ -278,6 +284,7 @@ public class __SourceInstallmentsPayment: __SourcePaymentInformation {
 /// EContext Source Payment Information
 @objc(OMSEContextPaymentInformation)
 @objcMembers
+// swiftlint:disable:next attributes
 public class __SourceEContextPayment: __SourcePaymentInformation {
     /// Name of the payer
     public let name: String
@@ -303,6 +310,7 @@ public class __SourceEContextPayment: __SourcePaymentInformation {
 /// The TrueMoney customer information
 @objc(OMSTrueMoneyPaymentInformation)
 @objcMembers
+// swiftlint:disable:next attributes
 public class __SourceTrueMoneyPayment: __SourcePaymentInformation {
     /// The customers phone number. Contains only digits and has 10 or 11 characters
     public let phoneNumber: String
@@ -320,6 +328,7 @@ public class __SourceTrueMoneyPayment: __SourcePaymentInformation {
 /// Points Source Payment Information
 @objc(OMSPointsPaymentInformation)
 @objcMembers
+// swiftlint:disable:next attributes
 public class __SourcePointsPayment: __SourcePaymentInformation {
 
     /// Payment Information for a Citi Points Payment
@@ -340,6 +349,7 @@ public class __SourcePointsPayment: __SourcePaymentInformation {
 /// Mobile Bankning Source Payment Information
 @objc(OMSMobileBankingPaymentInformation)
 @objcMembers
+// swiftlint:disable:next attributes
 public class __SourceMobileBankingPayment: __SourcePaymentInformation {
 
     /// Payment Information for a SCB Mobile Banking Payment
@@ -372,6 +382,7 @@ public class __SourceMobileBankingPayment: __SourcePaymentInformation {
 /// The FPX Source Payment information
 @objc(OMSFPXPaymentInformation)
 @objcMembers
+// swiftlint:disable:next attributes
 public class __SourceFPXPayment: __SourcePaymentInformation {
     /// The customer's bank name
     public let bank: String
@@ -394,6 +405,7 @@ public class __SourceFPXPayment: __SourcePaymentInformation {
 /// The DuitNow OBW Source Payment information
 @objc(OMSDuitNowOBWPaymentInformation)
 @objcMembers
+// swiftlint:disable:next attributes
 public class __SourceDuitNowOBWPayment: __SourcePaymentInformation {
     /// The customer's bank name
     public let bank: String
@@ -411,6 +423,7 @@ public class __SourceDuitNowOBWPayment: __SourcePaymentInformation {
 /// CustomSource Source Payment Information
 @objc(OMSCustomPaymentInformation)
 @objcMembers
+// swiftlint:disable:next attributes
 public class __CustomSourcePayment: __SourcePaymentInformation {
     /// Parameter of the payment source in a JSON data type
     public let parameters: [String: Any]
