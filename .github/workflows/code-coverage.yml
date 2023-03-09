@@ -11,6 +11,8 @@ jobs:
       name: Code Coverage
 
       runs-on: macos-latest
+      env:
+        BUILD_WRAPPER_OUT_DIR: Build # Directory where build-wrapper output will be placed
 
       steps:
         - name: Checkout
