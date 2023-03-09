@@ -1,0 +1,31 @@
+name: Code Coverage
+
+on:
+  push:
+    branches: [ 'master' ]
+  pull_request:
+    branches: [ 'master' ]
+
+jobs:
+  coverage:
+      name: Code Coverage
+
+      runs-on: macos-latest
+
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+
+        - name: Run xcodebuild with tests
+          run: xcodebuild test -project OmiseSDK.xcodeproj/ -scheme OmiseSDK -derivedDataPath Build/ -destination 'platform=iOS Simulator,name=iPhone 11,OS=16.2' -enableCodeCoverage YES clean build test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+        - name: Convert Xcode coverage to SonarCloud format
+          run: bash xccov-to-sonarqube-generic.sh build/Logs/Test/*.xcresult/ > coverage.xml
+
+        - name: SonarCloud Scan
+          uses: SonarSource/sonarcloud-github-action@master
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
