@@ -20,18 +20,18 @@ jobs:
           with:
             fetch-depth: 0
 
+        - name: Run xcodebuild with tests
+          run: xcodebuild -project OmiseSDK.xcodeproj/ -scheme OmiseSDK -derivedDataPath Build/ -destination 'platform=iOS Simulator,name=iPhone 11,OS=16.2' -enableCodeCoverage YES clean build test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+        - name: Convert Xcode coverage to SonarCloud format
+          run: bash xccov-to-sonarqube-generic.sh build/Logs/Test/*.xcresult/ > sonarqube-generic-coverage.xml
+
         - name: Install sonar-scanner and build-wrapper
           uses: SonarSource/sonarcloud-github-c-cpp@v1
 
         - name: Run build-wrapper
           run: |
               build-wrapper-macosx-x86 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} xcodebuild
-
-        - name: Run xcodebuild with tests
-          run: xcodebuild -project OmiseSDK.xcodeproj/ -scheme OmiseSDK -derivedDataPath Build/ -destination 'platform=iOS Simulator,name=iPhone 11,OS=16.2' -enableCodeCoverage YES clean build test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
-
-        - name: Convert Xcode coverage to SonarCloud format
-          run: bash xccov-to-sonarqube-generic.sh build/Logs/Test/*.xcresult/ > coverage.xml
 
         - name: Run sonar-scanner
           env:
