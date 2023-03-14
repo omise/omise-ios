@@ -36,6 +36,9 @@ jobs:
           run: |
               build-wrapper-macosx-x86 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} xcodebuild clean build
 
+        - name: Dump build-wrapper
+          run: cat ./buildwrapper/build-wrapper-dump.json
+
         - name: Run sonar-scanner
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
