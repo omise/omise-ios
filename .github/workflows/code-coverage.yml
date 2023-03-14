@@ -40,6 +40,7 @@ jobs:
 #          run: cat ./buildwrapper/build-wrapper-dump.json
 
         - name: Run sonar-scanner
+          uses: SonarSource/sonarcloud-github-action@master
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Put the name of your token here
