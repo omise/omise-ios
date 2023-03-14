@@ -31,7 +31,7 @@ jobs:
 
         - name: Run build-wrapper
           run: |
-              build-wrapper-macosx-x86 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} xcodebuild
+              build-wrapper-macosx-x86 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} xcodebuild clean build
 
         - name: Run sonar-scanner
           env:
