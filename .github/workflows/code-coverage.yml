@@ -32,16 +32,17 @@ jobs:
         - name: Mark build directory as deletable
           run: xattr -w com.apple.xcode.CreatedByBuildSystem true ./build
 
-        - name: Run build-wrapper
-          run: |
-              build-wrapper-macosx-x86 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} xcodebuild clean build
-
-        - name: Dump build-wrapper
-          run: cat ./buildwrapper/build-wrapper-dump.json
+#        - name: Run build-wrapper
+#          run: |
+#              build-wrapper-macosx-x86 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} xcodebuild clean build
+#
+#        - name: Dump build-wrapper
+#          run: cat ./buildwrapper/build-wrapper-dump.json
 
         - name: Run sonar-scanner
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }} # Put the name of your token here
           run: |
-              sonar-scanner --define sonar.cfamily.build-wrapper-output="${{ env.BUILD_WRAPPER_OUT_DIR }}"
+              sonar-scanner
+#              sonar-scanner --define sonar.cfamily.build-wrapper-output="${{ env.BUILD_WRAPPER_OUT_DIR }}"
