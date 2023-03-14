@@ -26,11 +26,11 @@ jobs:
         - name: Convert Xcode coverage to SonarCloud format
           run: bash xccov-to-sonarqube-generic.sh build/Logs/Test/*.xcresult/ > sonarqube-generic-coverage.xml
 
-        - name: Delete build directory
-          run: rm -rf ./build
-
         - name: Install sonar-scanner and build-wrapper
           uses: SonarSource/sonarcloud-github-c-cpp@v1
+
+        - name: Mark build directory as deletable
+          run: xattr -w com.apple.xcode.CreatedByBuildSystem true ./build
 
         - name: Run build-wrapper
           run: |
