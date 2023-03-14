@@ -52,10 +52,8 @@ jobs:
           with:
             fetch-depth: 0
           
-        - uses: actions/download-artifact@master
-          with:
-            name: sonarqube-generic-coverage.xml
-            path: ./
+        - name: Download all workflow run artifacts
+          uses: actions/download-artifact@v3
             
         - name: Run sonar-scanner
           uses: SonarSource/sonarcloud-github-action@master
