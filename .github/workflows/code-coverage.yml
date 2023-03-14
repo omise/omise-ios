@@ -54,7 +54,10 @@ jobs:
           
         - name: Download all workflow run artifacts
           uses: actions/download-artifact@v3
-            
+          with:
+            name: sonarqube-generic-coverage.xml
+            path: ~/
+
         - name: Run sonar-scanner
           uses: SonarSource/sonarcloud-github-action@master
           env:
