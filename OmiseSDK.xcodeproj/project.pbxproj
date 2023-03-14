@@ -29,8 +29,6 @@
 		73F9BA4725E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4625E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift */; };
 		73F9BA4B25E6053700F55CA8 /* FPXFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */; };
 		8A01E48D21059EFF00D73FE6 /* SourcePaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01E48C21059EFF00D73FE6 /* SourcePaymentMethod.swift */; };
-		8A01F78120D8DB7C003FC11E /* OMSOmiseClientTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78020D8DB7C003FC11E /* OMSOmiseClientTestCase.m */; };
-		8A01F78920D8E101003FC11E /* OMSRequestDelegateDummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78820D8E101003FC11E /* OMSRequestDelegateDummy.m */; };
 		8A01F78B20D90EC5003FC11E /* Client+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */; };
 		8A01F78E20D91091003FC11E /* OMSTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78D20D91091003FC11E /* OMSTokenRequest.swift */; };
 		8A01F79120D91356003FC11E /* OMSSourceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F79020D91356003FC11E /* OMSSourceRequest.swift */; };
@@ -189,9 +187,6 @@
 		73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPXFormViewController.swift; sourceTree = "<group>"; };
 		8A00FEC21F1DE88600246078 /* README.md */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; tabWidth = 2; };
 		8A01E48C21059EFF00D73FE6 /* SourcePaymentMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcePaymentMethod.swift; sourceTree = "<group>"; };
-		8A01F78020D8DB7C003FC11E /* OMSOmiseClientTestCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSOmiseClientTestCase.m; sourceTree = "<group>"; };
-		8A01F78720D8E101003FC11E /* OMSRequestDelegateDummy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OMSRequestDelegateDummy.h; sourceTree = "<group>"; };
-		8A01F78820D8E101003FC11E /* OMSRequestDelegateDummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSRequestDelegateDummy.m; sourceTree = "<group>"; };
 		8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+ObjC.swift"; sourceTree = "<group>"; };
 		8A01F78D20D91091003FC11E /* OMSTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMSTokenRequest.swift; sourceTree = "<group>"; };
 		8A01F79020D91356003FC11E /* OMSSourceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMSSourceRequest.swift; sourceTree = "<group>"; };
@@ -380,16 +375,6 @@
 			path = "Old version";
 			sourceTree = "<group>";
 		};
-		8A01F78620D8E0EB003FC11E /* Objective-C */ = {
-			isa = PBXGroup;
-			children = (
-				8A01F78720D8E101003FC11E /* OMSRequestDelegateDummy.h */,
-				8A01F78020D8DB7C003FC11E /* OMSOmiseClientTestCase.m */,
-				8A01F78820D8E101003FC11E /* OMSRequestDelegateDummy.m */,
-			);
-			path = "Objective-C";
-			sourceTree = "<group>";
-		};
 		8A0927841D535548008D393F /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -545,7 +530,6 @@
 				225931561CE4745200841B86 /* SDKTestCase.swift */,
 				F615CBFB2615696100E1A2D9 /* Views */,
 				8A47173F20AAD6BA0022733A /* Compatability Suite */,
-				8A01F78620D8E0EB003FC11E /* Objective-C */,
 			);
 			path = OmiseSDKTests;
 			sourceTree = "<group>";
@@ -886,9 +870,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A01F78120D8DB7C003FC11E /* OMSOmiseClientTestCase.m in Sources */,
 				8A14C20B220AE241003F5B20 /* CapabilityOperationFixtureTests.swift in Sources */,
-				8A01F78920D8E101003FC11E /* OMSRequestDelegateDummy.m in Sources */,
 				8AFE10BB20B69B39008E741D /* ClientTestCase.swift in Sources */,
 				8A43454720DBAE76005C5C94 /* PANModelTestCase.swift in Sources */,
 				8A429E7B2109A3AE007C230F /* PaymentInformationTestCase.swift in Sources */,
