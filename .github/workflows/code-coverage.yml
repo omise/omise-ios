@@ -12,7 +12,7 @@ jobs:
 
       runs-on: macos-latest
       env:
-        BUILD_WRAPPER_OUT_DIR: build # Directory where build-wrapper output will be placed
+        BUILD_WRAPPER_OUT_DIR: ./ # Directory where build-wrapper output will be placed
 
       steps:
         - name: Checkout
