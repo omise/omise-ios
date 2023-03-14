@@ -26,11 +26,14 @@ jobs:
         - name: Convert Xcode coverage to SonarCloud format
           run: bash xccov-to-sonarqube-generic.sh build/Logs/Test/*.xcresult/ > sonarqube-generic-coverage.xml
 
-        - name: Install sonar-scanner and build-wrapper
-          uses: SonarSource/sonarcloud-github-c-cpp@v1
-
         - name: Mark build directory as deletable
           run: xattr -w com.apple.xcode.CreatedByBuildSystem true ./build
+          
+        - name: Upload coverage report
+          uses: actions/upload-artifact@v2
+          with:
+            path: sonarqube-generic-coverage.xml
+            retention-days: 5 # Artifact will be available only for 5 days.
 
 #        - name: Run build-wrapper
 #          run: |
@@ -38,7 +41,21 @@ jobs:
 #
 #        - name: Dump build-wrapper
 #          run: cat ./buildwrapper/build-wrapper-dump.json
-
+  
+  sonar-scan:    
+      name: Sonar scan
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+          
+        - uses: actions/download-artifact@master
+          with:
+            name: sonarqube-generic-coverage.xml
+            path: ./
+            
         - name: Run sonar-scanner
           uses: SonarSource/sonarcloud-github-action@master
           env:
