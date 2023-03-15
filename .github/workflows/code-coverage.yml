@@ -65,4 +65,4 @@ jobs:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Put the name of your token here
           with:
             args: >
-                -Dsonar.coverageReportPaths=/home/runner/work/omise-ios/omise-ios/sonarqube-generic-coverage.xml
+                -Dsonar.coverageReportPaths=/home/runner/work/omise-ios/omise-ios/artifact
