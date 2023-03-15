@@ -58,6 +58,9 @@ jobs:
         - name: Debug artifact current path
           run: pwd
 
+        - name: Debug artifact current path
+          run: ls -la /home/runner/work/omise-ios/omise-ios/artifact
+
         - name: Run sonar-scanner
           uses: SonarSource/sonarcloud-github-action@master
           env:
@@ -65,4 +68,4 @@ jobs:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Put the name of your token here
           with:
             args: >
-                -Dsonar.coverageReportPaths=/home/runner/work/omise-ios/omise-ios/artifact
+                -Dsonar.coverageReportPaths=/home/runner/work/omise-ios/omise-ios/artifact/sonarqube-generic-coverage.xml
