@@ -55,17 +55,8 @@ jobs:
         - name: Download all workflow run artifacts
           uses: actions/download-artifact@v3
 
-        - name: Debug artifact current path
-          run: pwd
-
-        - name: Debug artifact current path
-          run: ls -la /home/runner/work/omise-ios/omise-ios/artifact
-
         - name: Run sonar-scanner
           uses: SonarSource/sonarcloud-github-action@master
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Put the name of your token here
-          with:
-            args: >
-                -Dsonar.coverageReportPaths=/home/runner/work/omise-ios/omise-ios/artifact/sonarqube-generic-coverage.xml
