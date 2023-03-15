@@ -60,9 +60,7 @@ jobs:
 
         - name: Run sonar-scanner
           uses: SonarSource/sonarcloud-github-action@master
+          working-directory: /home/runner/work/omise-ios/omise-ios
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Put the name of your token here
-
-        - name: Debug sonar-scanner current path
-          run: pwd
