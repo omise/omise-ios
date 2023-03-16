@@ -9,11 +9,16 @@ function convert_xccov_to_xml {
       -e 's/^$/  <\/file>/p'
 }
 
+function trim_pwd {
+  local pwd_dir=`pwd`
+  sed "s|$pwd_dir|.|"
+}
+
 function xccov_to_generic {
   local xcresult="$1"
 
   echo '<coverage version="1">'
-  xcrun xccov view --archive "$xcresult" | convert_xccov_to_xml
+  xcrun xccov view --archive "$xcresult" | convert_xccov_to_xml | trim_pwd
   echo '</coverage>'
 }
 
