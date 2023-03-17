@@ -183,7 +183,7 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
                 errorLabel.text = NSLocalizedString(
                     "payment-creator.error.api.bad_request.invalid-email.message",
                     tableName: "Error",
-                    bundle: .module,
+                    bundle: .omiseSDK,
                     value: "Email is invalid",
                     comment: "An error text in the FPX form displayed when the email is invalid"
                 )

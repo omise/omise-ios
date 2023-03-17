@@ -8,7 +8,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
     private let defaultImage: String = "FPX/unknown"
     private let message = NSLocalizedString(
         "fpx.bank-chooser.no-banks-available.text",
-        bundle: .module,
+        bundle: .omiseSDK,
         value: "Cannot retrieve list of banks.\nPlease try again later.",
         comment: "A descriptive text telling the user when there's no banks available"
     )
@@ -102,10 +102,10 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
     }
 
     private func bankImage(bank: String) -> UIImage? {
-        if let image = UIImage(named: "FPX/" + bank, in: .module, compatibleWith: nil) {
+        if let image = UIImage(named: "FPX/" + bank, in: .omiseSDK, compatibleWith: nil) {
             return image
         } else {
-            return UIImage(named: defaultImage, in: .module, compatibleWith: nil)
+            return UIImage(named: defaultImage, in: .omiseSDK, compatibleWith: nil)
         }
     }
 

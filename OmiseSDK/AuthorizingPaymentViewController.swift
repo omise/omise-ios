@@ -84,7 +84,7 @@ public class AuthorizingPaymentViewController: UIViewController {
     /// - returns: A UINavigationController with `OmiseAuthorizingPaymentViewController` as its root view controller
     @objc(authorizingPaymentViewControllerNavigationWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
     public static func makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> UINavigationController {
-        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
+        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
         let navigationController = storyboard.instantiateViewController(
             withIdentifier: "DefaultAuthorizingPaymentViewControllerWithNavigation"
         ) as! UINavigationController // swiftlint:disable:this force_cast
@@ -120,7 +120,7 @@ public class AuthorizingPaymentViewController: UIViewController {
     /// - returns: An `OmiseAuthorizingPaymentViewController` with given authorized URL and delegate.
     @objc(authorizingPaymentViewControllerWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
     public static func makeAuthorizingPaymentViewControllerWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> AuthorizingPaymentViewController {
-        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
+        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
         let viewController = storyboard.instantiateViewController(
             withIdentifier: "DefaultAuthorizingPaymentViewController"
         ) as! AuthorizingPaymentViewController // swiftlint:disable:this force_cast

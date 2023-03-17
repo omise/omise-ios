@@ -230,7 +230,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
                 errorLabel.text = NSLocalizedString(
                     "econtext-info-form.full-name-field.invalid-data.error.text",
                     tableName: "Error",
-                    bundle: .module,
+                    bundle: .omiseSDK,
                     value: "Customer name is invalid",
                     comment: "An error text in the E-Context information input displayed when the customer name is invalid"
                 )
@@ -238,7 +238,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
                 errorLabel.text = NSLocalizedString(
                     "econtext-info-form.email-name-field.invalid-data.error.text",
                     tableName: "Error",
-                    bundle: .module,
+                    bundle: .omiseSDK,
                     value: "Email is invalid",
                     comment: "An error text in the E-Context information input displayed when the email is invalid"
                 )
@@ -246,7 +246,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
                 errorLabel.text = NSLocalizedString(
                     "econtext-info-form.phone-number-field.invalid-data.error.text",
                     tableName: "Error",
-                    bundle: .module,
+                    bundle: .omiseSDK,
                     value: "Phone number is invalid",
                     comment: "An error text in the E-Context information input displayed when the phone number is invalid"
                 )
