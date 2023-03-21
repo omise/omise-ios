@@ -375,8 +375,8 @@ extension Client {
 
 // MARK: - Constants
 extension Client {
-    static let version: String = {
-        return Bundle.module.infoDictionary?["CFBundleShortVersionString"] as? String ?? "(n/a)"
+    static let sdkVersion: String = {
+        return Bundle.omiseSDK.infoDictionary?["CFBundleShortVersionString"] as? String ?? "(n/a)"
     }()
     
     static let currentPlatform: String = ProcessInfo.processInfo.operatingSystemVersionString
@@ -392,7 +392,7 @@ extension Client {
     
     static var defaultUserAgent: String {
         return """
-        OmiseIOSSDK/\(version) \
+        OmiseIOSSDK/\(sdkVersion) \
         iOS/\(currentPlatform) \
         Apple/\(currentDevice)
         """ // OmiseIOSSDK/3.0.0 iOS/12.0.0 Apple/iPhone

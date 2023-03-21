@@ -87,7 +87,7 @@ public class AuthorizingPaymentViewController: UIViewController {
     @objc(authorizingPaymentViewControllerNavigationWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
     // swiftlint:disable:next attributes
     public static func makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> UINavigationController {
-        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
+        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
         let navigationController = storyboard.instantiateViewController(
             withIdentifier: "DefaultAuthorizingPaymentViewControllerWithNavigation"
         ) as! UINavigationController // swiftlint:disable:this force_cast
@@ -124,7 +124,7 @@ public class AuthorizingPaymentViewController: UIViewController {
     @objc(authorizingPaymentViewControllerWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
     // swiftlint:disable:next attributes
     public static func makeAuthorizingPaymentViewControllerWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> AuthorizingPaymentViewController {
-        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
+        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
         let viewController = storyboard.instantiateViewController(
             withIdentifier: "DefaultAuthorizingPaymentViewController"
         ) as! AuthorizingPaymentViewController // swiftlint:disable:this force_cast

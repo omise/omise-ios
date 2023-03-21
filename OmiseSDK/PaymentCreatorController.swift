@@ -118,7 +118,7 @@ public class PaymentCreatorController: UINavigationController {
 
     private var noticeViewHeightConstraint: NSLayoutConstraint!
     private let displayingNoticeView: NoticeView = {
-        let noticeViewNib = UINib(nibName: "NoticeView", bundle: .module)
+        let noticeViewNib = UINib(nibName: "NoticeView", bundle: .omiseSDK)
         let noticeView = noticeViewNib.instantiate(withOwner: nil, options: nil).first as! NoticeView // swiftlint:disable:this force_cast
         noticeView.translatesAutoresizingMaskIntoConstraints = false
         noticeView.backgroundColor = .error
@@ -147,7 +147,7 @@ public class PaymentCreatorController: UINavigationController {
         allowedPaymentMethods: [OMSSourceTypeValue],
         paymentDelegate: PaymentCreatorControllerDelegate?
     ) -> PaymentCreatorController {
-        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
+        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
         let paymentCreatorController = storyboard.instantiateViewController(
             withIdentifier: "PaymentCreatorController"
         ) as! PaymentCreatorController // swiftlint:disable:this force_cast
@@ -182,7 +182,7 @@ public class PaymentCreatorController: UINavigationController {
     }
 
     public init() {
-        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
+        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
         let viewController = storyboard.instantiateViewController(withIdentifier: "PaymentChooserController")
 
         guard let paymentChooserViewController = viewController as? PaymentChooserViewController else {

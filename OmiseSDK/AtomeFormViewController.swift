@@ -272,7 +272,7 @@ private extension AtomeFormViewController {
                 errorLabel.text = NSLocalizedString(
                     "atome-info-form.phone-number-field.invalid-data.error.text",
                     tableName: "Error",
-                    bundle: .module,
+                    bundle: .omiseSDK,
                     value: "Please enter valid phone number",
                     comment: "An error text in the Atome information input displayed when the phone number is invalid"
                 )
@@ -280,7 +280,7 @@ private extension AtomeFormViewController {
                 errorLabel.text = NSLocalizedString(
                     "atome-info-form.email-name-field.invalid-data.error.text",
                     tableName: "Error",
-                    bundle: .module,
+                    bundle: .omiseSDK,
                     value: "Email is invalid",
                     comment: "An error text in the Atome information input displayed when the email is invalid"
                 )
@@ -288,7 +288,7 @@ private extension AtomeFormViewController {
                 errorLabel.text = NSLocalizedString(
                     "atome-info-form.shipping-street-field.empty-text.error.text",
                     tableName: "Error",
-                    bundle: .module,
+                    bundle: .omiseSDK,
                     value: "Shipping street is required",
                     comment: "An error text in the Atome information input displayed when the shipping street is empty"
                 )
@@ -296,7 +296,7 @@ private extension AtomeFormViewController {
                 errorLabel.text = NSLocalizedString(
                     "atome-info-form.shipping-city-field.empty-text.error.text",
                     tableName: "Error",
-                    bundle: .module,
+                    bundle: .omiseSDK,
                     value: "Shipping city is required",
                     comment: "An error text in the Atome information input displayed when the shipping city is empty"
                 )
@@ -304,7 +304,7 @@ private extension AtomeFormViewController {
                 errorLabel.text = NSLocalizedString(
                     "atome-info-form.shipping-country-code-field.empty-text.error.text",
                     tableName: "Error",
-                    bundle: .module,
+                    bundle: .omiseSDK,
                     value: "Shipping country is required",
                     comment: "An error text in the Atome information input displayed when the shipping country is empty"
                 )
@@ -312,7 +312,7 @@ private extension AtomeFormViewController {
                 errorLabel.text = NSLocalizedString(
                     "atome-info-form.shipping-postal_code-field.empty-text.error.text",
                     tableName: "Error",
-                    bundle: .module,
+                    bundle: .omiseSDK,
                     value: "Shipping postal code is required",
                     comment: "An error text in the Atome information input displayed when the shipping postal code is empty"
                 )

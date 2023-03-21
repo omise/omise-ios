@@ -168,7 +168,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     @objc(creditCardFormViewControllerWithPublicKey:)
     // swiftlint:disable:next attributes
     public static func makeCreditCardFormViewController(withPublicKey publicKey: String) -> CreditCardFormViewController {
-        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
+        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
         // swiftlint:disable:next force_cast
         let creditCardForm = storyboard.instantiateInitialViewController() as! CreditCardFormViewController
         creditCardForm.publicKey = publicKey
@@ -588,7 +588,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         default:
             cardBrandIconName = nil
         }
-        cardBrandIconImageView.image = cardBrandIconName.flatMap { UIImage(named: $0, in: .module, compatibleWith: nil) }
+        cardBrandIconImageView.image = cardBrandIconName.flatMap { UIImage(named: $0, in: .omiseSDK, compatibleWith: nil) }
         cardNumberTextField.rightViewMode = cardBrandIconImageView.image != nil ? .always : .never
     }
     
@@ -665,7 +665,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             return NSLocalizedString(
                 "credit-card-form.card-number-field.invalid-data.error.text",
                 tableName: "Error",
-                bundle: .module,
+                bundle: .omiseSDK,
                 value: "Credit card number is invalid",
                 comment: "An error text displayed when the credit card number is invalid"
             )
@@ -673,7 +673,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             return NSLocalizedString(
                 "credit-card-form.card-holder-name-field.invalid-data.error.text",
                 tableName: "Error",
-                bundle: .module,
+                bundle: .omiseSDK,
                 value: "Card holder name is invalid",
                 comment: "An error text displayed when the card holder name is invalid"
             )
@@ -681,7 +681,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             return NSLocalizedString(
                 "credit-card-form.expiry-date-field.invalid-data.error.text",
                 tableName: "Error",
-                bundle: .module,
+                bundle: .omiseSDK,
                 value: "Card expiry date is invalid",
                 comment: "An error text displayed when the expiry date is invalid"
             )
@@ -689,7 +689,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             return NSLocalizedString(
                 "credit-card-form.security-code-field.invalid-data.error.text",
                 tableName: "Error",
-                bundle: .module,
+                bundle: .omiseSDK,
                 value: "CVV code is invalid",
                 comment: "An error text displayed when the security code is invalid"
             )

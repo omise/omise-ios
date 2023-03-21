@@ -170,7 +170,7 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
                 errorLabel.text = NSLocalizedString(
                     "truemoney-form.phone-number-field.invalid-data.error.text",
                     tableName: "Error",
-                    bundle: .module,
+                    bundle: .omiseSDK,
                     value: "Phone number is invalid",
                     comment: "An error text in the TrueMoney form displayed when the phone number is invalid"
                 )
