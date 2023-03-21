@@ -1,6 +1,7 @@
 import UIKit
 
 @objc(OMSFPXFormViewController)
+// swiftlint:disable:next attributes
 class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
 
     private let destinationSegue: String = "GoToFPXBankChooserSegue"
@@ -11,15 +12,11 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
     private var client: Client?
 
     private var isInputDataValid: Bool {
-        let valid = formFields.reduce(into: true) { (valid, field) in
-            valid = valid && field.isValid
-        }
-
-        return valid || isEmailInputEmpty
+        return formFields.allSatisfy { $0.isValid } || isEmailInputEmpty
     }
 
     private var isEmailInputEmpty: Bool {
-        return emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) == ""
+        return emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty ?? true
     }
 
     @IBInspectable var preferredPrimaryColor: UIColor? {
@@ -83,9 +80,8 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
         }
         submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
 
-        if  #available(iOS 11, *) {
+        if #unavailable(iOS 11) {
             // We'll leave the adjusting scroll view insets job for iOS 11 and later to the layoutMargins + safeAreaInsets here
-        } else {
             automaticallyAdjustsScrollViewInsets = true
         }
 
@@ -111,12 +107,12 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
-        if #available(iOS 11, *) {
+        if #unavailable(iOS 11) {
             // There's a bug in iOS 10 and earlier which the text field's intrinsicContentSize is returned the value
             // that doesn't take the result of textRect(forBounds:) method into an account for the initial value
             // So we need to invalidate the intrinsic content size here to ask those text fields to calculate their
             // intrinsic content size again
-        } else {
+
             formFields.forEach {
                 $0.invalidateIntrinsicContentSize()
             }

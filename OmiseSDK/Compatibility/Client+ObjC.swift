@@ -15,8 +15,9 @@ extension Client {
      - seealso: OmiseTokenRequest
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
-    @objc(sendTokenRequest:callback:) public
-    func __sendRequest(_ request: __OMSTokenRequest, callback: ((__OmiseToken?, NSError?) -> Void)?) {
+    @objc(sendTokenRequest:callback:)
+    // swiftlint:disable:next attributes
+    public func __sendRequest(_ request: __OMSTokenRequest, callback: ((__OmiseToken?, NSError?) -> Void)?) {
         self.send(request.request) { result in
             let token: __OmiseToken?
             let error: NSError?
@@ -42,8 +43,9 @@ extension Client {
      - seealso: OmiseTokenRequest
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
-    @objc(sendTokenRequest:delegate:) public
-    func __sendRequest(_ request: __OMSTokenRequest, delegate: OMSTokenRequestDelegate?) {
+    @objc(sendTokenRequest:delegate:)
+    // swiftlint:disable:next attributes
+    public func __sendRequest(_ request: __OMSTokenRequest, delegate: OMSTokenRequestDelegate?) {
         self.send(request.request) { result in
             switch result {
             case let .success(token):
@@ -57,15 +59,17 @@ extension Client {
     
     @available(*, deprecated, message: "Please use the new -[OMSClient sendTokenRequest:callback:] method",
     renamed: "sendTokenRequest(_:completionHandler:)")
-    @objc(sendRequest:callback:) public
-    func ___sendRequest(_ request: __OMSTokenRequest, callback: ((__OmiseToken?, NSError?) -> Void)?) {
+    @objc(sendRequest:callback:)
+    // swiftlint:disable:next attributes
+    public func ___sendRequest(_ request: __OMSTokenRequest, callback: ((__OmiseToken?, NSError?) -> Void)?) {
         self.__sendRequest(request, callback: callback)
     }
     
     @available(*, deprecated, message: "Please use the new -[OMSClient sendTokenRequest:callback:] method",
     renamed: "sendTokenRequest(_:completionHandler:)")
-    @objc(sendRequest:delegate:) public
-    func ___sendRequest(_ request: __OMSTokenRequest, delegate: OMSTokenRequestDelegate?) {
+    @objc(sendRequest:delegate:)
+    // swiftlint:disable:next attributes
+    public func ___sendRequest(_ request: __OMSTokenRequest, delegate: OMSTokenRequestDelegate?) {
         self.__sendRequest(request, delegate: delegate)
     }
     
@@ -76,8 +80,9 @@ extension Client {
      - seealso: OmiseTokenRequest
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
-    @objc(sendSourceRequest:callback:) public
-    func __sendRequest(_ request: __OMSSourceRequest, callback: ((__OmiseSource?, NSError?) -> Void)?) {
+    @objc(sendSourceRequest:callback:)
+    // swiftlint:disable:next attributes
+    public func __sendRequest(_ request: __OMSSourceRequest, callback: ((__OmiseSource?, NSError?) -> Void)?) {
         self.send(request.request) { result in
             let token: __OmiseSource?
             let error: NSError?
@@ -103,8 +108,9 @@ extension Client {
      - seealso: OmiseTokenRequest
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
-    @objc(sendSourceRequest:delegate:) public
-    func __sendRequest(_ request: __OMSSourceRequest, delegate: OMSSourceRequestDelegate?) {
+    @objc(sendSourceRequest:delegate:)
+    // swiftlint:disable:next attributes
+    public func __sendRequest(_ request: __OMSSourceRequest, delegate: OMSSourceRequestDelegate?) {
         self.send(request.request) { result in
             switch result {
             case let .success(token):
@@ -116,8 +122,9 @@ extension Client {
         }
     }
     
-    @objc(capabilityDataWithCompletionHandler:) public
-    func __capabilityDataWithCompletionHandler(_ completionHandler: ((__OmiseCapability?, NSError?) -> Void)?) {
+    @objc(capabilityDataWithCompletionHandler:)
+    // swiftlint:disable:next attributes
+    public func __capabilityDataWithCompletionHandler(_ completionHandler: ((__OmiseCapability?, NSError?) -> Void)?) {
         self.capabilityDataWithCompletionHandler { (result) in
             switch result {
             case .success(let capability):

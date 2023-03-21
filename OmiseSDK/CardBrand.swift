@@ -2,6 +2,7 @@ import Foundation
 
 /// Brand of the Card Network
 @objc(OMSCardBrand)
+// swiftlint:disable:next attributes
 public enum CardBrand: Int, CustomStringConvertible, Codable {
     
     /// VISA card newtwork brand

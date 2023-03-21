@@ -29,6 +29,7 @@ public protocol PaymentChooserUI: AnyObject {
 // swiftlint:disable type_body_length
 /// Drop-in UI flow controller that let user choose the payment method with the given payment options
 @objc(OMSPaymentCreatorController)
+// swiftlint:disable:next attributes
 public class PaymentCreatorController: UINavigationController {
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String? {
@@ -162,6 +163,7 @@ public class PaymentCreatorController: UINavigationController {
     /// Factory method for creating CreditCardFormController with given public key.
     /// - parameter publicKey: Omise public key.
     @objc(paymentCreatorControllerWithPublicKey:amount:currency:allowedPaymentMethods:paymentDelegate:)
+    // swiftlint:disable:next attributes
     public static func __makePaymentCreatorViewControllerWith( // swiftlint:disable:this identifier_name
         publicKey: String,
         amount: Int64,
@@ -255,6 +257,7 @@ public class PaymentCreatorController: UINavigationController {
     }
 
     @objc(applyPaymentMethodsFrom:)
+    // swiftlint:disable:next attributes
     public func __applyPaymentMethods(from capability: __OmiseCapability) { // swiftlint:disable:this identifier_name
         applyPaymentMethods(from: capability.capability)
     }

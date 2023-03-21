@@ -5,6 +5,7 @@ import os
 /// Delegate to receive authorizing payment events.
 @objc(OMSAuthorizingPaymentViewControllerDelegate)
 @available(iOSApplicationExtension, unavailable)
+// swiftlint:disable:next attributes
 public protocol AuthorizingPaymentViewControllerDelegate: AnyObject {
     /// A delegation method called when the authorizing payment process is completed.
     /// - parameter viewController: The authorizing payment controller that call this method.
@@ -49,6 +50,7 @@ public typealias OmiseAuthorizingPaymentViewControllerDelegate = AuthorizingPaym
  */
 @objc(OMSAuthorizingPaymentViewController)
 @available(iOSApplicationExtension, unavailable)
+// swiftlint:disable:next attributes
 public class AuthorizingPaymentViewController: UIViewController {
     /// Authorized URL given from Omise in the created `Charge` object.
     public var authorizedURL: URL? {
@@ -83,6 +85,7 @@ public class AuthorizingPaymentViewController: UIViewController {
     ///
     /// - returns: A UINavigationController with `OmiseAuthorizingPaymentViewController` as its root view controller
     @objc(authorizingPaymentViewControllerNavigationWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
+    // swiftlint:disable:next attributes
     public static func makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> UINavigationController {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
         let navigationController = storyboard.instantiateViewController(
@@ -102,7 +105,7 @@ public class AuthorizingPaymentViewController: UIViewController {
     message: "Please use the new method that confrom to Objective-C convention +[AuthorizingPaymentViewController authorizingPaymentViewControllerNavigationWithAuthorizedURL:expectedReturnURLPatterns:delegate:] as of this method will be removed in the future release.", // swiftlint:disable:this line_length
     renamed: "makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(_:expectedReturnURLPatterns:delegate:)")
     @objc(makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
-    // swiftlint:disable:next identifier_name
+    // swiftlint:disable:next identifier_name attributes
     public static func __makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> UINavigationController {
         return AuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(
             authorizedURL,
@@ -119,6 +122,7 @@ public class AuthorizingPaymentViewController: UIViewController {
     ///
     /// - returns: An `OmiseAuthorizingPaymentViewController` with given authorized URL and delegate.
     @objc(authorizingPaymentViewControllerWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
+    // swiftlint:disable:next attributes
     public static func makeAuthorizingPaymentViewControllerWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> AuthorizingPaymentViewController {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
         let viewController = storyboard.instantiateViewController(
@@ -135,7 +139,7 @@ public class AuthorizingPaymentViewController: UIViewController {
     message: "Please use the new method that confrom to Objective-C convention +[AuthorizingPaymentViewController authorizingPaymentViewControllernWithAuthorizedURL:expectedReturnURLPatterns:delegate:] as of this method will be removed in the future release.",  // swiftlint:disable:this line_length
     renamed: "makeAuthorizingPaymentViewControllerWithAuthorizedURL(_:expectedReturnURLPatterns:delegate:)")
     @objc(makeAuthorizingPaymentViewControllerWithAuthorizedURL:expectedReturnURLPatterns:delegate:)
-    // swiftlint:disable:next identifier_name
+    // swiftlint:disable:next identifier_name attributes
     public static func __makeAuthorizingPaymentViewControllerWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> AuthorizingPaymentViewController {
         return AuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerWithAuthorizedURL(
             authorizedURL,

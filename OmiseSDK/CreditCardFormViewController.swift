@@ -41,6 +41,7 @@ renamed: "OMSCreditCardFormViewControllerDelegate")
 @objc public protocol OMSCreditCardFormDelegate: OMSCreditCardFormViewControllerDelegate {}
 
 @objc
+// swiftlint:disable:next attributes
 public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
     /// Delegate method for receiving token data when card tokenization succeeds.
     /// - parameter token: `OmiseToken` instance created from supplied credit card data.
@@ -74,6 +75,7 @@ public typealias CreditCardFormController = CreditCardFormViewController
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.
 @objc(OMSCreditCardFormViewController)
+// swiftlint:disable:next attributes
 public class CreditCardFormViewController: UIViewController, PaymentChooserUI, PaymentFormUIController {
     
     /// Omise public key for calling tokenization API.
@@ -117,9 +119,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     private lazy var overlayTransitionDelegate = OverlayPanelTransitioningDelegate()
     
     var isInputDataValid: Bool {
-        return formFields.reduce(into: true) { (valid, field) in
-            valid = valid && field.isValid
-        }
+        return formFields.allSatisfy { $0.isValid }
     }
     
     var currentEditingTextField: OmiseTextField?
@@ -166,6 +166,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     /// Factory method for creating CreditCardFormController with given public key.
     /// - parameter publicKey: Omise public key.
     @objc(creditCardFormViewControllerWithPublicKey:)
+    // swiftlint:disable:next attributes
     public static func makeCreditCardFormViewController(withPublicKey publicKey: String) -> CreditCardFormViewController {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .module)
         // swiftlint:disable:next force_cast
@@ -196,6 +197,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     }
     
     @objc(setCreditCardInformationWithNumber:name:expirationMonth:expirationYear:)
+    // swiftlint:disable:next attributes
     public func __setCreditCardInformation(number: String, name: String, expirationMonth: Int, expirationYear: Int) { // swiftlint:disable:this identifier_name
         let month: Int?
         let year: Int?
@@ -287,9 +289,8 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         }
         confirmButton.titleLabel?.adjustsFontForContentSizeCategory = true
         
-        if  #available(iOS 11, *) {
+        if  #unavailable(iOS 11) {
             // We'll leave the adjusting scroll view insets job for iOS 11 and later to the layoutMargins + safeAreaInsets here
-        } else {
             automaticallyAdjustsScrollViewInsets = true
         }
         
@@ -314,12 +315,12 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     public override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        if #available(iOS 11, *) {
+        if #unavailable(iOS 11) {
             // There's a bug in iOS 10 and earlier which the text field's intrinsicContentSize is returned the value
             // that doesn't take the result of textRect(forBounds:) method into an account for the initial value
             // So we need to invalidate the intrinsic content size here to ask those text fields to calculate their
             // intrinsic content size again
-        } else {
+
             formFields.forEach {
                 $0.invalidateIntrinsicContentSize()
             }
