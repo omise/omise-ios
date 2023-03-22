@@ -49,7 +49,7 @@ jobs:
   sonar-scan:    
     name: Sonar scan
     runs-on: ubuntu-latest
-    needs: coverage
+    needs: test
     steps:
       - name: Checkout repository on branch
         uses: actions/checkout@v2
