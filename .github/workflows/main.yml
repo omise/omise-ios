@@ -1,17 +1,13 @@
 name: CI
 on:
+  workflow_dispatch:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+    types: [opened, synchronize, reopened]
+  
 jobs:
-  build:
-    runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Run xcodebuild with tests
-      run: xcodebuild test -quiet -scheme OmiseSDKTests -destination 'platform=iOS Simulator,name=iPhone 12,OS=latest' ENABLE_TESTABILITY=yes
-
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -20,3 +16,56 @@ jobs:
       uses: norio-nomura/action-swiftlint@3.2.1
       with:
         args: --strict
+
+  test:
+    runs-on: macos-latest
+    env:
+        BUILD_WRAPPER_OUT_DIR: buildwrapper # Directory where build-wrapper output will be placed
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Run xcodebuild with tests
+      run: xcodebuild -project OmiseSDK.xcodeproj/ -scheme OmiseSDK -derivedDataPath Build/ -destination 'platform=iOS Simulator,name=iPhone 11,OS=16.2' -enableCodeCoverage YES clean build test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+    - name: Convert Xcode coverage to SonarCloud format
+      run: bash xccov-to-sonarqube-generic.sh build/Logs/Test/*.xcresult/ > sonarqube-generic-coverage.xml
+
+    - name: Mark build directory as deletable
+      run: xattr -w com.apple.xcode.CreatedByBuildSystem true ./build
+          
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v2
+      with:
+        path: sonarqube-generic-coverage.xml
+        retention-days: 5 # Artifact will be available only for 5 days.
+
+#    - name: Run build-wrapper
+#      run: |
+#       build-wrapper-macosx-x86 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} xcodebuild clean build
+#
+#    - name: Dump build-wrapper
+#      run: cat ./buildwrapper/build-wrapper-dump.json
+  
+  sonar-scan:    
+    name: Sonar scan
+    runs-on: ubuntu-latest
+    needs: coverage
+    steps:
+      - name: Checkout repository on branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.HEAD_REF }}
+          fetch-depth: 0
+          
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v3
+
+      - name: Run sonar-scanner
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Put the name of your token here
+        with: 
+          args: >
+            -Dsonar.projectVersion=${{ github.run_id }}
+            -Dsonar.branch.name=${{ github.ref_name }}
