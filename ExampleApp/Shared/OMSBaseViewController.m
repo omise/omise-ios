@@ -20,7 +20,6 @@
     return self;
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -29,7 +28,7 @@
     self.navigationController.navigationBar.tintColor = nil;
     
     [self updateUIColors];
-    
+
     if ([[NSLocale.currentLocale objectForKey:NSLocaleCountryCode] isEqualToString:@"JP"]) {
         self.paymentAmount = Tool.japanPaymentAmount;
         self.paymentCurrencyCode = Tool.japanPaymentCurrency;
@@ -82,12 +81,22 @@
 #else
     modeChooserDefaultBackgroundColor = UIColor.whiteColor;
 #endif
-    
-    UIImage *emptyImage = [Tool imageWithSize:CGSizeMake(1, 1) color:modeChooserDefaultBackgroundColor];
-    [self.navigationController.navigationBar setBackgroundImage:emptyImage forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setBackgroundImage:emptyImage forBarMetrics:UIBarMetricsCompact];
-    self.navigationController.navigationBar.shadowImage = emptyImage;
-    
+
+    if (@available(iOS 15.0, *)) {
+        UINavigationBarAppearance *navigationBarAppearance = [UINavigationBarAppearance new];
+        [navigationBarAppearance configureWithOpaqueBackground];
+        navigationBarAppearance.titleTextAttributes = @{NSForegroundColorAttributeName: UIColor.labelColor};
+        self.navigationItem.scrollEdgeAppearance = navigationBarAppearance;
+        self.navigationItem.standardAppearance = navigationBarAppearance;
+        self.navigationItem.compactAppearance = navigationBarAppearance;
+
+    } else {
+        UIImage *emptyImage = [Tool imageWithSize:CGSizeMake(1, 1) color:modeChooserDefaultBackgroundColor];
+        [self.navigationController.navigationBar setBackgroundImage:emptyImage forBarMetrics:UIBarMetricsDefault];
+        [self.navigationController.navigationBar setBackgroundImage:emptyImage forBarMetrics:UIBarMetricsCompact];
+        self.navigationController.navigationBar.shadowImage = emptyImage;
+    }
+
     UIImage *selectedModeBackgroundImage = [Tool imageWithSize:CGSizeMake(1, 41) actions:^(CGContextRef _Nonnull context) {
         CGContextSetFillColorWithColor(context, modeChooserDefaultBackgroundColor.CGColor);
         CGContextFillRect(context, CGRectMake(0, 0, 1, 40));
