@@ -7,7 +7,6 @@
 
 @implementation OMSBaseViewController
 
-
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     self.usesCapabilityDataForPaymentMethods = YES;
@@ -67,7 +66,6 @@
     
     [self updateUIColors];
 }
-
 
 - (void)updateUIColors {
     UIColor *modeChooserDefaultBackgroundColor = nil;
