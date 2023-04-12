@@ -198,6 +198,10 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
     
     /// A localized message describing how one might recover from the failure.
     public var recoverySuggestion: String? {
+        enum CommonStrings: String {
+            case tryAgainLater = "Please try again later. If the same problem persists please contact customer support."
+        }
+
         let recoverySuggestionMessage: String?
         switch self {
         case .api(code: let errorCode, message: _, location: _):
@@ -232,7 +236,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
                     "error.unexpected.no-error-norresponse.recovery-suggestion",
                     tableName: "Error",
                     bundle: .omiseSDK,
-                    value: "Please try again later. If the same problem persists please contact customer support.",
+                    value: CommonStrings.tryAgainLater.rawValue,
                     comment: "A default descriptive suggestion message to recovery from the `No error nor response` error during the operation in the client which a merchant may show this message to their user"
                 )
             case .httpErrorWithNoData:
@@ -240,7 +244,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
                     "error.unexpected.http-error-with-no-data.recovery-suggestion",
                     tableName: "Error",
                     bundle: .omiseSDK,
-                    value: "Please try again later. If the same problem persists please contact customer support.",
+                    value: CommonStrings.tryAgainLater.rawValue,
                     comment: "A default descriptive suggestion message to recovery from the `No error data in the error response` error during the operation in the client which a merchant may show this message to their user"
                 )
             case .httpErrorResponseWithInvalidData:
@@ -248,7 +252,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
                     "error.unexpected.http-error-response-with-invalid-data.recovery-suggestion",
                     tableName: "Error",
                     bundle: .omiseSDK,
-                    value: "Please try again later. If the same problem persists please contact customer support.",
+                    value: CommonStrings.tryAgainLater.rawValue,
                     comment: "A default descriptive suggestion message to recovery from the `Invalid error data in the error response` error during the operation in the client which a merchant may show this message to their user"
                 )
             case .httpSuccessWithNoData:
@@ -256,7 +260,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
                     "error.unexpected.http-succeess-with-no-data.recovery-suggestion",
                     tableName: "Error",
                     bundle: .omiseSDK,
-                    value: "Please try again later. If the same problem persists please contact customer support.",
+                    value: CommonStrings.tryAgainLater.rawValue,
                     comment: "A default descriptive suggestion message to recovery from the `No data in the success response` error during the operation in the client which a merchant may show this message to their user"
                 )
             case .httpSuccessWithInvalidData:
@@ -264,7 +268,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
                     "error.unexpected.http-succeess-with-invalid-data.recovery-suggestion",
                     tableName: "Error",
                     bundle: .omiseSDK,
-                    value: "Please try again later. If the same problem persists please contact customer support.",
+                    value: CommonStrings.tryAgainLater.rawValue,
                     comment: "A default descriptive suggestion message to recovery from the `Invalid data in the success response` error during the operation in the client which a merchant may show this message to their user"
                 )
             case .unrecognizedHTTPStatusCode:
@@ -272,7 +276,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
                     "error.unexpected.unrecognized-HTTP-status-code.recovery-suggestion",
                     tableName: "Error",
                     bundle: .omiseSDK,
-                    value: "Please try again later. If the same problem persists please contact customer support.",
+                    value: CommonStrings.tryAgainLater.rawValue,
                     comment: "A default descriptive suggestion message to recovery from the `Unrecognized/unsupported HTTP status code` error during the operation in the client which a merchant may show this message to their user"
                 )
             case .other:
@@ -483,7 +487,7 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
         static let nameIsTooLong: NSRegularExpression! = try? NSRegularExpression(pattern: "name is too long \\(maximum is ([\\d]+) characters\\)", options: [])
     }
     
-    // swiftlint:disable cyclomatic_complexity
+    // swiftlint:disable:next cyclomatic_complexity
     init(message: String, currency: Currency?) throws {
         if message.hasPrefix("amount must be ") {
             if let lessThanValidAmountMatch = ErrorMessageRegularExpression.amountLessThanValidAmount
@@ -804,7 +808,7 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
         return preferredRecoverySuggestionMessage.isEmpty ? nil : preferredRecoverySuggestionMessage
     }
     
-    // swiftlint:disable function_body_length
+    // swiftlint:disable:next function_body_length
     static func parseBadRequestReasonsFromMessage(_ message: String, currency: Currency?) throws -> [OmiseError.APIErrorCode.BadRequestReason] {
         let reasonMessages = message.components(separatedBy: ", and ")
             .flatMap { $0.components(separatedBy: ", ") }
@@ -813,7 +817,7 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
             try OmiseError.APIErrorCode.BadRequestReason(message: $0, currency: currency)
         })
         
-        // swiftlint:disable closure_body_length
+        // swiftlint:disable:next closure_body_length
         return parsedReasons.sorted {
             switch $0 {
             case .amountIsLessThanValidAmount:
@@ -894,5 +898,5 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
             }
         }
     }
-    
+    // swiftlint:enable line_length
 }

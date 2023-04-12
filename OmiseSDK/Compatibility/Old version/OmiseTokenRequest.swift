@@ -109,3 +109,4 @@ public class OmiseTokenRequest: NSObject {
         }
     }
 }
+// swiftlint:enable line_length

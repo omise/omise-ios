@@ -1,4 +1,3 @@
-// swiftlint:disable identifier_name
 import Foundation
 
 extension Client {
@@ -16,7 +15,7 @@ extension Client {
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
     @objc(sendTokenRequest:callback:)
-    // swiftlint:disable:next attributes
+    // swiftlint:disable:next attributes identifier_name
     public func __sendRequest(_ request: __OMSTokenRequest, callback: ((__OmiseToken?, NSError?) -> Void)?) {
         self.send(request.request) { result in
             let token: __OmiseToken?
@@ -44,7 +43,7 @@ extension Client {
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
     @objc(sendTokenRequest:delegate:)
-    // swiftlint:disable:next attributes
+    // swiftlint:disable:next attributes identifier_name
     public func __sendRequest(_ request: __OMSTokenRequest, delegate: OMSTokenRequestDelegate?) {
         self.send(request.request) { result in
             switch result {
@@ -60,7 +59,7 @@ extension Client {
     @available(*, deprecated, message: "Please use the new -[OMSClient sendTokenRequest:callback:] method",
     renamed: "sendTokenRequest(_:completionHandler:)")
     @objc(sendRequest:callback:)
-    // swiftlint:disable:next attributes
+    // swiftlint:disable:next attributes identifier_name
     public func ___sendRequest(_ request: __OMSTokenRequest, callback: ((__OmiseToken?, NSError?) -> Void)?) {
         self.__sendRequest(request, callback: callback)
     }
@@ -68,7 +67,7 @@ extension Client {
     @available(*, deprecated, message: "Please use the new -[OMSClient sendTokenRequest:callback:] method",
     renamed: "sendTokenRequest(_:completionHandler:)")
     @objc(sendRequest:delegate:)
-    // swiftlint:disable:next attributes
+    // swiftlint:disable:next attributes identifier_name
     public func ___sendRequest(_ request: __OMSTokenRequest, delegate: OMSTokenRequestDelegate?) {
         self.__sendRequest(request, delegate: delegate)
     }
@@ -81,7 +80,7 @@ extension Client {
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
     @objc(sendSourceRequest:callback:)
-    // swiftlint:disable:next attributes
+    // swiftlint:disable:next attributes identifier_name
     public func __sendRequest(_ request: __OMSSourceRequest, callback: ((__OmiseSource?, NSError?) -> Void)?) {
         self.send(request.request) { result in
             let token: __OmiseSource?
@@ -109,7 +108,7 @@ extension Client {
      - seealso: [Tokens API](https://www.omise.co/tokens-api)
      */
     @objc(sendSourceRequest:delegate:)
-    // swiftlint:disable:next attributes
+    // swiftlint:disable:next attributes identifier_name
     public func __sendRequest(_ request: __OMSSourceRequest, delegate: OMSSourceRequestDelegate?) {
         self.send(request.request) { result in
             switch result {
@@ -123,7 +122,7 @@ extension Client {
     }
     
     @objc(capabilityDataWithCompletionHandler:)
-    // swiftlint:disable:next attributes
+    // swiftlint:disable:next attributes identifier_name
     public func __capabilityDataWithCompletionHandler(_ completionHandler: ((__OmiseCapability?, NSError?) -> Void)?) {
         self.capabilityDataWithCompletionHandler { (result) in
             switch result {

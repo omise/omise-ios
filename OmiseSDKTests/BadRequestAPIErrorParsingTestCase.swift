@@ -1,9 +1,9 @@
 import XCTest
 @testable import OmiseSDK
 
-// swiftlint:disable function_body_length
 class BadRequestAPIErrorParsingTestCase: XCTestCase {
     
+    // swiftlint:disable:next function_body_length
     func testParseInvalidAmount() throws {
         do {
             let errorJSONString = """
@@ -67,6 +67,7 @@ class BadRequestAPIErrorParsingTestCase: XCTestCase {
         }
     }
     
+    // swiftlint:disable:next function_body_length
     func testParseInvalidEContextCustomerInformation() throws {
         do {
             let errorJSONString = """
@@ -145,6 +146,7 @@ class BadRequestAPIErrorParsingTestCase: XCTestCase {
         }
     }
     
+    // swiftlint:disable:next function_body_length
     func testParseBadRequestParameters() throws {
         do {
             let errorJSONString = """

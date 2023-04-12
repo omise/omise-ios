@@ -83,7 +83,7 @@ class PANModelTestCase: XCTestCase {
         }
     }
     
-    // swiftlint:disable function_body_length
+    // swiftlint:disable:next function_body_length
     func testBrandChecking() {
         do {
             let pan = PAN("4242424242424242")

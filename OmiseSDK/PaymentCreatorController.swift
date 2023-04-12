@@ -26,11 +26,16 @@ public protocol PaymentChooserUI: AnyObject {
     var preferredSecondaryColor: UIColor? { get set }
 }
 
-// swiftlint:disable type_body_length
 /// Drop-in UI flow controller that let user choose the payment method with the given payment options
 @objc(OMSPaymentCreatorController)
-// swiftlint:disable:next attributes
+// swiftlint:disable:next attributes type_body_length
 public class PaymentCreatorController: UINavigationController {
+
+    enum PreconditionFailures: String {
+        case paymentChooserViewcontrollerAsRoot =
+                "This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller"
+    }
+
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String? {
         didSet {
@@ -187,7 +192,7 @@ public class PaymentCreatorController: UINavigationController {
 
         guard let paymentChooserViewController = viewController as? PaymentChooserViewController else {
             preconditionFailure(
-                "This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller"
+                PreconditionFailures.paymentChooserViewcontrollerAsRoot.rawValue
             )
         }
 
@@ -200,7 +205,7 @@ public class PaymentCreatorController: UINavigationController {
     public override init(rootViewController: UIViewController) {
         guard let rootViewController = rootViewController as? PaymentChooserViewController else {
             preconditionFailure(
-                "This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller"
+                PreconditionFailures.paymentChooserViewcontrollerAsRoot.rawValue
             )
         }
         super.init(rootViewController: rootViewController)
@@ -213,7 +218,7 @@ public class PaymentCreatorController: UINavigationController {
 
         guard let rootViewController = topViewController as? PaymentChooserViewController else {
             preconditionFailure(
-                "This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller"
+                PreconditionFailures.paymentChooserViewcontrollerAsRoot.rawValue
             )
             return nil
         }
@@ -225,7 +230,7 @@ public class PaymentCreatorController: UINavigationController {
 
         guard let rootViewController = topViewController as? PaymentChooserViewController else {
             preconditionFailure(
-                "This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller"
+                PreconditionFailures.paymentChooserViewcontrollerAsRoot.rawValue
             )
         }
         initializeWithPaymentChooserViewController(rootViewController)
@@ -236,7 +241,7 @@ public class PaymentCreatorController: UINavigationController {
 
         guard let rootViewController = topViewController as? PaymentChooserViewController else {
             preconditionFailure(
-                "This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller"
+                PreconditionFailures.paymentChooserViewcontrollerAsRoot.rawValue
             )
         }
         initializeWithPaymentChooserViewController(rootViewController)
@@ -246,7 +251,7 @@ public class PaymentCreatorController: UINavigationController {
         willSet {
             if !(viewControllers.first is PaymentChooserViewController) {
                 preconditionFailure(
-                    "This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller"
+                    PreconditionFailures.paymentChooserViewcontrollerAsRoot.rawValue
                 )
             }
         }
@@ -391,7 +396,7 @@ public class PaymentCreatorController: UINavigationController {
     }
 
     // need to refactor loadView, removing super results in crash
-    // swiftlint:disable prohibited_super_call
+    // swiftlint:disable:next prohibited_super_call
     public override func loadView() {
         super.loadView()
 

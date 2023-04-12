@@ -165,7 +165,11 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
         }
     }
     
-    private func applyPrimaryColor() {}
+    private func applyPrimaryColor() {
+        // Intentionally empty (SonarCloud warning fix)
+    }
     
-    private func applySecondaryColor() {}
+    private func applySecondaryColor() {
+        // Intentionally empty (SonarCloud warning fix)
+    }
 }

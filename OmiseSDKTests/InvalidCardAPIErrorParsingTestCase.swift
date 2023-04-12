@@ -1,7 +1,6 @@
 import XCTest
 @testable import OmiseSDK
 
-// swiftlint:disable function_body_length
 class InvalidCardAPIErrorParsingTestCase: XCTestCase {
 
     func testParseInvalidCardNumber() throws {
@@ -65,6 +64,7 @@ class InvalidCardAPIErrorParsingTestCase: XCTestCase {
         }
     }
     
+    // swiftlint:disable:next function_body_length
     func testParseInvalidExpirationDate() throws {
         do {
             let errorJSONString = """
@@ -143,6 +143,8 @@ class InvalidCardAPIErrorParsingTestCase: XCTestCase {
         }
     }
     
+    // swiftlint:disable line_length
+    // swiftlint:disable:next function_body_length
     func testParseErrorWithMultipleReasons() throws {
         do {
             let errorJSONString = """
@@ -183,7 +185,6 @@ class InvalidCardAPIErrorParsingTestCase: XCTestCase {
         }
         
         do {
-            // swiftlint:disable line_length
             let errorJSONString = """
                 {
                   "object": "error",
@@ -221,5 +222,5 @@ class InvalidCardAPIErrorParsingTestCase: XCTestCase {
             }
         }
     }
-
+    // swiftlint:enable line_length
 }

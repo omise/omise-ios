@@ -91,7 +91,7 @@ extension Capability {
         }
 
         public struct Bank: Codable, Equatable {
-            // swiftlint:disable nesting
+            // swiftlint:disable:next nesting
             enum CodingKeys: String, CodingKey {
                 case name, code
                 case isActive = "active"
@@ -125,8 +125,8 @@ extension Capability.Backend {
     }
 }
 
-// swiftlint:disable function_body_length
 extension Capability.Backend.Payment {
+    // swiftlint:disable:next function_body_length
     public static func == (lhs: Capability.Backend.Payment, rhs: Capability.Backend.Payment) -> Bool {
         switch (lhs, rhs) {
         case (.card, .card), (.alipay, .alipay), (.alipayCN, .alipayCN), (.alipayHK, .alipayHK):
@@ -220,7 +220,7 @@ extension Capability {
 }
 
 extension Capability.Backend {
-    // swiftlint:disable function_body_length
+    // swiftlint:disable:next function_body_length
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
@@ -325,7 +325,7 @@ extension Capability.Backend {
         case .unknownSource(_, configurations: let configurations):
             try encoder.encodeJSONDictionary(configurations)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
-        // swiftlint:disable line_length
+        // swiftlint:disable:next line_length
         case .internetBanking, .alipay, .alipayCN, .alipayHK, .atome, .dana, .gcash, .kakaoPay, .touchNGoAlipayPlus, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .grabPay, .grabPayRms, .boost, .shopeePay, .shopeePayJumpApp, .maybankQRPay, .duitNowQR, .duitNowOBW, .payPay:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
@@ -361,6 +361,7 @@ extension Capability.Backend {
             try container.encode(type)
         }
 
+        // swiftlint:disable:next function_body_length
         init(payment: Capability.Backend.Payment) {
             switch payment {
             case .card:

@@ -1,13 +1,24 @@
 import UIKit
 import os
 
+// swiftlint:disable file_length
 @objc(OMSSDKClient) public class Client: NSObject {
     let session: URLSession
     let queue: OperationQueue
     let publicKey: String
     
     var userAgent: String?
-    
+
+    enum HTTPHeaders: String {
+        case authorization = "Authorization"
+        case userAgent = "User-Agent"
+        case contentType = "Content-Type"
+        case omiseVersion = "Omise-Version"
+    }
+
+    struct HTTPHeaderss {
+        let authorization = "Authorization"
+    }
     /// Initializes a new Client with the given Public Key and Operating OperationQueue
     ///
     /// - Parameters:
@@ -69,7 +80,7 @@ import os
         return task
     }
     
-    // swiftlint:disable function_body_length
+    // swiftlint:disable:next function_body_length
     public func capabilityDataWithCompletionHandler(_ completionHandler: ((RequestResult<Capability>) -> Void)?) {
         // swiftlint:disable:next closure_body_length
         let dataTask = session.dataTask(with: buildCapabilityAPIURLRequest()) { (data, response, error) in
@@ -258,30 +269,30 @@ extension Client {
         urlRequest.httpMethod = "POST"
         let encoder = Client.makeJSONEncoder()
         urlRequest.httpBody = try? encoder.encode(request.parameter)
-        urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
-        urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: "User-Agent")
-        urlRequest.setValue(Client.omiseAPIContentType, forHTTPHeaderField: "Content-Type")
-        urlRequest.setValue(Client.omiseAPIVersion, forHTTPHeaderField: "Omise-Version")
+        urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: HTTPHeaders.authorization.rawValue)
+        urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: HTTPHeaders.userAgent.rawValue)
+        urlRequest.setValue(Client.omiseAPIContentType, forHTTPHeaderField: HTTPHeaders.contentType.rawValue)
+        urlRequest.setValue(Client.omiseAPIVersion, forHTTPHeaderField: HTTPHeaders.omiseVersion.rawValue)
         return urlRequest
     }
     
     private func buildCapabilityAPIURLRequest() -> URLRequest {
         var urlRequest = URLRequest(url: Configuration.default.environment.capabilityURL)
         urlRequest.httpMethod = "GET"
-        urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
-        urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: "User-Agent")
-        urlRequest.setValue(Client.omiseAPIContentType, forHTTPHeaderField: "Content-Type")
-        urlRequest.setValue(Client.omiseAPIVersion, forHTTPHeaderField: "Omise-Version")
+        urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: HTTPHeaders.authorization.rawValue)
+        urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: HTTPHeaders.userAgent.rawValue)
+        urlRequest.setValue(Client.omiseAPIContentType, forHTTPHeaderField: HTTPHeaders.contentType.rawValue)
+        urlRequest.setValue(Client.omiseAPIVersion, forHTTPHeaderField: HTTPHeaders.omiseVersion.rawValue)
         return urlRequest
     }
 
     private func buildRetrieveTokenURLRequest(from tokenID: String) -> URLRequest {
         var urlRequest = URLRequest(url: Configuration.default.environment.tokenURL.appendingPathComponent(tokenID))
         urlRequest.httpMethod = "GET"
-        urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: "Authorization")
-        urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: "User-Agent")
-        urlRequest.setValue(Client.omiseAPIContentType, forHTTPHeaderField: "Content-Type")
-        urlRequest.setValue(Client.omiseAPIVersion, forHTTPHeaderField: "Omise-Version")
+        urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: HTTPHeaders.authorization.rawValue)
+        urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: HTTPHeaders.userAgent.rawValue)
+        urlRequest.setValue(Client.omiseAPIContentType, forHTTPHeaderField: HTTPHeaders.contentType.rawValue)
+        urlRequest.setValue(Client.omiseAPIVersion, forHTTPHeaderField: HTTPHeaders.omiseVersion.rawValue)
         return urlRequest
     }
     
@@ -305,9 +316,10 @@ extension Client {
         decoder.dateDecodingStrategy = .formatted(Client.jsonDateFormatter)
         return decoder
     }
-    
+
+    // swiftlint:disable:next function_body_length
     private static func completeRequest<T: Object>(_ request: Request<T>, callback: Request<T>.Callback?) -> ((Data?, URLResponse?, Error?) -> Void) {
-        // swiftlint:disable closure_body_length
+        // swiftlint:disable:next closure_body_length
         return { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             guard let callback = callback else { return } // nobody around to hear the leaf falls
             

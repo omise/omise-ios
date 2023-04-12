@@ -12,9 +12,9 @@ func ~=<T: PaymentMethod>(methodType: T.Type, type: String) -> Bool {
     return type.hasPrefix(methodType.paymentMethodTypePrefix)
 }
 
-// swiftlint:disable type_body_length
 /// Represents the payment information of a Source
 public enum PaymentInformation: Codable, Equatable {
+// swiftlint:disable:previous type_body_length
 
     /// The code of the bank for the Internet Bankning Payment
     public enum InternetBanking: PaymentMethod {
@@ -391,7 +391,7 @@ public enum PaymentInformation: Codable, Equatable {
         case type
     }
 
-    // swiftlint:disable function_body_length
+    // swiftlint:disable:next function_body_length
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let typeValue = try container.decode(String.self, forKey: .type)
@@ -469,6 +469,7 @@ public enum PaymentInformation: Codable, Equatable {
         }
     }
 
+    // swiftlint:disable:next function_body_length
     public func encode(to encoder: Encoder) throws {
         switch self {
         case .internetBanking(let value):
@@ -563,6 +564,7 @@ public enum PaymentInformation: Codable, Equatable {
         }
     }
 
+    // swiftlint:disable:next function_body_length
     public static func == (lhs: PaymentInformation, rhs: PaymentInformation) -> Bool {
         switch (lhs, rhs) {
         case (.internetBanking(let lhsValue), .internetBanking(let rhsValue)):

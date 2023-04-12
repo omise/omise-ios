@@ -47,7 +47,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
     
     // need to refactor loadView, removing super results in crash
-    // swiftlint:disable prohibited_super_call
+    // swiftlint:disable:next prohibited_super_call
     override func loadView() {
         super.loadView()
         

@@ -12,14 +12,15 @@ enum Environment {
         }
     }
     
-    // swiftlint:disable force_unwrapping
     private var apiBaseURL: URL {
         switch self {
         case .staging: return URL(string: "[STAGING_URL]")!
         case .production: return URL(string: "https://api.omise.co")!
         }
     }
-    
+
+    // swiftlint:enable force_unwrapping
+
     var tokenURL: URL {
         return vaultBaseURL.appendingPathComponent("tokens")
     }
@@ -36,7 +37,9 @@ enum Environment {
 struct Configuration {
     static let `default` = Configuration()
     
-    private init() {}
+    private init() {
+        // Intentionally empty (SonarCloud warning fix)
+    }
     
     var environment: Environment {
         if let configuration = Bundle.main.object(forInfoDictionaryKey: "Configuration") as? String {
