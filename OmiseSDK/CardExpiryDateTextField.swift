@@ -186,7 +186,7 @@ import UIKit
         super.replace(range, withText: text)
     }
 
-    // swiftlint:disable cyclomatic_complexity function_body_length
+    // swiftlint:disable:next cyclomatic_complexity function_body_length
     public override func paste(_ sender: Any?) {
         let pasteboard = UIPasteboard.general
         

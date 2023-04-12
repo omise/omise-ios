@@ -487,7 +487,7 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
         static let nameIsTooLong: NSRegularExpression! = try? NSRegularExpression(pattern: "name is too long \\(maximum is ([\\d]+) characters\\)", options: [])
     }
     
-    // swiftlint:disable cyclomatic_complexity
+    // swiftlint:disable:next cyclomatic_complexity
     init(message: String, currency: Currency?) throws {
         if message.hasPrefix("amount must be ") {
             if let lessThanValidAmountMatch = ErrorMessageRegularExpression.amountLessThanValidAmount
@@ -808,7 +808,7 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
         return preferredRecoverySuggestionMessage.isEmpty ? nil : preferredRecoverySuggestionMessage
     }
     
-    // swiftlint:disable function_body_length
+    // swiftlint:disable:next function_body_length
     static func parseBadRequestReasonsFromMessage(_ message: String, currency: Currency?) throws -> [OmiseError.APIErrorCode.BadRequestReason] {
         let reasonMessages = message.components(separatedBy: ", and ")
             .flatMap { $0.components(separatedBy: ", ") }
@@ -817,7 +817,7 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
             try OmiseError.APIErrorCode.BadRequestReason(message: $0, currency: currency)
         })
         
-        // swiftlint:disable closure_body_length
+        // swiftlint:disable:next closure_body_length
         return parsedReasons.sorted {
             switch $0 {
             case .amountIsLessThanValidAmount:
@@ -898,5 +898,5 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
             }
         }
     }
-    
+    // swiftlint:enable line_length
 }

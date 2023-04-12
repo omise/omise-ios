@@ -26,10 +26,9 @@ public protocol PaymentChooserUI: AnyObject {
     var preferredSecondaryColor: UIColor? { get set }
 }
 
-// swiftlint:disable type_body_length
 /// Drop-in UI flow controller that let user choose the payment method with the given payment options
 @objc(OMSPaymentCreatorController)
-// swiftlint:disable:next attributes
+// swiftlint:disable:next attributes type_body_length
 public class PaymentCreatorController: UINavigationController {
 
     enum PreconditionFailures: String {
@@ -397,7 +396,7 @@ public class PaymentCreatorController: UINavigationController {
     }
 
     // need to refactor loadView, removing super results in crash
-    // swiftlint:disable prohibited_super_call
+    // swiftlint:disable:next prohibited_super_call
     public override func loadView() {
         super.loadView()
 

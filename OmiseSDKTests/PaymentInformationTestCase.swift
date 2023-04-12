@@ -2,7 +2,8 @@
 import XCTest
 @testable import OmiseSDK
 
-// swiftlint:disable type_body_length function_body_length
+// swiftlint:disable function_body_length
+// swiftlint:disable:next type_body_length
 class PaymentInformationTestCase: XCTestCase {
 
     static func makeJSONEncoder() -> JSONEncoder {
@@ -814,3 +815,4 @@ class PaymentInformationTestCase: XCTestCase {
     }
 
 }
+// swiftlint:enable function_body_length

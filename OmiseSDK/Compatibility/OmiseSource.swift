@@ -440,7 +440,7 @@ public class __CustomSourcePayment: __SourcePaymentInformation {
 }
 
 extension PaymentInformation {
-    // swiftlint:disable function_body_length
+    // swiftlint:disable:next function_body_length
     init(from paymentInformation: __SourcePaymentInformation) {
         switch paymentInformation {
         case let value as __SourceInternetBankingPayment:
@@ -534,7 +534,7 @@ extension PaymentInformation {
 }
 
 extension __SourcePaymentInformation {
-    // swiftlint:disable function_body_length
+    // swiftlint:disable:next function_body_length
     static func makeSourcePaymentInformation(from paymentInformation: PaymentInformation) -> __SourcePaymentInformation {
         switch paymentInformation {
         case .alipay:
@@ -636,7 +636,7 @@ extension __SourcePaymentInformation {
             
         case .duitNowQR:
             return __SourcePaymentInformation.duitNowQRPayment
-        
+
         case .payPay:
             return __SourcePaymentInformation.paypayPayment
             
@@ -677,4 +677,6 @@ extension __SourcePaymentInformation {
             return __CustomSourcePayment(customType: type, parameters: parameters)
         }
     }
+
+    // swiftlint:enable type_name force_unwrapping
 }

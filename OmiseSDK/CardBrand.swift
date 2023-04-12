@@ -128,12 +128,14 @@ public enum CardBrand: Int, CustomStringConvertible, Codable {
     }
 }
 
-// swiftlint:disable identifier_name type_name
+// swiftlint:disable:next type_name
 @objc(OMSCardBrandHelper) public final class __OMSCardBrand: NSObject {
+    // swiftlint:disable:next identifier_name
     @objc(patternForBrand:) public static func __patternForBrand(brand: CardBrand) -> String {
         return brand.pattern
     }
     
+    // swiftlint:disable:next identifier_name
     @objc(validLengthsForBrand:) public static func __validLengthsForBrand(brand: CardBrand) -> NSRange {
         let range = brand.validLengths
         

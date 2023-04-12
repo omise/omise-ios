@@ -3,7 +3,7 @@ import XCTest
 
 class CapabilityOperationFixtureTests: XCTestCase {
 
-    // swiftlint:disable function_body_length
+    // swiftlint:disable:next function_body_length
     func testCapabilityRetrieve() {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
 

@@ -80,7 +80,7 @@ import os
         return task
     }
     
-    // swiftlint:disable function_body_length
+    // swiftlint:disable:next function_body_length
     public func capabilityDataWithCompletionHandler(_ completionHandler: ((RequestResult<Capability>) -> Void)?) {
         // swiftlint:disable:next closure_body_length
         let dataTask = session.dataTask(with: buildCapabilityAPIURLRequest()) { (data, response, error) in
@@ -316,9 +316,10 @@ extension Client {
         decoder.dateDecodingStrategy = .formatted(Client.jsonDateFormatter)
         return decoder
     }
-    
+
+    // swiftlint:disable:next function_body_length
     private static func completeRequest<T: Object>(_ request: Request<T>, callback: Request<T>.Callback?) -> ((Data?, URLResponse?, Error?) -> Void) {
-        // swiftlint:disable closure_body_length
+        // swiftlint:disable:next closure_body_length
         return { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             guard let callback = callback else { return } // nobody around to hear the leaf falls
             

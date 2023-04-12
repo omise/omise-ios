@@ -71,13 +71,12 @@ public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
 @available(*, deprecated, renamed: "CreditCardFormViewController")
 public typealias CreditCardFormController = CreditCardFormViewController
 
-// swiftlint:disable type_body_length
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.
 @objc(OMSCreditCardFormViewController)
-// swiftlint:disable:next attributes
 public class CreditCardFormViewController: UIViewController, PaymentChooserUI, PaymentFormUIController {
-    
+// swiftlint:disable:previous attributes type_body_length
+
     /// Omise public key for calling tokenization API.
     @objc public var publicKey: String?
     
@@ -224,7 +223,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     }
     
     // need to refactor loadView, removing super results in crash
-    // swiftlint:disable prohibited_super_call
+    // swiftlint:disable:next prohibited_super_call
     public override func loadView() {
         super.loadView()
         
@@ -752,7 +751,7 @@ extension CreditCardFormViewController {
         updateSupplementaryUI()
     }
     
-    // swiftlint:disable function_body_length
+    // swiftlint:disable:next function_body_length
     private func configureAccessibility() {
         formLabels.forEach {
             $0.adjustsFontForContentSizeCategory = true
@@ -769,7 +768,8 @@ extension CreditCardFormViewController {
             expiryDateTextField,
             secureCodeTextField
         ] as [OmiseTextField]
-        
+
+        // swiftlint:disable:next function_body_length
         func accessiblityElementAfter(
             _ element: NSObjectProtocol?,
             matchingPredicate predicate: (OmiseTextField) -> Bool,

@@ -317,4 +317,6 @@ extension UIColor {
         return defaultSuccess
         #endif
     }()
+
+// swiftlint:enable discouraged_object_literal
 }

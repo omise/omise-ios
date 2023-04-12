@@ -2,7 +2,7 @@
 import XCTest
 @testable import OmiseSDK
 
-// swiftlint:disable type_body_length function_body_length
+// swiftlint:disable:next type_body_length
 class ModelTestCase: XCTestCase {
 
     func testDecodeToken() throws {
@@ -105,6 +105,7 @@ class ModelTestCase: XCTestCase {
         }
     }
 
+    // swiftlint:disable:next function_body_length
     func testDecodeInstallmentsSource() throws {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
 
@@ -256,6 +257,7 @@ class ModelTestCase: XCTestCase {
         }
     }
 
+    // swiftlint:disable:next function_body_length
     func testDecodeMobileBankingSource() throws {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
 

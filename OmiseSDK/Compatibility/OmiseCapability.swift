@@ -1,8 +1,7 @@
-// swiftlint:disable type_name
 import Foundation
 
 @objc(OMSCapability)
-// swiftlint:disable:next attributes
+// swiftlint:disable:next attributes type_name
 public class __OmiseCapability: NSObject {
     let capability: Capability
 
@@ -20,7 +19,7 @@ public class __OmiseCapability: NSObject {
 }
 
 @objc(OMSCapabilityBackend)
-// swiftlint:disable:next attributes
+// swiftlint:disable:next attributes type_name
 public class __OmiseCapabilityBackend: NSObject {
     private let backend: Capability.Backend
 
@@ -34,11 +33,11 @@ public class __OmiseCapabilityBackend: NSObject {
 }
 
 @objc(OMSCapabilityBackendPayment)
-// swiftlint:disable:next attributes
+// swiftlint:disable:next attributes type_name
 public class __OmiseCapabilityBackendPayment: NSObject {}
 
 @objc(OMSCapabilityCardBackend)
-// swiftlint:disable:next attributes
+// swiftlint:disable:next attributes type_name
 public class __OmiseCapabilityCardBackendPayment: __OmiseCapabilityBackendPayment {
     @objc public let supportedBrands: Set<String>
 
@@ -48,7 +47,7 @@ public class __OmiseCapabilityCardBackendPayment: __OmiseCapabilityBackendPaymen
 }
 
 @objc(OMSCapabilitySourceBackend)
-// swiftlint:disable:next attributes
+// swiftlint:disable:next attributes type_name
 public class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
     @objc public let type: OMSSourceTypeValue
 
@@ -142,7 +141,7 @@ public class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPaym
 }
 
 @objc(OMSCapabilityInstallmentBackend)
-// swiftlint:disable:next attributes
+// swiftlint:disable:next attributes type_name
 public class __OmiseCapabilityInstallmentBackendPayment: __OmiseCapabilitySourceBackendPayment {
     @objc public let availableNumberOfTerms: IndexSet
 
@@ -153,7 +152,7 @@ public class __OmiseCapabilityInstallmentBackendPayment: __OmiseCapabilitySource
 }
 
 @objc(OMSCapabilityUnknownSourceBackend)
-// swiftlint:disable:next attributes
+// swiftlint:disable:next attributes type_name
 public class __OmiseCapabilityUnknownSourceBackendPayment: __OmiseCapabilitySourceBackendPayment {
     @objc public let parameters: [String: Any]
     init(sourceType: String, parameters: [String: Any]) {
@@ -163,7 +162,7 @@ public class __OmiseCapabilityUnknownSourceBackendPayment: __OmiseCapabilitySour
 }
 
 extension __OmiseCapabilityBackendPayment {
-    // swiftlint:disable function_body_length
+    // swiftlint:disable:next function_body_length
     static func makeCapabilityBackend(from payment: Capability.Backend.Payment) -> __OmiseCapabilityBackendPayment {
         switch payment {
         case .card(let brands):

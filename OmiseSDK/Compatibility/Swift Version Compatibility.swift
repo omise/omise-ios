@@ -22,3 +22,4 @@ let NotificationKeyboardFrameEndUserInfoKey = UIResponder.keyboardFrameEndUserIn
 let NotificationKeyboardFrameBeginUserInfoKey = UIResponder.keyboardFrameBeginUserInfoKey
 
 let AccessibilityNotificationAnnouncement = UIAccessibility.Notification.announcement
+// swiftlint:enable identifier_name

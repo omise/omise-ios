@@ -148,7 +148,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
 }
 
 extension PaymentChooserOption {
-    // swiftlint:disable function_body_length
+    // swiftlint:disable:next function_body_length
     fileprivate static func paymentOptions(for sourceType: OMSSourceTypeValue) -> [PaymentChooserOption] {
         switch sourceType {
         case .trueMoney:
@@ -221,7 +221,7 @@ extension PaymentChooserOption {
 }
 
 @objc(OMSPaymentChooserViewController)
-// swiftlint:disable type_body_length attributes
+// swiftlint:disable:next type_body_length attributes
 class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>,
                                     PaymentSourceChooser,
                                     PaymentChooserUI {
@@ -279,7 +279,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         updateShowingValues()
     }
 
-    // swiftlint:disable function_body_length
+    // swiftlint:disable:next function_body_length
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch (segue.identifier, segue.destination) {
         case ("GoToCreditCardFormSegue"?, let controller as CreditCardFormViewController):
@@ -350,6 +350,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         return cell
     }
 
+    // swiftlint:disable:next function_body_length
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
@@ -416,6 +417,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         }
     }
 
+    // swiftlint:disable:next function_body_length
     override func staticIndexPath(forValue value: PaymentChooserOption) -> IndexPath {
         switch value {
         case .creditCard:
@@ -485,11 +487,12 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         }
     }
 
+    // swiftlint:disable:next function_body_length
     func applyPaymentMethods(from capability: Capability) {
         self.capability = capability
         showsCreditCardPayment = capability.creditCardBackend != nil
 
-        // swiftlint:disable closure_body_length
+        // swiftlint:disable:next closure_body_length
         allowedPaymentMethods = capability.supportedBackends.compactMap {
             switch $0.payment {
             case .alipay:

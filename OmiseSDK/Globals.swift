@@ -371,8 +371,8 @@ extension NumberFormatter {
     }
 }
 
+// swiftlint:disable line_length
 extension OmiseError {
-    // swiftlint:disable line_length
     var bannerErrorDescription: String {
         switch self {
         case .api(code: let code, message: _, location: _):
@@ -788,4 +788,6 @@ extension OmiseError {
             )
         }
     }
+
+// swiftlint:enable line_length
 }
