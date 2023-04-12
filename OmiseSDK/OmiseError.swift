@@ -198,6 +198,10 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
     
     /// A localized message describing how one might recover from the failure.
     public var recoverySuggestion: String? {
+        enum CommonStrings: String {
+            case tryAgainLater = "Please try again later. If the same problem persists please contact customer support."
+        }
+
         let recoverySuggestionMessage: String?
         switch self {
         case .api(code: let errorCode, message: _, location: _):
@@ -232,7 +236,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
                     "error.unexpected.no-error-norresponse.recovery-suggestion",
                     tableName: "Error",
                     bundle: .omiseSDK,
-                    value: "Please try again later. If the same problem persists please contact customer support.",
+                    value: CommonStrings.tryAgainLater.rawValue,
                     comment: "A default descriptive suggestion message to recovery from the `No error nor response` error during the operation in the client which a merchant may show this message to their user"
                 )
             case .httpErrorWithNoData:
@@ -240,7 +244,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
                     "error.unexpected.http-error-with-no-data.recovery-suggestion",
                     tableName: "Error",
                     bundle: .omiseSDK,
-                    value: "Please try again later. If the same problem persists please contact customer support.",
+                    value: CommonStrings.tryAgainLater.rawValue,
                     comment: "A default descriptive suggestion message to recovery from the `No error data in the error response` error during the operation in the client which a merchant may show this message to their user"
                 )
             case .httpErrorResponseWithInvalidData:
@@ -248,7 +252,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
                     "error.unexpected.http-error-response-with-invalid-data.recovery-suggestion",
                     tableName: "Error",
                     bundle: .omiseSDK,
-                    value: "Please try again later. If the same problem persists please contact customer support.",
+                    value: CommonStrings.tryAgainLater.rawValue,
                     comment: "A default descriptive suggestion message to recovery from the `Invalid error data in the error response` error during the operation in the client which a merchant may show this message to their user"
                 )
             case .httpSuccessWithNoData:
@@ -256,7 +260,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
                     "error.unexpected.http-succeess-with-no-data.recovery-suggestion",
                     tableName: "Error",
                     bundle: .omiseSDK,
-                    value: "Please try again later. If the same problem persists please contact customer support.",
+                    value: CommonStrings.tryAgainLater.rawValue,
                     comment: "A default descriptive suggestion message to recovery from the `No data in the success response` error during the operation in the client which a merchant may show this message to their user"
                 )
             case .httpSuccessWithInvalidData:
@@ -264,7 +268,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
                     "error.unexpected.http-succeess-with-invalid-data.recovery-suggestion",
                     tableName: "Error",
                     bundle: .omiseSDK,
-                    value: "Please try again later. If the same problem persists please contact customer support.",
+                    value: CommonStrings.tryAgainLater.rawValue,
                     comment: "A default descriptive suggestion message to recovery from the `Invalid data in the success response` error during the operation in the client which a merchant may show this message to their user"
                 )
             case .unrecognizedHTTPStatusCode:
@@ -272,7 +276,7 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
                     "error.unexpected.unrecognized-HTTP-status-code.recovery-suggestion",
                     tableName: "Error",
                     bundle: .omiseSDK,
-                    value: "Please try again later. If the same problem persists please contact customer support.",
+                    value: CommonStrings.tryAgainLater.rawValue,
                     comment: "A default descriptive suggestion message to recovery from the `Unrecognized/unsupported HTTP status code` error during the operation in the client which a merchant may show this message to their user"
                 )
             case .other:
