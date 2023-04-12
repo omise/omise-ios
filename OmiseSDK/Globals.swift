@@ -585,6 +585,11 @@ extension OmiseError {
     }
 
     var bannerErrorRecoverySuggestion: String {
+
+        enum CommonStrings: String {
+            case tryAgainLater = "Please try again later"
+        }
+
         switch self {
         case .api(code: let code, message: _, location: _):
             switch code {
@@ -627,7 +632,7 @@ extension OmiseError {
                         "payment-creator.error.api.invalid_card.other.recovery-suggestion",
                         tableName: "Error",
                         bundle: .omiseSDK,
-                        value: "Please try again later",
+                        value: CommonStrings.tryAgainLater.rawValue,
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator in the built-in Payment Creator when there is the `other` API error occured"
                     )
                 }
@@ -752,7 +757,7 @@ extension OmiseError {
                         "payment-creator.error.api.bad_request.other.recovery-suggestion",
                         tableName: "Error",
                         bundle: .omiseSDK,
-                        value: "Please try again later",
+                        value: CommonStrings.tryAgainLater.rawValue,
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `other` from the backend has occurred"
                     )
                 }
@@ -761,7 +766,7 @@ extension OmiseError {
                     "payment-creator.error.api.unexpected.recovery-suggestion",
                     tableName: "Error",
                     bundle: .omiseSDK,
-                    value: "Please try again later",
+                    value: CommonStrings.tryAgainLater.rawValue,
                     comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator when there is the `unexpected` API error occured"
                 )
             case .other:
@@ -769,7 +774,7 @@ extension OmiseError {
                     "payment-creator.error.api.unknown.recovery-suggestion",
                     tableName: "Error",
                     bundle: .omiseSDK,
-                    value: "Please try again later",
+                    value: CommonStrings.tryAgainLater.rawValue,
                     comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator when there is an `unknown` API error occured"
                 )
             }
@@ -778,7 +783,7 @@ extension OmiseError {
                 "payment-creator.error.unexpected.recovery-suggestion",
                 tableName: "Error",
                 bundle: .omiseSDK,
-                value: "Please try again later",
+                value: CommonStrings.tryAgainLater.rawValue,
                 comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator when there is the `unexpected` error occured"
             )
         }
