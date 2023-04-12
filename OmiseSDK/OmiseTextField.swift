@@ -166,7 +166,9 @@ public enum OmiseTextFieldValidationError: Error {
         updateTextColor()
     }
     
-    @objc func textDidChange() {}
+    @objc func textDidChange() {
+        // Intentionally empty (SonarCloud warning fix)
+    }
     
     public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)

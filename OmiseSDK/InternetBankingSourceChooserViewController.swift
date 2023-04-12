@@ -89,5 +89,7 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         }
     }
     
-    private func applySecondaryColor() {}
+    private func applySecondaryColor() {
+        // Intentionally empty (SonarCloud warning fix)
+    }
 }

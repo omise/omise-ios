@@ -95,5 +95,7 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
         }
     }
 
-    private func applySecondaryColor() {}
+    private func applySecondaryColor() {
+        // Intentionally empty (SonarCloud warning fix)
+    }
 }

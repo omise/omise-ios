@@ -100,6 +100,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
     }
 
     private func applySecondaryColor() {
+        // Intentionally empty (SonarCloud warning fix)
     }
 
     private func bankImage(bank: String) -> UIImage? {

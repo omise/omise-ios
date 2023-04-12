@@ -111,5 +111,6 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
     }
     
     private func applySecondaryColor() {
+        // Intentionally empty (SonarCloud warning fix)
     }
 }

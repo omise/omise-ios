@@ -36,7 +36,9 @@ enum Environment {
 struct Configuration {
     static let `default` = Configuration()
     
-    private init() {}
+    private init() {
+        // Intentionally empty (SonarCloud warning fix)
+    }
     
     var environment: Environment {
         if let configuration = Bundle.main.object(forInfoDictionaryKey: "Configuration") as? String {

@@ -588,7 +588,9 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         }
     }
 
-    private func applySecondaryColor() {}
+    private func applySecondaryColor() {
+        // Intentionally empty (SonarCloud warning fix)
+    }
 
     private func updateShowingValues() {
         var paymentMethodsToShow: [PaymentChooserOption] = allowedPaymentMethods.reduce(into: []) { (result, sourceType) in

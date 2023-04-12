@@ -82,7 +82,9 @@ extension PaymentCreatorFlowSession: CreditCardFormViewControllerDelegate {
         delegate?.paymentCreatorFlowSession(self, didFailWithError: error)
     }
 
-    func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController) {}
+    func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController) {
+        // Intentionally empty (SonarCloud warning fix)
+    }
 }
 
 protocol PaymentSourceChooser {
