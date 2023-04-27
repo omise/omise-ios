@@ -1,5 +1,4 @@
 import UIKit
-import OmiseSDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
