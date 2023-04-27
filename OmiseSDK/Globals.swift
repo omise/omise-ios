@@ -354,9 +354,7 @@ extension ControlState: Hashable {
 }
 
 extension Bundle {
-    #if !SWIFT_PACKAGE
-    static var omiseSDK = Bundle(for: OmiseSDK_216d048c5feca16469a7a71566256537.self)
-    #endif
+    static var omiseSDK = Bundle(for: OmiseSDK216d048c5feca16469a7a71566256537.self)
 }
 
 extension NumberFormatter {

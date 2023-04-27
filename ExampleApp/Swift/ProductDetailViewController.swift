@@ -107,8 +107,8 @@ class ProductDetailViewController: OMSBaseViewController {
                                                 message: "Please input your given authorized URL",
                                                 preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
-        alertController.addAction(UIAlertAction(title: "Cancel", style: AlertActionStyle.cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "Go", style: AlertActionStyle.default) { (_) in
+        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Go", style: UIAlertAction.Style.default) { (_) in
             guard let textField = alertController.textFields?.first,
                   let text = textField.text,
                   let url = URL(string: text),

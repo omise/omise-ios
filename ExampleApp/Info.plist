@@ -37,7 +37,5 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
-    <key>Configuration</key>
-    <string>$(CONFIGURATION)</string>
 </dict>
 </plist>
