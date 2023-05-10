@@ -28,12 +28,13 @@
 		731A75D325E3604A002353C0 /* FPXBankChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A75D225E3604A002353C0 /* FPXBankChooserViewController.swift */; };
 		73F9BA4725E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4625E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift */; };
 		73F9BA4B25E6053700F55CA8 /* FPXFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */; };
+		751FAFEC2A0BCA6B006B8C80 /* Config.local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75DAD8922A0BC9540098AF96 /* Config.local.plist */; };
 		75348D4E29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75348D4D29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift */; };
 		75B43B572A0277A3004352C7 /* PaymentInformation.Atome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */; };
-		75B82D562A089BA5004F7919 /* Config.local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75B82D552A089BA5004F7919 /* Config.local.plist */; };
-		75B82D572A089BA5004F7919 /* Config.local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75B82D552A089BA5004F7919 /* Config.local.plist */; };
 		75DAD88C2A0BA5130098AF96 /* OmiseTestSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; };
 		75DAD88E2A0BA5130098AF96 /* OmiseTestSDK in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		75DAD8902A0BB8D80098AF96 /* LocalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */; };
+		75DAD8952A0BC9FA0098AF96 /* Config.local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75DAD8922A0BC9540098AF96 /* Config.local.plist */; };
 		8A01E48D21059EFF00D73FE6 /* PaymentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01E48C21059EFF00D73FE6 /* PaymentInformation.swift */; };
 		8A01F78B20D90EC5003FC11E /* Client+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */; };
 		8A01F78E20D91091003FC11E /* OMSTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78D20D91091003FC11E /* OMSTokenRequest.swift */; };
@@ -201,8 +202,9 @@
 		73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPXFormViewController.swift; sourceTree = "<group>"; };
 		75348D4D29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseSDK_216d048c5feca16469a7a71566256537.swift; sourceTree = "<group>"; };
 		75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInformation.Atome.swift; sourceTree = "<group>"; };
-		75B82D552A089BA5004F7919 /* Config.local.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.local.plist; sourceTree = "<group>"; };
 		75DAD87F2A0B9AE50098AF96 /* OmiseTestSDK */ = {isa = PBXFileReference; lastKnownFileType = text; path = OmiseTestSDK; sourceTree = SOURCE_ROOT; };
+		75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalConfig.swift; sourceTree = "<group>"; };
+		75DAD8922A0BC9540098AF96 /* Config.local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.local.plist; sourceTree = "<group>"; };
 		8A00FEC21F1DE88600246078 /* README.md */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; tabWidth = 2; };
 		8A01E48C21059EFF00D73FE6 /* PaymentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInformation.swift; sourceTree = "<group>"; };
 		8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+ObjC.swift"; sourceTree = "<group>"; };
@@ -378,7 +380,7 @@
 				22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */,
 				8A7567642178956800C684C9 /* Main.storyboard */,
 				8A7567672178959400C684C9 /* LaunchScreen.storyboard */,
-				75B82D552A089BA5004F7919 /* Config.local.plist */,
+				75DAD8922A0BC9540098AF96 /* Config.local.plist */,
 				8A723A682164D80C00D902F5 /* Objective-C */,
 				8AB3B85F216DCF5C006497B5 /* Shared */,
 				8A723A672164D80200D902F5 /* Swift */,
@@ -503,6 +505,7 @@
 				8A6AA06B216B957D00E49E5E /* OMSBaseViewController.m */,
 				8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */,
 				8A40DA2A216B53E900749F45 /* Tools.swift */,
+				75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -641,6 +644,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22D480AE1D0EB29C00544CE1 /* Build configuration list for PBXNativeTarget "ExampleApp (Swift)" */;
 			buildPhases = (
+				75DAD8912A0BC4D90098AF96 /* Copy LocalConfig from example */,
 				22D4809B1D0EB29C00544CE1 /* Resources */,
 				22D480991D0EB29C00544CE1 /* Sources */,
 				22D4809A1D0EB29C00544CE1 /* Frameworks */,
@@ -775,7 +779,7 @@
 				8A7567682178959400C684C9 /* LaunchScreen.storyboard in Resources */,
 				8A7567652178956800C684C9 /* Main.storyboard in Resources */,
 				22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */,
-				75B82D562A089BA5004F7919 /* Config.local.plist in Resources */,
+				75DAD8952A0BC9FA0098AF96 /* Config.local.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -786,7 +790,7 @@
 				8A7567692178959400C684C9 /* LaunchScreen.storyboard in Resources */,
 				8A7567662178956800C684C9 /* Main.storyboard in Resources */,
 				8A723A5C2164D7B100D902F5 /* Assets.xcassets in Resources */,
-				75B82D572A089BA5004F7919 /* Config.local.plist in Resources */,
+				751FAFEC2A0BCA6B006B8C80 /* Config.local.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -819,6 +823,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		75DAD8912A0BC4D90098AF96 /* Copy LocalConfig from example */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Config.local.plist.example",
+			);
+			name = "Copy LocalConfig from example";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Config.local.plist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nRESOURCE_PATH=$SRCROOT/ExampleApp\nEXAMPLE_CONFIG_FILENAME=Config.local.example.plist\nCONFIG_FILENAME=Config.local.plist\n\nif test -f \"$RESOURCE_PATH/$CONFIG_FILENAME\"; then\n    echo \"Config file exists\"\nelse\n    cp \"$RESOURCE_PATH/$EXAMPLE_CONFIG_FILENAME\" \"$RESOURCE_PATH/$CONFIG_FILENAME\"\n    echo \"Copied to $RESOURCE_PATH/$CONFIG_FILENAME\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -896,6 +921,7 @@
 				8A40DA2B216B53E900749F45 /* Tools.swift in Sources */,
 				229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */,
 				8AF56E62226878070097CFEE /* CustomCreditCardFormViewController.swift in Sources */,
+				75DAD8902A0BB8D80098AF96 /* LocalConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -64,7 +64,7 @@ class AtomeFormViewController: UIViewController, PaymentSourceChooser, PaymentCh
         submitButton.defaultBackgroundColor = .omise
         submitButton.disabledBackgroundColor = .line
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -207,11 +207,16 @@ private extension AtomeFormViewController {
             return
         }
 
+        let shippingAddress =
+            PaymentInformation.Atome.ShippingAddress(country: country,
+                                                     city: city,
+                                                     postalCode: postcode,
+                                                     state: "---",
+                                                     street1: street,
+                                                     street2: "")
+
         let atomeInfo = PaymentInformation.Atome(phoneNumber: phone,
-                                                 shippingStreet: street,
-                                                 shippingCity: city,
-                                                 shippingCountryCode: country,
-                                                 shippingPostalCode: postcode,
+                                                 shipping: shippingAddress,
                                                  name: name,
                                                  email: email)
         requestingIndicatorView.startAnimating()
