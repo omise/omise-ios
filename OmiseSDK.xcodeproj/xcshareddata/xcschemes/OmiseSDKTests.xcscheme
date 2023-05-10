@@ -16,6 +16,16 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OmiseTestSDKTests"
+               BuildableName = "OmiseTestSDKTests"
+               BlueprintName = "OmiseTestSDKTests"
+               ReferencedContainer = "container:OmiseTestSDK">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "987A02C81CE35D5E0035417A"
                BuildableName = "OmiseSDKTests.xctest"
                BlueprintName = "OmiseSDKTests"

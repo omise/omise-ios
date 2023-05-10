@@ -331,7 +331,10 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         case ("GoToDuitNowOBWBankChooserSegue"?, let controller as DuitNowOBWBankChooserViewController):
             controller.showingValues = duitNowOBWBanks
             controller.flowSession = self.flowSession
-        default: break
+        case ("GoToAtomeSegue"?, let controller as AtomeFormViewController):
+            controller.flowSession = self.flowSession
+        default:
+            break
         }
 
         if let paymentShourceChooserUI = segue.destination as? PaymentChooserUI {

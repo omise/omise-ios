@@ -29,7 +29,12 @@
 		73F9BA4725E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4625E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift */; };
 		73F9BA4B25E6053700F55CA8 /* FPXFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */; };
 		75348D4E29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75348D4D29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift */; };
-		8A01E48D21059EFF00D73FE6 /* SourcePaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01E48C21059EFF00D73FE6 /* SourcePaymentMethod.swift */; };
+		75B43B572A0277A3004352C7 /* PaymentInformation.Atome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */; };
+		75B82D562A089BA5004F7919 /* Config.local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75B82D552A089BA5004F7919 /* Config.local.plist */; };
+		75B82D572A089BA5004F7919 /* Config.local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75B82D552A089BA5004F7919 /* Config.local.plist */; };
+		75DAD88C2A0BA5130098AF96 /* OmiseTestSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; };
+		75DAD88E2A0BA5130098AF96 /* OmiseTestSDK in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		8A01E48D21059EFF00D73FE6 /* PaymentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01E48C21059EFF00D73FE6 /* PaymentInformation.swift */; };
 		8A01F78B20D90EC5003FC11E /* Client+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */; };
 		8A01F78E20D91091003FC11E /* OMSTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78D20D91091003FC11E /* OMSTokenRequest.swift */; };
 		8A01F79120D91356003FC11E /* OMSSourceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F79020D91356003FC11E /* OMSSourceRequest.swift */; };
@@ -131,6 +136,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		75DAD88D2A0BA5130098AF96 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				75DAD88E2A0BA5130098AF96 /* OmiseTestSDK in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8A0928211D545455008D393F /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -184,8 +200,11 @@
 		73F9BA4625E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptableDynamicTableViewController.swift; sourceTree = "<group>"; };
 		73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPXFormViewController.swift; sourceTree = "<group>"; };
 		75348D4D29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseSDK_216d048c5feca16469a7a71566256537.swift; sourceTree = "<group>"; };
+		75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInformation.Atome.swift; sourceTree = "<group>"; };
+		75B82D552A089BA5004F7919 /* Config.local.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.local.plist; sourceTree = "<group>"; };
+		75DAD87F2A0B9AE50098AF96 /* OmiseTestSDK */ = {isa = PBXFileReference; lastKnownFileType = text; path = OmiseTestSDK; sourceTree = SOURCE_ROOT; };
 		8A00FEC21F1DE88600246078 /* README.md */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; tabWidth = 2; };
-		8A01E48C21059EFF00D73FE6 /* SourcePaymentMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcePaymentMethod.swift; sourceTree = "<group>"; };
+		8A01E48C21059EFF00D73FE6 /* PaymentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInformation.swift; sourceTree = "<group>"; };
 		8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+ObjC.swift"; sourceTree = "<group>"; };
 		8A01F78D20D91091003FC11E /* OMSTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMSTokenRequest.swift; sourceTree = "<group>"; };
 		8A01F79020D91356003FC11E /* OMSSourceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMSSourceRequest.swift; sourceTree = "<group>"; };
@@ -296,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				987A02CE1CE35D5E0035417A /* OmiseSDK.framework in Frameworks */,
+				75DAD88C2A0BA5130098AF96 /* OmiseTestSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +331,7 @@
 				987A02CA1CE35D5E0035417A /* OmiseSDKTests */,
 				22D4809E1D0EB29C00544CE1 /* ExampleApp */,
 				225931191CE3210700841B86 /* Products */,
+				75DAD8802A0B9B060098AF96 /* Frameworks */,
 			);
 			indentWidth = 4;
 			sourceTree = "<group>";
@@ -357,6 +378,7 @@
 				22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */,
 				8A7567642178956800C684C9 /* Main.storyboard */,
 				8A7567672178959400C684C9 /* LaunchScreen.storyboard */,
+				75B82D552A089BA5004F7919 /* Config.local.plist */,
 				8A723A682164D80C00D902F5 /* Objective-C */,
 				8AB3B85F216DCF5C006497B5 /* Shared */,
 				8A723A672164D80200D902F5 /* Swift */,
@@ -370,6 +392,13 @@
 				75348D4D29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		75DAD8802A0B9B060098AF96 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		8A01F77E20D7D327003FC11E /* Old version */ = {
@@ -401,7 +430,8 @@
 				2220F1A41D0FEE85008CD89F /* OmiseError.swift */,
 				8A60619920B2A8D400CF90D5 /* PAN.swift */,
 				8A47173C20AAB11B0022733A /* Source.swift */,
-				8A01E48C21059EFF00D73FE6 /* SourcePaymentMethod.swift */,
+				8A01E48C21059EFF00D73FE6 /* PaymentInformation.swift */,
+				75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */,
 				8A47173920AAB0F40022733A /* Token.swift */,
 			);
 			name = Models;
@@ -526,6 +556,7 @@
 		987A02CA1CE35D5E0035417A /* OmiseSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				75DAD87F2A0B9AE50098AF96 /* OmiseTestSDK */,
 				987A03AC1CE5CD450035417A /* Fixtures */,
 				987A02CD1CE35D5E0035417A /* Info.plist */,
 				8A3C10572159FCE900BEFD8A /* BadRequestAPIErrorParsingTestCase.swift */,
@@ -621,6 +652,8 @@
 				8A7F8B0B20C55312008F4D08 /* PBXTargetDependency */,
 			);
 			name = "ExampleApp (Swift)";
+			packageProductDependencies = (
+			);
 			productName = ExampleApp;
 			productReference = 22D4809D1D0EB29C00544CE1 /* ExampleApp.app */;
 			productType = "com.apple.product-type.application";
@@ -651,6 +684,7 @@
 				987A02C71CE35D5E0035417A /* Resources */,
 				987A02C51CE35D5E0035417A /* Sources */,
 				987A02C61CE35D5E0035417A /* Frameworks */,
+				75DAD88D2A0BA5130098AF96 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -658,6 +692,9 @@
 				987A02D01CE35D5E0035417A /* PBXTargetDependency */,
 			);
 			name = OmiseSDKTests;
+			packageProductDependencies = (
+				75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */,
+			);
 			productName = OmiseSDKTests;
 			productReference = 987A02C91CE35D5E0035417A /* OmiseSDKTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -738,6 +775,7 @@
 				8A7567682178959400C684C9 /* LaunchScreen.storyboard in Resources */,
 				8A7567652178956800C684C9 /* Main.storyboard in Resources */,
 				22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */,
+				75B82D562A089BA5004F7919 /* Config.local.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -748,6 +786,7 @@
 				8A7567692178959400C684C9 /* LaunchScreen.storyboard in Resources */,
 				8A7567662178956800C684C9 /* Main.storyboard in Resources */,
 				8A723A5C2164D7B100D902F5 /* Assets.xcassets in Resources */,
+				75B82D572A089BA5004F7919 /* Config.local.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -810,6 +849,7 @@
 				8AF9857221479F72007E18ED /* CreditCardFormViewController.swift in Sources */,
 				8AC1D3A32139224D0051F966 /* InternetBankingSourceChooserViewController.swift in Sources */,
 				2220F1A91D0FEE85008CD89F /* OmiseCard.swift in Sources */,
+				75B43B572A0277A3004352C7 /* PaymentInformation.Atome.swift in Sources */,
 				8A14C209220ACB2B003F5B20 /* Capability.swift in Sources */,
 				8AD0609320B55B3A0074894E /* RequestTask.swift in Sources */,
 				8A275CBC21241E4500C5716F /* MainActionButton.swift in Sources */,
@@ -838,7 +878,7 @@
 				8AC1D3A7213941C80051F966 /* InstallmentsNumberOfTermsChooserViewController.swift in Sources */,
 				986406321CFEA7E4004BCF51 /* CardNumberTextField.swift in Sources */,
 				F6614CD6243DB8E7005B656E /* TrueMoneyFormViewController.swift in Sources */,
-				8A01E48D21059EFF00D73FE6 /* SourcePaymentMethod.swift in Sources */,
+				8A01E48D21059EFF00D73FE6 /* PaymentInformation.swift in Sources */,
 				225931501CE46F7F00841B86 /* CardNumber.swift in Sources */,
 				8AC1D3A5213922570051F966 /* InstallmentBankingSourceChooserViewController.swift in Sources */,
 				2259314E1CE46E5700841B86 /* CardBrand.swift in Sources */,
@@ -1178,6 +1218,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.ExampleApp;
 				PRODUCT_NAME = ExampleApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "ExampleApp/ExampleApp-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1207,6 +1250,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.ExampleApp;
 				PRODUCT_NAME = ExampleApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "ExampleApp/ExampleApp-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1283,7 +1329,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "Debug (Staging)";
 		};
@@ -1301,7 +1351,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1420,7 +1474,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1448,6 +1506,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.ExampleApp;
 				PRODUCT_NAME = ExampleApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "ExampleApp/ExampleApp-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1536,6 +1597,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OmiseTestSDK;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2259310F1CE3210700841B86 /* Project object */;
 }

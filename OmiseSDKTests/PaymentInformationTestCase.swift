@@ -647,12 +647,16 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
+            let shipping = PaymentInformation.Atome.ShippingAddress(
+                country: "TH",
+                city: "Bangkok",
+                postalCode: "10200",
+                state: "---",
+                street1: "4 Sukhumvit 103 rd.",
+                street2: "")
             let atome = PaymentInformation.Atome(
                 phoneNumber: "+66800000101",
-                shippingStreet: "4 Sukhumvit 103 rd.",
-                shippingCity: "Bangkok",
-                shippingCountryCode: "TH",
-                shippingPostalCode: "10200",
+                shipping: shipping,
                 name: "name",
                 email: "test_user@opn.ooo")
             let sourceParameter = Source.CreateParameter(paymentInformation: .atome(atome),
