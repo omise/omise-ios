@@ -28,13 +28,13 @@
 		731A75D325E3604A002353C0 /* FPXBankChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A75D225E3604A002353C0 /* FPXBankChooserViewController.swift */; };
 		73F9BA4725E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4625E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift */; };
 		73F9BA4B25E6053700F55CA8 /* FPXFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */; };
-		751FAFEC2A0BCA6B006B8C80 /* Config.local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75DAD8922A0BC9540098AF96 /* Config.local.plist */; };
 		75348D4E29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75348D4D29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift */; };
 		75B43B572A0277A3004352C7 /* PaymentInformation.Atome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */; };
 		75DAD88C2A0BA5130098AF96 /* OmiseTestSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; };
 		75DAD88E2A0BA5130098AF96 /* OmiseTestSDK in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		75DAD8902A0BB8D80098AF96 /* LocalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */; };
-		75DAD8952A0BC9FA0098AF96 /* Config.local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75DAD8922A0BC9540098AF96 /* Config.local.plist */; };
+		75F2A0182A0BD0D40038FA54 /* Config.local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75DAD8922A0BC9540098AF96 /* Config.local.plist */; };
+		75F2A0192A0BD0D40038FA54 /* Config.local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75DAD8922A0BC9540098AF96 /* Config.local.plist */; };
 		8A01E48D21059EFF00D73FE6 /* PaymentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01E48C21059EFF00D73FE6 /* PaymentInformation.swift */; };
 		8A01F78B20D90EC5003FC11E /* Client+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */; };
 		8A01F78E20D91091003FC11E /* OMSTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78D20D91091003FC11E /* OMSTokenRequest.swift */; };
@@ -374,16 +374,14 @@
 		22D4809E1D0EB29C00544CE1 /* ExampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				8AF6A1D720E4FEBE00AC5625 /* ExampleApp-Bridging-Header.h */,
-				22D480AB1D0EB29C00544CE1 /* Info.plist */,
-				229E14541D0EBAB5000511DE /* AppDelegate.swift */,
-				22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */,
-				8A7567642178956800C684C9 /* Main.storyboard */,
-				8A7567672178959400C684C9 /* LaunchScreen.storyboard */,
+				75F2A01A2A0BD1CD0038FA54 /* Resources */,
 				75DAD8922A0BC9540098AF96 /* Config.local.plist */,
-				8A723A682164D80C00D902F5 /* Objective-C */,
-				8AB3B85F216DCF5C006497B5 /* Shared */,
+				22D480AB1D0EB29C00544CE1 /* Info.plist */,
+				8AF6A1D720E4FEBE00AC5625 /* ExampleApp-Bridging-Header.h */,
+				229E14541D0EBAB5000511DE /* AppDelegate.swift */,
 				8A723A672164D80200D902F5 /* Swift */,
+				8AB3B85F216DCF5C006497B5 /* Shared */,
+				8A723A682164D80C00D902F5 /* Objective-C */,
 			);
 			path = ExampleApp;
 			sourceTree = "<group>";
@@ -401,6 +399,16 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		75F2A01A2A0BD1CD0038FA54 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */,
+				8A7567642178956800C684C9 /* Main.storyboard */,
+				8A7567672178959400C684C9 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		8A01F77E20D7D327003FC11E /* Old version */ = {
@@ -644,7 +652,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22D480AE1D0EB29C00544CE1 /* Build configuration list for PBXNativeTarget "ExampleApp (Swift)" */;
 			buildPhases = (
-				75DAD8912A0BC4D90098AF96 /* Copy LocalConfig from example */,
+				75DAD8912A0BC4D90098AF96 /* Copy Config.local.example to Config.local */,
 				22D4809B1D0EB29C00544CE1 /* Resources */,
 				22D480991D0EB29C00544CE1 /* Sources */,
 				22D4809A1D0EB29C00544CE1 /* Frameworks */,
@@ -779,7 +787,7 @@
 				8A7567682178959400C684C9 /* LaunchScreen.storyboard in Resources */,
 				8A7567652178956800C684C9 /* Main.storyboard in Resources */,
 				22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */,
-				75DAD8952A0BC9FA0098AF96 /* Config.local.plist in Resources */,
+				75F2A0182A0BD0D40038FA54 /* Config.local.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -790,7 +798,7 @@
 				8A7567692178959400C684C9 /* LaunchScreen.storyboard in Resources */,
 				8A7567662178956800C684C9 /* Main.storyboard in Resources */,
 				8A723A5C2164D7B100D902F5 /* Assets.xcassets in Resources */,
-				751FAFEC2A0BCA6B006B8C80 /* Config.local.plist in Resources */,
+				75F2A0192A0BD0D40038FA54 /* Config.local.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -824,7 +832,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		75DAD8912A0BC4D90098AF96 /* Copy LocalConfig from example */ = {
+		75DAD8912A0BC4D90098AF96 /* Copy Config.local.example to Config.local */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -835,7 +843,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Config.local.plist.example",
 			);
-			name = "Copy LocalConfig from example";
+			name = "Copy Config.local.example to Config.local";
 			outputFileListPaths = (
 			);
 			outputPaths = (
