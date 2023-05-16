@@ -35,6 +35,17 @@
 		75DAD8902A0BB8D80098AF96 /* LocalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */; };
 		75F2A0182A0BD0D40038FA54 /* Config.local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75DAD8922A0BC9540098AF96 /* Config.local.plist */; };
 		75F2A0192A0BD0D40038FA54 /* Config.local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75DAD8922A0BC9540098AF96 /* Config.local.plist */; };
+		75F2A0932A13B0B10038FA54 /* OmiseSDKUITestsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0922A13B0B10038FA54 /* OmiseSDKUITestsApp.swift */; };
+		75F2A0952A13B0B10038FA54 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0942A13B0B10038FA54 /* ContentView.swift */; };
+		75F2A0972A13B0B10038FA54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75F2A0962A13B0B10038FA54 /* Assets.xcassets */; };
+		75F2A09A2A13B0B10038FA54 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75F2A0992A13B0B10038FA54 /* Preview Assets.xcassets */; };
+		75F2A0A02A13B0DB0038FA54 /* UIKitViewPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A09F2A13B0DB0038FA54 /* UIKitViewPresentable.swift */; };
+		75F2A0A22A13B0E30038FA54 /* UIKitViewControllerPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0A12A13B0E30038FA54 /* UIKitViewControllerPresentable.swift */; };
+		75F2A0A52A13B1470038FA54 /* NewAtomeFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0A42A13B1470038FA54 /* NewAtomeFormViewController.swift */; };
+		75F2A0A62A13B70F0038FA54 /* OmiseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062F1CFEA7E4004BCF51 /* OmiseTextField.swift */; };
+		75F2A0A82A13B73B0038FA54 /* Swift Version Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatibility.swift */; };
+		75F2A0AB2A13B8B80038FA54 /* UIView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0AA2A13B8B80038FA54 /* UIView+Helpers.swift */; };
+		75F2A0AC2A13B8D40038FA54 /* UIView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0AA2A13B8B80038FA54 /* UIView+Helpers.swift */; };
 		8A01E48D21059EFF00D73FE6 /* PaymentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01E48C21059EFF00D73FE6 /* PaymentInformation.swift */; };
 		8A01F78B20D90EC5003FC11E /* Client+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */; };
 		8A01F78E20D91091003FC11E /* OMSTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78D20D91091003FC11E /* OMSTokenRequest.swift */; };
@@ -205,6 +216,15 @@
 		75DAD87F2A0B9AE50098AF96 /* OmiseTestSDK */ = {isa = PBXFileReference; lastKnownFileType = text; path = OmiseTestSDK; sourceTree = SOURCE_ROOT; };
 		75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalConfig.swift; sourceTree = "<group>"; };
 		75DAD8922A0BC9540098AF96 /* Config.local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.local.plist; sourceTree = "<group>"; };
+		75F2A0902A13B0B00038FA54 /* OmiseSDKUITests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmiseSDKUITests.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		75F2A0922A13B0B10038FA54 /* OmiseSDKUITestsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseSDKUITestsApp.swift; sourceTree = "<group>"; };
+		75F2A0942A13B0B10038FA54 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		75F2A0962A13B0B10038FA54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		75F2A0992A13B0B10038FA54 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		75F2A09F2A13B0DB0038FA54 /* UIKitViewPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitViewPresentable.swift; sourceTree = "<group>"; };
+		75F2A0A12A13B0E30038FA54 /* UIKitViewControllerPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitViewControllerPresentable.swift; sourceTree = "<group>"; };
+		75F2A0A42A13B1470038FA54 /* NewAtomeFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeFormViewController.swift; sourceTree = "<group>"; };
+		75F2A0AA2A13B8B80038FA54 /* UIView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Helpers.swift"; sourceTree = "<group>"; };
 		8A00FEC21F1DE88600246078 /* README.md */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; tabWidth = 2; };
 		8A01E48C21059EFF00D73FE6 /* PaymentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInformation.swift; sourceTree = "<group>"; };
 		8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+ObjC.swift"; sourceTree = "<group>"; };
@@ -305,6 +325,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		75F2A08D2A13B0B00038FA54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8A723A592164D7B100D902F5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -331,6 +358,7 @@
 				2259311A1CE3210700841B86 /* OmiseSDK */,
 				F6FE863425E3B0AE00C7A4DE /* OmiseSDKObjc */,
 				987A02CA1CE35D5E0035417A /* OmiseSDKTests */,
+				75F2A0912A13B0B10038FA54 /* OmiseSDKUITests */,
 				22D4809E1D0EB29C00544CE1 /* ExampleApp */,
 				225931191CE3210700841B86 /* Products */,
 				75DAD8802A0B9B060098AF96 /* Frameworks */,
@@ -346,6 +374,7 @@
 				987A02C91CE35D5E0035417A /* OmiseSDKTests.xctest */,
 				22D4809D1D0EB29C00544CE1 /* ExampleApp.app */,
 				8A723A632164D7B100D902F5 /* ExampleApp.app */,
+				75F2A0902A13B0B00038FA54 /* OmiseSDKUITests.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -411,6 +440,44 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		75F2A0912A13B0B10038FA54 /* OmiseSDKUITests */ = {
+			isa = PBXGroup;
+			children = (
+				75F2A0A32A13B0E70038FA54 /* UIKitLiveKit */,
+				75F2A0922A13B0B10038FA54 /* OmiseSDKUITestsApp.swift */,
+				75F2A0942A13B0B10038FA54 /* ContentView.swift */,
+				75F2A0A42A13B1470038FA54 /* NewAtomeFormViewController.swift */,
+				75F2A0962A13B0B10038FA54 /* Assets.xcassets */,
+				75F2A0982A13B0B10038FA54 /* Preview Content */,
+			);
+			path = OmiseSDKUITests;
+			sourceTree = "<group>";
+		};
+		75F2A0982A13B0B10038FA54 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				75F2A0992A13B0B10038FA54 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		75F2A0A32A13B0E70038FA54 /* UIKitLiveKit */ = {
+			isa = PBXGroup;
+			children = (
+				75F2A09F2A13B0DB0038FA54 /* UIKitViewPresentable.swift */,
+				75F2A0A12A13B0E30038FA54 /* UIKitViewControllerPresentable.swift */,
+			);
+			path = UIKitLiveKit;
+			sourceTree = "<group>";
+		};
+		75F2A0A92A13B8A40038FA54 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				75F2A0AA2A13B8B80038FA54 /* UIView+Helpers.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		8A01F77E20D7D327003FC11E /* Old version */ = {
 			isa = PBXGroup;
 			children = (
@@ -450,6 +517,7 @@
 		8A2BE95820A9A8FE000CEB60 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				75F2A0A92A13B8A40038FA54 /* Helpers */,
 				73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */,
 				731A75D225E3604A002353C0 /* FPXBankChooserViewController.swift */,
 				73F9BA4625E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift */,
@@ -670,6 +738,23 @@
 			productReference = 22D4809D1D0EB29C00544CE1 /* ExampleApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		75F2A08F2A13B0B00038FA54 /* OmiseSDKUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 75F2A09E2A13B0B10038FA54 /* Build configuration list for PBXNativeTarget "OmiseSDKUITests" */;
+			buildPhases = (
+				75F2A08C2A13B0B00038FA54 /* Sources */,
+				75F2A08D2A13B0B00038FA54 /* Frameworks */,
+				75F2A08E2A13B0B00038FA54 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OmiseSDKUITests;
+			productName = OmiseSDKUITests;
+			productReference = 75F2A0902A13B0B00038FA54 /* OmiseSDKUITests.app */;
+			productType = "com.apple.product-type.application";
+		};
 		8A723A502164D7B100D902F5 /* ExampleApp (Objective-C) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A723A602164D7B100D902F5 /* Build configuration list for PBXNativeTarget "ExampleApp (Objective-C)" */;
@@ -718,7 +803,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = OMS;
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = Omise;
 				TargetAttributes = {
@@ -731,6 +816,9 @@
 						CreatedOnToolsVersion = 7.3;
 						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
+					};
+					75F2A08F2A13B0B00038FA54 = {
+						CreatedOnToolsVersion = 14.3;
 					};
 					8A723A502164D7B100D902F5 = {
 						LastSwiftMigration = 1000;
@@ -762,6 +850,7 @@
 				987A02C81CE35D5E0035417A /* OmiseSDKTests */,
 				22D4809C1D0EB29C00544CE1 /* ExampleApp (Swift) */,
 				8A723A502164D7B100D902F5 /* ExampleApp (Objective-C) */,
+				75F2A08F2A13B0B00038FA54 /* OmiseSDKUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -788,6 +877,15 @@
 				8A7567652178956800C684C9 /* Main.storyboard in Resources */,
 				22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */,
 				75F2A0182A0BD0D40038FA54 /* Config.local.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		75F2A08E2A13B0B00038FA54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75F2A09A2A13B0B10038FA54 /* Preview Assets.xcassets in Resources */,
+				75F2A0972A13B0B10038FA54 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -870,6 +968,7 @@
 				73F9BA4B25E6053700F55CA8 /* FPXFormViewController.swift in Sources */,
 				8A7A9EC0216642D100F12D86 /* Swift Version Compatibility.swift in Sources */,
 				8A0A67E821383614006356B7 /* PaymentChooserViewController.swift in Sources */,
+				75F2A0AB2A13B8B80038FA54 /* UIView+Helpers.swift in Sources */,
 				98FF99BB2577789800476487 /* Configuration.swift in Sources */,
 				8A72CD5E2162358400F14F76 /* PaymentOptionTableViewCell.swift in Sources */,
 				8AD391B1230C05BC00383286 /* Colors.swift in Sources */,
@@ -930,6 +1029,21 @@
 				229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */,
 				8AF56E62226878070097CFEE /* CustomCreditCardFormViewController.swift in Sources */,
 				75DAD8902A0BB8D80098AF96 /* LocalConfig.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		75F2A08C2A13B0B00038FA54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75F2A0952A13B0B10038FA54 /* ContentView.swift in Sources */,
+				75F2A0A22A13B0E30038FA54 /* UIKitViewControllerPresentable.swift in Sources */,
+				75F2A0A82A13B73B0038FA54 /* Swift Version Compatibility.swift in Sources */,
+				75F2A0A52A13B1470038FA54 /* NewAtomeFormViewController.swift in Sources */,
+				75F2A0A62A13B70F0038FA54 /* OmiseTextField.swift in Sources */,
+				75F2A0A02A13B0DB0038FA54 /* UIKitViewPresentable.swift in Sources */,
+				75F2A0AC2A13B8D40038FA54 /* UIView+Helpers.swift in Sources */,
+				75F2A0932A13B0B10038FA54 /* OmiseSDKUITestsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1292,6 +1406,118 @@
 			};
 			name = Release;
 		};
+		75F2A09B2A13B0B10038FA54 /* Debug (Staging) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"OmiseSDKUITests/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK.OmiseSDKUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug (Staging)";
+		};
+		75F2A09C2A13B0B10038FA54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"OmiseSDKUITests/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK.OmiseSDKUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		75F2A09D2A13B0B10038FA54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"OmiseSDKUITests/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK.OmiseSDKUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		8A723A612164D7B100D902F5 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1606,6 +1832,16 @@
 				22D480AC1D0EB29C00544CE1 /* Debug (Staging) */,
 				98FF99B6257773EB00476487 /* Debug */,
 				22D480AD1D0EB29C00544CE1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		75F2A09E2A13B0B10038FA54 /* Build configuration list for PBXNativeTarget "OmiseSDKUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75F2A09B2A13B0B10038FA54 /* Debug (Staging) */,
+				75F2A09C2A13B0B10038FA54 /* Debug */,
+				75F2A09D2A13B0B10038FA54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
