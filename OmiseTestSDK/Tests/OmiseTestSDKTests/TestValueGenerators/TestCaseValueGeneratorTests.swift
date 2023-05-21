@@ -66,4 +66,48 @@ class TestCaseValueGeneratorTests: XCTestCase {
             testUsers.sorted { $0.age < $1.age }
         )
     }
+
+    func testMostInvalidValue() {
+        struct SomeItem: Equatable {
+            let name: String
+            let id: String
+            let type: String
+            let color: String
+        }
+
+        let mostInvalidItem = SomeItem(name: "-!@#$", id: "-10", type: "g.o.o.d.s", color: "Very very dark green")
+        let mostInvalidItem2 = SomeItem(name: "-!@#$", id: "0", type: "g.o.o.d.s", color: "Some green")
+        let mostInvalidItem3 = SomeItem(name: "-!@#$", id: "-10", type: "g.o.o.d.s", color: "Some orange")
+
+        let genSomeItem: (OmiseTestSDK.TestCaseValueGenerator) -> (SomeItem) = { gen in
+            SomeItem(
+                name: gen.cases([
+                    .valid("Cup"),
+                    .invalid(mostInvalidItem.name)
+                ]),
+                id: gen.cases([
+                    .valid("10"),
+                    .invalid(mostInvalidItem.id),
+                    .invalid(mostInvalidItem2.id)
+                ]),
+                type: gen.cases([
+                    .valid("Goods"),
+                    .invalid(mostInvalidItem.type)
+                ]),
+                color: gen.cases([
+                    .valid("Green"),
+                    .invalid(mostInvalidItem.color),
+                    .invalid(mostInvalidItem2.color),
+                    .invalid(mostInvalidItem3.color)
+                ])
+            )
+        }
+
+        let mostInvalidCase = OmiseTestSDK.TestCaseValueGenerator.mostInvalidCases(genSomeItem)
+        XCTAssertEqual(mostInvalidCase.first, mostInvalidItem)
+        XCTAssertEqual(mostInvalidCase.count, 3)
+        XCTAssertEqual(mostInvalidCase, [mostInvalidItem, mostInvalidItem2, mostInvalidItem3])
+
+    }
+
 }

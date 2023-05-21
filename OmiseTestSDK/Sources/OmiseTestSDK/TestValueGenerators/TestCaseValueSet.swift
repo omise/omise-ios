@@ -2,7 +2,7 @@ import Foundation
 
 public enum TestCaseValue<T> {
     case valid(_ value: T)
-    case invalid(_ value: T, _ reason: String)
+    case invalid(_ value: T, _ reason: String = "")
 
     var value: T {
         switch self {

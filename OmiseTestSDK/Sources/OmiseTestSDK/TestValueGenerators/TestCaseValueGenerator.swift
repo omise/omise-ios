@@ -4,6 +4,7 @@ public class TestCaseValueGenerator {
     public typealias GeneratorFunction<T> = (TestCaseValueGenerator) -> (T)
 
     public enum Filter {
+        case mostInvalid
         case invalid
         case valid
     }
@@ -28,6 +29,10 @@ public class TestCaseValueGenerator {
 
     public static func allCases<T>(_ function: GeneratorFunction<T>) -> [T] {
         filterCases(filter: .valid, function) + filterCases(filter: .invalid, function)
+    }
+
+    public static func mostInvalidCases<T>(_ function: GeneratorFunction<T>) -> [T] {
+        filterCases(filter: .mostInvalid, function)
     }
 
     public func cases<T: Hashable>(_ from: TestCaseValue<T>...) -> T {
@@ -56,7 +61,7 @@ public class TestCaseValueGenerator {
                 } else {
                     returnValue = TestCaseValueSet(from).valid
                 }
-            case .valid:
+            case .valid, .mostInvalid:
                 if filteredValues.count > totalIterations {
                     totalIterations = filteredValues.count
                 }
@@ -71,7 +76,7 @@ public class TestCaseValueGenerator {
                     let validValues = TestCaseValueSet(from).validAll
                     returnValue = validValues[iteration % validValues.count]
                 }
-            case .valid:
+            case .valid, .mostInvalid:
                 returnValue = filteredValues[iteration % filteredValues.count]
             }
         }
@@ -116,6 +121,8 @@ private extension TestCaseValueGenerator {
 private extension TestCaseValueSet {
     func filtered(_ filter: TestCaseValueGenerator.Filter) -> [T] {
         switch filter {
+        case .mostInvalid:
+            return self.invalidAll
         case .invalid:
             return self.invalidAll
         case .valid:
