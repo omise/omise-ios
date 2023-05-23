@@ -1,12 +1,12 @@
 import Foundation
 
 public enum TestCaseValue<T> {
-    case valid(_ value: T)
+    case valid(_ value: T, _ reason: String = "")
     case invalid(_ value: T, _ reason: String = "")
 
     var value: T {
         switch self {
-        case .valid(let value), .invalid(let value, _): return value
+        case .valid(let value, _), .invalid(let value, _): return value
         }
     }
 
@@ -17,10 +17,9 @@ public enum TestCaseValue<T> {
         }
     }
 
-    var invalidReason: String? {
+    var reason: String? {
         switch self {
-        case .invalid(_, let reason): return reason
-        default: return nil
+        case .valid(_, let reason), .invalid(_, let reason): return reason
         }
     }
 }

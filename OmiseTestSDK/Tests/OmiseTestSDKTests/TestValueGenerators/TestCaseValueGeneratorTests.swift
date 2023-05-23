@@ -107,7 +107,5 @@ class TestCaseValueGeneratorTests: XCTestCase {
         XCTAssertEqual(mostInvalidCase.first, mostInvalidItem)
         XCTAssertEqual(mostInvalidCase.count, 3)
         XCTAssertEqual(mostInvalidCase, [mostInvalidItem, mostInvalidItem2, mostInvalidItem3])
-
     }
-
 }

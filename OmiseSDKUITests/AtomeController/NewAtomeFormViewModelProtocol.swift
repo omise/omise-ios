@@ -11,12 +11,26 @@ import Foundation
 protocol NewAtomeFormViewModelProtocol {
     typealias ViewContext = NewAtomeFormViewContext
     typealias Field = ViewContext.Field
-    func validate(_ field: Field) -> String?
-    func process(_ viewContext: ViewContext, onComplete:()->())
+    var titleForNextButton: String { get }
+    func onNextButtonPressed(_ viewContext: ViewContext, onComplete: () -> Void)
+    func error(for: Field, value: String?) -> String?
+    func title(for: Field) -> String?
 }
 
 extension NewAtomeFormViewModelProtocol {
-    var isNextButtonEnabled: Bool {
-        Field.allCases.compactMap(validate).isEmpty
+    func isNextEnabled(_ viewContext: ViewContext) -> Bool {
+        Field.allCases.allSatisfy {
+            error(for: $0, value: viewContext.value(for: $0)) == nil
+        }
+    }
+
+    func validate(_ viewContext: ViewContext, value: String?) -> [Field: String] {
+        var errors: [Field: String] = [:]
+        for field in Field.allCases {
+            if let error = error(for: field, value: viewContext.value(for: field)) {
+                errors[field] = error
+            }
+        }
+        return errors
     }
 }

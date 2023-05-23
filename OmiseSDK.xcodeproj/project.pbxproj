@@ -28,6 +28,15 @@
 		731A75D325E3604A002353C0 /* FPXBankChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A75D225E3604A002353C0 /* FPXBankChooserViewController.swift */; };
 		73F9BA4725E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4625E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift */; };
 		73F9BA4B25E6053700F55CA8 /* FPXFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */; };
+		7509D4DD2A1A9FD70050AB38 /* MainActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A275CBB21241E4500C5716F /* MainActionButton.swift */; };
+		7509D4E02A1AA1450050AB38 /* NewAtomeFormViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4DF2A1AA1450050AB38 /* NewAtomeFormViewControllerTests.swift */; };
+		7509D4E22A1C876B0050AB38 /* NewAtomeFormViewContextMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E12A1C876B0050AB38 /* NewAtomeFormViewContextMockup.swift */; };
+		7509D4E42A1C89F10050AB38 /* NewAtomeFormViewModelMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E32A1C89F10050AB38 /* NewAtomeFormViewModelMockup.swift */; };
+		7509D4E72A1C8E3D0050AB38 /* NewAtomeFormViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E62A1C8E3D0050AB38 /* NewAtomeFormViewModelTests.swift */; };
+		7509D4EE2A1D1F9F0050AB38 /* OmiseTestSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 7509D4ED2A1D1F9F0050AB38 /* OmiseTestSDK */; };
+		7509D4EF2A1D1F9F0050AB38 /* OmiseTestSDK in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 7509D4ED2A1D1F9F0050AB38 /* OmiseTestSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		7509D4F42A1D2C3E0050AB38 /* NewAtomeFormViewModelMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E32A1C89F10050AB38 /* NewAtomeFormViewModelMockup.swift */; };
+		7509D4F52A1D2F550050AB38 /* NewAtomeFormViewContextMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E12A1C876B0050AB38 /* NewAtomeFormViewContextMockup.swift */; };
 		75348D4E29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75348D4D29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift */; };
 		75B43B572A0277A3004352C7 /* PaymentInformation.Atome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */; };
 		75DAD88C2A0BA5130098AF96 /* OmiseTestSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; };
@@ -55,6 +64,8 @@
 		75F2A0B92A1A60630038FA54 /* NewAtomeFormViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B32A1A5EAD0038FA54 /* NewAtomeFormViewModelProtocol.swift */; };
 		75F2A0BA2A1A60630038FA54 /* NewAtomeTextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B12A1A5E780038FA54 /* NewAtomeTextFieldContainer.swift */; };
 		75F2A0BB2A1A60630038FA54 /* NewAtomeFormViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B52A1A5F020038FA54 /* NewAtomeFormViewContext.swift */; };
+		75F2A0C12A1A84900038FA54 /* UIColor+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0C02A1A84900038FA54 /* UIColor+Helpers.swift */; };
+		75F2A0C22A1A87AE0038FA54 /* UIColor+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0C02A1A84900038FA54 /* UIColor+Helpers.swift */; };
 		8A01E48D21059EFF00D73FE6 /* PaymentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01E48C21059EFF00D73FE6 /* PaymentInformation.swift */; };
 		8A01F78B20D90EC5003FC11E /* Client+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */; };
 		8A01F78E20D91091003FC11E /* OMSTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78D20D91091003FC11E /* OMSTokenRequest.swift */; };
@@ -65,7 +76,6 @@
 		8A14C209220ACB2B003F5B20 /* Capability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A14C208220ACB2B003F5B20 /* Capability.swift */; };
 		8A14C20B220AE241003F5B20 /* CapabilityOperationFixtureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A14C20A220AE241003F5B20 /* CapabilityOperationFixtureTests.swift */; };
 		8A188BB01D951E3C00FFF467 /* AuthorizingPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentViewController.swift */; };
-		8A275CBC21241E4500C5716F /* MainActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A275CBB21241E4500C5716F /* MainActionButton.swift */; };
 		8A2BE95520A9A39E000CEB60 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2BE95420A9A39E000CEB60 /* Request.swift */; };
 		8A2C451920ECC7A60033E2EB /* OmiseSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 225931181CE3210700841B86 /* OmiseSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8A30FB7D214929C900DC09DC /* PaymentCreatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A30FB7C214929C900DC09DC /* PaymentCreatorController.swift */; };
@@ -157,6 +167,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		7509D4F02A1D1F9F0050AB38 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7509D4EF2A1D1F9F0050AB38 /* OmiseTestSDK in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75DAD88D2A0BA5130098AF96 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -220,6 +241,10 @@
 		731A75D225E3604A002353C0 /* FPXBankChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPXBankChooserViewController.swift; sourceTree = "<group>"; };
 		73F9BA4625E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptableDynamicTableViewController.swift; sourceTree = "<group>"; };
 		73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPXFormViewController.swift; sourceTree = "<group>"; };
+		7509D4DF2A1AA1450050AB38 /* NewAtomeFormViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeFormViewControllerTests.swift; sourceTree = "<group>"; };
+		7509D4E12A1C876B0050AB38 /* NewAtomeFormViewContextMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeFormViewContextMockup.swift; sourceTree = "<group>"; };
+		7509D4E32A1C89F10050AB38 /* NewAtomeFormViewModelMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeFormViewModelMockup.swift; sourceTree = "<group>"; };
+		7509D4E62A1C8E3D0050AB38 /* NewAtomeFormViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeFormViewModelTests.swift; sourceTree = "<group>"; };
 		75348D4D29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseSDK_216d048c5feca16469a7a71566256537.swift; sourceTree = "<group>"; };
 		75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInformation.Atome.swift; sourceTree = "<group>"; };
 		75DAD87F2A0B9AE50098AF96 /* OmiseTestSDK */ = {isa = PBXFileReference; lastKnownFileType = text; path = OmiseTestSDK; sourceTree = SOURCE_ROOT; };
@@ -238,6 +263,7 @@
 		75F2A0B12A1A5E780038FA54 /* NewAtomeTextFieldContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeTextFieldContainer.swift; sourceTree = "<group>"; };
 		75F2A0B32A1A5EAD0038FA54 /* NewAtomeFormViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeFormViewModelProtocol.swift; sourceTree = "<group>"; };
 		75F2A0B52A1A5F020038FA54 /* NewAtomeFormViewContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeFormViewContext.swift; sourceTree = "<group>"; };
+		75F2A0C02A1A84900038FA54 /* UIColor+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Helpers.swift"; sourceTree = "<group>"; };
 		8A00FEC21F1DE88600246078 /* README.md */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; tabWidth = 2; };
 		8A01E48C21059EFF00D73FE6 /* PaymentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInformation.swift; sourceTree = "<group>"; };
 		8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+ObjC.swift"; sourceTree = "<group>"; };
@@ -342,6 +368,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7509D4EE2A1D1F9F0050AB38 /* OmiseTestSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,8 +397,10 @@
 				226E16101D2268B400219652 /* QuickStart.playground */,
 				2259311A1CE3210700841B86 /* OmiseSDK */,
 				F6FE863425E3B0AE00C7A4DE /* OmiseSDKObjc */,
+				75DAD87F2A0B9AE50098AF96 /* OmiseTestSDK */,
 				987A02CA1CE35D5E0035417A /* OmiseSDKTests */,
 				75F2A0912A13B0B10038FA54 /* OmiseSDKUITests */,
+				7509D4F32A1D21D10050AB38 /* --- */,
 				22D4809E1D0EB29C00544CE1 /* ExampleApp */,
 				225931191CE3210700841B86 /* Products */,
 				75DAD8802A0B9B060098AF96 /* Frameworks */,
@@ -428,6 +457,49 @@
 			path = ExampleApp;
 			sourceTree = "<group>";
 		};
+		7509D4DE2A1AA1060050AB38 /* Atome */ = {
+			isa = PBXGroup;
+			children = (
+				7509D4E52A1C8C350050AB38 /* Mockups */,
+				7509D4DF2A1AA1450050AB38 /* NewAtomeFormViewControllerTests.swift */,
+				7509D4E62A1C8E3D0050AB38 /* NewAtomeFormViewModelTests.swift */,
+			);
+			path = Atome;
+			sourceTree = "<group>";
+		};
+		7509D4E52A1C8C350050AB38 /* Mockups */ = {
+			isa = PBXGroup;
+			children = (
+				7509D4E12A1C876B0050AB38 /* NewAtomeFormViewContextMockup.swift */,
+				7509D4E32A1C89F10050AB38 /* NewAtomeFormViewModelMockup.swift */,
+			);
+			path = Mockups;
+			sourceTree = "<group>";
+		};
+		7509D4E82A1C96D90050AB38 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				75F2A0B12A1A5E780038FA54 /* NewAtomeTextFieldContainer.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7509D4EA2A1C97A30050AB38 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				75F2A0922A13B0B10038FA54 /* OmiseSDKUITestsApp.swift */,
+				75F2A0942A13B0B10038FA54 /* ContentView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		7509D4F32A1D21D10050AB38 /* --- */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "---";
+			sourceTree = "<group>";
+		};
 		75348D4C29C3FC8F0008C8A3 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,9 +529,8 @@
 			isa = PBXGroup;
 			children = (
 				75F2A0A32A13B0E70038FA54 /* UIKitLiveKit */,
-				75F2A0922A13B0B10038FA54 /* OmiseSDKUITestsApp.swift */,
-				75F2A0942A13B0B10038FA54 /* ContentView.swift */,
 				75F2A0AD2A1A53870038FA54 /* AtomeController */,
+				7509D4EA2A1C97A30050AB38 /* App */,
 				75F2A0962A13B0B10038FA54 /* Assets.xcassets */,
 				75F2A0982A13B0B10038FA54 /* Preview Content */,
 			);
@@ -494,21 +565,30 @@
 		75F2A0AD2A1A53870038FA54 /* AtomeController */ = {
 			isa = PBXGroup;
 			children = (
-				75F2A0AE2A1A5BE30038FA54 /* Helpers */,
-				75F2A0B32A1A5EAD0038FA54 /* NewAtomeFormViewModelProtocol.swift */,
+				75F2A0AE2A1A5BE30038FA54 /* Property Wrappers */,
+				75F2A0BC2A1A82550038FA54 /* UI Helpers */,
+				7509D4E82A1C96D90050AB38 /* Views */,
 				75F2A0A42A13B1470038FA54 /* NewAtomeFormViewController.swift */,
 				75F2A0B52A1A5F020038FA54 /* NewAtomeFormViewContext.swift */,
-				75F2A0B12A1A5E780038FA54 /* NewAtomeTextFieldContainer.swift */,
+				75F2A0B32A1A5EAD0038FA54 /* NewAtomeFormViewModelProtocol.swift */,
 			);
 			path = AtomeController;
 			sourceTree = "<group>";
 		};
-		75F2A0AE2A1A5BE30038FA54 /* Helpers */ = {
+		75F2A0AE2A1A5BE30038FA54 /* Property Wrappers */ = {
 			isa = PBXGroup;
 			children = (
 				75F2A0AF2A1A5BF30038FA54 /* ProxyProperty.swift */,
 			);
-			path = Helpers;
+			path = "Property Wrappers";
+			sourceTree = "<group>";
+		};
+		75F2A0BC2A1A82550038FA54 /* UI Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				75F2A0C02A1A84900038FA54 /* UIColor+Helpers.swift */,
+			);
+			path = "UI Helpers";
 			sourceTree = "<group>";
 		};
 		8A01F77E20D7D327003FC11E /* Old version */ = {
@@ -668,9 +748,9 @@
 		987A02CA1CE35D5E0035417A /* OmiseSDKTests */ = {
 			isa = PBXGroup;
 			children = (
-				75DAD87F2A0B9AE50098AF96 /* OmiseTestSDK */,
-				987A03AC1CE5CD450035417A /* Fixtures */,
 				987A02CD1CE35D5E0035417A /* Info.plist */,
+				987A03AC1CE5CD450035417A /* Fixtures */,
+				7509D4DE2A1AA1060050AB38 /* Atome */,
 				8A3C10572159FCE900BEFD8A /* BadRequestAPIErrorParsingTestCase.swift */,
 				8A14C20A220AE241003F5B20 /* CapabilityOperationFixtureTests.swift */,
 				8AFE10BA20B69B39008E741D /* ClientTestCase.swift */,
@@ -778,12 +858,16 @@
 				75F2A08C2A13B0B00038FA54 /* Sources */,
 				75F2A08D2A13B0B00038FA54 /* Frameworks */,
 				75F2A08E2A13B0B00038FA54 /* Resources */,
+				7509D4F02A1D1F9F0050AB38 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = OmiseSDKUITests;
+			packageProductDependencies = (
+				7509D4ED2A1D1F9F0050AB38 /* OmiseTestSDK */,
+			);
 			productName = OmiseSDKUITests;
 			productReference = 75F2A0902A13B0B00038FA54 /* OmiseSDKUITests.app */;
 			productType = "com.apple.product-type.application";
@@ -1020,7 +1104,6 @@
 				75B43B572A0277A3004352C7 /* PaymentInformation.Atome.swift in Sources */,
 				8A14C209220ACB2B003F5B20 /* Capability.swift in Sources */,
 				8AD0609320B55B3A0074894E /* RequestTask.swift in Sources */,
-				8A275CBC21241E4500C5716F /* MainActionButton.swift in Sources */,
 				8A0A67E72137EE49006356B7 /* AdaptableStaticTableViewController.swift in Sources */,
 				8A01F78E20D91091003FC11E /* OMSTokenRequest.swift in Sources */,
 				29A7930629543C7E009A8A07 /* AtomeFormViewController.swift in Sources */,
@@ -1049,6 +1132,8 @@
 				F6614CD6243DB8E7005B656E /* TrueMoneyFormViewController.swift in Sources */,
 				75F2A0B72A1A60630038FA54 /* NewAtomeFormViewController.swift in Sources */,
 				8A01E48D21059EFF00D73FE6 /* PaymentInformation.swift in Sources */,
+				75F2A0C22A1A87AE0038FA54 /* UIColor+Helpers.swift in Sources */,
+				7509D4DD2A1A9FD70050AB38 /* MainActionButton.swift in Sources */,
 				225931501CE46F7F00841B86 /* CardNumber.swift in Sources */,
 				8AC1D3A5213922570051F966 /* InstallmentBankingSourceChooserViewController.swift in Sources */,
 				2259314E1CE46E5700841B86 /* CardBrand.swift in Sources */,
@@ -1078,14 +1163,17 @@
 				75F2A0B02A1A5BF30038FA54 /* ProxyProperty.swift in Sources */,
 				75F2A0952A13B0B10038FA54 /* ContentView.swift in Sources */,
 				75F2A0B22A1A5E780038FA54 /* NewAtomeTextFieldContainer.swift in Sources */,
+				7509D4F52A1D2F550050AB38 /* NewAtomeFormViewContextMockup.swift in Sources */,
 				75F2A0A22A13B0E30038FA54 /* UIKitViewControllerPresentable.swift in Sources */,
 				75F2A0B42A1A5EAD0038FA54 /* NewAtomeFormViewModelProtocol.swift in Sources */,
 				75F2A0A82A13B73B0038FA54 /* Swift Version Compatibility.swift in Sources */,
 				75F2A0A52A13B1470038FA54 /* NewAtomeFormViewController.swift in Sources */,
 				75F2A0A62A13B70F0038FA54 /* OmiseTextField.swift in Sources */,
 				75F2A0A02A13B0DB0038FA54 /* UIKitViewPresentable.swift in Sources */,
+				75F2A0C12A1A84900038FA54 /* UIColor+Helpers.swift in Sources */,
 				75F2A0AC2A13B8D40038FA54 /* UIView+Helpers.swift in Sources */,
 				75F2A0932A13B0B10038FA54 /* OmiseSDKUITestsApp.swift in Sources */,
+				7509D4F42A1D2C3E0050AB38 /* NewAtomeFormViewModelMockup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1108,6 +1196,8 @@
 			files = (
 				8A14C20B220AE241003F5B20 /* CapabilityOperationFixtureTests.swift in Sources */,
 				8AFE10BB20B69B39008E741D /* ClientTestCase.swift in Sources */,
+				7509D4E02A1AA1450050AB38 /* NewAtomeFormViewControllerTests.swift in Sources */,
+				7509D4E42A1C89F10050AB38 /* NewAtomeFormViewModelMockup.swift in Sources */,
 				8A43454720DBAE76005C5C94 /* PANModelTestCase.swift in Sources */,
 				8A429E7B2109A3AE007C230F /* PaymentInformationTestCase.swift in Sources */,
 				224460041CF43A1200801D0F /* SDKTestCase.swift in Sources */,
@@ -1116,6 +1206,8 @@
 				2244600A1CF441DC00801D0F /* TokenRequestDelegateDummy.swift in Sources */,
 				224460051CF43A1500801D0F /* CardNumberTest.swift in Sources */,
 				987A03211CE5B7D70035417A /* OmiseTokenRequestTest.swift in Sources */,
+				7509D4E72A1C8E3D0050AB38 /* NewAtomeFormViewModelTests.swift in Sources */,
+				7509D4E22A1C876B0050AB38 /* NewAtomeFormViewContextMockup.swift in Sources */,
 				8A3C10562159F7FC00BEFD8A /* InvalidCardAPIErrorParsingTestCase.swift in Sources */,
 				8A37E43620B584D300E2DA18 /* ModelTestCase.swift in Sources */,
 			);
@@ -1632,6 +1724,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "-DOMISE_SDK_UNIT_TESTING";
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1654,6 +1747,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "-DOMISE_SDK_UNIT_TESTING";
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1777,6 +1871,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "-DOMISE_SDK_UNIT_TESTING";
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1914,6 +2009,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7509D4ED2A1D1F9F0050AB38 /* OmiseTestSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OmiseTestSDK;
+		};
 		75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OmiseTestSDK;

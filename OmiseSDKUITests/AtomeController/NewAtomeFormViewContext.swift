@@ -21,5 +21,17 @@ struct NewAtomeFormViewContext {
         case street2
     }
 
-    var fields: [Field: String]
+    private var fields: [Field: String] = [:]
+
+    init(fields: [Field: String] = [:]) {
+        self.fields = fields
+    }
+    
+    mutating func setValue(_ value: String?, for field: Field) {
+        fields[field] = value
+    }
+    
+    func value(for field: Field) -> String? {
+        fields[field]
+    }
 }
