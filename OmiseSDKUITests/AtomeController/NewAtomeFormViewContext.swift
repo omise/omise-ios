@@ -6,7 +6,7 @@
 //  Copyright © 2023 Omise. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct NewAtomeFormViewContext {
     enum Field: String, CaseIterable {
@@ -33,5 +33,54 @@ struct NewAtomeFormViewContext {
     
     func value(for field: Field) -> String? {
         fields[field]
+    }
+}
+
+extension NewAtomeFormViewContext.Field {
+    var isOptional: Bool {
+        switch self {
+        case .name, .email, .street2: return true
+        default: return false
+        }
+    }
+
+    var title: String {
+        NSLocalizedString("Atome.field.\(self.rawValue)",
+                          tableName: "Localizable",
+                          bundle: .omiseSDK,
+                          value: self.rawValue.capitalized,
+                          comment: "Atome field name"
+        )
+    }
+
+    var keyboardType: UIKeyboardType {
+        switch self {
+        case .email: return .emailAddress
+        case .phoneNumber: return .phonePad
+        case .postalCode, .street1, .street2: return .numbersAndPunctuation
+        default: return .asciiCapable
+        }
+    }
+
+    var capitalization: UITextAutocapitalizationType {
+        switch self {
+        case .name, .city, .state, .street1, .street2: return .words
+        case .country: return .allCharacters
+        default: return .none
+        }
+    }
+
+    var contentType: UITextContentType {
+        switch self {
+        case .name: return .name
+        case .phoneNumber: return .telephoneNumber
+        case .email: return .emailAddress
+        case .country: return .countryName
+        case .city: return .addressCity
+        case .postalCode: return .postalCode
+        case .state: return .addressState
+        case .street1: return .streetAddressLine1
+        case .street2: return .streetAddressLine2
+        }
     }
 }

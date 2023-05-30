@@ -6,19 +6,31 @@
 //  Copyright © 2023 Omise. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol NewAtomeFormViewModelProtocol {
     typealias ViewContext = NewAtomeFormViewContext
     typealias Field = ViewContext.Field
-    var titleForNextButton: String { get }
-    func onNextButtonPressed(_ viewContext: ViewContext, onComplete: () -> Void)
+    var fields: [Field] { get }
+    var submitButtonTitle: String { get }
+    var headerText: String { get }
+    var logoName: String { get }
+
+    func onSubmitButtonPressed(_ viewContext: ViewContext, onComplete: () -> Void)
     func error(for: Field, value: String?) -> String?
     func title(for: Field) -> String?
+    func placeholder(for: Field) -> String?
+    func keyboardType(for: Field) -> UIKeyboardType
+    func capitalization(for: Field) -> UITextAutocapitalizationType
+    func contentType(for: Field) -> UITextContentType
 }
 
 extension NewAtomeFormViewModelProtocol {
-    func isNextEnabled(_ viewContext: ViewContext) -> Bool {
+    var fields: [Field] {
+        Field.allCases
+    }
+    
+    func isSubmitButtonEnabled(_ viewContext: ViewContext) -> Bool {
         Field.allCases.allSatisfy {
             error(for: $0, value: viewContext.value(for: $0)) == nil
         }
@@ -32,5 +44,19 @@ extension NewAtomeFormViewModelProtocol {
             }
         }
         return errors
+    }
+
+    func placeholder(for field: Field) -> String? {
+        return field.title
+    }
+
+    func keyboardType(for field: Field) -> UIKeyboardType {
+        return field.keyboardType
+    }
+    func capitalization(for field: Field) -> UITextAutocapitalizationType {
+        return field.capitalization
+    }
+    func contentType(for field: Field) -> UITextContentType {
+        return field.contentType
     }
 }

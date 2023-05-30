@@ -12,13 +12,16 @@ import Foundation
 #endif
 
 class NewAtomeFormViewModelMockup: NewAtomeFormViewModelProtocol {
-    var titleForNextButton: String = "Next"
+    var submitButtonTitle: String = "Next"
+    var headerText: String = "Please input the below information to complete the charge creation with Atome."
+    var logoName: String = "Atome_Big.pdf"
     var titles: [Field: String] = [:]
     var errors: [Field: String] = [:]
 
-    init(titleForNextButton: String? = nil, titles: [Field: String]? = nil, errors: [Field: String]? = nil) {
-        if let titleForNextButton = titleForNextButton {
-            self.titleForNextButton = titleForNextButton
+
+    init(submitButtonTitle: String? = nil, titles: [Field: String]? = nil, errors: [Field: String]? = nil) {
+        if let submitButtonTitle = submitButtonTitle {
+            self.submitButtonTitle = submitButtonTitle
         }
         if let titles = titles {
             self.titles = titles
@@ -32,15 +35,20 @@ class NewAtomeFormViewModelMockup: NewAtomeFormViewModelProtocol {
         errors[field]
     }
     func title(for field: Field) -> String? {
-        titles[field]
+        if field.isOptional {
+            return field.title.localized() + " " + "Atome.field.optional".localized()
+        } else {
+            return field.title.localized()
+        }
     }
-    func onNextButtonPressed(_ viewContext: ViewContext, onComplete: () -> Void) {
+    func onSubmitButtonPressed(_ viewContext: ViewContext, onComplete: () -> Void) {
         onComplete()
     }
 }
 
 extension NewAtomeFormViewModelMockup {
-    @discardableResult func applyMockupTitles() -> Self {
+    @discardableResult
+    func applyMockupTitles() -> Self {
         self.titles = Field.allCases.reduce(into: [Field: String]()) { list, field in
             list[field] = field.rawValue
         }

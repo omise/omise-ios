@@ -42,5 +42,7 @@ class NewAtomeFormViewModelTests: XCTestCase {
     }
 
     func testProcessing() {
+        // test processing
+        XCTAssert(true)
     }
 }

@@ -1,3 +1,17 @@
+// Atome
+"Atome.header.text" = "Please input the below information to complete the charge creation with Atome.";
+"Atome.field.name" = "Name";
+"Atome.field.email" = "Email";
+"Atome.field.phoneNumber" = "Phone Number";
+"Atome.field.phoneNumber.hint" = "(Enter '+' in front of country code)";
+"Atome.field.country" = "Country code";
+"Atome.field.city" = "City";
+"Atome.field.postalCode" = "Postal code";
+"Atome.field.state" = "State";
+"Atome.field.street1" = "Street";
+"Atome.field.street2" = "Street 2";
+"Atome.field.optional" = "(optional)";
+
 "installments.number-of-terms-chooser.number-of-terms-cell.label.text" = "%d months";
 
 "econtext.convenience-store.navigation-item.title" = "Konbini";

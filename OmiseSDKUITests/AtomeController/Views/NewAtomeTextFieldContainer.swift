@@ -13,6 +13,7 @@ class NewAtomeTextFieldContainer: UIView {
         var errorColor = UIColor(0xFB0000)
         var titleColor = UIColor(0x3C414D)
         var textColor = UIColor(0x3C414D)
+        var textFieldHeight = CGFloat(47)
     }
 
     private var style = Style()
@@ -26,6 +27,8 @@ class NewAtomeTextFieldContainer: UIView {
     private lazy var textField: OmiseTextField = {
         let textField = OmiseTextField()
         textField.textColor = style.textColor
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.heightAnchor.constraint(equalToConstant: style.textFieldHeight).isActive = true
         return textField
     }()
     private lazy var errorLabel: UILabel = {
@@ -38,11 +41,20 @@ class NewAtomeTextFieldContainer: UIView {
     private lazy var contentView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = .fillEqually
+        stackView.distribution = .equalSpacing
         stackView.alignment = .fill
         stackView.spacing = 0
         return stackView
     }()
+
+    var onTextFieldShouldReturn: () -> (Bool) = { return false }
+    var onTextChanged: (String) -> Void = { _ in }
+
+    @ProxyProperty(\NewAtomeTextFieldContainer.textField.keyboardType) var keyboardType: UIKeyboardType
+    @ProxyProperty(\NewAtomeTextFieldContainer.textField.textContentType) var textContentType: UITextContentType?
+    @ProxyProperty(\NewAtomeTextFieldContainer.textField.autocapitalizationType) var autocapitalizationType: UITextAutocapitalizationType
+    @ProxyProperty(\NewAtomeTextFieldContainer.textField.returnKeyType) var returnKeyType: UIReturnKeyType
+    @ProxyProperty(\NewAtomeTextFieldContainer.textField.autocorrectionType) var autocorrectionType: UITextAutocorrectionType
 
     @ProxyProperty(\NewAtomeTextFieldContainer.titleLabel.text) var title: String?
     @ProxyProperty(\NewAtomeTextFieldContainer.textField.placeholder) var placeholder: String?
@@ -59,13 +71,33 @@ class NewAtomeTextFieldContainer: UIView {
         contentView.addArrangedSubview(textField)
         contentView.addArrangedSubview(errorLabel)
         addSubviewAndFit(contentView)
+
+        textField.addTarget(self, action: #selector(didChangeText), for: .editingChanged)
+        textField.delegate = self
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+
+    @objc func didChangeText() {
+        onTextChanged(textField.text ?? "")
+    }
+
+    override func becomeFirstResponder() -> Bool {
+        textField.becomeFirstResponder()
+    }
+
+    override func resignFirstResponder() -> Bool {
+        textField.resignFirstResponder()
+    }
 }
 
+extension NewAtomeTextFieldContainer: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        onTextFieldShouldReturn()
+    }
+}
 
 #if SWIFTUI_ENABLED
 import SwiftUI
