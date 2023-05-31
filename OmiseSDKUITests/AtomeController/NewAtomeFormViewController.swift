@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol NewAtomeFormViewControllerInterface {
-    func onNextButtonTapped()
+    func onSubmitButtonTapped()
 
 }
 // @objc(OMSNewAtomeFormViewController)
@@ -25,8 +25,9 @@ class NewAtomeFormViewController: UIViewController {
         var backgroundColorForEnabledNextButton = UIColor(0x1957F0)
         var textColorForNextButton = UIColor(0xFFFFFF)
         var textColor = UIColor(0x3C414D)
-        var contentSpacing = CGFloat(12)
-        var stackSpacing = CGFloat(8)
+        var contentSpacing = CGFloat(18)
+        var stackSpacing = CGFloat(12)
+        var inputsSpacing = CGFloat(10)
         var nextButtonHeight = CGFloat(47)
     }
 
@@ -49,7 +50,9 @@ class NewAtomeFormViewController: UIViewController {
     private lazy var detailsLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.textAlignment = .center
         label.textColor = style.textColor
+        label.font = .preferredFont(forTextStyle: .body)
         return label
     }()
 
@@ -62,24 +65,20 @@ class NewAtomeFormViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private var nameInput = NewAtomeTextFieldContainer()
-    private var emailInput = NewAtomeTextFieldContainer()
-    private var phoneNumberInput = NewAtomeTextFieldContainer()
-    private var shippingStreet2Input = NewAtomeTextFieldContainer()
-    private var shippingStreetInput = NewAtomeTextFieldContainer()
-    private var shippingCityInput = NewAtomeTextFieldContainer()
-    private var shippingStateInput = NewAtomeTextFieldContainer()
-    private var shippingCountryCodeInput = NewAtomeTextFieldContainer()
-    private var shippingPostalCodeInput = NewAtomeTextFieldContainer()
-
     private lazy var submitButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: style.nextButtonHeight).isActive = true
+        button.cornerRadius(4)
         return button
     }()
 
-    private var requestingIndicatorView = UIActivityIndicatorView()
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .white)
+        indicator.color = UIColor(0x3D404C)
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
 
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -100,6 +99,15 @@ class NewAtomeFormViewController: UIViewController {
         return stackView
     }()
 
+    private lazy var inputsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .fill
+        stackView.spacing = style.stackSpacing
+        return stackView
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -109,7 +117,70 @@ class NewAtomeFormViewController: UIViewController {
         }
     }
 
-    private func setupViews() {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+}
+
+// MARK: Non-private for Unit-Testing
+extension NewAtomeFormViewController {
+    func makeViewContext() -> ViewContext{
+        guard let fields = viewModel?.fields else { return ViewContext() }
+
+        var context = ViewContext()
+        for field in fields {
+            context.setValue(input(for: field)?.text, for: field)
+        }
+        return context
+    }
+
+    func updateSubmitButtonState() {
+        let isEnabled = viewModel?.isSubmitButtonEnabled(makeViewContext()) ?? false
+        self.submitButton.isEnabled = isEnabled
+    }
+
+    func refreshError(for field: Field) {
+        guard let input = input(for: field) else { return }
+        input.error = viewModel?.error(for: field, validate: input.text)
+    }
+
+    func validateAll() {
+        for field in viewModel?.fields ?? [] {
+            refreshError(for: field)
+        }
+
+        updateSubmitButtonState()
+    }
+
+    func input(for field: Field) -> NewAtomeInputView? {
+        for input in inputsStackView.arrangedSubviews {
+            guard let input = input as? NewAtomeInputView, input.identifier == field.rawValue else {
+                continue
+            }
+            return input
+        }
+        return nil
+    }
+
+    func field(for input: NewAtomeInputView) -> Field? {
+        return Field(rawValue: input.identifier)
+    }
+}
+
+private extension NewAtomeFormViewController {
+    func startActivityIndicator() {
+        activityIndicator.startAnimating()
+        scrollContentView.isUserInteractionEnabled = false
+    }
+
+    func stopActivityIndicator() {
+        activityIndicator.stopAnimating()
+        scrollContentView.isUserInteractionEnabled = true
+    }
+
+
+    func setupViews() {
         view.addSubviewAndFit(scrollView)
         scrollView.addSubviewAndFit(scrollContentView)
         scrollContentView.addSubviewAndFit(stackView, horizontal: style.contentSpacing)
@@ -117,58 +188,26 @@ class NewAtomeFormViewController: UIViewController {
             scrollContentView.widthAnchor.constraint(equalTo: view.widthAnchor)
         ])
 
+        stackView.addArrangedSubview(SpacerView(vertical: 12.0))
         stackView.addArrangedSubview(logoImageView)
         stackView.addArrangedSubview(detailsLabel)
-        stackView.addArrangedSubview(shippingPostalCodeInput)
-        stackView.addArrangedSubview(nameInput)
-        stackView.addArrangedSubview(emailInput)
-        stackView.addArrangedSubview(phoneNumberInput)
-        stackView.addArrangedSubview(shippingStreetInput)
-        stackView.addArrangedSubview(shippingStreet2Input)
-        stackView.addArrangedSubview(shippingCityInput)
-        stackView.addArrangedSubview(shippingStateInput)
-        stackView.addArrangedSubview(shippingCountryCodeInput)
-        stackView.addArrangedSubview(shippingPostalCodeInput)
+        stackView.addArrangedSubview(SpacerView(vertical: 12.0))
+        stackView.addArrangedSubview(inputsStackView)
         stackView.addArrangedSubview(submitButton)
+
+        view.addSubviewAndFit(activityIndicator)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-
-    var currentContext: ViewContext {
-        guard let fields = viewModel?.fields else { return ViewContext() }
-
-        var context = ViewContext()
-        for field in fields {
-            context.setValue(input(for: field).text, for: field)
-        }
-        return context
-    }
-
-    func validate() {
-        guard let fields = viewModel?.fields else {
-            self.submitButton.isEnabled = false
-            return
-        }
-
-        for field in fields {
-            let inputContainer = input(for: field)
-            inputContainer.error = viewModel?.error(for: field, value: inputContainer.text)
-        }
-        self.submitButton.isEnabled = viewModel?.isSubmitButtonEnabled(currentContext) ?? false
-    }
-
-    private func bind(to viewModel: ViewModel) {
+    func bind(to viewModel: ViewModel) {
         guard isViewLoaded else { return }
         setupInputs(viewModel: viewModel)
         setupSubmitButton(viewModel: viewModel)
         detailsLabel.text = viewModel.headerText
-        logoImageView.image = UIImage(named: viewModel.logoName)
-    }
-}
+        logoImageView.image = UIImage(named: viewModel.logoName, in: .omiseSDK, compatibleWith: nil)
 
-private extension NewAtomeFormViewController {
+        updateSubmitButtonState()
+    }
+
     func setupSubmitButton(viewModel: ViewModel) {
         submitButton.setBackgroundImage(
             style.backgroundColorForDisabledNextButton.image(),
@@ -182,65 +221,84 @@ private extension NewAtomeFormViewController {
         submitButton.setTitle(viewModel.submitButtonTitle, for: ControlState.normal)
     }
 
+    func removeAllInputs() {
+        for view in inputsStackView.arrangedSubviews {
+            inputsStackView.removeArrangedSubview(view)
+        }
+    }
+
     func setupInputs(viewModel: ViewModel) {
+        removeAllInputs()
+
         let fields = viewModel.fields
         for field in fields {
-            let input = input(for: field)
+            let input = NewAtomeInputView(id: field.rawValue)
+            inputsStackView.addArrangedSubview(input)
+
             input.title = viewModel.title(for: field)
-            input.title = viewModel.title(for: field)
+            input.placeholder = viewModel.placeholder(for: field)
             input.textContentType = viewModel.contentType(for: field)
             input.autocapitalizationType = viewModel.capitalization(for: field)
             input.keyboardType = viewModel.keyboardType(for: field)
-            input.placeholder = viewModel.placeholder(for: field)
             input.autocorrectionType = .no
 
-            if let nextInput = self.input(after: input) {
+            input.onTextChanged = { [weak self] _ in
+//                self?.validate()
+            }
+
+            if field != fields.last {
                 input.returnKeyType = .next
-                input.onTextFieldShouldReturn = { [weak nextInput] in
-                    assert(false, "Need validation and show error here")
-                    _ = nextInput?.becomeFirstResponder()
+                input.onTextFieldShouldReturn = { [weak self, weak input] in
+                    guard let self = self, let input = input else { return true }
+                    self.onKeboardNextTapped(input: input)
                     return false
                 }
             } else {
                 input.returnKeyType = .done
-                input.onTextFieldShouldReturn = { [weak self] in
-                    self?.onNextButtonTapped()
+                input.onTextFieldShouldReturn = { [weak self, weak input] in
+                    guard let self = self, let input = input else { return true }
+                    self.onKeyboardDoneTapped(input: input)
                     return true
                 }
             }
         }
     }
-    func input(after input: NewAtomeTextFieldContainer) -> NewAtomeTextFieldContainer? {
-        guard let index = stackView.arrangedSubviews.firstIndex(of: input) else { return nil }
 
-        for i in index + 1..<stackView.arrangedSubviews.count {
-            if let nextInput = stackView.arrangedSubviews.at(i) as? NewAtomeTextFieldContainer {
-                return nextInput
-            }
+    func onKeboardNextTapped(input: NewAtomeInputView) {
+        validateAll()
+
+        if let nextInput = self.input(after: input) {
+            _ = nextInput.becomeFirstResponder()
         }
-        return nil
     }
 
-    func input(for field: Field) -> NewAtomeTextFieldContainer {
-        switch field {
-        case .name: return nameInput
-        case .email: return emailInput
-        case .phoneNumber: return phoneNumberInput
-        case .street2: return shippingStreet2Input
-        case .street1: return shippingStreetInput
-        case .city: return shippingCityInput
-        case .state: return shippingStateInput
-        case .country: return shippingCountryCodeInput
-        case .postalCode: return shippingPostalCodeInput
+    func onKeyboardDoneTapped(input: NewAtomeInputView) {
+        onSubmitButtonTapped()
+    }
+
+    func input(after input: NewAtomeInputView) -> NewAtomeInputView? {
+        guard
+            let inputField = Field(rawValue: input.identifier),
+            let viewModel = viewModel,
+            let index = viewModel.fields.firstIndex(of: inputField),
+            let nextField = viewModel.fields.at(index + 1),
+            let nextInput = self.input(for: nextField) else {
+            return nil
         }
+
+        return nextInput
     }
 }
 
 extension NewAtomeFormViewController: NewAtomeFormViewControllerInterface {
-    func onNextButtonTapped() {
+    func onSubmitButtonTapped() {
+        let currentContext = makeViewContext()
         guard let viewModel = self.viewModel, viewModel.isSubmitButtonEnabled(currentContext) else { return }
 
-        print("Sending data \(currentContext)")
+        startActivityIndicator()
+        viewModel.onSubmitButtonPressed(currentContext) {
+            stopActivityIndicator()
+        }
     }
 }
 

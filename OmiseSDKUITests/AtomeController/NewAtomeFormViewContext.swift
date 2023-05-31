@@ -11,8 +11,8 @@ import UIKit
 struct NewAtomeFormViewContext {
     enum Field: String, CaseIterable {
         case name
-        case phoneNumber
         case email
+        case phoneNumber
         case country
         case city
         case postalCode
@@ -45,14 +45,17 @@ extension NewAtomeFormViewContext.Field {
     }
 
     var title: String {
-        NSLocalizedString("Atome.field.\(self.rawValue)",
-                          tableName: "Localizable",
-                          bundle: .omiseSDK,
-                          value: self.rawValue.capitalized,
-                          comment: "Atome field name"
-        )
+        "Atome.field.\(self.rawValue)".localized()
     }
 
+    var validatorRegex: String? {
+        switch self {
+        case .phoneNumber: return "^(\\+\\d{2}|0)\\d{9}$"
+        case .email: return "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        default: return nil
+        }
+    }
+    
     var keyboardType: UIKeyboardType {
         switch self {
         case .email: return .emailAddress
@@ -81,6 +84,13 @@ extension NewAtomeFormViewContext.Field {
         case .state: return .addressState
         case .street1: return .streetAddressLine1
         case .street2: return .streetAddressLine2
+        }
+    }
+
+    var error: String? {
+        switch self {
+        case .name, .street2: return nil
+        default: return "Atome.field.\(self.rawValue).error".localized()
         }
     }
 }

@@ -11,7 +11,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         UIKitViewControllerPresentable(
-            viewController: NewAtomeFormViewController(viewModel: NewAtomeFormViewModelMockup().applyMockupTitles())
+            viewController: NewAtomeFormViewController(viewModel: NewAtomeFormViewModel())
         )
     }
 }

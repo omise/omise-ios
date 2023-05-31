@@ -14,9 +14,10 @@ import Foundation
 class NewAtomeFormViewModelMockup: NewAtomeFormViewModelProtocol {
     var submitButtonTitle: String = "Next"
     var headerText: String = "Please input the below information to complete the charge creation with Atome."
-    var logoName: String = "Atome_Big.pdf"
+    var logoName: String = "Atome"
     var titles: [Field: String] = [:]
     var errors: [Field: String] = [:]
+    var fields: [Field] = Field.allCases
 
 
     init(submitButtonTitle: String? = nil, titles: [Field: String]? = nil, errors: [Field: String]? = nil) {
@@ -31,9 +32,10 @@ class NewAtomeFormViewModelMockup: NewAtomeFormViewModelProtocol {
         }
     }
 
-    func error(for field: Field, value: String?) -> String? {
+    func error(for field: Field, validate: String?) -> String? {
         errors[field]
     }
+    
     func title(for field: Field) -> String? {
         if field.isOptional {
             return field.title.localized() + " " + "Atome.field.optional".localized()

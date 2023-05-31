@@ -13,37 +13,27 @@ import OmiseTestSDK
 class NewAtomeFormViewControllerTests: XCTestCase {
     typealias ViewModel = NewAtomeFormViewModelMockup
 
-    func testBindTitles() {
+    func testBindInputs() {
         let viewModel = ViewModel()
         for field in NewAtomeFormViewContext.Field.allCases {
             viewModel.titles[field] = "title: " + field.rawValue
-        }
-
-        let vc = NewAtomeFormViewController()
-        vc.set(viewModel: viewModel)
-
-        for field in ViewModel.Field.allCases {
-            XCTAssertEqual(vc.input(for: field).title, "title: " + field.rawValue)
-        }
-    }
-
-    func testBindErrors() {
-        let viewModel = ViewModel()
-        for field in NewAtomeFormViewContext.Field.allCases {
             viewModel.errors[field] = "error: " + field.rawValue
         }
 
-        let vc = NewAtomeFormViewController()
-        vc.set(viewModel: viewModel)
+        let vc = NewAtomeFormViewController(viewModel: viewModel)
+        for field in ViewModel.Field.allCases {
+            XCTAssertEqual(vc.input(for: field).title, "title: " + field.rawValue)
+            XCTAssertEqual(vc.input(for: field).error, "")
+        }
+
         vc.validate()
         for field in ViewModel.Field.allCases {
             XCTAssertEqual(vc.input(for: field).error, "error: " + field.rawValue)
         }
     }
-    
+
     func testFieldValidation() {
-        let vc = NewAtomeFormViewController()
-        vc.set(viewModel: ViewModel())
+        let vc = NewAtomeFormViewController(viewModel: ViewModel())
 //
         let validCases = TestCaseValueGenerator.validCases(NewAtomeFormViewContext.generateMockup)
 //        for case in validCases {
