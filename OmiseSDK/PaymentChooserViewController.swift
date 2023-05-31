@@ -331,8 +331,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         case ("GoToDuitNowOBWBankChooserSegue"?, let controller as DuitNowOBWBankChooserViewController):
             controller.showingValues = duitNowOBWBanks
             controller.flowSession = self.flowSession
-        case ("GoToAtomeSegue"?, let controller as AtomeFormViewController):
-            controller.flowSession = self.flowSession
+        case ("GoToAtomeSegue"?, let controller as NewAtomeFormViewController):
+            controller.viewModel = NewAtomeFormViewModel(flowSession: flowSession)
         default:
             break
         }
@@ -403,6 +403,9 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .duitNowQR
         case .payPay:
             payment = .payPay
+        case .atome:
+            goToAtome()
+            return
         default:
             return
         }
@@ -418,6 +421,16 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             cell?.accessoryView = oldAccessoryView
             self.view.isUserInteractionEnabled = true
         }
+    }
+
+    func goToAtome() {
+        let vc = NewAtomeFormViewController(viewModel: NewAtomeFormViewModel(flowSession: flowSession))
+        navigationController?.pushViewController(vc, animated: true)
+////
+//        if let storyboard = self.storyboard {
+//            let vc = storyboard.instantiateViewController(withIdentifier: "AtomeFormViewController")
+//            navigationController?.pushViewController(vc, animated: true)
+//        }
     }
 
     // swiftlint:disable:next function_body_length

@@ -42,7 +42,6 @@
 		75405A792A25D33F008C21F6 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A772A25D327008C21F6 /* String+Helpers.swift */; };
 		75405A7C2A25EC88008C21F6 /* Array+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A7B2A25EC88008C21F6 /* Array+Helpers.swift */; };
 		75405A7D2A25ED11008C21F6 /* Array+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A7B2A25EC88008C21F6 /* Array+Helpers.swift */; };
-		75405A7F2A262B4D008C21F6 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75348D4D29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift */; };
 		75405A812A2633B6008C21F6 /* SpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A802A2633B6008C21F6 /* SpacerView.swift */; };
 		75405A8B2A26340E008C21F6 /* UIStackView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A862A26340E008C21F6 /* UIStackView+Helpers.swift */; };
 		75405A8C2A26340E008C21F6 /* UIStackView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A862A26340E008C21F6 /* UIStackView+Helpers.swift */; };
@@ -57,8 +56,11 @@
 		75405A952A26343F008C21F6 /* SpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A802A2633B6008C21F6 /* SpacerView.swift */; };
 		75405A992A2634D9008C21F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75405A972A2634D9008C21F6 /* Assets.xcassets */; };
 		75405A9C2A266F50008C21F6 /* NewAtomeFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A9B2A266F50008C21F6 /* NewAtomeFormViewModel.swift */; };
-		75405A9D2A266F50008C21F6 /* NewAtomeFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A9B2A266F50008C21F6 /* NewAtomeFormViewModel.swift */; };
-		75405AA02A272314008C21F6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75405A9E2A272314008C21F6 /* Localizable.strings */; };
+		75405AA22A27F5D0008C21F6 /* NewAtomeFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0A42A13B1470038FA54 /* NewAtomeFormViewController.swift */; };
+		75405AA42A27F5D3008C21F6 /* NewAtomeFormViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B52A1A5F020038FA54 /* NewAtomeFormViewContext.swift */; };
+		75405AA52A27F5D3008C21F6 /* NewAtomeFormViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B32A1A5EAD0038FA54 /* NewAtomeFormViewModelProtocol.swift */; };
+		75405AA82A27F97E008C21F6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75405AA62A27F97E008C21F6 /* Localizable.strings */; };
+		75405AAB2A27F9B4008C21F6 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75348D4D29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift */; };
 		75B43B572A0277A3004352C7 /* PaymentInformation.Atome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */; };
 		75DAD88C2A0BA5130098AF96 /* OmiseTestSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; };
 		75DAD88E2A0BA5130098AF96 /* OmiseTestSDK in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -70,13 +72,10 @@
 		75F2A09A2A13B0B10038FA54 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75F2A0992A13B0B10038FA54 /* Preview Assets.xcassets */; };
 		75F2A0A02A13B0DB0038FA54 /* UIKitViewPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A09F2A13B0DB0038FA54 /* UIKitViewPresentable.swift */; };
 		75F2A0A22A13B0E30038FA54 /* UIKitViewControllerPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0A12A13B0E30038FA54 /* UIKitViewControllerPresentable.swift */; };
-		75F2A0A52A13B1470038FA54 /* NewAtomeFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0A42A13B1470038FA54 /* NewAtomeFormViewController.swift */; };
 		75F2A0A62A13B70F0038FA54 /* OmiseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062F1CFEA7E4004BCF51 /* OmiseTextField.swift */; };
 		75F2A0A82A13B73B0038FA54 /* Swift Version Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatibility.swift */; };
 		75F2A0B02A1A5BF30038FA54 /* ProxyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0AF2A1A5BF30038FA54 /* ProxyProperty.swift */; };
 		75F2A0B22A1A5E780038FA54 /* NewAtomeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B12A1A5E780038FA54 /* NewAtomeInputView.swift */; };
-		75F2A0B42A1A5EAD0038FA54 /* NewAtomeFormViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B32A1A5EAD0038FA54 /* NewAtomeFormViewModelProtocol.swift */; };
-		75F2A0B62A1A5F020038FA54 /* NewAtomeFormViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B52A1A5F020038FA54 /* NewAtomeFormViewContext.swift */; };
 		75F2A0B72A1A60630038FA54 /* NewAtomeFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0A42A13B1470038FA54 /* NewAtomeFormViewController.swift */; };
 		75F2A0B82A1A60630038FA54 /* ProxyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0AF2A1A5BF30038FA54 /* ProxyProperty.swift */; };
 		75F2A0B92A1A60630038FA54 /* NewAtomeFormViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B32A1A5EAD0038FA54 /* NewAtomeFormViewModelProtocol.swift */; };
@@ -122,7 +121,6 @@
 		8A7567662178956800C684C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7567642178956800C684C9 /* Main.storyboard */; };
 		8A7567682178959400C684C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7567672178959400C684C9 /* LaunchScreen.storyboard */; };
 		8A7567692178959400C684C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7567672178959400C684C9 /* LaunchScreen.storyboard */; };
-		8A75676D2178963B00C684C9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A75676B2178963B00C684C9 /* Localizable.strings */; };
 		8A76791F214663560085DE3C /* PaymentUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A76791E214663560085DE3C /* PaymentUI.swift */; };
 		8A776647214A5FC60029D166 /* NoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A776646214A5FC60029D166 /* NoticeView.xib */; };
 		8A7A9EBE2166160300F12D86 /* PaymentSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */; };
@@ -274,7 +272,9 @@
 		75405A8A2A26340E008C21F6 /* UIButton+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Helpers.swift"; sourceTree = "<group>"; };
 		75405A972A2634D9008C21F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75405A9B2A266F50008C21F6 /* NewAtomeFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeFormViewModel.swift; sourceTree = "<group>"; };
-		75405A9F2A272314008C21F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = OmiseSDK/Resources/en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		75405AA72A27F97E008C21F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		75405AA92A27F985008C21F6 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		75405AAA2A27F988008C21F6 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
 		75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInformation.Atome.swift; sourceTree = "<group>"; };
 		75DAD87F2A0B9AE50098AF96 /* OmiseTestSDK */ = {isa = PBXFileReference; lastKnownFileType = text; path = OmiseTestSDK; sourceTree = SOURCE_ROOT; };
 		75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalConfig.swift; sourceTree = "<group>"; };
@@ -328,9 +328,6 @@
 		8A72CD5D2162358400F14F76 /* PaymentOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentOptionTableViewCell.swift; sourceTree = "<group>"; };
 		8A7567642178956800C684C9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8A7567672178959400C684C9 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8A75676C2178963B00C684C9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		8A75676E2178964000C684C9 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
-		8A75676F2178964700C684C9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8A76791E214663560085DE3C /* PaymentUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentUI.swift; sourceTree = "<group>"; };
 		8A776646214A5FC60029D166 /* NoticeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeView.xib; sourceTree = "<group>"; };
 		8A776657214AA4E70029D166 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ja; path = ja.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
@@ -560,12 +557,17 @@
 			path = "UI Extensions";
 			sourceTree = "<group>";
 		};
-		75405A9A2A266EED008C21F6 /* ViewModel */ = {
+		75405AA12A27CB15008C21F6 /* AtomeFormViewController */ = {
 			isa = PBXGroup;
 			children = (
+				7509D4E82A1C96D90050AB38 /* Views */,
+				75F2A0A42A13B1470038FA54 /* NewAtomeFormViewController.swift */,
+				75F2A0B52A1A5F020038FA54 /* NewAtomeFormViewContext.swift */,
+				75F2A0B32A1A5EAD0038FA54 /* NewAtomeFormViewModelProtocol.swift */,
 				75405A9B2A266F50008C21F6 /* NewAtomeFormViewModel.swift */,
+				29A7930529543C7E009A8A07 /* AtomeFormViewController.swift */,
 			);
-			path = ViewModel;
+			name = AtomeFormViewController;
 			sourceTree = "<group>";
 		};
 		75DAD8802A0B9B060098AF96 /* Frameworks */ = {
@@ -588,7 +590,6 @@
 		75F2A0912A13B0B10038FA54 /* OmiseSDKUITests */ = {
 			isa = PBXGroup;
 			children = (
-				75405A9E2A272314008C21F6 /* Localizable.strings */,
 				75F2A0A32A13B0E70038FA54 /* UIKitLiveKit */,
 				75F2A0AD2A1A53870038FA54 /* AtomeController */,
 				7509D4EA2A1C97A30050AB38 /* App */,
@@ -618,11 +619,6 @@
 		75F2A0AD2A1A53870038FA54 /* AtomeController */ = {
 			isa = PBXGroup;
 			children = (
-				75405A9A2A266EED008C21F6 /* ViewModel */,
-				7509D4E82A1C96D90050AB38 /* Views */,
-				75F2A0A42A13B1470038FA54 /* NewAtomeFormViewController.swift */,
-				75F2A0B52A1A5F020038FA54 /* NewAtomeFormViewContext.swift */,
-				75F2A0B32A1A5EAD0038FA54 /* NewAtomeFormViewModelProtocol.swift */,
 			);
 			path = AtomeController;
 			sourceTree = "<group>";
@@ -674,13 +670,13 @@
 		8A2BE95820A9A8FE000CEB60 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				75405AA12A27CB15008C21F6 /* AtomeFormViewController */,
 				73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */,
 				731A75D225E3604A002353C0 /* FPXBankChooserViewController.swift */,
 				73F9BA4625E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift */,
 				8A0A67E62137EE49006356B7 /* AdaptableStaticTableViewController.swift */,
 				8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentViewController.swift */,
 				8AD391B0230C05BC00383286 /* Colors.swift */,
-				29A7930529543C7E009A8A07 /* AtomeFormViewController.swift */,
 				8A1D4C651D51B72200C7837C /* CreditCardFormViewController.swift */,
 				8A25E929213CF6F300D48252 /* EContextInformationInputViewController.swift */,
 				F6614CD5243DB8E7005B656E /* TrueMoneyFormViewController.swift */,
@@ -833,7 +829,7 @@
 				8A5D59831D5317DD005D3346 /* OmiseSDK.storyboard */,
 				8A776646214A5FC60029D166 /* NoticeView.xib */,
 				8AF5517C213D4C0100D61C98 /* Localizable.stringsdict */,
-				8A75676B2178963B00C684C9 /* Localizable.strings */,
+				75405AA62A27F97E008C21F6 /* Localizable.strings */,
 				8AF985752147CC3D007E18ED /* Error.strings */,
 			);
 			path = Resources;
@@ -1022,7 +1018,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A5D59811D5317DD005D3346 /* OmiseSDK.storyboard in Resources */,
-				8A75676D2178963B00C684C9 /* Localizable.strings in Resources */,
+				75405AA82A27F97E008C21F6 /* Localizable.strings in Resources */,
 				8A776647214A5FC60029D166 /* NoticeView.xib in Resources */,
 				2225B3541D0FDD63003EB396 /* Assets.xcassets in Resources */,
 				8AF5517A213D4C0100D61C98 /* Localizable.stringsdict in Resources */,
@@ -1046,7 +1042,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				75F2A09A2A13B0B10038FA54 /* Preview Assets.xcassets in Resources */,
-				75405AA02A272314008C21F6 /* Localizable.strings in Resources */,
 				75405A992A2634D9008C21F6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1213,23 +1208,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				75405A942A26340E008C21F6 /* UIButton+Helpers.swift in Sources */,
-				75F2A0B62A1A5F020038FA54 /* NewAtomeFormViewContext.swift in Sources */,
+				75405AA22A27F5D0008C21F6 /* NewAtomeFormViewController.swift in Sources */,
 				75F2A0B02A1A5BF30038FA54 /* ProxyProperty.swift in Sources */,
 				75F2A0952A13B0B10038FA54 /* ContentView.swift in Sources */,
 				75F2A0B22A1A5E780038FA54 /* NewAtomeInputView.swift in Sources */,
 				7509D4F52A1D2F550050AB38 /* NewAtomeFormViewContextMockup.swift in Sources */,
-				75405A9D2A266F50008C21F6 /* NewAtomeFormViewModel.swift in Sources */,
 				75F2A0A22A13B0E30038FA54 /* UIKitViewControllerPresentable.swift in Sources */,
 				75405A922A26340E008C21F6 /* UILabel+Helpers.swift in Sources */,
-				75F2A0B42A1A5EAD0038FA54 /* NewAtomeFormViewModelProtocol.swift in Sources */,
 				75F2A0A82A13B73B0038FA54 /* Swift Version Compatibility.swift in Sources */,
-				75F2A0A52A13B1470038FA54 /* NewAtomeFormViewController.swift in Sources */,
 				75F2A0A62A13B70F0038FA54 /* OmiseTextField.swift in Sources */,
 				75405A8E2A26340E008C21F6 /* UIView+Helpers.swift in Sources */,
 				75405A902A26340E008C21F6 /* UIImage+Helpers.swift in Sources */,
+				75405AAB2A27F9B4008C21F6 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift in Sources */,
+				75405AA42A27F5D3008C21F6 /* NewAtomeFormViewContext.swift in Sources */,
 				75F2A0A02A13B0DB0038FA54 /* UIKitViewPresentable.swift in Sources */,
 				75405A792A25D33F008C21F6 /* String+Helpers.swift in Sources */,
-				75405A7F2A262B4D008C21F6 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift in Sources */,
+				75405AA52A27F5D3008C21F6 /* NewAtomeFormViewModelProtocol.swift in Sources */,
 				75F2A0C12A1A84900038FA54 /* UIColor+Helpers.swift in Sources */,
 				75405A8C2A26340E008C21F6 /* UIStackView+Helpers.swift in Sources */,
 				75405A952A26343F008C21F6 /* SpacerView.swift in Sources */,
@@ -1296,10 +1290,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		75405A9E2A272314008C21F6 /* Localizable.strings */ = {
+		75405AA62A27F97E008C21F6 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				75405A9F2A272314008C21F6 /* en */,
+				75405AA72A27F97E008C21F6 /* en */,
+				75405AA92A27F985008C21F6 /* ja */,
+				75405AAA2A27F988008C21F6 /* th */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1313,16 +1309,6 @@
 				C2ED0BC3298237EA00D985A8 /* en */,
 			);
 			name = OmiseSDK.storyboard;
-			sourceTree = "<group>";
-		};
-		8A75676B2178963B00C684C9 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8A75676C2178963B00C684C9 /* en */,
-				8A75676E2178964000C684C9 /* th */,
-				8A75676F2178964700C684C9 /* ja */,
-			);
-			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		8AF5517C213D4C0100D61C98 /* Localizable.stringsdict */ = {

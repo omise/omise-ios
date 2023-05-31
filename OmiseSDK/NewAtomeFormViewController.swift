@@ -1,0 +1,426 @@
+//
+//  NewAtomeFormViewController.swift
+//  OmiseSDKUITests
+//
+//  Created by Andrei Solovev on 16/5/23.
+//  Copyright © 2023 Omise. All rights reserved.
+//
+
+// swiftlint:disable file_length
+
+import Foundation
+import UIKit
+
+protocol NewAtomeFormViewControllerInterface {
+    func onSubmitButtonTapped()
+
+}
+
+// @objc(OMSNewAtomeFormViewController)
+/// swiftlint:disable:next attributes
+class NewAtomeFormViewController: UIViewController {
+    struct Style {
+        var backgroundColorForDisabledNextButton = UIColor(0xE4E7ED)
+        var backgroundColorForEnabledNextButton = UIColor(0x1957F0)
+        var textColorForNextButton = UIColor(0xFFFFFF)
+        var textColor = UIColor(0x3C414D)
+        var shippingAddressLabelColor = UIColor(0x9B9B9B)
+        var contentSpacing = CGFloat(18)
+        var stackSpacing = CGFloat(12)
+        var inputsSpacing = CGFloat(10)
+        var nextButtonHeight = CGFloat(47)
+    }
+
+    typealias ViewModel = NewAtomeFormViewModelProtocol
+    typealias ViewContext = NewAtomeFormViewContext
+    typealias Field = ViewContext.Field
+
+    var viewModel: ViewModel? {
+        didSet {
+            if let newViewModel = viewModel {
+                bind(to: newViewModel)
+            }
+        }
+    }
+
+    private var style = Style()
+
+    private lazy var logoImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+
+    private lazy var detailsLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.textColor = style.textColor
+        label.font = .preferredFont(forTextStyle: .body)
+        return label
+    }()
+
+    private lazy var shippingAddressLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.textColor = style.shippingAddressLabelColor
+        label.font = .preferredFont(forTextStyle: .callout)
+        label.text = "Atome.shippingAddress".localized()
+        return label
+    }()
+
+    private lazy var submitButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: style.nextButtonHeight).isActive = true
+        button.cornerRadius(4)
+        return button
+    }()
+
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .white)
+        indicator.color = UIColor(0x3D404C)
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
+
+    private lazy var scrollContentView: UIView = {
+        let view = UIView()
+        return view
+    }()
+
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .fill
+        stackView.spacing = style.stackSpacing
+        return stackView
+    }()
+
+    private lazy var inputsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .fill
+        stackView.spacing = style.stackSpacing
+        return stackView
+    }()
+
+    init(viewModel: ViewModel? = nil) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViews()
+
+        if let viewModel = viewModel {
+            bind(to: viewModel)
+        }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+}
+
+// MARK: Setups
+private extension NewAtomeFormViewController {
+    func setupViews() {
+        view.backgroundColor = .white
+        if #available(iOS 11, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        }
+        view.addSubviewAndFit(scrollView)
+        scrollView.addSubviewAndFit(scrollContentView)
+        scrollContentView.addSubviewAndFit(stackView, horizontal: style.contentSpacing)
+        NSLayoutConstraint.activate([
+            scrollContentView.widthAnchor.constraint(equalTo: view.widthAnchor)
+        ])
+
+        stackView.addArrangedSubview(SpacerView(vertical: 12.0))
+        stackView.addArrangedSubview(logoImageView)
+        stackView.addArrangedSubview(detailsLabel)
+        stackView.addArrangedSubview(SpacerView(vertical: 12.0))
+        stackView.addArrangedSubview(inputsStackView)
+        stackView.addArrangedSubview(submitButton)
+
+        view.addSubviewAndFit(activityIndicator)
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+    }
+
+    func bind(to viewModel: ViewModel) {
+        guard isViewLoaded else { return }
+        setupInputs(viewModel: viewModel)
+        setupSubmitButton(viewModel: viewModel)
+        detailsLabel.text = viewModel.headerText
+        logoImageView.image = UIImage(named: viewModel.logoName, in: .omiseSDK, compatibleWith: nil)
+
+        updateSubmitButtonState()
+    }
+
+    func setupSubmitButton(viewModel: ViewModel) {
+        submitButton.setBackgroundImage(
+            style.backgroundColorForDisabledNextButton.image(),
+            for: .disabled
+        )
+        submitButton.setBackgroundImage(
+            style.backgroundColorForEnabledNextButton.image(),
+            for: .normal
+        )
+        submitButton.setTitleColor(style.textColorForNextButton, for: .normal)
+        submitButton.setTitle(viewModel.submitButtonTitle, for: ControlState.normal)
+        submitButton.addTarget(self, action: #selector(onSubmitButtonTapped), for: .touchUpInside)
+    }
+
+    func removeAllInputs() {
+        for view in inputsStackView.arrangedSubviews {
+            inputsStackView.removeArrangedSubview(view)
+        }
+    }
+
+    func setupInputs(viewModel: ViewModel) {
+        removeAllInputs()
+
+        let fields = viewModel.fields
+        for field in fields {
+            if field == viewModel.fieldForShippingAddressHeader {
+                inputsStackView.addArrangedSubview(SpacerView(vertical: 1))
+                inputsStackView.addArrangedSubview(shippingAddressLabel)
+            }
+
+            let input = NewAtomeInputView(id: field.rawValue)
+            inputsStackView.addArrangedSubview(input)
+            setupInput(input, field: field, isLast: field == fields.last, viewModel: viewModel)
+        }
+    }
+
+    func setupInput(_ input: NewAtomeInputView, field: Field, isLast: Bool, viewModel: ViewModel) {
+        input.title = viewModel.title(for: field)
+        input.placeholder = viewModel.placeholder(for: field)
+        input.textContentType = viewModel.contentType(for: field)
+        input.autocapitalizationType = viewModel.capitalization(for: field)
+        input.keyboardType = viewModel.keyboardType(for: field)
+        input.autocorrectionType = .no
+
+        input.onTextChanged = { [weak self, field] in
+            self?.onTextChanged(field: field)
+        }
+
+        input.onEndEditing = { [weak self, field] in
+            self?.onEndEditing(field: field)
+        }
+
+        input.onBeginEditing = { [weak self, field] in
+            self?.onBeginEditing(field: field)
+        }
+
+        setupOnTextFieldShouldReturn(field: field, isLast: isLast)
+    }
+}
+
+// MARK: Actions
+private extension NewAtomeFormViewController {
+    func hideErrorIfNil(field: Field) {
+        if let viewModel = viewModel, let input = input(for: field) {
+            let error = viewModel.error(for: field, validate: input.text)
+            if error == nil {
+                input.error = nil
+            }
+        }
+    }
+
+    @objc func hideKeyboard() {
+        self.view.endEditing(true)
+    }
+
+    func startActivityIndicator() {
+        activityIndicator.startAnimating()
+        scrollContentView.isUserInteractionEnabled = false
+        submitButton.isEnabled = false
+    }
+
+    func stopActivityIndicator() {
+        activityIndicator.stopAnimating()
+        scrollContentView.isUserInteractionEnabled = true
+        updateSubmitButtonState()
+    }
+}
+
+// MARK: Non-private for Unit-Testing
+extension NewAtomeFormViewController {
+    func makeViewContext() -> ViewContext {
+        guard let fields = viewModel?.fields else { return ViewContext() }
+
+        var context = ViewContext()
+        for field in fields {
+            context.setValue(input(for: field)?.text, for: field)
+        }
+        return context
+    }
+
+    func updateSubmitButtonState() {
+        let isEnabled = viewModel?.isSubmitButtonEnabled(makeViewContext()) ?? false
+        self.submitButton.isEnabled = isEnabled
+    }
+
+    func updateError(for field: Field) {
+        guard let input = input(for: field) else { return }
+        input.error = viewModel?.error(for: field, validate: input.text)
+    }
+
+    func input(for field: Field) -> NewAtomeInputView? {
+        for input in inputsStackView.arrangedSubviews {
+            guard let input = input as? NewAtomeInputView, input.identifier == field.rawValue else {
+                continue
+            }
+            return input
+        }
+        return nil
+    }
+
+    func input(after input: NewAtomeInputView) -> NewAtomeInputView? {
+        guard
+            let inputField = Field(rawValue: input.identifier),
+            let viewModel = viewModel,
+            let index = viewModel.fields.firstIndex(of: inputField),
+            let nextField = viewModel.fields.at(index + 1),
+            let nextInput = self.input(for: nextField) else {
+            return nil
+        }
+
+        return nextInput
+    }
+}
+
+// MARK: Input Processing
+private extension NewAtomeFormViewController {
+    func onTextChanged(field: Field) {
+        updateSubmitButtonState()
+        hideErrorIfNil(field: field)
+    }
+
+    func onEndEditing(field: Field) {
+        updateError(for: field)
+    }
+
+    func onBeginEditing(field: Field) {
+        switch field {
+        case .phoneNumber: onPhoneNumberBeginEditing()
+        default: return
+        }
+    }
+
+    func onPhoneNumberBeginEditing() {
+        guard let input = input(for: .phoneNumber) else { return }
+        if input.text?.isEmpty ?? true {
+            input.text = "+"
+        }
+    }
+
+    func onReturnKeyTapped(field: Field) -> Bool {
+        guard let input = input(for: field) else { return true }
+        self.onKeboardNextTapped(input: input)
+        return false
+    }
+
+    func setupOnTextFieldShouldReturn(field: Field, isLast: Bool) {
+        guard let input = input(for: field) else { return }
+
+        if isLast {
+            input.returnKeyType = .continue
+            input.onTextFieldShouldReturn = { [weak self, weak input] in
+                guard let self = self, let input = input else { return true }
+                self.onKeyboardDoneTapped(input: input)
+                return true
+            }
+        } else {
+            input.returnKeyType = .next
+            input.onTextFieldShouldReturn = { [weak self, weak input] in
+                guard let self = self, let input = input else { return true }
+                self.onKeboardNextTapped(input: input)
+                return false
+            }
+        }
+    }
+
+    func onKeboardNextTapped(input: NewAtomeInputView) {
+        if let nextInput = self.input(after: input) {
+            _ = nextInput.becomeFirstResponder()
+        }
+    }
+
+    func onKeyboardDoneTapped(input: NewAtomeInputView) {
+        if submitButton.isEnabled {
+            onSubmitButtonTapped()
+        } else {
+            showAllErrors()
+            goToFirstInvalidField()
+        }
+    }
+
+    func showAllErrors() {
+        guard let viewModel = self.viewModel else { return }
+
+        for field in viewModel.fields {
+            updateError(for: field)
+        }
+    }
+
+    func goToFirstInvalidField() {
+        guard let viewModel = self.viewModel else { return }
+
+        for field in viewModel.fields {
+            if let input = input(for: field), input.error != nil {
+                input.becomeFirstResponder()
+                return
+            }
+        }
+
+    }
+}
+
+// MARK: NewAtomeFormViewControllerInterface
+extension NewAtomeFormViewController: NewAtomeFormViewControllerInterface {
+    @objc func onSubmitButtonTapped() {
+        let currentContext = makeViewContext()
+        guard let viewModel = self.viewModel, viewModel.isSubmitButtonEnabled(currentContext) else {
+            return
+        }
+
+        hideKeyboard()
+        startActivityIndicator()
+        viewModel.onSubmitButtonPressed(currentContext) { [weak self] in
+            self?.stopActivityIndicator()
+        }
+    }
+}
+
+#if SWIFTUI_ENABLED
+import SwiftUI
+
+// MARK: Preview
+struct NewAtomeFormViewController_Previews: PreviewProvider {
+    static var previews: some View {
+        UIKitViewControllerPresentable(
+            viewController:
+                NewAtomeFormViewController(
+                    viewModel: NewAtomeFormViewModelMockup().applyMockupTitles().applyMockupFields()
+                )
+        )
+    }
+}
+#endif

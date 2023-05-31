@@ -1,5 +1,6 @@
 // Atome
 "Atome.header.text" = "Please input the below information to complete the charge creation with Atome.";
+"Atome.shippingAddress" = "Shipping address";
 "Atome.field.optional" = "(optional)";
 "Atome.field.name" = "Name";
 "Atome.field.email" = "Email";

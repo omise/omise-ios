@@ -17,8 +17,9 @@ class NewAtomeFormViewModelMockup: NewAtomeFormViewModelProtocol {
     var logoName: String = "Atome"
     var titles: [Field: String] = [:]
     var errors: [Field: String] = [:]
-    var fields: [Field] = Field.allCases
+    var fields: [Field] = []
 
+    var fieldForShippingAddressHeader: Field? { .country }
 
     init(submitButtonTitle: String? = nil, titles: [Field: String]? = nil, errors: [Field: String]? = nil) {
         if let submitButtonTitle = submitButtonTitle {
@@ -56,4 +57,11 @@ extension NewAtomeFormViewModelMockup {
         }
         return self
     }
+
+    @discardableResult
+    func applyMockupFields() -> Self {
+        fields = Field.allCases
+        return self
+    }
+
 }

@@ -10,9 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        UIKitViewControllerPresentable(
-            viewController: NewAtomeFormViewController(viewModel: NewAtomeFormViewModel())
-        )
+        NewAtomeFormViewController_Previews.previews
     }
 }
 
