@@ -37,7 +37,7 @@
 		7509D4EF2A1D1F9F0050AB38 /* OmiseTestSDK in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 7509D4ED2A1D1F9F0050AB38 /* OmiseTestSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		7509D4F42A1D2C3E0050AB38 /* NewAtomeFormViewModelMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E32A1C89F10050AB38 /* NewAtomeFormViewModelMockup.swift */; };
 		7509D4F52A1D2F550050AB38 /* NewAtomeFormViewContextMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E12A1C876B0050AB38 /* NewAtomeFormViewContextMockup.swift */; };
-		75348D4E29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75348D4D29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift */; };
+		75348D4E29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */; };
 		75405A782A25D327008C21F6 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A772A25D327008C21F6 /* String+Helpers.swift */; };
 		75405A792A25D33F008C21F6 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A772A25D327008C21F6 /* String+Helpers.swift */; };
 		75405A7C2A25EC88008C21F6 /* Array+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A7B2A25EC88008C21F6 /* Array+Helpers.swift */; };
@@ -60,7 +60,8 @@
 		75405AA42A27F5D3008C21F6 /* NewAtomeFormViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B52A1A5F020038FA54 /* NewAtomeFormViewContext.swift */; };
 		75405AA52A27F5D3008C21F6 /* NewAtomeFormViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B32A1A5EAD0038FA54 /* NewAtomeFormViewModelProtocol.swift */; };
 		75405AA82A27F97E008C21F6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75405AA62A27F97E008C21F6 /* Localizable.strings */; };
-		75405AAB2A27F9B4008C21F6 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75348D4D29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift */; };
+		75405AAB2A27F9B4008C21F6 /* Bundle+OmiseSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */; };
+		759856242A286C880087B605 /* UIScrollView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759856232A286C880087B605 /* UIScrollView+Helpers.swift */; };
 		75B43B572A0277A3004352C7 /* PaymentInformation.Atome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */; };
 		75DAD88C2A0BA5130098AF96 /* OmiseTestSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; };
 		75DAD88E2A0BA5130098AF96 /* OmiseTestSDK in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -261,7 +262,7 @@
 		7509D4E12A1C876B0050AB38 /* NewAtomeFormViewContextMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeFormViewContextMockup.swift; sourceTree = "<group>"; };
 		7509D4E32A1C89F10050AB38 /* NewAtomeFormViewModelMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeFormViewModelMockup.swift; sourceTree = "<group>"; };
 		7509D4E62A1C8E3D0050AB38 /* NewAtomeFormViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeFormViewModelTests.swift; sourceTree = "<group>"; };
-		75348D4D29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseSDK_216d048c5feca16469a7a71566256537.swift; sourceTree = "<group>"; };
+		75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+OmiseSDK.swift"; sourceTree = "<group>"; };
 		75405A772A25D327008C21F6 /* String+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Helpers.swift"; sourceTree = "<group>"; };
 		75405A7B2A25EC88008C21F6 /* Array+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Helpers.swift"; sourceTree = "<group>"; };
 		75405A802A2633B6008C21F6 /* SpacerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerView.swift; sourceTree = "<group>"; };
@@ -275,6 +276,7 @@
 		75405AA72A27F97E008C21F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		75405AA92A27F985008C21F6 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		75405AAA2A27F988008C21F6 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
+		759856232A286C880087B605 /* UIScrollView+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Helpers.swift"; sourceTree = "<group>"; };
 		75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInformation.Atome.swift; sourceTree = "<group>"; };
 		75DAD87F2A0B9AE50098AF96 /* OmiseTestSDK */ = {isa = PBXFileReference; lastKnownFileType = text; path = OmiseTestSDK; sourceTree = SOURCE_ROOT; };
 		75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalConfig.swift; sourceTree = "<group>"; };
@@ -530,7 +532,7 @@
 				75F2A0AE2A1A5BE30038FA54 /* Property Wrappers */,
 				75405A852A26340E008C21F6 /* UI Extensions */,
 				75405A7E2A262B14008C21F6 /* Extensions */,
-				75348D4D29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift */,
+				75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -547,6 +549,7 @@
 		75405A852A26340E008C21F6 /* UI Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				759856232A286C880087B605 /* UIScrollView+Helpers.swift */,
 				75F2A0C02A1A84900038FA54 /* UIColor+Helpers.swift */,
 				75405A862A26340E008C21F6 /* UIStackView+Helpers.swift */,
 				75405A872A26340E008C21F6 /* UIView+Helpers.swift */,
@@ -1125,6 +1128,7 @@
 				8AF56E602268650D0097CFEE /* OmiseTextFieldCompatability.swift in Sources */,
 				8A60619A20B2A8D400CF90D5 /* PAN.swift in Sources */,
 				75F2A0BA2A1A60630038FA54 /* NewAtomeInputView.swift in Sources */,
+				759856242A286C880087B605 /* UIScrollView+Helpers.swift in Sources */,
 				2220F1AA1D0FEE85008CD89F /* OmiseError.swift in Sources */,
 				75405A8D2A26340E008C21F6 /* UIView+Helpers.swift in Sources */,
 				73F9BA4B25E6053700F55CA8 /* FPXFormViewController.swift in Sources */,
@@ -1169,7 +1173,7 @@
 				8A87DBCB226DA404001596F1 /* OmiseCapability.swift in Sources */,
 				8ADAA9A520B6C0AF00DD7CCF /* Currency.swift in Sources */,
 				8A30FB7D214929C900DC09DC /* PaymentCreatorController.swift in Sources */,
-				75348D4E29C3FCC70008C8A3 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift in Sources */,
+				75348D4E29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift in Sources */,
 				8A4F7CB920A9C0FD001C441A /* Object.swift in Sources */,
 				75405A9C2A266F50008C21F6 /* NewAtomeFormViewModel.swift in Sources */,
 				8AD0609620B55E610074894E /* Client.swift in Sources */,
@@ -1219,7 +1223,7 @@
 				75F2A0A62A13B70F0038FA54 /* OmiseTextField.swift in Sources */,
 				75405A8E2A26340E008C21F6 /* UIView+Helpers.swift in Sources */,
 				75405A902A26340E008C21F6 /* UIImage+Helpers.swift in Sources */,
-				75405AAB2A27F9B4008C21F6 /* OmiseSDK_216d048c5feca16469a7a71566256537.swift in Sources */,
+				75405AAB2A27F9B4008C21F6 /* Bundle+OmiseSDK.swift in Sources */,
 				75405AA42A27F5D3008C21F6 /* NewAtomeFormViewContext.swift in Sources */,
 				75F2A0A02A13B0DB0038FA54 /* UIKitViewPresentable.swift in Sources */,
 				75405A792A25D33F008C21F6 /* String+Helpers.swift in Sources */,

@@ -87,6 +87,8 @@ class NewAtomeFormViewController: UIViewController {
 
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.adjustContentInsetOnKeyboardAppear()
         return scrollView
     }()
 
@@ -130,11 +132,6 @@ class NewAtomeFormViewController: UIViewController {
             bind(to: viewModel)
         }
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
 }
 
 // MARK: Setups
