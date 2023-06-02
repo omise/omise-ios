@@ -26,7 +26,10 @@ class NewAtomeFormViewModel: NewAtomeFormViewModelProtocol {
     var headerText = "Atome.header.text".localized()
     var logoName = "Atome_Big"
 
+    private let flowSession: PaymentCreatorFlowSession?
+
     init(flowSession: PaymentCreatorFlowSession?) {
+        self.flowSession = flowSession
     }
 
     func title(for field: Field) -> String? {
@@ -65,8 +68,41 @@ class NewAtomeFormViewModel: NewAtomeFormViewModelProtocol {
     }
 
     func onSubmitButtonPressed(_ viewContext: ViewContext, onComplete: @escaping () -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+        guard let flowSession = flowSession else {
+            onComplete()
+            return
+        }
+
+        let shippingAddress: PaymentInformation.Atome.ShippingAddress =
+            .init(country: viewContext[.country],
+                  city: viewContext[.city],
+                  postalCode: viewContext[.postalCode],
+                  state: viewContext[.state],
+                  street1: viewContext[.street1],
+                  street2: viewContext[.street2])
+
+        let items: [PaymentInformation.Atome.Item] = [
+            .init(
+                sku: "3427842",
+                category: "Shoes",
+                name: "Prada shoes",
+                quantity: 1,
+                amount: flowSession.paymentAmount ?? 0,
+                itemUri: "www.kan.com/product/shoes",
+                imageUri: "www.kan.com/product/shoes/image",
+                brand: "Gucci"
+            )
+        ]
+
+        let atomeData = PaymentInformation.Atome(phoneNumber: viewContext[.phoneNumber],
+                                                 name: viewContext[.name],
+                                                 email: viewContext[.email],
+                                                 shippingAddress: shippingAddress,
+                                                 items: items)
+
+        flowSession.requestCreateSource(.atome(atomeData)) { _ in
             onComplete()
         }
+
     }
 }

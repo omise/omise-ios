@@ -331,8 +331,6 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         case ("GoToDuitNowOBWBankChooserSegue"?, let controller as DuitNowOBWBankChooserViewController):
             controller.showingValues = duitNowOBWBanks
             controller.flowSession = self.flowSession
-        case ("GoToAtomeSegue"?, let controller as NewAtomeFormViewController):
-            controller.viewModel = NewAtomeFormViewModel(flowSession: flowSession)
         default:
             break
         }
@@ -425,8 +423,11 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
 
     func goToAtome() {
         let vc = NewAtomeFormViewController(viewModel: NewAtomeFormViewModel(flowSession: flowSession))
+        vc.preferredPrimaryColor = self.preferredPrimaryColor
+        vc.preferredSecondaryColor = self.preferredSecondaryColor
+
         navigationController?.pushViewController(vc, animated: true)
-////
+//
 //        if let storyboard = self.storyboard {
 //            let vc = storyboard.instantiateViewController(withIdentifier: "AtomeFormViewController")
 //            navigationController?.pushViewController(vc, animated: true)

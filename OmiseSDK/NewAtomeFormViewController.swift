@@ -18,7 +18,7 @@ protocol NewAtomeFormViewControllerInterface {
 
 // @objc(OMSNewAtomeFormViewController)
 /// swiftlint:disable:next attributes
-class NewAtomeFormViewController: UIViewController {
+class NewAtomeFormViewController: UIViewController, PaymentChooserUI {
     struct Style {
         var backgroundColorForDisabledNextButton = UIColor(0xE4E7ED)
         var backgroundColorForEnabledNextButton = UIColor(0x1957F0)
@@ -40,6 +40,18 @@ class NewAtomeFormViewController: UIViewController {
             if let newViewModel = viewModel {
                 bind(to: newViewModel)
             }
+        }
+    }
+
+    var preferredPrimaryColor: UIColor? {
+        didSet {
+            applyPrimaryColor()
+        }
+    }
+
+    var preferredSecondaryColor: UIColor? {
+        didSet {
+            applySecondaryColor()
         }
     }
 
@@ -71,9 +83,14 @@ class NewAtomeFormViewController: UIViewController {
     }()
 
     private lazy var submitButton: UIButton = {
-        let button = UIButton()
+        let button = MainActionButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: style.nextButtonHeight).isActive = true
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
+
+        button.defaultBackgroundColor = .omise
+        button.disabledBackgroundColor = .line
+
         button.cornerRadius(4)
         return button
     }()
@@ -132,12 +149,20 @@ class NewAtomeFormViewController: UIViewController {
             bind(to: viewModel)
         }
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        onSubmitButtonTapped()
+    }
 }
 
 // MARK: Setups
 private extension NewAtomeFormViewController {
     func setupViews() {
-        view.backgroundColor = .white
+        view.backgroundColor = .background
+        applyPrimaryColor()
+        applySecondaryColor()
+        
         if #available(iOS 11, *) {
             navigationItem.largeTitleDisplayMode = .never
         }
@@ -155,7 +180,7 @@ private extension NewAtomeFormViewController {
         stackView.addArrangedSubview(inputsStackView)
         stackView.addArrangedSubview(submitButton)
 
-        view.addSubviewAndFit(activityIndicator)
+        navigationItem.titleView = activityIndicator
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
     }
 
@@ -167,17 +192,11 @@ private extension NewAtomeFormViewController {
         logoImageView.image = UIImage(named: viewModel.logoName, in: .omiseSDK, compatibleWith: nil)
 
         updateSubmitButtonState()
+        applyPrimaryColor()
+        applySecondaryColor()
     }
 
     func setupSubmitButton(viewModel: ViewModel) {
-        submitButton.setBackgroundImage(
-            style.backgroundColorForDisabledNextButton.image(),
-            for: .disabled
-        )
-        submitButton.setBackgroundImage(
-            style.backgroundColorForEnabledNextButton.image(),
-            for: .normal
-        )
         submitButton.setTitleColor(style.textColorForNextButton, for: .normal)
         submitButton.setTitle(viewModel.submitButtonTitle, for: ControlState.normal)
         submitButton.addTarget(self, action: #selector(onSubmitButtonTapped), for: .touchUpInside)
@@ -207,7 +226,7 @@ private extension NewAtomeFormViewController {
 
     func setupInput(_ input: NewAtomeInputView, field: Field, isLast: Bool, viewModel: ViewModel) {
         input.title = viewModel.title(for: field)
-        input.placeholder = viewModel.placeholder(for: field)
+        input.placeholder = ""
         input.textContentType = viewModel.contentType(for: field)
         input.autocapitalizationType = viewModel.capitalization(for: field)
         input.keyboardType = viewModel.keyboardType(for: field)
@@ -226,6 +245,34 @@ private extension NewAtomeFormViewController {
         }
 
         setupOnTextFieldShouldReturn(field: field, isLast: isLast)
+    }
+
+    func applyPrimaryColor() {
+        guard isViewLoaded else {
+            return
+        }
+
+        detailsLabel.textColor = currentPrimaryColor
+        activityIndicator.color = currentPrimaryColor
+        inputsStackView.arrangedSubviews.forEach {
+            if let input = $0 as? NewAtomeInputView {
+                input.textColor = currentPrimaryColor
+                input.titleColor = currentPrimaryColor
+            }
+        }
+    }
+
+    func applySecondaryColor() {
+        guard isViewLoaded else {
+            return
+        }
+
+        inputsStackView.arrangedSubviews.forEach {
+            if let input = $0 as? NewAtomeInputView {
+                input.borderColor = currentPrimaryColor
+                input.placeholderTextColor = currentPrimaryColor
+            }
+        }
     }
 }
 
@@ -248,12 +295,14 @@ private extension NewAtomeFormViewController {
         activityIndicator.startAnimating()
         scrollContentView.isUserInteractionEnabled = false
         submitButton.isEnabled = false
+        view.tintAdjustmentMode = .dimmed
     }
 
     func stopActivityIndicator() {
         activityIndicator.stopAnimating()
         scrollContentView.isUserInteractionEnabled = true
         updateSubmitButtonState()
+        view.tintAdjustmentMode = .automatic
     }
 }
 
@@ -264,7 +313,7 @@ extension NewAtomeFormViewController {
 
         var context = ViewContext()
         for field in fields {
-            context.setValue(input(for: field)?.text, for: field)
+            context[field] = input(for: field)?.text ?? ""
         }
         return context
     }
@@ -338,7 +387,7 @@ private extension NewAtomeFormViewController {
         guard let input = input(for: field) else { return }
 
         if isLast {
-            input.returnKeyType = .continue
+            input.returnKeyType = .next
             input.onTextFieldShouldReturn = { [weak self, weak input] in
                 guard let self = self, let input = input else { return true }
                 self.onKeyboardDoneTapped(input: input)

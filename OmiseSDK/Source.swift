@@ -55,10 +55,23 @@ public struct CreateSourceParameter: Encodable {
     
     private let platformType: String
 
+    // Atome required fields
+    private let shippingAddress: PaymentInformation.Atome.ShippingAddress?
+    private let items: [PaymentInformation.Atome.Item]?
+    private let phoneNumber: String?
+    private let name: String?
+    private let email: String?
+
     private enum CodingKeys: String, CodingKey {
         case amount
         case currency
         case platformType = "platform_type"
+        case shippingAddress = "shipping"
+        case items
+        case name
+        case email
+        case phoneNumber = "phone_number"
+
     }
     
     /// Create a new `Create Source Parameter` that will be used to create a new Source
@@ -72,14 +85,35 @@ public struct CreateSourceParameter: Encodable {
         self.amount = amount
         self.currency = currency
         self.platformType = "IOS"
+
+        if let atomeData = paymentInformation.atomeData {
+            shippingAddress = atomeData.shippingAddress
+            items = atomeData.items
+            name = atomeData.name
+            email = atomeData.email
+            phoneNumber = atomeData.phoneNumber
+
+        } else {
+            shippingAddress = nil
+            items = nil
+            name = nil
+            email = nil
+            phoneNumber = nil
+        }
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(amount, forKey: .amount)
         try container.encode(currency, forKey: .currency)
         try paymentInformation.encode(to: encoder)
         try container.encode(platformType, forKey: .platformType)
+        try container.encode(shippingAddress, forKey: .shippingAddress)
+        try container.encode(items, forKey: .items)
+        try container.encode(name, forKey: .name)
+        try container.encode(phoneNumber, forKey: .phoneNumber)
+        try container.encode(email, forKey: .email)
+
     }
 }
 

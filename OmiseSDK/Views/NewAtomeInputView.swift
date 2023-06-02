@@ -38,6 +38,7 @@ class NewAtomeInputView: UIView {
         textField.borderWidth = style.textFieldBorderWidth
         textField.borderColor = style.textFieldBorderColor
         textField.cornerRadius = style.textFieldCornerRadius
+        textField.adjustsFontForContentSizeCategory = true
         return textField
     }()
     private lazy var errorLabel: UILabel = {
@@ -45,6 +46,7 @@ class NewAtomeInputView: UIView {
         label.numberOfLines = 0
         label.text = "error!"
         label.textColor = style.errorColor
+        label.adjustsFontForContentSizeCategory = true
         label.font = .preferredFont(forTextStyle: .caption2)
         return label
     }()
@@ -72,6 +74,11 @@ class NewAtomeInputView: UIView {
     @ProxyProperty(\NewAtomeInputView.textField.placeholder) var placeholder: String?
     @ProxyProperty(\NewAtomeInputView.textField.text) var text: String?
     @ProxyProperty(\NewAtomeInputView.errorLabel.text) var error: String?
+
+    @ProxyProperty(\NewAtomeInputView.titleLabel.textColor) var titleColor: UIColor?
+    @ProxyProperty(\NewAtomeInputView.textField.textColor) var textColor: UIColor?
+    @ProxyProperty(\NewAtomeInputView.textField.borderColor) var borderColor: UIColor?
+    @ProxyProperty(\NewAtomeInputView.textField.placeholderTextColor) var placeholderTextColor: UIColor?
 
     init(id: String, title: String? = nil, text: String? = nil, placeholder: String? = nil, error: String? = nil) {
         self.identifier = id

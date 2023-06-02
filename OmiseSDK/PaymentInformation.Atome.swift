@@ -1,5 +1,21 @@
+import Foundation
+
 public extension PaymentInformation {
-    /// The Atome customer information
+    var isAtome: Bool {
+        switch self {
+        case .atome: return true
+        default: return false
+        }
+    }
+
+    var atomeData: Atome? {
+        switch self {
+        case .atome(let data): return data
+        default: return nil
+        }
+
+    }
+
     struct Atome: PaymentMethod {
 
         public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.atome.rawValue
@@ -10,27 +26,59 @@ public extension PaymentInformation {
         public let phoneNumber: String
         public let name: String?
         public let email: String?
-//        public let shipping: ShippingAddress
+        public let items: [Item]
+        public let shippingAddress: ShippingAddress
 
         private enum CodingKeys: String, CodingKey {
             case name
             case email
             case phoneNumber = "phone_number"
-//            case shipping
+            case items = "items"
+            case shippingAddress = "shipping"
         }
 
         /// Creates a new Atome source with the given customer information
         ///
-        public init(phoneNumber: String, shipping: ShippingAddress, name: String? = nil, email: String? = nil) {
+        /// - Parameters:
+        ///   - phoneNumber:  The customers phone number
+        public init(phoneNumber: String, name: String? = nil, email: String? = nil, shippingAddress: ShippingAddress, items: [Item]) {
             self.name = name
             self.email = email
             self.phoneNumber = phoneNumber
-//            self.shipping = shipping
+            self.shippingAddress = shippingAddress
+            self.items = items
         }
     }
 }
 
 public extension PaymentInformation.Atome {
+    struct Item: Codable, Equatable {
+        //        public let sku: String
+        //        public let amount: Int64
+        //        public let name: String
+        //        public let quantity: Int64
+        
+        public let sku: String
+        public let category: String?
+        public let name: String
+        public let quantity: Int
+        public let amount: Int64
+        public let itemUri: String?
+        public let imageUri: String?
+        public let brand: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case sku
+            case amount
+            case name
+            case quantity
+            case category
+            case brand
+            case imageUri = "image_uri"
+            case itemUri = "item_uri"
+        }
+    }
+    
     struct ShippingAddress: Codable, Equatable {
         public let country: String
         public let city: String

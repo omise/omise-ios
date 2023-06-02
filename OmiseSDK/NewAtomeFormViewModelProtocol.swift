@@ -29,14 +29,14 @@ protocol NewAtomeFormViewModelProtocol {
 extension NewAtomeFormViewModelProtocol {
     func isSubmitButtonEnabled(_ viewContext: ViewContext) -> Bool {
         Field.allCases.allSatisfy {
-            error(for: $0, validate: viewContext.value(for: $0)) == nil
+            error(for: $0, validate: viewContext[$0]) == nil
         }
     }
 
     func validate(_ viewContext: ViewContext, value: String?) -> [Field: String] {
         var errors: [Field: String] = [:]
         for field in Field.allCases {
-            if let error = error(for: field, validate: viewContext.value(for: field)) {
+            if let error = error(for: field, validate: viewContext[field]) {
                 errors[field] = error
             }
         }
