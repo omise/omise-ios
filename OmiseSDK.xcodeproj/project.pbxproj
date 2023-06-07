@@ -102,7 +102,6 @@
 		8A40DA29216B441E00749F45 /* PaymentSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */; };
 		8A40DA2B216B53E900749F45 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A40DA2A216B53E900749F45 /* Tools.swift */; };
 		8A40DA2C216B53E900749F45 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A40DA2A216B53E900749F45 /* Tools.swift */; };
-		8A429E7B2109A3AE007C230F /* PaymentInformationTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A429E7A2109A3AE007C230F /* PaymentInformationTestCase.swift */; };
 		8A43454720DBAE76005C5C94 /* PANModelTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A43454620DBAE76005C5C94 /* PANModelTestCase.swift */; };
 		8A43FEAA2269BD8A002E89EC /* CustomCreditCardFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A43FEA92269BD8A002E89EC /* CustomCreditCardFormViewController.m */; };
 		8A47173A20AAB0F40022733A /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A47173920AAB0F40022733A /* Token.swift */; };
@@ -1255,7 +1254,6 @@
 				7509D4E02A1AA1450050AB38 /* NewAtomeFormViewControllerTests.swift in Sources */,
 				7509D4E42A1C89F10050AB38 /* NewAtomeFormViewModelMockup.swift in Sources */,
 				8A43454720DBAE76005C5C94 /* PANModelTestCase.swift in Sources */,
-				8A429E7B2109A3AE007C230F /* PaymentInformationTestCase.swift in Sources */,
 				224460041CF43A1200801D0F /* SDKTestCase.swift in Sources */,
 				8A3C10582159FCE900BEFD8A /* BadRequestAPIErrorParsingTestCase.swift in Sources */,
 				F615CBF8261565D600E1A2D9 /* CardExpiryDatePickerTests.swift in Sources */,

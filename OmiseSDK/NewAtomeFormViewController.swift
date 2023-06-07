@@ -308,6 +308,14 @@ private extension NewAtomeFormViewController {
 
 // MARK: Non-private for Unit-Testing
 extension NewAtomeFormViewController {
+    func showAllErrors() {
+        guard let viewModel = self.viewModel else { return }
+
+        for field in viewModel.fields {
+            updateError(for: field)
+        }
+    }
+    
     func makeViewContext() -> ViewContext {
         guard let fields = viewModel?.fields else { return ViewContext() }
 
@@ -415,14 +423,6 @@ private extension NewAtomeFormViewController {
         } else {
             showAllErrors()
             goToFirstInvalidField()
-        }
-    }
-
-    func showAllErrors() {
-        guard let viewModel = self.viewModel else { return }
-
-        for field in viewModel.fields {
-            updateError(for: field)
         }
     }
 
