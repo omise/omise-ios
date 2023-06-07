@@ -33,13 +33,8 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol {
     }
 
     func title(for field: Field) -> String? {
-        var title: String
-        switch field {
-        case .phoneNumber:
-            title = field.title.localized() + " " + "Atome.field.phoneNumber.hint".localized()
-        default:
-            title = field.title.localized()
-        }
+        var title = field.title.localized()
+
         if field.isOptional {
             title += " " + "Atome.field.optional".localized()
         }
