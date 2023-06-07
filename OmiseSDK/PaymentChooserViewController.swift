@@ -422,7 +422,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     }
 
     func goToAtome() {
-        let vc = NewAtomeFormViewController(viewModel: NewAtomeFormViewModel(flowSession: flowSession))
+        let vc = AtomeFormViewController(viewModel: AtomeFormViewModel(flowSession: flowSession))
         vc.preferredPrimaryColor = self.preferredPrimaryColor
         vc.preferredSecondaryColor = self.preferredSecondaryColor
 

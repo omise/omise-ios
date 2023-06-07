@@ -1,5 +1,5 @@
 //
-//  NewAtomeInputView.swift
+//  AtomeInputView.swift
 //  OmiseSDKUITests
 //
 //  Created by Andrei Solovev on 21/5/23.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewAtomeInputView: UIView {
+class AtomeInputView: UIView {
     struct Style {
         var errorColor = UIColor(0xFB0000)
         var titleColor = UIColor(0x3C414D)
@@ -64,21 +64,21 @@ class NewAtomeInputView: UIView {
     var onBeginEditing: () -> Void = { }
     var onEndEditing: () -> Void = { }
 
-    @ProxyProperty(\NewAtomeInputView.textField.keyboardType) var keyboardType: UIKeyboardType
-    @ProxyProperty(\NewAtomeInputView.textField.textContentType) var textContentType: UITextContentType?
-    @ProxyProperty(\NewAtomeInputView.textField.autocapitalizationType) var autocapitalizationType: UITextAutocapitalizationType
-    @ProxyProperty(\NewAtomeInputView.textField.returnKeyType) var returnKeyType: UIReturnKeyType
-    @ProxyProperty(\NewAtomeInputView.textField.autocorrectionType) var autocorrectionType: UITextAutocorrectionType
+    @ProxyProperty(\AtomeInputView.textField.keyboardType) var keyboardType: UIKeyboardType
+    @ProxyProperty(\AtomeInputView.textField.textContentType) var textContentType: UITextContentType?
+    @ProxyProperty(\AtomeInputView.textField.autocapitalizationType) var autocapitalizationType: UITextAutocapitalizationType
+    @ProxyProperty(\AtomeInputView.textField.returnKeyType) var returnKeyType: UIReturnKeyType
+    @ProxyProperty(\AtomeInputView.textField.autocorrectionType) var autocorrectionType: UITextAutocorrectionType
 
-    @ProxyProperty(\NewAtomeInputView.titleLabel.text) var title: String?
-    @ProxyProperty(\NewAtomeInputView.textField.placeholder) var placeholder: String?
-    @ProxyProperty(\NewAtomeInputView.textField.text) var text: String?
-    @ProxyProperty(\NewAtomeInputView.errorLabel.text) var error: String?
+    @ProxyProperty(\AtomeInputView.titleLabel.text) var title: String?
+    @ProxyProperty(\AtomeInputView.textField.placeholder) var placeholder: String?
+    @ProxyProperty(\AtomeInputView.textField.text) var text: String?
+    @ProxyProperty(\AtomeInputView.errorLabel.text) var error: String?
 
-    @ProxyProperty(\NewAtomeInputView.titleLabel.textColor) var titleColor: UIColor?
-    @ProxyProperty(\NewAtomeInputView.textField.textColor) var textColor: UIColor?
-    @ProxyProperty(\NewAtomeInputView.textField.borderColor) var borderColor: UIColor?
-    @ProxyProperty(\NewAtomeInputView.textField.placeholderTextColor) var placeholderTextColor: UIColor?
+    @ProxyProperty(\AtomeInputView.titleLabel.textColor) var titleColor: UIColor?
+    @ProxyProperty(\AtomeInputView.textField.textColor) var textColor: UIColor?
+    @ProxyProperty(\AtomeInputView.textField.borderColor) var borderColor: UIColor?
+    @ProxyProperty(\AtomeInputView.textField.placeholderTextColor) var placeholderTextColor: UIColor?
 
     init(id: String, title: String? = nil, text: String? = nil, placeholder: String? = nil, error: String? = nil) {
         self.identifier = id
@@ -127,7 +127,7 @@ class NewAtomeInputView: UIView {
     }
 }
 
-extension NewAtomeInputView: UITextFieldDelegate {
+extension AtomeInputView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         onTextFieldShouldReturn()
     }
@@ -135,9 +135,9 @@ extension NewAtomeInputView: UITextFieldDelegate {
 
 #if SWIFTUI_ENABLED
 import SwiftUI
-struct NewAtomeInputView_Previews: PreviewProvider {
+struct AtomeInputView_Previews: PreviewProvider {
     static var previews: some View {
-        UIKitViewPresentable(view: NewAtomeInputView(id: "", title: "Yoo", placeholder: "entered text", error: "!!!!"))
+        UIKitViewPresentable(view: AtomeInputView(id: "", title: "Yoo", placeholder: "entered text", error: "!!!!"))
     }
 }
 #endif

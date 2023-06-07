@@ -28,14 +28,14 @@
 		73F9BA4725E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4625E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift */; };
 		73F9BA4B25E6053700F55CA8 /* FPXFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */; };
 		7509D4DD2A1A9FD70050AB38 /* MainActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A275CBB21241E4500C5716F /* MainActionButton.swift */; };
-		7509D4E02A1AA1450050AB38 /* NewAtomeFormViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4DF2A1AA1450050AB38 /* NewAtomeFormViewControllerTests.swift */; };
-		7509D4E22A1C876B0050AB38 /* NewAtomeFormViewContextMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E12A1C876B0050AB38 /* NewAtomeFormViewContextMockup.swift */; };
-		7509D4E42A1C89F10050AB38 /* NewAtomeFormViewModelMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E32A1C89F10050AB38 /* NewAtomeFormViewModelMockup.swift */; };
-		7509D4E72A1C8E3D0050AB38 /* NewAtomeFormViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E62A1C8E3D0050AB38 /* NewAtomeFormViewModelTests.swift */; };
+		7509D4E02A1AA1450050AB38 /* AtomeFormViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4DF2A1AA1450050AB38 /* AtomeFormViewControllerTests.swift */; };
+		7509D4E22A1C876B0050AB38 /* AtomeFormViewContextMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E12A1C876B0050AB38 /* AtomeFormViewContextMockup.swift */; };
+		7509D4E42A1C89F10050AB38 /* AtomeFormViewModelMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E32A1C89F10050AB38 /* AtomeFormViewModelMockup.swift */; };
+		7509D4E72A1C8E3D0050AB38 /* AtomeFormViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E62A1C8E3D0050AB38 /* AtomeFormViewModelTests.swift */; };
 		7509D4EE2A1D1F9F0050AB38 /* OmiseTestSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 7509D4ED2A1D1F9F0050AB38 /* OmiseTestSDK */; };
 		7509D4EF2A1D1F9F0050AB38 /* OmiseTestSDK in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 7509D4ED2A1D1F9F0050AB38 /* OmiseTestSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		7509D4F42A1D2C3E0050AB38 /* NewAtomeFormViewModelMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E32A1C89F10050AB38 /* NewAtomeFormViewModelMockup.swift */; };
-		7509D4F52A1D2F550050AB38 /* NewAtomeFormViewContextMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E12A1C876B0050AB38 /* NewAtomeFormViewContextMockup.swift */; };
+		7509D4F42A1D2C3E0050AB38 /* AtomeFormViewModelMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E32A1C89F10050AB38 /* AtomeFormViewModelMockup.swift */; };
+		7509D4F52A1D2F550050AB38 /* AtomeFormViewContextMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E12A1C876B0050AB38 /* AtomeFormViewContextMockup.swift */; };
 		75348D4E29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */; };
 		75405A782A25D327008C21F6 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A772A25D327008C21F6 /* String+Helpers.swift */; };
 		75405A792A25D33F008C21F6 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A772A25D327008C21F6 /* String+Helpers.swift */; };
@@ -54,10 +54,10 @@
 		75405A942A26340E008C21F6 /* UIButton+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A8A2A26340E008C21F6 /* UIButton+Helpers.swift */; };
 		75405A952A26343F008C21F6 /* SpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A802A2633B6008C21F6 /* SpacerView.swift */; };
 		75405A992A2634D9008C21F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75405A972A2634D9008C21F6 /* Assets.xcassets */; };
-		75405A9C2A266F50008C21F6 /* NewAtomeFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A9B2A266F50008C21F6 /* NewAtomeFormViewModel.swift */; };
-		75405AA22A27F5D0008C21F6 /* NewAtomeFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0A42A13B1470038FA54 /* NewAtomeFormViewController.swift */; };
-		75405AA42A27F5D3008C21F6 /* NewAtomeFormViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B52A1A5F020038FA54 /* NewAtomeFormViewContext.swift */; };
-		75405AA52A27F5D3008C21F6 /* NewAtomeFormViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B32A1A5EAD0038FA54 /* NewAtomeFormViewModelProtocol.swift */; };
+		75405A9C2A266F50008C21F6 /* AtomeFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A9B2A266F50008C21F6 /* AtomeFormViewModel.swift */; };
+		75405AA22A27F5D0008C21F6 /* AtomeFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0A42A13B1470038FA54 /* AtomeFormViewController.swift */; };
+		75405AA42A27F5D3008C21F6 /* AtomeFormViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B52A1A5F020038FA54 /* AtomeFormViewContext.swift */; };
+		75405AA52A27F5D3008C21F6 /* AtomeFormViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B32A1A5EAD0038FA54 /* AtomeFormViewModelProtocol.swift */; };
 		75405AA82A27F97E008C21F6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75405AA62A27F97E008C21F6 /* Localizable.strings */; };
 		75405AAB2A27F9B4008C21F6 /* Bundle+OmiseSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */; };
 		759856242A286C880087B605 /* UIScrollView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759856232A286C880087B605 /* UIScrollView+Helpers.swift */; };
@@ -75,12 +75,12 @@
 		75F2A0A62A13B70F0038FA54 /* OmiseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062F1CFEA7E4004BCF51 /* OmiseTextField.swift */; };
 		75F2A0A82A13B73B0038FA54 /* Swift Version Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatibility.swift */; };
 		75F2A0B02A1A5BF30038FA54 /* ProxyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0AF2A1A5BF30038FA54 /* ProxyProperty.swift */; };
-		75F2A0B22A1A5E780038FA54 /* NewAtomeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B12A1A5E780038FA54 /* NewAtomeInputView.swift */; };
-		75F2A0B72A1A60630038FA54 /* NewAtomeFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0A42A13B1470038FA54 /* NewAtomeFormViewController.swift */; };
+		75F2A0B22A1A5E780038FA54 /* AtomeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B12A1A5E780038FA54 /* AtomeInputView.swift */; };
+		75F2A0B72A1A60630038FA54 /* AtomeFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0A42A13B1470038FA54 /* AtomeFormViewController.swift */; };
 		75F2A0B82A1A60630038FA54 /* ProxyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0AF2A1A5BF30038FA54 /* ProxyProperty.swift */; };
-		75F2A0B92A1A60630038FA54 /* NewAtomeFormViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B32A1A5EAD0038FA54 /* NewAtomeFormViewModelProtocol.swift */; };
-		75F2A0BA2A1A60630038FA54 /* NewAtomeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B12A1A5E780038FA54 /* NewAtomeInputView.swift */; };
-		75F2A0BB2A1A60630038FA54 /* NewAtomeFormViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B52A1A5F020038FA54 /* NewAtomeFormViewContext.swift */; };
+		75F2A0B92A1A60630038FA54 /* AtomeFormViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B32A1A5EAD0038FA54 /* AtomeFormViewModelProtocol.swift */; };
+		75F2A0BA2A1A60630038FA54 /* AtomeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B12A1A5E780038FA54 /* AtomeInputView.swift */; };
+		75F2A0BB2A1A60630038FA54 /* AtomeFormViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B52A1A5F020038FA54 /* AtomeFormViewContext.swift */; };
 		75F2A0C12A1A84900038FA54 /* UIColor+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0C02A1A84900038FA54 /* UIColor+Helpers.swift */; };
 		75F2A0C22A1A87AE0038FA54 /* UIColor+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0C02A1A84900038FA54 /* UIColor+Helpers.swift */; };
 		8A01E48D21059EFF00D73FE6 /* PaymentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01E48C21059EFF00D73FE6 /* PaymentInformation.swift */; };
@@ -255,10 +255,10 @@
 		731A75D225E3604A002353C0 /* FPXBankChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPXBankChooserViewController.swift; sourceTree = "<group>"; };
 		73F9BA4625E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptableDynamicTableViewController.swift; sourceTree = "<group>"; };
 		73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPXFormViewController.swift; sourceTree = "<group>"; };
-		7509D4DF2A1AA1450050AB38 /* NewAtomeFormViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeFormViewControllerTests.swift; sourceTree = "<group>"; };
-		7509D4E12A1C876B0050AB38 /* NewAtomeFormViewContextMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeFormViewContextMockup.swift; sourceTree = "<group>"; };
-		7509D4E32A1C89F10050AB38 /* NewAtomeFormViewModelMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeFormViewModelMockup.swift; sourceTree = "<group>"; };
-		7509D4E62A1C8E3D0050AB38 /* NewAtomeFormViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeFormViewModelTests.swift; sourceTree = "<group>"; };
+		7509D4DF2A1AA1450050AB38 /* AtomeFormViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewControllerTests.swift; sourceTree = "<group>"; };
+		7509D4E12A1C876B0050AB38 /* AtomeFormViewContextMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewContextMockup.swift; sourceTree = "<group>"; };
+		7509D4E32A1C89F10050AB38 /* AtomeFormViewModelMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewModelMockup.swift; sourceTree = "<group>"; };
+		7509D4E62A1C8E3D0050AB38 /* AtomeFormViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewModelTests.swift; sourceTree = "<group>"; };
 		75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+OmiseSDK.swift"; sourceTree = "<group>"; };
 		75405A772A25D327008C21F6 /* String+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Helpers.swift"; sourceTree = "<group>"; };
 		75405A7B2A25EC88008C21F6 /* Array+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Helpers.swift"; sourceTree = "<group>"; };
@@ -269,7 +269,7 @@
 		75405A892A26340E008C21F6 /* UILabel+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Helpers.swift"; sourceTree = "<group>"; };
 		75405A8A2A26340E008C21F6 /* UIButton+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Helpers.swift"; sourceTree = "<group>"; };
 		75405A972A2634D9008C21F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		75405A9B2A266F50008C21F6 /* NewAtomeFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeFormViewModel.swift; sourceTree = "<group>"; };
+		75405A9B2A266F50008C21F6 /* AtomeFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewModel.swift; sourceTree = "<group>"; };
 		75405AA72A27F97E008C21F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		75405AA92A27F985008C21F6 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		75405AAA2A27F988008C21F6 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -284,11 +284,11 @@
 		75F2A0992A13B0B10038FA54 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		75F2A09F2A13B0DB0038FA54 /* UIKitViewPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitViewPresentable.swift; sourceTree = "<group>"; };
 		75F2A0A12A13B0E30038FA54 /* UIKitViewControllerPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitViewControllerPresentable.swift; sourceTree = "<group>"; };
-		75F2A0A42A13B1470038FA54 /* NewAtomeFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeFormViewController.swift; sourceTree = "<group>"; };
+		75F2A0A42A13B1470038FA54 /* AtomeFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewController.swift; sourceTree = "<group>"; };
 		75F2A0AF2A1A5BF30038FA54 /* ProxyProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyProperty.swift; sourceTree = "<group>"; };
-		75F2A0B12A1A5E780038FA54 /* NewAtomeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeInputView.swift; sourceTree = "<group>"; };
-		75F2A0B32A1A5EAD0038FA54 /* NewAtomeFormViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeFormViewModelProtocol.swift; sourceTree = "<group>"; };
-		75F2A0B52A1A5F020038FA54 /* NewAtomeFormViewContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAtomeFormViewContext.swift; sourceTree = "<group>"; };
+		75F2A0B12A1A5E780038FA54 /* AtomeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeInputView.swift; sourceTree = "<group>"; };
+		75F2A0B32A1A5EAD0038FA54 /* AtomeFormViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewModelProtocol.swift; sourceTree = "<group>"; };
+		75F2A0B52A1A5F020038FA54 /* AtomeFormViewContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewContext.swift; sourceTree = "<group>"; };
 		75F2A0C02A1A84900038FA54 /* UIColor+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Helpers.swift"; sourceTree = "<group>"; };
 		8A00FEC21F1DE88600246078 /* README.md */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; tabWidth = 2; };
 		8A01E48C21059EFF00D73FE6 /* PaymentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInformation.swift; sourceTree = "<group>"; };
@@ -484,8 +484,8 @@
 			isa = PBXGroup;
 			children = (
 				7509D4E52A1C8C350050AB38 /* Mockups */,
-				7509D4DF2A1AA1450050AB38 /* NewAtomeFormViewControllerTests.swift */,
-				7509D4E62A1C8E3D0050AB38 /* NewAtomeFormViewModelTests.swift */,
+				7509D4DF2A1AA1450050AB38 /* AtomeFormViewControllerTests.swift */,
+				7509D4E62A1C8E3D0050AB38 /* AtomeFormViewModelTests.swift */,
 			);
 			path = Atome;
 			sourceTree = "<group>";
@@ -493,8 +493,8 @@
 		7509D4E52A1C8C350050AB38 /* Mockups */ = {
 			isa = PBXGroup;
 			children = (
-				7509D4E12A1C876B0050AB38 /* NewAtomeFormViewContextMockup.swift */,
-				7509D4E32A1C89F10050AB38 /* NewAtomeFormViewModelMockup.swift */,
+				7509D4E12A1C876B0050AB38 /* AtomeFormViewContextMockup.swift */,
+				7509D4E32A1C89F10050AB38 /* AtomeFormViewModelMockup.swift */,
 			);
 			path = Mockups;
 			sourceTree = "<group>";
@@ -502,7 +502,7 @@
 		7509D4E82A1C96D90050AB38 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				75F2A0B12A1A5E780038FA54 /* NewAtomeInputView.swift */,
+				75F2A0B12A1A5E780038FA54 /* AtomeInputView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -561,10 +561,10 @@
 			isa = PBXGroup;
 			children = (
 				7509D4E82A1C96D90050AB38 /* Views */,
-				75F2A0A42A13B1470038FA54 /* NewAtomeFormViewController.swift */,
-				75F2A0B52A1A5F020038FA54 /* NewAtomeFormViewContext.swift */,
-				75F2A0B32A1A5EAD0038FA54 /* NewAtomeFormViewModelProtocol.swift */,
-				75405A9B2A266F50008C21F6 /* NewAtomeFormViewModel.swift */,
+				75F2A0A42A13B1470038FA54 /* AtomeFormViewController.swift */,
+				75F2A0B52A1A5F020038FA54 /* AtomeFormViewContext.swift */,
+				75F2A0B32A1A5EAD0038FA54 /* AtomeFormViewModelProtocol.swift */,
+				75405A9B2A266F50008C21F6 /* AtomeFormViewModel.swift */,
 			);
 			name = AtomeFormViewController;
 			sourceTree = "<group>";
@@ -590,7 +590,6 @@
 			isa = PBXGroup;
 			children = (
 				75F2A0A32A13B0E70038FA54 /* UIKitLiveKit */,
-				75F2A0AD2A1A53870038FA54 /* AtomeController */,
 				7509D4EA2A1C97A30050AB38 /* App */,
 				75F2A0982A13B0B10038FA54 /* Preview Content */,
 			);
@@ -613,13 +612,6 @@
 				75F2A0A12A13B0E30038FA54 /* UIKitViewControllerPresentable.swift */,
 			);
 			path = UIKitLiveKit;
-			sourceTree = "<group>";
-		};
-		75F2A0AD2A1A53870038FA54 /* AtomeController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AtomeController;
 			sourceTree = "<group>";
 		};
 		75F2A0AE2A1A5BE30038FA54 /* Property Wrappers */ = {
@@ -1123,7 +1115,7 @@
 				2220F1AC1D0FEE85008CD89F /* OmiseSDKClient.swift in Sources */,
 				8AF56E602268650D0097CFEE /* OmiseTextFieldCompatability.swift in Sources */,
 				8A60619A20B2A8D400CF90D5 /* PAN.swift in Sources */,
-				75F2A0BA2A1A60630038FA54 /* NewAtomeInputView.swift in Sources */,
+				75F2A0BA2A1A60630038FA54 /* AtomeInputView.swift in Sources */,
 				759856242A286C880087B605 /* UIScrollView+Helpers.swift in Sources */,
 				2220F1AA1D0FEE85008CD89F /* OmiseError.swift in Sources */,
 				75405A8D2A26340E008C21F6 /* UIView+Helpers.swift in Sources */,
@@ -1133,7 +1125,7 @@
 				98FF99BB2577789800476487 /* Configuration.swift in Sources */,
 				8A72CD5E2162358400F14F76 /* PaymentOptionTableViewCell.swift in Sources */,
 				8AD391B1230C05BC00383286 /* Colors.swift in Sources */,
-				75F2A0BB2A1A60630038FA54 /* NewAtomeFormViewContext.swift in Sources */,
+				75F2A0BB2A1A60630038FA54 /* AtomeFormViewContext.swift in Sources */,
 				8A47173D20AAB11B0022733A /* Source.swift in Sources */,
 				986406351CFEA7E4004BCF51 /* OmiseTextField.swift in Sources */,
 				1121F44028523BED0003EE4F /* DuitNowOBWBankChooserViewController.swift in Sources */,
@@ -1159,7 +1151,7 @@
 				731A75D325E3604A002353C0 /* FPXBankChooserViewController.swift in Sources */,
 				8A2BE95520A9A39E000CEB60 /* Request.swift in Sources */,
 				14ACEF831D02D641001C5319 /* CardExpiryDatePicker.swift in Sources */,
-				75F2A0B92A1A60630038FA54 /* NewAtomeFormViewModelProtocol.swift in Sources */,
+				75F2A0B92A1A60630038FA54 /* AtomeFormViewModelProtocol.swift in Sources */,
 				75405A782A25D327008C21F6 /* String+Helpers.swift in Sources */,
 				8A01F79420D914A4003FC11E /* OmiseSource.swift in Sources */,
 				986406301CFEA7E4004BCF51 /* CardCVVTextField.swift in Sources */,
@@ -1170,14 +1162,14 @@
 				8A30FB7D214929C900DC09DC /* PaymentCreatorController.swift in Sources */,
 				75348D4E29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift in Sources */,
 				8A4F7CB920A9C0FD001C441A /* Object.swift in Sources */,
-				75405A9C2A266F50008C21F6 /* NewAtomeFormViewModel.swift in Sources */,
+				75405A9C2A266F50008C21F6 /* AtomeFormViewModel.swift in Sources */,
 				8AD0609620B55E610074894E /* Client.swift in Sources */,
 				8AC1D3A7213941C80051F966 /* InstallmentsNumberOfTermsChooserViewController.swift in Sources */,
 				75405A932A26340E008C21F6 /* UIButton+Helpers.swift in Sources */,
 				986406321CFEA7E4004BCF51 /* CardNumberTextField.swift in Sources */,
 				75405A8F2A26340E008C21F6 /* UIImage+Helpers.swift in Sources */,
 				F6614CD6243DB8E7005B656E /* TrueMoneyFormViewController.swift in Sources */,
-				75F2A0B72A1A60630038FA54 /* NewAtomeFormViewController.swift in Sources */,
+				75F2A0B72A1A60630038FA54 /* AtomeFormViewController.swift in Sources */,
 				8A01E48D21059EFF00D73FE6 /* PaymentInformation.swift in Sources */,
 				75F2A0C22A1A87AE0038FA54 /* UIColor+Helpers.swift in Sources */,
 				7509D4DD2A1A9FD70050AB38 /* MainActionButton.swift in Sources */,
@@ -1207,11 +1199,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				75405A942A26340E008C21F6 /* UIButton+Helpers.swift in Sources */,
-				75405AA22A27F5D0008C21F6 /* NewAtomeFormViewController.swift in Sources */,
+				75405AA22A27F5D0008C21F6 /* AtomeFormViewController.swift in Sources */,
 				75F2A0B02A1A5BF30038FA54 /* ProxyProperty.swift in Sources */,
 				75F2A0952A13B0B10038FA54 /* ContentView.swift in Sources */,
-				75F2A0B22A1A5E780038FA54 /* NewAtomeInputView.swift in Sources */,
-				7509D4F52A1D2F550050AB38 /* NewAtomeFormViewContextMockup.swift in Sources */,
+				75F2A0B22A1A5E780038FA54 /* AtomeInputView.swift in Sources */,
+				7509D4F52A1D2F550050AB38 /* AtomeFormViewContextMockup.swift in Sources */,
 				75F2A0A22A13B0E30038FA54 /* UIKitViewControllerPresentable.swift in Sources */,
 				75405A922A26340E008C21F6 /* UILabel+Helpers.swift in Sources */,
 				75F2A0A82A13B73B0038FA54 /* Swift Version Compatibility.swift in Sources */,
@@ -1219,16 +1211,16 @@
 				75405A8E2A26340E008C21F6 /* UIView+Helpers.swift in Sources */,
 				75405A902A26340E008C21F6 /* UIImage+Helpers.swift in Sources */,
 				75405AAB2A27F9B4008C21F6 /* Bundle+OmiseSDK.swift in Sources */,
-				75405AA42A27F5D3008C21F6 /* NewAtomeFormViewContext.swift in Sources */,
+				75405AA42A27F5D3008C21F6 /* AtomeFormViewContext.swift in Sources */,
 				75F2A0A02A13B0DB0038FA54 /* UIKitViewPresentable.swift in Sources */,
 				75405A792A25D33F008C21F6 /* String+Helpers.swift in Sources */,
-				75405AA52A27F5D3008C21F6 /* NewAtomeFormViewModelProtocol.swift in Sources */,
+				75405AA52A27F5D3008C21F6 /* AtomeFormViewModelProtocol.swift in Sources */,
 				75F2A0C12A1A84900038FA54 /* UIColor+Helpers.swift in Sources */,
 				75405A8C2A26340E008C21F6 /* UIStackView+Helpers.swift in Sources */,
 				75405A952A26343F008C21F6 /* SpacerView.swift in Sources */,
 				75F2A0932A13B0B10038FA54 /* OmiseSDKUITestsApp.swift in Sources */,
 				75405A7D2A25ED11008C21F6 /* Array+Helpers.swift in Sources */,
-				7509D4F42A1D2C3E0050AB38 /* NewAtomeFormViewModelMockup.swift in Sources */,
+				7509D4F42A1D2C3E0050AB38 /* AtomeFormViewModelMockup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1251,8 +1243,8 @@
 			files = (
 				8A14C20B220AE241003F5B20 /* CapabilityOperationFixtureTests.swift in Sources */,
 				8AFE10BB20B69B39008E741D /* ClientTestCase.swift in Sources */,
-				7509D4E02A1AA1450050AB38 /* NewAtomeFormViewControllerTests.swift in Sources */,
-				7509D4E42A1C89F10050AB38 /* NewAtomeFormViewModelMockup.swift in Sources */,
+				7509D4E02A1AA1450050AB38 /* AtomeFormViewControllerTests.swift in Sources */,
+				7509D4E42A1C89F10050AB38 /* AtomeFormViewModelMockup.swift in Sources */,
 				8A43454720DBAE76005C5C94 /* PANModelTestCase.swift in Sources */,
 				224460041CF43A1200801D0F /* SDKTestCase.swift in Sources */,
 				8A3C10582159FCE900BEFD8A /* BadRequestAPIErrorParsingTestCase.swift in Sources */,
@@ -1260,8 +1252,8 @@
 				2244600A1CF441DC00801D0F /* TokenRequestDelegateDummy.swift in Sources */,
 				224460051CF43A1500801D0F /* CardNumberTest.swift in Sources */,
 				987A03211CE5B7D70035417A /* OmiseTokenRequestTest.swift in Sources */,
-				7509D4E72A1C8E3D0050AB38 /* NewAtomeFormViewModelTests.swift in Sources */,
-				7509D4E22A1C876B0050AB38 /* NewAtomeFormViewContextMockup.swift in Sources */,
+				7509D4E72A1C8E3D0050AB38 /* AtomeFormViewModelTests.swift in Sources */,
+				7509D4E22A1C876B0050AB38 /* AtomeFormViewContextMockup.swift in Sources */,
 				8A3C10562159F7FC00BEFD8A /* InvalidCardAPIErrorParsingTestCase.swift in Sources */,
 				8A37E43620B584D300E2DA18 /* ModelTestCase.swift in Sources */,
 			);

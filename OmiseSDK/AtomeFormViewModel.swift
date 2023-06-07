@@ -1,5 +1,5 @@
 //
-//  NewAtomeFormViewModel.swift
+//  AtomeFormViewModel.swift
 //  OmiseSDK
 //
 //  Created by Andrei Solovev on 31/5/23.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NewAtomeFormViewModel: NewAtomeFormViewModelProtocol {
+class AtomeFormViewModel: AtomeFormViewModelProtocol {
     var fields: [Field] = [
         .name,
         .email,

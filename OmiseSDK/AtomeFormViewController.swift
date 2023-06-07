@@ -1,5 +1,5 @@
 //
-//  NewAtomeFormViewController.swift
+//  AtomeFormViewController.swift
 //  OmiseSDKUITests
 //
 //  Created by Andrei Solovev on 16/5/23.
@@ -11,14 +11,14 @@
 import Foundation
 import UIKit
 
-protocol NewAtomeFormViewControllerInterface {
+protocol AtomeFormViewControllerInterface {
     func onSubmitButtonTapped()
 
 }
 
 // @objc(OMSNewAtomeFormViewController)
 /// swiftlint:disable:next attributes
-class NewAtomeFormViewController: UIViewController, PaymentChooserUI {
+class AtomeFormViewController: UIViewController, PaymentChooserUI {
     struct Style {
         var backgroundColorForDisabledNextButton = UIColor(0xE4E7ED)
         var backgroundColorForEnabledNextButton = UIColor(0x1957F0)
@@ -31,8 +31,8 @@ class NewAtomeFormViewController: UIViewController, PaymentChooserUI {
         var nextButtonHeight = CGFloat(47)
     }
 
-    typealias ViewModel = NewAtomeFormViewModelProtocol
-    typealias ViewContext = NewAtomeFormViewContext
+    typealias ViewModel = AtomeFormViewModelProtocol
+    typealias ViewContext = AtomeFormViewContext
     typealias Field = ViewContext.Field
 
     var viewModel: ViewModel? {
@@ -157,7 +157,7 @@ class NewAtomeFormViewController: UIViewController, PaymentChooserUI {
 }
 
 // MARK: Setups
-private extension NewAtomeFormViewController {
+private extension AtomeFormViewController {
     func setupViews() {
         view.backgroundColor = .background
         applyPrimaryColor()
@@ -218,13 +218,13 @@ private extension NewAtomeFormViewController {
                 inputsStackView.addArrangedSubview(shippingAddressLabel)
             }
 
-            let input = NewAtomeInputView(id: field.rawValue)
+            let input = AtomeInputView(id: field.rawValue)
             inputsStackView.addArrangedSubview(input)
             setupInput(input, field: field, isLast: field == fields.last, viewModel: viewModel)
         }
     }
 
-    func setupInput(_ input: NewAtomeInputView, field: Field, isLast: Bool, viewModel: ViewModel) {
+    func setupInput(_ input: AtomeInputView, field: Field, isLast: Bool, viewModel: ViewModel) {
         input.title = viewModel.title(for: field)
         input.placeholder = ""
         input.textContentType = viewModel.contentType(for: field)
@@ -255,7 +255,7 @@ private extension NewAtomeFormViewController {
         detailsLabel.textColor = currentPrimaryColor
         activityIndicator.color = currentPrimaryColor
         inputsStackView.arrangedSubviews.forEach {
-            if let input = $0 as? NewAtomeInputView {
+            if let input = $0 as? AtomeInputView {
                 input.textColor = currentPrimaryColor
                 input.titleColor = currentPrimaryColor
             }
@@ -268,7 +268,7 @@ private extension NewAtomeFormViewController {
         }
 
         inputsStackView.arrangedSubviews.forEach {
-            if let input = $0 as? NewAtomeInputView {
+            if let input = $0 as? AtomeInputView {
                 input.borderColor = currentPrimaryColor
                 input.placeholderTextColor = currentPrimaryColor
             }
@@ -277,7 +277,7 @@ private extension NewAtomeFormViewController {
 }
 
 // MARK: Actions
-private extension NewAtomeFormViewController {
+private extension AtomeFormViewController {
     func hideErrorIfNil(field: Field) {
         if let viewModel = viewModel, let input = input(for: field) {
             let error = viewModel.error(for: field, validate: input.text)
@@ -307,7 +307,7 @@ private extension NewAtomeFormViewController {
 }
 
 // MARK: Non-private for Unit-Testing
-extension NewAtomeFormViewController {
+extension AtomeFormViewController {
     func showAllErrors() {
         guard let viewModel = self.viewModel else { return }
 
@@ -336,9 +336,9 @@ extension NewAtomeFormViewController {
         input.error = viewModel?.error(for: field, validate: input.text)
     }
 
-    func input(for field: Field) -> NewAtomeInputView? {
+    func input(for field: Field) -> AtomeInputView? {
         for input in inputsStackView.arrangedSubviews {
-            guard let input = input as? NewAtomeInputView, input.identifier == field.rawValue else {
+            guard let input = input as? AtomeInputView, input.identifier == field.rawValue else {
                 continue
             }
             return input
@@ -346,7 +346,7 @@ extension NewAtomeFormViewController {
         return nil
     }
 
-    func input(after input: NewAtomeInputView) -> NewAtomeInputView? {
+    func input(after input: AtomeInputView) -> AtomeInputView? {
         guard
             let inputField = Field(rawValue: input.identifier),
             let viewModel = viewModel,
@@ -361,7 +361,7 @@ extension NewAtomeFormViewController {
 }
 
 // MARK: Input Processing
-private extension NewAtomeFormViewController {
+private extension AtomeFormViewController {
     func onTextChanged(field: Field) {
         updateSubmitButtonState()
         hideErrorIfNil(field: field)
@@ -411,13 +411,13 @@ private extension NewAtomeFormViewController {
         }
     }
 
-    func onKeboardNextTapped(input: NewAtomeInputView) {
+    func onKeboardNextTapped(input: AtomeInputView) {
         if let nextInput = self.input(after: input) {
             _ = nextInput.becomeFirstResponder()
         }
     }
 
-    func onKeyboardDoneTapped(input: NewAtomeInputView) {
+    func onKeyboardDoneTapped(input: AtomeInputView) {
         if submitButton.isEnabled {
             onSubmitButtonTapped()
         } else {
@@ -439,8 +439,8 @@ private extension NewAtomeFormViewController {
     }
 }
 
-// MARK: NewAtomeFormViewControllerInterface
-extension NewAtomeFormViewController: NewAtomeFormViewControllerInterface {
+// MARK: AtomeFormViewControllerInterface
+extension AtomeFormViewController: AtomeFormViewControllerInterface {
     @objc func onSubmitButtonTapped() {
         let currentContext = makeViewContext()
         guard let viewModel = self.viewModel, viewModel.isSubmitButtonEnabled(currentContext) else {
@@ -459,12 +459,12 @@ extension NewAtomeFormViewController: NewAtomeFormViewControllerInterface {
 import SwiftUI
 
 // MARK: Preview
-struct NewAtomeFormViewController_Previews: PreviewProvider {
+struct AtomeFormViewController_Previews: PreviewProvider {
     static var previews: some View {
         UIKitViewControllerPresentable(
             viewController:
-                NewAtomeFormViewController(
-                    viewModel: NewAtomeFormViewModelMockup().applyMockupTitles().applyMockupFields()
+                AtomeFormViewController(
+                    viewModel: AtomeFormViewModelMockup().applyMockupTitles().applyMockupFields()
                 )
         )
     }

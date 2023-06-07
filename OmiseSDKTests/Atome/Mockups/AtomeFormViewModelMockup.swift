@@ -1,5 +1,5 @@
 //
-//  NewAtomeFormViewModelMockup.swift
+//  AtomeFormViewModelMockup.swift
 //  OmiseSDKTests
 //
 //  Created by Andrei Solovev on 23/5/23.
@@ -11,7 +11,7 @@ import Foundation
 @testable import OmiseSDK
 #endif
 
-class NewAtomeFormViewModelMockup: NewAtomeFormViewModelProtocol {
+class AtomeFormViewModelMockup: AtomeFormViewModelProtocol {
     var submitButtonTitle: String = "Next"
     var headerText: String = "Please input the below information to complete the charge creation with Atome."
     var logoName: String = "Atome"
@@ -49,7 +49,7 @@ class NewAtomeFormViewModelMockup: NewAtomeFormViewModelProtocol {
     }
 }
 
-extension NewAtomeFormViewModelMockup {
+extension AtomeFormViewModelMockup {
     @discardableResult
     func applyMockupTitles() -> Self {
         self.titles = Field.allCases.reduce(into: [Field: String]()) { list, field in

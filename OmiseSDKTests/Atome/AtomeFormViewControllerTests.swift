@@ -1,5 +1,5 @@
 //
-//  NewAtomeFormViewControllerTests.swift
+//  AtomeFormViewControllerTests.swift
 //  OmiseSDKTests
 //
 //  Created by Andrei Solovev on 22/5/23.
@@ -10,17 +10,17 @@ import XCTest
 import OmiseTestSDK
 @testable import OmiseSDK
 
-class NewAtomeFormViewControllerTests: XCTestCase {
-    typealias ViewModel = NewAtomeFormViewModelMockup
+class AtomeFormViewControllerTests: XCTestCase {
+    typealias ViewModel = AtomeFormViewModelMockup
 
 //    func testBindInputs() {
 //        let viewModel = ViewModel()
-//        for field in NewAtomeFormViewContext.Field.allCases {
+//        for field in AtomeFormViewContext.Field.allCases {
 //            viewModel.titles[field] = "title: " + field.rawValue
 //            viewModel.errors[field] = "error: " + field.rawValue
 //        }
 //
-//        let vc = NewAtomeFormViewController(viewModel: viewModel)
+//        let vc = AtomeFormViewController(viewModel: viewModel)
 //        for field in ViewModel.Field.allCases {
 //            XCTAssertEqual(vc.input(for: field)?.title, "title: " + field.rawValue)
 //            XCTAssertEqual(vc.input(for: field)?.error, "")

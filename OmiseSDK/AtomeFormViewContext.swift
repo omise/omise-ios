@@ -1,5 +1,5 @@
 //
-//  NewAtomeFormViewContext.swift
+//  AtomeFormViewContext.swift
 //  OmiseSDKUITests
 //
 //  Created by Andrei Solovev on 21/5/23.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct NewAtomeFormViewContext {
+struct AtomeFormViewContext {
     enum Field: String, CaseIterable {
         case name
         case email
@@ -37,7 +37,7 @@ struct NewAtomeFormViewContext {
     }
 }
 
-extension NewAtomeFormViewContext.Field {
+extension AtomeFormViewContext.Field {
     var isOptional: Bool {
         switch self {
         case .name, .email, .street2: return true
