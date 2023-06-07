@@ -27,6 +27,8 @@
 		731A75D325E3604A002353C0 /* FPXBankChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A75D225E3604A002353C0 /* FPXBankChooserViewController.swift */; };
 		73F9BA4725E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4625E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift */; };
 		73F9BA4B25E6053700F55CA8 /* FPXFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */; };
+		7502CA532A3011A900766E7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7502CA562A3011A900766E7D /* LaunchScreen.storyboard */; };
+		7502CA542A3011A900766E7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7502CA562A3011A900766E7D /* LaunchScreen.storyboard */; };
 		7509D4DD2A1A9FD70050AB38 /* MainActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A275CBB21241E4500C5716F /* MainActionButton.swift */; };
 		7509D4E02A1AA1450050AB38 /* AtomeFormViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4DF2A1AA1450050AB38 /* AtomeFormViewControllerTests.swift */; };
 		7509D4E22A1C876B0050AB38 /* AtomeFormViewContextMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E12A1C876B0050AB38 /* AtomeFormViewContextMockup.swift */; };
@@ -118,8 +120,6 @@
 		8A72CD5E2162358400F14F76 /* PaymentOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A72CD5D2162358400F14F76 /* PaymentOptionTableViewCell.swift */; };
 		8A7567652178956800C684C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7567642178956800C684C9 /* Main.storyboard */; };
 		8A7567662178956800C684C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7567642178956800C684C9 /* Main.storyboard */; };
-		8A7567682178959400C684C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7567672178959400C684C9 /* LaunchScreen.storyboard */; };
-		8A7567692178959400C684C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7567672178959400C684C9 /* LaunchScreen.storyboard */; };
 		8A76791F214663560085DE3C /* PaymentUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A76791E214663560085DE3C /* PaymentUI.swift */; };
 		8A776647214A5FC60029D166 /* NoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A776646214A5FC60029D166 /* NoticeView.xib */; };
 		8A7A9EBE2166160300F12D86 /* PaymentSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */; };
@@ -255,6 +255,10 @@
 		731A75D225E3604A002353C0 /* FPXBankChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPXBankChooserViewController.swift; sourceTree = "<group>"; };
 		73F9BA4625E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptableDynamicTableViewController.swift; sourceTree = "<group>"; };
 		73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPXFormViewController.swift; sourceTree = "<group>"; };
+		7502CA552A3011A900766E7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7502CA582A3011B000766E7D /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		7502CA5A2A3011B100766E7D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		7502CA5C2A3011B200766E7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		7509D4DF2A1AA1450050AB38 /* AtomeFormViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewControllerTests.swift; sourceTree = "<group>"; };
 		7509D4E12A1C876B0050AB38 /* AtomeFormViewContextMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewContextMockup.swift; sourceTree = "<group>"; };
 		7509D4E32A1C89F10050AB38 /* AtomeFormViewModelMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewModelMockup.swift; sourceTree = "<group>"; };
@@ -326,7 +330,6 @@
 		8A723A632164D7B100D902F5 /* ExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A72CD5D2162358400F14F76 /* PaymentOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentOptionTableViewCell.swift; sourceTree = "<group>"; };
 		8A7567642178956800C684C9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		8A7567672178959400C684C9 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8A76791E214663560085DE3C /* PaymentUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentUI.swift; sourceTree = "<group>"; };
 		8A776646214A5FC60029D166 /* NoticeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeView.xib; sourceTree = "<group>"; };
 		8A776657214AA4E70029D166 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ja; path = ja.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
@@ -581,7 +584,7 @@
 			children = (
 				22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */,
 				8A7567642178956800C684C9 /* Main.storyboard */,
-				8A7567672178959400C684C9 /* LaunchScreen.storyboard */,
+				7502CA562A3011A900766E7D /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1021,7 +1024,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A7567682178959400C684C9 /* LaunchScreen.storyboard in Resources */,
+				7502CA532A3011A900766E7D /* LaunchScreen.storyboard in Resources */,
 				8A7567652178956800C684C9 /* Main.storyboard in Resources */,
 				22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */,
 				75F2A0182A0BD0D40038FA54 /* Config.local.plist in Resources */,
@@ -1041,7 +1044,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A7567692178959400C684C9 /* LaunchScreen.storyboard in Resources */,
+				7502CA542A3011A900766E7D /* LaunchScreen.storyboard in Resources */,
 				8A7567662178956800C684C9 /* Main.storyboard in Resources */,
 				8A723A5C2164D7B100D902F5 /* Assets.xcassets in Resources */,
 				75F2A0192A0BD0D40038FA54 /* Config.local.plist in Resources */,
@@ -1280,6 +1283,17 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		7502CA562A3011A900766E7D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7502CA552A3011A900766E7D /* Base */,
+				7502CA582A3011B000766E7D /* th */,
+				7502CA5A2A3011B100766E7D /* ja */,
+				7502CA5C2A3011B200766E7D /* en */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		75405AA62A27F97E008C21F6 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
