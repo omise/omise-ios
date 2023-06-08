@@ -427,11 +427,6 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         vc.preferredSecondaryColor = self.preferredSecondaryColor
 
         navigationController?.pushViewController(vc, animated: true)
-//
-//        if let storyboard = self.storyboard {
-//            let vc = storyboard.instantiateViewController(withIdentifier: "AtomeFormViewController")
-//            navigationController?.pushViewController(vc, animated: true)
-//        }
     }
 
     // swiftlint:disable:next function_body_length
