@@ -64,6 +64,7 @@ class AtomeInputView: UIView {
     var onBeginEditing: () -> Void = { }
     var onEndEditing: () -> Void = { }
 
+    // swiftlint:disable attributes
     @ProxyProperty(\AtomeInputView.textField.keyboardType) var keyboardType: UIKeyboardType
     @ProxyProperty(\AtomeInputView.textField.textContentType) var textContentType: UITextContentType?
     @ProxyProperty(\AtomeInputView.textField.autocapitalizationType) var autocapitalizationType: UITextAutocapitalizationType
@@ -80,6 +81,7 @@ class AtomeInputView: UIView {
     @ProxyProperty(\AtomeInputView.textField.borderColor) var borderColor: UIColor?
     @ProxyProperty(\AtomeInputView.textField.placeholderTextColor) var placeholderTextColor: UIColor?
     @ProxyProperty(\AtomeInputView.textField.isUserInteractionEnabled) var textFieldUserInteractionEnabled: Bool
+    // swiftlint:enable attributes
 
     init(id: String, title: String? = nil, text: String? = nil, placeholder: String? = nil, error: String? = nil) {
         self.identifier = id
