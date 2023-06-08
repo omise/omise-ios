@@ -83,8 +83,8 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol {
                 name: "Prada shoes",
                 quantity: 1,
                 amount: flowSession.paymentAmount ?? 0,
-                itemUri: "www.kan.com/product/shoes",
-                imageUri: "www.kan.com/product/shoes/image",
+                itemUri: "omise.co/product/shoes",
+                imageUri: "omise.co/product/shoes/image",
                 brand: "Gucci"
             )
         ]
