@@ -53,11 +53,6 @@ public extension PaymentInformation {
 
 public extension PaymentInformation.Atome {
     struct Item: Codable, Equatable {
-        //        public let sku: String
-        //        public let amount: Int64
-        //        public let name: String
-        //        public let quantity: Int64
-        
         public let sku: String
         public let category: String?
         public let name: String
