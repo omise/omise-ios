@@ -16,6 +16,7 @@ protocol AtomeFormViewModelProtocol {
     var headerText: String { get }
     var logoName: String { get }
     var fieldForShippingAddressHeader: Field? { get }
+    var countryListViewModel: CountryListViewModelProtocol { get }
 
     func onSubmitButtonPressed(_ viewContext: ViewContext, onComplete: @escaping  () -> Void)
     func error(for: Field, validate: String?) -> String?

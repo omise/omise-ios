@@ -8,13 +8,8 @@
 
 import Foundation
 
-struct CountryInfo: Codable, Equatable {
-    let name: String
-    let code: String
-}
-
 protocol CountryListViewModelProtocol {
     var countries: [CountryInfo] { get }
-    var selected: CountryInfo? { get set }
-    var onSelect: (CountryInfo) -> Void { get set }
+    var selectedCountry: CountryInfo? { get set }
+    var onSelectCountry: (CountryInfo) -> Void { get set }
 }

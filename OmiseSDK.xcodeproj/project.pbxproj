@@ -34,6 +34,8 @@
 		7502CA622A31A7E100766E7D /* CountryListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7502CA612A31A7E100766E7D /* CountryListViewModelProtocol.swift */; };
 		7502CA632A31A7E100766E7D /* CountryListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7502CA612A31A7E100766E7D /* CountryListViewModelProtocol.swift */; };
 		7502CA642A31AA6F00766E7D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD391B0230C05BC00383286 /* Colors.swift */; };
+		7502CA662A31AEA200766E7D /* CountryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7502CA652A31AEA200766E7D /* CountryInfo.swift */; };
+		7502CA672A31AEA200766E7D /* CountryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7502CA652A31AEA200766E7D /* CountryInfo.swift */; };
 		7509D4DD2A1A9FD70050AB38 /* MainActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A275CBB21241E4500C5716F /* MainActionButton.swift */; };
 		7509D4E02A1AA1450050AB38 /* AtomeFormViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4DF2A1AA1450050AB38 /* AtomeFormViewControllerTests.swift */; };
 		7509D4E22A1C876B0050AB38 /* AtomeFormViewContextMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E12A1C876B0050AB38 /* AtomeFormViewContextMockup.swift */; };
@@ -43,6 +45,7 @@
 		7509D4EF2A1D1F9F0050AB38 /* OmiseTestSDK in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 7509D4ED2A1D1F9F0050AB38 /* OmiseTestSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		7509D4F42A1D2C3E0050AB38 /* AtomeFormViewModelMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E32A1C89F10050AB38 /* AtomeFormViewModelMockup.swift */; };
 		7509D4F52A1D2F550050AB38 /* AtomeFormViewContextMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E12A1C876B0050AB38 /* AtomeFormViewContextMockup.swift */; };
+		753279382A31B40F008048AD /* CountryListViewModelMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753279372A31B40F008048AD /* CountryListViewModelMockup.swift */; };
 		75348D4E29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */; };
 		75405A782A25D327008C21F6 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A772A25D327008C21F6 /* String+Helpers.swift */; };
 		75405A792A25D33F008C21F6 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A772A25D327008C21F6 /* String+Helpers.swift */; };
@@ -265,10 +268,12 @@
 		7502CA5C2A3011B200766E7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		7502CA5E2A31A7D600766E7D /* CountryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListViewController.swift; sourceTree = "<group>"; };
 		7502CA612A31A7E100766E7D /* CountryListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListViewModelProtocol.swift; sourceTree = "<group>"; };
+		7502CA652A31AEA200766E7D /* CountryInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryInfo.swift; sourceTree = "<group>"; };
 		7509D4DF2A1AA1450050AB38 /* AtomeFormViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewControllerTests.swift; sourceTree = "<group>"; };
 		7509D4E12A1C876B0050AB38 /* AtomeFormViewContextMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewContextMockup.swift; sourceTree = "<group>"; };
 		7509D4E32A1C89F10050AB38 /* AtomeFormViewModelMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewModelMockup.swift; sourceTree = "<group>"; };
 		7509D4E62A1C8E3D0050AB38 /* AtomeFormViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewModelTests.swift; sourceTree = "<group>"; };
+		753279372A31B40F008048AD /* CountryListViewModelMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListViewModelMockup.swift; sourceTree = "<group>"; };
 		75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+OmiseSDK.swift"; sourceTree = "<group>"; };
 		75405A772A25D327008C21F6 /* String+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Helpers.swift"; sourceTree = "<group>"; };
 		75405A7B2A25EC88008C21F6 /* Array+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Helpers.swift"; sourceTree = "<group>"; };
@@ -494,6 +499,7 @@
 			children = (
 				7502CA5E2A31A7D600766E7D /* CountryListViewController.swift */,
 				7502CA612A31A7E100766E7D /* CountryListViewModelProtocol.swift */,
+				7502CA652A31AEA200766E7D /* CountryInfo.swift */,
 			);
 			name = CountryListViewController;
 			sourceTree = "<group>";
@@ -501,6 +507,7 @@
 		7509D4DE2A1AA1060050AB38 /* Atome */ = {
 			isa = PBXGroup;
 			children = (
+				753279362A31B406008048AD /* CountryLists */,
 				7509D4E52A1C8C350050AB38 /* Mockups */,
 				7509D4DF2A1AA1450050AB38 /* AtomeFormViewControllerTests.swift */,
 				7509D4E62A1C8E3D0050AB38 /* AtomeFormViewModelTests.swift */,
@@ -539,6 +546,14 @@
 			children = (
 			);
 			path = "---";
+			sourceTree = "<group>";
+		};
+		753279362A31B406008048AD /* CountryLists */ = {
+			isa = PBXGroup;
+			children = (
+				753279372A31B40F008048AD /* CountryListViewModelMockup.swift */,
+			);
+			path = CountryLists;
 			sourceTree = "<group>";
 		};
 		75348D4C29C3FC8F0008C8A3 /* Helpers */ = {
@@ -1155,6 +1170,7 @@
 				8AF9857221479F72007E18ED /* CreditCardFormViewController.swift in Sources */,
 				8AC1D3A32139224D0051F966 /* InternetBankingSourceChooserViewController.swift in Sources */,
 				2220F1A91D0FEE85008CD89F /* OmiseCard.swift in Sources */,
+				7502CA662A31AEA200766E7D /* CountryInfo.swift in Sources */,
 				75B43B572A0277A3004352C7 /* PaymentInformation.Atome.swift in Sources */,
 				8A14C209220ACB2B003F5B20 /* Capability.swift in Sources */,
 				8AD0609320B55B3A0074894E /* RequestTask.swift in Sources */,
@@ -1221,6 +1237,7 @@
 			files = (
 				75405A942A26340E008C21F6 /* UIButton+Helpers.swift in Sources */,
 				7502CA602A31A7D600766E7D /* CountryListViewController.swift in Sources */,
+				7502CA672A31AEA200766E7D /* CountryInfo.swift in Sources */,
 				75F2A0B02A1A5BF30038FA54 /* ProxyProperty.swift in Sources */,
 				75F2A0952A13B0B10038FA54 /* ContentView.swift in Sources */,
 				75F2A0B22A1A5E780038FA54 /* AtomeInputView.swift in Sources */,
@@ -1273,6 +1290,7 @@
 				8A3C10582159FCE900BEFD8A /* BadRequestAPIErrorParsingTestCase.swift in Sources */,
 				F615CBF8261565D600E1A2D9 /* CardExpiryDatePickerTests.swift in Sources */,
 				2244600A1CF441DC00801D0F /* TokenRequestDelegateDummy.swift in Sources */,
+				753279382A31B40F008048AD /* CountryListViewModelMockup.swift in Sources */,
 				224460051CF43A1500801D0F /* CardNumberTest.swift in Sources */,
 				987A03211CE5B7D70035417A /* OmiseTokenRequestTest.swift in Sources */,
 				7509D4E72A1C8E3D0050AB38 /* AtomeFormViewModelTests.swift in Sources */,

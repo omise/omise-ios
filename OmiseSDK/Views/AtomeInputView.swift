@@ -79,6 +79,7 @@ class AtomeInputView: UIView {
     @ProxyProperty(\AtomeInputView.textField.textColor) var textColor: UIColor?
     @ProxyProperty(\AtomeInputView.textField.borderColor) var borderColor: UIColor?
     @ProxyProperty(\AtomeInputView.textField.placeholderTextColor) var placeholderTextColor: UIColor?
+    @ProxyProperty(\AtomeInputView.textField.isUserInteractionEnabled) var textFieldUserInteractionEnabled: Bool
 
     init(id: String, title: String? = nil, text: String? = nil, placeholder: String? = nil, error: String? = nil) {
         self.identifier = id

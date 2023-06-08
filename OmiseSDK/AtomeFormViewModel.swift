@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AtomeFormViewModel: AtomeFormViewModelProtocol {
+class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtocol {
     var fields: [Field] = [
         .name,
         .email,
@@ -21,6 +21,19 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol {
         .postalCode
     ]
 
+    // MARK: CountryListViewModelProtocol
+    lazy var countries: [CountryInfo] = CountryInfo.all.sorted { $0.name < $1.name }
+    lazy var selectedCountry: CountryInfo? = CountryInfo.current {
+        didSet {
+            if let selectedCountry = selectedCountry {
+                onSelectCountry(selectedCountry)
+            }
+        }
+    }
+    var onSelectCountry: (CountryInfo) -> Void = { _ in }
+
+    var countryListViewModel: CountryListViewModelProtocol { return self }
+    
     var fieldForShippingAddressHeader: Field? { .street1 }
     var submitButtonTitle = "Atome.submitButton.title".localized()
     var headerText = "Atome.header.text".localized()
@@ -34,11 +47,9 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol {
 
     func title(for field: Field) -> String? {
         var title = field.title.localized()
-
         if field.isOptional {
             title += " " + "Atome.field.optional".localized()
         }
-
         return title
     }
 

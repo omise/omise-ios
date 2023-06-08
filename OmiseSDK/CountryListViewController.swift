@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CountryListViewController: UIViewController {
+class CountryListViewController: UIViewController, PaymentChooserUI {
     typealias ViewModel = CountryListViewModelProtocol
 
     private struct Style {
@@ -36,7 +36,7 @@ class CountryListViewController: UIViewController {
         }
     }
 
-    lazy var tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundView = nil
         tableView.backgroundColor = .clear
@@ -64,6 +64,14 @@ class CountryListViewController: UIViewController {
         }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.scrollToSelectedRow(animated: false)
+        }
+    }
 }
 
 extension CountryListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -76,19 +84,19 @@ extension CountryListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:style.countryCellIdentifier , for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: style.countryCellIdentifier, for: indexPath)
         let country = viewModel?.countries.at(indexPath.row)
 
         cell.textLabel?.text = country?.name ?? ""
-        cell.accessoryType = (viewModel?.selected == country) ? .checkmark : .none
+        cell.textLabel?.textColor = currentPrimaryColor
+        cell.accessoryType = (viewModel?.selectedCountry == country) ? .checkmark : .none
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let country = viewModel?.countries.at(indexPath.row)
-        viewModel?.selected = country
+        viewModel?.selectedCountry = country
     }
-
 }
 
 // MARK: Setups
@@ -121,17 +129,20 @@ private extension CountryListViewController {
         }
         tableView.reloadData()
     }
-}
 
+    func scrollToSelectedRow(animated: Bool) {
+        if let viewModel = viewModel,
+           let selectedCountry = viewModel.selectedCountry,
+           let index = viewModel.countries.firstIndex(of: selectedCountry) {
+            let indexPath = IndexPath(row: index, section: 0)
+            tableView.scrollToRow(at: indexPath, at: .top, animated: animated)
+        }
+    }
+
+}
 
 #if SWIFTUI_ENABLED
 import SwiftUI
-
-class CountryListViewModelMockup: CountryListViewModelProtocol {
-    var countries: [CountryInfo] = [CountryInfo(name: "Thailand", code: "TH"), CountryInfo(name: "France", code: "FR")]
-    lazy var selected: CountryInfo? = countries.first
-    var onSelect: (CountryInfo) -> Void = { _ in }
-}
 
 // MARK: Preview
 struct CountryListViewController_Previews: PreviewProvider {

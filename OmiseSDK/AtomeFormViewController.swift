@@ -17,7 +17,7 @@ protocol AtomeFormViewControllerInterface {
 }
 
 @objc(OMSAtomeFormViewController)
-/// swiftlint:disable:next attributes
+// swiftlint:disable:next attributes
 class AtomeFormViewController: UIViewController, PaymentChooserUI {
     struct Style {
         var backgroundColorForDisabledNextButton = UIColor(0xE4E7ED)
@@ -216,7 +216,27 @@ private extension AtomeFormViewController {
             let input = AtomeInputView(id: field.rawValue)
             inputsStackView.addArrangedSubview(input)
             setupInput(input, field: field, isLast: field == fields.last, viewModel: viewModel)
+
+            if field == .country {
+                input.textFieldUserInteractionEnabled = false
+                input.text = viewModel.countryListViewModel.selectedCountry?.name
+                input.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onCountryInputTapped)))
+            }
+
         }
+    }
+
+    @objc func onCountryInputTapped() {
+        guard let viewModel = viewModel else { return }
+        let vc = CountryListViewController(viewModel: viewModel.countryListViewModel)
+        vc.title = input(for: .country)?.title ?? ""
+        vc.viewModel?.onSelectCountry = { [weak self] country in
+            guard let self = self else { return }
+            self.input(for: .country)?.text = country.name
+            self.navigationController?.popToViewController(self, animated: true)
+
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     func setupInput(_ input: AtomeInputView, field: Field, isLast: Bool, viewModel: ViewModel) {
@@ -312,11 +332,15 @@ extension AtomeFormViewController {
     }
     
     func makeViewContext() -> ViewContext {
-        guard let fields = viewModel?.fields else { return ViewContext() }
+        guard let viewModel = viewModel else { return ViewContext() }
 
         var context = ViewContext()
+        let fields = viewModel.fields
         for field in fields {
-            context[field] = input(for: field)?.text ?? ""
+            switch field {
+            case .country: context[field] = viewModel.countryListViewModel.selectedCountry?.code ?? ""
+            default: context[field] = input(for: field)?.text ?? ""
+            }
         }
         return context
     }
@@ -351,7 +375,11 @@ extension AtomeFormViewController {
             return nil
         }
 
-        return nextInput
+        if nextInput.textFieldUserInteractionEnabled {
+            return nextInput
+        } else {
+            return self.input(after: nextInput)
+        }
     }
 }
 

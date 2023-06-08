@@ -3,7 +3,7 @@
 "Atome.field.name" = "Name";
 "Atome.field.email" = "Email";
 "Atome.field.phoneNumber" = "Phone Number";
-"Atome.field.country" = "Country code";
+"Atome.field.country" = "Country";
 "Atome.field.city" = "City";
 "Atome.field.postalCode" = "Postal code";
 "Atome.field.state" = "State";

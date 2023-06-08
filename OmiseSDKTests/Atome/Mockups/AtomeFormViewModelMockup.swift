@@ -12,6 +12,8 @@ import Foundation
 #endif
 
 class AtomeFormViewModelMockup: AtomeFormViewModelProtocol {
+    var countryListViewModel = CountryListViewModelMockup()
+
     var submitButtonTitle: String = "Next"
     var headerText: String = "Please input the below information to complete the charge creation with Atome."
     var logoName: String = "Atome"
