@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        AtomeFormViewController_Previews.previews
+        Text("Started")
     }
 }
 

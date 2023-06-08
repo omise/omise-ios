@@ -16,7 +16,7 @@ protocol AtomeFormViewControllerInterface {
 
 }
 
-// @objc(OMSNewAtomeFormViewController)
+@objc(OMSAtomeFormViewController)
 /// swiftlint:disable:next attributes
 class AtomeFormViewController: UIViewController, PaymentChooserUI {
     struct Style {
@@ -148,11 +148,6 @@ class AtomeFormViewController: UIViewController, PaymentChooserUI {
         if let viewModel = viewModel {
             bind(to: viewModel)
         }
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        onSubmitButtonTapped()
     }
 }
 
