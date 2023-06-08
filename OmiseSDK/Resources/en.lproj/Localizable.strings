@@ -1,12 +1,33 @@
+// Atome
+"Atome.header.text" = "Please input the below information to complete the charge creation with Atome.";
+"Atome.field.name" = "Name";
+"Atome.field.email" = "Email";
+"Atome.field.phoneNumber" = "Phone Number";
+"Atome.field.country" = "Country";
+"Atome.field.city" = "City";
+"Atome.field.postalCode" = "Postal code";
+"Atome.field.state" = "State";
+"Atome.field.street1" = "Street";
+"Atome.field.street2" = "Street 2";
+"Atome.shippingAddress" = "Shipping address";
+"Atome.submitButton.title" = "Next";
+
+"Atome.field.email.error" = "Email is invalid";
+"Atome.field.phoneNumber.error" = "Please enter valid phone number";
+"Atome.field.country.error" = "Shipping country is required";
+"Atome.field.city.error" = "Shipping city is required";
+"Atome.field.postalCode.error" = "Shipping postal code is required";
+"Atome.field.state.error" = "Shipping state is required";
+"Atome.field.street1.error" = "Shipping street is required";
+"Atome.field.optional" = "(optional)";
+
 "installments.number-of-terms-chooser.number-of-terms-cell.label.text" = "%d months";
 
 "econtext.convenience-store.navigation-item.title" = "Konbini";
 "econtext.netbanking.navigation-item.title" = "Net Bank";
 "econtext.pay-easy.navigation-item.title" = "Pay-easy";
 
-
 "installment-number-of-terms-choosers.bay.navigation-item.title" = "Bangkok Bank";
-
 
 "installment-number-of-terms-choosers.first-choice.navigation-item.title" = "Kasikorn";
 "installment-number-of-terms-choosers.bbl.navigation-item.title" = "Krungsri";

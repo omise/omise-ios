@@ -1,3 +1,26 @@
+// Atome
+"Atome.header.text" = "กรุณาใส่ข้อมูลเพื่อสร้างรายการเรียกเก็บเงินกับ Atome ให้เสร็จสมบูรณ์";
+"Atome.field.name" = "ชื่อ";
+"Atome.field.email" = "อีเมล";
+"Atome.field.phoneNumber" = "หมายเลขโทรศัพท์";
+"Atome.field.country" = "ประเทศ";
+"Atome.field.city" = "เมือง";
+"Atome.field.postalCode" = "รหัสไปรษณีย์";
+"Atome.field.state" = "รัฐ";
+"Atome.field.street1" = "ถนน";
+"Atome.field.street2" = "ที่อยู่ - เพิ่มเติม";
+"Atome.shippingAddress" = "ที่อยู่สำหรับจัดส่งสินค้า";
+"Atome.submitButton.title" = "ดำเนินการต่อ";
+
+"Atome.field.email.error" = "อีเมลไม่ถูกต้อง";
+"Atome.field.phoneNumber.error" = "กรุณาใส่หมายเลขโทรศัพท์ที่ถูกต้อง";
+"Atome.field.country.error" = "จำเป็นต้องใส่ชื่อประเทศสำหรับจัดส่งสินค้า";
+"Atome.field.city.error" = "จำเป็นต้องใส่ชื่อเมืองสำหรับจัดส่งสินค้า";
+"Atome.field.postalCode.error" = "จำเป็นต้องใส่รหัสไปรษณีย์สำหรับจัดส่งสินค้า";
+"Atome.field.state.error" = "จำเป็นต้องใส่ชื่อรัฐสำหรับจัดส่งสินค้า";
+"Atome.field.street1.error" = "จำเป็นต้องใส่ชื่อถนนสำหรับจัดส่งสินค้า";
+"Atome.field.optional" = "(ถ้ามี)";
+
 /* A navigaiton title for the EContext screen when the `Konbini` is selected */
 "econtext.convenience-store.navigation-item.title" = "ร้านสะดวกซื้อ";
 

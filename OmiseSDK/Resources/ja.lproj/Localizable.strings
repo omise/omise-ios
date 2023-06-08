@@ -1,3 +1,26 @@
+// Atome
+"Atome.header.text" = "Atomeによるお支払いを完了させるには、以下の情報をご記入ください。";
+"Atome.field.name" = "名前";
+"Atome.field.email" = "メールアドレス";
+"Atome.field.phoneNumber" = "電話番号";
+"Atome.field.country" = "国";
+"Atome.field.city" = "市区郡";
+"Atome.field.postalCode" = "郵便番号";
+"Atome.field.state" = "州";
+"Atome.field.street1" = "通り名";
+"Atome.field.street2" = "通り名 2";
+"Atome.shippingAddress" = "配送先";
+"Atome.submitButton.title" = "次へ";
+
+"Atome.field.email.error" = "メールアドレスが無効です";
+"Atome.field.phoneNumber.error" = "有効な電話を入力してください";
+"Atome.field.country.error" = "配送先の市区郡名が必要です";
+"Atome.field.city.error" = "配送先の都市名が必要です";
+"Atome.field.postalCode.error" = "配送先の郵便番号が必要です";
+"Atome.field.state.error" = "配送先の州名が必要です";
+"Atome.field.street1.error" = "配送先の通り名が必要です";
+"Atome.field.optional" = "(任意)";
+
 /* A navigaiton title for the EContext screen when the `Konbini` is selected */
 "econtext.convenience-store.navigation-item.title" = "コンビニ";
 

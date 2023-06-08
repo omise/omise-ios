@@ -4,14 +4,21 @@ import OmiseSDK
 @objc(OMSExampleProductDetailViewController)
 // swiftlint:disable:next attributes
 class ProductDetailViewController: OMSBaseViewController {
-    private let publicKey = "pkey_test_<#Omise Public Key#>"
+    private let publicKey = LocalConfig.default.publicKey
     
     private var capability: Capability?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupClient()
+    }
+
+    private func setupClient() {
+        // Setup dev environment for staging
+        Configuration.setDefault(Configuration(environment: LocalConfig.default.env))
+
         let client = Client(publicKey: publicKey)
+
         client.capabilityDataWithCompletionHandler { (result) in
             if case .success(let capability) = result {
                 self.capability = capability

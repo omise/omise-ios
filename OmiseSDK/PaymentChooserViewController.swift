@@ -331,7 +331,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         case ("GoToDuitNowOBWBankChooserSegue"?, let controller as DuitNowOBWBankChooserViewController):
             controller.showingValues = duitNowOBWBanks
             controller.flowSession = self.flowSession
-        default: break
+        default:
+            break
         }
 
         if let paymentShourceChooserUI = segue.destination as? PaymentChooserUI {
@@ -400,6 +401,9 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .duitNowQR
         case .payPay:
             payment = .payPay
+        case .atome:
+            goToAtome()
+            return
         default:
             return
         }
@@ -415,6 +419,14 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             cell?.accessoryView = oldAccessoryView
             self.view.isUserInteractionEnabled = true
         }
+    }
+
+    func goToAtome() {
+        let vc = AtomeFormViewController(viewModel: AtomeFormViewModel(flowSession: flowSession))
+        vc.preferredPrimaryColor = self.preferredPrimaryColor
+        vc.preferredSecondaryColor = self.preferredSecondaryColor
+
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     // swiftlint:disable:next function_body_length

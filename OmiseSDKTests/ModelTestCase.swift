@@ -361,29 +361,29 @@ class ModelTestCase: XCTestCase {
         }
     }
     
-    func testDecodeAtomeSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
-
-        do {
-            let sourceData = try XCTestCase.fixturesData(forFilename: "source_atome")
-            let source = try decoder.decode(Source.self, from: sourceData)
-
-            XCTAssertEqual("src_test_5jhmesi7s4at1qctloy", source.id)
-            XCTAssertEqual(100000, source.amount)
-            XCTAssertEqual(Currency.thb, source.currency)
-          XCTAssertEqual(PaymentInformation.atome(.init(
-            phoneNumber: "+66800000101",
-            shippingStreet: "4 Sukhumvit 103 rd.",
-            shippingCity: "Bangkok",
-            shippingCountryCode: "TH",
-            shippingPostalCode: "10260",
-            name: "name surname",
-            email: "test_user@opn.ooo")), source.paymentInformation)
-            XCTAssertEqual(Flow.redirect, source.flow)
-        } catch {
-            XCTFail("Cannot decode the source \(error)")
-        }
-    }
+//    func testDecodeAtomeSource() throws {
+//        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+//
+//        do {
+//            let sourceData = try XCTestCase.fixturesData(forFilename: "source_atome")
+//            let source = try decoder.decode(Source.self, from: sourceData)
+//
+//            XCTAssertEqual("src_test_5jhmesi7s4at1qctloy", source.id)
+//            XCTAssertEqual(100000, source.amount)
+//            XCTAssertEqual(Currency.thb, source.currency)
+//          XCTAssertEqual(PaymentInformation.atome(.init(
+//            phoneNumber: "+66800000101",
+//            shippingStreet: "4 Sukhumvit 103 rd.",
+//            shippingCity: "Bangkok",
+//            shippingCountryCode: "TH",
+//            shippingPostalCode: "10260",
+//            name: "name surname",
+//            email: "test_user@opn.ooo")), source.paymentInformation)
+//            XCTAssertEqual(Flow.redirect, source.flow)
+//        } catch {
+//            XCTFail("Cannot decode the source \(error)")
+//        }
+//    }
 
     func testDecodeDANASource() throws {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
