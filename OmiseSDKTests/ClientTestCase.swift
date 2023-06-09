@@ -1,10 +1,21 @@
 import XCTest
 @testable import OmiseSDK
+import OmiseTestSDK
 
 private let timeout: TimeInterval = 15.0
 
 class ClientTestCase: XCTestCase {
-    
+
+    static let requestTokenGenerator: OmiseTestSDK.TestCaseValueGenerator.GeneratorFunction<Request<Token>> = { gen in
+        Request(parameter: Token.CreateParameter(
+            name: "JOHN DOE",
+            number: "4242424242424242",
+            expirationMonth: 11,
+            expirationYear: gen.cases(.valid(2030), .invalid(2016, "Expired")),
+            securityCode: "123"
+        ))
+    }
+
     var testClient: Client!
     override func setUp() {
         super.setUp()
@@ -18,7 +29,8 @@ class ClientTestCase: XCTestCase {
     
     func testValidTokenRequestWithCallback() {
         let expectation = self.expectation(description: "Tokenized Reqeust with a valid token data")
-        let task = testClient.send(ClientTestCase.makeValidTokenRequest()) { (result) in
+        let tokenRequest = ClientTestCase.makeValidTokenRequest()
+        let task = testClient.send(tokenRequest) { (result) in
             defer { expectation.fulfill() }
             switch result {
             case .success(let token):
@@ -30,10 +42,10 @@ class ClientTestCase: XCTestCase {
             }
         }
         
-        XCTAssertEqual("424242XXXXXX4242", task.request.parameter.number)
-        XCTAssertEqual(11, task.request.parameter.expirationMonth)
-        XCTAssertEqual(2030, task.request.parameter.expirationYear)
-        
+        XCTAssertEqual(tokenRequest.parameter.number, task.request.parameter.number)
+        XCTAssertEqual(tokenRequest.parameter.expirationMonth, task.request.parameter.expirationMonth)
+        XCTAssertEqual(tokenRequest.parameter.expirationYear, task.request.parameter.expirationYear)
+
         XCTAssertEqual(Token.postURL, task.dataTask.currentRequest?.url)
         XCTAssertEqual("POST", task.dataTask.currentRequest?.httpMethod)
         
@@ -42,16 +54,17 @@ class ClientTestCase: XCTestCase {
     
     func testInvalidTokenRequestWithCallback() {
         let expectation = self.expectation(description: "Tokenized Reqeust with an invalid token data")
-        let task = testClient.send(ClientTestCase.makeInvalidTokenRequest()) { (result) in
+        let tokenRequest = ClientTestCase.makeInvalidTokenRequest()
+        let task = testClient.send(tokenRequest) { (result) in
             defer { expectation.fulfill() }
             if case .success = result {
                 XCTFail("Expected failed request")
             }
         }
         
-        XCTAssertEqual("424242XXXXXX1111", task.request.parameter.number)
-        XCTAssertEqual(11, task.request.parameter.expirationMonth)
-        XCTAssertEqual(2016, task.request.parameter.expirationYear)
+        XCTAssertEqual(tokenRequest.parameter.number, task.request.parameter.number)
+        XCTAssertEqual(tokenRequest.parameter.expirationMonth, task.request.parameter.expirationMonth)
+        XCTAssertEqual(tokenRequest.parameter.expirationYear, task.request.parameter.expirationYear)
         
         XCTAssertEqual(Token.postURL, task.dataTask.currentRequest?.url)
         XCTAssertEqual("POST", task.dataTask.currentRequest?.httpMethod)
@@ -108,25 +121,15 @@ class ClientTestCase: XCTestCase {
 }
 
 extension ClientTestCase {
-    
+
     // MARK: Request factory methods
     static func makeValidTokenRequest() -> Request<Token> {
-        return Request(parameter: Token.CreateParameter(
-            name: "JOHN DOE",
-            number: "4242424242424242",
-            expirationMonth: 11,
-            expirationYear: 2030,
-            securityCode: "123"
-        ))
+        // swiftlint:disable:next force_unwrapping
+        TestCaseValueGenerator.validCases(self.requestTokenGenerator).first!
     }
     static func makeInvalidTokenRequest() -> Request<Token> {
-        return Request(parameter: Token.CreateParameter(
-            name: "JOHN DOE",
-            number: "4242424242111111",
-            expirationMonth: 11,
-            expirationYear: 2016,
-            securityCode: "123"
-        ))
+        // swiftlint:disable:next force_unwrapping
+        TestCaseValueGenerator.invalidCases(self.requestTokenGenerator).first!
     }
     
     static func makeValidSourceRequest() -> Request<Source> {

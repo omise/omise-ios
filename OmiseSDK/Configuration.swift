@@ -1,53 +1,49 @@
 import Foundation
 
-enum Environment {
-    case staging
+public enum Environment {
+    case dev(vaultURL: URL, apiURL: URL)
     case production
-        
-    // swiftlint:disable force_unwrapping
-    private var vaultBaseURL: URL {
-        switch self {
-        case .staging: return URL(string: "[STAGING_URL]")!
-        case .production: return URL(string: "https://vault.omise.co")!
-        }
-    }
-    
-    private var apiBaseURL: URL {
-        switch self {
-        case .staging: return URL(string: "[STAGING_URL]")!
-        case .production: return URL(string: "https://api.omise.co")!
-        }
-    }
-
-    // swiftlint:enable force_unwrapping
 
     var tokenURL: URL {
         return vaultBaseURL.appendingPathComponent("tokens")
     }
-    
+
     var sourceURL: URL {
         return apiBaseURL.appendingPathComponent("sources")
     }
-    
+
     var capabilityURL: URL {
         return apiBaseURL.appendingPathComponent("capability")
     }
 }
 
-struct Configuration {
-    static let `default` = Configuration()
-    
-    private init() {
-        // Intentionally empty (SonarCloud warning fix)
+private extension Environment {
+    var vaultBaseURL: URL {
+        switch self {
+        case .dev(let url, _): return url
+        // swiftlint:disable:next force_unwrapping
+        case .production: return URL(string: "https://vault.omise.co")!
+        }
     }
     
-    var environment: Environment {
-        if let configuration = Bundle.main.object(forInfoDictionaryKey: "Configuration") as? String {
-            if configuration.range(of: "Staging") != nil {
-                return .staging
-            }
+    var apiBaseURL: URL {
+        switch self {
+        case .dev(_, let url): return url
+        // swiftlint:disable:next force_unwrapping
+        case .production: return URL(string: "https://api.omise.co")!
         }
-        
-        return .production
+    }
+}
+
+public struct Configuration {
+    private(set) static var `default` = Configuration()
+    let environment: Environment
+
+    public init(environment: Environment = .production) {
+        self.environment = environment
+    }
+
+    public static func setDefault(_ config: Configuration) {
+        `default` = config
     }
 }

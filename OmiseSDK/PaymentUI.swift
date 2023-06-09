@@ -87,7 +87,7 @@ extension PaymentCreatorFlowSession: CreditCardFormViewControllerDelegate {
     }
 }
 
-protocol PaymentSourceChooser {
+protocol PaymentSourceChooser: AnyObject {
     var flowSession: PaymentCreatorFlowSession? { get set }
 }
 

@@ -6,7 +6,6 @@ excluded:
   - QuickStart.playground
 
 opt_in_rules:
-  - anyobject_protocol
   - attributes
   - closure_body_length
   - closure_end_indentation

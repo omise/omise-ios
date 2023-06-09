@@ -353,10 +353,6 @@ extension ControlState: Hashable {
     }
 }
 
-extension Bundle {
-    static var omiseSDK = Bundle(for: OmiseSDK216d048c5feca16469a7a71566256537.self)
-}
-
 extension NumberFormatter {
     static func makeAmountFormatter(for currency: Currency?) -> NumberFormatter {
         let formatter = NumberFormatter()
