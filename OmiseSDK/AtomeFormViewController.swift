@@ -13,7 +13,6 @@ import UIKit
 
 protocol AtomeFormViewControllerInterface {
     func onSubmitButtonTapped()
-
 }
 
 @objc(OMSAtomeFormViewController)
@@ -284,8 +283,8 @@ private extension AtomeFormViewController {
 
         inputsStackView.arrangedSubviews.forEach {
             if let input = $0 as? AtomeInputView {
-                input.borderColor = currentPrimaryColor
-                input.placeholderTextColor = currentPrimaryColor
+                input.borderColor = currentSecondaryColor
+                input.placeholderTextColor = currentSecondaryColor
             }
         }
     }
