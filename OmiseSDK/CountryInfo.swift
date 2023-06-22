@@ -18,6 +18,11 @@ extension CountryInfo {
         let currentRegionCode = Locale.current.regionCode
         return all.first { $0.code == currentRegionCode }
     }
+
+    static var avsCodes: [String] = ["US", "CA", "GB"]
+    var isAVS: Bool {
+        Self.avsCodes.contains(code)
+    }
     
     static var all: [CountryInfo] = [
         .init(name: "Afghanistan", code: "AF"),

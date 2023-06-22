@@ -629,12 +629,12 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		756C8F242A40697100D53059 /* InputView */ = {
+		756C8F242A40697100D53059 /* TextFieldView */ = {
 			isa = PBXGroup;
 			children = (
 				756C8F252A40698600D53059 /* TextFieldView.swift */,
 			);
-			name = InputView;
+			name = TextFieldView;
 			sourceTree = "<group>";
 		};
 		75DAD8802A0B9B060098AF96 /* Frameworks */ = {
@@ -729,7 +729,7 @@
 		8A2BE95820A9A8FE000CEB60 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				756C8F242A40697100D53059 /* InputView */,
+				756C8F242A40697100D53059 /* TextFieldView */,
 				7502CA5D2A31A7BE00766E7D /* CountryListViewController */,
 				75405AA12A27CB15008C21F6 /* AtomeFormViewController */,
 				756C8F1C2A40690C00D53059 /* CreditCardFormViewController */,

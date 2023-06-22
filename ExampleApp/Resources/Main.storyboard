@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="iu0-Jf-pl4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="iu0-Jf-pl4">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -184,7 +184,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
             <objects>
                 <tableViewController id="9af-Wv-9QW" customClass="PaymentSettingTableViewController" customModule="ExampleApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="IQu-Jd-aGH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -408,14 +408,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="vOJ-ds-wJl" style="IBUITableViewCellStyleDefault" id="SG2-Wb-8lK" userLabel="InstallmentCiti Payment">
-                                        <rect key="frame" x="0.0" y="813" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="813" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SG2-Wb-8lK" id="gdi-3C-ErM">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Installment - Citi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vOJ-ds-wJl" userLabel="Installment - Citi">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="44"/>
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -425,13 +425,13 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="3lo-uX-6dg" style="IBUITableViewCellStyleDefault" id="cGP-Rd-1MV" userLabel="InstallmentMBB Payment Cell">
-                                        <rect key="frame" x="0.0" y="857" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="856.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cGP-Rd-1MV" id="56C-Mg-Pb1">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Installment - MBB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3lo-uX-6dg" userLabel="Installment - MBB">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Installment - MBB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3lo-uX-6dg" userLabel="Installment - MBB">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -442,7 +442,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="EFg-sC-7Zf" style="IBUITableViewCellStyleDefault" id="Etx-Pd-SmH">
-                                        <rect key="frame" x="0.0" y="901" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="900.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Etx-Pd-SmH" id="VpN-OH-mAr">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -459,7 +459,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="yQa-YW-jSp" style="IBUITableViewCellStyleDefault" id="D8l-8j-XVp">
-                                        <rect key="frame" x="0.0" y="945" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="944.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="D8l-8j-XVp" id="wrn-Mn-ry6">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -476,14 +476,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="x1J-Ep-bTc" style="IBUITableViewCellStyleDefault" id="1s9-pD-vUM" userLabel="InstallmentSCB Payment Cell">
-                                        <rect key="frame" x="0.0" y="989" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="988.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1s9-pD-vUM" id="tRR-2X-CbK">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Installment - SCB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="x1J-Ep-bTc">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -493,14 +493,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="HwF-qK-Q3X" style="IBUITableViewCellStyleDefault" id="MuE-L7-tZS" userLabel="InstallmentTTB Payment">
-                                        <rect key="frame" x="0.0" y="1032.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1032.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MuE-L7-tZS" id="hHb-Rl-JE8">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Installment - TTB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HwF-qK-Q3X" userLabel="Installment - TTB">
-                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -510,7 +510,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="ca9-pi-DcX" style="IBUITableViewCellStyleDefault" id="1GN-jq-gKX" userLabel="InstallmentUOB Payment">
-                                        <rect key="frame" x="0.0" y="1076" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1076.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1GN-jq-gKX" id="Zd8-eB-I98">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -527,7 +527,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="SaY-Ag-qCZ" style="IBUITableViewCellStyleDefault" id="7lt-lG-Dv9">
-                                        <rect key="frame" x="0.0" y="1119.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1120" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7lt-lG-Dv9" id="mIh-ed-frV">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -544,7 +544,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="5vT-ay-4xe" style="IBUITableViewCellStyleDefault" id="U9s-UF-rSk">
-                                        <rect key="frame" x="0.0" y="1163" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1163.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="U9s-UF-rSk" id="XXh-g4-Nv2">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -561,7 +561,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="204-5J-Qdj" style="IBUITableViewCellStyleDefault" id="bRK-Ye-kiB">
-                                        <rect key="frame" x="0.0" y="1206.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1207" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bRK-Ye-kiB" id="2qM-Md-2k9">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -578,7 +578,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="xtk-7g-WKV" style="IBUITableViewCellStyleDefault" id="Fgd-So-rQR">
-                                        <rect key="frame" x="0.0" y="1250" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1250.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Fgd-So-rQR" id="1Io-lP-VCs">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -595,7 +595,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="siq-ge-ALW" style="IBUITableViewCellStyleDefault" id="CLr-CD-qgO" userLabel="AlipayCN">
-                                        <rect key="frame" x="0.0" y="1293.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1294" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CLr-CD-qgO" id="osn-dY-wKR">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -612,7 +612,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="EOj-ou-hnd" style="IBUITableViewCellStyleDefault" id="YeH-im-9Dq" userLabel="AlipayHK">
-                                        <rect key="frame" x="0.0" y="1337" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1337.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YeH-im-9Dq" id="Qsm-Ty-KAc">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -629,7 +629,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="xQg-Xr-tFl" style="IBUITableViewCellStyleDefault" id="0zY-Fb-Bpi" userLabel="Atome Payment Cell">
-                                        <rect key="frame" x="0.0" y="1380.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1381" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0zY-Fb-Bpi" id="mwv-NR-dwY">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -646,7 +646,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="qax-Jx-kmi" style="IBUITableViewCellStyleDefault" id="Glc-g3-04w" userLabel="Dana">
-                                        <rect key="frame" x="0.0" y="1424" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1424.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Glc-g3-04w" id="9Nx-QM-w1s">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -663,7 +663,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Eg1-eb-NbF" style="IBUITableViewCellStyleDefault" id="7Ax-Du-Ioh" userLabel="GCash">
-                                        <rect key="frame" x="0.0" y="1467.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1468" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7Ax-Du-Ioh" id="fNz-HZ-6NP">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -680,7 +680,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="f1r-nm-Nvz" style="IBUITableViewCellStyleDefault" id="tRh-Pq-hBQ" userLabel="KakaoPay">
-                                        <rect key="frame" x="0.0" y="1511" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1511.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tRh-Pq-hBQ" id="HD9-bB-4hq">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -697,7 +697,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Ped-8F-IMU" style="IBUITableViewCellStyleDefault" id="MK8-KY-eE6" userLabel="Touch N Go">
-                                        <rect key="frame" x="0.0" y="1554.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1555" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MK8-KY-eE6" id="25f-3M-5xL">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -714,7 +714,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="fzJ-WU-gCe" style="IBUITableViewCellStyleDefault" id="9DX-Jg-2uE">
-                                        <rect key="frame" x="0.0" y="1598" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1598.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9DX-Jg-2uE" id="JzN-WL-DyR">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -731,14 +731,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="XJK-z0-VSM" style="IBUITableViewCellStyleDefault" id="UET-A5-nkj">
-                                        <rect key="frame" x="0.0" y="1648.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1642" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UET-A5-nkj" id="QVq-nj-b6t">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Internet Banking - BBL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XJK-z0-VSM">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -748,14 +748,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Ffu-Re-1ts" style="IBUITableViewCellStyleDefault" id="jRH-XR-QY6">
-                                        <rect key="frame" x="0.0" y="1692" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1685.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jRH-XR-QY6" id="ZzT-dv-S4C">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Lotus's Bill Payment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ffu-Re-1ts">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -765,14 +765,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="R9z-v8-MDa" style="IBUITableViewCellStyleDefault" id="wvG-o9-5Gh">
-                                        <rect key="frame" x="0.0" y="1735.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1729" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wvG-o9-5Gh" id="QxD-U6-kTt">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="PayNow" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="R9z-v8-MDa">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -782,14 +782,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="w29-zP-7fy" style="IBUITableViewCellStyleDefault" id="PQI-uw-2ge">
-                                        <rect key="frame" x="0.0" y="1779" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1772.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PQI-uw-2ge" id="yTT-75-DW6">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="E-Context" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="w29-zP-7fy">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -799,14 +799,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Sxy-gk-WGt" style="IBUITableViewCellStyleDefault" id="3Rt-5Z-P6m" userLabel="Mobile BankingBAY Payment Cell">
-                                        <rect key="frame" x="0.0" y="1822.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1816" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3Rt-5Z-P6m" id="19n-VR-U2D">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Mobile Banking - BAY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Sxy-gk-WGt" userLabel="Mobile Banking - BAY">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -816,14 +816,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="XkB-Jf-ZZi" style="IBUITableViewCellStyleDefault" id="aad-ON-p2Y" userLabel="Mobile BankingKTB Payment Cell">
-                                        <rect key="frame" x="0.0" y="1866" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1859.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aad-ON-p2Y" id="21y-hx-0hz">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Mobile Banking - KTB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XkB-Jf-ZZi" userLabel="Mobile Banking - KTB">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -833,14 +833,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="VoJ-UZ-DAl" style="IBUITableViewCellStyleDefault" id="w5B-PQ-EFM" userLabel="Mobile BankingBBL Payment Cell">
-                                        <rect key="frame" x="0.0" y="1909.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1903" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w5B-PQ-EFM" id="69N-z4-DDV">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Mobile Banking - BBL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VoJ-UZ-DAl" userLabel="Mobile Banking - BBL">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -850,14 +850,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="8bh-Ak-evA" style="IBUITableViewCellStyleDefault" id="H5a-2l-Q46" userLabel="Mobile BankingKBank Payment Cell">
-                                        <rect key="frame" x="0.0" y="1953" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1946.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="H5a-2l-Q46" id="Hkk-gT-zXW">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Mobile Banking - KBank" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8bh-Ak-evA">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -867,14 +867,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Kt3-Rg-azs" style="IBUITableViewCellStyleDefault" id="3j3-aC-zYL">
-                                        <rect key="frame" x="0.0" y="1996.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="1990" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3j3-aC-zYL" id="gSR-Mf-91P">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Mobile Banking - SCB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kt3-Rg-azs">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -884,14 +884,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="p6k-BR-eXt" style="IBUITableViewCellStyleDefault" id="nsj-zP-Xij" userLabel="FPX Payment Cell">
-                                        <rect key="frame" x="0.0" y="2040" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="2033.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nsj-zP-Xij" id="aXw-Ju-3pO">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="FPX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="p6k-BR-eXt">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -901,14 +901,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="w5b-OO-9nN" style="IBUITableViewCellStyleDefault" id="a6J-5c-ZRo" userLabel="Rabbit Line Pay Payment Cell">
-                                        <rect key="frame" x="0.0" y="2083.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="2077" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a6J-5c-ZRo" id="NLW-lU-44p">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Rabbit LINE Pay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="w5b-OO-9nN">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -918,14 +918,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="myo-Qb-lXz" style="IBUITableViewCellStyleDefault" id="2vd-0b-2yn" userLabel="OCBC PAO Payment Cell">
-                                        <rect key="frame" x="0.0" y="2127" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="2120.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2vd-0b-2yn" id="zK7-qJ-QeY">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="OCBC Pay Anyone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="myo-Qb-lXz">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -935,14 +935,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="3B9-Pb-8iH" style="IBUITableViewCellStyleDefault" id="5YI-09-ukf" userLabel="GrabPay Payment Cell">
-                                        <rect key="frame" x="0.0" y="2170.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="2164" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5YI-09-ukf" id="pcv-3A-eki">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="GrabPay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3B9-Pb-8iH">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -952,14 +952,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="yMm-6L-WyW" style="IBUITableViewCellStyleDefault" id="RVV-m8-OQX" userLabel="Boost Payment Cell">
-                                        <rect key="frame" x="0.0" y="2214" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="2207.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RVV-m8-OQX" id="FmC-o9-ow3">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Boost" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yMm-6L-WyW">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -969,14 +969,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="HQ5-ca-ZJY" style="IBUITableViewCellStyleDefault" id="vLV-i8-CUC" userLabel="ShopeePay Payment Cell">
-                                        <rect key="frame" x="0.0" y="2257.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="2251" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vLV-i8-CUC" id="swa-rY-T6f">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="ShopeePay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HQ5-ca-ZJY">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -986,14 +986,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="wPw-Gw-KMW" style="IBUITableViewCellStyleDefault" id="gt3-2W-CDg" userLabel="Maybank QRPay Payment Cell">
-                                        <rect key="frame" x="0.0" y="2301" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="2294.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gt3-2W-CDg" id="lWW-gz-Uwg">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Maybank QRPay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wPw-Gw-KMW">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1003,14 +1003,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="1aB-c6-KEc" style="IBUITableViewCellStyleDefault" id="gtO-Wg-j9m" userLabel="DuitNow QR Payment Cell">
-                                        <rect key="frame" x="0.0" y="2344.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="2338" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gtO-Wg-j9m" id="E1h-4C-Rmu">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="DuitNow QR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1aB-c6-KEc">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1020,14 +1020,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="2lL-53-rp7" style="IBUITableViewCellStyleDefault" id="cY7-Jc-ACe" userLabel="DuitNow OBW Payment Cell">
-                                        <rect key="frame" x="0.0" y="2388" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="2381.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cY7-Jc-ACe" id="75m-WH-usx">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="DuitNow OBW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2lL-53-rp7">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1037,14 +1037,14 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="eME-ZB-M7h" style="IBUITableViewCellStyleDefault" id="mR1-Ir-o0j" userLabel="PayPay Payment Cell">
-                                        <rect key="frame" x="0.0" y="2431.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="2425" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mR1-Ir-o0j" id="JXK-3S-Fau">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="PayPay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eME-ZB-M7h" userLabel="PayPay">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1240,7 +1240,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="SfK-3s-OUA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xWi-gb-fNb" secondAttribute="bottom" constant="20" id="TnJ-Qz-RUb"/>
                             <constraint firstItem="xWi-gb-fNb" firstAttribute="top" secondItem="wBo-yP-lZM" secondAttribute="bottom" constant="20" id="dO3-1V-RRf"/>
@@ -1298,7 +1298,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bGC-5U-JNH" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hyi-nx-Eru">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="hyi-nx-Eru">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1345,7 +1345,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="E9r-cu-PMc"/>
+        <segue reference="dRk-CO-8T5"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="App Tint"/>
     <resources>

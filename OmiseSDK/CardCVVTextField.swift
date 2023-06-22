@@ -54,7 +54,7 @@ import UIKit
     }
 }
 
-extension CardCVVTextField: UITextFieldDelegate {
+extension CardCVVTextField {
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard range.length >= 0 else {
             return true

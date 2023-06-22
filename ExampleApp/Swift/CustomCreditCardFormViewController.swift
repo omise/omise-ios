@@ -37,7 +37,7 @@ class CustomCreditCardFormViewController: UIViewController {
         super.loadView()
         
         if storyboard == nil {
-            view.backgroundColor = .white
+            view.backgroundColor = .background
             
             cardNumberField = CardNumberTextField()
             cardNumberField.translatesAutoresizingMaskIntoConstraints = false

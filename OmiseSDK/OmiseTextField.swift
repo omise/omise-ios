@@ -19,6 +19,8 @@ public enum OmiseTextFieldValidationError: Error {
             invalidateIntrinsicContentSize()
         }
     }
+
+    public var onTextFieldShouldReturn: () -> (Bool) = { return false }
     
     @IBInspectable var borderWidth: CGFloat {
         get {
@@ -150,6 +152,7 @@ public enum OmiseTextFieldValidationError: Error {
     }
     
     private func initializeInstance() {
+        delegate = self
         normalTextColor = super.textColor
         
         addTarget(self, action: #selector(textDidChange), for: .editingChanged)
@@ -178,6 +181,12 @@ public enum OmiseTextFieldValidationError: Error {
             updateBorder()
         }
         #endif
+    }
+}
+
+extension OmiseTextField: UITextFieldDelegate {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        onTextFieldShouldReturn()
     }
 }
 

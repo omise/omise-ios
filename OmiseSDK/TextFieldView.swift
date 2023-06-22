@@ -19,7 +19,6 @@ class TextFieldView: UIView {
         var textFieldCornerRadius = CGFloat(4)
     }
 
-
     let identifier: String
     private var style = Style()
 
@@ -34,12 +33,6 @@ class TextFieldView: UIView {
         let textField = OmiseTextField()
         textField.textColor = style.textColor
         textField.font = .preferredFont(forTextStyle: .body)
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.heightAnchor.constraint(equalToConstant: style.textFieldHeight).isActive = true
-        textField.borderWidth = style.textFieldBorderWidth
-        textField.borderColor = style.textFieldBorderColor
-        textField.cornerRadius = style.textFieldCornerRadius
-        textField.adjustsFontForContentSizeCategory = true
         return textField
     }()
     private lazy var errorLabel: UILabel = {
@@ -84,13 +77,17 @@ class TextFieldView: UIView {
     @ProxyProperty(\TextFieldView.textField.isUserInteractionEnabled) var textFieldUserInteractionEnabled: Bool
     // swiftlint:enable attributes
 
-    init(id: String, title: String? = nil, text: String? = nil, placeholder: String? = nil, error: String? = nil) {
+    init(id: String, title: String? = nil, text: String? = nil, placeholder: String? = nil, error: String? = nil, textField customTextField: OmiseTextField? = nil) {
         self.identifier = id
         super.init(frame: .zero)
         self.title = title
         self.text = text
         self.placeholder = placeholder
         self.error = error
+
+        if let customTextField = customTextField {
+            self.textField = customTextField
+        }
 
         let titleLabelContainer = UIView()
         titleLabelContainer.backgroundColor = .clear
@@ -100,10 +97,7 @@ class TextFieldView: UIView {
         contentView.addArrangedSubview(errorLabel)
         addSubviewAndFit(contentView)
 
-        textField.addTarget(self, action: #selector(didChangeText), for: .editingChanged)
-        textField.addTarget(self, action: #selector(didBeginEditing), for: .editingDidBegin)
-        textField.addTarget(self, action: #selector(didEndEditing), for: .editingDidEnd)
-        textField.delegate = self
+        setupTextField()
     }
 
     required init?(coder: NSCoder) {
@@ -131,9 +125,23 @@ class TextFieldView: UIView {
     }
 }
 
-extension TextFieldView: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        onTextFieldShouldReturn()
+private extension TextFieldView {
+    func setupTextField() {
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.heightAnchor.constraint(equalToConstant: style.textFieldHeight).isActive = true
+        textField.borderWidth = style.textFieldBorderWidth
+        textField.borderColor = style.textFieldBorderColor
+        textField.cornerRadius = style.textFieldCornerRadius
+        textField.adjustsFontForContentSizeCategory = true
+
+        textField.addTarget(self, action: #selector(didChangeText), for: .editingChanged)
+        textField.addTarget(self, action: #selector(didBeginEditing), for: .editingDidBegin)
+        textField.addTarget(self, action: #selector(didEndEditing), for: .editingDidEnd)
+
+        textField.onTextFieldShouldReturn = { [weak self] in
+            guard let self = self else { return true }
+            return self.onTextFieldShouldReturn()
+        }
     }
 }
 
