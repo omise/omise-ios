@@ -22,6 +22,7 @@ class ProductDetailViewController: OMSBaseViewController {
         client.capabilityDataWithCompletionHandler { (result) in
             if case .success(let capability) = result {
                 self.capability = capability
+                print("Capability Country: \(capability.countryCode)")
             }
         }
     }
@@ -62,6 +63,9 @@ class ProductDetailViewController: OMSBaseViewController {
                 paymentCreatorController.allowedPaymentMethods = allowedPaymentMethods
             }
             paymentCreatorController.paymentDelegate = self
+        } else if segue.identifier == "ShowCreditFormWithCustomFields",
+            let vc = segue.destination as? CustomCreditCardFormViewController {
+            vc.delegate = self
         }
     }
     

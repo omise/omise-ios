@@ -1,4 +1,5 @@
 import UIKit
+import OmiseSDK
 
 // swiftlint:disable:next type_name
 protocol CustomCreditCardFormViewControllerDelegate: AnyObject {
@@ -26,7 +27,16 @@ class CustomCreditCardFormViewController: UIViewController {
     @IBOutlet private var cardNameField: CardNameTextField!
     @IBOutlet private var cardExpiryField: CardExpiryDateTextField!
     @IBOutlet private var cardCVVField: CardCVVTextField!
-  
+
+    @IBOutlet private var billingStackView: UIStackView!
+
+    private var countryCodeField = OmiseTextField()
+    private var street1Field = OmiseTextField()
+    private var street2Field = OmiseTextField()
+    private var cityField = OmiseTextField()
+    private var stateField = OmiseTextField()
+    private var postalCodeField = OmiseTextField()
+
     @IBOutlet private var doneButton: UIBarButtonItem!
     
     weak var delegate: CustomCreditCardFormViewControllerDelegate?
@@ -37,8 +47,14 @@ class CustomCreditCardFormViewController: UIViewController {
         super.loadView()
         
         if storyboard == nil {
-            view.backgroundColor = .white
-            
+            view.backgroundColor = .background
+
+            billingStackView = UIStackView()
+            billingStackView.axis = .vertical
+            billingStackView.spacing = 24
+            billingStackView.distribution = .equalSpacing
+            billingStackView.alignment = .fill
+
             cardNumberField = CardNumberTextField()
             cardNumberField.translatesAutoresizingMaskIntoConstraints = false
             cardNumberField.placeholder = "1234567812345678"
@@ -107,6 +123,8 @@ class CustomCreditCardFormViewController: UIViewController {
                 stackView.bottomAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.bottomAnchor)
             ])
         }
+
+        setupBillingAddressFields()
     }
     
     override func viewDidLoad() {
@@ -119,7 +137,21 @@ class CustomCreditCardFormViewController: UIViewController {
             navigationItem.title = "Custom Credit Card Form"
         }
     }
-    
+
+    func setupBillingAddressFields() {
+        countryCodeField.placeholder = "Country Code (ex. \"TH\")"
+        street1Field.placeholder = "Street"
+        street2Field.placeholder = "Street 2"
+        cityField.placeholder = "City"
+        stateField.placeholder = "State"
+        postalCodeField.placeholder = "Postal Code"
+
+        let fields = [countryCodeField, cityField, street1Field, street2Field, stateField, postalCodeField]
+        fields.forEach {
+            billingStackView.addArrangedSubview($0)
+        }
+    }
+
     @IBAction private func proceed(_ sender: UIBarButtonItem) {
         guard let name = cardNameField.text, cardNumberField.isValid,
             let expiryMonth = cardExpiryField.selectedMonth, let expiryYear = cardExpiryField.selectedYear,
@@ -131,9 +163,19 @@ class CustomCreditCardFormViewController: UIViewController {
             pan: cardNumberField.pan,
             expirationMonth: expiryMonth,
             expirationYear: expiryYear,
-            securityCode: cvv
+            securityCode: cvv,
+            countryCode: countryCodeField.text ?? "",
+            city: cityField.text ?? "",
+            state: stateField.text ?? "",
+            street1: street1Field.text ?? "",
+            street2: street2Field.text ?? "",
+            postalCode: postalCodeField.text ?? ""
         )
-        omiseClient.send(tokenRequest) { (result) in
+
+        doneButton.isEnabled = false
+        omiseClient.send(tokenRequest) { [weak self] (result) in
+            guard let self = self else { return }
+            self.doneButton.isEnabled = false
             switch result {
             case .success(let token):
                 self.delegate?.creditCardFormViewController(self, didSucceedWithToken: token)

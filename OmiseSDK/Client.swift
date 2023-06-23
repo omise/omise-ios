@@ -3,6 +3,15 @@ import os
 
 // swiftlint:disable file_length
 @objc(OMSSDKClient) public class Client: NSObject {
+    // Shared latest capability requested from API
+    static var sharedCapability: Capability? {
+        didSet {
+            if let countryCode = sharedCapability?.countryCode {
+                CountryInfo.setDefaultCountryCode(countryCode)
+            }
+        }
+    }
+
     let session: URLSession
     let queue: OperationQueue
     let publicKey: String
@@ -137,7 +146,9 @@ import os
                 }
                 
                 do {
-                    result = .success(try decoder.decode(Capability.self, from: data))
+                    let capability = try decoder.decode(Capability.self, from: data)
+                    Self.sharedCapability = capability
+                    result = .success(capability)
                 } catch {
                     let omiseError = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: error)
                     result = .failure(omiseError)

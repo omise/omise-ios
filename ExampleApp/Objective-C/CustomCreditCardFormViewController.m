@@ -7,6 +7,7 @@
 @property (strong, nonatomic) IBOutlet OMSCardNameTextField *cardNameField;
 @property (strong, nonatomic) IBOutlet OMSCardExpiryDateTextField *cardExpiryField;
 @property (strong, nonatomic) IBOutlet OMSCardCVVTextField *cardCVVField;
+@property (strong, nonatomic) IBOutlet UIStackView *billingStackView;
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
@@ -20,8 +21,12 @@
     [super loadView];
     
     if (!self.storyboard) {
-        self.view.backgroundColor = UIColor.whiteColor;
-        
+        if (@available(iOS 13, *)) {
+            self.view.backgroundColor = UIColor.systemBackgroundColor;
+        } else {
+            self.view.backgroundColor = UIColor.whiteColor;
+        }
+
         self.cardNumberField = [[OMSCardNumberTextField alloc] init];
         self.cardNumberField.translatesAutoresizingMaskIntoConstraints = false;
         self.cardNumberField.placeholder = @"1234567812345678";
@@ -56,7 +61,7 @@
         
         cardNumberStackView.axis = UILayoutConstraintAxisVertical;
         cardNumberStackView.distribution = UIStackViewDistributionFill;
-        cardNumberStackView.alignment = UIStackViewDistributionFill;
+        cardNumberStackView.alignment = UIStackViewAlignmentFill;
         cardNumberStackView.spacing = 10;
         cardNameStackView.axis = UILayoutConstraintAxisVertical;
         cardNameStackView.distribution = UIStackViewDistributionFill;
