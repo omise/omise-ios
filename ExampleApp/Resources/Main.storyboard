@@ -1166,7 +1166,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="xWi-gb-fNb">
-                                <rect key="frame" x="20" y="20" width="374" height="191.5"/>
+                                <rect key="frame" x="20" y="20" width="374" height="261.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Vwa-Wv-ESf">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="50.5"/>
@@ -1237,6 +1237,12 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                             </stackView>
                                         </subviews>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="TVz-FW-r1q">
+                                        <rect key="frame" x="0.0" y="211.5" width="374" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="250" id="MF6-oZ-1dK"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -1256,6 +1262,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="billingStackView" destination="TVz-FW-r1q" id="ceQ-GL-fS5"/>
                         <outlet property="cardCVVField" destination="Iw8-Ab-h7Y" id="zQV-gJ-8Nl"/>
                         <outlet property="cardExpiryField" destination="gES-RJ-kH4" id="AF8-RW-cV8"/>
                         <outlet property="cardNameField" destination="LzH-z8-dKL" id="Ys1-MB-BPy"/>
