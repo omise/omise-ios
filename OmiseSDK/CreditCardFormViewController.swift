@@ -732,6 +732,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
 
         textFields.forEach {
             if let input = $0 as? TextFieldView {
+                input.titleColor = preferredPrimaryColor
                 input.borderColor = currentSecondaryColor
                 input.placeholderTextColor = currentSecondaryColor
             }
