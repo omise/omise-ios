@@ -326,6 +326,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             setupInput(input, field: $0, isLast: $0 == viewModel.addressFields.last, viewModel: viewModel)
         }
         billingStackView.addArrangedSubview(addressStackView)
+        addressStackView.isHiddenInStackView = !viewModel.isAddressFieldsVisible
     }
 
     private func setupInput(_ input: TextFieldView, field: Field, isLast: Bool, viewModel: ViewModel) {
