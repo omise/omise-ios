@@ -22,7 +22,7 @@ class ProductDetailViewController: OMSBaseViewController {
         client.capabilityDataWithCompletionHandler { (result) in
             if case .success(let capability) = result {
                 self.capability = capability
-                print("Capability Countr: \(capability.countryCode)")
+                print("Capability Country: \(capability.countryCode)")
             }
         }
     }
