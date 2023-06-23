@@ -172,7 +172,10 @@ class CustomCreditCardFormViewController: UIViewController {
             postalCode: postalCodeField.text ?? ""
         )
 
-        omiseClient.send(tokenRequest) { (result) in
+        doneButton.isEnabled = false
+        omiseClient.send(tokenRequest) { [weak self] (result) in
+            guard let self = self else { return }
+            self.doneButton.isEnabled = false
             switch result {
             case .success(let token):
                 self.delegate?.creditCardFormViewController(self, didSucceedWithToken: token)

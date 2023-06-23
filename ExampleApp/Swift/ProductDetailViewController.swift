@@ -63,6 +63,9 @@ class ProductDetailViewController: OMSBaseViewController {
                 paymentCreatorController.allowedPaymentMethods = allowedPaymentMethods
             }
             paymentCreatorController.paymentDelegate = self
+        } else if segue.identifier == "ShowCreditFormWithCustomFields",
+            let vc = segue.destination as? CustomCreditCardFormViewController {
+            vc.delegate = self
         }
     }
     
