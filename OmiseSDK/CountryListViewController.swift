@@ -135,7 +135,7 @@ private extension CountryListViewController {
            let selectedCountry = viewModel.selectedCountry,
            let index = viewModel.countries.firstIndex(of: selectedCountry) {
             let indexPath = IndexPath(row: index, section: 0)
-            tableView.scrollToRow(at: indexPath, at: .middle, animated: animated)
+            tableView.scrollToRow(at: indexPath, at: .top, animated: animated)
         }
     }
 
