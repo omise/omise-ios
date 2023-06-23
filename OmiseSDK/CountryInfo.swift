@@ -25,7 +25,13 @@ extension CountryInfo {
     var isAVS: Bool {
         Self.avsCodes.contains(code)
     }
-    
+
+    static var sortedAll: [CountryInfo] = {
+        CountryInfo.all.sorted {
+            $0.name.localizedCompare($1.name) == .orderedAscending
+        }
+    }()
+
     static var all: [CountryInfo] = [
         .init(name: "Afghanistan", code: "AF"),
         .init(name: "Åland Islands", code: "AX"),

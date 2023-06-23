@@ -25,7 +25,8 @@ class CreditCardFormViewModel: CreditCardFormViewModelProtocol, CountryListViewM
     var countryListViewModel: CountryListViewModelProtocol { return self }
 
     // MARK: CountryListViewModelProtocol
-    lazy var countries: [CountryInfo] = CountryInfo.all.sorted { $0.name < $1.name }
+    lazy var countries: [CountryInfo] = CountryInfo.sortedAll
+    
     lazy var selectedCountry: CountryInfo? = CountryInfo.default {
         didSet {
             if let selectedCountry = selectedCountry {
