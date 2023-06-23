@@ -138,7 +138,7 @@ class CustomCreditCardFormViewController: UIViewController {
         }
     }
 
-    func setupBillingAddressFields() {
+    private func setupBillingAddressFields() {
         countryCodeField.placeholder = "Country Code (ex. \"TH\")"
         street1Field.placeholder = "Street"
         street2Field.placeholder = "Street 2"
@@ -150,6 +150,12 @@ class CustomCreditCardFormViewController: UIViewController {
         fields.forEach {
             billingStackView.addArrangedSubview($0)
         }
+
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+    }
+
+    @objc private func hideKeyboard() {
+        self.view.endEditing(true)
     }
 
     @IBAction private func proceed(_ sender: UIBarButtonItem) {
