@@ -14,9 +14,11 @@ struct CountryInfo: Codable, Equatable {
 }
 
 extension CountryInfo {
-    static var current: CountryInfo? {
-        let currentRegionCode = Locale.current.regionCode
-        return all.first { $0.code == currentRegionCode }
+
+    static var `default`: CountryInfo?
+
+    static func setDefaultCountryCode(_ code: String) {
+        self.default = CountryInfo.all.first { $0.code == code }
     }
 
     static var avsCodes: [String] = ["US", "CA", "GB"]
