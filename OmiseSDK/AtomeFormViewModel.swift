@@ -22,8 +22,9 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
     ]
 
     // MARK: CountryListViewModelProtocol
-    lazy var countries: [CountryInfo] = CountryInfo.all.sorted { $0.name < $1.name }
-    lazy var selectedCountry: CountryInfo? = CountryInfo.current {
+    lazy var countries: [CountryInfo] = CountryInfo.sortedAll
+
+    lazy var selectedCountry: CountryInfo? = CountryInfo.default {
         didSet {
             if let selectedCountry = selectedCountry {
                 onSelectCountry(selectedCountry)

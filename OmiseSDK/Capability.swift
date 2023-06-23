@@ -2,6 +2,7 @@
 import Foundation
 
 public struct Capability: Object {
+    public let countryCode: String
     public let location: String
     public let object: String
 
@@ -106,6 +107,7 @@ extension Capability {
 
 extension Capability: Codable {
     private enum CodingKeys: String, CodingKey {
+        case countryCode = "country"
         case object
         case location
         case supportedBanks = "banks"
@@ -188,6 +190,7 @@ extension Capability {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         location = try container.decode(String.self, forKey: .location)
+        countryCode = try container.decode(String.self, forKey: .countryCode)
         object = try container.decode(String.self, forKey: .object)
 
         supportedBanks = try container.decode(Set<String>.self, forKey: .supportedBanks)
@@ -208,6 +211,7 @@ extension Capability {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
         try container.encode(location, forKey: .location)
+        try container.encode(countryCode, forKey: .countryCode)
         try container.encode(object, forKey: .object)
 
         try container.encode(supportedBanks, forKey: .supportedBanks)

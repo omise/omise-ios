@@ -106,14 +106,13 @@ public struct CreateSourceParameter: Encodable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(amount, forKey: .amount)
         try container.encode(currency, forKey: .currency)
-        try paymentInformation.encode(to: encoder)
         try container.encode(platformType, forKey: .platformType)
         try container.encode(shippingAddress, forKey: .shippingAddress)
         try container.encode(items, forKey: .items)
         try container.encode(name, forKey: .name)
         try container.encode(phoneNumber, forKey: .phoneNumber)
         try container.encode(email, forKey: .email)
-
+        try paymentInformation.encode(to: encoder)
     }
 }
 

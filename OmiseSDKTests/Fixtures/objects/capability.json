@@ -1,6 +1,7 @@
 {
   "object": "capability",
   "location": "/capability",
+  "country": "TH",
   "banks": [
     "test",
     "bbl",

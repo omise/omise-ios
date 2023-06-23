@@ -21,9 +21,6 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "OmiseTestSDKTests",
-            dependencies: ["OmiseTestSDK"],
-            resources: [
-                .process("Resources")
-            ])
+            dependencies: ["OmiseTestSDK"])
     ]
 )

@@ -33,7 +33,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Name on card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEE-yU-zna">
-                                        <rect key="frame" x="16" y="105.33333333333334" width="343" height="18"/>
+                                        <rect key="frame" x="16" y="131.33333333333334" width="343" height="18"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
@@ -42,7 +42,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Expiry date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuR-9N-gze">
-                                        <rect key="frame" x="16" y="190.66666666666669" width="151.66666666666666" height="18"/>
+                                        <rect key="frame" x="16" y="242.66666666666669" width="151.66666666666666" height="18"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
@@ -51,7 +51,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Security code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMc-kJ-Ncs">
-                                        <rect key="frame" x="207.66666666666663" y="190.66666666666669" width="151.33333333333337" height="18"/>
+                                        <rect key="frame" x="207.66666666666663" y="242.66666666666669" width="151.33333333333337" height="18"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
@@ -60,7 +60,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MM/YY" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Par-EA-T3D" customClass="OMSCardExpiryDateTextField">
-                                        <rect key="frame" x="16" y="214.66666666666669" width="151.66666666666666" height="22"/>
+                                        <rect key="frame" x="16" y="266.66666666666669" width="151.66666666666666" height="48"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -87,7 +87,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y1l-QK-aPc" customClass="OMSCardCVVTextField">
-                                        <rect key="frame" x="207.66666666666663" y="214.66666666666669" width="151.33333333333337" height="22"/>
+                                        <rect key="frame" x="207.66666666666663" y="266.66666666666669" width="151.33333333333337" height="48"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -114,7 +114,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AJd-kX-GAq" customClass="OMSCardNameTextField">
-                                        <rect key="frame" x="16" y="129.33333333333334" width="343" height="22"/>
+                                        <rect key="frame" x="16" y="155.33333333333334" width="343" height="48"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -141,7 +141,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PBr-uW-pM8" customClass="OMSCardNumberTextField">
-                                        <rect key="frame" x="16" y="44" width="343" height="22"/>
+                                        <rect key="frame" x="16" y="44" width="343" height="48"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -167,8 +167,14 @@
                                             <action selector="validateTextFieldDataOf:" destination="ALK-ZP-CXg" eventType="editingDidEnd" id="ant-R8-Q9L"/>
                                         </connections>
                                     </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="69Z-um-x6Y">
+                                        <rect key="frame" x="16" y="340.66666666666669" width="343" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="250" constant="20" id="ePZ-xr-8eG"/>
+                                        </constraints>
+                                    </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZPa-NN-y1M" customClass="OMSMainActionButton">
-                                        <rect key="frame" x="16" y="276" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="380.66666666666669" width="343" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="p5t-Hl-v8s"/>
                                         </constraints>
@@ -192,25 +198,25 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubw-ZT-CVl">
-                                        <rect key="frame" x="16" y="242.66666666666669" width="151.66666666666666" height="13.333333333333314"/>
+                                        <rect key="frame" x="16" y="320.66666666666669" width="151.66666666666666" height="13.333333333333314"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3TR-eT-NNR">
-                                        <rect key="frame" x="207.66666666666663" y="242.66666666666669" width="151.33333333333337" height="13.333333333333314"/>
+                                        <rect key="frame" x="207.66666666666663" y="320.66666666666669" width="151.33333333333337" height="13.333333333333314"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="134-RW-VCo">
-                                        <rect key="frame" x="16" y="157.33333333333334" width="343" height="13.333333333333343"/>
+                                        <rect key="frame" x="16" y="209.33333333333331" width="343" height="13.333333333333343"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ox-gC-WRb">
-                                        <rect key="frame" x="16" y="72" width="343" height="13.333333333333329"/>
+                                        <rect key="frame" x="16" y="98" width="343" height="13.333333333333329"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549019602" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -264,14 +270,16 @@
                                         </connections>
                                     </view>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="8qh-Fc-Sh9">
-                                        <rect key="frame" x="177.66666666666666" y="288" width="20" height="20"/>
+                                        <rect key="frame" x="177.66666666666666" y="392.66666666666669" width="20" height="20"/>
                                         <color key="color" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     </activityIndicatorView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="69Z-um-x6Y" firstAttribute="trailing" secondItem="vMc-kJ-Ncs" secondAttribute="trailing" id="3Hb-zx-TkP"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ZPa-NN-y1M" secondAttribute="bottom" constant="20" id="8kj-th-UWb"/>
                                     <constraint firstItem="8mp-XL-4Ok" firstAttribute="top" secondItem="qhe-bV-kzv" secondAttribute="topMargin" priority="998" id="8yJ-WD-B8a"/>
                                     <constraint firstItem="Y1l-QK-aPc" firstAttribute="leading" secondItem="Par-EA-T3D" secondAttribute="trailing" constant="40" id="BDv-Go-TwL"/>
+                                    <constraint firstItem="69Z-um-x6Y" firstAttribute="leading" secondItem="uuR-9N-gze" secondAttribute="leading" id="BaX-qH-PJf"/>
                                     <constraint firstItem="8qh-Fc-Sh9" firstAttribute="centerX" secondItem="ZPa-NN-y1M" secondAttribute="centerX" id="DJj-gh-Cmu"/>
                                     <constraint firstItem="3TR-eT-NNR" firstAttribute="trailing" secondItem="Y1l-QK-aPc" secondAttribute="trailing" id="Dom-T6-fhX"/>
                                     <constraint firstItem="uuR-9N-gze" firstAttribute="trailing" secondItem="Par-EA-T3D" secondAttribute="trailing" id="EOU-H8-CjL"/>
@@ -285,7 +293,6 @@
                                     <constraint firstItem="Y1l-QK-aPc" firstAttribute="top" secondItem="Par-EA-T3D" secondAttribute="top" id="M5j-0r-t3Y"/>
                                     <constraint firstItem="uuR-9N-gze" firstAttribute="top" secondItem="134-RW-VCo" secondAttribute="bottom" constant="20" id="M7y-Up-i2F"/>
                                     <constraint firstItem="uuR-9N-gze" firstAttribute="leading" secondItem="qhe-bV-kzv" secondAttribute="leadingMargin" id="NXg-06-pPK"/>
-                                    <constraint firstItem="ZPa-NN-y1M" firstAttribute="top" secondItem="ubw-ZT-CVl" secondAttribute="bottom" constant="20" id="OD9-Xw-mSO"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="ZPa-NN-y1M" secondAttribute="trailing" priority="999" id="Oj7-W7-Lrr"/>
                                     <constraint firstItem="134-RW-VCo" firstAttribute="trailing" secondItem="AJd-kX-GAq" secondAttribute="trailing" id="QXb-2d-54T"/>
                                     <constraint firstItem="PBr-uW-pM8" firstAttribute="top" secondItem="CKR-Pl-Ix5" secondAttribute="bottom" constant="6" id="RoZ-HA-I9d"/>
@@ -300,14 +307,16 @@
                                     <constraint firstItem="AJd-kX-GAq" firstAttribute="trailing" secondItem="qhe-bV-kzv" secondAttribute="trailingMargin" id="b9F-Lq-glb"/>
                                     <constraint firstItem="3TR-eT-NNR" firstAttribute="leading" secondItem="Y1l-QK-aPc" secondAttribute="leading" id="bG8-RE-pdu"/>
                                     <constraint firstAttribute="topMargin" secondItem="8mp-XL-4Ok" secondAttribute="bottom" id="cI6-ZF-LpL"/>
-                                    <constraint firstItem="ZPa-NN-y1M" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Par-EA-T3D" secondAttribute="bottom" constant="20" id="co4-Lc-onD"/>
+                                    <constraint firstItem="69Z-um-x6Y" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Par-EA-T3D" secondAttribute="top" constant="20" id="d95-3U-IaF"/>
                                     <constraint firstItem="vMc-kJ-Ncs" firstAttribute="trailing" secondItem="qhe-bV-kzv" secondAttribute="trailingMargin" id="dSr-5N-CQ9"/>
                                     <constraint firstItem="134-RW-VCo" firstAttribute="leading" secondItem="AJd-kX-GAq" secondAttribute="leading" id="e9i-rD-KaH"/>
                                     <constraint firstItem="Par-EA-T3D" firstAttribute="leading" secondItem="qhe-bV-kzv" secondAttribute="leadingMargin" id="fcF-D8-abE"/>
                                     <constraint firstItem="bEE-yU-zna" firstAttribute="top" secondItem="7Ox-gC-WRb" secondAttribute="bottom" constant="20" id="fde-7Z-a3d"/>
+                                    <constraint firstItem="69Z-um-x6Y" firstAttribute="top" secondItem="ubw-ZT-CVl" secondAttribute="top" constant="20" id="gnO-lI-8xG"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="PBr-uW-pM8" secondAttribute="trailing" id="htn-Bs-1u3"/>
                                     <constraint firstItem="bEE-yU-zna" firstAttribute="top" relation="greaterThanOrEqual" secondItem="PBr-uW-pM8" secondAttribute="bottom" constant="20" id="iaX-eq-Hl8"/>
                                     <constraint firstItem="CKR-Pl-Ix5" firstAttribute="top" secondItem="8mp-XL-4Ok" secondAttribute="bottom" constant="20" id="kfk-MP-2VI"/>
+                                    <constraint firstItem="ZPa-NN-y1M" firstAttribute="top" secondItem="69Z-um-x6Y" secondAttribute="bottom" constant="20" id="muZ-GZ-BdD"/>
                                     <constraint firstItem="3TR-eT-NNR" firstAttribute="firstBaseline" secondItem="ubw-ZT-CVl" secondAttribute="firstBaseline" id="nui-d1-Ndk"/>
                                     <constraint firstItem="Par-EA-T3D" firstAttribute="top" secondItem="uuR-9N-gze" secondAttribute="bottom" constant="6" id="pEL-cc-c2y"/>
                                     <constraint firstItem="bEE-yU-zna" firstAttribute="trailing" secondItem="qhe-bV-kzv" secondAttribute="trailingMargin" id="rbU-6U-7HW"/>
@@ -340,13 +349,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="billingStackView" destination="69Z-um-x6Y" id="Gnb-X0-54N"/>
                         <outlet property="cardBrandIconImageView" destination="N60-a9-ZyW" id="tkI-ce-pr1"/>
                         <outlet property="cardExpiryDateErrorLabel" destination="ubw-ZT-CVl" id="W2L-vL-4E9"/>
                         <outlet property="cardHolderNameErrorLabel" destination="134-RW-VCo" id="lcw-94-w2y"/>
                         <outlet property="cardNameTextField" destination="AJd-kX-GAq" id="og9-3N-hk1"/>
                         <outlet property="cardNumberTextField" destination="PBr-uW-pM8" id="C6q-86-ad9"/>
                         <outlet property="cardSecurityCodeErrorLabel" destination="3TR-eT-NNR" id="Dq0-c2-YhU"/>
-                        <outlet property="confirmButton" destination="ZPa-NN-y1M" id="Jul-dW-umM"/>
                         <outlet property="contentView" destination="qhe-bV-kzv" id="CBC-5q-4H5"/>
                         <outlet property="creditCardNumberErrorLabel" destination="7Ox-gC-WRb" id="K3O-DF-PR8"/>
                         <outlet property="cvvInfoButton" destination="8dw-KO-4eq" id="Wea-xK-iEA"/>
@@ -362,6 +371,7 @@
                         <outlet property="hidingErrorBannerConstraint" destination="cI6-ZF-LpL" id="c56-Xf-Qhq"/>
                         <outlet property="requestingIndicatorView" destination="8qh-Fc-Sh9" id="eiI-zy-9G4"/>
                         <outlet property="secureCodeTextField" destination="Y1l-QK-aPc" id="YHf-Pb-fLh"/>
+                        <outlet property="submitButton" destination="ZPa-NN-y1M" id="4wJ-MV-k48"/>
                         <outletCollection property="formLabels" destination="CKR-Pl-Ix5" collectionClass="NSMutableArray" id="H8K-bu-DYv"/>
                         <outletCollection property="formLabels" destination="bEE-yU-zna" collectionClass="NSMutableArray" id="0pJ-Ls-TlI"/>
                         <outletCollection property="formLabels" destination="uuR-9N-gze" collectionClass="NSMutableArray" id="RWK-nS-z3R"/>
@@ -2906,7 +2916,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1JF-Jq-C50" customClass="OMSOmiseTextField">
-                                        <rect key="frame" x="16" y="213.33333333333331" width="343" height="22"/>
+                                        <rect key="frame" x="16" y="213.33333333333331" width="343" height="48"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -2929,13 +2939,13 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGT-xf-88M">
-                                        <rect key="frame" x="16" y="240.33333333333331" width="343" height="13.333333333333343"/>
+                                        <rect key="frame" x="16" y="266.33333333333331" width="343" height="13.333333333333314"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tI6-gP-6iQ" customClass="OMSMainActionButton">
-                                        <rect key="frame" x="16" y="273.66666666666669" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="299.66666666666669" width="343" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="XG2-qP-KC2"/>
                                         </constraints>
@@ -2959,7 +2969,7 @@
                                         </connections>
                                     </button>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="6Il-GW-Zuc">
-                                        <rect key="frame" x="177.66666666666666" y="285.66666666666669" width="20" height="20"/>
+                                        <rect key="frame" x="177.66666666666666" y="311.66666666666669" width="20" height="20"/>
                                         <color key="color" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please input your email address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYp-YV-pCx">
@@ -3625,22 +3635,22 @@
     </scenes>
     <designables>
         <designable name="1JF-Jq-C50">
-            <size key="intrinsicContentSize" width="5" height="22"/>
+            <size key="intrinsicContentSize" width="23" height="48"/>
         </designable>
         <designable name="1dv-2d-6Zi">
             <size key="intrinsicContentSize" width="38" height="33"/>
         </designable>
         <designable name="AJd-kX-GAq">
-            <size key="intrinsicContentSize" width="5" height="22"/>
+            <size key="intrinsicContentSize" width="23" height="48"/>
         </designable>
         <designable name="PBr-uW-pM8">
-            <size key="intrinsicContentSize" width="5" height="22"/>
+            <size key="intrinsicContentSize" width="23" height="48"/>
         </designable>
         <designable name="Par-EA-T3D">
-            <size key="intrinsicContentSize" width="55.333333333333336" height="22"/>
+            <size key="intrinsicContentSize" width="73.666666666666671" height="48"/>
         </designable>
         <designable name="Y1l-QK-aPc">
-            <size key="intrinsicContentSize" width="5" height="22"/>
+            <size key="intrinsicContentSize" width="23" height="48"/>
         </designable>
         <designable name="ZPa-NN-y1M">
             <size key="intrinsicContentSize" width="30" height="33"/>
