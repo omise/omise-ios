@@ -1,3 +1,14 @@
+// Credit Card
+"CreditCard.field.country" = "国または地域";
+"CreditCard.field.address" = "住所";
+"CreditCard.field.city" = "市";
+"CreditCard.field.state" = "州";
+"CreditCard.field.postalCode" = "郵便番号";
+"CreditCard.field.address.error" = "住所は必須です";
+"CreditCard.field.city.error" = "市が必要です";
+"CreditCard.field.state.error" = "州が必要です";
+"CreditCard.field.postalCode.error" = "郵便番号が必要です";
+
 // Atome
 "Atome.header.text" = "Atomeによるお支払いを完了させるには、以下の情報をご記入ください。";
 "Atome.field.name" = "名前";

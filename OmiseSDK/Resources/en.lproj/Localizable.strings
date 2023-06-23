@@ -1,3 +1,14 @@
+// Credit Card
+"CreditCard.field.country" = "Country or region";
+"CreditCard.field.address" = "Address";
+"CreditCard.field.city" = "City";
+"CreditCard.field.state" = "State";
+"CreditCard.field.postalCode" = "Zip code / Postal code";
+"CreditCard.field.address.error" = "Address is required";
+"CreditCard.field.city.error" = "City is required";
+"CreditCard.field.state.error" = "State is required";
+"CreditCard.field.postalCode.error" = "Zip code / Postal code is required";
+
 // Atome
 "Atome.header.text" = "Please input the below information to complete the charge creation with Atome.";
 "Atome.field.name" = "Name";

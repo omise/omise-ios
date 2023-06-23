@@ -35,16 +35,8 @@ struct CreditCardFormViewContext {
 }
 
 extension CreditCardFormViewContext.Field {
-    var isOptional: Bool {
-        return false
-    }
-
     var title: String {
-        var title = "CreditCard.field.\(self.rawValue)".localized()
-        if isOptional {
-            title += " " + "CreditCard.field.optional".localized()
-        }
-        return title
+        "CreditCard.field.\(self.rawValue)".localized()
     }
 
     var keyboardType: UIKeyboardType {
