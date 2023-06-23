@@ -19,11 +19,16 @@ public struct CreateTokenParameter: Encodable {
     public let expirationYear: Int
     /// Security code (CVV, CVC, etc) printed on the back of the card.
     public let securityCode: String
-    /// Issuing city.
+
     public let city: String?
-    /// Postal code.
     public let postalCode: String?
-    
+
+    public let countryCode: String?
+    public let state: String?
+    public let street1: String?
+    public let street2: String?
+    public let phoneNumber: String?
+
     private enum TokenCodingKeys: String, CodingKey {
         case card
         
@@ -35,6 +40,11 @@ public struct CreateTokenParameter: Encodable {
             case securityCode = "security_code"
             case city
             case postalCode = "postal_code"
+            case countryCode = "country"
+            case state
+            case street1
+            case street2
+            case phoneNumber = "phone_number"
         }
     }
     
@@ -45,8 +55,13 @@ public struct CreateTokenParameter: Encodable {
         expirationMonth: Int,
         expirationYear: Int,
         securityCode: String,
+        countryCode: String? = nil,
         city: String? = nil,
-        postalCode: String? = nil
+        state: String? = nil,
+        street1: String? = nil,
+        street2: String? = nil,
+        postalCode: String? = nil,
+        phoneNumber: String? = nil
     ) {
         self.name = name
         self.pan = pan
@@ -55,6 +70,11 @@ public struct CreateTokenParameter: Encodable {
         self.securityCode = securityCode
         self.city = city
         self.postalCode = postalCode
+        self.countryCode = countryCode
+        self.state = state
+        self.street1 = street1
+        self.street2 = street2
+        self.phoneNumber = phoneNumber
     }
     
     /// Initializes a new token request.
@@ -64,8 +84,13 @@ public struct CreateTokenParameter: Encodable {
         expirationMonth: Int,
         expirationYear: Int,
         securityCode: String,
+        countryCode: String? = nil,
         city: String? = nil,
-        postalCode: String? = nil
+        state: String? = nil,
+        street1: String? = nil,
+        street2: String? = nil,
+        postalCode: String? = nil,
+        phoneNumber: String? = nil
     ) {
         self.init(
             name: name,
@@ -73,8 +98,13 @@ public struct CreateTokenParameter: Encodable {
             expirationMonth: expirationMonth,
             expirationYear: expirationYear,
             securityCode: securityCode,
+            countryCode: countryCode,
             city: city,
-            postalCode: postalCode
+            state: state,
+            street1: street1,
+            street2: street2,
+            postalCode: postalCode,
+            phoneNumber: phoneNumber
         )
     }
     
@@ -89,6 +119,12 @@ public struct CreateTokenParameter: Encodable {
         try cardContainer.encodeIfPresent(securityCode, forKey: .securityCode)
         try cardContainer.encodeIfPresent(city, forKey: .city)
         try cardContainer.encodeIfPresent(postalCode, forKey: .postalCode)
+
+        try cardContainer.encodeIfPresent(countryCode, forKey: .countryCode)
+        try cardContainer.encodeIfPresent(state, forKey: .state)
+        try cardContainer.encodeIfPresent(street1, forKey: .street1)
+        try cardContainer.encodeIfPresent(street2, forKey: .street2)
+        try cardContainer.encodeIfPresent(phoneNumber, forKey: .phoneNumber)
     }
 }
 
@@ -223,8 +259,13 @@ extension Request where T == Token {
         expirationMonth: Int,
         expirationYear: Int,
         securityCode: String,
+        countryCode: String? = nil,
         city: String? = nil,
-        postalCode: String? = nil
+        state: String? = nil,
+        street1: String? = nil,
+        street2: String? = nil,
+        postalCode: String? = nil,
+        phoneNumber: String? = nil
     ) {
         self.init(parameter: CreateTokenParameter(
             name: name,
@@ -232,11 +273,16 @@ extension Request where T == Token {
             expirationMonth: expirationMonth,
             expirationYear: expirationYear,
             securityCode: securityCode,
+            countryCode: countryCode,
             city: city,
-            postalCode: postalCode
+            state: state,
+            street1: street1,
+            street2: street2,
+            postalCode: postalCode,
+            phoneNumber: phoneNumber
         ))
     }
-    
+
     /// Initializes a new Token Request with the given information
     public init(
         name: String,
@@ -244,8 +290,13 @@ extension Request where T == Token {
         expirationMonth: Int,
         expirationYear: Int,
         securityCode: String,
+        countryCode: String? = nil,
         city: String? = nil,
-        postalCode: String? = nil
+        state: String? = nil,
+        street1: String? = nil,
+        street2: String? = nil,
+        postalCode: String? = nil,
+        phoneNumber: String? = nil
     ) {
         self.init(parameter: CreateTokenParameter(
             name: name,
@@ -253,8 +304,13 @@ extension Request where T == Token {
             expirationMonth: expirationMonth,
             expirationYear: expirationYear,
             securityCode: securityCode,
+            countryCode: countryCode,
             city: city,
-            postalCode: postalCode
+            state: state,
+            street1: street1,
+            street2: street2,
+            postalCode: postalCode,
+            phoneNumber: phoneNumber
         ))
     }
 }

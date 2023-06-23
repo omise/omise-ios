@@ -10,15 +10,20 @@ import UIKit
 
 struct CreditCardFormViewContext {
     enum Field: String, CaseIterable {
-        case country
         case address
         case city
         case state
         case postalCode
     }
 
+    var pan = PAN("")
+    var expirationMonth: Int = 0
+    var expirationYear: Int = 0
+    var name: String = ""
+    var securityCode: String = ""
+    var countryCode: String = ""
+
     private var fields: [Field: String] = [:]
-    var countryCode: String?
 
     init(fields: [Field: String] = [:]) {
         self.fields = fields
@@ -55,7 +60,6 @@ extension CreditCardFormViewContext.Field {
 
     var contentType: UITextContentType {
         switch self {
-        case .country: return .countryName
         case .city: return .addressCity
         case .postalCode: return .postalCode
         case .state: return .addressState

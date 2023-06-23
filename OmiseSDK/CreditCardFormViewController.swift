@@ -150,6 +150,8 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     @IBOutlet private var expiryDateTextField: CardExpiryDateTextField!
     @IBOutlet private var secureCodeTextField: CardCVVTextField!
 
+    private var countryInputView = TextFieldView(id: "country")
+
     @IBOutlet private var submitButton: MainActionButton!
 
     @IBOutlet var formFieldsAccessoryView: UIToolbar!
@@ -294,9 +296,9 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     }
 
     private func setupCountryField() {
-        let input = TextFieldView(id: Field.country.rawValue)
+        let input = countryInputView
+        input.title = "CreditCard.field.country".localized()
         billingStackView.addArrangedSubview(input)
-        setupInput(input, field: .country, isLast: false, viewModel: viewModel)
 
         input.textFieldUserInteractionEnabled = false
         input.text = viewModel.countryListViewModel.selectedCountry?.name
@@ -305,10 +307,10 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
 
     @objc private func onCountryInputTapped() {
         let vc = CountryListViewController(viewModel: viewModel.countryListViewModel)
-        vc.title = input(for: .country)?.title ?? ""
+        vc.title = countryInputView.title
         vc.viewModel?.onSelectCountry = { [weak self] country in
             guard let self = self else { return }
-            self.input(for: .country)?.text = country.name
+            self.countryInputView.text = country.name
             self.navigationController?.popToViewController(self, animated: true)
             self.addressStackView.isHiddenInStackView = !self.viewModel.isAddressFieldsVisible
             self.updateSubmitButtonState()
@@ -351,7 +353,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-
+        setShowsErrorBanner(false)
         setupBillingStackView()
         setupAddressFields()
 
@@ -488,7 +490,14 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             default: context[field] = input(for: field)?.text ?? ""
             }
         }
+
         context.countryCode = viewModel.countryListViewModel.selectedCountry?.code ?? ""
+        context.pan = cardNumberTextField.pan
+        context.name = cardNameTextField.text ?? ""
+        context.expirationMonth = expiryDateTextField.selectedMonth ?? 0
+        context.expirationYear = expiryDateTextField.selectedYear ?? 0
+        context.securityCode = secureCodeTextField.text ?? ""
+
         return context
     }
 
@@ -497,25 +506,8 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
 
         UIAccessibility.post(notification: AccessibilityNotificationAnnouncement, argument: "Submitting payment, please wait")
 
-        guard let publicKey = publicKey else {
-            os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.publicKey ?? "")
-            assertionFailure("Missing public key information. Please set the public key before request token.")
-            return
-        }
-
-        os_log("Requesting to create token", log: uiLogObject, type: .info)
-
         startActivityIndicator()
-        let request = Request<Token>(
-            name: cardNameTextField.text ?? "",
-            pan: cardNumberTextField.pan,
-            expirationMonth: expiryDateTextField.selectedMonth ?? 0,
-            expirationYear: expiryDateTextField.selectedYear ?? 0,
-            securityCode: secureCodeTextField.text ?? ""
-        )
-
-        let client = Client(publicKey: publicKey)
-        client.send(request) { [weak self] (result) in
+        viewModel.onSubmitButtonPressed(makeViewContext(), publicKey: publicKey) { [weak self] result in
             guard let strongSelf = self else { return }
 
             strongSelf.stopActivityIndicator()
