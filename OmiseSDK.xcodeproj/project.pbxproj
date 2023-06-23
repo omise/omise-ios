@@ -1558,7 +1558,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.23.0;
+				MARKETING_VERSION = 4.24.0;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1598,7 +1598,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.23.0;
+				MARKETING_VERSION = 4.24.0;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1981,7 +1981,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.23.0;
+				MARKETING_VERSION = 4.24.0;
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
