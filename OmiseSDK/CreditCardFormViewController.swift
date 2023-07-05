@@ -3,6 +3,7 @@
 import UIKit
 import os.log
 
+// swiftlint:disable line_length
 public protocol CreditCardFormViewControllerDelegate: AnyObject {
     /// Delegate method for receiving token data when card tokenization succeeds.
     /// - parameter token: `OmiseToken` instance created from supplied credit card data.
@@ -57,22 +58,19 @@ public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
 
     @objc optional func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController)
 
-    // swiftlint:disable line_length
     @available(*, unavailable,
                 message: "Implement the new -[OMSCreditCardFormViewControllerDelegate creditCardFormViewController:didSucceedWithToken:] instead",
                 renamed: "creditCardFormViewController(_:didSucceedWithToken:)")
-    // swiftlint:enable line_length
     // swiftlint:disable:next attributes
     @objc func creditCardForm(_ controller: CreditCardFormViewController, didSucceedWithToken token: __OmiseToken)
 
-    // swiftlint:disable line_length
     @available(*, unavailable,
                 message: "Implement the new -[OMSCreditCardFormViewControllerDelegate creditCardFormViewController:didFailWithError:] instead",
                 renamed: "creditCardFormViewController(_:didFailWithError:)")
-    // swiftlint:enable line_length
     // swiftlint:disable:next attributes
     @objc func creditCardForm(_ controller: CreditCardFormViewController, didFailWithError error: NSError)
 }
+// swiftlint:enable line_length
 
 @available(*, deprecated, renamed: "CreditCardFormViewController")
 public typealias CreditCardFormController = CreditCardFormViewController
