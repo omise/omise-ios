@@ -61,8 +61,11 @@ public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
     @available(*, unavailable,
                 message: "Implement the new -[OMSCreditCardFormViewControllerDelegate creditCardFormViewController:didSucceedWithToken:] instead",
                 renamed: "creditCardFormViewController(_:didSucceedWithToken:)")
+    // swiftlint:enable line_length
+    // swiftlint:disable:next attributes
     @objc func creditCardForm(_ controller: CreditCardFormViewController, didSucceedWithToken token: __OmiseToken)
 
+    // swiftlint:disable line_length
     @available(*, unavailable,
                 message: "Implement the new -[OMSCreditCardFormViewControllerDelegate creditCardFormViewController:didFailWithError:] instead",
                 renamed: "creditCardFormViewController(_:didFailWithError:)")
