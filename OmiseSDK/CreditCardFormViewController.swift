@@ -311,12 +311,23 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         vc.viewModel?.onSelectCountry = { [weak self] country in
             guard let self = self else { return }
             self.countryInputView.text = country.name
-            self.navigationController?.popToViewController(self, animated: true)
+
+            if let nc = self.navigationController {
+                nc.popToViewController(self, animated: true)
+            } else {
+                self.dismiss(animated: true)
+            }
+
             self.addressStackView.isHiddenInStackView = !self.viewModel.isAddressFieldsVisible
             self.updateSubmitButtonState()
 
         }
-        navigationController?.pushViewController(vc, animated: true)
+
+        if let nc = navigationController {
+            nc.pushViewController(vc, animated: true)
+        } else {
+            present(vc, animated: true)
+        }
     }
 
     private func setupAddressFields() {
