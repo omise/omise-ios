@@ -3,6 +3,7 @@
 import UIKit
 import os.log
 
+// swiftlint:disable line_length
 public protocol CreditCardFormViewControllerDelegate: AnyObject {
     /// Delegate method for receiving token data when card tokenization succeeds.
     /// - parameter token: `OmiseToken` instance created from supplied credit card data.
@@ -57,16 +58,15 @@ public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
 
     @objc optional func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController)
 
-    // swiftlint:disable line_length
     @available(*, unavailable,
                 message: "Implement the new -[OMSCreditCardFormViewControllerDelegate creditCardFormViewController:didSucceedWithToken:] instead",
                 renamed: "creditCardFormViewController(_:didSucceedWithToken:)")
+    // swiftlint:disable:next attributes
     @objc func creditCardForm(_ controller: CreditCardFormViewController, didSucceedWithToken token: __OmiseToken)
 
     @available(*, unavailable,
                 message: "Implement the new -[OMSCreditCardFormViewControllerDelegate creditCardFormViewController:didFailWithError:] instead",
                 renamed: "creditCardFormViewController(_:didFailWithError:)")
-    // swiftlint:enable line_length
     // swiftlint:disable:next attributes
     @objc func creditCardForm(_ controller: CreditCardFormViewController, didFailWithError error: NSError)
 }
@@ -186,7 +186,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     @objc public static let defaultErrorMessageTextColor = UIColor.error
 
     /// A boolean flag that enables/disables Card.IO integration.
-    @available(*, unavailable, message: "Built in support for Card.ios was removed. You can implement it in your app and call the setCreditCardInformation(number:name:expiration:) method") // swiftlint:disable:this line_length
+    @available(*, unavailable, message: "Built in support for Card.ios was removed. You can implement it in your app and call the setCreditCardInformation(number:name:expiration:) method")
     @objc public var cardIOEnabled = true
 
     /// Factory method for creating CreditCardFormController with given public key.
@@ -203,7 +203,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     }
 
     @available(*, deprecated,
-                message: "Please use the new method that confrom to Objective-C convention +[OMSCreditCardFormViewController creditCardFormViewControllerWithPublicKey:] as of this method will be removed in the future release.", // swiftlint:disable:this line_length
+                message: "Please use the new method that confrom to Objective-C convention +[OMSCreditCardFormViewController creditCardFormViewControllerWithPublicKey:] as of this method will be removed in the future release.",
                 renamed: "makeCreditCardFormViewController(withPublicKey:)")
     @objc(makeCreditCardFormWithPublicKey:) public static func __makeCreditCardForm(withPublicKey publicKey: String) -> CreditCardFormViewController { // swiftlint:disable:this identifier_name
         return CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
@@ -248,6 +248,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
 
         self.setCreditCardInformationWith(number: number, name: name, expiration: expiration)
     }
+    // swiftlint:enable line_length
 
     // need to refactor loadView, removing super results in crash
     // swiftlint:disable:next prohibited_super_call
@@ -311,12 +312,23 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         vc.viewModel?.onSelectCountry = { [weak self] country in
             guard let self = self else { return }
             self.countryInputView.text = country.name
-            self.navigationController?.popToViewController(self, animated: true)
+
+            if let nc = self.navigationController {
+                nc.popToViewController(self, animated: true)
+            } else {
+                self.dismiss(animated: true)
+            }
+
             self.addressStackView.isHiddenInStackView = !self.viewModel.isAddressFieldsVisible
             self.updateSubmitButtonState()
 
         }
-        navigationController?.pushViewController(vc, animated: true)
+
+        if let nc = navigationController {
+            nc.pushViewController(vc, animated: true)
+        } else {
+            present(vc, animated: true)
+        }
     }
 
     private func setupAddressFields() {
