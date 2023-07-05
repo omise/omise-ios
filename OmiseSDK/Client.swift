@@ -398,9 +398,7 @@ extension Client {
 
 // MARK: - Constants
 extension Client {
-    static let sdkVersion: String = {
-        return Bundle.omiseSDK.infoDictionary?["CFBundleShortVersionString"] as? String ?? "(n/a)"
-    }()
+    static let sdkVersion: String = "4.24.2"
     
     static let currentPlatform: String = ProcessInfo.processInfo.operatingSystemVersionString
     static let currentDevice: String = UIDevice.current.model
