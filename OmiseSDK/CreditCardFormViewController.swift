@@ -70,7 +70,6 @@ public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
     // swiftlint:disable:next attributes
     @objc func creditCardForm(_ controller: CreditCardFormViewController, didFailWithError error: NSError)
 }
-// swiftlint:enable line_length
 
 @available(*, deprecated, renamed: "CreditCardFormViewController")
 public typealias CreditCardFormController = CreditCardFormViewController
@@ -187,7 +186,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     @objc public static let defaultErrorMessageTextColor = UIColor.error
 
     /// A boolean flag that enables/disables Card.IO integration.
-    @available(*, unavailable, message: "Built in support for Card.ios was removed. You can implement it in your app and call the setCreditCardInformation(number:name:expiration:) method") // swiftlint:disable:this line_length
+    @available(*, unavailable, message: "Built in support for Card.ios was removed. You can implement it in your app and call the setCreditCardInformation(number:name:expiration:) method")
     @objc public var cardIOEnabled = true
 
     /// Factory method for creating CreditCardFormController with given public key.
@@ -204,7 +203,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     }
 
     @available(*, deprecated,
-                message: "Please use the new method that confrom to Objective-C convention +[OMSCreditCardFormViewController creditCardFormViewControllerWithPublicKey:] as of this method will be removed in the future release.", // swiftlint:disable:this line_length
+                message: "Please use the new method that confrom to Objective-C convention +[OMSCreditCardFormViewController creditCardFormViewControllerWithPublicKey:] as of this method will be removed in the future release.",
                 renamed: "makeCreditCardFormViewController(withPublicKey:)")
     @objc(makeCreditCardFormWithPublicKey:) public static func __makeCreditCardForm(withPublicKey publicKey: String) -> CreditCardFormViewController { // swiftlint:disable:this identifier_name
         return CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
@@ -249,6 +248,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
 
         self.setCreditCardInformationWith(number: number, name: name, expiration: expiration)
     }
+    // swiftlint:enable line_length
 
     // need to refactor loadView, removing super results in crash
     // swiftlint:disable:next prohibited_super_call
