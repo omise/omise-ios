@@ -69,6 +69,12 @@
 		75405AA52A27F5D3008C21F6 /* AtomeFormViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B32A1A5EAD0038FA54 /* AtomeFormViewModelProtocol.swift */; };
 		75405AA82A27F97E008C21F6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75405AA62A27F97E008C21F6 /* Localizable.strings */; };
 		75405AAB2A27F9B4008C21F6 /* Bundle+OmiseSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */; };
+		7558CC8B2AAF7B44005815DF /* ThreeDS_SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 7558CC8A2AAF7B44005815DF /* ThreeDS_SDK */; };
+		7558CC8F2AAF7D4E005815DF /* UIButtonCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7558CC8E2AAF7D4E005815DF /* UIButtonCustomization.swift */; };
+		7558CC912AAF7D56005815DF /* UIToolbarCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7558CC902AAF7D56005815DF /* UIToolbarCustomization.swift */; };
+		7558CC932AAF7D5B005815DF /* UILabelCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7558CC922AAF7D5B005815DF /* UILabelCustomization.swift */; };
+		7558CC952AAF7D60005815DF /* UITextBoxCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7558CC942AAF7D60005815DF /* UITextBoxCustomization.swift */; };
+		7558CC972AAF7D67005815DF /* UICustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7558CC962AAF7D67005815DF /* UICustomization.swift */; };
 		756C8F1E2A40693B00D53059 /* CreditCardFormViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C8F1D2A40693B00D53059 /* CreditCardFormViewModelProtocol.swift */; };
 		756C8F202A40694000D53059 /* CreditCardFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C8F1F2A40694000D53059 /* CreditCardFormViewModel.swift */; };
 		756C8F222A40694F00D53059 /* CreditCardFormViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C8F212A40694F00D53059 /* CreditCardFormViewContext.swift */; };
@@ -292,6 +298,11 @@
 		75405AA72A27F97E008C21F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		75405AA92A27F985008C21F6 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		75405AAA2A27F988008C21F6 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7558CC8E2AAF7D4E005815DF /* UIButtonCustomization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonCustomization.swift; sourceTree = "<group>"; };
+		7558CC902AAF7D56005815DF /* UIToolbarCustomization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIToolbarCustomization.swift; sourceTree = "<group>"; };
+		7558CC922AAF7D5B005815DF /* UILabelCustomization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelCustomization.swift; sourceTree = "<group>"; };
+		7558CC942AAF7D60005815DF /* UITextBoxCustomization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextBoxCustomization.swift; sourceTree = "<group>"; };
+		7558CC962AAF7D67005815DF /* UICustomization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICustomization.swift; sourceTree = "<group>"; };
 		756C8F1D2A40693B00D53059 /* CreditCardFormViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardFormViewModelProtocol.swift; sourceTree = "<group>"; };
 		756C8F1F2A40694000D53059 /* CreditCardFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardFormViewModel.swift; sourceTree = "<group>"; };
 		756C8F212A40694F00D53059 /* CreditCardFormViewContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardFormViewContext.swift; sourceTree = "<group>"; };
@@ -399,6 +410,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7558CC8B2AAF7B44005815DF /* ThreeDS_SDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +481,7 @@
 		2259311A1CE3210700841B86 /* OmiseSDK */ = {
 			isa = PBXGroup;
 			children = (
+				7558CC8C2AAF7C85005815DF /* 3DS */,
 				75348D4C29C3FC8F0008C8A3 /* Helpers */,
 				2259311B1CE3210700841B86 /* OmiseSDK.h */,
 				8A00FEC21F1DE88600246078 /* README.md */,
@@ -608,6 +621,26 @@
 				75405A9B2A266F50008C21F6 /* AtomeFormViewModel.swift */,
 			);
 			name = AtomeFormViewController;
+			sourceTree = "<group>";
+		};
+		7558CC8C2AAF7C85005815DF /* 3DS */ = {
+			isa = PBXGroup;
+			children = (
+				7558CC8D2AAF7C9E005815DF /* UICustomization */,
+			);
+			path = 3DS;
+			sourceTree = "<group>";
+		};
+		7558CC8D2AAF7C9E005815DF /* UICustomization */ = {
+			isa = PBXGroup;
+			children = (
+				7558CC962AAF7D67005815DF /* UICustomization.swift */,
+				7558CC8E2AAF7D4E005815DF /* UIButtonCustomization.swift */,
+				7558CC902AAF7D56005815DF /* UIToolbarCustomization.swift */,
+				7558CC922AAF7D5B005815DF /* UILabelCustomization.swift */,
+				7558CC942AAF7D60005815DF /* UITextBoxCustomization.swift */,
+			);
+			path = UICustomization;
 			sourceTree = "<group>";
 		};
 		756C8F1C2A40690C00D53059 /* CreditCardFormViewController */ = {
@@ -926,6 +959,9 @@
 			dependencies = (
 			);
 			name = OmiseSDK;
+			packageProductDependencies = (
+				7558CC8A2AAF7B44005815DF /* ThreeDS_SDK */,
+			);
 			productName = OmiseSDK;
 			productReference = 225931181CE3210700841B86 /* OmiseSDK.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1060,6 +1096,9 @@
 				Base,
 			);
 			mainGroup = 2259310E1CE3210700841B86;
+			packageReferences = (
+				7558CC892AAF7B44005815DF /* XCRemoteSwiftPackageReference "SPM" */,
+			);
 			productRefGroup = 225931191CE3210700841B86 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1194,12 +1233,14 @@
 				8A0A67E821383614006356B7 /* PaymentChooserViewController.swift in Sources */,
 				98FF99BB2577789800476487 /* Configuration.swift in Sources */,
 				8A72CD5E2162358400F14F76 /* PaymentOptionTableViewCell.swift in Sources */,
+				7558CC8F2AAF7D4E005815DF /* UIButtonCustomization.swift in Sources */,
 				8AD391B1230C05BC00383286 /* Colors.swift in Sources */,
 				75F2A0BB2A1A60630038FA54 /* AtomeFormViewContext.swift in Sources */,
 				8A47173D20AAB11B0022733A /* Source.swift in Sources */,
 				986406351CFEA7E4004BCF51 /* OmiseTextField.swift in Sources */,
 				1121F44028523BED0003EE4F /* DuitNowOBWBankChooserViewController.swift in Sources */,
 				73F9BA4725E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift in Sources */,
+				7558CC932AAF7D5B005815DF /* UILabelCustomization.swift in Sources */,
 				756C8F1E2A40693B00D53059 /* CreditCardFormViewModelProtocol.swift in Sources */,
 				2220F1AD1D0FEE85008CD89F /* OmiseToken.swift in Sources */,
 				7502CA5F2A31A7D600766E7D /* CountryListViewController.swift in Sources */,
@@ -1210,6 +1251,7 @@
 				7502CA662A31AEA200766E7D /* CountryInfo.swift in Sources */,
 				75B43B572A0277A3004352C7 /* PaymentInformation.Atome.swift in Sources */,
 				8A14C209220ACB2B003F5B20 /* Capability.swift in Sources */,
+				7558CC972AAF7D67005815DF /* UICustomization.swift in Sources */,
 				8AD0609320B55B3A0074894E /* RequestTask.swift in Sources */,
 				75405A8B2A26340E008C21F6 /* UIStackView+Helpers.swift in Sources */,
 				8A0A67E72137EE49006356B7 /* AdaptableStaticTableViewController.swift in Sources */,
@@ -1240,6 +1282,7 @@
 				75405A9C2A266F50008C21F6 /* AtomeFormViewModel.swift in Sources */,
 				8AD0609620B55E610074894E /* Client.swift in Sources */,
 				8AC1D3A7213941C80051F966 /* InstallmentsNumberOfTermsChooserViewController.swift in Sources */,
+				7558CC912AAF7D56005815DF /* UIToolbarCustomization.swift in Sources */,
 				75405A932A26340E008C21F6 /* UIButton+Helpers.swift in Sources */,
 				986406321CFEA7E4004BCF51 /* CardNumberTextField.swift in Sources */,
 				75405A8F2A26340E008C21F6 /* UIImage+Helpers.swift in Sources */,
@@ -1249,6 +1292,7 @@
 				75F2A0C22A1A87AE0038FA54 /* UIColor+Helpers.swift in Sources */,
 				7509D4DD2A1A9FD70050AB38 /* MainActionButton.swift in Sources */,
 				225931501CE46F7F00841B86 /* CardNumber.swift in Sources */,
+				7558CC952AAF7D60005815DF /* UITextBoxCustomization.swift in Sources */,
 				7502CA622A31A7E100766E7D /* CountryListViewModelProtocol.swift in Sources */,
 				8AC1D3A5213922570051F966 /* InstallmentBankingSourceChooserViewController.swift in Sources */,
 				756C8F202A40694000D53059 /* CreditCardFormViewModel.swift in Sources */,
@@ -2143,10 +2187,26 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		7558CC892AAF7B44005815DF /* XCRemoteSwiftPackageReference "SPM" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ios-3ds-sdk/SPM.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		7509D4ED2A1D1F9F0050AB38 /* OmiseTestSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OmiseTestSDK;
+		};
+		7558CC8A2AAF7B44005815DF /* ThreeDS_SDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7558CC892AAF7B44005815DF /* XCRemoteSwiftPackageReference "SPM" */;
+			productName = ThreeDS_SDK;
 		};
 		75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */ = {
 			isa = XCSwiftPackageProductDependency;
