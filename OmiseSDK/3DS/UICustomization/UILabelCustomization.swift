@@ -44,13 +44,14 @@ public class UILabelCustomization: UICustomization {
 }
 
 extension ThreeDS_SDK.LabelCustomization {
-    convenience init(omiseLabelCustomization custom: UILabelCustomization) throws {
+    convenience init(_ custom: UILabelCustomization) throws {
         self.init()
-        try customize(omiseUICustomization: custom)
-        try customize(omiseLabelCustomization: custom)
+        try customize(custom)
     }
 
-    func customize(omiseLabelCustomization custom: UILabelCustomization) throws {
+    func customize(_ custom: UILabelCustomization) throws {
+        try customize(omiseUICustomization: custom)
+
         if let headingTextColorHex = custom.headingTextColorHex {
             try setHeadingTextColor(hexColorCode: headingTextColorHex)
         }

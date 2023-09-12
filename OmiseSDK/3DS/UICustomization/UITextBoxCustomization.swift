@@ -44,13 +44,14 @@ public class UITextBoxCustomization: UICustomization {
 }
 
 extension ThreeDS_SDK.TextBoxCustomization {
-    convenience init(omiseTextBoxCustomization custom: UITextBoxCustomization) throws {
+    convenience init(_ custom: UITextBoxCustomization) throws {
         self.init()
-        try customize(omiseUICustomization: custom)
-        try customize(omiseTextBoxCustomization: custom)
+        try customize(custom)
     }
 
-    func customize(omiseTextBoxCustomization custom: UITextBoxCustomization) throws {
+    func customize(_ custom: UITextBoxCustomization) throws {
+        try customize(omiseUICustomization: custom)
+
         if let borderWidth = custom.borderWidth {
             try setBorderWidth(borderWidth: borderWidth)
         }

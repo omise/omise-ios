@@ -39,13 +39,14 @@ public class UIButtonCustomization: UICustomization {
 }
 
 extension ThreeDS_SDK.ButtonCustomization {
-    convenience init(omiseButtonCustomization custom: UIButtonCustomization) throws {
+    convenience init(_ custom: UIButtonCustomization) throws {
         self.init()
-        try customize(omiseUICustomization: custom)
-        try customize(omiseButtonCustomization: custom)
+        try customize(custom)
     }
 
-    func customize(omiseButtonCustomization custom: UIButtonCustomization) throws {
+    func customize(_ custom: UIButtonCustomization) throws {
+        try customize(omiseUICustomization: custom)
+
         if let backgroundColorHex = custom.backgroundColorHex {
             try setBackgroundColor(hexColorCode: backgroundColorHex)
         }

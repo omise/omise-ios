@@ -44,13 +44,14 @@ public class UIToolbarCustomization: UICustomization {
 }
 
 extension ThreeDS_SDK.ToolbarCustomization {
-    convenience init(omiseToolbarCustomization custom: UIToolbarCustomization) throws {
+    convenience init(_ custom: UIToolbarCustomization) throws {
         self.init()
-        try customize(omiseUICustomization: custom)
-        try customize(omiseToolbarCustomization: custom)
+        try customize(custom)
     }
 
-    func customize(omiseToolbarCustomization custom: UIToolbarCustomization) throws {
+    func customize(_ custom: UIToolbarCustomization) throws {
+        try customize(omiseUICustomization: custom)
+
         if let backgroundColorHex = custom.backgroundColorHex {
             try setBackgroundColor(hexColorCode: backgroundColorHex)
         }
