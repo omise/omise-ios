@@ -1,5 +1,5 @@
 //
-//  UICustomization.swift
+//  ThreeDSCustomization.swift
 //  OmiseSDK
 //
 //  Created by Andrei Solovev on 11/9/23.
@@ -9,7 +9,7 @@
 import Foundation
 import ThreeDS_SDK
 
-public class UICustomization {
+public class ThreeDSCustomization {
     /// Text font name.
     public var textFontName: String?
 
@@ -36,7 +36,7 @@ public class UICustomization {
 }
 
 extension ThreeDS_SDK.Customization {
-    func customize(omiseUICustomization custom: UICustomization) throws {
+    func customize(omiseThreeDSCustomization custom: ThreeDSCustomization) throws {
         if let textFontName = custom.textFontName {
             try setTextFontName(fontName: textFontName)
         }

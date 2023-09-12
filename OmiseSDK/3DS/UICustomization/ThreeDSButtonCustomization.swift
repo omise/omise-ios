@@ -1,5 +1,5 @@
 //
-//  UIToolbarCustomization.swift
+//  ThreeDSButtonCustomization.swift
 //  OmiseSDK
 //
 //  Created by Andrei Solovev on 11/9/23.
@@ -9,24 +9,20 @@
 import Foundation
 import ThreeDS_SDK
 
-public class UIToolbarCustomization: UICustomization {
-    /// Background color for the toolbar in Hex format.
+public class ThreeDSButtonCustomization: ThreeDSCustomization {
+    /// Background color of the button in Hex format.
     public var backgroundColorHex: String?
 
-    /// Dark background color for the toolbar in Hex format.
+    /// Dark background color of the button in Hex format.
     public var darkBackgroundColorHex: String?
 
-    /// Header text of the toolbar.
-    public var headerText: String?
-
-    /// Button text of the toolbar. For example, “Cancel”.
-    public var buttonText: String?
+    /// Radius of the button corners.
+    public var cornerRadius: Int?
 
     public init(
         backgroundColorHex: String? = nil,
         darkBackgroundColorHex: String? = nil,
-        headerText: String? = nil,
-        buttonText: String? = nil,
+        cornerRadius: Int? = nil,
         textFontName: String? = nil,
         textColorHex: String? = nil,
         darkTextColorHex: String? = nil,
@@ -38,19 +34,18 @@ public class UIToolbarCustomization: UICustomization {
                    textFontSize: textFontSize)
         self.backgroundColorHex = backgroundColorHex
         self.darkBackgroundColorHex = darkBackgroundColorHex
-        self.headerText = headerText
-        self.buttonText = buttonText
+        self.cornerRadius = cornerRadius
     }
 }
 
-extension ThreeDS_SDK.ToolbarCustomization {
-    convenience init(_ custom: UIToolbarCustomization) throws {
+extension ThreeDS_SDK.ButtonCustomization {
+    convenience init(_ custom: ThreeDSButtonCustomization) throws {
         self.init()
         try customize(custom)
     }
 
-    func customize(_ custom: UIToolbarCustomization) throws {
-        try customize(omiseUICustomization: custom)
+    func customize(_ custom: ThreeDSButtonCustomization) throws {
+        try customize(omiseThreeDSCustomization: custom)
 
         if let backgroundColorHex = custom.backgroundColorHex {
             try setBackgroundColor(hexColorCode: backgroundColorHex)
@@ -60,12 +55,8 @@ extension ThreeDS_SDK.ToolbarCustomization {
             try setDarkBackgroundColor(hexColorCode: darkBackgroundColorHex)
         }
 
-        if let headerText = custom.headerText {
-            try setHeaderText(headerText: headerText)
-        }
-
-        if let buttonText = custom.buttonText {
-            try setButtonText(buttonText: buttonText)
+        if let cornerRadius = custom.cornerRadius {
+            try setCornerRadius(cornerRadius: cornerRadius)
         }
     }
 }

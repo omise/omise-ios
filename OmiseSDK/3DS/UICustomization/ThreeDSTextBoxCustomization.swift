@@ -1,5 +1,5 @@
 //
-//  UITextBoxCustomization.swift
+//  ThreeDSTextBoxCustomization.swift
 //  OmiseSDK
 //
 //  Created by Andrei Solovev on 11/9/23.
@@ -9,7 +9,7 @@
 import Foundation
 import ThreeDS_SDK
 
-public class UITextBoxCustomization: UICustomization {
+public class ThreeDSTextBoxCustomization: ThreeDSCustomization {
     /// Width of the text box border.
     public var borderWidth: Int?
 
@@ -44,13 +44,13 @@ public class UITextBoxCustomization: UICustomization {
 }
 
 extension ThreeDS_SDK.TextBoxCustomization {
-    convenience init(_ custom: UITextBoxCustomization) throws {
+    convenience init(_ custom: ThreeDSTextBoxCustomization) throws {
         self.init()
         try customize(custom)
     }
 
-    func customize(_ custom: UITextBoxCustomization) throws {
-        try customize(omiseUICustomization: custom)
+    func customize(_ custom: ThreeDSTextBoxCustomization) throws {
+        try customize(omiseThreeDSCustomization: custom)
 
         if let borderWidth = custom.borderWidth {
             try setBorderWidth(borderWidth: borderWidth)

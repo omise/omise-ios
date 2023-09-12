@@ -1,5 +1,5 @@
 //
-//  UILabelCustomization.swift
+//  ThreeDSLabelCustomization.swift
 //  OmiseSDK
 //
 //  Created by Andrei Solovev on 11/9/23.
@@ -9,7 +9,7 @@
 import Foundation
 import ThreeDS_SDK
 
-public class UILabelCustomization: UICustomization {
+public class ThreeDSLabelCustomization: ThreeDSCustomization {
     /// Color of the heading label text in Hex format.
     public var headingTextColorHex: String?
 
@@ -44,13 +44,13 @@ public class UILabelCustomization: UICustomization {
 }
 
 extension ThreeDS_SDK.LabelCustomization {
-    convenience init(_ custom: UILabelCustomization) throws {
+    convenience init(_ custom: ThreeDSLabelCustomization) throws {
         self.init()
         try customize(custom)
     }
 
-    func customize(_ custom: UILabelCustomization) throws {
-        try customize(omiseUICustomization: custom)
+    func customize(_ custom: ThreeDSLabelCustomization) throws {
+        try customize(omiseThreeDSCustomization: custom)
 
         if let headingTextColorHex = custom.headingTextColorHex {
             try setHeadingTextColor(hexColorCode: headingTextColorHex)

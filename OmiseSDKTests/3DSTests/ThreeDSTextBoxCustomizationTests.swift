@@ -1,5 +1,5 @@
 //
-//  UITextBoxCustomizationTests.swift
+//  ThreeDSTextBoxCustomizationTests.swift
 //  OmiseSDKTests
 //
 //  Created by Andrei Solovev on 12/9/23.

@@ -1,5 +1,5 @@
 //
-//  UILabelCustomizationTests.swift
+//  ThreeDSToolbarCustomizationTests.swift
 //  OmiseSDKTests
 //
 //  Created by Andrei Solovev on 12/9/23.

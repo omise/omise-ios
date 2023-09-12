@@ -2,7 +2,7 @@ import XCTest
 @testable import OmiseSDK
 import ThreeDS_SDK
 
-class UIButtonCustomizationTests: XCTestCase {
+class ThreeDSButtonCustomizationTests: XCTestCase {
     let backgroundColorHex = "#FFFFFF"
     let darkBackgroundColorHex = "#000000"
     let cornerRadius: Int = 12
@@ -13,7 +13,7 @@ class UIButtonCustomizationTests: XCTestCase {
     let testTextFontSize = 14
 
     func testNetceteraInit() {
-        let uiCustomization = UIButtonCustomization(
+        let uiCustomization = ThreeDSButtonCustomization(
             backgroundColorHex: backgroundColorHex,
             darkBackgroundColorHex: darkBackgroundColorHex,
             cornerRadius: cornerRadius,
@@ -39,7 +39,7 @@ class UIButtonCustomizationTests: XCTestCase {
     }
 
     func testNetceteraCustomization() {
-        let uiCustomization = UIButtonCustomization(
+        let uiCustomization = ThreeDSButtonCustomization(
             backgroundColorHex: backgroundColorHex,
             darkBackgroundColorHex: darkBackgroundColorHex,
             cornerRadius: cornerRadius,
