@@ -1590,6 +1590,7 @@
                         <outletCollection property="paymentMethodNameLables" destination="3wZ-Wa-j6j" collectionClass="NSMutableArray" id="53B-av-RYP"/>
                         <outletCollection property="paymentMethodNameLables" destination="fi0-U5-Eu6" collectionClass="NSMutableArray" id="UGU-T7-caB"/>
                         <outletCollection property="paymentMethodNameLables" destination="gf2-Jc-sHw" collectionClass="NSMutableArray" id="7eO-oS-VyU"/>
+                        <outletCollection property="paymentMethodNameLables" destination="ydy-jp-KSj" collectionClass="NSMutableArray" id="f5v-xU-SnZ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zoe-8g-RM3" userLabel="First Responder" sceneMemberID="firstResponder"/>

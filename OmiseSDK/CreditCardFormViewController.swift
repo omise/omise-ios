@@ -263,31 +263,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         cvvInfoButton.tintColor = .badgeBackground
         formFieldsAccessoryView.barTintColor = .formAccessoryBarTintColor
 
-#if compiler(>=5.1)
-        if #available(iOS 13, *) {
-            let appearance = navigationItem.standardAppearance ?? UINavigationBarAppearance(idiom: .phone)
-            appearance.configureWithOpaqueBackground()
-            appearance.titleTextAttributes = [
-                NSAttributedString.Key.foregroundColor: UIColor.headings
-            ]
-            appearance.largeTitleTextAttributes = [
-                NSAttributedString.Key.foregroundColor: UIColor.headings
-            ]
-            let renderer = UIGraphicsImageRenderer(size: CGSize(width: 1, height: 1))
-            let image = renderer.image { (context) in
-                context.cgContext.setFillColor(UIColor.line.cgColor)
-                context.fill(CGRect(origin: .zero, size: CGSize(width: 1, height: 1)))
-            }
-            appearance.shadowImage = image.resizableImage(withCapInsets: UIEdgeInsets.zero)
-                .withRenderingMode(.alwaysTemplate)
-            appearance.shadowColor = preferredSecondaryColor ?? defaultPaymentChooserUISecondaryColor
-            navigationItem.standardAppearance = appearance
-
-            let scrollEdgeAppearance = appearance.copy()
-            appearance.shadowColor = preferredSecondaryColor ?? defaultPaymentChooserUISecondaryColor
-            navigationItem.scrollEdgeAppearance = scrollEdgeAppearance
-        }
-#endif
+        applyNavigationBarStyle(.shadow(color: preferredSecondaryColor ?? defaultPaymentChooserUISecondaryColor))
     }
 
     private func setupBillingStackView() {

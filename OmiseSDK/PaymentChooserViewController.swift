@@ -266,22 +266,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         applyPrimaryColor()
         applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-
-        #if compiler(>=5.1)
-        if #available(iOS 13, *) {
-            let appearance = navigationItem.scrollEdgeAppearance ?? UINavigationBarAppearance(idiom: .phone)
-            appearance.configureWithOpaqueBackground()
-            appearance.titleTextAttributes = [
-                NSAttributedString.Key.foregroundColor: UIColor.headings
-            ]
-            appearance.largeTitleTextAttributes = [
-                NSAttributedString.Key.foregroundColor: UIColor.headings
-            ]
-            appearance.shadowColor = nil
-            navigationItem.scrollEdgeAppearance = appearance
-        }
-        #endif
-
+        applyNavigationBarStyle()
         updateShowingValues()
     }
 

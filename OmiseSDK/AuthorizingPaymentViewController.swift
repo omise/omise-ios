@@ -97,7 +97,8 @@ public class AuthorizingPaymentViewController: UIViewController {
         viewController.authorizedURL = authorizedURL
         viewController.expectedReturnURLPatterns = expectedReturnURLPatterns
         viewController.delegate = delegate
-        
+        viewController.applyNavigationBarStyle()
+
         return navigationController
     }
     
