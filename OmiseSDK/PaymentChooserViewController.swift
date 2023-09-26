@@ -393,6 +393,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .rabbitLinepay
         case .ocbcPao:
             payment = .ocbcPao
+        case .ocbcDigital:
+            payment = .ocbcDigital
         case .grabPay, .grabPayRms:
             payment = .grabPay
         case .boost:
