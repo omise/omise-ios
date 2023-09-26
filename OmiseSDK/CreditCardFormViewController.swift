@@ -185,8 +185,9 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     @IBOutlet private var requestingIndicatorView: UIActivityIndicatorView!
     @objc public static let defaultErrorMessageTextColor = UIColor.error
 
+    /// Deprecated.
+    /// Built in support for Card.ios was removed. You can implement it in your app and call the setCreditCardInformation(number:name:expiration:) method
     /// A boolean flag that enables/disables Card.IO integration.
-    @available(*, unavailable, message: "Built in support for Card.ios was removed. You can implement it in your app and call the setCreditCardInformation(number:name:expiration:) method")
     @objc public var cardIOEnabled = true
 
     /// Factory method for creating CreditCardFormController with given public key.
