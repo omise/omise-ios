@@ -200,6 +200,8 @@ extension PaymentChooserOption {
             return [.rabbitLinepay]
         case .mobileBankingOCBCPAO:
             return [.ocbcPao]
+        case .mobileBankingOCBC:
+            return [.ocbcDigital]
         case .grabPay:
             return [.grabPay]
         case .grabPayRms:
