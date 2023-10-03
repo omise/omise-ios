@@ -28,7 +28,7 @@ struct ProxyProperty<EnclosingType, Value> {
         }
     }
 
-    @available(*, unavailable, message: "@Proxy can only be applied to classes")
+    /// Proxy can only be applied to classes
     var wrappedValue: Value {
         get { fatalError("Can't use wrappedValue on ProxyProperty") }
         // swiftlint:disable:next unused_setter_value
