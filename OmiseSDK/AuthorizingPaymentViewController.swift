@@ -223,7 +223,8 @@ extension AuthorizingPaymentViewController: WKNavigationDelegate {
                        type: .default,
                        url.absoluteString)
             }
-        } else if let url = navigationAction.request.url, let scheme = url.scheme?.lowercased(), (scheme != "https" && scheme != "http") {
+        } else if let url = navigationAction.request.url, let scheme = url.scheme?.lowercased(),
+                  scheme != "https" && scheme != "http" {
             os_log("Redirected to custom-scheme %{private}@ URL",
                    log: uiLogObject,
                    type: .debug,
