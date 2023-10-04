@@ -181,9 +181,13 @@ public class __SourceCustomBarcodePayment: __SourceBarcodePayment {
     /// - Parameters:
     ///   - customType: The type of a source to be created
     ///   - parameters: Parameters of a source to be created
-    public init(customType: String, parameters: [String: Any]) {
+    public init?(customType: String, parameters: [String: Any]) {
         self.parameters = parameters
-        super.init(type: OMSSourceTypeValue(rawValue: customType))!
+        if let sourceType = OMSSourceTypeValue(customType) {
+            super.init(type: sourceType)
+        } else {
+            return nil
+        }
     }
 }
 
@@ -433,9 +437,13 @@ public class __CustomSourcePayment: __SourcePaymentInformation {
     /// - Parameters:
     ///   - customType: The source type of the payment source
     ///   - parameters: The parameter of the payment source
-    public init(customType: String, parameters: [String: Any]) {
+    public init?(customType: String, parameters: [String: Any]) {
         self.parameters = parameters
-        super.init(type: OMSSourceTypeValue(rawValue: customType))!
+        if let sourceType = OMSSourceTypeValue(customType) {
+            super.init(type: sourceType)
+        } else {
+            return nil
+        }
     }
 }
 
@@ -535,7 +543,7 @@ extension PaymentInformation {
 
 extension __SourcePaymentInformation {
     // swiftlint:disable:next function_body_length
-    static func makeSourcePaymentInformation(from paymentInformation: PaymentInformation) -> __SourcePaymentInformation {
+    static func makeSourcePaymentInformation(from paymentInformation: PaymentInformation) -> __SourcePaymentInformation? {
         switch paymentInformation {
         case .alipay:
             return __SourcePaymentInformation.alipayPayment
@@ -565,7 +573,11 @@ extension __SourcePaymentInformation {
         case .billPayment(PaymentInformation.BillPayment.tescoLotus):
             return __SourcePaymentInformation.tescoLotusBillPaymentPayment
         case .billPayment(PaymentInformation.BillPayment.other(let type)):
-            return __SourcePaymentInformation.init(type: OMSSourceTypeValue(type))!
+            if let sourceType = OMSSourceTypeValue(type) {
+                return __SourcePaymentInformation.init(type: sourceType)
+            } else {
+                return nil
+            }
         case .internetBanking(let bank):
             switch bank {
             case .bay:
@@ -573,7 +585,11 @@ extension __SourcePaymentInformation {
             case .bbl:
                 return __SourceInternetBankingPayment.bblInternetBankingPayment
             case .other(let type) where type.hasPrefix(PaymentInformation.InternetBanking.paymentMethodTypePrefix):
-                return __SourceInternetBankingPayment.init(type: OMSSourceTypeValue(type))!
+                if let sourceType = OMSSourceTypeValue(type) {
+                   return  __SourceInternetBankingPayment.init(type: sourceType)
+                } else {
+                    return nil
+                }
             case .other(let type):
                 return __CustomSourcePayment(customType: type, parameters: [:])
             }
@@ -600,7 +616,11 @@ extension __SourcePaymentInformation {
             case .uob:
                 return __SourceInstallmentsPayment.installmentUOBPayment(withNumberOfTerms: installment.numberOfTerms)
             case .other(let type) where type.hasPrefix(PaymentInformation.Installment.paymentMethodTypePrefix):
-                return __SourceInstallmentsPayment.init(type: OMSSourceTypeValue(type), numberOfTerms: installment.numberOfTerms)!
+                if let sourceType = OMSSourceTypeValue(type) {
+                    return  __SourceInstallmentsPayment.init(type: sourceType, numberOfTerms: installment.numberOfTerms)
+                } else {
+                    return nil
+                }
             case .other(let type):
                 return __CustomSourcePayment(customType: type, parameters: [:])
             }

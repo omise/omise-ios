@@ -1,5 +1,4 @@
 #import "OMSBaseViewController.h"
-#import <ExampleApp-Swift.h>
 
 @interface OMSBaseViewController ()
 

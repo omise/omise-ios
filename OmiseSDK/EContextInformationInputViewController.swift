@@ -1,7 +1,5 @@
 import UIKit
 
-@objc(OMSEContextInformationInputViewController)
-// swiftlint:disable:next attributes
 class EContextInformationInputViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
     var flowSession: PaymentCreatorFlowSession?
     var client: Client?

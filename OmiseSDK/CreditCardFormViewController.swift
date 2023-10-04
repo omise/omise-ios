@@ -76,9 +76,8 @@ public typealias CreditCardFormController = CreditCardFormViewController
 
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.
-@objc(OMSCreditCardFormViewController)
 public class CreditCardFormViewController: UIViewController, PaymentChooserUI, PaymentFormUIController {
-    // swiftlint:disable:previous attributes type_body_length
+    // swiftlint:disable:previous type_body_length
 
     typealias ViewModel = CreditCardFormViewModel
     typealias ViewContext = CreditCardFormViewContext

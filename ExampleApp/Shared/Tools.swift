@@ -33,30 +33,30 @@ struct PaymentPreset {
 
 @objc class Tool: NSObject {
     
-    @objc static let thailandPaymentAmount: Int64 = PaymentPreset.thailandPreset.paymentAmount
-    @objc static let thailandPaymentCurrency: String = PaymentPreset.thailandPreset.paymentCurrency.code
-    @objc static let thailandAllowedPaymentMethods: [OMSSourceTypeValue] = PaymentPreset.thailandPreset.allowedPaymentMethods
+    static let thailandPaymentAmount: Int64 = PaymentPreset.thailandPreset.paymentAmount
+    static let thailandPaymentCurrency: String = PaymentPreset.thailandPreset.paymentCurrency.code
+    static let thailandAllowedPaymentMethods: [OMSSourceTypeValue] = PaymentPreset.thailandPreset.allowedPaymentMethods
     
-    @objc static let japanPaymentAmount: Int64 = PaymentPreset.japanPreset.paymentAmount
-    @objc static let japanPaymentCurrency: String = PaymentPreset.japanPreset.paymentCurrency.code
-    @objc static let japanAllowedPaymentMethods: [OMSSourceTypeValue] = PaymentPreset.japanPreset.allowedPaymentMethods
+    static let japanPaymentAmount: Int64 = PaymentPreset.japanPreset.paymentAmount
+    static let japanPaymentCurrency: String = PaymentPreset.japanPreset.paymentCurrency.code
+    static let japanAllowedPaymentMethods: [OMSSourceTypeValue] = PaymentPreset.japanPreset.allowedPaymentMethods
     
-    @objc static let singaporePaymentAmount: Int64 = PaymentPreset.singaporePreset.paymentAmount
-    @objc static let singaporePaymentCurrency: String = PaymentPreset.singaporePreset.paymentCurrency.code
-    @objc static let singaporeAllowedPaymentMethods: [OMSSourceTypeValue] = PaymentPreset.singaporePreset.allowedPaymentMethods
+    static let singaporePaymentAmount: Int64 = PaymentPreset.singaporePreset.paymentAmount
+    static let singaporePaymentCurrency: String = PaymentPreset.singaporePreset.paymentCurrency.code
+    static let singaporeAllowedPaymentMethods: [OMSSourceTypeValue] = PaymentPreset.singaporePreset.allowedPaymentMethods
 
-    @objc static let malaysiaPaymentAmount: Int64 = PaymentPreset.malaysiaPreset.paymentAmount
-    @objc static let malaysiaPaymentCurrency: String = PaymentPreset.malaysiaPreset.paymentCurrency.code
-    @objc static let malaysiaAllowedPaymentMethods: [OMSSourceTypeValue] = PaymentPreset.malaysiaPreset.allowedPaymentMethods
+    static let malaysiaPaymentAmount: Int64 = PaymentPreset.malaysiaPreset.paymentAmount
+    static let malaysiaPaymentCurrency: String = PaymentPreset.malaysiaPreset.paymentCurrency.code
+    static let malaysiaAllowedPaymentMethods: [OMSSourceTypeValue] = PaymentPreset.malaysiaPreset.allowedPaymentMethods
     
-    @objc static func imageWith(size: CGSize, color: UIColor) -> UIImage? {
+    static func imageWith(size: CGSize, color: UIColor) -> UIImage? {
         return Tool.imageWith(size: size) { (context) in
             context.setFillColor(color.cgColor)
             context.fill(CGRect(origin: .zero, size: size))
         }
     }
     
-    @objc static func imageWith(size: CGSize, actions: (CGContext) -> Void) -> UIImage? {
+    static func imageWith(size: CGSize, actions: (CGContext) -> Void) -> UIImage? {
         let renderer = UIGraphicsImageRenderer(size: size)
         return renderer.image { context in
             actions(context.cgContext)

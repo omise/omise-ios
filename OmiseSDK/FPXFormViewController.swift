@@ -1,7 +1,5 @@
 import UIKit
 
-@objc(OMSFPXFormViewController)
-// swiftlint:disable:next attributes
 class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
 
     private let destinationSegue: String = "GoToFPXBankChooserSegue"

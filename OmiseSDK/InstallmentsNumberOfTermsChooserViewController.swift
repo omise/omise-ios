@@ -1,7 +1,6 @@
 import UIKit
 
-@objc(OMSInstallmentsNumberOfTermsChooserViewController)
-// swiftlint:disable:next type_name attributes
+// swiftlint:disable:next type_name
 class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentSourceChooser, PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
     

@@ -114,7 +114,7 @@ extension OMSSourceTypeValue {
         case .barcodeAlipay:
             return "barcode"
         case .installmentBAY, .installmentMBB, .installmentFirstChoice, .installmentBBL,
-             .installmentKTC, .installmentKBank, .installmentSCB, .installmentCiti, .installmentTTB, .installmentUOB:
+                .installmentKTC, .installmentKBank, .installmentSCB, .installmentCiti, .installmentTTB, .installmentUOB:
             return "installment"
         case .eContext:
             return "econtext"
@@ -160,8 +160,6 @@ extension OMSSourceTypeValue {
             return "duitnow_obw"
         case .payPay:
             return "paypay"
-        default:
-            return self.rawValue
         }
     }
 }

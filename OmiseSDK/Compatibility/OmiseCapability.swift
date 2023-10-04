@@ -1,7 +1,6 @@
 import Foundation
 
-@objc(OMSCapability)
-// swiftlint:disable:next attributes type_name
+// swiftlint:disable:next type_name
 public class __OmiseCapability: NSObject {
     let capability: Capability
 
@@ -18,26 +17,23 @@ public class __OmiseCapability: NSObject {
     }
 }
 
-@objc(OMSCapabilityBackend)
-// swiftlint:disable:next attributes type_name
+// swiftlint:disable:next type_name
 public class __OmiseCapabilityBackend: NSObject {
     private let backend: Capability.Backend
 
-    @objc public lazy var payment: __OmiseCapabilityBackendPayment =
+    public lazy var payment: __OmiseCapabilityBackendPayment? =
         __OmiseCapabilityBackendPayment.makeCapabilityBackend(from: backend.payment)
-    @objc public lazy var supportedCurrencyCodes: Set<String> = Set(backend.supportedCurrencies.map { $0.code })
+    public lazy var supportedCurrencyCodes: Set<String> = Set(backend.supportedCurrencies.map { $0.code })
 
     required init(_ backend: Capability.Backend) {
         self.backend = backend
     }
 }
 
-@objc(OMSCapabilityBackendPayment)
-// swiftlint:disable:next attributes type_name
+// swiftlint:disable:next type_name
 public class __OmiseCapabilityBackendPayment: NSObject {}
 
-@objc(OMSCapabilityCardBackend)
-// swiftlint:disable:next attributes type_name
+// swiftlint:disable:next type_name
 public class __OmiseCapabilityCardBackendPayment: __OmiseCapabilityBackendPayment {
     @objc public let supportedBrands: Set<String>
 
@@ -46,12 +42,11 @@ public class __OmiseCapabilityCardBackendPayment: __OmiseCapabilityBackendPaymen
     }
 }
 
-@objc(OMSCapabilitySourceBackend)
-// swiftlint:disable:next attributes type_name
+// swiftlint:disable:next type_name
 public class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
-    @objc public let type: OMSSourceTypeValue
+    public let type: OMSSourceTypeValue
 
-    init(sourceType: OMSSourceTypeValue) {
+    init?(sourceType: OMSSourceTypeValue) {
         self.type = sourceType
     }
 
@@ -129,14 +124,22 @@ public class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPaym
 
     static func makeInternetBankingSourceBackendPayment(
         bank: PaymentInformation.InternetBanking
-        ) -> __OmiseCapabilitySourceBackendPayment {
-        return __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue(bank.type))
+        ) -> __OmiseCapabilitySourceBackendPayment? {
+            if let sourceType = OMSSourceTypeValue(bank.type) {
+                return __OmiseCapabilitySourceBackendPayment(sourceType: sourceType)
+            } else {
+                return nil
+            }
     }
 
     static func makeMobileBankingSourceBackendPayment(
         bank: PaymentInformation.MobileBanking
-        ) -> __OmiseCapabilitySourceBackendPayment {
-        return __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue(bank.type))
+        ) -> __OmiseCapabilitySourceBackendPayment? {
+            if let sourceType = OMSSourceTypeValue(bank.type) {
+                return __OmiseCapabilitySourceBackendPayment(sourceType: sourceType)
+            } else {
+                return nil
+            }
     }
 }
 
@@ -145,7 +148,7 @@ public class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPaym
 public class __OmiseCapabilityInstallmentBackendPayment: __OmiseCapabilitySourceBackendPayment {
     @objc public let availableNumberOfTerms: IndexSet
 
-    init(sourceType: OMSSourceTypeValue, availableNumberOfTerms: IndexSet) {
+    init?(sourceType: OMSSourceTypeValue, availableNumberOfTerms: IndexSet) {
         self.availableNumberOfTerms = availableNumberOfTerms
         super.init(sourceType: sourceType)
     }
@@ -155,28 +158,41 @@ public class __OmiseCapabilityInstallmentBackendPayment: __OmiseCapabilitySource
 // swiftlint:disable:next attributes type_name
 public class __OmiseCapabilityUnknownSourceBackendPayment: __OmiseCapabilitySourceBackendPayment {
     @objc public let parameters: [String: Any]
-    init(sourceType: String, parameters: [String: Any]) {
+    init?(sourceType: String, parameters: [String: Any]) {
         self.parameters = parameters
-        super.init(sourceType: OMSSourceTypeValue(rawValue: sourceType))
+        if let sourceType = OMSSourceTypeValue(sourceType) {
+            super.init(sourceType: sourceType)
+        } else {
+            return nil
+        }
     }
 }
 
 extension __OmiseCapabilityBackendPayment {
     // swiftlint:disable:next function_body_length
-    static func makeCapabilityBackend(from payment: Capability.Backend.Payment) -> __OmiseCapabilityBackendPayment {
+    static func makeCapabilityBackend(from payment: Capability.Backend.Payment) -> __OmiseCapabilityBackendPayment? {
+
         switch payment {
         case .card(let brands):
             return __OmiseCapabilityCardBackendPayment(supportedBrands: Set(brands.map({ $0.description })))
         case .installment(let brand, availableNumberOfTerms: let availableNumberOfTerms):
-            return __OmiseCapabilityInstallmentBackendPayment(
-                sourceType: OMSSourceTypeValue(brand.type), availableNumberOfTerms: availableNumberOfTerms
-            )
+            if let sourceType = OMSSourceTypeValue(brand.type) {
+                return __OmiseCapabilityInstallmentBackendPayment(
+                    sourceType: sourceType, availableNumberOfTerms: availableNumberOfTerms
+                )
+            } else {
+                return nil
+            }
         case .internetBanking(let bank):
             return __OmiseCapabilitySourceBackendPayment.makeInternetBankingSourceBackendPayment(bank: bank)
         case .mobileBanking(let bank):
             return __OmiseCapabilitySourceBackendPayment.makeMobileBankingSourceBackendPayment(bank: bank)
         case .billPayment(let billPayment):
-            return __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue(billPayment.type))
+            if let sourceType = OMSSourceTypeValue(billPayment.type) {
+                return __OmiseCapabilitySourceBackendPayment(sourceType: sourceType)
+            } else {
+                return nil
+            }
         case .alipay:
             return __OmiseCapabilitySourceBackendPayment.alipaySourceBackendPayment
         case .alipayCN:
@@ -200,7 +216,11 @@ extension __OmiseCapabilityBackendPayment {
         case .truemoney:
             return __OmiseCapabilitySourceBackendPayment.truemoneySourceBackendPayment
         case .points(let points):
-            return __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue(points.type))
+            if let sourceType = OMSSourceTypeValue(points.type) {
+                return __OmiseCapabilitySourceBackendPayment(sourceType: sourceType)
+            } else {
+                return nil
+            }
         case .eContext:
             return __OmiseCapabilitySourceBackendPayment.eContextSourceBackendPayment
         case .fpx:

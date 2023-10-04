@@ -24,8 +24,11 @@ public struct Capability: Object {
 extension Capability {
     public static func ~= (lhs: Capability, rhs: CreateSourceParameter) -> Bool {
         func backend(from capability: Capability, for payment: PaymentInformation) -> Backend? {
-            let paymentSourceType = OMSSourceTypeValue(payment.sourceType)
-            return capability[paymentSourceType]
+            if let paymentSourceType = OMSSourceTypeValue(payment.sourceType) {
+                return capability[paymentSourceType]
+            } else {
+                return nil
+            }
         }
 
         guard let backend = backend(from: lhs, for: rhs.paymentInformation) else {
@@ -198,12 +201,15 @@ extension Capability {
         var backendsContainer = try container.nestedUnkeyedContainer(forKey: .paymentBackends)
 
         var backends: [Capability.Backend] = []
+        
         while !backendsContainer.isAtEnd {
-            backends.append(try backendsContainer.decode(Capability.Backend.self))
+            let backend = try backendsContainer.decode(Capability.Backend.self)
+            backends.append(backend)
         }
+
         self.supportedBackends = backends
 
-        let backendTypes = backends.map { Capability.Backend.BackendType(payment: $0.payment) }
+        let backendTypes = backends.compactMap { Capability.Backend.BackendType(payment: $0.payment) }
         self.backends = Dictionary(uniqueKeysWithValues: zip(backendTypes, backends))
     }
 
@@ -233,6 +239,8 @@ extension Capability.Backend {
         supportedCurrencies = try container.decode(Set<Currency>.self, forKey: .supportedCurrencies)
 
         switch type {
+        case .unknown(let sourceType):
+            self.payment = .unknownSource(sourceType, configurations: [:])
         case .card:
             let supportedBrand = try container.decode(Set<CardBrand>.self, forKey: .cardBrands)
             self.payment = .card(supportedBrand)
@@ -338,9 +346,13 @@ extension Capability.Backend {
 
 private let creditCardBackendTypeValue = "card"
 extension Capability.Backend {
+    struct OMSSourceTypeValueError: Error {
+    }
+
     fileprivate enum BackendType: Codable, Hashable {
         case card
         case source(OMSSourceTypeValue)
+        case unknown(sourceType: String)
 
         init(from decoder: Decoder) throws {
             let container = try decoder.singleValueContainer()
@@ -348,7 +360,11 @@ extension Capability.Backend {
             case creditCardBackendTypeValue:
                 self = .card
             case let value:
-                self = .source(OMSSourceTypeValue(value))
+                if let sourceType = OMSSourceTypeValue(value) {
+                    self = .source(sourceType)
+                } else {
+                    self = .unknown(sourceType: value)
+                }
             }
         }
 
@@ -356,6 +372,8 @@ extension Capability.Backend {
             var container = encoder.singleValueContainer()
             let type: String
             switch self {
+            case .unknown(let sourceType):
+                type = sourceType
             case .card:
                 type = creditCardBackendTypeValue
             case .source(let sourceType):
@@ -366,7 +384,7 @@ extension Capability.Backend {
         }
 
         // swiftlint:disable:next function_body_length
-        init(payment: Capability.Backend.Payment) {
+        init?(payment: Capability.Backend.Payment) {
             switch payment {
             case .card:
                 self = .card
@@ -389,15 +407,35 @@ extension Capability.Backend {
             case .touchNGo:
                 self = .source(.touchNGo)
             case .installment(let brand, availableNumberOfTerms: _):
-                self = .source(OMSSourceTypeValue(brand.type))
+                if let sourceType = OMSSourceTypeValue(brand.type) {
+                    self = .source(sourceType)
+                } else {
+                    return nil
+                }
             case .internetBanking(let banking):
-                self = .source(OMSSourceTypeValue(banking.type))
+                if let sourceType = OMSSourceTypeValue(banking.type) {
+                    self = .source(sourceType)
+                } else {
+                    return nil
+                }
             case .mobileBanking(let banking):
-                self = .source(OMSSourceTypeValue(banking.type))
+                if let sourceType = OMSSourceTypeValue(banking.type) {
+                    self = .source(sourceType)
+                } else {
+                    return nil
+                }
             case .billPayment(let billPayment):
-                self = .source(OMSSourceTypeValue(billPayment.type))
+                if let sourceType = OMSSourceTypeValue(billPayment.type) {
+                    self = .source(sourceType)
+                } else {
+                    return nil
+                }
             case .unknownSource(let sourceType, configurations: _):
-                self = .source(.init(sourceType))
+                if let sourceType = OMSSourceTypeValue(sourceType) {
+                    self = .source(sourceType)
+                } else {
+                    return nil
+                }
             case .promptpay:
                 self = .source(.promptPay)
             case .paynow:
@@ -405,7 +443,11 @@ extension Capability.Backend {
             case .truemoney:
                 self = .source(.trueMoney)
             case .points(let points):
-                self = .source(OMSSourceTypeValue(points.type))
+                if let sourceType = OMSSourceTypeValue(points.type) {
+                    self = .source(sourceType)
+                } else {
+                    return nil
+                }
             case .eContext:
                 self = .source(.eContext)
             case .fpx:
@@ -437,6 +479,8 @@ extension Capability.Backend {
 
         var type: String {
             switch self {
+            case .unknown(let sourceType):
+                return sourceType
             case .card:
                 return "card"
             case .source(let sourceType):

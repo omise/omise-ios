@@ -33,9 +33,8 @@ class PaymentSettingTableViewController: UITableViewController {
             amountField.text = amountFormatter.string(from: NSNumber(value: currentCurrency.convert(fromSubunit: currentAmount)))
         }
     }
-    @objc(currentCurrencyCode)
-    // swiftlint:disable:next attributes identifier_name
-    var __currentCurrencyCode: String {
+
+    var currentCurrencyCode: String {
         get {
             return currentCurrency.code
         }
@@ -55,7 +54,7 @@ class PaymentSettingTableViewController: UITableViewController {
         }
     }
 
-    @objc var allowedPaymentMethods: Set<OMSSourceTypeValue> = [] {
+    var allowedPaymentMethods: Set<OMSSourceTypeValue> = [] {
         willSet {
             guard isViewLoaded else {
                 return

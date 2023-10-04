@@ -214,14 +214,11 @@ extension PaymentChooserOption {
             return [.duitNowOBW]
         case .payPay:
             return [.payPay]
-        default:
-            return []
         }
     }
 }
 
-@objc(OMSPaymentChooserViewController)
-// swiftlint:disable:next type_body_length attributes
+// swiftlint:disable:next type_body_length
 class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>,
                                     PaymentSourceChooser,
                                     PaymentChooserUI {
@@ -234,7 +231,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             updateShowingValues()
         }
     }
-    @objc var allowedPaymentMethods: [OMSSourceTypeValue] = [] {
+    var allowedPaymentMethods: [OMSSourceTypeValue] = [] {
         didSet {
             updateShowingValues()
         }

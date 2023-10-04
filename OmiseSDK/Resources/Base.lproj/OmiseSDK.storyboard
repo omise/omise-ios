@@ -11,7 +11,7 @@
         <!--Credit Card-->
         <scene sceneID="dPJ-Ub-Z91">
             <objects>
-                <viewController storyboardIdentifier="CreditCardFormController" extendedLayoutIncludesOpaqueBars="YES" id="ALK-ZP-CXg" customClass="OMSCreditCardFormViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreditCardFormController" extendedLayoutIncludesOpaqueBars="YES" id="ALK-ZP-CXg" customClass="CreditCardFormViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iw5-48-6Oe"/>
                         <viewControllerLayoutGuide type="bottom" id="XzI-Fq-3C5"/>
@@ -486,7 +486,7 @@
         <!--Payment Methods-->
         <scene sceneID="gNp-vh-6ON">
             <objects>
-                <tableViewController storyboardIdentifier="PaymentChooserController" extendedLayoutIncludesOpaqueBars="YES" id="2c1-84-F03" customClass="OMSPaymentChooserViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PaymentChooserController" extendedLayoutIncludesOpaqueBars="YES" id="2c1-84-F03" customClass="PaymentChooserViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Gba-I0-J0M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="2200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1570,7 +1570,7 @@
         <!--Authorizing Payment-->
         <scene sceneID="IRy-iA-rF6">
             <objects>
-                <viewController storyboardIdentifier="DefaultAuthorizingPaymentViewController" id="TTh-Qc-TVG" customClass="OMSAuthorizingPaymentViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DefaultAuthorizingPaymentViewController" id="TTh-Qc-TVG" customClass="AuthorizingPaymentViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="v42-VO-PGC"/>
                         <viewControllerLayoutGuide type="bottom" id="rnF-ST-mfm"/>
@@ -1595,7 +1595,7 @@
         <!--TrueMoney Wallet-->
         <scene sceneID="B8a-pv-rKr">
             <objects>
-                <viewController id="Qrb-nZ-3ze" customClass="OMSTrueMoneyFormViewController" sceneMemberID="viewController">
+                <viewController id="Qrb-nZ-3ze" customClass="TrueMoneyFormViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OgH-zY-UpJ"/>
                         <viewControllerLayoutGuide type="bottom" id="7O7-vN-x1O"/>
@@ -1768,7 +1768,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ggq-Vj-kpA">
                         <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1782,7 +1781,7 @@
         <!--Internet Banking-->
         <scene sceneID="GWD-3m-vXf">
             <objects>
-                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="u3o-zY-Nfp" customClass="OMSInternetBankingSourceChooserViewController" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="u3o-zY-Nfp" customClass="InternetBankingSourceChooserViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6Up-qh-f82">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1961,7 +1960,7 @@
         <!--Installments-->
         <scene sceneID="dNp-Dn-cY2">
             <objects>
-                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="lhd-VO-2kZ" customClass="OMSInstallmentBankingSourceChooserViewController" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="lhd-VO-2kZ" customClass="InstallmentBankingSourceChooserViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="SqW-bG-UTj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2295,7 +2294,7 @@
         <!--Installments Number Of Terms Chooser View Controller-->
         <scene sceneID="CWW-iT-nyZ">
             <objects>
-                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="I6Y-g7-xLU" customClass="OMSInstallmentsNumberOfTermsChooserViewController" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="I6Y-g7-xLU" customClass="InstallmentsNumberOfTermsChooserViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="64" estimatedRowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" id="r1g-0M-p88">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2345,7 +2344,7 @@
         <!--EContext Information Input-->
         <scene sceneID="etS-JC-UOV">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" id="hC0-5j-tkj" userLabel="EContext Information Input" customClass="OMSEContextInformationInputViewController" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="hC0-5j-tkj" userLabel="EContext Information Input" customClass="EContextInformationInputViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KTl-km-I7b"/>
                         <viewControllerLayoutGuide type="bottom" id="NV0-P3-Xwj"/>
@@ -2609,7 +2608,7 @@
         <!--Payment Creator Controller-->
         <scene sceneID="6ey-jn-QkA">
             <objects>
-                <navigationController storyboardIdentifier="PaymentCreatorController" automaticallyAdjustsScrollViewInsets="NO" id="HXY-oA-L9Y" customClass="OMSPaymentCreatorController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="PaymentCreatorController" automaticallyAdjustsScrollViewInsets="NO" id="HXY-oA-L9Y" customClass="PaymentCreatorController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" backIndicatorImage="Back" largeTitles="YES" backIndicatorTransitionMaskImage="Back" id="aV8-zC-zfe">
                         <rect key="frame" x="0.0" y="50" width="375" height="96"/>
@@ -2628,7 +2627,7 @@
         <!--Mobile Banking-->
         <scene sceneID="pFJ-pw-u2Z">
             <objects>
-                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="9Up-v5-UpG" customClass="OMSMobileBankingSourceChooserViewController" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="9Up-v5-UpG" customClass="MobileBankingSourceChooserViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="XKU-sg-sJh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2837,7 +2836,7 @@
         <!--FPX Bank List-->
         <scene sceneID="EbJ-wh-5tq">
             <objects>
-                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="4Dm-CU-oaf" customClass="OMSFPXBankChooserViewController" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="4Dm-CU-oaf" customClass="FPXBankChooserViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="keo-NH-r9K">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2894,7 +2893,7 @@
         <!--FPX-->
         <scene sceneID="UVs-NR-lOg">
             <objects>
-                <viewController id="cWp-oe-wgJ" customClass="OMSFPXFormViewController" sceneMemberID="viewController">
+                <viewController id="cWp-oe-wgJ" customClass="FPXFormViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uFd-Vf-fSA"/>
                         <viewControllerLayoutGuide type="bottom" id="3Fw-T7-ntI"/>
@@ -2916,7 +2915,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1JF-Jq-C50" customClass="OMSOmiseTextField">
-                                        <rect key="frame" x="16" y="213.33333333333331" width="343" height="22"/>
+                                        <rect key="frame" x="16" y="213.33333333333331" width="343" height="48"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -2939,13 +2938,13 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGT-xf-88M">
-                                        <rect key="frame" x="16" y="240.33333333333331" width="343" height="13.333333333333343"/>
+                                        <rect key="frame" x="16" y="266.33333333333331" width="343" height="13.333333333333314"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                         <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tI6-gP-6iQ" customClass="OMSMainActionButton">
-                                        <rect key="frame" x="16" y="273.66666666666669" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="299.66666666666669" width="343" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="XG2-qP-KC2"/>
                                         </constraints>
@@ -2969,7 +2968,7 @@
                                         </connections>
                                     </button>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="6Il-GW-Zuc">
-                                        <rect key="frame" x="177.66666666666666" y="285.66666666666669" width="20" height="20"/>
+                                        <rect key="frame" x="177.66666666666666" y="311.66666666666669" width="20" height="20"/>
                                         <color key="color" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please input your email address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYp-YV-pCx">
@@ -3062,7 +3061,7 @@
         <!--DuitNow Online Banking/Wallets Bank List-->
         <scene sceneID="jFb-XV-emt">
             <objects>
-                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="fVC-FK-sgo" customClass="OMSDuitNowOBWBankChooserViewController" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="fVC-FK-sgo" customClass="DuitNowOBWBankChooserViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Paq-bQ-aS8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
