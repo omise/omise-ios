@@ -26,6 +26,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case fpx
     case rabbitLinepay
     case ocbcPao
+    case ocbcDigital
     case grabPay
     case boost
     case shopeePay
@@ -62,6 +63,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             .fpx,
             .rabbitLinepay,
             .ocbcPao,
+            .ocbcDigital,
             .grabPay,
             .boost,
             .shopeePay,
@@ -123,6 +125,8 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "Rabbit LINE Pay"
         case .ocbcPao:
             return "OCBC Pay Anyone"
+        case .ocbcDigital:
+            return "OCBC Digital"
         case .grabPay:
             return "Grab"
         case .boost:
@@ -196,6 +200,8 @@ extension PaymentChooserOption {
             return [.rabbitLinepay]
         case .mobileBankingOCBCPAO:
             return [.ocbcPao]
+        case .mobileBankingOCBC:
+            return [.ocbcDigital]
         case .grabPay:
             return [.grabPay]
         case .grabPayRms:
@@ -257,22 +263,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         applyPrimaryColor()
         applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-
-        #if compiler(>=5.1)
-        if #available(iOS 13, *) {
-            let appearance = navigationItem.scrollEdgeAppearance ?? UINavigationBarAppearance(idiom: .phone)
-            appearance.configureWithOpaqueBackground()
-            appearance.titleTextAttributes = [
-                NSAttributedString.Key.foregroundColor: UIColor.headings
-            ]
-            appearance.largeTitleTextAttributes = [
-                NSAttributedString.Key.foregroundColor: UIColor.headings
-            ]
-            appearance.shadowColor = nil
-            navigationItem.scrollEdgeAppearance = appearance
-        }
-        #endif
-
+        applyNavigationBarStyle()
         updateShowingValues()
     }
 
@@ -384,6 +375,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .rabbitLinepay
         case .ocbcPao:
             payment = .ocbcPao
+        case .ocbcDigital:
+            payment = .ocbcDigital
         case .grabPay, .grabPayRms:
             payment = .grabPay
         case .boost:
@@ -473,26 +466,28 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 20, section: 0)
         case .ocbcPao:
             return IndexPath(row: 21, section: 0)
-        case .grabPay:
+        case .ocbcDigital:
             return IndexPath(row: 22, section: 0)
-        case .boost:
+        case .grabPay:
             return IndexPath(row: 23, section: 0)
-        case .shopeePay, .shopeePayJumpApp:
+        case .boost:
             return IndexPath(row: 24, section: 0)
-        case .maybankQRPay:
+        case .shopeePay, .shopeePayJumpApp:
             return IndexPath(row: 25, section: 0)
-        case .duitNowQR:
+        case .maybankQRPay:
             return IndexPath(row: 26, section: 0)
-        case .duitNowOBW:
+        case .duitNowQR:
             return IndexPath(row: 27, section: 0)
-        case .touchNGo:
+        case .duitNowOBW:
             return IndexPath(row: 28, section: 0)
-        case .grabPayRms:
+        case .touchNGo:
             return IndexPath(row: 29, section: 0)
-        case .atome:
+        case .grabPayRms:
             return IndexPath(row: 30, section: 0)
-        case .payPay:
+        case .atome:
             return IndexPath(row: 31, section: 0)
+        case .payPay:
+            return IndexPath(row: 32, section: 0)
         }
     }
 
@@ -546,6 +541,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue.rabbitLinepay
             case .ocbcPao:
                 return OMSSourceTypeValue.mobileBankingOCBCPAO
+            case .ocbcDigital:
+                return OMSSourceTypeValue.mobileBankingOCBC
             case .grabPay:
                 return OMSSourceTypeValue.grabPay
             case .grabPayRms:
