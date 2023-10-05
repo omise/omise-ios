@@ -182,10 +182,6 @@ import UIKit
     
     static let monthStringRegularExpression: NSRegularExpression! = try? NSRegularExpression(pattern: "^([0-1]?\\d)", options: [])
     
-    public override func replace(_ range: UITextRange, withText text: String) {
-        super.replace(range, withText: text)
-    }
-
     // swiftlint:disable:next cyclomatic_complexity function_body_length
     public override func paste(_ sender: Any?) {
         let pasteboard = UIPasteboard.general

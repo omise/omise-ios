@@ -126,7 +126,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var shopeePayPaymentCell: UITableViewCell!
     @IBOutlet private var maybankQRPayPaymentCell: UITableViewCell!
     @IBOutlet private var duitNowQRPaymentCell: UITableViewCell!
-    @IBOutlet private var duitNowOBWPaymentCell: UITableViewCell!    
+    @IBOutlet private var duitNowOBWPaymentCell: UITableViewCell!
     @IBOutlet private var useCapabilityAPIValuesCell: UITableViewCell!
     @IBOutlet private var useSpecifiedValuesCell: UITableViewCell!
 
