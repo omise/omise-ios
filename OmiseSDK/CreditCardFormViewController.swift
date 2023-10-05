@@ -375,6 +375,10 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             // We'll leave the adjusting scroll view insets job for iOS 11 and later to the layoutMargins + safeAreaInsets here
             automaticallyAdjustsScrollViewInsets = true
         }
+        
+        // Storyboard shows wrong warning on textContentType == .creditCardNumber
+        // Set textContentType manually
+        cardNumberTextField.textContentType = .creditCardNumber
 
         cardNumberTextField.textContentType = .creditCardNumber
         cardNumberTextField.rightView = cardBrandIconImageView
