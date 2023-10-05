@@ -376,6 +376,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             automaticallyAdjustsScrollViewInsets = true
         }
 
+        cardNumberTextField.textContentType = .creditCardNumber
         cardNumberTextField.rightView = cardBrandIconImageView
         secureCodeTextField.rightView = cvvInfoButton
         secureCodeTextField.rightViewMode = .always
