@@ -22,7 +22,7 @@ class OMSBaseViewController: UIViewController {
     var paymentAmount: Int64 = 0
     var paymentCurrencyCode: String = ""
     var usesCapabilityDataForPaymentMethods = false
-    var allowedPaymentMethods: [OMSSourceTypeValue] = []
+    var allowedPaymentMethods: [SourceTypeValue] = []
 
     required init?(coder: NSCoder) {
         self.usesCapabilityDataForPaymentMethods = true

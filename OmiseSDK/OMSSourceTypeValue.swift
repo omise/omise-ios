@@ -1,5 +1,5 @@
 //
-//  OMSSourceTypeValue.swift
+//  SourceTypeValue.swift
 //  OmiseSDK
 //
 //  Created by Andrei Solovev on 4/10/23.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum OMSSourceTypeValue: String {
+public enum SourceTypeValue: String {
     case internetBankingBAY = "internet_banking_bay"
     case internetBankingBBL = "internet_banking_bbl"
     case mobileBankingSCB = "mobile_banking_scb"
@@ -57,7 +57,7 @@ public enum OMSSourceTypeValue: String {
     case payPay = "paypay"
 
     public init?(_ rawValue: String) {
-        if let value = OMSSourceTypeValue(rawValue: rawValue) {
+        if let value = SourceTypeValue(rawValue: rawValue) {
             self = value
         } else {
             return nil

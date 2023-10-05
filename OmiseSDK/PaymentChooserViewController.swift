@@ -153,7 +153,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
 
 extension PaymentChooserOption {
     // swiftlint:disable:next function_body_length
-    fileprivate static func paymentOptions(for sourceType: OMSSourceTypeValue) -> [PaymentChooserOption] {
+    fileprivate static func paymentOptions(for sourceType: SourceTypeValue) -> [PaymentChooserOption] {
         switch sourceType {
         case .trueMoney:
             return [.truemoney]
@@ -237,7 +237,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             updateShowingValues()
         }
     }
-    var allowedPaymentMethods: [OMSSourceTypeValue] = [] {
+    var allowedPaymentMethods: [SourceTypeValue] = [] {
         didSet {
             updateShowingValues()
         }
@@ -500,74 +500,74 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         allowedPaymentMethods = capability.supportedBackends.compactMap {
             switch $0.payment {
             case .alipay:
-                return OMSSourceTypeValue.alipay
+                return SourceTypeValue.alipay
             case .alipayCN:
-                return OMSSourceTypeValue.alipayCN
+                return SourceTypeValue.alipayCN
             case .alipayHK:
-                return OMSSourceTypeValue.alipayHK
+                return SourceTypeValue.alipayHK
             case .atome:
-                return OMSSourceTypeValue.atome
+                return SourceTypeValue.atome
             case .dana:
-                return OMSSourceTypeValue.dana
+                return SourceTypeValue.dana
             case .gcash:
-                return OMSSourceTypeValue.gcash
+                return SourceTypeValue.gcash
             case .kakaoPay:
-                return OMSSourceTypeValue.kakaoPay
+                return SourceTypeValue.kakaoPay
             case .touchNGoAlipayPlus:
-                return OMSSourceTypeValue.touchNGoAlipayPlus
+                return SourceTypeValue.touchNGoAlipayPlus
             case .touchNGo:
-                return OMSSourceTypeValue.touchNGo
+                return SourceTypeValue.touchNGo
             case .promptpay:
-                return OMSSourceTypeValue.promptPay
+                return SourceTypeValue.promptPay
             case .paynow:
-                return OMSSourceTypeValue.payNow
+                return SourceTypeValue.payNow
             case .truemoney:
-                return OMSSourceTypeValue.trueMoney
+                return SourceTypeValue.trueMoney
             case .points(let points):
-                return OMSSourceTypeValue(points.type)
+                return SourceTypeValue(points.type)
             case .installment(let brand, availableNumberOfTerms: _):
-                return OMSSourceTypeValue(brand.type)
+                return SourceTypeValue(brand.type)
             case .internetBanking(let bank):
-                return OMSSourceTypeValue(bank.type)
+                return SourceTypeValue(bank.type)
             case .billPayment(let billPayment):
-                return OMSSourceTypeValue(billPayment.type)
+                return SourceTypeValue(billPayment.type)
             case .eContext:
-                return OMSSourceTypeValue.eContext
+                return SourceTypeValue.eContext
             case .mobileBanking(let bank):
-                return OMSSourceTypeValue(bank.type)
+                return SourceTypeValue(bank.type)
             case .fpx:
-                return OMSSourceTypeValue.fpx
+                return SourceTypeValue.fpx
             case .rabbitLinepay:
-                return OMSSourceTypeValue.rabbitLinepay
+                return SourceTypeValue.rabbitLinepay
             case .ocbcPao:
-                return OMSSourceTypeValue.mobileBankingOCBCPAO
+                return SourceTypeValue.mobileBankingOCBCPAO
             case .ocbcDigital:
-                return OMSSourceTypeValue.mobileBankingOCBC
+                return SourceTypeValue.mobileBankingOCBC
             case .grabPay:
-                return OMSSourceTypeValue.grabPay
+                return SourceTypeValue.grabPay
             case .grabPayRms:
-                return OMSSourceTypeValue.grabPayRms
+                return SourceTypeValue.grabPayRms
             case .boost:
-                return OMSSourceTypeValue.boost
+                return SourceTypeValue.boost
             case .shopeePay:
                 // using ShopeePay Jump app as first priority ShopeePay source
                 let isShopeePayJumpAppExist = capability.supportedBackends.contains(
                   where: { $0.payment == Capability.Backend.Payment.shopeePayJumpApp }
                 )
                 if !isShopeePayJumpAppExist {
-                  return OMSSourceTypeValue.shopeePay
+                  return SourceTypeValue.shopeePay
                 }
                 return nil
             case .shopeePayJumpApp:
-                return OMSSourceTypeValue.shopeePayJumpApp
+                return SourceTypeValue.shopeePayJumpApp
             case .maybankQRPay:
-                return OMSSourceTypeValue.maybankQRPay
+                return SourceTypeValue.maybankQRPay
             case .duitNowQR:
-                return OMSSourceTypeValue.duitNowQR
+                return SourceTypeValue.duitNowQR
             case .duitNowOBW:
-                return OMSSourceTypeValue.duitNowOBW
+                return SourceTypeValue.duitNowOBW
             case .payPay:
-                return OMSSourceTypeValue.payPay
+                return SourceTypeValue.payPay
             case .card, .unknownSource:
                 return nil
             }

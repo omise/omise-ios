@@ -16,7 +16,7 @@ public struct Capability: Object {
         return backends[.card]
     }
 
-    public subscript(type: OMSSourceTypeValue) -> Capability.Backend? {
+    public subscript(type: SourceTypeValue) -> Capability.Backend? {
         return backends[.source(type)]
     }
 }
@@ -24,7 +24,7 @@ public struct Capability: Object {
 extension Capability {
     public static func ~= (lhs: Capability, rhs: CreateSourceParameter) -> Bool {
         func backend(from capability: Capability, for payment: PaymentInformation) -> Backend? {
-            if let paymentSourceType = OMSSourceTypeValue(payment.sourceType) {
+            if let paymentSourceType = SourceTypeValue(payment.sourceType) {
                 return capability[paymentSourceType]
             } else {
                 return nil
@@ -356,7 +356,7 @@ extension Capability.Backend {
 
     fileprivate enum BackendType: Codable, Hashable {
         case card
-        case source(OMSSourceTypeValue)
+        case source(SourceTypeValue)
         case unknown(sourceType: String)
 
         init(from decoder: Decoder) throws {
@@ -365,7 +365,7 @@ extension Capability.Backend {
             case creditCardBackendTypeValue:
                 self = .card
             case let value:
-                if let sourceType = OMSSourceTypeValue(value) {
+                if let sourceType = SourceTypeValue(value) {
                     self = .source(sourceType)
                 } else {
                     self = .unknown(sourceType: value)
@@ -412,31 +412,31 @@ extension Capability.Backend {
             case .touchNGo:
                 self = .source(.touchNGo)
             case .installment(let brand, availableNumberOfTerms: _):
-                if let sourceType = OMSSourceTypeValue(brand.type) {
+                if let sourceType = SourceTypeValue(brand.type) {
                     self = .source(sourceType)
                 } else {
                     return nil
                 }
             case .internetBanking(let banking):
-                if let sourceType = OMSSourceTypeValue(banking.type) {
+                if let sourceType = SourceTypeValue(banking.type) {
                     self = .source(sourceType)
                 } else {
                     return nil
                 }
             case .mobileBanking(let banking):
-                if let sourceType = OMSSourceTypeValue(banking.type) {
+                if let sourceType = SourceTypeValue(banking.type) {
                     self = .source(sourceType)
                 } else {
                     return nil
                 }
             case .billPayment(let billPayment):
-                if let sourceType = OMSSourceTypeValue(billPayment.type) {
+                if let sourceType = SourceTypeValue(billPayment.type) {
                     self = .source(sourceType)
                 } else {
                     return nil
                 }
             case .unknownSource(let sourceType, configurations: _):
-                if let sourceType = OMSSourceTypeValue(sourceType) {
+                if let sourceType = SourceTypeValue(sourceType) {
                     self = .source(sourceType)
                 } else {
                     return nil
@@ -448,7 +448,7 @@ extension Capability.Backend {
             case .truemoney:
                 self = .source(.trueMoney)
             case .points(let points):
-                if let sourceType = OMSSourceTypeValue(points.type) {
+                if let sourceType = SourceTypeValue(points.type) {
                     self = .source(sourceType)
                 } else {
                     return nil
