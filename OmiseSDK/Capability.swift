@@ -79,6 +79,7 @@ extension Capability {
             case fpx
             case rabbitLinepay
             case ocbcPao
+            case ocbcDigital
             case grabPay
             case grabPayRms
             case boost
@@ -160,6 +161,8 @@ extension Capability.Backend.Payment {
         case (.rabbitLinepay, .rabbitLinepay):
             return true
         case (.ocbcPao, .ocbcPao):
+            return true
+        case (.ocbcDigital, .ocbcDigital):
             return true
         case (.grabPay, .grabPay):
             return true
@@ -285,6 +288,8 @@ extension Capability.Backend {
             self.payment = .rabbitLinepay
         case .source(.mobileBankingOCBCPAO):
             self.payment = .ocbcPao
+        case .source(.mobileBankingOCBC):
+            self.payment = .ocbcDigital
         case .source(.grabPay):
             switch provider {
             case .rms:
@@ -330,7 +335,7 @@ extension Capability.Backend {
             try encoder.encodeJSONDictionary(configurations)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         // swiftlint:disable:next line_length
-        case .internetBanking, .alipay, .alipayCN, .alipayHK, .atome, .dana, .gcash, .kakaoPay, .touchNGoAlipayPlus, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .grabPay, .grabPayRms, .boost, .shopeePay, .shopeePayJumpApp, .maybankQRPay, .duitNowQR, .duitNowOBW, .payPay:
+        case .internetBanking, .alipay, .alipayCN, .alipayHK, .atome, .dana, .gcash, .kakaoPay, .touchNGoAlipayPlus, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .ocbcDigital, .grabPay, .grabPayRms, .boost, .shopeePay, .shopeePayJumpApp, .maybankQRPay, .duitNowQR, .duitNowOBW, .payPay:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
     }
@@ -414,6 +419,8 @@ extension Capability.Backend {
                 self = .source(.rabbitLinepay)
             case .ocbcPao:
                 self = .source(.mobileBankingOCBCPAO)
+            case .ocbcDigital:
+                self = .source(.mobileBankingOCBC)
             case .grabPay:
                 self = .source(.grabPay)
             case .grabPayRms:

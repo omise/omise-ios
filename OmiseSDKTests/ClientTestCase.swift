@@ -1,6 +1,6 @@
 import XCTest
 @testable import OmiseSDK
-import OmiseTestSDK
+@testable import OmiseTestSDK
 
 private let timeout: TimeInterval = 15.0
 

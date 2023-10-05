@@ -272,7 +272,10 @@ public enum PaymentInformation: Codable, Equatable {
     
     /// OCBC Pay Anyone Payment Source
     case ocbcPao
-    
+
+    /// OCBC Digital Payment Source
+    case ocbcDigital
+
     /// Boost Payment Source
     case boost
     
@@ -490,6 +493,9 @@ public enum PaymentInformation: Codable, Equatable {
         case .ocbcPao:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue, forKey: .type)
+        case .ocbcDigital:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.mobileBankingOCBC.rawValue, forKey: .type)
         case .grabPay:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.grabPay.rawValue, forKey: .type)
@@ -639,6 +645,8 @@ extension PaymentInformation {
             return OMSSourceTypeValue.rabbitLinepay.rawValue
         case .ocbcPao:
             return OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue
+        case .ocbcDigital:
+            return OMSSourceTypeValue.mobileBankingOCBC.rawValue
         case .grabPay:
             return OMSSourceTypeValue.grabPay.rawValue
         case .boost:

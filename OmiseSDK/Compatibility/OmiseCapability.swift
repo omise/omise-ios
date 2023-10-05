@@ -103,6 +103,9 @@ public class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPaym
     static let ocbcPaoSourceBackendPayment =
         __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.mobileBankingOCBCPAO)
 
+    static let ocbcDigitalSourceBackendPayment =
+        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.mobileBankingOCBC)
+
     static let grabPaySourceBackendPayment =
         __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.grabPay)
 
@@ -209,6 +212,8 @@ extension __OmiseCapabilityBackendPayment {
             return __OmiseCapabilitySourceBackendPayment.rabbitLinepaySourceBackendPayment
         case .ocbcPao:
             return __OmiseCapabilitySourceBackendPayment.ocbcPaoSourceBackendPayment
+        case .ocbcDigital:
+            return __OmiseCapabilitySourceBackendPayment.ocbcDigitalSourceBackendPayment
         case .grabPay, .grabPayRms:
             return __OmiseCapabilitySourceBackendPayment.grabPaySourceBackendPayment
         case .boost:

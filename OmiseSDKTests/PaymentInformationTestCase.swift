@@ -27,8 +27,13 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "THB",
+                  "email" : null,
                   "installment_term" : 6,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "installment_bay"
                 }
                 """, encodedJSONString)
@@ -46,8 +51,13 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 10000,
                   "currency" : "THB",
+                  "email" : null,
                   "installment_term" : 6,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "installment_first_choice"
                 }
                 """, encodedJSONString)
@@ -65,8 +75,13 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 100000,
                   "currency" : "THB",
+                  "email" : null,
                   "installment_term" : 6,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "installment_bbl"
                 }
                 """, encodedJSONString)
@@ -84,8 +99,13 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 500000,
                   "currency" : "MYR",
+                  "email" : null,
                   "installment_term" : 6,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "installment_mbb"
                 }
                 """, encodedJSONString)
@@ -103,8 +123,13 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000,
                   "currency" : "THB",
+                  "email" : null,
                   "installment_term" : 6,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "installment_ktc"
                 }
                 """, encodedJSONString)
@@ -122,8 +147,13 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000,
                   "currency" : "THB",
+                  "email" : null,
                   "installment_term" : 6,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "installment_kbank"
                 }
                 """, encodedJSONString)
@@ -141,8 +171,13 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 3000,
                   "currency" : "THB",
+                  "email" : null,
                   "installment_term" : 9,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "installment_scb"
                 }
                 """, encodedJSONString)
@@ -160,8 +195,13 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 3000,
                   "currency" : "THB",
+                  "email" : null,
                   "installment_term" : 6,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "installment_citi"
                 }
                 """, encodedJSONString)
@@ -179,8 +219,13 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 3000,
                   "currency" : "THB",
+                  "email" : null,
                   "installment_term" : 6,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "installment_ttb"
                 }
                 """, encodedJSONString)
@@ -198,8 +243,13 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 3000,
                   "currency" : "THB",
+                  "email" : null,
                   "installment_term" : 6,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "installment_uob"
                 }
                 """, encodedJSONString)
@@ -220,7 +270,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "THB",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "internet_banking_bay"
                 }
                 """, encodedJSONString)
@@ -237,7 +292,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000,
                   "currency" : "THB",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "internet_banking_bbl"
                 }
                 """, encodedJSONString)
@@ -258,12 +318,17 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "THB",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "mobile_banking_scb"
                 }
                 """, encodedJSONString)
         }
-        
+
         do {
             let sourceParameter = Source.CreateParameter(paymentInformation: .mobileBanking(.kbank),
                                                          amount: 10_000_00,
@@ -275,12 +340,17 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "THB",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "mobile_banking_kbank"
                 }
                 """, encodedJSONString)
         }
-        
+
         do {
             let sourceParameter = Source.CreateParameter(paymentInformation: .ocbcPao,
                                                          amount: 10_000_00,
@@ -292,12 +362,39 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "SGD",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "mobile_banking_ocbc_pao"
                 }
                 """, encodedJSONString)
         }
-        
+
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .ocbcDigital,
+                                                         amount: 10_000_00,
+                                                         currency: .sgd)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "currency" : "SGD",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
+                  "platform_type" : "IOS",
+                  "shipping" : null,
+                  "type" : "mobile_banking_ocbc"
+                }
+                """, encodedJSONString)
+        }
+
         do {
             let sourceParameter = Source.CreateParameter(paymentInformation: .mobileBanking(.bay),
                                                          amount: 10_000_00,
@@ -309,12 +406,17 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "THB",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "mobile_banking_bay"
                 }
                 """, encodedJSONString)
         }
-        
+
         do {
             let sourceParameter = Source.CreateParameter(paymentInformation: .mobileBanking(.bbl),
                                                          amount: 10_000_00,
@@ -326,12 +428,17 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "THB",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "mobile_banking_bbl"
                 }
                 """, encodedJSONString)
         }
-        
+
         do {
             let sourceParameter = Source.CreateParameter(paymentInformation: .mobileBanking(.ktb),
                                                          amount: 10_000_00,
@@ -343,7 +450,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "THB",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "mobile_banking_ktb"
                 }
                 """, encodedJSONString)
@@ -369,7 +481,12 @@ class PaymentInformationTestCase: XCTestCase {
                   "amount" : 1000000,
                   "barcode" : "barcode",
                   "currency" : "THB",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "store_id" : "store_id_1",
                   "store_name" : "Store Name",
                   "terminal_id" : "Terminal 1",
@@ -390,7 +507,12 @@ class PaymentInformationTestCase: XCTestCase {
                   "amount" : 1000000,
                   "barcode" : "barcode",
                   "currency" : "THB",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "terminal_id" : "Terminal 1",
                   "type" : "barcode_alipay"
                 }
@@ -409,7 +531,12 @@ class PaymentInformationTestCase: XCTestCase {
                   "amount" : 1000000,
                   "barcode" : "barcode",
                   "currency" : "THB",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "barcode_alipay"
                 }
                 """, encodedJSONString)
@@ -430,8 +557,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "THB",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
                   "phone_number" : "0123456789",
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "truemoney"
                 }
                 """, encodedJSONString)
@@ -451,7 +582,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "THB",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "points_citi"
                 }
                 """, encodedJSONString)
@@ -474,7 +610,11 @@ class PaymentInformationTestCase: XCTestCase {
                   "bank" : "uob",
                   "currency" : "MYR",
                   "email" : "support@omise.co",
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "fpx"
                 }
                 """, encodedJSONString)
@@ -495,7 +635,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "THB",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "alipay_cn"
                 }
                 """, encodedJSONString)
@@ -512,7 +657,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "HKD",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "alipay_hk"
                 }
                 """, encodedJSONString)
@@ -529,7 +679,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "JPY",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "dana"
                 }
                 """, encodedJSONString)
@@ -546,7 +701,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "USD",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "gcash"
                 }
                 """, encodedJSONString)
@@ -563,7 +723,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "USD",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "kakaopay"
                 }
                 """, encodedJSONString)
@@ -580,12 +745,17 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "SGD",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "touch_n_go"
                 }
                 """, encodedJSONString)
         }
-        
+
         do {
             let sourceParameter = Source.CreateParameter(paymentInformation: .rabbitLinepay,
                                                          amount: 50_000_00,
@@ -597,7 +767,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 5000000,
                   "currency" : "THB",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "rabbit_linepay"
                 }
                 """, encodedJSONString)
@@ -614,7 +789,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 100000,
                   "currency" : "SGD",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "grabpay"
                 }
                 """, encodedJSONString)
@@ -636,47 +816,90 @@ class PaymentInformationTestCase: XCTestCase {
                   "amount" : 1000000,
                   "bank" : "affin",
                   "currency" : "MYR",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "duitnow_obw"
                 }
                 """, encodedJSONString)
         }
     }
-    
-//    func testEncodeAtomeSourceParameter() throws {
-//        let encoder = PaymentInformationTestCase.makeJSONEncoder()
-//
-//        do {
-//            let shipping = PaymentInformation.Atome.ShippingAddress(
-//                country: "TH",
-//                city: "Bangkok",
-//                postalCode: "10200",
-//                state: "---",
-//                street1: "4 Sukhumvit 103 rd.",
-//                street2: "")
-//
-//            let items = [PaymentInformation.Atome.Item(sku: "1", category: "1", name: "1", quantity: 1, amount: 1000000, itemUri: "1", imageUri: "!", brand: "1")]
-//
-//            let atome = PaymentInformation.Atome(phoneNumber: "+66800000101",
-//                                                 shippingAddress: shipping,
-//                                                 items: items)
-//
-//            let sourceParameter = Source.CreateParameter(paymentInformation: .atome(atome),
-//                                                         amount: 10_000_00,
-//                                                         currency: .thb)
-//            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
-//            XCTAssertEqual(
-//                """
-//                {
-//                  "amount" : 1000000,
-//                  "currency" : "THB",
-//                  "platform_type" : "IOS",
-//                  "type" : "atome"
-//                }
-//                """, encodedJSONString)
-//        }
-//    }
-    
+
+    func testEncodeAtomeSourceParameter() throws {
+        let encoder = PaymentInformationTestCase.makeJSONEncoder()
+
+        do {
+            let shipping = PaymentInformation.Atome.ShippingAddress(
+                country: "TH",
+                city: "Bangkok",
+                postalCode: "10200",
+                state: "---",
+                street1: "4 Sukhumvit 103 rd.",
+                street2: "")
+
+            let items = [
+                PaymentInformation.Atome.Item(
+                    sku: "1",
+                    category: "1",
+                    name: "1",
+                    quantity: 1,
+                    amount: 1000000,
+                    itemUri: "1",
+                    imageUri: "!",
+                    brand: "1")
+            ]
+
+            let atome = PaymentInformation.Atome(phoneNumber: "+66800000101",
+                                                 shippingAddress: shipping,
+                                                 items: items)
+
+            let sourceParameter = Source.CreateParameter(paymentInformation: .atome(atome),
+                                                         amount: 10_000_00,
+                                                         currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "currency" : "THB",
+                  "email" : null,
+                  "items" : [
+                {
+                "amount" : 1000000,
+                "brand" : "1",
+                "category" : "1",
+                "image_uri" : "!",
+                "item_uri" : "1",
+                "name" : "1",
+                "quantity" : 1,
+                "sku" : "1"
+                }
+                ],
+                  "name" : null,
+                  "phone_number" : "+66800000101",
+                  "platform_type" : "IOS",
+                  "shipping" : {
+                  "city" : "Bangkok",
+                  "country" : "TH",
+                  "postal_code" : "10200",
+                  "state" : "---",
+                  "street1" : "4 Sukhumvit 103 rd.",
+                  "street2" : ""
+                },
+                  "type" : "atome"
+                }
+                """
+                    .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                    .replacingOccurrences(of: " ", with: ""),
+                encodedJSONString?
+                    .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                    .replacingOccurrences(of: " ", with: ""))
+        }
+    }
+
     func testEncodePayPaySourceParameter() throws {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
@@ -690,7 +913,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 1000000,
                   "currency" : "JPY",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "paypay"
                 }
                 """, encodedJSONString)
@@ -711,7 +939,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 30000,
                   "currency" : "THB",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "alipay"
                 }
                 """, encodedJSONString)
@@ -728,7 +961,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 12345,
                   "currency" : "THB",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "bill_payment_tesco_lotus"
                 }
                 """, encodedJSONString)
@@ -745,7 +983,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 12345,
                   "currency" : "MYR",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "boost"
                 }
                 """, encodedJSONString)
@@ -762,7 +1005,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 12345,
                   "currency" : "MYR",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "shopeepay"
                 }
                 """, encodedJSONString)
@@ -779,7 +1027,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 12345,
                   "currency" : "MYR",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "maybank_qr"
                 }
                 """, encodedJSONString)
@@ -796,7 +1049,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 12345,
                   "currency" : "MYR",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "duitnow_qr"
                 }
                 """, encodedJSONString)
@@ -813,7 +1071,12 @@ class PaymentInformationTestCase: XCTestCase {
                 {
                   "amount" : 12345,
                   "currency" : "MYR",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
                   "platform_type" : "IOS",
+                  "shipping" : null,
                   "type" : "shopeepay_jumpapp"
                 }
                 """, encodedJSONString)
