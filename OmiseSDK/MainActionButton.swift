@@ -1,7 +1,7 @@
 import UIKit
 
 @IBDesignable
-@objc(OMSMainActionButton) class MainActionButton: UIButton {
+class MainActionButton: UIButton {
     
     @IBInspectable var cornerRadius: CGFloat = 0.0 {
         didSet {

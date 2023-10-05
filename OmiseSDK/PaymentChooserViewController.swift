@@ -232,7 +232,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     var flowSession: PaymentCreatorFlowSession?
     var duitNowOBWBanks: [PaymentInformation.DuitNowOBW.Bank] = PaymentInformation.DuitNowOBW.Bank.allCases
 
-    @objc var showsCreditCardPayment = true {
+    var showsCreditCardPayment = true {
         didSet {
             updateShowingValues()
         }

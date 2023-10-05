@@ -13,7 +13,7 @@ class PaymentSettingTableViewController: UITableViewController {
         return numberFormatter
     }()
 
-    @objc var currentAmount: Int64 = 0
+    var currentAmount: Int64 = 0
     var currentCurrency: Currency = .thb {
         willSet {
             guard isViewLoaded else {
@@ -43,7 +43,7 @@ class PaymentSettingTableViewController: UITableViewController {
         }
     }
 
-    @objc var usesCapabilityDataForPaymentMethods = true {
+    var usesCapabilityDataForPaymentMethods = true {
         didSet {
             guard isViewLoaded else {
                 return

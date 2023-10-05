@@ -1,8 +1,6 @@
 import Foundation
 
 /// Brand of the Card Network
-@objc(OMSCardBrand)
-// swiftlint:disable:next attributes
 public enum CardBrand: Int, CustomStringConvertible, Codable {
     
     /// VISA card newtwork brand
@@ -125,20 +123,5 @@ public enum CardBrand: Int, CustomStringConvertible, Codable {
         default:
             throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid Card Brand value")
         }
-    }
-}
-
-// swiftlint:disable:next type_name
-@objc(OMSCardBrandHelper) public final class __OMSCardBrand: NSObject {
-    // swiftlint:disable:next identifier_name
-    @objc(patternForBrand:) public static func __patternForBrand(brand: CardBrand) -> String {
-        return brand.pattern
-    }
-    
-    // swiftlint:disable:next identifier_name
-    @objc(validLengthsForBrand:) public static func __validLengthsForBrand(brand: CardBrand) -> NSRange {
-        let range = brand.validLengths
-        
-        return NSRange(range)
     }
 }

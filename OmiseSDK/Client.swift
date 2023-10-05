@@ -2,7 +2,7 @@ import UIKit
 import os
 
 // swiftlint:disable file_length
-@objc(OMSSDKClient) public class Client: NSObject {
+public class Client: NSObject {
     // Shared latest capability requested from API
     static var sharedCapability: Capability? {
         didSet {
@@ -33,7 +33,7 @@ import os
     /// - Parameters:
     ///   - publicKey: Public Key for this Client used for calling the Omise API. The key must have `pkey` prefix
     ///   - queue: OperationQueue which the client uses for the network related operations
-    @objc public init(publicKey: String, queue: OperationQueue) {
+    public init(publicKey: String, queue: OperationQueue) {
         if publicKey.hasPrefix("pkey_") {
             self.publicKey = publicKey
         } else {
@@ -54,7 +54,7 @@ import os
     ///
     /// - Parameters:
     ///   - publicKey: Public Key for this Client used for calling the Omise API. The key must have `pkey` prefix
-    @objc public convenience init(publicKey: String) {
+    public convenience init(publicKey: String) {
         self.init(publicKey: publicKey, queue: OperationQueue())
     }
     

@@ -15,8 +15,6 @@ protocol AtomeFormViewControllerInterface {
     func onSubmitButtonTapped()
 }
 
-@objc(OMSAtomeFormViewController)
-// swiftlint:disable:next attributes
 class AtomeFormViewController: UIViewController, PaymentChooserUI {
     struct Style {
         var backgroundColorForDisabledNextButton = UIColor(0xE4E7ED)

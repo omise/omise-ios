@@ -1,7 +1,7 @@
 import XCTest
 
 extension XCTestCase {
-    @objc static func fixturesData(forFilename filename: String) throws -> Data {
+    static func fixturesData(forFilename filename: String) throws -> Data {
         let bundle = Bundle(for: ClientTestCase.self)
         let path = try XCTUnwrap(bundle.url(forResource: "Fixtures/objects/\(filename)", withExtension: "json"))
         let data = try Data(contentsOf: path)

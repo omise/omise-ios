@@ -59,7 +59,7 @@
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MM/YY" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Par-EA-T3D" customClass="OMSCardExpiryDateTextField">
+                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MM/YY" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Par-EA-T3D" customClass="CardExpiryDateTextField" customModule="OmiseSDK" customModuleProvider="target">
                                         <rect key="frame" x="16" y="214.66666666666669" width="151.66666666666666" height="22"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -86,7 +86,7 @@
                                             <action selector="validateTextFieldDataOf:" destination="ALK-ZP-CXg" eventType="editingDidEnd" id="5fL-3c-xl0"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y1l-QK-aPc" customClass="OMSCardCVVTextField">
+                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y1l-QK-aPc" customClass="CardCVVTextField" customModule="OmiseSDK" customModuleProvider="target">
                                         <rect key="frame" x="207.66666666666663" y="214.66666666666669" width="151.33333333333337" height="22"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -113,7 +113,7 @@
                                             <action selector="validateTextFieldDataOf:" destination="ALK-ZP-CXg" eventType="editingDidEnd" id="17j-R2-Pw3"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AJd-kX-GAq" customClass="OMSCardNameTextField">
+                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AJd-kX-GAq" customClass="CardNameTextField" customModule="OmiseSDK" customModuleProvider="target">
                                         <rect key="frame" x="16" y="129.33333333333334" width="343" height="22"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -140,7 +140,7 @@
                                             <action selector="validateTextFieldDataOf:" destination="ALK-ZP-CXg" eventType="editingDidEnd" id="Qhj-Qx-gAl"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PBr-uW-pM8" customClass="OMSCardNumberTextField">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PBr-uW-pM8" customClass="CardNumberTextField" customModule="OmiseSDK" customModuleProvider="target">
                                         <rect key="frame" x="16" y="44" width="343" height="22"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -173,7 +173,7 @@
                                             <constraint firstAttribute="height" priority="250" constant="20" id="ePZ-xr-8eG"/>
                                         </constraints>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZPa-NN-y1M" customClass="OMSMainActionButton">
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZPa-NN-y1M" customClass="MainActionButton" customModule="OmiseSDK" customModuleProvider="target">
                                         <rect key="frame" x="16" y="302.66666666666669" width="343" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="p5t-Hl-v8s"/>
@@ -1675,7 +1675,7 @@
                                         <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1dv-2d-6Zi" customClass="OMSMainActionButton">
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1dv-2d-6Zi" customClass="MainActionButton" customModule="OmiseSDK" customModuleProvider="target">
                                         <rect key="frame" x="16" y="295.66666666666669" width="343" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="5XS-Ra-w18"/>
@@ -2485,7 +2485,7 @@
                                             <action selector="validateTextFieldDataOf:" destination="hC0-5j-tkj" eventType="editingDidEnd" id="qeQ-Ek-IMb"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mE3-3u-rvg" customClass="OMSMainActionButton">
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mE3-3u-rvg" customClass="MainActionButton" customModule="OmiseSDK" customModuleProvider="target">
                                         <rect key="frame" x="16" y="274" width="343" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="WOU-ZA-4eO"/>
@@ -2944,7 +2944,7 @@
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1JF-Jq-C50" customClass="OMSOmiseTextField">
+                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1JF-Jq-C50" customClass="OmiseTextField" customModule="OmiseSDK" customModuleProvider="target">
                                         <rect key="frame" x="16" y="213.33333333333331" width="343" height="22"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2973,7 +2973,7 @@
                                         <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tI6-gP-6iQ" customClass="OMSMainActionButton">
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tI6-gP-6iQ" customClass="MainActionButton" customModule="OmiseSDK" customModuleProvider="target">
                                         <rect key="frame" x="16" y="273.66666666666669" width="343" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="XG2-qP-KC2"/>
@@ -3097,7 +3097,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="rLy-XG-aKO">
-                            <rect key="frame" x="0.0" y="1230" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="1090" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -3672,6 +3672,12 @@
         <designable name="AJd-kX-GAq">
             <size key="intrinsicContentSize" width="5" height="22"/>
         </designable>
+        <designable name="CD2-gj-4i6">
+            <size key="intrinsicContentSize" width="5" height="22"/>
+        </designable>
+        <designable name="OTm-3S-Jk9">
+            <size key="intrinsicContentSize" width="5" height="22"/>
+        </designable>
         <designable name="PBr-uW-pM8">
             <size key="intrinsicContentSize" width="5" height="22"/>
         </designable>
@@ -3689,6 +3695,12 @@
         </designable>
         <designable name="tI6-gP-6iQ">
             <size key="intrinsicContentSize" width="38" height="33"/>
+        </designable>
+        <designable name="wXP-YQ-VDL">
+            <size key="intrinsicContentSize" width="5" height="22"/>
+        </designable>
+        <designable name="y98-SD-aEV">
+            <size key="intrinsicContentSize" width="5" height="22"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
