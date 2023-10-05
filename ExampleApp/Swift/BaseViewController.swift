@@ -1,5 +1,5 @@
 //
-//  OMSBaseViewController.swift
+//  BaseViewController.swift
 //  OmiseSDK
 //
 //  Created by Andrei Solovev on 4/10/23.
@@ -9,16 +9,16 @@
 import UIKit
 import OmiseSDK
 
-enum OMSCodePathMode {
+enum CodePathMode {
     case storyboard
     case code
 }
 
-class OMSBaseViewController: UIViewController {
+class BaseViewController: UIViewController {
 
     @IBOutlet private var modeChooser: UISegmentedControl!
 
-    var currentCodePathMode: OMSCodePathMode = .storyboard
+    var currentCodePathMode: CodePathMode = .storyboard
     var paymentAmount: Int64 = 0
     var paymentCurrencyCode: String = ""
     var usesCapabilityDataForPaymentMethods = false

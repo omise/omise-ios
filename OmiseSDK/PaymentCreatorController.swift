@@ -9,13 +9,6 @@ public protocol PaymentCreatorControllerDelegate: NSObjectProtocol {
     func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController)
 }
 
-public protocol OMSPaymentCreatorControllerDelegate: NSObjectProtocol {
-    func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didCreateToken token: Token)
-    func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didCreateSource source: Source)
-    func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didFailWithError error: Error)
-    func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController)
-}
-
 public enum Payment {
     case token(Token)
     case source(Source)

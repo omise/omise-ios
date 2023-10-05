@@ -1,7 +1,7 @@
 import UIKit
 import OmiseSDK
 
-class ProductDetailViewController: OMSBaseViewController {
+class ProductDetailViewController: BaseViewController {
     private let publicKey = LocalConfig.default.publicKey
     
     private var capability: Capability?

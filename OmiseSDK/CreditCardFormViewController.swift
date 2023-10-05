@@ -18,21 +18,6 @@ public protocol CreditCardFormViewControllerDelegate: AnyObject {
 
     func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController)
 }
-public protocol OMSCreditCardFormViewControllerDelegate: AnyObject {
-    /// Delegate method for receiving token data when card tokenization succeeds.
-    /// - parameter token: `OmiseToken` instance created from supplied credit card data.
-    /// - seealso: [Tokens API](https://www.omise.co/tokens-api)
-    func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token)
-
-    /// Delegate method for receiving error information when card tokenization failed.
-    /// This allows you to have fine-grained control over error handling when setting
-    /// `handleErrors` to `false`.
-    /// - parameter error: The error that occurred during tokenization.
-    /// - note: This delegate method will *never* be called if `handleErrors` property is set to `true`.
-    func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: NSError)
-
-    func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController)
-}
 
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.

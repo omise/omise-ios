@@ -39,7 +39,7 @@
 		7509D4F52A1D2F550050AB38 /* AtomeFormViewContextMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E12A1C876B0050AB38 /* AtomeFormViewContextMockup.swift */; };
 		75131F862AC2BD9D008BCB17 /* UIViewController+NavigationBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75131F852AC2BD9D008BCB17 /* UIViewController+NavigationBarStyle.swift */; };
 		752E40C42ACD420C00B62A49 /* OMSSourceTypeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E40C32ACD420C00B62A49 /* OMSSourceTypeValue.swift */; };
-		752E40C72ACD429B00B62A49 /* OMSBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E40C52ACD426E00B62A49 /* OMSBaseViewController.swift */; };
+		752E40C72ACD429B00B62A49 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E40C52ACD426E00B62A49 /* BaseViewController.swift */; };
 		753279382A31B40F008048AD /* CountryListViewModelMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753279372A31B40F008048AD /* CountryListViewModelMockup.swift */; };
 		75348D4E29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */; };
 		75405A782A25D327008C21F6 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A772A25D327008C21F6 /* String+Helpers.swift */; };
@@ -228,7 +228,7 @@
 		7509D4E62A1C8E3D0050AB38 /* AtomeFormViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewModelTests.swift; sourceTree = "<group>"; };
 		75131F852AC2BD9D008BCB17 /* UIViewController+NavigationBarStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+NavigationBarStyle.swift"; sourceTree = "<group>"; };
 		752E40C32ACD420C00B62A49 /* OMSSourceTypeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMSSourceTypeValue.swift; sourceTree = "<group>"; };
-		752E40C52ACD426E00B62A49 /* OMSBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMSBaseViewController.swift; sourceTree = "<group>"; };
+		752E40C52ACD426E00B62A49 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		753279372A31B40F008048AD /* CountryListViewModelMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListViewModelMockup.swift; sourceTree = "<group>"; };
 		75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+OmiseSDK.swift"; sourceTree = "<group>"; };
 		75405A772A25D327008C21F6 /* String+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Helpers.swift"; sourceTree = "<group>"; };
@@ -290,8 +290,6 @@
 		8A5D59851D5317E0005D3346 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/OmiseSDK.strings; sourceTree = "<group>"; };
 		8A5D59871D5317E1005D3346 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/OmiseSDK.strings; sourceTree = "<group>"; };
 		8A60619920B2A8D400CF90D5 /* PAN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAN.swift; sourceTree = "<group>"; };
-		8A6AA06A216B957D00E49E5E /* OMSBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OMSBaseViewController.h; sourceTree = "<group>"; };
-		8A6AA06B216B957D00E49E5E /* OMSBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSBaseViewController.m; sourceTree = "<group>"; };
 		8A72CD5D2162358400F14F76 /* PaymentOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentOptionTableViewCell.swift; sourceTree = "<group>"; };
 		8A7567642178956800C684C9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8A76791E214663560085DE3C /* PaymentUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentUI.swift; sourceTree = "<group>"; };
@@ -684,7 +682,7 @@
 		8A723A672164D80200D902F5 /* Swift */ = {
 			isa = PBXGroup;
 			children = (
-				752E40C52ACD426E00B62A49 /* OMSBaseViewController.swift */,
+				752E40C52ACD426E00B62A49 /* BaseViewController.swift */,
 				229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */,
 				8AF56E61226878070097CFEE /* CustomCreditCardFormViewController.swift */,
 			);
@@ -694,8 +692,6 @@
 		8AB3B85F216DCF5C006497B5 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				8A6AA06A216B957D00E49E5E /* OMSBaseViewController.h */,
-				8A6AA06B216B957D00E49E5E /* OMSBaseViewController.m */,
 				8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */,
 				8A40DA2A216B53E900749F45 /* Tools.swift */,
 				75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */,
@@ -1096,7 +1092,7 @@
 				229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */,
 				8AF56E62226878070097CFEE /* CustomCreditCardFormViewController.swift in Sources */,
 				75DAD8902A0BB8D80098AF96 /* LocalConfig.swift in Sources */,
-				752E40C72ACD429B00B62A49 /* OMSBaseViewController.swift in Sources */,
+				752E40C72ACD429B00B62A49 /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

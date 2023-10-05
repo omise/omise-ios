@@ -351,9 +351,6 @@ extension Capability.Backend {
 
 private let creditCardBackendTypeValue = "card"
 extension Capability.Backend {
-    struct OMSSourceTypeValueError: Error {
-    }
-
     fileprivate enum BackendType: Codable, Hashable {
         case card
         case source(SourceTypeValue)
