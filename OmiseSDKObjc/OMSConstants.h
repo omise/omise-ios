@@ -7,6 +7,7 @@ extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInternetBankingBAY;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInternetBankingBBL;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingSCB;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingOCBCPAO;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingOCBC;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingBAY;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingBBL;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingKTB;
