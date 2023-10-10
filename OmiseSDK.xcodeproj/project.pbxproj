@@ -38,7 +38,7 @@
 		7509D4F42A1D2C3E0050AB38 /* AtomeFormViewModelMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E32A1C89F10050AB38 /* AtomeFormViewModelMockup.swift */; };
 		7509D4F52A1D2F550050AB38 /* AtomeFormViewContextMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E12A1C876B0050AB38 /* AtomeFormViewContextMockup.swift */; };
 		75131F862AC2BD9D008BCB17 /* UIViewController+NavigationBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75131F852AC2BD9D008BCB17 /* UIViewController+NavigationBarStyle.swift */; };
-		752E40C42ACD420C00B62A49 /* OMSSourceTypeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E40C32ACD420C00B62A49 /* OMSSourceTypeValue.swift */; };
+		752E40C42ACD420C00B62A49 /* SourceTypeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E40C32ACD420C00B62A49 /* SourceTypeValue.swift */; };
 		752E40C72ACD429B00B62A49 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E40C52ACD426E00B62A49 /* BaseViewController.swift */; };
 		753279382A31B40F008048AD /* CountryListViewModelMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753279372A31B40F008048AD /* CountryListViewModelMockup.swift */; };
 		75348D4E29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */; };
@@ -81,7 +81,6 @@
 		75F2A0A02A13B0DB0038FA54 /* UIKitViewPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A09F2A13B0DB0038FA54 /* UIKitViewPresentable.swift */; };
 		75F2A0A22A13B0E30038FA54 /* UIKitViewControllerPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0A12A13B0E30038FA54 /* UIKitViewControllerPresentable.swift */; };
 		75F2A0A62A13B70F0038FA54 /* OmiseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062F1CFEA7E4004BCF51 /* OmiseTextField.swift */; };
-		75F2A0A82A13B73B0038FA54 /* Swift Version Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatibility.swift */; };
 		75F2A0B02A1A5BF30038FA54 /* ProxyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0AF2A1A5BF30038FA54 /* ProxyProperty.swift */; };
 		75F2A0B22A1A5E780038FA54 /* AtomeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B12A1A5E780038FA54 /* AtomeInputView.swift */; };
 		75F2A0B72A1A60630038FA54 /* AtomeFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0A42A13B1470038FA54 /* AtomeFormViewController.swift */; };
@@ -115,7 +114,6 @@
 		8A7567652178956800C684C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7567642178956800C684C9 /* Main.storyboard */; };
 		8A76791F214663560085DE3C /* PaymentUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A76791E214663560085DE3C /* PaymentUI.swift */; };
 		8A776647214A5FC60029D166 /* NoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A776646214A5FC60029D166 /* NoticeView.xib */; };
-		8A7A9EC0216642D100F12D86 /* Swift Version Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBF216642D100F12D86 /* Swift Version Compatibility.swift */; };
 		8AC1D3A32139224D0051F966 /* InternetBankingSourceChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC1D3A22139224D0051F966 /* InternetBankingSourceChooserViewController.swift */; };
 		8AC1D3A5213922570051F966 /* InstallmentBankingSourceChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC1D3A4213922570051F966 /* InstallmentBankingSourceChooserViewController.swift */; };
 		8AC1D3A7213941C80051F966 /* InstallmentsNumberOfTermsChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC1D3A6213941C80051F966 /* InstallmentsNumberOfTermsChooserViewController.swift */; };
@@ -227,7 +225,7 @@
 		7509D4E32A1C89F10050AB38 /* AtomeFormViewModelMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewModelMockup.swift; sourceTree = "<group>"; };
 		7509D4E62A1C8E3D0050AB38 /* AtomeFormViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewModelTests.swift; sourceTree = "<group>"; };
 		75131F852AC2BD9D008BCB17 /* UIViewController+NavigationBarStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+NavigationBarStyle.swift"; sourceTree = "<group>"; };
-		752E40C32ACD420C00B62A49 /* OMSSourceTypeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMSSourceTypeValue.swift; sourceTree = "<group>"; };
+		752E40C32ACD420C00B62A49 /* SourceTypeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTypeValue.swift; sourceTree = "<group>"; };
 		752E40C52ACD426E00B62A49 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		753279372A31B40F008048AD /* CountryListViewModelMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListViewModelMockup.swift; sourceTree = "<group>"; };
 		75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+OmiseSDK.swift"; sourceTree = "<group>"; };
@@ -297,7 +295,6 @@
 		8A776657214AA4E70029D166 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ja; path = ja.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		8A776658214AA4F10029D166 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Error.strings; sourceTree = "<group>"; };
 		8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSettingTableViewController.swift; sourceTree = "<group>"; };
-		8A7A9EBF216642D100F12D86 /* Swift Version Compatibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift Version Compatibility.swift"; sourceTree = "<group>"; };
 		8AC1D3A22139224D0051F966 /* InternetBankingSourceChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetBankingSourceChooserViewController.swift; sourceTree = "<group>"; };
 		8AC1D3A4213922570051F966 /* InstallmentBankingSourceChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentBankingSourceChooserViewController.swift; sourceTree = "<group>"; };
 		8AC1D3A6213941C80051F966 /* InstallmentsNumberOfTermsChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentsNumberOfTermsChooserViewController.swift; sourceTree = "<group>"; };
@@ -404,10 +401,9 @@
 				8A0927841D535548008D393F /* Library */,
 				8A2BE95720A9A8F1000CEB60 /* Models */,
 				8A2BE95820A9A8FE000CEB60 /* Views */,
-				8AD0609120B550B90074894E /* Compatibility */,
 				F6FE863F25E49BC900C7A4DE /* Resources */,
 				98FF99BA2577789800476487 /* Configuration.swift */,
-				752E40C32ACD420C00B62A49 /* OMSSourceTypeValue.swift */,
+				752E40C32ACD420C00B62A49 /* SourceTypeValue.swift */,
 			);
 			path = OmiseSDK;
 			sourceTree = "<group>";
@@ -419,8 +415,8 @@
 				75DAD8922A0BC9540098AF96 /* Config.local.plist */,
 				22D480AB1D0EB29C00544CE1 /* Info.plist */,
 				229E14541D0EBAB5000511DE /* AppDelegate.swift */,
-				8A723A672164D80200D902F5 /* Swift */,
-				8AB3B85F216DCF5C006497B5 /* Shared */,
+				8A723A672164D80200D902F5 /* Views */,
+				8AB3B85F216DCF5C006497B5 /* Models */,
 			);
 			path = ExampleApp;
 			sourceTree = "<group>";
@@ -679,32 +675,24 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		8A723A672164D80200D902F5 /* Swift */ = {
+		8A723A672164D80200D902F5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				752E40C52ACD426E00B62A49 /* BaseViewController.swift */,
 				229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */,
 				8AF56E61226878070097CFEE /* CustomCreditCardFormViewController.swift */,
+				8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */,
 			);
-			path = Swift;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		8AB3B85F216DCF5C006497B5 /* Shared */ = {
+		8AB3B85F216DCF5C006497B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */,
 				8A40DA2A216B53E900749F45 /* Tools.swift */,
 				75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */,
 			);
-			path = Shared;
-			sourceTree = "<group>";
-		};
-		8AD0609120B550B90074894E /* Compatibility */ = {
-			isa = PBXGroup;
-			children = (
-				8A7A9EBF216642D100F12D86 /* Swift Version Compatibility.swift */,
-			);
-			path = Compatibility;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		8ADAA9AB20B71EC400DD7CCF /* CommonCrypto */ = {
@@ -1021,7 +1009,6 @@
 				2220F1AA1D0FEE85008CD89F /* OmiseError.swift in Sources */,
 				75405A8D2A26340E008C21F6 /* UIView+Helpers.swift in Sources */,
 				73F9BA4B25E6053700F55CA8 /* FPXFormViewController.swift in Sources */,
-				8A7A9EC0216642D100F12D86 /* Swift Version Compatibility.swift in Sources */,
 				8A0A67E821383614006356B7 /* PaymentChooserViewController.swift in Sources */,
 				98FF99BB2577789800476487 /* Configuration.swift in Sources */,
 				75131F862AC2BD9D008BCB17 /* UIViewController+NavigationBarStyle.swift in Sources */,
@@ -1073,7 +1060,7 @@
 				8A01E48D21059EFF00D73FE6 /* PaymentInformation.swift in Sources */,
 				75F2A0C22A1A87AE0038FA54 /* UIColor+Helpers.swift in Sources */,
 				7509D4DD2A1A9FD70050AB38 /* MainActionButton.swift in Sources */,
-				752E40C42ACD420C00B62A49 /* OMSSourceTypeValue.swift in Sources */,
+				752E40C42ACD420C00B62A49 /* SourceTypeValue.swift in Sources */,
 				7502CA622A31A7E100766E7D /* CountryListViewModelProtocol.swift in Sources */,
 				8AC1D3A5213922570051F966 /* InstallmentBankingSourceChooserViewController.swift in Sources */,
 				756C8F202A40694000D53059 /* CreditCardFormViewModel.swift in Sources */,
@@ -1110,7 +1097,6 @@
 				75F2A0A22A13B0E30038FA54 /* UIKitViewControllerPresentable.swift in Sources */,
 				7502CA632A31A7E100766E7D /* CountryListViewModelProtocol.swift in Sources */,
 				75405A922A26340E008C21F6 /* UILabel+Helpers.swift in Sources */,
-				75F2A0A82A13B73B0038FA54 /* Swift Version Compatibility.swift in Sources */,
 				75F2A0A62A13B70F0038FA54 /* OmiseTextField.swift in Sources */,
 				75405A8E2A26340E008C21F6 /* UIView+Helpers.swift in Sources */,
 				75405A902A26340E008C21F6 /* UIImage+Helpers.swift in Sources */,

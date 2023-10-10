@@ -41,7 +41,6 @@ public class CardExpiryDateTextField: OmiseTextField {
         }
     }
     
-    @available(iOS, unavailable)
     public override var delegate: UITextFieldDelegate? {
         get {
             return self

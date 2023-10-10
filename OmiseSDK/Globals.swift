@@ -1,6 +1,6 @@
 // swiftlint:disable file_length
 
-import Foundation
+import UIKit
 import os
 
 let sdkLogObject = OSLog(subsystem: "co.omise.ios.sdk", category: "SDK")
@@ -347,7 +347,7 @@ extension UnkeyedEncodingContainer {
     }
 }
 
-extension ControlState: Hashable {
+extension UIControl.State: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(rawValue)
     }

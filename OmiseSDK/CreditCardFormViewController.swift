@@ -128,11 +128,6 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     @IBOutlet private var requestingIndicatorView: UIActivityIndicatorView!
     public static let defaultErrorMessageTextColor = UIColor.error
 
-    /// Deprecated.
-    /// Built in support for Card.ios was removed. You can implement it in your app and call the setCreditCardInformation(number:name:expiration:) method
-    /// A boolean flag that enables/disables Card.IO integration.
-    public var cardIOEnabled = true
-
     /// Factory method for creating CreditCardFormController with given public key.
     /// - parameter publicKey: Omise public key.
     public static func makeCreditCardFormViewController(withPublicKey publicKey: String) -> CreditCardFormViewController {
@@ -294,13 +289,13 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillChangeFrame(_:)),
-            name: NotificationKeyboardWillChangeFrameNotification,
+            name: UIResponder.keyboardWillChangeFrameNotification,
             object: nil
         )
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillHide(_:)),
-            name: NotificationKeyboardWillHideFrameNotification,
+            name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
     }
@@ -326,7 +321,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillAppear(_:)),
-            name: NotificationKeyboardWillShowFrameNotification,
+            name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
     }
@@ -334,7 +329,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
-        NotificationCenter().removeObserver(self, name: NotificationKeyboardWillShowFrameNotification, object: nil)
+        NotificationCenter().removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 
     public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -405,7 +400,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     @IBAction private func requestToken() {
         doneEditing(nil)
 
-        UIAccessibility.post(notification: AccessibilityNotificationAnnouncement, argument: "Submitting payment, please wait")
+        UIAccessibility.post(notification: UIAccessibility.Notification.announcement, argument: "Submitting payment, please wait")
 
         startActivityIndicator()
         viewModel.onSubmitButtonPressed(makeViewContext(), publicKey: publicKey) { [weak self] result in
@@ -438,8 +433,8 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     }
 
     @objc func keyboardWillChangeFrame(_ notification: NSNotification) {
-        guard let frameEnd = notification.userInfo?[NotificationKeyboardFrameEndUserInfoKey] as? CGRect,
-              let frameStart = notification.userInfo?[NotificationKeyboardFrameBeginUserInfoKey] as? CGRect,
+        guard let frameEnd = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+              let frameStart = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? CGRect,
               frameEnd != frameStart else {
             return
         }
@@ -539,7 +534,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         }
 
         if animated {
-            UIView.animate(withDuration: TimeInterval(NavigationControllerHideShowBarDuration),
+            UIView.animate(withDuration: TimeInterval(UINavigationController.hideShowBarDuration),
                            delay: 0.0,
                            options: [.layoutSubviews],
                            animations: animationBlock)
@@ -714,7 +709,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
 extension CreditCardFormViewController {
 
     @IBAction private func validateTextFieldDataOf(_ sender: OmiseTextField) {
-        let duration = TimeInterval(NavigationControllerHideShowBarDuration)
+        let duration = TimeInterval(UINavigationController.hideShowBarDuration)
         UIView.animate(withDuration: duration,
                        delay: 0.0,
                        options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
@@ -725,7 +720,7 @@ extension CreditCardFormViewController {
 
     @IBAction private func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
         if let errorLabel = associatedErrorLabelOf(sender) {
-            let duration = TimeInterval(NavigationControllerHideShowBarDuration)
+            let duration = TimeInterval(UINavigationController.hideShowBarDuration)
             UIView.animate(withDuration: duration,
                            delay: 0.0,
                            options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
@@ -779,7 +774,7 @@ extension CreditCardFormViewController {
         func accessiblityElementAfter(
             _ element: NSObjectProtocol?,
             matchingPredicate predicate: (OmiseTextField) -> Bool,
-            direction: AccessibilityCustomRotorDirection
+            direction: UIAccessibilityCustomRotor.Direction
         ) -> NSObjectProtocol? {
             guard let element = element else {
                 switch direction {
@@ -805,7 +800,7 @@ extension CreditCardFormViewController {
             func filedAfter(
                 _ field: OmiseTextField,
                 matchingPredicate predicate: (OmiseTextField) -> Bool,
-                direction: AccessibilityCustomRotorDirection
+                direction: UIAccessibilityCustomRotor.Direction
             ) -> OmiseTextField? {
                 guard let indexOfField = fields.firstIndex(of: field) else { return nil }
                 switch direction {

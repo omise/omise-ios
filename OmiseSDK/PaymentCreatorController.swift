@@ -150,18 +150,6 @@ public class PaymentCreatorController: UINavigationController {
         initializeWithPaymentChooserViewController(paymentChooserViewController)
     }
 
-    @available(iOS, unavailable)
-    public override init(rootViewController: UIViewController) {
-        guard let rootViewController = rootViewController as? PaymentChooserViewController else {
-            preconditionFailure(
-                PreconditionFailures.paymentChooserViewcontrollerAsRoot.rawValue
-            )
-        }
-        super.init(rootViewController: rootViewController)
-
-        initializeWithPaymentChooserViewController(rootViewController)
-    }
-
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
@@ -260,7 +248,7 @@ public class PaymentCreatorController: UINavigationController {
         }
 
         if animated {
-            UIView.animate(withDuration: TimeInterval(NavigationControllerHideShowBarDuration) + 0.07,
+            UIView.animate(withDuration: TimeInterval(UINavigationController.hideShowBarDuration) + 0.07,
                            delay: 0.0,
                            options: [.layoutSubviews, .beginFromCurrentState],
                            animations: animationBlock)
@@ -286,7 +274,7 @@ public class PaymentCreatorController: UINavigationController {
 
         if animated {
             UIView.animate(
-                withDuration: TimeInterval(NavigationControllerHideShowBarDuration),
+                withDuration: TimeInterval(UINavigationController.hideShowBarDuration),
                 delay: 0.0,
                 options: [.layoutSubviews],
                 animations: animationBlock

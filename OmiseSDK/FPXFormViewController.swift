@@ -86,13 +86,13 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillChangeFrame(_:)),
-            name: NotificationKeyboardWillChangeFrameNotification,
+            name: UIResponder.keyboardWillChangeFrameNotification,
             object: nil
         )
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillHide(_:)),
-            name: NotificationKeyboardWillHideFrameNotification,
+            name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
 
@@ -139,7 +139,7 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
     }
 
     @IBAction private func validateTextFieldDataOf(_ sender: OmiseTextField) {
-        let duration = TimeInterval(NavigationControllerHideShowBarDuration)
+        let duration = TimeInterval(UINavigationController.hideShowBarDuration)
         UIView.animate(withDuration: duration,
                        delay: 0.0,
                        options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
@@ -149,7 +149,7 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
     }
 
     @IBAction private func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
-        let duration = TimeInterval(NavigationControllerHideShowBarDuration)
+        let duration = TimeInterval(UINavigationController.hideShowBarDuration)
         UIView.animate(withDuration: duration,
                        delay: 0.0,
                        options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
@@ -190,8 +190,8 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
     }
 
     @objc func keyboardWillChangeFrame(_ notification: NSNotification) {
-        guard let frameEnd = notification.userInfo?[NotificationKeyboardFrameEndUserInfoKey] as? CGRect,
-            let frameStart = notification.userInfo?[NotificationKeyboardFrameBeginUserInfoKey] as? CGRect,
+        guard let frameEnd = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+            let frameStart = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? CGRect,
             frameEnd != frameStart else {
                 return
         }

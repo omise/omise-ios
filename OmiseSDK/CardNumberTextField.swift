@@ -27,7 +27,7 @@ public class CardNumberTextField: OmiseTextField {
             
             let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map { $0 - 1 })
             
-            let kerningKey = AttributedStringKey.kern
+            let kerningKey = NSAttributedString.Key.kern
             if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
                 typingAttributes?[kerningKey] = 5
             } else {
@@ -36,7 +36,6 @@ public class CardNumberTextField: OmiseTextField {
         }
     }
     
-    @available(iOS, unavailable)
     public override var delegate: UITextFieldDelegate? {
         get {
             return self
@@ -137,7 +136,7 @@ public class CardNumberTextField: OmiseTextField {
         let range = NSRange(location: 0, length: formattingAttributedText.length)
         formattingAttributedText.removeAttribute(.kern, range: range)
         kerningIndexes[kerningIndexes.indexRange(in: 0..<attributedText.length)].forEach {
-            formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
+            formattingAttributedText.addAttribute(NSAttributedString.Key.kern, value: 5, range: NSRange(location: $0, length: 1))
         }
         let previousSelectedTextRange = self.selectedTextRange
         self.attributedText = formattingAttributedText
@@ -158,7 +157,7 @@ public class CardNumberTextField: OmiseTextField {
         }
         let kerningIndexes = IndexSet([3, 7, 11])
         kerningIndexes[kerningIndexes.indexRange(in: 0..<formattingAttributedText.length)].forEach {
-            formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
+            formattingAttributedText.addAttribute(NSAttributedString.Key.kern, value: 5, range: NSRange(location: $0, length: 1))
         }
         
         super.attributedPlaceholder = formattingAttributedText.copy() as? NSAttributedString
@@ -197,7 +196,7 @@ public class CardNumberTextField: OmiseTextField {
         }
         let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map { $0 - 1 })
         
-        let kerningKey = AttributedStringKey.kern
+        let kerningKey = NSAttributedString.Key.kern
         if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
             typingAttributes?[kerningKey] = 5
         } else {
@@ -205,9 +204,9 @@ public class CardNumberTextField: OmiseTextField {
         }
 
         if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
-            typingAttributes?[AttributedStringKey.kern] = 5
+            typingAttributes?[NSAttributedString.Key.kern] = 5
         } else {
-            typingAttributes?.removeValue(forKey: AttributedStringKey.kern)
+            typingAttributes?.removeValue(forKey: NSAttributedString.Key.kern)
         }
     }
     

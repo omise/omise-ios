@@ -9,7 +9,7 @@ class MainActionButton: UIButton {
         }
     }
     
-    private var backgroundColors: [ControlState: UIColor] = [:]
+    private var backgroundColors: [UIControl.State: UIColor] = [:]
     
     @IBInspectable var defaultBackgroundColor: UIColor? {
         didSet {
@@ -73,7 +73,7 @@ class MainActionButton: UIButton {
         updateBackgroundColor()
     }
     
-    func setBackgroundColor(_ color: UIColor?, for state: ControlState) {
+    func setBackgroundColor(_ color: UIColor?, for state: UIControl.State) {
         backgroundColors[state] = color
         updateBackgroundColor()
     }
@@ -99,7 +99,7 @@ class MainActionButton: UIButton {
         super.backgroundColor = self.backgroundColor
     }
     
-    func backgroundColor(for state: ControlState) -> UIColor? {
+    func backgroundColor(for state: UIControl.State) -> UIColor? {
         return backgroundColors[state]
     }
     

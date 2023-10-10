@@ -190,7 +190,7 @@ private extension AtomeFormViewController {
 
     func setupSubmitButton(viewModel: ViewModel) {
         submitButton.setTitleColor(style.textColorForNextButton, for: .normal)
-        submitButton.setTitle(viewModel.submitButtonTitle, for: ControlState.normal)
+        submitButton.setTitle(viewModel.submitButtonTitle, for: UIControl.State.normal)
         submitButton.addTarget(self, action: #selector(onSubmitButtonTapped), for: .touchUpInside)
     }
 

@@ -15,23 +15,6 @@ public protocol AuthorizingPaymentViewControllerDelegate: AnyObject {
     func authorizingPaymentViewControllerDidCancel(_ viewController: AuthorizingPaymentViewController)
 }
 
-@available(*, deprecated, renamed: "AuthorizingPaymentViewController")
-@available(iOSApplicationExtension, unavailable)
-public typealias Omise3DSViewController = AuthorizingPaymentViewController
-
-@available(iOSApplicationExtension, unavailable)
-@available(*, deprecated, renamed: "AuthorizingPaymentViewControllerDelegate")
-public typealias Omise3DSViewControllerDelegate = AuthorizingPaymentViewControllerDelegate
-
-@available(*, deprecated, renamed: "AuthorizingPaymentViewController")
-@available(iOSApplicationExtension, unavailable)
-public typealias OmiseAuthorizingPaymentViewController = AuthorizingPaymentViewController
-
-@available(*, deprecated, renamed: "AuthorizingPaymentViewControllerDelegate")
-@available(iOSApplicationExtension, unavailable)
-// swiftlint:disable:next type_name
-public typealias OmiseAuthorizingPaymentViewControllerDelegate = AuthorizingPaymentViewControllerDelegate
-
 /*:
  Drop-in authorizing payment handler view controller that automatically display the authorizing payment verification form
  which supports `3DS`, `Internet Banking` and other offsite payment methods those need to be authorized via a web browser.
