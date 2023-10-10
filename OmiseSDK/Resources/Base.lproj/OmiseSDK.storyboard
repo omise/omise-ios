@@ -452,7 +452,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMV-0E-5pR" customClass="ExpandedHitAreaButton" customModule="OmiseSDK" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMV-0E-5pR" customClass="ExpandedHitAreaButton" customModule="OmiseSDK">
                                 <rect key="frame" x="208" y="16" width="16" height="22"/>
                                 <state key="normal" image="Close Mini"/>
                                 <connections>
@@ -486,7 +486,7 @@
         <!--Payment Methods-->
         <scene sceneID="gNp-vh-6ON">
             <objects>
-                <tableViewController storyboardIdentifier="PaymentChooserController" extendedLayoutIncludesOpaqueBars="YES" id="2c1-84-F03" customClass="PaymentChooserViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PaymentChooserController" extendedLayoutIncludesOpaqueBars="YES" id="2c1-84-F03" customClass="PaymentChooserViewController" customModule="OmiseSDK" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Gba-I0-J0M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="2200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1600,7 +1600,7 @@
         <!--Authorizing Payment-->
         <scene sceneID="IRy-iA-rF6">
             <objects>
-                <viewController storyboardIdentifier="DefaultAuthorizingPaymentViewController" id="TTh-Qc-TVG" customClass="AuthorizingPaymentViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DefaultAuthorizingPaymentViewController" id="TTh-Qc-TVG" customClass="AuthorizingPaymentViewController" customModule="OmiseSDK" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="v42-VO-PGC"/>
                         <viewControllerLayoutGuide type="bottom" id="rnF-ST-mfm"/>
@@ -1625,7 +1625,7 @@
         <!--TrueMoney Wallet-->
         <scene sceneID="B8a-pv-rKr">
             <objects>
-                <viewController id="Qrb-nZ-3ze" customClass="TrueMoneyFormViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Qrb-nZ-3ze" customClass="TrueMoneyFormViewController" customModule="OmiseSDK" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OgH-zY-UpJ"/>
                         <viewControllerLayoutGuide type="bottom" id="7O7-vN-x1O"/>
@@ -1675,7 +1675,7 @@
                                         <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1dv-2d-6Zi" customClass="MainActionButton" customModule="OmiseSDK" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1dv-2d-6Zi" customClass="MainActionButton" customModule="OmiseSDK">
                                         <rect key="frame" x="16" y="295.66666666666669" width="343" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="5XS-Ra-w18"/>
@@ -1811,7 +1811,7 @@
         <!--Internet Banking-->
         <scene sceneID="GWD-3m-vXf">
             <objects>
-                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="u3o-zY-Nfp" customClass="InternetBankingSourceChooserViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="u3o-zY-Nfp" customClass="InternetBankingSourceChooserViewController" customModule="OmiseSDK" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6Up-qh-f82">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1990,7 +1990,7 @@
         <!--Installments-->
         <scene sceneID="dNp-Dn-cY2">
             <objects>
-                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="lhd-VO-2kZ" customClass="InstallmentBankingSourceChooserViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="lhd-VO-2kZ" customClass="InstallmentBankingSourceChooserViewController" customModule="OmiseSDK" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="SqW-bG-UTj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2324,7 +2324,7 @@
         <!--Installments Number Of Terms Chooser View Controller-->
         <scene sceneID="CWW-iT-nyZ">
             <objects>
-                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="I6Y-g7-xLU" customClass="InstallmentsNumberOfTermsChooserViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="I6Y-g7-xLU" customClass="InstallmentsNumberOfTermsChooserViewController" customModule="OmiseSDK" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="64" estimatedRowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" id="r1g-0M-p88">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2374,7 +2374,7 @@
         <!--EContext Information Input-->
         <scene sceneID="etS-JC-UOV">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" id="hC0-5j-tkj" userLabel="EContext Information Input" customClass="EContextInformationInputViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="hC0-5j-tkj" userLabel="EContext Information Input" customClass="EContextInformationInputViewController" customModule="OmiseSDK" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KTl-km-I7b"/>
                         <viewControllerLayoutGuide type="bottom" id="NV0-P3-Xwj"/>
@@ -2485,7 +2485,7 @@
                                             <action selector="validateTextFieldDataOf:" destination="hC0-5j-tkj" eventType="editingDidEnd" id="qeQ-Ek-IMb"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mE3-3u-rvg" customClass="MainActionButton" customModule="OmiseSDK" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mE3-3u-rvg" customClass="MainActionButton" customModule="OmiseSDK">
                                         <rect key="frame" x="16" y="352" width="343" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="WOU-ZA-4eO"/>
@@ -2638,7 +2638,7 @@
         <!--Payment Creator Controller-->
         <scene sceneID="6ey-jn-QkA">
             <objects>
-                <navigationController storyboardIdentifier="PaymentCreatorController" automaticallyAdjustsScrollViewInsets="NO" id="HXY-oA-L9Y" customClass="PaymentCreatorController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="PaymentCreatorController" automaticallyAdjustsScrollViewInsets="NO" id="HXY-oA-L9Y" customClass="PaymentCreatorController" customModule="OmiseSDK" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" backIndicatorImage="Back" largeTitles="YES" backIndicatorTransitionMaskImage="Back" id="aV8-zC-zfe">
                         <rect key="frame" x="0.0" y="50" width="375" height="96"/>
@@ -2657,7 +2657,7 @@
         <!--Mobile Banking-->
         <scene sceneID="pFJ-pw-u2Z">
             <objects>
-                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="9Up-v5-UpG" customClass="MobileBankingSourceChooserViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="9Up-v5-UpG" customClass="MobileBankingSourceChooserViewController" customModule="OmiseSDK" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="XKU-sg-sJh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2866,7 +2866,7 @@
         <!--FPX Bank List-->
         <scene sceneID="EbJ-wh-5tq">
             <objects>
-                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="4Dm-CU-oaf" customClass="FPXBankChooserViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="4Dm-CU-oaf" customClass="FPXBankChooserViewController" customModule="OmiseSDK" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="keo-NH-r9K">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2944,7 +2944,7 @@
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1JF-Jq-C50" customClass="OmiseTextField" customModule="OmiseSDK" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1JF-Jq-C50" customClass="OmiseTextField" customModule="OmiseSDK">
                                         <rect key="frame" x="16" y="213.33333333333331" width="343" height="48"/>
                                         <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                                         <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2973,7 +2973,7 @@
                                         <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tI6-gP-6iQ" customClass="MainActionButton" customModule="OmiseSDK" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tI6-gP-6iQ" customClass="MainActionButton" customModule="OmiseSDK">
                                         <rect key="frame" x="16" y="299.66666666666669" width="343" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="XG2-qP-KC2"/>
@@ -3091,13 +3091,13 @@
         <!--DuitNow Online Banking/Wallets Bank List-->
         <scene sceneID="jFb-XV-emt">
             <objects>
-                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="fVC-FK-sgo" customClass="DuitNowOBWBankChooserViewController" customModule="OmiseSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="fVC-FK-sgo" customClass="DuitNowOBWBankChooserViewController" customModule="OmiseSDK" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Paq-bQ-aS8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="rLy-XG-aKO">
-                            <rect key="frame" x="0.0" y="1090" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="1230" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -3431,14 +3431,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Kuwait Finance House" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1nc-rR-tPx">
-                                                    <rect key="frame" x="53" y="0.0" width="314" height="64"/>
+                                                    <rect key="frame" x="65" y="0.0" width="290" height="64"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="FPX/kfh" id="4SP-Do-DHm">
-                                                    <rect key="frame" x="8" y="17" width="30" height="30"/>
+                                                    <rect key="frame" x="20" y="17" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Next" translatesAutoresizingMaskIntoConstraints="NO" id="mUr-aW-805">
@@ -3460,14 +3460,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Maybank" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ogu-GM-3LI">
-                                                    <rect key="frame" x="53" y="0.0" width="314" height="64"/>
+                                                    <rect key="frame" x="65" y="0.0" width="290" height="64"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" image="FPX/maybank" id="cho-ZD-Qyg">
-                                                    <rect key="frame" x="8" y="17" width="30" height="30"/>
+                                                    <rect key="frame" x="20" y="17" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Next" translatesAutoresizingMaskIntoConstraints="NO" id="cvb-9E-iqx">
@@ -3489,14 +3489,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="OCBC" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="j4J-td-1AH">
-                                                    <rect key="frame" x="53" y="0.0" width="314" height="64"/>
+                                                    <rect key="frame" x="65" y="0.0" width="290" height="64"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" image="FPX/ocbc" id="iMH-9c-6kJ">
-                                                    <rect key="frame" x="8" y="17" width="30" height="30"/>
+                                                    <rect key="frame" x="20" y="17" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Next" translatesAutoresizingMaskIntoConstraints="NO" id="4xc-Fo-fk6">
@@ -3518,14 +3518,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Public Bank" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Byg-jP-720">
-                                                    <rect key="frame" x="53" y="0.0" width="314" height="64"/>
+                                                    <rect key="frame" x="65" y="0.0" width="290" height="64"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" image="FPX/public-bank" id="NNj-kS-T6e">
-                                                    <rect key="frame" x="8" y="17" width="30" height="30"/>
+                                                    <rect key="frame" x="20" y="17" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Next" translatesAutoresizingMaskIntoConstraints="NO" id="6oh-L9-QsM">
@@ -3547,14 +3547,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="RHB Bank" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Bog-Tb-lEL">
-                                                    <rect key="frame" x="53" y="0.0" width="314" height="64"/>
+                                                    <rect key="frame" x="65" y="0.0" width="290" height="64"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" image="FPX/rhb" id="saW-zq-B27">
-                                                    <rect key="frame" x="8" y="17" width="30" height="30"/>
+                                                    <rect key="frame" x="20" y="17" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Next" translatesAutoresizingMaskIntoConstraints="NO" id="kmg-10-gIK">
@@ -3576,14 +3576,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Standard Chartered" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DaU-2T-o6X">
-                                                    <rect key="frame" x="53" y="0.0" width="314" height="64"/>
+                                                    <rect key="frame" x="65" y="0.0" width="290" height="64"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" image="FPX/sc" id="4bL-w5-TRP">
-                                                    <rect key="frame" x="8" y="17" width="30" height="30"/>
+                                                    <rect key="frame" x="20" y="17" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Next" translatesAutoresizingMaskIntoConstraints="NO" id="yEF-uA-PSW">
@@ -3605,14 +3605,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="United Overseas Bank" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qa1-3q-6KN">
-                                                    <rect key="frame" x="53" y="0.0" width="314" height="64"/>
+                                                    <rect key="frame" x="65" y="0.0" width="290" height="64"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" image="FPX/uob" id="fkV-dj-wBN">
-                                                    <rect key="frame" x="8" y="17" width="30" height="30"/>
+                                                    <rect key="frame" x="20" y="17" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Next" translatesAutoresizingMaskIntoConstraints="NO" id="sG8-Xu-zSt">
