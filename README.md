@@ -182,7 +182,7 @@ func completionHandler(tokenResult: Result<Token, Error>) -> Void {
 
 ### Built-in Forms
 
-OPn Payments iOS SDK provides easy-to-use drop-in UI forms for both Tokenizing a Credit Card and Creating a Payment Source, which
+Opn Payments iOS SDK provides easy-to-use drop-in UI forms for both Tokenizing a Credit Card and Creating a Payment Source, which
 you can easily integrate into your app.
 
 #### Credit Card Form
