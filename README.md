@@ -1,4 +1,4 @@
-[![Omise](https://cdn.omise.co/assets/omise.png)](https://omise.co)
+[![](https://cdn.omise.co/assets/omise.png)](https://omise.co)
 
 # Opn Payments iOS SDK
 
@@ -12,7 +12,7 @@ in Thailand, Japan, and Singapore. Opn Payments provides a set of APIs that
 help merchants of any size accept payments online.
 
 The Opn Payments iOS SDK provides bindings for
-[tokenizing credit cards](https://www.omise.co/tokens-api) and
+[tokenizing credit cards](https://www..co/tokens-api) and
 [accepting non-credit-card payments](https://www.omise.co/sources-api)
 using the Opn Payments API allowing developers to safely and easily accept
 payments within apps.
@@ -265,7 +265,7 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 ##### Custom Credit Card Form
 
 You can create your own credit card form if you want to but please keep in mind that you must not send the credit card information to your server.
-Omise iOS SDK provides some built-in credit card UI components to make it easier to create your own credit card form:
+Opn Payments iOS SDK provides some built-in credit card UI components to make it easier to create your own credit card form:
 
 * `CardNumberTextField` - Provides basic number grouping as the user types.
 * `CardNameTextField` - Cardholder name field.
@@ -410,4 +410,4 @@ Pull requests, issues, and bugfixes are welcome!
 
 ## LICENSE
 
-MIT [See the full license text](https://github.com/omise/omise-ios/blob/master/LICENSE)
+MIT [See the full license text](https://github.com//-ios/blob/master/LICENSE)
