@@ -7,13 +7,13 @@
 //
 
 import Foundation
-import OmiseTestSDK
+import OmiseUnitTestKit
 #if OMISE_SDK_UNIT_TESTING
 @testable import OmiseSDK
 #endif
 
 extension AtomeFormViewContext {
-    static func generateMockup(_ generator: OmiseTestSDK.TestCaseValueGenerator) -> Self {
+    static func generateMockup(_ generator: OmiseUnitTestKit.TestCaseValueGenerator) -> Self {
         AtomeFormViewContext(fields: [
             .name: generator.cases(
                 .valid("Tester"),

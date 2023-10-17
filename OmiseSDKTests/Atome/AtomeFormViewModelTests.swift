@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import OmiseTestSDK
+import OmiseUnitTestKit
 @testable import OmiseSDK
 
 class AtomeFormViewModelTests: XCTestCase {

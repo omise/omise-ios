@@ -431,7 +431,7 @@
     },
     {
         "object": "payment_method",
-        "name": "shopeePay",
+        "name": "shopeepay",
         "currencies": [
             "MYR"
         ],

@@ -1,9 +1,9 @@
 import XCTest
-@testable import OmiseTestSDK
+@testable import OmiseUnitTestKit
 
 class TestCaseValueSetTests: XCTestCase {
     func testCaseValueSet() {
-        let nameSet = OmiseTestSDK.TestCaseValueSet<String>([
+        let nameSet = OmiseUnitTestKit.TestCaseValueSet<String>([
             .invalid("bb", "Name should contain 3 or more characters"),
             .invalid("Andr3y", "No digits allowed"),
             .invalid("@ndrey", "Only some special characters allowed"),

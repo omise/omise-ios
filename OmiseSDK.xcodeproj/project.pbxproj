@@ -68,18 +68,14 @@
 		756C8F202A40694000D53059 /* CreditCardFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C8F1F2A40694000D53059 /* CreditCardFormViewModel.swift */; };
 		756C8F222A40694F00D53059 /* CreditCardFormViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C8F212A40694F00D53059 /* CreditCardFormViewContext.swift */; };
 		756C8F262A40698600D53059 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C8F252A40698600D53059 /* TextFieldView.swift */; };
+		757B0A742AD71E3100DEAE8F /* OmiseUnitTestKit in Frameworks */ = {isa = PBXBuildFile; productRef = 757B0A732AD71E3100DEAE8F /* OmiseUnitTestKit */; };
+		757B0A752AD71E3100DEAE8F /* OmiseUnitTestKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 757B0A732AD71E3100DEAE8F /* OmiseUnitTestKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		758244092ACE988700781B3B /* PaymentInformationTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A429E7A2109A3AE007C230F /* PaymentInformationTestCase.swift */; };
 		759856242A286C880087B605 /* UIScrollView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759856232A286C880087B605 /* UIScrollView+Helpers.swift */; };
 		75B43B572A0277A3004352C7 /* PaymentInformation.Atome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */; };
-		75DAD88C2A0BA5130098AF96 /* OmiseTestSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; };
-		75DAD88E2A0BA5130098AF96 /* OmiseTestSDK in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		75DAD8902A0BB8D80098AF96 /* LocalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */; };
 		75F2A0182A0BD0D40038FA54 /* Config.local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75DAD8922A0BC9540098AF96 /* Config.local.plist */; };
-		75F2A0932A13B0B10038FA54 /* OmiseSDKUITestsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0922A13B0B10038FA54 /* OmiseSDKUITestsApp.swift */; };
-		75F2A0952A13B0B10038FA54 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0942A13B0B10038FA54 /* ContentView.swift */; };
 		75F2A09A2A13B0B10038FA54 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75F2A0992A13B0B10038FA54 /* Preview Assets.xcassets */; };
-		75F2A0A02A13B0DB0038FA54 /* UIKitViewPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A09F2A13B0DB0038FA54 /* UIKitViewPresentable.swift */; };
-		75F2A0A22A13B0E30038FA54 /* UIKitViewControllerPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0A12A13B0E30038FA54 /* UIKitViewControllerPresentable.swift */; };
 		75F2A0A62A13B70F0038FA54 /* OmiseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062F1CFEA7E4004BCF51 /* OmiseTextField.swift */; };
 		75F2A0B02A1A5BF30038FA54 /* ProxyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0AF2A1A5BF30038FA54 /* ProxyProperty.swift */; };
 		75F2A0B22A1A5E780038FA54 /* AtomeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B12A1A5E780038FA54 /* AtomeInputView.swift */; };
@@ -176,7 +172,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				75DAD88E2A0BA5130098AF96 /* OmiseTestSDK in Embed Frameworks */,
+				757B0A752AD71E3100DEAE8F /* OmiseUnitTestKit in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -246,17 +242,14 @@
 		756C8F1F2A40694000D53059 /* CreditCardFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardFormViewModel.swift; sourceTree = "<group>"; };
 		756C8F212A40694F00D53059 /* CreditCardFormViewContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardFormViewContext.swift; sourceTree = "<group>"; };
 		756C8F252A40698600D53059 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
+		757B0A712AD71D7B00DEAE8F /* OmiseSwiftUIKit */ = {isa = PBXFileReference; lastKnownFileType = text; name = OmiseSwiftUIKit; path = Helpers/OmiseSwiftUIKit; sourceTree = SOURCE_ROOT; };
+		757B0A722AD71DCD00DEAE8F /* OmiseUnitTestKit */ = {isa = PBXFileReference; lastKnownFileType = text; name = OmiseUnitTestKit; path = Helpers/OmiseUnitTestKit; sourceTree = SOURCE_ROOT; };
 		759856232A286C880087B605 /* UIScrollView+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Helpers.swift"; sourceTree = "<group>"; };
 		75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInformation.Atome.swift; sourceTree = "<group>"; };
-		75DAD87F2A0B9AE50098AF96 /* OmiseTestSDK */ = {isa = PBXFileReference; lastKnownFileType = text; path = OmiseTestSDK; sourceTree = SOURCE_ROOT; };
 		75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalConfig.swift; sourceTree = "<group>"; };
 		75DAD8922A0BC9540098AF96 /* Config.local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.local.plist; sourceTree = "<group>"; };
 		75F2A0902A13B0B00038FA54 /* OmiseSDKUITests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmiseSDKUITests.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		75F2A0922A13B0B10038FA54 /* OmiseSDKUITestsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseSDKUITestsApp.swift; sourceTree = "<group>"; };
-		75F2A0942A13B0B10038FA54 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		75F2A0992A13B0B10038FA54 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		75F2A09F2A13B0DB0038FA54 /* UIKitViewPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitViewPresentable.swift; sourceTree = "<group>"; };
-		75F2A0A12A13B0E30038FA54 /* UIKitViewControllerPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitViewControllerPresentable.swift; sourceTree = "<group>"; };
 		75F2A0A42A13B1470038FA54 /* AtomeFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewController.swift; sourceTree = "<group>"; };
 		75F2A0AF2A1A5BF30038FA54 /* ProxyProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyProperty.swift; sourceTree = "<group>"; };
 		75F2A0B12A1A5E780038FA54 /* AtomeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeInputView.swift; sourceTree = "<group>"; };
@@ -353,7 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				987A02CE1CE35D5E0035417A /* OmiseSDK.framework in Frameworks */,
-				75DAD88C2A0BA5130098AF96 /* OmiseTestSDK in Frameworks */,
+				757B0A742AD71E3100DEAE8F /* OmiseUnitTestKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,7 +358,6 @@
 			children = (
 				226E16101D2268B400219652 /* QuickStart.playground */,
 				2259311A1CE3210700841B86 /* OmiseSDK */,
-				75DAD87F2A0B9AE50098AF96 /* OmiseTestSDK */,
 				987A02CA1CE35D5E0035417A /* OmiseSDKTests */,
 				75F2A0912A13B0B10038FA54 /* OmiseSDKUITests */,
 				7509D4F32A1D21D10050AB38 /* --- */,
@@ -457,15 +449,6 @@
 				75F2A0B12A1A5E780038FA54 /* AtomeInputView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		7509D4EA2A1C97A30050AB38 /* App */ = {
-			isa = PBXGroup;
-			children = (
-				75F2A0922A13B0B10038FA54 /* OmiseSDKUITestsApp.swift */,
-				75F2A0942A13B0B10038FA54 /* ContentView.swift */,
-			);
-			path = App;
 			sourceTree = "<group>";
 		};
 		7509D4F32A1D21D10050AB38 /* --- */ = {
@@ -584,8 +567,7 @@
 		75F2A0912A13B0B10038FA54 /* OmiseSDKUITests */ = {
 			isa = PBXGroup;
 			children = (
-				75F2A0A32A13B0E70038FA54 /* UIKitLiveKit */,
-				7509D4EA2A1C97A30050AB38 /* App */,
+				757B0A712AD71D7B00DEAE8F /* OmiseSwiftUIKit */,
 				75F2A0982A13B0B10038FA54 /* Preview Content */,
 			);
 			path = OmiseSDKUITests;
@@ -598,15 +580,6 @@
 				75405A972A2634D9008C21F6 /* Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		75F2A0A32A13B0E70038FA54 /* UIKitLiveKit */ = {
-			isa = PBXGroup;
-			children = (
-				75F2A09F2A13B0DB0038FA54 /* UIKitViewPresentable.swift */,
-				75F2A0A12A13B0E30038FA54 /* UIKitViewControllerPresentable.swift */,
-			);
-			path = UIKitLiveKit;
 			sourceTree = "<group>";
 		};
 		75F2A0AE2A1A5BE30038FA54 /* Property Wrappers */ = {
@@ -719,6 +692,7 @@
 		987A02CA1CE35D5E0035417A /* OmiseSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				757B0A722AD71DCD00DEAE8F /* OmiseUnitTestKit */,
 				987A02CD1CE35D5E0035417A /* Info.plist */,
 				987A03AC1CE5CD450035417A /* Fixtures */,
 				7509D4DE2A1AA1060050AB38 /* Atome */,
@@ -847,7 +821,7 @@
 			);
 			name = OmiseSDKTests;
 			packageProductDependencies = (
-				75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */,
+				757B0A732AD71E3100DEAE8F /* OmiseUnitTestKit */,
 			);
 			productName = OmiseSDKTests;
 			productReference = 987A02C91CE35D5E0035417A /* OmiseSDKTests.xctest */;
@@ -1091,10 +1065,8 @@
 				7502CA602A31A7D600766E7D /* CountryListViewController.swift in Sources */,
 				7502CA672A31AEA200766E7D /* CountryInfo.swift in Sources */,
 				75F2A0B02A1A5BF30038FA54 /* ProxyProperty.swift in Sources */,
-				75F2A0952A13B0B10038FA54 /* ContentView.swift in Sources */,
 				75F2A0B22A1A5E780038FA54 /* AtomeInputView.swift in Sources */,
 				7509D4F52A1D2F550050AB38 /* AtomeFormViewContextMockup.swift in Sources */,
-				75F2A0A22A13B0E30038FA54 /* UIKitViewControllerPresentable.swift in Sources */,
 				7502CA632A31A7E100766E7D /* CountryListViewModelProtocol.swift in Sources */,
 				75405A922A26340E008C21F6 /* UILabel+Helpers.swift in Sources */,
 				75F2A0A62A13B70F0038FA54 /* OmiseTextField.swift in Sources */,
@@ -1102,14 +1074,12 @@
 				75405A902A26340E008C21F6 /* UIImage+Helpers.swift in Sources */,
 				75405AAB2A27F9B4008C21F6 /* Bundle+OmiseSDK.swift in Sources */,
 				75405AA42A27F5D3008C21F6 /* AtomeFormViewContext.swift in Sources */,
-				75F2A0A02A13B0DB0038FA54 /* UIKitViewPresentable.swift in Sources */,
 				75405A792A25D33F008C21F6 /* String+Helpers.swift in Sources */,
 				75405AA52A27F5D3008C21F6 /* AtomeFormViewModelProtocol.swift in Sources */,
 				75F2A0C12A1A84900038FA54 /* UIColor+Helpers.swift in Sources */,
 				75405A8C2A26340E008C21F6 /* UIStackView+Helpers.swift in Sources */,
 				7502CA642A31AA6F00766E7D /* Colors.swift in Sources */,
 				75405A952A26343F008C21F6 /* SpacerView.swift in Sources */,
-				75F2A0932A13B0B10038FA54 /* OmiseSDKUITestsApp.swift in Sources */,
 				75405A7D2A25ED11008C21F6 /* Array+Helpers.swift in Sources */,
 				7509D4F42A1D2C3E0050AB38 /* AtomeFormViewModelMockup.swift in Sources */,
 			);
@@ -1207,68 +1177,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		2259311E1CE3210700841B86 /* Debug (Staging) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 3;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = "Debug (Staging)";
-		};
 		2259311F1CE3210700841B86 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1326,45 +1234,6 @@
 			};
 			name = Release;
 		};
-		225931211CE3210700841B86 /* Debug (Staging) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				CURRENT_PROJECT_VERSION = 5;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				INFOPLIST_FILE = OmiseSDK/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				OTHER_LDFLAGS = "-lc++";
-				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Library";
-				"SWIFT_INCLUDE_PATHS[sdk=iphoneos*]" = "";
-				"SWIFT_INCLUDE_PATHS[sdk=iphoneos10*]" = "$(SRCROOT)/Library";
-				"SWIFT_INCLUDE_PATHS[sdk=iphoneos11*]" = "$(SRCROOT)/Library";
-				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator*]" = "";
-				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator10*]" = "$(SRCROOT)/Library";
-				"SWIFT_INCLUDE_PATHS[sdk=iphonesimulator11*]" = "$(SRCROOT)/Library";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-			};
-			name = "Debug (Staging)";
-		};
 		225931221CE3210700841B86 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1403,37 +1272,6 @@
 			};
 			name = Release;
 		};
-		22D480AC1D0EB29C00544CE1 /* Debug (Staging) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_WARNINGS = NO;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4TBJ63739J;
-				INFOPLIST_FILE = ExampleApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				OTHER_LDFLAGS = (
-					"-lc++",
-					"-all_load",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.omise.ExampleApp;
-				PRODUCT_NAME = ExampleApp;
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = "Debug (Staging)";
-		};
 		22D480AD1D0EB29C00544CE1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1464,45 +1302,6 @@
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
-		};
-		75F2A09B2A13B0B10038FA54 /* Debug (Staging) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"OmiseSDKUITests/Preview Content\"";
-				ENABLE_PREVIEWS = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				OTHER_SWIFT_FLAGS = "-DSWIFTUI_ENABLED";
-				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK.OmiseSDKUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = "Debug (Staging)";
 		};
 		75F2A09C2A13B0B10038FA54 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1579,28 +1378,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
-		};
-		987A02D11CE35D5E0035417A /* Debug (Staging) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = OmiseSDKTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				OTHER_SWIFT_FLAGS = "-DOMISE_SDK_UNIT_TESTING";
-				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDKTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = "Debug (Staging)";
 		};
 		987A02D21CE35D5E0035417A /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1785,7 +1562,6 @@
 		225931121CE3210700841B86 /* Build configuration list for PBXProject "OmiseSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2259311E1CE3210700841B86 /* Debug (Staging) */,
 				98FF99B3257773EB00476487 /* Debug */,
 				2259311F1CE3210700841B86 /* Release */,
 			);
@@ -1795,7 +1571,6 @@
 		225931201CE3210700841B86 /* Build configuration list for PBXNativeTarget "OmiseSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				225931211CE3210700841B86 /* Debug (Staging) */,
 				98FF99B4257773EB00476487 /* Debug */,
 				225931221CE3210700841B86 /* Release */,
 			);
@@ -1805,7 +1580,6 @@
 		22D480AE1D0EB29C00544CE1 /* Build configuration list for PBXNativeTarget "ExampleApp (Swift)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				22D480AC1D0EB29C00544CE1 /* Debug (Staging) */,
 				98FF99B6257773EB00476487 /* Debug */,
 				22D480AD1D0EB29C00544CE1 /* Release */,
 			);
@@ -1815,7 +1589,6 @@
 		75F2A09E2A13B0B10038FA54 /* Build configuration list for PBXNativeTarget "OmiseSDKUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				75F2A09B2A13B0B10038FA54 /* Debug (Staging) */,
 				75F2A09C2A13B0B10038FA54 /* Debug */,
 				75F2A09D2A13B0B10038FA54 /* Release */,
 			);
@@ -1825,7 +1598,6 @@
 		987A02D31CE35D5E0035417A /* Build configuration list for PBXNativeTarget "OmiseSDKTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				987A02D11CE35D5E0035417A /* Debug (Staging) */,
 				98FF99B5257773EB00476487 /* Debug */,
 				987A02D21CE35D5E0035417A /* Release */,
 			);
@@ -1839,9 +1611,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = OmiseTestSDK;
 		};
-		75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */ = {
+		757B0A732AD71E3100DEAE8F /* OmiseUnitTestKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = OmiseTestSDK;
+			productName = OmiseUnitTestKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

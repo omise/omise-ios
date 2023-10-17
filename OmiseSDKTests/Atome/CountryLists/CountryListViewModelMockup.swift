@@ -1,5 +1,5 @@
 import Foundation
-import OmiseTestSDK
+import OmiseUnitTestKit
 #if OMISE_SDK_UNIT_TESTING
 @testable import OmiseSDK
 #endif

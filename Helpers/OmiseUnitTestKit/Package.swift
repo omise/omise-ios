@@ -4,23 +4,23 @@
 import PackageDescription
 
 let package = Package(
-    name: "OmiseTestSDK",
+    name: "OmiseUnitTestKit",
     platforms: [
         .iOS(.v11)
     ],
     products: [
         .library(
-            name: "OmiseTestSDK",
+            name: "OmiseUnitTestKit",
             type: .dynamic,
-            targets: ["OmiseTestSDK"])
+            targets: ["OmiseUnitTestKit"])
     ],
     dependencies: [],
     targets: [
         .target(
-            name: "OmiseTestSDK",
+            name: "OmiseUnitTestKit",
             dependencies: []),
         .testTarget(
-            name: "OmiseTestSDKTests",
-            dependencies: ["OmiseTestSDK"])
+            name: "OmiseUnitTestKitTests",
+            dependencies: ["OmiseUnitTestKit"])
     ]
 )
