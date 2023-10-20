@@ -39,7 +39,7 @@ public enum Currency: Codable, Hashable {
 
     case custom(code: String, factor: Int)
     
-    static let `default`: Currency = .thb
+    static let main: Currency = .thb
 
     public var code: String {
         switch self {
@@ -66,7 +66,7 @@ public enum Currency: Codable, Hashable {
     /// - Parameter code: The ISO 4217 currency code for the creating Currency that will be created
     public init(code: String?) {
         guard let code = code else {
-            self = Currency.default
+            self = Currency.main
             return
         }
 

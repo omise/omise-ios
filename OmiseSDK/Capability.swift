@@ -385,6 +385,14 @@ extension Capability.Backend {
             try container.encode(type)
         }
 
+        init?(sourceType string: String) {
+            if let sourceType = SourceTypeValue(string) {
+                self = .source(sourceType)
+            } else {
+                return nil
+            }
+        }
+
         // swiftlint:disable:next function_body_length
         init?(payment: Capability.Backend.Payment) {
             switch payment {
@@ -409,35 +417,15 @@ extension Capability.Backend {
             case .touchNGo:
                 self = .source(.touchNGo)
             case .installment(let brand, availableNumberOfTerms: _):
-                if let sourceType = SourceTypeValue(brand.type) {
-                    self = .source(sourceType)
-                } else {
-                    return nil
-                }
+                self.init(sourceType: brand.type)
             case .internetBanking(let banking):
-                if let sourceType = SourceTypeValue(banking.type) {
-                    self = .source(sourceType)
-                } else {
-                    return nil
-                }
+                self.init(sourceType: banking.type)
             case .mobileBanking(let banking):
-                if let sourceType = SourceTypeValue(banking.type) {
-                    self = .source(sourceType)
-                } else {
-                    return nil
-                }
+                self.init(sourceType: banking.type)
             case .billPayment(let billPayment):
-                if let sourceType = SourceTypeValue(billPayment.type) {
-                    self = .source(sourceType)
-                } else {
-                    return nil
-                }
+                self.init(sourceType: billPayment.type)
             case .unknownSource(let sourceType, configurations: _):
-                if let sourceType = SourceTypeValue(sourceType) {
-                    self = .source(sourceType)
-                } else {
-                    return nil
-                }
+                self.init(sourceType: sourceType)
             case .promptpay:
                 self = .source(.promptPay)
             case .paynow:
@@ -445,11 +433,7 @@ extension Capability.Backend {
             case .truemoney:
                 self = .source(.trueMoney)
             case .points(let points):
-                if let sourceType = SourceTypeValue(points.type) {
-                    self = .source(sourceType)
-                } else {
-                    return nil
-                }
+                self.init(sourceType: points.type)
             case .eContext:
                 self = .source(.eContext)
             case .fpx:
