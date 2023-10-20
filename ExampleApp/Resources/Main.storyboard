@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="iu0-Jf-pl4">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1166,7 +1165,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
         <!--PaymentCreatorController-->
         <scene sceneID="Sgp-QY-wO1">
             <objects>
-                <viewControllerPlaceholder storyboardName="OmiseSDK" bundleIdentifier="co.omise.OmiseSDK" referencedIdentifier="PaymentCreatorController" id="OVI-jW-DQg" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="OmiseSDK" bundleIdentifier="OmiseSDK-OmiseSDK-resources" referencedIdentifier="PaymentCreatorController" id="OVI-jW-DQg" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="qGS-49-PsU"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c6D-lq-giu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1297,7 +1296,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
         <!--OmiseSDK Credit Card Form-->
         <scene sceneID="UEK-Dq-FH1">
             <objects>
-                <viewControllerPlaceholder storyboardName="OmiseSDK" bundleIdentifier="co.omise.OmiseSDK" id="Rxw-dP-FaG" userLabel="OmiseSDK Credit Card Form" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="OmiseSDK" bundleIdentifier="OmiseSDK-OmiseSDK-resources" id="Rxw-dP-FaG" userLabel="OmiseSDK Credit Card Form" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Mpt-Wt-4ua"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iDk-yg-N5a" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1360,6 +1359,9 @@ You can present via either Storyboard or Code and you can see the code in the Ex
     <designables>
         <designable name="5Ul-WN-gFb">
             <size key="intrinsicContentSize" width="156" height="22"/>
+        </designable>
+        <designable name="Iw8-Ab-h7Y">
+            <size key="intrinsicContentSize" width="28" height="22"/>
         </designable>
         <designable name="LzH-z8-dKL">
             <size key="intrinsicContentSize" width="123" height="22"/>

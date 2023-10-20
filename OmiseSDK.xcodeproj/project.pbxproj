@@ -1293,6 +1293,7 @@
 					"-lc++",
 					"-all_load",
 				);
+				OTHER_SWIFT_FLAGS = "-DINTERNAL_TEST";
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.ExampleApp;
 				PRODUCT_NAME = ExampleApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1546,6 +1547,7 @@
 					"-lc++",
 					"-all_load",
 				);
+				OTHER_SWIFT_FLAGS = "-DINTERNAL_TEST";
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.ExampleApp;
 				PRODUCT_NAME = ExampleApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
