@@ -1,8 +1,11 @@
 import XCTest
+import UIKit
 @testable import OmiseSwiftUIKit
 
 class UIKitViewPresentableTests: XCTestCase {
     func testTodo() {
-//        XCTAssertEqual
+        let view = UIView()
+        let presentable = UIKitViewPresentable<UIView>(view: view)
+        XCTAssertEqual(view, presentable.view)
     }
 }

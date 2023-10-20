@@ -8,7 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.tintColor = UIColor(named: "App Tint") ?? UIColor.blue
 
         #if !INTERNAL_TEST
-        /// WORKAROUND: 
+        /// WORKAROUND:
         /// Storyboards do not trigger the loading of resource bundles in Swift Packages.
         /// Loading Storyboard from OmiseSDK package to use Storyboard Reference in Interface Builder
         Bundle.loadStoryboard(package: "OmiseSDK", target: "OmiseSDK")
