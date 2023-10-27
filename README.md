@@ -103,7 +103,7 @@ Card** and **Creating a Payment Source**.
 #### Creating a Card Token
 
 Normally, merchants must not send credit or debit card data to their own
-servers. So, in order to collect a credit card payment from a
+servers. To collect a credit card payment from a
 customer, merchants will need to first *tokenize* the credit card data using
 Opn Payments API and then use the generated token in place of the card
 data.  You can tokenize credit card data by creating and initializing
@@ -125,7 +125,7 @@ let request = Request<Token>(parameter: tokenParameters)
 
 Opn Payments now supports many payment methods other than credit cards.  You
 may request a payment with one of those supported payment methods from
-a customer by calling `CreateSourceParameter` API. You need to specify
+a customer by calling the `CreateSourceParameter` API. You need to specify
 the parameters (e.g. payment amount and currency) of the source you
 want to create by creating and initializing a `Request<Source>` with
 the `Payment Information` object:
@@ -273,7 +273,7 @@ Opn Payments iOS SDK provides some built-in credit card UI components to make it
 * `CardExpiryDatePicker` - `UIPickerView` implementation that has a month and year column.
 * `CardCVVTextField` - CVV number field.
 
-Additionally fields turn red automatically if their content fails
+Additionally, fields turn red automatically if their content fails
 basic validation (e.g. alphabetic characters in the number field,
 content with wrong length, etc.) and come in 2 supported styles, plain
 and border.
@@ -400,7 +400,7 @@ extension ViewController: OmiseAuthorizingPaymentViewControllerDelegate {
 
 ## Objective-C Compatibility
 
-Opn Payments iOS SDK comes with full Objective-C support. The SDK is designed with the Swift language as a first-class citizen and adopts Swift-only features in the SDK, but also provides an Objective-C counterpart for those features.
+Opn Payments iOS SDK comes with full Objective-C support. The SDK is designed with the Swift language as a first-class citizen, and not only adopts Swift-only features in the SDK, but also provides an Objective-C counterpart for those features.
 If you found an API that is not available in Objective-C, please don't hestitate [to open an issue](https://github.com/omise/omise-ios/issues/new).
 
 
