@@ -97,7 +97,7 @@ let client = OmiseSDK.Client.init(publicKey: "omise_public_key")
 
 
 The SDK currently
-supports 2 main categories of the requests: **Tokenizing a Credit
+supports 2 main categories of requests: **Tokenizing a Credit
 Card** and **Creating a Payment Source**.
 
 #### Creating a Card Token
@@ -275,7 +275,7 @@ Opn Payments iOS SDK provides some built-in credit card UI components to make it
 
 Additionally, fields turn red automatically if their content fails
 basic validation (e.g. alphabetic characters in the number field,
-content with wrong length, etc.) and come in 2 supported styles, plain
+content with wrong length, etc.) and come in two supported styles, plain
 and border.
 
 #### Built-in Payment Creator Controller
@@ -384,7 +384,7 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
 ##### Receive `Authorizing Payment` events via the delegate
 
-`OmiseAuthorizingPaymentViewController` send `Authorizing Payment` events to its `delegate` when there's an event occurred.
+`OmiseAuthorizingPaymentViewController` sends `Authorizing Payment` events to its `delegate` when an event occurs.
 
 ```swift
 extension ViewController: OmiseAuthorizingPaymentViewControllerDelegate {
