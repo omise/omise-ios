@@ -7,7 +7,7 @@
 [![](https://img.shields.io/badge/email-support-yellow.svg?style=flat-square)](mailto:support@omise.co)
 ![CI](https://github.com/omise/omise-ios/workflows/CI/badge.svg?branch=master)
 
-[Opn Payments](https://www.omise.co/) is a payment service provider operating
+[Opn Payments](https://docs.opn.ooo/) is a payment service provider operating
 in Thailand, Japan, and Singapore. Opn Payments provides a set of APIs that
 help merchants of any size accept payments online.
 
