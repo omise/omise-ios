@@ -12,7 +12,7 @@ in Thailand, Japan, and Singapore. Opn Payments provides a set of APIs that
 help merchants of any size accept payments online.
 
 The Opn Payments iOS SDK provides bindings for
-[tokenizing credit cards](https://www..co/tokens-api) and
+[tokenizing credit cards](https://docs.opn.ooo/tokens-api) and
 [accepting non-credit-card payments](https://www.omise.co/sources-api)
 using the Opn Payments API allowing developers to safely and easily accept
 payments within apps.
