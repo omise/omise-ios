@@ -1,4 +1,3 @@
-[![](https://cdn.omise.co/assets/omise.png)](https://opn.ooo)
 
 # Opn Payments iOS SDK
 
