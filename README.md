@@ -4,7 +4,7 @@
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat-square)](https://github.com/Carthage/Carthage)
 [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Packager%20Manager-compatible-brightgreen?style=flat-square)](https://swift.org/package-manager)
-[![](https://img.shields.io/badge/email-support-yellow.svg?style=flat-square)](mailto:support@omise.co)
+[![](https://img.shields.io/badge/email-support-yellow.svg?style=flat-square)](mailto:support@opn.ooo)
 ![CI](https://github.com/omise/omise-ios/workflows/CI/badge.svg?branch=master)
 
 [Opn Payments](https://docs.opn.ooo/) is a payment service provider operating
@@ -21,7 +21,7 @@ If you run into any issues regarding this SDK and the functionality it
 provides, consult the frequently asked questions in our
 [comprehensive support documents](https://docs.opn.ooo/support).  If
 you can't find an answer there, feel free to
-[email our support team](mailto:support@omise.co).
+[email our support team](mailto:support@opn.ooo).
 
 ## Requirements
 
