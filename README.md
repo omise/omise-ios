@@ -1,4 +1,4 @@
-[![](https://cdn.omise.co/assets/omise.png)](https://omise.co)
+[![](https://cdn.omise.co/assets/omise.png)](https://opn.ooo)
 
 # Opn Payments iOS SDK
 
@@ -13,13 +13,13 @@ help merchants of any size accept payments online.
 
 The Opn Payments iOS SDK provides bindings for
 [tokenizing credit cards](https://docs.opn.ooo/tokens-api) and
-[accepting non-credit-card payments](https://www.omise.co/sources-api)
+[accepting non-credit-card payments](https://docs.opn.ooo/sources-api)
 using the Opn Payments API allowing developers to safely and easily accept
 payments within apps.
 
 If you run into any issues regarding this SDK and the functionality it
 provides, consult the frequently asked questions in our
-[comprehensive support documents](https://www.omise.co/support).  If
+[comprehensive support documents](https://docs.opn.ooo/support).  If
 you can't find an answer there, feel free to
 [email our support team](mailto:support@omise.co).
 
@@ -34,7 +34,7 @@ you can't find an answer there, feel free to
 
 **Card data should never transit through your server. We recommend that you follow our
 guide on how to safely
-[collect credit information](https://www.omise.co/collecting-card-information).**
+[collect credit information](https://docs.opn.ooo/collecting-card-information).**
 
 To be authorized to create tokens on your own server, you must have a
 currently valid PCI-DSS Attestation of Compliance (AoC) delivered by a
@@ -188,7 +188,7 @@ you can easily integrate into your app.
 #### Credit Card Form
 
 The `CreditCardFormViewController` provides a pre-made credit card form and will automatically
-[tokenize credit card information](https://www.omise.co/security-best-practices) for you.
+[tokenize credit card information](https://docs.opn.ooo/security-best-practices) for you.
 You only need to implement two delegate methods and a way to display the form.
 
 ##### Use Credit Card Form in code
@@ -350,7 +350,7 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
 ### Authorizing Payment
 
-Some payment methods require the customers to authorize the payment via an authorized URL. This includes the [3-D Secure verification](https://docs.opn.ooo/fraud-protection#3-d-secure), [Internet Banking payment](https://docs.opn.ooo/offsite-payment), [Alipay](https://docs.opn.ooo/alipay). The Opn Payments iOS SDK provides a built-in class to do the authorization.
+Some payment methods require the customers to authorize the payment via an authorized URL. This includes the [3-D Secure verification](https://docs.opn.ooo/fraud-protection#3-d-secure), [Internet Banking payment](https://docs.opn.ooo/internet-banking), [Alipay](https://docs.opn.ooo/alipay). The Opn Payments iOS SDK provides a built-in class to do the authorization.
 
 On payment methods that require opening the external app (e.g. mobile banking app) to authorize the transaction, set the *return_uri* to a **deeplink** or **applink** to be able to open the merchant app. Else, after the card holder completes authorizing the transaction on the external app, the flow redirects to the normal link in the *return_uri* and opens it on the browser app, and therefore results in the payment not being completed.
 
