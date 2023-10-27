@@ -350,7 +350,7 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
 ### Authorizing Payment
 
-Some payment methods require the customers to authorize the payment via an authorized URL. This includes the [3-D Secure verification](https://www.omise.co/fraud-protection#3-d-secure), [Internet Banking payment](https://www.omise.co/offsite-payment), [Alipay](https://www.omise.co/alipay). The Opn Payments iOS SDK provides a built-in class to do the authorization.
+Some payment methods require the customers to authorize the payment via an authorized URL. This includes the [3-D Secure verification](https://docs.opn.ooo/fraud-protection#3-d-secure), [Internet Banking payment](https://docs.opn.ooo/offsite-payment), [Alipay](https://docs.opn.ooo/alipay). The Opn Payments iOS SDK provides a built-in class to do the authorization.
 
 On payment methods that require opening the external app (e.g. mobile banking app) to authorize the transaction, set the *return_uri* to a **deeplink** or **applink** to be able to open the merchant app. Else, after the card holder completes authorizing the transaction on the external app, the flow redirects to the normal link in the *return_uri* and opens it on the browser app, and therefore results in the payment not being completed.
 
