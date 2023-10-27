@@ -410,4 +410,4 @@ Pull requests, issues, and bugfixes are welcome!
 
 ## LICENSE
 
-MIT [See the full license text](https://github.com//-ios/blob/master/LICENSE)
+MIT [See the full license text](https://github.com/omise/omise-ios/blob/master/LICENSE)
