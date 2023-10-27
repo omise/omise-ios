@@ -231,8 +231,8 @@ extension ViewController: CreditCardFormViewControllerDelegate {
 }
 ```
 
-Alternatively you can also push the view controller onto a `UINavigationController` stack
-like so:
+Alternatively, you can also push the view controller onto a `UINavigationController` stack
+as follows:
 
 ```swift
 @IBAction func displayCreditCardForm() {
