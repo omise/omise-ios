@@ -22,7 +22,6 @@ public class ThreeDSLabelCustomization: ThreeDSCustomization {
     /// Font size of the heading label text.
     public var headingTextFontSize: Int?
 
-    public 
     public init(
         headingTextColorHex: String? = nil,
         headingDarkTextColorHex: String? = nil,
@@ -41,6 +40,27 @@ public class ThreeDSLabelCustomization: ThreeDSCustomization {
         self.headingDarkTextColorHex = headingDarkTextColorHex
         self.headingTextFontName = headingTextFontName
         self.headingTextFontSize = headingTextFontSize
+    }
+
+    @discardableResult
+    public func headingTextColorHex(_ headingTextColorHex: String?) -> Self {
+        self.headingTextColorHex = headingTextColorHex
+        return self
+    }
+    @discardableResult
+    public func headingDarkTextColorHex(_ headingDarkTextColorHex: String?) -> Self {
+        self.headingDarkTextColorHex = headingDarkTextColorHex
+        return self
+    }
+    @discardableResult
+    public func headingTextFontName(_ headingTextFontName: String?) -> Self {
+        self.headingTextFontName = headingTextFontName
+        return self
+    }
+    @discardableResult
+    public func headingTextFontSize(_ headingTextFontSize: Int?) -> Self {
+        self.headingTextFontSize = headingTextFontSize
+        return self
     }
 }
 

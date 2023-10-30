@@ -41,6 +41,27 @@ public class ThreeDSToolbarCustomization: ThreeDSCustomization {
         self.headerText = headerText
         self.buttonText = buttonText
     }
+
+    @discardableResult
+    public func backgroundColorHex(_ backgroundColorHex: String?) -> Self {
+        self.backgroundColorHex = backgroundColorHex
+        return self
+    }
+    @discardableResult
+    public func darkBackgroundColorHex(_ darkBackgroundColorHex: String?) -> Self {
+        self.darkBackgroundColorHex = darkBackgroundColorHex
+        return self
+    }
+    @discardableResult
+    public func headerText(_ headerText: String?) -> Self {
+        self.headerText = headerText
+        return self
+    }
+    @discardableResult
+    public func buttonText(_ buttonText: String?) -> Self {
+        self.buttonText = buttonText
+        return self
+    }
 }
 
 extension ThreeDS_SDK.ToolbarCustomization {

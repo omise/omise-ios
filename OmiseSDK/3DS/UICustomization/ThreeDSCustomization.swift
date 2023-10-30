@@ -35,24 +35,24 @@ public class ThreeDSCustomization {
     }
 
     @discardableResult
-    func textFontName(_ textFontName: String?) -> Self {
+    public func textFontName(_ textFontName: String?) -> Self {
         self.textFontName = textFontName
         return self
     }
     
     @discardableResult
-    func textColorHex(_ textColorHex: String?) -> Self {
-        self.textFontName = textFontName
+    public func textColorHex(_ textColorHex: String?) -> Self {
+        self.textColorHex = textColorHex
         return self
     }
     @discardableResult
-    func darkTextColorHex(_ darkTextColorHex: String?) -> Self {
-        self.textFontName = textFontName
+    public func darkTextColorHex(_ darkTextColorHex: String?) -> Self {
+        self.darkTextColorHex = darkTextColorHex
         return self
     }
     @discardableResult
-    func textFontSize(_ textFontSize: Int?) -> Self {
-        self.textFontName = textFontName
+    public func textFontSize(_ textFontSize: Int?) -> Self {
+        self.textFontSize = textFontSize
         return self
     }
 }

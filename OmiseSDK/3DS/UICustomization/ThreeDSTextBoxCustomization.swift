@@ -41,6 +41,27 @@ public class ThreeDSTextBoxCustomization: ThreeDSCustomization {
         self.darkBorderColorHex = darkBorderColorHex
         self.cornerRadius = cornerRadius
     }
+
+    @discardableResult
+    public func borderColorHex(_ borderColorHex: String?) -> Self {
+        self.borderColorHex = borderColorHex
+        return self
+    }
+    @discardableResult
+    public func darkBorderColorHex(_ darkBorderColorHex: String?) -> Self {
+        self.darkBorderColorHex = darkBorderColorHex
+        return self
+    }
+    @discardableResult
+    public func cornerRadius(_ cornerRadius: Int?) -> Self {
+        self.cornerRadius = cornerRadius
+        return self
+    }
+    @discardableResult
+    public func borderWidth(_ borderWidth: Int?) -> Self {
+        self.borderWidth = borderWidth
+        return self
+    }
 }
 
 extension ThreeDS_SDK.TextBoxCustomization {

@@ -36,6 +36,22 @@ public class ThreeDSButtonCustomization: ThreeDSCustomization {
         self.darkBackgroundColorHex = darkBackgroundColorHex
         self.cornerRadius = cornerRadius
     }
+
+    @discardableResult
+    public func backgroundColorHex(_ backgroundColorHex: String?) -> Self {
+        self.backgroundColorHex = backgroundColorHex
+        return self
+    }
+    @discardableResult
+    public func darkBackgroundColorHex(_ darkBackgroundColorHex: String?) -> Self {
+        self.darkBackgroundColorHex = darkBackgroundColorHex
+        return self
+    }
+    @discardableResult
+    public func cornerRadius(_ cornerRadius: Int?) -> Self {
+        self.cornerRadius = cornerRadius
+        return self
+    }
 }
 
 extension ThreeDS_SDK.ButtonCustomization {

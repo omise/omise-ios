@@ -417,7 +417,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
 
         // DEBUG
         cardNameTextField.text = "test"
-        cardNumberTextField.text = "4761340000000043" // "5413681584441973"
+        cardNumberTextField.text = "5413681584441973"
         expiryDateTextField.text = "02/24"
         secureCodeTextField.text = "123"
         updateSubmitButtonState()

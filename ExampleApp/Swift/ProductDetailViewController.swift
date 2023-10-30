@@ -149,8 +149,23 @@ class ProductDetailViewController: OMSBaseViewController {
 private extension ProductDetailViewController {
     var threeDSUICustomization: ThreeDSUICustomization? {
         let threeDSUICustomization = ThreeDSUICustomization()
-        threeDSUICustomization.buttonCustomization = [.CANCEL: ThreeDSButtonCustomization(backgroundColorHex: "#FF0000")]
-        threeDSUICustomization.labelCustomization = ThreeDSLabelCustomization(h
+        threeDSUICustomization.buttonCustomization = [
+            .RESEND:
+                ThreeDSButtonCustomization()
+                .backgroundColorHex("#93C572"), // Green shade
+            .SUBMIT:
+                ThreeDSButtonCustomization()
+                .backgroundColorHex("#FFBF00"), // Orange
+        ]
+        threeDSUICustomization.labelCustomization = ThreeDSLabelCustomization()
+            .headingTextColorHex("#FFAA33") // Yellow-Orange
+        threeDSUICustomization.toolbarCustomization = ThreeDSToolbarCustomization()
+            .headerText("Omise 3DS Challenge")
+            .buttonText("Ok")
+        threeDSUICustomization.textBoxCustomization = ThreeDSTextBoxCustomization()
+            .borderWidth(10)
+            .borderColorHex("#00FF00") // Green
+            .cornerRadius(6)
         return threeDSUICustomization
     }
 }
