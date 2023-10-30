@@ -134,15 +134,19 @@ class ProductDetailViewController: OMSBaseViewController {
                 uiCustomization: self.threeDSUICustomization,
                 in: self
             )
-//            let handlerController =
-//                AuthorizingPaymentViewController
-//                    .makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(
-//                        url, expectedReturnURLPatterns: [expectedReturnURL], delegate: self)
-//            self.navigationController?.pushViewController(handlerController.topViewController!, animated: true)
-
-//            self.present(handlerController, animated: true, completion: nil)
         })
         present(alertController, animated: true, completion: nil)
+    }
+
+    // topViewController = handlerController.topViewController
+    func presentAuthPaymentController(topViewController: UIViewController, url: URL, expectedReturnURL: URLComponents) {
+        let handlerController =
+        AuthorizingPaymentViewController
+            .makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(
+                url, expectedReturnURLPatterns: [expectedReturnURL], delegate: self)
+        self.navigationController?.pushViewController(topViewController, animated: true)
+
+        self.present(handlerController, animated: true, completion: nil)
     }
 }
 
