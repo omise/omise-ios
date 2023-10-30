@@ -186,7 +186,6 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
     @objc public static let defaultErrorMessageTextColor = UIColor.error
 
     /// A boolean flag that enables/disables Card.IO integration.
-    @available(*, unavailable, message: "Built in support for Card.ios was removed. You can implement it in your app and call the setCreditCardInformation(number:name:expiration:) method")
     @objc public var cardIOEnabled = true
 
     /// Factory method for creating CreditCardFormController with given public key.
@@ -415,6 +414,13 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             name: NotificationKeyboardWillHideFrameNotification,
             object: nil
         )
+
+        // DEBUG
+        cardNameTextField.text = "test"
+        cardNumberTextField.text = "4761340000000043" // "5413681584441973"
+        expiryDateTextField.text = "02/24"
+        secureCodeTextField.text = "123"
+        updateSubmitButtonState()
     }
 
     public override func viewWillLayoutSubviews() {

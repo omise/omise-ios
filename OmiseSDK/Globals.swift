@@ -347,7 +347,7 @@ extension UnkeyedEncodingContainer {
     }
 }
 
-extension ControlState: Hashable {
+extension ControlState {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(rawValue)
     }

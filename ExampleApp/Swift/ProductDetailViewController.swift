@@ -119,19 +119,39 @@ class ProductDetailViewController: OMSBaseViewController {
                                                 preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
         alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "Go", style: UIAlertAction.Style.default) { (_) in
-            guard let textField = alertController.textFields?.first,
+        alertController.addAction(UIAlertAction(title: "Go", style: UIAlertAction.Style.default) { [weak self] (_) in
+            guard let self = self,
+                  let textField = alertController.textFields?.first,
                   let text = textField.text,
                   let url = URL(string: text),
-                  let expectedReturnURL = URLComponents(string: "http://www.example.com/orders") else { return }
-            
-            let handlerController =
-                AuthorizingPaymentViewController
-                    .makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(
-                        url, expectedReturnURLPatterns: [expectedReturnURL], delegate: self)
-            self.present(handlerController, animated: true, completion: nil)
+                  let expectedReturnURL = URLComponents(string: "omiseExampleApp://omise_3ds_challenge"),
+                  let threeDSRequestorAppURL = expectedReturnURL.url?.absoluteString
+            else { return }
+
+            NetceteraThreeDSController.processAuthorizedURL(
+                url,
+                threeDSRequestorAppURL: threeDSRequestorAppURL,
+                uiCustomization: self.threeDSUICustomization,
+                in: self
+            )
+//            let handlerController =
+//                AuthorizingPaymentViewController
+//                    .makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(
+//                        url, expectedReturnURLPatterns: [expectedReturnURL], delegate: self)
+//            self.navigationController?.pushViewController(handlerController.topViewController!, animated: true)
+
+//            self.present(handlerController, animated: true, completion: nil)
         })
         present(alertController, animated: true, completion: nil)
+    }
+}
+
+private extension ProductDetailViewController {
+    var threeDSUICustomization: ThreeDSUICustomization? {
+        let threeDSUICustomization = ThreeDSUICustomization()
+        threeDSUICustomization.buttonCustomization = [.CANCEL: ThreeDSButtonCustomization(backgroundColorHex: "#FF0000")]
+        threeDSUICustomization.labelCustomization = ThreeDSLabelCustomization(h
+        return threeDSUICustomization
     }
 }
 

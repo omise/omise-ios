@@ -1,6 +1,7 @@
 import Foundation
 import WebKit
 import os
+import OmiseThreeDSSDK
 
 /// Delegate to receive authorizing payment events.
 @objc(OMSAuthorizingPaymentViewControllerDelegate)
@@ -147,30 +148,58 @@ public class AuthorizingPaymentViewController: UIViewController {
             delegate: delegate
         )
     }
-    
+
+//    let netceteraThreeDSController = NetceteraThreeDSController()
+
     // need to refactor loadView, removing super results in crash
     // swiftlint:disable:next prohibited_super_call
     public override func loadView() {
         super.loadView()
-        
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(webView)
-        
-        webView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
-        webView.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
-        webView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        webView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+
+//        webView.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(webView)
+//
+//        webView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
+//        webView.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
+//        webView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+//        webView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        webView.navigationDelegate = self
-        webView.uiDelegate = self
+//        webView.navigationDelegate = self
+//        webView.uiDelegate = self
     }
     
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        startAuthorizingPaymentProcess()
+//        startAuthorizingPaymentProcess()
+
+//        if let authorizeUrl = authorizedURL {
+//            do {
+//                let transaction = try netceteraThreeDSController.newTransaction()
+//
+//                let authParams = try transaction.getAuthenticationRequestParameters()
+//                let deviceInfo = FimeProxy.deviceInformation(sdkAppId: authParams.getSDKAppID(), sdkVersion: "1.0")!
+//
+//                try netceteraThreeDSController.sendAuthenticationRequest(
+//                    deviceInfo: deviceInfo,
+//                    transaction: transaction,
+//                    authorizeUrl: authorizeUrl) { [weak self] response in
+//                        if let response = response, response.isChallenge == true {
+//                            guard let self = self else { return }
+//                            //                        DispatchQueue.main.async {
+//                            let vc = UIApplication.shared.keyWindow?.rootViewController ?? self
+//                            try? self.netceteraThreeDSController.presentChallenge(authResponse: response, transaction: transaction, from: vc)
+//                            //                        }
+//                        }
+//                        print("!!!")
+//                    }
+//            } catch {
+//                print(error)
+//            }
+//        }
+
     }
     
     @IBAction private func cancelAuthorizingPaymentProcess(_ sender: UIBarButtonItem) {

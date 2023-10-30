@@ -69,7 +69,6 @@
 		75405AA52A27F5D3008C21F6 /* AtomeFormViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B32A1A5EAD0038FA54 /* AtomeFormViewModelProtocol.swift */; };
 		75405AA82A27F97E008C21F6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75405AA62A27F97E008C21F6 /* Localizable.strings */; };
 		75405AAB2A27F9B4008C21F6 /* Bundle+OmiseSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */; };
-		7558CC8B2AAF7B44005815DF /* ThreeDS_SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 7558CC8A2AAF7B44005815DF /* ThreeDS_SDK */; };
 		7558CC8F2AAF7D4E005815DF /* ThreeDSButtonCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7558CC8E2AAF7D4E005815DF /* ThreeDSButtonCustomization.swift */; };
 		7558CC912AAF7D56005815DF /* ThreeDSToolbarCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7558CC902AAF7D56005815DF /* ThreeDSToolbarCustomization.swift */; };
 		7558CC932AAF7D5B005815DF /* ThreeDSLabelCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7558CC922AAF7D5B005815DF /* ThreeDSLabelCustomization.swift */; };
@@ -87,7 +86,10 @@
 		75AA454F2AAF903B003DE277 /* ThreeDSTextBoxCustomizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA454E2AAF903B003DE277 /* ThreeDSTextBoxCustomizationTests.swift */; };
 		75AA45512AAFF364003DE277 /* NetceteraThreeDSController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA45502AAFF364003DE277 /* NetceteraThreeDSController.swift */; };
 		75AA45532AAFF783003DE277 /* ThreeDSUICustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA45522AAFF783003DE277 /* ThreeDSUICustomization.swift */; };
-		75AA45592AAFFF16003DE277 /* ThreeDS_SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 75AA45582AAFFF16003DE277 /* ThreeDS_SDK */; };
+		75AA455C2AB03BF5003DE277 /* ds-root-key.crt in Resources */ = {isa = PBXBuildFile; fileRef = 75AA455B2AB03BF5003DE277 /* ds-root-key.crt */; };
+		75AA455F2AB042CC003DE277 /* ThreeDSDeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA455E2AB042CC003DE277 /* ThreeDSDeviceInfo.swift */; };
+		75AA46412AB05642003DE277 /* OmiseThreeDSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75AA463B2AB055AB003DE277 /* OmiseThreeDSSDK.framework */; };
+		75AA46422AB05642003DE277 /* OmiseThreeDSSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 75AA463B2AB055AB003DE277 /* OmiseThreeDSSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		75B43B572A0277A3004352C7 /* PaymentInformation.Atome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */; };
 		75DAD88C2A0BA5130098AF96 /* OmiseTestSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; };
 		75DAD88E2A0BA5130098AF96 /* OmiseTestSDK in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -110,6 +112,8 @@
 		75F2A0BB2A1A60630038FA54 /* AtomeFormViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B52A1A5F020038FA54 /* AtomeFormViewContext.swift */; };
 		75F2A0C12A1A84900038FA54 /* UIColor+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0C02A1A84900038FA54 /* UIColor+Helpers.swift */; };
 		75F2A0C22A1A87AE0038FA54 /* UIColor+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0C02A1A84900038FA54 /* UIColor+Helpers.swift */; };
+		75FCE1AF2ACBBA8200AE2895 /* ThreeDS_SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 75FCE1AE2ACBBA8200AE2895 /* ThreeDS_SDK */; };
+		75FCE1B12ACBBAD900AE2895 /* ThreeDS_SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 75FCE1B02ACBBAD900AE2895 /* ThreeDS_SDK */; };
 		8A01E48D21059EFF00D73FE6 /* PaymentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01E48C21059EFF00D73FE6 /* PaymentInformation.swift */; };
 		8A01F78B20D90EC5003FC11E /* Client+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78A20D90EC5003FC11E /* Client+ObjC.swift */; };
 		8A01F78E20D91091003FC11E /* OMSTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F78D20D91091003FC11E /* OMSTokenRequest.swift */; };
@@ -183,6 +187,34 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		75AA463A2AB055AB003DE277 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75AA46352AB055AB003DE277 /* OmiseThreeDSSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8AC8ED5D2317D44B00549747;
+			remoteInfo = OmiseThreeDSSDK;
+		};
+		75AA463C2AB055AB003DE277 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75AA46352AB055AB003DE277 /* OmiseThreeDSSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8AC8ED662317D44B00549747;
+			remoteInfo = OmiseThreeDSSDKTests;
+		};
+		75AA46622AB05765003DE277 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75AA46352AB055AB003DE277 /* OmiseThreeDSSDK.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8AC8ED5C2317D44B00549747;
+			remoteInfo = OmiseThreeDSSDK;
+		};
+		75AA46692AB0576F003DE277 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75AA46352AB055AB003DE277 /* OmiseThreeDSSDK.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8AC8ED5C2317D44B00549747;
+			remoteInfo = OmiseThreeDSSDK;
+		};
 		8A723A522164D7B100D902F5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2259310F1CE3210700841B86 /* Project object */;
@@ -218,6 +250,16 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		75AA465B2AB0570E003DE277 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75DAD88D2A0BA5130098AF96 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -236,6 +278,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				8A2C451920ECC7A60033E2EB /* OmiseSDK.framework in Embed Frameworks */,
+				75AA46422AB05642003DE277 /* OmiseThreeDSSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,6 +366,9 @@
 		75AA454E2AAF903B003DE277 /* ThreeDSTextBoxCustomizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSTextBoxCustomizationTests.swift; sourceTree = "<group>"; };
 		75AA45502AAFF364003DE277 /* NetceteraThreeDSController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetceteraThreeDSController.swift; sourceTree = "<group>"; };
 		75AA45522AAFF783003DE277 /* ThreeDSUICustomization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSUICustomization.swift; sourceTree = "<group>"; };
+		75AA455B2AB03BF5003DE277 /* ds-root-key.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ds-root-key.crt"; sourceTree = "<group>"; };
+		75AA455E2AB042CC003DE277 /* ThreeDSDeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSDeviceInfo.swift; sourceTree = "<group>"; };
+		75AA46352AB055AB003DE277 /* OmiseThreeDSSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OmiseThreeDSSDK.xcodeproj; path = "../../3DS/3DS-iOS-SDK/OmiseThreeDSSDK.xcodeproj"; sourceTree = "<group>"; };
 		75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInformation.Atome.swift; sourceTree = "<group>"; };
 		75DAD87F2A0B9AE50098AF96 /* OmiseTestSDK */ = {isa = PBXFileReference; lastKnownFileType = text; path = OmiseTestSDK; sourceTree = SOURCE_ROOT; };
 		75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalConfig.swift; sourceTree = "<group>"; };
@@ -425,7 +471,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7558CC8B2AAF7B44005815DF /* ThreeDS_SDK in Frameworks */,
+				75FCE1AF2ACBBA8200AE2895 /* ThreeDS_SDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,7 +479,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75AA45592AAFFF16003DE277 /* ThreeDS_SDK in Frameworks */,
+				75AA46412AB05642003DE277 /* OmiseThreeDSSDK.framework in Frameworks */,
+				75FCE1B12ACBBAD900AE2895 /* ThreeDS_SDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +514,7 @@
 		2259310E1CE3210700841B86 = {
 			isa = PBXGroup;
 			children = (
+				75AA46352AB055AB003DE277 /* OmiseThreeDSSDK.xcodeproj */,
 				226E16101D2268B400219652 /* QuickStart.playground */,
 				2259311A1CE3210700841B86 /* OmiseSDK */,
 				F6FE863425E3B0AE00C7A4DE /* OmiseSDKObjc */,
@@ -642,7 +690,9 @@
 		7558CC8C2AAF7C85005815DF /* 3DS */ = {
 			isa = PBXGroup;
 			children = (
+				75AA455A2AB03BE5003DE277 /* assets */,
 				75AA45502AAFF364003DE277 /* NetceteraThreeDSController.swift */,
+				8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentViewController.swift */,
 				7558CC8D2AAF7C9E005815DF /* UICustomization */,
 			);
 			path = 3DS;
@@ -698,6 +748,24 @@
 				756C8F252A40698600D53059 /* TextFieldView.swift */,
 			);
 			name = TextFieldView;
+			sourceTree = "<group>";
+		};
+		75AA455A2AB03BE5003DE277 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				75AA455B2AB03BF5003DE277 /* ds-root-key.crt */,
+				75AA455E2AB042CC003DE277 /* ThreeDSDeviceInfo.swift */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		75AA46362AB055AB003DE277 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				75AA463B2AB055AB003DE277 /* OmiseThreeDSSDK.framework */,
+				75AA463D2AB055AB003DE277 /* OmiseThreeDSSDKTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		75DAD8802A0B9B060098AF96 /* Frameworks */ = {
@@ -800,7 +868,6 @@
 				731A75D225E3604A002353C0 /* FPXBankChooserViewController.swift */,
 				73F9BA4625E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift */,
 				8A0A67E62137EE49006356B7 /* AdaptableStaticTableViewController.swift */,
-				8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentViewController.swift */,
 				8AD391B0230C05BC00383286 /* Colors.swift */,
 				8A25E929213CF6F300D48252 /* EContextInformationInputViewController.swift */,
 				F6614CD5243DB8E7005B656E /* TrueMoneyFormViewController.swift */,
@@ -984,15 +1051,17 @@
 				225931131CE3210700841B86 /* Sources */,
 				225931141CE3210700841B86 /* Frameworks */,
 				75341FF329A716FD003027E6 /* Swiftlint */,
+				75AA465B2AB0570E003DE277 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				75AA466A2AB0576F003DE277 /* PBXTargetDependency */,
 				75AA45552AAFFDF7003DE277 /* PBXTargetDependency */,
 			);
 			name = OmiseSDK;
 			packageProductDependencies = (
-				7558CC8A2AAF7B44005815DF /* ThreeDS_SDK */,
+				75FCE1AE2ACBBA8200AE2895 /* ThreeDS_SDK */,
 			);
 			productName = OmiseSDK;
 			productReference = 225931181CE3210700841B86 /* OmiseSDK.framework */;
@@ -1011,11 +1080,12 @@
 			buildRules = (
 			);
 			dependencies = (
+				75AA46632AB05765003DE277 /* PBXTargetDependency */,
 				8A7F8B0B20C55312008F4D08 /* PBXTargetDependency */,
 			);
 			name = "ExampleApp (Swift)";
 			packageProductDependencies = (
-				75AA45582AAFFF16003DE277 /* ThreeDS_SDK */,
+				75FCE1B02ACBBAD900AE2895 /* ThreeDS_SDK */,
 			);
 			productName = ExampleApp;
 			productReference = 22D4809D1D0EB29C00544CE1 /* ExampleApp.app */;
@@ -1131,10 +1201,16 @@
 			);
 			mainGroup = 2259310E1CE3210700841B86;
 			packageReferences = (
-				7558CC892AAF7B44005815DF /* XCRemoteSwiftPackageReference "SPM" */,
+				75FCE1AD2ACBBA8100AE2895 /* XCRemoteSwiftPackageReference "SPM" */,
 			);
 			productRefGroup = 225931191CE3210700841B86 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 75AA46362AB055AB003DE277 /* Products */;
+					ProjectRef = 75AA46352AB055AB003DE277 /* OmiseThreeDSSDK.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				225931171CE3210700841B86 /* OmiseSDK */,
@@ -1146,6 +1222,23 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		75AA463B2AB055AB003DE277 /* OmiseThreeDSSDK.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OmiseThreeDSSDK.framework;
+			remoteRef = 75AA463A2AB055AB003DE277 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		75AA463D2AB055AB003DE277 /* OmiseThreeDSSDKTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = OmiseThreeDSSDKTests.xctest;
+			remoteRef = 75AA463C2AB055AB003DE277 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		225931161CE3210700841B86 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -1154,6 +1247,7 @@
 				8A5D59811D5317DD005D3346 /* OmiseSDK.storyboard in Resources */,
 				75405AA82A27F97E008C21F6 /* Localizable.strings in Resources */,
 				8A776647214A5FC60029D166 /* NoticeView.xib in Resources */,
+				75AA455C2AB03BF5003DE277 /* ds-root-key.crt in Resources */,
 				2225B3541D0FDD63003EB396 /* Assets.xcassets in Resources */,
 				8AF5517A213D4C0100D61C98 /* Localizable.stringsdict in Resources */,
 				8AF985732147CC3D007E18ED /* Error.strings in Resources */,
@@ -1288,6 +1382,7 @@
 				7558CC972AAF7D67005815DF /* ThreeDSCustomization.swift in Sources */,
 				8AD0609320B55B3A0074894E /* RequestTask.swift in Sources */,
 				75405A8B2A26340E008C21F6 /* UIStackView+Helpers.swift in Sources */,
+				75AA455F2AB042CC003DE277 /* ThreeDSDeviceInfo.swift in Sources */,
 				8A0A67E72137EE49006356B7 /* AdaptableStaticTableViewController.swift in Sources */,
 				8A01F78E20D91091003FC11E /* OMSTokenRequest.swift in Sources */,
 				986406311CFEA7E4004BCF51 /* CardExpiryDateTextField.swift in Sources */,
@@ -1435,6 +1530,16 @@
 		75AA45552AAFFDF7003DE277 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			productRef = 75AA45542AAFFDF7003DE277 /* ThreeDS_SDK */;
+		};
+		75AA46632AB05765003DE277 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OmiseThreeDSSDK;
+			targetProxy = 75AA46622AB05765003DE277 /* PBXContainerItemProxy */;
+		};
+		75AA466A2AB0576F003DE277 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OmiseThreeDSSDK;
+			targetProxy = 75AA46692AB0576F003DE277 /* PBXContainerItemProxy */;
 		};
 		8A723A512164D7B100D902F5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2241,8 +2346,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ios-3ds-sdk/SPM.git";
 			requirement = {
+				kind = exactVersion;
+				version = 2.3.73;
+			};
+		};
+		75FCE1AD2ACBBA8100AE2895 /* XCRemoteSwiftPackageReference "SPM" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ios-3ds-sdk/SPM.git";
+			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				minimumVersion = 2.3.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -2251,11 +2364,6 @@
 		7509D4ED2A1D1F9F0050AB38 /* OmiseTestSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OmiseTestSDK;
-		};
-		7558CC8A2AAF7B44005815DF /* ThreeDS_SDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7558CC892AAF7B44005815DF /* XCRemoteSwiftPackageReference "SPM" */;
-			productName = ThreeDS_SDK;
 		};
 		75AA45462AAF8F5C003DE277 /* ThreeDS_SDK */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2267,14 +2375,19 @@
 			package = 7558CC892AAF7B44005815DF /* XCRemoteSwiftPackageReference "SPM" */;
 			productName = ThreeDS_SDK;
 		};
-		75AA45582AAFFF16003DE277 /* ThreeDS_SDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7558CC892AAF7B44005815DF /* XCRemoteSwiftPackageReference "SPM" */;
-			productName = ThreeDS_SDK;
-		};
 		75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OmiseTestSDK;
+		};
+		75FCE1AE2ACBBA8200AE2895 /* ThreeDS_SDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75FCE1AD2ACBBA8100AE2895 /* XCRemoteSwiftPackageReference "SPM" */;
+			productName = ThreeDS_SDK;
+		};
+		75FCE1B02ACBBAD900AE2895 /* ThreeDS_SDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75FCE1AD2ACBBA8100AE2895 /* XCRemoteSwiftPackageReference "SPM" */;
+			productName = ThreeDS_SDK;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

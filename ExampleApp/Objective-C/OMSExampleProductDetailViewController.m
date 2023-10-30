@@ -117,7 +117,8 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
         
         NSURLComponents *expectedReturnURL = [[NSURLComponents alloc] initWithString:@"http://www.example.com/orders"];
         UINavigationController *authorizingPaymentViewController = [OMSAuthorizingPaymentViewController authorizingPaymentViewControllerNavigationWithAuthorizedURL:url expectedReturnURLPatterns:@[expectedReturnURL] delegate:self];
-        [self presentViewController:authorizingPaymentViewController animated:YES completion:nil];
+        
+//        [self presentViewController:authorizingPaymentViewController animated:YES completion:nil];
     }]];
 
     [self presentViewController:alertController animated:YES completion:nil];

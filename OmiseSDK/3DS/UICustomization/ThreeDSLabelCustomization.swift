@@ -22,6 +22,7 @@ public class ThreeDSLabelCustomization: ThreeDSCustomization {
     /// Font size of the heading label text.
     public var headingTextFontSize: Int?
 
+    public 
     public init(
         headingTextColorHex: String? = nil,
         headingDarkTextColorHex: String? = nil,

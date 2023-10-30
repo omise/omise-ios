@@ -11,24 +11,24 @@ import ThreeDS_SDK
 
 public class ThreeDSUICustomization {
 
-    static var shared: ThreeDSUICustomization?
-    
+    public static var shared: ThreeDSUICustomization?
+
     /// Sets the attributes of a ButtonCustomization object for a particular button type.
-    var buttonCustomization: [ThreeDS_SDK.UiCustomization.ButtonType: ThreeDSButtonCustomization]?
+    public var buttonCustomization: [ThreeDS_SDK.UiCustomization.ButtonType: ThreeDSButtonCustomization]?
 
     /// Sets the attributes of a ButtonCustomization object for an implementer-specific button type.
-    var buttonCustomizationStrings: [String: ThreeDSButtonCustomization]?
+    public var buttonCustomizationStrings: [String: ThreeDSButtonCustomization]?
 
     /// Sets the attributes of a ToolbarCustomization object.
-    var toolbarCustomization: ThreeDSToolbarCustomization?
+    public var toolbarCustomization: ThreeDSToolbarCustomization?
 
     /// Sets the attributes of a LabelCustomization object.
-    var labelCustomization: ThreeDSLabelCustomization?
+    public var labelCustomization: ThreeDSLabelCustomization?
 
     /// Sets the attributes of a TextBoxCustomization object.
-    var textBoxCustomization: ThreeDSTextBoxCustomization?
+    public var textBoxCustomization: ThreeDSTextBoxCustomization?
 
-    init(
+    public init(
         buttonCustomization: [ThreeDS_SDK.UiCustomization.ButtonType: ThreeDSButtonCustomization]? = nil,
         buttonCustomizationStrings: [String: ThreeDSButtonCustomization]? = nil,
         toolbarCustomization: ThreeDSToolbarCustomization? = nil,
