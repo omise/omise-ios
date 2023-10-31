@@ -2,7 +2,6 @@
 
 # Omise iOS SDK
 
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat-square)](https://github.com/Carthage/Carthage)
 [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Packager%20Manager-compatible-brightgreen?style=flat-square)](https://swift.org/package-manager)
 [![](https://img.shields.io/badge/email-support-yellow.svg?style=flat-square)](mailto:support@omise.co)
 ![CI](https://github.com/omise/omise-ios/workflows/CI/badge.svg?branch=master)
@@ -43,29 +42,6 @@ through the end user's mobile phone without this data having to go
 through your server.
 
 ## Installation
-
-### Carthage
-
-To integrate the OmiseSDK into your Xcode project using [Carthage](https://github.com/Carthage/Carthage), proceed with the following steps:
-
-1. Add the following line to your `Cartfile`:
-```
-github "omise/omise-ios"
-```
-
-2. Run `carthage update --use-xcframeworks`:
-
-``` bash
-$ carthage update --use-xcframeworks
-*** Fetching omise-ios
-*** Checking out omise-ios at "..."
-*** xcodebuild output can be found in /var/folders/sd/ccsbmstn2vbbqd7nk4fgkd040000gn/T/carthage-xcodebuild.X7ZfYB.log
-*** Building scheme "OmiseSDK" in OmiseSDK.xcodeproj
-```
-
-3. Drag the built XCFramework from `/Carthage/Build` into your project.
-
-For more detailed instructions, please read the [official documentation for Carthage](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application).
 
 ### Swift Package Manager (Xcode 12+)
 
