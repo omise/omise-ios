@@ -42,8 +42,6 @@ through your server.
 
 ## Installation
 
-## Swift Package Manager (Xcode 12+)
-
 To integrate the Opn Payments SDK into your Xcode project using the [Swift Package Manager](https://swift.org/package-manager/), proceed with the following steps:
 
 1. In Xcode, select `File` > `Swift Packages` > `Add Package Dependency...`
