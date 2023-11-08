@@ -46,17 +46,16 @@ public class NetceteraThreeDSController {
         case runtimeError(event: ThreeDS_SDK.RuntimeErrorEvent)
     }
 
-    let licenceKey =
+    let trialLicenceKey =
     "eyJhbGciOiJSUzI1NiJ9.eyJ2ZXJzaW9uIjoyLCJ2YWxpZC11bnRpbCI6IjIwMjMtMDktMzAiLCJuYW1lIjoiT21pc2UiLCJtb2R1bGUiOiIzRFMifQ.XrTHC8r-7wLXwmBXpWj4Ln3evQoTrGThvuHlowICIWRiB3T7eZbDZUiO1ZR6zWbcIaM9RYi9j99tncK2FmWz9tbTcLJALwjZ3K5MGTEe5BgnSqrSH3Wo_OOFqB_6StWMjK_RkS41yV0RfppOAc2bLAneYUqyYM2ll35KvY3I9eG9_bMirerqWE3zot7B2ptsMvAVmNnLxdUDEJhkja_pPbkJgPXZuTOtFBFY0ZtVDSp8an-bGN5oyOeUrKkfFAAAefS0thmZhE-iBLj1pDkPJuPbOq3sDxYt55UMa7Jl4dzi-pzrxqbF_H43KVBtBmrQRAc2kTDdU24UxfwX1mjNrg"
     // swiftlint:disable:previous line_length
 
     let directoryServerId = "A000000001"
     let messageVersion = "2.2.0"
 
-    // swiftlint:disable line_length
     let certificate = """
 MIIDbzCCAlegAwIBAgIJANp1aztdBEjBMA0GCSqGSIb3DQEBCwUAME4xCzAJBgNVBAMMAmNhMQ4wDAYDVQQKDAVPbWlzZTEQMA4GA1UEBwwHQmFuZ2tvazEQMA4GA1UECAwHQmFuZ2tvazELMAkGA1UEBhMCVEgwHhcNMTkwMzEzMDkxNzM4WhcNMzkwMzA4MDkxNzM4WjBOMQswCQYDVQQDDAJjYTEOMAwGA1UECgwFT21pc2UxEDAOBgNVBAcMB0Jhbmdrb2sxEDAOBgNVBAgMB0Jhbmdrb2sxCzAJBgNVBAYTAlRIMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAziN94YnR2/cihsFVa/CRpu3YfZMy6uQxwG3wc2nYOYFHAeB0mRsk8GpNKmjDdldpF1pIq6ALXznijXBI7qF0bEc0GlGNwmt1rl5rLUtlxVtWV+hzXDyICIXa1rsvxMEQEjalF+pZpLMPdsuIFJTvK8YE7j8uywahRpcsR7xVwtSG/GvT8mA2o5UmdmFa1UoUVNsA8FDsSqpTWPAcw+wEe2YO0Ct0A91txeo8x2GBW6qBWtHf0PmY6Aq9ZqOW3akoYxgoiOq+FwQX+OeQuYvyKvbKelU6WlDZO7jifebZG2wEm5+SoNEBBgyYAUGllWHeu2CQW6DAg4GnBIUZx8FE5wIDAQABo1AwTjAdBgNVHQ4EFgQUg9xOjam9pOesWFIieUY21dV2PGYwHwYDVR0jBBgwFoAUg9xOjam9pOesWFIieUY21dV2PGYwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAiaR2IUmLKDEn3ixHQJX2CzqVvtqdO0DrxIcnWp8Cmd2DIKjlX3Jw/v5ADKaAiO+7TIFpHfxZCB/oDFdji4YEXK6KUa+5pfOawuL3HXpQ48cLougmJjtwEAOdEZnCLNpYfMeqct7tNQxcm/qme1ewHOXZ9zz7+XfS5N4ExvdTV676/kcnAB1+Juc2Mo+t3kpLvTCpYUmWCANISRR8vTXX2pvqoiJq8lFujoqE41BbPVSVqV8pFZmrp4NKbZP6OmYbxjtVrTeMb1r2/J3jdXGg6LsNE0ouOU/XbEEA+Xpyrs2sUwUZMmiLN49Wz1YYZ2Xkh78gzaRiKCXfJYplDm/mDA==
-"""
+""" // swiftlint:disable:previous line_length
 
     private static let sharedController = NetceteraThreeDSController()
 
@@ -141,7 +140,7 @@ MIIDbzCCAlegAwIBAgIJANp1aztdBEjBMA0GCSqGSIb3DQEBCwUAME4xCzAJBgNVBAMMAmNhMQ4wDAYD
         let configBuilder = ConfigurationBuilder()
         do {
             try configBuilder.add(self.newScheme())
-            try configBuilder.license(key: self.licenceKey)
+            try configBuilder.license(key: self.trialLicenceKey)
             try configBuilder.log(to: .info)
             let configParameters = configBuilder.configParameters()
 
@@ -163,7 +162,6 @@ MIIDbzCCAlegAwIBAgIJANp1aztdBEjBMA0GCSqGSIb3DQEBCwUAME4xCzAJBgNVBAMMAmNhMQ4wDAYD
     }()
 
     private func newTransaction(uiCustomization uiCustom: ThreeDSUICustomization? = nil) throws -> Transaction {
-
         let transaction = try threeDS2Service.createTransaction(
             directoryServerId: directoryServerId,
             messageVersion: "2.1.0"
@@ -215,7 +213,10 @@ MIIDbzCCAlegAwIBAgIJANp1aztdBEjBMA0GCSqGSIb3DQEBCwUAME4xCzAJBgNVBAMMAmNhMQ4wDAYD
         request.httpBody = bodyData
 
         let task = URLSession.shared.dataTask(with: request) {(data, _, error) in
-            guard let data = data else { return }
+            guard let data = data else {
+                onAuthResponse(nil)
+                return
+            }
 
             do {
                 let decoder = JSONDecoder()

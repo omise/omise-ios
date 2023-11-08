@@ -124,29 +124,30 @@ class ProductDetailViewController: OMSBaseViewController {
                   let textField = alertController.textFields?.first,
                   let text = textField.text,
                   let url = URL(string: text),
-                  let expectedReturnURL = URLComponents(string: "omiseExampleApp://omise_3ds_challenge"),
-                  let threeDSRequestorAppURL = expectedReturnURL.url?.absoluteString
+                  let deeplinkURL = URL(string: "omiseExampleApp://omise_3ds_challenge"),
+                  let expectedWebReturnURL = URL(string: "http://www.example.com/orders")
             else { return }
 
-//            presentAuthPaymentController(topViewController: self, url: url, expectedReturnURL: expectedReturnURL)
-            NetceteraThreeDSController.processAuthorizedURL(
-                url,
-                threeDSRequestorAppURL: threeDSRequestorAppURL,
-                uiCustomization: self.threeDSUICustomization,
-                in: self) { result in
-                    print(result)
+            AuthorizingPayment.shared.presentAuthPaymentController(
+                from: self,
+                url: url,
+                expectedWebViewReturnURL: expectedWebReturnURL,
+                deeplinkURL: deeplinkURL,
+                uiCustomization: self.threeDSUICustomization) { [weak self] result in
+                    print("AuthorizingPayment complete with result: \(result)")
+                    print("-")
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+                        let alertController = UIAlertController(title: "Authorizing Payment",
+                                                                message: "Status: \(result)",
+                                                                preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                        self?.present(alertController, animated: true, completion: nil)
+                    }
+
             }
         })
         present(alertController, animated: true, completion: nil)
-    }
-
-    // topViewController = handlerController.topViewController
-    func presentAuthPaymentController(topViewController: UIViewController, url: URL, expectedReturnURL: URLComponents) {
-        let handlerController =
-        AuthorizingPaymentWebViewController
-            .makeAuthorizingPaymentWebViewControllerNavigationWithAuthorizedURL(
-                url, expectedReturnURLPatterns: [expectedReturnURL], delegate: self)
-        topViewController.present(handlerController, animated: true, completion: nil)
     }
 }
 

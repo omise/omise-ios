@@ -92,6 +92,9 @@ public class AuthorizingPaymentWebViewController: UIViewController {
             withIdentifier: "DefaultAuthorizingPaymentWebViewControllerWithNavigation"
         ) as! UINavigationController // swiftlint:disable:this force_cast
 
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.backgroundColor = .white
+
         // swiftlint:disable:next force_cast
         let viewController = navigationController.topViewController as! AuthorizingPaymentWebViewController
         viewController.authorizedURL = authorizedURL
@@ -209,6 +212,21 @@ public class AuthorizingPaymentWebViewController: UIViewController {
 
 @available(iOSApplicationExtension, unavailable)
 extension AuthorizingPaymentWebViewController: WKNavigationDelegate {
+
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        print(error)
+        delegate?.authorizingPaymentWebViewControllerDidCancel(self)
+    }
+
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("finished")
+    }
+
+    public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        print(error)
+        delegate?.authorizingPaymentWebViewControllerDidCancel(self)
+    }
+
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         if let url = navigationAction.request.url, verifyPaymentURL(url) {
             os_log("Redirected to expected %{private}@ URL, trying to notify the delegate",
