@@ -29,11 +29,11 @@ PlaygroundPage.current.needsIndefiniteExecution = true
  
  The controller will automatically display a website and will notify the delegate
  when the customer is redirected to the expected URL. To receive the result data,
- implement the `AuthorizingPaymentViewControllerDelegate` methods on your view controller.
+ implement the `AuthorizingPaymentWebViewControllerDelegate` methods on your view controller.
  */
-extension CheckoutViewController: AuthorizingPaymentViewControllerDelegate {
+extension CheckoutViewController: AuthorizingPaymentWebViewControllerDelegate {
   
-  public func authorizingPaymentViewController(_ viewController: AuthorizingPaymentViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL) {
+  public func AuthorizingPaymentWebViewController(_ viewController: AuthorizingPaymentWebViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL) {
     dismiss(animated: true, completion: nil)
     print("Customer was just redirected to \(redirectedURL)")
     
@@ -41,14 +41,14 @@ extension CheckoutViewController: AuthorizingPaymentViewControllerDelegate {
     present(alert, animated: true, completion: nil)
   }
   
-  public func authorizingPaymentViewControllerDidCancel(_ viewController: AuthorizingPaymentViewController) {
+  public func AuthorizingPaymentWebViewControllerDidCancel(_ viewController: AuthorizingPaymentWebViewController) {
     dismiss(animated: true, completion: nil)
   }
 }
 
 extension CheckoutViewController: CheckoutViewControllerDelegate {
   public func checkoutViewControllerDidTapCheckout(_ checkoutViewController: CheckoutViewController) {
-    let navigationController = AuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(
+    let navigationController = AuthorizingPaymentWebViewController.makeAuthorizingPaymentWebViewControllerNavigationWithAuthorizedURL(
         authroizedURL,
         expectedReturnURLPatterns: expectedURLPatterns,
         delegate: self

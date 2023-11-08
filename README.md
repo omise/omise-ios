@@ -354,24 +354,24 @@ Some payment methods require the customers to authorize the payment via an autho
 
 #### Using built-in Authorizing Payment view controller
 
-You can use the built-in Authorizing Payment view controller by creating an instance of `OmiseAuthorizingPaymentViewController` and set it with `authorized URL` given with the charge and expected `return URL` patterns those were created by merchants.
+You can use the built-in Authorizing Payment view controller by creating an instance of `OmiseAuthorizingPaymentWebViewController` and set it with `authorized URL` given with the charge and expected `return URL` patterns those were created by merchants.
 
-##### Create an `OmiseAuthorizingPaymentViewController` by code
+##### Create an `OmiseAuthorizingPaymentWebViewController` by code
 
-You can create an instance of `OmiseAuthorizingPaymentViewController` by calling its factory method
+You can create an instance of `OmiseAuthorizingPaymentWebViewController` by calling its factory method
 ```swift
-let handlerController = OmiseAuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(url, expectedReturnURLPatterns: [expectedReturnURL], delegate: self)
+let handlerController = OmiseAuthorizingPaymentWebViewController.makeAuthorizingPaymentWebViewControllerNavigationWithAuthorizedURL(url, expectedReturnURLPatterns: [expectedReturnURL], delegate: self)
 self.present(handlerController, animated: true, completion: nil)
 ```
 
-##### Use `OmiseAuthorizingPaymentViewController` in Storyboard
+##### Use `OmiseAuthorizingPaymentWebViewController` in Storyboard
 
-`OmiseAuthorizingPaymentViewController` also comes with built-in storyboard support like `CreditCardFormViewController`. You can use `OmiseAuthorizingPaymentViewController` in your storyboard by using `Storyboard Reference`. Drag `Storyboard Reference` object onto your canvas and set its bundle identifier to `co.omise.OmiseSDK` and Storyboard to `OmiseSDK` then use `DefaultAuthorizingPaymentViewController` as a `Referenced ID`.
-You can setup `OmiseAuthorizingPaymentViewController` in `UIViewController.prepare(for:sender:)` method
+`OmiseAuthorizingPaymentWebViewController` also comes with built-in storyboard support like `CreditCardFormViewController`. You can use `OmiseAuthorizingPaymentWebViewController` in your storyboard by using `Storyboard Reference`. Drag `Storyboard Reference` object onto your canvas and set its bundle identifier to `co.omise.OmiseSDK` and Storyboard to `OmiseSDK` then use `DefaultAuthorizingPaymentWebViewController` as a `Referenced ID`.
+You can setup `OmiseAuthorizingPaymentWebViewController` in `UIViewController.prepare(for:sender:)` method
 ```swift
 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-  if segue.identifier == "AuthorizingPaymentViewController",
-    let omiseAuthorizingPaymentController = segue.destination as? OmiseAuthorizingPaymentViewController {
+  if segue.identifier == "AuthorizingPaymentWebViewController",
+    let omiseAuthorizingPaymentController = segue.destination as? OmiseAuthorizingPaymentWebViewController {
       omiseAuthorizingPaymentController.delegate = self
       omiseAuthorizingPaymentController.authorizedURL = authorizedURL
       omiseAuthorizingPaymentController.expectedReturnURLPatterns =  [ URLComponents(string: "http://www.example.com/orders")! ]
@@ -381,15 +381,15 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
 ##### Receive `Authorizing Payment` events via the delegate
 
-`OmiseAuthorizingPaymentViewController` send `Authorizing Payment` events to its `delegate` when there's an event occurred.
+`OmiseAuthorizingPaymentWebViewController` send `Authorizing Payment` events to its `delegate` when there's an event occurred.
 
 ```swift
-extension ViewController: OmiseAuthorizingPaymentViewControllerDelegate {
-  func omiseAuthorizingPaymentViewController(_ viewController: OmiseAuthorizingPaymentViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL) {
+extension ViewController: OmiseAuthorizingPaymentWebViewControllerDelegate {
+  func omiseAuthorizingPaymentWebViewController(_ viewController: OmiseAuthorizingPaymentWebViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL) {
     // Handle the `redirected URL` here
   }
 
-  func omiseAuthorizingPaymentViewControllerDidCancel(_ viewController: OmiseAuthorizingPaymentViewController) {
+  func omiseAuthorizingPaymentWebViewControllerDidCancel(_ viewController: OmiseAuthorizingPaymentWebViewController) {
     // Handle the case that user tap cancel button.
   }
 }

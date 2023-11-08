@@ -8,7 +8,6 @@
 
 import Foundation
 import ThreeDS_SDK
-import OmiseThreeDSSDK
 
 struct AuthResponse: Codable {
     var status: String
@@ -62,7 +61,7 @@ MIIDbzCCAlegAwIBAgIJANp1aztdBEjBMA0GCSqGSIb3DQEBCwUAME4xCzAJBgNVBAMMAmNhMQ4wDAYD
             let transaction = try netceteraThreeDSController.newTransaction()
             let authParams = try transaction.getAuthenticationRequestParameters()
 
-            if let deviceInfo = FimeProxy.deviceInformation(sdkAppId: authParams.getSDKAppID(), sdkVersion: "1.0") {
+            if let deviceInfo = DeviceInformation.deviceInformation(sdkAppId: authParams.getSDKAppID(), sdkVersion: "1.0") {
                 try netceteraThreeDSController.sendAuthenticationRequest(
                     deviceInfo: deviceInfo,
                     transaction: transaction,

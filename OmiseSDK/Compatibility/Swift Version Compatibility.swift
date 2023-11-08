@@ -2,6 +2,9 @@
 import Foundation
 import UIKit
 
+extension ControlState: Hashable {
+}
+
 typealias ControlState = UIControl.State
 typealias AttributedStringKey = NSAttributedString.Key
 typealias ViewAnimationOptions = UIView.AnimationOptions

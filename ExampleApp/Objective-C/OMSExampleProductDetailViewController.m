@@ -8,7 +8,7 @@ NSString * const OMSPublicKey = @"<#Omise Public Key#>";
 
 
 @interface OMSExampleProductDetailViewController () <OMSCreditCardFormViewControllerDelegate,
-OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate, OMSCustomCreditCardFormViewControllerDelegate>
+OMSAuthorizingPaymentWebViewControllerDelegate, OMSPaymentCreatorControllerDelegate, OMSCustomCreditCardFormViewControllerDelegate>
 
 @property (strong, nonatomic, nullable) OMSCapability *capability;
 
@@ -116,9 +116,9 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
         NSURL *url = [[NSURL alloc] initWithString:textField.text];
         
         NSURLComponents *expectedReturnURL = [[NSURLComponents alloc] initWithString:@"http://www.example.com/orders"];
-        UINavigationController *authorizingPaymentViewController = [OMSAuthorizingPaymentViewController authorizingPaymentViewControllerNavigationWithAuthorizedURL:url expectedReturnURLPatterns:@[expectedReturnURL] delegate:self];
+        UINavigationController *AuthorizingPaymentWebViewController = [OMSAuthorizingPaymentWebViewController AuthorizingPaymentWebViewControllerNavigationWithAuthorizedURL:url expectedReturnURLPatterns:@[expectedReturnURL] delegate:self];
         
-//        [self presentViewController:authorizingPaymentViewController animated:YES completion:nil];
+//        [self presentViewController:AuthorizingPaymentWebViewController animated:YES completion:nil];
     }]];
 
     [self presentViewController:alertController animated:YES completion:nil];
@@ -147,12 +147,12 @@ OMSAuthorizingPaymentViewControllerDelegate, OMSPaymentCreatorControllerDelegate
 
 #pragma mark - Payment Creator Controller Delegate methods
 
-- (void)authorizingPaymentViewController:(OMSAuthorizingPaymentViewController *)viewController didCompleteAuthorizingPaymentWithRedirectedURL:(NSURL *)redirectedURL {
+- (void)AuthorizingPaymentWebViewController:(OMSAuthorizingPaymentWebViewController *)viewController didCompleteAuthorizingPaymentWithRedirectedURL:(NSURL *)redirectedURL {
     NSLog(@"%@", redirectedURL);
     [self dismissForm];
 }
 
-- (void)authorizingPaymentViewControllerDidCancel:(OMSAuthorizingPaymentViewController *)viewController {
+- (void)AuthorizingPaymentWebViewControllerDidCancel:(OMSAuthorizingPaymentWebViewController *)viewController {
     [self dismissForm];
 }
 

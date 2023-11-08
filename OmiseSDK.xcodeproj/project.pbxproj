@@ -45,6 +45,17 @@
 		7509D4EF2A1D1F9F0050AB38 /* OmiseTestSDK in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 7509D4ED2A1D1F9F0050AB38 /* OmiseTestSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		7509D4F42A1D2C3E0050AB38 /* AtomeFormViewModelMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E32A1C89F10050AB38 /* AtomeFormViewModelMockup.swift */; };
 		7509D4F52A1D2F550050AB38 /* AtomeFormViewContextMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E12A1C876B0050AB38 /* AtomeFormViewContextMockup.swift */; };
+		751F39912AFB958C00DFBBDD /* CommonDataCollectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751F39882AFB958B00DFBBDD /* CommonDataCollectors.swift */; };
+		751F39922AFB958C00DFBBDD /* PlatformSpecificDataCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751F39892AFB958C00DFBBDD /* PlatformSpecificDataCollector.swift */; };
+		751F39932AFB958C00DFBBDD /* DeviceDataAggregator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751F398A2AFB958C00DFBBDD /* DeviceDataAggregator.swift */; };
+		751F39942AFB958C00DFBBDD /* DeviceInformationAggregator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751F398B2AFB958C00DFBBDD /* DeviceInformationAggregator.swift */; };
+		751F39952AFB958C00DFBBDD /* DeviceDataCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751F398C2AFB958C00DFBBDD /* DeviceDataCollector.swift */; };
+		751F39962AFB958C00DFBBDD /* DeviceDataResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751F398D2AFB958C00DFBBDD /* DeviceDataResult.swift */; };
+		751F39972AFB958C00DFBBDD /* DeviceModelDataCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751F398E2AFB958C00DFBBDD /* DeviceModelDataCollector.swift */; };
+		751F39982AFB958C00DFBBDD /* IPAddressDataCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751F398F2AFB958C00DFBBDD /* IPAddressDataCollector.swift */; };
+		751F39992AFB958C00DFBBDD /* LocationDataCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751F39902AFB958C00DFBBDD /* LocationDataCollector.swift */; };
+		751F399C2AFB95E900DFBBDD /* Warning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751F399B2AFB95E900DFBBDD /* Warning.swift */; };
+		751F399E2AFB960E00DFBBDD /* DeviceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751F399D2AFB960E00DFBBDD /* DeviceInformation.swift */; };
 		753279382A31B40F008048AD /* CountryListViewModelMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753279372A31B40F008048AD /* CountryListViewModelMockup.swift */; };
 		75348D4E29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */; };
 		75405A782A25D327008C21F6 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A772A25D327008C21F6 /* String+Helpers.swift */; };
@@ -88,9 +99,8 @@
 		75AA45532AAFF783003DE277 /* ThreeDSUICustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA45522AAFF783003DE277 /* ThreeDSUICustomization.swift */; };
 		75AA455C2AB03BF5003DE277 /* ds-root-key.crt in Resources */ = {isa = PBXBuildFile; fileRef = 75AA455B2AB03BF5003DE277 /* ds-root-key.crt */; };
 		75AA455F2AB042CC003DE277 /* ThreeDSDeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA455E2AB042CC003DE277 /* ThreeDSDeviceInfo.swift */; };
-		75AA46412AB05642003DE277 /* OmiseThreeDSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75AA463B2AB055AB003DE277 /* OmiseThreeDSSDK.framework */; };
-		75AA46422AB05642003DE277 /* OmiseThreeDSSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 75AA463B2AB055AB003DE277 /* OmiseThreeDSSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		75B43B572A0277A3004352C7 /* PaymentInformation.Atome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */; };
+		75D0086C2AFB910A006A85F2 /* AuthorizingPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D0086B2AFB910A006A85F2 /* AuthorizingPaymentViewController.swift */; };
 		75DAD88C2A0BA5130098AF96 /* OmiseTestSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; };
 		75DAD88E2A0BA5130098AF96 /* OmiseTestSDK in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		75DAD8902A0BB8D80098AF96 /* LocalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */; };
@@ -123,7 +133,7 @@
 		8A0A67E821383614006356B7 /* PaymentChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE23AAD20F8CA8800BC9D8F /* PaymentChooserViewController.swift */; };
 		8A14C209220ACB2B003F5B20 /* Capability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A14C208220ACB2B003F5B20 /* Capability.swift */; };
 		8A14C20B220AE241003F5B20 /* CapabilityOperationFixtureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A14C20A220AE241003F5B20 /* CapabilityOperationFixtureTests.swift */; };
-		8A188BB01D951E3C00FFF467 /* AuthorizingPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentViewController.swift */; };
+		8A188BB01D951E3C00FFF467 /* AuthorizingPaymentWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentWebViewController.swift */; };
 		8A2BE95520A9A39E000CEB60 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2BE95420A9A39E000CEB60 /* Request.swift */; };
 		8A2C451920ECC7A60033E2EB /* OmiseSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 225931181CE3210700841B86 /* OmiseSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8A30FB7D214929C900DC09DC /* PaymentCreatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A30FB7C214929C900DC09DC /* PaymentCreatorController.swift */; };
@@ -187,34 +197,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		75AA463A2AB055AB003DE277 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 75AA46352AB055AB003DE277 /* OmiseThreeDSSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8AC8ED5D2317D44B00549747;
-			remoteInfo = OmiseThreeDSSDK;
-		};
-		75AA463C2AB055AB003DE277 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 75AA46352AB055AB003DE277 /* OmiseThreeDSSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8AC8ED662317D44B00549747;
-			remoteInfo = OmiseThreeDSSDKTests;
-		};
-		75AA46622AB05765003DE277 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 75AA46352AB055AB003DE277 /* OmiseThreeDSSDK.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8AC8ED5C2317D44B00549747;
-			remoteInfo = OmiseThreeDSSDK;
-		};
-		75AA46692AB0576F003DE277 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 75AA46352AB055AB003DE277 /* OmiseThreeDSSDK.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8AC8ED5C2317D44B00549747;
-			remoteInfo = OmiseThreeDSSDK;
-		};
 		8A723A522164D7B100D902F5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2259310F1CE3210700841B86 /* Project object */;
@@ -278,7 +260,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				8A2C451920ECC7A60033E2EB /* OmiseSDK.framework in Embed Frameworks */,
-				75AA46422AB05642003DE277 /* OmiseThreeDSSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,6 +315,17 @@
 		7509D4E12A1C876B0050AB38 /* AtomeFormViewContextMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewContextMockup.swift; sourceTree = "<group>"; };
 		7509D4E32A1C89F10050AB38 /* AtomeFormViewModelMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewModelMockup.swift; sourceTree = "<group>"; };
 		7509D4E62A1C8E3D0050AB38 /* AtomeFormViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewModelTests.swift; sourceTree = "<group>"; };
+		751F39882AFB958B00DFBBDD /* CommonDataCollectors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonDataCollectors.swift; sourceTree = "<group>"; };
+		751F39892AFB958C00DFBBDD /* PlatformSpecificDataCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformSpecificDataCollector.swift; sourceTree = "<group>"; };
+		751F398A2AFB958C00DFBBDD /* DeviceDataAggregator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceDataAggregator.swift; sourceTree = "<group>"; };
+		751F398B2AFB958C00DFBBDD /* DeviceInformationAggregator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInformationAggregator.swift; sourceTree = "<group>"; };
+		751F398C2AFB958C00DFBBDD /* DeviceDataCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceDataCollector.swift; sourceTree = "<group>"; };
+		751F398D2AFB958C00DFBBDD /* DeviceDataResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceDataResult.swift; sourceTree = "<group>"; };
+		751F398E2AFB958C00DFBBDD /* DeviceModelDataCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceModelDataCollector.swift; sourceTree = "<group>"; };
+		751F398F2AFB958C00DFBBDD /* IPAddressDataCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPAddressDataCollector.swift; sourceTree = "<group>"; };
+		751F39902AFB958C00DFBBDD /* LocationDataCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDataCollector.swift; sourceTree = "<group>"; };
+		751F399B2AFB95E900DFBBDD /* Warning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Warning.swift; sourceTree = "<group>"; };
+		751F399D2AFB960E00DFBBDD /* DeviceInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInformation.swift; sourceTree = "<group>"; };
 		753279372A31B40F008048AD /* CountryListViewModelMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListViewModelMockup.swift; sourceTree = "<group>"; };
 		75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+OmiseSDK.swift"; sourceTree = "<group>"; };
 		75405A772A25D327008C21F6 /* String+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Helpers.swift"; sourceTree = "<group>"; };
@@ -368,8 +360,8 @@
 		75AA45522AAFF783003DE277 /* ThreeDSUICustomization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSUICustomization.swift; sourceTree = "<group>"; };
 		75AA455B2AB03BF5003DE277 /* ds-root-key.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ds-root-key.crt"; sourceTree = "<group>"; };
 		75AA455E2AB042CC003DE277 /* ThreeDSDeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSDeviceInfo.swift; sourceTree = "<group>"; };
-		75AA46352AB055AB003DE277 /* OmiseThreeDSSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OmiseThreeDSSDK.xcodeproj; path = "../../3DS/3DS-iOS-SDK/OmiseThreeDSSDK.xcodeproj"; sourceTree = "<group>"; };
 		75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInformation.Atome.swift; sourceTree = "<group>"; };
+		75D0086B2AFB910A006A85F2 /* AuthorizingPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizingPaymentViewController.swift; sourceTree = "<group>"; };
 		75DAD87F2A0B9AE50098AF96 /* OmiseTestSDK */ = {isa = PBXFileReference; lastKnownFileType = text; path = OmiseTestSDK; sourceTree = SOURCE_ROOT; };
 		75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalConfig.swift; sourceTree = "<group>"; };
 		75DAD8922A0BC9540098AF96 /* Config.local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.local.plist; sourceTree = "<group>"; };
@@ -394,7 +386,7 @@
 		8A0A67E62137EE49006356B7 /* AdaptableStaticTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptableStaticTableViewController.swift; sourceTree = "<group>"; };
 		8A14C208220ACB2B003F5B20 /* Capability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Capability.swift; sourceTree = "<group>"; };
 		8A14C20A220AE241003F5B20 /* CapabilityOperationFixtureTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapabilityOperationFixtureTests.swift; sourceTree = "<group>"; };
-		8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizingPaymentViewController.swift; sourceTree = "<group>"; };
+		8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizingPaymentWebViewController.swift; sourceTree = "<group>"; };
 		8A1D4C651D51B72200C7837C /* CreditCardFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = CreditCardFormViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		8A25E929213CF6F300D48252 /* EContextInformationInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EContextInformationInputViewController.swift; sourceTree = "<group>"; };
 		8A275CBB21241E4500C5716F /* MainActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainActionButton.swift; sourceTree = "<group>"; };
@@ -479,7 +471,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75AA46412AB05642003DE277 /* OmiseThreeDSSDK.framework in Frameworks */,
 				75FCE1B12ACBBAD900AE2895 /* ThreeDS_SDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -514,7 +505,6 @@
 		2259310E1CE3210700841B86 = {
 			isa = PBXGroup;
 			children = (
-				75AA46352AB055AB003DE277 /* OmiseThreeDSSDK.xcodeproj */,
 				226E16101D2268B400219652 /* QuickStart.playground */,
 				2259311A1CE3210700841B86 /* OmiseSDK */,
 				F6FE863425E3B0AE00C7A4DE /* OmiseSDKObjc */,
@@ -633,6 +623,32 @@
 			path = "---";
 			sourceTree = "<group>";
 		};
+		751F39812AFB946500DFBBDD /* DeviceInfo */ = {
+			isa = PBXGroup;
+			children = (
+				751F399A2AFB95AE00DFBBDD /* Data Collector */,
+				751F398C2AFB958C00DFBBDD /* DeviceDataCollector.swift */,
+				751F398A2AFB958C00DFBBDD /* DeviceDataAggregator.swift */,
+				751F398D2AFB958C00DFBBDD /* DeviceDataResult.swift */,
+				751F398B2AFB958C00DFBBDD /* DeviceInformationAggregator.swift */,
+				751F399B2AFB95E900DFBBDD /* Warning.swift */,
+				751F399D2AFB960E00DFBBDD /* DeviceInformation.swift */,
+			);
+			path = DeviceInfo;
+			sourceTree = "<group>";
+		};
+		751F399A2AFB95AE00DFBBDD /* Data Collector */ = {
+			isa = PBXGroup;
+			children = (
+				751F39882AFB958B00DFBBDD /* CommonDataCollectors.swift */,
+				751F39892AFB958C00DFBBDD /* PlatformSpecificDataCollector.swift */,
+				751F398E2AFB958C00DFBBDD /* DeviceModelDataCollector.swift */,
+				751F398F2AFB958C00DFBBDD /* IPAddressDataCollector.swift */,
+				751F39902AFB958C00DFBBDD /* LocationDataCollector.swift */,
+			);
+			path = "Data Collector";
+			sourceTree = "<group>";
+		};
 		753279362A31B406008048AD /* CountryLists */ = {
 			isa = PBXGroup;
 			children = (
@@ -690,9 +706,11 @@
 		7558CC8C2AAF7C85005815DF /* 3DS */ = {
 			isa = PBXGroup;
 			children = (
+				751F39812AFB946500DFBBDD /* DeviceInfo */,
 				75AA455A2AB03BE5003DE277 /* assets */,
 				75AA45502AAFF364003DE277 /* NetceteraThreeDSController.swift */,
-				8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentViewController.swift */,
+				8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentWebViewController.swift */,
+				75D0086B2AFB910A006A85F2 /* AuthorizingPaymentViewController.swift */,
 				7558CC8D2AAF7C9E005815DF /* UICustomization */,
 			);
 			path = 3DS;
@@ -757,15 +775,6 @@
 				75AA455E2AB042CC003DE277 /* ThreeDSDeviceInfo.swift */,
 			);
 			path = assets;
-			sourceTree = "<group>";
-		};
-		75AA46362AB055AB003DE277 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				75AA463B2AB055AB003DE277 /* OmiseThreeDSSDK.framework */,
-				75AA463D2AB055AB003DE277 /* OmiseThreeDSSDKTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		75DAD8802A0B9B060098AF96 /* Frameworks */ = {
@@ -1056,7 +1065,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				75AA466A2AB0576F003DE277 /* PBXTargetDependency */,
 				75AA45552AAFFDF7003DE277 /* PBXTargetDependency */,
 			);
 			name = OmiseSDK;
@@ -1080,7 +1088,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				75AA46632AB05765003DE277 /* PBXTargetDependency */,
 				8A7F8B0B20C55312008F4D08 /* PBXTargetDependency */,
 			);
 			name = "ExampleApp (Swift)";
@@ -1205,12 +1212,6 @@
 			);
 			productRefGroup = 225931191CE3210700841B86 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 75AA46362AB055AB003DE277 /* Products */;
-					ProjectRef = 75AA46352AB055AB003DE277 /* OmiseThreeDSSDK.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				225931171CE3210700841B86 /* OmiseSDK */,
@@ -1221,23 +1222,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		75AA463B2AB055AB003DE277 /* OmiseThreeDSSDK.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = OmiseThreeDSSDK.framework;
-			remoteRef = 75AA463A2AB055AB003DE277 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		75AA463D2AB055AB003DE277 /* OmiseThreeDSSDKTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = OmiseThreeDSSDKTests.xctest;
-			remoteRef = 75AA463C2AB055AB003DE277 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		225931161CE3210700841B86 /* Resources */ = {
@@ -1356,7 +1340,9 @@
 				759856242A286C880087B605 /* UIScrollView+Helpers.swift in Sources */,
 				2220F1AA1D0FEE85008CD89F /* OmiseError.swift in Sources */,
 				75405A8D2A26340E008C21F6 /* UIView+Helpers.swift in Sources */,
+				751F39972AFB958C00DFBBDD /* DeviceModelDataCollector.swift in Sources */,
 				73F9BA4B25E6053700F55CA8 /* FPXFormViewController.swift in Sources */,
+				751F39962AFB958C00DFBBDD /* DeviceDataResult.swift in Sources */,
 				8A7A9EC0216642D100F12D86 /* Swift Version Compatibility.swift in Sources */,
 				8A0A67E821383614006356B7 /* PaymentChooserViewController.swift in Sources */,
 				98FF99BB2577789800476487 /* Configuration.swift in Sources */,
@@ -1376,6 +1362,7 @@
 				8AF9857221479F72007E18ED /* CreditCardFormViewController.swift in Sources */,
 				8AC1D3A32139224D0051F966 /* InternetBankingSourceChooserViewController.swift in Sources */,
 				2220F1A91D0FEE85008CD89F /* OmiseCard.swift in Sources */,
+				751F39922AFB958C00DFBBDD /* PlatformSpecificDataCollector.swift in Sources */,
 				7502CA662A31AEA200766E7D /* CountryInfo.swift in Sources */,
 				75B43B572A0277A3004352C7 /* PaymentInformation.Atome.swift in Sources */,
 				8A14C209220ACB2B003F5B20 /* Capability.swift in Sources */,
@@ -1390,30 +1377,39 @@
 				986406341CFEA7E4004BCF51 /* CardNameTextField.swift in Sources */,
 				8AF9857121479F38007E18ED /* MoreInformationOnCVVViewController.swift in Sources */,
 				F6FE862C25E3B02300C7A4DE /* OMSConstants.m in Sources */,
+				751F39942AFB958C00DFBBDD /* DeviceInformationAggregator.swift in Sources */,
 				75AA45532AAFF783003DE277 /* ThreeDSUICustomization.swift in Sources */,
 				75405A7C2A25EC88008C21F6 /* Array+Helpers.swift in Sources */,
-				8A188BB01D951E3C00FFF467 /* AuthorizingPaymentViewController.swift in Sources */,
+				8A188BB01D951E3C00FFF467 /* AuthorizingPaymentWebViewController.swift in Sources */,
 				8A01F78B20D90EC5003FC11E /* Client+ObjC.swift in Sources */,
 				731A75D325E3604A002353C0 /* FPXBankChooserViewController.swift in Sources */,
+				751F39982AFB958C00DFBBDD /* IPAddressDataCollector.swift in Sources */,
 				8A2BE95520A9A39E000CEB60 /* Request.swift in Sources */,
 				14ACEF831D02D641001C5319 /* CardExpiryDatePicker.swift in Sources */,
+				75D0086C2AFB910A006A85F2 /* AuthorizingPaymentViewController.swift in Sources */,
 				75F2A0B92A1A60630038FA54 /* AtomeFormViewModelProtocol.swift in Sources */,
 				75405A782A25D327008C21F6 /* String+Helpers.swift in Sources */,
+				751F399E2AFB960E00DFBBDD /* DeviceInformation.swift in Sources */,
 				8A01F79420D914A4003FC11E /* OmiseSource.swift in Sources */,
 				986406301CFEA7E4004BCF51 /* CardCVVTextField.swift in Sources */,
 				8A47173A20AAB0F40022733A /* Token.swift in Sources */,
 				22445FFC1CF41DD300801D0F /* Globals.swift in Sources */,
+				751F39932AFB958C00DFBBDD /* DeviceDataAggregator.swift in Sources */,
 				756C8F222A40694F00D53059 /* CreditCardFormViewContext.swift in Sources */,
+				751F39952AFB958C00DFBBDD /* DeviceDataCollector.swift in Sources */,
+				751F399C2AFB95E900DFBBDD /* Warning.swift in Sources */,
 				8A87DBCB226DA404001596F1 /* OmiseCapability.swift in Sources */,
 				8ADAA9A520B6C0AF00DD7CCF /* Currency.swift in Sources */,
 				8A30FB7D214929C900DC09DC /* PaymentCreatorController.swift in Sources */,
 				75AA45512AAFF364003DE277 /* NetceteraThreeDSController.swift in Sources */,
+				751F39912AFB958C00DFBBDD /* CommonDataCollectors.swift in Sources */,
 				75348D4E29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift in Sources */,
 				8A4F7CB920A9C0FD001C441A /* Object.swift in Sources */,
 				75405A9C2A266F50008C21F6 /* AtomeFormViewModel.swift in Sources */,
 				8AD0609620B55E610074894E /* Client.swift in Sources */,
 				8AC1D3A7213941C80051F966 /* InstallmentsNumberOfTermsChooserViewController.swift in Sources */,
 				7558CC912AAF7D56005815DF /* ThreeDSToolbarCustomization.swift in Sources */,
+				751F39992AFB958C00DFBBDD /* LocationDataCollector.swift in Sources */,
 				75405A932A26340E008C21F6 /* UIButton+Helpers.swift in Sources */,
 				986406321CFEA7E4004BCF51 /* CardNumberTextField.swift in Sources */,
 				75405A8F2A26340E008C21F6 /* UIImage+Helpers.swift in Sources */,
@@ -1530,16 +1526,6 @@
 		75AA45552AAFFDF7003DE277 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			productRef = 75AA45542AAFFDF7003DE277 /* ThreeDS_SDK */;
-		};
-		75AA46632AB05765003DE277 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = OmiseThreeDSSDK;
-			targetProxy = 75AA46622AB05765003DE277 /* PBXContainerItemProxy */;
-		};
-		75AA466A2AB0576F003DE277 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = OmiseThreeDSSDK;
-			targetProxy = 75AA46692AB0576F003DE277 /* PBXContainerItemProxy */;
 		};
 		8A723A512164D7B100D902F5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

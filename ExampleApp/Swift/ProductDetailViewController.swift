@@ -141,8 +141,8 @@ class ProductDetailViewController: OMSBaseViewController {
     // topViewController = handlerController.topViewController
     func presentAuthPaymentController(topViewController: UIViewController, url: URL, expectedReturnURL: URLComponents) {
         let handlerController =
-        AuthorizingPaymentViewController
-            .makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(
+        AuthorizingPaymentWebViewController
+            .makeAuthorizingPaymentWebViewControllerNavigationWithAuthorizedURL(
                 url, expectedReturnURLPatterns: [expectedReturnURL], delegate: self)
         self.navigationController?.pushViewController(topViewController, animated: true)
 
@@ -210,13 +210,13 @@ extension ProductDetailViewController: CreditCardFormViewControllerDelegate {
 
 // MARK: - Authorizing Payment View Controller Delegate
 
-extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate {
-    func authorizingPaymentViewController(_ viewController: AuthorizingPaymentViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL) {
+extension ProductDetailViewController: AuthorizingPaymentWebViewControllerDelegate {
+    func authorizingPaymentWebViewController(_ viewController: AuthorizingPaymentWebViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL) {
         print(redirectedURL)
         dismiss(animated: true, completion: nil)
     }
     
-    func authorizingPaymentViewControllerDidCancel(_ viewController: AuthorizingPaymentViewController) {
+    func authorizingPaymentWebViewControllerDidCancel(_ viewController: AuthorizingPaymentWebViewController) {
         dismiss(animated: true, completion: nil)
     }
 }
