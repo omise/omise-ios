@@ -6,36 +6,36 @@ public let identicalBasedCurrencyFactor = 1
 public enum Currency: Codable, Hashable {
 
     enum CurrencyCode: String {
-        case thb = "THB"
-        case jpy = "JPY"
-        case idr = "IDR"
-        case sgd = "SGD"
-        case usd = "USD"
-        case gbp = "GBP"
-        case eur = "EUR"
-        case myr = "MYR"
         case aud = "AUD"
         case cad = "CAD"
         case chf = "CHF"
         case cny = "CNY"
         case dkk = "DKK"
+        case eur = "EUR"
+        case gbp = "GBP"
         case hkd = "HKD"
+        case idr = "IDR"
+        case jpy = "JPY"
+        case myr = "MYR"
+        case sgd = "SGD"
+        case thb = "THB"
+        case usd = "USD"
     }
 
-    case thb
-    case jpy
-    case idr
-    case sgd
-    case usd
-    case gbp
-    case eur
-    case myr
     case aud
     case cad
     case chf
     case cny
     case dkk
+    case eur
+    case gbp
     case hkd
+    case idr
+    case jpy
+    case myr
+    case sgd
+    case thb
+    case usd
 
     case custom(code: String, factor: Int)
     
