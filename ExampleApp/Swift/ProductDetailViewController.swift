@@ -128,12 +128,14 @@ class ProductDetailViewController: OMSBaseViewController {
                   let threeDSRequestorAppURL = expectedReturnURL.url?.absoluteString
             else { return }
 
+//            presentAuthPaymentController(topViewController: self, url: url, expectedReturnURL: expectedReturnURL)
             NetceteraThreeDSController.processAuthorizedURL(
                 url,
                 threeDSRequestorAppURL: threeDSRequestorAppURL,
                 uiCustomization: self.threeDSUICustomization,
-                in: self
-            )
+                in: self) { result in
+                    print(result)
+            }
         })
         present(alertController, animated: true, completion: nil)
     }
@@ -144,9 +146,7 @@ class ProductDetailViewController: OMSBaseViewController {
         AuthorizingPaymentWebViewController
             .makeAuthorizingPaymentWebViewControllerNavigationWithAuthorizedURL(
                 url, expectedReturnURLPatterns: [expectedReturnURL], delegate: self)
-        self.navigationController?.pushViewController(topViewController, animated: true)
-
-        self.present(handlerController, animated: true, completion: nil)
+        topViewController.present(handlerController, animated: true, completion: nil)
     }
 }
 

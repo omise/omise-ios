@@ -23,10 +23,28 @@ struct AuthResponse: Codable {
     var isChallenge: Bool {
         return status == "challenge"
     }
+
+    var isSuccess: Bool {
+        return status == "success"
+    }
+
+    var isFailed: Bool {
+        return status == "failed"
+    }
 }
 
 // swiftlint:disable file_length
 public class NetceteraThreeDSController {
+
+    enum Errors: Error {
+        case invalidDeviceInfo
+        case invalidAuthResponse
+        case cancelled
+        case timedout
+        case challenge(error: Error)
+        case protocolError(event: ThreeDS_SDK.ProtocolErrorEvent)
+        case runtimeError(event: ThreeDS_SDK.RuntimeErrorEvent)
+    }
 
     let licenceKey =
     "eyJhbGciOiJSUzI1NiJ9.eyJ2ZXJzaW9uIjoyLCJ2YWxpZC11bnRpbCI6IjIwMjMtMDktMzAiLCJuYW1lIjoiT21pc2UiLCJtb2R1bGUiOiIzRFMifQ.XrTHC8r-7wLXwmBXpWj4Ln3evQoTrGThvuHlowICIWRiB3T7eZbDZUiO1ZR6zWbcIaM9RYi9j99tncK2FmWz9tbTcLJALwjZ3K5MGTEe5BgnSqrSH3Wo_OOFqB_6StWMjK_RkS41yV0RfppOAc2bLAneYUqyYM2ll35KvY3I9eG9_bMirerqWE3zot7B2ptsMvAVmNnLxdUDEJhkja_pPbkJgPXZuTOtFBFY0ZtVDSp8an-bGN5oyOeUrKkfFAAAefS0thmZhE-iBLj1pDkPJuPbOq3sDxYt55UMa7Jl4dzi-pzrxqbF_H43KVBtBmrQRAc2kTDdU24UxfwX1mjNrg"
@@ -50,7 +68,8 @@ MIIDbzCCAlegAwIBAgIJANp1aztdBEjBMA0GCSqGSIb3DQEBCwUAME4xCzAJBgNVBAMMAmNhMQ4wDAYD
         _ authorizeUrl: URL,
         threeDSRequestorAppURL: String? = nil,
         uiCustomization: ThreeDSUICustomization? = nil,
-        in viewController: UIViewController
+        in viewController: UIViewController,
+        onComplete: @escaping ((Result<Void, Error>) -> Void)
     ) {
         if let uiCustomization = uiCustomization {
             Self.uiCustomization = uiCustomization
@@ -61,29 +80,46 @@ MIIDbzCCAlegAwIBAgIJANp1aztdBEjBMA0GCSqGSIb3DQEBCwUAME4xCzAJBgNVBAMMAmNhMQ4wDAYD
             let transaction = try netceteraThreeDSController.newTransaction()
             let authParams = try transaction.getAuthenticationRequestParameters()
 
-            if let deviceInfo = DeviceInformation.deviceInformation(sdkAppId: authParams.getSDKAppID(), sdkVersion: "1.0") {
-                try netceteraThreeDSController.sendAuthenticationRequest(
-                    deviceInfo: deviceInfo,
-                    transaction: transaction,
-                    authorizeUrl: authorizeUrl) { response in
-                        if let response = response, response.isChallenge == true {
-                            DispatchQueue.main.async {
-                                do {
-                                    try Self.sharedController.presentChallenge(
-                                        authResponse: response,
-                                        threeDSRequestorAppURL: threeDSRequestorAppURL,
-                                        transaction: transaction,
-                                        from: viewController
-                                    )
-                                } catch {
-                                    print(error)
-                                }
-                            }
+            guard let deviceInfo = DeviceInformation.deviceInformation(sdkAppId: authParams.getSDKAppID(), sdkVersion: "1.0") else {
+                onComplete(.failure(NetceteraThreeDSController.Errors.invalidDeviceInfo))
+                return
+            }
+
+            try netceteraThreeDSController.sendAuthenticationRequest(
+                deviceInfo: deviceInfo,
+                transaction: transaction,
+                authorizeUrl: authorizeUrl) { response in
+                    guard let response = response else {
+                        onComplete(.failure(NetceteraThreeDSController.Errors.invalidAuthResponse))
+                        return
+                    }
+
+                    guard response.isSuccess == false else {
+                        onComplete(.success(()))
+                        return
+                    }
+
+                    guard response.isChallenge == true else {
+                        onComplete(.failure(NetceteraThreeDSController.Errors.invalidAuthResponse))
+                        return
+                    }
+
+                    DispatchQueue.main.async {
+                        do {
+                            try Self.sharedController.presentChallenge(
+                                authResponse: response,
+                                threeDSRequestorAppURL: threeDSRequestorAppURL,
+                                transaction: transaction,
+                                from: viewController,
+                                onComplete: onComplete
+                            )
+                        } catch {
+                            onComplete(.failure(error))
                         }
-                }
+                    }
             }
         } catch {
-            print(error)
+            onComplete(.failure(error))
         }
     }
 
@@ -135,10 +171,6 @@ MIIDbzCCAlegAwIBAgIJANp1aztdBEjBMA0GCSqGSIb3DQEBCwUAME4xCzAJBgNVBAMMAmNhMQ4wDAYD
 
         return transaction
     }
-    // ToDo: Process exception errors
-    //        } catch ThreeDS2Error.SDKNotInitialized(let message, _) {
-    //        } catch ThreeDS2Error.InvalidInput(let message, _) {
-    //        } catch ThreeDS2Error.SDKAlreadyInitialized(let message, _) {
 
     typealias ErrorHandler = (String) -> Void
     func verifyWarnings(errorHandler: @escaping ErrorHandler) {
@@ -199,18 +231,19 @@ MIIDbzCCAlegAwIBAgIJANp1aztdBEjBMA0GCSqGSIb3DQEBCwUAME4xCzAJBgNVBAMMAmNhMQ4wDAYD
         }
 
         task.resume()
-
     }
 
-    func presentChallenge(authResponse: AuthResponse, threeDSRequestorAppURL: String?, transaction: Transaction, from viewController: UIViewController) throws {
+    func presentChallenge(
+        authResponse: AuthResponse,
+        threeDSRequestorAppURL: String?,
+        transaction: Transaction,
+        from viewController: UIViewController,
+        onComplete: @escaping ((Result<Void, Error>) -> Void)
+    ) throws {
         guard let aRes = authResponse.ares else { return }
 
-        print("presentChallenge: \(aRes)")
         let receiver = OmiseChallengeStatusReceiver()
-        receiver.onComplete = {
-            print("here")
-            // ...
-        }
+        receiver.onComplete = onComplete
 
         let threeDSServerTransactionID = aRes.threeDSServerTransID
         let acsTransactionID = aRes.acsTransID
@@ -231,43 +264,39 @@ MIIDbzCCAlegAwIBAgIJANp1aztdBEjBMA0GCSqGSIb3DQEBCwUAME4xCzAJBgNVBAMMAmNhMQ4wDAYD
         self.receiver = receiver
         self.transaction = transaction
 
-//        DispatchQueue.main.async {
-            do {
-                try transaction.doChallenge(
-                    challengeParameters: challengeParameters,
-                    challengeStatusReceiver: receiver,
-                    timeOut: 5,
-                    inViewController: viewController
-                )
-            } catch {
-                print("doChallenge error: \(error)")
-                print("-")
-            }
-//        }
+        do {
+            try transaction.doChallenge(
+                challengeParameters: challengeParameters,
+                challengeStatusReceiver: receiver,
+                timeOut: 5,
+                inViewController: viewController
+            )
+        } catch {
+            onComplete(.failure(NetceteraThreeDSController.Errors.challenge(error: error)))
+        }
     }
 }
 
 class OmiseChallengeStatusReceiver: ChallengeStatusReceiver {
-    var onComplete: (() -> Void)?
+    var onComplete: ((Result<Void, Error>) -> Void)?
 
     func completed(completionEvent: ThreeDS_SDK.CompletionEvent) {
-        onComplete?()
+        onComplete?(.success(()))
     }
 
     func cancelled() {
-        print("cancelled")
+        onComplete?(.failure(NetceteraThreeDSController.Errors.cancelled))
     }
 
     func timedout() {
-        print("timedout")
+        onComplete?(.failure(NetceteraThreeDSController.Errors.timedout))
     }
 
     func protocolError(protocolErrorEvent: ThreeDS_SDK.ProtocolErrorEvent) {
-        print("protocolError")
+        onComplete?(.failure(NetceteraThreeDSController.Errors.protocolError(event: protocolErrorEvent)))
     }
 
     func runtimeError(runtimeErrorEvent: ThreeDS_SDK.RuntimeErrorEvent) {
-        print("runtimeError, \(runtimeErrorEvent.getErrorCode()): \(runtimeErrorEvent.getErrorMessage())")
-        print("-")
+        onComplete?(.failure(NetceteraThreeDSController.Errors.runtimeError(event: runtimeErrorEvent)))
     }
 }
