@@ -399,7 +399,7 @@ extension Client {
 // MARK: - Constants
 extension Client {
     static let sdkVersion: String = "4.25.0"
-    
+
     static let currentPlatform: String = ProcessInfo.processInfo.operatingSystemVersionString
     static let currentDevice: String = UIDevice.current.model
     
@@ -413,7 +413,7 @@ extension Client {
     
     static var defaultUserAgent: String {
         return """
-        OmiseIOSSDK/\(sdkVersion) \
+        OmiseIOS/\(sdkVersion) \
         iOS/\(currentPlatform) \
         Apple/\(currentDevice)
         """ // OmiseIOSSDK/3.0.0 iOS/12.0.0 Apple/iPhone
