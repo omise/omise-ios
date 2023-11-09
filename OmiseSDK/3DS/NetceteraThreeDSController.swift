@@ -10,8 +10,20 @@ import Foundation
 import ThreeDS_SDK
 
 struct AuthResponse: Codable {
-    var status: String
+    var serverStatus: String
     var ares: ARes?
+
+    private enum CodingKeys: String, CodingKey {
+        case serverStatus = "status"
+        case ares
+    }
+
+    enum Status {
+        case challenge
+        case failed
+        case success
+        case unknown
+    }
 
     struct ARes: Codable {
         var threeDSServerTransID: String
@@ -20,20 +32,16 @@ struct AuthResponse: Codable {
         var acsUIType: String?
     }
 
-    var isChallenge: Bool {
-        return status == "challenge"
-    }
-
-    var isSuccess: Bool {
-        return status == "success"
-    }
-
-    var isFailed: Bool {
-        return status == "failed"
+    var status: Status {
+        switch serverStatus {
+        case "success": return .success
+        case "challenge": return .challenge
+        case "failed": return .failed
+        default: return .unknown
+        }
     }
 }
 
-// swiftlint:disable file_length
 public class NetceteraThreeDSController {
 
     enum Errors: Error {
@@ -44,6 +52,9 @@ public class NetceteraThreeDSController {
         case challenge(error: Error)
         case protocolError(event: ThreeDS_SDK.ProtocolErrorEvent)
         case runtimeError(event: ThreeDS_SDK.RuntimeErrorEvent)
+
+        case aResStatusFailed
+        case aResStatusUnknown(_ status: String)
     }
 
     let trialLicenceKey =
@@ -93,14 +104,19 @@ MIIDbzCCAlegAwIBAgIJANp1aztdBEjBMA0GCSqGSIb3DQEBCwUAME4xCzAJBgNVBAMMAmNhMQ4wDAYD
                         return
                     }
 
-                    guard response.isSuccess == false else {
+
+                    switch response.status {
+                    case .success:
                         onComplete(.success(()))
                         return
-                    }
-
-                    guard response.isChallenge == true else {
-                        onComplete(.failure(NetceteraThreeDSController.Errors.invalidAuthResponse))
+                    case .failed:
+                        onComplete(.failure(NetceteraThreeDSController.Errors.aResStatusFailed))
                         return
+                    case .unknown:
+                        onComplete(.failure(NetceteraThreeDSController.Errors.aResStatusUnknown(response.serverStatus)))
+                        return
+                    case .challenge:
+                        break
                     }
 
                     DispatchQueue.main.async {
@@ -282,9 +298,11 @@ class OmiseChallengeStatusReceiver: ChallengeStatusReceiver {
     var onComplete: ((Result<Void, Error>) -> Void)?
 
     func completed(completionEvent: ThreeDS_SDK.CompletionEvent) {
+        print(completionEvent)
         onComplete?(.success(()))
     }
 
+    // Don't go to webview
     func cancelled() {
         onComplete?(.failure(NetceteraThreeDSController.Errors.cancelled))
     }

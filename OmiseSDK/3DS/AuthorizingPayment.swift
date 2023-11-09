@@ -39,11 +39,20 @@ public class AuthorizingPayment {
                 switch result {
                 case .success:
                     completion(.complete(redirectURL: nil))
-                case .failure:
-                    DispatchQueue.main.async {
-                        self?.presentAuthPaymentController(topViewController: topViewController,
-                                                           url: url,
-                                                           expectedReturnURL: expectedWebViewReturnURL)
+                case .failure(let error):
+                    typealias NetceteraFlowError = NetceteraThreeDSController.Errors
+                    switch error {
+                    case NetceteraFlowError.cancelled,
+                        NetceteraFlowError.timedout,
+                        NetceteraFlowError.aResStatusFailed,
+                        NetceteraFlowError.aResStatusUnknown:
+                        completion(.cancel)
+                    default:
+                        DispatchQueue.main.async {
+                            self?.presentAuthPaymentController(topViewController: topViewController,
+                                                               url: url,
+                                                               expectedReturnURL: expectedWebViewReturnURL)
+                        }
                     }
                 }
         }
