@@ -134,9 +134,6 @@ class ProductDetailViewController: OMSBaseViewController {
                 expectedWebViewReturnURL: expectedWebReturnURL,
                 deeplinkURL: deeplinkURL,
                 uiCustomization: self.threeDSUICustomization) { [weak self] result in
-                    print("AuthorizingPayment complete with result: \(result)")
-                    print("-")
-
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
                         let alertController = UIAlertController(title: "Authorizing Payment",
                                                                 message: "Status: \(result)",
