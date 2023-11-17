@@ -3,7 +3,6 @@ import XCTest
 
 class CapabilityOperationFixtureTests: XCTestCase {
 
-    // swiftlint:disable:next function_body_length
     func testCapabilityRetrieve() {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
 
@@ -30,30 +29,6 @@ class CapabilityOperationFixtureTests: XCTestCase {
                 XCTFail("Capability doesn't have the BAY Installment backend")
             }
 
-            if let trueMoneyBackend = capability[OMSSourceTypeValue.trueMoney] {
-                XCTAssertEqual(trueMoneyBackend.supportedCurrencies, [.thb])
-            } else {
-                XCTFail("Capability doesn't have the TrueMoney backend")
-            }
-
-            if let citiPointsBackend = capability[OMSSourceTypeValue.pointsCiti] {
-                XCTAssertEqual(citiPointsBackend.supportedCurrencies, [.thb])
-            } else {
-                XCTFail("Capability doesn't have the Citi Points backend")
-            }
-
-            if let rabbitLinePayBackend = capability[OMSSourceTypeValue.rabbitLinepay] {
-                XCTAssertEqual(rabbitLinePayBackend.supportedCurrencies, [.thb])
-            } else {
-                XCTFail("Capability doesn't have the Rabbit LINE Pay backend")
-            }
-            
-            if let ocbcPaoBackend = capability[OMSSourceTypeValue.mobileBankingOCBCPAO] {
-                XCTAssertEqual(ocbcPaoBackend.supportedCurrencies, [.sgd])
-            } else {
-                XCTFail("Capability doesn't have the OCBC Pay Anyone backend")
-            }
-
             if let fpxBackend = capability[OMSSourceTypeValue.fpx] {
                 XCTAssertEqual(fpxBackend.banks, [
                     Capability.Backend.Bank(name: "UOB", code: "uob", isActive: true)
@@ -70,17 +45,20 @@ class CapabilityOperationFixtureTests: XCTestCase {
                 XCTFail("Capability doesn't have the Mobile Banking KBank backend")
             }
 
-            if let grabPayBackend = capability[OMSSourceTypeValue.grabPay] {
-                XCTAssertEqual(grabPayBackend.supportedCurrencies, [.sgd, .myr])
-            } else {
-                XCTFail("Capability doesn't have the GrabPay backend")
+            func testCapabilitySupportsCurrency(_ capability: Capability, sourceType: OMSSourceTypeValue, currencies: Set<Currency>) {
+                if let backend = capability[sourceType] {
+                    XCTAssertEqual(backend.supportedCurrencies, currencies)
+                } else {
+                    XCTFail("Capability doesn't have the \(sourceType) backend")
+                }
             }
-            
-            if let payPayBackend = capability[OMSSourceTypeValue.payPay] {
-                XCTAssertEqual(payPayBackend.supportedCurrencies, [.jpy])
-            } else {
-                XCTFail("Capability doesn't have the PayPay backend")
-            }
+
+            testCapabilitySupportsCurrency(capability, sourceType: .trueMoney, currencies: [.thb])
+            testCapabilitySupportsCurrency(capability, sourceType: .pointsCiti, currencies: [.thb])
+            testCapabilitySupportsCurrency(capability, sourceType: .rabbitLinepay, currencies: [.thb])
+            testCapabilitySupportsCurrency(capability, sourceType: .mobileBankingOCBCPAO, currencies: [.sgd])
+            testCapabilitySupportsCurrency(capability, sourceType: .grabPay, currencies: [.sgd, .myr])
+            testCapabilitySupportsCurrency(capability, sourceType: .payPay, currencies: [.jpy])
         } catch {
             XCTFail("Cannot decode the source \(error)")
         }
