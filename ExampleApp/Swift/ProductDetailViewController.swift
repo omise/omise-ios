@@ -125,7 +125,7 @@ class ProductDetailViewController: OMSBaseViewController {
                   let text = textField.text,
                   let url = URL(string: text),
                   let deeplinkURL = URL(string: "omiseExampleApp://omise_3ds_challenge"),
-                  let expectedWebReturnURL = URL(string: "http://www.example.com/orders")
+                  let expectedWebReturnURL = URL(string: "https://omise.co/orders")
             else { return }
 
             AuthorizingPayment.shared.presentAuthPaymentController(

@@ -12,9 +12,8 @@ import PlaygroundSupport
 let authroizedURL = URL(string: "https://authorized-url")!
 
 let expectedURLPatterns = [
-    URLComponents(string: "https://example.com")!,
     URLComponents(string: "https://omise.co")!,
-    URLComponents(string: "https://example.com/returned")!
+    URLComponents(string: "https://omise.co/returned")!
 ]
 
 let checkoutController = CheckoutViewController()
