@@ -157,7 +157,7 @@ private extension ProductDetailViewController {
                 .backgroundColorHex("#93C572"), // Green shade
             .SUBMIT:
                 ThreeDSButtonCustomization()
-                .backgroundColorHex("#FFBF00"), // Orange
+                .backgroundColorHex("#FFBF00") // Orange
         ]
         threeDSUICustomization.labelCustomization = ThreeDSLabelCustomization()
             .headingTextColorHex("#FFAA33") // Yellow-Orange
