@@ -115,7 +115,7 @@ class AuthorizingPaymentTests: XCTestCase {
     func test3DSAuthResponseStatusUnknown() {
         let expectation = self.expectation(description: "callback")
 
-        netceteraMockController.result = .failure(NetceteraError.authResStatusUnknown("Some Uknown Status"))
+        netceteraMockController.result = .failure(NetceteraError.authResStatusUnknown("Some Unknown Status"))
         authorizingPayment.presentAuthPaymentController(
             from: topViewController,
             url: authorizeURL,
