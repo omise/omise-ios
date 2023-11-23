@@ -10,7 +10,7 @@ import UIKit
 
 @available(iOSApplicationExtension, unavailable)
 public class AuthorizingPayment {
-    public enum Status {
+    public enum Status: Equatable {
         case complete(redirectURL: URL?)
         case cancel
     }
@@ -31,7 +31,7 @@ public class AuthorizingPayment {
         self.completion = completion
         self.topViewController = topViewController
         
-        NetceteraThreeDSController.processAuthorizedURL(
+        NetceteraThreeDSController.sharedController.processAuthorizedURL(
             url,
             threeDSRequestorAppURL: deeplinkURL.absoluteString,
             uiCustomization: uiCustomization,
@@ -42,10 +42,11 @@ public class AuthorizingPayment {
                 case .failure(let error):
                     typealias NetceteraFlowError = NetceteraThreeDSController.Errors
                     switch error {
-                    case NetceteraFlowError.cancelled,
+                    case NetceteraFlowError.incomplete,
+                        NetceteraFlowError.cancelled,
                         NetceteraFlowError.timedout,
-                        NetceteraFlowError.aResStatusFailed,
-                        NetceteraFlowError.aResStatusUnknown:
+                        NetceteraFlowError.authResStatusFailed,
+                        NetceteraFlowError.authResStatusUnknown:
                         completion(.cancel)
                     default:
                         DispatchQueue.main.async {
@@ -58,8 +59,7 @@ public class AuthorizingPayment {
         }
     }
 
-    // topViewController = handlerController.topViewController
-    func presentAuthPaymentController(topViewController: UIViewController, url: URL, expectedReturnURL: URL) {
+    private func presentAuthPaymentController(topViewController: UIViewController, url: URL, expectedReturnURL: URL) {
         guard let returnURLComponents = URLComponents(url: expectedReturnURL, resolvingAgainstBaseURL: false) else {
             return
         }
