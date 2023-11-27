@@ -39,44 +39,6 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case grabPayRms
     case payPay
 
-    static var sorting: [PaymentChooserOption] {
-        return [
-            .creditCard,
-            .installment,
-            .promptpay,
-            .citiPoints,
-            .alipay,
-            .alipayCN,
-            .alipayHK,
-            .atome,
-            .dana,
-            .gcash,
-            .kakaoPay,
-            .touchNGoAlipayPlus,
-            .internetBanking,
-            .mobileBanking,
-            .tescoLotus,
-            .paynow,
-            .conbini,
-            .payEasy,
-            .netBanking,
-            .fpx,
-            .rabbitLinepay,
-            .ocbcPao,
-            .ocbcDigital,
-            .grabPay,
-            .boost,
-            .shopeePay,
-            .shopeePayJumpApp,
-            .maybankQRPay,
-            .duitNowQR,
-            .duitNowOBW,
-            .touchNGo,
-            .grabPayRms,
-            .payPay
-        ]
-    }
-
     var description: String {
         switch self {
         case .creditCard:
