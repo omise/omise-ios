@@ -124,29 +124,27 @@ class ProductDetailViewController: OMSBaseViewController {
                   let textField = alertController.textFields?.first,
                   let text = textField.text,
                   let url = URL(string: text),
-                  let expectedReturnURL = URLComponents(string: "omiseExampleApp://omise_3ds_challenge"),
-                  let threeDSRequestorAppURL = expectedReturnURL.url?.absoluteString
+                  let deeplinkURL = URL(string: "omiseExampleApp://omise_3ds_challenge"),
+                  let expectedWebReturnURL = URL(string: "https://omise.co/orders")
             else { return }
 
-            NetceteraThreeDSController.processAuthorizedURL(
-                url,
-                threeDSRequestorAppURL: threeDSRequestorAppURL,
-                uiCustomization: self.threeDSUICustomization,
-                in: self
-            )
+            AuthorizingPayment.shared.presentAuthPaymentController(
+                from: self,
+                url: url,
+                expectedWebViewReturnURL: expectedWebReturnURL,
+                deeplinkURL: deeplinkURL,
+                uiCustomization: self.threeDSUICustomization) { [weak self] result in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+                        let alertController = UIAlertController(title: "Authorizing Payment",
+                                                                message: "Status: \(result)",
+                                                                preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                        self?.present(alertController, animated: true, completion: nil)
+                    }
+
+            }
         })
         present(alertController, animated: true, completion: nil)
-    }
-
-    // topViewController = handlerController.topViewController
-    func presentAuthPaymentController(topViewController: UIViewController, url: URL, expectedReturnURL: URLComponents) {
-        let handlerController =
-        AuthorizingPaymentWebViewController
-            .makeAuthorizingPaymentWebViewControllerNavigationWithAuthorizedURL(
-                url, expectedReturnURLPatterns: [expectedReturnURL], delegate: self)
-        self.navigationController?.pushViewController(topViewController, animated: true)
-
-        self.present(handlerController, animated: true, completion: nil)
     }
 }
 
@@ -159,7 +157,7 @@ private extension ProductDetailViewController {
                 .backgroundColorHex("#93C572"), // Green shade
             .SUBMIT:
                 ThreeDSButtonCustomization()
-                .backgroundColorHex("#FFBF00"), // Orange
+                .backgroundColorHex("#FFBF00") // Orange
         ]
         threeDSUICustomization.labelCustomization = ThreeDSLabelCustomization()
             .headingTextColorHex("#FFAA33") // Yellow-Orange

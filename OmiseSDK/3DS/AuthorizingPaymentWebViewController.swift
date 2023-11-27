@@ -66,7 +66,7 @@ public class AuthorizingPaymentWebViewController: UIViewController {
     /// The expected return URL patterns described in the URLComponents object.
     ///
     /// The rule is the scheme and host must be matched and must have the path as a prefix.
-    /// Example: if the return URL is `https://www.example.com/products/12345` the expected return URL should have a URLComponents with scheme of `https`, host of `www.example.com` and the path of `/products/`
+    /// Example: if the return URL is `https://omise.co/products/12345` the expected return URL should have a URLComponents with scheme of `https`, host of `omise.co` and the path of `/products/`
     public var expectedReturnURLPatterns: [URLComponents] = []
     
     /// A delegate object that will recieved the authorizing payment events.
@@ -91,6 +91,9 @@ public class AuthorizingPaymentWebViewController: UIViewController {
         let navigationController = storyboard.instantiateViewController(
             withIdentifier: "DefaultAuthorizingPaymentWebViewControllerWithNavigation"
         ) as! UINavigationController // swiftlint:disable:this force_cast
+
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.backgroundColor = .white
 
         // swiftlint:disable:next force_cast
         let viewController = navigationController.topViewController as! AuthorizingPaymentWebViewController
@@ -209,6 +212,21 @@ public class AuthorizingPaymentWebViewController: UIViewController {
 
 @available(iOSApplicationExtension, unavailable)
 extension AuthorizingPaymentWebViewController: WKNavigationDelegate {
+
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        print(error)
+        delegate?.authorizingPaymentWebViewControllerDidCancel(self)
+    }
+
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("finished")
+    }
+
+    public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        print(error)
+        delegate?.authorizingPaymentWebViewControllerDidCancel(self)
+    }
+
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         if let url = navigationAction.request.url, verifyPaymentURL(url) {
             os_log("Redirected to expected %{private}@ URL, trying to notify the delegate",
@@ -223,7 +241,7 @@ extension AuthorizingPaymentWebViewController: WKNavigationDelegate {
                        type: .default,
                        url.absoluteString)
             }
-        } else if let url = navigationAction.request.url, let scheme = url.scheme?.lowercased(), (scheme != "https" && scheme != "http") {
+        } else if let url = navigationAction.request.url, let scheme = url.scheme?.lowercased(), scheme != "https" && scheme != "http" {
             os_log("Redirected to custom-scheme %{private}@ URL",
                    log: uiLogObject,
                    type: .debug,

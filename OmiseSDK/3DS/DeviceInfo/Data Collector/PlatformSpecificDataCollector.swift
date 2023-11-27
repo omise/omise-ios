@@ -20,7 +20,8 @@ struct PlatformSpecificDeviceDataCollector: DeviceDataCollector {
   
   func perform() -> [DeviceData] {
     return [
-      GeneralDeviceData(name: "Identifier For Vendor", dataIdentifier: "I001",
+      GeneralDeviceData(name: "Identifier For Vendor",
+                        dataIdentifier: "I001",
                         value: device.identifierForVendor?.uuidString),
       GeneralDeviceData(name: "UserInterfaceIdiom", dataIdentifier: "I002", value: "\(device.userInterfaceIdiom.rawValue)")
     ]

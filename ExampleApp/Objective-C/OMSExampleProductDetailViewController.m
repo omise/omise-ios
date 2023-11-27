@@ -115,7 +115,7 @@ OMSAuthorizingPaymentWebViewControllerDelegate, OMSPaymentCreatorControllerDeleg
         UITextField *textField = alertController.textFields.firstObject;
         NSURL *url = [[NSURL alloc] initWithString:textField.text];
         
-        NSURLComponents *expectedReturnURL = [[NSURLComponents alloc] initWithString:@"http://www.example.com/orders"];
+        NSURLComponents *expectedReturnURL = [[NSURLComponents alloc] initWithString:@"https://omise.co/orders"];
         UINavigationController *AuthorizingPaymentWebViewController = [OMSAuthorizingPaymentWebViewController AuthorizingPaymentWebViewControllerNavigationWithAuthorizedURL:url expectedReturnURLPatterns:@[expectedReturnURL] delegate:self];
         
 //        [self presentViewController:AuthorizingPaymentWebViewController animated:YES completion:nil];
