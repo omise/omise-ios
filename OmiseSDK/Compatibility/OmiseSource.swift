@@ -110,6 +110,9 @@ public class __SourcePaymentInformation: NSObject {
     
     /// Payment Information for a PayPay Payment
     public static let paypayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.payPay)!
+
+    /// Payment Information for an Truemoney JumpApp
+    public static let truemoneyJumpAppPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.trueMoneyJumpApp)!
 }
 
 /// Internet Bankning Source Payment Information
@@ -648,6 +651,9 @@ extension __SourcePaymentInformation {
             
         case .truemoney(let trueMoney):
             return __SourceTrueMoneyPayment(phoneNumber: trueMoney.phoneNumber)
+
+        case .truemoneyJumpApp:
+            return __SourcePaymentInformation.truemoneyJumpAppPayment
 
         case .points(let points):
             switch points {
