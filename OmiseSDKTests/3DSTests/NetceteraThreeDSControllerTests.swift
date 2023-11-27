@@ -17,6 +17,8 @@ class NetceteraThreeDSControllerTests: XCTestCase {
         let netceteraController = NetceteraThreeDSController()
 
         let tests = [
+            "": nil,
+
             "someApp://":
                 "someApp://?transID=\(transactionId)",
 
