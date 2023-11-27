@@ -22,6 +22,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case promptpay
     case paynow
     case truemoney
+    case truemoneyJumpApp
     case citiPoints
     case fpx
     case rabbitLinepay
@@ -38,11 +39,10 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case grabPayRms
     case payPay
 
-    static var allCases: [PaymentChooserOption] {
+    static var sorting: [PaymentChooserOption] {
         return [
             .creditCard,
             .installment,
-            .truemoney,
             .promptpay,
             .citiPoints,
             .alipay,
@@ -116,7 +116,9 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
         case .paynow:
             return "PayNow"
         case .truemoney:
-            return "TrueMoney"
+            return "TrueMoney Wallet"
+        case .truemoneyJumpApp:
+            return "Truemoney"
         case .citiPoints:
             return "CitiPoints"
         case .fpx:
@@ -157,6 +159,8 @@ extension PaymentChooserOption {
         switch sourceType {
         case .trueMoney:
             return [.truemoney]
+        case .trueMoneyJumpApp:
+            return [.truemoneyJumpApp]
         case .installmentFirstChoice, .installmentMBB, .installmentKBank, .installmentKTC,
              .installmentBBL, .installmentBAY, .installmentSCB, .installmentCiti, .installmentTTB, .installmentUOB:
             return [.installment]
@@ -397,6 +401,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         case .atome:
             goToAtome()
             return
+        case .truemoneyJumpApp:
+            payment = .truemoneyJumpApp
         default:
             return
         }
@@ -491,6 +497,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 31, section: 0)
         case .payPay:
             return IndexPath(row: 32, section: 0)
+        case .truemoneyJumpApp:
+            return IndexPath(row: 33, section: 0)
         }
     }
 
