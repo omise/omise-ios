@@ -6,6 +6,16 @@ class NetceteraThreeDSControllerTests: XCTestCase {
 
     func testThreeDSRequestorAppURLTransaction() {
         let transactionId = "1234-5678-9012-ABCD"
+
+        let aRes = AuthResponse.ARes(
+            threeDSServerTransID: transactionId,
+            acsTransID: "123",
+            acsSignedContent: nil,
+            acsUIType: nil
+        )
+
+        let netceteraController = NetceteraThreeDSController()
+
         let tests = [
             "someApp://":
                 "someApp://?transID=\(transactionId)",
@@ -17,14 +27,6 @@ class NetceteraThreeDSControllerTests: XCTestCase {
                 "someApp://3ds/challenge?source=omiseSDK&transID=\(transactionId)"
         ]
 
-        let aRes = AuthResponse.ARes(
-            threeDSServerTransID: transactionId,
-            acsTransID: "123",
-            acsSignedContent: nil,
-            acsUIType: nil
-        )
-
-        let netceteraController = NetceteraThreeDSController()
         for (url, result) in tests {
             let params = netceteraController.prepareChallengeParameters(
                 aRes: aRes,
