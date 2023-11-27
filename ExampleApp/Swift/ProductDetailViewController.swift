@@ -124,7 +124,7 @@ class ProductDetailViewController: OMSBaseViewController {
                   let textField = alertController.textFields?.first,
                   let text = textField.text,
                   let url = URL(string: text),
-                  let deeplinkURL = URL(string: "omiseExampleApp://omise_3ds_challenge"),
+                  let deeplinkURL = AppDeeplink.threeDSChallenge.url,
                   let expectedWebReturnURL = URL(string: "https://omise.co/orders")
             else { return }
 

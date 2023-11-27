@@ -20,6 +20,10 @@ public class AuthorizingPayment {
 
     public static var shared = AuthorizingPayment()
 
+    public func appOpen3DSDeeplinkURL(_ url: URL) -> Bool {
+        NetceteraThreeDSController.sharedController.appOpen3DSDeeplinkURL(url)
+    }
+
     public func presentAuthPaymentController(
         from topViewController: UIViewController,
         url: URL,

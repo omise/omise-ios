@@ -101,6 +101,9 @@
 		75AA455F2AB042CC003DE277 /* ThreeDSDeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA455E2AB042CC003DE277 /* ThreeDSDeviceInfo.swift */; };
 		75B43B572A0277A3004352C7 /* PaymentInformation.Atome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */; };
 		75C5D7B32B0D87860038C0A0 /* AuthorizingPaymentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5D7B22B0D87860038C0A0 /* AuthorizingPaymentTests.swift */; };
+		75C5D7B72B1040430038C0A0 /* NetceteraThreeDSControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5D7B62B1040430038C0A0 /* NetceteraThreeDSControllerTests.swift */; };
+		75C5D7BA2B1421100038C0A0 /* AppDeeplink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5D7B82B1420CC0038C0A0 /* AppDeeplink.swift */; };
+		75C5D7BB2B1421110038C0A0 /* AppDeeplink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5D7B82B1420CC0038C0A0 /* AppDeeplink.swift */; };
 		75D0086C2AFB910A006A85F2 /* AuthorizingPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D0086B2AFB910A006A85F2 /* AuthorizingPayment.swift */; };
 		75DAD88C2A0BA5130098AF96 /* OmiseTestSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; };
 		75DAD88E2A0BA5130098AF96 /* OmiseTestSDK in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -363,6 +366,8 @@
 		75AA455E2AB042CC003DE277 /* ThreeDSDeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSDeviceInfo.swift; sourceTree = "<group>"; };
 		75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInformation.Atome.swift; sourceTree = "<group>"; };
 		75C5D7B22B0D87860038C0A0 /* AuthorizingPaymentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizingPaymentTests.swift; sourceTree = "<group>"; };
+		75C5D7B62B1040430038C0A0 /* NetceteraThreeDSControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetceteraThreeDSControllerTests.swift; sourceTree = "<group>"; };
+		75C5D7B82B1420CC0038C0A0 /* AppDeeplink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDeeplink.swift; sourceTree = "<group>"; };
 		75D0086B2AFB910A006A85F2 /* AuthorizingPayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizingPayment.swift; sourceTree = "<group>"; };
 		75DAD87F2A0B9AE50098AF96 /* OmiseTestSDK */ = {isa = PBXFileReference; lastKnownFileType = text; path = OmiseTestSDK; sourceTree = SOURCE_ROOT; };
 		75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalConfig.swift; sourceTree = "<group>"; };
@@ -564,6 +569,7 @@
 				22D480AB1D0EB29C00544CE1 /* Info.plist */,
 				8AF6A1D720E4FEBE00AC5625 /* ExampleApp-Bridging-Header.h */,
 				229E14541D0EBAB5000511DE /* AppDelegate.swift */,
+				75C5D7B82B1420CC0038C0A0 /* AppDeeplink.swift */,
 				8A723A672164D80200D902F5 /* Swift */,
 				8AB3B85F216DCF5C006497B5 /* Shared */,
 				8A723A682164D80C00D902F5 /* Objective-C */,
@@ -740,6 +746,7 @@
 				75AA454C2AAF9034003DE277 /* UILabelCustomizationTests.swift */,
 				75AA454E2AAF903B003DE277 /* ThreeDSTextBoxCustomizationTests.swift */,
 				75C5D7B22B0D87860038C0A0 /* AuthorizingPaymentTests.swift */,
+				75C5D7B62B1040430038C0A0 /* NetceteraThreeDSControllerTests.swift */,
 			);
 			path = 3DSTests;
 			sourceTree = "<group>";
@@ -1436,6 +1443,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A40DA29216B441E00749F45 /* PaymentSettingTableViewController.swift in Sources */,
+				75C5D7BA2B1421100038C0A0 /* AppDeeplink.swift in Sources */,
 				229E14581D0EBAB5000511DE /* AppDelegate.swift in Sources */,
 				8A6AA06E216B9DAE00E49E5E /* OMSBaseViewController.m in Sources */,
 				8A40DA2B216B53E900749F45 /* Tools.swift in Sources */,
@@ -1482,6 +1490,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75C5D7BB2B1421110038C0A0 /* AppDeeplink.swift in Sources */,
 				8A723A692164D87B00D902F5 /* OMSExampleProductDetailViewController.m in Sources */,
 				8A7A9EBE2166160300F12D86 /* PaymentSettingTableViewController.swift in Sources */,
 				8A6AA06D216B958100E49E5E /* OMSBaseViewController.m in Sources */,
@@ -1510,6 +1519,7 @@
 				2244600A1CF441DC00801D0F /* TokenRequestDelegateDummy.swift in Sources */,
 				753279382A31B40F008048AD /* CountryListViewModelMockup.swift in Sources */,
 				224460051CF43A1500801D0F /* CardNumberTest.swift in Sources */,
+				75C5D7B72B1040430038C0A0 /* NetceteraThreeDSControllerTests.swift in Sources */,
 				7558CC9A2AAF89C1005815DF /* UICustomizationTests.swift in Sources */,
 				987A03211CE5B7D70035417A /* OmiseTokenRequestTest.swift in Sources */,
 				7509D4E72A1C8E3D0050AB38 /* AtomeFormViewModelTests.swift in Sources */,
