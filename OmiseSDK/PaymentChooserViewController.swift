@@ -80,7 +80,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
         case .truemoney:
             return "TrueMoney Wallet"
         case .truemoneyJumpApp:
-            return "Truemoney"
+            return "TrueMoney"
         case .citiPoints:
             return "CitiPoints"
         case .fpx:
