@@ -26,9 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         switch components.host {
-        case "omise_3ds_challenge":
+        case AppDeeplink.threeDSChallenge.rawValue:
             print("Omise 3DS Challenge Callback")
-            return true
+            return AuthorizingPayment.shared.appOpen3DSDeeplinkURL(url)
         default:
             print("Unknown deeplink params \(url.host ?? "nil")")
             return false

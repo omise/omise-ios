@@ -44,6 +44,7 @@ struct AuthResponse: Codable {
 
 protocol NetceteraThreeDSControllerProtocol: AnyObject {
     typealias NetceteraThreeDSControllerResult = Result<Void, Error>
+    func appOpen3DSDeeplinkURL(_ url: URL) -> Bool
     func processAuthorizedURL(
         _ authorizeUrl: URL,
         threeDSRequestorAppURL: String?,
@@ -74,9 +75,11 @@ class NetceteraThreeDSController {
         case certificate
         case directoryServerId
         case messageVersion
-        
+        case acsRefNumber
+
         var value: String {
             switch self {
+            case .acsRefNumber: return "3DS_LOA_SDK_NEAG_020200_00528"
             case .licenceKey: return
                 "eyJhbGciOiJSUzI1NiJ9.eyJ2ZXJzaW9uIjoyLCJ2YWxpZC11bnRpbCI6IjIwMjMtMDktMzAiLCJuYW1lIjoiT21pc2UiLCJtb2R1bGUiOiIzRFMifQ.XrTHC8r-7wLXwmBXpWj4Ln3evQoTrGThvuHlowICIWRiB3T7eZbDZUiO1ZR6zWbcIaM9RYi9j99tncK2FmWz9tbTcLJALwjZ3K5MGTEe5BgnSqrSH3Wo_OOFqB_6StWMjK_RkS41yV0RfppOAc2bLAneYUqyYM2ll35KvY3I9eG9_bMirerqWE3zot7B2ptsMvAVmNnLxdUDEJhkja_pPbkJgPXZuTOtFBFY0ZtVDSp8an-bGN5oyOeUrKkfFAAAefS0thmZhE-iBLj1pDkPJuPbOq3sDxYt55UMa7Jl4dzi-pzrxqbF_H43KVBtBmrQRAc2kTDdU24UxfwX1mjNrg"
                 // swiftlint:disable:previous line_length
@@ -156,6 +159,10 @@ class NetceteraThreeDSController {
 }
 
 extension NetceteraThreeDSController: NetceteraThreeDSControllerProtocol {
+    public func appOpen3DSDeeplinkURL(_ url: URL) -> Bool {
+        ThreeDSSDKAppDelegate.shared.appOpened(url: url)
+    }
+
     func processAuthorizedURL(
         _ authorizeUrl: URL,
         threeDSRequestorAppURL: String?,
@@ -216,6 +223,28 @@ extension NetceteraThreeDSController: NetceteraThreeDSControllerProtocol {
         } catch {
             onComplete(.failure(error))
         }
+    }
+
+    func prepareChallengeParameters(
+        aRes: AuthResponse.ARes,
+        acsRefNumber: String,
+        threeDSRequestorAppURL: String?
+    ) -> ChallengeParameters {
+        let serverTransactionID = aRes.threeDSServerTransID
+        let acsTransactionID = aRes.acsTransID
+        let acsSignedContent = aRes.acsSignedContent
+
+        let challengeParameters = ChallengeParameters(
+            threeDSServerTransactionID: serverTransactionID,
+            acsTransactionID: acsTransactionID,
+            acsRefNumber: acsRefNumber,
+            acsSignedContent: acsSignedContent)
+
+        if let appUrl = updateAppURLString(threeDSRequestorAppURL, transactionID: serverTransactionID) {
+            challengeParameters.setThreeDSRequestorAppURL(threeDSRequestorAppURL: appUrl)
+        }
+
+        return challengeParameters
     }
 }
 
@@ -285,24 +314,15 @@ private extension NetceteraThreeDSController {
         let receiver = OmiseChallengeStatusReceiver()
         receiver.onComplete = onComplete
 
-        let threeDSServerTransactionID = aRes.threeDSServerTransID
-        let acsTransactionID = aRes.acsTransID
-        let acsRefNumber = "3DS_LOA_SDK_NEAG_020200_00528"
-        let acsSignedContent = aRes.acsSignedContent
+        let challengeParameters = prepareChallengeParameters(
+            aRes: aRes,
+            acsRefNumber: TestData.acsRefNumber.value,
+            threeDSRequestorAppURL: threeDSRequestorAppURL
+        )
 
-        let challengeParameters = ChallengeParameters(
-            threeDSServerTransactionID: threeDSServerTransactionID,
-            acsTransactionID: acsTransactionID,
-            acsRefNumber: acsRefNumber,
-            acsSignedContent: acsSignedContent)
-
-        if let threeDSRequestorAppURL = threeDSRequestorAppURL {
-            challengeParameters.setThreeDSRequestorAppURL(threeDSRequestorAppURL: threeDSRequestorAppURL)
-        }
-
-        self.challengeParameters = challengeParameters
         self.receiver = receiver
         self.transaction = transaction
+        self.challengeParameters = challengeParameters
 
         do {
             try transaction.doChallenge(
@@ -314,6 +334,14 @@ private extension NetceteraThreeDSController {
         } catch {
             onComplete(.failure(NetceteraThreeDSController.Errors.presentChallenge(error: error)))
         }
+    }
+
+    func updateAppURLString(_ urlString: String?, transactionID: String) -> String? {
+        guard let urlString = urlString, let url = URL(string: urlString) else {
+            return nil
+        }
+
+        return url.appendQueryItem(name: "transID", value: transactionID)?.absoluteString
     }
 }
 
@@ -342,5 +370,28 @@ class OmiseChallengeStatusReceiver: ChallengeStatusReceiver {
 
     func runtimeError(runtimeErrorEvent: ThreeDS_SDK.RuntimeErrorEvent) {
         onComplete?(.failure(NetceteraThreeDSController.Errors.runtimeError(event: runtimeErrorEvent)))
+    }
+}
+
+extension URL {
+
+    func appendQueryItem(name: String, value: String?) -> URL? {
+
+        guard var urlComponents = URLComponents(string: absoluteString) else { return nil }
+
+        // Create array of existing query items
+        var queryItems: [URLQueryItem] = urlComponents.queryItems ?? []
+
+        // Create query item
+        let queryItem = URLQueryItem(name: name, value: value)
+
+        // Append the new query item in the existing query items array
+        queryItems.append(queryItem)
+
+        // Append updated query items array in the url component object
+        urlComponents.queryItems = queryItems
+
+        // Returns the url from new url components
+        return urlComponents.url
     }
 }

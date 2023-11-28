@@ -3,7 +3,12 @@ import XCTest
 import ThreeDS_SDK
 
 class NetceteraThreeDSControllerMock: NetceteraThreeDSControllerProtocol {
-    var result = NetceteraThreeDSControllerResult.success(())
+
+    func appOpen3DSDeeplinkURL(_ url: URL) -> Bool {
+        return true
+    }
+    
+    var processAuthorizedURLResult = NetceteraThreeDSControllerResult.success(())
     func processAuthorizedURL(
         _ authorizeUrl: URL,
         threeDSRequestorAppURL: String?,
@@ -11,7 +16,7 @@ class NetceteraThreeDSControllerMock: NetceteraThreeDSControllerProtocol {
         in viewController: UIViewController,
         onComplete: @escaping (NetceteraThreeDSControllerResult) -> Void
     ) {
-        onComplete(result)
+        onComplete(processAuthorizedURLResult)
     }
 }
 
@@ -51,7 +56,7 @@ class AuthorizingPaymentTests: XCTestCase {
     func test3DSUserFailedChallenge() {
         let expectation = self.expectation(description: "callback")
 
-        netceteraMockController.result = .failure(NetceteraError.incomplete(event: nil))
+        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.incomplete(event: nil))
         authorizingPayment.presentAuthPaymentController(
             from: topViewController,
             url: authorizeURL,
@@ -67,7 +72,7 @@ class AuthorizingPaymentTests: XCTestCase {
     func test3DSUserCancelledChallenge() {
         let expectation = self.expectation(description: "callback")
 
-        netceteraMockController.result = .failure(NetceteraError.cancelled)
+        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.cancelled)
         authorizingPayment.presentAuthPaymentController(
             from: topViewController,
             url: authorizeURL,
@@ -83,7 +88,7 @@ class AuthorizingPaymentTests: XCTestCase {
     func test3DSUserTimedOutChallenge() {
         let expectation = self.expectation(description: "callback")
         
-        netceteraMockController.result = .failure(NetceteraError.timedout)
+        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.timedout)
         authorizingPayment.presentAuthPaymentController(
             from: topViewController,
             url: authorizeURL,
@@ -99,7 +104,7 @@ class AuthorizingPaymentTests: XCTestCase {
     func test3DSAuthResponseStatusFailed() {
         let expectation = self.expectation(description: "callback")
 
-        netceteraMockController.result = .failure(NetceteraError.authResStatusFailed)
+        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.authResStatusFailed)
         authorizingPayment.presentAuthPaymentController(
             from: topViewController,
             url: authorizeURL,
@@ -115,7 +120,7 @@ class AuthorizingPaymentTests: XCTestCase {
     func test3DSAuthResponseStatusUnknown() {
         let expectation = self.expectation(description: "callback")
 
-        netceteraMockController.result = .failure(NetceteraError.authResStatusUnknown("Some Unknown Status"))
+        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.authResStatusUnknown("Some Unknown Status"))
         authorizingPayment.presentAuthPaymentController(
             from: topViewController,
             url: authorizeURL,
@@ -131,7 +136,7 @@ class AuthorizingPaymentTests: XCTestCase {
     func test3DSSuccess() {
         let expectation = self.expectation(description: "callback")
 
-        netceteraMockController.result = .success(())
+        netceteraMockController.processAuthorizedURLResult = .success(())
         authorizingPayment.presentAuthPaymentController(
             from: topViewController,
             url: authorizeURL,
@@ -153,7 +158,7 @@ class AuthorizingPaymentTests: XCTestCase {
             XCTAssertTrue(presentedVC is AuthorizingPaymentWebViewController)
         }
 
-        netceteraMockController.result = .failure(NetceteraError.authResInvalid)
+        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.authResInvalid)
         authorizingPayment.presentAuthPaymentController(
             from: topViewController,
             url: authorizeURL,
@@ -174,7 +179,7 @@ class AuthorizingPaymentTests: XCTestCase {
             XCTAssertTrue(presentedVC is AuthorizingPaymentWebViewController)
         }
 
-        netceteraMockController.result = .failure(NetceteraError.protocolError(event: nil))
+        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.protocolError(event: nil))
         authorizingPayment.presentAuthPaymentController(
             from: topViewController,
             url: authorizeURL,
@@ -195,7 +200,7 @@ class AuthorizingPaymentTests: XCTestCase {
             XCTAssertTrue(presentedVC is AuthorizingPaymentWebViewController)
         }
 
-        netceteraMockController.result = .failure(NetceteraError.runtimeError(event: nil))
+        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.runtimeError(event: nil))
         authorizingPayment.presentAuthPaymentController(
             from: topViewController,
             url: authorizeURL,
@@ -217,7 +222,7 @@ class AuthorizingPaymentTests: XCTestCase {
         }
 
         let challengeError = AnyError("Any error on presenting Netcetera Challenge")
-        netceteraMockController.result = .failure(NetceteraError.presentChallenge(error: challengeError))
+        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.presentChallenge(error: challengeError))
         authorizingPayment.presentAuthPaymentController(
             from: topViewController,
             url: authorizeURL,
@@ -238,7 +243,7 @@ class AuthorizingPaymentTests: XCTestCase {
             XCTAssertTrue(presentedVC is AuthorizingPaymentWebViewController)
         }
 
-        netceteraMockController.result = .failure(NetceteraError.deviceInfoInvalid)
+        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.deviceInfoInvalid)
         authorizingPayment.presentAuthPaymentController(
             from: topViewController,
             url: authorizeURL,
@@ -259,7 +264,7 @@ class AuthorizingPaymentTests: XCTestCase {
             XCTAssertTrue(presentedVC is AuthorizingPaymentWebViewController)
         }
 
-        netceteraMockController.result = .failure(AnyError("Any error during initialization"))
+        netceteraMockController.processAuthorizedURLResult = .failure(AnyError("Any error during initialization"))
         authorizingPayment.presentAuthPaymentController(
             from: topViewController,
             url: authorizeURL,
