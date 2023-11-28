@@ -116,6 +116,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var promptpayPaymentCell: UITableViewCell!
     @IBOutlet private var paynowPaymentCell: UITableViewCell!
     @IBOutlet private var truemoneyPaymentCell: UITableViewCell!
+    @IBOutlet private var truemoneyJumpAppPaymentCell: UITableViewCell!
     @IBOutlet private var pointsCitiCell: UITableViewCell!
     @IBOutlet private var fpxCell: UITableViewCell!
     @IBOutlet private var rabbitLinepayCell: UITableViewCell!
@@ -329,6 +330,8 @@ extension PaymentSettingTableViewController {
             return .payNow
         case truemoneyPaymentCell:
             return .trueMoney
+        case truemoneyJumpAppPaymentCell:
+            return .trueMoneyJumpApp
         case pointsCitiCell:
             return .pointsCiti
         case fpxCell:
@@ -425,6 +428,8 @@ extension PaymentSettingTableViewController {
             return payPayPaymentCell
         case .trueMoney:
             return truemoneyPaymentCell
+        case .trueMoneyJumpApp:
+            return truemoneyJumpAppPaymentCell
         case .pointsCiti:
             return pointsCitiCell
         case .fpx:

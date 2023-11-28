@@ -35,6 +35,7 @@ extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePayNow;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueTouchNGo;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueTouchNGoAlipayPlus;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueTrueMoney;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueTrueMoneyJumpApp;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePointsCiti;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueFpx;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingKBank;

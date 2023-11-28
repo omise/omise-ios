@@ -74,6 +74,7 @@ extension Capability {
             case promptpay
             case paynow
             case truemoney
+            case truemoneyJumpApp
             case points(PaymentInformation.Points)
             case eContext
             case fpx
@@ -276,6 +277,8 @@ extension Capability.Backend {
             self.payment = .paynow
         case .source(.trueMoney):
             self.payment = .truemoney
+        case .source(.trueMoneyJumpApp):
+            self.payment = .truemoneyJumpApp
         case .source(.pointsCiti):
             self.payment = .points(.citiPoints)
         case .source(.billPaymentTescoLotus):
@@ -331,11 +334,11 @@ extension Capability.Backend {
         case .installment(_, availableNumberOfTerms: let availableNumberOfTerms):
             try container.encode(Array(availableNumberOfTerms), forKey: .allowedInstallmentTerms)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
+        case .internetBanking, .alipay, .alipayCN, .alipayHK, .atome, .dana, .gcash, .kakaoPay, .touchNGoAlipayPlus, .touchNGo, .promptpay, .paynow, .truemoney, .truemoneyJumpApp, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .ocbcDigital, .grabPay, .grabPayRms, .boost, .shopeePay, .shopeePayJumpApp, .maybankQRPay, .duitNowQR, .duitNowOBW, .payPay:
+            // swiftlint:disable:previous line_length
+            try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         case .unknownSource(_, configurations: let configurations):
             try encoder.encodeJSONDictionary(configurations)
-            try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
-        // swiftlint:disable:next line_length
-        case .internetBanking, .alipay, .alipayCN, .alipayHK, .atome, .dana, .gcash, .kakaoPay, .touchNGoAlipayPlus, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .ocbcDigital, .grabPay, .grabPayRms, .boost, .shopeePay, .shopeePayJumpApp, .maybankQRPay, .duitNowQR, .duitNowOBW, .payPay:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
     }
@@ -401,14 +404,14 @@ extension Capability.Backend {
                 self = .source(OMSSourceTypeValue(banking.type))
             case .billPayment(let billPayment):
                 self = .source(OMSSourceTypeValue(billPayment.type))
-            case .unknownSource(let sourceType, configurations: _):
-                self = .source(.init(sourceType))
             case .promptpay:
                 self = .source(.promptPay)
             case .paynow:
                 self = .source(.payNow)
             case .truemoney:
                 self = .source(.trueMoney)
+            case .truemoneyJumpApp:
+                self = .source(.trueMoneyJumpApp)
             case .points(let points):
                 self = .source(OMSSourceTypeValue(points.type))
             case .eContext:
@@ -439,6 +442,8 @@ extension Capability.Backend {
                 self = .source(.duitNowOBW)
             case .payPay:
                 self = .source(.payPay)
+            case .unknownSource(let sourceType, configurations: _):
+                self = .source(.init(sourceType))
             }
         }
 
