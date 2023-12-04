@@ -588,6 +588,9 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             paymentMethodsToShow.insert(.creditCard, at: 0)
         }
 
+        if paymentMethodsToShow.contains(.truemoney) && paymentMethodsToShow.contains(.truemoneyJumpApp) {
+            paymentMethodsToShow.removeAll { $0 == .truemoney }
+        }
         showingValues = paymentMethodsToShow
 
         os_log("Payment Chooser: Showing options - %{private}@",
