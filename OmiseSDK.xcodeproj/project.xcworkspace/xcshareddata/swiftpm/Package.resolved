@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/ios-3ds-sdk/SPM.git",
         "state": {
           "branch": null,
-          "revision": "1ba85e40625efcbcf81c524b326d4e4a59a90a64",
-          "version": "2.3.74"
+          "revision": "a4e55d7f10294ea81abd1db393ae05606a5efa46",
+          "version": "2.4.0"
         }
       }
     ]

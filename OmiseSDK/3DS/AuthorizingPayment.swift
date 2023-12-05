@@ -20,6 +20,11 @@ public class AuthorizingPayment {
 
     public static var shared = AuthorizingPayment()
 
+    // Temporary POC Solution
+    public func setAPIKey(_ apiKey: String) {
+        NetceteraThreeDSController.sharedController.setAPIKey(apiKey)
+    }
+
     public func appOpen3DSDeeplinkURL(_ url: URL) -> Bool {
         NetceteraThreeDSController.sharedController.appOpen3DSDeeplinkURL(url)
     }

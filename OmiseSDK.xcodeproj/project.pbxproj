@@ -2355,7 +2355,7 @@
 			repositoryURL = "https://github.com/ios-3ds-sdk/SPM.git";
 			requirement = {
 				kind = exactVersion;
-				version = 2.3.74;
+				version = 2.4.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
