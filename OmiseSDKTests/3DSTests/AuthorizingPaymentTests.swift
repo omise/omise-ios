@@ -3,6 +3,8 @@ import XCTest
 import ThreeDS_SDK
 
 class NetceteraThreeDSControllerMock: NetceteraThreeDSControllerProtocol {
+    func setAPIKey(_ apiKey: String) {
+    }
 
     func appOpen3DSDeeplinkURL(_ url: URL) -> Bool {
         return true
