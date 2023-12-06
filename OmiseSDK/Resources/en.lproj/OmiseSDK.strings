@@ -122,6 +122,9 @@
 /* Class = "UILabel"; text = "TrueMoney Wallet"; ObjectID = "ewt-LA-vRb"; */
 "ewt-LA-vRb.text" = "TrueMoney Wallet";
 
+/* Class = "UILabel"; text = "TrueMoney"; ObjectID = "ext-Bd-tya"; */
+"ext-Bd-tya.text" = "TrueMoney";
+
 /* Class = "UILabel"; text = "Label"; ObjectID = "hNq-jM-xs4"; */
 "hNq-jM-xs4.text" = "Label";
 

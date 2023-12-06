@@ -577,17 +577,9 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     }
 
     private func updateShowingValues() {
-        var paymentMethodsToShow: [PaymentChooserOption] = allowedPaymentMethods.reduce(into: []) { (result, sourceType) in
-            let paymentOptions = PaymentChooserOption.paymentOptions(for: sourceType)
-            for paymentOption in paymentOptions where !result.contains(paymentOption) {
-                result.append(paymentOption)
-            }
-        }
-
-        if showsCreditCardPayment {
-            paymentMethodsToShow.insert(.creditCard, at: 0)
-        }
-
+        var paymentMethodsToShow = paymentOptions(from: allowedPaymentMethods)
+        paymentMethodsToShow = appendCreditCardPayment(paymentOptions: paymentMethodsToShow)
+        paymentMethodsToShow = filterTrueMoney(paymentOptions: paymentMethodsToShow)
         showingValues = paymentMethodsToShow
 
         os_log("Payment Chooser: Showing options - %{private}@",
@@ -598,5 +590,33 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
 
     @IBAction private func requestToClose(_ sender: Any) {
         flowSession?.requestToCancel()
+    }
+}
+
+private extension PaymentChooserViewController {
+    func paymentOptions(from sourceTypes: [OMSSourceTypeValue]) -> [PaymentChooserOption] {
+        let paymentOptions: [PaymentChooserOption] = sourceTypes.reduce(into: []) { (result, sourceType) in
+            let paymentOptions = PaymentChooserOption.paymentOptions(for: sourceType)
+            for paymentOption in paymentOptions where !result.contains(paymentOption) {
+                result.append(paymentOption)
+            }
+        }
+        return paymentOptions
+    }
+
+    func appendCreditCardPayment(paymentOptions: [PaymentChooserOption]) -> [PaymentChooserOption] {
+        var filter = paymentOptions
+        if showsCreditCardPayment {
+            filter.insert(.creditCard, at: 0)
+        }
+        return filter
+    }
+
+    func filterTrueMoney(paymentOptions: [PaymentChooserOption]) -> [PaymentChooserOption] {
+        var filter = paymentOptions
+        if filter.contains(.truemoney) && filter.contains(.truemoneyJumpApp) {
+            filter.removeAll { $0 == .truemoney }
+        }
+        return filter
     }
 }
