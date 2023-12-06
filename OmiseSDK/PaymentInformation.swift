@@ -209,6 +209,7 @@ public enum PaymentInformation: Codable, Equatable {
 
     /// TrueMoney Payment Source
     case truemoney(TrueMoney)
+    case truemoneyJumpApp
 
     /// The name of the supported services to process the Points Payment
     public enum Points: PaymentMethod {
@@ -479,6 +480,9 @@ public enum PaymentInformation: Codable, Equatable {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(SourceTypeValue.trueMoney.rawValue, forKey: .type)
             try trueMoney.encode(to: encoder)
+        case .truemoneyJumpApp:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(SourceTypeValue.trueMoneyJumpApp.rawValue, forKey: .type)
         case .points(let points):
             try points.encode(to: encoder)
         case .mobileBanking(let value):
@@ -641,6 +645,8 @@ extension PaymentInformation {
             return SourceTypeValue.payNow.rawValue
         case .truemoney:
             return SourceTypeValue.trueMoney.rawValue
+        case .truemoneyJumpApp:
+            return SourceTypeValue.trueMoneyJumpApp.rawValue
         case .rabbitLinepay:
             return SourceTypeValue.rabbitLinepay.rawValue
         case .ocbcPao:

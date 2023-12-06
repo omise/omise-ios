@@ -3,7 +3,6 @@ import XCTest
 
 class CapabilityOperationFixtureTests: XCTestCase {
 
-    // swiftlint:disable:next function_body_length
     func testCapabilityRetrieve() {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
 
@@ -81,6 +80,21 @@ class CapabilityOperationFixtureTests: XCTestCase {
             } else {
                 XCTFail("Capability doesn't have the PayPay backend")
             }
+
+            func testCapabilitySupportsCurrency(_ capability: Capability, sourceType: SourceTypeValue, currencies: Set<Currency>) {
+                if let backend = capability[sourceType] {
+                    XCTAssertEqual(backend.supportedCurrencies, currencies)
+                } else {
+                    XCTFail("Capability doesn't have the \(sourceType) backend")
+                }
+            }
+
+            testCapabilitySupportsCurrency(capability, sourceType: .trueMoney, currencies: [.thb])
+            testCapabilitySupportsCurrency(capability, sourceType: .pointsCiti, currencies: [.thb])
+            testCapabilitySupportsCurrency(capability, sourceType: .rabbitLinepay, currencies: [.thb])
+            testCapabilitySupportsCurrency(capability, sourceType: .mobileBankingOCBCPAO, currencies: [.sgd])
+            testCapabilitySupportsCurrency(capability, sourceType: .grabPay, currencies: [.sgd, .myr])
+            testCapabilitySupportsCurrency(capability, sourceType: .payPay, currencies: [.jpy])
         } catch {
             XCTFail("Cannot decode the source \(error)")
         }

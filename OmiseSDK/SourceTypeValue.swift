@@ -42,6 +42,7 @@ public enum SourceTypeValue: String {
     case promptPay = "promptpay"
     case payNow = "paynow"
     case trueMoney = "truemoney"
+    case trueMoneyJumpApp = "truemoney_jumpapp"
     case pointsCiti = "points_citi"
     case fpx = "fpx"
     case rabbitLinepay = "rabbit_linepay"

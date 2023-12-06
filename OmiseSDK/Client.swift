@@ -331,7 +331,7 @@ extension Client {
     // swiftlint:disable:next function_body_length
     private static func completeRequest<T: Object>(_ request: Request<T>, callback: Request<T>.Callback?) -> ((Data?, URLResponse?, Error?) -> Void) {
         // swiftlint:disable:next closure_body_length
-        return { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+        return { (data: Data?, response: URLResponse?, error: Error?) in
             guard let callback = callback else { return } // nobody around to hear the leaf falls
             
             var result: RequestResult<T>
@@ -399,7 +399,6 @@ extension Client {
 // MARK: - Constants
 extension Client {
     static let sdkVersion: String = "5.0.0"
-    
     static let currentPlatform: String = ProcessInfo.processInfo.operatingSystemVersionString
     static let currentDevice: String = UIDevice.current.model
     
@@ -413,7 +412,7 @@ extension Client {
     
     static var defaultUserAgent: String {
         return """
-        OmiseIOSSDK/\(sdkVersion) \
+        OmiseIOS/\(sdkVersion) \
         iOS/\(currentPlatform) \
         Apple/\(currentDevice)
         """ // OmiseIOSSDK/3.0.0 iOS/12.0.0 Apple/iPhone
