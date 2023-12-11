@@ -6,6 +6,8 @@
 //  Copyright © 2023 Omise. All rights reserved.
 //
 
+// swiftlint:disable file_length
+
 import Foundation
 import ThreeDS_SDK
 
@@ -44,6 +46,7 @@ struct AuthResponse: Codable {
 
 protocol NetceteraThreeDSControllerProtocol: AnyObject {
     typealias NetceteraThreeDSControllerResult = Result<Void, Error>
+    func setAPIKey(_ apiKey: String) // Temporary POC Solution
     func appOpen3DSDeeplinkURL(_ url: URL) -> Bool
     func processAuthorizedURL(
         _ authorizeUrl: URL,
@@ -94,6 +97,7 @@ class NetceteraThreeDSController {
         }
     }
 
+    private var apiKey: String = ""
     static var sharedController: NetceteraThreeDSControllerProtocol = NetceteraThreeDSController()
     private static var uiCustomization: ThreeDSUICustomization?
 
@@ -117,7 +121,7 @@ class NetceteraThreeDSController {
         let configBuilder = ConfigurationBuilder()
         do {
             try configBuilder.add(self.newScheme())
-            try configBuilder.license(key: TestData.licenceKey.value)
+            try configBuilder.api(key: apiKey)
             try configBuilder.log(to: .info)
             let configParameters = configBuilder.configParameters()
 
@@ -159,6 +163,10 @@ class NetceteraThreeDSController {
 }
 
 extension NetceteraThreeDSController: NetceteraThreeDSControllerProtocol {
+    public func setAPIKey(_ key: String) {
+        self.apiKey = key
+    }
+
     public func appOpen3DSDeeplinkURL(_ url: URL) -> Bool {
         ThreeDSSDKAppDelegate.shared.appOpened(url: url)
     }
