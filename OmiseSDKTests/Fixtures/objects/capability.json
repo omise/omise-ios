@@ -224,6 +224,15 @@
       "installment_terms": null
     },
     {
+        "object": "payment_method",
+        "name": "truemoney_jumpapp",
+        "currencies": [
+            "THB"
+        ],
+        "card_brands": null,
+        "installment_terms": null
+    },
+    {
       "object": "payment_method",
       "name": "points_citi",
       "currencies": [
@@ -431,7 +440,7 @@
     },
     {
         "object": "payment_method",
-        "name": "shopeePay",
+        "name": "shopeepay",
         "currencies": [
             "MYR"
         ],

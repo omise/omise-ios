@@ -172,6 +172,9 @@
 /* Class = "UILabel"; text = "TrueMoney Wallet"; ObjectID = "ewt-LA-vRb"; */
 "ewt-LA-vRb.text" = "ทรูมันนี่วอลเล็ท";
 
+/* Class = "UILabel"; text = "TrueMoney"; ObjectID = "ext-Bd-tya"; */
+"ext-Bd-tya.text" = "ทรูมันนี่";
+
 /* Class = "UILabel"; text = "Pay with Citi Rewards Points"; ObjectID = "zmw-2Y-WAX"; */
 "zmw-2Y-WAX.text" = "ชำระด้วยคะแนนซิตี้รีวอร์ด";
 

@@ -211,7 +211,7 @@ class OverlayPanelPresentationController: UIPresentationController {
         let preferredContentSizeWidth = MoreInformationOnCVVViewController.preferredWidth
         
         let calculatedPreferredContentSize = viewController.view.systemLayoutSizeFitting(
-            CGSize(width: min(preferredContentSizeWidth, parentSize.width), height: ViewLayoutFittingCompressedSize.height),
+            CGSize(width: min(preferredContentSizeWidth, parentSize.width), height: UIView.layoutFittingCompressedSize.height),
             withHorizontalFittingPriority: UILayoutPriority.required,
             verticalFittingPriority: UILayoutPriority.fittingSizeLevel)
         let preferredContentSizeHeight = min(

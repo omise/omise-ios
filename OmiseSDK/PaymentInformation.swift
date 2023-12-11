@@ -71,7 +71,7 @@ public enum PaymentInformation: Codable, Equatable {
         public var type: String {
             switch self {
             case .alipay:
-                return OMSSourceTypeValue.barcodeAlipay.rawValue
+                return SourceTypeValue.barcodeAlipay.rawValue
             case .other(let value, _):
                 return Barcode.paymentMethodTypePrefix + value
             }
@@ -145,9 +145,9 @@ public enum PaymentInformation: Codable, Equatable {
 
     /// The EContext customer information
     public struct EContext: PaymentMethod, Codable, Equatable {
-        public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.eContext.rawValue
+        public static var paymentMethodTypePrefix: String = SourceTypeValue.eContext.rawValue
 
-        public let type: String = OMSSourceTypeValue.eContext.rawValue
+        public let type: String = SourceTypeValue.eContext.rawValue
 
         /// Customer name. The name cannot be longer than 10 characters
         public let name: String
@@ -186,9 +186,9 @@ public enum PaymentInformation: Codable, Equatable {
     /// The TrueMoney customer information
     public struct TrueMoney: PaymentMethod {
 
-        public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.trueMoney.rawValue
+        public static var paymentMethodTypePrefix: String = SourceTypeValue.trueMoney.rawValue
 
-        public var type: String = OMSSourceTypeValue.trueMoney.rawValue
+        public var type: String = SourceTypeValue.trueMoney.rawValue
 
         /// The customers phone number. Contains only digits and has 10 or 11 characters
         public let phoneNumber: String
@@ -209,6 +209,7 @@ public enum PaymentInformation: Codable, Equatable {
 
     /// TrueMoney Payment Source
     case truemoney(TrueMoney)
+    case truemoneyJumpApp
 
     /// The name of the supported services to process the Points Payment
     public enum Points: PaymentMethod {
@@ -238,9 +239,9 @@ public enum PaymentInformation: Codable, Equatable {
 
     /// Internet Banking FPX
     public struct FPX: PaymentMethod {
-        public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.fpx.rawValue
+        public static var paymentMethodTypePrefix: String = SourceTypeValue.fpx.rawValue
 
-        public var type: String = OMSSourceTypeValue.fpx.rawValue
+        public var type: String = SourceTypeValue.fpx.rawValue
 
         /// The customer's bank name
         public let bank: String
@@ -293,9 +294,9 @@ public enum PaymentInformation: Codable, Equatable {
     
     /// DuitNow OBW
     public struct DuitNowOBW: PaymentMethod {
-        public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.duitNowOBW.rawValue
+        public static var paymentMethodTypePrefix: String = SourceTypeValue.duitNowOBW.rawValue
 
-        public var type: String = OMSSourceTypeValue.duitNowOBW.rawValue
+        public var type: String = SourceTypeValue.duitNowOBW.rawValue
 
         /// The code of the supported Installment payment banks
         public enum Bank: Equatable {
@@ -368,43 +369,43 @@ public enum PaymentInformation: Codable, Equatable {
             self = .installment(try Installment(from: decoder))
         case PaymentInformation.EContext.self:
             self = .eContext(try EContext(from: decoder))
-        case OMSSourceTypeValue.alipay.rawValue:
+        case SourceTypeValue.alipay.rawValue:
             self = .alipay
-        case OMSSourceTypeValue.alipayCN.rawValue:
+        case SourceTypeValue.alipayCN.rawValue:
             self = .alipayCN
-        case OMSSourceTypeValue.alipayHK.rawValue:
+        case SourceTypeValue.alipayHK.rawValue:
             self = .alipayHK
-        case OMSSourceTypeValue.atome.rawValue:
+        case SourceTypeValue.atome.rawValue:
             self = .atome(try Atome(from: decoder))
-        case OMSSourceTypeValue.dana.rawValue:
+        case SourceTypeValue.dana.rawValue:
             self = .dana
-        case OMSSourceTypeValue.gcash.rawValue:
+        case SourceTypeValue.gcash.rawValue:
             self = .gcash
-        case OMSSourceTypeValue.kakaoPay.rawValue:
+        case SourceTypeValue.kakaoPay.rawValue:
             self = .kakaoPay
-        case OMSSourceTypeValue.touchNGo.rawValue:
+        case SourceTypeValue.touchNGo.rawValue:
             self = .touchNGo
-        case OMSSourceTypeValue.promptPay.rawValue:
+        case SourceTypeValue.promptPay.rawValue:
             self = .promptpay
-        case OMSSourceTypeValue.payNow.rawValue:
+        case SourceTypeValue.payNow.rawValue:
             self = .paynow
-        case OMSSourceTypeValue.trueMoney.rawValue:
+        case SourceTypeValue.trueMoney.rawValue:
             self = .truemoney(try TrueMoney(from: decoder))
-        case OMSSourceTypeValue.rabbitLinepay.rawValue:
+        case SourceTypeValue.rabbitLinepay.rawValue:
             self = .rabbitLinepay
-        case OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue:
+        case SourceTypeValue.mobileBankingOCBCPAO.rawValue:
             self = .ocbcPao
-        case OMSSourceTypeValue.grabPay.rawValue:
+        case SourceTypeValue.grabPay.rawValue:
             self = .grabPay
-        case OMSSourceTypeValue.boost.rawValue:
+        case SourceTypeValue.boost.rawValue:
             self = .boost
-        case OMSSourceTypeValue.shopeePay.rawValue:
+        case SourceTypeValue.shopeePay.rawValue:
             self = .shopeePay
-        case OMSSourceTypeValue.shopeePayJumpApp.rawValue:
+        case SourceTypeValue.shopeePayJumpApp.rawValue:
             self = .shopeePayJumpApp
-        case OMSSourceTypeValue.maybankQRPay.rawValue:
+        case SourceTypeValue.maybankQRPay.rawValue:
             self = .maybankQRPay
-        case OMSSourceTypeValue.duitNowQR.rawValue:
+        case SourceTypeValue.duitNowQR.rawValue:
             self = .duitNowQR
         case PaymentInformation.Points.self:
             self = .points(try Points(from: decoder))
@@ -414,7 +415,7 @@ public enum PaymentInformation: Codable, Equatable {
             self = .fpx(try FPX(from: decoder))
         case PaymentInformation.DuitNowOBW.self:
             self = .duitNowOBW(try DuitNowOBW(from: decoder))
-        case OMSSourceTypeValue.payPay.rawValue:
+        case SourceTypeValue.payPay.rawValue:
             self = .payPay
         case let value:
             self = .other(type: value, parameters: try decoder.decodeJSONDictionary().filter({ (key, _) -> Bool in
@@ -443,84 +444,87 @@ public enum PaymentInformation: Codable, Equatable {
             try value.encode(to: encoder)
         case .alipay:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.alipay.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.alipay.rawValue, forKey: .type)
         case .alipayCN:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.alipayCN.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.alipayCN.rawValue, forKey: .type)
         case .alipayHK:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.alipayHK.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.alipayHK.rawValue, forKey: .type)
         case .atome:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.atome.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.atome.rawValue, forKey: .type)
         case .dana:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.dana.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.dana.rawValue, forKey: .type)
         case .gcash:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.gcash.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.gcash.rawValue, forKey: .type)
         case .kakaoPay:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.kakaoPay.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.kakaoPay.rawValue, forKey: .type)
         case .touchNGo:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.touchNGo.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.touchNGo.rawValue, forKey: .type)
         case .eContext(let eContext):
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.eContext.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.eContext.rawValue, forKey: .type)
             try eContext.encode(to: encoder)
         case .promptpay:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.promptPay.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.promptPay.rawValue, forKey: .type)
         case .paynow:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.payNow.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.payNow.rawValue, forKey: .type)
         case .truemoney(let trueMoney):
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.trueMoney.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.trueMoney.rawValue, forKey: .type)
             try trueMoney.encode(to: encoder)
+        case .truemoneyJumpApp:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(SourceTypeValue.trueMoneyJumpApp.rawValue, forKey: .type)
         case .points(let points):
             try points.encode(to: encoder)
         case .mobileBanking(let value):
             try value.encode(to: encoder)
         case .fpx(let fpx):
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.fpx.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.fpx.rawValue, forKey: .type)
             try fpx.encode(to: encoder)
         case .rabbitLinepay:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.rabbitLinepay.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.rabbitLinepay.rawValue, forKey: .type)
         case .ocbcPao:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.mobileBankingOCBCPAO.rawValue, forKey: .type)
         case .ocbcDigital:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.mobileBankingOCBC.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.mobileBankingOCBC.rawValue, forKey: .type)
         case .grabPay:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.grabPay.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.grabPay.rawValue, forKey: .type)
         case .boost:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.boost.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.boost.rawValue, forKey: .type)
         case .shopeePay:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.shopeePay.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.shopeePay.rawValue, forKey: .type)
         case .shopeePayJumpApp:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.shopeePayJumpApp.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.shopeePayJumpApp.rawValue, forKey: .type)
         case .maybankQRPay:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.maybankQRPay.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.maybankQRPay.rawValue, forKey: .type)
         case .duitNowQR:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.duitNowQR.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.duitNowQR.rawValue, forKey: .type)
         case .duitNowOBW(let duitNowOBW):
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.duitNowOBW.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.duitNowOBW.rawValue, forKey: .type)
             try duitNowOBW.encode(to: encoder)
         case .payPay:
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.payPay.rawValue, forKey: .type)
+            try container.encode(SourceTypeValue.payPay.rawValue, forKey: .type)
         case .other(type: let type, parameters: let parameters):
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(type, forKey: .type)
@@ -610,21 +614,21 @@ extension PaymentInformation {
     public var sourceType: String {
         switch self {
         case .alipay:
-            return OMSSourceTypeValue.alipay.rawValue
+            return SourceTypeValue.alipay.rawValue
         case .alipayCN:
-            return OMSSourceTypeValue.alipayCN.rawValue
+            return SourceTypeValue.alipayCN.rawValue
         case .alipayHK:
-            return OMSSourceTypeValue.alipayHK.rawValue
+            return SourceTypeValue.alipayHK.rawValue
         case .atome:
-            return OMSSourceTypeValue.atome.rawValue
+            return SourceTypeValue.atome.rawValue
         case .dana:
-            return OMSSourceTypeValue.dana.rawValue
+            return SourceTypeValue.dana.rawValue
         case .gcash:
-            return OMSSourceTypeValue.gcash.rawValue
+            return SourceTypeValue.gcash.rawValue
         case .kakaoPay:
-            return OMSSourceTypeValue.kakaoPay.rawValue
+            return SourceTypeValue.kakaoPay.rawValue
         case .touchNGo:
-            return OMSSourceTypeValue.touchNGo.rawValue
+            return SourceTypeValue.touchNGo.rawValue
         case .barcode(let barcode):
             return barcode.type
         case .billPayment(let billPayment):
@@ -634,31 +638,33 @@ extension PaymentInformation {
         case .internetBanking(let bank):
             return bank.type
         case .eContext:
-            return OMSSourceTypeValue.eContext.rawValue
+            return SourceTypeValue.eContext.rawValue
         case .promptpay:
-            return OMSSourceTypeValue.promptPay.rawValue
+            return SourceTypeValue.promptPay.rawValue
         case .paynow:
-            return OMSSourceTypeValue.payNow.rawValue
+            return SourceTypeValue.payNow.rawValue
         case .truemoney:
-            return OMSSourceTypeValue.trueMoney.rawValue
+            return SourceTypeValue.trueMoney.rawValue
+        case .truemoneyJumpApp:
+            return SourceTypeValue.trueMoneyJumpApp.rawValue
         case .rabbitLinepay:
-            return OMSSourceTypeValue.rabbitLinepay.rawValue
+            return SourceTypeValue.rabbitLinepay.rawValue
         case .ocbcPao:
-            return OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue
+            return SourceTypeValue.mobileBankingOCBCPAO.rawValue
         case .ocbcDigital:
-            return OMSSourceTypeValue.mobileBankingOCBC.rawValue
+            return SourceTypeValue.mobileBankingOCBC.rawValue
         case .grabPay:
-            return OMSSourceTypeValue.grabPay.rawValue
+            return SourceTypeValue.grabPay.rawValue
         case .boost:
-            return OMSSourceTypeValue.boost.rawValue
+            return SourceTypeValue.boost.rawValue
         case .shopeePay:
-            return OMSSourceTypeValue.shopeePay.rawValue
+            return SourceTypeValue.shopeePay.rawValue
         case .shopeePayJumpApp:
-            return OMSSourceTypeValue.shopeePayJumpApp.rawValue
+            return SourceTypeValue.shopeePayJumpApp.rawValue
         case .maybankQRPay:
-            return OMSSourceTypeValue.maybankQRPay.rawValue
+            return SourceTypeValue.maybankQRPay.rawValue
         case .duitNowQR:
-            return OMSSourceTypeValue.duitNowQR.rawValue
+            return SourceTypeValue.duitNowQR.rawValue
         case .points(let points):
             return points.type
         case .mobileBanking(let bank):
@@ -668,7 +674,7 @@ extension PaymentInformation {
         case .duitNowOBW(let bank):
             return bank.type
         case .payPay:
-            return OMSSourceTypeValue.payPay.rawValue
+            return SourceTypeValue.payPay.rawValue
         case .other(let value, _):
             return value
         }
@@ -685,9 +691,9 @@ extension PaymentInformation.InternetBanking: CaseIterable, CustomStringConverti
     public var type: String {
         switch self {
         case .bay:
-            return OMSSourceTypeValue.internetBankingBAY.rawValue
+            return SourceTypeValue.internetBankingBAY.rawValue
         case .bbl:
-            return OMSSourceTypeValue.internetBankingBBL.rawValue
+            return SourceTypeValue.internetBankingBBL.rawValue
         case .other(let value):
             return PaymentInformation.InternetBanking.paymentMethodTypePrefix + value
         }
@@ -738,25 +744,25 @@ extension PaymentInformation.Installment {
     public var type: String {
         switch brand {
         case .bay:
-            return OMSSourceTypeValue.installmentBAY.rawValue
+            return SourceTypeValue.installmentBAY.rawValue
         case .firstChoice:
-            return OMSSourceTypeValue.installmentFirstChoice.rawValue
+            return SourceTypeValue.installmentFirstChoice.rawValue
         case .bbl:
-            return OMSSourceTypeValue.installmentBBL.rawValue
+            return SourceTypeValue.installmentBBL.rawValue
         case .mbb:
-            return OMSSourceTypeValue.installmentMBB.rawValue
+            return SourceTypeValue.installmentMBB.rawValue
         case .ktc:
-            return OMSSourceTypeValue.installmentKTC.rawValue
+            return SourceTypeValue.installmentKTC.rawValue
         case .kBank:
-            return OMSSourceTypeValue.installmentKBank.rawValue
+            return SourceTypeValue.installmentKBank.rawValue
         case .scb:
-            return OMSSourceTypeValue.installmentSCB.rawValue
+            return SourceTypeValue.installmentSCB.rawValue
         case .citi:
-            return OMSSourceTypeValue.installmentCiti.rawValue
+            return SourceTypeValue.installmentCiti.rawValue
         case .ttb:
-            return OMSSourceTypeValue.installmentTTB.rawValue
+            return SourceTypeValue.installmentTTB.rawValue
         case .uob:
-            return OMSSourceTypeValue.installmentUOB.rawValue
+            return SourceTypeValue.installmentUOB.rawValue
         case .other(let value):
             return PaymentInformation.Installment.paymentMethodTypePrefix + value
         }
@@ -853,25 +859,25 @@ extension PaymentInformation.Installment.Brand: CaseIterable, CustomStringConver
     public var type: String {
         switch self {
         case .bay:
-            return OMSSourceTypeValue.installmentBAY.rawValue
+            return SourceTypeValue.installmentBAY.rawValue
         case .firstChoice:
-            return OMSSourceTypeValue.installmentFirstChoice.rawValue
+            return SourceTypeValue.installmentFirstChoice.rawValue
         case .bbl:
-            return OMSSourceTypeValue.installmentBBL.rawValue
+            return SourceTypeValue.installmentBBL.rawValue
         case .mbb:
-            return OMSSourceTypeValue.installmentMBB.rawValue
+            return SourceTypeValue.installmentMBB.rawValue
         case .ktc:
-            return OMSSourceTypeValue.installmentKTC.rawValue
+            return SourceTypeValue.installmentKTC.rawValue
         case .kBank:
-            return OMSSourceTypeValue.installmentKBank.rawValue
+            return SourceTypeValue.installmentKBank.rawValue
         case .scb:
-            return OMSSourceTypeValue.installmentSCB.rawValue
+            return SourceTypeValue.installmentSCB.rawValue
         case .citi:
-            return OMSSourceTypeValue.installmentCiti.rawValue
+            return SourceTypeValue.installmentCiti.rawValue
         case .ttb:
-            return OMSSourceTypeValue.installmentTTB.rawValue
+            return SourceTypeValue.installmentTTB.rawValue
         case .uob:
-            return OMSSourceTypeValue.installmentUOB.rawValue
+            return SourceTypeValue.installmentUOB.rawValue
         case .other(let value):
             return value
         }
@@ -883,7 +889,7 @@ extension PaymentInformation.BillPayment {
     public var type: String {
         switch self {
         case .tescoLotus:
-            return OMSSourceTypeValue.billPaymentTescoLotus.rawValue
+            return SourceTypeValue.billPaymentTescoLotus.rawValue
         case .other(let value):
             return PaymentInformation.BillPayment.paymentMethodTypePrefix + value
         }
@@ -1020,7 +1026,7 @@ extension PaymentInformation.Barcode {
                 throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Invalid barcode source type value")
         }
         switch String(type[typePrefixRange.upperBound...]) {
-        case OMSSourceTypeValue.alipay.rawValue:
+        case SourceTypeValue.alipay.rawValue:
             self = .alipay(try AlipayBarcode(from: decoder))
         case let value:
             self = .other(String(value), parameters: try decoder.decodeJSONDictionary().filter({ (key, _) -> Bool in
@@ -1066,7 +1072,7 @@ extension PaymentInformation.Points {
     public var type: String {
         switch self {
         case .citiPoints:
-            return OMSSourceTypeValue.pointsCiti.rawValue
+            return SourceTypeValue.pointsCiti.rawValue
         case .other(let value):
             return PaymentInformation.Points.paymentMethodTypePrefix + value
         }
@@ -1110,15 +1116,15 @@ extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertibl
     public var type: String {
         switch self {
         case .scb:
-            return OMSSourceTypeValue.mobileBankingSCB.rawValue
+            return SourceTypeValue.mobileBankingSCB.rawValue
         case .kbank:
-            return OMSSourceTypeValue.mobileBankingKBank.rawValue
+            return SourceTypeValue.mobileBankingKBank.rawValue
         case .bay:
-            return OMSSourceTypeValue.mobileBankingBAY.rawValue
+            return SourceTypeValue.mobileBankingBAY.rawValue
         case .bbl:
-            return OMSSourceTypeValue.mobileBankingBBL.rawValue
+            return SourceTypeValue.mobileBankingBBL.rawValue
         case .ktb:
-            return OMSSourceTypeValue.mobileBankingKTB.rawValue
+            return SourceTypeValue.mobileBankingKTB.rawValue
         case .other(let value):
             return PaymentInformation.MobileBanking.paymentMethodTypePrefix + value
         }

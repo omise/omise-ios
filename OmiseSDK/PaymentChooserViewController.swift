@@ -22,6 +22,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case promptpay
     case paynow
     case truemoney
+    case truemoneyJumpApp
     case citiPoints
     case fpx
     case rabbitLinepay
@@ -37,45 +38,6 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case touchNGo
     case grabPayRms
     case payPay
-
-    static var allCases: [PaymentChooserOption] {
-        return [
-            .creditCard,
-            .installment,
-            .truemoney,
-            .promptpay,
-            .citiPoints,
-            .alipay,
-            .alipayCN,
-            .alipayHK,
-            .atome,
-            .dana,
-            .gcash,
-            .kakaoPay,
-            .touchNGoAlipayPlus,
-            .internetBanking,
-            .mobileBanking,
-            .tescoLotus,
-            .paynow,
-            .conbini,
-            .payEasy,
-            .netBanking,
-            .fpx,
-            .rabbitLinepay,
-            .ocbcPao,
-            .ocbcDigital,
-            .grabPay,
-            .boost,
-            .shopeePay,
-            .shopeePayJumpApp,
-            .maybankQRPay,
-            .duitNowQR,
-            .duitNowOBW,
-            .touchNGo,
-            .grabPayRms,
-            .payPay
-        ]
-    }
 
     var description: String {
         switch self {
@@ -116,6 +78,8 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
         case .paynow:
             return "PayNow"
         case .truemoney:
+            return "TrueMoney Wallet"
+        case .truemoneyJumpApp:
             return "TrueMoney"
         case .citiPoints:
             return "CitiPoints"
@@ -153,10 +117,12 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
 
 extension PaymentChooserOption {
     // swiftlint:disable:next function_body_length
-    fileprivate static func paymentOptions(for sourceType: OMSSourceTypeValue) -> [PaymentChooserOption] {
+    fileprivate static func paymentOptions(for sourceType: SourceTypeValue) -> [PaymentChooserOption] {
         switch sourceType {
         case .trueMoney:
             return [.truemoney]
+        case .trueMoneyJumpApp:
+            return [.truemoneyJumpApp]
         case .installmentFirstChoice, .installmentMBB, .installmentKBank, .installmentKTC,
              .installmentBBL, .installmentBAY, .installmentSCB, .installmentCiti, .installmentTTB, .installmentUOB:
             return [.installment]
@@ -220,14 +186,11 @@ extension PaymentChooserOption {
             return [.duitNowOBW]
         case .payPay:
             return [.payPay]
-        default:
-            return []
         }
     }
 }
 
-@objc(OMSPaymentChooserViewController)
-// swiftlint:disable:next type_body_length attributes
+// swiftlint:disable:next type_body_length
 class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>,
                                     PaymentSourceChooser,
                                     PaymentChooserUI {
@@ -235,12 +198,12 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     var flowSession: PaymentCreatorFlowSession?
     var duitNowOBWBanks: [PaymentInformation.DuitNowOBW.Bank] = PaymentInformation.DuitNowOBW.Bank.allCases
 
-    @objc var showsCreditCardPayment = true {
+    var showsCreditCardPayment = true {
         didSet {
             updateShowingValues()
         }
     }
-    @objc var allowedPaymentMethods: [OMSSourceTypeValue] = [] {
+    var allowedPaymentMethods: [SourceTypeValue] = [] {
         didSet {
             updateShowingValues()
         }
@@ -397,6 +360,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         case .atome:
             goToAtome()
             return
+        case .truemoneyJumpApp:
+            payment = .truemoneyJumpApp
         default:
             return
         }
@@ -491,6 +456,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 31, section: 0)
         case .payPay:
             return IndexPath(row: 32, section: 0)
+        case .truemoneyJumpApp:
+            return IndexPath(row: 33, section: 0)
         }
     }
 
@@ -503,74 +470,76 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         allowedPaymentMethods = capability.supportedBackends.compactMap {
             switch $0.payment {
             case .alipay:
-                return OMSSourceTypeValue.alipay
+                return SourceTypeValue.alipay
             case .alipayCN:
-                return OMSSourceTypeValue.alipayCN
+                return SourceTypeValue.alipayCN
             case .alipayHK:
-                return OMSSourceTypeValue.alipayHK
+                return SourceTypeValue.alipayHK
             case .atome:
-                return OMSSourceTypeValue.atome
+                return SourceTypeValue.atome
             case .dana:
-                return OMSSourceTypeValue.dana
+                return SourceTypeValue.dana
             case .gcash:
-                return OMSSourceTypeValue.gcash
+                return SourceTypeValue.gcash
             case .kakaoPay:
-                return OMSSourceTypeValue.kakaoPay
+                return SourceTypeValue.kakaoPay
             case .touchNGoAlipayPlus:
-                return OMSSourceTypeValue.touchNGoAlipayPlus
+                return SourceTypeValue.touchNGoAlipayPlus
             case .touchNGo:
-                return OMSSourceTypeValue.touchNGo
+                return SourceTypeValue.touchNGo
             case .promptpay:
-                return OMSSourceTypeValue.promptPay
+                return SourceTypeValue.promptPay
             case .paynow:
-                return OMSSourceTypeValue.payNow
+                return SourceTypeValue.payNow
             case .truemoney:
-                return OMSSourceTypeValue.trueMoney
+                return SourceTypeValue.trueMoney
+            case .truemoneyJumpApp:
+                return SourceTypeValue.trueMoneyJumpApp
             case .points(let points):
-                return OMSSourceTypeValue(points.type)
+                return SourceTypeValue(points.type)
             case .installment(let brand, availableNumberOfTerms: _):
-                return OMSSourceTypeValue(brand.type)
+                return SourceTypeValue(brand.type)
             case .internetBanking(let bank):
-                return OMSSourceTypeValue(bank.type)
+                return SourceTypeValue(bank.type)
             case .billPayment(let billPayment):
-                return OMSSourceTypeValue(billPayment.type)
+                return SourceTypeValue(billPayment.type)
             case .eContext:
-                return OMSSourceTypeValue.eContext
+                return SourceTypeValue.eContext
             case .mobileBanking(let bank):
-                return OMSSourceTypeValue(bank.type)
+                return SourceTypeValue(bank.type)
             case .fpx:
-                return OMSSourceTypeValue.fpx
+                return SourceTypeValue.fpx
             case .rabbitLinepay:
-                return OMSSourceTypeValue.rabbitLinepay
+                return SourceTypeValue.rabbitLinepay
             case .ocbcPao:
-                return OMSSourceTypeValue.mobileBankingOCBCPAO
+                return SourceTypeValue.mobileBankingOCBCPAO
             case .ocbcDigital:
-                return OMSSourceTypeValue.mobileBankingOCBC
+                return SourceTypeValue.mobileBankingOCBC
             case .grabPay:
-                return OMSSourceTypeValue.grabPay
+                return SourceTypeValue.grabPay
             case .grabPayRms:
-                return OMSSourceTypeValue.grabPayRms
+                return SourceTypeValue.grabPayRms
             case .boost:
-                return OMSSourceTypeValue.boost
+                return SourceTypeValue.boost
             case .shopeePay:
                 // using ShopeePay Jump app as first priority ShopeePay source
                 let isShopeePayJumpAppExist = capability.supportedBackends.contains(
                   where: { $0.payment == Capability.Backend.Payment.shopeePayJumpApp }
                 )
                 if !isShopeePayJumpAppExist {
-                  return OMSSourceTypeValue.shopeePay
+                  return SourceTypeValue.shopeePay
                 }
                 return nil
             case .shopeePayJumpApp:
-                return OMSSourceTypeValue.shopeePayJumpApp
+                return SourceTypeValue.shopeePayJumpApp
             case .maybankQRPay:
-                return OMSSourceTypeValue.maybankQRPay
+                return SourceTypeValue.maybankQRPay
             case .duitNowQR:
-                return OMSSourceTypeValue.duitNowQR
+                return SourceTypeValue.duitNowQR
             case .duitNowOBW:
-                return OMSSourceTypeValue.duitNowOBW
+                return SourceTypeValue.duitNowOBW
             case .payPay:
-                return OMSSourceTypeValue.payPay
+                return SourceTypeValue.payPay
             case .card, .unknownSource:
                 return nil
             }
@@ -605,17 +574,9 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     }
 
     private func updateShowingValues() {
-        var paymentMethodsToShow: [PaymentChooserOption] = allowedPaymentMethods.reduce(into: []) { (result, sourceType) in
-            let paymentOptions = PaymentChooserOption.paymentOptions(for: sourceType)
-            for paymentOption in paymentOptions where !result.contains(paymentOption) {
-                result.append(paymentOption)
-            }
-        }
-
-        if showsCreditCardPayment {
-            paymentMethodsToShow.insert(.creditCard, at: 0)
-        }
-
+        var paymentMethodsToShow = paymentOptions(from: allowedPaymentMethods)
+        paymentMethodsToShow = appendCreditCardPayment(paymentOptions: paymentMethodsToShow)
+        paymentMethodsToShow = filterTrueMoney(paymentOptions: paymentMethodsToShow)
         showingValues = paymentMethodsToShow
 
         os_log("Payment Chooser: Showing options - %{private}@",
@@ -626,5 +587,33 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
 
     @IBAction private func requestToClose(_ sender: Any) {
         flowSession?.requestToCancel()
+    }
+}
+
+private extension PaymentChooserViewController {
+    func paymentOptions(from sourceTypes: [SourceTypeValue]) -> [PaymentChooserOption] {
+        let paymentOptions: [PaymentChooserOption] = sourceTypes.reduce(into: []) { (result, sourceType) in
+            let paymentOptions = PaymentChooserOption.paymentOptions(for: sourceType)
+            for paymentOption in paymentOptions where !result.contains(paymentOption) {
+                result.append(paymentOption)
+            }
+        }
+        return paymentOptions
+    }
+
+    func appendCreditCardPayment(paymentOptions: [PaymentChooserOption]) -> [PaymentChooserOption] {
+        var filter = paymentOptions
+        if showsCreditCardPayment {
+            filter.insert(.creditCard, at: 0)
+        }
+        return filter
+    }
+
+    func filterTrueMoney(paymentOptions: [PaymentChooserOption]) -> [PaymentChooserOption] {
+        var filter = paymentOptions
+        if filter.contains(.truemoney) && filter.contains(.truemoneyJumpApp) {
+            filter.removeAll { $0 == .truemoney }
+        }
+        return filter
     }
 }

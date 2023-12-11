@@ -2,7 +2,7 @@ import UIKit
 import os
 
 // swiftlint:disable file_length
-@objc(OMSSDKClient) public class Client: NSObject {
+public class Client: NSObject {
     // Shared latest capability requested from API
     static var sharedCapability: Capability? {
         didSet {
@@ -33,7 +33,7 @@ import os
     /// - Parameters:
     ///   - publicKey: Public Key for this Client used for calling the Omise API. The key must have `pkey` prefix
     ///   - queue: OperationQueue which the client uses for the network related operations
-    @objc public init(publicKey: String, queue: OperationQueue) {
+    public init(publicKey: String, queue: OperationQueue) {
         if publicKey.hasPrefix("pkey_") {
             self.publicKey = publicKey
         } else {
@@ -54,7 +54,7 @@ import os
     ///
     /// - Parameters:
     ///   - publicKey: Public Key for this Client used for calling the Omise API. The key must have `pkey` prefix
-    @objc public convenience init(publicKey: String) {
+    public convenience init(publicKey: String) {
         self.init(publicKey: publicKey, queue: OperationQueue())
     }
     
@@ -331,7 +331,7 @@ extension Client {
     // swiftlint:disable:next function_body_length
     private static func completeRequest<T: Object>(_ request: Request<T>, callback: Request<T>.Callback?) -> ((Data?, URLResponse?, Error?) -> Void) {
         // swiftlint:disable:next closure_body_length
-        return { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+        return { (data: Data?, response: URLResponse?, error: Error?) in
             guard let callback = callback else { return } // nobody around to hear the leaf falls
             
             var result: RequestResult<T>
@@ -398,8 +398,7 @@ extension Client {
 
 // MARK: - Constants
 extension Client {
-    static let sdkVersion: String = "4.25.0"
-    
+    static let sdkVersion: String = "5.0.0"
     static let currentPlatform: String = ProcessInfo.processInfo.operatingSystemVersionString
     static let currentDevice: String = UIDevice.current.model
     
@@ -413,7 +412,7 @@ extension Client {
     
     static var defaultUserAgent: String {
         return """
-        OmiseIOSSDK/\(sdkVersion) \
+        OmiseIOS/\(sdkVersion) \
         iOS/\(currentPlatform) \
         Apple/\(currentDevice)
         """ // OmiseIOSSDK/3.0.0 iOS/12.0.0 Apple/iPhone

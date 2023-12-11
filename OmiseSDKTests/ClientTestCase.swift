@@ -1,12 +1,12 @@
 import XCTest
 @testable import OmiseSDK
-@testable import OmiseTestSDK
+@testable import OmiseUnitTestKit
 
 private let timeout: TimeInterval = 15.0
 
 class ClientTestCase: XCTestCase {
 
-    static let requestTokenGenerator: OmiseTestSDK.TestCaseValueGenerator.GeneratorFunction<Request<Token>> = { gen in
+    static let requestTokenGenerator: OmiseUnitTestKit.TestCaseValueGenerator.GeneratorFunction<Request<Token>> = { gen in
         Request(parameter: Token.CreateParameter(
             name: "JOHN DOE",
             number: "4242424242424242",

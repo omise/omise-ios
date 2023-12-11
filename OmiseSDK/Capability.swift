@@ -16,7 +16,7 @@ public struct Capability: Object {
         return backends[.card]
     }
 
-    public subscript(type: OMSSourceTypeValue) -> Capability.Backend? {
+    public subscript(type: SourceTypeValue) -> Capability.Backend? {
         return backends[.source(type)]
     }
 }
@@ -24,8 +24,11 @@ public struct Capability: Object {
 extension Capability {
     public static func ~= (lhs: Capability, rhs: CreateSourceParameter) -> Bool {
         func backend(from capability: Capability, for payment: PaymentInformation) -> Backend? {
-            let paymentSourceType = OMSSourceTypeValue(payment.sourceType)
-            return capability[paymentSourceType]
+            if let paymentSourceType = SourceTypeValue(payment.sourceType) {
+                return capability[paymentSourceType]
+            } else {
+                return nil
+            }
         }
 
         guard let backend = backend(from: lhs, for: rhs.paymentInformation) else {
@@ -74,6 +77,7 @@ extension Capability {
             case promptpay
             case paynow
             case truemoney
+            case truemoneyJumpApp
             case points(PaymentInformation.Points)
             case eContext
             case fpx
@@ -201,12 +205,15 @@ extension Capability {
         var backendsContainer = try container.nestedUnkeyedContainer(forKey: .paymentBackends)
 
         var backends: [Capability.Backend] = []
+        
         while !backendsContainer.isAtEnd {
-            backends.append(try backendsContainer.decode(Capability.Backend.self))
+            let backend = try backendsContainer.decode(Capability.Backend.self)
+            backends.append(backend)
         }
+
         self.supportedBackends = backends
 
-        let backendTypes = backends.map { Capability.Backend.BackendType(payment: $0.payment) }
+        let backendTypes = backends.compactMap { Capability.Backend.BackendType(payment: $0.payment) }
         self.backends = Dictionary(uniqueKeysWithValues: zip(backendTypes, backends))
     }
 
@@ -236,6 +243,8 @@ extension Capability.Backend {
         supportedCurrencies = try container.decode(Set<Currency>.self, forKey: .supportedCurrencies)
 
         switch type {
+        case .unknown(let sourceType):
+            self.payment = .unknownSource(sourceType, configurations: [:])
         case .card:
             let supportedBrand = try container.decode(Set<CardBrand>.self, forKey: .cardBrands)
             self.payment = .card(supportedBrand)
@@ -276,6 +285,8 @@ extension Capability.Backend {
             self.payment = .paynow
         case .source(.trueMoney):
             self.payment = .truemoney
+        case .source(.trueMoneyJumpApp):
+            self.payment = .truemoneyJumpApp
         case .source(.pointsCiti):
             self.payment = .points(.citiPoints)
         case .source(.billPaymentTescoLotus):
@@ -331,11 +342,11 @@ extension Capability.Backend {
         case .installment(_, availableNumberOfTerms: let availableNumberOfTerms):
             try container.encode(Array(availableNumberOfTerms), forKey: .allowedInstallmentTerms)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
+        case .internetBanking, .alipay, .alipayCN, .alipayHK, .atome, .dana, .gcash, .kakaoPay, .touchNGoAlipayPlus, .touchNGo, .promptpay, .paynow, .truemoney, .truemoneyJumpApp, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .ocbcDigital, .grabPay, .grabPayRms, .boost, .shopeePay, .shopeePayJumpApp, .maybankQRPay, .duitNowQR, .duitNowOBW, .payPay:
+            // swiftlint:disable:previous line_length
+            try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         case .unknownSource(_, configurations: let configurations):
             try encoder.encodeJSONDictionary(configurations)
-            try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
-        // swiftlint:disable:next line_length
-        case .internetBanking, .alipay, .alipayCN, .alipayHK, .atome, .dana, .gcash, .kakaoPay, .touchNGoAlipayPlus, .touchNGo, .promptpay, .paynow, .truemoney, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .ocbcDigital, .grabPay, .grabPayRms, .boost, .shopeePay, .shopeePayJumpApp, .maybankQRPay, .duitNowQR, .duitNowOBW, .payPay:
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         }
     }
@@ -345,7 +356,8 @@ private let creditCardBackendTypeValue = "card"
 extension Capability.Backend {
     fileprivate enum BackendType: Codable, Hashable {
         case card
-        case source(OMSSourceTypeValue)
+        case source(SourceTypeValue)
+        case unknown(sourceType: String)
 
         init(from decoder: Decoder) throws {
             let container = try decoder.singleValueContainer()
@@ -353,7 +365,11 @@ extension Capability.Backend {
             case creditCardBackendTypeValue:
                 self = .card
             case let value:
-                self = .source(OMSSourceTypeValue(value))
+                if let sourceType = SourceTypeValue(value) {
+                    self = .source(sourceType)
+                } else {
+                    self = .unknown(sourceType: value)
+                }
             }
         }
 
@@ -361,6 +377,8 @@ extension Capability.Backend {
             var container = encoder.singleValueContainer()
             let type: String
             switch self {
+            case .unknown(let sourceType):
+                type = sourceType
             case .card:
                 type = creditCardBackendTypeValue
             case .source(let sourceType):
@@ -370,8 +388,16 @@ extension Capability.Backend {
             try container.encode(type)
         }
 
+        init?(sourceType string: String) {
+            if let sourceType = SourceTypeValue(string) {
+                self = .source(sourceType)
+            } else {
+                return nil
+            }
+        }
+
         // swiftlint:disable:next function_body_length
-        init(payment: Capability.Backend.Payment) {
+        init?(payment: Capability.Backend.Payment) {
             switch payment {
             case .card:
                 self = .card
@@ -394,23 +420,23 @@ extension Capability.Backend {
             case .touchNGo:
                 self = .source(.touchNGo)
             case .installment(let brand, availableNumberOfTerms: _):
-                self = .source(OMSSourceTypeValue(brand.type))
+                self.init(sourceType: brand.type)
             case .internetBanking(let banking):
-                self = .source(OMSSourceTypeValue(banking.type))
+                self.init(sourceType: banking.type)
             case .mobileBanking(let banking):
-                self = .source(OMSSourceTypeValue(banking.type))
+                self.init(sourceType: banking.type)
             case .billPayment(let billPayment):
-                self = .source(OMSSourceTypeValue(billPayment.type))
-            case .unknownSource(let sourceType, configurations: _):
-                self = .source(.init(sourceType))
+                self.init(sourceType: billPayment.type)
             case .promptpay:
                 self = .source(.promptPay)
             case .paynow:
                 self = .source(.payNow)
             case .truemoney:
                 self = .source(.trueMoney)
+            case .truemoneyJumpApp:
+                self = .source(.trueMoneyJumpApp)
             case .points(let points):
-                self = .source(OMSSourceTypeValue(points.type))
+                self.init(sourceType: points.type)
             case .eContext:
                 self = .source(.eContext)
             case .fpx:
@@ -439,11 +465,15 @@ extension Capability.Backend {
                 self = .source(.duitNowOBW)
             case .payPay:
                 self = .source(.payPay)
+            case .unknownSource(let sourceType, configurations: _):
+                self.init(sourceType: sourceType)
             }
         }
 
         var type: String {
             switch self {
+            case .unknown(let sourceType):
+                return sourceType
             case .card:
                 return "card"
             case .source(let sourceType):

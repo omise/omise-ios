@@ -1,6 +1,6 @@
 // swiftlint:disable file_length
 
-import Foundation
+import UIKit
 import os
 
 let sdkLogObject = OSLog(subsystem: "co.omise.ios.sdk", category: "SDK")
@@ -98,7 +98,7 @@ struct SkippingKeyCodingKeys<Key: CodingKey>: CodingKey {
     }
 }
 
-extension OMSSourceTypeValue {
+extension SourceTypeValue {
     var sourceTypePrefix: String {
         switch self {
         case .internetBankingBAY, .internetBankingBBL:
@@ -114,7 +114,7 @@ extension OMSSourceTypeValue {
         case .barcodeAlipay:
             return "barcode"
         case .installmentBAY, .installmentMBB, .installmentFirstChoice, .installmentBBL,
-             .installmentKTC, .installmentKBank, .installmentSCB, .installmentCiti, .installmentTTB, .installmentUOB:
+                .installmentKTC, .installmentKBank, .installmentSCB, .installmentCiti, .installmentTTB, .installmentUOB:
             return "installment"
         case .eContext:
             return "econtext"
@@ -122,7 +122,7 @@ extension OMSSourceTypeValue {
             return "promptpay"
         case .payNow:
             return "paynow"
-        case .trueMoney:
+        case .trueMoney, .trueMoneyJumpApp:
             return "truemoney"
         case .pointsCiti:
             return "points"
@@ -162,8 +162,6 @@ extension OMSSourceTypeValue {
             return "duitnow_obw"
         case .payPay:
             return "paypay"
-        default:
-            return self.rawValue
         }
     }
 }
@@ -349,7 +347,7 @@ extension UnkeyedEncodingContainer {
     }
 }
 
-extension ControlState: Hashable {
+extension UIControl.State: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(rawValue)
     }

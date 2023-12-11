@@ -196,7 +196,7 @@ extension PaymentFormUIController where Self: UIViewController & PaymentChooserU
     }
 }
 
-extension OMSSourceTypeValue {
+extension SourceTypeValue {
 
     var installmentBrand: PaymentInformation.Installment.Brand? {
         switch self {

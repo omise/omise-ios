@@ -3,7 +3,7 @@ import UIKit
 /// UITextField subclass for entering the credit card number.
 /// Automatically formats entered number into groups of four.
 @IBDesignable
-@objc(OMSCardNumberTextField) public class CardNumberTextField: OmiseTextField {
+public class CardNumberTextField: OmiseTextField {
 
     /// The current PAN
     public var pan: PAN {
@@ -27,7 +27,7 @@ import UIKit
             
             let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map { $0 - 1 })
             
-            let kerningKey = AttributedStringKey.kern
+            let kerningKey = NSAttributedString.Key.kern
             if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
                 typingAttributes?[kerningKey] = 5
             } else {
@@ -36,7 +36,6 @@ import UIKit
         }
     }
     
-    @available(iOS, unavailable)
     public override var delegate: UITextFieldDelegate? {
         get {
             return self
@@ -137,7 +136,7 @@ import UIKit
         let range = NSRange(location: 0, length: formattingAttributedText.length)
         formattingAttributedText.removeAttribute(.kern, range: range)
         kerningIndexes[kerningIndexes.indexRange(in: 0..<attributedText.length)].forEach {
-            formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
+            formattingAttributedText.addAttribute(NSAttributedString.Key.kern, value: 5, range: NSRange(location: $0, length: 1))
         }
         let previousSelectedTextRange = self.selectedTextRange
         self.attributedText = formattingAttributedText
@@ -158,7 +157,7 @@ import UIKit
         }
         let kerningIndexes = IndexSet([3, 7, 11])
         kerningIndexes[kerningIndexes.indexRange(in: 0..<formattingAttributedText.length)].forEach {
-            formattingAttributedText.addAttribute(AttributedStringKey.kern, value: 5, range: NSRange(location: $0, length: 1))
+            formattingAttributedText.addAttribute(NSAttributedString.Key.kern, value: 5, range: NSRange(location: $0, length: 1))
         }
         
         super.attributedPlaceholder = formattingAttributedText.copy() as? NSAttributedString
@@ -197,7 +196,7 @@ import UIKit
         }
         let kerningIndexes = IndexSet(pan.suggestedSpaceFormattedIndexes.map { $0 - 1 })
         
-        let kerningKey = AttributedStringKey.kern
+        let kerningKey = NSAttributedString.Key.kern
         if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
             typingAttributes?[kerningKey] = 5
         } else {
@@ -205,9 +204,9 @@ import UIKit
         }
 
         if kerningIndexes.contains(self.offset(from: beginningOfDocument, to: selectedTextRange.start)) {
-            typingAttributes?[AttributedStringKey.kern] = 5
+            typingAttributes?[NSAttributedString.Key.kern] = 5
         } else {
-            typingAttributes?.removeValue(forKey: AttributedStringKey.kern)
+            typingAttributes?.removeValue(forKey: NSAttributedString.Key.kern)
         }
     }
     

@@ -9,13 +9,6 @@ public protocol PaymentCreatorControllerDelegate: NSObjectProtocol {
     func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController)
 }
 
-@objc public protocol OMSPaymentCreatorControllerDelegate: NSObjectProtocol {
-    @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didCreateToken token: __OmiseToken)
-    @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didCreateSource source: __OmiseSource)
-    @objc func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didFailWithError error: Error)
-    @objc optional func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController)
-}
-
 public enum Payment {
     case token(Token)
     case source(Source)
@@ -27,9 +20,8 @@ public protocol PaymentChooserUI: AnyObject {
 }
 
 /// Drop-in UI flow controller that let user choose the payment method with the given payment options
-@objc(OMSPaymentCreatorController)
-// swiftlint:disable:next attributes type_body_length
 public class PaymentCreatorController: UINavigationController {
+    // swiftlint:disable:previous type_body_length
 
     enum PreconditionFailures: String {
         case paymentChooserViewcontrollerAsRoot =
@@ -37,7 +29,7 @@ public class PaymentCreatorController: UINavigationController {
     }
 
     /// Omise public key for calling tokenization API.
-    @objc public var publicKey: String? {
+    public var publicKey: String? {
         didSet {
             guard let publicKey = publicKey else {
                 os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.publicKey ?? "")
@@ -62,28 +54,8 @@ public class PaymentCreatorController: UINavigationController {
         }
     }
 
-    /// Amount to create a Source payment
-    @objc(paymentAmount) public var __paymentAmount: Int64 { // swiftlint:disable:this identifier_name
-        get {
-            return paymentAmount ?? 0
-        }
-        set {
-            paymentAmount = newValue > 0 ? Int64(newValue) : nil
-        }
-    }
-
-    /// Currency to create a Source payment
-    @objc(paymentCurrencyCode) public var __paymentCurrencyCode: String? { // swiftlint:disable:this identifier_name
-        get {
-            return paymentCurrency?.code
-        }
-        set {
-            paymentCurrency = newValue.map(Currency.init(code:))
-        }
-    }
-
     /// Boolean indicates that the form should show the Credit Card payment option or not
-    @objc public var showsCreditCardPayment = true {
+    public var showsCreditCardPayment = true {
         didSet {
             paymentChooserViewController.showsCreditCardPayment = showsCreditCardPayment
         }
@@ -91,7 +63,7 @@ public class PaymentCreatorController: UINavigationController {
 
     /// Available Source payment options to let user to choose.
     /// The default value is the default available payment method for merchant in Thailand
-    @objc public var allowedPaymentMethods: [OMSSourceTypeValue] = PaymentCreatorController.thailandDefaultAvailableSourceMethods {
+    public var allowedPaymentMethods: [SourceTypeValue] = PaymentCreatorController.thailandDefaultAvailableSourceMethods {
         didSet {
             paymentChooserViewController.allowedPaymentMethods = allowedPaymentMethods
         }
@@ -102,12 +74,10 @@ public class PaymentCreatorController: UINavigationController {
     /// The controller will show an error alert in the UI if the value is true,
     /// otherwise the controller will ask its delegate.
     /// Defaults to `true`.
-    @objc public var handleErrors = true
+    public var handleErrors = true
 
     /// Delegate to receive CreditCardFormController result.
     public weak var paymentDelegate: PaymentCreatorControllerDelegate?
-    /// Delegate to receive CreditCardFormController result.
-    @objc(paymentDelegate) public weak var __paymentDelegate: OMSPaymentCreatorControllerDelegate? // swiftlint:disable:this identifier_name
 
     var client: Client? {
         didSet {
@@ -149,7 +119,7 @@ public class PaymentCreatorController: UINavigationController {
         publicKey: String,
         amount: Int64,
         currency: Currency,
-        allowedPaymentMethods: [OMSSourceTypeValue],
+        allowedPaymentMethods: [SourceTypeValue],
         paymentDelegate: PaymentCreatorControllerDelegate?
     ) -> PaymentCreatorController {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
@@ -165,27 +135,6 @@ public class PaymentCreatorController: UINavigationController {
         return paymentCreatorController
     }
 
-    /// Factory method for creating CreditCardFormController with given public key.
-    /// - parameter publicKey: Omise public key.
-    @objc(paymentCreatorControllerWithPublicKey:amount:currency:allowedPaymentMethods:paymentDelegate:)
-    // swiftlint:disable:next attributes
-    public static func __makePaymentCreatorViewControllerWith( // swiftlint:disable:this identifier_name
-        publicKey: String,
-        amount: Int64,
-        currencyCode: String,
-        allowedPaymentMethods: [OMSSourceTypeValue],
-        paymentDelegate: OMSPaymentCreatorControllerDelegate
-    ) -> PaymentCreatorController {
-        let controller = PaymentCreatorController.makePaymentCreatorControllerWith(
-            publicKey: publicKey,
-            amount: amount,
-            currency: Currency(code: currencyCode),
-            allowedPaymentMethods: allowedPaymentMethods,
-            paymentDelegate: nil)
-        controller.__paymentDelegate = paymentDelegate
-        return controller
-    }
-
     public init() {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
         let viewController = storyboard.instantiateViewController(withIdentifier: "PaymentChooserController")
@@ -199,18 +148,6 @@ public class PaymentCreatorController: UINavigationController {
         super.init(rootViewController: paymentChooserViewController)
 
         initializeWithPaymentChooserViewController(paymentChooserViewController)
-    }
-
-    @available(iOS, unavailable)
-    public override init(rootViewController: UIViewController) {
-        guard let rootViewController = rootViewController as? PaymentChooserViewController else {
-            preconditionFailure(
-                PreconditionFailures.paymentChooserViewcontrollerAsRoot.rawValue
-            )
-        }
-        super.init(rootViewController: rootViewController)
-
-        initializeWithPaymentChooserViewController(rootViewController)
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -259,12 +196,6 @@ public class PaymentCreatorController: UINavigationController {
 
     public func applyPaymentMethods(from capability: Capability) {
         paymentChooserViewController.applyPaymentMethods(from: capability)
-    }
-
-    @objc(applyPaymentMethodsFrom:)
-    // swiftlint:disable:next attributes
-    public func __applyPaymentMethods(from capability: __OmiseCapability) { // swiftlint:disable:this identifier_name
-        applyPaymentMethods(from: capability.capability)
     }
 
     private func initializeWithPaymentChooserViewController(_ viewController: PaymentChooserViewController) {
@@ -317,7 +248,7 @@ public class PaymentCreatorController: UINavigationController {
         }
 
         if animated {
-            UIView.animate(withDuration: TimeInterval(NavigationControllerHideShowBarDuration) + 0.07,
+            UIView.animate(withDuration: TimeInterval(UINavigationController.hideShowBarDuration) + 0.07,
                            delay: 0.0,
                            options: [.layoutSubviews, .beginFromCurrentState],
                            animations: animationBlock)
@@ -343,7 +274,7 @@ public class PaymentCreatorController: UINavigationController {
 
         if animated {
             UIView.animate(
-                withDuration: TimeInterval(NavigationControllerHideShowBarDuration),
+                withDuration: TimeInterval(UINavigationController.hideShowBarDuration),
                 delay: 0.0,
                 options: [.layoutSubviews],
                 animations: animationBlock
@@ -436,8 +367,6 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
 
         if let paymentDelegate = self.paymentDelegate {
             paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.token(token))
-        } else if let paymentDelegate = self.__paymentDelegate {
-            paymentDelegate.paymentCreatorController(self, didCreateToken: __OmiseToken(token: token))
         }
     }
 
@@ -449,9 +378,6 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
 
         if let paymentDelegate = self.paymentDelegate {
             paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.source(source))
-            os_log("Payment Creator Created Source succeed delegate notified", log: uiLogObject, type: .default)
-        } else if let paymentDelegate = self.__paymentDelegate {
-            paymentDelegate.paymentCreatorController(self, didCreateSource: __OmiseSource(source: source))
             os_log("Payment Creator Created Source succeed delegate notified", log: uiLogObject, type: .default)
         } else {
             os_log("There is no Payment Creator delegate to notify about the created source", log: uiLogObject, type: .default)
@@ -465,9 +391,6 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
                    type: .info,
                    error.localizedDescription)
             if let paymentDelegate = self.paymentDelegate {
-                paymentDelegate.paymentCreatorController(self, didFailWithError: error)
-                os_log("Payment Creator error handling delegate notified", log: uiLogObject, type: .default)
-            } else if let paymentDelegate = self.__paymentDelegate {
                 paymentDelegate.paymentCreatorController(self, didFailWithError: error)
                 os_log("Payment Creator error handling delegate notified", log: uiLogObject, type: .default)
             } else {
@@ -501,8 +424,6 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
 
         if let paymentDelegate = self.paymentDelegate {
             paymentDelegate.paymentCreatorControllerDidCancel(self)
-        } else if let paymentDidCancelDelegateMethod = self.__paymentDelegate?.paymentCreatorControllerDidCancel {
-            paymentDidCancelDelegateMethod(self)
         } else {
             os_log("Payment Creator dismissal requested but there is no delegate to ask. Ignore the request",
                    log: uiLogObject,
@@ -512,7 +433,7 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
 }
 
 extension PaymentCreatorController {
-    public static let thailandDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
+    public static let thailandDefaultAvailableSourceMethods: [SourceTypeValue] = [
         .internetBankingBAY,
         .internetBankingBBL,
         .mobileBankingSCB,
@@ -537,18 +458,18 @@ extension PaymentCreatorController {
         .shopeePayJumpApp
     ]
 
-    public static let japanDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
+    public static let japanDefaultAvailableSourceMethods: [SourceTypeValue] = [
         .eContext,
         .payPay
     ]
 
-    public static let singaporeDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
+    public static let singaporeDefaultAvailableSourceMethods: [SourceTypeValue] = [
         .payNow,
         .mobileBankingOCBCPAO,
         .shopeePayJumpApp
     ]
 
-    public static let malaysiaDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
+    public static let malaysiaDefaultAvailableSourceMethods: [SourceTypeValue] = [
         .fpx,
         .installmentMBB,
         .touchNGo,
@@ -561,13 +482,13 @@ extension PaymentCreatorController {
         .duitNowOBW
     ]
 
-    public static let internetBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
+    public static let internetBankingAvailablePaymentMethods: [SourceTypeValue] = [
         .internetBankingBAY,
         .internetBankingBBL
     ]
 
     // swiftlint:disable:next identifier_name
-    public static let installmentsBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
+    public static let installmentsBankingAvailablePaymentMethods: [SourceTypeValue] = [
         .installmentBAY,
         .installmentFirstChoice,
         .installmentBBL,
@@ -580,15 +501,15 @@ extension PaymentCreatorController {
         .installmentUOB
     ]
 
-    public static let billPaymentAvailablePaymentMethods: [OMSSourceTypeValue] = [
+    public static let billPaymentAvailablePaymentMethods: [SourceTypeValue] = [
         .billPaymentTescoLotus
     ]
 
-    public static let barcodeAvailablePaymentMethods: [OMSSourceTypeValue] = [
+    public static let barcodeAvailablePaymentMethods: [SourceTypeValue] = [
         .barcodeAlipay
     ]
 
-    public static let mobileBankingAvailablePaymentMethods: [OMSSourceTypeValue] = [
+    public static let mobileBankingAvailablePaymentMethods: [SourceTypeValue] = [
         .mobileBankingSCB,
         .mobileBankingKBank,
         .mobileBankingBAY,

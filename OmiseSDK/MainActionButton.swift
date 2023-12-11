@@ -1,7 +1,7 @@
 import UIKit
 
 @IBDesignable
-@objc(OMSMainActionButton) class MainActionButton: UIButton {
+class MainActionButton: UIButton {
     
     @IBInspectable var cornerRadius: CGFloat = 0.0 {
         didSet {
@@ -9,7 +9,7 @@ import UIKit
         }
     }
     
-    private var backgroundColors: [ControlState: UIColor] = [:]
+    private var backgroundColors: [UIControl.State: UIColor] = [:]
     
     @IBInspectable var defaultBackgroundColor: UIColor? {
         didSet {
@@ -73,7 +73,7 @@ import UIKit
         updateBackgroundColor()
     }
     
-    func setBackgroundColor(_ color: UIColor?, for state: ControlState) {
+    func setBackgroundColor(_ color: UIColor?, for state: UIControl.State) {
         backgroundColors[state] = color
         updateBackgroundColor()
     }
@@ -99,7 +99,7 @@ import UIKit
         super.backgroundColor = self.backgroundColor
     }
     
-    func backgroundColor(for state: ControlState) -> UIColor? {
+    func backgroundColor(for state: UIControl.State) -> UIColor? {
         return backgroundColors[state]
     }
     

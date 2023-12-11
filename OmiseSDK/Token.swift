@@ -242,14 +242,6 @@ extension Calendar {
     // swiftlint:disable:previous force_unwrapping
 }
 
-extension NSCalendar {
-    /// Calendar used in the Credit Card information which is Gregorian Calendar
-    @objc(creditCardInformationCalendar) public static var __creditCardInformationCalendar: Calendar {
-        // swiftlint:disable:previous identifier_name
-        return Calendar.creditCardInformationCalendar
-    }
-}
-
 extension Request where T == Token {
     
     /// Initializes a new Token Request with the given information

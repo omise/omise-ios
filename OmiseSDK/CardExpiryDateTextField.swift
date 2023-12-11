@@ -4,7 +4,7 @@ import UIKit
 /// UITextField subclass used for entering card's expiry date.
 /// `CardExpiryDatePicker` will be set as the default input view.
 @IBDesignable
-@objc(OMSCardExpiryDateTextField) public class CardExpiryDateTextField: OmiseTextField {
+public class CardExpiryDateTextField: OmiseTextField {
     
     /// Currently selected month, `nil` if no month has been selected.
     public private(set) var selectedMonth: Int? {
@@ -20,10 +20,7 @@ import UIKit
             }
         }
     }
-    @objc(selectedMonth) public var __selectedMonth: Int { // swiftlint:disable:this identifier_name
-        return selectedMonth ?? 0
-    }
-    
+
     /// Currently selected year, `nil` if no year has been selected.
     public private(set) var selectedYear: Int? {
         didSet {
@@ -32,14 +29,11 @@ import UIKit
             }
         }
     }
-    @objc(selectedYear) public var __selectedYear: Int { // swiftlint:disable:this identifier_name
-        return selectedYear ?? 0
-    }
-    
+
     public var dateSeparatorTextColor: UIColor?
     
-    @objc public private(set) var expirationMonthAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
-    @objc public private(set) var expirationYearAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
+    public private(set) var expirationMonthAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
+    public private(set) var expirationYearAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
     
     public override var keyboardType: UIKeyboardType {
         didSet {
@@ -47,7 +41,6 @@ import UIKit
         }
     }
     
-    @available(iOS, unavailable)
     public override var delegate: UITextFieldDelegate? {
         get {
             return self
