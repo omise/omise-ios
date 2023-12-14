@@ -88,6 +88,9 @@ public class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPaym
     static let truemoneySourceBackendPayment =
     __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.trueMoney)
 
+    static let truemoneyJumpAppSourceBackendPayment =
+    __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.trueMoneyJumpApp)
+
     static let cityPointsSourceBackendPayment =
     __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.pointsCiti)
 
@@ -202,6 +205,8 @@ extension __OmiseCapabilityBackendPayment {
             return __OmiseCapabilitySourceBackendPayment.paynowSourceBackendPayment
         case .truemoney:
             return __OmiseCapabilitySourceBackendPayment.truemoneySourceBackendPayment
+        case .truemoneyJumpApp:
+            return __OmiseCapabilitySourceBackendPayment.truemoneyJumpAppSourceBackendPayment
         case .points(let points):
             return __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue(points.type))
         case .eContext:

@@ -518,7 +518,7 @@
                             <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="g6L-kx-hv0">
-                            <rect key="frame" x="0.0" y="2190" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="2254" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -1541,6 +1541,35 @@
                                             <outlet property="accessoryView" destination="D7y-S8-lpb" id="xc1-ck-phc"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="ext-Bd-tya" imageView="DqM-AD-5EN" rowHeight="64" style="IBUITableViewCellStyleDefault" id="8Jf-6P-yPa" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
+                                        <rect key="frame" x="0.0" y="2162" width="375" height="64"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Jf-6P-yPa" id="btz-8Q-gzS">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="TrueMoney" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ext-Bd-tya">
+                                                    <rect key="frame" x="67" y="0.0" width="288" height="64"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" image="TrueMoney" adjustsImageSizeForAccessibilityContentSizeCategory="YES" id="DqM-AD-5EN">
+                                                    <rect key="frame" x="20" y="16" width="32" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Redirect" translatesAutoresizingMaskIntoConstraints="NO" id="XXk-p5-owH">
+                                                    <rect key="frame" x="345" y="23" width="16" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <color key="tintColor" red="0.89019607840000003" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="accessoryView" destination="XXk-p5-owH" id="5Fe-1O-OnN"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -1591,6 +1620,7 @@
                         <outletCollection property="paymentMethodNameLables" destination="fi0-U5-Eu6" collectionClass="NSMutableArray" id="UGU-T7-caB"/>
                         <outletCollection property="paymentMethodNameLables" destination="gf2-Jc-sHw" collectionClass="NSMutableArray" id="7eO-oS-VyU"/>
                         <outletCollection property="paymentMethodNameLables" destination="ydy-jp-KSj" collectionClass="NSMutableArray" id="f5v-xU-SnZ"/>
+                        <outletCollection property="paymentMethodNameLables" destination="ext-Bd-tya" collectionClass="NSMutableArray" id="nP2-zR-ud7"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zoe-8g-RM3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3098,7 +3128,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="rLy-XG-aKO">
-                            <rect key="frame" x="0.0" y="1090" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="1230" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -3665,22 +3695,22 @@
     </scenes>
     <designables>
         <designable name="1JF-Jq-C50">
-            <size key="intrinsicContentSize" width="5" height="22"/>
+            <size key="intrinsicContentSize" width="23" height="48"/>
         </designable>
         <designable name="1dv-2d-6Zi">
             <size key="intrinsicContentSize" width="38" height="33"/>
         </designable>
         <designable name="AJd-kX-GAq">
-            <size key="intrinsicContentSize" width="5" height="22"/>
+            <size key="intrinsicContentSize" width="23" height="48"/>
         </designable>
         <designable name="PBr-uW-pM8">
-            <size key="intrinsicContentSize" width="5" height="22"/>
+            <size key="intrinsicContentSize" width="23" height="48"/>
         </designable>
         <designable name="Par-EA-T3D">
-            <size key="intrinsicContentSize" width="55.333333333333336" height="22"/>
+            <size key="intrinsicContentSize" width="73.666666666666671" height="48"/>
         </designable>
         <designable name="Y1l-QK-aPc">
-            <size key="intrinsicContentSize" width="5" height="22"/>
+            <size key="intrinsicContentSize" width="23" height="48"/>
         </designable>
         <designable name="ZPa-NN-y1M">
             <size key="intrinsicContentSize" width="30" height="33"/>
