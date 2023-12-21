@@ -28,7 +28,7 @@ you can't find an answer there, feel free to
 * Xcode 10.2 or higher (Xcode 12 is recommended)
 * Swift 5.0 or higher (Swift 5.3 is recommended)
 
-## Merchant Compliance
+## Merchant compliance
 
 **Card data should never transit through your server. We recommend that you follow our
 guide on how to safely
@@ -36,7 +36,7 @@ guide on how to safely
 
 To be authorized to create tokens on your own server, you must have a
 currently valid PCI-DSS Attestation of Compliance (AoC) delivered by a
-certified QSA Auditor.  This SDK provides means to tokenize card data
+certified QSA Auditor.  This SDK provides the means to tokenize card data
 through the end user's mobile phone without this data having to go
 through your server.
 
@@ -70,16 +70,16 @@ let client = OmiseSDK.Client.init(publicKey: "omise_public_key")
 
 
 The SDK currently
-supports 2 main categories of requests: **Tokenizing a Credit
+supports 2 main categories of requests: **Tokenizing a 
 Card** and **Creating a Payment Source**.
 
-#### Creating a Card Token
+#### Creating a card token
 
 Normally, merchants must not send credit or debit card data to their own
-servers. To collect a credit card payment from a
-customer, merchants will need to first *tokenize* the credit card data using
+servers. To collect a card payment from a
+customer, merchants will need to first *tokenize* the card data using the
 Opn Payments API and then use the generated token in place of the card
-data.  You can tokenize credit card data by creating and initializing
+data. You can tokenize card data by creating and initializing
 a `Request<Token>` as follows:
 
 ```swift
@@ -94,9 +94,9 @@ let tokenParameters = Token.CreateParameter(
 let request = Request<Token>(parameter: tokenParameters)
 ```
 
-#### Creating a Payment Source
+#### Creating a payment source
 
-Opn Payments now supports many payment methods other than credit cards.  You
+Opn Payments now supports many payment methods other than cards.  You
 may request a payment with one of those supported payment methods from
 a customer by calling the `CreateSourceParameter` API. You need to specify
 the parameters (e.g. payment amount and currency) of the source you
@@ -114,7 +114,7 @@ let sourceParameter = CreateSourceParameter(
 let request = Request<Source>(parameter: sourceParameter)
 ```
 
-#### Sending the Request
+#### Sending the request
 
 Whether you are charging a source or a card, sending the
 request is the same.  Create a new `requestTask` on a `Client` object
@@ -139,7 +139,7 @@ client.send(request) { [weak self] (result) in
 
 #### Creating the completion handler
 
-A simple completion handler for a token looks like this.
+A simple completion handler for a token looks as follows.
 
 ``` swift
 func completionHandler(tokenResult: Result<Token, Error>) -> Void {
@@ -153,18 +153,18 @@ func completionHandler(tokenResult: Result<Token, Error>) -> Void {
 }
 ```
 
-### Built-in Forms
+### Built-in forms
 
-Opn Payments iOS SDK provides easy-to-use drop-in UI forms for both Tokenizing a Credit Card and Creating a Payment Source, which
-you can easily integrate into your app.
+Opn Payments iOS SDK provides easy-to-use drop-in UI forms for both Tokenizing a Card and Creating a Payment Source, which
+you can easily integrate into your application.
 
-#### Credit Card Form
+#### Card form
 
-The `CreditCardFormViewController` provides a pre-made credit card form and will automatically
-[tokenize credit card information](https://docs.opn.ooo/security-best-practices) for you.
+The `CreditCardFormViewController` provides a pre-made card form and will automatically
+[tokenize card information](https://docs.opn.ooo/security-best-practices) for you.
 You only need to implement two delegate methods and a way to display the form.
 
-##### Use Credit Card Form in code
+##### Use card form in code
 
 To use the controller in your application, modify your view controller with the following additions:
 
@@ -184,8 +184,7 @@ class ViewController: UIViewController {
 }
 ```
 
-Then implement the delegate to receive the `Token` object after user has entered the
-credit card data:
+Then implement the delegate to receive the `Token` object after user has entered the card data:
 
 ```swift
 extension ViewController: CreditCardFormViewControllerDelegate {
@@ -218,7 +217,7 @@ as follows:
 }
 ```
 
-##### Use Credit Card Form in Storyboard
+##### Use card form in storyboard
 
 `CreditCardFormViewController` comes with built-in storyboard support. You can use `CreditCardFormViewController` in your storybard by using `Storyboard Reference`. Drag the `Storyboard Reference` object onto your canvas and set its bundle identifier to `co.omise.OmiseSDK` and Storyboard to `OmiseSDK`. You can either leave `Referenced ID` empty or use `CreditCardFormController` as a `Referenced ID`
 You can setup `CreditCardFormViewController` in `UIViewController.prepare(for:sender:)` method
@@ -235,10 +234,10 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 }
 ```
 
-##### Custom Credit Card Form
+##### Custom card form
 
-You can create your own credit card form if you want to but please keep in mind that you must not send the credit card information to your server.
-Opn Payments iOS SDK provides some built-in credit card UI components to make it easier to create your own credit card form:
+You can create your own card form if you want but please keep in mind that you must not send the card information to your server.
+Opn Payments iOS SDK provides some built-in card UI components to make it easier to create your own card form:
 
 * `CardNumberTextField` - Provides basic number grouping as the user types.
 * `CardNameTextField` - Cardholder name field.
@@ -251,14 +250,14 @@ basic validation (e.g. alphabetic characters in the number field,
 content with wrong length, etc.) and come in two supported styles, plain
 and border.
 
-#### Built-in Payment Creator Controller
+#### Built-in payment creator controller
 
 The `PaymentCreatorController` provides a pre-made form to let a customer choose how they want to make a payment.
 Please note that the `PaymentCreatorController` is designed to be used as-is. It is a subclass of `UINavigationController`
 and you shouldn't push your view controllers into its navigation controller stack.
 You can configure it to display either specified payment method options or a default list based on your country.
 
-##### Use Payment Creator Controller in code
+##### Use payment creator controller in code
 You can create a new instance of `PaymentCreatorController` by calling its factory method:
 
 ```swift
@@ -300,7 +299,7 @@ extension ProductDetailViewController: PaymentCreatorControllerDelegate {
   }
 }
 ```
-##### Use Payment Creator Controller in Storyboard
+##### Use payment creator controller in storyboard
 `PaymentCreatorController` comes with built-in storyboard support.
 You can use `PaymentCreatorController` in your storybard by using `Storyboard Reference`.
 Drag `Storyboard Reference` object onto your canvas and set its bundle identifier to `co.omise.OmiseSDK` and Storyboard to `OmiseSDK`
@@ -320,17 +319,15 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 }
 ```
 
+### Authorizing payment
 
-### Authorizing Payment
+Some payment methods require the customers to authorize the payment via an authorized URL. This includes [3-D Secure verification](https://docs.opn.ooo/fraud-protection#3-d-secure), [Internet Banking payment](https://docs.opn.ooo/internet-banking), [Alipay](https://docs.opn.ooo/alipay). The Opn Payments iOS SDK provides a built-in class to authorize payments.
 
-Some payment methods require the customers to authorize the payment via an authorized URL. This includes the [3-D Secure verification](https://docs.opn.ooo/fraud-protection#3-d-secure), [Internet Banking payment](https://docs.opn.ooo/internet-banking), [Alipay](https://docs.opn.ooo/alipay). The Opn Payments iOS SDK provides a built-in class to do the authorization.
+On payment methods that require opening the external application (e.g. mobile banking application) to authorize the transaction, set the *return_uri* to a **deeplink** or **applink** to be able to open the merchant application. Else, after the card holder completes authorizing the transaction on the external application, the flow redirects to the normal link in the *return_uri* and opens it on the browser application, and therefore results in the payment not being completed.
 
-On payment methods that require opening the external app (e.g. mobile banking app) to authorize the transaction, set the *return_uri* to a **deeplink** or **applink** to be able to open the merchant app. Else, after the card holder completes authorizing the transaction on the external app, the flow redirects to the normal link in the *return_uri* and opens it on the browser app, and therefore results in the payment not being completed.
+#### Using built-in authorizing payment view controller
 
-
-#### Using built-in Authorizing Payment view controller
-
-You can use the built-in Authorizing Payment view controller by creating an instance of `OmiseAuthorizingPaymentViewController` and set it with `authorized URL` provided with the charge and expected `return URL` patterns created by merchants.
+You can use the built-in authorizing payment view controller by creating an instance of `OmiseAuthorizingPaymentViewController`, and setting it with `authorized URL` provided with the charge and expected `return URL` patterns that you create.
 
 ##### Create an `OmiseAuthorizingPaymentViewController` by code
 
@@ -340,9 +337,9 @@ let handlerController = OmiseAuthorizingPaymentViewController.makeAuthorizingPay
 self.present(handlerController, animated: true, completion: nil)
 ```
 
-##### Use `OmiseAuthorizingPaymentViewController` in Storyboard
+##### Use `OmiseAuthorizingPaymentViewController` in storyboard
 
-`OmiseAuthorizingPaymentViewController` also comes with built-in storyboard support like `CreditCardFormViewController`. You can use `OmiseAuthorizingPaymentViewController` in your storyboard by using `Storyboard Reference`. Drag `Storyboard Reference` object onto your canvas and set its bundle identifier to `co.omise.OmiseSDK` and Storyboard to `OmiseSDK` then use `DefaultAuthorizingPaymentViewController` as a `Referenced ID`.
+`OmiseAuthorizingPaymentViewController` also comes with built-in storyboard support such as `CreditCardFormViewController`. You can use `OmiseAuthorizingPaymentViewController` in your storyboard by using `Storyboard Reference`. Drag `Storyboard Reference` object onto your canvas, set its bundle identifier to `co.omise.OmiseSDK` and storyboard to `OmiseSDK`, then use `DefaultAuthorizingPaymentViewController` as a `Referenced ID`.
 You can setup `OmiseAuthorizingPaymentViewController` in `UIViewController.prepare(for:sender:)` method
 ```swift
 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -371,7 +368,7 @@ extension ViewController: OmiseAuthorizingPaymentViewControllerDelegate {
 }
 ```
 
-## Objective-C Compatibility
+## Objective-C compatibility
 
 Opn Payments iOS SDK comes with full Objective-C support. The SDK is designed with the Swift language as a first-class citizen, and not only adopts Swift-only features in the SDK, but also provides an Objective-C counterpart for those features.
 If you found an API that is not available in Objective-C, please don't hestitate [to open an issue](https://github.com/omise/omise-ios/issues/new).
