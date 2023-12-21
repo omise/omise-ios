@@ -378,6 +378,6 @@ If you found an API that is not available in Objective-C, please don't hestitate
 
 Pull requests, issues, and bugfixes are welcome!
 
-## LICENSE
+## License
 
 MIT [See the full license text](https://github.com/omise/omise-ios/blob/master/LICENSE)
