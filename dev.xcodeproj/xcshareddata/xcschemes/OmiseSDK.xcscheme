@@ -14,16 +14,30 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "22D4809C1D0EB29C00544CE1"
-               BuildableName = "ExampleApp.app"
-               BlueprintName = "ExampleApp (Swift)"
-               ReferencedContainer = "container:OmiseSDK.xcodeproj">
+               BlueprintIdentifier = "225931171CE3210700841B86"
+               BuildableName = "OmiseSDK.framework"
+               BlueprintName = "OmiseSDK"
+               ReferencedContainer = "container:dev.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "987A02C81CE35D5E0035417A"
+               BuildableName = "OmiseSDKTests.xctest"
+               BlueprintName = "OmiseSDKTests"
+               ReferencedContainer = "container:dev.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Debug (Production)"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
@@ -31,10 +45,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "22D4809C1D0EB29C00544CE1"
-            BuildableName = "ExampleApp.app"
-            BlueprintName = "ExampleApp (Swift)"
-            ReferencedContainer = "container:OmiseSDK.xcodeproj">
+            BlueprintIdentifier = "225931171CE3210700841B86"
+            BuildableName = "OmiseSDK.framework"
+            BlueprintName = "OmiseSDK"
+            ReferencedContainer = "container:dev.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -45,13 +59,13 @@
                BlueprintIdentifier = "987A02C81CE35D5E0035417A"
                BuildableName = "OmiseSDKTests.xctest"
                BlueprintName = "OmiseSDKTests"
-               ReferencedContainer = "container:OmiseSDK.xcodeproj">
+               ReferencedContainer = "container:dev.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug (Staging)"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -60,16 +74,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "22D4809C1D0EB29C00544CE1"
-            BuildableName = "ExampleApp.app"
-            BlueprintName = "ExampleApp (Swift)"
-            ReferencedContainer = "container:OmiseSDK.xcodeproj">
+            BlueprintIdentifier = "225931171CE3210700841B86"
+            BuildableName = "OmiseSDK.framework"
+            BlueprintName = "OmiseSDK"
+            ReferencedContainer = "container:dev.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -77,19 +90,18 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "22D4809C1D0EB29C00544CE1"
-            BuildableName = "ExampleApp.app"
-            BlueprintName = "ExampleApp (Swift)"
-            ReferencedContainer = "container:OmiseSDK.xcodeproj">
+            BlueprintIdentifier = "225931171CE3210700841B86"
+            BuildableName = "OmiseSDK.framework"
+            BlueprintName = "OmiseSDK"
+            ReferencedContainer = "container:dev.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Debug (Production)">
+      buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"

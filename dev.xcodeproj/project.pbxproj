@@ -769,7 +769,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22D480AE1D0EB29C00544CE1 /* Build configuration list for PBXNativeTarget "ExampleApp (Swift)" */;
 			buildPhases = (
-				75DAD8912A0BC4D90098AF96 /* Copy Config.local.example to Config.local */,
 				22D4809B1D0EB29C00544CE1 /* Resources */,
 				22D480991D0EB29C00544CE1 /* Sources */,
 				22D4809A1D0EB29C00544CE1 /* Frameworks */,
@@ -861,7 +860,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 225931121CE3210700841B86 /* Build configuration list for PBXProject "OmiseSDK" */;
+			buildConfigurationList = 225931121CE3210700841B86 /* Build configuration list for PBXProject "dev" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -947,27 +946,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		75DAD8912A0BC4D90098AF96 /* Copy Config.local.example to Config.local */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Config.local.plist.example",
-			);
-			name = "Copy Config.local.example to Config.local";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Config.local.plist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nRESOURCE_PATH=$SRCROOT/ExampleApp\nEXAMPLE_CONFIG_FILENAME=Config.local.example.plist\nCONFIG_FILENAME=Config.local.plist\n\nif test -f \"$RESOURCE_PATH/$CONFIG_FILENAME\"; then\n    echo \"Config file exists\"\nelse\n    cp \"$RESOURCE_PATH/$EXAMPLE_CONFIG_FILENAME\" \"$RESOURCE_PATH/$CONFIG_FILENAME\"\n    echo \"Copied to $RESOURCE_PATH/$CONFIG_FILENAME\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1565,7 +1543,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		225931121CE3210700841B86 /* Build configuration list for PBXProject "OmiseSDK" */ = {
+		225931121CE3210700841B86 /* Build configuration list for PBXProject "dev" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				98FF99B3257773EB00476487 /* Debug */,

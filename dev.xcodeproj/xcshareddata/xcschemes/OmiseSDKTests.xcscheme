@@ -29,7 +29,7 @@
                BlueprintIdentifier = "987A02C81CE35D5E0035417A"
                BuildableName = "OmiseSDKTests.xctest"
                BlueprintName = "OmiseSDKTests"
-               ReferencedContainer = "container:OmiseSDK.xcodeproj">
+               ReferencedContainer = "container:dev.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

@@ -4,8 +4,6 @@
 <dict>
 	<key>publicKey</key>
 	<string>pkey_</string>
-	<key>devMode</key>
-	<false/>
 	<key>devVaultBaseURL</key>
 	<string></string>
 	<key>devApiBaseURL</key>

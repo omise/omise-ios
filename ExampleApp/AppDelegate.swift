@@ -27,6 +27,8 @@ extension Bundle {
             let bundle = Bundle(url: bundleURL) else {
             preconditionFailure()
         }
-        bundle.load()
+        if !bundle.isLoaded {
+            bundle.load()
+        }
     }
 }

@@ -11,10 +11,13 @@ import OmiseSDK
 
 struct LocalConfig: Codable {
     var publicKey: String = "pkey_"
-    var devMode = false
 
     private let devVaultBaseURL: String?
     private let devApiBaseURL: String?
+
+    var devMode: Bool {
+        devVaultBaseURL != nil && devApiBaseURL != nil
+    }
 
     init() {
         devVaultBaseURL = nil

@@ -19,8 +19,23 @@
 		757B0A622AD713A000DEAE8F /* CustomCreditCardFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757B0A572AD713A000DEAE8F /* CustomCreditCardFormViewController.swift */; };
 		757B0A632AD713A000DEAE8F /* LocalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757B0A592AD713A000DEAE8F /* LocalConfig.swift */; };
 		757B0A642AD713A000DEAE8F /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757B0A5A2AD713A000DEAE8F /* Tools.swift */; };
+		75A6BD2A2B3D2A0D005D9B77 /* OmiseSDK in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 7558BBDF2AE24CD80035CD99 /* OmiseSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		75C2E2292AD712F1008584C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C2E2282AD712F1008584C0 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		75A6BD2B2B3D2A0D005D9B77 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				75A6BD2A2B3D2A0D005D9B77 /* OmiseSDK in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		757B0A462AD7136800DEAE8F /* Config.local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.local.plist; sourceTree = "<group>"; };
@@ -123,6 +138,7 @@
 				75C2E2212AD712F1008584C0 /* Sources */,
 				75C2E2222AD712F1008584C0 /* Frameworks */,
 				75C2E2232AD712F1008584C0 /* Resources */,
+				75A6BD2B2B3D2A0D005D9B77 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -437,7 +453,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/omise/omise-ios.git";
 			requirement = {
-				branch = "feature/MIT-1520";
+				branch = feature/v5.0.0_improvements;
 				kind = branch;
 			};
 		};

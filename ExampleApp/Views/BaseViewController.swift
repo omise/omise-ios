@@ -42,8 +42,9 @@ class BaseViewController: UIViewController {
 
         updateUIColors()
 
-        #if INTERNAL_TEST
         modeChooser.selectedSegmentIndex = CodePathMode.code.rawValue
+
+        #if INTERNAL_TEST
         modeChooser.isEnabled = false
         #endif
 
