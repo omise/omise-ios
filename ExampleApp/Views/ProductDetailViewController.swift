@@ -99,6 +99,11 @@ class ProductDetailViewController: BaseViewController {
             allowedPaymentMethods: allowedPaymentMethods,
             paymentDelegate: self
         )
+
+        if usesCapabilityDataForPaymentMethods, let capability = self.capability {
+            paymentCreatorController.applyPaymentMethods(from: capability)
+        }
+
         present(paymentCreatorController, animated: true, completion: nil)
     }
     
