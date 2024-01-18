@@ -41,7 +41,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
 
     static var alphabetical: [PaymentChooserOption] {
         return PaymentChooserOption.allCases.sorted {
-            $0.description.localizedCompare($1.description) == .orderedAscending
+            $0.description.localizedCaseInsensitiveCompare($1.description) == .orderedAscending
         }
     }
 
