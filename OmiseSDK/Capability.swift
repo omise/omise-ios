@@ -246,8 +246,11 @@ extension Capability.Backend {
         case .unknown(let sourceType):
             self.payment = .unknownSource(sourceType, configurations: [:])
         case .card:
-            let supportedBrand = try container.decode(Set<CardBrand>.self, forKey: .cardBrands)
-            self.payment = .card(supportedBrand)
+            let supportedBrand = try container.decode(Set<String>.self, forKey: .cardBrands)
+            let cardBrands = supportedBrand.compactMap {
+                CardBrand(rawValue: $0)
+            }
+            self.payment = .card(Set(cardBrands))
         case .source(let value) where value.isInstallmentSource:
             let allowedInstallmentTerms = IndexSet(try container.decode(Array<Int>.self, forKey: .allowedInstallmentTerms))
             // swiftlint:disable:next force_unwrapping
