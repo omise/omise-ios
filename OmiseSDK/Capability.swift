@@ -93,6 +93,7 @@ extension Capability {
             case duitNowQR
             case duitNowOBW
             case payPay
+            case weChat
             case unknownSource(String, configurations: [String: Any])
         }
 
@@ -185,6 +186,8 @@ extension Capability.Backend.Payment {
         case (.duitNowOBW, .duitNowOBW):
             return true
         case (.payPay, .payPay):
+            return true
+        case (.weChat, .weChat):
             return true
         default:
             return false
@@ -322,6 +325,8 @@ extension Capability.Backend {
             self.payment = .duitNowOBW
         case .source(.payPay):
             self.payment = .payPay
+        case .source(.weChat):
+            self.payment = .weChat
         case .source(let value):
             let configurations = try container.decodeJSONDictionary()
             self.payment = .unknownSource(value.rawValue, configurations: configurations)
@@ -342,7 +347,7 @@ extension Capability.Backend {
         case .installment(_, availableNumberOfTerms: let availableNumberOfTerms):
             try container.encode(Array(availableNumberOfTerms), forKey: .allowedInstallmentTerms)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
-        case .internetBanking, .alipay, .alipayCN, .alipayHK, .atome, .dana, .gcash, .kakaoPay, .touchNGoAlipayPlus, .touchNGo, .promptpay, .paynow, .truemoney, .truemoneyJumpApp, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .ocbcDigital, .grabPay, .grabPayRms, .boost, .shopeePay, .shopeePayJumpApp, .maybankQRPay, .duitNowQR, .duitNowOBW, .payPay:
+        case .internetBanking, .alipay, .alipayCN, .alipayHK, .atome, .dana, .gcash, .kakaoPay, .touchNGoAlipayPlus, .touchNGo, .promptpay, .paynow, .truemoney, .truemoneyJumpApp, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .ocbcDigital, .grabPay, .grabPayRms, .boost, .shopeePay, .shopeePayJumpApp, .maybankQRPay, .duitNowQR, .duitNowOBW, .payPay, .weChat:
             // swiftlint:disable:previous line_length
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         case .unknownSource(_, configurations: let configurations):
@@ -465,6 +470,8 @@ extension Capability.Backend {
                 self = .source(.duitNowOBW)
             case .payPay:
                 self = .source(.payPay)
+            case .weChat:
+                self = .source(.weChat)
             case .unknownSource(let sourceType, configurations: _):
                 self.init(sourceType: sourceType)
             }

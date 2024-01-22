@@ -162,6 +162,8 @@ extension SourceTypeValue {
             return "duitnow_obw"
         case .payPay:
             return "paypay"
+        case .weChat:
+            return "wechat_pay"
         }
     }
 }
