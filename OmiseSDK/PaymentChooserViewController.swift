@@ -40,7 +40,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case truemoneyJumpApp
 
     static var alphabetical: [PaymentChooserOption] {
-        return PaymentChooserOption.allCases.sorted {
+        PaymentChooserOption.allCases.sorted {
             $0.description.localizedCaseInsensitiveCompare($1.description) == .orderedAscending
         }
     }
