@@ -38,6 +38,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case touchNGo
     case grabPayRms
     case payPay
+    case weChat
 
     var description: String {
         switch self {
@@ -111,6 +112,8 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "GrabPay"
         case .payPay:
             return "PayPay"
+        case .weChat:
+            return "WeChat"
         }
     }
 }
@@ -186,6 +189,8 @@ extension PaymentChooserOption {
             return [.duitNowOBW]
         case .payPay:
             return [.payPay]
+        case .weChat:
+            return [.weChat]
         default:
             return []
         }
@@ -365,6 +370,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return
         case .truemoneyJumpApp:
             payment = .truemoneyJumpApp
+        case .weChat:
+            payment = .weChat
         default:
             return
         }
@@ -461,6 +468,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 32, section: 0)
         case .truemoneyJumpApp:
             return IndexPath(row: 33, section: 0)
+        case .weChat:
+            return IndexPath(row: 34, section: 0)
         }
     }
 
@@ -543,6 +552,8 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return OMSSourceTypeValue.duitNowOBW
             case .payPay:
                 return OMSSourceTypeValue.payPay
+            case .weChat:
+                return OMSSourceTypeValue.weChat
             case .card, .unknownSource:
                 return nil
             }

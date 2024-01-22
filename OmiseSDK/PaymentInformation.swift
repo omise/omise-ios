@@ -183,6 +183,9 @@ public enum PaymentInformation: Codable, Equatable {
     /// PayNow Payment Source
     case paynow
 
+    /// WeChat Payment Source
+    case weChat
+
     /// The TrueMoney customer information
     public struct TrueMoney: PaymentMethod {
 
@@ -525,6 +528,9 @@ public enum PaymentInformation: Codable, Equatable {
         case .payPay:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.payPay.rawValue, forKey: .type)
+        case .weChat:
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(OMSSourceTypeValue.weChat.rawValue, forKey: .type)
         case .other(type: let type, parameters: let parameters):
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(type, forKey: .type)
@@ -590,6 +596,8 @@ public enum PaymentInformation: Codable, Equatable {
         case (.duitNowOBW(let lhsValue), .duitNowOBW(let rhsValue)):
             return lhsValue == rhsValue
         case (.payPay, .payPay):
+            return true
+        case (.weChat, .weChat):
             return true
         case (.other(let lhsType, let lhsParameters), .other(let rhsType, let rhsParameters)):
             return lhsType == rhsType &&
@@ -675,6 +683,8 @@ extension PaymentInformation {
             return bank.type
         case .payPay:
             return OMSSourceTypeValue.payPay.rawValue
+        case .weChat:
+            return OMSSourceTypeValue.weChat.rawValue
         case .other(let value, _):
             return value
         }

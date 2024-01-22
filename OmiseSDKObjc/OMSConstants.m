@@ -48,6 +48,7 @@ OMSSourceTypeValue const _Nonnull OMSSourceTypeValueDuitNowQR = @"duitnow_qr";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueDuitNowOBW = @"duitnow_obw";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueAtome = @"atome";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePayPay = @"paypay";
+OMSSourceTypeValue const _Nonnull OMSSourceTypeValueWeChat = @"wechat_pay";
 
 OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeTHB = @"THB";
 OMSSupportedCurrencyCode const _Nonnull OMSSupportedCurrencyCodeJPY = @"JPY";
