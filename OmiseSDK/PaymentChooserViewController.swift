@@ -113,7 +113,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
         case .payPay:
             return "PayPay"
         case .weChat:
-            return "WeChat"
+            return "WeChat Pay"
         }
     }
 }
