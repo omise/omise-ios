@@ -9,7 +9,7 @@ extension Array {
 
 extension Array where Element: Equatable {
     func reorder(by preferredOrder: [Element]) -> [Element] {
-        return self.sorted { (a, b) -> Bool in
+        self.sorted { (a, b) -> Bool in
             guard let first = preferredOrder.firstIndex(of: a) else {
                 return false
             }
