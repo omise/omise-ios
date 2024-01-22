@@ -3,41 +3,74 @@ import UIKit
 import os
 
 enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
-    case creditCard
-    case installment
-    case internetBanking
-    case mobileBanking
-    case tescoLotus
-    case conbini
-    case payEasy
-    case netBanking
     case alipay
     case alipayCN
     case alipayHK
     case atome
-    case dana
-    case gcash
-    case kakaoPay
-    case touchNGoAlipayPlus
-    case promptpay
-    case paynow
-    case truemoney
-    case truemoneyJumpApp
-    case citiPoints
-    case fpx
-    case rabbitLinepay
-    case ocbcPao
-    case ocbcDigital
-    case grabPay
     case boost
+    case citiPoints
+    case conbini
+    case creditCard
+    case dana
+    case duitNowOBW
+    case duitNowQR
+    case fpx
+    case gcash
+    case grabPay
+    case grabPayRms
+    case installment
+    case internetBanking
+    case kakaoPay
+    case maybankQRPay
+    case mobileBanking
+    case netBanking
+    case ocbcDigital
+    case ocbcPao
+    case payEasy
+    case paynow
+    case payPay
+    case promptpay
+    case rabbitLinepay
     case shopeePay
     case shopeePayJumpApp
-    case maybankQRPay
-    case duitNowQR
-    case duitNowOBW
+    case tescoLotus
     case touchNGo
-    case grabPayRms
-    case payPay
+    case touchNGoAlipayPlus
+    case truemoney
+    case truemoneyJumpApp
+
+    static var alphabetical: [PaymentChooserOption] {
+        PaymentChooserOption.allCases.sorted {
+            $0.description.localizedCaseInsensitiveCompare($1.description) == .orderedAscending
+        }
+    }
+
+    static let topList: [PaymentChooserOption] = [
+        .creditCard,
+        .paynow,
+        .promptpay,
+        .truemoney,
+        .truemoneyJumpApp,
+        .mobileBanking,
+        .internetBanking,
+        .alipay,
+        .installment,
+        .ocbcDigital,
+        .ocbcPao,
+        .rabbitLinepay,
+        .shopeePay,
+        .shopeePayJumpApp,
+        .alipayCN,
+        .alipayHK
+    ]
+
+    static var sorting: [PaymentChooserOption] {
+        var sorted = topList
+        for item in alphabetical where !sorted.contains(item) {
+            sorted.append(item)
+        }
+        return sorted
+    }
 
     var description: String {
         switch self {
@@ -577,7 +610,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         var paymentMethodsToShow = paymentOptions(from: allowedPaymentMethods)
         paymentMethodsToShow = appendCreditCardPayment(paymentOptions: paymentMethodsToShow)
         paymentMethodsToShow = filterTrueMoney(paymentOptions: paymentMethodsToShow)
-        showingValues = paymentMethodsToShow
+        showingValues = paymentMethodsToShow.reorder(by: PaymentChooserOption.sorting)
 
         os_log("Payment Chooser: Showing options - %{private}@",
                log: uiLogObject,
