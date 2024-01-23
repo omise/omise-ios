@@ -57,7 +57,8 @@ class PaymentChooserViewControllerTests: XCTestCase {
         .duitNowQR,
         .duitNowOBW,
         .atome,
-        .payPay
+        .payPay,
+        .weChat
     ]
 
     func testTruemoveFiltering() {
@@ -86,5 +87,97 @@ class PaymentChooserViewControllerTests: XCTestCase {
         vc.allowedPaymentMethods = noTrueMoneyAndJumpApp
         XCTAssertFalse(vc.showingValues.contains(.truemoneyJumpApp))
         XCTAssertFalse(vc.showingValues.contains(.truemoney))
+    }
+
+    func testAlphabetSorting() {
+        let vc = PaymentChooserViewController()
+        vc.loadView()
+
+        let sorted: [PaymentChooserOption] = [
+            .alipay,
+            .alipayCN,
+            .alipayHK,
+            .atome,
+            .boost,
+            .citiPoints,
+            .conbini,
+            .creditCard,
+            .dana,
+            .duitNowOBW,
+            .duitNowQR,
+            .fpx,
+            .gcash,
+            .grabPay,
+            .grabPayRms,
+            .installment,
+            .internetBanking,
+            .kakaoPay,
+            .maybankQRPay,
+            .mobileBanking,
+            .netBanking,
+            .ocbcDigital,
+            .ocbcPao,
+            .payEasy,
+            .paynow,
+            .payPay,
+            .promptpay,
+            .rabbitLinepay,
+            .shopeePay,
+            .shopeePayJumpApp,
+            .tescoLotus,
+            .touchNGoAlipayPlus,  // TNG eWallet
+            .touchNGo,
+            .truemoneyJumpApp, // TrueMoney
+            .truemoney, // TrueMoney Wallet
+            .weChat
+        ]
+
+        XCTAssertEqual(PaymentChooserOption.alphabetical, sorted)
+    }
+
+    func testFilteringAndSorting() {
+        let filteredAndSorted: [PaymentChooserOption] = [
+            .creditCard,
+            .paynow,
+            .promptpay,
+            .truemoneyJumpApp, // TrueMoney
+            .mobileBanking,
+            .internetBanking,
+            .alipay,
+            .installment,
+            .ocbcDigital,
+            .ocbcPao,
+            .rabbitLinepay,
+            .shopeePay,
+            .shopeePayJumpApp,
+            .alipayCN,
+            .alipayHK,
+            .atome,
+            .boost,
+            .citiPoints,
+            .conbini,
+            .dana,
+            .duitNowOBW,
+            .duitNowQR,
+            .fpx,
+            .gcash,
+            .grabPay,
+            .grabPayRms,
+            .kakaoPay,
+            .maybankQRPay,
+            .netBanking,
+            .payEasy,
+            .payPay,
+            .tescoLotus,
+            .touchNGoAlipayPlus, // TNG eWallet
+            .touchNGo,
+            .weChat
+        ]
+
+        let vc = PaymentChooserViewController()
+        vc.loadView()
+
+        vc.allowedPaymentMethods = allSourceTypes
+        XCTAssertEqual(vc.showingValues, filteredAndSorted)
     }
 }
