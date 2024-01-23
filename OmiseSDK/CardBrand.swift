@@ -1,25 +1,25 @@
 import Foundation
 
 /// Brand of the Card Network
-public enum CardBrand: Int, CustomStringConvertible, Codable {
+public enum CardBrand: String, CustomStringConvertible, Codable {
     
     /// VISA card newtwork brand
-    case visa
+    case visa = "Visa"
     /// Master Card card newtwork brand
-    case masterCard
+    case masterCard = "MasterCard"
     /// jcb card newtwork brand
-    case jcb
+    case jcb = "JCB"
     /// AMEX card newtwork brand
-    case amex
+    case amex = "American Express"
     /// Diners card newtwork brand
-    case diners
+    case diners = "Diners Club"
     /// Laser card newtwork brand
-    case laser
+    case laser = "Laser"
     /// Maestro card newtwork brand
-    case maestro
+    case maestro = "Maestro"
     /// Discover card newtwork brand
-    case discover
-    
+    case discover = "Discover"
+
     public static let all: [CardBrand] = [
         visa,
         masterCard,
@@ -76,52 +76,6 @@ public enum CardBrand: Int, CustomStringConvertible, Codable {
     }
     
     public var description: String {
-        switch self {
-        case .visa:
-            return "Visa"
-        case .masterCard:
-            return "MasterCard"
-        case .jcb:
-            return "JCB"
-        case .amex:
-            return "American Express"
-        case .diners:
-            return "Diners Club"
-        case .discover:
-            return "Discover"
-        case .laser:
-            return "Laser"
-        case .maestro:
-            return "Maestro"
-        }
-    }
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(description)
-    }
-    
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        switch try container.decode(String.self) {
-        case "Visa":
-            self = .visa
-        case "MasterCard":
-            self = .masterCard
-        case "JCB":
-            self = .jcb
-        case "American Express":
-            self = .amex
-        case "Diners Club":
-            self = .diners
-        case "Discover":
-            self = .discover
-        case "Laser":
-            self = .laser
-        case "Maestro":
-            self = .maestro
-        default:
-            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid Card Brand value")
-        }
+        self.rawValue
     }
 }

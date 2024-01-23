@@ -2983,7 +2983,7 @@
         <!--FPX-->
         <scene sceneID="UVs-NR-lOg">
             <objects>
-                <viewController id="cWp-oe-wgJ" customClass="FPXFormViewController" sceneMemberID="viewController">
+                <viewController id="cWp-oe-wgJ" customClass="FPXFormViewController" customModule="OmiseSDK" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uFd-Vf-fSA"/>
                         <viewControllerLayoutGuide type="bottom" id="3Fw-T7-ntI"/>

@@ -56,7 +56,8 @@
       "card_brands": [
         "JCB",
         "Visa",
-        "MasterCard"
+        "MasterCard",
+        "UnionPay"
       ],
       "installment_terms": null
     },
