@@ -162,6 +162,8 @@ extension OMSSourceTypeValue {
             return "duitnow_obw"
         case .payPay:
             return "paypay"
+        case .weChat:
+            return "wechat_pay"
         default:
             return self.rawValue
         }

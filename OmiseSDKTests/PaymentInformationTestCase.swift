@@ -1107,5 +1107,30 @@ class PaymentInformationTestCase: XCTestCase {
         }
     }
 
+    func testEncodeWeChatSourceParameter() throws {
+        let encoder = PaymentInformationTestCase.makeJSONEncoder()
+
+        do {
+            let sourceParameter = Source.CreateParameter(paymentInformation: .weChat,
+                                                         amount: 10_000_00,
+                                                         currency: .thb)
+            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
+            XCTAssertEqual(
+                """
+                {
+                  "amount" : 1000000,
+                  "currency" : "THB",
+                  "email" : null,
+                  "items" : null,
+                  "name" : null,
+                  "phone_number" : null,
+                  "platform_type" : "IOS",
+                  "shipping" : null,
+                  "type" : "wechat_pay"
+                }
+                """, encodedJSONString)
+        }
+    }
+
 }
 // swiftlint:enable function_body_length

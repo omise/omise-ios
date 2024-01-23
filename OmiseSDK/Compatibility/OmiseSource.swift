@@ -111,6 +111,9 @@ public class __SourcePaymentInformation: NSObject {
     /// Payment Information for a PayPay Payment
     public static let paypayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.payPay)!
 
+    /// Payment Information for a PayPay Payment
+    public static let weChatPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.weChat)!
+
     /// Payment Information for an Truemoney JumpApp
     public static let truemoneyJumpAppPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.trueMoneyJumpApp)!
 }
@@ -684,7 +687,10 @@ extension __SourcePaymentInformation {
             
         case .duitNowOBW(let duitNowOBW):
             return __SourceDuitNowOBWPayment(bank: duitNowOBW.bank)
-            
+
+        case .weChat:
+            return __SourcePaymentInformation.weChatPayment
+
         case .other(type: let type, parameters: let parameters):
             return __CustomSourcePayment(customType: type, parameters: parameters)
         }

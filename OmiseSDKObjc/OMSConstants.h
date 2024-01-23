@@ -50,6 +50,7 @@ extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueDuitNowQR;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueDuitNowOBW;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueAtome;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValuePayPay;
+extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueWeChat;
 
 
 typedef NSString * OMSSupportedCurrencyCode NS_EXTENSIBLE_STRING_ENUM;
