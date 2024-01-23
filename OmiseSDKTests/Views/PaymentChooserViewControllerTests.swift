@@ -57,7 +57,8 @@ class PaymentChooserViewControllerTests: XCTestCase {
         .duitNowQR,
         .duitNowOBW,
         .atome,
-        .payPay
+        .payPay,
+        .weChat
     ]
 
     func testTrueMoveFiltering() {
@@ -127,7 +128,8 @@ class PaymentChooserViewControllerTests: XCTestCase {
             .touchNGoAlipayPlus,  // TNG eWallet
             .touchNGo,
             .truemoneyJumpApp, // TrueMoney
-            .truemoney // TrueMoney Wallet
+            .truemoney, // TrueMoney Wallet
+            .weChat
         ]
 
         XCTAssertEqual(PaymentChooserOption.alphabetical, sorted)
@@ -168,7 +170,8 @@ class PaymentChooserViewControllerTests: XCTestCase {
             .payPay,
             .tescoLotus,
             .touchNGoAlipayPlus, // TNG eWallet
-            .touchNGo
+            .touchNGo,
+            .weChat
         ]
 
         let vc = PaymentChooserViewController()
