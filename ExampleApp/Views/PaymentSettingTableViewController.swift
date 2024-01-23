@@ -129,6 +129,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var duitNowOBWPaymentCell: UITableViewCell!
     @IBOutlet private var useCapabilityAPIValuesCell: UITableViewCell!
     @IBOutlet private var useSpecifiedValuesCell: UITableViewCell!
+    @IBOutlet private var weChatPaymentCell: UITableViewCell!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -353,6 +354,8 @@ extension PaymentSettingTableViewController {
             return .duitNowQR
         case duitNowOBWPaymentCell:
             return .duitNowOBW
+        case weChatPaymentCell:
+            return .weChat
         default:
             return nil
         }
@@ -447,6 +450,8 @@ extension PaymentSettingTableViewController {
             return duitNowQRPaymentCell
         case .duitNowOBW:
             return duitNowOBWPaymentCell
+        case .weChat:
+            return weChatPaymentCell
         default:
             return nil
         }

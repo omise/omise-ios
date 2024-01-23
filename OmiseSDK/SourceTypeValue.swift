@@ -56,6 +56,7 @@ public enum SourceTypeValue: String {
     case duitNowOBW = "duitnow_obw"
     case atome = "atome"
     case payPay = "paypay"
+    case weChat = "wechat_pay"
 
     public init?(_ rawValue: String) {
         if let value = SourceTypeValue(rawValue: rawValue) {

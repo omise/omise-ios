@@ -1088,6 +1088,23 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="J6s-Yu-Oyu" style="IBUITableViewCellStyleDefault" id="FdW-Ao-Vph">
+                                        <rect key="frame" x="0.0" y="2555.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FdW-Ao-Vph" id="zDH-ZK-krO">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="WeChat Pay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="J6s-Yu-Oyu">
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -1161,6 +1178,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                         <outlet property="usdCurrencyCell" destination="3cT-5C-gGt" id="Lfe-4W-4xU"/>
                         <outlet property="useCapabilityAPIValuesCell" destination="rjA-xT-q8j" id="rH6-Jc-WqJ"/>
                         <outlet property="useSpecifiedValuesCell" destination="y0a-v5-qda" id="C9C-N9-Mfc"/>
+                        <outlet property="weChatPaymentCell" destination="FdW-Ao-Vph" id="a2u-XY-P45"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FYw-Qu-fTO" userLabel="First Responder" sceneMemberID="firstResponder"/>
