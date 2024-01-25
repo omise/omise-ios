@@ -131,7 +131,10 @@ public class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPaym
         __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.duitNowOBW)
     
     static let payPaySourceBackendPayment =
-        __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.payPay)
+    __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.payPay)
+
+    static let weChatSourceBackendPayment =
+    __OmiseCapabilitySourceBackendPayment(sourceType: OMSSourceTypeValue.weChat)
 
     static func makeInternetBankingSourceBackendPayment(
         bank: PaymentInformation.InternetBanking
@@ -235,6 +238,8 @@ extension __OmiseCapabilityBackendPayment {
             return __OmiseCapabilitySourceBackendPayment.duitNowOBWSourceBackendPayment
         case .payPay:
             return __OmiseCapabilitySourceBackendPayment.payPaySourceBackendPayment
+        case .weChat:
+            return __OmiseCapabilitySourceBackendPayment.weChatSourceBackendPayment
         case .unknownSource(let type, let configurations):
             return __OmiseCapabilityUnknownSourceBackendPayment(sourceType: type, parameters: configurations)
         }
