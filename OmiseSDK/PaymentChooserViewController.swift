@@ -538,17 +538,17 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             case .truemoneyJumpApp:
                 return SourceTypeValue.trueMoneyJumpApp
             case .points(let points):
-                return SourceTypeValue(points.type)
+                return SourceTypeValue(rawValue: points.type)
             case .installment(let brand, availableNumberOfTerms: _):
-                return SourceTypeValue(brand.type)
+                return SourceTypeValue(rawValue: brand.type)
             case .internetBanking(let bank):
-                return SourceTypeValue(bank.type)
+                return SourceTypeValue(rawValue: bank.type)
             case .billPayment(let billPayment):
-                return SourceTypeValue(billPayment.type)
+                return SourceTypeValue(rawValue: billPayment.type)
             case .eContext:
                 return SourceTypeValue.eContext
             case .mobileBanking(let bank):
-                return SourceTypeValue(bank.type)
+                return SourceTypeValue(rawValue: bank.type)
             case .fpx:
                 return SourceTypeValue.fpx
             case .rabbitLinepay:

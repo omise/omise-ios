@@ -24,7 +24,7 @@ public struct Capability: Object {
 extension Capability {
     public static func ~= (lhs: Capability, rhs: CreateSourceParameter) -> Bool {
         func backend(from capability: Capability, for payment: PaymentInformation) -> Backend? {
-            if let paymentSourceType = SourceTypeValue(payment.sourceType) {
+            if let paymentSourceType = SourceTypeValue(rawValue: payment.sourceType) {
                 return capability[paymentSourceType]
             } else {
                 return nil
@@ -373,7 +373,7 @@ extension Capability.Backend {
             case creditCardBackendTypeValue:
                 self = .card
             case let value:
-                if let sourceType = SourceTypeValue(value) {
+                if let sourceType = SourceTypeValue(rawValue: value) {
                     self = .source(sourceType)
                 } else {
                     self = .unknown(sourceType: value)
@@ -397,7 +397,7 @@ extension Capability.Backend {
         }
 
         init?(sourceType string: String) {
-            if let sourceType = SourceTypeValue(string) {
+            if let sourceType = SourceTypeValue(rawValue: string) {
                 self = .source(sourceType)
             } else {
                 return nil

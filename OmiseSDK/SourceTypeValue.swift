@@ -58,11 +58,11 @@ public enum SourceTypeValue: String {
     case payPay = "paypay"
     case weChat = "wechat_pay"
 
-    public init?(_ rawValue: String) {
-        if let value = SourceTypeValue(rawValue: rawValue) {
-            self = value
-        } else {
-            return nil
-        }
-    }
+//    public init?(_ rawValue: String) {
+//        if let value = SourceTypeValue(rawValue: rawValue) {
+//            self = value
+//        } else {
+//            return nil
+//        }
+//    }
 }
