@@ -93,7 +93,6 @@ public enum PaymentInformation: Codable, Equatable {
             case ktc
             case kBank
             case scb
-            case citi
             case ttb
             case uob
             case other(String)
@@ -124,8 +123,6 @@ public enum PaymentInformation: Codable, Equatable {
                 return IndexSet([ 3, 4, 6, 10 ])
             case .scb:
                 return IndexSet([ 3, 4, 6, 9, 10 ])
-            case .citi:
-                return IndexSet([ 4, 6, 9, 12, 15, 17 ])
             case .ttb:
                 return IndexSet([ 3, 4, 6, 10, 12 ])
             case .uob:
@@ -755,8 +752,6 @@ extension PaymentInformation.Installment {
             return OMSSourceTypeValue.installmentKBank.rawValue
         case .scb:
             return OMSSourceTypeValue.installmentSCB.rawValue
-        case .citi:
-            return OMSSourceTypeValue.installmentCiti.rawValue
         case .ttb:
             return OMSSourceTypeValue.installmentTTB.rawValue
         case .uob:
@@ -799,8 +794,6 @@ extension PaymentInformation.Installment {
             brand = .kBank
         case "scb":
             brand = .scb
-        case "citi":
-            brand = .citi
         case "ttb":
             brand = .ttb
         case "uob":
@@ -843,8 +836,6 @@ extension PaymentInformation.Installment.Brand: CaseIterable, CustomStringConver
             return "K-Bank"
         case .scb:
             return "SCB"
-        case .citi:
-            return "Citi"
         case .ttb:
             return "TTB"
         case .uob:
@@ -870,8 +861,6 @@ extension PaymentInformation.Installment.Brand: CaseIterable, CustomStringConver
             return OMSSourceTypeValue.installmentKBank.rawValue
         case .scb:
             return OMSSourceTypeValue.installmentSCB.rawValue
-        case .citi:
-            return OMSSourceTypeValue.installmentCiti.rawValue
         case .ttb:
             return OMSSourceTypeValue.installmentTTB.rawValue
         case .uob:

@@ -264,13 +264,6 @@ public class __SourceInstallmentsPayment: __SourcePaymentInformation {
     public static func installmentSCBPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
         return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentSCB, numberOfTerms: numberOfTerms)!
     }
-    /// Create a Citi Installment payment with the given number of terms
-    ///
-    /// - Parameter numberOfTerms: Number of plan of the installment plan
-    /// - Returns: Citi Installment payment with the specified number of terms
-    public static func installmentCitiPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
-        return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentCiti, numberOfTerms: numberOfTerms)!
-    }
     /// Create a TTB Installment payment with the given number of terms
     ///
     /// - Parameter numberOfTerms: Number of plan of the installment plan
@@ -478,8 +471,6 @@ extension PaymentInformation {
                 brand = .kBank
             case .installmentSCB:
                 brand = .scb
-            case .installmentCiti:
-                brand = .citi
             case .installmentTTB:
                 brand = .ttb
             case .installmentUOB:
@@ -599,8 +590,6 @@ extension __SourcePaymentInformation {
                 return __SourceInstallmentsPayment.installmentKBankPayment(withNumberOfTerms: installment.numberOfTerms)
             case .scb:
                 return __SourceInstallmentsPayment.installmentSCBPayment(withNumberOfTerms: installment.numberOfTerms)
-            case .citi:
-                return __SourceInstallmentsPayment.installmentCitiPayment(withNumberOfTerms: installment.numberOfTerms)
             case .ttb:
                 return __SourceInstallmentsPayment.installmentTTBPayment(withNumberOfTerms: installment.numberOfTerms)
             case .uob:

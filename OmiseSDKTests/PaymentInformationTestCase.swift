@@ -184,30 +184,6 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let installment = PaymentInformation.Installment(brand: .citi, numberOfTerms: 6)
-            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
-                                                         amount: 30_00,
-                                                         currency: .thb)
-            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
-
-            XCTAssertEqual(
-                """
-                {
-                  "amount" : 3000,
-                  "currency" : "THB",
-                  "email" : null,
-                  "installment_term" : 6,
-                  "items" : null,
-                  "name" : null,
-                  "phone_number" : null,
-                  "platform_type" : "IOS",
-                  "shipping" : null,
-                  "type" : "installment_citi"
-                }
-                """, encodedJSONString)
-        }
-
-        do {
             let installment = PaymentInformation.Installment(brand: .ttb, numberOfTerms: 6)
             let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 30_00,
@@ -347,28 +323,6 @@ class PaymentInformationTestCase: XCTestCase {
                   "platform_type" : "IOS",
                   "shipping" : null,
                   "type" : "mobile_banking_kbank"
-                }
-                """, encodedJSONString)
-        }
-
-        do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: .ocbcPao,
-                                                         amount: 10_000_00,
-                                                         currency: .sgd)
-            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
-
-            XCTAssertEqual(
-                """
-                {
-                  "amount" : 1000000,
-                  "currency" : "SGD",
-                  "email" : null,
-                  "items" : null,
-                  "name" : null,
-                  "phone_number" : null,
-                  "platform_type" : "IOS",
-                  "shipping" : null,
-                  "type" : "mobile_banking_ocbc_pao"
                 }
                 """, encodedJSONString)
         }

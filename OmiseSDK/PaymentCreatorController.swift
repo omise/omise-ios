@@ -528,7 +528,6 @@ extension PaymentCreatorController {
         .installmentKTC,
         .installmentKBank,
         .installmentSCB,
-        .installmentCiti,
         .installmentTTB,
         .installmentUOB,
         .promptPay,
@@ -574,7 +573,6 @@ extension PaymentCreatorController {
         .installmentKTC,
         .installmentKBank,
         .installmentSCB,
-        .installmentCiti,
         .installmentTTB,
         .installmentUOB
     ]

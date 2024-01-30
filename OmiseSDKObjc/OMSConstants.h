@@ -24,7 +24,6 @@ extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentMBB;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentKTC;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentKBank;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentSCB;
-extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentCiti;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentTTB;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentUOB;
 extern OMSSourceTypeValue const _Nonnull OMSSourceTypeValueKakaoPay;
