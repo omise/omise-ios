@@ -274,9 +274,6 @@ public enum PaymentInformation: Codable, Equatable {
     // Rabbit LINE Pay
     case rabbitLinepay
     
-    /// OCBC Pay Anyone Payment Source
-    case ocbcPao
-
     /// OCBC Digital Payment Source
     case ocbcDigital
 
@@ -396,8 +393,6 @@ public enum PaymentInformation: Codable, Equatable {
             self = .truemoney(try TrueMoney(from: decoder))
         case OMSSourceTypeValue.rabbitLinepay.rawValue:
             self = .rabbitLinepay
-        case OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue:
-            self = .ocbcPao
         case OMSSourceTypeValue.grabPay.rawValue:
             self = .grabPay
         case OMSSourceTypeValue.boost.rawValue:
@@ -497,9 +492,6 @@ public enum PaymentInformation: Codable, Equatable {
         case .rabbitLinepay:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.rabbitLinepay.rawValue, forKey: .type)
-        case .ocbcPao:
-            var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue, forKey: .type)
         case .ocbcDigital:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.mobileBankingOCBC.rawValue, forKey: .type)
@@ -562,8 +554,6 @@ public enum PaymentInformation: Codable, Equatable {
         case (.promptpay, .promptpay), (.paynow, .paynow):
             return true
         case (.rabbitLinepay, .rabbitLinepay):
-            return true
-        case (.ocbcPao, .ocbcPao):
             return true
         case (.grabPay, .grabPay):
             return true
@@ -657,8 +647,6 @@ extension PaymentInformation {
             return OMSSourceTypeValue.trueMoneyJumpApp.rawValue
         case .rabbitLinepay:
             return OMSSourceTypeValue.rabbitLinepay.rawValue
-        case .ocbcPao:
-            return OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue
         case .ocbcDigital:
             return OMSSourceTypeValue.mobileBankingOCBC.rawValue
         case .grabPay:

@@ -142,8 +142,6 @@ extension OMSSourceTypeValue {
             return "touch_n_go"
         case .rabbitLinepay:
             return "rabbit_linepay"
-        case .mobileBankingOCBCPAO:
-            return "mobile_banking_ocbc_pao"
         case .mobileBankingOCBC:
             return "mobile_banking_ocbc"
         case .grabPay, .grabPayRms:

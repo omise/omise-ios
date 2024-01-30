@@ -120,7 +120,6 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var pointsCitiCell: UITableViewCell!
     @IBOutlet private var fpxCell: UITableViewCell!
     @IBOutlet private var rabbitLinepayCell: UITableViewCell!
-    @IBOutlet private var OCBCPAOPaymentCell: UITableViewCell!
     @IBOutlet private var OCBCDigitalPaymentCell: UITableViewCell!
     @IBOutlet private var grabPayPaymentCell: UITableViewCell!
     @IBOutlet private var boostPaymentCell: UITableViewCell!
@@ -339,8 +338,6 @@ extension PaymentSettingTableViewController {
             return .fpx
         case rabbitLinepayCell:
             return .rabbitLinepay
-        case OCBCPAOPaymentCell:
-            return .mobileBankingOCBCPAO
         case OCBCDigitalPaymentCell:
             return .mobileBankingOCBC
         case grabPayPaymentCell:
@@ -409,8 +406,6 @@ extension PaymentSettingTableViewController {
             return installmentUOBPaymentCell
         case .mobileBankingSCB:
             return mobileBankingSCBPaymentCell
-        case .mobileBankingOCBCPAO:
-            return OCBCPAOPaymentCell
         case .mobileBankingOCBC:
             return OCBCDigitalPaymentCell
         case .mobileBankingKBank:

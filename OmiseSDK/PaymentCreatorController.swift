@@ -544,7 +544,6 @@ extension PaymentCreatorController {
 
     public static let singaporeDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
         .payNow,
-        .mobileBankingOCBCPAO,
         .shopeePayJumpApp
     ]
 

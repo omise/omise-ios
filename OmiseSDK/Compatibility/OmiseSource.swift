@@ -81,9 +81,6 @@ public class __SourcePaymentInformation: NSObject {
     /// Payment Information for an Rabbit LINE Pay Payment
     public static let rabbitLinepayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.rabbitLinepay)!
     
-    /// Payment Information for an OCBC Pay Anyone
-    public static let ocbcPaoPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.mobileBankingOCBCPAO)!
-
     /// Payment Information for an OCBC Digital
     public static let ocbcDigitalPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.mobileBankingOCBC)!
 
@@ -624,9 +621,6 @@ extension __SourcePaymentInformation {
             
         case .rabbitLinepay:
             return __SourcePaymentInformation.rabbitLinepayPayment
-
-        case .ocbcPao:
-            return __SourcePaymentInformation.ocbcPaoPayment
 
         case .ocbcDigital:
             return __SourcePaymentInformation.ocbcDigitalPayment
