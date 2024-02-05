@@ -352,28 +352,6 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let sourceParameter = Source.CreateParameter(paymentInformation: .ocbcPao,
-                                                         amount: 10_000_00,
-                                                         currency: .sgd)
-            let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
-
-            XCTAssertEqual(
-                """
-                {
-                  "amount" : 1000000,
-                  "currency" : "SGD",
-                  "email" : null,
-                  "items" : null,
-                  "name" : null,
-                  "phone_number" : null,
-                  "platform_type" : "IOS",
-                  "shipping" : null,
-                  "type" : "mobile_banking_ocbc_pao"
-                }
-                """, encodedJSONString)
-        }
-
-        do {
             let sourceParameter = Source.CreateParameter(paymentInformation: .ocbcDigital,
                                                          amount: 10_000_00,
                                                          currency: .sgd)

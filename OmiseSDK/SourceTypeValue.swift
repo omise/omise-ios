@@ -12,7 +12,6 @@ public enum SourceTypeValue: String {
     case internetBankingBAY = "internet_banking_bay"
     case internetBankingBBL = "internet_banking_bbl"
     case mobileBankingSCB = "mobile_banking_scb"
-    case mobileBankingOCBCPAO = "mobile_banking_ocbc_pao"
     case mobileBankingOCBC = "mobile_banking_ocbc"
     case mobileBankingKBank = "mobile_banking_kbank"
     case mobileBankingBAY = "mobile_banking_bay"

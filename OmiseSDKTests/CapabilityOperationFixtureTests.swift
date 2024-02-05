@@ -57,7 +57,6 @@ class CapabilityOperationFixtureTests: XCTestCase {
             validateCapabilitySupportsCurrency(capability, sourceType: .trueMoneyJumpApp, currencies: [.thb])
             validateCapabilitySupportsCurrency(capability, sourceType: .pointsCiti, currencies: [.thb])
             validateCapabilitySupportsCurrency(capability, sourceType: .rabbitLinepay, currencies: [.thb])
-            validateCapabilitySupportsCurrency(capability, sourceType: .mobileBankingOCBCPAO, currencies: [.sgd])
             validateCapabilitySupportsCurrency(capability, sourceType: .grabPay, currencies: [.sgd, .myr])
             validateCapabilitySupportsCurrency(capability, sourceType: .payPay, currencies: [.jpy])
         } catch {
