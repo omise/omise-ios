@@ -4,7 +4,6 @@
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInternetBankingBAY = @"internet_banking_bay";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInternetBankingBBL = @"internet_banking_bbl";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingSCB = @"mobile_banking_scb";
-OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingOCBCPAO = @"mobile_banking_ocbc_pao";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingOCBC = @"mobile_banking_ocbc";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingKBank = @"mobile_banking_kbank";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueMobileBankingBAY = @"mobile_banking_bay";
@@ -27,7 +26,6 @@ OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentMBB = @"installme
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentKTC = @"installment_ktc";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentKBank = @"installment_kbank";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentSCB = @"installment_scb";
-OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentCiti = @"installment_citi";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentTTB = @"installment_ttb";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueInstallmentUOB = @"installment_uob";
 OMSSourceTypeValue const _Nonnull OMSSourceTypeValueEContext = @"econtext";

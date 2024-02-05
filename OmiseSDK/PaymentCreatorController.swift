@@ -528,7 +528,6 @@ extension PaymentCreatorController {
         .installmentKTC,
         .installmentKBank,
         .installmentSCB,
-        .installmentCiti,
         .installmentTTB,
         .installmentUOB,
         .promptPay,
@@ -544,7 +543,6 @@ extension PaymentCreatorController {
 
     public static let singaporeDefaultAvailableSourceMethods: [OMSSourceTypeValue] = [
         .payNow,
-        .mobileBankingOCBCPAO,
         .shopeePayJumpApp
     ]
 
@@ -575,7 +573,6 @@ extension PaymentCreatorController {
         .installmentKTC,
         .installmentKBank,
         .installmentSCB,
-        .installmentCiti,
         .installmentTTB,
         .installmentUOB
     ]

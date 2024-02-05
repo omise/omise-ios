@@ -93,7 +93,6 @@ public enum PaymentInformation: Codable, Equatable {
             case ktc
             case kBank
             case scb
-            case citi
             case ttb
             case uob
             case other(String)
@@ -124,8 +123,6 @@ public enum PaymentInformation: Codable, Equatable {
                 return IndexSet([ 3, 4, 6, 10 ])
             case .scb:
                 return IndexSet([ 3, 4, 6, 9, 10 ])
-            case .citi:
-                return IndexSet([ 4, 6, 9, 12, 15, 17 ])
             case .ttb:
                 return IndexSet([ 3, 4, 6, 10, 12 ])
             case .uob:
@@ -274,9 +271,6 @@ public enum PaymentInformation: Codable, Equatable {
     // Rabbit LINE Pay
     case rabbitLinepay
     
-    /// OCBC Pay Anyone Payment Source
-    case ocbcPao
-
     /// OCBC Digital Payment Source
     case ocbcDigital
 
@@ -396,8 +390,6 @@ public enum PaymentInformation: Codable, Equatable {
             self = .truemoney(try TrueMoney(from: decoder))
         case OMSSourceTypeValue.rabbitLinepay.rawValue:
             self = .rabbitLinepay
-        case OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue:
-            self = .ocbcPao
         case OMSSourceTypeValue.grabPay.rawValue:
             self = .grabPay
         case OMSSourceTypeValue.boost.rawValue:
@@ -497,9 +489,6 @@ public enum PaymentInformation: Codable, Equatable {
         case .rabbitLinepay:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.rabbitLinepay.rawValue, forKey: .type)
-        case .ocbcPao:
-            var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue, forKey: .type)
         case .ocbcDigital:
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(OMSSourceTypeValue.mobileBankingOCBC.rawValue, forKey: .type)
@@ -562,8 +551,6 @@ public enum PaymentInformation: Codable, Equatable {
         case (.promptpay, .promptpay), (.paynow, .paynow):
             return true
         case (.rabbitLinepay, .rabbitLinepay):
-            return true
-        case (.ocbcPao, .ocbcPao):
             return true
         case (.grabPay, .grabPay):
             return true
@@ -657,8 +644,6 @@ extension PaymentInformation {
             return OMSSourceTypeValue.trueMoneyJumpApp.rawValue
         case .rabbitLinepay:
             return OMSSourceTypeValue.rabbitLinepay.rawValue
-        case .ocbcPao:
-            return OMSSourceTypeValue.mobileBankingOCBCPAO.rawValue
         case .ocbcDigital:
             return OMSSourceTypeValue.mobileBankingOCBC.rawValue
         case .grabPay:
@@ -767,8 +752,6 @@ extension PaymentInformation.Installment {
             return OMSSourceTypeValue.installmentKBank.rawValue
         case .scb:
             return OMSSourceTypeValue.installmentSCB.rawValue
-        case .citi:
-            return OMSSourceTypeValue.installmentCiti.rawValue
         case .ttb:
             return OMSSourceTypeValue.installmentTTB.rawValue
         case .uob:
@@ -811,8 +794,6 @@ extension PaymentInformation.Installment {
             brand = .kBank
         case "scb":
             brand = .scb
-        case "citi":
-            brand = .citi
         case "ttb":
             brand = .ttb
         case "uob":
@@ -855,8 +836,6 @@ extension PaymentInformation.Installment.Brand: CaseIterable, CustomStringConver
             return "K-Bank"
         case .scb:
             return "SCB"
-        case .citi:
-            return "Citi"
         case .ttb:
             return "TTB"
         case .uob:
@@ -882,8 +861,6 @@ extension PaymentInformation.Installment.Brand: CaseIterable, CustomStringConver
             return OMSSourceTypeValue.installmentKBank.rawValue
         case .scb:
             return OMSSourceTypeValue.installmentSCB.rawValue
-        case .citi:
-            return OMSSourceTypeValue.installmentCiti.rawValue
         case .ttb:
             return OMSSourceTypeValue.installmentTTB.rawValue
         case .uob:

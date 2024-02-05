@@ -81,9 +81,6 @@ public class __SourcePaymentInformation: NSObject {
     /// Payment Information for an Rabbit LINE Pay Payment
     public static let rabbitLinepayPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.rabbitLinepay)!
     
-    /// Payment Information for an OCBC Pay Anyone
-    public static let ocbcPaoPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.mobileBankingOCBCPAO)!
-
     /// Payment Information for an OCBC Digital
     public static let ocbcDigitalPayment = __SourcePaymentInformation(type: OMSSourceTypeValue.mobileBankingOCBC)!
 
@@ -266,13 +263,6 @@ public class __SourceInstallmentsPayment: __SourcePaymentInformation {
     /// - Returns: SCB Installment payment with the specified number of terms
     public static func installmentSCBPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
         return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentSCB, numberOfTerms: numberOfTerms)!
-    }
-    /// Create a Citi Installment payment with the given number of terms
-    ///
-    /// - Parameter numberOfTerms: Number of plan of the installment plan
-    /// - Returns: Citi Installment payment with the specified number of terms
-    public static func installmentCitiPayment(withNumberOfTerms numberOfTerms: Int) -> __SourceInstallmentsPayment {
-        return __SourceInstallmentsPayment(type: OMSSourceTypeValue.installmentCiti, numberOfTerms: numberOfTerms)!
     }
     /// Create a TTB Installment payment with the given number of terms
     ///
@@ -481,8 +471,6 @@ extension PaymentInformation {
                 brand = .kBank
             case .installmentSCB:
                 brand = .scb
-            case .installmentCiti:
-                brand = .citi
             case .installmentTTB:
                 brand = .ttb
             case .installmentUOB:
@@ -602,8 +590,6 @@ extension __SourcePaymentInformation {
                 return __SourceInstallmentsPayment.installmentKBankPayment(withNumberOfTerms: installment.numberOfTerms)
             case .scb:
                 return __SourceInstallmentsPayment.installmentSCBPayment(withNumberOfTerms: installment.numberOfTerms)
-            case .citi:
-                return __SourceInstallmentsPayment.installmentCitiPayment(withNumberOfTerms: installment.numberOfTerms)
             case .ttb:
                 return __SourceInstallmentsPayment.installmentTTBPayment(withNumberOfTerms: installment.numberOfTerms)
             case .uob:
@@ -624,9 +610,6 @@ extension __SourcePaymentInformation {
             
         case .rabbitLinepay:
             return __SourcePaymentInformation.rabbitLinepayPayment
-
-        case .ocbcPao:
-            return __SourcePaymentInformation.ocbcPaoPayment
 
         case .ocbcDigital:
             return __SourcePaymentInformation.ocbcDigitalPayment
