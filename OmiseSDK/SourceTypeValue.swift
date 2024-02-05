@@ -34,7 +34,6 @@ public enum SourceTypeValue: String {
     case installmentKTC = "installment_ktc"
     case installmentKBank = "installment_kbank"
     case installmentSCB = "installment_scb"
-    case installmentCiti = "installment_citi"
     case installmentTTB = "installment_ttb"
     case installmentUOB = "installment_uob"
     case eContext = "econtext"

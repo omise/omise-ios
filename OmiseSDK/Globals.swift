@@ -114,7 +114,7 @@ extension SourceTypeValue {
         case .barcodeAlipay:
             return "barcode"
         case .installmentBAY, .installmentMBB, .installmentFirstChoice, .installmentBBL,
-                .installmentKTC, .installmentKBank, .installmentSCB, .installmentCiti, .installmentTTB, .installmentUOB:
+                .installmentKTC, .installmentKBank, .installmentSCB, .installmentTTB, .installmentUOB:
             return "installment"
         case .eContext:
             return "econtext"

@@ -103,7 +103,6 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var installmentKTCPaymentCell: UITableViewCell!
     @IBOutlet private var installmentKBankPaymentCell: UITableViewCell!
     @IBOutlet private var installmentSCBPaymentCell: UITableViewCell!
-    @IBOutlet private var installmentCitiPaymentCell: UITableViewCell!
     @IBOutlet private var installmentTTBPaymentCell: UITableViewCell!
     @IBOutlet private var installmentUOBPaymentCell: UITableViewCell!
     @IBOutlet private var mobileBankingSCBPaymentCell: UITableViewCell!
@@ -303,8 +302,6 @@ extension PaymentSettingTableViewController {
             return .installmentKBank
         case installmentSCBPaymentCell:
             return .installmentSCB
-        case installmentCitiPaymentCell:
-            return .installmentCiti
         case installmentTTBPaymentCell:
             return .installmentTTB
         case installmentUOBPaymentCell:
@@ -397,8 +394,6 @@ extension PaymentSettingTableViewController {
             return installmentKBankPaymentCell
         case .installmentSCB:
             return installmentSCBPaymentCell
-        case .installmentCiti:
-            return installmentCitiPaymentCell
         case .installmentTTB:
             return installmentTTBPaymentCell
         case .installmentUOB:

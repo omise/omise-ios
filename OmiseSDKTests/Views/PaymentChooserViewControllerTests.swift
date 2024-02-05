@@ -32,7 +32,6 @@ class PaymentChooserViewControllerTests: XCTestCase {
         .installmentKTC,
         .installmentKBank,
         .installmentSCB,
-        .installmentCiti,
         .installmentTTB,
         .installmentUOB,
         .kakaoPay,
