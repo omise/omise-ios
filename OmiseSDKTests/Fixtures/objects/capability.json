@@ -12,7 +12,6 @@
     "mufg",
     "tmb",
     "scb",
-    "citi",
     "smbc",
     "sc",
     "cimb",
@@ -154,25 +153,6 @@
         8,
         9,
         10
-      ]
-    },
-    {
-      "object": "payment_method",
-      "name": "installment_citi",
-      "currencies": [
-        "THB"
-      ],
-      "card_brands": null,
-      "installment_terms": [
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10
-      ],
-      "banks": [
       ]
     },
     {
@@ -366,16 +346,6 @@
       ],
       "card_brands": null,
       "installment_terms": null
-    },
-    {
-      "object": "payment_method",
-      "name": "mobile_banking_ocbc_pao",
-      "currencies": [
-          "SGD"
-      ],
-      "card_brands": null,
-      "installment_terms": null,
-      "banks": []
     },
     {
       "object": "payment_method",
