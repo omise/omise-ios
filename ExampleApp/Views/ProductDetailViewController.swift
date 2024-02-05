@@ -126,8 +126,8 @@ class ProductDetailViewController: BaseViewController {
             guard let textField = alertController.textFields?.first,
                   let text = textField.text,
                   let url = URL(string: text),
-                  let expectedReturnURL = URLComponents(string: "http://www.example.com/orders") else { return }
-            
+                  let expectedReturnURL = URLComponents(string: "https://opn.ooo/") else { return }
+
             let handlerController =
                 AuthorizingPaymentViewController
                     .makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(
