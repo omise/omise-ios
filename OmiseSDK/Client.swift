@@ -398,7 +398,7 @@ extension Client {
 
 // MARK: - Constants
 extension Client {
-    static let sdkVersion: String = "4.27.0"
+    static let sdkVersion: String = "4.27.1"
 
     static let currentPlatform: String = ProcessInfo.processInfo.operatingSystemVersionString
     static let currentDevice: String = UIDevice.current.model
