@@ -18,7 +18,7 @@ class CapabilityOperationFixtureTests: XCTestCase {
             let capabilityData = try XCTestCase.fixturesData(forFilename: "capability")
             let capability = try decoder.decode(Capability.self, from: capabilityData)
 
-            XCTAssertEqual(capability.supportedBackends.count, 35)
+            XCTAssertEqual(capability.supportedBackends.count, 33)
 
             if let creditCardBackend = capability.creditCardBackend {
                 XCTAssertEqual(creditCardBackend.payment, .card([]))
@@ -57,7 +57,6 @@ class CapabilityOperationFixtureTests: XCTestCase {
             validateCapabilitySupportsCurrency(capability, sourceType: .trueMoneyJumpApp, currencies: [.thb])
             validateCapabilitySupportsCurrency(capability, sourceType: .pointsCiti, currencies: [.thb])
             validateCapabilitySupportsCurrency(capability, sourceType: .rabbitLinepay, currencies: [.thb])
-            validateCapabilitySupportsCurrency(capability, sourceType: .mobileBankingOCBCPAO, currencies: [.sgd])
             validateCapabilitySupportsCurrency(capability, sourceType: .grabPay, currencies: [.sgd, .myr])
             validateCapabilitySupportsCurrency(capability, sourceType: .payPay, currencies: [.jpy])
         } catch {

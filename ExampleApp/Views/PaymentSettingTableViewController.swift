@@ -103,7 +103,6 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var installmentKTCPaymentCell: UITableViewCell!
     @IBOutlet private var installmentKBankPaymentCell: UITableViewCell!
     @IBOutlet private var installmentSCBPaymentCell: UITableViewCell!
-    @IBOutlet private var installmentCitiPaymentCell: UITableViewCell!
     @IBOutlet private var installmentTTBPaymentCell: UITableViewCell!
     @IBOutlet private var installmentUOBPaymentCell: UITableViewCell!
     @IBOutlet private var mobileBankingSCBPaymentCell: UITableViewCell!
@@ -119,7 +118,6 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var pointsCitiCell: UITableViewCell!
     @IBOutlet private var fpxCell: UITableViewCell!
     @IBOutlet private var rabbitLinepayCell: UITableViewCell!
-    @IBOutlet private var OCBCPAOPaymentCell: UITableViewCell!
     @IBOutlet private var OCBCDigitalPaymentCell: UITableViewCell!
     @IBOutlet private var grabPayPaymentCell: UITableViewCell!
     @IBOutlet private var boostPaymentCell: UITableViewCell!
@@ -304,8 +302,6 @@ extension PaymentSettingTableViewController {
             return .installmentKBank
         case installmentSCBPaymentCell:
             return .installmentSCB
-        case installmentCitiPaymentCell:
-            return .installmentCiti
         case installmentTTBPaymentCell:
             return .installmentTTB
         case installmentUOBPaymentCell:
@@ -338,8 +334,6 @@ extension PaymentSettingTableViewController {
             return .fpx
         case rabbitLinepayCell:
             return .rabbitLinepay
-        case OCBCPAOPaymentCell:
-            return .mobileBankingOCBCPAO
         case OCBCDigitalPaymentCell:
             return .mobileBankingOCBC
         case grabPayPaymentCell:
@@ -400,16 +394,12 @@ extension PaymentSettingTableViewController {
             return installmentKBankPaymentCell
         case .installmentSCB:
             return installmentSCBPaymentCell
-        case .installmentCiti:
-            return installmentCitiPaymentCell
         case .installmentTTB:
             return installmentTTBPaymentCell
         case .installmentUOB:
             return installmentUOBPaymentCell
         case .mobileBankingSCB:
             return mobileBankingSCBPaymentCell
-        case .mobileBankingOCBCPAO:
-            return OCBCPAOPaymentCell
         case .mobileBankingOCBC:
             return OCBCDigitalPaymentCell
         case .mobileBankingKBank:

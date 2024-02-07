@@ -518,7 +518,7 @@
                             <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="g6L-kx-hv0">
-                            <rect key="frame" x="0.0" y="2318" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="2234" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -1185,37 +1185,8 @@
                                             <outlet property="accessoryView" destination="4DT-pa-pjw" id="m9y-GH-bt1"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="mKa-Xt-GOm" imageView="5Iw-E2-4lA" rowHeight="64" style="IBUITableViewCellStyleDefault" id="RPb-Tg-mbI" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
-                                        <rect key="frame" x="0.0" y="1394" width="375" height="64"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RPb-Tg-mbI" id="9zi-9r-8wv">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="OCBC Pay Anyone" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mKa-Xt-GOm">
-                                                    <rect key="frame" x="67" y="0.0" width="288" height="64"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                    <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="ocbc-pao" adjustsImageSizeForAccessibilityContentSizeCategory="YES" id="5Iw-E2-4lA" userLabel="rabbit-line-pay">
-                                                    <rect key="frame" x="20" y="16" width="32" height="32"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Redirect" translatesAutoresizingMaskIntoConstraints="NO" id="dFK-Eb-S8a">
-                                                    <rect key="frame" x="345" y="23" width="16" height="16"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                    <color key="tintColor" red="0.89019607840000003" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </imageView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="accessoryView" destination="dFK-Eb-S8a" id="afa-qP-LI3"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="ydy-jp-KSj" imageView="1Gg-Nq-XTL" rowHeight="64" style="IBUITableViewCellStyleDefault" id="Ia4-9O-5rf" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
-                                        <rect key="frame" x="0.0" y="1458" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="1394" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ia4-9O-5rf" id="AXM-Pu-22F">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -1244,7 +1215,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="sog-Al-m71" detailTextLabel="jct-Dc-T5x" imageView="gmB-i9-rPD" rowHeight="64" style="IBUITableViewCellStyleSubtitle" id="OfD-gs-6TW" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
-                                        <rect key="frame" x="0.0" y="1522" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="1458" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OfD-gs-6TW" id="HxR-O0-KSY">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -1280,7 +1251,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="oLb-UC-UWy" imageView="J5g-os-Dst" rowHeight="64" style="IBUITableViewCellStyleDefault" id="LDg-4e-rMM" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
-                                        <rect key="frame" x="0.0" y="1586" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="1522" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LDg-4e-rMM" id="GlB-1D-tAR">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -1309,7 +1280,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="zcT-e1-VEn" imageView="yWg-7l-eCP" rowHeight="64" style="IBUITableViewCellStyleDefault" id="gcS-dy-9bn" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
-                                        <rect key="frame" x="0.0" y="1650" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="1586" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gcS-dy-9bn" id="i1m-8y-DJM">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -1338,7 +1309,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="6ca-nf-Dz4" imageView="F4W-R6-8jm" rowHeight="64" style="IBUITableViewCellStyleDefault" id="V9V-T0-V1P" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
-                                        <rect key="frame" x="0.0" y="1714" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="1650" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V9V-T0-V1P" id="Qgn-1V-Q0F">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -1367,7 +1338,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="D27-Ln-mbu" imageView="tRu-H2-a1k" rowHeight="64" style="IBUITableViewCellStyleDefault" id="Jje-OE-Its" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
-                                        <rect key="frame" x="0.0" y="1778" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="1714" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jje-OE-Its" id="XAh-fR-r3E">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -1396,7 +1367,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="QtC-sV-8JY" imageView="KzJ-Jr-Aav" rowHeight="64" style="IBUITableViewCellStyleDefault" id="g0i-NL-MJv" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
-                                        <rect key="frame" x="0.0" y="1842" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="1778" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g0i-NL-MJv" id="8XQ-F3-GRP">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -1426,7 +1397,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="3wZ-Wa-j6j" imageView="ayg-4S-wzn" rowHeight="64" style="IBUITableViewCellStyleDefault" id="6hO-78-AUh" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
-                                        <rect key="frame" x="0.0" y="1906" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="1842" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6hO-78-AUh" id="tmZ-l0-tTL">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -1455,7 +1426,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="fi0-U5-Eu6" imageView="fq0-Nc-Ezt" rowHeight="64" style="IBUITableViewCellStyleDefault" id="GZ9-Os-OCB" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
-                                        <rect key="frame" x="0.0" y="1970" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="1906" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GZ9-Os-OCB" id="EcR-pI-qwc">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -1484,7 +1455,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="gf2-Jc-sHw" imageView="gUN-Th-8Zg" rowHeight="64" style="IBUITableViewCellStyleDefault" id="gIp-wZ-MNd" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
-                                        <rect key="frame" x="0.0" y="2034" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="1970" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gIp-wZ-MNd" id="DV0-ip-X5H">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -1513,7 +1484,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="AdT-eh-2p5" imageView="qdH-0y-XD6" rowHeight="64" style="IBUITableViewCellStyleDefault" id="AW9-Es-hIh" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
-                                        <rect key="frame" x="0.0" y="2098" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="2034" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AW9-Es-hIh" id="RFa-QA-elq">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -1542,24 +1513,24 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="ext-Bd-tya" imageView="DqM-AD-5EN" rowHeight="64" style="IBUITableViewCellStyleDefault" id="8Jf-6P-yPa" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
-                                        <rect key="frame" x="0.0" y="2162" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="2098" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Jf-6P-yPa" id="btz-8Q-gzS">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="TrueMoney" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ext-Bd-tya">
-                                                    <rect key="frame" x="55" y="0.0" width="312" height="64"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="TrueMoney" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ext-Bd-tya">
+                                                    <rect key="frame" x="67" y="0.0" width="288" height="64"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" image="TrueMoney" adjustsImageSizeForAccessibilityContentSizeCategory="YES" id="DqM-AD-5EN">
-                                                    <rect key="frame" x="8" y="16" width="32" height="32"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="TrueMoney" adjustsImageSizeForAccessibilityContentSizeCategory="YES" id="DqM-AD-5EN">
+                                                    <rect key="frame" x="20" y="16" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Redirect" translatesAutoresizingMaskIntoConstraints="NO" id="XXk-p5-owH">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Redirect" translatesAutoresizingMaskIntoConstraints="NO" id="XXk-p5-owH">
                                                     <rect key="frame" x="345" y="23" width="16" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <color key="tintColor" red="0.89019607840000003" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1571,7 +1542,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="wzU-mL-GTT" imageView="2E8-yO-1cc" rowHeight="64" style="IBUITableViewCellStyleDefault" id="WVv-fW-mMH" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
-                                        <rect key="frame" x="0.0" y="2226" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="2162" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WVv-fW-mMH" id="s1x-rH-x9l">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -1637,7 +1608,6 @@
                         <outletCollection property="paymentMethodNameLables" destination="2Ya-jo-TKI" collectionClass="NSMutableArray" id="0Oh-Vj-Tuq"/>
                         <outletCollection property="paymentMethodNameLables" destination="xx9-Ub-0n9" collectionClass="NSMutableArray" id="zvl-La-GM9"/>
                         <outletCollection property="paymentMethodNameLables" destination="xEd-bM-yyn" collectionClass="NSMutableArray" id="00Z-O3-wUb"/>
-                        <outletCollection property="paymentMethodNameLables" destination="mKa-Xt-GOm" collectionClass="NSMutableArray" id="d9Z-zv-Azf"/>
                         <outletCollection property="paymentMethodNameLables" destination="1Ww-5O-q0A" collectionClass="NSMutableArray" id="8Vx-zt-gcy"/>
                         <outletCollection property="paymentMethodNameLables" destination="sog-Al-m71" collectionClass="NSMutableArray" id="1Wl-TV-BhV"/>
                         <outletCollection property="paymentMethodNameLables" destination="QtC-sV-8JY" collectionClass="NSMutableArray" id="MYZ-XY-TgT"/>
@@ -2056,7 +2026,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="cLe-gI-PaB">
-                            <rect key="frame" x="0.0" y="718" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="654" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -2266,37 +2236,8 @@
                                             <outlet property="accessoryView" destination="NMF-2k-Pzh" id="VZq-LM-Srs"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="ZWa-M2-fVM" imageView="g3z-vO-5Ux" rowHeight="64" style="IBUITableViewCellStyleDefault" id="w0j-ks-wTq" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
-                                        <rect key="frame" x="0.0" y="498" width="375" height="64"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w0j-ks-wTq" id="CCv-M8-Lwe">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Citibank" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZWa-M2-fVM">
-                                                    <rect key="frame" x="67" y="0.0" width="288" height="64"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                    <color key="textColor" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="CitiBank" id="g3z-vO-5Ux">
-                                                    <rect key="frame" x="20" y="16" width="32" height="32"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Next" translatesAutoresizingMaskIntoConstraints="NO" id="QuN-bX-W8q">
-                                                    <rect key="frame" x="345" y="23" width="16" height="16"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                    <color key="tintColor" red="0.89019607840000003" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </imageView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="accessoryView" destination="QuN-bX-W8q" id="6sh-eW-R38"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="NkN-Zz-kdw" imageView="bOl-t1-kno" rowHeight="64" style="IBUITableViewCellStyleDefault" id="xgU-k9-MHt" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
-                                        <rect key="frame" x="0.0" y="562" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="498" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xgU-k9-MHt" id="Nv7-bd-FmH">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -2325,7 +2266,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="pV0-oM-DuD" imageView="x00-t0-hoK" rowHeight="64" style="IBUITableViewCellStyleDefault" id="5mk-OS-vWV" customClass="PaymentOptionTableViewCell" customModule="OmiseSDK">
-                                        <rect key="frame" x="0.0" y="626" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="562" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5mk-OS-vWV" id="eAp-W2-Y4N">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -2371,7 +2312,6 @@
                         <outletCollection property="bankNameLabels" destination="d1t-A5-fA9" collectionClass="NSMutableArray" id="b54-Iy-3dY"/>
                         <outletCollection property="bankNameLabels" destination="r9n-CR-zhg" collectionClass="NSMutableArray" id="WbQ-Bx-qyE"/>
                         <outletCollection property="bankNameLabels" destination="24h-w5-B3Y" collectionClass="NSMutableArray" id="TuV-5J-euZ"/>
-                        <outletCollection property="bankNameLabels" destination="ZWa-M2-fVM" collectionClass="NSMutableArray" id="VYp-jd-TNK"/>
                         <outletCollection property="bankNameLabels" destination="NkN-Zz-kdw" collectionClass="NSMutableArray" id="vRF-BX-TDV"/>
                         <outletCollection property="bankNameLabels" destination="pV0-oM-DuD" collectionClass="NSMutableArray" id="9Iz-bt-E7R"/>
                         <segue destination="I6Y-g7-xLU" kind="show" identifier="GoToInstallmentTermsChooserSegue" id="ljr-Fd-sHA"/>
@@ -3837,7 +3777,6 @@
         <image name="gcash" width="32" height="32"/>
         <image name="kakaopay" width="32" height="32"/>
         <image name="ocbc-digital" width="32" height="32"/>
-        <image name="ocbc-pao" width="32" height="32"/>
         <image name="touch-n-go" width="32" height="32"/>
         <image name="ttb" width="32" height="32"/>
         <image name="uob" width="32" height="32"/>

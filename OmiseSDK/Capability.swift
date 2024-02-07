@@ -82,7 +82,6 @@ extension Capability {
             case eContext
             case fpx
             case rabbitLinepay
-            case ocbcPao
             case ocbcDigital
             case grabPay
             case grabPayRms
@@ -164,8 +163,6 @@ extension Capability.Backend.Payment {
         case (.fpx, .fpx):
             return true
         case (.rabbitLinepay, .rabbitLinepay):
-            return true
-        case (.ocbcPao, .ocbcPao):
             return true
         case (.ocbcDigital, .ocbcDigital):
             return true
@@ -303,8 +300,6 @@ extension Capability.Backend {
             self.payment = .fpx
         case .source(.rabbitLinepay):
             self.payment = .rabbitLinepay
-        case .source(.mobileBankingOCBCPAO):
-            self.payment = .ocbcPao
         case .source(.mobileBankingOCBC):
             self.payment = .ocbcDigital
         case .source(.grabPay):
@@ -350,7 +345,7 @@ extension Capability.Backend {
         case .installment(_, availableNumberOfTerms: let availableNumberOfTerms):
             try container.encode(Array(availableNumberOfTerms), forKey: .allowedInstallmentTerms)
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
-        case .internetBanking, .alipay, .alipayCN, .alipayHK, .atome, .dana, .gcash, .kakaoPay, .touchNGoAlipayPlus, .touchNGo, .promptpay, .paynow, .truemoney, .truemoneyJumpApp, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcPao, .ocbcDigital, .grabPay, .grabPayRms, .boost, .shopeePay, .shopeePayJumpApp, .maybankQRPay, .duitNowQR, .duitNowOBW, .payPay, .weChat:
+        case .internetBanking, .alipay, .alipayCN, .alipayHK, .atome, .dana, .gcash, .kakaoPay, .touchNGoAlipayPlus, .touchNGo, .promptpay, .paynow, .truemoney, .truemoneyJumpApp, .points, .billPayment, .eContext, .mobileBanking, .fpx, .rabbitLinepay, .ocbcDigital, .grabPay, .grabPayRms, .boost, .shopeePay, .shopeePayJumpApp, .maybankQRPay, .duitNowQR, .duitNowOBW, .payPay, .weChat:
             // swiftlint:disable:previous line_length
             try container.encode(Array(supportedCurrencies), forKey: .supportedCurrencies)
         case .unknownSource(_, configurations: let configurations):
@@ -451,8 +446,6 @@ extension Capability.Backend {
                 self = .source(.fpx)
             case .rabbitLinepay:
                 self = .source(.rabbitLinepay)
-            case .ocbcPao:
-                self = .source(.mobileBankingOCBCPAO)
             case .ocbcDigital:
                 self = .source(.mobileBankingOCBC)
             case .grabPay:

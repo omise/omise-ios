@@ -214,8 +214,6 @@ extension SourceTypeValue {
             return .kBank
         case .installmentSCB:
             return .scb
-        case .installmentCiti:
-            return .citi
         case .installmentTTB:
             return .ttb
         case .installmentUOB:
@@ -228,7 +226,7 @@ extension SourceTypeValue {
     var isInstallmentSource: Bool {
         switch self {
         case .installmentBAY, .installmentMBB, .installmentFirstChoice, .installmentBBL,
-             .installmentKTC, .installmentKBank, .installmentSCB, .installmentCiti, .installmentTTB, .installmentUOB:
+             .installmentKTC, .installmentKBank, .installmentSCB, .installmentTTB, .installmentUOB:
             return true
         default:
             return false

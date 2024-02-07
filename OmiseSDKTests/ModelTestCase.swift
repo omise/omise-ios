@@ -188,19 +188,6 @@ class ModelTestCase: XCTestCase {
         }
 
         do {
-            let sourceData = try XCTestCase.fixturesData(forFilename: "source_installments/citi")
-            let source = try decoder.decode(Source.self, from: sourceData)
-
-            XCTAssertEqual("src_test_5obr9ossd5huc93kd71", source.id)
-            XCTAssertEqual(Currency.thb, source.currency)
-            XCTAssertEqual(5000_00, source.amount)
-            XCTAssertEqual(.installment(.init(brand: .citi, numberOfTerms: 6)), source.paymentInformation)
-            XCTAssertEqual(Flow.redirect, source.flow)
-        } catch {
-            XCTFail("Cannot decode the source \(error)")
-        }
-
-        do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_installments/ttb")
             let source = try decoder.decode(Source.self, from: sourceData)
 
@@ -521,23 +508,6 @@ class ModelTestCase: XCTestCase {
         }
     }
     
-    func testDecodeOcbcPaoSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
-
-        do {
-            let sourceData = try XCTestCase.fixturesData(forFilename: "source_ocbc_pao")
-            let source = try decoder.decode(Source.self, from: sourceData)
-
-            XCTAssertEqual("src_test_5pqcjr6tu4xvqut5nh5", source.id)
-            XCTAssertEqual(1000000, source.amount)
-            XCTAssertEqual(Currency.sgd, source.currency)
-            XCTAssertEqual(PaymentInformation.ocbcPao, source.paymentInformation)
-            XCTAssertEqual(Flow.appRedirect, source.flow)
-        } catch {
-            XCTFail("Cannot decode the source \(error)")
-        }
-    }
-
     func testDecodeGrabPaySource() throws {
         let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
 
