@@ -124,6 +124,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var grabPayPaymentCell: UITableViewCell!
     @IBOutlet private var boostPaymentCell: UITableViewCell!
     @IBOutlet private var shopeePayPaymentCell: UITableViewCell!
+    @IBOutlet private var shopeePayJumpAppPaymentCell: UITableViewCell!
     @IBOutlet private var maybankQRPayPaymentCell: UITableViewCell!
     @IBOutlet private var duitNowQRPaymentCell: UITableViewCell!
     @IBOutlet private var duitNowOBWPaymentCell: UITableViewCell!
@@ -348,6 +349,8 @@ extension PaymentSettingTableViewController {
             return .boost
         case shopeePayPaymentCell:
             return .shopeePay
+        case shopeePayJumpAppPaymentCell:
+            return .shopeePayJumpApp
         case maybankQRPayPaymentCell:
             return .maybankQRPay
         case duitNowQRPaymentCell:
@@ -444,6 +447,8 @@ extension PaymentSettingTableViewController {
             return boostPaymentCell
         case .shopeePay:
             return shopeePayPaymentCell
+        case .shopeePayJumpApp:
+            return shopeePayJumpAppPaymentCell
         case .maybankQRPay:
             return maybankQRPayPaymentCell
         case .duitNowQR:

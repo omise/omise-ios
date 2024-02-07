@@ -199,7 +199,7 @@ extension ProductDetailViewController: PaymentCreatorControllerDelegate {
                 title = "Token Created"
                 message = "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge."
             case .source(let source):
-                title = "Token Created"
+                title = "Token Created (\(source.paymentInformation.sourceType))"
                 message = "A source with id of \(source.id) was successfully created. Please send this id to server to create a charge."
             }
             
