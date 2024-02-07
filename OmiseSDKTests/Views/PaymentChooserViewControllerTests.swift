@@ -172,7 +172,6 @@ class PaymentChooserViewControllerTests: XCTestCase {
             .installment,
             .ocbcDigital,
             .rabbitLinepay,
-            .shopeePay,
             .shopeePayJumpApp,
             .alipayCN,
             .alipayHK,
