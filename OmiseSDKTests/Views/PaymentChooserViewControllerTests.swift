@@ -14,7 +14,6 @@ class PaymentChooserViewControllerTests: XCTestCase {
         .internetBankingBAY,
         .internetBankingBBL,
         .mobileBankingSCB,
-        .mobileBankingOCBCPAO,
         .mobileBankingOCBC,
         .mobileBankingBAY,
         .mobileBankingBBL,
@@ -33,7 +32,6 @@ class PaymentChooserViewControllerTests: XCTestCase {
         .installmentKTC,
         .installmentKBank,
         .installmentSCB,
-        .installmentCiti,
         .installmentTTB,
         .installmentUOB,
         .kakaoPay,
@@ -144,7 +142,6 @@ class PaymentChooserViewControllerTests: XCTestCase {
             .mobileBanking,
             .netBanking,
             .ocbcDigital,
-            .ocbcPao,
             .payEasy,
             .paynow,
             .payPay,
@@ -174,7 +171,6 @@ class PaymentChooserViewControllerTests: XCTestCase {
             .alipay,
             .installment,
             .ocbcDigital,
-            .ocbcPao,
             .rabbitLinepay,
             .shopeePay,
             .shopeePayJumpApp,
@@ -207,5 +203,45 @@ class PaymentChooserViewControllerTests: XCTestCase {
 
         vc.allowedPaymentMethods = allSourceTypes
         XCTAssertEqual(vc.showingValues, filteredAndSorted)
+    }
+
+    func testShowsCreditCardPayment() {
+        let availableTypes: [SourceTypeValue] = [
+            .alipay,
+            .alipayCN,
+            .alipayHK,
+            .atome
+        ]
+
+        let vc = PaymentChooserViewController()
+        vc.loadView()
+
+        vc.showsCreditCardPayment = false
+        vc.allowedPaymentMethods = availableTypes
+        XCTAssertEqual(vc.showingValues.count, availableTypes.count)
+
+        vc.showsCreditCardPayment = true
+        XCTAssertEqual(vc.showingValues.count, availableTypes.count + 1)
+    }
+
+    func testAllowedPaymentMethods() {
+        let set1: [SourceTypeValue] = [ .alipay, .alipayCN ]
+        let result1: [PaymentChooserOption] = [.alipay, .alipayCN]
+
+        let set2: [SourceTypeValue] = [ .atome, .payPay, .weChat ]
+        let result2: [PaymentChooserOption] = [ .atome, .payPay, .weChat ]
+
+        let vc = PaymentChooserViewController()
+        vc.loadView()
+
+        vc.showsCreditCardPayment = false
+        vc.allowedPaymentMethods = set1
+        XCTAssertEqual(vc.showingValues, result1)
+
+        vc.allowedPaymentMethods = set2
+        XCTAssertEqual(vc.showingValues, result2)
+
+        vc.showsCreditCardPayment = true
+        XCTAssertEqual(vc.showingValues, [PaymentChooserOption.creditCard] + result2)
     }
 }

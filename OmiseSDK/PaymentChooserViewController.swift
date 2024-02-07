@@ -25,7 +25,6 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case mobileBanking
     case netBanking
     case ocbcDigital
-    case ocbcPao
     case payEasy
     case paynow
     case payPay
@@ -57,7 +56,6 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
         .alipay,
         .installment,
         .ocbcDigital,
-        .ocbcPao,
         .rabbitLinepay,
         .shopeePay,
         .shopeePayJumpApp,
@@ -121,8 +119,6 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "FPX"
         case .rabbitLinepay:
             return "Rabbit LINE Pay"
-        case .ocbcPao:
-            return "OCBC Pay Anyone"
         case .ocbcDigital:
             return "OCBC Digital"
         case .grabPay:
@@ -160,7 +156,7 @@ extension PaymentChooserOption {
         case .trueMoneyJumpApp:
             return [.truemoneyJumpApp]
         case .installmentFirstChoice, .installmentMBB, .installmentKBank, .installmentKTC,
-             .installmentBBL, .installmentBAY, .installmentSCB, .installmentCiti, .installmentTTB, .installmentUOB:
+             .installmentBBL, .installmentBAY, .installmentSCB, .installmentTTB, .installmentUOB:
             return [.installment]
         case .billPaymentTescoLotus:
             return [.tescoLotus]
@@ -200,8 +196,6 @@ extension PaymentChooserOption {
             return [.fpx]
         case .rabbitLinepay:
             return [.rabbitLinepay]
-        case .mobileBankingOCBCPAO:
-            return [.ocbcPao]
         case .mobileBankingOCBC:
             return [.ocbcDigital]
         case .grabPay:
@@ -377,8 +371,6 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             payment = .points(.citiPoints)
         case .rabbitLinepay:
             payment = .rabbitLinepay
-        case .ocbcPao:
-            payment = .ocbcPao
         case .ocbcDigital:
             payment = .ocbcDigital
         case .grabPay, .grabPayRms:
@@ -472,34 +464,32 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 19, section: 0)
         case .rabbitLinepay:
             return IndexPath(row: 20, section: 0)
-        case .ocbcPao:
-            return IndexPath(row: 21, section: 0)
         case .ocbcDigital:
-            return IndexPath(row: 22, section: 0)
+            return IndexPath(row: 21, section: 0)
         case .grabPay:
-            return IndexPath(row: 23, section: 0)
+            return IndexPath(row: 22, section: 0)
         case .boost:
-            return IndexPath(row: 24, section: 0)
+            return IndexPath(row: 23, section: 0)
         case .shopeePay, .shopeePayJumpApp:
-            return IndexPath(row: 25, section: 0)
+            return IndexPath(row: 24, section: 0)
         case .maybankQRPay:
-            return IndexPath(row: 26, section: 0)
+            return IndexPath(row: 25, section: 0)
         case .duitNowQR:
-            return IndexPath(row: 27, section: 0)
+            return IndexPath(row: 26, section: 0)
         case .duitNowOBW:
-            return IndexPath(row: 28, section: 0)
+            return IndexPath(row: 27, section: 0)
         case .touchNGo:
-            return IndexPath(row: 29, section: 0)
+            return IndexPath(row: 28, section: 0)
         case .grabPayRms:
-            return IndexPath(row: 30, section: 0)
+            return IndexPath(row: 29, section: 0)
         case .atome:
-            return IndexPath(row: 31, section: 0)
+            return IndexPath(row: 30, section: 0)
         case .payPay:
-            return IndexPath(row: 32, section: 0)
+            return IndexPath(row: 31, section: 0)
         case .truemoneyJumpApp:
-            return IndexPath(row: 33, section: 0)
+            return IndexPath(row: 32, section: 0)
         case .weChat:
-            return IndexPath(row: 34, section: 0)
+            return IndexPath(row: 33, section: 0)
         }
     }
 
@@ -553,8 +543,6 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                 return SourceTypeValue.fpx
             case .rabbitLinepay:
                 return SourceTypeValue.rabbitLinepay
-            case .ocbcPao:
-                return SourceTypeValue.mobileBankingOCBCPAO
             case .ocbcDigital:
                 return SourceTypeValue.mobileBankingOCBC
             case .grabPay:
