@@ -830,13 +830,17 @@ class PaymentInformationTestCase: XCTestCase {
                     brand: "1")
             ]
 
-            let atome = PaymentInformation.Atome(phoneNumber: "+66800000101",
-                                                 shippingAddress: shipping,
-                                                 items: items)
+            let atome = PaymentInformation.Atome(
+                phoneNumber: "+66800000101",
+                shippingAddress: shipping,
+                items: items
+            )
 
-            let sourceParameter = Source.CreateParameter(paymentInformation: .atome(atome),
-                                                         amount: 10_000_00,
-                                                         currency: .thb)
+            let sourceParameter = Source.CreateParameter(
+                paymentInformation: .atome(atome),
+                amount: 10_000_00,
+                currency: .thb
+            )
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
             XCTAssertEqual(
                 """

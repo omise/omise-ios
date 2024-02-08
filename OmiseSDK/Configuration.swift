@@ -5,20 +5,36 @@ public enum Environment {
     case production
 
     var tokenURL: URL {
-        return vaultBaseURL.appendingPathComponent("tokens")
+        return vaultURL.appendingPathComponent("tokens")
     }
 
     var sourceURL: URL {
-        return apiBaseURL.appendingPathComponent("sources")
+        return apiURL.appendingPathComponent("sources")
     }
 
     var capabilityURL: URL {
-        return apiBaseURL.appendingPathComponent("capability")
+        return apiURL.appendingPathComponent("capability")
     }
 }
 
-private extension Environment {
-    var vaultBaseURL: URL {
+extension Environment {
+    var customVaultURL: URL? {
+        switch self {
+        case .dev(let vaultURL, _): return vaultURL
+        default: return nil
+        }
+    }
+
+    var customAPIURL: URL? {
+        switch self {
+        case .dev(_, let apiURL): return apiURL
+        default: return nil
+        }
+    }
+}
+
+extension Environment {
+    var vaultURL: URL {
         switch self {
         case .dev(let url, _): return url
         // swiftlint:disable:next force_unwrapping
@@ -26,7 +42,7 @@ private extension Environment {
         }
     }
     
-    var apiBaseURL: URL {
+    var apiURL: URL {
         switch self {
         case .dev(_, let url): return url
         // swiftlint:disable:next force_unwrapping

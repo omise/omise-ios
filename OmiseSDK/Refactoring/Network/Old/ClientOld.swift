@@ -3,20 +3,11 @@ import os
 
 // swiftlint:disable file_length
 public class Client: NSObject {
-    // Shared latest capability requested from API
-    static var sharedCapability: Capability? {
-        didSet {
-            if let countryCode = sharedCapability?.countryCode {
-                CountryInfo.setDefaultCountryCode(countryCode)
-            }
-        }
-    }
+    let publicKey: String
+    var userAgent: String?
 
     let session: URLSession
     let queue: OperationQueue
-    let publicKey: String
-    
-    var userAgent: String?
 
     enum HTTPHeaders: String {
         case authorization = "Authorization"
@@ -28,6 +19,19 @@ public class Client: NSObject {
     struct HTTPHeaderss {
         let authorization = "Authorization"
     }
+//
+// ^ Refactored ^
+//
+
+    // Shared latest capability requested from API
+    static var sharedCapability: Capability? {
+        didSet {
+            if let countryCode = sharedCapability?.countryCode {
+                CountryInfo.setDefaultCountryCode(countryCode)
+            }
+        }
+    }
+
     /// Initializes a new Client with the given Public Key and Operating OperationQueue
     ///
     /// - Parameters:

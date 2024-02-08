@@ -101,11 +101,13 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
             )
         ]
 
-        let atomeData = PaymentInformation.Atome(phoneNumber: viewContext[.phoneNumber],
-                                                 name: viewContext[.name],
-                                                 email: viewContext[.email],
-                                                 shippingAddress: shippingAddress,
-                                                 items: items)
+        let atomeData = PaymentInformation.Atome(
+            phoneNumber: viewContext[.phoneNumber],
+            name: viewContext[.name],
+            email: viewContext[.email],
+            shippingAddress: shippingAddress,
+            items: items
+        )
 
         flowSession.requestCreateSource(.atome(atomeData)) { _ in
             onComplete()

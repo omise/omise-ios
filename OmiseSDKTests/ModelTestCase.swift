@@ -90,10 +90,12 @@ class ModelTestCase: XCTestCase {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_barcode/alipay")
             let source = try decoder.decode(Source.self, from: sourceData)
 
-            let expectedBarcode = PaymentInformation.Barcode.AlipayBarcode(barcode: "1234567890123456",
-                                                                           storeID: "1",
-                                                                           storeName: "Main Store",
-                                                                           terminalID: nil)
+            let expectedBarcode = PaymentInformation.Barcode.AlipayBarcode(
+                barcode: "1234567890123456",
+                storeID: "1",
+                storeName: "Main Store",
+                terminalID: nil
+            )
 
             XCTAssertEqual("src_test_5cq1tilrnz7d62t8y87", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
