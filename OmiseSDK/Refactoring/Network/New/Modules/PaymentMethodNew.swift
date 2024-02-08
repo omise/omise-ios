@@ -22,7 +22,7 @@ extension CapabilityNew.PaymentMethod {
     enum PaymentMethodType {
         case card
         case source(SourceType)
-        case unsupported
+        case unsupported(paymentMethod: String)
     }
 
     var isCardType: Bool {
@@ -35,7 +35,7 @@ extension CapabilityNew.PaymentMethod {
         } else if isCardType {
             return .card
         } else {
-            return .unsupported
+            return .unsupported(paymentMethod: name)
         }
     }
 }
