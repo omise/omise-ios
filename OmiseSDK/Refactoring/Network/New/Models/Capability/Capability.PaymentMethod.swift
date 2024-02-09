@@ -1,5 +1,6 @@
 import Foundation
 
+// TODO: Add comments for public properties and functions
 extension CapabilityNew {
     public struct PaymentMethod: Codable {
         public let name: String

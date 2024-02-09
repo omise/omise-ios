@@ -234,14 +234,6 @@ public struct Card: Decodable {
     }
 }
 
-extension Calendar {
-    /// Calendar used in the Credit Card information which is Gregorian Calendar
-    public static let creditCardInformationCalendar = Calendar(identifier: .gregorian)
-    /// Range contains the valid range of the expiration month value
-    public static let validExpirationMonthRange: Range<Int> = Calendar.creditCardInformationCalendar.maximumRange(of: .month)!
-    // swiftlint:disable:previous force_unwrapping
-}
-
 extension Request where T == Token {
     
     /// Initializes a new Token Request with the given information

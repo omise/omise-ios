@@ -11,27 +11,29 @@ import Foundation
 struct CountryInfo: Codable, Equatable {
     let name: String
     let code: String
-}
 
-extension CountryInfo {
-
-    static var `default`: CountryInfo?
-
-    static func setDefaultCountryCode(_ code: String) {
-        self.default = CountryInfo.all.first { $0.code == code }
-    }
-
-    static var avsCodes: [String] = ["US", "CA", "GB"]
     var isAVS: Bool {
         Self.avsCodes.contains(code)
     }
+}
+
+extension CountryInfo {
+    static var `default`: CountryInfo?
+
+    static func setDefault(countryCode: String) {
+        self.default = CountryInfo.all.first { $0.code == countryCode }
+    }
+
+    static var avsCodes: [String] = ["US", "CA", "GB"]
 
     static var sortedAll: [CountryInfo] = {
         CountryInfo.all.sorted {
             $0.name.localizedCompare($1.name) == .orderedAscending
         }
     }()
+}
 
+extension CountryInfo {
     static var all: [CountryInfo] = [
         .init(name: "Afghanistan", code: "AF"),
         .init(name: "Åland Islands", code: "AX"),

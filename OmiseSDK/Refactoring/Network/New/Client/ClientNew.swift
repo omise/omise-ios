@@ -14,29 +14,38 @@ public class ClientNew {
         self.publicKey = publicKey
         self.network = network
     }
-}
-
-// MARK: API Requests
-extension ClientNew {
 
     // TODO: Add unit tests
     public func capability(_ completionHandler: @escaping (Result<CapabilityNew, Error>) -> Void) {
         apiRequest(api: OmiseAPI.capability, completionHandler: completionHandler)
     }
 
+    // TODO: Add implementation
     // TODO: Add unit tests
-    // TODO: Refactor ChargeStatus
-    public func chargeStatus(tokenID: String, _ completionHandler: @escaping (Result<ChargeStatus, Error>) -> Void) {
-        apiRequest(api: OmiseAPI.chargeStatusByToken(tokenID: tokenID), completionHandler: completionHandler)
+    public func observeChargeStatusChange(tokenID: String, _ completionHandler: @escaping (Result<ChargeStatus, Error>) -> Void) {
     }
 
-// func chargeStatusByToken(tokenID: String)
-// func createToken(cardInfo: String)
-// func createSource(paymentInfo: String)
+    // TODO: Sync naming with Android
+    // TODO: Add Implementation
+    // TODO: Add unit tests
+    public func createToken(cardInfo: String) {
+
+    }
+
+    // TODO: Sync naming with Android
+    // TODO: Add Implementation
+    // TODO: Add unit tests
+    public func createSource(paymentInfo: String) {
+
+    }
 }
 
-// MARK: API Request
 private extension ClientNew {
+    // TODO: Add unit tests
+    func token(tokenID: String, _ completionHandler: @escaping (Result<ChargeStatus, Error>) -> Void) {
+        apiRequest(api: OmiseAPI.token(tokenID: tokenID), completionHandler: completionHandler)
+    }
+
     func apiRequest<T: Codable>(api: APIProtocol, completionHandler: @escaping (Result<T, Error>) -> Void) {
         let urlRequest = urlRequest(publicKey: publicKey, api: api)
         network.get(

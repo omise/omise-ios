@@ -25,7 +25,7 @@ enum ServerType {
 
 enum OmiseAPI {
     case capability
-    case chargeStatusByToken(tokenID: String)
+    case token(tokenID: String)
     case createToken(cardInfo: String)
     case createSource(paymentInfo: String)
 }
@@ -39,7 +39,7 @@ extension OmiseAPI: APIProtocol {
         switch self {
         case .capability, .createSource:
             return .api
-        case .chargeStatusByToken, .createToken:
+        case .token, .createToken:
             return .vault
         }
     }
@@ -48,7 +48,7 @@ extension OmiseAPI: APIProtocol {
         switch self {
         case .capability:
             return "capability"
-        case .chargeStatusByToken, .createToken:
+        case .token, .createToken:
             return "tokens"
         case .createSource:
             return "sources"
@@ -57,7 +57,7 @@ extension OmiseAPI: APIProtocol {
 
     var method: String {
         switch self {
-        case .capability, .chargeStatusByToken:
+        case .capability, .token:
             return "GET"
         case .createToken, .createSource:
             return "POST"

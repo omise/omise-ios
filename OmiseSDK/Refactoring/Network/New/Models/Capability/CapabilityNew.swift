@@ -1,6 +1,7 @@
 import Foundation
 
 // TODO: Rename to Capability
+// TODO: Add comments for public properties and functions
 public struct CapabilityNew: Codable {
     public let countryCode: String
     public let paymentMethods: [CapabilityNew.PaymentMethod]
