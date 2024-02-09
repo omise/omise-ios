@@ -56,3 +56,88 @@ public enum SourceType: String, Codable {
     case payPay = "paypay"
     case weChat = "wechat_pay"
 }
+
+extension SourceType {
+
+    var installmentBrand: PaymentInformation.Installment.Brand? {
+        switch self {
+        case .installmentBAY:
+            return .bay
+        case .installmentMBB:
+            return .mbb
+        case .installmentFirstChoice:
+            return .firstChoice
+        case .installmentBBL:
+            return .bbl
+        case .installmentKTC:
+            return .ktc
+        case .installmentKBank:
+            return .kBank
+        case .installmentSCB:
+            return .scb
+        case .installmentTTB:
+            return .ttb
+        case .installmentUOB:
+            return .uob
+        default:
+            return nil
+        }
+    }
+
+    var isInstallmentSource: Bool {
+        switch self {
+        case .installmentBAY, .installmentMBB, .installmentFirstChoice, .installmentBBL,
+                .installmentKTC, .installmentKBank, .installmentSCB, .installmentTTB, .installmentUOB:
+            return true
+        default:
+            return false
+        }
+
+    }
+
+    var internetBankingSource: PaymentInformation.InternetBanking? {
+        switch self {
+        case .internetBankingBAY:
+            return .bay
+        case .internetBankingBBL:
+            return .bbl
+        default:
+            return nil
+        }
+    }
+
+    var isInternetBankingSource: Bool {
+        switch self {
+        case .internetBankingBAY, .internetBankingBBL:
+            return true
+        default:
+            return false
+        }
+    }
+
+    var mobileBankingSource: PaymentInformation.MobileBanking? {
+        switch self {
+        case .mobileBankingSCB:
+            return .scb
+        case .mobileBankingKBank:
+            return .kbank
+        case .mobileBankingBAY:
+            return .bay
+        case .mobileBankingBBL:
+            return .bbl
+        case .mobileBankingKTB:
+            return .ktb
+        default:
+            return nil
+        }
+    }
+
+    var isMobileBankingSource: Bool {
+        switch self {
+        case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingBAY, .mobileBankingBBL, .mobileBankingKTB:
+            return true
+        default:
+            return false
+        }
+    }
+}

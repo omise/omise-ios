@@ -336,7 +336,8 @@
       ],
       "card_brands": null,
       "installment_terms": null,
-      "banks": []
+      "banks": [],
+      "provider": "Alipay_plus"
     },
     {
       "object": "payment_method",
