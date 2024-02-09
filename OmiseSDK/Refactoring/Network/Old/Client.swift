@@ -27,7 +27,7 @@ public class Client: NSObject {
     static var sharedCapability: Capability? {
         didSet {
             if let countryCode = sharedCapability?.countryCode {
-                CountryInfo.setDefault(countryCode: countryCode)
+                OmiseSDK.shared.setCurrentCountry(countryCode: countryCode)
             }
         }
     }

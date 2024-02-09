@@ -1,5 +1,5 @@
 //
-//  CountryInfo.swift
+//  Country.swift
 //  OmiseSDK
 //
 //  Created by Andrei Solovev on 8/6/23.
@@ -8,33 +8,39 @@
 
 import Foundation
 
-struct CountryInfo: Codable, Equatable {
+struct Country: Codable, Equatable {
     let name: String
     let code: String
 
     var isAVS: Bool {
         Self.avsCodes.contains(code)
     }
+
+    init(name: String, code: String) {
+        self.name = name
+        self.code = code
+    }
+    
+    init?(code: String) {
+        guard let country = Self.all.first(where: { $0.code == code }) else {
+            return nil
+        }
+        self = country
+    }
 }
 
-extension CountryInfo {
-    static var `default`: CountryInfo?
-
-    static func setDefault(countryCode: String) {
-        self.default = CountryInfo.all.first { $0.code == countryCode }
-    }
-
+extension Country {
     static var avsCodes: [String] = ["US", "CA", "GB"]
 
-    static var sortedAll: [CountryInfo] = {
-        CountryInfo.all.sorted {
+    static var sortedAll: [Country] = {
+        Country.all.sorted {
             $0.name.localizedCompare($1.name) == .orderedAscending
         }
     }()
 }
 
-extension CountryInfo {
-    static var all: [CountryInfo] = [
+extension Country {
+    static var all: [Country] = [
         .init(name: "Afghanistan", code: "AF"),
         .init(name: "Åland Islands", code: "AX"),
         .init(name: "Albania", code: "AL"),

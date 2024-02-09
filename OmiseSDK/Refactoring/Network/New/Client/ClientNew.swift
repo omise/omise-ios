@@ -17,7 +17,13 @@ public class ClientNew {
 
     // TODO: Add unit tests
     public func capability(_ completionHandler: @escaping (Result<CapabilityNew, Error>) -> Void) {
-        apiRequest(api: OmiseAPI.capability, completionHandler: completionHandler)
+        let localHandler = { (result: (Result<CapabilityNew, Error>)) in
+            if let capability = try? result.get() {
+                OmiseSDK.shared.setCurrentCountry(countryCode: capability.countryCode)
+            }
+            completionHandler(result)
+        }
+        apiRequest(api: OmiseAPI.capability, completionHandler: localHandler)
     }
 
     // TODO: Add implementation
