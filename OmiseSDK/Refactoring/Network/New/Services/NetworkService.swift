@@ -18,6 +18,7 @@ class NetworkService {
         )
     }
 
+    // TODO: Refactoring is required
     func get<T: Codable>(
         urlRequest: URLRequest,
         dateFormatter: DateFormatter? = nil,
@@ -26,6 +27,12 @@ class NetworkService {
         let dataTask = session.dataTask(with: urlRequest) { [weak self] (data, response, error) in
             guard let self = self else { return }
 
+            if let data = data {
+                print("Data: \(String(data: data, encoding: .utf8))")
+            } else if let error = error {
+                print("error: \(error)")
+            }
+            print(response)
             var result: Result<T, Error>
 
             defer {
@@ -94,5 +101,13 @@ class NetworkService {
             }
         }
         dataTask.resume()
+        
+        os_log(
+            "Starting/Resuming Request %{public}@",
+            log: sdkLogObject,
+            type: .debug,
+            String(describing: type(of: T.self))
+        )
+
     }
 }

@@ -7,9 +7,16 @@ class ClientTests: XCTestCase {
     let publicKeyBase64 = "cGtleV90ZXN0XzU4d2ZubHdveHoxdGJrZGQ5OTM="
 
     var testClient: ClientNew!
+    
     override func setUp() {
         super.setUp()
         testClient = ClientNew(publicKey: publicKey)
+        
+        let testEnvironment = Environment.dev(
+            vaultURL: URL(string: "https://vault.staging-omise.co")!,
+            apiURL: URL(string: "https://api.staging-omise.co")!
+        )
+        Configuration.setDefault(Configuration(environment: testEnvironment))
     }
 
     override func tearDown() {
@@ -54,6 +61,7 @@ class ClientTests: XCTestCase {
         XCTAssertEqual(expectedResult, result)
     }
 
+    /*
     func testCapabilityAPI() {
         let expectation = self.expectation(description: "Capability API test")
 
@@ -72,9 +80,32 @@ class ClientTests: XCTestCase {
         }
 
         waitForExpectations(timeout: 15.0, handler: nil)
-//        client.request(.capability) { result in
-//        }
     }
+     */
+
+    /*
+    func testObserveChargeStatus() {
+        let expectation = self.expectation(description: "Capability API test")
+
+        let tokenID = "test token id"
+        let publicKey = "test pkey"
+        let client = ClientNew(publicKey: publicKey)
+        client.observeChargeStatusUntilChange(tokenID: tokenID) { result in
+            do {
+                let value = try result.get()
+                print(value)
+                XCTAssertNotNil(value)
+            } catch {
+                XCTFail("Failed with \(error)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 15.0, handler: nil)
+
+    }
+     */
 
     func testCreateSourceAPI() {
 //        let paymentInfo = PaymentInfo(

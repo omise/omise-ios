@@ -57,8 +57,9 @@ public enum SourceType: String, Codable {
     case weChat = "wechat_pay"
 }
 
+// MARK: Installment Brand
+// TODO: Refactoring with PaymentInformation
 extension SourceType {
-
     var installmentBrand: PaymentInformation.Installment.Brand? {
         switch self {
         case .installmentBAY:
@@ -84,18 +85,16 @@ extension SourceType {
         }
     }
 
-    var isInstallmentSource: Bool {
-        switch self {
-        case .installmentBAY, .installmentMBB, .installmentFirstChoice, .installmentBBL,
-                .installmentKTC, .installmentKBank, .installmentSCB, .installmentTTB, .installmentUOB:
-            return true
-        default:
-            return false
-        }
-
+    // Add Unit Test
+    var isInstallment: Bool {
+        installmentBrand != nil
     }
+}
 
-    var internetBankingSource: PaymentInformation.InternetBanking? {
+// MARK: Internet Banking
+// TODO: Refactoring with PaymentInformation
+extension SourceType {
+    var internetBanking: PaymentInformation.InternetBanking? {
         switch self {
         case .internetBankingBAY:
             return .bay
@@ -106,16 +105,15 @@ extension SourceType {
         }
     }
 
-    var isInternetBankingSource: Bool {
-        switch self {
-        case .internetBankingBAY, .internetBankingBBL:
-            return true
-        default:
-            return false
-        }
+    var isInternetBanking: Bool {
+        internetBanking != nil
     }
+}
 
-    var mobileBankingSource: PaymentInformation.MobileBanking? {
+// MARK: Mobile Banking
+// TODO: Refactoring with PaymentInformation
+extension SourceType {
+    var mobileBanking: PaymentInformation.MobileBanking? {
         switch self {
         case .mobileBankingSCB:
             return .scb
@@ -132,12 +130,7 @@ extension SourceType {
         }
     }
 
-    var isMobileBankingSource: Bool {
-        switch self {
-        case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingBAY, .mobileBankingBBL, .mobileBankingKTB:
-            return true
-        default:
-            return false
-        }
+    var isMobileBanking: Bool {
+        mobileBanking != nil
     }
 }

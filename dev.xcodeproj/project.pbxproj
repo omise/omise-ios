@@ -602,6 +602,17 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		75B4205F2B767D1E0036134D /* Done */ = {
+			isa = PBXGroup;
+			children = (
+				8A2BE95420A9A39E000CEB60 /* Request.swift */,
+				8AD0609220B55B3A0074894E /* RequestTask.swift */,
+				8A14C208220ACB2B003F5B20 /* Capability.swift */,
+				8A47173920AAB0F40022733A /* Token.swift */,
+			);
+			path = Done;
+			sourceTree = "<group>";
+		};
 		75CFC4CA2B73AED900422A8F /* Refactoring */ = {
 			isa = PBXGroup;
 			children = (
@@ -615,8 +626,6 @@
 			children = (
 				8A2BE95720A9A8F1000CEB60 /* Models */,
 				8AD0609520B55E610074894E /* Client.swift */,
-				8A2BE95420A9A39E000CEB60 /* Request.swift */,
-				8AD0609220B55B3A0074894E /* RequestTask.swift */,
 			);
 			path = Old;
 			sourceTree = "<group>";
@@ -655,10 +664,10 @@
 		75CFC4EF2B753AB900422A8F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7502CA652A31AEA200766E7D /* Country.swift */,
 				75B420512B76120C0036134D /* Capability */,
 				75B420552B7659860036134D /* Token */,
 				75CFC4F42B753C3C00422A8F /* SourceType.swift */,
+				7502CA652A31AEA200766E7D /* Country.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -735,16 +744,15 @@
 		8A2BE95720A9A8F1000CEB60 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8A14C208220ACB2B003F5B20 /* Capability.swift */,
+				75B4205F2B767D1E0036134D /* Done */,
+				8A47173C20AAB11B0022733A /* Source.swift */,
 				2259314D1CE46E5700841B86 /* CardBrand.swift */,
 				8ADAA9A420B6C0AF00DD7CCF /* Currency.swift */,
 				8A4F7CB820A9C0FD001C441A /* Object.swift */,
 				2220F1A41D0FEE85008CD89F /* OmiseError.swift */,
 				8A60619920B2A8D400CF90D5 /* PAN.swift */,
-				8A47173C20AAB11B0022733A /* Source.swift */,
 				8A01E48C21059EFF00D73FE6 /* PaymentInformation.swift */,
 				75B43B562A0277A3004352C7 /* PaymentInformation.Atome.swift */,
-				8A47173920AAB0F40022733A /* Token.swift */,
 			);
 			name = Models;
 			path = ../../..;

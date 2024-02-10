@@ -13,7 +13,7 @@ extension TokenNew {
         /// Card holder's full name.
         public let name: String?
         /// Last 4 digits of the card number.
-        public let lastDigits: String
+        public let lastDigits: String?
         /// Card expiration month (1-12)
         public let expirationMonth: Int?
         /// Card expiration year (Gregrorian)

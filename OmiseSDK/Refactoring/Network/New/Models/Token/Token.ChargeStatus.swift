@@ -10,3 +10,16 @@ extension TokenNew {
         case unknown
     }
 }
+
+extension TokenNew.ChargeStatus {
+    static let finalStates: [Self] = [
+        .successful,
+        .failed,
+        .expired,
+        .reversed
+    ]
+
+    var isFinal: Bool {
+        Self.finalStates.contains(self)
+    }
+}

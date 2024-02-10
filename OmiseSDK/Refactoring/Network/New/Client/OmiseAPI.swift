@@ -13,14 +13,14 @@ enum ServerType {
     case api
     case vault
 
+    // swiftlint:disable force_unwrapping
     var url: URL {
-        // swiftlint:disable force_unwrapping
         switch self {
         case .api: return URL(string: "https://api.omise.co")!
         case .vault: return URL(string: "https://vault.omise.co")!
         }
-        // swiftlint:enable force_unwrapping
     }
+    // swiftlint:enable force_unwrapping
 }
 
 enum OmiseAPI {
@@ -48,7 +48,9 @@ extension OmiseAPI: APIProtocol {
         switch self {
         case .capability:
             return "capability"
-        case .token, .createToken:
+        case .token(let tokenID):
+            return "tokens/\(tokenID)"
+        case .createToken:
             return "tokens"
         case .createSource:
             return "sources"

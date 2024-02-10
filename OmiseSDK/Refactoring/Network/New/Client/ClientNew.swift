@@ -17,38 +17,75 @@ public class ClientNew {
 
     // TODO: Add unit tests
     public func capability(_ completionHandler: @escaping (Result<CapabilityNew, Error>) -> Void) {
-        let localHandler = { (result: (Result<CapabilityNew, Error>)) in
+        apiRequest(api: OmiseAPI.capability) { (result: (Result<CapabilityNew, Error>)) in
             if let capability = try? result.get() {
                 OmiseSDK.shared.setCurrentCountry(countryCode: capability.countryCode)
             }
             completionHandler(result)
         }
-        apiRequest(api: OmiseAPI.capability, completionHandler: localHandler)
     }
 
-    // TODO: Add implementation
     // TODO: Add unit tests
-    public func observeChargeStatusChange(tokenID: String, _ completionHandler: @escaping (Result<ChargeStatus, Error>) -> Void) {
+    public func observeChargeStatusUntilChange(tokenID: String, _ completionHandler: @escaping (Result<TokenNew.ChargeStatus, Error>) -> Void) {
+        observeChargeStatusUntilChange(
+            tokenID: tokenID,
+            timeInterval: 3,
+            attemp: 0,
+            maxAttempt: 3,
+            completionHandler
+        )
     }
 
-    // TODO: Sync naming with Android
-    // TODO: Add Implementation
     // TODO: Add unit tests
     public func createToken(cardInfo: String) {
-
+        // TODO: Add Implementation after PaymentInformation refactoring
     }
 
-    // TODO: Sync naming with Android
-    // TODO: Add Implementation
     // TODO: Add unit tests
     public func createSource(paymentInfo: String) {
-
+        // TODO: Add Implementation after PaymentInformation refactoring
     }
 }
 
 private extension ClientNew {
-    // TODO: Add unit tests
-    func token(tokenID: String, _ completionHandler: @escaping (Result<ChargeStatus, Error>) -> Void) {
+    private func observeChargeStatusUntilChange(
+        tokenID: String,
+        timeInterval: Int,
+        attemp: Int,
+        maxAttempt: Int,
+        _ completionHandler: @escaping (Result<TokenNew.ChargeStatus, Error>) -> Void
+    ) {
+        guard maxAttempt > attemp else {
+            return
+        }
+        token(tokenID: tokenID) { [weak self] (result: (Result<TokenNew, Error>)) in
+            switch result {
+            case .success(let token) where token.chargeStatus.isFinal:
+                completionHandler(.success(token.chargeStatus))
+            case .success(let token):
+                guard attemp + 1 < maxAttempt else {
+                    completionHandler(.success(token.chargeStatus))
+                    return
+                }
+
+                let queue = DispatchQueue.global(qos: .background)
+                queue.asyncAfter(deadline: .now() + .seconds(timeInterval)) {
+                    self?.observeChargeStatusUntilChange(
+                        tokenID: tokenID,
+                        timeInterval: timeInterval,
+                        attemp: attemp + 1,
+                        maxAttempt: maxAttempt,
+                        completionHandler
+                    )
+                }
+
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
+    }
+
+    func token(tokenID: String, _ completionHandler: @escaping (Result<TokenNew, Error>) -> Void) {
         apiRequest(api: OmiseAPI.token(tokenID: tokenID), completionHandler: completionHandler)
     }
 
