@@ -3,6 +3,13 @@ import os
 
 // TODO: Rename to Client
 public class ClientNew {
+    public typealias RequestResultClosure<T: Codable, E: Error> = (Result<T, E>) -> Void
+
+    private enum Const {
+        static let observingAttemptsCount = 10
+        static let observingTimeInterval = 3
+    }
+
     private let publicKey: String
     private let network: NetworkService
 
@@ -16,8 +23,8 @@ public class ClientNew {
     }
 
     // TODO: Add unit tests
-    public func capability(_ completionHandler: @escaping (Result<CapabilityNew, Error>) -> Void) {
-        apiRequest(api: OmiseAPI.capability) { (result: (Result<CapabilityNew, Error>)) in
+    public func capability(_ completionHandler: @escaping RequestResultClosure<CapabilityNew, Error>) {
+        apiRequest(api: OmiseAPI.capability) { (result: Result<CapabilityNew, Error>) in
             if let capability = try? result.get() {
                 OmiseSDK.shared.setCurrentCountry(countryCode: capability.countryCode)
             }
@@ -26,19 +33,19 @@ public class ClientNew {
     }
 
     // TODO: Add unit tests
-    public func observeChargeStatusUntilChange(tokenID: String, _ completionHandler: @escaping (Result<TokenNew.ChargeStatus, Error>) -> Void) {
+    public func observeChargeStatusUntilChange(tokenID: String, _ completionHandler: @escaping RequestResultClosure<TokenNew.ChargeStatus, Error>) {
         observeChargeStatusUntilChange(
             tokenID: tokenID,
-            timeInterval: 3,
+            timeInterval: Self.Const.observingTimeInterval,
             attemp: 0,
-            maxAttempt: 3,
+            maxAttempt: Self.Const.observingAttemptsCount,
             completionHandler
         )
     }
 
     // TODO: Add unit tests
-    public func createToken(cardInfo: String) {
-        // TODO: Add Implementation after PaymentInformation refactoring
+    public func createToken(card: PaymentInformationNew.Card, _ completionHandler: @escaping RequestResultClosure<TokenNew, Error>) {
+        apiRequest(api: OmiseAPI.createToken(card: card), completionHandler: completionHandler)
     }
 
     // TODO: Add unit tests
@@ -53,7 +60,7 @@ private extension ClientNew {
         timeInterval: Int,
         attemp: Int,
         maxAttempt: Int,
-        _ completionHandler: @escaping (Result<TokenNew.ChargeStatus, Error>) -> Void
+        _ completionHandler: @escaping RequestResultClosure<TokenNew.ChargeStatus, Error>
     ) {
         guard maxAttempt > attemp else {
             return
@@ -85,13 +92,13 @@ private extension ClientNew {
         }
     }
 
-    func token(tokenID: String, _ completionHandler: @escaping (Result<TokenNew, Error>) -> Void) {
+    func token(tokenID: String, _ completionHandler: @escaping RequestResultClosure<TokenNew, Error>) {
         apiRequest(api: OmiseAPI.token(tokenID: tokenID), completionHandler: completionHandler)
     }
 
-    func apiRequest<T: Codable>(api: APIProtocol, completionHandler: @escaping (Result<T, Error>) -> Void) {
+    func apiRequest<T: Codable>(api: APIProtocol, completionHandler: @escaping RequestResultClosure<T, Error>) {
         let urlRequest = urlRequest(publicKey: publicKey, api: api)
-        network.get(
+        network.send(
             urlRequest: urlRequest,
             dateFormatter: api.dateFormatter,
             completionHandler: completionHandler

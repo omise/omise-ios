@@ -5,6 +5,7 @@ import XCTest
 class ClientTests: XCTestCase {
     let publicKey = "pkey_test_58wfnlwoxz1tbkdd993"
     let publicKeyBase64 = "cGtleV90ZXN0XzU4d2ZubHdveHoxdGJrZGQ5OTM="
+    let requestTimeout: TimeInterval = 15.0
 
     var testClient: ClientNew!
     
@@ -12,10 +13,12 @@ class ClientTests: XCTestCase {
         super.setUp()
         testClient = ClientNew(publicKey: publicKey)
         
+        // swiftlint:disable force_unwrapping
         let testEnvironment = Environment.dev(
             vaultURL: URL(string: "https://vault.staging-omise.co")!,
             apiURL: URL(string: "https://api.staging-omise.co")!
         )
+        // swiftlint:enable force_unwrapping
         Configuration.setDefault(Configuration(environment: testEnvironment))
     }
 
@@ -62,10 +65,50 @@ class ClientTests: XCTestCase {
     }
 
     /*
-    func testCapabilityAPI() {
-        let expectation = self.expectation(description: "Capability API test")
+     func testCapabilityAPI() {
+     let expectation = self.expectation(description: "API: Capability")
 
-        testClient?.capability { result in
+     testClient?.capability { result in
+     print(result)
+
+     do {
+     let value = try result.get()
+     print(value)
+     XCTAssertNotNil(value)
+     } catch {
+     XCTFail("Failed with \(error)")
+     }
+
+     expectation.fulfill()
+     }
+
+     waitForExpectations(timeout: 15.0, handler: nil)
+     }
+     */
+
+    func testCreateTokenAPI() {
+        let expectation = self.expectation(description: "API: Create Token")
+
+        // TODO: Move to test data collection
+        let card = PaymentInformationNew.Card(
+            name: "Test User",
+            number: "4242424242424242",
+            expirationMonth: 4,
+            expirationYear: 2024,
+            securityCode: "123",
+            countryCode: "th",
+            city: nil,
+            state: nil,
+            street1: nil,
+            street2: nil,
+            postalCode: nil,
+            phoneNumber: nil
+        )
+
+        let publicKey = "..."
+        let client = ClientNew(publicKey: publicKey)
+
+        client.createToken(card: card) { result in
             print(result)
 
             do {
@@ -79,32 +122,31 @@ class ClientTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 15.0, handler: nil)
+        waitForExpectations(timeout: requestTimeout, handler: nil)
     }
-     */
 
     /*
-    func testObserveChargeStatus() {
-        let expectation = self.expectation(description: "Capability API test")
+     func testObserveChargeStatus() {
+     let expectation = self.expectation(description: "API: Observe Charge Status")
 
-        let tokenID = "test token id"
-        let publicKey = "test pkey"
-        let client = ClientNew(publicKey: publicKey)
-        client.observeChargeStatusUntilChange(tokenID: tokenID) { result in
-            do {
-                let value = try result.get()
-                print(value)
-                XCTAssertNotNil(value)
-            } catch {
-                XCTFail("Failed with \(error)")
-            }
+     let tokenID = "test token id"
+     let publicKey = "test pkey"
+     let client = ClientNew(publicKey: publicKey)
+     client.observeChargeStatusUntilChange(tokenID: tokenID) { result in
+     do {
+     let value = try result.get()
+     print(value)
+     XCTAssertNotNil(value)
+     } catch {
+     XCTFail("Failed with \(error)")
+     }
 
-            expectation.fulfill()
-        }
+     expectation.fulfill()
+     }
 
-        waitForExpectations(timeout: 15.0, handler: nil)
+     waitForExpectations(timeout: 15.0, handler: nil)
 
-    }
+     }
      */
 
     func testCreateSourceAPI() {

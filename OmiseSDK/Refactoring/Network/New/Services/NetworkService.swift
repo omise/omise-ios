@@ -2,7 +2,13 @@ import Foundation
 import os
 
 protocol NetworkServiceProtocol {
-    var urlRequest: URLRequest { get }
+    typealias RequestResultClosure<T: Codable, E: Error> = (Result<T, E>) -> Void
+
+    func send<T: Codable>(
+        urlRequest: URLRequest,
+        dateFormatter: DateFormatter?,
+        completionHandler: @escaping RequestResultClosure<T, Error>
+    )
 }
 
 class NetworkService {
@@ -17,12 +23,14 @@ class NetworkService {
             delegateQueue: queue
         )
     }
+}
 
+extension NetworkService: NetworkServiceProtocol {
     // TODO: Refactoring is required
-    func get<T: Codable>(
+    func send<T: Codable>(
         urlRequest: URLRequest,
-        dateFormatter: DateFormatter? = nil,
-        completionHandler: @escaping (Result<T, Error>) -> Void
+        dateFormatter: DateFormatter?,
+        completionHandler: @escaping RequestResultClosure<T, Error>
     ) {
         let dataTask = session.dataTask(with: urlRequest) { [weak self] (data, response, error) in
             guard let self = self else { return }

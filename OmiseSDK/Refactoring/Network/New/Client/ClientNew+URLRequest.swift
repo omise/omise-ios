@@ -1,17 +1,6 @@
 import Foundation
 import UIKit.UIDevice
 
-// MARK: URLRequest
-extension URLRequest {
-    /// Convenient method to set HTTP headers
-    /// - Parameter headers: [HTTPHeader: Value]
-    mutating func setHTTPHeaders(_ headers: [String: String]) {
-        for (key, value) in headers {
-            self.setValue(value, forHTTPHeaderField: key)
-        }
-    }
-}
-
 // TODO: Make it private and move test code to another test of public method
 extension ClientNew {
     func customURL(api: APIProtocol) -> URL? {
@@ -34,13 +23,15 @@ extension ClientNew {
             publicKey: publicKey,
             userAgent: userAgent(),
             apiVersion: api.omiseAPIVersion,
-            contentType: api.contentType
+            contentType: api.contentType.rawValue
         )
 
         var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = api.method
-        urlRequest.setHTTPHeaders(headers)
-
+        urlRequest.httpMethod = api.method.rawValue
+        urlRequest.httpBody = api.httpBody
+        for (key, value) in headers {
+            urlRequest.setValue(value, forHTTPHeaderField: key)
+        }
         return urlRequest
     }
 }

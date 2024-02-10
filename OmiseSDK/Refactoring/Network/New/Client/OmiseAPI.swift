@@ -1,18 +1,6 @@
 import Foundation
 
-protocol APIProtocol {
-    var omiseAPIVersion: String { get }
-    var server: ServerType { get }
-    var path: String { get }
-    var method: String { get }
-    var contentType: String { get }
-    var dateFormatter: DateFormatter { get }
-}
-
-enum ServerType {
-    case api
-    case vault
-
+extension ServerType {
     // swiftlint:disable force_unwrapping
     var url: URL {
         switch self {
@@ -23,10 +11,11 @@ enum ServerType {
     // swiftlint:enable force_unwrapping
 }
 
+// TODO: Extend it in Unit Test to add Sample Data
 enum OmiseAPI {
     case capability
     case token(tokenID: String)
-    case createToken(cardInfo: String)
+    case createToken(card: PaymentInformationNew.Card)
     case createSource(paymentInfo: String)
 }
 
@@ -57,17 +46,27 @@ extension OmiseAPI: APIProtocol {
         }
     }
 
-    var method: String {
+    var method: HTTPMethod {
         switch self {
         case .capability, .token:
-            return "GET"
+            return .get
         case .createToken, .createSource:
-            return "POST"
+            return .post
         }
     }
 
-    var contentType: String {
-        "application/json; charset=utf8"
+    var contentType: ContentType {
+        .json
+    }
+
+    var httpBody: Data? {
+        switch self {
+        case .createToken(let card):
+            let token = PaymentInformationNew.Token(card: card)
+            return try? jsonEncoder.encode(token)
+        default:
+            return nil
+        }
     }
 
     var dateFormatter: DateFormatter {
@@ -79,8 +78,10 @@ extension OmiseAPI: APIProtocol {
     }
 }
 
-// extension ClientNew.API: NetworkAPIProtocol {
-//    var urlRequest: URLRequest {
-//        return URLRequest(url: url)
-//    }
-// }
+extension OmiseAPI {
+    var jsonEncoder: JSONEncoder {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .formatted(dateFormatter)
+        return encoder
+    }
+}
