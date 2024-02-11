@@ -5,6 +5,6 @@
   "location": "/sources/src_5pqcjr6tu4xvqut5nh5",
   "type": "shopeepay",
   "flow": "redirect",
-  "amount": 100000,
+  "amount": 110000,
   "currency": "MYR"
 }

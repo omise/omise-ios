@@ -5,7 +5,7 @@
   "location": "/sources/src_test_5jb2cjjyjea25nps3ya",
   "amount": 100000,
   "created_at": "2020-03-23T08:26:05Z",
+  "type": "promptpay",
   "currency": "THB",
   "flow": "offline",
-  "type": "promptpay"
 }
