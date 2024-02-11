@@ -1,6 +1,6 @@
 import Foundation
 
-/// Brand of the Card NetworkService
+/// Brand of the Card Network
 public enum CardBrand: String, CustomStringConvertible, Codable {
     
     /// VISA card newtwork brand

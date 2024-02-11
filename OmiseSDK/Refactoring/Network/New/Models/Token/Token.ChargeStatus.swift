@@ -8,6 +8,10 @@ extension TokenNew {
         case reversed
         case successful
         case unknown
+
+        public init(from decoder: Decoder) throws {
+            self = try Self(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .unknown
+        }
     }
 }
 

@@ -288,6 +288,8 @@ extension Client {
         urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: HTTPHeaders.userAgent.rawValue)
         urlRequest.setValue(Client.omiseAPIContentType, forHTTPHeaderField: HTTPHeaders.contentType.rawValue)
         urlRequest.setValue(Client.omiseAPIVersion, forHTTPHeaderField: HTTPHeaders.omiseVersion.rawValue)
+
+        print(String(data: urlRequest.httpBody!, encoding: .utf8)!)
         return urlRequest
     }
     

@@ -7,7 +7,7 @@ protocol NetworkServiceProtocol {
     func send<T: Codable>(
         urlRequest: URLRequest,
         dateFormatter: DateFormatter?,
-        completionHandler: @escaping RequestResultClosure<T, Error>
+        completion: @escaping RequestResultClosure<T, Error>
     )
 }
 
@@ -30,7 +30,7 @@ extension NetworkService: NetworkServiceProtocol {
     func send<T: Codable>(
         urlRequest: URLRequest,
         dateFormatter: DateFormatter?,
-        completionHandler: @escaping RequestResultClosure<T, Error>
+        completion: @escaping RequestResultClosure<T, Error>
     ) {
         let dataTask = session.dataTask(with: urlRequest) { [weak self] (data, response, error) in
             guard let self = self else { return }
@@ -52,7 +52,7 @@ extension NetworkService: NetworkServiceProtocol {
                 }
 
                 DispatchQueue.main.async {
-                    completionHandler(result)
+                    completion(result)
                 }
             }
 

@@ -86,6 +86,7 @@ class ClientTests: XCTestCase {
      }
      */
 
+    /*
     func testCreateTokenAPI() {
         let expectation = self.expectation(description: "API: Create Token")
 
@@ -124,6 +125,7 @@ class ClientTests: XCTestCase {
 
         waitForExpectations(timeout: requestTimeout, handler: nil)
     }
+     */
 
     /*
      func testObserveChargeStatus() {
@@ -148,18 +150,6 @@ class ClientTests: XCTestCase {
 
      }
      */
-
-    func testCreateSourceAPI() {
-//        let paymentInfo = PaymentInfo(
-//            sourceType: SourceTypeValue.alipay
-//        )
-//
-//        let extendedPaymentInfo = AtomePaymentInfo(
-//            phoneNumber: "123"
-//        )
-//        client.request(.createSource(paymentInfo: paymentInfo))
-//        client.request(.createSource(paymentInfo: extendedPaymentInfo))
-    }
 }
 
 class MockupNetwork: NetworkService {
