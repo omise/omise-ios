@@ -1,0 +1,10 @@
+{
+  "object": "source",
+  "id": "src_test_5cs0swjx9zguxt0kd0z",
+  "livemode": false,
+  "location": "/sources/src_test_5cs0swjx9zguxt0kd0z",
+  "type": "internet_banking_ktb",
+  "flow": "redirect",
+  "amount": 100000,
+  "currency": "THB"
+}

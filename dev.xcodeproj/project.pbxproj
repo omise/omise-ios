@@ -27,6 +27,9 @@
 		7502CA662A31AEA200766E7D /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7502CA652A31AEA200766E7D /* Country.swift */; };
 		750708DE2B78FB6500A48DD0 /* SourcePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750708DD2B78FB6500A48DD0 /* SourcePayload.swift */; };
 		750708E02B7909BB00A48DD0 /* SourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750708DF2B7909BB00A48DD0 /* SourceTests.swift */; };
+		750708E32B790B8300A48DD0 /* String+JSONDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750708E22B790B8300A48DD0 /* String+JSONDate.swift */; };
+		750708E52B790BD600A48DD0 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750708E42B790BD600A48DD0 /* SampleData.swift */; };
+		750708E72B790CF200A48DD0 /* SampleData in Resources */ = {isa = PBXBuildFile; fileRef = 750708E62B790CF200A48DD0 /* SampleData */; };
 		7509D4DD2A1A9FD70050AB38 /* MainActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A275CBB21241E4500C5716F /* MainActionButton.swift */; };
 		7509D4E02A1AA1450050AB38 /* AtomeFormViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4DF2A1AA1450050AB38 /* AtomeFormViewControllerTests.swift */; };
 		7509D4E22A1C876B0050AB38 /* AtomeFormViewContextMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E12A1C876B0050AB38 /* AtomeFormViewContextMockup.swift */; };
@@ -250,6 +253,9 @@
 		7502CA652A31AEA200766E7D /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		750708DD2B78FB6500A48DD0 /* SourcePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcePayload.swift; sourceTree = "<group>"; };
 		750708DF2B7909BB00A48DD0 /* SourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTests.swift; sourceTree = "<group>"; };
+		750708E22B790B8300A48DD0 /* String+JSONDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+JSONDate.swift"; sourceTree = "<group>"; };
+		750708E42B790BD600A48DD0 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		750708E62B790CF200A48DD0 /* SampleData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SampleData; sourceTree = "<group>"; };
 		7509D4DF2A1AA1450050AB38 /* AtomeFormViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewControllerTests.swift; sourceTree = "<group>"; };
 		7509D4E12A1C876B0050AB38 /* AtomeFormViewContextMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewContextMockup.swift; sourceTree = "<group>"; };
 		7509D4E32A1C89F10050AB38 /* AtomeFormViewModelMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewModelMockup.swift; sourceTree = "<group>"; };
@@ -313,7 +319,7 @@
 		75B420A32B78E5B30036134D /* Object.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Object.swift; path = OmiseSDK/Object.swift; sourceTree = "<group>"; };
 		75B420A42B78E5B30036134D /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Currency.swift; path = OmiseSDK/Currency.swift; sourceTree = "<group>"; };
 		75B420A52B78E5B30036134D /* PAN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PAN.swift; path = OmiseSDK/PAN.swift; sourceTree = "<group>"; };
-		75B420A62B78E5B30036134D /* PaymentInformation.Atome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaymentInformation.Atome.swift; path = OmiseSDK/PaymentInformation.Atome.swift; sourceTree = "<group>"; };
+		75B420A62B78E5B30036134D /* PaymentInformation.Atome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentInformation.Atome.swift; sourceTree = "<group>"; };
 		75B420AE2B78E5D30036134D /* PaymentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaymentInformation.swift; path = OmiseSDK/PaymentInformation.swift; sourceTree = "<group>"; };
 		75CFC4CD2B73AF0E00422A8F /* ClientNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientNew.swift; sourceTree = "<group>"; };
 		75CFC4D12B73AFD500422A8F /* OmiseSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseSDK.swift; sourceTree = "<group>"; };
@@ -463,7 +469,6 @@
 				8A2BE95820A9A8FE000CEB60 /* Views */,
 				F6FE863F25E49BC900C7A4DE /* Resources */,
 				98FF99BA2577789800476487 /* Configuration.swift */,
-				752E40C32ACD420C00B62A49 /* SourceTypeValue.swift */,
 			);
 			path = OmiseSDK;
 			sourceTree = "<group>";
@@ -488,6 +493,32 @@
 				7502CA612A31A7E100766E7D /* CountryListViewModelProtocol.swift */,
 			);
 			name = CountryListViewController;
+			sourceTree = "<group>";
+		};
+		750708E12B790B2400A48DD0 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				750708E22B790B8300A48DD0 /* String+JSONDate.swift */,
+				750708E42B790BD600A48DD0 /* SampleData.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		750708E82B79125200A48DD0 /* Old tests */ = {
+			isa = PBXGroup;
+			children = (
+				F615CBFB2615696100E1A2D9 /* Views */,
+				225931561CE4745200841B86 /* SDKTestCase.swift */,
+				7509D4DE2A1AA1060050AB38 /* Atome */,
+				75CFC4D52B73EFB600422A8F /* Client */,
+				8A3C10572159FCE900BEFD8A /* BadRequestAPIErrorParsingTestCase.swift */,
+				8A14C20A220AE241003F5B20 /* CapabilityOperationFixtureTests.swift */,
+				8A3C10552159F7FC00BEFD8A /* InvalidCardAPIErrorParsingTestCase.swift */,
+				8A37E43520B584D300E2DA18 /* ModelTestCase.swift */,
+				8A43454620DBAE76005C5C94 /* PANModelTestCase.swift */,
+				8A429E7A2109A3AE007C230F /* PaymentInformationTestCase.swift */,
+			);
+			path = "Old tests";
 			sourceTree = "<group>";
 		};
 		7509D4DE2A1AA1060050AB38 /* Atome */ = {
@@ -678,7 +709,6 @@
 				75CFC4D32B73B21100422A8F /* ClientTests.swift */,
 				75CFC4F62B753D6300422A8F /* CapabilityTests.swift */,
 				75B420882B77FF500036134D /* PaymentPayload.swift */,
-				750708DF2B7909BB00A48DD0 /* SourceTests.swift */,
 				75B4208D2B78C2120036134D /* SourcePaymentTests.swift */,
 				75B420902B78C2450036134D /* CardPaymenTests.swift */,
 			);
@@ -688,6 +718,7 @@
 		75B420952B78E56D0036134D /* Done */ = {
 			isa = PBXGroup;
 			children = (
+				75B420A62B78E5B30036134D /* PaymentInformation.Atome.swift */,
 				75B420962B78E56D0036134D /* Capability.swift */,
 				75B420972B78E56D0036134D /* RequestTask.swift */,
 				75B420982B78E56D0036134D /* Request.swift */,
@@ -821,14 +852,14 @@
 		8A2BE95720A9A8F1000CEB60 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				75B420952B78E56D0036134D /* Done */,
+				752E40C32ACD420C00B62A49 /* SourceTypeValue.swift */,
 				75B420A22B78E5B30036134D /* CardBrand.swift */,
 				75B420A42B78E5B30036134D /* Currency.swift */,
 				75B420A32B78E5B30036134D /* Object.swift */,
 				75B420A12B78E5B30036134D /* OmiseError.swift */,
 				75B420A52B78E5B30036134D /* PAN.swift */,
 				75B420AE2B78E5D30036134D /* PaymentInformation.swift */,
-				75B420A62B78E5B30036134D /* PaymentInformation.Atome.swift */,
-				75B420952B78E56D0036134D /* Done */,
 				75B4209E2B78E5980036134D /* Source.swift */,
 			);
 			name = Models;
@@ -915,17 +946,11 @@
 				757B0A722AD71DCD00DEAE8F /* OmiseUnitTestKit */,
 				987A02CD1CE35D5E0035417A /* Info.plist */,
 				987A03AC1CE5CD450035417A /* Fixtures */,
+				750708E62B790CF200A48DD0 /* SampleData */,
+				750708E82B79125200A48DD0 /* Old tests */,
 				75B4208F2B78C22A0036134D /* New Tests */,
-				7509D4DE2A1AA1060050AB38 /* Atome */,
-				75CFC4D52B73EFB600422A8F /* Client */,
-				8A3C10572159FCE900BEFD8A /* BadRequestAPIErrorParsingTestCase.swift */,
-				8A14C20A220AE241003F5B20 /* CapabilityOperationFixtureTests.swift */,
-				8A3C10552159F7FC00BEFD8A /* InvalidCardAPIErrorParsingTestCase.swift */,
-				8A37E43520B584D300E2DA18 /* ModelTestCase.swift */,
-				8A43454620DBAE76005C5C94 /* PANModelTestCase.swift */,
-				8A429E7A2109A3AE007C230F /* PaymentInformationTestCase.swift */,
-				225931561CE4745200841B86 /* SDKTestCase.swift */,
-				F615CBFB2615696100E1A2D9 /* Views */,
+				750708E12B790B2400A48DD0 /* Helpers */,
+				750708DF2B7909BB00A48DD0 /* SourceTests.swift */,
 			);
 			path = OmiseSDKTests;
 			sourceTree = "<group>";
@@ -1140,6 +1165,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				750708E72B790CF200A48DD0 /* SampleData in Resources */,
 				987A03AD1CE5CD450035417A /* Fixtures in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1332,6 +1358,8 @@
 				75B420912B78C2450036134D /* CardPaymenTests.swift in Sources */,
 				8A3C10562159F7FC00BEFD8A /* InvalidCardAPIErrorParsingTestCase.swift in Sources */,
 				75F8C0B72B1F78E300AE78D9 /* PaymentChooserViewControllerTests.swift in Sources */,
+				750708E32B790B8300A48DD0 /* String+JSONDate.swift in Sources */,
+				750708E52B790BD600A48DD0 /* SampleData.swift in Sources */,
 				758244092ACE988700781B3B /* PaymentInformationTestCase.swift in Sources */,
 				750708E02B7909BB00A48DD0 /* SourceTests.swift in Sources */,
 				75CFC4D42B73B21100422A8F /* ClientTests.swift in Sources */,

@@ -1,7 +1,7 @@
 import Foundation
 
 extension SourcePayload {
-    public struct Atome: Codable {
+    public struct Atome: Codable, Equatable {
         /// The customers phone number. Contains only digits and has 10 or 11 characters
         let phoneNumber: String
         let name: String?
@@ -83,5 +83,3 @@ extension SourcePayload.Atome {
         }
     }
 }
-
-

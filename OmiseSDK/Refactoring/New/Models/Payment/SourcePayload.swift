@@ -2,17 +2,17 @@ import Foundation
 
 // TODO: Add Unit Tests for SourcePayload
 // TODO: Add comments to SourcePayload's properties
-public enum SourcePayload: Codable {
+public enum SourcePayload: Codable, Equatable {
     case atome(SourcePayload.Atome)
-    case barcode(SourcePayload.Barcode)
-    case billPayment(SourcePayload.BillPayment)
-    case duitNowOBW(SourcePayload.DoitNowOBW)
-    case eContext(SourcePayload.EContext)
-    case fpx(SourcePayload.FPX)
-    case installment(SourcePayload.Installment)
-    case mobileBanking(SourcePayload.MobileBanking)
-    case points(SourcePayload.Points)
-    case trueMoney(SourcePayload.TrueMoney)
+//    case barcode(SourcePayload.Barcode)
+//    case billPayment(SourcePayload.BillPayment)
+//    case duitNowOBW(SourcePayload.DoitNowOBW)
+//    case eContext(SourcePayload.EContext)
+//    case fpx(SourcePayload.FPX)
+//    case installment(SourcePayload.Installment)
+//    case mobileBanking(SourcePayload.MobileBanking)
+//    case points(SourcePayload.Points)
+//    case trueMoney(SourcePayload.TrueMoney)
     case other(SourceType)
 
     private enum CodingKeys: String, CodingKey {

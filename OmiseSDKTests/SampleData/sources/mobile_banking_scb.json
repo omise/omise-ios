@@ -1,0 +1,10 @@
+{
+  "object": "source",
+  "id": "src_test_5cs0sm8u8h8nqo5zasd",
+  "livemode": false,
+  "location": "/sources/src_test_5avnh1p1dt3hkh161ac",
+  "type": "mobile_banking_scb",
+  "flow": "app_redirect",
+  "amount": 1000000,
+  "currency": "THB"
+}

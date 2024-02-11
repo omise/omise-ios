@@ -1,0 +1,54 @@
+{
+    "object":"source",
+    "id":"src_5yqiaqtbbog2pxjdg6b",
+    "livemode":true,
+    "location":"/sources/src_5yqiaqtbbog2pxjdg6b",
+    "amount":500000,
+    "barcode":null,
+    "bank":null,
+    "created_at":"2024-02-11T10:36:32Z",
+    "currency":"THB",
+    "email":null,
+    "flow":"redirect",
+    "installment_term":null,
+    "ip":"11.5.27.19",
+    "absorption_type":null,
+    "name":"Test Data",
+    "mobile_number":"+12312312312",
+    "phone_number":"+12312312312",
+    "platform_type":"IOS",
+    "scannable_code":null,
+    "billing":null,
+    "shipping":{
+        "city":"Bangkok",
+        "country":"TH",
+        "postal_code":"10330",
+        "state":"Krung Thep Maha Nakhon",
+        "street1":"444 Phaya Thai Rd",
+        "street2":"Khwaeng Wang Mai, Pathum Wan"
+    },
+    "items":[
+        {
+            "sku":"3427842",
+            "name":"Prada shoes",
+            "brand":"Gucci",
+            "category":"Shoes",
+            "amount":500000,
+            "quantity":1,
+            "item_uri":"omise.co/product/shoes",
+            "image_uri":"omise.co/product/shoes/image"
+        }
+    ],
+    "references":null,
+    "provider_references":null,
+    "store_id":null,
+    "store_name":null,
+    "terminal_id":null,
+    "type":"atome",
+    "zero_interest_installments":null,
+    "charge_status":"unknown",
+    "receipt_amount":null,
+    "discounts":[
+
+    ]
+}

@@ -1,0 +1,10 @@
+{
+  "object": "source",
+  "id": "src_test_5cs0sm8u8h8nqo5hwcs",
+  "livemode": false,
+  "location": "/sources/src_test_5cs0sm8u8h8nqo5hwcs",
+  "type": "internet_banking_bay",
+  "flow": "redirect",
+  "amount": 100000,
+  "currency": "THB"
+}
