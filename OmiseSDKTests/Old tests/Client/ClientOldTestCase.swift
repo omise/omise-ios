@@ -16,10 +16,10 @@ class ClientTestCase: XCTestCase {
         ))
     }
 
-    var testClient: Client!
+    var testClient: ClientOld!
     override func setUp() {
         super.setUp()
-        testClient = Client(publicKey: "pkey_test_58wfnlwoxz1tbkdd993")
+        testClient = ClientOld(publicKey: "pkey_test_58wfnlwoxz1tbkdd993")
     }
     
     override func tearDown() {
@@ -73,7 +73,7 @@ class ClientTestCase: XCTestCase {
     }
     
     func testValidSourceRequestWithCallback() {
-        let expectation = self.expectation(description: "Source Reqeust with a valid token data")
+        let expectation = self.expectation(description: "SourceOLD Reqeust with a valid token data")
         let task = testClient.send(ClientTestCase.makeValidSourceRequest()) { (result) in
             defer { expectation.fulfill() }
             switch result {
@@ -91,14 +91,14 @@ class ClientTestCase: XCTestCase {
         XCTAssertEqual(Currency.thb, task.request.parameter.currency)
         XCTAssertEqual(PaymentInformation.internetBanking(.bay), task.request.parameter.paymentInformation)
         
-        XCTAssertEqual(Source.postURL, task.dataTask.currentRequest?.url)
+        XCTAssertEqual(SourceOLD.postURL, task.dataTask.currentRequest?.url)
         XCTAssertEqual("POST", task.dataTask.currentRequest?.httpMethod)
         
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
     func testInvalidSourceRequestWithCallback() {
-        let expectation = self.expectation(description: "Source Reqeust with an invalid source data")
+        let expectation = self.expectation(description: "SourceOLD Reqeust with an invalid source data")
         let task = testClient.send(ClientTestCase.makeInvalidSourceRequest()) { (result) in
             defer { expectation.fulfill() }
             if case .success = result {
@@ -113,7 +113,7 @@ class ClientTestCase: XCTestCase {
             task.request.parameter.paymentInformation
         )
 
-        XCTAssertEqual(Source.postURL, task.dataTask.currentRequest?.url)
+        XCTAssertEqual(SourceOLD.postURL, task.dataTask.currentRequest?.url)
         XCTAssertEqual("POST", task.dataTask.currentRequest?.httpMethod)
         
         waitForExpectations(timeout: timeout, handler: nil)
@@ -132,10 +132,10 @@ extension ClientTestCase {
         TestCaseValueGenerator.invalidCases(self.requestTokenGenerator).first!
     }
     
-    static func makeValidSourceRequest() -> Request<Source> {
+    static func makeValidSourceRequest() -> Request<SourceOLD> {
         return Request(paymentInformation: PaymentInformation.internetBanking(.bay), amount: 100_00, currency: .thb)
     }
-    static func makeInvalidSourceRequest() -> Request<Source> {
+    static func makeInvalidSourceRequest() -> Request<SourceOLD> {
         return Request(
             paymentInformation: .other(type: "UNSUPPORTED SOURCE", parameters: [ "client_id": "client_12345", "client_balance": 12345.67]),
             amount: 100_00,

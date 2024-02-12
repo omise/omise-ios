@@ -1,18 +1,18 @@
 import Foundation
 
-// TODO: Add Unit Tests for SourceNew
 /// Represents an Omise Source object
-public struct SourceNew: Decodable {
-    /// Omise Source ID
+/// Sources are methods for accepting payments through non-credit-card channels
+public struct Source: Decodable {
+    /// The processing flow of a Source
     public let id: String
-    /// Processing Flow of this source
-    public let flow: Flow
-    /// Boolean indicates that if this Token is in the live mode
+    /// Whether this is a live (true) or test (false) source
     public let isLiveMode: Bool
-    /// Payment amount of this Source
+    /// Source amount in smallest unit of source currency
     let amount: Int64
-    /// Payment currency of this Source
+    /// Currency for source as three-letter ISO 4217 code
     let currency: String
+    /// The payment flow payers need to go through to complete the payment
+    public let flow: Flow
     /// The payment details of this source describes how the payment is processed
     let paymentInformation: SourcePayload
 

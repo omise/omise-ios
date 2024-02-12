@@ -12,7 +12,7 @@ class CapabilityOperationFixtureTests: XCTestCase {
     }
 
     func testCapabilityRetrieve() {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let capabilityData = try XCTestCase.fixturesData(forFilename: "capability")
@@ -65,7 +65,7 @@ class CapabilityOperationFixtureTests: XCTestCase {
     }
 
     func testEncodeCapabilityRetrieve() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
         let capabilityData = try XCTestCase.fixturesData(forFilename: "capability")
         let capability = try decoder.decode(Capability.self, from: capabilityData)
 

@@ -36,7 +36,7 @@ extension SourcePayload {
     }
 }
 
-extension SourcePayload.Atome  {
+extension SourcePayload.Atome {
     private enum CodingKeys: String, CodingKey {
         case name
         case email

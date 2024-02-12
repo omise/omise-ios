@@ -21,7 +21,7 @@ class PaymentPayloadTests: XCTestCase {
     func parse(filename: String) {
         do {
             let jsonData = try XCTestCase.fixturesData(forFilename: filename)
-            let data = try decoder.decode(SourceNew.self, from: jsonData)
+            let data = try decoder.decode(Source.self, from: jsonData)
             print(data)
             XCTAssertTrue(true)
         } catch {

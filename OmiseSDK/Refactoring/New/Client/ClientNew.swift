@@ -11,7 +11,7 @@ import os
 
 
 
-// TODO: Rename to Client
+// TODO: Rename to ClientOld
 public class ClientNew {
     public typealias RequestResultClosure<T: Decodable, E: Error> = (Result<T, E>) -> Void
 

@@ -1,13 +1,13 @@
 import Foundation
 
-/// Represents an Omise Source object
-public struct Source: CreatableObject {
+/// Represents an Omise SourceOLD object
+public struct SourceOLD: CreatableObject {
     public typealias CreateParameter = CreateSourceParameter
     
     public static let postURL: URL = Configuration.default.environment.sourceURL
     
     public let object: String
-    /// Omise Source ID
+    /// Omise SourceOLD ID
     public let id: String
     
     /// The payment information of this source describes how the payment is processed
@@ -17,9 +17,9 @@ public struct Source: CreatableObject {
     /// - SeeAlso: Flow
     public let flow: Flow
     
-    /// Payment amount of this Source
+    /// Payment amount of this SourceOLD
     public let amount: Int64
-    /// Payment currency of this Source
+    /// Payment currency of this SourceOLD
     public let currency: Currency
     
     enum CodingKeys: String, CodingKey {
@@ -43,14 +43,14 @@ public struct Source: CreatableObject {
     }
 }
 
-/// Parameter for creating a new `Source`
-/// - SeeAlso: Source
+/// Parameter for creating a new `SourceOLD`
+/// - SeeAlso: SourceOLD
 public struct CreateSourceParameter: Encodable {
-    /// The payment information that is used to create a new Source
+    /// The payment information that is used to create a new SourceOLD
     public let paymentInformation: PaymentInformation
-    /// The amount of the creating Source
+    /// The amount of the creating SourceOLD
     public let amount: Int64
-    /// The currench of the creating Source
+    /// The currench of the creating SourceOLD
     public let currency: Currency
     
     private let platformType: String
@@ -74,12 +74,12 @@ public struct CreateSourceParameter: Encodable {
 
     }
     
-    /// Create a new `Create Source Parameter` that will be used to create a new Source
+    /// Create a new `Create SourceOLD Parameter` that will be used to create a new SourceOLD
     ///
     /// - Parameters:
-    ///   - paymentInformation: The payment informaiton of the creating Source
-    ///   - amount: The amount of the creating Source
-    ///   - currency: The currency of the creating Source
+    ///   - paymentInformation: The payment informaiton of the creating SourceOLD
+    ///   - amount: The amount of the creating SourceOLD
+    ///   - currency: The currency of the creating SourceOLD
     public init(paymentInformation: PaymentInformation, amount: Int64, currency: Currency) {
         self.paymentInformation = paymentInformation
         self.amount = amount
@@ -116,7 +116,7 @@ public struct CreateSourceParameter: Encodable {
     }
 }
 
-/// The processing flow of a Source
+/// The processing flow of a SourceOLD
 ///
 /// - redirect: The customer need to be redirected to another URL in order to process the source
 /// - offline: The customer need to do something in offline in order to process the source

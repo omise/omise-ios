@@ -11,7 +11,7 @@ public protocol PaymentCreatorControllerDelegate: NSObjectProtocol {
 
 public enum Payment {
     case token(Token)
-    case source(Source)
+    case source(SourceOLD)
 }
 
 public protocol PaymentChooserUI: AnyObject {
@@ -37,17 +37,17 @@ public class PaymentCreatorController: UINavigationController {
                 return
             }
 
-            self.client = Client(publicKey: publicKey)
+            self.client = ClientOld(publicKey: publicKey)
         }
     }
 
-    /// Amount to create a Source payment
+    /// Amount to create a SourceOLD payment
     public var paymentAmount: Int64? {
         didSet {
             paymentSourceCreatorFlowSession.paymentAmount = paymentAmount
         }
     }
-    /// Currency to create a Source payment
+    /// Currency to create a SourceOLD payment
     public var paymentCurrency: Currency? {
         didSet {
             paymentSourceCreatorFlowSession.paymentCurrency = paymentCurrency
@@ -61,7 +61,7 @@ public class PaymentCreatorController: UINavigationController {
         }
     }
 
-    /// Available Source payment options to let user to choose.
+    /// Available SourceOLD payment options to let user to choose.
     /// The default value is the default available payment method for merchant in Thailand
     public var allowedPaymentMethods: [SourceTypeValue] = PaymentCreatorController.thailandDefaultAvailableSourceMethods {
         didSet {
@@ -79,7 +79,7 @@ public class PaymentCreatorController: UINavigationController {
     /// Delegate to receive CreditCardFormController result.
     public weak var paymentDelegate: PaymentCreatorControllerDelegate?
 
-    var client: Client? {
+    var client: ClientOld? {
         didSet {
             paymentSourceCreatorFlowSession.client = client
         }
@@ -370,15 +370,15 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
         }
     }
 
-    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreatedSource source: Source) {
-        os_log("Payment Creator Create Source Request succeed %{private}@, trying to notify the delegate",
+    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreatedSource source: SourceOLD) {
+        os_log("Payment Creator Create SourceOLD Request succeed %{private}@, trying to notify the delegate",
                log: uiLogObject,
                type: .default,
                source.id)
 
         if let paymentDelegate = self.paymentDelegate {
             paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.source(source))
-            os_log("Payment Creator Created Source succeed delegate notified", log: uiLogObject, type: .default)
+            os_log("Payment Creator Created SourceOLD succeed delegate notified", log: uiLogObject, type: .default)
         } else {
             os_log("There is no Payment Creator delegate to notify about the created source", log: uiLogObject, type: .default)
         }

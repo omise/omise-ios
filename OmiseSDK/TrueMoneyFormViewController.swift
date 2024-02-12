@@ -4,7 +4,7 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
     
     var flowSession: PaymentCreatorFlowSession?
     
-    private var client: Client?
+    private var client: ClientOld?
     
     private var isInputDataValid: Bool {
         return formFields.allSatisfy { $0.isValid }

@@ -27,7 +27,7 @@ struct ContentView_Previews: PreviewProvider {
 ///     - Tests for next button enabled / disabled
 ///     - Tests for processing (pass data to textfields, press button action - delegate receives data (pass closure to mockup view controller to get callback)
 /// - View Model
-///     - Dependency injection for Client and use same existing flow
+///     - Dependency injection for ClientOld and use same existing flow
 ///     - Test using Client's mockup response (postpone but check about future refactoring)
 
 /// Billing address refactoring to the same approach:
@@ -38,5 +38,5 @@ struct ContentView_Previews: PreviewProvider {
 ///     - Tests for next button enabled / disabled
 ///     - Tests for processing (pass data to textfields, press button action - delegate receives data (pass closure to mockup view controller to get callback)
 /// - View Model
-///     - Dependency injection for Client and use same existing flow
+///     - Dependency injection for ClientOld and use same existing flow
 ///     - Test using Client's mockup response (postpone but check about future refactoring)

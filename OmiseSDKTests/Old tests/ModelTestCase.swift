@@ -6,7 +6,7 @@ import XCTest
 class ModelTestCase: XCTestCase {
 
     func testDecodeToken() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Token>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<Token>?.none)
         let tokenData = try XCTestCase.fixturesData(forFilename: "token_object")
         let token = try decoder.decode(Token.self, from: tokenData)
 
@@ -20,7 +20,7 @@ class ModelTestCase: XCTestCase {
     }
 
     func testDecodeTokenWithoutCard() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Token>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<Token>?.none)
         let tokenData = try XCTestCase.fixturesData(forFilename: "token_with_empty_card_object")
         let token = try decoder.decode(Token.self, from: tokenData)
 
@@ -34,7 +34,7 @@ class ModelTestCase: XCTestCase {
     }
 
     func testDecodeCard() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Token>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<Token>?.none)
         let cardData = try XCTestCase.fixturesData(forFilename: "card_object")
         let card = try decoder.decode(Card.self, from: cardData)
 
@@ -50,11 +50,11 @@ class ModelTestCase: XCTestCase {
     }
 
     func testDecodeSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_alipay_object")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5avnfnqxzzj2yu7a34e", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
@@ -67,11 +67,11 @@ class ModelTestCase: XCTestCase {
     }
 
     func testBillPaymentSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_bill_payment/tesco_lotus")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_59trf2nxk43b5nml8z0", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
@@ -84,11 +84,11 @@ class ModelTestCase: XCTestCase {
     }
 
     func testDecodeBarcodeSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_barcode/alipay")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             let expectedBarcode = PaymentInformation.Barcode.AlipayBarcode(
                 barcode: "1234567890123456",
@@ -109,11 +109,11 @@ class ModelTestCase: XCTestCase {
 
     // swiftlint:disable:next function_body_length
     func testDecodeInstallmentsSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_installments/first_choice")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5cq1ugk8m0un1yefb2u", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
@@ -126,7 +126,7 @@ class ModelTestCase: XCTestCase {
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_installments/bay")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5cs0t6x8n0z8rcfrsfi", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
@@ -139,7 +139,7 @@ class ModelTestCase: XCTestCase {
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_installments/bbl")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5cs0tdinbyypg6kn1fa", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
@@ -152,7 +152,7 @@ class ModelTestCase: XCTestCase {
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_installments/mbb")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5obr9opqz5huc6tefw8", source.id)
             XCTAssertEqual(Currency.myr, source.currency)
@@ -165,7 +165,7 @@ class ModelTestCase: XCTestCase {
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_installments/ktc")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5cs0tk7m2e5ivctrq30", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
@@ -178,7 +178,7 @@ class ModelTestCase: XCTestCase {
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_installments/kbank")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5cs0totfv87k1i6y45l", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
@@ -191,7 +191,7 @@ class ModelTestCase: XCTestCase {
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_installments/ttb")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5obr9opd7ej5c6tefw8", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
@@ -204,7 +204,7 @@ class ModelTestCase: XCTestCase {
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_installments/uob")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5oe7fj1qz5huc6tefw8", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
@@ -217,11 +217,11 @@ class ModelTestCase: XCTestCase {
     }
 
     func testDecodeInternetBankingSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_internet_banking/bay")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5cs0sm8u8h8nqo5hwcs", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
@@ -234,7 +234,7 @@ class ModelTestCase: XCTestCase {
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_internet_banking/bbl")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5cs0sfy7phu06yhyz5c", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
@@ -248,11 +248,11 @@ class ModelTestCase: XCTestCase {
 
     // swiftlint:disable:next function_body_length
     func testDecodeMobileBankingSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_mobile_banking/scb")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5cs0sm8u8h8nqo5zasd", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
@@ -265,7 +265,7 @@ class ModelTestCase: XCTestCase {
         
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_mobile_banking/kbank")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5cs0sm8u8h8nqo5zasd", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
@@ -278,7 +278,7 @@ class ModelTestCase: XCTestCase {
         
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_mobile_banking/bay")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5cs0sm8u8h8nqo5zasd", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
@@ -291,7 +291,7 @@ class ModelTestCase: XCTestCase {
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_mobile_banking/bbl")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5cs0sm8u8h8nqo5zasd", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
@@ -304,7 +304,7 @@ class ModelTestCase: XCTestCase {
         
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_mobile_banking/ktb")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5cs0sm8u8h8nqo5zasd", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
@@ -317,11 +317,11 @@ class ModelTestCase: XCTestCase {
     }
 
     func testDecodeAlipayCNSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_alipay_plus/alipay_cn")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5owftw9kjhjisssm0n2", source.id)
             XCTAssertEqual(Currency.thb, source.currency)
@@ -334,11 +334,11 @@ class ModelTestCase: XCTestCase {
     }
 
     func testDecodeAlipayHKSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_alipay_plus/alipay_hk")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5oxesy9ovpgawobhf6n", source.id)
             XCTAssertEqual(Currency.hkd, source.currency)
@@ -351,11 +351,11 @@ class ModelTestCase: XCTestCase {
     }
     
 //    func testDecodeAtomeSource() throws {
-//        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+//        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 //
 //        do {
 //            let sourceData = try XCTestCase.fixturesData(forFilename: "source_atome")
-//            let source = try decoder.decode(Source.self, from: sourceData)
+//            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 //
 //            XCTAssertEqual("src_test_5jhmesi7s4at1qctloy", source.id)
 //            XCTAssertEqual(100000, source.amount)
@@ -375,11 +375,11 @@ class ModelTestCase: XCTestCase {
 //    }
 
     func testDecodeDANASource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_alipay_plus/dana")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5oxew5l8jxhss03ybfb", source.id)
             XCTAssertEqual(Currency.jpy, source.currency)
@@ -392,11 +392,11 @@ class ModelTestCase: XCTestCase {
     }
 
     func testDecodeGCashSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_alipay_plus/gcash")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5oxesgzoekdn5nukcdf", source.id)
             XCTAssertEqual(Currency.usd, source.currency)
@@ -409,11 +409,11 @@ class ModelTestCase: XCTestCase {
     }
 
     func testDecodeKakaoPaySource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_alipay_plus/kakaopay")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5oxetau2owhu0rbzg7y", source.id)
             XCTAssertEqual(Currency.usd, source.currency)
@@ -426,11 +426,11 @@ class ModelTestCase: XCTestCase {
     }
 
     func testDecodeTouchNGoSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_alipay_plus/touch_n_go")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5oxet335rx3xzdyn06g", source.id)
             XCTAssertEqual(Currency.sgd, source.currency)
@@ -443,11 +443,11 @@ class ModelTestCase: XCTestCase {
     }
 
     func testDecodePromptPayQRSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_qr_payment/promptpay")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5jb2cjjyjea25nps3ya", source.id)
             XCTAssertEqual(100000, source.amount)
@@ -460,11 +460,11 @@ class ModelTestCase: XCTestCase {
     }
 
     func testDecodePayNowQRSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_qr_payment/paynow")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5iso4taobco8j5jehx5", source.id)
             XCTAssertEqual(100000, source.amount)
@@ -477,11 +477,11 @@ class ModelTestCase: XCTestCase {
     }
 
     func testDecodeTrueMoneySource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_truemoney_object")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5jhmesi7s4at1qctloy", source.id)
             XCTAssertEqual(100000, source.amount)
@@ -494,11 +494,11 @@ class ModelTestCase: XCTestCase {
     }
     
     func testDecodeRabbitLinePaySource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_rabbit_linepay")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5owftw9kjhjisssm0n2", source.id)
             XCTAssertEqual(500000, source.amount)
@@ -511,11 +511,11 @@ class ModelTestCase: XCTestCase {
     }
     
     func testDecodeGrabPaySource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_grabpay")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5pqcjr6tu4xvqut5nh5", source.id)
             XCTAssertEqual(100000, source.amount)
@@ -528,11 +528,11 @@ class ModelTestCase: XCTestCase {
     }
     
     func testDecodePointsSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_points/city_points")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5ji0d5y5w8xd9ll3loh", source.id)
             XCTAssertEqual(100000, source.amount)
@@ -545,11 +545,11 @@ class ModelTestCase: XCTestCase {
     }
 
     func testDecodeFPXSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_fpx")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_test_5jhmesi7s4at1qctloz", source.id)
             XCTAssertEqual(100000, source.amount)
@@ -562,11 +562,11 @@ class ModelTestCase: XCTestCase {
     }
 
     func testDecodeBoostSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_boost")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_5pqcjr6tu4xvqut5nh5", source.id)
             XCTAssertEqual(100000, source.amount)
@@ -579,11 +579,11 @@ class ModelTestCase: XCTestCase {
     }
     
     func testDecodeShopeePaySource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_shopeepay")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_5pqcjr6tu4xvqut5nh5", source.id)
             XCTAssertEqual(100000, source.amount)
@@ -596,11 +596,11 @@ class ModelTestCase: XCTestCase {
     }
     
     func testDecodeShopeePayJumpAppSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_shopeepay_jumpapp")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_5pqcjr6tu4xvqut5nh5", source.id)
             XCTAssertEqual(100000, source.amount)
@@ -613,11 +613,11 @@ class ModelTestCase: XCTestCase {
     }
     
     func testDecodeMaybankQRPaySource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_maybank_qr")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_5pqcjr6tu4xvqut5nh5", source.id)
             XCTAssertEqual(100000, source.amount)
@@ -630,11 +630,11 @@ class ModelTestCase: XCTestCase {
     }
     
     func testDecodeDuitNowQRSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_duitnow_qr")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_5pqcjr6tu4xvqut5nh5", source.id)
             XCTAssertEqual(100000, source.amount)
@@ -647,11 +647,11 @@ class ModelTestCase: XCTestCase {
     }
     
     func testDecodeDuitNowOBWSource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_duitnow_obw")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_5pqcjr6tu4xvqut5nh5", source.id)
             XCTAssertEqual(100000, source.amount)
@@ -664,7 +664,7 @@ class ModelTestCase: XCTestCase {
     }
     
     func testEncodeTokenParams() throws {
-        let encoder = Client.makeJSONEncoder()
+        let encoder = ClientOld.makeJSONEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
 
         do {
@@ -717,11 +717,11 @@ class ModelTestCase: XCTestCase {
     }
     
     func testDecodePayPaySource() throws {
-        let decoder = Client.makeJSONDecoder(for: Request<Source>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
 
         do {
             let sourceData = try XCTestCase.fixturesData(forFilename: "source_paypay")
-            let source = try decoder.decode(Source.self, from: sourceData)
+            let source = try decoder.decode(SourceOLD.self, from: sourceData)
 
             XCTAssertEqual("src_5pqcjr6tu4xvqut5nh5", source.id)
             XCTAssertEqual(100000, source.amount)

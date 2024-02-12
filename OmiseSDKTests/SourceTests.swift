@@ -171,15 +171,21 @@ class SourceTests: XCTestCase {
         XCTAssertEqual(source.currency, "THB")
     }
 
-        func testDecodeBarcodeAlipay() throws {
-            let source = try source(type: .barcodeAlipay)
-            XCTAssertEqual(source.id, "src_test_5cq1tilrnz7d62t8y87")
-            XCTAssertFalse(source.isLiveMode)
-            XCTAssertEqual(source.paymentInformation, .barcode(.alipay(payload)))
-            XCTAssertEqual(source.flow, .<#flow#>)
-            XCTAssertEqual(source.amount, <#amount#>)
-            XCTAssertEqual(source.currency, "<#currency#>")
-        }
+    func testDecodeBarcodeAlipay() throws {
+        let source = try source(type: .barcodeAlipay)
+        let payload = SourcePayload.Barcode.Alipay(
+            barcode: "1234567890123456",
+            storeID: "1",
+            storeName: "Main Store",
+            terminalID: nil
+        )
+        XCTAssertEqual(source.id, "src_test_5cq1tilrnz7d62t8y87")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .barcode(.alipay(payload)))
+        XCTAssertEqual(source.flow, .offline)
+        XCTAssertEqual(source.amount, 100000)
+        XCTAssertEqual(source.currency, "THB")
+    }
 
     //    func testDecode<#Type#>() throws {
     //        let source = try source(type: .<#type#>)
@@ -244,10 +250,10 @@ class SourceTests: XCTestCase {
 }
 
 private extension SourceTests {
-    func source(type: SourceType) throws -> SourceNew {
+    func source(type: SourceType) throws -> Source {
         do {
             let sourceData = try sampleData.jsonData(for: .source(type: type))
-            let source = try decoder.decode(SourceNew.self, from: sourceData)
+            let source = try decoder.decode(Source.self, from: sourceData)
             return source
         } catch {
             XCTFail("Cannot decode the source \(error)")

@@ -18,7 +18,7 @@ protocol CustomCreditCardFormViewControllerDelegate: AnyObject {
 
 class CustomCreditCardFormViewController: UIViewController {
     
-    let omiseClient = Client(publicKey: LocalConfig.default.publicKey)
+    let omiseClient = ClientOld(publicKey: LocalConfig.default.publicKey)
 
     @IBOutlet private var cardNumberField: CardNumberTextField!
     @IBOutlet private var cardNameField: CardNameTextField!

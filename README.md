@@ -58,20 +58,20 @@ details, read on:
 ### Opn Payments API
 
 The Opn Payments iOS SDK provides an easy-to-use library for calling the
-Opn Payments API. The main class for the Opn Payments iOS SDK is `Client` through
+Opn Payments API. The main class for the Opn Payments iOS SDK is `ClientOld` through
 which all requests to the Opn Payments API will be sent. Creating a new
-`Client` object requires an Opn Payments public key.
+`ClientOld` object requires an Opn Payments public key.
 
 ``` swift
 import OmiseSDK
 
-let client = OmiseSDK.Client.init(publicKey: "omise_public_key")
+let client = OmiseSDK.ClientOld.init(publicKey: "omise_public_key")
 ```
 
 
 The SDK currently
 supports 2 main categories of requests: **Tokenizing a 
-Card** and **Creating a Payment Source**.
+Card** and **Creating a Payment SourceOLD**.
 
 #### Creating a card token
 
@@ -100,7 +100,7 @@ Opn Payments now supports many payment methods other than cards.  You
 may request a payment with one of those supported payment methods from
 a customer by calling the `CreateSourceParameter` API. You need to specify
 the parameters (e.g. payment amount and currency) of the source you
-want to create by creating and initializing a `Request<Source>` with
+want to create by creating and initializing a `Request<SourceOLD>` with
 the `Payment Information` object:
 
 ```swift
@@ -111,13 +111,13 @@ let sourceParameter = CreateSourceParameter(
     currency: currency
 )
 
-let request = Request<Source>(parameter: sourceParameter)
+let request = Request<SourceOLD>(parameter: sourceParameter)
 ```
 
 #### Sending the request
 
 Whether you are charging a source or a card, sending the
-request is the same.  Create a new `requestTask` on a `Client` object
+request is the same.  Create a new `requestTask` on a `ClientOld` object
 with the completion handler block and call `resume` on the
 requestTask:
 
@@ -127,7 +127,7 @@ requestTask.resume()
 ```
 
 You may also send a request by calling the
-`send(_:completionHandler:)` method on the `Client`.
+`send(_:completionHandler:)` method on the `ClientOld`.
 
 ```swift
 client.send(request) { [weak self] (result) in
@@ -155,7 +155,7 @@ func completionHandler(tokenResult: Result<Token, Error>) -> Void {
 
 ### Built-in forms
 
-Opn Payments iOS SDK provides easy-to-use drop-in UI forms for both Tokenizing a Card and Creating a Payment Source, which
+Opn Payments iOS SDK provides easy-to-use drop-in UI forms for both Tokenizing a Card and Creating a Payment SourceOLD, which
 you can easily integrate into your application.
 
 #### Card form
@@ -281,7 +281,7 @@ extension ProductDetailViewController: PaymentCreatorControllerDelegate {
   func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didCreatePayment payment: Payment) {
     dismissForm()
 
-    // Sends selected `Token` or `Source` to your server to create a charge, or a customer object.
+    // Sends selected `Token` or `SourceOLD` to your server to create a charge, or a customer object.
   }
 
   func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didFailWithError error: Error) {

@@ -2,7 +2,7 @@ import UIKit
 import os
 
 // swiftlint:disable file_length
-public class Client: NSObject {
+public class ClientOld: NSObject {
     let publicKey: String
     var userAgent: String?
 
@@ -32,10 +32,10 @@ public class Client: NSObject {
         }
     }
 
-    /// Initializes a new Client with the given Public Key and Operating OperationQueue
+    /// Initializes a new ClientOld with the given Public Key and Operating OperationQueue
     ///
     /// - Parameters:
-    ///   - publicKey: Public Key for this Client used for calling the Omise API. The key must have `pkey` prefix
+    ///   - publicKey: Public Key for this ClientOld used for calling the Omise API. The key must have `pkey` prefix
     ///   - queue: OperationQueue which the client uses for the network related operations
     public init(publicKey: String, queue: OperationQueue) {
         if publicKey.hasPrefix("pkey_") {
@@ -54,10 +54,10 @@ public class Client: NSObject {
         )
     }
     
-    /// Initializes a new Client with the given Public Key
+    /// Initializes a new ClientOld with the given Public Key
     ///
     /// - Parameters:
-    ///   - publicKey: Public Key for this Client used for calling the Omise API. The key must have `pkey` prefix
+    ///   - publicKey: Public Key for this ClientOld used for calling the Omise API. The key must have `pkey` prefix
     public convenience init(publicKey: String) {
         self.init(publicKey: publicKey, queue: OperationQueue())
     }
@@ -76,7 +76,7 @@ public class Client: NSObject {
                 print(string)
             }
             DispatchQueue.main.async {
-                Client.completeRequest(request, callback: completionHandler)(data, response, error)
+                ClientOld.completeRequest(request, callback: completionHandler)(data, response, error)
             }
         }
         return RequestTask(request: request, dataTask: dataTask)
@@ -129,7 +129,7 @@ public class Client: NSObject {
             }
             
             let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .formatted(Client.jsonDateFormatter)
+            decoder.dateDecodingStrategy = .formatted(ClientOld.jsonDateFormatter)
             
             switch httpResponse.statusCode {
             case 400..<600:
@@ -192,7 +192,7 @@ public class Client: NSObject {
             }
 
             let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .formatted(Client.jsonDateFormatter)
+            decoder.dateDecodingStrategy = .formatted(ClientOld.jsonDateFormatter)
 
             switch httpResponse.statusCode {
             case 400..<600:
@@ -278,7 +278,7 @@ public class Client: NSObject {
 }
 
 // MARK: - URL Request related methods
-extension Client {
+extension ClientOld {
     
     private static let omiseAPIContentType = "application/json; charset=utf8"
     private static let omiseAPIVersion = "2019-05-29"
@@ -286,12 +286,12 @@ extension Client {
     private func buildURLRequest<T: Object>(for request: Request<T>) -> URLRequest {
         var urlRequest = URLRequest(url: T.postURL)
         urlRequest.httpMethod = "POST"
-        let encoder = Client.makeJSONEncoder()
+        let encoder = ClientOld.makeJSONEncoder()
         urlRequest.httpBody = try? encoder.encode(request.parameter)
-        urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: HTTPHeaders.authorization.rawValue)
-        urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: HTTPHeaders.userAgent.rawValue)
-        urlRequest.setValue(Client.omiseAPIContentType, forHTTPHeaderField: HTTPHeaders.contentType.rawValue)
-        urlRequest.setValue(Client.omiseAPIVersion, forHTTPHeaderField: HTTPHeaders.omiseVersion.rawValue)
+        urlRequest.setValue(ClientOld.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: HTTPHeaders.authorization.rawValue)
+        urlRequest.setValue(userAgent ?? ClientOld.defaultUserAgent, forHTTPHeaderField: HTTPHeaders.userAgent.rawValue)
+        urlRequest.setValue(ClientOld.omiseAPIContentType, forHTTPHeaderField: HTTPHeaders.contentType.rawValue)
+        urlRequest.setValue(ClientOld.omiseAPIVersion, forHTTPHeaderField: HTTPHeaders.omiseVersion.rawValue)
 
         print(String(data: urlRequest.httpBody!, encoding: .utf8)!)
         return urlRequest
@@ -300,20 +300,20 @@ extension Client {
     private func buildCapabilityAPIURLRequest() -> URLRequest {
         var urlRequest = URLRequest(url: Configuration.default.environment.capabilityURL)
         urlRequest.httpMethod = "GET"
-        urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: HTTPHeaders.authorization.rawValue)
-        urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: HTTPHeaders.userAgent.rawValue)
-        urlRequest.setValue(Client.omiseAPIContentType, forHTTPHeaderField: HTTPHeaders.contentType.rawValue)
-        urlRequest.setValue(Client.omiseAPIVersion, forHTTPHeaderField: HTTPHeaders.omiseVersion.rawValue)
+        urlRequest.setValue(ClientOld.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: HTTPHeaders.authorization.rawValue)
+        urlRequest.setValue(userAgent ?? ClientOld.defaultUserAgent, forHTTPHeaderField: HTTPHeaders.userAgent.rawValue)
+        urlRequest.setValue(ClientOld.omiseAPIContentType, forHTTPHeaderField: HTTPHeaders.contentType.rawValue)
+        urlRequest.setValue(ClientOld.omiseAPIVersion, forHTTPHeaderField: HTTPHeaders.omiseVersion.rawValue)
         return urlRequest
     }
 
     private func buildRetrieveTokenURLRequest(from tokenID: String) -> URLRequest {
         var urlRequest = URLRequest(url: Configuration.default.environment.tokenURL.appendingPathComponent(tokenID))
         urlRequest.httpMethod = "GET"
-        urlRequest.setValue(Client.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: HTTPHeaders.authorization.rawValue)
-        urlRequest.setValue(userAgent ?? Client.defaultUserAgent, forHTTPHeaderField: HTTPHeaders.userAgent.rawValue)
-        urlRequest.setValue(Client.omiseAPIContentType, forHTTPHeaderField: HTTPHeaders.contentType.rawValue)
-        urlRequest.setValue(Client.omiseAPIVersion, forHTTPHeaderField: HTTPHeaders.omiseVersion.rawValue)
+        urlRequest.setValue(ClientOld.encodeAuthorizationHeader(publicKey), forHTTPHeaderField: HTTPHeaders.authorization.rawValue)
+        urlRequest.setValue(userAgent ?? ClientOld.defaultUserAgent, forHTTPHeaderField: HTTPHeaders.userAgent.rawValue)
+        urlRequest.setValue(ClientOld.omiseAPIContentType, forHTTPHeaderField: HTTPHeaders.contentType.rawValue)
+        urlRequest.setValue(ClientOld.omiseAPIVersion, forHTTPHeaderField: HTTPHeaders.omiseVersion.rawValue)
         return urlRequest
     }
     
@@ -325,16 +325,16 @@ extension Client {
     
     static func makeJSONEncoder() -> JSONEncoder {
         let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .formatted(Client.jsonDateFormatter)
+        encoder.dateEncodingStrategy = .formatted(ClientOld.jsonDateFormatter)
         return encoder
     }
     
     static func makeJSONDecoder<T>(for request: Request<T>?) -> JSONDecoder {
         let decoder = JSONDecoder()
-        if let request = request as? Request<Source> {
+        if let request = request as? Request<SourceOLD> {
             decoder.userInfo[sourceParameterCodingsUserInfoKey] = request.parameter
         }
-        decoder.dateDecodingStrategy = .formatted(Client.jsonDateFormatter)
+        decoder.dateDecodingStrategy = .formatted(ClientOld.jsonDateFormatter)
         return decoder
     }
 
@@ -407,7 +407,7 @@ extension Client {
 }
 
 // MARK: - Constants
-extension Client {
+extension ClientOld {
     static let sdkVersion: String = "5.0.0"
     static let currentPlatform: String = ProcessInfo.processInfo.operatingSystemVersionString
     static let currentDevice: String = UIDevice.current.model

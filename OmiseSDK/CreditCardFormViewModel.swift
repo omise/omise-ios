@@ -65,7 +65,7 @@ class CreditCardFormViewModel: CreditCardFormViewModelProtocol, CountryListViewM
             postalCode: viewContext[.postalCode]
         )
 
-        let client = Client(publicKey: publicKey)
+        let client = ClientOld(publicKey: publicKey)
         client.send(request) { (result) in
             onComplete(result)
         }

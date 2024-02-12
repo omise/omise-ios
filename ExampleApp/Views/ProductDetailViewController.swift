@@ -15,7 +15,7 @@ class ProductDetailViewController: BaseViewController {
         // Setup dev environment for staging
         Configuration.setDefault(Configuration(environment: LocalConfig.default.env))
 
-        let client = Client(publicKey: publicKey)
+        let client = ClientOld(publicKey: publicKey)
 
         client.capabilityDataWithCompletionHandler { (result) in
             if case .success(let capability) = result {

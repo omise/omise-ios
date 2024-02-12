@@ -7,13 +7,13 @@ let defaultPaymentChooserUISecondaryColor = UIColor.line
 internal protocol PaymentCreatorFlowSessionDelegate: AnyObject {
     func paymentCreatorFlowSessionWillCreateSource(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession)
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreateToken token: Token)
-    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreatedSource source: Source)
+    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreatedSource source: SourceOLD)
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didFailWithError error: Error)
     func paymentCreatorFlowSessionDidCancel(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession)
 }
 
 internal class PaymentCreatorFlowSession {
-    var client: Client?
+    var client: ClientOld?
     var paymentAmount: Int64?
     var paymentCurrency: Currency?
 
@@ -43,7 +43,7 @@ internal class PaymentCreatorFlowSession {
         return false
     }
 
-    func requestCreateSource(_ paymentInformation: PaymentInformation, completionHandler: ((RequestResult<Source>) -> Void)?) {
+    func requestCreateSource(_ paymentInformation: PaymentInformation, completionHandler: ((RequestResult<SourceOLD>) -> Void)?) {
         guard validateRequiredProperties(), let client = self.client,
             let amount = paymentAmount, let currency = paymentCurrency else {
                 return
@@ -52,7 +52,7 @@ internal class PaymentCreatorFlowSession {
         os_log("Request to create a new source", log: uiLogObject, type: .info)
 
         delegate?.paymentCreatorFlowSessionWillCreateSource(self)
-        client.send(Request<Source>(paymentInformation: paymentInformation, amount: amount, currency: currency)) { (result) in
+        client.send(Request<SourceOLD>(paymentInformation: paymentInformation, amount: amount, currency: currency)) { (result) in
             defer {
                 DispatchQueue.main.async {
                     completionHandler?(result)

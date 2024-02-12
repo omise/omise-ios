@@ -1,7 +1,7 @@
 import Foundation
 
-// TODO: Add Unit Tests for SourceNew.Flow
-extension SourceNew {
+// TODO: Add Unit Tests for Source.Flow
+extension Source {
     /// The processing flow of a Source
     /// - redirect: The customer need to be redirected to another URL in order to process the source
     /// - offline: The customer need to do something in offline in order to process the source

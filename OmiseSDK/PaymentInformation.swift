@@ -12,7 +12,7 @@ func ~=<T: PaymentMethod>(methodType: T.Type, type: String) -> Bool {
     return type.hasPrefix(methodType.paymentMethodTypePrefix)
 }
 
-/// Represents the payment information of a Source
+/// Represents the payment information of a SourceOLD
 public enum PaymentInformation: Codable, Equatable {
 // swiftlint:disable:previous type_body_length
 
@@ -24,31 +24,31 @@ public enum PaymentInformation: Codable, Equatable {
         case bbl
         case other(String)
     }
-    /// Internet Banking Payment Source
+    /// Internet Banking Payment SourceOLD
     case internetBanking(InternetBanking)
 
-    /// Online Alipay Payment Source
+    /// Online Alipay Payment SourceOLD
     case alipay
 
-    /// Online Alipay + China Wallet Payment Source
+    /// Online Alipay + China Wallet Payment SourceOLD
     case alipayCN
 
-    /// Online Alipay + Hongkong Wallet Payment Source
+    /// Online Alipay + Hongkong Wallet Payment SourceOLD
     case alipayHK
     
-    /// Online Atome Payment Source
+    /// Online Atome Payment SourceOLD
     case atome(Atome)
 
-    /// Online Alipay + Dana Wallet Payment Source
+    /// Online Alipay + Dana Wallet Payment SourceOLD
     case dana
 
-    /// Online Alipay + Gcash Wallet Payment Source
+    /// Online Alipay + Gcash Wallet Payment SourceOLD
     case gcash
 
-    /// Online Alipay + KakaoPay Wallet Payment Source
+    /// Online Alipay + KakaoPay Wallet Payment SourceOLD
     case kakaoPay
 
-    /// Online Alipay + Touch N Go Wallet Payment Source
+    /// Online Alipay + Touch N Go Wallet Payment SourceOLD
     case touchNGo
 
     /// The name of the supported services to process the Bill Payment
@@ -58,7 +58,7 @@ public enum PaymentInformation: Codable, Equatable {
         case tescoLotus
         case other(String)
     }
-    /// Bill Payment Payment Source
+    /// Bill Payment Payment SourceOLD
     case billPayment(BillPayment)
 
     /// The name of the supported Barcode Payment services
@@ -77,7 +77,7 @@ public enum PaymentInformation: Codable, Equatable {
             }
         }
     }
-    /// Barcode Payment Source
+    /// Barcode Payment SourceOLD
     case barcode(Barcode)
 
     /// The Installments information
@@ -137,7 +137,7 @@ public enum PaymentInformation: Codable, Equatable {
             self.numberOfTerms = numberOfTerms
         }
     }
-    /// Installments Payment Source
+    /// Installments Payment SourceOLD
     case installment(Installment)
 
     /// The EContext customer information
@@ -171,16 +171,16 @@ public enum PaymentInformation: Codable, Equatable {
             self.phoneNumber = phoneNumber
         }
     }
-    /// E-Context Payment Source
+    /// E-Context Payment SourceOLD
     case eContext(EContext)
 
-    /// PromptPay Payment Source
+    /// PromptPay Payment SourceOLD
     case promptpay
 
-    /// PayNow Payment Source
+    /// PayNow Payment SourceOLD
     case paynow
 
-    /// WeChat Payment Source
+    /// WeChat Payment SourceOLD
     case weChat
 
     /// The TrueMoney customer information
@@ -207,7 +207,7 @@ public enum PaymentInformation: Codable, Equatable {
 
     }
 
-    /// TrueMoney Payment Source
+    /// TrueMoney Payment SourceOLD
     case truemoney(TrueMoney)
     case truemoneyJumpApp
 
@@ -219,7 +219,7 @@ public enum PaymentInformation: Codable, Equatable {
         case other(String)
     }
 
-    /// Points Payment Source
+    /// Points Payment SourceOLD
     case points(Points)
 
     /// The code of the bank for the Internet Bankning Payment
@@ -234,7 +234,7 @@ public enum PaymentInformation: Codable, Equatable {
         case other(String)
     }
 
-    /// Mobile Banking Payment Source
+    /// Mobile Banking Payment SourceOLD
     case mobileBanking(MobileBanking)
 
     /// Internet Banking FPX
@@ -271,22 +271,22 @@ public enum PaymentInformation: Codable, Equatable {
     // Rabbit LINE Pay
     case rabbitLinepay
     
-    /// OCBC Digital Payment Source
+    /// OCBC Digital Payment SourceOLD
     case ocbcDigital
 
-    /// Boost Payment Source
+    /// Boost Payment SourceOLD
     case boost
     
-    /// ShopeePay Payment Source
+    /// ShopeePay Payment SourceOLD
     case shopeePay
     
-    /// ShopeePayJumpApp Payment Source
+    /// ShopeePayJumpApp Payment SourceOLD
     case shopeePayJumpApp
     
-    /// Maybank QRPay Payment Source
+    /// Maybank QRPay Payment SourceOLD
     case maybankQRPay
     
-    /// DuitNow QR Payment Source
+    /// DuitNow QR Payment SourceOLD
     case duitNowQR
     
     /// DuitNow OBW
@@ -334,7 +334,7 @@ public enum PaymentInformation: Codable, Equatable {
         }
     }
 
-    /// DuitNow OBW Payment Source
+    /// DuitNow OBW Payment SourceOLD
     case duitNowOBW(DuitNowOBW)
 
     // GrabPay
@@ -343,7 +343,7 @@ public enum PaymentInformation: Codable, Equatable {
     // PayPay
     case payPay
 
-    /// Other Payment Source
+    /// Other Payment SourceOLD
     case other(type: String, parameters: [String: Any])
 
     fileprivate enum CodingKeys: String, CodingKey {
@@ -415,9 +415,9 @@ public enum PaymentInformation: Codable, Equatable {
         case let value:
             self = .other(type: value, parameters: try decoder.decodeJSONDictionary().filter({ (key, _) -> Bool in
                 switch key {
-                case CodingKeys.type.stringValue, Source.CodingKeys.object.stringValue,
-                     Source.CodingKeys.id.stringValue, Source.CodingKeys.flow.stringValue,
-                     Source.CodingKeys.currency.stringValue, Source.CodingKeys.amount.stringValue,
+                case CodingKeys.type.stringValue, SourceOLD.CodingKeys.object.stringValue,
+                     SourceOLD.CodingKeys.id.stringValue, SourceOLD.CodingKeys.flow.stringValue,
+                     SourceOLD.CodingKeys.currency.stringValue, SourceOLD.CodingKeys.amount.stringValue,
                     "livemode", "location":
                     return false
                 default: return true
@@ -595,8 +595,8 @@ public enum PaymentInformation: Codable, Equatable {
 
 }
 
-extension Request where T == Source {
-    /// Initializes a new Source Request
+extension Request where T == SourceOLD {
+    /// Initializes a new SourceOLD Request
     public init (paymentInformation: PaymentInformation, amount: Int64, currency: Currency) {
         self.init(
             parameter: CreateSourceParameter(paymentInformation: paymentInformation, amount: amount, currency: currency)
@@ -605,7 +605,7 @@ extension Request where T == Source {
 }
 
 extension PaymentInformation {
-    /// Omise Source Type value using in the Omise API
+    /// Omise SourceOLD Type value using in the Omise API
     public var sourceType: String {
         switch self {
         case .alipay:
@@ -682,7 +682,7 @@ extension PaymentInformation.InternetBanking: CaseIterable, CustomStringConverti
         .bay, .bbl
     ]
 
-    /// Omise Source Type value using in the Omise API
+    /// Omise SourceOLD Type value using in the Omise API
     public var type: String {
         switch self {
         case .bay:
@@ -735,7 +735,7 @@ extension PaymentInformation.InternetBanking: CaseIterable, CustomStringConverti
 }
 
 extension PaymentInformation.Installment {
-    /// Omise Source Type value using in the Omise API
+    /// Omise SourceOLD Type value using in the Omise API
     public var type: String {
         switch brand {
         case .bay:
@@ -872,7 +872,7 @@ extension PaymentInformation.Installment.Brand: CaseIterable, CustomStringConver
 }
 
 extension PaymentInformation.BillPayment {
-    /// Omise Source Type value using in the Omise API
+    /// Omise SourceOLD Type value using in the Omise API
     public var type: String {
         switch self {
         case .tescoLotus:
@@ -1018,9 +1018,9 @@ extension PaymentInformation.Barcode {
         case let value:
             self = .other(String(value), parameters: try decoder.decodeJSONDictionary().filter({ (key, _) -> Bool in
                 switch key {
-                case PaymentInformation.CodingKeys.type.stringValue, Source.CodingKeys.object.stringValue,
-                     Source.CodingKeys.id.stringValue, Source.CodingKeys.flow.stringValue,
-                     Source.CodingKeys.currency.stringValue, Source.CodingKeys.amount.stringValue,
+                case PaymentInformation.CodingKeys.type.stringValue, SourceOLD.CodingKeys.object.stringValue,
+                     SourceOLD.CodingKeys.id.stringValue, SourceOLD.CodingKeys.flow.stringValue,
+                     SourceOLD.CodingKeys.currency.stringValue, SourceOLD.CodingKeys.amount.stringValue,
                      "livemode", "location":
                     return false
                 default: return true
@@ -1055,7 +1055,7 @@ extension PaymentInformation.Barcode {
 }
 
 extension PaymentInformation.Points {
-    /// Omise Source Type value using in the Omise API
+    /// Omise SourceOLD Type value using in the Omise API
     public var type: String {
         switch self {
         case .citiPoints:
@@ -1099,7 +1099,7 @@ extension PaymentInformation.MobileBanking: CaseIterable, CustomStringConvertibl
         .scb, .kbank, .bay, .bbl, .ktb
     ]
 
-    /// Omise Source Type value using in the Omise API
+    /// Omise SourceOLD Type value using in the Omise API
     public var type: String {
         switch self {
         case .scb:

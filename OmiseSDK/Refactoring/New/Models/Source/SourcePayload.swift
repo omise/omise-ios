@@ -8,18 +8,25 @@ import Foundation
 // Sources are methods for accepting payments through non-credit-card channels
 
 public enum SourcePayload: Codable, Equatable {
-    /// Atome payment method payload
+    /// Atome
     case atome(_ payload: Atome)
+    /// Barcode
     case barcode(_ payload: Barcode)
+    /// Bill Payment
 //    case billPayment(_ payload: SourcePayload.BillPayment)
+    /// DuitNow Online Banking/Wallets
 //    case duitNowOBW(_ payload: SourcePayload.DoitNowOBW)
+    /// Konbini, Pay-easy, and Online Banking
 //    case eContext(SourcePayload.EContext)
+    /// Malaysia FPX
 //    case fpx(SourcePayload.FPX)
+    /// Installment Payments
 //    case installment(SourcePayload.Installment)
 //    case internetBanking(SourcePayload.MobileBanking)
 //    case mobileBanking(SourcePayload.MobileBanking)
 //    case points(SourcePayload.Points)
 //    case trueMoney(SourcePayload.TrueMoney)
+    /// Payment menthods without additional payment parameters
     case other(SourceType)
 
     private enum CodingKeys: String, CodingKey {

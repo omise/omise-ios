@@ -10,9 +10,9 @@ let publicKey = "pkey_test_<#Omise Public Key#>"
  */
 
 /*: create-a-client-step
- You need a `Client` object for comminucating with Omise API
+ You need a `ClientOld` object for comminucating with Omise API
  */
-let client = Client(publicKey: publicKey)
+let client = ClientOld(publicKey: publicKey)
 
 /*: create-a-request
  You also need a `Request` object which will have the credit card information that you want to tokenize.

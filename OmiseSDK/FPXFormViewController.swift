@@ -7,7 +7,7 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
     var showingValues: [Capability.Backend.Bank]?
     private var emailValue: String?
 
-    private var client: Client?
+    private var client: ClientOld?
 
     private var isInputDataValid: Bool {
         return formFields.allSatisfy { $0.isValid } || isEmailInputEmpty

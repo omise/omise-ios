@@ -1,5 +1,6 @@
 import Foundation
 
+/// Barcode payment methods payload
 extension SourcePayload.Barcode {
     /// Alipay In-Store payment method
     public struct Alipay: Codable, Equatable {
