@@ -1,5 +1,9 @@
 import Foundation
 
+protocol SourcePayloadProtocol {
+    var sourceType: SourceType { get }
+}
+
 extension Source {
     /// Information details about source payment
     public enum Payload: Codable, Equatable {
@@ -20,8 +24,8 @@ extension Source {
         /// Thai Internet Banking
         case internetBanking(_ payload: InternetBanking)
         /// Mobile Banking
-        /// 
         case mobileBanking(_ payload: MobileBanking)
+        /// Pay with Points
         case points(_ payload: Points)
         case trueMoney(_ payload: TrueMoney)
         /// Payment menthods without additional payment parameters
@@ -55,7 +59,7 @@ extension Source {
     }
 }
 
-extension Source.Payload {
+extension Source.Payload: SourcePayloadProtocol {
     public var sourceType: SourceType {
         switch self {
         case .other(let sourceType):
@@ -67,4 +71,3 @@ extension Source.Payload {
         }
     }
 }
-

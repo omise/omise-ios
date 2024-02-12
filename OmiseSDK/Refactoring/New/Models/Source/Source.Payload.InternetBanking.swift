@@ -1,7 +1,8 @@
 import Foundation
 
 extension Source.Payload {
-    /// Thai Internet Banking https://docs.opn.ooo/internet-banking
+    /// Payloads for Thai Internet Banking paymen methods
+    /// https://docs.opn.ooo/internet-banking
     public struct InternetBanking: Codable, Equatable {
     }
 }

@@ -1,7 +1,8 @@
 import Foundation
 
 extension Source.Payload {
-    /// Installment Payments    https://docs.opn.ooo/installment-payments
+    /// Payloads for Installment payment methods
+    /// https://docs.opn.ooo/installment-payments
     public struct Installment: Codable, Equatable {
     }
 }

@@ -1,15 +1,11 @@
 import Foundation
 
 extension Source.Payload {
-    /// `Barcode` payment methods
+    /// Payloads for Barcode payment methods
     /// https://docs.opn.ooo/alipay-barcode
     public enum Barcode: Codable, Equatable {
         /// Alipay In-Store payment method
         case alipay(_ payload: Alipay)
-
-        fileprivate enum CodingKeys: String, CodingKey {
-            case sourceType = "type"
-        }
     }
 }
 
@@ -38,7 +34,7 @@ public extension Source.Payload.Barcode {
     }
 }
 
-extension Source.Payload.Barcode {
+extension Source.Payload.Barcode: SourcePayloadProtocol {
     /// Source types Barcode payment method support
     static var sourceTypes: [SourceType] {
         [.barcodeAlipay]
@@ -49,5 +45,11 @@ extension Source.Payload.Barcode {
         switch self {
         case .alipay: return .barcodeAlipay
         }
+    }
+}
+
+private extension Source.Payload.Barcode {
+    enum CodingKeys: String, CodingKey {
+        case sourceType = "type"
     }
 }
