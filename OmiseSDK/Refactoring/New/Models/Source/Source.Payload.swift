@@ -1,7 +1,11 @@
 import Foundation
 
-protocol SourcePayloadProtocol {
-    var sourceType: SourceType { get }
+/// Protocol to unify codebase related to payload enums
+protocol SourcePayloadGroupProtocol {
+    /// Source types that belong to payment method group
+    static var sourceTypes: [SourceType] { get }
+    /// Source type of current payment method
+//    var sourceType: SourceType { get }
 }
 
 extension Source {
@@ -10,11 +14,9 @@ extension Source {
         /// Atome
         case atome(_ payload: Atome)
         /// Barcode
-        case barcode(_ payload: Barcode)
-        /// Bill Payment
-        case billPayment(_ payload: BillPayment)
+        case barcodeAlipay(_ payload: BarcodeAlipay)
         /// DuitNow Online Banking/Wallets
-        case duitNowOBW(_ payload: DoitNowOBW)
+        case duitNowOBW(_ payload: DuitNowOBW)
         /// Konbini, Pay-easy, and Online Banking
         case eContext(_ payload: EContext)
         /// Malaysia FPX
@@ -25,33 +27,78 @@ extension Source {
         case internetBanking(_ payload: InternetBanking)
         /// Mobile Banking
         case mobileBanking(_ payload: MobileBanking)
-        /// Pay with Points
-        case points(_ payload: Points)
+        /// TrueMoney Wallet
         case trueMoney(_ payload: TrueMoney)
         /// Payment menthods without additional payment parameters
-        case other(SourceType)
+        case other(_ sourceType: SourceType)
+
+        /// Encode payload to JSON string
+        public func encode(to encoder: Encoder) throws {
+            switch self {
+            case .atome(let payload):
+                try payload.encode(to: encoder)
+            case .barcodeAlipay(let payload):
+                try payload.encode(to: encoder)
+            case .duitNowOBW(let payload):
+                try payload.encode(to: encoder)
+            case .eContext(let payload):
+                try payload.encode(to: encoder)
+            case .fpx(let payload):
+                try payload.encode(to: encoder)
+            case .installment(let payload):
+                try payload.encode(to: encoder)
+            case .internetBanking(let payload):
+                try payload.encode(to: encoder)
+            case .mobileBanking(let payload):
+                try payload.encode(to: encoder)
+            case .trueMoney(let payload):
+                try payload.encode(to: encoder)
+            case .other(let sourceType):
+                var container = encoder.container(keyedBy: CodingKeys.self)
+                try container.encode(sourceType.rawValue, forKey: .sourceType)
+            }
+        }
+
+        var sourceType: SourceType {
+            switch self {
+            case .atome:
+                return .atome
+            case .barcodeAlipay:
+                return .barcodeAlipay
+            case .duitNowOBW:
+                return .duitNowOBW
+            case .eContext:
+                return .eContext
+            case .fpx:
+                return .fpx
+            case .installment(let value):
+                return value.sourceType
+            case .internetBanking(let value):
+                return value.sourceType
+            case .mobileBanking(let value):
+                return value.sourceType
+            case .trueMoney:
+                return .trueMoney
+            case .other(let value):
+                return value
+            }
+        }
 
         private enum CodingKeys: String, CodingKey {
             case sourceType = "type"
         }
-
-        public func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(sourceType, forKey: .sourceType)
-            switch self {
-            case .atome(let value):
-                try value.encode(to: encoder)
-            default:
-                break
-            }
-        }
-
+        /// Decode payload from JSON string
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             let sourceType = try container.decode(SourceType.self, forKey: .sourceType)
+
             switch sourceType {
-            case _ where Barcode.sourceTypes.contains(sourceType):
-                self = try .barcode(Barcode(from: decoder))
+            case .atome:
+                self = try .atome(Atome(from: decoder))
+            case .barcodeAlipay:
+                self = try .barcodeAlipay(BarcodeAlipay(from: decoder))
+            case .duitNowOBW:
+                self = try .duitNowOBW(DuitNowOBW(from: decoder))
             default:
                 self = .other(sourceType)
             }
@@ -59,15 +106,13 @@ extension Source {
     }
 }
 
-extension Source.Payload: SourcePayloadProtocol {
-    public var sourceType: SourceType {
-        switch self {
-        case .other(let sourceType):
-            return sourceType
-        case .barcode(let payload):
-            return payload.sourceType
-        default:
-            return .atome
+
+extension Source.Payload {
+    public struct SourceTypePayload: Codable, Equatable {
+        let sourceType: SourceType
+
+        private enum CodingKeys: String, CodingKey {
+            case sourceType = "type"
         }
     }
 }

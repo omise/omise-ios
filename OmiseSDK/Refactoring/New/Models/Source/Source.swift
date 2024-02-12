@@ -22,6 +22,7 @@ public struct Source: Decodable {
         case isLiveMode = "livemode"
     }
 
+    /// Parse Source from JSON String
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)

@@ -1,7 +1,7 @@
 import Foundation
 
 /// Source type of payment
-public enum SourceType: String, Codable {
+public enum SourceType: String, Codable, CaseIterable {
     /// Alipay (Online) https://docs.opn.ooo/alipay
     case alipay = "alipay"
     /// Alipay CN   https://docs.opn.ooo/alipay-cn

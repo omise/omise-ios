@@ -173,7 +173,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeBarcodeAlipay() throws {
         let source = try source(type: .barcodeAlipay)
-        let payload = Source.Payload.Barcode.Alipay(
+        let payload = Source.Payload.BarcodeAlipay(
             barcode: "1234567890123456",
             storeID: "1",
             storeName: "Main Store",
@@ -181,41 +181,86 @@ class SourceTests: XCTestCase {
         )
         XCTAssertEqual(source.id, "src_test_5cq1tilrnz7d62t8y87")
         XCTAssertFalse(source.isLiveMode)
-        XCTAssertEqual(source.paymentInformation, .barcode(.alipay(payload)))
+        XCTAssertEqual(source.paymentInformation, .barcodeAlipay(payload))
         XCTAssertEqual(source.flow, .offline)
         XCTAssertEqual(source.amount, 100000)
         XCTAssertEqual(source.currency, "THB")
     }
 
-    //    func testDecode<#Type#>() throws {
-    //        let source = try source(type: .<#type#>)
-    //        XCTAssertEqual(source.id, "<#id#>")
-    //        XCTAssert<#Bool#>(source.isLiveMode)
-    //        XCTAssertEqual(source.paymentInformation, .other(.<#type#>))
-    //        XCTAssertEqual(source.flow, .<#flow#>)
-    //        XCTAssertEqual(source.amount, <#amount#>)
-    //        XCTAssertEqual(source.currency, "<#currency#>")
-    //    }
+    func testDecodeBillPaymentTescoLotus() throws {
+        let source = try source(type: .billPaymentTescoLotus)
+        XCTAssertEqual(source.id, "src_test_59trf2nxk43b5nml8z0")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .other(.billPaymentTescoLotus))
+        XCTAssertEqual(source.flow, .offline)
+        XCTAssertEqual(source.amount, 1000000)
+        XCTAssertEqual(source.currency, "THB")
+    }
 
-    //    func testDecode<#Type#>() throws {
-    //        let source = try source(type: .<#type#>)
-    //        XCTAssertEqual(source.id, "<#id#>")
-    //        XCTAssert<#Bool#>(source.isLiveMode)
-    //        XCTAssertEqual(source.paymentInformation, .other(.<#type#>))
-    //        XCTAssertEqual(source.flow, .<#flow#>)
-    //        XCTAssertEqual(source.amount, <#amount#>)
-    //        XCTAssertEqual(source.currency, "<#currency#>")
-    //    }
+    func testDecodeAtome() throws {
+        let payload = Source.Payload.Atome(
+            phoneNumber: "+12312312312",
+            name: "Test Data",
+            email: "test@omise.co",
+            shipping: Source.Payload.Address(
+                country: "TH",
+                city: "Bangkok",
+                postalCode: "10330",
+                state: "Krung Thep Maha Nakhon",
+                street1: "444 Phaya Thai Rd",
+                street2: "Khwaeng Wang Mai, Pathum Wan"
+            ),
+            billing: Source.Payload.Address(
+                country: "TH",
+                city: "Bangkok",
+                postalCode: "10100",
+                state: "Bangkok",
+                street1: "Sukhumvit",
+                street2: nil
+            ),
+            items: [
+                Source.Payload.Item(
+                    sku: "3427842",
+                    category: "Shoes",
+                    name: "Prada shoes",
+                    quantity: 1,
+                    amount: 500000,
+                    itemUri: "omise.co/product/shoes",
+                    imageUri: "omise.co/product/shoes/image",
+                    brand: "Gucci"
+                ),
+                Source.Payload.Item(
+                    sku: "3427843",
+                    category: "Shoes",
+                    name: "Skate Shoes",
+                    quantity: 2,
+                    amount: 200000,
+                    itemUri: nil,
+                    imageUri: nil,
+                    brand: "DC"
+                )
+            ]
+        )
 
-    //    func testDecode<#Type#>() throws {
-    //        let source = try source(type: .<#type#>)
-    //        XCTAssertEqual(source.id, "<#id#>")
-    //        XCTAssert<#Bool#>(source.isLiveMode)
-    //        XCTAssertEqual(source.paymentInformation, .other(.<#type#>))
-    //        XCTAssertEqual(source.flow, .<#flow#>)
-    //        XCTAssertEqual(source.amount, <#amount#>)
-    //        XCTAssertEqual(source.currency, "<#currency#>")
-    //    }
+        let source = try source(type: .atome)
+        XCTAssertEqual(source.id, "src_5yqiaqtbbog2pxjdg6b")
+        XCTAssertTrue(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .atome(payload))
+        XCTAssertEqual(source.flow, .redirect)
+        XCTAssertEqual(source.amount, 700000)
+        XCTAssertEqual(source.currency, "THB")
+    }
+
+    func testDecodeDuitNowOBW() throws {
+        let source = try source(type: .duitNowOBW)
+        let payload = Source.Payload.DuitNowOBW(bank: .affin)
+        XCTAssertEqual(source.id, "src_5pqcjr6tu4xvqut5nh5")
+        XCTAssertTrue(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .duitNowOBW(payload))
+        XCTAssertEqual(source.flow, .redirect)
+        XCTAssertEqual(source.amount, 100000)
+        XCTAssertEqual(source.currency, "MYR")
+    }
 
     //    func testDecode<#Type#>() throws {
     //        let source = try source(type: .<#type#>)
@@ -252,7 +297,7 @@ class SourceTests: XCTestCase {
 private extension SourceTests {
     func source(type: SourceType) throws -> Source {
         do {
-            let sourceData = try sampleData.jsonData(for: .source(type: type))
+            let sourceData = try sampleData.jsonData(for: .source(sourceType: type))
             let source = try decoder.decode(Source.self, from: sourceData)
             return source
         } catch {

@@ -11,11 +11,11 @@ extension Source.Payload {
         /// Customer email
         let email: String?
         /// Shipping address
-        let shipping: Address
+        let shipping: Source.Payload.Address
         /// Billing address
-        let billing: Address?
+        let billing: Source.Payload.Address?
         /// Information about items included in the order
-        let items: [Item]
+        let items: [Source.Payload.Item]
 
         /// Creates a new Atome payment method payload
         ///
@@ -26,7 +26,7 @@ extension Source.Payload {
         ///   - shipping: Shipping address
         ///   - billing: Billing address
         ///   - items: Items details
-        init(phoneNumber: String, name: String? = nil, email: String? = nil, shipping: Address, billing: Address, items: [Item]) {
+        init(phoneNumber: String, name: String? = nil, email: String? = nil, shipping: Address, billing: Source.Payload.Address, items: [Source.Payload.Item]) {
             self.name = name
             self.email = email
             self.phoneNumber = phoneNumber

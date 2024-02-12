@@ -4,7 +4,7 @@ import OmiseSDK
 
 class SampleData {
     enum Entity {
-        case source(type: SourceType)
+        case source(sourceType: SourceType)
 
         var path: String {
             switch self {

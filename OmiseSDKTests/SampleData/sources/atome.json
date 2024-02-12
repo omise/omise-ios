@@ -3,12 +3,12 @@
     "id":"src_5yqiaqtbbog2pxjdg6b",
     "livemode":true,
     "location":"/sources/src_5yqiaqtbbog2pxjdg6b",
-    "amount":500000,
+    "amount":700000,
     "barcode":null,
     "bank":null,
     "created_at":"2024-02-11T10:36:32Z",
     "currency":"THB",
-    "email":null,
+    "email":"test@omise.co",
     "flow":"redirect",
     "installment_term":null,
     "ip":"11.5.27.19",
@@ -18,7 +18,13 @@
     "phone_number":"+12312312312",
     "platform_type":"IOS",
     "scannable_code":null,
-    "billing":null,
+    "billing":{
+        "city":"Bangkok",
+        "country":"TH",
+        "postal_code":"10100",
+        "state":"Bangkok",
+        "street1":"Sukhumvit",
+    },
     "shipping":{
         "city":"Bangkok",
         "country":"TH",
@@ -37,6 +43,16 @@
             "quantity":1,
             "item_uri":"omise.co/product/shoes",
             "image_uri":"omise.co/product/shoes/image"
+        },
+        {
+            "sku":"3427843",
+            "name":"Skate Shoes",
+            "brand":"DC",
+            "category":"Shoes",
+            "amount":200000,
+            "quantity":2,
+            "item_uri": null,
+            "image_uri": null
         }
     ],
     "references":null,
