@@ -2,6 +2,9 @@ import Foundation
 
 // TODO: Add Unit Tests for CardPayment
 // TODO: Add comments to CardPayment's properties
+
+/// Information to create a token
+/// A token represents a credit or debit card
 public struct CardPayment: Encodable {
     /// Card holder's full name.
     public let name: String

@@ -2,8 +2,13 @@ import Foundation
 
 // TODO: Add Unit Tests for SourcePayment
 // TODO: Add comments to SourcePayment's properties
+
+/// Information to create payment Source
+/// Sources are methods for accepting payments through non-credit-card channels
 public struct SourcePayment: Encodable {
+    /// Source amount in smallest unit of source currency
     let amount: Int64
+    /// Currency for source as three-letter ISO 4217 code
     let currency: String
     let details: SourcePayload
 

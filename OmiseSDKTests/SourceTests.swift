@@ -161,7 +161,6 @@ class SourceTests: XCTestCase {
         XCTAssertEqual(source.currency, "SGD")
     }
 
-
     func testDecodeTrueMoneyJumpApp() throws {
         let source = try source(type: .trueMoneyJumpApp)
         XCTAssertEqual(source.id, "src_5yqlbf5w206mcfybj8v")
@@ -172,7 +171,67 @@ class SourceTests: XCTestCase {
         XCTAssertEqual(source.currency, "THB")
     }
 
-    //    func testDecodeTruemoneyJumpApp() throws {
+        func testDecodeBarcodeAlipay() throws {
+            let source = try source(type: .barcodeAlipay)
+            XCTAssertEqual(source.id, "src_test_5cq1tilrnz7d62t8y87")
+            XCTAssertFalse(source.isLiveMode)
+            XCTAssertEqual(source.paymentInformation, .barcode(.alipay(payload)))
+            XCTAssertEqual(source.flow, .<#flow#>)
+            XCTAssertEqual(source.amount, <#amount#>)
+            XCTAssertEqual(source.currency, "<#currency#>")
+        }
+
+    //    func testDecode<#Type#>() throws {
+    //        let source = try source(type: .<#type#>)
+    //        XCTAssertEqual(source.id, "<#id#>")
+    //        XCTAssert<#Bool#>(source.isLiveMode)
+    //        XCTAssertEqual(source.paymentInformation, .other(.<#type#>))
+    //        XCTAssertEqual(source.flow, .<#flow#>)
+    //        XCTAssertEqual(source.amount, <#amount#>)
+    //        XCTAssertEqual(source.currency, "<#currency#>")
+    //    }
+
+    //    func testDecode<#Type#>() throws {
+    //        let source = try source(type: .<#type#>)
+    //        XCTAssertEqual(source.id, "<#id#>")
+    //        XCTAssert<#Bool#>(source.isLiveMode)
+    //        XCTAssertEqual(source.paymentInformation, .other(.<#type#>))
+    //        XCTAssertEqual(source.flow, .<#flow#>)
+    //        XCTAssertEqual(source.amount, <#amount#>)
+    //        XCTAssertEqual(source.currency, "<#currency#>")
+    //    }
+
+    //    func testDecode<#Type#>() throws {
+    //        let source = try source(type: .<#type#>)
+    //        XCTAssertEqual(source.id, "<#id#>")
+    //        XCTAssert<#Bool#>(source.isLiveMode)
+    //        XCTAssertEqual(source.paymentInformation, .other(.<#type#>))
+    //        XCTAssertEqual(source.flow, .<#flow#>)
+    //        XCTAssertEqual(source.amount, <#amount#>)
+    //        XCTAssertEqual(source.currency, "<#currency#>")
+    //    }
+
+    //    func testDecode<#Type#>() throws {
+    //        let source = try source(type: .<#type#>)
+    //        XCTAssertEqual(source.id, "<#id#>")
+    //        XCTAssert<#Bool#>(source.isLiveMode)
+    //        XCTAssertEqual(source.paymentInformation, .other(.<#type#>))
+    //        XCTAssertEqual(source.flow, .<#flow#>)
+    //        XCTAssertEqual(source.amount, <#amount#>)
+    //        XCTAssertEqual(source.currency, "<#currency#>")
+    //    }
+
+    //    func testDecode<#Type#>() throws {
+    //        let source = try source(type: .<#type#>)
+    //        XCTAssertEqual(source.id, "<#id#>")
+    //        XCTAssert<#Bool#>(source.isLiveMode)
+    //        XCTAssertEqual(source.paymentInformation, .other(.<#type#>))
+    //        XCTAssertEqual(source.flow, .<#flow#>)
+    //        XCTAssertEqual(source.amount, <#amount#>)
+    //        XCTAssertEqual(source.currency, "<#currency#>")
+    //    }
+
+    //    func testDecodeTruemoney() throws {
     //        let source = try source(type: .trueMoney)
     //        XCTAssertEqual(source.id, "src_test_5jhmesi7s4at1qctloy")
     //        XCTAssert<#Bool#>(source.isLiveMode)
@@ -182,15 +241,6 @@ class SourceTests: XCTestCase {
     //        XCTAssertEqual(source.currency, "<#currency#>")
     //    }
 
-//    func testDecode<#Type#>() throws {
-//        let source = try source(type: .<#type#>)
-//        XCTAssertEqual(source.id, "<#id#>")
-//        XCTAssert<#Bool#>(source.isLiveMode)
-//        XCTAssertEqual(source.paymentInformation, .other(.<#type#>))
-//        XCTAssertEqual(source.flow, .<#flow#>)
-//        XCTAssertEqual(source.amount, <#amount#>)
-//        XCTAssertEqual(source.currency, "<#currency#>")
-//    }
 }
 
 private extension SourceTests {
@@ -200,8 +250,8 @@ private extension SourceTests {
             let source = try decoder.decode(SourceNew.self, from: sourceData)
             return source
         } catch {
-            throw error
             XCTFail("Cannot decode the source \(error)")
+            throw error
         }
     }
 }

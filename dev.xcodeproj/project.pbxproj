@@ -30,6 +30,10 @@
 		750708E32B790B8300A48DD0 /* String+JSONDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750708E22B790B8300A48DD0 /* String+JSONDate.swift */; };
 		750708E52B790BD600A48DD0 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750708E42B790BD600A48DD0 /* SampleData.swift */; };
 		750708E72B790CF200A48DD0 /* SampleData in Resources */ = {isa = PBXBuildFile; fileRef = 750708E62B790CF200A48DD0 /* SampleData */; };
+		750708EA2B7A292F00A48DD0 /* SourcePayload.InternetBanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750708E92B7A292F00A48DD0 /* SourcePayload.InternetBanking.swift */; };
+		750708EC2B7A2ACC00A48DD0 /* SourcePayload.Barcode.Alipay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750708EB2B7A2ACC00A48DD0 /* SourcePayload.Barcode.Alipay.swift */; };
+		750708EE2B7A430300A48DD0 /* SourcePayload.Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750708ED2B7A430300A48DD0 /* SourcePayload.Item.swift */; };
+		750708F02B7A431B00A48DD0 /* SourcePayload.Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750708EF2B7A431B00A48DD0 /* SourcePayload.Address.swift */; };
 		7509D4DD2A1A9FD70050AB38 /* MainActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A275CBB21241E4500C5716F /* MainActionButton.swift */; };
 		7509D4E02A1AA1450050AB38 /* AtomeFormViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4DF2A1AA1450050AB38 /* AtomeFormViewControllerTests.swift */; };
 		7509D4E22A1C876B0050AB38 /* AtomeFormViewContextMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509D4E12A1C876B0050AB38 /* AtomeFormViewContextMockup.swift */; };
@@ -256,6 +260,10 @@
 		750708E22B790B8300A48DD0 /* String+JSONDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+JSONDate.swift"; sourceTree = "<group>"; };
 		750708E42B790BD600A48DD0 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		750708E62B790CF200A48DD0 /* SampleData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SampleData; sourceTree = "<group>"; };
+		750708E92B7A292F00A48DD0 /* SourcePayload.InternetBanking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcePayload.InternetBanking.swift; sourceTree = "<group>"; };
+		750708EB2B7A2ACC00A48DD0 /* SourcePayload.Barcode.Alipay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcePayload.Barcode.Alipay.swift; sourceTree = "<group>"; };
+		750708ED2B7A430300A48DD0 /* SourcePayload.Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcePayload.Item.swift; sourceTree = "<group>"; };
+		750708EF2B7A431B00A48DD0 /* SourcePayload.Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcePayload.Address.swift; sourceTree = "<group>"; };
 		7509D4DF2A1AA1450050AB38 /* AtomeFormViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewControllerTests.swift; sourceTree = "<group>"; };
 		7509D4E12A1C876B0050AB38 /* AtomeFormViewContextMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewContextMockup.swift; sourceTree = "<group>"; };
 		7509D4E32A1C89F10050AB38 /* AtomeFormViewModelMockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewModelMockup.swift; sourceTree = "<group>"; };
@@ -689,13 +697,17 @@
 				75B420652B77741E0036134D /* CardPayment.swift */,
 				75B420812B77FAA50036134D /* SourcePayment.swift */,
 				750708DD2B78FB6500A48DD0 /* SourcePayload.swift */,
+				750708ED2B7A430300A48DD0 /* SourcePayload.Item.swift */,
+				750708EF2B7A431B00A48DD0 /* SourcePayload.Address.swift */,
 				75B4206A2B77DD4D0036134D /* SourcePayload.Atome.swift */,
 				75B4206E2B77DE250036134D /* SourcePayload.Barcode.swift */,
+				750708EB2B7A2ACC00A48DD0 /* SourcePayload.Barcode.Alipay.swift */,
 				75B4206C2B77DE1D0036134D /* SourcePayload.BillPayment.swift */,
 				75B4207C2B77DE540036134D /* SourcePayload.DuitNowOBW.swift */,
 				75B420722B77DE330036134D /* SourcePayload.EContext.swift */,
 				75B4207A2B77DE4C0036134D /* SourcePayload.FPX.swift */,
 				75B420702B77DE2B0036134D /* SourcePayload.Installment .swift */,
+				750708E92B7A292F00A48DD0 /* SourcePayload.InternetBanking.swift */,
 				75B420782B77DE440036134D /* SourcePayload.MobileBanking.swift */,
 				75B420762B77DE3F0036134D /* SourcePayload.Points.swift */,
 				75B420742B77DE390036134D /* SourcePayload.TrueMoney.swift */,
@@ -1230,6 +1242,7 @@
 				1121F44028523BED0003EE4F /* DuitNowOBWBankChooserViewController.swift in Sources */,
 				73F9BA4725E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift in Sources */,
 				756C8F1E2A40693B00D53059 /* CreditCardFormViewModelProtocol.swift in Sources */,
+				750708EE2B7A430300A48DD0 /* SourcePayload.Item.swift in Sources */,
 				7502CA5F2A31A7D600766E7D /* CountryListViewController.swift in Sources */,
 				75B420942B78DE350036134D /* Capability.PaymentMethod.Provider.swift in Sources */,
 				F3497368254C067000D05C7B /* MobileBankingSourceChooserViewController.swift in Sources */,
@@ -1269,6 +1282,7 @@
 				75B4209F2B78E5980036134D /* Source.swift in Sources */,
 				75CFC4DD2B73F75C00422A8F /* OmiseAPI.swift in Sources */,
 				75B420872B77FDB10036134D /* Source.Flow.swift in Sources */,
+				750708EA2B7A292F00A48DD0 /* SourcePayload.InternetBanking.swift in Sources */,
 				75348D4E29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift in Sources */,
 				75405A9C2A266F50008C21F6 /* AtomeFormViewModel.swift in Sources */,
 				8AD0609620B55E610074894E /* Client.swift in Sources */,
@@ -1276,6 +1290,7 @@
 				75B420AA2B78E5B30036134D /* Object.swift in Sources */,
 				75CFC4DB2B73F5AF00422A8F /* NetworkService.swift in Sources */,
 				75405A932A26340E008C21F6 /* UIButton+Helpers.swift in Sources */,
+				750708F02B7A431B00A48DD0 /* SourcePayload.Address.swift in Sources */,
 				986406321CFEA7E4004BCF51 /* CardNumberTextField.swift in Sources */,
 				75B4209B2B78E56D0036134D /* RequestTask.swift in Sources */,
 				75B420752B77DE390036134D /* SourcePayload.TrueMoney.swift in Sources */,
@@ -1287,6 +1302,7 @@
 				7509D4DD2A1A9FD70050AB38 /* MainActionButton.swift in Sources */,
 				75B420572B765BC40036134D /* TokenNew.swift in Sources */,
 				752E40C42ACD420C00B62A49 /* SourceTypeValue.swift in Sources */,
+				750708EC2B7A2ACC00A48DD0 /* SourcePayload.Barcode.Alipay.swift in Sources */,
 				75CFC4F12B753B0F00422A8F /* CapabilityNew.swift in Sources */,
 				75CFC4CE2B73AF0E00422A8F /* ClientNew.swift in Sources */,
 				7502CA622A31A7E100766E7D /* CountryListViewModelProtocol.swift in Sources */,

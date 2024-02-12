@@ -2,14 +2,21 @@ import Foundation
 
 // TODO: Add Unit Tests for SourcePayload
 // TODO: Add comments to SourcePayload's properties
+
+/// Payment source payloads
+// Payment source information
+// Sources are methods for accepting payments through non-credit-card channels
+
 public enum SourcePayload: Codable, Equatable {
-    case atome(SourcePayload.Atome)
-//    case barcode(SourcePayload.Barcode)
-//    case billPayment(SourcePayload.BillPayment)
-//    case duitNowOBW(SourcePayload.DoitNowOBW)
+    /// Atome payment method payload
+    case atome(_ payload: Atome)
+    case barcode(_ payload: Barcode)
+//    case billPayment(_ payload: SourcePayload.BillPayment)
+//    case duitNowOBW(_ payload: SourcePayload.DoitNowOBW)
 //    case eContext(SourcePayload.EContext)
 //    case fpx(SourcePayload.FPX)
 //    case installment(SourcePayload.Installment)
+//    case internetBanking(SourcePayload.MobileBanking)
 //    case mobileBanking(SourcePayload.MobileBanking)
 //    case points(SourcePayload.Points)
 //    case trueMoney(SourcePayload.TrueMoney)
@@ -43,6 +50,8 @@ extension SourcePayload {
         switch self {
         case .other(let sourceType):
             return sourceType
+        case .barcode(let payload):
+            return payload.sourceType
         default:
             return .atome
         }
