@@ -173,7 +173,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeBarcodeAlipay() throws {
         let source = try source(type: .barcodeAlipay)
-        let payload = SourcePayload.Barcode.Alipay(
+        let payload = Source.Payload.Barcode.Alipay(
             barcode: "1234567890123456",
             storeID: "1",
             storeName: "Main Store",

@@ -1,7 +1,8 @@
 import Foundation
 
-extension SourcePayload {
-    /// Atome payment method payload
+extension Source.Payload {
+    /// Payload for `Atome App Redirection` payment method
+    /// https://docs.opn.ooo/atome
     public struct Atome: Codable, Equatable {
         /// Customer mobile number with a country code (example: +66876543210 or 0876543210)
         let phoneNumber: String
@@ -36,7 +37,7 @@ extension SourcePayload {
     }
 }
 
-extension SourcePayload.Atome {
+extension Source.Payload.Atome {
     private enum CodingKeys: String, CodingKey {
         case name
         case email

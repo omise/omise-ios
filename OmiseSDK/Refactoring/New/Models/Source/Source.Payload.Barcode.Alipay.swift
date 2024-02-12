@@ -1,8 +1,8 @@
 import Foundation
 
-/// Barcode payment methods payload
-extension SourcePayload.Barcode {
-    /// Alipay In-Store payment method
+extension Source.Payload.Barcode {
+    /// Payload for `Alipay In-Store` payment method
+    /// https://docs.opn.ooo/alipay-barcode
     public struct Alipay: Codable, Equatable {
         /// Alipay barcode number
         public let barcode: String

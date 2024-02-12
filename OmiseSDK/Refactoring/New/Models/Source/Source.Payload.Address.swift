@@ -1,7 +1,8 @@
 import Foundation
 
-extension SourcePayload {
-    /// Shipping or Billing address
+extension Source.Payload {
+    /// `Shipping` or `Billing` address
+    /// https://docs.opn.ooo/sources-api
     public struct Address: Codable, Equatable {
         /// Address country as two-letter ISO 3166 code
         let country: String
@@ -36,7 +37,7 @@ extension SourcePayload {
     }
 }
 
-extension SourcePayload.Address {
+extension Source.Payload.Address {
     private enum CodingKeys: String, CodingKey {
         case country
         case city

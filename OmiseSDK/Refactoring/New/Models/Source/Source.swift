@@ -1,7 +1,8 @@
 import Foundation
 
-/// Represents an Omise Source object
+/// Represents an Omise Source object 
 /// Sources are methods for accepting payments through non-credit-card channels
+/// https://docs.opn.ooo/sources-api
 public struct Source: Decodable {
     /// The processing flow of a Source
     public let id: String
@@ -14,7 +15,7 @@ public struct Source: Decodable {
     /// The payment flow payers need to go through to complete the payment
     public let flow: Flow
     /// The payment details of this source describes how the payment is processed
-    let paymentInformation: SourcePayload
+    let paymentInformation: Source.Payload
 
     private enum CodingKeys: String, CodingKey {
         case id, flow, amount, currency
@@ -28,6 +29,6 @@ public struct Source: Decodable {
         currency = try container.decode(String.self, forKey: .currency)
         amount = try container.decode(Int64.self, forKey: .amount)
         isLiveMode = try container.decode(Bool.self, forKey: .isLiveMode)
-        paymentInformation = try SourcePayload(from: decoder)
+        paymentInformation = try Source.Payload(from: decoder)
     }
 }

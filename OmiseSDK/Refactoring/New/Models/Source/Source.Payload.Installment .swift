@@ -1,7 +1,8 @@
 import Foundation
 
-extension SourcePayload {
-    public struct Installment: Codable {
+extension Source.Payload {
+    /// Installment Payments    https://docs.opn.ooo/installment-payments
+    public struct Installment: Codable, Equatable {
     }
 }
 

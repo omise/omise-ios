@@ -1,7 +1,8 @@
 import Foundation
 
-extension SourcePayload {
+extension Source.Payload {
     /// Information about items included in the order
+    /// https://docs.opn.ooo/sources-api
     public struct Item: Codable, Equatable {
         /// SKU/product id of the item
         let sku: String
@@ -44,9 +45,7 @@ extension SourcePayload {
     }
 }
 
-
-
-extension SourcePayload.Item {
+extension Source.Payload.Item {
     private enum CodingKeys: String, CodingKey {
         case sku
         case amount

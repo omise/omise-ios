@@ -10,11 +10,11 @@ public struct SourcePayment: Encodable {
     let amount: Int64
     /// Currency for source as three-letter ISO 4217 code
     let currency: String
-    let details: SourcePayload
+    let details: Source.Payload
 
     let platform = "IOS"
 
-    init(amount: Int64, currency: String, details: SourcePayload) {
+    init(amount: Int64, currency: String, details: Source.Payload) {
         self.amount = amount
         self.currency = currency
         self.details = details

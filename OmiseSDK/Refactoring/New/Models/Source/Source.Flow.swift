@@ -1,12 +1,14 @@
 import Foundation
 
-// TODO: Add Unit Tests for Source.Flow
 extension Source {
-    /// The processing flow of a Source
-    /// - redirect: The customer need to be redirected to another URL in order to process the source
-    /// - offline: The customer need to do something in offline in order to process the source
-    /// - other: Other processing flow
-    public enum Flow: String, Decodable {
+
+    /// The payment flow payers need to go through to complete the payment
+    ///
+    /// - redirect: Payer must be redirected to external website (charge.authorize_uri) to complete payment
+    /// - offline: Payer will receive payment information to complete payment offline (charge.source.references)
+    /// - appRedirect: Payer must be redirected to an app (charge.authorize_uri) to complete payment
+    /// - unknown: Any other unknown flow
+    public enum Flow: String, Codable {
         case redirect
         case offline
         case appRedirect = "app_redirect"
