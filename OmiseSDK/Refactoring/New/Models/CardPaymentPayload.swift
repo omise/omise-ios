@@ -1,10 +1,15 @@
 import Foundation
 
-// TODO: Add Unit Tests for CardPayment
-/// Information to create a token
+/// Card Information to create a token container
+/// Used as payload in createToken API
+struct TokenPaymentPayloadContainer: Codable {
+    let card: CardPaymentPayload
+}
+
+/// Card Information to create a token
 /// A token represents a credit or debit card
 /// https://docs.opn.ooo/tokens-api
-public struct CardPaymentPayload: Encodable {
+public struct CardPaymentPayload: Codable, Equatable {
     /// Card holder's full name
     public let name: String
     /// Card number
@@ -45,5 +50,3 @@ public struct CardPaymentPayload: Encodable {
         case phoneNumber = "phone_number"
     }
 }
-
-

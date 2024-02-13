@@ -6,9 +6,6 @@ import XCTest
 // swiftlint:disable:next type_body_length
 class SourceTests: XCTestCase {
 
-    let sampleData = SampleData()
-    var jsonDecoder = JSONDecoder()
-
     /// Test Source.Payload's Codable protocol
     func validatePayloadCodable(_ payload: Source.Payload) throws {
         let encodedPayload = try JSONEncoder().encode(payload)
@@ -18,12 +15,12 @@ class SourceTests: XCTestCase {
             print("")
         }
 
-        let decodedPayload = try parsePayload(jsonString: encodedPayloadJson)
+        let decodedPayload: Source.Payload = try parse(jsonString: encodedPayloadJson)
         XCTAssertEqual(payload, decodedPayload)
     }
 
     func testAlipayCN() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .alipayCN)
+        let source: Source = try sampleFromJSONBy(.source(type: .alipayCN))
         XCTAssertEqual(source.id, "src_test_5owftw9kjhjisssm0n2")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.alipayCN))
@@ -33,7 +30,7 @@ class SourceTests: XCTestCase {
         try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeAlipayHK() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .alipayHK)
+        let source: Source = try sampleFromJSONBy(.source(type: .alipayHK))
         XCTAssertEqual(source.id, "src_test_5oxesy9ovpgawobhf6n")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.alipayHK))
@@ -43,7 +40,7 @@ class SourceTests: XCTestCase {
         try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeAlipay() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .alipay)
+        let source: Source = try sampleFromJSONBy(.source(type: .alipay))
         XCTAssertEqual(source.id, "src_test_5avnfnqxzzj2yu7a34e")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.alipay))
@@ -53,7 +50,7 @@ class SourceTests: XCTestCase {
         try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeBoost() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .boost)
+        let source: Source = try sampleFromJSONBy(.source(type: .boost))
         XCTAssertEqual(source.id, "src_5pqcjr6tu4xvqut5nh5")
         XCTAssertTrue(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.boost))
@@ -63,7 +60,7 @@ class SourceTests: XCTestCase {
         try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeDana() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .dana)
+        let source: Source = try sampleFromJSONBy(.source(type: .dana))
         XCTAssertEqual(source.id, "src_test_5oxew5l8jxhss03ybfb")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.dana))
@@ -73,7 +70,7 @@ class SourceTests: XCTestCase {
         try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeDuitNowQR() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .duitNowQR)
+        let source: Source = try sampleFromJSONBy(.source(type: .duitNowQR))
         XCTAssertEqual(source.id, "src_5pqcjr6tu4xvqut5nh5")
         XCTAssertTrue(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.duitNowQR))
@@ -83,7 +80,7 @@ class SourceTests: XCTestCase {
         try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeGcash() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .gcash)
+        let source: Source = try sampleFromJSONBy(.source(type: .gcash))
         XCTAssertEqual(source.id, "src_test_5oxesgzoekdn5nukcdf")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.gcash))
@@ -93,7 +90,7 @@ class SourceTests: XCTestCase {
         try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeGrabPay() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .grabPay)
+        let source: Source = try sampleFromJSONBy(.source(type: .grabPay))
         XCTAssertEqual(source.id, "src_test_5pqcjr6tu4xvqut5nh5")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.grabPay))
@@ -103,7 +100,7 @@ class SourceTests: XCTestCase {
         try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeKakaoPay() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .kakaoPay)
+        let source: Source = try sampleFromJSONBy(.source(type: .kakaoPay))
         XCTAssertEqual(source.id, "src_test_5oxetau2owhu0rbzg7y")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.kakaoPay))
@@ -113,7 +110,7 @@ class SourceTests: XCTestCase {
         try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeMaybankQRPay() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .maybankQRPay)
+        let source: Source = try sampleFromJSONBy(.source(type: .maybankQRPay))
         XCTAssertEqual(source.id, "src_5pqcjr6tu4xvqut5nh5")
         XCTAssertTrue(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.maybankQRPay))
@@ -123,7 +120,7 @@ class SourceTests: XCTestCase {
         try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodePayNow() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .payNow)
+        let source: Source = try sampleFromJSONBy(.source(type: .payNow))
         XCTAssertEqual(source.id, "src_test_5iso4taobco8j5jehx5")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.payNow))
@@ -133,7 +130,7 @@ class SourceTests: XCTestCase {
         try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodePayPay() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .payPay)
+        let source: Source = try sampleFromJSONBy(.source(type: .payPay))
         XCTAssertEqual(source.id, "src_5pqcjr6tu4xvqut5nh5")
         XCTAssertTrue(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.payPay))
@@ -143,7 +140,7 @@ class SourceTests: XCTestCase {
         try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodePromptPay() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .promptPay)
+        let source: Source = try sampleFromJSONBy(.source(type: .promptPay))
         XCTAssertEqual(source.id, "src_test_5jb2cjjyjea25nps3ya")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.promptPay))
@@ -153,7 +150,7 @@ class SourceTests: XCTestCase {
         try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeRabbitLinepay() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .rabbitLinepay)
+        let source: Source = try sampleFromJSONBy(.source(type: .rabbitLinepay))
         XCTAssertEqual(source.id, "src_test_5owftw9kjhjisssm0n2")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.rabbitLinepay))
@@ -163,7 +160,7 @@ class SourceTests: XCTestCase {
         try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeShopeePayJumpApp() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .shopeePayJumpApp)
+        let source: Source = try sampleFromJSONBy(.source(type: .shopeePayJumpApp))
         XCTAssertEqual(source.id, "src_5pqcjr6tu4xvqut5nh5")
         XCTAssertTrue(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.shopeePayJumpApp))
@@ -173,7 +170,7 @@ class SourceTests: XCTestCase {
         try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeShopeePay() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .shopeePay)
+        let source: Source = try sampleFromJSONBy(.source(type: .shopeePay))
         XCTAssertEqual(source.id, "src_5pqcjr6tu4xvqut5nh5")
         XCTAssertTrue(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.shopeePay))
@@ -183,7 +180,7 @@ class SourceTests: XCTestCase {
         try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeTouchNGo() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .touchNGo)
+        let source: Source = try sampleFromJSONBy(.source(type: .touchNGo))
         XCTAssertEqual(source.id, "src_test_5oxet335rx3xzdyn06g")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.touchNGo))
@@ -194,7 +191,7 @@ class SourceTests: XCTestCase {
     }
 
     func testDecodeTrueMoneyJumpApp() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .trueMoneyJumpApp)
+        let source: Source = try sampleFromJSONBy(.source(type: .trueMoneyJumpApp))
         XCTAssertEqual(source.id, "src_5yqlbf5w206mcfybj8v")
         XCTAssertTrue(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.trueMoneyJumpApp))
@@ -205,7 +202,7 @@ class SourceTests: XCTestCase {
     }
 
     func testDecodeBarcodeAlipay() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .barcodeAlipay)
+        let source: Source = try sampleFromJSONBy(.source(type: .barcodeAlipay))
         let payload = Source.Payload.BarcodeAlipay(
             barcode: "1234567890123456",
             storeID: "1",
@@ -222,7 +219,7 @@ class SourceTests: XCTestCase {
     }
 
     func testDecodeBillPaymentTescoLotus() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .billPaymentTescoLotus)
+        let source: Source = try sampleFromJSONBy(.source(type: .billPaymentTescoLotus))
         XCTAssertEqual(source.id, "src_test_59trf2nxk43b5nml8z0")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.billPaymentTescoLotus))
@@ -277,7 +274,7 @@ class SourceTests: XCTestCase {
             ]
         )
 
-        let source = try sourceFromSampleJSONFileBy(type: .atome)
+        let source: Source = try sampleFromJSONBy(.source(type: .atome))
         XCTAssertEqual(source.id, "src_5yqiaqtbbog2pxjdg6b")
         XCTAssertTrue(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .atome(payload))
@@ -288,7 +285,7 @@ class SourceTests: XCTestCase {
     }
 
     func testDecodeDuitNowOBW() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .duitNowOBW)
+        let source: Source = try sampleFromJSONBy(.source(type: .duitNowOBW))
         let payload = Source.Payload.DuitNowOBW(bank: .affin)
         XCTAssertEqual(source.id, "src_5pqcjr6tu4xvqut5nh5")
         XCTAssertTrue(source.isLiveMode)
@@ -301,7 +298,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeInstallmentBay() throws {
         let sourceType: SourceType = .installmentBAY
-        let source = try sourceFromSampleJSONFileBy(type: sourceType)
+        let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         let payload = Source.Payload.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
@@ -318,7 +315,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeInstallmentBBL() throws {
         let sourceType: SourceType = .installmentBBL
-        let source = try sourceFromSampleJSONFileBy(type: sourceType)
+        let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         let payload = Source.Payload.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
@@ -335,7 +332,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeInstallmentFirstChoice() throws {
         let sourceType: SourceType = .installmentFirstChoice
-        let source = try sourceFromSampleJSONFileBy(type: sourceType)
+        let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         let payload = Source.Payload.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
@@ -353,7 +350,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeInstallmentKBank() throws {
         let sourceType: SourceType = .installmentKBank
-        let source = try sourceFromSampleJSONFileBy(type: sourceType)
+        let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         let payload = Source.Payload.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
@@ -370,7 +367,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeInstallmentKTC() throws {
         let sourceType: SourceType = .installmentKTC
-        let source = try sourceFromSampleJSONFileBy(type: sourceType)
+        let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         let payload = Source.Payload.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
@@ -387,7 +384,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeInstallmentMBB() throws {
         let sourceType: SourceType = .installmentMBB
-        let source = try sourceFromSampleJSONFileBy(type: sourceType)
+        let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         let payload = Source.Payload.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
@@ -404,7 +401,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeInstallmentTTB() throws {
         let sourceType: SourceType = .installmentTTB
-        let source = try sourceFromSampleJSONFileBy(type: sourceType)
+        let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         let payload = Source.Payload.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
@@ -421,7 +418,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeInstallmentUOB() throws {
         let sourceType: SourceType = .installmentUOB
-        let source = try sourceFromSampleJSONFileBy(type: sourceType)
+        let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         let payload = Source.Payload.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
@@ -437,7 +434,7 @@ class SourceTests: XCTestCase {
     }
 
     func testDecodeTrueMoneyWallet() throws {
-        let source = try sourceFromSampleJSONFileBy(type: .trueMoneyWallet)
+        let source: Source = try sampleFromJSONBy(.source(type: .trueMoneyWallet))
         let payload = Source.Payload.TrueMoneyWallet(phoneNumber: "0123456789")
         XCTAssertEqual(source.id, "src_test_5jhmesi7s4at1qctloy")
         XCTAssertFalse(source.isLiveMode)
@@ -450,7 +447,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeInternetBankingBay() throws {
         let sourceType: SourceType = .internetBankingBAY
-        let source = try sourceFromSampleJSONFileBy(type: sourceType)
+        let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         XCTAssertEqual(source.id, "src_test_5cs0sm8u8h8nqo5hwcs")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(sourceType))
@@ -462,7 +459,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeInternetBankingBBL() throws {
         let sourceType: SourceType = .internetBankingBBL
-        let source = try sourceFromSampleJSONFileBy(type: sourceType)
+        let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         XCTAssertEqual(source.id, "src_test_5cs0sfy7phu06yhyz5c")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(sourceType))
@@ -474,7 +471,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeMobileBankingBAY() throws {
         let sourceType: SourceType = .mobileBankingBAY
-        let source = try sourceFromSampleJSONFileBy(type: sourceType)
+        let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         XCTAssertEqual(source.id, "src_test_5cs0sm8u8h8nqo5zasd")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(sourceType))
@@ -486,7 +483,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeMobileBankingBBL() throws {
         let sourceType: SourceType = .mobileBankingBBL
-        let source = try sourceFromSampleJSONFileBy(type: sourceType)
+        let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         XCTAssertEqual(source.id, "src_test_5cs0sm8u8h8nqo5zasd")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(sourceType))
@@ -498,7 +495,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeMobileBankingKBank() throws {
         let sourceType: SourceType = .mobileBankingKBank
-        let source = try sourceFromSampleJSONFileBy(type: sourceType)
+        let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         XCTAssertEqual(source.id, "src_test_5cs0sm8u8h8nqo5zasd")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(sourceType))
@@ -509,7 +506,7 @@ class SourceTests: XCTestCase {
     }
     func testDecodeMobileBankingTKB() throws {
         let sourceType: SourceType = .mobileBankingKTB
-        let source = try sourceFromSampleJSONFileBy(type: sourceType)
+        let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         XCTAssertEqual(source.id, "src_test_5cs0sm8u8h8nqo5zasd")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(sourceType))
@@ -521,7 +518,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeMobileBankingSCB() throws {
         let sourceType: SourceType = .mobileBankingSCB
-        let source = try sourceFromSampleJSONFileBy(type: sourceType)
+        let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         XCTAssertEqual(source.id, "src_test_5cs0sm8u8h8nqo5zasd")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(sourceType))
@@ -533,7 +530,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeEContext() throws {
         let sourceType: SourceType = .eContext
-        let source = try sourceFromSampleJSONFileBy(type: sourceType)
+        let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         let payload = Source.Payload.EContext(
             name: "ヤマダタロウ",
             email: "test@opn.com",
@@ -550,7 +547,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeFPX() throws {
         let sourceType: SourceType = .fpx
-        let source = try sourceFromSampleJSONFileBy(type: sourceType)
+        let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         let payload = Source.Payload.FPX(
             bank: .uob,
             email: "support@omise.co"

@@ -11,7 +11,6 @@ extension OmiseServerType {
     // swiftlint:enable force_unwrapping
 }
 
-// TODO: Add Sample Data to test Client
 enum OmiseAPI {
     case capability
     case token(tokenID: String)
@@ -62,9 +61,6 @@ extension OmiseAPI: APIProtocol {
     var httpBody: Data? {
         switch self {
         case .createToken(let payload):
-            struct TokenPaymentPayloadContainer: Encodable {
-                let card: CardPaymentPayload
-            }
             let token = TokenPaymentPayloadContainer(card: payload)
             return try? jsonEncoder.encode(token)
         case .createSource(let sourcePayment):

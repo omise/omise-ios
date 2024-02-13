@@ -11,13 +11,13 @@ public class Client {
     }
 
     let publicKey: String
-    let network: NetworkService
+    let network: NetworkServiceProtocol
 
     public convenience init(publicKey: String) {
         self.init(publicKey: publicKey, network: NetworkService())
     }
 
-    init(publicKey: String, network: NetworkService) {
+    init(publicKey: String, network: NetworkServiceProtocol) {
         self.publicKey = publicKey
         self.network = network
     }
