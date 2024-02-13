@@ -18,7 +18,7 @@ extension Source {
         /// TrueMoney Wallet
         case trueMoneyWallet(_ payload: TrueMoneyWallet)
         /// Payment menthods without additional payment parameters
-        case other(_ sourceType: SourceType)
+        case sourceType(_ sourceType: SourceType)
 
         /// Encode payload to JSON string
         public func encode(to encoder: Encoder) throws {
@@ -44,7 +44,7 @@ extension Source {
             case .trueMoneyWallet(let payload):
                 try container.encode(SourceType.trueMoneyWallet, forKey: .sourceType)
                 try payload.encode(to: encoder)
-            case .other(let sourceType):
+            case .sourceType(let sourceType):
                 try container.encode(sourceType.rawValue, forKey: .sourceType)
             }
         }
@@ -65,7 +65,7 @@ extension Source {
                 return value.sourceType
             case .trueMoneyWallet:
                 return .trueMoneyWallet
-            case .other(let value):
+            case .sourceType(let value):
                 return value
             }
         }
@@ -95,7 +95,7 @@ extension Source {
             case .fpx:
                 self = try .fpx(FPX(from: decoder))
             default:
-                self = .other(sourceType)
+                self = .sourceType(sourceType)
             }
         }
     }

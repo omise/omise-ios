@@ -350,52 +350,52 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         os_log("Payment Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedType.description)
         switch selectedType {
         case .alipay:
-            payment = .other(.alipay)
+            payment = .sourceType(.alipay)
         case .alipayCN:
-            payment = .other(.alipayCN)
+            payment = .sourceType(.alipayCN)
         case .alipayHK:
-            payment = .other(.alipayHK)
+            payment = .sourceType(.alipayHK)
         case .dana:
-            payment = .other(.dana)
+            payment = .sourceType(.dana)
         case .gcash:
-            payment = .other(.gcash)
+            payment = .sourceType(.gcash)
         case .kakaoPay:
-            payment = .other(.kakaoPay)
+            payment = .sourceType(.kakaoPay)
         case .touchNGoAlipayPlus, .touchNGo:
-            payment = .other(.touchNGo)
+            payment = .sourceType(.touchNGo)
         case .tescoLotus:
-            payment = .other(.billPaymentTescoLotus)
+            payment = .sourceType(.billPaymentTescoLotus)
         case .promptpay:
-            payment = .other(.promptPay)
+            payment = .sourceType(.promptPay)
         case .paynow:
-            payment = .other(.payNow)
+            payment = .sourceType(.payNow)
         case .citiPoints:
-            payment = .other(.pointsCiti)
+            payment = .sourceType(.pointsCiti)
         case .rabbitLinepay:
-            payment = .other(.rabbitLinepay)
+            payment = .sourceType(.rabbitLinepay)
         case .ocbcDigital:
-            payment = .other(.mobileBankingOCBC)
+            payment = .sourceType(.mobileBankingOCBC)
         case .grabPay, .grabPayRms:
-            payment = .other(.grabPay)
+            payment = .sourceType(.grabPay)
         case .boost:
-            payment = .other(.boost)
+            payment = .sourceType(.boost)
         case .shopeePay:
-            payment = .other(.shopeePay)
+            payment = .sourceType(.shopeePay)
         case .shopeePayJumpApp:
-            payment = .other(.shopeePayJumpApp)
+            payment = .sourceType(.shopeePayJumpApp)
         case .maybankQRPay:
-            payment = .other(.maybankQRPay)
+            payment = .sourceType(.maybankQRPay)
         case .duitNowQR:
-            payment = .other(.duitNowQR)
+            payment = .sourceType(.duitNowQR)
         case .payPay:
-            payment = .other(.payPay)
+            payment = .sourceType(.payPay)
         case .atome:
             goToAtome()
             return
         case .truemoneyJumpApp:
-            payment = .other(.trueMoneyJumpApp)
+            payment = .sourceType(.trueMoneyJumpApp)
         case .weChat:
-            payment = .other(.weChat)
+            payment = .sourceType(.weChat)
         default:
             return
         }

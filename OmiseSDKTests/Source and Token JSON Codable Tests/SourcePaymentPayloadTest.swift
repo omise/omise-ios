@@ -4,7 +4,7 @@ import XCTest
 
 class SourcePaymentPayloadTest: XCTestCase {
     func testJSONEncoding() throws {
-        let sourcePayload = SourcePaymentPayload(amount: 1, currency: "THB", details: .other(.alipay))
+        let sourcePayload = SourcePaymentPayload(amount: 1, currency: "THB", details: .sourceType(.alipay))
 
         let jsonString = try encodeToJson(sourcePayload)
         let decoded: SourcePaymentPayload = try parse(jsonString: jsonString)

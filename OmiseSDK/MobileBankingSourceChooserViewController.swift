@@ -77,7 +77,7 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
 
-        flowSession?.requestCreateSource(.other(sourceType)) { _ in
+        flowSession?.requestCreateSource(.sourceType(sourceType)) { _ in
             cell?.accessoryView = oldAccessoryView
             self.view.isUserInteractionEnabled = true
         }
