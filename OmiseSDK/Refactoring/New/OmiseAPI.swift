@@ -15,8 +15,8 @@ extension OmiseServerType {
 enum OmiseAPI {
     case capability
     case token(tokenID: String)
-    case createToken(cardPayment: CardPayment)
-    case createSource(sourcePayment: SourcePayment)
+    case createToken(payload: CardPaymentPayload)
+    case createSource(payload: SourcePaymentPayload)
 }
 
 extension OmiseAPI: APIProtocol {
@@ -61,11 +61,11 @@ extension OmiseAPI: APIProtocol {
 
     var httpBody: Data? {
         switch self {
-        case .createToken(let cardPayment):
-            struct CardPaymentContainer: Encodable {
-                let card: CardPayment
+        case .createToken(let payload):
+            struct TokenPaymentPayloadContainer: Encodable {
+                let card: CardPaymentPayload
             }
-            let token = CardPaymentContainer(card: cardPayment)
+            let token = TokenPaymentPayloadContainer(card: payload)
             return try? jsonEncoder.encode(token)
         case .createSource(let sourcePayment):
             return try? jsonEncoder.encode(sourcePayment)

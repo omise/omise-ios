@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="iu0-Jf-pl4">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +16,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Z4F-hQ-6m7"/>
                     </layoutGuides>
                     <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="rB7-5O-yfJ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="804"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hEr-df-bfx">
@@ -185,7 +184,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
             <objects>
                 <tableViewController id="9af-Wv-9QW" customClass="PaymentSettingTableViewController" customModule="ExampleApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="IQu-Jd-aGH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -316,8 +315,8 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Payment Methods" id="TrO-kC-S3j">
-                                <string key="footerTitle">"Try Capability API" will try to load the allowed payment methods from the Capability API and use it if it's available.
-"Use specific payment methods" will ignore the allowed payment methods from the Capability API and always use the payment method specified below</string>
+                                <string key="footerTitle">"Try CapabilityOld API" will try to load the allowed payment methods from tCapabilityOld API and use it if it's available.
+"Use specific payment methods" will ignore the allowed payment methods from tCapabilityOld API and always use the payment method specified below</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="hyr-Kp-7vQ" style="IBUITableViewCellStyleDefault" id="rjA-xT-q8j">
                                         <rect key="frame" x="0.0" y="463.5" width="414" height="43.5"/>
@@ -326,7 +325,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Try Capability API" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hyr-Kp-7vQ">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Try CapabilityOld API" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hyr-Kp-7vQ">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1182,7 +1181,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                         <viewControllerLayoutGuide type="bottom" id="SfK-3s-OUA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="I3U-U2-SfQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="804"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="xWi-gb-fNb">
@@ -1357,20 +1356,6 @@ You can present via either Storyboard or Code and you can see the code in the Ex
             <point key="canvasLocation" x="1052" y="637"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="5Ul-WN-gFb">
-            <size key="intrinsicContentSize" width="171" height="22"/>
-        </designable>
-        <designable name="Iw8-Ab-h7Y">
-            <size key="intrinsicContentSize" width="28" height="22"/>
-        </designable>
-        <designable name="LzH-z8-dKL">
-            <size key="intrinsicContentSize" width="123" height="22"/>
-        </designable>
-        <designable name="gES-RJ-kH4">
-            <size key="intrinsicContentSize" width="150" height="22"/>
-        </designable>
-    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="E9r-cu-PMc"/>
     </inferredMetricsTieBreakers>

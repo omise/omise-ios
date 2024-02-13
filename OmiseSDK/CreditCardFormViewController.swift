@@ -7,7 +7,7 @@ public protocol CreditCardFormViewControllerDelegate: AnyObject {
     /// Delegate method for receiving token data when card tokenization succeeds.
     /// - parameter token: `OmiseToken` instance created from supplied credit card data.
     /// - seealso: [Tokens API](https://www.omise.co/tokens-api)
-    func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token)
+    func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: TokenOld)
 
     /// Delegate method for receiving error information when card tokenization failed.
     /// This allows you to have fine-grained control over error handling when setting
@@ -415,7 +415,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
                        token.id)
                 if let delegate = strongSelf.delegate {
                     delegate.creditCardFormViewController(strongSelf, didSucceedWithToken: token)
-                    os_log("Credit Card Form Create Token succeed delegate notified", log: uiLogObject, type: .default)
+                    os_log("Credit Card Form Create TokenOld succeed delegate notified", log: uiLogObject, type: .default)
                 } else {
                     os_log("There is no Credit Card Form's delegate to notify about the created token", log: uiLogObject, type: .default)
                 }

@@ -2,7 +2,7 @@ import Foundation
 import UIKit.UIDevice
 
 // TODO: Make it private and move test code to another test of public method
-extension ClientNew {
+extension Client {
     func customURL(api: APIProtocol) -> URL? {
         switch api.server {
         case .api:
@@ -38,7 +38,7 @@ extension ClientNew {
 
 // MARK: User Agent
 // TODO: Make it private and move test code to another test of public method
-extension ClientNew {
+extension Client {
     func userAgent(
         sdkVersion: String = OmiseSDK.shared.version,
         platform: String = ProcessInfo.processInfo.operatingSystemVersionString,
@@ -50,7 +50,7 @@ extension ClientNew {
 
 // MARK: HTTP Headers
 // TODO: Make it private and move test code to another test of public method
-extension ClientNew {
+extension Client {
     enum HTTPHeaders: String {
         case authorization = "Authorization"
         case userAgent = "User-Agent"

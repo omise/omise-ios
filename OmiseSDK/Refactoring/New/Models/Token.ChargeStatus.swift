@@ -1,6 +1,6 @@
 import Foundation
 
-extension TokenNew {
+extension Token {
     // TODO: Add Unit Tests to ChargeStatus
     // TODO: Add comments to ChargeStatus's properties
     public enum ChargeStatus: String, Decodable {
@@ -17,7 +17,7 @@ extension TokenNew {
     }
 }
 
-extension TokenNew.ChargeStatus {
+extension Token.ChargeStatus {
     static let finalStates: [Self] = [.successful, .failed, .expired, .reversed]
 
     var isFinal: Bool {

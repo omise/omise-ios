@@ -1,6 +1,6 @@
 import Foundation
 
-extension CapabilityNew.PaymentMethod {
+extension Capability.PaymentMethod {
     // TODO: Add Unit Tests to Provider
     // TODO: Add comments to Provider's properties
     enum Provider: String, Codable, Hashable {

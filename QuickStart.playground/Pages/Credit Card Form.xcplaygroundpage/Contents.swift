@@ -28,11 +28,11 @@ PlaygroundPage.current.needsIndefiniteExecution = true
  
  */
 extension CheckoutViewController: CreditCardFormViewControllerDelegate {
-  public func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
+  public func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: TokenOld) {
     dismiss(animated: true, completion: nil)
     print("token created: \(token.id )")
     
-    let alert = UIAlertController(title: "Token", message: token.id, preferredStyle: .alert)
+    let alert = UIAlertController(title: "TokenOld", message: token.id, preferredStyle: .alert)
     present(alert, animated: true, completion: nil)
     
   }

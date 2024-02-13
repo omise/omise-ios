@@ -1,7 +1,7 @@
 import UIKit
 import os
 
-class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capability.Backend.Bank>, PaymentSourceChooser, PaymentChooserUI {
+class FPXBankChooserViewController: AdaptableDynamicTableViewController<CapabilityOld.Backend.Bank>, PaymentSourceChooser, PaymentChooserUI {
     var email: String?
     var flowSession: PaymentCreatorFlowSession?
     private let defaultImage: String = "FPX/unknown"
@@ -12,7 +12,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         comment: "A descriptive text telling the user when there's no banks available"
     )
 
-    override var showingValues: [Capability.Backend.Bank] {
+    override var showingValues: [CapabilityOld.Backend.Bank] {
         didSet {
             os_log("FPX Bank Chooser: Showing options - %{private}@",
                    log: uiLogObject,

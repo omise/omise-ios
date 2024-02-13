@@ -4,7 +4,7 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
 
     private let destinationSegue: String = "GoToFPXBankChooserSegue"
     var flowSession: PaymentCreatorFlowSession?
-    var showingValues: [Capability.Backend.Bank]?
+    var showingValues: [CapabilityOld.Backend.Bank]?
     private var emailValue: String?
 
     private var client: ClientOld?

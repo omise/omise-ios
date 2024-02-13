@@ -42,7 +42,7 @@ class CreditCardFormViewModel: CreditCardFormViewModelProtocol, CountryListViewM
         return result
     }
 
-    func onSubmitButtonPressed(_ viewContext: ViewContext, publicKey: String?, onComplete: @escaping (RequestResult<Token>) -> Void) {
+    func onSubmitButtonPressed(_ viewContext: ViewContext, publicKey: String?, onComplete: @escaping (RequestResult<TokenOld>) -> Void) {
         
         guard let publicKey = publicKey else {
             os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, publicKey ?? "")
@@ -52,7 +52,7 @@ class CreditCardFormViewModel: CreditCardFormViewModelProtocol, CountryListViewM
 
         os_log("Requesting to create token", log: uiLogObject, type: .info)
 
-        let request = Request<Token>(
+        let request = Request<TokenOld>(
             name: viewContext.name,
             pan: viewContext.pan,
             expirationMonth: viewContext.expirationMonth,

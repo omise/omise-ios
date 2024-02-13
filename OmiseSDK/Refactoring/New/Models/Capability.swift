@@ -1,11 +1,10 @@
 import Foundation
 
-// TODO: Rename to Capability
-// TODO: Add Unit Tests to CapabilityNew
+// TODO: Add Unit Tests to Capability
 // TODO: Add comments to CapabilityNew's properties
-public struct CapabilityNew: Codable {
+public struct Capability: Codable {
     public let countryCode: String
-    public let paymentMethods: [CapabilityNew.PaymentMethod]
+    public let paymentMethods: [Capability.PaymentMethod]
     public let banks: Set<String>
 
     private enum CodingKeys: String, CodingKey {

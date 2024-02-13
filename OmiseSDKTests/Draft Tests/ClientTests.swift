@@ -7,11 +7,11 @@ class ClientTests: XCTestCase {
     let publicKeyBase64 = "cGtleV90ZXN0XzU4d2ZubHdveHoxdGJrZGQ5OTM="
     let requestTimeout: TimeInterval = 15.0
 
-    var testClient: ClientNew!
+    var testClient: Client!
     
     override func setUp() {
         super.setUp()
-        testClient = ClientNew(publicKey: publicKey)
+        testClient = Client(publicKey: publicKey)
         
         // swiftlint:disable force_unwrapping
         let testEnvironment = Environment.dev(
@@ -66,7 +66,7 @@ class ClientTests: XCTestCase {
 
     /*
      func testCapabilityAPI() {
-     let expectation = self.expectation(description: "API: Capability")
+     let expectation = self.expectation(description: "API: CapabilityOld")
 
      testClient?.capability { result in
      print(result)
@@ -88,7 +88,7 @@ class ClientTests: XCTestCase {
 
     /*
     func testCreateTokenAPI() {
-        let expectation = self.expectation(description: "API: Create Token")
+        let expectation = self.expectation(description: "API: Create TokenOld")
 
         // TODO: Move to test data collection
         let card = PaymentInformationNew.Card(
@@ -107,7 +107,7 @@ class ClientTests: XCTestCase {
         )
 
         let publicKey = "..."
-        let client = ClientNew(publicKey: publicKey)
+        let client = Client(publicKey: publicKey)
 
         client.createToken(card: card) { result in
             print(result)
@@ -133,7 +133,7 @@ class ClientTests: XCTestCase {
 
      let tokenID = "test token id"
      let publicKey = "test pkey"
-     let client = ClientNew(publicKey: publicKey)
+     let client = Client(publicKey: publicKey)
      client.observeChargeStatusUntilChange(tokenID: tokenID) { result in
      do {
      let value = try result.get()

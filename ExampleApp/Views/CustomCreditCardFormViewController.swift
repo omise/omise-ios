@@ -6,7 +6,7 @@ protocol CustomCreditCardFormViewControllerDelegate: AnyObject {
     /// Delegate method for receiving token data when card tokenization succeeds.
     /// - parameter token: `OmiseToken` instance created from supplied credit card data.
     /// - seealso: [Tokens API](https://www.omise.co/tokens-api)
-    func creditCardFormViewController(_ controller: CustomCreditCardFormViewController, didSucceedWithToken token: Token)
+    func creditCardFormViewController(_ controller: CustomCreditCardFormViewController, didSucceedWithToken token: TokenOld)
     
     /// Delegate method for receiving error information when card tokenization failed.
     /// This allows you to have fine-grained control over error handling when setting
@@ -161,7 +161,7 @@ class CustomCreditCardFormViewController: UIViewController {
             let cvv = cardCVVField.text else {
                 return
         }
-        let tokenRequest = Request<Token>(
+        let tokenRequest = Request<TokenOld>(
             name: name,
             pan: cardNumberField.pan,
             expirationMonth: expiryMonth,

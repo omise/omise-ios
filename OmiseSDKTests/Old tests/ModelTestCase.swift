@@ -6,9 +6,9 @@ import XCTest
 class ModelTestCase: XCTestCase {
 
     func testDecodeToken() throws {
-        let decoder = ClientOld.makeJSONDecoder(for: Request<Token>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<TokenOld>?.none)
         let tokenData = try XCTestCase.fixturesData(forFilename: "token_object")
-        let token = try decoder.decode(Token.self, from: tokenData)
+        let token = try decoder.decode(TokenOld.self, from: tokenData)
 
         XCTAssertEqual("tokn_test_5086xl7c9k5rnx35qba", token.id)
         XCTAssertEqual("/tokens/tokn_test_5086xl7c9k5rnx35qba", token.location)
@@ -20,9 +20,9 @@ class ModelTestCase: XCTestCase {
     }
 
     func testDecodeTokenWithoutCard() throws {
-        let decoder = ClientOld.makeJSONDecoder(for: Request<Token>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<TokenOld>?.none)
         let tokenData = try XCTestCase.fixturesData(forFilename: "token_with_empty_card_object")
-        let token = try decoder.decode(Token.self, from: tokenData)
+        let token = try decoder.decode(TokenOld.self, from: tokenData)
 
         XCTAssertEqual("tokn_test_5086xl7c9k5rnx35qba", token.id)
         XCTAssertEqual("/tokens/tokn_test_5086xl7c9k5rnx35qba", token.location)
@@ -34,7 +34,7 @@ class ModelTestCase: XCTestCase {
     }
 
     func testDecodeCard() throws {
-        let decoder = ClientOld.makeJSONDecoder(for: Request<Token>?.none)
+        let decoder = ClientOld.makeJSONDecoder(for: Request<TokenOld>?.none)
         let cardData = try XCTestCase.fixturesData(forFilename: "card_object")
         let card = try decoder.decode(Card.self, from: cardData)
 
@@ -668,7 +668,7 @@ class ModelTestCase: XCTestCase {
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
 
         do {
-            let tokenParameter = Token.CreateParameter(name: "John Appleseed",
+            let tokenParameter = TokenOld.CreateParameter(name: "John Appleseed",
                                                        number: "4242424242424242",
                                                        expirationMonth: 6,
                                                        expirationYear: 2018,
@@ -690,7 +690,7 @@ class ModelTestCase: XCTestCase {
         }
 
         do {
-            let tokenParameter = Token.CreateParameter(name: "John Appleseed",
+            let tokenParameter = TokenOld.CreateParameter(name: "John Appleseed",
                                                        number: "4242424242424242",
                                                        expirationMonth: 6,
                                                        expirationYear: 2018,

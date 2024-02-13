@@ -16,7 +16,7 @@ protocol CreditCardFormViewModelProtocol {
     var countryListViewModel: CountryListViewModelProtocol { get }
     var isAddressFieldsVisible: Bool { get }
     
-    func onSubmitButtonPressed(_ viewContext: ViewContext, publicKey: String?, onComplete: @escaping (RequestResult<Token>) -> Void)
+    func onSubmitButtonPressed(_ viewContext: ViewContext, publicKey: String?, onComplete: @escaping (RequestResult<TokenOld>) -> Void)
     func error(for: AddressField, validate: String?) -> String?
     func title(for: AddressField) -> String?
     func placeholder(for: AddressField) -> String?

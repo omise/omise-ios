@@ -1,6 +1,6 @@
 import Foundation
 
-extension CapabilityNew.PaymentMethod {
+extension Capability.PaymentMethod {
     // TODO: Add Unit Tests to Bank
     // TODO: Add comments to Bank's properties
     public struct Bank: Codable, Hashable {

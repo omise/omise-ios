@@ -24,7 +24,7 @@ public class ClientOld: NSObject {
 //
 
     // Shared latest capability requested from API
-    static var sharedCapability: Capability? {
+    static var sharedCapability: CapabilityOld? {
         didSet {
             if let countryCode = sharedCapability?.countryCode {
                 OmiseSDK.shared.setCurrentCountry(countryCode: countryCode)
@@ -98,16 +98,16 @@ public class ClientOld: NSObject {
     }
     
     // swiftlint:disable:next function_body_length
-    public func capabilityDataWithCompletionHandler(_ completionHandler: ((RequestResult<Capability>) -> Void)?) {
+    public func capabilityDataWithCompletionHandler(_ completionHandler: ((RequestResult<CapabilityOld>) -> Void)?) {
         // swiftlint:disable:next closure_body_length
         let dataTask = session.dataTask(with: buildCapabilityAPIURLRequest()) { (data, response, error) in
             guard let completionHandler = completionHandler else { return } // nobody around to hear the leaf falls
             
-            var result: RequestResult<Capability>
+            var result: RequestResult<CapabilityOld>
             defer {
                 switch result {
                 case .success:
-                    os_log("Request succeed: Capability", log: sdkLogObject, type: .debug)
+                    os_log("Request succeed: CapabilityOld", log: sdkLogObject, type: .debug)
                 case .failure(let error):
                     os_log("Request failed %{public}@", log: sdkLogObject, type: .info, error.localizedDescription)
                 }
@@ -154,7 +154,7 @@ public class ClientOld: NSObject {
                 }
                 
                 do {
-                    let capability = try decoder.decode(Capability.self, from: data)
+                    let capability = try decoder.decode(CapabilityOld.self, from: data)
                     Self.sharedCapability = capability
                     result = .success(capability)
                 } catch {
@@ -217,7 +217,7 @@ public class ClientOld: NSObject {
                 }
 
                 do {
-                    let token = try decoder.decode(Token.self, from: data)
+                    let token = try decoder.decode(TokenOld.self, from: data)
                     result = .success(token.chargeStatus)
                 } catch {
                     let omiseError = OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: error)

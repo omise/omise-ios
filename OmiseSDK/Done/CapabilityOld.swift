@@ -1,7 +1,7 @@
 // swiftlint:disable file_length
 import Foundation
 
-public struct Capability: Object {
+public struct CapabilityOld: Object {
     public let countryCode: String
     public let location: String
     public let object: String
@@ -10,20 +10,20 @@ public struct Capability: Object {
 
     public let supportedBackends: [Backend]
 
-    private let backends: [Capability.Backend.BackendType: Backend]
+    private let backends: [CapabilityOld.Backend.BackendType: Backend]
 
-    public var creditCardBackend: Capability.Backend? {
+    public var creditCardBackend: CapabilityOld.Backend? {
         return backends[.card]
     }
 
-    public subscript(type: SourceTypeValue) -> Capability.Backend? {
+    public subscript(type: SourceTypeValue) -> CapabilityOld.Backend? {
         return backends[.source(type)]
     }
 }
 
-extension Capability {
-    public static func ~= (lhs: Capability, rhs: CreateSourceParameter) -> Bool {
-        func backend(from capability: Capability, for payment: PaymentInformation) -> Backend? {
+extension CapabilityOld {
+    public static func ~= (lhs: CapabilityOld, rhs: CreateSourceParameter) -> Bool {
+        func backend(from capability: CapabilityOld, for payment: PaymentInformation) -> Backend? {
             if let paymentSourceType = SourceTypeValue(payment.sourceType) {
                 return capability[paymentSourceType]
             } else {
@@ -53,7 +53,7 @@ extension Capability {
     }
 }
 
-extension Capability {
+extension CapabilityOld {
     public struct Backend: Codable, Equatable {
         public let payment: Payment
         public let supportedCurrencies: Set<Currency>
@@ -110,7 +110,7 @@ extension Capability {
     }
 }
 
-extension Capability: Codable {
+extension CapabilityOld: Codable {
     private enum CodingKeys: String, CodingKey {
         case countryCode = "country"
         case object
@@ -120,7 +120,7 @@ extension Capability: Codable {
     }
 }
 
-extension Capability.Backend {
+extension CapabilityOld.Backend {
     private enum CodingKeys: String, CodingKey {
         case object
         case name
@@ -132,9 +132,9 @@ extension Capability.Backend {
     }
 }
 
-extension Capability.Backend.Payment {
+extension CapabilityOld.Backend.Payment {
     // swiftlint:disable:next function_body_length
-    public static func == (lhs: Capability.Backend.Payment, rhs: Capability.Backend.Payment) -> Bool {
+    public static func == (lhs: CapabilityOld.Backend.Payment, rhs: CapabilityOld.Backend.Payment) -> Bool {
         switch (lhs, rhs) {
         case (.card, .card), (.alipay, .alipay), (.alipayCN, .alipayCN), (.alipayHK, .alipayHK):
             return true
@@ -192,7 +192,7 @@ extension Capability.Backend.Payment {
     }
 }
 
-extension Capability {
+extension CapabilityOld {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
@@ -204,16 +204,16 @@ extension Capability {
 
         var backendsContainer = try container.nestedUnkeyedContainer(forKey: .paymentBackends)
 
-        var backends: [Capability.Backend] = []
+        var backends: [CapabilityOld.Backend] = []
         
         while !backendsContainer.isAtEnd {
-            let backend = try backendsContainer.decode(Capability.Backend.self)
+            let backend = try backendsContainer.decode(CapabilityOld.Backend.self)
             backends.append(backend)
         }
 
         self.supportedBackends = backends
 
-        let backendTypes = backends.compactMap { Capability.Backend.BackendType(payment: $0.payment) }
+        let backendTypes = backends.compactMap { CapabilityOld.Backend.BackendType(payment: $0.payment) }
         self.backends = Dictionary(uniqueKeysWithValues: zip(backendTypes, backends))
     }
 
@@ -233,7 +233,7 @@ extension Capability {
     }
 }
 
-extension Capability.Backend {
+extension CapabilityOld.Backend {
     // swiftlint:disable:next function_body_length
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -356,7 +356,7 @@ extension Capability.Backend {
 }
 
 private let creditCardBackendTypeValue = "card"
-extension Capability.Backend {
+extension CapabilityOld.Backend {
     fileprivate enum BackendType: Codable, Hashable {
         case card
         case source(SourceTypeValue)
@@ -400,7 +400,7 @@ extension Capability.Backend {
         }
 
         // swiftlint:disable:next function_body_length
-        init?(payment: Capability.Backend.Payment) {
+        init?(payment: CapabilityOld.Backend.Payment) {
             switch payment {
             case .card:
                 self = .card
@@ -494,7 +494,7 @@ extension Capability.Backend {
     }
 }
 
-extension Capability.Backend {
+extension CapabilityOld.Backend {
     fileprivate enum Provider: String, Codable, Hashable {
         case alipayPlus = "Alipay_plus"
         case rms = "RMS"

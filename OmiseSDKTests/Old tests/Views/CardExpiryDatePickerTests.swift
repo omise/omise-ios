@@ -1,5 +1,5 @@
 import XCTest
-import OmiseSDK
+@testable import OmiseSDK
 
 class CardExpiryDatePickerTests: XCTestCase {
     

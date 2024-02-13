@@ -10,7 +10,7 @@ public protocol PaymentCreatorControllerDelegate: NSObjectProtocol {
 }
 
 public enum Payment {
-    case token(Token)
+    case token(TokenOld)
     case source(SourceOLD)
 }
 
@@ -194,7 +194,7 @@ public class PaymentCreatorController: UINavigationController {
         }
     }
 
-    public func applyPaymentMethods(from capability: Capability) {
+    public func applyPaymentMethods(from capability: CapabilityOld) {
         paymentChooserViewController.applyPaymentMethods(from: capability)
     }
 
@@ -359,7 +359,7 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
         dismissErrorMessage(animated: true, sender: self)
     }
 
-    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreateToken token: Token) {
+    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreateToken token: TokenOld) {
         os_log("Credit Card Form in Payment Createor - Request succeed %{private}@, trying to notify the delegate",
                log: uiLogObject,
                type: .default,

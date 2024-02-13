@@ -1,7 +1,7 @@
 import Foundation
 
-/// Parameter for creating a new `Token`
-/// - seealso: Token
+/// Parameter for creating a new `TokenOld`
+/// - seealso: TokenOld
 public struct CreateTokenParameter: Encodable {
     /// Card holder's full name.
     public let name: String
@@ -138,8 +138,8 @@ public enum ChargeStatus: String, Codable {
     case successful
 }
 
-/// Represents an Omise Token object
-public struct Token: CreatableObject {
+/// Represents an Omise TokenOld object
+public struct TokenOld: CreatableObject {
     public typealias CreateParameter = CreateTokenParameter
     
     public static let postURL: URL = Configuration.default.environment.tokenURL
@@ -148,19 +148,19 @@ public struct Token: CreatableObject {
     /// Omise ID of the token
     public let id: String
     
-    /// Boolean indicates that if this Token is in the live mode
+    /// Boolean indicates that if this TokenOld is in the live mode
     public let isLiveMode: Bool
     
-    /// URL for fetching the Token data
+    /// URL for fetching the TokenOld data
     public let location: String
     
     /// Boolean indicates that if this token is already used for creating a charge already
     public var isUsed: Bool
     
-    /// Card that is used for creating this Token
+    /// Card that is used for creating this TokenOld
     public let card: Card?
     
-    /// Date that this Token was created
+    /// Date that this TokenOld was created
     public let createdDate: Date
     
     /// Status of charge created using this token
@@ -234,9 +234,9 @@ public struct Card: Decodable {
     }
 }
 
-extension Request where T == Token {
+extension Request where T == TokenOld {
     
-    /// Initializes a new Token Request with the given information
+    /// Initializes a new TokenOld Request with the given information
     public init(
         name: String,
         pan: PAN,
@@ -267,7 +267,7 @@ extension Request where T == Token {
         ))
     }
 
-    /// Initializes a new Token Request with the given information
+    /// Initializes a new TokenOld Request with the given information
     public init(
         name: String,
         number: String,

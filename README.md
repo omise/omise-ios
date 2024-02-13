@@ -80,10 +80,10 @@ servers. To collect a card payment from a
 customer, merchants will need to first *tokenize* the card data using the
 Opn Payments API and then use the generated token in place of the card
 data. You can tokenize card data by creating and initializing
-a `Request<Token>` as follows:
+a `Request<TokenOld>` as follows:
 
 ```swift
-let tokenParameters = Token.CreateParameter(
+let tokenParameters = TokenOld.CreateParameter(
     name: "JOHN DOE",
     number: "4242424242424242",
     expirationMonth: 11,
@@ -91,7 +91,7 @@ let tokenParameters = Token.CreateParameter(
     securityCode: "123"
 )
 
-let request = Request<Token>(parameter: tokenParameters)
+let request = Request<TokenOld>(parameter: tokenParameters)
 ```
 
 #### Creating a payment source
@@ -142,10 +142,10 @@ client.send(request) { [weak self] (result) in
 A simple completion handler for a token looks as follows.
 
 ``` swift
-func completionHandler(tokenResult: Result<Token, Error>) -> Void {
+func completionHandler(tokenResult: Result<TokenOld, Error>) -> Void {
     switch tokenResult {
     case .success(let value):
-        // do something with Token id
+        // do something with TokenOld id
         print(value.id)
     case .failure(let error):
         print(error)
@@ -184,14 +184,14 @@ class ViewController: UIViewController {
 }
 ```
 
-Then implement the delegate to receive the `Token` object after user has entered the card data:
+Then implement the delegate to receive the `TokenOld` object after user has entered the card data:
 
 ```swift
 extension ViewController: CreditCardFormViewControllerDelegate {
-  func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
+  func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: TokenOld) {
     dismissCreditCardForm()
 
-    // Sends `Token` to your server to create a charge, or a customer object.
+    // Sends `TokenOld` to your server to create a charge, or a customer object.
   }
 
   func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error) {
@@ -281,7 +281,7 @@ extension ProductDetailViewController: PaymentCreatorControllerDelegate {
   func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didCreatePayment payment: Payment) {
     dismissForm()
 
-    // Sends selected `Token` or `SourceOLD` to your server to create a charge, or a customer object.
+    // Sends selected `TokenOld` or `SourceOLD` to your server to create a charge, or a customer object.
   }
 
   func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didFailWithError error: Error) {

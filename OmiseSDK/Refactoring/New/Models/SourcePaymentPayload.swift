@@ -1,17 +1,15 @@
 import Foundation
 
-// TODO: Add Unit Tests for SourcePayment
-// TODO: Add comments to SourcePayment's properties
-
-/// Information to create payment Source
+/// Information to create payment source
 /// Sources are methods for accepting payments through non-credit-card channels
-public struct SourcePayment: Encodable {
+public struct SourcePaymentPayload: Encodable {
     /// Source amount in smallest unit of source currency
     let amount: Int64
     /// Currency for source as three-letter ISO 4217 code
     let currency: String
+    /// The payment details of this source describes how the payment is processed
     let details: Source.Payload
-
+    /// Current SDK platform type
     let platform = "IOS"
 
     init(amount: Int64, currency: String, details: Source.Payload) {
@@ -26,6 +24,7 @@ public struct SourcePayment: Encodable {
         case platform = "platform_type"
     }
 
+    /// Encode information to create payment source to JSON string
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(platform, forKey: .platform)
@@ -34,3 +33,4 @@ public struct SourcePayment: Encodable {
         try details.encode(to: encoder)
     }
 }
+

@@ -8,7 +8,7 @@ class CapabilityTests: XCTestCase {
 
         do {
             let jsonData = try XCTestCase.fixturesData(forFilename: "capability")
-            let capability = try decoder.decode(CapabilityNew.self, from: jsonData)
+            let capability = try decoder.decode(Capability.self, from: jsonData)
             print(capability)
             XCTAssertTrue(true)
         } catch {

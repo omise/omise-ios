@@ -6,8 +6,8 @@ private let timeout: TimeInterval = 15.0
 
 class ClientTestCase: XCTestCase {
 
-    static let requestTokenGenerator: OmiseUnitTestKit.TestCaseValueGenerator.GeneratorFunction<Request<Token>> = { gen in
-        Request(parameter: Token.CreateParameter(
+    static let requestTokenGenerator: OmiseUnitTestKit.TestCaseValueGenerator.GeneratorFunction<Request<TokenOld>> = { gen in
+        Request(parameter: TokenOld.CreateParameter(
             name: "JOHN DOE",
             number: "4242424242424242",
             expirationMonth: 11,
@@ -46,7 +46,7 @@ class ClientTestCase: XCTestCase {
         XCTAssertEqual(tokenRequest.parameter.expirationMonth, task.request.parameter.expirationMonth)
         XCTAssertEqual(tokenRequest.parameter.expirationYear, task.request.parameter.expirationYear)
 
-        XCTAssertEqual(Token.postURL, task.dataTask.currentRequest?.url)
+        XCTAssertEqual(TokenOld.postURL, task.dataTask.currentRequest?.url)
         XCTAssertEqual("POST", task.dataTask.currentRequest?.httpMethod)
         
         waitForExpectations(timeout: timeout, handler: nil)
@@ -66,7 +66,7 @@ class ClientTestCase: XCTestCase {
         XCTAssertEqual(tokenRequest.parameter.expirationMonth, task.request.parameter.expirationMonth)
         XCTAssertEqual(tokenRequest.parameter.expirationYear, task.request.parameter.expirationYear)
         
-        XCTAssertEqual(Token.postURL, task.dataTask.currentRequest?.url)
+        XCTAssertEqual(TokenOld.postURL, task.dataTask.currentRequest?.url)
         XCTAssertEqual("POST", task.dataTask.currentRequest?.httpMethod)
         
         waitForExpectations(timeout: timeout, handler: nil)
@@ -123,11 +123,11 @@ class ClientTestCase: XCTestCase {
 extension ClientTestCase {
 
     // MARK: Request factory methods
-    static func makeValidTokenRequest() -> Request<Token> {
+    static func makeValidTokenRequest() -> Request<TokenOld> {
         // swiftlint:disable:next force_unwrapping
         TestCaseValueGenerator.validCases(self.requestTokenGenerator).first!
     }
-    static func makeInvalidTokenRequest() -> Request<Token> {
+    static func makeInvalidTokenRequest() -> Request<TokenOld> {
         // swiftlint:disable:next force_unwrapping
         TestCaseValueGenerator.invalidCases(self.requestTokenGenerator).first!
     }

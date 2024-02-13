@@ -3,11 +3,11 @@ import XCTest
 
 class CapabilityOperationFixtureTests: XCTestCase {
 
-    func validateCapabilitySupportsCurrency(_ capability: Capability, sourceType: SourceTypeValue, currencies: Set<Currency>) {
+    func validateCapabilitySupportsCurrency(_ capability: CapabilityOld, sourceType: SourceTypeValue, currencies: Set<Currency>) {
         if let backend = capability[sourceType] {
             XCTAssertEqual(backend.supportedCurrencies, currencies)
         } else {
-            XCTFail("Capability doesn't have the \(sourceType) backend")
+            XCTFail("CapabilityOld doesn't have the \(sourceType) backend")
         }
     }
 
@@ -16,7 +16,7 @@ class CapabilityOperationFixtureTests: XCTestCase {
 
         do {
             let capabilityData = try XCTestCase.fixturesData(forFilename: "capability")
-            let capability = try decoder.decode(Capability.self, from: capabilityData)
+            let capability = try decoder.decode(CapabilityOld.self, from: capabilityData)
 
             XCTAssertEqual(capability.supportedBackends.count, 33)
 
@@ -24,7 +24,7 @@ class CapabilityOperationFixtureTests: XCTestCase {
                 XCTAssertEqual(creditCardBackend.payment, .card([]))
                 XCTAssertEqual(creditCardBackend.supportedCurrencies, [.thb, .jpy, .usd, .eur, .gbp, .sgd, .aud, .chf, .cny, .dkk, .hkd])
             } else {
-                XCTFail("Capability doesn't have the Credit Card backend")
+                XCTFail("CapabilityOld doesn't have the Credit Card backend")
             }
 
             if let bayInstallmentBackend = capability[SourceTypeValue.installmentBAY] {
@@ -34,15 +34,15 @@ class CapabilityOperationFixtureTests: XCTestCase {
                 )
                 XCTAssertEqual(bayInstallmentBackend.supportedCurrencies, [.thb])
             } else {
-                XCTFail("Capability doesn't have the BAY Installment backend")
+                XCTFail("CapabilityOld doesn't have the BAY Installment backend")
             }
 
             if let fpxBackend = capability[SourceTypeValue.fpx] {
                 XCTAssertEqual(fpxBackend.banks, [
-                    Capability.Backend.Bank(name: "UOB", code: "uob", isActive: true)
+                    CapabilityOld.Backend.Bank(name: "UOB", code: "uob", isActive: true)
                 ])
             } else {
-               XCTFail("Capability doesn't have the FPX backend")
+               XCTFail("CapabilityOld doesn't have the FPX backend")
             }
 
             if let mobileBankingKBankBackend = capability[SourceTypeValue.mobileBankingKBank] {
@@ -50,7 +50,7 @@ class CapabilityOperationFixtureTests: XCTestCase {
                     mobileBankingKBankBackend.payment, .mobileBanking(.kbank))
                 XCTAssertEqual(mobileBankingKBankBackend.supportedCurrencies, [.thb])
             } else {
-                XCTFail("Capability doesn't have the Mobile Banking KBank backend")
+                XCTFail("CapabilityOld doesn't have the Mobile Banking KBank backend")
             }
 
             validateCapabilitySupportsCurrency(capability, sourceType: .trueMoney, currencies: [.thb])
@@ -67,13 +67,13 @@ class CapabilityOperationFixtureTests: XCTestCase {
     func testEncodeCapabilityRetrieve() throws {
         let decoder = ClientOld.makeJSONDecoder(for: Request<SourceOLD>?.none)
         let capabilityData = try XCTestCase.fixturesData(forFilename: "capability")
-        let capability = try decoder.decode(Capability.self, from: capabilityData)
+        let capability = try decoder.decode(CapabilityOld.self, from: capabilityData)
 
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         let encodedData = try encoder.encode(capability)
 
-        let decodedCapability = try decoder.decode(Capability.self, from: encodedData)
+        let decodedCapability = try decoder.decode(CapabilityOld.self, from: encodedData)
         XCTAssertEqual(capability.supportedBackends.count, decodedCapability.supportedBackends.count)
 
         XCTAssertEqual(capability.creditCardBackend?.payment, decodedCapability.creditCardBackend?.payment)

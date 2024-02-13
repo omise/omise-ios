@@ -1,6 +1,6 @@
 import Foundation
 
-extension CapabilityNew {
+extension Capability {
     // TODO: Add Unit Tests to PaymentMethod
     // TODO: Add comments to PaymentMethod's properties
     public struct PaymentMethod: Codable {

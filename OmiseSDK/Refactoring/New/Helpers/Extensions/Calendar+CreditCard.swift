@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Calendar {
+extension Calendar {
     /// Calendar used in the Credit Card information which is Gregorian Calendar
     static let creditCardInformationCalendar = Calendar(identifier: .gregorian)
     /// Range contains the valid range of the expiration month value

@@ -226,7 +226,7 @@ extension PaymentChooserOption {
 class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>,
                                     PaymentSourceChooser,
                                     PaymentChooserUI {
-    var capability: Capability?
+    var capability: CapabilityOld?
     var flowSession: PaymentCreatorFlowSession?
     var duitNowOBWBanks: [PaymentInformation.DuitNowOBW.Bank] = PaymentInformation.DuitNowOBW.Bank.allCases
 
@@ -494,7 +494,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     }
 
     // swiftlint:disable:next function_body_length
-    func applyPaymentMethods(from capability: Capability) {
+    func applyPaymentMethods(from capability: CapabilityOld) {
         self.capability = capability
         showsCreditCardPayment = capability.creditCardBackend != nil
 
@@ -554,7 +554,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             case .shopeePay:
                 // using ShopeePay Jump app as first priority ShopeePay source
                 let isShopeePayJumpAppExist = capability.supportedBackends.contains(
-                  where: { $0.payment == Capability.Backend.Payment.shopeePayJumpApp }
+                  where: { $0.payment == CapabilityOld.Backend.Payment.shopeePayJumpApp }
                 )
                 if !isShopeePayJumpAppExist {
                   return SourceTypeValue.shopeePay
