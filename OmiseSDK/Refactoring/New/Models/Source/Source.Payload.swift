@@ -23,12 +23,8 @@ extension Source {
         case fpx(_ payload: FPX)
         /// Installment Payments
         case installment(_ payload: Installment)
-        /// Thai Internet Banking
-        case internetBanking(_ payload: InternetBanking)
-        /// Mobile Banking
-        case mobileBanking(_ payload: MobileBanking)
         /// TrueMoney Wallet
-        case trueMoney(_ payload: TrueMoney)
+        case trueMoneyWallet(_ payload: TrueMoneyWallet)
         /// Payment menthods without additional payment parameters
         case other(_ sourceType: SourceType)
 
@@ -47,11 +43,7 @@ extension Source {
                 try payload.encode(to: encoder)
             case .installment(let payload):
                 try payload.encode(to: encoder)
-            case .internetBanking(let payload):
-                try payload.encode(to: encoder)
-            case .mobileBanking(let payload):
-                try payload.encode(to: encoder)
-            case .trueMoney(let payload):
+            case .trueMoneyWallet(let payload):
                 try payload.encode(to: encoder)
             case .other(let sourceType):
                 var container = encoder.container(keyedBy: CodingKeys.self)
@@ -73,12 +65,8 @@ extension Source {
                 return .fpx
             case .installment(let value):
                 return value.sourceType
-            case .internetBanking(let value):
-                return value.sourceType
-            case .mobileBanking(let value):
-                return value.sourceType
-            case .trueMoney:
-                return .trueMoney
+            case .trueMoneyWallet:
+                return .trueMoneyWallet
             case .other(let value):
                 return value
             }
@@ -99,20 +87,13 @@ extension Source {
                 self = try .barcodeAlipay(BarcodeAlipay(from: decoder))
             case .duitNowOBW:
                 self = try .duitNowOBW(DuitNowOBW(from: decoder))
+            case _ where Installment.sourceTypes.contains(sourceType):
+                self = try .installment(Installment(from: decoder))
+            case .trueMoneyWallet:
+                self = try .trueMoneyWallet(TrueMoneyWallet(from: decoder))
             default:
                 self = .other(sourceType)
             }
-        }
-    }
-}
-
-
-extension Source.Payload {
-    public struct SourceTypePayload: Codable, Equatable {
-        let sourceType: SourceType
-
-        private enum CodingKeys: String, CodingKey {
-            case sourceType = "type"
         }
     }
 }

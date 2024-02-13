@@ -2,6 +2,7 @@ import Foundation
 import XCTest
 @testable import OmiseSDK
 
+// swiftlint:disable:next type_body_length
 class SourceTests: XCTestCase {
 
     let sampleData = SampleData()
@@ -262,36 +263,221 @@ class SourceTests: XCTestCase {
         XCTAssertEqual(source.currency, "MYR")
     }
 
-    //    func testDecode<#Type#>() throws {
-    //        let source = try source(type: .<#type#>)
-    //        XCTAssertEqual(source.id, "<#id#>")
-    //        XCTAssert<#Bool#>(source.isLiveMode)
-    //        XCTAssertEqual(source.paymentInformation, .other(.<#type#>))
-    //        XCTAssertEqual(source.flow, .<#flow#>)
-    //        XCTAssertEqual(source.amount, <#amount#>)
-    //        XCTAssertEqual(source.currency, "<#currency#>")
-    //    }
+    func testDecodeInstallmentBay() throws {
+        let sourceType: SourceType = .installmentBAY
+        let source = try source(type: sourceType)
+        let payload = Source.Payload.Installment(
+            installmentTerm: 6,
+            zeroInterestInstallments: false,
+            sourceType: sourceType
+        )
+        XCTAssertEqual(source.id, "src_test_5cs0t6x8n0z8rcfrsfi")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .installment(payload))
+        XCTAssertEqual(source.flow, .redirect)
+        XCTAssertEqual(source.amount, 500000)
+        XCTAssertEqual(source.currency, "THB")
+    }
 
-    //    func testDecode<#Type#>() throws {
-    //        let source = try source(type: .<#type#>)
-    //        XCTAssertEqual(source.id, "<#id#>")
-    //        XCTAssert<#Bool#>(source.isLiveMode)
-    //        XCTAssertEqual(source.paymentInformation, .other(.<#type#>))
-    //        XCTAssertEqual(source.flow, .<#flow#>)
-    //        XCTAssertEqual(source.amount, <#amount#>)
-    //        XCTAssertEqual(source.currency, "<#currency#>")
-    //    }
+    func testDecodeInstallmentBBL() throws {
+        let sourceType: SourceType = .installmentBBL
+        let source = try source(type: sourceType)
+        let payload = Source.Payload.Installment(
+            installmentTerm: 6,
+            zeroInterestInstallments: false,
+            sourceType: sourceType
+        )
+        XCTAssertEqual(source.id, "src_test_5cs0tdinbyypg6kn1fa")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .installment(payload))
+        XCTAssertEqual(source.flow, .redirect)
+        XCTAssertEqual(source.amount, 500000)
+        XCTAssertEqual(source.currency, "THB")
+    }
 
-    //    func testDecodeTruemoney() throws {
-    //        let source = try source(type: .trueMoney)
-    //        XCTAssertEqual(source.id, "src_test_5jhmesi7s4at1qctloy")
-    //        XCTAssert<#Bool#>(source.isLiveMode)
-    //        XCTAssertEqual(source.paymentInformation, .other(.trueMoney))
-    //        XCTAssertEqual(source.flow, .<#flow#>)
-    //        XCTAssertEqual(source.amount, <#amount#>)
-    //        XCTAssertEqual(source.currency, "<#currency#>")
-    //    }
+    func testDecodeInstallmentFirstChoice() throws {
+        let sourceType: SourceType = .installmentFirstChoice
+        let source = try source(type: sourceType)
+        let payload = Source.Payload.Installment(
+            installmentTerm: 6,
+            zeroInterestInstallments: false,
+            sourceType: sourceType
+        )
 
+        XCTAssertEqual(source.id, "src_test_5cq1ugk8m0un1yefb2u")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .installment(payload))
+        XCTAssertEqual(source.flow, .redirect)
+        XCTAssertEqual(source.amount, 500000)
+        XCTAssertEqual(source.currency, "THB")
+    }
+
+    func testDecodeInstallmentKBank() throws {
+        let sourceType: SourceType = .installmentKBank
+        let source = try source(type: sourceType)
+        let payload = Source.Payload.Installment(
+            installmentTerm: 6,
+            zeroInterestInstallments: false,
+            sourceType: sourceType
+        )
+        XCTAssertEqual(source.id, "src_test_5cs0totfv87k1i6y45l")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .installment(payload))
+        XCTAssertEqual(source.flow, .redirect)
+        XCTAssertEqual(source.amount, 500000)
+        XCTAssertEqual(source.currency, "THB")
+    }
+
+    func testDecodeInstallmentKTC() throws {
+        let sourceType: SourceType = .installmentKTC
+        let source = try source(type: sourceType)
+        let payload = Source.Payload.Installment(
+            installmentTerm: 6,
+            zeroInterestInstallments: false,
+            sourceType: sourceType
+        )
+        XCTAssertEqual(source.id, "src_test_5cs0tk7m2e5ivctrq30")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .installment(payload))
+        XCTAssertEqual(source.flow, .redirect)
+        XCTAssertEqual(source.amount, 500000)
+        XCTAssertEqual(source.currency, "THB")
+    }
+
+    func testDecodeInstallmentMBB() throws {
+        let sourceType: SourceType = .installmentMBB
+        let source = try source(type: sourceType)
+        let payload = Source.Payload.Installment(
+            installmentTerm: 6,
+            zeroInterestInstallments: false,
+            sourceType: sourceType
+        )
+        XCTAssertEqual(source.id, "src_test_5obr9opqz5huc6tefw8")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .installment(payload))
+        XCTAssertEqual(source.flow, .redirect)
+        XCTAssertEqual(source.amount, 500000)
+        XCTAssertEqual(source.currency, "MYR")
+    }
+
+    func testDecodeInstallmentTTB() throws {
+        let sourceType: SourceType = .installmentTTB
+        let source = try source(type: sourceType)
+        let payload = Source.Payload.Installment(
+            installmentTerm: 6,
+            zeroInterestInstallments: false,
+            sourceType: sourceType
+        )
+        XCTAssertEqual(source.id, "src_test_5obr9opd7ej5c6tefw8")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .installment(payload))
+        XCTAssertEqual(source.flow, .redirect)
+        XCTAssertEqual(source.amount, 500000)
+        XCTAssertEqual(source.currency, "THB")
+    }
+
+    func testDecodeInstallmentUOB() throws {
+        let sourceType: SourceType = .installmentUOB
+        let source = try source(type: sourceType)
+        let payload = Source.Payload.Installment(
+            installmentTerm: 6,
+            zeroInterestInstallments: false,
+            sourceType: sourceType
+        )
+        XCTAssertEqual(source.id, "src_test_5oe7fj1qz5huc6tefw8")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .installment(payload))
+        XCTAssertEqual(source.flow, .redirect)
+        XCTAssertEqual(source.amount, 500000)
+        XCTAssertEqual(source.currency, "THB")
+    }
+
+    func testDecodeTrueMoneyWallet() throws {
+        let source = try source(type: .trueMoneyWallet)
+        let payload = Source.Payload.TrueMoneyWallet(phoneNumber: "0123456789")
+        XCTAssertEqual(source.id, "src_test_5jhmesi7s4at1qctloy")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .trueMoneyWallet(payload))
+        XCTAssertEqual(source.flow, .redirect)
+        XCTAssertEqual(source.amount, 100000)
+        XCTAssertEqual(source.currency, "THB")
+    }
+
+    func testDecodeInternetBankingBay() throws {
+        let sourceType: SourceType = .internetBankingBAY
+        let source = try source(type: sourceType)
+        XCTAssertEqual(source.id, "src_test_5cs0sm8u8h8nqo5hwcs")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .other(sourceType))
+        XCTAssertEqual(source.flow, .redirect)
+        XCTAssertEqual(source.amount, 100000)
+        XCTAssertEqual(source.currency, "THB")
+    }
+
+    func testDecodeInternetBankingBBL() throws {
+        let sourceType: SourceType = .internetBankingBBL
+        let source = try source(type: sourceType)
+        XCTAssertEqual(source.id, "src_test_5cs0sfy7phu06yhyz5c")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .other(sourceType))
+        XCTAssertEqual(source.flow, .redirect)
+        XCTAssertEqual(source.amount, 100000)
+        XCTAssertEqual(source.currency, "THB")
+    }
+
+    func testDecodeMobileBankingBAY() throws {
+        let sourceType: SourceType = .mobileBankingBAY
+        let source = try source(type: sourceType)
+        XCTAssertEqual(source.id, "src_test_5cs0sm8u8h8nqo5zasd")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .other(sourceType))
+        XCTAssertEqual(source.flow, .appRedirect)
+        XCTAssertEqual(source.amount, 1000000)
+        XCTAssertEqual(source.currency, "THB")
+    }
+
+    func testDecodeMobileBankingBBL() throws {
+        let sourceType: SourceType = .mobileBankingBBL
+        let source = try source(type: sourceType)
+        XCTAssertEqual(source.id, "src_test_5cs0sm8u8h8nqo5zasd")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .other(sourceType))
+        XCTAssertEqual(source.flow, .appRedirect)
+        XCTAssertEqual(source.amount, 1000000)
+        XCTAssertEqual(source.currency, "THB")
+    }
+
+    func testDecodeMobileBankingKBank() throws {
+        let sourceType: SourceType = .mobileBankingKBank
+        let source = try source(type: sourceType)
+        XCTAssertEqual(source.id, "src_test_5cs0sm8u8h8nqo5zasd")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .other(sourceType))
+        XCTAssertEqual(source.flow, .appRedirect)
+        XCTAssertEqual(source.amount, 1000000)
+        XCTAssertEqual(source.currency, "THB")
+    }
+    func testDecodeMobileBankingTKB() throws {
+        let sourceType: SourceType = .mobileBankingKTB
+        let source = try source(type: sourceType)
+        XCTAssertEqual(source.id, "src_test_5cs0sm8u8h8nqo5zasd")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .other(sourceType))
+        XCTAssertEqual(source.flow, .appRedirect)
+        XCTAssertEqual(source.amount, 1000000)
+        XCTAssertEqual(source.currency, "THB")
+    }
+
+    func testDecodeMobileBankingSCB() throws {
+        let sourceType: SourceType = .mobileBankingSCB
+        let source = try source(type: sourceType)
+        XCTAssertEqual(source.id, "src_test_5cs0sm8u8h8nqo5zasd")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .other(sourceType))
+        XCTAssertEqual(source.flow, .appRedirect)
+        XCTAssertEqual(source.amount, 1000000)
+        XCTAssertEqual(source.currency, "THB")
+    }
 }
 
 private extension SourceTests {

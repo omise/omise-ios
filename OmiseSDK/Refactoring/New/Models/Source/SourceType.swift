@@ -89,7 +89,7 @@ public enum SourceType: String, Codable, CaseIterable {
     /// - warning   Information not found
     case touchNGoAlipayPlus = "touch_n_go_alipay_plus"
     /// TrueMoney Wallet    https://docs.opn.ooo/truemoney-wallet
-    case trueMoney = "truemoney"
+    case trueMoneyWallet = "truemoney"
     /// TrueMoney App Redirection   https://docs.opn.ooo/truemoney-jumpapp
     case trueMoneyJumpApp = "truemoney_jumpapp"
     /// WeChat Pay App Redirection  https://docs.opn.ooo/wechat-pay-online
