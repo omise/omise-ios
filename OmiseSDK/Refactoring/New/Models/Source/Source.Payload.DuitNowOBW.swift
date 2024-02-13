@@ -55,7 +55,7 @@ extension Source.Payload.DuitNowOBW {
         /// OCBC Bank
         case ocbc
         /// Public Bank
-        case publicBank
+        case publicBank = "public"
         /// RHB Bank
         case rhb
         /// Standard Chartered

@@ -478,6 +478,22 @@ class SourceTests: XCTestCase {
         XCTAssertEqual(source.amount, 1000000)
         XCTAssertEqual(source.currency, "THB")
     }
+
+    func testDecodeEContext() throws {
+        let sourceType: SourceType = .eContext
+        let source = try source(type: sourceType)
+        let payload = Source.Payload.EContext(
+            name: "ヤマダタロウ",
+            email: "taro.yamada@example.com",
+            phoneNumber: "01234567891"
+        )
+        XCTAssertEqual(source.id, "src_test_5xsjw8qafayihquj3k9")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .eContext(payload))
+        XCTAssertEqual(source.flow, .offline)
+        XCTAssertEqual(source.amount, 300)
+        XCTAssertEqual(source.currency, "JPY")
+    }
 }
 
 private extension SourceTests {

@@ -87,6 +87,8 @@ extension Source {
                 self = try .barcodeAlipay(BarcodeAlipay(from: decoder))
             case .duitNowOBW:
                 self = try .duitNowOBW(DuitNowOBW(from: decoder))
+            case .eContext:
+                self = try .eContext(EContext(from: decoder))
             case _ where Installment.sourceTypes.contains(sourceType):
                 self = try .installment(Installment(from: decoder))
             case .trueMoneyWallet:
