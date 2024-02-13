@@ -101,7 +101,7 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
             )
         ]
 
-        let atomeData = Source.Payment.atome(
+        let atomePayment = Source.Payment.atome(
             .init(
                 phoneNumber: viewContext[.phoneNumber],
                 shipping: shippingAddress,
@@ -110,13 +110,8 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
             )
         )
 
-        flowSession.requestCreateSource(.atome(atomeData)) { _ in
-
-        } completionHandler: <#T##((Result<Source, Error>) -> Void)?##((Result<Source, Error>) -> Void)?##(Result<Source, Error>) -> Void#>)
-//        SourcePaymentPayload(amount: <#T##Int64#>, currency: <#T##String#>, details: <#T##Source.Payment#>)
-//        flowSession.requestCreateSource(.atome(atomeData)) { _ in
-//            onComplete()
-//        }
-
+        flowSession.requestCreateSource(atomePayment) { _ in
+            onComplete()
+        }
     }
 }

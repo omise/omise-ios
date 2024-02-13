@@ -1,7 +1,6 @@
 import Foundation
 
 extension Token {
-    // TODO: Add Unit Tests to Card
     public struct Card: Decodable {
         /// Card's ID.
         public let id: String

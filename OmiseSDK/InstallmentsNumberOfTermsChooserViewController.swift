@@ -1,6 +1,7 @@
 import UIKit
 import os
 
+// swiftlint:disable:next type_name
 class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentSourceChooser, PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
 

@@ -1,6 +1,5 @@
 import Foundation
 
-// TODO: Add comments to CapabilityNew's properties
 public struct Capability: Codable {
     public let countryCode: String
     public let paymentMethods: [Capability.PaymentMethod]

@@ -1,8 +1,6 @@
 import Foundation
 
 extension Token {
-    // TODO: Add Unit Tests to ChargeStatus
-    // TODO: Add comments to ChargeStatus's properties
     public enum ChargeStatus: String, Decodable {
         case failed
         case expired

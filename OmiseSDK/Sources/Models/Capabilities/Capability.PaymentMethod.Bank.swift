@@ -1,8 +1,6 @@
 import Foundation
 
 extension Capability.PaymentMethod {
-    // TODO: Add Unit Tests to Bank
-    // TODO: Add comments to Bank's properties
     public struct Bank: Codable, Hashable {
         public let name: String
         public let code: String

@@ -1,6 +1,7 @@
 import UIKit
 import os
 
+// swiftlint:disable:next line_length
 class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capability.PaymentMethod.Bank>, PaymentSourceChooser, PaymentChooserUI {
     var email: String?
     var flowSession: PaymentCreatorFlowSession?

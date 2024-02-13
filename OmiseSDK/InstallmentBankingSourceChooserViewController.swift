@@ -77,7 +77,7 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
             return
         }
         
-        let selectedBrand = element(forUIIndexPath: indexPath)
+//        let selectedBrand = element(forUIIndexPath: indexPath)
 //        os_log("Installment Brand Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedBrand.description)
 
         performSegue(withIdentifier: "GoToInstallmentTermsChooserSegue", sender: cell)

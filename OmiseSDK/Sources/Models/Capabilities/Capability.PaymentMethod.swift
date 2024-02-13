@@ -1,8 +1,6 @@
 import Foundation
 
 extension Capability {
-    // TODO: Add Unit Tests to PaymentMethod
-    // TODO: Add comments to PaymentMethod's properties
     public struct PaymentMethod: Codable, Equatable {
         public let name: String
         public let currencies: Set<String>

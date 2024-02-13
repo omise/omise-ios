@@ -1,7 +1,5 @@
 import Foundation
 
-// TODO: Rename to Token
-// TODO: Add Unit Tests to Token
 public struct Token: Decodable {
     /// Omise ID of the token
     public let id: String
