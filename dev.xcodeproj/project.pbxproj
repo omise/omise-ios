@@ -121,6 +121,7 @@
 		75DAD8902A0BB8D80098AF96 /* LocalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */; };
 		75E0EB712B7A904100E3198A /* SourceFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E0EB702B7A904100E3198A /* SourceFlowTests.swift */; };
 		75E0EB722B7A962600E3198A /* SourcePaymentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4208D2B78C2120036134D /* SourcePaymentTests.swift */; };
+		75E0EB752B7B280300E3198A /* SourceTests+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E0EB742B7B280300E3198A /* SourceTests+Helpers.swift */; };
 		75F2A0182A0BD0D40038FA54 /* Config.local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75DAD8922A0BC9540098AF96 /* Config.local.plist */; };
 		75F2A09A2A13B0B10038FA54 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75F2A0992A13B0B10038FA54 /* Preview Assets.xcassets */; };
 		75F2A0A62A13B70F0038FA54 /* OmiseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062F1CFEA7E4004BCF51 /* OmiseTextField.swift */; };
@@ -335,6 +336,7 @@
 		75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalConfig.swift; sourceTree = "<group>"; };
 		75DAD8922A0BC9540098AF96 /* Config.local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.local.plist; sourceTree = "<group>"; };
 		75E0EB702B7A904100E3198A /* SourceFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceFlowTests.swift; sourceTree = "<group>"; };
+		75E0EB742B7B280300E3198A /* SourceTests+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SourceTests+Helpers.swift"; sourceTree = "<group>"; };
 		75F2A0902A13B0B00038FA54 /* OmiseSDKUITests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmiseSDKUITests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F2A0992A13B0B10038FA54 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		75F2A0A42A13B1470038FA54 /* AtomeFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewController.swift; sourceTree = "<group>"; };
@@ -814,6 +816,15 @@
 			path = Payments;
 			sourceTree = "<group>";
 		};
+		75E0EB762B7B290400E3198A /* SourceTests */ = {
+			isa = PBXGroup;
+			children = (
+				750708DF2B7909BB00A48DD0 /* SourceTests.swift */,
+				75E0EB742B7B280300E3198A /* SourceTests+Helpers.swift */,
+			);
+			path = SourceTests;
+			sourceTree = "<group>";
+		};
 		75F2A01A2A0BD1CD0038FA54 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -959,7 +970,7 @@
 				750708E82B79125200A48DD0 /* Old tests */,
 				75B4208F2B78C22A0036134D /* New Tests */,
 				750708E12B790B2400A48DD0 /* Helpers */,
-				750708DF2B7909BB00A48DD0 /* SourceTests.swift */,
+				75E0EB762B7B290400E3198A /* SourceTests */,
 				75E0EB702B7A904100E3198A /* SourceFlowTests.swift */,
 				750708F32B7A765500A48DD0 /* OmiseSDKTests.swift */,
 			);
@@ -1360,6 +1371,7 @@
 				8A43454720DBAE76005C5C94 /* PANModelTestCase.swift in Sources */,
 				750708F42B7A765500A48DD0 /* OmiseSDKTests.swift in Sources */,
 				224460041CF43A1200801D0F /* SDKTestCase.swift in Sources */,
+				75E0EB752B7B280300E3198A /* SourceTests+Helpers.swift in Sources */,
 				8A3C10582159FCE900BEFD8A /* BadRequestAPIErrorParsingTestCase.swift in Sources */,
 				75E0EB712B7A904100E3198A /* SourceFlowTests.swift in Sources */,
 				75CFC4F72B753D6300422A8F /* CapabilityTests.swift in Sources */,

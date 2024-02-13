@@ -32,7 +32,6 @@ public class ClientNew {
         self.network = network
     }
 
-    // TODO: Add unit tests
     public func capability(_ completion: @escaping RequestResultClosure<CapabilityNew, Error>) {
         apiRequest(api: OmiseAPI.capability) { (result: Result<CapabilityNew, Error>) in
             if let capability = try? result.get() {
@@ -42,7 +41,6 @@ public class ClientNew {
         }
     }
 
-    // TODO: Add unit tests
     public func observeChargeStatusUntilChange(tokenID: String, _ completion: @escaping RequestResultClosure<TokenNew.ChargeStatus, Error>) {
         observeChargeStatusUntilChange(
             tokenID: tokenID,
@@ -53,20 +51,15 @@ public class ClientNew {
         )
     }
 
-    // TODO: Add unit tests
     public func createToken(cardPayment: CardPayment, _ completion: @escaping RequestResultClosure<TokenNew, Error>) {
         apiRequest(api: OmiseAPI.createToken(cardPayment: cardPayment), completion: completion)
     }
 }
 
 extension ClientNew {
-    // TODO: Add unit tests
-    // TODO: Validate that marchant can't call this directly on Android
     func createSource(sourcePayment: SourcePayment, _ completion: @escaping RequestResultClosure<TokenNew, Error>
     ) {
         apiRequest(api: OmiseAPI.createSource(sourcePayment: sourcePayment), completion: completion)
-
-        // TODO: Add Implementation after PaymentInformation refactoring
     }
 }
 
@@ -80,7 +73,6 @@ private extension ClientNew {
         )
     }
 
-    // TODO: Add unit tests
     func observeChargeStatusUntilChange(
         tokenID: String,
         timeInterval: Int,
@@ -118,7 +110,6 @@ private extension ClientNew {
         }
     }
 
-    // TODO: Add unit tests
     func token(tokenID: String, _ completion: @escaping RequestResultClosure<TokenNew, Error>) {
         apiRequest(api: OmiseAPI.token(tokenID: tokenID), completion: completion)
     }

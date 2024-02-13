@@ -2,178 +2,210 @@ import Foundation
 import XCTest
 @testable import OmiseSDK
 
+// swiftlint:disable file_length
 // swiftlint:disable:next type_body_length
 class SourceTests: XCTestCase {
 
     let sampleData = SampleData()
-    let decoder = JSONDecoder()
+    var jsonDecoder = JSONDecoder()
 
-    func testDecodeAlipayCN() throws {
-        let source = try source(type: .alipayCN)
+    /// Test Source.Payload's Codable protocol
+    func validatePayloadCodable(_ payload: Source.Payload) throws {
+        let encodedPayload = try JSONEncoder().encode(payload)
+        let encodedPayloadJson = String(data: encodedPayload, encoding: .utf8) ?? ""
+        if payload.sourceType == .duitNowOBW {
+            print(encodedPayloadJson)
+            print("")
+        }
+
+        let decodedPayload = try parsePayload(jsonString: encodedPayloadJson)
+        XCTAssertEqual(payload, decodedPayload)
+    }
+
+    func testAlipayCN() throws {
+        let source = try sourceFromSampleJSONFileBy(type: .alipayCN)
         XCTAssertEqual(source.id, "src_test_5owftw9kjhjisssm0n2")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.alipayCN))
         XCTAssertEqual(source.flow, .appRedirect)
         XCTAssertEqual(source.currency, "THB")
         XCTAssertEqual(source.amount, 500000)
+        try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeAlipayHK() throws {
-        let source = try source(type: .alipayHK)
+        let source = try sourceFromSampleJSONFileBy(type: .alipayHK)
         XCTAssertEqual(source.id, "src_test_5oxesy9ovpgawobhf6n")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.alipayHK))
         XCTAssertEqual(source.flow, .appRedirect)
         XCTAssertEqual(source.currency, "HKD")
         XCTAssertEqual(source.amount, 500000)
+        try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeAlipay() throws {
-        let source = try source(type: .alipay)
+        let source = try sourceFromSampleJSONFileBy(type: .alipay)
         XCTAssertEqual(source.id, "src_test_5avnfnqxzzj2yu7a34e")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.alipay))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.currency, "THB")
         XCTAssertEqual(source.amount, 1000000)
+        try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeBoost() throws {
-        let source = try source(type: .boost)
+        let source = try sourceFromSampleJSONFileBy(type: .boost)
         XCTAssertEqual(source.id, "src_5pqcjr6tu4xvqut5nh5")
         XCTAssertTrue(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.boost))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.currency, "MYR")
         XCTAssertEqual(source.amount, 100000)
+        try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeDana() throws {
-        let source = try source(type: .dana)
+        let source = try sourceFromSampleJSONFileBy(type: .dana)
         XCTAssertEqual(source.id, "src_test_5oxew5l8jxhss03ybfb")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.dana))
         XCTAssertEqual(source.flow, .appRedirect)
         XCTAssertEqual(source.currency, "JPY")
         XCTAssertEqual(source.amount, 500000)
+        try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeDuitNowQR() throws {
-        let source = try source(type: .duitNowQR)
+        let source = try sourceFromSampleJSONFileBy(type: .duitNowQR)
         XCTAssertEqual(source.id, "src_5pqcjr6tu4xvqut5nh5")
         XCTAssertTrue(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.duitNowQR))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.currency, "MYR")
         XCTAssertEqual(source.amount, 100000)
+        try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeGcash() throws {
-        let source = try source(type: .gcash)
+        let source = try sourceFromSampleJSONFileBy(type: .gcash)
         XCTAssertEqual(source.id, "src_test_5oxesgzoekdn5nukcdf")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.gcash))
         XCTAssertEqual(source.flow, .appRedirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "USD")
+        try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeGrabPay() throws {
-        let source = try source(type: .grabPay)
+        let source = try sourceFromSampleJSONFileBy(type: .grabPay)
         XCTAssertEqual(source.id, "src_test_5pqcjr6tu4xvqut5nh5")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.grabPay))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 100000)
         XCTAssertEqual(source.currency, "SGD")
+        try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeKakaoPay() throws {
-        let source = try source(type: .kakaoPay)
+        let source = try sourceFromSampleJSONFileBy(type: .kakaoPay)
         XCTAssertEqual(source.id, "src_test_5oxetau2owhu0rbzg7y")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.kakaoPay))
         XCTAssertEqual(source.flow, .appRedirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "USD")
+        try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeMaybankQRPay() throws {
-        let source = try source(type: .maybankQRPay)
+        let source = try sourceFromSampleJSONFileBy(type: .maybankQRPay)
         XCTAssertEqual(source.id, "src_5pqcjr6tu4xvqut5nh5")
         XCTAssertTrue(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.maybankQRPay))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 100000)
         XCTAssertEqual(source.currency, "MYR")
+        try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodePayNow() throws {
-        let source = try source(type: .payNow)
+        let source = try sourceFromSampleJSONFileBy(type: .payNow)
         XCTAssertEqual(source.id, "src_test_5iso4taobco8j5jehx5")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.payNow))
         XCTAssertEqual(source.flow, .offline)
         XCTAssertEqual(source.amount, 100000)
         XCTAssertEqual(source.currency, "SGD")
+        try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodePayPay() throws {
-        let source = try source(type: .payPay)
+        let source = try sourceFromSampleJSONFileBy(type: .payPay)
         XCTAssertEqual(source.id, "src_5pqcjr6tu4xvqut5nh5")
         XCTAssertTrue(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.payPay))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 100000)
         XCTAssertEqual(source.currency, "JPY")
+        try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodePromptPay() throws {
-        let source = try source(type: .promptPay)
+        let source = try sourceFromSampleJSONFileBy(type: .promptPay)
         XCTAssertEqual(source.id, "src_test_5jb2cjjyjea25nps3ya")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.promptPay))
         XCTAssertEqual(source.flow, .offline)
         XCTAssertEqual(source.amount, 100000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeRabbitLinepay() throws {
-        let source = try source(type: .rabbitLinepay)
+        let source = try sourceFromSampleJSONFileBy(type: .rabbitLinepay)
         XCTAssertEqual(source.id, "src_test_5owftw9kjhjisssm0n2")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.rabbitLinepay))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeShopeePayJumpApp() throws {
-        let source = try source(type: .shopeePayJumpApp)
+        let source = try sourceFromSampleJSONFileBy(type: .shopeePayJumpApp)
         XCTAssertEqual(source.id, "src_5pqcjr6tu4xvqut5nh5")
         XCTAssertTrue(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.shopeePayJumpApp))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 100000)
         XCTAssertEqual(source.currency, "MYR")
+        try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeShopeePay() throws {
-        let source = try source(type: .shopeePay)
+        let source = try sourceFromSampleJSONFileBy(type: .shopeePay)
         XCTAssertEqual(source.id, "src_5pqcjr6tu4xvqut5nh5")
         XCTAssertTrue(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.shopeePay))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 110000)
         XCTAssertEqual(source.currency, "MYR")
+        try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeTouchNGo() throws {
-        let source = try source(type: .touchNGo)
+        let source = try sourceFromSampleJSONFileBy(type: .touchNGo)
         XCTAssertEqual(source.id, "src_test_5oxet335rx3xzdyn06g")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.touchNGo))
         XCTAssertEqual(source.flow, .appRedirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "SGD")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeTrueMoneyJumpApp() throws {
-        let source = try source(type: .trueMoneyJumpApp)
+        let source = try sourceFromSampleJSONFileBy(type: .trueMoneyJumpApp)
         XCTAssertEqual(source.id, "src_5yqlbf5w206mcfybj8v")
         XCTAssertTrue(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.trueMoneyJumpApp))
         XCTAssertEqual(source.flow, .appRedirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeBarcodeAlipay() throws {
-        let source = try source(type: .barcodeAlipay)
+        let source = try sourceFromSampleJSONFileBy(type: .barcodeAlipay)
         let payload = Source.Payload.BarcodeAlipay(
             barcode: "1234567890123456",
             storeID: "1",
@@ -186,18 +218,20 @@ class SourceTests: XCTestCase {
         XCTAssertEqual(source.flow, .offline)
         XCTAssertEqual(source.amount, 100000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeBillPaymentTescoLotus() throws {
-        let source = try source(type: .billPaymentTescoLotus)
+        let source = try sourceFromSampleJSONFileBy(type: .billPaymentTescoLotus)
         XCTAssertEqual(source.id, "src_test_59trf2nxk43b5nml8z0")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(.billPaymentTescoLotus))
         XCTAssertEqual(source.flow, .offline)
         XCTAssertEqual(source.amount, 1000000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
-
+    //  swiftlint:disable:next function_body_length
     func testDecodeAtome() throws {
         let payload = Source.Payload.Atome(
             phoneNumber: "+12312312312",
@@ -243,17 +277,18 @@ class SourceTests: XCTestCase {
             ]
         )
 
-        let source = try source(type: .atome)
+        let source = try sourceFromSampleJSONFileBy(type: .atome)
         XCTAssertEqual(source.id, "src_5yqiaqtbbog2pxjdg6b")
         XCTAssertTrue(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .atome(payload))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 700000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeDuitNowOBW() throws {
-        let source = try source(type: .duitNowOBW)
+        let source = try sourceFromSampleJSONFileBy(type: .duitNowOBW)
         let payload = Source.Payload.DuitNowOBW(bank: .affin)
         XCTAssertEqual(source.id, "src_5pqcjr6tu4xvqut5nh5")
         XCTAssertTrue(source.isLiveMode)
@@ -261,11 +296,12 @@ class SourceTests: XCTestCase {
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 100000)
         XCTAssertEqual(source.currency, "MYR")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeInstallmentBay() throws {
         let sourceType: SourceType = .installmentBAY
-        let source = try source(type: sourceType)
+        let source = try sourceFromSampleJSONFileBy(type: sourceType)
         let payload = Source.Payload.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
@@ -277,11 +313,12 @@ class SourceTests: XCTestCase {
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeInstallmentBBL() throws {
         let sourceType: SourceType = .installmentBBL
-        let source = try source(type: sourceType)
+        let source = try sourceFromSampleJSONFileBy(type: sourceType)
         let payload = Source.Payload.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
@@ -293,11 +330,12 @@ class SourceTests: XCTestCase {
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeInstallmentFirstChoice() throws {
         let sourceType: SourceType = .installmentFirstChoice
-        let source = try source(type: sourceType)
+        let source = try sourceFromSampleJSONFileBy(type: sourceType)
         let payload = Source.Payload.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
@@ -310,11 +348,12 @@ class SourceTests: XCTestCase {
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeInstallmentKBank() throws {
         let sourceType: SourceType = .installmentKBank
-        let source = try source(type: sourceType)
+        let source = try sourceFromSampleJSONFileBy(type: sourceType)
         let payload = Source.Payload.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
@@ -326,11 +365,12 @@ class SourceTests: XCTestCase {
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeInstallmentKTC() throws {
         let sourceType: SourceType = .installmentKTC
-        let source = try source(type: sourceType)
+        let source = try sourceFromSampleJSONFileBy(type: sourceType)
         let payload = Source.Payload.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
@@ -342,11 +382,12 @@ class SourceTests: XCTestCase {
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeInstallmentMBB() throws {
         let sourceType: SourceType = .installmentMBB
-        let source = try source(type: sourceType)
+        let source = try sourceFromSampleJSONFileBy(type: sourceType)
         let payload = Source.Payload.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
@@ -358,11 +399,12 @@ class SourceTests: XCTestCase {
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "MYR")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeInstallmentTTB() throws {
         let sourceType: SourceType = .installmentTTB
-        let source = try source(type: sourceType)
+        let source = try sourceFromSampleJSONFileBy(type: sourceType)
         let payload = Source.Payload.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
@@ -374,11 +416,12 @@ class SourceTests: XCTestCase {
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeInstallmentUOB() throws {
         let sourceType: SourceType = .installmentUOB
-        let source = try source(type: sourceType)
+        let source = try sourceFromSampleJSONFileBy(type: sourceType)
         let payload = Source.Payload.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
@@ -390,10 +433,11 @@ class SourceTests: XCTestCase {
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeTrueMoneyWallet() throws {
-        let source = try source(type: .trueMoneyWallet)
+        let source = try sourceFromSampleJSONFileBy(type: .trueMoneyWallet)
         let payload = Source.Payload.TrueMoneyWallet(phoneNumber: "0123456789")
         XCTAssertEqual(source.id, "src_test_5jhmesi7s4at1qctloy")
         XCTAssertFalse(source.isLiveMode)
@@ -401,90 +445,98 @@ class SourceTests: XCTestCase {
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 100000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeInternetBankingBay() throws {
         let sourceType: SourceType = .internetBankingBAY
-        let source = try source(type: sourceType)
+        let source = try sourceFromSampleJSONFileBy(type: sourceType)
         XCTAssertEqual(source.id, "src_test_5cs0sm8u8h8nqo5hwcs")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(sourceType))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 100000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeInternetBankingBBL() throws {
         let sourceType: SourceType = .internetBankingBBL
-        let source = try source(type: sourceType)
+        let source = try sourceFromSampleJSONFileBy(type: sourceType)
         XCTAssertEqual(source.id, "src_test_5cs0sfy7phu06yhyz5c")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(sourceType))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 100000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeMobileBankingBAY() throws {
         let sourceType: SourceType = .mobileBankingBAY
-        let source = try source(type: sourceType)
+        let source = try sourceFromSampleJSONFileBy(type: sourceType)
         XCTAssertEqual(source.id, "src_test_5cs0sm8u8h8nqo5zasd")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(sourceType))
         XCTAssertEqual(source.flow, .appRedirect)
         XCTAssertEqual(source.amount, 1000000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeMobileBankingBBL() throws {
         let sourceType: SourceType = .mobileBankingBBL
-        let source = try source(type: sourceType)
+        let source = try sourceFromSampleJSONFileBy(type: sourceType)
         XCTAssertEqual(source.id, "src_test_5cs0sm8u8h8nqo5zasd")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(sourceType))
         XCTAssertEqual(source.flow, .appRedirect)
         XCTAssertEqual(source.amount, 1000000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeMobileBankingKBank() throws {
         let sourceType: SourceType = .mobileBankingKBank
-        let source = try source(type: sourceType)
+        let source = try sourceFromSampleJSONFileBy(type: sourceType)
         XCTAssertEqual(source.id, "src_test_5cs0sm8u8h8nqo5zasd")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(sourceType))
         XCTAssertEqual(source.flow, .appRedirect)
         XCTAssertEqual(source.amount, 1000000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
     func testDecodeMobileBankingTKB() throws {
         let sourceType: SourceType = .mobileBankingKTB
-        let source = try source(type: sourceType)
+        let source = try sourceFromSampleJSONFileBy(type: sourceType)
         XCTAssertEqual(source.id, "src_test_5cs0sm8u8h8nqo5zasd")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(sourceType))
         XCTAssertEqual(source.flow, .appRedirect)
         XCTAssertEqual(source.amount, 1000000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeMobileBankingSCB() throws {
         let sourceType: SourceType = .mobileBankingSCB
-        let source = try source(type: sourceType)
+        let source = try sourceFromSampleJSONFileBy(type: sourceType)
         XCTAssertEqual(source.id, "src_test_5cs0sm8u8h8nqo5zasd")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .other(sourceType))
         XCTAssertEqual(source.flow, .appRedirect)
         XCTAssertEqual(source.amount, 1000000)
         XCTAssertEqual(source.currency, "THB")
+        try validatePayloadCodable(source.paymentInformation)
     }
 
     func testDecodeEContext() throws {
         let sourceType: SourceType = .eContext
-        let source = try source(type: sourceType)
+        let source = try sourceFromSampleJSONFileBy(type: sourceType)
         let payload = Source.Payload.EContext(
             name: "ヤマダタロウ",
-            email: "taro.yamada@example.com",
+            email: "test@opn.com",
             phoneNumber: "01234567891"
         )
         XCTAssertEqual(source.id, "src_test_5xsjw8qafayihquj3k9")
@@ -493,18 +545,22 @@ class SourceTests: XCTestCase {
         XCTAssertEqual(source.flow, .offline)
         XCTAssertEqual(source.amount, 300)
         XCTAssertEqual(source.currency, "JPY")
+        try validatePayloadCodable(source.paymentInformation)
     }
-}
 
-private extension SourceTests {
-    func source(type: SourceType) throws -> Source {
-        do {
-            let sourceData = try sampleData.jsonData(for: .source(sourceType: type))
-            let source = try decoder.decode(Source.self, from: sourceData)
-            return source
-        } catch {
-            XCTFail("Cannot decode the source \(error)")
-            throw error
-        }
+    func testDecodeFPX() throws {
+        let sourceType: SourceType = .fpx
+        let source = try sourceFromSampleJSONFileBy(type: sourceType)
+        let payload = Source.Payload.FPX(
+            bank: .uob,
+            email: "support@omise.co"
+        )
+        XCTAssertEqual(source.id, "src_test_5jhmesi7s4at1qctloz")
+        XCTAssertFalse(source.isLiveMode)
+        XCTAssertEqual(source.paymentInformation, .fpx(payload))
+        XCTAssertEqual(source.flow, .redirect)
+        XCTAssertEqual(source.amount, 100000)
+        XCTAssertEqual(source.currency, "MYR")
+        try validatePayloadCodable(source.paymentInformation)
     }
 }

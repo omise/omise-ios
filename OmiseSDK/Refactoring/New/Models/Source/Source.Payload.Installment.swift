@@ -21,7 +21,7 @@ extension Source.Payload {
     }
 }
 
-extension Source.Payload.Installment: SourcePayloadGroupProtocol {
+extension Source.Payload.Installment {
     static var sourceTypes: [SourceType] {
         [
             .installmentBAY,

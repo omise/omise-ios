@@ -1,13 +1,5 @@
 import Foundation
 
-/// Protocol to unify codebase related to payload enums
-protocol SourcePayloadGroupProtocol {
-    /// Source types that belong to payment method group
-    static var sourceTypes: [SourceType] { get }
-    /// Source type of current payment method
-//    var sourceType: SourceType { get }
-}
-
 extension Source {
     /// Information details about source payment
     public enum Payload: Codable, Equatable {
@@ -30,23 +22,29 @@ extension Source {
 
         /// Encode payload to JSON string
         public func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
             switch self {
             case .atome(let payload):
+                try container.encode(SourceType.atome, forKey: .sourceType)
                 try payload.encode(to: encoder)
             case .barcodeAlipay(let payload):
+                try container.encode(SourceType.barcodeAlipay, forKey: .sourceType)
                 try payload.encode(to: encoder)
             case .duitNowOBW(let payload):
+                try container.encode(SourceType.duitNowOBW, forKey: .sourceType)
                 try payload.encode(to: encoder)
             case .eContext(let payload):
+                try container.encode(SourceType.eContext, forKey: .sourceType)
                 try payload.encode(to: encoder)
             case .fpx(let payload):
+                try container.encode(SourceType.fpx, forKey: .sourceType)
                 try payload.encode(to: encoder)
             case .installment(let payload):
                 try payload.encode(to: encoder)
             case .trueMoneyWallet(let payload):
+                try container.encode(SourceType.trueMoneyWallet, forKey: .sourceType)
                 try payload.encode(to: encoder)
             case .other(let sourceType):
-                var container = encoder.container(keyedBy: CodingKeys.self)
                 try container.encode(sourceType.rawValue, forKey: .sourceType)
             }
         }
@@ -75,6 +73,7 @@ extension Source {
         private enum CodingKeys: String, CodingKey {
             case sourceType = "type"
         }
+
         /// Decode payload from JSON string
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -93,6 +92,8 @@ extension Source {
                 self = try .installment(Installment(from: decoder))
             case .trueMoneyWallet:
                 self = try .trueMoneyWallet(TrueMoneyWallet(from: decoder))
+            case .fpx:
+                self = try .fpx(FPX(from: decoder))
             default:
                 self = .other(sourceType)
             }

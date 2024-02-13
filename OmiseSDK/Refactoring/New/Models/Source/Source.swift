@@ -1,6 +1,6 @@
 import Foundation
 
-/// Represents an Omise Source object 
+/// Represents an Omise Source object
 /// Sources are methods for accepting payments through non-credit-card channels
 /// https://docs.opn.ooo/sources-api
 public struct Source: Decodable {
