@@ -1,36 +1,35 @@
 import Foundation
 
-extension Source.Payload {
-    /// Payload for Malaysia FPX payment method
-    /// https://docs.opn.ooo/fpx
-    public struct FPX: Codable, Equatable {
+extension Source.Payment {
+    /// Payment for `DuitNow Online Banking/Wallets` payment method
+    /// https://docs.opn.ooo/duitnow-obw
+    public struct DuitNowOBW: Codable, Equatable {
         /// Bank code selected by customer
         public let bank: Bank
-        /// Customer email
-        public let email: String?
 
-        /// Creates a new FPX payment method payload
+        /// Creates a new DuitNowOBW payment method payload
         ///
         /// - Parameters:
         ///   - bank: Bank code selected by customer
-        ///   - email: Customer email
-        public init(bank: Source.Payload.FPX.Bank, email: String?) {
+        public init(bank: Source.Payment.DuitNowOBW.Bank) {
             self.bank = bank
-            self.email = email
         }
 
         // Decode DuitNowOBW object from JSON string
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             self.bank = try container.decode(Bank.self, forKey: .bank)
-            self.email = try container.decodeIfPresent(String.self, forKey: .email)
         }
     }
 }
 
-extension Source.Payload.FPX {
+extension Source.Payment.DuitNowOBW {
     /// Bank code selected by customer
-    public enum Bank: String, Codable {
+    public enum Bank: String, Codable, CaseIterable, CustomStringConvertible {
+        public var description: String {
+            self.rawValue
+        }
+
         /// Affin Bank
         case affin
         /// Alliance Bank (Personal)
@@ -45,8 +44,6 @@ extension Source.Payload.FPX {
         case muamalat
         /// Bank Rakyat
         case rakyat
-        /// Bank Of China
-        case bocm
         /// BSN
         case bsn
         /// CIMB Clicks
@@ -57,8 +54,6 @@ extension Source.Payload.FPX {
         case hsbc
         /// KFH
         case kfh
-        /// Maybank2E
-        case maybank2e
         /// Maybank2U
         case maybank2u
         /// OCBC Bank

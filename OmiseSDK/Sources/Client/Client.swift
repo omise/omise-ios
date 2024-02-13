@@ -45,13 +45,13 @@ public class Client {
         )
     }
 
-    /// Send Create a Token API request with given Card Payload
+    /// Send Create a Token API request with given Card Payment
     /// - returns Created Token
     public func createToken(payload: CardPaymentPayload, _ completion: @escaping RequestResultClosure<Token, Error>) {
         apiRequest(api: OmiseAPI.createToken(payload: payload), completion: completion)
     }
 
-    /// Sends Create a Source API request with given Source Payload
+    /// Sends Create a Source API request with given Source Payment
     public func createSource(payload: SourcePaymentPayload, _ completion: @escaping RequestResultClosure<Source, Error>) {
         apiRequest(api: OmiseAPI.createSource(payload: payload), completion: completion)
     }

@@ -8,11 +8,11 @@ public struct SourcePaymentPayload: Codable, Equatable {
     /// Currency for source as three-letter ISO 4217 code
     let currency: String
     /// The payment details of this source describes how the payment is processed
-    let details: Source.Payload
+    let details: Source.Payment
     /// Current SDK platform type
     let platform = "IOS"
 
-    init(amount: Int64, currency: String, details: Source.Payload) {
+    init(amount: Int64, currency: String, details: Source.Payment) {
         self.amount = amount
         self.currency = currency
         self.details = details
@@ -38,6 +38,6 @@ public struct SourcePaymentPayload: Codable, Equatable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.amount = try container.decode(Int64.self, forKey: .amount)
         self.currency = try container.decode(String.self, forKey: .currency)
-        self.details = try Source.Payload(from: decoder)
+        self.details = try Source.Payment(from: decoder)
     }
 }

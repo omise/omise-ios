@@ -11,7 +11,7 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
                    type: .info,
                    numberOfTerms.map { String($0) }.joined(separator: ", "))
             if let sourceType = sourceType {
-                numberOfTerms = Source.Payload.Installment.availableTerms(for: sourceType)
+                numberOfTerms = Source.Payment.Installment.availableTerms(for: sourceType)
                 navigationItem.title = headerTitle(for: sourceType)
             } else {
                 numberOfTerms = []
@@ -154,7 +154,7 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
         
-        let payload = Source.Payload.Installment(
+        let payload = Source.Payment.Installment(
             installmentTerm: self.numberOfTerms[indexPath.row],
             zeroInterestInstallments: false,
             sourceType: sourceType

@@ -2,7 +2,7 @@ import Foundation
 
 extension Source {
     /// Information details about source payment
-    public enum Payload: Codable, Equatable {
+    public enum Payment: Codable, Equatable {
         /// Atome
         case atome(_ payload: Atome)
         /// Barcode

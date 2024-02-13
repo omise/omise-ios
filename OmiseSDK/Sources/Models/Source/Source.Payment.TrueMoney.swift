@@ -1,7 +1,7 @@
 import Foundation
 
-extension Source.Payload {
-    /// Payload for `TrueMoney Wallet` payment method
+extension Source.Payment {
+    /// Payment for `TrueMoney Wallet` payment method
     /// https://docs.opn.ooo/truemoney-wallet
     public struct TrueMoneyWallet: Codable, Equatable {
         /// Alipay barcode number

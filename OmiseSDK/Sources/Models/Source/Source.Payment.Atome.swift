@@ -1,7 +1,7 @@
 import Foundation
 
-extension Source.Payload {
-    /// Payload for `Atome App Redirection` payment method
+extension Source.Payment {
+    /// Payment for `Atome App Redirection` payment method
     /// https://docs.opn.ooo/atome
     public struct Atome: Codable, Equatable {
         /// Customer mobile number with a country code (example: +66876543210 or 0876543210)
@@ -11,11 +11,11 @@ extension Source.Payload {
         /// Customer email
         let email: String?
         /// Shipping address
-        let shipping: Source.Payload.Address
+        let shipping: Source.Payment.Address
         /// Billing address
-        let billing: Source.Payload.Address?
+        let billing: Source.Payment.Address?
         /// Information about items included in the order
-        let items: [Source.Payload.Item]
+        let items: [Source.Payment.Item]
 
         /// Creates a new Atome payment method payload
         ///
@@ -26,7 +26,7 @@ extension Source.Payload {
         ///   - shipping: Shipping address
         ///   - billing: Billing address
         ///   - items: Items details
-        init(phoneNumber: String, name: String? = nil, email: String? = nil, shipping: Address, billing: Source.Payload.Address?, items: [Source.Payload.Item]) {
+        init(phoneNumber: String, name: String? = nil, email: String? = nil, shipping: Address, billing: Source.Payment.Address?, items: [Source.Payment.Item]) {
             self.name = name
             self.email = email
             self.phoneNumber = phoneNumber
@@ -37,7 +37,7 @@ extension Source.Payload {
     }
 }
 
-extension Source.Payload.Atome {
+extension Source.Payment.Atome {
     private enum CodingKeys: String, CodingKey {
         case name
         case email

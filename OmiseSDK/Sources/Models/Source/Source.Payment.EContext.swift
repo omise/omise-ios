@@ -1,7 +1,7 @@
 import Foundation
 
-extension Source.Payload {
-    /// Payload for Konbini, Pay-easy, and Online Banking payment method
+extension Source.Payment {
+    /// Payment for Konbini, Pay-easy, and Online Banking payment method
     /// https://docs.opn.ooo/konbini-pay-easy-online-banking
     public struct EContext: Codable, Equatable {
         /// Customer name. The name cannot be longer than 10 characters

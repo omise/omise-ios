@@ -411,7 +411,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
                        log: uiLogObject,
                        type: .default,
                        token.id)
-                delegate?.creditCardFormViewController(self, didSucceedWithToken: token)
+                self.delegate?.creditCardFormViewController(self, didSucceedWithToken: token)
             case .failure(let error):
                 self.handleError(error)
             }

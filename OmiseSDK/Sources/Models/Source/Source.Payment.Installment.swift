@@ -1,6 +1,6 @@
 import Foundation
 
-extension Source.Payload {
+extension Source.Payment {
     /// Payloads for Installment payment methods
     /// https://docs.opn.ooo/installment-payments
     public struct Installment: Codable, Equatable {
@@ -21,7 +21,7 @@ extension Source.Payload {
     }
 }
 
-extension Source.Payload.Installment {
+extension Source.Payment.Installment {
     static var sourceTypes: [SourceType] {
         [
             .installmentBAY,

@@ -228,7 +228,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
                                     PaymentChooserUI {
     var capability: Capability?
     var flowSession: PaymentCreatorFlowSession?
-    var duitNowOBWBanks: [Source.Payload.DuitNowOBW.Bank] = Source.Payload.DuitNowOBW.Bank.allCases
+    var duitNowOBWBanks: [Source.Payment.DuitNowOBW.Bank] = Source.Payment.DuitNowOBW.Bank.allCases
 
     var showsCreditCardPayment = true {
         didSet {
@@ -343,7 +343,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
-        let payment: Source.Payload
+        let payment: Source.Payment
 
         let selectedType = element(forUIIndexPath: indexPath)
 

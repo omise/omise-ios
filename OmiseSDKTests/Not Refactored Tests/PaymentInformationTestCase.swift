@@ -16,7 +16,7 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let installment = Source.Payload.Installment(brand: .bay, numberOfTerms: 6)
+            let installment = Source.Payment.Installment(brand: .bay, numberOfTerms: 6)
             let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 10_000_00,
                                                          currency: .thb)
@@ -40,7 +40,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let installment = Source.Payload.Installment(brand: .firstChoice, numberOfTerms: 6)
+            let installment = Source.Payment.Installment(brand: .firstChoice, numberOfTerms: 6)
             let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 100_00,
                                                          currency: .thb)
@@ -64,7 +64,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let installment = Source.Payload.Installment(brand: .bbl, numberOfTerms: 6)
+            let installment = Source.Payment.Installment(brand: .bbl, numberOfTerms: 6)
             let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 1_000_00,
                                                          currency: .thb)
@@ -88,7 +88,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let installment = Source.Payload.Installment(brand: .mbb, numberOfTerms: 6)
+            let installment = Source.Payment.Installment(brand: .mbb, numberOfTerms: 6)
             let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 5_000_00,
                                                          currency: .myr)
@@ -112,7 +112,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let installment = Source.Payload.Installment(brand: .ktc, numberOfTerms: 6)
+            let installment = Source.Payment.Installment(brand: .ktc, numberOfTerms: 6)
             let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 10_00,
                                                          currency: .thb)
@@ -136,7 +136,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let installment = Source.Payload.Installment(brand: .kBank, numberOfTerms: 6)
+            let installment = Source.Payment.Installment(brand: .kBank, numberOfTerms: 6)
             let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 10_00,
                                                          currency: .thb)
@@ -160,7 +160,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let installment = Source.Payload.Installment(brand: .scb, numberOfTerms: 9)
+            let installment = Source.Payment.Installment(brand: .scb, numberOfTerms: 9)
             let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 30_00,
                                                          currency: .thb)
@@ -184,7 +184,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let installment = Source.Payload.Installment(brand: .ttb, numberOfTerms: 6)
+            let installment = Source.Payment.Installment(brand: .ttb, numberOfTerms: 6)
             let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 30_00,
                                                          currency: .thb)
@@ -208,7 +208,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let installment = Source.Payload.Installment(brand: .uob, numberOfTerms: 6)
+            let installment = Source.Payment.Installment(brand: .uob, numberOfTerms: 6)
             let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 30_00,
                                                          currency: .thb)
@@ -420,7 +420,7 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            typealias AlipayBarcode = Source.Payload.Barcode.AlipayBarcode
+            typealias AlipayBarcode = Source.Payment.Barcode.AlipayBarcode
             let storeInformation = AlipayBarcode.StoreInformation(storeID: "store_id_1", storeName: "Store Name")
             let barcode = AlipayBarcode(barcode: "barcode",
                                         storeInformation: storeInformation,
@@ -450,7 +450,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let barcode = Source.Payload.Barcode.AlipayBarcode(barcode: "barcode", terminalID: "Terminal 1")
+            let barcode = Source.Payment.Barcode.AlipayBarcode(barcode: "barcode", terminalID: "Terminal 1")
             let sourceParameter = Source.CreateParameter(paymentInformation: .barcode(.alipay(barcode)),
                                                          amount: 10_000_00,
                                                          currency: .thb)
@@ -474,7 +474,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let barcode = Source.Payload.Barcode.AlipayBarcode(barcode: "barcode", terminalID: nil)
+            let barcode = Source.Payment.Barcode.AlipayBarcode(barcode: "barcode", terminalID: nil)
             let sourceParameter = Source.CreateParameter(paymentInformation: .barcode(.alipay(barcode)),
                                                          amount: 10_000_00,
                                                          currency: .thb)
@@ -501,7 +501,7 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let trueMoney = Source.Payload.TrueMoney(phoneNumber: "0123456789")
+            let trueMoney = Source.Payment.TrueMoney(phoneNumber: "0123456789")
             let sourceParameter = Source.CreateParameter(paymentInformation: .truemoney(trueMoney),
                                                          amount: 10_000_00,
                                                          currency: .thb)
@@ -576,7 +576,7 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let fpx = Source.Payload.FPX(bank: "uob", email: "support@omise.co")
+            let fpx = Source.Payment.FPX(bank: "uob", email: "support@omise.co")
             let sourceParameter = Source.CreateParameter(paymentInformation: .fpx(fpx),
                                                          amount: 10_000_00,
                                                          currency: .myr)
@@ -783,7 +783,7 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let duitNowOBW = Source.Payload.DuitNowOBW(bank: "affin")
+            let duitNowOBW = Source.Payment.DuitNowOBW(bank: "affin")
             let sourceParameter = Source.CreateParameter(paymentInformation: .duitNowOBW(duitNowOBW),
                                                          amount: 10_000_00,
                                                          currency: .myr)
@@ -810,7 +810,7 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let shipping = Source.Payload.Atome.ShippingAddress(
+            let shipping = Source.Payment.Atome.ShippingAddress(
                 country: "TH",
                 city: "Bangkok",
                 postalCode: "10200",
@@ -819,7 +819,7 @@ class PaymentInformationTestCase: XCTestCase {
                 street2: "")
 
             let items = [
-                Source.Payload.Atome.Item(
+                Source.Payment.Atome.Item(
                     sku: "1",
                     category: "1",
                     name: "1",
@@ -830,7 +830,7 @@ class PaymentInformationTestCase: XCTestCase {
                     brand: "1")
             ]
 
-            let atome = Source.Payload.Atome(
+            let atome = Source.Payment.Atome(
                 phoneNumber: "+66800000101",
                 shippingAddress: shipping,
                 items: items
