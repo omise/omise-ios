@@ -49,4 +49,19 @@ public struct CardPaymentPayload: Codable, Equatable {
         case street2
         case phoneNumber = "phone_number"
     }
+
+    public init(name: String, number: String, expirationMonth: Int, expirationYear: Int, securityCode: String, countryCode: String?, city: String?, state: String?, street1: String?, street2: String?, postalCode: String?, phoneNumber: String?) {
+        self.name = name
+        self.number = number
+        self.expirationMonth = expirationMonth
+        self.expirationYear = expirationYear
+        self.securityCode = securityCode
+        self.countryCode = countryCode
+        self.city = city
+        self.state = state
+        self.street1 = street1
+        self.street2 = street2
+        self.postalCode = postalCode
+        self.phoneNumber = phoneNumber
+    }
 }

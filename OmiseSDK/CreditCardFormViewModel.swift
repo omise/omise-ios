@@ -52,7 +52,7 @@ class CreditCardFormViewModel: CreditCardFormViewModelProtocol, CountryListViewM
 
         let payload = CardPaymentPayload(
             name: viewContext.name,
-            number: viewContext.pan.number,
+            number: viewContext.number,
             expirationMonth: viewContext.expirationMonth,
             expirationYear: viewContext.expirationYear,
             securityCode: viewContext.securityCode,

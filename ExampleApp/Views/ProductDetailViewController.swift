@@ -17,7 +17,7 @@ class ProductDetailViewController: BaseViewController {
 
         let client = Client(publicKey: publicKey)
 
-        client.capabilityDataWithCompletionHandler { (result) in
+        client.capability { (result) in
             if case .success(let capability) = result {
                 self.capability = capability
                 print("Capability Country: \(capability.countryCode)")

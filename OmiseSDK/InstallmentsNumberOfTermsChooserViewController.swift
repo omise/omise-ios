@@ -1,94 +1,95 @@
 import UIKit
+import os
 
-// swiftlint:disable:next type_name
 class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentSourceChooser, PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
 
-    /*
-    var installmentBrand: Source.Payload.Installment {
+    var sourceType: SourceType? {
         didSet {
-//            switch installmentBrand.sourceType {
-            numberOfTerms = Source.Payload.Installment.availableTerms(for: installmentBrand.sourceType)
-//             installmentBrand.map(PaymentInformation.Installment.availableTerms(for:)).map(Array.init) ?? []
-            
-            let title: String
-            switch installmentBrand {
-            case .bay?:
-                title = NSLocalizedString(
-                    "installment-number-of-terms-choosers.bbl.navigation-item.title",
-                    bundle: .omiseSDK,
-                    value: "Krungsri",
-                    comment: "A navigation title for the choosing installment terms screen with the `Krungsri` selected"
-                )
-            case .firstChoice?:
-                title = NSLocalizedString(
-                    "installment-number-of-terms-choosers.ktc.navigation-item.title",
-                    bundle: .omiseSDK,
-                    value: "Krungsri First Choice",
-                    comment: "A navigation title for the choosing installment terms screen with the `Krungsri First Choice` selected"
-                )
-            case .bbl?:
-                title = NSLocalizedString(
-                    "installment-number-of-terms-choosers.bay.navigation-item.title",
-                    bundle: .omiseSDK,
-                    value: "Bangkok Bank",
-                    comment: "A navigation title for the choosing installment terms screen with the `Bangkok Bank` selected"
-                )
-            case .mbb?:
-                title = NSLocalizedString(
-                    "installment-number-of-terms-choosers.mbb.navigation-item.title",
-                    bundle: .omiseSDK,
-                    value: "MBB",
-                    comment: "A navigation title for the choosing installment terms screen with the `MBB` selected"
-                )
-            case .ktc?:
-                title = NSLocalizedString(
-                    "installment-number-of-terms-choosers.k-bank.navigation-item.title",
-                    bundle: .omiseSDK,
-                    value: "KTC",
-                    comment: "A navigation title for the choosing installment terms screen with the `KTC` selected"
-                )
-            case .kBank?:
-                title = NSLocalizedString(
-                    "installment-number-of-terms-choosers.first-choice.navigation-item.title",
-                    bundle: .omiseSDK,
-                    value: "Kasikorn",
-                    comment: "A navigation title for the choosing installment terms screen with the `Kasikorn` selected"
-                )
-            case .scb?:
-                title = NSLocalizedString(
-                    "installment-number-of-terms-choosers.scb.navigation-item.title",
-                    bundle: .omiseSDK,
-                    value: "SCB",
-                    comment: "A navigation title for the choosing installment terms screen with the `SCB` selected"
-                )
-            case .ttb?:
-                title = NSLocalizedString(
-                    "installment-number-of-terms-choosers.ttb.navigation-item.title",
-                    bundle: .omiseSDK,
-                    value: "TTB",
-                    comment: "A navigation title for the choosing installment terms screen with the `TTB` selected"
-                )
-            case .uob?:
-                title = NSLocalizedString(
-                    "installment-number-of-terms-choosers.uob.navigation-item.title",
-                    bundle: .omiseSDK,
-                    value: "UOB",
-                    comment: "A navigation title for the choosing installment terms screen with the `UOB` selected"
-                )
-            case .other?, nil:
-                title = NSLocalizedString(
-                    "installment-number-of-terms-choosers.default.navigation-item.title",
-                    bundle: .omiseSDK,
-                    value: "Installments Terms",
-                    comment: "A navigation title for the choosing installment terms screen with the `Installments Terms` selected"
-                )
+            os_log("Installment Chooser: Showing options - %{private}@",
+                   log: uiLogObject,
+                   type: .info,
+                   numberOfTerms.map { String($0) }.joined(separator: ", "))
+            if let sourceType = sourceType {
+                numberOfTerms = Source.Payload.Installment.availableTerms(for: sourceType)
+                navigationItem.title = headerTitle(for: sourceType)
+            } else {
+                numberOfTerms = []
+                navigationItem.title = ""
             }
-            
-            navigationItem.title = title
         }
     }
-     */
+
+    // swiftlint:disable:next function_body_length
+    func headerTitle(for sourceType: SourceType) -> String {
+        switch sourceType {
+        case .installmentBAY:
+            return NSLocalizedString(
+                "installment-number-of-terms-choosers.bbl.navigation-item.title",
+                bundle: .omiseSDK,
+                value: "Krungsri",
+                comment: "A navigation title for the choosing installment terms screen with the `Krungsri` selected"
+            )
+        case .installmentBBL:
+            return NSLocalizedString(
+                "installment-number-of-terms-choosers.bay.navigation-item.title",
+                bundle: .omiseSDK,
+                value: "Bangkok Bank",
+                comment: "A navigation title for the choosing installment terms screen with the `Bangkok Bank` selected"
+            )
+        case .installmentFirstChoice:
+            return NSLocalizedString(
+                "installment-number-of-terms-choosers.ktc.navigation-item.title",
+                bundle: .omiseSDK,
+                value: "Krungsri First Choice",
+                comment: "A navigation title for the choosing installment terms screen with the `Krungsri First Choice` selected"
+            )
+        case .installmentKBank:
+            return NSLocalizedString(
+                "installment-number-of-terms-choosers.first-choice.navigation-item.title",
+                bundle: .omiseSDK,
+                value: "Kasikorn",
+                comment: "A navigation title for the choosing installment terms screen with the `Kasikorn` selected"
+            )
+        case .installmentKTC:
+            return NSLocalizedString(
+                "installment-number-of-terms-choosers.k-bank.navigation-item.title",
+                bundle: .omiseSDK,
+                value: "KTC",
+                comment: "A navigation title for the choosing installment terms screen with the `KTC` selected"
+            )
+        case .installmentMBB:
+            return NSLocalizedString(
+                "installment-number-of-terms-choosers.mbb.navigation-item.title",
+                bundle: .omiseSDK,
+                value: "MBB",
+                comment: "A navigation title for the choosing installment terms screen with the `MBB` selected"
+            )
+        case .installmentSCB:
+            return NSLocalizedString(
+                "installment-number-of-terms-choosers.scb.navigation-item.title",
+                bundle: .omiseSDK,
+                value: "SCB",
+                comment: "A navigation title for the choosing installment terms screen with the `SCB` selected"
+            )
+        case .installmentTTB:
+            return NSLocalizedString(
+                "installment-number-of-terms-choosers.ttb.navigation-item.title",
+                bundle: .omiseSDK,
+                value: "TTB",
+                comment: "A navigation title for the choosing installment terms screen with the `TTB` selected"
+            )
+        case .installmentUOB:
+            return NSLocalizedString(
+                "installment-number-of-terms-choosers.default.navigation-item.title",
+                bundle: .omiseSDK,
+                value: "Installments Terms",
+                comment: "A navigation title for the choosing installment terms screen with the `Installments Terms` selected"
+            )
+        default:
+            return ""
+        }
+    }
 
     var numberOfTerms: [Int] = [] {
         didSet {
@@ -141,12 +142,11 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let sourceType = sourceType else { return }
+        
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
-//        guard let brand = installmentBrand else {
-//            return
-//        }
-        
+
         let oldAccessoryView = cell?.accessoryView
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
         loadingIndicator.color = currentSecondaryColor
@@ -154,11 +154,16 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
         
-        let numberOfTerms = self.numberOfTerms[indexPath.row]
-//        flowSession?.requestCreateSource(.installment(PaymentInformation.Installment(brand: brand, numberOfTerms: numberOfTerms))) { _ in
-//            cell?.accessoryView = oldAccessoryView
-//            self.view.isUserInteractionEnabled = true
-//        }
+        let payload = Source.Payload.Installment(
+            installmentTerm: self.numberOfTerms[indexPath.row],
+            zeroInterestInstallments: false,
+            sourceType: sourceType
+        )
+
+        flowSession?.requestCreateSource(.installment(payload)) { _ in
+            cell?.accessoryView = oldAccessoryView
+            self.view.isUserInteractionEnabled = true
+        }
     }
     
     private func applyPrimaryColor() {

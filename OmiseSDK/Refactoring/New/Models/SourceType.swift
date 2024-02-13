@@ -126,7 +126,7 @@ extension SourceType {
     }
 
     var isInternetBanking: Bool {
-        Self.installments.contains(self)
+        Self.internetBanking.contains(self)
     }
 }
 

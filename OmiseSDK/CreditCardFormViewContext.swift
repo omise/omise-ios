@@ -16,7 +16,7 @@ struct CreditCardFormViewContext {
         case postalCode
     }
 
-    var pan = PAN("")
+    var number: String = ""
     var expirationMonth: Int = 0
     var expirationYear: Int = 0
     var name: String = ""

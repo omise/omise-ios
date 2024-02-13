@@ -61,9 +61,9 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
-        let bank = element(forUIIndexPath: indexPath)
-        
-        os_log("Internet Banking Chooser: %{private}@ was selected", log: uiLogObject, type: .info, bank.rawValue)
+        let sourceType = element(forUIIndexPath: indexPath)
+
+        os_log("Internet Banking Chooser: %{private}@ was selected", log: uiLogObject, type: .info, sourceType.rawValue)
 
         let oldAccessoryView = cell?.accessoryView
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
@@ -72,10 +72,10 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
         
-//        flowSession?.requestCreateSource(.installment(.init(installmentTerm: ter, zeroInterestInstallments: <#T##Bool?#>, sourceType: <#T##SourceType#>)), completionHandler: <#T##((Result<Source, Error>) -> Void)?#>)
-//            cell?.accessoryView = oldAccessoryView
-//            self.view.isUserInteractionEnabled = true
-//        }
+        flowSession?.requestCreateSource(.other(sourceType)) { _ in
+            cell?.accessoryView = oldAccessoryView
+            self.view.isUserInteractionEnabled = true
+        }
     }
     
     private func applyPrimaryColor() {

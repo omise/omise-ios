@@ -53,12 +53,12 @@ internal class PaymentCreatorFlowSession {
 
         delegate?.paymentCreatorFlowSessionWillCreateSource(self)
         let sourcePaymentPayload = SourcePaymentPayload(
-            amount: paymentAmount ?? 0,
-            currency: paymentCurrency?.code ?? "",
+            amount: amount,
+            currency: currency.code,
             details: payload
         )
 
-        client.createSource(payload: sourcePaymentPayload, { [weak self] result in
+        client.createSource(payload: sourcePaymentPayload) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let source):
@@ -66,7 +66,7 @@ internal class PaymentCreatorFlowSession {
             case .failure(let error):
                 self.delegate?.paymentCreatorFlowSession(self, didFailWithError: error)
             }
-        })
+        }
     }
 
     func requestToCancel() {

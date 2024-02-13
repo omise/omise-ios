@@ -161,9 +161,10 @@ class CustomCreditCardFormViewController: UIViewController {
             let cvv = cardCVVField.text else {
                 return
         }
-        let tokenRequest = Request<Token>(
+
+        let tokenRequest = CardPaymentPayload(
             name: name,
-            pan: cardNumberField.pan,
+            number: cardNumberField.pan.number,
             expirationMonth: expiryMonth,
             expirationYear: expiryYear,
             securityCode: cvv,
@@ -172,11 +173,12 @@ class CustomCreditCardFormViewController: UIViewController {
             state: stateField.text ?? "",
             street1: street1Field.text ?? "",
             street2: street2Field.text ?? "",
-            postalCode: postalCodeField.text ?? ""
+            postalCode: postalCodeField.text ?? "",
+            phoneNumber: nil
         )
 
         doneButton.isEnabled = false
-        omiseClient.send(tokenRequest) { [weak self] (result) in
+        omiseClient.createToken(payload: tokenRequest) { [weak self] (result) in
             guard let self = self else { return }
             self.doneButton.isEnabled = false
             switch result {

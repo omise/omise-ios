@@ -388,7 +388,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         }
 
         context.countryCode = viewModel.countryListViewModel.selectedCountry?.code ?? ""
-        context.pan = cardNumberTextField.pan
+        context.number = cardNumberTextField.text ?? ""
         context.name = cardNameTextField.text ?? ""
         context.expirationMonth = expiryDateTextField.selectedMonth ?? 0
         context.expirationYear = expiryDateTextField.selectedYear ?? 0

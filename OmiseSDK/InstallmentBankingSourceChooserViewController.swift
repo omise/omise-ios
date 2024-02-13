@@ -71,7 +71,6 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
         cell.accessoryView?.tintColor = currentSecondaryColor
         return cell
     }
-    
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) else {
@@ -89,15 +88,13 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
             return
         }
         let sourceType = element(forUIIndexPath: indexPath)
-        let terms = Source.Payload.Installment.availableTerms(for: sourceType)
-
-//        if segue.identifier == "GoToInstallmentTermsChooserSegue",
-//            let installmentTermsChooserViewController = segue.destination as? InstallmentsNumberOfTermsChooserViewController {
-//            installmentTermsChooserViewController.installmentBrand = Source.Payload.Installment.init(installmentTerm: <#T##Int#>, zeroInterestInstallments: <#T##Bool?#>, sourceType: <#T##SourceType#>)
-//            installmentTermsChooserViewController.flowSession = self.flowSession
-//            installmentTermsChooserViewController.preferredPrimaryColor = self.preferredPrimaryColor
-//            installmentTermsChooserViewController.preferredSecondaryColor = self.preferredSecondaryColor
-//        }
+        if segue.identifier == "GoToInstallmentTermsChooserSegue",
+           let installmentTermsChooserViewController = segue.destination as? InstallmentsNumberOfTermsChooserViewController {
+            installmentTermsChooserViewController.sourceType = sourceType
+            installmentTermsChooserViewController.flowSession = self.flowSession
+            installmentTermsChooserViewController.preferredPrimaryColor = self.preferredPrimaryColor
+            installmentTermsChooserViewController.preferredSecondaryColor = self.preferredSecondaryColor
+        }
     }
     
     private func applyPrimaryColor() {
