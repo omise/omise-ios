@@ -35,4 +35,29 @@ extension Source.Payload.Installment {
             .installmentUOB
         ]
     }
+
+    static func availableTerms(for sourceType: SourceType) -> [Int] {
+        switch sourceType {
+        case .installmentBAY:
+            return [ 3, 4, 6, 9, 10 ]
+        case .installmentFirstChoice:
+            return [ 3, 4, 6, 9, 10, 12, 18, 24, 36 ]
+        case .installmentBBL:
+            return [ 4, 6, 8, 9, 10 ]
+        case .installmentMBB:
+            return [ 6, 12, 18, 24 ]
+        case .installmentKTC:
+            return [ 3, 4, 5, 6, 7, 8, 9, 10 ]
+        case .installmentKBank:
+            return [ 3, 4, 6, 10 ]
+        case .installmentSCB:
+            return [ 3, 4, 6, 9, 10 ]
+        case .installmentTTB:
+            return [ 3, 4, 6, 10, 12 ]
+        case .installmentUOB:
+            return [ 3, 4, 6, 10 ]
+        default:
+            return []
+        }
+    }
 }

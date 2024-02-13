@@ -6,18 +6,18 @@ let publicKey = "pkey_test_<#Omise Public Key#>"
 
 /*: tokenization-api-call
  
- You can do manual credit card tokenization by using our TokenOld Request API.
+ You can do manual credit card tokenization by using our Token Request API.
  */
 
 /*: create-a-client-step
- You need a `ClientOld` object for comminucating with Omise API
+ You need a `Client` object for comminucating with Omise API
  */
-let client = ClientOld(publicKey: publicKey)
+let client = Client(publicKey: publicKey)
 
 /*: create-a-request
  You also need a `Request` object which will have the credit card information that you want to tokenize.
  */
-let request = Request<TokenOld>(parameter: CreateTokenParameter(
+let request = Request<Token>(parameter: CreateTokenParameter(
   name: "Customer Name",
   number: "4242424242424242",
   expirationMonth: 12,

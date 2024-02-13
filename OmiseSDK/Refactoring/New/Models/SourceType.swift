@@ -96,80 +96,52 @@ public enum SourceType: String, Codable, CaseIterable {
     case weChat = "wechat_pay"
 }
 
-// MARK: Installment Brand
-// TODO: Refactoring with PaymentInformation
 extension SourceType {
-    var installmentBrand: PaymentInformation.Installment.Brand? {
-        switch self {
-        case .installmentBAY:
-            return .bay
-        case .installmentMBB:
-            return .mbb
-        case .installmentFirstChoice:
-            return .firstChoice
-        case .installmentBBL:
-            return .bbl
-        case .installmentKTC:
-            return .ktc
-        case .installmentKBank:
-            return .kBank
-        case .installmentSCB:
-            return .scb
-        case .installmentTTB:
-            return .ttb
-        case .installmentUOB:
-            return .uob
-        default:
-            return nil
-        }
+    public static var installments: [SourceType] {
+        [
+            .installmentBAY,
+            .installmentBBL,
+            .installmentFirstChoice,
+            .installmentKBank,
+            .installmentKTC,
+            .installmentMBB,
+            .installmentSCB,
+            .installmentTTB,
+            .installmentUOB
+        ]
     }
 
     // Add Unit Test
     var isInstallment: Bool {
-        installmentBrand != nil
+        Self.installments.contains(self)
     }
 }
 
-// MARK: Internet Banking
-// TODO: Refactoring with PaymentInformation
 extension SourceType {
-    var internetBanking: PaymentInformation.InternetBanking? {
-        switch self {
-        case .internetBankingBAY:
-            return .bay
-        case .internetBankingBBL:
-            return .bbl
-        default:
-            return nil
-        }
+    public static var internetBanking: [SourceType] {
+        [
+            .internetBankingBAY,
+            .internetBankingBAY
+        ]
     }
 
     var isInternetBanking: Bool {
-        internetBanking != nil
+        Self.installments.contains(self)
     }
 }
 
-// MARK: Mobile Banking
-// TODO: Refactoring with PaymentInformation
 extension SourceType {
-    var mobileBanking: PaymentInformation.MobileBanking? {
-        switch self {
-        case .mobileBankingSCB:
-            return .scb
-        case .mobileBankingKBank:
-            return .kbank
-        case .mobileBankingBAY:
-            return .bay
-        case .mobileBankingBBL:
-            return .bbl
-        case .mobileBankingKTB:
-            return .ktb
-        default:
-            return nil
-        }
+    public static var mobileBanking: [SourceType] {
+        [
+            .mobileBankingSCB,
+            .mobileBankingKBank,
+            .mobileBankingBAY,
+            .mobileBankingBBL,
+            .mobileBankingKTB
+        ]
     }
 
     var isMobileBanking: Bool {
-        mobileBanking != nil
+        Self.mobileBanking.contains(self)
     }
 }

@@ -5,11 +5,11 @@ import Foundation
 public struct Token: Decodable {
     /// Omise ID of the token
     public let id: String
-    /// Boolean indicates that if this TokenOld is in the live mode
+    /// Boolean indicates that if this Token is in the live mode
     public let isLiveMode: Bool
     /// Boolean indicates that if this token is already used for creating a charge already
     public var isUsed: Bool
-    /// Card that is used for creating this TokenOld
+    /// Card that is used for creating this Token
     public let card: Token.Card?
     /// Status of charge created using this token
     public let chargeStatus: ChargeStatus

@@ -2,7 +2,7 @@ import UIKit
 
 class EContextInformationInputViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
     var flowSession: PaymentCreatorFlowSession?
-    var client: ClientOld?
+    var client: Client?
     var paymentAmount: Int64?
     var paymentCurrency: Currency?
     
@@ -120,12 +120,12 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
                 return
         }
         
-        let eContextInformation = PaymentInformation.EContext(name: fullname, email: email, phoneNumber: phoneNumber)
+        let eContextInformation = Source.Payload.EContext(name: fullname, email: email, phoneNumber: phoneNumber)
         requestingIndicatorView.startAnimating()
         view.isUserInteractionEnabled = false
         view.tintAdjustmentMode = .dimmed
         submitButton.isEnabled = false
-        flowSession?.requestCreateSource(PaymentInformation.eContext(eContextInformation)) { _ in
+        flowSession?.requestCreateSource(Source.Payload.eContext(eContextInformation)) { _ in
             self.requestingIndicatorView.stopAnimating()
             self.view.isUserInteractionEnabled = true
             self.view.tintAdjustmentMode = .automatic

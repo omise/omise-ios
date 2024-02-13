@@ -4,7 +4,7 @@ import OmiseSDK
 class ProductDetailViewController: BaseViewController {
     private let publicKey = LocalConfig.default.publicKey
     
-    private var capability: CapabilityOld?
+    private var capability: Capability?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,12 +15,12 @@ class ProductDetailViewController: BaseViewController {
         // Setup dev environment for staging
         Configuration.setDefault(Configuration(environment: LocalConfig.default.env))
 
-        let client = ClientOld(publicKey: publicKey)
+        let client = Client(publicKey: publicKey)
 
         client.capabilityDataWithCompletionHandler { (result) in
             if case .success(let capability) = result {
                 self.capability = capability
-                print("CapabilityOld Country: \(capability.countryCode)")
+                print("Capability Country: \(capability.countryCode)")
             }
         }
     }
@@ -145,10 +145,10 @@ extension ProductDetailViewController: CreditCardFormViewControllerDelegate {
         dismissForm()
     }
     
-    func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: TokenOld) {
+    func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
         dismissForm {
             let alertController = UIAlertController(
-                title: "TokenOld Created",
+                title: "Token Created",
                 message: "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge.",
                 preferredStyle: .alert
             )
@@ -196,10 +196,10 @@ extension ProductDetailViewController: PaymentCreatorControllerDelegate {
             
             switch payment {
             case .token(let token):
-                title = "TokenOld Created"
+                title = "Token Created"
                 message = "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge."
             case .source(let source):
-                title = "TokenOld Created"
+                title = "Token Created"
                 message = "A source with id of \(source.id) was successfully created. Please send this id to server to create a charge."
             }
             
@@ -229,10 +229,10 @@ extension ProductDetailViewController: PaymentCreatorControllerDelegate {
 // MARK: - Custom Credit Card Form View Controller Delegate
 
 extension ProductDetailViewController: CustomCreditCardFormViewControllerDelegate {
-    func creditCardFormViewController(_ controller: CustomCreditCardFormViewController, didSucceedWithToken token: TokenOld) {
+    func creditCardFormViewController(_ controller: CustomCreditCardFormViewController, didSucceedWithToken token: Token) {
         dismissForm {
             let alertController = UIAlertController(
-                title: "TokenOld Created",
+                title: "Token Created",
                 message: "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge.",
                 preferredStyle: .alert
             )

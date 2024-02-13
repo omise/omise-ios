@@ -4,10 +4,10 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
 
     private let destinationSegue: String = "GoToFPXBankChooserSegue"
     var flowSession: PaymentCreatorFlowSession?
-    var showingValues: [CapabilityOld.Backend.Bank]?
+    var showingValues: [Capability.PaymentMethod.Bank]?
     private var emailValue: String?
 
-    private var client: ClientOld?
+    private var client: Client?
 
     private var isInputDataValid: Bool {
         return formFields.allSatisfy { $0.isValid } || isEmailInputEmpty

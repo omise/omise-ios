@@ -1,6 +1,5 @@
 import Foundation
 
-// TODO: Add Unit Tests to Capability
 // TODO: Add comments to CapabilityNew's properties
 public struct Capability: Codable {
     public let countryCode: String
@@ -11,5 +10,19 @@ public struct Capability: Codable {
         case countryCode = "country"
         case paymentMethods = "payment_methods"
         case banks
+    }
+}
+
+extension Capability {
+    func paymentMethod(for sourceType: SourceType) -> Capability.PaymentMethod? {
+        paymentMethods.first { method in
+            method.name == sourceType.rawValue
+        }
+    }
+
+    var cardPaymentMethod: Capability.PaymentMethod? {
+        paymentMethods.first { method in
+            method.name == "card"
+        }
     }
 }

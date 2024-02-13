@@ -10,8 +10,8 @@ public protocol PaymentCreatorControllerDelegate: NSObjectProtocol {
 }
 
 public enum Payment {
-    case token(TokenOld)
-    case source(SourceOLD)
+    case token(Token)
+    case source(Source)
 }
 
 public protocol PaymentChooserUI: AnyObject {
@@ -37,17 +37,17 @@ public class PaymentCreatorController: UINavigationController {
                 return
             }
 
-            self.client = ClientOld(publicKey: publicKey)
+            self.client = Client(publicKey: publicKey)
         }
     }
 
-    /// Amount to create a SourceOLD payment
+    /// Amount to create a Source payment
     public var paymentAmount: Int64? {
         didSet {
             paymentSourceCreatorFlowSession.paymentAmount = paymentAmount
         }
     }
-    /// Currency to create a SourceOLD payment
+    /// Currency to create a Source payment
     public var paymentCurrency: Currency? {
         didSet {
             paymentSourceCreatorFlowSession.paymentCurrency = paymentCurrency
@@ -61,9 +61,9 @@ public class PaymentCreatorController: UINavigationController {
         }
     }
 
-    /// Available SourceOLD payment options to let user to choose.
+    /// Available Source payment options to let user to choose.
     /// The default value is the default available payment method for merchant in Thailand
-    public var allowedPaymentMethods: [SourceTypeValue] = PaymentCreatorController.thailandDefaultAvailableSourceMethods {
+    public var allowedPaymentMethods: [SourceType] = PaymentCreatorController.thailandDefaultAvailableSourceMethods {
         didSet {
             paymentChooserViewController.allowedPaymentMethods = allowedPaymentMethods
         }
@@ -79,7 +79,7 @@ public class PaymentCreatorController: UINavigationController {
     /// Delegate to receive CreditCardFormController result.
     public weak var paymentDelegate: PaymentCreatorControllerDelegate?
 
-    var client: ClientOld? {
+    var client: Client? {
         didSet {
             paymentSourceCreatorFlowSession.client = client
         }
@@ -119,7 +119,7 @@ public class PaymentCreatorController: UINavigationController {
         publicKey: String,
         amount: Int64,
         currency: Currency,
-        allowedPaymentMethods: [SourceTypeValue],
+        allowedPaymentMethods: [SourceType],
         paymentDelegate: PaymentCreatorControllerDelegate?
     ) -> PaymentCreatorController {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
@@ -194,7 +194,7 @@ public class PaymentCreatorController: UINavigationController {
         }
     }
 
-    public func applyPaymentMethods(from capability: CapabilityOld) {
+    public func applyPaymentMethods(from capability: Capability) {
         paymentChooserViewController.applyPaymentMethods(from: capability)
     }
 
@@ -359,7 +359,7 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
         dismissErrorMessage(animated: true, sender: self)
     }
 
-    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreateToken token: TokenOld) {
+    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreateToken token: Token) {
         os_log("Credit Card Form in Payment Createor - Request succeed %{private}@, trying to notify the delegate",
                log: uiLogObject,
                type: .default,
@@ -370,15 +370,15 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
         }
     }
 
-    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreatedSource source: SourceOLD) {
-        os_log("Payment Creator Create SourceOLD Request succeed %{private}@, trying to notify the delegate",
+    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreatedSource source: Source) {
+        os_log("Payment Creator Create Source Request succeed %{private}@, trying to notify the delegate",
                log: uiLogObject,
                type: .default,
                source.id)
 
         if let paymentDelegate = self.paymentDelegate {
             paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.source(source))
-            os_log("Payment Creator Created SourceOLD succeed delegate notified", log: uiLogObject, type: .default)
+            os_log("Payment Creator Created Source succeed delegate notified", log: uiLogObject, type: .default)
         } else {
             os_log("There is no Payment Creator delegate to notify about the created source", log: uiLogObject, type: .default)
         }
@@ -433,7 +433,7 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
 }
 
 extension PaymentCreatorController {
-    public static let thailandDefaultAvailableSourceMethods: [SourceTypeValue] = [
+    public static let thailandDefaultAvailableSourceMethods: [SourceType] = [
         .internetBankingBAY,
         .internetBankingBBL,
         .mobileBankingSCB,
@@ -452,22 +452,22 @@ extension PaymentCreatorController {
         .installmentTTB,
         .installmentUOB,
         .promptPay,
-        .trueMoney,
+        .trueMoneyWallet,
         .pointsCiti,
         .shopeePayJumpApp
     ]
 
-    public static let japanDefaultAvailableSourceMethods: [SourceTypeValue] = [
+    public static let japanDefaultAvailableSourceMethods: [SourceType] = [
         .eContext,
         .payPay
     ]
 
-    public static let singaporeDefaultAvailableSourceMethods: [SourceTypeValue] = [
+    public static let singaporeDefaultAvailableSourceMethods: [SourceType] = [
         .payNow,
         .shopeePayJumpApp
     ]
 
-    public static let malaysiaDefaultAvailableSourceMethods: [SourceTypeValue] = [
+    public static let malaysiaDefaultAvailableSourceMethods: [SourceType] = [
         .fpx,
         .installmentMBB,
         .touchNGo,
@@ -480,13 +480,13 @@ extension PaymentCreatorController {
         .duitNowOBW
     ]
 
-    public static let internetBankingAvailablePaymentMethods: [SourceTypeValue] = [
+    public static let internetBankingAvailablePaymentMethods: [SourceType] = [
         .internetBankingBAY,
         .internetBankingBBL
     ]
 
     // swiftlint:disable:next identifier_name
-    public static let installmentsBankingAvailablePaymentMethods: [SourceTypeValue] = [
+    public static let installmentsBankingAvailablePaymentMethods: [SourceType] = [
         .installmentBAY,
         .installmentFirstChoice,
         .installmentBBL,
@@ -498,15 +498,15 @@ extension PaymentCreatorController {
         .installmentUOB
     ]
 
-    public static let billPaymentAvailablePaymentMethods: [SourceTypeValue] = [
+    public static let billPaymentAvailablePaymentMethods: [SourceType] = [
         .billPaymentTescoLotus
     ]
 
-    public static let barcodeAvailablePaymentMethods: [SourceTypeValue] = [
+    public static let barcodeAvailablePaymentMethods: [SourceType] = [
         .barcodeAlipay
     ]
 
-    public static let mobileBankingAvailablePaymentMethods: [SourceTypeValue] = [
+    public static let mobileBankingAvailablePaymentMethods: [SourceType] = [
         .mobileBankingSCB,
         .mobileBankingKBank,
         .mobileBankingBAY,

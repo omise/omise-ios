@@ -58,20 +58,20 @@ details, read on:
 ### Opn Payments API
 
 The Opn Payments iOS SDK provides an easy-to-use library for calling the
-Opn Payments API. The main class for the Opn Payments iOS SDK is `ClientOld` through
+Opn Payments API. The main class for the Opn Payments iOS SDK is `Client` through
 which all requests to the Opn Payments API will be sent. Creating a new
-`ClientOld` object requires an Opn Payments public key.
+`Client` object requires an Opn Payments public key.
 
 ``` swift
 import OmiseSDK
 
-let client = OmiseSDK.ClientOld.init(publicKey: "omise_public_key")
+let client = OmiseSDK.Client.init(publicKey: "omise_public_key")
 ```
 
 
 The SDK currently
 supports 2 main categories of requests: **Tokenizing a 
-Card** and **Creating a Payment SourceOLD**.
+Card** and **Creating a Payment Source**.
 
 #### Creating a card token
 
@@ -80,10 +80,10 @@ servers. To collect a card payment from a
 customer, merchants will need to first *tokenize* the card data using the
 Opn Payments API and then use the generated token in place of the card
 data. You can tokenize card data by creating and initializing
-a `Request<TokenOld>` as follows:
+a `Request<Token>` as follows:
 
 ```swift
-let tokenParameters = TokenOld.CreateParameter(
+let tokenParameters = Token.CreateParameter(
     name: "JOHN DOE",
     number: "4242424242424242",
     expirationMonth: 11,
@@ -91,7 +91,7 @@ let tokenParameters = TokenOld.CreateParameter(
     securityCode: "123"
 )
 
-let request = Request<TokenOld>(parameter: tokenParameters)
+let request = Request<Token>(parameter: tokenParameters)
 ```
 
 #### Creating a payment source
@@ -100,24 +100,24 @@ Opn Payments now supports many payment methods other than cards.  You
 may request a payment with one of those supported payment methods from
 a customer by calling the `CreateSourceParameter` API. You need to specify
 the parameters (e.g. payment amount and currency) of the source you
-want to create by creating and initializing a `Request<SourceOLD>` with
+want to create by creating and initializing a `Request<Source>` with
 the `Payment Information` object:
 
 ```swift
-let paymentInformation = PaymentInformation.internetBanking(.bbl) // Bangkok Bank Internet Banking payment method
+let paymentInformation = Source.Payload.internetBanking(.bbl) // Bangkok Bank Internet Banking payment method
 let sourceParameter = CreateSourceParameter(
     paymentInformation: paymentInformation,
     amount: amount,
     currency: currency
 )
 
-let request = Request<SourceOLD>(parameter: sourceParameter)
+let request = Request<Source>(parameter: sourceParameter)
 ```
 
 #### Sending the request
 
 Whether you are charging a source or a card, sending the
-request is the same.  Create a new `requestTask` on a `ClientOld` object
+request is the same.  Create a new `requestTask` on a `Client` object
 with the completion handler block and call `resume` on the
 requestTask:
 
@@ -127,7 +127,7 @@ requestTask.resume()
 ```
 
 You may also send a request by calling the
-`send(_:completionHandler:)` method on the `ClientOld`.
+`send(_:completionHandler:)` method on the `Client`.
 
 ```swift
 client.send(request) { [weak self] (result) in
@@ -142,10 +142,10 @@ client.send(request) { [weak self] (result) in
 A simple completion handler for a token looks as follows.
 
 ``` swift
-func completionHandler(tokenResult: Result<TokenOld, Error>) -> Void {
+func completionHandler(tokenResult: Result<Token, Error>) -> Void {
     switch tokenResult {
     case .success(let value):
-        // do something with TokenOld id
+        // do something with Token id
         print(value.id)
     case .failure(let error):
         print(error)
@@ -155,7 +155,7 @@ func completionHandler(tokenResult: Result<TokenOld, Error>) -> Void {
 
 ### Built-in forms
 
-Opn Payments iOS SDK provides easy-to-use drop-in UI forms for both Tokenizing a Card and Creating a Payment SourceOLD, which
+Opn Payments iOS SDK provides easy-to-use drop-in UI forms for both Tokenizing a Card and Creating a Payment Source, which
 you can easily integrate into your application.
 
 #### Card form
@@ -184,14 +184,14 @@ class ViewController: UIViewController {
 }
 ```
 
-Then implement the delegate to receive the `TokenOld` object after user has entered the card data:
+Then implement the delegate to receive the `Token` object after user has entered the card data:
 
 ```swift
 extension ViewController: CreditCardFormViewControllerDelegate {
-  func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: TokenOld) {
+  func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
     dismissCreditCardForm()
 
-    // Sends `TokenOld` to your server to create a charge, or a customer object.
+    // Sends `Token` to your server to create a charge, or a customer object.
   }
 
   func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error) {
@@ -281,7 +281,7 @@ extension ProductDetailViewController: PaymentCreatorControllerDelegate {
   func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didCreatePayment payment: Payment) {
     dismissForm()
 
-    // Sends selected `TokenOld` or `SourceOLD` to your server to create a charge, or a customer object.
+    // Sends selected `Token` or `Source` to your server to create a charge, or a customer object.
   }
 
   func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didFailWithError error: Error) {

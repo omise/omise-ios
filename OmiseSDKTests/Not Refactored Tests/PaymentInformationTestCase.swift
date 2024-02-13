@@ -7,7 +7,7 @@ import XCTest
 class PaymentInformationTestCase: XCTestCase {
 
     static func makeJSONEncoder() -> JSONEncoder {
-        let encoder = ClientOld.makeJSONEncoder()
+        let encoder = Client.makeJSONEncoder()
         encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
         return encoder
     }
@@ -16,8 +16,8 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let installment = PaymentInformation.Installment(brand: .bay, numberOfTerms: 6)
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .installment(installment),
+            let installment = Source.Payload.Installment(brand: .bay, numberOfTerms: 6)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 10_000_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -40,8 +40,8 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let installment = PaymentInformation.Installment(brand: .firstChoice, numberOfTerms: 6)
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .installment(installment),
+            let installment = Source.Payload.Installment(brand: .firstChoice, numberOfTerms: 6)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 100_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -64,8 +64,8 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let installment = PaymentInformation.Installment(brand: .bbl, numberOfTerms: 6)
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .installment(installment),
+            let installment = Source.Payload.Installment(brand: .bbl, numberOfTerms: 6)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 1_000_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -88,8 +88,8 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let installment = PaymentInformation.Installment(brand: .mbb, numberOfTerms: 6)
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .installment(installment),
+            let installment = Source.Payload.Installment(brand: .mbb, numberOfTerms: 6)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 5_000_00,
                                                          currency: .myr)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -112,8 +112,8 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let installment = PaymentInformation.Installment(brand: .ktc, numberOfTerms: 6)
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .installment(installment),
+            let installment = Source.Payload.Installment(brand: .ktc, numberOfTerms: 6)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 10_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -136,8 +136,8 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let installment = PaymentInformation.Installment(brand: .kBank, numberOfTerms: 6)
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .installment(installment),
+            let installment = Source.Payload.Installment(brand: .kBank, numberOfTerms: 6)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 10_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -160,8 +160,8 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let installment = PaymentInformation.Installment(brand: .scb, numberOfTerms: 9)
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .installment(installment),
+            let installment = Source.Payload.Installment(brand: .scb, numberOfTerms: 9)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 30_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -184,8 +184,8 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let installment = PaymentInformation.Installment(brand: .ttb, numberOfTerms: 6)
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .installment(installment),
+            let installment = Source.Payload.Installment(brand: .ttb, numberOfTerms: 6)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 30_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -208,8 +208,8 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let installment = PaymentInformation.Installment(brand: .uob, numberOfTerms: 6)
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .installment(installment),
+            let installment = Source.Payload.Installment(brand: .uob, numberOfTerms: 6)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .installment(installment),
                                                          amount: 30_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -236,7 +236,7 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .internetBanking(.bay),
+            let sourceParameter = Source.CreateParameter(paymentInformation: .internetBanking(.bay),
                                                          amount: 10_000_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -258,7 +258,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .internetBanking(.bbl),
+            let sourceParameter = Source.CreateParameter(paymentInformation: .internetBanking(.bbl),
                                                          amount: 10_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -284,7 +284,7 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .mobileBanking(.scb),
+            let sourceParameter = Source.CreateParameter(paymentInformation: .mobileBanking(.scb),
                                                          amount: 10_000_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -306,7 +306,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .mobileBanking(.kbank),
+            let sourceParameter = Source.CreateParameter(paymentInformation: .mobileBanking(.kbank),
                                                          amount: 10_000_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -328,7 +328,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .ocbcDigital,
+            let sourceParameter = Source.CreateParameter(paymentInformation: .ocbcDigital,
                                                          amount: 10_000_00,
                                                          currency: .sgd)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -350,7 +350,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .mobileBanking(.bay),
+            let sourceParameter = Source.CreateParameter(paymentInformation: .mobileBanking(.bay),
                                                          amount: 10_000_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -372,7 +372,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .mobileBanking(.bbl),
+            let sourceParameter = Source.CreateParameter(paymentInformation: .mobileBanking(.bbl),
                                                          amount: 10_000_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -394,7 +394,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .mobileBanking(.ktb),
+            let sourceParameter = Source.CreateParameter(paymentInformation: .mobileBanking(.ktb),
                                                          amount: 10_000_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -420,12 +420,12 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            typealias AlipayBarcode = PaymentInformation.Barcode.AlipayBarcode
+            typealias AlipayBarcode = Source.Payload.Barcode.AlipayBarcode
             let storeInformation = AlipayBarcode.StoreInformation(storeID: "store_id_1", storeName: "Store Name")
             let barcode = AlipayBarcode(barcode: "barcode",
                                         storeInformation: storeInformation,
                                         terminalID: "Terminal 1")
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .barcode(.alipay(barcode)),
+            let sourceParameter = Source.CreateParameter(paymentInformation: .barcode(.alipay(barcode)),
                                                          amount: 10_000_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -450,8 +450,8 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let barcode = PaymentInformation.Barcode.AlipayBarcode(barcode: "barcode", terminalID: "Terminal 1")
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .barcode(.alipay(barcode)),
+            let barcode = Source.Payload.Barcode.AlipayBarcode(barcode: "barcode", terminalID: "Terminal 1")
+            let sourceParameter = Source.CreateParameter(paymentInformation: .barcode(.alipay(barcode)),
                                                          amount: 10_000_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -474,8 +474,8 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let barcode = PaymentInformation.Barcode.AlipayBarcode(barcode: "barcode", terminalID: nil)
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .barcode(.alipay(barcode)),
+            let barcode = Source.Payload.Barcode.AlipayBarcode(barcode: "barcode", terminalID: nil)
+            let sourceParameter = Source.CreateParameter(paymentInformation: .barcode(.alipay(barcode)),
                                                          amount: 10_000_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -501,8 +501,8 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let trueMoney = PaymentInformation.TrueMoney(phoneNumber: "0123456789")
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .truemoney(trueMoney),
+            let trueMoney = Source.Payload.TrueMoney(phoneNumber: "0123456789")
+            let sourceParameter = Source.CreateParameter(paymentInformation: .truemoney(trueMoney),
                                                          amount: 10_000_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -527,7 +527,7 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .truemoneyJumpApp,
+            let sourceParameter = Source.CreateParameter(paymentInformation: .truemoneyJumpApp,
                                                          amount: 10_000_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -551,7 +551,7 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .points(.citiPoints),
+            let sourceParameter = Source.CreateParameter(paymentInformation: .points(.citiPoints),
                                                          amount: 10_000_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -576,8 +576,8 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let fpx = PaymentInformation.FPX(bank: "uob", email: "support@omise.co")
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .fpx(fpx),
+            let fpx = Source.Payload.FPX(bank: "uob", email: "support@omise.co")
+            let sourceParameter = Source.CreateParameter(paymentInformation: .fpx(fpx),
                                                          amount: 10_000_00,
                                                          currency: .myr)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -603,7 +603,7 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .alipayCN,
+            let sourceParameter = Source.CreateParameter(paymentInformation: .alipayCN,
                                                          amount: 10_000_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -625,7 +625,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .alipayHK,
+            let sourceParameter = Source.CreateParameter(paymentInformation: .alipayHK,
                                                          amount: 10_000_00,
                                                          currency: .hkd)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -647,7 +647,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .dana,
+            let sourceParameter = Source.CreateParameter(paymentInformation: .dana,
                                                          amount: 10_000_00,
                                                          currency: .jpy)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -669,7 +669,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .gcash,
+            let sourceParameter = Source.CreateParameter(paymentInformation: .gcash,
                                                          amount: 10_000_00,
                                                          currency: .usd)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -691,7 +691,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .kakaoPay,
+            let sourceParameter = Source.CreateParameter(paymentInformation: .kakaoPay,
                                                          amount: 10_000_00,
                                                          currency: .usd)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -713,7 +713,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .touchNGo,
+            let sourceParameter = Source.CreateParameter(paymentInformation: .touchNGo,
                                                          amount: 10_000_00,
                                                          currency: .sgd)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -735,7 +735,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .rabbitLinepay,
+            let sourceParameter = Source.CreateParameter(paymentInformation: .rabbitLinepay,
                                                          amount: 50_000_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -757,7 +757,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .grabPay,
+            let sourceParameter = Source.CreateParameter(paymentInformation: .grabPay,
                                                          amount: 1_000_00,
                                                          currency: .sgd)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -783,8 +783,8 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let duitNowOBW = PaymentInformation.DuitNowOBW(bank: "affin")
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .duitNowOBW(duitNowOBW),
+            let duitNowOBW = Source.Payload.DuitNowOBW(bank: "affin")
+            let sourceParameter = Source.CreateParameter(paymentInformation: .duitNowOBW(duitNowOBW),
                                                          amount: 10_000_00,
                                                          currency: .myr)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -810,7 +810,7 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let shipping = PaymentInformation.Atome.ShippingAddress(
+            let shipping = Source.Payload.Atome.ShippingAddress(
                 country: "TH",
                 city: "Bangkok",
                 postalCode: "10200",
@@ -819,7 +819,7 @@ class PaymentInformationTestCase: XCTestCase {
                 street2: "")
 
             let items = [
-                PaymentInformation.Atome.Item(
+                Source.Payload.Atome.Item(
                     sku: "1",
                     category: "1",
                     name: "1",
@@ -830,13 +830,13 @@ class PaymentInformationTestCase: XCTestCase {
                     brand: "1")
             ]
 
-            let atome = PaymentInformation.Atome(
+            let atome = Source.Payload.Atome(
                 phoneNumber: "+66800000101",
                 shippingAddress: shipping,
                 items: items
             )
 
-            let sourceParameter = SourceOLD.CreateParameter(
+            let sourceParameter = Source.CreateParameter(
                 paymentInformation: .atome(atome),
                 amount: 10_000_00,
                 currency: .thb
@@ -886,7 +886,7 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .payPay,
+            let sourceParameter = Source.CreateParameter(paymentInformation: .payPay,
                                                          amount: 10_000_00,
                                                          currency: .jpy)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -911,7 +911,7 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .alipay,
+            let sourceParameter = Source.CreateParameter(paymentInformation: .alipay,
                                                          amount: 300_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -933,7 +933,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .billPayment(.tescoLotus),
+            let sourceParameter = Source.CreateParameter(paymentInformation: .billPayment(.tescoLotus),
                                                          amount: 123_45,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -955,7 +955,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .boost,
+            let sourceParameter = Source.CreateParameter(paymentInformation: .boost,
                                                          amount: 123_45,
                                                          currency: .myr)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -977,7 +977,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .shopeePay,
+            let sourceParameter = Source.CreateParameter(paymentInformation: .shopeePay,
                                                          amount: 123_45,
                                                          currency: .myr)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -999,7 +999,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .maybankQRPay,
+            let sourceParameter = Source.CreateParameter(paymentInformation: .maybankQRPay,
                                                          amount: 123_45,
                                                          currency: .myr)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -1021,7 +1021,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
         
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .duitNowQR,
+            let sourceParameter = Source.CreateParameter(paymentInformation: .duitNowQR,
                                                          amount: 123_45,
                                                          currency: .myr)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -1043,7 +1043,7 @@ class PaymentInformationTestCase: XCTestCase {
         }
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .shopeePayJumpApp,
+            let sourceParameter = Source.CreateParameter(paymentInformation: .shopeePayJumpApp,
                                                          amount: 123_45,
                                                          currency: .myr)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)
@@ -1069,7 +1069,7 @@ class PaymentInformationTestCase: XCTestCase {
         let encoder = PaymentInformationTestCase.makeJSONEncoder()
 
         do {
-            let sourceParameter = SourceOLD.CreateParameter(paymentInformation: .weChat,
+            let sourceParameter = Source.CreateParameter(paymentInformation: .weChat,
                                                          amount: 10_000_00,
                                                          currency: .thb)
             let encodedJSONString = String(data: try encoder.encode(sourceParameter), encoding: .utf8)

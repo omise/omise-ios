@@ -149,9 +149,9 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
 
 extension PaymentChooserOption {
     // swiftlint:disable:next function_body_length
-    fileprivate static func paymentOptions(for sourceType: SourceTypeValue) -> [PaymentChooserOption] {
+    fileprivate static func paymentOptions(for sourceType: SourceType) -> [PaymentChooserOption] {
         switch sourceType {
-        case .trueMoney:
+        case .trueMoneyWallet:
             return [.truemoney]
         case .trueMoneyJumpApp:
             return [.truemoneyJumpApp]
@@ -226,16 +226,16 @@ extension PaymentChooserOption {
 class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>,
                                     PaymentSourceChooser,
                                     PaymentChooserUI {
-    var capability: CapabilityOld?
+    var capability: Capability?
     var flowSession: PaymentCreatorFlowSession?
-    var duitNowOBWBanks: [PaymentInformation.DuitNowOBW.Bank] = PaymentInformation.DuitNowOBW.Bank.allCases
+    var duitNowOBWBanks: [Source.Payload.DuitNowOBW.Bank] = Source.Payload.DuitNowOBW.Bank.allCases
 
     var showsCreditCardPayment = true {
         didSet {
             updateShowingValues()
         }
     }
-    var allowedPaymentMethods: [SourceTypeValue] = [] {
+    var allowedPaymentMethods: [SourceType] = [] {
         didSet {
             updateShowingValues()
         }
@@ -273,13 +273,13 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             controller.delegate = flowSession
             controller.navigationItem.rightBarButtonItem = nil
         case ("GoToInternetBankingChooserSegue"?, let controller as InternetBankingSourceChooserViewController):
-            controller.showingValues = allowedPaymentMethods.compactMap({ $0.internetBankingSource })
+            controller.showingValues = allowedPaymentMethods.filter({ $0.isInternetBanking })
             controller.flowSession = self.flowSession
         case ("GoToMobileBankingChooserSegue"?, let controller as MobileBankingSourceChooserViewController):
-            controller.showingValues = allowedPaymentMethods.compactMap({ $0.mobileBankingSource })
+            controller.showingValues = allowedPaymentMethods.filter({ $0.isMobileBanking })
             controller.flowSession = self.flowSession
         case ("GoToInstallmentBrandChooserSegue"?, let controller as InstallmentBankingSourceChooserViewController):
-            controller.showingValues = allowedPaymentMethods.compactMap({ $0.installmentBrand })
+            controller.showingValues = allowedPaymentMethods.filter({ $0.isInstallment })
             controller.flowSession = self.flowSession
         case (_, let controller as EContextInformationInputViewController):
             controller.flowSession = self.flowSession
@@ -312,7 +312,9 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         case ("GoToTrueMoneyFormSegue"?, let controller as TrueMoneyFormViewController):
             controller.flowSession = self.flowSession
         case ("GoToFPXFormSegue"?, let controller as FPXFormViewController):
-            controller.showingValues = capability?[.fpx]?.banks ?? []
+//            controller.showingValues = capability?.paymentMethod(for: .fpx)?.banks
+//            capability?[.fpx]?.banks ?? []
+            
             controller.flowSession = self.flowSession
         case ("GoToDuitNowOBWBankChooserSegue"?, let controller as DuitNowOBWBankChooserViewController):
             controller.showingValues = duitNowOBWBanks
@@ -341,59 +343,59 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
-        let payment: PaymentInformation
+        let payment: Source.Payload
 
         let selectedType = element(forUIIndexPath: indexPath)
 
         os_log("Payment Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedType.description)
         switch selectedType {
         case .alipay:
-            payment = .alipay
+            payment = .other(.alipay)
         case .alipayCN:
-            payment = .alipayCN
+            payment = .other(.alipayCN)
         case .alipayHK:
-            payment = .alipayHK
+            payment = .other(.alipayHK)
         case .dana:
-            payment = .dana
+            payment = .other(.dana)
         case .gcash:
-            payment = .gcash
+            payment = .other(.gcash)
         case .kakaoPay:
-            payment = .kakaoPay
+            payment = .other(.kakaoPay)
         case .touchNGoAlipayPlus, .touchNGo:
-            payment = .touchNGo
+            payment = .other(.touchNGo)
         case .tescoLotus:
-            payment = .billPayment(.tescoLotus)
+            payment = .other(.billPaymentTescoLotus)
         case .promptpay:
-            payment = .promptpay
+            payment = .other(.promptPay)
         case .paynow:
-            payment = .paynow
+            payment = .other(.payNow)
         case .citiPoints:
-            payment = .points(.citiPoints)
+            payment = .other(.pointsCiti)
         case .rabbitLinepay:
-            payment = .rabbitLinepay
+            payment = .other(.rabbitLinepay)
         case .ocbcDigital:
-            payment = .ocbcDigital
+            payment = .other(.mobileBankingOCBC)
         case .grabPay, .grabPayRms:
-            payment = .grabPay
+            payment = .other(.grabPay)
         case .boost:
-            payment = .boost
+            payment = .other(.boost)
         case .shopeePay:
-            payment = .shopeePay
+            payment = .other(.shopeePay)
         case .shopeePayJumpApp:
-            payment = .shopeePayJumpApp
+            payment = .other(.shopeePayJumpApp)
         case .maybankQRPay:
-            payment = .maybankQRPay
+            payment = .other(.maybankQRPay)
         case .duitNowQR:
-            payment = .duitNowQR
+            payment = .other(.duitNowQR)
         case .payPay:
-            payment = .payPay
+            payment = .other(.payPay)
         case .atome:
             goToAtome()
             return
         case .truemoneyJumpApp:
-            payment = .truemoneyJumpApp
+            payment = .other(.trueMoneyJumpApp)
         case .weChat:
-            payment = .weChat
+            payment = .other(.weChat)
         default:
             return
         }
@@ -493,102 +495,15 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         }
     }
 
-    // swiftlint:disable:next function_body_length
-    func applyPaymentMethods(from capability: CapabilityOld) {
+    func applyPaymentMethods(from capability: Capability) {
         self.capability = capability
-        showsCreditCardPayment = capability.creditCardBackend != nil
+        showsCreditCardPayment = capability.cardPaymentMethod != nil
 
-        // swiftlint:disable:next closure_body_length
-        allowedPaymentMethods = capability.supportedBackends.compactMap {
-            switch $0.payment {
-            case .alipay:
-                return SourceTypeValue.alipay
-            case .alipayCN:
-                return SourceTypeValue.alipayCN
-            case .alipayHK:
-                return SourceTypeValue.alipayHK
-            case .atome:
-                return SourceTypeValue.atome
-            case .dana:
-                return SourceTypeValue.dana
-            case .gcash:
-                return SourceTypeValue.gcash
-            case .kakaoPay:
-                return SourceTypeValue.kakaoPay
-            case .touchNGoAlipayPlus:
-                return SourceTypeValue.touchNGoAlipayPlus
-            case .touchNGo:
-                return SourceTypeValue.touchNGo
-            case .promptpay:
-                return SourceTypeValue.promptPay
-            case .paynow:
-                return SourceTypeValue.payNow
-            case .truemoney:
-                return SourceTypeValue.trueMoney
-            case .truemoneyJumpApp:
-                return SourceTypeValue.trueMoneyJumpApp
-            case .points(let points):
-                return SourceTypeValue(points.type)
-            case .installment(let brand, availableNumberOfTerms: _):
-                return SourceTypeValue(brand.type)
-            case .internetBanking(let bank):
-                return SourceTypeValue(bank.type)
-            case .billPayment(let billPayment):
-                return SourceTypeValue(billPayment.type)
-            case .eContext:
-                return SourceTypeValue.eContext
-            case .mobileBanking(let bank):
-                return SourceTypeValue(bank.type)
-            case .fpx:
-                return SourceTypeValue.fpx
-            case .rabbitLinepay:
-                return SourceTypeValue.rabbitLinepay
-            case .ocbcDigital:
-                return SourceTypeValue.mobileBankingOCBC
-            case .grabPay:
-                return SourceTypeValue.grabPay
-            case .grabPayRms:
-                return SourceTypeValue.grabPayRms
-            case .boost:
-                return SourceTypeValue.boost
-            case .shopeePay:
-                // using ShopeePay Jump app as first priority ShopeePay source
-                let isShopeePayJumpAppExist = capability.supportedBackends.contains(
-                  where: { $0.payment == CapabilityOld.Backend.Payment.shopeePayJumpApp }
-                )
-                if !isShopeePayJumpAppExist {
-                  return SourceTypeValue.shopeePay
-                }
-                return nil
-            case .shopeePayJumpApp:
-                return SourceTypeValue.shopeePayJumpApp
-            case .maybankQRPay:
-                return SourceTypeValue.maybankQRPay
-            case .duitNowQR:
-                return SourceTypeValue.duitNowQR
-            case .duitNowOBW:
-                return SourceTypeValue.duitNowOBW
-            case .payPay:
-                return SourceTypeValue.payPay
-            case .weChat:
-                return SourceTypeValue.weChat
-            case .card, .unknownSource:
-                return nil
-            }
+        allowedPaymentMethods = capability.paymentMethods.compactMap {
+            SourceType(rawValue: $0.name)
         }
 
         updateShowingValues()
-    }
-
-    private func loadCapabilityData() {
-        flowSession?.client?.capabilityDataWithCompletionHandler { (result) in
-            switch result {
-            case .success(let capability):
-                self.applyPaymentMethods(from: capability)
-            case .failure:
-                break
-            }
-        }
     }
 
     private func applyPrimaryColor() {
@@ -623,7 +538,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
 }
 
 private extension PaymentChooserViewController {
-    func paymentOptions(from sourceTypes: [SourceTypeValue]) -> [PaymentChooserOption] {
+    func paymentOptions(from sourceTypes: [SourceType]) -> [PaymentChooserOption] {
         let paymentOptions: [PaymentChooserOption] = sourceTypes.reduce(into: []) { (result, sourceType) in
             let paymentOptions = PaymentChooserOption.paymentOptions(for: sourceType)
             for paymentOption in paymentOptions where !result.contains(paymentOption) {

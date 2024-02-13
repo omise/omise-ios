@@ -328,8 +328,9 @@ extension OmiseError.APIErrorCode: Decodable {
         case "invalid_card":
             self = .invalidCard(try OmiseError.APIErrorCode.InvalidCardReason.parseInvalidCardReasonsFromMessage(message))
         case "bad_request":
-            let sourceParameter = decoder.userInfo[sourceParameterCodingsUserInfoKey] as? CreateSourceParameter
-            self = .badRequest(try OmiseError.APIErrorCode.BadRequestReason.parseBadRequestReasonsFromMessage(message, currency: sourceParameter?.currency))
+//            let sourceParameter = decoder.userInfo[sourceParameterCodingsUserInfoKey] as? CreateSourceParameter
+//            self = .badRequest(try OmiseError.APIErrorCode.BadRequestReason.parseBadRequestReasonsFromMessage(message, currency: sourceParameter?.currency))
+            self = .badRequest(try OmiseError.APIErrorCode.BadRequestReason.parseBadRequestReasonsFromMessage(message, currency: .main))
         case "authentication_failure":
             self = .authenticationFailure
         case "service_not_found":
@@ -536,9 +537,9 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         
-        let sourceParameter = decoder.userInfo[sourceParameterCodingsUserInfoKey] as? CreateSourceParameter
+//        let sourceParameter = decoder.userInfo[sourceParameterCodingsUserInfoKey] as? CreateSourceParameter
         
-        try self.init(message: try container.decode(String.self), currency: sourceParameter?.currency)
+        try self.init(message: try container.decode(String.self), currency: .main)
     }
     
     var defaultLocalizedErrorDescription: String? {

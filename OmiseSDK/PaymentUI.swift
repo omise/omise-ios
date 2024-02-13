@@ -6,14 +6,14 @@ let defaultPaymentChooserUISecondaryColor = UIColor.line
 
 internal protocol PaymentCreatorFlowSessionDelegate: AnyObject {
     func paymentCreatorFlowSessionWillCreateSource(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession)
-    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreateToken token: TokenOld)
-    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreatedSource source: SourceOLD)
+    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreateToken token: Token)
+    func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreatedSource source: Source)
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didFailWithError error: Error)
     func paymentCreatorFlowSessionDidCancel(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession)
 }
 
 internal class PaymentCreatorFlowSession {
-    var client: ClientOld?
+    var client: Client?
     var paymentAmount: Int64?
     var paymentCurrency: Currency?
 
@@ -24,7 +24,7 @@ internal class PaymentCreatorFlowSession {
         let waringMessageMessage: String
 
         if self.client == nil {
-            os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.client ?? "")
+//            os_log("Missing or invalid public key information - %{private}@", log: uiLogObject, type: .error, self.client ?? "")
             waringMessageTitle = "Missing public key information."
             waringMessageMessage = "Please set the public key before request token or source."
         } else if self.paymentAmount == nil || self.paymentCurrency == nil {
@@ -43,7 +43,7 @@ internal class PaymentCreatorFlowSession {
         return false
     }
 
-    func requestCreateSource(_ paymentInformation: PaymentInformation, completionHandler: ((RequestResult<SourceOLD>) -> Void)?) {
+    func requestCreateSource(_ payload: Source.Payload, completionHandler: ((Result<Source, Error>) -> Void)?) {
         guard validateRequiredProperties(), let client = self.client,
             let amount = paymentAmount, let currency = paymentCurrency else {
                 return
@@ -52,20 +52,21 @@ internal class PaymentCreatorFlowSession {
         os_log("Request to create a new source", log: uiLogObject, type: .info)
 
         delegate?.paymentCreatorFlowSessionWillCreateSource(self)
-        client.send(Request<SourceOLD>(paymentInformation: paymentInformation, amount: amount, currency: currency)) { (result) in
-            defer {
-                DispatchQueue.main.async {
-                    completionHandler?(result)
-                }
-            }
+        let sourcePaymentPayload = SourcePaymentPayload(
+            amount: paymentAmount ?? 0,
+            currency: paymentCurrency?.code ?? "",
+            details: payload
+        )
 
+        client.createSource(payload: sourcePaymentPayload, { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let source):
                 self.delegate?.paymentCreatorFlowSession(self, didCreatedSource: source)
             case .failure(let error):
                 self.delegate?.paymentCreatorFlowSession(self, didFailWithError: error)
             }
-        }
+        })
     }
 
     func requestToCancel() {
@@ -74,7 +75,7 @@ internal class PaymentCreatorFlowSession {
 }
 
 extension PaymentCreatorFlowSession: CreditCardFormViewControllerDelegate {
-    func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: TokenOld) {
+    func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
         delegate?.paymentCreatorFlowSession(self, didCreateToken: token)
     }
 
@@ -192,91 +193,6 @@ extension PaymentFormUIController where Self: UIViewController & PaymentChooserU
         formFields.forEach {
             $0.borderColor = currentSecondaryColor
             $0.placeholderTextColor = currentSecondaryColor
-        }
-    }
-}
-
-extension SourceTypeValue {
-
-    var installmentBrand: PaymentInformation.Installment.Brand? {
-        switch self {
-        case .installmentBAY:
-            return .bay
-        case .installmentMBB:
-            return .mbb
-        case .installmentFirstChoice:
-            return .firstChoice
-        case .installmentBBL:
-            return .bbl
-        case .installmentKTC:
-            return .ktc
-        case .installmentKBank:
-            return .kBank
-        case .installmentSCB:
-            return .scb
-        case .installmentTTB:
-            return .ttb
-        case .installmentUOB:
-            return .uob
-        default:
-            return nil
-        }
-    }
-
-    var isInstallmentSource: Bool {
-        switch self {
-        case .installmentBAY, .installmentMBB, .installmentFirstChoice, .installmentBBL,
-             .installmentKTC, .installmentKBank, .installmentSCB, .installmentTTB, .installmentUOB:
-            return true
-        default:
-            return false
-        }
-
-    }
-
-    var internetBankingSource: PaymentInformation.InternetBanking? {
-        switch self {
-        case .internetBankingBAY:
-            return .bay
-        case .internetBankingBBL:
-            return .bbl
-        default:
-            return nil
-        }
-    }
-
-    var isInternetBankingSource: Bool {
-        switch self {
-        case .internetBankingBAY, .internetBankingBBL:
-            return true
-        default:
-            return false
-        }
-    }
-
-    var mobileBankingSource: PaymentInformation.MobileBanking? {
-        switch self {
-        case .mobileBankingSCB:
-            return .scb
-        case .mobileBankingKBank:
-            return .kbank
-        case .mobileBankingBAY:
-            return .bay
-        case .mobileBankingBBL:
-            return .bbl
-        case .mobileBankingKTB:
-            return .ktb
-        default:
-            return nil
-        }
-    }
-
-    var isMobileBankingSource: Bool {
-        switch self {
-        case .mobileBankingSCB, .mobileBankingKBank, .mobileBankingBAY, .mobileBankingBBL, .mobileBankingKTB:
-            return true
-        default:
-            return false
         }
     }
 }

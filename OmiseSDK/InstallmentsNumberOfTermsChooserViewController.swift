@@ -3,10 +3,13 @@ import UIKit
 // swiftlint:disable:next type_name
 class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentSourceChooser, PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
-    
-    var installmentBrand: PaymentInformation.Installment.Brand? {
+
+    /*
+    var installmentBrand: Source.Payload.Installment {
         didSet {
-            numberOfTerms = installmentBrand.map(PaymentInformation.Installment.availableTerms(for:)).map(Array.init) ?? []
+//            switch installmentBrand.sourceType {
+            numberOfTerms = Source.Payload.Installment.availableTerms(for: installmentBrand.sourceType)
+//             installmentBrand.map(PaymentInformation.Installment.availableTerms(for:)).map(Array.init) ?? []
             
             let title: String
             switch installmentBrand {
@@ -85,7 +88,8 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
             navigationItem.title = title
         }
     }
-    
+     */
+
     var numberOfTerms: [Int] = [] {
         didSet {
             if isViewLoaded {
@@ -139,9 +143,9 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
-        guard let brand = installmentBrand else {
-            return
-        }
+//        guard let brand = installmentBrand else {
+//            return
+//        }
         
         let oldAccessoryView = cell?.accessoryView
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
@@ -151,10 +155,10 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
         view.isUserInteractionEnabled = false
         
         let numberOfTerms = self.numberOfTerms[indexPath.row]
-        flowSession?.requestCreateSource(.installment(PaymentInformation.Installment(brand: brand, numberOfTerms: numberOfTerms))) { _ in
-            cell?.accessoryView = oldAccessoryView
-            self.view.isUserInteractionEnabled = true
-        }
+//        flowSession?.requestCreateSource(.installment(PaymentInformation.Installment(brand: brand, numberOfTerms: numberOfTerms))) { _ in
+//            cell?.accessoryView = oldAccessoryView
+//            self.view.isUserInteractionEnabled = true
+//        }
     }
     
     private func applyPrimaryColor() {

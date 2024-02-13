@@ -1,12 +1,12 @@
 import UIKit
 import os
 
-class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<PaymentInformation.DuitNowOBW.Bank>,
+class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<Source.Payload.DuitNowOBW.Bank>,
                                                   PaymentSourceChooser,
                                                   PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
     
-    override var showingValues: [PaymentInformation.DuitNowOBW.Bank] {
+    override var showingValues: [Source.Payload.DuitNowOBW.Bank] {
         didSet {
             os_log("DuitNow OBW Bank Chooser: Showing options - %{private}@",
                    log: uiLogObject,
@@ -37,7 +37,7 @@ class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<Pa
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
-    override func staticIndexPath(forValue value: PaymentInformation.DuitNowOBW.Bank) -> IndexPath {
+    override func staticIndexPath(forValue value: Source.Payload.DuitNowOBW.Bank) -> IndexPath {
         switch value {
         case .affin:
             return IndexPath(row: 0, section: 0)
@@ -75,8 +75,6 @@ class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<Pa
             return IndexPath(row: 16, section: 0)
         case .uob:
             return IndexPath(row: 17, section: 0)
-        case .other:
-            preconditionFailure("This value is not supported for built-in chooser")
         }
     }
     
@@ -96,8 +94,8 @@ class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<Pa
         }
         
         let selectedBank = element(forUIIndexPath: indexPath)
-        let paymentInformation = PaymentInformation.DuitNowOBW(bank: selectedBank.description)
-        
+        let payload = Source.Payload.duitNowOBW(.init(bank: selectedBank))
+
         tableView.deselectRow(at: indexPath, animated: true)
         
         os_log("DuitNow OBW Bank List Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedBank.description)
@@ -109,7 +107,8 @@ class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<Pa
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
         
-        flowSession?.requestCreateSource(.duitNowOBW(paymentInformation)) { _ in
+        flowSession?.requestCreateSource(payload) { [weak self] _ in
+            guard let self = self else { return }
             cell.accessoryView = oldAccessoryView
             self.view.isUserInteractionEnabled = true
         }

@@ -26,7 +26,7 @@ extension Source.Payload {
         ///   - shipping: Shipping address
         ///   - billing: Billing address
         ///   - items: Items details
-        init(phoneNumber: String, name: String? = nil, email: String? = nil, shipping: Address, billing: Source.Payload.Address, items: [Source.Payload.Item]) {
+        init(phoneNumber: String, name: String? = nil, email: String? = nil, shipping: Address, billing: Source.Payload.Address?, items: [Source.Payload.Item]) {
             self.name = name
             self.email = email
             self.phoneNumber = phoneNumber

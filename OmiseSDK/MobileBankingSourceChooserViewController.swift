@@ -1,17 +1,17 @@
 import UIKit
 import os
 
-class MobileBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.MobileBanking>,
+class MobileBankingSourceChooserViewController: AdaptableStaticTableViewController<SourceType>,
                                                 PaymentSourceChooser,
                                                 PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
 
-    override var showingValues: [PaymentInformation.MobileBanking] {
+    override var showingValues: [SourceType] {
         didSet {
             os_log("Mobile Banking Chooser: Showing options - %{private}@",
                    log: uiLogObject,
                    type: .info,
-                   showingValues.map { $0.description }.joined(separator: ", "))
+                   showingValues.map { $0.rawValue }.joined(separator: ", "))
         }
     }
 
@@ -36,19 +36,19 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 
-    override func staticIndexPath(forValue value: PaymentInformation.MobileBanking) -> IndexPath {
+    override func staticIndexPath(forValue value: SourceType) -> IndexPath {
         switch value {
-        case .bay:
+        case .mobileBankingBAY:
             return IndexPath(row: 0, section: 0)
-        case .bbl:
+        case .mobileBankingBBL:
             return IndexPath(row: 1, section: 0)
-        case .kbank:
+        case .mobileBankingKBank:
             return IndexPath(row: 2, section: 0)
-        case .scb:
+        case .mobileBankingSCB:
             return IndexPath(row: 3, section: 0)
-        case .ktb:
+        case .mobileBankingKTB:
             return IndexPath(row: 4, section: 0)
-        case .other:
+        default:
             preconditionFailure("This value is not supported for the built-in chooser")
         }
     }
@@ -68,7 +68,7 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
         tableView.deselectRow(at: indexPath, animated: true)
         let bank = element(forUIIndexPath: indexPath)
 
-        os_log("Mobile Banking Chooser: %{private}@ was selected", log: uiLogObject, type: .info, bank.description)
+        os_log("Mobile Banking Chooser: %{private}@ was selected", log: uiLogObject, type: .info, bank.rawValue)
 
         let oldAccessoryView = cell?.accessoryView
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
@@ -77,10 +77,10 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
 
-        flowSession?.requestCreateSource(.mobileBanking(bank)) { _ in
-            cell?.accessoryView = oldAccessoryView
-            self.view.isUserInteractionEnabled = true
-        }
+//        flowSession?.requestCreateSource(.mobileBanking(bank)) { _ in
+//            cell?.accessoryView = oldAccessoryView
+//            self.view.isUserInteractionEnabled = true
+//        }
     }
 
     private func applyPrimaryColor() {

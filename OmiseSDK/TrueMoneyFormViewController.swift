@@ -4,7 +4,7 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
     
     var flowSession: PaymentCreatorFlowSession?
     
-    private var client: ClientOld?
+    private var client: Client?
     
     private var isInputDataValid: Bool {
         return formFields.allSatisfy { $0.isValid }
@@ -112,12 +112,12 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
             return
         }
         
-        let trueMoneyInformation = PaymentInformation.TrueMoney(phoneNumber: phoneNumber)
+        let payload = Source.Payload.TrueMoneyWallet(phoneNumber: phoneNumber)
         requestingIndicatorView.startAnimating()
         view.isUserInteractionEnabled = false
         view.tintAdjustmentMode = .dimmed
         submitButton.isEnabled = false
-        flowSession?.requestCreateSource(.truemoney(trueMoneyInformation)) { _ in
+        flowSession?.requestCreateSource(.trueMoneyWallet(payload)) { _ in
             self.requestingIndicatorView.stopAnimating()
             self.view.isUserInteractionEnabled = true
             self.view.tintAdjustmentMode = .automatic

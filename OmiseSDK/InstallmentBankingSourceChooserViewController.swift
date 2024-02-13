@@ -2,17 +2,17 @@ import UIKit
 import os
 
 // swiftlint:disable:next type_name
-class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.Installment.Brand>,
+class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<SourceType>,
                                                      PaymentSourceChooser,
                                                      PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
     
-    override var showingValues: [PaymentInformation.Installment.Brand] {
+    override var showingValues: [SourceType] {
         didSet {
             os_log("Installment Brand Chooser: Showing options - %{private}@",
                    log: uiLogObject,
                    type: .info,
-                   showingValues.map { $0.description }.joined(separator: ", "))
+                   showingValues.map { $0.rawValue }.joined(separator: ", "))
         }
     }
     
@@ -37,31 +37,31 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
-    override func staticIndexPath(forValue value: PaymentInformation.Installment.Brand) -> IndexPath {
+    override func staticIndexPath(forValue value: SourceType) -> IndexPath {
         switch value {
-        case .bbl:
+        case .installmentBBL:
             return IndexPath(row: 0, section: 0)
-        case .kBank:
+        case .installmentKBank:
             return IndexPath(row: 1, section: 0)
-        case .bay:
+        case .installmentBAY:
             return IndexPath(row: 2, section: 0)
-        case .firstChoice:
+        case .installmentFirstChoice:
             return IndexPath(row: 3, section: 0)
-        case .ktc:
+        case .installmentKTC:
             return IndexPath(row: 4, section: 0)
-        case .mbb:
+        case .installmentMBB:
             return IndexPath(row: 5, section: 0)
-        case .scb:
+        case .installmentSCB:
             return IndexPath(row: 6, section: 0)
-        case .ttb:
+        case .installmentTTB:
             return IndexPath(row: 7, section: 0)
-        case .uob:
+        case .installmentUOB:
             return IndexPath(row: 8, section: 0)
-        case .other:
+        default:
             preconditionFailure("This value is not supported for built-in chooser")
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
@@ -72,14 +72,15 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
         return cell
     }
     
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) else {
             return
         }
         
         let selectedBrand = element(forUIIndexPath: indexPath)
-        os_log("Installment Brand Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedBrand.description)
-        
+//        os_log("Installment Brand Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedBrand.description)
+
         performSegue(withIdentifier: "GoToInstallmentTermsChooserSegue", sender: cell)
     }
     
@@ -87,14 +88,16 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
         guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else {
             return
         }
-        let selectedBrand = element(forUIIndexPath: indexPath)
-        if segue.identifier == "GoToInstallmentTermsChooserSegue",
-            let installmentTermsChooserViewController = segue.destination as? InstallmentsNumberOfTermsChooserViewController {
-            installmentTermsChooserViewController.installmentBrand = selectedBrand
-            installmentTermsChooserViewController.flowSession = self.flowSession
-            installmentTermsChooserViewController.preferredPrimaryColor = self.preferredPrimaryColor
-            installmentTermsChooserViewController.preferredSecondaryColor = self.preferredSecondaryColor
-        }
+        let sourceType = element(forUIIndexPath: indexPath)
+        let terms = Source.Payload.Installment.availableTerms(for: sourceType)
+
+//        if segue.identifier == "GoToInstallmentTermsChooserSegue",
+//            let installmentTermsChooserViewController = segue.destination as? InstallmentsNumberOfTermsChooserViewController {
+//            installmentTermsChooserViewController.installmentBrand = Source.Payload.Installment.init(installmentTerm: <#T##Int#>, zeroInterestInstallments: <#T##Bool?#>, sourceType: <#T##SourceType#>)
+//            installmentTermsChooserViewController.flowSession = self.flowSession
+//            installmentTermsChooserViewController.preferredPrimaryColor = self.preferredPrimaryColor
+//            installmentTermsChooserViewController.preferredSecondaryColor = self.preferredSecondaryColor
+//        }
     }
     
     private func applyPrimaryColor() {

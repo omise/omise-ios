@@ -98,7 +98,7 @@ struct SkippingKeyCodingKeys<Key: CodingKey>: CodingKey {
     }
 }
 
-extension SourceTypeValue {
+extension SourceType {
     var sourceTypePrefix: String {
         switch self {
         case .internetBankingBAY, .internetBankingBBL:
@@ -122,7 +122,7 @@ extension SourceTypeValue {
             return "promptpay"
         case .payNow:
             return "paynow"
-        case .trueMoney, .trueMoneyJumpApp:
+        case .trueMoneyWallet, .trueMoneyJumpApp:
             return "truemoney"
         case .pointsCiti:
             return "points"

@@ -1,7 +1,6 @@
 import Foundation
 import os
 
-// TODO: Add Unit Tests
 public class Client {
     public typealias RequestResultClosure<T: Decodable, E: Error> = (Result<T, E>) -> Void
 
@@ -53,7 +52,7 @@ public class Client {
     }
 
     /// Sends Create a Source API request with given Source Payload
-    public func createSource(payload: SourcePaymentPayload, _ completion: @escaping RequestResultClosure<Token, Error>) {
+    public func createSource(payload: SourcePaymentPayload, _ completion: @escaping RequestResultClosure<Source, Error>) {
         apiRequest(api: OmiseAPI.createSource(payload: payload), completion: completion)
     }
 }

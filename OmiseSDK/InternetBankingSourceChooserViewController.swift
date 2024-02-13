@@ -2,17 +2,17 @@ import UIKit
 import os
 
 // swiftlint:disable:next type_name
-class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<PaymentInformation.InternetBanking>,
+class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<SourceType>,
                                                   PaymentSourceChooser,
                                                   PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
     
-    override var showingValues: [PaymentInformation.InternetBanking] {
+    override var showingValues: [SourceType] {
         didSet {
             os_log("Internet Banking Chooser: Showing options - %{private}@",
                    log: uiLogObject,
                    type: .info,
-                   showingValues.map { $0.description }.joined(separator: ", "))
+                   showingValues.map { $0.rawValue }.joined(separator: ", "))
         }
     }
     
@@ -37,13 +37,13 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
-    override func staticIndexPath(forValue value: PaymentInformation.InternetBanking) -> IndexPath {
+    override func staticIndexPath(forValue value: SourceType) -> IndexPath {
         switch value {
-        case .bbl:
+        case .internetBankingBBL:
             return IndexPath(row: 0, section: 0)
-        case .bay:
+        case .internetBankingBAY:
             return IndexPath(row: 1, section: 0)
-        case .other:
+        default:
             preconditionFailure("This value is not supported for the built-in chooser")
         }
     }
@@ -63,8 +63,8 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         tableView.deselectRow(at: indexPath, animated: true)
         let bank = element(forUIIndexPath: indexPath)
         
-        os_log("Internet Banking Chooser: %{private}@ was selected", log: uiLogObject, type: .info, bank.description)
-        
+        os_log("Internet Banking Chooser: %{private}@ was selected", log: uiLogObject, type: .info, bank.rawValue)
+
         let oldAccessoryView = cell?.accessoryView
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
         loadingIndicator.color = currentSecondaryColor
@@ -72,10 +72,10 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
         
-        flowSession?.requestCreateSource(.internetBanking(bank)) { _ in
-            cell?.accessoryView = oldAccessoryView
-            self.view.isUserInteractionEnabled = true
-        }
+//        flowSession?.requestCreateSource(.installment(.init(installmentTerm: ter, zeroInterestInstallments: <#T##Bool?#>, sourceType: <#T##SourceType#>)), completionHandler: <#T##((Result<Source, Error>) -> Void)?#>)
+//            cell?.accessoryView = oldAccessoryView
+//            self.view.isUserInteractionEnabled = true
+//        }
     }
     
     private func applyPrimaryColor() {

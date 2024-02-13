@@ -1,7 +1,7 @@
 import UIKit
 import os
 
-class FPXBankChooserViewController: AdaptableDynamicTableViewController<CapabilityOld.Backend.Bank>, PaymentSourceChooser, PaymentChooserUI {
+class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capability.PaymentMethod.Bank>, PaymentSourceChooser, PaymentChooserUI {
     var email: String?
     var flowSession: PaymentCreatorFlowSession?
     private let defaultImage: String = "FPX/unknown"
@@ -12,7 +12,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         comment: "A descriptive text telling the user when there's no banks available"
     )
 
-    override var showingValues: [CapabilityOld.Backend.Bank] {
+    override var showingValues: [Capability.PaymentMethod.Bank] {
         didSet {
             os_log("FPX Bank Chooser: Showing options - %{private}@",
                    log: uiLogObject,
@@ -72,7 +72,11 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         }
 
         let selectedBank = element(forUIIndexPath: indexPath)
-        let paymentInformation = PaymentInformation.FPX(bank: selectedBank.code, email: email)
+        guard let bank = Source.Payload.FPX.Bank(rawValue: selectedBank.code) else {
+            return
+        }
+
+        let payload = Source.Payload.fpx(.init(bank: bank, email: email))
 
         tableView.deselectRow(at: indexPath, animated: true)
 
@@ -85,7 +89,8 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
 
-        flowSession?.requestCreateSource(.fpx(paymentInformation)) { _ in
+        flowSession?.requestCreateSource(payload) { [weak self] _ in
+            guard let self = self else { return }
             cell.accessoryView = oldAccessoryView
             self.view.isUserInteractionEnabled = true
         }

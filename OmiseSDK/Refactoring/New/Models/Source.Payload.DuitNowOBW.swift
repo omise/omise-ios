@@ -25,7 +25,11 @@ extension Source.Payload {
 
 extension Source.Payload.DuitNowOBW {
     /// Bank code selected by customer
-    public enum Bank: String, Codable {
+    public enum Bank: String, Codable, CaseIterable, CustomStringConvertible {
+        public var description: String {
+            self.rawValue
+        }
+
         /// Affin Bank
         case affin
         /// Alliance Bank (Personal)

@@ -79,16 +79,16 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
             onComplete()
             return
         }
+        let shippingAddress = Source.Payload.Address(
+            country: viewContext[.country],
+            city: viewContext[.city],
+            postalCode: viewContext[.postalCode],
+            state: viewContext[.state],
+            street1: viewContext[.street1],
+            street2: viewContext[.street2]
+        )
 
-        let shippingAddress: PaymentInformation.Atome.ShippingAddress =
-            .init(country: viewContext[.country],
-                  city: viewContext[.city],
-                  postalCode: viewContext[.postalCode],
-                  state: viewContext[.state],
-                  street1: viewContext[.street1],
-                  street2: viewContext[.street2])
-
-        let items: [PaymentInformation.Atome.Item] = [
+        let items: [Source.Payload.Item] = [
             .init(
                 sku: "3427842",
                 category: "Shoes",
@@ -101,17 +101,19 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
             )
         ]
 
-        let atomeData = PaymentInformation.Atome(
-            phoneNumber: viewContext[.phoneNumber],
-            name: viewContext[.name],
-            email: viewContext[.email],
-            shippingAddress: shippingAddress,
-            items: items
+        let atomeData = Source.Payload.atome(
+            .init(
+                phoneNumber: viewContext[.phoneNumber],
+                shipping: shippingAddress,
+                billing: nil,
+                items: items
+            )
         )
 
-        flowSession.requestCreateSource(.atome(atomeData)) { _ in
-            onComplete()
-        }
+//        SourcePaymentPayload(amount: <#T##Int64#>, currency: <#T##String#>, details: <#T##Source.Payload#>)
+//        flowSession.requestCreateSource(.atome(atomeData)) { _ in
+//            onComplete()
+//        }
 
     }
 }

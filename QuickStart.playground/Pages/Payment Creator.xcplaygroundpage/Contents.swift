@@ -31,10 +31,10 @@ extension CheckoutViewController: PaymentCreatorControllerDelegate {
     
     switch payment {
     case .token(let token):
-      title = "TokenOld"
+      title = "Token"
       message = token.id
     case .source(let source):
-      title = "SourceOLD"
+      title = "Source"
       message = source.id
     }
     print("\(title) created: \(message)")
