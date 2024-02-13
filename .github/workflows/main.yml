@@ -21,7 +21,7 @@ jobs:
     env:
         BUILD_WRAPPER_OUT_DIR: buildwrapper # Directory where build-wrapper output will be placed
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Run xcodebuild with tests
       run: xcodebuild -project dev.xcodeproj/ -scheme OmiseSDK -derivedDataPath Build/ -destination 'platform=iOS Simulator,name=iPhone 11,OS=16.2' -enableCodeCoverage YES clean build test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
