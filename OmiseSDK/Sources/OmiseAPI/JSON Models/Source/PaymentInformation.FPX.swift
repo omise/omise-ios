@@ -1,6 +1,6 @@
 import Foundation
 
-extension Source.Details {
+extension PaymentInformation {
     /// Payment for Malaysia FPX payment method
     /// https://docs.opn.ooo/fpx
     public struct FPX: Equatable {
@@ -14,21 +14,21 @@ extension Source.Details {
         /// - Parameters:
         ///   - bank: Bank code selected by customer
         ///   - email: Customer email
-        public init(bank: Source.Details.FPX.Bank, email: String?) {
+        public init(bank: PaymentInformation.FPX.Bank, email: String?) {
             self.bank = bank
             self.email = email
         }
     }
 }
 
-extension Source.Details.FPX: SourceTypeDetailsProtocol {
+extension PaymentInformation.FPX: SourceTypeContainerProtocol {
     /// Source payment method identifier
     static let sourceType: SourceType = .fpx
     var sourceType: SourceType { Self.sourceType }
 }
 
 /// Encoding/decoding JSON string
-extension Source.Details.FPX: Codable {
+extension PaymentInformation.FPX: Codable {
     /// Decode DuitNowOBW object from JSON string
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -37,7 +37,7 @@ extension Source.Details.FPX: Codable {
     }
 }
 
-extension Source.Details.FPX {
+extension PaymentInformation.FPX {
     /// Bank code selected by customer
     public enum Bank: String, Codable {
         /// Affin Bank

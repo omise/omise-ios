@@ -1,21 +1,21 @@
 import Foundation
 
-extension Source.Details {
+extension PaymentInformation {
     /// `Shipping` or `Billing` address
     /// https://docs.opn.ooo/sources-api
     public struct Address: Equatable {
         /// Address country as two-letter ISO 3166 code
-        let country: String
+        public let country: String
         /// Address city
-        let city: String
+        public let city: String
         /// Address postal code
-        let postalCode: String
+        public let postalCode: String
         /// Address state
-        let state: String
+        public let state: String
         /// Address street #1
-        let street1: String
+        public let street1: String
         /// Address street #2
-        let street2: String?
+        public let street2: String?
 
         /// Creates a new Shipping or Billing address source with the given details
         ///
@@ -26,7 +26,7 @@ extension Source.Details {
         ///   - state: Address state
         ///   - street1: Address street #1
         ///   - street2: Address street #2
-        init(country: String, city: String, postalCode: String, state: String, street1: String, street2: String?) {
+        public init(country: String, city: String, postalCode: String, state: String, street1: String, street2: String?) {
             self.country = country
             self.city = city
             self.postalCode = postalCode
@@ -37,7 +37,7 @@ extension Source.Details {
     }
 }
 
-extension Source.Details.Address: Codable {
+extension PaymentInformation.Address: Codable {
     private enum CodingKeys: String, CodingKey {
         case country
         case city

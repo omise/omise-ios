@@ -1,21 +1,21 @@
 import Foundation
 
-extension Source.Details {
+extension PaymentInformation {
     /// Payment for `Atome App Redirection` payment method
     /// https://docs.opn.ooo/atome
     public struct Atome: Equatable {
         /// Customer mobile number with a country code (example: +66876543210 or 0876543210)
-        let phoneNumber: String
+        public let phoneNumber: String
         /// Customer name
-        let name: String?
+        public let name: String?
         /// Customer email
-        let email: String?
+        public let email: String?
         /// Shipping address
-        let shipping: Source.Details.Address
+        public let shipping: PaymentInformation.Address
         /// Billing address
-        let billing: Source.Details.Address?
+        public let billing: PaymentInformation.Address?
         /// Information about items included in the order
-        let items: [Source.Details.Item]
+        public let items: [PaymentInformation.Item]
 
         /// Creates a new Atome payment method payload
         ///
@@ -26,7 +26,7 @@ extension Source.Details {
         ///   - shipping: Shipping address
         ///   - billing: Billing address
         ///   - items: Items details
-        init(phoneNumber: String, name: String? = nil, email: String? = nil, shipping: Address, billing: Source.Details.Address?, items: [Source.Details.Item]) {
+        public init(phoneNumber: String, name: String? = nil, email: String? = nil, shipping: Address, billing: PaymentInformation.Address?, items: [PaymentInformation.Item]) {
             self.name = name
             self.email = email
             self.phoneNumber = phoneNumber
@@ -37,14 +37,14 @@ extension Source.Details {
     }
 }
 
-extension Source.Details.Atome: SourceTypeDetailsProtocol {
+extension PaymentInformation.Atome: SourceTypeContainerProtocol {
     /// Payment method identifier
-    static let sourceType: SourceType = .atome
-    var sourceType: SourceType { Self.sourceType }
+    public static let sourceType: SourceType = .atome
+    public var sourceType: SourceType { Self.sourceType }
 }
 
 /// Encoding/decoding JSON string
-extension Source.Details.Atome: Codable {
+extension PaymentInformation.Atome: Codable {
     private enum CodingKeys: String, CodingKey {
         case name
         case email

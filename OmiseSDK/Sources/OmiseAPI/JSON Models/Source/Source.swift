@@ -1,6 +1,6 @@
 import Foundation
 
-/// Represents an Omise Source object
+/// Represents Source JSON object for communication with Omise API
 /// Sources are methods for accepting payments through non-credit-card channels
 /// https://docs.opn.ooo/sources-api
 public struct Source {
@@ -12,8 +12,8 @@ public struct Source {
     let amount: Int64
     /// Currency for source as three-letter ISO 4217 code
     let currency: String
-    /// The payment details of this source describes how the payment is processed
-    let paymentInformation: Source.Details
+    /// The payment information of this source describes how the payment is processed
+    let paymentInformation: PaymentInformation
     /// The payment flow payers need to go through to complete the payment
     public let flow: Flow
 
@@ -50,6 +50,6 @@ extension Source: Decodable {
         currency = try container.decode(String.self, forKey: .currency)
         amount = try container.decode(Int64.self, forKey: .amount)
         isLiveMode = try container.decode(Bool.self, forKey: .isLiveMode)
-        paymentInformation = try Source.Details(from: decoder)
+        paymentInformation = try PaymentInformation(from: decoder)
     }
 }

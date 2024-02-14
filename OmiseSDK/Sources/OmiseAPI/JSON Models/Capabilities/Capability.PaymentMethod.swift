@@ -1,6 +1,7 @@
 import Foundation
 
 extension Capability {
+    /// Represents Capability.PaymentMethod JSON object for communication with Omise API
     public struct PaymentMethod: Codable, Equatable {
         public let name: String
         public let currencies: Set<String>

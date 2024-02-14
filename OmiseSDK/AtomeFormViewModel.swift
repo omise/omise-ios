@@ -79,7 +79,7 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
             onComplete()
             return
         }
-        let shippingAddress = Source.Details.Address(
+        let shippingAddress = PaymentInformation.Address(
             country: viewContext[.country],
             city: viewContext[.city],
             postalCode: viewContext[.postalCode],
@@ -88,7 +88,7 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
             street2: viewContext[.street2]
         )
 
-        let items: [Source.Details.Item] = [
+        let items: [PaymentInformation.Item] = [
             .init(
                 sku: "3427842",
                 category: "Shoes",
@@ -101,7 +101,7 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
             )
         ]
 
-        let atomePayment = Source.Details.atome(
+        let atomePayment = PaymentInformation.atome(
             .init(
                 phoneNumber: viewContext[.phoneNumber],
                 shipping: shippingAddress,

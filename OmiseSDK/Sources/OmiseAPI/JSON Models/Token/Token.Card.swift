@@ -1,7 +1,8 @@
 import Foundation
 
 extension Token {
-    public struct Card: Decodable {
+    /// Represents Token.Card JSON object for communication with Omise API
+    public struct Card {
         /// Card's ID.
         public let id: String
         /// Boolean flag indicating wether this card is a live card or a test card.
@@ -33,22 +34,24 @@ extension Token {
         public let city: String?
         /// Postal code.
         public let postalCode: String?
+    }
+}
 
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case isLiveMode = "livemode"
-            case brand
-            case bank
-            case name
-            case lastDigits = "last_digits"
-            case expirationMonth = "expiration_month"
-            case expirationYear = "expiration_year"
-            case fingerprint
-            case financing
-            case securityCodeCheck = "security_code_check"
-            case countryCode = "country"
-            case city
-            case postalCode = "postal_code"
-        }
+extension Token.Card: Decodable {
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case isLiveMode = "livemode"
+        case brand
+        case bank
+        case name
+        case lastDigits = "last_digits"
+        case expirationMonth = "expiration_month"
+        case expirationYear = "expiration_year"
+        case fingerprint
+        case financing
+        case securityCodeCheck = "security_code_check"
+        case countryCode = "country"
+        case city
+        case postalCode = "postal_code"
     }
 }

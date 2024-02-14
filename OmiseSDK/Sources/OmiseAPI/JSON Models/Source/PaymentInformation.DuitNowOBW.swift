@@ -1,6 +1,6 @@
 import Foundation
 
-extension Source.Details {
+extension PaymentInformation {
     /// Payment for `DuitNow Online Banking/Wallets` payment method
     /// https://docs.opn.ooo/duitnow-obw
     public struct DuitNowOBW: Equatable {
@@ -11,20 +11,20 @@ extension Source.Details {
         ///
         /// - Parameters:
         ///   - bank: Bank code selected by customer
-        public init(bank: Source.Details.DuitNowOBW.Bank) {
+        public init(bank: PaymentInformation.DuitNowOBW.Bank) {
             self.bank = bank
         }
     }
 }
 
 /// Payment method identifier
-extension Source.Details.DuitNowOBW: SourceTypeDetailsProtocol {
-    static let sourceType: SourceType = .duitNowOBW
-    var sourceType: SourceType { Self.sourceType }
+extension PaymentInformation.DuitNowOBW: SourceTypeContainerProtocol {
+    public static let sourceType: SourceType = .duitNowOBW
+    public var sourceType: SourceType { Self.sourceType }
 }
 
 /// Encoding/decoding JSON string
-extension Source.Details.DuitNowOBW: Codable {
+extension PaymentInformation.DuitNowOBW: Codable {
     // Decode DuitNowOBW object from JSON string
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -32,7 +32,7 @@ extension Source.Details.DuitNowOBW: Codable {
     }
 }
 
-extension Source.Details.DuitNowOBW {
+extension PaymentInformation.DuitNowOBW {
     /// Bank code selected by customer
     public enum Bank: String, Codable, CaseIterable, CustomStringConvertible {
         public var description: String {

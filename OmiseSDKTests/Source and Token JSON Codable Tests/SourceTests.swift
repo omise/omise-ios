@@ -7,7 +7,7 @@ import XCTest
 class SourceTests: XCTestCase {
 
     /// Test Source.Payload's Codable protocol
-    func validatePayloadCodable(_ payload: Source.Details) throws {
+    func validatePayloadCodable(_ payload: PaymentInformation) throws {
         let encodedPayload = try JSONEncoder().encode(payload)
         let encodedPayloadJson = String(data: encodedPayload, encoding: .utf8) ?? ""
         if payload.sourceType == .duitNowOBW {
@@ -15,7 +15,7 @@ class SourceTests: XCTestCase {
             print("")
         }
 
-        let decodedPayload: Source.Details = try parse(jsonString: encodedPayloadJson)
+        let decodedPayload: PaymentInformation = try parse(jsonString: encodedPayloadJson)
         XCTAssertEqual(payload, decodedPayload)
     }
 
@@ -203,7 +203,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeBarcodeAlipay() throws {
         let source: Source = try sampleFromJSONBy(.source(type: .barcodeAlipay))
-        let payload = Source.Details.BarcodeAlipay(
+        let payload = PaymentInformation.BarcodeAlipay(
             barcode: "1234567890123456",
             storeID: "1",
             storeName: "Main Store",
@@ -230,11 +230,11 @@ class SourceTests: XCTestCase {
     }
     //  swiftlint:disable:next function_body_length
     func testDecodeAtome() throws {
-        let payload = Source.Details.Atome(
+        let payload = PaymentInformation.Atome(
             phoneNumber: "+12312312312",
             name: "Test Data",
             email: "test@omise.co",
-            shipping: Source.Details.Address(
+            shipping: PaymentInformation.Address(
                 country: "TH",
                 city: "Bangkok",
                 postalCode: "10330",
@@ -242,7 +242,7 @@ class SourceTests: XCTestCase {
                 street1: "444 Phaya Thai Rd",
                 street2: "Khwaeng Wang Mai, Pathum Wan"
             ),
-            billing: Source.Details.Address(
+            billing: PaymentInformation.Address(
                 country: "TH",
                 city: "Bangkok",
                 postalCode: "10100",
@@ -251,7 +251,7 @@ class SourceTests: XCTestCase {
                 street2: nil
             ),
             items: [
-                Source.Details.Item(
+                PaymentInformation.Item(
                     sku: "3427842",
                     category: "Shoes",
                     name: "Prada shoes",
@@ -261,7 +261,7 @@ class SourceTests: XCTestCase {
                     imageUri: "omise.co/product/shoes/image",
                     brand: "Gucci"
                 ),
-                Source.Details.Item(
+                PaymentInformation.Item(
                     sku: "3427843",
                     category: "Shoes",
                     name: "Skate Shoes",
@@ -286,7 +286,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeDuitNowOBW() throws {
         let source: Source = try sampleFromJSONBy(.source(type: .duitNowOBW))
-        let payload = Source.Details.DuitNowOBW(bank: .affin)
+        let payload = PaymentInformation.DuitNowOBW(bank: .affin)
         XCTAssertEqual(source.id, "src_5pqcjr6tu4xvqut5nh5")
         XCTAssertTrue(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .duitNowOBW(payload))
@@ -299,7 +299,7 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentBay() throws {
         let sourceType: SourceType = .installmentBAY
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = Source.Details.Installment(
+        let payload = PaymentInformation.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
@@ -316,7 +316,7 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentBBL() throws {
         let sourceType: SourceType = .installmentBBL
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = Source.Details.Installment(
+        let payload = PaymentInformation.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
@@ -333,7 +333,7 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentFirstChoice() throws {
         let sourceType: SourceType = .installmentFirstChoice
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = Source.Details.Installment(
+        let payload = PaymentInformation.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
@@ -351,7 +351,7 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentKBank() throws {
         let sourceType: SourceType = .installmentKBank
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = Source.Details.Installment(
+        let payload = PaymentInformation.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
@@ -368,7 +368,7 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentKTC() throws {
         let sourceType: SourceType = .installmentKTC
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = Source.Details.Installment(
+        let payload = PaymentInformation.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
@@ -385,7 +385,7 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentMBB() throws {
         let sourceType: SourceType = .installmentMBB
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = Source.Details.Installment(
+        let payload = PaymentInformation.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
@@ -402,7 +402,7 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentTTB() throws {
         let sourceType: SourceType = .installmentTTB
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = Source.Details.Installment(
+        let payload = PaymentInformation.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
@@ -419,7 +419,7 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentUOB() throws {
         let sourceType: SourceType = .installmentUOB
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = Source.Details.Installment(
+        let payload = PaymentInformation.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
@@ -435,7 +435,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeTrueMoneyWallet() throws {
         let source: Source = try sampleFromJSONBy(.source(type: .trueMoneyWallet))
-        let payload = Source.Details.TrueMoneyWallet(phoneNumber: "0123456789")
+        let payload = PaymentInformation.TrueMoneyWallet(phoneNumber: "0123456789")
         XCTAssertEqual(source.id, "src_test_5jhmesi7s4at1qctloy")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .trueMoneyWallet(payload))
@@ -531,7 +531,7 @@ class SourceTests: XCTestCase {
     func testDecodeEContext() throws {
         let sourceType: SourceType = .eContext
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = Source.Details.EContext(
+        let payload = PaymentInformation.EContext(
             name: "ヤマダタロウ",
             email: "test@opn.com",
             phoneNumber: "01234567891"
@@ -548,7 +548,7 @@ class SourceTests: XCTestCase {
     func testDecodeFPX() throws {
         let sourceType: SourceType = .fpx
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = Source.Details.FPX(
+        let payload = PaymentInformation.FPX(
             bank: .uob,
             email: "support@omise.co"
         )

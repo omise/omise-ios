@@ -120,12 +120,12 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
                 return
         }
         
-        let eContextInformation = Source.Details.EContext(name: fullname, email: email, phoneNumber: phoneNumber)
+        let eContextInformation = PaymentInformation.EContext(name: fullname, email: email, phoneNumber: phoneNumber)
         requestingIndicatorView.startAnimating()
         view.isUserInteractionEnabled = false
         view.tintAdjustmentMode = .dimmed
         submitButton.isEnabled = false
-        flowSession?.requestCreateSource(Source.Details.eContext(eContextInformation)) { _ in
+        flowSession?.requestCreateSource(PaymentInformation.eContext(eContextInformation)) { _ in
             self.requestingIndicatorView.stopAnimating()
             self.view.isUserInteractionEnabled = true
             self.view.tintAdjustmentMode = .automatic
