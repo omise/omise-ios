@@ -52,13 +52,13 @@ internal class PaymentCreatorFlowSession {
         os_log("Request to create a new source", log: uiLogObject, type: .info)
 
         delegate?.paymentCreatorFlowSessionWillCreateSource(self)
-        let sourcePaymentPayload = CreateSourcePayload(
+        let sourcePayment = CreateSourcePayload(
             amount: amount,
             currency: currency.code,
             details: payload
         )
 
-        client.createSource(payload: sourcePaymentPayload) { [weak self] result in
+        client.createSource(payload: sourcePayment) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let source):

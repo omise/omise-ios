@@ -83,7 +83,7 @@ data. You can tokenize card data by creating and initializing
 a `CreateTokenPayload.Card` as follows:
 
 ```swift
-let tokenPayload = CreateTokenPayload.Card(
+let createTokenPayload = CreateTokenPayload.Card(
     name: "JOHN DOE",
     number: "4242424242424242",
     expirationMonth: 11,
@@ -94,45 +94,32 @@ let tokenPayload = CreateTokenPayload.Card(
 
 #### Creating a payment source
 
-Opn Payments now supports many payment methods other than cards.  You
+Opn Payments now supports many payment methods other than cards. You
 may request a payment with one of those supported payment methods from
-a customer by calling the `CreateSourceParameter` API. You need to specify
+a customer by calling the `CreateSource` API. You need to specify
 the parameters (e.g. payment amount and currency) of the source you
-want to create by creating and initializing a `Request<Source>` with
+want to create by creating and initializing a `CreateSourcePayload` with
 the `Payment Information` object:
 
 ```swift
-let paymentInformation = PaymentInformation.internetBanking(.bbl) // Bangkok Bank Internet Banking payment method
-let sourceParameter = CreateSourceParameter(
-    paymentInformation: paymentInformation,
+let createSourcePayload = CreateSourcePayload(
     amount: amount,
-    currency: currency
+    currency: currency,
+    details: .sourceType(.internetBankingBBL) // Bangkok Bank Internet Banking payment method
 )
-
-let request = Request<Source>(parameter: sourceParameter)
 ```
 
 #### Sending the request
 
 Whether you are charging a source or a card, sending the
-request is the same.  Create a new `requestTask` on a `Client` object
-with the completion handler block and call `resume` on the
-requestTask:
-
+request is the same.  Use `Client` object to perform one off API calls
+with the completion handler block
 ```swift
-let requestTask = client.requestTask(with: request, completionHandler: completionHandler)
-requestTask.resume()
-```
-
-You may also send a request by calling the
-`send(_:completionHandler:)` method on the `Client`.
-
-```swift
-client.send(request) { [weak self] (result) in
-  guard let s = self else { return }
-
-  // switch result { }
-}
+client.createToken(payload: createTokenPayload, completionHandler)
+client.createSource(payload: createSourcePayload, completionHandler)
+client.capability(completionHandler)
+client.token(tokenID: "tokenID", completionHandler)
+client.observeChargeStatus(completionHandler)
 ```
 
 #### Creating the completion handler
@@ -142,9 +129,9 @@ A simple completion handler for a token looks as follows.
 ``` swift
 func completionHandler(tokenResult: Result<Token, Error>) -> Void {
     switch tokenResult {
-    case .success(let value):
+    case .success(let token):
         // do something with Token id
-        print(value.id)
+        print(token.id)
     case .failure(let error):
         print(error)
     }
@@ -368,9 +355,7 @@ extension ViewController: OmiseAuthorizingPaymentViewControllerDelegate {
 
 ## Objective-C compatibility
 
-Opn Payments iOS SDK comes with full Objective-C support. The SDK is designed with the Swift language as a first-class citizen, and not only adopts Swift-only features in the SDK, but also provides an Objective-C counterpart for those features.
-If you found an API that is not available in Objective-C, please don't hestitate [to open an issue](https://github.com/omise/omise-ios/issues/new).
-
+This version of Opn Payments iOS SDK does not support Objective-C. [Old version with full Objective-C support](https://github.com/omise/omise-ios/tree/support/v4.x.x)
 
 ## Contributing
 

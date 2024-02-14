@@ -34,6 +34,18 @@ public class Client {
         }
     }
 
+    /// Sends Create a Source API request with given Source Payment
+    public func createSource(payload: CreateSourcePayload, _ completion: @escaping RequestResultClosure<Source, Error>) {
+        performRequest(api: OmiseAPI.createSource(payload: payload), completion: completion)
+    }
+
+    /// Send Create a Token API request with given Card Payment
+    /// - returns Created Token
+    public func createToken(payload: CreateTokenPayload.Card, _ completion: @escaping RequestResultClosure<Token, Error>) {
+        let apiPayload = CreateTokenPayload(card: payload)
+        performRequest(api: OmiseAPI.createToken(payload: apiPayload), completion: completion)
+    }
+
     /// Perform Token API request with given Token ID
     /// - returns Token
     func token(tokenID: String, _ completion: @escaping RequestResultClosure<Token, Error>) {
@@ -51,17 +63,5 @@ public class Client {
             maxAttempt: pollingAttemptsCount,
             completion
         )
-    }
-
-    /// Send Create a Token API request with given Card Payment
-    /// - returns Created Token
-    public func createToken(payload: CreateTokenPayload.Card, _ completion: @escaping RequestResultClosure<Token, Error>) {
-        let apiPayload = CreateTokenPayload(card: payload)
-        performRequest(api: OmiseAPI.createToken(payload: apiPayload), completion: completion)
-    }
-
-    /// Sends Create a Source API request with given Source Payment
-    public func createSource(payload: CreateSourcePayload, _ completion: @escaping RequestResultClosure<Source, Error>) {
-        performRequest(api: OmiseAPI.createSource(payload: payload), completion: completion)
     }
 }
