@@ -1,12 +1,12 @@
 import UIKit
 import os
 
-class MobileBankingSourceChooserViewController: AdaptableStaticTableViewController<SourceType>,
+class MobileBankingSourceChooserViewController: AdaptableStaticTableViewController<SourceTypeValue>,
                                                 PaymentSourceChooser,
                                                 PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
 
-    override var showingValues: [SourceType] {
+    override var showingValues: [SourceTypeValue] {
         didSet {
             os_log("Mobile Banking Chooser: Showing options - %{private}@",
                    log: uiLogObject,
@@ -36,7 +36,7 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 
-    override func staticIndexPath(forValue value: SourceType) -> IndexPath {
+    override func staticIndexPath(forValue value: SourceTypeValue) -> IndexPath {
         switch value {
         case .mobileBankingBAY:
             return IndexPath(row: 0, section: 0)

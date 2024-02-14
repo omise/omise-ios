@@ -5,7 +5,7 @@ import os
 class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentSourceChooser, PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
 
-    var sourceType: SourceType? {
+    var sourceType: SourceTypeValue? {
         didSet {
             os_log("Installment Chooser: Showing options - %{private}@",
                    log: uiLogObject,
@@ -22,7 +22,7 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
     }
 
     // swiftlint:disable:next function_body_length
-    func headerTitle(for sourceType: SourceType) -> String {
+    func headerTitle(for sourceType: SourceTypeValue) -> String {
         switch sourceType {
         case .installmentBAY:
             return NSLocalizedString(

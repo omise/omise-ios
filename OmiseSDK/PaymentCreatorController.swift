@@ -63,7 +63,7 @@ public class PaymentCreatorController: UINavigationController {
 
     /// Available Source payment options to let user to choose.
     /// The default value is the default available payment method for merchant in Thailand
-    public var allowedPaymentMethods: [SourceType] = PaymentCreatorController.thailandDefaultAvailableSourceMethods {
+    public var allowedPaymentMethods: [SourceTypeValue] = PaymentCreatorController.thailandDefaultAvailableSourceMethods {
         didSet {
             paymentChooserViewController.allowedPaymentMethods = allowedPaymentMethods
         }
@@ -119,7 +119,7 @@ public class PaymentCreatorController: UINavigationController {
         publicKey: String,
         amount: Int64,
         currency: Currency,
-        allowedPaymentMethods: [SourceType],
+        allowedPaymentMethods: [SourceTypeValue],
         paymentDelegate: PaymentCreatorControllerDelegate?
     ) -> PaymentCreatorController {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
@@ -433,7 +433,7 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
 }
 
 extension PaymentCreatorController {
-    public static let thailandDefaultAvailableSourceMethods: [SourceType] = [
+    public static let thailandDefaultAvailableSourceMethods: [SourceTypeValue] = [
         .internetBankingBAY,
         .internetBankingBBL,
         .mobileBankingSCB,
@@ -457,17 +457,17 @@ extension PaymentCreatorController {
         .shopeePayJumpApp
     ]
 
-    public static let japanDefaultAvailableSourceMethods: [SourceType] = [
+    public static let japanDefaultAvailableSourceMethods: [SourceTypeValue] = [
         .eContext,
         .payPay
     ]
 
-    public static let singaporeDefaultAvailableSourceMethods: [SourceType] = [
+    public static let singaporeDefaultAvailableSourceMethods: [SourceTypeValue] = [
         .payNow,
         .shopeePayJumpApp
     ]
 
-    public static let malaysiaDefaultAvailableSourceMethods: [SourceType] = [
+    public static let malaysiaDefaultAvailableSourceMethods: [SourceTypeValue] = [
         .fpx,
         .installmentMBB,
         .touchNGo,
@@ -480,13 +480,13 @@ extension PaymentCreatorController {
         .duitNowOBW
     ]
 
-    public static let internetBankingAvailablePaymentMethods: [SourceType] = [
+    public static let internetBankingAvailablePaymentMethods: [SourceTypeValue] = [
         .internetBankingBAY,
         .internetBankingBBL
     ]
 
     // swiftlint:disable:next identifier_name
-    public static let installmentsBankingAvailablePaymentMethods: [SourceType] = [
+    public static let installmentsBankingAvailablePaymentMethods: [SourceTypeValue] = [
         .installmentBAY,
         .installmentFirstChoice,
         .installmentBBL,
@@ -498,15 +498,15 @@ extension PaymentCreatorController {
         .installmentUOB
     ]
 
-    public static let billPaymentAvailablePaymentMethods: [SourceType] = [
+    public static let billPaymentAvailablePaymentMethods: [SourceTypeValue] = [
         .billPaymentTescoLotus
     ]
 
-    public static let barcodeAvailablePaymentMethods: [SourceType] = [
+    public static let barcodeAvailablePaymentMethods: [SourceTypeValue] = [
         .barcodeAlipay
     ]
 
-    public static let mobileBankingAvailablePaymentMethods: [SourceType] = [
+    public static let mobileBankingAvailablePaymentMethods: [SourceTypeValue] = [
         .mobileBankingSCB,
         .mobileBankingKBank,
         .mobileBankingBAY,

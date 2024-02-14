@@ -54,7 +54,7 @@ class PaymentSettingTableViewController: UITableViewController {
         }
     }
 
-    var allowedPaymentMethods: Set<SourceType> = [] {
+    var allowedPaymentMethods: Set<SourceTypeValue> = [] {
         willSet {
             guard isViewLoaded else {
                 return
@@ -264,7 +264,7 @@ extension PaymentSettingTableViewController {
     }
 
     // swiftlint:disable:next function_body_length
-    func paymentSource(for cell: UITableViewCell) -> SourceType? {
+    func paymentSource(for cell: UITableViewCell) -> SourceTypeValue? {
         switch cell {
         case internetBankingBAYPaymentCell:
             return .internetBankingBAY
@@ -356,7 +356,7 @@ extension PaymentSettingTableViewController {
     }
 
     // swiftlint:disable:next function_body_length
-    func cell(for paymentSource: SourceType) -> UITableViewCell? {
+    func cell(for paymentSource: SourceTypeValue) -> UITableViewCell? {
         switch paymentSource {
         case .internetBankingBAY:
             return internetBankingBAYPaymentCell

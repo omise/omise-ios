@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Country: Codable, Equatable {
+public struct CountryInfo: Codable, Equatable {
     public let name: String
     public let code: String
 
@@ -21,18 +21,18 @@ public struct Country: Codable, Equatable {
     }
 }
 
-extension Country {
+extension CountryInfo {
     public static var avsCodes: [String] = ["US", "CA", "GB"]
 
-    public static var sortedAll: [Country] = {
-        Country.all.sorted {
+    public static var sortedAll: [CountryInfo] = {
+        CountryInfo.all.sorted {
             $0.name.localizedCompare($1.name) == .orderedAscending
         }
     }()
 }
 
-extension Country {
-    public static var all: [Country] = [
+extension CountryInfo {
+    public static var all: [CountryInfo] = [
         .init(name: "Afghanistan", code: "AF"),
         .init(name: "Åland Islands", code: "AX"),
         .init(name: "Albania", code: "AL"),

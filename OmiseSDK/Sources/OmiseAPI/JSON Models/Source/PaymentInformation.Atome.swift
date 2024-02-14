@@ -39,8 +39,8 @@ extension PaymentInformation {
 
 extension PaymentInformation.Atome: SourceTypeContainerProtocol {
     /// Payment method identifier
-    public static let sourceType: SourceType = .atome
-    public var sourceType: SourceType { Self.sourceType }
+    public static let sourceType: SourceTypeValue = .atome
+    public var sourceType: SourceTypeValue { Self.sourceType }
 }
 
 /// Encoding/decoding JSON string

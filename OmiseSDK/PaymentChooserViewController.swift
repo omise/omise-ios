@@ -149,7 +149,7 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
 
 extension PaymentChooserOption {
     // swiftlint:disable:next function_body_length
-    fileprivate static func paymentOptions(for sourceType: SourceType) -> [PaymentChooserOption] {
+    fileprivate static func paymentOptions(for sourceType: SourceTypeValue) -> [PaymentChooserOption] {
         switch sourceType {
         case .trueMoneyWallet:
             return [.truemoney]
@@ -235,7 +235,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             updateShowingValues()
         }
     }
-    var allowedPaymentMethods: [SourceType] = [] {
+    var allowedPaymentMethods: [SourceTypeValue] = [] {
         didSet {
             updateShowingValues()
         }
@@ -500,7 +500,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         showsCreditCardPayment = capability.cardPaymentMethod != nil
 
         allowedPaymentMethods = capability.paymentMethods.compactMap {
-            SourceType(rawValue: $0.name)
+            SourceTypeValue(rawValue: $0.name)
         }
 
         updateShowingValues()
@@ -538,7 +538,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
 }
 
 private extension PaymentChooserViewController {
-    func paymentOptions(from sourceTypes: [SourceType]) -> [PaymentChooserOption] {
+    func paymentOptions(from sourceTypes: [SourceTypeValue]) -> [PaymentChooserOption] {
         let paymentOptions: [PaymentChooserOption] = sourceTypes.reduce(into: []) { (result, sourceType) in
             let paymentOptions = PaymentChooserOption.paymentOptions(for: sourceType)
             for paymentOption in paymentOptions where !result.contains(paymentOption) {

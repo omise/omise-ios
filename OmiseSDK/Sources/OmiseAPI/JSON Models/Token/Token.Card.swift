@@ -26,7 +26,7 @@ extension Token {
         public let financing: String?
         /// Boolean indicates that whether that the card is passed the security code check
         public let securityCodeCheck: Bool
-        /// ISO3166 Country code based on the card number.
+        /// ISO3166 CountryInfo code based on the card number.
         /// - note: This is informational only and may not always be 100% accurate.
         public let countryCode: String?
         /// Issuing city.

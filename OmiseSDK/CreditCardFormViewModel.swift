@@ -25,16 +25,16 @@ class CreditCardFormViewModel: CreditCardFormViewModelProtocol, CountryListViewM
     var countryListViewModel: CountryListViewModelProtocol { return self }
 
     // MARK: CountryListViewModelProtocol
-    lazy var countries: [Country] = Country.sortedAll
+    lazy var countries: [CountryInfo] = CountryInfo.sortedAll
     
-    lazy var selectedCountry: Country? = OmiseSDK.shared.country {
+    lazy var selectedCountry: CountryInfo? = OmiseSDK.shared.country {
         didSet {
             if let selectedCountry = selectedCountry {
                 onSelectCountry(selectedCountry)
             }
         }
     }
-    var onSelectCountry: (Country) -> Void = { _ in }
+    var onSelectCountry: (CountryInfo) -> Void = { _ in }
 
     func error(for field: AddressField, validate text: String?) -> String? {
         guard isAddressFieldsVisible else { return nil }

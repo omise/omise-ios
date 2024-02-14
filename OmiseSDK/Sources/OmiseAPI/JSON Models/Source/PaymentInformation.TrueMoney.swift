@@ -11,8 +11,8 @@ extension PaymentInformation {
 
 extension PaymentInformation.TrueMoneyWallet: SourceTypeContainerProtocol {
     /// Source payment method identifier
-    static let sourceType: SourceType = .trueMoneyWallet
-    var sourceType: SourceType { Self.sourceType }
+    static let sourceType: SourceTypeValue = .trueMoneyWallet
+    var sourceType: SourceTypeValue { Self.sourceType }
 }
 
 /// Encoding/decoding JSON string

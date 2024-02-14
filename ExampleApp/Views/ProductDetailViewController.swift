@@ -20,7 +20,7 @@ class ProductDetailViewController: BaseViewController {
         client.capability { (result) in
             if case .success(let capability) = result {
                 self.capability = capability
-                print("Capability Country: \(capability.countryCode)")
+                print("Capability CountryInfo: \(capability.countryCode)")
             }
         }
     }

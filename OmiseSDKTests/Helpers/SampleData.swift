@@ -4,7 +4,7 @@ import OmiseSDK
 
 class SampleData {
     enum Entity {
-        case source(type: SourceType)
+        case source(type: SourceTypeValue)
         case card
         case token
         case capability
@@ -36,7 +36,7 @@ class SampleData {
 private let sampleData = SampleData()
 private let jsonDecoder = JSONDecoder()
 
-/// Load JSON sample data from resources by given SourceType
+/// Load JSON sample data from resources by given SourceTypeValue
 func sampleFromJSONBy<T: Decodable>(_ entity: SampleData.Entity) throws -> T {
     do {
         switch entity {

@@ -2,8 +2,8 @@ import Foundation
 
 /// Protocol to group payment methods by it's source type
 protocol SourceTypeContainerProtocol: Codable {
-    static var sourceType: SourceType { get }
-    var sourceType: SourceType { get }
+    static var sourceType: SourceTypeValue { get }
+    var sourceType: SourceTypeValue { get }
 }
 
 /// Information details about source payment
@@ -25,11 +25,11 @@ public enum PaymentInformation: Equatable {
     /// TrueMoney Wallet
     case trueMoneyWallet(_ details: TrueMoneyWallet)
     /// Payment menthods without additional payment parameters
-    case sourceType(_ sourceType: SourceType)
+    case sourceType(_ sourceType: SourceTypeValue)
 
-    /// SourceType of current payment
+    /// SourceTypeValue of current payment
     /// Used for encoding sourceType parameter into flat JSON string
-    public var sourceType: SourceType {
+    public var sourceType: SourceTypeValue {
         switch self {
         case .sourceType(let sourceType): return sourceType
         case .atome(let details): return details.sourceType
@@ -70,7 +70,7 @@ extension PaymentInformation: Codable {
     /// Creates new instance from JSON string
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let sourceType = try container.decode(SourceType.self, forKey: .sourceType)
+        let sourceType = try container.decode(SourceTypeValue.self, forKey: .sourceType)
 
         switch sourceType {
         case Atome.sourceType:

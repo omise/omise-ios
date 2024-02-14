@@ -2,12 +2,12 @@ import UIKit
 import os
 
 // swiftlint:disable:next type_name
-class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<SourceType>,
+class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<SourceTypeValue>,
                                                      PaymentSourceChooser,
                                                      PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
     
-    override var showingValues: [SourceType] {
+    override var showingValues: [SourceTypeValue] {
         didSet {
             os_log("Installment Brand Chooser: Showing options - %{private}@",
                    log: uiLogObject,
@@ -37,7 +37,7 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
-    override func staticIndexPath(forValue value: SourceType) -> IndexPath {
+    override func staticIndexPath(forValue value: SourceTypeValue) -> IndexPath {
         switch value {
         case .installmentBBL:
             return IndexPath(row: 0, section: 0)

@@ -22,16 +22,16 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
     ]
 
     // MARK: CountryListViewModelProtocol
-    lazy var countries: [Country] = Country.sortedAll
+    lazy var countries: [CountryInfo] = CountryInfo.sortedAll
 
-    lazy var selectedCountry: Country? = OmiseSDK.shared.country {
+    lazy var selectedCountry: CountryInfo? = OmiseSDK.shared.country {
         didSet {
             if let selectedCountry = selectedCountry {
                 onSelectCountry(selectedCountry)
             }
         }
     }
-    var onSelectCountry: (Country) -> Void = { _ in }
+    var onSelectCountry: (CountryInfo) -> Void = { _ in }
 
     var countryListViewModel: CountryListViewModelProtocol { return self }
     

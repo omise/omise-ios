@@ -28,8 +28,8 @@ extension PaymentInformation {
 
 extension PaymentInformation.BarcodeAlipay: SourceTypeContainerProtocol {
     /// Payment method identifier
-    public static let sourceType: SourceType = .barcodeAlipay
-    public var sourceType: SourceType { Self.sourceType }
+    public static let sourceType: SourceTypeValue = .barcodeAlipay
+    public var sourceType: SourceTypeValue { Self.sourceType }
 }
 
 /// Encoding/decoding JSON string
