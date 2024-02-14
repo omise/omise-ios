@@ -38,10 +38,9 @@ public enum Currency: String, Codable, Hashable {
 
     /// A conversion factor represents how much Omise amount equals to 1 unit of this currency. eg. THB's factor is equals to 100.
     public var factor: Int {
-        switch self {
-        case .jpy:
+        if case .jpy = self {
             return identicalBasedCurrencyFactor
-        default:
+        } else {
             return centBasedCurrencyFactor
         }
     }

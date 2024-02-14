@@ -1,15 +1,15 @@
 import Foundation
 
 public struct Configuration {
-    private(set) static var `default` = Configuration()
+    private(set) static var shared = Configuration()
     let environment: Environment
 
     public init(environment: Environment = .production) {
         self.environment = environment
     }
 
-    public static func setDefault(_ config: Configuration) {
-        `default` = config
+    public static func setShared(_ config: Configuration) {
+        shared = config
     }
 }
 
@@ -20,16 +20,16 @@ public enum Environment {
 
 extension Environment {
     var customVaultURL: URL? {
-        switch self {
-        case .dev(let vaultURL, _): return vaultURL
-        default: return nil
+        guard case .dev(let vaultURL, _) = self else {
+            return nil
         }
+        return vaultURL
     }
 
     var customAPIURL: URL? {
-        switch self {
-        case .dev(_, let apiURL): return apiURL
-        default: return nil
+        guard case .dev(_, let apiURL) = self else {
+            return nil
         }
+        return apiURL
     }
 }

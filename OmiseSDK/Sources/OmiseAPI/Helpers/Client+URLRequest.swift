@@ -5,9 +5,9 @@ extension Client {
     func customURL(api: APIProtocol) -> URL? {
         switch api.server {
         case .api:
-            return Configuration.default.environment.customAPIURL
+            return Configuration.shared.environment.customAPIURL
         case .vault:
-            return Configuration.default.environment.customVaultURL
+            return Configuration.shared.environment.customVaultURL
         }
     }
 

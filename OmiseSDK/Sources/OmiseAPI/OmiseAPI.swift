@@ -2,10 +2,13 @@ import Foundation
 
 extension OmiseServerType {
     // swiftlint:disable force_unwrapping
+    var apiServerURL: String { "https://vault.omise.co" }
+    var vaultServerURL: String { "https://vault.omise.co" }
+
     var url: URL {
         switch self {
-        case .api: return URL(string: "https://api.omise.co")!
-        case .vault: return URL(string: "https://vault.omise.co")!
+        case .api: return URL(string: apiServerURL)!
+        case .vault: return URL(string: vaultServerURL)!
         }
     }
     // swiftlint:enable force_unwrapping
