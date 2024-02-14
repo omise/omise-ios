@@ -77,7 +77,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
             return
         }
 
-        let payload = PaymentInformation.fpx(.init(bank: bank, email: email))
+        let paymentInformation = PaymentInformation.fpx(.init(bank: bank, email: email))
 
         tableView.deselectRow(at: indexPath, animated: true)
 
@@ -90,7 +90,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
 
-        flowSession?.requestCreateSource(payload) { [weak self] _ in
+        flowSession?.requestCreateSource(paymentInformation) { [weak self] _ in
             guard let self = self else { return }
             cell.accessoryView = oldAccessoryView
             self.view.isUserInteractionEnabled = true

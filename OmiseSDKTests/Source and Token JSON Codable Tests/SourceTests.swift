@@ -203,7 +203,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeBarcodeAlipay() throws {
         let source: Source = try sampleFromJSONBy(.source(type: .barcodeAlipay))
-        let payload = PaymentInformation.BarcodeAlipay(
+        let paymentInformation = PaymentInformation.BarcodeAlipay(
             barcode: "1234567890123456",
             storeID: "1",
             storeName: "Main Store",
@@ -211,7 +211,7 @@ class SourceTests: XCTestCase {
         )
         XCTAssertEqual(source.id, "src_test_5cq1tilrnz7d62t8y87")
         XCTAssertFalse(source.isLiveMode)
-        XCTAssertEqual(source.paymentInformation, .barcodeAlipay(payload))
+        XCTAssertEqual(source.paymentInformation, .barcodeAlipay(paymentInformation))
         XCTAssertEqual(source.flow, .offline)
         XCTAssertEqual(source.amount, 100000)
         XCTAssertEqual(source.currency, "THB")
@@ -230,7 +230,7 @@ class SourceTests: XCTestCase {
     }
     //  swiftlint:disable:next function_body_length
     func testDecodeAtome() throws {
-        let payload = PaymentInformation.Atome(
+        let paymentInformation = PaymentInformation.Atome(
             phoneNumber: "+12312312312",
             name: "Test Data",
             email: "test@omise.co",
@@ -277,7 +277,7 @@ class SourceTests: XCTestCase {
         let source: Source = try sampleFromJSONBy(.source(type: .atome))
         XCTAssertEqual(source.id, "src_5yqiaqtbbog2pxjdg6b")
         XCTAssertTrue(source.isLiveMode)
-        XCTAssertEqual(source.paymentInformation, .atome(payload))
+        XCTAssertEqual(source.paymentInformation, .atome(paymentInformation))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 700000)
         XCTAssertEqual(source.currency, "THB")
@@ -286,10 +286,10 @@ class SourceTests: XCTestCase {
 
     func testDecodeDuitNowOBW() throws {
         let source: Source = try sampleFromJSONBy(.source(type: .duitNowOBW))
-        let payload = PaymentInformation.DuitNowOBW(bank: .affin)
+        let paymentInformation = PaymentInformation.DuitNowOBW(bank: .affin)
         XCTAssertEqual(source.id, "src_5pqcjr6tu4xvqut5nh5")
         XCTAssertTrue(source.isLiveMode)
-        XCTAssertEqual(source.paymentInformation, .duitNowOBW(payload))
+        XCTAssertEqual(source.paymentInformation, .duitNowOBW(paymentInformation))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 100000)
         XCTAssertEqual(source.currency, "MYR")
@@ -299,14 +299,14 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentBay() throws {
         let sourceType: SourceType = .installmentBAY
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = PaymentInformation.Installment(
+        let paymentInformation = PaymentInformation.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
         )
         XCTAssertEqual(source.id, "src_test_5cs0t6x8n0z8rcfrsfi")
         XCTAssertFalse(source.isLiveMode)
-        XCTAssertEqual(source.paymentInformation, .installment(payload))
+        XCTAssertEqual(source.paymentInformation, .installment(paymentInformation))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "THB")
@@ -316,14 +316,14 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentBBL() throws {
         let sourceType: SourceType = .installmentBBL
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = PaymentInformation.Installment(
+        let paymentInformation = PaymentInformation.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
         )
         XCTAssertEqual(source.id, "src_test_5cs0tdinbyypg6kn1fa")
         XCTAssertFalse(source.isLiveMode)
-        XCTAssertEqual(source.paymentInformation, .installment(payload))
+        XCTAssertEqual(source.paymentInformation, .installment(paymentInformation))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "THB")
@@ -333,7 +333,7 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentFirstChoice() throws {
         let sourceType: SourceType = .installmentFirstChoice
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = PaymentInformation.Installment(
+        let paymentInformation = PaymentInformation.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
@@ -341,7 +341,7 @@ class SourceTests: XCTestCase {
 
         XCTAssertEqual(source.id, "src_test_5cq1ugk8m0un1yefb2u")
         XCTAssertFalse(source.isLiveMode)
-        XCTAssertEqual(source.paymentInformation, .installment(payload))
+        XCTAssertEqual(source.paymentInformation, .installment(paymentInformation))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "THB")
@@ -351,14 +351,14 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentKBank() throws {
         let sourceType: SourceType = .installmentKBank
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = PaymentInformation.Installment(
+        let paymentInformation = PaymentInformation.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
         )
         XCTAssertEqual(source.id, "src_test_5cs0totfv87k1i6y45l")
         XCTAssertFalse(source.isLiveMode)
-        XCTAssertEqual(source.paymentInformation, .installment(payload))
+        XCTAssertEqual(source.paymentInformation, .installment(paymentInformation))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "THB")
@@ -368,14 +368,14 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentKTC() throws {
         let sourceType: SourceType = .installmentKTC
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = PaymentInformation.Installment(
+        let paymentInformation = PaymentInformation.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
         )
         XCTAssertEqual(source.id, "src_test_5cs0tk7m2e5ivctrq30")
         XCTAssertFalse(source.isLiveMode)
-        XCTAssertEqual(source.paymentInformation, .installment(payload))
+        XCTAssertEqual(source.paymentInformation, .installment(paymentInformation))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "THB")
@@ -385,14 +385,14 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentMBB() throws {
         let sourceType: SourceType = .installmentMBB
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = PaymentInformation.Installment(
+        let paymentInformation = PaymentInformation.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
         )
         XCTAssertEqual(source.id, "src_test_5obr9opqz5huc6tefw8")
         XCTAssertFalse(source.isLiveMode)
-        XCTAssertEqual(source.paymentInformation, .installment(payload))
+        XCTAssertEqual(source.paymentInformation, .installment(paymentInformation))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "MYR")
@@ -402,14 +402,14 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentTTB() throws {
         let sourceType: SourceType = .installmentTTB
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = PaymentInformation.Installment(
+        let paymentInformation = PaymentInformation.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
         )
         XCTAssertEqual(source.id, "src_test_5obr9opd7ej5c6tefw8")
         XCTAssertFalse(source.isLiveMode)
-        XCTAssertEqual(source.paymentInformation, .installment(payload))
+        XCTAssertEqual(source.paymentInformation, .installment(paymentInformation))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "THB")
@@ -419,14 +419,14 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentUOB() throws {
         let sourceType: SourceType = .installmentUOB
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = PaymentInformation.Installment(
+        let paymentInformation = PaymentInformation.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
         )
         XCTAssertEqual(source.id, "src_test_5oe7fj1qz5huc6tefw8")
         XCTAssertFalse(source.isLiveMode)
-        XCTAssertEqual(source.paymentInformation, .installment(payload))
+        XCTAssertEqual(source.paymentInformation, .installment(paymentInformation))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 500000)
         XCTAssertEqual(source.currency, "THB")
@@ -435,10 +435,10 @@ class SourceTests: XCTestCase {
 
     func testDecodeTrueMoneyWallet() throws {
         let source: Source = try sampleFromJSONBy(.source(type: .trueMoneyWallet))
-        let payload = PaymentInformation.TrueMoneyWallet(phoneNumber: "0123456789")
+        let paymentInformation = PaymentInformation.TrueMoneyWallet(phoneNumber: "0123456789")
         XCTAssertEqual(source.id, "src_test_5jhmesi7s4at1qctloy")
         XCTAssertFalse(source.isLiveMode)
-        XCTAssertEqual(source.paymentInformation, .trueMoneyWallet(payload))
+        XCTAssertEqual(source.paymentInformation, .trueMoneyWallet(paymentInformation))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 100000)
         XCTAssertEqual(source.currency, "THB")
@@ -531,14 +531,14 @@ class SourceTests: XCTestCase {
     func testDecodeEContext() throws {
         let sourceType: SourceType = .eContext
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = PaymentInformation.EContext(
+        let paymentInformation = PaymentInformation.EContext(
             name: "ヤマダタロウ",
             email: "test@opn.com",
             phoneNumber: "01234567891"
         )
         XCTAssertEqual(source.id, "src_test_5xsjw8qafayihquj3k9")
         XCTAssertFalse(source.isLiveMode)
-        XCTAssertEqual(source.paymentInformation, .eContext(payload))
+        XCTAssertEqual(source.paymentInformation, .eContext(paymentInformation))
         XCTAssertEqual(source.flow, .offline)
         XCTAssertEqual(source.amount, 300)
         XCTAssertEqual(source.currency, "JPY")
@@ -548,13 +548,13 @@ class SourceTests: XCTestCase {
     func testDecodeFPX() throws {
         let sourceType: SourceType = .fpx
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let payload = PaymentInformation.FPX(
+        let paymentInformation = PaymentInformation.FPX(
             bank: .uob,
             email: "support@omise.co"
         )
         XCTAssertEqual(source.id, "src_test_5jhmesi7s4at1qctloz")
         XCTAssertFalse(source.isLiveMode)
-        XCTAssertEqual(source.paymentInformation, .fpx(payload))
+        XCTAssertEqual(source.paymentInformation, .fpx(paymentInformation))
         XCTAssertEqual(source.flow, .redirect)
         XCTAssertEqual(source.amount, 100000)
         XCTAssertEqual(source.currency, "MYR")

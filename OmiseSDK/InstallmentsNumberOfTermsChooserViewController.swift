@@ -155,13 +155,13 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
         
-        let payload = PaymentInformation.Installment(
+        let paymentInformation = PaymentInformation.Installment(
             installmentTerm: self.numberOfTerms[indexPath.row],
             zeroInterestInstallments: false,
             sourceType: sourceType
         )
 
-        flowSession?.requestCreateSource(.installment(payload)) { _ in
+        flowSession?.requestCreateSource(.installment(paymentInformation)) { _ in
             cell?.accessoryView = oldAccessoryView
             self.view.isUserInteractionEnabled = true
         }

@@ -94,7 +94,7 @@ class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<Pa
         }
         
         let selectedBank = element(forUIIndexPath: indexPath)
-        let payload = PaymentInformation.duitNowOBW(.init(bank: selectedBank))
+        let paymentInformation = PaymentInformation.duitNowOBW(.init(bank: selectedBank))
 
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -107,7 +107,7 @@ class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<Pa
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
         
-        flowSession?.requestCreateSource(payload) { [weak self] _ in
+        flowSession?.requestCreateSource(paymentInformation) { [weak self] _ in
             guard let self = self else { return }
             cell.accessoryView = oldAccessoryView
             self.view.isUserInteractionEnabled = true
