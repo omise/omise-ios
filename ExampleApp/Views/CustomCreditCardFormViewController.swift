@@ -158,13 +158,13 @@ class CustomCreditCardFormViewController: UIViewController {
     @IBAction private func proceed(_ sender: UIBarButtonItem) {
         guard let name = cardNameField.text, cardNumberField.isValid,
             let expiryMonth = cardExpiryField.selectedMonth, let expiryYear = cardExpiryField.selectedYear,
-            let cvv = cardCVVField.text else {
+            let cvv = cardCVVField.text, let number = cardNumberField.text else {
                 return
         }
 
         let tokenRequest = CardPaymentPayload(
             name: name,
-            number: cardNumberField.pan.number,
+            number: number,
             expirationMonth: expiryMonth,
             expirationYear: expiryYear,
             securityCode: cvv,
