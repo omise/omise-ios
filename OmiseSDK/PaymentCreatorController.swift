@@ -397,8 +397,8 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
                 os_log("There is no Payment Creator delegate to notify about the error", log: uiLogObject, type: .default)
             }
         } else if let error = error as? OmiseError {
-            displayErrorWith(title: error.bannerErrorDescription,
-                             message: error.bannerErrorRecoverySuggestion,
+            displayErrorWith(title: error.localizedDescription,
+                             message: error.localizedRecoverySuggestion,
                              animated: true,
                              sender: self)
         } else if let error = error as? LocalizedError {

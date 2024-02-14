@@ -28,7 +28,7 @@ public class Client {
     public func capability(_ completion: @escaping RequestResultClosure<Capability, Error>) {
         performRequest(api: OmiseAPI.capability) { (result: Result<Capability, Error>) in
             if let capability = try? result.get() {
-                OmiseSDK.shared.setCurrentCountry(countryCode: capability.countryCode)
+                OmiseSDK.shared.setCountry(countryCode: capability.countryCode)
             }
             completion(result)
         }

@@ -110,6 +110,7 @@
 		75E0EBBA2B7BD02F00E3198A /* Source.Details.Installment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E0EBAE2B7BD02F00E3198A /* Source.Details.Installment.swift */; };
 		75E0EBBB2B7BD02F00E3198A /* SourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E0EBAF2B7BD02F00E3198A /* SourceType.swift */; };
 		75E0EBBC2B7BD02F00E3198A /* Source.Details.BarcodeAlipay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E0EBB02B7BD02F00E3198A /* Source.Details.BarcodeAlipay.swift */; };
+		75E0EBC22B7D1F9E00E3198A /* OmiseError+LocalizedDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E0EBC12B7D1F9E00E3198A /* OmiseError+LocalizedDescription.swift */; };
 		75F2A0182A0BD0D40038FA54 /* Config.local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75DAD8922A0BC9540098AF96 /* Config.local.plist */; };
 		75F2A09A2A13B0B10038FA54 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75F2A0992A13B0B10038FA54 /* Preview Assets.xcassets */; };
 		75F2A0A62A13B70F0038FA54 /* OmiseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062F1CFEA7E4004BCF51 /* OmiseTextField.swift */; };
@@ -307,6 +308,7 @@
 		75E0EBAE2B7BD02F00E3198A /* Source.Details.Installment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Source.Details.Installment.swift; path = Source/Source.Details.Installment.swift; sourceTree = "<group>"; };
 		75E0EBAF2B7BD02F00E3198A /* SourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SourceType.swift; path = Source/SourceType.swift; sourceTree = "<group>"; };
 		75E0EBB02B7BD02F00E3198A /* Source.Details.BarcodeAlipay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Source.Details.BarcodeAlipay.swift; path = Source/Source.Details.BarcodeAlipay.swift; sourceTree = "<group>"; };
+		75E0EBC12B7D1F9E00E3198A /* OmiseError+LocalizedDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OmiseError+LocalizedDescription.swift"; sourceTree = "<group>"; };
 		75F2A0902A13B0B00038FA54 /* OmiseSDKUITests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmiseSDKUITests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F2A0992A13B0B10038FA54 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		75F2A0A42A13B1470038FA54 /* AtomeFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewController.swift; sourceTree = "<group>"; };
@@ -690,16 +692,16 @@
 			isa = PBXGroup;
 			children = (
 				75348D4C29C3FC8F0008C8A3 /* Helpers */,
-				75E0EB942B7BD00F00E3198A /* Other Models */,
-				8A2BE95820A9A8FE000CEB60 /* Views */,
 				75E0EBBD2B7D0DB600E3198A /* Config */,
+				75E0EB942B7BD00F00E3198A /* Models */,
+				8A2BE95820A9A8FE000CEB60 /* Views */,
 				75E0EBBF2B7D13D200E3198A /* OmiseAPI */,
-				75E0EBBE2B7D0DD100E3198A /* Main */,
+				75CFC4D12B73AFD500422A8F /* OmiseSDK.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		75E0EB942B7BD00F00E3198A /* Other Models */ = {
+		75E0EB942B7BD00F00E3198A /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				75E0EB952B7BD00F00E3198A /* Currency.swift */,
@@ -708,7 +710,7 @@
 				75E0EB982B7BD00F00E3198A /* CardBrand.swift */,
 				75E0EB992B7BD00F00E3198A /* OmiseError.swift */,
 			);
-			path = "Other Models";
+			path = Models;
 			sourceTree = "<group>";
 		};
 		75E0EBBD2B7D0DB600E3198A /* Config */ = {
@@ -716,16 +718,9 @@
 			children = (
 				98FF99BA2577789800476487 /* Configuration.swift */,
 				22445FFB1CF41DD300801D0F /* Globals.swift */,
+				75E0EBC02B7D1F7A00E3198A /* OmiseError */,
 			);
 			path = Config;
-			sourceTree = "<group>";
-		};
-		75E0EBBE2B7D0DD100E3198A /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				75CFC4D12B73AFD500422A8F /* OmiseSDK.swift */,
-			);
-			path = Main;
 			sourceTree = "<group>";
 		};
 		75E0EBBF2B7D13D200E3198A /* OmiseAPI */ = {
@@ -733,12 +728,20 @@
 			children = (
 				75CFC4F92B75503000422A8F /* Helpers */,
 				75CFC4EF2B753AB900422A8F /* JSON Models */,
-				75B420652B77741E0036134D /* CreateTokenPayload.swift */,
-				75B420812B77FAA50036134D /* CreateSourcePayload.swift */,
 				75CFC4CD2B73AF0E00422A8F /* Client.swift */,
 				75CFC4DC2B73F75C00422A8F /* OmiseAPI.swift */,
+				75B420652B77741E0036134D /* CreateTokenPayload.swift */,
+				75B420812B77FAA50036134D /* CreateSourcePayload.swift */,
 			);
 			path = OmiseAPI;
+			sourceTree = "<group>";
+		};
+		75E0EBC02B7D1F7A00E3198A /* OmiseError */ = {
+			isa = PBXGroup;
+			children = (
+				75E0EBC12B7D1F9E00E3198A /* OmiseError+LocalizedDescription.swift */,
+			);
+			path = OmiseError;
 			sourceTree = "<group>";
 		};
 		75F2A01A2A0BD1CD0038FA54 /* Resources */ = {
@@ -1197,6 +1200,7 @@
 				75F2A0B72A1A60630038FA54 /* AtomeFormViewController.swift in Sources */,
 				75F2A0C22A1A87AE0038FA54 /* UIColor+Helpers.swift in Sources */,
 				7509D4DD2A1A9FD70050AB38 /* MainActionButton.swift in Sources */,
+				75E0EBC22B7D1F9E00E3198A /* OmiseError+LocalizedDescription.swift in Sources */,
 				75E0EBBB2B7BD02F00E3198A /* SourceType.swift in Sources */,
 				75CFC4F12B753B0F00422A8F /* Capability.swift in Sources */,
 				75CFC4CE2B73AF0E00422A8F /* Client.swift in Sources */,

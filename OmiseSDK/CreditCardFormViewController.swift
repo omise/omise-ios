@@ -460,8 +460,8 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
                                                     sender: self)
         if let targetController = targetController, targetController !== self {
             if let error = error as? OmiseError {
-                targetController.displayErrorWith(title: error.bannerErrorDescription,
-                                                  message: error.bannerErrorRecoverySuggestion,
+                targetController.displayErrorWith(title: error.localizedDescription,
+                                                  message: error.localizedRecoverySuggestion,
                                                   animated: true,
                                                   sender: self)
             } else if let error = error as? LocalizedError {
@@ -479,8 +479,8 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             let errorTitle: String
             let errorMessage: String?
             if let error = error as? OmiseError {
-                errorTitle = error.bannerErrorDescription
-                errorMessage = error.bannerErrorRecoverySuggestion
+                errorTitle = error.localizedDescription
+                errorMessage = error.localizedRecoverySuggestion
             } else if let error = error as? LocalizedError {
                 errorTitle = error.localizedDescription
                 errorMessage = error.recoverySuggestion
