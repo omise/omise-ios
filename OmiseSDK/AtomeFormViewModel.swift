@@ -101,7 +101,7 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
             )
         ]
 
-        let atomePayment = PaymentInformation.atome(
+        let paymentInformation = PaymentInformation.atome(
             PaymentInformation.Atome(
                 phoneNumber: viewContext[.phoneNumber],
                 shipping: shippingAddress,
@@ -110,7 +110,7 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
             )
         )
 
-        flowSession.requestCreateSource(atomePayment) { _ in
+        flowSession.requestCreateSource(paymentInformation) { _ in
             onComplete()
         }
     }
