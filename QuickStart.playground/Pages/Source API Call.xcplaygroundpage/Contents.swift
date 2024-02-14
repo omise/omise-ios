@@ -17,17 +17,15 @@ let client = Client(publicKey: publicKey)
 /*: create-a-request
  You also need a `Request` object which will have the credit card information that you want to tokenize.
  */
-let request = Request<Source>(parameter: CreateSourceParameter(
-  paymentInformation: PaymentInformation.internetBanking(.bbl),
-  amount: 50_000_00,
-  currency: .thb
-  )
+let createSourcePayload = CreateSourcePayload(
+    amount: amount,
+    currency: currency,
+    details: .sourceType(.internetBankingBBL) // Bangkok Bank Internet Banking payment method
 )
-
 /*: request
  After you create a client and request, you can create a `RequestTask` with those and call resume method to make an API call with a completion handler block
  */
-let task = client.requestTask(with: request) { (result) in
+client.createSource(payload: createSourcePayload) { (result) in
   defer {
     PlaygroundPage.current.finishExecution()
   }
@@ -39,7 +37,5 @@ let task = client.requestTask(with: request) { (result) in
     print(error)
   }
 }
-
-task.resume()
 
 PlaygroundPage.current.needsIndefiniteExecution = true
