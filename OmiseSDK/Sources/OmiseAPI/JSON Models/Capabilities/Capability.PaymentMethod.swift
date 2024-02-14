@@ -2,7 +2,7 @@ import Foundation
 
 extension Capability {
     /// Represents Capability.PaymentMethod JSON object for communication with Omise API
-    public struct PaymentMethod: Codable, Equatable {
+    public struct PaymentMethod: Equatable {
         public let name: String
         public let currencies: Set<String>
         public let cardBrands: Set<String>?
@@ -19,17 +19,19 @@ extension Capability {
             self.provider = provider
         }
 
-        private enum CodingKeys: String, CodingKey {
-            case name
-            case currencies
-            case installmentTerms = "installment_terms"
-            case cardBrands = "card_brands"
-            case banks
-            case provider
-        }
-
         var isCardType: Bool {
             name == "card"
         }
+    }
+}
+
+extension Capability.PaymentMethod: Codable {
+    private enum CodingKeys: String, CodingKey {
+        case name
+        case currencies
+        case installmentTerms = "installment_terms"
+        case cardBrands = "card_brands"
+        case banks
+        case provider
     }
 }
