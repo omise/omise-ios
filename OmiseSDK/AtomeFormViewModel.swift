@@ -89,7 +89,7 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
         )
 
         let items: [PaymentInformation.Item] = [
-            .init(
+            PaymentInformation.Item(
                 sku: "3427842",
                 category: "Shoes",
                 name: "Prada shoes",
@@ -102,7 +102,7 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
         ]
 
         let atomePayment = PaymentInformation.atome(
-            .init(
+            PaymentInformation.Atome(
                 phoneNumber: viewContext[.phoneNumber],
                 shipping: shippingAddress,
                 billing: nil,

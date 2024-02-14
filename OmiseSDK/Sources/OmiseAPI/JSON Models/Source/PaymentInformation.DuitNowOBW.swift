@@ -14,6 +14,11 @@ extension PaymentInformation {
         public init(bank: PaymentInformation.DuitNowOBW.Bank) {
             self.bank = bank
         }
+
+        /// Convenient static function to create a new DuitNowOBW instance
+        static func bank(_ bank: PaymentInformation.DuitNowOBW.Bank) -> Self {
+            Self(bank: bank)
+        }
     }
 }
 

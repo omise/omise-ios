@@ -18,6 +18,11 @@ extension PaymentInformation {
             self.bank = bank
             self.email = email
         }
+
+        /// Convenient static function to create a new DuitNowOBW instance
+        static func bank(_ bank: PaymentInformation.FPX.Bank, email: String?) -> Self {
+            Self(bank: bank, email: email)
+        }
     }
 }
 

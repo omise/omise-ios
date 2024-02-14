@@ -77,7 +77,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
             return
         }
 
-        let paymentInformation = PaymentInformation.fpx(.init(bank: bank, email: email))
+        let paymentInformation = PaymentInformation.fpx(.bank(bank, email: email))
 
         tableView.deselectRow(at: indexPath, animated: true)
 
