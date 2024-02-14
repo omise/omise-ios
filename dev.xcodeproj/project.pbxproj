@@ -625,8 +625,6 @@
 				75CFC4CD2B73AF0E00422A8F /* Client.swift */,
 				75CFC4ED2B7537BC00422A8F /* Client+URLRequest.swift */,
 				75E0EB7B2B7B410600E3198A /* Client+Network.swift */,
-				75B420652B77741E0036134D /* CardPaymentPayload.swift */,
-				75B420812B77FAA50036134D /* SourcePaymentPayload.swift */,
 			);
 			path = Client;
 			sourceTree = "<group>";
@@ -674,6 +672,7 @@
 				75E0EBA52B7BD02F00E3198A /* Source.Payment.FPX.swift */,
 				75E0EBAE2B7BD02F00E3198A /* Source.Payment.Installment.swift */,
 				75E0EBAA2B7BD02F00E3198A /* Source.Payment.TrueMoney.swift */,
+				75B420812B77FAA50036134D /* SourcePaymentPayload.swift */,
 			);
 			name = "Payment Methods - Source";
 			sourceTree = "<group>";
@@ -692,9 +691,10 @@
 		75E0EB862B7BCD4100E3198A /* Card (Token) Payment */ = {
 			isa = PBXGroup;
 			children = (
+				75E0EBA02B7BD02200E3198A /* Token.swift */,
 				75E0EB9F2B7BD02200E3198A /* Token.Card.swift */,
 				75E0EBA12B7BD02200E3198A /* Token.ChargeStatus.swift */,
-				75E0EBA02B7BD02200E3198A /* Token.swift */,
+				75B420652B77741E0036134D /* CardPaymentPayload.swift */,
 			);
 			name = "Card (Token) Payment";
 			sourceTree = "<group>";

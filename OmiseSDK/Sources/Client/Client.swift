@@ -1,6 +1,7 @@
 import Foundation
 import os
 
+/// Network Client to communicate with Omise APIs
 public class Client {
     public typealias RequestResultClosure<T: Decodable, E: Error> = (Result<T, E>) -> Void
 
@@ -12,13 +13,16 @@ public class Client {
     let publicKey: String
     let network: NetworkServiceProtocol
 
-    public convenience init(publicKey: String) {
-        self.init(publicKey: publicKey, network: NetworkService())
-    }
-
     init(publicKey: String, network: NetworkServiceProtocol) {
         self.publicKey = publicKey
         self.network = network
+    }
+
+    /// Creates a new Client item with given public key
+    /// - Parameters:
+    ///   - country: Omise public key
+    public convenience init(publicKey: String) {
+        self.init(publicKey: publicKey, network: NetworkService())
     }
 
     /// Perform Capability API Request
