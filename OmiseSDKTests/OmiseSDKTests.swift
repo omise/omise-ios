@@ -5,7 +5,7 @@ import XCTest
 class OmiseSDKTests: XCTestCase {
     func testCountry() {
         let expectedCountry = Country(name: "Thailand", code: "TH")
-        OmiseSDK.shared.setCurrentCountry(countryCode: "TH")
-        XCTAssertEqual(expectedCountry, OmiseSDK.shared.currentCountry)
+        OmiseSDK.shared.setCountry(countryCode: "TH")
+        XCTAssertEqual(expectedCountry, OmiseSDK.shared.country)
     }
 }
