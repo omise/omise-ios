@@ -31,7 +31,7 @@ class ClientTests: XCTestCase {
             apiURL: URL(string: "https://api.staging-omise.co")!
         )
         // swiftlint:enable force_unwrapping
-        Configuration.setDefault(Configuration(environment: testEnvironment))
+        Configuration.setShared(Configuration(environment: testEnvironment))
     }
 
     override func tearDown() {
