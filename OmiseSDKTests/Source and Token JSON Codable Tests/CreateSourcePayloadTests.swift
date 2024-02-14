@@ -2,12 +2,12 @@ import Foundation
 import XCTest
 @testable import OmiseSDK
 
-class SourcePaymentPayloadTest: XCTestCase {
+class CreateSourcePayloadTests: XCTestCase {
     func testJSONEncoding() throws {
-        let sourcePayload = SourcePaymentPayload(amount: 1, currency: "THB", details: .sourceType(.alipay))
+        let sourcePayload = CreateSourcePayload(amount: 1, currency: "THB", details: .sourceType(.alipay))
 
         let jsonString = try encodeToJson(sourcePayload)
-        let decoded: SourcePaymentPayload = try parse(jsonString: jsonString)
+        let decoded: CreateSourcePayload = try parse(jsonString: jsonString)
         XCTAssertEqual(sourcePayload, decoded)
         let expectedJsonString = "{\"amount\":1,\"currency\":\"THB\",\"platform_type\":\"IOS\",\"type\":\"alipay\"}"
         XCTAssertEqual(jsonString, expectedJsonString)

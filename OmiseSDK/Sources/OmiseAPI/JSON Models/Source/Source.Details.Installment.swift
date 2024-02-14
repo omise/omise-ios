@@ -1,28 +1,30 @@
 import Foundation
 
-extension Source.Payment {
+extension Source.Details {
     /// Payloads for Installment payment methods
     /// https://docs.opn.ooo/installment-payments
-    public struct Installment: Codable, Equatable {
+    public struct Installment: Equatable {
         /// Valid installment term length in months
         let installmentTerm: Int
         /// Whether customer or merchant absorbs interest. true when merchant absorbs interest
         let zeroInterestInstallments: Bool?
         // swiftlint:disable:previous discouraged_optional_boolean
-
         /// Source type of payment
         var sourceType: SourceType
-
-        private enum CodingKeys: String, CodingKey {
-            case installmentTerm = "installment_term"
-            case zeroInterestInstallments = "zero_interest_installments"
-            case sourceType = "type"
-        }
     }
 }
 
-extension Source.Payment.Installment {
-    static var sourceTypes: [SourceType] {
+/// Encoding/decoding JSON string
+extension Source.Details.Installment: Codable {
+    private enum CodingKeys: String, CodingKey {
+        case sourceType = "type"
+        case installmentTerm = "installment_term"
+        case zeroInterestInstallments = "zero_interest_installments"
+    }
+}
+
+extension Source.Details.Installment {
+    public static var sourceTypes: [SourceType] {
         [
             .installmentBAY,
             .installmentBBL,
@@ -36,7 +38,7 @@ extension Source.Payment.Installment {
         ]
     }
 
-    static func availableTerms(for sourceType: SourceType) -> [Int] {
+    public static func availableTerms(for sourceType: SourceType) -> [Int] {
         switch sourceType {
         case .installmentBAY:
             return [ 3, 4, 6, 9, 10 ]

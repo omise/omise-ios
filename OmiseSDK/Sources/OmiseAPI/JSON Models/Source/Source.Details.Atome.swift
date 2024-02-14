@@ -1,9 +1,9 @@
 import Foundation
 
-extension Source.Payment {
+extension Source.Details {
     /// Payment for `Atome App Redirection` payment method
     /// https://docs.opn.ooo/atome
-    public struct Atome: Codable, Equatable {
+    public struct Atome: Equatable {
         /// Customer mobile number with a country code (example: +66876543210 or 0876543210)
         let phoneNumber: String
         /// Customer name
@@ -11,11 +11,11 @@ extension Source.Payment {
         /// Customer email
         let email: String?
         /// Shipping address
-        let shipping: Source.Payment.Address
+        let shipping: Source.Details.Address
         /// Billing address
-        let billing: Source.Payment.Address?
+        let billing: Source.Details.Address?
         /// Information about items included in the order
-        let items: [Source.Payment.Item]
+        let items: [Source.Details.Item]
 
         /// Creates a new Atome payment method payload
         ///
@@ -26,7 +26,7 @@ extension Source.Payment {
         ///   - shipping: Shipping address
         ///   - billing: Billing address
         ///   - items: Items details
-        init(phoneNumber: String, name: String? = nil, email: String? = nil, shipping: Address, billing: Source.Payment.Address?, items: [Source.Payment.Item]) {
+        init(phoneNumber: String, name: String? = nil, email: String? = nil, shipping: Address, billing: Source.Details.Address?, items: [Source.Details.Item]) {
             self.name = name
             self.email = email
             self.phoneNumber = phoneNumber
@@ -37,7 +37,14 @@ extension Source.Payment {
     }
 }
 
-extension Source.Payment.Atome {
+extension Source.Details.Atome: SourceTypeDetailsProtocol {
+    /// Payment method identifier
+    static let sourceType: SourceType = .atome
+    var sourceType: SourceType { Self.sourceType }
+}
+
+/// Encoding/decoding JSON string
+extension Source.Details.Atome: Codable {
     private enum CodingKeys: String, CodingKey {
         case name
         case email

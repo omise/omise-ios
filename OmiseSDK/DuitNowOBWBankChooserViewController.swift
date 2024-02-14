@@ -1,12 +1,12 @@
 import UIKit
 import os
 
-class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<Source.Payment.DuitNowOBW.Bank>,
+class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<Source.Details.DuitNowOBW.Bank>,
                                                   PaymentSourceChooser,
                                                   PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
     
-    override var showingValues: [Source.Payment.DuitNowOBW.Bank] {
+    override var showingValues: [Source.Details.DuitNowOBW.Bank] {
         didSet {
             os_log("DuitNow OBW Bank Chooser: Showing options - %{private}@",
                    log: uiLogObject,
@@ -37,7 +37,7 @@ class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<So
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
-    override func staticIndexPath(forValue value: Source.Payment.DuitNowOBW.Bank) -> IndexPath {
+    override func staticIndexPath(forValue value: Source.Details.DuitNowOBW.Bank) -> IndexPath {
         switch value {
         case .affin:
             return IndexPath(row: 0, section: 0)
@@ -94,7 +94,7 @@ class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<So
         }
         
         let selectedBank = element(forUIIndexPath: indexPath)
-        let payload = Source.Payment.duitNowOBW(.init(bank: selectedBank))
+        let payload = Source.Details.duitNowOBW(.init(bank: selectedBank))
 
         tableView.deselectRow(at: indexPath, animated: true)
         

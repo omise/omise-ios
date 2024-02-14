@@ -2,17 +2,17 @@ import Foundation
 
 /// Information to create payment source
 /// Sources are methods for accepting payments through non-credit-card channels
-public struct SourcePaymentPayload: Codable, Equatable {
+public struct CreateSourcePayload: Codable, Equatable {
     /// Source amount in smallest unit of source currency
     let amount: Int64
     /// Currency for source as three-letter ISO 4217 code
     let currency: String
     /// The payment details of this source describes how the payment is processed
-    let details: Source.Payment
+    let details: Source.Details
     /// Current SDK platform type
     let platform = "IOS"
 
-    init(amount: Int64, currency: String, details: Source.Payment) {
+    init(amount: Int64, currency: String, details: Source.Details) {
         self.amount = amount
         self.currency = currency
         self.details = details
@@ -33,11 +33,11 @@ public struct SourcePaymentPayload: Codable, Equatable {
         try details.encode(to: encoder)
     }
 
-    // Decode SourcePaymentPayload object from JSON string
+    // Decode CreateSourcePayload object from JSON string
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.amount = try container.decode(Int64.self, forKey: .amount)
         self.currency = try container.decode(String.self, forKey: .currency)
-        self.details = try Source.Payment(from: decoder)
+        self.details = try Source.Details(from: decoder)
     }
 }

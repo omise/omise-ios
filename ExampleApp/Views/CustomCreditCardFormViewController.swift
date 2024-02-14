@@ -162,7 +162,7 @@ class CustomCreditCardFormViewController: UIViewController {
                 return
         }
 
-        let tokenRequest = CardPaymentPayload(
+        let payload = CreateTokenPayload.Card(
             name: name,
             number: number,
             expirationMonth: expiryMonth,
@@ -178,7 +178,7 @@ class CustomCreditCardFormViewController: UIViewController {
         )
 
         doneButton.isEnabled = false
-        omiseClient.createToken(payload: tokenRequest) { [weak self] (result) in
+        omiseClient.createToken(payload: payload) { [weak self] (result) in
             guard let self = self else { return }
             self.doneButton.isEnabled = false
             switch result {

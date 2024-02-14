@@ -1,19 +1,19 @@
 import Foundation
 
-struct Country: Codable, Equatable {
-    let name: String
-    let code: String
+public struct Country: Codable, Equatable {
+    public let name: String
+    public let code: String
 
-    var isAVS: Bool {
+    public var isAVS: Bool {
         Self.avsCodes.contains(code)
     }
 
-    init(name: String, code: String) {
+    public init(name: String, code: String) {
         self.name = name
         self.code = code
     }
     
-    init?(code: String) {
+    public init?(code: String) {
         guard let country = Self.all.first(where: { $0.code == code }) else {
             return nil
         }
@@ -22,9 +22,9 @@ struct Country: Codable, Equatable {
 }
 
 extension Country {
-    static var avsCodes: [String] = ["US", "CA", "GB"]
+    public static var avsCodes: [String] = ["US", "CA", "GB"]
 
-    static var sortedAll: [Country] = {
+    public static var sortedAll: [Country] = {
         Country.all.sorted {
             $0.name.localizedCompare($1.name) == .orderedAscending
         }
@@ -32,7 +32,7 @@ extension Country {
 }
 
 extension Country {
-    static var all: [Country] = [
+    public static var all: [Country] = [
         .init(name: "Afghanistan", code: "AF"),
         .init(name: "Åland Islands", code: "AX"),
         .init(name: "Albania", code: "AL"),

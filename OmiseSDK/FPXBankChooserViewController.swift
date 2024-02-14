@@ -73,11 +73,11 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         }
 
         let selectedBank = element(forUIIndexPath: indexPath)
-        guard let bank = Source.Payment.FPX.Bank(rawValue: selectedBank.code) else {
+        guard let bank = Source.Details.FPX.Bank(rawValue: selectedBank.code) else {
             return
         }
 
-        let payload = Source.Payment.fpx(.init(bank: bank, email: email))
+        let payload = Source.Details.fpx(.init(bank: bank, email: email))
 
         tableView.deselectRow(at: indexPath, animated: true)
 

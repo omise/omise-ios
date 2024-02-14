@@ -104,7 +104,7 @@ want to create by creating and initializing a `Request<Source>` with
 the `Payment Information` object:
 
 ```swift
-let paymentInformation = Source.Payment.internetBanking(.bbl) // Bangkok Bank Internet Banking payment method
+let paymentInformation = Source.Details.internetBanking(.bbl) // Bangkok Bank Internet Banking payment method
 let sourceParameter = CreateSourceParameter(
     paymentInformation: paymentInformation,
     amount: amount,

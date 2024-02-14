@@ -43,7 +43,7 @@ internal class PaymentCreatorFlowSession {
         return false
     }
 
-    func requestCreateSource(_ payload: Source.Payment, completionHandler: ((Result<Source, Error>) -> Void)?) {
+    func requestCreateSource(_ payload: Source.Details, completionHandler: ((Result<Source, Error>) -> Void)?) {
         guard validateRequiredProperties(), let client = self.client,
             let amount = paymentAmount, let currency = paymentCurrency else {
                 return
@@ -52,7 +52,7 @@ internal class PaymentCreatorFlowSession {
         os_log("Request to create a new source", log: uiLogObject, type: .info)
 
         delegate?.paymentCreatorFlowSessionWillCreateSource(self)
-        let sourcePaymentPayload = SourcePaymentPayload(
+        let sourcePaymentPayload = CreateSourcePayload(
             amount: amount,
             currency: currency.code,
             details: payload

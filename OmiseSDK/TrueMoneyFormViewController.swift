@@ -112,7 +112,7 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
             return
         }
         
-        let payload = Source.Payment.TrueMoneyWallet(phoneNumber: phoneNumber)
+        let payload = Source.Details.TrueMoneyWallet(phoneNumber: phoneNumber)
         requestingIndicatorView.startAnimating()
         view.isUserInteractionEnabled = false
         view.tintAdjustmentMode = .dimmed

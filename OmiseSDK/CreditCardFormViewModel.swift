@@ -50,7 +50,7 @@ class CreditCardFormViewModel: CreditCardFormViewModelProtocol, CountryListViewM
 
         os_log("Requesting to create token", log: uiLogObject, type: .info)
 
-        let payload = CardPaymentPayload(
+        let payload = CreateTokenPayload.Card(
             name: viewContext.name,
             number: viewContext.number,
             expirationMonth: viewContext.expirationMonth,
@@ -62,8 +62,9 @@ class CreditCardFormViewModel: CreditCardFormViewModelProtocol, CountryListViewM
             street1: viewContext[.address],
             street2: nil,
             postalCode: viewContext[.postalCode],
-            phoneNumber: nil)
-        
+            phoneNumber: nil
+        )
+
         let client = Client(publicKey: publicKey)
         client.createToken(payload: payload) { result in
             onComplete(result)

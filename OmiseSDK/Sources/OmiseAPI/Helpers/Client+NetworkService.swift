@@ -3,7 +3,7 @@ import Foundation
 extension Client {
     /// Creates urlRequest and performs API request with currenly used Network Service
     /// - returns Generic Decodable from JSON string
-    func apiRequest<T: Decodable>(api: APIProtocol, completion: @escaping RequestResultClosure<T, Error>) {
+    func performRequest<T: Decodable>(api: APIProtocol, completion: @escaping RequestResultClosure<T, Error>) {
         let urlRequest = urlRequest(publicKey: publicKey, api: api)
         network.send(
             urlRequest: urlRequest,
@@ -19,7 +19,7 @@ extension Client {
     ///   - timeInterval: TimeInterval between polling requests
     ///   - attemp: Current attemp
     ///   - maxAttempt: Maximum number of attemps
-    func observeChargeStatusUntilChange(
+    func observeUntilChargeStatusIsFinal(
         tokenID: String,
         timeInterval: Int,
         attemp: Int,
@@ -41,7 +41,7 @@ extension Client {
 
                 let queue = DispatchQueue.global(qos: .background)
                 queue.asyncAfter(deadline: .now() + .seconds(timeInterval)) {
-                    self?.observeChargeStatusUntilChange(
+                    self?.observeUntilChargeStatusIsFinal(
                         tokenID: tokenID,
                         timeInterval: timeInterval,
                         attemp: attemp + 1,
@@ -54,11 +54,5 @@ extension Client {
                 completion(.failure(error))
             }
         }
-    }
-
-    /// Perform Token API request with given Token ID
-    /// - returns Token
-    func token(tokenID: String, _ completion: @escaping RequestResultClosure<Token, Error>) {
-        apiRequest(api: OmiseAPI.token(tokenID: tokenID), completion: completion)
     }
 }

@@ -5,10 +5,8 @@ import os
 public class Client {
     public typealias RequestResultClosure<T: Decodable, E: Error> = (Result<T, E>) -> Void
 
-    private enum Const {
-        static let observingAttemptsCount = 10
-        static let observingTimeInterval = 3
-    }
+    let pollingAttemptsCount = 10
+    let pollingTimeInterval = 3
 
     let publicKey: String
     let network: NetworkServiceProtocol
@@ -28,7 +26,7 @@ public class Client {
     /// Perform Capability API Request
     /// - returns Capability
     public func capability(_ completion: @escaping RequestResultClosure<Capability, Error>) {
-        apiRequest(api: OmiseAPI.capability) { (result: Result<Capability, Error>) in
+        performRequest(api: OmiseAPI.capability) { (result: Result<Capability, Error>) in
             if let capability = try? result.get() {
                 OmiseSDK.shared.setCurrentCountry(countryCode: capability.countryCode)
             }
@@ -36,27 +34,34 @@ public class Client {
         }
     }
 
+    /// Perform Token API request with given Token ID
+    /// - returns Token
+    func token(tokenID: String, _ completion: @escaping RequestResultClosure<Token, Error>) {
+        performRequest(api: OmiseAPI.token(tokenID: tokenID), completion: completion)
+    }
+
     /// Observe Token Charge Status until it changes
     /// Sends API request every `timeInterval` with number of`maxAttempt`attempts.
     /// - returns Latest charge status value
-    public func observeChargeStatusUntilChange(tokenID: String, _ completion: @escaping RequestResultClosure<Token.ChargeStatus, Error>) {
-        observeChargeStatusUntilChange(
+    public func observeChargeStatus(tokenID: String, _ completion: @escaping RequestResultClosure<Token.ChargeStatus, Error>) {
+        observeUntilChargeStatusIsFinal(
             tokenID: tokenID,
-            timeInterval: Self.Const.observingTimeInterval,
+            timeInterval: pollingTimeInterval,
             attemp: 0,
-            maxAttempt: Self.Const.observingAttemptsCount,
+            maxAttempt: pollingAttemptsCount,
             completion
         )
     }
 
     /// Send Create a Token API request with given Card Payment
     /// - returns Created Token
-    public func createToken(payload: CardPaymentPayload, _ completion: @escaping RequestResultClosure<Token, Error>) {
-        apiRequest(api: OmiseAPI.createToken(payload: payload), completion: completion)
+    public func createToken(payload: CreateTokenPayload.Card, _ completion: @escaping RequestResultClosure<Token, Error>) {
+        let apiPayload = CreateTokenPayload(card: payload)
+        performRequest(api: OmiseAPI.createToken(payload: apiPayload), completion: completion)
     }
 
     /// Sends Create a Source API request with given Source Payment
-    public func createSource(payload: SourcePaymentPayload, _ completion: @escaping RequestResultClosure<Source, Error>) {
-        apiRequest(api: OmiseAPI.createSource(payload: payload), completion: completion)
+    public func createSource(payload: CreateSourcePayload, _ completion: @escaping RequestResultClosure<Source, Error>) {
+        performRequest(api: OmiseAPI.createSource(payload: payload), completion: completion)
     }
 }

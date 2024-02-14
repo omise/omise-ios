@@ -43,7 +43,7 @@ class ClientTests: XCTestCase {
     /// Testing if `Client` generates URLRequest with correct HTTP body to perform API request
     func testCreateTokenURLRequest() throws {
         let expectation = self.expectation(description: "Create Token Mockup Callback")
-        let cardPayload: CardPaymentPayload = try sampleFromJSONBy(.card)
+        let cardPayload: CreateTokenPayload.Card = try sampleFromJSONBy(.card)
 
         let networkMockup = NetworkMockup { [cardPayload] urlRequest in
             defer { expectation.fulfill() }
@@ -51,7 +51,7 @@ class ClientTests: XCTestCase {
             func validateURLRequest() {
                 if let data = urlRequest.httpBody, let jsonString = String(data: data, encoding: .utf8) {
                     do {
-                        let decodedCardPayload: TokenPaymentPayloadContainer = try parse(jsonString: jsonString)
+                        let decodedCardPayload: CreateTokenPayload = try parse(jsonString: jsonString)
                         XCTAssertEqual(cardPayload, decodedCardPayload.card)
                     } catch {
                         XCTFail("Unable to decode payload from encoded JSON string")
@@ -77,7 +77,7 @@ class ClientTests: XCTestCase {
     /// Testing if `Client` generates URLRequest with correct HTTP body to perform API request
     func testCreateSourceURLRequest() throws {
         let expectation = self.expectation(description: "Create Source Mockup Callback")
-        let sourcePayload: SourcePaymentPayload = try sampleFromJSONBy(.source(type: .atome))
+        let sourcePayload: CreateSourcePayload = try sampleFromJSONBy(.source(type: .atome))
 
         let networkMockup = NetworkMockup { [sourcePayload] urlRequest in
             defer { expectation.fulfill() }
@@ -85,7 +85,7 @@ class ClientTests: XCTestCase {
             func validateURLRequest() {
                 if let data = urlRequest.httpBody, let jsonString = String(data: data, encoding: .utf8) {
                     do {
-                        let decodedCardPayload: SourcePaymentPayload = try parse(jsonString: jsonString)
+                        let decodedCardPayload: CreateSourcePayload = try parse(jsonString: jsonString)
                         XCTAssertEqual(sourcePayload, decodedCardPayload)
                     } catch {
                         XCTFail("Unable to decode payload from encoded JSON string")
