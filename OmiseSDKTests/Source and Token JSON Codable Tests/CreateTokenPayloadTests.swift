@@ -14,10 +14,10 @@ class CreateTokenPayloadTests: XCTestCase {
             address: PaymentInformation.Address(
                 countryCode: "gb",
                 city: "Bangkok",
-                postalCode: "10240",
                 state: "Bangkok Metropolis",
                 street1: "Sukhumvit",
-                street2: "MBK"
+                street2: "MBK",
+                postalCode: "10240"
             )
         )
 

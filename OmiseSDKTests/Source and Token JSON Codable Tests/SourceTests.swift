@@ -237,18 +237,18 @@ class SourceTests: XCTestCase {
             shipping: PaymentInformation.Address(
                 countryCode: "TH",
                 city: "Bangkok",
-                postalCode: "10330",
                 state: "Krung Thep Maha Nakhon",
                 street1: "444 Phaya Thai Rd",
-                street2: "Khwaeng Wang Mai, Pathum Wan"
+                street2: "Khwaeng Wang Mai, Pathum Wan",
+                postalCode: "10330"
             ),
             billing: PaymentInformation.Address(
                 countryCode: "TH",
                 city: "Bangkok",
-                postalCode: "10100",
                 state: "Bangkok",
                 street1: "Sukhumvit",
-                street2: nil
+                street2: nil,
+                postalCode: "10100"
             ),
             items: [
                 PaymentInformation.Item(
