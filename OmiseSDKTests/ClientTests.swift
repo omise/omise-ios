@@ -38,7 +38,13 @@ class ClientTests: XCTestCase {
         testClient = nil
         super.tearDown()
     }
-
+    let tokenPayload = CreateTokenPayload.Card(
+        name: "JOHN DOE",
+        number: "4242424242424242",
+        expirationMonth: 11,
+        expirationYear: 2022,
+        securityCode: "123"
+    )
     /// Testing createToken API Request.
     /// Testing if `Client` generates URLRequest with correct HTTP body to perform API request
     func testCreateTokenURLRequest() throws {

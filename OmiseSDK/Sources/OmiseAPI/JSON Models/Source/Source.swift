@@ -9,11 +9,11 @@ public struct Source {
     /// Whether this is a live (true) or test (false) source
     public let isLiveMode: Bool
     /// Source amount in smallest unit of source currency
-    let amount: Int64
+    public let amount: Int64
     /// Currency for source as three-letter ISO 4217 code
-    let currency: String
+    public let currency: String
     /// The payment information of this source describes how the payment is processed
-    let paymentInformation: PaymentInformation
+    public let paymentInformation: PaymentInformation
     /// The payment flow payers need to go through to complete the payment
     public let flow: Flow
 

@@ -10,13 +10,15 @@ class CreateTokenPayloadTests: XCTestCase {
             expirationMonth: 12,
             expirationYear: 2020,
             securityCode: "123",
-            countryCode: "gb",
-            city: "Bangkok",
-            state: "Bangkok Metropolis",
-            street1: "Sukhumvit",
-            street2: "MBK",
-            postalCode: "10240",
-            phoneNumber: "0123456789"
+            phoneNumber: "0123456789",
+            address: PaymentInformation.Address(
+                countryCode: "gb",
+                city: "Bangkok",
+                postalCode: "10240",
+                state: "Bangkok Metropolis",
+                street1: "Sukhumvit",
+                street2: "MBK"
+            )
         )
 
         let samplePayload: CreateTokenPayload.Card = try sampleFromJSONBy(.card)

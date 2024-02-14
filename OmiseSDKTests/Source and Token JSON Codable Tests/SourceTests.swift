@@ -235,7 +235,7 @@ class SourceTests: XCTestCase {
             name: "Test Data",
             email: "test@omise.co",
             shipping: PaymentInformation.Address(
-                country: "TH",
+                countryCode: "TH",
                 city: "Bangkok",
                 postalCode: "10330",
                 state: "Krung Thep Maha Nakhon",
@@ -243,7 +243,7 @@ class SourceTests: XCTestCase {
                 street2: "Khwaeng Wang Mai, Pathum Wan"
             ),
             billing: PaymentInformation.Address(
-                country: "TH",
+                countryCode: "TH",
                 city: "Bangkok",
                 postalCode: "10100",
                 state: "Bangkok",

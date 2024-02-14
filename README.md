@@ -80,18 +80,16 @@ servers. To collect a card payment from a
 customer, merchants will need to first *tokenize* the card data using the
 Opn Payments API and then use the generated token in place of the card
 data. You can tokenize card data by creating and initializing
-a `Request<Token>` as follows:
+a `CreateTokenPayload.Card` as follows:
 
 ```swift
-let tokenParameters = Token.CreateParameter(
+let tokenPayload = CreateTokenPayload.Card(
     name: "JOHN DOE",
     number: "4242424242424242",
     expirationMonth: 11,
     expirationYear: 2022,
     securityCode: "123"
 )
-
-let request = Request<Token>(parameter: tokenParameters)
 ```
 
 #### Creating a payment source

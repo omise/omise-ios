@@ -2,7 +2,7 @@ import Foundation
 
 /// Information to create payment source
 /// Sources are methods for accepting payments through non-credit-card channels
-public struct CreateSourcePayload: Codable, Equatable {
+public struct CreateSourcePayload: Equatable {
     /// Source amount in smallest unit of source currency
     let amount: Int64
     /// Currency for source as three-letter ISO 4217 code
@@ -17,7 +17,9 @@ public struct CreateSourcePayload: Codable, Equatable {
         self.currency = currency
         self.details = details
     }
+}
 
+extension CreateSourcePayload: Codable {
     private enum CodingKeys: String, CodingKey {
         case amount
         case currency

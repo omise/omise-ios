@@ -80,12 +80,12 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
             return
         }
         let shippingAddress = PaymentInformation.Address(
-            country: viewContext[.country],
+            countryCode: viewContext[.country],
             city: viewContext[.city],
-            postalCode: viewContext[.postalCode],
             state: viewContext[.state],
             street1: viewContext[.street1],
-            street2: viewContext[.street2]
+            street2: viewContext[.street2],
+            postalCode: viewContext[.postalCode]
         )
 
         let items: [PaymentInformation.Item] = [

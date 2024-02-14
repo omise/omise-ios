@@ -168,13 +168,15 @@ class CustomCreditCardFormViewController: UIViewController {
             expirationMonth: expiryMonth,
             expirationYear: expiryYear,
             securityCode: cvv,
-            countryCode: countryCodeField.text ?? "",
-            city: cityField.text ?? "",
-            state: stateField.text ?? "",
-            street1: street1Field.text ?? "",
-            street2: street2Field.text ?? "",
-            postalCode: postalCodeField.text ?? "",
-            phoneNumber: nil
+            phoneNumber: nil,
+            address: PaymentInformation.Address(
+                countryCode: countryCodeField.text ?? "",
+                city: cityField.text ?? "",
+                state: stateField.text ?? "",
+                street1: street1Field.text ?? "",
+                street2: street2Field.text ?? "",
+                postalCode: postalCodeField.text ?? ""
+            )
         )
 
         doneButton.isEnabled = false

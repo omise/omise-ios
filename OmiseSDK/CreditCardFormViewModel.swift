@@ -56,13 +56,15 @@ class CreditCardFormViewModel: CreditCardFormViewModelProtocol, CountryListViewM
             expirationMonth: viewContext.expirationMonth,
             expirationYear: viewContext.expirationYear,
             securityCode: viewContext.securityCode,
-            countryCode: viewContext.countryCode,
-            city: viewContext[.city],
-            state: viewContext[.state],
-            street1: viewContext[.address],
-            street2: nil,
-            postalCode: viewContext[.postalCode],
-            phoneNumber: nil
+            phoneNumber: nil,
+            address: PaymentInformation.Address(
+                countryCode: viewContext.countryCode,
+                city: viewContext[.city],
+                state: viewContext[.state],
+                street1: viewContext[.address],
+                street2: nil,
+                postalCode: viewContext[.postalCode]
+            )
         )
 
         let client = Client(publicKey: publicKey)
