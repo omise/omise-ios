@@ -136,7 +136,7 @@ class CustomCreditCardFormViewController: UIViewController {
     }
 
     private func setupBillingAddressFields() {
-        countryCodeField.placeholder = "CountryInfo Code (ex. \"TH\")"
+        countryCodeField.placeholder = "Country Code (ex. \"TH\")"
         street1Field.placeholder = "Street"
         street2Field.placeholder = "Street 2"
         cityField.placeholder = "City"

@@ -15,8 +15,8 @@ extension PaymentInformation {
 
 extension PaymentInformation.EContext: SourceTypeContainerProtocol {
     /// Source payment method identifier
-    static let sourceType: SourceTypeValue = .eContext
-    var sourceType: SourceTypeValue { Self.sourceType }
+    static let sourceType: SourceType = .eContext
+    var sourceType: SourceType { Self.sourceType }
 }
 
 /// Encoding/decoding JSON string

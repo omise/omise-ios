@@ -28,8 +28,8 @@ extension PaymentInformation {
 
 extension PaymentInformation.FPX: SourceTypeContainerProtocol {
     /// Source payment method identifier
-    static let sourceType: SourceTypeValue = .fpx
-    var sourceType: SourceTypeValue { Self.sourceType }
+    static let sourceType: SourceType = .fpx
+    var sourceType: SourceType { Self.sourceType }
 }
 
 /// Encoding/decoding JSON string

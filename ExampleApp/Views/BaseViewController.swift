@@ -22,7 +22,7 @@ class BaseViewController: UIViewController {
     var paymentAmount: Int64 = 0
     var paymentCurrencyCode: String = ""
     var usesCapabilityDataForPaymentMethods = false
-    var allowedPaymentMethods: [SourceTypeValue] = []
+    var allowedPaymentMethods: [SourceType] = []
 
     required init?(coder: NSCoder) {
         self.usesCapabilityDataForPaymentMethods = true

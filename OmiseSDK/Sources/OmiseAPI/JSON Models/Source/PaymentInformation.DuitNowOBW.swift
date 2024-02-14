@@ -24,8 +24,8 @@ extension PaymentInformation {
 
 /// Payment method identifier
 extension PaymentInformation.DuitNowOBW: SourceTypeContainerProtocol {
-    public static let sourceType: SourceTypeValue = .duitNowOBW
-    public var sourceType: SourceTypeValue { Self.sourceType }
+    public static let sourceType: SourceType = .duitNowOBW
+    public var sourceType: SourceType { Self.sourceType }
 }
 
 /// Encoding/decoding JSON string

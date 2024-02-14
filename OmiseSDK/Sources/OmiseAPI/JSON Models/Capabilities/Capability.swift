@@ -9,7 +9,7 @@ public struct Capability {
 
 extension Capability {
     /// Returns payment information by given Source Type if presents
-    func paymentMethod(for sourceType: SourceTypeValue) -> Capability.PaymentMethod? {
+    func paymentMethod(for sourceType: SourceType) -> Capability.PaymentMethod? {
         paymentMethods.first { method in
             method.name == sourceType.rawValue
         }

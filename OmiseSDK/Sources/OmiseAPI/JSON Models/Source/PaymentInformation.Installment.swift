@@ -10,7 +10,7 @@ extension PaymentInformation {
         let zeroInterestInstallments: Bool?
         // swiftlint:disable:previous discouraged_optional_boolean
         /// Source type of payment
-        var sourceType: SourceTypeValue
+        var sourceType: SourceType
     }
 }
 
@@ -24,7 +24,7 @@ extension PaymentInformation.Installment: Codable {
 }
 
 extension PaymentInformation.Installment {
-    public static var sourceTypes: [SourceTypeValue] {
+    public static var sourceTypes: [SourceType] {
         [
             .installmentBAY,
             .installmentBBL,
@@ -38,7 +38,7 @@ extension PaymentInformation.Installment {
         ]
     }
 
-    public static func availableTerms(for sourceType: SourceTypeValue) -> [Int] {
+    public static func availableTerms(for sourceType: SourceType) -> [Int] {
         switch sourceType {
         case .installmentBAY:
             return [ 3, 4, 6, 9, 10 ]

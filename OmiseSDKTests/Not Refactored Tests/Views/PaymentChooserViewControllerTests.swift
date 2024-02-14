@@ -10,7 +10,7 @@ import XCTest
 @testable import OmiseSDK
 
 class PaymentChooserViewControllerTests: XCTestCase {
-    let allSourceTypes: [SourceTypeValue] = [
+    let allSourceTypes: [SourceType] = [
         .internetBankingBAY,
         .internetBankingBBL,
         .mobileBankingSCB,
@@ -178,7 +178,7 @@ class PaymentChooserViewControllerTests: XCTestCase {
     }
 
     func testShowsCreditCardPayment() {
-        let availableTypes: [SourceTypeValue] = [
+        let availableTypes: [SourceType] = [
             .alipay,
             .alipayCN,
             .alipayHK,
@@ -197,10 +197,10 @@ class PaymentChooserViewControllerTests: XCTestCase {
     }
 
     func testAllowedPaymentMethods() {
-        let set1: [SourceTypeValue] = [ .alipay, .alipayCN ]
+        let set1: [SourceType] = [ .alipay, .alipayCN ]
         let result1: [PaymentChooserOption] = [.alipay, .alipayCN]
 
-        let set2: [SourceTypeValue] = [ .atome, .payPay, .weChat ]
+        let set2: [SourceType] = [ .atome, .payPay, .weChat ]
         let result2: [PaymentChooserOption] = [ .atome, .payPay, .weChat ]
 
         let vc = PaymentChooserViewController()

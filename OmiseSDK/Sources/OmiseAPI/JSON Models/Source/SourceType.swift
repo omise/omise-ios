@@ -1,7 +1,7 @@
 import Foundation
 
 /// Source type of payment
-public enum SourceTypeValue: String, Codable, CaseIterable {
+public enum SourceType: String, Codable, CaseIterable {
     /// Alipay (Online) https://docs.opn.ooo/alipay
     case alipay = "alipay"
     /// Alipay CN   https://docs.opn.ooo/alipay-cn
@@ -96,8 +96,8 @@ public enum SourceTypeValue: String, Codable, CaseIterable {
     case weChat = "wechat_pay"
 }
 
-extension SourceTypeValue {
-    public static var installments: [SourceTypeValue] {
+extension SourceType {
+    public static var installments: [SourceType] {
         [
             .installmentBAY,
             .installmentBBL,
@@ -117,8 +117,8 @@ extension SourceTypeValue {
     }
 }
 
-extension SourceTypeValue {
-    public static var internetBanking: [SourceTypeValue] {
+extension SourceType {
+    public static var internetBanking: [SourceType] {
         [
             .internetBankingBAY,
             .internetBankingBAY
@@ -130,8 +130,8 @@ extension SourceTypeValue {
     }
 }
 
-extension SourceTypeValue {
-    public static var mobileBanking: [SourceTypeValue] {
+extension SourceType {
+    public static var mobileBanking: [SourceType] {
         [
             .mobileBankingSCB,
             .mobileBankingKBank,
