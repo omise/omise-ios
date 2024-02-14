@@ -355,7 +355,7 @@ extension ViewController: OmiseAuthorizingPaymentViewControllerDelegate {
 
 ## Objective-C compatibility
 
-This version of Opn Payments iOS SDK does not support Objective-C. [Old version with full Objective-C support](https://github.com/omise/omise-ios/tree/support/v4.x.x)
+This version of Opn Payments iOS SDK does not support Objective-C. Latest [version](https://github.com/omise/omise-ios/tree/support/v4.x.x) with full Objective-C support.
 
 ## Contributing
 
