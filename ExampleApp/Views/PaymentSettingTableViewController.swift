@@ -335,7 +335,7 @@ extension PaymentSettingTableViewController {
         case rabbitLinepayCell:
             return .rabbitLinepay
         case OCBCDigitalPaymentCell:
-            return .mobileBankingOCBC
+            return .ocbcDigital
         case grabPayPaymentCell:
             return .grabPay
         case boostPaymentCell:
@@ -400,7 +400,7 @@ extension PaymentSettingTableViewController {
             return installmentUOBPaymentCell
         case .mobileBankingSCB:
             return mobileBankingSCBPaymentCell
-        case .mobileBankingOCBC:
+        case .ocbcDigital:
             return OCBCDigitalPaymentCell
         case .mobileBankingKBank:
             return mobileBankingKBankPaymentCell

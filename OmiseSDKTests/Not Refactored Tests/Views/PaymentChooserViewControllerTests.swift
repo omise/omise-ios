@@ -14,7 +14,7 @@ class PaymentChooserViewControllerTests: XCTestCase {
         .internetBankingBAY,
         .internetBankingBBL,
         .mobileBankingSCB,
-        .mobileBankingOCBC,
+        .ocbcDigital,
         .mobileBankingBAY,
         .mobileBankingBBL,
         .mobileBankingKTB,

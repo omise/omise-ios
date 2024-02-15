@@ -7,8 +7,7 @@ extension SourceType {
             .mobileBankingKBank,
             .mobileBankingBAY,
             .mobileBankingBBL,
-            .mobileBankingKTB,
-            .mobileBankingOCBC
+            .mobileBankingKTB
         ]
     }
 

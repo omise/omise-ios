@@ -196,7 +196,7 @@ extension PaymentChooserOption {
             return [.fpx]
         case .rabbitLinepay:
             return [.rabbitLinepay]
-        case .mobileBankingOCBC:
+        case .ocbcDigital:
             return [.ocbcDigital]
         case .grabPay:
             return [.grabPay]
@@ -374,7 +374,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         case .rabbitLinepay:
             payment = .sourceType(.rabbitLinepay)
         case .ocbcDigital:
-            payment = .sourceType(.mobileBankingOCBC)
+            payment = .sourceType(.ocbcDigital)
         case .grabPay, .grabPayRms:
             payment = .sourceType(.grabPay)
         case .boost:

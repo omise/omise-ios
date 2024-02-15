@@ -67,7 +67,8 @@ public enum SourceType: String, Codable, CaseIterable {
     /// Krung Thai (KTB NEXT)   https://docs.opn.ooo/mobile-banking-ktb
     case mobileBankingKTB = "mobile_banking_ktb"
     /// OCBC Digital    https://docs.opn.ooo/mobile-banking-ocbc
-    case mobileBankingOCBC = "mobile_banking_ocbc"
+    /// - note: "Most of SG customers recognize it as OCBC PAO, not a part of mobile banking"
+    case ocbcDigital = "mobile_banking_ocbc"
     /// SCB (SCB Easy)  https://docs.opn.ooo/mobile-banking-scb
     case mobileBankingSCB = "mobile_banking_scb"
     /// PayNow  https://docs.opn.ooo/paynow
