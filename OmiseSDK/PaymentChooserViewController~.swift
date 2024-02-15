@@ -421,9 +421,6 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         navigationController?.pushViewController(vc, animated: true)
     }
 
-    // TODO: Add implementation for AdaptableStaticTableViewController
-    /*
-
     // swiftlint:disable:next function_body_length
     override func staticIndexPath(forValue value: PaymentChooserOption) -> IndexPath {
         switch value {
@@ -497,7 +494,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             return IndexPath(row: 33, section: 0)
         }
     }
-*/
+
     func applyPaymentMethods(from capability: Capability) {
         self.capability = capability
         showsCreditCardPayment = capability.cardPaymentMethod != nil

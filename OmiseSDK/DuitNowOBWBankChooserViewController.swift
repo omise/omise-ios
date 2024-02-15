@@ -33,59 +33,23 @@ class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<Pa
         super.viewDidLoad()
         applyPrimaryColor()
         applySecondaryColor()
-        
+        setupTableViewCells()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
-    override func staticIndexPath(forValue value: PaymentInformation.DuitNowOBW.Bank) -> IndexPath {
-        switch value {
-        case .affin:
-            return IndexPath(row: 0, section: 0)
-        case .alliance:
-            return IndexPath(row: 1, section: 0)
-        case .agro:
-            return IndexPath(row: 2, section: 0)
-        case .ambank:
-            return IndexPath(row: 3, section: 0)
-        case .cimb:
-            return IndexPath(row: 4, section: 0)
-        case .islam:
-            return IndexPath(row: 5, section: 0)
-        case .rakyat:
-            return IndexPath(row: 6, section: 0)
-        case .muamalat:
-            return IndexPath(row: 7, section: 0)
-        case .bsn:
-            return IndexPath(row: 8, section: 0)
-        case .hongleong:
-            return IndexPath(row: 9, section: 0)
-        case .hsbc:
-            return IndexPath(row: 10, section: 0)
-        case .kfh:
-            return IndexPath(row: 11, section: 0)
-        case .maybank2u:
-            return IndexPath(row: 12, section: 0)
-        case .ocbc:
-            return IndexPath(row: 13, section: 0)
-        case .publicBank:
-            return IndexPath(row: 14, section: 0)
-        case .rhb:
-            return IndexPath(row: 15, section: 0)
-        case .sc:
-            return IndexPath(row: 16, section: 0)
-        case .uob:
-            return IndexPath(row: 17, section: 0)
+    private func setupTableViewCells() {
+        createTableViewCellsClosure = { [weak self] bank, _, cell, _ in
+            guard let self = self else { return }
+            cell.textLabel?.text = bank.localizedTitle
+            cell.imageView?.image = bank.listIcon
+            cell.accessoryView = UIImageView(image: UIImage(named: "Next"))
+
+            if let cell = cell as? PaymentOptionTableViewCell {
+                cell.separatorView.backgroundColor = self.currentSecondaryColor
+            }
+            cell.accessoryView?.tintColor = self.currentSecondaryColor
+
         }
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = super.tableView(tableView, cellForRowAt: indexPath)
-        
-        if let cell = cell as? PaymentOptionTableViewCell {
-            cell.separatorView.backgroundColor = currentSecondaryColor
-        }
-        cell.accessoryView?.tintColor = currentSecondaryColor
-        return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -125,5 +89,89 @@ class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<Pa
     
     private func applySecondaryColor() {
         // Intentionally empty (SonarCloud warning fix)
+    }
+}
+
+extension PaymentInformation.DuitNowOBW.Bank {
+    var localizedTitle: String {
+        switch self {
+        case .affin:
+            return "Affin Bank"
+        case .alliance:
+            return "Alliance Bank"
+        case .agro:
+            return "Agrobank"
+        case .ambank:
+            return "AmBank"
+        case .islam:
+            return "Bank Islam"
+        case .muamalat:
+            return "Bank Muamalat"
+        case .rakyat:
+            return "Bank Rakyat"
+        case .bsn:
+            return "Bank Simpanan Nasional"
+        case .cimb:
+            return "CIMB Bank"
+        case .hongleong:
+            return "Hong Leong"
+        case .hsbc:
+            return "HSBC Bank"
+        case .kfh:
+            return "Kuwait Finance House"
+        case .maybank2u:
+            return "Maybank"
+        case .ocbc:
+            return "OCBC"
+        case .publicBank:
+            return "Public Bank"
+        case .rhb:
+            return "RHB Bank"
+        case .sc:
+            return "Standard Chartered"
+        case .uob:
+            return "United Overseas Bank"
+        }
+    }
+
+    var listIcon: UIImage? {
+        switch self {
+        case .affin:
+            return UIImage(named: "FPX/affin")
+        case .alliance:
+            return UIImage(named: "FPX/alliance")
+        case .agro:
+            return UIImage(named: "agrobank")
+        case .ambank:
+            return UIImage(named: "FPX/ambank")
+        case .islam:
+            return UIImage(named: "FPX/islam")
+        case .muamalat:
+            return UIImage(named: "FPX/muamalat")
+        case .rakyat:
+            return UIImage(named: "FPX/rakyat")
+        case .bsn:
+            return UIImage(named: "FPX/bsn")
+        case .cimb:
+            return UIImage(named: "FPX/cimb")
+        case .hongleong:
+            return UIImage(named: "FPX/hong-leong")
+        case .hsbc:
+            return UIImage(named: "FPX/hsbc")
+        case .kfh:
+            return UIImage(named: "FPX/kfh")
+        case .maybank2u:
+            return UIImage(named: "FPX/maybank")
+        case .ocbc:
+            return UIImage(named: "FPX/ocbc")
+        case .publicBank:
+            return UIImage(named: "FPX/public-bank")
+        case .rhb:
+            return UIImage(named: "FPX/rhb")
+        case .sc:
+            return UIImage(named: "FPX/sc")
+        case .uob:
+            return UIImage(named: "FPX/uob")
+        }
     }
 }

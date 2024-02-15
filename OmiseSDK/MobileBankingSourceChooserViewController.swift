@@ -36,6 +36,8 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 
+    // TODO: Add implementation for AdaptableStaticTableViewController
+    /*
     override func staticIndexPath(forValue value: SourceType) -> IndexPath {
         switch value {
         case .mobileBankingBAY:
@@ -54,6 +56,7 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
             preconditionFailure("This value is not supported for the built-in chooser")
         }
     }
+     */
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)

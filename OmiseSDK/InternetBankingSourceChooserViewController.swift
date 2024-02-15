@@ -37,6 +37,8 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
+    // TODO: Add implementation for AdaptableStaticTableViewController
+/*
     override func staticIndexPath(forValue value: SourceType) -> IndexPath {
         switch value {
         case .internetBankingBBL:
@@ -47,6 +49,7 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
             preconditionFailure("This value is not supported for the built-in chooser")
         }
     }
+    */
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
