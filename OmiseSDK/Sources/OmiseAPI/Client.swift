@@ -33,7 +33,7 @@ public class Client {
             completion(result)
         }
     }
-
+    
     /// Sends Create a Source API request with given Source Payment
     public func createSource(payload: CreateSourcePayload, _ completion: @escaping RequestResultClosure<Source, Error>) {
         performRequest(api: OmiseAPI.createSource(payload: payload), completion: completion)
@@ -48,7 +48,7 @@ public class Client {
 
     /// Perform Token API request with given Token ID
     /// - returns Token
-    func token(tokenID: String, _ completion: @escaping RequestResultClosure<Token, Error>) {
+    public func token(tokenID: String, _ completion: @escaping RequestResultClosure<Token, Error>) {
         performRequest(api: OmiseAPI.token(tokenID: tokenID), completion: completion)
     }
 
