@@ -13,7 +13,7 @@ class ProductDetailViewController: BaseViewController {
 
     private func setupClient() {
         // Setup dev environment for staging
-        Configuration.setDefault(Configuration(environment: LocalConfig.default.env))
+        Configuration.setShared(Configuration(environment: LocalConfig.default.env))
 
         let client = Client(publicKey: publicKey)
 
