@@ -524,6 +524,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         var paymentMethodsToShow = paymentOptions(from: allowedPaymentMethods)
         paymentMethodsToShow = appendCreditCardPayment(paymentOptions: paymentMethodsToShow)
         paymentMethodsToShow = filterTrueMoney(paymentOptions: paymentMethodsToShow)
+        paymentMethodsToShow = filterShopeePay(paymentOptions: paymentMethodsToShow)
         showingValues = paymentMethodsToShow.reorder(by: PaymentChooserOption.sorting)
 
         os_log("Payment Chooser: Showing options - %{private}@",
@@ -560,6 +561,14 @@ private extension PaymentChooserViewController {
         var filter = paymentOptions
         if filter.contains(.truemoney) && filter.contains(.truemoneyJumpApp) {
             filter.removeAll { $0 == .truemoney }
+        }
+        return filter
+    }
+
+    func filterShopeePay(paymentOptions: [PaymentChooserOption]) -> [PaymentChooserOption] {
+        var filter = paymentOptions
+        if filter.contains(.shopeePay) && filter.contains(.shopeePayJumpApp) {
+            filter.removeAll { $0 == .shopeePay }
         }
         return filter
     }

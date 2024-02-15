@@ -87,6 +87,34 @@ class PaymentChooserViewControllerTests: XCTestCase {
         XCTAssertFalse(vc.showingValues.contains(.truemoney))
     }
 
+    func testShopeePayFiltering() {
+        let shopeePayOnly = allSourceTypes.filter { $0 != .shopeePayJumpApp }
+        let shopeePayJumpAppOnly = allSourceTypes.filter { $0 != .shopeePay }
+        let shopeePayAndJumpApp = allSourceTypes
+        let noShopeePayandJumpApp = allSourceTypes.filter {
+            ($0 != .shopeePay) && ($0 != .shopeePayJumpApp)
+        }
+
+        let vc = PaymentChooserViewController()
+        vc.loadView()
+
+        vc.allowedPaymentMethods = shopeePayOnly
+        XCTAssertTrue(vc.showingValues.contains(.shopeePay))
+        XCTAssertFalse(vc.showingValues.contains(.shopeePayJumpApp))
+
+        vc.allowedPaymentMethods = shopeePayJumpAppOnly
+        XCTAssertTrue(vc.showingValues.contains(.shopeePayJumpApp))
+        XCTAssertFalse(vc.showingValues.contains(.shopeePay))
+
+        vc.allowedPaymentMethods = shopeePayAndJumpApp
+        XCTAssertTrue(vc.showingValues.contains(.shopeePayJumpApp))
+        XCTAssertFalse(vc.showingValues.contains(.shopeePay))
+
+        vc.allowedPaymentMethods = noShopeePayandJumpApp
+        XCTAssertFalse(vc.showingValues.contains(.shopeePayJumpApp))
+        XCTAssertFalse(vc.showingValues.contains(.shopeePay))
+    }
+
     func testAlphabetSorting() {
         let vc = PaymentChooserViewController()
         vc.loadView()
@@ -144,7 +172,6 @@ class PaymentChooserViewControllerTests: XCTestCase {
             .installment,
             .ocbcDigital,
             .rabbitLinepay,
-            .shopeePay,
             .shopeePayJumpApp,
             .alipayCN,
             .alipayHK,
