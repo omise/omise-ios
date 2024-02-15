@@ -133,7 +133,7 @@ extension PaymentInformation.DuitNowOBW.Bank {
             return "United Overseas Bank"
         }
     }
-
+    // UIImage(named: "FPX/" + bank, in: .omiseSDK, compatibleWith: nil)
     var listIcon: UIImage? {
         switch self {
         case .affin:

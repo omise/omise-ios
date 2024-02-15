@@ -145,8 +145,82 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
             return "WeChat Pay"
         }
     }
+    var listIcon: UIImage? {
+        switch self {
+        case .creditCard:
+            return UIImage(named: "Card", in: .omiseSDK, compatibleWith: nil)
+        case .installment:
+            return UIImage(named: "Installment", in: .omiseSDK, compatibleWith: nil)
+        case .internetBanking:
+            return UIImage(named: "Banking", in: .omiseSDK, compatibleWith: nil)
+        case .mobileBanking:
+            return UIImage(named: "MobileBanking", in: .omiseSDK, compatibleWith: nil)
+        case .tescoLotus:
+            return UIImage(named: "Tesco", in: .omiseSDK, compatibleWith: nil)
+        case .conbini:
+            return UIImage(named: "Conbini", in: .omiseSDK, compatibleWith: nil)
+        case .payEasy:
+            return UIImage(named: "Payeasy", in: .omiseSDK, compatibleWith: nil)
+        case .netBanking:
+            return UIImage(named: "Netbank", in: .omiseSDK, compatibleWith: nil)
+        case .alipay:
+            return UIImage(named: "Alipay", in: .omiseSDK, compatibleWith: nil)
+        case .alipayCN:
+            return UIImage(named: "AlipayCN", in: .omiseSDK, compatibleWith: nil)
+        case .alipayHK:
+            return UIImage(named: "AlipayHK", in: .omiseSDK, compatibleWith: nil)
+        case .atome:
+            return UIImage(named: "Atome", in: .omiseSDK, compatibleWith: nil)
+        case .dana:
+            return UIImage(named: "dana", in: .omiseSDK, compatibleWith: nil)
+        case .gcash:
+            return UIImage(named: "gcash", in: .omiseSDK, compatibleWith: nil)
+        case .kakaoPay:
+            return UIImage(named: "kakaopay", in: .omiseSDK, compatibleWith: nil)
+        case .touchNGoAlipayPlus:
+            return UIImage(named: "touch-n-go", in: .omiseSDK, compatibleWith: nil)
+        case .promptpay:
+            return UIImage(named: "PromptPay", in: .omiseSDK, compatibleWith: nil)
+        case .paynow:
+            return UIImage(named: "PayNow", in: .omiseSDK, compatibleWith: nil)
+        case .truemoney:
+            return UIImage(named: "TrueMoney", in: .omiseSDK, compatibleWith: nil)
+        case .truemoneyJumpApp:
+            return UIImage(named: "TrueMoney", in: .omiseSDK, compatibleWith: nil)
+        case .citiPoints:
+            return UIImage(named: "CitiBank", in: .omiseSDK, compatibleWith: nil)
+        case .fpx:
+            return UIImage(named: "FPX", in: .omiseSDK, compatibleWith: nil)
+        case .rabbitLinepay:
+            return UIImage(named: "RabbitLinePay", in: .omiseSDK, compatibleWith: nil)
+        case .ocbcDigital:
+            return UIImage(named: "ocbc-digital", in: .omiseSDK, compatibleWith: nil)
+        case .grabPay:
+            return UIImage(named: "Grab", in: .omiseSDK, compatibleWith: nil)
+        case .boost:
+            return UIImage(named: "Boost", in: .omiseSDK, compatibleWith: nil)
+        case .shopeePay:
+            return UIImage(named: "Shopeepay", in: .omiseSDK, compatibleWith: nil)
+        case .shopeePayJumpApp:
+            return UIImage(named: "Shopeepay", in: .omiseSDK, compatibleWith: nil)
+        case .maybankQRPay:
+            return UIImage(named: "MAE-maybank", in: .omiseSDK, compatibleWith: nil)
+        case .duitNowQR:
+            return UIImage(named: "DuitNow-QR", in: .omiseSDK, compatibleWith: nil)
+        case .duitNowOBW:
+            return UIImage(named: "Duitnow-OBW", in: .omiseSDK, compatibleWith: nil)
+        case .touchNGo:
+            return UIImage(named: "touch-n-go", in: .omiseSDK, compatibleWith: nil)
+        case .grabPayRms:
+            return UIImage(named: "Grab", in: .omiseSDK, compatibleWith: nil)
+        case .payPay:
+            return UIImage(named: "PayPay", in: .omiseSDK, compatibleWith: nil)
+        case .weChat:
+            return UIImage(named: "wechat_pay", in: .omiseSDK, compatibleWith: nil)
+        }
+    }
 }
-
+ 
 extension PaymentChooserOption {
     // swiftlint:disable:next function_body_length
     fileprivate static func paymentOptions(for sourceType: SourceType) -> [PaymentChooserOption] {
@@ -156,7 +230,7 @@ extension PaymentChooserOption {
         case .trueMoneyJumpApp:
             return [.truemoneyJumpApp]
         case .installmentFirstChoice, .installmentMBB, .installmentKBank, .installmentKTC,
-             .installmentBBL, .installmentBAY, .installmentSCB, .installmentTTB, .installmentUOB:
+                .installmentBBL, .installmentBAY, .installmentSCB, .installmentTTB, .installmentUOB:
             return [.installment]
         case .billPaymentTescoLotus:
             return [.tescoLotus]
@@ -242,7 +316,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     }
 
     @IBOutlet private var paymentMethodNameLables: [UILabel]!
-    
+
     @IBInspectable var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
@@ -312,9 +386,9 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
         case ("GoToTrueMoneyFormSegue"?, let controller as TrueMoneyFormViewController):
             controller.flowSession = self.flowSession
         case ("GoToFPXFormSegue"?, let controller as FPXFormViewController):
-//            controller.showingValues = capability?.paymentMethod(for: .fpx)?.banks
-//            capability?[.fpx]?.banks ?? []
-            
+            //            controller.showingValues = capability?.paymentMethod(for: .fpx)?.banks
+            //            capability?[.fpx]?.banks ?? []
+
             controller.flowSession = self.flowSession
         case ("GoToDuitNowOBWBankChooserSegue"?, let controller as DuitNowOBWBankChooserViewController):
             controller.showingValues = duitNowOBWBanks
@@ -422,82 +496,20 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     }
 
     // TODO: Add implementation for AdaptableStaticTableViewController
-    /*
+    private func setupTableViewCells() {
+        createTableViewCellsClosure = { [weak self] paymentOption, _, cell, _ in
+            guard let self = self else { return }
+            cell.textLabel?.text = paymentOption.description
+            cell.imageView?.image = paymentOption.listIcon
+            cell.accessoryView = UIImageView(image: UIImage(named: "Next"))
 
-    // swiftlint:disable:next function_body_length
-    override func staticIndexPath(forValue value: PaymentChooserOption) -> IndexPath {
-        switch value {
-        case .creditCard:
-            return IndexPath(row: 0, section: 0)
-        case .installment:
-            return IndexPath(row: 1, section: 0)
-        case .truemoney:
-            return IndexPath(row: 2, section: 0)
-        case .promptpay:
-            return IndexPath(row: 3, section: 0)
-        case .citiPoints:
-            return IndexPath(row: 4, section: 0)
-        case .alipay:
-            return IndexPath(row: 5, section: 0)
-        case .internetBanking:
-            return IndexPath(row: 6, section: 0)
-        case .tescoLotus:
-            return IndexPath(row: 7, section: 0)
-        case .paynow:
-            return IndexPath(row: 8, section: 0)
-        case .conbini:
-            return IndexPath(row: 9, section: 0)
-        case .payEasy:
-            return IndexPath(row: 10, section: 0)
-        case .netBanking:
-            return IndexPath(row: 11, section: 0)
-        case .mobileBanking:
-            return IndexPath(row: 12, section: 0)
-        case .fpx:
-            return IndexPath(row: 13, section: 0)
-        case .alipayCN:
-            return IndexPath(row: 14, section: 0)
-        case .alipayHK:
-            return IndexPath(row: 15, section: 0)
-        case .dana:
-            return IndexPath(row: 16, section: 0)
-        case .gcash:
-            return IndexPath(row: 17, section: 0)
-        case .kakaoPay:
-            return IndexPath(row: 18, section: 0)
-        case .touchNGoAlipayPlus:
-            return IndexPath(row: 19, section: 0)
-        case .rabbitLinepay:
-            return IndexPath(row: 20, section: 0)
-        case .ocbcDigital:
-            return IndexPath(row: 21, section: 0)
-        case .grabPay:
-            return IndexPath(row: 22, section: 0)
-        case .boost:
-            return IndexPath(row: 23, section: 0)
-        case .shopeePay, .shopeePayJumpApp:
-            return IndexPath(row: 24, section: 0)
-        case .maybankQRPay:
-            return IndexPath(row: 25, section: 0)
-        case .duitNowQR:
-            return IndexPath(row: 26, section: 0)
-        case .duitNowOBW:
-            return IndexPath(row: 27, section: 0)
-        case .touchNGo:
-            return IndexPath(row: 28, section: 0)
-        case .grabPayRms:
-            return IndexPath(row: 29, section: 0)
-        case .atome:
-            return IndexPath(row: 30, section: 0)
-        case .payPay:
-            return IndexPath(row: 31, section: 0)
-        case .truemoneyJumpApp:
-            return IndexPath(row: 32, section: 0)
-        case .weChat:
-            return IndexPath(row: 33, section: 0)
+            if let cell = cell as? PaymentOptionTableViewCell {
+                cell.separatorView.backgroundColor = self.currentSecondaryColor
+            }
+            cell.accessoryView?.tintColor = self.currentSecondaryColor
         }
     }
-*/
+
     func applyPaymentMethods(from capability: Capability) {
         self.capability = capability
         showsCreditCardPayment = capability.cardPaymentMethod != nil
