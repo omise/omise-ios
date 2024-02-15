@@ -26,7 +26,13 @@ public class AdaptableStaticTableViewController<Element: CaseIterable & Equatabl
     }
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        let identifier = "UITableViewCell"
+        var cell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: identifier)
+        
+        if cell == nil {
+            cell = UITableViewCell(style: .default, reuseIdentifier: identifier)
+        }
+
         let element = element(forUIIndexPath: indexPath)
         createTableViewCellsClosure?(element, tableView, cell, indexPath)
         return cell

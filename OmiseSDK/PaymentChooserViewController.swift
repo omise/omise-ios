@@ -296,7 +296,7 @@ extension PaymentChooserOption {
     }
 }
 
-// swiftlint:disable:next type_body_length
+/// swiftlint:disable:next type_body_length
 class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentChooserOption>,
                                     PaymentSourceChooser,
                                     PaymentChooserUI {
@@ -332,11 +332,12 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        applyPrimaryColor()
-        applySecondaryColor()
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        applyNavigationBarStyle()
-        updateShowingValues()
+        setupTableViewCells()
+//        applyPrimaryColor()
+//        applySecondaryColor()
+//        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+//        applyNavigationBarStyle()
+//        updateShowingValues()
     }
 
     // swiftlint:disable:next function_body_length
