@@ -339,6 +339,21 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
 //        applyNavigationBarStyle()
 //        updateShowingValues()
     }
+    
+    // TODO: Add implementation for AdaptableStaticTableViewController
+    private func setupTableViewCells() {
+        createTableViewCellsClosure = { [weak self] paymentOption, _, cell, _ in
+            guard let self = self else { return }
+            cell.textLabel?.text = paymentOption.description
+            cell.imageView?.image = paymentOption.listIcon
+            cell.accessoryView = UIImageView(image: UIImage(named: "Next"))
+
+            if let cell = cell as? PaymentOptionTableViewCell {
+                cell.separatorView.backgroundColor = self.currentSecondaryColor
+            }
+            cell.accessoryView?.tintColor = self.currentSecondaryColor
+        }
+    }
 
     // swiftlint:disable:next function_body_length
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -402,16 +417,6 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             paymentShourceChooserUI.preferredPrimaryColor = self.preferredPrimaryColor
             paymentShourceChooserUI.preferredSecondaryColor = self.preferredSecondaryColor
         }
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = super.tableView(tableView, cellForRowAt: indexPath)
-
-        if let cell = cell as? PaymentOptionTableViewCell {
-            cell.separatorView.backgroundColor = currentSecondaryColor
-        }
-        cell.accessoryView?.tintColor = currentSecondaryColor
-        return cell
     }
 
     // swiftlint:disable:next function_body_length
@@ -495,21 +500,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
 
         navigationController?.pushViewController(vc, animated: true)
     }
-
-    // TODO: Add implementation for AdaptableStaticTableViewController
-    private func setupTableViewCells() {
-        createTableViewCellsClosure = { [weak self] paymentOption, _, cell, _ in
-            guard let self = self else { return }
-            cell.textLabel?.text = paymentOption.description
-            cell.imageView?.image = paymentOption.listIcon
-            cell.accessoryView = UIImageView(image: UIImage(named: "Next"))
-
-            if let cell = cell as? PaymentOptionTableViewCell {
-                cell.separatorView.backgroundColor = self.currentSecondaryColor
-            }
-            cell.accessoryView?.tintColor = self.currentSecondaryColor
-        }
-    }
+    
 
     func applyPaymentMethods(from capability: Capability) {
         self.capability = capability
