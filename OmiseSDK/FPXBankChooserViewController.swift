@@ -72,7 +72,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
             return
         }
 
-        let selectedBank = element(forUIIndexPath: indexPath)
+        let selectedBank = item(at: indexPath)
         guard let bank = PaymentInformation.FPX.Bank(rawValue: selectedBank.code) else {
             return
         }

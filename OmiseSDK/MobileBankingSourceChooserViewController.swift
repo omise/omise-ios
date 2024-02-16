@@ -1,12 +1,23 @@
 import UIKit
 import os
 
-class MobileBankingSourceChooserViewController: AdaptableStaticTableViewController<SourceType>,
+class MobileBankingSourceChooserViewController: UITableViewController, ListViewControllerProtocol,
                                                 PaymentSourceChooser,
                                                 PaymentChooserUI {
+    func customize(element: SourceType, tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
+//                    cell.textLabel?.text = title(for: paymentOption.so)
+//                    cell.imageView?.image = paymentOption.listIcon
+        cell.accessoryView = UIImageView(image: UIImage(named: "Next"))
+
+        if let cell = cell as? PaymentOptionTableViewCell {
+            cell.separatorView.backgroundColor = self.currentSecondaryColor
+        }
+        cell.accessoryView?.tintColor = self.currentSecondaryColor
+    }
+    
     var flowSession: PaymentCreatorFlowSession?
 
-    override var showingValues: [SourceType] {
+    var showingValues: [SourceType] = [] {
         didSet {
             os_log("Mobile Banking Chooser: Showing options - %{private}@",
                    log: uiLogObject,
@@ -31,32 +42,32 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        applyPrimaryColor()
-        applySecondaryColor()
+//        applyPrimaryColor()
+//        applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 
-    // TODO: Add implementation for AdaptableStaticTableViewController
-    /*
-    override func staticIndexPath(forValue value: SourceType) -> IndexPath {
-        switch value {
-        case .mobileBankingBAY:
-            return IndexPath(row: 0, section: 0)
-        case .mobileBankingBBL:
-            return IndexPath(row: 1, section: 0)
-        case .mobileBankingKBank:
-            return IndexPath(row: 2, section: 0)
-        case .mobileBankingSCB:
-            return IndexPath(row: 3, section: 0)
-        case .mobileBankingKTB:
-            return IndexPath(row: 4, section: 0)
-        case .ocbcDigital:
-            return IndexPath(row: 5, section: 0)
-        default:
-            preconditionFailure("This value is not supported for the built-in chooser")
+    func title(for sourceType: SourceType) -> String? {
+        switch sourceType {
+        case .mobileBankingSCB: return "SCB EASY"
+        case .mobileBankingKBank: return "K PLUS"
+        case .mobileBankingBAY: return "KMA"
+        case .mobileBankingBBL: return "Bualuang mBanking"
+        case .mobileBankingKTB: return "Krungthai Next"
+        default: return nil
         }
     }
-     */
+
+    func icon(for sourceType: SourceType) -> UIImage? {
+        switch sourceType {
+        case .mobileBankingSCB: return UIImage(named: "SCB", in: .omiseSDK, compatibleWith: nil)
+        case .mobileBankingKBank: return UIImage(named: "KPlus", in: .omiseSDK, compatibleWith: nil)
+        case .mobileBankingBAY: return UIImage(named: "KMA", in: .omiseSDK, compatibleWith: nil)
+        case .mobileBankingBBL: return UIImage(named: "BBL M", in: .omiseSDK, compatibleWith: nil)
+        case .mobileBankingKTB: return UIImage(named: "KTB Next", in: .omiseSDK, compatibleWith: nil)
+        default: return nil
+        }
+    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
@@ -71,7 +82,7 @@ class MobileBankingSourceChooserViewController: AdaptableStaticTableViewControll
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
-        let sourceType = element(forUIIndexPath: indexPath)
+        let sourceType = item(at: indexPath)
 
         os_log("Mobile Banking Chooser: %{private}@ was selected", log: uiLogObject, type: .info, sourceType.rawValue)
 

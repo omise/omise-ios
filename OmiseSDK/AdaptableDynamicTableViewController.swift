@@ -1,8 +1,8 @@
 import UIKit
 
-public class AdaptableDynamicTableViewController<Element: Equatable>: UITableViewController {
+public class AdaptableDynamicTableViewController<Item: Equatable>: UITableViewController {
     
-    public var showingValues: [Element] = [] {
+    public var showingValues: [Item] = [] {
         didSet {
             if isViewLoaded {
                 tableView.reloadData()
@@ -14,7 +14,7 @@ public class AdaptableDynamicTableViewController<Element: Equatable>: UITableVie
         return showingValues.count
     }
     
-    public func element(forUIIndexPath indexPath: IndexPath) -> Element {
+    public func item(at indexPath: IndexPath) -> Item {
         return showingValues[indexPath.row]
     }
 }

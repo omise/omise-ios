@@ -2,12 +2,12 @@ import UIKit
 import os
 
 // swiftlint:disable:next type_name
-class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewController<SourceType>,
+class InstallmentBankingSourceChooserViewController: UITableViewController, ListViewControllerProtocol,
                                                      PaymentSourceChooser,
                                                      PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?
     
-    override var showingValues: [SourceType] {
+    var showingValues: [SourceType] = [] {
         didSet {
             os_log("Installment Brand Chooser: Showing options - %{private}@",
                    log: uiLogObject,
@@ -37,7 +37,10 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
-    // TODO: Add implementation for AdaptableStaticTableViewController 
+    func customize(element: SourceType, tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
+        
+    }
+
     /*
     override func staticIndexPath(forValue value: SourceType) -> IndexPath {
         switch value {
@@ -80,7 +83,7 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
             return
         }
         
-//        let selectedBrand = element(forUIIndexPath: indexPath)
+//        let selectedBrand = item(at: indexPath)
 //        os_log("Installment Brand Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedBrand.description)
 
         performSegue(withIdentifier: "GoToInstallmentTermsChooserSegue", sender: cell)
@@ -90,7 +93,7 @@ class InstallmentBankingSourceChooserViewController: AdaptableStaticTableViewCon
         guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else {
             return
         }
-        let sourceType = element(forUIIndexPath: indexPath)
+        let sourceType = item(at: indexPath)
         if segue.identifier == "GoToInstallmentTermsChooserSegue",
            let installmentTermsChooserViewController = segue.destination as? InstallmentsNumberOfTermsChooserViewController {
             installmentTermsChooserViewController.sourceType = sourceType

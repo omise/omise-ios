@@ -1,12 +1,23 @@
 import UIKit
 import os
 
-class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<PaymentInformation.DuitNowOBW.Bank>,
+class DuitNowOBWBankChooserViewController: UITableViewController, ListViewControllerProtocol,
                                                   PaymentSourceChooser,
-                                                  PaymentChooserUI {
+                                           PaymentChooserUI {
+    func customize(element bank: PaymentInformation.DuitNowOBW.Bank, tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
+        cell.textLabel?.text = bank.localizedTitle
+        cell.imageView?.image = bank.listIcon
+        cell.accessoryView = UIImageView(image: UIImage(named: "Next"))
+
+        if let cell = cell as? PaymentOptionTableViewCell {
+            cell.separatorView.backgroundColor = self.currentSecondaryColor
+        }
+        cell.accessoryView?.tintColor = self.currentSecondaryColor
+    }
+    
     var flowSession: PaymentCreatorFlowSession?
     
-    override var showingValues: [PaymentInformation.DuitNowOBW.Bank] {
+    var showingValues: [PaymentInformation.DuitNowOBW.Bank] = [] {
         didSet {
             os_log("DuitNow OBW Bank Chooser: Showing options - %{private}@",
                    log: uiLogObject,
@@ -33,23 +44,7 @@ class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<Pa
         super.viewDidLoad()
         applyPrimaryColor()
         applySecondaryColor()
-        setupTableViewCells()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-    }
-    
-    private func setupTableViewCells() {
-        createTableViewCellsClosure = { [weak self] bank, _, cell, _ in
-            guard let self = self else { return }
-            cell.textLabel?.text = bank.localizedTitle
-            cell.imageView?.image = bank.listIcon
-            cell.accessoryView = UIImageView(image: UIImage(named: "Next"))
-
-            if let cell = cell as? PaymentOptionTableViewCell {
-                cell.separatorView.backgroundColor = self.currentSecondaryColor
-            }
-            cell.accessoryView?.tintColor = self.currentSecondaryColor
-
-        }
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -57,7 +52,7 @@ class DuitNowOBWBankChooserViewController: AdaptableStaticTableViewController<Pa
             return
         }
         
-        let selectedBank = element(forUIIndexPath: indexPath)
+        let selectedBank = item(at: indexPath)
 
         tableView.deselectRow(at: indexPath, animated: true)
         

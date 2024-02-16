@@ -202,7 +202,7 @@ public class PaymentCreatorController: UINavigationController {
         viewController.preferredPrimaryColor = preferredPrimaryColor
         viewController.preferredSecondaryColor = preferredSecondaryColor
 
-        viewController.flowSession = paymentSourceCreatorFlowSession
+        viewController.viewModel.flowSession = paymentSourceCreatorFlowSession
         viewController.allowedPaymentMethods = allowedPaymentMethods
         viewController.showsCreditCardPayment = showsCreditCardPayment
 
@@ -305,7 +305,7 @@ public class PaymentCreatorController: UINavigationController {
             viewController.preferredSecondaryColor = preferredSecondaryColor
         }
         if let viewController = viewController as? PaymentChooserViewController {
-            viewController.flowSession = self.paymentSourceCreatorFlowSession
+            viewController.viewModel.flowSession = self.paymentSourceCreatorFlowSession
         }
         super.pushViewController(viewController, animated: animated)
     }
@@ -321,7 +321,7 @@ public class PaymentCreatorController: UINavigationController {
             viewController.preferredSecondaryColor = preferredSecondaryColor
         }
         if let viewController = childController as? PaymentChooserViewController {
-            viewController.flowSession = self.paymentSourceCreatorFlowSession
+            viewController.viewModel.flowSession = self.paymentSourceCreatorFlowSession
         }
         super.addChild(childController)
     }

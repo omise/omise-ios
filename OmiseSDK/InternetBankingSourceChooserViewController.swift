@@ -2,12 +2,13 @@ import UIKit
 import os
 
 // swiftlint:disable:next type_name
-class InternetBankingSourceChooserViewController: AdaptableStaticTableViewController<SourceType>,
+class InternetBankingSourceChooserViewController: UITableViewController, ListViewControllerProtocol,
                                                   PaymentSourceChooser,
                                                   PaymentChooserUI {
+    
     var flowSession: PaymentCreatorFlowSession?
     
-    override var showingValues: [SourceType] {
+    var showingValues: [SourceType] = [] {
         didSet {
             os_log("Internet Banking Chooser: Showing options - %{private}@",
                    log: uiLogObject,
@@ -37,7 +38,14 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
-    // TODO: Add implementation for AdaptableStaticTableViewController
+    func customize(element: SourceType, tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
+        if let cell = cell as? PaymentOptionTableViewCell {
+            cell.separatorView.backgroundColor = currentSecondaryColor
+        }
+        cell.accessoryView?.tintColor = currentSecondaryColor
+    }
+
+    // TODO: Add implementation for ListViewController
 /*
     override func staticIndexPath(forValue value: SourceType) -> IndexPath {
         switch value {
@@ -50,21 +58,11 @@ class InternetBankingSourceChooserViewController: AdaptableStaticTableViewContro
         }
     }
     */
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = super.tableView(tableView, cellForRowAt: indexPath)
-        
-        if let cell = cell as? PaymentOptionTableViewCell {
-            cell.separatorView.backgroundColor = currentSecondaryColor
-        }
-        cell.accessoryView?.tintColor = currentSecondaryColor
-        return cell
-    }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
-        let sourceType = element(forUIIndexPath: indexPath)
+        let sourceType = item(at: indexPath)
 
         os_log("Internet Banking Chooser: %{private}@ was selected", log: uiLogObject, type: .info, sourceType.rawValue)
 
