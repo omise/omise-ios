@@ -94,6 +94,7 @@ class ProductDetailViewController: OMSBaseViewController {
         guard currentCodePathMode == .code else {
             return
         }
+        
         let paymentCreatorController = PaymentCreatorController.makePaymentCreatorControllerWith(
             publicKey: publicKey,
             amount: paymentAmount,
@@ -101,6 +102,11 @@ class ProductDetailViewController: OMSBaseViewController {
             allowedPaymentMethods: allowedPaymentMethods,
             paymentDelegate: self
         )
+
+        if usesCapabilityDataForPaymentMethods, let capability = self.capability {
+            paymentCreatorController.applyPaymentMethods(from: capability)
+        }
+        
         present(paymentCreatorController, animated: true, completion: nil)
     }
     
@@ -196,7 +202,7 @@ extension ProductDetailViewController: PaymentCreatorControllerDelegate {
                 title = "Token Created"
                 message = "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge."
             case .source(let source):
-                title = "Token Created"
+                title = "Token Created (\(source.paymentInformation.sourceType))"
                 message = "A source with id of \(source.id) was successfully created. Please send this id to server to create a charge."
             }
             

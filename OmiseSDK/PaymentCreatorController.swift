@@ -552,7 +552,6 @@ extension PaymentCreatorController {
         .touchNGo,
         .grabPay,
         .boost,
-        .shopeePay,
         .shopeePayJumpApp,
         .maybankQRPay,
         .duitNowQR,
