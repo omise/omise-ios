@@ -13,8 +13,8 @@ public struct Country: Codable, Equatable {
         self.code = code
     }
     
-    public init?(code: String) {
-        guard let country = Self.all.first(where: { $0.code == code }) else {
+    public init?(code: String?) {
+        guard let code = code, let country = Self.all.first(where: { $0.code == code }) else {
             return nil
         }
         self = country

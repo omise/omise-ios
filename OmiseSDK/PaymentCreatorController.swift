@@ -37,7 +37,7 @@ public class PaymentCreatorController: UINavigationController {
                 return
             }
 
-            self.client = Client(publicKey: publicKey)
+            self.client = OmiseSDK(publicKey: publicKey).client
         }
     }
 

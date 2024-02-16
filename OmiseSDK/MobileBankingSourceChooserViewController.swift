@@ -1,7 +1,7 @@
 import UIKit
 import os
 
-class MobileBankingSourceChooserViewController: UITableViewController, ListViewControllerProtocol,
+class MobileBankingSourceChooserViewController: UITableViewController, ListControllerProtocol,
                                                 PaymentSourceChooser,
                                                 PaymentChooserUI {
     func customize(element: SourceType, tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {

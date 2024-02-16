@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
     case alipay
     case alipayCN
@@ -220,4 +219,3 @@ enum PaymentChooserOption: CaseIterable, Equatable, CustomStringConvertible {
         }
     }
 }
-

@@ -2,7 +2,7 @@ import UIKit
 import os
 
 // swiftlint:disable:next type_name
-class InternetBankingSourceChooserViewController: UITableViewController, ListViewControllerProtocol,
+class InternetBankingSourceChooserViewController: UITableViewController, ListControllerProtocol,
                                                   PaymentSourceChooser,
                                                   PaymentChooserUI {
     

@@ -2,7 +2,7 @@ import UIKit
 import os
 
 // swiftlint:disable:next type_name
-class InstallmentBankingSourceChooserViewController: UITableViewController, ListViewControllerProtocol,
+class InstallmentBankingSourceChooserViewController: UITableViewController, ListControllerProtocol,
                                                      PaymentSourceChooser,
                                                      PaymentChooserUI {
     var flowSession: PaymentCreatorFlowSession?

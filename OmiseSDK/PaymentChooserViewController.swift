@@ -2,9 +2,8 @@
 import UIKit
 import os
 
-
 /// swiftlint:disable:next type_body_length
-class PaymentChooserViewController: UITableViewController, ListViewControllerProtocol,
+class PaymentChooserViewController: UITableViewController, ListControllerProtocol,
                                     PaymentChooserUI {
     
     var showingValues: [ViewContext] = [] {

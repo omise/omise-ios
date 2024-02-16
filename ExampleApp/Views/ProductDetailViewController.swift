@@ -12,10 +12,8 @@ class ProductDetailViewController: BaseViewController {
     }
 
     private func setupClient() {
-        // Setup dev environment for staging
-        Configuration.setShared(Configuration(environment: LocalConfig.default.env))
-
-        let client = Client(publicKey: publicKey)
+        let config = LocalConfig.default.configuration
+        let client = OmiseSDK(publicKey: publicKey, configuration: config).client
 
         client.capability { (result) in
             if case .success(let capability) = result {

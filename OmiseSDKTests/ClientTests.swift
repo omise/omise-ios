@@ -23,15 +23,13 @@ class ClientTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        testClient = Client(publicKey: publicKey)
-        
         // swiftlint:disable force_unwrapping
-        let testEnvironment = Environment.dev(
-            vaultURL: URL(string: "https://vault.staging-omise.co")!,
-            apiURL: URL(string: "https://api.staging-omise.co")!
+        testClient = Client(
+            publicKey: publicKey,
+            apiURL: URL(string: "https://api.staging-omise.co")!,
+            vaultURL: URL(string: "https://vault.staging-omise.co")!
         )
         // swiftlint:enable force_unwrapping
-        Configuration.setShared(Configuration(environment: testEnvironment))
     }
 
     override func tearDown() {

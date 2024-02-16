@@ -1,7 +1,7 @@
 import UIKit
 import os
 
-class DuitNowOBWBankChooserViewController: UITableViewController, ListViewControllerProtocol,
+class DuitNowOBWBankChooserViewController: UITableViewController, ListControllerProtocol,
                                                   PaymentSourceChooser,
                                            PaymentChooserUI {
     func customize(element bank: PaymentInformation.DuitNowOBW.Bank, tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
