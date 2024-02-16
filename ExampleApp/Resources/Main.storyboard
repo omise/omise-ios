@@ -316,8 +316,8 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Payment Methods" id="TrO-kC-S3j">
-                                <string key="footerTitle">"Try Capability API" will try to load the allowed payment methods from tCapabilityOld API and use it if it's available.
-"Use specific payment methods" will ignore the allowed payment methods from tCapabilityOld API and always use the payment method specified below</string>
+                                <string key="footerTitle">"Try Capability API" will try to load the allowed payment methods from the Capability API and use it if it's available.
+"Use specific payment methods" will ignore the allowed payment methods from the Capability API and always use the payment method specified below</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="hyr-Kp-7vQ" style="IBUITableViewCellStyleDefault" id="rjA-xT-q8j">
                                         <rect key="frame" x="0.0" y="463.5" width="414" height="43.5"/>
@@ -1377,7 +1377,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
     </scenes>
     <designables>
         <designable name="5Ul-WN-gFb">
-            <size key="intrinsicContentSize" width="171" height="22"/>
+            <size key="intrinsicContentSize" width="156" height="22"/>
         </designable>
         <designable name="Iw8-Ab-h7Y">
             <size key="intrinsicContentSize" width="28" height="22"/>
