@@ -1,25 +1,23 @@
-// swiftlint:disable file_length
 import UIKit
 import os
 
 protocol PaymentChooserControllerViewModel {
-    var viewContext: [PaymentChooserController.ViewContext] { get }
-    var onViewContextChanged: ([PaymentChooserController.ViewContext]) -> Void { get }
+    var viewContext: [ChoosePaymentMethodController.ViewContext] { get }
+    var onViewContextChanged: ([ChoosePaymentMethodController.ViewContext]) -> Void { get }
 }
 
-protocol PaymentChooserControllerDelegate {
+protocol PaymentChooserControllerDelegate: AnyObject {
 }
 
 /// swiftlint:disable:next type_body_length
-class PaymentChooserController: UITableViewController {
-
+class ChoosePaymentMethodController: UITableViewController {
     struct ViewContext: Equatable {
         let icon: UIImage?
         let title: String
         let accessoryIcon: UIImage?
     }
 
-    let viewModel = ViewModel()
+    let viewModel = ChoosePaymentMethodViewModel()
 
     func reloadIfLoaded() {
         if isViewLoaded {
@@ -63,82 +61,18 @@ class PaymentChooserController: UITableViewController {
 
         cell.textLabel?.text = viewContext?.title
         cell.textLabel?.font = .boldSystemFont(ofSize: 14.0)
-        cell.textLabel?.textColor = UIStyle.Color.primary.uiColor
+        cell.textLabel?.textColor = UIColor.omisePrimary
 
         cell.imageView?.image = viewContext?.icon
         cell.accessoryView = UIImageView(image: viewContext?.accessoryIcon)
 
         if let cell = cell as? PaymentOptionTableViewCell {
-            cell.separatorView.backgroundColor = UIStyle.Color.secondary.uiColor
+            cell.separatorView.backgroundColor = UIColor.omiseSecondary
         }
-        cell.accessoryView?.tintColor = UIStyle.Color.secondary.uiColor
+        cell.accessoryView?.tintColor = UIColor.omiseSecondary
 
         return cell
     }
-
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        switch (segue.identifier, segue.destination) {
-//        case ("GoToCreditCardFormSegue"?, let controller as CreditCardFormViewController):
-//            controller.publicKey = viewModel.flowSession?.client?.publicKey
-//            controller.delegate = viewModel.flowSession
-//            controller.navigationItem.rightBarButtonItem = nil
-//        case ("GoToInternetBankingChooserSegue"?, let controller as InternetBankingSourceChooserViewController):
-//            controller.showingValues = allowedPaymentMethods.filter({ $0.isInternetBanking })
-//            controller.flowSession = self.viewModel.flowSession
-//        case ("GoToMobileBankingChooserSegue"?, let controller as MobileBankingSourceChooserViewController):
-//            controller.showingValues = allowedPaymentMethods.filter({ $0.isMobileBanking })
-//            controller.flowSession = self.viewModel.flowSession
-//        case ("GoToInstallmentBrandChooserSegue"?, let controller as InstallmentBankingSourceChooserViewController):
-//            controller.showingValues = allowedPaymentMethods.filter({ $0.isInstallment })
-//            controller.flowSession = self.viewModel.flowSession
-//        case (_, let controller as EContextInformationInputViewController):
-//            controller.flowSession = self.viewModel.flowSession
-//            if let element = (sender as? UITableViewCell).flatMap(tableView.indexPath(for:)).map(item(at:)) {
-//                switch element {
-//                case .conbini:
-//                    controller.navigationItem.title = NSLocalizedString(
-//                        "econtext.convenience-store.navigation-item.title",
-//                        bundle: .omiseSDK,
-//                        value: "Konbini",
-//                        comment: "A navigaiton title for the EContext screen when the `Konbini` is selected"
-//                    )
-//                case .netBanking:
-//                    controller.navigationItem.title = NSLocalizedString(
-//                        "econtext.netbanking.navigation-item.title",
-//                        bundle: .omiseSDK,
-//                        value: "Net Bank",
-//                        comment: "A navigaiton title for the EContext screen when the `Net Bank` is selected"
-//                    )
-//                case .payEasy:
-//                    controller.navigationItem.title = NSLocalizedString(
-//                        "econtext.pay-easy.navigation-item.title",
-//                        bundle: .omiseSDK,
-//                        value: "Pay-easy",
-//                        comment: "A navigaiton title for the EContext screen when the `Pay-easy` is selected"
-//                    )
-//                default: break
-//                }
-//            }
-//        case ("GoToTrueMoneyFormSegue"?, let controller as TrueMoneyFormViewController):
-//            controller.flowSession = self.viewModel.flowSession
-//        case ("GoToFPXFormSegue"?, let controller as FPXFormViewController):
-//            //            controller.showingValues = capability?.paymentMethod(for: .fpx)?.banks
-//            //            capability?[.fpx]?.banks ?? []
-//
-//            controller.flowSession = self.viewModel.flowSession
-//        case ("GoToDuitNowOBWBankChooserSegue"?, let controller as DuitNowOBWBankChooserViewController):
-////            controller.showingValues = [.duitNowOBWBanks]
-////            [PaymentInformation.DuitNowOBW.Bank]
-//            controller.flowSession = self.viewModel.flowSession
-//        default:
-//            break
-//        }
-//
-//        if let paymentShourceChooserUI = segue.destination as? PaymentChooserUI {
-//            paymentShourceChooserUI.preferredPrimaryColor = self.preferredPrimaryColor
-//            paymentShourceChooserUI.preferredSecondaryColor = self.preferredSecondaryColor
-//        }
-//    }
 
     // swiftlint:disable:next function_body_length
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -208,7 +142,7 @@ class PaymentChooserController: UITableViewController {
 
         let oldAccessoryView = cell?.accessoryView
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
-        loadingIndicator.color = UIStyle.Color.secondary.uiColor
+        loadingIndicator.color = UIColor.omiseSecondary
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
@@ -231,6 +165,6 @@ class PaymentChooserController: UITableViewController {
      */
 
     @IBAction private func closeTapped(_ sender: Any) {
-        viewModel.flowSession?.requestToCancel()
+        viewModel.completion(.cancel)
     }
 }

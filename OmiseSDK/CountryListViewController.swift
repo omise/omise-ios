@@ -88,7 +88,7 @@ extension CountryListViewController: UITableViewDelegate, UITableViewDataSource 
         let country = viewModel?.countries.at(indexPath.row)
 
         cell.textLabel?.text = country?.name ?? ""
-        cell.textLabel?.textColor = UIStyle.Color.primary.uiColor
+        cell.textLabel?.textColor = UIColor.omisePrimary
         cell.accessoryType = (viewModel?.selectedCountry == country) ? .checkmark : .none
         return cell
     }

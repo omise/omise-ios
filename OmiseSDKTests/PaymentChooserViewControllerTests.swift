@@ -67,7 +67,7 @@ class PaymentChooserViewControllerTests: XCTestCase {
             ($0 != .trueMoneyWallet) && ($0 != .trueMoneyJumpApp)
         }
 
-        let vc = PaymentChooserController()
+        let vc = ChoosePaymentMethodController()
         vc.loadView()
 
         vc.allowedPaymentMethods = trueMoneyWalletOnly
@@ -95,7 +95,7 @@ class PaymentChooserViewControllerTests: XCTestCase {
             ($0 != .shopeePay) && ($0 != .shopeePayJumpApp)
         }
 
-        let vc = PaymentChooserController()
+        let vc = ChoosePaymentMethodController()
         vc.loadView()
 
         vc.allowedPaymentMethods = shopeePayOnly
@@ -116,7 +116,7 @@ class PaymentChooserViewControllerTests: XCTestCase {
     }
 
     func testAlphabetSorting() {
-        let vc = PaymentChooserController()
+        let vc = ChoosePaymentMethodController()
         vc.loadView()
 
         let sorted: [PaymentOption] = [
@@ -197,7 +197,7 @@ class PaymentChooserViewControllerTests: XCTestCase {
             .weChat
         ]
 
-        let vc = PaymentChooserController()
+        let vc = ChoosePaymentMethodController()
         vc.loadView()
 
         vc.allowedPaymentMethods = allSourceTypes
@@ -212,7 +212,7 @@ class PaymentChooserViewControllerTests: XCTestCase {
             .atome
         ]
 
-        let vc = PaymentChooserController()
+        let vc = ChoosePaymentMethodController()
         vc.loadView()
 
         vc.showsCreditCardPayment = false
@@ -230,7 +230,7 @@ class PaymentChooserViewControllerTests: XCTestCase {
         let set2: [SourceType] = [ .atome, .payPay, .weChat ]
         let result2: [PaymentOption] = [ .atome, .payPay, .weChat ]
 
-        let vc = PaymentChooserController()
+        let vc = ChoosePaymentMethodController()
         vc.loadView()
 
         vc.showsCreditCardPayment = false

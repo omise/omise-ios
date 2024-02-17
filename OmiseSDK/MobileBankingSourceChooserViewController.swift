@@ -9,9 +9,9 @@ class MobileBankingSourceChooserViewController: UITableViewController, ListContr
         cell.accessoryView = UIImageView(image: UIImage(named: "Next"))
 
         if let cell = cell as? PaymentOptionTableViewCell {
-            cell.separatorView.backgroundColor = UIStyle.Color.secondary.uiColor
+            cell.separatorView.backgroundColor = UIColor.omiseSecondary
         }
-        cell.accessoryView?.tintColor = UIStyle.Color.secondary.uiColor
+        cell.accessoryView?.tintColor = UIColor.omiseSecondary
     }
     
     var flowSession: PaymentCreatorFlowSession?
@@ -72,9 +72,9 @@ class MobileBankingSourceChooserViewController: UITableViewController, ListContr
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
 
         if let cell = cell as? PaymentOptionTableViewCell {
-            cell.separatorView.backgroundColor = UIStyle.Color.secondary.uiColor
+            cell.separatorView.backgroundColor = UIColor.omiseSecondary
         }
-        cell.accessoryView?.tintColor = UIStyle.Color.secondary.uiColor
+        cell.accessoryView?.tintColor = UIColor.omiseSecondary
         return cell
     }
 
@@ -87,7 +87,7 @@ class MobileBankingSourceChooserViewController: UITableViewController, ListContr
 
         let oldAccessoryView = cell?.accessoryView
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
-        loadingIndicator.color = UIStyle.Color.secondary.uiColor
+        loadingIndicator.color = UIColor.omiseSecondary
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
@@ -104,7 +104,7 @@ class MobileBankingSourceChooserViewController: UITableViewController, ListContr
         }
 
         mobileBankingNameLabels.forEach {
-            $0.textColor = UIStyle.Color.primary.uiColor
+            $0.textColor = UIColor.omisePrimary
         }
     }
 

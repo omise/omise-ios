@@ -51,13 +51,13 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         if let cell = cell as? PaymentOptionTableViewCell {
-            cell.separatorView.backgroundColor = UIStyle.Color.secondary.uiColor
+            cell.separatorView.backgroundColor = UIColor.omiseSecondary
         }
         let bank = showingValues[indexPath.row]
-        cell.accessoryView?.tintColor = UIStyle.Color.secondary.uiColor
+        cell.accessoryView?.tintColor = UIColor.omiseSecondary
         cell.textLabel?.text = bank.name
         cell.imageView?.image = bankImage(bank: bank.code)
-        cell.textLabel?.textColor = UIStyle.Color.primary.uiColor
+        cell.textLabel?.textColor = UIColor.omisePrimary
 
         if !bank.isActive {
             disableCell(cell: cell)
@@ -84,7 +84,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
 
         let oldAccessoryView = cell.accessoryView
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
-        loadingIndicator.color = UIStyle.Color.secondary.uiColor
+        loadingIndicator.color = UIColor.omiseSecondary
         cell.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
@@ -126,7 +126,7 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
         )
 
         label.text = message
-        label.textColor = UIStyle.Color.primary.uiColor
+        label.textColor = UIColor.omisePrimary
         label.numberOfLines = 0
         label.textAlignment = .center
         label.sizeToFit()

@@ -156,7 +156,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
                        options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
             self.validateField(sender)
         }
-        sender.borderColor = UIStyle.Color.secondary.uiColor
+        sender.borderColor = UIColor.omiseSecondary
     }
     
     @objc func keyboardWillChangeFrame(_ notification: NSNotification) {

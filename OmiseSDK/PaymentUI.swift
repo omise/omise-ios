@@ -169,17 +169,17 @@ extension PaymentFormUIController where Self: UIViewController & PaymentChooserU
         }
 
         formFields.forEach {
-            $0.textColor = UIStyle.Color.primary.uiColor
+            $0.textColor = UIColor.omisePrimary
         }
         formLabels.forEach {
-            $0.textColor = UIStyle.Color.primary.uiColor
+            $0.textColor = UIColor.omisePrimary
         }
     }
 
     func applySecondaryColor() {
         formFields.forEach {
-            $0.borderColor = UIStyle.Color.secondary.uiColor
-            $0.placeholderTextColor = UIStyle.Color.secondary.uiColor
+            $0.borderColor = UIColor.omiseSecondary
+            $0.placeholderTextColor = UIColor.omiseSecondary
         }
     }
 }

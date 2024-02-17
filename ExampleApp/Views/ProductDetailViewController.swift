@@ -34,36 +34,36 @@ class ProductDetailViewController: BaseViewController {
         return true
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        
-        if segue.identifier == "PresentCreditFormWithModal",
-            let creditCardFormNavigationController = segue.destination as? UINavigationController,
-            let creditCardFormController = creditCardFormNavigationController.topViewController as? CreditCardFormViewController {
-            creditCardFormController.publicKey = publicKey
-            creditCardFormController.handleErrors = true
-            creditCardFormController.delegate = self
-        } else if segue.identifier == "ShowCreditForm",
-            let creditCardFormController = segue.destination as? CreditCardFormViewController {
-            creditCardFormController.publicKey = publicKey
-            creditCardFormController.handleErrors = true
-            creditCardFormController.delegate = self
-        } else if segue.identifier == "PresentPaymentCreator",
-            let paymentCreatorController = segue.destination as? PaymentCreatorController {
-            paymentCreatorController.publicKey = self.publicKey
-            paymentCreatorController.paymentAmount = paymentAmount
-            paymentCreatorController.paymentCurrency = Currency(code: paymentCurrencyCode)
-            if usesCapabilityDataForPaymentMethods, let capability = self.capability {
-                paymentCreatorController.applyPaymentMethods(from: capability)
-            } else {
-                paymentCreatorController.allowedPaymentMethods = allowedPaymentMethods
-            }
-            paymentCreatorController.paymentDelegate = self
-        } else if segue.identifier == "ShowCreditFormWithCustomFields",
-            let vc = segue.destination as? CustomCreditCardFormViewController {
-            vc.delegate = self
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        super.prepare(for: segue, sender: sender)
+//        
+//        if segue.identifier == "PresentCreditFormWithModal",
+//            let creditCardFormNavigationController = segue.destination as? UINavigationController,
+//            let creditCardFormController = creditCardFormNavigationController.topViewController as? CreditCardFormViewController {
+//            creditCardFormController.publicKey = publicKey
+//            creditCardFormController.handleErrors = true
+//            creditCardFormController.delegate = self
+//        } else if segue.identifier == "ShowCreditForm",
+//            let creditCardFormController = segue.destination as? CreditCardFormViewController {
+//            creditCardFormController.publicKey = publicKey
+//            creditCardFormController.handleErrors = true
+//            creditCardFormController.delegate = self
+//        } else if segue.identifier == "PresentPaymentCreator",
+//            let paymentCreatorController = segue.destination as? PaymentCreatorController {
+//            paymentCreatorController.publicKey = self.publicKey
+//            paymentCreatorController.paymentAmount = paymentAmount
+//            paymentCreatorController.paymentCurrency = Currency(code: paymentCurrencyCode)
+//            if usesCapabilityDataForPaymentMethods, let capability = self.capability {
+//                paymentCreatorController.applyPaymentMethods(from: capability)
+//            } else {
+//                paymentCreatorController.allowedPaymentMethods = allowedPaymentMethods
+//            }
+//            paymentCreatorController.paymentDelegate = self
+//        } else if segue.identifier == "ShowCreditFormWithCustomFields",
+//            let vc = segue.destination as? CustomCreditCardFormViewController {
+//            vc.delegate = self
+//        }
+//    }
     
     @IBAction private func showModalCreditCardForm(_ sender: Any) {
         guard currentCodePathMode == .code else {
@@ -90,19 +90,18 @@ class ProductDetailViewController: BaseViewController {
         guard currentCodePathMode == .code else {
             return
         }
-        let paymentCreatorController = PaymentCreatorController.makePaymentCreatorControllerWith(
-            publicKey: publicKey,
-            amount: paymentAmount,
-            currency: Currency(code: paymentCurrencyCode),
-            allowedPaymentMethods: allowedPaymentMethods,
-            paymentDelegate: self
-        )
 
-        if usesCapabilityDataForPaymentMethods, let capability = self.capability {
-            paymentCreatorController.applyPaymentMethods(from: capability)
-        }
+        let paymentMethods = usesCapabilityDataForPaymentMethods ? nil : allowedPaymentMethods
+        let choosePaymentMethodController = OmiseSDK(publicKey: publicKey)
+            .makeChoosePaymentMethodController(
+                allowedPaymentMethods: paymentMethods,
+                paymentAmount: paymentAmount,
+                paymentCurrency: paymentCurrencyCode) { [weak self] result in
+                    print("Payment complete with \(result)")
+                    self?.dismissForm()
+            }
 
-        present(paymentCreatorController, animated: true, completion: nil)
+        present(choosePaymentMethodController, animated: true, completion: nil)
     }
     
     @IBAction private func showCustomCreditCardForm(_ sender: Any) {
@@ -185,44 +184,44 @@ extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate 
 
 // MARK: - Payment Creator Controller Delegate
 
-extension ProductDetailViewController: PaymentCreatorControllerDelegate {
-    
-    func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didCreatePayment payment: Payment) {
-        dismissForm {
-            let title: String
-            let message: String
-            
-            switch payment {
-            case .token(let token):
-                title = "Token Created"
-                message = "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge."
-            case .source(let source):
-                title = "Token Created"
-                message = "A source with id of \(source.id) was successfully created. Please send this id to server to create a charge."
-            }
-            
-            let alertController = UIAlertController(
-                title: title,
-                message: message,
-                preferredStyle: .alert
-            )
-            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-        }
-    }
-    
-    func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didFailWithError error: Error) {
-        let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alertController.addAction(okAction)
-        paymentCreatorController.present(alertController, animated: true, completion: nil)
-    }
-    
-    func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController) {
-        dismissForm()
-    }
-}
+//extension ProductDetailViewController: PaymentCreatorControllerDelegate {
+//    
+//    func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didCreatePayment payment: Payment) {
+//        dismissForm {
+//            let title: String
+//            let message: String
+//            
+//            switch payment {
+//            case .token(let token):
+//                title = "Token Created"
+//                message = "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge."
+//            case .source(let source):
+//                title = "Token Created"
+//                message = "A source with id of \(source.id) was successfully created. Please send this id to server to create a charge."
+//            }
+//            
+//            let alertController = UIAlertController(
+//                title: title,
+//                message: message,
+//                preferredStyle: .alert
+//            )
+//            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+//            alertController.addAction(okAction)
+//            self.present(alertController, animated: true, completion: nil)
+//        }
+//    }
+//    
+//    func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didFailWithError error: Error) {
+//        let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+//        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+//        alertController.addAction(okAction)
+//        paymentCreatorController.present(alertController, animated: true, completion: nil)
+//    }
+//    
+//    func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController) {
+//        dismissForm()
+//    }
+//}
 
 // MARK: - Custom Credit Card Form View Controller Delegate
 

@@ -22,6 +22,10 @@ extension Capability {
         var isCardType: Bool {
             name == "card"
         }
+
+        var sourceType: SourceType? {
+            SourceType(rawValue: name)
+        }
     }
 }
 

@@ -33,16 +33,32 @@ public class OmiseSDK {
     ///
     /// - Parameters:
     ///    - from: ViewController is used as a base to present UINavigationController
-    ///    - availablePaymentMethods: Custom list of payment methods to be shown in the list
+    ///    - allowedPaymentMethods: Custom list of payment methods to be shown in the list. If value is nill then SDK will load list from Capability API
     ///    - showsCreditCardPayment: Should present Card Payment Method in the list
     ///    - delegate: Delegate to be notified when Source or Token is created
-    public func presentPaymentOptionViewController(
-        from: UIViewController,
-        availablePaymentMethods: [SourceType]? = nil,
+    public func makeChoosePaymentMethodController(
+        allowedPaymentMethods: [SourceType]? = nil,
         showsCreditCardPayment: Bool = true,
-        delegate: PaymentCreatorControllerDelegate
-    ) {
-        
+        paymentAmount: Int64,
+        paymentCurrency: String,
+        completion: @escaping PaymentResultClosure
+    ) -> UINavigationController {
+        let paymentFlow = PaymentFlow(
+            client: client,
+            amount: paymentAmount,
+            currency: paymentCurrency
+        )
+
+        /// If allowedPaymentMethods is empty or nil then load it from Capability
+        let useCapability = allowedPaymentMethods?.isEmpty ?? true
+        let viewController = paymentFlow.createRootViewController(
+            allowedPaymentMethods: allowedPaymentMethods ?? [],
+            usePaymentMethodsFromCapability: useCapability,
+            completion: completion
+        )
+
+        let navigationController = UINavigationController(rootViewController: viewController)
+        return navigationController
     }
 }
 

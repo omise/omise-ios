@@ -132,12 +132,12 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
             comment: "Number of terms option text displayed as a title of the number of terms option cell in number of terms chooser scene"
         )
         cell.textLabel?.text = String.localizedStringWithFormat(numberOfTermsTitleFormat, numberOfTerms[indexPath.row])
-        cell.textLabel?.textColor = UIStyle.Color.primary.uiColor
+        cell.textLabel?.textColor = UIColor.omisePrimary
         
         if let cell = cell as? PaymentOptionTableViewCell {
-            cell.separatorView.backgroundColor = UIStyle.Color.secondary.uiColor
+            cell.separatorView.backgroundColor = UIColor.omiseSecondary
         }
-        cell.accessoryView?.tintColor = UIStyle.Color.secondary.uiColor
+        cell.accessoryView?.tintColor = UIColor.omiseSecondary
         
         return cell
     }
@@ -150,7 +150,7 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
 
         let oldAccessoryView = cell?.accessoryView
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
-        loadingIndicator.color = UIStyle.Color.secondary.uiColor
+        loadingIndicator.color = UIColor.omiseSecondary
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false

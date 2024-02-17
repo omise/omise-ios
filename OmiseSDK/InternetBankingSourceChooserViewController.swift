@@ -39,9 +39,9 @@ class InternetBankingSourceChooserViewController: UITableViewController, ListCon
     
     func customize(element: SourceType, tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
         if let cell = cell as? PaymentOptionTableViewCell {
-            cell.separatorView.backgroundColor = UIStyle.Color.secondary.uiColor
+            cell.separatorView.backgroundColor = UIColor.omiseSecondary
         }
-        cell.accessoryView?.tintColor = UIStyle.Color.secondary.uiColor
+        cell.accessoryView?.tintColor = UIColor.omiseSecondary
     }
 
 /*
@@ -66,7 +66,7 @@ class InternetBankingSourceChooserViewController: UITableViewController, ListCon
 
         let oldAccessoryView = cell?.accessoryView
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
-        loadingIndicator.color = UIStyle.Color.secondary.uiColor
+        loadingIndicator.color = UIColor.omiseSecondary
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
@@ -83,7 +83,7 @@ class InternetBankingSourceChooserViewController: UITableViewController, ListCon
         }
         
         internetBankingNameLabels.forEach {
-            $0.textColor = UIStyle.Color.primary.uiColor
+            $0.textColor = UIColor.omisePrimary
         }
     }
     

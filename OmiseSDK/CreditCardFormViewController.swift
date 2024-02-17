@@ -562,10 +562,10 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
         }
 
         formFields.forEach {
-            $0.textColor = UIStyle.Color.primary.uiColor
+            $0.textColor = UIColor.omisePrimary
         }
         formLabels.forEach {
-            $0.textColor = UIStyle.Color.primary.uiColor
+            $0.textColor = UIColor.omisePrimary
         }
 
         let textFields: [UIView] =
@@ -574,7 +574,7 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
 
         textFields.forEach {
             if let input = $0 as? TextFieldView {
-                input.textColor = UIStyle.Color.primary.uiColor
+                input.textColor = UIColor.omisePrimary
             }
         }
 
@@ -586,8 +586,8 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
         }
 
         formFields.forEach {
-            $0.borderColor = UIStyle.Color.secondary.uiColor
-            $0.placeholderTextColor = UIStyle.Color.secondary.uiColor
+            $0.borderColor = UIColor.omiseSecondary
+            $0.placeholderTextColor = UIColor.omiseSecondary
         }
 
         let textFields: [UIView] =
@@ -597,8 +597,8 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
         textFields.forEach {
             if let input = $0 as? TextFieldView {
                 input.titleColor = preferredPrimaryColor
-                input.borderColor = UIStyle.Color.secondary.uiColor
-                input.placeholderTextColor = UIStyle.Color.secondary.uiColor
+                input.borderColor = UIColor.omiseSecondary
+                input.placeholderTextColor = UIColor.omiseSecondary
             }
         }
     }
@@ -690,7 +690,7 @@ extension CreditCardFormViewController {
                        options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
             self.validateField(sender)
         }
-        sender.borderColor = UIStyle.Color.secondary.uiColor
+        sender.borderColor = UIColor.omiseSecondary
     }
 
     @IBAction private func updateInputAccessoryViewFor(_ sender: OmiseTextField) {

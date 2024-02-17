@@ -9,9 +9,9 @@ class DuitNowOBWBankChooserViewController: UITableViewController, ListController
         cell.accessoryView = UIImageView(image: UIImage(named: "Next"))
 
         if let cell = cell as? PaymentOptionTableViewCell {
-            cell.separatorView.backgroundColor = UIStyle.Color.secondary.uiColor
+            cell.separatorView.backgroundColor = UIColor.omiseSecondary
         }
-        cell.accessoryView?.tintColor = UIStyle.Color.secondary.uiColor
+        cell.accessoryView?.tintColor = UIColor.omiseSecondary
     }
     
     var flowSession: PaymentCreatorFlowSession?
@@ -59,7 +59,7 @@ class DuitNowOBWBankChooserViewController: UITableViewController, ListController
         
         let oldAccessoryView = cell.accessoryView
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
-        loadingIndicator.color = UIStyle.Color.secondary.uiColor
+        loadingIndicator.color = UIColor.omiseSecondary
         cell.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
@@ -77,7 +77,7 @@ class DuitNowOBWBankChooserViewController: UITableViewController, ListController
         }
         
         bankNameLabels.forEach {
-            $0.textColor = UIStyle.Color.primary.uiColor
+            $0.textColor = UIColor.omisePrimary
         }
     }
     

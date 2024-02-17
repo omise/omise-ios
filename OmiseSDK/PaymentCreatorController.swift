@@ -3,17 +3,6 @@
 import UIKit
 import os
 
-public protocol PaymentCreatorControllerDelegate: AnyObject {
-    func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didCreatePayment payment: Payment)
-    func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didFailWithError error: Error)
-    func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController)
-}
-
-public enum Payment {
-    case token(Token)
-    case source(Source)
-}
-
 /// Drop-in UI flow controller that let user choose the payment method with the given payment options
 public class PaymentCreatorController: UINavigationController {
 
@@ -50,7 +39,7 @@ public class PaymentCreatorController: UINavigationController {
         }
     }
 
-    private let paymentChooserController = PaymentChooserController(nibName: nil, bundle: .omiseSDK)
+    private let paymentChooserController = ChoosePaymentMethodController(nibName: nil, bundle: .omiseSDK)
 
     /// Available Source payment options to let user to choose.
     /// The default value is the default available payment method for merchant in Thailand
@@ -68,7 +57,7 @@ public class PaymentCreatorController: UINavigationController {
     public var handleErrors = true
 
     /// Delegate to receive CreditCardFormController result.
-    public weak var paymentDelegate: PaymentCreatorControllerDelegate?
+//    public weak var paymentDelegate: PaymentCreatorControllerDelegate?
 
     var client: Client? {
         didSet {
@@ -100,23 +89,23 @@ public class PaymentCreatorController: UINavigationController {
         }
     }
 
-    /// Factory method for creating CreditCardFormController with given public key.
-    /// - parameter publicKey: Omise public key.
-    public static func makePaymentCreatorControllerWith(
-        publicKey: String,
-        amount: Int64,
-        currency: Currency,
-        allowedPaymentMethods: [SourceType],
-        paymentDelegate: PaymentCreatorControllerDelegate?
-    ) -> PaymentCreatorController {
-        let paymentCreatorController = PaymentCreatorController()
-        paymentCreatorController.publicKey = publicKey
-        paymentCreatorController.paymentAmount = amount
-        paymentCreatorController.paymentCurrency = currency
-        paymentCreatorController.allowedPaymentMethods = allowedPaymentMethods
-        paymentCreatorController.paymentDelegate = paymentDelegate
-        return paymentCreatorController
-    }
+//    /// Factory method for creating CreditCardFormController with given public key.
+//    /// - parameter publicKey: Omise public key.
+//    public static func makePaymentCreatorControllerWith(
+//        publicKey: String,
+//        amount: Int64,
+//        currency: Currency,
+//        allowedPaymentMethods: [SourceType],
+//        paymentDelegate: PaymentCreatorControllerDelegate?
+//    ) -> PaymentCreatorController {
+//        let paymentCreatorController = PaymentCreatorController()
+//        paymentCreatorController.publicKey = publicKey
+//        paymentCreatorController.paymentAmount = amount
+//        paymentCreatorController.paymentCurrency = currency
+//        paymentCreatorController.allowedPaymentMethods = allowedPaymentMethods
+//        paymentCreatorController.paymentDelegate = paymentDelegate
+//        return paymentCreatorController
+//    }
 
     public init() {
         super.init(rootViewController: paymentChooserController)
@@ -143,7 +132,7 @@ public class PaymentCreatorController: UINavigationController {
         paymentChooserController.viewModel.allowedPaymentMethods(from: capability)
     }
 
-    private func initializeWithPaymentChooserViewController(_ viewController: PaymentChooserController) {
+    private func initializeWithPaymentChooserViewController(_ viewController: ChoosePaymentMethodController) {
         viewController.viewModel.flowSession = paymentSourceCreatorFlowSession
         viewController.viewModel.allowedPaymentMethods = allowedPaymentMethods
         viewController.viewModel.showsCreditCardPayment = showsCreditCardPayment
@@ -242,7 +231,7 @@ public class PaymentCreatorController: UINavigationController {
     public override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         dismissErrorMessage(animated: false, sender: self)
 
-        if let viewController = viewController as? PaymentChooserController {
+        if let viewController = viewController as? ChoosePaymentMethodController {
             viewController.viewModel.flowSession = self.paymentSourceCreatorFlowSession
         }
         super.pushViewController(viewController, animated: animated)
@@ -254,7 +243,7 @@ public class PaymentCreatorController: UINavigationController {
     }
 
     public override func addChild(_ childController: UIViewController) {
-        if let viewController = childController as? PaymentChooserController {
+        if let viewController = childController as? ChoosePaymentMethodController {
             viewController.viewModel.flowSession = self.paymentSourceCreatorFlowSession
         }
         super.addChild(childController)
@@ -299,9 +288,10 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
                type: .default,
                token.id)
 
-        if let paymentDelegate = self.paymentDelegate {
-            paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.token(token))
-        }
+
+//        if let paymentDelegate = self.paymentDelegate {
+//            paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.token(token))
+//        }
     }
 
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didCreatedSource source: Source) {
@@ -310,12 +300,12 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
                type: .default,
                source.id)
 
-        if let paymentDelegate = self.paymentDelegate {
-            paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.source(source))
-            os_log("Payment Creator Created Source succeed delegate notified", log: uiLogObject, type: .default)
-        } else {
-            os_log("There is no Payment Creator delegate to notify about the created source", log: uiLogObject, type: .default)
-        }
+//        if let paymentDelegate = self.paymentDelegate {
+//            paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.source(source))
+//            os_log("Payment Creator Created Source succeed delegate notified", log: uiLogObject, type: .default)
+//        } else {
+//            os_log("There is no Payment Creator delegate to notify about the created source", log: uiLogObject, type: .default)
+//        }
     }
 
     func paymentCreatorFlowSession(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession, didFailWithError error: Error) {
@@ -324,12 +314,12 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
                    log: uiLogObject,
                    type: .info,
                    error.localizedDescription)
-            if let paymentDelegate = self.paymentDelegate {
-                paymentDelegate.paymentCreatorController(self, didFailWithError: error)
-                os_log("Payment Creator error handling delegate notified", log: uiLogObject, type: .default)
-            } else {
-                os_log("There is no Payment Creator delegate to notify about the error", log: uiLogObject, type: .default)
-            }
+//            if let paymentDelegate = self.paymentDelegate {
+//                paymentDelegate.paymentCreatorController(self, didFailWithError: error)
+//                os_log("Payment Creator error handling delegate notified", log: uiLogObject, type: .default)
+//            } else {
+//                os_log("There is no Payment Creator delegate to notify about the error", log: uiLogObject, type: .default)
+//            }
         } else if let error = error as? OmiseError {
             displayErrorWith(title: error.localizedDescription,
                              message: error.localizedRecoverySuggestion,
@@ -356,13 +346,13 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
     func paymentCreatorFlowSessionDidCancel(_ paymentSourceCreatorFlowSession: PaymentCreatorFlowSession) {
         os_log("Payment Creator dismissal requested. Asking the delegate what should the controler do", log: uiLogObject, type: .default)
 
-        if let paymentDelegate = self.paymentDelegate {
-            paymentDelegate.paymentCreatorControllerDidCancel(self)
-        } else {
-            os_log("Payment Creator dismissal requested but there is no delegate to ask. Ignore the request",
-                   log: uiLogObject,
-                   type: .default)
-        }
+//        if let paymentDelegate = self.paymentDelegate {
+//            paymentDelegate.paymentCreatorControllerDidCancel(self)
+//        } else {
+//            os_log("Payment Creator dismissal requested but there is no delegate to ask. Ignore the request",
+//                   log: uiLogObject,
+//                   type: .default)
+//        }
     }
 }
 

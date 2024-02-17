@@ -264,12 +264,12 @@ private extension AtomeFormViewController {
             return
         }
 
-        detailsLabel.textColor = UIStyle.Color.primary.uiColor
-        activityIndicator.color = UIStyle.Color.primary.uiColor
+        detailsLabel.textColor = UIColor.omisePrimary
+        activityIndicator.color = UIColor.omisePrimary
         inputsStackView.arrangedSubviews.forEach {
             if let input = $0 as? AtomeInputView {
-                input.textColor = UIStyle.Color.primary.uiColor
-                input.titleColor = UIStyle.Color.primary.uiColor
+                input.textColor = UIColor.omisePrimary
+                input.titleColor = UIColor.omisePrimary
             }
         }
     }
@@ -281,8 +281,8 @@ private extension AtomeFormViewController {
 
         inputsStackView.arrangedSubviews.forEach {
             if let input = $0 as? AtomeInputView {
-                input.borderColor = UIStyle.Color.secondary.uiColor
-                input.placeholderTextColor = UIStyle.Color.secondary.uiColor
+                input.borderColor = UIColor.omiseSecondary
+                input.placeholderTextColor = UIColor.omiseSecondary
             }
         }
     }

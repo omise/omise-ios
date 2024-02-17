@@ -122,7 +122,7 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
                        options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
             self.validateField(sender)
         }
-        sender.borderColor = UIStyle.Color.secondary.uiColor
+        sender.borderColor = UIColor.omiseSecondary
     }
     
     @IBAction private func updateInputAccessoryViewFor(_ sender: OmiseTextField) {

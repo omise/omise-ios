@@ -71,9 +71,9 @@ class InstallmentBankingSourceChooserViewController: UITableViewController, List
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         if let cell = cell as? PaymentOptionTableViewCell {
-            cell.separatorView.backgroundColor = UIStyle.Color.secondary.uiColor
+            cell.separatorView.backgroundColor = UIColor.omiseSecondary
         }
-        cell.accessoryView?.tintColor = UIStyle.Color.secondary.uiColor
+        cell.accessoryView?.tintColor = UIColor.omiseSecondary
         return cell
     }
 
@@ -108,7 +108,7 @@ class InstallmentBankingSourceChooserViewController: UITableViewController, List
         }
         
         bankNameLabels.forEach {
-            $0.textColor = UIStyle.Color.primary.uiColor
+            $0.textColor = UIColor.omisePrimary
         }
     }
     
