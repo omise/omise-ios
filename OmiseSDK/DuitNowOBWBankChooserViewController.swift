@@ -1,7 +1,7 @@
 import UIKit
 import os
 
-class DuitNowOBWBankChooserViewController: UITableViewController, ListControllerProtocol,
+class DuitNowOBWBankChooserViewController: UITableViewController,
                                                   PaymentSourceChooser {
     func customize(element bank: PaymentInformation.DuitNowOBW.Bank, tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
         cell.textLabel?.text = bank.localizedTitle
@@ -51,7 +51,7 @@ class DuitNowOBWBankChooserViewController: UITableViewController, ListController
             return
         }
         
-        let selectedBank = item(at: indexPath)
+        let selectedBank = showingValues[indexPath.row]
 
         tableView.deselectRow(at: indexPath, animated: true)
         

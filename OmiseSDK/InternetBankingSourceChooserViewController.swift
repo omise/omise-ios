@@ -2,7 +2,7 @@ import UIKit
 import os
 
 // swiftlint:disable:next type_name
-class InternetBankingSourceChooserViewController: UITableViewController, ListControllerProtocol,
+class InternetBankingSourceChooserViewController: UITableViewController,
                                                   PaymentSourceChooser {
     
     var flowSession: PaymentCreatorFlowSession?
@@ -60,7 +60,7 @@ class InternetBankingSourceChooserViewController: UITableViewController, ListCon
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
-        let sourceType = item(at: indexPath)
+        let sourceType = showingValues[indexPath.row]
 
         os_log("Internet Banking Chooser: %{private}@ was selected", log: uiLogObject, type: .info, sourceType.rawValue)
 

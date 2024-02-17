@@ -2,7 +2,7 @@ import UIKit
 import os
 
 // swiftlint:disable:next type_name
-class InstallmentBankingSourceChooserViewController: UITableViewController, ListControllerProtocol,
+class InstallmentBankingSourceChooserViewController: UITableViewController,
                                                      PaymentSourceChooser {
     var flowSession: PaymentCreatorFlowSession?
     
@@ -92,7 +92,7 @@ class InstallmentBankingSourceChooserViewController: UITableViewController, List
         guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else {
             return
         }
-        let sourceType = item(at: indexPath)
+        let sourceType = showingValues[indexPath.row]
         if segue.identifier == "GoToInstallmentTermsChooserSegue",
            let installmentTermsChooserViewController = segue.destination as? InstallmentsNumberOfTermsChooserViewController {
             installmentTermsChooserViewController.sourceType = sourceType

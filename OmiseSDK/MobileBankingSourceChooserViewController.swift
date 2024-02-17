@@ -1,7 +1,7 @@
 import UIKit
 import os
 
-class MobileBankingSourceChooserViewController: UITableViewController, ListControllerProtocol,
+class MobileBankingSourceChooserViewController: UITableViewController,
                                                 PaymentSourceChooser {
     func customize(element: SourceType, tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
 //                    cell.textLabel?.text = title(for: paymentOption.so)
@@ -81,7 +81,7 @@ class MobileBankingSourceChooserViewController: UITableViewController, ListContr
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
-        let sourceType = item(at: indexPath)
+        let sourceType = showingValues[indexPath.row]
 
         os_log("Mobile Banking Chooser: %{private}@ was selected", log: uiLogObject, type: .info, sourceType.rawValue)
 

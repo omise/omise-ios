@@ -27,6 +27,7 @@ class ChoosePaymentMethodController: UITableViewController {
         viewModel.onViewContextChanged = { [weak self] _ in
             self?.reloadIfViewIsLoaded()
         }
+        tableView.separatorColor = UIColor.omiseSecondary
         tableView.rowHeight = 64
         applyNavigationBarStyle()
         setupNavigationItems()
@@ -55,11 +56,11 @@ class ChoosePaymentMethodController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = "PaymentOptionTableViewCell"
+        let identifier = "UITableViewCell"
         var cell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: identifier)
 
         if cell == nil {
-            cell = PaymentOptionTableViewCell(style: .default, reuseIdentifier: identifier)
+            cell = UITableViewCell(style: .default, reuseIdentifier: identifier)
         }
 
         let viewContext = viewModel.viewContext(at: indexPath.row)
@@ -71,9 +72,6 @@ class ChoosePaymentMethodController: UITableViewController {
         cell.imageView?.image = viewContext?.icon
         cell.accessoryView = UIImageView(image: viewContext?.accessoryIcon)
 
-        if let cell = cell as? PaymentOptionTableViewCell {
-            cell.separatorView.backgroundColor = UIColor.omiseSecondary
-        }
         cell.accessoryView?.tintColor = UIColor.omiseSecondary
 
         return cell
