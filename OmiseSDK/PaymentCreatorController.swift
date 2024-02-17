@@ -3,7 +3,7 @@
 import UIKit
 import os
 
-public protocol PaymentCreatorControllerDelegate: NSObjectProtocol {
+public protocol PaymentCreatorControllerDelegate: AnyObject {
     func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didCreatePayment payment: Payment)
     func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didFailWithError error: Error)
     func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController)
@@ -14,19 +14,8 @@ public enum Payment {
     case source(Source)
 }
 
-public protocol PaymentChooserUI: AnyObject {
-    var preferredPrimaryColor: UIColor? { get set }
-    var preferredSecondaryColor: UIColor? { get set }
-}
-
 /// Drop-in UI flow controller that let user choose the payment method with the given payment options
 public class PaymentCreatorController: UINavigationController {
-    // swiftlint:disable:previous type_body_length
-
-    enum PreconditionFailures: String {
-        case paymentChooserViewcontrollerAsRoot =
-                "This Payment Creator doesn't allow the root view controller to be other class than the PaymentChooserViewcontroller"
-    }
 
     /// Omise public key for calling tokenization API.
     public var publicKey: String? {
@@ -57,15 +46,17 @@ public class PaymentCreatorController: UINavigationController {
     /// Boolean indicates that the form should show the Credit Card payment option or not
     public var showsCreditCardPayment = true {
         didSet {
-            paymentChooserViewController.showsCreditCardPayment = showsCreditCardPayment
+            paymentChooserController.viewModel.showsCreditCardPayment = showsCreditCardPayment
         }
     }
 
+    private let paymentChooserController = PaymentChooserController(nibName: nil, bundle: .omiseSDK)
+
     /// Available Source payment options to let user to choose.
     /// The default value is the default available payment method for merchant in Thailand
-    public var allowedPaymentMethods: [SourceType] = PaymentCreatorController.thailandDefaultAvailableSourceMethods {
+    public var allowedPaymentMethods: [SourceType] = SourceType.availableByDefaultInThailand {
         didSet {
-            paymentChooserViewController.allowedPaymentMethods = allowedPaymentMethods
+            paymentChooserController.viewModel.allowedPaymentMethods = allowedPaymentMethods
         }
     }
 
@@ -86,10 +77,6 @@ public class PaymentCreatorController: UINavigationController {
     }
 
     private let paymentSourceCreatorFlowSession = PaymentCreatorFlowSession()
-
-    private var paymentChooserViewController: PaymentChooserViewController {
-        return viewControllers[0] as! PaymentChooserViewController // swiftlint:disable:this force_cast
-    }
 
     private var noticeViewHeightConstraint: NSLayoutConstraint!
     private let displayingNoticeView: NoticeView = {
@@ -122,89 +109,44 @@ public class PaymentCreatorController: UINavigationController {
         allowedPaymentMethods: [SourceType],
         paymentDelegate: PaymentCreatorControllerDelegate?
     ) -> PaymentCreatorController {
-        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
-        let paymentCreatorController = storyboard.instantiateViewController(
-            withIdentifier: "PaymentCreatorController"
-        ) as! PaymentCreatorController // swiftlint:disable:this force_cast
+        let paymentCreatorController = PaymentCreatorController()
         paymentCreatorController.publicKey = publicKey
         paymentCreatorController.paymentAmount = amount
         paymentCreatorController.paymentCurrency = currency
         paymentCreatorController.allowedPaymentMethods = allowedPaymentMethods
         paymentCreatorController.paymentDelegate = paymentDelegate
-
         return paymentCreatorController
     }
 
     public init() {
-        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "PaymentChooserController")
-
-        guard let paymentChooserViewController = viewController as? PaymentChooserViewController else {
-            preconditionFailure(
-                PreconditionFailures.paymentChooserViewcontrollerAsRoot.rawValue
-            )
-        }
-
-        super.init(rootViewController: paymentChooserViewController)
-
-        initializeWithPaymentChooserViewController(paymentChooserViewController)
+        super.init(rootViewController: paymentChooserController)
+        initializeWithPaymentChooserViewController(paymentChooserController)
     }
 
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-
-        guard let rootViewController = topViewController as? PaymentChooserViewController else {
-            preconditionFailure(
-                PreconditionFailures.paymentChooserViewcontrollerAsRoot.rawValue
-            )
-            return nil
-        }
-        initializeWithPaymentChooserViewController(rootViewController)
+        viewControllers = [paymentChooserController]
+        initializeWithPaymentChooserViewController(paymentChooserController)
     }
 
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-
-        guard let rootViewController = topViewController as? PaymentChooserViewController else {
-            preconditionFailure(
-                PreconditionFailures.paymentChooserViewcontrollerAsRoot.rawValue
-            )
-        }
-        initializeWithPaymentChooserViewController(rootViewController)
+        initializeWithPaymentChooserViewController(paymentChooserController)
     }
 
     public override init(navigationBarClass: AnyClass?, toolbarClass: AnyClass?) {
         super.init(navigationBarClass: navigationBarClass, toolbarClass: toolbarClass)
-
-        guard let rootViewController = topViewController as? PaymentChooserViewController else {
-            preconditionFailure(
-                PreconditionFailures.paymentChooserViewcontrollerAsRoot.rawValue
-            )
-        }
-        initializeWithPaymentChooserViewController(rootViewController)
+        initializeWithPaymentChooserViewController(paymentChooserController)
     }
-
-    public override var viewControllers: [UIViewController] {
-        willSet {
-            if !(viewControllers.first is PaymentChooserViewController) {
-                preconditionFailure(
-                    PreconditionFailures.paymentChooserViewcontrollerAsRoot.rawValue
-                )
-            }
-        }
-    }
-
+    
     public func applyPaymentMethods(from capability: Capability) {
-        paymentChooserViewController.applyPaymentMethods(from: capability)
+        paymentChooserController.viewModel.allowedPaymentMethods(from: capability)
     }
 
-    private func initializeWithPaymentChooserViewController(_ viewController: PaymentChooserViewController) {
-        viewController.preferredPrimaryColor = preferredPrimaryColor
-        viewController.preferredSecondaryColor = preferredSecondaryColor
-
+    private func initializeWithPaymentChooserViewController(_ viewController: PaymentChooserController) {
         viewController.viewModel.flowSession = paymentSourceCreatorFlowSession
-        viewController.allowedPaymentMethods = allowedPaymentMethods
-        viewController.showsCreditCardPayment = showsCreditCardPayment
+        viewController.viewModel.allowedPaymentMethods = allowedPaymentMethods
+        viewController.viewModel.showsCreditCardPayment = showsCreditCardPayment
 
         paymentSourceCreatorFlowSession.delegate = self
 
@@ -300,11 +242,7 @@ public class PaymentCreatorController: UINavigationController {
     public override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         dismissErrorMessage(animated: false, sender: self)
 
-        if let viewController = viewController as? PaymentChooserUI {
-            viewController.preferredPrimaryColor = preferredPrimaryColor
-            viewController.preferredSecondaryColor = preferredSecondaryColor
-        }
-        if let viewController = viewController as? PaymentChooserViewController {
+        if let viewController = viewController as? PaymentChooserController {
             viewController.viewModel.flowSession = self.paymentSourceCreatorFlowSession
         }
         super.pushViewController(viewController, animated: animated)
@@ -316,11 +254,7 @@ public class PaymentCreatorController: UINavigationController {
     }
 
     public override func addChild(_ childController: UIViewController) {
-        if let viewController = childController as? PaymentChooserUI {
-            viewController.preferredPrimaryColor = preferredPrimaryColor
-            viewController.preferredSecondaryColor = preferredSecondaryColor
-        }
-        if let viewController = childController as? PaymentChooserViewController {
+        if let viewController = childController as? PaymentChooserController {
             viewController.viewModel.flowSession = self.paymentSourceCreatorFlowSession
         }
         super.addChild(childController)
@@ -432,87 +366,6 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
     }
 }
 
-extension PaymentCreatorController {
-    public static let thailandDefaultAvailableSourceMethods: [SourceType] = [
-        .internetBankingBAY,
-        .internetBankingBBL,
-        .mobileBankingSCB,
-        .mobileBankingKBank,
-        .mobileBankingBAY,
-        .mobileBankingBBL,
-        .mobileBankingKTB,
-        .alipay,
-        .billPaymentTescoLotus,
-        .installmentBAY,
-        .installmentFirstChoice,
-        .installmentBBL,
-        .installmentKTC,
-        .installmentKBank,
-        .installmentSCB,
-        .installmentTTB,
-        .installmentUOB,
-        .promptPay,
-        .trueMoneyWallet,
-        .pointsCiti,
-        .shopeePayJumpApp
-    ]
-
-    public static let japanDefaultAvailableSourceMethods: [SourceType] = [
-        .eContext,
-        .payPay
-    ]
-
-    public static let singaporeDefaultAvailableSourceMethods: [SourceType] = [
-        .payNow,
-        .shopeePayJumpApp
-    ]
-
-    public static let malaysiaDefaultAvailableSourceMethods: [SourceType] = [
-        .fpx,
-        .installmentMBB,
-        .touchNGo,
-        .grabPay,
-        .boost,
-        .shopeePay,
-        .shopeePayJumpApp,
-        .maybankQRPay,
-        .duitNowQR,
-        .duitNowOBW
-    ]
-
-    public static let internetBankingAvailablePaymentMethods: [SourceType] = [
-        .internetBankingBAY,
-        .internetBankingBBL
-    ]
-
-    // swiftlint:disable:next identifier_name
-    public static let installmentsBankingAvailablePaymentMethods: [SourceType] = [
-        .installmentBAY,
-        .installmentFirstChoice,
-        .installmentBBL,
-        .installmentMBB,
-        .installmentKTC,
-        .installmentKBank,
-        .installmentSCB,
-        .installmentTTB,
-        .installmentUOB
-    ]
-
-    public static let billPaymentAvailablePaymentMethods: [SourceType] = [
-        .billPaymentTescoLotus
-    ]
-
-    public static let barcodeAvailablePaymentMethods: [SourceType] = [
-        .barcodeAlipay
-    ]
-
-    public static let mobileBankingAvailablePaymentMethods: [SourceType] = [
-        .mobileBankingSCB,
-        .mobileBankingKBank,
-        .mobileBankingBAY,
-        .mobileBankingKTB
-    ]
-}
 
 class NoticeView: UIView {
 

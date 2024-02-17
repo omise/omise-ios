@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 public class OmiseSDK {
     /// Static container that allows to assign a shared instance of OmiseSDK to be used as a Singleton object
@@ -26,6 +27,22 @@ public class OmiseSDK {
             apiURL: configuration?.apiURL,
             vaultURL: configuration?.vaultURL
         )
+    }
+
+    /// Presents controller with Payment Methods list
+    ///
+    /// - Parameters:
+    ///    - from: ViewController is used as a base to present UINavigationController
+    ///    - availablePaymentMethods: Custom list of payment methods to be shown in the list
+    ///    - showsCreditCardPayment: Should present Card Payment Method in the list
+    ///    - delegate: Delegate to be notified when Source or Token is created
+    public func presentPaymentOptionViewController(
+        from: UIViewController,
+        availablePaymentMethods: [SourceType]? = nil,
+        showsCreditCardPayment: Bool = true,
+        delegate: PaymentCreatorControllerDelegate
+    ) {
+        
     }
 }
 

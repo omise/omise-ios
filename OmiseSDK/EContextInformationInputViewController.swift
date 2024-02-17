@@ -1,6 +1,6 @@
 import UIKit
 
-class EContextInformationInputViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
+class EContextInformationInputViewController: UIViewController, PaymentSourceChooser, PaymentFormUIController {
     var flowSession: PaymentCreatorFlowSession?
     var client: Client?
     var paymentAmount: Int64?
@@ -10,18 +10,6 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     
     var isInputDataValid: Bool {
         return formFields.allSatisfy { $0.isValid }
-    }
-    
-    @IBInspectable var preferredPrimaryColor: UIColor? {
-        didSet {
-            applyPrimaryColor()
-        }
-    }
-    
-    @IBInspectable var preferredSecondaryColor: UIColor? {
-        didSet {
-            applySecondaryColor()
-        }
     }
     
     @IBOutlet var contentView: UIScrollView!
@@ -59,8 +47,6 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        applyPrimaryColor()
-        applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         formFields.forEach {
@@ -170,7 +156,7 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
                        options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
             self.validateField(sender)
         }
-        sender.borderColor = currentSecondaryColor
+        sender.borderColor = UIStyle.Color.secondary.uiColor
     }
     
     @objc func keyboardWillChangeFrame(_ notification: NSNotification) {

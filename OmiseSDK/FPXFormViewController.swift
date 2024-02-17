@@ -1,6 +1,6 @@
 import UIKit
 
-class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
+class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentFormUIController {
 
     private let destinationSegue: String = "GoToFPXBankChooserSegue"
     var flowSession: PaymentCreatorFlowSession?
@@ -15,18 +15,6 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
 
     private var isEmailInputEmpty: Bool {
         return emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty ?? true
-    }
-
-    @IBInspectable var preferredPrimaryColor: UIColor? {
-        didSet {
-            applyPrimaryColor()
-        }
-    }
-
-    @IBInspectable var preferredSecondaryColor: UIColor? {
-        didSet {
-            applySecondaryColor()
-        }
     }
 
     var currentEditingTextField: OmiseTextField?
@@ -62,8 +50,6 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        applyPrimaryColor()
-        applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         formFields.forEach {
@@ -129,8 +115,6 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
             fpxBankChooserViewController.email = emailValue
             fpxBankChooserViewController.showingValues = showingValues ?? []
             fpxBankChooserViewController.flowSession = self.flowSession
-            fpxBankChooserViewController.preferredPrimaryColor = self.preferredPrimaryColor
-            fpxBankChooserViewController.preferredSecondaryColor = self.preferredSecondaryColor
         }
     }
 
@@ -145,7 +129,7 @@ class FPXFormViewController: UIViewController, PaymentSourceChooser, PaymentChoo
                        options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
             self.validateField(sender)
         }
-        sender.borderColor = currentSecondaryColor
+        sender.borderColor = UIStyle.Color.secondary.uiColor
     }
 
     @IBAction private func updateInputAccessoryViewFor(_ sender: OmiseTextField) {

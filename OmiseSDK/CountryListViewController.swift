@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CountryListViewController: UIViewController, PaymentChooserUI {
+class CountryListViewController: UIViewController {
     typealias ViewModel = CountryListViewModelProtocol
 
     private struct Style {
@@ -88,7 +88,7 @@ extension CountryListViewController: UITableViewDelegate, UITableViewDataSource 
         let country = viewModel?.countries.at(indexPath.row)
 
         cell.textLabel?.text = country?.name ?? ""
-        cell.textLabel?.textColor = currentPrimaryColor
+        cell.textLabel?.textColor = UIStyle.Color.primary.uiColor
         cell.accessoryType = (viewModel?.selectedCountry == country) ? .checkmark : .none
         return cell
     }

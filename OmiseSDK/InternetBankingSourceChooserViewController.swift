@@ -3,8 +3,7 @@ import os
 
 // swiftlint:disable:next type_name
 class InternetBankingSourceChooserViewController: UITableViewController, ListControllerProtocol,
-                                                  PaymentSourceChooser,
-                                                  PaymentChooserUI {
+                                                  PaymentSourceChooser {
     
     var flowSession: PaymentCreatorFlowSession?
     
@@ -40,12 +39,11 @@ class InternetBankingSourceChooserViewController: UITableViewController, ListCon
     
     func customize(element: SourceType, tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
         if let cell = cell as? PaymentOptionTableViewCell {
-            cell.separatorView.backgroundColor = currentSecondaryColor
+            cell.separatorView.backgroundColor = UIStyle.Color.secondary.uiColor
         }
-        cell.accessoryView?.tintColor = currentSecondaryColor
+        cell.accessoryView?.tintColor = UIStyle.Color.secondary.uiColor
     }
 
-    // TODO: Add implementation for ListViewController
 /*
     override func staticIndexPath(forValue value: SourceType) -> IndexPath {
         switch value {
@@ -68,7 +66,7 @@ class InternetBankingSourceChooserViewController: UITableViewController, ListCon
 
         let oldAccessoryView = cell?.accessoryView
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
-        loadingIndicator.color = currentSecondaryColor
+        loadingIndicator.color = UIStyle.Color.secondary.uiColor
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
@@ -85,7 +83,7 @@ class InternetBankingSourceChooserViewController: UITableViewController, ListCon
         }
         
         internetBankingNameLabels.forEach {
-            $0.textColor = currentPrimaryColor
+            $0.textColor = UIStyle.Color.primary.uiColor
         }
     }
     

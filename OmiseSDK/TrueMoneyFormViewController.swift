@@ -1,6 +1,6 @@
 import UIKit
 
-class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, PaymentChooserUI, PaymentFormUIController {
+class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, PaymentFormUIController {
     
     var flowSession: PaymentCreatorFlowSession?
     
@@ -9,19 +9,7 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
     private var isInputDataValid: Bool {
         return formFields.allSatisfy { $0.isValid }
     }
-    
-    @IBInspectable var preferredPrimaryColor: UIColor? {
-        didSet {
-            applyPrimaryColor()
-        }
-    }
-    
-    @IBInspectable var preferredSecondaryColor: UIColor? {
-        didSet {
-            applySecondaryColor()
-        }
-    }
-    
+
     var currentEditingTextField: OmiseTextField?
     
     @IBOutlet var contentView: UIScrollView!
@@ -55,8 +43,6 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        applyPrimaryColor()
-        applySecondaryColor()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         formFields.forEach {
@@ -136,7 +122,7 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
                        options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
             self.validateField(sender)
         }
-        sender.borderColor = currentSecondaryColor
+        sender.borderColor = UIStyle.Color.secondary.uiColor
     }
     
     @IBAction private func updateInputAccessoryViewFor(_ sender: OmiseTextField) {

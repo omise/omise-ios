@@ -92,16 +92,6 @@ protocol PaymentSourceChooser: AnyObject {
     var flowSession: PaymentCreatorFlowSession? { get set }
 }
 
-extension PaymentChooserUI {
-    var currentPrimaryColor: UIColor {
-        return preferredPrimaryColor ?? defaultPaymentChooserUIPrimaryColor
-    }
-
-    var currentSecondaryColor: UIColor {
-        return preferredSecondaryColor ?? defaultPaymentChooserUISecondaryColor
-    }
-}
-
 protocol PaymentFormUIController: AnyObject {
     var formLabels: [UILabel]! { get }
     var formFields: [OmiseTextField]! { get }
@@ -171,6 +161,7 @@ extension PaymentFormUIController where Self: UIViewController {
     }
 }
 
+protocol PaymentChooserUI {}
 extension PaymentFormUIController where Self: UIViewController & PaymentChooserUI {
     func applyPrimaryColor() {
         guard isViewLoaded else {
@@ -178,21 +169,17 @@ extension PaymentFormUIController where Self: UIViewController & PaymentChooserU
         }
 
         formFields.forEach {
-            $0.textColor = currentPrimaryColor
+            $0.textColor = UIStyle.Color.primary.uiColor
         }
         formLabels.forEach {
-            $0.textColor = currentPrimaryColor
+            $0.textColor = UIStyle.Color.primary.uiColor
         }
     }
 
     func applySecondaryColor() {
-        guard isViewLoaded else {
-            return
-        }
-
         formFields.forEach {
-            $0.borderColor = currentSecondaryColor
-            $0.placeholderTextColor = currentSecondaryColor
+            $0.borderColor = UIStyle.Color.secondary.uiColor
+            $0.placeholderTextColor = UIStyle.Color.secondary.uiColor
         }
     }
 }

@@ -2,17 +2,16 @@ import UIKit
 import os
 
 class DuitNowOBWBankChooserViewController: UITableViewController, ListControllerProtocol,
-                                                  PaymentSourceChooser,
-                                           PaymentChooserUI {
+                                                  PaymentSourceChooser {
     func customize(element bank: PaymentInformation.DuitNowOBW.Bank, tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
         cell.textLabel?.text = bank.localizedTitle
         cell.imageView?.image = bank.listIcon
         cell.accessoryView = UIImageView(image: UIImage(named: "Next"))
 
         if let cell = cell as? PaymentOptionTableViewCell {
-            cell.separatorView.backgroundColor = self.currentSecondaryColor
+            cell.separatorView.backgroundColor = UIStyle.Color.secondary.uiColor
         }
-        cell.accessoryView?.tintColor = self.currentSecondaryColor
+        cell.accessoryView?.tintColor = UIStyle.Color.secondary.uiColor
     }
     
     var flowSession: PaymentCreatorFlowSession?
@@ -60,7 +59,7 @@ class DuitNowOBWBankChooserViewController: UITableViewController, ListController
         
         let oldAccessoryView = cell.accessoryView
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
-        loadingIndicator.color = currentSecondaryColor
+        loadingIndicator.color = UIStyle.Color.secondary.uiColor
         cell.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
@@ -78,7 +77,7 @@ class DuitNowOBWBankChooserViewController: UITableViewController, ListController
         }
         
         bankNameLabels.forEach {
-            $0.textColor = currentPrimaryColor
+            $0.textColor = UIStyle.Color.primary.uiColor
         }
     }
     

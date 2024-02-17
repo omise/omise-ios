@@ -21,7 +21,7 @@ public protocol CreditCardFormViewControllerDelegate: AnyObject {
 
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.
-public class CreditCardFormViewController: UIViewController, PaymentChooserUI, PaymentFormUIController {
+public class CreditCardFormViewController: UIViewController, PaymentFormUIController {
     // swiftlint:disable:previous type_body_length
 
     typealias ViewModel = CreditCardFormViewModel
@@ -562,10 +562,10 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         }
 
         formFields.forEach {
-            $0.textColor = currentPrimaryColor
+            $0.textColor = UIStyle.Color.primary.uiColor
         }
         formLabels.forEach {
-            $0.textColor = currentPrimaryColor
+            $0.textColor = UIStyle.Color.primary.uiColor
         }
 
         let textFields: [UIView] =
@@ -574,7 +574,7 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
 
         textFields.forEach {
             if let input = $0 as? TextFieldView {
-                input.textColor = currentPrimaryColor
+                input.textColor = UIStyle.Color.primary.uiColor
             }
         }
 
@@ -586,8 +586,8 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         }
 
         formFields.forEach {
-            $0.borderColor = currentSecondaryColor
-            $0.placeholderTextColor = currentSecondaryColor
+            $0.borderColor = UIStyle.Color.secondary.uiColor
+            $0.placeholderTextColor = UIStyle.Color.secondary.uiColor
         }
 
         let textFields: [UIView] =
@@ -597,8 +597,8 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
         textFields.forEach {
             if let input = $0 as? TextFieldView {
                 input.titleColor = preferredPrimaryColor
-                input.borderColor = currentSecondaryColor
-                input.placeholderTextColor = currentSecondaryColor
+                input.borderColor = UIStyle.Color.secondary.uiColor
+                input.placeholderTextColor = UIStyle.Color.secondary.uiColor
             }
         }
     }
@@ -690,7 +690,7 @@ extension CreditCardFormViewController {
                        options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
             self.validateField(sender)
         }
-        sender.borderColor = currentSecondaryColor
+        sender.borderColor = UIStyle.Color.secondary.uiColor
     }
 
     @IBAction private func updateInputAccessoryViewFor(_ sender: OmiseTextField) {

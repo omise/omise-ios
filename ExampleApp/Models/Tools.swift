@@ -6,33 +6,43 @@ struct PaymentPreset {
     var paymentCurrency: Currency
     var allowedPaymentMethods: [SourceType]
     
+    static let allPreset = PaymentPreset(
+        paymentAmount: 5_000_00,
+        paymentCurrency: .thb,
+        allowedPaymentMethods: SourceType.allCases
+    )
+
     static let thailandPreset = PaymentPreset(
         paymentAmount: 5_000_00,
         paymentCurrency: .thb,
-        allowedPaymentMethods: PaymentCreatorController.thailandDefaultAvailableSourceMethods
+        allowedPaymentMethods: SourceType.availableByDefaultInThailand
     )
-    
+
     static let japanPreset = PaymentPreset(
         paymentAmount: 5_000,
         paymentCurrency: .jpy,
-        allowedPaymentMethods: PaymentCreatorController.japanDefaultAvailableSourceMethods
+        allowedPaymentMethods: SourceType.availableByDefaultInJapan
     )
     
     static let singaporePreset = PaymentPreset(
         paymentAmount: 5_000_00,
         paymentCurrency: .sgd,
-        allowedPaymentMethods: PaymentCreatorController.singaporeDefaultAvailableSourceMethods
+        allowedPaymentMethods: SourceType.availableByDefaultSingapore
     )
 
     static let malaysiaPreset = PaymentPreset(
         paymentAmount: 5_000_00,
         paymentCurrency: .myr,
-        allowedPaymentMethods: PaymentCreatorController.malaysiaDefaultAvailableSourceMethods
+        allowedPaymentMethods: SourceType.availableByDefaultMalaysia
     )
 }
 
 class Tool: NSObject {
     
+    static let allPaymentAmount: Int64 = PaymentPreset.allPreset.paymentAmount
+    static let allPaymentCurrency: String = PaymentPreset.allPreset.paymentCurrency.code
+    static let allAllowedPaymentMethods: [SourceType] = PaymentPreset.allPreset.allowedPaymentMethods
+
     static let thailandPaymentAmount: Int64 = PaymentPreset.thailandPreset.paymentAmount
     static let thailandPaymentCurrency: String = PaymentPreset.thailandPreset.paymentCurrency.code
     static let thailandAllowedPaymentMethods: [SourceType] = PaymentPreset.thailandPreset.allowedPaymentMethods

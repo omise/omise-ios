@@ -3,8 +3,7 @@ import os
 
 // swiftlint:disable:next type_name
 class InstallmentBankingSourceChooserViewController: UITableViewController, ListControllerProtocol,
-                                                     PaymentSourceChooser,
-                                                     PaymentChooserUI {
+                                                     PaymentSourceChooser {
     var flowSession: PaymentCreatorFlowSession?
     
     var showingValues: [SourceType] = [] {
@@ -72,9 +71,9 @@ class InstallmentBankingSourceChooserViewController: UITableViewController, List
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         if let cell = cell as? PaymentOptionTableViewCell {
-            cell.separatorView.backgroundColor = currentSecondaryColor
+            cell.separatorView.backgroundColor = UIStyle.Color.secondary.uiColor
         }
-        cell.accessoryView?.tintColor = currentSecondaryColor
+        cell.accessoryView?.tintColor = UIStyle.Color.secondary.uiColor
         return cell
     }
 
@@ -109,7 +108,7 @@ class InstallmentBankingSourceChooserViewController: UITableViewController, List
         }
         
         bankNameLabels.forEach {
-            $0.textColor = currentPrimaryColor
+            $0.textColor = UIStyle.Color.primary.uiColor
         }
     }
     

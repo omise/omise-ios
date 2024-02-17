@@ -15,7 +15,7 @@ protocol AtomeFormViewControllerInterface {
     func onSubmitButtonTapped()
 }
 
-class AtomeFormViewController: UIViewController, PaymentChooserUI {
+class AtomeFormViewController: UIViewController {
     struct Style {
         var backgroundColorForDisabledNextButton = UIColor(0xE4E7ED)
         var backgroundColorForEnabledNextButton = UIColor(0x1957F0)
@@ -264,12 +264,12 @@ private extension AtomeFormViewController {
             return
         }
 
-        detailsLabel.textColor = currentPrimaryColor
-        activityIndicator.color = currentPrimaryColor
+        detailsLabel.textColor = UIStyle.Color.primary.uiColor
+        activityIndicator.color = UIStyle.Color.primary.uiColor
         inputsStackView.arrangedSubviews.forEach {
             if let input = $0 as? AtomeInputView {
-                input.textColor = currentPrimaryColor
-                input.titleColor = currentPrimaryColor
+                input.textColor = UIStyle.Color.primary.uiColor
+                input.titleColor = UIStyle.Color.primary.uiColor
             }
         }
     }
@@ -281,8 +281,8 @@ private extension AtomeFormViewController {
 
         inputsStackView.arrangedSubviews.forEach {
             if let input = $0 as? AtomeInputView {
-                input.borderColor = currentSecondaryColor
-                input.placeholderTextColor = currentSecondaryColor
+                input.borderColor = UIStyle.Color.secondary.uiColor
+                input.placeholderTextColor = UIStyle.Color.secondary.uiColor
             }
         }
     }

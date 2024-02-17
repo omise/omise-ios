@@ -2,7 +2,7 @@ import UIKit
 import os
 
 // swiftlint:disable:next type_name
-class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentSourceChooser, PaymentChooserUI {
+class InstallmentsNumberOfTermsChooserViewController: UITableViewController, PaymentSourceChooser {
     var flowSession: PaymentCreatorFlowSession?
 
     var sourceType: SourceType? {
@@ -132,12 +132,12 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
             comment: "Number of terms option text displayed as a title of the number of terms option cell in number of terms chooser scene"
         )
         cell.textLabel?.text = String.localizedStringWithFormat(numberOfTermsTitleFormat, numberOfTerms[indexPath.row])
-        cell.textLabel?.textColor = currentPrimaryColor
+        cell.textLabel?.textColor = UIStyle.Color.primary.uiColor
         
         if let cell = cell as? PaymentOptionTableViewCell {
-            cell.separatorView.backgroundColor = currentSecondaryColor
+            cell.separatorView.backgroundColor = UIStyle.Color.secondary.uiColor
         }
-        cell.accessoryView?.tintColor = currentSecondaryColor
+        cell.accessoryView?.tintColor = UIStyle.Color.secondary.uiColor
         
         return cell
     }
@@ -150,7 +150,7 @@ class InstallmentsNumberOfTermsChooserViewController: UITableViewController, Pay
 
         let oldAccessoryView = cell?.accessoryView
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
-        loadingIndicator.color = currentSecondaryColor
+        loadingIndicator.color = UIStyle.Color.secondary.uiColor
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false

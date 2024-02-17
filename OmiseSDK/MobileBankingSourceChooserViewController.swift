@@ -2,17 +2,16 @@ import UIKit
 import os
 
 class MobileBankingSourceChooserViewController: UITableViewController, ListControllerProtocol,
-                                                PaymentSourceChooser,
-                                                PaymentChooserUI {
+                                                PaymentSourceChooser {
     func customize(element: SourceType, tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
 //                    cell.textLabel?.text = title(for: paymentOption.so)
 //                    cell.imageView?.image = paymentOption.listIcon
         cell.accessoryView = UIImageView(image: UIImage(named: "Next"))
 
         if let cell = cell as? PaymentOptionTableViewCell {
-            cell.separatorView.backgroundColor = self.currentSecondaryColor
+            cell.separatorView.backgroundColor = UIStyle.Color.secondary.uiColor
         }
-        cell.accessoryView?.tintColor = self.currentSecondaryColor
+        cell.accessoryView?.tintColor = UIStyle.Color.secondary.uiColor
     }
     
     var flowSession: PaymentCreatorFlowSession?
@@ -73,9 +72,9 @@ class MobileBankingSourceChooserViewController: UITableViewController, ListContr
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
 
         if let cell = cell as? PaymentOptionTableViewCell {
-            cell.separatorView.backgroundColor = currentSecondaryColor
+            cell.separatorView.backgroundColor = UIStyle.Color.secondary.uiColor
         }
-        cell.accessoryView?.tintColor = currentSecondaryColor
+        cell.accessoryView?.tintColor = UIStyle.Color.secondary.uiColor
         return cell
     }
 
@@ -88,7 +87,7 @@ class MobileBankingSourceChooserViewController: UITableViewController, ListContr
 
         let oldAccessoryView = cell?.accessoryView
         let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
-        loadingIndicator.color = currentSecondaryColor
+        loadingIndicator.color = UIStyle.Color.secondary.uiColor
         cell?.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
         view.isUserInteractionEnabled = false
@@ -105,7 +104,7 @@ class MobileBankingSourceChooserViewController: UITableViewController, ListContr
         }
 
         mobileBankingNameLabels.forEach {
-            $0.textColor = currentPrimaryColor
+            $0.textColor = UIStyle.Color.primary.uiColor
         }
     }
 
