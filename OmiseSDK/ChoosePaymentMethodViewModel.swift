@@ -4,31 +4,15 @@ class ChoosePaymentMethodViewModel {
     typealias ViewContext = ChoosePaymentMethodController.ViewContext
 
     var flowSession: PaymentCreatorFlowSession?
-    var showsCreditCardPayment = true
-    var paymentAmount: Int64 = 0
-    var paymentCurrency: String = ""
 
-    var completion: PaymentResultClosure = { _ in }
-    var usePaymentMethodsFromCapability: Bool = false {
-        didSet {
-            if usePaymentMethodsFromCapability {
-                loadCapabilities()
-            }
-        }
-    }
-    var client: Client? {
-        didSet {
-            if usePaymentMethodsFromCapability {
-                loadCapabilities()
-            }
-        }
-    }
+    var amount: Int64 = 0
+    var currency: String = ""
 
-    var allowedPaymentMethods: [SourceType] = [] {
-        didSet {
-            viewContexts = generateViewContexts(from: allowedPaymentMethods)
-        }
-    }
+    var usePaymentMethodsFromCapability = false
+    var allowedPaymentMethods: [SourceType] = []
+    var showsCreditCardPayment = false
+    var client: Client?
+    var completion: (PaymentResult) -> Void = { _ in }
 
     var onViewContextChanged: ([ViewContext]) -> Void = { _ in }
     private var viewContexts: [ViewContext] = [] {
@@ -48,35 +32,54 @@ class ChoosePaymentMethodViewModel {
         return viewContexts[index]
     }
 
-    func loadCapabilities() {
+    private func loadCapabilities() {
         guard let client = client, usePaymentMethodsFromCapability else {
             return
         }
 
-        if let capability = client.latestLoadedCapability {
-            allowedPaymentMethods(from: capability)
+        client.capability { [weak self] _ in
+            self?.updateViewContexts()
         }
-        client.capability { [weak self] result in
-            if let capability = try? result.get() {
-                self?.allowedPaymentMethods(from: capability)
-            }
+
+        if client.latestLoadedCapability != nil {
+            updateViewContexts()
         }
     }
 
-    func allowedPaymentMethods(from capability: Capability) {
-        showsCreditCardPayment = capability.cardPaymentMethod != nil
-
-        allowedPaymentMethods = capability.paymentMethods.compactMap {
-            SourceType(rawValue: $0.name)
+    func reload() {
+        if usePaymentMethodsFromCapability {
+            loadCapabilities()
         }
+
+        updateViewContexts()
     }
 }
 
 private extension ChoosePaymentMethodViewModel {
-    func generateViewContexts(from sourceTypes: [SourceType]) -> [ViewContext] {
+
+    func updateViewContexts() {
+        if usePaymentMethodsFromCapability {
+            guard let capability = client?.latestLoadedCapability else {
+                return
+            }
+
+            let capabilitySourceTypes = capability.paymentMethods.compactMap {
+                SourceType(rawValue: $0.name)
+            }
+
+            let showsCreditCard = capability.cardPaymentMethod != nil
+            print("showsCreditCard: \(showsCreditCard)")
+            self.viewContexts = generateViewContexts(from: capabilitySourceTypes, showsCreditCard: showsCreditCard)
+        } else {
+            print("2. showsCreditCard: \(showsCreditCardPayment)")
+            self.viewContexts = generateViewContexts(from: allowedPaymentMethods, showsCreditCard: showsCreditCardPayment)
+        }
+    }
+
+    func generateViewContexts(from sourceTypes: [SourceType], showsCreditCard: Bool) -> [ViewContext] {
         var list = PaymentOption.from(sourceTypes)
 
-        if showsCreditCardPayment {
+        if showsCreditCard {
             list.append(.creditCard)
         }
 

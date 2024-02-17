@@ -6,9 +6,6 @@ protocol PaymentChooserControllerViewModel {
     var onViewContextChanged: ([ChoosePaymentMethodController.ViewContext]) -> Void { get }
 }
 
-protocol PaymentChooserControllerDelegate: AnyObject {
-}
-
 /// swiftlint:disable:next type_body_length
 class ChoosePaymentMethodController: UITableViewController {
     struct ViewContext: Equatable {
@@ -19,7 +16,7 @@ class ChoosePaymentMethodController: UITableViewController {
 
     let viewModel = ChoosePaymentMethodViewModel()
 
-    func reloadIfLoaded() {
+    func reloadIfViewIsLoaded() {
         if isViewLoaded {
             tableView.reloadData()
         }
@@ -27,7 +24,18 @@ class ChoosePaymentMethodController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.onViewContextChanged = { [weak self] _ in
+            self?.reloadIfViewIsLoaded()
+        }
+        tableView.rowHeight = 64
+        applyNavigationBarStyle()
+        setupNavigationItems()
+    }
 
+    private func setupViewModel() {
+    }
+
+    private func setupNavigationItems() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(omise: "Close"),
@@ -40,9 +48,6 @@ class ChoosePaymentMethodController: UITableViewController {
         if #available(iOSApplicationExtension 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = true
         }
-
-        applyNavigationBarStyle()
-        tableView.rowHeight = 64
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

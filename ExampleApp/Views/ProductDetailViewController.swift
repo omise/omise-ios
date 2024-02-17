@@ -1,23 +1,24 @@
 import UIKit
 import OmiseSDK
 
-class ProductDetailViewController: BaseViewController {
-    private let publicKey = LocalConfig.default.publicKey
-    
-    private var capability: Capability?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupClient()
+extension ProductDetailViewController: ChoosePaymentMethodDelegate {
+    func paymentCompleteWithResult(_ result: PaymentResult) {
+        switch result {
+        default:
+            break
+        }
+        dismissForm()
+        print("payment complete with \(result)")
     }
+}
 
-    private func setupClient() {
-        let config = LocalConfig.default.configuration
-        let client = OmiseSDK(publicKey: publicKey, configuration: config).client
+class ProductDetailViewController: BaseViewController {
+    let omiseSDK = OmiseSDK(publicKey: LocalConfig.default.publicKey,
+                            configuration: LocalConfig.default.configuration)
 
-        client.capability { (result) in
+    private func loadCapability() {
+        omiseSDK.client.capability { (result) in
             if case .success(let capability) = result {
-                self.capability = capability
                 print("Capability Country: \(capability.countryCode)")
             }
         }
@@ -69,21 +70,21 @@ class ProductDetailViewController: BaseViewController {
         guard currentCodePathMode == .code else {
             return
         }
-        let creditCardFormController = CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
-        creditCardFormController.handleErrors = true
-        creditCardFormController.delegate = self
-        let navigationController = UINavigationController(rootViewController: creditCardFormController)
-        present(navigationController, animated: true, completion: nil)
+//        let creditCardFormController = CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
+//        creditCardFormController.handleErrors = true
+//        creditCardFormController.delegate = self
+//        let navigationController = UINavigationController(rootViewController: creditCardFormController)
+//        present(navigationController, animated: true, completion: nil)
     }
     
     @IBAction private func showCreditCardForm(_ sender: UIButton) {
         guard currentCodePathMode == .code else {
             return
         }
-        let creditCardFormController = CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
-        creditCardFormController.handleErrors = true
-        creditCardFormController.delegate = self
-        show(creditCardFormController, sender: self)
+//        let creditCardFormController = CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
+//        creditCardFormController.handleErrors = true
+//        creditCardFormController.delegate = self
+//        show(creditCardFormController, sender: self)
     }
     
     @IBAction private func showModalPaymentCreator(_ sender: Any) {
@@ -91,17 +92,23 @@ class ProductDetailViewController: BaseViewController {
             return
         }
 
-        let paymentMethods = usesCapabilityDataForPaymentMethods ? nil : allowedPaymentMethods
-        let choosePaymentMethodController = OmiseSDK(publicKey: publicKey)
-            .makeChoosePaymentMethodController(
-                allowedPaymentMethods: paymentMethods,
-                paymentAmount: paymentAmount,
-                paymentCurrency: paymentCurrencyCode) { [weak self] result in
-                    print("Payment complete with \(result)")
-                    self?.dismissForm()
-            }
-
-        present(choosePaymentMethodController, animated: true, completion: nil)
+        if usesCapabilityDataForPaymentMethods {
+            let viewController = omiseSDK.makeChoosePaymentMethodController(
+                amount: paymentAmount,
+                currency: paymentCurrencyCode,
+                delegate: self
+            )
+            present(viewController, animated: true, completion: nil)
+        } else {
+            let viewController = omiseSDK.makeChoosePaymentMethodController(
+                amount: paymentAmount,
+                currency: paymentCurrencyCode,
+                allowedPaymentMethods: allowedPaymentMethods,
+                showsCreditCardPayment: true,
+                delegate: self
+            )
+            present(viewController, animated: true, completion: nil)
+        }
     }
     
     @IBAction private func showCustomCreditCardForm(_ sender: Any) {

@@ -29,7 +29,34 @@ public class OmiseSDK {
         )
     }
 
-    /// Presents controller with Payment Methods list
+    /// Creates a Payment controller with given payment methods details
+    ///
+    /// - Parameters:
+    ///    - amount: Payment amount
+    ///    - currency: Payment currency code
+    ///    - allowedPaymentMethods: Custom list of payment methods to be shown in the list. If value is nill then SDK will load list from Capability API
+    ///    - showsCreditCardPayment: Should present Card Payment Method in the list
+    ///    - completion: Completion handler triggered when payment completes with Token, Source, Error or was Cancelled
+    public func makeChoosePaymentMethodController(
+        amount: Int64,
+        currency: String,
+        allowedPaymentMethods: [SourceType],
+        showsCreditCardPayment: Bool,
+        delegate: ChoosePaymentMethodDelegate
+    ) -> UINavigationController {
+        let paymentFlow = PaymentFlow(client: client, amount: amount, currency: currency)
+        let viewController = paymentFlow.createRootViewController(
+            allowedPaymentMethods: allowedPaymentMethods,
+            showsCreditCardPayment: showsCreditCardPayment,
+            usePaymentMethodsFromCapability: false,
+            delegate: delegate
+        )
+
+        let navigationController = UINavigationController(rootViewController: viewController)
+        return navigationController
+    }
+
+    /// Creates a Payment controller with payment methods loaded from Capability API
     ///
     /// - Parameters:
     ///    - from: ViewController is used as a base to present UINavigationController
@@ -37,24 +64,14 @@ public class OmiseSDK {
     ///    - showsCreditCardPayment: Should present Card Payment Method in the list
     ///    - delegate: Delegate to be notified when Source or Token is created
     public func makeChoosePaymentMethodController(
-        allowedPaymentMethods: [SourceType]? = nil,
-        showsCreditCardPayment: Bool = true,
-        paymentAmount: Int64,
-        paymentCurrency: String,
-        completion: @escaping PaymentResultClosure
+        amount: Int64,
+        currency: String,
+        delegate: ChoosePaymentMethodDelegate
     ) -> UINavigationController {
-        let paymentFlow = PaymentFlow(
-            client: client,
-            amount: paymentAmount,
-            currency: paymentCurrency
-        )
-
-        /// If allowedPaymentMethods is empty or nil then load it from Capability
-        let useCapability = allowedPaymentMethods?.isEmpty ?? true
+        let paymentFlow = PaymentFlow(client: client, amount: amount, currency: currency)
         let viewController = paymentFlow.createRootViewController(
-            allowedPaymentMethods: allowedPaymentMethods ?? [],
-            usePaymentMethodsFromCapability: useCapability,
-            completion: completion
+            usePaymentMethodsFromCapability: true,
+            delegate: delegate
         )
 
         let navigationController = UINavigationController(rootViewController: viewController)

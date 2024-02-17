@@ -23,7 +23,7 @@ public class Client {
     ///   - network: Optional network communication service is used for testing
     ///   - apiURL: Custom URL for Omise API Server is used for testing
     ///   - vaultURL: Custom URL for Omise Vault Server is used for testing
-    init(publicKey: String, network: NetworkServiceProtocol, apiURL: URL? = nil, vaultURL: URL? = nil) {
+    init(publicKey: String, network: NetworkServiceProtocol = NetworkService(), apiURL: URL? = nil, vaultURL: URL? = nil) {
         self.publicKey = publicKey
         self.network = network
         self.customApiURL = apiURL
@@ -83,5 +83,10 @@ public class Client {
             maxAttempt: pollingAttemptsCount,
             completion
         )
+    }
+
+    /// Used for the test purposes
+    func setLatestLoadedCapability(_ capability: Capability) {
+        latestLoadedCapability = capability
     }
 }

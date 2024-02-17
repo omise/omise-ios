@@ -8,6 +8,10 @@ public enum PaymentResult {
     case cancel
 }
 
+public protocol ChoosePaymentMethodDelegate: AnyObject {
+    func paymentCompleteWithResult(_ result: PaymentResult)
+}
+
 public class PaymentFlow {
     var completion: PaymentResultClosure = { _ in }
     let client: Client
@@ -25,19 +29,25 @@ public class PaymentFlow {
     ///   - allowedPaymentMethods: List of Payment Methods to be presented in the list
     ///   - usePaymentMethodsFromCapability: If true then take payment methods from client.capability()
     func createRootViewController(
-        allowedPaymentMethods: [SourceType],
+        allowedPaymentMethods: [SourceType] = [],
+        showsCreditCardPayment: Bool = true,
         usePaymentMethodsFromCapability: Bool,
-        completion: @escaping PaymentResultClosure
+        delegate: ChoosePaymentMethodDelegate
     ) -> ChoosePaymentMethodController {
         let rootViewController = ChoosePaymentMethodController()
         rootViewController.addChild(PaymentFlowContainerController(self))
         let viewModel = rootViewController.viewModel
         viewModel.allowedPaymentMethods = allowedPaymentMethods
-        viewModel.paymentAmount = amount
-        viewModel.paymentCurrency = currency
-        viewModel.completion = completion
+        viewModel.showsCreditCardPayment = showsCreditCardPayment
+        viewModel.amount = amount
+        viewModel.currency = currency
         viewModel.client = client
         viewModel.usePaymentMethodsFromCapability = usePaymentMethodsFromCapability
+        viewModel.completion = { [weak delegate] result in
+            delegate?.paymentCompleteWithResult(result)
+        }
+        viewModel.reload()
+
         return rootViewController
     }
 }

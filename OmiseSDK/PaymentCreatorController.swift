@@ -129,7 +129,7 @@ public class PaymentCreatorController: UINavigationController {
     }
     
     public func applyPaymentMethods(from capability: Capability) {
-        paymentChooserController.viewModel.allowedPaymentMethods(from: capability)
+        paymentChooserController.viewModel.usePaymentMethodsFromCapability = true
     }
 
     private func initializeWithPaymentChooserViewController(_ viewController: ChoosePaymentMethodController) {
