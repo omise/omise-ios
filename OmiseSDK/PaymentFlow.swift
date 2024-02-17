@@ -44,7 +44,13 @@ public class PaymentFlow {
         viewModel.client = client
         viewModel.usePaymentMethodsFromCapability = usePaymentMethodsFromCapability
         viewModel.completion = { [weak delegate] result in
-            delegate?.paymentCompleteWithResult(result)
+            switch result {
+            case .cancelled:
+                delegate?.paymentCompleteWithResult(.cancel)
+            case .paymentSelected(let paymentOption):
+                print("doSomething here with payment '\(paymentOption)'")
+            }
+
         }
         viewModel.reload()
 

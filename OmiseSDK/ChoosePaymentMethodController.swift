@@ -77,11 +77,18 @@ class ChoosePaymentMethodController: UITableViewController {
         return cell
     }
 
-    // swiftlint:disable:next function_body_length
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
 
+        let oldAccessoryView = cell?.accessoryView
+        let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+        loadingIndicator.color = UIColor.omiseSecondary
+        cell?.accessoryView = loadingIndicator
+        loadingIndicator.startAnimating()
+        view.isUserInteractionEnabled = false
+
+        viewModel.didSelect(index: indexPath.row)
 //        let option = item(at: indexPath)
 //        switch option {
 //        case .c
@@ -90,7 +97,6 @@ class ChoosePaymentMethodController: UITableViewController {
 //        let element: ViewContext = self.item(at: indexPath)
 //        let selectedType = SourceType(rawValue: element.name)
 /*
-        os_log("Payment Chooser: %{private}@ was selected", log: uiLogObject, type: .info, selectedType.description)
         switch selectedType {
         case .alipay:
             payment = .sourceType(.alipay)
@@ -168,6 +174,6 @@ class ChoosePaymentMethodController: UITableViewController {
      */
 
     @IBAction private func closeTapped(_ sender: Any) {
-        viewModel.completion(.cancel)
+        viewModel.completion(.cancelled)
     }
 }

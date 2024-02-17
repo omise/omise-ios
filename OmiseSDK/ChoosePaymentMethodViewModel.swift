@@ -1,6 +1,11 @@
 import Foundation
 
 class ChoosePaymentMethodViewModel {
+    enum Completion {
+        case paymentSelected(PaymentOption)
+        case cancelled
+    }
+
     typealias ViewContext = ChoosePaymentMethodController.ViewContext
 
     var flowSession: PaymentCreatorFlowSession?
@@ -12,8 +17,9 @@ class ChoosePaymentMethodViewModel {
     var allowedPaymentMethods: [SourceType] = []
     var showsCreditCardPayment = false
     var client: Client?
-    var completion: (PaymentResult) -> Void = { _ in }
+    var completion: (Completion) -> Void = { _ in }
 
+    private var paymentOptions: [PaymentOption] = []
     var onViewContextChanged: ([ViewContext]) -> Void = { _ in }
     private var viewContexts: [ViewContext] = [] {
         didSet {
@@ -43,6 +49,12 @@ class ChoosePaymentMethodViewModel {
 
         if client.latestLoadedCapability != nil {
             updateViewContexts()
+        }
+    }
+
+    func didSelect(index: Int) {
+        if let payment = paymentOptions.at(index) {
+            completion(.paymentSelected(payment))
         }
     }
 
@@ -95,6 +107,8 @@ private extension ChoosePaymentMethodViewModel {
 
         // Sort and filter
         list = PaymentOption.sorted(from: list)
+
+        paymentOptions = list
 
         let viewContexts = list.map {
             ViewContext(icon: $0.listIcon, title: $0.localizedTitle, accessoryIcon: $0.accessoryIcon)
