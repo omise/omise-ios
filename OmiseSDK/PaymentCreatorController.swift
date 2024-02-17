@@ -356,9 +356,7 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
     }
 }
 
-
 class NoticeView: UIView {
-
     @IBOutlet var iconImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var detailLabel: UILabel!

@@ -55,11 +55,11 @@ class ChoosePaymentMethodController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = "UITableViewCell"
+        let identifier = "PaymentOptionTableViewCell"
         var cell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: identifier)
 
         if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: identifier)
+            cell = PaymentOptionTableViewCell(style: .default, reuseIdentifier: identifier)
         }
 
         let viewContext = viewModel.viewContext(at: indexPath.row)
