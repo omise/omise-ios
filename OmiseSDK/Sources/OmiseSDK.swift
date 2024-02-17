@@ -37,7 +37,7 @@ public class OmiseSDK {
     ///    - allowedPaymentMethods: Custom list of payment methods to be shown in the list. If value is nill then SDK will load list from Capability API
     ///    - showsCreditCardPayment: Should present Card Payment Method in the list
     ///    - completion: Completion handler triggered when payment completes with Token, Source, Error or was Cancelled
-    public func makeChoosePaymentMethodController(
+    public func choosePaymentMethodController(
         amount: Int64,
         currency: String,
         allowedPaymentMethods: [SourceType],
@@ -63,7 +63,7 @@ public class OmiseSDK {
     ///    - allowedPaymentMethods: Custom list of payment methods to be shown in the list. If value is nill then SDK will load list from Capability API
     ///    - showsCreditCardPayment: Should present Card Payment Method in the list
     ///    - delegate: Delegate to be notified when Source or Token is created
-    public func makeChoosePaymentMethodController(
+    public func choosePaymentMethodFromCapabilityController(
         amount: Int64,
         currency: String,
         delegate: ChoosePaymentMethodDelegate

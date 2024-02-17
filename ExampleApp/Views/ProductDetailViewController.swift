@@ -93,14 +93,14 @@ class ProductDetailViewController: BaseViewController {
         }
 
         if usesCapabilityDataForPaymentMethods {
-            let viewController = omiseSDK.makeChoosePaymentMethodController(
+            let viewController = omiseSDK.choosePaymentMethodFromCapabilityController(
                 amount: paymentAmount,
                 currency: paymentCurrencyCode,
                 delegate: self
             )
             present(viewController, animated: true, completion: nil)
         } else {
-            let viewController = omiseSDK.makeChoosePaymentMethodController(
+            let viewController = omiseSDK.choosePaymentMethodController(
                 amount: paymentAmount,
                 currency: paymentCurrencyCode,
                 allowedPaymentMethods: allowedPaymentMethods,
