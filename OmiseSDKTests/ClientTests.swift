@@ -26,6 +26,7 @@ class ClientTests: XCTestCase {
         // swiftlint:disable force_unwrapping
         testClient = Client(
             publicKey: publicKey,
+            version: "1.0.0",
             apiURL: URL(string: "https://api.staging-omise.co")!,
             vaultURL: URL(string: "https://vault.staging-omise.co")!
         )
@@ -69,7 +70,7 @@ class ClientTests: XCTestCase {
             validateURLRequest()
         }
 
-        let client = Client(publicKey: publicKey, network: networkMockup)
+        let client = Client(publicKey: publicKey, version: "1.0.0", network: networkMockup)
         client.createToken(payload: cardPayload) { _ in
             /// Testing URLRequst in through Network Mockup closure
             /// Closure implementation is nor required
@@ -103,7 +104,7 @@ class ClientTests: XCTestCase {
             validateURLRequest()
         }
 
-        let client = Client(publicKey: publicKey, network: networkMockup)
+        let client = Client(publicKey: publicKey, version: "1.0.0", network: networkMockup)
         client.createSource(payload: sourcePayload) { _ in
             /// Testing URLRequst in through Network Mockup closure
             /// Closure implementation is nor required
