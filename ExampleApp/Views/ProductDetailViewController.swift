@@ -2,10 +2,16 @@ import UIKit
 import OmiseSDK
 
 class ProductDetailViewController: BaseViewController {
-    let omiseSDK = OmiseSDK(
-        publicKey: LocalConfig.default.publicKey,
-        configuration: LocalConfig.default.configuration
-    )
+    let omiseSDK = {
+        // Initialize OmiseSDK instance with given publicKey and optional configuration used for testing
+        let omiseSDK = OmiseSDK(
+            publicKey: LocalConfig.default.publicKey,
+            configuration: LocalConfig.default.configuration
+        )
+        // Setup shared instance to use from other screens if required
+        OmiseSDK.shared = omiseSDK
+        return omiseSDK
+    }()
 
     private func loadCapability() {
         omiseSDK.client.capability { (result) in
@@ -28,8 +34,6 @@ class ProductDetailViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        OmiseSDK.shared = omiseSDK
     }
 
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
