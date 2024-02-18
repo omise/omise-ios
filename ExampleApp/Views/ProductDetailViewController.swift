@@ -1,20 +1,11 @@
 import UIKit
 import OmiseSDK
 
-extension ProductDetailViewController: ChoosePaymentMethodDelegate {
-    func paymentCompleteWithResult(_ result: PaymentResult) {
-        switch result {
-        default:
-            break
-        }
-        dismissForm()
-        print("payment complete with \(result)")
-    }
-}
-
 class ProductDetailViewController: BaseViewController {
-    let omiseSDK = OmiseSDK(publicKey: LocalConfig.default.publicKey,
-                            configuration: LocalConfig.default.configuration)
+    let omiseSDK = OmiseSDK(
+        publicKey: LocalConfig.default.publicKey,
+        configuration: LocalConfig.default.configuration
+    )
 
     private func loadCapability() {
         omiseSDK.client.capability { (result) in
@@ -34,7 +25,13 @@ class ProductDetailViewController: BaseViewController {
         
         return true
     }
-    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        OmiseSDK.shared = omiseSDK
+    }
+
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        super.prepare(for: segue, sender: sender)
 //        
@@ -104,7 +101,7 @@ class ProductDetailViewController: BaseViewController {
                 amount: paymentAmount,
                 currency: paymentCurrencyCode,
                 allowedPaymentMethods: allowedPaymentMethods,
-                showsCreditCardPayment: true,
+                allowedCardPayment: true,
                 delegate: self
             )
             present(viewController, animated: true, completion: nil)
@@ -189,47 +186,6 @@ extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate 
     }
 }
 
-// MARK: - Payment Creator Controller Delegate
-
-//extension ProductDetailViewController: PaymentCreatorControllerDelegate {
-//    
-//    func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didCreatePayment payment: Payment) {
-//        dismissForm {
-//            let title: String
-//            let message: String
-//            
-//            switch payment {
-//            case .token(let token):
-//                title = "Token Created"
-//                message = "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge."
-//            case .source(let source):
-//                title = "Token Created"
-//                message = "A source with id of \(source.id) was successfully created. Please send this id to server to create a charge."
-//            }
-//            
-//            let alertController = UIAlertController(
-//                title: title,
-//                message: message,
-//                preferredStyle: .alert
-//            )
-//            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-//            alertController.addAction(okAction)
-//            self.present(alertController, animated: true, completion: nil)
-//        }
-//    }
-//    
-//    func paymentCreatorController(_ paymentCreatorController: PaymentCreatorController, didFailWithError error: Error) {
-//        let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-//        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-//        alertController.addAction(okAction)
-//        paymentCreatorController.present(alertController, animated: true, completion: nil)
-//    }
-//    
-//    func paymentCreatorControllerDidCancel(_ paymentCreatorController: PaymentCreatorController) {
-//        dismissForm()
-//    }
-//}
-
 // MARK: - Custom Credit Card Form View Controller Delegate
 
 extension ProductDetailViewController: CustomCreditCardFormViewControllerDelegate {
@@ -257,5 +213,43 @@ extension ProductDetailViewController: CustomCreditCardFormViewControllerDelegat
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
         }
+    }
+}
+
+/// Processing result of choosing Payment Method screen
+extension ProductDetailViewController: ChoosePaymentMethodDelegate {
+    func choosePaymentMethodDidComplete(with source: Source) {
+        let alertController = UIAlertController(
+            title: "Source Created",
+            message: "A source with id of \(source.id) was successfully created. Please send this id to server to create a charge.",
+            preferredStyle: .alert
+        )
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func choosePaymentMethodDidComplete(with token: Token) {
+        let alertController = UIAlertController(
+            title: "Token Created",
+            message: "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge.",
+            preferredStyle: .alert
+        )
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func choosePaymentMethodDidComplete(with error: Error) {
+        dismissForm {
+            let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+
+    func choosePaymentMethodDidCancel() {
+        dismissForm()
     }
 }

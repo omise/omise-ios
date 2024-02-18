@@ -36,11 +36,12 @@ extension Client {
 // MARK: User Agent
 extension Client {
     func userAgent(
-        sdkVersion: String = OmiseSDK.shared.version,
+        sdkVersion: String? = nil,
         platform: String = ProcessInfo.processInfo.operatingSystemVersionString,
         device: String = UIDevice.current.model
     ) -> String {
-        "OmiseIOS/\(sdkVersion) iOS/\(platform) Apple/\(device)"
+        let sdkVersion = sdkVersion ?? version
+        return "OmiseIOS/\(sdkVersion) iOS/\(platform) Apple/\(device)"
     }
 }
 

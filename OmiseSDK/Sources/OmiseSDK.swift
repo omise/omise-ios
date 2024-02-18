@@ -1,9 +1,29 @@
 import Foundation
 import UIKit
 
+/// Omise Payment delegate protocol is required to process payment results
+public protocol ChoosePaymentMethodDelegate: AnyObject {
+    func choosePaymentMethodDidComplete(with source: Source)
+    func choosePaymentMethodDidComplete(with token: Token)
+    func choosePaymentMethodDidComplete(with error: Error)
+    func choosePaymentMethodDidCancel()
+}
+
+/// Payment Results
+public enum PaymentResult {
+    /// Payment completed with Card payment and contains Token object
+    case token(Token)
+    /// Payment completed with Source payment and contains Source object
+    case source(Source)
+    /// Payment completed with Error
+    case error(Error)
+    /// Payment was cancelled by user
+    case cancel
+}
+
 public class OmiseSDK {
     /// Static container that allows to assign a shared instance of OmiseSDK to be used as a Singleton object
-    public static var shared = OmiseSDK(publicKey: "")
+    public static var shared = OmiseSDK(publicKey: "pkey_")
 
     /// OmiseSDK version
     public let version: String = "5.0.0"
@@ -23,6 +43,7 @@ public class OmiseSDK {
         self.publicKey = publicKey
         self.client = Client(
             publicKey: publicKey,
+            version: version,
             network: NetworkService(),
             apiURL: configuration?.apiURL,
             vaultURL: configuration?.vaultURL
@@ -35,19 +56,19 @@ public class OmiseSDK {
     ///    - amount: Payment amount
     ///    - currency: Payment currency code
     ///    - allowedPaymentMethods: Custom list of payment methods to be shown in the list. If value is nill then SDK will load list from Capability API
-    ///    - showsCreditCardPayment: Should present Card Payment Method in the list
+    ///    - allowedCardPayment: Should present Card Payment Method in the list
     ///    - completion: Completion handler triggered when payment completes with Token, Source, Error or was Cancelled
     public func choosePaymentMethodController(
         amount: Int64,
         currency: String,
         allowedPaymentMethods: [SourceType],
-        showsCreditCardPayment: Bool,
+        allowedCardPayment: Bool,
         delegate: ChoosePaymentMethodDelegate
     ) -> UINavigationController {
         let paymentFlow = PaymentFlow(client: client, amount: amount, currency: currency)
         let viewController = paymentFlow.createRootViewController(
             allowedPaymentMethods: allowedPaymentMethods,
-            showsCreditCardPayment: showsCreditCardPayment,
+            allowedCardPayment: allowedCardPayment,
             usePaymentMethodsFromCapability: false,
             delegate: delegate
         )
@@ -61,7 +82,7 @@ public class OmiseSDK {
     /// - Parameters:
     ///    - from: ViewController is used as a base to present UINavigationController
     ///    - allowedPaymentMethods: Custom list of payment methods to be shown in the list. If value is nill then SDK will load list from Capability API
-    ///    - showsCreditCardPayment: Should present Card Payment Method in the list
+    ///    - allowedCardPayment: Should present Card Payment Method in the list
     ///    - delegate: Delegate to be notified when Source or Token is created
     public func choosePaymentMethodFromCapabilityController(
         amount: Int64,
@@ -85,4 +106,10 @@ public extension OmiseSDK {
 
     /// Country associated with `latestLoadedCapability`
     var country: Country? { Country(code: latestLoadedCapability?.countryCode) }
+}
+
+private extension OmiseSDK {
+    private func preloadCapabilityAPI() {
+        client.capability { _ in }
+    }
 }

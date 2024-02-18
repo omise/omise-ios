@@ -215,11 +215,11 @@ class PaymentChooserViewControllerTests: XCTestCase {
         let vc = ChoosePaymentMethodController()
         vc.loadView()
 
-        vc.showsCreditCardPayment = false
+        vc.allowedCardPayment = false
         vc.allowedPaymentMethods = availableTypes
         XCTAssertEqual(vc.showingValues.count, availableTypes.count)
 
-        vc.showsCreditCardPayment = true
+        vc.allowedCardPayment = true
         XCTAssertEqual(vc.showingValues.count, availableTypes.count + 1)
     }
 
@@ -233,14 +233,14 @@ class PaymentChooserViewControllerTests: XCTestCase {
         let vc = ChoosePaymentMethodController()
         vc.loadView()
 
-        vc.showsCreditCardPayment = false
+        vc.allowedCardPayment = false
         vc.allowedPaymentMethods = set1
         XCTAssertEqual(vc.showingValues, result1)
 
         vc.allowedPaymentMethods = set2
         XCTAssertEqual(vc.showingValues, result2)
 
-        vc.showsCreditCardPayment = true
+        vc.allowedCardPayment = true
         XCTAssertEqual(vc.showingValues, [PaymentOption.creditCard] + result2)
     }
 }

@@ -67,8 +67,8 @@ class CreditCardFormViewModel: CreditCardFormViewModelProtocol, CountryListViewM
             )
         )
 
-        let client = OmiseSDK(publicKey: publicKey).client
-        client.createToken(payload: payload) { result in
+        let client = try? OmiseSDK(publicKey: publicKey).client
+        client?.createToken(payload: payload) { result in
             onComplete(result)
         }
     }

@@ -17,9 +17,6 @@ protocol CustomCreditCardFormViewControllerDelegate: AnyObject {
 }
 
 class CustomCreditCardFormViewController: UIViewController {
-    
-    let omiseClient = OmiseSDK(publicKey: LocalConfig.default.publicKey).client
-
     @IBOutlet private var cardNumberField: CardNumberTextField!
     @IBOutlet private var cardNameField: CardNameTextField!
     @IBOutlet private var cardExpiryField: CardExpiryDateTextField!
@@ -180,7 +177,7 @@ class CustomCreditCardFormViewController: UIViewController {
         )
 
         doneButton.isEnabled = false
-        omiseClient.createToken(payload: payload) { [weak self] (result) in
+        OmiseSDK.shared.client.createToken(payload: payload) { [weak self] (result) in
             guard let self = self else { return }
             self.doneButton.isEnabled = false
             switch result {

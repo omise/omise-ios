@@ -33,9 +33,9 @@ public class PaymentCreatorController: UINavigationController {
     }
 
     /// Boolean indicates that the form should show the Credit Card payment option or not
-    public var showsCreditCardPayment = true {
+    public var allowedCardPayment = true {
         didSet {
-            paymentChooserController.viewModel.showsCreditCardPayment = showsCreditCardPayment
+            paymentChooserController.viewModel.allowedCardPayment = allowedCardPayment
         }
     }
 
@@ -135,7 +135,7 @@ public class PaymentCreatorController: UINavigationController {
     private func initializeWithPaymentChooserViewController(_ viewController: ChoosePaymentMethodController) {
         viewController.viewModel.flowSession = paymentSourceCreatorFlowSession
         viewController.viewModel.allowedPaymentMethods = allowedPaymentMethods
-        viewController.viewModel.showsCreditCardPayment = showsCreditCardPayment
+        viewController.viewModel.allowedCardPayment = allowedCardPayment
 
         paymentSourceCreatorFlowSession.delegate = self
 

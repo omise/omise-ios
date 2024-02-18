@@ -1,22 +1,11 @@
 import UIKit
 
-public typealias PaymentResultClosure = (PaymentResult) -> Void
-public enum PaymentResult {
-    case token(Token)
-    case source(Source)
-    case error(Error)
-    case cancel
-}
+class PaymentFlow {
+    private let client: Client
+    private let amount: Int64
+    private let currency: String
 
-public protocol ChoosePaymentMethodDelegate: AnyObject {
-    func paymentCompleteWithResult(_ result: PaymentResult)
-}
-
-public class PaymentFlow {
-    var completion: PaymentResultClosure = { _ in }
-    let client: Client
-    let amount: Int64
-    let currency: String
+    private var choosePaymentMethodController: ChoosePaymentMethodController?
 
     init(client: Client, amount: Int64, currency: String) {
         self.client = client
@@ -26,38 +15,94 @@ public class PaymentFlow {
     /// Creates RootViewController and attach current flow object inside created controller to be deallocated together
     ///
     /// - Parameters:
-    ///   - allowedPaymentMethods: List of Payment Methods to be presented in the list
-    ///   - usePaymentMethodsFromCapability: If true then take payment methods from client.capability()
+    ///   - allowedPaymentMethods: List of Payment Methods to be presented in the list if `usePaymentMethodsFromCapability` is `false`
+    ///   - allowedCardPayment: Shows credit card payment option if `true` and `usePaymentMethodsFromCapability` is `false`
+    ///   - usePaymentMethodsFromCapability: If `true`then it loads list of Payment Methods from Capability API and ignores previous parameters
     func createRootViewController(
         allowedPaymentMethods: [SourceType] = [],
-        showsCreditCardPayment: Bool = true,
+        allowedCardPayment: Bool = true,
         usePaymentMethodsFromCapability: Bool,
         delegate: ChoosePaymentMethodDelegate
     ) -> ChoosePaymentMethodController {
         let rootViewController = ChoosePaymentMethodController()
         rootViewController.addChild(PaymentFlowContainerController(self))
         let viewModel = rootViewController.viewModel
-        viewModel.allowedPaymentMethods = allowedPaymentMethods
-        viewModel.showsCreditCardPayment = showsCreditCardPayment
-        viewModel.amount = amount
-        viewModel.currency = currency
-        viewModel.client = client
-        viewModel.usePaymentMethodsFromCapability = usePaymentMethodsFromCapability
-        viewModel.completion = { [weak delegate] result in
-            switch result {
-            case .cancelled:
-                delegate?.paymentCompleteWithResult(.cancel)
-            case .paymentSelected(let paymentOption):
-                print("doSomething here with payment '\(paymentOption)'")
-            }
 
+        if usePaymentMethodsFromCapability {
+            viewModel.setup(amount: amount, currenct: currency, client: client)
+        } else {
+            viewModel.setupAllowedPaymentMethods(
+                allowedPaymentMethods,
+                allowedCardPayment: allowedCardPayment,
+                amount: amount,
+                currenct: currency,
+                client: client
+            )
         }
-        viewModel.reload()
 
+        viewModel.completionHandler { [weak self, weak delegate] result in
+            guard let self = self, let delegate = delegate else { return }
+            self.choosePaymentMethodCompletion(delegate: delegate, result)
+        }
+
+        choosePaymentMethodController = rootViewController
         return rootViewController
     }
 }
 
+private extension PaymentFlow {
+    private func choosePaymentMethodCompletion(delegate: ChoosePaymentMethodDelegate, _ result: ChoosePaymentMethodResult) {
+        switch result {
+        case .cancelled:
+            delegate.choosePaymentMethodDidCancel()
+        case .selectedPayment(let paymentOption):
+            let viewController: UIViewController?
+
+            switch paymentOption {
+            case .creditCard:
+                viewController = UIViewController()
+            case .installment:
+                viewController = UIViewController()
+            case .internetBanking:
+                viewController = UIViewController()
+            case .mobileBanking:
+                viewController = UIViewController()
+            case .eContextConbini:
+                viewController = UIViewController()
+            case .eContextPayEasy:
+                viewController = UIViewController()
+            case .eContextNetBanking:
+                viewController = UIViewController()
+            case .sourceType(.atome):
+                viewController = UIViewController()
+            case .sourceType(.barcodeAlipay):
+                viewController = UIViewController()
+            case .sourceType(.duitNowOBW):
+                viewController = UIViewController()
+            case .sourceType(.fpx):
+                viewController = UIViewController()
+            case .sourceType(.trueMoneyWallet):
+                viewController = UIViewController()
+            default:
+                viewController = nil
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) { [weak self] in
+                    self?.choosePaymentMethodController?.unlockUserInterface()
+
+                }
+            }
+
+            if let viewController = viewController {
+                viewController.view.backgroundColor = .white
+                viewController.title = paymentOption.localizedTitle
+                choosePaymentMethodController?.navigationController?.pushViewController(
+                    viewController,
+                    animated: true
+                )
+            }
+            print("doSomething here with payment '\(paymentOption)'")
+        }
+    }
+}
 protocol NavigationFlow<Route> {
     associatedtype Route
     func navigate(to: Route)
@@ -70,7 +115,7 @@ extension PaymentFlow: NavigationFlow {
         case mobileBanking
         case internetBanking
         case atome
-        case trueMoneyWaller
+        case trueMoneyWallet
         case duitNowOBW
         case eContext
         case fpx

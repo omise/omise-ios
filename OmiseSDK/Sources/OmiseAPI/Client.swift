@@ -5,6 +5,7 @@ import os
 public class Client {
     public typealias RequestResultClosure<T: Decodable, E: Error> = (Result<T, E>) -> Void
 
+    let version: String
     let publicKey: String
     var customApiURL: URL?
     var customVaultURL: URL?
@@ -19,12 +20,21 @@ public class Client {
     /// Creates a new Client item with given public key
     ///
     /// - Parameters:
-    ///   - publicKey: Omise public key
+    ///   - publicKey: Omise public key, should starts with "pkey_"
     ///   - network: Optional network communication service is used for testing
     ///   - apiURL: Custom URL for Omise API Server is used for testing
     ///   - vaultURL: Custom URL for Omise Vault Server is used for testing
-    init(publicKey: String, network: NetworkServiceProtocol = NetworkService(), apiURL: URL? = nil, vaultURL: URL? = nil) {
-        self.publicKey = publicKey
+    init(publicKey: String, version: String, network: NetworkServiceProtocol = NetworkService(), apiURL: URL? = nil, vaultURL: URL? = nil) {
+
+        if publicKey.hasPrefix("pkey_") {
+            self.publicKey = publicKey
+        } else {
+            self.publicKey = ""
+            os_log("Refusing to initialize sdk client with a non-public key: %{private}@", log: sdkLogObject, type: .error, publicKey)
+            assertionFailure("Refusing to initialize sdk client with a non-public key.")
+        }
+
+        self.version = version
         self.network = network
         self.customApiURL = apiURL
         self.customVaultURL = vaultURL
