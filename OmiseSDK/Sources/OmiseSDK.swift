@@ -65,7 +65,7 @@ public class OmiseSDK {
         allowedCardPayment: Bool,
         delegate: ChoosePaymentMethodDelegate
     ) -> UINavigationController {
-        let paymentFlow = PaymentFlow(client: client, amount: amount, currency: currency)
+        let paymentFlow = ChoosePaymentMethodFlow(client: client, amount: amount, currency: currency)
         let viewController = paymentFlow.createRootViewController(
             allowedPaymentMethods: allowedPaymentMethods,
             allowedCardPayment: allowedCardPayment,
@@ -89,7 +89,7 @@ public class OmiseSDK {
         currency: String,
         delegate: ChoosePaymentMethodDelegate
     ) -> UINavigationController {
-        let paymentFlow = PaymentFlow(client: client, amount: amount, currency: currency)
+        let paymentFlow = ChoosePaymentMethodFlow(client: client, amount: amount, currency: currency)
         let viewController = paymentFlow.createRootViewController(
             usePaymentMethodsFromCapability: true,
             delegate: delegate

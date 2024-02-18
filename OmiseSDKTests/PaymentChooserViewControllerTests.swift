@@ -119,7 +119,7 @@ class PaymentChooserViewControllerTests: XCTestCase {
         let vc = ChoosePaymentMethodController()
         vc.loadView()
 
-        let sorted: [PaymentOption] = [
+        let sorted: [PaymentMethod] = [
             .alipay,
             .alipayCN,
             .alipayHK,
@@ -157,11 +157,11 @@ class PaymentChooserViewControllerTests: XCTestCase {
             .weChat
         ]
 
-        XCTAssertEqual(PaymentOption.alphabetical, sorted)
+        XCTAssertEqual(PaymentMethod.alphabetical, sorted)
     }
 
     func testFilteringAndSorting() {
-        let filteredAndSorted: [PaymentOption] = [
+        let filteredAndSorted: [PaymentMethod] = [
             .creditCard,
             .paynow,
             .promptpay,
@@ -225,10 +225,10 @@ class PaymentChooserViewControllerTests: XCTestCase {
 
     func testAllowedPaymentMethods() {
         let set1: [SourceType] = [ .alipay, .alipayCN ]
-        let result1: [PaymentOption] = [.alipay, .alipayCN]
+        let result1: [PaymentMethod] = [.alipay, .alipayCN]
 
         let set2: [SourceType] = [ .atome, .payPay, .weChat ]
-        let result2: [PaymentOption] = [ .atome, .payPay, .weChat ]
+        let result2: [PaymentMethod] = [ .atome, .payPay, .weChat ]
 
         let vc = ChoosePaymentMethodController()
         vc.loadView()
@@ -241,6 +241,6 @@ class PaymentChooserViewControllerTests: XCTestCase {
         XCTAssertEqual(vc.showingValues, result2)
 
         vc.allowedCardPayment = true
-        XCTAssertEqual(vc.showingValues, [PaymentOption.creditCard] + result2)
+        XCTAssertEqual(vc.showingValues, [PaymentMethod.creditCard] + result2)
     }
 }

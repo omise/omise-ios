@@ -1,6 +1,6 @@
 import UIKit
 
-class PaymentFlow {
+class ChoosePaymentMethodFlow {
     private let client: Client
     private let amount: Int64
     private let currency: String
@@ -50,7 +50,7 @@ class PaymentFlow {
     }
 }
 
-private extension PaymentFlow {
+private extension ChoosePaymentMethodFlow {
     private func choosePaymentMethodCompletion(delegate: ChoosePaymentMethodDelegate, _ result: ChoosePaymentMethodResult) {
         switch result {
         case .cancelled:
@@ -108,7 +108,7 @@ protocol NavigationFlow<Route> {
     func navigate(to: Route)
 }
 
-extension PaymentFlow: NavigationFlow {
+extension ChoosePaymentMethodFlow: NavigationFlow {
     enum Route {
         case creditCard
         case installments
@@ -195,11 +195,11 @@ extension PaymentFlow: NavigationFlow {
     }
 }
 
-/// This class is used to store PaymentFlow and attach PaymentFlowContainerController to rootViewController
+/// This class is used to store ChoosePaymentMethodFlow and attach PaymentFlowContainerController to rootViewController
 /// It will be deallocated as soon as rootViewController is dismissed
 class PaymentFlowContainerController: UIViewController {
-    var paymentFlow: PaymentFlow?
-    init(_ paymentFlow: PaymentFlow) {
+    var paymentFlow: ChoosePaymentMethodFlow?
+    init(_ paymentFlow: ChoosePaymentMethodFlow) {
         self.paymentFlow = paymentFlow
         super.init(nibName: nil, bundle: nil)
     }

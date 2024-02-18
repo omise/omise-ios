@@ -1,10 +1,10 @@
 import Foundation
 
-extension PaymentOption: CustomStringConvertible {
+extension ChoosePaymentMethodController.ViewModel.PaymentMethod: CustomStringConvertible {
     var description: String { localizedTitle }
 }
 
-extension PaymentOption: ListItemProtocol {
+extension ChoosePaymentMethodController.ViewModel.PaymentMethod: ListItemProtocol {
     /// Localized title for given payment option
     public var localizedTitle: String {
         let prefixCode = "paymentMethod"

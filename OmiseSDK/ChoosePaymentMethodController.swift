@@ -8,7 +8,7 @@ class ChoosePaymentMethodController: UITableViewController {
         let accessoryIcon: UIImage?
     }
 
-    let viewModel = ChoosePaymentMethodViewModel()
+    let viewModel = ViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
