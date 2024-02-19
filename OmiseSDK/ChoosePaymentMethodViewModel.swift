@@ -11,7 +11,7 @@ class ChoosePaymentMethodViewModel: ViewAttachable {
     /// Payment method options used in UI mapped from SourceType
     private var paymentMethods: [PaymentMethod] = [] {
         didSet {
-            onPaymentMethodChanged(createViewContexts())
+            onPaymentMethodsUpdated(createViewContexts())
         }
     }
 
@@ -22,9 +22,9 @@ class ChoosePaymentMethodViewModel: ViewAttachable {
 
     /// Should be used to reload UI on payment methods list changed
     /// Instantly calls on assign
-    var onPaymentMethodChanged: ([ViewContext]) -> Void = { _ in } {
+    var onPaymentMethodsUpdated: ([ViewContext]) -> Void = { _ in } {
         didSet {
-            onPaymentMethodChanged(createViewContexts())
+            onPaymentMethodsUpdated(createViewContexts())
         }
     }
 

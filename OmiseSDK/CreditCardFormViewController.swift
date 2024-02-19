@@ -540,7 +540,7 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
         default:
             cardBrandIconName = nil
         }
-        cardBrandIconImageView.image = cardBrandIconName.flatMap { UIImage(named: $0, in: .omiseSDK, compatibleWith: nil) }
+        cardBrandIconImageView.image = cardBrandIconName.flatMap { UIImage(omise: $0) }
         cardNumberTextField.rightViewMode = cardBrandIconImageView.image != nil ? .always : .never
     }
 

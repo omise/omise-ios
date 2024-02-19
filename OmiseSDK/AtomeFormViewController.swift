@@ -181,7 +181,7 @@ private extension AtomeFormViewController {
         setupInputs(viewModel: viewModel)
         setupSubmitButton(viewModel: viewModel)
         detailsLabel.text = viewModel.headerText
-        logoImageView.image = UIImage(named: viewModel.logoName, in: .omiseSDK, compatibleWith: nil)
+        logoImageView.image = UIImage(omise: viewModel.logoName)
 
         updateSubmitButtonState()
         applyPrimaryColor()

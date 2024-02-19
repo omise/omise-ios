@@ -6,7 +6,7 @@ class DuitNowOBWBankChooserViewController: UITableViewController,
     func customize(element bank: PaymentInformation.DuitNowOBW.Bank, tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
         cell.textLabel?.text = bank.localizedTitle
         cell.imageView?.image = bank.listIcon
-        cell.accessoryView = UIImageView(image: UIImage(named: "Next"))
+        cell.accessoryView = UIImageView(image: UIImage(omise: "Next"))
 
         if let cell = cell as? PaymentOptionTableViewCell {
             cell.separatorView.backgroundColor = UIColor.omiseSecondary
@@ -86,86 +86,3 @@ class DuitNowOBWBankChooserViewController: UITableViewController,
     }
 }
 
-extension PaymentInformation.DuitNowOBW.Bank {
-    var localizedTitle: String {
-        switch self {
-        case .affin:
-            return "Affin Bank"
-        case .alliance:
-            return "Alliance Bank"
-        case .agro:
-            return "Agrobank"
-        case .ambank:
-            return "AmBank"
-        case .islam:
-            return "Bank Islam"
-        case .muamalat:
-            return "Bank Muamalat"
-        case .rakyat:
-            return "Bank Rakyat"
-        case .bsn:
-            return "Bank Simpanan Nasional"
-        case .cimb:
-            return "CIMB Bank"
-        case .hongleong:
-            return "Hong Leong"
-        case .hsbc:
-            return "HSBC Bank"
-        case .kfh:
-            return "Kuwait Finance House"
-        case .maybank2u:
-            return "Maybank"
-        case .ocbc:
-            return "OCBC"
-        case .publicBank:
-            return "Public Bank"
-        case .rhb:
-            return "RHB Bank"
-        case .sc:
-            return "Standard Chartered"
-        case .uob:
-            return "United Overseas Bank"
-        }
-    }
-    // UIImage(named: "FPX/" + bank, in: .omiseSDK, compatibleWith: nil)
-    var listIcon: UIImage? {
-        switch self {
-        case .affin:
-            return UIImage(named: "FPX/affin")
-        case .alliance:
-            return UIImage(named: "FPX/alliance")
-        case .agro:
-            return UIImage(named: "agrobank")
-        case .ambank:
-            return UIImage(named: "FPX/ambank")
-        case .islam:
-            return UIImage(named: "FPX/islam")
-        case .muamalat:
-            return UIImage(named: "FPX/muamalat")
-        case .rakyat:
-            return UIImage(named: "FPX/rakyat")
-        case .bsn:
-            return UIImage(named: "FPX/bsn")
-        case .cimb:
-            return UIImage(named: "FPX/cimb")
-        case .hongleong:
-            return UIImage(named: "FPX/hong-leong")
-        case .hsbc:
-            return UIImage(named: "FPX/hsbc")
-        case .kfh:
-            return UIImage(named: "FPX/kfh")
-        case .maybank2u:
-            return UIImage(named: "FPX/maybank")
-        case .ocbc:
-            return UIImage(named: "FPX/ocbc")
-        case .publicBank:
-            return UIImage(named: "FPX/public-bank")
-        case .rhb:
-            return UIImage(named: "FPX/rhb")
-        case .sc:
-            return UIImage(named: "FPX/sc")
-        case .uob:
-            return UIImage(named: "FPX/uob")
-        }
-    }
-}

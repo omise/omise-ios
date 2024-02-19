@@ -62,7 +62,7 @@ extension SourceType: ListItemProtocol {
         case .duitNowQR:
             return "DuitNow QR"
         case .duitNowOBW:
-            return "DuitNow OBW"
+            return "DuitNow Online Banking/Wallets"
         case .touchNGo:
             return "Touch 'n Go"
         case .grabPayRms:

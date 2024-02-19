@@ -6,7 +6,7 @@ class MobileBankingSourceChooserViewController: UITableViewController,
     func customize(element: SourceType, tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
 //                    cell.textLabel?.text = title(for: paymentOption.so)
 //                    cell.imageView?.image = paymentOption.listIcon
-        cell.accessoryView = UIImageView(image: UIImage(named: "Next"))
+        cell.accessoryView = UIImageView(image: UIImage(omise: "Next"))
 
         if let cell = cell as? PaymentOptionTableViewCell {
             cell.separatorView.backgroundColor = UIColor.omiseSecondary
@@ -59,11 +59,11 @@ class MobileBankingSourceChooserViewController: UITableViewController,
 
     func icon(for sourceType: SourceType) -> UIImage? {
         switch sourceType {
-        case .mobileBankingSCB: return UIImage(named: "SCB", in: .omiseSDK, compatibleWith: nil)
-        case .mobileBankingKBank: return UIImage(named: "KPlus", in: .omiseSDK, compatibleWith: nil)
-        case .mobileBankingBAY: return UIImage(named: "KMA", in: .omiseSDK, compatibleWith: nil)
-        case .mobileBankingBBL: return UIImage(named: "BBL M", in: .omiseSDK, compatibleWith: nil)
-        case .mobileBankingKTB: return UIImage(named: "KTB Next", in: .omiseSDK, compatibleWith: nil)
+        case .mobileBankingSCB: return UIImage(omise: "SCB")
+        case .mobileBankingKBank: return UIImage(omise: "KPlus")
+        case .mobileBankingBAY: return UIImage(omise: "KMA")
+        case .mobileBankingBBL: return UIImage(omise: "BBL M")
+        case .mobileBankingKTB: return UIImage(omise: "KTB Next")
         default: return nil
         }
     }

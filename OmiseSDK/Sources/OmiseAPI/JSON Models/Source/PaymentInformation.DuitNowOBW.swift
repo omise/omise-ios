@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 extension PaymentInformation {
     /// Payment for `DuitNow Online Banking/Wallets` payment method
@@ -80,5 +81,88 @@ extension PaymentInformation.DuitNowOBW {
         case sc
         /// UOB Bank
         case uob
+    }
+}
+
+extension PaymentInformation.DuitNowOBW.Bank {
+    var localizedTitle: String {
+        switch self {
+        case .affin:
+            return "Affin Bank"
+        case .alliance:
+            return "Alliance Bank"
+        case .agro:
+            return "Agrobank"
+        case .ambank:
+            return "AmBank"
+        case .islam:
+            return "Bank Islam"
+        case .muamalat:
+            return "Bank Muamalat"
+        case .rakyat:
+            return "Bank Rakyat"
+        case .bsn:
+            return "Bank Simpanan Nasional"
+        case .cimb:
+            return "CIMB Bank"
+        case .hongleong:
+            return "Hong Leong"
+        case .hsbc:
+            return "HSBC Bank"
+        case .kfh:
+            return "Kuwait Finance House"
+        case .maybank2u:
+            return "Maybank"
+        case .ocbc:
+            return "OCBC"
+        case .publicBank:
+            return "Public Bank"
+        case .rhb:
+            return "RHB Bank"
+        case .sc:
+            return "Standard Chartered"
+        case .uob:
+            return "United Overseas Bank"
+        }
+    }
+    var listIcon: UIImage? {
+        switch self {
+        case .affin:
+            return UIImage(omise: "FPX/affin")
+        case .alliance:
+            return UIImage(omise: "FPX/alliance")
+        case .agro:
+            return UIImage(omise: "agrobank")
+        case .ambank:
+            return UIImage(omise: "FPX/ambank")
+        case .islam:
+            return UIImage(omise: "FPX/islam")
+        case .muamalat:
+            return UIImage(omise: "FPX/muamalat")
+        case .rakyat:
+            return UIImage(omise: "FPX/rakyat")
+        case .bsn:
+            return UIImage(omise: "FPX/bsn")
+        case .cimb:
+            return UIImage(omise: "FPX/cimb")
+        case .hongleong:
+            return UIImage(omise: "FPX/hong-leong")
+        case .hsbc:
+            return UIImage(omise: "FPX/hsbc")
+        case .kfh:
+            return UIImage(omise: "FPX/kfh")
+        case .maybank2u:
+            return UIImage(omise: "FPX/maybank")
+        case .ocbc:
+            return UIImage(omise: "FPX/ocbc")
+        case .publicBank:
+            return UIImage(omise: "FPX/public-bank")
+        case .rhb:
+            return UIImage(omise: "FPX/rhb")
+        case .sc:
+            return UIImage(omise: "FPX/sc")
+        case .uob:
+            return UIImage(omise: "FPX/uob")
+        }
     }
 }

@@ -107,10 +107,10 @@ class FPXBankChooserViewController: AdaptableDynamicTableViewController<Capabili
     }
 
     private func bankImage(bank: String) -> UIImage? {
-        if let image = UIImage(named: "FPX/" + bank, in: .omiseSDK, compatibleWith: nil) {
+        if let image = UIImage(omise: "FPX/" + bank) {
             return image
         } else {
-            return UIImage(named: defaultImage, in: .omiseSDK, compatibleWith: nil)
+            return UIImage(omise: defaultImage)
         }
     }
 

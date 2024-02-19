@@ -17,7 +17,7 @@ class ChoosePaymentMethodControllerOld: UITableViewController {
         applyNavigationBarStyle()
         setupNavigationItems()
         
-//        viewModel.onPaymentMethodChanged = { [weak self] in
+//        viewModel.onPaymentMethodsUpdated = { [weak self] in
 //            guard let self = self else { return }
 //            if self.isViewLoaded {
 //                self.tableView.reloadData()

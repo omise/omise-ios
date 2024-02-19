@@ -96,6 +96,10 @@ public class OmiseSDK {
         )
 
         let navigationController = UINavigationController(rootViewController: viewController)
+        if #available(iOSApplicationExtension 11.0, *) {
+            navigationController.navigationBar.prefersLargeTitles = true
+        }
+
         return navigationController
     }
 }

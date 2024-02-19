@@ -5,8 +5,6 @@ class PaymentFlow: ViewAttachable {
     let amount: Int64
     let currency: String
 
-    typealias PaymentMethod = ChoosePaymentMethodViewModel.PaymentMethod
-
     enum ResultState {
         case cancelled
         case selectedPaymentMethod(PaymentMethod)
@@ -31,60 +29,109 @@ class PaymentFlow: ViewAttachable {
         usePaymentMethodsFromCapability: Bool,
         delegate: ChoosePaymentMethodDelegate
     ) -> TableListController {
-
-        let builder = ChoosePaymentMethodFactory()
-        let listController = builder.createViewController { [weak delegate] in
-            delegate?.choosePaymentMethodDidCancel()
+        // Setup ViewController
+        let listController = TableListController()
+        if #available(iOSApplicationExtension 11.0, *) {
+            listController.navigationItem.largeTitleDisplayMode = .always
+        }
+        listController.navigationItem.title = localized("paymentMethods.title", text: "Payment Methods")
+        listController.navigationItem.backBarButtonItem = .empty
+        listController.navigationItem.rightBarButtonItem = ClosureBarButtonItem(
+            image: UIImage(omise: "Close"),
+            style: .plain) { [weak delegate] _ in
+                delegate?.choosePaymentMethodDidCancel()
         }
 
-        let viewModel = builder.createViewModel(
-            client: client,
-            allowedPaymentMethods: allowedPaymentMethods,
-            allowedCardPayment: allowedCardPayment,
-            usePaymentMethodsFromCapability: usePaymentMethodsFromCapability
-        )
-        let listDataSource = builder.createTableDataSource(
-            for: viewModel,
-            listController: listController
-        )
+        // Setup ViewModel
+        let viewModel = ChoosePaymentMethodViewModel()
+        if usePaymentMethodsFromCapability {
+            viewModel.setupCapabilityPaymentMethods(client: client)
+        } else {
+            viewModel.setupAllowedPaymentMethods(
+                allowedPaymentMethods,
+                allowedCardPayment: allowedCardPayment,
+                client: client
+            )
+        }
+        viewModel.reloadPaymentMethods()
 
-        let listDelegateCompletion: (PaymentFlow.ResultState) -> Void = { [weak self, weak listController] result in
-            switch result {
-            case .cancelled:
-                delegate.choosePaymentMethodDidCancel()
-            case .selectedPaymentMethod(let paymentMethod):
-                if let self = self, let listController = listController {
-                    self.didChoosePaymentMethod(
-                        paymentMethod,
-                        listController: listController,
-                        delegate: delegate
-                    )
-                }
+        // Connect ViewController and ViewModel
+        viewModel.onPaymentMethodsUpdated = { [weak listController] viewContexts in
+            listController?.items = viewContexts
+        }
+
+        listController.didSelectCellHandler = { [weak viewModel, weak listController, weak delegate] cell, indexPath in
+            guard let delegate = delegate,
+                    let viewModel = viewModel,
+                    let listController = listController else {
+                return
+            }
+
+            if viewModel.showsActivityForSelectedPaymentMethod(at: indexPath.row) {
+                cell.startAccessoryActivityIndicator()
+                listController.lockUserInferface()
+            }
+
+            if let paymentMethod = viewModel.paymentMethod(at: indexPath.row) {
+                self.didSelectPaymentMethod(
+                    paymentMethod,
+                    listController: listController,
+                    delegate: delegate
+                )
             }
         }
-        
-        let listDelegate = builder.createTableDelegate(
-            viewModel: viewModel,
-            listController: listController,
-            completion: listDelegateCompletion
-        )
 
         // Finalize setup
-        listController.tableView.delegate = listDelegate
-        listController.tableView.dataSource = listDataSource
-        listController.attach(listDataSource)
-        listController.attach(listDelegate)
         listController.attach(viewModel)
         listController.attach(self)
+        return listController
+    }
 
-        viewModel.reloadPaymentMethods()
+    func createDuitNowController(title: String) -> TableListController {
+        let listController = TableListController()
+        if #available(iOSApplicationExtension 11.0, *) {
+            listController.navigationItem.largeTitleDisplayMode = .never
+        }
+        listController.navigationItem.title = title
+        listController.navigationItem.backBarButtonItem = .empty
+
+        let banks = PaymentInformation.DuitNowOBW.Bank.allCases.sorted {
+            $0.localizedTitle.localizedCaseInsensitiveCompare($1.localizedTitle) == .orderedAscending
+        }
+
+        listController.items = banks.map {
+            TableCellContext(
+                icon: $0.listIcon,
+                title: $0.localizedTitle,
+                accessoryIcon: UIImage(omise: "Redirect")
+            )
+        }
+
+        listController.didSelectCellHandler = { [banks, weak listController] cell, indexPath in
+            guard let listController = listController else { return }
+
+            cell.startAccessoryActivityIndicator()
+            listController.lockUserInferface()
+
+            if let bank = banks.at(indexPath.row) {
+                print("Bank selected: \(bank)")
+            }
+
+//            if let paymentMethod = viewModel.paymentMethod(at: indexPath.row) {
+//                self.didSelectPaymentMethod(
+//                    paymentMethod,
+//                    listController: listController,
+//                    delegate: delegate
+//                )
+//            }
+        }
 
         return listController
     }
 }
 
 extension PaymentFlow {
-    func didChoosePaymentMethod(
+    func didSelectPaymentMethod(
         _ paymentMethod: PaymentMethod,
         listController: TableListController,
         delegate: ChoosePaymentMethodDelegate
@@ -111,7 +158,7 @@ extension PaymentFlow {
         case .sourceType(.barcodeAlipay):
             viewController = UIViewController()
         case .sourceType(.duitNowOBW):
-            viewController = UIViewController()
+            viewController = createDuitNowController(title: paymentMethod.localizedTitle)
         case .sourceType(.fpx):
             viewController = UIViewController()
         case .sourceType(.trueMoneyWallet):
@@ -135,8 +182,6 @@ extension PaymentFlow {
 
     }
 }
-
-
 
 // protocol NavigationFlow<Route> {
 //    associatedtype Route
