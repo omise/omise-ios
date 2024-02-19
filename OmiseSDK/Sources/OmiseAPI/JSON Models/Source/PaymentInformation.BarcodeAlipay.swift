@@ -1,5 +1,6 @@
 import Foundation
 
+// TODO: Rename to Source.BarcodeAlipay
 extension PaymentInformation {
     /// Payment for `Alipay In-Store` payment method
     /// https://docs.opn.ooo/alipay-barcode

@@ -1,5 +1,6 @@
 import Foundation
 
+// TODO: Address
 extension PaymentInformation {
     /// `Shipping` or `Billing` address
     /// https://docs.opn.ooo/sources-api

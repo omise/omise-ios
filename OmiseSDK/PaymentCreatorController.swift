@@ -39,7 +39,7 @@ public class PaymentCreatorController: UINavigationController {
         }
     }
 
-    private let paymentChooserController = ChoosePaymentMethodController(nibName: nil, bundle: .omiseSDK)
+    private let paymentChooserController = ChoosePaymentMethodControllerOld(nibName: nil, bundle: .omiseSDK)
 
     /// Available Source payment options to let user to choose.
     /// The default value is the default available payment method for merchant in Thailand
@@ -132,7 +132,7 @@ public class PaymentCreatorController: UINavigationController {
         paymentChooserController.viewModel.usePaymentMethodsFromCapability = true
     }
 
-    private func initializeWithPaymentChooserViewController(_ viewController: ChoosePaymentMethodController) {
+    private func initializeWithPaymentChooserViewController(_ viewController: ChoosePaymentMethodControllerOld) {
         viewController.viewModel.flowSession = paymentSourceCreatorFlowSession
         viewController.viewModel.allowedPaymentMethods = allowedPaymentMethods
         viewController.viewModel.allowedCardPayment = allowedCardPayment
@@ -231,7 +231,7 @@ public class PaymentCreatorController: UINavigationController {
     public override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         dismissErrorMessage(animated: false, sender: self)
 
-        if let viewController = viewController as? ChoosePaymentMethodController {
+        if let viewController = viewController as? ChoosePaymentMethodControllerOld {
             viewController.viewModel.flowSession = self.paymentSourceCreatorFlowSession
         }
         super.pushViewController(viewController, animated: animated)
@@ -243,7 +243,7 @@ public class PaymentCreatorController: UINavigationController {
     }
 
     public override func addChild(_ childController: UIViewController) {
-        if let viewController = childController as? ChoosePaymentMethodController {
+        if let viewController = childController as? ChoosePaymentMethodControllerOld {
             viewController.viewModel.flowSession = self.paymentSourceCreatorFlowSession
         }
         super.addChild(childController)

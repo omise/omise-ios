@@ -1,182 +1,30 @@
 import UIKit
-import os
 
-class ChoosePaymentMethodController: UITableViewController {
-    struct ViewContext: Equatable {
-        let icon: UIImage?
-        let title: String
-        let accessoryIcon: UIImage?
-    }
-
-    let viewModel = ViewModel()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.separatorColor = UIColor.omiseSecondary
-        tableView.rowHeight = 64
-        applyNavigationBarStyle()
-        setupNavigationItems()
-        
-        viewModel.onPaymentMethodChanged = { [weak self] in
-            guard let self = self else { return }
-            if self.isViewLoaded {
-                self.tableView.reloadData()
-            }
-        }
-        viewModel.reloadPaymentMethods()
-    }
-
-    private func setupNavigationItems() {
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(omise: "Close"),
-            style: .plain,
-            target: self,
-            action: #selector(closeTapped)
-        )
-
-        navigationItem.title = localized("paymentMethods.title", text: "Payment Methods")
-        if #available(iOSApplicationExtension 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.numberOfViewContexts
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = "UITableViewCell"
-        var cell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: identifier)
-
-        if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: identifier)
-        }
-
-        let viewContext = viewModel.viewContext(at: indexPath.row)
-
-        cell.textLabel?.text = viewContext?.title
-        cell.textLabel?.font = .boldSystemFont(ofSize: 14.0)
-        cell.textLabel?.textColor = UIColor.omisePrimary
-
-        cell.imageView?.image = viewContext?.icon
-        cell.accessoryView = UIImageView(image: viewContext?.accessoryIcon)
-
-        cell.accessoryView?.tintColor = UIColor.omiseSecondary
-
-        return cell
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        tableView.deselectRow(at: indexPath, animated: true)
-
-        if viewModel.showsActivityOnPaymentMethodSelected(at: indexPath.row) {
-            let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
-            loadingIndicator.color = UIColor.omiseSecondary
-            cell?.accessoryView = loadingIndicator
-            loadingIndicator.startAnimating()
-            lockUserInferface()
-        }
-
-        viewModel.didSelectPaymentMethod(at: indexPath.row)
-    }
-
-    @IBAction private func closeTapped(_ sender: Any) {
-        viewModel.didCancel()
-    }
-}
-
-extension ChoosePaymentMethodController {
-    func lockUserInferface() {
-        view.isUserInteractionEnabled = false
-    }
-
-    func unlockUserInterface() {
-        view.isUserInteractionEnabled = true
-        tableView.reloadData()
-    }
-}
-
-/*
- func goToAtome() {
- let vc = AtomeFormViewController(viewModel: AtomeFormViewModel(flowSession: flowSession))
- vc.preferredPrimaryColor = self.preferredPrimaryColor
- vc.preferredSecondaryColor = self.preferredSecondaryColor
-
- navigationController?.pushViewController(vc, animated: true)
- }
- */
-
-//        let option = item(at: indexPath)
-//        switch option {
-//        case .c
+//class ChoosePaymentMethodController: TableListController {
+//    
+//    var closeDidTapClosure: (() -> Void)?
+//    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        setupNavigationBar()
+//    }
+//}
 //
-//        }
-//        let element: ViewContext = self.item(at: indexPath)
-//        let selectedType = SourceType(rawValue: element.name)
-/*
- switch selectedType {
- case .alipay:
- payment = .sourceType(.alipay)
- case .alipayCN:
- payment = .sourceType(.alipayCN)
- case .alipayHK:
- payment = .sourceType(.alipayHK)
- case .dana:
- payment = .sourceType(.dana)
- case .gcash:
- payment = .sourceType(.gcash)
- case .kakaoPay:
- payment = .sourceType(.kakaoPay)
- case .touchNGoAlipayPlus, .touchNGo:
- payment = .sourceType(.touchNGo)
- case .tescoLotus:
- payment = .sourceType(.billPaymentTescoLotus)
- case .promptpay:
- payment = .sourceType(.promptPay)
- case .paynow:
- payment = .sourceType(.payNow)
- case .citiPoints:
- payment = .sourceType(.pointsCiti)
- case .rabbitLinepay:
- payment = .sourceType(.rabbitLinepay)
- case .ocbcDigital:
- payment = .sourceType(.ocbcDigital)
- case .grabPay, .grabPayRms:
- payment = .sourceType(.grabPay)
- case .boost:
- payment = .sourceType(.boost)
- case .shopeePay:
- payment = .sourceType(.shopeePay)
- case .shopeePayJumpApp:
- payment = .sourceType(.shopeePayJumpApp)
- case .maybankQRPay:
- payment = .sourceType(.maybankQRPay)
- case .duitNowQR:
- payment = .sourceType(.duitNowQR)
- case .payPay:
- payment = .sourceType(.payPay)
- case .atome:
- goToAtome()
- return
- case .truemoneyJumpApp:
- payment = .sourceType(.trueMoneyJumpApp)
- case .weChat:
- payment = .sourceType(.weChat)
- default:
- return
- }
-
- let oldAccessoryView = cell?.accessoryView
- let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
- loadingIndicator.color = UIColor.omiseSecondary
- cell?.accessoryView = loadingIndicator
- loadingIndicator.startAnimating()
- view.isUserInteractionEnabled = false
-
- flowSession?.requestCreateSource(payment) { _ in
- cell?.accessoryView = oldAccessoryView
- self.view.isUserInteractionEnabled = true
- }
- */
+//private extension ChoosePaymentMethodController {
+//    private func setupNavigationBar() {
+//        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(
+//            image: UIImage(omise: "Close"),
+//            style: .plain,
+//            target: self,
+//            action: #selector(closeDidTap)
+//        )
+//
+//        navigationItem.title = localized("paymentMethods.title", text: "Payment Methods")
+//        prefersLargeTitles = true
+//    }
+//
+//    @objc func closeDidTap(_ sender: Any) {
+//        closeDidTapClosure?()
+//    }
+//}

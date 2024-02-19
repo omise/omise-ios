@@ -1,5 +1,6 @@
 import Foundation
 
+// TODO: Rename to Source.Atome
 extension PaymentInformation {
     /// Payment for `Atome App Redirection` payment method
     /// https://docs.opn.ooo/atome

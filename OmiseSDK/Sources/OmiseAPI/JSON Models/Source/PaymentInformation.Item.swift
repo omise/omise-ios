@@ -1,5 +1,6 @@
 import Foundation
 
+// TODO: Rename to Source.Item
 extension PaymentInformation {
     /// Information about items included in the order
     /// https://docs.opn.ooo/sources-api

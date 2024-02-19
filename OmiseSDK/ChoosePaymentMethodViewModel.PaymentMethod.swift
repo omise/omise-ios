@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-extension ChoosePaymentMethodController.ViewModel {
+extension ChoosePaymentMethodViewModel {
     enum PaymentMethod: CaseIterable, Equatable, Hashable {
         case creditCard
         case installment
@@ -67,8 +67,8 @@ extension ChoosePaymentMethodController.ViewModel {
     }
 }
 
-extension ChoosePaymentMethodController.ViewModel.PaymentMethod {
-    typealias PaymentMethod = ChoosePaymentMethodController.ViewModel.PaymentMethod
+extension ChoosePaymentMethodViewModel.PaymentMethod {
+    typealias PaymentMethod = ChoosePaymentMethodViewModel.PaymentMethod
     static func paymentOptions(for sourceType: SourceType) -> [PaymentMethod] {
         switch sourceType {
         case _ where sourceType.isInstallment:
@@ -117,5 +117,3 @@ extension ChoosePaymentMethodController.ViewModel.PaymentMethod {
         topListed(from: alphabetical(from: from))
     }
 }
-
-

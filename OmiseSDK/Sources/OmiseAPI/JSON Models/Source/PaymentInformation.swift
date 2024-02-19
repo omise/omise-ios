@@ -6,6 +6,8 @@ protocol SourceTypeContainerProtocol: Codable {
     var sourceType: SourceType { get }
 }
 
+// TODO: Rename to Source.PaymentInformation
+
 /// Information details about source payment
 /// There are some payment methods that has additional parameters like "phoneNumber" and some requires only Source`type`
 /// This enum groups all supported payment methods details together.
