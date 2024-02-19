@@ -9,13 +9,13 @@ extension PaymentFlow {
         listController.navigationItem.title = title
         listController.navigationItem.backBarButtonItem = .empty
 
-        let banks = PaymentInformation.DuitNowOBW.Bank.allCases.sorted {
+        let banks = Source.PaymentInformation.DuitNowOBW.Bank.allCases.sorted {
             $0.localizedTitle.localizedCaseInsensitiveCompare($1.localizedTitle) == .orderedAscending
         }
 
         listController.items = banks.map {
             TableCellContext(
-                icon: $0.listIcon,
+                icon: UIImage(omise: $0.iconName),
                 title: $0.localizedTitle,
                 accessoryIcon: UIImage(omise: "Redirect")
             )

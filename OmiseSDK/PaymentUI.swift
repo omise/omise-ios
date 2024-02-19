@@ -43,7 +43,7 @@ internal class PaymentCreatorFlowSession {
         return false
     }
 
-    func requestCreateSource(_ payload: PaymentInformation, completionHandler: ((Result<Source, Error>) -> Void)?) {
+    func requestCreateSource(_ payload: Source.PaymentInformation, completionHandler: ((Result<Source, Error>) -> Void)?) {
         guard validateRequiredProperties(), let client = self.client,
             let amount = paymentAmount, let currency = paymentCurrency else {
                 return

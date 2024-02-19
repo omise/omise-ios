@@ -57,11 +57,21 @@ class TableListController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         tableView.deselectRow(at: indexPath, animated: true)
-
         didSelectCellHandler(cell, indexPath)
     }
 }
 
 extension TableListController {
+    func startCellActivity(at indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
 
+        let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+        loadingIndicator.color = UIColor.omiseSecondary
+        cell.accessoryView = loadingIndicator
+        loadingIndicator.startAnimating()
+    }
+
+    func stopCellActivity(at indexPath: IndexPath) {
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
 }

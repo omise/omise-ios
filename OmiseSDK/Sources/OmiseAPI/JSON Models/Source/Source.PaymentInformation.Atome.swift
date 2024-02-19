@@ -1,7 +1,6 @@
 import Foundation
 
-// TODO: Rename to Source.Atome
-extension PaymentInformation {
+extension Source.PaymentInformation {
     /// Payment for `Atome App Redirection` payment method
     /// https://docs.opn.ooo/atome
     public struct Atome: Equatable {
@@ -12,11 +11,11 @@ extension PaymentInformation {
         /// Customer email
         public let email: String?
         /// Shipping address
-        public let shipping: PaymentInformation.Address
+        public let shipping: Source.PaymentInformation.Address
         /// Billing address
-        public let billing: PaymentInformation.Address?
+        public let billing: Source.PaymentInformation.Address?
         /// Information about items included in the order
-        public let items: [PaymentInformation.Item]
+        public let items: [Source.PaymentInformation.Item]
 
         /// Creates a new Atome payment method payload
         ///
@@ -27,7 +26,7 @@ extension PaymentInformation {
         ///   - shipping: Shipping address
         ///   - billing: Billing address
         ///   - items: Items details
-        public init(phoneNumber: String, name: String? = nil, email: String? = nil, shipping: Address, billing: PaymentInformation.Address?, items: [PaymentInformation.Item]) {
+        public init(phoneNumber: String, name: String? = nil, email: String? = nil, shipping: Address, billing: Source.PaymentInformation.Address?, items: [Source.PaymentInformation.Item]) {
             self.name = name
             self.email = email
             self.phoneNumber = phoneNumber
@@ -38,14 +37,14 @@ extension PaymentInformation {
     }
 }
 
-extension PaymentInformation.Atome: SourceTypeContainerProtocol {
+extension Source.PaymentInformation.Atome: SourceTypeContainerProtocol {
     /// Payment method identifier
     public static let sourceType: SourceType = .atome
     public var sourceType: SourceType { Self.sourceType }
 }
 
 /// Encoding/decoding JSON string
-extension PaymentInformation.Atome: Codable {
+extension Source.PaymentInformation.Atome: Codable {
     private enum CodingKeys: String, CodingKey {
         case name
         case email

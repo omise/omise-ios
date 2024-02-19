@@ -45,12 +45,12 @@ class ChoosePaymentMethodViewModel: ViewAttachable {
     func reloadPaymentMethods() {
         if usePaymentMethodsFromCapability {
             if let latestLoadedCapability = client?.latestLoadedCapability {
-                generatePaymentMethods(with: latestLoadedCapability)
+                paymentMethods = PaymentMethod.createPaymentMethods(with: latestLoadedCapability)
             } else {
                 loadCapabilities()
             }
         } else {
-            generatePaymentMethods(with: allowedPaymentMethods, allowedCardPayment)
+            paymentMethods = PaymentMethod.createPaymentMethods(from: allowedPaymentMethods, showsCreditCard: allowedCardPayment)
         }
     }
 
@@ -82,29 +82,27 @@ private extension ChoosePaymentMethodViewModel {
 
         client.capability { [weak self] result in
             if let capability = try? result.get() {
-                self?.generatePaymentMethods(with: capability)
+                self?.paymentMethods = PaymentMethod.createPaymentMethods(with: capability)
             }
         }
     }
+}
 
+extension PaymentMethod {
     /// Generates Payment Methods with given Capability
-    func generatePaymentMethods(with capability: Capability) {
+    static func createPaymentMethods(with capability: Capability) -> [PaymentMethod] {
         let sourceTypes = capability.paymentMethods.compactMap {
             SourceType(rawValue: $0.name)
         }
 
         let showsCreditCard = capability.cardPaymentMethod != nil
-        paymentMethods = createPaymentMethods(from: sourceTypes, showsCreditCard: showsCreditCard)
-    }
-
-    /// Generate Payment Methods with given list of SourceType and allowedCardPayment option
-    func generatePaymentMethods(with sourceTypes: [SourceType], _ cardPayment: Bool) {
-        paymentMethods = createPaymentMethods(from: sourceTypes, showsCreditCard: cardPayment)
+        let paymentMethods = createPaymentMethods(from: sourceTypes, showsCreditCard: showsCreditCard)
+        return paymentMethods
     }
 
     /// Generates PaymenOption list with given list of SourceType and allowedCardPayment option
-    func createPaymentMethods(from sourceTypes: [SourceType], showsCreditCard: Bool) -> [PaymentMethod] {
-        var list = PaymentMethod.from(sourceTypes)
+    static func createPaymentMethods(from sourceTypes: [SourceType], showsCreditCard: Bool) -> [PaymentMethod] {
+        var list = PaymentMethod.from(sourceTypes: sourceTypes)
 
         if showsCreditCard {
             list.append(.creditCard)
@@ -125,9 +123,9 @@ private extension ChoosePaymentMethodViewModel {
         return list
     }
 
-    func createViewContexts(from paymentMethods: [PaymentMethod]) -> [ViewContext] {
+    static func createViewContexts(from paymentMethods: [PaymentMethod]) -> [TableCellContext] {
         let viewContexts = paymentMethods.map {
-            ViewContext(icon: $0.listIcon, title: $0.localizedTitle, accessoryIcon: $0.accessoryIcon)
+            TableCellContext(icon: $0.listIcon, title: $0.localizedTitle, accessoryIcon: $0.accessoryIcon)
         }
 
         return viewContexts

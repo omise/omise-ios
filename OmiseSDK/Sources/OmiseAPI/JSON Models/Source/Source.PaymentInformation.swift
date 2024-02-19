@@ -6,47 +6,47 @@ protocol SourceTypeContainerProtocol: Codable {
     var sourceType: SourceType { get }
 }
 
-// TODO: Rename to Source.PaymentInformation
+extension Source {
+    /// Information details about source payment
+    /// There are some payment methods that has additional parameters like "phoneNumber" and some requires only Source`type`
+    /// This enum groups all supported payment methods details together.
+    public enum PaymentInformation: Equatable {
+        /// Atome
+        case atome(_ details: Atome)
+        /// Barcode
+        case barcodeAlipay(_ details: BarcodeAlipay)
+        /// DuitNow Online Banking/Wallets
+        case duitNowOBW(_ details: DuitNowOBW)
+        /// Konbini, Pay-easy, and Online Banking
+        case eContext(_ payloadetailsd: EContext)
+        /// Malaysia FPX
+        case fpx(_ details: FPX)
+        /// Installment Payments
+        case installment(_ details: Installment)
+        /// TrueMoney Wallet
+        case trueMoneyWallet(_ details: TrueMoneyWallet)
+        /// Payment menthods without additional payment parameters
+        case sourceType(_ sourceType: SourceType)
 
-/// Information details about source payment
-/// There are some payment methods that has additional parameters like "phoneNumber" and some requires only Source`type`
-/// This enum groups all supported payment methods details together.
-public enum PaymentInformation: Equatable {
-    /// Atome
-    case atome(_ details: Atome)
-    /// Barcode
-    case barcodeAlipay(_ details: BarcodeAlipay)
-    /// DuitNow Online Banking/Wallets
-    case duitNowOBW(_ details: DuitNowOBW)
-    /// Konbini, Pay-easy, and Online Banking
-    case eContext(_ payloadetailsd: EContext)
-    /// Malaysia FPX
-    case fpx(_ details: FPX)
-    /// Installment Payments
-    case installment(_ details: Installment)
-    /// TrueMoney Wallet
-    case trueMoneyWallet(_ details: TrueMoneyWallet)
-    /// Payment menthods without additional payment parameters
-    case sourceType(_ sourceType: SourceType)
-
-    /// SourceType of current payment
-    /// Used for encoding sourceType parameter into flat JSON string
-    public var sourceType: SourceType {
-        switch self {
-        case .sourceType(let sourceType): return sourceType
-        case .atome(let details): return details.sourceType
-        case .barcodeAlipay(let details): return details.sourceType
-        case .duitNowOBW(let details): return details.sourceType
-        case .eContext(let details): return details.sourceType
-        case .fpx(let details): return details.sourceType
-        case .installment(let details): return details.sourceType
-        case .trueMoneyWallet(let details): return details.sourceType
+        /// SourceType of current payment
+        /// Used for encoding sourceType parameter into flat JSON string
+        public var sourceType: SourceType {
+            switch self {
+            case .sourceType(let sourceType): return sourceType
+            case .atome(let details): return details.sourceType
+            case .barcodeAlipay(let details): return details.sourceType
+            case .duitNowOBW(let details): return details.sourceType
+            case .eContext(let details): return details.sourceType
+            case .fpx(let details): return details.sourceType
+            case .installment(let details): return details.sourceType
+            case .trueMoneyWallet(let details): return details.sourceType
+            }
         }
     }
 }
 
 /// Encoding/decoding JSON string
-extension PaymentInformation: Codable {
+extension Source.PaymentInformation: Codable {
     private enum CodingKeys: String, CodingKey {
         case sourceType = "type"
     }

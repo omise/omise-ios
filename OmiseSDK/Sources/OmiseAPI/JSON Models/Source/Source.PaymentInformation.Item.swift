@@ -1,7 +1,6 @@
 import Foundation
 
-// TODO: Rename to Source.Item
-extension PaymentInformation {
+extension Source.PaymentInformation {
     /// Information about items included in the order
     /// https://docs.opn.ooo/sources-api
     public struct Item: Equatable {
@@ -46,7 +45,7 @@ extension PaymentInformation {
     }
 }
 
-extension PaymentInformation.Item: Codable {
+extension Source.PaymentInformation.Item: Codable {
     private enum CodingKeys: String, CodingKey {
         case sku
         case amount

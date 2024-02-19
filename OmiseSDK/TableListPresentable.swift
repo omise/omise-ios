@@ -1,6 +1,6 @@
 import Foundation
 
-protocol ListItemProtocol {
+protocol TableListPresentable {
     var localizedTitle: String { get }
     var iconName: String { get }
 }

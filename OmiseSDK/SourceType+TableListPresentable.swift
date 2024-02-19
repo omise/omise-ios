@@ -4,7 +4,7 @@ extension SourceType: CustomStringConvertible {
     public var description: String { localizedTitle }
 }
 
-extension SourceType: ListItemProtocol {
+extension SourceType: TableListPresentable {
     public var localizedTitle: String {
         localized("SourceType.\(self.rawValue).title",
                   text: title,

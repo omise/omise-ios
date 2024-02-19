@@ -6,6 +6,8 @@ import XCTest
 // swiftlint:disable:next type_body_length
 class SourceTests: XCTestCase {
 
+    typealias PaymentInformation = Source.PaymentInformation
+
     /// Test Source.Payload's Codable protocol
     func validatePayloadCodable(_ payload: PaymentInformation) throws {
         let encodedPayload = try JSONEncoder().encode(payload)
@@ -234,7 +236,7 @@ class SourceTests: XCTestCase {
             phoneNumber: "+12312312312",
             name: "Test Data",
             email: "test@omise.co",
-            shipping: PaymentInformation.Address(
+            shipping: Source.PaymentInformation.Address(
                 countryCode: "TH",
                 city: "Bangkok",
                 state: "Krung Thep Maha Nakhon",
@@ -242,7 +244,7 @@ class SourceTests: XCTestCase {
                 street2: "Khwaeng Wang Mai, Pathum Wan",
                 postalCode: "10330"
             ),
-            billing: PaymentInformation.Address(
+            billing: Source.PaymentInformation.Address(
                 countryCode: "TH",
                 city: "Bangkok",
                 state: "Bangkok",
@@ -251,7 +253,7 @@ class SourceTests: XCTestCase {
                 postalCode: "10100"
             ),
             items: [
-                PaymentInformation.Item(
+                Source.PaymentInformation.Item(
                     sku: "3427842",
                     category: "Shoes",
                     name: "Prada shoes",
@@ -261,7 +263,7 @@ class SourceTests: XCTestCase {
                     imageUri: "omise.co/product/shoes/image",
                     brand: "Gucci"
                 ),
-                PaymentInformation.Item(
+                Source.PaymentInformation.Item(
                     sku: "3427843",
                     category: "Shoes",
                     name: "Skate Shoes",

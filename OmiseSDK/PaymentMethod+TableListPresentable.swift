@@ -4,7 +4,7 @@ extension PaymentMethod: CustomStringConvertible {
     var description: String { localizedTitle }
 }
 
-extension PaymentMethod: ListItemProtocol {
+extension PaymentMethod: TableListPresentable {
     /// Localized title for given payment option
     public var localizedTitle: String {
         let prefixCode = "paymentMethod"

@@ -3,9 +3,9 @@ import os
 
 class DuitNowOBWBankChooserViewController: UITableViewController,
                                                   PaymentSourceChooser {
-    func customize(element bank: PaymentInformation.DuitNowOBW.Bank, tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
+    func customize(element bank: Source.PaymentInformation.DuitNowOBW.Bank, tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
         cell.textLabel?.text = bank.localizedTitle
-        cell.imageView?.image = bank.listIcon
+        cell.imageView?.image = UIImage(omise: bank.iconName)
         cell.accessoryView = UIImageView(image: UIImage(omise: "Next"))
 
         if let cell = cell as? PaymentOptionTableViewCell {
@@ -16,7 +16,7 @@ class DuitNowOBWBankChooserViewController: UITableViewController,
     
     var flowSession: PaymentCreatorFlowSession?
     
-    var showingValues: [PaymentInformation.DuitNowOBW.Bank] = [] {
+    var showingValues: [Source.PaymentInformation.DuitNowOBW.Bank] = [] {
         didSet {
             os_log("DuitNow OBW Bank Chooser: Showing options - %{private}@",
                    log: uiLogObject,
