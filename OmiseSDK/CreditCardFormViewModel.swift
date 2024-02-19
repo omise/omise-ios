@@ -57,18 +57,16 @@ class CreditCardFormViewModel: CreditCardFormViewModelProtocol, CountryListViewM
             expirationYear: viewContext.expirationYear,
             securityCode: viewContext.securityCode,
             phoneNumber: nil,
-            address: PaymentInformation.Address(
-                countryCode: viewContext.countryCode,
-                city: viewContext[.city],
-                state: viewContext[.state],
-                street1: viewContext[.address],
-                street2: nil,
-                postalCode: viewContext[.postalCode]
-            )
+            countryCode: viewContext.countryCode,
+            city: viewContext[.city],
+            state: viewContext[.state],
+            street1: viewContext[.address],
+            street2: nil,
+            postalCode: viewContext[.postalCode]
         )
 
-        let client = try? OmiseSDK(publicKey: publicKey).client
-        client?.createToken(payload: payload) { result in
+        let client = OmiseSDK(publicKey: publicKey).client
+        client.createToken(payload: payload) { result in
             onComplete(result)
         }
     }

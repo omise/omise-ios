@@ -21,17 +21,32 @@ public struct CreateTokenPayload: Codable {
         public let securityCode: String
         /// Phone Numeber
         public let phoneNumber: String?
-        /// Address
-        public let address: PaymentInformation.Address?
+        /// Address country as two-letter ISO 3166 code
+        public let countryCode: String?
+        /// Address city
+        public let city: String?
+        /// Address state
+        public let state: String?
+        /// Address street #1
+        public let street1: String?
+        /// Address street #2
+        public let street2: String?
+        /// Address postal code
+        public let postalCode: String?
 
-        public init(name: String, number: String, expirationMonth: Int, expirationYear: Int, securityCode: String, phoneNumber: String? = nil, address: PaymentInformation.Address? = nil) {
+        public init(name: String, number: String, expirationMonth: Int, expirationYear: Int, securityCode: String, phoneNumber: String? = nil, countryCode: String? = nil, city: String? = nil, state: String? = nil, street1: String? = nil, street2: String? = nil, postalCode: String? = nil) {
             self.name = name
             self.number = number
             self.expirationMonth = expirationMonth
             self.expirationYear = expirationYear
             self.securityCode = securityCode
             self.phoneNumber = phoneNumber
-            self.address = address
+            self.countryCode = countryCode
+            self.city = city
+            self.postalCode = postalCode
+            self.state = state
+            self.street1 = street1
+            self.street2 = street2
         }
     }
 }
@@ -44,29 +59,11 @@ extension CreateTokenPayload.Card: Codable {
         case expirationYear = "expiration_year"
         case securityCode = "security_code"
         case phoneNumber = "phone_number"
-    }
-
-    /// Encode information to create payment source to JSON string
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(name, forKey: .name)
-        try container.encode(number, forKey: .number)
-        try container.encode(expirationMonth, forKey: .expirationMonth)
-        try container.encode(expirationYear, forKey: .expirationYear)
-        try container.encode(securityCode, forKey: .securityCode)
-        try container.encode(phoneNumber, forKey: .phoneNumber)
-        try address?.encode(to: encoder)
-    }
-
-    // Decode CreateSourcePayload object from JSON string
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try container.decode(String.self, forKey: .name)
-        self.number = try container.decode(String.self, forKey: .number)
-        self.expirationMonth = try container.decode(Int.self, forKey: .expirationMonth)
-        self.expirationYear = try container.decode(Int.self, forKey: .expirationYear)
-        self.securityCode = try container.decode(String.self, forKey: .securityCode)
-        self.phoneNumber = try container.decode(String.self, forKey: .phoneNumber)
-        self.address = try? PaymentInformation.Address(from: decoder)
+        case countryCode = "country"
+        case city
+        case postalCode = "postal_code"
+        case state
+        case street1
+        case street2
     }
 }

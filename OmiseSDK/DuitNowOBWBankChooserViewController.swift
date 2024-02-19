@@ -85,4 +85,3 @@ class DuitNowOBWBankChooserViewController: UITableViewController,
         // Intentionally empty (SonarCloud warning fix)
     }
 }
-
