@@ -1,6 +1,6 @@
 import Foundation
 
-extension Source.PaymentInformation {
+extension Source.Payment {
     /// Payment for Konbini, Pay-easy, and Online Banking payment method
     /// https://docs.opn.ooo/konbini-pay-easy-online-banking
     public struct EContext: Equatable {
@@ -13,14 +13,14 @@ extension Source.PaymentInformation {
     }
 }
 
-extension Source.PaymentInformation.EContext: SourceTypeContainerProtocol {
+extension Source.Payment.EContext: SourceTypeContainerProtocol {
     /// Source payment method identifier
     static let sourceType: SourceType = .eContext
     var sourceType: SourceType { Self.sourceType }
 }
 
 /// Encoding/decoding JSON string
-extension Source.PaymentInformation.EContext: Codable {
+extension Source.Payment.EContext: Codable {
     private enum CodingKeys: String, CodingKey {
         case name
         case email

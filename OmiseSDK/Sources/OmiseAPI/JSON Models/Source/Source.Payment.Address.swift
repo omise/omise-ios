@@ -1,6 +1,6 @@
 import Foundation
 
-extension Source.PaymentInformation {
+extension Source.Payment {
     /// `Shipping` or `Billing` address
     /// https://docs.opn.ooo/sources-api
     public struct Address: Equatable {
@@ -37,7 +37,7 @@ extension Source.PaymentInformation {
     }
 }
 
-extension Source.PaymentInformation.Address: Codable {
+extension Source.Payment.Address: Codable {
     private enum CodingKeys: String, CodingKey {
         case countryCode = "country"
         case city

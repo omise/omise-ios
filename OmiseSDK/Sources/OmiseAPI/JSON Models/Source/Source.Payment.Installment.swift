@@ -1,6 +1,6 @@
 import Foundation
 
-extension Source.PaymentInformation {
+extension Source.Payment {
     /// Payloads for Installment payment methods
     /// https://docs.opn.ooo/installment-payments
     public struct Installment: Equatable {
@@ -15,7 +15,7 @@ extension Source.PaymentInformation {
 }
 
 /// Encoding/decoding JSON string
-extension Source.PaymentInformation.Installment: Codable {
+extension Source.Payment.Installment: Codable {
     private enum CodingKeys: String, CodingKey {
         case sourceType = "type"
         case installmentTerm = "installment_term"
@@ -23,7 +23,7 @@ extension Source.PaymentInformation.Installment: Codable {
     }
 }
 
-extension Source.PaymentInformation.Installment {
+extension Source.Payment.Installment {
     /// List of sourceTypes belongs to Installment payment type
     public static var sourceTypes: [SourceType] {
         [

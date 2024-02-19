@@ -1,6 +1,6 @@
 import Foundation
 
-extension Source.PaymentInformation {
+extension Source.Payment {
     /// Payment for Malaysia FPX payment method
     /// https://docs.opn.ooo/fpx
     public struct FPX: Equatable {
@@ -26,14 +26,14 @@ extension Source.PaymentInformation {
     }
 }
 
-extension Source.PaymentInformation.FPX: SourceTypeContainerProtocol {
+extension Source.Payment.FPX: SourceTypeContainerProtocol {
     /// Source payment method identifier
     static let sourceType: SourceType = .fpx
     var sourceType: SourceType { Self.sourceType }
 }
 
 /// Encoding/decoding JSON string
-extension Source.PaymentInformation.FPX: Codable {
+extension Source.Payment.FPX: Codable {
     /// Decode DuitNowOBW object from JSON string
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

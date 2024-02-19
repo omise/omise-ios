@@ -1,6 +1,6 @@
 import Foundation
 
-extension Source.PaymentInformation.DuitNowOBW.Bank: TableListPresentable {
+extension Source.Payment.DuitNowOBW.Bank: TableListPresentable {
     var localizedTitle: String {
         switch self {
         case .affin:

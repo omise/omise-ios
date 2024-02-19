@@ -1,8 +1,13 @@
 import Foundation
+import UIKit.UIImage
 
-extension Source.PaymentInformation.FPX {
+extension Source.Payment.DuitNowOBW {
     /// Bank code selected by customer
-    public enum Bank: String, Codable {
+    public enum Bank: String, Codable, CaseIterable, CustomStringConvertible {
+        public var description: String {
+            self.rawValue
+        }
+
         /// Affin Bank
         case affin
         /// Alliance Bank (Personal)
@@ -17,8 +22,6 @@ extension Source.PaymentInformation.FPX {
         case muamalat
         /// Bank Rakyat
         case rakyat
-        /// Bank Of China
-        case bocm
         /// BSN
         case bsn
         /// CIMB Clicks
@@ -29,8 +32,6 @@ extension Source.PaymentInformation.FPX {
         case hsbc
         /// KFH
         case kfh
-        /// Maybank2E
-        case maybank2e
         /// Maybank2U
         case maybank2u
         /// OCBC Bank

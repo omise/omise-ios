@@ -13,7 +13,7 @@ public struct Source {
     /// Currency for source as three-letter ISO 4217 code
     public let currency: String
     /// The payment information of this source describes how the payment is processed
-    public let paymentInformation: PaymentInformation
+    public let paymentInformation: Payment
     /// The payment flow payers need to go through to complete the payment
     public let flow: Flow
 
@@ -50,6 +50,6 @@ extension Source: Decodable {
         currency = try container.decode(String.self, forKey: .currency)
         amount = try container.decode(Int64.self, forKey: .amount)
         isLiveMode = try container.decode(Bool.self, forKey: .isLiveMode)
-        paymentInformation = try PaymentInformation(from: decoder)
+        paymentInformation = try Payment(from: decoder)
     }
 }

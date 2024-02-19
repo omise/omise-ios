@@ -9,7 +9,7 @@ extension PaymentFlow {
         listController.navigationItem.title = title
         listController.navigationItem.backBarButtonItem = .empty
 
-        let banks = Source.PaymentInformation.DuitNowOBW.Bank.allCases.sorted {
+        let banks = Source.Payment.DuitNowOBW.Bank.allCases.sorted {
             $0.localizedTitle.localizedCaseInsensitiveCompare($1.localizedTitle) == .orderedAscending
         }
 

@@ -1,6 +1,6 @@
 import Foundation
 
-extension Source.PaymentInformation {
+extension Source.Payment {
     /// Payment for `Atome App Redirection` payment method
     /// https://docs.opn.ooo/atome
     public struct Atome: Equatable {
@@ -11,11 +11,11 @@ extension Source.PaymentInformation {
         /// Customer email
         public let email: String?
         /// Shipping address
-        public let shipping: Source.PaymentInformation.Address
+        public let shipping: Source.Payment.Address
         /// Billing address
-        public let billing: Source.PaymentInformation.Address?
+        public let billing: Source.Payment.Address?
         /// Information about items included in the order
-        public let items: [Source.PaymentInformation.Item]
+        public let items: [Source.Payment.Item]
 
         /// Creates a new Atome payment method payload
         ///
@@ -26,7 +26,7 @@ extension Source.PaymentInformation {
         ///   - shipping: Shipping address
         ///   - billing: Billing address
         ///   - items: Items details
-        public init(phoneNumber: String, name: String? = nil, email: String? = nil, shipping: Address, billing: Source.PaymentInformation.Address?, items: [Source.PaymentInformation.Item]) {
+        public init(phoneNumber: String, name: String? = nil, email: String? = nil, shipping: Address, billing: Source.Payment.Address?, items: [Source.Payment.Item]) {
             self.name = name
             self.email = email
             self.phoneNumber = phoneNumber
@@ -37,14 +37,14 @@ extension Source.PaymentInformation {
     }
 }
 
-extension Source.PaymentInformation.Atome: SourceTypeContainerProtocol {
+extension Source.Payment.Atome: SourceTypeContainerProtocol {
     /// Payment method identifier
     public static let sourceType: SourceType = .atome
     public var sourceType: SourceType { Self.sourceType }
 }
 
 /// Encoding/decoding JSON string
-extension Source.PaymentInformation.Atome: Codable {
+extension Source.Payment.Atome: Codable {
     private enum CodingKeys: String, CodingKey {
         case name
         case email

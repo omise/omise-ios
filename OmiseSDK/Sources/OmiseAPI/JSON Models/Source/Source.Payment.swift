@@ -10,7 +10,7 @@ extension Source {
     /// Information details about source payment
     /// There are some payment methods that has additional parameters like "phoneNumber" and some requires only Source`type`
     /// This enum groups all supported payment methods details together.
-    public enum PaymentInformation: Equatable {
+    public enum Payment: Equatable {
         /// Atome
         case atome(_ details: Atome)
         /// Barcode
@@ -46,7 +46,7 @@ extension Source {
 }
 
 /// Encoding/decoding JSON string
-extension Source.PaymentInformation: Codable {
+extension Source.Payment: Codable {
     private enum CodingKeys: String, CodingKey {
         case sourceType = "type"
     }

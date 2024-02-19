@@ -165,7 +165,7 @@ extension PaymentFlow {
 //        //            controller.flowSession = self.viewModel.flowSession
 //        //        case ("GoToDuitNowOBWBankChooserSegue"?, let controller as DuitNowOBWBankChooserViewController):
 //        ////            controller.showingValues = [.duitNowOBWBanks]
-//        ////            [PaymentInformation.DuitNowOBW.Bank]
+//        ////            [Payment.DuitNowOBW.Bank]
 //        //            controller.flowSession = self.viewModel.flowSession
 //        //        default:
 //        //            break

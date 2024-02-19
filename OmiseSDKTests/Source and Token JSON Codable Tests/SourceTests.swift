@@ -6,10 +6,10 @@ import XCTest
 // swiftlint:disable:next type_body_length
 class SourceTests: XCTestCase {
 
-    typealias PaymentInformation = Source.PaymentInformation
+    typealias Payment = Source.Payment
 
     /// Test Source.Payload's Codable protocol
-    func validatePayloadCodable(_ payload: PaymentInformation) throws {
+    func validatePayloadCodable(_ payload: Payment) throws {
         let encodedPayload = try JSONEncoder().encode(payload)
         let encodedPayloadJson = String(data: encodedPayload, encoding: .utf8) ?? ""
         if payload.sourceType == .duitNowOBW {
@@ -17,7 +17,7 @@ class SourceTests: XCTestCase {
             print("")
         }
 
-        let decodedPayload: PaymentInformation = try parse(jsonString: encodedPayloadJson)
+        let decodedPayload: Payment = try parse(jsonString: encodedPayloadJson)
         XCTAssertEqual(payload, decodedPayload)
     }
 
@@ -205,7 +205,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeBarcodeAlipay() throws {
         let source: Source = try sampleFromJSONBy(.source(type: .barcodeAlipay))
-        let paymentInformation = PaymentInformation.BarcodeAlipay(
+        let paymentInformation = Payment.BarcodeAlipay(
             barcode: "1234567890123456",
             storeID: "1",
             storeName: "Main Store",
@@ -232,11 +232,11 @@ class SourceTests: XCTestCase {
     }
     //  swiftlint:disable:next function_body_length
     func testDecodeAtome() throws {
-        let paymentInformation = PaymentInformation.Atome(
+        let paymentInformation = Payment.Atome(
             phoneNumber: "+12312312312",
             name: "Test Data",
             email: "test@omise.co",
-            shipping: Source.PaymentInformation.Address(
+            shipping: Source.Payment.Address(
                 countryCode: "TH",
                 city: "Bangkok",
                 state: "Krung Thep Maha Nakhon",
@@ -244,7 +244,7 @@ class SourceTests: XCTestCase {
                 street2: "Khwaeng Wang Mai, Pathum Wan",
                 postalCode: "10330"
             ),
-            billing: Source.PaymentInformation.Address(
+            billing: Source.Payment.Address(
                 countryCode: "TH",
                 city: "Bangkok",
                 state: "Bangkok",
@@ -253,7 +253,7 @@ class SourceTests: XCTestCase {
                 postalCode: "10100"
             ),
             items: [
-                Source.PaymentInformation.Item(
+                Source.Payment.Item(
                     sku: "3427842",
                     category: "Shoes",
                     name: "Prada shoes",
@@ -263,7 +263,7 @@ class SourceTests: XCTestCase {
                     imageUri: "omise.co/product/shoes/image",
                     brand: "Gucci"
                 ),
-                Source.PaymentInformation.Item(
+                Source.Payment.Item(
                     sku: "3427843",
                     category: "Shoes",
                     name: "Skate Shoes",
@@ -288,7 +288,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeDuitNowOBW() throws {
         let source: Source = try sampleFromJSONBy(.source(type: .duitNowOBW))
-        let paymentInformation = PaymentInformation.DuitNowOBW(bank: .affin)
+        let paymentInformation = Payment.DuitNowOBW(bank: .affin)
         XCTAssertEqual(source.id, "src_5pqcjr6tu4xvqut5nh5")
         XCTAssertTrue(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .duitNowOBW(paymentInformation))
@@ -301,7 +301,7 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentBay() throws {
         let sourceType: SourceType = .installmentBAY
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let paymentInformation = PaymentInformation.Installment(
+        let paymentInformation = Payment.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
@@ -318,7 +318,7 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentBBL() throws {
         let sourceType: SourceType = .installmentBBL
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let paymentInformation = PaymentInformation.Installment(
+        let paymentInformation = Payment.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
@@ -335,7 +335,7 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentFirstChoice() throws {
         let sourceType: SourceType = .installmentFirstChoice
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let paymentInformation = PaymentInformation.Installment(
+        let paymentInformation = Payment.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
@@ -353,7 +353,7 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentKBank() throws {
         let sourceType: SourceType = .installmentKBank
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let paymentInformation = PaymentInformation.Installment(
+        let paymentInformation = Payment.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
@@ -370,7 +370,7 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentKTC() throws {
         let sourceType: SourceType = .installmentKTC
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let paymentInformation = PaymentInformation.Installment(
+        let paymentInformation = Payment.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
@@ -387,7 +387,7 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentMBB() throws {
         let sourceType: SourceType = .installmentMBB
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let paymentInformation = PaymentInformation.Installment(
+        let paymentInformation = Payment.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
@@ -404,7 +404,7 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentTTB() throws {
         let sourceType: SourceType = .installmentTTB
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let paymentInformation = PaymentInformation.Installment(
+        let paymentInformation = Payment.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
@@ -421,7 +421,7 @@ class SourceTests: XCTestCase {
     func testDecodeInstallmentUOB() throws {
         let sourceType: SourceType = .installmentUOB
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let paymentInformation = PaymentInformation.Installment(
+        let paymentInformation = Payment.Installment(
             installmentTerm: 6,
             zeroInterestInstallments: false,
             sourceType: sourceType
@@ -437,7 +437,7 @@ class SourceTests: XCTestCase {
 
     func testDecodeTrueMoneyWallet() throws {
         let source: Source = try sampleFromJSONBy(.source(type: .trueMoneyWallet))
-        let paymentInformation = PaymentInformation.TrueMoneyWallet(phoneNumber: "0123456789")
+        let paymentInformation = Payment.TrueMoneyWallet(phoneNumber: "0123456789")
         XCTAssertEqual(source.id, "src_test_5jhmesi7s4at1qctloy")
         XCTAssertFalse(source.isLiveMode)
         XCTAssertEqual(source.paymentInformation, .trueMoneyWallet(paymentInformation))
@@ -533,7 +533,7 @@ class SourceTests: XCTestCase {
     func testDecodeEContext() throws {
         let sourceType: SourceType = .eContext
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let paymentInformation = PaymentInformation.EContext(
+        let paymentInformation = Payment.EContext(
             name: "ヤマダタロウ",
             email: "test@opn.com",
             phoneNumber: "01234567891"
@@ -550,7 +550,7 @@ class SourceTests: XCTestCase {
     func testDecodeFPX() throws {
         let sourceType: SourceType = .fpx
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        let paymentInformation = PaymentInformation.FPX(
+        let paymentInformation = Payment.FPX(
             bank: .uob,
             email: "support@omise.co"
         )

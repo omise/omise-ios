@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-extension Source.PaymentInformation {
+extension Source.Payment {
     /// Payment for `DuitNow Online Banking/Wallets` payment method
     /// https://docs.opn.ooo/duitnow-obw
     public struct DuitNowOBW: Equatable {
@@ -24,13 +24,13 @@ extension Source.PaymentInformation {
 }
 
 /// Payment method identifier
-extension Source.PaymentInformation.DuitNowOBW: SourceTypeContainerProtocol {
+extension Source.Payment.DuitNowOBW: SourceTypeContainerProtocol {
     public static let sourceType: SourceType = .duitNowOBW
     public var sourceType: SourceType { Self.sourceType }
 }
 
 /// Encoding/decoding JSON string
-extension Source.PaymentInformation.DuitNowOBW: Codable {
+extension Source.Payment.DuitNowOBW: Codable {
     // Decode DuitNowOBW object from JSON string
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

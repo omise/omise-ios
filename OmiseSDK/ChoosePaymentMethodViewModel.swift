@@ -22,7 +22,6 @@ class ChoosePaymentMethodViewModel {
         }
     }
 
-
     init(client: Client, allowedPaymentMethods: [SourceType], isCardEnabled: Bool, useCapability: Bool) {
         self.client = client
 

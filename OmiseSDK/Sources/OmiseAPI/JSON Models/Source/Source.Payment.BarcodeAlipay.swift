@@ -1,6 +1,6 @@
 import Foundation
 
-extension Source.PaymentInformation {
+extension Source.Payment {
     /// Payment for `Alipay In-Store` payment method
     /// https://docs.opn.ooo/alipay-barcode
     public struct BarcodeAlipay: Equatable {
@@ -26,14 +26,14 @@ extension Source.PaymentInformation {
     }
 }
 
-extension Source.PaymentInformation.BarcodeAlipay: SourceTypeContainerProtocol {
+extension Source.Payment.BarcodeAlipay: SourceTypeContainerProtocol {
     /// Payment method identifier
     public static let sourceType: SourceType = .barcodeAlipay
     public var sourceType: SourceType { Self.sourceType }
 }
 
 /// Encoding/decoding JSON string
-extension Source.PaymentInformation.BarcodeAlipay: Codable {
+extension Source.Payment.BarcodeAlipay: Codable {
     private enum CodingKeys: String, CodingKey {
         case barcode
         case storeID = "store_id"
