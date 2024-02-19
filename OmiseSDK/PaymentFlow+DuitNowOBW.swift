@@ -24,7 +24,7 @@ extension PaymentFlow {
         listController.didSelectCellHandler = { [banks, weak listController] cell, indexPath in
             guard let listController = listController else { return }
 
-            cell.startAccessoryActivityIndicator()
+//            cell.startAccessoryActivityIndicator()
             listController.lockUserInferface()
 
             if let bank = banks.at(indexPath.row) {

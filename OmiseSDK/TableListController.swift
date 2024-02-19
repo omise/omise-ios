@@ -69,9 +69,11 @@ extension TableListController {
         loadingIndicator.color = UIColor.omiseSecondary
         cell.accessoryView = loadingIndicator
         loadingIndicator.startAnimating()
+        view.isUserInteractionEnabled = false
     }
 
     func stopCellActivity(at indexPath: IndexPath) {
         tableView.reloadRows(at: [indexPath], with: .automatic)
+        view.isUserInteractionEnabled = true
     }
 }
