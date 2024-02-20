@@ -11,7 +11,7 @@ public enum SourceType: String, Codable, CaseIterable {
     /// Atome App Redirection   https://docs.opn.ooo/atome
     case atome = "atome"
     /// Alipay In-Store https://docs.opn.ooo/alipay-barcode
-    case barcodeAlipay = "barcode_alipay"
+    case barcodeAlipay = "barcode_alipay" // Not available to select in UI
     /// Lotus's Bill Payment    https://docs.opn.ooo/bill-payment
     case billPaymentTescoLotus = "bill_payment_tesco_lotus"
     /// Boost   https://docs.opn.ooo/boost

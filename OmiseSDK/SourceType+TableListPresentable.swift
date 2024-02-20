@@ -6,9 +6,12 @@ extension SourceType: CustomStringConvertible {
 
 extension SourceType: TableListPresentable {
     public var localizedTitle: String {
-        localized("SourceType.\(self.rawValue).title",
-                  text: title,
-                  "Localized title for given payment method")
+        localized("SourceType.\(self.rawValue).title", text: title)
+    }
+
+    public var localizedSubtitle: String? {
+        guard let subtitle = subtitle else { return nil }
+        return localized("SourceType.\(self.rawValue).subtitle", text: subtitle)
     }
 
     public var title: String {
@@ -211,13 +214,31 @@ extension SourceType: TableListPresentable {
         }
     }
 
-    var accessoryIconName: String {
-        guard let paymentMethod = PaymentMethod.paymentMethods(for: self).first else { return "" }
+    var accessoryIcon: Assets.Icon {
+        requiresAdditionalDetails ? Assets.Icon.next : Assets.Icon.redirect
+    }
+
+    public var subtitle: String? {
+        switch self {
+        case .alipayCN, .alipayHK, .dana, .gcash, .kakaoPay, .touchNGo:
+            return "(Alipay+™ Partner)"
+        case .grabPay:
+            return "(GrabPay and PayLater)"
+        default:
+            return nil
+        }
+    }
+
+}
+
+extension SourceType {
+    var requiresAdditionalDetails: Bool {
+        guard let paymentMethod = PaymentMethod.paymentMethods(for: self).first else { return false }
         switch paymentMethod {
         case .sourceType, .internetBanking, .mobileBanking:
-            return Assets.Icon.redirect.rawValue
+            return false
         default:
-            return Assets.Icon.next.rawValue
+            return true
         }
     }
 }

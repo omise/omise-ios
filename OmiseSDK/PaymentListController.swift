@@ -13,6 +13,10 @@ protocol PaymentListViewModelProtocol {
     func viewDidTapClose()
 }
 
+extension PaymentListViewModelProtocol {
+    func viewDidTapClose() {}
+}
+
 class PaymentListController: UITableViewController {
 
     let viewModel: PaymentListViewModelProtocol
@@ -33,7 +37,7 @@ class PaymentListController: UITableViewController {
         navigationItem.backBarButtonItem = .empty
         tableView.separatorColor = UIColor.omiseSecondary
         tableView.rowHeight = 64
-
+        tableView.backgroundColor = .white
         viewModel.viewOnDataReloadHandler { [weak tableView] in
             tableView?.reloadData()
         }
@@ -68,7 +72,7 @@ class PaymentListController: UITableViewController {
         var cell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: identifier)
 
         if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: identifier)
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: identifier)
         }
 
         let viewContext = viewModel.viewContext(at: indexPath.row)
@@ -76,6 +80,10 @@ class PaymentListController: UITableViewController {
         cell.textLabel?.text = viewContext?.title
         cell.textLabel?.font = .boldSystemFont(ofSize: 14.0)
         cell.textLabel?.textColor = UIColor.omisePrimary
+
+        cell.detailTextLabel?.text = viewContext?.subtitle
+        cell.detailTextLabel?.font = .systemFont(ofSize: 10.0)
+        cell.detailTextLabel?.textColor = UIColor(0x8B949E)
 
         cell.imageView?.image = viewContext?.icon
         cell.accessoryView = UIImageView(image: viewContext?.accessoryIcon)

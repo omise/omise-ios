@@ -84,6 +84,8 @@ extension PaymentMethod {
             return [.mobileBanking]
         case .eContext:
             return [.eContextConbini, .eContextNetBanking, .eContextPayEasy]
+        case .barcodeAlipay:
+            return []
         default:
             return [.sourceType(sourceType)]
         }
@@ -151,9 +153,10 @@ extension PaymentMethod {
     static func createViewContexts(from paymentMethods: [PaymentMethod]) -> [TableCellContext] {
         let viewContexts = paymentMethods.map {
             TableCellContext(
-                icon: UIImage(omise: $0.iconName),
                 title: $0.localizedTitle,
-                accessoryIcon: UIImage(omise: $0.accessoryIconName)
+                subtitle: $0.localizedSubtitle,
+                icon: UIImage(omise: $0.iconName),
+                accessoryIcon: UIImage($0.accessoryIcon)
             )
         }
 

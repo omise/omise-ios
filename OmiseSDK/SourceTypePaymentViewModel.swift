@@ -1,7 +1,7 @@
 import UIKit
 
 protocol SourceTypePaymentViewModelDelegate: AnyObject {
-    func didSelectSourcePayment(_ payment: Source.Payment)
+    func didSelectSourceType(_ sourceType: SourceType)
 }
 
 class SourceTypePaymentViewModel {
@@ -21,7 +21,7 @@ class SourceTypePaymentViewModel {
         }
     }
 
-    init(sourceTypes: [SourceType], title: String, delegate: SourceTypePaymentViewModelDelegate) {
+    init(title: String, sourceTypes: [SourceType], delegate: SourceTypePaymentViewModelDelegate) {
         self.sourceTypes = sourceTypes
         self.title = title
         self.delegate = delegate
@@ -52,21 +52,19 @@ extension SourceTypePaymentViewModel: PaymentListViewModelProtocol {
     func viewContext(at index: Int) -> TableCellContext? {
         guard let sourceType = sourceTypes.at(index) else { return nil }
         return TableCellContext(
-            icon: UIImage(omise: sourceType.iconName),
             title: sourceType.localizedTitle,
-            accessoryIcon: UIImage(omise: sourceType.accessoryIconName)
+            icon: UIImage(omise: sourceType.iconName),
+            accessoryIcon: UIImage(sourceType.accessoryIcon)
         )
     }
 
     func viewDidSelectCell(at index: Int) {
         guard let sourceType = sourceTypes.at(index) else { return }
-        delegate?.didSelectSourcePayment(.sourceType(sourceType))
+        delegate?.didSelectSourceType(sourceType)
     }
 
     func viewShouldAnimateSelectedCell(at index: Int) -> Bool {
-        true
-    }
-
-    func viewDidTapClose() {
+        guard let sourceType = sourceTypes.at(index) else { return false }
+        return !sourceType.requiresAdditionalDetails
     }
 }

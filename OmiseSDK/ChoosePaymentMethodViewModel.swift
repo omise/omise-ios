@@ -6,7 +6,6 @@ protocol ChoosePaymentMethodViewModelDelegate: AnyObject {
     func didCancelPayment()
 }
 
-
 class ChoosePaymentMethodViewModel {
     let client: Client
 
@@ -84,9 +83,10 @@ extension ChoosePaymentMethodViewModel: PaymentListViewModelProtocol {
     func viewContext(at index: Int) -> TableCellContext? {
         guard let payment = paymentMethods.at(index) else { return nil }
         return TableCellContext(
-            icon: UIImage(omise: payment.iconName),
             title: payment.localizedTitle,
-            accessoryIcon: UIImage(omise: payment.accessoryIconName)
+            subtitle: payment.localizedSubtitle,
+            icon: UIImage(omise: payment.iconName),
+            accessoryIcon: UIImage(payment.accessoryIcon)
         )
     }
     

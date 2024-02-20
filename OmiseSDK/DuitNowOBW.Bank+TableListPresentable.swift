@@ -1,10 +1,6 @@
 import Foundation
 
 extension Source.Payment.DuitNowOBW.Bank: TableListPresentable {
-    var accessoryIconName: String {
-        Assets.Icon.redirect.rawValue
-    }
-    
     var localizedTitle: String {
         switch self {
         case .affin:
@@ -85,5 +81,9 @@ extension Source.Payment.DuitNowOBW.Bank: TableListPresentable {
             return "FPX/uob"
         }
     }
-}
 
+    var accessoryIcon: Assets.Icon {
+        .redirect
+    }
+
+}

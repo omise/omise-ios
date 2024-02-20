@@ -6,6 +6,15 @@ extension PaymentMethod: CustomStringConvertible {
 
 extension PaymentMethod: TableListPresentable {
     /// Localized title for given payment option
+    public var localizedSubtitle: String? {
+        if case .sourceType(let sourceType) = self {
+            return sourceType.localizedSubtitle
+        } else {
+            return nil
+        }
+    }
+
+    /// Localized title for given payment option
     public var localizedTitle: String {
         let prefixCode = "paymentMethod"
         switch self {
@@ -42,11 +51,7 @@ extension PaymentMethod: TableListPresentable {
         }
     }
 
-    var accessoryIconName: String {
-        if requiresAdditionalDetails {
-            return "Next"
-        } else {
-            return "Redirect"
-        }
+    var accessoryIcon: Assets.Icon {
+        requiresAdditionalDetails ? Assets.Icon.next : Assets.Icon.redirect
     }
 }

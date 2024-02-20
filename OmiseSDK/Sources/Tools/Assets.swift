@@ -9,9 +9,8 @@ enum Assets {
 }
 
 extension UIImage {
-    convenience init?(_ icon: Assets.Icon) {
+    convenience init?(_ icon: Assets.Icon?) {
+        guard let icon = icon else { return nil }
         self.init(named: icon.rawValue, in: .omiseSDK, compatibleWith: nil)
     }
 }
-
-

@@ -51,8 +51,8 @@ class PaymentFlowCoordinator: ViewAttachable {
     /// Creates Mobile Banking screen and attach current flow object inside created controller to be deallocated together
     func createMobileBankingController() -> PaymentListController {
         let viewModel = SourceTypePaymentViewModel(
-            sourceTypes: SourceType.mobileBanking,
             title: PaymentMethod.mobileBanking.localizedTitle,
+            sourceTypes: SourceType.mobileBanking,
             delegate: self
         )
 
@@ -64,8 +64,8 @@ class PaymentFlowCoordinator: ViewAttachable {
     /// Creates Mobile Banking screen and attach current flow object inside created controller to be deallocated together
     func createInternetBankingController() -> PaymentListController {
         let viewModel = SourceTypePaymentViewModel(
-            sourceTypes: SourceType.internetBanking,
             title: PaymentMethod.internetBanking.localizedTitle,
+            sourceTypes: SourceType.internetBanking,
             delegate: self
         )
 
@@ -77,8 +77,8 @@ class PaymentFlowCoordinator: ViewAttachable {
     /// Creates Installement screen and attach current flow object inside created controller to be deallocated together
     func createInstallmentController() -> PaymentListController {
         let viewModel = SourceTypePaymentViewModel(
-            sourceTypes: SourceType.installments,
             title: PaymentMethod.installment.localizedTitle,
+            sourceTypes: SourceType.installments,
             delegate: self
         )
 
@@ -86,7 +86,80 @@ class PaymentFlowCoordinator: ViewAttachable {
         listController.attach(self)
         return listController
     }
+
+    /// Creates Installement screen and attach current flow object inside created controller to be deallocated together
+    func createInstallmentTermsController(sourceType: SourceType) -> PaymentListController {
+        let viewModel = InstallmentTermsViewModel(sourceType: sourceType, delegate: self)
+        let listController = PaymentListController(viewModel: viewModel)
+        listController.attach(self)
+        return listController
+    }
 }
+
+extension PaymentFlowCoordinator: ChoosePaymentMethodViewModelDelegate {
+    func didSelectPaymentMethod(_ paymentMethod: PaymentMethod) {
+        if paymentMethod.requiresAdditionalDetails {
+            switch paymentMethod {
+            case .mobileBanking: navigate(to: createMobileBankingController())
+            case .internetBanking: navigate(to: createInternetBankingController())
+            case .installment: navigate(to: createInstallmentController())
+            default: break
+            }
+        } else if let sourceType = paymentMethod.sourceType {
+            processPayment(.sourceType(sourceType))
+        } else {
+            assertionFailure("Unexpected case for selected payment method: \(paymentMethod)")
+        }
+    }
+
+    func didCancelPayment() {
+        choosePaymentMethodDelegate?.choosePaymentMethodDidCancel()
+    }
+}
+
+extension PaymentFlowCoordinator: SourceTypePaymentViewModelDelegate {
+    func didSelectSourceType(_ sourceType: SourceType) {
+        if sourceType.isInstallment {
+            navigate(to: createInstallmentTermsController(sourceType: sourceType))
+        } else {
+            processPayment(.sourceType(sourceType))
+        }
+    }
+}
+
+extension PaymentFlowCoordinator: InstallmentTermsViewModelDelegate {
+    func didSelectInstallmentPayment(_ installment: Source.Payment.Installment) {
+        processPayment(.installment(installment))
+    }
+}
+
+extension PaymentFlowCoordinator {
+    func navigate(to viewController: UIViewController) {
+        rootViewController?.navigationController?.pushViewController(
+            viewController,
+            animated: true
+        )
+    }
+
+    func processPayment(_ payment: Source.Payment) {
+        guard let delegate = choosePaymentMethodDelegate else { return }
+        let sourcePayload = CreateSourcePayload(
+            amount: amount,
+            currency: currency,
+            details: payment
+        )
+
+        client.createSource(payload: sourcePayload) { [weak delegate] result in
+            switch result {
+            case .success(let source):
+                delegate?.choosePaymentMethodDidComplete(with: source)
+            case .failure(let error):
+                delegate?.choosePaymentMethodDidComplete(with: error)
+            }
+        }
+    }
+}
+
 // protocol NavigationFlow<Route> {
 //    associatedtype Route
 //    func navigate(to: Route)
@@ -178,58 +251,3 @@ class PaymentFlowCoordinator: ViewAttachable {
 //        }
 //    }
 // }
-
-extension PaymentFlowCoordinator: ChoosePaymentMethodViewModelDelegate {
-    func didSelectPaymentMethod(_ paymentMethod: PaymentMethod) {
-        if paymentMethod.requiresAdditionalDetails {
-            switch paymentMethod {
-            case .mobileBanking: navigate(to: createMobileBankingController())
-            case .internetBanking: navigate(to: createInternetBankingController())
-            case .installment: navigate(to: createInstallmentController())
-            default: break
-            }
-        } else if let sourceType = paymentMethod.sourceType {
-            processPayment(.sourceType(sourceType))
-        } else {
-            assertionFailure("Unexpected case for selected payment method: \(paymentMethod)")
-        }
-    }
-
-    func didCancelPayment() {
-        choosePaymentMethodDelegate?.choosePaymentMethodDidCancel()
-    }
-}
-
-extension PaymentFlowCoordinator: SourceTypePaymentViewModelDelegate {
-    func didSelectSourcePayment(_ payment: Source.Payment) {
-        processPayment(payment)
-    }
-
-}
-
-extension PaymentFlowCoordinator {
-    func navigate(to viewController: UIViewController) {
-        rootViewController?.navigationController?.pushViewController(
-            viewController,
-            animated: true
-        )
-    }
-
-    func processPayment(_ payment: Source.Payment) {
-        guard let delegate = choosePaymentMethodDelegate else { return }
-        let sourcePayload = CreateSourcePayload(
-            amount: amount,
-            currency: currency,
-            details: payment
-        )
-
-        client.createSource(payload: sourcePayload) { [weak delegate] result in
-            switch result {
-            case .success(let source):
-                delegate?.choosePaymentMethodDidComplete(with: source)
-            case .failure(let error):
-                delegate?.choosePaymentMethodDidComplete(with: error)
-            }
-        }
-    }
-}
