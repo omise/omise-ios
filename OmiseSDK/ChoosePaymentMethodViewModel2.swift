@@ -1,4 +1,5 @@
 import Foundation
+import UIKit.UIImage
 
 /// Contains properties and functions to generate data for ViewController and process user actions that requires data processing or screen navigation
 class ChoosePaymentMethodViewModel2: ViewAttachable {
@@ -63,9 +64,9 @@ private extension ChoosePaymentMethodViewModel2 {
     func createViewContexts() -> [ViewContext] {
         paymentMethods.map { payment in
             ViewContext(
-                icon: payment.listIcon,
+                icon: UIImage(omise: payment.iconName),
                 title: payment.localizedTitle,
-                accessoryIcon: payment.accessoryIcon
+                accessoryIcon: UIImage(omise: payment.accessoryIconName)
             )
         }
     }

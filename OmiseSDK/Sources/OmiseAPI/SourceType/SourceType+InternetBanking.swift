@@ -4,7 +4,7 @@ extension SourceType {
     public static var internetBanking: [SourceType] {
         [
             .internetBankingBAY,
-            .internetBankingBAY
+            .internetBankingBBL
         ]
     }
 

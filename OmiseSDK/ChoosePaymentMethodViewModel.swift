@@ -1,9 +1,16 @@
 import Foundation
+import UIKit.UIImage
+
+protocol ChoosePaymentMethodViewModelDelegate: AnyObject {
+    func didSelectPaymentMethod(_ paymentMethod: PaymentMethod)
+    func didCancelPayment()
+}
+
 
 class ChoosePaymentMethodViewModel {
     let client: Client
 
-    weak var delegate: PaymentMethodDelegate?
+    weak var delegate: ChoosePaymentMethodViewModelDelegate?
 
     private var viewOnDataReloadHandler: () -> Void = { } {
         didSet {
@@ -17,7 +24,7 @@ class ChoosePaymentMethodViewModel {
         }
     }
 
-    init(client: Client, delegate: PaymentMethodDelegate) {
+    init(client: Client, delegate: ChoosePaymentMethodViewModelDelegate) {
         self.client = client
         self.delegate = delegate
     }
@@ -51,11 +58,6 @@ class ChoosePaymentMethodViewModel {
             showsCreditCard: isCardEnabled
         )
     }
-
-    func paymentMethod(at index: Int) -> PaymentMethod? {
-        paymentMethods.at(index)
-    }
-
 }
 
 extension ChoosePaymentMethodViewModel: PaymentListViewModelProtocol {
@@ -80,21 +82,21 @@ extension ChoosePaymentMethodViewModel: PaymentListViewModelProtocol {
     }
     
     func viewContext(at index: Int) -> TableCellContext? {
-        guard let payment = paymentMethod(at: index) else { return nil }
+        guard let payment = paymentMethods.at(index) else { return nil }
         return TableCellContext(
-            icon: payment.listIcon,
+            icon: UIImage(omise: payment.iconName),
             title: payment.localizedTitle,
-            accessoryIcon: payment.accessoryIcon
+            accessoryIcon: UIImage(omise: payment.accessoryIconName)
         )
     }
     
     func viewDidSelectCell(at index: Int) {
-        guard let paymentMethod = paymentMethod(at: index) else { return }
+        guard let paymentMethod = paymentMethods.at(index) else { return }
         delegate?.didSelectPaymentMethod(paymentMethod)
     }
     
     func viewShouldAnimateSelectedCell(at index: Int) -> Bool {
-        guard let payment = paymentMethod(at: index) else { return false }
+        guard let payment = paymentMethods.at(index) else { return false }
         return !payment.requiresAdditionalDetails
     }
     

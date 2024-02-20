@@ -41,10 +41,6 @@ enum PaymentMethod: CaseIterable, Equatable, Hashable {
         .sourceType(.alipayHK)
     ]
 
-    var listIcon: UIImage? {
-        return UIImage(omise: iconName)
-    }
-
     var requiresAdditionalDetails: Bool {
         switch self {
         case .creditCard,
@@ -62,14 +58,6 @@ enum PaymentMethod: CaseIterable, Equatable, Hashable {
             return true
         default:
             return false
-        }
-    }
-
-    var accessoryIcon: UIImage? {
-        if requiresAdditionalDetails {
-            return UIImage(omise: "Next")
-        } else {
-            return UIImage(omise: "Redirect")
         }
     }
 }
@@ -162,7 +150,11 @@ extension PaymentMethod {
 extension PaymentMethod {
     static func createViewContexts(from paymentMethods: [PaymentMethod]) -> [TableCellContext] {
         let viewContexts = paymentMethods.map {
-            TableCellContext(icon: $0.listIcon, title: $0.localizedTitle, accessoryIcon: $0.accessoryIcon)
+            TableCellContext(
+                icon: UIImage(omise: $0.iconName),
+                title: $0.localizedTitle,
+                accessoryIcon: UIImage(omise: $0.accessoryIconName)
+            )
         }
 
         return viewContexts

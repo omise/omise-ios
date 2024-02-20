@@ -41,4 +41,12 @@ extension PaymentMethod: TableListPresentable {
         case .sourceType(let sourceType): return sourceType.iconName
         }
     }
+
+    var accessoryIconName: String {
+        if requiresAdditionalDetails {
+            return "Next"
+        } else {
+            return "Redirect"
+        }
+    }
 }

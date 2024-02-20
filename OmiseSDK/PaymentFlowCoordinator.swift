@@ -12,13 +12,15 @@ class PaymentFlowCoordinator: ViewAttachable {
     
     weak var choosePaymentMethodDelegate: ChoosePaymentMethodDelegate?
 
+    weak var rootViewController: UIViewController?
+
     init(client: Client, amount: Int64, currency: String) {
         self.client = client
         self.amount = amount
         self.currency = currency
     }
 
-    /// Creates RootViewController and attach current flow object inside created controller to be deallocated together
+    /// Creates ChoosePaymentMethodController and attach current flow object inside created controller to be deallocated together
     ///
     /// - Parameters:
     ///   - allowedPaymentMethods: List of Payment Methods to be presented in the list if `usePaymentMethodsFromCapability` is `false`
@@ -30,8 +32,6 @@ class PaymentFlowCoordinator: ViewAttachable {
         usePaymentMethodsFromCapability useCapability: Bool,
         delegate: ChoosePaymentMethodDelegate
     ) -> PaymentListController {
-        self.choosePaymentMethodDelegate = delegate
-
         let viewModel = ChoosePaymentMethodViewModel(client: client, delegate: self)
         if useCapability {
             viewModel.setupCapability()
@@ -41,63 +41,52 @@ class PaymentFlowCoordinator: ViewAttachable {
 
         let listController = PaymentListController(viewModel: viewModel)
         listController.attach(self)
+
+        self.choosePaymentMethodDelegate = delegate
+        self.rootViewController = listController
+
+        return listController
+    }
+
+    /// Creates Mobile Banking screen and attach current flow object inside created controller to be deallocated together
+    func createMobileBankingController() -> PaymentListController {
+        let viewModel = SourceTypePaymentViewModel(
+            sourceTypes: SourceType.mobileBanking,
+            title: PaymentMethod.mobileBanking.localizedTitle,
+            delegate: self
+        )
+
+        let listController = PaymentListController(viewModel: viewModel)
+        listController.attach(self)
+        return listController
+    }
+
+    /// Creates Mobile Banking screen and attach current flow object inside created controller to be deallocated together
+    func createInternetBankingController() -> PaymentListController {
+        let viewModel = SourceTypePaymentViewModel(
+            sourceTypes: SourceType.internetBanking,
+            title: PaymentMethod.internetBanking.localizedTitle,
+            delegate: self
+        )
+
+        let listController = PaymentListController(viewModel: viewModel)
+        listController.attach(self)
+        return listController
+    }
+
+    /// Creates Installement screen and attach current flow object inside created controller to be deallocated together
+    func createInstallmentController() -> PaymentListController {
+        let viewModel = SourceTypePaymentViewModel(
+            sourceTypes: SourceType.installments,
+            title: PaymentMethod.installment.localizedTitle,
+            delegate: self
+        )
+
+        let listController = PaymentListController(viewModel: viewModel)
+        listController.attach(self)
         return listController
     }
 }
-
-extension PaymentFlowCoordinator {
-    func didSelectPaymentMethod(
-        _ paymentMethod: PaymentMethod,
-        listController: TableListController,
-        delegate: ChoosePaymentMethodDelegate
-    ) {
-        let viewController: UIViewController?
-
-        switch paymentMethod {
-        case .creditCard:
-            viewController = UIViewController()
-        case .installment:
-            viewController = UIViewController()
-        case .internetBanking:
-            viewController = UIViewController()
-        case .mobileBanking:
-            viewController = UIViewController()
-        case .eContextConbini:
-            viewController = UIViewController()
-        case .eContextPayEasy:
-            viewController = UIViewController()
-        case .eContextNetBanking:
-            viewController = UIViewController()
-        case .sourceType(.atome):
-            viewController = UIViewController()
-        case .sourceType(.barcodeAlipay):
-            viewController = UIViewController()
-        case .sourceType(.duitNowOBW):
-            viewController = createDuitNowOBWController(title: paymentMethod.localizedTitle)
-        case .sourceType(.fpx):
-            viewController = UIViewController()
-        case .sourceType(.trueMoneyWallet):
-            viewController = UIViewController()
-        default:
-            viewController = nil
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) { [weak listController] in
-                listController?.unlockUserInterface()
-            }
-        }
-
-        if let viewController = viewController {
-            viewController.view.backgroundColor = .white
-            viewController.title = paymentMethod.localizedTitle
-            listController.navigationController?.pushViewController(
-                viewController,
-                animated: true
-            )
-        }
-        print("doSomething here with payment '\(paymentMethod)'")
-
-    }
-}
-
 // protocol NavigationFlow<Route> {
 //    associatedtype Route
 //    func navigate(to: Route)
@@ -190,25 +179,50 @@ extension PaymentFlowCoordinator {
 //    }
 // }
 
-extension PaymentFlowCoordinator: PaymentMethodDelegate {
+extension PaymentFlowCoordinator: ChoosePaymentMethodViewModelDelegate {
     func didSelectPaymentMethod(_ paymentMethod: PaymentMethod) {
         if paymentMethod.requiresAdditionalDetails {
-            print("Navigate to the next screen")
+            switch paymentMethod {
+            case .mobileBanking: navigate(to: createMobileBankingController())
+            case .internetBanking: navigate(to: createInternetBankingController())
+            case .installment: navigate(to: createInstallmentController())
+            default: break
+            }
         } else if let sourceType = paymentMethod.sourceType {
-            processPayment(sourceType: sourceType)
+            processPayment(.sourceType(sourceType))
         } else {
-            assertionFailure("Unexpected case with selected payment method: \(paymentMethod.localizedTitle)")
+            assertionFailure("Unexpected case for selected payment method: \(paymentMethod)")
         }
     }
 
-    func processPayment(sourceType: SourceType) {
+    func didCancelPayment() {
+        choosePaymentMethodDelegate?.choosePaymentMethodDidCancel()
+    }
+}
+
+extension PaymentFlowCoordinator: SourceTypePaymentViewModelDelegate {
+    func didSelectSourcePayment(_ payment: Source.Payment) {
+        processPayment(payment)
+    }
+
+}
+
+extension PaymentFlowCoordinator {
+    func navigate(to viewController: UIViewController) {
+        rootViewController?.navigationController?.pushViewController(
+            viewController,
+            animated: true
+        )
+    }
+
+    func processPayment(_ payment: Source.Payment) {
         guard let delegate = choosePaymentMethodDelegate else { return }
         let sourcePayload = CreateSourcePayload(
             amount: amount,
             currency: currency,
-            details: .sourceType(sourceType)
+            details: payment
         )
-        
+
         client.createSource(payload: sourcePayload) { [weak delegate] result in
             switch result {
             case .success(let source):
@@ -217,9 +231,5 @@ extension PaymentFlowCoordinator: PaymentMethodDelegate {
                 delegate?.choosePaymentMethodDidComplete(with: error)
             }
         }
-    }
-
-    func didCancelPayment() {
-        choosePaymentMethodDelegate?.choosePaymentMethodDidCancel()
     }
 }

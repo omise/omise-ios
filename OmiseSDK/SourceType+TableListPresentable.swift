@@ -211,4 +211,13 @@ extension SourceType: TableListPresentable {
         }
     }
 
+    var accessoryIconName: String {
+        guard let paymentMethod = PaymentMethod.paymentMethods(for: self).first else { return "" }
+        switch paymentMethod {
+        case .sourceType, .internetBanking, .mobileBanking:
+            return Assets.Icon.redirect.rawValue
+        default:
+            return Assets.Icon.next.rawValue
+        }
+    }
 }
