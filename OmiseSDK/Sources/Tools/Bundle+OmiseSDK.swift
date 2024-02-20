@@ -1,6 +1,6 @@
 import Foundation
 
-// Unique named class to use as a reference with Bundle()
+// Unique named class to use as a reference to create a current Bundle
 private final class OmiseSDK216d048c5feca16469a7a71566256537 {
 }
 

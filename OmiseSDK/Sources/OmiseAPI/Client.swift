@@ -94,8 +94,9 @@ public class Client {
             completion
         )
     }
+}
 
-    /// Used for the test purposes
+extension Client {
     func setLatestLoadedCapability(_ capability: Capability) {
         latestLoadedCapability = capability
     }
