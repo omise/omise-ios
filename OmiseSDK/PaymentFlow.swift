@@ -10,6 +10,8 @@ class PaymentFlow: ViewAttachable {
         case selectedPaymentMethod(PaymentMethod)
     }
     
+    weak var choosePaymentMethodDelegate: ChoosePaymentMethodDelegate?
+
     init(client: Client, amount: Int64, currency: String) {
         self.client = client
         self.amount = amount
@@ -23,17 +25,19 @@ class PaymentFlow: ViewAttachable {
     ///   - allowedCardPayment: Shows credit card payment option if `true` and `usePaymentMethodsFromCapability` is `false`
     ///   - usePaymentMethodsFromCapability: If `true`then it loads list of Payment Methods from Capability API and ignores previous parameters
     func createChoosePaymentMethodController(
-        allowedPaymentMethods: [SourceType] = [],
-        allowedCardPayment: Bool = true,
-        usePaymentMethodsFromCapability: Bool,
+        allowedPaymentMethods paymentMethods: [SourceType] = [],
+        allowedCardPayment isCardEnabled: Bool = true,
+        usePaymentMethodsFromCapability useCapability: Bool,
         delegate: ChoosePaymentMethodDelegate
     ) -> PaymentListController {
-        let viewModel = ChoosePaymentMethodViewModel(
-            client: client,
-            allowedPaymentMethods: allowedPaymentMethods,
-            isCardEnabled: allowedCardPayment,
-            useCapability: usePaymentMethodsFromCapability
-        )
+        self.choosePaymentMethodDelegate = delegate
+
+        let viewModel = ChoosePaymentMethodViewModel(client: client, delegate: self)
+        if useCapability {
+            viewModel.setupCapability()
+        } else {
+            viewModel.setupAllowedPaymentMethods(paymentMethods, isCardEnabled: isCardEnabled)
+        }
 
         let listController = PaymentListController(viewModel: viewModel)
         listController.attach(self)
@@ -185,3 +189,37 @@ extension PaymentFlow {
 //        }
 //    }
 // }
+
+extension PaymentFlow: PaymentMethodDelegate {
+    func didSelectPaymentMethod(_ paymentMethod: PaymentMethod) {
+        if paymentMethod.requiresAdditionalDetails {
+            print("Navigate to the next screen")
+        } else if let sourceType = paymentMethod.sourceType {
+            processPayment(sourceType: sourceType)
+        } else {
+            assertionFailure("Unexpected case with selected payment method: \(paymentMethod.localizedTitle)")
+        }
+    }
+
+    func processPayment(sourceType: SourceType) {
+        guard let delegate = choosePaymentMethodDelegate else { return }
+        let sourcePayload = CreateSourcePayload(
+            amount: amount,
+            currency: currency,
+            details: .sourceType(sourceType)
+        )
+        
+        client.createSource(payload: sourcePayload) { [weak delegate] result in
+            switch result {
+            case .success(let source):
+                delegate?.choosePaymentMethodDidComplete(with: source)
+            case .failure(let error):
+                delegate?.choosePaymentMethodDidComplete(with: error)
+            }
+        }
+    }
+
+    func didCancelPayment() {
+        choosePaymentMethodDelegate?.choosePaymentMethodDidCancel()
+    }
+}

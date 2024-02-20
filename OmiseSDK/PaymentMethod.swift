@@ -11,6 +11,15 @@ enum PaymentMethod: CaseIterable, Equatable, Hashable {
     case eContextPayEasy
     case sourceType(_ type: SourceType)
 
+    var sourceType: SourceType? {
+        switch self {
+        case .sourceType(let sourceType):
+            return sourceType
+        default:
+            return nil
+        }
+    }
+
     static var allCases: [PaymentMethod] = from(sourceTypes: SourceType.allCases)
 
     /// List of payment methods to be placed above other payment methods in a given order

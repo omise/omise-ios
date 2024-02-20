@@ -3,39 +3,33 @@ import Foundation
 class ChoosePaymentMethodViewModel {
     let client: Client
 
+    weak var delegate: PaymentMethodDelegate?
+
     private var viewOnDataReloadHandler: () -> Void = { } {
         didSet {
-            viewOnDataReloadHandler()
+            self.viewOnDataReloadHandler()
         }
     }
-
-//    var onPaymentMethodsReloadHandler: () -> Void = {} {
-//        didSet {
-//            onPaymentMethodsReloadHandler()
-//        }
-//    }
 
     private var paymentMethods: [PaymentMethod] = [] {
         didSet {
-//            onPaymentMethodsReloadHandler()
             viewOnDataReloadHandler()
         }
     }
 
-    init(client: Client, allowedPaymentMethods: [SourceType], isCardEnabled: Bool, useCapability: Bool) {
+    init(client: Client, delegate: PaymentMethodDelegate) {
         self.client = client
-
-        if useCapability {
-            setupCapability()
-        } else {
-            self.paymentMethods = PaymentMethod.createPaymentMethods(
-                from: allowedPaymentMethods,
-                showsCreditCard: isCardEnabled
-            )
-        }
+        self.delegate = delegate
     }
 
-    private func setupCapability() {
+    func setupAllowedPaymentMethods(_ paymentMethods: [SourceType], isCardEnabled: Bool) {
+        self.paymentMethods = PaymentMethod.createPaymentMethods(
+            from: paymentMethods,
+            showsCreditCard: isCardEnabled
+        )
+    }
+
+    func setupCapability() {
         var allowedPaymentMethods: [SourceType] = []
         var isCardEnabled = false
 
@@ -94,8 +88,9 @@ extension ChoosePaymentMethodViewModel: PaymentListViewModelProtocol {
         )
     }
     
-    func viewDidSelectCell(at: Int) {
-        print("Selected at \(at)")
+    func viewDidSelectCell(at index: Int) {
+        guard let paymentMethod = paymentMethod(at: index) else { return }
+        delegate?.didSelectPaymentMethod(paymentMethod)
     }
     
     func viewShouldAnimateSelectedCell(at index: Int) -> Bool {
@@ -104,6 +99,6 @@ extension ChoosePaymentMethodViewModel: PaymentListViewModelProtocol {
     }
     
     func viewDidTapClose() {
-        print("close")
+        delegate?.didCancelPayment()
     }
 }
