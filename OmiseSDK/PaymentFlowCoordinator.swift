@@ -1,6 +1,6 @@
 import UIKit
 
-class PaymentFlow: ViewAttachable {
+class PaymentFlowCoordinator: ViewAttachable {
     let client: Client
     let amount: Int64
     let currency: String
@@ -45,7 +45,7 @@ class PaymentFlow: ViewAttachable {
     }
 }
 
-extension PaymentFlow {
+extension PaymentFlowCoordinator {
     func didSelectPaymentMethod(
         _ paymentMethod: PaymentMethod,
         listController: TableListController,
@@ -103,7 +103,7 @@ extension PaymentFlow {
 //    func navigate(to: Route)
 // }
 //
-// extension PaymentFlow: NavigationFlow {
+// extension PaymentFlowCoordinator: NavigationFlow {
 //    enum Route {
 //        case creditCard
 //        case installments
@@ -190,7 +190,7 @@ extension PaymentFlow {
 //    }
 // }
 
-extension PaymentFlow: PaymentMethodDelegate {
+extension PaymentFlowCoordinator: PaymentMethodDelegate {
     func didSelectPaymentMethod(_ paymentMethod: PaymentMethod) {
         if paymentMethod.requiresAdditionalDetails {
             print("Navigate to the next screen")

@@ -1,6 +1,6 @@
 import UIKit
 
-extension PaymentFlow {
+extension PaymentFlowCoordinator {
     func createDuitNowOBWController(title: String) -> TableListController {
         let listController = TableListController()
         if #available(iOSApplicationExtension 11.0, *) {

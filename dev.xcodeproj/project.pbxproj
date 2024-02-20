@@ -95,7 +95,7 @@
 		75CFC4F12B753B0F00422A8F /* Capability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CFC4F02B753B0F00422A8F /* Capability.swift */; };
 		75CFC4F32B753BCD00422A8F /* Capability.PaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CFC4F22B753BCD00422A8F /* Capability.PaymentMethod.swift */; };
 		75D13D5E2B8069650073A831 /* UIImage+Omise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D13D5D2B8069650073A831 /* UIImage+Omise.swift */; };
-		75D13D602B807AC90073A831 /* PaymentFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D13D5F2B807AC90073A831 /* PaymentFlow.swift */; };
+		75D13D602B807AC90073A831 /* PaymentFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D13D5F2B807AC90073A831 /* PaymentFlowCoordinator.swift */; };
 		75D13D6C2B8335850073A831 /* ViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D13D6B2B8335850073A831 /* ViewContainer.swift */; };
 		75D13D702B833A3E0073A831 /* TableListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D13D6F2B833A3E0073A831 /* TableListController.swift */; };
 		75D13D732B833A810073A831 /* TableCellContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D13D722B833A810073A831 /* TableCellContext.swift */; };
@@ -319,7 +319,7 @@
 		75CFC4F02B753B0F00422A8F /* Capability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capability.swift; sourceTree = "<group>"; };
 		75CFC4F22B753BCD00422A8F /* Capability.PaymentMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capability.PaymentMethod.swift; sourceTree = "<group>"; };
 		75D13D5D2B8069650073A831 /* UIImage+Omise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Omise.swift"; sourceTree = "<group>"; };
-		75D13D5F2B807AC90073A831 /* PaymentFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFlow.swift; sourceTree = "<group>"; };
+		75D13D5F2B807AC90073A831 /* PaymentFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFlowCoordinator.swift; sourceTree = "<group>"; };
 		75D13D6B2B8335850073A831 /* ViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewContainer.swift; sourceTree = "<group>"; };
 		75D13D6F2B833A3E0073A831 /* TableListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableListController.swift; sourceTree = "<group>"; };
 		75D13D722B833A810073A831 /* TableCellContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCellContext.swift; sourceTree = "<group>"; };
@@ -713,7 +713,7 @@
 			isa = PBXGroup;
 			children = (
 				75D13DC32B8407B50073A831 /* Delete */,
-				75D13D5F2B807AC90073A831 /* PaymentFlow.swift */,
+				75D13D5F2B807AC90073A831 /* PaymentFlowCoordinator.swift */,
 				75D13DBA2B83FB470073A831 /* PaymentListController.swift */,
 				75D13DC42B85054B0073A831 /* PaymentMethodDelegate.swift */,
 				751E7BD82B7E5D130031B4A2 /* PaymentMethod.swift */,
@@ -1338,7 +1338,7 @@
 				986406341CFEA7E4004BCF51 /* CardNameTextField.swift in Sources */,
 				8AF9857121479F38007E18ED /* MoreInformationOnCVVViewController.swift in Sources */,
 				75E0EB7C2B7B410600E3198A /* Client+NetworkService.swift in Sources */,
-				75D13D602B807AC90073A831 /* PaymentFlow.swift in Sources */,
+				75D13D602B807AC90073A831 /* PaymentFlowCoordinator.swift in Sources */,
 				75D13DB42B83B71D0073A831 /* DuitNowOBW.Bank+TableListPresentable.swift in Sources */,
 				75405A7C2A25EC88008C21F6 /* Array+Helpers.swift in Sources */,
 				75D13DC22B84071E0073A831 /* ChoosePaymentMethodViewModel2.swift in Sources */,
