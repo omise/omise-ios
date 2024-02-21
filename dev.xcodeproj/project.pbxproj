@@ -474,7 +474,7 @@
 				2259311A1CE3210700841B86 /* OmiseSDK */,
 				987A02CA1CE35D5E0035417A /* OmiseSDKTests */,
 				75F2A0912A13B0B10038FA54 /* OmiseSDKUITests */,
-				7509D4F32A1D21D10050AB38 /* --- */,
+				75D13E072B8670EC0073A831 /* --- */,
 				22D4809E1D0EB29C00544CE1 /* ExampleApp */,
 				225931191CE3210700841B86 /* Products */,
 				75DAD8802A0B9B060098AF96 /* Frameworks */,
@@ -558,13 +558,6 @@
 				7509D4E32A1C89F10050AB38 /* AtomeFormViewModelMockup.swift */,
 			);
 			path = Mockups;
-			sourceTree = "<group>";
-		};
-		7509D4F32A1D21D10050AB38 /* --- */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "---";
 			sourceTree = "<group>";
 		};
 		753279362A31B406008048AD /* CountryLists */ = {
@@ -695,9 +688,7 @@
 				75D13DEC2B866AEB0073A831 /* ToDelete */,
 				75D13DEF2B866BE90073A831 /* Helpers */,
 				75D13DF02B866BF60073A831 /* Components */,
-				75D13DF32B866C420073A831 /* ChoosePaymentCoordinator */,
-				75D13DFB2B866D070073A831 /* Credit Card Payment */,
-				75D13DFA2B866CF40073A831 /* AuthorizingPaymentViewController */,
+				75D13E052B8670A80073A831 /* Screens */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -753,7 +744,7 @@
 			path = CountryListController;
 			sourceTree = "<group>";
 		};
-		75D13DF32B866C420073A831 /* ChoosePaymentCoordinator */ = {
+		75D13DF32B866C420073A831 /* ChoosePaymentMethods */ = {
 			isa = PBXGroup;
 			children = (
 				75D13D5F2B807AC90073A831 /* ChoosePaymentCoordinator.swift */,
@@ -763,7 +754,7 @@
 				75D13DF62B866C650073A831 /* Select Payment */,
 				75D13DF72B866C900073A831 /* ToDo */,
 			);
-			path = ChoosePaymentCoordinator;
+			path = ChoosePaymentMethods;
 			sourceTree = "<group>";
 		};
 		75D13DF42B866C590073A831 /* ViewPresentable */ = {
@@ -843,6 +834,24 @@
 				756C8F212A40694F00D53059 /* CreditCardFormViewContext.swift */,
 			);
 			path = "Credit Card Payment";
+			sourceTree = "<group>";
+		};
+		75D13E052B8670A80073A831 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				75D13DF32B866C420073A831 /* ChoosePaymentMethods */,
+				75D13DFA2B866CF40073A831 /* AuthorizingPaymentViewController */,
+				75D13DFB2B866D070073A831 /* Credit Card Payment */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		75D13E072B8670EC0073A831 /* --- */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "---";
+			path = OmiseSDKUITests;
 			sourceTree = "<group>";
 		};
 		75DAD8802A0B9B060098AF96 /* Frameworks */ = {
