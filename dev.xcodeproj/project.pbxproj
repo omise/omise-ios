@@ -40,7 +40,7 @@
 		751E7BD52B7E2F2A0031B4A2 /* SourceType+ViewPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E7BD42B7E2F2A0031B4A2 /* SourceType+ViewPresentable.swift */; };
 		751E7BD92B7E5D130031B4A2 /* PaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E7BD82B7E5D130031B4A2 /* PaymentMethod.swift */; };
 		751E7BE32B7F4DD00031B4A2 /* MainActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A275CBB21241E4500C5716F /* MainActionButton.swift */; };
-		751E7BEA2B7F77120031B4A2 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E7BE92B7F77120031B4A2 /* LocalizedString.swift */; };
+		751E7BEA2B7F77120031B4A2 /* Localized+Omise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E7BE92B7F77120031B4A2 /* Localized+Omise.swift */; };
 		751E7BEC2B7F7CE50031B4A2 /* ViewPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E7BEB2B7F7CE50031B4A2 /* ViewPresentable.swift */; };
 		751E7BEE2B7F7DD20031B4A2 /* PaymentMethod+ViewPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E7BED2B7F7DD20031B4A2 /* PaymentMethod+ViewPresentable.swift */; };
 		751E7BF02B7FBA760031B4A2 /* UIColor+Omise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751E7BEF2B7FBA760031B4A2 /* UIColor+Omise.swift */; };
@@ -69,7 +69,6 @@
 		75405AA42A27F5D3008C21F6 /* AtomeFormViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B52A1A5F020038FA54 /* AtomeFormViewContext.swift */; };
 		75405AA52A27F5D3008C21F6 /* AtomeFormViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B32A1A5EAD0038FA54 /* AtomeFormViewModelProtocol.swift */; };
 		75405AA82A27F97E008C21F6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75405AA62A27F97E008C21F6 /* Localizable.strings */; };
-		75405AAB2A27F9B4008C21F6 /* Bundle+OmiseSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */; };
 		756C8F1E2A40693B00D53059 /* CreditCardFormViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C8F1D2A40693B00D53059 /* CreditCardFormViewModelProtocol.swift */; };
 		756C8F202A40694000D53059 /* CreditCardFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C8F1F2A40694000D53059 /* CreditCardFormViewModel.swift */; };
 		756C8F222A40694F00D53059 /* CreditCardFormViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C8F212A40694F00D53059 /* CreditCardFormViewContext.swift */; };
@@ -126,6 +125,8 @@
 		75D13DD02B85A4250073A831 /* ChooseDuitNowObwBankViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D13DCF2B85A4240073A831 /* ChooseDuitNowObwBankViewModel.swift */; };
 		75D13DD22B85A4490073A831 /* ChooseFPXBankViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D13DD12B85A4490073A831 /* ChooseFPXBankViewModel.swift */; };
 		75D13DD42B8652230073A831 /* SourceType+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D13DD32B8652230073A831 /* SourceType+Helpers.swift */; };
+		75D13DD62B8653360073A831 /* UIControl.State+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D13DD52B8653360073A831 /* UIControl.State+Hashable.swift */; };
+		75D13DD82B86539C0073A831 /* Optional+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D13DD72B86539C0073A831 /* Optional+Helpers.swift */; };
 		75DAD8902A0BB8D80098AF96 /* LocalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */; };
 		75E0EB712B7A904100E3198A /* SourceFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E0EB702B7A904100E3198A /* SourceFlowTests.swift */; };
 		75E0EB722B7A962600E3198A /* CreateSourcePayloadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4208D2B78C2120036134D /* CreateSourcePayloadTests.swift */; };
@@ -273,7 +274,7 @@
 		75131F852AC2BD9D008BCB17 /* UIViewController+NavigationBarStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+NavigationBarStyle.swift"; sourceTree = "<group>"; };
 		751E7BD42B7E2F2A0031B4A2 /* SourceType+ViewPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SourceType+ViewPresentable.swift"; sourceTree = "<group>"; };
 		751E7BD82B7E5D130031B4A2 /* PaymentMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethod.swift; sourceTree = "<group>"; };
-		751E7BE92B7F77120031B4A2 /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
+		751E7BE92B7F77120031B4A2 /* Localized+Omise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Localized+Omise.swift"; sourceTree = "<group>"; };
 		751E7BEB2B7F7CE50031B4A2 /* ViewPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPresentable.swift; sourceTree = "<group>"; };
 		751E7BED2B7F7DD20031B4A2 /* PaymentMethod+ViewPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaymentMethod+ViewPresentable.swift"; sourceTree = "<group>"; };
 		751E7BEF2B7FBA760031B4A2 /* UIColor+Omise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Omise.swift"; sourceTree = "<group>"; };
@@ -351,6 +352,8 @@
 		75D13DCF2B85A4240073A831 /* ChooseDuitNowObwBankViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDuitNowObwBankViewModel.swift; sourceTree = "<group>"; };
 		75D13DD12B85A4490073A831 /* ChooseFPXBankViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseFPXBankViewModel.swift; sourceTree = "<group>"; };
 		75D13DD32B8652230073A831 /* SourceType+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SourceType+Helpers.swift"; sourceTree = "<group>"; };
+		75D13DD52B8653360073A831 /* UIControl.State+Hashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl.State+Hashable.swift"; sourceTree = "<group>"; };
+		75D13DD72B86539C0073A831 /* Optional+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Helpers.swift"; sourceTree = "<group>"; };
 		75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalConfig.swift; sourceTree = "<group>"; };
 		75DAD8922A0BC9540098AF96 /* Config.local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.local.plist; sourceTree = "<group>"; };
 		75E0EB702B7A904100E3198A /* SourceFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceFlowTests.swift; sourceTree = "<group>"; };
@@ -625,18 +628,14 @@
 			path = CountryLists;
 			sourceTree = "<group>";
 		};
-		75348D4C29C3FC8F0008C8A3 /* Tools */ = {
+		75348D4C29C3FC8F0008C8A3 /* ToolKit */ = {
 			isa = PBXGroup;
 			children = (
 				75F2A0AE2A1A5BE30038FA54 /* Property Wrappers */,
 				75405A852A26340E008C21F6 /* UI Extensions */,
 				75405A7E2A262B14008C21F6 /* Extensions */,
-				75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */,
-				751E7BE92B7F77120031B4A2 /* LocalizedString.swift */,
-				75D13D5D2B8069650073A831 /* UIImage+Omise.swift */,
-				75D13DCA2B8531D20073A831 /* Assets.swift */,
 			);
-			path = Tools;
+			path = ToolKit;
 			sourceTree = "<group>";
 		};
 		75405A7E2A262B14008C21F6 /* Extensions */ = {
@@ -644,7 +643,7 @@
 			children = (
 				75405A772A25D327008C21F6 /* String+Helpers.swift */,
 				75405A7B2A25EC88008C21F6 /* Array+Helpers.swift */,
-				75B4205D2B7674D70036134D /* Calendar+CreditCard.swift */,
+				75D13DD72B86539C0073A831 /* Optional+Helpers.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -659,6 +658,7 @@
 				75405A882A26340E008C21F6 /* UIImage+Helpers.swift */,
 				75405A892A26340E008C21F6 /* UILabel+Helpers.swift */,
 				75405A8A2A26340E008C21F6 /* UIButton+Helpers.swift */,
+				75D13DD52B8653360073A831 /* UIControl.State+Hashable.swift */,
 			);
 			path = "UI Extensions";
 			sourceTree = "<group>";
@@ -868,7 +868,7 @@
 		75E0EB872B7BCEA000E3198A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				75348D4C29C3FC8F0008C8A3 /* Tools */,
+				75348D4C29C3FC8F0008C8A3 /* ToolKit */,
 				75E0EBBD2B7D0DB600E3198A /* Components */,
 				75E0EB942B7BD00F00E3198A /* Models */,
 				75E0EBBF2B7D13D200E3198A /* OmiseAPI */,
@@ -886,6 +886,7 @@
 				75E0EB972B7BD00F00E3198A /* Country.swift */,
 				75E0EB982B7BD00F00E3198A /* CardBrand.swift */,
 				75E0EB992B7BD00F00E3198A /* OmiseError.swift */,
+				75E0EBC12B7D1F9E00E3198A /* OmiseError+LocalizedDescription.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -893,8 +894,12 @@
 		75E0EBBD2B7D0DB600E3198A /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				75E0EBC02B7D1F7A00E3198A /* OmiseError */,
+				75B4205D2B7674D70036134D /* Calendar+CreditCard.swift */,
+				75348D4D29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift */,
+				75D13D5D2B8069650073A831 /* UIImage+Omise.swift */,
+				751E7BE92B7F77120031B4A2 /* Localized+Omise.swift */,
 				98FF99BA2577789800476487 /* Configuration.swift */,
+				75D13DCA2B8531D20073A831 /* Assets.swift */,
 				22445FFB1CF41DD300801D0F /* Globals.swift */,
 			);
 			path = Components;
@@ -911,14 +916,6 @@
 				75CFC4DC2B73F75C00422A8F /* OmiseAPI.swift */,
 			);
 			path = OmiseAPI;
-			sourceTree = "<group>";
-		};
-		75E0EBC02B7D1F7A00E3198A /* OmiseError */ = {
-			isa = PBXGroup;
-			children = (
-				75E0EBC12B7D1F9E00E3198A /* OmiseError+LocalizedDescription.swift */,
-			);
-			path = OmiseError;
 			sourceTree = "<group>";
 		};
 		75F2A01A2A0BD1CD0038FA54 /* Resources */ = {
@@ -1349,13 +1346,15 @@
 				75D13DA92B83B58B0073A831 /* Source.Payment.Item.swift in Sources */,
 				75E0EB9E2B7BD00F00E3198A /* OmiseError.swift in Sources */,
 				75F2A0B92A1A60630038FA54 /* AtomeFormViewModelProtocol.swift in Sources */,
+				75D13DD82B86539C0073A831 /* Optional+Helpers.swift in Sources */,
 				75D13DD22B85A4490073A831 /* ChooseFPXBankViewModel.swift in Sources */,
 				75D13DAE2B83B58B0073A831 /* Source.Payment.DuitNowOBW.Bank.swift in Sources */,
 				75405A782A25D327008C21F6 /* String+Helpers.swift in Sources */,
 				986406301CFEA7E4004BCF51 /* CardCVVTextField.swift in Sources */,
 				75D13DAA2B83B58B0073A831 /* Source.Payment.Installment.swift in Sources */,
+				75D13DD62B8653360073A831 /* UIControl.State+Hashable.swift in Sources */,
 				751E7BEC2B7F7CE50031B4A2 /* ViewPresentable.swift in Sources */,
-				751E7BEA2B7F77120031B4A2 /* LocalizedString.swift in Sources */,
+				751E7BEA2B7F77120031B4A2 /* Localized+Omise.swift in Sources */,
 				75D13DA52B83B58B0073A831 /* Source.swift in Sources */,
 				22445FFC1CF41DD300801D0F /* Globals.swift in Sources */,
 				756C8F222A40694F00D53059 /* CreditCardFormViewContext.swift in Sources */,
@@ -1426,7 +1425,6 @@
 				75F2A0A62A13B70F0038FA54 /* OmiseTextField.swift in Sources */,
 				75405A8E2A26340E008C21F6 /* UIView+Helpers.swift in Sources */,
 				75405A902A26340E008C21F6 /* UIImage+Helpers.swift in Sources */,
-				75405AAB2A27F9B4008C21F6 /* Bundle+OmiseSDK.swift in Sources */,
 				75405AA42A27F5D3008C21F6 /* AtomeFormViewContext.swift in Sources */,
 				75405A792A25D33F008C21F6 /* String+Helpers.swift in Sources */,
 				75405AA52A27F5D3008C21F6 /* AtomeFormViewModelProtocol.swift in Sources */,
