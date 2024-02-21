@@ -35,17 +35,18 @@ public class PaymentCreatorController: UINavigationController {
     /// Boolean indicates that the form should show the Credit Card payment option or not
     public var allowedCardPayment = true {
         didSet {
-            paymentChooserController.viewModel.allowedCardPayment = allowedCardPayment
+//            paymentChooserController.viewModel.allowedCardPayment = allowedCardPayment
         }
     }
 
-    private let paymentChooserController = ChoosePaymentMethodControllerOld(nibName: nil, bundle: .omiseSDK)
+    private let paymentChooserController = UIViewController()
+//    ChoosePaymentMethodController(nibName: nil, bundle: .omiseSDK)
 
     /// Available Source payment options to let user to choose.
     /// The default value is the default available payment method for merchant in Thailand
     public var allowedPaymentMethods: [SourceType] = SourceType.availableByDefaultInThailand {
         didSet {
-            paymentChooserController.viewModel.allowedPaymentMethods = allowedPaymentMethods
+//            paymentChooserController.viewModel.allowedPaymentMethods = allowedPaymentMethods
         }
     }
 
@@ -129,13 +130,13 @@ public class PaymentCreatorController: UINavigationController {
     }
     
     public func applyPaymentMethods(from capability: Capability) {
-        paymentChooserController.viewModel.usePaymentMethodsFromCapability = true
+//        paymentChooserController.viewModel.usePaymentMethodsFromCapability = true
     }
 
-    private func initializeWithPaymentChooserViewController(_ viewController: ChoosePaymentMethodControllerOld) {
-        viewController.viewModel.flowSession = paymentSourceCreatorFlowSession
-        viewController.viewModel.allowedPaymentMethods = allowedPaymentMethods
-        viewController.viewModel.allowedCardPayment = allowedCardPayment
+    private func initializeWithPaymentChooserViewController(_ viewController: UIViewController) {
+//        viewController.viewModel.flowSession = paymentSourceCreatorFlowSession
+//        viewController.viewModel.allowedPaymentMethods = allowedPaymentMethods
+//        viewController.viewModel.allowedCardPayment = allowedCardPayment
 
         paymentSourceCreatorFlowSession.delegate = self
 
@@ -231,9 +232,9 @@ public class PaymentCreatorController: UINavigationController {
     public override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         dismissErrorMessage(animated: false, sender: self)
 
-        if let viewController = viewController as? ChoosePaymentMethodControllerOld {
-            viewController.viewModel.flowSession = self.paymentSourceCreatorFlowSession
-        }
+//        if let viewController = viewController as? ChoosePaymentMethodControllerOld {
+//            viewController.viewModel.flowSession = self.paymentSourceCreatorFlowSession
+//        }
         super.pushViewController(viewController, animated: animated)
     }
 
@@ -243,9 +244,9 @@ public class PaymentCreatorController: UINavigationController {
     }
 
     public override func addChild(_ childController: UIViewController) {
-        if let viewController = childController as? ChoosePaymentMethodControllerOld {
-            viewController.viewModel.flowSession = self.paymentSourceCreatorFlowSession
-        }
+//        if let viewController = childController as? ChoosePaymentMethodControllerOld {
+//            viewController.viewModel.flowSession = self.paymentSourceCreatorFlowSession
+//        }
         super.addChild(childController)
     }
 

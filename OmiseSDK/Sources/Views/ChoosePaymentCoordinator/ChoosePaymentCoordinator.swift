@@ -128,8 +128,8 @@ extension ChoosePaymentCoordinator: SelectSourceTypeDelegate {
 }
 
 extension ChoosePaymentCoordinator: SelectSourcePaymentDelegate {
-    func didSelectInstallmentPayment(_ installment: Source.Payment.Installment) {
-        processPayment(.installment(installment))
+    func didSelectSourcePayment(_ payment: Source.Payment) {
+        processPayment(payment)
     }
 }
 
