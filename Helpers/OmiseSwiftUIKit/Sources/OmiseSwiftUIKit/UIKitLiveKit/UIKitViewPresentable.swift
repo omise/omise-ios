@@ -8,13 +8,13 @@
 import SwiftUI
 import UIKit
 
-struct UIKitViewPresentable<V: UIView>: UIViewRepresentable {
-    let view: V
+public struct UIKitViewPresentable<V: UIView>: UIViewRepresentable {
+    public let view: V
 
-    func makeUIView(context: Context) -> V {
+    public func makeUIView(context: Context) -> V {
         return view
     }
 
-    func updateUIView(_ uiView: V, context: Context) {
+    public func updateUIView(_ uiView: V, context: Context) {
     }
 }

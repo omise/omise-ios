@@ -1,5 +1,5 @@
 //
-//  AtomeFormViewModel.swift
+//  AtomePaymentViewModel.swift
 //  OmiseSDK
 //
 //  Created by Andrei Solovev on 31/5/23.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtocol {
+class AtomePaymentViewModel: AtomePaymentViewModelProtocol, CountryListViewModelProtocol {
     var fields: [Field] = [
         .name,
         .email,
@@ -21,6 +21,9 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
         .postalCode
     ]
 
+    private weak var delegate: SelectSourcePaymentDelegate?
+    private let amount: Int64
+
     // MARK: CountryListViewModelProtocol
     lazy var countries: [Country] = Country.sortedAll
 
@@ -31,6 +34,7 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
             }
         }
     }
+
     var onSelectCountry: (Country) -> Void = { _ in }
 
     var countryListViewModel: CountryListViewModelProtocol { return self }
@@ -40,10 +44,9 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
     var headerText = "Atome.header.text".localized()
     var logoName = "Atome_Big"
 
-    private let flowSession: PaymentCreatorFlowSession?
-
-    init(flowSession: PaymentCreatorFlowSession?) {
-        self.flowSession = flowSession
+    init(amount: Int64, delegate: SelectSourcePaymentDelegate?) {
+        self.amount = amount
+        self.delegate = delegate
     }
 
     func title(for field: Field) -> String? {
@@ -75,7 +78,7 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
     }
 
     func onSubmitButtonPressed(_ viewContext: ViewContext, onComplete: @escaping () -> Void) {
-        guard let flowSession = flowSession else {
+        guard let delegate = delegate else {
             onComplete()
             return
         }
@@ -94,24 +97,20 @@ class AtomeFormViewModel: AtomeFormViewModelProtocol, CountryListViewModelProtoc
                 category: "Shoes",
                 name: "Prada shoes",
                 quantity: 1,
-                amount: flowSession.paymentAmount ?? 0,
+                amount: amount,
                 itemUri: "omise.co/product/shoes",
                 imageUri: "omise.co/product/shoes/image",
                 brand: "Gucci"
             )
         ]
 
-        let paymentInformation = Source.Payment.atome(
-            Source.Payment.Atome(
-                phoneNumber: viewContext[.phoneNumber],
-                shipping: shippingAddress,
-                billing: nil,
-                items: items
-            )
+        let paymentInformation = Source.Payment.Atome(
+            phoneNumber: viewContext[.phoneNumber],
+            shipping: shippingAddress,
+            billing: nil,
+            items: items
         )
 
-        flowSession.requestCreateSource(paymentInformation) { _ in
-            onComplete()
-        }
+        delegate.didSelectSourcePayment(.atome(paymentInformation))
     }
 }

@@ -2,9 +2,8 @@ import Foundation
 import UIKit.UIImage
 
 class SelectPaymentMethodViewModel {
-    let client: Client
-
-    weak var delegate: SelectPaymentMethodDelegate?
+    private weak var delegate: SelectPaymentMethodDelegate?
+    private let client: Client
 
     private var viewOnDataReloadHandler: () -> Void = { } {
         didSet {

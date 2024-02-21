@@ -1,9 +1,8 @@
 import UIKit
 
 class SelectSourceTypePaymentViewModel {
-
-    weak var delegate: SelectSourceTypeDelegate?
-    let title: String
+    private weak var delegate: SelectSourceTypeDelegate?
+    private let title: String
 
     private var viewOnDataReloadHandler: () -> Void = { } {
         didSet {

@@ -1,5 +1,5 @@
 //
-//  AtomeFormViewModelProtocol.swift
+//  AtomePaymentViewModelProtocol.swift
 //  OmiseSDKUITests
 //
 //  Created by Andrei Solovev on 21/5/23.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol AtomeFormViewModelProtocol {
-    typealias ViewContext = AtomeFormViewContext
+protocol AtomePaymentViewModelProtocol {
+    typealias ViewContext = AtomePaymentViewContext
     typealias Field = ViewContext.Field
     var fields: [Field] { get }
     var submitButtonTitle: String { get }
@@ -27,7 +27,7 @@ protocol AtomeFormViewModelProtocol {
     func contentType(for: Field) -> UITextContentType
 }
 
-extension AtomeFormViewModelProtocol {
+extension AtomePaymentViewModelProtocol {
     func isSubmitButtonEnabled(_ viewContext: ViewContext) -> Bool {
         Field.allCases.allSatisfy {
             error(for: $0, validate: viewContext[$0]) == nil

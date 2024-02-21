@@ -57,7 +57,6 @@ class ChoosePaymentCoordinator: ViewAttachable {
         )
 
         let listController = SelectPaymentController(viewModel: viewModel)
-        listController.attach(self)
         return listController
     }
 
@@ -70,7 +69,6 @@ class ChoosePaymentCoordinator: ViewAttachable {
         )
 
         let listController = SelectPaymentController(viewModel: viewModel)
-        listController.attach(self)
         return listController
     }
 
@@ -83,7 +81,6 @@ class ChoosePaymentCoordinator: ViewAttachable {
         )
 
         let listController = SelectPaymentController(viewModel: viewModel)
-        listController.attach(self)
         return listController
     }
 
@@ -91,8 +88,15 @@ class ChoosePaymentCoordinator: ViewAttachable {
     func createInstallmentTermsController(sourceType: SourceType) -> SelectPaymentController {
         let viewModel = SelectInstallmentTermsViewModel(sourceType: sourceType, delegate: self)
         let listController = SelectPaymentController(viewModel: viewModel)
-        listController.attach(self)
         return listController
+    }
+
+    /// Creates Atome screen and attach current flow object inside created controller to be deallocated together
+    func createAtomeController() -> AtomePaymentController {
+        let viewModel = AtomePaymentViewModel(amount: amount, delegate: self)
+        let viewController = AtomePaymentController(viewModel: viewModel)
+        viewController.title = SourceType.atome.localizedTitle
+        return viewController
     }
 }
 
@@ -103,6 +107,7 @@ extension ChoosePaymentCoordinator: SelectPaymentMethodDelegate {
             case .mobileBanking: navigate(to: createMobileBankingController())
             case .internetBanking: navigate(to: createInternetBankingController())
             case .installment: navigate(to: createInstallmentController())
+            case .sourceType(.atome): navigate(to: createAtomeController())
             default: break
             }
         } else if let sourceType = paymentMethod.sourceType {

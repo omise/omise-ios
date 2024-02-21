@@ -63,9 +63,9 @@
 		75405A942A26340E008C21F6 /* UIButton+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A8A2A26340E008C21F6 /* UIButton+Helpers.swift */; };
 		75405A952A26343F008C21F6 /* SpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A802A2633B6008C21F6 /* SpacerView.swift */; };
 		75405A992A2634D9008C21F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75405A972A2634D9008C21F6 /* Assets.xcassets */; };
-		75405A9C2A266F50008C21F6 /* AtomeFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A9B2A266F50008C21F6 /* AtomeFormViewModel.swift */; };
-		75405AA42A27F5D3008C21F6 /* AtomeFormViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B52A1A5F020038FA54 /* AtomeFormViewContext.swift */; };
-		75405AA52A27F5D3008C21F6 /* AtomeFormViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B32A1A5EAD0038FA54 /* AtomeFormViewModelProtocol.swift */; };
+		75405A9C2A266F50008C21F6 /* AtomePaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75405A9B2A266F50008C21F6 /* AtomePaymentViewModel.swift */; };
+		75405AA42A27F5D3008C21F6 /* AtomePaymentViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B52A1A5F020038FA54 /* AtomePaymentViewContext.swift */; };
+		75405AA52A27F5D3008C21F6 /* AtomePaymentViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B32A1A5EAD0038FA54 /* AtomePaymentViewModelProtocol.swift */; };
 		75405AA82A27F97E008C21F6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75405AA62A27F97E008C21F6 /* Localizable.strings */; };
 		756C8F1E2A40693B00D53059 /* CreditCardFormViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C8F1D2A40693B00D53059 /* CreditCardFormViewModelProtocol.swift */; };
 		756C8F202A40694000D53059 /* CreditCardFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C8F1F2A40694000D53059 /* CreditCardFormViewModel.swift */; };
@@ -137,6 +137,8 @@
 		75D13E022B866E040073A831 /* PaymentUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A76791E214663560085DE3C /* PaymentUI.swift */; };
 		75D13E032B866E040073A831 /* PaymentOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A72CD5D2162358400F14F76 /* PaymentOptionTableViewCell.swift */; };
 		75D13E042B866E040073A831 /* MobileBankingSourceChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3497367254C066F00D05C7B /* MobileBankingSourceChooserViewController.swift */; };
+		75D13E0F2B8678530073A831 /* OmiseSwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 75D13E0E2B8678530073A831 /* OmiseSwiftUIKit */; };
+		75D13E102B8678530073A831 /* OmiseSwiftUIKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 75D13E0E2B8678530073A831 /* OmiseSwiftUIKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		75DAD8902A0BB8D80098AF96 /* LocalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */; };
 		75E0EB712B7A904100E3198A /* SourceFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E0EB702B7A904100E3198A /* SourceFlowTests.swift */; };
 		75E0EB722B7A962600E3198A /* CreateSourcePayloadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4208D2B78C2120036134D /* CreateSourcePayloadTests.swift */; };
@@ -157,12 +159,10 @@
 		75F2A09A2A13B0B10038FA54 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75F2A0992A13B0B10038FA54 /* Preview Assets.xcassets */; };
 		75F2A0A62A13B70F0038FA54 /* OmiseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062F1CFEA7E4004BCF51 /* OmiseTextField.swift */; };
 		75F2A0B02A1A5BF30038FA54 /* ProxyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0AF2A1A5BF30038FA54 /* ProxyProperty.swift */; };
-		75F2A0B22A1A5E780038FA54 /* AtomeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B12A1A5E780038FA54 /* AtomeInputView.swift */; };
-		75F2A0B72A1A60630038FA54 /* AtomeFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0A42A13B1470038FA54 /* AtomeFormViewController.swift */; };
+		75F2A0B72A1A60630038FA54 /* AtomePaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0A42A13B1470038FA54 /* AtomePaymentController.swift */; };
 		75F2A0B82A1A60630038FA54 /* ProxyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0AF2A1A5BF30038FA54 /* ProxyProperty.swift */; };
-		75F2A0B92A1A60630038FA54 /* AtomeFormViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B32A1A5EAD0038FA54 /* AtomeFormViewModelProtocol.swift */; };
-		75F2A0BA2A1A60630038FA54 /* AtomeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B12A1A5E780038FA54 /* AtomeInputView.swift */; };
-		75F2A0BB2A1A60630038FA54 /* AtomeFormViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B52A1A5F020038FA54 /* AtomeFormViewContext.swift */; };
+		75F2A0B92A1A60630038FA54 /* AtomePaymentViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B32A1A5EAD0038FA54 /* AtomePaymentViewModelProtocol.swift */; };
+		75F2A0BB2A1A60630038FA54 /* AtomePaymentViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B52A1A5F020038FA54 /* AtomePaymentViewContext.swift */; };
 		75F2A0C12A1A84900038FA54 /* UIColor+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0C02A1A84900038FA54 /* UIColor+Helpers.swift */; };
 		75F2A0C22A1A87AE0038FA54 /* UIColor+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0C02A1A84900038FA54 /* UIColor+Helpers.swift */; };
 		8A188BB01D951E3C00FFF467 /* AuthorizingPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentViewController.swift */; };
@@ -220,6 +220,16 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		75D13E142B8679790073A831 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75DAD88D2A0BA5130098AF96 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -238,6 +248,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				8A2C451920ECC7A60033E2EB /* OmiseSDK.framework in Embed Frameworks */,
+				75D13E102B8678530073A831 /* OmiseSwiftUIKit in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,7 +306,7 @@
 		75405A892A26340E008C21F6 /* UILabel+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Helpers.swift"; sourceTree = "<group>"; };
 		75405A8A2A26340E008C21F6 /* UIButton+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Helpers.swift"; sourceTree = "<group>"; };
 		75405A972A2634D9008C21F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		75405A9B2A266F50008C21F6 /* AtomeFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewModel.swift; sourceTree = "<group>"; };
+		75405A9B2A266F50008C21F6 /* AtomePaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomePaymentViewModel.swift; sourceTree = "<group>"; };
 		75405AA72A27F97E008C21F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		75405AA92A27F985008C21F6 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		75405AAA2A27F988008C21F6 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -379,11 +390,10 @@
 		75E0EBC12B7D1F9E00E3198A /* OmiseError+LocalizedDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OmiseError+LocalizedDescription.swift"; sourceTree = "<group>"; };
 		75F2A0902A13B0B00038FA54 /* OmiseSDKUITests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmiseSDKUITests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F2A0992A13B0B10038FA54 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		75F2A0A42A13B1470038FA54 /* AtomeFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewController.swift; sourceTree = "<group>"; };
+		75F2A0A42A13B1470038FA54 /* AtomePaymentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomePaymentController.swift; sourceTree = "<group>"; };
 		75F2A0AF2A1A5BF30038FA54 /* ProxyProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyProperty.swift; sourceTree = "<group>"; };
-		75F2A0B12A1A5E780038FA54 /* AtomeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeInputView.swift; sourceTree = "<group>"; };
-		75F2A0B32A1A5EAD0038FA54 /* AtomeFormViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewModelProtocol.swift; sourceTree = "<group>"; };
-		75F2A0B52A1A5F020038FA54 /* AtomeFormViewContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomeFormViewContext.swift; sourceTree = "<group>"; };
+		75F2A0B32A1A5EAD0038FA54 /* AtomePaymentViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomePaymentViewModelProtocol.swift; sourceTree = "<group>"; };
+		75F2A0B52A1A5F020038FA54 /* AtomePaymentViewContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomePaymentViewContext.swift; sourceTree = "<group>"; };
 		75F2A0C02A1A84900038FA54 /* UIColor+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Helpers.swift"; sourceTree = "<group>"; };
 		75F8C0B62B1F78E300AE78D9 /* PaymentChooserViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentChooserViewControllerTests.swift; sourceTree = "<group>"; };
 		8A00FEC21F1DE88600246078 /* README.md */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; tabWidth = 2; };
@@ -444,6 +454,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75D13E0F2B8678530073A831 /* OmiseSwiftUIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -747,11 +758,11 @@
 		75D13DF32B866C420073A831 /* ChoosePaymentMethods */ = {
 			isa = PBXGroup;
 			children = (
-				75D13D5F2B807AC90073A831 /* ChoosePaymentCoordinator.swift */,
-				751E7BD82B7E5D130031B4A2 /* PaymentMethod.swift */,
 				75D13DF42B866C590073A831 /* ViewPresentable */,
 				75D13DF52B866C600073A831 /* Delegates */,
 				75D13DF62B866C650073A831 /* Select Payment */,
+				75D13D5F2B807AC90073A831 /* ChoosePaymentCoordinator.swift */,
+				751E7BD82B7E5D130031B4A2 /* PaymentMethod.swift */,
 				75D13DF72B866C900073A831 /* ToDo */,
 			);
 			path = ChoosePaymentMethods;
@@ -808,11 +819,10 @@
 		75D13DF82B866CA90073A831 /* AtomePaymentController */ = {
 			isa = PBXGroup;
 			children = (
-				75F2A0B12A1A5E780038FA54 /* AtomeInputView.swift */,
-				75F2A0A42A13B1470038FA54 /* AtomeFormViewController.swift */,
-				75F2A0B52A1A5F020038FA54 /* AtomeFormViewContext.swift */,
-				75F2A0B32A1A5EAD0038FA54 /* AtomeFormViewModelProtocol.swift */,
-				75405A9B2A266F50008C21F6 /* AtomeFormViewModel.swift */,
+				75F2A0A42A13B1470038FA54 /* AtomePaymentController.swift */,
+				75F2A0B52A1A5F020038FA54 /* AtomePaymentViewContext.swift */,
+				75F2A0B32A1A5EAD0038FA54 /* AtomePaymentViewModelProtocol.swift */,
+				75405A9B2A266F50008C21F6 /* AtomePaymentViewModel.swift */,
 			);
 			path = AtomePaymentController;
 			sourceTree = "<group>";
@@ -1079,19 +1089,22 @@
 				225931131CE3210700841B86 /* Sources */,
 				225931141CE3210700841B86 /* Frameworks */,
 				75341FF329A716FD003027E6 /* Swiftlint */,
+				75D13E142B8679790073A831 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = OmiseSDK;
+			packageProductDependencies = (
+			);
 			productName = OmiseSDK;
 			productReference = 225931181CE3210700841B86 /* OmiseSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		22D4809C1D0EB29C00544CE1 /* ExampleApp (Swift) */ = {
+		22D4809C1D0EB29C00544CE1 /* ExampleApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22D480AE1D0EB29C00544CE1 /* Build configuration list for PBXNativeTarget "ExampleApp (Swift)" */;
+			buildConfigurationList = 22D480AE1D0EB29C00544CE1 /* Build configuration list for PBXNativeTarget "ExampleApp" */;
 			buildPhases = (
 				22D4809B1D0EB29C00544CE1 /* Resources */,
 				22D480991D0EB29C00544CE1 /* Sources */,
@@ -1103,8 +1116,9 @@
 			dependencies = (
 				8A7F8B0B20C55312008F4D08 /* PBXTargetDependency */,
 			);
-			name = "ExampleApp (Swift)";
+			name = ExampleApp;
 			packageProductDependencies = (
+				75D13E0E2B8678530073A831 /* OmiseSwiftUIKit */,
 			);
 			productName = ExampleApp;
 			productReference = 22D4809D1D0EB29C00544CE1 /* ExampleApp.app */;
@@ -1201,7 +1215,7 @@
 			targets = (
 				225931171CE3210700841B86 /* OmiseSDK */,
 				987A02C81CE35D5E0035417A /* OmiseSDKTests */,
-				22D4809C1D0EB29C00544CE1 /* ExampleApp (Swift) */,
+				22D4809C1D0EB29C00544CE1 /* ExampleApp */,
 				75F2A08F2A13B0B00038FA54 /* OmiseSDKUITests */,
 			);
 		};
@@ -1287,7 +1301,6 @@
 				759C7EC22B7DC80A0029D555 /* SourceType+InternetBanking.swift in Sources */,
 				75D13E002B866E040073A831 /* DuitNowOBWBankChooserViewController.swift in Sources */,
 				75405A912A26340E008C21F6 /* UILabel+Helpers.swift in Sources */,
-				75F2A0BA2A1A60630038FA54 /* AtomeInputView.swift in Sources */,
 				759856242A286C880087B605 /* UIScrollView+Helpers.swift in Sources */,
 				75E0EB9C2B7BD00F00E3198A /* Country.swift in Sources */,
 				75D13D8A2B8382760073A831 /* ClosureBarButtonItem.swift in Sources */,
@@ -1302,7 +1315,7 @@
 				75131F862AC2BD9D008BCB17 /* UIViewController+NavigationBarStyle.swift in Sources */,
 				75B420822B77FAA50036134D /* CreateSourcePayload.swift in Sources */,
 				8AD391B1230C05BC00383286 /* Colors.swift in Sources */,
-				75F2A0BB2A1A60630038FA54 /* AtomeFormViewContext.swift in Sources */,
+				75F2A0BB2A1A60630038FA54 /* AtomePaymentViewContext.swift in Sources */,
 				75D13DB12B83B58B0073A831 /* Source.Payment.FPX.Bank.swift in Sources */,
 				75B420662B77741E0036134D /* CreateTokenPayload.swift in Sources */,
 				986406351CFEA7E4004BCF51 /* OmiseTextField.swift in Sources */,
@@ -1349,7 +1362,7 @@
 				75D13D5E2B8069650073A831 /* UIImage+Omise.swift in Sources */,
 				75D13DA92B83B58B0073A831 /* Source.Payment.Item.swift in Sources */,
 				75E0EB9E2B7BD00F00E3198A /* OmiseError.swift in Sources */,
-				75F2A0B92A1A60630038FA54 /* AtomeFormViewModelProtocol.swift in Sources */,
+				75F2A0B92A1A60630038FA54 /* AtomePaymentViewModelProtocol.swift in Sources */,
 				75D13DD82B86539C0073A831 /* Optional+Helpers.swift in Sources */,
 				75D13DD22B85A4490073A831 /* ChooseFPXBankViewModel.swift in Sources */,
 				75D13DE22B8666C40073A831 /* SelectPaymentMethodDelegate.swift in Sources */,
@@ -1370,7 +1383,7 @@
 				75348D4E29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift in Sources */,
 				75E0EB9D2B7BD00F00E3198A /* CardBrand.swift in Sources */,
 				75E0EB9A2B7BD00F00E3198A /* Currency.swift in Sources */,
-				75405A9C2A266F50008C21F6 /* AtomeFormViewModel.swift in Sources */,
+				75405A9C2A266F50008C21F6 /* AtomePaymentViewModel.swift in Sources */,
 				75D13DA72B83B58B0073A831 /* Source.Payment.BarcodeAlipay.swift in Sources */,
 				75CFC4DB2B73F5AF00422A8F /* NetworkService.swift in Sources */,
 				75E0EBA32B7BD02200E3198A /* Token.swift in Sources */,
@@ -1383,7 +1396,7 @@
 				75D13DB02B83B58B0073A831 /* Source.Payment.Address.swift in Sources */,
 				75405A8F2A26340E008C21F6 /* UIImage+Helpers.swift in Sources */,
 				F6614CD6243DB8E7005B656E /* TrueMoneyFormViewController.swift in Sources */,
-				75F2A0B72A1A60630038FA54 /* AtomeFormViewController.swift in Sources */,
+				75F2A0B72A1A60630038FA54 /* AtomePaymentController.swift in Sources */,
 				75F2A0C22A1A87AE0038FA54 /* UIColor+Helpers.swift in Sources */,
 				75D13D6C2B8335850073A831 /* ViewContainer.swift in Sources */,
 				7509D4DD2A1A9FD70050AB38 /* MainActionButton.swift in Sources */,
@@ -1424,16 +1437,15 @@
 				75405A942A26340E008C21F6 /* UIButton+Helpers.swift in Sources */,
 				7502CA602A31A7D600766E7D /* CountryListViewController.swift in Sources */,
 				75F2A0B02A1A5BF30038FA54 /* ProxyProperty.swift in Sources */,
-				75F2A0B22A1A5E780038FA54 /* AtomeInputView.swift in Sources */,
 				7509D4F52A1D2F550050AB38 /* AtomeFormViewContextMockup.swift in Sources */,
 				7502CA632A31A7E100766E7D /* CountryListViewModelProtocol.swift in Sources */,
 				75405A922A26340E008C21F6 /* UILabel+Helpers.swift in Sources */,
 				75F2A0A62A13B70F0038FA54 /* OmiseTextField.swift in Sources */,
 				75405A8E2A26340E008C21F6 /* UIView+Helpers.swift in Sources */,
 				75405A902A26340E008C21F6 /* UIImage+Helpers.swift in Sources */,
-				75405AA42A27F5D3008C21F6 /* AtomeFormViewContext.swift in Sources */,
+				75405AA42A27F5D3008C21F6 /* AtomePaymentViewContext.swift in Sources */,
 				75405A792A25D33F008C21F6 /* String+Helpers.swift in Sources */,
-				75405AA52A27F5D3008C21F6 /* AtomeFormViewModelProtocol.swift in Sources */,
+				75405AA52A27F5D3008C21F6 /* AtomePaymentViewModelProtocol.swift in Sources */,
 				75F2A0C12A1A84900038FA54 /* UIColor+Helpers.swift in Sources */,
 				75405A8C2A26340E008C21F6 /* UIStackView+Helpers.swift in Sources */,
 				751E7BE32B7F4DD00031B4A2 /* MainActionButton.swift in Sources */,
@@ -1580,7 +1592,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1610,13 +1622,14 @@
 				);
 				INFOPLIST_FILE = OmiseSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "-lc++";
+				OTHER_SWIFT_FLAGS = "-DLIVE_PREVIEW_ENABLED";
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1812,7 +1825,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1841,13 +1854,14 @@
 				);
 				INFOPLIST_FILE = OmiseSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "-lc++";
+				OTHER_SWIFT_FLAGS = "-DLIVE_PREVIEW_ENABLED";
 				PRODUCT_BUNDLE_IDENTIFIER = co.omise.OmiseSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1938,7 +1952,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22D480AE1D0EB29C00544CE1 /* Build configuration list for PBXNativeTarget "ExampleApp (Swift)" */ = {
+		22D480AE1D0EB29C00544CE1 /* Build configuration list for PBXNativeTarget "ExampleApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				98FF99B6257773EB00476487 /* Debug */,
@@ -1975,6 +1989,10 @@
 		757B0A732AD71E3100DEAE8F /* OmiseUnitTestKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OmiseUnitTestKit;
+		};
+		75D13E0E2B8678530073A831 /* OmiseSwiftUIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OmiseSwiftUIKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

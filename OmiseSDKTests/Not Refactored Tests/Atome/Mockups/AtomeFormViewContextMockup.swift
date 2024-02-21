@@ -1,5 +1,5 @@
 //
-//  AtomeFormViewContextMockup.swift
+//  AtomePaymentViewContextMockup.swift
 //  OmiseSDKTests
 //
 //  Created by Andrei Solovev on 23/5/23.
@@ -12,9 +12,9 @@ import OmiseUnitTestKit
 @testable import OmiseSDK
 #endif
 
-extension AtomeFormViewContext {
+extension AtomePaymentViewContext {
     static func generateMockup(_ generator: OmiseUnitTestKit.TestCaseValueGenerator) -> Self {
-        AtomeFormViewContext(fields: [
+        AtomePaymentViewContext(fields: [
             .name: generator.cases(
                 .valid("Tester"),
                 .valid("", "Name is optional"),
