@@ -28,7 +28,7 @@ class ChooseSourceTypeViewModel {
     }
 }
 
-extension ChooseSourceTypeViewModel: ChoosePaymentViewModelProtocol {
+extension ChooseSourceTypeViewModel: ChoosePaymentPresentableProtocol {
     func viewOnDataReloadHandler(_ handler: @escaping () -> Void) {
         self.viewOnDataReloadHandler = handler
     }
@@ -39,14 +39,6 @@ extension ChooseSourceTypeViewModel: ChoosePaymentViewModelProtocol {
 
     var viewNavigationTitle: String {
         title
-    }
-
-    var viewDisplayLargeTitle: Bool {
-        false
-    }
-
-    var viewShowsCloseButton: Bool {
-        false
     }
 
     func viewContext(at index: Int) -> TableCellContext? {

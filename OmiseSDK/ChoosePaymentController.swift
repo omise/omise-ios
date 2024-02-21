@@ -1,27 +1,10 @@
 import UIKit
 
-protocol ChoosePaymentViewModelProtocol {
-    var numberOfViewContexts: Int { get }
-    var viewNavigationTitle: String { get }
-    var viewDisplayLargeTitle: Bool { get }
-    var viewShowsCloseButton: Bool { get }
-
-    func viewOnDataReloadHandler(_ handler: @escaping () -> Void)
-    func viewContext(at: Int) -> TableCellContext?
-    func viewDidSelectCell(at: Int)
-    func viewShouldAnimateSelectedCell(at: Int) -> Bool
-    func viewDidTapClose()
-}
-
-extension ChoosePaymentViewModelProtocol {
-    func viewDidTapClose() {}
-}
-
 class ChoosePaymentController: UITableViewController {
 
-    let viewModel: ChoosePaymentViewModelProtocol
+    let viewModel: ChoosePaymentPresentableProtocol
 
-    init(viewModel: ChoosePaymentViewModelProtocol) {
+    init(viewModel: ChoosePaymentPresentableProtocol) {
         self.viewModel = viewModel
         super.init(style: .plain)
     }
@@ -34,29 +17,8 @@ class ChoosePaymentController: UITableViewController {
         super.viewDidLoad()
         applyNavigationBarStyle()
         setupNavigationItems()
-        navigationItem.backBarButtonItem = .empty
-        tableView.separatorColor = UIColor.omiseSecondary
-        tableView.rowHeight = 64
-        tableView.backgroundColor = .white
-        viewModel.viewOnDataReloadHandler { [weak tableView] in
-            tableView?.reloadData()
-        }
-    }
-
-    private func setupNavigationItems() {
-        if #available(iOSApplicationExtension 11.0, *) {
-            navigationItem.largeTitleDisplayMode = viewModel.viewDisplayLargeTitle ? .always : .never
-        }
-
-        navigationItem.title = viewModel.viewNavigationTitle
-        if viewModel.viewShowsCloseButton {
-            navigationItem.rightBarButtonItem = ClosureBarButtonItem(
-                image: UIImage(omise: "Close"),
-                style: .plain,
-                target: self,
-                action: #selector(didTapClose)
-            )
-        }
+        setupTableView()
+        setupViewModel()
     }
 
     @objc private func didTapClose() {
@@ -90,6 +52,10 @@ class ChoosePaymentController: UITableViewController {
 
         cell.accessoryView?.tintColor = UIColor.omiseSecondary
 
+        cell.selectionStyle = .default
+        cell.selectedBackgroundView = UIView()
+            .backgroundColor(UIColor.selectedCellBackgroundColor)
+
         return cell
     }
 
@@ -114,5 +80,36 @@ extension ChoosePaymentController {
     func stopCellActivity(at indexPath: IndexPath) {
         tableView.reloadRows(at: [indexPath], with: .automatic)
         view.isUserInteractionEnabled = true
+    }
+}
+
+private extension ChoosePaymentController {
+    func setupViewModel() {
+        viewModel.viewOnDataReloadHandler { [weak tableView] in
+            tableView?.reloadData()
+        }
+    }
+
+    func setupTableView() {
+        tableView.separatorColor = UIColor.omiseSecondary
+        tableView.rowHeight = 64
+        tableView.backgroundColor = .white
+    }
+
+    func setupNavigationItems() {
+        if #available(iOSApplicationExtension 11.0, *) {
+            navigationItem.largeTitleDisplayMode = viewModel.viewDisplayLargeTitle ? .always : .never
+        }
+
+        navigationItem.title = viewModel.viewNavigationTitle
+        if viewModel.viewShowsCloseButton {
+            navigationItem.rightBarButtonItem = ClosureBarButtonItem(
+                image: UIImage(omise: "Close"),
+                style: .plain,
+                target: self,
+                action: #selector(didTapClose)
+            )
+        }
+        navigationItem.backBarButtonItem = .empty
     }
 }

@@ -27,7 +27,7 @@ class ChooseInstallmentTermsViewModel {
     }
 }
 
-extension ChooseInstallmentTermsViewModel: ChoosePaymentViewModelProtocol {
+extension ChooseInstallmentTermsViewModel: ChoosePaymentPresentableProtocol {
     func viewOnDataReloadHandler(_ handler: @escaping () -> Void) {
         self.viewOnDataReloadHandler = handler
     }
@@ -39,15 +39,7 @@ extension ChooseInstallmentTermsViewModel: ChoosePaymentViewModelProtocol {
     var viewNavigationTitle: String {
         sourceType.localizedTitle
     }
-
-    var viewDisplayLargeTitle: Bool {
-        false
-    }
-
-    var viewShowsCloseButton: Bool {
-        false
-    }
-
+    
     func viewContext(at index: Int) -> TableCellContext? {
         guard let value = values.at(index) else { return nil }
         let numberOfTermsTitleFormat = localized("installments.number-of-terms.text", "%d months")
