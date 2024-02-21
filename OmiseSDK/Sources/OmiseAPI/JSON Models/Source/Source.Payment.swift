@@ -94,3 +94,18 @@ extension Source.Payment: Codable {
         }
     }
 }
+
+extension Source.Payment {
+    static func requiresAdditionalDetails(sourceType: SourceType) -> Bool {
+        var requiresDetails: [SourceType] = [
+            Atome.sourceType,
+            BarcodeAlipay.sourceType,
+            DuitNowOBW.sourceType,
+            EContext.sourceType,
+            TrueMoneyWallet.sourceType,
+            FPX.sourceType
+        ] + Installment.sourceTypes
+
+        return requiresDetails.contains(sourceType)
+    }
+}

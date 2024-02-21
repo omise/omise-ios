@@ -1,12 +1,12 @@
 import UIKit
 
-protocol SourceTypePaymentViewModelDelegate: AnyObject {
+protocol ChooseSourceTypeViewModelDelegate: AnyObject {
     func didSelectSourceType(_ sourceType: SourceType)
 }
 
-class SourceTypePaymentViewModel {
+class ChooseSourceTypeViewModel {
 
-    weak var delegate: SourceTypePaymentViewModelDelegate?
+    weak var delegate: ChooseSourceTypeViewModelDelegate?
     let title: String
 
     private var viewOnDataReloadHandler: () -> Void = { } {
@@ -21,14 +21,14 @@ class SourceTypePaymentViewModel {
         }
     }
 
-    init(title: String, sourceTypes: [SourceType], delegate: SourceTypePaymentViewModelDelegate) {
+    init(title: String, sourceTypes: [SourceType], delegate: ChooseSourceTypeViewModelDelegate) {
         self.sourceTypes = sourceTypes
         self.title = title
         self.delegate = delegate
     }
 }
 
-extension SourceTypePaymentViewModel: PaymentListViewModelProtocol {
+extension ChooseSourceTypeViewModel: ChoosePaymentViewModelProtocol {
     func viewOnDataReloadHandler(_ handler: @escaping () -> Void) {
         self.viewOnDataReloadHandler = handler
     }

@@ -20,7 +20,7 @@ class PaymentFlowCoordinator: ViewAttachable {
         self.currency = currency
     }
 
-    /// Creates ChoosePaymentMethodController and attach current flow object inside created controller to be deallocated together
+    /// Creates ChoosePaymentController and attach current flow object inside created controller to be deallocated together
     ///
     /// - Parameters:
     ///   - allowedPaymentMethods: List of Payment Methods to be presented in the list if `usePaymentMethodsFromCapability` is `false`
@@ -31,7 +31,7 @@ class PaymentFlowCoordinator: ViewAttachable {
         allowedCardPayment isCardEnabled: Bool = true,
         usePaymentMethodsFromCapability useCapability: Bool,
         delegate: ChoosePaymentMethodDelegate
-    ) -> PaymentListController {
+    ) -> ChoosePaymentController {
         let viewModel = ChoosePaymentMethodViewModel(client: client, delegate: self)
         if useCapability {
             viewModel.setupCapability()
@@ -39,7 +39,7 @@ class PaymentFlowCoordinator: ViewAttachable {
             viewModel.setupAllowedPaymentMethods(paymentMethods, isCardEnabled: isCardEnabled)
         }
 
-        let listController = PaymentListController(viewModel: viewModel)
+        let listController = ChoosePaymentController(viewModel: viewModel)
         listController.attach(self)
 
         self.choosePaymentMethodDelegate = delegate
@@ -49,48 +49,48 @@ class PaymentFlowCoordinator: ViewAttachable {
     }
 
     /// Creates Mobile Banking screen and attach current flow object inside created controller to be deallocated together
-    func createMobileBankingController() -> PaymentListController {
-        let viewModel = SourceTypePaymentViewModel(
+    func createMobileBankingController() -> ChoosePaymentController {
+        let viewModel = ChooseSourceTypeViewModel(
             title: PaymentMethod.mobileBanking.localizedTitle,
             sourceTypes: SourceType.mobileBanking,
             delegate: self
         )
 
-        let listController = PaymentListController(viewModel: viewModel)
+        let listController = ChoosePaymentController(viewModel: viewModel)
         listController.attach(self)
         return listController
     }
 
     /// Creates Mobile Banking screen and attach current flow object inside created controller to be deallocated together
-    func createInternetBankingController() -> PaymentListController {
-        let viewModel = SourceTypePaymentViewModel(
+    func createInternetBankingController() -> ChoosePaymentController {
+        let viewModel = ChooseSourceTypeViewModel(
             title: PaymentMethod.internetBanking.localizedTitle,
             sourceTypes: SourceType.internetBanking,
             delegate: self
         )
 
-        let listController = PaymentListController(viewModel: viewModel)
+        let listController = ChoosePaymentController(viewModel: viewModel)
         listController.attach(self)
         return listController
     }
 
     /// Creates Installement screen and attach current flow object inside created controller to be deallocated together
-    func createInstallmentController() -> PaymentListController {
-        let viewModel = SourceTypePaymentViewModel(
+    func createInstallmentController() -> ChoosePaymentController {
+        let viewModel = ChooseSourceTypeViewModel(
             title: PaymentMethod.installment.localizedTitle,
             sourceTypes: SourceType.installments,
             delegate: self
         )
 
-        let listController = PaymentListController(viewModel: viewModel)
+        let listController = ChoosePaymentController(viewModel: viewModel)
         listController.attach(self)
         return listController
     }
 
     /// Creates Installement screen and attach current flow object inside created controller to be deallocated together
-    func createInstallmentTermsController(sourceType: SourceType) -> PaymentListController {
-        let viewModel = InstallmentTermsViewModel(sourceType: sourceType, delegate: self)
-        let listController = PaymentListController(viewModel: viewModel)
+    func createInstallmentTermsController(sourceType: SourceType) -> ChoosePaymentController {
+        let viewModel = ChooseInstallmentTermsViewModel(sourceType: sourceType, delegate: self)
+        let listController = ChoosePaymentController(viewModel: viewModel)
         listController.attach(self)
         return listController
     }
@@ -117,7 +117,7 @@ extension PaymentFlowCoordinator: ChoosePaymentMethodViewModelDelegate {
     }
 }
 
-extension PaymentFlowCoordinator: SourceTypePaymentViewModelDelegate {
+extension PaymentFlowCoordinator: ChooseSourceTypeViewModelDelegate {
     func didSelectSourceType(_ sourceType: SourceType) {
         if sourceType.isInstallment {
             navigate(to: createInstallmentTermsController(sourceType: sourceType))
@@ -127,7 +127,7 @@ extension PaymentFlowCoordinator: SourceTypePaymentViewModelDelegate {
     }
 }
 
-extension PaymentFlowCoordinator: InstallmentTermsViewModelDelegate {
+extension PaymentFlowCoordinator: ChooseInstallmentTermsViewModelDelegate {
     func didSelectInstallmentPayment(_ installment: Source.Payment.Installment) {
         processPayment(.installment(installment))
     }

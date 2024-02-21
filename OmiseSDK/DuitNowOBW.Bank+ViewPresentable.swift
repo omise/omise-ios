@@ -1,6 +1,6 @@
 import Foundation
 
-extension Source.Payment.DuitNowOBW.Bank: TableListPresentable {
+extension Source.Payment.DuitNowOBW.Bank: ViewPresentable {
     var localizedTitle: String {
         switch self {
         case .affin:
@@ -85,5 +85,4 @@ extension Source.Payment.DuitNowOBW.Bank: TableListPresentable {
     var accessoryIcon: Assets.Icon {
         .redirect
     }
-
 }

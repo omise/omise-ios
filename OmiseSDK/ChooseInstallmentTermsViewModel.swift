@@ -1,11 +1,11 @@
 import UIKit
 
-protocol InstallmentTermsViewModelDelegate: AnyObject {
+protocol ChooseInstallmentTermsViewModelDelegate: AnyObject {
     func didSelectInstallmentPayment(_ installment: Source.Payment.Installment)
 }
 
-class InstallmentTermsViewModel {
-    weak var delegate: InstallmentTermsViewModelDelegate?
+class ChooseInstallmentTermsViewModel {
+    weak var delegate: ChooseInstallmentTermsViewModelDelegate?
     let sourceType: SourceType
 
     private var viewOnDataReloadHandler: () -> Void = { } {
@@ -20,14 +20,14 @@ class InstallmentTermsViewModel {
         }
     }
 
-    init(sourceType: SourceType, delegate: InstallmentTermsViewModelDelegate) {
+    init(sourceType: SourceType, delegate: ChooseInstallmentTermsViewModelDelegate) {
         self.sourceType = sourceType
         self.values = Source.Payment.Installment.availableTerms(for: sourceType)
         self.delegate = delegate
     }
 }
 
-extension InstallmentTermsViewModel: PaymentListViewModelProtocol {
+extension ChooseInstallmentTermsViewModel: ChoosePaymentViewModelProtocol {
     func viewOnDataReloadHandler(_ handler: @escaping () -> Void) {
         self.viewOnDataReloadHandler = handler
     }

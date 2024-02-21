@@ -4,7 +4,7 @@ extension PaymentMethod: CustomStringConvertible {
     var description: String { localizedTitle }
 }
 
-extension PaymentMethod: TableListPresentable {
+extension PaymentMethod: ViewPresentable {
     /// Localized title for given payment option
     public var localizedSubtitle: String? {
         if case .sourceType(let sourceType) = self {

@@ -4,7 +4,7 @@ extension SourceType: CustomStringConvertible {
     public var description: String { localizedTitle }
 }
 
-extension SourceType: TableListPresentable {
+extension SourceType: ViewPresentable {
     public var localizedTitle: String {
         localized("SourceType.\(self.rawValue).title", text: title)
     }
@@ -229,16 +229,4 @@ extension SourceType: TableListPresentable {
         }
     }
 
-}
-
-extension SourceType {
-    var requiresAdditionalDetails: Bool {
-        guard let paymentMethod = PaymentMethod.paymentMethods(for: self).first else { return false }
-        switch paymentMethod {
-        case .sourceType, .internetBanking, .mobileBanking:
-            return false
-        default:
-            return true
-        }
-    }
 }

@@ -1,8 +1,8 @@
 import UIKit
 
 // extension PaymentFlowCoordinator {
-//    func createDuitNowOBWController(title: String) -> PaymentListController {
-//        let listController = PaymentListController()
+//    func createDuitNowOBWController(title: String) -> ChoosePaymentController {
+//        let listController = ChoosePaymentController()
 //        if #available(iOSApplicationExtension 11.0, *) {
 //            listController.navigationItem.largeTitleDisplayMode = .never
 //        }

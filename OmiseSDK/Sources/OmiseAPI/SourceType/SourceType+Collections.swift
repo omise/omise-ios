@@ -2,6 +2,7 @@
 import Foundation
 
 extension SourceType {
+    // TODO: Revert before release
     public static let availableByDefaultInThailand: [SourceType] = SourceType.allCases
 //    [
 //        .internetBankingBAY,

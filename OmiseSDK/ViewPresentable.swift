@@ -1,12 +1,12 @@
 import Foundation
 
-protocol TableListPresentable {
+protocol ViewPresentable {
     var localizedTitle: String { get }
     var iconName: String { get }
     var accessoryIcon: Assets.Icon { get }
     var localizedSubtitle: String? { get }
 }
 
-extension TableListPresentable {
+extension ViewPresentable {
     var localizedSubtitle: String? { nil }
 }

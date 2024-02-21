@@ -1,6 +1,6 @@
 import UIKit
 
-//class ChoosePaymentMethodController: TableListController {
+//class ChoosePaymentController: TableListController {
 //    
 //    var closeDidTapClosure: (() -> Void)?
 //    
@@ -10,7 +10,7 @@ import UIKit
 //    }
 //}
 //
-//private extension ChoosePaymentMethodController {
+//private extension ChoosePaymentController {
 //    private func setupNavigationBar() {
 //        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 //        navigationItem.rightBarButtonItem = UIBarButtonItem(

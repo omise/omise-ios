@@ -1,6 +1,6 @@
 import UIKit
 
-protocol PaymentListViewModelProtocol {
+protocol ChoosePaymentViewModelProtocol {
     var numberOfViewContexts: Int { get }
     var viewNavigationTitle: String { get }
     var viewDisplayLargeTitle: Bool { get }
@@ -13,15 +13,15 @@ protocol PaymentListViewModelProtocol {
     func viewDidTapClose()
 }
 
-extension PaymentListViewModelProtocol {
+extension ChoosePaymentViewModelProtocol {
     func viewDidTapClose() {}
 }
 
-class PaymentListController: UITableViewController {
+class ChoosePaymentController: UITableViewController {
 
-    let viewModel: PaymentListViewModelProtocol
+    let viewModel: ChoosePaymentViewModelProtocol
 
-    init(viewModel: PaymentListViewModelProtocol) {
+    init(viewModel: ChoosePaymentViewModelProtocol) {
         self.viewModel = viewModel
         super.init(style: .plain)
     }
@@ -104,7 +104,7 @@ class PaymentListController: UITableViewController {
     }
 }
 
-extension PaymentListController {
+extension ChoosePaymentController {
     func startCellActivity(at indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         cell.startAccessoryActivityIndicator()

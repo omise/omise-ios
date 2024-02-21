@@ -59,7 +59,7 @@ class ChoosePaymentMethodViewModel {
     }
 }
 
-extension ChoosePaymentMethodViewModel: PaymentListViewModelProtocol {
+extension ChoosePaymentMethodViewModel: ChoosePaymentViewModelProtocol {
     func viewOnDataReloadHandler(_ handler: @escaping () -> Void) {
         self.viewOnDataReloadHandler = handler
     }
