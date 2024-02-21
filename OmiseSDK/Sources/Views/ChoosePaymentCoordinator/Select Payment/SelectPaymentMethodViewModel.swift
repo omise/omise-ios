@@ -1,15 +1,10 @@
 import Foundation
 import UIKit.UIImage
 
-protocol ChoosePaymentMethodViewModelDelegate: AnyObject {
-    func didSelectPaymentMethod(_ paymentMethod: PaymentMethod)
-    func didCancelPayment()
-}
-
-class ChoosePaymentMethodViewModel {
+class SelectPaymentMethodViewModel {
     let client: Client
 
-    weak var delegate: ChoosePaymentMethodViewModelDelegate?
+    weak var delegate: SelectPaymentMethodDelegate?
 
     private var viewOnDataReloadHandler: () -> Void = { } {
         didSet {
@@ -23,7 +18,7 @@ class ChoosePaymentMethodViewModel {
         }
     }
 
-    init(client: Client, delegate: ChoosePaymentMethodViewModelDelegate) {
+    init(client: Client, delegate: SelectPaymentMethodDelegate) {
         self.client = client
         self.delegate = delegate
     }
@@ -59,7 +54,7 @@ class ChoosePaymentMethodViewModel {
     }
 }
 
-extension ChoosePaymentMethodViewModel: ChoosePaymentPresentableProtocol {
+extension SelectPaymentMethodViewModel: SelectPaymentPresentableProtocol {
     func viewOnDataReloadHandler(_ handler: @escaping () -> Void) {
         self.viewOnDataReloadHandler = handler
     }

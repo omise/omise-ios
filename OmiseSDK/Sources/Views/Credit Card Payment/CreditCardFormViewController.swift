@@ -185,7 +185,7 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
     }
 
     @objc func onCountryInputTapped() {
-        let vc = CountryListViewController(viewModel: viewModel.countryListViewModel)
+        let vc = CountryListController(viewModel: viewModel.countryListViewModel)
         vc.title = countryInputView.title
         vc.viewModel?.onSelectCountry = { [weak self] country in
             guard let self = self else { return }

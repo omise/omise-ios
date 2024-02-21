@@ -1,14 +1,6 @@
-//
-//  CountryListViewController.swift
-//  OmiseSDK
-//
-//  Created by Andrei Solovev on 8/6/23.
-//  Copyright © 2023 Omise. All rights reserved.
-//
-
 import UIKit
 
-class CountryListViewController: UIViewController {
+class CountryListController: UIViewController {
     typealias ViewModel = CountryListViewModelProtocol
 
     private struct Style {
@@ -74,7 +66,7 @@ class CountryListViewController: UIViewController {
     }
 }
 
-extension CountryListViewController: UITableViewDelegate, UITableViewDataSource {
+extension CountryListController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -100,7 +92,7 @@ extension CountryListViewController: UITableViewDelegate, UITableViewDataSource 
 }
 
 // MARK: Setups
-private extension CountryListViewController {
+private extension CountryListController {
     func setupViews() {
         if #available(iOS 11, *) {
             navigationItem.largeTitleDisplayMode = .never
@@ -149,7 +141,7 @@ struct CountryListViewController_Previews: PreviewProvider {
     static var previews: some View {
         UIKitViewControllerPresentable(
             viewController:
-                CountryListViewController(
+                CountryListController(
                     viewModel: CountryListViewModelMockup()
                 )
         )

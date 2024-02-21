@@ -1,6 +1,6 @@
 import Foundation
 
-protocol ChoosePaymentPresentableProtocol {
+protocol SelectPaymentPresentableProtocol {
     var numberOfViewContexts: Int { get }
     var viewNavigationTitle: String { get }
     var viewDisplayLargeTitle: Bool { get }
@@ -14,7 +14,7 @@ protocol ChoosePaymentPresentableProtocol {
 }
 
 // Default implementation for most common cases
-extension ChoosePaymentPresentableProtocol {
+extension SelectPaymentPresentableProtocol {
     var viewShowsCloseButton: Bool { false }
     var viewDisplayLargeTitle: Bool { false }
     func viewDidTapClose() {}

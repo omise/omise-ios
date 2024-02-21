@@ -225,7 +225,7 @@ private extension AtomeFormViewController {
 
     @objc func onCountryInputTapped() {
         guard let viewModel = viewModel else { return }
-        let vc = CountryListViewController(viewModel: viewModel.countryListViewModel)
+        let vc = CountryListController(viewModel: viewModel.countryListViewModel)
         vc.title = input(for: .country)?.title ?? ""
         vc.viewModel?.onSelectCountry = { [weak self] country in
             guard let self = self else { return }

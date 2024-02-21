@@ -1,6 +1,6 @@
 import UIKit
 
-class PaymentFlowCoordinator: ViewAttachable {
+class ChoosePaymentCoordinator: ViewAttachable {
     let client: Client
     let amount: Int64
     let currency: String
@@ -20,7 +20,7 @@ class PaymentFlowCoordinator: ViewAttachable {
         self.currency = currency
     }
 
-    /// Creates ChoosePaymentController and attach current flow object inside created controller to be deallocated together
+    /// Creates SelectPaymentController and attach current flow object inside created controller to be deallocated together
     ///
     /// - Parameters:
     ///   - allowedPaymentMethods: List of Payment Methods to be presented in the list if `usePaymentMethodsFromCapability` is `false`
@@ -31,15 +31,15 @@ class PaymentFlowCoordinator: ViewAttachable {
         allowedCardPayment isCardEnabled: Bool = true,
         usePaymentMethodsFromCapability useCapability: Bool,
         delegate: ChoosePaymentMethodDelegate
-    ) -> ChoosePaymentController {
-        let viewModel = ChoosePaymentMethodViewModel(client: client, delegate: self)
+    ) -> SelectPaymentController {
+        let viewModel = SelectPaymentMethodViewModel(client: client, delegate: self)
         if useCapability {
             viewModel.setupCapability()
         } else {
             viewModel.setupAllowedPaymentMethods(paymentMethods, isCardEnabled: isCardEnabled)
         }
 
-        let listController = ChoosePaymentController(viewModel: viewModel)
+        let listController = SelectPaymentController(viewModel: viewModel)
         listController.attach(self)
 
         self.choosePaymentMethodDelegate = delegate
@@ -49,54 +49,54 @@ class PaymentFlowCoordinator: ViewAttachable {
     }
 
     /// Creates Mobile Banking screen and attach current flow object inside created controller to be deallocated together
-    func createMobileBankingController() -> ChoosePaymentController {
-        let viewModel = ChooseSourceTypeViewModel(
+    func createMobileBankingController() -> SelectPaymentController {
+        let viewModel = SelectSourceTypePaymentViewModel(
             title: PaymentMethod.mobileBanking.localizedTitle,
             sourceTypes: SourceType.mobileBanking,
             delegate: self
         )
 
-        let listController = ChoosePaymentController(viewModel: viewModel)
+        let listController = SelectPaymentController(viewModel: viewModel)
         listController.attach(self)
         return listController
     }
 
     /// Creates Mobile Banking screen and attach current flow object inside created controller to be deallocated together
-    func createInternetBankingController() -> ChoosePaymentController {
-        let viewModel = ChooseSourceTypeViewModel(
+    func createInternetBankingController() -> SelectPaymentController {
+        let viewModel = SelectSourceTypePaymentViewModel(
             title: PaymentMethod.internetBanking.localizedTitle,
             sourceTypes: SourceType.internetBanking,
             delegate: self
         )
 
-        let listController = ChoosePaymentController(viewModel: viewModel)
+        let listController = SelectPaymentController(viewModel: viewModel)
         listController.attach(self)
         return listController
     }
 
     /// Creates Installement screen and attach current flow object inside created controller to be deallocated together
-    func createInstallmentController() -> ChoosePaymentController {
-        let viewModel = ChooseSourceTypeViewModel(
+    func createInstallmentController() -> SelectPaymentController {
+        let viewModel = SelectSourceTypePaymentViewModel(
             title: PaymentMethod.installment.localizedTitle,
             sourceTypes: SourceType.installments,
             delegate: self
         )
 
-        let listController = ChoosePaymentController(viewModel: viewModel)
+        let listController = SelectPaymentController(viewModel: viewModel)
         listController.attach(self)
         return listController
     }
 
     /// Creates Installement screen and attach current flow object inside created controller to be deallocated together
-    func createInstallmentTermsController(sourceType: SourceType) -> ChoosePaymentController {
-        let viewModel = ChooseInstallmentTermsViewModel(sourceType: sourceType, delegate: self)
-        let listController = ChoosePaymentController(viewModel: viewModel)
+    func createInstallmentTermsController(sourceType: SourceType) -> SelectPaymentController {
+        let viewModel = SelectInstallmentTermsViewModel(sourceType: sourceType, delegate: self)
+        let listController = SelectPaymentController(viewModel: viewModel)
         listController.attach(self)
         return listController
     }
 }
 
-extension PaymentFlowCoordinator: ChoosePaymentMethodViewModelDelegate {
+extension ChoosePaymentCoordinator: SelectPaymentMethodDelegate {
     func didSelectPaymentMethod(_ paymentMethod: PaymentMethod) {
         if paymentMethod.requiresAdditionalDetails {
             switch paymentMethod {
@@ -117,7 +117,7 @@ extension PaymentFlowCoordinator: ChoosePaymentMethodViewModelDelegate {
     }
 }
 
-extension PaymentFlowCoordinator: ChooseSourceTypeViewModelDelegate {
+extension ChoosePaymentCoordinator: SelectSourceTypeDelegate {
     func didSelectSourceType(_ sourceType: SourceType) {
         if sourceType.isInstallment {
             navigate(to: createInstallmentTermsController(sourceType: sourceType))
@@ -127,13 +127,13 @@ extension PaymentFlowCoordinator: ChooseSourceTypeViewModelDelegate {
     }
 }
 
-extension PaymentFlowCoordinator: ChooseInstallmentTermsViewModelDelegate {
+extension ChoosePaymentCoordinator: SelectSourcePaymentDelegate {
     func didSelectInstallmentPayment(_ installment: Source.Payment.Installment) {
         processPayment(.installment(installment))
     }
 }
 
-extension PaymentFlowCoordinator {
+extension ChoosePaymentCoordinator {
     func navigate(to viewController: UIViewController) {
         rootViewController?.navigationController?.pushViewController(
             viewController,
@@ -165,7 +165,7 @@ extension PaymentFlowCoordinator {
 //    func navigate(to: Route)
 // }
 //
-// extension PaymentFlowCoordinator: NavigationFlow {
+// extension ChoosePaymentCoordinator: NavigationFlow {
 //    enum Route {
 //        case creditCard
 //        case installments

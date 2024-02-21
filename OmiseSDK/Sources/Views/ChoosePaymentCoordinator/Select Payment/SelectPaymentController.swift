@@ -1,10 +1,10 @@
 import UIKit
 
-class ChoosePaymentController: UITableViewController {
+class SelectPaymentController: UITableViewController {
 
-    let viewModel: ChoosePaymentPresentableProtocol
+    let viewModel: SelectPaymentPresentableProtocol
 
-    init(viewModel: ChoosePaymentPresentableProtocol) {
+    init(viewModel: SelectPaymentPresentableProtocol) {
         self.viewModel = viewModel
         super.init(style: .plain)
     }
@@ -70,7 +70,7 @@ class ChoosePaymentController: UITableViewController {
     }
 }
 
-extension ChoosePaymentController {
+extension SelectPaymentController {
     func startCellActivity(at indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         cell.startAccessoryActivityIndicator()
@@ -83,7 +83,7 @@ extension ChoosePaymentController {
     }
 }
 
-private extension ChoosePaymentController {
+private extension SelectPaymentController {
     func setupViewModel() {
         viewModel.viewOnDataReloadHandler { [weak tableView] in
             tableView?.reloadData()

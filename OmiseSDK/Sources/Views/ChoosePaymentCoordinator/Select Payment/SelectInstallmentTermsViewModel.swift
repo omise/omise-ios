@@ -1,11 +1,7 @@
 import UIKit
 
-protocol ChooseInstallmentTermsViewModelDelegate: AnyObject {
-    func didSelectInstallmentPayment(_ installment: Source.Payment.Installment)
-}
-
-class ChooseInstallmentTermsViewModel {
-    weak var delegate: ChooseInstallmentTermsViewModelDelegate?
+class SelectInstallmentTermsViewModel {
+    weak var delegate: SelectSourcePaymentDelegate?
     let sourceType: SourceType
 
     private var viewOnDataReloadHandler: () -> Void = { } {
@@ -20,14 +16,14 @@ class ChooseInstallmentTermsViewModel {
         }
     }
 
-    init(sourceType: SourceType, delegate: ChooseInstallmentTermsViewModelDelegate) {
+    init(sourceType: SourceType, delegate: SelectSourcePaymentDelegate) {
         self.sourceType = sourceType
         self.values = Source.Payment.Installment.availableTerms(for: sourceType)
         self.delegate = delegate
     }
 }
 
-extension ChooseInstallmentTermsViewModel: ChoosePaymentPresentableProtocol {
+extension SelectInstallmentTermsViewModel: SelectPaymentPresentableProtocol {
     func viewOnDataReloadHandler(_ handler: @escaping () -> Void) {
         self.viewOnDataReloadHandler = handler
     }
@@ -57,7 +53,7 @@ extension ChooseInstallmentTermsViewModel: ChoosePaymentPresentableProtocol {
             zeroInterestInstallments: nil,
             sourceType: sourceType
         )
-        delegate?.didSelectInstallmentPayment(payment)
+        delegate?.didSelectSourcePayment(.installment(payment))
     }
 
     func viewShouldAnimateSelectedCell(at index: Int) -> Bool {
