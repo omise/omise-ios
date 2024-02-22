@@ -145,7 +145,7 @@ you can easily integrate into your application.
 
 #### Card form
 
-The `CreditCardFormViewController` provides a pre-made card form and will automatically
+The `CreditCardPaymentController` provides a pre-made card form and will automatically
 [tokenize card information](https://docs.opn.ooo/security-best-practices) for you.
 You only need to implement two delegate methods and a way to display the form.
 
@@ -159,8 +159,8 @@ import OmiseSDK // at the top of the file
 class ViewController: UIViewController {
   private let publicKey = "pkey_test_123"
 
-  @IBAction func displayCreditCardForm() {
-    let creditCardView = CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
+  @IBAction func displayCreditCardPayment() {
+    let creditCardView = CreditCardPaymentController.makeCreditCardPaymentController(withPublicKey: publicKey)
     creditCardView.delegate = self
     creditCardView.handleErrors = true
 
@@ -172,15 +172,15 @@ class ViewController: UIViewController {
 Then implement the delegate to receive the `Token` object after user has entered the card data:
 
 ```swift
-extension ViewController: CreditCardFormViewControllerDelegate {
-  func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
-    dismissCreditCardForm()
+extension ViewController: CreditCardPaymentControllerDelegate {
+  func creditCardFormViewController(_ controller: CreditCardPaymentController, didSucceedWithToken token: Token) {
+    dismissCreditCardPayment()
 
     // Sends `Token` to your server to create a charge, or a customer object.
   }
 
-  func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error) {
-    dismissCreditCardForm()
+  func creditCardFormViewController(_ controller: CreditCardPaymentController, didFailWithError error: Error) {
+    dismissCreditCardPayment()
 
     // Only important if we set `handleErrors = false`.
     // You can send errors to a logging service, or display them to the user here.
@@ -192,8 +192,8 @@ Alternatively, you can also push the view controller onto a `UINavigationControl
 as follows:
 
 ```swift
-@IBAction func displayCreditCardForm() {
-  let creditCardView = CreditCardFormViewController.makeCreditCardFormViewController(publicKey)
+@IBAction func displayCreditCardPayment() {
+  let creditCardView = CreditCardPaymentController.makeCreditCardPaymentController(publicKey)
   creditCardView.delegate = self
   creditCardView.handleErrors = true
 
@@ -204,14 +204,14 @@ as follows:
 
 ##### Use card form in storyboard
 
-`CreditCardFormViewController` comes with built-in storyboard support. You can use `CreditCardFormViewController` in your storybard by using `Storyboard Reference`. Drag the `Storyboard Reference` object onto your canvas and set its bundle identifier to `co.omise.OmiseSDK` and Storyboard to `OmiseSDK`. You can either leave `Referenced ID` empty or use `CreditCardFormController` as a `Referenced ID`
-You can setup `CreditCardFormViewController` in `UIViewController.prepare(for:sender:)` method
+`CreditCardPaymentController` comes with built-in storyboard support. You can use `CreditCardPaymentController` in your storybard by using `Storyboard Reference`. Drag the `Storyboard Reference` object onto your canvas and set its bundle identifier to `co.omise.OmiseSDK` and Storyboard to `OmiseSDK`. You can either leave `Referenced ID` empty or use `CreditCardPaymentController` as a `Referenced ID`
+You can setup `CreditCardPaymentController` in `UIViewController.prepare(for:sender:)` method
 
 ```swift
 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
   if segue.identifier == "PresentCreditFormWithModal",
     let creditCardFormNavigationController = segue.destination as? UINavigationController,
-    let creditCardFormViewController = creditCardFormNavigationController.topViewController as? CreditCardFormViewController {
+    let creditCardFormViewController = creditCardFormNavigationController.topViewController as? CreditCardPaymentController {
       creditCardFormViewController.publicKey = publicKey
       creditCardFormViewController.handleErrors = true
       creditCardFormViewController.delegate = self
@@ -324,7 +324,7 @@ self.present(handlerController, animated: true, completion: nil)
 
 ##### Use `OmiseAuthorizingPaymentViewController` in storyboard
 
-`OmiseAuthorizingPaymentViewController` also comes with built-in storyboard support such as `CreditCardFormViewController`. You can use `OmiseAuthorizingPaymentViewController` in your storyboard by using `Storyboard Reference`. Drag `Storyboard Reference` object onto your canvas, set its bundle identifier to `co.omise.OmiseSDK` and storyboard to `OmiseSDK`, then use `DefaultAuthorizingPaymentViewController` as a `Referenced ID`.
+`OmiseAuthorizingPaymentViewController` also comes with built-in storyboard support such as `CreditCardPaymentController`. You can use `OmiseAuthorizingPaymentViewController` in your storyboard by using `Storyboard Reference`. Drag `Storyboard Reference` object onto your canvas, set its bundle identifier to `co.omise.OmiseSDK` and storyboard to `OmiseSDK`, then use `DefaultAuthorizingPaymentViewController` as a `Referenced ID`.
 You can setup `OmiseAuthorizingPaymentViewController` in `UIViewController.prepare(for:sender:)` method
 ```swift
 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

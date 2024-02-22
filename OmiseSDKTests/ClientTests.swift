@@ -48,7 +48,7 @@ class ClientTests: XCTestCase {
     /// Testing if `Client` generates URLRequest with correct HTTP body to perform API request
     func testCreateTokenURLRequest() throws {
         let expectation = self.expectation(description: "Create Token Mockup Callback")
-        let cardPayload: CreateTokenPayload.Card = try sampleFromJSONBy(.card)
+        let cardPayload = CreateTokenPayload(card: try sampleFromJSONBy(.card))
 
         let networkMockup = NetworkMockup { [cardPayload] urlRequest in
             defer { expectation.fulfill() }
@@ -57,7 +57,7 @@ class ClientTests: XCTestCase {
                 if let data = urlRequest.httpBody, let jsonString = String(data: data, encoding: .utf8) {
                     do {
                         let decodedCardPayload: CreateTokenPayload = try parse(jsonString: jsonString)
-                        XCTAssertEqual(cardPayload, decodedCardPayload.card)
+                        XCTAssertEqual(cardPayload, decodedCardPayload)
                     } catch {
                         XCTFail("Unable to decode payload from encoded JSON string")
                     }

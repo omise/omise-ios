@@ -74,19 +74,19 @@ internal class PaymentCreatorFlowSession {
     }
 }
 
-extension PaymentCreatorFlowSession: CreditCardFormViewControllerDelegate {
-    func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
-        delegate?.paymentCreatorFlowSession(self, didCreateToken: token)
-    }
-
-    func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error) {
-        delegate?.paymentCreatorFlowSession(self, didFailWithError: error)
-    }
-
-    func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController) {
-        // Intentionally empty (SonarCloud warning fix)
-    }
-}
+// extension PaymentCreatorFlowSession: CreditCardPaymentControllerDelegate {
+//    func creditCardFormViewController(_ controller: CreditCardPaymentController, didSucceedWithToken token: Token) {
+//        delegate?.paymentCreatorFlowSession(self, didCreateToken: token)
+//    }
+//
+//    func creditCardFormViewController(_ controller: CreditCardPaymentController, didFailWithError error: Error) {
+//        delegate?.paymentCreatorFlowSession(self, didFailWithError: error)
+//    }
+//
+//    func creditCardFormViewControllerDidCancel(_ controller: CreditCardPaymentController) {
+//        // Intentionally empty (SonarCloud warning fix)
+//    }
+// }
 
 protocol PaymentSourceChooser: AnyObject {
     var flowSession: PaymentCreatorFlowSession? { get set }

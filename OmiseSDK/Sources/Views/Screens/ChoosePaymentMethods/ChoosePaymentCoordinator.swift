@@ -98,8 +98,26 @@ class ChoosePaymentCoordinator: ViewAttachable {
         viewController.title = SourceType.atome.localizedTitle
         return viewController
     }
+
+    /// Creates Atome screen and attach current flow object inside created controller to be deallocated together
+    func createCardPaymentController() -> CreditCardPaymentController {
+        let viewModel = CreditCardPaymentViewModel(delegate: self)
+        let viewController = CreditCardPaymentController(nibName: nil, bundle: .omiseSDK)
+        viewController.viewModel = viewModel
+        viewController.title = PaymentMethod.creditCard.localizedTitle
+        return viewController
+    }
 }
 
+extension ChoosePaymentCoordinator: CreditCardPaymentDelegate {
+    func didSelectCardPayment(_ card: CreateTokenPayload.Card) {
+        processPayment(card)
+    }
+
+    func didCancelCardPayment() {
+        didCancelPayment()
+    }
+}
 extension ChoosePaymentCoordinator: SelectPaymentMethodDelegate {
     func didSelectPaymentMethod(_ paymentMethod: PaymentMethod) {
         if paymentMethod.requiresAdditionalDetails {
@@ -146,6 +164,20 @@ extension ChoosePaymentCoordinator {
         )
     }
 
+    func processPayment(_ card: CreateTokenPayload.Card) {
+        guard let delegate = choosePaymentMethodDelegate else { return }
+        let tokenPayload = CreateTokenPayload(card: card)
+
+        client.createToken(payload: tokenPayload) { [weak delegate] result in
+            switch result {
+            case .success(let token):
+                delegate?.choosePaymentMethodDidComplete(with: token)
+            case .failure(let error):
+                delegate?.choosePaymentMethodDidComplete(with: error)
+            }
+        }
+    }
+
     func processPayment(_ payment: Source.Payment) {
         guard let delegate = choosePaymentMethodDelegate else { return }
         let sourcePayload = CreateSourcePayload(
@@ -186,7 +218,7 @@ extension ChoosePaymentCoordinator {
 //    func navigate(to: Route) {
 //        //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        //        switch (segue.identifier, segue.destination) {
-//        //        case ("GoToCreditCardFormSegue"?, let controller as CreditCardFormViewController):
+//        //        case ("GoToCreditCardPaymentSegue"?, let controller as CreditCardPaymentController):
 //        //            controller.publicKey = viewModel.flowSession?.client?.publicKey
 //        //            controller.delegate = viewModel.flowSession
 //        //            controller.navigationItem.rightBarButtonItem = nil

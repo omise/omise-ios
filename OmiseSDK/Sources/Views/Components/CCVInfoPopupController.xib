@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CCVInfoPopupController" customModule="OmiseSDK" customModuleProvider="target">
+            <connections>
+                <outlet property="closeButton" destination="0Sq-r5-rek" id="EVs-5m-0RX"/>
+                <outlet property="cvvLocationDescriptionLabel" destination="V71-lN-rMQ" id="ZLl-OV-YjK"/>
+                <outlet property="cvvLocationImageView" destination="hrc-Ru-eNB" id="iOX-NY-mCb"/>
+                <outlet property="view" destination="hrc-Ru-eNB" id="Jbw-Jr-7Ik"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="kSf-7X-0YI">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" image="CVV" translatesAutoresizingMaskIntoConstraints="NO" id="hrc-Ru-eNB">
+                    <rect key="frame" x="149" y="40" width="95" height="60"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3-4 digit number on the back of your card" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V71-lN-rMQ">
+                    <rect key="frame" x="26" y="116" width="341" height="708"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Sq-r5-rek" customClass="ExpandedHitAreaButton" customModule="OmiseSDK">
+                    <rect key="frame" x="361" y="16" width="16" height="22"/>
+                    <state key="normal" image="Close Mini"/>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="4xc-GQ-6HW"/>
+            <constraints>
+                <constraint firstItem="0Sq-r5-rek" firstAttribute="top" secondItem="kSf-7X-0YI" secondAttribute="top" constant="16" id="8Gt-WC-OWK"/>
+                <constraint firstAttribute="trailingMargin" secondItem="V71-lN-rMQ" secondAttribute="trailing" constant="10" id="EHj-H5-LBI"/>
+                <constraint firstAttribute="trailing" secondItem="0Sq-r5-rek" secondAttribute="trailing" constant="16" id="HRh-5F-LEa"/>
+                <constraint firstAttribute="bottom" secondItem="V71-lN-rMQ" secondAttribute="bottom" constant="28" id="PEc-3U-kp0"/>
+                <constraint firstItem="hrc-Ru-eNB" firstAttribute="centerX" secondItem="kSf-7X-0YI" secondAttribute="centerX" id="PXY-aw-p9o"/>
+                <constraint firstItem="V71-lN-rMQ" firstAttribute="top" secondItem="hrc-Ru-eNB" secondAttribute="bottom" constant="16" id="Snw-fR-aiD"/>
+                <constraint firstItem="V71-lN-rMQ" firstAttribute="leading" secondItem="kSf-7X-0YI" secondAttribute="leadingMargin" constant="10" id="qld-lk-uHe"/>
+                <constraint firstItem="hrc-Ru-eNB" firstAttribute="top" secondItem="kSf-7X-0YI" secondAttribute="top" constant="40" id="sxO-QR-VqM"/>
+            </constraints>
+            <point key="canvasLocation" x="-421" y="-627"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="CVV" width="95" height="60"/>
+        <image name="Close Mini" width="16" height="16"/>
+    </resources>
+</document>

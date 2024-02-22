@@ -57,7 +57,7 @@ public class PaymentCreatorController: UINavigationController {
     /// Defaults to `true`.
     public var handleErrors = true
 
-    /// Delegate to receive CreditCardFormController result.
+    /// Delegate to receive CreditCardPaymentController result.
 //    public weak var paymentDelegate: PaymentCreatorControllerDelegate?
 
     var client: Client? {
@@ -90,7 +90,7 @@ public class PaymentCreatorController: UINavigationController {
         }
     }
 
-//    /// Factory method for creating CreditCardFormController with given public key.
+//    /// Factory method for creating CreditCardPaymentController with given public key.
 //    /// - parameter publicKey: Omise public key.
 //    public static func makePaymentCreatorControllerWith(
 //        publicKey: String,

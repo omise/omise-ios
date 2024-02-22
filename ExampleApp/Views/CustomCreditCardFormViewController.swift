@@ -2,21 +2,21 @@ import UIKit
 import OmiseSDK
 
 // swiftlint:disable:next type_name
-protocol CustomCreditCardFormViewControllerDelegate: AnyObject {
+protocol CustomCreditCardPaymentControllerDelegate: AnyObject {
     /// Delegate method for receiving token data when card tokenization succeeds.
     /// - parameter token: `OmiseToken` instance created from supplied credit card data.
     /// - seealso: [Tokens API](https://www.omise.co/tokens-api)
-    func creditCardFormViewController(_ controller: CustomCreditCardFormViewController, didSucceedWithToken token: Token)
+    func creditCardFormViewController(_ controller: CustomCreditCardPaymentController, didSucceedWithToken token: Token)
     
     /// Delegate method for receiving error information when card tokenization failed.
     /// This allows you to have fine-grained control over error handling when setting
     /// `handleErrors` to `false`.
     /// - parameter error: The error that occurred during tokenization.
     /// - note: This delegate method will *never* be called if `handleErrors` property is set to `true`.
-    func creditCardFormViewController(_ controller: CustomCreditCardFormViewController, didFailWithError error: Error)
+    func creditCardFormViewController(_ controller: CustomCreditCardPaymentController, didFailWithError error: Error)
 }
 
-class CustomCreditCardFormViewController: UIViewController {
+class CustomCreditCardPaymentController: UIViewController {
     @IBOutlet private var cardNumberField: CardNumberTextField!
     @IBOutlet private var cardNameField: CardNameTextField!
     @IBOutlet private var cardExpiryField: CardExpiryDateTextField!
@@ -33,7 +33,7 @@ class CustomCreditCardFormViewController: UIViewController {
 
     @IBOutlet private var doneButton: UIBarButtonItem!
     
-    weak var delegate: CustomCreditCardFormViewControllerDelegate?
+    weak var delegate: CustomCreditCardPaymentControllerDelegate?
     
     // need to refactor loadView, removing super results in crash
     // swiftlint:disable:next prohibited_super_call function_body_length
@@ -159,7 +159,7 @@ class CustomCreditCardFormViewController: UIViewController {
                 return
         }
 
-        let payload = CreateTokenPayload.Card(
+        let card = CreateTokenPayload.Card(
             name: name,
             number: number,
             expirationMonth: expiryMonth,
@@ -174,6 +174,7 @@ class CustomCreditCardFormViewController: UIViewController {
             postalCode: postalCodeField.text ?? ""
         )
 
+        let payload = CreateTokenPayload(card: card)
         doneButton.isEnabled = false
         OmiseSDK.shared.client.createToken(payload: payload) { [weak self] (result) in
             guard let self = self else { return }

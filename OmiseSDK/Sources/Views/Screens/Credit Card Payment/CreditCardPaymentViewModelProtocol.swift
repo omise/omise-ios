@@ -1,5 +1,5 @@
 //
-//  CreditCardFormViewModelProtocol.swift
+//  CreditCardPaymentViewModelProtocol.swift
 //  OmiseSDK
 //
 //  Created by Andrei Solovev on 19/6/23.
@@ -8,15 +8,15 @@
 
 import UIKit
 
-protocol CreditCardFormViewModelProtocol {
-    typealias ViewContext = CreditCardFormViewContext
+protocol CreditCardPaymentViewModelProtocol {
+    typealias ViewContext = CreditCardPaymentViewContext
     typealias AddressField = ViewContext.Field
     var addressFields: [AddressField] { get }
     var fieldForShippingAddressHeader: AddressField? { get }
     var countryListViewModel: CountryListViewModelProtocol { get }
     var isAddressFieldsVisible: Bool { get }
     
-    func onSubmitButtonPressed(_ viewContext: ViewContext, publicKey: String?, onComplete: @escaping (Result<Token, Error>) -> Void)
+    func onSubmitButtonPressed(_ viewContext: ViewContext)
     func error(for: AddressField, validate: String?) -> String?
     func title(for: AddressField) -> String?
     func placeholder(for: AddressField) -> String?
@@ -25,7 +25,7 @@ protocol CreditCardFormViewModelProtocol {
     func contentType(for: AddressField) -> UITextContentType
 }
 
-extension CreditCardFormViewModelProtocol {
+extension CreditCardPaymentViewModelProtocol {
     func isSubmitButtonEnabled(_ viewContext: ViewContext) -> Bool {
         addressFields.allSatisfy {
             error(for: $0, validate: viewContext[$0]) == nil

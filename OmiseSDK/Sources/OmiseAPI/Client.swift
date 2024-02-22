@@ -65,9 +65,8 @@ public class Client {
     /// - Parameters:
     ///    - payload: Information required to perform Create a Token API request
     ///    - completion: Returns `Token`object  on success and `Error` on request failed
-    public func createToken(payload: CreateTokenPayload.Card, _ completion: @escaping RequestResultClosure<Token, Error>) {
-        let apiPayload = CreateTokenPayload(card: payload)
-        performRequest(api: OmiseAPI.createToken(payload: apiPayload), completion: completion)
+    public func createToken(payload: CreateTokenPayload, _ completion: @escaping RequestResultClosure<Token, Error>) {
+        performRequest(api: OmiseAPI.createToken(payload: payload), completion: completion)
     }
 
     /// Request a Token from API with given Token ID

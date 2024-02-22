@@ -39,19 +39,7 @@ class AtomePaymentController: UIViewController {
             }
         }
     }
-
-    var preferredPrimaryColor: UIColor? {
-        didSet {
-            applyPrimaryColor()
-        }
-    }
-
-    var preferredSecondaryColor: UIColor? {
-        didSet {
-            applySecondaryColor()
-        }
-    }
-
+    
     private var style = Style()
 
     private lazy var logoImageView: UIImageView = {

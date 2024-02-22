@@ -74,7 +74,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="showModalCreditCardForm:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MdL-YF-aYB"/>
+                                                            <action selector="showModalCreditCardPayment:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MdL-YF-aYB"/>
                                                             <segue destination="bGC-5U-JNH" kind="presentation" identifier="PresentCreditFormWithModal" id="lyU-Bh-1tt"/>
                                                         </connections>
                                                     </button>
@@ -90,7 +90,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="showCreditCardForm:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cTe-00-xs1"/>
+                                                            <action selector="showCreditCardPayment:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cTe-00-xs1"/>
                                                             <segue destination="Rxw-dP-FaG" kind="show" identifier="ShowCreditForm" id="E9r-cu-PMc"/>
                                                         </connections>
                                                     </button>
@@ -106,7 +106,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="showCustomCreditCardForm:" destination="BYZ-38-t0r" eventType="touchUpInside" id="T2b-WD-5xw"/>
+                                                            <action selector="showCustomCreditCardPayment:" destination="BYZ-38-t0r" eventType="touchUpInside" id="T2b-WD-5xw"/>
                                                             <segue destination="KcE-bu-oNL" kind="show" identifier="ShowCreditFormWithCustomFields" id="K3o-b8-fef"/>
                                                         </connections>
                                                     </button>
@@ -518,7 +518,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="TrueMoney Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SaY-Ag-qCZ">
-                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -535,7 +535,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="PromptPay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5vT-ay-4xe">
-                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -552,7 +552,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Pay with Citi Rewards Points" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="204-5J-Qdj">
-                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1194,7 +1194,7 @@ You can present via either Storyboard or Code and you can see the code in the Ex
         <!--Credit Card Form-->
         <scene sceneID="6hE-K0-9iR">
             <objects>
-                <viewController id="KcE-bu-oNL" customClass="CustomCreditCardFormViewController" customModule="ExampleApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KcE-bu-oNL" customClass="CustomCreditCardPaymentController" customModule="ExampleApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wBo-yP-lZM"/>
                         <viewControllerLayoutGuide type="bottom" id="SfK-3s-OUA"/>
@@ -1375,20 +1375,6 @@ You can present via either Storyboard or Code and you can see the code in the Ex
             <point key="canvasLocation" x="1052" y="637"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="5Ul-WN-gFb">
-            <size key="intrinsicContentSize" width="156" height="22"/>
-        </designable>
-        <designable name="Iw8-Ab-h7Y">
-            <size key="intrinsicContentSize" width="28" height="22"/>
-        </designable>
-        <designable name="LzH-z8-dKL">
-            <size key="intrinsicContentSize" width="123" height="22"/>
-        </designable>
-        <designable name="gES-RJ-kH4">
-            <size key="intrinsicContentSize" width="150" height="22"/>
-        </designable>
-    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="E9r-cu-PMc"/>
     </inferredMetricsTieBreakers>

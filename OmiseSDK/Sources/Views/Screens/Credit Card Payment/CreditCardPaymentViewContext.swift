@@ -1,5 +1,5 @@
 //
-//  CreditCardFormViewContext.swift
+//  CreditCardPaymentViewContext.swift
 //  OmiseSDK
 //
 //  Created by Andrei Solovev on 19/6/23.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct CreditCardFormViewContext {
+struct CreditCardPaymentViewContext {
     enum Field: String, CaseIterable {
         case address
         case city
@@ -39,7 +39,7 @@ struct CreditCardFormViewContext {
     }
 }
 
-extension CreditCardFormViewContext.Field {
+extension CreditCardPaymentViewContext.Field {
     var title: String {
         "CreditCard.field.\(self.rawValue)".localized()
     }

@@ -3,29 +3,13 @@
 import UIKit
 import os.log
 
-public protocol CreditCardFormViewControllerDelegate: AnyObject {
-    /// Delegate method for receiving token data when card tokenization succeeds.
-    /// - parameter token: `OmiseToken` instance created from supplied credit card data.
-    /// - seealso: [Tokens API](https://www.omise.co/tokens-api)
-    func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token)
-
-    /// Delegate method for receiving error information when card tokenization failed.
-    /// This allows you to have fine-grained control over error handling when setting
-    /// `handleErrors` to `false`.
-    /// - parameter error: The error that occurred during tokenization.
-    /// - note: This delegate method will *never* be called if `handleErrors` property is set to `true`.
-    func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error)
-
-    func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController)
-}
-
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.
-public class CreditCardFormViewController: UIViewController, PaymentFormUIController {
+public class CreditCardPaymentController: UIViewController {
     // swiftlint:disable:previous type_body_length
 
-    typealias ViewModel = CreditCardFormViewModel
-    typealias ViewContext = CreditCardFormViewContext
+    typealias ViewModel = CreditCardPaymentViewModel
+    typealias ViewContext = CreditCardPaymentViewContext
     typealias Field = ViewContext.Field
 
     struct Style {
@@ -33,35 +17,21 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
     }
     var style = Style()
 
-    lazy var viewModel: ViewModel = {
-        ViewModel()
-    }()
-    /// Omise public key for calling tokenization API.
-    public var publicKey: String?
-
-    /// Delegate to receive CreditCardFormController result.
-    public weak var delegate: CreditCardFormViewControllerDelegate?
-    /// Delegate to receive CreditCardFormController result.
+    var viewModel: ViewModel? {
+        didSet {
+            if let newViewModel = viewModel {
+                bind(to: newViewModel)
+            }
+        }
+    }
 
     /// A boolean flag to enables/disables automatic error handling. Defaults to `true`.
     public var handleErrors = true
 
-    @IBInspectable public var preferredPrimaryColor: UIColor? {
-        didSet {
-            applyPrimaryColor()
-        }
-    }
-
-    @IBInspectable public var preferredSecondaryColor: UIColor? {
-        didSet {
-            applySecondaryColor()
-        }
-    }
-
-    @IBInspectable public var errorMessageTextColor: UIColor! = CreditCardFormViewController.defaultErrorMessageTextColor {
+    @IBInspectable public var errorMessageTextColor: UIColor! = CreditCardPaymentController.defaultErrorMessageTextColor {
         didSet {
             if errorMessageTextColor == nil {
-                errorMessageTextColor = CreditCardFormViewController.defaultErrorMessageTextColor
+                errorMessageTextColor = CreditCardPaymentController.defaultErrorMessageTextColor
             }
 
             if isViewLoaded {
@@ -82,11 +52,16 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
     var currentEditingTextField: OmiseTextField?
     var hasErrorMessage = false
 
-    @IBOutlet var formFields: [OmiseTextField]!
-    @IBOutlet var formLabels: [UILabel]!
-    @IBOutlet var errorLabels: [UILabel]!
+    var formFields: [OmiseTextField] = []
+    var formLabels: [UILabel] = []
 
-    @IBOutlet var contentView: UIScrollView!
+    var errorLabels: [UILabel] = []
+    var contentView: UIScrollView!
+
+    @IBOutlet var cardNumberLabel: UILabel!
+    @IBOutlet var cardNameLabel: UILabel!
+    @IBOutlet var expiryDateLabel: UILabel!
+    @IBOutlet var secureCodeLabel: UILabel!
 
     @IBOutlet var cardNumberTextField: CardNumberTextField!
     @IBOutlet var cardNameTextField: CardNameTextField!
@@ -128,14 +103,12 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
     @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
     public static let defaultErrorMessageTextColor = UIColor.error
 
-    /// Factory method for creating CreditCardFormController with given public key.
+    /// Factory method for creating CreditCardPaymentController with given public key.
     /// - parameter publicKey: Omise public key.
-    public static func makeCreditCardFormViewController(withPublicKey publicKey: String) -> CreditCardFormViewController {
+    public static func makeCreditCardPaymentController(withPublicKey publicKey: String) -> CreditCardPaymentController {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
         // swiftlint:disable:next force_cast
-        let creditCardForm = storyboard.instantiateInitialViewController() as! CreditCardFormViewController
-        creditCardForm.publicKey = publicKey
-
+        let creditCardForm = storyboard.instantiateInitialViewController() as! CreditCardPaymentController
         return creditCardForm
     }
 
@@ -157,6 +130,27 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
     public override func loadView() {
         super.loadView()
 
+        errorLabels = [
+            cardHolderNameErrorLabel,
+            creditCardNumberErrorLabel,
+            cardSecurityCodeErrorLabel,
+            cardExpiryDateErrorLabel
+        ]
+
+        formLabels = [
+            cardNameLabel,
+            cardNumberLabel,
+            secureCodeLabel,
+            expiryDateLabel
+        ]
+
+        formFields = [
+            cardNumberTextField,
+            cardNameTextField,
+            secureCodeTextField,
+            expiryDateTextField
+        ]
+
         view.backgroundColor = UIColor.background
         submitButton.defaultBackgroundColor = view.tintColor
         submitButton.disabledBackgroundColor = .line
@@ -164,31 +158,45 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
         cvvInfoButton.tintColor = .badgeBackground
         formFieldsAccessoryView.barTintColor = .formAccessoryBarTintColor
 
-        applyNavigationBarStyle(.shadow(color: preferredSecondaryColor ?? defaultPaymentChooserUISecondaryColor))
+        applyNavigationBarStyle(.shadow(color: .omiseSecondary))
     }
 
-    func setupBillingStackView() {
+    private func setupBillingStackView() {
         billingStackView.distribution = .equalSpacing
         billingStackView.alignment = .fill
         billingStackView.spacing = style.billingStackSpacing
         setupCountryField()
     }
 
-    func setupCountryField() {
+    func bind(to viewModel: ViewModel) {
+        guard isViewLoaded else { return }
+        countryInputView.text = viewModel.countryListViewModel.selectedCountry?.name
+        
+        viewModel.addressFields.forEach {
+            let input = TextFieldView(id: $0.rawValue)
+            addressStackView.addArrangedSubview(input)
+            setupInput(input, field: $0, isLast: $0 == viewModel.addressFields.last, viewModel: viewModel)
+        }
+        addressStackView.isHiddenInStackView = !viewModel.isAddressFieldsVisible
+        updateSupplementaryUI()
+    }
+
+    private  func setupCountryField() {
         let input = countryInputView
         input.title = "CreditCard.field.country".localized()
         billingStackView.addArrangedSubview(input)
 
         input.textFieldUserInteractionEnabled = false
-        input.text = viewModel.countryListViewModel.selectedCountry?.name
         input.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onCountryInputTapped)))
     }
 
     @objc func onCountryInputTapped() {
+        guard let viewModel = viewModel else { return }
+
         let vc = CountryListController(viewModel: viewModel.countryListViewModel)
         vc.title = countryInputView.title
         vc.viewModel?.onSelectCountry = { [weak self] country in
-            guard let self = self else { return }
+            guard let self = self, let viewModel = self.viewModel else { return }
             self.countryInputView.text = country.name
 
             if let nc = self.navigationController {
@@ -197,7 +205,7 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
                 self.dismiss(animated: true)
             }
 
-            self.addressStackView.isHiddenInStackView = !self.viewModel.isAddressFieldsVisible
+            self.addressStackView.isHiddenInStackView = !viewModel.isAddressFieldsVisible
             self.updateSubmitButtonState()
 
         }
@@ -210,13 +218,7 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
     }
 
     func setupAddressFields() {
-        viewModel.addressFields.forEach {
-            let input = TextFieldView(id: $0.rawValue)
-            addressStackView.addArrangedSubview(input)
-            setupInput(input, field: $0, isLast: $0 == viewModel.addressFields.last, viewModel: viewModel)
-        }
         billingStackView.addArrangedSubview(addressStackView)
-        addressStackView.isHiddenInStackView = !viewModel.isAddressFieldsVisible
     }
 
     func setupInput(_ input: TextFieldView, field: Field, isLast: Bool, viewModel: ViewModel) {
@@ -276,28 +278,12 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
             // We'll leave the adjusting scroll view insets job for iOS 11 and later to the layoutMargins + safeAreaInsets here
             automaticallyAdjustsScrollViewInsets = true
         }
-        
-        // Storyboard shows wrong warning on textContentType == .creditCardNumber
-        // Set textContentType manually
-        cardNumberTextField.textContentType = .creditCardNumber
 
+        cardNumberTextField.textContentType = .creditCardNumber
         cardNumberTextField.textContentType = .creditCardNumber
         cardNumberTextField.rightView = cardBrandIconImageView
         secureCodeTextField.rightView = cvvInfoButton
         secureCodeTextField.rightViewMode = .always
-
-//        NotificationCenter.default.addObserver(
-//            self,
-//            selector: #selector(keyboardWillChangeFrame(_:)),
-//            name: UIResponder.keyboardWillChangeFrameNotification,
-//            object: nil
-//        )
-//        NotificationCenter.default.addObserver(
-//            self,
-//            selector: #selector(keyboardWillHide(_:)),
-//            name: UIResponder.keyboardWillHideNotification,
-//            object: nil
-//        )
     }
 
     public override func viewWillLayoutSubviews() {
@@ -314,17 +300,6 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
             }
         }
     }
-
-//    public override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//
-//        NotificationCenter.default.addObserver(
-//            self,
-//            selector: #selector(self.keyboardWillAppear(_:)),
-//            name: UIResponder.keyboardWillShowNotification,
-//            object: nil
-//        )
-//    }
 
     public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -358,27 +333,32 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
 
     @discardableResult
     func performCancelingForm() -> Bool {
-        os_log("Credit Card Form dismissing requested, Asking the delegate what should the form controler do",
-               log: uiLogObject,
-               type: .default)
-
-        if let delegate = self.delegate {
-            delegate.creditCardFormViewControllerDidCancel(self)
-            os_log("Canceling form delegate notified", log: uiLogObject, type: .default)
-            return true
-        } else if let delegateMethod = delegate?.creditCardFormViewControllerDidCancel {
-            delegateMethod(self)
-            os_log("Canceling form delegate notified", log: uiLogObject, type: .default)
-            return true
-        } else {
-            os_log("Credit Card Form dismissing requested but there is not delegate to ask. Ignore the request",
-                   log: uiLogObject,
-                   type: .default)
-            return false
-        }
+        guard let viewModel = viewModel else { return false }
+        viewModel.viewDidTapClose()
+        return true
+//        os_log("Credit Card Form dismissing requested, Asking the delegate what should the form controler do",
+//               log: uiLogObject,
+//               type: .default)
+//
+//        if let delegate = self.delegate {
+//            delegate.creditCardFormViewControllerDidCancel(self)
+//            os_log("Canceling form delegate notified", log: uiLogObject, type: .default)
+//            return true
+//        } else if let delegateMethod = delegate?.creditCardFormViewControllerDidCancel {
+//            delegateMethod(self)
+//            os_log("Canceling form delegate notified", log: uiLogObject, type: .default)
+//            return true
+//        } else {
+//            os_log("Credit Card Form dismissing requested but there is not delegate to ask. Ignore the request",
+//                   log: uiLogObject,
+//                   type: .default)
+//            return false
+//        }
     }
 
     func makeViewContext() -> ViewContext {
+        guard let viewModel = viewModel else { return ViewContext () }
+
         var context = ViewContext()
         let fields = viewModel.addressFields
         for field in fields {
@@ -399,23 +379,26 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
 
     @IBAction private func requestToken() {
         doneEditing(nil)
+        guard let viewModel = viewModel else { return }
 
         UIAccessibility.post(notification: UIAccessibility.Notification.announcement, argument: "Submitting payment, please wait")
         startActivityIndicator()
-        viewModel.onSubmitButtonPressed(makeViewContext(), publicKey: publicKey) { [weak self] result in
-            guard let self = self else { return }
-            self.stopActivityIndicator()
-            switch result {
-            case .success(let token):
-                os_log("Credit Card Form's Request succeed %{private}@, trying to notify the delegate",
-                       log: uiLogObject,
-                       type: .default,
-                       token.id)
-                self.delegate?.creditCardFormViewController(self, didSucceedWithToken: token)
-            case .failure(let error):
-                self.handleError(error)
-            }
-        }
+        viewModel.onSubmitButtonPressed(makeViewContext())
+
+//        { [weak self] result in
+//            guard let self = self else { return }
+//            self.stopActivityIndicator()
+//            switch result {
+//            case .success(let token):
+//                os_log("Credit Card Form's Request succeed %{private}@, trying to notify the delegate",
+//                       log: uiLogObject,
+//                       type: .default,
+//                       token.id)
+//                self.delegate?.creditCardFormViewController(self, didSucceedWithToken: token)
+//            case .failure(let error):
+//                self.handleError(error)
+//            }
+//        }
     }
 
     func keyboardWillAppear(_ notification: Notification) {
@@ -450,7 +433,7 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
     }
 
     func handleError(_ error: Error) {
-        delegate?.creditCardFormViewController(self, didFailWithError: error)
+//        delegate?.creditCardFormViewController(self, didFailWithError: error)
         displayError(error)
         hasErrorMessage = true
     }
@@ -596,7 +579,7 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
 
         textFields.forEach {
             if let input = $0 as? TextFieldView {
-                input.titleColor = preferredPrimaryColor
+                input.titleColor = UIColor.omisePrimary
                 input.borderColor = UIColor.omiseSecondary
                 input.placeholderTextColor = UIColor.omiseSecondary
             }
@@ -681,7 +664,7 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
 }
 
 // MARK: - Fields Accessory methods
-extension CreditCardFormViewController {
+extension CreditCardPaymentController {
 
     @IBAction private func validateTextFieldDataOf(_ sender: OmiseTextField) {
         let duration = TimeInterval(UINavigationController.hideShowBarDuration)
@@ -721,7 +704,7 @@ extension CreditCardFormViewController {
 }
 
 // MARK: - Accessibility
-extension CreditCardFormViewController {
+extension CreditCardPaymentController {
 
     @IBAction private func updateAccessibilityValue(_ sender: OmiseTextField) {
         updateSupplementaryUI()
@@ -849,14 +832,16 @@ extension CreditCardFormViewController {
     }
 }
 
-extension CreditCardFormViewController: MoreInformationOnCVVViewControllerDelegate {
+extension CreditCardPaymentController: MoreInformationOnCVVViewControllerDelegate {
     func moreInformationOnCVVViewControllerDidAskToClose(_ controller: CCVInfoPopupController) {
         dismiss(animated: true, completion: nil)
     }
 }
 
-extension CreditCardFormViewController {
+extension CreditCardPaymentController {
     func updateSubmitButtonState() {
+        guard let viewModel = viewModel else { return }
+
         let valid = isInputDataValid
         submitButton?.isEnabled = valid && viewModel.isSubmitButtonEnabled(makeViewContext())
 
@@ -868,6 +853,7 @@ extension CreditCardFormViewController {
     }
 
     func updateError(for field: Field) {
+        guard let viewModel = viewModel else { return }
         guard let input = input(for: field) else { return }
         input.error = viewModel.error(for: field, validate: input.text)
     }
@@ -885,6 +871,7 @@ extension CreditCardFormViewController {
 
     func input(after input: TextFieldView) -> TextFieldView? {
         guard
+            let viewModel = viewModel,
             let inputField = Field(rawValue: input.identifier),
             let index = viewModel.addressFields.firstIndex(of: inputField),
             let nextField = viewModel.addressFields.at(index + 1),
@@ -900,6 +887,8 @@ extension CreditCardFormViewController {
     }
 
     func hideErrorIfNil(field: Field) {
+        guard let viewModel = viewModel else { return }
+        
         if let input = input(for: field) {
             let error = viewModel.error(for: field, validate: input.text)
             if error == nil {
@@ -969,6 +958,7 @@ extension CreditCardFormViewController {
     }
 
     func goToFirstInvalidField() {
+        guard let viewModel = viewModel else { return }
         for field in viewModel.addressFields {
             if let input = input(for: field), input.error != nil {
                 input.becomeFirstResponder()
@@ -979,9 +969,44 @@ extension CreditCardFormViewController {
     }
 
     func showAllErrors() {
+        guard let viewModel = viewModel else { return }
         for field in viewModel.addressFields {
             updateError(for: field)
         }
     }
 
+}
+
+extension CreditCardPaymentController {
+    func updateInputAccessoryViewWithFirstResponder(_ firstResponder: OmiseTextField) {
+        guard formFields.contains(firstResponder) else { return }
+
+        currentEditingTextField = firstResponder
+        gotoPreviousFieldBarButtonItem.isEnabled = firstResponder !== formFields.first
+        gotoNextFieldBarButtonItem.isEnabled = firstResponder !== formFields.last
+    }
+
+    func gotoPreviousField() {
+        guard let currentTextField = currentEditingTextField, let index = formFields.firstIndex(of: currentTextField) else {
+            return
+        }
+
+        let prevIndex = index - 1
+        guard prevIndex >= 0 else { return }
+        formFields[prevIndex].becomeFirstResponder()
+    }
+
+    func gotoNextField() {
+        guard let currentTextField = currentEditingTextField, let index = formFields.firstIndex(of: currentTextField) else {
+            return
+        }
+
+        let nextIndex = index + 1
+        guard nextIndex < formFields.count else { return }
+        formFields[nextIndex].becomeFirstResponder()
+    }
+
+    func doneEditing() {
+        view.endEditing(true)
+    }
 }

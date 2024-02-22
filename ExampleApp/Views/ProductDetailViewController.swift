@@ -41,12 +41,12 @@ class ProductDetailViewController: BaseViewController {
 //        
 //        if segue.identifier == "PresentCreditFormWithModal",
 //            let creditCardFormNavigationController = segue.destination as? UINavigationController,
-//            let creditCardFormController = creditCardFormNavigationController.topViewController as? CreditCardFormViewController {
+//            let creditCardFormController = creditCardFormNavigationController.topViewController as? CreditCardPaymentController {
 //            creditCardFormController.publicKey = publicKey
 //            creditCardFormController.handleErrors = true
 //            creditCardFormController.delegate = self
 //        } else if segue.identifier == "ShowCreditForm",
-//            let creditCardFormController = segue.destination as? CreditCardFormViewController {
+//            let creditCardFormController = segue.destination as? CreditCardPaymentController {
 //            creditCardFormController.publicKey = publicKey
 //            creditCardFormController.handleErrors = true
 //            creditCardFormController.delegate = self
@@ -62,27 +62,27 @@ class ProductDetailViewController: BaseViewController {
 //            }
 //            paymentCreatorController.paymentDelegate = self
 //        } else if segue.identifier == "ShowCreditFormWithCustomFields",
-//            let vc = segue.destination as? CustomCreditCardFormViewController {
+//            let vc = segue.destination as? CustomCreditCardPaymentController {
 //            vc.delegate = self
 //        }
 //    }
     
-    @IBAction private func showModalCreditCardForm(_ sender: Any) {
+    @IBAction private func showModalCreditCardPayment(_ sender: Any) {
         guard currentCodePathMode == .code else {
             return
         }
-//        let creditCardFormController = CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
+//        let creditCardFormController = CreditCardPaymentController.makeCreditCardPaymentController(withPublicKey: publicKey)
 //        creditCardFormController.handleErrors = true
 //        creditCardFormController.delegate = self
 //        let navigationController = UINavigationController(rootViewController: creditCardFormController)
 //        present(navigationController, animated: true, completion: nil)
     }
     
-    @IBAction private func showCreditCardForm(_ sender: UIButton) {
+    @IBAction private func showCreditCardPayment(_ sender: UIButton) {
         guard currentCodePathMode == .code else {
             return
         }
-//        let creditCardFormController = CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
+//        let creditCardFormController = CreditCardPaymentController.makeCreditCardPaymentController(withPublicKey: publicKey)
 //        creditCardFormController.handleErrors = true
 //        creditCardFormController.delegate = self
 //        show(creditCardFormController, sender: self)
@@ -112,13 +112,13 @@ class ProductDetailViewController: BaseViewController {
         }
     }
     
-    @IBAction private func showCustomCreditCardForm(_ sender: Any) {
+    @IBAction private func showCustomCreditCardPayment(_ sender: Any) {
         guard currentCodePathMode == .code else {
             return
         }
-        let customCreditCardFormController = CustomCreditCardFormViewController(nibName: nil, bundle: nil)
-        customCreditCardFormController.delegate = self
-        show(customCreditCardFormController, sender: sender)
+        let customCreditCardPaymentController = CustomCreditCardPaymentController(nibName: nil, bundle: nil)
+        customCreditCardPaymentController.delegate = self
+        show(customCreditCardPaymentController, sender: sender)
     }
     
     @IBAction private func handlingAuthorizingPayment(_ sender: UIBarButtonItem) {
@@ -143,40 +143,6 @@ class ProductDetailViewController: BaseViewController {
     }
 }
 
-// MARK: - Credit Card Form View Controller Delegate
-
-extension ProductDetailViewController: CreditCardFormViewControllerDelegate {
-    func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController) {
-        dismissForm()
-    }
-    
-    func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
-        dismissForm {
-            let alertController = UIAlertController(
-                title: "Token Created",
-                message: "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge.",
-                preferredStyle: .alert
-            )
-            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-        }
-    }
-    
-    func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error) {
-        dismissForm {
-            let alertController = UIAlertController(
-                title: "Error",
-                message: error.localizedDescription,
-                preferredStyle: .alert
-            )
-            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-        }
-    }
-}
-
 // MARK: - Authorizing Payment View Controller Delegate
 
 extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate {
@@ -192,8 +158,8 @@ extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate 
 
 // MARK: - Custom Credit Card Form View Controller Delegate
 
-extension ProductDetailViewController: CustomCreditCardFormViewControllerDelegate {
-    func creditCardFormViewController(_ controller: CustomCreditCardFormViewController, didSucceedWithToken token: Token) {
+extension ProductDetailViewController: CustomCreditCardPaymentControllerDelegate {
+    func creditCardFormViewController(_ controller: CustomCreditCardPaymentController, didSucceedWithToken token: Token) {
         dismissForm {
             let alertController = UIAlertController(
                 title: "Token Created",
@@ -206,7 +172,7 @@ extension ProductDetailViewController: CustomCreditCardFormViewControllerDelegat
         }
     }
     
-    func creditCardFormViewController(_ controller: CustomCreditCardFormViewController, didFailWithError error: Error) {
+    func creditCardFormViewController(_ controller: CustomCreditCardPaymentController, didFailWithError error: Error) {
         dismissForm {
             let alertController = UIAlertController(
                 title: "Error",

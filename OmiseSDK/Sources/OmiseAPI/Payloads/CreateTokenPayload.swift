@@ -2,9 +2,13 @@ import Foundation
 
 /// Card Information to create a token container
 /// Used as payload in createToken API
-public struct CreateTokenPayload: Codable {
-    let card: Card
+public struct CreateTokenPayload: Codable, Equatable {
+    public let card: Card
 
+    public init(card: Card) {
+        self.card = card
+    }
+    
     /// Card Information to create a token
     /// A token represents a credit or debit card
     /// https://docs.opn.ooo/tokens-api
