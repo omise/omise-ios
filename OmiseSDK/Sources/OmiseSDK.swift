@@ -48,6 +48,10 @@ public class OmiseSDK {
             apiURL: configuration?.apiURL,
             vaultURL: configuration?.vaultURL
         )
+
+        let color = UIColor(red: 0.26, green: 0.27, blue: 0.28, alpha: 0.5)
+        print(color.hexString)
+        client.capability { _ in }
     }
 
     /// Creates a Payment controller with given payment methods details

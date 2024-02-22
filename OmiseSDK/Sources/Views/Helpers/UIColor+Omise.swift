@@ -5,14 +5,20 @@ extension UIColor {
     enum Omise: Int {
         case primary = 0x3C414D
         case secondary = 0xE4E7ED
+        case darkBackground = 0x1C1C1E
+        case lightBackground = 0xFFFFFF
+    }
+
+    static var omiseBackground: UIColor {
+        UIColor(.lightBackground, dark: .darkBackground)
     }
 
     static var omisePrimary: UIColor {
-        UIColor(Omise.primary, dark: Omise.secondary)
+        UIColor(.primary, dark: .secondary)
     }
 
     static var omiseSecondary: UIColor {
-        UIColor(Omise.secondary, dark: Omise.primary)
+        UIColor(.secondary, dark: .primary)
     }
 
     convenience init(_ light: Omise, dark: Omise) {

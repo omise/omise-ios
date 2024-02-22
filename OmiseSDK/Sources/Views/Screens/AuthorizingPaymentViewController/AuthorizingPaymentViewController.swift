@@ -94,23 +94,17 @@ public class AuthorizingPaymentViewController: UIViewController {
         
         return viewController
     }
-    
-    // need to refactor loadView, removing super results in crash
-    // swiftlint:disable:next prohibited_super_call
-    public override func loadView() {
-        super.loadView()
         
+    public override func viewDidLoad() {
+        super.viewDidLoad()
         webView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(webView)
-        
+
         webView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
         webView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         webView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-    }
-    
-    public override func viewDidLoad() {
-        super.viewDidLoad()
+
         webView.navigationDelegate = self
         webView.uiDelegate = self
     }

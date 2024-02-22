@@ -43,7 +43,7 @@ public class CreditCardPaymentController: UIViewController {
     }
 
     // swiftlint:disable:next weak_delegate
-    lazy var overlayTransitionDelegate = OverlayPanelTransitioningDelegate()
+//    lazy var overlayTransitionDelegate = OverlayPanelTransitioningDelegate()
 
     var isInputDataValid: Bool {
         return formFields.allSatisfy { $0.isValid }
@@ -56,7 +56,7 @@ public class CreditCardPaymentController: UIViewController {
     var formLabels: [UILabel] = []
 
     var errorLabels: [UILabel] = []
-    var contentView: UIScrollView!
+    @IBOutlet var contentView: UIScrollView!
 
     @IBOutlet var cardNumberLabel: UILabel!
     @IBOutlet var cardNameLabel: UILabel!
@@ -125,11 +125,7 @@ public class CreditCardPaymentController: UIViewController {
         os_log("The custom credit card information was set - %{private}@", log: uiLogObject, type: .debug, String((number ?? "").suffix(4)))
     }
 
-    // need to refactor loadView, removing super results in crash
-    // swiftlint:disable:next prohibited_super_call
-    public override func loadView() {
-        super.loadView()
-
+    func setupArrays() {
         errorLabels = [
             cardHolderNameErrorLabel,
             creditCardNumberErrorLabel,
@@ -150,8 +146,13 @@ public class CreditCardPaymentController: UIViewController {
             secureCodeTextField,
             expiryDateTextField
         ]
+    }
 
-        view.backgroundColor = UIColor.background
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        setupArrays()
+
+        view.backgroundColor = UIColor.omiseBackground
         submitButton.defaultBackgroundColor = view.tintColor
         submitButton.disabledBackgroundColor = .line
 
@@ -159,6 +160,72 @@ public class CreditCardPaymentController: UIViewController {
         formFieldsAccessoryView.barTintColor = .formAccessoryBarTintColor
 
         applyNavigationBarStyle(.shadow(color: .omiseSecondary))
+
+        setShowsErrorBanner(false)
+        setupBillingStackView()
+        setupAddressFields()
+
+        applyPrimaryColor()
+        applySecondaryColor()
+
+        formFields.forEach {
+            $0.inputAccessoryView = formFieldsAccessoryView
+        }
+
+        errorLabels.forEach {
+            $0.textColor = errorMessageTextColor
+        }
+
+        formFields.forEach(self.updateAccessibilityValue)
+
+        updateSupplementaryUI()
+
+        configureAccessibility()
+        formFields.forEach {
+            $0.adjustsFontForContentSizeCategory = true
+        }
+        formLabels.forEach {
+            $0.adjustsFontForContentSizeCategory = true
+        }
+        submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
+
+        if  #unavailable(iOS 11) {
+            // We'll leave the adjusting scroll view insets job for iOS 11 and later to the layoutMargins + safeAreaInsets here
+            automaticallyAdjustsScrollViewInsets = true
+        }
+
+        cardNumberTextField.textContentType = .creditCardNumber
+        cardNumberTextField.textContentType = .creditCardNumber
+        cardNumberTextField.rightView = cardBrandIconImageView
+        secureCodeTextField.rightView = cvvInfoButton
+        secureCodeTextField.rightViewMode = .always
+    }
+
+    public override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
+        if #unavailable(iOS 11) {
+            // There's a bug in iOS 10 and earlier which the text field's intrinsicContentSize is returned the value
+            // that doesn't take the result of textRect(forBounds:) method into an account for the initial value
+            // So we need to invalidate the intrinsic content size here to ask those text fields to calculate their
+            // intrinsic content size again
+
+            formFields.forEach {
+                $0.invalidateIntrinsicContentSize()
+            }
+        }
+    }
+
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        NotificationCenter().removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if previousTraitCollection?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
+            view.setNeedsUpdateConstraints()
+        }
     }
 
     private func setupBillingStackView() {
@@ -244,87 +311,40 @@ public class CreditCardPaymentController: UIViewController {
         setupOnTextFieldShouldReturn(field: field, isLast: isLast)
     }
 
-    public override func viewDidLoad() {
-        super.viewDidLoad()
-        setShowsErrorBanner(false)
-        setupBillingStackView()
-        setupAddressFields()
+    @IBAction private func presentCVVInfo(_ sender: UIButton) {
+        guard let targetView = view.window ?? view else { return }
 
-        applyPrimaryColor()
-        applySecondaryColor()
+        let ccvInfoController = CCVInfoController(nibName: nil, bundle: .omiseSDK)
 
-        formFields.forEach {
-            $0.inputAccessoryView = formFieldsAccessoryView
+        ccvInfoController.view.tintColor = view.tintColor
+        ccvInfoController.preferredCardBrand = cardNumberTextField.cardBrand
+        ccvInfoController.onCloseTapped = { [weak self, weak ccvInfoController] in
+            guard let self = self, let ccvInfoController = ccvInfoController else { return }
+            self.dismissCVVInfo(ccvInfoController)
         }
 
-        errorLabels.forEach {
-            $0.textColor = errorMessageTextColor
-        }
-
-        formFields.forEach(self.updateAccessibilityValue)
-
-        updateSupplementaryUI()
-
-        configureAccessibility()
-        formFields.forEach {
-            $0.adjustsFontForContentSizeCategory = true
-        }
-        formLabels.forEach {
-            $0.adjustsFontForContentSizeCategory = true
-        }
-        submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
-
-        if  #unavailable(iOS 11) {
-            // We'll leave the adjusting scroll view insets job for iOS 11 and later to the layoutMargins + safeAreaInsets here
-            automaticallyAdjustsScrollViewInsets = true
-        }
-
-        cardNumberTextField.textContentType = .creditCardNumber
-        cardNumberTextField.textContentType = .creditCardNumber
-        cardNumberTextField.rightView = cardBrandIconImageView
-        secureCodeTextField.rightView = cvvInfoButton
-        secureCodeTextField.rightViewMode = .always
+        UIView.transition(
+            with: targetView,
+            duration: 0.25,
+            options: [.transitionCrossDissolve],
+            animations: {
+                targetView.addSubviewAndFit(ccvInfoController.view)
+            }, completion: { _ in
+                self.addChild(ccvInfoController)
+            })
     }
 
-    public override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    private func dismissCVVInfo(_ ccvInfoController: CCVInfoController) {
+        guard let targetView = view.window ?? view else { return }
 
-        if #unavailable(iOS 11) {
-            // There's a bug in iOS 10 and earlier which the text field's intrinsicContentSize is returned the value
-            // that doesn't take the result of textRect(forBounds:) method into an account for the initial value
-            // So we need to invalidate the intrinsic content size here to ask those text fields to calculate their
-            // intrinsic content size again
-
-            formFields.forEach {
-                $0.invalidateIntrinsicContentSize()
-            }
-        }
-    }
-
-    public override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-
-        NotificationCenter().removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-    }
-
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        if previousTraitCollection?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
-            view.setNeedsUpdateConstraints()
-        }
-    }
-
-    @IBAction private func displayMoreCVVInfo(_ sender: UIButton) {
-        guard let viewController = storyboard?.instantiateViewController(withIdentifier: "CCVInfoPopupController"),
-              let moreInformationOnCVVViewController = viewController as? CCVInfoPopupController else {
-            return
-        }
-
-        moreInformationOnCVVViewController.preferredCardBrand = cardNumberTextField.cardBrand
-        moreInformationOnCVVViewController.delegate = self
-        moreInformationOnCVVViewController.modalPresentationStyle = .custom
-        moreInformationOnCVVViewController.transitioningDelegate = overlayTransitionDelegate
-        moreInformationOnCVVViewController.view.tintColor = view.tintColor
-        present(moreInformationOnCVVViewController, animated: true, completion: nil)
+        UIView.transition(
+            with: targetView,
+            duration: 0.25,
+            options: [.transitionCrossDissolve],
+            animations: {
+                ccvInfoController.view.removeFromSuperview()
+                ccvInfoController.removeFromParent()
+            }, completion: nil)
     }
 
     @IBAction private func cancelForm() {
@@ -829,12 +849,6 @@ extension CreditCardPaymentController {
 
     public override func accessibilityPerformEscape() -> Bool {
         return performCancelingForm()
-    }
-}
-
-extension CreditCardPaymentController: MoreInformationOnCVVViewControllerDelegate {
-    func moreInformationOnCVVViewControllerDidAskToClose(_ controller: CCVInfoPopupController) {
-        dismiss(animated: true, completion: nil)
     }
 }
 

@@ -100,7 +100,7 @@ class ChoosePaymentCoordinator: ViewAttachable {
     }
 
     /// Creates Atome screen and attach current flow object inside created controller to be deallocated together
-    func createCardPaymentController() -> CreditCardPaymentController {
+    func createCreditCardPaymentController() -> CreditCardPaymentController {
         let viewModel = CreditCardPaymentViewModel(delegate: self)
         let viewController = CreditCardPaymentController(nibName: nil, bundle: .omiseSDK)
         viewController.viewModel = viewModel
@@ -119,12 +119,14 @@ extension ChoosePaymentCoordinator: CreditCardPaymentDelegate {
     }
 }
 extension ChoosePaymentCoordinator: SelectPaymentMethodDelegate {
+
     func didSelectPaymentMethod(_ paymentMethod: PaymentMethod) {
         if paymentMethod.requiresAdditionalDetails {
             switch paymentMethod {
             case .mobileBanking: navigate(to: createMobileBankingController())
             case .internetBanking: navigate(to: createInternetBankingController())
             case .installment: navigate(to: createInstallmentController())
+            case .creditCard: navigate(to: createCreditCardPaymentController())
             case .sourceType(.atome): navigate(to: createAtomeController())
             default: break
             }

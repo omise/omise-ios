@@ -28,20 +28,14 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
     @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!
     @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
     
-    // need to refactor loadView, removing super results in crash
-    // swiftlint:disable:next prohibited_super_call
-    override func loadView() {
-        super.loadView()
-        
-        view.backgroundColor = .background
-        formFieldsAccessoryView.barTintColor = .formAccessoryBarTintColor
-        
-        submitButton.defaultBackgroundColor = .omise
-        submitButton.disabledBackgroundColor = .line
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        view.backgroundColor = .background
+        formFieldsAccessoryView.barTintColor = .formAccessoryBarTintColor
+
+        submitButton.defaultBackgroundColor = .omise
+        submitButton.disabledBackgroundColor = .line
 
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
