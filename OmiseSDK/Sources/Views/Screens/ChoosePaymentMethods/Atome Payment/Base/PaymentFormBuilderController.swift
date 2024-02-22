@@ -14,7 +14,7 @@ class PaymentFormBuilderController: UIViewController {
         var nextButtonHeight = CGFloat(47)
     }
 
-    var onDidTapSubmitButtonHandler: () -> Void = { }
+    var didTapSubmitButtonHandler: () -> Void = { }
 
     @ProxyProperty(\PaymentFormBuilderController.detailsLabel.text)
     var details: String?
@@ -96,6 +96,10 @@ class PaymentFormBuilderController: UIViewController {
         super.viewDidLoad()
         setupViews()
     }
+
+    func updateSubmitButtonState() {
+        self.submitButton.isEnabled = false
+    }
 }
 
 // MARK: - To override by child or add delegate or ViewModel?
@@ -128,10 +132,6 @@ extension PaymentFormBuilderController {
         stackView.addArrangedSubview(submitButton)
     }
 
-    func updateSubmitButtonState() {
-        self.submitButton.isEnabled = false
-    }
-
     func setupSubmitButton(title: String, color: UIColor) {
         submitButton.setTitle(title, for: UIControl.State.normal)
         submitButton.setTitleColor(color, for: .normal)
@@ -143,8 +143,6 @@ extension PaymentFormBuilderController {
             inputsStackView.removeArrangedSubview(view)
         }
     }
-
-
 }
 
 // MARK: Actions
@@ -168,7 +166,6 @@ extension PaymentFormBuilderController {
     }
 }
 
-// MARK: AtomePaymentControllerInterface
 extension PaymentFormBuilderController {
     @objc func onSubmitButtonTapped() {
         guard isSubmitButtonEnabled else {
@@ -177,8 +174,6 @@ extension PaymentFormBuilderController {
 
         hideKeyboard()
         startActivityIndicator()
-        onDidTapSubmitButtonHandler()
-
-    // TODO: Add error and stop activity processing in PaymentFormBuilderController
+        didTapSubmitButtonHandler()
     }
 }

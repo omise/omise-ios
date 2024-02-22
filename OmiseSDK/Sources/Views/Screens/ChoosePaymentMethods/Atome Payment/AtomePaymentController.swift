@@ -6,16 +6,10 @@
 //  Copyright © 2023 Omise. All rights reserved.
 //
 
-// swiftlint:disable file_length
-
 import Foundation
 import UIKit
 
-protocol AtomePaymentControllerInterface {
-    func onSubmitButtonTapped()
-}
-
-class AtomePaymentController: UIViewController {
+class AtomePaymentController: PaymentFormBuilderController {
     struct Style {
         var backgroundColorForDisabledNextButton = UIColor(0xE4E7ED)
         var backgroundColorForEnabledNextButton = UIColor(0x1957F0)
@@ -39,25 +33,8 @@ class AtomePaymentController: UIViewController {
             }
         }
     }
-    
-    private var style = Style()
 
-    private lazy var logoImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-
-    private lazy var detailsLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.textColor = style.textColor
-        label.font = .preferredFont(forTextStyle: .body)
-        return label
-    }()
-
-    private lazy var shippingAddressLabel: UILabel = {
+    lazy var shippingAddressLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .left
@@ -65,56 +42,6 @@ class AtomePaymentController: UIViewController {
         label.font = .preferredFont(forTextStyle: .callout)
         label.text = "Atome.shippingAddress".localized()
         return label
-    }()
-
-    private lazy var submitButton: UIButton = {
-        let button = MainActionButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: style.nextButtonHeight).isActive = true
-        button.titleLabel?.adjustsFontForContentSizeCategory = true
-
-        button.defaultBackgroundColor = .omise
-        button.disabledBackgroundColor = .line
-
-        button.cornerRadius(4)
-        return button
-    }()
-
-    private lazy var activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .white)
-        indicator.color = UIColor(0x3D404C)
-        indicator.hidesWhenStopped = true
-        return indicator
-    }()
-
-    private lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.adjustContentInsetOnKeyboardAppear()
-        return scrollView
-    }()
-
-    private lazy var scrollContentView: UIView = {
-        let view = UIView()
-        return view
-    }()
-
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
-        stackView.alignment = .fill
-        stackView.spacing = style.stackSpacing
-        return stackView
-    }()
-
-    private lazy var inputsStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
-        stackView.alignment = .fill
-        stackView.spacing = style.stackSpacing
-        return stackView
     }()
 
     init(viewModel: ViewModel? = nil) {
@@ -128,64 +55,46 @@ class AtomePaymentController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
 
         if let viewModel = viewModel {
             bind(to: viewModel)
         }
+
+        didTapSubmitButtonHandler = onSubmitButtonHandler
+    }
+
+    override func updateSubmitButtonState() {
+        let isEnabled = viewModel?.isSubmitButtonEnabled(makeViewContext()) ?? false
+        self.submitButton.isEnabled = isEnabled
+        isSubmitButtonEnabled = isEnabled
     }
 }
 
-// MARK: Setups
 private extension AtomePaymentController {
-    func setupViews() {
-        view.backgroundColor = .background
-        applyPrimaryColor()
-        applySecondaryColor()
-        
-        if #available(iOS 11, *) {
-            navigationItem.largeTitleDisplayMode = .never
+
+    func onSubmitButtonHandler() {
+        let currentContext = makeViewContext()
+        guard let viewModel = self.viewModel, viewModel.isSubmitButtonEnabled(currentContext) else {
+            return
         }
-        view.addSubviewAndFit(scrollView)
-        scrollView.addSubviewAndFit(scrollContentView)
-        scrollContentView.addSubviewAndFit(stackView, horizontal: style.contentSpacing)
-        NSLayoutConstraint.activate([
-            scrollContentView.widthAnchor.constraint(equalTo: view.widthAnchor)
-        ])
 
-        stackView.addArrangedSubview(SpacerView(vertical: 12.0))
-        stackView.addArrangedSubview(logoImageView)
-        stackView.addArrangedSubview(detailsLabel)
-        stackView.addArrangedSubview(SpacerView(vertical: 12.0))
-        stackView.addArrangedSubview(inputsStackView)
-        stackView.addArrangedSubview(submitButton)
-
-        navigationItem.titleView = activityIndicator
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+        hideKeyboard()
+        startActivityIndicator()
+        viewModel.onSubmitButtonPressed(currentContext) { [weak self] in
+            self?.stopActivityIndicator()
+        }
     }
 
     func bind(to viewModel: ViewModel) {
         guard isViewLoaded else { return }
         setupInputs(viewModel: viewModel)
-        setupSubmitButton(viewModel: viewModel)
-        detailsLabel.text = viewModel.headerText
-        logoImageView.image = UIImage(omise: viewModel.logoName)
+        setupSubmitButton(title: viewModel.submitButtonTitle, color: style.textColorForNextButton)
+        details = viewModel.headerText
+        logoImage = UIImage(omise: viewModel.logoName)
 
         updateSubmitButtonState()
         applyPrimaryColor()
         applySecondaryColor()
-    }
-
-    func setupSubmitButton(viewModel: ViewModel) {
-        submitButton.setTitleColor(style.textColorForNextButton, for: .normal)
-        submitButton.setTitle(viewModel.submitButtonTitle, for: UIControl.State.normal)
-        submitButton.addTarget(self, action: #selector(onSubmitButtonTapped), for: .touchUpInside)
-    }
-
-    func removeAllInputs() {
-        for view in inputsStackView.arrangedSubviews {
-            inputsStackView.removeArrangedSubview(view)
-        }
     }
 
     func setupInputs(viewModel: ViewModel) {
@@ -286,24 +195,6 @@ private extension AtomePaymentController {
             }
         }
     }
-
-    @objc func hideKeyboard() {
-        self.view.endEditing(true)
-    }
-
-    func startActivityIndicator() {
-        activityIndicator.startAnimating()
-        scrollContentView.isUserInteractionEnabled = false
-        submitButton.isEnabled = false
-        view.tintAdjustmentMode = .dimmed
-    }
-
-    func stopActivityIndicator() {
-        activityIndicator.stopAnimating()
-        scrollContentView.isUserInteractionEnabled = true
-        updateSubmitButtonState()
-        view.tintAdjustmentMode = .automatic
-    }
 }
 
 // MARK: Non-private for Unit-Testing
@@ -328,11 +219,6 @@ extension AtomePaymentController {
             }
         }
         return context
-    }
-
-    func updateSubmitButtonState() {
-        let isEnabled = viewModel?.isSubmitButtonEnabled(makeViewContext()) ?? false
-        self.submitButton.isEnabled = isEnabled
     }
 
     func updateError(for field: Field) {
@@ -446,38 +332,3 @@ private extension AtomePaymentController {
 
     }
 }
-
-// MARK: AtomePaymentControllerInterface
-extension AtomePaymentController: AtomePaymentControllerInterface {
-    @objc func onSubmitButtonTapped() {
-        let currentContext = makeViewContext()
-        guard let viewModel = self.viewModel, viewModel.isSubmitButtonEnabled(currentContext) else {
-            return
-        }
-
-        hideKeyboard()
-        startActivityIndicator()
-        viewModel.onSubmitButtonPressed(currentContext) { [weak self] in
-            self?.stopActivityIndicator()
-        }
-    }
-}
-
-/*
-#if LIVE_PREVIEW_ENABLED
-import SwiftUI
-import OmiseSwiftUIKit
-
-// MARK: Preview
-struct AtomePaymentController_Previews: PreviewProvider {
-    static var previews: some View {
-        UIKitViewControllerPresentable(
-            viewController:
-                AtomePaymentController(
-                    viewModel: AtomePaymentViewModelMockup().applyMockupTitles().applyMockupFields()
-                )
-        )
-    }
-}
-#endif
-*/
