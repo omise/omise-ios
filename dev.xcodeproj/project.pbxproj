@@ -15,6 +15,7 @@
 		22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */; };
 		731A75D325E3604A002353C0 /* FPXBankChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A75D225E3604A002353C0 /* FPXBankChooserViewController.swift */; };
 		73F9BA4B25E6053700F55CA8 /* FPXFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */; };
+		7501265D2B87CB6500ED5E14 /* PaymentFormBuilderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7501265C2B87CB6500ED5E14 /* PaymentFormBuilderController.swift */; };
 		7502CA532A3011A900766E7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7502CA562A3011A900766E7D /* LaunchScreen.storyboard */; };
 		7502CA5F2A31A7D600766E7D /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7502CA5E2A31A7D600766E7D /* CountryListViewController.swift */; };
 		7502CA602A31A7D600766E7D /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7502CA5E2A31A7D600766E7D /* CountryListViewController.swift */; };
@@ -275,6 +276,7 @@
 		731A75D225E3604A002353C0 /* FPXBankChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPXBankChooserViewController.swift; sourceTree = "<group>"; };
 		73F9BA4625E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptableDynamicTableViewController.swift; sourceTree = "<group>"; };
 		73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPXFormViewController.swift; sourceTree = "<group>"; };
+		7501265C2B87CB6500ED5E14 /* PaymentFormBuilderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFormBuilderController.swift; sourceTree = "<group>"; };
 		7502CA552A3011A900766E7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7502CA582A3011B000766E7D /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		7502CA5A2A3011B100766E7D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -536,6 +538,14 @@
 				8AB3B85F216DCF5C006497B5 /* Models */,
 			);
 			path = ExampleApp;
+			sourceTree = "<group>";
+		};
+		7501265B2B87CB3F00ED5E14 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				7501265C2B87CB6500ED5E14 /* PaymentFormBuilderController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		750708E12B790B2400A48DD0 /* Helpers */ = {
@@ -827,6 +837,7 @@
 		75D13DF82B866CA90073A831 /* Atome Payment */ = {
 			isa = PBXGroup;
 			children = (
+				7501265B2B87CB3F00ED5E14 /* Base */,
 				75F2A0A42A13B1470038FA54 /* AtomePaymentController.swift */,
 				75F2A0B52A1A5F020038FA54 /* AtomePaymentViewContext.swift */,
 				75F2A0B32A1A5EAD0038FA54 /* AtomePaymentViewModelProtocol.swift */,
@@ -1407,6 +1418,7 @@
 				754B78182B8741CD00973B71 /* TapGestureHandler.swift in Sources */,
 				75D13DCB2B8531D20073A831 /* Assets.swift in Sources */,
 				986406321CFEA7E4004BCF51 /* CardNumberTextField.swift in Sources */,
+				7501265D2B87CB6500ED5E14 /* PaymentFormBuilderController.swift in Sources */,
 				75D13E042B866E040073A831 /* MobileBankingSourceChooserViewController.swift in Sources */,
 				75D13DCD2B8536B10073A831 /* SelectInstallmentTermsViewModel.swift in Sources */,
 				75D13DB02B83B58B0073A831 /* Source.Payment.Address.swift in Sources */,
