@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ALK-ZP-CXg">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -431,10 +430,10 @@
             </objects>
             <point key="canvasLocation" x="864.79999999999995" y="375.36945812807886"/>
         </scene>
-        <!--More Information OnCVV View Controller-->
+        <!--Info Popup Controller-->
         <scene sceneID="rj6-oc-qQw">
             <objects>
-                <viewController storyboardIdentifier="MoreInformationOnCVVViewController" id="upG-eE-jlo" customClass="MoreInformationOnCVVViewController" customModule="OmiseSDK" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CCVInfoPopupController" id="upG-eE-jlo" customClass="CCVInfoPopupController" customModule="OmiseSDK" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MXu-6C-agz"/>
                         <viewControllerLayoutGuide type="bottom" id="y6l-9h-nJf"/>
@@ -492,7 +491,7 @@
                         <viewControllerLayoutGuide type="bottom" id="rnF-ST-mfm"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ctw-dC-Dob">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="718"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1734,7 +1733,7 @@
             <objects>
                 <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="4Dm-CU-oaf" customClass="FPXBankChooserViewController" customModule="OmiseSDK" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="keo-NH-r9K">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="802"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="oFs-6F-gEO">
@@ -1963,7 +1962,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="rLy-XG-aKO">
-                            <rect key="frame" x="0.0" y="1090" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="1230" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -2528,47 +2527,6 @@
             <point key="canvasLocation" x="4977" y="1190"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="1JF-Jq-C50">
-            <size key="intrinsicContentSize" width="5" height="22"/>
-        </designable>
-        <designable name="1dv-2d-6Zi">
-            <size key="intrinsicContentSize" width="38" height="33"/>
-        </designable>
-        <designable name="AJd-kX-GAq">
-            <size key="intrinsicContentSize" width="5" height="22"/>
-        </designable>
-        <designable name="CD2-gj-4i6">
-            <size key="intrinsicContentSize" width="5" height="22"/>
-        </designable>
-        <designable name="OTm-3S-Jk9">
-            <size key="intrinsicContentSize" width="5" height="22"/>
-        </designable>
-        <designable name="PBr-uW-pM8">
-            <size key="intrinsicContentSize" width="5" height="22"/>
-        </designable>
-        <designable name="Par-EA-T3D">
-            <size key="intrinsicContentSize" width="55.333333333333336" height="22"/>
-        </designable>
-        <designable name="Y1l-QK-aPc">
-            <size key="intrinsicContentSize" width="5" height="22"/>
-        </designable>
-        <designable name="ZPa-NN-y1M">
-            <size key="intrinsicContentSize" width="30" height="33"/>
-        </designable>
-        <designable name="mE3-3u-rvg">
-            <size key="intrinsicContentSize" width="38" height="33"/>
-        </designable>
-        <designable name="tI6-gP-6iQ">
-            <size key="intrinsicContentSize" width="38" height="33"/>
-        </designable>
-        <designable name="wXP-YQ-VDL">
-            <size key="intrinsicContentSize" width="5" height="22"/>
-        </designable>
-        <designable name="y98-SD-aEV">
-            <size key="intrinsicContentSize" width="5" height="22"/>
-        </designable>
-    </designables>
     <resources>
         <image name="Alert" width="30" height="30"/>
         <image name="BAY" width="32" height="32"/>

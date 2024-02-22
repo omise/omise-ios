@@ -2,10 +2,10 @@ import UIKit
 
 // swiftlint:disable:next type_name
 protocol MoreInformationOnCVVViewControllerDelegate: AnyObject {
-    func moreInformationOnCVVViewControllerDidAskToClose(_ controller: MoreInformationOnCVVViewController)
+    func moreInformationOnCVVViewControllerDidAskToClose(_ controller: CCVInfoPopupController)
 }
 
-class MoreInformationOnCVVViewController: UIViewController {
+class CCVInfoPopupController: UIViewController {
     static let preferredWidth: CGFloat = 240
     
     @IBOutlet private var cvvLocationImageView: UIImageView!
@@ -208,7 +208,7 @@ class OverlayPanelPresentationController: UIPresentationController {
             return super.size(forChildContentContainer: container, withParentContainerSize: parentSize)
         }
         
-        let preferredContentSizeWidth = MoreInformationOnCVVViewController.preferredWidth
+        let preferredContentSizeWidth = CCVInfoPopupController.preferredWidth
         
         let calculatedPreferredContentSize = viewController.view.systemLayoutSizeFitting(
             CGSize(width: min(preferredContentSizeWidth, parentSize.width), height: UIView.layoutFittingCompressedSize.height),
@@ -247,7 +247,7 @@ class OverlayPanelPresentationController: UIPresentationController {
     }
     
     @objc func requestToDismiss(_ sender: AnyObject) {
-        if let presentedViewController = presentedViewController as? MoreInformationOnCVVViewController {
+        if let presentedViewController = presentedViewController as? CCVInfoPopupController {
             presentedViewController.askToClose(sender)
         } else {
             presentingViewController.dismiss(animated: true, completion: nil)

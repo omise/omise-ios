@@ -339,8 +339,8 @@ public class CreditCardFormViewController: UIViewController, PaymentFormUIContro
     }
 
     @IBAction private func displayMoreCVVInfo(_ sender: UIButton) {
-        guard let viewController = storyboard?.instantiateViewController(withIdentifier: "MoreInformationOnCVVViewController"),
-              let moreInformationOnCVVViewController = viewController as? MoreInformationOnCVVViewController else {
+        guard let viewController = storyboard?.instantiateViewController(withIdentifier: "CCVInfoPopupController"),
+              let moreInformationOnCVVViewController = viewController as? CCVInfoPopupController else {
             return
         }
 
@@ -850,7 +850,7 @@ extension CreditCardFormViewController {
 }
 
 extension CreditCardFormViewController: MoreInformationOnCVVViewControllerDelegate {
-    func moreInformationOnCVVViewControllerDidAskToClose(_ controller: MoreInformationOnCVVViewController) {
+    func moreInformationOnCVVViewControllerDidAskToClose(_ controller: CCVInfoPopupController) {
         dismiss(animated: true, completion: nil)
     }
 }

@@ -176,7 +176,7 @@
 		8AEF7804224CABF800787470 /* EContextInformationInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A25E929213CF6F300D48252 /* EContextInformationInputViewController.swift */; };
 		8AF5517A213D4C0100D61C98 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 8AF5517C213D4C0100D61C98 /* Localizable.stringsdict */; };
 		8AF56E62226878070097CFEE /* CustomCreditCardFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF56E61226878070097CFEE /* CustomCreditCardFormViewController.swift */; };
-		8AF9857121479F38007E18ED /* MoreInformationOnCVVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3150AD2146B6C300A4F429 /* MoreInformationOnCVVViewController.swift */; };
+		8AF9857121479F38007E18ED /* CCVInfoPopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3150AD2146B6C300A4F429 /* CCVInfoPopupController.swift */; };
 		8AF9857221479F72007E18ED /* CreditCardFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1D4C651D51B72200C7837C /* CreditCardFormViewController.swift */; };
 		8AF985732147CC3D007E18ED /* Error.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8AF985752147CC3D007E18ED /* Error.strings */; };
 		986406301CFEA7E4004BCF51 /* CardCVVTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062A1CFEA7E4004BCF51 /* CardCVVTextField.swift */; };
@@ -402,7 +402,7 @@
 		8A25E929213CF6F300D48252 /* EContextInformationInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EContextInformationInputViewController.swift; sourceTree = "<group>"; };
 		8A275CBB21241E4500C5716F /* MainActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainActionButton.swift; sourceTree = "<group>"; };
 		8A30FB7C214929C900DC09DC /* PaymentCreatorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCreatorController.swift; sourceTree = "<group>"; };
-		8A3150AD2146B6C300A4F429 /* MoreInformationOnCVVViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInformationOnCVVViewController.swift; sourceTree = "<group>"; };
+		8A3150AD2146B6C300A4F429 /* CCVInfoPopupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCVInfoPopupController.swift; sourceTree = "<group>"; };
 		8A3C10552159F7FC00BEFD8A /* InvalidCardAPIErrorParsingTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvalidCardAPIErrorParsingTestCase.swift; sourceTree = "<group>"; };
 		8A3C10572159FCE900BEFD8A /* BadRequestAPIErrorParsingTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadRequestAPIErrorParsingTestCase.swift; sourceTree = "<group>"; };
 		8A40DA2A216B53E900749F45 /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
@@ -724,7 +724,7 @@
 			children = (
 				75D13DF12B866BFC0073A831 /* TextFields */,
 				75D13DF22B866C070073A831 /* CountryListController */,
-				8A3150AD2146B6C300A4F429 /* MoreInformationOnCVVViewController.swift */,
+				8A3150AD2146B6C300A4F429 /* CCVInfoPopupController.swift */,
 				8A275CBB21241E4500C5716F /* MainActionButton.swift */,
 				756C8F252A40698600D53059 /* TextFieldView.swift */,
 				75405A802A2633B6008C21F6 /* SpacerView.swift */,
@@ -1345,7 +1345,7 @@
 				75D13E032B866E040073A831 /* PaymentOptionTableViewCell.swift in Sources */,
 				756C8F262A40698600D53059 /* TextFieldView.swift in Sources */,
 				986406341CFEA7E4004BCF51 /* CardNameTextField.swift in Sources */,
-				8AF9857121479F38007E18ED /* MoreInformationOnCVVViewController.swift in Sources */,
+				8AF9857121479F38007E18ED /* CCVInfoPopupController.swift in Sources */,
 				75D13E012B866E040073A831 /* AdaptableDynamicTableViewController.swift in Sources */,
 				75E0EB7C2B7B410600E3198A /* Client+NetworkService.swift in Sources */,
 				75D13D602B807AC90073A831 /* ChoosePaymentCoordinator.swift in Sources */,
@@ -1592,7 +1592,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1825,7 +1825,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
