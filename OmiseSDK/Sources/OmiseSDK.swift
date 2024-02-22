@@ -69,7 +69,7 @@ public class OmiseSDK {
         allowedCardPayment: Bool,
         delegate: ChoosePaymentMethodDelegate
     ) -> UINavigationController {
-        let paymentFlow = ChoosePaymentCoordinator(client: client, amount: amount, currency: currency)
+        let paymentFlow = ChoosePaymentCoordinator(client: client, amount: amount, currency: currency, currentCountry: country)
         let viewController = paymentFlow.createChoosePaymentMethodController(
             allowedPaymentMethods: allowedPaymentMethods,
             allowedCardPayment: allowedCardPayment,
@@ -93,7 +93,7 @@ public class OmiseSDK {
         currency: String,
         delegate: ChoosePaymentMethodDelegate
     ) -> UINavigationController {
-        let paymentFlow = ChoosePaymentCoordinator(client: client, amount: amount, currency: currency)
+        let paymentFlow = ChoosePaymentCoordinator(client: client, amount: amount, currency: currency, currentCountry: country)
         let viewController = paymentFlow.createChoosePaymentMethodController(
             usePaymentMethodsFromCapability: true,
             delegate: delegate
@@ -113,7 +113,9 @@ public extension OmiseSDK {
     var latestLoadedCapability: Capability? { client.latestLoadedCapability }
 
     /// Country associated with `latestLoadedCapability`
-    var country: Country? { Country(code: latestLoadedCapability?.countryCode) }
+    var country: Country? {
+        Country(code: latestLoadedCapability?.countryCode)
+    }
 }
 
 private extension OmiseSDK {

@@ -26,14 +26,15 @@ class CreditCardPaymentViewModel: CreditCardPaymentViewModelProtocol, CountryLis
 
     private weak var delegate: CreditCardPaymentDelegate?
 
-    init(delegate: CreditCardPaymentDelegate?) {
+    init(currentCountry: Country?, delegate: CreditCardPaymentDelegate?) {
         self.delegate = delegate
+        self.selectedCountry = currentCountry
     }
 
     // MARK: CountryListViewModelProtocol
     lazy var countries: [Country] = Country.sortedAll
     
-    lazy var selectedCountry: Country? = OmiseSDK.shared.country {
+    var selectedCountry: Country? {
         didSet {
             if let selectedCountry = selectedCountry {
                 onSelectCountry(selectedCountry)

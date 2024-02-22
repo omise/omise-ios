@@ -21,7 +21,8 @@ public class OmiseTextField: UITextField {
     }
 
     public var onTextFieldShouldReturn: () -> (Bool) = { return false }
-    
+    public var onValueChanged: () -> () = { }
+
     @IBInspectable var borderWidth: CGFloat {
         get {
             switch style {
@@ -170,7 +171,7 @@ public class OmiseTextField: UITextField {
     }
     
     @objc func textDidChange() {
-        // Intentionally empty (SonarCloud warning fix)
+        onValueChanged()
     }
     
     public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

@@ -68,7 +68,7 @@ public class CreditCardPaymentController: UIViewController {
     @IBOutlet var expiryDateTextField: CardExpiryDateTextField!
     @IBOutlet var secureCodeTextField: CardCVVTextField!
 
-    var countryInputView = TextFieldView(id: "country")
+    let countryInputView = TextFieldView(id: "country")
 
     @IBOutlet var submitButton: MainActionButton!
 
@@ -170,13 +170,14 @@ public class CreditCardPaymentController: UIViewController {
 
         formFields.forEach {
             $0.inputAccessoryView = formFieldsAccessoryView
+            $0.onValueChanged = { [weak self] in
+                self?.updateAccessibilityValue()
+            }
         }
 
         errorLabels.forEach {
             $0.textColor = errorMessageTextColor
         }
-
-        formFields.forEach(self.updateAccessibilityValue)
 
         updateSupplementaryUI()
 
@@ -199,6 +200,10 @@ public class CreditCardPaymentController: UIViewController {
         cardNumberTextField.rightView = cardBrandIconImageView
         secureCodeTextField.rightView = cvvInfoButton
         secureCodeTextField.rightViewMode = .always
+
+        if let viewModel = viewModel {
+            bind(to: viewModel)
+        }
     }
 
     public override func viewWillLayoutSubviews() {
@@ -726,7 +731,7 @@ extension CreditCardPaymentController {
 // MARK: - Accessibility
 extension CreditCardPaymentController {
 
-    @IBAction private func updateAccessibilityValue(_ sender: OmiseTextField) {
+    @IBAction private func updateAccessibilityValue() {
         updateSupplementaryUI()
     }
 
@@ -739,14 +744,9 @@ extension CreditCardPaymentController {
             $0.adjustsFontForContentSizeCategory = true
         }
 
-        submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
+        let fields = formFields
 
-        let fields = [
-            cardNumberTextField,
-            cardNameTextField,
-            expiryDateTextField,
-            secureCodeTextField
-        ] as [OmiseTextField]
+        submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
 
         // swiftlint:disable:next function_body_length
         func accessiblityElementAfter(

@@ -4,6 +4,7 @@ class ChoosePaymentCoordinator: ViewAttachable {
     let client: Client
     let amount: Int64
     let currency: String
+    let currentCountry: Country?
 
     enum ResultState {
         case cancelled
@@ -14,10 +15,11 @@ class ChoosePaymentCoordinator: ViewAttachable {
 
     weak var rootViewController: UIViewController?
 
-    init(client: Client, amount: Int64, currency: String) {
+    init(client: Client, amount: Int64, currency: String, currentCountry: Country?) {
         self.client = client
         self.amount = amount
         self.currency = currency
+        self.currentCountry = currentCountry
     }
 
     /// Creates SelectPaymentController and attach current flow object inside created controller to be deallocated together
@@ -93,7 +95,7 @@ class ChoosePaymentCoordinator: ViewAttachable {
 
     /// Creates Atome screen and attach current flow object inside created controller to be deallocated together
     func createAtomeController() -> AtomePaymentController {
-        let viewModel = AtomePaymentViewModel(amount: amount, delegate: self)
+        let viewModel = AtomePaymentViewModel(amount: amount, currentCountry: currentCountry, delegate: self)
         let viewController = AtomePaymentController(viewModel: viewModel)
         viewController.title = SourceType.atome.localizedTitle
         return viewController
@@ -101,7 +103,7 @@ class ChoosePaymentCoordinator: ViewAttachable {
 
     /// Creates Atome screen and attach current flow object inside created controller to be deallocated together
     func createCreditCardPaymentController() -> CreditCardPaymentController {
-        let viewModel = CreditCardPaymentViewModel(delegate: self)
+        let viewModel = CreditCardPaymentViewModel(currentCountry: currentCountry, delegate: self)
         let viewController = CreditCardPaymentController(nibName: nil, bundle: .omiseSDK)
         viewController.viewModel = viewModel
         viewController.title = PaymentMethod.creditCard.localizedTitle

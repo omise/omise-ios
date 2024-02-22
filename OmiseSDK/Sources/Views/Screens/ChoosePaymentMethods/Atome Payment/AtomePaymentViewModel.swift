@@ -27,7 +27,7 @@ class AtomePaymentViewModel: AtomePaymentViewModelProtocol, CountryListViewModel
     // MARK: CountryListViewModelProtocol
     lazy var countries: [Country] = Country.sortedAll
 
-    lazy var selectedCountry: Country? = OmiseSDK.shared.country {
+    var selectedCountry: Country? {
         didSet {
             if let selectedCountry = selectedCountry {
                 onSelectCountry(selectedCountry)
@@ -44,9 +44,10 @@ class AtomePaymentViewModel: AtomePaymentViewModelProtocol, CountryListViewModel
     var headerText = "Atome.header.text".localized()
     var logoName = "Atome_Big"
 
-    init(amount: Int64, delegate: SelectSourcePaymentDelegate?) {
+    init(amount: Int64, currentCountry: Country?, delegate: SelectSourcePaymentDelegate?) {
         self.amount = amount
         self.delegate = delegate
+        self.selectedCountry = currentCountry
     }
 
     func title(for field: Field) -> String? {
