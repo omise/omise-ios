@@ -53,7 +53,7 @@ extension PaymentFormStyle {
     }
 
     var textColor: UIColor {
-        get { return UIColor(0x3C414D) }
+        get { return .omisePrimary }
         set {}
     }
 
@@ -63,7 +63,7 @@ extension PaymentFormStyle {
     }
 
     var activityIndicatorColor: UIColor {
-        get { return UIColor(0x3D404C) }
+        get { return .omisePrimary }
         set {}
     }
 

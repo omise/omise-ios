@@ -10,21 +10,19 @@ import Foundation
 import UIKit
 
 class AtomePaymentInputsFormController: PaymentFormController {
-    struct Style {
-        var backgroundColorForDisabledNextButton = UIColor(0xE4E7ED)
-        var backgroundColorForEnabledNextButton = UIColor(0x1957F0)
-        var textColorForNextButton = UIColor(0xFFFFFF)
-        var textColor = UIColor(0x3C414D)
-        var shippingAddressLabelColor = UIColor(0x9B9B9B)
-        var containerStackSideSpacer = CGFloat(18)
-        var verticalContainerStackSpacer = CGFloat(12)
-        var verticalInputsStackSpacer = CGFloat(10)
-        var buttoneHeight = CGFloat(47)
-    }
-
     typealias ViewModel = AtomePaymentFormViewModelProtocol
     typealias ViewContext = AtomePaymentFormViewContext
     typealias Field = ViewContext.Field
+
+    lazy var shippingAddressLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.textColor = style.sectionTitleColor
+        label.font = .preferredFont(forTextStyle: .callout)
+        label.text = "Atome.shippingAddress".localized()
+        return label
+    }()
 
     var viewModel: ViewModel? {
         didSet {
@@ -34,23 +32,13 @@ class AtomePaymentInputsFormController: PaymentFormController {
         }
     }
 
-    lazy var shippingAddressLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.textAlignment = .left
-        label.textColor = style.shippingAddressLabelColor
-        label.font = .preferredFont(forTextStyle: .callout)
-        label.text = "Atome.shippingAddress".localized()
-        return label
-    }()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     init(viewModel: ViewModel? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 
     override func viewDidLoad() {
@@ -59,8 +47,6 @@ class AtomePaymentInputsFormController: PaymentFormController {
         if let viewModel = viewModel {
             bind(to: viewModel)
         }
-
-        onSubmitButtonTappedClosure = onSubmitButtonHandler
     }
 
     override func updateSubmitButtonState() {
@@ -88,7 +74,7 @@ private extension AtomePaymentInputsFormController {
     func bind(to viewModel: ViewModel) {
         guard isViewLoaded else { return }
         setupInputs(viewModel: viewModel)
-        setupSubmitButton(title: viewModel.submitButtonTitle, color: style.textColorForNextButton)
+        setupSubmitButton(title: viewModel.submitButtonTitle, color: style.buttonTextColor)
         details = viewModel.headerText
         logoImage = UIImage(omise: viewModel.logoName)
 
@@ -97,11 +83,13 @@ private extension AtomePaymentInputsFormController {
         applySecondaryColor()
     }
 
+    
     func setupInputs(viewModel: ViewModel) {
         removeAllInputs()
 
         let fields = viewModel.fields
         for field in fields {
+            // Shipping Address section header title
             if field == viewModel.fieldForShippingAddressHeader {
                 inputsStackView.addArrangedSubview(SpacerView(vertical: 1))
                 inputsStackView.addArrangedSubview(shippingAddressLabel)
@@ -109,6 +97,7 @@ private extension AtomePaymentInputsFormController {
 
             let input = TextFieldView(id: field.rawValue)
             inputsStackView.addArrangedSubview(input)
+            
             setupInput(input, field: field, isLast: field == fields.last, viewModel: viewModel)
 
             if field == .country {
@@ -161,8 +150,6 @@ private extension AtomePaymentInputsFormController {
             return
         }
 
-        headerTextLabel.textColor = UIColor.omisePrimary
-        activityIndicator.color = UIColor.omisePrimary
         inputsStackView.arrangedSubviews.forEach {
             if let input = $0 as? TextFieldView {
                 input.textColor = UIColor.omisePrimary

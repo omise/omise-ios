@@ -165,10 +165,6 @@ extension PaymentFormController {
 
         hideKeyboard()
         startActivityIndicator()
-        submitButtonTapped()
-    }
-
-    func submitButtonTapped() {
         onSubmitButtonTappedClosure()
     }
 }

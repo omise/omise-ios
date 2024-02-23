@@ -1,5 +1,12 @@
 import Foundation
 
+struct AtomeInputField: PaymenFormtInputProtocol {
+    var next: PaymenFormtInputProtocol?
+    var title: String
+    var error: String
+    var isError: Bool
+}
+
 class AtomePaymentFormViewModel: AtomePaymentFormViewModelProtocol, CountryListViewModelProtocol {
     var fields: [Field] = [
         .name,
