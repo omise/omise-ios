@@ -15,8 +15,9 @@
 		22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */; };
 		731A75D325E3604A002353C0 /* FPXBankChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A75D225E3604A002353C0 /* FPXBankChooserViewController.swift */; };
 		73F9BA4B25E6053700F55CA8 /* FPXFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */; };
-		7501265D2B87CB6500ED5E14 /* PaymentFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7501265C2B87CB6500ED5E14 /* PaymentFormController.swift */; };
-		7501265F2B8893C900ED5E14 /* PaymentMarkupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7501265E2B8893C900ED5E14 /* PaymentMarkupController.swift */; };
+		7501265D2B87CB6500ED5E14 /* PaymentInputsFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7501265C2B87CB6500ED5E14 /* PaymentInputsFormController.swift */; };
+		7501265F2B8893C900ED5E14 /* PaymentFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7501265E2B8893C900ED5E14 /* PaymentFormController.swift */; };
+		750126612B8902A500ED5E14 /* PaymentFormStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750126602B8902A500ED5E14 /* PaymentFormStyle.swift */; };
 		7502CA532A3011A900766E7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7502CA562A3011A900766E7D /* LaunchScreen.storyboard */; };
 		7502CA5F2A31A7D600766E7D /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7502CA5E2A31A7D600766E7D /* CountryListViewController.swift */; };
 		7502CA602A31A7D600766E7D /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7502CA5E2A31A7D600766E7D /* CountryListViewController.swift */; };
@@ -277,8 +278,9 @@
 		731A75D225E3604A002353C0 /* FPXBankChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPXBankChooserViewController.swift; sourceTree = "<group>"; };
 		73F9BA4625E50F4700F55CA8 /* AdaptableDynamicTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptableDynamicTableViewController.swift; sourceTree = "<group>"; };
 		73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPXFormViewController.swift; sourceTree = "<group>"; };
-		7501265C2B87CB6500ED5E14 /* PaymentFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFormController.swift; sourceTree = "<group>"; };
-		7501265E2B8893C900ED5E14 /* PaymentMarkupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMarkupController.swift; sourceTree = "<group>"; };
+		7501265C2B87CB6500ED5E14 /* PaymentInputsFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInputsFormController.swift; sourceTree = "<group>"; };
+		7501265E2B8893C900ED5E14 /* PaymentFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFormController.swift; sourceTree = "<group>"; };
+		750126602B8902A500ED5E14 /* PaymentFormStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFormStyle.swift; sourceTree = "<group>"; };
 		7502CA552A3011A900766E7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7502CA582A3011B000766E7D /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		7502CA5A2A3011B100766E7D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -545,8 +547,9 @@
 		7501265B2B87CB3F00ED5E14 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				7501265E2B8893C900ED5E14 /* PaymentMarkupController.swift */,
-				7501265C2B87CB6500ED5E14 /* PaymentFormController.swift */,
+				750126602B8902A500ED5E14 /* PaymentFormStyle.swift */,
+				7501265E2B8893C900ED5E14 /* PaymentFormController.swift */,
+				7501265C2B87CB6500ED5E14 /* PaymentInputsFormController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1404,7 +1407,7 @@
 				751E7BEA2B7F77120031B4A2 /* Localized+Omise.swift in Sources */,
 				75D13DA52B83B58B0073A831 /* Source.swift in Sources */,
 				22445FFC1CF41DD300801D0F /* Globals.swift in Sources */,
-				7501265F2B8893C900ED5E14 /* PaymentMarkupController.swift in Sources */,
+				7501265F2B8893C900ED5E14 /* PaymentFormController.swift in Sources */,
 				756C8F222A40694F00D53059 /* CreditCardPaymentViewContext.swift in Sources */,
 				751E7BF02B7FBA760031B4A2 /* UIColor+Omise.swift in Sources */,
 				751E7BF22B7FC90C0031B4A2 /* SourceType+Collections.swift in Sources */,
@@ -1422,7 +1425,7 @@
 				754B78182B8741CD00973B71 /* TapGestureHandler.swift in Sources */,
 				75D13DCB2B8531D20073A831 /* Assets.swift in Sources */,
 				986406321CFEA7E4004BCF51 /* CardNumberTextField.swift in Sources */,
-				7501265D2B87CB6500ED5E14 /* PaymentFormController.swift in Sources */,
+				7501265D2B87CB6500ED5E14 /* PaymentInputsFormController.swift in Sources */,
 				75D13E042B866E040073A831 /* MobileBankingSourceChooserViewController.swift in Sources */,
 				75D13DCD2B8536B10073A831 /* SelectInstallmentTermsViewModel.swift in Sources */,
 				75D13DB02B83B58B0073A831 /* Source.Payment.Address.swift in Sources */,
@@ -1430,6 +1433,7 @@
 				F6614CD6243DB8E7005B656E /* TrueMoneyFormViewController.swift in Sources */,
 				75F2A0B72A1A60630038FA54 /* AtomePaymentFormController.swift in Sources */,
 				75F2A0C22A1A87AE0038FA54 /* UIColor+Helpers.swift in Sources */,
+				750126612B8902A500ED5E14 /* PaymentFormStyle.swift in Sources */,
 				75D13D6C2B8335850073A831 /* ViewContainer.swift in Sources */,
 				7509D4DD2A1A9FD70050AB38 /* MainActionButton.swift in Sources */,
 				75E0EBC22B7D1F9E00E3198A /* OmiseError+LocalizedDescription.swift in Sources */,

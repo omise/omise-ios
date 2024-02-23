@@ -102,19 +102,19 @@ class CustomCreditCardPaymentController: UIViewController {
             lowerRowStackView.alignment = .fill
             lowerRowStackView.spacing = 10
             
-            let stackView = UIStackView(arrangedSubviews: [cardNumberStackView, cardNameStackView, lowerRowStackView])
-            stackView.translatesAutoresizingMaskIntoConstraints = false
-            stackView.axis = .vertical
-            stackView.distribution = .fill
-            stackView.alignment = .fill
-            stackView.spacing = 20
+            let verticalContainerStack = UIStackView(arrangedSubviews: [cardNumberStackView, cardNameStackView, lowerRowStackView])
+            verticalContainerStack.translatesAutoresizingMaskIntoConstraints = false
+            verticalContainerStack.axis = .vertical
+            verticalContainerStack.distribution = .fill
+            verticalContainerStack.alignment = .fill
+            verticalContainerStack.spacing = 20
 
-            view.addSubview(stackView)
+            view.addSubview(verticalContainerStack)
             NSLayoutConstraint.activate([
-                stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-                stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-                stackView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 20),
-                stackView.bottomAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.bottomAnchor)
+                verticalContainerStack.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+                verticalContainerStack.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+                verticalContainerStack.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 20),
+                verticalContainerStack.bottomAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.bottomAnchor)
             ])
         }
 

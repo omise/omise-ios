@@ -45,12 +45,12 @@ class TextFieldView: UIView {
         return label
     }()
     private lazy var contentView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
-        stackView.alignment = .fill
-        stackView.spacing = 4
-        return stackView
+        let verticalContainerStack = UIStackView()
+        verticalContainerStack.axis = .vertical
+        verticalContainerStack.distribution = .equalSpacing
+        verticalContainerStack.alignment = .fill
+        verticalContainerStack.spacing = 4
+        return verticalContainerStack
     }()
 
     var onTextFieldShouldReturn: () -> (Bool) = { return false }

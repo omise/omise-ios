@@ -92,12 +92,12 @@ public class CreditCardPaymentController: UIViewController {
     @IBOutlet var billingStackView: UIStackView!
 
     lazy var addressStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
-        stackView.alignment = .fill
-        stackView.spacing = style.billingStackSpacing
-        return stackView
+        let verticalContainerStack = UIStackView()
+        verticalContainerStack.axis = .vertical
+        verticalContainerStack.distribution = .equalSpacing
+        verticalContainerStack.alignment = .fill
+        verticalContainerStack.spacing = style.billingStackSpacing
+        return verticalContainerStack
     }()
 
     @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!

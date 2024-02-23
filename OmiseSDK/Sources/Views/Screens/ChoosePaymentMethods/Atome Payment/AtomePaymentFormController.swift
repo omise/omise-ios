@@ -1,5 +1,5 @@
 //
-//  AtomePaymentFormController.swift
+//  AtomePaymentInputsFormController.swift
 //  OmiseSDKUITests
 //
 //  Created by Andrei Solovev on 16/5/23.
@@ -9,17 +9,17 @@
 import Foundation
 import UIKit
 
-class AtomePaymentFormController: PaymentMarkupController {
+class AtomePaymentInputsFormController: PaymentFormController {
     struct Style {
         var backgroundColorForDisabledNextButton = UIColor(0xE4E7ED)
         var backgroundColorForEnabledNextButton = UIColor(0x1957F0)
         var textColorForNextButton = UIColor(0xFFFFFF)
         var textColor = UIColor(0x3C414D)
         var shippingAddressLabelColor = UIColor(0x9B9B9B)
-        var contentSpacing = CGFloat(18)
-        var stackSpacing = CGFloat(12)
-        var inputsSpacing = CGFloat(10)
-        var nextButtonHeight = CGFloat(47)
+        var containerStackSideSpacer = CGFloat(18)
+        var verticalContainerStackSpacer = CGFloat(12)
+        var verticalInputsStackSpacer = CGFloat(10)
+        var buttoneHeight = CGFloat(47)
     }
 
     typealias ViewModel = AtomePaymentFormViewModelProtocol
@@ -60,7 +60,7 @@ class AtomePaymentFormController: PaymentMarkupController {
             bind(to: viewModel)
         }
 
-        didTapSubmitButtonHandler = onSubmitButtonHandler
+        onSubmitButtonTappedClosure = onSubmitButtonHandler
     }
 
     override func updateSubmitButtonState() {
@@ -70,7 +70,7 @@ class AtomePaymentFormController: PaymentMarkupController {
     }
 }
 
-private extension AtomePaymentFormController {
+private extension AtomePaymentInputsFormController {
 
     func onSubmitButtonHandler() {
         let currentContext = makeViewContext()
@@ -161,7 +161,7 @@ private extension AtomePaymentFormController {
             return
         }
 
-        detailsLabel.textColor = UIColor.omisePrimary
+        headerTextLabel.textColor = UIColor.omisePrimary
         activityIndicator.color = UIColor.omisePrimary
         inputsStackView.arrangedSubviews.forEach {
             if let input = $0 as? TextFieldView {
@@ -186,7 +186,7 @@ private extension AtomePaymentFormController {
 }
 
 // MARK: Actions
-private extension AtomePaymentFormController {
+private extension AtomePaymentInputsFormController {
     func hideErrorIfNil(field: Field) {
         if let viewModel = viewModel, let input = input(for: field) {
             let error = viewModel.error(for: field, validate: input.text)
@@ -198,7 +198,7 @@ private extension AtomePaymentFormController {
 }
 
 // MARK: Non-private for Unit-Testing
-extension AtomePaymentFormController {
+extension AtomePaymentInputsFormController {
     func showAllErrors() {
         guard let viewModel = self.viewModel else { return }
 
@@ -255,7 +255,7 @@ extension AtomePaymentFormController {
 }
 
 // MARK: Input Processing
-private extension AtomePaymentFormController {
+private extension AtomePaymentInputsFormController {
     func onTextChanged(field: Field) {
         updateSubmitButtonState()
         hideErrorIfNil(field: field)
