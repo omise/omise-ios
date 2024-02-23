@@ -94,9 +94,9 @@ class ChoosePaymentCoordinator: ViewAttachable {
     }
 
     /// Creates Atome screen and attach current flow object inside created controller to be deallocated together
-    func createAtomeController() -> AtomePaymentController {
-        let viewModel = AtomePaymentViewModel(amount: amount, currentCountry: currentCountry, delegate: self)
-        let viewController = AtomePaymentController(viewModel: viewModel)
+    func createAtomeController() -> AtomePaymentFormController {
+        let viewModel = AtomePaymentFormViewModel(amount: amount, currentCountry: currentCountry, delegate: self)
+        let viewController = AtomePaymentFormController(viewModel: viewModel)
         viewController.title = SourceType.atome.localizedTitle
         return viewController
     }

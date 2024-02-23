@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
-
-class PaymentFormBuilderController: UIViewController {
+class PaymentMarkupController: UIViewController {
     struct Style {
         var backgroundColorForDisabledNextButton = UIColor(0xE4E7ED)
         var backgroundColorForEnabledNextButton = UIColor(0x1957F0)
@@ -16,10 +15,10 @@ class PaymentFormBuilderController: UIViewController {
 
     var didTapSubmitButtonHandler: () -> Void = { }
 
-    @ProxyProperty(\PaymentFormBuilderController.detailsLabel.text)
+    @ProxyProperty(\PaymentMarkupController.detailsLabel.text)
     var details: String?
 
-    @ProxyProperty(\PaymentFormBuilderController.logoImageView.image)
+    @ProxyProperty(\PaymentMarkupController.logoImageView.image)
     var logoImage: UIImage?
 
     var style = Style()
@@ -103,7 +102,7 @@ class PaymentFormBuilderController: UIViewController {
 }
 
 // MARK: - To override by child or add delegate or ViewModel?
-extension PaymentFormBuilderController {
+extension PaymentMarkupController {
     func setupViews() {
         view.backgroundColor = .background
 
@@ -146,7 +145,7 @@ extension PaymentFormBuilderController {
 }
 
 // MARK: Actions
-extension PaymentFormBuilderController {
+extension PaymentMarkupController {
     @objc func hideKeyboard() {
         self.view.endEditing(true)
     }
@@ -166,7 +165,7 @@ extension PaymentFormBuilderController {
     }
 }
 
-extension PaymentFormBuilderController {
+extension PaymentMarkupController {
     @objc func onSubmitButtonTapped() {
         guard isSubmitButtonEnabled else {
             return

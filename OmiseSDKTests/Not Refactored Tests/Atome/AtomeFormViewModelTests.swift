@@ -1,5 +1,5 @@
 //
-//  AtomePaymentViewModelTests.swift
+//  AtomePaymentFormViewModelTests.swift
 //  OmiseSDKTests
 //
 //  Created by Andrei Solovev on 23/5/23.
@@ -10,11 +10,11 @@ import XCTest
 import OmiseUnitTestKit
 @testable import OmiseSDK
 
-class AtomePaymentViewModelTests: XCTestCase {
-    typealias ViewModel = AtomePaymentViewModelMockup
+class AtomePaymentFormViewModelTests: XCTestCase {
+    typealias ViewModel = AtomePaymentFormViewModelMockup
 
-    let validCases = TestCaseValueGenerator.validCases(AtomePaymentViewContext.generateMockup)
-    let invalidCases = TestCaseValueGenerator.invalidCases(AtomePaymentViewContext.generateMockup)
-    let mostInvalidCases = TestCaseValueGenerator.mostInvalidCases(AtomePaymentViewContext.generateMockup)
+    let validCases = TestCaseValueGenerator.validCases(AtomePaymentFormViewContext.generateMockup)
+    let invalidCases = TestCaseValueGenerator.invalidCases(AtomePaymentFormViewContext.generateMockup)
+    let mostInvalidCases = TestCaseValueGenerator.mostInvalidCases(AtomePaymentFormViewContext.generateMockup)
 
 }

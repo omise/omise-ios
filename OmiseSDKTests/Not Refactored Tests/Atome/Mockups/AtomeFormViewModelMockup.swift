@@ -1,5 +1,5 @@
 //
-//  AtomePaymentViewModelMockup.swift
+//  AtomePaymentFormViewModelMockup.swift
 //  OmiseSDKTests
 //
 //  Created by Andrei Solovev on 23/5/23.
@@ -11,7 +11,7 @@ import Foundation
 @testable import OmiseSDK
 #endif
 
-class AtomePaymentViewModelMockup: AtomePaymentViewModelProtocol {
+class AtomePaymentFormViewModelMockup: AtomePaymentFormViewModelProtocol {
     var countryListViewModel: CountryListViewModelProtocol = CountryListViewModelMockup()
 
     var submitButtonTitle: String = "Next"
@@ -51,7 +51,7 @@ class AtomePaymentViewModelMockup: AtomePaymentViewModelProtocol {
     }
 }
 
-extension AtomePaymentViewModelMockup {
+extension AtomePaymentFormViewModelMockup {
     @discardableResult
     func applyMockupTitles() -> Self {
         self.titles = Field.allCases.reduce(into: [Field: String]()) { list, field in

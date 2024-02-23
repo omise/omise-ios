@@ -1,14 +1,6 @@
-//
-//  AtomePaymentViewModel.swift
-//  OmiseSDK
-//
-//  Created by Andrei Solovev on 31/5/23.
-//  Copyright © 2023 Omise. All rights reserved.
-//
-
 import Foundation
 
-class AtomePaymentViewModel: AtomePaymentViewModelProtocol, CountryListViewModelProtocol {
+class AtomePaymentFormViewModel: AtomePaymentFormViewModelProtocol, CountryListViewModelProtocol {
     var fields: [Field] = [
         .name,
         .email,

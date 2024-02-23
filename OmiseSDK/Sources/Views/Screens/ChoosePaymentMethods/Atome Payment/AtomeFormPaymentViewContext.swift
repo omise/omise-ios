@@ -1,14 +1,6 @@
-//
-//  AtomePaymentViewContext.swift
-//  OmiseSDKUITests
-//
-//  Created by Andrei Solovev on 21/5/23.
-//  Copyright © 2023 Omise. All rights reserved.
-//
-
 import UIKit
 
-struct AtomePaymentViewContext {
+struct AtomePaymentFormViewContext {
     enum Field: String, CaseIterable {
         case name
         case email
@@ -37,7 +29,7 @@ struct AtomePaymentViewContext {
     }
 }
 
-extension AtomePaymentViewContext.Field {
+extension AtomePaymentFormViewContext.Field {
     var isOptional: Bool {
         switch self {
         case .name, .email, .street2: return true

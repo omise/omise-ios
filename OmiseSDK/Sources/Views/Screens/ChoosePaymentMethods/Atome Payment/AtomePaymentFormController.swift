@@ -1,5 +1,5 @@
 //
-//  AtomePaymentController.swift
+//  AtomePaymentFormController.swift
 //  OmiseSDKUITests
 //
 //  Created by Andrei Solovev on 16/5/23.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class AtomePaymentController: PaymentFormBuilderController {
+class AtomePaymentFormController: PaymentMarkupController {
     struct Style {
         var backgroundColorForDisabledNextButton = UIColor(0xE4E7ED)
         var backgroundColorForEnabledNextButton = UIColor(0x1957F0)
@@ -22,8 +22,8 @@ class AtomePaymentController: PaymentFormBuilderController {
         var nextButtonHeight = CGFloat(47)
     }
 
-    typealias ViewModel = AtomePaymentViewModelProtocol
-    typealias ViewContext = AtomePaymentViewContext
+    typealias ViewModel = AtomePaymentFormViewModelProtocol
+    typealias ViewContext = AtomePaymentFormViewContext
     typealias Field = ViewContext.Field
 
     var viewModel: ViewModel? {
@@ -70,7 +70,7 @@ class AtomePaymentController: PaymentFormBuilderController {
     }
 }
 
-private extension AtomePaymentController {
+private extension AtomePaymentFormController {
 
     func onSubmitButtonHandler() {
         let currentContext = makeViewContext()
@@ -186,7 +186,7 @@ private extension AtomePaymentController {
 }
 
 // MARK: Actions
-private extension AtomePaymentController {
+private extension AtomePaymentFormController {
     func hideErrorIfNil(field: Field) {
         if let viewModel = viewModel, let input = input(for: field) {
             let error = viewModel.error(for: field, validate: input.text)
@@ -198,7 +198,7 @@ private extension AtomePaymentController {
 }
 
 // MARK: Non-private for Unit-Testing
-extension AtomePaymentController {
+extension AtomePaymentFormController {
     func showAllErrors() {
         guard let viewModel = self.viewModel else { return }
 
@@ -255,7 +255,7 @@ extension AtomePaymentController {
 }
 
 // MARK: Input Processing
-private extension AtomePaymentController {
+private extension AtomePaymentFormController {
     func onTextChanged(field: Field) {
         updateSubmitButtonState()
         hideErrorIfNil(field: field)

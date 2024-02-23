@@ -1,5 +1,5 @@
 //
-//  AtomePaymentControllerTests.swift
+//  AtomePaymentFormControllerTests.swift
 //  OmiseSDKTests
 //
 //  Created by Andrei Solovev on 22/5/23.
@@ -10,17 +10,17 @@ import XCTest
 import OmiseUnitTestKit
 @testable import OmiseSDK
 
-class AtomePaymentControllerTests: XCTestCase {
-    typealias ViewModel = AtomePaymentViewModelMockup
+class AtomePaymentFormControllerTests: XCTestCase {
+    typealias ViewModel = AtomePaymentFormViewModelMockup
 
 //    func testBindInputs() {
 //        let viewModel = ViewModel()
-//        for field in AtomePaymentViewContext.Field.allCases {
+//        for field in AtomePaymentFormViewContext.Field.allCases {
 //            viewModel.titles[field] = "title: " + field.rawValue
 //            viewModel.errors[field] = "error: " + field.rawValue
 //        }
 //
-//        let vc = AtomePaymentController(viewModel: viewModel)
+//        let vc = AtomePaymentFormController(viewModel: viewModel)
 //        for field in ViewModel.Field.allCases {
 //            XCTAssertEqual(vc.input(for: field)?.title, "title: " + field.rawValue)
 //            XCTAssertEqual(vc.input(for: field)?.error, "")
