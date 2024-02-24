@@ -1,7 +1,8 @@
 import UIKit
 
-class EContextInformationInputViewController: UIViewController, PaymentSourceChooser, PaymentFormUIController {
-    var flowSession: PaymentCreatorFlowSession?
+class EContextInformationInputController: UIViewController, PaymentFormUIController {
+    weak var delegate: SelectSourcePaymentDelegate?
+
     var client: Client?
     var paymentAmount: Int64?
     var paymentCurrency: Currency?
@@ -19,14 +20,27 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
     @IBOutlet private var phoneNumberTextField: OmiseTextField!
     @IBOutlet private var submitButton: MainActionButton!
     @IBOutlet private var requestingIndicatorView: UIActivityIndicatorView!
-    
+
+    @IBOutlet private var fullNameLabel: UILabel!
+    @IBOutlet private var emailLabel: UILabel!
+    @IBOutlet private var phoneNumberLabel: UILabel!
+
     @IBOutlet private var fullNameErrorLabel: UILabel!
     @IBOutlet private var emailErrorLabel: UILabel!
     @IBOutlet private var phoneNumberErrorLabel: UILabel!
     
-    @IBOutlet var formLabels: [UILabel]!
-    @IBOutlet var formFields: [OmiseTextField]!
-    @IBOutlet var errorLabels: [UILabel]!
+    lazy var formLabels: [UILabel]! = {
+        [fullNameLabel, emailLabel, phoneNumberLabel]
+    }()
+
+    lazy var formFields: [OmiseTextField]! = {
+        [fullNameTextField, emailTextField, phoneNumberTextField]
+    }()
+
+    lazy var errorLabels: [UILabel] = {
+        [fullNameErrorLabel, emailErrorLabel, phoneNumberErrorLabel]
+    }()
+
     @IBOutlet var formFieldsAccessoryView: UIToolbar!
     @IBOutlet var gotoPreviousFieldBarButtonItem: UIBarButtonItem!
     @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!
@@ -40,6 +54,10 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
 
         submitButton.defaultBackgroundColor = .omise
         submitButton.disabledBackgroundColor = .line
+
+        if #available(iOSApplicationExtension 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        }
 
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
@@ -76,8 +94,24 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         fullNameTextField.validator = try? NSRegularExpression(pattern: "\\A[\\w\\s]{1,10}\\s?\\z", options: [])
         emailTextField.validator = try? NSRegularExpression(pattern: "\\A[\\w\\-\\.]+@[\\w\\-\\.]+\\s?\\z", options: [])
         phoneNumberTextField.validator = try? NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
+
+        setupTextFieldHandlers()
     }
-    
+
+    private func setupTextFieldHandlers() {
+        self.formFields.forEach { field in
+            setupTextField(field)
+        }
+    }
+
+    private func setupTextField(_ field: OmiseTextField) {
+        field.addTarget(self, action: #selector(gotoNextField), for: .editingDidEndOnExit)
+        field.addTarget(self, action: #selector(validateFieldData), for: .editingChanged)
+        field.addTarget(self, action: #selector(updateInputAccessoryViewFor), for: .editingDidBegin)
+        field.addTarget(self, action: #selector(validateTextFieldDataOf), for: .editingDidEnd)
+
+    }
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
@@ -105,12 +139,8 @@ class EContextInformationInputViewController: UIViewController, PaymentSourceCho
         view.isUserInteractionEnabled = false
         view.tintAdjustmentMode = .dimmed
         submitButton.isEnabled = false
-        flowSession?.requestCreateSource(Source.Payment.eContext(eContextInformation)) { _ in
-            self.requestingIndicatorView.stopAnimating()
-            self.view.isUserInteractionEnabled = true
-            self.view.tintAdjustmentMode = .automatic
-            self.submitButton.isEnabled = true
-        }
+        let payment = Source.Payment.eContext(eContextInformation)
+        delegate?.didSelectSourcePayment(payment)
     }
     
     @IBAction private func updateInputAccessoryViewFor(_ sender: OmiseTextField) {

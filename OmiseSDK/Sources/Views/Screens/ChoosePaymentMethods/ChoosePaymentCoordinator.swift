@@ -109,6 +109,14 @@ class ChoosePaymentCoordinator: ViewAttachable {
         viewController.title = PaymentMethod.creditCard.localizedTitle
         return viewController
     }
+
+    /// Creates Atome screen and attach current flow object inside created controller to be deallocated together
+    func createEContextController(title: String) -> EContextInformationInputController {
+        let viewController = EContextInformationInputController(nibName: nil, bundle: .omiseSDK)
+        viewController.title = title
+        viewController.delegate = self
+        return viewController
+    }
 }
 
 extension ChoosePaymentCoordinator: CreditCardPaymentDelegate {
@@ -130,6 +138,8 @@ extension ChoosePaymentCoordinator: SelectPaymentMethodDelegate {
             case .installment: navigate(to: createInstallmentController())
             case .creditCard: navigate(to: createCreditCardPaymentController())
             case .sourceType(.atome): navigate(to: createAtomeController())
+            case .eContextConbini, .eContextPayEasy, .eContextNetBanking:
+                navigate(to: createEContextController(title: paymentMethod.localizedTitle))
             default: break
             }
         } else if let sourceType = paymentMethod.sourceType {
@@ -235,7 +245,7 @@ extension ChoosePaymentCoordinator {
 //        //        case ("GoToInstallmentBrandChooserSegue"?, let controller as InstallmentBankingSourceChooserViewController):
 //        //            controller.showingValues = allowedPaymentMethods.filter({ $0.isInstallment })
 //        //            controller.flowSession = self.viewModel.flowSession
-//        //        case (_, let controller as EContextInformationInputViewController):
+//        //        case (_, let controller as EContextInformationInputController):
 //        //            controller.flowSession = self.viewModel.flowSession
 //        //            if let element = (sender as? UITableViewCell).flatMap(tableView.indexPath(for:)).map(item(at:)) {
 //        //                switch element {

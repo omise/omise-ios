@@ -1,5 +1,6 @@
 import UIKit
 
+/*
 class PaymentInputsFormController<Field: PaymenFormtInputProtocol & CaseIterable & Hashable>: PaymentFormController {
 
     private var fields: [Field: String] = [:]
@@ -18,3 +19,4 @@ class PaymentInputsFormController<Field: PaymenFormtInputProtocol & CaseIterable
         set { fields[field] = newValue }
     }
 }
+*/

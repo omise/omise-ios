@@ -83,7 +83,6 @@ private extension AtomePaymentInputsFormController {
         applySecondaryColor()
     }
 
-    
     func setupInputs(viewModel: ViewModel) {
         removeAllInputs()
 
