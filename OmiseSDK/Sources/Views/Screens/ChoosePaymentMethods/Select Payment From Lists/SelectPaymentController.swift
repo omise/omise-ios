@@ -66,7 +66,11 @@ class SelectPaymentController: UITableViewController {
             startCellActivity(at: indexPath)
         }
 
-        viewModel.viewDidSelectCell(at: indexPath.row)
+        viewModel.viewDidSelectCell(at: indexPath.row) { [indexPath, weak self] in
+            guard let self = self else { return }
+            self.stopCellActivity(at: indexPath)
+            self.view.isUserInteractionEnabled = true
+        }
     }
 }
 

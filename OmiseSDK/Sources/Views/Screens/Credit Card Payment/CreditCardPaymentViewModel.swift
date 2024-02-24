@@ -53,7 +53,7 @@ class CreditCardPaymentViewModel: CreditCardPaymentViewModelProtocol, CountryLis
         delegate?.didCancelCardPayment()
     }
 
-    func onSubmitButtonPressed(_ viewContext: ViewContext) {
+    func onSubmitButtonPressed(_ viewContext: ViewContext, completion: @escaping () -> Void) {
 
         let card = CreateTokenPayload.Card(
             name: viewContext.name,
@@ -70,7 +70,7 @@ class CreditCardPaymentViewModel: CreditCardPaymentViewModelProtocol, CountryLis
             postalCode: viewContext[.postalCode]
         )
 
-        delegate?.didSelectCardPayment(card)
+        delegate?.didSelectCardPayment(card, completion: completion)
 
         /*
         viewModel.onSubmitButtonPressed(makeViewContext(), publicKey: publicKey) { [weak self] result in

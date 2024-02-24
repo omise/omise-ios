@@ -120,8 +120,8 @@ class ChoosePaymentCoordinator: ViewAttachable {
 }
 
 extension ChoosePaymentCoordinator: CreditCardPaymentDelegate {
-    func didSelectCardPayment(_ card: CreateTokenPayload.Card) {
-        processPayment(card)
+    func didSelectCardPayment(_ card: CreateTokenPayload.Card, completion: @escaping () -> Void) {
+        processPayment(card, completion: completion)
     }
 
     func didCancelCardPayment() {
@@ -130,7 +130,7 @@ extension ChoosePaymentCoordinator: CreditCardPaymentDelegate {
 }
 extension ChoosePaymentCoordinator: SelectPaymentMethodDelegate {
 
-    func didSelectPaymentMethod(_ paymentMethod: PaymentMethod) {
+    func didSelectPaymentMethod(_ paymentMethod: PaymentMethod, completion: @escaping () -> Void) {
         if paymentMethod.requiresAdditionalDetails {
             switch paymentMethod {
             case .mobileBanking: navigate(to: createMobileBankingController())
@@ -140,11 +140,11 @@ extension ChoosePaymentCoordinator: SelectPaymentMethodDelegate {
             case .sourceType(.atome): navigate(to: createAtomeController())
             case .eContextConbini, .eContextPayEasy, .eContextNetBanking:
                 navigate(to: createEContextController(title: paymentMethod.localizedTitle))
-            default: break
-            }
+            default: break            }
         } else if let sourceType = paymentMethod.sourceType {
-            processPayment(.sourceType(sourceType))
+            processPayment(.sourceType(sourceType), completion: completion)
         } else {
+            completion()
             assertionFailure("Unexpected case for selected payment method: \(paymentMethod)")
         }
     }
@@ -155,18 +155,18 @@ extension ChoosePaymentCoordinator: SelectPaymentMethodDelegate {
 }
 
 extension ChoosePaymentCoordinator: SelectSourceTypeDelegate {
-    func didSelectSourceType(_ sourceType: SourceType) {
+    func didSelectSourceType(_ sourceType: SourceType, completion: @escaping () -> Void) {
         if sourceType.isInstallment {
             navigate(to: createInstallmentTermsController(sourceType: sourceType))
         } else {
-            processPayment(.sourceType(sourceType))
+            processPayment(.sourceType(sourceType), completion: completion)
         }
     }
 }
 
 extension ChoosePaymentCoordinator: SelectSourcePaymentDelegate {
-    func didSelectSourcePayment(_ payment: Source.Payment) {
-        processPayment(payment)
+    func didSelectSourcePayment(_ payment: Source.Payment, completion: @escaping () -> Void) {
+        processPayment(payment, completion: completion)
     }
 }
 
@@ -178,7 +178,7 @@ extension ChoosePaymentCoordinator {
         )
     }
 
-    func processPayment(_ card: CreateTokenPayload.Card) {
+    func processPayment(_ card: CreateTokenPayload.Card, completion: @escaping () -> Void) {
         guard let delegate = choosePaymentMethodDelegate else { return }
         let tokenPayload = CreateTokenPayload(card: card)
 
@@ -189,10 +189,11 @@ extension ChoosePaymentCoordinator {
             case .failure(let error):
                 delegate?.choosePaymentMethodDidComplete(with: error)
             }
+            completion()
         }
     }
 
-    func processPayment(_ payment: Source.Payment) {
+    func processPayment(_ payment: Source.Payment, completion: @escaping () -> Void) {
         guard let delegate = choosePaymentMethodDelegate else { return }
         let sourcePayload = CreateSourcePayload(
             amount: amount,
@@ -207,6 +208,7 @@ extension ChoosePaymentCoordinator {
             case .failure(let error):
                 delegate?.choosePaymentMethodDidComplete(with: error)
             }
+            completion()
         }
     }
 }

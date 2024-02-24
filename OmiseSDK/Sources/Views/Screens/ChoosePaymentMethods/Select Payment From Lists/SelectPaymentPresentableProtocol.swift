@@ -8,7 +8,7 @@ protocol SelectPaymentPresentableProtocol {
 
     func viewOnDataReloadHandler(_ handler: @escaping () -> Void)
     func viewContext(at: Int) -> TableCellContext?
-    func viewDidSelectCell(at: Int)
+    func viewDidSelectCell(at: Int, completion: @escaping () -> Void)
     func viewShouldAnimateSelectedCell(at: Int) -> Bool
     func viewDidTapClose()
 }

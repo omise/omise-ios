@@ -588,6 +588,7 @@
 		750126672B89F0B200ED5E14 /* TrueMoneyWallet */ = {
 			isa = PBXGroup;
 			children = (
+				F6614CD5243DB8E7005B656E /* TrueMoneyFormViewController.swift */,
 			);
 			path = TrueMoneyWallet;
 			sourceTree = "<group>";
@@ -876,7 +877,6 @@
 		75D13DF72B866C900073A831 /* ToDo */ = {
 			isa = PBXGroup;
 			children = (
-				F6614CD5243DB8E7005B656E /* TrueMoneyFormViewController.swift */,
 				75D13DCF2B85A4240073A831 /* ChooseDuitNowObwBankViewModel.swift */,
 				75D13DD12B85A4490073A831 /* ChooseFPXBankViewModel.swift */,
 				73F9BA4A25E6053700F55CA8 /* FPXFormViewController.swift */,

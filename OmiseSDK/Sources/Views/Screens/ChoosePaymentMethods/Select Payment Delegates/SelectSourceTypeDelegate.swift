@@ -1,5 +1,5 @@
 import Foundation
 
 protocol SelectSourceTypeDelegate: AnyObject {
-    func didSelectSourceType(_ sourceType: SourceType)
+    func didSelectSourceType(_ sourceType: SourceType, completion: @escaping () -> Void)
 }

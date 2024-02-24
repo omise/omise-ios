@@ -84,9 +84,9 @@ extension SelectPaymentMethodViewModel: SelectPaymentPresentableProtocol {
         )
     }
     
-    func viewDidSelectCell(at index: Int) {
+    func viewDidSelectCell(at index: Int, completion: @escaping () -> Void) {
         guard let paymentMethod = paymentMethods.at(index) else { return }
-        delegate?.didSelectPaymentMethod(paymentMethod)
+        delegate?.didSelectPaymentMethod(paymentMethod, completion: completion)
     }
     
     func viewShouldAnimateSelectedCell(at index: Int) -> Bool {

@@ -140,7 +140,13 @@ class EContextInformationInputController: UIViewController, PaymentFormUIControl
         view.tintAdjustmentMode = .dimmed
         submitButton.isEnabled = false
         let payment = Source.Payment.eContext(eContextInformation)
-        delegate?.didSelectSourcePayment(payment)
+        delegate?.didSelectSourcePayment(payment) { [weak self] in
+            guard let self = self else { return }
+            self.requestingIndicatorView.stopAnimating()
+            self.view.isUserInteractionEnabled = true
+            self.view.tintAdjustmentMode = .automatic
+            self.submitButton.isEnabled = true
+        }
     }
     
     @IBAction private func updateInputAccessoryViewFor(_ sender: OmiseTextField) {

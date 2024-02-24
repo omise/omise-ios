@@ -45,9 +45,9 @@ extension SelectSourceTypePaymentViewModel: SelectPaymentPresentableProtocol {
         )
     }
 
-    func viewDidSelectCell(at index: Int) {
+    func viewDidSelectCell(at index: Int, completion: @escaping () -> Void) {
         guard let sourceType = sourceTypes.at(index) else { return }
-        delegate?.didSelectSourceType(sourceType)
+        delegate?.didSelectSourceType(sourceType, completion: completion)
     }
 
     func viewShouldAnimateSelectedCell(at index: Int) -> Bool {

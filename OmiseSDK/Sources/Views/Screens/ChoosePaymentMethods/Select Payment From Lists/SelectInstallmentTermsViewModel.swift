@@ -46,14 +46,14 @@ extension SelectInstallmentTermsViewModel: SelectPaymentPresentableProtocol {
         )
     }
 
-    func viewDidSelectCell(at index: Int) {
+    func viewDidSelectCell(at index: Int, completion: @escaping () -> Void) {
         guard let value = values.at(index) else { return }
         let payment = Source.Payment.Installment(
             installmentTerm: value,
             zeroInterestInstallments: nil,
             sourceType: sourceType
         )
-        delegate?.didSelectSourcePayment(.installment(payment))
+        delegate?.didSelectSourcePayment(.installment(payment), completion: completion)
     }
 
     func viewShouldAnimateSelectedCell(at index: Int) -> Bool {

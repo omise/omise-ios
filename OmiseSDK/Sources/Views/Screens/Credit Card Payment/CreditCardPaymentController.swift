@@ -408,7 +408,8 @@ public class CreditCardPaymentController: UIViewController {
 
         UIAccessibility.post(notification: UIAccessibility.Notification.announcement, argument: "Submitting payment, please wait")
         startActivityIndicator()
-        viewModel.onSubmitButtonPressed(makeViewContext())
+        viewModel.onSubmitButtonPressed(makeViewContext()) {
+            self.stopActivityIndicator()
 
 //        { [weak self] result in
 //            guard let self = self else { return }
@@ -424,6 +425,8 @@ public class CreditCardPaymentController: UIViewController {
 //                self.handleError(error)
 //            }
 //        }
+        }
+
     }
 
     func keyboardWillAppear(_ notification: Notification) {

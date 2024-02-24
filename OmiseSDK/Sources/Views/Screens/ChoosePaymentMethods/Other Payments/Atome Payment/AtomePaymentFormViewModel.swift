@@ -104,6 +104,6 @@ class AtomePaymentFormViewModel: AtomePaymentFormViewModelProtocol, CountryListV
             items: items
         )
 
-        delegate.didSelectSourcePayment(.atome(paymentInformation))
+        delegate.didSelectSourcePayment(.atome(paymentInformation), completion: onComplete)
     }
 }

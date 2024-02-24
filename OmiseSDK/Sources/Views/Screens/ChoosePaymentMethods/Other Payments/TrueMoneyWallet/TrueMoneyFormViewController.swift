@@ -1,9 +1,8 @@
 import UIKit
 
-class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, PaymentFormUIController {
-    
-    var flowSession: PaymentCreatorFlowSession?
-    
+class TrueMoneyFormViewController: UIViewController, PaymentFormUIController {
+    weak var delegate: SelectSourcePaymentDelegate?
+
     private var client: Client?
     
     private var isInputDataValid: Bool {
@@ -97,7 +96,8 @@ class TrueMoneyFormViewController: UIViewController, PaymentSourceChooser, Payme
         view.isUserInteractionEnabled = false
         view.tintAdjustmentMode = .dimmed
         submitButton.isEnabled = false
-        flowSession?.requestCreateSource(.trueMoneyWallet(paymentInformation)) { _ in
+        delegate?.didSelectSourcePayment(.trueMoneyWallet(paymentInformation)) { [weak self] in
+            guard let self = self else { return }
             self.requestingIndicatorView.stopAnimating()
             self.view.isUserInteractionEnabled = true
             self.view.tintAdjustmentMode = .automatic
