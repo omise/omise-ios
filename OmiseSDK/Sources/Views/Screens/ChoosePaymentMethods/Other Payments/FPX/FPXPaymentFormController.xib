@@ -39,6 +39,7 @@
             </items>
             <point key="canvasLocation" x="2260" y="1546"/>
         </toolbar>
+        <navigationItem title="FPX" largeTitleDisplayMode="never" id="NuM-EA-LsN"/>
         <view contentMode="scaleToFill" id="DjQ-nx-7Qg">
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -154,7 +155,6 @@
             </constraints>
             <point key="canvasLocation" x="2947" y="1487"/>
         </view>
-        <navigationItem title="FPX" largeTitleDisplayMode="never" id="NuM-EA-LsN"/>
     </objects>
     <designables>
         <designable name="PbB-J3-Qob">

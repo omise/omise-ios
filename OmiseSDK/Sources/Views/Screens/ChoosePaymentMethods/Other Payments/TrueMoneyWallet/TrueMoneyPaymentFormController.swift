@@ -13,15 +13,21 @@ class TrueMoneyPaymentFormController: UIViewController, PaymentFormUIController 
     
     @IBOutlet var contentView: UIScrollView!
     
+    @IBOutlet private var phoneNumberLabel: UILabel!
     @IBOutlet private var phoneNumberTextField: OmiseTextField!
     @IBOutlet private var submitButton: MainActionButton!
     @IBOutlet private var requestingIndicatorView: UIActivityIndicatorView!
     
     @IBOutlet private var errorLabel: UILabel!
-    
-    @IBOutlet var formLabels: [UILabel]!
-    @IBOutlet var formFields: [OmiseTextField]!
-    
+
+    lazy var formLabels: [UILabel]! = {
+        [phoneNumberLabel]
+    }()
+
+    lazy var formFields: [OmiseTextField]! = {
+        [phoneNumberTextField]
+    }()
+
     @IBOutlet var formFieldsAccessoryView: UIToolbar!
     @IBOutlet var gotoPreviousFieldBarButtonItem: UIBarButtonItem!
     @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!
@@ -73,8 +79,21 @@ class TrueMoneyPaymentFormController: UIViewController, PaymentFormUIController 
         )
         
         phoneNumberTextField.validator = try? NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
+        setupTextFieldHandlers()
     }
-    
+
+    private func setupTextFieldHandlers() {
+        self.formFields.forEach { field in
+            setupTextField(field)
+        }
+    }
+
+    private func setupTextField(_ field: OmiseTextField) {
+        field.addTarget(self, action: #selector(validateFieldData), for: .editingChanged)
+        field.addTarget(self, action: #selector(updateInputAccessoryViewFor), for: .editingDidBegin)
+        field.addTarget(self, action: #selector(validateTextFieldDataOf), for: .editingDidEnd)
+    }
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         

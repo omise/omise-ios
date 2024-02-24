@@ -37,10 +37,6 @@ class EContextPaymentFormController: UIViewController, PaymentFormUIController {
         [fullNameTextField, emailTextField, phoneNumberTextField]
     }()
 
-    lazy var errorLabels: [UILabel] = {
-        [fullNameErrorLabel, emailErrorLabel, phoneNumberErrorLabel]
-    }()
-
     @IBOutlet var formFieldsAccessoryView: UIToolbar!
     @IBOutlet var gotoPreviousFieldBarButtonItem: UIBarButtonItem!
     @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!

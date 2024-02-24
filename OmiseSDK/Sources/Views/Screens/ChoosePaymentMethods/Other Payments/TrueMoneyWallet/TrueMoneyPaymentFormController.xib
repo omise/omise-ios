@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrueMoneyPaymentFormController" customModule="OmiseSDK" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrueMoneyPaymentFormController" customModule="OmiseSDK" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="1dZ-ba-5lL" id="MiI-jn-gQ8"/>
+                <outlet property="doneEditingBarButtonItem" destination="WjO-Rx-fPr" id="gBu-k6-NO8"/>
+                <outlet property="errorLabel" destination="AUd-11-e1K" id="7xh-eL-pj4"/>
+                <outlet property="formFieldsAccessoryView" destination="Ilf-hG-acj" id="CcP-6R-nlx"/>
+                <outlet property="gotoNextFieldBarButtonItem" destination="zBL-t6-nmf" id="Wxn-Eo-VLl"/>
+                <outlet property="gotoPreviousFieldBarButtonItem" destination="6vM-47-Sdc" id="eyQ-OD-n9e"/>
+                <outlet property="phoneNumberLabel" destination="ph2-zw-Rut" id="YvJ-el-oBR"/>
+                <outlet property="phoneNumberTextField" destination="qZ4-kg-cTO" id="Wm6-H5-o6g"/>
+                <outlet property="requestingIndicatorView" destination="WTQ-HL-L5e" id="5Dv-HO-6qf"/>
+                <outlet property="submitButton" destination="u3l-7W-P9v" id="yTc-Wd-OSS"/>
+                <outlet property="view" destination="T8r-3V-d5f" id="90E-4Y-Bda"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <navigationItem title="TrueMoney Wallet" largeTitleDisplayMode="never" id="tcc-13-8o1"/>
         <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="Ilf-hG-acj">
@@ -19,7 +32,11 @@
                 <barButtonItem enabled="NO" image="Back" id="6vM-47-Sdc" userLabel="Go to previous field bar button item"/>
                 <barButtonItem enabled="NO" image="Next Field" id="zBL-t6-nmf" userLabel="Go to next field bar button item"/>
                 <barButtonItem systemItem="flexibleSpace" id="gQa-PT-qep"/>
-                <barButtonItem systemItem="done" id="WjO-Rx-fPr"/>
+                <barButtonItem systemItem="done" id="WjO-Rx-fPr">
+                    <connections>
+                        <action selector="doneEditing:" destination="-1" id="Zzn-1v-dxo"/>
+                    </connections>
+                </barButtonItem>
             </items>
             <point key="canvasLocation" x="3486" y="1546"/>
         </toolbar>
@@ -27,10 +44,10 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dZ-ba-5lL">
+                <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dZ-ba-5lL" userLabel="Content Scroll">
                     <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Phone number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ph2-zw-Rut">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Phone number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ph2-zw-Rut" userLabel="Phone Number">
                             <rect key="frame" x="16" y="212.33333333333334" width="361" height="18"/>
                             <accessibility key="accessibilityConfiguration">
                                 <bool key="isElement" value="NO"/>
@@ -39,7 +56,7 @@
                             <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qZ4-kg-cTO" customClass="OmiseTextField" customModule="OmiseSDK">
+                        <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qZ4-kg-cTO" userLabel="Phone Number" customClass="OmiseTextField" customModule="OmiseSDK">
                             <rect key="frame" x="16" y="235.33333333333334" width="361" height="22.000000000000028"/>
                             <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                             <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -57,13 +74,13 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUd-11-e1K">
+                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUd-11-e1K" userLabel="Phone Number Error">
                             <rect key="frame" x="16" y="262.33333333333331" width="361" height="13.333333333333314"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                             <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u3l-7W-P9v" customClass="MainActionButton" customModule="OmiseSDK">
+                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u3l-7W-P9v" userLabel="Submit" customClass="MainActionButton" customModule="OmiseSDK">
                             <rect key="frame" x="16" y="295.66666666666669" width="361" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="fWH-1c-cfB"/>
@@ -83,6 +100,9 @@
                                     <color key="value" red="0.89411764709999997" green="0.90588235289999997" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="submitForm:" destination="-1" eventType="touchUpInside" id="PG9-kH-vZ0"/>
+                            </connections>
                         </button>
                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="WTQ-HL-L5e">
                             <rect key="frame" x="186.66666666666666" y="307.66666666666669" width="20" height="20"/>
@@ -123,7 +143,6 @@
                     <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
                 </scrollView>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="qqo-4m-nfb"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="1dZ-ba-5lL" secondAttribute="trailing" id="0le-2u-ONt"/>

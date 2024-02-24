@@ -154,6 +154,13 @@ class ChoosePaymentCoordinator: ViewAttachable {
         let listController = SelectPaymentController(viewModel: viewModel)
         return listController
     }
+
+    /// Creates Installement screen and attach current flow object inside created controller to be deallocated together
+    func createTrueMoneyWalletController() -> TrueMoneyPaymentFormController {
+        let viewController = TrueMoneyPaymentFormController(nibName: nil, bundle: .omiseSDK)
+        viewController.delegate = self
+        return viewController
+    }
 }
 
 extension ChoosePaymentCoordinator: FPXPaymentFormControllerDelegate {
@@ -176,7 +183,7 @@ extension ChoosePaymentCoordinator: SelectPaymentMethodDelegate {
     func didSelectPaymentMethod(_ paymentMethod: PaymentMethod, completion: @escaping () -> Void) {
         if paymentMethod.requiresAdditionalDetails {
             switch paymentMethod {
-            case .mobileBanking: 
+            case .mobileBanking:
                 navigate(to: createMobileBankingController())
             case .internetBanking:
                 navigate(to: createInternetBankingController())
@@ -192,6 +199,8 @@ extension ChoosePaymentCoordinator: SelectPaymentMethodDelegate {
                 navigate(to: createFPXController())
             case .sourceType(.duitNowOBW):
                 navigate(to: createDuitNowOBWBanksController())
+            case .sourceType(.trueMoneyWallet):
+                navigate(to: createTrueMoneyWalletController())
             default: break
             }
         } else if let sourceType = paymentMethod.sourceType {
