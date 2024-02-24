@@ -551,7 +551,7 @@ class SourceTests: XCTestCase {
         let sourceType: SourceType = .fpx
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         let paymentInformation = Payment.FPX(
-            bank: .uob,
+            bank: "uob",
             email: "support@omise.co"
         )
         XCTAssertEqual(source.id, "src_test_5jhmesi7s4at1qctloz")
