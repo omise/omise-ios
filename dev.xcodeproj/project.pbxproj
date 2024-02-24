@@ -24,6 +24,7 @@
 		7501266E2B8A411C00ED5E14 /* FPXPaymentFormController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7501266D2B8A411C00ED5E14 /* FPXPaymentFormController.xib */; };
 		750126702B8A490000ED5E14 /* SelectFPXBankViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7501266F2B8A490000ED5E14 /* SelectFPXBankViewModel.swift */; };
 		750126722B8A49BC00ED5E14 /* FPX.Bank+ViewPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750126712B8A49BC00ED5E14 /* FPX.Bank+ViewPresentable.swift */; };
+		750126742B8A580500ED5E14 /* SelectDuitNowOBWBankViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750126732B8A580500ED5E14 /* SelectDuitNowOBWBankViewModel.swift */; };
 		7502CA532A3011A900766E7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7502CA562A3011A900766E7D /* LaunchScreen.storyboard */; };
 		7502CA5F2A31A7D600766E7D /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7502CA5E2A31A7D600766E7D /* CountryListViewController.swift */; };
 		7502CA602A31A7D600766E7D /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7502CA5E2A31A7D600766E7D /* CountryListViewController.swift */; };
@@ -293,6 +294,7 @@
 		7501266D2B8A411C00ED5E14 /* FPXPaymentFormController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FPXPaymentFormController.xib; sourceTree = "<group>"; };
 		7501266F2B8A490000ED5E14 /* SelectFPXBankViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFPXBankViewModel.swift; sourceTree = "<group>"; };
 		750126712B8A49BC00ED5E14 /* FPX.Bank+ViewPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FPX.Bank+ViewPresentable.swift"; sourceTree = "<group>"; };
+		750126732B8A580500ED5E14 /* SelectDuitNowOBWBankViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDuitNowOBWBankViewModel.swift; sourceTree = "<group>"; };
 		7502CA552A3011A900766E7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7502CA582A3011B000766E7D /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		7502CA5A2A3011B100766E7D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -883,6 +885,7 @@
 				75D13DC82B8529790073A831 /* SelectSourceTypePaymentViewModel.swift */,
 				75D13DCC2B8536B10073A831 /* SelectInstallmentTermsViewModel.swift */,
 				7501266F2B8A490000ED5E14 /* SelectFPXBankViewModel.swift */,
+				750126732B8A580500ED5E14 /* SelectDuitNowOBWBankViewModel.swift */,
 			);
 			path = "Select Payment From Lists";
 			sourceTree = "<group>";
@@ -1487,6 +1490,7 @@
 				754B78182B8741CD00973B71 /* TapGestureHandler.swift in Sources */,
 				75D13DCB2B8531D20073A831 /* Assets.swift in Sources */,
 				986406321CFEA7E4004BCF51 /* CardNumberTextField.swift in Sources */,
+				750126742B8A580500ED5E14 /* SelectDuitNowOBWBankViewModel.swift in Sources */,
 				7501265D2B87CB6500ED5E14 /* PaymentInputsFormController.swift in Sources */,
 				75D13E042B866E040073A831 /* MobileBankingSourceChooserViewController.swift in Sources */,
 				75D13DCD2B8536B10073A831 /* SelectInstallmentTermsViewModel.swift in Sources */,

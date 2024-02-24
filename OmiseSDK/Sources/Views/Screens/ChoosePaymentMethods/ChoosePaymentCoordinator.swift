@@ -101,7 +101,7 @@ class ChoosePaymentCoordinator: ViewAttachable {
         return viewController
     }
 
-    /// Creates Atome screen and attach current flow object inside created controller to be deallocated together
+    /// Creates Credit Carc Payment screen and attach current flow object inside created controller to be deallocated together
     func createCreditCardPaymentController() -> CreditCardPaymentController {
         let viewModel = CreditCardPaymentViewModel(currentCountry: currentCountry, delegate: self)
         let viewController = CreditCardPaymentController(nibName: nil, bundle: .omiseSDK)
@@ -110,7 +110,7 @@ class ChoosePaymentCoordinator: ViewAttachable {
         return viewController
     }
 
-    /// Creates Atome screen and attach current flow object inside created controller to be deallocated together
+    /// Creates EContext screen and attach current flow object inside created controller to be deallocated together
     func createEContextController(title: String) -> EContextPaymentFormController {
         let viewController = EContextPaymentFormController(nibName: nil, bundle: .omiseSDK)
         viewController.title = title
@@ -118,7 +118,7 @@ class ChoosePaymentCoordinator: ViewAttachable {
         return viewController
     }
 
-    /// Creates Atome screen and attach current flow object inside created controller to be deallocated together
+    /// Creates FPX screen and attach current flow object inside created controller to be deallocated together
     func createFPXController() -> FPXPaymentFormController {
         let viewController = FPXPaymentFormController(nibName: nil, bundle: .omiseSDK)
         viewController.title = SourceType.fpx.localizedTitle
@@ -126,7 +126,7 @@ class ChoosePaymentCoordinator: ViewAttachable {
         return viewController
     }
 
-    /// Creates Atome screen and attach current flow object inside created controller to be deallocated together
+    /// Creates FPX Banks screen and attach current flow object inside created controller to be deallocated together
     func createFPXBanksController(email: String?) -> SelectPaymentController {
         let fpx = client.latestLoadedCapability?.paymentMethods.first { $0.name == SourceType.fpx.rawValue }
         let banks: [Capability.PaymentMethod.Bank] = Array(fpx?.banks ?? [])
@@ -141,6 +141,17 @@ class ChoosePaymentCoordinator: ViewAttachable {
                 cell.isUserInteractionEnabled = false
             }
         }
+        return listController
+    }
+
+    /// Creates Installement screen and attach current flow object inside created controller to be deallocated together
+    func createDuitNowOBWBanksController() -> SelectPaymentController {
+        let banks = Source.Payment.DuitNowOBW.Bank.allCases.sorted {
+            $0.localizedTitle.localizedCompare($1.localizedTitle) == .orderedAscending
+        }
+
+        let viewModel = SelectDuitNowOBWBankViewModel(banks: banks, delegate: self)
+        let listController = SelectPaymentController(viewModel: viewModel)
         return listController
     }
 }
@@ -179,6 +190,8 @@ extension ChoosePaymentCoordinator: SelectPaymentMethodDelegate {
                 navigate(to: createEContextController(title: paymentMethod.localizedTitle))
             case .sourceType(.fpx):
                 navigate(to: createFPXController())
+            case .sourceType(.duitNowOBW):
+                navigate(to: createDuitNowOBWBanksController())
             default: break
             }
         } else if let sourceType = paymentMethod.sourceType {
