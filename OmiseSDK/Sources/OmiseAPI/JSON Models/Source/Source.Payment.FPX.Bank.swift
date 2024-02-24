@@ -2,7 +2,7 @@ import Foundation
 
 extension Source.Payment.FPX {
     /// Bank code selected by customer
-    public enum Bank: String, Codable {
+    public enum Bank: String, Codable, CaseIterable {
         /// Affin Bank
         case affin
         /// Alliance Bank (Personal)
@@ -43,5 +43,6 @@ extension Source.Payment.FPX {
         case sc
         /// UOB Bank
         case uob
+        /// Other bank
     }
 }

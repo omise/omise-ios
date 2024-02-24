@@ -111,11 +111,43 @@ class ChoosePaymentCoordinator: ViewAttachable {
     }
 
     /// Creates Atome screen and attach current flow object inside created controller to be deallocated together
-    func createEContextController(title: String) -> EContextInformationInputController {
-        let viewController = EContextInformationInputController(nibName: nil, bundle: .omiseSDK)
+    func createEContextController(title: String) -> EContextPaymentFormController {
+        let viewController = EContextPaymentFormController(nibName: nil, bundle: .omiseSDK)
         viewController.title = title
         viewController.delegate = self
         return viewController
+    }
+
+    /// Creates Atome screen and attach current flow object inside created controller to be deallocated together
+    func createFPXController() -> FPXPaymentFormController {
+        let viewController = FPXPaymentFormController(nibName: nil, bundle: .omiseSDK)
+        viewController.title = SourceType.fpx.localizedTitle
+        viewController.delegate = self
+        return viewController
+    }
+
+    /// Creates Atome screen and attach current flow object inside created controller to be deallocated together
+    func createFPXBanksController(email: String?) -> SelectPaymentController {
+        let fpx = client.latestLoadedCapability?.paymentMethods.first { $0.name == SourceType.fpx.rawValue }
+        let banks: [Capability.PaymentMethod.Bank] = Array(fpx?.banks ?? [])
+        let viewModel = SelectFPXBankViewModel(email: email, banks: banks, delegate: self)
+        let listController = SelectPaymentController(viewModel: viewModel)
+        
+        listController.customizeCellAtIndexPathClosure = { [banks] cell, indexPath in
+            guard let bank = banks.at(indexPath.row) else { return }
+            if !bank.isActive {
+                cell.selectionStyle = UITableViewCell.SelectionStyle.none
+                cell.contentView.alpha = 0.5
+                cell.isUserInteractionEnabled = false
+            }
+        }
+        return listController
+    }
+}
+
+extension ChoosePaymentCoordinator: FPXPaymentFormControllerDelegate {
+    func fpxDidCompleteWith(email: String?, completion: @escaping () -> Void) {
+        navigate(to: createFPXBanksController(email: email))
     }
 }
 
@@ -133,14 +165,22 @@ extension ChoosePaymentCoordinator: SelectPaymentMethodDelegate {
     func didSelectPaymentMethod(_ paymentMethod: PaymentMethod, completion: @escaping () -> Void) {
         if paymentMethod.requiresAdditionalDetails {
             switch paymentMethod {
-            case .mobileBanking: navigate(to: createMobileBankingController())
-            case .internetBanking: navigate(to: createInternetBankingController())
-            case .installment: navigate(to: createInstallmentController())
-            case .creditCard: navigate(to: createCreditCardPaymentController())
-            case .sourceType(.atome): navigate(to: createAtomeController())
+            case .mobileBanking: 
+                navigate(to: createMobileBankingController())
+            case .internetBanking:
+                navigate(to: createInternetBankingController())
+            case .installment:
+                navigate(to: createInstallmentController())
+            case .creditCard:
+                navigate(to: createCreditCardPaymentController())
+            case .sourceType(.atome):
+                navigate(to: createAtomeController())
             case .eContextConbini, .eContextPayEasy, .eContextNetBanking:
                 navigate(to: createEContextController(title: paymentMethod.localizedTitle))
-            default: break            }
+            case .sourceType(.fpx):
+                navigate(to: createFPXController())
+            default: break
+            }
         } else if let sourceType = paymentMethod.sourceType {
             processPayment(.sourceType(sourceType), completion: completion)
         } else {
@@ -247,7 +287,7 @@ extension ChoosePaymentCoordinator {
 //        //        case ("GoToInstallmentBrandChooserSegue"?, let controller as InstallmentBankingSourceChooserViewController):
 //        //            controller.showingValues = allowedPaymentMethods.filter({ $0.isInstallment })
 //        //            controller.flowSession = self.viewModel.flowSession
-//        //        case (_, let controller as EContextInformationInputController):
+//        //        case (_, let controller as EContextPaymentFormController):
 //        //            controller.flowSession = self.viewModel.flowSession
 //        //            if let element = (sender as? UITableViewCell).flatMap(tableView.indexPath(for:)).map(item(at:)) {
 //        //                switch element {
@@ -275,9 +315,9 @@ extension ChoosePaymentCoordinator {
 //        //                default: break
 //        //                }
 //        //            }
-//        //        case ("GoToTrueMoneyFormSegue"?, let controller as TrueMoneyFormViewController):
+//        //        case ("GoToTrueMoneyFormSegue"?, let controller as TrueMoneyPaymentFormController):
 //        //            controller.flowSession = self.viewModel.flowSession
-//        //        case ("GoToFPXFormSegue"?, let controller as FPXFormViewController):
+//        //        case ("GoToFPXFormSegue"?, let controller as FPXPaymentFormController):
 //        //            //            controller.showingValues = capability?.paymentMethod(for: .fpx)?.banks
 //        //            //            capability?[.fpx]?.banks ?? []
 //        //

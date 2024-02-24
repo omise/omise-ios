@@ -4,6 +4,8 @@ class SelectPaymentController: UITableViewController {
 
     let viewModel: SelectPaymentPresentableProtocol
 
+    var customizeCellAtIndexPathClosure: (UITableViewCell, IndexPath) -> Void = { _, _ in }
+
     init(viewModel: SelectPaymentPresentableProtocol) {
         self.viewModel = viewModel
         super.init(style: .plain)
@@ -56,6 +58,7 @@ class SelectPaymentController: UITableViewController {
         cell.selectedBackgroundView = UIView()
             .backgroundColor(UIColor.selectedCellBackgroundColor)
 
+        customizeCellAtIndexPathClosure(cell, indexPath)
         return cell
     }
 

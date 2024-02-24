@@ -1,6 +1,6 @@
 import UIKit
 
-class EContextInformationInputController: UIViewController, PaymentFormUIController {
+class EContextPaymentFormController: UIViewController, PaymentFormUIController {
     weak var delegate: SelectSourcePaymentDelegate?
 
     var client: Client?
@@ -109,7 +109,6 @@ class EContextInformationInputController: UIViewController, PaymentFormUIControl
         field.addTarget(self, action: #selector(validateFieldData), for: .editingChanged)
         field.addTarget(self, action: #selector(updateInputAccessoryViewFor), for: .editingDidBegin)
         field.addTarget(self, action: #selector(validateTextFieldDataOf), for: .editingDidEnd)
-
     }
 
     override func viewWillLayoutSubviews() {

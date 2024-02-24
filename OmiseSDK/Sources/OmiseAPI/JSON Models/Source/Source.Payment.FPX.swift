@@ -5,7 +5,7 @@ extension Source.Payment {
     /// https://docs.opn.ooo/fpx
     public struct FPX: Equatable {
         /// Bank code selected by customer
-        public let bank: Bank
+        public let bank: String
         /// Customer email
         public let email: String?
 
@@ -14,13 +14,13 @@ extension Source.Payment {
         /// - Parameters:
         ///   - bank: Bank code selected by customer
         ///   - email: Customer email
-        public init(bank: Bank, email: String?) {
+        public init(bank: String, email: String?) {
             self.bank = bank
             self.email = email
         }
 
         /// Convenient static function to create a new DuitNowOBW instance
-        static func bank(_ bank: Bank, email: String?) -> Self {
+        static func bank(_ bank: String, email: String?) -> Self {
             Self(bank: bank, email: email)
         }
     }
@@ -37,7 +37,7 @@ extension Source.Payment.FPX: Codable {
     /// Decode DuitNowOBW object from JSON string
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.bank = try container.decode(Bank.self, forKey: .bank)
+        self.bank = try container.decode(String.self, forKey: .bank)
         self.email = try container.decodeIfPresent(String.self, forKey: .email)
     }
 }

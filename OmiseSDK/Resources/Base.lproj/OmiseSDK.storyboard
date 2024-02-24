@@ -88,7 +88,7 @@
         <!--TrueMoney Wallet-->
         <scene sceneID="B8a-pv-rKr">
             <objects>
-                <viewController id="Qrb-nZ-3ze" customClass="TrueMoneyFormViewController" customModule="OmiseSDK" sceneMemberID="viewController">
+                <viewController id="Qrb-nZ-3ze" customClass="TrueMoneyPaymentFormController" customModule="OmiseSDK" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OgH-zY-UpJ"/>
                         <viewControllerLayoutGuide type="bottom" id="7O7-vN-x1O"/>
@@ -322,7 +322,7 @@
         <!--FPX-->
         <scene sceneID="UVs-NR-lOg">
             <objects>
-                <viewController id="cWp-oe-wgJ" customClass="FPXFormViewController" customModule="OmiseSDK" sceneMemberID="viewController">
+                <viewController id="cWp-oe-wgJ" customClass="FPXPaymentFormController" customModule="OmiseSDK" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uFd-Vf-fSA"/>
                         <viewControllerLayoutGuide type="bottom" id="3Fw-T7-ntI"/>
