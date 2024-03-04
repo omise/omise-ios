@@ -69,6 +69,7 @@ public class OmiseSDK {
     ///    - currency: Payment currency code
     ///    - allowedPaymentMethods: Custom list of payment methods to be shown in the list. If value is nill then SDK will load list from Capability API
     ///    - allowedCardPayment: Should present Card Payment Method in the list
+    ///    - handleErrors:  If `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
     ///    - completion: Completion handler triggered when payment completes with Token, Source, Error or was Cancelled
     public func choosePaymentMethodController(
         amount: Int64,
@@ -103,7 +104,7 @@ public class OmiseSDK {
     ///    - from: ViewController is used as a base to present UINavigationController
     ///    - allowedPaymentMethods: Custom list of payment methods to be shown in the list. If value is nill then SDK will load list from Capability API
     ///    - allowedCardPayment: Should present Card Payment Method in the list
-    ///    - handleErrors:  If the value is `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
+    ///    - handleErrors:  If `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
     ///    - delegate: Delegate to be notified when Source or Token is created
     public func choosePaymentMethodFromCapabilityController(
         amount: Int64,
@@ -136,7 +137,7 @@ public class OmiseSDK {
     ///
     /// - Parameters:
     ///    - countryCode: Delegate to be notified when Source or Token is created
-    ///    - handleErrors:  If the value is `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
+    ///    - handleErrors:  If `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
     ///    - delegate: Delegate to be notified when Source or Token is created
     public func creditCardController(
         countryCode: String? = nil,
@@ -163,7 +164,7 @@ public class OmiseSDK {
 
     /// Creates a authorizing payment view controller comes in UINavigationController stack.
     ///
-    /// - parameter authorizedURL: The authorized URL given in `Charge` object that will be set to `OmiseAuthorizingPaymentViewController`
+    /// - parameter authorizedURL: The authorized URL given in `Charge` object
     /// - parameter expectedReturnURLPatterns: The expected return URL patterns.
     /// - parameter delegate: A delegate object that will recieved authorizing payment events.
     ///

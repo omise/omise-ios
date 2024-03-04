@@ -65,8 +65,8 @@ public class CardNumberTextField: OmiseTextField {
         
         super.delegate = self
         
-        placeholder = placeholder
-        
+        updatePlaceholderTextColor()
+
         textContentType = .creditCardNumber
     }
     
