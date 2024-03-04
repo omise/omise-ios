@@ -19,7 +19,7 @@ extension SourceType: ViewPresentable {
         case .billPaymentTescoLotus:
             return "Tesco Lotus"
         case .eContext:
-            return "Conbini"
+            return "" // Doesn't have specific title
         case .alipay:
             return "Alipay"
         case .alipayCN:
@@ -119,7 +119,7 @@ extension SourceType: ViewPresentable {
         case .billPaymentTescoLotus:
             return "Tesco"
         case .eContext:
-            return "Conbini"
+            return "" // Doesn't have specific icon
         case .alipay:
             return "Alipay"
         case .alipayCN:

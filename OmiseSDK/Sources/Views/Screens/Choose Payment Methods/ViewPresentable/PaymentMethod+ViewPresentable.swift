@@ -27,11 +27,11 @@ extension PaymentMethod: ViewPresentable {
         case .mobileBanking:
             return localized("\(prefixCode).mobileBanking", text: "Mobile Banking")
         case .eContextConbini:
-            return localized("\(prefixCode).eContext.conbini", text: "Conbini")
+            return localized("\(prefixCode).eContext.conbini", text: "Konbini")
         case .eContextPayEasy:
-            return localized("\(prefixCode).eContext.payEasy", text: "PayEasy")
+            return localized("\(prefixCode).eContext.payEasy", text: "Pay-easy")
         case .eContextNetBanking:
-            return localized("\(prefixCode).eContext.netBanking", text: "NetBanking")
+            return localized("\(prefixCode).eContext.netBanking", text: "Net Bank")
         case .sourceType(let sourceType):
             return sourceType.localizedTitle
         }
@@ -44,7 +44,7 @@ extension PaymentMethod: ViewPresentable {
         case .installment: return "Installment"
         case .internetBanking: return "Banking"
         case .mobileBanking: return "MobileBanking"
-        case .eContextConbini: return "Conbini"
+        case .eContextConbini: return "Konbini"
         case .eContextPayEasy: return "Payeasy"
         case .eContextNetBanking: return "Netbank"
         case .sourceType(let sourceType): return sourceType.iconName
