@@ -37,4 +37,3 @@ extension Source.Payment.DuitNowOBW: Codable {
         self.bank = try container.decode(Bank.self, forKey: .bank)
     }
 }
-

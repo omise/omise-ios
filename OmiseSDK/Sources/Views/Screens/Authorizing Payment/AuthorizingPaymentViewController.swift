@@ -2,6 +2,7 @@ import Foundation
 import WebKit
 import os
 
+@available(iOSApplicationExtension, unavailable)
 public protocol AuthorizingPaymentViewControllerDelegate: AnyObject {
     /// A delegation method called when the authorizing payment process is completed.
     /// - parameter viewController: The authorizing payment controller that call this method.
@@ -19,6 +20,7 @@ public protocol AuthorizingPaymentViewControllerDelegate: AnyObject {
  - remark:
    This is still an experimental API. If you encountered with any problem with this API, please feel free to report to Omise.
  */
+@available(iOSApplicationExtension, unavailable)
 public class AuthorizingPaymentViewController: UIViewController {
     /// Authorized URL given from Omise in the created `Charge` object.
     var authorizedURL: URL? {

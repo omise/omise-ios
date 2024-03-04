@@ -130,9 +130,8 @@ class FPXPaymentFormController: UIViewController, PaymentFormUIController {
 
     @IBAction private func submitForm(_ sender: AnyObject) {
         emailValue = emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces)
-        delegate?.fpxDidCompleteWith(email: emailValue, completion: {})
+        delegate?.fpxDidCompleteWith(email: emailValue) {}
     }
-
 
     @IBAction private func validateFieldData(_ textField: OmiseTextField) {
         submitButton.isEnabled = isInputDataValid

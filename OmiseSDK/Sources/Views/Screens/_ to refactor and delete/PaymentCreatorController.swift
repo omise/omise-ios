@@ -1,5 +1,3 @@
-// swiftlint:disable file_length
-
 import UIKit
 import os
 
@@ -56,9 +54,6 @@ public class PaymentCreatorController: UINavigationController {
     /// otherwise the controller will ask its delegate.
     /// Defaults to `true`.
     public var handleErrors = true
-
-    /// Delegate to receive CreditCardPaymentController result.
-//    public weak var paymentDelegate: PaymentCreatorControllerDelegate?
 
     var client: Client? {
         didSet {
@@ -243,13 +238,6 @@ public class PaymentCreatorController: UINavigationController {
         return super.popViewController(animated: animated)
     }
 
-    public override func addChild(_ childController: UIViewController) {
-//        if let viewController = childController as? ChoosePaymentMethodControllerOld {
-//            viewController.viewModel.flowSession = self.paymentSourceCreatorFlowSession
-//        }
-        super.addChild(childController)
-    }
-
     // need to refactor loadView, removing super results in crash
     // swiftlint:disable:next prohibited_super_call
     public override func loadView() {
@@ -288,7 +276,6 @@ extension PaymentCreatorController: PaymentCreatorFlowSessionDelegate {
                log: uiLogObject,
                type: .default,
                token.id)
-
 
 //        if let paymentDelegate = self.paymentDelegate {
 //            paymentDelegate.paymentCreatorController(self, didCreatePayment: Payment.token(token))

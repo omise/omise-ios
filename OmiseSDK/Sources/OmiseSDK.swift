@@ -163,6 +163,7 @@ public class OmiseSDK {
     /// - parameter delegate: A delegate object that will recieved authorizing payment events.
     ///
     /// - returns: A UINavigationController with `OmiseAuthorizingPaymentViewController` as its root view controller
+    @available(iOSApplicationExtension, unavailable)
     public func authorizedController(
         authorizedURL: URL,
         expectedReturnURLPatterns: [URLComponents],

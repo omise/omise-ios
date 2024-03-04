@@ -97,7 +97,7 @@ extension Source.Payment: Codable {
 
 extension Source.Payment {
     static func requiresAdditionalDetails(sourceType: SourceType) -> Bool {
-        var requiresDetails: [SourceType] = [
+        let requiresDetails: [SourceType] = [
             Atome.sourceType,
             BarcodeAlipay.sourceType,
             DuitNowOBW.sourceType,

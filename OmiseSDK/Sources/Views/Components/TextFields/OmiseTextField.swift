@@ -21,7 +21,7 @@ public class OmiseTextField: UITextField {
     }
 
     public var onTextFieldShouldReturn: () -> (Bool) = { return false }
-    public var onValueChanged: () -> () = { }
+    public var onValueChanged: () -> Void = { }
 
     @IBInspectable var borderWidth: CGFloat {
         get {

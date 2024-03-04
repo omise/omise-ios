@@ -87,7 +87,6 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
         return viewController
     }
 
-
     /// Creates Mobile Banking screen and attach current flow object inside created controller to be deallocated together
     func createMobileBankingController() -> SelectPaymentController {
         let viewModel = SelectSourceTypePaymentViewModel(
