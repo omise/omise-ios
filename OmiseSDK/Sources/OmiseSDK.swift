@@ -34,9 +34,6 @@ public class OmiseSDK {
     /// Client is used to communicate with Omise API
     public let client: Client
 
-    /// If it's `true` SDK will handle errors and will not notify ChoosePaymentMethodDelegate
-    public let handleErrors: Bool
-
     /// Latest capability loaded with `client.capability()`
     var latestLoadedCapability: Capability? { client.latestLoadedCapability }
 
@@ -50,9 +47,8 @@ public class OmiseSDK {
     /// - Parameters:
     ///    - publicKey: Omise public key
     ///    - configuration: Optional configuration is used for testing
-    public init(publicKey: String, handleErrors: Bool = true, configuration: Configuration? = nil) {
+    public init(publicKey: String, configuration: Configuration? = nil) {
         self.publicKey = publicKey
-        self.handleErrors = handleErrors
         self.client = Client(
             publicKey: publicKey,
             version: version,
@@ -79,6 +75,7 @@ public class OmiseSDK {
         currency: String,
         allowedPaymentMethods: [SourceType],
         allowedCardPayment: Bool,
+        handleErrors: Bool = true,
         delegate: ChoosePaymentMethodDelegate
     ) -> UINavigationController {
         let paymentFlow = ChoosePaymentCoordinator(
@@ -106,10 +103,12 @@ public class OmiseSDK {
     ///    - from: ViewController is used as a base to present UINavigationController
     ///    - allowedPaymentMethods: Custom list of payment methods to be shown in the list. If value is nill then SDK will load list from Capability API
     ///    - allowedCardPayment: Should present Card Payment Method in the list
+    ///    - handleErrors:  If the value is `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
     ///    - delegate: Delegate to be notified when Source or Token is created
     public func choosePaymentMethodFromCapabilityController(
         amount: Int64,
         currency: String,
+        handleErrors: Bool = true,
         delegate: ChoosePaymentMethodDelegate
     ) -> UINavigationController {
         let paymentFlow = ChoosePaymentCoordinator(
@@ -136,13 +135,19 @@ public class OmiseSDK {
     /// Creates a Credit Card Controller comes in UINavigationController stack
     ///
     /// - Parameters:
+    ///    - countryCode: Delegate to be notified when Source or Token is created
+    ///    - handleErrors:  If the value is `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
     ///    - delegate: Delegate to be notified when Source or Token is created
-    public func creditCardController(delegate: ChoosePaymentMethodDelegate) -> UINavigationController {
+    public func creditCardController(
+        countryCode: String? = nil,
+        handleErrors: Bool = true,
+        delegate: ChoosePaymentMethodDelegate
+    ) -> UINavigationController {
         let paymentFlow = ChoosePaymentCoordinator(
             client: client,
             amount: 0,
             currency: "",
-            currentCountry: country,
+            currentCountry: Country(code: countryCode) ?? self.country,
             handleErrors: handleErrors
         )
         let viewController = paymentFlow.createCreditCardPaymentController(delegate: delegate)
@@ -162,7 +167,7 @@ public class OmiseSDK {
     /// - parameter expectedReturnURLPatterns: The expected return URL patterns.
     /// - parameter delegate: A delegate object that will recieved authorizing payment events.
     ///
-    /// - returns: A UINavigationController with `OmiseAuthorizingPaymentViewController` as its root view controller
+    /// - returns: A UINavigationController with `AuthorizingPaymentViewController` as its root view controller
     @available(iOSApplicationExtension, unavailable)
     public func authorizedController(
         authorizedURL: URL,

@@ -58,14 +58,14 @@ details, read on:
 ### Opn Payments API
 
 The Opn Payments iOS SDK provides an easy-to-use library for calling the
-Opn Payments API. The main class for the Opn Payments iOS SDK is `Client` through
+Opn Payments API. The main classes for the Opn Payments iOS SDK is `OmiseSDK` and `Client` through
 which all requests to the Opn Payments API will be sent. Creating a new
-`Client` object requires an Opn Payments public key.
+`OmiseSDK` object requires an Opn Payments public key.
 
 ``` swift
 import OmiseSDK
 
-let client = OmiseSDK.Client.init(publicKey: "omise_public_key")
+let omiseSDK = OmiseSDK(publicKey: "omise_public_key")
 ```
 
 
