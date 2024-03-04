@@ -20,86 +20,13 @@ class ProductDetailViewController: BaseViewController {
             }
         }
     }
-    
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "PresentCreditFormWithModal" ||
-            identifier == "ShowCreditForm" ||
-            identifier == "PresentPaymentCreator" ||
-            identifier == "ShowCreditFormWithCustomFields" {
-            return currentCodePathMode == .storyboard
-        }
-        
-        return true
-    }
 
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        super.prepare(for: segue, sender: sender)
-//        
-//        if segue.identifier == "PresentCreditFormWithModal",
-//            let creditCardFormNavigationController = segue.destination as? UINavigationController,
-//            let creditCardFormController = creditCardFormNavigationController.topViewController as? CreditCardPaymentController {
-//            creditCardFormController.publicKey = publicKey
-//            creditCardFormController.handleErrors = true
-//            creditCardFormController.delegate = self
-//        } else if segue.identifier == "ShowCreditForm",
-//            let creditCardFormController = segue.destination as? CreditCardPaymentController {
-//            creditCardFormController.publicKey = publicKey
-//            creditCardFormController.handleErrors = true
-//            creditCardFormController.delegate = self
-//        } else if segue.identifier == "PresentPaymentCreator",
-//            let paymentCreatorController = segue.destination as? PaymentCreatorController {
-//            paymentCreatorController.publicKey = self.publicKey
-//            paymentCreatorController.paymentAmount = paymentAmount
-//            paymentCreatorController.paymentCurrency = Currency(code: paymentCurrencyCode)
-//            if usesCapabilityDataForPaymentMethods, let capability = self.capability {
-//                paymentCreatorController.applyPaymentMethods(from: capability)
-//            } else {
-//                paymentCreatorController.allowedPaymentMethods = allowedPaymentMethods
-//            }
-//            paymentCreatorController.paymentDelegate = self
-//        } else if segue.identifier == "ShowCreditFormWithCustomFields",
-//            let vc = segue.destination as? CustomCreditCardPaymentController {
-//            vc.delegate = self
-//        }
-//    }
-    
     @IBAction private func showModalCreditCardPayment(_ sender: Any) {
-        guard currentCodePathMode == .code else {
-            return
-        }
-
         let viewController = omiseSDK.creditCardController(delegate: self)
         present(viewController, animated: true, completion: nil)
-
-//        let creditCardFormController = CreditCardPaymentController.makeCreditCardPaymentController(withPublicKey: publicKey)
-//        creditCardFormController.handleErrors = true
-//        creditCardFormController.delegate = self
-//        let navigationController = UINavigationController(rootViewController: creditCardFormController)
-//        present(navigationController, animated: true, completion: nil)
-    }
-    
-    @IBAction private func showCreditCardPayment(_ sender: UIButton) {
-        guard currentCodePathMode == .code else {
-            return
-        }
-
-        let nc = omiseSDK.creditCardController(delegate: self)
-        addChild(nc)
-        if let vc = nc.topViewController {
-            navigationController?.pushViewController(vc, animated: true)
-        }
-
-//        let creditCardFormController = CreditCardPaymentController.makeCreditCardPaymentController(withPublicKey: publicKey)
-//        creditCardFormController.handleErrors = true
-//        creditCardFormController.delegate = self
-//        show(creditCardFormController, sender: self)
     }
     
     @IBAction private func showModalPaymentCreator(_ sender: Any) {
-        guard currentCodePathMode == .code else {
-            return
-        }
-
         if usesCapabilityDataForPaymentMethods {
             let viewController = omiseSDK.choosePaymentMethodFromCapabilityController(
                 amount: paymentAmount,
@@ -120,9 +47,6 @@ class ProductDetailViewController: BaseViewController {
     }
     
     @IBAction private func showCustomCreditCardPayment(_ sender: Any) {
-        guard currentCodePathMode == .code else {
-            return
-        }
         let customCreditCardPaymentController = CustomCreditCardPaymentController(nibName: nil, bundle: nil)
         customCreditCardPaymentController.delegate = self
         show(customCreditCardPaymentController, sender: sender)

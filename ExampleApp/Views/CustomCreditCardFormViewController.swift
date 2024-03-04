@@ -40,83 +40,81 @@ class CustomCreditCardPaymentController: UIViewController {
     override func loadView() {
         super.loadView()
         
-        if storyboard == nil {
-            view.backgroundColor = .background
+        view.backgroundColor = .background
 
-            billingStackView = UIStackView()
-            billingStackView.axis = .vertical
-            billingStackView.spacing = 24
-            billingStackView.distribution = .equalSpacing
-            billingStackView.alignment = .fill
+        billingStackView = UIStackView()
+        billingStackView.axis = .vertical
+        billingStackView.spacing = 24
+        billingStackView.distribution = .equalSpacing
+        billingStackView.alignment = .fill
 
-            cardNumberField = CardNumberTextField()
-            cardNumberField.translatesAutoresizingMaskIntoConstraints = false
-            cardNumberField.placeholder = "1234567812345678"
-            cardNameField = CardNameTextField()
-            cardNameField.translatesAutoresizingMaskIntoConstraints = false
-            cardNameField.placeholder = "John Appleseed"
-            cardExpiryField = CardExpiryDateTextField()
-            cardExpiryField.translatesAutoresizingMaskIntoConstraints = false
-            cardExpiryField.placeholder = "MM/yy Date Format"
-            cardCVVField = CardCVVTextField()
-            cardCVVField.translatesAutoresizingMaskIntoConstraints = false
-            cardCVVField.placeholder = "321"
-            
-            let cardNumberLabel = UILabel()
-            cardNumberLabel.text = "Card Number"
-            cardNumberLabel.translatesAutoresizingMaskIntoConstraints = false
-            let cardNumberStackView = UIStackView(arrangedSubviews: [cardNumberLabel, cardNumberField])
-            let cardNameLabel = UILabel()
-            cardNameLabel.text = "Card Name"
-            cardNameLabel.translatesAutoresizingMaskIntoConstraints = false
-            let cardNameStackView = UIStackView(arrangedSubviews: [cardNameLabel, cardNameField])
-            let cardExpiryLabel = UILabel()
-            cardExpiryLabel.text = "Card Expiry"
-            cardExpiryLabel.translatesAutoresizingMaskIntoConstraints = false
-            let cardExpiryStackView = UIStackView(arrangedSubviews: [cardExpiryLabel, cardExpiryField])
-            let cardCVVLabel = UILabel()
-            cardCVVLabel.text = "Card CVV"
-            cardCVVLabel.translatesAutoresizingMaskIntoConstraints = false
-            let cardCVVStackView = UIStackView(arrangedSubviews: [cardCVVLabel, cardCVVField])
-            
-            let lowerRowStackView = UIStackView(arrangedSubviews: [cardExpiryStackView, cardCVVStackView])
-            
-            cardNumberStackView.axis = .vertical
-            cardNumberStackView.distribution = .fill
-            cardNumberStackView.alignment = .fill
-            cardNumberStackView.spacing = 10
-            cardNameStackView.axis = .vertical
-            cardNameStackView.distribution = .fill
-            cardNameStackView.alignment = .fill
-            cardNameStackView.spacing = 10
-            cardExpiryStackView.axis = .vertical
-            cardExpiryStackView.distribution = .fill
-            cardExpiryStackView.alignment = .fill
-            cardExpiryStackView.spacing = 10
-            cardCVVStackView.axis = .vertical
-            cardCVVStackView.distribution = .fill
-            cardCVVStackView.alignment = .fill
-            cardCVVStackView.spacing = 10
-            lowerRowStackView.axis = .horizontal
-            lowerRowStackView.distribution = .fillEqually
-            lowerRowStackView.alignment = .fill
-            lowerRowStackView.spacing = 10
-            
-            let verticalContainerStack = UIStackView(arrangedSubviews: [cardNumberStackView, cardNameStackView, lowerRowStackView])
-            verticalContainerStack.translatesAutoresizingMaskIntoConstraints = false
-            verticalContainerStack.axis = .vertical
-            verticalContainerStack.distribution = .fill
-            verticalContainerStack.alignment = .fill
-            verticalContainerStack.spacing = 20
+        cardNumberField = CardNumberTextField()
+        cardNumberField.translatesAutoresizingMaskIntoConstraints = false
+        cardNumberField.placeholder = "1234567812345678"
+        cardNameField = CardNameTextField()
+        cardNameField.translatesAutoresizingMaskIntoConstraints = false
+        cardNameField.placeholder = "John Appleseed"
+        cardExpiryField = CardExpiryDateTextField()
+        cardExpiryField.translatesAutoresizingMaskIntoConstraints = false
+        cardExpiryField.placeholder = "MM/yy Date Format"
+        cardCVVField = CardCVVTextField()
+        cardCVVField.translatesAutoresizingMaskIntoConstraints = false
+        cardCVVField.placeholder = "321"
 
-            view.addSubview(verticalContainerStack)
-            NSLayoutConstraint.activate([
-                verticalContainerStack.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-                verticalContainerStack.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-                verticalContainerStack.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 20),
-                verticalContainerStack.bottomAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.bottomAnchor)
-            ])
-        }
+        let cardNumberLabel = UILabel()
+        cardNumberLabel.text = "Card Number"
+        cardNumberLabel.translatesAutoresizingMaskIntoConstraints = false
+        let cardNumberStackView = UIStackView(arrangedSubviews: [cardNumberLabel, cardNumberField])
+        let cardNameLabel = UILabel()
+        cardNameLabel.text = "Card Name"
+        cardNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        let cardNameStackView = UIStackView(arrangedSubviews: [cardNameLabel, cardNameField])
+        let cardExpiryLabel = UILabel()
+        cardExpiryLabel.text = "Card Expiry"
+        cardExpiryLabel.translatesAutoresizingMaskIntoConstraints = false
+        let cardExpiryStackView = UIStackView(arrangedSubviews: [cardExpiryLabel, cardExpiryField])
+        let cardCVVLabel = UILabel()
+        cardCVVLabel.text = "Card CVV"
+        cardCVVLabel.translatesAutoresizingMaskIntoConstraints = false
+        let cardCVVStackView = UIStackView(arrangedSubviews: [cardCVVLabel, cardCVVField])
+
+        let lowerRowStackView = UIStackView(arrangedSubviews: [cardExpiryStackView, cardCVVStackView])
+
+        cardNumberStackView.axis = .vertical
+        cardNumberStackView.distribution = .fill
+        cardNumberStackView.alignment = .fill
+        cardNumberStackView.spacing = 10
+        cardNameStackView.axis = .vertical
+        cardNameStackView.distribution = .fill
+        cardNameStackView.alignment = .fill
+        cardNameStackView.spacing = 10
+        cardExpiryStackView.axis = .vertical
+        cardExpiryStackView.distribution = .fill
+        cardExpiryStackView.alignment = .fill
+        cardExpiryStackView.spacing = 10
+        cardCVVStackView.axis = .vertical
+        cardCVVStackView.distribution = .fill
+        cardCVVStackView.alignment = .fill
+        cardCVVStackView.spacing = 10
+        lowerRowStackView.axis = .horizontal
+        lowerRowStackView.distribution = .fillEqually
+        lowerRowStackView.alignment = .fill
+        lowerRowStackView.spacing = 10
+
+        let verticalContainerStack = UIStackView(arrangedSubviews: [cardNumberStackView, cardNameStackView, lowerRowStackView])
+        verticalContainerStack.translatesAutoresizingMaskIntoConstraints = false
+        verticalContainerStack.axis = .vertical
+        verticalContainerStack.distribution = .fill
+        verticalContainerStack.alignment = .fill
+        verticalContainerStack.spacing = 20
+
+        view.addSubview(verticalContainerStack)
+        NSLayoutConstraint.activate([
+            verticalContainerStack.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            verticalContainerStack.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            verticalContainerStack.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 20),
+            verticalContainerStack.bottomAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.bottomAnchor)
+        ])
 
         setupBillingAddressFields()
     }
@@ -124,12 +122,10 @@ class CustomCreditCardPaymentController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if storyboard == nil {
-            let saveButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.proceed))
-            navigationItem.rightBarButtonItem = saveButtonItem
-            self.doneButton = saveButtonItem
-            navigationItem.title = "Custom Credit Card Form"
-        }
+        let saveButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.proceed))
+        navigationItem.rightBarButtonItem = saveButtonItem
+        self.doneButton = saveButtonItem
+        navigationItem.title = "Custom Credit Card Form"
     }
 
     private func setupBillingAddressFields() {

@@ -202,23 +202,6 @@ as follows:
 }
 ```
 
-##### Use card form in storyboard
-
-`CreditCardPaymentController` comes with built-in storyboard support. You can use `CreditCardPaymentController` in your storybard by using `Storyboard Reference`. Drag the `Storyboard Reference` object onto your canvas and set its bundle identifier to `co.omise.OmiseSDK` and Storyboard to `OmiseSDK`. You can either leave `Referenced ID` empty or use `CreditCardPaymentController` as a `Referenced ID`
-You can setup `CreditCardPaymentController` in `UIViewController.prepare(for:sender:)` method
-
-```swift
-override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-  if segue.identifier == "PresentCreditFormWithModal",
-    let creditCardFormNavigationController = segue.destination as? UINavigationController,
-    let creditCardFormViewController = creditCardFormNavigationController.topViewController as? CreditCardPaymentController {
-      creditCardFormViewController.publicKey = publicKey
-      creditCardFormViewController.handleErrors = true
-      creditCardFormViewController.delegate = self
-  }
-}
-```
-
 ##### Custom card form
 
 You can create your own card form if you want but please keep in mind that you must not send the card information to your server.
@@ -284,25 +267,6 @@ extension ProductDetailViewController: PaymentCreatorControllerDelegate {
   }
 }
 ```
-##### Use payment creator controller in storyboard
-`PaymentCreatorController` comes with built-in storyboard support.
-You can use `PaymentCreatorController` in your storybard by using `Storyboard Reference`.
-Drag `Storyboard Reference` object onto your canvas and set its bundle identifier to `co.omise.OmiseSDK` and Storyboard to `OmiseSDK`
-and  `PaymentCreatorController` as a `Referenced ID`
-You can setup `PaymentCreatorController` in `UIViewController.prepare(for:sender:)` method
-
-```swift
-override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-  if segue.identifier == "PresentCreditFormWithModal",
-  let paymentCreatorController = segue.destination as? UINavigationController {
-    paymentCreatorController.publicKey = self.publicKey
-    paymentCreatorController.paymentAmount = paymentAmount
-    paymentCreatorController.paymentCurrency = paymentCurrency
-    paymentCreatorController.allowedPaymentMethods = allowedPaymentMethods
-    paymentCreatorController.paymentDelegate = self
-  }
-}
-```
 
 ### Authorizing payment
 
@@ -320,21 +284,6 @@ You can create an instance of `OmiseAuthorizingPaymentViewController` by calling
 ```swift
 let handlerController = OmiseAuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(url, expectedReturnURLPatterns: [expectedReturnURL], delegate: self)
 self.present(handlerController, animated: true, completion: nil)
-```
-
-##### Use `OmiseAuthorizingPaymentViewController` in storyboard
-
-`OmiseAuthorizingPaymentViewController` also comes with built-in storyboard support such as `CreditCardPaymentController`. You can use `OmiseAuthorizingPaymentViewController` in your storyboard by using `Storyboard Reference`. Drag `Storyboard Reference` object onto your canvas, set its bundle identifier to `co.omise.OmiseSDK` and storyboard to `OmiseSDK`, then use `DefaultAuthorizingPaymentViewController` as a `Referenced ID`.
-You can setup `OmiseAuthorizingPaymentViewController` in `UIViewController.prepare(for:sender:)` method
-```swift
-override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-  if segue.identifier == "AuthorizingPaymentViewController",
-    let omiseAuthorizingPaymentController = segue.destination as? OmiseAuthorizingPaymentViewController {
-      omiseAuthorizingPaymentController.delegate = self
-      omiseAuthorizingPaymentController.authorizedURL = authorizedURL
-      omiseAuthorizingPaymentController.expectedReturnURLPatterns =  [ URLComponents(string: "http://www.example.com/orders")! ]
-  }
-}
 ```
 
 ##### Receive `Authorizing Payment` events via the delegate

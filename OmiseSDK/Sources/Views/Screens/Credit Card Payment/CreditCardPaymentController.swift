@@ -97,15 +97,6 @@ class CreditCardPaymentController: UIViewController {
     @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
     static let defaultErrorMessageTextColor = UIColor.error
 
-    /// Factory method for creating CreditCardPaymentController with given public key.
-    /// - parameter publicKey: Omise public key.
-    static func makeCreditCardPaymentController(withPublicKey publicKey: String) -> CreditCardPaymentController {
-        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
-        // swiftlint:disable:next force_cast
-        let creditCardForm = storyboard.instantiateInitialViewController() as! CreditCardPaymentController
-        return creditCardForm
-    }
-
     func setCreditCardInformationWith(number: String?, name: String?, expiration: (month: Int, year: Int)?) {
         cardNumberTextField.text = number
         cardNameTextField.text = name

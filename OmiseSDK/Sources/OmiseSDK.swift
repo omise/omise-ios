@@ -37,6 +37,14 @@ public class OmiseSDK {
     /// If it's `true` SDK will handle errors and will not notify ChoosePaymentMethodDelegate
     public let handleErrors: Bool
 
+    /// Latest capability loaded with `client.capability()`
+    var latestLoadedCapability: Capability? { client.latestLoadedCapability }
+
+    /// Country associated with `latestLoadedCapability`
+    var country: Country? {
+        Country(code: latestLoadedCapability?.countryCode)
+    }
+
     /// Creates a new instance of Omise SDK that provides interface to functionallity that SDK provides
     ///
     /// - Parameters:
@@ -175,42 +183,6 @@ public class OmiseSDK {
         }
 
         return navigationController
-    }
-
-    /// A factory method for creating a authorizing payment view controller comes in UINavigationController stack.
-    ///
-    /// - parameter authorizedURL: The authorized URL given in `Charge` object that will be set to `OmiseAuthorizingPaymentViewController`
-    /// - parameter expectedReturnURLPatterns: The expected return URL patterns.
-    /// - parameter delegate: A delegate object that will recieved authorizing payment events.
-    ///
-    /// - returns: A UINavigationController with `OmiseAuthorizingPaymentViewController` as its root view controller
-    public static func authorizingPaymentController(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> UINavigationController {
-        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
-        let navigationController = storyboard.instantiateViewController(
-            withIdentifier: "DefaultAuthorizingPaymentViewControllerWithNavigation"
-        ) as! UINavigationController // swiftlint:disable:this force_cast
-
-        navigationController.navigationBar.isTranslucent = false
-        navigationController.navigationBar.backgroundColor = .white
-
-        // swiftlint:disable:next force_cast
-        let viewController = navigationController.topViewController as! AuthorizingPaymentViewController
-        viewController.authorizedURL = authorizedURL
-        viewController.expectedReturnURLPatterns = expectedReturnURLPatterns
-        viewController.delegate = delegate
-        viewController.applyNavigationBarStyle()
-
-        return navigationController
-    }
-}
-
-public extension OmiseSDK {
-    /// Latest capability loaded with `client.capability()`
-    var latestLoadedCapability: Capability? { client.latestLoadedCapability }
-
-    /// Country associated with `latestLoadedCapability`
-    var country: Country? {
-        Country(code: latestLoadedCapability?.countryCode)
     }
 }
 

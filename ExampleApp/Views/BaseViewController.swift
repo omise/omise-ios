@@ -9,16 +9,10 @@
 import UIKit
 import OmiseSDK
 
-enum CodePathMode: Int {
-    case storyboard = 0
-    case code = 1
-}
-
 class BaseViewController: UIViewController {
 
     @IBOutlet private var modeChooser: UISegmentedControl!
 
-    var currentCodePathMode: CodePathMode = .code
     var paymentAmount: Int64 = 0
     var paymentCurrencyCode: String = ""
     var usesCapabilityDataForPaymentMethods = false
@@ -41,12 +35,6 @@ class BaseViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = nil
 
         updateUIColors()
-
-        modeChooser.selectedSegmentIndex = CodePathMode.code.rawValue
-
-        #if INTERNAL_TEST
-        modeChooser.isEnabled = false
-        #endif
 
         let localeCountryCode: String? = {
             if #available(iOS 16, *) {
@@ -183,13 +171,4 @@ class BaseViewController: UIViewController {
         self.usesCapabilityDataForPaymentMethods = settingViewController.usesCapabilityDataForPaymentMethods
         self.allowedPaymentMethods = Array(settingViewController.allowedPaymentMethods)
     }
-
-    @IBAction private func codePathModeChangedHandler(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == CodePathMode.code.rawValue {
-            self.currentCodePathMode = .code
-        } else {
-            self.currentCodePathMode = .storyboard
-        }
-    }
-
 }
