@@ -5,7 +5,7 @@ import os.log
 
 /// Drop-in credit card input form view controller that automatically tokenizes credit
 /// card information.
-public class CreditCardPaymentController: UIViewController {
+class CreditCardPaymentController: UIViewController {
     // swiftlint:disable:previous type_body_length
 
     typealias ViewModel = CreditCardPaymentViewModel
@@ -25,10 +25,7 @@ public class CreditCardPaymentController: UIViewController {
         }
     }
 
-    /// A boolean flag to enables/disables automatic error handling. Defaults to `true`.
-    public var handleErrors = true
-
-    @IBInspectable public var errorMessageTextColor: UIColor! = CreditCardPaymentController.defaultErrorMessageTextColor {
+    @IBInspectable var errorMessageTextColor: UIColor! = CreditCardPaymentController.defaultErrorMessageTextColor {
         didSet {
             if errorMessageTextColor == nil {
                 errorMessageTextColor = CreditCardPaymentController.defaultErrorMessageTextColor
@@ -41,9 +38,6 @@ public class CreditCardPaymentController: UIViewController {
             }
         }
     }
-
-    // swiftlint:disable:next weak_delegate
-//    lazy var overlayTransitionDelegate = OverlayPanelTransitioningDelegate()
 
     var isInputDataValid: Bool {
         return formFields.allSatisfy { $0.isValid }
@@ -101,18 +95,18 @@ public class CreditCardPaymentController: UIViewController {
     }()
 
     @IBOutlet var requestingIndicatorView: UIActivityIndicatorView!
-    public static let defaultErrorMessageTextColor = UIColor.error
+    static let defaultErrorMessageTextColor = UIColor.error
 
     /// Factory method for creating CreditCardPaymentController with given public key.
     /// - parameter publicKey: Omise public key.
-    public static func makeCreditCardPaymentController(withPublicKey publicKey: String) -> CreditCardPaymentController {
+    static func makeCreditCardPaymentController(withPublicKey publicKey: String) -> CreditCardPaymentController {
         let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
         // swiftlint:disable:next force_cast
         let creditCardForm = storyboard.instantiateInitialViewController() as! CreditCardPaymentController
         return creditCardForm
     }
 
-    public func setCreditCardInformationWith(number: String?, name: String?, expiration: (month: Int, year: Int)?) {
+    func setCreditCardInformationWith(number: String?, name: String?, expiration: (month: Int, year: Int)?) {
         cardNumberTextField.text = number
         cardNameTextField.text = name
 
@@ -148,7 +142,7 @@ public class CreditCardPaymentController: UIViewController {
         ]
     }
 
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         setupArrays()
 
@@ -206,7 +200,7 @@ public class CreditCardPaymentController: UIViewController {
         }
     }
 
-    public override func viewWillLayoutSubviews() {
+    override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
         if #unavailable(iOS 11) {
@@ -221,13 +215,13 @@ public class CreditCardPaymentController: UIViewController {
         }
     }
 
-    public override func viewDidDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
         NotificationCenter().removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if previousTraitCollection?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
             view.setNeedsUpdateConstraints()
         }
@@ -361,28 +355,10 @@ public class CreditCardPaymentController: UIViewController {
         guard let viewModel = viewModel else { return false }
         viewModel.viewDidTapClose()
         return true
-//        os_log("Credit Card Form dismissing requested, Asking the delegate what should the form controler do",
-//               log: uiLogObject,
-//               type: .default)
-//
-//        if let delegate = self.delegate {
-//            delegate.creditCardFormViewControllerDidCancel(self)
-//            os_log("Canceling form delegate notified", log: uiLogObject, type: .default)
-//            return true
-//        } else if let delegateMethod = delegate?.creditCardFormViewControllerDidCancel {
-//            delegateMethod(self)
-//            os_log("Canceling form delegate notified", log: uiLogObject, type: .default)
-//            return true
-//        } else {
-//            os_log("Credit Card Form dismissing requested but there is not delegate to ask. Ignore the request",
-//                   log: uiLogObject,
-//                   type: .default)
-//            return false
-//        }
     }
 
     func makeViewContext() -> ViewContext {
-        guard let viewModel = viewModel else { return ViewContext () }
+        guard let viewModel = viewModel else { return ViewContext() }
 
         var context = ViewContext()
         let fields = viewModel.addressFields
@@ -410,23 +386,7 @@ public class CreditCardPaymentController: UIViewController {
         startActivityIndicator()
         viewModel.onSubmitButtonPressed(makeViewContext()) {
             self.stopActivityIndicator()
-
-//        { [weak self] result in
-//            guard let self = self else { return }
-//            self.stopActivityIndicator()
-//            switch result {
-//            case .success(let token):
-//                os_log("Credit Card Form's Request succeed %{private}@, trying to notify the delegate",
-//                       log: uiLogObject,
-//                       type: .default,
-//                       token.id)
-//                self.delegate?.creditCardFormViewController(self, didSucceedWithToken: token)
-//            case .failure(let error):
-//                self.handleError(error)
-//            }
-//        }
         }
-
     }
 
     func keyboardWillAppear(_ notification: Notification) {
@@ -841,7 +801,7 @@ extension CreditCardPaymentController {
         ]
     }
 
-    public override func accessibilityPerformMagicTap() -> Bool {
+    override func accessibilityPerformMagicTap() -> Bool {
         guard isInputDataValid else {
             return false
         }
@@ -850,7 +810,7 @@ extension CreditCardPaymentController {
         return true
     }
 
-    public override func accessibilityPerformEscape() -> Bool {
+    override func accessibilityPerformEscape() -> Bool {
         return performCancelingForm()
     }
 }

@@ -34,13 +34,17 @@ public class OmiseSDK {
     /// Client is used to communicate with Omise API
     public let client: Client
 
+    /// If it's `true` SDK will handle errors and will not notify ChoosePaymentMethodDelegate
+    public let handleErrors: Bool
+
     /// Creates a new instance of Omise SDK that provides interface to functionallity that SDK provides
     ///
     /// - Parameters:
     ///    - publicKey: Omise public key
     ///    - configuration: Optional configuration is used for testing
-    public init(publicKey: String, configuration: Configuration? = nil) {
+    public init(publicKey: String, handleErrors: Bool = true, configuration: Configuration? = nil) {
         self.publicKey = publicKey
+        self.handleErrors = handleErrors
         self.client = Client(
             publicKey: publicKey,
             version: version,
@@ -69,7 +73,13 @@ public class OmiseSDK {
         allowedCardPayment: Bool,
         delegate: ChoosePaymentMethodDelegate
     ) -> UINavigationController {
-        let paymentFlow = ChoosePaymentCoordinator(client: client, amount: amount, currency: currency, currentCountry: country)
+        let paymentFlow = ChoosePaymentCoordinator(
+            client: client,
+            amount: amount,
+            currency: currency,
+            currentCountry: country,
+            handleErrors: handleErrors
+        )
         let viewController = paymentFlow.createChoosePaymentMethodController(
             allowedPaymentMethods: allowedPaymentMethods,
             allowedCardPayment: allowedCardPayment,
@@ -78,6 +88,7 @@ public class OmiseSDK {
         )
 
         let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.delegate = paymentFlow
         return navigationController
     }
 
@@ -93,7 +104,13 @@ public class OmiseSDK {
         currency: String,
         delegate: ChoosePaymentMethodDelegate
     ) -> UINavigationController {
-        let paymentFlow = ChoosePaymentCoordinator(client: client, amount: amount, currency: currency, currentCountry: country)
+        let paymentFlow = ChoosePaymentCoordinator(
+            client: client,
+            amount: amount,
+            currency: currency,
+            currentCountry: country,
+            handleErrors: handleErrors
+        )
         let viewController = paymentFlow.createChoosePaymentMethodController(
             usePaymentMethodsFromCapability: true,
             delegate: delegate
@@ -104,7 +121,35 @@ public class OmiseSDK {
             navigationController.navigationBar.prefersLargeTitles = true
         }
 
+        navigationController.delegate = paymentFlow
         return navigationController
+    }
+
+    /// Creates a Credit Card Controller with payment methods loaded from Capability API
+    ///
+    /// - Parameters:
+    ///    - delegate: Delegate to be notified when Source or Token is created
+    public func creditCardController(delegate: ChoosePaymentMethodDelegate) -> UINavigationController {
+        let paymentFlow = ChoosePaymentCoordinator(
+            client: client,
+            amount: 0,
+            currency: "",
+            currentCountry: country,
+            handleErrors: handleErrors
+        )
+        let viewController = paymentFlow.createCreditCardPaymentController(delegate: delegate)
+
+        let navigationController = UINavigationController(rootViewController: viewController)
+        if #available(iOSApplicationExtension 11.0, *) {
+            navigationController.navigationBar.prefersLargeTitles = true
+        }
+
+        navigationController.delegate = paymentFlow
+        return navigationController
+    }
+
+    func showAuthorizedController() {
+        
     }
 }
 

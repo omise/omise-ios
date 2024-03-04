@@ -222,7 +222,6 @@ extension OmiseError {
     }
 
     var localizedRecoverySuggestion: String {
-
         enum CommonStrings: String {
             case tryAgainLater = "Please try again later"
         }

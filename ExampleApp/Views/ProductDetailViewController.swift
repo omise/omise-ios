@@ -32,10 +32,6 @@ class ProductDetailViewController: BaseViewController {
         return true
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        super.prepare(for: segue, sender: sender)
 //        
@@ -71,6 +67,10 @@ class ProductDetailViewController: BaseViewController {
         guard currentCodePathMode == .code else {
             return
         }
+
+        let viewController = omiseSDK.creditCardController(delegate: self)
+        present(viewController, animated: true, completion: nil)
+
 //        let creditCardFormController = CreditCardPaymentController.makeCreditCardPaymentController(withPublicKey: publicKey)
 //        creditCardFormController.handleErrors = true
 //        creditCardFormController.delegate = self
@@ -82,6 +82,13 @@ class ProductDetailViewController: BaseViewController {
         guard currentCodePathMode == .code else {
             return
         }
+
+        let nc = omiseSDK.creditCardController(delegate: self)
+        addChild(nc)
+        if let vc = nc.topViewController {
+            navigationController?.pushViewController(vc, animated: true)
+        }
+
 //        let creditCardFormController = CreditCardPaymentController.makeCreditCardPaymentController(withPublicKey: publicKey)
 //        creditCardFormController.handleErrors = true
 //        creditCardFormController.delegate = self

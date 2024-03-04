@@ -1,10 +1,11 @@
 import UIKit
 
-class ChoosePaymentCoordinator: ViewAttachable {
+class ChoosePaymentCoordinator: NSObject, ViewAttachable {
     let client: Client
     let amount: Int64
     let currency: String
     let currentCountry: Country?
+    let handleErrors: Bool
 
     enum ResultState {
         case cancelled
@@ -12,14 +13,26 @@ class ChoosePaymentCoordinator: ViewAttachable {
     }
     
     weak var choosePaymentMethodDelegate: ChoosePaymentMethodDelegate?
-
     weak var rootViewController: UIViewController?
 
-    init(client: Client, amount: Int64, currency: String, currentCountry: Country?) {
+    var errorViewHeightConstraint: NSLayoutConstraint?
+    let errorView: NoticeView = {
+        let noticeViewNib = UINib(nibName: "NoticeView", bundle: .omiseSDK)
+        let noticeView = noticeViewNib.instantiate(withOwner: nil, options: nil).first as! NoticeView // swiftlint:disable:this force_cast
+        noticeView.translatesAutoresizingMaskIntoConstraints = false
+        noticeView.backgroundColor = .error
+        return noticeView
+    }()
+
+    init(client: Client, amount: Int64, currency: String, currentCountry: Country?, handleErrors: Bool) {
         self.client = client
         self.amount = amount
         self.currency = currency
         self.currentCountry = currentCountry
+        self.handleErrors = handleErrors
+        super.init()
+
+        self.setupErrorView()
     }
 
     /// Creates SelectPaymentController and attach current flow object inside created controller to be deallocated together
@@ -28,6 +41,7 @@ class ChoosePaymentCoordinator: ViewAttachable {
     ///   - allowedPaymentMethods: List of Payment Methods to be presented in the list if `usePaymentMethodsFromCapability` is `false`
     ///   - allowedCardPayment: Shows credit card payment option if `true` and `usePaymentMethodsFromCapability` is `false`
     ///   - usePaymentMethodsFromCapability: If `true`then it loads list of Payment Methods from Capability API and ignores previous parameters
+    ///   - delegate: Payment method delegate
     func createChoosePaymentMethodController(
         allowedPaymentMethods paymentMethods: [SourceType] = [],
         allowedCardPayment isCardEnabled: Bool = true,
@@ -49,6 +63,30 @@ class ChoosePaymentCoordinator: ViewAttachable {
 
         return listController
     }
+
+    /// Creates CreditCardController and attach current flow object inside created controller to be deallocated together
+    ///
+    /// - Parameters:
+    ///   - delegate: Payment method delegate
+    func createCreditCardPaymentController(delegate: ChoosePaymentMethodDelegate) -> CreditCardPaymentController {
+        let viewController = createCreditCardPaymentController()
+        viewController.attach(self)
+
+        self.choosePaymentMethodDelegate = delegate
+        self.rootViewController = viewController
+
+        return viewController
+    }
+
+    /// Creates Credit Carc Payment screen and attach current flow object inside created controller to be deallocated together
+    func createCreditCardPaymentController() -> CreditCardPaymentController {
+        let viewModel = CreditCardPaymentViewModel(currentCountry: currentCountry, delegate: self)
+        let viewController = CreditCardPaymentController(nibName: nil, bundle: .omiseSDK)
+        viewController.viewModel = viewModel
+        viewController.title = PaymentMethod.creditCard.localizedTitle
+        return viewController
+    }
+
 
     /// Creates Mobile Banking screen and attach current flow object inside created controller to be deallocated together
     func createMobileBankingController() -> SelectPaymentController {
@@ -98,15 +136,6 @@ class ChoosePaymentCoordinator: ViewAttachable {
         let viewModel = AtomePaymentFormViewModel(amount: amount, currentCountry: currentCountry, delegate: self)
         let viewController = AtomePaymentInputsFormController(viewModel: viewModel)
         viewController.title = SourceType.atome.localizedTitle
-        return viewController
-    }
-
-    /// Creates Credit Carc Payment screen and attach current flow object inside created controller to be deallocated together
-    func createCreditCardPaymentController() -> CreditCardPaymentController {
-        let viewModel = CreditCardPaymentViewModel(currentCountry: currentCountry, delegate: self)
-        let viewController = CreditCardPaymentController(nibName: nil, bundle: .omiseSDK)
-        viewController.viewModel = viewModel
-        viewController.title = PaymentMethod.creditCard.localizedTitle
         return viewController
     }
 
@@ -231,138 +260,3 @@ extension ChoosePaymentCoordinator: SelectSourcePaymentDelegate {
         processPayment(payment, completion: completion)
     }
 }
-
-extension ChoosePaymentCoordinator {
-    func navigate(to viewController: UIViewController) {
-        rootViewController?.navigationController?.pushViewController(
-            viewController,
-            animated: true
-        )
-    }
-
-    func processPayment(_ card: CreateTokenPayload.Card, completion: @escaping () -> Void) {
-        guard let delegate = choosePaymentMethodDelegate else { return }
-        let tokenPayload = CreateTokenPayload(card: card)
-
-        client.createToken(payload: tokenPayload) { [weak delegate] result in
-            switch result {
-            case .success(let token):
-                delegate?.choosePaymentMethodDidComplete(with: token)
-            case .failure(let error):
-                delegate?.choosePaymentMethodDidComplete(with: error)
-            }
-            completion()
-        }
-    }
-
-    func processPayment(_ payment: Source.Payment, completion: @escaping () -> Void) {
-        guard let delegate = choosePaymentMethodDelegate else { return }
-        let sourcePayload = CreateSourcePayload(
-            amount: amount,
-            currency: currency,
-            details: payment
-        )
-
-        client.createSource(payload: sourcePayload) { [weak delegate] result in
-            switch result {
-            case .success(let source):
-                delegate?.choosePaymentMethodDidComplete(with: source)
-            case .failure(let error):
-                delegate?.choosePaymentMethodDidComplete(with: error)
-            }
-            completion()
-        }
-    }
-}
-
-// protocol NavigationFlow<Route> {
-//    associatedtype Route
-//    func navigate(to: Route)
-// }
-//
-// extension ChoosePaymentCoordinator: NavigationFlow {
-//    enum Route {
-//        case creditCard
-//        case installments
-//        case mobileBanking
-//        case internetBanking
-//        case atome
-//        case trueMoneyWallet
-//        case duitNowOBW
-//        case eContext
-//        case fpx
-//    }
-//
-//    func navigate(to: Route) {
-//        //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        //        switch (segue.identifier, segue.destination) {
-//        //        case ("GoToCreditCardPaymentSegue"?, let controller as CreditCardPaymentController):
-//        //            controller.publicKey = viewModel.flowSession?.client?.publicKey
-//        //            controller.delegate = viewModel.flowSession
-//        //            controller.navigationItem.rightBarButtonItem = nil
-//        //        case ("GoToInternetBankingChooserSegue"?, let controller as InternetBankingSourceChooserViewController):
-//        //            controller.showingValues = allowedPaymentMethods.filter({ $0.isInternetBanking })
-//        //            controller.flowSession = self.viewModel.flowSession
-//        //        case ("GoToMobileBankingChooserSegue"?, let controller as MobileBankingSourceChooserViewController):
-//        //            controller.showingValues = allowedPaymentMethods.filter({ $0.isMobileBanking })
-//        //            controller.flowSession = self.viewModel.flowSession
-//        //        case ("GoToInstallmentBrandChooserSegue"?, let controller as InstallmentBankingSourceChooserViewController):
-//        //            controller.showingValues = allowedPaymentMethods.filter({ $0.isInstallment })
-//        //            controller.flowSession = self.viewModel.flowSession
-//        //        case (_, let controller as EContextPaymentFormController):
-//        //            controller.flowSession = self.viewModel.flowSession
-//        //            if let element = (sender as? UITableViewCell).flatMap(tableView.indexPath(for:)).map(item(at:)) {
-//        //                switch element {
-//        //                case .conbini:
-//        //                    controller.navigationItem.title = NSLocalizedString(
-//        //                        "econtext.convenience-store.navigation-item.title",
-//        //                        bundle: .omiseSDK,
-//        //                        value: "Konbini",
-//        //                        comment: "A navigaiton title for the EContext screen when the `Konbini` is selected"
-//        //                    )
-//        //                case .netBanking:
-//        //                    controller.navigationItem.title = NSLocalizedString(
-//        //                        "econtext.netbanking.navigation-item.title",
-//        //                        bundle: .omiseSDK,
-//        //                        value: "Net Bank",
-//        //                        comment: "A navigaiton title for the EContext screen when the `Net Bank` is selected"
-//        //                    )
-//        //                case .payEasy:
-//        //                    controller.navigationItem.title = NSLocalizedString(
-//        //                        "econtext.pay-easy.navigation-item.title",
-//        //                        bundle: .omiseSDK,
-//        //                        value: "Pay-easy",
-//        //                        comment: "A navigaiton title for the EContext screen when the `Pay-easy` is selected"
-//        //                    )
-//        //                default: break
-//        //                }
-//        //            }
-//        //        case ("GoToTrueMoneyFormSegue"?, let controller as TrueMoneyPaymentFormController):
-//        //            controller.flowSession = self.viewModel.flowSession
-//        //        case ("GoToFPXFormSegue"?, let controller as FPXPaymentFormController):
-//        //            //            controller.showingValues = capability?.paymentMethod(for: .fpx)?.banks
-//        //            //            capability?[.fpx]?.banks ?? []
-//        //
-//        //            controller.flowSession = self.viewModel.flowSession
-//        //        case ("GoToDuitNowOBWBankChooserSegue"?, let controller as DuitNowOBWBankChooserViewController):
-//        ////            controller.showingValues = [.duitNowOBWBanks]
-//        ////            [Payment.DuitNowOBW.Bank]
-//        //            controller.flowSession = self.viewModel.flowSession
-//        //        default:
-//        //            break
-//        //        }
-//        //
-//        //        if let paymentShourceChooserUI = segue.destination as? PaymentChooserUI {
-//        //            paymentShourceChooserUI.preferredPrimaryColor = self.preferredPrimaryColor
-//        //            paymentShourceChooserUI.preferredSecondaryColor = self.preferredSecondaryColor
-//        //        }
-//        //    }
-//    }
-//
-//    private func viewController(for route: Route) -> UIViewController {
-//        switch self {
-//        default:
-//            return UIViewController()
-//        }
-//    }
-// }
