@@ -58,7 +58,7 @@ public class OmiseSDK {
         client.capability { _ in }
     }
 
-    /// Creates a Payment controller with given payment methods details
+    /// Creates a Payment controller with given payment methods details comes in UINavigationController stack
     ///
     /// - Parameters:
     ///    - amount: Payment amount
@@ -92,7 +92,7 @@ public class OmiseSDK {
         return navigationController
     }
 
-    /// Creates a Payment controller with payment methods loaded from Capability API
+    /// Creates a Payment controller with payment methods loaded from Capability API comes in UINavigationController stack
     ///
     /// - Parameters:
     ///    - from: ViewController is used as a base to present UINavigationController
@@ -125,7 +125,7 @@ public class OmiseSDK {
         return navigationController
     }
 
-    /// Creates a Credit Card Controller with payment methods loaded from Capability API
+    /// Creates a Credit Card Controller comes in UINavigationController stack
     ///
     /// - Parameters:
     ///    - delegate: Delegate to be notified when Source or Token is created
@@ -148,8 +148,59 @@ public class OmiseSDK {
         return navigationController
     }
 
-    func showAuthorizedController() {
-        
+    /// Creates a authorizing payment view controller comes in UINavigationController stack.
+    ///
+    /// - parameter authorizedURL: The authorized URL given in `Charge` object that will be set to `OmiseAuthorizingPaymentViewController`
+    /// - parameter expectedReturnURLPatterns: The expected return URL patterns.
+    /// - parameter delegate: A delegate object that will recieved authorizing payment events.
+    ///
+    /// - returns: A UINavigationController with `OmiseAuthorizingPaymentViewController` as its root view controller
+    public func authorizedController(
+        authorizedURL: URL,
+        expectedReturnURLPatterns: [URLComponents],
+        delegate: AuthorizingPaymentViewControllerDelegate
+    ) -> UINavigationController {
+        let viewController = AuthorizingPaymentViewController(nibName: nil, bundle: .omiseSDK)
+        viewController.authorizedURL = authorizedURL
+        viewController.expectedReturnURLPatterns = expectedReturnURLPatterns
+        viewController.delegate = delegate
+        viewController.applyNavigationBarStyle()
+
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.backgroundColor = .white
+
+        if #available(iOSApplicationExtension 11.0, *) {
+            navigationController.navigationBar.prefersLargeTitles = true
+        }
+
+        return navigationController
+    }
+
+    /// A factory method for creating a authorizing payment view controller comes in UINavigationController stack.
+    ///
+    /// - parameter authorizedURL: The authorized URL given in `Charge` object that will be set to `OmiseAuthorizingPaymentViewController`
+    /// - parameter expectedReturnURLPatterns: The expected return URL patterns.
+    /// - parameter delegate: A delegate object that will recieved authorizing payment events.
+    ///
+    /// - returns: A UINavigationController with `OmiseAuthorizingPaymentViewController` as its root view controller
+    public static func authorizingPaymentController(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> UINavigationController {
+        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
+        let navigationController = storyboard.instantiateViewController(
+            withIdentifier: "DefaultAuthorizingPaymentViewControllerWithNavigation"
+        ) as! UINavigationController // swiftlint:disable:this force_cast
+
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.backgroundColor = .white
+
+        // swiftlint:disable:next force_cast
+        let viewController = navigationController.topViewController as! AuthorizingPaymentViewController
+        viewController.authorizedURL = authorizedURL
+        viewController.expectedReturnURLPatterns = expectedReturnURLPatterns
+        viewController.delegate = delegate
+        viewController.applyNavigationBarStyle()
+
+        return navigationController
     }
 }
 

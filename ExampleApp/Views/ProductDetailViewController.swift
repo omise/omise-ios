@@ -134,16 +134,18 @@ class ProductDetailViewController: BaseViewController {
                                                 preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
         alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "Go", style: UIAlertAction.Style.default) { (_) in
-            guard let textField = alertController.textFields?.first,
+        alertController.addAction(UIAlertAction(title: "Go", style: UIAlertAction.Style.default) { [weak self ](_) in
+            guard let self = self,
+                  let textField = alertController.textFields?.first,
                   let text = textField.text,
                   let url = URL(string: text),
                   let expectedReturnURL = URLComponents(string: "https://opn.ooo/") else { return }
 
-            let handlerController =
-                AuthorizingPaymentViewController
-                    .makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(
-                        url, expectedReturnURLPatterns: [expectedReturnURL], delegate: self)
+            let handlerController = self.omiseSDK.authorizedController(
+                authorizedURL: url,
+                expectedReturnURLPatterns: [expectedReturnURL],
+                delegate: self
+            )
             self.present(handlerController, animated: true, completion: nil)
         })
         present(alertController, animated: true, completion: nil)

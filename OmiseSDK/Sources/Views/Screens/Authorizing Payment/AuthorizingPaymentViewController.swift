@@ -2,9 +2,6 @@ import Foundation
 import WebKit
 import os
 
-/// Delegate to receive authorizing payment events.
-@available(iOSApplicationExtension, unavailable)
-// swiftlint:disable:next attributes
 public protocol AuthorizingPaymentViewControllerDelegate: AnyObject {
     /// A delegation method called when the authorizing payment process is completed.
     /// - parameter viewController: The authorizing payment controller that call this method.
@@ -22,11 +19,9 @@ public protocol AuthorizingPaymentViewControllerDelegate: AnyObject {
  - remark:
    This is still an experimental API. If you encountered with any problem with this API, please feel free to report to Omise.
  */
-@available(iOSApplicationExtension, unavailable)
-// swiftlint:disable:next attributes
 public class AuthorizingPaymentViewController: UIViewController {
     /// Authorized URL given from Omise in the created `Charge` object.
-    public var authorizedURL: URL? {
+    var authorizedURL: URL? {
         didSet {
             guard isViewLoaded else {
                 return
@@ -40,61 +35,16 @@ public class AuthorizingPaymentViewController: UIViewController {
     ///
     /// The rule is the scheme and host must be matched and must have the path as a prefix.
     /// Example: if the return URL is `https://www.example.com/products/12345` the expected return URL should have a URLComponents with scheme of `https`, host of `www.example.com` and the path of `/products/`
-    public var expectedReturnURLPatterns: [URLComponents] = []
+    var expectedReturnURLPatterns: [URLComponents] = []
     
     /// A delegate object that will recieved the authorizing payment events.
-    public weak var delegate: AuthorizingPaymentViewControllerDelegate?
+    weak var delegate: AuthorizingPaymentViewControllerDelegate?
     
     let webView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration())
     let okButtonTitle = NSLocalizedString("OK", comment: "OK button for JavaScript panel")
     let confirmButtonTitle = NSLocalizedString("Confirm", comment: "Confirm button for JavaScript panel")
     let cancelButtonTitle = NSLocalizedString("Cancel", comment: "Cancel button for JavaScript panel")
-    
-    /// A factory method for creating a authorizing payment view controller comes in UINavigationController stack.
-    ///
-    /// - parameter authorizedURL: The authorized URL given in `Charge` object that will be set to `OmiseAuthorizingPaymentViewController`
-    /// - parameter expectedReturnURLPatterns: The expected return URL patterns.
-    /// - parameter delegate: A delegate object that will recieved authorizing payment events.
-    ///
-    /// - returns: A UINavigationController with `OmiseAuthorizingPaymentViewController` as its root view controller
-    public static func makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> UINavigationController {
-        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
-        let navigationController = storyboard.instantiateViewController(
-            withIdentifier: "DefaultAuthorizingPaymentViewControllerWithNavigation"
-        ) as! UINavigationController // swiftlint:disable:this force_cast
 
-        navigationController.navigationBar.isTranslucent = false
-        navigationController.navigationBar.backgroundColor = .white
-
-        // swiftlint:disable:next force_cast
-        let viewController = navigationController.topViewController as! AuthorizingPaymentViewController
-        viewController.authorizedURL = authorizedURL
-        viewController.expectedReturnURLPatterns = expectedReturnURLPatterns
-        viewController.delegate = delegate
-        viewController.applyNavigationBarStyle()
-
-        return navigationController
-    }
-
-    /// A factory method for creating a authorizing payment view controller comes in UINavigationController stack.
-    ///
-    /// - parameter authorizedURL: The authorized URL given in `Charge` object that will be set to `OmiseAuthorizingPaymentViewController`
-    /// - parameter expectedReturnURLPatterns: The expected return URL patterns.
-    /// - parameter delegate: A delegate object that will recieved authorizing payment events.
-    ///
-    /// - returns: An `OmiseAuthorizingPaymentViewController` with given authorized URL and delegate.
-    public static func makeAuthorizingPaymentViewControllerWithAuthorizedURL(_ authorizedURL: URL, expectedReturnURLPatterns: [URLComponents], delegate: AuthorizingPaymentViewControllerDelegate) -> AuthorizingPaymentViewController {
-        let storyboard = UIStoryboard(name: "OmiseSDK", bundle: .omiseSDK)
-        let viewController = storyboard.instantiateViewController(
-            withIdentifier: "DefaultAuthorizingPaymentViewController"
-        ) as! AuthorizingPaymentViewController // swiftlint:disable:this force_cast
-        viewController.authorizedURL = authorizedURL
-        viewController.expectedReturnURLPatterns = expectedReturnURLPatterns
-        viewController.delegate = delegate
-        
-        return viewController
-    }
-        
     public override func viewDidLoad() {
         super.viewDidLoad()
         webView.translatesAutoresizingMaskIntoConstraints = false
@@ -107,6 +57,13 @@ public class AuthorizingPaymentViewController: UIViewController {
 
         webView.navigationDelegate = self
         webView.uiDelegate = self
+
+        let cancelButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .cancel,
+            target: self,
+            action: #selector(cancelAuthorizingPaymentProcess)
+        )
+        navigationItem.rightBarButtonItem = cancelButtonItem
     }
     
     public override func viewDidAppear(_ animated: Bool) {

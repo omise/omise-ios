@@ -55,7 +55,7 @@ class EContextPaymentFormController: UIViewController, PaymentFormUIController {
             navigationItem.largeTitleDisplayMode = .never
         }
 
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = .empty
         
         formFields.forEach {
             $0.inputAccessoryView = formFieldsAccessoryView
