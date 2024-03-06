@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/omise/omise-ios.git",
       "state" : {
-        "branch" : "feature/MIT-2251_v5_AdaptableTableView",
-        "revision" : "bf2e8840edf4cd937fdb1daf2d8e1d3a030b96bb"
+        "branch" : "feature/v5_refactoring",
+        "revision" : "a2b256dc8fb9b2a7deca380b2ae8441342ec29d8"
       }
     }
   ],

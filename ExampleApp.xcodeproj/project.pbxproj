@@ -453,7 +453,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/omise/omise-ios.git";
 			requirement = {
-				branch = "feature/MIT-2251_v5_AdaptableTableView";
+				branch = feature/v5_refactoring;
 				kind = branch;
 			};
 		};
