@@ -46,7 +46,7 @@ To integrate the Opn Payments SDK into your Xcode project using the [Swift Packa
 
 1. In Xcode, select `File` > `Swift Packages` > `Add Package Dependency...`
 2. Enter the URL for this repository `https://github.com/omise/omise-ios.git`
-3. Choose a minimum semantic version of `v4.22.0`
+3. Choose a minimum semantic version of `v5.0.0`
 4. Select your target, go to `Frameworks, Libraries, and Embedded Content` and set OmiseSDK to `Embed & Sign`
 
 ## Usage
@@ -58,14 +58,14 @@ details, read on:
 ### Opn Payments API
 
 The Opn Payments iOS SDK provides an easy-to-use library for calling the
-Opn Payments API. The main class for the Opn Payments iOS SDK is `Client` through
+Opn Payments API. The main classes for the Opn Payments iOS SDK is `OmiseSDK` and `Client` through
 which all requests to the Opn Payments API will be sent. Creating a new
-`Client` object requires an Opn Payments public key.
+`OmiseSDK` object requires an Opn Payments public key.
 
 ``` swift
 import OmiseSDK
 
-let client = OmiseSDK.Client.init(publicKey: "omise_public_key")
+let omiseSDK = OmiseSDK(publicKey: "omise_public_key")
 ```
 
 
@@ -80,61 +80,46 @@ servers. To collect a card payment from a
 customer, merchants will need to first *tokenize* the card data using the
 Opn Payments API and then use the generated token in place of the card
 data. You can tokenize card data by creating and initializing
-a `Request<Token>` as follows:
+a `CreateTokenPayload.Card` as follows:
 
 ```swift
-let tokenParameters = Token.CreateParameter(
+let createTokenPayload = CreateTokenPayload.Card(
     name: "JOHN DOE",
     number: "4242424242424242",
     expirationMonth: 11,
     expirationYear: 2022,
     securityCode: "123"
 )
-
-let request = Request<Token>(parameter: tokenParameters)
 ```
 
 #### Creating a payment source
 
-Opn Payments now supports many payment methods other than cards.  You
+Opn Payments now supports many payment methods other than cards. You
 may request a payment with one of those supported payment methods from
-a customer by calling the `CreateSourceParameter` API. You need to specify
+a customer by calling the `CreateSource` API. You need to specify
 the parameters (e.g. payment amount and currency) of the source you
-want to create by creating and initializing a `Request<Source>` with
+want to create by creating and initializing a `CreateSourcePayload` with
 the `Payment Information` object:
 
 ```swift
-let paymentInformation = PaymentInformation.internetBanking(.bbl) // Bangkok Bank Internet Banking payment method
-let sourceParameter = CreateSourceParameter(
-    paymentInformation: paymentInformation,
+let createSourcePayload = CreateSourcePayload(
     amount: amount,
-    currency: currency
+    currency: currency,
+    details: .sourceType(.internetBankingBBL) // Bangkok Bank Internet Banking payment method
 )
-
-let request = Request<Source>(parameter: sourceParameter)
 ```
 
 #### Sending the request
 
 Whether you are charging a source or a card, sending the
-request is the same.  Create a new `requestTask` on a `Client` object
-with the completion handler block and call `resume` on the
-requestTask:
-
+request is the same.  Use `Client` object to perform one off API calls
+with the completion handler block
 ```swift
-let requestTask = client.requestTask(with: request, completionHandler: completionHandler)
-requestTask.resume()
-```
-
-You may also send a request by calling the
-`send(_:completionHandler:)` method on the `Client`.
-
-```swift
-client.send(request) { [weak self] (result) in
-  guard let s = self else { return }
-
-  // switch result { }
-}
+client.createToken(payload: createTokenPayload, completionHandler)
+client.createSource(payload: createSourcePayload, completionHandler)
+client.capability(completionHandler)
+client.token(tokenID: "tokenID", completionHandler)
+client.observeChargeStatus(completionHandler)
 ```
 
 #### Creating the completion handler
@@ -144,9 +129,9 @@ A simple completion handler for a token looks as follows.
 ``` swift
 func completionHandler(tokenResult: Result<Token, Error>) -> Void {
     switch tokenResult {
-    case .success(let value):
+    case .success(let token):
         // do something with Token id
-        print(value.id)
+        print(token.id)
     case .failure(let error):
         print(error)
     }
@@ -160,7 +145,7 @@ you can easily integrate into your application.
 
 #### Card form
 
-The `CreditCardFormViewController` provides a pre-made card form and will automatically
+The `CreditCardPaymentController` provides a pre-made card form and will automatically
 [tokenize card information](https://docs.opn.ooo/security-best-practices) for you.
 You only need to implement two delegate methods and a way to display the form.
 
@@ -174,8 +159,8 @@ import OmiseSDK // at the top of the file
 class ViewController: UIViewController {
   private let publicKey = "pkey_test_123"
 
-  @IBAction func displayCreditCardForm() {
-    let creditCardView = CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
+  @IBAction func displayCreditCardPayment() {
+    let creditCardView = CreditCardPaymentController.makeCreditCardPaymentController(withPublicKey: publicKey)
     creditCardView.delegate = self
     creditCardView.handleErrors = true
 
@@ -187,15 +172,15 @@ class ViewController: UIViewController {
 Then implement the delegate to receive the `Token` object after user has entered the card data:
 
 ```swift
-extension ViewController: CreditCardFormViewControllerDelegate {
-  func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
-    dismissCreditCardForm()
+extension ViewController: CreditCardPaymentControllerDelegate {
+  func creditCardFormViewController(_ controller: CreditCardPaymentController, didSucceedWithToken token: Token) {
+    dismissCreditCardPayment()
 
     // Sends `Token` to your server to create a charge, or a customer object.
   }
 
-  func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error) {
-    dismissCreditCardForm()
+  func creditCardFormViewController(_ controller: CreditCardPaymentController, didFailWithError error: Error) {
+    dismissCreditCardPayment()
 
     // Only important if we set `handleErrors = false`.
     // You can send errors to a logging service, or display them to the user here.
@@ -207,30 +192,13 @@ Alternatively, you can also push the view controller onto a `UINavigationControl
 as follows:
 
 ```swift
-@IBAction func displayCreditCardForm() {
-  let creditCardView = CreditCardFormViewController.makeCreditCardFormViewController(publicKey)
+@IBAction func displayCreditCardPayment() {
+  let creditCardView = CreditCardPaymentController.makeCreditCardPaymentController(publicKey)
   creditCardView.delegate = self
   creditCardView.handleErrors = true
 
   // This View Controller is already in a UINavigationController stack
   show(creditCardView, sender: self)
-}
-```
-
-##### Use card form in storyboard
-
-`CreditCardFormViewController` comes with built-in storyboard support. You can use `CreditCardFormViewController` in your storybard by using `Storyboard Reference`. Drag the `Storyboard Reference` object onto your canvas and set its bundle identifier to `co.omise.OmiseSDK` and Storyboard to `OmiseSDK`. You can either leave `Referenced ID` empty or use `CreditCardFormController` as a `Referenced ID`
-You can setup `CreditCardFormViewController` in `UIViewController.prepare(for:sender:)` method
-
-```swift
-override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-  if segue.identifier == "PresentCreditFormWithModal",
-    let creditCardFormNavigationController = segue.destination as? UINavigationController,
-    let creditCardFormViewController = creditCardFormNavigationController.topViewController as? CreditCardFormViewController {
-      creditCardFormViewController.publicKey = publicKey
-      creditCardFormViewController.handleErrors = true
-      creditCardFormViewController.delegate = self
-  }
 }
 ```
 
@@ -299,25 +267,6 @@ extension ProductDetailViewController: PaymentCreatorControllerDelegate {
   }
 }
 ```
-##### Use payment creator controller in storyboard
-`PaymentCreatorController` comes with built-in storyboard support.
-You can use `PaymentCreatorController` in your storybard by using `Storyboard Reference`.
-Drag `Storyboard Reference` object onto your canvas and set its bundle identifier to `co.omise.OmiseSDK` and Storyboard to `OmiseSDK`
-and  `PaymentCreatorController` as a `Referenced ID`
-You can setup `PaymentCreatorController` in `UIViewController.prepare(for:sender:)` method
-
-```swift
-override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-  if segue.identifier == "PresentCreditFormWithModal",
-  let paymentCreatorController = segue.destination as? UINavigationController {
-    paymentCreatorController.publicKey = self.publicKey
-    paymentCreatorController.paymentAmount = paymentAmount
-    paymentCreatorController.paymentCurrency = paymentCurrency
-    paymentCreatorController.allowedPaymentMethods = allowedPaymentMethods
-    paymentCreatorController.paymentDelegate = self
-  }
-}
-```
 
 ### Authorizing payment
 
@@ -335,21 +284,6 @@ You can create an instance of `OmiseAuthorizingPaymentViewController` by calling
 ```swift
 let handlerController = OmiseAuthorizingPaymentViewController.makeAuthorizingPaymentViewControllerNavigationWithAuthorizedURL(url, expectedReturnURLPatterns: [expectedReturnURL], delegate: self)
 self.present(handlerController, animated: true, completion: nil)
-```
-
-##### Use `OmiseAuthorizingPaymentViewController` in storyboard
-
-`OmiseAuthorizingPaymentViewController` also comes with built-in storyboard support such as `CreditCardFormViewController`. You can use `OmiseAuthorizingPaymentViewController` in your storyboard by using `Storyboard Reference`. Drag `Storyboard Reference` object onto your canvas, set its bundle identifier to `co.omise.OmiseSDK` and storyboard to `OmiseSDK`, then use `DefaultAuthorizingPaymentViewController` as a `Referenced ID`.
-You can setup `OmiseAuthorizingPaymentViewController` in `UIViewController.prepare(for:sender:)` method
-```swift
-override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-  if segue.identifier == "AuthorizingPaymentViewController",
-    let omiseAuthorizingPaymentController = segue.destination as? OmiseAuthorizingPaymentViewController {
-      omiseAuthorizingPaymentController.delegate = self
-      omiseAuthorizingPaymentController.authorizedURL = authorizedURL
-      omiseAuthorizingPaymentController.expectedReturnURLPatterns =  [ URLComponents(string: "http://www.example.com/orders")! ]
-  }
-}
 ```
 
 ##### Receive `Authorizing Payment` events via the delegate
@@ -370,9 +304,7 @@ extension ViewController: OmiseAuthorizingPaymentViewControllerDelegate {
 
 ## Objective-C compatibility
 
-Opn Payments iOS SDK comes with full Objective-C support. The SDK is designed with the Swift language as a first-class citizen, and not only adopts Swift-only features in the SDK, but also provides an Objective-C counterpart for those features.
-If you found an API that is not available in Objective-C, please don't hestitate [to open an issue](https://github.com/omise/omise-ios/issues/new).
-
+This version of Opn Payments iOS SDK does not support Objective-C. Latest [version](https://github.com/omise/omise-ios/tree/support/v4.x.x) with full Objective-C support.
 
 ## Contributing
 

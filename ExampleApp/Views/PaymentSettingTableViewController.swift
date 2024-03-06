@@ -54,7 +54,7 @@ class PaymentSettingTableViewController: UITableViewController {
         }
     }
 
-    var allowedPaymentMethods: Set<SourceTypeValue> = [] {
+    var allowedPaymentMethods: Set<SourceType> = [] {
         willSet {
             guard isViewLoaded else {
                 return
@@ -122,6 +122,7 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var grabPayPaymentCell: UITableViewCell!
     @IBOutlet private var boostPaymentCell: UITableViewCell!
     @IBOutlet private var shopeePayPaymentCell: UITableViewCell!
+    @IBOutlet private var shopeePayJumpAppPaymentCell: UITableViewCell!
     @IBOutlet private var maybankQRPayPaymentCell: UITableViewCell!
     @IBOutlet private var duitNowQRPaymentCell: UITableViewCell!
     @IBOutlet private var duitNowOBWPaymentCell: UITableViewCell!
@@ -264,7 +265,7 @@ extension PaymentSettingTableViewController {
     }
 
     // swiftlint:disable:next function_body_length
-    func paymentSource(for cell: UITableViewCell) -> SourceTypeValue? {
+    func paymentSource(for cell: UITableViewCell) -> SourceType? {
         switch cell {
         case internetBankingBAYPaymentCell:
             return .internetBankingBAY
@@ -325,7 +326,7 @@ extension PaymentSettingTableViewController {
         case paynowPaymentCell:
             return .payNow
         case truemoneyPaymentCell:
-            return .trueMoney
+            return .trueMoneyWallet
         case truemoneyJumpAppPaymentCell:
             return .trueMoneyJumpApp
         case pointsCitiCell:
@@ -335,13 +336,15 @@ extension PaymentSettingTableViewController {
         case rabbitLinepayCell:
             return .rabbitLinepay
         case OCBCDigitalPaymentCell:
-            return .mobileBankingOCBC
+            return .ocbcDigital
         case grabPayPaymentCell:
             return .grabPay
         case boostPaymentCell:
             return .boost
         case shopeePayPaymentCell:
             return .shopeePay
+        case shopeePayJumpAppPaymentCell:
+            return .shopeePayJumpApp
         case maybankQRPayPaymentCell:
             return .maybankQRPay
         case duitNowQRPaymentCell:
@@ -356,7 +359,7 @@ extension PaymentSettingTableViewController {
     }
 
     // swiftlint:disable:next function_body_length
-    func cell(for paymentSource: SourceTypeValue) -> UITableViewCell? {
+    func cell(for paymentSource: SourceType) -> UITableViewCell? {
         switch paymentSource {
         case .internetBankingBAY:
             return internetBankingBAYPaymentCell
@@ -400,7 +403,7 @@ extension PaymentSettingTableViewController {
             return installmentUOBPaymentCell
         case .mobileBankingSCB:
             return mobileBankingSCBPaymentCell
-        case .mobileBankingOCBC:
+        case .ocbcDigital:
             return OCBCDigitalPaymentCell
         case .mobileBankingKBank:
             return mobileBankingKBankPaymentCell
@@ -418,7 +421,7 @@ extension PaymentSettingTableViewController {
             return paynowPaymentCell
         case .payPay:
             return payPayPaymentCell
-        case .trueMoney:
+        case .trueMoneyWallet:
             return truemoneyPaymentCell
         case .trueMoneyJumpApp:
             return truemoneyJumpAppPaymentCell
@@ -434,6 +437,8 @@ extension PaymentSettingTableViewController {
             return boostPaymentCell
         case .shopeePay:
             return shopeePayPaymentCell
+        case .shopeePayJumpApp:
+            return shopeePayJumpAppPaymentCell
         case .maybankQRPay:
             return maybankQRPayPaymentCell
         case .duitNowQR:

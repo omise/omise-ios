@@ -8,14 +8,14 @@
 import SwiftUI
 import UIKit
 
-struct UIKitViewControllerPresentable<VC: UIViewController>: UIViewControllerRepresentable {
-    let viewController: VC
+public struct UIKitViewControllerPresentable<VC: UIViewController>: UIViewControllerRepresentable {
+    public let viewController: VC
 
-    func makeUIViewController(context: Context) -> VC {
+    public func makeUIViewController(context: Context) -> VC {
         viewController
     }
 
-    func updateUIViewController(_ uiViewController: VC, context: Context) {
+    public func updateUIViewController(_ uiViewController: VC, context: Context) {
 //        viewController
     }
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>installments.number-of-terms-chooser.number-of-terms-cell.label.text</key>
+	<key>installments.number-of-terms.text</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@MONTHs@</string>

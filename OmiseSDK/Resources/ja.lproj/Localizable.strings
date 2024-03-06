@@ -74,3 +74,4 @@
 "more-info.cvv-location.amex.text" = "カード表面の4桁の番号";
 "more-info.cvv-location.default.text" = "カード裏面の3桁の番号";
 
+"paymentMethods.title" = "決済方法";

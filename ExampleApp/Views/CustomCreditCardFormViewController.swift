@@ -2,24 +2,21 @@ import UIKit
 import OmiseSDK
 
 // swiftlint:disable:next type_name
-protocol CustomCreditCardFormViewControllerDelegate: AnyObject {
+protocol CustomCreditCardPaymentControllerDelegate: AnyObject {
     /// Delegate method for receiving token data when card tokenization succeeds.
     /// - parameter token: `OmiseToken` instance created from supplied credit card data.
     /// - seealso: [Tokens API](https://www.omise.co/tokens-api)
-    func creditCardFormViewController(_ controller: CustomCreditCardFormViewController, didSucceedWithToken token: Token)
+    func creditCardFormViewController(_ controller: CustomCreditCardPaymentController, didSucceedWithToken token: Token)
     
     /// Delegate method for receiving error information when card tokenization failed.
     /// This allows you to have fine-grained control over error handling when setting
     /// `handleErrors` to `false`.
     /// - parameter error: The error that occurred during tokenization.
     /// - note: This delegate method will *never* be called if `handleErrors` property is set to `true`.
-    func creditCardFormViewController(_ controller: CustomCreditCardFormViewController, didFailWithError error: Error)
+    func creditCardFormViewController(_ controller: CustomCreditCardPaymentController, didFailWithError error: Error)
 }
 
-class CustomCreditCardFormViewController: UIViewController {
-    
-    let omiseClient = Client(publicKey: LocalConfig.default.publicKey)
-
+class CustomCreditCardPaymentController: UIViewController {
     @IBOutlet private var cardNumberField: CardNumberTextField!
     @IBOutlet private var cardNameField: CardNameTextField!
     @IBOutlet private var cardExpiryField: CardExpiryDateTextField!
@@ -36,90 +33,88 @@ class CustomCreditCardFormViewController: UIViewController {
 
     @IBOutlet private var doneButton: UIBarButtonItem!
     
-    weak var delegate: CustomCreditCardFormViewControllerDelegate?
+    weak var delegate: CustomCreditCardPaymentControllerDelegate?
     
     // need to refactor loadView, removing super results in crash
     // swiftlint:disable:next prohibited_super_call function_body_length
     override func loadView() {
         super.loadView()
         
-        if storyboard == nil {
-            view.backgroundColor = .background
+        view.backgroundColor = .background
 
-            billingStackView = UIStackView()
-            billingStackView.axis = .vertical
-            billingStackView.spacing = 24
-            billingStackView.distribution = .equalSpacing
-            billingStackView.alignment = .fill
+        billingStackView = UIStackView()
+        billingStackView.axis = .vertical
+        billingStackView.spacing = 24
+        billingStackView.distribution = .equalSpacing
+        billingStackView.alignment = .fill
 
-            cardNumberField = CardNumberTextField()
-            cardNumberField.translatesAutoresizingMaskIntoConstraints = false
-            cardNumberField.placeholder = "1234567812345678"
-            cardNameField = CardNameTextField()
-            cardNameField.translatesAutoresizingMaskIntoConstraints = false
-            cardNameField.placeholder = "John Appleseed"
-            cardExpiryField = CardExpiryDateTextField()
-            cardExpiryField.translatesAutoresizingMaskIntoConstraints = false
-            cardExpiryField.placeholder = "MM/yy Date Format"
-            cardCVVField = CardCVVTextField()
-            cardCVVField.translatesAutoresizingMaskIntoConstraints = false
-            cardCVVField.placeholder = "321"
-            
-            let cardNumberLabel = UILabel()
-            cardNumberLabel.text = "Card Number"
-            cardNumberLabel.translatesAutoresizingMaskIntoConstraints = false
-            let cardNumberStackView = UIStackView(arrangedSubviews: [cardNumberLabel, cardNumberField])
-            let cardNameLabel = UILabel()
-            cardNameLabel.text = "Card Name"
-            cardNameLabel.translatesAutoresizingMaskIntoConstraints = false
-            let cardNameStackView = UIStackView(arrangedSubviews: [cardNameLabel, cardNameField])
-            let cardExpiryLabel = UILabel()
-            cardExpiryLabel.text = "Card Expiry"
-            cardExpiryLabel.translatesAutoresizingMaskIntoConstraints = false
-            let cardExpiryStackView = UIStackView(arrangedSubviews: [cardExpiryLabel, cardExpiryField])
-            let cardCVVLabel = UILabel()
-            cardCVVLabel.text = "Card CVV"
-            cardCVVLabel.translatesAutoresizingMaskIntoConstraints = false
-            let cardCVVStackView = UIStackView(arrangedSubviews: [cardCVVLabel, cardCVVField])
-            
-            let lowerRowStackView = UIStackView(arrangedSubviews: [cardExpiryStackView, cardCVVStackView])
-            
-            cardNumberStackView.axis = .vertical
-            cardNumberStackView.distribution = .fill
-            cardNumberStackView.alignment = .fill
-            cardNumberStackView.spacing = 10
-            cardNameStackView.axis = .vertical
-            cardNameStackView.distribution = .fill
-            cardNameStackView.alignment = .fill
-            cardNameStackView.spacing = 10
-            cardExpiryStackView.axis = .vertical
-            cardExpiryStackView.distribution = .fill
-            cardExpiryStackView.alignment = .fill
-            cardExpiryStackView.spacing = 10
-            cardCVVStackView.axis = .vertical
-            cardCVVStackView.distribution = .fill
-            cardCVVStackView.alignment = .fill
-            cardCVVStackView.spacing = 10
-            lowerRowStackView.axis = .horizontal
-            lowerRowStackView.distribution = .fillEqually
-            lowerRowStackView.alignment = .fill
-            lowerRowStackView.spacing = 10
-            
-            let stackView = UIStackView(arrangedSubviews: [cardNumberStackView, cardNameStackView, lowerRowStackView])
-            stackView.translatesAutoresizingMaskIntoConstraints = false
-            stackView.axis = .vertical
-            stackView.distribution = .fill
-            stackView.alignment = .fill
-            stackView.spacing = 20
+        cardNumberField = CardNumberTextField()
+        cardNumberField.translatesAutoresizingMaskIntoConstraints = false
+        cardNumberField.placeholder = "1234567812345678"
+        cardNameField = CardNameTextField()
+        cardNameField.translatesAutoresizingMaskIntoConstraints = false
+        cardNameField.placeholder = "John Appleseed"
+        cardExpiryField = CardExpiryDateTextField()
+        cardExpiryField.translatesAutoresizingMaskIntoConstraints = false
+        cardExpiryField.placeholder = "MM/yy Date Format"
+        cardCVVField = CardCVVTextField()
+        cardCVVField.translatesAutoresizingMaskIntoConstraints = false
+        cardCVVField.placeholder = "321"
 
-            view.addSubview(stackView)
-            NSLayoutConstraint.activate([
-                stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-                stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-                stackView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 20),
-                stackView.bottomAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.bottomAnchor)
-            ])
-        }
+        let cardNumberLabel = UILabel()
+        cardNumberLabel.text = "Card Number"
+        cardNumberLabel.translatesAutoresizingMaskIntoConstraints = false
+        let cardNumberStackView = UIStackView(arrangedSubviews: [cardNumberLabel, cardNumberField])
+        let cardNameLabel = UILabel()
+        cardNameLabel.text = "Card Name"
+        cardNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        let cardNameStackView = UIStackView(arrangedSubviews: [cardNameLabel, cardNameField])
+        let cardExpiryLabel = UILabel()
+        cardExpiryLabel.text = "Card Expiry"
+        cardExpiryLabel.translatesAutoresizingMaskIntoConstraints = false
+        let cardExpiryStackView = UIStackView(arrangedSubviews: [cardExpiryLabel, cardExpiryField])
+        let cardCVVLabel = UILabel()
+        cardCVVLabel.text = "Card CVV"
+        cardCVVLabel.translatesAutoresizingMaskIntoConstraints = false
+        let cardCVVStackView = UIStackView(arrangedSubviews: [cardCVVLabel, cardCVVField])
+
+        let lowerRowStackView = UIStackView(arrangedSubviews: [cardExpiryStackView, cardCVVStackView])
+
+        cardNumberStackView.axis = .vertical
+        cardNumberStackView.distribution = .fill
+        cardNumberStackView.alignment = .fill
+        cardNumberStackView.spacing = 10
+        cardNameStackView.axis = .vertical
+        cardNameStackView.distribution = .fill
+        cardNameStackView.alignment = .fill
+        cardNameStackView.spacing = 10
+        cardExpiryStackView.axis = .vertical
+        cardExpiryStackView.distribution = .fill
+        cardExpiryStackView.alignment = .fill
+        cardExpiryStackView.spacing = 10
+        cardCVVStackView.axis = .vertical
+        cardCVVStackView.distribution = .fill
+        cardCVVStackView.alignment = .fill
+        cardCVVStackView.spacing = 10
+        lowerRowStackView.axis = .horizontal
+        lowerRowStackView.distribution = .fillEqually
+        lowerRowStackView.alignment = .fill
+        lowerRowStackView.spacing = 10
+
+        let verticalContainerStack = UIStackView(arrangedSubviews: [cardNumberStackView, cardNameStackView, lowerRowStackView])
+        verticalContainerStack.translatesAutoresizingMaskIntoConstraints = false
+        verticalContainerStack.axis = .vertical
+        verticalContainerStack.distribution = .fill
+        verticalContainerStack.alignment = .fill
+        verticalContainerStack.spacing = 20
+
+        view.addSubview(verticalContainerStack)
+        NSLayoutConstraint.activate([
+            verticalContainerStack.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            verticalContainerStack.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            verticalContainerStack.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 20),
+            verticalContainerStack.bottomAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.bottomAnchor)
+        ])
 
         setupBillingAddressFields()
     }
@@ -127,12 +122,10 @@ class CustomCreditCardFormViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if storyboard == nil {
-            let saveButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.proceed))
-            navigationItem.rightBarButtonItem = saveButtonItem
-            self.doneButton = saveButtonItem
-            navigationItem.title = "Custom Credit Card Form"
-        }
+        let saveButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.proceed))
+        navigationItem.rightBarButtonItem = saveButtonItem
+        self.doneButton = saveButtonItem
+        navigationItem.title = "Custom Credit Card Form"
     }
 
     private func setupBillingAddressFields() {
@@ -158,15 +151,17 @@ class CustomCreditCardFormViewController: UIViewController {
     @IBAction private func proceed(_ sender: UIBarButtonItem) {
         guard let name = cardNameField.text, cardNumberField.isValid,
             let expiryMonth = cardExpiryField.selectedMonth, let expiryYear = cardExpiryField.selectedYear,
-            let cvv = cardCVVField.text else {
+            let cvv = cardCVVField.text, let number = cardNumberField.text else {
                 return
         }
-        let tokenRequest = Request<Token>(
+
+        let card = CreateTokenPayload.Card(
             name: name,
-            pan: cardNumberField.pan,
+            number: number,
             expirationMonth: expiryMonth,
             expirationYear: expiryYear,
             securityCode: cvv,
+            phoneNumber: nil,
             countryCode: countryCodeField.text ?? "",
             city: cityField.text ?? "",
             state: stateField.text ?? "",
@@ -175,8 +170,9 @@ class CustomCreditCardFormViewController: UIViewController {
             postalCode: postalCodeField.text ?? ""
         )
 
+        let payload = CreateTokenPayload(card: card)
         doneButton.isEnabled = false
-        omiseClient.send(tokenRequest) { [weak self] (result) in
+        OmiseSDK.shared.client.createToken(payload: payload) { [weak self] (result) in
             guard let self = self else { return }
             self.doneButton.isEnabled = false
             switch result {
