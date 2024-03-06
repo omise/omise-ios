@@ -23,15 +23,14 @@ class ClientTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        testClient = Client(publicKey: publicKey)
-        
         // swiftlint:disable force_unwrapping
-        let testEnvironment = Environment.dev(
-            vaultURL: URL(string: "https://vault.staging-omise.co")!,
-            apiURL: URL(string: "https://api.staging-omise.co")!
+        testClient = Client(
+            publicKey: publicKey,
+            version: "1.0.0",
+            apiURL: URL(string: "https://api.staging-omise.co")!,
+            vaultURL: URL(string: "https://vault.staging-omise.co")!
         )
         // swiftlint:enable force_unwrapping
-        Configuration.setShared(Configuration(environment: testEnvironment))
     }
 
     override func tearDown() {
@@ -49,7 +48,7 @@ class ClientTests: XCTestCase {
     /// Testing if `Client` generates URLRequest with correct HTTP body to perform API request
     func testCreateTokenURLRequest() throws {
         let expectation = self.expectation(description: "Create Token Mockup Callback")
-        let cardPayload: CreateTokenPayload.Card = try sampleFromJSONBy(.card)
+        let cardPayload = CreateTokenPayload(card: try sampleFromJSONBy(.card))
 
         let networkMockup = NetworkMockup { [cardPayload] urlRequest in
             defer { expectation.fulfill() }
@@ -58,7 +57,7 @@ class ClientTests: XCTestCase {
                 if let data = urlRequest.httpBody, let jsonString = String(data: data, encoding: .utf8) {
                     do {
                         let decodedCardPayload: CreateTokenPayload = try parse(jsonString: jsonString)
-                        XCTAssertEqual(cardPayload, decodedCardPayload.card)
+                        XCTAssertEqual(cardPayload, decodedCardPayload)
                     } catch {
                         XCTFail("Unable to decode payload from encoded JSON string")
                     }
@@ -71,7 +70,7 @@ class ClientTests: XCTestCase {
             validateURLRequest()
         }
 
-        let client = Client(publicKey: publicKey, network: networkMockup)
+        let client = Client(publicKey: publicKey, version: "1.0.0", network: networkMockup)
         client.createToken(payload: cardPayload) { _ in
             /// Testing URLRequst in through Network Mockup closure
             /// Closure implementation is nor required
@@ -105,7 +104,7 @@ class ClientTests: XCTestCase {
             validateURLRequest()
         }
 
-        let client = Client(publicKey: publicKey, network: networkMockup)
+        let client = Client(publicKey: publicKey, version: "1.0.0", network: networkMockup)
         client.createSource(payload: sourcePayload) { _ in
             /// Testing URLRequst in through Network Mockup closure
             /// Closure implementation is nor required

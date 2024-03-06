@@ -23,16 +23,16 @@ struct LocalConfig: Codable {
         devVaultBaseURL = nil
         devApiBaseURL = nil
     }
-    
-    var env: Environment {
+
+    var configuration: Configuration? {
         if devMode,
            let vaultBaseURLString = devVaultBaseURL,
            let vaultBaseURL = URL(string: vaultBaseURLString),
            let apiBaseURLString = devApiBaseURL,
            let apiBaseURL = URL(string: apiBaseURLString) {
-            return .dev(vaultURL: vaultBaseURL, apiURL: apiBaseURL)
+            return .init(vaultURL: vaultBaseURL, apiURL: apiBaseURL)
         } else {
-            return .production
+            return nil
         }
     }
 

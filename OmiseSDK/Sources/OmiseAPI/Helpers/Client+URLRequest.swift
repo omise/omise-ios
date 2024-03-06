@@ -2,17 +2,15 @@ import Foundation
 import UIKit.UIDevice
 
 extension Client {
-    func customURL(api: APIProtocol) -> URL? {
-        switch api.server {
-        case .api:
-            return Configuration.shared.environment.customAPIURL
-        case .vault:
-            return Configuration.shared.environment.customVaultURL
-        }
-    }
-
     func url(api: APIProtocol) -> URL {
-        customURL(api: api) ?? api.server.url
+        let customURL = {
+            switch api.server {
+            case .api: return customApiURL
+            case .vault: return customVaultURL
+            }
+        }()
+
+        return customURL ?? api.server.url
     }
 
     func urlRequest(publicKey: String, api: APIProtocol)
@@ -38,11 +36,12 @@ extension Client {
 // MARK: User Agent
 extension Client {
     func userAgent(
-        sdkVersion: String = OmiseSDK.shared.version,
+        sdkVersion: String? = nil,
         platform: String = ProcessInfo.processInfo.operatingSystemVersionString,
         device: String = UIDevice.current.model
     ) -> String {
-        "OmiseIOS/\(sdkVersion) iOS/\(platform) Apple/\(device)"
+        let sdkVersion = sdkVersion ?? version
+        return "OmiseIOS/\(sdkVersion) iOS/\(platform) Apple/\(device)"
     }
 }
 

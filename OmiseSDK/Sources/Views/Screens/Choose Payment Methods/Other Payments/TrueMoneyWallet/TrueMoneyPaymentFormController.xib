@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrueMoneyPaymentFormController" customModule="OmiseSDK" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="1dZ-ba-5lL" id="MiI-jn-gQ8"/>
+                <outlet property="doneEditingBarButtonItem" destination="WjO-Rx-fPr" id="gBu-k6-NO8"/>
+                <outlet property="errorLabel" destination="AUd-11-e1K" id="7xh-eL-pj4"/>
+                <outlet property="formFieldsAccessoryView" destination="Ilf-hG-acj" id="CcP-6R-nlx"/>
+                <outlet property="gotoNextFieldBarButtonItem" destination="zBL-t6-nmf" id="Wxn-Eo-VLl"/>
+                <outlet property="gotoPreviousFieldBarButtonItem" destination="6vM-47-Sdc" id="eyQ-OD-n9e"/>
+                <outlet property="phoneNumberLabel" destination="ph2-zw-Rut" id="YvJ-el-oBR"/>
+                <outlet property="phoneNumberTextField" destination="qZ4-kg-cTO" id="Wm6-H5-o6g"/>
+                <outlet property="requestingIndicatorView" destination="WTQ-HL-L5e" id="5Dv-HO-6qf"/>
+                <outlet property="submitButton" destination="u3l-7W-P9v" id="yTc-Wd-OSS"/>
+                <outlet property="view" destination="T8r-3V-d5f" id="90E-4Y-Bda"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <navigationItem title="TrueMoney Wallet" largeTitleDisplayMode="never" id="tcc-13-8o1"/>
+        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="Ilf-hG-acj">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+            <items>
+                <barButtonItem enabled="NO" image="Back" id="6vM-47-Sdc" userLabel="Go to previous field bar button item"/>
+                <barButtonItem enabled="NO" image="Next Field" id="zBL-t6-nmf" userLabel="Go to next field bar button item"/>
+                <barButtonItem systemItem="flexibleSpace" id="gQa-PT-qep"/>
+                <barButtonItem systemItem="done" id="WjO-Rx-fPr">
+                    <connections>
+                        <action selector="doneEditing:" destination="-1" id="Zzn-1v-dxo"/>
+                    </connections>
+                </barButtonItem>
+            </items>
+            <point key="canvasLocation" x="3486" y="1546"/>
+        </toolbar>
+        <view contentMode="scaleToFill" id="T8r-3V-d5f">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dZ-ba-5lL" userLabel="Content Scroll">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Phone number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ph2-zw-Rut" userLabel="Phone Number">
+                            <rect key="frame" x="16" y="212.33333333333334" width="361" height="18"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <bool key="isElement" value="NO"/>
+                            </accessibility>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                            <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qZ4-kg-cTO" userLabel="Phone Number" customClass="OmiseTextField" customModule="OmiseSDK">
+                            <rect key="frame" x="16" y="235.33333333333334" width="361" height="22.000000000000028"/>
+                            <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
+                            <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                            <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="tel"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" red="0.89411764709999997" green="0.90588235289999997" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="4"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUd-11-e1K" userLabel="Phone Number Error">
+                            <rect key="frame" x="16" y="262.33333333333331" width="361" height="13.333333333333314"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                            <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u3l-7W-P9v" userLabel="Submit" customClass="MainActionButton" customModule="OmiseSDK">
+                            <rect key="frame" x="16" y="295.66666666666669" width="361" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="fWH-1c-cfB"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <state key="normal" title="Next">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="defaultBackgroundColor">
+                                    <color key="value" red="0.10000000000000001" green="0.34000000000000002" blue="0.93999999999999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="4"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="disabledBackgroundColor">
+                                    <color key="value" red="0.89411764709999997" green="0.90588235289999997" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="submitForm:" destination="-1" eventType="touchUpInside" id="PG9-kH-vZ0"/>
+                            </connections>
+                        </button>
+                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="WTQ-HL-L5e">
+                            <rect key="frame" x="186.66666666666666" y="307.66666666666669" width="20" height="20"/>
+                            <color key="color" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        </activityIndicatorView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TrueMoney_Big" translatesAutoresizingMaskIntoConstraints="NO" id="xR4-mZ-7kx">
+                            <rect key="frame" x="144" y="30" width="105" height="80"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please input the mobile number connected to your TrueMoney Wallet account" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JbH-sv-yfG">
+                            <rect key="frame" x="16" y="140" width="361" height="42.333333333333343"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="JbH-sv-yfG" firstAttribute="leading" secondItem="1dZ-ba-5lL" secondAttribute="leadingMargin" id="1vY-W1-bxV"/>
+                        <constraint firstItem="AUd-11-e1K" firstAttribute="leading" secondItem="1dZ-ba-5lL" secondAttribute="leadingMargin" id="9rK-DU-7cI"/>
+                        <constraint firstItem="qZ4-kg-cTO" firstAttribute="leading" secondItem="1dZ-ba-5lL" secondAttribute="leadingMargin" id="ABj-Ce-2qa"/>
+                        <constraint firstItem="u3l-7W-P9v" firstAttribute="top" secondItem="AUd-11-e1K" secondAttribute="bottom" constant="20" id="BVm-o0-fOr"/>
+                        <constraint firstItem="qZ4-kg-cTO" firstAttribute="top" secondItem="ph2-zw-Rut" secondAttribute="bottom" constant="5" id="DyU-Oz-bxU"/>
+                        <constraint firstAttribute="trailingMargin" secondItem="u3l-7W-P9v" secondAttribute="trailing" id="Em8-qT-pm0"/>
+                        <constraint firstItem="AUd-11-e1K" firstAttribute="top" secondItem="qZ4-kg-cTO" secondAttribute="bottom" constant="5" id="Gkk-uF-lqq"/>
+                        <constraint firstItem="JbH-sv-yfG" firstAttribute="top" secondItem="xR4-mZ-7kx" secondAttribute="bottom" constant="30" id="KXQ-l2-2la"/>
+                        <constraint firstItem="xR4-mZ-7kx" firstAttribute="top" secondItem="1dZ-ba-5lL" secondAttribute="top" constant="30" id="TGY-6j-CmX"/>
+                        <constraint firstAttribute="bottom" secondItem="u3l-7W-P9v" secondAttribute="bottom" constant="20" id="c20-28-t54"/>
+                        <constraint firstAttribute="trailingMargin" secondItem="ph2-zw-Rut" secondAttribute="trailing" id="dQH-la-hpK"/>
+                        <constraint firstItem="xR4-mZ-7kx" firstAttribute="centerX" secondItem="1dZ-ba-5lL" secondAttribute="centerX" id="eBI-7F-nql"/>
+                        <constraint firstItem="WTQ-HL-L5e" firstAttribute="centerY" secondItem="u3l-7W-P9v" secondAttribute="centerY" id="fzM-2f-OEi"/>
+                        <constraint firstAttribute="trailingMargin" secondItem="qZ4-kg-cTO" secondAttribute="trailing" id="gCm-E4-Vp8"/>
+                        <constraint firstItem="ph2-zw-Rut" firstAttribute="top" secondItem="JbH-sv-yfG" secondAttribute="bottom" constant="30" id="gxR-x9-OTS"/>
+                        <constraint firstItem="ph2-zw-Rut" firstAttribute="leading" secondItem="1dZ-ba-5lL" secondAttribute="leadingMargin" id="mnr-qO-wg6"/>
+                        <constraint firstAttribute="trailingMargin" secondItem="JbH-sv-yfG" secondAttribute="trailing" id="ofx-Ej-14i"/>
+                        <constraint firstItem="u3l-7W-P9v" firstAttribute="leading" secondItem="1dZ-ba-5lL" secondAttribute="leadingMargin" id="onR-6d-BPV"/>
+                        <constraint firstAttribute="trailingMargin" secondItem="AUd-11-e1K" secondAttribute="trailing" id="q4n-f5-Inu"/>
+                        <constraint firstItem="WTQ-HL-L5e" firstAttribute="centerX" secondItem="u3l-7W-P9v" secondAttribute="centerX" id="zdm-xD-Ii1"/>
+                    </constraints>
+                    <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="1dZ-ba-5lL" secondAttribute="trailing" id="0le-2u-ONt"/>
+                <constraint firstAttribute="bottom" secondItem="1dZ-ba-5lL" secondAttribute="bottom" id="Lvb-hQ-ToT"/>
+                <constraint firstAttribute="trailingMargin" secondItem="u3l-7W-P9v" secondAttribute="trailing" priority="999" id="PID-qv-4gU"/>
+                <constraint firstItem="1dZ-ba-5lL" firstAttribute="top" secondItem="T8r-3V-d5f" secondAttribute="top" id="Ygo-yv-KLT"/>
+                <constraint firstItem="u3l-7W-P9v" firstAttribute="leading" secondItem="T8r-3V-d5f" secondAttribute="leadingMargin" priority="999" id="b8T-Bu-ikg"/>
+                <constraint firstItem="1dZ-ba-5lL" firstAttribute="leading" secondItem="T8r-3V-d5f" secondAttribute="leading" id="v6d-Tq-JGa"/>
+            </constraints>
+            <point key="canvasLocation" x="-74" y="20"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="qZ4-kg-cTO">
+            <size key="intrinsicContentSize" width="5" height="22"/>
+        </designable>
+        <designable name="u3l-7W-P9v">
+            <size key="intrinsicContentSize" width="38" height="33"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="Back" width="24" height="24"/>
+        <image name="Next Field" width="24" height="24"/>
+        <image name="TrueMoney_Big" width="105" height="80"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

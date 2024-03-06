@@ -56,3 +56,5 @@
 "more-info.cvv-location.default.text" = "3 digit number on the back of your card";
 
 "fpx.bank-chooser.no-banks-available.text" = "Cannot retrieve list of banks.\nPlease try again later.";
+
+"paymentMethods.title" = "Payment Methods";

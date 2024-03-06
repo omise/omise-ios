@@ -74,3 +74,5 @@
 
 "more-info.cvv-location.amex.text" = "หมายเลข 4 หลักบนหน้าบัตร";
 "more-info.cvv-location.default.text" = "หมายเลข 3 หลักด้านหลังบัตร";
+
+"paymentMethods.title" = "ช่องทางชำระเงิน";

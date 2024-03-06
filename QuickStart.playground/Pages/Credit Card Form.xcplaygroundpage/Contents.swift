@@ -24,11 +24,11 @@ PlaygroundPage.current.needsIndefiniteExecution = true
 
 /*: implement-delegate
  
- The form will automatically tokenizes credit card data for you as the user click on the submit button. To receive the resulting token data, implement the `CreditCardFormDelegate` methods on your view controller.
+ The form will automatically tokenizes credit card data for you as the user click on the submit button. To receive the resulting token data, implement the `CreditCardPaymentDelegate` methods on your view controller.
  
  */
-extension CheckoutViewController: CreditCardFormViewControllerDelegate {
-  public func creditCardFormViewController(_ controller: CreditCardFormViewController, didSucceedWithToken token: Token) {
+extension CheckoutViewController: CreditCardPaymentControllerDelegate {
+  public func creditCardFormViewController(_ controller: CreditCardPaymentController, didSucceedWithToken token: Token) {
     dismiss(animated: true, completion: nil)
     print("token created: \(token.id )")
     
@@ -37,7 +37,7 @@ extension CheckoutViewController: CreditCardFormViewControllerDelegate {
     
   }
   
-  public func creditCardFormViewController(_ controller: CreditCardFormViewController, didFailWithError error: Error) {
+  public func creditCardFormViewController(_ controller: CreditCardPaymentController, didFailWithError error: Error) {
     dismiss(animated: true, completion: nil)
     print("error: \(error)")
     
@@ -46,14 +46,14 @@ extension CheckoutViewController: CreditCardFormViewControllerDelegate {
     
   }
   
-  public func creditCardFormViewControllerDidCancel(_ controller: CreditCardFormViewController) {
+  public func creditCardFormViewControllerDidCancel(_ controller: CreditCardPaymentController) {
     dismiss(animated: true, completion: nil)
   }
 }
 
 extension CheckoutViewController: CheckoutViewControllerDelegate {
   public func checkoutViewControllerDidTapCheckout(_ checkoutViewController: CheckoutViewController) {
-    let creditCardForm = CreditCardFormViewController.makeCreditCardFormViewController(withPublicKey: publicKey)
+    let creditCardForm = CreditCardPaymentController.makeCreditCardPaymentController(withPublicKey: publicKey)
     creditCardForm.delegate = self
     
     let navigationController = UINavigationController(rootViewController: creditCardForm)
