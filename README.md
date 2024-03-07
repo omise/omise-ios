@@ -21,6 +21,11 @@ provides, consult the frequently asked questions in our
 you can't find an answer there, feel free to
 [email our support team](mailto:support@opn.ooo).
 
+## Security Warning
+
+**Please do NOT use Omise iOS SDK versions less than 3.2.0, as they are outdated and have security vulnerabilities.**
+
+
 ## Requirements
 
 * Opn Payments API public key. [Register for an Opn Payments account](https://dashboard.omise.co/signup) to obtain your API keys.
