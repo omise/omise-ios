@@ -27,23 +27,16 @@ class ProductDetailViewController: BaseViewController {
     }
     
     @IBAction private func showModalPaymentCreator(_ sender: Any) {
-        if usesCapabilityDataForPaymentMethods {
-            let viewController = omiseSDK.choosePaymentMethodFromCapabilityController(
-                amount: paymentAmount,
-                currency: paymentCurrencyCode,
-                delegate: self
-            )
-            present(viewController, animated: true, completion: nil)
-        } else {
-            let viewController = omiseSDK.choosePaymentMethodController(
-                amount: paymentAmount,
-                currency: paymentCurrencyCode,
-                allowedPaymentMethods: allowedPaymentMethods,
-                allowedCardPayment: true,
-                delegate: self
-            )
-            present(viewController, animated: true, completion: nil)
-        }
+        omiseSDK.presentChoosePaymentMethod(
+            from: self,
+            amount: paymentAmount,
+            currency: paymentCurrencyCode,
+            allowedPaymentMethods: usesCapabilityDataForPaymentMethods ? [] : allowedPaymentMethods,
+            forcePaymentMethods: true,
+            isCardPaymentAllowed: true,
+            handleErrors: true,
+            delegate: self
+        )
     }
     
     @IBAction private func showCustomCreditCardPayment(_ sender: Any) {

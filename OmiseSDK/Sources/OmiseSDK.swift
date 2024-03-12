@@ -57,25 +57,28 @@ public class OmiseSDK {
             vaultURL: configuration?.vaultURL
         )
 
-        let color = UIColor(red: 0.26, green: 0.27, blue: 0.28, alpha: 0.5)
-        print(color.hexString)
-        client.capability { _ in }
+        preloadCapabilityAPI()
     }
 
-    /// Creates a Payment controller with given payment methods details comes in UINavigationController stack
+    /// Creates and presents modal Choose Payment Methods Controller with given parameters
     ///
     /// - Parameters:
+    ///    - from: ViewController to be used to present Choose Payment Methods
     ///    - amount: Payment amount
-    ///    - currency: Payment currency code
-    ///    - allowedPaymentMethods: Custom list of payment methods to be shown in the list. If value is nill then SDK will load list from Capability API
-    ///    - allowedCardPayment: Should present Card Payment Method in the list
-    ///    - handleErrors:  If `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
+    ///    - currency: Payment currency code  (ISO 4217)
+    ///    - allowedPaymentMethods: Custom list of payment methods to be shown in the list. Only payment methods presented in the Capabilities will be shown
+    ///    - forcePaymentMethods: If `true` all payment methods from `paymentMethods` will be shown if it's not empty (for test purposes)
+    ///    - isCardPaymentAllowed: Should present Card Payment Method in the list
+    ///    - handleErrors: If `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
     ///    - completion: Completion handler triggered when payment completes with Token, Source, Error or was Cancelled
-    public func choosePaymentMethodController(
+    @discardableResult
+    public func presentChoosePaymentMethod(
+        from topViewController: UIViewController,
         amount: Int64,
         currency: String,
-        allowedPaymentMethods: [SourceType],
-        allowedCardPayment: Bool,
+        allowedPaymentMethods: [SourceType] = [],
+        forcePaymentMethods: Bool = false,
+        isCardPaymentAllowed: Bool = true,
         handleErrors: Bool = true,
         delegate: ChoosePaymentMethodDelegate
     ) -> UINavigationController {
@@ -86,41 +89,15 @@ public class OmiseSDK {
             currentCountry: country,
             handleErrors: handleErrors
         )
-        let viewController = paymentFlow.createChoosePaymentMethodController(
-            allowedPaymentMethods: allowedPaymentMethods,
-            allowedCardPayment: allowedCardPayment,
-            usePaymentMethodsFromCapability: false,
-            delegate: delegate
+
+        let filter = SelectPaymentMethodViewModel.Filter(
+            sourceTypes: allowedPaymentMethods,
+            isCardPaymentAllowed: isCardPaymentAllowed,
+            isForced: forcePaymentMethods
         )
 
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.delegate = paymentFlow
-        return navigationController
-    }
-
-    /// Creates a Payment controller with payment methods loaded from Capability API comes in UINavigationController stack
-    ///
-    /// - Parameters:
-    ///    - from: ViewController is used as a base to present UINavigationController
-    ///    - allowedPaymentMethods: Custom list of payment methods to be shown in the list. If value is nill then SDK will load list from Capability API
-    ///    - allowedCardPayment: Should present Card Payment Method in the list
-    ///    - handleErrors:  If `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
-    ///    - delegate: Delegate to be notified when Source or Token is created
-    public func choosePaymentMethodFromCapabilityController(
-        amount: Int64,
-        currency: String,
-        handleErrors: Bool = true,
-        delegate: ChoosePaymentMethodDelegate
-    ) -> UINavigationController {
-        let paymentFlow = ChoosePaymentCoordinator(
-            client: client,
-            amount: amount,
-            currency: currency,
-            currentCountry: country,
-            handleErrors: handleErrors
-        )
         let viewController = paymentFlow.createChoosePaymentMethodController(
-            usePaymentMethodsFromCapability: true,
+            filter: filter,
             delegate: delegate
         )
 
@@ -130,6 +107,8 @@ public class OmiseSDK {
         }
 
         navigationController.delegate = paymentFlow
+
+        topViewController.present(navigationController, animated: true, completion: nil)
         return navigationController
     }
 

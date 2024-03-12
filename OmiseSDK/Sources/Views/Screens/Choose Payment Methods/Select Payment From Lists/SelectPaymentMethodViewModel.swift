@@ -2,8 +2,15 @@ import Foundation
 import UIKit.UIImage
 
 class SelectPaymentMethodViewModel {
-    private weak var delegate: SelectPaymentMethodDelegate?
+    struct Filter {
+        let sourceTypes: [SourceType]
+        let isCardPaymentAllowed: Bool
+        let isForced: Bool
+    }
+
     private let client: Client
+    private let filter: Filter
+    private weak var delegate: SelectPaymentMethodDelegate?
 
     private var viewOnDataReloadHandler: () -> Void = { } {
         didSet {
@@ -17,32 +24,45 @@ class SelectPaymentMethodViewModel {
         }
     }
 
-    init(client: Client, delegate: SelectPaymentMethodDelegate) {
+    init(client: Client, filter: Filter, delegate: SelectPaymentMethodDelegate) {
         self.client = client
         self.delegate = delegate
-    }
+        self.filter = filter
 
-    func setupAllowedPaymentMethods(_ paymentMethods: [SourceType], isCardEnabled: Bool) {
-        self.paymentMethods = PaymentMethod.createPaymentMethods(
-            from: paymentMethods,
-            showsCreditCard: isCardEnabled
-        )
-    }
-
-    func setupCapability() {
-        var allowedPaymentMethods: [SourceType] = []
-        var isCardEnabled = false
-
-        if let capability = client.latestLoadedCapability {
-            isCardEnabled = capability.cardPaymentMethod != nil
-            allowedPaymentMethods = capability.paymentMethods.compactMap {
-                SourceType(rawValue: $0.name)
-            }
+        if !filter.sourceTypes.isEmpty, filter.isForced {
+            self.paymentMethods = PaymentMethod.createPaymentMethods(
+                from: filter.sourceTypes,
+                showsCreditCard: filter.isCardPaymentAllowed
+            )
         } else {
+
+            setupCapability(client.latestLoadedCapability)
+        }
+    }
+
+    func setupCapability(_ capability: Capability? = nil) {
+        guard let capability = capability else {
             client.capability { [weak self] result in
                 if let capability = try? result.get() {
-                    self?.paymentMethods = PaymentMethod.createPaymentMethods(with: capability)
+                    self?.setupCapability(capability)
                 }
+            }
+            return
+        }
+        let sourceTypes = capability.paymentMethods.compactMap { SourceType(rawValue: $0.name) }
+        let isCardPaymentAllowed = capability.cardPaymentMethod != nil
+        setupPaymentMethodsAndFilter(sourceTypes: sourceTypes, isCardPaymentAllowed: isCardPaymentAllowed)
+    }
+
+    func setupPaymentMethodsAndFilter(sourceTypes: [SourceType], isCardPaymentAllowed: Bool) {
+        let filterSourceTypes = filter.sourceTypes
+
+        let isCardEnabled = isCardPaymentAllowed && filter.isCardPaymentAllowed
+        let allowedPaymentMethods = sourceTypes.filter { [filterSourceTypes] sourceType in
+            if filterSourceTypes.isEmpty {
+                return true
+            } else {
+                return filterSourceTypes.contains(sourceType)
             }
         }
 

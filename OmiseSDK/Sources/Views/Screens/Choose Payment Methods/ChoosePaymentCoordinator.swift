@@ -38,23 +38,13 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
     /// Creates SelectPaymentController and attach current flow object inside created controller to be deallocated together
     ///
     /// - Parameters:
-    ///   - allowedPaymentMethods: List of Payment Methods to be presented in the list if `usePaymentMethodsFromCapability` is `false`
-    ///   - allowedCardPayment: Shows credit card payment option if `true` and `usePaymentMethodsFromCapability` is `false`
-    ///   - usePaymentMethodsFromCapability: If `true`then it loads list of Payment Methods from Capability API and ignores previous parameters
+    ///   - filter: Filter for Payment Methods list to be presented in the list
     ///   - delegate: Payment method delegate
     func createChoosePaymentMethodController(
-        allowedPaymentMethods paymentMethods: [SourceType] = [],
-        allowedCardPayment isCardEnabled: Bool = true,
-        usePaymentMethodsFromCapability useCapability: Bool,
+        filter: SelectPaymentMethodViewModel.Filter,
         delegate: ChoosePaymentMethodDelegate
     ) -> SelectPaymentController {
-        let viewModel = SelectPaymentMethodViewModel(client: client, delegate: self)
-        if useCapability {
-            viewModel.setupCapability()
-        } else {
-            viewModel.setupAllowedPaymentMethods(paymentMethods, isCardEnabled: isCardEnabled)
-        }
-
+        let viewModel = SelectPaymentMethodViewModel(client: client, filter: filter, delegate: self)
         let listController = SelectPaymentController(viewModel: viewModel)
         listController.attach(self)
 
