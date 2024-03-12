@@ -16,7 +16,7 @@ extension PaymentMethod: ViewPresentable {
 
     /// Localized title for given payment option
     public var localizedTitle: String {
-        let prefixCode = "paymentMethod"
+        let prefixCode = "PaymentMethod"
         switch self {
         case .creditCard:
             return localized("\(prefixCode).creditCard", text: "Credit Card")

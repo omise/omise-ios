@@ -134,7 +134,7 @@ public class OmiseSDK {
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.delegate = paymentFlow
         if #available(iOSApplicationExtension 11.0, *) {
-            navigationController.navigationBar.prefersLargeTitles = true
+            navigationController.navigationBar.prefersLargeTitles = false
         }
 
         topViewController.present(navigationController, animated: true, completion: nil)
@@ -159,13 +159,14 @@ public class OmiseSDK {
         viewController.expectedReturnURLPatterns = expectedReturnURLPatterns
         viewController.delegate = delegate
         viewController.applyNavigationBarStyle()
-
+        viewController.title = "AuthorizingPayment.title".localized()
+        
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.navigationBar.isTranslucent = false
         navigationController.navigationBar.backgroundColor = .white
 
         if #available(iOSApplicationExtension 11.0, *) {
-            navigationController.navigationBar.prefersLargeTitles = true
+            navigationController.navigationBar.prefersLargeTitles = false
         }
 
         topViewController.present(navigationController, animated: true, completion: nil)

@@ -1,3 +1,17 @@
+// Payment Methods
+"PaymentMethod.creditCard" = "บัตรเครดิต";
+"PaymentMethod.installments" = "ผ่อนชำระ";
+"PaymentMethod.internetBanking" = "อินเทอร์เน็ตแบงก์กิ้ง";
+"PaymentMethod.mobileBanking" = "โมบายล์แบงก์กิ้ง";
+"PaymentMethod.eContext.conbini" = "ร้านสะดวกซื้อ";
+"PaymentMethod.eContext.payEasy" = "เพย์อีซี";
+"PaymentMethod.eContext.netBanking" = "เน็ตแบงก์";
+
+"SourceType.payNow" = "เพย์นาว";
+
+// Authorizing Payment
+"AuthorizingPayment.title" = "กำลังอนุมัติวงเงิน";
+
 // Credit Card
 "CreditCard.field.country" = "ประเทศหรือภูมิภาค";
 "CreditCard.field.address" = "ที่อยู่";

@@ -6,7 +6,7 @@ extension SourceType: CustomStringConvertible {
 
 extension SourceType: ViewPresentable {
     public var localizedTitle: String {
-        localized("SourceType.\(self.rawValue).title", text: title)
+        localized("SourceType.\(self.rawValue)", text: title)
     }
 
     public var localizedSubtitle: String? {

@@ -1,3 +1,17 @@
+// Payment Methods
+"PaymentMethod.creditCard" = "Credit Card";
+"PaymentMethod.installments" = "Installments";
+"PaymentMethod.internetBanking" = "Internet Banking";
+"PaymentMethod.mobileBanking" = "Mobile Banking";
+"PaymentMethod.eContext.conbini" = "Konbini";
+"PaymentMethod.eContext.payEasy" = "Pay-easy";
+"PaymentMethod.eContext.netBanking" = "Net Bank";
+
+"SourceType.payNow" = "PayNow";
+
+// Authorizing Payment
+"AuthorizingPayment.title" = "Authorizing Payment";
+
 // Credit Card
 "CreditCard.field.country" = "Country or region";
 "CreditCard.field.address" = "Address";
