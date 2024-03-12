@@ -276,7 +276,7 @@ method `choosePaymentMethodDidComplete(with error: Error)` will be called instea
 
 ```swift
 
-let allowedPaymentMethods = PaymentCreatorController.thailandDefaultAvailableSourceMethods
+let allowedPaymentMethods = SourceType.availableByDefaultInThailand
 omiseSDK.presentChoosePaymentMethod(
     from: self,
     amount: paymentAmount,
