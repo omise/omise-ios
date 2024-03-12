@@ -140,19 +140,20 @@ public class OmiseSDK {
         topViewController.present(navigationController, animated: true, completion: nil)
     }
 
-    /// Creates a authorizing payment view controller comes in UINavigationController stack.
+    /// Creates and presents Authorizing Payment controller with a given parameters
     ///
-    /// - parameter authorizedURL: The authorized URL given in `Charge` object
-    /// - parameter expectedReturnURLPatterns: The expected return URL patterns.
-    /// - parameter delegate: A delegate object that will recieved authorizing payment events.
-    ///
-    /// - returns: A UINavigationController with `AuthorizingPaymentViewController` as its root view controller
+    /// - Parameters:
+    ///    - from: ViewController is used to present Choose Payment Methods
+    ///    - authorizedURL: The authorized URL given in `Charge` object
+    ///    - expectedReturnURLPatterns: The expected return URL patterns.
+    ///    - delegate: A delegate object that will recieved authorizing payment events.
     @available(iOSApplicationExtension, unavailable)
-    public func authorizedController(
+    public func presentAuthorizedController(
+        from topViewController: UIViewController,
         authorizedURL: URL,
         expectedReturnURLPatterns: [URLComponents],
         delegate: AuthorizingPaymentViewControllerDelegate
-    ) -> UINavigationController {
+    ) {
         let viewController = AuthorizingPaymentViewController(nibName: nil, bundle: .omiseSDK)
         viewController.authorizedURL = authorizedURL
         viewController.expectedReturnURLPatterns = expectedReturnURLPatterns
@@ -167,7 +168,7 @@ public class OmiseSDK {
             navigationController.navigationBar.prefersLargeTitles = true
         }
 
-        return navigationController
+        topViewController.present(navigationController, animated: true, completion: nil)
     }
 }
 
