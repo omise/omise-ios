@@ -26,7 +26,7 @@ class ProductDetailViewController: BaseViewController {
         present(viewController, animated: true, completion: nil)
     }
     
-    @IBAction private func showModalPaymentCreator(_ sender: Any) {
+    @IBAction private func showChoosePaymentMethods(_ sender: Any) {
         omiseSDK.presentChoosePaymentMethod(
             from: self,
             amount: paymentAmount,
