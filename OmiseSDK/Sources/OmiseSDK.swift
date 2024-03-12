@@ -60,10 +60,10 @@ public class OmiseSDK {
         preloadCapabilityAPI()
     }
 
-    /// Creates and presents modal Choose Payment Methods Controller with given parameters
+    /// Creates and presents modal "Payment Methods" controller with a given parameters
     ///
     /// - Parameters:
-    ///    - from: ViewController to be used to present Choose Payment Methods
+    ///    - from: ViewController is used to present Choose Payment Methods
     ///    - amount: Payment amount
     ///    - currency: Payment currency code  (ISO 4217)
     ///    - allowedPaymentMethods: Custom list of payment methods to be shown in the list. Only payment methods presented in the Capabilities will be shown
@@ -71,7 +71,6 @@ public class OmiseSDK {
     ///    - isCardPaymentAllowed: Should present Card Payment Method in the list
     ///    - handleErrors: If `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
     ///    - completion: Completion handler triggered when payment completes with Token, Source, Error or was Cancelled
-    @discardableResult
     public func presentChoosePaymentMethod(
         from topViewController: UIViewController,
         amount: Int64,
@@ -81,7 +80,7 @@ public class OmiseSDK {
         isCardPaymentAllowed: Bool = true,
         handleErrors: Bool = true,
         delegate: ChoosePaymentMethodDelegate
-    ) -> UINavigationController {
+    ) {
         let paymentFlow = ChoosePaymentCoordinator(
             client: client,
             amount: amount,
@@ -102,27 +101,27 @@ public class OmiseSDK {
         )
 
         let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.delegate = paymentFlow
         if #available(iOSApplicationExtension 11.0, *) {
             navigationController.navigationBar.prefersLargeTitles = true
         }
 
-        navigationController.delegate = paymentFlow
-
         topViewController.present(navigationController, animated: true, completion: nil)
-        return navigationController
     }
 
-    /// Creates a Credit Card Controller comes in UINavigationController stack
+    /// Creates and presents modal "Credit Card Payment" controller with a given parameters
     ///
     /// - Parameters:
+    ///    - from: ViewController is used to present Choose Payment Methods
     ///    - countryCode: Delegate to be notified when Source or Token is created
-    ///    - handleErrors:  If `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
+    ///    - handleErrors: If `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
     ///    - delegate: Delegate to be notified when Source or Token is created
-    public func creditCardController(
+    public func presentCreditCardPayment(
+        from topViewController: UIViewController,
         countryCode: String? = nil,
         handleErrors: Bool = true,
         delegate: ChoosePaymentMethodDelegate
-    ) -> UINavigationController {
+    ) {
         let paymentFlow = ChoosePaymentCoordinator(
             client: client,
             amount: 0,
@@ -133,12 +132,12 @@ public class OmiseSDK {
         let viewController = paymentFlow.createCreditCardPaymentController(delegate: delegate)
 
         let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.delegate = paymentFlow
         if #available(iOSApplicationExtension 11.0, *) {
             navigationController.navigationBar.prefersLargeTitles = true
         }
 
-        navigationController.delegate = paymentFlow
-        return navigationController
+        topViewController.present(navigationController, animated: true, completion: nil)
     }
 
     /// Creates a authorizing payment view controller comes in UINavigationController stack.

@@ -22,8 +22,7 @@ class ProductDetailViewController: BaseViewController {
     }
 
     @IBAction private func showModalCreditCardPayment(_ sender: Any) {
-        let viewController = omiseSDK.creditCardController(delegate: self)
-        present(viewController, animated: true, completion: nil)
+        omiseSDK.presentCreditCardPayment(from: self, delegate: self)
     }
     
     @IBAction private func showChoosePaymentMethods(_ sender: Any) {
