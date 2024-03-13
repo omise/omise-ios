@@ -75,7 +75,7 @@ public class OmiseSDK {
         from topViewController: UIViewController,
         amount: Int64,
         currency: String,
-        allowedPaymentMethods: [SourceType] = [],
+        allowedPaymentMethods: [SourceType]? = nil,
         skipCapabilityValidation: Bool = true,
         isCardPaymentAllowed: Bool = true,
         handleErrors: Bool = true,
@@ -90,7 +90,7 @@ public class OmiseSDK {
         )
 
         let filter = SelectPaymentMethodViewModel.Filter(
-            sourceTypes: allowedPaymentMethods,
+            sourceTypes: allowedPaymentMethods ?? [],
             isCardPaymentAllowed: isCardPaymentAllowed,
             isForced: skipCapabilityValidation
         )

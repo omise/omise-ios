@@ -30,7 +30,7 @@ class ProductDetailViewController: BaseViewController {
             from: self,
             amount: paymentAmount,
             currency: paymentCurrencyCode,
-            allowedPaymentMethods: usesCapabilityDataForPaymentMethods ? [] : allowedPaymentMethods,
+            allowedPaymentMethods: usesCapabilityDataForPaymentMethods ? nil : allowedPaymentMethods,
             skipCapabilityValidation: true,
             isCardPaymentAllowed: true,
             handleErrors: true,
