@@ -46,7 +46,7 @@ class ProductDetailViewController: BaseViewController {
     
     @IBAction private func handlingAuthorizingPayment(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Authorizing Payment",
-                                                message: "Please input your given authorized URL",
+                                                message: "Please input your given authorize URL",
                                                 preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
         alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
@@ -57,9 +57,9 @@ class ProductDetailViewController: BaseViewController {
                   let url = URL(string: text),
                   let expectedReturnURL = URLComponents(string: "https://opn.ooo/") else { return }
 
-            self.omiseSDK.presentAuthorizedController(
+            self.omiseSDK.presentAuthorizingPayment(
                 from: self,
-                authorizedURL: url,
+                authorizeURL: url,
                 expectedReturnURLPatterns: [expectedReturnURL],
                 delegate: self
             )
@@ -73,11 +73,11 @@ class ProductDetailViewController: BaseViewController {
 extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate {
     func authorizingPaymentViewController(_ viewController: AuthorizingPaymentViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL) {
         print(redirectedURL)
-        dismiss(animated: true, completion: nil)
+        omiseSDK.dismiss()
     }
     
     func authorizingPaymentViewControllerDidCancel(_ viewController: AuthorizingPaymentViewController) {
-        dismiss(animated: true, completion: nil)
+        omiseSDK.dismiss()
     }
 }
 
@@ -85,7 +85,7 @@ extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate 
 
 extension ProductDetailViewController: CustomCreditCardPaymentControllerDelegate {
     func creditCardFormViewController(_ controller: CustomCreditCardPaymentController, didSucceedWithToken token: Token) {
-        dismissForm {
+        omiseSDK.dismiss {
             let alertController = UIAlertController(
                 title: "Token Created",
                 message: "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge.",
@@ -98,7 +98,7 @@ extension ProductDetailViewController: CustomCreditCardPaymentControllerDelegate
     }
     
     func creditCardFormViewController(_ controller: CustomCreditCardPaymentController, didFailWithError error: Error) {
-        dismissForm {
+        omiseSDK.dismiss {
             let alertController = UIAlertController(
                 title: "Error",
                 message: error.localizedDescription,
@@ -114,7 +114,7 @@ extension ProductDetailViewController: CustomCreditCardPaymentControllerDelegate
 /// Processing result of choosing Payment Method screen
 extension ProductDetailViewController: ChoosePaymentMethodDelegate {
     func choosePaymentMethodDidComplete(with source: Source) {
-        dismissForm {
+        omiseSDK.dismiss {
             let alertController = UIAlertController(
                 title: "Source Created\n(\(source.paymentInformation.sourceType.rawValue))",
                 message: "A source with id of \(source.id) was successfully created. Please send this id to server to create a charge.",
@@ -127,7 +127,7 @@ extension ProductDetailViewController: ChoosePaymentMethodDelegate {
     }
 
     func choosePaymentMethodDidComplete(with token: Token) {
-        dismissForm {
+        omiseSDK.dismiss {
             let alertController = UIAlertController(
                 title: "Token Created",
                 message: "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge.",
@@ -140,15 +140,15 @@ extension ProductDetailViewController: ChoosePaymentMethodDelegate {
     }
 
     func choosePaymentMethodDidComplete(with error: Error) {
-        dismissForm {
-            let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-        }
+        let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+
+        let vc = omiseSDK.presentedViewController ?? self
+        vc.present(alertController, animated: true, completion: nil)
     }
 
     func choosePaymentMethodDidCancel() {
-        dismissForm()
+        omiseSDK.dismiss()
     }
 }

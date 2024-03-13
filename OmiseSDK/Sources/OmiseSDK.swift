@@ -42,6 +42,8 @@ public class OmiseSDK {
         Country(code: latestLoadedCapability?.countryCode)
     }
 
+    public private(set) weak var presentedViewController: UIViewController?
+
     /// Creates a new instance of Omise SDK that provides interface to functionallity that SDK provides
     ///
     /// - Parameters:
@@ -63,7 +65,8 @@ public class OmiseSDK {
     /// Creates and presents modal "Payment Methods" controller with a given parameters
     ///
     /// - Parameters:
-    ///    - from: ViewController is used to present new controller
+    ///    - from: ViewController is used to present Choose Payment Methods
+    ///    - animated: Presents controller with animation if `true`
     ///    - amount: Payment amount
     ///    - currency: Payment currency code  (ISO 4217)
     ///    - allowedPaymentMethods: Payment methods to be presented in the list
@@ -73,6 +76,7 @@ public class OmiseSDK {
     ///    - completion: Completion handler triggered when payment completes with Token, Source, Error or was Cancelled
     public func presentChoosePaymentMethod(
         from topViewController: UIViewController,
+        animated: Bool = true,
         amount: Int64,
         currency: String,
         allowedPaymentMethods: [SourceType]? = nil,
@@ -81,6 +85,8 @@ public class OmiseSDK {
         handleErrors: Bool = true,
         delegate: ChoosePaymentMethodDelegate
     ) {
+        dismiss(animated: false)
+
         let paymentFlow = ChoosePaymentCoordinator(
             client: client,
             amount: amount,
@@ -106,22 +112,27 @@ public class OmiseSDK {
             navigationController.navigationBar.prefersLargeTitles = true
         }
 
-        topViewController.present(navigationController, animated: true, completion: nil)
+        topViewController.present(navigationController, animated: animated, completion: nil)
+        presentedViewController = navigationController
     }
 
     /// Creates and presents modal "Credit Card Payment" controller with a given parameters
     ///
     /// - Parameters:
-    ///    - from: ViewController is used to present new controller
-    ///    - countryCode: Delegate to be notified when Source or Token is created
+    ///    - from: ViewController is used to present Choose Payment Methods
+    ///    - animated: Presents controller with animation if `true`
+    ///    - countryCode: Country to be preselected in the form. If `nil` country from Capabilities will be used instead.
     ///    - handleErrors: If `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
     ///    - delegate: Delegate to be notified when Source or Token is created
     public func presentCreditCardPayment(
         from topViewController: UIViewController,
+        animated: Bool = true,
         countryCode: String? = nil,
         handleErrors: Bool = true,
         delegate: ChoosePaymentMethodDelegate
     ) {
+        dismiss(animated: false)
+
         let paymentFlow = ChoosePaymentCoordinator(
             client: client,
             amount: 0,
@@ -137,25 +148,30 @@ public class OmiseSDK {
             navigationController.navigationBar.prefersLargeTitles = false
         }
 
-        topViewController.present(navigationController, animated: true, completion: nil)
+        topViewController.present(navigationController, animated: animated, completion: nil)
+        presentedViewController = navigationController
     }
 
     /// Creates and presents Authorizing Payment controller with a given parameters
     ///
     /// - Parameters:
-    ///    - from: ViewController is used to present new controller
-    ///    - authorizedURL: The authorized URL given in `Charge` object
+    ///    - from: ViewController is used to present Choose Payment Methods
+    ///    - animated: Presents controller with animation if `true`
+    ///    - authorizeURL: The authorize URL given in `Charge` object
     ///    - expectedReturnURLPatterns: The expected return URL patterns.
     ///    - delegate: A delegate object that will recieved authorizing payment events.
     @available(iOSApplicationExtension, unavailable)
-    public func presentAuthorizedController(
+    public func presentAuthorizingPayment(
         from topViewController: UIViewController,
-        authorizedURL: URL,
+        animated: Bool = true,
+        authorizeURL: URL,
         expectedReturnURLPatterns: [URLComponents],
         delegate: AuthorizingPaymentViewControllerDelegate
     ) {
+        dismiss(animated: false)
+
         let viewController = AuthorizingPaymentViewController(nibName: nil, bundle: .omiseSDK)
-        viewController.authorizedURL = authorizedURL
+        viewController.authorizeURL = authorizeURL
         viewController.expectedReturnURLPatterns = expectedReturnURLPatterns
         viewController.delegate = delegate
         viewController.applyNavigationBarStyle()
@@ -169,7 +185,14 @@ public class OmiseSDK {
             navigationController.navigationBar.prefersLargeTitles = false
         }
 
-        topViewController.present(navigationController, animated: true, completion: nil)
+        topViewController.present(navigationController, animated: animated, completion: nil)
+        presentedViewController = navigationController
+    }
+
+    /// Dismiss any presented UI form by OmiseSDK
+    public func dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
+        guard let presentedViewController = presentedViewController else { return }
+        presentedViewController.dismiss(animated: animated, completion: completion)
     }
 }
 
