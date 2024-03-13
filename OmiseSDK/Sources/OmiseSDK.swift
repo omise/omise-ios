@@ -32,7 +32,7 @@ public class OmiseSDK {
     public let publicKey: String
 
     /// Client is used to communicate with Omise API
-    public let client: Client
+    public let client: ClientProtocol
 
     /// Latest capability loaded with `client.capability()`
     var latestLoadedCapability: Capability? { client.latestLoadedCapability }

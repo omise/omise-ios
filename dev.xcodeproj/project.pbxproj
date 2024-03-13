@@ -80,6 +80,7 @@
 		75405AA82A27F97E008C21F6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75405AA62A27F97E008C21F6 /* Localizable.strings */; };
 		754B78182B8741CD00973B71 /* TapGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754B78172B8741CD00973B71 /* TapGestureHandler.swift */; };
 		755CD9212BA1C81600E8FCDA /* UIViewController+KeyboardAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755CD9202BA1C81600E8FCDA /* UIViewController+KeyboardAppearance.swift */; };
+		755CD9232BA2000600E8FCDA /* ClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755CD9222BA2000600E8FCDA /* ClientProtocol.swift */; };
 		756C8F1E2A40693B00D53059 /* CreditCardPaymentViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C8F1D2A40693B00D53059 /* CreditCardPaymentViewModelProtocol.swift */; };
 		756C8F202A40694000D53059 /* CreditCardPaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C8F1F2A40694000D53059 /* CreditCardPaymentViewModel.swift */; };
 		756C8F222A40694F00D53059 /* CreditCardPaymentViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C8F212A40694F00D53059 /* CreditCardPaymentViewContext.swift */; };
@@ -325,6 +326,7 @@
 		75405AAA2A27F988008C21F6 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
 		754B78172B8741CD00973B71 /* TapGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureHandler.swift; sourceTree = "<group>"; };
 		755CD9202BA1C81600E8FCDA /* UIViewController+KeyboardAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+KeyboardAppearance.swift"; sourceTree = "<group>"; };
+		755CD9222BA2000600E8FCDA /* ClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientProtocol.swift; sourceTree = "<group>"; };
 		756C8F1D2A40693B00D53059 /* CreditCardPaymentViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardPaymentViewModelProtocol.swift; sourceTree = "<group>"; };
 		756C8F1F2A40694000D53059 /* CreditCardPaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardPaymentViewModel.swift; sourceTree = "<group>"; };
 		756C8F212A40694F00D53059 /* CreditCardPaymentViewContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardPaymentViewContext.swift; sourceTree = "<group>"; };
@@ -964,6 +966,7 @@
 				75E0EBBF2B7D13D200E3198A /* OmiseAPI */,
 				75D13DEE2B866BCA0073A831 /* Views */,
 				75CFC4D12B73AFD500422A8F /* OmiseSDK.swift */,
+				755CD9222BA2000600E8FCDA /* ClientProtocol.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -1430,6 +1433,7 @@
 				75D13DE42B8666CC0073A831 /* SelectSourceTypeDelegate.swift in Sources */,
 				75CFC4DD2B73F75C00422A8F /* OmiseAPI.swift in Sources */,
 				75348D4E29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift in Sources */,
+				755CD9232BA2000600E8FCDA /* ClientProtocol.swift in Sources */,
 				75E0EB9D2B7BD00F00E3198A /* CardBrand.swift in Sources */,
 				75E0EB9A2B7BD00F00E3198A /* Currency.swift in Sources */,
 				75405A9C2A266F50008C21F6 /* AtomePaymentFormViewModel.swift in Sources */,

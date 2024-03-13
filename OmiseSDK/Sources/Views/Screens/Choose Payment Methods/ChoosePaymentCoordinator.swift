@@ -1,7 +1,7 @@
 import UIKit
 
 class ChoosePaymentCoordinator: NSObject, ViewAttachable {
-    let client: Client
+    let client: ClientProtocol
     let amount: Int64
     let currency: String
     let currentCountry: Country?
@@ -24,7 +24,7 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
         return noticeView
     }()
 
-    init(client: Client, amount: Int64, currency: String, currentCountry: Country?, handleErrors: Bool) {
+    init(client: ClientProtocol, amount: Int64, currency: String, currentCountry: Country?, handleErrors: Bool) {
         self.client = client
         self.amount = amount
         self.currency = currency

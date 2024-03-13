@@ -2,9 +2,7 @@ import Foundation
 import os
 
 /// Network Client to communicate with Omise APIs
-public class Client {
-    public typealias RequestResultClosure<T: Decodable, E: Error> = (Result<T, E>) -> Void
-
+class Client: ClientProtocol {
     let version: String
     let publicKey: String
     var customApiURL: URL?
@@ -15,7 +13,7 @@ public class Client {
     private let pollingTimeInterval = 3
 
     /// Latest capability loaded with `capability()`
-    public private(set) var latestLoadedCapability: Capability?
+    private(set) var latestLoadedCapability: Capability?
 
     /// Creates a new Client item with given public key
     ///
@@ -40,9 +38,9 @@ public class Client {
         self.customVaultURL = vaultURL
     }
     
-    /// Perform Capability API Request
-    /// - returns Capability
-    public func capability(_ completion: @escaping RequestResultClosure<Capability, Error>) {
+    /// Performs a Capability API Request
+    /// - parameter completion: Returns `Capability` object on success and `Error` on request failed
+    func capability(_ completion: @escaping ResponseClosure<Capability, Error>) {
         performRequest(api: OmiseAPI.capability) { [weak self] (result: Result<Capability, Error>) in
             if let capability = try? result.get() {
                 self?.latestLoadedCapability = capability
@@ -51,40 +49,31 @@ public class Client {
         }
     }
     
-    /// Sends Create a Source API request with given Payment Payload
-    ///
-    /// - Parameters:
-    ///    - payload: Information required to perform Create a Source API request
-    ///    - completion: Returns `Source` object on success and `Error` on request failed
-    public func createSource(payload: CreateSourcePayload, _ completion: @escaping RequestResultClosure<Source, Error>) {
+    /// Sends `Create a Source` API request with given Payment Payload
+    /// - parameter payload: Information required to perform Create a Source API request
+    /// - parameter completion: Returns `Source` object on success and `Error` on request failed
+    func createSource(payload: CreateSourcePayload, _ completion: @escaping ResponseClosure<Source, Error>) {
         performRequest(api: OmiseAPI.createSource(payload: payload), completion: completion)
     }
 
-    /// Send Create a Token API request with given Card Payment
-    ///
-    /// - Parameters:
-    ///    - payload: Information required to perform Create a Token API request
-    ///    - completion: Returns `Token`object  on success and `Error` on request failed
-    public func createToken(payload: CreateTokenPayload, _ completion: @escaping RequestResultClosure<Token, Error>) {
+    /// Sends `Create a Token` API request with given Card Payment
+    /// - parameter payload: Information required to perform Create a Token API request
+    /// - parameter completion: Returns `Token`object  on success and `Error` on request failed
+    func createToken(payload: CreateTokenPayload, _ completion: @escaping ResponseClosure<Token, Error>) {
         performRequest(api: OmiseAPI.createToken(payload: payload), completion: completion)
     }
 
-    /// Request a Token from API with given Token ID
-    ///
-    /// - Parameters:
-    ///    - tokenID: Token identifier
-    ///    - completion: Returns `Token`object  on success and `Error` on request failed
-    public func token(tokenID: String, _ completion: @escaping RequestResultClosure<Token, Error>) {
+    /// Requests a `Token` from API with given Token ID
+    /// - parameter tokenID: Token identifier
+    /// - parameter completion: Returns `Token`object  on success and `Error` on request failed
+    func token(tokenID: String, _ completion: @escaping ResponseClosure<Token, Error>) {
         performRequest(api: OmiseAPI.token(tokenID: tokenID), completion: completion)
     }
 
-    /// Observe Token Charge Status until it changes
-    /// Sends API request every `timeInterval` with number of`maxAttempt`attempts.
-    ///
-    /// - Parameters:
-    ///    - tokenID: Token identifier
-    ///    - completion: Returns `Token.ChargeStatus`object with token charge status value  on success and `Error` on request failed
-    public func observeChargeStatus(tokenID: String, _ completion: @escaping RequestResultClosure<Token.ChargeStatus, Error>) {
+    /// Observes `Token Charge Status` until it changes or max attempts is reached
+    /// - parameter tokenID: Token identifier
+    /// - parameter completion: Returns `Token.ChargeStatus`object with token charge status value  on success and `Error` on request failed
+    func observeChargeStatus(tokenID: String, _ completion: @escaping ResponseClosure<Token.ChargeStatus, Error>) {
         observeUntilChargeStatusIsFinal(
             tokenID: tokenID,
             timeInterval: pollingTimeInterval,

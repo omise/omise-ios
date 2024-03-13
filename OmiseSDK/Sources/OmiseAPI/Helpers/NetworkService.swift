@@ -2,12 +2,12 @@ import Foundation
 import os
 
 protocol NetworkServiceProtocol {
-    typealias RequestResultClosure<T: Decodable, E: Error> = (Result<T, E>) -> Void
+    typealias ResponseClosure<T: Decodable, E: Error> = (Result<T, E>) -> Void
 
     func send<T: Decodable>(
         urlRequest: URLRequest,
         dateFormatter: DateFormatter?,
-        completion: @escaping RequestResultClosure<T, Error>
+        completion: @escaping ResponseClosure<T, Error>
     )
 }
 
@@ -29,7 +29,7 @@ extension NetworkService: NetworkServiceProtocol {
     func send<T: Decodable>(
         urlRequest: URLRequest,
         dateFormatter: DateFormatter?,
-        completion: @escaping RequestResultClosure<T, Error>
+        completion: @escaping ResponseClosure<T, Error>
     ) {
         let dataTask = session.dataTask(with: urlRequest) { [weak self] (data, response, error) in
             guard let self = self else { return }

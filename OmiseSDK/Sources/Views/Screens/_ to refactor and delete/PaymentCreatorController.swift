@@ -55,7 +55,7 @@ public class PaymentCreatorController: UINavigationController {
     /// Defaults to `true`.
     public var handleErrors = true
 
-    var client: Client? {
+    var client: ClientProtocol? {
         didSet {
             paymentSourceCreatorFlowSession.client = client
         }

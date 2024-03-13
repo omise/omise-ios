@@ -12,7 +12,7 @@ class FPXPaymentFormController: UIViewController, PaymentFormUIController {
     var showingValues: [Capability.PaymentMethod.Bank]?
     private var emailValue: String?
 
-    private var client: Client?
+    private var client: ClientProtocol?
 
     private var isInputDataValid: Bool {
         return formFields.allSatisfy { $0.isValid } || isEmailInputEmpty
