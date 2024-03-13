@@ -7,7 +7,12 @@
 "PaymentMethod.eContext.payEasy" = "ペイジー";
 "PaymentMethod.eContext.netBanking" = "ネットバンク";
 
-"SourceType.payNow" = "PayNow";
+"SourceType.paynow" = "PayNow";
+"SourceType.truemoney" = "TrueMoneyウォレット";
+"SourceType.promptpay" = "プロンプトペイ";
+"SourceType.alipay" = "アリペイ";
+"SourceType.points_citi" = "Citi Rewardsポイント";
+"SourceType.bill_payment_tesco_lotus" = "ロータス";
 
 // Authorizing Payment
 "AuthorizingPayment.title" = "決済の認可";

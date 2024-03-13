@@ -7,7 +7,21 @@
 "PaymentMethod.eContext.payEasy" = "Pay-easy";
 "PaymentMethod.eContext.netBanking" = "Net Bank";
 
-"SourceType.payNow" = "PayNow";
+"SourceType.paynow" = "PayNow";
+"SourceType.truemoney" = "TrueMoney Wallet";
+"SourceType.promptpay" = "PromptPay";
+"SourceType.alipay" = "Alipay";
+"SourceType.points_citi" = "Pay with Citi Rewards Points";
+"SourceType.bill_payment_tesco_lotus" = "Lotus's Bill Payment";
+"SourceType." = "";
+"SourceType." = "";
+"SourceType." = "";
+"SourceType." = "";
+"SourceType." = "";
+"SourceType." = "";
+"SourceType." = "";
+"SourceType." = "";
+
 
 // Authorizing Payment
 "AuthorizingPayment.title" = "Authorizing Payment";

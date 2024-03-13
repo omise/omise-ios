@@ -7,7 +7,12 @@
 "PaymentMethod.eContext.payEasy" = "เพย์อีซี";
 "PaymentMethod.eContext.netBanking" = "เน็ตแบงก์";
 
-"SourceType.payNow" = "เพย์นาว";
+"SourceType.paynow" = "เพย์นาว";
+"SourceType.truemoney" = "ทรูมันนี่วอลเล็ท";
+"SourceType.promptpay" = "พร้อมเพย์";
+"SourceType.alipay" = "อาลีเพย์";
+"SourceType.points_citi" = "ชำระด้วยคะแนนซิตี้รีวอร์ด";
+"SourceType.bill_payment_tesco_lotus" = "โลตัสบิลเพย์เมนต์";
 
 // Authorizing Payment
 "AuthorizingPayment.title" = "กำลังอนุมัติวงเงิน";
