@@ -46,7 +46,7 @@ class ProductDetailViewController: BaseViewController {
     
     @IBAction private func handlingAuthorizingPayment(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Authorizing Payment",
-                                                message: "Please input your given authorized URL",
+                                                message: "Please input your given authorize URL",
                                                 preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
         alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
@@ -59,7 +59,7 @@ class ProductDetailViewController: BaseViewController {
 
             self.omiseSDK.presentAuthorizedController(
                 from: self,
-                authorizedURL: url,
+                authorizeURL: url,
                 expectedReturnURLPatterns: [expectedReturnURL],
                 delegate: self
             )

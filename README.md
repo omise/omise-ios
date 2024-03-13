@@ -331,19 +331,19 @@ extension ProductDetailViewController: ChoosePaymentMethodDelegate {
 
 ### Authorizing payment
 
-Some payment methods require customers to authorize the payment uaing an authorized URL. This includes [3-D Secure verification](https://docs.opn.ooo/fraud-protection#3-d-secure), [Internet Banking payment](https://docs.opn.ooo/internet-banking), and [Alipay](https://docs.opn.ooo/alipay). The Opn Payments iOS SDK provides a built-in class to authorize payments.
+Some payment methods require customers to authorize the payment using an authorize URL. This includes [3-D Secure verification](https://docs.opn.ooo/fraud-protection#3-d-secure), [Internet Banking payment](https://docs.opn.ooo/internet-banking), and [Alipay](https://docs.opn.ooo/alipay). The Opn Payments iOS SDK provides a built-in class to authorize payments.
 
 On payment methods that require opening the external application (e.g., mobile banking application) to authorize the transaction, set the *return_uri* to a **deep link** or **app link** to be able to open the merchant application. Otherwise, after the cardholder authorizes the transaction on the external application, the flow redirects to the normal link in the *return_uri*, and opens it on the browser application, resulting in the payment not being completed.
 
 #### Using built-in authorizing payment view controller
 
-You can use the built-in authorizing payment view controller with the `authorized URL` provided with the charge and expected `return URL` patterns you create.
+You can use the built-in authorizing payment view controller with the `authorizeURL` provided with the charge and expected `return URL` patterns you create.
 
 ```swift
 
 omiseSDK.presentAuthorizedController(
     from: self,
-    authorizedURL: url,
+    authorizeURL: url,
     expectedReturnURLPatterns: [expectedReturnURL],
     delegate: self
 )

@@ -22,8 +22,8 @@ public protocol AuthorizingPaymentViewControllerDelegate: AnyObject {
  */
 @available(iOSApplicationExtension, unavailable)
 public class AuthorizingPaymentViewController: UIViewController {
-    /// Authorized URL given from Omise in the created `Charge` object.
-    var authorizedURL: URL? {
+    /// Authorize URL given from Omise in the created `Charge` object.
+    var authorizeURL: URL? {
         didSet {
             guard isViewLoaded else {
                 return
@@ -82,14 +82,14 @@ public class AuthorizingPaymentViewController: UIViewController {
     }
     
     private func startAuthorizingPaymentProcess() {
-        guard let authorizedURL = authorizedURL, !expectedReturnURLPatterns.isEmpty else {
+        guard let authorizeURL = authorizeURL, !expectedReturnURLPatterns.isEmpty else {
             assertionFailure("Insufficient authorizing payment information")
             os_log("Refusing to initialize sdk client with a non-public key: %{private}@", log: uiLogObject, type: .error)
             return
         }
         
-        os_log("Starting the authorizing process with %{private}@ URL", log: uiLogObject, type: .info, authorizedURL.absoluteString)
-        let request = URLRequest(url: authorizedURL, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 60.0)
+        os_log("Starting the authorizing process with %{private}@ URL", log: uiLogObject, type: .info, authorizeURL.absoluteString)
+        let request = URLRequest(url: authorizeURL, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 60.0)
         webView.load(request)
     }
     

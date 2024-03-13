@@ -157,21 +157,21 @@ public class OmiseSDK {
     /// - Parameters:
     ///    - from: ViewController is used to present Choose Payment Methods
     ///    - animated: Presents controller with animation if `true`
-    ///    - authorizedURL: The authorized URL given in `Charge` object
+    ///    - authorizeURL: The authorize URL given in `Charge` object
     ///    - expectedReturnURLPatterns: The expected return URL patterns.
     ///    - delegate: A delegate object that will recieved authorizing payment events.
     @available(iOSApplicationExtension, unavailable)
     public func presentAuthorizedController(
         from topViewController: UIViewController,
         animated: Bool = true,
-        authorizedURL: URL,
+        authorizeURL: URL,
         expectedReturnURLPatterns: [URLComponents],
         delegate: AuthorizingPaymentViewControllerDelegate
     ) {
         dismiss(animated: false)
 
         let viewController = AuthorizingPaymentViewController(nibName: nil, bundle: .omiseSDK)
-        viewController.authorizedURL = authorizedURL
+        viewController.authorizeURL = authorizeURL
         viewController.expectedReturnURLPatterns = expectedReturnURLPatterns
         viewController.delegate = delegate
         viewController.applyNavigationBarStyle()
