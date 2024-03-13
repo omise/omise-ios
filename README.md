@@ -12,7 +12,7 @@ help merchants of any size accept payments online.
 The Opn Payments iOS SDK provides bindings for
 [tokenizing credit cards](https://docs.opn.ooo/tokens-api) and
 [accepting non-credit-card payments](https://docs.opn.ooo/sources-api)
-using the Opn Payments API allowing developers to safely and easily accept
+using the Opn Payments API, allowing developers to safely and easily accept
 payments within apps.
 
 If you run into any issues regarding this SDK and the functionality it
@@ -39,7 +39,7 @@ you can't find an answer there, feel free to
 guide on how to safely
 [collect credit information](https://docs.opn.ooo/collecting-card-information).**
 
-To be authorized to create tokens on your own server, you must have a
+To be authorized to create tokens on your server, you must have a
 currently valid PCI-DSS Attestation of Compliance (AoC) delivered by a
 certified QSA Auditor.  This SDK provides the means to tokenize card data
 through the end user's mobile phone without this data having to go
@@ -52,17 +52,17 @@ To integrate the Opn Payments SDK into your Xcode project using the [Swift Packa
 1. In Xcode, select `File` > `Swift Packages` > `Add Package Dependency...`
 2. Enter the URL for this repository `https://github.com/omise/omise-ios.git`
 3. Choose a minimum semantic version of `v5.0.0`
-4. Select your target, go to `Frameworks, Libraries, and Embedded Content` and set OmiseSDK to `Embed & Sign`
+4. Select your target, go to `Frameworks, Libraries, and Embedded Content`, and set OmiseSDK to `Embed & Sign`
 
 ## Usage
 
 The Opn Payments iOS SDK provides an easy-to-use library for calling the
 Opn Payments API and presenting UI forms.
 
-The main classes for the Opn Payments iOS SDK is `OmiseSDK` and `Client` through
-which all requests to the Opn Payments API will be sent
+The main classes for the Opn Payments iOS SDK are `OmiseSDK` and `Client` through
+which all requests to the Opn Payments API will be sent.
 
-To start working with OmiseSDK you need to create a new instance of `OmiseSDK` class with an Opn Payments public key.
+To start working with OmiseSDK, you must create a new instance of the `OmiseSDK` class with an Opn Payments public key.
 
 ```swift
 import OmiseSDK
@@ -70,25 +70,25 @@ import OmiseSDK
 let omiseSDK = OmiseSDK(publicKey: "omise_public_key")
 ```
 
-You can also setup and use `shared` instance of `OmiseSDK` in your code:
+You can also set up and use a `shared` instance of `OmiseSDK` in your code:
 ```swift
 OmiseSDK.shared = omiseSDK
 ```
 
 
-If you cloned this project to your local hard drive, you can checkout the `ExampleApp.xcodeproj`.
+If you cloned this project to your local hard drive, you can check out `ExampleApp.xcodeproj`.
 
 ### Opn Payments API
 
 The SDK currently
-supports 2 main categories of requests: **Tokenizing a 
+supports two main categories of requests: **Tokenizing a 
 Card** and **Creating a Payment Source**.
 
 #### Creating a card token
 
 Normally, merchants must not send credit or debit card data to their own
 servers. To collect a card payment from a
-customer, merchants will need to first *tokenize* the card data using the
+customer, merchants must first *tokenize* the card data using the
 Opn Payments API and then use the generated token in place of the card
 data. You can tokenize card data by creating and initializing
 a `CreateTokenPayload.Card` as follows:
@@ -123,7 +123,7 @@ let createTokenPayloadWithAddress = CreateTokenPayload.Card(
 Opn Payments supports many payment methods other than cards. You
 may request a payment with one of those supported payment methods from
 a customer by calling the `CreateSource` API. You need to specify
-the parameters (e.g. payment amount and currency) of the source you
+the parameters (e.g., payment amount and currency) of the source you
 want to create by creating and initializing a `CreateSourcePayload` with
 the `Payment Information` object:
 
@@ -137,7 +137,7 @@ let createSourcePayload = CreateSourcePayload(
 
 #### Creating the completion handler
 
-A simple completion handler for a token looks as follows:
+A simple completion handler for a token is as follows:
 
 ```swift
 func tokenCompletionHandler(tokenResult: Result<Token, Error>) -> Void {
@@ -154,8 +154,9 @@ func tokenCompletionHandler(tokenResult: Result<Token, Error>) -> Void {
 #### Sending the request
 
 Whether you are charging a source or a card, sending the
-request is the same.  Use `Client` object to perform one off API calls
-with the completion handler block
+request is the same.  Use the `Client` object to perform one-off API calls
+with the completion handler block.
+
 ```swift
 let client = omiseSDK.client
 client.createToken(payload: createTokenPayload, tokenCompletionHandler)
@@ -192,8 +193,8 @@ class ViewController: UIViewController {
 ```
 
 You can provide extra parameters:
-- `countryCode` to preselect country in the UI form 
-- `handleErrors` to process and display errors (by default is `true`), if `false` then delegate 
+- `countryCode` to preselect the country in the UI form 
+- `handleErrors` to process and display errors (by default, is `true`); if `false`, then the delegate 
 method `choosePaymentMethodDidComplete(with error: Error)` will be called instead.
 
 ```swift
@@ -205,23 +206,24 @@ omiseSDK.presentCreditCardPayment(
 )
 ```
     
-Then implement the delegate to receive the `Token` object after user has entered the card data:
+Then implement the delegate to receive the `Token` object after the user has entered the card data:
 
 ```swift
 extension ViewController: ChoosePaymentMethodDelegate {
   func choosePaymentMethodDidComplete(with token: Token) {
-    // Send `Token` to your server to create a charge, or a customer object.
+    // Send `Token` to your server to create a charge or a customer object.
     print(token.id) // prints Token ID
   }
 
   func choosePaymentMethodDidComplete(with error: Error) {
     // Only called if we set `handleErrors = false`.
-    // You can send errors to a logging service, or display them to the user here.
+    // You can send errors to a logging service or display them here to the user.
   }
 }
 ```
 
-You can call `OmiseSDK.dismiss(animated:completion:)` to close UI form presented by OmiseSDK
+You can call `OmiseSDK.dismiss(animated:completion:)` to close UI form presented by OmiseSDK:
+
 ```swift
   func choosePaymentMethodDidComplete(with token: Token) {
     omiseSDK.dismiss {
@@ -233,29 +235,29 @@ You can call `OmiseSDK.dismiss(animated:completion:)` to close UI form presented
 
 ##### Custom card form
 
-You can create your own card form if you want but please keep in mind that you must not send the card information to your server.
-Opn Payments iOS SDK provides some built-in card UI components to make it easier to create your own card form:
+You can create your card form, but please remember you must not send the card information to your server.
+Opn Payments iOS SDK provides the following built-in card UI components to make it easier to create your card form:
 
 * `CardNumberTextField` - Provides basic number grouping as the user types.
 * `CardNameTextField` - Cardholder name field.
 * `CardExpiryDateTextField` - Provides card expiration date input and styling
-* `CardExpiryDatePicker` - `UIPickerView` implementation that has a month and year column.
+* `CardExpiryDatePicker` - `UIPickerView` implementation with a month and year column.
 * `CardCVVTextField` - CVV number field.
 
-Additionally, fields turn red automatically if their content fails
-basic validation (e.g. alphabetic characters in the number field,
-content with wrong length, etc.) and come in two supported styles, plain
+Additionally, fields automatically turn red if their content fails
+basic validation (e.g., alphabetic characters in the number field,
+content with wrong length), and come in two supported styles: plain
 and border.
 
 #### Built-in Choose Payment Methods controller
 
-The `presentChoosePaymentMethod` function of `OmiseSDK` presents a pre-made form to let a customer choose how they want to make a payment.
-Please note that presented controller is designed to be used as-is and you shouldn't push your view controllers into its navigation controller stack.
+The `presentChoosePaymentMethod` function of `OmiseSDK` presents a pre-made form that lets customers choose how they want to make a payment.
+Please note that the presented controller is designed to be used as-is, and you should not push your view controllers into its navigation controller stack.
 You can configure it to display either specified payment method options or a default list based on your country.
 
 ##### Use Choose Payment Methods controller
 
-To use the controller in your application call `presentChoosePaymentMethod`. 
+To use the controller in your application, call `presentChoosePaymentMethod`. 
 
 ```swift
 
@@ -268,10 +270,10 @@ omiseSDK.presentChoosePaymentMethod(
 ```
 
 You can provide extra parameters:
-- `allowedPaymentMethods` to show given payment methods (if presented in Capability API)
-- `forcePaymentMethods` to override payment methods from Capability and show only `allowedPaymentMethods`
-- `isCardPaymentAllowed` to show or hide Credit Card payment method
-- `handleErrors` to process and display errors (by default is `true`), if `false` then delegate 
+- `allowedPaymentMethods` to display given payment methods (if presented in Capability API)
+- `forcePaymentMethods` to override payment methods from Capability and display only `allowedPaymentMethods`
+- `isCardPaymentAllowed` to display or hide the Credit Card payment method
+- `handleErrors` to process and display errors (by default, is `true`); if `false`, then the delegate 
 method `choosePaymentMethodDidComplete(with error: Error)` will be called instead.
 
 ```swift
@@ -290,7 +292,7 @@ omiseSDK.presentChoosePaymentMethod(
 
 ```
 
-Then implement the delegate to receive the `Source` or `Token` object after user has selected:
+Then implement the delegate to receive the `Source` or `Token` object after the user has selected:
 
 ```swift
 extension ProductDetailViewController: ChoosePaymentMethodDelegate {  
@@ -325,13 +327,13 @@ extension ProductDetailViewController: ChoosePaymentMethodDelegate {
 
 ### Authorizing payment
 
-Some payment methods require the customers to authorize the payment via an authorized URL. This includes [3-D Secure verification](https://docs.opn.ooo/fraud-protection#3-d-secure), [Internet Banking payment](https://docs.opn.ooo/internet-banking), [Alipay](https://docs.opn.ooo/alipay). The Opn Payments iOS SDK provides a built-in class to authorize payments.
+Some payment methods require customers to authorize the payment uaing an authorized URL. This includes [3-D Secure verification](https://docs.opn.ooo/fraud-protection#3-d-secure), [Internet Banking payment](https://docs.opn.ooo/internet-banking), and [Alipay](https://docs.opn.ooo/alipay). The Opn Payments iOS SDK provides a built-in class to authorize payments.
 
-On payment methods that require opening the external application (e.g. mobile banking application) to authorize the transaction, set the *return_uri* to a **deeplink** or **applink** to be able to open the merchant application. Else, after the card holder completes authorizing the transaction on the external application, the flow redirects to the normal link in the *return_uri* and opens it on the browser application, and therefore results in the payment not being completed.
+On payment methods that require opening the external application (e.g., mobile banking application) to authorize the transaction, set the *return_uri* to a **deep link** or **app link** to be able to open the merchant application. Otherwise, after the cardholder authorizes the transaction on the external application, the flow redirects to the normal link in the *return_uri*, and opens it on the browser application, resulting in the payment not being completed.
 
 #### Using built-in authorizing payment view controller
 
-You can use the built-in authorizing payment view controller with `authorized URL` provided with the charge and expected `return URL` patterns that you create.
+You can use the built-in authorizing payment view controller with the `authorized URL` provided with the charge and expected `return URL` patterns you create.
 
 ```swift
 
@@ -343,7 +345,7 @@ omiseSDK.presentAuthorizedController(
 )
 ```
 
-Then implement the delegate to receive the `Source` or `Token` object after user has selected:
+Then implement the delegate to receive the `Source` or `Token` object after the user has selected:
 
 `OmiseAuthorizingPaymentViewController` sends `Authorizing Payment` events to its `delegate` when an event occurs.
 
@@ -355,7 +357,7 @@ extension ViewController: AuthorizingPaymentViewControllerDelegate {
   }
   
   func authorizingPaymentViewControllerDidCancel(_ viewController: AuthorizingPaymentViewController) {
-    // Handle the case that user tap cancel button.
+    // Handle the case that the user taps cancel.
     omiseSDK.dismiss()
   }
 }
@@ -363,11 +365,11 @@ extension ViewController: AuthorizingPaymentViewControllerDelegate {
 
 ## Objective-C compatibility
 
-This version of Opn Payments iOS SDK does not support Objective-C. Latest [version](https://github.com/omise/omise-ios/tree/support/v4.x.x) with full Objective-C support.
+This version of Opn Payments iOS SDK does not support Objective-C. For full Objective-C support, use [this version](https://github.com/omise/omise-ios/tree/support/v4.x.x).
 
 ## Contributing
 
-Pull requests, issues, and bugfixes are welcome!
+Pull requests, issues, and bug fixes are welcome!
 
 ## License
 
