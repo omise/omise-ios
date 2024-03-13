@@ -341,7 +341,7 @@ You can use the built-in authorizing payment view controller with the `authorize
 
 ```swift
 
-omiseSDK.presentAuthorizedController(
+omiseSDK.presentAuthorizingPayment(
     from: self,
     authorizeURL: url,
     expectedReturnURLPatterns: [expectedReturnURL],

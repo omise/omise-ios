@@ -161,7 +161,7 @@ public class OmiseSDK {
     ///    - expectedReturnURLPatterns: The expected return URL patterns.
     ///    - delegate: A delegate object that will recieved authorizing payment events.
     @available(iOSApplicationExtension, unavailable)
-    public func presentAuthorizedController(
+    public func presentAuthorizingPayment(
         from topViewController: UIViewController,
         animated: Bool = true,
         authorizeURL: URL,

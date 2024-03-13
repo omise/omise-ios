@@ -57,7 +57,7 @@ class ProductDetailViewController: BaseViewController {
                   let url = URL(string: text),
                   let expectedReturnURL = URLComponents(string: "https://opn.ooo/") else { return }
 
-            self.omiseSDK.presentAuthorizedController(
+            self.omiseSDK.presentAuthorizingPayment(
                 from: self,
                 authorizeURL: url,
                 expectedReturnURLPatterns: [expectedReturnURL],
