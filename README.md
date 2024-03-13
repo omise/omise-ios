@@ -351,8 +351,6 @@ omiseSDK.presentAuthorizingPayment(
 
 Then implement the delegate to receive the `Source` or `Token` object after the user has selected:
 
-`OmiseAuthorizingPaymentViewController` sends `Authorizing Payment` events to its `delegate` when an event occurs.
-
 ```swift
 extension ViewController: AuthorizingPaymentViewControllerDelegate {
   func authorizingPaymentViewController(_ viewController: AuthorizingPaymentViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL) {
