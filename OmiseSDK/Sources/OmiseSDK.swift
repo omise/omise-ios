@@ -63,11 +63,11 @@ public class OmiseSDK {
     /// Creates and presents modal "Payment Methods" controller with a given parameters
     ///
     /// - Parameters:
-    ///    - from: ViewController is used to present Choose Payment Methods
+    ///    - from: ViewController is used to present new controller
     ///    - amount: Payment amount
     ///    - currency: Payment currency code  (ISO 4217)
-    ///    - allowedPaymentMethods: Custom list of payment methods to be shown in the list. Only payment methods presented in the Capabilities will be shown
-    ///    - forcePaymentMethods: If `true` all payment methods from `paymentMethods` will be shown if it's not empty (for test purposes)
+    ///    - allowedPaymentMethods: Payment methods to be presented in the list
+    ///    - skipCapabilityValidation: Set `false` to filter payment methods presented in Capability (default), `true` to skip validation (for testing)
     ///    - isCardPaymentAllowed: Should present Card Payment Method in the list
     ///    - handleErrors: If `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
     ///    - completion: Completion handler triggered when payment completes with Token, Source, Error or was Cancelled
@@ -76,7 +76,7 @@ public class OmiseSDK {
         amount: Int64,
         currency: String,
         allowedPaymentMethods: [SourceType] = [],
-        forcePaymentMethods: Bool = false,
+        skipCapabilityValidation: Bool = true,
         isCardPaymentAllowed: Bool = true,
         handleErrors: Bool = true,
         delegate: ChoosePaymentMethodDelegate
@@ -92,7 +92,7 @@ public class OmiseSDK {
         let filter = SelectPaymentMethodViewModel.Filter(
             sourceTypes: allowedPaymentMethods,
             isCardPaymentAllowed: isCardPaymentAllowed,
-            isForced: forcePaymentMethods
+            isForced: skipCapabilityValidation
         )
 
         let viewController = paymentFlow.createChoosePaymentMethodController(
@@ -112,7 +112,7 @@ public class OmiseSDK {
     /// Creates and presents modal "Credit Card Payment" controller with a given parameters
     ///
     /// - Parameters:
-    ///    - from: ViewController is used to present Choose Payment Methods
+    ///    - from: ViewController is used to present new controller
     ///    - countryCode: Delegate to be notified when Source or Token is created
     ///    - handleErrors: If `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
     ///    - delegate: Delegate to be notified when Source or Token is created
@@ -143,7 +143,7 @@ public class OmiseSDK {
     /// Creates and presents Authorizing Payment controller with a given parameters
     ///
     /// - Parameters:
-    ///    - from: ViewController is used to present Choose Payment Methods
+    ///    - from: ViewController is used to present new controller
     ///    - authorizedURL: The authorized URL given in `Charge` object
     ///    - expectedReturnURLPatterns: The expected return URL patterns.
     ///    - delegate: A delegate object that will recieved authorizing payment events.

@@ -24,7 +24,7 @@
 "CreditCard.field.postalCode.error" = "Zip code / Postal code is required";
 
 // Atome
-"Atome.header.text" = "Please input the below information to complete the charge creation with Atome.";
+"Atome.header.text" = "Please input the below information to complete the charge creation with Atome";
 "Atome.field.name" = "Name";
 "Atome.field.email" = "Email";
 "Atome.field.phoneNumber" = "Phone Number";
