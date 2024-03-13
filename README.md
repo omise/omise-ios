@@ -59,7 +59,7 @@ To integrate the Opn Payments SDK into your Xcode project using the [Swift Packa
 The Opn Payments iOS SDK provides an easy-to-use library for calling the
 Opn Payments API and presenting UI forms.
 
-The main classes for the Opn Payments iOS SDK are `OmiseSDK` and `Client` through
+The main class and protocol for the Opn Payments iOS SDK are `OmiseSDK` and `ClientProtocol` through
 which all requests to the Opn Payments API will be sent.
 
 To start working with OmiseSDK, you must create a new instance of the `OmiseSDK` class with an Opn Payments public key.
@@ -158,7 +158,7 @@ Now, send the request:
 #### Sending the request
 
 Whether you are charging a source or a card, sending the
-request is the same.  Use the `Client` object to perform one-off API calls
+request is the same.  Use the `ClientProtocol` to perform one-off API calls
 with the completion handler block.
 
 ```swift
