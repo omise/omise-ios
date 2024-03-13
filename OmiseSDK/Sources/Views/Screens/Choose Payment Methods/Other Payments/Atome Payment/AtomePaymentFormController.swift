@@ -47,6 +47,8 @@ class AtomePaymentInputsFormController: PaymentFormController {
         if let viewModel = viewModel {
             bind(to: viewModel)
         }
+
+        onSubmitButtonTappedClosure = onSubmitButtonHandler
     }
 
     override func updateSubmitButtonState() {
@@ -64,8 +66,6 @@ private extension AtomePaymentInputsFormController {
             return
         }
 
-        hideKeyboard()
-        startActivityIndicator()
         viewModel.onSubmitButtonPressed(currentContext) { [weak self] in
             self?.stopActivityIndicator()
         }
@@ -104,7 +104,6 @@ private extension AtomePaymentInputsFormController {
                 input.text = viewModel.countryListViewModel.selectedCountry?.name
                 input.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onCountryInputTapped)))
             }
-
         }
     }
 
