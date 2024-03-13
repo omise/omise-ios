@@ -1,11 +1,3 @@
-//
-//  AtomePaymentFormViewContextMockup.swift
-//  OmiseSDKTests
-//
-//  Created by Andrei Solovev on 23/5/23.
-//  Copyright © 2023 Omise. All rights reserved.
-//
-
 import Foundation
 import OmiseUnitTestKit
 #if OMISE_SDK_UNIT_TESTING

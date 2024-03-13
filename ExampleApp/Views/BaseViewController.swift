@@ -1,11 +1,3 @@
-//
-//  BaseViewController.swift
-//  OmiseSDK
-//
-//  Created by Andrei Solovev on 4/10/23.
-//  Copyright © 2023 Omise. All rights reserved.
-//
-
 import UIKit
 import OmiseSDK
 

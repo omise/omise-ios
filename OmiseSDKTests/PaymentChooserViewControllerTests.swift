@@ -1,11 +1,3 @@
-//
-//  PaymentChooserViewControllerTests.swift
-//  OmiseSDKTests
-//
-//  Created by Andrei Solovev on 5/12/23.
-//  Copyright © 2023 Omise. All rights reserved.
-//
-
 import XCTest
 @testable import OmiseSDK
 

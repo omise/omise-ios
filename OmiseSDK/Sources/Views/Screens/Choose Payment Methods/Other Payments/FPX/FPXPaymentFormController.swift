@@ -99,6 +99,8 @@ class FPXPaymentFormController: UIViewController, PaymentFormUIController {
         // check for 1st time
         validateFieldData(emailTextField)
         setupTextFieldHandlers()
+
+        contentView.adjustContentInsetOnKeyboardAppear()
     }
 
     private func setupTextFieldHandlers() {

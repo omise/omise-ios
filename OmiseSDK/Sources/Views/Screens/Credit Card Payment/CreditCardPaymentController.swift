@@ -114,22 +114,22 @@ class CreditCardPaymentController: UIViewController {
         errorLabels = [
             cardHolderNameErrorLabel,
             creditCardNumberErrorLabel,
-            cardSecurityCodeErrorLabel,
-            cardExpiryDateErrorLabel
+            cardExpiryDateErrorLabel,
+            cardSecurityCodeErrorLabel
         ]
 
         formLabels = [
             cardNameLabel,
             cardNumberLabel,
-            secureCodeLabel,
-            expiryDateLabel
+            expiryDateLabel,
+            secureCodeLabel
         ]
 
         formFields = [
             cardNumberTextField,
             cardNameTextField,
-            secureCodeTextField,
-            expiryDateTextField
+            expiryDateTextField,
+            secureCodeTextField
         ]
     }
 
@@ -138,8 +138,6 @@ class CreditCardPaymentController: UIViewController {
         setupArrays()
 
         view.backgroundColor = UIColor.omiseBackground
-        submitButton.defaultBackgroundColor = view.tintColor
-        submitButton.disabledBackgroundColor = .line
 
         cvvInfoButton.tintColor = .badgeBackground
         formFieldsAccessoryView.barTintColor = .formAccessoryBarTintColor
@@ -153,6 +151,38 @@ class CreditCardPaymentController: UIViewController {
         applyPrimaryColor()
         applySecondaryColor()
 
+        updateSupplementaryUI()
+
+        configureAccessibility()
+
+        if  #unavailable(iOS 11) {
+            // We'll leave the adjusting scroll view insets job for iOS 11 and later to the layoutMargins + safeAreaInsets here
+            automaticallyAdjustsScrollViewInsets = true
+        }
+
+        setupLabels()
+        setupTextFields()
+        setupSubmitButton()
+        setupCancelButton()
+
+        contentView.adjustContentInsetOnKeyboardAppear()
+
+        if let viewModel = viewModel {
+            bind(to: viewModel)
+        }
+    }
+
+    private func setupLabels() {
+        errorLabels.forEach {
+            $0.textColor = errorMessageTextColor
+        }
+
+        formLabels.forEach {
+            $0.adjustsFontForContentSizeCategory = true
+        }
+    }
+
+    private func setupTextFields() {
         formFields.forEach {
             $0.inputAccessoryView = formFieldsAccessoryView
             $0.onValueChanged = { [weak self] in
@@ -160,24 +190,9 @@ class CreditCardPaymentController: UIViewController {
             }
         }
 
-        errorLabels.forEach {
-            $0.textColor = errorMessageTextColor
-        }
-
-        updateSupplementaryUI()
-
-        configureAccessibility()
         formFields.forEach {
             $0.adjustsFontForContentSizeCategory = true
-        }
-        formLabels.forEach {
-            $0.adjustsFontForContentSizeCategory = true
-        }
-        submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
-
-        if  #unavailable(iOS 11) {
-            // We'll leave the adjusting scroll view insets job for iOS 11 and later to the layoutMargins + safeAreaInsets here
-            automaticallyAdjustsScrollViewInsets = true
+            setupTextFieldAction($0)
         }
 
         cardNumberTextField.textContentType = .creditCardNumber
@@ -185,7 +200,21 @@ class CreditCardPaymentController: UIViewController {
         cardNumberTextField.rightView = cardBrandIconImageView
         secureCodeTextField.rightView = cvvInfoButton
         secureCodeTextField.rightViewMode = .always
+    }
 
+    private func setupTextFieldAction(_ field: OmiseTextField) {
+        field.addTarget(self, action: #selector(updateAccessibilityValue), for: .editingChanged)
+        field.addTarget(self, action: #selector(updateInputAccessoryViewFor), for: .editingDidBegin)
+        field.addTarget(self, action: #selector(validateTextFieldDataOf), for: .editingDidEnd)
+    }
+
+    private func setupSubmitButton() {
+        submitButton.defaultBackgroundColor = view.tintColor
+        submitButton.disabledBackgroundColor = .line
+        submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
+    }
+
+    private func setupCancelButton() {
         let cancelButtonItem = UIBarButtonItem(
             image: UIImage(omise: "Close"),
             style: .plain,
@@ -193,10 +222,6 @@ class CreditCardPaymentController: UIViewController {
             action: #selector(cancelForm)
         )
         navigationItem.rightBarButtonItem = cancelButtonItem
-
-        if let viewModel = viewModel {
-            bind(to: viewModel)
-        }
     }
 
     override func viewWillLayoutSubviews() {

@@ -1,11 +1,3 @@
-//
-//  UIViewController+NavigationBarStyle.swift
-//  OmiseSDK
-//
-//  Created by Andrei Solovev on 26/9/23.
-//  Copyright © 2023 Omise. All rights reserved.
-//
-
 import UIKit
 
 extension UIViewController {
