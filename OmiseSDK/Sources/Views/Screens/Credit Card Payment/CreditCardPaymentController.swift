@@ -186,6 +186,14 @@ class CreditCardPaymentController: UIViewController {
         secureCodeTextField.rightView = cvvInfoButton
         secureCodeTextField.rightViewMode = .always
 
+        let cancelButtonItem = UIBarButtonItem(
+            image: UIImage(omise: "Close"),
+            style: .plain,
+            target: self,
+            action: #selector(cancelForm)
+        )
+        navigationItem.rightBarButtonItem = cancelButtonItem
+
         if let viewModel = viewModel {
             bind(to: viewModel)
         }
