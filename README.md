@@ -135,9 +135,11 @@ let createSourcePayload = CreateSourcePayload(
 )
 ```
 
+After creating the token or the payment source, create the completion handler, as follows:
+
 #### Creating the completion handler
 
-A simple completion handler for a token is as follows:
+A simple completion handler for a token, for example, is as follows:
 
 ```swift
 func tokenCompletionHandler(tokenResult: Result<Token, Error>) -> Void {
@@ -150,6 +152,8 @@ func tokenCompletionHandler(tokenResult: Result<Token, Error>) -> Void {
     }
 }
 ```
+
+Now, send the request:
 
 #### Sending the request
 
@@ -166,14 +170,14 @@ client.token(tokenID: "tokenID", tokenInfoCompletionHandler)
 client.observeChargeStatus(chargeStatusCompletionHandler)
 ```
 
-### Built-in forms
+### Using built-in forms
 
 Opn Payments iOS SDK provides easy-to-use drop-in UI forms for both Tokenizing a Card and Creating a Payment Source, which
 you can easily integrate into your application.
 
 #### Card form
 
-The `omiseSDK.presentCreditCardPayment()` provides a pre-made card form and will automatically
+The `omiseSDK.presentCreditCardPayment()` provides a pre-made card form that will automatically
 [tokenize card information](https://docs.opn.ooo/security-best-practices) for you.
 
 ##### Use Opn Payments card form
@@ -233,7 +237,7 @@ You can call `OmiseSDK.dismiss(animated:completion:)` to close UI form presented
 
 ``` 
 
-##### Custom card form
+##### Creating a custom card form
 
 You can create your card form, but please remember you must not send the card information to your server.
 Opn Payments iOS SDK provides the following built-in card UI components to make it easier to create your card form:
