@@ -108,7 +108,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Name on card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HP2-BW-ZV4">
-                            <rect key="frame" x="16" y="131.33333333333334" width="361" height="18"/>
+                            <rect key="frame" x="16" y="105.33333333333334" width="361" height="18"/>
                             <accessibility key="accessibilityConfiguration">
                                 <bool key="isElement" value="NO"/>
                             </accessibility>
@@ -117,7 +117,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Expiry date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NYX-EX-GEB">
-                            <rect key="frame" x="16" y="242.66666666666669" width="160.66666666666666" height="18"/>
+                            <rect key="frame" x="16" y="190.66666666666666" width="160.66666666666666" height="18"/>
                             <accessibility key="accessibilityConfiguration">
                                 <bool key="isElement" value="NO"/>
                             </accessibility>
@@ -126,7 +126,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Security code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDX-pH-7WH">
-                            <rect key="frame" x="216.66666666666663" y="242.66666666666669" width="160.33333333333337" height="18"/>
+                            <rect key="frame" x="216.66666666666663" y="190.66666666666666" width="160.33333333333337" height="18"/>
                             <accessibility key="accessibilityConfiguration">
                                 <bool key="isElement" value="NO"/>
                             </accessibility>
@@ -135,7 +135,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MM/YY" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pXX-1r-DDc" customClass="CardExpiryDateTextField" customModule="OmiseSDK">
-                            <rect key="frame" x="16" y="266.66666666666669" width="160.66666666666666" height="48"/>
+                            <rect key="frame" x="16" y="214.66666666666669" width="160.66666666666666" height="22"/>
                             <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                             <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -156,7 +156,7 @@
                             </userDefinedRuntimeAttributes>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HoS-M7-MhN" customClass="CardCVVTextField" customModule="OmiseSDK">
-                            <rect key="frame" x="216.66666666666663" y="266.66666666666669" width="160.33333333333337" height="48"/>
+                            <rect key="frame" x="216.66666666666663" y="214.66666666666669" width="160.33333333333337" height="22"/>
                             <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                             <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -177,7 +177,7 @@
                             </userDefinedRuntimeAttributes>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cVw-q6-gta" customClass="CardNameTextField" customModule="OmiseSDK">
-                            <rect key="frame" x="16" y="155.33333333333334" width="361" height="48"/>
+                            <rect key="frame" x="16" y="129.33333333333334" width="361" height="22"/>
                             <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                             <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -198,7 +198,7 @@
                             </userDefinedRuntimeAttributes>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lq2-js-lxc" customClass="CardNumberTextField" customModule="OmiseSDK">
-                            <rect key="frame" x="16" y="44" width="361" height="48"/>
+                            <rect key="frame" x="16" y="44" width="361" height="22"/>
                             <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                             <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -219,13 +219,13 @@
                             </userDefinedRuntimeAttributes>
                         </textField>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6Yc-Eg-flU">
-                            <rect key="frame" x="16" y="340.66666666666669" width="361" height="20"/>
+                            <rect key="frame" x="16" y="262.66666666666669" width="361" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" priority="250" constant="20" id="sTV-Hf-QlR"/>
                             </constraints>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGL-YL-8G8" customClass="MainActionButton" customModule="OmiseSDK">
-                            <rect key="frame" x="16" y="380.66666666666669" width="361" height="44"/>
+                            <rect key="frame" x="16" y="302.66666666666669" width="361" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="L1A-Sz-3pI"/>
                             </constraints>
@@ -249,25 +249,25 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n4u-LP-Rqe" userLabel="Expire Date Error Label">
-                            <rect key="frame" x="16" y="320.66666666666669" width="160.66666666666666" height="13.333333333333314"/>
+                            <rect key="frame" x="16" y="242.66666666666669" width="160.66666666666666" height="13.333333333333314"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                             <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GIi-DF-ygM" userLabel="CVV Error Label">
-                            <rect key="frame" x="216.66666666666663" y="320.66666666666669" width="160.33333333333337" height="13.333333333333314"/>
+                            <rect key="frame" x="216.66666666666663" y="242.66666666666669" width="160.33333333333337" height="13.333333333333314"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                             <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LRp-F7-Hgu" userLabel="Name Error Label">
-                            <rect key="frame" x="16" y="209.33333333333331" width="361" height="13.333333333333343"/>
+                            <rect key="frame" x="16" y="157.33333333333334" width="361" height="13.333333333333343"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                             <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AbT-ko-a4x" userLabel="Credit Card Number Error Label">
-                            <rect key="frame" x="16" y="98" width="361" height="13.333333333333329"/>
+                            <rect key="frame" x="16" y="72" width="361" height="13.333333333333329"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                             <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -321,7 +321,7 @@
                             </connections>
                         </view>
                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="0NE-Pj-fw9">
-                            <rect key="frame" x="186.66666666666666" y="392.66666666666669" width="20" height="20"/>
+                            <rect key="frame" x="186.66666666666666" y="314.66666666666669" width="20" height="20"/>
                             <color key="color" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         </activityIndicatorView>
                     </subviews>
@@ -396,19 +396,19 @@
     </objects>
     <designables>
         <designable name="HoS-M7-MhN">
-            <size key="intrinsicContentSize" width="23" height="48"/>
+            <size key="intrinsicContentSize" width="5" height="22"/>
         </designable>
         <designable name="aGL-YL-8G8">
             <size key="intrinsicContentSize" width="30" height="33"/>
         </designable>
         <designable name="cVw-q6-gta">
-            <size key="intrinsicContentSize" width="23" height="48"/>
+            <size key="intrinsicContentSize" width="5" height="22"/>
         </designable>
         <designable name="lq2-js-lxc">
-            <size key="intrinsicContentSize" width="23" height="48"/>
+            <size key="intrinsicContentSize" width="5" height="22"/>
         </designable>
         <designable name="pXX-1r-DDc">
-            <size key="intrinsicContentSize" width="73.666666666666671" height="48"/>
+            <size key="intrinsicContentSize" width="55.333333333333336" height="22"/>
         </designable>
     </designables>
     <resources>

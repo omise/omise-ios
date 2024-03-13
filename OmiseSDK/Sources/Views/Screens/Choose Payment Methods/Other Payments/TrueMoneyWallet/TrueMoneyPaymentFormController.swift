@@ -80,6 +80,8 @@ class TrueMoneyPaymentFormController: UIViewController, PaymentFormUIController 
         
         phoneNumberTextField.validator = try? NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
         setupTextFieldHandlers()
+
+        contentView.adjustContentInsetOnKeyboardAppear()
     }
 
     private func setupTextFieldHandlers() {

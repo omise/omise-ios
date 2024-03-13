@@ -79,6 +79,7 @@
 		75405AA52A27F5D3008C21F6 /* AtomePaymentFormViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B32A1A5EAD0038FA54 /* AtomePaymentFormViewModelProtocol.swift */; };
 		75405AA82A27F97E008C21F6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75405AA62A27F97E008C21F6 /* Localizable.strings */; };
 		754B78182B8741CD00973B71 /* TapGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754B78172B8741CD00973B71 /* TapGestureHandler.swift */; };
+		755CD9212BA1C81600E8FCDA /* UIViewController+KeyboardAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755CD9202BA1C81600E8FCDA /* UIViewController+KeyboardAppearance.swift */; };
 		756C8F1E2A40693B00D53059 /* CreditCardPaymentViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C8F1D2A40693B00D53059 /* CreditCardPaymentViewModelProtocol.swift */; };
 		756C8F202A40694000D53059 /* CreditCardPaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C8F1F2A40694000D53059 /* CreditCardPaymentViewModel.swift */; };
 		756C8F222A40694F00D53059 /* CreditCardPaymentViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C8F212A40694F00D53059 /* CreditCardPaymentViewContext.swift */; };
@@ -323,6 +324,7 @@
 		75405AA92A27F985008C21F6 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		75405AAA2A27F988008C21F6 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
 		754B78172B8741CD00973B71 /* TapGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureHandler.swift; sourceTree = "<group>"; };
+		755CD9202BA1C81600E8FCDA /* UIViewController+KeyboardAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+KeyboardAppearance.swift"; sourceTree = "<group>"; };
 		756C8F1D2A40693B00D53059 /* CreditCardPaymentViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardPaymentViewModelProtocol.swift; sourceTree = "<group>"; };
 		756C8F1F2A40694000D53059 /* CreditCardPaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardPaymentViewModel.swift; sourceTree = "<group>"; };
 		756C8F212A40694F00D53059 /* CreditCardPaymentViewContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardPaymentViewContext.swift; sourceTree = "<group>"; };
@@ -761,6 +763,7 @@
 			children = (
 				751E7BEF2B7FBA760031B4A2 /* UIColor+Omise.swift */,
 				75131F852AC2BD9D008BCB17 /* UIViewController+NavigationBarStyle.swift */,
+				755CD9202BA1C81600E8FCDA /* UIViewController+KeyboardAppearance.swift */,
 				75D13D782B833F160073A831 /* ViewAttachable.swift */,
 				75D13D6B2B8335850073A831 /* ViewContainer.swift */,
 				75D13D8B2B8385820073A831 /* UIBarButtonItem+Helpers.swift */,
@@ -1462,6 +1465,7 @@
 				756C8F202A40694000D53059 /* CreditCardPaymentViewModel.swift in Sources */,
 				75D13D732B833A810073A831 /* TableCellContext.swift in Sources */,
 				759C7EC42B7DC8270029D555 /* SourceType+Installments.swift in Sources */,
+				755CD9212BA1C81600E8FCDA /* UIViewController+KeyboardAppearance.swift in Sources */,
 				8AEF7804224CABF800787470 /* EContextPaymentFormController.swift in Sources */,
 				75D13DC92B8529790073A831 /* SelectSourceTypePaymentViewModel.swift in Sources */,
 			);
