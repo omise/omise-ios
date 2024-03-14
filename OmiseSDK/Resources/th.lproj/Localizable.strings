@@ -8,6 +8,7 @@
 "PaymentMethod.eContext.payEasy" = "เพย์อีซี";
 "PaymentMethod.eContext.netBanking" = "เน็ตแบงก์";
 
+// Source Types
 "SourceType.alipay" = "อาลีเพย์";
 "SourceType.bill_payment_tesco_lotus" = "โลตัสบิลเพย์เมนต์";
 "SourceType.installment_bay" = "ธนาคารกรุงศรี";
@@ -26,8 +27,35 @@
 "SourceType.truemoney" = "ทรูมันนี่วอลเล็ท";
 "SourceType.truemoney_jumpapp" = "ทรูมันนี่";
 
-// Authorizing Payment
-"AuthorizingPayment.title" = "กำลังอนุมัติวงเงิน";
+// Source Types without localization
+"SourceType.alipay_cn" = "Alipay CN";
+"SourceType.alipay_hk" = "Alipay HK";
+"SourceType.atome" = "Atome";
+"SourceType.barcode_alipay" = "Alipay In-Store";
+"SourceType.boost" = "Boost";
+"SourceType.dana" = "DANA";
+"SourceType.duitnow_obw" = "DuitNow Online Banking/Wallets";
+"SourceType.duitnow_qr" = "DuitNow QR";
+"SourceType.fpx" = "FPX";
+"SourceType.gcash" = "GCash";
+"SourceType.grabpay" = "Grab";
+"SourceType.grabpay_rms" = "GrabPay";
+"SourceType.installment_mbb" = "MayBank";
+"SourceType.kakaopay" = "Kakao Pay";
+"SourceType.maybank_qr" = "Maybank QRPay";
+"SourceType.mobile_banking_bay" = "KMA";
+"SourceType.mobile_banking_bbl" = "Bualuang mBanking";
+"SourceType.mobile_banking_kbank" = "K PLUS";
+"SourceType.mobile_banking_ktb" = "Krungthai Next";
+"SourceType.mobile_banking_ocbc" = "OCBC Digital";
+"SourceType.mobile_banking_scb" = "SCB EASY";
+"SourceType.paypay" = "PayPay";
+"SourceType.rabbit_linepay" = "Rabbit LINE Pay";
+"SourceType.shopeepay" = "ShopeePay";
+"SourceType.shopeepay_jumpapp" = "ShopeePay";
+"SourceType.touch_n_go" = "Touch 'n Go";
+"SourceType.touch_n_go_alipay_plus" = "TNG eWallet";
+"SourceType.wechat_pay" = "WeChat Pay";
 
 // Credit Card
 "CreditCard.field.country" = "ประเทศหรือภูมิภาค";
@@ -63,5 +91,12 @@
 "Atome.field.street1.error" = "จำเป็นต้องใส่ชื่อถนนสำหรับจัดส่งสินค้า";
 "Atome.field.optional" = "(ถ้ามี)";
 
+// FPX
+"fpx.bank-chooser.no-banks-available.text" = "Cannot retrieve list of banks.\nPlease try again later.";
+
+// Authorizing Payment
+"AuthorizingPayment.title" = "กำลังอนุมัติวงเงิน";
+
+// CCV Info
 "more-info.cvv-location.amex.text" = "หมายเลข 4 หลักบนหน้าบัตร";
 "more-info.cvv-location.default.text" = "หมายเลข 3 หลักด้านหลังบัตร";

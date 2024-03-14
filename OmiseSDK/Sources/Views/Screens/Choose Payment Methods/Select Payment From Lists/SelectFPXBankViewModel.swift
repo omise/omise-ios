@@ -4,13 +4,15 @@ class SelectFPXBankViewModel {
     weak var delegate: SelectSourcePaymentDelegate?
     let email: String?
 
+    let errorMessage: String?
+
     private var viewOnDataReloadHandler: () -> Void = { } {
         didSet {
             self.viewOnDataReloadHandler()
         }
     }
 
-    private var values: [Capability.PaymentMethod.Bank] = [] {
+    private var banks: [Capability.PaymentMethod.Bank] = [] {
         didSet {
             viewOnDataReloadHandler()
         }
@@ -18,8 +20,10 @@ class SelectFPXBankViewModel {
 
     init(email: String?, banks: [Capability.PaymentMethod.Bank], delegate: SelectSourcePaymentDelegate) {
         self.email = email
-        self.values = banks
+        self.banks = banks
         self.delegate = delegate
+
+        errorMessage = banks.isEmpty ? localized("fpx.bank-chooser.no-banks-available.text") : nil
     }
 }
 
@@ -29,7 +33,7 @@ extension SelectFPXBankViewModel: SelectPaymentPresentableProtocol {
     }
 
     var numberOfViewContexts: Int {
-        values.count
+        banks.count
     }
 
     var viewNavigationTitle: String {
@@ -37,7 +41,7 @@ extension SelectFPXBankViewModel: SelectPaymentPresentableProtocol {
     }
 
     func viewContext(at index: Int) -> TableCellContext? {
-        guard let bank = values.at(index) else { return nil }
+        guard let bank = banks.at(index) else { return nil }
         let fpxBank = Source.Payment.FPX.Bank(rawValue: bank.code)
         return TableCellContext(
             title: bank.name,
@@ -47,7 +51,7 @@ extension SelectFPXBankViewModel: SelectPaymentPresentableProtocol {
     }
 
     func viewDidSelectCell(at index: Int, completion: @escaping () -> Void) {
-        guard let bank = values.at(index) else { return }
+        guard let bank = banks.at(index) else { return }
 
         let payment = Source.Payment.FPX(bank: bank.code, email: email)
         delegate?.didSelectSourcePayment(.fpx(payment), completion: completion)
