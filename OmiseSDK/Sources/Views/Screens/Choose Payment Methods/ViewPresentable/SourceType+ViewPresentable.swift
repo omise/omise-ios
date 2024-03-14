@@ -6,7 +6,7 @@ extension SourceType: CustomStringConvertible {
 
 extension SourceType: ViewPresentable {
     public var localizedTitle: String {
-        localized("SourceType.\(self.rawValue)", text: title)
+        localized("SourceType.\(self.rawValue).title", text: title)
     }
 
     public var localizedSubtitle: String? {
@@ -16,10 +16,6 @@ extension SourceType: ViewPresentable {
 
     public var title: String {
         switch self {
-        case .billPaymentTescoLotus:
-            return "Tesco Lotus"
-        case .eContext:
-            return "" // Doesn't have specific title
         case .alipay:
             return "Alipay"
         case .alipayCN:
@@ -28,55 +24,28 @@ extension SourceType: ViewPresentable {
             return "Alipay HK"
         case .atome:
             return "Atome"
-        case .dana:
-            return "DANA"
-        case .gcash:
-            return "GCash"
-        case .kakaoPay:
-            return "Kakao Pay"
-        case .touchNGoAlipayPlus:
-            return "TNG eWallet"
-        case .promptPay:
-            return "PromptPay"
-        case .payNow:
-            return "PayNow"
-        case .trueMoneyWallet:
-            return "TrueMoney Wallet"
-        case .trueMoneyJumpApp:
-            return "TrueMoney"
-        case .pointsCiti:
-            return "Pay with Citi Rewards Points"
-        case .fpx:
-            return "FPX"
-        case .rabbitLinepay:
-            return "Rabbit LINE Pay"
-        case .ocbcDigital:
-            return "OCBC Digital"
-        case .grabPay:
-            return "Grab"
-        case .boost:
-            return "Boost"
-        case .shopeePay:
-            return "ShopeePay"
-        case .shopeePayJumpApp:
-            return "ShopeePay"
-        case .maybankQRPay:
-            return "Maybank QRPay"
-        case .duitNowQR:
-            return "DuitNow QR"
-        case .duitNowOBW:
-            return "DuitNow Online Banking/Wallets"
-        case .touchNGo:
-            return "Touch 'n Go"
-        case .grabPayRms:
-            return "GrabPay"
-        case .payPay:
-            return "PayPay"
-        case .weChat:
-            return "WeChat Pay"
         case .barcodeAlipay:
             return "Alipay In-Store"
-
+        case .billPaymentTescoLotus:
+            return "Tesco Lotus"
+        case .boost:
+            return "Boost"
+        case .dana:
+            return "DANA"
+        case .duitNowOBW:
+            return "DuitNow Online Banking/Wallets"
+        case .duitNowQR:
+            return "DuitNow QR"
+        case .eContext:
+            return "" // Doesn't have specific title
+        case .fpx:
+            return "FPX"
+        case .gcash:
+            return "GCash"
+        case .grabPay:
+            return "Grab"
+        case .grabPayRms:
+            return "GrabPay"
         case .installmentBAY:
             return "Krungsri"
         case .installmentBBL:
@@ -95,12 +64,14 @@ extension SourceType: ViewPresentable {
             return "TMBThanachart Bank"
         case .installmentUOB:
             return "United Overseas Bank"
-
         case .internetBankingBAY:
             return "Bank of Ayudhya"
         case .internetBankingBBL:
             return "Bangkok Bank"
-
+        case .kakaoPay:
+            return "Kakao Pay"
+        case .maybankQRPay:
+            return "Maybank QRPay"
         case .mobileBankingBAY:
             return "KMA"
         case .mobileBankingBBL:
@@ -111,15 +82,37 @@ extension SourceType: ViewPresentable {
             return "Krungthai Next"
         case .mobileBankingSCB:
             return "SCB EASY"
+        case .ocbcDigital:
+            return "OCBC Digital"
+        case .payNow:
+            return "PayNow"
+        case .payPay:
+            return "PayPay"
+        case .pointsCiti:
+            return "Pay with Citi Rewards Points"
+        case .promptPay:
+            return "PromptPay"
+        case .rabbitLinepay:
+            return "Rabbit LINE Pay"
+        case .shopeePay:
+            return "ShopeePay"
+        case .shopeePayJumpApp:
+            return "ShopeePay"
+        case .touchNGo:
+            return "Touch 'n Go"
+        case .touchNGoAlipayPlus:
+            return "TNG eWallet"
+        case .trueMoneyWallet:
+            return "TrueMoney Wallet"
+        case .trueMoneyJumpApp:
+            return "TrueMoney"
+        case .weChat:
+            return "WeChat Pay"
         }
     }
 
     public var iconName: String {
         switch self {
-        case .billPaymentTescoLotus:
-            return "Tesco"
-        case .eContext:
-            return "" // Doesn't have specific icon
         case .alipay:
             return "Alipay"
         case .alipayCN:
@@ -128,55 +121,28 @@ extension SourceType: ViewPresentable {
             return "AlipayHK"
         case .atome:
             return "Atome"
-        case .dana:
-            return "dana"
-        case .gcash:
-            return "gcash"
-        case .kakaoPay:
-            return "kakaopay"
-        case .touchNGoAlipayPlus:
-            return "touch-n-go"
-        case .promptPay:
-            return "PromptPay"
-        case .payNow:
-            return "PayNow"
-        case .trueMoneyWallet:
-            return "TrueMoney"
-        case .trueMoneyJumpApp:
-            return "TrueMoney"
-        case .pointsCiti:
-            return "CitiBank"
-        case .fpx:
-            return "FPX"
-        case .rabbitLinepay:
-            return "RabbitLinePay"
-        case .ocbcDigital:
-            return "ocbc-digital"
-        case .grabPay:
-            return "Grab"
-        case .boost:
-            return "Boost"
-        case .shopeePay:
-            return "Shopeepay"
-        case .shopeePayJumpApp:
-            return "Shopeepay"
-        case .maybankQRPay:
-            return "MAE-maybank"
-        case .duitNowQR:
-            return "DuitNow-QR"
-        case .duitNowOBW:
-            return "Duitnow-OBW"
-        case .touchNGo:
-            return "touch-n-go"
-        case .grabPayRms:
-            return "Grab"
-        case .payPay:
-            return "PayPay"
-        case .weChat:
-            return "wechat_pay"
         case .barcodeAlipay:
             return "Alipay"
-
+        case .billPaymentTescoLotus:
+            return "Tesco"
+        case .boost:
+            return "Boost"
+        case .dana:
+            return "dana"
+        case .duitNowOBW:
+            return "Duitnow-OBW"
+        case .duitNowQR:
+            return "DuitNow-QR"
+        case .eContext:
+            return "" // Doesn't have specific icon
+        case .fpx:
+            return "FPX"
+        case .gcash:
+            return "gcash"
+        case .grabPay:
+            return "Grab"
+        case .grabPayRms:
+            return "Grab"
         case .installmentBAY:
             return "BAY"
         case .installmentBBL:
@@ -195,12 +161,14 @@ extension SourceType: ViewPresentable {
             return "ttb"
         case .installmentUOB:
             return "uob"
-
         case .internetBankingBAY:
             return "BAY"
         case .internetBankingBBL:
             return "BBL"
-
+        case .kakaoPay:
+            return "kakaopay"
+        case .maybankQRPay:
+            return "MAE-maybank"
         case .mobileBankingBAY:
             return "KMA"
         case .mobileBankingBBL:
@@ -211,6 +179,32 @@ extension SourceType: ViewPresentable {
             return "KTB Next"
         case .mobileBankingSCB:
             return "SCB"
+        case .ocbcDigital:
+            return "ocbc-digital"
+        case .payNow:
+            return "PayNow"
+        case .payPay:
+            return "PayPay"
+        case .pointsCiti:
+            return "CitiBank"
+        case .promptPay:
+            return "PromptPay"
+        case .rabbitLinepay:
+            return "RabbitLinePay"
+        case .shopeePay:
+            return "Shopeepay"
+        case .shopeePayJumpApp:
+            return "Shopeepay"
+        case .touchNGo:
+            return "touch-n-go"
+        case .touchNGoAlipayPlus:
+            return "touch-n-go"
+        case .trueMoneyWallet:
+            return "TrueMoney"
+        case .trueMoneyJumpApp:
+            return "TrueMoney"
+        case .weChat:
+            return "wechat_pay"
         }
     }
 

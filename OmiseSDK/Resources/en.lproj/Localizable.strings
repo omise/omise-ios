@@ -1,4 +1,5 @@
 // Payment Methods
+"PaymentMethods.title" = "Payment Methods";
 "PaymentMethod.creditCard" = "Credit Card";
 "PaymentMethod.installments" = "Installments";
 "PaymentMethod.internetBanking" = "Internet Banking";
@@ -7,21 +8,23 @@
 "PaymentMethod.eContext.payEasy" = "Pay-easy";
 "PaymentMethod.eContext.netBanking" = "Net Bank";
 
-"SourceType.paynow" = "PayNow";
-"SourceType.truemoney" = "TrueMoney Wallet";
-"SourceType.promptpay" = "PromptPay";
 "SourceType.alipay" = "Alipay";
-"SourceType.points_citi" = "Pay with Citi Rewards Points";
 "SourceType.bill_payment_tesco_lotus" = "Lotus's Bill Payment";
-"SourceType." = "";
-"SourceType." = "";
-"SourceType." = "";
-"SourceType." = "";
-"SourceType." = "";
-"SourceType." = "";
-"SourceType." = "";
-"SourceType." = "";
-
+"SourceType.installment_bay" = "Krungsri";
+"SourceType.installment_bbl" = "Bangkok Bank";
+"SourceType.installment_first_choice" = "Krungsri First Choice";
+"SourceType.installment_kbank" = "Kasikorn Bank";
+"SourceType.installment_ktc" = "KTC";
+"SourceType.installment_scb" = "Siam Commercial Bank";
+"SourceType.installment_ttb" = "TMBThanachart Bank";
+"SourceType.installment_uob" = "United Overseas Bank";
+"SourceType.internet_banking_bay" = "Bank of Ayudhya";
+"SourceType.internet_banking_bbl" = "Bangkok Bank";
+"SourceType.paynow" = "PayNow";
+"SourceType.points_citi" = "Pay with Citi Rewards Points";
+"SourceType.promptpay" = "PromptPay";
+"SourceType.truemoney" = "TrueMoney Wallet";
+"SourceType.truemoney_jumpapp" = "TrueMoney";
 
 // Authorizing Payment
 "AuthorizingPayment.title" = "Authorizing Payment";
@@ -60,29 +63,7 @@
 "Atome.field.street1.error" = "Shipping street is required";
 "Atome.field.optional" = "(optional)";
 
-"installments.number-of-terms-chooser.number-of-terms-cell.label.text" = "%d months";
-
-"econtext.convenience-store.navigation-item.title" = "Konbini";
-"econtext.netbanking.navigation-item.title" = "Net Bank";
-"econtext.pay-easy.navigation-item.title" = "Pay-easy";
-
-"installment-number-of-terms-choosers.bay.navigation-item.title" = "Bangkok Bank";
-
-"installment-number-of-terms-choosers.first-choice.navigation-item.title" = "Kasikorn";
-"installment-number-of-terms-choosers.bbl.navigation-item.title" = "Krungsri";
-"installment-number-of-terms-choosers.ktc.navigation-item.title" = "Krungsri First Choice";
-"installment-number-of-terms-choosers.k-bank.navigation-item.title" = "KTC";
-"installment-number-of-terms-choosers.mbb.navigation-item.title" = "MayBank";
-"installment-number-of-terms-choosers.scb.navigation-item.title" = "Siam Commercial Bank";
-"installment-number-of-terms-choosers.ttb.navigation-item.title" = "TMBThanachart Bank";
-"installment-number-of-terms-choosers.uob.navigation-item.title" = "United Overseas Bank";
-
-/* A navigation title for the choosing installment terms screen with the `Installments Terms` selected */
-"installment-number-of-terms-choosers.default.navigation-item.title" = "Installment terms";
-
 "more-info.cvv-location.amex.text" = "4 digit number on the front of your card";
 "more-info.cvv-location.default.text" = "3 digit number on the back of your card";
 
 "fpx.bank-chooser.no-banks-available.text" = "Cannot retrieve list of banks.\nPlease try again later.";
-
-"paymentMethods.title" = "Payment Methods";

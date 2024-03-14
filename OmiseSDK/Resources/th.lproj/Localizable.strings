@@ -1,4 +1,5 @@
 // Payment Methods
+"PaymentMethods.title" = "ช่องทางชำระเงิน";
 "PaymentMethod.creditCard" = "บัตรเครดิต";
 "PaymentMethod.installments" = "ผ่อนชำระ";
 "PaymentMethod.internetBanking" = "อินเทอร์เน็ตแบงก์กิ้ง";
@@ -7,12 +8,23 @@
 "PaymentMethod.eContext.payEasy" = "เพย์อีซี";
 "PaymentMethod.eContext.netBanking" = "เน็ตแบงก์";
 
-"SourceType.paynow" = "เพย์นาว";
-"SourceType.truemoney" = "ทรูมันนี่วอลเล็ท";
-"SourceType.promptpay" = "พร้อมเพย์";
 "SourceType.alipay" = "อาลีเพย์";
-"SourceType.points_citi" = "ชำระด้วยคะแนนซิตี้รีวอร์ด";
 "SourceType.bill_payment_tesco_lotus" = "โลตัสบิลเพย์เมนต์";
+"SourceType.installment_bay" = "ธนาคารกรุงศรี";
+"SourceType.installment_bbl" = "ธนาคารกรุงเทพ";
+"SourceType.installment_first_choice" = "กรุงศรีเฟิร์สช้อยส์";
+"SourceType.installment_kbank" = "ธนาคารกสิกรไทย";
+"SourceType.installment_ktc" = "เคทีซี";
+"SourceType.installment_scb" = "ธนาคารไทยพาณิชย์";
+"SourceType.installment_ttb" = "ธนาคารทีเอ็มบีธนชาต";
+"SourceType.installment_uob" = "ธนาคารยูโอบี";
+"SourceType.internet_banking_bay" = "ธนาคารกรุงศรีอยุธยา";
+"SourceType.internet_banking_bbl" = "ธนาคารกรุงเทพ";
+"SourceType.paynow" = "เพย์นาว";
+"SourceType.points_citi" = "ชำระด้วยคะแนนซิตี้รีวอร์ด";
+"SourceType.promptpay" = "พร้อมเพย์";
+"SourceType.truemoney" = "ทรูมันนี่วอลเล็ท";
+"SourceType.truemoney_jumpapp" = "ทรูมันนี่";
 
 // Authorizing Payment
 "AuthorizingPayment.title" = "กำลังอนุมัติวงเงิน";
@@ -51,47 +63,5 @@
 "Atome.field.street1.error" = "จำเป็นต้องใส่ชื่อถนนสำหรับจัดส่งสินค้า";
 "Atome.field.optional" = "(ถ้ามี)";
 
-/* A navigaiton title for the EContext screen when the `Konbini` is selected */
-"econtext.convenience-store.navigation-item.title" = "ร้านสะดวกซื้อ";
-
-/* A navigaiton title for the EContext screen when the `Net Bank` is selected */
-"econtext.netbanking.navigation-item.title" = "เน็ตแบงก์";
-
-/* A navigaiton title for the EContext screen when the `Pay-easy` is selected */
-"econtext.pay-easy.navigation-item.title" = "เพย์อีซี";
-
-/* A navigation title for the choosing installment terms screen with the `Bangkok Bank` selected */
-"installment-number-of-terms-choosers.bay.navigation-item.title" = "ธนาคารกรุงเทพ";
-
-/* A navigation title for the choosing installment terms screen with the `Krungsri` selected */
-"installment-number-of-terms-choosers.bbl.navigation-item.title" = "ธนาคารกรุงศรี";
-
-/* A navigation title for the choosing installment terms screen with the `Installments Terms` selected */
-"installment-number-of-terms-choosers.default.navigation-item.title" = "ระยะเวลาผ่อนชำระ";
-
-/* A navigation title for the choosing installment terms screen with the `Kasikorn` selected */
-"installment-number-of-terms-choosers.first-choice.navigation-item.title" = "ธนาคารกสิกรไทย";
-
-/* A navigation title for the choosing installment terms screen with the `KTC` selected */
-"installment-number-of-terms-choosers.k-bank.navigation-item.title" = "เคทีซี";
-
-/* A navigation title for the choosing installment terms screen with the `Krungsri First Choice` selected */
-"installment-number-of-terms-choosers.ktc.navigation-item.title" = "กรุงศรีเฟิร์สช้อยส์";
-
-/* A navigation title for the choosing installment terms screen with the `Siam Commercial Bank` selected */
-"installment-number-of-terms-choosers.scb.navigation-item.title" = "ธนาคารไทยพาณิชย์";
-
-/* A navigation title for the choosing installment terms screen with the `TTB Bank` selected */
-"installment-number-of-terms-choosers.ttb.navigation-item.title" = "ธนาคารทีเอ็มบีธนชาต";
-
-/* A navigation title for the choosing installment terms screen with the `UOB Bank` selected */
-"installment-number-of-terms-choosers.uob.navigation-item.title" = "ธนาคารยูโอบี";
-
-/* Number of terms option text displayed as a title of the number of terms option cell in number of terms chooser scene */
-"installments.number-of-terms-chooser.number-of-terms-cell.label.text" = "%d เดือน";
-
-
 "more-info.cvv-location.amex.text" = "หมายเลข 4 หลักบนหน้าบัตร";
 "more-info.cvv-location.default.text" = "หมายเลข 3 หลักด้านหลังบัตร";
-
-"paymentMethods.title" = "ช่องทางชำระเงิน";
