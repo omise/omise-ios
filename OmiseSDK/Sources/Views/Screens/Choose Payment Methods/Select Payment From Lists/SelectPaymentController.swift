@@ -100,7 +100,7 @@ private extension SelectPaymentController {
     func setupTableView() {
         tableView.separatorColor = UIColor.omiseSecondary
         tableView.rowHeight = 64
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .background
     }
 
     func setupNavigationItems() {

@@ -39,8 +39,9 @@ class PaymentFormController: UIViewController {
         button.heightAnchor.constraint(equalToConstant: style.buttonHeight).isActive = true
         button.titleLabel?.adjustsFontForContentSizeCategory = true
 
-        button.defaultBackgroundColor = style.buttonBackgroundColor
-        button.disabledBackgroundColor = style.buttonDisabledBackgroundColor
+        button.defaultBackgroundColor = .omise
+        button.disabledBackgroundColor = .line
+
         button.cornerRadius(style.buttonCornerRadius)
         return button
     }()
@@ -122,9 +123,9 @@ extension PaymentFormController {
         verticalContainerStack.addArrangedSubview(submitButton)
     }
 
-    func setupSubmitButton(title: String, color: UIColor? = nil) {
+    func setupSubmitButton(title: String, textColor: UIColor? = nil) {
         submitButton.setTitle(title, for: UIControl.State.normal)
-        submitButton.setTitleColor(color ?? style.buttonTextColor, for: .normal)
+        submitButton.setTitleColor(textColor ?? style.buttonTextColor, for: .normal)
         submitButton.addTarget(self, action: #selector(onSubmitButtonTapped), for: .touchUpInside)
     }
 

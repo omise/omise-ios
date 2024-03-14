@@ -66,7 +66,7 @@ private extension AtomePaymentInputsFormController {
     func bind(to viewModel: ViewModel) {
         guard isViewLoaded else { return }
         setupInputs(viewModel: viewModel)
-        setupSubmitButton(title: viewModel.submitButtonTitle, color: style.buttonTextColor)
+        setupSubmitButton(title: viewModel.submitButtonTitle)
         details = viewModel.headerText
         logoImage = UIImage(omise: viewModel.logoName)
 
