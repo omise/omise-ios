@@ -3,7 +3,7 @@ import UIKit
 class TrueMoneyPaymentFormController: UIViewController, PaymentFormUIController {
     weak var delegate: SelectSourcePaymentDelegate?
 
-    private var client: Client?
+    private var client: ClientProtocol?
     
     private var isInputDataValid: Bool {
         return formFields.allSatisfy { $0.isValid }

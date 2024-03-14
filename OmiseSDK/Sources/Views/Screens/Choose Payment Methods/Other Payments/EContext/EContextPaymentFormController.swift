@@ -3,7 +3,7 @@ import UIKit
 class EContextPaymentFormController: UIViewController, PaymentFormUIController {
     weak var delegate: SelectSourcePaymentDelegate?
 
-    var client: Client?
+    var client: ClientProtocol?
     var paymentAmount: Int64?
     var paymentCurrency: Currency?
     

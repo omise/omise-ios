@@ -3,7 +3,7 @@ import Foundation
 extension Client {
     /// Creates urlRequest and performs API request with currenly used Network Service
     /// - returns Generic Decodable from JSON string
-    func performRequest<T: Decodable>(api: APIProtocol, completion: @escaping RequestResultClosure<T, Error>) {
+    func performRequest<T: Decodable>(api: APIProtocol, completion: @escaping ResponseClosure<T, Error>) {
         let urlRequest = urlRequest(publicKey: publicKey, api: api)
         network.send(
             urlRequest: urlRequest,
@@ -24,7 +24,7 @@ extension Client {
         timeInterval: Int,
         attemp: Int,
         maxAttempt: Int,
-        _ completion: @escaping RequestResultClosure<Token.ChargeStatus, Error>
+        _ completion: @escaping ResponseClosure<Token.ChargeStatus, Error>
     ) {
         guard maxAttempt > attemp else {
             return

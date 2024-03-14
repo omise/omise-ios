@@ -8,7 +8,7 @@ class SelectPaymentMethodViewModel {
         let isForced: Bool
     }
 
-    private let client: Client
+    private let client: ClientProtocol
     private let filter: Filter
     private weak var delegate: SelectPaymentMethodDelegate?
 
@@ -24,7 +24,7 @@ class SelectPaymentMethodViewModel {
         }
     }
 
-    init(client: Client, filter: Filter, delegate: SelectPaymentMethodDelegate) {
+    init(client: ClientProtocol, filter: Filter, delegate: SelectPaymentMethodDelegate) {
         self.client = client
         self.delegate = delegate
         self.filter = filter

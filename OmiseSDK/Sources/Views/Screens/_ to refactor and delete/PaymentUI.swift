@@ -13,7 +13,7 @@ internal protocol PaymentCreatorFlowSessionDelegate: AnyObject {
 }
 
 internal class PaymentCreatorFlowSession {
-    var client: Client?
+    var client: ClientProtocol?
     var paymentAmount: Int64?
     var paymentCurrency: Currency?
 

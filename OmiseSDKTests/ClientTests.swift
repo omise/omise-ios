@@ -8,7 +8,7 @@ struct NetworkMockup: NetworkServiceProtocol {
     func send<T: Decodable>(
         urlRequest: URLRequest,
         dateFormatter: DateFormatter?,
-        completion: @escaping RequestResultClosure<T, Error>
+        completion: @escaping ResponseClosure<T, Error>
     ) {
         self.sendClosure(urlRequest)
     }
