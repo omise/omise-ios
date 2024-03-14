@@ -1,6 +1,7 @@
 import Foundation
 
 extension SourceType {
+    // TODO: Revert changes before create PR
     public static let availableByDefaultInThailand: [SourceType] = SourceType.allCases
 //
 //    [
