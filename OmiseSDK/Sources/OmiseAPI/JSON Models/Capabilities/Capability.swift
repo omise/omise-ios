@@ -21,6 +21,12 @@ extension Capability {
             method.name == "card"
         }
     }
+
+    func availableSourceTypes(_ sourceTypes: [SourceType]) -> [SourceType] {
+        paymentMethods
+            .compactMap { $0.sourceType }
+            .filter { sourceTypes.contains($0) }
+    }
 }
 
 extension Capability: Codable {

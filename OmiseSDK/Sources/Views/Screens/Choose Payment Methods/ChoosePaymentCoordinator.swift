@@ -79,9 +79,10 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
 
     /// Creates Mobile Banking screen and attach current flow object inside created controller to be deallocated together
     func createMobileBankingController() -> SelectPaymentController {
+        let sourceTypes = client.latestLoadedCapability?.availableSourceTypes(SourceType.mobileBanking)
         let viewModel = SelectSourceTypePaymentViewModel(
             title: PaymentMethod.mobileBanking.localizedTitle,
-            sourceTypes: SourceType.mobileBanking,
+            sourceTypes: sourceTypes ?? [],
             delegate: self
         )
 
@@ -91,9 +92,10 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
 
     /// Creates Mobile Banking screen and attach current flow object inside created controller to be deallocated together
     func createInternetBankingController() -> SelectPaymentController {
+        let sourceTypes = client.latestLoadedCapability?.availableSourceTypes(SourceType.internetBanking)
         let viewModel = SelectSourceTypePaymentViewModel(
             title: PaymentMethod.internetBanking.localizedTitle,
-            sourceTypes: SourceType.internetBanking,
+            sourceTypes: sourceTypes ?? [],
             delegate: self
         )
 
@@ -103,9 +105,10 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
 
     /// Creates Installement screen and attach current flow object inside created controller to be deallocated together
     func createInstallmentController() -> SelectPaymentController {
+        let sourceTypes = client.latestLoadedCapability?.availableSourceTypes(SourceType.installments)
         let viewModel = SelectSourceTypePaymentViewModel(
             title: PaymentMethod.installment.localizedTitle,
-            sourceTypes: SourceType.installments,
+            sourceTypes: sourceTypes ?? [],
             delegate: self
         )
 

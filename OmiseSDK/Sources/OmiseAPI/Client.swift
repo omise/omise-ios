@@ -83,9 +83,3 @@ class Client: ClientProtocol {
         )
     }
 }
-
-extension Client {
-    func setLatestLoadedCapability(_ capability: Capability) {
-        latestLoadedCapability = capability
-    }
-}
