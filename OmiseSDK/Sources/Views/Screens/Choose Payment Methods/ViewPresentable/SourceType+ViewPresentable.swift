@@ -215,9 +215,9 @@ extension SourceType: ViewPresentable {
     public var subtitle: String? {
         switch self {
         case .alipayCN, .alipayHK, .dana, .gcash, .kakaoPay, .touchNGo:
-            return "(Alipay+™ Partner)"
+            return localized("SourceType.alipay.footnote")
         case .grabPay:
-            return "(GrabPay and PayLater)"
+            return localized("SourceType.grabpay.footnote)")
         default:
             return nil
         }

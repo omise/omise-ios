@@ -9,7 +9,8 @@
 "PaymentMethod.eContext.netBanking" = "Net Bank";
 
 // Source Types
-"SourceType.alipay" = "Alipay";
+"SourceType.alipay" = "Alipay Online";
+"SourceType.alipay.footnote" = "(Alipay+™ Partner)";
 "SourceType.bill_payment_tesco_lotus" = "Lotus's Bill Payment";
 "SourceType.installment_bay" = "Krungsri";
 "SourceType.installment_bbl" = "Bangkok Bank";
@@ -28,8 +29,8 @@
 "SourceType.truemoney_jumpapp" = "TrueMoney";
 
 // Source Types without localization
-"SourceType.alipay_cn" = "Alipay CN";
-"SourceType.alipay_hk" = "Alipay HK";
+"SourceType.alipay_cn" = "Alipay";
+"SourceType.alipay_hk" = "AlipayHK";
 "SourceType.atome" = "Atome";
 "SourceType.barcode_alipay" = "Alipay In-Store";
 "SourceType.boost" = "Boost";
@@ -39,8 +40,9 @@
 "SourceType.fpx" = "FPX";
 "SourceType.gcash" = "GCash";
 "SourceType.grabpay" = "Grab";
+"SourceType.grabpay.footnote" = "(GrabPay and PayLater)";
 "SourceType.grabpay_rms" = "GrabPay";
-"SourceType.installment_mbb" = "MayBank";
+"SourceType.installment_mbb" = "Maybank";
 "SourceType.kakaopay" = "Kakao Pay";
 "SourceType.maybank_qr" = "Maybank QRPay";
 "SourceType.mobile_banking_bay" = "KMA";
@@ -53,7 +55,7 @@
 "SourceType.rabbit_linepay" = "Rabbit LINE Pay";
 "SourceType.shopeepay" = "ShopeePay";
 "SourceType.shopeepay_jumpapp" = "ShopeePay";
-"SourceType.touch_n_go" = "Touch 'n Go";
+"SourceType.touch_n_go" = "Touch ’n Go";
 "SourceType.touch_n_go_alipay_plus" = "TNG eWallet";
 "SourceType.wechat_pay" = "WeChat Pay";
 
@@ -67,6 +69,26 @@
 "CreditCard.field.city.error" = "City is required";
 "CreditCard.field.state.error" = "State is required";
 "CreditCard.field.postalCode.error" = "Zip code / Postal code is required";
+"CreditCard.field.cardNumber" = "Card number";
+"CreditCard.field.nameOnCard" = "Name on card";
+"CreditCard.field.expiryDate" = "Expiry date";
+"CreditCard.field.securityCode" = "Security code";
+"CreditCard.field.mmyy.placeholder" = "MM/YY";
+"CreditCard.payButton.title" = "Pay";
+
+"CreditCard.ccv.details.amex.text" = "4 digit number on the front of your card";
+"CreditCard.ccv.details.default.text" = "3 digit number on the back of your card";
+
+// EContext
+"EContext.field.fullName" = "Full name";
+"EContext.field.email" = "Email";
+"EContext.field.phone" = "Phone";
+"EContext.nextButton.title" = "Next";
+
+// TrueMoney Wallet
+"TrueMoneyWallet.field.phoneNumber" = "Phone number";
+"TrueMoneyWallet.nextButton.title" = "Next";
+"TrueMoneyWallet.label.pleaseInput.text" = "Please input the mobile number connected to your TrueMoney Wallet account";
 
 // Atome
 "Atome.header.text" = "Please input the below information to complete the charge creation with Atome";
@@ -96,6 +118,3 @@
 
 // Authorizing Payment
 "AuthorizingPayment.title" = "Authorizing Payment";
-// CCV Info
-"more-info.cvv-location.amex.text" = "4 digit number on the front of your card";
-"more-info.cvv-location.default.text" = "3 digit number on the back of your card";

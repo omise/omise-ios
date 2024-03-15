@@ -40,18 +40,10 @@ class CCVInfoController: UIViewController {
         switch preferredCardBrand {
         case .amex?:
             cvvLocationImageView.image = UIImage(omise: "CVV AMEX")
-            cvvLocationDescriptionLabel.text = NSLocalizedString(
-                "more-info.cvv-location.amex.text",
-                bundle: .omiseSDK,
-                value: "4 digit number on the front of your card",
-                comment: "A descriptive text telling the location of CVV on the AMEX card")
+            cvvLocationDescriptionLabel.text = localized("CreditCard.ccv.details.amex.text")
         default:
             cvvLocationImageView.image = UIImage(omise: "CVV")
-            cvvLocationDescriptionLabel.text = NSLocalizedString(
-                "more-info.cvv-location.default.text",
-                bundle: .omiseSDK,
-                value: "3 digit number on the back of your card",
-                comment: "A descriptive text telling the location of CVV on the typical credit card")
+            cvvLocationDescriptionLabel.text = localized("CreditCard.ccv.details.default.text")
         }
     }
 }

@@ -3,13 +3,14 @@
 "PaymentMethod.creditCard" = "บัตรเครดิต";
 "PaymentMethod.installments" = "ผ่อนชำระ";
 "PaymentMethod.internetBanking" = "อินเทอร์เน็ตแบงก์กิ้ง";
-"PaymentMethod.mobileBanking" = "โมบายล์แบงก์กิ้ง";
+"PaymentMethod.mobileBanking" = "โมบายแบงก์กิ้ง";
 "PaymentMethod.eContext.conbini" = "ร้านสะดวกซื้อ";
 "PaymentMethod.eContext.payEasy" = "เพย์อีซี";
 "PaymentMethod.eContext.netBanking" = "เน็ตแบงก์";
 
 // Source Types
-"SourceType.alipay" = "อาลีเพย์";
+"SourceType.alipay" = "อาลีเพย์ (ออนไลน์)";
+"SourceType.alipay.footnote" = "(อาลีเพย์พลัส)";
 "SourceType.bill_payment_tesco_lotus" = "โลตัสบิลเพย์เมนต์";
 "SourceType.installment_bay" = "ธนาคารกรุงศรี";
 "SourceType.installment_bbl" = "ธนาคารกรุงเทพ";
@@ -28,20 +29,21 @@
 "SourceType.truemoney_jumpapp" = "ทรูมันนี่";
 
 // Source Types without localization
-"SourceType.alipay_cn" = "Alipay CN";
-"SourceType.alipay_hk" = "Alipay HK";
+"SourceType.alipay_cn" = "อาลีเพย์";
+"SourceType.alipay_hk" = "อาลีเพย์ฮ่องกง";
 "SourceType.atome" = "Atome";
 "SourceType.barcode_alipay" = "Alipay In-Store";
 "SourceType.boost" = "Boost";
-"SourceType.dana" = "DANA";
+"SourceType.dana" = "ดานา";
 "SourceType.duitnow_obw" = "DuitNow Online Banking/Wallets";
 "SourceType.duitnow_qr" = "DuitNow QR";
 "SourceType.fpx" = "FPX";
-"SourceType.gcash" = "GCash";
+"SourceType.gcash" = "จีแคช";
 "SourceType.grabpay" = "Grab";
+"SourceType.grabpay.footnote" = "(GrabPay and PayLater)";
 "SourceType.grabpay_rms" = "GrabPay";
-"SourceType.installment_mbb" = "MayBank";
-"SourceType.kakaopay" = "Kakao Pay";
+"SourceType.installment_mbb" = "เมย์แบงก์";
+"SourceType.kakaopay" = "กาเกาเพย์";
 "SourceType.maybank_qr" = "Maybank QRPay";
 "SourceType.mobile_banking_bay" = "KMA";
 "SourceType.mobile_banking_bbl" = "Bualuang mBanking";
@@ -53,7 +55,7 @@
 "SourceType.rabbit_linepay" = "Rabbit LINE Pay";
 "SourceType.shopeepay" = "ShopeePay";
 "SourceType.shopeepay_jumpapp" = "ShopeePay";
-"SourceType.touch_n_go" = "Touch 'n Go";
+"SourceType.touch_n_go" = "ทัชแอนด์โก";
 "SourceType.touch_n_go_alipay_plus" = "TNG eWallet";
 "SourceType.wechat_pay" = "WeChat Pay";
 
@@ -67,6 +69,26 @@
 "CreditCard.field.city.error" = "ต้องระบุเมือง";
 "CreditCard.field.state.error" = "ต้องระบุเขต";
 "CreditCard.field.postalCode.error" = "ต้องระบุรหัสไปรษณีย์";
+"CreditCard.field.cardNumber" = "หมายเลขบัตร";
+"CreditCard.field.nameOnCard" = "ชื่อบนบัตร";
+"CreditCard.field.expiryDate" = "หมดอายุ";
+"CreditCard.field.securityCode" = "รหัสความปลอดภัย";
+"CreditCard.field.mmyy.placeholder" = "ดด/ปป";
+"CreditCard.payButton.title" = "ชำระเงิน";
+
+"CreditCard.ccv.details.amex.text" = "หมายเลข 4 หลักบนหน้าบัตร";
+"CreditCard.ccv.details.default.text" = "หมายเลข 3 หลักด้านหลังบัตร";
+
+// EContext
+"EContext.field.fullName" = "ชื่อ-สกุล";
+"EContext.field.email" = "อีเมล์";
+"EContext.field.phone" = "โทร.";
+"EContext.nextButton.title" = "ถัดไป";
+
+// TrueMoney Wallet
+"TrueMoneyWallet.field.phoneNumber" = "โทร.";
+"TrueMoneyWallet.nextButton.title" = "ถัดไป";
+"TrueMoneyWallet.label.pleaseInput.text" = "กรุณากรอกหมายเลขโทรศัพท์ที่ผูกกับบัญชีทรูมันนี่วอลเล็ท";
 
 // Atome
 "Atome.header.text" = "กรุณาใส่ข้อมูลเพื่อสร้างรายการเรียกเก็บเงินกับ Atome ให้เสร็จสมบูรณ์";
@@ -92,11 +114,7 @@
 "Atome.field.optional" = "(ถ้ามี)";
 
 // FPX
-"fpx.bank-chooser.no-banks-available.text" = "Cannot retrieve list of banks.\nPlease try again later.";
+"fpx.bank-chooser.no-banks-available.text" = "ไม่สามารถเรียกข้อมูลรายชื่อธนาคารได้ในขณะนี้ กรุณาลองใหม่อีกครั้ง";
 
 // Authorizing Payment
 "AuthorizingPayment.title" = "กำลังอนุมัติวงเงิน";
-
-// CCV Info
-"more-info.cvv-location.amex.text" = "หมายเลข 4 หลักบนหน้าบัตร";
-"more-info.cvv-location.default.text" = "หมายเลข 3 หลักด้านหลังบัตร";
