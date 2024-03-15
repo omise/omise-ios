@@ -24,7 +24,7 @@ extension UIScrollView {
                 bottomScrollIndicatorInset = keyboardFrame.height
             }
             
-            scrollIndicatorInsets.bottom = bottomScrollIndicatorInset
+            self.scrollIndicatorInsets.bottom = bottomScrollIndicatorInset
         }
 
         // swiftlint:disable:next line_length
