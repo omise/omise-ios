@@ -18,6 +18,7 @@
                 <outlet property="gotoPreviousFieldBarButtonItem" destination="6vM-47-Sdc" id="eyQ-OD-n9e"/>
                 <outlet property="phoneNumberLabel" destination="ph2-zw-Rut" id="YvJ-el-oBR"/>
                 <outlet property="phoneNumberTextField" destination="qZ4-kg-cTO" id="Wm6-H5-o6g"/>
+                <outlet property="pleaseInputLabel" destination="JbH-sv-yfG" id="SFC-V8-Zhm"/>
                 <outlet property="requestingIndicatorView" destination="WTQ-HL-L5e" id="5Dv-HO-6qf"/>
                 <outlet property="submitButton" destination="u3l-7W-P9v" id="yTc-Wd-OSS"/>
                 <outlet property="view" destination="T8r-3V-d5f" id="90E-4Y-Bda"/>

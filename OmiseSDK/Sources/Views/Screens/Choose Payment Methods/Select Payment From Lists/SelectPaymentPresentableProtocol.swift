@@ -5,6 +5,7 @@ protocol SelectPaymentPresentableProtocol {
     var viewNavigationTitle: String { get }
     var viewDisplayLargeTitle: Bool { get }
     var viewShowsCloseButton: Bool { get }
+    var errorMessage: String? { get }
 
     func viewOnDataReloadHandler(_ handler: @escaping () -> Void)
     func viewContext(at: Int) -> TableCellContext?
@@ -15,6 +16,7 @@ protocol SelectPaymentPresentableProtocol {
 
 // Default implementation for most common cases
 extension SelectPaymentPresentableProtocol {
+    var errorMessage: String? { nil }
     var viewShowsCloseButton: Bool { false }
     var viewDisplayLargeTitle: Bool { false }
     func viewDidTapClose() {}

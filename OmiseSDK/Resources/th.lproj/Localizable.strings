@@ -1,13 +1,94 @@
+// Payment Methods
+"PaymentMethods.title" = "ช่องทางชำระเงิน";
+"PaymentMethod.creditCard" = "บัตรเครดิต";
+"PaymentMethod.installments" = "ผ่อนชำระ";
+"PaymentMethod.internetBanking" = "อินเทอร์เน็ตแบงก์กิ้ง";
+"PaymentMethod.mobileBanking" = "โมบายแบงก์กิ้ง";
+"PaymentMethod.eContext.conbini" = "ร้านสะดวกซื้อ";
+"PaymentMethod.eContext.payEasy" = "เพย์อีซี";
+"PaymentMethod.eContext.netBanking" = "เน็ตแบงก์";
+
+// Source Types
+"SourceType.alipay" = "อาลีเพย์ (ออนไลน์)";
+"SourceType.alipay.footnote" = "(อาลีเพย์พลัส)";
+"SourceType.bill_payment_tesco_lotus" = "โลตัสบิลเพย์เมนต์";
+"SourceType.installment_bay" = "ธนาคารกรุงศรี";
+"SourceType.installment_bbl" = "ธนาคารกรุงเทพ";
+"SourceType.installment_first_choice" = "กรุงศรีเฟิร์สช้อยส์";
+"SourceType.installment_kbank" = "ธนาคารกสิกรไทย";
+"SourceType.installment_ktc" = "เคทีซี";
+"SourceType.installment_scb" = "ธนาคารไทยพาณิชย์";
+"SourceType.installment_ttb" = "ธนาคารทีเอ็มบีธนชาต";
+"SourceType.installment_uob" = "ธนาคารยูโอบี";
+"SourceType.internet_banking_bay" = "ธนาคารกรุงศรีอยุธยา";
+"SourceType.internet_banking_bbl" = "ธนาคารกรุงเทพ";
+"SourceType.paynow" = "เพย์นาว";
+"SourceType.points_citi" = "ชำระด้วยคะแนนซิตี้รีวอร์ด";
+"SourceType.promptpay" = "พร้อมเพย์";
+"SourceType.truemoney" = "ทรูมันนี่วอลเล็ท";
+"SourceType.truemoney_jumpapp" = "ทรูมันนี่";
+
+// Source Types without localization
+"SourceType.alipay_cn" = "อาลีเพย์";
+"SourceType.alipay_hk" = "อาลีเพย์ฮ่องกง";
+"SourceType.atome" = "Atome";
+"SourceType.barcode_alipay" = "Alipay In-Store";
+"SourceType.boost" = "Boost";
+"SourceType.dana" = "ดานา";
+"SourceType.duitnow_obw" = "DuitNow Online Banking/Wallets";
+"SourceType.duitnow_qr" = "DuitNow QR";
+"SourceType.fpx" = "FPX";
+"SourceType.gcash" = "จีแคช";
+"SourceType.grabpay" = "Grab";
+"SourceType.grabpay.footnote" = "(GrabPay and PayLater)";
+"SourceType.grabpay_rms" = "GrabPay";
+"SourceType.installment_mbb" = "เมย์แบงก์";
+"SourceType.kakaopay" = "กาเกาเพย์";
+"SourceType.maybank_qr" = "Maybank QRPay";
+"SourceType.mobile_banking_bay" = "KMA";
+"SourceType.mobile_banking_bbl" = "Bualuang mBanking";
+"SourceType.mobile_banking_kbank" = "K PLUS";
+"SourceType.mobile_banking_ktb" = "Krungthai Next";
+"SourceType.mobile_banking_ocbc" = "OCBC Digital";
+"SourceType.mobile_banking_scb" = "SCB EASY";
+"SourceType.paypay" = "PayPay";
+"SourceType.rabbit_linepay" = "Rabbit LINE Pay";
+"SourceType.shopeepay" = "ShopeePay";
+"SourceType.shopeepay_jumpapp" = "ShopeePay";
+"SourceType.touch_n_go" = "ทัชแอนด์โก";
+"SourceType.touch_n_go_alipay_plus" = "TNG eWallet";
+"SourceType.wechat_pay" = "WeChat Pay";
+
 // Credit Card
 "CreditCard.field.country" = "ประเทศหรือภูมิภาค";
 "CreditCard.field.address" = "ที่อยู่";
-"CreditCard.field.city" = "จังหวัด";
-"CreditCard.field.state" = "เขต";
-"CreditCard.field.postalCode" = "รหัสไปรษณีย์";
 "CreditCard.field.address.error" = "ต้องระบุที่อยู่";
+"CreditCard.field.city" = "จังหวัด";
 "CreditCard.field.city.error" = "ต้องระบุเมือง";
+"CreditCard.field.state" = "เขต";
 "CreditCard.field.state.error" = "ต้องระบุเขต";
+"CreditCard.field.postalCode" = "รหัสไปรษณีย์";
 "CreditCard.field.postalCode.error" = "ต้องระบุรหัสไปรษณีย์";
+"CreditCard.field.cardNumber" = "หมายเลขบัตร";
+"CreditCard.field.nameOnCard" = "ชื่อบนบัตร";
+"CreditCard.field.expiryDate" = "หมดอายุ";
+"CreditCard.field.securityCode" = "รหัสความปลอดภัย";
+"CreditCard.field.mmyy.placeholder" = "ดด/ปป";
+"CreditCard.payButton.title" = "ชำระเงิน";
+
+"CreditCard.ccv.details.amex.text" = "หมายเลข 4 หลักบนหน้าบัตร";
+"CreditCard.ccv.details.default.text" = "หมายเลข 3 หลักด้านหลังบัตร";
+
+// EContext
+"EContext.field.fullName" = "ชื่อ-สกุล";
+"EContext.field.email" = "อีเมล์";
+"EContext.field.phone" = "โทร.";
+"EContext.nextButton.title" = "ถัดไป";
+
+// TrueMoney Wallet
+"TrueMoneyWallet.field.phoneNumber" = "โทร.";
+"TrueMoneyWallet.nextButton.title" = "ถัดไป";
+"TrueMoneyWallet.label.pleaseInput.text" = "กรุณากรอกหมายเลขโทรศัพท์ที่ผูกกับบัญชีทรูมันนี่วอลเล็ท";
 
 // Atome
 "Atome.header.text" = "กรุณาใส่ข้อมูลเพื่อสร้างรายการเรียกเก็บเงินกับ Atome ให้เสร็จสมบูรณ์";
@@ -32,47 +113,8 @@
 "Atome.field.street1.error" = "จำเป็นต้องใส่ชื่อถนนสำหรับจัดส่งสินค้า";
 "Atome.field.optional" = "(ถ้ามี)";
 
-/* A navigaiton title for the EContext screen when the `Konbini` is selected */
-"econtext.convenience-store.navigation-item.title" = "ร้านสะดวกซื้อ";
+// FPX
+"fpx.bank-chooser.no-banks-available.text" = "ไม่สามารถเรียกข้อมูลรายชื่อธนาคารได้ในขณะนี้ กรุณาลองใหม่อีกครั้ง";
 
-/* A navigaiton title for the EContext screen when the `Net Bank` is selected */
-"econtext.netbanking.navigation-item.title" = "เน็ตแบงก์";
-
-/* A navigaiton title for the EContext screen when the `Pay-easy` is selected */
-"econtext.pay-easy.navigation-item.title" = "เพย์อีซี";
-
-/* A navigation title for the choosing installment terms screen with the `Bangkok Bank` selected */
-"installment-number-of-terms-choosers.bay.navigation-item.title" = "ธนาคารกรุงเทพ";
-
-/* A navigation title for the choosing installment terms screen with the `Krungsri` selected */
-"installment-number-of-terms-choosers.bbl.navigation-item.title" = "ธนาคารกรุงศรี";
-
-/* A navigation title for the choosing installment terms screen with the `Installments Terms` selected */
-"installment-number-of-terms-choosers.default.navigation-item.title" = "ระยะเวลาผ่อนชำระ";
-
-/* A navigation title for the choosing installment terms screen with the `Kasikorn` selected */
-"installment-number-of-terms-choosers.first-choice.navigation-item.title" = "ธนาคารกสิกรไทย";
-
-/* A navigation title for the choosing installment terms screen with the `KTC` selected */
-"installment-number-of-terms-choosers.k-bank.navigation-item.title" = "เคทีซี";
-
-/* A navigation title for the choosing installment terms screen with the `Krungsri First Choice` selected */
-"installment-number-of-terms-choosers.ktc.navigation-item.title" = "กรุงศรีเฟิร์สช้อยส์";
-
-/* A navigation title for the choosing installment terms screen with the `Siam Commercial Bank` selected */
-"installment-number-of-terms-choosers.scb.navigation-item.title" = "ธนาคารไทยพาณิชย์";
-
-/* A navigation title for the choosing installment terms screen with the `TTB Bank` selected */
-"installment-number-of-terms-choosers.ttb.navigation-item.title" = "ธนาคารทีเอ็มบีธนชาต";
-
-/* A navigation title for the choosing installment terms screen with the `UOB Bank` selected */
-"installment-number-of-terms-choosers.uob.navigation-item.title" = "ธนาคารยูโอบี";
-
-/* Number of terms option text displayed as a title of the number of terms option cell in number of terms chooser scene */
-"installments.number-of-terms-chooser.number-of-terms-cell.label.text" = "%d เดือน";
-
-
-"more-info.cvv-location.amex.text" = "หมายเลข 4 หลักบนหน้าบัตร";
-"more-info.cvv-location.default.text" = "หมายเลข 3 หลักด้านหลังบัตร";
-
-"paymentMethods.title" = "ช่องทางชำระเงิน";
+// Authorizing Payment
+"AuthorizingPayment.title" = "กำลังอนุมัติวงเงิน";

@@ -19,12 +19,12 @@ extension UIScrollView {
 
             let bottomScrollIndicatorInset: CGFloat
             if #available(iOS 11.0, *) {
-                bottomScrollIndicatorInset = keyboardFrame.height - safeAreaInsets.bottom
+                bottomScrollIndicatorInset = keyboardFrame.height - self.safeAreaInsets.bottom
             } else {
                 bottomScrollIndicatorInset = keyboardFrame.height
             }
             
-            scrollIndicatorInsets.bottom = bottomScrollIndicatorInset
+            self.scrollIndicatorInsets.bottom = bottomScrollIndicatorInset
         }
 
         // swiftlint:disable:next line_length
