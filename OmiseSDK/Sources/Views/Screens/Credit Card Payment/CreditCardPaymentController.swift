@@ -184,9 +184,16 @@ class CreditCardPaymentController: UIViewController {
         formLabels.forEach {
             $0.adjustsFontForContentSizeCategory = true
         }
+        
+        cardNumberLabel.text = localized("CreditCard.field.cardNumber")
+        cardNameLabel.text = localized("CreditCard.field.nameOnCard")
+        expiryDateLabel.text = localized("CreditCard.field.expiryDate")
+        secureCodeLabel.text = localized("CreditCard.field.securityCode")
     }
 
     private func setupTextFields() {
+        expiryDateTextField.placeholder = localized("CreditCard.field.mmyy.placeholder")
+
         formFields.forEach {
             $0.inputAccessoryView = formFieldsAccessoryView
             $0.onValueChanged = { [weak self] in
@@ -213,6 +220,7 @@ class CreditCardPaymentController: UIViewController {
     }
 
     private func setupSubmitButton() {
+        submitButton.setTitle(localized("CreditCard.payButton.title"), for: .normal)
         submitButton.defaultBackgroundColor = view.tintColor
         submitButton.disabledBackgroundColor = .line
         submitButton.titleLabel?.adjustsFontForContentSizeCategory = true

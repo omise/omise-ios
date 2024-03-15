@@ -217,7 +217,7 @@ extension SourceType: ViewPresentable {
         case .alipayCN, .alipayHK, .dana, .gcash, .kakaoPay, .touchNGo:
             return localized("SourceType.alipay.footnote")
         case .grabPay:
-            return localized("SourceType.grabpay.footnote)")
+            return localized("SourceType.grabpay.footnote")
         default:
             return nil
         }

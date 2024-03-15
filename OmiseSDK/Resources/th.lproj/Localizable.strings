@@ -62,12 +62,12 @@
 // Credit Card
 "CreditCard.field.country" = "ประเทศหรือภูมิภาค";
 "CreditCard.field.address" = "ที่อยู่";
-"CreditCard.field.city" = "จังหวัด";
-"CreditCard.field.state" = "เขต";
-"CreditCard.field.postalCode" = "รหัสไปรษณีย์";
 "CreditCard.field.address.error" = "ต้องระบุที่อยู่";
+"CreditCard.field.city" = "จังหวัด";
 "CreditCard.field.city.error" = "ต้องระบุเมือง";
+"CreditCard.field.state" = "เขต";
 "CreditCard.field.state.error" = "ต้องระบุเขต";
+"CreditCard.field.postalCode" = "รหัสไปรษณีย์";
 "CreditCard.field.postalCode.error" = "ต้องระบุรหัสไปรษณีย์";
 "CreditCard.field.cardNumber" = "หมายเลขบัตร";
 "CreditCard.field.nameOnCard" = "ชื่อบนบัตร";

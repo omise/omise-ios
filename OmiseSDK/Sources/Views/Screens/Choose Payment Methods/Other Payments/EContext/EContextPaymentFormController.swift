@@ -93,6 +93,12 @@ class EContextPaymentFormController: UIViewController, PaymentFormUIController {
 
         setupTextFieldHandlers()
         contentView.adjustContentInsetOnKeyboardAppear()
+
+        fullNameLabel.text = localized("EContext.field.fullName")
+        emailLabel.text = localized("EContext.field.email")
+        phoneNumberLabel.text = localized("EContext.field.phone")
+        submitButton.setTitle(localized("EContext.nextButton.title"), for: .normal)
+
     }
 
     private func setupTextFieldHandlers() {

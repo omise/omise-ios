@@ -13,6 +13,7 @@ class TrueMoneyPaymentFormController: UIViewController, PaymentFormUIController 
     
     @IBOutlet var contentView: UIScrollView!
     
+    @IBOutlet private var pleaseInputLabel: UILabel!
     @IBOutlet private var phoneNumberLabel: UILabel!
     @IBOutlet private var phoneNumberTextField: OmiseTextField!
     @IBOutlet private var submitButton: MainActionButton!
@@ -82,6 +83,10 @@ class TrueMoneyPaymentFormController: UIViewController, PaymentFormUIController 
         setupTextFieldHandlers()
 
         contentView.adjustContentInsetOnKeyboardAppear()
+
+        pleaseInputLabel.text = localized("TrueMoneyWallet.label.pleaseInput.text")
+        phoneNumberLabel.text = localized("TrueMoneyWallet.field.phoneNumber")
+        submitButton.setTitle(localized("TrueMoneyWallet.nextButton.title"), for: .normal)
     }
 
     private func setupTextFieldHandlers() {
