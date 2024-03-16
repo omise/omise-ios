@@ -83,3 +83,10 @@ class Client: ClientProtocol {
         )
     }
 }
+
+// For Unit Testing
+extension Client {
+    func setLatestLoadedCapability(_ capability: Capability?) {
+        latestLoadedCapability = capability
+    }
+}
