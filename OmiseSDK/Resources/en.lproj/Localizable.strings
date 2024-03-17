@@ -1,16 +1,97 @@
+// Payment Methods
+"PaymentMethods.title" = "Payment Methods";
+"PaymentMethod.creditCard" = "Credit Card";
+"PaymentMethod.installments" = "Installments";
+"PaymentMethod.internetBanking" = "Internet Banking";
+"PaymentMethod.mobileBanking" = "Mobile Banking";
+"PaymentMethod.eContext.conbini" = "Konbini";
+"PaymentMethod.eContext.payEasy" = "Pay-easy";
+"PaymentMethod.eContext.netBanking" = "Net Bank";
+
+// Source Types
+"SourceType.alipay" = "Alipay Online";
+"SourceType.alipay.footnote" = "(Alipay+™ Partner)";
+"SourceType.bill_payment_tesco_lotus" = "Lotus's Bill Payment";
+"SourceType.installment_bay" = "Krungsri";
+"SourceType.installment_bbl" = "Bangkok Bank";
+"SourceType.installment_first_choice" = "Krungsri First Choice";
+"SourceType.installment_kbank" = "Kasikorn Bank";
+"SourceType.installment_ktc" = "KTC";
+"SourceType.installment_scb" = "Siam Commercial Bank";
+"SourceType.installment_ttb" = "TMBThanachart Bank";
+"SourceType.installment_uob" = "United Overseas Bank";
+"SourceType.internet_banking_bay" = "Bank of Ayudhya";
+"SourceType.internet_banking_bbl" = "Bangkok Bank";
+"SourceType.paynow" = "PayNow";
+"SourceType.points_citi" = "Pay with Citi Rewards Points";
+"SourceType.promptpay" = "PromptPay";
+"SourceType.truemoney" = "TrueMoney Wallet";
+"SourceType.truemoney_jumpapp" = "TrueMoney";
+
+// Source Types without localization
+"SourceType.alipay_cn" = "Alipay";
+"SourceType.alipay_hk" = "AlipayHK";
+"SourceType.atome" = "Atome";
+"SourceType.barcode_alipay" = "Alipay In-Store";
+"SourceType.boost" = "Boost";
+"SourceType.dana" = "DANA";
+"SourceType.duitnow_obw" = "DuitNow Online Banking/Wallets";
+"SourceType.duitnow_qr" = "DuitNow QR";
+"SourceType.fpx" = "FPX";
+"SourceType.gcash" = "GCash";
+"SourceType.grabpay" = "Grab";
+"SourceType.grabpay.footnote" = "(GrabPay and PayLater)";
+"SourceType.grabpay_rms" = "GrabPay";
+"SourceType.installment_mbb" = "Maybank";
+"SourceType.kakaopay" = "Kakao Pay";
+"SourceType.maybank_qr" = "Maybank QRPay";
+"SourceType.mobile_banking_bay" = "KMA";
+"SourceType.mobile_banking_bbl" = "Bualuang mBanking";
+"SourceType.mobile_banking_kbank" = "K PLUS";
+"SourceType.mobile_banking_ktb" = "Krungthai Next";
+"SourceType.mobile_banking_ocbc" = "OCBC Digital";
+"SourceType.mobile_banking_scb" = "SCB EASY";
+"SourceType.paypay" = "PayPay";
+"SourceType.rabbit_linepay" = "Rabbit LINE Pay";
+"SourceType.shopeepay" = "ShopeePay";
+"SourceType.shopeepay_jumpapp" = "ShopeePay";
+"SourceType.touch_n_go" = "Touch ’n Go";
+"SourceType.touch_n_go_alipay_plus" = "TNG eWallet";
+"SourceType.wechat_pay" = "WeChat Pay";
+
 // Credit Card
 "CreditCard.field.country" = "Country or region";
 "CreditCard.field.address" = "Address";
 "CreditCard.field.city" = "City";
-"CreditCard.field.state" = "State";
-"CreditCard.field.postalCode" = "Zip code / Postal code";
-"CreditCard.field.address.error" = "Address is required";
 "CreditCard.field.city.error" = "City is required";
+"CreditCard.field.state" = "State";
 "CreditCard.field.state.error" = "State is required";
+"CreditCard.field.postalCode" = "Zip code / Postal code";
 "CreditCard.field.postalCode.error" = "Zip code / Postal code is required";
+"CreditCard.field.address.error" = "Address is required";
+"CreditCard.field.cardNumber" = "Card number";
+"CreditCard.field.nameOnCard" = "Name on card";
+"CreditCard.field.expiryDate" = "Expiry date";
+"CreditCard.field.securityCode" = "Security code";
+"CreditCard.field.mmyy.placeholder" = "MM/YY";
+"CreditCard.payButton.title" = "Pay";
+
+"CreditCard.ccv.details.amex.text" = "4 digit number on the front of your card";
+"CreditCard.ccv.details.default.text" = "3 digit number on the back of your card";
+
+// EContext
+"EContext.field.fullName" = "Full name";
+"EContext.field.email" = "Email";
+"EContext.field.phone" = "Phone";
+"EContext.nextButton.title" = "Next";
+
+// TrueMoney Wallet
+"TrueMoneyWallet.field.phoneNumber" = "Phone number";
+"TrueMoneyWallet.nextButton.title" = "Next";
+"TrueMoneyWallet.label.pleaseInput.text" = "Please input the mobile number connected to your TrueMoney Wallet account";
 
 // Atome
-"Atome.header.text" = "Please input the below information to complete the charge creation with Atome.";
+"Atome.header.text" = "Please input the below information to complete the charge creation with Atome";
 "Atome.field.name" = "Name";
 "Atome.field.email" = "Email";
 "Atome.field.phoneNumber" = "Phone Number";
@@ -32,29 +113,8 @@
 "Atome.field.street1.error" = "Shipping street is required";
 "Atome.field.optional" = "(optional)";
 
-"installments.number-of-terms-chooser.number-of-terms-cell.label.text" = "%d months";
-
-"econtext.convenience-store.navigation-item.title" = "Konbini";
-"econtext.netbanking.navigation-item.title" = "Net Bank";
-"econtext.pay-easy.navigation-item.title" = "Pay-easy";
-
-"installment-number-of-terms-choosers.bay.navigation-item.title" = "Bangkok Bank";
-
-"installment-number-of-terms-choosers.first-choice.navigation-item.title" = "Kasikorn";
-"installment-number-of-terms-choosers.bbl.navigation-item.title" = "Krungsri";
-"installment-number-of-terms-choosers.ktc.navigation-item.title" = "Krungsri First Choice";
-"installment-number-of-terms-choosers.k-bank.navigation-item.title" = "KTC";
-"installment-number-of-terms-choosers.mbb.navigation-item.title" = "MayBank";
-"installment-number-of-terms-choosers.scb.navigation-item.title" = "Siam Commercial Bank";
-"installment-number-of-terms-choosers.ttb.navigation-item.title" = "TMBThanachart Bank";
-"installment-number-of-terms-choosers.uob.navigation-item.title" = "United Overseas Bank";
-
-/* A navigation title for the choosing installment terms screen with the `Installments Terms` selected */
-"installment-number-of-terms-choosers.default.navigation-item.title" = "Installment terms";
-
-"more-info.cvv-location.amex.text" = "4 digit number on the front of your card";
-"more-info.cvv-location.default.text" = "3 digit number on the back of your card";
-
+// FPX
 "fpx.bank-chooser.no-banks-available.text" = "Cannot retrieve list of banks.\nPlease try again later.";
 
-"paymentMethods.title" = "Payment Methods";
+// Authorizing Payment
+"AuthorizingPayment.title" = "Authorizing Payment";

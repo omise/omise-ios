@@ -69,8 +69,8 @@ public class OmiseSDK {
     ///    - animated: Presents controller with animation if `true`
     ///    - amount: Payment amount
     ///    - currency: Payment currency code  (ISO 4217)
-    ///    - allowedPaymentMethods: Custom list of payment methods to be shown in the list. Only payment methods presented in the Capabilities will be shown
-    ///    - forcePaymentMethods: If `true` all payment methods from `paymentMethods` will be shown if it's not empty (for test purposes)
+    ///    - allowedPaymentMethods: Payment methods to be presented in the list
+    ///    - skipCapabilityValidation: Set `false` to filter payment methods presented in Capability (default), `true` to skip validation (for testing)
     ///    - isCardPaymentAllowed: Should present Card Payment Method in the list
     ///    - handleErrors: If `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
     ///    - completion: Completion handler triggered when payment completes with Token, Source, Error or was Cancelled
@@ -79,8 +79,8 @@ public class OmiseSDK {
         animated: Bool = true,
         amount: Int64,
         currency: String,
-        allowedPaymentMethods: [SourceType] = [],
-        forcePaymentMethods: Bool = false,
+        allowedPaymentMethods: [SourceType]? = nil,
+        skipCapabilityValidation: Bool = true,
         isCardPaymentAllowed: Bool = true,
         handleErrors: Bool = true,
         delegate: ChoosePaymentMethodDelegate
@@ -96,9 +96,9 @@ public class OmiseSDK {
         )
 
         let filter = SelectPaymentMethodViewModel.Filter(
-            sourceTypes: allowedPaymentMethods,
+            sourceTypes: allowedPaymentMethods ?? [],
             isCardPaymentAllowed: isCardPaymentAllowed,
-            isForced: forcePaymentMethods
+            isForced: skipCapabilityValidation
         )
 
         let viewController = paymentFlow.createChoosePaymentMethodController(
@@ -145,7 +145,7 @@ public class OmiseSDK {
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.delegate = paymentFlow
         if #available(iOSApplicationExtension 11.0, *) {
-            navigationController.navigationBar.prefersLargeTitles = true
+            navigationController.navigationBar.prefersLargeTitles = false
         }
 
         topViewController.present(navigationController, animated: animated, completion: nil)
@@ -175,13 +175,14 @@ public class OmiseSDK {
         viewController.expectedReturnURLPatterns = expectedReturnURLPatterns
         viewController.delegate = delegate
         viewController.applyNavigationBarStyle()
-
+        viewController.title = "AuthorizingPayment.title".localized()
+        
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.navigationBar.isTranslucent = false
         navigationController.navigationBar.backgroundColor = .white
 
         if #available(iOSApplicationExtension 11.0, *) {
-            navigationController.navigationBar.prefersLargeTitles = true
+            navigationController.navigationBar.prefersLargeTitles = false
         }
 
         topViewController.present(navigationController, animated: animated, completion: nil)

@@ -83,7 +83,7 @@ extension SelectPaymentMethodViewModel: SelectPaymentPresentableProtocol {
     }
     
     var viewNavigationTitle: String {
-        localized("paymentMethods.title", text: "Payment Methods")
+        localized("PaymentMethods.title", text: "Payment Methods")
     }
     
     var viewDisplayLargeTitle: Bool {

@@ -21,6 +21,10 @@ class SelectPaymentController: UITableViewController {
         setupNavigationItems()
         setupTableView()
         setupViewModel()
+
+        if let errorMessage = viewModel.errorMessage {
+            showErrorMessage(errorMessage)
+        }
     }
 
     @objc private func didTapClose() {
@@ -118,5 +122,25 @@ private extension SelectPaymentController {
             )
         }
         navigationItem.backBarButtonItem = .empty
+    }
+
+    private func showErrorMessage(_ errorMessage: String) {
+        let label = UILabel(
+            frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height)
+        )
+
+        label.text = errorMessage
+        label.textColor = UIColor.omisePrimary
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.sizeToFit()
+
+        tableView.backgroundView = label
+        tableView.separatorStyle = .none
+    }
+
+    private func hideErrorMessage() {
+        tableView.backgroundView = nil
+        tableView.separatorStyle = .singleLine
     }
 }
