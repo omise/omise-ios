@@ -281,6 +281,8 @@ class CreditCardPaymentController: UIViewController {
         }
         addressStackView.isHiddenInStackView = !viewModel.isAddressFieldsVisible
         updateSupplementaryUI()
+        applyPrimaryColor()
+        applySecondaryColor()
     }
 
     private  func setupCountryField() {
@@ -584,7 +586,6 @@ class CreditCardPaymentController: UIViewController {
                 input.textColor = UIColor.omisePrimary
             }
         }
-
     }
 
     func applySecondaryColor() {
