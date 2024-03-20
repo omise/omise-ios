@@ -19,6 +19,7 @@
 		757B0A622AD713A000DEAE8F /* CustomCreditCardFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757B0A572AD713A000DEAE8F /* CustomCreditCardFormViewController.swift */; };
 		757B0A632AD713A000DEAE8F /* LocalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757B0A592AD713A000DEAE8F /* LocalConfig.swift */; };
 		757B0A642AD713A000DEAE8F /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757B0A5A2AD713A000DEAE8F /* Tools.swift */; };
+		758801222BAAD5BA00F02934 /* AppDeeplink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758801212BAAD5BA00F02934 /* AppDeeplink.swift */; };
 		75A6BD2A2B3D2A0D005D9B77 /* OmiseSDK in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 7558BBDF2AE24CD80035CD99 /* OmiseSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		75C2E2292AD712F1008584C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C2E2282AD712F1008584C0 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 		757B0A572AD713A000DEAE8F /* CustomCreditCardFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCreditCardFormViewController.swift; sourceTree = "<group>"; };
 		757B0A592AD713A000DEAE8F /* LocalConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalConfig.swift; sourceTree = "<group>"; };
 		757B0A5A2AD713A000DEAE8F /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
+		758801212BAAD5BA00F02934 /* AppDeeplink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDeeplink.swift; sourceTree = "<group>"; };
 		75C2E2252AD712F1008584C0 /* ExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C2E2282AD712F1008584C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75C2E2362AD712F2008584C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				757B0A4A2AD7139F00DEAE8F /* Resources */,
 				757B0A532AD713A000DEAE8F /* Views */,
 				75C2E2282AD712F1008584C0 /* AppDelegate.swift */,
+				758801212BAAD5BA00F02934 /* AppDeeplink.swift */,
 				757B0A462AD7136800DEAE8F /* Config.local.plist */,
 				75C2E2362AD712F2008584C0 /* Info.plist */,
 			);
@@ -211,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75C2E2292AD712F1008584C0 /* AppDelegate.swift in Sources */,
+				758801222BAAD5BA00F02934 /* AppDeeplink.swift in Sources */,
 				757B0A612AD713A000DEAE8F /* PaymentSettingTableViewController.swift in Sources */,
 				757B0A5F2AD713A000DEAE8F /* BaseViewController.swift in Sources */,
 				757B0A632AD713A000DEAE8F /* LocalConfig.swift in Sources */,
