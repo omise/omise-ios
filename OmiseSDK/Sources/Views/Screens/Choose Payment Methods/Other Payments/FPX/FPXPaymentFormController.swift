@@ -94,6 +94,7 @@ class FPXPaymentFormController: UIViewController, PaymentFormUIController {
             object: nil
         )
 
+        emailTextField.textColor = UIColor.omisePrimary
         emailTextField.validator = try? NSRegularExpression(pattern: "\\A[\\w.+-]+@[a-z\\d.-]+\\.[a-z]{2,}\\z", options: [.caseInsensitive])
 
         // check for 1st time
