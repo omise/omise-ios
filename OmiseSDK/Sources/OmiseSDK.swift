@@ -44,7 +44,7 @@ public class OmiseSDK {
 
     public private(set) weak var presentedViewController: UIViewController?
 
-    private var handleURLs: [URL] = []
+    private var handleURLs: [String] = []
 
     /// Creates a new instance of Omise SDK that provides interface to functionallity that SDK provides
     ///
@@ -167,14 +167,14 @@ public class OmiseSDK {
         from topViewController: UIViewController,
         animated: Bool = true,
         authorizeURL: URL,
-        returnURL: [URL],
+        returnURLs: [String],
         delegate: AuthorizingPaymentViewControllerDelegate
     ) {
         dismiss(animated: false)
 
-        handleURLs = returnURL
-        let returnURLComponents = returnURL.compactMap {
-            URLComponents(url: $0, resolvingAgainstBaseURL: false)
+        handleURLs = returnURLs
+        let returnURLComponents = returnURLs.compactMap {
+            URLComponents(string: $0)
         }
 
         let viewController = AuthorizingPaymentViewController(nibName: nil, bundle: .omiseSDK)
@@ -205,7 +205,13 @@ public class OmiseSDK {
     /// Handle URL Callback received by AppDelegate
     public func handleURLCallback(_ url: URL) -> Bool {
         // Will handle callback with 3ds library
-        return handleURLs.contains(url)
+        let containsURL = handleURLs
+            .map {
+                url.match(string: $0)
+            }
+            .contains(true)
+
+        return containsURL
     }
 }
 

@@ -1,13 +1,17 @@
 import Foundation
 
 enum AppDeeplink: String {
-    case threeDSChallenge = "omise_3ds_challenge"
+    case threeDSChallenge = "3ds_challenge"
 
     var scheme: String {
         "omiseExampleApp"
     }
 
+    var urlString: String {
+        "\(scheme)://\(rawValue)"
+    }
+
     var url: URL? {
-        URL(string: "\(scheme)://\(rawValue)")
+        URL(string: urlString)
     }
 }

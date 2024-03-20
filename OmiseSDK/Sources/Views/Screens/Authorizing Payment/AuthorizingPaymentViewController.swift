@@ -99,9 +99,7 @@ public class AuthorizingPaymentViewController: UIViewController {
         }
         
         return expectedReturnURLPatterns.contains { expectedURLComponents -> Bool in
-            return expectedURLComponents.scheme == components.scheme
-                && expectedURLComponents.host == components.host
-                && components.path.hasPrefix(expectedURLComponents.path)
+            components.match(components: expectedURLComponents)
         }
     }
     

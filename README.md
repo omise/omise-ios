@@ -344,7 +344,7 @@ You can use the built-in authorizing payment view controller with the `authorize
 omiseSDK.presentAuthorizingPayment(
     from: self,
     authorizeURL: url,
-    expectedReturnURLPatterns: [expectedReturnURL],
+    returnURLs: [returnURLs],
     delegate: self
 )
 ```

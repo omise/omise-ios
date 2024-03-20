@@ -54,14 +54,14 @@ class ProductDetailViewController: BaseViewController {
             guard let self = self,
                   let textField = alertController.textFields?.first,
                   let text = textField.text,
-                  let url = URL(string: text),
-                  let deeplinkRedirectURL = AppDeeplink.threeDSChallenge.url,
-                  let webRedirectURL = URL(string: "https://exampleapp.opn.ooo") else { return }
+                  let url = URL(string: text) else { return }
 
+            let deeplinkRedirectURLPattern = AppDeeplink.threeDSChallenge.urlString
+            let webRedirectURLPattern = "https://exampleapp.opn.ooo"
             self.omiseSDK.presentAuthorizingPayment(
                 from: self,
                 authorizeURL: url,
-                returnURL: [deeplinkRedirectURL, webRedirectURL],
+                returnURLs: [deeplinkRedirectURLPattern, webRedirectURLPattern],
                 delegate: self
             )
         })
