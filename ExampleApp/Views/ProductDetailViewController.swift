@@ -81,39 +81,10 @@ extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate 
     }
 }
 
-// MARK: - Custom Credit Card Form View Controller Delegate
-
-extension ProductDetailViewController: CustomCreditCardPaymentControllerDelegate {
-    func creditCardFormViewController(_ controller: CustomCreditCardPaymentController, didSucceedWithToken token: Token) {
-        dismissForm {
-            let alertController = UIAlertController(
-                title: "Token Created",
-                message: "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge.",
-                preferredStyle: .alert
-            )
-            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-        }
-    }
-    
-    func creditCardFormViewController(_ controller: CustomCreditCardPaymentController, didFailWithError error: Error) {
-        dismissForm {
-            let alertController = UIAlertController(
-                title: "Error",
-                message: error.localizedDescription,
-                preferredStyle: .alert
-            )
-            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-        }
-    }
-}
-
 /// Processing result of choosing Payment Method screen
 extension ProductDetailViewController: ChoosePaymentMethodDelegate {
     func choosePaymentMethodDidComplete(with source: Source) {
+        print("Source is created with id '\(source.id)'")
         omiseSDK.dismiss {
             let alertController = UIAlertController(
                 title: "Source Created\n(\(source.paymentInformation.sourceType.rawValue))",
@@ -127,6 +98,7 @@ extension ProductDetailViewController: ChoosePaymentMethodDelegate {
     }
 
     func choosePaymentMethodDidComplete(with token: Token) {
+        print("Token is created with id '\(token.id)'")
         omiseSDK.dismiss {
             let alertController = UIAlertController(
                 title: "Token Created",
@@ -150,5 +122,35 @@ extension ProductDetailViewController: ChoosePaymentMethodDelegate {
 
     func choosePaymentMethodDidCancel() {
         omiseSDK.dismiss()
+    }
+}
+
+// MARK: - Custom Credit Card Form View Controller Delegate
+extension ProductDetailViewController: CustomCreditCardPaymentControllerDelegate {
+    func creditCardFormViewController(_ controller: CustomCreditCardPaymentController, didSucceedWithToken token: Token) {
+        print("Token is created by using custom form with id '\(token.id)'")
+        dismissForm {
+            let alertController = UIAlertController(
+                title: "Token Created",
+                message: "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge.",
+                preferredStyle: .alert
+            )
+            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+
+    func creditCardFormViewController(_ controller: CustomCreditCardPaymentController, didFailWithError error: Error) {
+        dismissForm {
+            let alertController = UIAlertController(
+                title: "Error",
+                message: error.localizedDescription,
+                preferredStyle: .alert
+            )
+            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
 }
