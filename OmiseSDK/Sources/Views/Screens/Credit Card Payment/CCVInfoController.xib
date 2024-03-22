@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CCVInfoController" customModule="OmiseSDK">
+            <connections>
+                <outlet property="containerView" destination="kSf-7X-0YI" id="Rba-If-V3I"/>
+                <outlet property="cvvLocationDescriptionLabel" destination="V71-lN-rMQ" id="ZLl-OV-YjK"/>
+                <outlet property="cvvLocationImageView" destination="hrc-Ru-eNB" id="iOX-NY-mCb"/>
+                <outlet property="view" destination="4OE-fn-PXr" id="GYW-RD-FNa"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="4OE-fn-PXr">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kSf-7X-0YI">
+                    <rect key="frame" x="78.666666666666671" y="337.33333333333331" width="235.66666666666663" height="177.66666666666669"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" image="CVV" translatesAutoresizingMaskIntoConstraints="NO" id="hrc-Ru-eNB">
+                            <rect key="frame" x="70.333333333333329" y="40" width="94.999999999999986" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="94.999999999999986" id="Wp2-ZV-LG8"/>
+                                <constraint firstAttribute="height" constant="60" id="cvg-bl-z6V"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3-4 digit number on the back of your card" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V71-lN-rMQ">
+                            <rect key="frame" x="18" y="116.00000000000001" width="199.66666666666666" height="33.666666666666671"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailingMargin" secondItem="V71-lN-rMQ" secondAttribute="trailing" constant="10" id="EHj-H5-LBI"/>
+                        <constraint firstAttribute="bottom" secondItem="V71-lN-rMQ" secondAttribute="bottom" constant="28" id="PEc-3U-kp0"/>
+                        <constraint firstItem="hrc-Ru-eNB" firstAttribute="centerX" secondItem="kSf-7X-0YI" secondAttribute="centerX" id="PXY-aw-p9o"/>
+                        <constraint firstItem="V71-lN-rMQ" firstAttribute="top" secondItem="hrc-Ru-eNB" secondAttribute="bottom" constant="16" id="Snw-fR-aiD"/>
+                        <constraint firstItem="V71-lN-rMQ" firstAttribute="leading" secondItem="kSf-7X-0YI" secondAttribute="leadingMargin" constant="10" id="qld-lk-uHe"/>
+                        <constraint firstItem="hrc-Ru-eNB" firstAttribute="top" secondItem="kSf-7X-0YI" secondAttribute="top" constant="40" id="sxO-QR-VqM"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.25882352941176467" green="0.27058823529411763" blue="0.27843137254901962" alpha="0.5" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="kSf-7X-0YI" firstAttribute="width" secondItem="4OE-fn-PXr" secondAttribute="width" multiplier="0.6" id="pqJ-iK-lpq"/>
+                <constraint firstItem="kSf-7X-0YI" firstAttribute="centerY" secondItem="4OE-fn-PXr" secondAttribute="centerY" id="pqy-K4-aep"/>
+                <constraint firstItem="kSf-7X-0YI" firstAttribute="centerX" secondItem="4OE-fn-PXr" secondAttribute="centerX" id="uyr-yv-x5H"/>
+            </constraints>
+            <point key="canvasLocation" x="-382" y="-1"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="CVV" width="95" height="60"/>
+    </resources>
+</document>

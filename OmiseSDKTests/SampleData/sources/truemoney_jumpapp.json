@@ -1,0 +1,37 @@
+{
+    "object":"source",
+    "id":"src_5yqlbf5w206mcfybj8v",
+    "livemode":true,
+    "location":"/sources/src_5yqlbf5w206mcfybj8v",
+    "amount":500000,
+    "barcode":null,
+    "bank":null,
+    "created_at":"2024-02-11T15:45:15Z",
+    "currency":"THB",
+    "email":null,
+    "flow":"app_redirect",
+    "installment_term":null,
+    "absorption_type":null,
+    "name":null,
+    "mobile_number":null,
+    "phone_number":null,
+    "platform_type":"IOS",
+    "scannable_code":null,
+    "billing":null,
+    "shipping":null,
+    "items":[
+
+    ],
+    "references":null,
+    "provider_references":null,
+    "store_id":null,
+    "store_name":null,
+    "terminal_id":null,
+    "type":"truemoney_jumpapp",
+    "zero_interest_installments":null,
+    "charge_status":"unknown",
+    "receipt_amount":null,
+    "discounts":[
+
+    ]
+}

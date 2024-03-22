@@ -17,15 +17,10 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "OmiseSDKObjc",
-            path: "OmiseSDKObjc",
-            publicHeadersPath: ""
-        ),
-        .target(
             name: "OmiseSDK",
-            dependencies: ["OmiseSDKObjc"],
+            dependencies: [],
             path: "OmiseSDK",
-            exclude: ["Info.plist", "OmiseSDK.h"],
+            exclude: ["Info.plist"],
             resources: [.process("Resources")]
         )
     ]
