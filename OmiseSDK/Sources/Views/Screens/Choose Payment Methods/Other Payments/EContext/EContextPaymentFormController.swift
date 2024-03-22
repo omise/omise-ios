@@ -99,6 +99,9 @@ class EContextPaymentFormController: UIViewController, PaymentFormUIController {
         phoneNumberLabel.text = localized("EContext.field.phone")
         submitButton.setTitle(localized("EContext.nextButton.title"), for: .normal)
 
+        fullNameLabel.textColor = UIColor.omisePrimary
+        emailLabel.textColor = UIColor.omisePrimary
+        phoneNumberLabel.textColor = UIColor.omisePrimary
     }
 
     private func setupTextFieldHandlers() {
@@ -108,6 +111,7 @@ class EContextPaymentFormController: UIViewController, PaymentFormUIController {
     }
 
     private func setupTextField(_ field: OmiseTextField) {
+        field.textColor = UIColor.omisePrimary
         field.addTarget(self, action: #selector(gotoNextField), for: .editingDidEndOnExit)
         field.addTarget(self, action: #selector(validateFieldData), for: .editingChanged)
         field.addTarget(self, action: #selector(updateInputAccessoryViewFor), for: .editingDidBegin)

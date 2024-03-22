@@ -13,6 +13,7 @@ class PaymentSettingTableViewController: UITableViewController {
         return numberFormatter
     }()
 
+    var currencyInitialized = false
     var currentAmount: Int64 = 0
     var currentCurrency: Currency = .thb {
         willSet {
@@ -22,15 +23,20 @@ class PaymentSettingTableViewController: UITableViewController {
             cell(for: currentCurrency)?.accessoryType = .none
         }
         didSet {
-            let numberOfDigits = Int(log10(Double(currentCurrency.factor)))
-            amountFormatter.minimumFractionDigits = numberOfDigits
-            amountFormatter.maximumFractionDigits = numberOfDigits
 
-            guard isViewLoaded else {
-                return
+            if currencyInitialized == false {
+                currencyInitialized = true
+            } else {
+                switch (oldValue.factor, currentCurrency.factor) {
+                case (identicalBasedCurrencyFactor, centBasedCurrencyFactor):
+                    currentAmount *= 100
+                case (centBasedCurrencyFactor, identicalBasedCurrencyFactor):
+                    currentAmount /= 100
+                default:
+                    break
+                }
             }
-            cell(for: currentCurrency)?.accessoryType = .checkmark
-            amountField.text = amountFormatter.string(from: NSNumber(value: currentCurrency.convert(fromSubunit: currentAmount)))
+            updateAmountField()
         }
     }
 
@@ -143,6 +149,8 @@ class PaymentSettingTableViewController: UITableViewController {
 
         useCapabilityAPIValuesCell.accessoryType = usesCapabilityDataForPaymentMethods ? .checkmark : .none
         useSpecifiedValuesCell.accessoryType = usesCapabilityDataForPaymentMethods ? .none : .checkmark
+
+        updateAmountField()
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -221,12 +229,22 @@ extension PaymentSettingTableViewController: UITextFieldDelegate {
         }
     }
 
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let amount = textField.text.flatMap(Double.init) else {
+    func updateCurrentAmount(_ textField: UITextField) {
+        guard isViewLoaded, let amount = textField.text.flatMap(Double.init) else {
             return
         }
+
         currentAmount = currentCurrency.convert(toSubunit: amount)
         textField.text = amountFormatter.string(from: NSNumber(value: amount))
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        updateCurrentAmount(textField)
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        updateCurrentAmount(textField)
+        return true
     }
 }
 
@@ -451,4 +469,22 @@ extension PaymentSettingTableViewController {
             return nil
         }
     }
+}
+
+extension PaymentSettingTableViewController {
+    func updateAmountField() {
+        guard isViewLoaded else { return }
+
+        let numberOfDigits = Int(log10(Double(currentCurrency.factor)))
+        amountFormatter.minimumFractionDigits = numberOfDigits
+        amountFormatter.maximumFractionDigits = numberOfDigits
+
+        guard isViewLoaded else {
+            return
+        }
+        cell(for: currentCurrency)?.accessoryType = .checkmark
+
+        amountField.text = amountFormatter.string(from: NSNumber(value: currentCurrency.convert(fromSubunit: currentAmount)))
+    }
+
 }
