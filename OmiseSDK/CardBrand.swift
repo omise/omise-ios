@@ -105,25 +105,36 @@ public enum CardBrand: Int, CustomStringConvertible, Codable {
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        switch try container.decode(String.self) {
-        case "Visa":
-            self = .visa
-        case "MasterCard":
-            self = .masterCard
-        case "JCB":
-            self = .jcb
-        case "American Express":
-            self = .amex
-        case "Diners Club":
-            self = .diners
-        case "Discover":
-            self = .discover
-        case "Laser":
-            self = .laser
-        case "Maestro":
-            self = .maestro
-        default:
+        let stringValue = try container.decode(String.self)
+        if let cardBrand = CardBrand.from(string: stringValue) {
+            self = cardBrand
+        } else {
             throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid Card Brand value")
+        }
+    }
+}
+
+extension CardBrand {
+    static func from(string: String) -> CardBrand? {
+        switch string {
+        case "Visa":
+            return .visa
+        case "MasterCard":
+            return .masterCard
+        case "JCB":
+            return .jcb
+        case "American Express":
+            return .amex
+        case "Diners Club":
+            return .diners
+        case "Discover":
+            return .discover
+        case "Laser":
+            return .laser
+        case "Maestro":
+            return .maestro
+        default:
+            return nil
         }
     }
 }

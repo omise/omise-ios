@@ -415,6 +415,14 @@ public class CreditCardFormViewController: UIViewController, PaymentChooserUI, P
             object: nil
         )
 
+        // DEBUG
+        cardNumberTextField.text = "4761340000000076" // Challenge
+//        cardNumberTextField.text = "5362684181065006" // Frictionless
+        //        cardNumberTextField.text = "4012000000001089" // Frictionless failed
+        cardNameTextField.text = "Omise Test"
+        expiryDateTextField.text = "05/24"
+        secureCodeTextField.text = "123"
+
         updateSubmitButtonState()
     }
 

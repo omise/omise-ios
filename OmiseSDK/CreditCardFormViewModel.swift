@@ -68,6 +68,15 @@ class CreditCardFormViewModel: CreditCardFormViewModelProtocol, CountryListViewM
         let client = Client(publicKey: publicKey)
         client.send(request) { (result) in
             onComplete(result)
+
+            if let tokenID = try? result.get().id {
+                client.retrieveChargeStatusWithCompletionHandler(from: tokenID, completionHandler: { data in
+                    print(data)
+                })
+
+            }
+
+
         }
     }
 

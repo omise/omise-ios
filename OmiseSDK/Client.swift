@@ -67,6 +67,9 @@ import os
     /// - Returns: A new Request Task
     public func requestTask<T: CreatableObject>(with request: Request<T>, completionHandler: Request<T>.Callback?) -> RequestTask<T> {
         let dataTask = session.dataTask(with: buildURLRequest(for: request)) { (data, response, error) in
+            if let data = data {
+                print(String(data: data, encoding: .utf8))
+            }
             DispatchQueue.main.async {
                 Client.completeRequest(request, callback: completionHandler)(data, response, error)
             }
