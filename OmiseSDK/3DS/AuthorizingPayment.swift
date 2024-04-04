@@ -39,7 +39,16 @@ public class AuthorizingPayment {
     ) {
         self.completion = completion
         self.topViewController = topViewController
-        
+
+        guard url.absoluteString.contains("acs=true") else {
+            presentAuthPaymentController(
+                topViewController: topViewController,
+                url: url,
+                expectedReturnURL: expectedWebViewReturnURL
+            )
+            return
+        }
+
         NetceteraThreeDSController.sharedController.processAuthorizedURL(
             url,
             threeDSRequestorAppURL: deeplinkURL.absoluteString,
@@ -59,9 +68,11 @@ public class AuthorizingPayment {
                         completion(.cancel)
                     default:
                         DispatchQueue.main.async {
-                            self?.presentAuthPaymentController(topViewController: topViewController,
-                                                               url: url,
-                                                               expectedReturnURL: expectedWebViewReturnURL)
+                            self?.presentAuthPaymentController(
+                                topViewController: topViewController,
+                                url: url,
+                                expectedReturnURL: expectedWebViewReturnURL
+                            )
                         }
                     }
                 }
