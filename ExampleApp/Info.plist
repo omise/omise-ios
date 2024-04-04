@@ -37,5 +37,18 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>co.omise.ExampleApp</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>omiseExampleApp</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

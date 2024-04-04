@@ -1,13 +1,94 @@
+// Payment Methods
+"PaymentMethods.title" = "決済方法";
+"PaymentMethod.creditCard" = "クレジットカード";
+"PaymentMethod.installments" = "分割払い";
+"PaymentMethod.internetBanking" = "インターネットバンク";
+"PaymentMethod.mobileBanking" = "モバイルバンキング";
+"PaymentMethod.eContext.conbini" = "コンビニ";
+"PaymentMethod.eContext.payEasy" = "ペイジー";
+"PaymentMethod.eContext.netBanking" = "ネットバンク";
+
+// Source Types
+"SourceType.alipay" = "アリペイオンライン";
+"SourceType.alipay.footnote" = "(アリペイプラス)";
+"SourceType.bill_payment_tesco_lotus" = "ロータス";
+"SourceType.installment_bay" = "クルンシィ";
+"SourceType.installment_bbl" = "バンコク銀行";
+"SourceType.installment_first_choice" = "クルンシィ・ファーストチョイス";
+"SourceType.installment_kbank" = "カシコン銀行";
+"SourceType.installment_ktc" = "クルンタイカード";
+"SourceType.installment_scb" = "サイアム・コマーシャル銀行";
+"SourceType.installment_ttb" = "TMBタナチャート銀行";
+"SourceType.installment_uob" = "ユナイテッド・オーバーシーズ銀行";
+"SourceType.internet_banking_bay" = "アユタヤ銀行";
+"SourceType.internet_banking_bbl" = "バンコク銀行";
+"SourceType.paynow" = "PayNow";
+"SourceType.points_citi" = "Citi Rewardsポイント";
+"SourceType.promptpay" = "プロンプトペイ";
+"SourceType.truemoney" = "TrueMoneyウォレット";
+"SourceType.truemoney_jumpapp" = "TrueMoney";
+
+// Source Types without localization
+"SourceType.alipay_cn" = "アリペイ";
+"SourceType.alipay_hk" = "アリペイ香港";
+"SourceType.atome" = "Atome";
+"SourceType.barcode_alipay" = "Alipay In-Store";
+"SourceType.boost" = "Boost";
+"SourceType.dana" = "ダナ";
+"SourceType.duitnow_obw" = "DuitNow Online Banking/Wallets";
+"SourceType.duitnow_qr" = "DuitNow QR";
+"SourceType.fpx" = "FPX";
+"SourceType.gcash" = "ジーキャッシュ";
+"SourceType.grabpay" = "Grab";
+"SourceType.grabpay.footnote" = "(GrabPay and PayLater)";
+"SourceType.grabpay_rms" = "GrabPay";
+"SourceType.installment_mbb" = "メイバンク";
+"SourceType.kakaopay" = "カカオペイ";
+"SourceType.maybank_qr" = "Maybank QRPay";
+"SourceType.mobile_banking_bay" = "KMA";
+"SourceType.mobile_banking_bbl" = "Bualuang mBanking";
+"SourceType.mobile_banking_kbank" = "K PLUS";
+"SourceType.mobile_banking_ktb" = "Krungthai Next";
+"SourceType.mobile_banking_ocbc" = "OCBC Digital";
+"SourceType.mobile_banking_scb" = "SCB EASY";
+"SourceType.paypay" = "PayPay";
+"SourceType.rabbit_linepay" = "Rabbit LINE Pay";
+"SourceType.shopeepay" = "ShopeePay";
+"SourceType.shopeepay_jumpapp" = "ShopeePay";
+"SourceType.touch_n_go" = "タッチンゴー";
+"SourceType.touch_n_go_alipay_plus" = "TNG eWallet";
+"SourceType.wechat_pay" = "WeChat Pay";
+
 // Credit Card
 "CreditCard.field.country" = "国または地域";
 "CreditCard.field.address" = "住所";
-"CreditCard.field.city" = "市";
-"CreditCard.field.state" = "州";
-"CreditCard.field.postalCode" = "郵便番号";
 "CreditCard.field.address.error" = "住所は必須です";
+"CreditCard.field.city" = "市";
 "CreditCard.field.city.error" = "市が必要です";
+"CreditCard.field.state" = "州";
 "CreditCard.field.state.error" = "州が必要です";
+"CreditCard.field.postalCode" = "郵便番号";
 "CreditCard.field.postalCode.error" = "郵便番号が必要です";
+"CreditCard.field.cardNumber" = "カード番号";
+"CreditCard.field.nameOnCard" = "カード名義";
+"CreditCard.field.expiryDate" = "有効期限";
+"CreditCard.field.securityCode" = "セキュリティコード";
+"CreditCard.field.mmyy.placeholder" = "MM/YY";
+"CreditCard.payButton.title" = "支払う";
+
+"CreditCard.ccv.details.amex.text" = "カード表面の4桁の番号";
+"CreditCard.ccv.details.default.text" = "カード裏面の3桁の番号";
+
+// EContext
+"EContext.field.fullName" = "氏名";
+"EContext.field.email" = "メール";
+"EContext.field.phone" = "電話";
+"EContext.nextButton.title" = "次";
+
+// TrueMoney Wallet
+"TrueMoneyWallet.field.phoneNumber" = "電話";
+"TrueMoneyWallet.nextButton.title" = "次";
+"TrueMoneyWallet.label.pleaseInput.text" = "TrueMoney ウォレットアカウントに登録されている携帯電話番号を入力してください";
 
 // Atome
 "Atome.header.text" = "Atomeによるお支払いを完了させるには、以下の情報をご記入ください。";
@@ -32,48 +113,8 @@
 "Atome.field.street1.error" = "配送先の通り名が必要です";
 "Atome.field.optional" = "(任意)";
 
-/* A navigaiton title for the EContext screen when the `Konbini` is selected */
-"econtext.convenience-store.navigation-item.title" = "コンビニ";
+// FPX
+"fpx.bank-chooser.no-banks-available.text" = "銀行のリストを検索できません。後でもう一度お試しください。";
 
-/* A navigaiton title for the EContext screen when the `Net Bank` is selected */
-"econtext.netbanking.navigation-item.title" = "ネットバンク";
-
-/* A navigaiton title for the EContext screen when the `Pay-easy` is selected */
-"econtext.pay-easy.navigation-item.title" = "ペイジー";
-
-/* A navigation title for the choosing installment terms screen with the `Bangkok Bank` selected */
-"installment-number-of-terms-choosers.bay.navigation-item.title" = "バンコク銀行";
-
-/* A navigation title for the choosing installment terms screen with the `Krungsri` selected */
-"installment-number-of-terms-choosers.bbl.navigation-item.title" = "クルンシィ";
-
-/* A navigation title for the choosing installment terms screen with the `Installments Terms` selected */
-"installment-number-of-terms-choosers.default.navigation-item.title" = "分割払い条件";
-
-/* A navigation title for the choosing installment terms screen with the `Kasikorn` selected */
-"installment-number-of-terms-choosers.first-choice.navigation-item.title" = "カシコン";
-
-/* A navigation title for the choosing installment terms screen with the `KTC` selected */
-"installment-number-of-terms-choosers.k-bank.navigation-item.title" = "クルンタイカード";
-
-/* A navigation title for the choosing installment terms screen with the `Krungsri First Choice` selected */
-"installment-number-of-terms-choosers.ktc.navigation-item.title" = "クルンシィ・ファーストチョイス";
-
-/* A navigation title for the choosing installment terms screen with the `Siam Commercial Bank` selected */
-"installment-number-of-terms-choosers.scb.navigation-item.title" = "サイアム・コマーシャル銀行";
-
-/* Number of terms option text displayed as a title of the number of terms option cell in number of terms chooser scene */
-"installments.number-of-terms-chooser.number-of-terms-cell.label.text" = "%d 月々";
-
-/* A navigation title for the choosing installment terms screen with the `Citibank` selected */
-"installment-number-of-terms-choosers.citi.navigation-item.title" = "シティバンク";
-
-/* A navigation title for the choosing installment terms screen with the `TTB Bank` selected */
-"installment-number-of-terms-choosers.ttb.navigation-item.title" = "TMBタナチャート銀行";
-
-/* A navigation title for the choosing installment terms screen with the `UOB Bank` selected */
-"installment-number-of-terms-choosers.uob.navigation-item.title" = "ユナイテッド・オーバーシーズ銀行";
-
-"more-info.cvv-location.amex.text" = "カード表面の4桁の番号";
-"more-info.cvv-location.default.text" = "カード裏面の3桁の番号";
-
+// Authorizing Payment
+"AuthorizingPayment.title" = "決済の認可";
