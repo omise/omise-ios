@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ALK-ZP-CXg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ALK-ZP-CXg">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1575,7 +1576,7 @@
                         <viewControllerLayoutGuide type="bottom" id="rnF-ST-mfm"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ctw-dC-Dob">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="718"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1600,7 +1601,7 @@
                         <viewControllerLayoutGuide type="bottom" id="7O7-vN-x1O"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="uZR-T2-T31">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="718"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dcl-ay-c0h">
@@ -2899,7 +2900,7 @@
                         <viewControllerLayoutGuide type="bottom" id="3Fw-T7-ntI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xTN-Vq-ICj">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="718"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mEL-D2-2w4">
@@ -3632,6 +3633,35 @@
             <point key="canvasLocation" x="4977" y="1190"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="1JF-Jq-C50">
+            <size key="intrinsicContentSize" width="5" height="22"/>
+        </designable>
+        <designable name="1dv-2d-6Zi">
+            <size key="intrinsicContentSize" width="38" height="33"/>
+        </designable>
+        <designable name="AJd-kX-GAq">
+            <size key="intrinsicContentSize" width="5" height="22"/>
+        </designable>
+        <designable name="PBr-uW-pM8">
+            <size key="intrinsicContentSize" width="5" height="22"/>
+        </designable>
+        <designable name="Par-EA-T3D">
+            <size key="intrinsicContentSize" width="55.333333333333336" height="22"/>
+        </designable>
+        <designable name="Y1l-QK-aPc">
+            <size key="intrinsicContentSize" width="5" height="22"/>
+        </designable>
+        <designable name="ZPa-NN-y1M">
+            <size key="intrinsicContentSize" width="30" height="33"/>
+        </designable>
+        <designable name="mE3-3u-rvg">
+            <size key="intrinsicContentSize" width="38" height="33"/>
+        </designable>
+        <designable name="tI6-gP-6iQ">
+            <size key="intrinsicContentSize" width="38" height="33"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="5Dy-nJ-QYC"/>
     </inferredMetricsTieBreakers>
