@@ -4,6 +4,10 @@ public enum Environment {
     case dev(vaultURL: URL, apiURL: URL)
     case production
 
+    var netceteraConfigURL: URL {
+        return vaultBaseURL.appendingPathComponent("config")
+    }
+
     var tokenURL: URL {
         return vaultBaseURL.appendingPathComponent("tokens")
     }

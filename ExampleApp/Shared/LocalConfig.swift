@@ -12,7 +12,6 @@ import OmiseSDK
 struct LocalConfig: Codable {
     var publicKey: String = "pkey_"
     var devMode = false
-    var netceteraAPIKey: String = ""
     
     private let devVaultBaseURL: String?
     private let devApiBaseURL: String?

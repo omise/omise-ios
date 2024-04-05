@@ -25,8 +25,6 @@ class ProductDetailViewController: OMSBaseViewController {
                 print("Capability Country: \(capability.countryCode)")
             }
         }
-
-        AuthorizingPayment.shared.setAPIKey(LocalConfig.default.netceteraAPIKey)
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

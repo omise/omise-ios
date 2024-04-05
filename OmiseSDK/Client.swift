@@ -275,8 +275,8 @@ import os
 // MARK: - URL Request related methods
 extension Client {
     
-    private static let omiseAPIContentType = "application/json; charset=utf8"
-    private static let omiseAPIVersion = "2019-05-29"
+    static let omiseAPIContentType = "application/json; charset=utf8"
+    static let omiseAPIVersion = "2019-05-29"
     
     private func buildURLRequest<T: Object>(for request: Request<T>) -> URLRequest {
         var urlRequest = URLRequest(url: T.postURL)
@@ -310,7 +310,7 @@ extension Client {
         return urlRequest
     }
     
-    private static func encodeAuthorizationHeader(_ publicKey: String) -> String {
+    static func encodeAuthorizationHeader(_ publicKey: String) -> String {
         let data = publicKey.data(using: String.Encoding.utf8, allowLossyConversion: false)
         let base64 = data?.base64EncodedString()
         return "Basic \(base64 ?? "")"

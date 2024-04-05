@@ -1,11 +1,3 @@
-//
-//  NetceteraThreeDSController.swift
-//  OmiseSDK
-//
-//  Created by Andrei Solovev on 12/9/23.
-//  Copyright © 2023 Omise. All rights reserved.
-//
-
 // swiftlint:disable file_length
 
 import Foundation
@@ -32,6 +24,7 @@ struct AuthResponse: Codable {
         var acsTransID: String
         var acsSignedContent: String?
         var acsUIType: String?
+        var acsReferenceNumber: String?
     }
 
     var status: Status {
@@ -46,7 +39,6 @@ struct AuthResponse: Codable {
 
 protocol NetceteraThreeDSControllerProtocol: AnyObject {
     typealias NetceteraThreeDSControllerResult = Result<Void, Error>
-    func setAPIKey(_ apiKey: String) // Temporary POC Solution
     func appOpen3DSDeeplinkURL(_ url: URL) -> Bool
     func processAuthorizedURL(
         _ authorizeUrl: URL,
@@ -73,31 +65,6 @@ class NetceteraThreeDSController {
         case authResStatusUnknown(_ status: String)
     }
 
-    enum TestData {
-        case licenceKey
-        case certificate
-        case directoryServerId
-        case messageVersion
-        case acsRefNumber
-
-        var value: String {
-            switch self {
-            case .acsRefNumber: return "3DS_LOA_SDK_NEAG_020200_00528"
-            case .licenceKey: return
-                "eyJhbGciOiJSUzI1NiJ9.eyJ2ZXJzaW9uIjoyLCJ2YWxpZC11bnRpbCI6IjIwMjMtMDktMzAiLCJuYW1lIjoiT21pc2UiLCJtb2R1bGUiOiIzRFMifQ.XrTHC8r-7wLXwmBXpWj4Ln3evQoTrGThvuHlowICIWRiB3T7eZbDZUiO1ZR6zWbcIaM9RYi9j99tncK2FmWz9tbTcLJALwjZ3K5MGTEe5BgnSqrSH3Wo_OOFqB_6StWMjK_RkS41yV0RfppOAc2bLAneYUqyYM2ll35KvY3I9eG9_bMirerqWE3zot7B2ptsMvAVmNnLxdUDEJhkja_pPbkJgPXZuTOtFBFY0ZtVDSp8an-bGN5oyOeUrKkfFAAAefS0thmZhE-iBLj1pDkPJuPbOq3sDxYt55UMa7Jl4dzi-pzrxqbF_H43KVBtBmrQRAc2kTDdU24UxfwX1mjNrg"
-                // swiftlint:disable:previous line_length
-                
-            case .certificate: return """
-    MIIDbzCCAlegAwIBAgIJANp1aztdBEjBMA0GCSqGSIb3DQEBCwUAME4xCzAJBgNVBAMMAmNhMQ4wDAYDVQQKDAVPbWlzZTEQMA4GA1UEBwwHQmFuZ2tvazEQMA4GA1UECAwHQmFuZ2tvazELMAkGA1UEBhMCVEgwHhcNMTkwMzEzMDkxNzM4WhcNMzkwMzA4MDkxNzM4WjBOMQswCQYDVQQDDAJjYTEOMAwGA1UECgwFT21pc2UxEDAOBgNVBAcMB0Jhbmdrb2sxEDAOBgNVBAgMB0Jhbmdrb2sxCzAJBgNVBAYTAlRIMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAziN94YnR2/cihsFVa/CRpu3YfZMy6uQxwG3wc2nYOYFHAeB0mRsk8GpNKmjDdldpF1pIq6ALXznijXBI7qF0bEc0GlGNwmt1rl5rLUtlxVtWV+hzXDyICIXa1rsvxMEQEjalF+pZpLMPdsuIFJTvK8YE7j8uywahRpcsR7xVwtSG/GvT8mA2o5UmdmFa1UoUVNsA8FDsSqpTWPAcw+wEe2YO0Ct0A91txeo8x2GBW6qBWtHf0PmY6Aq9ZqOW3akoYxgoiOq+FwQX+OeQuYvyKvbKelU6WlDZO7jifebZG2wEm5+SoNEBBgyYAUGllWHeu2CQW6DAg4GnBIUZx8FE5wIDAQABo1AwTjAdBgNVHQ4EFgQUg9xOjam9pOesWFIieUY21dV2PGYwHwYDVR0jBBgwFoAUg9xOjam9pOesWFIieUY21dV2PGYwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAiaR2IUmLKDEn3ixHQJX2CzqVvtqdO0DrxIcnWp8Cmd2DIKjlX3Jw/v5ADKaAiO+7TIFpHfxZCB/oDFdji4YEXK6KUa+5pfOawuL3HXpQ48cLougmJjtwEAOdEZnCLNpYfMeqct7tNQxcm/qme1ewHOXZ9zz7+XfS5N4ExvdTV676/kcnAB1+Juc2Mo+t3kpLvTCpYUmWCANISRR8vTXX2pvqoiJq8lFujoqE41BbPVSVqV8pFZmrp4NKbZP6OmYbxjtVrTeMb1r2/J3jdXGg6LsNE0ouOU/XbEEA+Xpyrs2sUwUZMmiLN49Wz1YYZ2Xkh78gzaRiKCXfJYplDm/mDA==
-    """ // swiftlint:disable:previous line_length
-                
-            case .directoryServerId: return "A000000001"
-            case .messageVersion: return "2.1.0"
-            }
-        }
-    }
-
-    private var apiKey: String = ""
     static var sharedController: NetceteraThreeDSControllerProtocol = NetceteraThreeDSController()
     private static var uiCustomization: ThreeDSUICustomization?
 
@@ -105,22 +72,39 @@ class NetceteraThreeDSController {
     private var receiver: OmiseChallengeStatusReceiver?
     private var transaction: Transaction?
 
-    private func newScheme() -> Scheme {
-        let scheme = Scheme(name: "Mastercard")
-        scheme.ids = [TestData.directoryServerId.value]
-        scheme.logoImageName = "3ds_logo"
+    private func newScheme(config: NetceteraConfig) -> Scheme? {
+        let formattedCert = config.deviceInfoEncryptionCertPem.pemCertificate
 
-        scheme.encryptionKeyValue = TestData.certificate.value
-        scheme.rootCertificateValue = TestData.certificate.value
+        let scheme = Scheme(name: config.id)
+        scheme.ids = [config.directoryServerId]
+        scheme.encryptionKeyValue = formattedCert
+        scheme.rootCertificateValue = formattedCert
         return scheme
     }
 
-    private lazy var threeDS2Service: ThreeDS2ServiceSDK = {
+    func apiKey(config: NetceteraConfig) -> String {
+        guard let encryptedApiKey = Data(base64Encoded: config.key) else { return "" }
+        let decryptionKey = config.directoryServerId.sha512Data.subdata(in: 0..<32)
+
+        let iv = encryptedApiKey.subdata(in: 0..<16)
+        if let apiKey = encryptedApiKey.decryptAES256(key: decryptionKey, iv: iv) {
+            return String(data: apiKey, encoding: .utf8) ?? ""
+        } else {
+            return ""
+        }
+    }
+
+    func newService(config: NetceteraConfig) -> ThreeDS2ServiceSDK {
         let threeDS2Service = ThreeDS2ServiceSDK()
-        
+
         let configBuilder = ConfigurationBuilder()
         do {
-            try configBuilder.add(self.newScheme())
+            if let scheme = self.newScheme(config: config) {
+                try configBuilder.add(scheme)
+            } else {
+                print("Scheme wasn't created")
+            }
+            let apiKey = apiKey(config: config)
             try configBuilder.api(key: apiKey)
             try configBuilder.log(to: .info)
             let configParameters = configBuilder.configParameters()
@@ -139,38 +123,35 @@ class NetceteraThreeDSController {
         }
 
         return threeDS2Service
-    }()
-
-    typealias ErrorHandler = (String) -> Void
-    private func verifyWarnings(errorHandler: @escaping ErrorHandler) {
-        var sdkWarnings: [ThreeDS_SDK.Warning] = []
-        do {
-            sdkWarnings = try threeDS2Service.getWarnings()
-        } catch let error as NSError {
-            errorHandler(error.localizedDescription)
-        } catch {
-            errorHandler("ThreeDS SDK couldn't calculate warnings")
-        }
-        if !sdkWarnings.isEmpty {
-            var message = ""
-            for warning in sdkWarnings {
-                message += warning.getMessage()
-                message += "\n"
-            }
-            errorHandler(message)
-        }
     }
+
+//    typealias ErrorHandler = (String) -> Void
+//    private func verifyWarnings(errorHandler: @escaping ErrorHandler) {
+//        var sdkWarnings: [ThreeDS_SDK.Warning] = []
+//        do {
+//            sdkWarnings = try threeDS2Service.getWarnings()
+//        } catch let error as NSError {
+//            errorHandler(error.localizedDescription)
+//        } catch {
+//            errorHandler("ThreeDS SDK couldn't calculate warnings")
+//        }
+//        if !sdkWarnings.isEmpty {
+//            var message = ""
+//            for warning in sdkWarnings {
+//                message += warning.getMessage()
+//                message += "\n"
+//            }
+//            errorHandler(message)
+//        }
+//    }
 }
 
 extension NetceteraThreeDSController: NetceteraThreeDSControllerProtocol {
-    public func setAPIKey(_ key: String) {
-        self.apiKey = key
-    }
-
     public func appOpen3DSDeeplinkURL(_ url: URL) -> Bool {
         ThreeDSSDKAppDelegate.shared.appOpened(url: url)
     }
 
+    // swiftlint:disable:next function_body_length
     func processAuthorizedURL(
         _ authorizeUrl: URL,
         threeDSRequestorAppURL: String?,
@@ -182,65 +163,79 @@ extension NetceteraThreeDSController: NetceteraThreeDSControllerProtocol {
             Self.uiCustomization = uiCustomization
         }
 
-        do {
-            let transaction = try self.newTransaction()
-            let authParams = try transaction.getAuthenticationRequestParameters()
+        // swiftlint:disable:next closure_body_length
+        netceteraConfig(authUrl: authorizeUrl) { [weak self] result in
+            guard let self = self else { return }
 
-            guard let deviceInfo = DeviceInformation.deviceInformation(sdkAppId: authParams.getSDKAppID(), sdkVersion: "1.0") else {
-                onComplete(.failure(NetceteraThreeDSController.Errors.deviceInfoInvalid))
-                return
+            switch result {
+            case .failure(let error):
+                onComplete(.failure(error))
+            case .success(let config):
+                do {
+                    let threeDS2Service = self.newService(config: config)
+                    let transaction = try threeDS2Service.createTransaction(
+                        directoryServerId: config.directoryServerId,
+                        messageVersion: config.messageVersion
+                    )
+                    let authParams = try transaction.getAuthenticationRequestParameters()
+
+                    guard let deviceInfo = DeviceInformation.deviceInformation(sdkAppId: authParams.getSDKAppID(), sdkVersion: "1.0") else {
+                        onComplete(.failure(NetceteraThreeDSController.Errors.deviceInfoInvalid))
+                        return
+                    }
+
+                    try self.sendAuthenticationRequest(
+                        deviceInfo: deviceInfo,
+                        transaction: transaction,
+                        authorizeUrl: authorizeUrl) { response in
+                            guard let response = response else {
+                                onComplete(.failure(NetceteraThreeDSController.Errors.authResInvalid))
+                                return
+                            }
+
+                            switch response.status {
+                            case .success:
+                                onComplete(.success(()))
+                                return
+                            case .failed:
+                                onComplete(.failure(NetceteraThreeDSController.Errors.authResStatusFailed))
+                                return
+                            case .unknown:
+                                onComplete(.failure(NetceteraThreeDSController.Errors.authResStatusUnknown(response.serverStatus)))
+                                return
+                            case .challenge:
+                                break
+                            }
+
+                            DispatchQueue.main.async {
+                                do {
+                                    try self.presentChallenge(
+                                        authResponse: response,
+                                        threeDSRequestorAppURL: threeDSRequestorAppURL,
+                                        transaction: transaction,
+                                        from: viewController,
+                                        onComplete: onComplete
+                                    )
+                                } catch {
+                                    onComplete(.failure(error))
+                                }
+                            }
+                    }
+                } catch {
+                    onComplete(.failure(error))
+                }
             }
-
-            try self.sendAuthenticationRequest(
-                deviceInfo: deviceInfo,
-                transaction: transaction,
-                authorizeUrl: authorizeUrl) { response in
-                    guard let response = response else {
-                        onComplete(.failure(NetceteraThreeDSController.Errors.authResInvalid))
-                        return
-                    }
-
-                    switch response.status {
-                    case .success:
-                        onComplete(.success(()))
-                        return
-                    case .failed:
-                        onComplete(.failure(NetceteraThreeDSController.Errors.authResStatusFailed))
-                        return
-                    case .unknown:
-                        onComplete(.failure(NetceteraThreeDSController.Errors.authResStatusUnknown(response.serverStatus)))
-                        return
-                    case .challenge:
-                        break
-                    }
-
-                    DispatchQueue.main.async {
-                        do {
-                            try self.presentChallenge(
-                                authResponse: response,
-                                threeDSRequestorAppURL: threeDSRequestorAppURL,
-                                transaction: transaction,
-                                from: viewController,
-                                onComplete: onComplete
-                            )
-                        } catch {
-                            onComplete(.failure(error))
-                        }
-                    }
-            }
-        } catch {
-            onComplete(.failure(error))
         }
     }
 
     func prepareChallengeParameters(
         aRes: AuthResponse.ARes,
-        acsRefNumber: String,
         threeDSRequestorAppURL: String?
     ) -> ChallengeParameters {
         let serverTransactionID = aRes.threeDSServerTransID
         let acsTransactionID = aRes.acsTransID
         let acsSignedContent = aRes.acsSignedContent
+        let acsRefNumber = aRes.acsReferenceNumber
 
         let challengeParameters = ChallengeParameters(
             threeDSServerTransactionID: serverTransactionID,
@@ -257,15 +252,6 @@ extension NetceteraThreeDSController: NetceteraThreeDSControllerProtocol {
 }
 
 private extension NetceteraThreeDSController {
-    func newTransaction() throws -> Transaction {
-        let transaction = try threeDS2Service.createTransaction(
-            directoryServerId: TestData.directoryServerId.value,
-            messageVersion: TestData.messageVersion.value
-        )
-
-        return transaction
-    }
-
     func sendAuthenticationRequest(deviceInfo: String, transaction: Transaction, authorizeUrl: URL, onAuthResponse: @escaping (AuthResponse?) -> Void ) throws {
         let authParams = try transaction.getAuthenticationRequestParameters()
         let body =
@@ -324,7 +310,6 @@ private extension NetceteraThreeDSController {
 
         let challengeParameters = prepareChallengeParameters(
             aRes: aRes,
-            acsRefNumber: TestData.acsRefNumber.value,
             threeDSRequestorAppURL: threeDSRequestorAppURL
         )
 
@@ -402,4 +387,22 @@ extension URL {
         // Returns the url from new url components
         return urlComponents.url
     }
+}
+
+extension NetceteraThreeDSController {
+    func netceteraConfig(authUrl: URL, completion: @escaping (Result<NetceteraConfig, Error>) -> Void) {
+        guard
+            let configURLString = Client.modifyURL(authUrl.absoluteString, withNewEndpoint: "config"),
+            let url = URL(string: configURLString) else {
+            struct URLError: Error {}
+            completion(.failure(URLError()))
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "GET"
+        Client.send(session: URLSession.shared, urlRequest: request, dateFormatter: nil, completion: completion)
+    }
+
 }
