@@ -12,10 +12,20 @@ extension SourceType {
             .installmentSCB,
             .installmentTTB,
             .installmentUOB
+        ] + whiteLabelInstallments
+    }
+
+    public static var whiteLabelInstallments: [SourceType] {
+        [
+            .installmentWhiteLabelKTC
         ]
     }
 
     var isInstallment: Bool {
         Self.installments.contains(self)
+    }
+
+    var isWhiteLabelInstallment: Bool {
+        Self.whiteLabelInstallments.contains(self)
     }
 }

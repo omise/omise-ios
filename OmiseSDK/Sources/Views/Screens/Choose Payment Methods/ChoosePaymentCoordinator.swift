@@ -69,8 +69,8 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
     }
 
     /// Creates Credit Carc Payment screen and attach current flow object inside created controller to be deallocated together
-    func createCreditCardPaymentController() -> CreditCardPaymentController {
-        let viewModel = CreditCardPaymentViewModel(currentCountry: currentCountry, delegate: self)
+    func createCreditCardPaymentController(paymentType: CreditCardPaymentOption = .card) -> CreditCardPaymentController {
+        let viewModel = CreditCardPaymentViewModel(currentCountry: currentCountry, paymentType: paymentType, delegate: self)
         let viewController = CreditCardPaymentController(nibName: nil, bundle: .omiseSDK)
         viewController.viewModel = viewModel
         viewController.title = PaymentMethod.creditCard.localizedTitle
@@ -105,10 +105,16 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
 
     /// Creates Installement screen and attach current flow object inside created controller to be deallocated together
     func createInstallmentController() -> SelectPaymentController {
-        let sourceTypes = client.latestLoadedCapability?.availableSourceTypes(SourceType.installments)
+        var sourceTypes = client.latestLoadedCapability?.availableSourceTypes(SourceType.installments) ?? []
+
+        // Remove .installmentKTC if .installmentWhiteLabelKTC is present
+        if sourceTypes.contains(.installmentWhiteLabelKTC) {
+            sourceTypes.removeAll { $0 == .installmentKTC }
+        }
+
         let viewModel = SelectSourceTypePaymentViewModel(
             title: PaymentMethod.installment.localizedTitle,
-            sourceTypes: sourceTypes ?? [],
+            sourceTypes: sourceTypes,
             delegate: self
         )
 
@@ -191,10 +197,19 @@ extension ChoosePaymentCoordinator: FPXPaymentFormControllerDelegate {
 }
 
 extension ChoosePaymentCoordinator: CreditCardPaymentDelegate {
-    func didSelectCardPayment(_ card: CreateTokenPayload.Card, completion: @escaping () -> Void) {
-        processPayment(card, completion: completion)
+    func didSelectCardPayment(
+        paymentType: CreditCardPaymentOption,
+        card: CreateTokenPayload.Card,
+        completion: @escaping () -> Void
+    ) {
+        switch paymentType {
+        case .card:
+            processPayment(card, completion: completion)
+        case .whiteLabelInstallment(let payment):
+            processWhiteLabelInstallmentPayment(payment, card: card, completion: completion)
+        }
     }
-
+    
     func didCancelCardPayment() {
         didCancelPayment()
     }
@@ -249,6 +264,12 @@ extension ChoosePaymentCoordinator: SelectSourceTypeDelegate {
 
 extension ChoosePaymentCoordinator: SelectSourcePaymentDelegate {
     func didSelectSourcePayment(_ payment: Source.Payment, completion: @escaping () -> Void) {
-        processPayment(payment, completion: completion)
+        if payment.sourceType.isWhiteLabelInstallment {
+            navigate(to: createCreditCardPaymentController(
+                paymentType: .whiteLabelInstallment(payment: payment)
+            ))
+        } else {
+            processPayment(payment, completion: completion)
+        }
     }
 }

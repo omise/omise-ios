@@ -64,6 +64,8 @@ extension SourceType: ViewPresentable {
             return "TMBThanachart Bank"
         case .installmentUOB:
             return "United Overseas Bank"
+        case .installmentWhiteLabelKTC:
+            return "Krungthai Card (KTC)"
         case .internetBankingBAY:
             return "Bank of Ayudhya"
         case .internetBankingBBL:
@@ -151,7 +153,7 @@ extension SourceType: ViewPresentable {
             return "First Choice"
         case .installmentKBank:
             return "KBANK"
-        case .installmentKTC:
+        case .installmentKTC, .installmentWhiteLabelKTC:
             return "KTC"
         case .installmentMBB:
             return "FPX/maybank"

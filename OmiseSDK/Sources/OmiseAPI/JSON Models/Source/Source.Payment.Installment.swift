@@ -50,7 +50,7 @@ extension Source.Payment.Installment {
             return [ 4, 6, 8, 9, 10 ]
         case .installmentMBB:
             return [ 6, 12, 18, 24 ]
-        case .installmentKTC:
+        case .installmentKTC, .installmentWhiteLabelKTC:
             return [ 3, 4, 5, 6, 7, 8, 9, 10 ]
         case .installmentKBank:
             return [ 3, 4, 6, 10 ]
