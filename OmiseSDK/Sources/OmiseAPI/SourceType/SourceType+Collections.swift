@@ -22,7 +22,6 @@ extension SourceType {
         .installmentUOB,
         .promptPay,
         .trueMoneyWallet,
-        .pointsCiti,
         .shopeePayJumpApp
     ]
 
