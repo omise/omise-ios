@@ -88,8 +88,6 @@ extension SourceType: ViewPresentable {
             return "PayNow"
         case .payPay:
             return "PayPay"
-        case .pointsCiti:
-            return "Pay with Citi Rewards Points"
         case .promptPay:
             return "PromptPay"
         case .rabbitLinepay:
@@ -185,8 +183,6 @@ extension SourceType: ViewPresentable {
             return "PayNow"
         case .payPay:
             return "PayPay"
-        case .pointsCiti:
-            return "CitiBank"
         case .promptPay:
             return "PromptPay"
         case .rabbitLinepay:

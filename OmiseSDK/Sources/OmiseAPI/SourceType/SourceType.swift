@@ -75,8 +75,6 @@ public enum SourceType: String, Codable, CaseIterable {
     case payNow = "paynow"
     /// PayPay  https://docs.opn.ooo/paypay
     case payPay = "paypay"
-    /// Pay with Points https://docs.opn.ooo/pay-with-points
-    case pointsCiti = "points_citi"
     /// PromptPay   https://docs.opn.ooo/promptpay
     case promptPay = "promptpay"
     /// Rabbit LINE Pay https://docs.opn.ooo/rabbit-linepay

@@ -34,7 +34,6 @@ class PaymentChooserViewControllerTests: XCTestCase {
         .touchNGoAlipayPlus,
         .trueMoneyWallet,
         .trueMoneyJumpApp,
-        .pointsCiti,
         .fpx,
         .mobileBankingKBank,
         .rabbitLinepay,
