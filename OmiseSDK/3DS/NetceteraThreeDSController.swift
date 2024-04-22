@@ -83,6 +83,8 @@ class NetceteraThreeDSController {
     }
 
     func apiKey(config: NetceteraConfig) -> String {
+        return "9a607320-f11d-43ed-abb0-41a1557522cd"
+        
         guard let encryptedApiKey = Data(base64Encoded: config.key) else { return "" }
         let decryptionKey = config.directoryServerId.sha512Data.subdata(in: 0..<32)
 
@@ -177,12 +179,8 @@ extension NetceteraThreeDSController: NetceteraThreeDSControllerProtocol {
                         directoryServerId: config.directoryServerId,
                         messageVersion: config.messageVersion
                     )
-                    let authParams = try transaction.getAuthenticationRequestParameters()
-
-                    guard let deviceInfo = DeviceInformation.deviceInformation(sdkAppId: authParams.getSDKAppID(), sdkVersion: "1.0") else {
-                        onComplete(.failure(NetceteraThreeDSController.Errors.deviceInfoInvalid))
-                        return
-                    }
+                    
+                    let deviceInfo = try transaction.getAuthenticationRequestParameters().getDeviceData()
 
                     try self.sendAuthenticationRequest(
                         deviceInfo: deviceInfo,
@@ -263,7 +261,7 @@ private extension NetceteraThreeDSController {
                 "sdkMaxTimeout": 5,
                 "sdkTransID": "\(authParams.getSDKTransactionId())"
               },
-              "device_info": \(deviceInfo),
+              "encrypted_device_info": "\(deviceInfo)",
               "device_type": "iOS"
             }
 """

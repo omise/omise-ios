@@ -19,6 +19,6 @@ extension NetceteraConfig: Decodable {
         case deviceInfoEncryptionCertPem = "device_info_encryption_cert_pem"
         case directoryServerId = "directory_server_id"
         case key
-        case messageVersion = "messageVersion"
+        case messageVersion = "message_version"
     }
 }
