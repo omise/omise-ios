@@ -24,21 +24,6 @@ extension Source.Payment.Installment: Codable {
 }
 
 extension Source.Payment.Installment {
-    /// List of sourceTypes belongs to Installment payment type
-    public static var sourceTypes: [SourceType] {
-        [
-            .installmentBAY,
-            .installmentBBL,
-            .installmentFirstChoice,
-            .installmentKBank,
-            .installmentKTC,
-            .installmentMBB,
-            .installmentSCB,
-            .installmentTTB,
-            .installmentUOB
-        ]
-    }
-
     /// Available Installments terms (months) for given sourceType
     public static func availableTerms(for sourceType: SourceType) -> [Int] {
         switch sourceType {
@@ -50,7 +35,7 @@ extension Source.Payment.Installment {
             return [ 4, 6, 8, 9, 10 ]
         case .installmentMBB:
             return [ 6, 12, 18, 24 ]
-        case .installmentKTC:
+        case .installmentKTC, .installmentWhiteLabelKTC:
             return [ 3, 4, 5, 6, 7, 8, 9, 10 ]
         case .installmentKBank:
             return [ 3, 4, 6, 10 ]

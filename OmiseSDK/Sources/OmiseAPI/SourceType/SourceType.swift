@@ -50,6 +50,8 @@ public enum SourceType: String, Codable, CaseIterable {
     case installmentTTB = "installment_ttb"
     /// United Overseas Bank (UOB)   https://docs.opn.ooo/installment-payments
     case installmentUOB = "installment_uob"
+    /// Krungthai Card (KTC)  https://docs.opn.ooo/installment-white-label-payments
+    case installmentWhiteLabelKTC = "installment_wlb_ktc"
     /// Bank of Ayudhya (Krungsri)   https://docs.opn.ooo/internet-banking
     case internetBankingBAY = "internet_banking_bay"
     /// Bangkok Bank   https://docs.opn.ooo/internet-banking

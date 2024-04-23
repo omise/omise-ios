@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/omise/omise-ios.git",
       "state" : {
-        "branch" : "feature/v5_refactoring",
-        "revision" : "a59269f3d734ebc17d8e717b5c03b17d5d67a679"
+        "branch" : "feature/MIT-1904",
+        "revision" : "0ed8ce39701b08433a2d5c0a678e95edd8b2b8ef"
       }
     }
   ],

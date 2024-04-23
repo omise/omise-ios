@@ -1,26 +1,6 @@
 import Foundation
 import UIKit
 
-/// Omise Payment delegate protocol is required to process payment results
-public protocol ChoosePaymentMethodDelegate: AnyObject {
-    func choosePaymentMethodDidComplete(with source: Source)
-    func choosePaymentMethodDidComplete(with token: Token)
-    func choosePaymentMethodDidComplete(with error: Error)
-    func choosePaymentMethodDidCancel()
-}
-
-/// Payment Results
-public enum PaymentResult {
-    /// Payment completed with Card payment and contains Token object
-    case token(Token)
-    /// Payment completed with Source payment and contains Source object
-    case source(Source)
-    /// Payment completed with Error
-    case error(Error)
-    /// Payment was cancelled by user
-    case cancel
-}
-
 public class OmiseSDK {
     /// Static container that allows to assign a shared instance of OmiseSDK to be used as a Singleton object
     public static var shared = OmiseSDK(publicKey: "pkey_")

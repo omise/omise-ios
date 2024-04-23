@@ -20,6 +20,7 @@
 "SourceType.installment_scb" = "Siam Commercial Bank";
 "SourceType.installment_ttb" = "TMBThanachart Bank";
 "SourceType.installment_uob" = "United Overseas Bank";
+"SourceType.installment_wlb_ktc" = "KTC";
 "SourceType.internet_banking_bay" = "Bank of Ayudhya";
 "SourceType.internet_banking_bbl" = "Bangkok Bank";
 "SourceType.paynow" = "PayNow";
