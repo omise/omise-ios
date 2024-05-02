@@ -2,6 +2,7 @@
 
 import Foundation
 import ThreeDS_SDK
+import CommonCrypto
 
 struct AuthResponse: Codable {
     var serverStatus: String
@@ -52,7 +53,8 @@ protocol NetceteraThreeDSControllerProtocol: AnyObject {
 class NetceteraThreeDSController {
 
     enum Errors: Error {
-        case deviceInfoInvalid
+        case configInvalid
+        case apiKeyInvalid
         case cancelled
         case timedout
         case presentChallenge(error: Error)
@@ -82,17 +84,31 @@ class NetceteraThreeDSController {
         return scheme
     }
 
-    func apiKey(config: NetceteraConfig) -> String {
-        return "9a607320-f11d-43ed-abb0-41a1557522cd"
-        
-        guard let encryptedApiKey = Data(base64Encoded: config.key) else { return "" }
-        let decryptionKey = config.directoryServerId.sha512Data.subdata(in: 0..<32)
+func apiKey(config: NetceteraConfig) throws -> String {
+        let decryptionKey = config.directoryServerId.sha512.subdata(in: 0..<32)
 
-        let iv = encryptedApiKey.subdata(in: 0..<16)
-        if let apiKey = encryptedApiKey.decryptAES256(key: decryptionKey, iv: iv) {
-            return String(data: apiKey, encoding: .utf8) ?? ""
+        guard let ciphertext = Data(base64Encoded: config.key) else {
+            throw Errors.configInvalid
+        }
+
+        let iv = ciphertext.subdata(in: 0..<16)
+        let ciphertextWithoutIV = ciphertext.subdata(in: 16..<ciphertext.count)
+
+        let encrypted = try cryptData(
+            ciphertextWithoutIV,
+            operation: CCOperation(kCCDecrypt),
+            mode: CCMode(kCCModeCTR),
+            algorithm: CCAlgorithm(kCCAlgorithmAES),
+            padding: CCPadding(ccNoPadding),
+            keyLength: kCCKeySizeAES256,
+            iv: iv,
+            key: decryptionKey
+        )
+
+        if let apiKey = String(data: encrypted, encoding: .utf8) {
+            return apiKey
         } else {
-            return ""
+            throw Errors.apiKeyInvalid
         }
     }
 
@@ -106,7 +122,7 @@ class NetceteraThreeDSController {
             } else {
                 print("Scheme wasn't created")
             }
-            let apiKey = apiKey(config: config)
+            let apiKey = try apiKey(config: config)
             try configBuilder.api(key: apiKey)
             try configBuilder.log(to: .info)
             let configParameters = configBuilder.configParameters()

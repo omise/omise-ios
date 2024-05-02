@@ -32,7 +32,6 @@ class NetceteraThreeDSControllerTests: XCTestCase {
         for (url, result) in tests {
             let params = netceteraController.prepareChallengeParameters(
                 aRes: aRes,
-                acsRefNumber: "123",
                 threeDSRequestorAppURL: url
             )
             XCTAssertEqual(params.getThreeDSRequestorAppURL(), result)

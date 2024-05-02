@@ -236,7 +236,7 @@ class AuthorizingPaymentTests: XCTestCase {
         waitForExpectations(timeout: timeout, handler: nil)
     }
 
-    func testWebViewOn3DSDeviceInfoInvalid() {
+    func testWebViewOn3DSApiKeyInvalid() {
         let expectation = self.expectation(description: "callback")
 
         topViewController.onPresentViewController = { viewController in
@@ -245,7 +245,7 @@ class AuthorizingPaymentTests: XCTestCase {
             XCTAssertTrue(presentedVC is AuthorizingPaymentWebViewController)
         }
 
-        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.deviceInfoInvalid)
+        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.apiKeyInvalid)
         authorizingPayment.presentAuthPaymentController(
             from: topViewController,
             url: authorizeURL,
