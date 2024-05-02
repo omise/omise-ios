@@ -125,12 +125,12 @@ extension ProductDetailViewController: ChoosePaymentMethodDelegate {
         omiseSDK.dismiss()
     }
 
-    func choosePaymentMethodDidComplete(with whiteLabelInstallmentSource: Source, token: Token) {
-        print("White-label installment payment Token is created with id '\(token.id)', Source id: '\(whiteLabelInstallmentSource.id)'")
+    func choosePaymentMethodDidComplete(with source: Source, token: Token) {
+        print("White-label installment payment Token is created with id '\(token.id)', Source id: '\(source.id)'")
         omiseSDK.dismiss {
             let alertController = UIAlertController(
                 title: "Token & Source Created",
-                message: "A token with id of \(token.id) and source with id of \(whiteLabelInstallmentSource.id) was successfully created. Please send this id to server to create a charge.",
+                message: "A token with id of \(token.id) and source with id of \(source.id) was successfully created. Please send this id to server to create a charge.",
                 preferredStyle: .alert
             )
             let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
