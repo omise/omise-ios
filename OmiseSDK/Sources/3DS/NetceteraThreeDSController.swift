@@ -276,12 +276,10 @@ private extension NetceteraThreeDSController {
             do {
                 let decoder = JSONDecoder()
                 let response = try decoder.decode(AuthResponse.self, from: data)
-                print(response)
                 onAuthResponse(response)
 
             } catch {
                 onAuthResponse(nil)
-                print(error)
             }
 
         }
