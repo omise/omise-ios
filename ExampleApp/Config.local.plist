@@ -3,21 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>publicKey</key>
-	<string>pkey_5unb23qvo9l4x3onvym</string>
-	<key>devMode</key>
-	<true/>
-	<key>devVaultBaseURL</key>
-	<string>https://vault.staging-omise.co</string>
-	<key>devApiBaseURL</key>
-	<string>https://api.staging-omise.co</string>
-	<key>pk_anna</key>
-	<string>pkey_5unb23qvo9l4x3onvym</string>
-	<key>PKeys</key>
-	<dict>
-		<key>pkey_5unb23qvo9l4x3onvym</key>
-		<string>skey_5ushbvxvvcvkrfd2cnw</string>
-	</dict>
-	<key>netceteraAPIKey</key>
-	<string>9a607320-f11d-43ed-abb0-41a1557522cd</string>
+	<string>pkey_</string>
 </dict>
 </plist>
