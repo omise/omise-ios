@@ -56,12 +56,11 @@ class ProductDetailViewController: BaseViewController {
                   let text = textField.text,
                   let url = URL(string: text) else { return }
 
-            let deeplinkRedirectURLPattern = AppDeeplink.threeDSChallenge.urlString
-            let webRedirectURLPattern = "https://exampleapp.opn.ooo"
             self.omiseSDK.presentAuthorizingPayment(
                 from: self,
                 authorizeURL: url,
-                returnURLs: [deeplinkRedirectURLPattern, webRedirectURLPattern],
+                expectedReturnURLPatterns: ["https://omise.co"],
+                threeDSRequestorAppURLString: AppDeeplink.threeDSChallenge.urlString,
                 delegate: self
             )
         })
@@ -71,13 +70,12 @@ class ProductDetailViewController: BaseViewController {
 
 // MARK: - Authorizing Payment View Controller Delegate
 
-extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate {
-    func authorizingPaymentViewController(_ viewController: AuthorizingPaymentViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL) {
-        print("Payment is authorized with redirect url `\(redirectedURL)`")
+extension ProductDetailViewController: AuthorizingPaymentDelegate {
+    func authorizingPaymentDidComplete(with redirectedURL: URL?) {
+        print("Payment is authorized with redirect url `\(String(describing: redirectedURL))`")
         omiseSDK.dismiss()
     }
-    
-    func authorizingPaymentViewControllerDidCancel(_ viewController: AuthorizingPaymentViewController) {
+    func authorizingPaymentDidCancel() {
         omiseSDK.dismiss()
     }
 }

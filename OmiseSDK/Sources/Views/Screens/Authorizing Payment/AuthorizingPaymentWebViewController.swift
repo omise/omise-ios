@@ -2,17 +2,6 @@ import Foundation
 import WebKit
 import os
 
-@available(iOSApplicationExtension, unavailable)
-public protocol AuthorizingPaymentViewControllerDelegate: AnyObject {
-    /// A delegation method called when the authorizing payment process is completed.
-    /// - parameter viewController: The authorizing payment controller that call this method.
-    /// - parameter redirectedURL: A URL returned from the authorizing payment process.
-    func authorizingPaymentViewController(_ viewController: AuthorizingPaymentViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL)
-    
-    /// A delegation method called when user cancel the authorizing payment process.
-    func authorizingPaymentViewControllerDidCancel(_ viewController: AuthorizingPaymentViewController)
-}
-
 /*:
  Drop-in authorizing payment handler view controller that automatically display the authorizing payment verification form
  which supports `3DS`, `Internet Banking` and other offsite payment methods those need to be authorized via a web browser.
@@ -21,7 +10,7 @@ public protocol AuthorizingPaymentViewControllerDelegate: AnyObject {
    This is still an experimental API. If you encountered with any problem with this API, please feel free to report to Omise.
  */
 @available(iOSApplicationExtension, unavailable)
-public class AuthorizingPaymentViewController: UIViewController {
+class AuthorizingPaymentWebViewController: UIViewController {
     /// Authorize URL given from Omise in the created `Charge` object.
     var authorizeURL: URL? {
         didSet {
@@ -33,21 +22,25 @@ public class AuthorizingPaymentViewController: UIViewController {
         }
     }
     
+    enum CompletionState {
+        case complete(redirectedURL: URL?)
+        case cancel
+    }
+
     /// The expected return URL patterns described in the URLComponents object.
     ///
     /// The rule is the scheme and host must be matched and must have the path as a prefix.
     /// Example: if the return URL is `https://www.example.com/products/12345` the expected return URL should have a URLComponents with scheme of `https`, host of `www.example.com` and the path of `/products/`
     var expectedReturnURLPatterns: [URLComponents] = []
     
-    /// A delegate object that will recieved the authorizing payment events.
-    weak var delegate: AuthorizingPaymentViewControllerDelegate?
-    
+    var completion: ParamClosure<CompletionState>?
+
     let webView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration())
     let okButtonTitle = NSLocalizedString("OK", comment: "OK button for JavaScript panel")
     let confirmButtonTitle = NSLocalizedString("Confirm", comment: "Confirm button for JavaScript panel")
     let cancelButtonTitle = NSLocalizedString("Cancel", comment: "Cancel button for JavaScript panel")
 
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         webView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(webView)
@@ -68,15 +61,16 @@ public class AuthorizingPaymentViewController: UIViewController {
         navigationItem.rightBarButtonItem = cancelButtonItem
     }
     
-    public override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         startAuthorizingPaymentProcess()
     }
     
     @IBAction private func cancelAuthorizingPaymentProcess(_ sender: UIBarButtonItem) {
         os_log("Authorization process was cancelled, trying to notify the delegate", log: uiLogObject, type: .info)
-        delegate?.authorizingPaymentViewControllerDidCancel(self)
-        if delegate == nil {
+        if let completion = completion {
+            completion(.cancel)
+        } else {
             os_log("Authorization process was cancelled but no delegate to be notified", log: uiLogObject, type: .default)
         }
     }
@@ -106,7 +100,7 @@ public class AuthorizingPaymentViewController: UIViewController {
 }
 
 @available(iOSApplicationExtension, unavailable)
-extension AuthorizingPaymentViewController: WKNavigationDelegate {
+extension AuthorizingPaymentWebViewController: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         if let url = navigationAction.request.url, verifyPaymentURL(url) {
             os_log("Redirected to expected %{private}@ URL, trying to notify the delegate",
@@ -114,8 +108,8 @@ extension AuthorizingPaymentViewController: WKNavigationDelegate {
                    type: .info,
                    url.absoluteString)
             decisionHandler(.cancel)
-            delegate?.authorizingPaymentViewController(self, didCompleteAuthorizingPaymentWithRedirectedURL: url)
-            if delegate == nil {
+            completion?(.complete(redirectedURL: url))
+            if completion == nil {
                 os_log("Redirected to expected %{private}@ URL but no delegate to be notified",
                        log: uiLogObject,
                        type: .default,
@@ -140,7 +134,7 @@ extension AuthorizingPaymentViewController: WKNavigationDelegate {
 }
 
 @available(iOSApplicationExtension, unavailable)
-extension AuthorizingPaymentViewController: WKUIDelegate {
+extension AuthorizingPaymentWebViewController: WKUIDelegate {
     public func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
 
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
@@ -151,7 +145,7 @@ extension AuthorizingPaymentViewController: WKUIDelegate {
         
         alertController.addAction(okAction)
         
-        // NOTE: Must present an UIAlertController on AuthorizingPaymentViewController
+        // NOTE: Must present an UIAlertController on AuthorizingPaymentWebViewController
         self.present(alertController, animated: true)
     }
     
@@ -168,7 +162,7 @@ extension AuthorizingPaymentViewController: WKUIDelegate {
         alertController.addAction(confirmAction)
         alertController.addAction(cancelAction)
 
-        // NOTE: Must present an UIAlertController on AuthorizingPaymentViewController
+        // NOTE: Must present an UIAlertController on AuthorizingPaymentWebViewController
         self.present(alertController, animated: true, completion: nil)
     }
     
@@ -191,7 +185,7 @@ extension AuthorizingPaymentViewController: WKUIDelegate {
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)
         
-        // NOTE: Must present an UIAlertController on AuthorizingPaymentViewController
+        // NOTE: Must present an UIAlertController on AuthorizingPaymentWebViewController
         self.present(alertController, animated: true, completion: nil)
     }
 }

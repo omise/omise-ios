@@ -171,6 +171,14 @@ class CreditCardPaymentController: UIViewController {
 
         contentView.adjustContentInsetOnKeyboardAppear()
 
+        // TODO: Remove
+        cardNumberTextField.text = "4761340000000076" // Challenge
+        //        cardNumberTextField.text = "5362684181065006" // Frictionless
+        //        cardNumberTextField.text = "4012000000001089" // Frictionless failed
+        cardNameTextField.text = "Omise Test"
+        expiryDateTextField.text = "05/24"
+        secureCodeTextField.text = "123"
+
         if let viewModel = viewModel {
             bind(to: viewModel)
         }
