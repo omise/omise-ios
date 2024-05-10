@@ -21,6 +21,9 @@
 "SourceType.installment_ttb" = "TMBタナチャート銀行";
 "SourceType.installment_uob" = "ユナイテッド・オーバーシーズ銀行";
 "SourceType.installment_wlb_ktc" = "クルンタイカード";
+"SourceType.installment_wlb_kbank" = "カシコン銀行";
+"SourceType.installment_wlb_scb" = "サイアム・コマーシャル銀行";
+"SourceType.installment_wlb_bbl" = "バンコク銀行";
 "SourceType.internet_banking_bay" = "アユタヤ銀行";
 "SourceType.internet_banking_bbl" = "バンコク銀行";
 "SourceType.paynow" = "PayNow";

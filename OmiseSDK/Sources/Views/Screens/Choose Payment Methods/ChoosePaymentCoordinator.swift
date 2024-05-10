@@ -107,9 +107,16 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
     func createInstallmentController() -> SelectPaymentController {
         var sourceTypes = client.latestLoadedCapability?.availableSourceTypes(SourceType.installments) ?? []
 
-        // Remove .installmentKTC if .installmentWhiteLabelKTC is present
-        if sourceTypes.contains(.installmentWhiteLabelKTC) {
-            sourceTypes.removeAll { $0 == .installmentKTC }
+        let filter: [SourceType: SourceType] = [
+            .installmentWhiteLabelKTC: .installmentKTC,
+            .installmentWhiteLabelKBank: .installmentKBank,
+            .installmentWhiteLabelSCB: .installmentSCB,
+            .installmentWhiteLabelBBL: .installmentBBL
+        ]
+        
+        for (keepingSourceType, removingSourceType) in filter 
+            where sourceTypes.contains(keepingSourceType) {
+            sourceTypes.removeAll { $0 == removingSourceType }
         }
 
         let viewModel = SelectSourceTypePaymentViewModel(

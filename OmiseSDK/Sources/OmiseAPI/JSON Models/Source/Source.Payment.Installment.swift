@@ -31,15 +31,15 @@ extension Source.Payment.Installment {
             return [ 3, 4, 6, 9, 10 ]
         case .installmentFirstChoice:
             return [ 3, 4, 6, 9, 10, 12, 18, 24, 36 ]
-        case .installmentBBL:
+        case .installmentBBL, .installmentWhiteLabelBBL:
             return [ 4, 6, 8, 9, 10 ]
         case .installmentMBB:
             return [ 6, 12, 18, 24 ]
         case .installmentKTC, .installmentWhiteLabelKTC:
             return [ 3, 4, 5, 6, 7, 8, 9, 10 ]
-        case .installmentKBank:
+        case .installmentKBank, .installmentWhiteLabelKBank:
             return [ 3, 4, 6, 10 ]
-        case .installmentSCB:
+        case .installmentSCB, .installmentWhiteLabelSCB:
             return [ 3, 4, 6, 9, 10 ]
         case .installmentTTB:
             return [ 3, 4, 6, 10, 12 ]

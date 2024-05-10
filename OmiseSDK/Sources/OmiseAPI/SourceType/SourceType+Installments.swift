@@ -17,7 +17,10 @@ extension SourceType {
 
     public static var whiteLabelInstallments: [SourceType] {
         [
-            .installmentWhiteLabelKTC
+            .installmentWhiteLabelKTC,
+            .installmentWhiteLabelKBank,
+            .installmentWhiteLabelSCB,
+            .installmentWhiteLabelBBL
         ]
     }
 

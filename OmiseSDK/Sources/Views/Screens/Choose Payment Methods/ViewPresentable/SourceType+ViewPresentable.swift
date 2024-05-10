@@ -48,17 +48,17 @@ extension SourceType: ViewPresentable {
             return "GrabPay"
         case .installmentBAY:
             return "Krungsri"
-        case .installmentBBL:
+        case .installmentBBL, .installmentWhiteLabelBBL:
             return "Bangkok Bank"
         case .installmentFirstChoice:
             return "Krungsri First Choice"
-        case .installmentKBank:
+        case .installmentKBank, .installmentWhiteLabelKBank:
             return "Kasikorn"
         case .installmentKTC:
             return "KTC"
         case .installmentMBB:
             return "MayBank"
-        case .installmentSCB:
+        case .installmentSCB, .installmentWhiteLabelSCB:
             return "Siam Commercial Bank"
         case .installmentTTB:
             return "TMBThanachart Bank"
@@ -145,17 +145,17 @@ extension SourceType: ViewPresentable {
             return "Grab"
         case .installmentBAY:
             return "BAY"
-        case .installmentBBL:
+        case .installmentBBL, .installmentWhiteLabelBBL:
             return "BBL"
         case .installmentFirstChoice:
             return "First Choice"
-        case .installmentKBank:
+        case .installmentKBank, .installmentWhiteLabelKBank:
             return "KBANK"
         case .installmentKTC, .installmentWhiteLabelKTC:
             return "KTC"
         case .installmentMBB:
             return "FPX/maybank"
-        case .installmentSCB:
+        case .installmentSCB, .installmentWhiteLabelSCB:
             return "SCB"
         case .installmentTTB:
             return "ttb"
