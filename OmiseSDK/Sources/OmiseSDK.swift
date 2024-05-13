@@ -62,7 +62,7 @@ public class OmiseSDK {
         amount: Int64,
         currency: String,
         allowedPaymentMethods: [SourceType]? = nil,
-        skipCapabilityValidation: Bool = true,
+        skipCapabilityValidation: Bool = false,
         isCardPaymentAllowed: Bool = true,
         handleErrors: Bool = true,
         delegate: ChoosePaymentMethodDelegate
