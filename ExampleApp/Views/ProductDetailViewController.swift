@@ -128,7 +128,7 @@ extension ProductDetailViewController: ChoosePaymentMethodDelegate {
         print("White-label installment payment Token is created with id '\(token.id)', Source id: '\(source.id)'")
         omiseSDK.dismiss {
             let alertController = UIAlertController(
-                title: "Token & Source Created",
+                title: "Token & Source Created\n(\(source.paymentInformation.sourceType.rawValue))",
                 message: "A token with id of \(token.id) and source with id of \(source.id) was successfully created. Please send this id to server to create a charge.",
                 preferredStyle: .alert
             )

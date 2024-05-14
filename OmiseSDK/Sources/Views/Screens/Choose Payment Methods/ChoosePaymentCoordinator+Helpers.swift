@@ -89,9 +89,13 @@ extension ChoosePaymentCoordinator {
                     case .failure(let error):
                         self?.processError(error)
                     }
-                    completion()
                 }
             }
+            
+            DispatchQueue.main.async {
+                completion()
+            }
+
         }
     }
 }

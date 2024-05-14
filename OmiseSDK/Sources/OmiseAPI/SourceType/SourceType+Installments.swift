@@ -20,7 +20,10 @@ extension SourceType {
             .installmentWhiteLabelKTC,
             .installmentWhiteLabelKBank,
             .installmentWhiteLabelSCB,
-            .installmentWhiteLabelBBL
+            .installmentWhiteLabelBBL,
+            .installmentWhiteLabelBAY,
+            .installmentWhiteLabelFirstChoice,
+            .installmentWhiteLabelTTB
         ]
     }
 

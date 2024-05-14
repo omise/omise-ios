@@ -6,109 +6,12 @@ extension SourceType: CustomStringConvertible {
 
 extension SourceType: ViewPresentable {
     public var localizedTitle: String {
-        localized("SourceType.\(self.rawValue)", text: title)
+        localized("SourceType.\(self.rawValue)")
     }
 
     public var localizedSubtitle: String? {
         guard let subtitle = subtitle else { return nil }
         return localized("SourceType.\(self.rawValue).subtitle", text: subtitle)
-    }
-
-    public var title: String {
-        switch self {
-        case .alipay:
-            return "Alipay"
-        case .alipayCN:
-            return "Alipay CN"
-        case .alipayHK:
-            return "Alipay HK"
-        case .atome:
-            return "Atome"
-        case .barcodeAlipay:
-            return "Alipay In-Store"
-        case .billPaymentTescoLotus:
-            return "Tesco Lotus"
-        case .boost:
-            return "Boost"
-        case .dana:
-            return "DANA"
-        case .duitNowOBW:
-            return "DuitNow Online Banking/Wallets"
-        case .duitNowQR:
-            return "DuitNow QR"
-        case .eContext:
-            return "" // Doesn't have specific title
-        case .fpx:
-            return "FPX"
-        case .gcash:
-            return "GCash"
-        case .grabPay:
-            return "Grab"
-        case .grabPayRms:
-            return "GrabPay"
-        case .installmentBAY:
-            return "Krungsri"
-        case .installmentBBL, .installmentWhiteLabelBBL:
-            return "Bangkok Bank"
-        case .installmentFirstChoice:
-            return "Krungsri First Choice"
-        case .installmentKBank, .installmentWhiteLabelKBank:
-            return "Kasikorn"
-        case .installmentKTC:
-            return "KTC"
-        case .installmentMBB:
-            return "MayBank"
-        case .installmentSCB, .installmentWhiteLabelSCB:
-            return "Siam Commercial Bank"
-        case .installmentTTB:
-            return "TMBThanachart Bank"
-        case .installmentUOB:
-            return "United Overseas Bank"
-        case .installmentWhiteLabelKTC:
-            return "Krungthai Card (KTC)"
-        case .internetBankingBAY:
-            return "Bank of Ayudhya"
-        case .internetBankingBBL:
-            return "Bangkok Bank"
-        case .kakaoPay:
-            return "Kakao Pay"
-        case .maybankQRPay:
-            return "Maybank QRPay"
-        case .mobileBankingBAY:
-            return "KMA"
-        case .mobileBankingBBL:
-            return "Bualuang mBanking"
-        case .mobileBankingKBank:
-            return "K PLUS"
-        case .mobileBankingKTB:
-            return "Krungthai Next"
-        case .mobileBankingSCB:
-            return "SCB EASY"
-        case .ocbcDigital:
-            return "OCBC Digital"
-        case .payNow:
-            return "PayNow"
-        case .payPay:
-            return "PayPay"
-        case .promptPay:
-            return "PromptPay"
-        case .rabbitLinepay:
-            return "Rabbit LINE Pay"
-        case .shopeePay:
-            return "ShopeePay"
-        case .shopeePayJumpApp:
-            return "ShopeePay"
-        case .touchNGo:
-            return "Touch 'n Go"
-        case .touchNGoAlipayPlus:
-            return "TNG eWallet"
-        case .trueMoneyWallet:
-            return "TrueMoney Wallet"
-        case .trueMoneyJumpApp:
-            return "TrueMoney"
-        case .weChat:
-            return "WeChat Pay"
-        }
     }
 
     public var iconName: String {
@@ -143,11 +46,11 @@ extension SourceType: ViewPresentable {
             return "Grab"
         case .grabPayRms:
             return "Grab"
-        case .installmentBAY:
+        case .installmentBAY, .installmentWhiteLabelBAY:
             return "BAY"
         case .installmentBBL, .installmentWhiteLabelBBL:
             return "BBL"
-        case .installmentFirstChoice:
+        case .installmentFirstChoice, .installmentWhiteLabelFirstChoice:
             return "First Choice"
         case .installmentKBank, .installmentWhiteLabelKBank:
             return "KBANK"
@@ -157,7 +60,7 @@ extension SourceType: ViewPresentable {
             return "FPX/maybank"
         case .installmentSCB, .installmentWhiteLabelSCB:
             return "SCB"
-        case .installmentTTB:
+        case .installmentTTB, .installmentWhiteLabelTTB:
             return "ttb"
         case .installmentUOB:
             return "uob"

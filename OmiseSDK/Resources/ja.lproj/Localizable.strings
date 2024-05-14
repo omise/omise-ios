@@ -24,6 +24,9 @@
 "SourceType.installment_wlb_kbank" = "カシコン銀行";
 "SourceType.installment_wlb_scb" = "サイアム・コマーシャル銀行";
 "SourceType.installment_wlb_bbl" = "バンコク銀行";
+"SourceType.installment_wlb_bay" = "クルンシィ";
+"SourceType.installment_wlb_first_choice" = "クルンシィ・ファーストチョイス";
+"SourceType.installment_wlb_ttb" = "TMBタナチャート銀行";
 "SourceType.internet_banking_bay" = "アユタヤ銀行";
 "SourceType.internet_banking_bbl" = "バンコク銀行";
 "SourceType.paynow" = "PayNow";
