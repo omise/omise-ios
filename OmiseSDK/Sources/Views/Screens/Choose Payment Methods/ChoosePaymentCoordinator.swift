@@ -114,7 +114,7 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
             .installmentWhiteLabelBBL: .installmentBBL
         ]
         
-        for (keepingSourceType, removingSourceType) in filter 
+        for (keepingSourceType, removingSourceType) in filter
             where sourceTypes.contains(keepingSourceType) {
             sourceTypes.removeAll { $0 == removingSourceType }
         }
