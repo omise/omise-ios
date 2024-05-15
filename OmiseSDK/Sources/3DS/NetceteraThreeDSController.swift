@@ -267,7 +267,7 @@ private extension NetceteraThreeDSController {
         request.httpMethod = "POST"
         request.httpBody = bodyData
 
-        let task = URLSession.shared.dataTask(with: request) {(data, _, error) in
+        let task = URLSession.shared.dataTask(with: request) {(data, _, _) in
             guard let data = data else {
                 onAuthResponse(nil)
                 return

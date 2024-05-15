@@ -34,13 +34,6 @@ extension NetworkService: NetworkServiceProtocol {
         let dataTask = session.dataTask(with: urlRequest) { [weak self] (data, response, error) in
             guard let self = self else { return }
 
-            print("urlRequest: \(urlRequest)")
-            if let data = data {
-                print("data: \(String(data: data, encoding: .utf8))")
-            }
-            print("response: \(response)")
-            print("error: \(error)")
-
             var result: Result<T, Error>
             if let error = error {
                 result = .failure(error)
