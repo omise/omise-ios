@@ -65,7 +65,7 @@ class NetceteraThreeDSController {
         case authResStatusUnknown(_ status: String)
     }
 
-    static var sharedController: NetceteraThreeDSControllerProtocol = NetceteraThreeDSController()
+//    static var sharedController: NetceteraThreeDSControllerProtocol = NetceteraThreeDSController()
     private static var uiCustomization: ThreeDSUICustomization?
 
     private var network = NetworkService()
@@ -79,7 +79,7 @@ class NetceteraThreeDSController {
         let scheme = Scheme(name: config.id)
         scheme.ids = [config.directoryServerId]
         scheme.encryptionKeyValue = formattedCert
-        scheme.rootCertificateValues = [formattedCert]
+        scheme.rootCertificateValue = formattedCert
         return scheme
     }
 

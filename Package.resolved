@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "ThreeDS_SDK",
-        "repositoryURL": "https://github.com/ios-3ds-sdk/SPM.git",
+        "repositoryURL": "https://github.com/ios-3ds-sdk/SPM",
         "state": {
           "branch": null,
           "revision": "a4e55d7f10294ea81abd1db393ae05606a5efa46",

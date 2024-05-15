@@ -1281,6 +1281,7 @@
 				22D480991D0EB29C00544CE1 /* Sources */,
 				22D4809A1D0EB29C00544CE1 /* Frameworks */,
 				8A0928211D545455008D393F /* Embed Frameworks */,
+				752970442BF4A8F100DE1AA5 /* Skip Config file changes */,
 			);
 			buildRules = (
 			);
@@ -1447,6 +1448,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		752970442BF4A8F100DE1AA5 /* Skip Config file changes */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Skip Config file changes";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if git --version >/dev/null 2>&1; then\n    git update-index --assume-unchanged ExampleApp/Config.local.plist\nelse\n    echo \"Git is not installed, skipping command.\"\nfi\n";
+		};
 		75341FF329A716FD003027E6 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -2178,7 +2197,7 @@
 			repositoryURL = "https://github.com/ios-3ds-sdk/SPM.git";
 			requirement = {
 				kind = exactVersion;
-				version = 2.4.12;
+				version = 2.4.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

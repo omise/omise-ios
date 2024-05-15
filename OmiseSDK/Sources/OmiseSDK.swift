@@ -25,6 +25,7 @@ public class OmiseSDK {
     public private(set) weak var presentedViewController: UIViewController?
 
     private var expectedReturnURLStrings: [String] = []
+    private var netceteraThreeDSController: NetceteraThreeDSController?
 
     /// Creates a new instance of Omise SDK that provides interface to functionallity that SDK provides
     ///
@@ -164,7 +165,8 @@ public class OmiseSDK {
             return
         }
 
-        NetceteraThreeDSController.sharedController.processAuthorizedURL(
+        netceteraThreeDSController = NetceteraThreeDSController()
+        netceteraThreeDSController?.processAuthorizedURL(
             authorizeURL,
             threeDSRequestorAppURL: threeDSRequestorAppURLString,
             uiCustomization: threeDSUICustomization,

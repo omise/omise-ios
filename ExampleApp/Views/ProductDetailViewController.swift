@@ -76,6 +76,7 @@ extension ProductDetailViewController: AuthorizingPaymentDelegate {
         omiseSDK.dismiss()
     }
     func authorizingPaymentDidCancel() {
+        print("Payment is not authorized")
         omiseSDK.dismiss()
     }
 }
