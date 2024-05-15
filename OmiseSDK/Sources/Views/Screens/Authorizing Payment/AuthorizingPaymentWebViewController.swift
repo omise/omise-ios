@@ -31,7 +31,7 @@ class AuthorizingPaymentWebViewController: UIViewController {
     ///
     /// The rule is the scheme and host must be matched and must have the path as a prefix.
     /// Example: if the return URL is `https://www.example.com/products/12345` the expected return URL should have a URLComponents with scheme of `https`, host of `www.example.com` and the path of `/products/`
-    var expectedReturnURLPatterns: [URLComponents] = []
+    var expectedReturnURLStrings: [URLComponents] = []
     
     var completion: ParamClosure<CompletionState>?
 
@@ -76,7 +76,7 @@ class AuthorizingPaymentWebViewController: UIViewController {
     }
     
     private func startAuthorizingPaymentProcess() {
-        guard let authorizeURL = authorizeURL, !expectedReturnURLPatterns.isEmpty else {
+        guard let authorizeURL = authorizeURL, !expectedReturnURLStrings.isEmpty else {
             assertionFailure("Insufficient authorizing payment information")
             os_log("Refusing to initialize sdk client with a non-public key: %{private}@", log: uiLogObject, type: .error)
             return
@@ -92,7 +92,7 @@ class AuthorizingPaymentWebViewController: UIViewController {
             return false
         }
         
-        return expectedReturnURLPatterns.contains { expectedURLComponents -> Bool in
+        return expectedReturnURLStrings.contains { expectedURLComponents -> Bool in
             components.match(components: expectedURLComponents)
         }
     }

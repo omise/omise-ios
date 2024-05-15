@@ -24,7 +24,7 @@ public class OmiseSDK {
 
     public private(set) weak var presentedViewController: UIViewController?
 
-    private var expectedReturnURLPatterns: [String] = []
+    private var expectedReturnURLStrings: [String] = []
 
     /// Creates a new instance of Omise SDK that provides interface to functionallity that SDK provides
     ///
@@ -140,7 +140,7 @@ public class OmiseSDK {
     ///    - from: ViewController is used to present Choose Payment Methods
     ///    - animated: Presents controller with animation if `true`
     ///    - authorizeURL: The authorize URL given in `Charge` object
-    ///    - expectedReturnURLPatterns: The expected return URL patterns for web view 3DS.
+    ///    - expectedReturnURLStrings: The expected return URL patterns for web view 3DS.
     ///    - threeDSRequestorAppURLString: 3DS requestor app URL string (deeplink).
     ///    - delegate: A delegate object that will recieved authorizing payment events.
     @available(iOSApplicationExtension, unavailable)
@@ -148,8 +148,8 @@ public class OmiseSDK {
         from topViewController: UIViewController,
         animated: Bool = true,
         authorizeURL: URL,
-        expectedReturnURLPatterns: [String],
-        threeDSRequestorAppURLString: String?,
+        expectedReturnURLStrings: [String],
+        threeDSRequestorAppURLString: String,
         threeDSUICustomization: ThreeDSUICustomization? = nil,
         delegate: AuthorizingPaymentDelegate
     ) {
@@ -158,8 +158,7 @@ public class OmiseSDK {
                 from: topViewController,
                 animated: animated,
                 authorizeURL: authorizeURL,
-                expectedReturnURLPatterns: expectedReturnURLPatterns,
-                threeDSRequestorAppURLString: threeDSRequestorAppURLString,
+                expectedReturnURLStrings: expectedReturnURLStrings,
                 delegate: delegate
             )
             return
@@ -188,8 +187,7 @@ public class OmiseSDK {
                                 from: topViewController,
                                 animated: animated,
                                 authorizeURL: authorizeURL,
-                                expectedReturnURLPatterns: expectedReturnURLPatterns,
-                                threeDSRequestorAppURLString: threeDSRequestorAppURLString,
+                                expectedReturnURLStrings: expectedReturnURLStrings,
                                 delegate: delegate
                             )
                         }
@@ -207,7 +205,7 @@ public class OmiseSDK {
     /// Handle URL Callback received by AppDelegate
     public func handleURLCallback(_ url: URL) -> Bool {
         // Will handle callback with 3ds library
-        let containsURL = expectedReturnURLPatterns
+        let containsURL = expectedReturnURLStrings
             .map {
                 url.match(string: $0)
             }
@@ -229,15 +227,14 @@ private extension OmiseSDK {
         from topViewController: UIViewController,
         animated: Bool = true,
         authorizeURL: URL,
-        expectedReturnURLPatterns: [String],
-        threeDSRequestorAppURLString: String?,
+        expectedReturnURLStrings: [String],
         delegate: AuthorizingPaymentDelegate
     ) {
         dismiss(animated: false)
 
         let viewController = AuthorizingPaymentWebViewController(nibName: nil, bundle: .omiseSDK)
         viewController.authorizeURL = authorizeURL
-        viewController.expectedReturnURLPatterns = expectedReturnURLPatterns.compactMap {
+        viewController.expectedReturnURLStrings = expectedReturnURLStrings.compactMap {
             URLComponents(string: $0)
         }
         viewController.completion = { [weak delegate] result in
@@ -263,6 +260,6 @@ private extension OmiseSDK {
         topViewController.present(navigationController, animated: animated, completion: nil)
         presentedViewController = navigationController
 
-        self.expectedReturnURLPatterns = expectedReturnURLPatterns
+        self.expectedReturnURLStrings = expectedReturnURLStrings
     }
 }

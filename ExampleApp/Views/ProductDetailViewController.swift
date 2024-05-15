@@ -59,7 +59,7 @@ class ProductDetailViewController: BaseViewController {
             self.omiseSDK.presentAuthorizingPayment(
                 from: self,
                 authorizeURL: url,
-                expectedReturnURLPatterns: ["https://omise.co"],
+                expectedReturnURLStrings: ["https://omise.co"],
                 threeDSRequestorAppURLString: AppDeeplink.threeDSChallenge.urlString,
                 delegate: self
             )
