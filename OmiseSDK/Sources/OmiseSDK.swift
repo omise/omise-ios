@@ -24,7 +24,8 @@ public class OmiseSDK {
 
     public private(set) weak var presentedViewController: UIViewController?
 
-    private var handleURLs: [String] = []
+    private var expectedReturnURLStrings: [String] = []
+    private var netceteraThreeDSController: NetceteraThreeDSController?
 
     /// Creates a new instance of Omise SDK that provides interface to functionallity that SDK provides
     ///
@@ -140,40 +141,61 @@ public class OmiseSDK {
     ///    - from: ViewController is used to present Choose Payment Methods
     ///    - animated: Presents controller with animation if `true`
     ///    - authorizeURL: The authorize URL given in `Charge` object
-    ///    - expectedReturnURLPatterns: The expected return URL patterns.
+    ///    - expectedReturnURLStrings: The expected return URL patterns for web view 3DS.
+    ///    - threeDSRequestorAppURLString: 3DS requestor app URL string (deeplink).
     ///    - delegate: A delegate object that will recieved authorizing payment events.
     @available(iOSApplicationExtension, unavailable)
     public func presentAuthorizingPayment(
         from topViewController: UIViewController,
         animated: Bool = true,
         authorizeURL: URL,
-        returnURLs: [String],
-        delegate: AuthorizingPaymentViewControllerDelegate
+        expectedReturnURLStrings: [String],
+        threeDSRequestorAppURLString: String,
+        threeDSUICustomization: ThreeDSUICustomization? = nil,
+        delegate: AuthorizingPaymentDelegate
     ) {
-        dismiss(animated: false)
-
-        handleURLs = returnURLs
-        let returnURLComponents = returnURLs.compactMap {
-            URLComponents(string: $0)
+        guard authorizeURL.absoluteString.contains("acs=true") else {
+            presentWebViewAuthorizingPayment(
+                from: topViewController,
+                animated: animated,
+                authorizeURL: authorizeURL,
+                expectedReturnURLStrings: expectedReturnURLStrings,
+                delegate: delegate
+            )
+            return
         }
 
-        let viewController = AuthorizingPaymentViewController(nibName: nil, bundle: .omiseSDK)
-        viewController.authorizeURL = authorizeURL
-        viewController.expectedReturnURLPatterns = returnURLComponents
-        viewController.delegate = delegate
-        viewController.applyNavigationBarStyle()
-        viewController.title = "AuthorizingPayment.title".localized()
-        
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.navigationBar.isTranslucent = false
-        navigationController.navigationBar.backgroundColor = .white
-
-        if #available(iOSApplicationExtension 11.0, *) {
-            navigationController.navigationBar.prefersLargeTitles = false
+        netceteraThreeDSController = NetceteraThreeDSController()
+        netceteraThreeDSController?.processAuthorizedURL(
+            authorizeURL,
+            threeDSRequestorAppURL: threeDSRequestorAppURLString,
+            uiCustomization: threeDSUICustomization,
+            in: topViewController) { [weak self] result in
+                switch result {
+                case .success:
+                    delegate.authorizingPaymentDidComplete(with: nil)
+                case .failure(let error):
+                    typealias NetceteraFlowError = NetceteraThreeDSController.Errors
+                    switch error {
+                    case NetceteraFlowError.incomplete,
+                        NetceteraFlowError.cancelled,
+                        NetceteraFlowError.timedout,
+                        NetceteraFlowError.authResStatusFailed,
+                        NetceteraFlowError.authResStatusUnknown:
+                        delegate.authorizingPaymentDidCancel()
+                    default:
+                        DispatchQueue.main.async {
+                            self?.presentWebViewAuthorizingPayment(
+                                from: topViewController,
+                                animated: animated,
+                                authorizeURL: authorizeURL,
+                                expectedReturnURLStrings: expectedReturnURLStrings,
+                                delegate: delegate
+                            )
+                        }
+                    }
+                }
         }
-
-        topViewController.present(navigationController, animated: animated, completion: nil)
-        presentedViewController = navigationController
     }
 
     /// Dismiss any presented UI form by OmiseSDK
@@ -185,7 +207,7 @@ public class OmiseSDK {
     /// Handle URL Callback received by AppDelegate
     public func handleURLCallback(_ url: URL) -> Bool {
         // Will handle callback with 3ds library
-        let containsURL = handleURLs
+        let containsURL = expectedReturnURLStrings
             .map {
                 url.match(string: $0)
             }
@@ -198,5 +220,48 @@ public class OmiseSDK {
 private extension OmiseSDK {
     private func preloadCapabilityAPI() {
         client.capability { _ in }
+    }
+}
+
+private extension OmiseSDK {
+    @available(iOSApplicationExtension, unavailable)
+    func presentWebViewAuthorizingPayment(
+        from topViewController: UIViewController,
+        animated: Bool = true,
+        authorizeURL: URL,
+        expectedReturnURLStrings: [String],
+        delegate: AuthorizingPaymentDelegate
+    ) {
+        dismiss(animated: false)
+
+        let viewController = AuthorizingPaymentWebViewController(nibName: nil, bundle: .omiseSDK)
+        viewController.authorizeURL = authorizeURL
+        viewController.expectedReturnURLStrings = expectedReturnURLStrings.compactMap {
+            URLComponents(string: $0)
+        }
+        viewController.completion = { [weak delegate] result in
+            switch result {
+            case .cancel:
+                delegate?.authorizingPaymentDidCancel()
+            case .complete(let redirectedURL):
+                delegate?.authorizingPaymentDidComplete(with: redirectedURL)
+            }
+        }
+
+        viewController.applyNavigationBarStyle()
+        viewController.title = "AuthorizingPayment.title".localized()
+
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.backgroundColor = .white
+
+        if #available(iOSApplicationExtension 11.0, *) {
+            navigationController.navigationBar.prefersLargeTitles = false
+        }
+
+        topViewController.present(navigationController, animated: animated, completion: nil)
+        presentedViewController = navigationController
+
+        self.expectedReturnURLStrings = expectedReturnURLStrings
     }
 }

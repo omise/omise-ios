@@ -4,9 +4,5 @@
 <dict>
 	<key>publicKey</key>
 	<string>pkey_</string>
-	<key>devVaultBaseURL</key>
-	<string></string>
-	<key>devApiBaseURL</key>
-	<string></string>
 </dict>
 </plist>

@@ -7,6 +7,7 @@ extension Client {
             switch api.server {
             case .api: return customApiURL
             case .vault: return customVaultURL
+            case .other(let baseURL): return baseURL
             }
         }()
 
@@ -47,13 +48,6 @@ extension Client {
 
 // MARK: HTTP Headers
 extension Client {
-    enum HTTPHeaders: String {
-        case authorization = "Authorization"
-        case userAgent = "User-Agent"
-        case contentType = "Content-Type"
-        case omiseVersion = "Omise-Version"
-    }
-
     func httpHeaders(
         publicKey: String,
         userAgent: String,

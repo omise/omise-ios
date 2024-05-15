@@ -457,7 +457,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/omise/omise-ios.git";
 			requirement = {
-				branch = "feature/MIT-1904";
+				branch = "feature/MIT-2470";
 				kind = branch;
 			};
 		};
