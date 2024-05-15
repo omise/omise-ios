@@ -107,20 +107,20 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
     func createInstallmentController() -> SelectPaymentController {
         var sourceTypes = client.latestLoadedCapability?.availableSourceTypes(SourceType.installments) ?? []
 
-        let filter: [SourceType: SourceType] = [
-            .installmentWhiteLabelKTC: .installmentKTC,
-            .installmentWhiteLabelKBank: .installmentKBank,
-            .installmentWhiteLabelSCB: .installmentSCB,
-            .installmentWhiteLabelBBL: .installmentBBL,
-            .installmentWhiteLabelBAY: .installmentBAY,
-            .installmentWhiteLabelFirstChoice: .installmentFirstChoice,
-            .installmentWhiteLabelTTB: .installmentTTB
-        ]
+//        let filter: [SourceType: SourceType] = [
+//            .installmentWhiteLabelKTC: .installmentKTC,
+//            .installmentWhiteLabelKBank: .installmentKBank,
+//            .installmentWhiteLabelSCB: .installmentSCB,
+//            .installmentWhiteLabelBBL: .installmentBBL,
+//            .installmentWhiteLabelBAY: .installmentBAY,
+//            .installmentWhiteLabelFirstChoice: .installmentFirstChoice,
+//            .installmentWhiteLabelTTB: .installmentTTB
+//        ]
         
-        for (keepingSourceType, removingSourceType) in filter
-            where sourceTypes.contains(keepingSourceType) {
-            sourceTypes.removeAll { $0 == removingSourceType }
-        }
+//        for (keepingSourceType, removingSourceType) in filter
+//            where sourceTypes.contains(keepingSourceType) {
+//            sourceTypes.removeAll { $0 == removingSourceType }
+//        }
 
         let viewModel = SelectSourceTypePaymentViewModel(
             title: PaymentMethod.installment.localizedTitle,

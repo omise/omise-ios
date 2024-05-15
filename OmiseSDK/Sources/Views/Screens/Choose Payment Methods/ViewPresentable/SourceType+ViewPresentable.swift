@@ -46,21 +46,21 @@ extension SourceType: ViewPresentable {
             return "Grab"
         case .grabPayRms:
             return "Grab"
-        case .installmentBAY, .installmentWhiteLabelBAY:
+        case .installmentBAY: // , .installmentWhiteLabelBAY:
             return "BAY"
-        case .installmentBBL, .installmentWhiteLabelBBL:
+        case .installmentBBL: // , .installmentWhiteLabelBBL:
             return "BBL"
-        case .installmentFirstChoice, .installmentWhiteLabelFirstChoice:
+        case .installmentFirstChoice: // , .installmentWhiteLabelFirstChoice:
             return "First Choice"
-        case .installmentKBank, .installmentWhiteLabelKBank:
+        case .installmentKBank: // , .installmentWhiteLabelKBank:
             return "KBANK"
-        case .installmentKTC, .installmentWhiteLabelKTC:
+        case .installmentKTC: // , .installmentWhiteLabelKTC:
             return "KTC"
         case .installmentMBB:
             return "FPX/maybank"
-        case .installmentSCB, .installmentWhiteLabelSCB:
+        case .installmentSCB: // , .installmentWhiteLabelSCB:
             return "SCB"
-        case .installmentTTB, .installmentWhiteLabelTTB:
+        case .installmentTTB: // , .installmentWhiteLabelTTB:
             return "ttb"
         case .installmentUOB:
             return "uob"
