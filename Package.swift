@@ -15,10 +15,15 @@ let package = Package(
             targets: ["OmiseSDK"]
         )
     ],
+    dependencies: [
+        .package(url: "https://github.com/ios-3ds-sdk/SPM", .exact("2.4.0"))
+    ],
     targets: [
         .target(
             name: "OmiseSDK",
-            dependencies: [],
+            dependencies: [
+                .product(name: "ThreeDS_SDK", package: "SPM")
+            ],
             path: "OmiseSDK",
             exclude: ["Info.plist"],
             resources: [.process("Resources")]

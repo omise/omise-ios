@@ -352,13 +352,13 @@ omiseSDK.presentAuthorizingPayment(
 Then implement the delegate to receive the `Source` or `Token` object after the user has selected:
 
 ```swift
-extension ViewController: AuthorizingPaymentViewControllerDelegate {
-  func authorizingPaymentViewController(_ viewController: AuthorizingPaymentViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL) {
+extension ViewController: AuthorizingPaymentWebViewDelegate {
+  func authorizingPaymentViewController(_ viewController: AuthorizingPaymentWebViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL) {
       // Handle the `redirected URL` here
       omiseSDK.dismiss()
   }
   
-  func authorizingPaymentViewControllerDidCancel(_ viewController: AuthorizingPaymentViewController) {
+  func authorizingPaymentViewControllerDidCancel(_ viewController: AuthorizingPaymentWebViewController) {
     // Handle the case that the user taps cancel.
     omiseSDK.dismiss()
   }
