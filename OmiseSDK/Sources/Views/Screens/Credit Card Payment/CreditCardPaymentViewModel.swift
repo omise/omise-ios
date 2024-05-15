@@ -1,9 +1,17 @@
 import Foundation
 import os.log
 
+enum CreditCardPaymentOption {
+    case card
+    case whiteLabelInstallment(payment: Source.Payment)
+}
+
 class CreditCardPaymentViewModel: CreditCardPaymentViewModelProtocol, CountryListViewModelProtocol {
+
+    let paymentType: CreditCardPaymentOption
+
     var addressFields: [AddressField] = [.address, .city, .state, .postalCode]
-    
+
     var fieldForShippingAddressHeader: AddressField?
 
     var isAddressFieldsVisible: Bool {
@@ -18,9 +26,10 @@ class CreditCardPaymentViewModel: CreditCardPaymentViewModelProtocol, CountryLis
 
     private weak var delegate: CreditCardPaymentDelegate?
 
-    init(currentCountry: Country?, delegate: CreditCardPaymentDelegate?) {
+    init(currentCountry: Country?, paymentType: CreditCardPaymentOption, delegate: CreditCardPaymentDelegate?) {
         self.delegate = delegate
         self.selectedCountry = currentCountry
+        self.paymentType = paymentType
     }
 
     // MARK: CountryListViewModelProtocol
@@ -62,6 +71,6 @@ class CreditCardPaymentViewModel: CreditCardPaymentViewModelProtocol, CountryLis
             postalCode: viewContext[.postalCode]
         )
 
-        delegate?.didSelectCardPayment(card, completion: completion)
+        delegate?.didSelectCardPayment(paymentType: paymentType, card: card, completion: completion)
     }
 }

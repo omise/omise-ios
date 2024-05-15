@@ -1,14 +1,21 @@
 import Foundation
 
+enum OmiseServerType {
+    case api
+    case vault
+    case other(baseURL: URL)
+}
+
 extension OmiseServerType {
     // swiftlint:disable force_unwrapping
     private var apiServerURL: String { "https://vault.omise.co" }
     private var vaultServerURL: String { "https://vault.omise.co" }
-
+    
     var url: URL {
         switch self {
         case .api: return URL(string: apiServerURL)!
         case .vault: return URL(string: vaultServerURL)!
+        case .other(let url): return url
         }
     }
     // swiftlint:enable force_unwrapping
@@ -19,6 +26,7 @@ enum OmiseAPI {
     case token(tokenID: String)
     case createToken(payload: CreateTokenPayload)
     case createSource(payload: CreateSourcePayload)
+    case netceteraConfig(baseUrl: URL)
 }
 
 extension OmiseAPI: APIProtocol {
@@ -32,6 +40,8 @@ extension OmiseAPI: APIProtocol {
             return .api
         case .token, .createToken:
             return .vault
+        case .netceteraConfig(let baseURL):
+            return .other(baseURL: baseURL)
         }
     }
 
@@ -45,15 +55,23 @@ extension OmiseAPI: APIProtocol {
             return "tokens"
         case .createSource:
             return "sources"
+        case .netceteraConfig:
+            return "config"
         }
     }
 
+    var url: URL {
+        server.url.appendingLastPathComponent(path)
+    }
+    
     var method: HTTPMethod {
         switch self {
         case .capability, .token:
             return .get
         case .createToken, .createSource:
             return .post
+        case .netceteraConfig:
+            return .get
         }
     }
 

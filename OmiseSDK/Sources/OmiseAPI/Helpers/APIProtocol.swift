@@ -19,7 +19,9 @@ enum ContentType: String {
     case json = "application/json; charset=utf8"
 }
 
-enum OmiseServerType {
-    case api
-    case vault
+enum HTTPHeaders: String {
+    case authorization = "Authorization"
+    case userAgent = "User-Agent"
+    case contentType = "Content-Type"
+    case omiseVersion = "Omise-Version"
 }

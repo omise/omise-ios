@@ -24,30 +24,15 @@ extension Source.Payment.Installment: Codable {
 }
 
 extension Source.Payment.Installment {
-    /// List of sourceTypes belongs to Installment payment type
-    public static var sourceTypes: [SourceType] {
-        [
-            .installmentBAY,
-            .installmentBBL,
-            .installmentFirstChoice,
-            .installmentKBank,
-            .installmentKTC,
-            .installmentMBB,
-            .installmentSCB,
-            .installmentTTB,
-            .installmentUOB
-        ]
-    }
-
     /// Available Installments terms (months) for given sourceType
     public static func availableTerms(for sourceType: SourceType) -> [Int] {
         switch sourceType {
         case .installmentBAY:
-            return [ 3, 4, 6, 9, 10 ]
-        case .installmentFirstChoice:
-            return [ 3, 4, 6, 9, 10, 12, 18, 24, 36 ]
+            return [ 3, 4, 6, 10 ]
         case .installmentBBL:
-            return [ 4, 6, 8, 9, 10 ]
+            return [ 4, 6, 8, 10 ]
+        case .installmentFirstChoice:
+            return [ 3, 4, 6, 10, 12, 18, 24, 36 ]
         case .installmentMBB:
             return [ 6, 12, 18, 24 ]
         case .installmentKTC:
@@ -60,6 +45,20 @@ extension Source.Payment.Installment {
             return [ 3, 4, 6, 10, 12 ]
         case .installmentUOB:
             return [ 3, 4, 6, 10 ]
+//        case .installmentWhiteLabelBAY:
+//            return [ 3, 4, 6, 9, 10 ]
+//        case .installmentWhiteLabelFirstChoice:
+//            return [ 3, 4, 6, 9, 10, 12, 18, 24, 36 ]
+//        case .installmentWhiteLabelBBL:
+//            return [ 4, 6, 8, 10 ]
+//        case .installmentWhiteLabelKTC:
+//            return [ 3, 4, 5, 6, 7, 8, 9, 10 ]
+//        case .installmentWhiteLabelSCB:
+//            return [ 3, 4, 6, 9, 10 ]
+//        case .installmentWhiteLabelKBank:
+//            return [ 3, 6, 10 ]
+//        case .installmentWhiteLabelTTB:
+//            return [ 4, 6, 10 ]
         default:
             return []
         }

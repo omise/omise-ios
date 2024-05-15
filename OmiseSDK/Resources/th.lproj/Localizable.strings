@@ -20,6 +20,10 @@
 "SourceType.installment_scb" = "ธนาคารไทยพาณิชย์";
 "SourceType.installment_ttb" = "ธนาคารทีเอ็มบีธนชาต";
 "SourceType.installment_uob" = "ธนาคารยูโอบี";
+"SourceType.installment_wlb_ktc" = "เคทีซี";
+"SourceType.installment_wlb_kbank" = "ธนาคารกสิกรไทย";
+"SourceType.installment_wlb_scb" = "ธนาคารไทยพาณิชย์";
+"SourceType.installment_wlb_bbl" = "ธนาคารกรุงเทพ";
 "SourceType.internet_banking_bay" = "ธนาคารกรุงศรีอยุธยา";
 "SourceType.internet_banking_bbl" = "ธนาคารกรุงเทพ";
 "SourceType.paynow" = "เพย์นาว";

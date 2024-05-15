@@ -39,10 +39,11 @@ extension SelectInstallmentTermsViewModel: SelectPaymentPresentableProtocol {
     func viewContext(at index: Int) -> TableCellContext? {
         guard let value = values.at(index) else { return nil }
         let numberOfTermsTitleFormat = localized("installments.number-of-terms.text", "%d months")
+        let accessoryIcon = sourceType.isWhiteLabelInstallment ? Assets.Icon.next : Assets.Icon.redirect
         return TableCellContext(
             title: String.localizedStringWithFormat(numberOfTermsTitleFormat, value),
             icon: nil,
-            accessoryIcon: UIImage(Assets.Icon.redirect)
+            accessoryIcon: UIImage(accessoryIcon)
         )
     }
 
@@ -57,6 +58,10 @@ extension SelectInstallmentTermsViewModel: SelectPaymentPresentableProtocol {
     }
 
     func viewShouldAnimateSelectedCell(at index: Int) -> Bool {
-        true
+        if sourceType.isWhiteLabelInstallment {
+            return false
+        } else {
+            return true
+        }
     }
 }

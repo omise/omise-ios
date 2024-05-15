@@ -64,6 +64,40 @@ extension ChoosePaymentCoordinator {
             completion()
         }
     }
+
+    func processWhiteLabelInstallmentPayment(_ payment: Source.Payment, card: CreateTokenPayload.Card, completion: @escaping () -> Void) {
+
+        guard let delegate = choosePaymentMethodDelegate else { return }
+        let sourcePayload = CreateSourcePayload(
+            amount: amount,
+            currency: currency,
+            details: payment
+        )
+
+        let tokenPayload = CreateTokenPayload(card: card)
+
+        client.createSource(payload: sourcePayload) { [weak self, weak delegate, tokenPayload] result in
+            guard let self = self else { return }
+            switch result {
+            case .failure(let error):
+                self.processError(error)
+            case .success(let source):
+                self.client.createToken(payload: tokenPayload) { [weak self, weak delegate] result in
+                    switch result {
+                    case .success(let token):
+                        delegate?.choosePaymentMethodDidComplete(with: source, token: token)
+                    case .failure(let error):
+                        self?.processError(error)
+                    }
+                }
+            }
+            
+            DispatchQueue.main.async {
+                completion()
+            }
+
+        }
+    }
 }
 
 extension ChoosePaymentCoordinator {

@@ -31,7 +31,6 @@ class ProductDetailViewController: BaseViewController {
             amount: paymentAmount,
             currency: paymentCurrencyCode,
             allowedPaymentMethods: usesCapabilityDataForPaymentMethods ? nil : allowedPaymentMethods,
-            skipCapabilityValidation: true,
             isCardPaymentAllowed: true,
             handleErrors: true,
             delegate: self
@@ -56,12 +55,11 @@ class ProductDetailViewController: BaseViewController {
                   let text = textField.text,
                   let url = URL(string: text) else { return }
 
-            let deeplinkRedirectURLPattern = AppDeeplink.threeDSChallenge.urlString
-            let webRedirectURLPattern = "https://exampleapp.opn.ooo"
             self.omiseSDK.presentAuthorizingPayment(
                 from: self,
                 authorizeURL: url,
-                returnURLs: [deeplinkRedirectURLPattern, webRedirectURLPattern],
+                expectedReturnURLStrings: ["https://omise.co"],
+                threeDSRequestorAppURLString: AppDeeplink.threeDSChallenge.urlString,
                 delegate: self
             )
         })
@@ -71,13 +69,13 @@ class ProductDetailViewController: BaseViewController {
 
 // MARK: - Authorizing Payment View Controller Delegate
 
-extension ProductDetailViewController: AuthorizingPaymentViewControllerDelegate {
-    func authorizingPaymentViewController(_ viewController: AuthorizingPaymentViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL) {
-        print("Payment is authorized with redirect url `\(redirectedURL)`")
+extension ProductDetailViewController: AuthorizingPaymentDelegate {
+    func authorizingPaymentDidComplete(with redirectedURL: URL?) {
+        print("Payment is authorized with redirect url `\(String(describing: redirectedURL))`")
         omiseSDK.dismiss()
     }
-    
-    func authorizingPaymentViewControllerDidCancel(_ viewController: AuthorizingPaymentViewController) {
+    func authorizingPaymentDidCancel() {
+        print("Payment is not authorized")
         omiseSDK.dismiss()
     }
 }
@@ -123,6 +121,21 @@ extension ProductDetailViewController: ChoosePaymentMethodDelegate {
 
     func choosePaymentMethodDidCancel() {
         omiseSDK.dismiss()
+    }
+
+    func choosePaymentMethodDidComplete(with source: Source, token: Token) {
+        print("White-label installment payment Token is created with id '\(token.id)', Source id: '\(source.id)'")
+        omiseSDK.dismiss {
+            let alertController = UIAlertController(
+                title: "Token & Source Created\n(\(source.paymentInformation.sourceType.rawValue))",
+                message: "A token with id of \(token.id) and source with id of \(source.id) was successfully created. Please send this id to server to create a charge.",
+                preferredStyle: .alert
+            )
+            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+
     }
 }
 

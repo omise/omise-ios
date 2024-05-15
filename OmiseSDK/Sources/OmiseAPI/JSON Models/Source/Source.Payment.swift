@@ -87,7 +87,7 @@ extension Source.Payment: Codable {
             self = try .trueMoneyWallet(TrueMoneyWallet(from: decoder))
         case FPX.sourceType:
             self = try .fpx(FPX(from: decoder))
-        case _ where Installment.sourceTypes.contains(sourceType):
+        case _ where sourceType.isInstallment:
             self = try .installment(Installment(from: decoder))
         default:
             self = .sourceType(sourceType)
@@ -104,7 +104,7 @@ extension Source.Payment {
             EContext.sourceType,
             TrueMoneyWallet.sourceType,
             FPX.sourceType
-        ] + Installment.sourceTypes
+        ] + SourceType.installments
 
         return requiresDetails.contains(sourceType)
     }

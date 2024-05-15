@@ -5,8 +5,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/omise/omise-ios.git",
       "state" : {
-        "branch" : "feature/v5_refactoring",
-        "revision" : "a59269f3d734ebc17d8e717b5c03b17d5d67a679"
+        "branch" : "feature/MIT-2470",
+        "revision" : "4f1bbf9a0f0828c7531664276fc244fd8433a869"
+      }
+    },
+    {
+      "identity" : "spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ios-3ds-sdk/SPM",
+      "state" : {
+        "revision" : "a4e55d7f10294ea81abd1db393ae05606a5efa46",
+        "version" : "2.4.0"
       }
     }
   ],

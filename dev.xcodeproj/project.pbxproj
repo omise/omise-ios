@@ -25,7 +25,7 @@
 		750126722B8A49BC00ED5E14 /* FPX.Bank+ViewPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750126712B8A49BC00ED5E14 /* FPX.Bank+ViewPresentable.swift */; };
 		750126742B8A580500ED5E14 /* SelectDuitNowOBWBankViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750126732B8A580500ED5E14 /* SelectDuitNowOBWBankViewModel.swift */; };
 		750126772B95971A00ED5E14 /* ChoosePaymentCoordinator+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750126762B95971A00ED5E14 /* ChoosePaymentCoordinator+Helpers.swift */; };
-		750126792B95A34000ED5E14 /* AuthorizingPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 750126782B95A34000ED5E14 /* AuthorizingPaymentViewController.xib */; };
+		750126792B95A34000ED5E14 /* AuthorizingPaymentWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 750126782B95A34000ED5E14 /* AuthorizingPaymentWebViewController.xib */; };
 		7502CA532A3011A900766E7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7502CA562A3011A900766E7D /* LaunchScreen.storyboard */; };
 		7502CA5F2A31A7D600766E7D /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7502CA5E2A31A7D600766E7D /* CountryListViewController.swift */; };
 		7502CA602A31A7D600766E7D /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7502CA5E2A31A7D600766E7D /* CountryListViewController.swift */; };
@@ -87,8 +87,29 @@
 		756C8F262A40698600D53059 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C8F252A40698600D53059 /* TextFieldView.swift */; };
 		757B0A742AD71E3100DEAE8F /* OmiseUnitTestKit in Frameworks */ = {isa = PBXBuildFile; productRef = 757B0A732AD71E3100DEAE8F /* OmiseUnitTestKit */; };
 		757B0A752AD71E3100DEAE8F /* OmiseUnitTestKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 757B0A732AD71E3100DEAE8F /* OmiseUnitTestKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		757E14352BD61DFE005F08AD /* ChoosePaymentMethodDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757E14342BD61DFE005F08AD /* ChoosePaymentMethodDelegate.swift */; };
 		7588011E2BAAB37C00F02934 /* AppDeeplink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7588011D2BAAB37C00F02934 /* AppDeeplink.swift */; };
 		758801202BAAC70200F02934 /* URL+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7588011F2BAAC70200F02934 /* URL+Helpers.swift */; };
+		758A4E6E2BE38A5F005E7B5A /* CryptData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4E6B2BE38A5E005E7B5A /* CryptData.swift */; };
+		758A4E6F2BE38A5F005E7B5A /* String+sha512.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4E6C2BE38A5E005E7B5A /* String+sha512.swift */; };
+		758A4E702BE38A5F005E7B5A /* String+PemCert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4E6D2BE38A5E005E7B5A /* String+PemCert.swift */; };
+		758A4E732BE38A7E005E7B5A /* NetceteraThreeDSController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4E712BE38A7E005E7B5A /* NetceteraThreeDSController.swift */; };
+		758A4E742BE38A7E005E7B5A /* NetceteraConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4E722BE38A7E005E7B5A /* NetceteraConfig.swift */; };
+		758A4E7C2BE38A89005E7B5A /* ThreeDSButtonCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4E762BE38A88005E7B5A /* ThreeDSButtonCustomization.swift */; };
+		758A4E7D2BE38A89005E7B5A /* ThreeDSLabelCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4E772BE38A89005E7B5A /* ThreeDSLabelCustomization.swift */; };
+		758A4E7E2BE38A89005E7B5A /* ThreeDSToolbarCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4E782BE38A89005E7B5A /* ThreeDSToolbarCustomization.swift */; };
+		758A4E7F2BE38A89005E7B5A /* ThreeDSCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4E792BE38A89005E7B5A /* ThreeDSCustomization.swift */; };
+		758A4E802BE38A89005E7B5A /* ThreeDSUICustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4E7A2BE38A89005E7B5A /* ThreeDSUICustomization.swift */; };
+		758A4E812BE38A89005E7B5A /* ThreeDSTextBoxCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4E7B2BE38A89005E7B5A /* ThreeDSTextBoxCustomization.swift */; };
+		758A4E842BE38AC3005E7B5A /* ThreeDS_SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 758A4E832BE38AC3005E7B5A /* ThreeDS_SDK */; };
+		758A4E862BE38AD0005E7B5A /* ThreeDS_SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 758A4E852BE38AD0005E7B5A /* ThreeDS_SDK */; };
+		758A4E902BE38AFD005E7B5A /* NetceteraThreeDSControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4E882BE38AFD005E7B5A /* NetceteraThreeDSControllerTests.swift */; };
+		758A4E922BE38AFD005E7B5A /* UICustomizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4E8A2BE38AFD005E7B5A /* UICustomizationTests.swift */; };
+		758A4E962BE38AFD005E7B5A /* ThreeDSButtonCustomizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4E8E2BE38AFD005E7B5A /* ThreeDSButtonCustomizationTests.swift */; };
+		758A4E972BE38AFD005E7B5A /* SHA512Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4E8F2BE38AFD005E7B5A /* SHA512Tests.swift */; };
+		758A4E9F2BE3DFDF005E7B5A /* URL+PathComponentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4E9E2BE3DFDF005E7B5A /* URL+PathComponentsTests.swift */; };
+		758A4EA62BE9D5C0005E7B5A /* Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4EA52BE9D5C0005E7B5A /* Closures.swift */; };
+		758A4EA82BE9D722005E7B5A /* AuthorizingPaymentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4EA72BE9D722005E7B5A /* AuthorizingPaymentDelegate.swift */; };
 		759856242A286C880087B605 /* UIScrollView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759856232A286C880087B605 /* UIScrollView+Helpers.swift */; };
 		759C7EC02B7DC7F50029D555 /* SourceType+MobileBanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759C7EBF2B7DC7F50029D555 /* SourceType+MobileBanking.swift */; };
 		759C7EC22B7DC80A0029D555 /* SourceType+InternetBanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759C7EC12B7DC80A0029D555 /* SourceType+InternetBanking.swift */; };
@@ -175,7 +196,7 @@
 		75F2A0BB2A1A60630038FA54 /* AtomePaymentFormViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0B52A1A5F020038FA54 /* AtomePaymentFormViewContext.swift */; };
 		75F2A0C12A1A84900038FA54 /* UIColor+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0C02A1A84900038FA54 /* UIColor+Helpers.swift */; };
 		75F2A0C22A1A87AE0038FA54 /* UIColor+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A0C02A1A84900038FA54 /* UIColor+Helpers.swift */; };
-		8A188BB01D951E3C00FFF467 /* AuthorizingPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentViewController.swift */; };
+		8A188BB01D951E3C00FFF467 /* AuthorizingPaymentWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentWebViewController.swift */; };
 		8A2C451920ECC7A60033E2EB /* OmiseSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 225931181CE3210700841B86 /* OmiseSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8A40DA29216B441E00749F45 /* PaymentSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */; };
 		8A40DA2B216B53E900749F45 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A40DA2A216B53E900749F45 /* Tools.swift */; };
@@ -286,7 +307,7 @@
 		750126712B8A49BC00ED5E14 /* FPX.Bank+ViewPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FPX.Bank+ViewPresentable.swift"; sourceTree = "<group>"; };
 		750126732B8A580500ED5E14 /* SelectDuitNowOBWBankViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDuitNowOBWBankViewModel.swift; sourceTree = "<group>"; };
 		750126762B95971A00ED5E14 /* ChoosePaymentCoordinator+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChoosePaymentCoordinator+Helpers.swift"; sourceTree = "<group>"; };
-		750126782B95A34000ED5E14 /* AuthorizingPaymentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthorizingPaymentViewController.xib; sourceTree = "<group>"; };
+		750126782B95A34000ED5E14 /* AuthorizingPaymentWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthorizingPaymentWebViewController.xib; sourceTree = "<group>"; };
 		7502CA552A3011A900766E7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7502CA582A3011B000766E7D /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		7502CA5A2A3011B100766E7D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -335,8 +356,28 @@
 		756C8F252A40698600D53059 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		757B0A712AD71D7B00DEAE8F /* OmiseSwiftUIKit */ = {isa = PBXFileReference; lastKnownFileType = text; name = OmiseSwiftUIKit; path = Helpers/OmiseSwiftUIKit; sourceTree = SOURCE_ROOT; };
 		757B0A722AD71DCD00DEAE8F /* OmiseUnitTestKit */ = {isa = PBXFileReference; lastKnownFileType = text; name = OmiseUnitTestKit; path = Helpers/OmiseUnitTestKit; sourceTree = SOURCE_ROOT; };
+		757E14342BD61DFE005F08AD /* ChoosePaymentMethodDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePaymentMethodDelegate.swift; sourceTree = "<group>"; };
 		7588011D2BAAB37C00F02934 /* AppDeeplink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDeeplink.swift; sourceTree = "<group>"; };
 		7588011F2BAAC70200F02934 /* URL+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Helpers.swift"; sourceTree = "<group>"; };
+		758A4E6B2BE38A5E005E7B5A /* CryptData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptData.swift; sourceTree = "<group>"; };
+		758A4E6C2BE38A5E005E7B5A /* String+sha512.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+sha512.swift"; sourceTree = "<group>"; };
+		758A4E6D2BE38A5E005E7B5A /* String+PemCert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+PemCert.swift"; sourceTree = "<group>"; };
+		758A4E712BE38A7E005E7B5A /* NetceteraThreeDSController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetceteraThreeDSController.swift; sourceTree = "<group>"; };
+		758A4E722BE38A7E005E7B5A /* NetceteraConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetceteraConfig.swift; sourceTree = "<group>"; };
+		758A4E762BE38A88005E7B5A /* ThreeDSButtonCustomization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeDSButtonCustomization.swift; sourceTree = "<group>"; };
+		758A4E772BE38A89005E7B5A /* ThreeDSLabelCustomization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeDSLabelCustomization.swift; sourceTree = "<group>"; };
+		758A4E782BE38A89005E7B5A /* ThreeDSToolbarCustomization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeDSToolbarCustomization.swift; sourceTree = "<group>"; };
+		758A4E792BE38A89005E7B5A /* ThreeDSCustomization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeDSCustomization.swift; sourceTree = "<group>"; };
+		758A4E7A2BE38A89005E7B5A /* ThreeDSUICustomization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeDSUICustomization.swift; sourceTree = "<group>"; };
+		758A4E7B2BE38A89005E7B5A /* ThreeDSTextBoxCustomization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeDSTextBoxCustomization.swift; sourceTree = "<group>"; };
+		758A4E882BE38AFD005E7B5A /* NetceteraThreeDSControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetceteraThreeDSControllerTests.swift; sourceTree = "<group>"; };
+		758A4E8A2BE38AFD005E7B5A /* UICustomizationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICustomizationTests.swift; sourceTree = "<group>"; };
+		758A4E8B2BE38AFD005E7B5A /* AuthorizingPaymentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizingPaymentTests.swift; sourceTree = "<group>"; };
+		758A4E8E2BE38AFD005E7B5A /* ThreeDSButtonCustomizationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeDSButtonCustomizationTests.swift; sourceTree = "<group>"; };
+		758A4E8F2BE38AFD005E7B5A /* SHA512Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA512Tests.swift; sourceTree = "<group>"; };
+		758A4E9E2BE3DFDF005E7B5A /* URL+PathComponentsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+PathComponentsTests.swift"; sourceTree = "<group>"; };
+		758A4EA52BE9D5C0005E7B5A /* Closures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Closures.swift; sourceTree = "<group>"; };
+		758A4EA72BE9D722005E7B5A /* AuthorizingPaymentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizingPaymentDelegate.swift; sourceTree = "<group>"; };
 		759856232A286C880087B605 /* UIScrollView+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Helpers.swift"; sourceTree = "<group>"; };
 		759C7EBF2B7DC7F50029D555 /* SourceType+MobileBanking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SourceType+MobileBanking.swift"; sourceTree = "<group>"; };
 		759C7EC12B7DC80A0029D555 /* SourceType+InternetBanking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SourceType+InternetBanking.swift"; sourceTree = "<group>"; };
@@ -419,7 +460,7 @@
 		75F2A0C02A1A84900038FA54 /* UIColor+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Helpers.swift"; sourceTree = "<group>"; };
 		75F8C0B62B1F78E300AE78D9 /* PaymentChooserViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentChooserViewControllerTests.swift; sourceTree = "<group>"; };
 		8A00FEC21F1DE88600246078 /* README.md */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; tabWidth = 2; };
-		8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizingPaymentViewController.swift; sourceTree = "<group>"; };
+		8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizingPaymentWebViewController.swift; sourceTree = "<group>"; };
 		8A25E929213CF6F300D48252 /* EContextPaymentFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EContextPaymentFormController.swift; sourceTree = "<group>"; };
 		8A275CBB21241E4500C5716F /* MainActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainActionButton.swift; sourceTree = "<group>"; };
 		8A30FB7C214929C900DC09DC /* PaymentCreatorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCreatorController.swift; sourceTree = "<group>"; };
@@ -459,6 +500,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				758A4E842BE38AC3005E7B5A /* ThreeDS_SDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +526,7 @@
 			files = (
 				987A02CE1CE35D5E0035417A /* OmiseSDK.framework in Frameworks */,
 				757B0A742AD71E3100DEAE8F /* OmiseUnitTestKit in Frameworks */,
+				758A4E862BE38AD0005E7B5A /* ThreeDS_SDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +562,7 @@
 		2259311A1CE3210700841B86 /* OmiseSDK */ = {
 			isa = PBXGroup;
 			children = (
+				75348D4C29C3FC8F0008C8A3 /* ToolKit */,
 				75E0EB872B7BCEA000E3198A /* Sources */,
 				8A00FEC21F1DE88600246078 /* README.md */,
 				2259311D1CE3210700841B86 /* Info.plist */,
@@ -660,6 +704,7 @@
 		75348D4C29C3FC8F0008C8A3 /* ToolKit */ = {
 			isa = PBXGroup;
 			children = (
+				758A4EA42BE9D599005E7B5A /* Typedefs */,
 				75F2A0AE2A1A5BE30038FA54 /* Property Wrappers */,
 				75405A852A26340E008C21F6 /* UI Extensions */,
 				75405A7E2A262B14008C21F6 /* Extensions */,
@@ -691,6 +736,72 @@
 				75D13DD52B8653360073A831 /* UIControl.State+Hashable.swift */,
 			);
 			path = "UI Extensions";
+			sourceTree = "<group>";
+		};
+		757E14332BD61DBB005F08AD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				75D13DC02B8400610073A831 /* SelectPaymentMethodViewModel.swift */,
+				75D13DC82B8529790073A831 /* SelectSourceTypePaymentViewModel.swift */,
+				75D13DCC2B8536B10073A831 /* SelectInstallmentTermsViewModel.swift */,
+				7501266F2B8A490000ED5E14 /* SelectFPXBankViewModel.swift */,
+				750126732B8A580500ED5E14 /* SelectDuitNowOBWBankViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		758A4E682BE389B2005E7B5A /* 3DS */ = {
+			isa = PBXGroup;
+			children = (
+				758A4E752BE38A84005E7B5A /* UICustomization */,
+				758A4E722BE38A7E005E7B5A /* NetceteraConfig.swift */,
+				758A4E712BE38A7E005E7B5A /* NetceteraThreeDSController.swift */,
+				758A4E6A2BE38A49005E7B5A /* Crypto */,
+			);
+			path = 3DS;
+			sourceTree = "<group>";
+		};
+		758A4E6A2BE38A49005E7B5A /* Crypto */ = {
+			isa = PBXGroup;
+			children = (
+				758A4E6B2BE38A5E005E7B5A /* CryptData.swift */,
+				758A4E6D2BE38A5E005E7B5A /* String+PemCert.swift */,
+				758A4E6C2BE38A5E005E7B5A /* String+sha512.swift */,
+			);
+			path = Crypto;
+			sourceTree = "<group>";
+		};
+		758A4E752BE38A84005E7B5A /* UICustomization */ = {
+			isa = PBXGroup;
+			children = (
+				758A4E762BE38A88005E7B5A /* ThreeDSButtonCustomization.swift */,
+				758A4E792BE38A89005E7B5A /* ThreeDSCustomization.swift */,
+				758A4E772BE38A89005E7B5A /* ThreeDSLabelCustomization.swift */,
+				758A4E7B2BE38A89005E7B5A /* ThreeDSTextBoxCustomization.swift */,
+				758A4E782BE38A89005E7B5A /* ThreeDSToolbarCustomization.swift */,
+				758A4E7A2BE38A89005E7B5A /* ThreeDSUICustomization.swift */,
+			);
+			path = UICustomization;
+			sourceTree = "<group>";
+		};
+		758A4E872BE38AE8005E7B5A /* 3DS */ = {
+			isa = PBXGroup;
+			children = (
+				758A4E8B2BE38AFD005E7B5A /* AuthorizingPaymentTests.swift */,
+				758A4E882BE38AFD005E7B5A /* NetceteraThreeDSControllerTests.swift */,
+				758A4E8F2BE38AFD005E7B5A /* SHA512Tests.swift */,
+				758A4E8E2BE38AFD005E7B5A /* ThreeDSButtonCustomizationTests.swift */,
+				758A4E8A2BE38AFD005E7B5A /* UICustomizationTests.swift */,
+			);
+			path = 3DS;
+			sourceTree = "<group>";
+		};
+		758A4EA42BE9D599005E7B5A /* Typedefs */ = {
+			isa = PBXGroup;
+			children = (
+				758A4EA52BE9D5C0005E7B5A /* Closures.swift */,
+			);
+			path = Typedefs;
 			sourceTree = "<group>";
 		};
 		75CFC4EF2B753AB900422A8F /* JSON Models */ = {
@@ -857,13 +968,9 @@
 		75D13DF62B866C650073A831 /* Select Payment From Lists */ = {
 			isa = PBXGroup;
 			children = (
+				757E14332BD61DBB005F08AD /* ViewModels */,
 				75D13DDC2B8658660073A831 /* SelectPaymentPresentableProtocol.swift */,
 				75D13DBA2B83FB470073A831 /* SelectPaymentController.swift */,
-				75D13DC02B8400610073A831 /* SelectPaymentMethodViewModel.swift */,
-				75D13DC82B8529790073A831 /* SelectSourceTypePaymentViewModel.swift */,
-				75D13DCC2B8536B10073A831 /* SelectInstallmentTermsViewModel.swift */,
-				7501266F2B8A490000ED5E14 /* SelectFPXBankViewModel.swift */,
-				750126732B8A580500ED5E14 /* SelectDuitNowOBWBankViewModel.swift */,
 			);
 			path = "Select Payment From Lists";
 			sourceTree = "<group>";
@@ -883,8 +990,8 @@
 		75D13DFA2B866CF40073A831 /* Authorizing Payment */ = {
 			isa = PBXGroup;
 			children = (
-				8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentViewController.swift */,
-				750126782B95A34000ED5E14 /* AuthorizingPaymentViewController.xib */,
+				8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentWebViewController.swift */,
+				750126782B95A34000ED5E14 /* AuthorizingPaymentWebViewController.xib */,
 			);
 			path = "Authorizing Payment";
 			sourceTree = "<group>";
@@ -966,12 +1073,14 @@
 		75E0EB872B7BCEA000E3198A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				75348D4C29C3FC8F0008C8A3 /* ToolKit */,
+				758A4E682BE389B2005E7B5A /* 3DS */,
 				75E0EBBD2B7D0DB600E3198A /* Components */,
 				75E0EB942B7BD00F00E3198A /* Models */,
 				75E0EBBF2B7D13D200E3198A /* OmiseAPI */,
 				75D13DEE2B866BCA0073A831 /* Views */,
 				75CFC4D12B73AFD500422A8F /* OmiseSDK.swift */,
+				757E14342BD61DFE005F08AD /* ChoosePaymentMethodDelegate.swift */,
+				758A4EA72BE9D722005E7B5A /* AuthorizingPaymentDelegate.swift */,
 				755CD9222BA2000600E8FCDA /* ClientProtocol.swift */,
 			);
 			path = Sources;
@@ -1092,6 +1201,8 @@
 		987A02CA1CE35D5E0035417A /* OmiseSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				758A4E9E2BE3DFDF005E7B5A /* URL+PathComponentsTests.swift */,
+				758A4E872BE38AE8005E7B5A /* 3DS */,
 				757B0A722AD71DCD00DEAE8F /* OmiseUnitTestKit */,
 				987A02CD1CE35D5E0035417A /* Info.plist */,
 				987A03AC1CE5CD450035417A /* Fixtures */,
@@ -1156,6 +1267,7 @@
 			);
 			name = OmiseSDK;
 			packageProductDependencies = (
+				758A4E832BE38AC3005E7B5A /* ThreeDS_SDK */,
 			);
 			productName = OmiseSDK;
 			productReference = 225931181CE3210700841B86 /* OmiseSDK.framework */;
@@ -1169,6 +1281,7 @@
 				22D480991D0EB29C00544CE1 /* Sources */,
 				22D4809A1D0EB29C00544CE1 /* Frameworks */,
 				8A0928211D545455008D393F /* Embed Frameworks */,
+				752970442BF4A8F100DE1AA5 /* Skip Config file changes */,
 			);
 			buildRules = (
 			);
@@ -1221,6 +1334,7 @@
 			name = OmiseSDKTests;
 			packageProductDependencies = (
 				757B0A732AD71E3100DEAE8F /* OmiseUnitTestKit */,
+				758A4E852BE38AD0005E7B5A /* ThreeDS_SDK */,
 			);
 			productName = OmiseSDKTests;
 			productReference = 987A02C91CE35D5E0035417A /* OmiseSDKTests.xctest */;
@@ -1268,6 +1382,9 @@
 				Base,
 			);
 			mainGroup = 2259310E1CE3210700841B86;
+			packageReferences = (
+				758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */,
+			);
 			productRefGroup = 225931191CE3210700841B86 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1290,7 +1407,7 @@
 				75D13E1B2B86FD2D0073A831 /* CCVInfoController.xib in Resources */,
 				75405AA82A27F97E008C21F6 /* Localizable.strings in Resources */,
 				7501266E2B8A411C00ED5E14 /* FPXPaymentFormController.xib in Resources */,
-				750126792B95A34000ED5E14 /* AuthorizingPaymentViewController.xib in Resources */,
+				750126792B95A34000ED5E14 /* AuthorizingPaymentWebViewController.xib in Resources */,
 				8A776647214A5FC60029D166 /* NoticeView.xib in Resources */,
 				2225B3541D0FDD63003EB396 /* Assets.xcassets in Resources */,
 				8AF5517A213D4C0100D61C98 /* Localizable.stringsdict in Resources */,
@@ -1331,6 +1448,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		752970442BF4A8F100DE1AA5 /* Skip Config file changes */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Skip Config file changes";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if git --version >/dev/null 2>&1; then\n    git update-index --assume-unchanged ExampleApp/Config.local.plist\nelse\n    echo \"Git is not installed, skipping command.\"\nfi\n";
+		};
 		75341FF329A716FD003027E6 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -1373,6 +1508,7 @@
 				73F9BA4B25E6053700F55CA8 /* FPXPaymentFormController.swift in Sources */,
 				98FF99BB2577789800476487 /* Configuration.swift in Sources */,
 				759C7EC02B7DC7F50029D555 /* SourceType+MobileBanking.swift in Sources */,
+				758A4EA82BE9D722005E7B5A /* AuthorizingPaymentDelegate.swift in Sources */,
 				75B420612B776D8A0036134D /* APIProtocol.swift in Sources */,
 				75CFC4D22B73AFD500422A8F /* OmiseSDK.swift in Sources */,
 				75131F862AC2BD9D008BCB17 /* UIViewController+NavigationBarStyle.swift in Sources */,
@@ -1395,6 +1531,7 @@
 				75CFC4EE2B7537BC00422A8F /* Client+URLRequest.swift in Sources */,
 				75D13DAC2B83B58B0073A831 /* Source.Payment.EContext.swift in Sources */,
 				75D13D8C2B8385820073A831 /* UIBarButtonItem+Helpers.swift in Sources */,
+				758A4E7C2BE38A89005E7B5A /* ThreeDSButtonCustomization.swift in Sources */,
 				75E0EBA22B7BD02200E3198A /* Token.Card.swift in Sources */,
 				75405A8B2A26340E008C21F6 /* UIStackView+Helpers.swift in Sources */,
 				75D13DA82B83B58B0073A831 /* Source.Payment.DuitNowOBW.swift in Sources */,
@@ -1408,9 +1545,10 @@
 				8AF9857121479F38007E18ED /* CCVInfoController.swift in Sources */,
 				75E0EB7C2B7B410600E3198A /* Client+NetworkService.swift in Sources */,
 				75D13D602B807AC90073A831 /* ChoosePaymentCoordinator.swift in Sources */,
+				758A4E7D2BE38A89005E7B5A /* ThreeDSLabelCustomization.swift in Sources */,
 				75D13DB42B83B71D0073A831 /* DuitNowOBW.Bank+ViewPresentable.swift in Sources */,
 				75405A7C2A25EC88008C21F6 /* Array+Helpers.swift in Sources */,
-				8A188BB01D951E3C00FFF467 /* AuthorizingPaymentViewController.swift in Sources */,
+				8A188BB01D951E3C00FFF467 /* AuthorizingPaymentWebViewController.swift in Sources */,
 				75D13DFC2B866DFE0073A831 /* PaymentCreatorController.swift in Sources */,
 				14ACEF831D02D641001C5319 /* CardExpiryDatePicker.swift in Sources */,
 				75CFC4F32B753BCD00422A8F /* Capability.PaymentMethod.swift in Sources */,
@@ -1428,28 +1566,37 @@
 				986406301CFEA7E4004BCF51 /* CardCVVTextField.swift in Sources */,
 				75D13DAA2B83B58B0073A831 /* Source.Payment.Installment.swift in Sources */,
 				75D13DD62B8653360073A831 /* UIControl.State+Hashable.swift in Sources */,
+				758A4E7F2BE38A89005E7B5A /* ThreeDSCustomization.swift in Sources */,
 				751E7BEC2B7F7CE50031B4A2 /* ViewPresentable.swift in Sources */,
 				751E7BEA2B7F77120031B4A2 /* Localized+Omise.swift in Sources */,
 				75D13DA52B83B58B0073A831 /* Source.swift in Sources */,
 				22445FFC1CF41DD300801D0F /* Globals.swift in Sources */,
+				758A4E702BE38A5F005E7B5A /* String+PemCert.swift in Sources */,
 				7501265F2B8893C900ED5E14 /* PaymentFormController.swift in Sources */,
 				756C8F222A40694F00D53059 /* CreditCardPaymentViewContext.swift in Sources */,
 				751E7BF02B7FBA760031B4A2 /* UIColor+Omise.swift in Sources */,
 				751E7BF22B7FC90C0031B4A2 /* SourceType+Collections.swift in Sources */,
 				750126722B8A49BC00ED5E14 /* FPX.Bank+ViewPresentable.swift in Sources */,
+				758A4E812BE38A89005E7B5A /* ThreeDSTextBoxCustomization.swift in Sources */,
 				75D13DE42B8666CC0073A831 /* SelectSourceTypeDelegate.swift in Sources */,
 				75CFC4DD2B73F75C00422A8F /* OmiseAPI.swift in Sources */,
 				75348D4E29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift in Sources */,
 				755CD9232BA2000600E8FCDA /* ClientProtocol.swift in Sources */,
+				757E14352BD61DFE005F08AD /* ChoosePaymentMethodDelegate.swift in Sources */,
+				758A4E802BE38A89005E7B5A /* ThreeDSUICustomization.swift in Sources */,
 				75E0EB9D2B7BD00F00E3198A /* CardBrand.swift in Sources */,
+				758A4EA62BE9D5C0005E7B5A /* Closures.swift in Sources */,
+				758A4E6E2BE38A5F005E7B5A /* CryptData.swift in Sources */,
 				75E0EB9A2B7BD00F00E3198A /* Currency.swift in Sources */,
 				75405A9C2A266F50008C21F6 /* AtomePaymentFormViewModel.swift in Sources */,
 				75D13DA72B83B58B0073A831 /* Source.Payment.BarcodeAlipay.swift in Sources */,
 				75CFC4DB2B73F5AF00422A8F /* NetworkService.swift in Sources */,
+				758A4E6F2BE38A5F005E7B5A /* String+sha512.swift in Sources */,
 				75E0EBA32B7BD02200E3198A /* Token.swift in Sources */,
 				75405A932A26340E008C21F6 /* UIButton+Helpers.swift in Sources */,
 				751E7BD92B7E5D130031B4A2 /* PaymentMethod.swift in Sources */,
 				754B78182B8741CD00973B71 /* TapGestureHandler.swift in Sources */,
+				758A4E742BE38A7E005E7B5A /* NetceteraConfig.swift in Sources */,
 				75D13DCB2B8531D20073A831 /* Assets.swift in Sources */,
 				986406321CFEA7E4004BCF51 /* CardNumberTextField.swift in Sources */,
 				750126742B8A580500ED5E14 /* SelectDuitNowOBWBankViewModel.swift in Sources */,
@@ -1470,6 +1617,7 @@
 				75E0EBBB2B7BD02F00E3198A /* SourceType.swift in Sources */,
 				75D13DAF2B83B58B0073A831 /* Source.Payment.Atome.swift in Sources */,
 				75CFC4F12B753B0F00422A8F /* Capability.swift in Sources */,
+				758A4E7E2BE38A89005E7B5A /* ThreeDSToolbarCustomization.swift in Sources */,
 				75CFC4CE2B73AF0E00422A8F /* Client.swift in Sources */,
 				7502CA622A31A7E100766E7D /* CountryListViewModelProtocol.swift in Sources */,
 				75D13DC12B8400610073A831 /* SelectPaymentMethodViewModel.swift in Sources */,
@@ -1479,6 +1627,7 @@
 				755CD9212BA1C81600E8FCDA /* UIViewController+KeyboardAppearance.swift in Sources */,
 				8AEF7804224CABF800787470 /* EContextPaymentFormController.swift in Sources */,
 				75D13DC92B8529790073A831 /* SelectSourceTypePaymentViewModel.swift in Sources */,
+				758A4E732BE38A7E005E7B5A /* NetceteraThreeDSController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1527,18 +1676,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				7509D4E02A1AA1450050AB38 /* AtomeFormViewControllerTests.swift in Sources */,
+				758A4E962BE38AFD005E7B5A /* ThreeDSButtonCustomizationTests.swift in Sources */,
+				758A4E902BE38AFD005E7B5A /* NetceteraThreeDSControllerTests.swift in Sources */,
 				7509D4E42A1C89F10050AB38 /* AtomeFormViewModelMockup.swift in Sources */,
 				750708F42B7A765500A48DD0 /* OmiseSDKTests.swift in Sources */,
 				75E0EB7E2B7B5EE400E3198A /* CreateTokenPayloadTests.swift in Sources */,
 				75E0EB712B7A904100E3198A /* SourceFlowTests.swift in Sources */,
 				75E0EB832B7B79E700E3198A /* CapabilityTests.swift in Sources */,
 				F615CBF8261565D600E1A2D9 /* CardExpiryDatePickerTests.swift in Sources */,
+				758A4E9F2BE3DFDF005E7B5A /* URL+PathComponentsTests.swift in Sources */,
+				758A4E922BE38AFD005E7B5A /* UICustomizationTests.swift in Sources */,
 				75E0EB722B7A962600E3198A /* CreateSourcePayloadTests.swift in Sources */,
 				753279382A31B40F008048AD /* CountryListViewModelMockup.swift in Sources */,
 				7509D4E72A1C8E3D0050AB38 /* AtomeFormViewModelTests.swift in Sources */,
 				7509D4E22A1C876B0050AB38 /* AtomeFormViewContextMockup.swift in Sources */,
 				750708E32B790B8300A48DD0 /* String+JSON.swift in Sources */,
 				750708E52B790BD600A48DD0 /* SampleData.swift in Sources */,
+				758A4E972BE38AFD005E7B5A /* SHA512Tests.swift in Sources */,
 				750708E02B7909BB00A48DD0 /* SourceTests.swift in Sources */,
 				75CFC4D42B73B21100422A8F /* ClientTests.swift in Sources */,
 			);
@@ -2037,6 +2191,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ios-3ds-sdk/SPM.git";
+			requirement = {
+				kind = exactVersion;
+				version = 2.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		7509D4ED2A1D1F9F0050AB38 /* OmiseTestSDK */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2045,6 +2210,16 @@
 		757B0A732AD71E3100DEAE8F /* OmiseUnitTestKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OmiseUnitTestKit;
+		};
+		758A4E832BE38AC3005E7B5A /* ThreeDS_SDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */;
+			productName = ThreeDS_SDK;
+		};
+		758A4E852BE38AD0005E7B5A /* ThreeDS_SDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */;
+			productName = ThreeDS_SDK;
 		};
 		75D13E0E2B8678530073A831 /* OmiseSwiftUIKit */ = {
 			isa = XCSwiftPackageProductDependency;

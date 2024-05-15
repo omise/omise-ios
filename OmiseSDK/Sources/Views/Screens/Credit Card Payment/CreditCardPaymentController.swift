@@ -462,6 +462,7 @@ class CreditCardPaymentController: UIViewController {
 //        delegate?.creditCardFormViewController(self, didFailWithError: error)
         displayError(error)
         hasErrorMessage = true
+        stopActivityIndicator()
     }
 
     func displayError(_ error: Error) {

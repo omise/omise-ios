@@ -50,6 +50,20 @@ public enum SourceType: String, Codable, CaseIterable {
     case installmentTTB = "installment_ttb"
     /// United Overseas Bank (UOB)   https://docs.opn.ooo/installment-payments
     case installmentUOB = "installment_uob"
+//    /// Krungthai Card (KTC)  https://docs.opn.ooo/installment-white-label-payments
+//    case installmentWhiteLabelKTC = "installment_wlb_ktc"
+//    /// Kasikorn Bank  https://docs.opn.ooo/installment-white-label-payments
+//    case installmentWhiteLabelKBank = "installment_wlb_kbank"
+//    /// Siam Commercial Bank  https://docs.opn.ooo/installment-white-label-payments
+//    case installmentWhiteLabelSCB = "installment_wlb_scb"
+//    /// Bangkok Bank https://docs.opn.ooo/installment-white-label-payments
+//    case installmentWhiteLabelBBL = "installment_wlb_bbl"
+//    /// Krungsri https://docs.opn.ooo/installment-white-label-payments
+//    case installmentWhiteLabelBAY = "installment_wlb_bay"
+//    /// Krungsri First Choice https://docs.opn.ooo/installment-white-label-payments
+//    case installmentWhiteLabelFirstChoice = "installment_wlb_first_choice"
+//    /// TMBThanachart Bank https://docs.opn.ooo/installment-white-label-payments
+//    case installmentWhiteLabelTTB = "installment_wlb_ttb"
     /// Bank of Ayudhya (Krungsri)   https://docs.opn.ooo/internet-banking
     case internetBankingBAY = "internet_banking_bay"
     /// Bangkok Bank   https://docs.opn.ooo/internet-banking
@@ -75,8 +89,6 @@ public enum SourceType: String, Codable, CaseIterable {
     case payNow = "paynow"
     /// PayPay  https://docs.opn.ooo/paypay
     case payPay = "paypay"
-    /// Pay with Points https://docs.opn.ooo/pay-with-points
-    case pointsCiti = "points_citi"
     /// PromptPay   https://docs.opn.ooo/promptpay
     case promptPay = "promptpay"
     /// Rabbit LINE Pay https://docs.opn.ooo/rabbit-linepay
