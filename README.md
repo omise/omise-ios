@@ -329,41 +329,87 @@ extension ProductDetailViewController: ChoosePaymentMethodDelegate {
 }
 ```
 
-### Authorizing payment
+## Authorizing payment
 
-Some payment methods require customers to authorize the payment using an authorize URL. This includes [3-D Secure verification](https://docs.opn.ooo/fraud-protection#3-d-secure), [Internet Banking payment](https://docs.opn.ooo/internet-banking), and [Alipay](https://docs.opn.ooo/alipay). The Opn Payments iOS SDK provides a built-in class to authorize payments.
+Some payment methods require the customer to authorize the payment using an authorization URL. This includes [3-D Secure verification](https://docs.opn.ooo/fraud-protection#3-d-secure), [Internet Banking payment](https://docs.opn.ooo/internet-banking), [Mobile Banking SCB](https://docs.opn.ooo/mobile-banking-scb), etc. Opn Payments iOS SDK provides a built-in class to handle the authorization.
 
-On payment methods that require opening the external application (e.g., mobile banking application) to authorize the transaction, set the *return_uri* to a **deep link** or **app link** to be able to open the merchant application. Otherwise, after the cardholder authorizes the transaction on the external application, the flow redirects to the normal link in the *return_uri*, and opens it on the browser application, resulting in the payment not being completed.
-
-#### Using built-in authorizing payment view controller
-
-You can use the built-in authorizing payment view controller with the `authorizeURL` provided with the charge and expected `return URL` patterns you create.
+On payment methods that require opening the external app (e.g., mobile banking app) to authorize the transaction, set the _return_uri_ to a **deep link** or **app link** to be able to open the merchant app. Otherwise, after the cardholder authorizes the transaction on the external app, the flow redirects to the normal link in the _return_uri_, and opens it on the browser app, resulting in the payment not being completed.
+Some authorized URLs will be processed using the in-app browser flow, and others will be processed using the native flow from the SDK (3DS v2), and the SDK automatically handles all of this.
 
 ```swift
 
 omiseSDK.presentAuthorizingPayment(
     from: self,
     authorizeURL: url,
-    returnURLs: [returnURLs],
+    expectedReturnURLStrings: ["https://omise.co"],
+    threeDSRequestorAppURLString: "merchantAppScheme://3ds_auth",
+    threeDSUICustomization: nil
     delegate: self
 )
 ```
 
-Then implement the delegate to receive the `Source` or `Token` object after the user has selected:
+Replace the string `authorizeURL` with the authorized URL that comes with the created charge and the array of string `expectedReturnURLStrings` with the expected pattern of redirected URLs array.
+Replace the string `threeDSRequestorAppURLString` with the url of your app to allow the external bank apps to navigate back to your app when required.
+Optional `threeDSUICustomization` parameter is used to customize the UI of the built-in 3DS SDK during the 3DS challenge flow.
+If you want to customize the title of the authorizing payment activity, you must use the theme customization and pass the `headerText` in the `toolbarCustomization` in the `DEFAULT` theme parameter:
 
 ```swift
-extension ViewController: AuthorizingPaymentWebViewDelegate {
-  func authorizingPaymentViewController(_ viewController: AuthorizingPaymentWebViewController, didCompleteAuthorizingPaymentWithRedirectedURL redirectedURL: URL) {
-      // Handle the `redirected URL` here
-      omiseSDK.dismiss()
-  }
-  
-  func authorizingPaymentViewControllerDidCancel(_ viewController: AuthorizingPaymentWebViewController) {
-    // Handle the case that the user taps cancel.
-    omiseSDK.dismiss()
-  }
+let toolbarUI = ThreeDSToolbarCustomization(
+    backgroundColorHex: "FFFFFF",
+    headerText: "Secure Checkout",
+    buttonText: "Close",
+    textFontName: "Arial-BoldMT",
+    textColorHex: "000000",
+    textFontSize: 20
+)
+
+let customUI = ThreeDSUICustomization(toolbarCustomization: toolbarUI)
+```
+
+You can check out the [ThreeDSUICustomization](./OmiseSDK/Sources/3DS/UICustomization/ThreeDSUICustomization.swift) class to see customizable UI elements in the challenge flow.
+
+After the end-user completes the payment authorization process, the delegate
+callback will be triggered, and you will receive different responses based on how the transaction was processed
+and which flow it used. Handle it in this manner:
+
+```swift
+extension ViewController: AuthorizingPaymentDelegate {
+    func authorizingPaymentDidComplete(with redirectedURL: URL?) {
+        print("Payment is authorized with redirect url `\(String(describing: redirectedURL))`")
+        omiseSDK.dismiss()
+    }
+    func authorizingPaymentDidCancel() {
+        print("Payment is not authorized")
+        omiseSDK.dismiss()
+    }
 }
 ```
+
+You can check out the sample implementation in the [ProductDetailViewController](./ExampleApp/Views/ProductDetailViewController.swift) class in the example app.
+
+### Observing charge status in the token
+
+The following utility function observes the token until its charge status changes. You can use it to check the charge status after the payment authorization process is completed.
+
+```swift
+func observeTokenChargeStatusHandler(tokenResult: Result<Token, Error>) -> Void {
+    switch tokenResult {
+    case .success(let token):
+        // do something with Token id
+        print(token.id)
+    case .failure(let error):
+        print(error)
+    }
+}
+
+let client = omiseSDK.client
+client.observeChargeStatus(observeTokenChargeStatusHandler)
+```
+
+### Authorizing payment via an external app
+
+Some request methods allow the user to authorize the payment with an external app, for example Alipay. When a user needs to authorize the payment with an external app, `OmiseSDK` will automatically open an external app. However, merchant developers must handle the `AuthorizingPaymentDelegate` callback themselves.
+
 
 ## Objective-C compatibility
 
