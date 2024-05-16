@@ -368,9 +368,7 @@ let threeDSUICustomization = ThreeDSUICustomization(toolbarCustomization: toolba
 
 You can check out the [ThreeDSUICustomization](./OmiseSDK/Sources/3DS/UICustomization/ThreeDSUICustomization.swift) class to see customizable UI elements in the challenge flow.
 
-After the end-user completes the payment authorization process, the delegate
-callback will be triggered, and you will receive different responses based on how the transaction was processed
-and which flow it used. Handle it in this manner:
+After the end-user completes the payment authorization process, the delegate callback will be triggered, and you will receive varying responses based on how the transaction was processed and the flow it used. Handle it as follows:
 
 ```swift
 extension ViewController: AuthorizingPaymentDelegate {
