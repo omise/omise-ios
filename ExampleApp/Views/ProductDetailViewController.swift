@@ -56,15 +56,15 @@ class ProductDetailViewController: BaseViewController {
                   let url = URL(string: text) else { return }
 
 //            let toolbarUI = ThreeDSToolbarCustomization(
-//                backgroundColorHex: "FFFFFF",
+//                backgroundColorHex: "#FFFFFF",
 //                headerText: "Secure Checkout",
 //                buttonText: "Close",
 //                textFontName: "Arial-BoldMT",
-//                textColorHex: "000000",
+//                textColorHex: "#000000",
 //                textFontSize: 20
 //            )
 //
-//            let customUI = ThreeDSUICustomization(toolbarCustomization: toolbarUI)
+//            let threeDSUICustomization = ThreeDSUICustomization(toolbarCustomization: toolbarUI)
             self.omiseSDK.presentAuthorizingPayment(
                 from: self,
                 authorizeURL: url,

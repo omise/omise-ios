@@ -355,11 +355,11 @@ If you want to customize the title of the authorizing payment activity, you must
 
 ```swift
 let toolbarUI = ThreeDSToolbarCustomization(
-    backgroundColorHex: "FFFFFF",
+    backgroundColorHex: "#FFFFFF",
     headerText: "Secure Checkout",
     buttonText: "Close",
     textFontName: "Arial-BoldMT",
-    textColorHex: "000000",
+    textColorHex: "#000000",
     textFontSize: 20
 )
 
