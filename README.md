@@ -351,7 +351,7 @@ omiseSDK.presentAuthorizingPayment(
 Replace the string `authorizeURL` with the authorized URL that comes with the created charge and the array of string `expectedReturnURLStrings` with the expected pattern of redirected URLs array.
 Replace the string `threeDSRequestorAppURLString` with the url of your app to allow the external bank apps to navigate back to your app when required.
 Optional `threeDSUICustomization` parameter is used to customize the UI of the built-in 3DS SDK during the 3DS challenge flow.
-If you want to customize the title of the authorizing payment activity, you must use the theme customization and pass the `headerText` in the `toolbarCustomization` in the `DEFAULT` theme parameter:
+If you want to customize the title of the authorizing payment activity, you must use the theme customization and pass the `headerText` in the `toolbarCustomization`
 
 ```swift
 let toolbarUI = ThreeDSToolbarCustomization(
@@ -363,7 +363,7 @@ let toolbarUI = ThreeDSToolbarCustomization(
     textFontSize: 20
 )
 
-let customUI = ThreeDSUICustomization(toolbarCustomization: toolbarUI)
+let threeDSUICustomization = ThreeDSUICustomization(toolbarCustomization: toolbarUI)
 ```
 
 You can check out the [ThreeDSUICustomization](./OmiseSDK/Sources/3DS/UICustomization/ThreeDSUICustomization.swift) class to see customizable UI elements in the challenge flow.
@@ -385,7 +385,7 @@ extension ViewController: AuthorizingPaymentDelegate {
 }
 ```
 
-You can check out the sample implementation in the [ProductDetailViewController](./ExampleApp/Views/ProductDetailViewController.swift) class in the example app.
+You can check out the sample implementation in the [ProductDetailViewController](./ExampleApp/Views/ProductDetailViewController.swift#L68) class in the example app.
 
 ### Observing charge status in the token
 
