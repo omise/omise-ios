@@ -81,6 +81,9 @@ extension ChoosePaymentCoordinator {
             switch result {
             case .failure(let error):
                 self.processError(error)
+                DispatchQueue.main.async {
+                    completion()
+                }
             case .success(let source):
                 self.client.createToken(payload: tokenPayload) { [weak self, weak delegate] result in
                     switch result {
@@ -88,14 +91,12 @@ extension ChoosePaymentCoordinator {
                         delegate?.choosePaymentMethodDidComplete(with: source, token: token)
                     case .failure(let error):
                         self?.processError(error)
+                        DispatchQueue.main.async {
+                            completion()
+                        }
                     }
                 }
             }
-            
-            DispatchQueue.main.async {
-                completion()
-            }
-
         }
     }
 }
