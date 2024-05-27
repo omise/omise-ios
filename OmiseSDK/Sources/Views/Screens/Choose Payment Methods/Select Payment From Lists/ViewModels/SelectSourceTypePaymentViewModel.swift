@@ -4,7 +4,7 @@ class SelectSourceTypePaymentViewModel {
     private weak var delegate: SelectSourceTypeDelegate?
     private let title: String
 
-    private var viewOnDataReloadHandler: () -> Void = { } {
+    private var viewOnDataReloadHandler: () -> Void = { /* Non-optional default empty implementation */ } {
         didSet {
             self.viewOnDataReloadHandler()
         }
