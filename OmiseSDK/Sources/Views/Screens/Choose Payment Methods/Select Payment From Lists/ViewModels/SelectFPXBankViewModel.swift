@@ -6,7 +6,7 @@ class SelectFPXBankViewModel {
 
     let errorMessage: String?
 
-    private var viewOnDataReloadHandler: () -> Void = { } {
+    private var viewOnDataReloadHandler: () -> Void = { /* Non-optional default empty implementation */ } {
         didSet {
             self.viewOnDataReloadHandler()
         }
