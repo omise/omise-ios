@@ -170,6 +170,7 @@
 		75D13E1D2B86FF8C0073A831 /* CreditCardPaymentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D13E1C2B86FF8C0073A831 /* CreditCardPaymentDelegate.swift */; };
 		75D13E202B8703F80073A831 /* CreditCardPaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D13E1E2B8703F70073A831 /* CreditCardPaymentController.swift */; };
 		75D13E212B8703F80073A831 /* CreditCardPaymentController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75D13E1F2B8703F80073A831 /* CreditCardPaymentController.xib */; };
+		75D4E7062C05F50500ECCE72 /* OmiseErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D4E7052C05F50500ECCE72 /* OmiseErrorTests.swift */; };
 		75DAD8902A0BB8D80098AF96 /* LocalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */; };
 		75E0EB712B7A904100E3198A /* SourceFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E0EB702B7A904100E3198A /* SourceFlowTests.swift */; };
 		75E0EB722B7A962600E3198A /* CreateSourcePayloadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4208D2B78C2120036134D /* CreateSourcePayloadTests.swift */; };
@@ -435,6 +436,7 @@
 		75D13E1C2B86FF8C0073A831 /* CreditCardPaymentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardPaymentDelegate.swift; sourceTree = "<group>"; };
 		75D13E1E2B8703F70073A831 /* CreditCardPaymentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardPaymentController.swift; sourceTree = "<group>"; };
 		75D13E1F2B8703F80073A831 /* CreditCardPaymentController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreditCardPaymentController.xib; sourceTree = "<group>"; };
+		75D4E7052C05F50500ECCE72 /* OmiseErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseErrorTests.swift; sourceTree = "<group>"; };
 		75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalConfig.swift; sourceTree = "<group>"; };
 		75DAD8922A0BC9540098AF96 /* Config.local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.local.plist; sourceTree = "<group>"; };
 		75E0EB702B7A904100E3198A /* SourceFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceFlowTests.swift; sourceTree = "<group>"; };
@@ -1213,6 +1215,7 @@
 				75CFC4D32B73B21100422A8F /* ClientTests.swift */,
 				750708F32B7A765500A48DD0 /* OmiseSDKTests.swift */,
 				75F8C0B62B1F78E300AE78D9 /* PaymentChooserViewControllerTests.swift */,
+				75D4E7052C05F50500ECCE72 /* OmiseErrorTests.swift */,
 			);
 			path = OmiseSDKTests;
 			sourceTree = "<group>";
@@ -1691,6 +1694,7 @@
 				7509D4E72A1C8E3D0050AB38 /* AtomeFormViewModelTests.swift in Sources */,
 				7509D4E22A1C876B0050AB38 /* AtomeFormViewContextMockup.swift in Sources */,
 				750708E32B790B8300A48DD0 /* String+JSON.swift in Sources */,
+				75D4E7062C05F50500ECCE72 /* OmiseErrorTests.swift in Sources */,
 				750708E52B790BD600A48DD0 /* SampleData.swift in Sources */,
 				758A4E972BE38AFD005E7B5A /* SHA512Tests.swift in Sources */,
 				750708E02B7909BB00A48DD0 /* SourceTests.swift in Sources */,
