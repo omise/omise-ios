@@ -104,6 +104,7 @@ func apiKey(config: NetceteraConfig) throws -> String {
             key: decryptionKey
         )
 
+        // swiftlint:disable:next non_optional_string_data_conversion
         if let apiKey = String(data: encrypted, encoding: .utf8) {
             return apiKey
         } else {

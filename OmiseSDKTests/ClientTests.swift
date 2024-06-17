@@ -54,6 +54,7 @@ class ClientTests: XCTestCase {
             defer { expectation.fulfill() }
 
             func validateURLRequest() {
+                // swiftlint:disable:next non_optional_string_data_conversion
                 if let data = urlRequest.httpBody, let jsonString = String(data: data, encoding: .utf8) {
                     do {
                         let decodedCardPayload: CreateTokenPayload = try parse(jsonString: jsonString)
@@ -88,6 +89,7 @@ class ClientTests: XCTestCase {
             defer { expectation.fulfill() }
 
             func validateURLRequest() {
+                // swiftlint:disable:next non_optional_string_data_conversion
                 if let data = urlRequest.httpBody, let jsonString = String(data: data, encoding: .utf8) {
                     do {
                         let decodedCardPayload: CreateSourcePayload = try parse(jsonString: jsonString)
