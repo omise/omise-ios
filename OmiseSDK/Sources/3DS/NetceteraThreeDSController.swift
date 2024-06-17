@@ -187,18 +187,8 @@ extension NetceteraThreeDSController: NetceteraThreeDSControllerProtocol {
                                 return
                             }
 
-                            switch response.status {
-                            case .success:
-                                onComplete(.success(()))
+                            guard !Self.processAuthenticationResponse(response, onComplete: onComplete) else {
                                 return
-                            case .failed:
-                                onComplete(.failure(NetceteraThreeDSController.Errors.authResStatusFailed))
-                                return
-                            case .unknown:
-                                onComplete(.failure(NetceteraThreeDSController.Errors.authResStatusUnknown(response.serverStatus)))
-                                return
-                            case .challenge:
-                                break
                             }
 
                             DispatchQueue.main.async {
@@ -219,6 +209,22 @@ extension NetceteraThreeDSController: NetceteraThreeDSControllerProtocol {
                     onComplete(.failure(error))
                 }
             }
+        }
+    }
+
+    static func processAuthenticationResponse(_ response: AuthResponse, onComplete: ((Result<Void, Error>) -> Void)) -> Bool {
+        switch response.status {
+        case .success:
+            onComplete(.success(()))
+            return true
+        case .failed:
+            onComplete(.failure(NetceteraThreeDSController.Errors.authResStatusFailed))
+            return true
+        case .unknown:
+            onComplete(.failure(NetceteraThreeDSController.Errors.authResStatusUnknown(response.serverStatus)))
+            return true
+        case .challenge:
+            return false
         }
     }
 
