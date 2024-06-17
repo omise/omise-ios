@@ -3,7 +3,7 @@ import UIKit
 class SelectDuitNowOBWBankViewModel {
     private weak var delegate: SelectSourcePaymentDelegate?
 
-    private var viewOnDataReloadHandler: () -> Void = { } {
+    private var viewOnDataReloadHandler: () -> Void = { /* Non-optional default empty implementation */ } {
         didSet {
             self.viewOnDataReloadHandler()
         }

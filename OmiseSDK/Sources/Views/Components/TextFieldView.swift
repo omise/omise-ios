@@ -46,9 +46,9 @@ class TextFieldView: UIView {
     }()
 
     var onTextFieldShouldReturn: () -> (Bool) = { return false }
-    var onTextChanged: () -> Void = { }
-    var onBeginEditing: () -> Void = { }
-    var onEndEditing: () -> Void = { }
+    var onTextChanged: () -> Void = { /* Non-optional default empty implementation */ }
+    var onBeginEditing: () -> Void = { /* Non-optional default empty implementation */ }
+    var onEndEditing: () -> Void = { /* Non-optional default empty implementation */ }
 
     // swiftlint:disable attributes
     @ProxyProperty(\TextFieldView.textField.keyboardType) var keyboardType: UIKeyboardType

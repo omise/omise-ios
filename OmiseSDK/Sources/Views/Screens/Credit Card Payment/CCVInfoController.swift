@@ -16,7 +16,7 @@ class CCVInfoController: UIViewController {
         }
     }
 
-    var onCloseTapped: () -> Void = { }
+    var onCloseTapped: () -> Void = { /* Non-optional default empty implementation */ }
 
     override func viewDidLoad() {
         super.viewDidLoad()

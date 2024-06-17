@@ -6,7 +6,7 @@ public class OmiseSDK {
     public static var shared = OmiseSDK(publicKey: "pkey_")
 
     /// OmiseSDK version
-    public let version: String = "5.2.0"
+    public let version: String = "5.2.1"
 
     /// Public Key associated with this instance of OmiseSDK
     public let publicKey: String
@@ -219,7 +219,9 @@ public class OmiseSDK {
 
 private extension OmiseSDK {
     private func preloadCapabilityAPI() {
-        client.capability { _ in }
+        client.capability { _ in
+            // Preload capability and auto cache it as client.latestLoadedCapability
+        }
     }
 }
 
