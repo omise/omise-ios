@@ -831,7 +831,6 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
         return preferredRecoverySuggestionMessage.isEmpty ? nil : preferredRecoverySuggestionMessage
     }
     
-    // swiftlint:disable:next function_body_length
     static func parseBadRequestReasonsFromMessage(_ message: String, currency: Currency?) throws -> [OmiseError.APIErrorCode.BadRequestReason] {
         let reasonMessages = message.components(separatedBy: ", and ")
             .flatMap { $0.components(separatedBy: ", ") }
@@ -840,86 +839,124 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
             try OmiseError.APIErrorCode.BadRequestReason(message: $0, currency: currency)
         })
         
-        // swiftlint:disable:next closure_body_length
         return parsedReasons.sorted {
             switch $0 {
             case .amountIsLessThanValidAmount:
                 return true
             case .other:
                 return false
-                
             case .amountIsGreaterThanValidAmount:
-                switch $1 {
-                case .amountIsGreaterThanValidAmount, .invalidCurrency, .emptyName, .nameIsTooLong, .invalidName,
-                     .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
-                    return true
-                case .amountIsLessThanValidAmount, .other:
-                    return false
-                }
+                return Self.sortByAmountIsGreaterThanValidAmount(reason: $1)
             case .invalidCurrency:
-                switch $1 {
-                case .invalidCurrency, .emptyName, .nameIsTooLong, .invalidName, .invalidEmail,
-                     .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
-                    return true
-                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .other:
-                    return false
-                }
+                return Self.sortByInvalidCurrency(reason: $1)
             case .emptyName:
-                switch $1 {
-                case .emptyName, .nameIsTooLong, .invalidName, .invalidEmail, .invalidPhoneNumber,
-                     .typeNotSupported, .currencyNotSupported:
-                    return true
-                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency, .other:
-                    return false
-                }
+                return Self.sortByEmptyName(reason: $1)
             case .nameIsTooLong:
-                switch $1 {
-                case  .nameIsTooLong, .invalidName, .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
-                    return true
-                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency, .emptyName, .other:
-                    return false
-                }
+                return Self.sortByNameIsTooLong(reason: $1)
             case .invalidName:
-                switch $1 {
-                case .invalidName, .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
-                    return true
-                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency, .emptyName, .nameIsTooLong, .other:
-                    return false
-                }
+                return Self.sortByInvalidName(reason: $1)
             case .invalidEmail:
-                switch $1 {
-                case .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
-                    return true
-                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount,
-                     .invalidCurrency, .emptyName, .nameIsTooLong, .invalidName, .other:
-                    return false
-                }
+                return Self.sortByInvalidEmail(reason: $1)
             case .invalidPhoneNumber:
-                switch $1 {
-                case .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
-                    return true
-                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency,
-                     .emptyName, .nameIsTooLong, .invalidEmail, .invalidName, .other:
-                    return false
-                }
+                return Self.sortByInvalidPhoneNumber(reason: $1)
             case .typeNotSupported:
-                switch $1 {
-                case .typeNotSupported, .currencyNotSupported:
-                    return true
-                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency,
-                     .emptyName, .nameIsTooLong, .invalidEmail, .invalidName, .invalidPhoneNumber, .other:
-                    return false
-                }
+                return Self.sortByTypeNotSupported(reason: $1)
             case .currencyNotSupported:
-                switch $1 {
-                case  .currencyNotSupported:
-                    return true
-                case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency, .emptyName,
-                     .nameIsTooLong, .invalidName, .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .other:
-                    return false
-                }
+                return Self.sortByCurrencyNotSupported(reason: $1)
             }
         }
     }
-    // swiftlint:enable line_length
 }
+
+extension OmiseError.APIErrorCode.BadRequestReason {
+    static func sortByAmountIsGreaterThanValidAmount(reason: OmiseError.APIErrorCode.BadRequestReason) -> Bool {
+        switch reason {
+        case .amountIsGreaterThanValidAmount, .invalidCurrency, .emptyName, .nameIsTooLong, .invalidName,
+                .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
+            return true
+        case .amountIsLessThanValidAmount, .other:
+            return false
+        }
+    }
+
+    static func sortByInvalidCurrency(reason: OmiseError.APIErrorCode.BadRequestReason) -> Bool {
+        switch reason {
+        case .invalidCurrency, .emptyName, .nameIsTooLong, .invalidName, .invalidEmail,
+                .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
+            return true
+        case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .other:
+            return false
+        }
+
+    }
+    static func sortByEmptyName(reason: OmiseError.APIErrorCode.BadRequestReason) -> Bool {
+        switch reason {
+        case .emptyName, .nameIsTooLong, .invalidName, .invalidEmail, .invalidPhoneNumber,
+                .typeNotSupported, .currencyNotSupported:
+            return true
+        case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency, .other:
+            return false
+        }
+
+    }
+
+    static func sortByNameIsTooLong(reason: OmiseError.APIErrorCode.BadRequestReason) -> Bool {
+        switch reason {
+        case  .nameIsTooLong, .invalidName, .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
+            return true
+        case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency, .emptyName, .other:
+            return false
+        }
+    }
+
+    static func sortByInvalidName(reason: OmiseError.APIErrorCode.BadRequestReason) -> Bool {
+        switch reason {
+        case .invalidName, .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
+            return true
+        case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency, .emptyName, .nameIsTooLong, .other:
+            return false
+        }
+    }
+
+    static func sortByInvalidEmail(reason: OmiseError.APIErrorCode.BadRequestReason) -> Bool {
+        switch reason {
+        case .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
+            return true
+        case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount,
+                .invalidCurrency, .emptyName, .nameIsTooLong, .invalidName, .other:
+            return false
+        }
+    }
+
+    static func sortByInvalidPhoneNumber(reason: OmiseError.APIErrorCode.BadRequestReason) -> Bool {
+        switch reason {
+        case .invalidPhoneNumber, .typeNotSupported, .currencyNotSupported:
+            return true
+        case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency,
+                .emptyName, .nameIsTooLong, .invalidEmail, .invalidName, .other:
+            return false
+        }
+    }
+
+    static func sortByTypeNotSupported(reason: OmiseError.APIErrorCode.BadRequestReason) -> Bool {
+        switch reason {
+        case .typeNotSupported, .currencyNotSupported:
+            return true
+        case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency,
+                .emptyName, .nameIsTooLong, .invalidEmail, .invalidName, .invalidPhoneNumber, .other:
+            return false
+        }
+    }
+
+    static func sortByCurrencyNotSupported(reason: OmiseError.APIErrorCode.BadRequestReason) -> Bool {
+        switch reason {
+        case  .currencyNotSupported:
+            return true
+        case .amountIsLessThanValidAmount, .amountIsGreaterThanValidAmount, .invalidCurrency, .emptyName,
+                .nameIsTooLong, .invalidName, .invalidEmail, .invalidPhoneNumber, .typeNotSupported, .other:
+            return false
+        }
+    }
+}
+
+// swiftlint:enable line_length
