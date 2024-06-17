@@ -149,7 +149,6 @@ extension NetceteraThreeDSController: NetceteraThreeDSControllerProtocol {
         ThreeDSSDKAppDelegate.shared.appOpened(url: url)
     }
 
-    // swiftlint:disable:next function_body_length
     func processAuthorizedURL(
         _ authorizeUrl: URL,
         threeDSRequestorAppURL: String?,
