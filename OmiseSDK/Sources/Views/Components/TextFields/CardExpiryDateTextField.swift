@@ -175,7 +175,22 @@ public class CardExpiryDateTextField: OmiseTextField {
     
     static let monthStringRegularExpression: NSRegularExpression! = try? NSRegularExpression(pattern: "^([0-1]?\\d)", options: [])
 
-    // swiftlint:disable:next cyclomatic_complexity function_body_length
+    var parsedSelectedYear: Int? {
+        get {
+            return selectedYear
+        }
+        set {
+            guard let value = newValue else {
+                return
+            }
+            if value < 100 {
+                self.selectedYear = 2000 + value
+            } else {
+                self.selectedYear = value
+            }
+        }
+    }
+
     public override func paste(_ sender: Any?) {
         let pasteboard = UIPasteboard.general
         
@@ -198,39 +213,35 @@ public class CardExpiryDateTextField: OmiseTextField {
         defer {
             typingAttributes = defaultTextAttributes
         }
-        
-        var parsedSelectedYear: Int? {
-            get {
-                return selectedYear
-            }
-            set {
-                guard let value = newValue else {
-                    return
-                }
-                if value < 100 {
-                    self.selectedYear = 2000 + value
-                } else {
-                    self.selectedYear = value
-                }
-            }
+
+        parseCardExpiryDate(text: text)
+
+        if let attributedText = self.attributedText.map(NSMutableAttributedString.init(attributedString:)),
+           let separatorTextColor = self.dateSeparatorTextColor,
+           let dateSeparatorIndex = attributedText.string.firstIndex(of: "/") {
+            let range = NSRange(dateSeparatorIndex...dateSeparatorIndex, in: attributedText.string)
+            attributedText.addAttribute(.foregroundColor, value: separatorTextColor, range: range)
+            self.attributedText = attributedText
         }
-        
+    }
+
+    func parseCardExpiryDate(text: String) {
         if let separatorIndex = text.firstIndex(of: "/") {
             selectedMonth = Int(text[text.startIndex..<separatorIndex])
             if separatorIndex != text.endIndex {
                 parsedSelectedYear = Int(text[text.index(after: separatorIndex)...])
             }
         } else if let match = CardExpiryDateTextField.monthStringRegularExpression
-                    .firstMatch(in: text, options: [], range: NSRange(text.startIndex..., in: text)),
+            .firstMatch(in: text, options: [], range: NSRange(text.startIndex..., in: text)),
                   match.numberOfRanges == 2 {
             let monthStringNSRange = match.range(at: 1)
             guard let monthStringRange = Range(monthStringNSRange, in: text) else {
                 return
             }
-            
+
             selectedMonth = Int(text[monthStringRange])
             parsedSelectedYear = Int(text[monthStringRange.upperBound...])
-            
+
             if monthStringNSRange.length < 2, let selectedMonth = self.selectedMonth {
                 if let attributedText = self.attributedText.map(NSMutableAttributedString.init(attributedString:)) {
                     attributedText.mutableString.replaceCharacters(in: monthStringNSRange, with: String(format: "%02d/", selectedMonth))
@@ -240,16 +251,8 @@ public class CardExpiryDateTextField: OmiseTextField {
                 }
             }
         }
-        
-        if let attributedText = self.attributedText.map(NSMutableAttributedString.init(attributedString:)),
-           let separatorTextColor = self.dateSeparatorTextColor,
-           let dateSeparatorIndex = attributedText.string.firstIndex(of: "/") {
-            let range = NSRange(dateSeparatorIndex...dateSeparatorIndex, in: attributedText.string)
-            attributedText.addAttribute(.foregroundColor, value: separatorTextColor, range: range)
-            self.attributedText = attributedText
-        }
     }
-    
+
     public override func layoutSubviews() {
         super.layoutSubviews()
         

@@ -12,7 +12,7 @@ class SelectPaymentMethodViewModel {
     private let filter: Filter
     private weak var delegate: SelectPaymentMethodDelegate?
 
-    private var viewOnDataReloadHandler: () -> Void = { } {
+    private var viewOnDataReloadHandler: () -> Void = { /* Non-optional default empty implementation */ } {
         didSet {
             self.viewOnDataReloadHandler()
         }

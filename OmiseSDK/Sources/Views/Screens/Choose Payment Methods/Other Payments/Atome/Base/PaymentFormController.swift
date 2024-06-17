@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 class PaymentFormController: UIViewController {
-    var onSubmitButtonTappedClosure: () -> Void = { }
+    var onSubmitButtonTappedClosure: () -> Void = { /* Non-optional default empty implementation */ }
 
     @ProxyProperty(\PaymentFormController.headerTextLabel.text)
     var details: String?
