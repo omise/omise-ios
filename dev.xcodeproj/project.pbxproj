@@ -170,6 +170,7 @@
 		75D13E1D2B86FF8C0073A831 /* CreditCardPaymentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D13E1C2B86FF8C0073A831 /* CreditCardPaymentDelegate.swift */; };
 		75D13E202B8703F80073A831 /* CreditCardPaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D13E1E2B8703F70073A831 /* CreditCardPaymentController.swift */; };
 		75D13E212B8703F80073A831 /* CreditCardPaymentController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75D13E1F2B8703F80073A831 /* CreditCardPaymentController.xib */; };
+		75D2C3EE2C19A80C006072D9 /* ThreeDS_SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 75D2C3ED2C19A80C006072D9 /* ThreeDS_SDK */; };
 		75D4E7062C05F50500ECCE72 /* OmiseErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D4E7052C05F50500ECCE72 /* OmiseErrorTests.swift */; };
 		75DAD8902A0BB8D80098AF96 /* LocalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */; };
 		75E0EB712B7A904100E3198A /* SourceFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E0EB702B7A904100E3198A /* SourceFlowTests.swift */; };
@@ -511,6 +512,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75D13E0F2B8678530073A831 /* OmiseSwiftUIKit in Frameworks */,
+				75D2C3EE2C19A80C006072D9 /* ThreeDS_SDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1294,6 +1296,7 @@
 			name = ExampleApp;
 			packageProductDependencies = (
 				75D13E0E2B8678530073A831 /* OmiseSwiftUIKit */,
+				75D2C3ED2C19A80C006072D9 /* ThreeDS_SDK */,
 			);
 			productName = ExampleApp;
 			productReference = 22D4809D1D0EB29C00544CE1 /* ExampleApp.app */;
@@ -2228,6 +2231,11 @@
 		75D13E0E2B8678530073A831 /* OmiseSwiftUIKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OmiseSwiftUIKit;
+		};
+		75D2C3ED2C19A80C006072D9 /* ThreeDS_SDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */;
+			productName = ThreeDS_SDK;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
