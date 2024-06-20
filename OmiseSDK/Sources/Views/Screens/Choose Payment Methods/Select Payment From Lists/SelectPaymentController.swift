@@ -108,7 +108,7 @@ private extension SelectPaymentController {
     }
 
     func setupNavigationItems() {
-        if #available(iOSApplicationExtension 11.0, *) {
+        if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = viewModel.viewDisplayLargeTitle ? .always : .never
         }
 

@@ -51,7 +51,7 @@ class EContextPaymentFormController: UIViewController, PaymentFormUIController {
         submitButton.defaultBackgroundColor = .omise
         submitButton.disabledBackgroundColor = .line
 
-        if #available(iOSApplicationExtension 11.0, *) {
+        if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .never
         }
 

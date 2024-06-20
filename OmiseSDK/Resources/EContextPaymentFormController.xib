@@ -45,7 +45,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="APy-25-zRM">
-                            <rect key="frame" x="16" y="107.33333333333334" width="361" height="18"/>
+                            <rect key="frame" x="16" y="133.33333333333334" width="361" height="18"/>
                             <accessibility key="accessibilityConfiguration">
                                 <bool key="isElement" value="NO"/>
                             </accessibility>
@@ -54,7 +54,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUi-BV-W0e">
-                            <rect key="frame" x="16" y="190.66666666666666" width="361" height="18"/>
+                            <rect key="frame" x="16" y="242.66666666666669" width="361" height="18"/>
                             <accessibility key="accessibilityConfiguration">
                                 <bool key="isElement" value="NO"/>
                             </accessibility>
@@ -63,7 +63,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yVJ-mj-sHY" userLabel="PhoneNumber" customClass="OmiseTextField" customModule="OmiseSDK">
-                            <rect key="frame" x="16" y="213.66666666666669" width="361" height="22"/>
+                            <rect key="frame" x="16" y="265.66666666666669" width="361" height="48"/>
                             <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                             <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -81,7 +81,7 @@
                             </userDefinedRuntimeAttributes>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YLI-Ma-u7d" userLabel="Email" customClass="OmiseTextField" customModule="OmiseSDK">
-                            <rect key="frame" x="16" y="130.33333333333334" width="361" height="22"/>
+                            <rect key="frame" x="16" y="156.33333333333334" width="361" height="48"/>
                             <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                             <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -99,7 +99,7 @@
                             </userDefinedRuntimeAttributes>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="999" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ljc-YO-BUd" userLabel="Full Name" customClass="OmiseTextField" customModule="OmiseSDK">
-                            <rect key="frame" x="16" y="47" width="361" height="22"/>
+                            <rect key="frame" x="16" y="47" width="361" height="48"/>
                             <edgeInsets key="layoutMargins" top="12" left="8" bottom="12" right="8"/>
                             <color key="textColor" red="0.23529411759999999" green="0.25490196079999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -117,7 +117,7 @@
                             </userDefinedRuntimeAttributes>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nWy-ob-AQK" customClass="MainActionButton" customModule="OmiseSDK">
-                            <rect key="frame" x="16" y="274" width="361" height="44"/>
+                            <rect key="frame" x="16" y="352" width="361" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="pX6-gS-Rns"/>
                             </constraints>
@@ -141,25 +141,25 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qp2-aW-4Hl" userLabel="Full Name Error">
-                            <rect key="frame" x="16" y="74" width="361" height="13.333333333333329"/>
+                            <rect key="frame" x="16" y="100" width="361" height="13.333333333333329"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                             <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oOs-a3-tWB" userLabel="Email Error">
-                            <rect key="frame" x="16" y="157.33333333333334" width="361" height="13.333333333333343"/>
+                            <rect key="frame" x="16" y="209.33333333333331" width="361" height="13.333333333333343"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                             <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WS2-zt-C8T" userLabel="Phone Number Error">
-                            <rect key="frame" x="16" y="240.66666666666669" width="361" height="13.333333333333343"/>
+                            <rect key="frame" x="16" y="318.66666666666669" width="361" height="13.333333333333314"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                             <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="nZS-pT-77s">
-                            <rect key="frame" x="186.66666666666666" y="286" width="20" height="20"/>
+                            <rect key="frame" x="186.66666666666666" y="364" width="20" height="20"/>
                             <color key="color" red="0.23999999999999999" green="0.25" blue="0.29999999999999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         </activityIndicatorView>
                     </subviews>
@@ -243,16 +243,16 @@
     </objects>
     <designables>
         <designable name="Ljc-YO-BUd">
-            <size key="intrinsicContentSize" width="5" height="22"/>
+            <size key="intrinsicContentSize" width="23" height="48"/>
         </designable>
         <designable name="YLI-Ma-u7d">
-            <size key="intrinsicContentSize" width="5" height="22"/>
+            <size key="intrinsicContentSize" width="23" height="48"/>
         </designable>
         <designable name="nWy-ob-AQK">
             <size key="intrinsicContentSize" width="38" height="33"/>
         </designable>
         <designable name="yVJ-mj-sHY">
-            <size key="intrinsicContentSize" width="5" height="22"/>
+            <size key="intrinsicContentSize" width="23" height="48"/>
         </designable>
     </designables>
     <resources>

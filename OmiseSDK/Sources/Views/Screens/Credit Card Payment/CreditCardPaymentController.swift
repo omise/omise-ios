@@ -137,7 +137,7 @@ class CreditCardPaymentController: UIViewController {
         super.viewDidLoad()
         setupArrays()
 
-        if #available(iOSApplicationExtension 11.0, *) {
+        if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .never
         }
 
