@@ -163,7 +163,7 @@ extension OMSSourceTypeValue {
         case .weChat:
             return "wechat_pay"
         default:
-            return self.rawValue
+            return self.stringValue
         }
     }
 }

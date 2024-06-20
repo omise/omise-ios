@@ -110,6 +110,8 @@
 		75D2C5462C242C3B006072D9 /* OmiseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D2C4F42C242C3A006072D9 /* OmiseError.swift */; };
 		75D2C5482C242D07006072D9 /* OMSSourceTypeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D2C5472C242D07006072D9 /* OMSSourceTypeValue.swift */; };
 		75D2C54A2C242D10006072D9 /* OMSSupportedCurrencyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D2C5492C242D10006072D9 /* OMSSupportedCurrencyCode.swift */; };
+		75D2C54F2C2443C6006072D9 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D2C54D2C24432C006072D9 /* BaseViewController.swift */; };
+		75D2C5502C2443C6006072D9 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D2C54D2C24432C006072D9 /* BaseViewController.swift */; };
 		75DAD88C2A0BA5130098AF96 /* OmiseTestSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; };
 		75DAD88E2A0BA5130098AF96 /* OmiseTestSDK in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 75DAD88B2A0BA5130098AF96 /* OmiseTestSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		75DAD8902A0BB8D80098AF96 /* LocalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */; };
@@ -132,8 +134,6 @@
 		8A43454720DBAE76005C5C94 /* PANModelTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A43454620DBAE76005C5C94 /* PANModelTestCase.swift */; };
 		8A43FEAA2269BD8A002E89EC /* CustomCreditCardFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A43FEA92269BD8A002E89EC /* CustomCreditCardFormViewController.m */; };
 		8A5D59811D5317DD005D3346 /* OmiseSDK.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A5D59831D5317DD005D3346 /* OmiseSDK.storyboard */; };
-		8A6AA06D216B958100E49E5E /* OMSBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6AA06B216B957D00E49E5E /* OMSBaseViewController.m */; };
-		8A6AA06E216B9DAE00E49E5E /* OMSBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6AA06B216B957D00E49E5E /* OMSBaseViewController.m */; };
 		8A723A562164D7B100D902F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14541D0EBAB5000511DE /* AppDelegate.swift */; };
 		8A723A5C2164D7B100D902F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */; };
 		8A723A5F2164D7B100D902F5 /* OmiseSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 225931181CE3210700841B86 /* OmiseSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -331,6 +331,7 @@
 		75D2C4F42C242C3A006072D9 /* OmiseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmiseError.swift; sourceTree = "<group>"; };
 		75D2C5472C242D07006072D9 /* OMSSourceTypeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMSSourceTypeValue.swift; sourceTree = "<group>"; };
 		75D2C5492C242D10006072D9 /* OMSSupportedCurrencyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMSSupportedCurrencyCode.swift; sourceTree = "<group>"; };
+		75D2C54D2C24432C006072D9 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		75DAD87F2A0B9AE50098AF96 /* OmiseTestSDK */ = {isa = PBXFileReference; lastKnownFileType = text; path = OmiseTestSDK; sourceTree = SOURCE_ROOT; };
 		75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalConfig.swift; sourceTree = "<group>"; };
 		75DAD8922A0BC9540098AF96 /* Config.local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.local.plist; sourceTree = "<group>"; };
@@ -354,8 +355,6 @@
 		8A5D59821D5317DD005D3346 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/OmiseSDK.storyboard; sourceTree = "<group>"; };
 		8A5D59851D5317E0005D3346 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/OmiseSDK.strings; sourceTree = "<group>"; };
 		8A5D59871D5317E1005D3346 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/OmiseSDK.strings; sourceTree = "<group>"; };
-		8A6AA06A216B957D00E49E5E /* OMSBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OMSBaseViewController.h; sourceTree = "<group>"; };
-		8A6AA06B216B957D00E49E5E /* OMSBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OMSBaseViewController.m; sourceTree = "<group>"; };
 		8A723A632164D7B100D902F5 /* ExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A7567642178956800C684C9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8A776646214A5FC60029D166 /* NoticeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeView.xib; sourceTree = "<group>"; };
@@ -743,8 +742,7 @@
 		8AB3B85F216DCF5C006497B5 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				8A6AA06A216B957D00E49E5E /* OMSBaseViewController.h */,
-				8A6AA06B216B957D00E49E5E /* OMSBaseViewController.m */,
+				75D2C54D2C24432C006072D9 /* BaseViewController.swift */,
 				8A7A9EBC2166160300F12D86 /* PaymentSettingTableViewController.swift */,
 				8A40DA2A216B53E900749F45 /* Tools.swift */,
 				75DAD88F2A0BB8D80098AF96 /* LocalConfig.swift */,
@@ -1163,10 +1161,10 @@
 			files = (
 				8A40DA29216B441E00749F45 /* PaymentSettingTableViewController.swift in Sources */,
 				229E14581D0EBAB5000511DE /* AppDelegate.swift in Sources */,
-				8A6AA06E216B9DAE00E49E5E /* OMSBaseViewController.m in Sources */,
 				8A40DA2B216B53E900749F45 /* Tools.swift in Sources */,
 				229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */,
 				8AF56E62226878070097CFEE /* CustomCreditCardFormViewController.swift in Sources */,
+				75D2C54F2C2443C6006072D9 /* BaseViewController.swift in Sources */,
 				75DAD8902A0BB8D80098AF96 /* LocalConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1190,10 +1188,10 @@
 			files = (
 				8A723A692164D87B00D902F5 /* OMSExampleProductDetailViewController.m in Sources */,
 				8A7A9EBE2166160300F12D86 /* PaymentSettingTableViewController.swift in Sources */,
-				8A6AA06D216B958100E49E5E /* OMSBaseViewController.m in Sources */,
 				8A40DA2C216B53E900749F45 /* Tools.swift in Sources */,
 				8A43FEAA2269BD8A002E89EC /* CustomCreditCardFormViewController.m in Sources */,
 				8A723A562164D7B100D902F5 /* AppDelegate.swift in Sources */,
+				75D2C5502C2443C6006072D9 /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

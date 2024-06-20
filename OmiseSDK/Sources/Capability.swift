@@ -319,7 +319,7 @@ extension Capability.Backend {
             self.payment = .weChat
         case .source(let value):
             let configurations = try container.decodeJSONDictionary()
-            self.payment = .unknownSource(value.rawValue, configurations: configurations)
+            self.payment = .unknownSource(value.stringValue, configurations: configurations)
         }
 
         banks = try? container.decode([Bank].self, forKey: .banks)
@@ -370,7 +370,7 @@ extension Capability.Backend {
             case .card:
                 type = creditCardBackendTypeValue
             case .source(let sourceType):
-                type = sourceType.rawValue
+                type = sourceType.stringValue
             }
 
             try container.encode(type)

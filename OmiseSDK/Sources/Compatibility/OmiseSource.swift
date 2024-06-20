@@ -131,7 +131,7 @@ public class __SourceInternetBankingPayment: __SourcePaymentInformation {
     /// - Parameter type: Source type of the source to be created
     /// - Precondition: type must have a prefix of `internet_banking`
     public override init?(type: OMSSourceTypeValue) {
-        guard type.rawValue.hasPrefix(PaymentInformation.InternetBanking.paymentMethodTypePrefix) else {
+        guard type.stringValue.hasPrefix(PaymentInformation.InternetBanking.paymentMethodTypePrefix) else {
             return nil
         }
         super.init(type: type)
@@ -207,7 +207,7 @@ public class __SourceInstallmentsPayment: __SourcePaymentInformation {
     ///   - type: The type of a source to be created
     ///   - numberOfTerms: Number of terms of the installment plan
     public init?(type: OMSSourceTypeValue, numberOfTerms: Int) {
-        guard type.rawValue.hasPrefix(PaymentInformation.Installment.paymentMethodTypePrefix) else {
+        guard type.stringValue.hasPrefix(PaymentInformation.Installment.paymentMethodTypePrefix) else {
             return nil
         }
         self.numberOfTerms = numberOfTerms
@@ -338,7 +338,7 @@ public class __SourcePointsPayment: __SourcePaymentInformation {
     /// - Parameter type: Source type of the source to be created
     /// - Precondition: type must have a prefix of `points`
     public override init?(type: OMSSourceTypeValue) {
-        guard type.rawValue.hasPrefix(PaymentInformation.Points.paymentMethodTypePrefix) else {
+        guard type.stringValue.hasPrefix(PaymentInformation.Points.paymentMethodTypePrefix) else {
             return nil
         }
         super.init(type: type)
@@ -371,7 +371,7 @@ public class __SourceMobileBankingPayment: __SourcePaymentInformation {
     /// - Parameter type: Source type of the source to be created
     /// - Precondition: type must have a prefix of `internet_banking`
     public override init?(type: OMSSourceTypeValue) {
-        guard type.rawValue.hasPrefix(PaymentInformation.MobileBanking.paymentMethodTypePrefix) else {
+        guard type.stringValue.hasPrefix(PaymentInformation.MobileBanking.paymentMethodTypePrefix) else {
             return nil
         }
         super.init(type: type)
@@ -450,8 +450,8 @@ extension PaymentInformation {
             case .internetBankingBBL:
                 bank = .bbl
             case let type:
-                let range = type.rawValue.range(of: PaymentInformation.InternetBanking.paymentMethodTypePrefix)!
-                bank = .other(String(type.rawValue[range.upperBound...]))
+                let range = type.stringValue.range(of: PaymentInformation.InternetBanking.paymentMethodTypePrefix)!
+                bank = .other(String(type.stringValue[range.upperBound...]))
             }
             self = .internetBanking(bank)
         case let value as __SourceInstallmentsPayment:
@@ -476,17 +476,17 @@ extension PaymentInformation {
             case .installmentUOB:
                 brand = .uob
             case let type:
-                let range = type.rawValue.range(of: PaymentInformation.Installment.paymentMethodTypePrefix)!
-                brand = .other(String(type.rawValue[range.upperBound...]))
+                let range = type.stringValue.range(of: PaymentInformation.Installment.paymentMethodTypePrefix)!
+                brand = .other(String(type.stringValue[range.upperBound...]))
             }
             self = .installment(PaymentInformation.Installment(brand: brand, numberOfTerms: value.numberOfTerms))
         case let value where value.type == OMSSourceTypeValue.alipay:
             self = .alipay
         case let value where value.type == OMSSourceTypeValue.billPaymentTescoLotus:
             self = .billPayment(PaymentInformation.BillPayment.tescoLotus)
-        case let value where value.type.rawValue.hasPrefix(PaymentInformation.BillPayment.paymentMethodTypePrefix):
-            let rangeOfPrefix = value.type.rawValue.range(of: PaymentInformation.BillPayment.paymentMethodTypePrefix)!
-            self = .billPayment(PaymentInformation.BillPayment.other(String(value.type.rawValue[rangeOfPrefix.upperBound...])))
+        case let value where value.type.stringValue.hasPrefix(PaymentInformation.BillPayment.paymentMethodTypePrefix):
+            let rangeOfPrefix = value.type.stringValue.range(of: PaymentInformation.BillPayment.paymentMethodTypePrefix)!
+            self = .billPayment(PaymentInformation.BillPayment.other(String(value.type.stringValue[rangeOfPrefix.upperBound...])))
         case let value as __SourceAlipayBarcodePayment:
             let storeInformation: PaymentInformation.Barcode.AlipayBarcode.StoreInformation?
             if let storeID = value.alipayBarcodeInformation.storeID,
@@ -504,10 +504,10 @@ extension PaymentInformation {
                 )
             )
         case let value as __SourceCustomBarcodePayment:
-            self = .barcode(.other(value.type.rawValue, parameters: value.parameters))
+            self = .barcode(.other(value.type.stringValue, parameters: value.parameters))
         case let value as __SourceBarcodePayment:
-            let rangeOfPrefix = value.type.rawValue.range(of: PaymentInformation.Barcode.paymentMethodTypePrefix)!
-            self = .barcode(PaymentInformation.Barcode.other(String(value.type.rawValue[rangeOfPrefix.upperBound...]), parameters: [:]))
+            let rangeOfPrefix = value.type.stringValue.range(of: PaymentInformation.Barcode.paymentMethodTypePrefix)!
+            self = .barcode(PaymentInformation.Barcode.other(String(value.type.stringValue[rangeOfPrefix.upperBound...]), parameters: [:]))
         case let value where value.type == OMSSourceTypeValue.promptPay:
             self = .promptpay
         case let value as __SourceTrueMoneyPayment:
@@ -518,14 +518,14 @@ extension PaymentInformation {
             case .pointsCiti:
                 type = .citiPoints
             case let typeValue:
-                let range = typeValue.rawValue.range(of: PaymentInformation.Points.paymentMethodTypePrefix)!
-                type = .other(String(typeValue.rawValue[range.upperBound...]))
+                let range = typeValue.stringValue.range(of: PaymentInformation.Points.paymentMethodTypePrefix)!
+                type = .other(String(typeValue.stringValue[range.upperBound...]))
             }
             self = .points(type)
         case let value as __CustomSourcePayment:
-            self = .other(type: value.type.rawValue, parameters: value.parameters)
+            self = .other(type: value.type.stringValue, parameters: value.parameters)
         default:
-            self = .other(type: paymentInformation.type.rawValue, parameters: [:])
+            self = .other(type: paymentInformation.type.stringValue, parameters: [:])
         }
     }
 }

@@ -18,9 +18,9 @@ public extension PaymentInformation {
 
     struct Atome: PaymentMethod {
 
-        public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.atome.rawValue
+        public static var paymentMethodTypePrefix: String = OMSSourceTypeValue.atome.stringValue
 
-        public var type: String = OMSSourceTypeValue.atome.rawValue
+        public var type: String = OMSSourceTypeValue.atome.stringValue
 
         /// The customers phone number. Contains only digits and has 10 or 11 characters
         public let phoneNumber: String

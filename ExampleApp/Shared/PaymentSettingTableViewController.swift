@@ -55,7 +55,7 @@ class PaymentSettingTableViewController: UITableViewController {
         }
     }
 
-    @objc var allowedPaymentMethods: Set<OMSSourceTypeValue> = [] {
+    var allowedPaymentMethods: Set<OMSSourceTypeValue> = [] {
         willSet {
             guard isViewLoaded else {
                 return
