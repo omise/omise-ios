@@ -238,7 +238,7 @@ class PaymentChooserViewController: AdaptableStaticTableViewController<PaymentCh
             updateShowingValues()
         }
     }
-    @objc var allowedPaymentMethods: [OMSSourceTypeValue] = [] {
+    var allowedPaymentMethods: [OMSSourceTypeValue] = [] {
         didSet {
             updateShowingValues()
         }

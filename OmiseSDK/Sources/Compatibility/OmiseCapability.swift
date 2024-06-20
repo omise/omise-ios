@@ -49,7 +49,7 @@ public class __OmiseCapabilityCardBackendPayment: __OmiseCapabilityBackendPaymen
 @objc(OMSCapabilitySourceBackend)
 // swiftlint:disable:next attributes type_name
 public class __OmiseCapabilitySourceBackendPayment: __OmiseCapabilityBackendPayment {
-    @objc public let type: OMSSourceTypeValue
+    public let type: OMSSourceTypeValue
 
     init(sourceType: OMSSourceTypeValue) {
         self.type = sourceType
@@ -163,7 +163,7 @@ public class __OmiseCapabilityUnknownSourceBackendPayment: __OmiseCapabilitySour
     @objc public let parameters: [String: Any]
     init(sourceType: String, parameters: [String: Any]) {
         self.parameters = parameters
-        super.init(sourceType: OMSSourceTypeValue(rawValue: sourceType))
+        super.init(sourceType: OMSSourceTypeValue(sourceType))
     }
 }
 

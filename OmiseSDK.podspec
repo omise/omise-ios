@@ -9,23 +9,20 @@ The Opn Payments iOS SDK provides bindings for tokenizing credit cards and accep
                        DESC
   s.homepage         = 'https://github.com/omise/omise-ios'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Your Name' => 'andrei@opn.ooo' }
-  s.source           = { :git => 'https://github.com/omise/omise-ios.git', :tag => s.version.to_s }
+  s.author           = { 'Andrei Solovev' => 'andrei@opn.ooo' }
+  s.source           = { :git => 'https://github.com/omise/omise-ios.git', :branch => 'feature/v4_cocoapods' }
+# :tag => s.version.to_s }
 
   s.ios.deployment_target = '10.0'
 
-  s.source_files = 'OmiseSDK/**/*.{swift,h,m}'
-  s.exclude_files = 'OmiseSDK/Info.plist'
-
-  s.public_header_files = 'OmiseSDKObjc/**/*.h'
+  s.source_files = 'OmiseSDK/Sources/**/*.{swift,h,m}'
+  s.public_header_files = 'OmiseSDK/Sources/**/*.h'
+#  s.exclude_files = 'OmiseSDK/Info.plist'
 
   s.resource_bundles = {
     'OmiseSDK' => ['OmiseSDK/Resources/**/*']
   }
 
-  s.subspec 'Objc' do |objc|
-    objc.source_files = 'OmiseSDKObjc/**/*.{h,m}'
-    objc.public_header_files = 'OmiseSDKObjc/**/*.h'
-  end
+  s.swift_version = '5.0'
 
 end

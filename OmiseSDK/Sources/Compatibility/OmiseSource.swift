@@ -189,7 +189,7 @@ public class __SourceCustomBarcodePayment: __SourceBarcodePayment {
     ///   - parameters: Parameters of a source to be created
     public init(customType: String, parameters: [String: Any]) {
         self.parameters = parameters
-        super.init(type: OMSSourceTypeValue(rawValue: customType))!
+        super.init(type: OMSSourceTypeValue(customType))!
     }
 }
 
@@ -434,7 +434,7 @@ public class __CustomSourcePayment: __SourcePaymentInformation {
     ///   - parameters: The parameter of the payment source
     public init(customType: String, parameters: [String: Any]) {
         self.parameters = parameters
-        super.init(type: OMSSourceTypeValue(rawValue: customType))!
+        super.init(type: OMSSourceTypeValue(customType))!
     }
 }
 
