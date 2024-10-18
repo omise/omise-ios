@@ -6,7 +6,7 @@ public class OmiseSDK {
     public static var shared = OmiseSDK(publicKey: "pkey_")
 
     /// OmiseSDK version
-    public let version: String = "5.2.0"
+    public let version: String = "5.2.1"
 
     /// Public Key associated with this instance of OmiseSDK
     public let publicKey: String

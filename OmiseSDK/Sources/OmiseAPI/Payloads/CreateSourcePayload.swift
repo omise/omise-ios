@@ -12,7 +12,7 @@ public struct CreateSourcePayload: Equatable {
     /// Current SDK platform type
     let platform = "IOS"
 
-    init(amount: Int64, currency: String, details: Source.Payment) {
+    public init(amount: Int64, currency: String, details: Source.Payment) {
         self.amount = amount
         self.currency = currency
         self.details = details
