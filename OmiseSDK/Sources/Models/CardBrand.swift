@@ -17,6 +17,8 @@ public enum CardBrand: String, CustomStringConvertible, Codable {
     case laser = "Laser"
     /// Maestro card newtwork brand
     case maestro = "Maestro"
+    /// UnionPay card network brand
+    case unionPay = "UnionPay"
     /// Discover card newtwork brand
     case discover = "Discover"
 
@@ -28,7 +30,8 @@ public enum CardBrand: String, CustomStringConvertible, Codable {
         diners,
         laser,
         maestro,
-        discover
+        discover,
+        unionPay
     ]
     
     /// Regular expression pattern that can detect cards issued by the brand.
@@ -48,8 +51,10 @@ public enum CardBrand: String, CustomStringConvertible, Codable {
             return "^(6304|670[69]|6771)"
         case .maestro:
             return "^(5[0,6-8]|6304|6759|676[1-3])"
+        case .unionPay:
+            return "^62\\d{14,17}$"
         case .discover:
-            return "^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5]|64[4-9])|65)"
+            return "^(6011\\d{12,15}|65\\d{14,17}|64[4-9]\\d{13,16}|6221[2-9]\\d{11,14}|622[3-9]\\d{12,15})$"
         }
     }
     
@@ -70,8 +75,10 @@ public enum CardBrand: String, CustomStringConvertible, Codable {
             return 16...19
         case .maestro:
             return 12...19
+        case .unionPay:
+            return 16...19
         case .discover:
-            return 16...16
+            return 16...19
         }
     }
     
