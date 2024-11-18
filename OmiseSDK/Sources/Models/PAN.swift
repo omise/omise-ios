@@ -39,17 +39,7 @@ public struct PAN {
     
     /// The suggested of where the space should be displayed string indexes
     public var suggestedSpaceFormattedIndexes: IndexSet {
-        switch self {
-        case CardBrand.amex.pattern, "^5[6-8]":
-            return [ 4, 10 ]
-        case "^50":
-            return [ 4, 8 ]
-        case "^3[0,6,8-9]":
-            return [ 4, 10 ]
-        case "^[0-9]":
-            return [ 4, 8, 12 ]
-        default: return []
-        }
+        return IndexSet(stride(from: 4, to: 19, by: 4))
     }
     
     /// The last 4 digits of the PAN number

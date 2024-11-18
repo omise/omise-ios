@@ -547,6 +547,10 @@ class CreditCardPaymentController: UIViewController {
             cardBrandIconName = "AMEX"
         case .diners?:
             cardBrandIconName = "Diners"
+        case .unionPay:
+            cardBrandIconName = "UnionPay"
+        case .discover?:
+            cardBrandIconName = "Discover"
         default:
             cardBrandIconName = nil
         }
