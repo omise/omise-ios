@@ -119,7 +119,9 @@ public class CardNumberTextField: OmiseTextField {
             options: .regularExpression,
             range: nil)
         
-        let panLength = (self.pan.brand?.validLengths.upperBound ?? 16) - (self.text?.count ?? 0) + selectedTextLength
+        // Using the current detected upper bound for the current brand will cause problems when swtching from
+        // a brand that has an upper bound that is lower than that of the pasted detected card. (ex from visa to discover). So the upper bound will be set to the highest upper bound available for cards which is 19
+        let panLength = 19 - (self.text?.count ?? 0) + selectedTextLength
         let maxPastingPANLength = min(pan.count, panLength)
         guard maxPastingPANLength > 0 else {
             return
@@ -306,7 +308,7 @@ extension CardNumberTextField {
         guard range.length >= 0 else {
             return true
         }
-        let maxLength = (pan.brand?.validLengths.upperBound ?? 16)
+        let maxLength = (pan.brand?.validLengths.upperBound ?? 19)
         
         return maxLength >= (self.text?.count ?? 0) - range.length + string.count
     }
