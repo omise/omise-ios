@@ -1,12 +1,13 @@
 {
+  "originHash" : "f131717f980b1b6f5251428da012f188d1eaff4e6fa62f7a3121859345471b87",
   "pins" : [
     {
       "identity" : "omise-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/omise/omise-ios.git",
       "state" : {
-        "branch" : "feature/MIT-2470",
-        "revision" : "4f1bbf9a0f0828c7531664276fc244fd8433a869"
+        "branch" : "master",
+        "revision" : "c54d16bd6d8f037c0bcc8da3ce0d140563134944"
       }
     },
     {
@@ -19,5 +20,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
