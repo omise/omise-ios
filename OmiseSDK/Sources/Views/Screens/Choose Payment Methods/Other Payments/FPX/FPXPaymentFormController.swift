@@ -133,7 +133,7 @@ class FPXPaymentFormController: UIViewController, PaymentFormUIController {
 
     @IBAction private func submitForm(_ sender: AnyObject) {
         emailValue = emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces)
-        delegate?.fpxDidCompleteWith(email: emailValue) {}
+        delegate?.fpxDidCompleteWith(email: emailValue) { /* no action is required */ }
     }
 
     @IBAction private func validateFieldData(_ textField: OmiseTextField) {

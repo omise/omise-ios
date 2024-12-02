@@ -27,7 +27,7 @@ class AtomePaymentFormViewModel: AtomePaymentFormViewModelProtocol, CountryListV
         }
     }
 
-    var onSelectCountry: (Country) -> Void = { _ in }
+    var onSelectCountry: (Country) -> Void = { _ in /* Non-optional default empty implementation */ }
 
     var countryListViewModel: CountryListViewModelProtocol { return self }
     

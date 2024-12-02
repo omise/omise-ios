@@ -219,7 +219,9 @@ public class OmiseSDK {
 
 private extension OmiseSDK {
     private func preloadCapabilityAPI() {
-        client.capability { _ in }
+        client.capability { _ in
+            // Preload capability and auto cache it as client.latestLoadedCapability
+        }
     }
 }
 

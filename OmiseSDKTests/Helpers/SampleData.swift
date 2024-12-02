@@ -62,6 +62,7 @@ func encodeToJson<T: Encodable>(_ object: T) throws -> String {
     encoder.outputFormatting = [.sortedKeys]
 
     let data = try encoder.encode(object)
+    // swiftlint:disable:next non_optional_string_data_conversion
     guard let result = String(data: data, encoding: .utf8) else {
         throw DataToStringCastError()
     }
