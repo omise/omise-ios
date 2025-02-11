@@ -58,10 +58,12 @@ public class OmiseSDK {
         let flutterEngine = FlutterEngine(name: OmiseFlutter.engineName)  // Initialize a new Flutter engine with a custom name
         flutterEngine.run()  // Start the Flutter engine to prepare it for communication
         
-        let methodChannel = FlutterMethodChannel(name: OmiseFlutter.channelName,  // Create a Flutter method channel with a specified name
-                                                 binaryMessenger: flutterEngine.binaryMessenger)  // Use the engine's binary messenger for communication
-        
-        let channelHander = FlutterChannelHandlerImpl(channel: methodChannel)  // Instantiate the custom channel handler to handle communication via the method channel
+        /// Create a Flutter method channel with a specified name
+        /// Use the engine's binary messenger for communication
+        let methodChannel = FlutterMethodChannel(name: OmiseFlutter.channelName,
+                                                 binaryMessenger: flutterEngine.binaryMessenger)
+        /// Instantiate the custom channel handler to handle communication via the method channel
+        let channelHander = FlutterChannelHandlerImpl(channel: methodChannel)
         
         flutterEngineManager = FlutterEngineManagerImpl(
             flutterEngine: flutterEngine,
