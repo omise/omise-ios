@@ -13,6 +13,8 @@
 		229E14581D0EBAB5000511DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14541D0EBAB5000511DE /* AppDelegate.swift */; };
 		229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */; };
 		22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */; };
+		2F0DB8D62D5A0B8B001AA265 /* App.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0DB8D42D5A0B8B001AA265 /* App.xcframework */; };
+		2F0DB8D82D5A0B8B001AA265 /* Flutter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0DB8D52D5A0B8B001AA265 /* Flutter.xcframework */; };
 		73F9BA4B25E6053700F55CA8 /* FPXPaymentFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4A25E6053700F55CA8 /* FPXPaymentFormController.swift */; };
 		7501265D2B87CB6500ED5E14 /* PaymentInputsFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7501265C2B87CB6500ED5E14 /* PaymentInputsFormController.swift */; };
 		7501265F2B8893C900ED5E14 /* PaymentFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7501265E2B8893C900ED5E14 /* PaymentFormController.swift */; };
@@ -295,6 +297,8 @@
 		22D4809D1D0EB29C00544CE1 /* ExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D480AB1D0EB29C00544CE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2F0DB8D42D5A0B8B001AA265 /* App.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = App.xcframework; path = "OmiseSDK/Sources/Flutter/$(CONFIGURATION)/App.xcframework"; sourceTree = "<group>"; };
+		2F0DB8D52D5A0B8B001AA265 /* Flutter.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:S8QB4VV633:FLUTTER.IO LLC"; lastKnownFileType = wrapper.xcframework; name = Flutter.xcframework; path = "OmiseSDK/Sources/Flutter/$(CONFIGURATION)/Flutter.xcframework"; sourceTree = "<group>"; };
 		73F9BA4A25E6053700F55CA8 /* FPXPaymentFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPXPaymentFormController.swift; sourceTree = "<group>"; };
 		7501265C2B87CB6500ED5E14 /* PaymentInputsFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInputsFormController.swift; sourceTree = "<group>"; };
 		7501265E2B8893C900ED5E14 /* PaymentFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFormController.swift; sourceTree = "<group>"; };
@@ -500,7 +504,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F0DB8D82D5A0B8B001AA265 /* Flutter.xcframework in Frameworks */,
 				758A4E842BE38AC3005E7B5A /* ThreeDS_SDK in Frameworks */,
+				2F0DB8D62D5A0B8B001AA265 /* App.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1033,6 +1039,8 @@
 		75DAD8802A0B9B060098AF96 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2F0DB8D42D5A0B8B001AA265 /* App.xcframework */,
+				2F0DB8D52D5A0B8B001AA265 /* Flutter.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1827,6 +1835,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Flutter/$(CONFIGURATION)/",
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
@@ -2059,6 +2068,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Flutter/$(CONFIGURATION)/",
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
