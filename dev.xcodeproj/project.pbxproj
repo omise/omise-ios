@@ -19,6 +19,7 @@
 		2F66C24F2D5D997200AB5BF9 /* FlutterEngineManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F66C24E2D5D997200AB5BF9 /* FlutterEngineManagerTests.swift */; };
 		2F66C2522D5D998F00AB5BF9 /* MockChoosePaymentMethodDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F66C2512D5D998F00AB5BF9 /* MockChoosePaymentMethodDelegate.swift */; };
 		2F66C2542D5D999A00AB5BF9 /* MockFlutterChannelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F66C2532D5D999A00AB5BF9 /* MockFlutterChannelHandler.swift */; };
+		2F66C25F2D5DD98600AB5BF9 /* omise-flutter-ios-spm in Frameworks */ = {isa = PBXBuildFile; productRef = 2F66C25E2D5DD98600AB5BF9 /* omise-flutter-ios-spm */; };
 		73F9BA4B25E6053700F55CA8 /* FPXPaymentFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4A25E6053700F55CA8 /* FPXPaymentFormController.swift */; };
 		7501265D2B87CB6500ED5E14 /* PaymentInputsFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7501265C2B87CB6500ED5E14 /* PaymentInputsFormController.swift */; };
 		7501265F2B8893C900ED5E14 /* PaymentFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7501265E2B8893C900ED5E14 /* PaymentFormController.swift */; };
@@ -512,6 +513,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F66C25F2D5DD98600AB5BF9 /* omise-flutter-ios-spm in Frameworks */,
 				758A4E842BE38AC3005E7B5A /* ThreeDS_SDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1310,6 +1312,7 @@
 			name = OmiseSDK;
 			packageProductDependencies = (
 				758A4E832BE38AC3005E7B5A /* ThreeDS_SDK */,
+				2F66C25E2D5DD98600AB5BF9 /* omise-flutter-ios-spm */,
 			);
 			productName = OmiseSDK;
 			productReference = 225931181CE3210700841B86 /* OmiseSDK.framework */;
@@ -1426,6 +1429,7 @@
 			mainGroup = 2259310E1CE3210700841B86;
 			packageReferences = (
 				758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */,
+				2F66C25D2D5DD98600AB5BF9 /* XCRemoteSwiftPackageReference "flutter-ios-framework-spm" */,
 			);
 			productRefGroup = 225931191CE3210700841B86 /* Products */;
 			projectDirPath = "";
@@ -2240,6 +2244,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2F66C25D2D5DD98600AB5BF9 /* XCRemoteSwiftPackageReference "flutter-ios-framework-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tyler-techcombine/flutter-ios-framework-spm.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ios-3ds-sdk/SPM.git";
@@ -2251,6 +2263,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2F66C25E2D5DD98600AB5BF9 /* omise-flutter-ios-spm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F66C25D2D5DD98600AB5BF9 /* XCRemoteSwiftPackageReference "flutter-ios-framework-spm" */;
+			productName = "omise-flutter-ios-spm";
+		};
 		7509D4ED2A1D1F9F0050AB38 /* OmiseTestSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OmiseTestSDK;
