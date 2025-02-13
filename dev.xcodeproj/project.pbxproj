@@ -35,6 +35,12 @@
 		2FC27E1E2D6DDA0F001E5857 /* MockApplePayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC27E1D2D6DDA0F001E5857 /* MockApplePayViewModel.swift */; };
 		2FC4CA7A2D64ED880005EC4A /* ApplePayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4CA792D64ED880005EC4A /* ApplePayViewController.swift */; };
 		2FC4CA7C2D64ED960005EC4A /* ApplePayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4CA7B2D64ED910005EC4A /* ApplePayViewModel.swift */; };
+		2F66C2482D5D990600AB5BF9 /* FlutterPaymentMethodResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F66C2472D5D990600AB5BF9 /* FlutterPaymentMethodResult.swift */; };
+		2F66C24A2D5D991600AB5BF9 /* FlutterEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F66C2492D5D991600AB5BF9 /* FlutterEngineManager.swift */; };
+		2F66C24C2D5D992500AB5BF9 /* OmiseFlutter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F66C24B2D5D992500AB5BF9 /* OmiseFlutter.swift */; };
+		2F66C24F2D5D997200AB5BF9 /* FlutterEngineManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F66C24E2D5D997200AB5BF9 /* FlutterEngineManagerTests.swift */; };
+		2F66C2522D5D998F00AB5BF9 /* MockChoosePaymentMethodDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F66C2512D5D998F00AB5BF9 /* MockChoosePaymentMethodDelegate.swift */; };
+		2F66C2542D5D999A00AB5BF9 /* MockFlutterChannelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F66C2532D5D999A00AB5BF9 /* MockFlutterChannelHandler.swift */; };
 		73F9BA4B25E6053700F55CA8 /* FPXPaymentFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4A25E6053700F55CA8 /* FPXPaymentFormController.swift */; };
 		7501265D2B87CB6500ED5E14 /* PaymentInputsFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7501265C2B87CB6500ED5E14 /* PaymentInputsFormController.swift */; };
 		7501265F2B8893C900ED5E14 /* PaymentFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7501265E2B8893C900ED5E14 /* PaymentFormController.swift */; };
@@ -340,6 +346,12 @@
 		2FC27E1D2D6DDA0F001E5857 /* MockApplePayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApplePayViewModel.swift; sourceTree = "<group>"; };
 		2FC4CA792D64ED880005EC4A /* ApplePayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayViewController.swift; sourceTree = "<group>"; };
 		2FC4CA7B2D64ED910005EC4A /* ApplePayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayViewModel.swift; sourceTree = "<group>"; };
+		2F66C2472D5D990600AB5BF9 /* FlutterPaymentMethodResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlutterPaymentMethodResult.swift; sourceTree = "<group>"; };
+		2F66C2492D5D991600AB5BF9 /* FlutterEngineManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlutterEngineManager.swift; sourceTree = "<group>"; };
+		2F66C24B2D5D992500AB5BF9 /* OmiseFlutter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseFlutter.swift; sourceTree = "<group>"; };
+		2F66C24E2D5D997200AB5BF9 /* FlutterEngineManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlutterEngineManagerTests.swift; sourceTree = "<group>"; };
+		2F66C2512D5D998F00AB5BF9 /* MockChoosePaymentMethodDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockChoosePaymentMethodDelegate.swift; sourceTree = "<group>"; };
+		2F66C2532D5D999A00AB5BF9 /* MockFlutterChannelHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFlutterChannelHandler.swift; sourceTree = "<group>"; };
 		73F9BA4A25E6053700F55CA8 /* FPXPaymentFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPXPaymentFormController.swift; sourceTree = "<group>"; };
 		7501265C2B87CB6500ED5E14 /* PaymentInputsFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInputsFormController.swift; sourceTree = "<group>"; };
 		7501265E2B8893C900ED5E14 /* PaymentFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFormController.swift; sourceTree = "<group>"; };
@@ -703,6 +715,34 @@
 				2FC4CA792D64ED880005EC4A /* ApplePayViewController.swift */,
 			);
 			path = ApplePay;
+			sourceTree = "<group>";
+		};
+		2F66C2412D5D98C200AB5BF9 /* Flutter */ = {
+			isa = PBXGroup;
+			children = (
+				2F66C24B2D5D992500AB5BF9 /* OmiseFlutter.swift */,
+				2F66C2492D5D991600AB5BF9 /* FlutterEngineManager.swift */,
+				2F66C2472D5D990600AB5BF9 /* FlutterPaymentMethodResult.swift */,
+			);
+			path = Flutter;
+			sourceTree = "<group>";
+		};
+		2F66C24D2D5D995A00AB5BF9 /* FlutterIntegration */ = {
+			isa = PBXGroup;
+			children = (
+				2F66C2502D5D998600AB5BF9 /* Mocks */,
+				2F66C24E2D5D997200AB5BF9 /* FlutterEngineManagerTests.swift */,
+			);
+			path = FlutterIntegration;
+			sourceTree = "<group>";
+		};
+		2F66C2502D5D998600AB5BF9 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				2F66C2532D5D999A00AB5BF9 /* MockFlutterChannelHandler.swift */,
+				2F66C2512D5D998F00AB5BF9 /* MockChoosePaymentMethodDelegate.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		7501265B2B87CB3F00ED5E14 /* Base */ = {
@@ -1194,6 +1234,7 @@
 		75E0EB872B7BCEA000E3198A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				2F66C2412D5D98C200AB5BF9 /* Flutter */,
 				758A4E682BE389B2005E7B5A /* 3DS */,
 				75E0EBBD2B7D0DB600E3198A /* Components */,
 				75E0EB942B7BD00F00E3198A /* Models */,
@@ -1326,6 +1367,7 @@
 				2F5D47502D895B2E00C776CF /* CreditCardPayment */,
 				2F5D98F02D6EB27900B5ECB4 /* PaymentMethod */,
 				2F9682182D65A44C00A7AFDA /* ApplePay */,
+				2F66C24D2D5D995A00AB5BF9 /* FlutterIntegration */,
 				758A4E9E2BE3DFDF005E7B5A /* URL+PathComponentsTests.swift */,
 				758A4E872BE38AE8005E7B5A /* 3DS */,
 				757B0A722AD71DCD00DEAE8F /* OmiseUnitTestKit */,
@@ -1625,7 +1667,9 @@
 				75405A812A2633B6008C21F6 /* SpacerView.swift in Sources */,
 				75D13DAD2B83B58B0073A831 /* Source.Payment.TrueMoney.swift in Sources */,
 				75D13E022B866E040073A831 /* PaymentUI.swift in Sources */,
+				2F66C24C2D5D992500AB5BF9 /* OmiseFlutter.swift in Sources */,
 				759C7EC22B7DC80A0029D555 /* SourceType+InternetBanking.swift in Sources */,
+				2F66C24A2D5D991600AB5BF9 /* FlutterEngineManager.swift in Sources */,
 				75405A912A26340E008C21F6 /* UILabel+Helpers.swift in Sources */,
 				759856242A286C880087B605 /* UIScrollView+Helpers.swift in Sources */,
 				75E0EB9C2B7BD00F00E3198A /* Country.swift in Sources */,
@@ -1664,6 +1708,7 @@
 				75405A8B2A26340E008C21F6 /* UIStackView+Helpers.swift in Sources */,
 				75D13DA82B83B58B0073A831 /* Source.Payment.DuitNowOBW.swift in Sources */,
 				75D13DAB2B83B58B0073A831 /* Source.Payment.FPX.swift in Sources */,
+				2F66C2482D5D990600AB5BF9 /* FlutterPaymentMethodResult.swift in Sources */,
 				751E7BEE2B7F7DD20031B4A2 /* PaymentMethod+ViewPresentable.swift in Sources */,
 				75D13D772B833C200073A831 /* UITableViewCell+ActivityIndicator.swift in Sources */,
 				986406311CFEA7E4004BCF51 /* CardExpiryDateTextField.swift in Sources */,
@@ -1810,6 +1855,7 @@
 				2F96821A2D65A45400A7AFDA /* MockApplePayInterface.swift in Sources */,
 				7509D4E02A1AA1450050AB38 /* AtomeFormViewControllerTests.swift in Sources */,
 				2F0267572D8D538F00BA8D3E /* CardExpiryDateTextFieldTests.swift in Sources */,
+				2F66C2542D5D999A00AB5BF9 /* MockFlutterChannelHandler.swift in Sources */,
 				758A4E962BE38AFD005E7B5A /* ThreeDSButtonCustomizationTests.swift in Sources */,
 				2FC27E1C2D6DC1B7001E5857 /* ApplePayViewControllerTest.swift in Sources */,
 				2F5D98F72D6EB96600B5ECB4 /* MockSelectPaymentMethodDelegate.swift in Sources */,
@@ -1835,6 +1881,7 @@
 				753279382A31B40F008048AD /* CountryListViewModelMockup.swift in Sources */,
 				7509D4E72A1C8E3D0050AB38 /* AtomeFormViewModelTests.swift in Sources */,
 				7509D4E22A1C876B0050AB38 /* AtomeFormViewContextMockup.swift in Sources */,
+				2F66C24F2D5D997200AB5BF9 /* FlutterEngineManagerTests.swift in Sources */,
 				750708E32B790B8300A48DD0 /* String+JSON.swift in Sources */,
 				75D4E7062C05F50500ECCE72 /* OmiseErrorTests.swift in Sources */,
 				2F5D47522D895BA100C776CF /* CreditCardPaymentControllerTests.swift in Sources */,
@@ -1844,6 +1891,7 @@
 				750708E02B7909BB00A48DD0 /* SourceTests.swift in Sources */,
 				75CFC4D42B73B21100422A8F /* ClientTests.swift in Sources */,
 				2FC27E1E2D6DDA0F001E5857 /* MockApplePayViewModel.swift in Sources */,
+				2F66C2522D5D998F00AB5BF9 /* MockChoosePaymentMethodDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
