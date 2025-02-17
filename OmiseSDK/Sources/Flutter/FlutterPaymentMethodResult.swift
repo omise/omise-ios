@@ -41,13 +41,14 @@ protocol FlutterChannelHandler {
 /// Implementation of `FlutterChannelHandler` that communicates with Flutter via a method channel.
 final class FlutterChannelHandlerImpl: FlutterChannelHandler {
     
-    /// The Flutter method channel used for communication between the app and Flutter.
-    private let channel: FlutterMethodChannel
+    /// The custom Flutter method channel protocol used for communication between the app and Flutter.
+    /// Protocol is used for method channel wrapper for testing purposes
+    private let channel: FlutterMethodChannelProtocol
     
     /// Initializes a new `FlutterChannelHandlerImpl` with the provided method channel.
     ///
     /// - Parameter channel: The Flutter method channel used for communication.
-    init(channel: FlutterMethodChannel) {
+    init(channel: FlutterMethodChannelProtocol) {
         self.channel = channel
     }
     

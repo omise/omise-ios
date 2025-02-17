@@ -65,7 +65,7 @@ public class OmiseSDK {
         let methodChannel = FlutterMethodChannel(name: OmiseFlutter.channelName,
                                                  binaryMessenger: flutterEngine.binaryMessenger)
         /// Instantiate the custom channel handler to handle communication via the method channel
-        let channelHander = FlutterChannelHandlerImpl(channel: methodChannel)
+        let channelHander = FlutterChannelHandlerImpl(channel: FlutterMethodChannelWrapper(channel: methodChannel))
         
         flutterEngineManager = FlutterEngineManagerImpl(
             flutterEngine: flutterEngine,
