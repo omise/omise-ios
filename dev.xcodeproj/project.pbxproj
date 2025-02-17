@@ -13,6 +13,9 @@
 		229E14581D0EBAB5000511DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14541D0EBAB5000511DE /* AppDelegate.swift */; };
 		229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */; };
 		22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */; };
+		2F0F80B42D630D2E00DAAAC5 /* FlutterChannelHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F80B32D630D2C00DAAAC5 /* FlutterChannelHandlerTests.swift */; };
+		2F0F80B62D6324E400DAAAC5 /* MockFlutterMethodChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F80B52D6324E000DAAAC5 /* MockFlutterMethodChannel.swift */; };
+		2F0F80B82D63259200DAAAC5 /* FlutterMethodChannelWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F80B72D63259200DAAAC5 /* FlutterMethodChannelWrapper.swift */; };
 		2F66C2482D5D990600AB5BF9 /* FlutterPaymentMethodResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F66C2472D5D990600AB5BF9 /* FlutterPaymentMethodResult.swift */; };
 		2F66C24A2D5D991600AB5BF9 /* FlutterEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F66C2492D5D991600AB5BF9 /* FlutterEngineManager.swift */; };
 		2F66C24C2D5D992500AB5BF9 /* OmiseFlutter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F66C24B2D5D992500AB5BF9 /* OmiseFlutter.swift */; };
@@ -302,6 +305,9 @@
 		22D4809D1D0EB29C00544CE1 /* ExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D480AB1D0EB29C00544CE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2F0F80B32D630D2C00DAAAC5 /* FlutterChannelHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlutterChannelHandlerTests.swift; sourceTree = "<group>"; };
+		2F0F80B52D6324E000DAAAC5 /* MockFlutterMethodChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFlutterMethodChannel.swift; sourceTree = "<group>"; };
+		2F0F80B72D63259200DAAAC5 /* FlutterMethodChannelWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlutterMethodChannelWrapper.swift; sourceTree = "<group>"; };
 		2F66C2472D5D990600AB5BF9 /* FlutterPaymentMethodResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlutterPaymentMethodResult.swift; sourceTree = "<group>"; };
 		2F66C2492D5D991600AB5BF9 /* FlutterEngineManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlutterEngineManager.swift; sourceTree = "<group>"; };
 		2F66C24B2D5D992500AB5BF9 /* OmiseFlutter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseFlutter.swift; sourceTree = "<group>"; };
@@ -603,6 +609,7 @@
 		2F66C2412D5D98C200AB5BF9 /* Flutter */ = {
 			isa = PBXGroup;
 			children = (
+				2F0F80B72D63259200DAAAC5 /* FlutterMethodChannelWrapper.swift */,
 				2F66C24B2D5D992500AB5BF9 /* OmiseFlutter.swift */,
 				2F66C2492D5D991600AB5BF9 /* FlutterEngineManager.swift */,
 				2F66C2472D5D990600AB5BF9 /* FlutterPaymentMethodResult.swift */,
@@ -614,6 +621,7 @@
 			isa = PBXGroup;
 			children = (
 				2F66C2502D5D998600AB5BF9 /* Mocks */,
+				2F0F80B32D630D2C00DAAAC5 /* FlutterChannelHandlerTests.swift */,
 				2F66C24E2D5D997200AB5BF9 /* FlutterEngineManagerTests.swift */,
 			);
 			path = FlutterIntegration;
@@ -622,6 +630,7 @@
 		2F66C2502D5D998600AB5BF9 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				2F0F80B52D6324E000DAAAC5 /* MockFlutterMethodChannel.swift */,
 				2F66C2532D5D999A00AB5BF9 /* MockFlutterChannelHandler.swift */,
 				2F66C2512D5D998F00AB5BF9 /* MockChoosePaymentMethodDelegate.swift */,
 			);
@@ -1637,6 +1646,7 @@
 				758A4EA62BE9D5C0005E7B5A /* Closures.swift in Sources */,
 				758A4E6E2BE38A5F005E7B5A /* CryptData.swift in Sources */,
 				75E0EB9A2B7BD00F00E3198A /* Currency.swift in Sources */,
+				2F0F80B82D63259200DAAAC5 /* FlutterMethodChannelWrapper.swift in Sources */,
 				75405A9C2A266F50008C21F6 /* AtomePaymentFormViewModel.swift in Sources */,
 				75D13DA72B83B58B0073A831 /* Source.Payment.BarcodeAlipay.swift in Sources */,
 				75CFC4DB2B73F5AF00422A8F /* NetworkService.swift in Sources */,
@@ -1744,9 +1754,11 @@
 				750708E32B790B8300A48DD0 /* String+JSON.swift in Sources */,
 				750708E52B790BD600A48DD0 /* SampleData.swift in Sources */,
 				758A4E972BE38AFD005E7B5A /* SHA512Tests.swift in Sources */,
+				2F0F80B62D6324E400DAAAC5 /* MockFlutterMethodChannel.swift in Sources */,
 				750708E02B7909BB00A48DD0 /* SourceTests.swift in Sources */,
 				75CFC4D42B73B21100422A8F /* ClientTests.swift in Sources */,
 				2F66C2522D5D998F00AB5BF9 /* MockChoosePaymentMethodDelegate.swift in Sources */,
+				2F0F80B42D630D2E00DAAAC5 /* FlutterChannelHandlerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
