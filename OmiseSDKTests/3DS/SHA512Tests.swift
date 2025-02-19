@@ -7,7 +7,7 @@ class SHA512Tests: XCTestCase {
     func testSHA512EmptyString() {
         let emptyString = ""
         let expectedHash = Data(
-            // swiftlint:disable:next multiline_literal_brackets
+            
             [ // expected SHA-512 hash of empty string
                 0xcf, 0x83, 0xe1, 0x35, 0x7e, 0xef, 0xb8, 0xbd,
                 0xf1, 0x54, 0x28, 0x50, 0xd6, 0x6d, 0x80, 0x07,
