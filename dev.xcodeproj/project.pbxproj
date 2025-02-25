@@ -307,6 +307,7 @@
 		22D4809D1D0EB29C00544CE1 /* ExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D480AB1D0EB29C00544CE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2F5A707E2D6742A500F5A61A /* ExampleAppDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ExampleAppDebug.entitlements; sourceTree = "<group>"; };
 		2F5A70802D6C73D400F5A61A /* MockApplePayViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApplePayViewModelDelegate.swift; sourceTree = "<group>"; };
 		2F9682162D657EFA00A7AFDA /* ApplePaymentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePaymentHandler.swift; sourceTree = "<group>"; };
 		2F9682192D65A45400A7AFDA /* MockApplePayInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApplePayInterface.swift; sourceTree = "<group>"; };
@@ -599,6 +600,7 @@
 		22D4809E1D0EB29C00544CE1 /* ExampleApp */ = {
 			isa = PBXGroup;
 			children = (
+				2F5A707E2D6742A500F5A61A /* ExampleAppDebug.entitlements */,
 				75F2A01A2A0BD1CD0038FA54 /* Resources */,
 				75DAD8922A0BC9540098AF96 /* Config.local.plist */,
 				22D480AB1D0EB29C00544CE1 /* Info.plist */,
@@ -1937,6 +1939,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4TBJ63739J;
+				CODE_SIGN_ENTITLEMENTS = ExampleApp/ExampleApp.entitlements;
 				INFOPLIST_FILE = ExampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2189,6 +2192,7 @@
 				ASSETCATALOG_WARNINGS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = ExampleApp/ExampleAppDebug.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4TBJ63739J;
