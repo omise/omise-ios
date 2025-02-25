@@ -8,6 +8,10 @@ class ProductDetailViewController: BaseViewController {
             publicKey: LocalConfig.default.publicKey,
             configuration: LocalConfig.default.configuration
         )
+        
+        // Setup merchant ID for ApplePay
+        omiseSDK.setupApplePay(for: LocalConfig.default.merchantId, requiredBillingAddress: true)
+        
         // Setup shared instance to use from other screens if required
         OmiseSDK.shared = omiseSDK
         return omiseSDK

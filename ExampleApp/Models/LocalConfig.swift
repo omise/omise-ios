@@ -10,6 +10,8 @@ struct LocalConfig: Codable {
     var devMode: Bool {
         devVaultBaseURL != nil && devApiBaseURL != nil
     }
+    
+    var merchantId: String = ""
 
     init() {
         devVaultBaseURL = nil
