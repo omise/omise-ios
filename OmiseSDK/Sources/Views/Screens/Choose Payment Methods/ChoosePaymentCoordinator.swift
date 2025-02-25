@@ -5,6 +5,7 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
     let amount: Int64
     let currency: String
     let currentCountry: Country?
+    let applePayInfo: ApplePayInfo?
     let handleErrors: Bool
 
     enum ResultState {
@@ -24,11 +25,12 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
         return noticeView
     }()
 
-    init(client: ClientProtocol, amount: Int64, currency: String, currentCountry: Country?, handleErrors: Bool) {
+    init(client: ClientProtocol, amount: Int64, currency: String, currentCountry: Country?, applePayInfo: ApplePayInfo?, handleErrors: Bool) {
         self.client = client
         self.amount = amount
         self.currency = currency
         self.currentCountry = currentCountry
+        self.applePayInfo = applePayInfo
         self.handleErrors = handleErrors
         super.init()
 
@@ -199,7 +201,18 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
         viewController.delegate = self
         return viewController
     }
-}
+    
+    @available(iOS 11.0, *)
+    func createApplePayController(info: ApplePayInfo) -> ApplePayViewController {
+        let viewModel = ApplePayViewModel(applePayInfo: info,
+                                          amount: amount,
+                                          currency: currency,
+                                          country: currentCountry,
+                                          applePaymentHandler: ApplePaymentHandler(),
+                                          delegate: self)
+        let viewController = ApplePayViewController(viewModel: viewModel)
+        return viewController
+    }}
 
 extension ChoosePaymentCoordinator: FPXPaymentFormControllerDelegate {
     func fpxDidCompleteWith(email: String?, completion: @escaping () -> Void) {
@@ -248,6 +261,10 @@ extension ChoosePaymentCoordinator: SelectPaymentMethodDelegate {
                 navigate(to: createDuitNowOBWBanksController())
             case .sourceType(.trueMoneyWallet):
                 navigate(to: createTrueMoneyWalletController())
+            case .sourceType(.applePay):
+                if #available(iOS 11.0, *), let info = self.applePayInfo {
+                    navigate(to: createApplePayController(info: info))
+                }
             default: break
             }
         } else if let sourceType = paymentMethod.sourceType {
@@ -281,6 +298,18 @@ extension ChoosePaymentCoordinator: SelectSourcePaymentDelegate {
             ))
         } else {
             processPayment(payment, completion: completion)
+        }
+    }
+}
+
+extension ChoosePaymentCoordinator: ApplePayViewModelDelegate {
+    func didFinishApplePayWith(result: OmiseApplePayResult, completion: @escaping () -> Void) {
+        switch result {
+        case .success(let payload):
+            processPayment(applePay: payload, completion: completion)
+        case .failure(let error):
+            completion()
+            processError(error)
         }
     }
 }

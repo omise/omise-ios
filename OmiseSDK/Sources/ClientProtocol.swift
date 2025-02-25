@@ -21,6 +21,11 @@ public protocol ClientProtocol {
     /// - parameter completion: Returns `Token`object  on success and `Error` on request failed
     func createToken(payload: CreateTokenPayload, _ completion: @escaping ResponseClosure<Token, Error>)
 
+    /// Sends `Create a Token` API request with return ApplePay's PKPayment  token
+    /// - parameter applePayToken: Information required to perform Create a Token API request with ApplePay token Payload
+    /// - parameter completion: Returns `Token`object  on success and `Error` on request failed
+    func createToken(applePayToken: CreateTokenApplePayPayload, _ completion: @escaping ResponseClosure<Token, Error>)
+    
     /// Requests a `Token` from API with given Token ID
     /// - parameter tokenID: Token identifier
     /// - parameter completion: Returns `Token`object  on success and `Error` on request failed

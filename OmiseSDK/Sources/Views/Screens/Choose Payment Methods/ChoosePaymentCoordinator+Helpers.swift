@@ -64,6 +64,21 @@ extension ChoosePaymentCoordinator {
             completion()
         }
     }
+    
+    func processPayment(applePay payload: CreateTokenApplePayPayload?, completion: @escaping () -> Void) {
+        guard let delegate = choosePaymentMethodDelegate,
+              let payload = payload else { return }
+        
+        client.createToken(applePayToken: payload) { [weak self, weak delegate] result in
+            switch result {
+            case .success(let token):
+                delegate?.choosePaymentMethodDidComplete(with: token)
+            case .failure(let error):
+                self?.processError(error)
+            }
+            completion()
+        }
+    }
 
     func processWhiteLabelInstallmentPayment(_ payment: Source.Payment, card: CreateTokenPayload.Card, completion: @escaping () -> Void) {
 
