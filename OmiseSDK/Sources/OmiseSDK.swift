@@ -22,6 +22,8 @@ public class OmiseSDK {
         Country(code: latestLoadedCapability?.countryCode)
     }
 
+    var applePayInfo: ApplePayInfo?
+    
     public private(set) weak var presentedViewController: UIViewController?
 
     private var expectedReturnURLStrings: [String] = []
@@ -75,6 +77,7 @@ public class OmiseSDK {
             amount: amount,
             currency: currency,
             currentCountry: country,
+            applePayInfo: self.applePayInfo,
             handleErrors: handleErrors
         )
 
@@ -121,6 +124,7 @@ public class OmiseSDK {
             amount: 0,
             currency: "",
             currentCountry: Country(code: countryCode) ?? self.country,
+            applePayInfo: applePayInfo,
             handleErrors: handleErrors
         )
         let viewController = paymentFlow.createCreditCardPaymentController(delegate: delegate)
@@ -214,6 +218,11 @@ public class OmiseSDK {
             .contains(true)
 
         return containsURL
+    }
+    
+    public func setupApplePay(for merchantId: String, requiredBillingAddress: Bool = false) {
+        self.applePayInfo = ApplePayInfo(merchantIdentifier: merchantId,
+                                         requestBillingAddress: requiredBillingAddress)
     }
 }
 
