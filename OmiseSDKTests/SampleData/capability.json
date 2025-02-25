@@ -473,5 +473,8 @@
         "banks": []
      }
   ],
+  "tokenization_methods": [
+      "applepay"
+    ],
   "zero_interest_installments": false
 }

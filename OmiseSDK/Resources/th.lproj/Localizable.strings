@@ -11,6 +11,7 @@
 // Source Types
 "SourceType.alipay" = "อาลีเพย์ (ออนไลน์)";
 "SourceType.alipay.footnote" = "(อาลีเพย์พลัส)";
+"SourceType.applepay" = "Apple Pay";
 "SourceType.bill_payment_tesco_lotus" = "โลตัสบิลเพย์เมนต์";
 "SourceType.installment_bay" = "ธนาคารกรุงศรี";
 "SourceType.installment_bbl" = "ธนาคารกรุงเทพ";

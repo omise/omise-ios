@@ -11,6 +11,7 @@
 // Source Types
 "SourceType.alipay" = "アリペイオンライン";
 "SourceType.alipay.footnote" = "(アリペイプラス)";
+"SourceType.applepay" = "Apple Pay";
 "SourceType.bill_payment_tesco_lotus" = "ロータス";
 "SourceType.installment_bay" = "クルンシィ";
 "SourceType.installment_bbl" = "バンコク銀行";

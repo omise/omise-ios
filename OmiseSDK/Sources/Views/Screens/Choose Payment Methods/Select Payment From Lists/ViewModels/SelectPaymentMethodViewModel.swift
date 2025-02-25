@@ -49,7 +49,12 @@ class SelectPaymentMethodViewModel {
             }
             return
         }
-        let sourceTypes = capability.paymentMethods.compactMap { SourceType(rawValue: $0.name) }
+        var sourceTypes = capability.paymentMethods.compactMap { SourceType(rawValue: $0.name) }
+        /// add apple pay in the list
+        if capability.tokenizationMethods.contains(SourceType.applePay.rawValue),
+           let applePay = SourceType(rawValue: SourceType.applePay.rawValue) {
+            sourceTypes.insert(applePay, at: sourceTypes.count)
+        }
         let isCardPaymentAllowed = capability.cardPaymentMethod != nil
         setupPaymentMethodsAndFilter(sourceTypes: sourceTypes, isCardPaymentAllowed: isCardPaymentAllowed)
     }

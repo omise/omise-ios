@@ -26,10 +26,13 @@ class CapabilityTests: XCTestCase {
         // swiftlint:disable:next line_length
         let banks = ["test", "bbl", "kbank", "rbs", "ktb", "jpm", "mufg", "tmb", "scb", "smbc", "sc", "cimb", "uob", "bay", "mega", "boa", "cacib", "gsb", "hsbc", "db", "ghb", "baac", "mb", "bnp", "tbank", "ibank", "tisco", "kk", "icbc", "tcrb", "lhb"]
 
+        let tokenization = ["googlepay", "applepay"]
+        
         let capability = Capability(
             countryCode: "TH",
             paymentMethods: payments,
-            banks: Set(banks)
+            banks: Set(banks),
+            tokenizationMethods: Set(tokenization)
         )
 
         let sample: Capability = try sampleFromJSONBy(.capability)
