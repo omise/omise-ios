@@ -19,6 +19,7 @@
 		2F96821C2D65A4A600A7AFDA /* ApplePaymentHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F96821B2D65A4A600A7AFDA /* ApplePaymentHandlerTests.swift */; };
 		2F96821E2D65AC1600A7AFDA /* ApplePayViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F96821D2D65AC1600A7AFDA /* ApplePayViewModelTests.swift */; };
 		2F9682202D65AC3000A7AFDA /* MockApplePaymentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F96821F2D65AC3000A7AFDA /* MockApplePaymentHandler.swift */; };
+		2F9F58D82D6E28D600240952 /* ThreeDS_SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9F58D72D6E28D600240952 /* ThreeDS_SDK */; };
 		2FB5FC4D2D5F38C600FF8ED8 /* CreateTokenApplePayPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB5FC4C2D5F38BD00FF8ED8 /* CreateTokenApplePayPayload.swift */; };
 		2FC27E1A2D6D67DD001E5857 /* ApplePayProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC27E192D6D67D5001E5857 /* ApplePayProtocols.swift */; };
 		2FC27E1C2D6DC1B7001E5857 /* ApplePayViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC27E1B2D6DC1B7001E5857 /* ApplePayViewControllerTest.swift */; };
@@ -534,6 +535,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75D13E0F2B8678530073A831 /* OmiseSwiftUIKit in Frameworks */,
+				2F9F58D82D6E28D600240952 /* ThreeDS_SDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1353,6 +1355,7 @@
 			name = ExampleApp;
 			packageProductDependencies = (
 				75D13E0E2B8678530073A831 /* OmiseSwiftUIKit */,
+				2F9F58D72D6E28D600240952 /* ThreeDS_SDK */,
 			);
 			productName = ExampleApp;
 			productReference = 22D4809D1D0EB29C00544CE1 /* ExampleApp.app */;
@@ -2279,6 +2282,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2F9F58D72D6E28D600240952 /* ThreeDS_SDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */;
+			productName = ThreeDS_SDK;
+		};
 		7509D4ED2A1D1F9F0050AB38 /* OmiseTestSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OmiseTestSDK;
