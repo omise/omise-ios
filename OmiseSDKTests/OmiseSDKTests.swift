@@ -5,7 +5,7 @@ import XCTest
 class OmiseSDKTests: XCTestCase {
     func testCountry() {
         let expectedCountry = Country(name: "Thailand", code: "TH")
-        let capability = Capability(countryCode: "TH", paymentMethods: [], banks: Set<String>())
+        let capability = Capability(countryCode: "TH", paymentMethods: [], banks: Set<String>(), tokenizationMethods: Set<String>())
         if let client = OmiseSDK.shared.client as? Client {
             client.setLatestLoadedCapability(capability)
             XCTAssertEqual(expectedCountry, OmiseSDK.shared.country)
