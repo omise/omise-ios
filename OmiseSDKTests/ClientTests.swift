@@ -81,6 +81,40 @@ class ClientTests: XCTestCase {
 
     /// Testing createToken API Request.
     /// Testing if `Client` generates URLRequest with correct HTTP body to perform API request
+    func testCreateApplePayTokenURLRequest() throws {
+        let expectation = self.expectation(description: "Create Apple Pay Token Mockup Callback")
+        let payload: CreateTokenApplePayPayload = try sampleFromJSONBy(.source(type: .applePay))
+
+        let networkMockup = NetworkMockup { [payload] urlRequest in
+            defer { expectation.fulfill() }
+
+            func validateURLRequest() {
+                if let data = urlRequest.httpBody, let jsonString = String(data: data, encoding: .utf8) {
+                    do {
+                        let decodedCardPayload: CreateTokenApplePayPayload = try parse(jsonString: jsonString)
+                        XCTAssertEqual(payload, decodedCardPayload)
+                    } catch {
+                        XCTFail("Unable to decode payload from encoded JSON string")
+                    }
+
+                } else {
+                    XCTFail("Unable to decode payload from encoded JSON string")
+                }
+            }
+
+            validateURLRequest()
+        }
+
+        let client = Client(publicKey: publicKey, version: "1.0.0", network: networkMockup)
+        client.createToken(applePayToken: payload) { _ in
+            /// Testing URLRequst in through Network Mockup closure
+            /// Closure implementation is nor required
+        }
+        waitForExpectations(timeout: requestTimeout, handler: nil)
+    }
+
+    /// Testing createToken API Request.
+    /// Testing if `Client` generates URLRequest with correct HTTP body to perform API request
     func testCreateSourceURLRequest() throws {
         let expectation = self.expectation(description: "Create Source Mockup Callback")
         let sourcePayload: CreateSourcePayload = try sampleFromJSONBy(.source(type: .atome))

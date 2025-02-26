@@ -14,6 +14,12 @@
 		229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */; };
 		22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */; };
 		2F5A70812D6C73DA00F5A61A /* MockApplePayViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5A70802D6C73D400F5A61A /* MockApplePayViewModelDelegate.swift */; };
+		2F5D98F32D6EB29000B5ECB4 /* ChoosePaymentCooridnatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D98F22D6EB28800B5ECB4 /* ChoosePaymentCooridnatorTest.swift */; };
+		2F5D98F52D6EB41C00B5ECB4 /* MockClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D98F42D6EB41800B5ECB4 /* MockClientProtocol.swift */; };
+		2F5D98F72D6EB96600B5ECB4 /* MockSelectPaymentMethodDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D98F62D6EB96200B5ECB4 /* MockSelectPaymentMethodDelegate.swift */; };
+		2F5D98F92D6EBAA000B5ECB4 /* MockNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D98F82D6EBA9600B5ECB4 /* MockNavigationController.swift */; };
+		2F5D98FB2D6EC26400B5ECB4 /* MockChoosePaymentMethodDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D98FA2D6EC26100B5ECB4 /* MockChoosePaymentMethodDelegate.swift */; };
+		2F5D99022D6ECA4300B5ECB4 /* SelectPaymentMethodViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D99012D6ECA4100B5ECB4 /* SelectPaymentMethodViewModelTest.swift */; };
 		2F9682172D657EFA00A7AFDA /* ApplePaymentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9682162D657EFA00A7AFDA /* ApplePaymentHandler.swift */; };
 		2F96821A2D65A45400A7AFDA /* MockApplePayInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9682192D65A45400A7AFDA /* MockApplePayInterface.swift */; };
 		2F96821C2D65A4A600A7AFDA /* ApplePaymentHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F96821B2D65A4A600A7AFDA /* ApplePaymentHandlerTests.swift */; };
@@ -310,6 +316,12 @@
 		22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F5A707E2D6742A500F5A61A /* ExampleAppDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ExampleAppDebug.entitlements; sourceTree = "<group>"; };
 		2F5A70802D6C73D400F5A61A /* MockApplePayViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApplePayViewModelDelegate.swift; sourceTree = "<group>"; };
+		2F5D98F22D6EB28800B5ECB4 /* ChoosePaymentCooridnatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePaymentCooridnatorTest.swift; sourceTree = "<group>"; };
+		2F5D98F42D6EB41800B5ECB4 /* MockClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockClientProtocol.swift; sourceTree = "<group>"; };
+		2F5D98F62D6EB96200B5ECB4 /* MockSelectPaymentMethodDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSelectPaymentMethodDelegate.swift; sourceTree = "<group>"; };
+		2F5D98F82D6EBA9600B5ECB4 /* MockNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNavigationController.swift; sourceTree = "<group>"; };
+		2F5D98FA2D6EC26100B5ECB4 /* MockChoosePaymentMethodDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockChoosePaymentMethodDelegate.swift; sourceTree = "<group>"; };
+		2F5D99012D6ECA4100B5ECB4 /* SelectPaymentMethodViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPaymentMethodViewModelTest.swift; sourceTree = "<group>"; };
 		2F9682162D657EFA00A7AFDA /* ApplePaymentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePaymentHandler.swift; sourceTree = "<group>"; };
 		2F9682192D65A45400A7AFDA /* MockApplePayInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApplePayInterface.swift; sourceTree = "<group>"; };
 		2F96821B2D65A4A600A7AFDA /* ApplePaymentHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePaymentHandlerTests.swift; sourceTree = "<group>"; };
@@ -623,6 +635,27 @@
 				2F9682192D65A45400A7AFDA /* MockApplePayInterface.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		2F5D98F02D6EB27900B5ECB4 /* PaymentMethod */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D99012D6ECA4100B5ECB4 /* SelectPaymentMethodViewModelTest.swift */,
+				2F5D98F22D6EB28800B5ECB4 /* ChoosePaymentCooridnatorTest.swift */,
+				2F5D98F12D6EB28300B5ECB4 /* Mock */,
+			);
+			path = PaymentMethod;
+			sourceTree = "<group>";
+		};
+		2F5D98F12D6EB28300B5ECB4 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D98FA2D6EC26100B5ECB4 /* MockChoosePaymentMethodDelegate.swift */,
+				2F5D98F82D6EBA9600B5ECB4 /* MockNavigationController.swift */,
+				2F5D98F62D6EB96200B5ECB4 /* MockSelectPaymentMethodDelegate.swift */,
+				2F5D98F42D6EB41800B5ECB4 /* MockClientProtocol.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 		2F9682182D65A44C00A7AFDA /* ApplePay */ = {
@@ -1264,6 +1297,7 @@
 		987A02CA1CE35D5E0035417A /* OmiseSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				2F5D98F02D6EB27900B5ECB4 /* PaymentMethod */,
 				2F9682182D65A44C00A7AFDA /* ApplePay */,
 				758A4E9E2BE3DFDF005E7B5A /* URL+PathComponentsTests.swift */,
 				758A4E872BE38AE8005E7B5A /* 3DS */,
@@ -1749,8 +1783,12 @@
 				7509D4E02A1AA1450050AB38 /* AtomeFormViewControllerTests.swift in Sources */,
 				758A4E962BE38AFD005E7B5A /* ThreeDSButtonCustomizationTests.swift in Sources */,
 				2FC27E1C2D6DC1B7001E5857 /* ApplePayViewControllerTest.swift in Sources */,
+				2F5D98F72D6EB96600B5ECB4 /* MockSelectPaymentMethodDelegate.swift in Sources */,
+				2F5D98FB2D6EC26400B5ECB4 /* MockChoosePaymentMethodDelegate.swift in Sources */,
+				2F5D98F32D6EB29000B5ECB4 /* ChoosePaymentCooridnatorTest.swift in Sources */,
 				758A4E902BE38AFD005E7B5A /* NetceteraThreeDSControllerTests.swift in Sources */,
 				7509D4E42A1C89F10050AB38 /* AtomeFormViewModelMockup.swift in Sources */,
+				2F5D98F52D6EB41C00B5ECB4 /* MockClientProtocol.swift in Sources */,
 				750708F42B7A765500A48DD0 /* OmiseSDKTests.swift in Sources */,
 				2F5A70812D6C73DA00F5A61A /* MockApplePayViewModelDelegate.swift in Sources */,
 				75E0EB7E2B7B5EE400E3198A /* CreateTokenPayloadTests.swift in Sources */,
@@ -1758,6 +1796,7 @@
 				2F9682202D65AC3000A7AFDA /* MockApplePaymentHandler.swift in Sources */,
 				2F96821C2D65A4A600A7AFDA /* ApplePaymentHandlerTests.swift in Sources */,
 				75E0EB832B7B79E700E3198A /* CapabilityTests.swift in Sources */,
+				2F5D98F92D6EBAA000B5ECB4 /* MockNavigationController.swift in Sources */,
 				2F96821E2D65AC1600A7AFDA /* ApplePayViewModelTests.swift in Sources */,
 				F615CBF8261565D600E1A2D9 /* CardExpiryDatePickerTests.swift in Sources */,
 				758A4E9F2BE3DFDF005E7B5A /* URL+PathComponentsTests.swift in Sources */,
@@ -1769,6 +1808,7 @@
 				750708E32B790B8300A48DD0 /* String+JSON.swift in Sources */,
 				750708E52B790BD600A48DD0 /* SampleData.swift in Sources */,
 				758A4E972BE38AFD005E7B5A /* SHA512Tests.swift in Sources */,
+				2F5D99022D6ECA4300B5ECB4 /* SelectPaymentMethodViewModelTest.swift in Sources */,
 				750708E02B7909BB00A48DD0 /* SourceTests.swift in Sources */,
 				75CFC4D42B73B21100422A8F /* ClientTests.swift in Sources */,
 				2FC27E1E2D6DDA0F001E5857 /* MockApplePayViewModel.swift in Sources */,

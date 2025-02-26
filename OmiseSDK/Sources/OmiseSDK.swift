@@ -22,7 +22,7 @@ public class OmiseSDK {
         Country(code: latestLoadedCapability?.countryCode)
     }
 
-    var applePayInfo: ApplePayInfo?
+    private(set) var applePayInfo: ApplePayInfo?
     
     public private(set) weak var presentedViewController: UIViewController?
 
