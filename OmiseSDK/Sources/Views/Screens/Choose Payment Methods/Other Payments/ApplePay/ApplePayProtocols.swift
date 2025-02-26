@@ -22,7 +22,7 @@ protocol PaymentAuthorizationControllerProtocol {
     func dismissSheet(completion: (() -> Void)?)
 }
 
-struct ApplePayInfo {
+struct ApplePayInfo: Equatable {
     /// The merchant identifier used for Apple Pay transactions.
     let merchantIdentifier: String
     
