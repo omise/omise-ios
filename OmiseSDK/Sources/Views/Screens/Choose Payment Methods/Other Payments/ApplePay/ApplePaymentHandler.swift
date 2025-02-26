@@ -27,15 +27,6 @@ class ApplePaymentHandler: NSObject, ApplePaymentHandlerType {
     /// The payment authorization controller conforming to `PaymentAuthorizationControllerProtocol`.
     var paymentController: PaymentAuthorizationControllerProtocol?
     
-    /// The array of payment summary items (e.g., total, tax) for the payment request.
-    var paymentSummaryItems: [PKPaymentSummaryItem] = []
-    
-    /// The current status of the payment authorization.
-    var paymentStatus = PKPaymentAuthorizationStatus.failure
-    
-    /// The Omise payment token obtained after a successful payment authorization.
-    var omisePaymentToken: String = ""
-    
     /// The completion handler called after payment processing completes.
     private(set) var completionHandler: ((PKPayment?, Error?) -> Void)?
     
