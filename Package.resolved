@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "omise-flutter-ios-spm",
+        "repositoryURL": "https://github.com/tyler-techcombine/flutter-ios-framework-spm.git",
+        "state": {
+          "branch": "main",
+          "revision": "6d6e3e7a9532ac46e4898a50c75d49029a517517",
+          "version": null
+        }
+      },
+      {
         "package": "ThreeDS_SDK",
         "repositoryURL": "https://github.com/ios-3ds-sdk/SPM",
         "state": {
