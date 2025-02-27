@@ -127,3 +127,6 @@
 
 // Authorizing Payment
 "AuthorizingPayment.title" = "Authorizing Payment";
+
+// Apple Pay
+"ApplePay.not.available.text" = "Apple Pay is not available on this device";

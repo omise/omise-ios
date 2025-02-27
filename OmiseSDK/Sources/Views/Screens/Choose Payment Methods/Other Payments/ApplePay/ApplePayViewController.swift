@@ -14,7 +14,7 @@ class ApplePayViewController: UIViewController {
     /// A label displayed when Apple Pay is not available on the device.
     lazy var errorLabel: UILabel = {
         let label = UILabel()
-        label.text = "Apple Pay not available on this device"
+        label.text = "ApplePay.not.available.text".localized()
         return label
     }()
     

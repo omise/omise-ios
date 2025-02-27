@@ -127,3 +127,6 @@
 
 // Authorizing Payment
 "AuthorizingPayment.title" = "決済の認可";
+
+// Apple Pay
+"ApplePay.not.available.text" = "この端末ではApple Payはご利用いただけません";
