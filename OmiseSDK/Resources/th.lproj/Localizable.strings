@@ -124,3 +124,6 @@
 
 // Authorizing Payment
 "AuthorizingPayment.title" = "กำลังอนุมัติวงเงิน";
+
+// Apple Pay
+"ApplePay.not.available.text" = "ไม่สามารถใช้งาน Apple Pay ได้บนอุปกรณ์นี้";
