@@ -43,7 +43,7 @@ extension Source.Payment.Installment {
             return [ 3, 4, 6, 9, 10 ]
         case .installmentTTB:
             return [ 3, 4, 6, 10, 12 ]
-        case .installmentUOB:
+        case .installmentUOB, .installmentWhiteLabelUOB:
             return [ 3, 4, 6, 10 ]
         case .installmentWhiteLabelBAY:
             return [ 3, 4, 6, 9, 10 ]

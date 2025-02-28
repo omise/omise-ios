@@ -62,6 +62,8 @@ public enum SourceType: String, Codable, CaseIterable {
     case installmentWhiteLabelBAY = "installment_wlb_bay"
     /// Krungsri First Choice https://docs.opn.ooo/installment-white-label-payments
     case installmentWhiteLabelFirstChoice = "installment_wlb_first_choice"
+    /// United Overseas Bank (UOB)  https://docs.opn.ooo/installment-white-label-payments
+    case installmentWhiteLabelUOB = "installment_wlb_uob"
     /// TMBThanachart Bank https://docs.opn.ooo/installment-white-label-payments
     case installmentWhiteLabelTTB = "installment_wlb_ttb"
     /// Bank of Ayudhya (Krungsri)   https://docs.opn.ooo/internet-banking

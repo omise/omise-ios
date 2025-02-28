@@ -62,7 +62,7 @@ extension SourceType: ViewPresentable {
             return "SCB"
         case .installmentTTB, .installmentWhiteLabelTTB:
             return "ttb"
-        case .installmentUOB:
+        case .installmentUOB, .installmentWhiteLabelUOB:
             return "uob"
         case .internetBankingBAY:
             return "BAY"

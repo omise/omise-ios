@@ -114,7 +114,8 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
             .installmentWhiteLabelBBL: .installmentBBL,
             .installmentWhiteLabelBAY: .installmentBAY,
             .installmentWhiteLabelFirstChoice: .installmentFirstChoice,
-            .installmentWhiteLabelTTB: .installmentTTB
+            .installmentWhiteLabelTTB: .installmentTTB,
+            .installmentWhiteLabelUOB: .installmentUOB
         ]
         
         for (keepingSourceType, removingSourceType) in filter
