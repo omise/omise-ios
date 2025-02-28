@@ -23,7 +23,8 @@ extension SourceType {
             .installmentWhiteLabelBBL,
             .installmentWhiteLabelBAY,
             .installmentWhiteLabelFirstChoice,
-            .installmentWhiteLabelTTB
+            .installmentWhiteLabelTTB,
+            .installmentWhiteLabelUOB
         ]
     }
 
