@@ -11,6 +11,16 @@ extension Source.Payment {
         // swiftlint:disable:previous discouraged_optional_boolean
         /// Source type of payment
         var sourceType: SourceType
+        
+        public init(
+            installmentTerm: Int,
+            zeroInterestInstallments: Bool?,// swiftlint:disable:this discouraged_optional_boolean
+            sourceType: SourceType
+        ) {
+            self.installmentTerm = installmentTerm
+            self.zeroInterestInstallments = zeroInterestInstallments
+            self.sourceType = sourceType
+        }
     }
 }
 
