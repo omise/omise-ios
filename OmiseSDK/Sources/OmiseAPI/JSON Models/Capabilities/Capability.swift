@@ -5,6 +5,7 @@ public struct Capability {
     public let countryCode: String
     public let paymentMethods: [Capability.PaymentMethod]
     public let banks: Set<String>
+    public let tokenizationMethods: Set<String>
 }
 
 extension Capability {
@@ -34,5 +35,6 @@ extension Capability: Codable {
         case countryCode = "country"
         case paymentMethods = "payment_methods"
         case banks
+        case tokenizationMethods = "tokenization_methods"
     }
 }

@@ -23,3 +23,9 @@ extension Token: Decodable {
         case chargeStatus = "charge_status"
     }
 }
+
+extension Token: Equatable {
+    public static func == (lhs: Token, rhs: Token) -> Bool {
+        lhs.id == rhs.id
+    }
+}

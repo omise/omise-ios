@@ -24,6 +24,8 @@ extension SourceType: ViewPresentable {
             return "AlipayHK"
         case .atome:
             return "Atome"
+        case .applePay:
+            return "ApplePay"
         case .barcodeAlipay:
             return "Alipay"
         case .billPaymentTescoLotus:
