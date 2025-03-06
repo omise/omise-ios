@@ -4,7 +4,7 @@ import Foundation
 extension OmiseError {
     var localizedDescription: String {
         switch self {
-        case .api(code: let code, message: _, location: _):
+        case .api(code: let code, message: let message, location: _):
             switch code {
             case .invalidCard(let invalidCardReasons):
                 switch invalidCardReasons.first {
@@ -177,13 +177,18 @@ extension OmiseError {
                         comment: "The displaying message showing in the error banner an `Bad request` error with `currency-not-supported` from the backend has occurred"
                     )
                 case .other?, nil:
-                    return NSLocalizedString(
-                        "payment-creator.error.api.bad_request.other.message",
-                        tableName: "Error",
-                        bundle: .omiseSDK,
-                        value: "Unknown error occurred",
-                        comment: "The displaying message showing in the error banner an `Bad request` error with `other` from the backend has occurred"
-                    )
+                    if message.isEmpty {
+                        return NSLocalizedString(
+                            "payment-creator.error.api.bad_request.other.message",
+                            tableName: "Error",
+                            bundle: .omiseSDK,
+                            value: "Unknown error occurred",
+                            comment: "The displaying message showing in the error banner an `Bad request` error with `other` from the backend has occurred"
+                        )
+                    } else {
+                        return message
+                    }
+                    
                 }
             case .authenticationFailure, .serviceNotFound:
                 return NSLocalizedString(
@@ -219,7 +224,7 @@ extension OmiseError {
         }
 
         switch self {
-        case .api(code: let code, message: _, location: _):
+        case .api(code: let code, message: let message, location: _):
             switch code {
             case .invalidCard(let invalidCardReasons):
                 switch invalidCardReasons.first {
@@ -381,6 +386,9 @@ extension OmiseError {
                         comment: "The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator an `Bad request` error with `currency-not-supported` from the backend has occurred"
                     )
                 case .other?, nil:
+                    if !message.isEmpty {
+                        return "" /// will return empty because we will only show API error message instead. No recovery message is needed
+                    }
                     return NSLocalizedString(
                         "payment-creator.error.api.bad_request.other.recovery-suggestion",
                         tableName: "Error",
