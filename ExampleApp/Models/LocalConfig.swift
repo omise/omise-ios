@@ -1,17 +1,16 @@
 import Foundation
 import OmiseSDK
 
-struct LocalConfig: Codable {
+struct LocalConfig {
     var publicKey: String = "pkey_"
-
+    var merchantId: String = ""
+    
     private let devVaultBaseURL: String?
     private let devApiBaseURL: String?
 
     var devMode: Bool {
         devVaultBaseURL != nil && devApiBaseURL != nil
     }
-    
-    var merchantId: String = ""
 
     init() {
         devVaultBaseURL = nil
@@ -38,5 +37,20 @@ struct LocalConfig: Codable {
         } else {
             return LocalConfig()
         }
+    }
+}
+
+extension LocalConfig: Codable {
+    enum CodingKeys: String, CodingKey {
+        case publicKey
+        case merchantId
+    }
+    
+    init(from decoder: Decoder) throws {
+        self.init()
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.publicKey = try container.decodeIfPresent(String.self, forKey: .publicKey) ?? "pkey_"
+        self.merchantId = try container.decodeIfPresent(String.self, forKey: .merchantId) ?? ""
     }
 }
