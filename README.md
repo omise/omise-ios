@@ -78,6 +78,17 @@ OmiseSDK.shared = omiseSDK
 
 If you cloned this project to your local hard drive, you can check out `ExampleApp.xcodeproj`.
 
+#### ApplePay
+To enable Apple Pay in your app, configure your Apple Pay Merchant Identifier using the setupApplePay method.
+Refer to the ExampleApp sample for a complete implementation.
+For more information, please review at [Omise Apple Pay Documentation](https://docs.opn.ooo/applepay/singapore).
+
+```swift 
+omiseSDK.setupApplePay(for: "your_merchant_id", requiredBillingAddress: true)
+```
+Replace "your_merchant_id" with your actual Apple Pay Merchant Identifier.
+
+
 ### Opn Payments API
 
 The SDK currently
