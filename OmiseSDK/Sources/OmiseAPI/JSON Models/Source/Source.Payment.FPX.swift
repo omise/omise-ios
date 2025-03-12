@@ -2,7 +2,7 @@ import Foundation
 
 extension Source.Payment {
     /// Payment for Malaysia FPX payment method
-    /// https://docs.opn.ooo/fpx
+    /// https://docs.omise.co/fpx
     public struct FPX: Equatable {
         /// Bank code selected by customer
         public let bank: String

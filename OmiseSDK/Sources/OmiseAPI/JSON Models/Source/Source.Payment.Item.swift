@@ -2,7 +2,7 @@ import Foundation
 
 extension Source.Payment {
     /// Information about items included in the order
-    /// https://docs.opn.ooo/sources-api
+    /// https://docs.omise.co/sources-api
     public struct Item: Equatable {
         /// SKU/product id of the item
         public let sku: String
