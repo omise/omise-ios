@@ -536,7 +536,7 @@ class SourceTests: XCTestCase {
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         let paymentInformation = Payment.EContext(
             name: "ヤマダタロウ",
-            email: "test@opn.com",
+            email: "test@omise.co",
             phoneNumber: "01234567891"
         )
         XCTAssertEqual(source.id, "src_test_5xsjw8qafayihquj3k9")

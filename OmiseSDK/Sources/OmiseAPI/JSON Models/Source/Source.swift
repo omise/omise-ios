@@ -2,7 +2,7 @@ import Foundation
 
 /// Represents Source JSON object for communication with Omise API
 /// Sources are methods for accepting payments through non-credit-card channels
-/// https://docs.opn.ooo/sources-api
+/// https://docs.omise.co/sources-api
 public struct Source {
     /// The processing flow of a Source
     public let id: String

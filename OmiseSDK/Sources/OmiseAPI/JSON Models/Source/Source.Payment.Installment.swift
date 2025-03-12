@@ -2,7 +2,7 @@ import Foundation
 
 extension Source.Payment {
     /// Payloads for Installment payment methods
-    /// https://docs.opn.ooo/installment-payments
+    /// https://docs.omise.co/installment-payments
     public struct Installment: Equatable {
         /// Valid installment term length in months
         let installmentTerm: Int
