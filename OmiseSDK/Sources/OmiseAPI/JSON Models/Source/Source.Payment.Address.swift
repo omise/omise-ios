@@ -2,7 +2,7 @@ import Foundation
 
 extension Source.Payment {
     /// `Shipping` or `Billing` address
-    /// https://docs.opn.ooo/sources-api
+    /// https://docs.omise.co/sources-api
     public struct Address: Equatable {
         /// Address country as two-letter ISO 3166 code
         public let countryCode: String

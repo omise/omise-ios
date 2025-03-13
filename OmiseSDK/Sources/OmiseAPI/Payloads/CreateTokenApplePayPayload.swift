@@ -3,7 +3,7 @@ import PassKit
 
 /// Payload to create a token using Apple Pay data.
 /// This structure is used as the request body in Omise's createToken API.
-/// See: https://docs.opn.ooo/tokens
+/// See: https://docs.omise.co/tokens
 public struct CreateTokenApplePayPayload: Codable, Equatable {
     public static func == (lhs: CreateTokenApplePayPayload, rhs: CreateTokenApplePayPayload) -> Bool {
         lhs.tokenization.merchantId == rhs.tokenization.merchantId &&

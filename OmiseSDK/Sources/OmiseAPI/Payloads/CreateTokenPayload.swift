@@ -11,7 +11,7 @@ public struct CreateTokenPayload: Codable, Equatable {
     
     /// Card Information to create a token
     /// A token represents a credit or debit card
-    /// https://docs.opn.ooo/tokens-api
+    /// https://docs.omise.co/tokens-api
     public struct Card: Equatable {
         /// Card holder's full name
         public let name: String
