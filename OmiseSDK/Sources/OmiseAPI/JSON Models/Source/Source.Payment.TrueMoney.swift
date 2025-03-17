@@ -2,7 +2,7 @@ import Foundation
 
 extension Source.Payment {
     /// Payment for `TrueMoney Wallet` payment method
-    /// https://docs.opn.ooo/truemoney-wallet
+    /// https://docs.omise.co/truemoney-wallet
     public struct TrueMoneyWallet: Equatable {
         /// Phone number
         public let phoneNumber: String
