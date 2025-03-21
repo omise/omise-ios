@@ -59,4 +59,52 @@ class ChoosePaymentCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockChoosePaymentMethodDelegate.calls[0], .choosePaymentMethodDidComplete)
         XCTAssertEqual(mockChoosePaymentMethodDelegate.token, token)
     }
+    
+    func test_process_whiteLabelPayment() throws {
+        let expectation = XCTestExpectation(description: "Did Process Payment for White Label Installment")
+        let token: Token = try sampleFromJSONBy(.token)
+        let source: Source = try sampleFromJSONBy(.source(type: .installmentBAY))
+        
+        let card = CreateTokenPayload.Card(name: "John Doe",
+                                           number: "4242424242424242",
+                                           expirationMonth: 12,
+                                           expirationYear: 2020,
+                                           securityCode: "123")
+        
+        let installment = Source.Payment.Installment(installmentTerm: 3,
+                                                     zeroInterestInstallments: true,
+                                                     sourceType: .installmentBAY)
+        sut.didSelectCardPayment(
+            paymentType: .whiteLabelInstallment(payment: .installment(installment)),
+            card: card) { expectation.fulfill() }
+        
+        wait(for: [expectation], timeout: 1.0)
+        XCTAssertEqual(mockChoosePaymentMethodDelegate.calls.count, 1)
+        XCTAssertEqual(mockChoosePaymentMethodDelegate.calls[0], .choosePaymentMethodDidComplete)
+        XCTAssertEqual(mockChoosePaymentMethodDelegate.token, token)
+        XCTAssertEqual(mockChoosePaymentMethodDelegate.source, source)
+    }
+    
+    func test_process_whiteLabelPayment_Failure() throws {
+        let expectation = XCTestExpectation(description: "Did Process Payment for White Label Installment")
+        let card = CreateTokenPayload.Card(name: "John Doe",
+                                           number: "4242424242424242",
+                                           expirationMonth: 12,
+                                           expirationYear: 2020,
+                                           securityCode: "123")
+        
+        let installment = Source.Payment.Installment(installmentTerm: 3,
+                                                     zeroInterestInstallments: true,
+                                                     sourceType: .installmentBAY)
+        
+        mockClient.shouldShowError = true
+        sut.didSelectCardPayment(
+            paymentType: .whiteLabelInstallment(payment: .installment(installment)),
+            card: card) { expectation.fulfill() }
+        
+        wait(for: [expectation], timeout: 1.0)
+        XCTAssertEqual(mockChoosePaymentMethodDelegate.calls.count, 0)
+        XCTAssertNil(mockChoosePaymentMethodDelegate.token)
+        XCTAssertNil(mockChoosePaymentMethodDelegate.source)
+    }
 }

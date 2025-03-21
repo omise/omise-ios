@@ -107,42 +107,7 @@ public class CardNumberTextField: OmiseTextField {
     
     public override func paste(_ sender: Any?) {
         let pasteboard = UIPasteboard.general
-        
-        guard let copiedText = pasteboard.string, let selectedTextRange = selectedTextRange else {
-            return
-        }
-        
-        let selectedTextLength = self.offset(from: selectedTextRange.start, to: selectedTextRange.end)
-        let pan = copiedText.replacingOccurrences(
-            of: "[^0-9]",
-            with: "",
-            options: .regularExpression,
-            range: nil)
-        
-        // Using the current detected upper bound for the current brand will cause problems when swtching from
-        // a brand that has an upper bound that is lower than that of the pasted detected card. (ex from visa to discover). So the upper bound will be set to the highest upper bound available for cards which is 19
-        let panLength = 19 - (self.text?.count ?? 0) + selectedTextLength
-        let maxPastingPANLength = min(pan.count, panLength)
-        guard maxPastingPANLength > 0 else {
-            return
-        }
-        replace(selectedTextRange, withText: String(pan[pan.startIndex..<pan.index(pan.startIndex, offsetBy: maxPastingPANLength)]))
-        
-        guard let attributedText = attributedText else {
-            return
-        }
-        
-        let formattingAttributedText = NSMutableAttributedString(attributedString: attributedText)
-        let kerningIndexes = IndexSet(PAN.suggestedSpaceFormattedIndexesForPANPrefix(attributedText.string).map { $0 - 1 })
-        
-        let range = NSRange(location: 0, length: formattingAttributedText.length)
-        formattingAttributedText.removeAttribute(.kern, range: range)
-        kerningIndexes[kerningIndexes.indexRange(in: 0..<attributedText.length)].forEach {
-            formattingAttributedText.addAttribute(NSAttributedString.Key.kern, value: 5, range: NSRange(location: $0, length: 1))
-        }
-        let previousSelectedTextRange = self.selectedTextRange
-        self.attributedText = formattingAttributedText
-        self.selectedTextRange = previousSelectedTextRange
+        handlePaste(copiedText: pasteboard.string)
     }
     
     override func updatePlaceholderTextColor() {
@@ -311,5 +276,46 @@ extension CardNumberTextField {
         let maxLength = (pan.brand?.validLengths.upperBound ?? 19)
         
         return maxLength >= (self.text?.count ?? 0) - range.length + string.count
+    }
+}
+
+extension CardNumberTextField {
+    func handlePaste(copiedText: String?) {
+        guard let copiedText = copiedText, let selectedTextRange = selectedTextRange else {
+            return
+        }
+        
+        let selectedTextLength = self.offset(from: selectedTextRange.start, to: selectedTextRange.end)
+        let copiedPAN = copiedText.replacingOccurrences(
+            of: "[^0-9]",
+            with: "",
+            options: .regularExpression,
+            range: nil)
+        
+        // Using the current detected upper bound for the current brand will cause problems when swtching from
+        // a brand that has an upper bound that is lower than that of the pasted detected card. (ex from visa to discover). So the upper bound will be set to the highest upper bound available for cards which is 19
+        let panLength = 19 - (self.text?.count ?? 0) + selectedTextLength
+        let maxPastingPANLength = min(copiedPAN.count, panLength)
+        guard maxPastingPANLength > 0 else {
+            return
+        }
+        replace(selectedTextRange,
+                withText: String(copiedPAN[copiedPAN.startIndex..<copiedPAN.index(copiedPAN.startIndex, offsetBy: maxPastingPANLength)]))
+        
+        guard let attributedText = attributedText else {
+            return
+        }
+        
+        let formattingAttributedText = NSMutableAttributedString(attributedString: attributedText)
+        let kerningIndexes = IndexSet(PAN.suggestedSpaceFormattedIndexesForPANPrefix(attributedText.string).map { $0 - 1 })
+        
+        let range = NSRange(location: 0, length: formattingAttributedText.length)
+        formattingAttributedText.removeAttribute(.kern, range: range)
+        kerningIndexes[kerningIndexes.indexRange(in: 0..<attributedText.length)].forEach {
+            formattingAttributedText.addAttribute(NSAttributedString.Key.kern, value: 5, range: NSRange(location: $0, length: 1))
+        }
+        let previousSelectedTextRange = self.selectedTextRange
+        self.attributedText = formattingAttributedText
+        self.selectedTextRange = previousSelectedTextRange
     }
 }

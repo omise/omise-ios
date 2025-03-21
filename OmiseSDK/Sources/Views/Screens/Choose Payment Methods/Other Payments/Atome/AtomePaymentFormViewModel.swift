@@ -27,7 +27,7 @@ class AtomePaymentFormViewModel: AtomePaymentFormViewModelProtocol, CountryListV
         }
     }
 
-    var onSelectCountry: (Country) -> Void = { _ in }
+    var onSelectCountry: (Country) -> Void = { _ in /* Non-optional default empty implementation */ }
 
     var countryListViewModel: CountryListViewModelProtocol { return self }
     
@@ -51,7 +51,9 @@ class AtomePaymentFormViewModel: AtomePaymentFormViewModelProtocol, CountryListV
     }
 
     func error(for field: Field, validate text: String?) -> String? {
-        if field.isOptional, text?.isEmpty ?? true { return nil }
+        if field.isOptional && (text?.isEmpty ?? true) {
+            return nil
+        }
 
         if let validatorRegex = field.validatorRegex,
             let regex = try? NSRegularExpression(pattern: validatorRegex, options: []) {

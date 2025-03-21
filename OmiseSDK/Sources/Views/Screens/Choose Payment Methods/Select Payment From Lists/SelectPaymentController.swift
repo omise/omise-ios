@@ -4,7 +4,9 @@ class SelectPaymentController: UITableViewController {
 
     let viewModel: SelectPaymentPresentableProtocol
 
-    var customizeCellAtIndexPathClosure: (UITableViewCell, IndexPath) -> Void = { _, _ in }
+    var customizeCellAtIndexPathClosure: (UITableViewCell, IndexPath) -> Void = { _, _ in
+        // Non-optional default empty implementation
+    }
 
     init(viewModel: SelectPaymentPresentableProtocol) {
         self.viewModel = viewModel

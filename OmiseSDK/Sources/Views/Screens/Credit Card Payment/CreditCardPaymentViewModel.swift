@@ -42,7 +42,8 @@ class CreditCardPaymentViewModel: CreditCardPaymentViewModelProtocol, CountryLis
             }
         }
     }
-    var onSelectCountry: (Country) -> Void = { _ in }
+    
+    var onSelectCountry: (Country) -> Void = { _ in /* Non-optional default empty implementation */ }
 
     func error(for field: AddressField, validate text: String?) -> String? {
         guard isAddressFieldsVisible else { return nil }
