@@ -27,7 +27,7 @@ class MockClient: ClientProtocol {
             completion(.failure(error))
         } else {
             do {
-                completion(.success(try getSource()))
+                completion(.success(try getSource(type: payload.details.sourceType)))
             } catch {
                 completion(.failure(error))
             }
