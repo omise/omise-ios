@@ -13,7 +13,10 @@
 		229E14581D0EBAB5000511DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14541D0EBAB5000511DE /* AppDelegate.swift */; };
 		229E145A1D0EBAB5000511DE /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14561D0EBAB5000511DE /* ProductDetailViewController.swift */; };
 		22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */; };
+		2F0267552D8D4FB100BA8D3E /* CardNumberTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0267542D8D4FB100BA8D3E /* CardNumberTextFieldTests.swift */; };
+		2F0267572D8D538F00BA8D3E /* CardExpiryDateTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0267562D8D538F00BA8D3E /* CardExpiryDateTextFieldTests.swift */; };
 		2F5A70812D6C73DA00F5A61A /* MockApplePayViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5A70802D6C73D400F5A61A /* MockApplePayViewModelDelegate.swift */; };
+		2F5D47522D895BA100C776CF /* CreditCardPaymentControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D47512D895B9F00C776CF /* CreditCardPaymentControllerTests.swift */; };
 		2F5D98F32D6EB29000B5ECB4 /* ChoosePaymentCooridnatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D98F22D6EB28800B5ECB4 /* ChoosePaymentCooridnatorTest.swift */; };
 		2F5D98F52D6EB41C00B5ECB4 /* MockClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D98F42D6EB41800B5ECB4 /* MockClientProtocol.swift */; };
 		2F5D98F72D6EB96600B5ECB4 /* MockSelectPaymentMethodDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D98F62D6EB96200B5ECB4 /* MockSelectPaymentMethodDelegate.swift */; };
@@ -315,8 +318,11 @@
 		22D4809D1D0EB29C00544CE1 /* ExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D480AB1D0EB29C00544CE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2F0267542D8D4FB100BA8D3E /* CardNumberTextFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumberTextFieldTests.swift; sourceTree = "<group>"; };
+		2F0267562D8D538F00BA8D3E /* CardExpiryDateTextFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardExpiryDateTextFieldTests.swift; sourceTree = "<group>"; };
 		2F5A707E2D6742A500F5A61A /* ExampleAppDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ExampleAppDebug.entitlements; sourceTree = "<group>"; };
 		2F5A70802D6C73D400F5A61A /* MockApplePayViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApplePayViewModelDelegate.swift; sourceTree = "<group>"; };
+		2F5D47512D895B9F00C776CF /* CreditCardPaymentControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardPaymentControllerTests.swift; sourceTree = "<group>"; };
 		2F5D98F22D6EB28800B5ECB4 /* ChoosePaymentCooridnatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePaymentCooridnatorTest.swift; sourceTree = "<group>"; };
 		2F5D98F42D6EB41800B5ECB4 /* MockClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockClientProtocol.swift; sourceTree = "<group>"; };
 		2F5D98F62D6EB96200B5ECB4 /* MockSelectPaymentMethodDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSelectPaymentMethodDelegate.swift; sourceTree = "<group>"; };
@@ -628,6 +634,15 @@
 			path = ExampleApp;
 			sourceTree = "<group>";
 		};
+		2F0267532D8D4FAC00BA8D3E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2F0267562D8D538F00BA8D3E /* CardExpiryDateTextFieldTests.swift */,
+				2F0267542D8D4FB100BA8D3E /* CardNumberTextFieldTests.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		2F5A707F2D6C73C700F5A61A /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -637,6 +652,14 @@
 				2F9682192D65A45400A7AFDA /* MockApplePayInterface.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		2F5D47502D895B2E00C776CF /* CreditCardPayment */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D47512D895B9F00C776CF /* CreditCardPaymentControllerTests.swift */,
+			);
+			path = CreditCardPayment;
 			sourceTree = "<group>";
 		};
 		2F5D98F02D6EB27900B5ECB4 /* PaymentMethod */ = {
@@ -1299,6 +1322,8 @@
 		987A02CA1CE35D5E0035417A /* OmiseSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				2F0267532D8D4FAC00BA8D3E /* Components */,
+				2F5D47502D895B2E00C776CF /* CreditCardPayment */,
 				2F5D98F02D6EB27900B5ECB4 /* PaymentMethod */,
 				2F9682182D65A44C00A7AFDA /* ApplePay */,
 				758A4E9E2BE3DFDF005E7B5A /* URL+PathComponentsTests.swift */,
@@ -1784,12 +1809,14 @@
 			files = (
 				2F96821A2D65A45400A7AFDA /* MockApplePayInterface.swift in Sources */,
 				7509D4E02A1AA1450050AB38 /* AtomeFormViewControllerTests.swift in Sources */,
+				2F0267572D8D538F00BA8D3E /* CardExpiryDateTextFieldTests.swift in Sources */,
 				758A4E962BE38AFD005E7B5A /* ThreeDSButtonCustomizationTests.swift in Sources */,
 				2FC27E1C2D6DC1B7001E5857 /* ApplePayViewControllerTest.swift in Sources */,
 				2F5D98F72D6EB96600B5ECB4 /* MockSelectPaymentMethodDelegate.swift in Sources */,
 				2F5D98FB2D6EC26400B5ECB4 /* MockChoosePaymentMethodDelegate.swift in Sources */,
 				2F5D98F32D6EB29000B5ECB4 /* ChoosePaymentCooridnatorTest.swift in Sources */,
 				758A4E902BE38AFD005E7B5A /* NetceteraThreeDSControllerTests.swift in Sources */,
+				2F0267552D8D4FB100BA8D3E /* CardNumberTextFieldTests.swift in Sources */,
 				7509D4E42A1C89F10050AB38 /* AtomeFormViewModelMockup.swift in Sources */,
 				2F5D98F52D6EB41C00B5ECB4 /* MockClientProtocol.swift in Sources */,
 				750708F42B7A765500A48DD0 /* OmiseSDKTests.swift in Sources */,
@@ -1810,6 +1837,7 @@
 				7509D4E22A1C876B0050AB38 /* AtomeFormViewContextMockup.swift in Sources */,
 				750708E32B790B8300A48DD0 /* String+JSON.swift in Sources */,
 				75D4E7062C05F50500ECCE72 /* OmiseErrorTests.swift in Sources */,
+				2F5D47522D895BA100C776CF /* CreditCardPaymentControllerTests.swift in Sources */,
 				750708E52B790BD600A48DD0 /* SampleData.swift in Sources */,
 				758A4E972BE38AFD005E7B5A /* SHA512Tests.swift in Sources */,
 				2F5D99022D6ECA4300B5ECB4 /* SelectPaymentMethodViewModelTest.swift in Sources */,

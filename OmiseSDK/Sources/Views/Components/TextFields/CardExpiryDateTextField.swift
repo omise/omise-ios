@@ -20,7 +20,7 @@ public class CardExpiryDateTextField: OmiseTextField {
             }
         }
     }
-
+    
     /// Currently selected year, `nil` if no year has been selected.
     public private(set) var selectedYear: Int? {
         didSet {
@@ -29,7 +29,7 @@ public class CardExpiryDateTextField: OmiseTextField {
             }
         }
     }
-
+    
     public var dateSeparatorTextColor: UIColor?
     
     public private(set) var expirationMonthAccessibilityElement: CardExpiryDateTextField.InfoAccessibilityElement!
@@ -122,8 +122,8 @@ public class CardExpiryDateTextField: OmiseTextField {
             range: nil
         )
         guard let text = replacedText,
-            !isDeletingDateSeparator else {
-                return
+              !isDeletingDateSeparator else {
+            return
         }
         
         let expiryDateComponents = text.split(separator: "/")
@@ -174,7 +174,7 @@ public class CardExpiryDateTextField: OmiseTextField {
     }
     
     static let monthStringRegularExpression: NSRegularExpression! = try? NSRegularExpression(pattern: "^([0-1]?\\d)", options: [])
-
+    
     var parsedSelectedYear: Int? {
         get {
             return selectedYear
@@ -190,41 +190,12 @@ public class CardExpiryDateTextField: OmiseTextField {
             }
         }
     }
-
+    
     public override func paste(_ sender: Any?) {
         let pasteboard = UIPasteboard.general
-        
-        guard let copiedText = pasteboard.string, let selectedTextRange = selectedTextRange else {
-            return
-        }
-        let pan = copiedText.replacingOccurrences(
-            of: "[^0-9/]",
-            with: "",
-            options: .regularExpression,
-            range: nil)
-        isDeletingDateSeparator = true
-        replace(selectedTextRange, withText: pan)
-        isDeletingDateSeparator = false
-        
-        guard !text.isNilOrEmpty, let text = self.text else {
-            return
-        }
-        
-        defer {
-            typingAttributes = defaultTextAttributes
-        }
-
-        parseCardExpiryDate(text: text)
-
-        if let attributedText = self.attributedText.map(NSMutableAttributedString.init(attributedString:)),
-           let separatorTextColor = self.dateSeparatorTextColor,
-           let dateSeparatorIndex = attributedText.string.firstIndex(of: "/") {
-            let range = NSRange(dateSeparatorIndex...dateSeparatorIndex, in: attributedText.string)
-            attributedText.addAttribute(.foregroundColor, value: separatorTextColor, range: range)
-            self.attributedText = attributedText
-        }
+        handlePaste(copiedText: pasteboard.string)
     }
-
+    
     func parseCardExpiryDate(text: String) {
         if let separatorIndex = text.firstIndex(of: "/") {
             selectedMonth = Int(text[text.startIndex..<separatorIndex])
@@ -238,10 +209,10 @@ public class CardExpiryDateTextField: OmiseTextField {
             guard let monthStringRange = Range(monthStringNSRange, in: text) else {
                 return
             }
-
+            
             selectedMonth = Int(text[monthStringRange])
             parsedSelectedYear = Int(text[monthStringRange.upperBound...])
-
+            
             if monthStringNSRange.length < 2, let selectedMonth = self.selectedMonth {
                 if let attributedText = self.attributedText.map(NSMutableAttributedString.init(attributedString:)) {
                     attributedText.mutableString.replaceCharacters(in: monthStringNSRange, with: String(format: "%02d/", selectedMonth))
@@ -252,7 +223,7 @@ public class CardExpiryDateTextField: OmiseTextField {
             }
         }
     }
-
+    
     public override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -269,10 +240,10 @@ extension CardExpiryDateTextField {
         let bounds = textRect(forBounds: self.bounds)
         
         if let text = text, text.count >= 5,
-            let endOfMonthRange = position(from: beginningOfDocument, offset: 2),
-            let startOfYearRange = position(from: endOfMonthRange, offset: 1),
-            let monthRange = textRange(from: beginningOfDocument, to: endOfMonthRange),
-            let yearRange = textRange(from: startOfYearRange, to: endOfDocument) {
+           let endOfMonthRange = position(from: beginningOfDocument, offset: 2),
+           let startOfYearRange = position(from: endOfMonthRange, offset: 1),
+           let monthRange = textRange(from: beginningOfDocument, to: endOfMonthRange),
+           let yearRange = textRange(from: startOfYearRange, to: endOfDocument) {
             let monthRect = firstRect(for: monthRange)
             let yearRect = firstRect(for: yearRange)
             expirationMonthFrameInTextfield = CGRect(x: monthRect.origin.x + bounds.minX,
@@ -332,7 +303,7 @@ extension CardExpiryDateTextField {
             switch component {
             case .month:
                 let selectedMonth = expiryDateTextField.selectedMonth
-                    ?? Calendar.creditCardInformationCalendar.component(.month, from: Date())
+                ?? Calendar.creditCardInformationCalendar.component(.month, from: Date())
                 expiryDateTextField.selectedMonth = min(12, selectedMonth + 1)
             case .year:
                 let selectedYear = expiryDateTextField.selectedYear ?? Calendar.creditCardInformationCalendar.component(.year, from: Date())
@@ -345,7 +316,7 @@ extension CardExpiryDateTextField {
             switch component {
             case .month:
                 let selectedMonth = expiryDateTextField.selectedMonth
-                    ?? Calendar.creditCardInformationCalendar.component(.month, from: Date())
+                ?? Calendar.creditCardInformationCalendar.component(.month, from: Date())
                 expiryDateTextField.selectedMonth = max(1, selectedMonth - 1)
             case .year:
                 let selectedYear = expiryDateTextField.selectedYear ?? Calendar.creditCardInformationCalendar.component(.year, from: Date())
@@ -382,5 +353,39 @@ extension CardExpiryDateTextField {
         let maxLength = 5
         
         return maxLength >= (self.text?.count ?? 0) - range.length + string.count
+    }
+}
+
+extension CardExpiryDateTextField {
+    func handlePaste(copiedText: String?) {
+        guard let copiedText = copiedText, let selectedTextRange = selectedTextRange else {
+            return
+        }
+        let pan = copiedText.replacingOccurrences(
+            of: "[^0-9/]",
+            with: "",
+            options: .regularExpression,
+            range: nil)
+        isDeletingDateSeparator = true
+        replace(selectedTextRange, withText: pan)
+        isDeletingDateSeparator = false
+        
+        guard !text.isNilOrEmpty, let text = self.text else {
+            return
+        }
+        
+        defer {
+            typingAttributes = defaultTextAttributes
+        }
+        
+        parseCardExpiryDate(text: text)
+        
+        if let attributedText = self.attributedText.map(NSMutableAttributedString.init(attributedString:)),
+           let separatorTextColor = self.dateSeparatorTextColor,
+           let dateSeparatorIndex = attributedText.string.firstIndex(of: "/") {
+            let range = NSRange(dateSeparatorIndex...dateSeparatorIndex, in: attributedText.string)
+            attributedText.addAttribute(.foregroundColor, value: separatorTextColor, range: range)
+            self.attributedText = attributedText
+        }
     }
 }
