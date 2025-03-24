@@ -500,27 +500,9 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
         static let nameIsTooLong: NSRegularExpression! = try? NSRegularExpression(pattern: "name is too long \\(maximum is ([\\d]+) characters\\)", options: [])
     }
     
-    // swiftlint:disable:next cyclomatic_complexity
     init(message: String, currency: Currency?) throws {
         if message.hasPrefix("amount must be ") {
-            if let lessThanValidAmountMatch = ErrorMessageRegularExpression.amountLessThanValidAmount
-                .firstMatch(in: message, range: NSRange(message.startIndex..<message.endIndex, in: message)),
-                lessThanValidAmountMatch.numberOfRanges == 2,
-                let amountRange = Range(lessThanValidAmountMatch.range(at: 1), in: message) {
-                self = .amountIsLessThanValidAmount(validAmount: Int64(message[amountRange]), currency: currency)
-            } else if let greaterThanValidAmountMatch = ErrorMessageRegularExpression.amountGreaterThanValidAmount
-                .firstMatch(in: message, range: NSRange(message.startIndex..<message.endIndex, in: message)),
-                greaterThanValidAmountMatch.numberOfRanges == 2,
-                let amountRange = Range(greaterThanValidAmountMatch.range(at: 1), in: message) {
-                self = .amountIsGreaterThanValidAmount(validAmount: Int64(message[amountRange]), currency: currency)
-            } else if let atLeastValidAmountMatch = ErrorMessageRegularExpression.amountAtLeastValidAmount
-                .firstMatch(in: message, range: NSRange(message.startIndex..<message.endIndex, in: message)),
-                atLeastValidAmountMatch.numberOfRanges == 2,
-                let amountRange = Range(atLeastValidAmountMatch.range(at: 1), in: message) {
-                self = .amountIsLessThanValidAmount(validAmount: Int64(message[amountRange]), currency: currency)
-            } else {
-                self = .other(message)
-            }
+            self = Self.processAmountMessage(message: message, currency: currency)
         } else if message.contains("currency must be") {
             self = .invalidCurrency
         } else if message.contains("type") {
@@ -529,12 +511,8 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
             self = .currencyNotSupported
         } else if message.contains("name") && message.contains("blank") {
             self = .emptyName
-        } else if message.hasPrefix("name is too long"),
-                  let lessThanValidAmountMatch = ErrorMessageRegularExpression.nameIsTooLong
-                .firstMatch(in: message, range: NSRange(message.startIndex..<message.endIndex, in: message)),
-            lessThanValidAmountMatch.numberOfRanges == 2,
-            let amountRange = Range(lessThanValidAmountMatch.range(at: 1), in: message) {
-            self = .nameIsTooLong(maximum: Int(message[amountRange]))
+        } else if message.hasPrefix("name is too long"), let reason = Self.processNameTooLongMessage(message: message) {
+            self = reason
         } else if message.contains("name") {
             self = .nameIsTooLong(maximum: nil)
         } else if message.contains("email") {
@@ -545,7 +523,39 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
             self = .other(message)
         }
     }
-    
+
+    private static func processAmountMessage(message: String, currency: Currency?) -> Self {
+        if let lessThanValidAmountMatch = ErrorMessageRegularExpression.amountLessThanValidAmount
+            .firstMatch(in: message, range: NSRange(message.startIndex..<message.endIndex, in: message)),
+           lessThanValidAmountMatch.numberOfRanges == 2,
+           let amountRange = Range(lessThanValidAmountMatch.range(at: 1), in: message) {
+            return .amountIsLessThanValidAmount(validAmount: Int64(message[amountRange]), currency: currency)
+        } else if let greaterThanValidAmountMatch = ErrorMessageRegularExpression.amountGreaterThanValidAmount
+            .firstMatch(in: message, range: NSRange(message.startIndex..<message.endIndex, in: message)),
+                  greaterThanValidAmountMatch.numberOfRanges == 2,
+                  let amountRange = Range(greaterThanValidAmountMatch.range(at: 1), in: message) {
+            return .amountIsGreaterThanValidAmount(validAmount: Int64(message[amountRange]), currency: currency)
+        } else if let atLeastValidAmountMatch = ErrorMessageRegularExpression.amountAtLeastValidAmount
+            .firstMatch(in: message, range: NSRange(message.startIndex..<message.endIndex, in: message)),
+                  atLeastValidAmountMatch.numberOfRanges == 2,
+                  let amountRange = Range(atLeastValidAmountMatch.range(at: 1), in: message) {
+            return .amountIsLessThanValidAmount(validAmount: Int64(message[amountRange]), currency: currency)
+        } else {
+            return .other(message)
+        }
+    }
+
+    private static func processNameTooLongMessage(message: String) -> Self? {
+        let matchRange = NSRange(message.startIndex..<message.endIndex, in: message)
+        guard let match = ErrorMessageRegularExpression.nameIsTooLong.firstMatch(in: message, range: matchRange),
+           match.numberOfRanges == 2,
+           let range = Range(match.range(at: 1), in: message) else {
+            return nil
+        }
+
+        return .nameIsTooLong(maximum: Int(message[range]))
+    }
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         

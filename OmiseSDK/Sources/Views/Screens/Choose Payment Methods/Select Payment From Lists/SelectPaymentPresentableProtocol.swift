@@ -19,5 +19,5 @@ extension SelectPaymentPresentableProtocol {
     var errorMessage: String? { nil }
     var viewShowsCloseButton: Bool { false }
     var viewDisplayLargeTitle: Bool { false }
-    func viewDidTapClose() {}
+    func viewDidTapClose() { /* Default empty implementation */ }
 }
