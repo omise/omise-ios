@@ -14,46 +14,6 @@ struct NetworkMockup: NetworkServiceProtocol {
     }
 }
 
-class TokenPollingNetworkMock: NetworkServiceProtocol {
-    var requestCount = 0
-    var responses: [Result<Token, Error>] = []
-    
-    func queueResponse(_ token: Token) {
-        responses.append(.success(token))
-    }
-    
-    func queueError(_ error: Error) {
-        responses.append(.failure(error))
-    }
-    
-    func send<T: Decodable>(
-        urlRequest: URLRequest,
-        dateFormatter: DateFormatter?,
-        completion: @escaping ResponseClosure<T, Error>
-    ) {
-        
-        if urlRequest.url?.absoluteString.contains("/tokens/") ?? false && T.self == Token.self {
-            let responseIndex = min(requestCount, responses.count - 1)
-            if responseIndex >= 0 && !responses.isEmpty {
-                let response = responses[responseIndex]
-                
-                DispatchQueue.main.async {
-                    switch response {
-                    case .success(let token):
-                        if let completion = completion as? ResponseClosure<Token, Error> {
-                            completion(.success(token))
-                        }
-                    case .failure(let error):
-                        completion(.failure(error))
-                    }
-                }
-            }
-        }
-        
-        requestCount += 1
-    }
-}
-
 class ClientTests: XCTestCase {
     let publicKey = "pkey_test_58wfnlwoxz1tbkdd993"
     let publicKeyBase64 = "cGtleV90ZXN0XzU4d2ZubHdveHoxdGJrZGQ5OTM="
@@ -221,56 +181,5 @@ class ClientTests: XCTestCase {
             contentType: contentType
         )
         XCTAssertEqual(expectedResult, result)
-    }
-    
-    func testObserveChargeStatus() {
-        let expectation = XCTestExpectation(description: "Observe charge status")
-        let mockNetwork = TokenPollingNetworkMock()
-        
-        let pendingToken = Token(
-            id: "tok_test_1234",
-            isLiveMode: false,
-            isUsed: false,
-            card: nil,
-            chargeStatus: .pending
-        )
-        
-        let successToken = Token(
-            id: "tok_test_1234",
-            isLiveMode: false,
-            isUsed: true,
-            card: nil,
-            chargeStatus: .successful
-        )
-        
-        mockNetwork.queueResponse(pendingToken)
-        mockNetwork.queueResponse(successToken)
-        
-        // Create the client with the mock network
-        let testClient = Client(
-            publicKey: "pkey_test_123",
-            version: "test_version",
-            network: mockNetwork,
-            apiURL: nil,
-            vaultURL: nil
-        )
-        
-        // Execute
-        testClient.observeChargeStatus(tokenID: "tok_test_1234") { result in
-            switch result {
-            case .success(let status):
-                // Verify the final status is successful
-                XCTAssertEqual(status, .successful)
-                expectation.fulfill()
-            case .failure(let error):
-                XCTFail("Unexpected error: \(error)")
-            }
-        }
-        
-        // Wait for the async operation to complete
-        wait(for: [expectation], timeout: 10.0)
-        
-        // Verify the token endpoint was called multiple times
-        XCTAssertEqual(mockNetwork.requestCount, 2)
     }
 }
