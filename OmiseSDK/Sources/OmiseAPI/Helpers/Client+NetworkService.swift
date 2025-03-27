@@ -40,8 +40,9 @@ extension Client {
                 }
 
                 let queue = DispatchQueue.global(qos: .background)
-                queue.asyncAfter(deadline: .now() + .seconds(timeInterval)) {
-                    self?.observeUntilChargeStatusIsFinal(
+                queue.asyncAfter(deadline: .now() + .seconds(timeInterval)) { [weak self] in
+                    guard let self = self else { return }
+                    self.observeUntilChargeStatusIsFinal(
                         tokenID: tokenID,
                         timeInterval: timeInterval,
                         attemp: attemp + 1,

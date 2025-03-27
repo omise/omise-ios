@@ -36,6 +36,10 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
 
         self.setupErrorView()
     }
+    
+    deinit {
+        errorView.gestureRecognizers?.forEach { errorView.removeGestureRecognizer($0) }
+    }
 
     /// Creates SelectPaymentController and attach current flow object inside created controller to be deallocated together
     ///
