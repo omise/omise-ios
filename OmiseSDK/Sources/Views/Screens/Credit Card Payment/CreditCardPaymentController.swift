@@ -175,6 +175,12 @@ class CreditCardPaymentController: UIViewController {
             bind(to: viewModel)
         }
     }
+    
+    deinit {
+        formFields.forEach {
+            $0.removeTarget(self, action: nil, for: .allEvents)
+        }
+    }
 
     private func setupLabels() {
         errorLabels.forEach {
