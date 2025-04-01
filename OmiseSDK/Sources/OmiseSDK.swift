@@ -123,31 +123,6 @@ public class OmiseSDK {
         flutterEngineManager.presentFlutterPaymentMethod(viewController: topViewController,
                                                          arguments: args,
                                                          delegate: delegate)
-        /*
-         
-         let paymentFlow = ChoosePaymentCoordinator(
-         client: client,
-         amount: amount,
-         currency: currency,
-         currentCountry: country,
-         applePayInfo: self.applePayInfo,
-         handleErrors: handleErrors
-         )
-         
-         let filter = SelectPaymentMethodViewModel.Filter(
-         sourceTypes: allowedPaymentMethods ?? [],
-         isCardPaymentAllowed: isCardPaymentAllowed,
-         isForced: skipCapabilityValidation
-         )
-         
-         let viewController = paymentFlow.createChoosePaymentMethodController(
-         filter: filter,
-         delegate: delegate
-         )
-         
-         let navigationController = UINavigationController(rootViewController: viewController)
-         navigationController.delegate = paymentFlow
-         */
     }
     
     /// Creates and presents modal "Credit Card Payment" controller with a given parameters
@@ -222,32 +197,33 @@ public class OmiseSDK {
             authorizeURL,
             threeDSRequestorAppURL: threeDSRequestorAppURLString,
             uiCustomization: threeDSUICustomization,
-            in: topViewController) { [weak self] result in
-                switch result {
-                case .success:
-                    delegate.authorizingPaymentDidComplete(with: nil)
-                case .failure(let error):
-                    typealias NetceteraFlowError = NetceteraThreeDSController.Errors
-                    switch error {
-                    case NetceteraFlowError.incomplete,
-                        NetceteraFlowError.cancelled,
-                        NetceteraFlowError.timedout,
-                        NetceteraFlowError.authResStatusFailed,
-                        NetceteraFlowError.authResStatusUnknown:
-                        delegate.authorizingPaymentDidCancel()
-                    default:
-                        DispatchQueue.main.async {
-                            self?.presentWebViewAuthorizingPayment(
-                                from: topViewController,
-                                animated: animated,
-                                authorizeURL: authorizeURL,
-                                expectedReturnURLStrings: expectedReturnURLStrings,
-                                delegate: delegate
-                            )
-                        }
+            in: topViewController
+        ) { [weak self] result in
+            switch result {
+            case .success:
+                delegate.authorizingPaymentDidComplete(with: nil)
+            case .failure(let error):
+                typealias NetceteraFlowError = NetceteraThreeDSController.Errors
+                switch error {
+                case NetceteraFlowError.incomplete,
+                    NetceteraFlowError.cancelled,
+                    NetceteraFlowError.timedout,
+                    NetceteraFlowError.authResStatusFailed,
+                    NetceteraFlowError.authResStatusUnknown:
+                    delegate.authorizingPaymentDidCancel()
+                default:
+                    DispatchQueue.main.async {
+                        self?.presentWebViewAuthorizingPayment(
+                            from: topViewController,
+                            animated: animated,
+                            authorizeURL: authorizeURL,
+                            expectedReturnURLStrings: expectedReturnURLStrings,
+                            delegate: delegate
+                        )
                     }
                 }
             }
+        }
     }
     
     /// Dismiss any presented UI form by OmiseSDK
