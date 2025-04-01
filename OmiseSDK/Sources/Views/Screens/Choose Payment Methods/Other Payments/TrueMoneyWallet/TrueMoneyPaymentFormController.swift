@@ -88,6 +88,13 @@ class TrueMoneyPaymentFormController: UIViewController, PaymentFormUIController 
         phoneNumberLabel.text = localized("TrueMoneyWallet.field.phoneNumber")
         submitButton.setTitle(localized("TrueMoneyWallet.nextButton.title"), for: .normal)
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        formFields.forEach {
+            $0.removeTarget(self, action: nil, for: .allEvents)
+        }
+    }
 
     private func setupTextFieldHandlers() {
         self.formFields.forEach { field in
