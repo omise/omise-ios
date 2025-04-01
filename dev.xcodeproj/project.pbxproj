@@ -650,8 +650,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F66C25F2D5DD98600AB5BF9 /* omise-flutter-ios-spm in Frameworks */,
 				758A4E842BE38AC3005E7B5A /* ThreeDS_SDK in Frameworks */,
+				2F27105F2D9BD343007093C6 /* OmiseFlutterSPM in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1606,7 +1606,7 @@
 			name = OmiseSDK;
 			packageProductDependencies = (
 				758A4E832BE38AC3005E7B5A /* ThreeDS_SDK */,
-				2F66C25E2D5DD98600AB5BF9 /* omise-flutter-ios-spm */,
+				2F27105E2D9BD343007093C6 /* OmiseFlutterSPM */,
 			);
 			productName = OmiseSDK;
 			productReference = 225931181CE3210700841B86 /* OmiseSDK.framework */;
@@ -2616,7 +2616,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/tyler-techcombine/flutter-ios-framework-spm.git";
 			requirement = {
-				branch = main;
+				branch = "build-config";
 				kind = branch;
 			};
 		};
@@ -2631,12 +2631,12 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2F66C25E2D5DD98600AB5BF9 /* omise-flutter-ios-spm */ = {
+		2F27105E2D9BD343007093C6 /* OmiseFlutterSPM */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2F66C25D2D5DD98600AB5BF9 /* XCRemoteSwiftPackageReference "flutter-ios-framework-spm" */;
-			productName = "omise-flutter-ios-spm";
+			productName = OmiseFlutterSPM;
 		};
-        2F9F58D72D6E28D600240952 /* ThreeDS_SDK */ = {
+		2F9F58D72D6E28D600240952 /* ThreeDS_SDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */;
 			productName = ThreeDS_SDK;
