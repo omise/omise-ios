@@ -22,8 +22,7 @@ class FlutterEngineManagerTests: XCTestCase {
         flutterEngineManager = FlutterEngineManagerImpl(
             flutterEngine: mockFlutterEngine,
             methodChannel: mockMethodChannel,
-            channelHander: mockChannelHandler,
-            publicKey: "testPublicKey"
+            channelHander: mockChannelHandler
         )
         
         // Set up mock delegate
@@ -46,8 +45,7 @@ class FlutterEngineManagerTests: XCTestCase {
         
         flutterEngineManager.presentFlutterPaymentMethod(
             viewController: viewController,
-            amount: amount,
-            currency: currency,
+            arguments: ["amount": amount, "currency": currency],
             delegate: mockDelegate
         )
         let arguments: [String: Any] = [
@@ -67,11 +65,12 @@ class FlutterEngineManagerTests: XCTestCase {
         mockChannelHandler.triggerSuccessResult(token: token, source: source)
         
         // Assert that delegate method is called
-        XCTAssertTrue(mockDelegate.paymentMethodCompleted)
-        XCTAssertNotNil(mockDelegate.tokenReceived)
-        XCTAssertNotNil(mockDelegate.sourceReceived)
-        XCTAssertEqual(mockDelegate.tokenReceived?.id, token?.id)
-        XCTAssertEqual(mockDelegate.sourceReceived?.id, source?.id)
+        XCTAssertEqual(mockDelegate.calls.count, 1)
+        XCTAssertEqual(mockDelegate.calls[0], .choosePaymentMethodDidComplete)
+        XCTAssertNotNil(mockDelegate.token)
+        XCTAssertNotNil(mockDelegate.source)
+        XCTAssertEqual(mockDelegate.token?.id, token?.id)
+        XCTAssertEqual(mockDelegate.source?.id, source?.id)
     }
     
     func testPresentFlutterPaymentMethodTokenOnly() {
@@ -81,8 +80,7 @@ class FlutterEngineManagerTests: XCTestCase {
         
         flutterEngineManager.presentFlutterPaymentMethod(
             viewController: viewController,
-            amount: amount,
-            currency: currency,
+            arguments: ["amount": amount, "currency": currency],
             delegate: mockDelegate
         )
         let arguments: [String: Any] = [
@@ -95,10 +93,11 @@ class FlutterEngineManagerTests: XCTestCase {
         mockChannelHandler.triggerSuccessResult(token: token, source: source)
         
         // Assert that delegate method is called
-        XCTAssertTrue(mockDelegate.paymentMethodCompleted)
-        XCTAssertNotNil(mockDelegate.tokenReceived)
-        XCTAssertNil(mockDelegate.sourceReceived)
-        XCTAssertEqual(mockDelegate.tokenReceived?.id, token?.id)
+        XCTAssertEqual(mockDelegate.calls.count, 1)
+        XCTAssertEqual(mockDelegate.calls[0], .choosePaymentMethodDidComplete)
+        XCTAssertNotNil(mockDelegate.token)
+        XCTAssertNil(mockDelegate.source)
+        XCTAssertEqual(mockDelegate.token?.id, token?.id)
     }
     
     func testPresentFlutterPaymentMethodSourceOnly() {
@@ -108,8 +107,7 @@ class FlutterEngineManagerTests: XCTestCase {
         
         flutterEngineManager.presentFlutterPaymentMethod(
             viewController: viewController,
-            amount: amount,
-            currency: currency,
+            arguments: ["amount": amount, "currency": currency],
             delegate: mockDelegate
         )
         let arguments: [String: Any] = [
@@ -128,10 +126,11 @@ class FlutterEngineManagerTests: XCTestCase {
         mockChannelHandler.triggerSuccessResult(token: token, source: source)
         
         // Assert that delegate method is called
-        XCTAssertTrue(mockDelegate.paymentMethodCompleted)
-        XCTAssertNil(mockDelegate.tokenReceived)
-        XCTAssertNotNil(mockDelegate.sourceReceived)
-        XCTAssertEqual(mockDelegate.sourceReceived?.id, source?.id)
+        XCTAssertEqual(mockDelegate.calls.count, 1)
+        XCTAssertEqual(mockDelegate.calls[0], .choosePaymentMethodDidComplete)
+        XCTAssertNil(mockDelegate.token)
+        XCTAssertNotNil(mockDelegate.source)
+        XCTAssertEqual(mockDelegate.source?.id, source?.id)
     }
     
     func testPresentFlutterPaymentMethodError() {
@@ -141,8 +140,7 @@ class FlutterEngineManagerTests: XCTestCase {
         
         flutterEngineManager.presentFlutterPaymentMethod(
             viewController: viewController,
-            amount: amount,
-            currency: currency,
+            arguments: ["amount": amount, "currency": currency],
             delegate: mockDelegate
         )
         let error = NSError(domain: "com.omise.omiseSDK",
@@ -152,11 +150,12 @@ class FlutterEngineManagerTests: XCTestCase {
         mockChannelHandler.triggerFailureResult(error: error)
         
         // Assert that delegate method is called
-        XCTAssertTrue(mockDelegate.paymentMethodCompleted)
-        XCTAssertNil(mockDelegate.tokenReceived)
-        XCTAssertNil(mockDelegate.sourceReceived)
-        XCTAssertNotNil(mockDelegate.errorReceived)
-        XCTAssertEqual(mockDelegate.errorReceived?.localizedDescription, "Arguments not found or invalid")
+        XCTAssertEqual(mockDelegate.calls.count, 1)
+        XCTAssertEqual(mockDelegate.calls[0], .choosePaymentMethodDidComplete)
+        XCTAssertNil(mockDelegate.token)
+        XCTAssertNil(mockDelegate.source)
+        XCTAssertNotNil(mockDelegate.error)
+        XCTAssertEqual(mockDelegate.error?.localizedDescription, "Arguments not found or invalid")
     }
     
     func testHandlerCallbackSuccess() {
@@ -167,8 +166,7 @@ class FlutterEngineManagerTests: XCTestCase {
             
             flutterEngineManager.presentFlutterPaymentMethod(
                 viewController: viewController,
-                amount: amount,
-                currency: currency,
+                arguments: ["amount": amount, "currency": currency],
                 delegate: mockDelegate
             )
             let arguments: [String: Any] = [
@@ -208,8 +206,7 @@ class FlutterEngineManagerTests: XCTestCase {
             
             flutterEngineManager.presentFlutterPaymentMethod(
                 viewController: viewController,
-                amount: amount,
-                currency: currency,
+                arguments: ["amount": amount, "currency": currency],
                 delegate: mockDelegate
             )
             let nsError = NSError(

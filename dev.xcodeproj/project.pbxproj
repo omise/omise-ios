@@ -650,8 +650,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F1DB2992D9BE867006424F4 /* OmiseFlutterSPM in Frameworks */,
 				758A4E842BE38AC3005E7B5A /* ThreeDS_SDK in Frameworks */,
-				2F27105F2D9BD343007093C6 /* OmiseFlutterSPM in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,6 +661,7 @@
 			files = (
 				75D13E0F2B8678530073A831 /* OmiseSwiftUIKit in Frameworks */,
 				2F9F58D82D6E28D600240952 /* ThreeDS_SDK in Frameworks */,
+				2F1DB29B2D9BE8E0006424F4 /* OmiseFlutterSPM in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -888,9 +889,11 @@
 				4BE420C22DCA089F00C587CF /* FPXPaymentVMTest.swift */,
 				4B904E572DC9FE3100BE78EC /* FPXPaymentVCTests.swift */,
 			);
+			path = FlutterIntegration;
 			path = FPX;
 			sourceTree = "<group>";
 		};
+		2F66C2502D5D998600AB5BF9 /* Mocks */ = {
 		4B904E562DC9FE2900BE78EC /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -925,6 +928,28 @@
 				4BC7A8C32DC8C007007E1A17 /* MockTrueMoneyFormViewModel.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		2F9682182D65A44C00A7AFDA /* ApplePay */ = {
+			isa = PBXGroup;
+			children = (
+				2F5A707F2D6C73C700F5A61A /* Mocks */,
+				2FC27E1B2D6DC1B7001E5857 /* ApplePayViewControllerTest.swift */,
+				2F96821D2D65AC1600A7AFDA /* ApplePayViewModelTests.swift */,
+				2F96821B2D65A4A600A7AFDA /* ApplePaymentHandlerTests.swift */,
+			);
+			path = ApplePay;
+			sourceTree = "<group>";
+		};
+		2FC4CA782D64ED730005EC4A /* ApplePay */ = {
+			isa = PBXGroup;
+			children = (
+				2FC27E192D6D67D5001E5857 /* ApplePayProtocols.swift */,
+				2F9682162D657EFA00A7AFDA /* ApplePaymentHandler.swift */,
+				2FC4CA7B2D64ED910005EC4A /* ApplePayViewModel.swift */,
+				2FC4CA792D64ED880005EC4A /* ApplePayViewController.swift */,
+			);
+			path = ApplePay;
 			sourceTree = "<group>";
 		};
 		7501265B2B87CB3F00ED5E14 /* Base */ = {
@@ -1631,6 +1656,7 @@
 			packageProductDependencies = (
 				75D13E0E2B8678530073A831 /* OmiseSwiftUIKit */,
 				2F9F58D72D6E28D600240952 /* ThreeDS_SDK */,
+				2F1DB29A2D9BE8E0006424F4 /* OmiseFlutterSPM */,
 			);
 			productName = ExampleApp;
 			productReference = 22D4809D1D0EB29C00544CE1 /* ExampleApp.app */;
@@ -2631,6 +2657,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2F1DB29A2D9BE8E0006424F4 /* OmiseFlutterSPM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F66C25D2D5DD98600AB5BF9 /* XCRemoteSwiftPackageReference "flutter-ios-framework-spm" */;
+			productName = OmiseFlutterSPM;
+		};
 		2F27105E2D9BD343007093C6 /* OmiseFlutterSPM */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2F66C25D2D5DD98600AB5BF9 /* XCRemoteSwiftPackageReference "flutter-ios-framework-spm" */;
