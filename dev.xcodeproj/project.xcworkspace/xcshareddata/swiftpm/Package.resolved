@@ -5,8 +5,8 @@
         "package": "OmiseFlutterSPM",
         "repositoryURL": "https://github.com/tyler-techcombine/flutter-ios-framework-spm.git",
         "state": {
-          "branch": "build-config",
-          "revision": "38cfc7fdfa78c36a9c9edb3cef266b9e70c053ad",
+          "branch": "release",
+          "revision": "5f29a7777a8419f36655d7efee6680dd42813044",
           "version": null
         }
       },

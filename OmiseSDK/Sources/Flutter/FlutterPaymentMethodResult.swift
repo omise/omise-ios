@@ -68,12 +68,11 @@ final class FlutterChannelHandlerImpl: FlutterChannelHandler {
                 // Handle the result of the payment method selection
                 guard let arguments = call.arguments as? [String: Any] else {
                     // Return an error if arguments are invalid or not found
-                    result(FlutterError(code: "INVALID_ARGUMENTS",
-                                        message: "Arguments not found or invalid",
-                                        details: nil))
+                    // If flutter returns no arguments, it means user has pressed the close button
+                    result("Payment method result processed")
                     completion(.failure(NSError(domain: "com.omise.omiseSDK",
-                                                code: 1002,
-                                                userInfo: [NSLocalizedDescriptionKey: "Arguments not found or invalid"])))
+                                                code: OmiseFlutter.selectPaymentMethodResultCancelled,
+                                                userInfo: [NSLocalizedDescriptionKey: "Arguments not found or cancelled"])))
                     return
                 }
                 
