@@ -17,14 +17,14 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/ios-3ds-sdk/SPM", .exact("2.4.0")),
-        .package(url: "https://github.com/tyler-techcombine/flutter-ios-framework-spm.git", .branch("main"))
+        .package(url: "https://github.com/tyler-techcombine/flutter-ios-framework-spm.git", .branch("release"))
     ],
     targets: [
         .target(
             name: "OmiseSDK",
             dependencies: [
                 .product(name: "ThreeDS_SDK", package: "SPM"),
-                .product(name: "omise-flutter-ios-spm", package: "flutter-ios-framework-spm")
+                .product(name: "OmiseFlutterSPM", package: "flutter-ios-framework-spm")
             ],
             path: "OmiseSDK",
             exclude: ["Info.plist"],
