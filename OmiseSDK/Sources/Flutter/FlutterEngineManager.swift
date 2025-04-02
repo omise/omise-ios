@@ -82,7 +82,8 @@ class FlutterEngineManagerImpl: FlutterEngineManager {
         flutterViewController.modalPresentationStyle = .fullScreen
         
         // Handle the result of the payment method selection
-        channelHander.handleSelectPaymentMethodResult { response in
+        channelHander.handleSelectPaymentMethodResult { [weak self] response in
+            guard let self = self else { return }
             switch response {
             case .success(let result):
                 // If both token and source are present, pass them to the delegate
@@ -95,6 +96,11 @@ class FlutterEngineManagerImpl: FlutterEngineManager {
                 }
             case .failure(let error):
                 // If there is an error, pass the error to the delegate
+                if (error as NSError).code == OmiseFlutter.selectPaymentMethodResultCancelled {
+                    self.detachFlutterViewController(animated: true)
+                    delegate.choosePaymentMethodDidCancel()
+                    return
+                }
                 delegate.choosePaymentMethodDidComplete(with: error)
             }
         }

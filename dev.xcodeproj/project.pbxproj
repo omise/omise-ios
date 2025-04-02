@@ -2410,7 +2410,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/tyler-techcombine/flutter-ios-framework-spm.git";
 			requirement = {
-				branch = "build-config";
+				branch = release;
 				kind = branch;
 			};
 		};
