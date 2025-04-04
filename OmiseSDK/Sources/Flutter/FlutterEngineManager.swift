@@ -5,8 +5,7 @@ protocol FlutterEngineManager {
     func detachFlutterViewController(animated: Bool)
     func presentFlutterPaymentMethod(
         viewController: UIViewController,  /// The view controller that will present the Flutter payment UI
-        amount: Int64,  /// The amount for the payment
-        currency: String,  /// The currency for the payment
+        arguments: [String: Any], /// arguments that can be passed to flutter module
         delegate: ChoosePaymentMethodDelegate  /// The delegate to handle the result of the payment method selection
     )
 }
@@ -18,7 +17,6 @@ class FlutterEngineManagerImpl: FlutterEngineManager {
     let flutterEngine: FlutterEngine  /// The Flutter engine used to run the Flutter code
     let methodChannel: FlutterMethodChannel  /// The method channel used for communication between native iOS and Flutter
     let channelHander: FlutterChannelHandler  /// The handler responsible for processing payment method results
-    let publicKey: String  /// The public key used for SDK
     
     // MARK: - Initialization
     
@@ -33,11 +31,9 @@ class FlutterEngineManagerImpl: FlutterEngineManager {
     init(
         flutterEngine: FlutterEngine,
         methodChannel: FlutterMethodChannel,
-        channelHander: FlutterChannelHandler,
-        publicKey: String
+        channelHander: FlutterChannelHandler
     ) {
         self.flutterEngine = flutterEngine
-        self.publicKey = publicKey
         self.methodChannel = methodChannel
         self.channelHander = channelHander
     }
@@ -73,17 +69,10 @@ class FlutterEngineManagerImpl: FlutterEngineManager {
     ///     - delegate: The delegate that handles the result of the payment method selection.
     ///     - completion: An optional callback that is invoked when the method call has completed.
     func presentFlutterPaymentMethod(
-        viewController: UIViewController,  /// The view controller that will present the Flutter payment UI
-        amount: Int64,  /// The amount for the payment
-        currency: String,  /// The currency for the payment
-        delegate: ChoosePaymentMethodDelegate /// The delegate to handle the result of the payment method selection
+    viewController: UIViewController,  /// The view controller that will present the Flutter payment UI
+    arguments: [String: Any],
+    delegate: ChoosePaymentMethodDelegate /// The delegate to handle the result of the payment method selection
     ) {
-        let arguments: [String: Any] = [
-            "pkey": publicKey,
-            "amount": amount,
-            "currency": currency
-        ]
-        
         // Invoke the Flutter method to request the payment method selection UI
         methodChannel.invokeMethod(OmiseFlutter.selectPaymentMethodName, arguments: arguments)
         
@@ -93,7 +82,8 @@ class FlutterEngineManagerImpl: FlutterEngineManager {
         flutterViewController.modalPresentationStyle = .fullScreen
         
         // Handle the result of the payment method selection
-        channelHander.handleSelectPaymentMethodResult { response in
+        channelHander.handleSelectPaymentMethodResult { [weak self] response in
+            guard let self = self else { return }
             switch response {
             case .success(let result):
                 // If both token and source are present, pass them to the delegate
@@ -106,6 +96,11 @@ class FlutterEngineManagerImpl: FlutterEngineManager {
                 }
             case .failure(let error):
                 // If there is an error, pass the error to the delegate
+                if (error as NSError).code == OmiseFlutter.selectPaymentMethodResultCancelled {
+                    self.detachFlutterViewController(animated: true)
+                    delegate.choosePaymentMethodDidCancel()
+                    return
+                }
                 delegate.choosePaymentMethodDidComplete(with: error)
             }
         }
