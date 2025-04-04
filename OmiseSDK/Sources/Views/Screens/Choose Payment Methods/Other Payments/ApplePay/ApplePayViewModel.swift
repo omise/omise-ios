@@ -107,7 +107,9 @@ extension ApplePayViewModel: ApplePayViewModelInput {
     /// - Parameter completion: A closure called after the payment process completes.
     func startPayment(completion: @escaping () -> Void) {
         // Convert the amount from cents to a decimal value (e.g., 999 becomes 9.99).
-        let decimalAmount = NSDecimalNumber(value: amount).multiplying(by: 0.01)
+        let decimalAmount = currency == Currency.jpy.code
+        ? NSDecimalNumber(value: amount)
+        : NSDecimalNumber(value: amount).multiplying(by: 0.01)
         
         let request = applePaymentHandler.createPKPaymentRequest(with: decimalAmount,
                                                                  currency: currency,

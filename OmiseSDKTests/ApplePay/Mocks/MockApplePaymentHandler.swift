@@ -7,6 +7,7 @@ class MockApplePaymentHandler: ApplePaymentHandlerType {
     // Simulated values
     var mockPayment: PKPayment?
     var mockError: Error?
+    var amountToApplePayRequest: NSDecimalNumber = .zero
     
     func createPKPaymentRequest(
         with amount: NSDecimalNumber,
@@ -15,7 +16,8 @@ class MockApplePaymentHandler: ApplePaymentHandlerType {
         requiredBillingAddress: Bool,
         merchantId: String
     ) -> PKPaymentRequest {
-        PKPaymentRequest()
+        amountToApplePayRequest = amount
+        return PKPaymentRequest()
     }
     
     func createPaymentAuthViewController(from request: PKPaymentRequest) -> PKPaymentAuthorizationController {

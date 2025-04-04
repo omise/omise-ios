@@ -145,4 +145,46 @@ class ApplePayViewModelTests: XCTestCase {
         XCTAssertFalse(mockDelegate.didFinishApplePayCalled, "Delegate should not be called when no payment and no error are returned")
     }
     
+    /// Test payment currency for JPY
+    func testStartPayment_JPY_Success() {
+        viewModel = ApplePayViewModel(
+            applePayInfo: dummyApplePayInfo,
+            amount: 100,
+            currency: Currency.jpy.code,
+            country: .init(code: "SG"),
+            applePaymentHandler: mockHandler,
+            delegate: mockDelegate
+        )
+        let expectation = self.expectation(description: "Payment returned successfully")
+        
+        viewModel.input.startPayment {
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.0, handler: nil)
+        
+        XCTAssertEqual(mockHandler.amountToApplePayRequest, NSDecimalNumber(value: 100))
+    }
+    
+    /// Test payment currency for THB
+    func testStartPayment_THB_Success() {
+        viewModel = ApplePayViewModel(
+            applePayInfo: dummyApplePayInfo,
+            amount: 10000,
+            currency: Currency.thb.code,
+            country: .init(code: "TH"),
+            applePaymentHandler: mockHandler,
+            delegate: mockDelegate
+        )
+        let expectation = self.expectation(description: "Payment returned successfully")
+        
+        viewModel.input.startPayment {
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.0, handler: nil)
+        
+        XCTAssertEqual(mockHandler.amountToApplePayRequest, NSDecimalNumber(value: 100))
+    }
+    
 }
