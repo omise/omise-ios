@@ -145,7 +145,7 @@ class FlutterEngineManagerTests: XCTestCase {
         )
         let error = NSError(domain: "com.omise.omiseSDK",
                             code: 1002,
-                            userInfo: [NSLocalizedDescriptionKey: "Arguments not found or invalid"])
+                            userInfo: [NSLocalizedDescriptionKey: "Error"])
         
         mockChannelHandler.triggerFailureResult(error: error)
         
@@ -155,7 +155,31 @@ class FlutterEngineManagerTests: XCTestCase {
         XCTAssertNil(mockDelegate.token)
         XCTAssertNil(mockDelegate.source)
         XCTAssertNotNil(mockDelegate.error)
-        XCTAssertEqual(mockDelegate.error?.localizedDescription, "Arguments not found or invalid")
+        XCTAssertEqual(mockDelegate.error?.localizedDescription, "Error")
+    }
+    
+    func testPresentFlutterPaymentMethod_DidCancel() {
+        let viewController = UIViewController()
+        let amount: Int64 = 10_000
+        let currency = "THB"
+        
+        flutterEngineManager.presentFlutterPaymentMethod(
+            viewController: viewController,
+            arguments: ["amount": amount, "currency": currency],
+            delegate: mockDelegate
+        )
+        let error = NSError(domain: "com.omise.omiseSDK",
+                            code: OmiseFlutter.selectPaymentMethodResultCancelled,
+                            userInfo: [NSLocalizedDescriptionKey: "Arguments not found or invalid"])
+        
+        mockChannelHandler.triggerFailureResult(error: error)
+        
+        // Assert that delegate method is called
+        XCTAssertEqual(mockDelegate.calls.count, 1)
+        XCTAssertEqual(mockDelegate.calls[0], .choosePaymentMethodDidCancel)
+        XCTAssertNil(mockDelegate.token)
+        XCTAssertNil(mockDelegate.source)
+        XCTAssertNil(mockDelegate.error)
     }
     
     func testHandlerCallbackSuccess() {
