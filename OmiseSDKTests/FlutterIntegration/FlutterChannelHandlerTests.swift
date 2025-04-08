@@ -113,7 +113,7 @@ class FlutterChannelHandlerImplTests: XCTestCase {
             case .success:
                 XCTFail("Expected failure but got success")
             case .failure(let error):
-                XCTAssertEqual(error.localizedDescription, "Arguments not found or invalid")
+                XCTAssertEqual(error.localizedDescription, "Arguments not found or cancelled")
                 expectation.fulfill()
             }
         }
