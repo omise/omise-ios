@@ -51,7 +51,7 @@ class OmiseErrorTests: XCTestCase {
         
         for testCase in testCases {
             let error = testCase.error
-            let expectedDescription = error.localizedDescription
+            let expectedDescription = testCase.expectedDescription
             let expectedRecovery = testCase.expectedRecovery
             
             XCTAssertEqual(error.localizedDescription, expectedDescription)
@@ -83,7 +83,7 @@ class OmiseErrorTests: XCTestCase {
         
         for testCase in testCases {
             let error = testCase.error
-            let expectedDescription = error.localizedDescription
+            let expectedDescription = testCase.expectedDescription
             let expectedRecovery = testCase.expectedRecovery
             
             XCTAssertEqual(error.localizedDescription, expectedDescription)
@@ -137,7 +137,7 @@ class OmiseErrorTests: XCTestCase {
         
         for testCase in testCases {
             let error = testCase.error
-            let expectedDescription = error.localizedDescription
+            let expectedDescription = testCase.expectedDescription
             let expectedRecovery = testCase.expectedRecovery
             
             XCTAssertEqual(error.localizedDescription, expectedDescription)
@@ -149,10 +149,12 @@ class OmiseErrorTests: XCTestCase {
         let testCases: [OmiseErrorParsing] = [
             .init(error: OmiseError.api(code: .authenticationFailure, message: "", location: ""),
                   expectedDescription: "An unexpected error occured",
-                  expectedRecovery: "Please try again later"),
+                  expectedRecovery: "Please try again later",
+                  expectedErrorDescription: "Authentication failure"),
             .init(error: OmiseError.api(code: .serviceNotFound, message: "", location: ""),
                   expectedDescription: "An unexpected error occured",
-                  expectedRecovery: "Please try again later"),
+                  expectedRecovery: "Please try again later",
+                  expectedErrorDescription: "Service not found"),
             .init(error: OmiseError.api(code: .other(""), message: "", location: ""),
                   expectedDescription: "An unknown error occured",
                   expectedRecovery: "Please try again later")
@@ -160,25 +162,57 @@ class OmiseErrorTests: XCTestCase {
         
         for testCase in testCases {
             let error = testCase.error
-            let expectedDescription = error.localizedDescription
+            let expectedDescription = testCase.expectedDescription
             let expectedRecovery = testCase.expectedRecovery
+            let expectedErrorDescription = testCase.expectedErrorDescription
             
             XCTAssertEqual(error.localizedDescription, expectedDescription)
+            XCTAssertEqual(error.errorDescription, expectedErrorDescription)
             XCTAssertEqual(error.localizedRecoverySuggestion, expectedRecovery)
         }
     }
     
     func testUnexpectedErrorLocalizedDescription() throws {
-        let error = OmiseError.unexpected(error: .noErrorNorResponse, underlying: nil)
+        let testCases: [OmiseErrorParsing] = [
+            .init(error: OmiseError.unexpected(error: .noErrorNorResponse, underlying: nil),
+                  expectedErrorDescription: "No error nor response"),
+            .init(error: OmiseError.unexpected(error: .httpErrorWithNoData, underlying: nil),
+                  expectedErrorDescription: "No error data in the error response"),
+            .init(error: OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: nil),
+                  expectedErrorDescription: "Invalid error data in the error response"),
+            .init(error: OmiseError.unexpected(error: .httpSuccessWithNoData, underlying: nil),
+                  expectedErrorDescription: "No data in the success response"),
+            .init(error: OmiseError.unexpected(error: .httpSuccessWithInvalidData, underlying: nil),
+                  expectedErrorDescription: "Invalid data in the success response"),
+            .init(error: OmiseError.unexpected(error: .unrecognizedHTTPStatusCode(code: 9), underlying: nil),
+                  expectedErrorDescription: "Unrecognized/unsupported HTTP status code"),
+            .init(error: OmiseError.unexpected(error: .other("API Error"), underlying: nil),
+                  expectedErrorDescription: "API Error")
+        ]
         
-        XCTAssertEqual(error.localizedDescription, "An unexpected error occurred")
-        XCTAssertEqual(error.localizedRecoverySuggestion, "Please try again later")
+        for testCase in testCases {
+            let error = testCase.error
+            let expectedErrorDescription = testCase.expectedErrorDescription
+            
+            XCTAssertEqual(error.errorDescription, expectedErrorDescription)
+            XCTAssertEqual(error.localizedDescription, "An unexpected error occurred")
+            XCTAssertEqual(error.localizedRecoverySuggestion, "Please try again later")
+        }
+    }
+    
+    func testMessageNotEmptyLocalizedDescription() throws {
+        let error = OmiseError.api(code: .badRequest([.other("")]),
+                                   message: "API Error",
+                                   location: "")
         
+        XCTAssertEqual(error.localizedDescription, "API Error")
+        XCTAssertEqual(error.localizedRecoverySuggestion, "")
     }
 }
 
 private struct OmiseErrorParsing {
     let error: OmiseError
-    let expectedDescription: String
-    let expectedRecovery: String
+    var expectedDescription: String = ""
+    var expectedRecovery: String = ""
+    var expectedErrorDescription: String = ""
 }
