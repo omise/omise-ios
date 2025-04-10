@@ -2,6 +2,7 @@ import Foundation
 import XCTest
 @testable import OmiseSDK
 
+// swiftlint:disable:next type_body_length
 class OmiseErrorTests: XCTestCase {
     
     func testBadRequestReason() throws {
