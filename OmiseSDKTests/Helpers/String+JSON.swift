@@ -27,7 +27,6 @@ extension String {
         encoder.outputFormatting = [.sortedKeys]
 
         let data = try encoder.encode(encodable)
-        // swiftlint:disable:next non_optional_string_data_conversion
         guard let string = String(data: data, encoding: .utf8) else {
             throw StringFromDateError()
         }

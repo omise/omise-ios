@@ -22,7 +22,7 @@ class OmiseErrorTests: XCTestCase {
                 "... currency ...": .currencyNotSupported,
                 "Something else": .other("Something else")
             ]
-
+            
             for (testString, expectedResult) in expectedResults {
                 let result = try OmiseError.APIErrorCode.BadRequestReason(message: testString, currency: currency)
                 XCTAssertEqual(result, expectedResult)
@@ -31,107 +31,138 @@ class OmiseErrorTests: XCTestCase {
     }
     
     func testInvalidCardLocalizedDescription() throws {
-        let testCases: [(error: OmiseError, expectedDescription: String, expectedSuggestion: String)] = [
-            (OmiseError.api(code: .invalidCard([.invalidCardNumber]), message: "", location: ""),
-             "Invalid card number",
-             "Please review the card number"),
-            
-            (OmiseError.api(code: .invalidCard([.emptyCardHolderName]), message: "", location: ""),
-             "Invalid card holder name",
-             "Please review the card holder name"),
-            
-            (OmiseError.api(code: .invalidCard([.invalidExpirationDate]), message: "", location: ""),
-             "Invalid card expiration date",
-             "Please review the card expiration date again."),
-            
-            (OmiseError.api(code: .invalidCard([.unsupportedBrand]), message: "", location: ""),
-             "Unsupported card brand",
-             "Please use another card"),
-            
-            (OmiseError.api(code: .invalidCard([.other("")]), message: "", location: ""),
-             "An unknown error occured",
-             "Please try again later")
+        let testCases: [OmiseErrorParsing] = [
+            .init(error: OmiseError.api(code: .invalidCard([.invalidCardNumber]), message: "", location: ""),
+                  expectedDescription: "Invalid card number",
+                  expectedRecovery: "Please review the card number"),
+            .init(error: OmiseError.api(code: .invalidCard([.emptyCardHolderName]), message: "", location: ""),
+                  expectedDescription: "Invalid card holder name",
+                  expectedRecovery: "Please review the card holder name"),
+            .init(error: OmiseError.api(code: .invalidCard([.invalidExpirationDate]), message: "", location: ""),
+                  expectedDescription: "Invalid card expiration date",
+                  expectedRecovery: "Please review the card expiration date again."),
+            .init(error: OmiseError.api(code: .invalidCard([.unsupportedBrand]), message: "", location: ""),
+                  expectedDescription: "Unsupported card brand",
+                  expectedRecovery: "Please use another card"),
+            .init(error: OmiseError.api(code: .invalidCard([.other("")]), message: "", location: ""),
+                  expectedDescription: "An unknown error occured",
+                  expectedRecovery: "Please try again later")
         ]
         
-        for (error, expectedDescription, expectedSuggestion) in testCases {
+        for testCase in testCases {
+            let error = testCase.error
+            let expectedDescription = error.localizedDescription
+            let expectedRecovery = testCase.expectedRecovery
+            
             XCTAssertEqual(error.localizedDescription, expectedDescription)
-            XCTAssertEqual(error.localizedRecoverySuggestion, expectedSuggestion)
+            XCTAssertEqual(error.localizedRecoverySuggestion, expectedRecovery)
         }
     }
     
-    func testBadRequestLocalizedDescription() throws {
-        let testCases: [(error: OmiseError, expectedDescription: String, expectedSuggestion: String)] = [
-            (OmiseError.api(code: .badRequest([.invalidName]), message: "", location: ""),
-             "The customer name is invalid",
-             "Please review the customer name"),
-            
-            (OmiseError.api(code: .badRequest([.invalidEmail]), message: "", location: ""),
-             "The customer email is invalid",
-             "Please review the email"),
-            
-            (OmiseError.api(code: .badRequest([.invalidCurrency]), message: "", location: ""),
-             "The currency is invalid",
-             "Please choose another currency or contact customer support"),
-            
-            (OmiseError.api(code: .badRequest([.invalidPhoneNumber]), message: "", location: ""),
-             "The customer phone number is invalid",
-             "Please review the phone number"),
-            
-            (OmiseError.api(code: .badRequest([.emptyName]), message: "", location: ""),
-             "The customer name is empty",
-             "Please fill in the customer name"),
-            
-            (OmiseError.api(code: .badRequest([.typeNotSupported]), message: "", location: ""),
-             "The source type is not supported by this account",
-             "Please contact customer support"),
-            
-            (OmiseError.api(code: .badRequest([.currencyNotSupported]), message: "", location: ""),
-             "The currency is not supported for this account",
-             "Please choose another currency"),
-            
-            (OmiseError.api(code: .badRequest([.other("")]), message: "", location: ""),
-             "Unknown error occurred",
-             "Please try again later"),
-            
-            (OmiseError.api(code: .badRequest([.amountIsGreaterThanValidAmount(validAmount: 1000, currency: .sgd)]), message: "", location: ""),
-             "Amount is greater than the valid amount of SGD 10.00",
-             "The payment amount is too high. Please make a payment with a lower amount."),
-            
-            (OmiseError.api(code: .badRequest([.amountIsLessThanValidAmount(validAmount: 1000, currency: .sgd)]), message: "", location: ""),
-             "Amount is less than the valid amount of SGD 10.00",
-             "The payment amount is too low. Please make a payment with a higher amount."),
-            
-            (OmiseError.api(code: .badRequest([.amountIsGreaterThanValidAmount(validAmount: nil, currency: nil)]), message: "", location: ""),
-             "Amount is greater than the valid amount",
-             "The payment amount is too high. Please make a payment with a lower amount."),
-            
-            (OmiseError.api(code: .badRequest([.amountIsLessThanValidAmount(validAmount: nil, currency: nil)]), message: "", location: ""),
-             "Amount is less than the valid amount",
-             "The payment amount is too low. Please make a payment with a higher amount."),
-            
-            (OmiseError.api(code: .badRequest([.nameIsTooLong(maximum: 100)]), message: "", location: ""),
-             "The customer name exceeds 100 characters",
-             "Please review the customer name"),
-            
-            (OmiseError.api(code: .badRequest([.nameIsTooLong(maximum: nil)]), message: "", location: ""),
-             "The customer name is too long",
-             "Please review the customer name")
+    func testBadRequestLocalizedDescription1() throws {
+        let testCases: [OmiseErrorParsing] = [
+            .init(error: OmiseError.api(code: .badRequest([.invalidName]), message: "", location: ""),
+                  expectedDescription: "The customer name is invalid",
+                  expectedRecovery: "Please review the customer name"),
+            .init(error: OmiseError.api(code: .badRequest([.invalidEmail]), message: "", location: ""),
+                  expectedDescription: "The customer email is invalid",
+                  expectedRecovery: "Please review the email"),
+            .init(error: OmiseError.api(code: .badRequest([.invalidCurrency]), message: "", location: ""),
+                  expectedDescription: "The currency is invalid",
+                  expectedRecovery: "Please choose another currency or contact customer support"),
+            .init(error: OmiseError.api(code: .badRequest([.invalidPhoneNumber]), message: "", location: ""),
+                  expectedDescription: "The customer phone number is invalid",
+                  expectedRecovery: "Please review the phone number"),
+            .init(error: OmiseError.api(code: .badRequest([.emptyName]), message: "", location: ""),
+                  expectedDescription: "The customer name is empty",
+                  expectedRecovery: "Please fill in the customer name"),
+            .init(error: OmiseError.api(code: .badRequest([.typeNotSupported]), message: "", location: ""),
+                  expectedDescription: "The source type is not supported by this account",
+                  expectedRecovery: "Please contact customer support")
         ]
         
-        for (error, expectedDescription, expectedSuggestion) in testCases {
+        for testCase in testCases {
+            let error = testCase.error
+            let expectedDescription = error.localizedDescription
+            let expectedRecovery = testCase.expectedRecovery
+            
             XCTAssertEqual(error.localizedDescription, expectedDescription)
-            XCTAssertEqual(error.localizedRecoverySuggestion, expectedSuggestion)
+            XCTAssertEqual(error.localizedRecoverySuggestion, expectedRecovery)
+        }
+    }
+    
+    func testBadRequestLocalizedDescription2() throws {
+        let testCases: [OmiseErrorParsing] = [
+            .init(error: OmiseError.api(code: .badRequest([.currencyNotSupported]), message: "", location: ""),
+                  expectedDescription: "The currency is not supported for this account",
+                  expectedRecovery: "Please choose another currency"),
+            .init(error: OmiseError.api(code: .badRequest([.other("")]), message: "", location: ""),
+                  expectedDescription: "Unknown error occurred",
+                  expectedRecovery: "Please try again later"),
+            .init(error: OmiseError.api(code: .badRequest([
+                .amountIsGreaterThanValidAmount(validAmount: 1000, currency: .sgd)
+            ]),
+                                        message: "",
+                                        location: ""),
+                  expectedDescription: "Amount is greater than the valid amount of SGD 10.00",
+                  expectedRecovery: "The payment amount is too high. Please make a payment with a lower amount."),
+            .init(error: OmiseError.api(code: .badRequest([
+                .amountIsLessThanValidAmount(validAmount: 1000, currency: .sgd)
+            ]),
+                                        message: "",
+                                        location: ""),
+                  expectedDescription: "Amount is less than the valid amount of SGD 10.00",
+                  expectedRecovery: "The payment amount is too low. Please make a payment with a higher amount."),
+            .init(error: OmiseError.api(code: .badRequest([
+                .amountIsGreaterThanValidAmount(validAmount: nil, currency: nil)
+            ]),
+                                        message: "",
+                                        location: ""),
+                  expectedDescription: "Amount is greater than the valid amount",
+                  expectedRecovery: "The payment amount is too high. Please make a payment with a lower amount."),
+            .init(error: OmiseError.api(code: .badRequest([
+                .amountIsLessThanValidAmount(validAmount: nil, currency: nil)
+            ]),
+                                        message: "",
+                                        location: ""),
+                  expectedDescription: "Amount is less than the valid amount",
+                  expectedRecovery: "The payment amount is too low. Please make a payment with a higher amount."),
+            .init(error: OmiseError.api(code: .badRequest([.nameIsTooLong(maximum: 100)]), message: "", location: ""),
+                  expectedDescription: "The customer name exceeds 100 characters",
+                  expectedRecovery: "Please review the customer name"),
+            .init(error: OmiseError.api(code: .badRequest([.nameIsTooLong(maximum: nil)]), message: "", location: ""),
+                  expectedDescription: "The customer name is too long",
+                  expectedRecovery: "Please review the customer name")
+        ]
+        
+        for testCase in testCases {
+            let error = testCase.error
+            let expectedDescription = error.localizedDescription
+            let expectedRecovery = testCase.expectedRecovery
+            
+            XCTAssertEqual(error.localizedDescription, expectedDescription)
+            XCTAssertEqual(error.localizedRecoverySuggestion, expectedRecovery)
         }
     }
     
     func testOtherErrorLocalizedDescription() throws {
-        let testCases: [(error: OmiseError, expectedDescription: String, expectedRecovery: String)] = [
-            (OmiseError.api(code: .authenticationFailure, message: "", location: ""), "An unexpected error occured", "Please try again later"),
-            (OmiseError.api(code: .serviceNotFound, message: "", location: ""), "An unexpected error occured", "Please try again later"),
-            (OmiseError.api(code: .other(""), message: "", location: ""), "An unknown error occured", "Please try again later")
+        let testCases: [OmiseErrorParsing] = [
+            .init(error: OmiseError.api(code: .authenticationFailure, message: "", location: ""),
+                  expectedDescription: "An unexpected error occured",
+                  expectedRecovery: "Please try again later"),
+            .init(error: OmiseError.api(code: .serviceNotFound, message: "", location: ""),
+                  expectedDescription: "An unexpected error occured",
+                  expectedRecovery: "Please try again later"),
+            .init(error: OmiseError.api(code: .other(""), message: "", location: ""),
+                  expectedDescription: "An unknown error occured",
+                  expectedRecovery: "Please try again later")
         ]
         
-        for (error, expectedDescription, expectedRecovery) in testCases {
+        for testCase in testCases {
+            let error = testCase.error
+            let expectedDescription = error.localizedDescription
+            let expectedRecovery = testCase.expectedRecovery
+            
             XCTAssertEqual(error.localizedDescription, expectedDescription)
             XCTAssertEqual(error.localizedRecoverySuggestion, expectedRecovery)
         }
@@ -144,4 +175,10 @@ class OmiseErrorTests: XCTestCase {
         XCTAssertEqual(error.localizedRecoverySuggestion, "Please try again later")
         
     }
+}
+
+private struct OmiseErrorParsing {
+    let error: OmiseError
+    let expectedDescription: String
+    let expectedRecovery: String
 }
