@@ -39,6 +39,7 @@
 		4B7F2C4A2DA7AA2000A23CEF /* CCVInfoControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7F2C492DA7AA2000A23CEF /* CCVInfoControllerTests.swift */; };
 		4B7F2C4C2DA7B70B00A23CEF /* SelectSourceTypePaymentViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7F2C4B2DA7B70B00A23CEF /* SelectSourceTypePaymentViewModelTests.swift */; };
 		4B7F2C4E2DA7B74000A23CEF /* MockSelectSourceTypeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7F2C4D2DA7B74000A23CEF /* MockSelectSourceTypeDelegate.swift */; };
+		4B7F2C502DA7D0AB00A23CEF /* SelectInstallmentTermsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7F2C4F2DA7D0AB00A23CEF /* SelectInstallmentTermsViewModelTests.swift */; };
 		73F9BA4B25E6053700F55CA8 /* FPXPaymentFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4A25E6053700F55CA8 /* FPXPaymentFormController.swift */; };
 		7501265D2B87CB6500ED5E14 /* PaymentInputsFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7501265C2B87CB6500ED5E14 /* PaymentInputsFormController.swift */; };
 		7501265F2B8893C900ED5E14 /* PaymentFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7501265E2B8893C900ED5E14 /* PaymentFormController.swift */; };
@@ -348,6 +349,7 @@
 		4B7F2C492DA7AA2000A23CEF /* CCVInfoControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCVInfoControllerTests.swift; sourceTree = "<group>"; };
 		4B7F2C4B2DA7B70B00A23CEF /* SelectSourceTypePaymentViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSourceTypePaymentViewModelTests.swift; sourceTree = "<group>"; };
 		4B7F2C4D2DA7B74000A23CEF /* MockSelectSourceTypeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSelectSourceTypeDelegate.swift; sourceTree = "<group>"; };
+		4B7F2C4F2DA7D0AB00A23CEF /* SelectInstallmentTermsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectInstallmentTermsViewModelTests.swift; sourceTree = "<group>"; };
 		73F9BA4A25E6053700F55CA8 /* FPXPaymentFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPXPaymentFormController.swift; sourceTree = "<group>"; };
 		7501265C2B87CB6500ED5E14 /* PaymentInputsFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInputsFormController.swift; sourceTree = "<group>"; };
 		7501265E2B8893C900ED5E14 /* PaymentFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFormController.swift; sourceTree = "<group>"; };
@@ -674,6 +676,7 @@
 		2F5D98F02D6EB27900B5ECB4 /* PaymentMethod */ = {
 			isa = PBXGroup;
 			children = (
+				4B7F2C4F2DA7D0AB00A23CEF /* SelectInstallmentTermsViewModelTests.swift */,
 				4B7F2C4B2DA7B70B00A23CEF /* SelectSourceTypePaymentViewModelTests.swift */,
 				2F5D99012D6ECA4100B5ECB4 /* SelectPaymentMethodViewModelTest.swift */,
 				2F5D98F22D6EB28800B5ECB4 /* ChoosePaymentCooridnatorTest.swift */,
@@ -1845,6 +1848,7 @@
 				F615CBF8261565D600E1A2D9 /* CardExpiryDatePickerTests.swift in Sources */,
 				758A4E9F2BE3DFDF005E7B5A /* URL+PathComponentsTests.swift in Sources */,
 				2FF94B422D946711008126D3 /* TrueMoneyPaymentFormControllerTests.swift in Sources */,
+				4B7F2C502DA7D0AB00A23CEF /* SelectInstallmentTermsViewModelTests.swift in Sources */,
 				758A4E922BE38AFD005E7B5A /* UICustomizationTests.swift in Sources */,
 				75E0EB722B7A962600E3198A /* CreateSourcePayloadTests.swift in Sources */,
 				753279382A31B40F008048AD /* CountryListViewModelMockup.swift in Sources */,

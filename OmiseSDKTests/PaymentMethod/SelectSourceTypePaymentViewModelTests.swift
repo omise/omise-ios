@@ -2,7 +2,7 @@ import XCTest
 import UIKit
 @testable import OmiseSDK
 
-private extension Array {
+extension Array {
     func at(_ index: Int) -> Element? {
         return indices.contains(index) ? self[index] : nil
     }
