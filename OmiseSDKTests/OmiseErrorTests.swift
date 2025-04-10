@@ -208,6 +208,94 @@ class OmiseErrorTests: XCTestCase {
         XCTAssertEqual(error.localizedDescription, "API Error")
         XCTAssertEqual(error.localizedRecoverySuggestion, "")
     }
+    
+    func test_init_withAmountMustBePrefix() throws {
+        let message = "amount must be 1000"
+        let actual = try OmiseError.APIErrorCode.BadRequestReason(message: message, currency: .main)
+        XCTAssertEqual(actual.defaultLocalizedErrorDescription, "Bad request: amount must be 1000")
+    }
+    
+    func test_init_withCurrencyMustBeSubstring() throws {
+        let message = "the currency must be USD"
+        let actual = try OmiseError.APIErrorCode.BadRequestReason(message: message, currency: .main)
+        XCTAssertEqual(actual, .invalidCurrency)
+    }
+    
+    func test_init_withTypeSubstring() throws {
+        let message = "unsupported type provided"
+        let actual = try OmiseError.APIErrorCode.BadRequestReason(message: message, currency: .main)
+        XCTAssertEqual(actual, .typeNotSupported)
+    }
+    
+    func test_init_withCurrencySubstring() throws {
+        let message = "provided currency is not supported"
+        let actual = try OmiseError.APIErrorCode.BadRequestReason(message: message, currency: .main)
+        XCTAssertEqual(actual, .currencyNotSupported)
+    }
+    
+    func test_init_withNameAndBlank() throws {
+        let message = "name is blank"
+        let actual = try OmiseError.APIErrorCode.BadRequestReason(message: message, currency: .main)
+        XCTAssertEqual(actual, .emptyName)
+    }
+    
+    func test_init_withNameIsTooLongPrefix_validParsing() throws {
+        let message = "name is too long: maximum is 30"
+        let actual = try OmiseError.APIErrorCode.BadRequestReason(message: message, currency: .main)
+        XCTAssertEqual(actual.defaultLocalizedErrorDescription, "The customer name is too long")
+        
+    }
+    
+    func test_init_withNameSubstring_notTooLongOrBlank() throws {
+        let message = "name is unacceptable"
+        let actual = try OmiseError.APIErrorCode.BadRequestReason(message: message, currency: .main)
+        XCTAssertEqual(actual, .nameIsTooLong(maximum: nil))
+    }
+    
+    func test_init_withEmailSubstring() throws {
+        let message = "email format is not correct"
+        let actual = try OmiseError.APIErrorCode.BadRequestReason(message: message, currency: .main)
+        XCTAssertEqual(actual, .invalidEmail)
+    }
+    
+    func test_init_withPhoneSubstring() throws {
+        let message = "phone number is invalid"
+        let actual = try OmiseError.APIErrorCode.BadRequestReason(message: message, currency: .main)
+        XCTAssertEqual(actual, .invalidPhoneNumber)
+    }
+    
+    func test_init_withNoMatchingPattern() throws {
+        let message = "an unexpected error occurred"
+        let actual = try OmiseError.APIErrorCode.BadRequestReason(message: message, currency: .main)
+        XCTAssertEqual(actual, .other(message))
+    }
+    
+    func test_parseBadRequestReasonsFromMessage_returnsExpectedReasons() throws {
+        let message = """
+            amount must be 1000, the currency must be USD, unsupported type, \
+            provided currency is not supported, name blank, \
+            name is too long: maximum is 30, name is unacceptable, \
+            email format error, phone is missing, and unexpected error
+            """
+        
+        let parsedReasons = try OmiseError.APIErrorCode.BadRequestReason.parseBadRequestReasonsFromMessage(message, currency: .main)
+        
+        let expectedReasons: [OmiseError.APIErrorCode.BadRequestReason] = [
+            .other("amount must be 1000"),
+            .invalidCurrency,
+            .typeNotSupported,
+            .currencyNotSupported,
+            .emptyName,
+            .nameIsTooLong(maximum: nil),
+            .invalidEmail,
+            .invalidPhoneNumber,
+            .other("unexpected error")
+        ]
+        
+        let sortedParsed = parsedReasons.sorted { "\($0)" < "\($1)" }
+        let sortedExpected = expectedReasons.sorted { "\($0)" < "\($1)" }
+        XCTAssertEqual(sortedParsed, sortedExpected)
+    }
 }
 
 private struct OmiseErrorParsing {
