@@ -143,4 +143,10 @@ class SelectPaymentMethodViewModelTest: XCTestCase {
             }
         }
     }
+    
+    func test() {
+        sut.viewDidTapClose()
+        XCTAssertEqual(mockselectPaymentMethodDelegate.calls.count, 1)
+        XCTAssertEqual(mockselectPaymentMethodDelegate.calls[0], .didCancelPayment)
+    }
 }

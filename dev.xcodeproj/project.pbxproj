@@ -37,6 +37,8 @@
 		2FC4CA7C2D64ED960005EC4A /* ApplePayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4CA7B2D64ED910005EC4A /* ApplePayViewModel.swift */; };
 		2FF94B422D946711008126D3 /* TrueMoneyPaymentFormControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8FC5E92D94658500028D2A /* TrueMoneyPaymentFormControllerTests.swift */; };
 		4B7F2C4A2DA7AA2000A23CEF /* CCVInfoControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7F2C492DA7AA2000A23CEF /* CCVInfoControllerTests.swift */; };
+		4B7F2C4C2DA7B70B00A23CEF /* SelectSourceTypePaymentViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7F2C4B2DA7B70B00A23CEF /* SelectSourceTypePaymentViewModelTests.swift */; };
+		4B7F2C4E2DA7B74000A23CEF /* MockSelectSourceTypeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7F2C4D2DA7B74000A23CEF /* MockSelectSourceTypeDelegate.swift */; };
 		73F9BA4B25E6053700F55CA8 /* FPXPaymentFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F9BA4A25E6053700F55CA8 /* FPXPaymentFormController.swift */; };
 		7501265D2B87CB6500ED5E14 /* PaymentInputsFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7501265C2B87CB6500ED5E14 /* PaymentInputsFormController.swift */; };
 		7501265F2B8893C900ED5E14 /* PaymentFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7501265E2B8893C900ED5E14 /* PaymentFormController.swift */; };
@@ -344,6 +346,8 @@
 		2FC4CA792D64ED880005EC4A /* ApplePayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayViewController.swift; sourceTree = "<group>"; };
 		2FC4CA7B2D64ED910005EC4A /* ApplePayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayViewModel.swift; sourceTree = "<group>"; };
 		4B7F2C492DA7AA2000A23CEF /* CCVInfoControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCVInfoControllerTests.swift; sourceTree = "<group>"; };
+		4B7F2C4B2DA7B70B00A23CEF /* SelectSourceTypePaymentViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSourceTypePaymentViewModelTests.swift; sourceTree = "<group>"; };
+		4B7F2C4D2DA7B74000A23CEF /* MockSelectSourceTypeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSelectSourceTypeDelegate.swift; sourceTree = "<group>"; };
 		73F9BA4A25E6053700F55CA8 /* FPXPaymentFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPXPaymentFormController.swift; sourceTree = "<group>"; };
 		7501265C2B87CB6500ED5E14 /* PaymentInputsFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInputsFormController.swift; sourceTree = "<group>"; };
 		7501265E2B8893C900ED5E14 /* PaymentFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFormController.swift; sourceTree = "<group>"; };
@@ -670,6 +674,7 @@
 		2F5D98F02D6EB27900B5ECB4 /* PaymentMethod */ = {
 			isa = PBXGroup;
 			children = (
+				4B7F2C4B2DA7B70B00A23CEF /* SelectSourceTypePaymentViewModelTests.swift */,
 				2F5D99012D6ECA4100B5ECB4 /* SelectPaymentMethodViewModelTest.swift */,
 				2F5D98F22D6EB28800B5ECB4 /* ChoosePaymentCooridnatorTest.swift */,
 				2F5D98F12D6EB28300B5ECB4 /* Mock */,
@@ -680,6 +685,7 @@
 		2F5D98F12D6EB28300B5ECB4 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
+				4B7F2C4D2DA7B74000A23CEF /* MockSelectSourceTypeDelegate.swift */,
 				2F5D98FA2D6EC26100B5ECB4 /* MockChoosePaymentMethodDelegate.swift */,
 				2F5D98F82D6EBA9600B5ECB4 /* MockNavigationController.swift */,
 				2F5D98F62D6EB96200B5ECB4 /* MockSelectPaymentMethodDelegate.swift */,
@@ -1814,6 +1820,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F96821A2D65A45400A7AFDA /* MockApplePayInterface.swift in Sources */,
+				4B7F2C4C2DA7B70B00A23CEF /* SelectSourceTypePaymentViewModelTests.swift in Sources */,
 				7509D4E02A1AA1450050AB38 /* AtomeFormViewControllerTests.swift in Sources */,
 				2F0267572D8D538F00BA8D3E /* CardExpiryDateTextFieldTests.swift in Sources */,
 				758A4E962BE38AFD005E7B5A /* ThreeDSButtonCustomizationTests.swift in Sources */,
@@ -1852,6 +1859,7 @@
 				750708E02B7909BB00A48DD0 /* SourceTests.swift in Sources */,
 				75CFC4D42B73B21100422A8F /* ClientTests.swift in Sources */,
 				2FC27E1E2D6DDA0F001E5857 /* MockApplePayViewModel.swift in Sources */,
+				4B7F2C4E2DA7B74000A23CEF /* MockSelectSourceTypeDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
