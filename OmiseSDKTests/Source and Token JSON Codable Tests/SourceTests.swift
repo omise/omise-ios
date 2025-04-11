@@ -11,7 +11,6 @@ class SourceTests: XCTestCase {
     /// Test Source.Payload's Codable protocol
     func validatePayloadCodable(_ payload: Payment) throws {
         let encodedPayload = try JSONEncoder().encode(payload)
-        // swiftlint:disable:next non_optional_string_data_conversion
         let encodedPayloadJson = String(data: encodedPayload, encoding: .utf8) ?? ""
         if payload.sourceType == .duitNowOBW {
             print(encodedPayloadJson)
@@ -536,7 +535,7 @@ class SourceTests: XCTestCase {
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))
         let paymentInformation = Payment.EContext(
             name: "ヤマダタロウ",
-            email: "test@opn.com",
+            email: "test@omise.co",
             phoneNumber: "01234567891"
         )
         XCTAssertEqual(source.id, "src_test_5xsjw8qafayihquj3k9")

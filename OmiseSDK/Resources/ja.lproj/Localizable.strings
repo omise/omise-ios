@@ -11,6 +11,7 @@
 // Source Types
 "SourceType.alipay" = "アリペイオンライン";
 "SourceType.alipay.footnote" = "(アリペイプラス)";
+"SourceType.applepay" = "Apple Pay";
 "SourceType.bill_payment_tesco_lotus" = "ロータス";
 "SourceType.installment_bay" = "クルンシィ";
 "SourceType.installment_bbl" = "バンコク銀行";
@@ -27,6 +28,7 @@
 "SourceType.installment_wlb_bay" = "クルンシィ";
 "SourceType.installment_wlb_first_choice" = "クルンシィ・ファーストチョイス";
 "SourceType.installment_wlb_ttb" = "TMBタナチャート銀行";
+"SourceType.installment_wlb_uob" = "ユナイテッド・オーバーシーズ銀行";
 "SourceType.internet_banking_bay" = "アユタヤ銀行";
 "SourceType.internet_banking_bbl" = "バンコク銀行";
 "SourceType.paynow" = "PayNow";
@@ -125,3 +127,6 @@
 
 // Authorizing Payment
 "AuthorizingPayment.title" = "決済の認可";
+
+// Apple Pay
+"ApplePay.not.available.text" = "この端末ではApple Payはご利用いただけません";

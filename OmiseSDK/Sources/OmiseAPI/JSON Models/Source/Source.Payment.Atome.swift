@@ -2,7 +2,7 @@ import Foundation
 
 extension Source.Payment {
     /// Payment for `Atome App Redirection` payment method
-    /// https://docs.opn.ooo/atome
+    /// https://docs.omise.co/atome
     public struct Atome: Equatable {
         /// Customer mobile number with a country code (example: +66876543210 or 0876543210)
         public let phoneNumber: String

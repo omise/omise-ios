@@ -54,7 +54,8 @@ enum PaymentMethod: CaseIterable, Equatable, Hashable {
                 .sourceType(.barcodeAlipay),
                 .sourceType(.duitNowOBW),
                 .sourceType(.fpx),
-                .sourceType(.trueMoneyWallet):
+                .sourceType(.trueMoneyWallet),
+                .sourceType(.applePay):
             return true
         default:
             return false

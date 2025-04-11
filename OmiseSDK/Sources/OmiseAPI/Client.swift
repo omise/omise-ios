@@ -62,6 +62,10 @@ class Client: ClientProtocol {
     func createToken(payload: CreateTokenPayload, _ completion: @escaping ResponseClosure<Token, Error>) {
         performRequest(api: OmiseAPI.createToken(payload: payload), completion: completion)
     }
+    
+    func createToken(applePayToken: CreateTokenApplePayPayload, _ completion: @escaping ResponseClosure<Token, Error>) {
+        performRequest(api: OmiseAPI.createTokenFromApplePayToken(token: applePayToken), completion: completion)
+    }
 
     /// Requests a `Token` from API with given Token ID
     /// - parameter tokenID: Token identifier

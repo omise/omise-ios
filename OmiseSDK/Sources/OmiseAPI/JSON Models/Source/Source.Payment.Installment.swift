@@ -2,7 +2,7 @@ import Foundation
 
 extension Source.Payment {
     /// Payloads for Installment payment methods
-    /// https://docs.opn.ooo/installment-payments
+    /// https://docs.omise.co/installment-payments
     public struct Installment: Equatable {
         /// Valid installment term length in months
         let installmentTerm: Int
@@ -11,6 +11,16 @@ extension Source.Payment {
         // swiftlint:disable:previous discouraged_optional_boolean
         /// Source type of payment
         var sourceType: SourceType
+        
+        public init(
+            installmentTerm: Int,
+            zeroInterestInstallments: Bool?,// swiftlint:disable:this discouraged_optional_boolean
+            sourceType: SourceType
+        ) {
+            self.installmentTerm = installmentTerm
+            self.zeroInterestInstallments = zeroInterestInstallments
+            self.sourceType = sourceType
+        }
     }
 }
 
@@ -43,7 +53,7 @@ extension Source.Payment.Installment {
             return [ 3, 4, 6, 9, 10 ]
         case .installmentTTB:
             return [ 3, 4, 6, 10, 12 ]
-        case .installmentUOB:
+        case .installmentUOB, .installmentWhiteLabelUOB:
             return [ 3, 4, 6, 10 ]
         case .installmentWhiteLabelBAY:
             return [ 3, 4, 6, 9, 10 ]

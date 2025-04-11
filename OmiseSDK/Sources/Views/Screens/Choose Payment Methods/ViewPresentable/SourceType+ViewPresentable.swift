@@ -24,6 +24,8 @@ extension SourceType: ViewPresentable {
             return "AlipayHK"
         case .atome:
             return "Atome"
+        case .applePay:
+            return "ApplePay"
         case .barcodeAlipay:
             return "Alipay"
         case .billPaymentTescoLotus:
@@ -62,7 +64,7 @@ extension SourceType: ViewPresentable {
             return "SCB"
         case .installmentTTB, .installmentWhiteLabelTTB:
             return "ttb"
-        case .installmentUOB:
+        case .installmentUOB, .installmentWhiteLabelUOB:
             return "uob"
         case .internetBankingBAY:
             return "BAY"

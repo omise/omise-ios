@@ -11,6 +11,7 @@
 // Source Types
 "SourceType.alipay" = "Alipay Online";
 "SourceType.alipay.footnote" = "(Alipay+™ Partner)";
+"SourceType.applepay" = "Apple Pay";
 "SourceType.bill_payment_tesco_lotus" = "Lotus's Bill Payment";
 "SourceType.installment_bay" = "Krungsri";
 "SourceType.installment_bbl" = "Bangkok Bank";
@@ -27,6 +28,7 @@
 "SourceType.installment_wlb_bay" = "Krungsri";
 "SourceType.installment_wlb_first_choice" = "Krungsri First Choice";
 "SourceType.installment_wlb_ttb" = "TMBThanachart Bank";
+"SourceType.installment_wlb_uob" = "United Overseas Bank";
 "SourceType.internet_banking_bay" = "Bank of Ayudhya";
 "SourceType.internet_banking_bbl" = "Bangkok Bank";
 "SourceType.paynow" = "PayNow";
@@ -125,3 +127,6 @@
 
 // Authorizing Payment
 "AuthorizingPayment.title" = "Authorizing Payment";
+
+// Apple Pay
+"ApplePay.not.available.text" = "Apple Pay is not available on this device";

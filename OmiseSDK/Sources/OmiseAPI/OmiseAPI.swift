@@ -25,6 +25,7 @@ enum OmiseAPI {
     case capability
     case token(tokenID: String)
     case createToken(payload: CreateTokenPayload)
+    case createTokenFromApplePayToken(token: CreateTokenApplePayPayload)
     case createSource(payload: CreateSourcePayload)
     case netceteraConfig(baseUrl: URL)
 }
@@ -38,7 +39,7 @@ extension OmiseAPI: APIProtocol {
         switch self {
         case .capability, .createSource:
             return .api
-        case .token, .createToken:
+        case .token, .createToken, .createTokenFromApplePayToken:
             return .vault
         case .netceteraConfig(let baseURL):
             return .other(baseURL: baseURL)
@@ -51,7 +52,7 @@ extension OmiseAPI: APIProtocol {
             return "capability"
         case .token(let tokenID):
             return "tokens/\(tokenID)"
-        case .createToken:
+        case .createToken, .createTokenFromApplePayToken:
             return "tokens"
         case .createSource:
             return "sources"
@@ -68,7 +69,7 @@ extension OmiseAPI: APIProtocol {
         switch self {
         case .capability, .token:
             return .get
-        case .createToken, .createSource:
+        case .createToken, .createSource, .createTokenFromApplePayToken:
             return .post
         case .netceteraConfig:
             return .get
@@ -82,6 +83,8 @@ extension OmiseAPI: APIProtocol {
     var httpBody: Data? {
         switch self {
         case .createToken(let payload):
+            return try? jsonEncoder.encode(payload)
+        case .createTokenFromApplePayToken(let payload):
             return try? jsonEncoder.encode(payload)
         case .createSource(let sourcePayment):
             return try? jsonEncoder.encode(sourcePayment)

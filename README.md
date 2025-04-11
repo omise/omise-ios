@@ -1,25 +1,25 @@
 
-# Opn Payments iOS SDK
+# Omise iOS SDK
 
 [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Packager%20Manager-compatible-brightgreen?style=flat-square)](https://swift.org/package-manager)
-[![](https://img.shields.io/badge/email-support-yellow.svg?style=flat-square)](mailto:support@opn.ooo)
+[![](https://img.shields.io/badge/email-support-yellow.svg?style=flat-square)](mailto:support@omise.co)
 ![CI](https://github.com/omise/omise-ios/workflows/CI/badge.svg?branch=master)
 
-[Opn Payments](https://docs.opn.ooo/) is a payment service provider operating
-in Thailand, Japan, and Singapore. Opn Payments provides a set of APIs that
+[Omise](https://docs.omise.co/) is a payment service provider operating
+in Thailand, Japan, and Singapore. Omise provides a set of APIs that
 help merchants of any size accept payments online.
 
-The Opn Payments iOS SDK provides bindings for
-[tokenizing credit cards](https://docs.opn.ooo/tokens-api) and
-[accepting non-credit-card payments](https://docs.opn.ooo/sources-api)
-using the Opn Payments API, allowing developers to safely and easily accept
+The Omise iOS SDK provides bindings for
+[tokenizing credit cards](https://docs.omise.co/tokens-api) and
+[accepting non-credit-card payments](https://docs.omise.co/sources-api)
+using the Omise API, allowing developers to safely and easily accept
 payments within apps.
 
 If you run into any issues regarding this SDK and the functionality it
 provides, consult the frequently asked questions in our
-[comprehensive support documents](https://docs.opn.ooo/support).  If
+[comprehensive support documents](https://docs.omise.co/support).  If
 you can't find an answer there, feel free to
-[email our support team](mailto:support@opn.ooo).
+[email our support team](mailto:support@omise.co).
 
 ## Security Warning
 
@@ -28,7 +28,7 @@ you can't find an answer there, feel free to
 
 ## Requirements
 
-* Opn Payments API public key. [Register for an Opn Payments account](https://dashboard.omise.co/signup) to obtain your API keys.
+* Omise API public key. [Register for an Omise account](https://dashboard.omise.co/signup) to obtain your API keys.
 * iOS 10 or higher deployment target.
 * Xcode 14.0 or higher (Xcode 15 is recommended)
 * Swift 5.0 or higher (Swift 5.3 is recommended)
@@ -37,7 +37,7 @@ you can't find an answer there, feel free to
 
 **Card data should never transit through your server. We recommend that you follow our
 guide on how to safely
-[collect credit information](https://docs.opn.ooo/collecting-card-information).**
+[collect credit information](https://docs.omise.co/collecting-card-information).**
 
 To be authorized to create tokens on your server, you must have a
 currently valid PCI-DSS Attestation of Compliance (AoC) delivered by a
@@ -47,7 +47,7 @@ through your server.
 
 ## Installation
 
-To integrate the Opn Payments SDK into your Xcode project using the [Swift Package Manager](https://swift.org/package-manager/), proceed with the following steps:
+To integrate the Omise SDK into your Xcode project using the [Swift Package Manager](https://swift.org/package-manager/), proceed with the following steps:
 
 1. In Xcode, select `File` > `Swift Packages` > `Add Package Dependency...`
 2. Enter the URL for this repository `https://github.com/omise/omise-ios.git`
@@ -56,13 +56,13 @@ To integrate the Opn Payments SDK into your Xcode project using the [Swift Packa
 
 ## Usage
 
-The Opn Payments iOS SDK provides an easy-to-use library for calling the
-Opn Payments API and presenting UI forms.
+The Omise iOS SDK provides an easy-to-use library for calling the
+Omise API and presenting UI forms.
 
-The main class and protocol for the Opn Payments iOS SDK are `OmiseSDK` and `ClientProtocol` through
-which all requests to the Opn Payments API will be sent.
+The main class and protocol for the Omise iOS SDK are `OmiseSDK` and `ClientProtocol` through
+which all requests to the Omise API will be sent.
 
-To start working with OmiseSDK, you must create a new instance of the `OmiseSDK` class with an Opn Payments public key.
+To start working with OmiseSDK, you must create a new instance of the `OmiseSDK` class with an Omise public key.
 
 ```swift
 import OmiseSDK
@@ -78,7 +78,18 @@ OmiseSDK.shared = omiseSDK
 
 If you cloned this project to your local hard drive, you can check out `ExampleApp.xcodeproj`.
 
-### Opn Payments API
+#### ApplePay
+To enable Apple Pay in your app, configure your Apple Pay Merchant Identifier using the setupApplePay method.
+Refer to the ExampleApp sample for a complete implementation.
+For more information, please review at [Omise Apple Pay Documentation](https://docs.omise.co/applepay/singapore).
+
+```swift 
+omiseSDK.setupApplePay(for: "your_merchant_id", requiredBillingAddress: true)
+```
+Replace "your_merchant_id" with your actual Apple Pay Merchant Identifier.
+
+
+### Omise API
 
 The SDK currently
 supports two main categories of requests: **Tokenizing a 
@@ -89,7 +100,7 @@ Card** and **Creating a Payment Source**.
 Normally, merchants must not send credit or debit card data to their own
 servers. To collect a card payment from a
 customer, merchants must first *tokenize* the card data using the
-Opn Payments API and then use the generated token in place of the card
+Omise API and then use the generated token in place of the card
 data. You can tokenize card data by creating and initializing
 a `CreateTokenPayload.Card` as follows:
 
@@ -120,7 +131,7 @@ let createTokenPayloadWithAddress = CreateTokenPayload.Card(
 
 #### Creating a payment source
 
-Opn Payments supports many payment methods other than cards. You
+Omise supports many payment methods other than cards. You
 may request a payment with one of those supported payment methods from
 a customer by calling the `CreateSource` API. You need to specify
 the parameters (e.g., payment amount and currency) of the source you
@@ -172,15 +183,15 @@ client.observeChargeStatus(chargeStatusCompletionHandler)
 
 ### Using built-in forms
 
-Opn Payments iOS SDK provides easy-to-use drop-in UI forms for both Tokenizing a Card and Creating a Payment Source, which
+Omise iOS SDK provides easy-to-use drop-in UI forms for both Tokenizing a Card and Creating a Payment Source, which
 you can easily integrate into your application.
 
 #### Card form
 
 The `omiseSDK.presentCreditCardPayment()` provides a pre-made card form that will automatically
-[tokenize card information](https://docs.opn.ooo/security-best-practices) for you.
+[tokenize card information](https://docs.omise.co/security-best-practices) for you.
 
-##### Use Opn Payments card form
+##### Use Omise card form
 
 To use the controller in your application, modify your view controller with the following additions:
 
@@ -240,7 +251,7 @@ You can call `OmiseSDK.dismiss(animated:completion:)` to close UI form presented
 ##### Creating a custom card form
 
 You can create your card form, but please remember you must not send the card information to your server.
-Opn Payments iOS SDK provides the following built-in card UI components to make it easier to create your card form:
+Omise iOS SDK provides the following built-in card UI components to make it easier to create your card form:
 
 * `CardNumberTextField` - Provides basic number grouping as the user types.
 * `CardNameTextField` - Cardholder name field.
@@ -331,7 +342,7 @@ extension ProductDetailViewController: ChoosePaymentMethodDelegate {
 
 ## Authorizing payment
 
-Some payment methods require the customer to authorize the payment using an authorization URL. This includes [3-D Secure verification](https://docs.opn.ooo/fraud-protection#3-d-secure), [Internet Banking payment](https://docs.opn.ooo/internet-banking), [Mobile Banking SCB](https://docs.opn.ooo/mobile-banking-scb), etc. Opn Payments iOS SDK provides a built-in class to handle the authorization.
+Some payment methods require the customer to authorize the payment using an authorization URL. This includes [3-D Secure verification](https://docs.omise.co/fraud-protection#3-d-secure), [Internet Banking payment](https://docs.omise.co/internet-banking), [Mobile Banking SCB](https://docs.omise.co/mobile-banking-scb), etc. Omise iOS SDK provides a built-in class to handle the authorization.
 
 On payment methods that require opening the external app (e.g., mobile banking app) to authorize the transaction, set the _return_uri_ to a **deep link** or **app link** to be able to open the merchant app. Otherwise, after the cardholder authorizes the transaction on the external app, the flow redirects to the normal link in the _return_uri_, and opens it on the browser app, resulting in the payment not being completed.
 Some authorized URLs will be processed using the in-app browser flow, and others will be processed using the native flow from the SDK (3DS v2), and the SDK automatically handles all of this.
@@ -411,7 +422,7 @@ Some request methods allow the user to authorize the payment with an external ap
 
 ## Objective-C compatibility
 
-This version of Opn Payments iOS SDK does not support Objective-C. For full Objective-C support, use [this version](https://github.com/omise/omise-ios/tree/support/v4.x.x).
+This version of Omise iOS SDK does not support Objective-C. For full Objective-C support, use [this version](https://github.com/omise/omise-ios/tree/support/v4.x.x).
 
 ## Contributing
 

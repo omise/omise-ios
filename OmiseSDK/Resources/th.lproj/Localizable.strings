@@ -11,6 +11,7 @@
 // Source Types
 "SourceType.alipay" = "อาลีเพย์ (ออนไลน์)";
 "SourceType.alipay.footnote" = "(อาลีเพย์พลัส)";
+"SourceType.applepay" = "Apple Pay";
 "SourceType.bill_payment_tesco_lotus" = "โลตัสบิลเพย์เมนต์";
 "SourceType.installment_bay" = "ธนาคารกรุงศรี";
 "SourceType.installment_bbl" = "ธนาคารกรุงเทพ";
@@ -24,6 +25,7 @@
 "SourceType.installment_wlb_kbank" = "ธนาคารกสิกรไทย";
 "SourceType.installment_wlb_scb" = "ธนาคารไทยพาณิชย์";
 "SourceType.installment_wlb_bbl" = "ธนาคารกรุงเทพ";
+"SourceType.installment_wlb_uob" = "ธนาคารยูโอบี";
 "SourceType.internet_banking_bay" = "ธนาคารกรุงศรีอยุธยา";
 "SourceType.internet_banking_bbl" = "ธนาคารกรุงเทพ";
 "SourceType.paynow" = "เพย์นาว";
@@ -122,3 +124,6 @@
 
 // Authorizing Payment
 "AuthorizingPayment.title" = "กำลังอนุมัติวงเงิน";
+
+// Apple Pay
+"ApplePay.not.available.text" = "ไม่สามารถใช้งาน Apple Pay ได้บนอุปกรณ์นี้";

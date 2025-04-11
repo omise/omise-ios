@@ -3,7 +3,7 @@ import UIKit
 
 extension Source.Payment {
     /// Payment for `DuitNow Online Banking/Wallets` payment method
-    /// https://docs.opn.ooo/duitnow-obw
+    /// https://docs.omise.co/duitnow-obw
     public struct DuitNowOBW: Equatable {
         /// Bank code selected by customer
         public let bank: Bank

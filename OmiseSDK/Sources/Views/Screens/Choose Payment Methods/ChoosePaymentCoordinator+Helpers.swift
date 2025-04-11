@@ -64,6 +64,21 @@ extension ChoosePaymentCoordinator {
             completion()
         }
     }
+    
+    func processPayment(applePay payload: CreateTokenApplePayPayload?, completion: @escaping () -> Void) {
+        guard let delegate = choosePaymentMethodDelegate,
+              let payload = payload else { return }
+        
+        client.createToken(applePayToken: payload) { [weak self, weak delegate] result in
+            switch result {
+            case .success(let token):
+                delegate?.choosePaymentMethodDidComplete(with: token)
+            case .failure(let error):
+                self?.processError(error)
+            }
+            completion()
+        }
+    }
 
     func processWhiteLabelInstallmentPayment(_ payment: Source.Payment, card: CreateTokenPayload.Card, completion: @escaping () -> Void) {
 
@@ -76,7 +91,7 @@ extension ChoosePaymentCoordinator {
 
         let tokenPayload = CreateTokenPayload(card: card)
 
-        client.createSource(payload: sourcePayload) { [weak self, weak delegate, tokenPayload] result in
+        client.createSource(payload: sourcePayload) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .failure(let error):
@@ -85,17 +100,11 @@ extension ChoosePaymentCoordinator {
                     completion()
                 }
             case .success(let source):
-                self.client.createToken(payload: tokenPayload) { [weak self, weak delegate] result in
-                    switch result {
-                    case .success(let token):
-                        delegate?.choosePaymentMethodDidComplete(with: source, token: token)
-                    case .failure(let error):
-                        self?.processError(error)
-                        DispatchQueue.main.async {
-                            completion()
-                        }
-                    }
-                }
+                self.createTokenForWhiteLabelPayment(
+                    tokenPayload: tokenPayload,
+                    source: source,
+                    delegate: delegate,
+                    completion: completion)
             }
         }
     }
@@ -167,9 +176,7 @@ extension ChoosePaymentCoordinator {
         let animationBlock = { [weak navController] in
             self.errorViewHeightConstraint?.isActive = true
             navController?.view.layoutIfNeeded()
-            if #available(iOS 13, *) {
-                navController?.topViewController?.additionalSafeAreaInsets.top = 0
-            } else if #available(iOS 11, *) {
+            if #available(iOS 11, *) {
                 navController?.topViewController?.additionalSafeAreaInsets.top = 0
             }
         }
@@ -182,9 +189,7 @@ extension ChoosePaymentCoordinator {
                 animations: animationBlock
             ) { [weak navController] _ in
                 var isCompleted: Bool {
-                    if #available(iOS 13, *) {
-                        return navController?.topViewController?.additionalSafeAreaInsets.top == 0
-                    } else if #available(iOS 11, *) {
+                    if #available(iOS 11, *) {
                         return navController?.topViewController?.additionalSafeAreaInsets.top == 0
                     } else {
                         return true
@@ -203,5 +208,29 @@ extension ChoosePaymentCoordinator {
 extension ChoosePaymentCoordinator: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         dismissErrorMessage(animated: animated, sender: nil)
+    }
+}
+
+private extension ChoosePaymentCoordinator {
+    func createTokenForWhiteLabelPayment(
+        tokenPayload: CreateTokenPayload,
+        source: Source,
+        delegate: ChoosePaymentMethodDelegate,
+        completion: @escaping () -> Void
+    ) {
+        client.createToken(payload: tokenPayload) { [weak self] result in
+            switch result {
+            case .success(let token):
+                delegate.choosePaymentMethodDidComplete(with: source, token: token)
+                DispatchQueue.main.async {
+                    completion()
+                }
+            case .failure(let error):
+                self?.processError(error)
+                DispatchQueue.main.async {
+                    completion()
+                }
+            }
+        }
     }
 }

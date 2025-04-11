@@ -175,6 +175,12 @@ class CreditCardPaymentController: UIViewController {
             bind(to: viewModel)
         }
     }
+    
+    deinit {
+        formFields.forEach {
+            $0.removeTarget(self, action: nil, for: .allEvents)
+        }
+    }
 
     private func setupLabels() {
         errorLabels.forEach {
@@ -744,7 +750,7 @@ extension CreditCardPaymentController {
         formLabels.forEach { $0.adjustsFontForContentSizeCategory = true }
         formFields.forEach { $0.adjustsFontForContentSizeCategory = true }
         submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
-
+        
         /* write unit tests for the code below */
         accessibilityCustomRotors = [
             UIAccessibilityCustomRotor(name: "Fields") { [weak self] (predicate) -> UIAccessibilityCustomRotorItemResult? in
@@ -755,7 +761,7 @@ extension CreditCardPaymentController {
                                                        direction: predicate.searchDirection)
                 .map { UIAccessibilityCustomRotorItemResult(targetElement: $0, targetRange: nil) }
             },
-
+            
             UIAccessibilityCustomRotor(name: "Invalid Data Fields") { [weak self] (predicate) -> UIAccessibilityCustomRotorItemResult? in
                 let fields = self?.formFields ?? []
                 return self?.accessibilityElementAfter(predicate.currentItem.targetElement,
@@ -967,14 +973,14 @@ extension CreditCardPaymentController {
         }
         return findAccessibilityElement(element, fields: fields, matchingPredicate: predicate, direction: direction)
     }
-
+    
     // This could be the new helper function handling cases when no element is provided
     func handleNoElement(
         _ direction: UIAccessibilityCustomRotor.Direction,
         fields: [OmiseTextField],
         matchingPredicate predicate: (OmiseTextField) -> Bool
     ) -> NSObjectProtocol? {
-
+        
         switch direction {
         case .previous:
             return fields.reversed().first(where: predicate)?.accessibilityElements?.last as? NSObjectProtocol
@@ -986,7 +992,7 @@ extension CreditCardPaymentController {
             ?? fields.first(where: predicate)
         }
     }
-
+    
     // This could be another helper function finding an accessibility element
     func findAccessibilityElement(
         _ element: NSObjectProtocol,
@@ -998,12 +1004,12 @@ extension CreditCardPaymentController {
             guard let accessibilityElements = field.accessibilityElements as? [NSObjectProtocol] else {
                 return element === field
             }
-
+            
             return accessibilityElements.contains { $0 === element }
         } ?? cardNumberTextField! // swiftlint:disable:this force_unwrapping
-
+        
         let nextField = filedAfter(fieldOfElement, fields: fields, matchingPredicate: predicate, direction: direction)
-
+        
         guard let currentAccessibilityElements = (fieldOfElement.accessibilityElements as? [NSObjectProtocol]),
               let indexOfAccessibilityElement = currentAccessibilityElements.firstIndex(where: { $0 === element }) else {
             switch direction {
@@ -1015,7 +1021,7 @@ extension CreditCardPaymentController {
                 return nextField?.accessibilityElements?.first as? NSObjectProtocol ?? nextField
             }
         }
-
+        
         switch direction {
         case .previous:
             if predicate(fieldOfElement) && indexOfAccessibilityElement > currentAccessibilityElements.startIndex {
@@ -1033,7 +1039,7 @@ extension CreditCardPaymentController {
             }
         }
     }
-
+    
     func filedAfter(
         _ field: OmiseTextField,
         fields: [OmiseTextField],
@@ -1049,5 +1055,5 @@ extension CreditCardPaymentController {
             return fields[fields.index(after: indexOfField)...].first(where: predicate)
         }
     }
-
+    
 }

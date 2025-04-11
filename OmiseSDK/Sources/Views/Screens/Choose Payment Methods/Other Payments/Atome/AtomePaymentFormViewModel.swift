@@ -51,7 +51,9 @@ class AtomePaymentFormViewModel: AtomePaymentFormViewModelProtocol, CountryListV
     }
 
     func error(for field: Field, validate text: String?) -> String? {
-        if field.isOptional, text?.isEmpty ?? true { return nil }
+        if field.isOptional && (text?.isEmpty ?? true) {
+            return nil
+        }
 
         if let validatorRegex = field.validatorRegex,
             let regex = try? NSRegularExpression(pattern: validatorRegex, options: []) {

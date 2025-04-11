@@ -2,7 +2,7 @@ import Foundation
 
 extension Source.Payment {
     /// Payment for `Alipay In-Store` payment method
-    /// https://docs.opn.ooo/alipay-barcode
+    /// https://docs.omise.co/alipay-barcode
     public struct BarcodeAlipay: Equatable {
         /// Alipay barcode number
         public let barcode: String
