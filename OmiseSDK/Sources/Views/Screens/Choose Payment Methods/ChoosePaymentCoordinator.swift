@@ -156,9 +156,10 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
 
     /// Creates EContext screen and attach current flow object inside created controller to be deallocated together
     func createEContextController(title: String) -> EContextPaymentFormController {
-        let viewController = EContextPaymentFormController(nibName: nil, bundle: .omiseSDK)
+        let vm = EContextPaymentFormViewModel()
+        vm.delegate = self
+        let viewController = EContextPaymentFormController(viewModel: vm)
         viewController.title = title
-        viewController.delegate = self
         return viewController
     }
 

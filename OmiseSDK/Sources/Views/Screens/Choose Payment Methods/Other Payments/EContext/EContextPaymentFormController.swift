@@ -1,284 +1,282 @@
 import UIKit
+import Foundation
 
-class EContextPaymentFormController: UIViewController, PaymentFormUIController {
-    weak var delegate: SelectSourcePaymentDelegate?
-
-    var client: ClientProtocol?
-    var paymentAmount: Int64?
-    var paymentCurrency: Currency?
+class EContextPaymentFormController: BaseFormViewController {
+    // MARK: - UI Elements
+    private let fullNameLabel: UILabel = {
+        let label = UILabel()
+        label.text(localized("EContext.field.fullName"))
+            .configure()
+        return label
+    }()
     
-    var currentEditingTextField: OmiseTextField?
+    private let emailLabel: UILabel = {
+        let label = UILabel()
+        label.text(localized("EContext.field.email"))
+            .configure()
+        return label
+    }()
     
-    var isInputDataValid: Bool {
-        return formFields.allSatisfy { $0.isValid }
+    private let phoneNumberLabel: UILabel = {
+        let label = UILabel()
+        label.text(localized("EContext.field.phone"))
+            .configure()
+        return label
+    }()
+    
+    private let fullNameTextField: OmiseTextField = {
+        let tf = OmiseTextField()
+        tf.validator = try? NSRegularExpression(pattern: "\\A[\\w\\s]{1,10}\\s?\\z", options: [])
+        tf.configure()
+        return tf
+    }()
+    
+    private let emailTextField: OmiseTextField = {
+        let tf = OmiseTextField()
+        tf.validator = try? NSRegularExpression(pattern: "\\A[\\w\\-\\.]+@[\\w\\-\\.]+\\s?\\z", options: [])
+        tf.configure()
+        return tf
+    }()
+    
+    private let phoneNumberTextField: OmiseTextField = {
+        let tf = OmiseTextField()
+        tf.validator = try? NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
+        tf.configure()
+        return tf
+    }()
+    
+    // Error Labels
+    private let fullNameErrorLabel: UILabel = {
+        let label = UILabel()
+        label.text("-")
+            .configureErrorLabel()
+        return label
+    }()
+    
+    private let emailErrorLabel: UILabel = {
+        let label = UILabel()
+        label.text("-")
+            .configureErrorLabel()
+        return label
+    }()
+    
+    private let phoneNumberErrorLabel: UILabel = {
+        let label = UILabel()
+        label.text("-")
+            .configureErrorLabel()
+        return label
+    }()
+    
+    private lazy var submitButton: MainActionButton = {
+        let button = MainActionButton()
+        button.setTitle(localized("EContext.nextButton.title"), for: .normal)
+        button.font(.preferredFont(forTextStyle: .headline))
+        button.defaultBackgroundColor = .omise
+        button.disabledBackgroundColor = .line
+        button.cornerRadius = 4
+        button.isEnabled = false
+        button.addTarget(self, action: #selector(submitEContextForm(_:)), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints(false)
+        return button
+    }()
+    
+    private let requestingIndicatorView: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.color = .gray
+        indicator.contentMode = .scaleAspectFill
+        indicator.translatesAutoresizingMaskIntoConstraints(false)
+        return indicator
+    }()
+    
+    private lazy var formStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis(.vertical)
+            .alignment(.fill)
+            .spacing(.spacing)
+            .translatesAutoresizingMaskIntoConstraints(false)
+        return stack
+    }()
+    
+    let viewModel: EContextPaymentFormViewModelProtocol
+    
+    // MARK: - Initialization
+    init(viewModel: EContextPaymentFormViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
-    @IBOutlet var contentView: UIScrollView!
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
-    @IBOutlet private var fullNameTextField: OmiseTextField!
-    @IBOutlet private var emailTextField: OmiseTextField!
-    @IBOutlet private var phoneNumberTextField: OmiseTextField!
-    @IBOutlet private var submitButton: MainActionButton!
-    @IBOutlet private var requestingIndicatorView: UIActivityIndicatorView!
-
-    @IBOutlet private var fullNameLabel: UILabel!
-    @IBOutlet private var emailLabel: UILabel!
-    @IBOutlet private var phoneNumberLabel: UILabel!
-
-    @IBOutlet private var fullNameErrorLabel: UILabel!
-    @IBOutlet private var emailErrorLabel: UILabel!
-    @IBOutlet private var phoneNumberErrorLabel: UILabel!
-    
-    lazy var formLabels: [UILabel]! = {
-        [fullNameLabel, emailLabel, phoneNumberLabel]
-    }()
-
-    lazy var formFields: [OmiseTextField]! = {
-        [fullNameTextField, emailTextField, phoneNumberTextField]
-    }()
-
-    @IBOutlet var formFieldsAccessoryView: UIToolbar!
-    @IBOutlet var gotoPreviousFieldBarButtonItem: UIBarButtonItem!
-    @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!
-    @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
-    
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .background
-        formFieldsAccessoryView.barTintColor = .formAccessoryBarTintColor
-
-        submitButton.defaultBackgroundColor = .omise
-        submitButton.disabledBackgroundColor = .line
-
+        
         if #available(iOSApplicationExtension 11.0, *) {
             navigationItem.largeTitleDisplayMode = .never
         }
-
         navigationItem.backBarButtonItem = .empty
         
-        formFields.forEach {
-            $0.inputAccessoryView = formFieldsAccessoryView
-        }
+        // Add the content view (inherited from BaseFormViewController)
+        view.addSubviewAndFit(contentView)
         
-        formFields.forEach {
-            $0.adjustsFontForContentSizeCategory = true
-        }
-        formLabels.forEach {
-            $0.adjustsFontForContentSizeCategory = true
-        }
-        submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
-        
-        if  #unavailable(iOS 11) {
-            // We'll leave the adjusting scroll view insets job for iOS 11 and later to the layoutMargins + safeAreaInsets here
-            automaticallyAdjustsScrollViewInsets = true
-        }
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillChangeFrame(_:)),
-            name: UIResponder.keyboardWillChangeFrameNotification,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillHide(_:)),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
-        
-        fullNameTextField.validator = try? NSRegularExpression(pattern: "\\A[\\w\\s]{1,10}\\s?\\z", options: [])
-        emailTextField.validator = try? NSRegularExpression(pattern: "\\A[\\w\\-\\.]+@[\\w\\-\\.]+\\s?\\z", options: [])
-        phoneNumberTextField.validator = try? NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
-
+        setupUI()
         setupTextFieldHandlers()
+        setupHandlers()
+    }
+    
+    // MARK: - Setup UI
+    private func setupUI() {
+        contentView.addSubviewAndFit(formStack, vertical: .padding, horizontal: .padding)
+        formStack.constrainWidth(equalTo: contentView, constant: -(.padding * 2))
+        
+        // Add rows: Label, TextField, and Error label for each form element.
+        formStack.addArrangedSubviews([
+            getStackViewGroup(for: [fullNameLabel, fullNameTextField, fullNameErrorLabel]),
+            getStackViewGroup(for: [emailLabel, emailTextField, emailErrorLabel]),
+            getStackViewGroup(for: [phoneNumberLabel, phoneNumberTextField, phoneNumberErrorLabel]),
+            submitButton
+        ])
+        
+        contentView.addSubviewToCenter(requestingIndicatorView)
+        
+        // Tell the base controller which fields to handle.
+        formFields = [fullNameTextField, emailTextField, phoneNumberTextField]
         contentView.adjustContentInsetOnKeyboardAppear()
-
-        fullNameLabel.text = localized("EContext.field.fullName")
-        emailLabel.text = localized("EContext.field.email")
-        phoneNumberLabel.text = localized("EContext.field.phone")
-        submitButton.setTitle(localized("EContext.nextButton.title"), for: .normal)
-
-        fullNameLabel.textColor = UIColor.omisePrimary
-        emailLabel.textColor = UIColor.omisePrimary
-        phoneNumberLabel.textColor = UIColor.omisePrimary
-    }
-
-    private func setupTextFieldHandlers() {
-        self.formFields.forEach { field in
-            setupTextField(field)
-        }
-    }
-
-    private func setupTextField(_ field: OmiseTextField) {
-        field.textColor = UIColor.omisePrimary
-        field.addTarget(self, action: #selector(gotoNextField), for: .editingDidEndOnExit)
-        field.addTarget(self, action: #selector(validateFieldData), for: .editingChanged)
-        field.addTarget(self, action: #selector(updateInputAccessoryViewFor), for: .editingDidBegin)
-        field.addTarget(self, action: #selector(validateTextFieldDataOf), for: .editingDidEnd)
-    }
-
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        if #unavailable(iOS 11) {
-            // There's a bug in iOS 10 and earlier which the text field's intrinsicContentSize is returned the value
-            // that doesn't take the result of textRect(forBounds:) method into an account for the initial value
-            // So we need to invalidate the intrinsic content size here to ask those text fields to calculate their
-            // intrinsic content size again
-
-            formFields.forEach {
-                $0.invalidateIntrinsicContentSize()
-            }
-        }
     }
     
-    @IBAction private func submitEContextForm(_ sender: AnyObject) {
-        guard let fullname = fullNameTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces),
-            let email = emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces),
-            let phoneNumber = phoneNumberTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
-                return
-        }
-        
-        let eContextInformation = Source.Payment.EContext(name: fullname, email: email, phoneNumber: phoneNumber)
-        requestingIndicatorView.startAnimating()
-        view.isUserInteractionEnabled = false
-        view.tintAdjustmentMode = .dimmed
-        submitButton.isEnabled = false
-        let payment = Source.Payment.eContext(eContextInformation)
-        delegate?.didSelectSourcePayment(payment) { [weak self] in
+    private func setupHandlers() {
+        viewModel.input.set { [weak self] isLoading in
             guard let self = self else { return }
-            self.requestingIndicatorView.stopAnimating()
-            self.view.isUserInteractionEnabled = true
-            self.view.tintAdjustmentMode = .automatic
-            self.submitButton.isEnabled = true
-        }
-    }
-    
-    @IBAction private func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
-        if let errorLabel = associatedErrorLabelOf(sender) {
-            let duration = TimeInterval(UINavigationController.hideShowBarDuration)
-            UIView.animate(withDuration: duration,
-                           delay: 0.0,
-                           options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
-                errorLabel.alpha = 0.0
+            if isLoading {
+                self.requestingIndicatorView.startAnimating()
+                self.view.isUserInteractionEnabled = false
+                self.view.tintAdjustmentMode = .dimmed
+                self.submitButton.isEnabled = false
+            } else {
+                self.requestingIndicatorView.stopAnimating()
+                self.view.isUserInteractionEnabled = true
+                self.view.tintAdjustmentMode = .automatic
+                self.submitButton.isEnabled = true
             }
         }
-        
-        updateInputAccessoryViewWithFirstResponder(sender)
-        sender.borderColor = view.tintColor
     }
     
-    @IBAction private func gotoPreviousField(_ button: UIBarButtonItem) {
-        gotoPreviousField()
+    private func getStackViewGroup(for views: [UIView]) -> UIStackView {
+        let stackView = UIStackView()
+        stackView.axis(.vertical)
+            .alignment(.fill)
+            .spacing(.minSpacing)
+            .translatesAutoresizingMaskIntoConstraints(false)
+            .addArrangedSubviews(views)
+        return stackView
     }
     
-    @IBAction private func gotoNextField(_ sender: AnyObject) {
+    // MARK: - Form Submission
+    @objc private func submitEContextForm(_ sender: UIButton) {
+        guard let fullname = fullNameTextField.text?.trimmingCharacters(in: .whitespaces),
+              let email = emailTextField.text?.trimmingCharacters(in: .whitespaces),
+              let phoneNumber = phoneNumberTextField.text?.trimmingCharacters(in: .whitespaces) else { return }
+        viewModel.input.startPayment(name: fullname, email: email, phone: phoneNumber)
+    }
+}
+
+// MARK: - TextFields Helper
+private extension EContextPaymentFormController {
+    func setupTextFieldHandlers() {
+        for field in formFields {
+            field.addTarget(self, action: #selector(textFieldEditingDidBegin(_:)), for: .editingDidBegin)
+            field.addTarget(self, action: #selector(textFieldEditingDidEndOnExit(_:)), for: .editingDidEndOnExit)
+            field.addTarget(self, action: #selector(validateFieldData(_:)), for: .editingChanged)
+            field.addTarget(self, action: #selector(validateTextFieldDataOf(_:)), for: .editingDidEnd)
+        }
+    }
+    
+    @objc func textFieldEditingDidBegin(_ textField: OmiseTextField) {
+        updateNavigationButtons(for: textField)
+    }
+    
+    @objc func textFieldEditingDidEndOnExit(_ textField: OmiseTextField) {
         gotoNextField()
     }
     
-    @IBAction private func doneEditing(_ button: UIBarButtonItem?) {
-        doneEditing()
+    @objc func validateFieldData(_ textField: OmiseTextField) {
+        submitButton.isEnabled = formFields.allSatisfy { $0.isValid }
     }
     
-    @IBAction private func validateFieldData(_ textField: OmiseTextField) {
-        submitButton.isEnabled = isInputDataValid
-    }
-    
-    @IBAction private func validateTextFieldDataOf(_ sender: OmiseTextField) {
-        let duration = TimeInterval(UINavigationController.hideShowBarDuration)
-        UIView.animate(withDuration: duration,
-                       delay: 0.0,
-                       options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
-            self.validateField(sender)
+    @objc func validateTextFieldDataOf(_ textField: OmiseTextField) {
+        UIView.animate(withDuration: TimeInterval(UINavigationController.hideShowBarDuration)) {
+            self.validateField(textField)
         }
-        sender.borderColor = UIColor.omiseSecondary
+        textField.borderColor = .omiseSecondary
     }
     
-    @objc func keyboardWillChangeFrame(_ notification: NSNotification) {
-        guard let frameEnd = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
-            let frameStart = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? CGRect,
-            frameEnd != frameStart else {
-                return
-        }
-        
-        let intersectedFrame = contentView.convert(frameEnd, from: nil)
-        
-        contentView.contentInset.bottom = intersectedFrame.height
-        let bottomScrollIndicatorInset: CGFloat
-        if #available(iOS 11.0, *) {
-            bottomScrollIndicatorInset = intersectedFrame.height - contentView.safeAreaInsets.bottom
-        } else {
-            bottomScrollIndicatorInset = intersectedFrame.height
-        }
-        contentView.scrollIndicatorInsets.bottom = bottomScrollIndicatorInset
-    }
-    
-    @objc func keyboardWillHide(_ notification: NSNotification) {
-        contentView.contentInset.bottom = 0.0
-        contentView.scrollIndicatorInsets.bottom = 0.0
-    }
-    
-    fileprivate func associatedErrorLabelOf(_ textField: OmiseTextField) -> UILabel? {
-        switch textField {
-        case fullNameTextField:
-            return fullNameErrorLabel
-        case emailTextField:
-            return emailErrorLabel
-        case phoneNumberTextField:
-            return phoneNumberErrorLabel
-        default:
-            return nil
-        }
-    }
-    
-    private func validateField(_ textField: OmiseTextField) {
-        guard let errorLabel = associatedErrorLabelOf(textField) else {
-            return
-        }
+    func validateField(_ textField: OmiseTextField) {
+        guard let errorLabel = associatedErrorLabel(of: textField) else { return }
         do {
             try textField.validate()
-            errorLabel.alpha = 0.0
+            errorLabel.alpha(0.0)
         } catch {
             switch (error, textField) {
             case (OmiseTextFieldValidationError.emptyText, _):
-                errorLabel.text = "-" // We need to set the error label some string in order to have it retains its height
-                
+                errorLabel.text("-")
             case (OmiseTextFieldValidationError.invalidData, fullNameTextField):
-                errorLabel.text = NSLocalizedString(
-                    "econtext-info-form.full-name-field.invalid-data.error.text",
-                    tableName: "Error",
-                    bundle: .omiseSDK,
-                    value: "Customer name is invalid",
-                    comment: "An error text in the E-Context information input displayed when the customer name is invalid"
-                )
+                errorLabel.text(viewModel.output.nameError)
             case (OmiseTextFieldValidationError.invalidData, emailTextField):
-                errorLabel.text = NSLocalizedString(
-                    "econtext-info-form.email-name-field.invalid-data.error.text",
-                    tableName: "Error",
-                    bundle: .omiseSDK,
-                    value: "Email is invalid",
-                    comment: "An error text in the E-Context information input displayed when the email is invalid"
-                )
+                errorLabel.text(viewModel.output.emailError)
             case (OmiseTextFieldValidationError.invalidData, phoneNumberTextField):
-                errorLabel.text = NSLocalizedString(
-                    "econtext-info-form.phone-number-field.invalid-data.error.text",
-                    tableName: "Error",
-                    bundle: .omiseSDK,
-                    value: "Phone number is invalid",
-                    comment: "An error text in the E-Context information input displayed when the phone number is invalid"
-                )
-                
-            case (_, fullNameTextField):
-                errorLabel.text = error.localizedDescription
-            case (_, emailTextField):
-                errorLabel.text = error.localizedDescription
-            case (_, phoneNumberTextField):
-                errorLabel.text = error.localizedDescription
+                errorLabel.text(viewModel.output.phoneeError)
             default:
-                errorLabel.text = "-"
+                errorLabel.text(error.localizedDescription)
             }
-            errorLabel.alpha = errorLabel.text != "-" ? 1.0 : 0.0
+            errorLabel.alpha(errorLabel.text != "-" ? 1.0 : 0.0)
         }
+    }
+    
+    func associatedErrorLabel(of textField: OmiseTextField) -> UILabel? {
+        switch textField {
+        case fullNameTextField: return fullNameErrorLabel
+        case emailTextField: return emailErrorLabel
+        case phoneNumberTextField: return phoneNumberErrorLabel
+        default: return nil
+        }
+    }
+}
+
+// MARK: - Helper Extensions
+private extension CGFloat {
+    static let padding: CGFloat = 20.0
+    static let spacing: CGFloat = 16.0
+    static let minSpacing: CGFloat = 8.0
+}
+
+private extension OmiseTextField {
+    func configure() {
+        self.cornerRadius = 4
+        self.borderWidth = 1
+        self.borderColor = UIColor.lightGray.withAlphaComponent(0.5)
+        self.textColor = .omisePrimary
+        self.font = .preferredFont(forTextStyle: .body)
+        self.adjustsFontForContentSizeCategory = true
+        self.translatesAutoresizingMaskIntoConstraints(false)
+    }
+}
+
+private extension UILabel {
+    func configure() {
+        self.textColor(.omisePrimary)
+            .font(.preferredFont(forTextStyle: .subheadline))
+            .numberOfLines(1)
+            .enableDynamicType()
+            .translatesAutoresizingMaskIntoConstraints(false)
+    }
+    
+    func configureErrorLabel() {
+        self.textColor(.systemRed)
+            .font(.preferredFont(forTextStyle: .caption2))
+            .numberOfLines(0)
+            .alpha( 0.0)
+            .enableDynamicType()
+            .translatesAutoresizingMaskIntoConstraints(false)
     }
 }

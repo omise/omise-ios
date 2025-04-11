@@ -91,4 +91,13 @@ extension UIView {
         }
         return self
     }
+    
+    @discardableResult
+    func constrainWidth(equalTo otherView: UIView, constant: CGFloat) -> Self {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            self.widthAnchor.constraint(equalTo: otherView.widthAnchor, constant: constant)
+        ])
+        return self
+    }
 }
