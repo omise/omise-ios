@@ -37,4 +37,15 @@ extension UILabel {
         return self
     }
 
+    @discardableResult
+    func alpha(_ alpha: CGFloat) -> Self {
+        self.alpha = alpha
+        return self
+    }
+    
+    @discardableResult
+    func enableDynamicType() -> Self {
+        self.adjustsFontForContentSizeCategory = true
+        return self
+    }
 }
