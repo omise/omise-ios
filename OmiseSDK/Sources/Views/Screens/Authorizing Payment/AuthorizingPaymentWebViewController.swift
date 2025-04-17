@@ -33,7 +33,7 @@ class AuthorizingPaymentWebViewController: UIViewController {
     /// Example: if the return URL is `https://www.example.com/products/12345` the expected return URL should have a URLComponents with scheme of `https`, host of `www.example.com` and the path of `/products/`
     var expectedReturnURLStrings: [URLComponents] = []
     
-    var completion: ParamClosure<CompletionState>?
+    var completion: ParamClosure<CompletionState> = nil
 
     let webView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration())
     let okButtonTitle = NSLocalizedString("OK", comment: "OK button for JavaScript panel")

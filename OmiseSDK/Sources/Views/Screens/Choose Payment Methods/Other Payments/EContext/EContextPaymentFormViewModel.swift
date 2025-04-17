@@ -6,7 +6,7 @@ class EContextPaymentFormViewModel: EContextPaymentFormViewModelProtocol {
     
     weak var delegate: SelectSourcePaymentDelegate?
     
-    private var loadingHandler: Handler<Bool> = nil
+    private var loadingClosure: ParamClosure<Bool> = nil
     
     init() { }
 }
@@ -16,15 +16,15 @@ extension EContextPaymentFormViewModel: EContextPaymentFormViewModelInput {
         let eContextInformation = Source.Payment.EContext(name: name, email: email, phoneNumber: phone)
         let payment = Source.Payment.eContext(eContextInformation)
         
-        loadingHandler?(true)
+        loadingClosure?(true)
         delegate?.didSelectSourcePayment(payment) { [weak self] in
             guard let self = self else { return }
-            self.loadingHandler?(false)
+            self.loadingClosure?(false)
         }
     }
     
-    func set(loadingHandler: Handler<Bool>) {
-        self.loadingHandler = loadingHandler
+    func set(loadingClosure: ParamClosure<Bool>) {
+        self.loadingClosure = loadingClosure
     }
 }
 

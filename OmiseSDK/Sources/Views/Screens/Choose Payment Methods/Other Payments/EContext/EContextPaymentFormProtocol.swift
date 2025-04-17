@@ -7,7 +7,7 @@ protocol EContextPaymentFormViewModelProtocol {
 
 protocol EContextPaymentFormViewModelInput {
     func startPayment(name: String, email: String, phone: String)
-    func set(loadingHandler: Handler<Bool>)
+    func set(loadingClosure: ParamClosure<Bool>)
 }
 
 protocol EContextPaymentFormViewModelOutput {

@@ -1,9 +1,9 @@
 import UIKit
 
 class OmiseFormToolbar: UIToolbar {
-    let onPrevious: VoidHandler
-    let onNext: VoidHandler
-    let onDone: VoidHandler
+    let onPrevious: VoidClosure
+    let onNext: VoidClosure
+    let onDone: VoidClosure
     
     private lazy var previousButton: UIBarButtonItem = {
         UIBarButtonItem(
@@ -34,9 +34,9 @@ class OmiseFormToolbar: UIToolbar {
     
     init(
         frame: CGRect = .zero,
-        onPrevious: VoidHandler,
-        onNext: VoidHandler,
-        onDone: VoidHandler
+        onPrevious: VoidClosure,
+        onNext: VoidClosure,
+        onDone: VoidClosure
     ) {
         self.onPrevious = onPrevious
         self.onNext = onNext
