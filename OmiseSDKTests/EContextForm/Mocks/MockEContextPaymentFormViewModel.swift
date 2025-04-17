@@ -26,5 +26,5 @@ class MockEContextPaymentFormViewModel: EContextPaymentFormViewModelProtocol,
     
     var nameError: String { "Name error" }
     var emailError: String { "Email error" }
-    var phoneeError: String { "Phone error" }
+    var phoneError: String { "Phone error" }
 }

@@ -45,7 +45,7 @@ extension EContextPaymentFormViewModel: EContextPaymentFormViewModelOutput {
                           comment: "Invalid email")
     }
     
-    var phoneeError: String {
+    var phoneError: String {
         NSLocalizedString("econtext-info-form.phone-number-field.invalid-data.error.text",
                           tableName: "Error",
                           bundle: .omiseSDK,

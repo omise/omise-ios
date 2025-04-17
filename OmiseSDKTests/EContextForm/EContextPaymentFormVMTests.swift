@@ -44,6 +44,6 @@ final class EContextPaymentFormViewModelTests: XCTestCase {
     func testOutputErrorMessagesMatchFallbackValues() {
         XCTAssertEqual(sut.output.nameError, "Customer name is invalid")
         XCTAssertEqual(sut.output.emailError, "Email is invalid")
-        XCTAssertEqual(sut.output.phoneeError, "Phone number is invalid")
+        XCTAssertEqual(sut.output.phoneError, "Phone number is invalid")
     }
 }

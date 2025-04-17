@@ -13,5 +13,5 @@ protocol EContextPaymentFormViewModelInput {
 protocol EContextPaymentFormViewModelOutput {
     var nameError: String { get }
     var emailError: String { get }
-    var phoneeError: String { get }
+    var phoneError: String { get }
 }

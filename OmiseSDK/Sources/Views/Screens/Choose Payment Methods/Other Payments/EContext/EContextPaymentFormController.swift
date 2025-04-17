@@ -202,7 +202,7 @@ class EContextPaymentFormController: BaseFormViewController {
             case (OmiseTextFieldValidationError.invalidData, emailTextField):
                 errorLabel.text(viewModel.output.emailError)
             case (OmiseTextFieldValidationError.invalidData, phoneNumberTextField):
-                errorLabel.text(viewModel.output.phoneeError)
+                errorLabel.text(viewModel.output.phoneError)
             default:
                 errorLabel.text(error.localizedDescription)
             }
