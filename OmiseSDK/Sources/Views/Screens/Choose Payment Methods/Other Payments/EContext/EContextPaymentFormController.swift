@@ -27,21 +27,24 @@ class EContextPaymentFormController: BaseFormViewController {
     private let fullNameTextField: OmiseTextField = {
         let tf = OmiseTextField()
         tf.validator = try? NSRegularExpression(pattern: "\\A[\\w\\s]{1,10}\\s?\\z", options: [])
-        tf.configure()
+        tf.setAccessibilityID(id: "EContextForm.nameTextField")
+            .configure()
         return tf
     }()
     
     private let emailTextField: OmiseTextField = {
         let tf = OmiseTextField()
         tf.validator = try? NSRegularExpression(pattern: "\\A[\\w\\-\\.]+@[\\w\\-\\.]+\\s?\\z", options: [])
-        tf.configure()
+        tf.setAccessibilityID(id: "EContextForm.emailTextField")
+            .configure()
         return tf
     }()
     
     private let phoneNumberTextField: OmiseTextField = {
         let tf = OmiseTextField()
         tf.validator = try? NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
-        tf.configure()
+        tf.setAccessibilityID(id: "EContextForm.phoneTextField")
+            .configure()
         return tf
     }()
     
@@ -49,6 +52,7 @@ class EContextPaymentFormController: BaseFormViewController {
     private let fullNameErrorLabel: UILabel = {
         let label = UILabel()
         label.text("-")
+            .setAccessibilityID(id: "EContextForm.nameError")
             .configureErrorLabel()
         return label
     }()
@@ -56,6 +60,7 @@ class EContextPaymentFormController: BaseFormViewController {
     private let emailErrorLabel: UILabel = {
         let label = UILabel()
         label.text("-")
+            .setAccessibilityID(id: "EContextForm.emailError")
             .configureErrorLabel()
         return label
     }()
@@ -63,6 +68,7 @@ class EContextPaymentFormController: BaseFormViewController {
     private let phoneNumberErrorLabel: UILabel = {
         let label = UILabel()
         label.text("-")
+            .setAccessibilityID(id: "EContextForm.phoneError")
             .configureErrorLabel()
         return label
     }()
@@ -76,7 +82,8 @@ class EContextPaymentFormController: BaseFormViewController {
         button.cornerRadius = 4
         button.isEnabled = false
         button.addTarget(self, action: #selector(submitEContextForm(_:)), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints(false)
+        button.setAccessibilityID(id: "EContextForm.submitButton")
+            .translatesAutoresizingMaskIntoConstraints(false)
         return button
     }()
     
@@ -85,6 +92,7 @@ class EContextPaymentFormController: BaseFormViewController {
         indicator.color = .gray
         indicator.contentMode = .scaleAspectFill
         indicator.translatesAutoresizingMaskIntoConstraints(false)
+            .setAccessibilityID(id: "EContextForm.requestingIndicator")
         return indicator
     }()
     
@@ -102,7 +110,7 @@ class EContextPaymentFormController: BaseFormViewController {
     // MARK: - Initialization
     init(viewModel: EContextPaymentFormViewModelProtocol) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init(nibName: nil, bundle: .omiseSDK)
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -173,11 +181,33 @@ class EContextPaymentFormController: BaseFormViewController {
     }
     
     // MARK: - Form Submission
-    @objc private func submitEContextForm(_ sender: UIButton) {
+    @objc func submitEContextForm(_ sender: UIButton) {
         guard let fullname = fullNameTextField.text?.trimmingCharacters(in: .whitespaces),
               let email = emailTextField.text?.trimmingCharacters(in: .whitespaces),
               let phoneNumber = phoneNumberTextField.text?.trimmingCharacters(in: .whitespaces) else { return }
         viewModel.input.startPayment(name: fullname, email: email, phone: phoneNumber)
+    }
+    
+    func validateField(_ textField: OmiseTextField) {
+        guard let errorLabel = associatedErrorLabel(of: textField) else { return }
+        do {
+            try textField.validate()
+            errorLabel.alpha(0.0)
+        } catch {
+            switch (error, textField) {
+            case (OmiseTextFieldValidationError.emptyText, _):
+                errorLabel.text("-")
+            case (OmiseTextFieldValidationError.invalidData, fullNameTextField):
+                errorLabel.text(viewModel.output.nameError)
+            case (OmiseTextFieldValidationError.invalidData, emailTextField):
+                errorLabel.text(viewModel.output.emailError)
+            case (OmiseTextFieldValidationError.invalidData, phoneNumberTextField):
+                errorLabel.text(viewModel.output.phoneeError)
+            default:
+                errorLabel.text(error.localizedDescription)
+            }
+            errorLabel.alpha(errorLabel.text != "-" ? 1.0 : 0.0)
+        }
     }
 }
 
@@ -209,28 +239,6 @@ private extension EContextPaymentFormController {
             self.validateField(textField)
         }
         textField.borderColor = .omiseSecondary
-    }
-    
-    func validateField(_ textField: OmiseTextField) {
-        guard let errorLabel = associatedErrorLabel(of: textField) else { return }
-        do {
-            try textField.validate()
-            errorLabel.alpha(0.0)
-        } catch {
-            switch (error, textField) {
-            case (OmiseTextFieldValidationError.emptyText, _):
-                errorLabel.text("-")
-            case (OmiseTextFieldValidationError.invalidData, fullNameTextField):
-                errorLabel.text(viewModel.output.nameError)
-            case (OmiseTextFieldValidationError.invalidData, emailTextField):
-                errorLabel.text(viewModel.output.emailError)
-            case (OmiseTextFieldValidationError.invalidData, phoneNumberTextField):
-                errorLabel.text(viewModel.output.phoneeError)
-            default:
-                errorLabel.text(error.localizedDescription)
-            }
-            errorLabel.alpha(errorLabel.text != "-" ? 1.0 : 0.0)
-        }
     }
     
     func associatedErrorLabel(of textField: OmiseTextField) -> UILabel? {
