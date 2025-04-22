@@ -5,7 +5,7 @@ class OmiseFormToolbar: UIToolbar {
     let onNext: VoidClosure
     let onDone: VoidClosure
     
-    private lazy var previousButton: UIBarButtonItem = {
+    private(set) lazy var previousButton: UIBarButtonItem = {
         UIBarButtonItem(
             image: UIImage(omise: "Back"),
             style: .plain,
@@ -14,7 +14,7 @@ class OmiseFormToolbar: UIToolbar {
         )
     }()
     
-    private lazy var nextButton: UIBarButtonItem = {
+    private(set) lazy var nextButton: UIBarButtonItem = {
         UIBarButtonItem(
             image: UIImage(omise: "Next Field"),
             style: .plain,
