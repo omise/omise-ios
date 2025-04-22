@@ -65,15 +65,15 @@ final class EContextPaymentFormControllerTests: XCTestCase {
             return
         }
         // Ensure loadingHandler was set
-        XCTAssertNotNil(mockViewModel.loadingHandler)
+        XCTAssertNotNil(mockViewModel.loadingClosure)
         sut.submitEContextForm(submitButton)
         
-        mockViewModel.loadingHandler?(true)
+        mockViewModel.loadingClosure?(true)
         XCTAssertTrue(indicator.isAnimating)
         XCTAssertFalse(sut.view.isUserInteractionEnabled)
         XCTAssertFalse(submitButton.isEnabled)
         
-        mockViewModel.loadingHandler?(false)
+        mockViewModel.loadingClosure?(false)
         XCTAssertFalse(indicator.isAnimating)
         XCTAssertTrue(sut.view.isUserInteractionEnabled)
         XCTAssertTrue(submitButton.isEnabled)

@@ -2,12 +2,6 @@ import XCTest
 import UIKit
 @testable import OmiseSDK
 
-extension Array {
-    func at(_ index: Int) -> Element? {
-        return indices.contains(index) ? self[index] : nil
-    }
-}
-
 class SelectSourceTypePaymentViewModelTests: XCTestCase {
     var sut: SelectSourceTypePaymentViewModel!
     var mockDelegate: MockSelectSourceTypeDelegate!

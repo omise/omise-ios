@@ -11,7 +11,7 @@ class MockEContextPaymentFormViewModel: EContextPaymentFormViewModelProtocol,
     private(set) var capturedEmail: String?
     private(set) var capturedPhone: String?
     
-    private(set) var loadingHandler: Handler<Bool> = nil
+    private(set) var loadingClosure: ParamClosure<Bool> = nil
     
     func startPayment(name: String, email: String, phone: String) {
         startPaymentCalled = true
@@ -20,8 +20,8 @@ class MockEContextPaymentFormViewModel: EContextPaymentFormViewModelProtocol,
         capturedPhone = phone
     }
     
-    func set(loadingHandler: Handler<Bool>) {
-        self.loadingHandler = loadingHandler
+    func set(loadingClosure: ParamClosure<Bool>) {
+        self.loadingClosure = loadingClosure
     }
     
     var nameError: String { "Name error" }
