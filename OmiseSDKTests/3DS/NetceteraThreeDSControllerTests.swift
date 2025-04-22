@@ -37,4 +37,20 @@ class NetceteraThreeDSControllerTests: XCTestCase {
             XCTAssertEqual(params.getThreeDSRequestorAppURL(), result)
         }
     }
+    
+    func test_processAuthenticationResponse() {
+        let onComplete: ((Result<Void, Error>) -> Void) = { _ in /* Non-optional default empty implementation */ }
+        let success = AuthResponse(serverStatus: "success", ares: nil)
+        XCTAssertTrue(NetceteraThreeDSController.processAuthenticationResponse(success, onComplete: onComplete))
+        
+        let failed = AuthResponse(serverStatus: "failed", ares: nil)
+        XCTAssertTrue(NetceteraThreeDSController.processAuthenticationResponse(failed, onComplete: onComplete))
+        
+        let unknown = AuthResponse(serverStatus: "something_unknow", ares: nil)
+        XCTAssertTrue(NetceteraThreeDSController.processAuthenticationResponse(unknown, onComplete: onComplete))
+        
+        let challenge = AuthResponse(serverStatus: "challenge", ares: nil)
+        XCTAssertFalse(NetceteraThreeDSController.processAuthenticationResponse(challenge, onComplete: onComplete))
+    }
+    
 }
