@@ -39,6 +39,7 @@
 		2FC27E1E2D6DDA0F001E5857 /* MockApplePayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC27E1D2D6DDA0F001E5857 /* MockApplePayViewModel.swift */; };
 		2FC4CA7A2D64ED880005EC4A /* ApplePayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4CA792D64ED880005EC4A /* ApplePayViewController.swift */; };
 		2FC4CA7C2D64ED960005EC4A /* ApplePayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4CA7B2D64ED910005EC4A /* ApplePayViewModel.swift */; };
+		2FF94B422D946711008126D3 /* TrueMoneyPaymentFormControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8FC5E92D94658500028D2A /* TrueMoneyPaymentFormControllerTests.swift */; };
 		2FE11AFF2DB0C5BF00EBBCC2 /* UIExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE11AFE2DB0C5B800EBBCC2 /* UIExtensionsTests.swift */; };
 		2FE11B202DB0F07300EBBCC2 /* ViewExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE11B1F2DB0F06D00EBBCC2 /* ViewExtensionsTests.swift */; };
 		2FE11B222DB0F21600EBBCC2 /* ViewControllerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE11B212DB0F20F00EBBCC2 /* ViewControllerExtensionsTests.swift */; };
@@ -1901,6 +1902,7 @@
 				7509D4E42A1C89F10050AB38 /* AtomeFormViewModelMockup.swift in Sources */,
 				2F5D98F52D6EB41C00B5ECB4 /* MockClientProtocol.swift in Sources */,
 				750708F42B7A765500A48DD0 /* OmiseSDKTests.swift in Sources */,
+				2F5A70812D6C73DA00F5A61A /* MockApplePayViewModelDelegate.swift in Sources */,
 				2F5985F72DB09F6500E81646 /* MockEContextPaymentFormViewModel.swift in Sources */,
 				2F5A70812D6C73DA00F5A61A /* MockApplePayViewModelDelegate.swift in Sources */,
 				2FE11B202DB0F07300EBBCC2 /* ViewExtensionsTests.swift in Sources */,
@@ -1916,6 +1918,7 @@
 				F615CBF8261565D600E1A2D9 /* CardExpiryDatePickerTests.swift in Sources */,
 				2FE11B262DB0FFA300EBBCC2 /* CountryListControllerTests.swift in Sources */,
 				758A4E9F2BE3DFDF005E7B5A /* URL+PathComponentsTests.swift in Sources */,
+				2FF94B422D946711008126D3 /* TrueMoneyPaymentFormControllerTests.swift in Sources */,
 				2FE11AFF2DB0C5BF00EBBCC2 /* UIExtensionsTests.swift in Sources */,
 				2FF94B422D946711008126D3 /* TrueMoneyPaymentFormControllerTests.swift in Sources */,
 				4B7F2C502DA7D0AB00A23CEF /* SelectInstallmentTermsViewModelTests.swift in Sources */,

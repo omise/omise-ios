@@ -3,6 +3,7 @@ import UIKit
 class BaseFormViewController: UIViewController {
     lazy var omiseFormToolbar: OmiseFormToolbar = {
         OmiseFormToolbar(
+            frame: .init(x: 0, y: 0, width: 375, height: 0),
             onPrevious: gotoPreviousField,
             onNext: gotoNextField,
             onDone: doneEditing
