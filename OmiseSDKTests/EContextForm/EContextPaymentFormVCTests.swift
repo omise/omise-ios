@@ -115,4 +115,15 @@ final class EContextPaymentFormControllerTests: XCTestCase {
         XCTAssertEqual(errorLabel.text, "Phone error")
         XCTAssertEqual(errorLabel.alpha, 1.0)
     }
+    
+    func test_textFieldEditingDidBegin() {
+        guard let nameField = sut.view.view(withAccessibilityIdentifier: "EContextForm.nameTextField") as? OmiseTextField else {
+            XCTFail("Name field or error label not found")
+            return
+        }
+        nameField.text = "#"
+        sut.updateNavigationButtons(for: nameField)
+        XCTAssertFalse(sut.omiseFormToolbar.previousButton.isEnabled)
+        XCTAssertTrue(sut.omiseFormToolbar.nextButton.isEnabled)
+    }
 }
