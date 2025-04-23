@@ -107,4 +107,10 @@ class ChoosePaymentCoordinatorTests: XCTestCase {
         XCTAssertNil(mockChoosePaymentMethodDelegate.token)
         XCTAssertNil(mockChoosePaymentMethodDelegate.source)
     }
+    
+    func test_createEContextController() {
+        let viewController = sut.createEContextController(title: "Easy Pay")
+        XCTAssertNotNil(viewController)
+        XCTAssertEqual(viewController.title, "Easy Pay")
+    }
 }
