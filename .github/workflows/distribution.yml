@@ -1,0 +1,82 @@
+name: iOS Distribution
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, develop, feature/auto-example-app-release]
+    tags:     ['v*']
+    
+jobs:
+  build-and-distribute:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode 16.1
+        uses: maxim-lobanov/setup-xcode@v1
+        with: { xcode-version: '16.1' }
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+          working-directory: '.'
+
+      - name: Install Gems
+        run: bundle install
+
+      - name: Detect build source
+        id: detect
+        run: |
+          source scripts/detect_source.sh \
+            | tee build_source.env
+
+      - name: Export BUILD_SOURCE
+        run: echo "BUILD_SOURCE=$(grep BUILD_SOURCE build_source.env | cut -d '=' -f2)" >> $GITHUB_ENV
+
+      - name: Install Signing Files
+        env:
+          DISTRIB_CERT_BASE64:   ${{ secrets.IOS_DISTRIBUTION_CERT_BASE64 }}
+          DISTRIB_CERT_PASSWORD: ${{ secrets.IOS_DISTRIBUTION_CERT_PASSWORD }}
+          PROFILE_BASE64:        ${{ secrets.IOS_PROVISIONING_PROFILE_BASE64 }}
+          KEYCHAIN_PASSWORD:     ${{ secrets.MAC_KEYCHAIN_PASSWORD }}
+        run: scripts/install_signing.sh
+
+      - name: Update ApplePay Merchant ID
+        env:
+          MERCHANT_ID: ${{ secrets.APPLE_PAY_MERCHANT_ID }}
+        run: scripts/update_apple_pay_merchant.sh
+
+      - name: Update Host
+        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+        env:
+         HOST: ${{ secrets.DEV_HOST }}
+        run: bash scripts/update_api.sh
+        
+      - name: Build iPA
+        run: bundle exec fastlane ios adhoc
+        env:
+          KEYCHAIN_NAME:      build.keychain
+          KEYCHAIN_PASSWORD:  ${{ secrets.MAC_KEYCHAIN_PASSWORD }}
+          IOS_BUNDLE_ID:      ${{ secrets.IOS_BUNDLE_ID }}
+          IOS_PROFILE_NAME:   ${{ secrets.IOS_PROFILE_NAME }}
+          APPLE_TEAM_ID:      ${{ secrets.APPLE_TEAM_ID }}
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Configure Firebase Credentials
+        env:
+          FIREBASE_SA_JSON_B64: ${{ secrets.FIREBASE_SA_JSON_B64 }}
+        run: |
+          echo "$FIREBASE_SA_JSON_B64" | base64 --decode > $HOME/firebase-key.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$HOME/firebase-key.json" >> $GITHUB_ENV
+
+      - name: Distribute to Firebase
+        env:
+          FIREBASE_APP_ID:             ${{ secrets.FIREBASE_APP_ID }}
+          FIREBASE_DISTRIBUTION_GROUP: ${{ secrets.FIREBASE_DISTRIBUTION_GROUP }}
+          BUILD_SOURCE:                ${{ env.BUILD_SOURCE }}
+        run: scripts/distribute.sh

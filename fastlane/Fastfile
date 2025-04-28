@@ -1,0 +1,24 @@
+default_platform(:ios)
+
+platform :ios do
+  lane :adhoc do
+    timestamp = Time.now.utc.strftime("%Y%m%d%H%M%S")
+    increment_build_number(build_number: timestamp)
+
+    build_app(
+      scheme:           'ExampleApp',
+      clean:            true,
+      export_method:    'ad-hoc',
+      output_directory: 'build',
+      output_name:      "ExampleApp.ipa",
+      export_options: {
+        signingStyle: 'manual',
+        teamID:       ENV['APPLE_TEAM_ID'],
+        provisioningProfiles: {
+          ENV['IOS_BUNDLE_ID'] => ENV['IOS_PROFILE_NAME']
+        },
+        signingCertificate: 'Apple Distribution'
+      }
+    )
+  end
+end
