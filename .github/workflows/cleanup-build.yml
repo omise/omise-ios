@@ -1,0 +1,48 @@
+name: Cleanup App Distribution
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * 1'   # every Monday at 02:00 UTC
+
+jobs:
+  prune-old-builds:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure GCP credentials
+        env:
+          FIREBASE_SA_JSON_B64: ${{ secrets.FIREBASE_SA_JSON_B64 }}
+        run: |
+          echo "$FIREBASE_SA_JSON_B64" \
+            | base64 --decode > "$HOME/firebase-key.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$HOME/firebase-key.json" >> $GITHUB_ENV
+
+      - name: Install jq & curl
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq jq curl
+          
+      - name: Set up gcloud CLI
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          version: 'latest'
+
+      - name: Authenticate gcloud CLI
+        run: |
+          gcloud auth activate-service-account \
+            --key-file="$GOOGLE_APPLICATION_CREDENTIALS"
+          PROJECT_ID=$(jq -r .project_id "$GOOGLE_APPLICATION_CREDENTIALS")
+          gcloud config set project "$PROJECT_ID"
+
+      - name: Prune releases older than 60 days
+        env:
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+        run: bash scripts/cleanup_builds.sh
+    
+      - name: Cleanup Temporary Key
+        run: |
+          rm -f $HOME/firebase-key.json
+          echo "🗑 Removed key"
