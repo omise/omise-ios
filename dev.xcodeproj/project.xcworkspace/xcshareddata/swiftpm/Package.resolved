@@ -3,11 +3,11 @@
     "pins": [
       {
         "package": "OmiseFlutterSPM",
-        "repositoryURL": "https://github.com/tyler-techcombine/flutter-ios-framework-spm.git",
+        "repositoryURL": "https://github.com/omise/omise-flutter-wrapper-ios.git",
         "state": {
-          "branch": "release",
-          "revision": "5f29a7777a8419f36655d7efee6680dd42813044",
-          "version": null
+          "branch": null,
+          "revision": "035f4d98ee04c2a030e53b773446be5b53ce454b",
+          "version": "0.2.8"
         }
       },
       {
