@@ -9,6 +9,7 @@ class BaseViewController: UIViewController {
     var paymentCurrencyCode: String = ""
     var usesCapabilityDataForPaymentMethods = false
     var allowedPaymentMethods: [SourceType] = []
+    private(set) var pkeyFromSettings: String = ""
 
     required init?(coder: NSCoder) {
         self.usesCapabilityDataForPaymentMethods = true
@@ -162,5 +163,6 @@ class BaseViewController: UIViewController {
         self.paymentCurrencyCode = settingViewController.currentCurrencyCode
         self.usesCapabilityDataForPaymentMethods = settingViewController.usesCapabilityDataForPaymentMethods
         self.allowedPaymentMethods = Array(settingViewController.allowedPaymentMethods)
+        self.pkeyFromSettings = settingViewController.pkey
     }
 }
