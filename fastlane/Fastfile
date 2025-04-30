@@ -20,6 +20,12 @@ platform :ios do
       teamid:     team_id
     )
 
+    disable_automatic_code_signing(
+      path: "dev.xcodeproj",
+      use_automatic_signing: false,
+      targets: ["ExampleApp"]
+    )
+
     update_project_provisioning(
       xcodeproj:                 "dev.xcodeproj",
       target_filter:             "ExampleApp",
