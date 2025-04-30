@@ -41,3 +41,8 @@ jobs:
         env:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
         run: bash scripts/cleanup_builds.sh
+    
+      - name: Cleanup Temporary Key
+        run: |
+          rm -f $HOME/firebase-key.json
+          echo "🗑 Removed key"
