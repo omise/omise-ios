@@ -3,7 +3,7 @@ name: iOS Distribution
 on:
   workflow_dispatch:
   push:
-    branches: [main, develop, feature/auto-example-app-release]
+    branches: [main, develop]
     tags:     ['v*']
     
 jobs:
