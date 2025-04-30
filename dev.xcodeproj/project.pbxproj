@@ -18,8 +18,8 @@
 		2F0F80B42D630D2E00DAAAC5 /* FlutterChannelHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F80B32D630D2C00DAAAC5 /* FlutterChannelHandlerTests.swift */; };
 		2F0F80B62D6324E400DAAAC5 /* MockFlutterMethodChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F80B52D6324E000DAAAC5 /* MockFlutterMethodChannel.swift */; };
 		2F0F80B82D63259200DAAAC5 /* FlutterMethodChannelWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F80B72D63259200DAAAC5 /* FlutterMethodChannelWrapper.swift */; };
-		2F1DB2992D9BE867006424F4 /* OmiseFlutterSPM in Frameworks */ = {isa = PBXBuildFile; productRef = 2F27105E2D9BD343007093C6 /* OmiseFlutterSPM */; };
-		2F1DB29B2D9BE8E0006424F4 /* OmiseFlutterSPM in Frameworks */ = {isa = PBXBuildFile; productRef = 2F1DB29A2D9BE8E0006424F4 /* OmiseFlutterSPM */; };
+		2F3DA6AF2DC2270E001CAC9E /* OmiseFlutterSPM in Frameworks */ = {isa = PBXBuildFile; productRef = 2F3DA6AE2DC2270E001CAC9E /* OmiseFlutterSPM */; };
+		2F3DA6B12DC22720001CAC9E /* OmiseFlutterSPM in Frameworks */ = {isa = PBXBuildFile; productRef = 2F3DA6B02DC22720001CAC9E /* OmiseFlutterSPM */; };
 		2F5A70812D6C73DA00F5A61A /* MockApplePayViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5A70802D6C73D400F5A61A /* MockApplePayViewModelDelegate.swift */; };
 		2F5D47522D895BA100C776CF /* CreditCardPaymentControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D47512D895B9F00C776CF /* CreditCardPaymentControllerTests.swift */; };
 		2F5D98F32D6EB29000B5ECB4 /* ChoosePaymentCooridnatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D98F22D6EB28800B5ECB4 /* ChoosePaymentCooridnatorTest.swift */; };
@@ -564,7 +564,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F1DB2992D9BE867006424F4 /* OmiseFlutterSPM in Frameworks */,
+				2F3DA6AF2DC2270E001CAC9E /* OmiseFlutterSPM in Frameworks */,
 				758A4E842BE38AC3005E7B5A /* ThreeDS_SDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -575,7 +575,7 @@
 			files = (
 				75D13E0F2B8678530073A831 /* OmiseSwiftUIKit in Frameworks */,
 				2F9F58D82D6E28D600240952 /* ThreeDS_SDK in Frameworks */,
-				2F1DB29B2D9BE8E0006424F4 /* OmiseFlutterSPM in Frameworks */,
+				2F3DA6B12DC22720001CAC9E /* OmiseFlutterSPM in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1446,7 +1446,7 @@
 			name = OmiseSDK;
 			packageProductDependencies = (
 				758A4E832BE38AC3005E7B5A /* ThreeDS_SDK */,
-				2F27105E2D9BD343007093C6 /* OmiseFlutterSPM */,
+				2F3DA6AE2DC2270E001CAC9E /* OmiseFlutterSPM */,
 			);
 			productName = OmiseSDK;
 			productReference = 225931181CE3210700841B86 /* OmiseSDK.framework */;
@@ -1471,7 +1471,7 @@
 			packageProductDependencies = (
 				75D13E0E2B8678530073A831 /* OmiseSwiftUIKit */,
 				2F9F58D72D6E28D600240952 /* ThreeDS_SDK */,
-				2F1DB29A2D9BE8E0006424F4 /* OmiseFlutterSPM */,
+				2F3DA6B02DC22720001CAC9E /* OmiseFlutterSPM */,
 			);
 			productName = ExampleApp;
 			productReference = 22D4809D1D0EB29C00544CE1 /* ExampleApp.app */;
@@ -1565,7 +1565,7 @@
 			mainGroup = 2259310E1CE3210700841B86;
 			packageReferences = (
 				758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */,
-				2F66C25D2D5DD98600AB5BF9 /* XCRemoteSwiftPackageReference "flutter-ios-framework-spm" */,
+				2F3DA6AD2DC2270E001CAC9E /* XCRemoteSwiftPackageReference "omise-flutter-wrapper-ios" */,
 			);
 			productRefGroup = 225931191CE3210700841B86 /* Products */;
 			projectDirPath = "";
@@ -2406,12 +2406,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2F66C25D2D5DD98600AB5BF9 /* XCRemoteSwiftPackageReference "flutter-ios-framework-spm" */ = {
+		2F3DA6AD2DC2270E001CAC9E /* XCRemoteSwiftPackageReference "omise-flutter-wrapper-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/tyler-techcombine/flutter-ios-framework-spm.git";
+			repositoryURL = "https://github.com/omise/omise-flutter-wrapper-ios.git";
 			requirement = {
-				branch = release;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.8;
 			};
 		};
 		758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */ = {
@@ -2425,14 +2425,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2F1DB29A2D9BE8E0006424F4 /* OmiseFlutterSPM */ = {
+		2F3DA6AE2DC2270E001CAC9E /* OmiseFlutterSPM */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2F66C25D2D5DD98600AB5BF9 /* XCRemoteSwiftPackageReference "flutter-ios-framework-spm" */;
+			package = 2F3DA6AD2DC2270E001CAC9E /* XCRemoteSwiftPackageReference "omise-flutter-wrapper-ios" */;
 			productName = OmiseFlutterSPM;
 		};
-		2F27105E2D9BD343007093C6 /* OmiseFlutterSPM */ = {
+		2F3DA6B02DC22720001CAC9E /* OmiseFlutterSPM */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2F66C25D2D5DD98600AB5BF9 /* XCRemoteSwiftPackageReference "flutter-ios-framework-spm" */;
+			package = 2F3DA6AD2DC2270E001CAC9E /* XCRemoteSwiftPackageReference "omise-flutter-wrapper-ios" */;
 			productName = OmiseFlutterSPM;
 		};
 		2F9F58D72D6E28D600240952 /* ThreeDS_SDK */ = {
