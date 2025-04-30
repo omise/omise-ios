@@ -95,3 +95,4 @@ jobs:
         run: |
           if security list-keychains | grep -q "build.keychain"; then
             security delete-keychain build.keychain || true
+          fi
