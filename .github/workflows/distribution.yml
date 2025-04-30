@@ -44,6 +44,15 @@ jobs:
           KEYCHAIN_PASSWORD:     ${{ secrets.MAC_KEYCHAIN_PASSWORD }}
         run: scripts/install_signing.sh
 
+      - name: Update Bundle Identifier
+        env:
+          OLD_BUNDLE_ID: "co.omise.ExampleApp"
+          NEW_BUNDLE_ID: ${{ secrets.IOS_BUNDLE_ID }}
+        run: |
+          sed -i '' -E \
+            "s|(PRODUCT_BUNDLE_IDENTIFIER = )${OLD_BUNDLE_ID};|\1${NEW_BUNDLE_ID};|" \
+            dev.xcodeproj/project.pbxproj
+            
       - name: Update ApplePay Merchant ID
         env:
           MERCHANT_ID: ${{ secrets.APPLE_PAY_MERCHANT_ID }}
@@ -80,3 +89,9 @@ jobs:
           FIREBASE_DISTRIBUTION_GROUP: ${{ secrets.FIREBASE_DISTRIBUTION_GROUP }}
           BUILD_SOURCE:                ${{ env.BUILD_SOURCE }}
         run: scripts/distribute.sh
+        
+      - name: Clean up Temporary Keychain
+        if: always()
+        run: |
+          if security list-keychains | grep -q "build.keychain"; then
+            security delete-keychain build.keychain || true

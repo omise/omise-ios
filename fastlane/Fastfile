@@ -1,23 +1,45 @@
-default_platform(:ios)
+default_platform :ios
 
 platform :ios do
   lane :adhoc do
-    timestamp = Time.now.utc.strftime("%Y%m%d%H%M%S")
-    increment_build_number(build_number: timestamp)
+    timestamp     = Time.now.utc.strftime("%Y%m%d%H%M%S")
+
+    bundle_id       = ENV.fetch("IOS_BUNDLE_ID")
+    profile_name    = ENV.fetch("IOS_PROFILE_NAME")
+    team_id         = ENV.fetch("APPLE_TEAM_ID")
+
+    set_info_plist_value(
+      path:  "ExampleApp/Info.plist",
+      key:   "CFBundleVersion",
+      value: timestamp
+    )
+
+    update_project_team(
+      path:  "dev.xcodeproj",
+      targets: ["ExampleApp"],
+      teamid:     team_id
+    )
+
+    update_project_provisioning(
+      xcodeproj:                 "dev.xcodeproj",
+      target_filter:             "ExampleApp",
+      build_configuration:       "Release",
+      profile:                   File.expand_path("~/Library/MobileDevice/Provisioning\ Profiles/distribution_profile.mobileprovision"),
+      code_signing_identity:     "Apple Distribution"
+    )
 
     build_app(
-      scheme:           'ExampleApp',
+      project:          "dev.xcodeproj",
+      scheme:           "ExampleApp",
       clean:            true,
-      export_method:    'ad-hoc',
-      output_directory: 'build',
+      export_method:    "ad-hoc",
+      output_directory: "build",
       output_name:      "ExampleApp.ipa",
+
       export_options: {
-        signingStyle: 'manual',
-        teamID:       ENV['APPLE_TEAM_ID'],
-        provisioningProfiles: {
-          ENV['IOS_BUNDLE_ID'] => ENV['IOS_PROFILE_NAME']
-        },
-        signingCertificate: 'Apple Distribution'
+        teamID:               team_id,
+        provisioningProfiles: { bundle_id => profile_name },
+        signingCertificate:   "Apple Distribution"
       }
     )
   end
