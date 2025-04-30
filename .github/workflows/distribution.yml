@@ -90,9 +90,15 @@ jobs:
           BUILD_SOURCE:                ${{ env.BUILD_SOURCE }}
         run: scripts/distribute.sh
         
-      - name: Clean up Temporary Keychain
+      - name: Cleanup Temporary Keys
         if: always()
         run: |
           if security list-keychains | grep -q "build.keychain"; then
             security delete-keychain build.keychain || true
           fi
+          rm -f $HOME/firebase-key.json
+          PROFILE_PATH="$HOME/Library/MobileDevice/Provisioning Profiles/distribution_profile.mobileprovision"
+          if [ -f "$PROFILE_PATH" ]; then
+            rm -f "$PROFILE_PATH"
+          fi
+          echo "🗑 Removed keys"
