@@ -3,73 +3,71 @@ import Foundation
 
 class EContextPaymentFormController: BaseFormViewController {
     // MARK: - UI Elements
-    private let fullNameLabel: UILabel = {
+    private lazy var fullNameLabel: UILabel = {
         let label = UILabel()
         label.text(localized("EContext.field.fullName"))
-            .configure()
+        configure(label)
         return label
     }()
     
-    private let emailLabel: UILabel = {
+    private lazy var emailLabel: UILabel = {
         let label = UILabel()
         label.text(localized("EContext.field.email"))
-            .configure()
+        configure(label)
         return label
     }()
     
-    private let phoneNumberLabel: UILabel = {
+    private lazy var phoneNumberLabel: UILabel = {
         let label = UILabel()
         label.text(localized("EContext.field.phone"))
-            .configure()
+        configure(label)
         return label
     }()
     
-    private let fullNameTextField: OmiseTextField = {
+    private lazy var fullNameTextField: OmiseTextField = {
         let tf = OmiseTextField()
         tf.validator = try? NSRegularExpression(pattern: "\\A[\\w\\s]{1,10}\\s?\\z", options: [])
         tf.setAccessibilityID(id: "EContextForm.nameTextField")
-            .configure()
+        configure(tf)
         return tf
     }()
     
-    private let emailTextField: OmiseTextField = {
+    private lazy var emailTextField: OmiseTextField = {
         let tf = OmiseTextField()
         tf.validator = try? NSRegularExpression(pattern: "\\A[\\w\\-\\.]+@[\\w\\-\\.]+\\s?\\z", options: [])
         tf.setAccessibilityID(id: "EContextForm.emailTextField")
-            .configure()
+        configure(tf)
         return tf
     }()
     
-    private let phoneNumberTextField: OmiseTextField = {
+    private lazy var phoneNumberTextField: OmiseTextField = {
         let tf = OmiseTextField()
         tf.validator = try? NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
         tf.setAccessibilityID(id: "EContextForm.phoneTextField")
-            .configure()
+        tf.keyboardType = .phonePad
+        configure(tf)
         return tf
     }()
     
     // Error Labels
-    private let fullNameErrorLabel: UILabel = {
+    private lazy var fullNameErrorLabel: UILabel = {
         let label = UILabel()
-        label.text("-")
-            .setAccessibilityID(id: "EContextForm.nameError")
-            .configureErrorLabel()
+        label.text("-").setAccessibilityID(id: "EContextForm.nameError")
+        configureError(label)
         return label
     }()
     
-    private let emailErrorLabel: UILabel = {
+    private lazy var emailErrorLabel: UILabel = {
         let label = UILabel()
-        label.text("-")
-            .setAccessibilityID(id: "EContextForm.emailError")
-            .configureErrorLabel()
+        label.text("-").setAccessibilityID(id: "EContextForm.emailError")
+        configureError(label)
         return label
     }()
     
-    private let phoneNumberErrorLabel: UILabel = {
+    private lazy var phoneNumberErrorLabel: UILabel = {
         let label = UILabel()
-        label.text("-")
-            .setAccessibilityID(id: "EContextForm.phoneError")
-            .configureErrorLabel()
+        label.text("-").setAccessibilityID(id: "EContextForm.phoneError")
+        configureError(label)
         return label
     }()
     
@@ -87,20 +85,11 @@ class EContextPaymentFormController: BaseFormViewController {
         return button
     }()
     
-    private let requestingIndicatorView: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView()
-        indicator.color = .gray
-        indicator.contentMode = .scaleAspectFill
-        indicator.translatesAutoresizingMaskIntoConstraints(false)
-            .setAccessibilityID(id: "EContextForm.requestingIndicator")
-        return indicator
-    }()
-    
     private lazy var formStack: UIStackView = {
         let stack = UIStackView()
         stack.axis(.vertical)
             .alignment(.fill)
-            .spacing(.spacing)
+            .spacing(spacing)
             .translatesAutoresizingMaskIntoConstraints(false)
         return stack
     }()
@@ -118,13 +107,6 @@ class EContextPaymentFormController: BaseFormViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .background
-        
-        if #available(iOSApplicationExtension 11.0, *) {
-            navigationItem.largeTitleDisplayMode = .never
-        }
-        navigationItem.backBarButtonItem = .empty
-        
         // Add the content view (inherited from BaseFormViewController)
         view.addSubviewAndFit(contentView)
         
@@ -135,8 +117,8 @@ class EContextPaymentFormController: BaseFormViewController {
     
     // MARK: - Setup UI
     private func setupUI() {
-        contentView.addSubviewAndFit(formStack, vertical: .padding, horizontal: .padding)
-        formStack.constrainWidth(equalTo: contentView, constant: -(.padding * 2))
+        contentView.addSubviewAndFit(formStack, vertical: padding, horizontal: padding)
+        formStack.constrainWidth(equalTo: contentView, constant: -(padding * 2))
         
         // Add rows: Label, TextField, and Error label for each form element.
         formStack.addArrangedSubviews([
@@ -174,7 +156,7 @@ class EContextPaymentFormController: BaseFormViewController {
         let stackView = UIStackView()
         stackView.axis(.vertical)
             .alignment(.fill)
-            .spacing(.minSpacing)
+            .spacing(minSpacing)
             .translatesAutoresizingMaskIntoConstraints(false)
             .addArrangedSubviews(views)
         return stackView
@@ -248,43 +230,5 @@ private extension EContextPaymentFormController {
         case phoneNumberTextField: return phoneNumberErrorLabel
         default: return nil
         }
-    }
-}
-
-// MARK: - Helper Extensions
-private extension CGFloat {
-    static let padding: CGFloat = 20.0
-    static let spacing: CGFloat = 16.0
-    static let minSpacing: CGFloat = 8.0
-}
-
-private extension OmiseTextField {
-    func configure() {
-        self.cornerRadius = 4
-        self.borderWidth = 1
-        self.borderColor = UIColor.lightGray.withAlphaComponent(0.5)
-        self.textColor = .omisePrimary
-        self.font = .preferredFont(forTextStyle: .body)
-        self.adjustsFontForContentSizeCategory = true
-        self.translatesAutoresizingMaskIntoConstraints(false)
-    }
-}
-
-private extension UILabel {
-    func configure() {
-        self.textColor(.omisePrimary)
-            .font(.preferredFont(forTextStyle: .subheadline))
-            .numberOfLines(1)
-            .enableDynamicType()
-            .translatesAutoresizingMaskIntoConstraints(false)
-    }
-    
-    func configureErrorLabel() {
-        self.textColor(.systemRed)
-            .font(.preferredFont(forTextStyle: .caption2))
-            .numberOfLines(0)
-            .alpha( 0.0)
-            .enableDynamicType()
-            .translatesAutoresizingMaskIntoConstraints(false)
     }
 }

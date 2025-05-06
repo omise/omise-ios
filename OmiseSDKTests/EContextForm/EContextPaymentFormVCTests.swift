@@ -24,7 +24,7 @@ final class EContextPaymentFormControllerTests: XCTestCase {
             XCTFail("Submit button not found")
             return
         }
-        guard let indicator = sut.view.view(withAccessibilityIdentifier: "EContextForm.requestingIndicator")
+        guard let indicator = sut.view.view(withAccessibilityIdentifier: "BaseForm.requestingIndicator")
                 as? UIActivityIndicatorView else {
             XCTFail("Indicator not found")
             return
@@ -59,7 +59,7 @@ final class EContextPaymentFormControllerTests: XCTestCase {
             XCTFail("Submit button not found")
             return
         }
-        guard let indicator = sut.view.view(withAccessibilityIdentifier: "EContextForm.requestingIndicator")
+        guard let indicator = sut.view.view(withAccessibilityIdentifier: "BaseForm.requestingIndicator")
                 as? UIActivityIndicatorView else {
             XCTFail("Indicator not found")
             return

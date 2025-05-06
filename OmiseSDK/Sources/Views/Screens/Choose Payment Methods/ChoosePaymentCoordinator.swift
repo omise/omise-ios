@@ -202,8 +202,9 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
 
     /// Creates Installement screen and attach current flow object inside created controller to be deallocated together
     func createTrueMoneyWalletController() -> TrueMoneyPaymentFormController {
-        let viewController = TrueMoneyPaymentFormController(nibName: nil, bundle: .omiseSDK)
-        viewController.delegate = self
+        let vm = TrueMoneyPaymentFormViewModel()
+        vm.delegate = self
+        let viewController = TrueMoneyPaymentFormController(viewModel: vm)
         return viewController
     }
     
