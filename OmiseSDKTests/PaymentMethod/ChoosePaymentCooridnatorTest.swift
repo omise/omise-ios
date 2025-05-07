@@ -113,4 +113,16 @@ class ChoosePaymentCoordinatorTests: XCTestCase {
         XCTAssertNotNil(viewController)
         XCTAssertEqual(viewController.title, "Easy Pay")
     }
+    
+    func test_createTrueMoneyWalletController() throws {
+        let vc = sut.createTrueMoneyWalletController()
+        vc.loadViewIfNeeded()
+        XCTAssertNotNil(vc)
+        
+        let phoneField = try XCTUnwrap(
+            vc.view.view(withAccessibilityIdentifier: "TrueMoneyPaymentForm.phoneTextField") as? OmiseTextField
+        )
+        
+        XCTAssertEqual(phoneField.keyboardType, .phonePad)
+    }
 }

@@ -100,6 +100,16 @@ extension UIView {
         ])
         return self
     }
+    
+    @discardableResult
+    func setToCenter(of anotherView: UIView) -> Self {
+        translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            self.centerXAnchor.constraint(equalTo: anotherView.centerXAnchor),
+            self.centerYAnchor.constraint(equalTo: anotherView.centerYAnchor)
+        ])
+        return self
+    }
 }
 
 // MARK: - Accessibility Identifier Helper
