@@ -124,6 +124,9 @@
 
 // FPX
 "fpx.bank-chooser.no-banks-available.text" = "銀行のリストを検索できません。後でもう一度お試しください。";
+"fpx.field.email" = "メールアドレス (任意)";
+"fpx.nextButton.title" = "次";
+"fpx.label.pleaseInput.text" = "メールアドレスを入力し、FPXからの取引確認メールを受信します";
 
 // Authorizing Payment
 "AuthorizingPayment.title" = "決済の認可";
