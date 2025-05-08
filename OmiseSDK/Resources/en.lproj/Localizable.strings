@@ -124,6 +124,9 @@
 
 // FPX
 "fpx.bank-chooser.no-banks-available.text" = "Cannot retrieve list of banks.\nPlease try again later.";
+"fpx.field.email" = "Email (Optional)";
+"fpx.nextButton.title" = "Next";
+"fpx.label.pleaseInput.text" = "Please input your email to receive transaction confirmation from FPX";
 
 // Authorizing Payment
 "AuthorizingPayment.title" = "Authorizing Payment";

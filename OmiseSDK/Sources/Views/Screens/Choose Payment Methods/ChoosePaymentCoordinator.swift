@@ -165,9 +165,10 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
 
     /// Creates FPX screen and attach current flow object inside created controller to be deallocated together
     func createFPXController() -> FPXPaymentFormController {
-        let viewController = FPXPaymentFormController(nibName: nil, bundle: .omiseSDK)
+        let vm = FPXPaymentFormViewModel()
+        vm.delegate = self
+        let viewController = FPXPaymentFormController(viewModel: vm)
         viewController.title = SourceType.fpx.localizedTitle
-        viewController.delegate = self
         return viewController
     }
 

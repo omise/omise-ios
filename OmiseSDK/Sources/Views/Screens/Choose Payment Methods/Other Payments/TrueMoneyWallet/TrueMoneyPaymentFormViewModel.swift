@@ -8,7 +8,7 @@ class TrueMoneyPaymentFormViewModel: TrueMoneyPaymentFormProtocol {
     
     private var loadingClosure: ParamClosure<Bool> = nil
     
-    init() { }
+    init() { /* Non-optional default empty implementation */ }
 }
 
 extension TrueMoneyPaymentFormViewModel: TrueMoneyPaymentFormViewModelInput {

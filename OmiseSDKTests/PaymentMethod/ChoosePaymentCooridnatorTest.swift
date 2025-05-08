@@ -125,4 +125,17 @@ class ChoosePaymentCoordinatorTests: XCTestCase {
         
         XCTAssertEqual(phoneField.keyboardType, .phonePad)
     }
+    
+    func test_createFPXController() throws {
+        let vc = sut.createFPXController()
+        vc.loadViewIfNeeded()
+        XCTAssertNotNil(vc)
+        XCTAssertEqual(vc.title, SourceType.fpx.localizedTitle)
+        
+        let emailField = try XCTUnwrap(
+            vc.view.view(withAccessibilityIdentifier: "fpx.emailTextField") as? OmiseTextField
+        )
+        
+        XCTAssertEqual(emailField.keyboardType, .emailAddress)
+    }
 }
