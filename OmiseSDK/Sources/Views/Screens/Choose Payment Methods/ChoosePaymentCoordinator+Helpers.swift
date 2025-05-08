@@ -114,10 +114,10 @@ extension ChoosePaymentCoordinator {
     func setupErrorView() {
         errorViewHeightConstraint = errorView.heightAnchor.constraint(equalToConstant: 0)
         errorViewHeightConstraint?.isActive = true
-
-        let dismissErrorBannerTapGestureRecognizer = UITapGestureRecognizer(target: self,
-                                                                            action: #selector(self.dismissErrorMessageBanner(_:)))
-        errorView.addGestureRecognizer(dismissErrorBannerTapGestureRecognizer)
+        
+        errorView.onClose = { [weak self] in
+            self?.dismissErrorMessage(animated: true, sender: nil)
+        }
     }
 
     /// Displays an error banner at the top of the UI with the given error message.
@@ -130,8 +130,8 @@ extension ChoosePaymentCoordinator {
     func displayErrorWith(title: String, message: String?, animated: Bool, sender: Any?) {
         guard let navController = rootViewController?.navigationController else { return }
 
-        errorView.titleLabel.text = title
-        errorView.detailLabel.text = message
+        errorView.title = title
+        errorView.subtitle = message
         navController.view.insertSubview(self.errorView, belowSubview: navController.navigationBar)
 
         NSLayoutConstraint.activate([
@@ -162,10 +162,6 @@ extension ChoosePaymentCoordinator {
         } else {
             animationBlock()
         }
-    }
-
-    @objc func dismissErrorMessageBanner(_ sender: AnyObject) {
-        dismissErrorMessage(animated: true, sender: sender)
     }
 
     func dismissErrorMessage(animated: Bool, sender: Any?) {

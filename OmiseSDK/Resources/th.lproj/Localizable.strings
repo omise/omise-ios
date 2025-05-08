@@ -82,8 +82,8 @@
 "CreditCard.field.mmyy.placeholder" = "ดด/ปป";
 "CreditCard.payButton.title" = "ชำระเงิน";
 
-"CreditCard.ccv.details.amex.text" = "หมายเลข 4 หลักบนหน้าบัตร";
-"CreditCard.ccv.details.default.text" = "หมายเลข 3 หลักด้านหลังบัตร";
+"CreditCard.cvv.details.amex.text" = "หมายเลข 4 หลักบนหน้าบัตร";
+"CreditCard.cvv.details.default.text" = "หมายเลข 3 หลักด้านหลังบัตร";
 
 // EContext
 "EContext.field.fullName" = "ชื่อ-สกุล";

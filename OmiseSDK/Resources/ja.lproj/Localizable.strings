@@ -85,8 +85,8 @@
 "CreditCard.field.mmyy.placeholder" = "MM/YY";
 "CreditCard.payButton.title" = "支払う";
 
-"CreditCard.ccv.details.amex.text" = "カード表面の4桁の番号";
-"CreditCard.ccv.details.default.text" = "カード裏面の3桁の番号";
+"CreditCard.cvv.details.amex.text" = "カード表面の4桁の番号";
+"CreditCard.cvv.details.default.text" = "カード裏面の3桁の番号";
 
 // EContext
 "EContext.field.fullName" = "氏名";

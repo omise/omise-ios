@@ -128,7 +128,8 @@ class EContextPaymentFormController: BaseFormViewController {
             submitButton
         ])
         
-        contentView.addSubviewToCenter(requestingIndicatorView)
+        contentView.addSubview(requestingIndicatorView)
+        requestingIndicatorView.setToCenter(of: submitButton)
         
         // Tell the base controller which fields to handle.
         formFields = [fullNameTextField, emailTextField, phoneNumberTextField]
@@ -205,6 +206,20 @@ private extension EContextPaymentFormController {
     }
     
     @objc func textFieldEditingDidBegin(_ textField: OmiseTextField) {
+        let duration = TimeInterval(UINavigationController.hideShowBarDuration)
+        UIView.animate(withDuration: duration,
+                       delay: 0.0,
+                       options: [
+                        .curveEaseInOut,
+                        .allowUserInteraction,
+                        .beginFromCurrentState,
+                        .layoutSubviews
+                       ]
+        ) { [weak self] in
+            if let errorLabel = self?.associatedErrorLabel(of: textField) {
+                errorLabel.alpha = 0.0
+            }
+        }
         updateNavigationButtons(for: textField)
     }
     

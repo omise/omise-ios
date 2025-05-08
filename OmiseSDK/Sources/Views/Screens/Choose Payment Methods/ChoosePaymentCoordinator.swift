@@ -17,12 +17,10 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
     weak var rootViewController: UIViewController?
 
     var errorViewHeightConstraint: NSLayoutConstraint?
-    let errorView: NoticeView = {
-        let noticeViewNib = UINib(nibName: "NoticeView", bundle: .omiseSDK)
-        let noticeView = noticeViewNib.instantiate(withOwner: nil, options: nil).first as! NoticeView // swiftlint:disable:this force_cast
-        noticeView.translatesAutoresizingMaskIntoConstraints = false
-        noticeView.backgroundColor = .error
-        return noticeView
+    let errorView: OmiseBannerView = {
+        let view = OmiseBannerView()
+        view.translatesAutoresizingMaskIntoConstraints(false)
+        return view
     }()
 
     init(client: ClientProtocol, amount: Int64, currency: String, currentCountry: Country?, applePayInfo: ApplePayInfo?, handleErrors: Bool) {
@@ -35,10 +33,6 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
         super.init()
 
         self.setupErrorView()
-    }
-    
-    deinit {
-        errorView.gestureRecognizers?.forEach { errorView.removeGestureRecognizer($0) }
     }
 
     /// Creates SelectPaymentController and attach current flow object inside created controller to be deallocated together
