@@ -357,27 +357,23 @@ class CreditCardPaymentController: UIViewController {
     @IBAction private func presentCVVInfo(_ sender: UIButton) {
         guard let targetView = view.window ?? view else { return }
 
-        let ccvInfoController = CCVInfoController(nibName: nil, bundle: .omiseSDK)
-
-        ccvInfoController.view.tintColor = view.tintColor
-        ccvInfoController.preferredCardBrand = cardNumberTextField.cardBrand
-        ccvInfoController.onCloseTapped = { [weak self, weak ccvInfoController] in
-            guard let self = self, let ccvInfoController = ccvInfoController else { return }
-            self.dismissCVVInfo(ccvInfoController)
+        let cvv = CVVInfoView()
+        cvv.tintColor = view.tintColor
+        cvv.preferredCardBrand = cardNumberTextField.cardBrand
+        cvv.onCloseTapped = {[weak self] in
+            guard let self = self else { return }
+            self.dismissCVVInfo(cvv)
         }
 
         UIView.transition(
             with: targetView,
             duration: 0.25,
             options: [.transitionCrossDissolve],
-            animations: {
-                targetView.addSubviewAndFit(ccvInfoController.view)
-            }, completion: { _ in
-                self.addChild(ccvInfoController)
-            })
+            animations: ({ targetView.addSubviewAndFit(cvv) })
+        )
     }
 
-    private func dismissCVVInfo(_ ccvInfoController: CCVInfoController) {
+    func dismissCVVInfo(_ cvvView: UIView) {
         guard let targetView = view.window ?? view else { return }
 
         UIView.transition(
@@ -385,8 +381,7 @@ class CreditCardPaymentController: UIViewController {
             duration: 0.25,
             options: [.transitionCrossDissolve],
             animations: {
-                ccvInfoController.view.removeFromSuperview()
-                ccvInfoController.removeFromParent()
+                cvvView.removeFromSuperview()
             }, completion: nil)
     }
 

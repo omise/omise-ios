@@ -47,7 +47,9 @@
 		4B04F7152DA8DCBA005A7B19 /* EContextPaymentFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B04F7142DA8DCB7005A7B19 /* EContextPaymentFormController.swift */; };
 		4B04F7172DA91D06005A7B19 /* BaseFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B04F7162DA91D06005A7B19 /* BaseFormViewController.swift */; };
 		4B04F7192DA91D1C005A7B19 /* OmiseFormToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B04F7182DA91D1C005A7B19 /* OmiseFormToolbar.swift */; };
-		4B7F2C4A2DA7AA2000A23CEF /* CCVInfoControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7F2C492DA7AA2000A23CEF /* CCVInfoControllerTests.swift */; };
+		4B54813C2DCCB0E200BD10AE /* OmiseBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B54813B2DCCB0DF00BD10AE /* OmiseBannerView.swift */; };
+		4B54813E2DCCD20500BD10AE /* OmiseBannerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B54813D2DCCD1F700BD10AE /* OmiseBannerViewTests.swift */; };
+		4B7F2C4A2DA7AA2000A23CEF /* CVVInfoViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7F2C492DA7AA2000A23CEF /* CVVInfoViewTests.swift */; };
 		4B7F2C4C2DA7B70B00A23CEF /* SelectSourceTypePaymentViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7F2C4B2DA7B70B00A23CEF /* SelectSourceTypePaymentViewModelTests.swift */; };
 		4B7F2C4E2DA7B74000A23CEF /* MockSelectSourceTypeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7F2C4D2DA7B74000A23CEF /* MockSelectSourceTypeDelegate.swift */; };
 		4B7F2C502DA7D0AB00A23CEF /* SelectInstallmentTermsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7F2C4F2DA7D0AB00A23CEF /* SelectInstallmentTermsViewModelTests.swift */; };
@@ -215,7 +217,6 @@
 		75D13E022B866E040073A831 /* PaymentUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A76791E214663560085DE3C /* PaymentUI.swift */; };
 		75D13E0F2B8678530073A831 /* OmiseSwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 75D13E0E2B8678530073A831 /* OmiseSwiftUIKit */; };
 		75D13E102B8678530073A831 /* OmiseSwiftUIKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 75D13E0E2B8678530073A831 /* OmiseSwiftUIKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		75D13E1B2B86FD2D0073A831 /* CCVInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75D13E192B86FD2D0073A831 /* CCVInfoController.xib */; };
 		75D13E1D2B86FF8C0073A831 /* CreditCardPaymentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D13E1C2B86FF8C0073A831 /* CreditCardPaymentDelegate.swift */; };
 		75D13E202B8703F80073A831 /* CreditCardPaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D13E1E2B8703F70073A831 /* CreditCardPaymentController.swift */; };
 		75D13E212B8703F80073A831 /* CreditCardPaymentController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75D13E1F2B8703F80073A831 /* CreditCardPaymentController.xib */; };
@@ -255,7 +256,7 @@
 		8AD391B1230C05BC00383286 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD391B0230C05BC00383286 /* Colors.swift */; };
 		8AF5517A213D4C0100D61C98 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 8AF5517C213D4C0100D61C98 /* Localizable.stringsdict */; };
 		8AF56E62226878070097CFEE /* CustomCreditCardFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF56E61226878070097CFEE /* CustomCreditCardFormViewController.swift */; };
-		8AF9857121479F38007E18ED /* CCVInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3150AD2146B6C300A4F429 /* CCVInfoController.swift */; };
+		8AF9857121479F38007E18ED /* CVVInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3150AD2146B6C300A4F429 /* CVVInfoView.swift */; };
 		8AF985732147CC3D007E18ED /* Error.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8AF985752147CC3D007E18ED /* Error.strings */; };
 		986406301CFEA7E4004BCF51 /* CardCVVTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062A1CFEA7E4004BCF51 /* CardCVVTextField.swift */; };
 		986406311CFEA7E4004BCF51 /* CardExpiryDateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864062B1CFEA7E4004BCF51 /* CardExpiryDateTextField.swift */; };
@@ -378,7 +379,9 @@
 		4B04F7142DA8DCB7005A7B19 /* EContextPaymentFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EContextPaymentFormController.swift; sourceTree = "<group>"; };
 		4B04F7162DA91D06005A7B19 /* BaseFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFormViewController.swift; sourceTree = "<group>"; };
 		4B04F7182DA91D1C005A7B19 /* OmiseFormToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseFormToolbar.swift; sourceTree = "<group>"; };
-		4B7F2C492DA7AA2000A23CEF /* CCVInfoControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCVInfoControllerTests.swift; sourceTree = "<group>"; };
+		4B54813B2DCCB0DF00BD10AE /* OmiseBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseBannerView.swift; sourceTree = "<group>"; };
+		4B54813D2DCCD1F700BD10AE /* OmiseBannerViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseBannerViewTests.swift; sourceTree = "<group>"; };
+		4B7F2C492DA7AA2000A23CEF /* CVVInfoViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVVInfoViewTests.swift; sourceTree = "<group>"; };
 		4B7F2C4B2DA7B70B00A23CEF /* SelectSourceTypePaymentViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSourceTypePaymentViewModelTests.swift; sourceTree = "<group>"; };
 		4B7F2C4D2DA7B74000A23CEF /* MockSelectSourceTypeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSelectSourceTypeDelegate.swift; sourceTree = "<group>"; };
 		4B7F2C4F2DA7D0AB00A23CEF /* SelectInstallmentTermsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectInstallmentTermsViewModelTests.swift; sourceTree = "<group>"; };
@@ -529,7 +532,6 @@
 		75D13DE12B8666C40073A831 /* SelectPaymentMethodDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPaymentMethodDelegate.swift; sourceTree = "<group>"; };
 		75D13DE32B8666CC0073A831 /* SelectSourceTypeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSourceTypeDelegate.swift; sourceTree = "<group>"; };
 		75D13DE52B8666DB0073A831 /* SelectSourcePaymentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSourcePaymentDelegate.swift; sourceTree = "<group>"; };
-		75D13E192B86FD2D0073A831 /* CCVInfoController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CCVInfoController.xib; sourceTree = "<group>"; };
 		75D13E1C2B86FF8C0073A831 /* CreditCardPaymentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardPaymentDelegate.swift; sourceTree = "<group>"; };
 		75D13E1E2B8703F70073A831 /* CreditCardPaymentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardPaymentController.swift; sourceTree = "<group>"; };
 		75D13E1F2B8703F80073A831 /* CreditCardPaymentController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreditCardPaymentController.xib; sourceTree = "<group>"; };
@@ -562,7 +564,7 @@
 		8A188BAF1D951E3C00FFF467 /* AuthorizingPaymentWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizingPaymentWebViewController.swift; sourceTree = "<group>"; };
 		8A275CBB21241E4500C5716F /* MainActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainActionButton.swift; sourceTree = "<group>"; };
 		8A30FB7C214929C900DC09DC /* PaymentCreatorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCreatorController.swift; sourceTree = "<group>"; };
-		8A3150AD2146B6C300A4F429 /* CCVInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCVInfoController.swift; sourceTree = "<group>"; };
+		8A3150AD2146B6C300A4F429 /* CVVInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVVInfoView.swift; sourceTree = "<group>"; };
 		8A3C10552159F7FC00BEFD8A /* InvalidCardAPIErrorParsingTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvalidCardAPIErrorParsingTestCase.swift; sourceTree = "<group>"; };
 		8A3C10572159FCE900BEFD8A /* BadRequestAPIErrorParsingTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadRequestAPIErrorParsingTestCase.swift; sourceTree = "<group>"; };
 		8A40DA2A216B53E900749F45 /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
@@ -689,6 +691,8 @@
 		2F0267532D8D4FAC00BA8D3E /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				4B54813D2DCCD1F700BD10AE /* OmiseBannerViewTests.swift */,
+				4B7F2C492DA7AA2000A23CEF /* CVVInfoViewTests.swift */,
 				2FE11B252DB0FF9600EBBCC2 /* CountryListControllerTests.swift */,
 				2FE11B232DB0FB1600EBBCC2 /* CardCVVTextFieldTests.swift */,
 				2F0267562D8D538F00BA8D3E /* CardExpiryDateTextFieldTests.swift */,
@@ -740,7 +744,6 @@
 		2F5D47502D895B2E00C776CF /* CreditCardPayment */ = {
 			isa = PBXGroup;
 			children = (
-				4B7F2C492DA7AA2000A23CEF /* CCVInfoControllerTests.swift */,
 				2F5D47512D895B9F00C776CF /* CreditCardPaymentControllerTests.swift */,
 			);
 			path = CreditCardPayment;
@@ -1153,6 +1156,8 @@
 				8AD391B0230C05BC00383286 /* Colors.swift */,
 				4B04F7182DA91D1C005A7B19 /* OmiseFormToolbar.swift */,
 				4B04F7162DA91D06005A7B19 /* BaseFormViewController.swift */,
+				4B54813B2DCCB0DF00BD10AE /* OmiseBannerView.swift */,
+				8A3150AD2146B6C300A4F429 /* CVVInfoView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1249,8 +1254,6 @@
 		75D13DFB2B866D070073A831 /* Credit Card Payment */ = {
 			isa = PBXGroup;
 			children = (
-				8A3150AD2146B6C300A4F429 /* CCVInfoController.swift */,
-				75D13E192B86FD2D0073A831 /* CCVInfoController.xib */,
 				75D13E1E2B8703F70073A831 /* CreditCardPaymentController.swift */,
 				75D13E1F2B8703F80073A831 /* CreditCardPaymentController.xib */,
 				756C8F212A40694F00D53059 /* CreditCardPaymentViewContext.swift */,
@@ -1663,7 +1666,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				75D13E212B8703F80073A831 /* CreditCardPaymentController.xib in Resources */,
-				75D13E1B2B86FD2D0073A831 /* CCVInfoController.xib in Resources */,
 				75405AA82A27F97E008C21F6 /* Localizable.strings in Resources */,
 				750126792B95A34000ED5E14 /* AuthorizingPaymentWebViewController.xib in Resources */,
 				8A776647214A5FC60029D166 /* NoticeView.xib in Resources */,
@@ -1804,7 +1806,7 @@
 				758801202BAAC70200F02934 /* URL+Helpers.swift in Sources */,
 				756C8F262A40698600D53059 /* TextFieldView.swift in Sources */,
 				986406341CFEA7E4004BCF51 /* CardNameTextField.swift in Sources */,
-				8AF9857121479F38007E18ED /* CCVInfoController.swift in Sources */,
+				8AF9857121479F38007E18ED /* CVVInfoView.swift in Sources */,
 				75E0EB7C2B7B410600E3198A /* Client+NetworkService.swift in Sources */,
 				75D13D602B807AC90073A831 /* ChoosePaymentCoordinator.swift in Sources */,
 				758A4E7D2BE38A89005E7B5A /* ThreeDSLabelCustomization.swift in Sources */,
@@ -1871,6 +1873,7 @@
 				4B04F7172DA91D06005A7B19 /* BaseFormViewController.swift in Sources */,
 				7501265D2B87CB6500ED5E14 /* PaymentInputsFormController.swift in Sources */,
 				75D13DCD2B8536B10073A831 /* SelectInstallmentTermsViewModel.swift in Sources */,
+				4B54813C2DCCB0E200BD10AE /* OmiseBannerView.swift in Sources */,
 				75D13DB02B83B58B0073A831 /* Source.Payment.Address.swift in Sources */,
 				75405A8F2A26340E008C21F6 /* UIImage+Helpers.swift in Sources */,
 				75F2A0B72A1A60630038FA54 /* AtomePaymentFormController.swift in Sources */,
@@ -1952,7 +1955,7 @@
 				2F0267572D8D538F00BA8D3E /* CardExpiryDateTextFieldTests.swift in Sources */,
 				758A4E962BE38AFD005E7B5A /* ThreeDSButtonCustomizationTests.swift in Sources */,
 				2FC27E1C2D6DC1B7001E5857 /* ApplePayViewControllerTest.swift in Sources */,
-				4B7F2C4A2DA7AA2000A23CEF /* CCVInfoControllerTests.swift in Sources */,
+				4B7F2C4A2DA7AA2000A23CEF /* CVVInfoViewTests.swift in Sources */,
 				2F5D98F72D6EB96600B5ECB4 /* MockSelectPaymentMethodDelegate.swift in Sources */,
 				2F5D98FB2D6EC26400B5ECB4 /* MockChoosePaymentMethodDelegate.swift in Sources */,
 				4B904E5C2DC9FE5D00BE78EC /* MockFPXPaymentViewModel.swift in Sources */,
@@ -1969,6 +1972,7 @@
 				2FE11B202DB0F07300EBBCC2 /* ViewExtensionsTests.swift in Sources */,
 				75E0EB7E2B7B5EE400E3198A /* CreateTokenPayloadTests.swift in Sources */,
 				2F5985FA2DB0B6B100E81646 /* ExtensionsTests.swift in Sources */,
+				4B54813E2DCCD20500BD10AE /* OmiseBannerViewTests.swift in Sources */,
 				2FE11B222DB0F21600EBBCC2 /* ViewControllerExtensionsTests.swift in Sources */,
 				75E0EB712B7A904100E3198A /* SourceFlowTests.swift in Sources */,
 				2F9682202D65AC3000A7AFDA /* MockApplePaymentHandler.swift in Sources */,
