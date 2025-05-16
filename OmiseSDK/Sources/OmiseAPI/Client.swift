@@ -4,7 +4,7 @@ import os
 /// Network Client to communicate with Omise APIs
 class Client: ClientProtocol {
     let version: String
-    let publicKey: String
+    private(set) var publicKey: String
     var customApiURL: URL?
     var customVaultURL: URL?
 
@@ -85,6 +85,12 @@ class Client: ClientProtocol {
             maxAttempt: pollingAttemptsCount,
             completion
         )
+    }
+    
+    func updatePublicKey(_ key: String) {
+        if key.hasPrefix("pkey_") {
+            self.publicKey = key
+        }
     }
 }
 

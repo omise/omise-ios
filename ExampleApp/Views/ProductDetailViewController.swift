@@ -2,10 +2,10 @@ import UIKit
 import OmiseSDK
 
 class ProductDetailViewController: BaseViewController {
-    lazy var omiseSDK: OmiseSDK = {
+    let omiseSDK: OmiseSDK = {
         // Initialize OmiseSDK instance with given publicKey and optional configuration used for testing
         let omiseSDK = OmiseSDK(
-            publicKey: self.pkeyFromSettings.isEmpty ? LocalConfig.default.publicKey : self.pkeyFromSettings,
+            publicKey: LocalConfig.default.publicKey,
             configuration: LocalConfig.default.configuration
         )
         
@@ -16,6 +16,13 @@ class ProductDetailViewController: BaseViewController {
         OmiseSDK.shared = omiseSDK
         return omiseSDK
     }()
+    
+    override var pkeyFromSettings: String {
+        didSet {
+            if pkeyFromSettings.isEmpty { return }
+            omiseSDK.updatePublicKey(key: pkeyFromSettings)
+        }
+    }
 
     private func loadCapability() {
         omiseSDK.client.capability { (result) in

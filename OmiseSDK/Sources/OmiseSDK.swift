@@ -11,7 +11,7 @@ public class OmiseSDK {
     public let version: String = "5.5.2"
 
     /// Public Key associated with this instance of OmiseSDK
-    public let publicKey: String
+    public private(set) var publicKey: String
     
     /// Client is used to communicate with Omise API
     public let client: ClientProtocol
@@ -253,6 +253,12 @@ public class OmiseSDK {
     public func setupApplePay(for merchantId: String, requiredBillingAddress: Bool = false) {
         self.applePayInfo = ApplePayInfo(merchantIdentifier: merchantId,
                                          requestBillingAddress: requiredBillingAddress)
+    }
+    
+    public func updatePublicKey(key: String) {
+        self.publicKey = key
+        self.client.updatePublicKey(key)
+        self.preloadCapabilityAPI()
     }
 }
 
