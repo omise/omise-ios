@@ -16,7 +16,7 @@ final class OmiseBannerView: UIView {
     
     // MARK: - Subviews
     private let iconImageView: UIImageView = {
-        let iv = UIImageView(image: UIImage(named: "Alert", in: .omiseSDK, compatibleWith: .none))
+        let iv = UIImageView(image: UIImage(omise: "Alert"))
         iv.contentMode(.scaleAspectFit)
             .translatesAutoresizingMaskIntoConstraints(false)
         iv.tintColor = .white
@@ -30,7 +30,7 @@ final class OmiseBannerView: UIView {
             .textColor(.white)
             .numberOfLines(0)
             .enableDynamicType()
-            .setAccessibilityID(id: "OmiseBannerView.titleLabel")
+            .setAccessibilityID("OmiseBannerView.titleLabel")
         return lbl
     }()
     
@@ -41,14 +41,14 @@ final class OmiseBannerView: UIView {
             .textColor(.white.withAlphaComponent(0.85))
             .numberOfLines(0)
             .enableDynamicType()
-            .setAccessibilityID(id: "OmiseBannerView.subtitleLabel")
+            .setAccessibilityID("OmiseBannerView.subtitleLabel")
         return lbl
     }()
     
     private let closeButton: UIButton = {
         let btn = UIButton(type: .custom)
             .translatesAutoresizingMaskIntoConstraints(false)
-        btn.setImage(UIImage(named: "Close Mini", in: .omiseSDK, compatibleWith: .none), for: .normal)
+        btn.setImage(UIImage(omise: "Close Mini"), for: .normal)
         btn.tintColor = .white
         return btn
     }()

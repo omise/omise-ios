@@ -17,7 +17,7 @@ final class CVVInfoView: UIView, UIGestureRecognizerDelegate {
         v.translatesAutoresizingMaskIntoConstraints(false)
             .backgroundColor(.omiseBackground)
             .cornerRadius(.cornderRadius)
-            .setAccessibilityID(id: "CVVInfoView.containerView")
+            .setAccessibilityID("CVVInfoView.containerView")
         return v
     }()
     
@@ -37,7 +37,7 @@ final class CVVInfoView: UIView, UIGestureRecognizerDelegate {
             .numberOfLines(0)
             .textAlignment(.center)
             .enableDynamicType()
-            .setAccessibilityID(id: "CVVInfoView.descriptionLabel")
+            .setAccessibilityID("CVVInfoView.descriptionLabel")
         return l
     }()
     

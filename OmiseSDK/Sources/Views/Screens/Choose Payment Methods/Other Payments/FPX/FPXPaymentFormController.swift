@@ -3,7 +3,7 @@ import UIKit
 class FPXPaymentFormController: BaseFormViewController {
     // MARK: - UI Elements
     private lazy var imgFPX: UIImageView = {
-        UIImageView(image: UIImage(named: "FPX_Big", in: .omiseSDK, compatibleWith: .none))
+        UIImageView(image: UIImage(omise: "FPX_Big"))
             .contentMode(.scaleAspectFit)
     }()
     
@@ -25,7 +25,7 @@ class FPXPaymentFormController: BaseFormViewController {
         let tf = OmiseTextField()
         tf.validator = try? NSRegularExpression(pattern: "\\A[\\w.+-]+@[a-z\\d.-]+\\.[a-z]{2,}\\z",
                                                 options: [.caseInsensitive])
-        tf.setAccessibilityID(id: "fpx.emailTextField")
+        tf.setAccessibilityID("fpx.emailTextField")
         tf.keyboardType = .emailAddress
         configure(tf)
         return tf
@@ -33,7 +33,7 @@ class FPXPaymentFormController: BaseFormViewController {
     
     private lazy var emailErrorLabel: UILabel = {
         let label = UILabel()
-        label.text("-").setAccessibilityID(id: "fpx.emailError")
+        label.text("-").setAccessibilityID("fpx.emailError")
         configureError(label)
         return label
     }()
@@ -47,7 +47,7 @@ class FPXPaymentFormController: BaseFormViewController {
         button.cornerRadius = 4
         button.isEnabled = false
         button.addTarget(self, action: #selector(submitForm(_:)), for: .touchUpInside)
-        button.setAccessibilityID(id: "fpx.submitButton")
+        button.setAccessibilityID("fpx.submitButton")
             .translatesAutoresizingMaskIntoConstraints(false)
         return button
     }()

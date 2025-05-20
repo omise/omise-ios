@@ -123,7 +123,7 @@ extension UIView {
     }
     
     @discardableResult
-    func setAccessibilityID(id: String) -> Self {
+    func setAccessibilityID(_ id: String) -> Self {
         accessibilityIdentifier = id
         return self
     }
