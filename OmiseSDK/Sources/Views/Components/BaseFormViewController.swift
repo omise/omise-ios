@@ -15,7 +15,7 @@ class BaseFormViewController: UIViewController {
         indicator.color = .gray
         indicator.contentMode = .scaleAspectFill
         indicator.translatesAutoresizingMaskIntoConstraints(false)
-            .setAccessibilityID(id: "BaseForm.requestingIndicator")
+            .setAccessibilityID("BaseForm.requestingIndicator")
         return indicator
     }()
     
@@ -151,6 +151,15 @@ extension BaseFormViewController {
         textField.adjustsFontForContentSizeCategory = true
         textField.translatesAutoresizingMaskIntoConstraints(false)
     }
+    
+    func configure(_ button: MainActionButton) {
+        button.font(.preferredFont(forTextStyle: .headline))
+        button.defaultBackgroundColor = .omise
+        button.disabledBackgroundColor = .line
+        button.cornerRadius = cornerRadius
+        button.isEnabled = false
+        button.translatesAutoresizingMaskIntoConstraints(false)
+    }
 }
 
 // MARK: - Helper Extensions
@@ -158,4 +167,9 @@ extension BaseFormViewController {
     var padding: CGFloat { 20.0 }
     var spacing: CGFloat { 16.0 }
     var minSpacing: CGFloat { 8.0 }
+    var cornerRadius: CGFloat { 4.0 }
+    var addressFieldTag: Int { 1001 }
+    var cityFieldTag: Int { 1002 }
+    var stateFieldTag: Int { 1003 }
+    var zipCodeFieldTag: Int { 1004 }
 }

@@ -70,11 +70,12 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
 
     /// Creates Credit Carc Payment screen and attach current flow object inside created controller to be deallocated together
     func createCreditCardPaymentController(paymentType: CreditCardPaymentOption = .card) -> CreditCardPaymentController {
-        let viewModel = CreditCardPaymentViewModel(currentCountry: currentCountry, paymentType: paymentType, delegate: self)
-        let viewController = CreditCardPaymentController(nibName: nil, bundle: .omiseSDK)
-        viewController.viewModel = viewModel
-        viewController.title = PaymentMethod.creditCard.localizedTitle
-        return viewController
+        let vm = CreditCardPaymentFormViewModel(country: self.currentCountry,
+                                                paymentOption: paymentType,
+                                                delegate: self)
+        let vc = CreditCardPaymentController(viewModel: vm)
+        vc.title = PaymentMethod.creditCard.localizedTitle
+        return vc
     }
 
     /// Creates Mobile Banking screen and attach current flow object inside created controller to be deallocated together

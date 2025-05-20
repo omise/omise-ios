@@ -27,7 +27,7 @@ class EContextPaymentFormController: BaseFormViewController {
     private lazy var fullNameTextField: OmiseTextField = {
         let tf = OmiseTextField()
         tf.validator = try? NSRegularExpression(pattern: "\\A[\\w\\s]{1,10}\\s?\\z", options: [])
-        tf.setAccessibilityID(id: "EContextForm.nameTextField")
+        tf.setAccessibilityID("EContextForm.nameTextField")
         configure(tf)
         return tf
     }()
@@ -35,7 +35,7 @@ class EContextPaymentFormController: BaseFormViewController {
     private lazy var emailTextField: OmiseTextField = {
         let tf = OmiseTextField()
         tf.validator = try? NSRegularExpression(pattern: "\\A[\\w\\-\\.]+@[\\w\\-\\.]+\\s?\\z", options: [])
-        tf.setAccessibilityID(id: "EContextForm.emailTextField")
+        tf.setAccessibilityID("EContextForm.emailTextField")
         configure(tf)
         return tf
     }()
@@ -43,7 +43,7 @@ class EContextPaymentFormController: BaseFormViewController {
     private lazy var phoneNumberTextField: OmiseTextField = {
         let tf = OmiseTextField()
         tf.validator = try? NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
-        tf.setAccessibilityID(id: "EContextForm.phoneTextField")
+        tf.setAccessibilityID("EContextForm.phoneTextField")
         tf.keyboardType = .phonePad
         configure(tf)
         return tf
@@ -52,21 +52,21 @@ class EContextPaymentFormController: BaseFormViewController {
     // Error Labels
     private lazy var fullNameErrorLabel: UILabel = {
         let label = UILabel()
-        label.text("-").setAccessibilityID(id: "EContextForm.nameError")
+        label.text("-").setAccessibilityID("EContextForm.nameError")
         configureError(label)
         return label
     }()
     
     private lazy var emailErrorLabel: UILabel = {
         let label = UILabel()
-        label.text("-").setAccessibilityID(id: "EContextForm.emailError")
+        label.text("-").setAccessibilityID("EContextForm.emailError")
         configureError(label)
         return label
     }()
     
     private lazy var phoneNumberErrorLabel: UILabel = {
         let label = UILabel()
-        label.text("-").setAccessibilityID(id: "EContextForm.phoneError")
+        label.text("-").setAccessibilityID("EContextForm.phoneError")
         configureError(label)
         return label
     }()
@@ -80,7 +80,7 @@ class EContextPaymentFormController: BaseFormViewController {
         button.cornerRadius = 4
         button.isEnabled = false
         button.addTarget(self, action: #selector(submitEContextForm(_:)), for: .touchUpInside)
-        button.setAccessibilityID(id: "EContextForm.submitButton")
+        button.setAccessibilityID("EContextForm.submitButton")
             .translatesAutoresizingMaskIntoConstraints(false)
         return button
     }()

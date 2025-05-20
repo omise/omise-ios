@@ -3,7 +3,7 @@ import UIKit
 class TrueMoneyPaymentFormController: BaseFormViewController {
     // MARK: - UI Elements
     private lazy var imgTrueMoney: UIImageView = {
-        UIImageView(image: UIImage(named: "TrueMoney_Big", in: .omiseSDK, compatibleWith: .none))
+        UIImageView(image: UIImage(omise: "TrueMoney_Big"))
             .contentMode(.scaleAspectFit)
     }()
     
@@ -24,7 +24,7 @@ class TrueMoneyPaymentFormController: BaseFormViewController {
     private lazy var phoneNumberTextField: OmiseTextField = {
         let tf = OmiseTextField()
         tf.validator = try? NSRegularExpression(pattern: "\\d{10,11}\\s?", options: [])
-        tf.setAccessibilityID(id: "TrueMoneyPaymentForm.phoneTextField")
+        tf.setAccessibilityID("TrueMoneyPaymentForm.phoneTextField")
         tf.keyboardType = .phonePad
         configure(tf)
         return tf
@@ -32,7 +32,7 @@ class TrueMoneyPaymentFormController: BaseFormViewController {
     
     private lazy var phoneNumberErrorLabel: UILabel = {
         let label = UILabel()
-        label.text("-").setAccessibilityID(id: "TrueMoneyPaymentForm.phoneError")
+        label.text("-").setAccessibilityID("TrueMoneyPaymentForm.phoneError")
         configureError(label)
         return label
     }()
@@ -46,7 +46,7 @@ class TrueMoneyPaymentFormController: BaseFormViewController {
         button.cornerRadius = 4
         button.isEnabled = false
         button.addTarget(self, action: #selector(submitTrueMoneyForm(_:)), for: .touchUpInside)
-        button.setAccessibilityID(id: "TrueMoneyPaymentForm.submitButton")
+        button.setAccessibilityID("TrueMoneyPaymentForm.submitButton")
             .translatesAutoresizingMaskIntoConstraints(false)
         return button
     }()
