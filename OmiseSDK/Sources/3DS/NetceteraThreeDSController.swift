@@ -24,6 +24,7 @@ struct AuthResponse: Codable {
         var acsSignedContent: String?
         var acsUIType: String?
         var acsReferenceNumber: String?
+        var sdkTransID: String
     }
 
     var status: Status {
@@ -79,7 +80,7 @@ class NetceteraThreeDSController {
         let scheme = Scheme(name: config.id)
         scheme.ids = [config.directoryServerId]
         scheme.encryptionKeyValue = formattedCert
-        scheme.rootCertificateValue = formattedCert
+        scheme.rootCertificateValues = [formattedCert]
         return scheme
     }
 
@@ -241,7 +242,7 @@ extension NetceteraThreeDSController: NetceteraThreeDSControllerProtocol {
             acsRefNumber: acsRefNumber,
             acsSignedContent: acsSignedContent)
 
-        if let appUrl = updateAppURLString(threeDSRequestorAppURL, transactionID: serverTransactionID) {
+        if let appUrl = updateAppURLString(threeDSRequestorAppURL, transactionID: aRes.sdkTransID) {
             challengeParameters.setThreeDSRequestorAppURL(threeDSRequestorAppURL: appUrl)
         }
 
