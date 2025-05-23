@@ -55,7 +55,7 @@ class MockCreditCardPaymentViewModel:
     var expiryError: String { "expErr" }
     var cvvError: String { "cvvErr" }
     
-    var shouldShouldAddressFields: Bool {
+    var shouldAddressFields: Bool {
         return shouldShowAddressFields
     }
     

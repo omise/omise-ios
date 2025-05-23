@@ -299,7 +299,7 @@ class CreditCardPaymentController: BaseFormViewController {
             cvvTextField
         ]
         
-        if viewModel.output.shouldShouldAddressFields {
+        if viewModel.output.shouldAddressFields {
             formFields.append(contentsOf: [
                 addressFieldView.textField,
                 cityFieldView.textField,
@@ -322,7 +322,7 @@ class CreditCardPaymentController: BaseFormViewController {
     }
     
     private func handleAddressFieldsDisplay() {
-        addressStackView.isHidden = !viewModel.output.shouldShouldAddressFields
+        addressStackView.isHidden = !viewModel.output.shouldAddressFields
         setupFormFields()
         setupTextFieldHandlers()
     }

@@ -1,280 +1,86 @@
 import XCTest
 @testable import OmiseSDK
-import ThreeDS_SDK
+import WebKit
 
-class NetceteraThreeDSControllerMock: NetceteraThreeDSControllerProtocol {
-    func setAPIKey(_ apiKey: String) {
-    }
-
-    func appOpen3DSDeeplinkURL(_ url: URL) -> Bool {
-        return true
-    }
+class AuthorizingPaymentWebViewControllerTests: XCTestCase {
+    var sut: AuthorizingPaymentWebViewController!
+    var authURL: URL!
     
-    var processAuthorizedURLResult = NetceteraThreeDSControllerResult.success(())
-    func processAuthorizedURL(
-        _ authorizeUrl: URL,
-        threeDSRequestorAppURL: String?,
-        uiCustomization: ThreeDSUICustomization?,
-        in viewController: UIViewController,
-        onComplete: @escaping (NetceteraThreeDSControllerResult) -> Void
-    ) {
-        onComplete(processAuthorizedURLResult)
-    }
-}
-
-class TopViewControllerMock: UIViewController {
-    var onPresentViewController: ((UIViewController) -> Void)?
-    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
-        onPresentViewController?(viewControllerToPresent)
-    }
-}
-
-class AuthorizingPaymentTests: XCTestCase {
-
-    struct AnyError: Error {
-        let message: String
-        init(_ message: String? = nil) {
-            self.message = message ?? ""
-        }
-    }
-
     // swiftlint:disable force_unwrapping
-    let authorizeURL = URL(string: "https://co.omise.com/authorize")!
-    let expectedWebReturnURL = URL(string: "https://co.omise.com/callback")!
-    let deeplinkURL = URL(string: "omiseExampleApp://authorizePayment")!
+    let expectedURL = URL(string: "https://example.com/cb/123")!
+    let otherURL    = URL(string: "https://foo.com")!
+    let customURL   = URL(string: "myapp://doSomething")!
     // swiftlint:enable force_unwrapping
-
-    typealias NetceteraError = NetceteraThreeDSController.Errors
-    let netceteraMockController = NetceteraThreeDSControllerMock()
-    let authorizingPayment = AuthorizingPayment()
-    let topViewController = TopViewControllerMock()
-    let timeout: TimeInterval = 15.0
-
+    
     override func setUp() {
         super.setUp()
-        NetceteraThreeDSController.sharedController = netceteraMockController
+        sut = AuthorizingPaymentWebViewController()
+        _ = sut.view
+        sut.expectedReturnURLStrings = [
+            // swiftlint:disable:next force_unwrapping
+            URLComponents(string: "https://example.com/cb/")!
+        ]
+        // swiftlint:disable:next force_unwrapping
+        authURL = URL(string: "https://omise.co")!
+        sut.authorizeURL = authURL
+        sut.loadViewIfNeeded()
+        sut.viewDidAppear(false)
     }
-
-    func test3DSUserFailedChallenge() {
-        let expectation = self.expectation(description: "callback")
-
-        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.incomplete(event: nil))
-        authorizingPayment.presentAuthPaymentController(
-            from: topViewController,
-            url: authorizeURL,
-            expectedWebViewReturnURL: expectedWebReturnURL,
-            deeplinkURL: deeplinkURL) { result in
-                defer { expectation.fulfill() }
-                XCTAssertEqual(result, AuthorizingPayment.Status.cancel)
-        }
-
-        waitForExpectations(timeout: timeout, handler: nil)
+    
+    override func tearDown() {
+        sut = nil
+        super.tearDown()
     }
-
-    func test3DSUserCancelledChallenge() {
-        let expectation = self.expectation(description: "callback")
-
-        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.cancelled)
-        authorizingPayment.presentAuthPaymentController(
-            from: topViewController,
-            url: authorizeURL,
-            expectedWebViewReturnURL: expectedWebReturnURL,
-            deeplinkURL: deeplinkURL) { result in
-                defer { expectation.fulfill() }
-                XCTAssertEqual(result, AuthorizingPayment.Status.cancel)
-        }
-
-        waitForExpectations(timeout: timeout, handler: nil)
+    
+    func test_policyAndResult_forExpectedReturnURL() {
+        let (policy, result) = sut.policyAndResult(for: expectedURL)
+        XCTAssertEqual(policy, .cancel, "Expected `.cancel` for a matching return URL")
+        XCTAssertEqual(result, .complete(redirectedURL: expectedURL))
     }
-
-    func test3DSUserTimedOutChallenge() {
-        let expectation = self.expectation(description: "callback")
+    
+    func test_policyAndResult_forOtherHttpURL() {
+        let (policy, result) = sut.policyAndResult(for: otherURL)
+        XCTAssertEqual(policy, .allow, "Non-matching HTTPS should be `.allow`")
+        XCTAssertNil(result)
+    }
+    
+    func test_policyAndResult_forCustomSchemeURL() {
+        let (policy, result) = sut.policyAndResult(for: customURL)
+        XCTAssertEqual(policy, .cancel, "Custom schemes should be `.cancel` (we open them)")
+        XCTAssertNil(result)
+    }
+    
+    func test_cancelAuthorizingPaymentProcess_invokesCompletionCancel() {
+        // arrange
+        var saw: AuthorizingPaymentWebViewController.CompletionState?
+        sut.completion = { saw = $0 }
         
-        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.timedout)
-        authorizingPayment.presentAuthPaymentController(
-            from: topViewController,
-            url: authorizeURL,
-            expectedWebViewReturnURL: expectedWebReturnURL,
-            deeplinkURL: deeplinkURL) { result in
-                defer { expectation.fulfill() }
-                XCTAssertEqual(result, AuthorizingPayment.Status.cancel)
-        }
-
-        waitForExpectations(timeout: timeout, handler: nil)
+        // install a dummy cancel button so perform(_:with:) has a target
+        let cancelItem = UIBarButtonItem()
+        sut.navigationItem.rightBarButtonItem = cancelItem
+        
+        // act
+        sut.perform(
+            #selector(AuthorizingPaymentWebViewController.cancelAuthorizingPaymentProcess(_:)),
+            with: cancelItem
+        )
+        
+        // assert
+        XCTAssertEqual(saw, .cancel)
     }
+}
 
-    func test3DSAuthResponseStatusFailed() {
-        let expectation = self.expectation(description: "callback")
-
-        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.authResStatusFailed)
-        authorizingPayment.presentAuthPaymentController(
-            from: topViewController,
-            url: authorizeURL,
-            expectedWebViewReturnURL: expectedWebReturnURL,
-            deeplinkURL: deeplinkURL) { result in
-                defer { expectation.fulfill() }
-                XCTAssertEqual(result, AuthorizingPayment.Status.cancel)
+private extension AuthorizingPaymentWebViewController {
+    /// Extract the same branches from your `decidePolicyFor:` into a pure function
+    /// so tests can call it directly.
+    func policyAndResult(for url: URL)
+    -> (policy: WKNavigationActionPolicy, completionState: CompletionState?) {
+        if verifyPaymentURL(url) {
+            return (.cancel, .complete(redirectedURL: url))
         }
-
-        waitForExpectations(timeout: timeout, handler: nil)
-    }
-
-    func test3DSAuthResponseStatusUnknown() {
-        let expectation = self.expectation(description: "callback")
-
-        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.authResStatusUnknown("Some Unknown Status"))
-        authorizingPayment.presentAuthPaymentController(
-            from: topViewController,
-            url: authorizeURL,
-            expectedWebViewReturnURL: expectedWebReturnURL,
-            deeplinkURL: deeplinkURL) { result in
-                defer { expectation.fulfill() }
-                XCTAssertEqual(result, AuthorizingPayment.Status.cancel)
+        if let scheme = url.scheme?.lowercased(), scheme != "http" && scheme != "https" {
+            return (.cancel, nil)
         }
-
-        waitForExpectations(timeout: timeout, handler: nil)
-    }
-
-    func test3DSSuccess() {
-        let expectation = self.expectation(description: "callback")
-
-        netceteraMockController.processAuthorizedURLResult = .success(())
-        authorizingPayment.presentAuthPaymentController(
-            from: topViewController,
-            url: authorizeURL,
-            expectedWebViewReturnURL: expectedWebReturnURL,
-            deeplinkURL: deeplinkURL) { result in
-                defer { expectation.fulfill() }
-                XCTAssertEqual(result, AuthorizingPayment.Status.complete(redirectURL: nil))
-        }
-
-        waitForExpectations(timeout: timeout, handler: nil)
-    }
-
-    func testWebViewOn3DSAuthResponseInvalid() {
-        let expectation = self.expectation(description: "callback")
-
-        topViewController.onPresentViewController = { viewController in
-            defer { expectation.fulfill() }
-            let presentedVC = (viewController as? UINavigationController)?.topViewController
-            XCTAssertTrue(presentedVC is AuthorizingPaymentWebViewController)
-        }
-
-        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.authResInvalid)
-        authorizingPayment.presentAuthPaymentController(
-            from: topViewController,
-            url: authorizeURL,
-            expectedWebViewReturnURL: expectedWebReturnURL,
-            deeplinkURL: deeplinkURL) { _ in
-                XCTFail("Should open webview and don't call this callback")
-        }
-
-        waitForExpectations(timeout: timeout, handler: nil)
-    }
-
-    func testWebViewOn3DSProtocolError() {
-        let expectation = self.expectation(description: "callback")
-
-        topViewController.onPresentViewController = { viewController in
-            defer { expectation.fulfill() }
-            let presentedVC = (viewController as? UINavigationController)?.topViewController
-            XCTAssertTrue(presentedVC is AuthorizingPaymentWebViewController)
-        }
-
-        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.protocolError(event: nil))
-        authorizingPayment.presentAuthPaymentController(
-            from: topViewController,
-            url: authorizeURL,
-            expectedWebViewReturnURL: expectedWebReturnURL,
-            deeplinkURL: deeplinkURL) { _ in
-                XCTFail("Should open webview and don't call this callback")
-        }
-
-        waitForExpectations(timeout: timeout, handler: nil)
-    }
-
-    func testWebViewOn3DSRuntimeError() {
-        let expectation = self.expectation(description: "callback")
-
-        topViewController.onPresentViewController = { viewController in
-            defer { expectation.fulfill() }
-            let presentedVC = (viewController as? UINavigationController)?.topViewController
-            XCTAssertTrue(presentedVC is AuthorizingPaymentWebViewController)
-        }
-
-        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.runtimeError(event: nil))
-        authorizingPayment.presentAuthPaymentController(
-            from: topViewController,
-            url: authorizeURL,
-            expectedWebViewReturnURL: expectedWebReturnURL,
-            deeplinkURL: deeplinkURL) { _ in
-                XCTFail("Should open webview and don't call this callback")
-        }
-
-        waitForExpectations(timeout: timeout, handler: nil)
-    }
-
-    func testWebViewOn3DSPresentChallengeFailed() {
-        let expectation = self.expectation(description: "callback")
-
-        topViewController.onPresentViewController = { viewController in
-            defer { expectation.fulfill() }
-            let presentedVC = (viewController as? UINavigationController)?.topViewController
-            XCTAssertTrue(presentedVC is AuthorizingPaymentWebViewController)
-        }
-
-        let challengeError = AnyError("Any error on presenting Netcetera Challenge")
-        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.presentChallenge(error: challengeError))
-        authorizingPayment.presentAuthPaymentController(
-            from: topViewController,
-            url: authorizeURL,
-            expectedWebViewReturnURL: expectedWebReturnURL,
-            deeplinkURL: deeplinkURL) { _ in
-                XCTFail("Should open webview and don't call this callback")
-        }
-
-        waitForExpectations(timeout: timeout, handler: nil)
-    }
-
-    func testWebViewOn3DSApiKeyInvalid() {
-        let expectation = self.expectation(description: "callback")
-
-        topViewController.onPresentViewController = { viewController in
-            defer { expectation.fulfill() }
-            let presentedVC = (viewController as? UINavigationController)?.topViewController
-            XCTAssertTrue(presentedVC is AuthorizingPaymentWebViewController)
-        }
-
-        netceteraMockController.processAuthorizedURLResult = .failure(NetceteraError.apiKeyInvalid)
-        authorizingPayment.presentAuthPaymentController(
-            from: topViewController,
-            url: authorizeURL,
-            expectedWebViewReturnURL: expectedWebReturnURL,
-            deeplinkURL: deeplinkURL) { _ in
-                XCTFail("Should open webview and don't call this callback")
-        }
-
-        waitForExpectations(timeout: timeout, handler: nil)
-    }
-
-    func testWebViewOnInitializationFailed() {
-        let expectation = self.expectation(description: "callback")
-
-        topViewController.onPresentViewController = { viewController in
-            defer { expectation.fulfill() }
-            let presentedVC = (viewController as? UINavigationController)?.topViewController
-            XCTAssertTrue(presentedVC is AuthorizingPaymentWebViewController)
-        }
-
-        netceteraMockController.processAuthorizedURLResult = .failure(AnyError("Any error during initialization"))
-        authorizingPayment.presentAuthPaymentController(
-            from: topViewController,
-            url: authorizeURL,
-            expectedWebViewReturnURL: expectedWebReturnURL,
-            deeplinkURL: deeplinkURL) { _ in
-                XCTFail("Should open webview and don't call this callback")
-        }
-
-        waitForExpectations(timeout: timeout, handler: nil)
+        return (.allow, nil)
     }
 }

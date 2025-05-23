@@ -105,7 +105,7 @@ extension CreditCardPaymentFormViewModel: CreditCardPaymentFormViewModelInput {
 extension CreditCardPaymentFormViewModel: CreditCardPaymentFormViewModelOutput {
     var countryViewModel: CountryListViewModelProtocol { return self }
     
-    var shouldShouldAddressFields: Bool {
+    var shouldAddressFields: Bool {
         self.currentCountry?.isAVS ?? false
     }
     
