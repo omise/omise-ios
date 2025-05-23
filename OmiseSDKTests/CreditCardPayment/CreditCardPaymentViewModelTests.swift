@@ -100,11 +100,11 @@ class CreditCardPaymentFormViewModelTests: XCTestCase {
     
     func test_shouldShowAddressFields_reflectsCountryAVS() {
         sut.selectedCountry = Country(code: "JP")  // assume isAVS=false
-        XCTAssertFalse(sut.output.shouldShouldAddressFields)
+        XCTAssertFalse(sut.output.shouldAddressFields)
         
         let avsCountry = Country(code: "US")
         sut.selectedCountry = avsCountry
-        XCTAssertTrue(sut.output.shouldShouldAddressFields)
+        XCTAssertTrue(sut.output.shouldAddressFields)
     }
     
     func test_allCountries() {
