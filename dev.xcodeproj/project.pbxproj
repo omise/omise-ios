@@ -63,7 +63,7 @@
 		4B9E70432DDBA46800DA384C /* CreditCardPaymentViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E70422DDBA46100DA384C /* CreditCardPaymentViewModelTests.swift */; };
 		4B9E70462DDBA48000DA384C /* MockCreditCardPaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E70452DDBA47C00DA384C /* MockCreditCardPaymentViewModel.swift */; };
 		4B9E70482DDBA4CB00DA384C /* MockCreditCardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E70472DDBA4C600DA384C /* MockCreditCardDelegate.swift */; };
-		4B9E705D2DDD88B800DA384C /* AuthorizingPaymentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4E8B2BE38AFD005E7B5A /* AuthorizingPaymentTests.swift */; };
+		4B9E705D2DDD88B800DA384C /* AuthorizingPaymentWebViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4E8B2BE38AFD005E7B5A /* AuthorizingPaymentWebViewControllerTests.swift */; };
 		4BC7A8B82DC5E14A007E1A17 /* TrueMoneyPaymentFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7A8B72DC5E144007E1A17 /* TrueMoneyPaymentFormViewModel.swift */; };
 		4BC7A8BA2DC5E153007E1A17 /* TrueMoneyPaymentFormProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7A8B92DC5E14E007E1A17 /* TrueMoneyPaymentFormProtocol.swift */; };
 		4BC7A8BC2DC5E930007E1A17 /* TrueMoneyPaymentFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7A8BB2DC5E92C007E1A17 /* TrueMoneyPaymentFormController.swift */; };
@@ -474,7 +474,7 @@
 		758A4E7B2BE38A89005E7B5A /* ThreeDSTextBoxCustomization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeDSTextBoxCustomization.swift; sourceTree = "<group>"; };
 		758A4E882BE38AFD005E7B5A /* NetceteraThreeDSControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetceteraThreeDSControllerTests.swift; sourceTree = "<group>"; };
 		758A4E8A2BE38AFD005E7B5A /* UICustomizationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICustomizationTests.swift; sourceTree = "<group>"; };
-		758A4E8B2BE38AFD005E7B5A /* AuthorizingPaymentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizingPaymentTests.swift; sourceTree = "<group>"; };
+		758A4E8B2BE38AFD005E7B5A /* AuthorizingPaymentWebViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizingPaymentWebViewControllerTests.swift; sourceTree = "<group>"; };
 		758A4E8E2BE38AFD005E7B5A /* ThreeDSButtonCustomizationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeDSButtonCustomizationTests.swift; sourceTree = "<group>"; };
 		758A4E8F2BE38AFD005E7B5A /* SHA512Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA512Tests.swift; sourceTree = "<group>"; };
 		758A4E9E2BE3DFDF005E7B5A /* URL+PathComponentsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+PathComponentsTests.swift"; sourceTree = "<group>"; };
@@ -1037,7 +1037,7 @@
 		758A4E872BE38AE8005E7B5A /* 3DS */ = {
 			isa = PBXGroup;
 			children = (
-				758A4E8B2BE38AFD005E7B5A /* AuthorizingPaymentTests.swift */,
+				758A4E8B2BE38AFD005E7B5A /* AuthorizingPaymentWebViewControllerTests.swift */,
 				758A4E882BE38AFD005E7B5A /* NetceteraThreeDSControllerTests.swift */,
 				758A4E8F2BE38AFD005E7B5A /* SHA512Tests.swift */,
 				758A4E8E2BE38AFD005E7B5A /* ThreeDSButtonCustomizationTests.swift */,
@@ -1951,7 +1951,7 @@
 				4B904E5C2DC9FE5D00BE78EC /* MockFPXPaymentViewModel.swift in Sources */,
 				2F5D98F32D6EB29000B5ECB4 /* ChoosePaymentCooridnatorTest.swift in Sources */,
 				758A4E902BE38AFD005E7B5A /* NetceteraThreeDSControllerTests.swift in Sources */,
-				4B9E705D2DDD88B800DA384C /* AuthorizingPaymentTests.swift in Sources */,
+				4B9E705D2DDD88B800DA384C /* AuthorizingPaymentWebViewControllerTests.swift in Sources */,
 				2F0267552D8D4FB100BA8D3E /* CardNumberTextFieldTests.swift in Sources */,
 				7509D4E42A1C89F10050AB38 /* AtomeFormViewModelMockup.swift in Sources */,
 				2F5D98F52D6EB41C00B5ECB4 /* MockClientProtocol.swift in Sources */,
