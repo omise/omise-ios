@@ -110,7 +110,12 @@ extension MockClient {
         let originalData = try Data(contentsOf: path)
         var json = String(data: originalData, encoding: .utf8)
         json = json?.replacingOccurrences(of: "\"active\": true", with: "\"active\": false")
-        let data = json?.data(using: .utf8) ?? Data()
+        
+        guard let data = json?.data(using: .utf8) else {
+            XCTFail("Failed to convert modified JSON string to Data")
+            throw NSError(domain: "MockClientError", code: 1, userInfo: [NSLocalizedDescriptionKey: "Invalid JSON data"])
+        }
+        
         return try JSONDecoder().decode(Capability.self, from: data)
     }
 }
