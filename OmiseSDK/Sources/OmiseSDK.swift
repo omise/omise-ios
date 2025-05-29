@@ -245,7 +245,7 @@ private extension OmiseSDK {
     ) {
         dismiss(animated: false)
 
-        let viewController = AuthorizingPaymentWebViewController(nibName: nil, bundle: .omiseSDK)
+        let viewController = AuthorizingPaymentWebViewController()
         viewController.authorizeURL = authorizeURL
         viewController.expectedReturnURLStrings = expectedReturnURLStrings.compactMap {
             URLComponents(string: $0)

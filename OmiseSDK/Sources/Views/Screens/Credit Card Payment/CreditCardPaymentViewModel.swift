@@ -1,77 +1,164 @@
 import Foundation
-import os.log
 
-enum CreditCardPaymentOption {
-    case card
-    case whiteLabelInstallment(payment: Source.Payment)
-}
-
-class CreditCardPaymentViewModel: CreditCardPaymentViewModelProtocol, CountryListViewModelProtocol {
-
-    let paymentType: CreditCardPaymentOption
-
-    var addressFields: [AddressField] = [.address, .city, .state, .postalCode]
-
-    var fieldForShippingAddressHeader: AddressField?
-
-    var isAddressFieldsVisible: Bool {
-        selectedCountry?.isAVS ?? false
-    }
-
-    func title(for field: AddressField) -> String? {
-        field.title
-    }
-    
-    var countryListViewModel: CountryListViewModelProtocol { return self }
-
-    private weak var delegate: CreditCardPaymentDelegate?
-
-    init(currentCountry: Country?, paymentType: CreditCardPaymentOption, delegate: CreditCardPaymentDelegate?) {
-        self.delegate = delegate
-        self.selectedCountry = currentCountry
-        self.paymentType = paymentType
-    }
-
-    // MARK: CountryListViewModelProtocol
-    lazy var countries: [Country] = Country.sortedAll
+class CreditCardPaymentFormViewModel: CreditCardPaymentFormViewModelProtocol, CountryListViewModelProtocol {
+    var input: CreditCardPaymentFormViewModelInput { self }
+    var output: CreditCardPaymentFormViewModelOutput { self }
     
     var selectedCountry: Country? {
         didSet {
             if let selectedCountry = selectedCountry {
-                onSelectCountry(selectedCountry)
+                currentCountry = selectedCountry
+                countryClosure?(selectedCountry)
             }
         }
     }
+    lazy var countries: [Country] = Country.sortedAll
     
     var onSelectCountry: (Country) -> Void = { _ in /* Non-optional default empty implementation */ }
-
-    func error(for field: AddressField, validate text: String?) -> String? {
-        guard isAddressFieldsVisible else { return nil }
-        let result = (text?.isEmpty ?? true) ? field.error : nil
-        return result
+    
+    weak var delegate: CreditCardPaymentDelegate?
+    
+    private var loadingClosure: ParamClosure<Bool> = nil
+    private var countryClosure: ParamClosure<Country> = nil
+    
+    private var currentCountry: Country?
+    private let option: CreditCardPaymentOption
+    
+    init(
+        country: Country?,
+        paymentOption: CreditCardPaymentOption,
+        delegate: CreditCardPaymentDelegate?
+    ) {
+        self.delegate = delegate
+        self.currentCountry = country
+        self.option = paymentOption
     }
+}
 
-    func viewDidTapClose() {
+// MARK: - Input
+extension CreditCardPaymentFormViewModel: CreditCardPaymentFormViewModelInput {
+    func viewDidLoad() {
+        if let country = self.currentCountry {
+            countryClosure?(country)
+        }
+    }
+    
+    func didCancelForm() {
         delegate?.didCancelCardPayment()
     }
-
-    func onSubmitButtonPressed(_ viewContext: ViewContext, completion: @escaping () -> Void) {
-
+    
+    func startPayment(for payment: CreditCardPayment) {
         let card = CreateTokenPayload.Card(
-            name: viewContext.name,
-            number: viewContext.number,
-            expirationMonth: viewContext.expirationMonth,
-            expirationYear: viewContext.expirationYear,
-            securityCode: viewContext.securityCode,
+            name: payment.name,
+            number: payment.pan,
+            expirationMonth: payment.expiryMonth,
+            expirationYear: payment.expiryYear,
+            securityCode: payment.cvv,
             phoneNumber: nil,
-            countryCode: viewContext.countryCode,
-            city: viewContext[.city],
-            state: viewContext[.state],
-            street1: viewContext[.address],
+            countryCode: currentCountry?.code,
+            city: payment.city,
+            state: payment.state,
+            street1: payment.address,
             street2: nil,
-            postalCode: viewContext[.postalCode]
+            postalCode: payment.zipcode
         )
-
-        delegate?.didSelectCardPayment(paymentType: paymentType, card: card, completion: completion)
+        
+        loadingClosure?(true)
+        delegate?.didSelectCardPayment(paymentType: option,
+                                       card: card) { [weak self] in
+            guard let self = self else { return }
+            self.loadingClosure?(false)
+        }
     }
+    
+    func set(loadingClosure: ParamClosure<Bool>) {
+        self.loadingClosure = loadingClosure
+    }
+    
+    func set(countryClosure: ParamClosure<Country>) {
+        self.countryClosure = countryClosure
+    }
+    
+    func getBrandImage(for brand: CardBrand?) -> String? {
+        switch brand {
+        case .visa:
+            return "Visa"
+        case .masterCard:
+            return "Mastercard"
+        case .jcb:
+            return "JCB"
+        case .amex:
+            return "AMEX"
+        case .diners:
+            return "Diners"
+        case .unionPay:
+            return "UnionPay"
+        case .discover:
+            return "Discover"
+        default:
+            return nil
+        }
+    }
+}
+
+// MARK: - Output
+extension CreditCardPaymentFormViewModel: CreditCardPaymentFormViewModelOutput {
+    var countryViewModel: CountryListViewModelProtocol { return self }
+    
+    var shouldAddressFields: Bool {
+        self.currentCountry?.isAVS ?? false
+    }
+    
+    var numberError: String {
+        NSLocalizedString(
+            "credit-card-form.card-number-field.invalid-data.error.text",
+            tableName: "Error",
+            bundle: .omiseSDK,
+            value: "Credit card number is invalid",
+            comment: "An error text displayed when the credit card number is invalid"
+        )
+    }
+    
+    var expiryError: String {
+        NSLocalizedString(
+            "credit-card-form.expiry-date-field.invalid-data.error.text",
+            tableName: "Error",
+            bundle: .omiseSDK,
+            value: "Card expiry date is invalid",
+            comment: "An error text displayed when the expiry date is invalid"
+        )
+    }
+    
+    var cvvError: String {
+        NSLocalizedString(
+            "credit-card-form.security-code-field.invalid-data.error.text",
+            tableName: "Error",
+            bundle: .omiseSDK,
+            value: "CVV code is invalid",
+            comment: "An error text displayed when the security code is invalid"
+        )
+    }
+    
+    var nameError: String {
+        NSLocalizedString(
+            "credit-card-form.card-holder-name-field.invalid-data.error.text",
+            tableName: "Error",
+            bundle: .omiseSDK,
+            value: "Card holder name is invalid",
+            comment: "An error text displayed when the card holder name is invalid"
+        )
+    }
+}
+
+struct CreditCardPayment {
+    let pan: String
+    let name: String
+    let expiryMonth: Int
+    let expiryYear: Int
+    let cvv: String
+    let country: String
+    let address: String?
+    let state: String?
+    let city: String?
+    let zipcode: String?
 }

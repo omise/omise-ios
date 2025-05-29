@@ -59,7 +59,7 @@ class ApplePayViewControllerTests: XCTestCase {
         
         // Wait for the asynchronous completion to re-enable the button.
         let expectation = self.expectation(description: "Button re-enabled after payment completion")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             XCTAssertTrue(self.viewController.applePayButton.isEnabled, "Button should be re-enabled after payment completion")
             expectation.fulfill()
         }

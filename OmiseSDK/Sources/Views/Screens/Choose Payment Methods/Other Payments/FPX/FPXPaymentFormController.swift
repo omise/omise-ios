@@ -1,217 +1,210 @@
 import UIKit
 
-protocol FPXPaymentFormControllerDelegate: AnyObject {
-    func fpxDidCompleteWith(email: String?, completion: @escaping () -> Void)
-}
-
-class FPXPaymentFormController: UIViewController, PaymentFormUIController {
-
-    weak var delegate: FPXPaymentFormControllerDelegate?
-
-    private let destinationSegue: String = "GoToFPXBankChooserSegue"
-    var showingValues: [Capability.PaymentMethod.Bank]?
-    private var emailValue: String?
-
-    private var client: ClientProtocol?
-
-    private var isInputDataValid: Bool {
-        return formFields.allSatisfy { $0.isValid } || isEmailInputEmpty
+class FPXPaymentFormController: BaseFormViewController {
+    // MARK: - UI Elements
+    private lazy var imgFPX: UIImageView = {
+        UIImageView(image: UIImage(omise: "FPX_Big"))
+            .contentMode(.scaleAspectFit)
+    }()
+    
+    private lazy var pleaseInputLabel: UILabel = {
+        let label = UILabel()
+        label.text(localized("fpx.label.pleaseInput.text"))
+        configureBody(label)
+        return label
+    }()
+    
+    private lazy var emailLabel: UILabel = {
+        let label = UILabel()
+        label.text(localized("fpx.field.email"))
+        configure(label)
+        return label
+    }()
+    
+    private lazy var emailTextField: OmiseTextField = {
+        let tf = OmiseTextField()
+        tf.validator = try? NSRegularExpression(pattern: "\\A[\\w.+-]+@[a-z\\d.-]+\\.[a-z]{2,}\\z",
+                                                options: [.caseInsensitive])
+        tf.setAccessibilityID("fpx.emailTextField")
+        tf.keyboardType = .emailAddress
+        configure(tf)
+        return tf
+    }()
+    
+    private lazy var emailErrorLabel: UILabel = {
+        let label = UILabel()
+        label.text("-").setAccessibilityID("fpx.emailError")
+        configureError(label)
+        return label
+    }()
+    
+    private lazy var submitButton: MainActionButton = {
+        let button = MainActionButton()
+        button.setTitle(localized("fpx.nextButton.title"), for: .normal)
+        button.font(.preferredFont(forTextStyle: .headline))
+        button.defaultBackgroundColor = .omise
+        button.disabledBackgroundColor = .line
+        button.cornerRadius = 4
+        button.isEnabled = false
+        button.addTarget(self, action: #selector(submitForm(_:)), for: .touchUpInside)
+        button.setAccessibilityID("fpx.submitButton")
+            .translatesAutoresizingMaskIntoConstraints(false)
+        return button
+    }()
+    
+    private lazy var formStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis(.vertical)
+            .alignment(.fill)
+            .spacing(spacing)
+            .translatesAutoresizingMaskIntoConstraints(false)
+        return stack
+    }()
+    
+    let viewModel: FPXPaymentFormViewModelProtocol
+    
+    // MARK: - Initialization
+    init(viewModel: FPXPaymentFormViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: .omiseSDK)
     }
-
-    private var isEmailInputEmpty: Bool {
-        return emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty ?? true
-    }
-
-    var currentEditingTextField: OmiseTextField?
-
-    @IBOutlet var contentView: UIScrollView!
-
-    @IBOutlet private var emailLabel: UILabel!
-    @IBOutlet private var emailErrorLabel: UILabel!
-    @IBOutlet private var emailTextField: OmiseTextField!
-    @IBOutlet private var submitButton: MainActionButton!
-    @IBOutlet private var requestingIndicatorView: UIActivityIndicatorView!
-
-    lazy var formLabels: [UILabel]! = {
-        [emailLabel]
-    }()
-
-    lazy var formFields: [OmiseTextField]! = {
-        [emailTextField]
-    }()
-
-    lazy var errorLabels: [UILabel] = {
-        [emailErrorLabel]
-    }()
-
-    @IBOutlet var formFieldsAccessoryView: UIToolbar!
-    @IBOutlet var gotoPreviousFieldBarButtonItem: UIBarButtonItem!
-    @IBOutlet var gotoNextFieldBarButtonItem: UIBarButtonItem!
-    @IBOutlet var doneEditingBarButtonItem: UIBarButtonItem!
-
+    
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .background
-        formFieldsAccessoryView.barTintColor = .formAccessoryBarTintColor
-
-        submitButton.defaultBackgroundColor = .omise
-        submitButton.disabledBackgroundColor = .line
-
-        if #available(iOSApplicationExtension 11.0, *) {
-            navigationItem.largeTitleDisplayMode = .never
-        }
-
-        navigationItem.backBarButtonItem = .empty
-
-        formFields.forEach {
-            $0.inputAccessoryView = formFieldsAccessoryView
-        }
-
-        formFields.forEach {
-            $0.adjustsFontForContentSizeCategory = true
-        }
-        formLabels.forEach {
-            $0.adjustsFontForContentSizeCategory = true
-        }
-        submitButton.titleLabel?.adjustsFontForContentSizeCategory = true
-
-        if #unavailable(iOS 11) {
-            // We'll leave the adjusting scroll view insets job for iOS 11 and later to the layoutMargins + safeAreaInsets here
-            automaticallyAdjustsScrollViewInsets = true
-        }
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillChangeFrame(_:)),
-            name: UIResponder.keyboardWillChangeFrameNotification,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillHide(_:)),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
-
-        emailTextField.textColor = UIColor.omisePrimary
-        emailTextField.validator = try? NSRegularExpression(pattern: "\\A[\\w.+-]+@[a-z\\d.-]+\\.[a-z]{2,}\\z", options: [.caseInsensitive])
-
-        // check for 1st time
-        validateFieldData(emailTextField)
+        // Add the content view (inherited from BaseFormViewController)
+        view.addSubviewAndFit(contentView)
+        
+        setupUI()
         setupTextFieldHandlers()
-
+        setupHandlers()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.input.viewWillAppear() // reset state
+    }
+    
+    // MARK: - Setup UI
+    private func setupUI() {
+        contentView.addSubviewAndFit(formStack, vertical: padding, horizontal: padding)
+        
+        formStack.constrainWidth(equalTo: contentView, constant: -(padding * 2))
+        formStack.addArrangedSubviews([
+            getStackViewGroup(for: [imgFPX, pleaseInputLabel]),
+            getStackViewGroup(for: [emailLabel, emailTextField, emailErrorLabel]),
+            submitButton
+        ])
+        
+        contentView.addSubview(requestingIndicatorView)
+        requestingIndicatorView.setToCenter(of: submitButton)
+        
+        // Tell the base controller which fields to handle.
+        formFields = [emailTextField]
         contentView.adjustContentInsetOnKeyboardAppear()
     }
-
-    private func setupTextFieldHandlers() {
-        self.formFields.forEach { field in
-            setupTextField(field)
-        }
-    }
-
-    private func setupTextField(_ field: OmiseTextField) {
-        field.addTarget(self, action: #selector(validateFieldData), for: .editingChanged)
-        field.addTarget(self, action: #selector(updateInputAccessoryViewFor), for: .editingDidBegin)
-        field.addTarget(self, action: #selector(validateTextFieldDataOf), for: .editingDidEnd)
-    }
-
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-
-        if #unavailable(iOS 11) {
-            // There's a bug in iOS 10 and earlier which the text field's intrinsicContentSize is returned the value
-            // that doesn't take the result of textRect(forBounds:) method into an account for the initial value
-            // So we need to invalidate the intrinsic content size here to ask those text fields to calculate their
-            // intrinsic content size again
-
-            formFields.forEach {
-                $0.invalidateIntrinsicContentSize()
+    
+    private func setupHandlers() {
+        viewModel.input.set { [weak self] isLoading in
+            guard let self = self else { return }
+            if isLoading {
+                self.requestingIndicatorView.startAnimating()
+                self.view.isUserInteractionEnabled = false
+                self.view.tintAdjustmentMode = .dimmed
+                self.submitButton.isEnabled = false
+            } else {
+                self.requestingIndicatorView.stopAnimating()
+                self.view.isUserInteractionEnabled = true
+                self.view.tintAdjustmentMode = .automatic
+                self.submitButton.isEnabled = true
             }
         }
     }
-
-    @IBAction private func submitForm(_ sender: AnyObject) {
-        emailValue = emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespaces)
-        delegate?.fpxDidCompleteWith(email: emailValue) { /* no action is required */ }
+    
+    private func getStackViewGroup(for views: [UIView]) -> UIStackView {
+        let stackView = UIStackView()
+        stackView.axis(.vertical)
+            .alignment(.fill)
+            .spacing(minSpacing)
+            .translatesAutoresizingMaskIntoConstraints(false)
+            .addArrangedSubviews(views)
+        return stackView
     }
-
-    @IBAction private func validateFieldData(_ textField: OmiseTextField) {
-        submitButton.isEnabled = isInputDataValid
+    
+    // MARK: - Form Submission
+    @objc func submitForm(_ sender: UIButton) {
+        let email = emailTextField.text?.trimmingCharacters(in: .whitespaces)
+        viewModel.input.startPayment(email: email)
     }
-
-    @IBAction private func validateTextFieldDataOf(_ sender: OmiseTextField) {
-        let duration = TimeInterval(UINavigationController.hideShowBarDuration)
-        UIView.animate(withDuration: duration,
-                       delay: 0.0,
-                       options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
-            self.validateField(sender)
-        }
-        sender.borderColor = UIColor.omiseSecondary
-    }
-
-    @IBAction private func updateInputAccessoryViewFor(_ sender: OmiseTextField) {
-        let duration = TimeInterval(UINavigationController.hideShowBarDuration)
-        UIView.animate(withDuration: duration,
-                       delay: 0.0,
-                       options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .layoutSubviews]) {
-            self.emailErrorLabel.alpha = 0.0
-        }
-
-        updateInputAccessoryViewWithFirstResponder(sender)
-        sender.borderColor = view.tintColor
-    }
-
-    @IBAction private func doneEditing(_ button: UIBarButtonItem?) {
-        doneEditing()
-    }
-
-    private func validateField(_ textField: OmiseTextField) {
+    
+    func validateField(_ textField: OmiseTextField) {
         do {
             try textField.validate()
-            emailErrorLabel.alpha = 0.0
+            emailErrorLabel.alpha(0.0)
         } catch {
             switch error {
             case OmiseTextFieldValidationError.emptyText:
-                emailErrorLabel.text = "-" // We need to set the error label some string in order to have it retains its height
-
+                emailErrorLabel.text("-")
             case OmiseTextFieldValidationError.invalidData:
-                emailErrorLabel.text = NSLocalizedString(
-                    "payment-creator.error.api.bad_request.invalid-email.message",
-                    tableName: "Error",
-                    bundle: .omiseSDK,
-                    value: "Email is invalid",
-                    comment: "An error text in the FPX form displayed when the email is invalid"
-                )
-
+                emailErrorLabel.text(viewModel.output.emailError)
             default:
-                emailErrorLabel.text = error.localizedDescription
+                emailErrorLabel.text(error.localizedDescription)
             }
-            emailErrorLabel.alpha = emailErrorLabel.text != "-" ? 1.0 : 0.0
+            emailErrorLabel.alpha(emailErrorLabel.text != "-" ? 1.0 : 0.0)
         }
     }
+    
+}
 
-    @objc func keyboardWillChangeFrame(_ notification: NSNotification) {
-        guard let frameEnd = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
-            let frameStart = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? CGRect,
-            frameEnd != frameStart else {
-                return
-        }
-
-        let intersectedFrame = contentView.convert(frameEnd, from: nil)
-
-        contentView.contentInset.bottom = intersectedFrame.height
-        let bottomScrollIndicatorInset: CGFloat
-        if #available(iOS 11.0, *) {
-            bottomScrollIndicatorInset = intersectedFrame.height - contentView.safeAreaInsets.bottom
-        } else {
-            bottomScrollIndicatorInset = intersectedFrame.height
-        }
-        contentView.scrollIndicatorInsets.bottom = bottomScrollIndicatorInset
+// MARK: - TextFields Helper
+extension FPXPaymentFormController {
+    func setupTextFieldHandlers() {
+        emailTextField.addTarget(self,
+                                 action: #selector(textFieldEditingDidBegin(_:)),
+                                 for: .editingDidBegin)
+        emailTextField.addTarget(self,
+                                 action: #selector(textFieldEditingDidEndOnExit(_:)),
+                                 for: .editingDidEndOnExit)
+        emailTextField.addTarget(self,
+                                 action: #selector(validateFieldData(_:)),
+                                 for: .editingChanged)
+        emailTextField.addTarget(self,
+                                 action: #selector(validateTextFieldDataOf(_:)),
+                                 for: .editingDidEnd)
+        
+        validateFieldData(emailTextField)
     }
-
-    @objc func keyboardWillHide(_ notification: NSNotification) {
-        contentView.contentInset.bottom = 0.0
-        contentView.scrollIndicatorInsets.bottom = 0.0
+    
+    @objc func textFieldEditingDidBegin(_ textField: OmiseTextField) {
+        let duration = TimeInterval(UINavigationController.hideShowBarDuration)
+        UIView.animate(withDuration: duration,
+                       delay: 0.0,
+                       options: [
+                        .curveEaseInOut,
+                        .allowUserInteraction,
+                        .beginFromCurrentState,
+                        .layoutSubviews
+                       ]
+        ) { [weak self] in
+            self?.emailErrorLabel.alpha = 0.0
+        }
+        updateNavigationButtons(for: textField)
+    }
+    
+    @objc func textFieldEditingDidEndOnExit(_ textField: OmiseTextField) {
+        gotoNextField()
+    }
+    
+    @objc func validateFieldData(_ textField: OmiseTextField) {
+        submitButton.isEnabled = formFields.allSatisfy { $0.isValid || ($0.text ?? "").isEmpty }
+    }
+    
+    @objc func validateTextFieldDataOf(_ textField: OmiseTextField) {
+        UIView.animate(withDuration: TimeInterval(UINavigationController.hideShowBarDuration)) {
+            self.validateField(textField)
+        }
+        textField.borderColor = .omiseSecondary
+        validateFieldData(textField)
     }
 }

@@ -839,30 +839,39 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
             try OmiseError.APIErrorCode.BadRequestReason(message: $0, currency: currency)
         })
         
-        return parsedReasons.sorted {
-            switch $0 {
+        return parsedReasons.sorted { lhs, rhs in
+            // 1) If lhs is `.other` it must go *after* anything else:
+            if case .other = lhs {
+                return false
+            }
+            // 2) If rhs is `.other` then lhs (which is not `.other`) goes *before*:
+            if case .other = rhs {
+                return true
+            }
+            
+            switch lhs {
             case .amountIsLessThanValidAmount:
                 return true
-            case .other:
-                return false
             case .amountIsGreaterThanValidAmount:
-                return Self.sortByAmountIsGreaterThanValidAmount(reason: $1)
+                return Self.sortByAmountIsGreaterThanValidAmount(reason: rhs)
             case .invalidCurrency:
-                return Self.sortByInvalidCurrency(reason: $1)
+                return Self.sortByInvalidCurrency(reason: rhs)
             case .emptyName:
-                return Self.sortByEmptyName(reason: $1)
+                return Self.sortByEmptyName(reason: rhs)
             case .nameIsTooLong:
-                return Self.sortByNameIsTooLong(reason: $1)
+                return Self.sortByNameIsTooLong(reason: rhs)
             case .invalidName:
-                return Self.sortByInvalidName(reason: $1)
+                return Self.sortByInvalidName(reason: rhs)
             case .invalidEmail:
-                return Self.sortByInvalidEmail(reason: $1)
+                return Self.sortByInvalidEmail(reason: rhs)
             case .invalidPhoneNumber:
-                return Self.sortByInvalidPhoneNumber(reason: $1)
+                return Self.sortByInvalidPhoneNumber(reason: rhs)
             case .typeNotSupported:
-                return Self.sortByTypeNotSupported(reason: $1)
+                return Self.sortByTypeNotSupported(reason: rhs)
             case .currencyNotSupported:
-                return Self.sortByCurrencyNotSupported(reason: $1)
+                return Self.sortByCurrencyNotSupported(reason: rhs)
+            default:
+                return false
             }
         }
     }

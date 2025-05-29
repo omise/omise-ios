@@ -85,8 +85,8 @@
 "CreditCard.field.mmyy.placeholder" = "MM/YY";
 "CreditCard.payButton.title" = "Pay";
 
-"CreditCard.ccv.details.amex.text" = "4 digit number on the front of your card";
-"CreditCard.ccv.details.default.text" = "3 digit number on the back of your card";
+"CreditCard.cvv.details.amex.text" = "4 digit number on the front of your card";
+"CreditCard.cvv.details.default.text" = "3 digit number on the back of your card";
 
 // EContext
 "EContext.field.fullName" = "Full name";
@@ -124,6 +124,9 @@
 
 // FPX
 "fpx.bank-chooser.no-banks-available.text" = "Cannot retrieve list of banks.\nPlease try again later.";
+"fpx.field.email" = "Email (Optional)";
+"fpx.nextButton.title" = "Next";
+"fpx.label.pleaseInput.text" = "Please input your email to receive transaction confirmation from FPX";
 
 // Authorizing Payment
 "AuthorizingPayment.title" = "Authorizing Payment";

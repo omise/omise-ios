@@ -8,7 +8,7 @@ class EContextPaymentFormViewModel: EContextPaymentFormViewModelProtocol {
     
     private var loadingClosure: ParamClosure<Bool> = nil
     
-    init() { }
+    init() { /* Non-optional default empty implementation */ }
 }
 
 extension EContextPaymentFormViewModel: EContextPaymentFormViewModelInput {
