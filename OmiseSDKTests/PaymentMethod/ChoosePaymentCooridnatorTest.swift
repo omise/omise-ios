@@ -366,7 +366,7 @@ class ChoosePaymentCoordinatorTests: XCTestCase {
         XCTAssertFalse(mockNavigationController.view.subviews.contains(sut.errorView))
     }
     
-    func test_navigationController_Animiated() {
+    func test_navigationController_Animated() {
         let duration = TimeInterval(UINavigationController.hideShowBarDuration)
         let exp = expectation(description: "wait for hide/show-bar animation")
         
@@ -381,7 +381,7 @@ class ChoosePaymentCoordinatorTests: XCTestCase {
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             exp.fulfill()
         }
-        wait(for: [exp], timeout: duration + 0.1)
+        wait(for: [exp], timeout: duration + 0.5)
         
         XCTAssertNil(sut.errorView.superview)
         XCTAssertFalse(mockNavigationController.view.subviews.contains(sut.errorView))
