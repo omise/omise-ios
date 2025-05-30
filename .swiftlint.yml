@@ -4,6 +4,7 @@
 
 excluded:
   - QuickStart.playground
+  - "**/DerivedSources/GeneratedAssetSymbols.swift"
 
 opt_in_rules:
   - attributes
