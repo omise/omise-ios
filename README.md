@@ -4,6 +4,8 @@
 [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Packager%20Manager-compatible-brightgreen?style=flat-square)](https://swift.org/package-manager)
 [![](https://img.shields.io/badge/email-support-yellow.svg?style=flat-square)](mailto:support@omise.co)
 ![CI](https://github.com/omise/omise-ios/workflows/CI/badge.svg?branch=master)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fomise%2Fomise-ios%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/omise/omise-ios)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fomise%2Fomise-ios%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/omise/omise-ios)
 
 [Omise](https://docs.omise.co/) is a payment service provider operating
 in Thailand, Japan, and Singapore. Omise provides a set of APIs that
