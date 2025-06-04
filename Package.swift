@@ -16,7 +16,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/ios-3ds-sdk/SPM", .exact("2.5.22"))
+        .package(url: "https://github.com/ios-3ds-sdk/SPM", .exact("2.4.0"))
     ],
     targets: [
         .target(

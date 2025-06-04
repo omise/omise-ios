@@ -80,7 +80,7 @@ class NetceteraThreeDSController {
         let scheme = Scheme(name: config.id)
         scheme.ids = [config.directoryServerId]
         scheme.encryptionKeyValue = formattedCert
-        scheme.rootCertificateValues = [formattedCert]
+        scheme.rootCertificateValue = formattedCert
         return scheme
     }
 
