@@ -3,12 +3,16 @@ import UIKit
 protocol AtomePaymentFormViewModelProtocol {
     typealias ViewContext = AtomePaymentFormViewContext
     typealias Field = ViewContext.Field
+    var billingAddressFields: [Field] { get }
     var fields: [Field] { get }
     var submitButtonTitle: String { get }
     var headerText: String { get }
     var logoName: String { get }
     var fieldForShippingAddressHeader: Field? { get }
+    var fieldForBillingAddressHeader: Field? { get }
     var countryListViewModel: CountryListViewModelProtocol { get }
+    var shippingCountry: Country? { get set }
+    var billingCountry: Country? { get set }
 
     func onSubmitButtonPressed(_ viewContext: ViewContext, onComplete: @escaping  () -> Void)
     func error(for: Field, validate: String?) -> String?
