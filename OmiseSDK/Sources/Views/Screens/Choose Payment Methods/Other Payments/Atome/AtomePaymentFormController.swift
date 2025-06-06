@@ -238,10 +238,10 @@ extension AtomePaymentInputsFormController {
     }
     
     func handleBillingAddress(shouldHide: Bool) {
-        billingAddressLabel.isHidden = shouldHide
         for field in viewModel.billingAddressFields {
             guard let input = input(for: field) else { return }
             input.isHidden = shouldHide
+            billingAddressLabel.isHidden = shouldHide
             
             if shouldHide {
                 input.text = ""

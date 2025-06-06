@@ -1212,6 +1212,7 @@
 		75D13DF02B866BF60073A831 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				4B7C1E712DF05820002A7356 /* OmiseCheckbox.swift */,
 				75D13DF12B866BFC0073A831 /* TextFields */,
 				75D13DF22B866C070073A831 /* CountryListController */,
 				4B7C1E712DF05820002A7356 /* OmiseCheckbox.swift */,
