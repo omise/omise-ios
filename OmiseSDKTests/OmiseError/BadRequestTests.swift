@@ -129,6 +129,7 @@ class BadRequestTests: XCTestCase {
         XCTAssertEqual(actual, .other(message))
     }
     
+    // swiftlint:disable:next function_body_length
     func testBadRequestLocalizedDescription1() throws {
         let testCases: [OmiseErrorParsing] = [
             .init(error: OmiseError.api(code: .badRequest([.invalidName]), message: "", location: ""),
@@ -170,7 +171,7 @@ class BadRequestTests: XCTestCase {
                   expectedLocalizedDescription: "Unknown error occurred",
                   expectedLocalizedRecovery: "Please try again later",
                   expectedDescription: "Bad request: Other Bad Request",
-                  expectedRecovery: "Other Bad Request"),
+                  expectedRecovery: "Other Bad Request")
         ]
         
         for testCase in testCases {
@@ -187,6 +188,7 @@ class BadRequestTests: XCTestCase {
         }
     }
     
+    // swiftlint:disable:next function_body_length
     func testBadRequestLocalizedDescription2() throws {
         let testCases: [OmiseErrorParsing] = [
             .init(error: OmiseError.api(code: .badRequest([.amountIsGreaterThanValidAmount(validAmount: 1000, currency: .sgd)]),

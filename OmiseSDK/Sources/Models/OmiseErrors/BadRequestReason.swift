@@ -1,12 +1,13 @@
 import Foundation
-
+// swiftlint:disable file_length
 extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
-    
     private enum ErrorMessageRegularExpression {
+        // swiftlint:disable line_length
         static let amountAtLeastValidAmount: NSRegularExpression! = try? NSRegularExpression(pattern: "amount must be at least ([\\d]+)", options: [])
         static let amountGreaterThanValidAmount: NSRegularExpression! = try? NSRegularExpression(pattern: "amount must be less than ([\\d]+)", options: [])
         static let amountLessThanValidAmount: NSRegularExpression! = try? NSRegularExpression(pattern: "amount must be greater than ([\\d]+)", options: [])
         static let nameIsTooLong: NSRegularExpression! = try? NSRegularExpression(pattern: "name is too long \\(maximum is ([\\d]+) characters\\)", options: [])
+        // swiftlint:enable line_length
     }
     
     public init(from decoder: Decoder) throws {
@@ -48,7 +49,11 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
                 let preferredErrorDescriptionFormat = getLocalizedError(
                     "error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.message",
                     defaultValue: "Amount is less than the valid amount of %@",
-                    comment: "A default descriptive message representing an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user"
+                    comment: """
+                            A default descriptive message representing an `Bad request` error with \
+                            `amount-is-less-than-valid-amount.with-valid-amount` from the backend which \
+                            a merchant may show this message to their user
+                            """
                 )
                 let formatter = NumberFormatter.makeAmountFormatter(for: currency)
                 preferredErrorDescription = String.localizedStringWithFormat(
@@ -58,7 +63,11 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
                 preferredErrorDescription = getLocalizedError(
                     "error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.message",
                     defaultValue: "Amount is less than the valid amount",
-                    comment: "A default descriptive message representing an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user"
+                    comment: """
+                            A default descriptive message representing an `Bad request` error with \
+                            `amount-is-less-than-valid-amount.without-valid-amount` from the backend \
+                            which a merchant may show this message to their user
+                            """
                 )
             }
         case .amountIsGreaterThanValidAmount(validAmount: let validAmount, currency: let currency):
@@ -66,7 +75,11 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
                 let preferredErrorDescriptionFormat = getLocalizedError(
                     "error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.message",
                     defaultValue: "Amount exceeds the valid amount of %@",
-                    comment: "A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user"
+                    comment: """
+                            A default descriptive message representing an `Bad request` error with \
+                            `amount-is-greater-than-valid-amount.with-valid-amount` from the backend \
+                             which a merchant may show this message to their user
+                            """
                 )
                 let formatter = NumberFormatter.makeAmountFormatter(for: currency)
                 preferredErrorDescription = String.localizedStringWithFormat(
@@ -76,21 +89,31 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
                 preferredErrorDescription = getLocalizedError(
                     "error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.message",
                     defaultValue: "Amount exceeds the valid amount",
-                    comment: "A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user"
+                    comment: """
+                            A default descriptive message representing an `Bad request` error with \
+                            `amount-is-greater-than-valid-amount.without-valid-amount` from the \
+                            backend which a merchant may show this message to their user
+                            """
                 )
             }
         case .invalidCurrency:
             preferredErrorDescription = getLocalizedError(
                 "error.api.bad_request.invalid-currency.message",
                 defaultValue: "The currency is invalid",
-                comment: "A default descriptive message representing an `Bad request` error with `invalid-currency` from the backend which a merchant may show this message to their user"
+                comment: """
+                        A default descriptive message representing an `Bad request` error with \
+                        `invalid-currency` from the backend which a merchant may show this message to their user
+                        """
             )
             
         case .emptyName:
             preferredErrorDescription = getLocalizedError(
                 "error.api.bad_request.empty-name.message",
                 defaultValue: "The customer name is empty",
-                comment: "A default descriptive message representing an `Bad request` error with `empty-name` from the backend which a merchant may show this message to their user"
+                comment: """
+                        A default descriptive message representing an `Bad request` error with `empty-name` from  \
+                        the backend which a merchant may show this message to their user
+                        """
             )
             
         case .nameIsTooLong(maximum: let maximumLength):
@@ -98,54 +121,78 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
                 let preferredErrorDescriptionFormat = getLocalizedError(
                     "error.api.bad_request.name-is-too-long.with-valid-length.message",
                     defaultValue: "The customer name exceeds the %d character limit",
-                    comment: "A default descriptive message representing an `Bad request` error with `name-is-too-long.with-valid-length` from the backend which a merchant may show this message to their user"
+                    comment: """
+                            A default descriptive message representing an `Bad request` error with \
+                            `name-is-too-long.with-valid-length` from the backend which a merchant may show this message to their user
+                            """
                 )
                 preferredErrorDescription = String.localizedStringWithFormat(preferredErrorDescriptionFormat, maximumLength)
             } else {
                 preferredErrorDescription = getLocalizedError(
                     "error.api.bad_request.name-is-too-long.without-valid-length.message",
                     defaultValue: "The customer name is too long",
-                    comment: "A default descriptive message representing an `Bad request` error with `name-is-too-long.without-valid-length` from the backend which a merchant may show this message to their user"
+                    comment: """
+                            A default descriptive message representing an `Bad request` error with \
+                            `name-is-too-long.without-valid-length` from the backend which a merchant may show this message to their user
+                            """
                 )
             }
         case .invalidName:
             preferredErrorDescription = getLocalizedError(
                 "error.api.bad_request.invalid-name.message",
                 defaultValue: "The customer name is invalid",
-                comment: "A default descriptive message representing an `Bad request` error with `invalid-name` from the backend which a merchant may show this message to their user"
+                comment: """
+                        A default descriptive message representing an `Bad request` error with `invalid-name` \
+                        from the backend which a merchant may show this message to their user
+                        """
             )
         case .invalidEmail:
             preferredErrorDescription = getLocalizedError(
                 "error.api.bad_request.invalid-email.message",
                 defaultValue: "The customer email is invalid",
-                comment: "A default descriptive message representing an `Bad request` error with `invalid-email` from the backend which a merchant may show this message to their user"
+                comment: """
+                        A default descriptive message representing an `Bad request` error with \
+                        `invalid-email` from the backend which a merchant may show this message to their user
+                        """
             )
             
         case .invalidPhoneNumber:
             preferredErrorDescription = getLocalizedError(
                 "error.api.bad_request.invalid-phone-number.message",
                 defaultValue: "The customer phone number is invalid",
-                comment: "A default descriptive message representing an `Bad request` error with `invalid-phone-number` from the backend which a merchant may show this message to their user"
+                comment: """
+                        A default descriptive message representing an `Bad request` error with `invalid-phone-number` \
+                        from the backend which a merchant may show this message to their user
+                        """
             )
             
         case .typeNotSupported:
             preferredErrorDescription = getLocalizedError(
                 "error.api.bad_request.type-not-supported.message",
                 defaultValue: "The source type is not supported by this account",
-                comment: "A default descriptive message representing an `Bad request` error with `type-not-supported` from the backend which a merchant may show this message to their user"
+                comment: """
+                        A default descriptive message representing an `Bad request` error with \
+                        `type-not-supported` from the backend which a merchant may show this message to their user
+                        """
             )
             
         case .currencyNotSupported:
             preferredErrorDescription = getLocalizedError(
                 "error.api.bad_request.currency-not-supported.message",
                 defaultValue: "The currency is not supported by this account",
-                comment: "A default descriptive message representing an `Bad request` error with `currency-not-supported` from the backend which a merchant may show this message to their user"
+                comment: """
+                        A default descriptive message representing an `Bad request` error with \
+                        `currency-not-supported` from the backend which a merchant may show this message to their user
+                        """
             )
         case .other(let value):
             let preferredErrorDescriptionFormat = getLocalizedError(
                 "error.api.bad_request.other.message",
                 defaultValue: "Bad request: %@",
-                comment: "A default descriptive message representing an `Bad request` error with `other` from the backend which a merchant may show this message to their user"
+                comment: """
+                        A default descriptive message representing an `Bad request` error with \
+                        `other` from the backend which a merchant may show this message to their user
+                        """
             )
             preferredErrorDescription = String.localizedStringWithFormat(preferredErrorDescriptionFormat, value)
         }
@@ -161,7 +208,11 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
                 let preferredRecoverySuggestionMessageFormat = getLocalizedError(
                     "error.api.bad_request.amount-is-less-than-valid-amount.with-valid-amount.recovery-suggestion",
                     defaultValue: "Please create a source with an amount that is greater than %@",
-                    comment: "A default descriptive message representing an `Bad request` error with `amount-is-less-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user"
+                    comment: """
+                            A default descriptive message representing an `Bad request` error with \
+                            `amount-is-less-than-valid-amount.with-valid-amount` from the backend which a merchant may \
+                            show this message to their user
+                            """
                 )
                 let formatter = NumberFormatter.makeAmountFormatter(for: currency)
                 preferredRecoverySuggestionMessage = String.localizedStringWithFormat(
@@ -171,7 +222,11 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
                 preferredRecoverySuggestionMessage = getLocalizedError(
                     "error.api.bad_request.amount-is-less-than-valid-amount.without-valid-amount.recovery-suggestion",
                     defaultValue: "Please create a source with a greater amount",
-                    comment: "A default descriptive message representing an `Bad request` error with `amount-is-less-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user"
+                    comment: """
+                            A default descriptive message representing an `Bad request` error with \
+                            `amount-is-less-than-valid-amount.without-valid-amount` from the backend which a merchant \
+                            may show this message to their user
+                            """
                 )
             }
         case .amountIsGreaterThanValidAmount(validAmount: let validAmount, currency: let currency):
@@ -179,7 +234,11 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
                 let preferredRecoverySuggestionMessageFormat = getLocalizedError(
                     "error.api.bad_request.amount-is-greater-than-valid-amount.with-valid-amount.recovery-suggestion",
                     defaultValue: "Please create a source with an amount which is less than %@",
-                    comment: "A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.with-valid-amount` from the backend which a merchant may show this message to their user"
+                    comment: """
+                            A default descriptive message representing an `Bad request` error with \
+                            `amount-is-greater-than-valid-amount.with-valid-amount` from the backend which a merchant may show \
+                            this message to their user
+                            """
                 )
                 let formatter = NumberFormatter.makeAmountFormatter(for: currency)
                 return String.localizedStringWithFormat(
@@ -189,66 +248,98 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
                 preferredRecoverySuggestionMessage = getLocalizedError(
                     "error.api.bad_request.amount-is-greater-than-valid-amount.without-valid-amount.recovery-suggestion",
                     defaultValue: "Please create a source with less amount",
-                    comment: "A default descriptive message representing an `Bad request` error with `amount-is-greater-than-valid-amount.without-valid-amount` from the backend which a merchant may show this message to their user"
+                    comment: """
+                    A default descriptive message representing an `Bad request` error with \
+                    `amount-is-greater-than-valid-amount.without-valid-amount` from the backend which a \
+                    merchant may show this message to their user
+                    """
                 )
             }
         case .invalidCurrency:
             preferredRecoverySuggestionMessage = getLocalizedError(
                 "error.api.bad_request.invalid-currency.recovery-suggestion",
                 defaultValue: "Bad request",
-                comment: "A default descriptive message representing an `Bad request` error with `invalid-currency` from the backend which a merchant may show this message to their user"
+                comment: """
+                    A default descriptive message representing an `Bad request` error with `invalid-currency` from \
+                    the backend which a merchant may show this message to their user
+                    """
             )
             
         case .emptyName:
             preferredRecoverySuggestionMessage = getLocalizedError(
                 "error.api.bad_request.empty-name.recovery-suggestion",
                 defaultValue: "Please input customer name",
-                comment: "A default descriptive message representing an `Bad request` error with `empty-name` from the backend which a merchant may show this message to their user"
+                comment: """
+                    A default descriptive message representing an `Bad request` error with `empty-name` \
+                    from the backend which a merchant may show this message to their user
+                    """
             )
         case .nameIsTooLong(maximum: let maximumLength):
             if let maximumLength = maximumLength {
                 let preferredRecoverySuggestionMessageFormat = getLocalizedError(
                     "error.api.bad_request.name-is-too-long.with-valid-length.recovery-suggestion",
                     defaultValue: "Please input customer name which is no longer than %d characters",
-                    comment: "A default descriptive message representing an `Bad request` error with `name-is-too-long.with-valid-length` from the backend which a merchant may show this message to their user"
+                    comment: """
+                    A default descriptive message representing an `Bad request` error with \
+                    `name-is-too-long.with-valid-length` from the backend which a merchant may show this message to their user
+                    """
                 )
+                // swiftlint:disable:next line_length
                 preferredRecoverySuggestionMessage = String.localizedStringWithFormat(preferredRecoverySuggestionMessageFormat, maximumLength)
             } else {
                 preferredRecoverySuggestionMessage = getLocalizedError(
                     "error.api.bad_request.name-is-too-long.without-valid-length.recovery-suggestion",
                     defaultValue: "Please input shorter customer name",
-                    comment: "A default descriptive message representing an `Bad request` error with `name-is-too-long.without-valid-length` from the backend which a merchant may show this message to their user"
+                    comment: """
+                    A default descriptive message representing an `Bad request` error with \
+                    `name-is-too-long.without-valid-length` from the backend which a merchant may show this message to their user
+                    """
                 )
             }
         case .invalidName:
             preferredRecoverySuggestionMessage = getLocalizedError(
                 "error.api.bad_request.invalid-name.recovery-suggestion",
                 defaultValue: "Please review the customer name",
-                comment: "A default descriptive message representing an `Bad request` error with `invalid-name` from the backend which a merchant may show this message to their user"
+                comment: """
+                    A default descriptive message representing an `Bad request` error with `invalid-name` \
+                    from the backend which a merchant may show this message to their user
+                    """
             )
         case .invalidEmail:
             preferredRecoverySuggestionMessage = getLocalizedError(
                 "error.api.bad_request.invalid-email.recovery-suggestion",
                 defaultValue: "Please review the customer email",
-                comment: "A default descriptive message representing an `Bad request` error with `invalid-email` from the backend which a merchant may show this message to their user"
+                comment: """
+                    A default descriptive message representing an `Bad request` error with \
+                    `invalid-email` from the backend which a merchant may show this message to their user
+                    """
             )
         case .invalidPhoneNumber:
             preferredRecoverySuggestionMessage = getLocalizedError(
                 "error.api.bad_request.invalid-phone-number.recovery-suggestion",
                 defaultValue: "Please review the customer phone number",
-                comment: "A default descriptive message representing an `Bad request` error with `invalid-phone-number` from the backend which a merchant may show this message to their user"
+                comment: """
+                    A default descriptive message representing an `Bad request` error with \
+                    `invalid-phone-number` from the backend which a merchant may show this message to their user
+                    """
             )
         case .typeNotSupported:
             preferredRecoverySuggestionMessage = getLocalizedError(
                 "error.api.bad_request.type-not-supported.recovery-suggestion",
                 defaultValue: "Please review the source type",
-                comment: "A default descriptive message representing an `Bad request` error with `type-not-supported` from the backend which a merchant may show this message to their user"
+                comment: """
+                    A default descriptive message representing an `Bad request` error with \
+                    `type-not-supported` from the backend which a merchant may show this message to their user
+                    """
             )
         case .currencyNotSupported:
             preferredRecoverySuggestionMessage = getLocalizedError(
                 "error.api.bad_request.currency-not-supported.recovery-suggestion",
                 defaultValue: "Please choose another currency",
-                comment: "A default descriptive message representing an `Bad request` error with `currency-not-supported` from the backend which a merchant may show this message to their user"
+                comment: """
+                    A default descriptive message representing an `Bad request` error with \
+                    `currency-not-supported` from the backend which a merchant may show this message to their user
+                    """
             )
         case .other(let value):
             preferredRecoverySuggestionMessage = value
@@ -303,7 +394,7 @@ extension OmiseError.APIErrorCode.BadRequestReason: Decodable {
     }
 }
 
-// MARK: -  Sort
+// MARK: - Sort
 extension OmiseError.APIErrorCode.BadRequestReason {
     static func sortByAmountIsGreaterThanValidAmount(reason: OmiseError.APIErrorCode.BadRequestReason) -> Bool {
         switch reason {
@@ -395,7 +486,7 @@ extension OmiseError.APIErrorCode.BadRequestReason {
     }
 }
 
-// MARK: -  Process Message
+// MARK: - Process Message
 private extension OmiseError.APIErrorCode.BadRequestReason {
     static func processAmountMessage(message: String, currency: Currency?) -> Self {
         if let lessThanValidAmountMatch = ErrorMessageRegularExpression.amountLessThanValidAmount
@@ -429,3 +520,4 @@ private extension OmiseError.APIErrorCode.BadRequestReason {
         return .nameIsTooLong(maximum: Int(message[range]))
     }
 }
+// swiftlint:enable file_length

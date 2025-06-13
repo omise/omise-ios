@@ -16,6 +16,8 @@
 		2F0267552D8D4FB100BA8D3E /* CardNumberTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0267542D8D4FB100BA8D3E /* CardNumberTextFieldTests.swift */; };
 		2F0267572D8D538F00BA8D3E /* CardExpiryDateTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0267562D8D538F00BA8D3E /* CardExpiryDateTextFieldTests.swift */; };
 		2F36EF1F2DFBCDA500A39314 /* SelectPaymentControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36EF1E2DFBCDA500A39314 /* SelectPaymentControllerTests.swift */; };
+		2F36EF212DFBF16300A39314 /* NumberFormatter+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36EF202DFBF16300A39314 /* NumberFormatter+Helpers.swift */; };
+		2F36EF252DFBF19600A39314 /* OmiseError+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36EF242DFBF19600A39314 /* OmiseError+Helpers.swift */; };
 		2F5985F12DB09BD700E81646 /* EContextPaymentFormVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5985F02DB09BD700E81646 /* EContextPaymentFormVMTests.swift */; };
 		2F5985F42DB09EDB00E81646 /* EContextPaymentFormVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5985F32DB09ED300E81646 /* EContextPaymentFormVCTests.swift */; };
 		2F5985F72DB09F6500E81646 /* MockEContextPaymentFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5985F62DB09F6500E81646 /* MockEContextPaymentFormViewModel.swift */; };
@@ -48,10 +50,6 @@
 		2FDDFF392DFAA72000C1369A /* APIErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDDFF382DFAA71A00C1369A /* APIErrorCode.swift */; };
 		2FDDFF3B2DFAA74D00C1369A /* InvalidCardReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDDFF3A2DFAA74500C1369A /* InvalidCardReason.swift */; };
 		2FDDFF3D2DFAA78300C1369A /* BadRequestReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDDFF3C2DFAA78000C1369A /* BadRequestReason.swift */; };
-		2FDDFF3F2DFAA94200C1369A /* NumberFormatter+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDDFF3E2DFAA93900C1369A /* NumberFormatter+Helpers.swift */; };
-		2FDDFF402DFAA94200C1369A /* NumberFormatter+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDDFF3E2DFAA93900C1369A /* NumberFormatter+Helpers.swift */; };
-		2FDDFF422DFABAAA00C1369A /* OmiseError+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDDFF412DFABAA600C1369A /* OmiseError+Helpers.swift */; };
-		2FDDFF432DFABAAA00C1369A /* OmiseError+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDDFF412DFABAA600C1369A /* OmiseError+Helpers.swift */; };
 		2FDDFF462DFAE02E00C1369A /* InvalidCardAPIErrorParsingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C10552159F7FC00BEFD8A /* InvalidCardAPIErrorParsingTestCase.swift */; };
 		2FDDFF472DFAE03200C1369A /* BadRequestAPIErrorParsingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C10572159FCE900BEFD8A /* BadRequestAPIErrorParsingTestCase.swift */; };
 		2FDDFF492DFAE07A00C1369A /* BadRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDDFF482DFAE07500C1369A /* BadRequestTests.swift */; };
@@ -364,6 +362,8 @@
 		2F0267542D8D4FB100BA8D3E /* CardNumberTextFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumberTextFieldTests.swift; sourceTree = "<group>"; };
 		2F0267562D8D538F00BA8D3E /* CardExpiryDateTextFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardExpiryDateTextFieldTests.swift; sourceTree = "<group>"; };
 		2F36EF1E2DFBCDA500A39314 /* SelectPaymentControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPaymentControllerTests.swift; sourceTree = "<group>"; };
+		2F36EF202DFBF16300A39314 /* NumberFormatter+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Helpers.swift"; sourceTree = "<group>"; };
+		2F36EF242DFBF19600A39314 /* OmiseError+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OmiseError+Helpers.swift"; sourceTree = "<group>"; };
 		2F5985F02DB09BD700E81646 /* EContextPaymentFormVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EContextPaymentFormVMTests.swift; sourceTree = "<group>"; };
 		2F5985F32DB09ED300E81646 /* EContextPaymentFormVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EContextPaymentFormVCTests.swift; sourceTree = "<group>"; };
 		2F5985F62DB09F6500E81646 /* MockEContextPaymentFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEContextPaymentFormViewModel.swift; sourceTree = "<group>"; };
@@ -397,8 +397,6 @@
 		2FDDFF382DFAA71A00C1369A /* APIErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorCode.swift; sourceTree = "<group>"; };
 		2FDDFF3A2DFAA74500C1369A /* InvalidCardReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvalidCardReason.swift; sourceTree = "<group>"; };
 		2FDDFF3C2DFAA78000C1369A /* BadRequestReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadRequestReason.swift; sourceTree = "<group>"; };
-		2FDDFF3E2DFAA93900C1369A /* NumberFormatter+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Helpers.swift"; sourceTree = "<group>"; };
-		2FDDFF412DFABAA600C1369A /* OmiseError+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OmiseError+Helpers.swift"; sourceTree = "<group>"; };
 		2FDDFF482DFAE07500C1369A /* BadRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadRequestTests.swift; sourceTree = "<group>"; };
 		2FE11AFE2DB0C5B800EBBCC2 /* UIExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensionsTests.swift; sourceTree = "<group>"; };
 		2FE11B1F2DB0F06D00EBBCC2 /* ViewExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensionsTests.swift; sourceTree = "<group>"; };
@@ -1022,8 +1020,8 @@
 		75405A7E2A262B14008C21F6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				2FDDFF412DFABAA600C1369A /* OmiseError+Helpers.swift */,
-				2FDDFF3E2DFAA93900C1369A /* NumberFormatter+Helpers.swift */,
+				2F36EF242DFBF19600A39314 /* OmiseError+Helpers.swift */,
+				2F36EF202DFBF16300A39314 /* NumberFormatter+Helpers.swift */,
 				75405A772A25D327008C21F6 /* String+Helpers.swift */,
 				75405A7B2A25EC88008C21F6 /* Array+Helpers.swift */,
 				75D13DD72B86539C0073A831 /* Optional+Helpers.swift */,
@@ -1828,7 +1826,7 @@
 				75D13DA62B83B58B0073A831 /* Source.Payment.swift in Sources */,
 				75D13D792B833F160073A831 /* ViewAttachable.swift in Sources */,
 				75D13DD42B8652230073A831 /* SourceType+Helpers.swift in Sources */,
-				2FDDFF422DFABAAA00C1369A /* OmiseError+Helpers.swift in Sources */,
+				2F36EF252DFBF19600A39314 /* OmiseError+Helpers.swift in Sources */,
 				75E0EB9B2B7BD00F00E3198A /* PAN.swift in Sources */,
 				751E7BD52B7E2F2A0031B4A2 /* SourceType+ViewPresentable.swift in Sources */,
 				7502CA5F2A31A7D600766E7D /* CountryListViewController.swift in Sources */,
@@ -1882,7 +1880,6 @@
 				75D13DA52B83B58B0073A831 /* Source.swift in Sources */,
 				22445FFC1CF41DD300801D0F /* Globals.swift in Sources */,
 				758A4E702BE38A5F005E7B5A /* String+PemCert.swift in Sources */,
-				2FDDFF402DFAA94200C1369A /* NumberFormatter+Helpers.swift in Sources */,
 				2FC27E1A2D6D67DD001E5857 /* ApplePayProtocols.swift in Sources */,
 				7501265F2B8893C900ED5E14 /* PaymentFormController.swift in Sources */,
 				2F9682172D657EFA00A7AFDA /* ApplePaymentHandler.swift in Sources */,
@@ -1978,12 +1975,10 @@
 				7502CA632A31A7E100766E7D /* CountryListViewModelProtocol.swift in Sources */,
 				75405A922A26340E008C21F6 /* UILabel+Helpers.swift in Sources */,
 				75F2A0A62A13B70F0038FA54 /* OmiseTextField.swift in Sources */,
-				2FDDFF3F2DFAA94200C1369A /* NumberFormatter+Helpers.swift in Sources */,
 				75405A8E2A26340E008C21F6 /* UIView+Helpers.swift in Sources */,
 				75405A902A26340E008C21F6 /* UIImage+Helpers.swift in Sources */,
 				75405AA42A27F5D3008C21F6 /* AtomePaymentFormViewContext.swift in Sources */,
 				75405A792A25D33F008C21F6 /* String+Helpers.swift in Sources */,
-				2FDDFF432DFABAAA00C1369A /* OmiseError+Helpers.swift in Sources */,
 				75405AA52A27F5D3008C21F6 /* AtomePaymentFormViewModelProtocol.swift in Sources */,
 				75F2A0C12A1A84900038FA54 /* UIColor+Helpers.swift in Sources */,
 				75405A8C2A26340E008C21F6 /* UIStackView+Helpers.swift in Sources */,
