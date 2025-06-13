@@ -250,16 +250,7 @@ class BadRequestAPIErrorParsingTestCase: XCTestCase {
 }
 
 private struct CreateSourceParameter {
-    public let paymentInformation: Source.Payment
-    public let amount:    Int64
-    public let currency:  Currency
-    
-    public init(paymentInformation: Source.Payment,
-                amount: Int64,
-                currency: Currency)
-    {
-        self.paymentInformation = paymentInformation
-        self.amount             = amount
-        self.currency           = currency
-    }
+    let paymentInformation: Source.Payment
+    let amount: Int64
+    let currency: Currency
 }

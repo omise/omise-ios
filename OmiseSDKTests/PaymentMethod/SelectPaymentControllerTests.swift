@@ -7,7 +7,7 @@ private class MockViewModel: SelectPaymentPresentableProtocol {
     var viewNavigationTitle: String = ""
     var viewDisplayLargeTitle: Bool = false
     var viewShowsCloseButton: Bool = false
-    var errorMessage: String? = nil
+    var errorMessage: String?
     
     /// contexts to return from viewContext(at:)
     var contexts: [TableCellContext?] = []
