@@ -29,7 +29,7 @@ class SelectPaymentController: UITableViewController {
         }
     }
 
-    @objc private func didTapClose() {
+    @objc func didTapClose() {
         viewModel.viewDidTapClose()
     }
     
