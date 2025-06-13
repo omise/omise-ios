@@ -13,7 +13,7 @@ public enum ErrorUserInfoKey: String, CodingKey {
     case message
 }
 
-// MARK: - OmiseError
+// MARK: -  OmiseError
 /// Represent errors from the Omise iOS SDK.
 public enum OmiseError: CustomNSError, LocalizedError, Decodable {
     /// API error returned from Omise API
@@ -159,7 +159,8 @@ public enum OmiseError: CustomNSError, LocalizedError, Decodable {
     }
 }
 
-// MARK: - APIErrorCode
+
+// MARK: -  APIErrorCode
 private extension OmiseError {
     func getAPIErrorDescription(_ code: APIErrorCode, messageFromAPI: String) -> String? {
         switch code {
@@ -171,19 +172,13 @@ private extension OmiseError {
             return getLocalizedError(
                 "error.api.authentication_failure.message",
                 defaultValue: "Authentication failure",
-                comment: """
-                        A default descriptive message representing an `Authentication failure` error from \
-                        the backend which a merchant may show this message to their user
-                        """
+                comment: "A default descriptive message representing an `Authentication failure` error from the backend which a merchant may show this message to their user"
             )
         case .serviceNotFound:
             return getLocalizedError(
                 "error.api.service_not_found.message",
                 defaultValue: "Service not found",
-                comment: """
-                        A default descriptive message representing an `Service not found` \
-                        error from the backend which a merchant may show this message to their user
-                        """
+                comment: "A default descriptive message representing an `Service not found` error from the backend which a merchant may show this message to their user"
             )
         case .other:
             return messageFromAPI
@@ -200,19 +195,13 @@ private extension OmiseError {
             getLocalizedError(
                 "error.api.authentication_failure.recovery-suggestion",
                 defaultValue: "Please contact the merchant",
-                comment: """
-                        A default descriptive suggestion message to recovery from the `Authentication failure` \
-                        error from the backend which a merchant may show this message to their user
-                        """
+                comment: "A default descriptive suggestion message to recovery from the `Authentication failure` error from the backend which a merchant may show this message to their user"
             )
         case .serviceNotFound:
             getLocalizedError(
                 "error.api.service_not_found.recovery-suggestion",
                 defaultValue: "Please contact the merchant",
-                comment: """
-                        A default descriptive suggestion message to recovery from the `Service not found` \
-                        error from the backend which a merchant may show this message to their user
-                        """
+                comment: "A default descriptive suggestion message to recovery from the `Service not found` error from the backend which a merchant may show this message to their user"
             )
         default:
             ""
@@ -220,9 +209,8 @@ private extension OmiseError {
     }
 }
 
-// MARK: - Unexpected Error
+// MARK: -  Unexpected Error
 private extension OmiseError {
-    // swiftlint:disable:next function_body_length
     func getUnexpectedErrorDescription(_ error: UnexpectedError) -> String {
         switch error {
         case .noErrorNorResponse:
@@ -235,46 +223,31 @@ private extension OmiseError {
             return getLocalizedError(
                 "error.unexpected.http-error-with-no-data.message",
                 defaultValue: "No error data in the error response",
-                comment: """
-                        A descriptive message representing an `No error data in the error \
-                        response` error during the operation in the client
-                        """
+                comment: "A descriptive message representing an `No error data in the error response` error during the operation in the client"
             )
         case .httpErrorResponseWithInvalidData:
             return getLocalizedError(
                 "error.unexpected.http-error-response-with-invalid-data.message",
                 defaultValue: "Invalid error data in the error response",
-                comment: """
-                        A descriptive message representing an `Invalid error data in the error \
-                        response` error during the operation in the client
-                        """
+                comment: "A descriptive message representing an `Invalid error data in the error response` error during the operation in the client"
             )
         case .httpSuccessWithNoData:
             return getLocalizedError(
                 "error.unexpected.http-succeess-with-no-data.message",
                 defaultValue: "No data in the success response",
-                comment: """
-                        A descriptive message representing an `No data in the \
-                        success response` error during the operation in the client
-                        """
+                comment: "A descriptive message representing an `No data in the success response` error during the operation in the client"
             )
         case .httpSuccessWithInvalidData:
             return getLocalizedError(
                 "error.unexpected.http-succeess-with-invalid-data.message",
                 defaultValue: "Invalid data in the success response",
-                comment: """
-                        A descriptive message representing an `Invalid data in the \
-                        success response` error during the operation in the client
-                        """
+                comment: "A descriptive message representing an `Invalid data in the success response` error during the operation in the client"
             )
         case .unrecognizedHTTPStatusCode(let statusCode):
             let messageFormat = getLocalizedError(
                 "error.unexpected.unrecognized-HTTP-status-code.message",
                 defaultValue: "Unrecognized/unsupported HTTP status code",
-                comment: """
-                        A descriptive message representing an `Unrecognized/unsupported HTTP status code` \
-                        error during the operation in the client
-                        """
+                comment: "A descriptive message representing an `Unrecognized/unsupported HTTP status code` error during the operation in the client"
             )
             return String.localizedStringWithFormat(messageFormat, statusCode)
         case .other(let message):
@@ -282,7 +255,6 @@ private extension OmiseError {
         }
     }
     
-    // swiftlint:disable:next function_body_length
     func getUnexpectedErrorRecoverySuggestion(_ error: UnexpectedError) -> String? {
         enum CommonStrings: String {
             case tryAgainLater = "Please try again later. If the same problem persists please contact customer support."
@@ -293,55 +265,37 @@ private extension OmiseError {
             return getLocalizedError(
                 "error.unexpected.no-error-norresponse.recovery-suggestion",
                 defaultValue: CommonStrings.tryAgainLater.rawValue,
-                comment: """
-                        A default descriptive suggestion message to recovery from the `No error nor response` \
-                        error during the operation in the client which a merchant may show this message to their user
-                        """
+                comment: "A default descriptive suggestion message to recovery from the `No error nor response` error during the operation in the client which a merchant may show this message to their user"
             )
         case .httpErrorWithNoData:
             return getLocalizedError(
                 "error.unexpected.http-error-with-no-data.recovery-suggestion",
                 defaultValue: CommonStrings.tryAgainLater.rawValue,
-                comment: """
-                    A default descriptive suggestion message to recovery from the `No error data in the error response` \
-                    error during the operation in the client which a merchant may show this message to their user
-                    """
+                comment: "A default descriptive suggestion message to recovery from the `No error data in the error response` error during the operation in the client which a merchant may show this message to their user"
             )
         case .httpErrorResponseWithInvalidData:
             return getLocalizedError(
                 "error.unexpected.http-error-response-with-invalid-data.recovery-suggestion",
                 defaultValue: CommonStrings.tryAgainLater.rawValue,
-                comment: """
-                    A default descriptive suggestion message to recovery from the `Invalid error data in the error response` \
-                    error during the operation in the client which a merchant may show this message to their user
-                    """
+                comment: "A default descriptive suggestion message to recovery from the `Invalid error data in the error response` error during the operation in the client which a merchant may show this message to their user"
             )
         case .httpSuccessWithNoData:
             return getLocalizedError(
                 "error.unexpected.http-succeess-with-no-data.recovery-suggestion",
                 defaultValue: CommonStrings.tryAgainLater.rawValue,
-                comment: """
-                     A default descriptive suggestion message to recovery from the `No data in the success response` \
-                     error during the operation in the client which a merchant may show this message to their user
-                     """
+                comment: "A default descriptive suggestion message to recovery from the `No data in the success response` error during the operation in the client which a merchant may show this message to their user"
             )
         case .httpSuccessWithInvalidData:
             return getLocalizedError(
                 "error.unexpected.http-succeess-with-invalid-data.recovery-suggestion",
                 defaultValue: CommonStrings.tryAgainLater.rawValue,
-                comment: """
-                     A default descriptive suggestion message to recovery from the `Invalid data in the success response` \
-                     error during the operation in the client which a merchant may show this message to their user
-                     """
+                comment: "A default descriptive suggestion message to recovery from the `Invalid data in the success response` error during the operation in the client which a merchant may show this message to their user"
             )
         case .unrecognizedHTTPStatusCode:
             return getLocalizedError(
                 "error.unexpected.unrecognized-HTTP-status-code.recovery-suggestion",
                 defaultValue: CommonStrings.tryAgainLater.rawValue,
-                comment: """
-                        A default descriptive suggestion message to recovery from the `Unrecognized/unsupported HTTP status code` \
-                        error during the operation in the client which a merchant may show this message to their user
-                        """
+                comment: "A default descriptive suggestion message to recovery from the `Unrecognized/unsupported HTTP status code` error during the operation in the client which a merchant may show this message to their user"
             )
         case .other:
             return nil

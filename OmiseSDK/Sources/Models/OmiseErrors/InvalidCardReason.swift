@@ -31,10 +31,7 @@ extension OmiseError.APIErrorCode.InvalidCardReason: Decodable {
                 tableName: "Error",
                 bundle: .omiseSDK,
                 value: "Invalid card number",
-                comment: """
-                A default descriptive message representing an `Invalid card data` error with \
-                the `Invalid card number` message from the backend which a merchant may show this message to their user
-                """
+                comment: "A default descriptive message representing an `Invalid card data` error with the `Invalid card number` message from the backend which a merchant may show this message to their user"
             )
         case .invalidExpirationDate:
             preferredErrorDescription = NSLocalizedString(
@@ -42,10 +39,7 @@ extension OmiseError.APIErrorCode.InvalidCardReason: Decodable {
                 tableName: "Error",
                 bundle: .omiseSDK,
                 value: "Invalid card expiration date",
-                comment: """
-                A default descriptive message representing an `Invalid card data` error with \
-                the `Invalid card expiration date` message from the backend which a merchant may show this message to their user
-                """
+                comment: "A default descriptive message representing an `Invalid card data` error with the `Invalid card expiration date` message from the backend which a merchant may show this message to their user"
             )
         case .emptyCardHolderName:
             preferredErrorDescription = NSLocalizedString(
@@ -53,10 +47,7 @@ extension OmiseError.APIErrorCode.InvalidCardReason: Decodable {
                 tableName: "Error",
                 bundle: .omiseSDK,
                 value: "Invalid card holder name",
-                comment: """
-                A default descriptive message representing an `Invalid card data` error with the \
-                `Invalid card holder name` message from the backend which a merchant may show this message to their user
-                """
+                comment: "A default descriptive message representing an `Invalid card data` error with the `Invalid card holder name` message from the backend which a merchant may show this message to their user"
             )
         case .unsupportedBrand:
             preferredErrorDescription = NSLocalizedString(
@@ -64,10 +55,7 @@ extension OmiseError.APIErrorCode.InvalidCardReason: Decodable {
                 tableName: "Error",
                 bundle: .omiseSDK,
                 value: "Unsupported card brand",
-                comment: """
-                         A default descriptive message representing an `Invalid card data` error with \
-                         the `Unsupported card brand` message from the backend which a merchant may show this message to their user
-                         """
+                comment: "A default descriptive message representing an `Invalid card data` error with the `Unsupported card brand` message from the backend which a merchant may show this message to their user"
             )
         case .other(let value):
             preferredErrorDescription = value
@@ -85,10 +73,7 @@ extension OmiseError.APIErrorCode.InvalidCardReason: Decodable {
                 tableName: "Error",
                 bundle: .omiseSDK,
                 value: "Please review the card number",
-                comment: """
-                   A default descriptive suggestion message to recovery from the `Invalid card data` error \
-                   with the `Invalid card number` message from the backend which a merchant may show this message to their user
-                   """
+                comment: "A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Invalid card number` message from the backend which a merchant may show this message to their user"
             )
         case .invalidExpirationDate:
             preferredRecoverySuggestionMessage = NSLocalizedString(
@@ -96,10 +81,7 @@ extension OmiseError.APIErrorCode.InvalidCardReason: Decodable {
                 tableName: "Error",
                 bundle: .omiseSDK,
                 value: "Please review the card expiration date",
-                comment: """
-                A default descriptive suggestion message to recovery from the `Invalid card data` error \
-                with the `Invalid card expiration date` message from the backend which a merchant may show this message to their user
-                """
+                comment: "A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Invalid card expiration date` message from the backend which a merchant may show this message to their user"
             )
         case .emptyCardHolderName:
             preferredRecoverySuggestionMessage = NSLocalizedString(
@@ -107,10 +89,7 @@ extension OmiseError.APIErrorCode.InvalidCardReason: Decodable {
                 tableName: "Error",
                 bundle: .omiseSDK,
                 value: "Please review the card holder name",
-                comment: """
-                A default descriptive suggestion message to recovery from the `Invalid card data` error \
-                with the `Invalid card holder name` message from the backend which a merchant may show this message to their user
-                """
+                comment: "A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Invalid card holder name` message from the backend which a merchant may show this message to their user"
             )
         case .unsupportedBrand:
             preferredRecoverySuggestionMessage = NSLocalizedString(
@@ -118,10 +97,7 @@ extension OmiseError.APIErrorCode.InvalidCardReason: Decodable {
                 tableName: "Error",
                 bundle: .omiseSDK,
                 value: "Please use another credit card",
-                comment: """
-                A default descriptive suggestion message to recovery from the `Invalid card data` error \
-                with the `Unsupported card brand` message from the backend which a merchant may show this message to their user
-                """
+                comment: "A default descriptive suggestion message to recovery from the `Invalid card data` error with the `Unsupported card brand` message from the backend which a merchant may show this message to their user"
             )
         case .other:
             preferredRecoverySuggestionMessage = NSLocalizedString(
@@ -129,10 +105,7 @@ extension OmiseError.APIErrorCode.InvalidCardReason: Decodable {
                 tableName: "Error",
                 bundle: .omiseSDK,
                 value: "Please review credit card information",
-                comment: """
-                A descriptive suggestion message to recovery from the `Invalid card data` error \
-                from the backend which a merchant may show this message to their user
-                """
+                comment: "A descriptive suggestion message to recovery from the `Invalid card data` error from the backend which a merchant may show this message to their user"
             )
         }
         

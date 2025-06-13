@@ -2,6 +2,7 @@ import Foundation
 import XCTest
 @testable import OmiseSDK
 
+// swiftlint:disable:next type_body_length
 class OmiseErrorTests: XCTestCase {
     func testInvalidCardLocalizedDescription() throws {
         let testCases: [OmiseErrorParsing] = [
@@ -92,7 +93,6 @@ class OmiseErrorTests: XCTestCase {
         }
     }
     
-    // swiftlint:disable:next function_body_length
     func testUnexpectedErrorMessage() throws {
         let underlying: OmiseError = .api(
             code: .authenticationFailure,
@@ -104,7 +104,7 @@ class OmiseErrorTests: XCTestCase {
                   expectedLocalizedDescription: "An unexpected error occurred",
                   expectedLocalizedRecovery: "Please try again later",
                   expectedDescription: "Authentication failure",
-                  expectedRecovery: "Please try again later. If the same problem persists please contact customer support."),
+                  expectedRecovery: "Please try again later. If the same problem persists please contact customer support."), // with underlying error
             .init(error: OmiseError.unexpected(error: .noErrorNorResponse, underlying: nil),
                   expectedLocalizedDescription: "An unexpected error occurred",
                   expectedLocalizedRecovery: "Please try again later",
@@ -163,12 +163,9 @@ class OmiseErrorTests: XCTestCase {
             location: "https://docs.omise.co/api-errors"
         )
         let testCases: [OmiseErrorParsing] = [
-            .init(error: OmiseError.api(code: .serviceNotFound, message: "", location: ""),
-                  expectedNSLocalizedDescriptionKey: "Service not found"),
-            .init(error: OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: underlying),
-                  expectedNSLocalizedDescriptionKey: "Authentication failure"),
-            .init(error: OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: nil),
-                  expectedNSLocalizedDescriptionKey: "Invalid error data in the error response")
+            .init(error: OmiseError.api(code: .serviceNotFound, message: "", location: ""), expectedNSLocalizedDescriptionKey: "Service not found"),
+            .init(error: OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: underlying), expectedNSLocalizedDescriptionKey: "Authentication failure"),
+            .init(error: OmiseError.unexpected(error: .httpErrorResponseWithInvalidData, underlying: nil), expectedNSLocalizedDescriptionKey: "Invalid error data in the error response")
         ]
         
         for testCase in testCases {
