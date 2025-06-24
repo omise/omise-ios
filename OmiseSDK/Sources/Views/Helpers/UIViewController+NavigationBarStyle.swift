@@ -33,9 +33,6 @@ extension UIViewController {
             }
 
             navigationItem.standardAppearance = appearance
-
-            // Copied from previous implementation
-            navigationItem.scrollEdgeAppearance = navigationItem.standardAppearance
         }
 #endif
     }
