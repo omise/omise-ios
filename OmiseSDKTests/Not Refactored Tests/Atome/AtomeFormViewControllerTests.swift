@@ -60,6 +60,7 @@ final class AtomePaymentInputsFormControllerTests: XCTestCase {
         }
         XCTAssertTrue(sut.billingAddressLabel.isHidden)
         
+        _ = billingCheckbox.intrinsicContentSize
         billingCheckbox.onToggle?(false)
         
         for input in billingInputs {
@@ -74,6 +75,23 @@ final class AtomePaymentInputsFormControllerTests: XCTestCase {
             XCTAssertEqual(input.text, "", "Expected billing input text to be cleared when hidden")
         }
         XCTAssertTrue(sut.billingAddressLabel.isHidden, "Expected billing address header to be hidden after toggling on")
+    }
+    
+    func test_toggleChecked_viaButton_sendsOnToggle_andUpdatesIsChecked() {
+        // initial state
+        XCTAssertTrue(billingCheckbox.isChecked)
+        
+        let exp = expectation(description: "onToggle called")
+        var callbackValue: Bool = true
+        billingCheckbox.onToggle = { newValue in
+            callbackValue = newValue
+            exp.fulfill()
+        }
+        billingCheckbox.toggleChecked()
+        
+        wait(for: [exp], timeout: 1.0)
+        XCTAssertFalse(billingCheckbox.isChecked)
+        XCTAssertFalse(callbackValue)
     }
     
     func test_submitButton_becomesEnabled_whenViewModelSaysValid() {

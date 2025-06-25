@@ -56,7 +56,7 @@ class OmiseCheckbox: UIView {
         addGestureRecognizer(tap)
     }
     
-    @objc private func toggleChecked() {
+    @objc func toggleChecked() {
         isChecked.toggle()
     }
     

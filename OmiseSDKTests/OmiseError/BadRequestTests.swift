@@ -191,13 +191,13 @@ class BadRequestTests: XCTestCase {
     // swiftlint:disable:next function_body_length
     func testBadRequestLocalizedDescription2() throws {
         let testCases: [OmiseErrorParsing] = [
-            .init(error: OmiseError.api(code: .badRequest([.amountIsGreaterThanValidAmount(validAmount: 1000, currency: .sgd)]),
+            .init(error: OmiseError.api(code: .badRequest([.amountIsGreaterThanValidAmount(validAmount: 1000, currency: .thb)]),
                                         message: "",
                                         location: ""),
-                  expectedLocalizedDescription: "Amount is greater than the valid amount of SGD 10.00",
+                  expectedLocalizedDescription: "Amount is greater than the valid amount of ฿10.00",
                   expectedLocalizedRecovery: "The payment amount is too high. Please make a payment with a lower amount.",
-                  expectedDescription: "Amount exceeds the valid amount of SGD 10.00",
-                  expectedRecovery: "Please create a source with an amount which is less than SGD 10.00"),
+                  expectedDescription: "Amount exceeds the valid amount of ฿10.00",
+                  expectedRecovery: "Please create a source with an amount which is less than ฿10.00"),
             .init(error: OmiseError.api(code: .badRequest([.amountIsLessThanValidAmount(validAmount: 1000, currency: .sgd)]),
                                         message: "",
                                         location: ""),
