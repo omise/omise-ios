@@ -15,6 +15,9 @@
 		22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */; };
 		2F0267552D8D4FB100BA8D3E /* CardNumberTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0267542D8D4FB100BA8D3E /* CardNumberTextFieldTests.swift */; };
 		2F0267572D8D538F00BA8D3E /* CardExpiryDateTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0267562D8D538F00BA8D3E /* CardExpiryDateTextFieldTests.swift */; };
+		2F0FEF8D2E0B09C800CB6F2E /* CardNameTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0FEF8C2E0B09C300CB6F2E /* CardNameTextFieldTests.swift */; };
+		2F0FEF8F2E0B0E1600CB6F2E /* ClosureBarButtonItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0FEF8E2E0B0E1400CB6F2E /* ClosureBarButtonItemTests.swift */; };
+		2F0FEF912E0B0F3200CB6F2E /* SelectDuitNowOBWBankVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0FEF902E0B0F2A00CB6F2E /* SelectDuitNowOBWBankVMTests.swift */; };
 		2F36EF1F2DFBCDA500A39314 /* SelectPaymentControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36EF1E2DFBCDA500A39314 /* SelectPaymentControllerTests.swift */; };
 		2F36EF212DFBF16300A39314 /* NumberFormatter+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36EF202DFBF16300A39314 /* NumberFormatter+Helpers.swift */; };
 		2F36EF252DFBF19600A39314 /* OmiseError+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36EF242DFBF19600A39314 /* OmiseError+Helpers.swift */; };
@@ -361,6 +364,9 @@
 		22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F0267542D8D4FB100BA8D3E /* CardNumberTextFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumberTextFieldTests.swift; sourceTree = "<group>"; };
 		2F0267562D8D538F00BA8D3E /* CardExpiryDateTextFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardExpiryDateTextFieldTests.swift; sourceTree = "<group>"; };
+		2F0FEF8C2E0B09C300CB6F2E /* CardNameTextFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNameTextFieldTests.swift; sourceTree = "<group>"; };
+		2F0FEF8E2E0B0E1400CB6F2E /* ClosureBarButtonItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosureBarButtonItemTests.swift; sourceTree = "<group>"; };
+		2F0FEF902E0B0F2A00CB6F2E /* SelectDuitNowOBWBankVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDuitNowOBWBankVMTests.swift; sourceTree = "<group>"; };
 		2F36EF1E2DFBCDA500A39314 /* SelectPaymentControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPaymentControllerTests.swift; sourceTree = "<group>"; };
 		2F36EF202DFBF16300A39314 /* NumberFormatter+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Helpers.swift"; sourceTree = "<group>"; };
 		2F36EF242DFBF19600A39314 /* OmiseError+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OmiseError+Helpers.swift"; sourceTree = "<group>"; };
@@ -786,6 +792,9 @@
 			isa = PBXGroup;
 			children = (
 				2F5D98F12D6EB28300B5ECB4 /* Mock */,
+				2F8272582E0BADD9003B5C30 /* PaymentMethodEnumTests.swift */,
+				2F8272532E0BABC0003B5C30 /* FPXBankViewPresentableTests.swift */,
+				2F0FEF902E0B0F2A00CB6F2E /* SelectDuitNowOBWBankVMTests.swift */,
 				2F36EF1E2DFBCDA500A39314 /* SelectPaymentControllerTests.swift */,
 				4B7F2C4F2DA7D0AB00A23CEF /* SelectInstallmentTermsViewModelTests.swift */,
 				4B7F2C4B2DA7B70B00A23CEF /* SelectSourceTypePaymentViewModelTests.swift */,
@@ -2014,6 +2023,8 @@
 				7509D4E42A1C89F10050AB38 /* AtomeFormViewModelMockup.swift in Sources */,
 				2F5D98F52D6EB41C00B5ECB4 /* MockClientProtocol.swift in Sources */,
 				4B904E5E2DC9FF6100BE78EC /* MockFPXPaymentFormControllerDelegate.swift in Sources */,
+				2F82725B2E0BB1C9003B5C30 /* OmiseTextFieldTests.swift in Sources */,
+				2F8272552E0BACDD003B5C30 /* PANModelTestCase.swift in Sources */,
 				2F36EF1F2DFBCDA500A39314 /* SelectPaymentControllerTests.swift in Sources */,
 				750708F42B7A765500A48DD0 /* OmiseSDKTests.swift in Sources */,
 				2F5985F72DB09F6500E81646 /* MockEContextPaymentFormViewModel.swift in Sources */,
@@ -2023,6 +2034,8 @@
 				4B54813E2DCCD20500BD10AE /* OmiseBannerViewTests.swift in Sources */,
 				2FE11B222DB0F21600EBBCC2 /* ViewControllerExtensionsTests.swift in Sources */,
 				2FDDFF462DFAE02E00C1369A /* InvalidCardAPIErrorParsingTestCase.swift in Sources */,
+				2F8272572E0BAD95003B5C30 /* ButtonExtensionsTests.swift in Sources */,
+				2F8272522E0BA86F003B5C30 /* ColorsTests.swift in Sources */,
 				75E0EB712B7A904100E3198A /* SourceFlowTests.swift in Sources */,
 				2F0FEF8D2E0B09C800CB6F2E /* CardNameTextFieldTests.swift in Sources */,
 				2F0FEF912E0B0F3200CB6F2E /* SelectDuitNowOBWBankVMTests.swift in Sources */,
