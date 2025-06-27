@@ -1,6 +1,6 @@
 import UIKit
 
-public enum TextFieldStyle {
+public enum TextFieldStyle: Equatable {
     case plain
     case border(width: CGFloat)
 }
