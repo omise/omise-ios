@@ -18,7 +18,7 @@ class OmiseErrorTests: XCTestCase {
                   expectedLocalizedDescription: "Unsupported card brand",
                   expectedRecovery: "Please use another card"),
             .init(error: OmiseError.api(code: .invalidCard([.other("")]), message: "", location: ""),
-                  expectedLocalizedDescription: "An unknown error occured",
+                  expectedLocalizedDescription: "An unknown error occurred",
                   expectedRecovery: "Please try again later")
         ]
         
@@ -45,7 +45,7 @@ class OmiseErrorTests: XCTestCase {
                   expectedDescription: "Service not found",
                   expectedRecovery: "Please contact the merchant"),
             .init(error: OmiseError.api(code: .other(""), message: "", location: ""),
-                  expectedLocalizedDescription: "An unknown error occured",
+                  expectedLocalizedDescription: "An unknown error occurred",
                   expectedLocalizedRecovery: "Please try again later",
                   expectedRecovery: nil)
         ]

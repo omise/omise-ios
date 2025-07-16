@@ -47,7 +47,7 @@ extension OmiseError {
                 case .other?, nil:
                     return getLocalizedError(
                         "payment-creator.error.api.invalid_card.other.message",
-                        defaultValue: "An unknown error occured",
+                        defaultValue: "An unknown error occurred",
                         comment: """
                         The displaying message showing in the error banner in the \
                         built-in Payment Creator when there is the `other` API error occured
@@ -221,7 +221,7 @@ extension OmiseError {
             case .other:
                 return getLocalizedError(
                     "payment-creator.error.api.unknown.message",
-                    defaultValue: "An unknown error occured",
+                    defaultValue: "An unknown error occurred",
                     comment: "The displaying message showing in the error banner when there is an `unknown` API error occured"
                 )
             }
