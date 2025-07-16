@@ -8,6 +8,7 @@ class MockClient: ClientProtocol {
     var shouldShowError: Bool = false
     var shouldSetFPXBankNotActive = false
     let error = NSError(domain: "Error", code: 0)
+    private var pkey: String = ""
     
     func capability(_ completion: @escaping ResponseClosure<Capability, any Error>) {
         if shouldShowError {
@@ -86,6 +87,12 @@ class MockClient: ClientProtocol {
             completion(.failure(error))
         } else {
             completion(.success(.successful))
+        }
+    }
+    
+    func updatePublicKey(_ key: String) {
+        if key.hasPrefix("pkey_") {
+            self.pkey = key
         }
     }
     

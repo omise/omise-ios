@@ -10,7 +10,7 @@ enum PaymentMethod: CaseIterable, Equatable, Hashable {
     case eContextNetBanking
     case eContextPayEasy
     case sourceType(_ type: SourceType)
-
+    
     var sourceType: SourceType? {
         switch self {
         case .sourceType(let sourceType):
@@ -19,9 +19,9 @@ enum PaymentMethod: CaseIterable, Equatable, Hashable {
             return nil
         }
     }
-
+    
     static var allCases: [PaymentMethod] = from(sourceTypes: SourceType.allCases)
-
+    
     /// List of payment methods to be placed above other payment methods in a given order
     static let topList: [PaymentMethod] = [
         .creditCard,
@@ -40,7 +40,7 @@ enum PaymentMethod: CaseIterable, Equatable, Hashable {
         .sourceType(.alipayCN),
         .sourceType(.alipayHK)
     ]
-
+    
     var requiresAdditionalDetails: Bool {
         switch self {
         case .creditCard,
@@ -74,7 +74,7 @@ extension PaymentMethod {
         }
         return Array(list)
     }
-
+    
     static func paymentMethods(for sourceType: SourceType) -> [PaymentMethod] {
         switch sourceType {
         case _ where sourceType.isInstallment:
@@ -91,14 +91,7 @@ extension PaymentMethod {
             return [.sourceType(sourceType)]
         }
     }
-
-    /// List of payment methods in localized alphabetical order
-    static func alphabetical(from: [PaymentMethod]) -> [PaymentMethod] {
-        from.sorted {
-            $0.description.localizedCaseInsensitiveCompare($1.description) == .orderedAscending
-        }
-    }
-
+    
     static func topListed(from: [PaymentMethod]) -> [PaymentMethod] {
         var source = from
         var sorted = [PaymentMethod]()
@@ -108,59 +101,5 @@ extension PaymentMethod {
         }
         sorted.append(contentsOf: source)
         return sorted
-    }
-
-    /// Sorted list of all payment methods
-    static func sorted(from: [PaymentMethod]) -> [PaymentMethod] {
-        topListed(from: alphabetical(from: from))
-    }
-
-    /// Generates Payment Methods with given Capability
-    static func createPaymentMethods(with capability: Capability) -> [PaymentMethod] {
-        let sourceTypes = capability.paymentMethods.compactMap {
-            SourceType(rawValue: $0.name)
-        }
-
-        let showsCreditCard = capability.cardPaymentMethod != nil
-        let paymentMethods = createPaymentMethods(from: sourceTypes, showsCreditCard: showsCreditCard)
-        return paymentMethods
-    }
-
-    /// Generates PaymenOption list with given list of SourceType and allowedCardPayment option
-    static func createPaymentMethods(from sourceTypes: [SourceType], showsCreditCard: Bool) -> [PaymentMethod] {
-        var list = PaymentMethod.from(sourceTypes: sourceTypes)
-
-        if showsCreditCard {
-            list.append(.creditCard)
-        }
-
-        // Remove .trueMoneyWallet if .trueMoneyJumpApp is present
-        if list.contains(.sourceType(.trueMoneyJumpApp)) {
-            list.removeAll { $0 == .sourceType(.trueMoneyWallet) }
-        }
-
-        // Remove .shopeePay if .shopeePayJumpApp is present
-        if list.contains(.sourceType(.shopeePayJumpApp)) {
-            list.removeAll { $0 == .sourceType(.shopeePay) }
-        }
-
-        // Sort and filter
-        list = PaymentMethod.sorted(from: list)
-        return list
-    }
-}
-
-extension PaymentMethod {
-    static func createViewContexts(from paymentMethods: [PaymentMethod]) -> [TableCellContext] {
-        let viewContexts = paymentMethods.map {
-            TableCellContext(
-                title: $0.localizedTitle,
-                subtitle: $0.localizedSubtitle,
-                icon: UIImage(omise: $0.iconName),
-                accessoryIcon: UIImage($0.accessoryIcon)
-            )
-        }
-
-        return viewContexts
     }
 }

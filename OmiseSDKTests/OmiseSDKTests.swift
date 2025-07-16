@@ -57,23 +57,6 @@ class OmiseSDKTests: XCTestCase {
         XCTAssertNotNil(match, "Version \(version) should match semantic versioning (major.minor.patch)")
     }
     
-    func test_presentChoosePaymentMethod() {
-        sut.setupApplePay(for: "merchant_id", requiredBillingAddress: true)
-        sut.presentChoosePaymentMethod(from: mockVC,
-                                       amount: 1000,
-                                       currency: "THB",
-                                       delegate: mockDelegate)
-        
-        let navController = sut.presentedViewController as? UINavigationController
-        let coordinator = navController?.delegate as? ChoosePaymentCoordinator
-        
-        XCTAssertEqual(coordinator?.amount, 1000)
-        XCTAssertEqual(coordinator?.applePayInfo?.merchantIdentifier, "merchant_id")
-        XCTAssertEqual(coordinator?.applePayInfo?.requestBillingAddress, true)
-        XCTAssertEqual(coordinator?.currency, "THB")
-        XCTAssertEqual(coordinator?.handleErrors, true)
-    }
-    
     func test_presentCreditCardPayment() {
         sut.presentCreditCardPayment(from: mockVC,
                                      delegate: mockDelegate)
