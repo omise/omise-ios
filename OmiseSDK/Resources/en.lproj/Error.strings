@@ -278,7 +278,7 @@
 "payment-creator.error.api.invalid_card.invalid-expiration-date.recovery-suggestion" = "Please review the card expiration date again.";
 
 /* The displaying message showing in the error banner in the built-in Payment Creator when there is the `other` API error occured */
-"payment-creator.error.api.invalid_card.other.message" = "An unknown error occured";
+"payment-creator.error.api.invalid_card.other.message" = "An unknown error occurred";
 
 /* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator in the built-in Payment Creator when there is the `other` API error occured */
 "payment-creator.error.api.invalid_card.other.recovery-suggestion" = "Please try again later";
@@ -296,7 +296,7 @@
 "payment-creator.error.api.unexpected.recovery-suggestion" = "Please try again later";
 
 /* The displaying message showing in the error banner when there is an `unknown` API error occured */
-"payment-creator.error.api.unknown.message" = "An unknown error occured";
+"payment-creator.error.api.unknown.message" = "An unknown error occurred";
 
 /* The displaying recovery from error suggestion showing in the error banner in the built-in Payment Creator when there is an `unknown` API error occured */
 "payment-creator.error.api.unknown.recovery-suggestion" = "Please try again later";

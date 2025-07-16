@@ -13,6 +13,7 @@ class PaymentSettingTableViewController: UITableViewController {
         return numberFormatter
     }()
 
+    var pkey: String = ""
     var currencyInitialized = false
     var currentAmount: Int64 = 0
     var currentCurrency: Currency = .thb {
@@ -136,6 +137,8 @@ class PaymentSettingTableViewController: UITableViewController {
     @IBOutlet private var weChatPaymentCell: UITableViewCell!
     @IBOutlet private var applePayCell: UITableViewCell!
     
+    @IBOutlet private var pkeyField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -151,6 +154,9 @@ class PaymentSettingTableViewController: UITableViewController {
         useSpecifiedValuesCell.accessoryType = usesCapabilityDataForPaymentMethods ? .none : .checkmark
 
         updateAmountField()
+        
+        pkeyField.text = pkey
+        pkeyField.inputAccessoryView = amountFieldInputAccessoryView
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -192,6 +198,12 @@ class PaymentSettingTableViewController: UITableViewController {
     }
     @IBAction private func finishEditingAmount(_ sender: Any) {
         amountField.resignFirstResponder()
+        pkeyField.resignFirstResponder()
+    }
+    
+    @IBAction private func didEndEditingPublicKey(_ sender: UITextField) {
+        guard let pkey = sender.text else { return }
+        self.pkey = pkey
     }
 
     @IBAction private func showPresetChooser(_ sender: Any) {
@@ -224,6 +236,7 @@ class PaymentSettingTableViewController: UITableViewController {
 
 extension PaymentSettingTableViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard textField == self.amountField else { return true }
         return string.allSatisfy { (character) -> Bool in
             return "0"..."9" ~= character || (currentCurrency.factor > 1 && "." == character)
         }

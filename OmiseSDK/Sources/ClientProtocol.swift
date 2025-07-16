@@ -35,4 +35,6 @@ public protocol ClientProtocol {
     /// - parameter tokenID: Token identifier
     /// - parameter completion: Returns `Token.ChargeStatus`object with token charge status value  on success and `Error` on request failed
     func observeChargeStatus(tokenID: String, _ completion: @escaping ResponseClosure<Token.ChargeStatus, Error>)
+    
+    func updatePublicKey(_ key: String)
 }

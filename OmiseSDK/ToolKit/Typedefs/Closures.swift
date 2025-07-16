@@ -1,4 +1,4 @@
 import Foundation
 
-typealias VoidClosure = () -> Void
-typealias ParamClosure<T> = (T) -> Void
+typealias VoidClosure = (() -> Void)?
+typealias ParamClosure<T> = ((T) -> Void)?

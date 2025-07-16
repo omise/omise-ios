@@ -85,8 +85,8 @@
 "CreditCard.field.mmyy.placeholder" = "MM/YY";
 "CreditCard.payButton.title" = "支払う";
 
-"CreditCard.ccv.details.amex.text" = "カード表面の4桁の番号";
-"CreditCard.ccv.details.default.text" = "カード裏面の3桁の番号";
+"CreditCard.cvv.details.amex.text" = "カード表面の4桁の番号";
+"CreditCard.cvv.details.default.text" = "カード裏面の3桁の番号";
 
 // EContext
 "EContext.field.fullName" = "氏名";
@@ -122,8 +122,20 @@
 "Atome.field.street1.error" = "配送先の通り名が必要です";
 "Atome.field.optional" = "(任意)";
 
+"Atome.billingAddress" = "Billing address (optional)";
+"Atome.field.billing.the.same" = "My billing and shipping address are the same.";
+"Atome.field.billingCountry" = "国";
+"Atome.field.billingCity" = "市区郡";
+"Atome.field.billingPostalCode" = "郵便番号";
+"Atome.field.billingState" = "州";
+"Atome.field.billingStreet1" = "通り名";
+"Atome.field.billingStreet2" = "通り名 2";
+
 // FPX
 "fpx.bank-chooser.no-banks-available.text" = "銀行のリストを検索できません。後でもう一度お試しください。";
+"fpx.field.email" = "メールアドレス (任意)";
+"fpx.nextButton.title" = "次";
+"fpx.label.pleaseInput.text" = "メールアドレスを入力し、FPXからの取引確認メールを受信します";
 
 // Authorizing Payment
 "AuthorizingPayment.title" = "決済の認可";

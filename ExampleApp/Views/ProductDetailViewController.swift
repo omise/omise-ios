@@ -2,7 +2,7 @@ import UIKit
 import OmiseSDK
 
 class ProductDetailViewController: BaseViewController {
-    let omiseSDK = {
+    let omiseSDK: OmiseSDK = {
         // Initialize OmiseSDK instance with given publicKey and optional configuration used for testing
         let omiseSDK = OmiseSDK(
             publicKey: LocalConfig.default.publicKey,
@@ -16,6 +16,13 @@ class ProductDetailViewController: BaseViewController {
         OmiseSDK.shared = omiseSDK
         return omiseSDK
     }()
+    
+    override var pkeyFromSettings: String {
+        didSet {
+            if pkeyFromSettings.isEmpty { return }
+            omiseSDK.updatePublicKey(key: pkeyFromSettings)
+        }
+    }
 
     private func loadCapability() {
         omiseSDK.client.capability { (result) in
@@ -101,10 +108,11 @@ extension ProductDetailViewController: AuthorizingPaymentDelegate {
 extension ProductDetailViewController: ChoosePaymentMethodDelegate {
     func choosePaymentMethodDidComplete(with source: Source) {
         print("Source is created with id '\(source.id)'")
+        copyToPasteboard(source.id)
         omiseSDK.dismiss {
             let alertController = UIAlertController(
                 title: "Source Created\n(\(source.paymentInformation.sourceType.rawValue))",
-                message: "A source with id of \(source.id) was successfully created. Please send this id to server to create a charge.",
+                message: "A source with id of \(source.id) was successfully created. Please send this id to server to create a charge. ID is copied to your pastedboard",
                 preferredStyle: .alert
             )
             let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -115,10 +123,11 @@ extension ProductDetailViewController: ChoosePaymentMethodDelegate {
 
     func choosePaymentMethodDidComplete(with token: Token) {
         print("Token is created with id '\(token.id)'")
+        copyToPasteboard(token.id)
         omiseSDK.dismiss {
             let alertController = UIAlertController(
                 title: "Token Created",
-                message: "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge.",
+                message: "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge. ID is copied to your pastedboard",
                 preferredStyle: .alert
             )
             let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -142,10 +151,11 @@ extension ProductDetailViewController: ChoosePaymentMethodDelegate {
 
     func choosePaymentMethodDidComplete(with source: Source, token: Token) {
         print("White-label installment payment Token is created with id '\(token.id)', Source id: '\(source.id)'")
+        copyToPasteboard("\(token.id) \(source.id)")
         omiseSDK.dismiss {
             let alertController = UIAlertController(
                 title: "Token & Source Created\n(\(source.paymentInformation.sourceType.rawValue))",
-                message: "A token with id of \(token.id) and source with id of \(source.id) was successfully created. Please send this id to server to create a charge.",
+                message: "A token with id of \(token.id) and source with id of \(source.id) was successfully created. Please send this id to server to create a charge. Token and Source IDs are copied to your pastedboard separated by space.",
                 preferredStyle: .alert
             )
             let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -160,10 +170,11 @@ extension ProductDetailViewController: ChoosePaymentMethodDelegate {
 extension ProductDetailViewController: CustomCreditCardPaymentControllerDelegate {
     func creditCardFormViewController(_ controller: CustomCreditCardPaymentController, didSucceedWithToken token: Token) {
         print("Token is created by using custom form with id '\(token.id)'")
+        copyToPasteboard(token.id)
         dismissForm {
             let alertController = UIAlertController(
                 title: "Token Created",
-                message: "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge.",
+                message: "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge. ID is copied to your pastedboard",
                 preferredStyle: .alert
             )
             let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -183,5 +194,11 @@ extension ProductDetailViewController: CustomCreditCardPaymentControllerDelegate
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
         }
+    }
+}
+
+private extension ProductDetailViewController {
+    func copyToPasteboard(_ string: String) {
+        UIPasteboard.general.string = string
     }
 }

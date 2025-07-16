@@ -21,7 +21,7 @@ class TextFieldView: UIView {
         label.font = .preferredFont(forTextStyle: .subheadline)
         return label
     }()
-    private lazy var textField: OmiseTextField = {
+    private(set) lazy var textField: OmiseTextField = {
         let textField = OmiseTextField()
         textField.textColor = style.textColor
         textField.font = .preferredFont(forTextStyle: .body)

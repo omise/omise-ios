@@ -82,8 +82,8 @@
 "CreditCard.field.mmyy.placeholder" = "ดด/ปป";
 "CreditCard.payButton.title" = "ชำระเงิน";
 
-"CreditCard.ccv.details.amex.text" = "หมายเลข 4 หลักบนหน้าบัตร";
-"CreditCard.ccv.details.default.text" = "หมายเลข 3 หลักด้านหลังบัตร";
+"CreditCard.cvv.details.amex.text" = "หมายเลข 4 หลักบนหน้าบัตร";
+"CreditCard.cvv.details.default.text" = "หมายเลข 3 หลักด้านหลังบัตร";
 
 // EContext
 "EContext.field.fullName" = "ชื่อ-สกุล";
@@ -119,8 +119,20 @@
 "Atome.field.street1.error" = "จำเป็นต้องใส่ชื่อถนนสำหรับจัดส่งสินค้า";
 "Atome.field.optional" = "(ถ้ามี)";
 
+"Atome.billingAddress" = "ที่อยู่สำหรับส่งใบแจ้งหนี้ (ไม่จำเป็น)";
+"Atome.field.billing.the.same" = "ใช้ที่อยู่เดียวกันสำหรับจัดส่งสินค้าและใบแจ้งหนี้";
+"Atome.field.billingCountry" = "ประเทศ";
+"Atome.field.billingCity" = "เมือง";
+"Atome.field.billingPostalCode" = "รหัสไปรษณีย์";
+"Atome.field.billingState" = "รัฐ";
+"Atome.field.billingStreet1" = "ถนน";
+"Atome.field.billingStreet2" = "ที่อยู่ - เพิ่มเติม";
+
 // FPX
 "fpx.bank-chooser.no-banks-available.text" = "ไม่สามารถเรียกข้อมูลรายชื่อธนาคารได้ในขณะนี้ กรุณาลองใหม่อีกครั้ง";
+"fpx.field.email" = "อีเมล (ถ้ามี)";
+"fpx.nextButton.title" = "ถัดไป";
+"fpx.label.pleaseInput.text" = "กรุณากรอกอีเมลเพื่อรับการยืนยันการรับชำระจากเอฟพีเอ็กซ์";
 
 // Authorizing Payment
 "AuthorizingPayment.title" = "กำลังอนุมัติวงเงิน";

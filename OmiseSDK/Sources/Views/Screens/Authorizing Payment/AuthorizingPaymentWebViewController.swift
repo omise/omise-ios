@@ -22,7 +22,7 @@ class AuthorizingPaymentWebViewController: UIViewController {
         }
     }
     
-    enum CompletionState {
+    enum CompletionState: Equatable {
         case complete(redirectedURL: URL?)
         case cancel
     }
@@ -33,7 +33,7 @@ class AuthorizingPaymentWebViewController: UIViewController {
     /// Example: if the return URL is `https://www.example.com/products/12345` the expected return URL should have a URLComponents with scheme of `https`, host of `www.example.com` and the path of `/products/`
     var expectedReturnURLStrings: [URLComponents] = []
     
-    var completion: ParamClosure<CompletionState>?
+    var completion: ParamClosure<CompletionState> = nil
 
     let webView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration())
     let okButtonTitle = NSLocalizedString("OK", comment: "OK button for JavaScript panel")
@@ -66,7 +66,7 @@ class AuthorizingPaymentWebViewController: UIViewController {
         startAuthorizingPaymentProcess()
     }
     
-    @IBAction private func cancelAuthorizingPaymentProcess(_ sender: UIBarButtonItem) {
+    @objc func cancelAuthorizingPaymentProcess(_ sender: UIBarButtonItem) {
         os_log("Authorization process was cancelled, trying to notify the delegate", log: uiLogObject, type: .info)
         if let completion = completion {
             completion(.cancel)
@@ -87,7 +87,7 @@ class AuthorizingPaymentWebViewController: UIViewController {
         webView.load(request)
     }
     
-    private func verifyPaymentURL(_ url: URL) -> Bool {
+    func verifyPaymentURL(_ url: URL) -> Bool {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             return false
         }
