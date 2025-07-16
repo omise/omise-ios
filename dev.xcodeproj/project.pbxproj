@@ -535,6 +535,7 @@
 				2FA17F652E27940A007B682A /* OmiseFlutterSPM in Frameworks */,
 				75D13E0F2B8678530073A831 /* OmiseSwiftUIKit in Frameworks */,
 				2F9F58D82D6E28D600240952 /* ThreeDS_SDK in Frameworks */,
+				2F3DA6B12DC22720001CAC9E /* OmiseFlutterSPM in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1533,6 +1534,7 @@
 				759C7EC22B7DC80A0029D555 /* SourceType+InternetBanking.swift in Sources */,
 				4B04F7192DA91D1C005A7B19 /* OmiseFormToolbar.swift in Sources */,
 				759C7EC22B7DC80A0029D555 /* SourceType+InternetBanking.swift in Sources */,
+				2F66C24A2D5D991600AB5BF9 /* FlutterEngineManager.swift in Sources */,
 				75405A912A26340E008C21F6 /* UILabel+Helpers.swift in Sources */,
 				759856242A286C880087B605 /* UIScrollView+Helpers.swift in Sources */,
 				75E0EB9C2B7BD00F00E3198A /* Country.swift in Sources */,
