@@ -72,6 +72,8 @@ class OmiseSDKTests: XCTestCase {
         let billingFields = result["applePayRequiredBillingContactFields"] as? [String]
         XCTAssertNotNil(billingFields)
         XCTAssertEqual(billingFields, ["emailAddress", "name", "phoneNumber", "postalAddress"])
+    }
+    
     func test_versionIsNotEmpty() {
         XCTAssertFalse(sut.version.isEmpty)
     }

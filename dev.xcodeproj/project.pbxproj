@@ -30,6 +30,7 @@
 		2F8272552E0BACDD003B5C30 /* PANModelTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A43454620DBAE76005C5C94 /* PANModelTestCase.swift */; };
 		2F8272572E0BAD95003B5C30 /* ButtonExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8272562E0BAD8E003B5C30 /* ButtonExtensionsTests.swift */; };
 		2F82725B2E0BB1C9003B5C30 /* OmiseTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82725A2E0BB1C9003B5C30 /* OmiseTextFieldTests.swift */; };
+		2F8D00F62E27A411000D9E16 /* SourceType+InternetBanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8D00F52E27A411000D9E16 /* SourceType+InternetBanking.swift */; };
 		2F9F58D82D6E28D600240952 /* ThreeDS_SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9F58D72D6E28D600240952 /* ThreeDS_SDK */; };
 		2FA17F642E27940A007B682A /* OmiseFlutterSPM in Frameworks */ = {isa = PBXBuildFile; productRef = 2F27105E2D9BD343007093C6 /* OmiseFlutterSPM */; };
 		2FA17F652E27940A007B682A /* OmiseFlutterSPM in Frameworks */ = {isa = PBXBuildFile; productRef = 2F1DB29A2D9BE8E0006424F4 /* OmiseFlutterSPM */; };
@@ -139,7 +140,6 @@
 		758A4EA82BE9D722005E7B5A /* AuthorizingPaymentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4EA72BE9D722005E7B5A /* AuthorizingPaymentDelegate.swift */; };
 		759856242A286C880087B605 /* UIScrollView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759856232A286C880087B605 /* UIScrollView+Helpers.swift */; };
 		759C7EC02B7DC7F50029D555 /* SourceType+MobileBanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759C7EBF2B7DC7F50029D555 /* SourceType+MobileBanking.swift */; };
-		759C7EC22B7DC80A0029D555 /* SourceType+InternetBanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759C7EC12B7DC80A0029D555 /* SourceType+InternetBanking.swift */; };
 		759C7EC42B7DC8270029D555 /* SourceType+Installments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759C7EC32B7DC8270029D555 /* SourceType+Installments.swift */; };
 		75B420502B7611710036134D /* Capability.PaymentMethod.Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4204F2B7611710036134D /* Capability.PaymentMethod.Bank.swift */; };
 		75B4205E2B7674D70036134D /* Calendar+CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4205D2B7674D70036134D /* Calendar+CreditCard.swift */; };
@@ -325,6 +325,7 @@
 		2F8272512E0BA86C003B5C30 /* ColorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsTests.swift; sourceTree = "<group>"; };
 		2F8272562E0BAD8E003B5C30 /* ButtonExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtensionsTests.swift; sourceTree = "<group>"; };
 		2F82725A2E0BB1C9003B5C30 /* OmiseTextFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmiseTextFieldTests.swift; sourceTree = "<group>"; };
+		2F8D00F52E27A411000D9E16 /* SourceType+InternetBanking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SourceType+InternetBanking.swift"; sourceTree = "<group>"; };
 		2FA17F672E279476007B682A /* FlutterEngineManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlutterEngineManager.swift; sourceTree = "<group>"; };
 		2FA17F682E279476007B682A /* FlutterMethodChannelWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlutterMethodChannelWrapper.swift; sourceTree = "<group>"; };
 		2FA17F692E279476007B682A /* FlutterPaymentMethodResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlutterPaymentMethodResult.swift; sourceTree = "<group>"; };
@@ -418,7 +419,6 @@
 		758A4EA72BE9D722005E7B5A /* AuthorizingPaymentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizingPaymentDelegate.swift; sourceTree = "<group>"; };
 		759856232A286C880087B605 /* UIScrollView+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Helpers.swift"; sourceTree = "<group>"; };
 		759C7EBF2B7DC7F50029D555 /* SourceType+MobileBanking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SourceType+MobileBanking.swift"; sourceTree = "<group>"; };
-		759C7EC12B7DC80A0029D555 /* SourceType+InternetBanking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SourceType+InternetBanking.swift"; sourceTree = "<group>"; };
 		759C7EC32B7DC8270029D555 /* SourceType+Installments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SourceType+Installments.swift"; sourceTree = "<group>"; };
 		75B4204F2B7611710036134D /* Capability.PaymentMethod.Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capability.PaymentMethod.Bank.swift; sourceTree = "<group>"; };
 		75B4205D2B7674D70036134D /* Calendar+CreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar+CreditCard.swift"; sourceTree = "<group>"; };
@@ -535,7 +535,6 @@
 				2FA17F652E27940A007B682A /* OmiseFlutterSPM in Frameworks */,
 				75D13E0F2B8678530073A831 /* OmiseSwiftUIKit in Frameworks */,
 				2F9F58D82D6E28D600240952 /* ThreeDS_SDK in Frameworks */,
-				2F3DA6B12DC22720001CAC9E /* OmiseFlutterSPM in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -895,11 +894,11 @@
 		75D13D7A2B834A4D0073A831 /* SourceType */ = {
 			isa = PBXGroup;
 			children = (
+				2F8D00F52E27A411000D9E16 /* SourceType+InternetBanking.swift */,
 				75E0EBAF2B7BD02F00E3198A /* SourceType.swift */,
 				75D13DD32B8652230073A831 /* SourceType+Helpers.swift */,
 				751E7BF12B7FC90C0031B4A2 /* SourceType+Collections.swift */,
 				759C7EC32B7DC8270029D555 /* SourceType+Installments.swift */,
-				759C7EC12B7DC80A0029D555 /* SourceType+InternetBanking.swift */,
 				759C7EBF2B7DC7F50029D555 /* SourceType+MobileBanking.swift */,
 			);
 			path = SourceType;
@@ -1531,10 +1530,7 @@
 				2FDDFF3B2DFAA74D00C1369A /* InvalidCardReason.swift in Sources */,
 				75405A812A2633B6008C21F6 /* SpacerView.swift in Sources */,
 				75D13DAD2B83B58B0073A831 /* Source.Payment.TrueMoney.swift in Sources */,
-				759C7EC22B7DC80A0029D555 /* SourceType+InternetBanking.swift in Sources */,
 				4B04F7192DA91D1C005A7B19 /* OmiseFormToolbar.swift in Sources */,
-				759C7EC22B7DC80A0029D555 /* SourceType+InternetBanking.swift in Sources */,
-				2F66C24A2D5D991600AB5BF9 /* FlutterEngineManager.swift in Sources */,
 				75405A912A26340E008C21F6 /* UILabel+Helpers.swift in Sources */,
 				759856242A286C880087B605 /* UIScrollView+Helpers.swift in Sources */,
 				75E0EB9C2B7BD00F00E3198A /* Country.swift in Sources */,
@@ -1615,6 +1611,7 @@
 				75D13DE42B8666CC0073A831 /* SelectSourceTypeDelegate.swift in Sources */,
 				75CFC4DD2B73F75C00422A8F /* OmiseAPI.swift in Sources */,
 				75348D4E29C3FCC70008C8A3 /* Bundle+OmiseSDK.swift in Sources */,
+				2F8D00F62E27A411000D9E16 /* SourceType+InternetBanking.swift in Sources */,
 				2FB5FC4D2D5F38C600FF8ED8 /* CreateTokenApplePayPayload.swift in Sources */,
 				755CD9232BA2000600E8FCDA /* ClientProtocol.swift in Sources */,
 				2F36EF212DFBF16300A39314 /* NumberFormatter+Helpers.swift in Sources */,
