@@ -64,7 +64,8 @@ final class FlutterChannelHandlerImpl: FlutterChannelHandler {
             if self == nil { return }
             
             switch call.method {
-            case OmiseFlutter.selectPaymentMethodResult:
+            case OmiseFlutterMethod.selectPaymentMethod.result,
+                OmiseFlutterMethod.openCardPage.result:
                 // Handle the result of the payment method selection
                 guard let arguments = call.arguments as? [String: Any] else {
                     // Return an error if arguments are invalid or not found

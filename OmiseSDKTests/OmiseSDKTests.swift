@@ -6,12 +6,17 @@ class OmiseSDKTests: XCTestCase {
     var sut: OmiseSDK!
     var mockVC: UIViewController!
     var mockDelegate: MockChoosePaymentMethodDelegate!
+    var mockFlutterEngineManager: MockFlutterEngineManager!
+    var dummyVC: UIViewController!
     
     override func setUp() {
         super.setUp()
         sut = OmiseSDK(publicKey: "pkey_my_key")
         mockVC = UIViewController()
         mockDelegate = MockChoosePaymentMethodDelegate()
+        mockFlutterEngineManager = MockFlutterEngineManager()
+        dummyVC = UIViewController()
+        sut.flutterEngineManager = mockFlutterEngineManager
         OmiseSDK.shared = sut
     }
     
@@ -90,19 +95,6 @@ class OmiseSDKTests: XCTestCase {
         XCTAssertNotNil(match, "Version \(version) should match semantic versioning (major.minor.patch)")
     }
     
-    func test_presentCreditCardPayment() {
-        sut.presentCreditCardPayment(from: mockVC,
-                                     delegate: mockDelegate)
-        
-        let navController = sut.presentedViewController as? UINavigationController
-        let coordinator = navController?.delegate as? ChoosePaymentCoordinator
-        
-        XCTAssertEqual(coordinator?.amount, 0)
-        XCTAssertNil(coordinator?.applePayInfo)
-        XCTAssertEqual(coordinator?.currency, "")
-        XCTAssertEqual(coordinator?.handleErrors, true)
-    }
-    
     func test_Configuration_init_storesURLs() throws {
         let vault = try XCTUnwrap(URL(string: "https://vault.example.com"))
         let api = try XCTUnwrap(URL(string: "https://api.example.com"))
@@ -111,5 +103,82 @@ class OmiseSDKTests: XCTestCase {
         
         XCTAssertEqual(config.vaultURL, vault)
         XCTAssertEqual(config.apiURL, api)
+    }
+    
+    //    func test_updatPKey {
+    //        sut.updatePublicKey(key: "")
+    //    }
+    func testPresentChoosePaymentMethod_buildsArgsAndForwardsCall() throws {
+        // Act
+        sut.presentChoosePaymentMethod(
+            from: dummyVC,
+            animated: false,
+            amount: 5000,
+            currency: "USD",
+            allowedPaymentMethods: [.atome, .applePay],
+            skipCapabilityValidation: false,
+            isCardPaymentAllowed: true,
+            handleErrors: true,
+            delegate: mockDelegate
+        )
+        
+        // Assert detach
+        XCTAssertTrue(mockFlutterEngineManager.didDetach)
+        
+        // Assert present call
+        XCTAssertEqual(mockFlutterEngineManager.presentCalls.count, 1)
+        let call = try XCTUnwrap(mockFlutterEngineManager.presentCalls.first)
+        XCTAssertEqual(call.method, .selectPaymentMethod)
+        XCTAssert(call.viewController === dummyVC)
+        XCTAssert(call.delegate === mockDelegate)
+        
+        let args = call.arguments
+        XCTAssertEqual(args["pkey"] as? String, "pkey_my_key")
+        XCTAssertEqual(args["amount"] as? Int64, 5000)
+        XCTAssertEqual(args["currency"] as? String, "USD")
+        
+        let paymentMethods = args["selectedPaymentMethods"] as? [String] ?? []
+        XCTAssertEqual(
+            Set(paymentMethods),
+            Set([SourceType.atome.rawValue, SourceType.applePay.rawValue])
+        )
+        
+        let tokenMethods = args["selectedTokenizationMethods"] as? [String] ?? []
+        XCTAssertEqual(tokenMethods, [SourceType.applePay.rawValue])
+    }
+    
+    func testPresentCreditCardPayment_forwardsCorrectArgs() throws {
+        // Act
+        sut.presentCreditCardPayment(
+            from: dummyVC,
+            animated: true,
+            countryCode: "TH",
+            handleErrors: true,
+            delegate: mockDelegate
+        )
+        
+        // Assert detach
+        XCTAssertTrue(mockFlutterEngineManager.didDetach)
+        
+        // Assert present call
+        XCTAssertEqual(mockFlutterEngineManager.presentCalls.count, 1)
+        let call = try XCTUnwrap(mockFlutterEngineManager.presentCalls.first)
+        XCTAssertEqual(call.method, .openCardPage)
+        XCTAssert(call.viewController === dummyVC)
+        XCTAssert(call.delegate === mockDelegate)
+        
+        let args = call.arguments
+        XCTAssertEqual(args["pkey"] as? String, "pkey_my_key")
+        XCTAssertEqual(args.count, 1)
+    }
+    
+    func testUpdatePublicKey() {
+        XCTAssertEqual(sut.publicKey, "pkey_my_key")
+        
+        // Act
+        sut.updatePublicKey(key: "new_key")
+        
+        // Assert
+        XCTAssertEqual(sut.publicKey, "new_key")
     }
 }

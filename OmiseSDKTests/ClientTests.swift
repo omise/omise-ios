@@ -27,8 +27,8 @@ class ClientTests: XCTestCase {
         testClient = Client(
             publicKey: publicKey,
             version: "1.0.0",
-            apiURL: URL(string: "https://api.staging-omise.co")!,
-            vaultURL: URL(string: "https://vault.staging-omise.co")!
+            apiURL: URL(string: "https://api.omise.co")!,
+            vaultURL: URL(string: "https://vault.omise.co")!
         )
         // swiftlint:enable force_unwrapping
     }

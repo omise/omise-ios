@@ -31,7 +31,7 @@ public class OmiseSDK {
     private var expectedReturnURLStrings: [String] = []
     private var netceteraThreeDSController: NetceteraThreeDSController?
     
-    private let flutterEngineManager: FlutterEngineManager
+    internal var flutterEngineManager: FlutterEngineManager
     /// Creates a new instance of Omise SDK that provides interface to functionallity that SDK provides
     ///
     /// - Parameters:
@@ -120,9 +120,10 @@ public class OmiseSDK {
                                               requestBillingAddress: applePayInfo?.requestBillingAddress ?? false
         )
         
-        flutterEngineManager.presentFlutterPaymentMethod(viewController: topViewController,
-                                                         arguments: args,
-                                                         delegate: delegate)
+        flutterEngineManager.presentFlutterViewController(for: .selectPaymentMethod,
+                                                          on: topViewController,
+                                                          arguments: args,
+                                                          delegate: delegate)
     }
     
     /// Creates and presents modal "Credit Card Payment" controller with a given parameters
@@ -141,25 +142,11 @@ public class OmiseSDK {
         delegate: ChoosePaymentMethodDelegate
     ) {
         dismiss(animated: false)
-        
-        let paymentFlow = ChoosePaymentCoordinator(
-            client: client,
-            amount: 0,
-            currency: "",
-            currentCountry: Country(code: countryCode) ?? self.country,
-            applePayInfo: applePayInfo,
-            handleErrors: handleErrors
-        )
-        let viewController = paymentFlow.createCreditCardPaymentController(delegate: delegate)
-        
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.delegate = paymentFlow
-        if #available(iOSApplicationExtension 11.0, *) {
-            navigationController.navigationBar.prefersLargeTitles = false
-        }
-        
-        topViewController.present(navigationController, animated: animated, completion: nil)
-        presentedViewController = navigationController
+        let args: [String: Any] = ["pkey": publicKey]
+        flutterEngineManager.presentFlutterViewController(for: .openCardPage,
+                                                          on: topViewController,
+                                                          arguments: args,
+                                                          delegate: delegate)
     }
     
     /// Creates and presents Authorizing Payment controller with a given parameters
@@ -327,12 +314,10 @@ extension OmiseSDK {
         requestBillingAddress: Bool,
         atomeItems: [[String: Any]]? = nil
     ) -> [String: Any] {
+        var arguments = buildBasicArgument(with: publicKey)
         
-        var arguments: [String: Any] = [
-            "pkey": publicKey,
-            "amount": amount,
-            "currency": currency
-        ]
+        arguments["amount"] = amount
+        arguments["currency"] = currency
         
         // Add optional parameters only if they're provided
         if let paymentMethods = paymentMethods, !paymentMethods.isEmpty {
@@ -353,5 +338,9 @@ extension OmiseSDK {
         }
         
         return arguments
+    }
+    
+    func buildBasicArgument(with pkey: String) -> [String: Any] {
+        return ["pkey": pkey]
     }
 }

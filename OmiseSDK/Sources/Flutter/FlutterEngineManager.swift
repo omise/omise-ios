@@ -3,10 +3,11 @@ import Flutter
 
 protocol FlutterEngineManager {
     func detachFlutterViewController(animated: Bool)
-    func presentFlutterPaymentMethod(
-        viewController: UIViewController,  /// The view controller that will present the Flutter payment UI
-        arguments: [String: Any], /// arguments that can be passed to flutter module
-        delegate: ChoosePaymentMethodDelegate  /// The delegate to handle the result of the payment method selection
+    func presentFlutterViewController(
+        for method: OmiseFlutterMethod,
+        on viewController: UIViewController,  /// The view controller that will present the Flutter payment UI
+        arguments: [String: Any],
+        delegate: ChoosePaymentMethodDelegate /// The delegate to handle the result of the payment method selection
     )
 }
 /// `FlutterEngineManager` is responsible for managing communication between the native iOS SDK
@@ -68,13 +69,14 @@ class FlutterEngineManagerImpl: FlutterEngineManager {
     ///     - currency: The currency for the payment.
     ///     - delegate: The delegate that handles the result of the payment method selection.
     ///     - completion: An optional callback that is invoked when the method call has completed.
-    func presentFlutterPaymentMethod(
-    viewController: UIViewController,  /// The view controller that will present the Flutter payment UI
-    arguments: [String: Any],
-    delegate: ChoosePaymentMethodDelegate /// The delegate to handle the result of the payment method selection
+    func presentFlutterViewController(
+        for method: OmiseFlutterMethod,
+        on viewController: UIViewController,  /// The view controller that will present the Flutter payment UI
+        arguments: [String: Any],
+        delegate: ChoosePaymentMethodDelegate /// The delegate to handle the result of the payment method selection
     ) {
         // Invoke the Flutter method to request the payment method selection UI
-        methodChannel.invokeMethod(OmiseFlutter.selectPaymentMethodName, arguments: arguments)
+        methodChannel.invokeMethod(method.name, arguments: arguments)
         
         // Create a Flutter view controller to present the payment UI
         let flutterViewController = FlutterViewController(engine: flutterEngine, nibName: nil, bundle: .omiseSDK)
