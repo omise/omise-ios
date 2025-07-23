@@ -105,9 +105,6 @@ class OmiseSDKTests: XCTestCase {
         XCTAssertEqual(config.apiURL, api)
     }
     
-    //    func test_updatPKey {
-    //        sut.updatePublicKey(key: "")
-    //    }
     func testPresentChoosePaymentMethod_buildsArgsAndForwardsCall() throws {
         // Act
         sut.presentChoosePaymentMethod(

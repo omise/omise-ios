@@ -224,7 +224,6 @@ class FlutterEngineManagerTests: XCTestCase {
             }
         }
         mockChannelHandler.triggerSuccessResult(token: token, source: source)
-        
     }
     
     func testHandlerCallbackError() {
