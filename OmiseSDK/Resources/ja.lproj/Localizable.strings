@@ -122,6 +122,15 @@
 "Atome.field.street1.error" = "配送先の通り名が必要です";
 "Atome.field.optional" = "(任意)";
 
+"Atome.billingAddress" = "Billing address (optional)";
+"Atome.field.billing.the.same" = "My billing and shipping address are the same.";
+"Atome.field.billingCountry" = "国";
+"Atome.field.billingCity" = "市区郡";
+"Atome.field.billingPostalCode" = "郵便番号";
+"Atome.field.billingState" = "州";
+"Atome.field.billingStreet1" = "通り名";
+"Atome.field.billingStreet2" = "通り名 2";
+
 // FPX
 "fpx.bank-chooser.no-banks-available.text" = "銀行のリストを検索できません。後でもう一度お試しください。";
 "fpx.field.email" = "メールアドレス (任意)";

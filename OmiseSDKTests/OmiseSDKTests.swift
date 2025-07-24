@@ -86,4 +86,14 @@ class OmiseSDKTests: XCTestCase {
         XCTAssertEqual(coordinator?.currency, "")
         XCTAssertEqual(coordinator?.handleErrors, true)
     }
+    
+    func test_Configuration_init_storesURLs() throws {
+        let vault = try XCTUnwrap(URL(string: "https://vault.example.com"))
+        let api = try XCTUnwrap(URL(string: "https://api.example.com"))
+        
+        let config = Configuration(vaultURL: vault, apiURL: api)
+        
+        XCTAssertEqual(config.vaultURL, vault)
+        XCTAssertEqual(config.apiURL, api)
+    }
 }
