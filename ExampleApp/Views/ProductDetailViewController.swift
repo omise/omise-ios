@@ -48,12 +48,6 @@ class ProductDetailViewController: BaseViewController {
         )
     }
     
-    @IBAction private func showCustomCreditCardPayment(_ sender: Any) {
-        let customCreditCardPaymentController = CustomCreditCardPaymentController(nibName: nil, bundle: nil)
-        customCreditCardPaymentController.delegate = self
-        show(customCreditCardPaymentController, sender: sender)
-    }
-    
     @IBAction private func handlingAuthorizingPayment(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Authorizing Payment",
                                                 message: "Please input your given authorize URL",
@@ -163,37 +157,6 @@ extension ProductDetailViewController: ChoosePaymentMethodDelegate {
             self.present(alertController, animated: true, completion: nil)
         }
 
-    }
-}
-
-// MARK: - Custom Credit Card Form View Controller Delegate
-extension ProductDetailViewController: CustomCreditCardPaymentControllerDelegate {
-    func creditCardFormViewController(_ controller: CustomCreditCardPaymentController, didSucceedWithToken token: Token) {
-        print("Token is created by using custom form with id '\(token.id)'")
-        copyToPasteboard(token.id)
-        dismissForm {
-            let alertController = UIAlertController(
-                title: "Token Created",
-                message: "A token with id of \(token.id) was successfully created. Please send this id to server to create a charge. ID is copied to your pastedboard",
-                preferredStyle: .alert
-            )
-            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-        }
-    }
-
-    func creditCardFormViewController(_ controller: CustomCreditCardPaymentController, didFailWithError error: Error) {
-        dismissForm {
-            let alertController = UIAlertController(
-                title: "Error",
-                message: error.localizedDescription,
-                preferredStyle: .alert
-            )
-            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-        }
     }
 }
 
