@@ -55,6 +55,12 @@ class BaseViewController: UIViewController {
             self.paymentCurrencyCode = Tool.thailandPaymentCurrency
             self.allowedPaymentMethods = Tool.thailandAllowedPaymentMethods
         }
+        
+        if #available(iOS 17.0, *) {
+            registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (vc: Self, _) in
+                vc.updateUIColors()
+            }
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -68,18 +74,17 @@ class BaseViewController: UIViewController {
             settingViewController.allowedPaymentMethods = Set(self.allowedPaymentMethods)
         }
     }
+    
+    @available(iOS, introduced: 8.0, deprecated: 17.0)
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        updateUIColors()
+        if #unavailable(iOS 17.0) {
+            super.traitCollectionDidChange(previousTraitCollection)
+            updateUIColors()
+        }
     }
 
-    // swiftlint:disable:next function_body_length
     func updateUIColors() {
-        var modeChooserDefaultBackgroundColor: UIColor = .white
-
-        if #available(iOS 13.0, *) {
-            modeChooserDefaultBackgroundColor = .systemBackground
-        }
+        let modeChooserDefaultBackgroundColor: UIColor = .systemBackground
 
         if #available(iOS 15.0, *) {
             let navigationBarAppearance = UINavigationBarAppearance()
@@ -131,13 +136,10 @@ class BaseViewController: UIViewController {
             NSAttributedString.Key.foregroundColor: UIColor.darkText,
             NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .callout)
         ]
-
-        if #available(iOS 13.0, *) {
-            normalTitleAttributes = [
-                NSAttributedString.Key.foregroundColor: UIColor.label,
-                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .callout)
-            ]
-        }
+        normalTitleAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.label,
+            NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .callout)
+        ]
 
         self.modeChooser.setTitleTextAttributes(normalTitleAttributes, for: .normal)
         self.modeChooser.setTitleTextAttributes(normalTitleAttributes, for: .highlighted)

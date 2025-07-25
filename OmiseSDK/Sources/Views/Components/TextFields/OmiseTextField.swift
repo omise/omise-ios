@@ -19,10 +19,10 @@ public class OmiseTextField: UITextField {
             invalidateIntrinsicContentSize()
         }
     }
-
+    
     public var onTextFieldShouldReturn: () -> (Bool) = { return false }
     public var onValueChanged: () -> Void = { /* Non-optional default empty implementation */ }
-
+    
     @IBInspectable var borderWidth: CGFloat {
         get {
             switch style {
@@ -113,7 +113,7 @@ public class OmiseTextField: UITextField {
     func updatePlaceholderTextColor() {
         if let attributedPlaceholder = attributedPlaceholder, let placeholderColor = self.placeholderTextColor {
             let formattingAttributedText = NSMutableAttributedString(attributedString: attributedPlaceholder)
-
+            
             let formattingPlaceholderString = formattingAttributedText.string
             let range = NSRange(formattingPlaceholderString.startIndex..<formattingPlaceholderString.endIndex,
                                 in: formattingPlaceholderString)
@@ -160,6 +160,12 @@ public class OmiseTextField: UITextField {
         addTarget(self, action: #selector(didBeginEditing), for: .editingDidBegin)
         addTarget(self, action: #selector(didEndEditing), for: .editingDidEnd)
         updateBorder()
+        
+        if #available(iOS 17.0, *) {
+            registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (view: Self, _) in
+                view.updateBorder()
+            }
+        }
     }
     
     @objc func didBeginEditing() {
@@ -174,14 +180,15 @@ public class OmiseTextField: UITextField {
         onValueChanged()
     }
     
+    @available(iOS, introduced: 8.0, deprecated: 17.0)
     public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        
-        #if compiler(>=5.1)
-        if #available(iOS 13, *), traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
-            updateBorder()
+        if #unavailable(iOS 17.0) {
+            super.traitCollectionDidChange(previousTraitCollection)
+            if let previous = previousTraitCollection,
+               traitCollection.hasDifferentColorAppearance(comparedTo: previous) {
+                updateBorder()
+            }
         }
-        #endif
     }
 }
 
