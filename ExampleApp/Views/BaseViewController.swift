@@ -77,7 +77,7 @@ class BaseViewController: UIViewController {
     
     @available(iOS, introduced: 8.0, deprecated: 17.0)
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        if #unavailable(iOS 17.0) {
+        if !#available(iOS 17.0, *) {
             super.traitCollectionDidChange(previousTraitCollection)
             updateUIColors()
         }
