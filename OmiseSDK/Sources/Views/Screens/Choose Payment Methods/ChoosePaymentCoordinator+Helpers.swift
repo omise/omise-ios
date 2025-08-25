@@ -181,11 +181,8 @@ private extension ChoosePaymentCoordinator {
             guard let navController = navController else { return }
             self.errorViewHeightConstraint?.isActive = false
             navController.view.layoutIfNeeded()
-            if #available(iOS 13, *) {
-                navController.topViewController?.additionalSafeAreaInsets.top = self.errorView.bounds.height
-            } else if #available(iOS 11, *) {
-                navController.additionalSafeAreaInsets.top = self.errorView.bounds.height
-            }
+            
+            navController.topViewController?.additionalSafeAreaInsets.top = self.errorView.bounds.height
         }
         
         if animated {
@@ -206,9 +203,7 @@ private extension ChoosePaymentCoordinator {
         let animationBlock = { [weak navController] in
             self.errorViewHeightConstraint?.isActive = true
             navController?.view.layoutIfNeeded()
-            if #available(iOS 11, *) {
-                navController?.topViewController?.additionalSafeAreaInsets.top = 0
-            }
+            navController?.topViewController?.additionalSafeAreaInsets.top = 0
         }
         
         if animated {
@@ -219,11 +214,7 @@ private extension ChoosePaymentCoordinator {
                 animations: animationBlock
             ) { [weak navController] _ in
                 var isCompleted: Bool {
-                    if #available(iOS 11, *) {
-                        return navController?.topViewController?.additionalSafeAreaInsets.top == 0
-                    } else {
-                        return true
-                    }
+                    return navController?.topViewController?.additionalSafeAreaInsets.top == 0
                 }
                 guard isCompleted else { return }
                 self.errorView.removeFromSuperview()

@@ -266,7 +266,7 @@ extension ChoosePaymentCoordinator: SelectPaymentMethodDelegate {
             case .sourceType(.trueMoneyWallet):
                 navigate(to: createTrueMoneyWalletController())
             case .sourceType(.applePay):
-                if #available(iOS 11.0, *), let info = self.applePayInfo {
+                if let info = self.applePayInfo {
                     navigate(to: createApplePayController(info: info))
                 }
             default: break

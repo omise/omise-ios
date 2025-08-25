@@ -67,9 +67,7 @@ class SelectPaymentControllerTests: XCTestCase {
         sut.loadViewIfNeeded()
         
         XCTAssertEqual(sut.navigationItem.title, "MyTitle")
-        if #available(iOS 11.0, *) {
-            XCTAssertEqual(sut.navigationItem.largeTitleDisplayMode, .always)
-        }
+        XCTAssertEqual(sut.navigationItem.largeTitleDisplayMode, .always)
         XCTAssertNotNil(sut.navigationItem.rightBarButtonItem)
         XCTAssertEqual(sut.tableView.separatorColor?.hexString, UIColor.omiseSecondary.hexString)
         XCTAssertEqual(sut.tableView.rowHeight, 64)

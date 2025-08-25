@@ -47,7 +47,7 @@ class PaymentFormController: UIViewController {
     }()
 
     lazy var activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .white)
+        let indicator = UIActivityIndicatorView(style: .medium)
         indicator.color = style.activityIndicatorColor
         indicator.hidesWhenStopped = true
         return indicator
@@ -98,9 +98,7 @@ extension PaymentFormController {
     func setupViews() {
         view.backgroundColor = .background
 
-        if #available(iOS 11, *) {
-            navigationItem.largeTitleDisplayMode = .never
-        }
+        navigationItem.largeTitleDisplayMode = .never
         view.addSubviewAndFit(scrollView)
         scrollView.addSubviewAndFit(scrollContentView)
         scrollContentView.addSubviewAndFit(verticalContainerStack, horizontal: style.containerStackSideSpacer)

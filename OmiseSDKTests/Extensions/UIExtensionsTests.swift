@@ -30,7 +30,7 @@ final class UIExtensionsTests: XCTestCase {
         
         // Assert: contentInset and scrollIndicatorInsets updated
         XCTAssertEqual(scrollView.contentInset.bottom, 180)
-        XCTAssertEqual(scrollView.scrollIndicatorInsets.bottom, 180 - scrollView.safeAreaInsets.bottom)
+        XCTAssertEqual(scrollView.verticalScrollIndicatorInsets.bottom, 180 - scrollView.safeAreaInsets.bottom)
         
         // Simulate keyboard hiding
         NotificationCenter.default.post(
@@ -40,7 +40,7 @@ final class UIExtensionsTests: XCTestCase {
         
         // Assert: insets reset to zero
         XCTAssertEqual(scrollView.contentInset.bottom, 0)
-        XCTAssertEqual(scrollView.scrollIndicatorInsets.bottom, 0)
+        XCTAssertEqual(scrollView.verticalScrollIndicatorInsets.bottom, 0)
     }
     
     // MARK: - UIColor
