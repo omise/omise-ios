@@ -67,7 +67,7 @@ final class ViewControllerExtensionsTests: XCTestCase {
             return XCTFail("accessoryView should be a UIActivityIndicatorView")
         }
         XCTAssertTrue(indicator.isAnimating)
-        XCTAssertEqual(indicator.style, .gray)
+        XCTAssertEqual(indicator.style, .medium)
         XCTAssertEqual(indicator.color.hexString, UIColor.omiseSecondary.hexString)
         XCTAssertFalse(cell.isUserInteractionEnabled)
     }

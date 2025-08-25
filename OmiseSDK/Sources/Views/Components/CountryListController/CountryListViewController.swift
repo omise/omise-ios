@@ -2,11 +2,11 @@ import UIKit
 
 class CountryListController: UIViewController {
     typealias ViewModel = CountryListViewModelProtocol
-
+    
     private struct Style {
         let countryCellIdentifier = "CountryCell"
     }
-
+    
     private var style = Style()
     var viewModel: ViewModel? {
         didSet {
@@ -15,19 +15,19 @@ class CountryListController: UIViewController {
             }
         }
     }
-
+    
     var preferredPrimaryColor: UIColor? {
         didSet {
             applyPrimaryColor()
         }
     }
-
+    
     var preferredSecondaryColor: UIColor? {
         didSet {
             applySecondaryColor()
         }
     }
-
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundView = nil
@@ -37,28 +37,28 @@ class CountryListController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: style.countryCellIdentifier)
         return tableView
     }()
-
+    
     init(viewModel: ViewModel? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-
+        
         if let viewModel = viewModel {
             bind(to: viewModel)
         }
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         tableView.reloadData()
         DispatchQueue.main.async {
             self.scrollToSelectedRow(animated: false)
@@ -70,7 +70,7 @@ extension CountryListController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.countries.count ?? 0
     }
@@ -78,13 +78,13 @@ extension CountryListController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: style.countryCellIdentifier, for: indexPath)
         let country = viewModel?.countries.at(indexPath.row)
-
+        
         cell.textLabel?.text = country?.name ?? ""
         cell.textLabel?.textColor = UIColor.omisePrimary
         cell.accessoryType = (viewModel?.selectedCountry == country) ? .checkmark : .none
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let country = viewModel?.countries.at(indexPath.row)
         viewModel?.selectedCountry = country
@@ -94,34 +94,32 @@ extension CountryListController: UITableViewDelegate, UITableViewDataSource {
 // MARK: Setups
 private extension CountryListController {
     func setupViews() {
-        if #available(iOS 11, *) {
-            navigationItem.largeTitleDisplayMode = .never
-        }
-
+        navigationItem.largeTitleDisplayMode = .never
+        
         view.backgroundColor = .background
         view.addSubviewAndFit(tableView)
         tableView.reloadData()
     }
-
+    
     func bind(to viewModel: ViewModel) {
         guard isViewLoaded else { return }
         tableView.reloadData()
     }
-
+    
     func applyPrimaryColor() {
         guard isViewLoaded else {
             return
         }
         tableView.reloadData()
     }
-
+    
     func applySecondaryColor() {
         guard isViewLoaded else {
             return
         }
         tableView.reloadData()
     }
-
+    
     func scrollToSelectedRow(animated: Bool) {
         if let viewModel = viewModel,
            let selectedCountry = viewModel.selectedCountry,
@@ -130,7 +128,7 @@ private extension CountryListController {
             tableView.scrollToRow(at: indexPath, at: .middle, animated: animated)
         }
     }
-
+    
 }
 
 #if SWIFTUI_ENABLED

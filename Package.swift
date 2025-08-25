@@ -6,7 +6,7 @@ let package = Package(
     name: "OmiseSDK",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v10)
+        .iOS(.v14)
     ],
     products: [
         .library(

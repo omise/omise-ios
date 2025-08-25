@@ -107,12 +107,12 @@ class BaseFormViewController: UIViewController {
         else { return }
         let convertedFrame = view.convert(frameEnd, from: view.window)
         contentView.contentInset.bottom = convertedFrame.height
-        contentView.scrollIndicatorInsets.bottom = convertedFrame.height
+        contentView.verticalScrollIndicatorInsets.bottom = convertedFrame.height
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
         contentView.contentInset.bottom = 0
-        contentView.scrollIndicatorInsets.bottom = 0
+        contentView.verticalScrollIndicatorInsets.bottom = 0
     }
 }
 
