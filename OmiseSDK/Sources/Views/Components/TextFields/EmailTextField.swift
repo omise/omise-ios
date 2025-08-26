@@ -32,7 +32,7 @@ public class EmailTextField: OmiseTextField {
     public override func validate() throws {
         try super.validate()
         
-        guard let text = self.text else {
+        guard let _ = self.text else {
             throw OmiseTextFieldValidationError.emptyText
         }
     }
