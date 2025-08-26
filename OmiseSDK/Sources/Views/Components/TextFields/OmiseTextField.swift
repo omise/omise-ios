@@ -180,7 +180,7 @@ public class OmiseTextField: UITextField {
         onValueChanged()
     }
     
-    @available(iOS, introduced: 8.0, deprecated: 17.0)
+    @available(iOS, introduced: 14.0, deprecated: 17.0)
     public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         if let previous = previousTraitCollection,

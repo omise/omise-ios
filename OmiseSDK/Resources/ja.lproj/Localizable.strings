@@ -84,6 +84,12 @@
 "CreditCard.field.securityCode" = "セキュリティコード";
 "CreditCard.field.mmyy.placeholder" = "MM/YY";
 "CreditCard.payButton.title" = "支払う";
+"CreditCard.field.email" = "メール";
+"CreditCard.field.phone" = "電話";
+
+"CreditCard.search.country.hint" = "Search country";
+"CreditCard.search.country.code.hint" = "Search country or code";
+"CreditCard.search.country.code.title" = "Select Country Code";
 
 "CreditCard.cvv.details.amex.text" = "カード表面の4桁の番号";
 "CreditCard.cvv.details.default.text" = "カード裏面の3桁の番号";

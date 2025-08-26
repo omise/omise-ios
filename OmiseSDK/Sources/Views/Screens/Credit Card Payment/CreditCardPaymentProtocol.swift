@@ -19,6 +19,8 @@ protocol CreditCardPaymentFormViewModelOutput {
     var nameError: String { get }
     var expiryError: String { get }
     var cvvError: String { get }
+    var emailError: String { get }
+    var phoneError: String { get }
     var shouldAddressFields: Bool { get }
     var countryViewModel: CountryListViewModelProtocol { get }
 }

@@ -13,6 +13,10 @@ class CreditCardPaymentFormViewModel: CreditCardPaymentFormViewModelProtocol, Co
         }
     }
     lazy var countries: [Country] = Country.sortedAll
+    private var _filteredCountries: [Country] = []
+    var filteredCountries: [Country] {
+        return _filteredCountries.isEmpty ? countries : _filteredCountries
+    }
     
     var onSelectCountry: (Country) -> Void = { _ in /* Non-optional default empty implementation */ }
     
@@ -31,6 +35,7 @@ class CreditCardPaymentFormViewModel: CreditCardPaymentFormViewModelProtocol, Co
     ) {
         self.delegate = delegate
         self.currentCountry = country
+        self.selectedCountry = country
         self.option = paymentOption
     }
 }
@@ -54,7 +59,7 @@ extension CreditCardPaymentFormViewModel: CreditCardPaymentFormViewModelInput {
             expirationMonth: payment.expiryMonth,
             expirationYear: payment.expiryYear,
             securityCode: payment.cvv,
-            phoneNumber: nil,
+            phoneNumber: payment.phoneNumber,
             countryCode: currentCountry?.code,
             city: payment.city,
             state: payment.state,
@@ -98,6 +103,23 @@ extension CreditCardPaymentFormViewModel: CreditCardPaymentFormViewModelInput {
         default:
             return nil
         }
+    }
+    
+    func filterCountries(with searchText: String) {
+        if searchText.isEmpty {
+            _filteredCountries = []
+        } else {
+            _filteredCountries = countries.filter { country in
+                let searchLower = searchText.lowercased()
+                return country.name.lowercased().contains(searchLower) ||
+                       country.code.lowercased().contains(searchLower)
+            }
+        }
+    }
+    
+    func updateSelectedCountry(at index: Int) {
+        guard index >= 0 && index < filteredCountries.count else { return }
+        selectedCountry = filteredCountries[index]
     }
 }
 
@@ -148,6 +170,26 @@ extension CreditCardPaymentFormViewModel: CreditCardPaymentFormViewModelOutput {
             comment: "An error text displayed when the card holder name is invalid"
         )
     }
+    
+    var emailError: String {
+        NSLocalizedString(
+            "credit-card-form.email-field.invalid-data.error.text",
+            tableName: "Error",
+            bundle: .omiseSDK,
+            value: "Card holder name is invalid",
+            comment: "An error text displayed when card holder email is invalid"
+        )
+    }
+    
+    var phoneError: String {
+        NSLocalizedString(
+            "credit-card-form.phone-number-field.invalid-data.error.text",
+            tableName: "Error",
+            bundle: .omiseSDK,
+            value: "Phone number is invalid",
+            comment: "An error text displayed when phone number is invalid"
+        )
+    }
 }
 
 struct CreditCardPayment {
@@ -161,4 +203,6 @@ struct CreditCardPayment {
     let state: String?
     let city: String?
     let zipcode: String?
+    let email: String?
+    let phoneNumber: String?
 }

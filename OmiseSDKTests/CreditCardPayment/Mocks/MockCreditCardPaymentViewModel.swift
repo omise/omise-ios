@@ -7,12 +7,11 @@ class MockCreditCardPaymentViewModel:
     CreditCardPaymentFormViewModelOutput {
     
     private var _onSelectCountry: (Country) -> Void = { _ in }
+    private var _filteredCountries: [Country] = []
     
-    // Expose them so tests can drive
     var loadingClosure: ParamClosure<Bool> = nil
     var countryClosure: ParamClosure<Country> = nil
     
-    // control flags
     var shouldShowAddressFields = false
     var viewDidLoadCalled = false
     var didCancelCalled = false
@@ -25,8 +24,7 @@ class MockCreditCardPaymentViewModel:
     // MARK: — Input
     func viewDidLoad() {
         viewDidLoadCalled = true
-        // simulate sending back an initial country if you like:
-        // countryClosure?(Country(code: "US")!)
+        countryClosure?(.init(name: "United States of America", code: "US"))
     }
     
     func set(loadingClosure: ParamClosure<Bool>) {
@@ -54,6 +52,8 @@ class MockCreditCardPaymentViewModel:
     var nameError: String { "nameErr" }
     var expiryError: String { "expErr" }
     var cvvError: String { "cvvErr" }
+    var emailError: String { "emailErr "}
+    var phoneError: String { "phoneErr "}
     
     var shouldAddressFields: Bool {
         return shouldShowAddressFields
@@ -78,6 +78,10 @@ extension MockCreditCardPaymentViewModel: CountryListViewModelProtocol {
         Country.all
     }
     
+    var filteredCountries: [Country] {
+        return _filteredCountries.isEmpty ? countries : _filteredCountries
+    }
+    
     var selectedCountry: Country? {
         get {
             Country(code: "TH")
@@ -85,5 +89,21 @@ extension MockCreditCardPaymentViewModel: CountryListViewModelProtocol {
         set(newValue) { // swiftlint:disable:this unused_setter_value
             
         }
+    }
+    
+    func filterCountries(with searchText: String) {
+        if searchText.isEmpty {
+            _filteredCountries = []
+        } else {
+            _filteredCountries = countries.filter { country in
+                let searchLower = searchText.lowercased()
+                return country.name.lowercased().contains(searchLower) ||
+                country.code.lowercased().contains(searchLower)
+            }
+        }
+    }
+    
+    func updateSelectedCountry(at index: Int) {
+        guard index >= 0 && index < filteredCountries.count else { return }
     }
 }
