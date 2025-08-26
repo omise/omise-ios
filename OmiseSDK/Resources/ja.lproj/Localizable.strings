@@ -87,9 +87,9 @@
 "CreditCard.field.email" = "メール";
 "CreditCard.field.phone" = "電話";
 
-"CreditCard.search.country.hint" = "Search country";
-"CreditCard.search.country.code.hint" = "Search country or code";
-"CreditCard.search.country.code.title" = "Select Country Code";
+"CreditCard.search.country.hint" = "国名で探す";
+"CreditCard.search.country.code.hint" = "国名または国番号で探す";
+"CreditCard.search.country.code.title" = "国番号を選ぶ";
 
 "CreditCard.cvv.details.amex.text" = "カード表面の4桁の番号";
 "CreditCard.cvv.details.default.text" = "カード裏面の3桁の番号";
