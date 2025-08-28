@@ -27,16 +27,19 @@ class CreditCardPaymentFormViewModel: CreditCardPaymentFormViewModelProtocol, Co
     
     private var currentCountry: Country?
     private let option: CreditCardPaymentOption
+    private let collect3DSData: Required3DSData
     
     init(
         country: Country?,
         paymentOption: CreditCardPaymentOption,
+        collect3DSData: Required3DSData,
         delegate: CreditCardPaymentDelegate?
     ) {
         self.delegate = delegate
         self.currentCountry = country
         self.selectedCountry = country
         self.option = paymentOption
+        self.collect3DSData = collect3DSData
     }
 }
 
@@ -60,6 +63,7 @@ extension CreditCardPaymentFormViewModel: CreditCardPaymentFormViewModelInput {
             expirationYear: payment.expiryYear,
             securityCode: payment.cvv,
             phoneNumber: payment.phoneNumber,
+            email: payment.email,
             countryCode: currentCountry?.code,
             city: payment.city,
             state: payment.state,
@@ -129,6 +133,14 @@ extension CreditCardPaymentFormViewModel: CreditCardPaymentFormViewModelOutput {
     
     var shouldAddressFields: Bool {
         self.currentCountry?.isAVS ?? false
+    }
+    
+    var shouldshowEmailField: Bool {
+        collect3DSData.shouldRenderEmailField
+    }
+    
+    var shouldShowPhoneField: Bool {
+        collect3DSData.shouldRenderPhoneField
     }
     
     var numberError: String {

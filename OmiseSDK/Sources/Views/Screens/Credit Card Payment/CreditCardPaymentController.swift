@@ -303,10 +303,22 @@ class CreditCardPaymentController: BaseFormViewController {
             hStack,
             countryFieldView,
             addressStackView,
-            getStackViewGroup(for: [emailLabel, emailTextField, emailErrorLabel]),
-            getStackViewGroup(for: [phoneLabel, phoneTextField, phoneErrorLabel]),
             submitButton
         ])
+        
+        if viewModel.output.shouldshowEmailField {
+            formStack.addArrangedSubview(
+                getStackViewGroup(for: [emailLabel, emailTextField, emailErrorLabel])
+            )
+        }
+        
+        if viewModel.output.shouldShowPhoneField {
+            formStack.addArrangedSubview(
+                getStackViewGroup(for: [phoneLabel, phoneTextField, phoneErrorLabel])
+            )
+        }
+        
+        formStack.addArrangedSubview(submitButton)
         
         // activity spinner
         contentView.addSubview(requestingIndicatorView)
@@ -359,10 +371,10 @@ class CreditCardPaymentController: BaseFormViewController {
         }
         
         // Add email and phone fields if not hidden
-        if !emailTextField.isHidden {
+        if viewModel.output.shouldshowEmailField {
             formFields.append(emailTextField)
         }
-        if !phoneTextField.isHidden {
+        if viewModel.output.shouldShowPhoneField {
             formFields.append(phoneTextField)
         }
         
@@ -404,9 +416,9 @@ class CreditCardPaymentController: BaseFormViewController {
                                         state: stateFieldView.text,
                                         city: cityFieldView.text,
                                         zipcode: zipCodeFieldView.text,
-                                        email: emailTextField.isHidden ? nil :
-                                            emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines),
-                                        phoneNumber: phoneTextField.isHidden ? nil : phoneTextField.fullPhoneNumber)
+                                        email: viewModel.output.shouldshowEmailField ?
+                                        emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) : nil,
+                                        phoneNumber: viewModel.output.shouldShowPhoneField ? phoneTextField.fullPhoneNumber : nil)
         viewModel.input.startPayment(for: payment)
     }
     
@@ -509,21 +521,6 @@ class CreditCardPaymentController: BaseFormViewController {
         case zipCodeFieldTag: zipCodeFieldView.error = nil
         default: break
         }
-    }
-    
-    // MARK: - Public Methods for Field Visibility
-    func setEmailFieldHidden(_ hidden: Bool) {
-        emailLabel.isHidden = hidden
-        emailTextField.isHidden = hidden
-        emailErrorLabel.isHidden = hidden
-        setupFormFields() // Refresh form fields array
-    }
-    
-    func setPhoneFieldHidden(_ hidden: Bool) {
-        phoneLabel.isHidden = hidden
-        phoneTextField.isHidden = hidden
-        phoneErrorLabel.isHidden = hidden
-        setupFormFields() // Refresh form fields array
     }
 }
 

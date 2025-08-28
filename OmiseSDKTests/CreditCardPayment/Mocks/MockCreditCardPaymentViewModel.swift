@@ -59,6 +59,14 @@ class MockCreditCardPaymentViewModel:
         return shouldShowAddressFields
     }
     
+    var shouldshowEmailField: Bool {
+        true
+    }
+    
+    var shouldShowPhoneField: Bool {
+        true
+    }
+    
     var countryViewModel: CountryListViewModelProtocol {
         return self
     }

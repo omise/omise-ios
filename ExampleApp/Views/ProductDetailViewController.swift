@@ -37,6 +37,7 @@ class ProductDetailViewController: BaseViewController {
             allowedPaymentMethods: usesCapabilityDataForPaymentMethods ? nil : allowedPaymentMethods,
             isCardPaymentAllowed: true,
             handleErrors: true,
+            collect3DSData: .all,
             delegate: self
         )
     }

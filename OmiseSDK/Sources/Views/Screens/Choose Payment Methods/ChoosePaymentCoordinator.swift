@@ -7,6 +7,7 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
     let currentCountry: Country?
     let applePayInfo: ApplePayInfo?
     let handleErrors: Bool
+    let collect3DSData: Required3DSData
     
     enum ResultState {
         case cancelled
@@ -23,13 +24,22 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
         return view
     }()
     
-    init(client: ClientProtocol, amount: Int64, currency: String, currentCountry: Country?, applePayInfo: ApplePayInfo?, handleErrors: Bool) {
+    init(
+        client: ClientProtocol,
+        amount: Int64,
+        currency: String,
+        currentCountry: Country?,
+        applePayInfo: ApplePayInfo?,
+        handleErrors: Bool,
+        collect3DSData: Required3DSData
+    ) {
         self.client = client
         self.amount = amount
         self.currency = currency
         self.currentCountry = currentCountry
         self.applePayInfo = applePayInfo
         self.handleErrors = handleErrors
+        self.collect3DSData = collect3DSData
         super.init()
         
         self.setupErrorView()
@@ -72,6 +82,7 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
     func createCreditCardPaymentController(paymentType: CreditCardPaymentOption = .card) -> CreditCardPaymentController {
         let vm = CreditCardPaymentFormViewModel(country: self.currentCountry,
                                                 paymentOption: paymentType,
+                                                collect3DSData: self.collect3DSData,
                                                 delegate: self)
         let vc = CreditCardPaymentController(viewModel: vm)
         vc.title = PaymentMethod.creditCard.localizedTitle

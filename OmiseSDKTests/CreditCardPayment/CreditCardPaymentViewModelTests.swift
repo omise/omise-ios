@@ -13,6 +13,7 @@ class CreditCardPaymentFormViewModelTests: XCTestCase {
         sut = CreditCardPaymentFormViewModel(
             country: country,
             paymentOption: .card,
+            collect3DSData: .all,
             delegate: mockDelegate
         )
     }
