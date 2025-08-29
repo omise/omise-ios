@@ -18,6 +18,10 @@
 		2F0FEF8D2E0B09C800CB6F2E /* CardNameTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0FEF8C2E0B09C300CB6F2E /* CardNameTextFieldTests.swift */; };
 		2F0FEF8F2E0B0E1600CB6F2E /* ClosureBarButtonItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0FEF8E2E0B0E1400CB6F2E /* ClosureBarButtonItemTests.swift */; };
 		2F0FEF912E0B0F3200CB6F2E /* SelectDuitNowOBWBankVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0FEF902E0B0F2A00CB6F2E /* SelectDuitNowOBWBankVMTests.swift */; };
+		2F25F8972E618073002D1AB0 /* PasskeyAuthenticationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25F8962E61806F002D1AB0 /* PasskeyAuthenticationProtocol.swift */; };
+		2F25F8992E6180F7002D1AB0 /* SafariPasskeyAuthenticationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25F8982E6180F4002D1AB0 /* SafariPasskeyAuthenticationHandler.swift */; };
+		2F25F89C2E61926D002D1AB0 /* MockPasskeyAuthenticationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25F89B2E61926C002D1AB0 /* MockPasskeyAuthenticationHandler.swift */; };
+		2F367B712E6197EA003ABBFC /* SafariPasskeyAuthenticationHandlerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F367B702E6197EA003ABBFC /* SafariPasskeyAuthenticationHandlerTest.swift */; };
 		2F36EF1F2DFBCDA500A39314 /* SelectPaymentControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36EF1E2DFBCDA500A39314 /* SelectPaymentControllerTests.swift */; };
 		2F36EF212DFBF16300A39314 /* NumberFormatter+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36EF202DFBF16300A39314 /* NumberFormatter+Helpers.swift */; };
 		2F36EF252DFBF19600A39314 /* OmiseError+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36EF242DFBF19600A39314 /* OmiseError+Helpers.swift */; };
@@ -374,6 +378,10 @@
 		2F0FEF8C2E0B09C300CB6F2E /* CardNameTextFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNameTextFieldTests.swift; sourceTree = "<group>"; };
 		2F0FEF8E2E0B0E1400CB6F2E /* ClosureBarButtonItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosureBarButtonItemTests.swift; sourceTree = "<group>"; };
 		2F0FEF902E0B0F2A00CB6F2E /* SelectDuitNowOBWBankVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDuitNowOBWBankVMTests.swift; sourceTree = "<group>"; };
+		2F25F8962E61806F002D1AB0 /* PasskeyAuthenticationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyAuthenticationProtocol.swift; sourceTree = "<group>"; };
+		2F25F8982E6180F4002D1AB0 /* SafariPasskeyAuthenticationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariPasskeyAuthenticationHandler.swift; sourceTree = "<group>"; };
+		2F25F89B2E61926C002D1AB0 /* MockPasskeyAuthenticationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPasskeyAuthenticationHandler.swift; sourceTree = "<group>"; };
+		2F367B702E6197EA003ABBFC /* SafariPasskeyAuthenticationHandlerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariPasskeyAuthenticationHandlerTest.swift; sourceTree = "<group>"; };
 		2F36EF1E2DFBCDA500A39314 /* SelectPaymentControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPaymentControllerTests.swift; sourceTree = "<group>"; };
 		2F36EF202DFBF16300A39314 /* NumberFormatter+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Helpers.swift"; sourceTree = "<group>"; };
 		2F36EF242DFBF19600A39314 /* OmiseError+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OmiseError+Helpers.swift"; sourceTree = "<group>"; };
@@ -751,6 +759,24 @@
 				2F0267542D8D4FB100BA8D3E /* CardNumberTextFieldTests.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		2F25F8952E617FDD002D1AB0 /* Passkey */ = {
+			isa = PBXGroup;
+			children = (
+				2F25F8982E6180F4002D1AB0 /* SafariPasskeyAuthenticationHandler.swift */,
+				2F25F8962E61806F002D1AB0 /* PasskeyAuthenticationProtocol.swift */,
+			);
+			path = Passkey;
+			sourceTree = "<group>";
+		};
+		2F25F89A2E619261002D1AB0 /* Passkey */ = {
+			isa = PBXGroup;
+			children = (
+				2F367B702E6197EA003ABBFC /* SafariPasskeyAuthenticationHandlerTest.swift */,
+				2F25F89B2E61926C002D1AB0 /* MockPasskeyAuthenticationHandler.swift */,
+			);
+			path = Passkey;
 			sourceTree = "<group>";
 		};
 		2F5985F22DB09E4E00E81646 /* EContextForm */ = {
@@ -1411,6 +1437,7 @@
 		75E0EB872B7BCEA000E3198A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				2F25F8952E617FDD002D1AB0 /* Passkey */,
 				758A4E682BE389B2005E7B5A /* 3DS */,
 				75E0EBBD2B7D0DB600E3198A /* Components */,
 				75E0EB942B7BD00F00E3198A /* Models */,
@@ -1538,6 +1565,7 @@
 		987A02CA1CE35D5E0035417A /* OmiseSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				2F25F89A2E619261002D1AB0 /* Passkey */,
 				2FDDFF442DFABFB800C1369A /* OmiseError */,
 				4B904E552DC9FE2400BE78EC /* FPX */,
 				4BC7A8BD2DC8BFD7007E1A17 /* TrueMoneyForm */,
@@ -1950,6 +1978,7 @@
 				4B7C1E722DF05820002A7356 /* OmiseCheckbox.swift in Sources */,
 				75E0EBA32B7BD02200E3198A /* Token.swift in Sources */,
 				75405A932A26340E008C21F6 /* UIButton+Helpers.swift in Sources */,
+				2F25F8992E6180F7002D1AB0 /* SafariPasskeyAuthenticationHandler.swift in Sources */,
 				751E7BD92B7E5D130031B4A2 /* PaymentMethod.swift in Sources */,
 				754B78182B8741CD00973B71 /* TapGestureHandler.swift in Sources */,
 				758A4E742BE38A7E005E7B5A /* NetceteraConfig.swift in Sources */,
@@ -1987,6 +2016,7 @@
 				759C7EC42B7DC8270029D555 /* SourceType+Installments.swift in Sources */,
 				2F8241CE2E5CF170006B9B3F /* EmailTextField.swift in Sources */,
 				755CD9212BA1C81600E8FCDA /* UIViewController+KeyboardAppearance.swift in Sources */,
+				2F25F8972E618073002D1AB0 /* PasskeyAuthenticationProtocol.swift in Sources */,
 				75D13DC92B8529790073A831 /* SelectSourceTypePaymentViewModel.swift in Sources */,
 				758A4E732BE38A7E005E7B5A /* NetceteraThreeDSController.swift in Sources */,
 			);
@@ -2047,6 +2077,7 @@
 				2FDDFF472DFAE03200C1369A /* BadRequestAPIErrorParsingTestCase.swift in Sources */,
 				758A4E962BE38AFD005E7B5A /* ThreeDSButtonCustomizationTests.swift in Sources */,
 				2FC27E1C2D6DC1B7001E5857 /* ApplePayViewControllerTest.swift in Sources */,
+				2F367B712E6197EA003ABBFC /* SafariPasskeyAuthenticationHandlerTest.swift in Sources */,
 				4B7F2C4A2DA7AA2000A23CEF /* CVVInfoViewTests.swift in Sources */,
 				2F5D98F72D6EB96600B5ECB4 /* MockSelectPaymentMethodDelegate.swift in Sources */,
 				2F5D98FB2D6EC26400B5ECB4 /* MockChoosePaymentMethodDelegate.swift in Sources */,
@@ -2095,6 +2126,7 @@
 				75E0EB722B7A962600E3198A /* CreateSourcePayloadTests.swift in Sources */,
 				753279382A31B40F008048AD /* CountryListViewModelMockup.swift in Sources */,
 				2F5985F12DB09BD700E81646 /* EContextPaymentFormVMTests.swift in Sources */,
+				2F25F89C2E61926D002D1AB0 /* MockPasskeyAuthenticationHandler.swift in Sources */,
 				4BC7A8C42DC8C00F007E1A17 /* MockTrueMoneyFormViewModel.swift in Sources */,
 				7509D4E72A1C8E3D0050AB38 /* AtomeFormViewModelTests.swift in Sources */,
 				4B9E70432DDBA46800DA384C /* CreditCardPaymentViewModelTests.swift in Sources */,

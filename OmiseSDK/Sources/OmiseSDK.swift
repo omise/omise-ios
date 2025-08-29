@@ -28,7 +28,8 @@ public class OmiseSDK {
 
     private var expectedReturnURLStrings: [String] = []
     private var netceteraThreeDSController: NetceteraThreeDSController?
-
+    private var passkeyHandler: PasskeyAuthenticationProtocol
+    
     /// Creates a new instance of Omise SDK that provides interface to functionallity that SDK provides
     ///
     /// - Parameters:
@@ -43,10 +44,30 @@ public class OmiseSDK {
             apiURL: configuration?.apiURL,
             vaultURL: configuration?.vaultURL
         )
-
+        self.passkeyHandler = SafariPasskeyAuthenticationHandler()
+        
         preloadCapabilityAPI()
     }
-
+    
+    // Internal initializer for testing
+    internal init(
+        publicKey: String,
+        configuration: Configuration? = nil,
+        passkeyAuthenticationHandler: PasskeyAuthenticationProtocol
+    ) {
+        self.publicKey = publicKey
+        self.client = Client(
+            publicKey: publicKey,
+            version: version,
+            network: NetworkService(),
+            apiURL: configuration?.apiURL,
+            vaultURL: configuration?.vaultURL
+        )
+        self.passkeyHandler = passkeyAuthenticationHandler
+        
+        preloadCapabilityAPI()
+    }
+    
     /// Creates and presents modal "Payment Methods" controller with a given parameters
     ///
     /// - Parameters:
@@ -164,6 +185,17 @@ public class OmiseSDK {
         threeDSUICustomization: ThreeDSUICustomization? = nil,
         delegate: AuthorizingPaymentDelegate
     ) {
+        // Passkey
+        if passkeyHandler.shouldHandlePasskey(authorizeURL) {
+            passkeyHandler.presentPasskeyAuthentication(
+                from: topViewController,
+                authorizeURL: authorizeURL,
+                expectedReturnURLStrings: expectedReturnURLStrings,
+                delegate: delegate
+            )
+            return
+        }
+        
         guard authorizeURL.absoluteString.contains("acs=true") else {
             presentWebViewAuthorizingPayment(
                 from: topViewController,
@@ -210,12 +242,25 @@ public class OmiseSDK {
 
     /// Dismiss any presented UI form by OmiseSDK
     public func dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
-        guard let presentedViewController = presentedViewController else { return }
+        // Clean up Safari passkey authentication if active
+        if let handler = passkeyHandler as? SafariPasskeyAuthenticationHandler {
+            handler.dismiss(animated: animated, completion: completion)
+        }
+        
+        guard let presentedViewController = presentedViewController else {
+            completion?()
+            return
+        }
         presentedViewController.dismiss(animated: animated, completion: completion)
     }
 
     /// Handle URL Callback received by AppDelegate
     public func handleURLCallback(_ url: URL) -> Bool {
+        // First try passkey authentication handler
+        if passkeyHandler.handlePasskeyCallback(url) {
+            return true
+        }
+        
         // Will handle callback with 3ds library
         let containsURL = expectedReturnURLStrings
             .map {
