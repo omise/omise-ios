@@ -82,7 +82,7 @@
 "CreditCard.field.nameOnCard" = "Name on card";
 "CreditCard.field.expiryDate" = "Expiry date";
 "CreditCard.field.securityCode" = "Security code";
-"CreditCard.field.email" = "Eamil";
+"CreditCard.field.email" = "Email";
 "CreditCard.field.phone" = "Phone Number";
 "CreditCard.field.mmyy.placeholder" = "MM/YY";
 "CreditCard.payButton.title" = "Pay";
