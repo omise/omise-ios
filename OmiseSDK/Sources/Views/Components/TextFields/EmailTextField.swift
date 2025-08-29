@@ -26,7 +26,7 @@ public class EmailTextField: OmiseTextField {
         textContentType = .emailAddress
         placeholder = "email@example.com"
         
-        validator = try? NSRegularExpression(pattern: "\\A[\\w\\-\\.]+@[\\w\\-\\.]+\\.[a-zA-Z]{2,}\\s?\\z", options: [])
+        validator = try? NSRegularExpression(pattern: .emailRegexPattern, options: [])
     }
     
     public override func validate() throws {

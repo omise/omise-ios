@@ -55,7 +55,7 @@ public class PhoneNumberTextField: OmiseTextField {
         placeholder = "123 456 7890"
         textContentType = .telephoneNumber
         
-        validator = try? NSRegularExpression(pattern: #"^\d{7,15}$"#, options: [])
+        validator = try? NSRegularExpression(pattern: .phoneNumberRegexPattern, options: [])
         
         setupLeftView()
     }
