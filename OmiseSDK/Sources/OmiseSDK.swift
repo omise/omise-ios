@@ -28,7 +28,8 @@ public class OmiseSDK {
 
     private var expectedReturnURLStrings: [String] = []
     private var netceteraThreeDSController: NetceteraThreeDSController?
-
+    private var passkeyHandler: PasskeyAuthenticationProtocol
+    
     /// Creates a new instance of Omise SDK that provides interface to functionallity that SDK provides
     ///
     /// - Parameters:
@@ -43,10 +44,30 @@ public class OmiseSDK {
             apiURL: configuration?.apiURL,
             vaultURL: configuration?.vaultURL
         )
-
+        self.passkeyHandler = SafariPasskeyAuthenticationHandler()
+        
         preloadCapabilityAPI()
     }
-
+    
+    // Internal initializer for testing
+    internal init(
+        publicKey: String,
+        configuration: Configuration? = nil,
+        passkeyAuthenticationHandler: PasskeyAuthenticationProtocol
+    ) {
+        self.publicKey = publicKey
+        self.client = Client(
+            publicKey: publicKey,
+            version: version,
+            network: NetworkService(),
+            apiURL: configuration?.apiURL,
+            vaultURL: configuration?.vaultURL
+        )
+        self.passkeyHandler = passkeyAuthenticationHandler
+        
+        preloadCapabilityAPI()
+    }
+    
     /// Creates and presents modal "Payment Methods" controller with a given parameters
     ///
     /// - Parameters:
@@ -58,6 +79,7 @@ public class OmiseSDK {
     ///    - skipCapabilityValidation: Set `false` to filter payment methods presented in Capability (default), `true` to skip validation (for testing)
     ///    - isCardPaymentAllowed: Should present Card Payment Method in the list
     ///    - handleErrors: If `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
+    ///    - collect3DSData: either none, phone, email or all, default is none. this will render email and/or phone fields in credit card form to support 3DS and PASSKEY auth
     ///    - completion: Completion handler triggered when payment completes with Token, Source, Error or was Cancelled
     public func presentChoosePaymentMethod(
         from topViewController: UIViewController,
@@ -68,6 +90,7 @@ public class OmiseSDK {
         skipCapabilityValidation: Bool = false,
         isCardPaymentAllowed: Bool = true,
         handleErrors: Bool = true,
+        collect3DSData: Required3DSData = .none,
         delegate: ChoosePaymentMethodDelegate
     ) {
         dismiss(animated: false)
@@ -78,7 +101,8 @@ public class OmiseSDK {
             currency: currency,
             currentCountry: country,
             applePayInfo: self.applePayInfo,
-            handleErrors: handleErrors
+            handleErrors: handleErrors,
+            collect3DSData: collect3DSData
         )
 
         let filter = SelectPaymentMethodViewModel.Filter(
@@ -109,12 +133,14 @@ public class OmiseSDK {
     ///    - animated: Presents controller with animation if `true`
     ///    - countryCode: Country to be preselected in the form. If `nil` country from Capabilities will be used instead.
     ///    - handleErrors: If `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
+    ///    - collect3DSData: either none, phone, email or all, default is none. this will render email and/or phone fields in credit card form to support 3DS and PASSKEY auth
     ///    - delegate: Delegate to be notified when Source or Token is created
     public func presentCreditCardPayment(
         from topViewController: UIViewController,
         animated: Bool = true,
         countryCode: String? = nil,
         handleErrors: Bool = true,
+        collect3DSData: Required3DSData = .none,
         delegate: ChoosePaymentMethodDelegate
     ) {
         dismiss(animated: false)
@@ -125,7 +151,8 @@ public class OmiseSDK {
             currency: "",
             currentCountry: Country(code: countryCode) ?? self.country,
             applePayInfo: applePayInfo,
-            handleErrors: handleErrors
+            handleErrors: handleErrors,
+            collect3DSData: collect3DSData
         )
         let viewController = paymentFlow.createCreditCardPaymentController(delegate: delegate)
 
@@ -158,6 +185,17 @@ public class OmiseSDK {
         threeDSUICustomization: ThreeDSUICustomization? = nil,
         delegate: AuthorizingPaymentDelegate
     ) {
+        // Passkey
+        if passkeyHandler.shouldHandlePasskey(authorizeURL) {
+            passkeyHandler.presentPasskeyAuthentication(
+                from: topViewController,
+                authorizeURL: authorizeURL,
+                expectedReturnURLStrings: expectedReturnURLStrings,
+                delegate: delegate
+            )
+            return
+        }
+        
         guard authorizeURL.absoluteString.contains("acs=true") else {
             presentWebViewAuthorizingPayment(
                 from: topViewController,
@@ -204,12 +242,25 @@ public class OmiseSDK {
 
     /// Dismiss any presented UI form by OmiseSDK
     public func dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
-        guard let presentedViewController = presentedViewController else { return }
+        // Clean up Safari passkey authentication if active
+        if let handler = passkeyHandler as? SafariPasskeyAuthenticationHandler {
+            handler.dismiss(animated: animated, completion: completion)
+        }
+        
+        guard let presentedViewController = presentedViewController else {
+            completion?()
+            return
+        }
         presentedViewController.dismiss(animated: animated, completion: completion)
     }
 
     /// Handle URL Callback received by AppDelegate
     public func handleURLCallback(_ url: URL) -> Bool {
+        // First try passkey authentication handler
+        if passkeyHandler.handlePasskeyCallback(url) {
+            return true
+        }
+        
         // Will handle callback with 3ds library
         let containsURL = expectedReturnURLStrings
             .map {

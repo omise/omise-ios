@@ -52,11 +52,47 @@ final class CountryListControllerTests: XCTestCase {
         sut.tableView(tableView, didSelectRowAt: [0, 1])
         XCTAssertEqual(mockVM.selectedCountry, mockVM.countries[1])
     }
+    
+    func testMockVM_filterCountries_worksCorrectly() {
+        // Initially should have all countries
+        XCTAssertEqual(mockVM.filteredCountries.count, 2)
+        
+        // Filter by "A"
+        mockVM.filterCountries(with: "A")
+        XCTAssertEqual(mockVM.filteredCountries.count, 1)
+        XCTAssertEqual(mockVM.filteredCountries.first?.name, "A")
+        
+        // Clear filter
+        mockVM.filterCountries(with: "")
+        XCTAssertEqual(mockVM.filteredCountries.count, 2)
+    }
 }
 
 // MARK: - Mock ViewModel
 class MockVM: CountryListViewModelProtocol {
     var countries: [Country] = [.init(name: "A", code: "A"), .init(name: "B", code: "B")]
+    var filteredCountries: [Country] = []
     var selectedCountry: Country?
     var onSelectCountry: (Country) -> Void = { _ in /* Non-optional default empty implementation */ }
+    
+    init() {
+        filteredCountries = countries
+    }
+    
+    func filterCountries(with searchText: String) {
+        if searchText.isEmpty {
+            filteredCountries = countries
+        } else {
+            filteredCountries = countries.filter { country in
+                country.name.lowercased().contains(searchText.lowercased()) ||
+                country.code.lowercased().contains(searchText.lowercased())
+            }
+        }
+    }
+    
+    func updateSelectedCountry(at index: Int) {
+        guard index >= 0 && index < filteredCountries.count else { return }
+        selectedCountry = filteredCountries[index]
+        onSelectCountry(selectedCountry ?? .init(name: "Australia", code: "AU"))
+    }
 }

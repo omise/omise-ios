@@ -6,10 +6,17 @@ class OmiseSDKTests: XCTestCase {
     var sut: OmiseSDK!
     var mockVC: UIViewController!
     var mockDelegate: MockChoosePaymentMethodDelegate!
+    var mockPasskeyHandler: MockPasskeyAuthenticationHandler!
+    var mockAuthorizingDelegate: MockAuthorizingPaymentDelegate!
     
     override func setUp() {
         super.setUp()
-        sut = OmiseSDK(publicKey: "pkey_my_key")
+        mockPasskeyHandler = MockPasskeyAuthenticationHandler()
+        mockAuthorizingDelegate = MockAuthorizingPaymentDelegate()
+        sut = OmiseSDK(
+            publicKey: "pkey_my_key",
+            passkeyAuthenticationHandler: mockPasskeyHandler
+        )
         mockVC = UIViewController()
         mockDelegate = MockChoosePaymentMethodDelegate()
         OmiseSDK.shared = sut
@@ -20,6 +27,8 @@ class OmiseSDKTests: XCTestCase {
         sut = nil
         mockVC = nil
         mockDelegate = nil
+        mockPasskeyHandler = nil
+        mockAuthorizingDelegate = nil
     }
     
     func testCountry() {
@@ -95,5 +104,96 @@ class OmiseSDKTests: XCTestCase {
         
         XCTAssertEqual(config.vaultURL, vault)
         XCTAssertEqual(config.apiURL, api)
+    }
+    
+    // MARK: - Passkey Authentication Tests
+    func test_handleURLCallback_withPasskeyHandler_returnsTrue() throws {
+        // Given
+        let callbackURL = try XCTUnwrap(URL(string: "myapp://callback?result=success"))
+        mockPasskeyHandler.shouldReturnTrueForCallback = true
+        
+        // When
+        let result = sut.handleURLCallback(callbackURL)
+        
+        // Then
+        XCTAssertTrue(result)
+        XCTAssertEqual(mockPasskeyHandler.handlePasskeyCallbackCallCount, 1)
+    }
+    
+    func test_handleURLCallback_withoutPasskeyHandler_fallsBackToDefault() throws {
+        // Given
+        let callbackURL = try XCTUnwrap(URL(string: "myapp://callback?result=success"))
+        mockPasskeyHandler.shouldReturnTrueForCallback = false
+        
+        // When
+        let result = sut.handleURLCallback(callbackURL)
+        
+        // Then
+        XCTAssertEqual(mockPasskeyHandler.handlePasskeyCallbackCallCount, 1)
+        // The result should be false since passkey handler returned false
+        // and there are no expected URLs set up for the default behavior
+        XCTAssertFalse(result)
+    }
+    
+    func test_presentAuthorizingPayment_withSignatureParam_callsPasskeyHandler() throws {
+        // Given
+        let passkeyURL = try XCTUnwrap(URL(string: "https://sample.domain/?signature=aBcdXyzlibc"))
+        let expectedReturnURLs = ["myapp://callback"]
+        mockPasskeyHandler.shouldReturnTrueForShouldHandle = true
+        
+        // When
+        sut.presentAuthorizingPayment(
+            from: mockVC,
+            authorizeURL: passkeyURL,
+            expectedReturnURLStrings: expectedReturnURLs,
+            threeDSRequestorAppURLString: "myapp://",
+            delegate: mockAuthorizingDelegate
+        )
+        
+        // Then
+        XCTAssertEqual(mockPasskeyHandler.shouldHanlePasskeyCallCount, 1)
+        XCTAssertEqual(mockPasskeyHandler.presentPasskeyAuthenticationCallCount, 1)
+        XCTAssertEqual(mockPasskeyHandler.lastPresentedURL, passkeyURL)
+    }
+    
+    func test_presentAuthorizingPayment_withoutSignatureParam_doesNotCallPasskeyHandler() throws {
+        // Given
+        let regularURL = try XCTUnwrap(URL(string: "https://regular.domain/authorize?t=token&sigv=1"))
+        let expectedReturnURLs = ["myapp://callback"]
+        mockPasskeyHandler.shouldReturnTrueForShouldHandle = false
+        
+        // When
+        sut.presentAuthorizingPayment(
+            from: mockVC,
+            authorizeURL: regularURL,
+            expectedReturnURLStrings: expectedReturnURLs,
+            threeDSRequestorAppURLString: "myapp://",
+            delegate: mockAuthorizingDelegate
+        )
+        
+        // Then
+        XCTAssertEqual(mockPasskeyHandler.shouldHanlePasskeyCallCount, 1)
+        XCTAssertEqual(mockPasskeyHandler.presentPasskeyAuthenticationCallCount, 0)
+    }
+    
+    func test_presentAuthorizingPayment_withSignatureAndExtraParams_callsPasskeyHandler() throws {
+        // Given
+        let passkeyURL = try XCTUnwrap(URL(string: "https://sample.domain/?t=token&signature=aBcdXyzlibc&sigv=1&extra=value"))
+        let expectedReturnURLs = ["myapp://callback"]
+        mockPasskeyHandler.shouldReturnTrueForShouldHandle = true
+        
+        // When
+        sut.presentAuthorizingPayment(
+            from: mockVC,
+            authorizeURL: passkeyURL,
+            expectedReturnURLStrings: expectedReturnURLs,
+            threeDSRequestorAppURLString: "myapp://",
+            delegate: mockAuthorizingDelegate
+        )
+        
+        // Then
+        XCTAssertEqual(mockPasskeyHandler.shouldHanlePasskeyCallCount, 1)
+        XCTAssertEqual(mockPasskeyHandler.presentPasskeyAuthenticationCallCount, 1)
+        XCTAssertEqual(mockPasskeyHandler.lastPresentedURL, passkeyURL)
     }
 }

@@ -13,6 +13,10 @@ class CreditCardPaymentFormViewModel: CreditCardPaymentFormViewModelProtocol, Co
         }
     }
     lazy var countries: [Country] = Country.sortedAll
+    private var _filteredCountries: [Country] = []
+    var filteredCountries: [Country] {
+        return _filteredCountries.isEmpty ? countries : _filteredCountries
+    }
     
     var onSelectCountry: (Country) -> Void = { _ in /* Non-optional default empty implementation */ }
     
@@ -23,15 +27,19 @@ class CreditCardPaymentFormViewModel: CreditCardPaymentFormViewModelProtocol, Co
     
     private var currentCountry: Country?
     private let option: CreditCardPaymentOption
+    private let collect3DSData: Required3DSData
     
     init(
         country: Country?,
         paymentOption: CreditCardPaymentOption,
+        collect3DSData: Required3DSData,
         delegate: CreditCardPaymentDelegate?
     ) {
         self.delegate = delegate
         self.currentCountry = country
+        self.selectedCountry = country
         self.option = paymentOption
+        self.collect3DSData = collect3DSData
     }
 }
 
@@ -54,7 +62,8 @@ extension CreditCardPaymentFormViewModel: CreditCardPaymentFormViewModelInput {
             expirationMonth: payment.expiryMonth,
             expirationYear: payment.expiryYear,
             securityCode: payment.cvv,
-            phoneNumber: nil,
+            phoneNumber: payment.phoneNumber,
+            email: payment.email,
             countryCode: currentCountry?.code,
             city: payment.city,
             state: payment.state,
@@ -99,6 +108,23 @@ extension CreditCardPaymentFormViewModel: CreditCardPaymentFormViewModelInput {
             return nil
         }
     }
+    
+    func filterCountries(with searchText: String) {
+        if searchText.isEmpty {
+            _filteredCountries = []
+        } else {
+            _filteredCountries = countries.filter { country in
+                let searchLower = searchText.lowercased()
+                return country.name.lowercased().contains(searchLower) ||
+                       country.code.lowercased().contains(searchLower)
+            }
+        }
+    }
+    
+    func updateSelectedCountry(at index: Int) {
+        guard index >= 0 && index < filteredCountries.count else { return }
+        selectedCountry = filteredCountries[index]
+    }
 }
 
 // MARK: - Output
@@ -107,6 +133,14 @@ extension CreditCardPaymentFormViewModel: CreditCardPaymentFormViewModelOutput {
     
     var shouldAddressFields: Bool {
         self.currentCountry?.isAVS ?? false
+    }
+    
+    var shouldshowEmailField: Bool {
+        collect3DSData.shouldRenderEmailField
+    }
+    
+    var shouldShowPhoneField: Bool {
+        collect3DSData.shouldRenderPhoneField
     }
     
     var numberError: String {
@@ -148,6 +182,26 @@ extension CreditCardPaymentFormViewModel: CreditCardPaymentFormViewModelOutput {
             comment: "An error text displayed when the card holder name is invalid"
         )
     }
+    
+    var emailError: String {
+        NSLocalizedString(
+            "credit-card-form.email-field.invalid-data.error.text",
+            tableName: "Error",
+            bundle: .omiseSDK,
+            value: "Card holder name is invalid",
+            comment: "An error text displayed when card holder email is invalid"
+        )
+    }
+    
+    var phoneError: String {
+        NSLocalizedString(
+            "credit-card-form.phone-number-field.invalid-data.error.text",
+            tableName: "Error",
+            bundle: .omiseSDK,
+            value: "Phone number is invalid",
+            comment: "An error text displayed when phone number is invalid"
+        )
+    }
 }
 
 struct CreditCardPayment {
@@ -161,4 +215,6 @@ struct CreditCardPayment {
     let state: String?
     let city: String?
     let zipcode: String?
+    let email: String?
+    let phoneNumber: String?
 }

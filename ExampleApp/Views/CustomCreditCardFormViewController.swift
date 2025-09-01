@@ -162,6 +162,7 @@ class CustomCreditCardPaymentController: UIViewController {
             expirationYear: expiryYear,
             securityCode: cvv,
             phoneNumber: nil,
+            email: nil,
             countryCode: countryCodeField.text ?? "",
             city: cityField.text ?? "",
             state: stateField.text ?? "",
