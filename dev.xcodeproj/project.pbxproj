@@ -18,6 +18,10 @@
 		2F0FEF8D2E0B09C800CB6F2E /* CardNameTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0FEF8C2E0B09C300CB6F2E /* CardNameTextFieldTests.swift */; };
 		2F0FEF8F2E0B0E1600CB6F2E /* ClosureBarButtonItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0FEF8E2E0B0E1400CB6F2E /* ClosureBarButtonItemTests.swift */; };
 		2F0FEF912E0B0F3200CB6F2E /* SelectDuitNowOBWBankVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0FEF902E0B0F2A00CB6F2E /* SelectDuitNowOBWBankVMTests.swift */; };
+		2F25F8972E618073002D1AB0 /* PasskeyAuthenticationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25F8962E61806F002D1AB0 /* PasskeyAuthenticationProtocol.swift */; };
+		2F25F8992E6180F7002D1AB0 /* SafariPasskeyAuthenticationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25F8982E6180F4002D1AB0 /* SafariPasskeyAuthenticationHandler.swift */; };
+		2F25F89C2E61926D002D1AB0 /* MockPasskeyAuthenticationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25F89B2E61926C002D1AB0 /* MockPasskeyAuthenticationHandler.swift */; };
+		2F367B712E6197EA003ABBFC /* SafariPasskeyAuthenticationHandlerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F367B702E6197EA003ABBFC /* SafariPasskeyAuthenticationHandlerTest.swift */; };
 		2F36EF1F2DFBCDA500A39314 /* SelectPaymentControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36EF1E2DFBCDA500A39314 /* SelectPaymentControllerTests.swift */; };
 		2F36EF212DFBF16300A39314 /* NumberFormatter+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36EF202DFBF16300A39314 /* NumberFormatter+Helpers.swift */; };
 		2F36EF252DFBF19600A39314 /* OmiseError+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36EF242DFBF19600A39314 /* OmiseError+Helpers.swift */; };
@@ -32,6 +36,13 @@
 		2F5D98F92D6EBAA000B5ECB4 /* MockNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D98F82D6EBA9600B5ECB4 /* MockNavigationController.swift */; };
 		2F5D98FB2D6EC26400B5ECB4 /* MockChoosePaymentMethodDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D98FA2D6EC26100B5ECB4 /* MockChoosePaymentMethodDelegate.swift */; };
 		2F5D99022D6ECA4300B5ECB4 /* SelectPaymentMethodViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D99012D6ECA4100B5ECB4 /* SelectPaymentMethodViewModelTest.swift */; };
+		2F8241C82E5C44CD006B9B3F /* CountryCodePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8241C72E5C44CD006B9B3F /* CountryCodePickerController.swift */; };
+		2F8241CA2E5C45F0006B9B3F /* CountryCodePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8241C92E5C45EA006B9B3F /* CountryCodePickerViewModel.swift */; };
+		2F8241CC2E5C4631006B9B3F /* CountryCodePickerControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8241CB2E5C4621006B9B3F /* CountryCodePickerControllerTest.swift */; };
+		2F8241CE2E5CF170006B9B3F /* EmailTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8241CD2E5CF16F006B9B3F /* EmailTextField.swift */; };
+		2F8241D02E5CF197006B9B3F /* PhoneNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8241CF2E5CF196006B9B3F /* PhoneNumberTextField.swift */; };
+		2F8241D22E5CF26D006B9B3F /* PhoneNumberTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8241D12E5CF267006B9B3F /* PhoneNumberTextFieldTests.swift */; };
+		2F8241D42E5CF274006B9B3F /* EmailTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8241D32E5CF271006B9B3F /* EmailTextFieldTests.swift */; };
 		2F8272522E0BA86F003B5C30 /* ColorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8272512E0BA86C003B5C30 /* ColorsTests.swift */; };
 		2F8272542E0BABC0003B5C30 /* FPXBankViewPresentableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8272532E0BABC0003B5C30 /* FPXBankViewPresentableTests.swift */; };
 		2F8272552E0BACDD003B5C30 /* PANModelTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A43454620DBAE76005C5C94 /* PANModelTestCase.swift */; };
@@ -367,6 +378,10 @@
 		2F0FEF8C2E0B09C300CB6F2E /* CardNameTextFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNameTextFieldTests.swift; sourceTree = "<group>"; };
 		2F0FEF8E2E0B0E1400CB6F2E /* ClosureBarButtonItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosureBarButtonItemTests.swift; sourceTree = "<group>"; };
 		2F0FEF902E0B0F2A00CB6F2E /* SelectDuitNowOBWBankVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDuitNowOBWBankVMTests.swift; sourceTree = "<group>"; };
+		2F25F8962E61806F002D1AB0 /* PasskeyAuthenticationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyAuthenticationProtocol.swift; sourceTree = "<group>"; };
+		2F25F8982E6180F4002D1AB0 /* SafariPasskeyAuthenticationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariPasskeyAuthenticationHandler.swift; sourceTree = "<group>"; };
+		2F25F89B2E61926C002D1AB0 /* MockPasskeyAuthenticationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPasskeyAuthenticationHandler.swift; sourceTree = "<group>"; };
+		2F367B702E6197EA003ABBFC /* SafariPasskeyAuthenticationHandlerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariPasskeyAuthenticationHandlerTest.swift; sourceTree = "<group>"; };
 		2F36EF1E2DFBCDA500A39314 /* SelectPaymentControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPaymentControllerTests.swift; sourceTree = "<group>"; };
 		2F36EF202DFBF16300A39314 /* NumberFormatter+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Helpers.swift"; sourceTree = "<group>"; };
 		2F36EF242DFBF19600A39314 /* OmiseError+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OmiseError+Helpers.swift"; sourceTree = "<group>"; };
@@ -384,6 +399,13 @@
 		2F5D98FA2D6EC26100B5ECB4 /* MockChoosePaymentMethodDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockChoosePaymentMethodDelegate.swift; sourceTree = "<group>"; };
 		2F5D99012D6ECA4100B5ECB4 /* SelectPaymentMethodViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPaymentMethodViewModelTest.swift; sourceTree = "<group>"; };
 		2F73F4BC2DBF7CDC00A59545 /* ExampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ExampleApp.entitlements; sourceTree = "<group>"; };
+		2F8241C72E5C44CD006B9B3F /* CountryCodePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodePickerController.swift; sourceTree = "<group>"; };
+		2F8241C92E5C45EA006B9B3F /* CountryCodePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodePickerViewModel.swift; sourceTree = "<group>"; };
+		2F8241CB2E5C4621006B9B3F /* CountryCodePickerControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodePickerControllerTest.swift; sourceTree = "<group>"; };
+		2F8241CD2E5CF16F006B9B3F /* EmailTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailTextField.swift; sourceTree = "<group>"; };
+		2F8241CF2E5CF196006B9B3F /* PhoneNumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberTextField.swift; sourceTree = "<group>"; };
+		2F8241D12E5CF267006B9B3F /* PhoneNumberTextFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberTextFieldTests.swift; sourceTree = "<group>"; };
+		2F8241D32E5CF271006B9B3F /* EmailTextFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailTextFieldTests.swift; sourceTree = "<group>"; };
 		2F8272512E0BA86C003B5C30 /* ColorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsTests.swift; sourceTree = "<group>"; };
 		2F8272532E0BABC0003B5C30 /* FPXBankViewPresentableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPXBankViewPresentableTests.swift; sourceTree = "<group>"; };
 		2F8272562E0BAD8E003B5C30 /* ButtonExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtensionsTests.swift; sourceTree = "<group>"; };
@@ -722,6 +744,9 @@
 		2F0267532D8D4FAC00BA8D3E /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				2F8241D32E5CF271006B9B3F /* EmailTextFieldTests.swift */,
+				2F8241D12E5CF267006B9B3F /* PhoneNumberTextFieldTests.swift */,
+				2F8241CB2E5C4621006B9B3F /* CountryCodePickerControllerTest.swift */,
 				2F82725A2E0BB1C9003B5C30 /* OmiseTextFieldTests.swift */,
 				2F8272512E0BA86C003B5C30 /* ColorsTests.swift */,
 				2F0FEF8E2E0B0E1400CB6F2E /* ClosureBarButtonItemTests.swift */,
@@ -734,6 +759,24 @@
 				2F0267542D8D4FB100BA8D3E /* CardNumberTextFieldTests.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		2F25F8952E617FDD002D1AB0 /* Passkey */ = {
+			isa = PBXGroup;
+			children = (
+				2F25F8982E6180F4002D1AB0 /* SafariPasskeyAuthenticationHandler.swift */,
+				2F25F8962E61806F002D1AB0 /* PasskeyAuthenticationProtocol.swift */,
+			);
+			path = Passkey;
+			sourceTree = "<group>";
+		};
+		2F25F89A2E619261002D1AB0 /* Passkey */ = {
+			isa = PBXGroup;
+			children = (
+				2F367B702E6197EA003ABBFC /* SafariPasskeyAuthenticationHandlerTest.swift */,
+				2F25F89B2E61926C002D1AB0 /* MockPasskeyAuthenticationHandler.swift */,
+			);
+			path = Passkey;
 			sourceTree = "<group>";
 		};
 		2F5985F22DB09E4E00E81646 /* EContextForm */ = {
@@ -814,6 +857,15 @@
 				2F5D98F42D6EB41800B5ECB4 /* MockClientProtocol.swift */,
 			);
 			path = Mock;
+			sourceTree = "<group>";
+		};
+		2F8241C62E5C44B6006B9B3F /* CountryCodePickerController */ = {
+			isa = PBXGroup;
+			children = (
+				2F8241C92E5C45EA006B9B3F /* CountryCodePickerViewModel.swift */,
+				2F8241C72E5C44CD006B9B3F /* CountryCodePickerController.swift */,
+			);
+			path = CountryCodePickerController;
 			sourceTree = "<group>";
 		};
 		2F9682182D65A44C00A7AFDA /* ApplePay */ = {
@@ -1212,6 +1264,7 @@
 		75D13DF02B866BF60073A831 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				2F8241C62E5C44B6006B9B3F /* CountryCodePickerController */,
 				75D13DF12B866BFC0073A831 /* TextFields */,
 				75D13DF22B866C070073A831 /* CountryListController */,
 				4B7C1E712DF05820002A7356 /* OmiseCheckbox.swift */,
@@ -1232,6 +1285,8 @@
 		75D13DF12B866BFC0073A831 /* TextFields */ = {
 			isa = PBXGroup;
 			children = (
+				2F8241CF2E5CF196006B9B3F /* PhoneNumberTextField.swift */,
+				2F8241CD2E5CF16F006B9B3F /* EmailTextField.swift */,
 				9864062A1CFEA7E4004BCF51 /* CardCVVTextField.swift */,
 				14ACEF821D02D641001C5319 /* CardExpiryDatePicker.swift */,
 				9864062B1CFEA7E4004BCF51 /* CardExpiryDateTextField.swift */,
@@ -1382,6 +1437,7 @@
 		75E0EB872B7BCEA000E3198A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				2F25F8952E617FDD002D1AB0 /* Passkey */,
 				758A4E682BE389B2005E7B5A /* 3DS */,
 				75E0EBBD2B7D0DB600E3198A /* Components */,
 				75E0EB942B7BD00F00E3198A /* Models */,
@@ -1509,6 +1565,7 @@
 		987A02CA1CE35D5E0035417A /* OmiseSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				2F25F89A2E619261002D1AB0 /* Passkey */,
 				2FDDFF442DFABFB800C1369A /* OmiseError */,
 				4B904E552DC9FE2400BE78EC /* FPX */,
 				4BC7A8BD2DC8BFD7007E1A17 /* TrueMoneyForm */,
@@ -1813,6 +1870,7 @@
 				75405A912A26340E008C21F6 /* UILabel+Helpers.swift in Sources */,
 				759856242A286C880087B605 /* UIScrollView+Helpers.swift in Sources */,
 				75E0EB9C2B7BD00F00E3198A /* Country.swift in Sources */,
+				2F8241D02E5CF197006B9B3F /* PhoneNumberTextField.swift in Sources */,
 				75D13D8A2B8382760073A831 /* ClosureBarButtonItem.swift in Sources */,
 				75E0EBA42B7BD02200E3198A /* Token.ChargeStatus.swift in Sources */,
 				75405A8D2A26340E008C21F6 /* UIView+Helpers.swift in Sources */,
@@ -1830,6 +1888,7 @@
 				8AD391B1230C05BC00383286 /* Colors.swift in Sources */,
 				75F2A0BB2A1A60630038FA54 /* AtomePaymentFormViewContext.swift in Sources */,
 				4BC7A8B82DC5E14A007E1A17 /* TrueMoneyPaymentFormViewModel.swift in Sources */,
+				2F8241CA2E5C45F0006B9B3F /* CountryCodePickerViewModel.swift in Sources */,
 				75D13DB12B83B58B0073A831 /* Source.Payment.FPX.Bank.swift in Sources */,
 				75B420662B77741E0036134D /* CreateTokenPayload.swift in Sources */,
 				986406351CFEA7E4004BCF51 /* OmiseTextField.swift in Sources */,
@@ -1910,6 +1969,7 @@
 				758A4EA62BE9D5C0005E7B5A /* Closures.swift in Sources */,
 				758A4E6E2BE38A5F005E7B5A /* CryptData.swift in Sources */,
 				75E0EB9A2B7BD00F00E3198A /* Currency.swift in Sources */,
+				2F8241C82E5C44CD006B9B3F /* CountryCodePickerController.swift in Sources */,
 				75405A9C2A266F50008C21F6 /* AtomePaymentFormViewModel.swift in Sources */,
 				75D13DA72B83B58B0073A831 /* Source.Payment.BarcodeAlipay.swift in Sources */,
 				75CFC4DB2B73F5AF00422A8F /* NetworkService.swift in Sources */,
@@ -1918,6 +1978,7 @@
 				4B7C1E722DF05820002A7356 /* OmiseCheckbox.swift in Sources */,
 				75E0EBA32B7BD02200E3198A /* Token.swift in Sources */,
 				75405A932A26340E008C21F6 /* UIButton+Helpers.swift in Sources */,
+				2F25F8992E6180F7002D1AB0 /* SafariPasskeyAuthenticationHandler.swift in Sources */,
 				751E7BD92B7E5D130031B4A2 /* PaymentMethod.swift in Sources */,
 				754B78182B8741CD00973B71 /* TapGestureHandler.swift in Sources */,
 				758A4E742BE38A7E005E7B5A /* NetceteraConfig.swift in Sources */,
@@ -1953,7 +2014,9 @@
 				4BD7F2FB2DD5D8E0002404A7 /* CreditCardVC+Extensions.swift in Sources */,
 				75D13D732B833A810073A831 /* TableCellContext.swift in Sources */,
 				759C7EC42B7DC8270029D555 /* SourceType+Installments.swift in Sources */,
+				2F8241CE2E5CF170006B9B3F /* EmailTextField.swift in Sources */,
 				755CD9212BA1C81600E8FCDA /* UIViewController+KeyboardAppearance.swift in Sources */,
+				2F25F8972E618073002D1AB0 /* PasskeyAuthenticationProtocol.swift in Sources */,
 				75D13DC92B8529790073A831 /* SelectSourceTypePaymentViewModel.swift in Sources */,
 				758A4E732BE38A7E005E7B5A /* NetceteraThreeDSController.swift in Sources */,
 			);
@@ -2005,6 +2068,7 @@
 			files = (
 				4B7B2A342DE873F30048F50D /* MockApplePayViewModelDelegate.swift in Sources */,
 				2F96821A2D65A45400A7AFDA /* MockApplePayInterface.swift in Sources */,
+				2F8241D22E5CF26D006B9B3F /* PhoneNumberTextFieldTests.swift in Sources */,
 				2F8272542E0BABC0003B5C30 /* FPXBankViewPresentableTests.swift in Sources */,
 				4B7F2C4C2DA7B70B00A23CEF /* SelectSourceTypePaymentViewModelTests.swift in Sources */,
 				2F5985F42DB09EDB00E81646 /* EContextPaymentFormVCTests.swift in Sources */,
@@ -2013,6 +2077,7 @@
 				2FDDFF472DFAE03200C1369A /* BadRequestAPIErrorParsingTestCase.swift in Sources */,
 				758A4E962BE38AFD005E7B5A /* ThreeDSButtonCustomizationTests.swift in Sources */,
 				2FC27E1C2D6DC1B7001E5857 /* ApplePayViewControllerTest.swift in Sources */,
+				2F367B712E6197EA003ABBFC /* SafariPasskeyAuthenticationHandlerTest.swift in Sources */,
 				4B7F2C4A2DA7AA2000A23CEF /* CVVInfoViewTests.swift in Sources */,
 				2F5D98F72D6EB96600B5ECB4 /* MockSelectPaymentMethodDelegate.swift in Sources */,
 				2F5D98FB2D6EC26400B5ECB4 /* MockChoosePaymentMethodDelegate.swift in Sources */,
@@ -2034,6 +2099,7 @@
 				2F5985FA2DB0B6B100E81646 /* ExtensionsTests.swift in Sources */,
 				4B54813E2DCCD20500BD10AE /* OmiseBannerViewTests.swift in Sources */,
 				2FE11B222DB0F21600EBBCC2 /* ViewControllerExtensionsTests.swift in Sources */,
+				2F8241D42E5CF274006B9B3F /* EmailTextFieldTests.swift in Sources */,
 				2FDDFF462DFAE02E00C1369A /* InvalidCardAPIErrorParsingTestCase.swift in Sources */,
 				2F8272572E0BAD95003B5C30 /* ButtonExtensionsTests.swift in Sources */,
 				2F8272522E0BA86F003B5C30 /* ColorsTests.swift in Sources */,
@@ -2060,10 +2126,12 @@
 				75E0EB722B7A962600E3198A /* CreateSourcePayloadTests.swift in Sources */,
 				753279382A31B40F008048AD /* CountryListViewModelMockup.swift in Sources */,
 				2F5985F12DB09BD700E81646 /* EContextPaymentFormVMTests.swift in Sources */,
+				2F25F89C2E61926D002D1AB0 /* MockPasskeyAuthenticationHandler.swift in Sources */,
 				4BC7A8C42DC8C00F007E1A17 /* MockTrueMoneyFormViewModel.swift in Sources */,
 				7509D4E72A1C8E3D0050AB38 /* AtomeFormViewModelTests.swift in Sources */,
 				4B9E70432DDBA46800DA384C /* CreditCardPaymentViewModelTests.swift in Sources */,
 				7509D4E22A1C876B0050AB38 /* AtomeFormViewContextMockup.swift in Sources */,
+				2F8241CC2E5C4631006B9B3F /* CountryCodePickerControllerTest.swift in Sources */,
 				2F8272592E0BADE1003B5C30 /* PaymentMethodEnumTests.swift in Sources */,
 				750708E32B790B8300A48DD0 /* String+JSON.swift in Sources */,
 				75D4E7062C05F50500ECCE72 /* OmiseErrorTests.swift in Sources */,
