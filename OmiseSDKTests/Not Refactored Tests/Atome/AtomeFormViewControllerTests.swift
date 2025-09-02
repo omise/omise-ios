@@ -249,8 +249,8 @@ final class AtomePaymentInputsFormControllerTests: XCTestCase {
         XCTAssertFalse(emailInput.isHidden)
         XCTAssertFalse(phoneInput.isHidden)
         
-        XCTAssert(sut.input(after: nameInput) === emailInput)
-        XCTAssert(sut.input(after: emailInput) === phoneInput)
+        XCTAssertIdentical(sut.input(after: nameInput), emailInput)
+        XCTAssertIdentical(sut.input(after: emailInput), phoneInput)
         
         XCTAssertNil(sut.input(after: phoneInput))
     }

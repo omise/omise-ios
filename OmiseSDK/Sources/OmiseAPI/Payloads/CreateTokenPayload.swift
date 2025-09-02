@@ -40,7 +40,21 @@ public struct CreateTokenPayload: Codable, Equatable {
         /// Address postal code
         public let postalCode: String?
 
-        public init(name: String, number: String, expirationMonth: Int, expirationYear: Int, securityCode: String, phoneNumber: String? = nil, email: String? = nil, countryCode: String? = nil, city: String? = nil, state: String? = nil, street1: String? = nil, street2: String? = nil, postalCode: String? = nil) {
+        public init(
+            name: String,
+            number: String,
+            expirationMonth: Int,
+            expirationYear: Int,
+            securityCode: String,
+            phoneNumber: String? = nil,
+            email: String? = nil,
+            countryCode: String? = nil,
+            city: String? = nil,
+            state: String? = nil,
+            street1: String? = nil,
+            street2: String? = nil,
+            postalCode: String? = nil
+        ) {
             self.name = name
             self.number = number
             self.expirationMonth = expirationMonth
