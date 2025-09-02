@@ -28,9 +28,6 @@ jobs:
       with:
         xcode-version: latest-stable
         
-    - name: List available simulators
-      run: xcrun simctl list devices
-      
     - name: Find available iOS simulator
       run: ./scripts/find_simulator.sh
       
