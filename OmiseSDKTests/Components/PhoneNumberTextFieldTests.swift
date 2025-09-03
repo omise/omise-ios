@@ -292,7 +292,7 @@ final class PhoneNumberTextFieldTests: XCTestCase {
     // MARK: - Edge Cases and Integration Tests
     
     func testInheritanceFromOmiseTextField() {
-        XCTAssertTrue(sut.delegate === sut)
+        XCTAssertIdentical(sut.delegate, sut)
     }
     
     func testTextFieldProperties_areCorrectlySet() {

@@ -142,7 +142,7 @@ final class OmiseTextFieldTests: XCTestCase {
     }
     
     func testInit_setsDelegate_and_defaultTextColor() {
-        XCTAssertTrue(tf.delegate === tf)
+        XCTAssertIdentical(tf.delegate, tf)
         // default borderWidth is zero
         XCTAssertEqual(tf.layer.borderWidth, 0)
         

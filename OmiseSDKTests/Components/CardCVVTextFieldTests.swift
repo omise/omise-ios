@@ -26,12 +26,12 @@ final class CardCVVTextFieldTests: XCTestCase {
     }
     
     func testDelegateIsAlwaysSelf() {
-        XCTAssertTrue(sut.delegate === sut)
+        XCTAssertIdentical(sut.delegate, sut)
         
         class DummyDelegate: NSObject, UITextFieldDelegate {}
         let dummy = DummyDelegate()
         sut.delegate = dummy
-        XCTAssertTrue(sut.delegate === sut)
+        XCTAssertIdentical(sut.delegate, sut)
     }
     
     func testValidateThrowsEmptyTextErrorWhenTextIsNilOrEmpty() {

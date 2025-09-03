@@ -116,14 +116,12 @@ class BaseViewController: UIViewController {
         self.modeChooser.setBackgroundImage(normalModeBackgroundImage, for: .normal, barMetrics: .default)
         self.modeChooser.setBackgroundImage(normalModeBackgroundImage, for: .highlighted, barMetrics: .default)
 
-        // swiftlint:disable line_length
         self.modeChooser.setDividerImage(normalModeBackgroundImage, forLeftSegmentState: .selected, rightSegmentState: .normal, barMetrics: .default)
         self.modeChooser.setDividerImage(normalModeBackgroundImage, forLeftSegmentState: .normal, rightSegmentState: .selected, barMetrics: .default)
         self.modeChooser.setDividerImage(normalModeBackgroundImage, forLeftSegmentState: .highlighted, rightSegmentState: .normal, barMetrics: .default)
         self.modeChooser.setDividerImage(normalModeBackgroundImage, forLeftSegmentState: .normal, rightSegmentState: .highlighted, barMetrics: .default)
         self.modeChooser.setDividerImage(normalModeBackgroundImage, forLeftSegmentState: .highlighted, rightSegmentState: .selected, barMetrics: .default)
         self.modeChooser.setDividerImage(normalModeBackgroundImage, forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
-        // swiftlint:enable line_length
 
         let highlightedTitleAttributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.foregroundColor: self.view.tintColor ?? UIColor.lightGray,

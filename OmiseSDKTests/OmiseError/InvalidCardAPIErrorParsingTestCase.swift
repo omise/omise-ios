@@ -144,7 +144,6 @@ class InvalidCardAPIErrorParsingTestCase: XCTestCase {
         }
     }
     
-    // swiftlint:disable line_length
     // swiftlint:disable:next function_body_length
     func testParseErrorWithMultipleReasons() throws {
         do {
@@ -223,7 +222,6 @@ class InvalidCardAPIErrorParsingTestCase: XCTestCase {
             }
         }
     }
-    // swiftlint:enable line_length
     
     func testInitMessage_detectsInvalidCardNumber() throws {
         let reason = try OmiseError.APIErrorCode.InvalidCardReason(message: "number is wrong")

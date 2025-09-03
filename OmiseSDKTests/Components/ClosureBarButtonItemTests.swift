@@ -15,7 +15,7 @@ class ClosureBarButtonItemTests: XCTestCase {
         }
         
         // target should be the item itself
-        XCTAssertTrue(item.target === item)
+        XCTAssertIdentical(item.target, item)
         // action should be our selector
         XCTAssertEqual(item.action, #selector(ClosureBarButtonItem.barButtonItemPressed(sender:)))
         
@@ -23,7 +23,7 @@ class ClosureBarButtonItemTests: XCTestCase {
         item.barButtonItemPressed(sender: item)
         
         waitForExpectations(timeout: 0.1)
-        XCTAssertTrue(receivedItem === item)
+        XCTAssertIdentical(receivedItem, item)
     }
     
     func testTitleInitializer_callsHandler_andConfiguresTargetAction() {
@@ -35,13 +35,13 @@ class ClosureBarButtonItemTests: XCTestCase {
             expect.fulfill()
         }
         
-        XCTAssertTrue(item.target === item)
+        XCTAssertIdentical(item.target, item)
         XCTAssertEqual(item.action, #selector(ClosureBarButtonItem.barButtonItemPressed(sender:)))
         
         item.barButtonItemPressed(sender: item)
         
         waitForExpectations(timeout: 0.1)
-        XCTAssertTrue(receivedItem === item)
+        XCTAssertIdentical(receivedItem, item)
     }
     
     func testSystemItemInitializer_callsHandler_andConfiguresTargetAction() {
@@ -53,12 +53,12 @@ class ClosureBarButtonItemTests: XCTestCase {
             expect.fulfill()
         }
         
-        XCTAssertTrue(item.target === item)
+        XCTAssertIdentical(item.target, item)
         XCTAssertEqual(item.action, #selector(ClosureBarButtonItem.barButtonItemPressed(sender:)))
         
         item.barButtonItemPressed(sender: item)
         
         waitForExpectations(timeout: 0.1)
-        XCTAssertTrue(receivedItem === item)
+        XCTAssertIdentical(receivedItem, item)
     }
 }
