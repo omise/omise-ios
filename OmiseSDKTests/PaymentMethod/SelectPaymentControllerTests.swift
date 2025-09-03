@@ -130,7 +130,7 @@ class SelectPaymentControllerTests: XCTestCase {
         XCTAssertEqual(accessoryView?.tintColor.hexString, UIColor.omiseSecondary.hexString)
         XCTAssertTrue(didCustomize)
         XCTAssertEqual(capturedIndex, IndexPath(row: 0, section: 0))
-        XCTAssert(capturedCell === cell)
+        XCTAssertIdentical(capturedCell, cell)
     }
     
     func test_didSelectRow_whenAnimateFalse_onlyNotifiesViewModel() {

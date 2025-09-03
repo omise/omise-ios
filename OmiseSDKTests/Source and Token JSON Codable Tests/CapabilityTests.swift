@@ -23,7 +23,6 @@ class CapabilityTests: XCTestCase {
             )
         ]
         
-        // swiftlint:disable:next line_length
         let banks = ["test", "bbl", "kbank", "rbs", "ktb", "jpm", "mufg", "tmb", "scb", "smbc", "sc", "cimb", "uob", "bay", "mega", "boa", "cacib", "gsb", "hsbc", "db", "ghb", "baac", "mb", "bnp", "tbank", "ibank", "tisco", "kk", "icbc", "tcrb", "lhb"]
 
         let tokenization = ["googlepay", "applepay"]

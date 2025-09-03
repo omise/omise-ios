@@ -19,8 +19,8 @@ final class FPXPaymentFormViewModelTests: XCTestCase {
     }
     
     func testInputAndOutputReferToSameInstance() {
-        XCTAssertTrue(sut.input as AnyObject === sut)
-        XCTAssertTrue(sut.output as AnyObject === sut)
+        XCTAssertIdentical(sut.input as AnyObject, sut)
+        XCTAssertIdentical(sut.output as AnyObject, sut)
     }
     
     func testLoadingHandlerAndDelegateAreCalled() {
