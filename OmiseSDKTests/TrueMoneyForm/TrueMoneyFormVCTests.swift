@@ -127,7 +127,7 @@ final class TrueMoneyFormViewControllerTests: XCTestCase {
         sut.loadViewIfNeeded()
         
         XCTAssertEqual(sut.contentView.contentInset.bottom, 0)
-        XCTAssertEqual(sut.contentView.scrollIndicatorInsets.bottom, 0)
+        XCTAssertEqual(sut.contentView.verticalScrollIndicatorInsets.bottom, 0)
         
         let keyboardHeight: CGFloat = 300
         let frameEnd = CGRect(
@@ -147,6 +147,6 @@ final class TrueMoneyFormViewControllerTests: XCTestCase {
         sut.keyboardWillChangeFrame(noti)
         
         XCTAssertEqual(sut.contentView.contentInset.bottom, keyboardHeight)
-        XCTAssertEqual(sut.contentView.scrollIndicatorInsets.bottom, keyboardHeight)
+        XCTAssertEqual(sut.contentView.verticalScrollIndicatorInsets.bottom, keyboardHeight)
     }
 }

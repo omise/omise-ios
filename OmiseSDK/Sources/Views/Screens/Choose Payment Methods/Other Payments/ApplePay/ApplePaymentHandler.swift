@@ -61,7 +61,7 @@ class ApplePaymentHandler: NSObject, ApplePaymentHandlerType {
         let paymentRequest = PKPaymentRequest()
         paymentRequest.paymentSummaryItems = [total]
         paymentRequest.merchantIdentifier = merchantId
-        paymentRequest.merchantCapabilities = .capability3DS
+        paymentRequest.merchantCapabilities = .threeDSecure
         paymentRequest.countryCode = country?.code ?? "SG"
         paymentRequest.currencyCode = currency
         paymentRequest.supportedNetworks = Self.supportedNetworks

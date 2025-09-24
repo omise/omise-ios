@@ -4,12 +4,14 @@ import PassKit
 
 // MARK: - ApplePayViewController Tests
 @available(iOS 11.0, *)
+@MainActor
 class ApplePayViewControllerTests: XCTestCase {
     var mockViewModel: MockApplePayViewModel!
     var viewController: ApplePayViewController!
     
     override func setUp() {
         super.setUp()
+        XCTAssertTrue(Thread.isMainThread, "setUp must execute on the main thread")
         // Initialize the mock view model with default values.
         mockViewModel = MockApplePayViewModel()
         // Create the view controller using the mock view model.
