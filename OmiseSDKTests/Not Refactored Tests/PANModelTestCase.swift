@@ -156,7 +156,7 @@ class PANModelTestCase: XCTestCase {
         }
     }
     
-    func  testPANValidation() {
+    func testPANValidation() {
         do {
             let pan = PAN("4242424242424242")
             XCTAssertTrue(pan.isValid)
