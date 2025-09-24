@@ -249,8 +249,8 @@ final class AtomePaymentInputsFormControllerTests: XCTestCase {
         XCTAssertFalse(emailInput.isHidden)
         XCTAssertFalse(phoneInput.isHidden)
         
-        XCTAssert(sut.input(after: nameInput) === emailInput)
-        XCTAssert(sut.input(after: emailInput) === phoneInput)
+        XCTAssertIdentical(sut.input(after: nameInput), emailInput)
+        XCTAssertIdentical(sut.input(after: emailInput), phoneInput)
         
         XCTAssertNil(sut.input(after: phoneInput))
     }
@@ -262,5 +262,14 @@ private class FakeNavController: UINavigationController {
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         super.pushViewController(viewController, animated: false)
         onPush?(viewController)
+    }
+}
+
+private extension UIApplication {
+    var keyWindow: UIWindow? {
+        UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+            .first { $0.isKeyWindow }
     }
 }

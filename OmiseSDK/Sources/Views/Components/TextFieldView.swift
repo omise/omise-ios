@@ -69,7 +69,14 @@ class TextFieldView: UIView {
     @ProxyProperty(\TextFieldView.textField.isUserInteractionEnabled) var textFieldUserInteractionEnabled: Bool
     // swiftlint:enable attributes
 
-    init(id: String, title: String? = nil, text: String? = nil, placeholder: String? = nil, error: String? = nil, textField customTextField: OmiseTextField? = nil) {
+    init(
+        id: String,
+        title: String? = nil,
+        text: String? = nil,
+        placeholder: String? = nil,
+        error: String? = nil,
+        textField customTextField: OmiseTextField? = nil
+    ) {
         self.identifier = id
         super.init(frame: .zero)
         self.title = title

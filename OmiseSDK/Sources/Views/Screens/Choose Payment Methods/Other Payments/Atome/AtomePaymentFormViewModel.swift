@@ -35,6 +35,10 @@ class AtomePaymentFormViewModel: AtomePaymentFormViewModelProtocol, CountryListV
     
     // MARK: CountryListViewModelProtocol
     lazy var countries: [Country] = Country.sortedAll
+    private var _filteredCountries: [Country] = []
+    var filteredCountries: [Country] {
+        return _filteredCountries.isEmpty ? countries : _filteredCountries
+    }
     
     var selectedCountry: Country? {
         didSet {
@@ -45,6 +49,23 @@ class AtomePaymentFormViewModel: AtomePaymentFormViewModelProtocol, CountryListV
     }
     
     var onSelectCountry: (Country) -> Void = { _ in /* Non-optional default empty implementation */ }
+    
+    func filterCountries(with searchText: String) {
+        if searchText.isEmpty {
+            _filteredCountries = []
+        } else {
+            _filteredCountries = countries.filter { country in
+                let searchLower = searchText.lowercased()
+                return country.name.lowercased().contains(searchLower) ||
+                       country.code.lowercased().contains(searchLower)
+            }
+        }
+    }
+    
+    func updateSelectedCountry(at index: Int) {
+        guard index >= 0 && index < filteredCountries.count else { return }
+        selectedCountry = filteredCountries[index]
+    }
     
     var countryListViewModel: CountryListViewModelProtocol { return self }
     var shippingCountry: Country?

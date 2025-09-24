@@ -10,6 +10,12 @@
 /* An error text displayed when the security code is invalid */
 "credit-card-form.security-code-field.invalid-data.error.text" = "CVVコードが無効です";
 
+/* An error text displayed when phone number is invalid */
+"credit-card-form.phone-number-field.invalid-data.error.text" = "電話番号が無効です";
+
+/* An error text displayed when email is invalid */
+"credit-card-form.email-field.invalid-data.error.text" = "メールが無効です";
+
 /* An error text in the E-Context information input displayed when the email is invalid */
 "econtext-info-form.email-name-field.invalid-data.error.text" = "メールが無効です";
 

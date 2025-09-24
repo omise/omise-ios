@@ -26,7 +26,7 @@ class ProductDetailViewController: BaseViewController {
     }
 
     @IBAction private func showModalCreditCardPayment(_ sender: Any) {
-        omiseSDK.presentCreditCardPayment(from: self, delegate: self)
+        omiseSDK.presentCreditCardPayment(from: self, collect3DSData: .all, delegate: self)
     }
     
     @IBAction private func showChoosePaymentMethods(_ sender: Any) {
@@ -37,6 +37,7 @@ class ProductDetailViewController: BaseViewController {
             allowedPaymentMethods: usesCapabilityDataForPaymentMethods ? nil : allowedPaymentMethods,
             isCardPaymentAllowed: true,
             handleErrors: true,
+            collect3DSData: .all,
             delegate: self
         )
     }

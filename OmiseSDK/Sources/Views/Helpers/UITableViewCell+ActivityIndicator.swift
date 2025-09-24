@@ -2,7 +2,7 @@ import UIKit
 
 extension UITableViewCell {
     func startAccessoryActivityIndicator() {
-        let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+        let loadingIndicator = UIActivityIndicatorView(style: .medium)
         loadingIndicator.color = UIColor.omiseSecondary
         accessoryView = loadingIndicator
         loadingIndicator.startAnimating()

@@ -10,6 +10,12 @@
 /* An error text displayed when the security code is invalid */
 "credit-card-form.security-code-field.invalid-data.error.text" = "CVV code is invalid";
 
+/* An error text displayed when phone number is invalid */
+"credit-card-form.phone-number-field.invalid-data.error.text" = "Phone number is invalid";
+
+/* An error text displayed when email is invalid */
+"credit-card-form.email-field.invalid-data.error.text" = "Email is invalid";
+
 /* An error text in the E-Context information input displayed when the email is invalid */
 "econtext-info-form.email-name-field.invalid-data.error.text" = "Email is invalid";
 

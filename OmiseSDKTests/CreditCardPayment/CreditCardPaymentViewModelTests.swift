@@ -13,6 +13,7 @@ class CreditCardPaymentFormViewModelTests: XCTestCase {
         sut = CreditCardPaymentFormViewModel(
             country: country,
             paymentOption: .card,
+            collect3DSData: .all,
             delegate: mockDelegate
         )
     }
@@ -57,7 +58,9 @@ class CreditCardPaymentFormViewModelTests: XCTestCase {
             address: "1 Infinite Loop",
             state: "Bangkok",
             city: "Bangkok",
-            zipcode: "95014"
+            zipcode: "95014",
+            email: "example@example.com",
+            phoneNumber: "66934344388"
         )
         var loadingStates: [Bool] = []
         sut.input.set { loadingStates.append($0) }
