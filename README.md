@@ -443,7 +443,7 @@ omiseSDK.presentChoosePaymentMethod(
 )
 ```
 
-If need to present card form only, you can pass the same parameter to `presentCreditCardPayment` and supply the new `collect3DSData` like mentioned in the above. The SDK handles both PASSKEY and 3DS completion callbacks through `AuthorizingPaymentDelegate` exactly as described above.
+If you need to present card form only, you can pass the same parameter to `presentCreditCardPayment` and supply the new `collect3DSData` like mentioned in the above. The SDK handles both PASSKEY and 3DS completion callbacks through `AuthorizingPaymentDelegate` exactly as described above.
 
 
 ## Objective-C compatibility
