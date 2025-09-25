@@ -72,6 +72,41 @@ class AtomePaymentFormViewModelTests: XCTestCase {
         sut.selectedCountry = newCountry
         XCTAssertEqual(captured?.code, "US")
     }
+
+    func testFilterCountries_matchesByCodeOrName() {
+        let fixture = [
+            Country(name: "Thailand", code: "TH"),
+            Country(name: "United States", code: "US"),
+            Country(name: "Canada", code: "CA")
+        ]
+        sut.countries = fixture
+
+        sut.filterCountries(with: "th")
+        XCTAssertEqual(sut.filteredCountries.map { $0.code }, ["TH"])
+
+        sut.filterCountries(with: "US")
+        XCTAssertEqual(sut.filteredCountries.map { $0.code }, ["US"])
+
+        sut.filterCountries(with: "bn123")
+        XCTAssertEqual(sut.filteredCountries, fixture)
+    }
+
+    func testUpdateSelectedCountry_usesFilteredListAndGuardsInvalidIndex() {
+        sut.filterCountries(with: "us")
+        sut.updateSelectedCountry(at: sut.filteredCountries.count + 5)
+        XCTAssertEqual(sut.selectedCountry?.code, "TH")
+
+        if let usIndex = sut.filteredCountries.firstIndex(where: { $0.code == "US" }) {
+            sut.updateSelectedCountry(at: usIndex)
+            XCTAssertEqual(sut.selectedCountry?.code, "US")
+        } else {
+            XCTFail("Expected US in filtered results")
+        }
+        sut.filterCountries(with: "")
+        XCTAssertEqual(sut.selectedCountry?.code, "US")
+        sut.filterCountries(with: "ca")
+        XCTAssertEqual(sut.selectedCountry?.code, "US")
+    }
     
     func testBillingAddressFields_areInExpectedOrder() {
         let billing = sut.billingAddressFields
