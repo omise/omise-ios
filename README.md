@@ -426,7 +426,7 @@ Some request methods allow the user to authorize the payment with an external ap
 
 The SDK now supports PASSKEY alongside 3DS so users get the fastest available checkout flow. When you call your existing authorization code, the SDK inspects the authorize URL and picks the correct experience between 3DS vs PASSKEY automatically.
 
-- Keep using `presentChoosePaymentMethod` or `presentCreditCardPayment` and provide the new `collect3DSData` option to decide whether you collect a phone number, email, or both (Default is none). Either field needs to be collected.
+- Keep using `presentChoosePaymentMethod` or `presentCreditCardPayment` and provide the new `collect3DSData` option to decide whether you collect a phone number, email, or both (Default is none). For PASSKEY authentication to function properly, you must collect at least one of these fields (phone number or email).
 - Continue to present `presentAuthorizingPayment` with the authorize URL from your `/charge` response; no other changes are required for merchants already supporting 3DS.
 - PASSKEY relies on `SFSafariViewController`, so be sure your integration allows the SDK to present it when required.
 
