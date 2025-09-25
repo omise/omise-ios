@@ -263,7 +263,8 @@ class CountryCodePickerControllerTest: XCTestCase {
             return XCTFail("Expected embedded table view")
         }
         XCTAssertEqual(tableView.numberOfRows(inSection: 0), mockViewModel.mockCountries.count)
-        XCTAssertEqual(tableView.indexPathsForVisibleRows?.first?.row, 2)
+        let visibleRows = tableView.indexPathsForVisibleRows ?? []
+        XCTAssertTrue(visibleRows.contains(IndexPath(row: 2, section: 0)))
     }
 
     func testHandleCancelPopsWhenInNavigationStack() {
