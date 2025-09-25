@@ -31,8 +31,8 @@ you can't find an answer there, feel free to
 ## Requirements
 
 * Omise API public key. [Register for an Omise account](https://dashboard.omise.co/signup) to obtain your API keys.
-* iOS 10 or higher deployment target.
-* Xcode 14.0 or higher (Xcode 15 is recommended)
+* iOS 14 or higher deployment target.
+* Xcode 15.0 or higher (Xcode 26 is recommended)
 * Swift 5.0 or higher (Swift 5.3 is recommended)
 
 ## Merchant compliance
@@ -53,7 +53,7 @@ To integrate the Omise SDK into your Xcode project using the [Swift Package Mana
 
 1. In Xcode, select `File` > `Swift Packages` > `Add Package Dependency...`
 2. Enter the URL for this repository `https://github.com/omise/omise-ios.git`
-3. Choose a minimum semantic version of `v5.0.0`
+3. Choose the latest available `5.6.0` release
 4. Select your target, go to `Frameworks, Libraries, and Embedded Content`, and set OmiseSDK to `Embed & Sign`
 
 ## Usage
@@ -420,6 +420,30 @@ client.observeChargeStatus(observeTokenChargeStatusHandler)
 ### Authorizing payment via an external app
 
 Some request methods allow the user to authorize the payment with an external app, for example Alipay. When a user needs to authorize the payment with an external app, `OmiseSDK` will automatically open an external app. However, merchant developers must handle the `AuthorizingPaymentDelegate` callback themselves.
+
+
+### Passkey authentication
+
+The SDK now supports PASSKEY alongside 3DS so users get the fastest available checkout flow. When you call your existing authorization code, the SDK inspects the authorize URL and picks the correct experience between 3DS vs PASSKEY automatically.
+
+- Keep using `presentChoosePaymentMethod` or `presentCreditCardPayment` and provide the new `collect3DSData` option to decide whether you collect a phone number, email, or both (Default is none). Either field needs to be collected.
+- Continue to present `presentAuthorizingPayment` with the authorize URL from your `/charge` response; no other changes are required for merchants already supporting 3DS.
+- PASSKEY relies on `SFSafariViewController`, so be sure your integration allows the SDK to present it when required.
+
+```swift
+omiseSDK.presentChoosePaymentMethod(
+    from: self,
+    amount: paymentAmount,
+    currency: paymentCurrencyCode,
+    allowedPaymentMethods: usesCapabilityDataForPaymentMethods ? nil : allowedPaymentMethods,
+    isCardPaymentAllowed: true,
+    handleErrors: true,
+    collect3DSData: .all,
+    delegate: self
+)
+```
+
+If need to present card form only, you can pass the same parameter to `presentCreditCardPayment` and supply the new `collect3DSData` like mentioned in the above. The SDK handles both PASSKEY and 3DS completion callbacks through `AuthorizingPaymentDelegate` exactly as described above.
 
 
 ## Objective-C compatibility
