@@ -33,12 +33,12 @@ class CountryCodePickerController: UIViewController {
     }
     
     convenience init(selectedCountry: Country, onCountrySelected: @escaping (Country) -> Void) {
-        let viewModel = CountryCodePickerViewModel(selectedCountry: selectedCountry)
+        let vm = CountryCodePickerViewModel(selectedCountry: selectedCountry)
         
-        self.init(viewModel: viewModel)
+        self.init(viewModel: vm)
         
-        viewModel.onCountrySelected = onCountrySelected
-        viewModel.onCancel = { [weak self] in
+        vm.onCountrySelected = onCountrySelected
+        vm.onCancel = { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
     }

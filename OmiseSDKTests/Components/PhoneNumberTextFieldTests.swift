@@ -219,7 +219,7 @@ final class PhoneNumberTextFieldTests: XCTestCase {
         host.loadViewIfNeeded()
         host.view.addSubview(sut)
         let navigation = PushingSpyNavigationController(rootViewController: host)
-        sut.perform(Selector(("countryCodeButtonTapped")))
+        sut.countryCodeButtonTapped()
 
         XCTAssertTrue(navigation.lastPushed is CountryCodePickerController)
     }
@@ -228,7 +228,7 @@ final class PhoneNumberTextFieldTests: XCTestCase {
         let host = PresentingSpyViewController()
         host.loadViewIfNeeded()
         host.view.addSubview(sut)
-        sut.perform(Selector(("countryCodeButtonTapped")))
+        sut.countryCodeButtonTapped()
 
         guard let presented = host.presentedController as? UINavigationController else {
             return XCTFail("Expected nav controller presentation")
@@ -237,7 +237,7 @@ final class PhoneNumberTextFieldTests: XCTestCase {
     }
 
     func testCountryCodeButtonTap_withoutViewControllerHostDoesNothing() {
-        sut.perform(Selector(("countryCodeButtonTapped")))
+        sut.countryCodeButtonTapped()
 
         // Nothing should crash and no delegate calls should occur
         XCTAssertEqual(mockDelegate.didSelectCountryCallCount, 0)
