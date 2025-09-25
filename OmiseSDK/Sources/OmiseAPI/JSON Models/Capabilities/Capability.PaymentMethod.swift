@@ -10,7 +10,14 @@ extension Capability {
         public let banks: Set<Bank>?
         private let provider: Provider?
 
-        public init(name: String, currencies: Set<String>, cardBrands: Set<String>?, installmentTerms: Set<Int>?, banks: Set<Bank>?, provider: Provider?) {
+        public init(
+            name: String,
+            currencies: Set<String>,
+            cardBrands: Set<String>?,
+            installmentTerms: Set<Int>?,
+            banks: Set<Bank>?,
+            provider: Provider?
+        ) {
             self.name = name
             self.currencies = currencies
             self.cardBrands = cardBrands

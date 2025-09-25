@@ -126,8 +126,8 @@ class OmiseSDKTests: XCTestCase {
         XCTAssertEqual(mockFlutterEngineManager.presentCalls.count, 1)
         let call = try XCTUnwrap(mockFlutterEngineManager.presentCalls.first)
         XCTAssertEqual(call.method, .selectPaymentMethod)
-        XCTAssert(call.viewController === dummyVC)
-        XCTAssert(call.delegate === mockDelegate)
+        XCTAssertEqual(call.viewController, dummyVC)
+        XCTAssertIdentical(call.delegate, mockDelegate)
         
         let args = call.arguments
         XCTAssertEqual(args["pkey"] as? String, "pkey_my_key")
@@ -161,8 +161,8 @@ class OmiseSDKTests: XCTestCase {
         XCTAssertEqual(mockFlutterEngineManager.presentCalls.count, 1)
         let call = try XCTUnwrap(mockFlutterEngineManager.presentCalls.first)
         XCTAssertEqual(call.method, .openCardPage)
-        XCTAssert(call.viewController === dummyVC)
-        XCTAssert(call.delegate === mockDelegate)
+        XCTAssertEqual(call.viewController, dummyVC)
+        XCTAssertIdentical(call.delegate, mockDelegate)
         
         let args = call.arguments
         XCTAssertEqual(args["pkey"] as? String, "pkey_my_key")
