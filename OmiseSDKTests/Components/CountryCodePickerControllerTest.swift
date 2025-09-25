@@ -2,6 +2,7 @@ import XCTest
 @testable import OmiseSDK
 import UIKit
 
+// swiftlint:disable file_length
 // MARK: - Mock ViewModel
 class MockCountryCodePickerViewModel: CountryCodePickerViewModelProtocol {
     var input: CountryCodePickerViewModelInput { self }
@@ -429,3 +430,4 @@ class CountryCodePickerViewModelTest: XCTestCase {
         XCTAssertTrue(cancelCalled)
     }
 }
+// swiftlint:enable file_length
