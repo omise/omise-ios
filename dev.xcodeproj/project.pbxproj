@@ -15,6 +15,7 @@
 		2F142F7C2E2FA6FC00ECA0C3 /* MockFlutterEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F142F7B2E2FA6FC00ECA0C3 /* MockFlutterEngineManager.swift */; };
 		2F36EF212DFBF16300A39314 /* NumberFormatter+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36EF202DFBF16300A39314 /* NumberFormatter+Helpers.swift */; };
 		2F36EF252DFBF19600A39314 /* OmiseError+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36EF242DFBF19600A39314 /* OmiseError+Helpers.swift */; };
+		2F4D94842E854F660054D148 /* OmiseFlutterSPM in Frameworks */ = {isa = PBXBuildFile; productRef = 2F4D94832E854F660054D148 /* OmiseFlutterSPM */; };
 		2F5985FA2DB0B6B100E81646 /* ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5985F92DB0B6AD00E81646 /* ExtensionsTests.swift */; };
 		2F5D98F52D6EB41C00B5ECB4 /* MockClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D98F42D6EB41800B5ECB4 /* MockClientProtocol.swift */; };
 		2F5D98F72D6EB96600B5ECB4 /* MockSelectPaymentMethodDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D98F62D6EB96200B5ECB4 /* MockSelectPaymentMethodDelegate.swift */; };
@@ -24,8 +25,6 @@
 		2F8272552E0BACDD003B5C30 /* PANModelTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A43454620DBAE76005C5C94 /* PANModelTestCase.swift */; };
 		2F8D00F62E27A411000D9E16 /* SourceType+InternetBanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8D00F52E27A411000D9E16 /* SourceType+InternetBanking.swift */; };
 		2F9F58D82D6E28D600240952 /* ThreeDS_SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9F58D72D6E28D600240952 /* ThreeDS_SDK */; };
-		2FA17F642E27940A007B682A /* OmiseFlutterSPM in Frameworks */ = {isa = PBXBuildFile; productRef = 2F27105E2D9BD343007093C6 /* OmiseFlutterSPM */; };
-		2FA17F652E27940A007B682A /* OmiseFlutterSPM in Frameworks */ = {isa = PBXBuildFile; productRef = 2F1DB29A2D9BE8E0006424F4 /* OmiseFlutterSPM */; };
 		2FA17F6C2E279476007B682A /* FlutterMethodChannelWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA17F682E279476007B682A /* FlutterMethodChannelWrapper.swift */; };
 		2FA17F6D2E279476007B682A /* FlutterEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA17F672E279476007B682A /* FlutterEngineManager.swift */; };
 		2FA17F6E2E279476007B682A /* FlutterPaymentMethodResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA17F692E279476007B682A /* FlutterPaymentMethodResult.swift */; };
@@ -400,7 +399,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FA17F642E27940A007B682A /* OmiseFlutterSPM in Frameworks */,
+				2F4D94842E854F660054D148 /* OmiseFlutterSPM in Frameworks */,
 				758A4E842BE38AC3005E7B5A /* ThreeDS_SDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,7 +408,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FA17F652E27940A007B682A /* OmiseFlutterSPM in Frameworks */,
 				75D13E0F2B8678530073A831 /* OmiseSwiftUIKit in Frameworks */,
 				2F9F58D82D6E28D600240952 /* ThreeDS_SDK in Frameworks */,
 			);
@@ -1077,7 +1075,7 @@
 			name = OmiseSDK;
 			packageProductDependencies = (
 				758A4E832BE38AC3005E7B5A /* ThreeDS_SDK */,
-				2F27105E2D9BD343007093C6 /* OmiseFlutterSPM */,
+				2F4D94832E854F660054D148 /* OmiseFlutterSPM */,
 			);
 			productName = OmiseSDK;
 			productReference = 225931181CE3210700841B86 /* OmiseSDK.framework */;
@@ -1102,7 +1100,6 @@
 			packageProductDependencies = (
 				75D13E0E2B8678530073A831 /* OmiseSwiftUIKit */,
 				2F9F58D72D6E28D600240952 /* ThreeDS_SDK */,
-				2F1DB29A2D9BE8E0006424F4 /* OmiseFlutterSPM */,
 			);
 			productName = ExampleApp;
 			productReference = 22D4809D1D0EB29C00544CE1 /* ExampleApp.app */;
@@ -1196,7 +1193,7 @@
 			mainGroup = 2259310E1CE3210700841B86;
 			packageReferences = (
 				758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */,
-				2F66C25D2D5DD98600AB5BF9 /* XCRemoteSwiftPackageReference "flutter-ios-framework-spm" */,
+				2F4D94822E854F660054D148 /* XCRemoteSwiftPackageReference "omise-flutter-wrapper-ios" */,
 			);
 			productRefGroup = 225931191CE3210700841B86 /* Products */;
 			projectDirPath = "";
@@ -1587,7 +1584,7 @@
 				);
 				INFOPLIST_FILE = OmiseSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1616,13 +1613,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_WARNINGS = NO;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = ExampleApp/ExampleApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4TBJ63739J;
-				CODE_SIGN_ENTITLEMENTS = ExampleApp/ExampleApp.entitlements;
 				INFOPLIST_FILE = ExampleApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1724,7 +1721,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				INFOPLIST_FILE = OmiseSDKTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12;
+				IPHONEOS_DEPLOYMENT_TARGET = 14;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1820,7 +1817,7 @@
 				);
 				INFOPLIST_FILE = OmiseSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1848,7 +1845,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = OmiseSDKTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12;
+				IPHONEOS_DEPLOYMENT_TARGET = 14;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1872,13 +1869,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_WARNINGS = NO;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_ENTITLEMENTS = ExampleApp/ExampleAppDebug.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4TBJ63739J;
 				INFOPLIST_FILE = ExampleApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1949,12 +1946,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2F66C25D2D5DD98600AB5BF9 /* XCRemoteSwiftPackageReference "flutter-ios-framework-spm" */ = {
+		2F4D94822E854F660054D148 /* XCRemoteSwiftPackageReference "omise-flutter-wrapper-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/tyler-techcombine/flutter-ios-framework-spm.git";
+			repositoryURL = "git@github.com:omise/omise-flutter-wrapper-ios.git";
 			requirement = {
-				branch = release;
-				kind = branch;
+				kind = exactVersion;
+				version = 0.3.0;
 			};
 		};
 		758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */ = {
@@ -1968,14 +1965,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2F1DB29A2D9BE8E0006424F4 /* OmiseFlutterSPM */ = {
+		2F4D94832E854F660054D148 /* OmiseFlutterSPM */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2F66C25D2D5DD98600AB5BF9 /* XCRemoteSwiftPackageReference "flutter-ios-framework-spm" */;
-			productName = OmiseFlutterSPM;
-		};
-		2F27105E2D9BD343007093C6 /* OmiseFlutterSPM */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2F66C25D2D5DD98600AB5BF9 /* XCRemoteSwiftPackageReference "flutter-ios-framework-spm" */;
+			package = 2F4D94822E854F660054D148 /* XCRemoteSwiftPackageReference "omise-flutter-wrapper-ios" */;
 			productName = OmiseFlutterSPM;
 		};
 		2F9F58D72D6E28D600240952 /* ThreeDS_SDK */ = {
