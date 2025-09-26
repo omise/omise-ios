@@ -36,9 +36,9 @@ class CountryCodePickerViewModel: CountryCodePickerViewModelProtocol {
     private let isPresentedModally: Bool
     
     // MARK: - Callbacks
-    var onCountrySelected: (Country) -> Void = { _ in }
-    var onCancel: () -> Void = {}
-    var onDataUpdated: () -> Void = {}
+    var onCountrySelected: (Country) -> Void = { _ in /* Non-optional default empty implementation */ }
+    var onCancel: () -> Void = { /* Non-optional default empty implementation */ }
+    var onDataUpdated: () -> Void = { /* Non-optional default empty implementation */ }
     
     // MARK: - Initialization
     init(selectedCountry: Country) {

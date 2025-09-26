@@ -80,7 +80,7 @@ public class PhoneNumberTextField: OmiseTextField {
     }
     
     // MARK: - Actions
-    @objc private func countryCodeButtonTapped() {
+    @objc func countryCodeButtonTapped() {
         presentCountryPicker()
     }
     

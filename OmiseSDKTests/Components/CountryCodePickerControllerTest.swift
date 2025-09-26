@@ -2,6 +2,7 @@ import XCTest
 @testable import OmiseSDK
 import UIKit
 
+// swiftlint:disable file_length
 // MARK: - Mock ViewModel
 class MockCountryCodePickerViewModel: CountryCodePickerViewModelProtocol {
     var input: CountryCodePickerViewModelInput { self }
@@ -28,6 +29,29 @@ class MockCountryCodePickerViewModel: CountryCodePickerViewModelProtocol {
     ]
     var mockSelectedCountry = Country(name: "Thailand", code: "TH")
     var mockTitle = "Test Title"
+}
+
+// MARK: - Helpers
+private func extractTableView(from controller: CountryCodePickerController) -> UITableView? {
+    return controller.view.subviews.compactMap { $0 as? UITableView }.first
+}
+
+final class SpyCountryCodePickerController: CountryCodePickerController {
+    private(set) var dismissCalled = false
+
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        dismissCalled = true
+        completion?()
+    }
+}
+
+final class PoppingSpyNavigationController: UINavigationController {
+    private(set) var popCallCount = 0
+
+    override func popViewController(animated: Bool) -> UIViewController? {
+        popCallCount += 1
+        return super.popViewController(animated: animated)
+    }
 }
 
 // MARK: - Mock Input
@@ -95,13 +119,13 @@ extension MockCountryCodePickerViewModel: CountryCodePickerViewModelOutput {
 // MARK: - Tests
 class CountryCodePickerControllerTest: XCTestCase {
     
-    var sut: CountryCodePickerController!
+    var sut: SpyCountryCodePickerController!
     var mockViewModel: MockCountryCodePickerViewModel!
     
     override func setUp() {
         super.setUp()
         mockViewModel = MockCountryCodePickerViewModel()
-        sut = CountryCodePickerController(viewModel: mockViewModel)
+        sut = SpyCountryCodePickerController(viewModel: mockViewModel)
     }
     
     override func tearDown() {
@@ -132,7 +156,7 @@ class CountryCodePickerControllerTest: XCTestCase {
     // MARK: - Lifecycle Tests
     func testViewDidLoad_CallsViewModelViewDidLoad() {
         // When
-        sut.viewDidLoad()
+        sut.loadViewIfNeeded()
         
         // Then
         XCTAssertTrue(mockViewModel.viewDidLoadCalled)
@@ -140,7 +164,7 @@ class CountryCodePickerControllerTest: XCTestCase {
     
     func testViewDidLoad_SetsUpUI() {
         // When
-        sut.viewDidLoad()
+        sut.loadViewIfNeeded()
         
         // Then
         XCTAssertEqual(sut.title, mockViewModel.mockTitle)
@@ -150,7 +174,7 @@ class CountryCodePickerControllerTest: XCTestCase {
     // MARK: - TableView Tests
     func testNumberOfRows_ReturnsCountriesCount() {
         // Given
-        sut.viewDidLoad()
+        sut.loadViewIfNeeded()
         let tableView = UITableView()
         
         // When
@@ -162,7 +186,7 @@ class CountryCodePickerControllerTest: XCTestCase {
     
     func testCellForRowAt_ConfiguresCell() {
         // Given
-        sut.viewDidLoad()
+        sut.loadViewIfNeeded()
         let tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CountryCodeCell")
         let indexPath = IndexPath(row: 0, section: 0)
@@ -178,7 +202,7 @@ class CountryCodePickerControllerTest: XCTestCase {
     
     func testSelectedCountryIndex_ReturnsCorrectIndex() {
         // When
-        sut.viewDidLoad()
+        sut.loadViewIfNeeded()
         
         // Then
         XCTAssertEqual(mockViewModel.selectedCountryIndex, 0) // Thailand is at index 0 in mock data
@@ -186,7 +210,7 @@ class CountryCodePickerControllerTest: XCTestCase {
     
     func testDidSelectRowAt_CallsViewModelSelectCountry() {
         // Given
-        sut.viewDidLoad()
+        sut.loadViewIfNeeded()
         let tableView = UITableView()
         let indexPath = IndexPath(row: 1, section: 0)
         
@@ -201,7 +225,7 @@ class CountryCodePickerControllerTest: XCTestCase {
     // MARK: - Search Tests
     func testUpdateSearchResults_CallsViewModelFilterCountries() {
         // Given
-        sut.viewDidLoad()
+        sut.loadViewIfNeeded()
         let searchController = UISearchController()
         searchController.searchBar.text = "thai"
         
@@ -215,7 +239,7 @@ class CountryCodePickerControllerTest: XCTestCase {
     
     func testUpdateSearchResults_WithEmptyText_CallsViewModelWithEmptyString() {
         // Given
-        sut.viewDidLoad()
+        sut.loadViewIfNeeded()
         let searchController = UISearchController()
         searchController.searchBar.text = ""
         
@@ -229,16 +253,50 @@ class CountryCodePickerControllerTest: XCTestCase {
     
     // MARK: - ViewModel Binding Tests
     func testOnDataUpdated_ReloadsTableView() {
-        // Given
-        sut.viewDidLoad()
-        
-        // When
+        sut.loadViewIfNeeded()
+        mockViewModel.mockSelectedCountry = mockViewModel.mockCountries[2]
+
         mockViewModel.onDataUpdated()
-        
-        // Then
-        // This is hard to test without exposing tableView or using UI testing
-        // In a real scenario, you might want to create a testable tableView wrapper
-        XCTAssertTrue(true) // Placeholder - would need UI testing or tableView exposure
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.05))
+
+        guard let tableView = extractTableView(from: sut) else {
+            return XCTFail("Expected embedded table view")
+        }
+        XCTAssertEqual(tableView.numberOfRows(inSection: 0), mockViewModel.mockCountries.count)
+        let visibleRows = tableView.indexPathsForVisibleRows ?? []
+        XCTAssertTrue(visibleRows.contains(IndexPath(row: 2, section: 0)))
+    }
+
+    func testHandleCancelPopsWhenInNavigationStack() {
+        sut.loadViewIfNeeded()
+        let navigation = PoppingSpyNavigationController(rootViewController: UIViewController())
+        navigation.pushViewController(sut, animated: false)
+        mockViewModel.onCancel()
+
+        XCTAssertEqual(navigation.popCallCount, 1)
+        XCTAssertFalse(sut.dismissCalled)
+    }
+
+    func testHandleCancelDismissesWhenNoNavigation() {
+        sut.loadViewIfNeeded()
+        mockViewModel.onCancel()
+
+        XCTAssertTrue(sut.dismissCalled)
+    }
+
+    func testDidSelectRow_pushesAndCancelsThroughNavigation() {
+        sut.loadViewIfNeeded()
+        guard let tableView = extractTableView(from: sut) else {
+            return XCTFail("Expected embedded table view")
+        }
+        let navigation = PoppingSpyNavigationController(rootViewController: UIViewController())
+        navigation.pushViewController(sut, animated: false)
+        mockViewModel.selectCountryCalled = false
+
+        sut.tableView(tableView, didSelectRowAt: IndexPath(row: 1, section: 0))
+
+        XCTAssertTrue(mockViewModel.selectCountryCalled)
+        XCTAssertEqual(navigation.popCallCount, 1)
     }
 }
 
@@ -373,3 +431,4 @@ class CountryCodePickerViewModelTest: XCTestCase {
         XCTAssertTrue(cancelCalled)
     }
 }
+// swiftlint:enable file_length

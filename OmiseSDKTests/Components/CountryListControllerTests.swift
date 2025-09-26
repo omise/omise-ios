@@ -29,6 +29,13 @@ final class CountryListControllerTests: XCTestCase {
         mockVM = nil
         super.tearDown()
     }
+
+    func testSettingViewModelBeforeViewLoadsDefersBinding() {
+        let controller = CountryListController()
+        XCTAssertFalse(controller.isViewLoaded)
+        controller.viewModel = mockVM
+        XCTAssertFalse(controller.isViewLoaded)
+    }
     
     func testNumberOfRows_matchesViewModelCountriesCount() {
         XCTAssertEqual(tableView.numberOfRows(inSection: 0),
@@ -66,6 +73,52 @@ final class CountryListControllerTests: XCTestCase {
         mockVM.filterCountries(with: "")
         XCTAssertEqual(mockVM.filteredCountries.count, 2)
     }
+
+    func testPreferredColorsBeforeAndAfterViewLoad() {
+        let controller = CountryListController(viewModel: mockVM)
+        controller.preferredPrimaryColor = .red
+        controller.preferredSecondaryColor = .blue
+
+        controller.loadViewIfNeeded()
+        controller.preferredPrimaryColor = .green
+        controller.preferredSecondaryColor = .yellow
+
+        XCTAssertNotNil(controller.view)
+    }
+
+    func testViewWillDisappearResetsSearchAndFilters() {
+        sut.viewDidLoad()
+        mockVM.filterCountries(with: "A")
+        XCTAssertEqual(mockVM.filteredCountries.count, 1)
+
+        sut.navigationItem.searchController?.searchBar.text = "A"
+        sut.viewWillDisappear(false)
+
+        XCTAssertEqual(sut.navigationItem.searchController?.searchBar.text, "")
+        XCTAssertEqual(mockVM.filteredCountries.count, 2)
+    }
+
+    func testViewDidAppearScrollsToSelectedCountry() {
+        mockVM.selectedCountry = mockVM.countries[1]
+        sut.viewDidAppear(false)
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.05))
+
+        XCTAssertEqual(tableView.indexPathsForVisibleRows?.first?.row, 1)
+    }
+
+    func testUpdateSearchResultsTriggersFilterAndScroll() {
+        sut.viewDidLoad()
+        guard let searchController = sut.navigationItem.searchController else {
+            return XCTFail("Expected search controller")
+        }
+        mockVM.selectedCountry = mockVM.countries[0]
+        mockVM.filterCountriesCalled = false
+        searchController.searchBar.text = "B"
+        sut.updateSearchResults(for: searchController)
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.05))
+
+        XCTAssertTrue(mockVM.filterCountriesCalled)
+    }
 }
 
 // MARK: - Mock ViewModel
@@ -74,12 +127,14 @@ class MockVM: CountryListViewModelProtocol {
     var filteredCountries: [Country] = []
     var selectedCountry: Country?
     var onSelectCountry: (Country) -> Void = { _ in /* Non-optional default empty implementation */ }
+    var filterCountriesCalled = false
     
     init() {
         filteredCountries = countries
     }
     
     func filterCountries(with searchText: String) {
+        filterCountriesCalled = true
         if searchText.isEmpty {
             filteredCountries = countries
         } else {

@@ -28,12 +28,12 @@ class SafariPasskeyAuthenticationHandler: PasskeyAuthenticationProtocol {
         delegate: AuthorizingPaymentDelegate
     ) {
         // Create SFSafariViewController for passkey authentication
-        let safariViewController = SFSafariViewController(url: authorizeURL)
+        let sfViewController = SFSafariViewController(url: authorizeURL)
         
         // Configure Safari view controller
-        safariViewController.dismissButtonStyle = .cancel
-        safariViewController.preferredBarTintColor = .systemBackground
-        safariViewController.preferredControlTintColor = .systemBlue
+        sfViewController.dismissButtonStyle = .cancel
+        sfViewController.preferredBarTintColor = .systemBackground
+        sfViewController.preferredControlTintColor = .systemBlue
         
         // Store state for callback handling
         self.expectedReturnURLStrings = expectedReturnURLStrings
@@ -42,10 +42,10 @@ class SafariPasskeyAuthenticationHandler: PasskeyAuthenticationProtocol {
         self.isAuthenticationActive = true
         
         // Present Safari view controller
-        viewController.present(safariViewController, animated: true)
+        viewController.present(sfViewController, animated: true)
         
         // Store reference
-        self.safariViewController = safariViewController
+        self.safariViewController = sfViewController
     }
     
     func handlePasskeyCallback(_ url: URL) -> Bool {

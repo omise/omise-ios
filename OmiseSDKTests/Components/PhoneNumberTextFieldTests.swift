@@ -213,6 +213,35 @@ final class PhoneNumberTextFieldTests: XCTestCase {
         
         XCTAssertEqual(button.title(for: .normal), germany.phonePrefix)
     }
+
+    func testCountryCodeButtonTap_pushesPickerWhenInNavigationController() {
+        let host = HostingSpyViewController()
+        host.loadViewIfNeeded()
+        host.view.addSubview(sut)
+        let navigation = PushingSpyNavigationController(rootViewController: host)
+        sut.countryCodeButtonTapped()
+
+        XCTAssertTrue(navigation.lastPushed is CountryCodePickerController)
+    }
+
+    func testCountryCodeButtonTap_presentsPickerWhenNoNavigationController() {
+        let host = PresentingSpyViewController()
+        host.loadViewIfNeeded()
+        host.view.addSubview(sut)
+        sut.countryCodeButtonTapped()
+
+        guard let presented = host.presentedController as? UINavigationController else {
+            return XCTFail("Expected nav controller presentation")
+        }
+        XCTAssertTrue(presented.viewControllers.first is CountryCodePickerController)
+    }
+
+    func testCountryCodeButtonTap_withoutViewControllerHostDoesNothing() {
+        sut.countryCodeButtonTapped()
+
+        // Nothing should crash and no delegate calls should occur
+        XCTAssertEqual(mockDelegate.didSelectCountryCallCount, 0)
+    }
     
     func testCountryCodeButton_frameCalculation() {
         let longPrefixCountry = Country(name: "United States", code: "US") // +1
@@ -429,5 +458,26 @@ final class PhoneNumberTextFieldTests: XCTestCase {
         XCTAssertThrowsError(try sut.validate(), "Should not validate 16-digit phone") { error in
             XCTAssertEqual(error as? OmiseTextFieldValidationError, .invalidData)
         }
+    }
+}
+
+// MARK: - Test Helpers
+private final class HostingSpyViewController: UIViewController {}
+
+private final class PresentingSpyViewController: UIViewController {
+    private(set) var presentedController: UIViewController?
+
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        presentedController = viewControllerToPresent
+        completion?()
+    }
+}
+
+private final class PushingSpyNavigationController: UINavigationController {
+    private(set) var lastPushed: UIViewController?
+
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        lastPushed = viewController
+        super.pushViewController(viewController, animated: animated)
     }
 }
