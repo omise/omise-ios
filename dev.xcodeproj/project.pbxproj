@@ -1955,7 +1955,7 @@
 /* Begin XCRemoteSwiftPackageReference section */
 		2F4D99B12E868F5F0054D148 /* XCRemoteSwiftPackageReference "omise-flutter-wrapper-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:omise/omise-flutter-wrapper-ios.git";
+			repositoryURL = "https://github.com/omise/omise-flutter-wrapper-ios.git";
 			requirement = {
 				kind = exactVersion;
 				version = 0.3.1;

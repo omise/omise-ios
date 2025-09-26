@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "OmiseFlutterSPM",
-        "repositoryURL": "git@github.com:omise/omise-flutter-wrapper-ios.git",
+        "repositoryURL": "https://github.com/omise/omise-flutter-wrapper-ios.git",
         "state": {
           "branch": null,
           "revision": "9c1c5d8ebca0feb79b632b15eeabac309d139f2e",
