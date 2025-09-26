@@ -142,7 +142,7 @@ public class OmiseSDK {
         delegate: ChoosePaymentMethodDelegate
     ) {
         dismiss(animated: false)
-        let args: [String: Any] = ["pkey": publicKey]
+        let args: [String: Any] = buildBasicArgument(with: publicKey)
         flutterEngineManager.presentFlutterViewController(for: .openCardPage,
                                                           on: topViewController,
                                                           arguments: args,

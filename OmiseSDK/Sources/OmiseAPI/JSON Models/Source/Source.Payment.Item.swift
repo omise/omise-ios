@@ -32,7 +32,16 @@ extension Source.Payment {
         ///   - itemUri: URI of the item
         ///   - imageUri: Image URI of the item
         ///   - brand: Brand of the item
-        public init(sku: String, category: String?, name: String, quantity: Int, amount: Int64, itemUri: String?, imageUri: String?, brand: String?) {
+        public init(
+            sku: String,
+            category: String?,
+            name: String,
+            quantity: Int,
+            amount: Int64,
+            itemUri: String?,
+            imageUri: String?,
+            brand: String?
+        ) {
             self.sku = sku
             self.category = category
             self.name = name
