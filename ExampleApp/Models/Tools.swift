@@ -1,48 +1,12 @@
 import UIKit
 import OmiseSDK
 
-struct PaymentPreset {
-    var paymentAmount: Int64
-    var paymentCurrency: Currency
-    var allowedPaymentMethods: [SourceType]
-    
-    static let allPreset = PaymentPreset(
-        paymentAmount: 3_500_00,
-        paymentCurrency: .thb,
-        allowedPaymentMethods: SourceType.allCases
-    )
-
-    static let thailandPreset = PaymentPreset(
-        paymentAmount: 3_500_00,
-        paymentCurrency: .thb,
-        allowedPaymentMethods: SourceType.availableByDefaultInThailand
-    )
-
-    static let japanPreset = PaymentPreset(
-        paymentAmount: 3_500,
-        paymentCurrency: .jpy,
-        allowedPaymentMethods: SourceType.availableByDefaultInJapan
-    )
-    
-    static let singaporePreset = PaymentPreset(
-        paymentAmount: 3_500_00,
-        paymentCurrency: .sgd,
-        allowedPaymentMethods: SourceType.availableByDefaultSingapore
-    )
-
-    static let malaysiaPreset = PaymentPreset(
-        paymentAmount: 3_500_00,
-        paymentCurrency: .myr,
-        allowedPaymentMethods: SourceType.availableByDefaultMalaysia
-    )
-}
-
 class Tool: NSObject {
     
     static let allPaymentAmount: Int64 = PaymentPreset.allPreset.paymentAmount
     static let allPaymentCurrency: String = PaymentPreset.allPreset.paymentCurrency.code
     static let allAllowedPaymentMethods: [SourceType] = PaymentPreset.allPreset.allowedPaymentMethods
-
+    
     static let thailandPaymentAmount: Int64 = PaymentPreset.thailandPreset.paymentAmount
     static let thailandPaymentCurrency: String = PaymentPreset.thailandPreset.paymentCurrency.code
     static let thailandAllowedPaymentMethods: [SourceType] = PaymentPreset.thailandPreset.allowedPaymentMethods
@@ -54,7 +18,7 @@ class Tool: NSObject {
     static let singaporePaymentAmount: Int64 = PaymentPreset.singaporePreset.paymentAmount
     static let singaporePaymentCurrency: String = PaymentPreset.singaporePreset.paymentCurrency.code
     static let singaporeAllowedPaymentMethods: [SourceType] = PaymentPreset.singaporePreset.allowedPaymentMethods
-
+    
     static let malaysiaPaymentAmount: Int64 = PaymentPreset.malaysiaPreset.paymentAmount
     static let malaysiaPaymentCurrency: String = PaymentPreset.malaysiaPreset.paymentCurrency.code
     static let malaysiaAllowedPaymentMethods: [SourceType] = PaymentPreset.malaysiaPreset.allowedPaymentMethods
@@ -71,5 +35,20 @@ class Tool: NSObject {
         return renderer.image { context in
             actions(context.cgContext)
         }
+    }
+}
+
+extension String {
+    var maskedPublicKey: String {
+        let trimmed = trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return "Not set" }
+        
+        let prefixCount = min(6, trimmed.count)
+        let suffixCount = min(4, max(0, trimmed.count - prefixCount))
+        let prefix = trimmed.prefix(prefixCount)
+        let suffix = trimmed.suffix(suffixCount)
+        let maskedCount = max(0, trimmed.count - prefixCount - suffixCount)
+        let mask = String(repeating: "•", count: maskedCount)
+        return "\(prefix)\(mask)\(suffix)"
     }
 }
