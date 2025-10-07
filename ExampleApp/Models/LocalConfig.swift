@@ -7,16 +7,16 @@ struct LocalConfig {
     
     private let devVaultBaseURL: String?
     private let devApiBaseURL: String?
-
+    
     var devMode: Bool {
         devVaultBaseURL != nil && devApiBaseURL != nil
     }
-
+    
     init() {
         devVaultBaseURL = nil
         devApiBaseURL = nil
     }
-
+    
     var configuration: Configuration? {
         if devMode,
            let vaultBaseURLString = devVaultBaseURL,
@@ -28,7 +28,7 @@ struct LocalConfig {
             return nil
         }
     }
-
+    
     static var `default`: LocalConfig {
         let resource = Bundle.main.url(forResource: "Config.local", withExtension: "plist")
         if let url = resource, let data = try? Data(contentsOf: url) {
