@@ -228,7 +228,9 @@ final class AuthorizeViewController: ViewModelViewController<AuthorizeViewModel>
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+            self?.present(alert, animated: true)
+        }
     }
 }
 
