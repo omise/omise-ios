@@ -204,7 +204,6 @@
 		758A4EA82BE9D722005E7B5A /* AuthorizingPaymentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758A4EA72BE9D722005E7B5A /* AuthorizingPaymentDelegate.swift */; };
 		759856242A286C880087B605 /* UIScrollView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759856232A286C880087B605 /* UIScrollView+Helpers.swift */; };
 		759C7EC02B7DC7F50029D555 /* SourceType+MobileBanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759C7EBF2B7DC7F50029D555 /* SourceType+MobileBanking.swift */; };
-		759C7EC22B7DC80A0029D555 /* SourceType+InternetBanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759C7EC12B7DC80A0029D555 /* SourceType+InternetBanking.swift */; };
 		759C7EC42B7DC8270029D555 /* SourceType+Installments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759C7EC32B7DC8270029D555 /* SourceType+Installments.swift */; };
 		75B420502B7611710036134D /* Capability.PaymentMethod.Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4204F2B7611710036134D /* Capability.PaymentMethod.Bank.swift */; };
 		75B4205E2B7674D70036134D /* Calendar+CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4205D2B7674D70036134D /* Calendar+CreditCard.swift */; };
@@ -555,7 +554,6 @@
 		758A4EA72BE9D722005E7B5A /* AuthorizingPaymentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizingPaymentDelegate.swift; sourceTree = "<group>"; };
 		759856232A286C880087B605 /* UIScrollView+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Helpers.swift"; sourceTree = "<group>"; };
 		759C7EBF2B7DC7F50029D555 /* SourceType+MobileBanking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SourceType+MobileBanking.swift"; sourceTree = "<group>"; };
-		759C7EC12B7DC80A0029D555 /* SourceType+InternetBanking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SourceType+InternetBanking.swift"; sourceTree = "<group>"; };
 		759C7EC32B7DC8270029D555 /* SourceType+Installments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SourceType+Installments.swift"; sourceTree = "<group>"; };
 		75B4204F2B7611710036134D /* Capability.PaymentMethod.Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capability.PaymentMethod.Bank.swift; sourceTree = "<group>"; };
 		75B4205D2B7674D70036134D /* Calendar+CreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar+CreditCard.swift"; sourceTree = "<group>"; };
@@ -1259,7 +1257,6 @@
 				75D13DD32B8652230073A831 /* SourceType+Helpers.swift */,
 				751E7BF12B7FC90C0031B4A2 /* SourceType+Collections.swift */,
 				759C7EC32B7DC8270029D555 /* SourceType+Installments.swift */,
-				759C7EC12B7DC80A0029D555 /* SourceType+InternetBanking.swift */,
 				759C7EBF2B7DC7F50029D555 /* SourceType+MobileBanking.swift */,
 			);
 			path = SourceType;
@@ -1926,7 +1923,6 @@
 				2FDDFF3B2DFAA74D00C1369A /* InvalidCardReason.swift in Sources */,
 				75405A812A2633B6008C21F6 /* SpacerView.swift in Sources */,
 				75D13DAD2B83B58B0073A831 /* Source.Payment.TrueMoney.swift in Sources */,
-				759C7EC22B7DC80A0029D555 /* SourceType+InternetBanking.swift in Sources */,
 				4B04F7192DA91D1C005A7B19 /* OmiseFormToolbar.swift in Sources */,
 				75405A912A26340E008C21F6 /* UILabel+Helpers.swift in Sources */,
 				759856242A286C880087B605 /* UIScrollView+Helpers.swift in Sources */,

@@ -147,12 +147,6 @@ class ChoosePaymentCoordinatorTests: XCTestCase {
         XCTAssertEqual(vc.viewModel.viewNavigationTitle, PaymentMethod.mobileBanking.localizedTitle)
     }
     
-    func test_createInternetBankingController() {
-        let vc = sut.createInternetBankingController()
-        XCTAssertNotNil(vc)
-        XCTAssertEqual(vc.viewModel.viewNavigationTitle, PaymentMethod.internetBanking.localizedTitle)
-    }
-    
     func test_createInstallmentController() {
         let expectation = XCTestExpectation(description: "Capability did load")
         // given

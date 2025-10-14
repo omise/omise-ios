@@ -144,7 +144,7 @@ the `Payment Information` object:
 let createSourcePayload = CreateSourcePayload(
     amount: amount,
     currency: currency,
-    details: .sourceType(.internetBankingBBL) // Bangkok Bank Internet Banking payment method
+    details: .sourceType(.mobileBankingBBL) // Bangkok Bank mobile banking payment method
 )
 ```
 
@@ -344,7 +344,7 @@ extension ProductDetailViewController: ChoosePaymentMethodDelegate {
 
 ## Authorizing payment
 
-Some payment methods require the customer to authorize the payment using an authorization URL. This includes [3-D Secure verification](https://docs.omise.co/fraud-protection#3-d-secure), [Internet Banking payment](https://docs.omise.co/internet-banking), [Mobile Banking SCB](https://docs.omise.co/mobile-banking-scb), etc. Omise iOS SDK provides a built-in class to handle the authorization.
+Some payment methods require the customer to authorize the payment using an authorization URL. This includes [3-D Secure verification](https://docs.omise.co/fraud-protection#3-d-secure), [FPX](https://docs.omise.co/fpx), [Mobile Banking SCB](https://docs.omise.co/mobile-banking-scb), etc. Omise iOS SDK provides a built-in class to handle the authorization.
 
 On payment methods that require opening the external app (e.g., mobile banking app) to authorize the transaction, set the _return_uri_ to a **deep link** or **app link** to be able to open the merchant app. Otherwise, after the cardholder authorizes the transaction on the external app, the flow redirects to the normal link in the _return_uri_, and opens it on the browser app, resulting in the payment not being completed.
 Some authorized URLs will be processed using the in-app browser flow, and others will be processed using the native flow from the SDK (3DS v2), and the SDK automatically handles all of this.
