@@ -40,8 +40,6 @@ enum PaymentMethodCatalog {
         Entry(sourceType: .installmentUOB, displayName: "Installment - UOB", group: .installments),
         
         // Bank & QR
-        Entry(sourceType: .internetBankingBAY, displayName: "Internet Banking - BAY", group: .bankAndQR),
-        Entry(sourceType: .internetBankingBBL, displayName: "Internet Banking - BBL", group: .bankAndQR),
         Entry(sourceType: .mobileBankingBAY, displayName: "Mobile Banking - BAY", group: .bankAndQR),
         Entry(sourceType: .mobileBankingBBL, displayName: "Mobile Banking - BBL", group: .bankAndQR),
         Entry(sourceType: .mobileBankingKBank, displayName: "Mobile Banking - KBank", group: .bankAndQR),

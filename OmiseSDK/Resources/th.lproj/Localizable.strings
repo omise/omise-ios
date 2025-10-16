@@ -2,7 +2,6 @@
 "PaymentMethods.title" = "ช่องทางชำระเงิน";
 "PaymentMethod.creditCard" = "บัตรเครดิต";
 "PaymentMethod.installments" = "ผ่อนชำระ";
-"PaymentMethod.internetBanking" = "อินเทอร์เน็ตแบงก์กิ้ง";
 "PaymentMethod.mobileBanking" = "โมบายแบงก์กิ้ง";
 "PaymentMethod.eContext.conbini" = "ร้านสะดวกซื้อ";
 "PaymentMethod.eContext.payEasy" = "เพย์อีซี";
@@ -26,8 +25,6 @@
 "SourceType.installment_wlb_scb" = "ธนาคารไทยพาณิชย์";
 "SourceType.installment_wlb_bbl" = "ธนาคารกรุงเทพ";
 "SourceType.installment_wlb_uob" = "ธนาคารยูโอบี";
-"SourceType.internet_banking_bay" = "ธนาคารกรุงศรีอยุธยา";
-"SourceType.internet_banking_bbl" = "ธนาคารกรุงเทพ";
 "SourceType.paynow" = "เพย์นาว";
 "SourceType.points_citi" = "ชำระด้วยคะแนนซิตี้รีวอร์ด";
 "SourceType.promptpay" = "พร้อมเพย์";

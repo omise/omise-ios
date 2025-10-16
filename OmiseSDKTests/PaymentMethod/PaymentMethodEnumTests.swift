@@ -4,7 +4,6 @@ import UIKit
 
 class PaymentMethodTests: XCTestCase {
     var anyInstallment: SourceType!
-    var anyInternet: SourceType!
     var anyMobile: SourceType!
     let eContext       = SourceType.eContext
     let barcodeAlipay  = SourceType.barcodeAlipay
@@ -19,12 +18,6 @@ class PaymentMethodTests: XCTestCase {
             return
         }
         anyInstallment = inst
-        
-        guard let internet = SourceType.allCases.first(where: { $0.isInternetBanking }) else {
-            XCTFail("No installment SourceType found")
-            return
-        }
-        anyInternet = internet
         
         guard let mobile = SourceType.allCases.first(where: { $0.isMobileBanking }) else {
             XCTFail("No installment SourceType found")
@@ -41,7 +34,6 @@ class PaymentMethodTests: XCTestCase {
     
     func testPaymentMethodsForSourceTypeVariants() {
         XCTAssertEqual(PaymentMethod.paymentMethods(for: anyInstallment), [.installment])
-        XCTAssertEqual(PaymentMethod.paymentMethods(for: anyInternet), [.internetBanking])
         XCTAssertEqual(PaymentMethod.paymentMethods(for: anyMobile), [.mobileBanking])
         XCTAssertEqual(PaymentMethod.paymentMethods(for: eContext),
                        [.eContextConbini, .eContextNetBanking, .eContextPayEasy])
@@ -57,15 +49,15 @@ class PaymentMethodTests: XCTestCase {
     }
     
     func testAlphabeticalSort() {
-        let input: [PaymentMethod] = [.internetBanking, .creditCard, .mobileBanking]
+        let input: [PaymentMethod] = [.mobileBanking, .creditCard, .installment]
         let sorted = PaymentMethod.alphabetical(from: input)
-        XCTAssertEqual(sorted, [.creditCard, .internetBanking, .mobileBanking])
+        XCTAssertEqual(sorted, [.creditCard, .installment, .mobileBanking])
     }
     
     func testTopListedKeepsGlobalOrderAndAppendsRest() {
-        let input: [PaymentMethod] = [.internetBanking, .creditCard]
+        let input: [PaymentMethod] = [.mobileBanking, .sourceType(.payNow), .creditCard]
         let top = PaymentMethod.topListed(from: input)
-        XCTAssertEqual(top, [.creditCard, .internetBanking])
+        XCTAssertEqual(top, [.creditCard, .sourceType(.payNow), .mobileBanking])
     }
     
     func testSortedCombinesAlphabeticalAndTopListed() {

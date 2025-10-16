@@ -42,8 +42,6 @@ class SelectPaymentMethodViewModelTest: XCTestCase {
         .installmentWhiteLabelTTB: "ttb",
         .installmentUOB: "uob",
         .installmentWhiteLabelUOB: "uob",
-        .internetBankingBAY: "BAY",
-        .internetBankingBBL: "BBL",
         .kakaoPay: "kakaopay",
         .maybankQRPay: "MAE-maybank",
         .mobileBankingBAY: "KMA",

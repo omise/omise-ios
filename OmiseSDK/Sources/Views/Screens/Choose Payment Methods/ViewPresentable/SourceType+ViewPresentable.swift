@@ -66,10 +66,6 @@ extension SourceType: ViewPresentable {
             return "ttb"
         case .installmentUOB, .installmentWhiteLabelUOB:
             return "uob"
-        case .internetBankingBAY:
-            return "BAY"
-        case .internetBankingBBL:
-            return "BBL"
         case .kakaoPay:
             return "kakaopay"
         case .maybankQRPay:

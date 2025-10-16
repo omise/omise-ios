@@ -2,7 +2,6 @@
 "PaymentMethods.title" = "決済方法";
 "PaymentMethod.creditCard" = "クレジットカード";
 "PaymentMethod.installments" = "分割払い";
-"PaymentMethod.internetBanking" = "インターネットバンク";
 "PaymentMethod.mobileBanking" = "モバイルバンキング";
 "PaymentMethod.eContext.conbini" = "コンビニ";
 "PaymentMethod.eContext.payEasy" = "ペイジー";
@@ -29,8 +28,6 @@
 "SourceType.installment_wlb_first_choice" = "クルンシィ・ファーストチョイス";
 "SourceType.installment_wlb_ttb" = "TMBタナチャート銀行";
 "SourceType.installment_wlb_uob" = "ユナイテッド・オーバーシーズ銀行";
-"SourceType.internet_banking_bay" = "アユタヤ銀行";
-"SourceType.internet_banking_bbl" = "バンコク銀行";
 "SourceType.paynow" = "PayNow";
 "SourceType.points_citi" = "Citi Rewardsポイント";
 "SourceType.promptpay" = "プロンプトペイ";

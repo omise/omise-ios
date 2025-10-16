@@ -102,19 +102,6 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
         return listController
     }
     
-    /// Creates Mobile Banking screen and attach current flow object inside created controller to be deallocated together
-    func createInternetBankingController() -> SelectPaymentController {
-        let sourceTypes = client.latestLoadedCapability?.availableSourceTypes(SourceType.internetBanking)
-        let viewModel = SelectSourceTypePaymentViewModel(
-            title: PaymentMethod.internetBanking.localizedTitle,
-            sourceTypes: sourceTypes ?? [],
-            delegate: self
-        )
-        
-        let listController = SelectPaymentController(viewModel: viewModel)
-        return listController
-    }
-    
     /// Creates Installement screen and attach current flow object inside created controller to be deallocated together
     func createInstallmentController() -> SelectPaymentController {
         var sourceTypes = client.latestLoadedCapability?.availableSourceTypes(SourceType.installments) ?? []
@@ -260,8 +247,6 @@ extension ChoosePaymentCoordinator: SelectPaymentMethodDelegate {
             switch paymentMethod {
             case .mobileBanking:
                 navigate(to: createMobileBankingController())
-            case .internetBanking:
-                navigate(to: createInternetBankingController())
             case .installment:
                 navigate(to: createInstallmentController())
             case .creditCard:

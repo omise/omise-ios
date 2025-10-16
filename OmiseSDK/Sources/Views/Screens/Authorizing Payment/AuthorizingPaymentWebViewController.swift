@@ -4,7 +4,7 @@ import os
 
 /*:
  Drop-in authorizing payment handler view controller that automatically display the authorizing payment verification form
- which supports `3DS`, `Internet Banking` and other offsite payment methods those need to be authorized via a web browser.
+ which supports `3DS`, `FPX`, mobile banking flows, and other offsite payment methods that need to be authorized via a web browser.
  
  - remark:
    This is still an experimental API. If you encountered with any problem with this API, please feel free to report to Omise.

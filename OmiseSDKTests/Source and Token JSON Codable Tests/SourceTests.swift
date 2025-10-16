@@ -447,30 +447,6 @@ class SourceTests: XCTestCase {
         try validatePayloadCodable(source.paymentInformation)
     }
 
-    func testDecodeInternetBankingBay() throws {
-        let sourceType: SourceType = .internetBankingBAY
-        let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        XCTAssertEqual(source.id, "src_test_5cs0sm8u8h8nqo5hwcs")
-        XCTAssertFalse(source.isLiveMode)
-        XCTAssertEqual(source.paymentInformation, .sourceType(sourceType))
-        XCTAssertEqual(source.flow, .redirect)
-        XCTAssertEqual(source.amount, 100000)
-        XCTAssertEqual(source.currency, "THB")
-        try validatePayloadCodable(source.paymentInformation)
-    }
-
-    func testDecodeInternetBankingBBL() throws {
-        let sourceType: SourceType = .internetBankingBBL
-        let source: Source = try sampleFromJSONBy(.source(type: sourceType))
-        XCTAssertEqual(source.id, "src_test_5cs0sfy7phu06yhyz5c")
-        XCTAssertFalse(source.isLiveMode)
-        XCTAssertEqual(source.paymentInformation, .sourceType(sourceType))
-        XCTAssertEqual(source.flow, .redirect)
-        XCTAssertEqual(source.amount, 100000)
-        XCTAssertEqual(source.currency, "THB")
-        try validatePayloadCodable(source.paymentInformation)
-    }
-
     func testDecodeMobileBankingBAY() throws {
         let sourceType: SourceType = .mobileBankingBAY
         let source: Source = try sampleFromJSONBy(.source(type: sourceType))

@@ -22,8 +22,6 @@ extension PaymentMethod: ViewPresentable {
             return localized("\(prefixCode).creditCard", text: "Credit Card")
         case .installment:
             return localized("\(prefixCode).installments", text: "Installments")
-        case .internetBanking:
-            return localized("\(prefixCode).internetBanking", text: "Internet Banking")
         case .mobileBanking:
             return localized("\(prefixCode).mobileBanking", text: "Mobile Banking")
         case .eContextConbini:
@@ -42,7 +40,6 @@ extension PaymentMethod: ViewPresentable {
         switch self {
         case .creditCard: return "Card"
         case .installment: return "Installment"
-        case .internetBanking: return "Banking"
         case .mobileBanking: return "MobileBanking"
         case .eContextConbini: return "Konbini"
         case .eContextPayEasy: return "Payeasy"
