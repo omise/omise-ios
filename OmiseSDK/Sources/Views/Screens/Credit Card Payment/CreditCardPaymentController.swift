@@ -143,6 +143,52 @@ class CreditCardPaymentController: BaseFormViewController {
         return view
     }()
     
+    // email and phone fields and errors
+    private lazy var emailLabel: UILabel = {
+        let label = UILabel()
+        label.text("CreditCard.field.email".localized())
+        configure(label)
+        return label
+    }()
+    
+    private lazy var emailTextField: EmailTextField = {
+        let tf = EmailTextField()
+        tf.setAccessibilityID("CreditCardForm.emailTextField")
+        configure(tf)
+        return tf
+    }()
+    
+    private lazy var emailErrorLabel: UILabel = {
+        let label = UILabel()
+        label.text = "-"
+        label.setAccessibilityID("CreditCardForm.emailError")
+        configureError(label)
+        return label
+    }()
+    
+    private lazy var phoneLabel: UILabel = {
+        let label = UILabel()
+        label.text("CreditCard.field.phone".localized())
+        configure(label)
+        return label
+    }()
+    
+    private lazy var phoneTextField: PhoneNumberTextField = {
+        let tf = PhoneNumberTextField()
+        tf.setAccessibilityID("CreditCardForm.phoneTextField")
+        tf.phoneDelegate = self
+        configure(tf)
+        return tf
+    }()
+    
+    private lazy var phoneErrorLabel: UILabel = {
+        let label = UILabel()
+        label.text = "-"
+        label.setAccessibilityID("CreditCardForm.phoneError")
+        configureError(label)
+        return label
+    }()
+    
     private lazy var submitButton: MainActionButton = {
         let button = MainActionButton()
         configure(button)
@@ -260,6 +306,20 @@ class CreditCardPaymentController: BaseFormViewController {
             submitButton
         ])
         
+        if viewModel.output.shouldshowEmailField {
+            formStack.addArrangedSubview(
+                getStackViewGroup(for: [emailLabel, emailTextField, emailErrorLabel])
+            )
+        }
+        
+        if viewModel.output.shouldShowPhoneField {
+            formStack.addArrangedSubview(
+                getStackViewGroup(for: [phoneLabel, phoneTextField, phoneErrorLabel])
+            )
+        }
+        
+        formStack.addArrangedSubview(submitButton)
+        
         // activity spinner
         contentView.addSubview(requestingIndicatorView)
         requestingIndicatorView.setToCenter(of: submitButton)
@@ -281,9 +341,11 @@ class CreditCardPaymentController: BaseFormViewController {
             }
         }
         
-        viewModel.input.set { [weak self] country in
+        viewModel.input.set { [weak self] (country: Country) in
             guard let self = self else { return }
             self.countryFieldView.text = country.name
+            // One-way sync: country -> phone prefix
+            self.phoneTextField.setCountry(country)
             self.dismissViewController()
             self.handleAddressFieldsDisplay()
             self.validateFieldData()
@@ -306,6 +368,14 @@ class CreditCardPaymentController: BaseFormViewController {
                 stateFieldView.textField,
                 zipCodeFieldView.textField
             ])
+        }
+        
+        // Add email and phone fields if not hidden
+        if viewModel.output.shouldshowEmailField {
+            formFields.append(emailTextField)
+        }
+        if viewModel.output.shouldShowPhoneField {
+            formFields.append(phoneTextField)
         }
         
         contentView.adjustContentInsetOnKeyboardAppear()
@@ -345,7 +415,10 @@ class CreditCardPaymentController: BaseFormViewController {
                                         address: addressFieldView.text,
                                         state: stateFieldView.text,
                                         city: cityFieldView.text,
-                                        zipcode: zipCodeFieldView.text)
+                                        zipcode: zipCodeFieldView.text,
+                                        email: viewModel.output.shouldshowEmailField ?
+                                        emailTextField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) : nil,
+                                        phoneNumber: viewModel.output.shouldShowPhoneField ? phoneTextField.fullPhoneNumber : nil)
         viewModel.input.startPayment(for: payment)
     }
     
@@ -410,6 +483,10 @@ class CreditCardPaymentController: BaseFormViewController {
                 errorLabel.text(viewModel.output.expiryError)
             case (OmiseTextFieldValidationError.invalidData, cvvTextField):
                 errorLabel.text(viewModel.output.cvvError)
+            case (OmiseTextFieldValidationError.invalidData, emailTextField):
+                errorLabel.text(viewModel.output.emailError)
+            case (OmiseTextFieldValidationError.invalidData, phoneTextField):
+                errorLabel.text(viewModel.output.phoneError)
             default:
                 errorLabel.text(error.localizedDescription)
             }
@@ -444,6 +521,14 @@ class CreditCardPaymentController: BaseFormViewController {
         case zipCodeFieldTag: zipCodeFieldView.error = nil
         default: break
         }
+    }
+}
+
+// MARK: - PhoneNumberTextField Delegate
+extension CreditCardPaymentController: PhoneNumberTextFieldDelegate {
+    func phoneNumberTextField(_ textField: PhoneNumberTextField, didSelectCountry country: Country) {
+        // Phone prefix changes don't affect the country/region field above
+        // This is one-way sync: country -> phone prefix only
     }
 }
 
@@ -505,6 +590,8 @@ extension CreditCardPaymentController {
         case cardNumberTextField: return cardNumberErrorLabel
         case expiryDateTextField: return expiryDateErrorLabel
         case cvvTextField: return cvvErrorLabel
+        case emailTextField: return emailErrorLabel
+        case phoneTextField: return phoneErrorLabel
         default: return nil
         }
     }

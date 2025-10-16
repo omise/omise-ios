@@ -220,7 +220,7 @@ final class CardExpiryDateTextFieldTests: XCTestCase {
         XCTAssertNotNil(field.expirationMonthAccessibilityElement)
         XCTAssertNotNil(field.expirationYearAccessibilityElement)
         XCTAssertEqual(field.keyboardType, .numberPad)
-        XCTAssertTrue(field.delegate === field)
+        XCTAssertIdentical(field.delegate, field)
     }
     
     func testParseCardExpiryDate_regexBranch_setsMonthOnlyAndLeavesTextAlone() {

@@ -13,7 +13,7 @@ final class ViewControllerExtensionsTests: XCTestCase {
         guard let container = parentView.subviews.first as? ViewContainer else {
             return XCTFail("Expected a ViewContainer subview")
         }
-        XCTAssertTrue(container.object as AnyObject === dummy as AnyObject)
+        XCTAssertIdentical(container.object as AnyObject, dummy as AnyObject)
         XCTAssertEqual(container.backgroundColor, .clear)
         XCTAssertFalse(container.isUserInteractionEnabled)
     }
@@ -28,7 +28,7 @@ final class ViewControllerExtensionsTests: XCTestCase {
         guard let container = vc.view.subviews.first as? ViewContainer else {
             return XCTFail("Expected a ViewContainer subview in view controller's view")
         }
-        XCTAssertTrue(container.object as AnyObject === dummy as AnyObject)
+        XCTAssertIdentical(container.object as AnyObject, dummy as AnyObject)
         XCTAssertEqual(container.backgroundColor, .clear)
         XCTAssertFalse(container.isUserInteractionEnabled)
     }
@@ -45,8 +45,8 @@ final class ViewControllerExtensionsTests: XCTestCase {
         XCTAssertEqual(parentView.subviews.count, 2)
         let containers = parentView.subviews.compactMap { $0 as? ViewContainer }
         XCTAssertEqual(containers.count, 2)
-        XCTAssertTrue(containers[0].object as AnyObject === a as AnyObject)
-        XCTAssertTrue(containers[1].object as AnyObject === b as AnyObject)
+        XCTAssertIdentical(containers[0].object as AnyObject, a as AnyObject)
+        XCTAssertIdentical(containers[1].object as AnyObject, b as AnyObject)
     }
     
     // MARK: - BarButton
@@ -67,7 +67,7 @@ final class ViewControllerExtensionsTests: XCTestCase {
             return XCTFail("accessoryView should be a UIActivityIndicatorView")
         }
         XCTAssertTrue(indicator.isAnimating)
-        XCTAssertEqual(indicator.style, .gray)
+        XCTAssertEqual(indicator.style, .medium)
         XCTAssertEqual(indicator.color.hexString, UIColor.omiseSecondary.hexString)
         XCTAssertFalse(cell.isUserInteractionEnabled)
     }
@@ -94,7 +94,7 @@ final class ViewControllerExtensionsTests: XCTestCase {
         guard let restored = cell.accessoryView as? UIImageView else {
             return XCTFail("accessoryView should be restored to the custom view")
         }
-        XCTAssertTrue(restored === customView)
+        XCTAssertIdentical(restored, customView)
         XCTAssertFalse(cell.isUserInteractionEnabled)
     }
 }

@@ -13,6 +13,7 @@ class CreditCardPaymentFormViewModelTests: XCTestCase {
         sut = CreditCardPaymentFormViewModel(
             country: country,
             paymentOption: .card,
+            collect3DSData: .all,
             delegate: mockDelegate
         )
     }
@@ -57,7 +58,9 @@ class CreditCardPaymentFormViewModelTests: XCTestCase {
             address: "1 Infinite Loop",
             state: "Bangkok",
             city: "Bangkok",
-            zipcode: "95014"
+            zipcode: "95014",
+            email: "example@example.com",
+            phoneNumber: "66934344388"
         )
         var loadingStates: [Bool] = []
         sut.input.set { loadingStates.append($0) }
@@ -96,6 +99,8 @@ class CreditCardPaymentFormViewModelTests: XCTestCase {
         XCTAssertFalse(sut.output.nameError.isEmpty)
         XCTAssertFalse(sut.output.expiryError.isEmpty)
         XCTAssertFalse(sut.output.cvvError.isEmpty)
+        XCTAssertFalse(sut.output.emailError.isEmpty)
+        XCTAssertFalse(sut.output.phoneError.isEmpty)
     }
     
     func test_shouldShowAddressFields_reflectsCountryAVS() {
@@ -106,11 +111,62 @@ class CreditCardPaymentFormViewModelTests: XCTestCase {
         sut.selectedCountry = avsCountry
         XCTAssertTrue(sut.output.shouldAddressFields)
     }
-    
+
     func test_allCountries() {
         let allCodes      = Set(Country.all.map { $0.code })
         let sutCodes      = Set(sut.countries.map { $0.code })
         
         XCTAssertEqual(sutCodes, allCodes)
+    }
+
+    func test_filterCountries_updatesFilteredListAndReset() {
+        sut.filterCountries(with: "thai")
+        XCTAssertTrue(sut.filteredCountries.contains { $0.code == "TH" })
+
+        sut.filterCountries(with: "jp")
+        XCTAssertTrue(sut.filteredCountries.contains { $0.code == "JP" })
+
+        sut.filterCountries(with: "")
+        XCTAssertEqual(sut.filteredCountries.count, sut.countries.count)
+    }
+
+    func test_updateSelectedCountry_usesFilteredResultsAndGuardsBounds() {
+        sut.filterCountries(with: "us")
+
+        let outOfRangeIndex = sut.filteredCountries.count
+        sut.updateSelectedCountry(at: outOfRangeIndex)
+        XCTAssertEqual(sut.selectedCountry?.code, "TH")
+
+        if let index = sut.filteredCountries.firstIndex(where: { $0.code == "US" }) {
+            sut.updateSelectedCountry(at: index)
+            XCTAssertEqual(sut.selectedCountry?.code, "US")
+        } else {
+            XCTFail("Expected US to be part of filtered list")
+        }
+    }
+
+    func test_shouldShowEmailAndPhoneFields_follow3DSRequirements() {
+        XCTAssertTrue(sut.output.shouldshowEmailField)
+        XCTAssertTrue(sut.output.shouldShowPhoneField)
+
+        let phoneOnly = CreditCardPaymentFormViewModel(
+            country: Country(code: "SG"),
+            paymentOption: .card,
+            collect3DSData: .phoneNumber,
+            delegate: mockDelegate
+        )
+
+        XCTAssertFalse(phoneOnly.output.shouldshowEmailField)
+        XCTAssertTrue(phoneOnly.output.shouldShowPhoneField)
+
+        let emailOnly = CreditCardPaymentFormViewModel(
+            country: Country(code: "SG"),
+            paymentOption: .card,
+            collect3DSData: .email,
+            delegate: mockDelegate
+        )
+
+        XCTAssertTrue(emailOnly.output.shouldshowEmailField)
+        XCTAssertFalse(emailOnly.output.shouldShowPhoneField)
     }
 }

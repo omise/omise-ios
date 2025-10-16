@@ -81,6 +81,12 @@
 "CreditCard.field.securityCode" = "รหัสความปลอดภัย";
 "CreditCard.field.mmyy.placeholder" = "ดด/ปป";
 "CreditCard.payButton.title" = "ชำระเงิน";
+"CreditCard.field.email" = "อีเมล์";
+"CreditCard.field.phone" = "โทร.";
+
+"CreditCard.search.country.hint" = "ค้นหาประเทศ";
+"CreditCard.search.country.code.hint" = "ค้นหาประเทศหรือรหัสประเทศ";
+"CreditCard.search.country.code.title" = "เลือกรหัสประเทศ";
 
 "CreditCard.cvv.details.amex.text" = "หมายเลข 4 หลักบนหน้าบัตร";
 "CreditCard.cvv.details.default.text" = "หมายเลข 3 หลักด้านหลังบัตร";

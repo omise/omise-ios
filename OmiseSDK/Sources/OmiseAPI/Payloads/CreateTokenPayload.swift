@@ -25,6 +25,8 @@ public struct CreateTokenPayload: Codable, Equatable {
         public let securityCode: String
         /// Phone Numeber
         public let phoneNumber: String?
+        /// Email
+        public let email: String?
         /// Address country as two-letter ISO 3166 code
         public let countryCode: String?
         /// Address city
@@ -38,13 +40,28 @@ public struct CreateTokenPayload: Codable, Equatable {
         /// Address postal code
         public let postalCode: String?
 
-        public init(name: String, number: String, expirationMonth: Int, expirationYear: Int, securityCode: String, phoneNumber: String? = nil, countryCode: String? = nil, city: String? = nil, state: String? = nil, street1: String? = nil, street2: String? = nil, postalCode: String? = nil) {
+        public init(
+            name: String,
+            number: String,
+            expirationMonth: Int,
+            expirationYear: Int,
+            securityCode: String,
+            phoneNumber: String? = nil,
+            email: String? = nil,
+            countryCode: String? = nil,
+            city: String? = nil,
+            state: String? = nil,
+            street1: String? = nil,
+            street2: String? = nil,
+            postalCode: String? = nil
+        ) {
             self.name = name
             self.number = number
             self.expirationMonth = expirationMonth
             self.expirationYear = expirationYear
             self.securityCode = securityCode
             self.phoneNumber = phoneNumber
+            self.email = email
             self.countryCode = countryCode
             self.city = city
             self.postalCode = postalCode
@@ -63,6 +80,7 @@ extension CreateTokenPayload.Card: Codable {
         case expirationYear = "expiration_year"
         case securityCode = "security_code"
         case phoneNumber = "phone_number"
+        case email = "email"
         case countryCode = "country"
         case city
         case postalCode = "postal_code"

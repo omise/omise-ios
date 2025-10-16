@@ -26,7 +26,14 @@ extension Source.Payment {
         ///   - shipping: Shipping address
         ///   - billing: Billing address
         ///   - items: Items details
-        public init(phoneNumber: String, name: String? = nil, email: String? = nil, shipping: Address, billing: Source.Payment.Address?, items: [Source.Payment.Item]) {
+        public init(
+            phoneNumber: String,
+            name: String? = nil,
+            email: String? = nil,
+            shipping: Address,
+            billing: Source.Payment.Address?,
+            items: [Source.Payment.Item]
+        ) {
             self.name = name
             self.email = email
             self.phoneNumber = phoneNumber

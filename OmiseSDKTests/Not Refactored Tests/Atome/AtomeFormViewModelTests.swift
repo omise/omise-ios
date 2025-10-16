@@ -10,7 +10,7 @@ class AtomePaymentFormViewModelTests: XCTestCase {
     let invalidCases = TestCaseValueGenerator.invalidCases(AtomePaymentFormViewContext.generateMockup)
     let mostInvalidCases = TestCaseValueGenerator.mostInvalidCases(AtomePaymentFormViewContext.generateMockup)
     let allCountriesCodes: [String] = [ // swiftlint:disable:next line_length
-        "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "CV", "KH", "CM", "CA", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "SZ", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MK", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "UM", "US", "UY", "UZ", "VU", "VE", "VN", "VI", "VG", "WF", "EH", "YE", "ZM", "ZW"
+        "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "CV", "KH", "CM", "CA", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "SZ", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MK", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "UM", "US", "UY", "UZ", "VU", "VE", "VN", "VI", "VG", "WF", "EH", "YE", "ZM", "ZW"
     ]
     let contextDict: [AtomePaymentFormViewContext.Field: String] = [
         .name: "Test User",
@@ -71,6 +71,41 @@ class AtomePaymentFormViewModelTests: XCTestCase {
         let newCountry = Country(name: "United States", code: "US")
         sut.selectedCountry = newCountry
         XCTAssertEqual(captured?.code, "US")
+    }
+
+    func testFilterCountries_matchesByCodeOrName() {
+        let fixture = [
+            Country(name: "Thailand", code: "TH"),
+            Country(name: "United States", code: "US"),
+            Country(name: "Canada", code: "CA")
+        ]
+        sut.countries = fixture
+
+        sut.filterCountries(with: "th")
+        XCTAssertEqual(sut.filteredCountries.map { $0.code }, ["TH"])
+
+        sut.filterCountries(with: "US")
+        XCTAssertEqual(sut.filteredCountries.map { $0.code }, ["US"])
+
+        sut.filterCountries(with: "bn123")
+        XCTAssertEqual(sut.filteredCountries, fixture)
+    }
+
+    func testUpdateSelectedCountry_usesFilteredListAndGuardsInvalidIndex() {
+        sut.filterCountries(with: "us")
+        sut.updateSelectedCountry(at: sut.filteredCountries.count + 5)
+        XCTAssertEqual(sut.selectedCountry?.code, "TH")
+
+        if let usIndex = sut.filteredCountries.firstIndex(where: { $0.code == "US" }) {
+            sut.updateSelectedCountry(at: usIndex)
+            XCTAssertEqual(sut.selectedCountry?.code, "US")
+        } else {
+            XCTFail("Expected US in filtered results")
+        }
+        sut.filterCountries(with: "")
+        XCTAssertEqual(sut.selectedCountry?.code, "US")
+        sut.filterCountries(with: "ca")
+        XCTAssertEqual(sut.selectedCountry?.code, "US")
     }
     
     func testBillingAddressFields_areInExpectedOrder() {

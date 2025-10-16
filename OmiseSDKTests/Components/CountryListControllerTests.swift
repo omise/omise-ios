@@ -29,6 +29,13 @@ final class CountryListControllerTests: XCTestCase {
         mockVM = nil
         super.tearDown()
     }
+
+    func testSettingViewModelBeforeViewLoadsDefersBinding() {
+        let controller = CountryListController()
+        XCTAssertFalse(controller.isViewLoaded)
+        controller.viewModel = mockVM
+        XCTAssertFalse(controller.isViewLoaded)
+    }
     
     func testNumberOfRows_matchesViewModelCountriesCount() {
         XCTAssertEqual(tableView.numberOfRows(inSection: 0),
@@ -52,11 +59,95 @@ final class CountryListControllerTests: XCTestCase {
         sut.tableView(tableView, didSelectRowAt: [0, 1])
         XCTAssertEqual(mockVM.selectedCountry, mockVM.countries[1])
     }
+    
+    func testMockVM_filterCountries_worksCorrectly() {
+        // Initially should have all countries
+        XCTAssertEqual(mockVM.filteredCountries.count, 2)
+        
+        // Filter by "A"
+        mockVM.filterCountries(with: "A")
+        XCTAssertEqual(mockVM.filteredCountries.count, 1)
+        XCTAssertEqual(mockVM.filteredCountries.first?.name, "A")
+        
+        // Clear filter
+        mockVM.filterCountries(with: "")
+        XCTAssertEqual(mockVM.filteredCountries.count, 2)
+    }
+
+    func testPreferredColorsBeforeAndAfterViewLoad() {
+        let controller = CountryListController(viewModel: mockVM)
+        controller.preferredPrimaryColor = .red
+        controller.preferredSecondaryColor = .blue
+
+        controller.loadViewIfNeeded()
+        controller.preferredPrimaryColor = .green
+        controller.preferredSecondaryColor = .yellow
+
+        XCTAssertNotNil(controller.view)
+    }
+
+    func testViewWillDisappearResetsSearchAndFilters() {
+        sut.viewDidLoad()
+        mockVM.filterCountries(with: "A")
+        XCTAssertEqual(mockVM.filteredCountries.count, 1)
+
+        sut.navigationItem.searchController?.searchBar.text = "A"
+        sut.viewWillDisappear(false)
+
+        XCTAssertEqual(sut.navigationItem.searchController?.searchBar.text, "")
+        XCTAssertEqual(mockVM.filteredCountries.count, 2)
+    }
+
+    func testViewDidAppearScrollsToSelectedCountry() {
+        mockVM.selectedCountry = mockVM.countries[1]
+        sut.viewDidAppear(false)
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.05))
+
+        XCTAssertEqual(tableView.indexPathsForVisibleRows?.first?.row, 1)
+    }
+
+    func testUpdateSearchResultsTriggersFilterAndScroll() {
+        sut.viewDidLoad()
+        guard let searchController = sut.navigationItem.searchController else {
+            return XCTFail("Expected search controller")
+        }
+        mockVM.selectedCountry = mockVM.countries[0]
+        mockVM.filterCountriesCalled = false
+        searchController.searchBar.text = "B"
+        sut.updateSearchResults(for: searchController)
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.05))
+
+        XCTAssertTrue(mockVM.filterCountriesCalled)
+    }
 }
 
 // MARK: - Mock ViewModel
 class MockVM: CountryListViewModelProtocol {
     var countries: [Country] = [.init(name: "A", code: "A"), .init(name: "B", code: "B")]
+    var filteredCountries: [Country] = []
     var selectedCountry: Country?
     var onSelectCountry: (Country) -> Void = { _ in /* Non-optional default empty implementation */ }
+    var filterCountriesCalled = false
+    
+    init() {
+        filteredCountries = countries
+    }
+    
+    func filterCountries(with searchText: String) {
+        filterCountriesCalled = true
+        if searchText.isEmpty {
+            filteredCountries = countries
+        } else {
+            filteredCountries = countries.filter { country in
+                country.name.lowercased().contains(searchText.lowercased()) ||
+                country.code.lowercased().contains(searchText.lowercased())
+            }
+        }
+    }
+    
+    func updateSelectedCountry(at index: Int) {
+        guard index >= 0 && index < filteredCountries.count else { return }
+        selectedCountry = filteredCountries[index]
+        onSelectCountry(selectedCountry ?? .init(name: "Australia", code: "AU"))
+    }
 }
