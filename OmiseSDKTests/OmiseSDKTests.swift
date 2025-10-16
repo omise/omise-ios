@@ -86,8 +86,8 @@ class OmiseSDKTests: XCTestCase {
     func test_versionMatchesSemanticVersionFormat() throws {
         let version = sut.version
         
-        // semantic versioning: major.minor.patch
-        let semverRegex = #"^\d+\.\d+\.\d+$"#
+        // semantic versioning: major.minor.patch with optional pre-release suffix (e.g. -alpha.1)
+        let semverRegex = #"^\d+\.\d+\.\d+(-[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?$"#
         
         let regex = try NSRegularExpression(pattern: semverRegex, options: [])
         let range = NSRange(location: 0, length: version.utf16.count)
