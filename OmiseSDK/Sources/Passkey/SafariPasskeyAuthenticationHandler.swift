@@ -14,7 +14,7 @@ class SafariPasskeyAuthenticationHandler: PasskeyAuthenticationProtocol {
             return false
         }
         
-        let requiredParams = ["signature"] // "t", "sigv" - could add these if confirmd
+        let requiredParams = ["signature"] // "t", "sigv" - could add these if confirmed
         let presentParams = Set(queryItems.compactMap { $0.name })
         
         // Check if all required parameters are present

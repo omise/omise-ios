@@ -21,9 +21,9 @@ class SafariPasskeyAuthenticationHandlerTests: XCTestCase {
         mockDelegate = nil
     }
     
-    // MARK: - shouldHanlePasskey Tests
+    // MARK: - shouldHandlePasskey Tests
     
-    func test_shouldHanlePasskey_withSignatureParam_returnsTrue() throws {
+    func test_shouldHandlePasskey_withSignatureParam_returnsTrue() throws {
         // Given
         let urlWithSignature = try XCTUnwrap(URL(string: "https://sample.domain/?signature=aBcdXyzlibc"))
         
@@ -34,7 +34,7 @@ class SafariPasskeyAuthenticationHandlerTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_shouldHanlePasskey_withSignatureAndExtraParams_returnsTrue() throws {
+    func test_shouldHandlePasskey_withSignatureAndExtraParams_returnsTrue() throws {
         // Given
         let urlWithSignatureAndExtras = try XCTUnwrap(URL(string: "https://sample.domain/?t=opaqueToken&signature=aBcdXyzlibc&sigv=1&extra=value"))
         
@@ -45,7 +45,7 @@ class SafariPasskeyAuthenticationHandlerTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_shouldHanlePasskey_withMissingSignatureParam_returnsFalse() throws {
+    func test_shouldHandlePasskey_withMissingSignatureParam_returnsFalse() throws {
         // Given
         let urlMissingSignature = try XCTUnwrap(URL(string: "https://sample.domain/?t=opaqueToken&sigv=1"))
         
@@ -56,7 +56,7 @@ class SafariPasskeyAuthenticationHandlerTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_shouldHanlePasskey_withNoQueryParams_returnsFalse() throws {
+    func test_shouldHandlePasskey_withNoQueryParams_returnsFalse() throws {
         // Given
         let urlWithoutParams = try XCTUnwrap(URL(string: "https://sample.domain/"))
         
@@ -67,7 +67,7 @@ class SafariPasskeyAuthenticationHandlerTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_shouldHanlePasskey_withEmptySignatureValue_returnsTrue() throws {
+    func test_shouldHandlePasskey_withEmptySignatureValue_returnsTrue() throws {
         // Given - Signature param present but with empty value
         let urlWithEmptySignature = try XCTUnwrap(URL(string: "https://sample.domain/?signature="))
         
@@ -78,7 +78,7 @@ class SafariPasskeyAuthenticationHandlerTests: XCTestCase {
         XCTAssertTrue(result) // Should return true as long as parameter name is present
     }
     
-    func test_shouldHanlePasskey_withOnlyOtherParams_returnsFalse() throws {
+    func test_shouldHandlePasskey_withOnlyOtherParams_returnsFalse() throws {
         // Given - Has other params but not signature
         let urlWithOtherParams = try XCTUnwrap(URL(string: "https://sample.domain/?t=token&sigv=1&other=value"))
         
@@ -89,7 +89,7 @@ class SafariPasskeyAuthenticationHandlerTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_shouldHanlePasskey_withCaseSensitiveParam_returnsFalse() throws {
+    func test_shouldHandlePasskey_withCaseSensitiveParam_returnsFalse() throws {
         // Given - Different case for signature param
         let urlWithWrongCase = try XCTUnwrap(URL(string: "https://sample.domain/?SIGNATURE=aBcdXyzlibc"))
         
@@ -100,7 +100,7 @@ class SafariPasskeyAuthenticationHandlerTests: XCTestCase {
         XCTAssertFalse(result) // Parameter names are case-sensitive
     }
     
-    func test_shouldHanlePasskey_withMultipleSignatureParams_returnsTrue() throws {
+    func test_shouldHandlePasskey_withMultipleSignatureParams_returnsTrue() throws {
         // Given - Multiple signature params (which is valid in URLs)
         let urlWithMultipleSignatures = try XCTUnwrap(URL(string: "https://sample.domain/?signature=first&signature=second"))
         

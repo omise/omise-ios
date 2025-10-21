@@ -2,7 +2,7 @@ import XCTest
 @testable import OmiseSDK
 
 class MockPasskeyAuthenticationHandler: PasskeyAuthenticationProtocol {
-    var shouldHanlePasskeyCallCount = 0
+    var shouldHandlePasskeyCallCount = 0
     var presentPasskeyAuthenticationCallCount = 0
     var handlePasskeyCallbackCallCount = 0
     var lastPresentedURL: URL?
@@ -12,7 +12,7 @@ class MockPasskeyAuthenticationHandler: PasskeyAuthenticationProtocol {
     var shouldReturnTrueForShouldHandle = false
     
     func shouldHandlePasskey(_ url: URL) -> Bool {
-        shouldHanlePasskeyCallCount += 1
+        shouldHandlePasskeyCallCount += 1
         return shouldReturnTrueForShouldHandle
     }
     
