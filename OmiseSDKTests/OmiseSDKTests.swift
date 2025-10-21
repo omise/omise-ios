@@ -77,6 +77,20 @@ class OmiseSDKTests: XCTestCase {
         let billingFields = result["applePayRequiredBillingContactFields"] as? [String]
         XCTAssertNotNil(billingFields)
         XCTAssertEqual(billingFields, ["emailAddress", "name", "phoneNumber", "postalAddress"])
+        XCTAssertNil(result["cardHolderData"])
+    }
+
+    func test_BuildPaymentArgument_IncludesCardHolderDataWhenRequested() {
+        let result = sut.buildPaymentArguments(
+            publicKey: "pk_test",
+            amount: 100,
+            currency: "THB",
+            requestBillingAddress: false,
+            collect3DSData: .all
+        )
+        
+        let payload = result["cardHolderData"] as? [String]
+        XCTAssertEqual(payload, ["email", "phoneNumber"])
     }
     
     func test_versionIsNotEmpty() {
@@ -142,8 +156,28 @@ class OmiseSDKTests: XCTestCase {
         
         let tokenMethods = args["selectedTokenizationMethods"] as? [String] ?? []
         XCTAssertEqual(tokenMethods, [SourceType.applePay.rawValue])
+        XCTAssertNil(args["cardHolderData"])
     }
     
+    func testPresentChoosePaymentMethod_forwardsCollect3DSData() throws {
+        // Act
+        sut.presentChoosePaymentMethod(
+            from: dummyVC,
+            animated: false,
+            amount: 5000,
+            currency: "USD",
+            allowedPaymentMethods: [.internetBankingBAY],
+            skipCapabilityValidation: false,
+            isCardPaymentAllowed: true,
+            handleErrors: true,
+            collect3DSData: .phoneNumber,
+            delegate: mockDelegate
+        )
+        
+        let call = try XCTUnwrap(mockFlutterEngineManager.presentCalls.last)
+        XCTAssertEqual(call.arguments["cardHolderData"] as? [String], ["phoneNumber"])
+    }
+
     func testPresentCreditCardPayment_forwardsCorrectArgs() throws {
         // Act
         sut.presentCreditCardPayment(
@@ -151,6 +185,7 @@ class OmiseSDKTests: XCTestCase {
             animated: true,
             countryCode: "TH",
             handleErrors: true,
+            collect3DSData: .email,
             delegate: mockDelegate
         )
         
@@ -166,7 +201,8 @@ class OmiseSDKTests: XCTestCase {
         
         let args = call.arguments
         XCTAssertEqual(args["pkey"] as? String, "pkey_my_key")
-        XCTAssertEqual(args.count, 1)
+        XCTAssertEqual(args["cardHolderData"] as? [String], ["email"])
+        XCTAssertEqual(args.count, 2)
     }
     
     func testUpdatePublicKey() {

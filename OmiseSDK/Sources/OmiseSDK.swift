@@ -3,6 +3,7 @@ import UIKit
 import Flutter
 import FlutterPluginRegistrant
 
+// swiftlint:disable file_length
 public class OmiseSDK {
     /// Static container that allows to assign a shared instance of OmiseSDK to be used as a Singleton object
     public static var shared = OmiseSDK(publicKey: "pkey_")
@@ -30,6 +31,7 @@ public class OmiseSDK {
     
     private var expectedReturnURLStrings: [String] = []
     private var netceteraThreeDSController: NetceteraThreeDSController?
+    private var passkeyHandler: PasskeyAuthenticationProtocol
     
     internal var flutterEngineManager: FlutterEngineManager
     /// Creates a new instance of Omise SDK that provides interface to functionallity that SDK provides
@@ -75,6 +77,45 @@ public class OmiseSDK {
             channelHander: channelHander
         )
         
+        self.passkeyHandler = SafariPasskeyAuthenticationHandler()
+        
+        preloadCapabilityAPI()
+    }
+    
+    // Internal initializer for testing
+    internal init(
+        publicKey: String,
+        configuration: Configuration? = nil,
+        passkeyAuthenticationHandler: PasskeyAuthenticationProtocol
+    ) {
+        self.publicKey = publicKey
+        self.client = Client(
+            publicKey: publicKey,
+            version: version,
+            network: NetworkService(),
+            apiURL: configuration?.apiURL,
+            vaultURL: configuration?.vaultURL
+        )
+        self.passkeyHandler = passkeyAuthenticationHandler
+        
+        // flutter
+        let flutterEngine = FlutterEngine(name: OmiseFlutter.engineName)  // Initialize a new Flutter engine with a custom name
+        flutterEngine.run()  // Start the Flutter engine to prepare it for communication
+        GeneratedPluginRegistrant.register(with: flutterEngine)
+        
+        /// Create a Flutter method channel with a specified name
+        /// Use the engine's binary messenger for communication
+        let methodChannel = FlutterMethodChannel(name: OmiseFlutter.channelName,
+                                                 binaryMessenger: flutterEngine.binaryMessenger)
+        /// Instantiate the custom channel handler to handle communication via the method channel
+        let channelHander = FlutterChannelHandlerImpl(channel: FlutterMethodChannelWrapper(channel: methodChannel))
+        
+        flutterEngineManager = FlutterEngineManagerImpl(
+            flutterEngine: flutterEngine,
+            methodChannel: methodChannel,
+            channelHander: channelHander
+        )
+        
         preloadCapabilityAPI()
     }
     
@@ -89,6 +130,7 @@ public class OmiseSDK {
     ///    - skipCapabilityValidation: Set `false` to filter payment methods presented in Capability (default), `true` to skip validation (for testing)
     ///    - isCardPaymentAllowed: Should present Card Payment Method in the list
     ///    - handleErrors: If `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
+    ///    - collect3DSData: either none, phone, email or all, default is none. this will render email and/or phone fields in credit card form to support 3DS and PASSKEY auth
     ///    - completion: Completion handler triggered when payment completes with Token, Source, Error or was Cancelled
     public func presentChoosePaymentMethod(
         from topViewController: UIViewController,
@@ -99,6 +141,7 @@ public class OmiseSDK {
         skipCapabilityValidation: Bool = false,
         isCardPaymentAllowed: Bool = true,
         handleErrors: Bool = true,
+        collect3DSData: Required3DSData = .none,
         delegate: ChoosePaymentMethodDelegate
     ) {
         dismiss(animated: false)
@@ -117,7 +160,8 @@ public class OmiseSDK {
                                               paymentMethods: paymentMethod,
                                               tokenizationMethods: tokenizationMethod,
                                               merchantId: applePayInfo?.merchantIdentifier,
-                                              requestBillingAddress: applePayInfo?.requestBillingAddress ?? false
+                                              requestBillingAddress: applePayInfo?.requestBillingAddress ?? false,
+                                              collect3DSData: collect3DSData
         )
         
         flutterEngineManager.presentFlutterViewController(for: .selectPaymentMethod,
@@ -133,16 +177,18 @@ public class OmiseSDK {
     ///    - animated: Presents controller with animation if `true`
     ///    - countryCode: Country to be preselected in the form. If `nil` country from Capabilities will be used instead.
     ///    - handleErrors: If `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
+    ///    - collect3DSData: either none, phone, email or all, default is none. this will render email and/or phone fields in credit card form to support 3DS and PASSKEY auth
     ///    - delegate: Delegate to be notified when Source or Token is created
     public func presentCreditCardPayment(
         from topViewController: UIViewController,
         animated: Bool = true,
         countryCode: String? = nil,
         handleErrors: Bool = true,
+        collect3DSData: Required3DSData = .none,
         delegate: ChoosePaymentMethodDelegate
     ) {
         dismiss(animated: false)
-        let args: [String: Any] = buildBasicArgument(with: publicKey)
+        let args: [String: Any] = buildBasicArgument(with: publicKey, collect3DSData: collect3DSData)
         flutterEngineManager.presentFlutterViewController(for: .openCardPage,
                                                           on: topViewController,
                                                           arguments: args,
@@ -168,6 +214,16 @@ public class OmiseSDK {
         threeDSUICustomization: ThreeDSUICustomization? = nil,
         delegate: AuthorizingPaymentDelegate
     ) {
+        // Passkey
+        if passkeyHandler.shouldHandlePasskey(authorizeURL) {
+            passkeyHandler.presentPasskeyAuthentication(
+                from: topViewController,
+                authorizeURL: authorizeURL,
+                expectedReturnURLStrings: expectedReturnURLStrings,
+                delegate: delegate
+            )
+            return
+        }
         guard authorizeURL.absoluteString.contains("acs=true") else {
             presentWebViewAuthorizingPayment(
                 from: topViewController,
@@ -178,7 +234,6 @@ public class OmiseSDK {
             )
             return
         }
-        
         netceteraThreeDSController = NetceteraThreeDSController()
         netceteraThreeDSController?.processAuthorizedURL(
             authorizeURL,
@@ -190,13 +245,12 @@ public class OmiseSDK {
             case .success:
                 delegate.authorizingPaymentDidComplete(with: nil)
             case .failure(let error):
-                typealias NetceteraFlowError = NetceteraThreeDSController.Errors
                 switch error {
-                case NetceteraFlowError.incomplete,
-                    NetceteraFlowError.cancelled,
-                    NetceteraFlowError.timedout,
-                    NetceteraFlowError.authResStatusFailed,
-                    NetceteraFlowError.authResStatusUnknown:
+                case NetceteraThreeDSController.Errors.incomplete,
+                    NetceteraThreeDSController.Errors.cancelled,
+                    NetceteraThreeDSController.Errors.timedout,
+                    NetceteraThreeDSController.Errors.authResStatusFailed,
+                    NetceteraThreeDSController.Errors.authResStatusUnknown:
                     delegate.authorizingPaymentDidCancel()
                 default:
                     DispatchQueue.main.async {
@@ -216,6 +270,11 @@ public class OmiseSDK {
     /// Dismiss any presented UI form by OmiseSDK
     /// Clear Flutter Screen
     public func dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
+        // Clean up Safari passkey authentication if active
+        if let handler = passkeyHandler as? SafariPasskeyAuthenticationHandler {
+            handler.dismiss(animated: animated, completion: completion)
+        }
+        
         flutterEngineManager.detachFlutterViewController(animated: animated)
         
         guard let presentedViewController = presentedViewController else {
@@ -227,6 +286,11 @@ public class OmiseSDK {
     
     /// Handle URL Callback received by AppDelegate
     public func handleURLCallback(_ url: URL) -> Bool {
+        // First try passkey authentication handler
+        if passkeyHandler.handlePasskeyCallback(url) {
+            return true
+        }
+        
         // Will handle callback with 3ds library
         let containsURL = expectedReturnURLStrings
             .map {
@@ -312,9 +376,10 @@ extension OmiseSDK {
         returnURLs: [String]? = nil,
         merchantId: String? = nil,
         requestBillingAddress: Bool,
+        collect3DSData: Required3DSData = .none,
         atomeItems: [[String: Any]]? = nil
     ) -> [String: Any] {
-        var arguments = buildBasicArgument(with: publicKey)
+        var arguments = buildBasicArgument(with: publicKey, collect3DSData: collect3DSData)
         
         arguments["amount"] = amount
         arguments["currency"] = currency
@@ -340,7 +405,13 @@ extension OmiseSDK {
         return arguments
     }
     
-    func buildBasicArgument(with pkey: String) -> [String: Any] {
-        return ["pkey": pkey]
+    func buildBasicArgument(with pkey: String, collect3DSData: Required3DSData) -> [String: Any] {
+        var arguments: [String: Any] = ["pkey": pkey]
+        if let cardHolderData = collect3DSData.parsedArgument {
+            arguments["cardHolderData"] = cardHolderData
+        }
+        return arguments
     }
 }
+
+// swiftlint:enable file_length
