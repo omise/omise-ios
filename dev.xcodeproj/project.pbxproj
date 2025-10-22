@@ -12,6 +12,7 @@
 		229E14581D0EBAB5000511DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14541D0EBAB5000511DE /* AppDelegate.swift */; };
 		22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */; };
 		2F142F7C2E2FA6FC00ECA0C3 /* MockFlutterEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F142F7B2E2FA6FC00ECA0C3 /* MockFlutterEngineManager.swift */; };
+		2F181F7F2EA8D094009EB897 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F181F7E2EA8D094009EB897 /* SceneDelegate.swift */; };
 		2F36EF212DFBF16300A39314 /* NumberFormatter+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36EF202DFBF16300A39314 /* NumberFormatter+Helpers.swift */; };
 		2F36EF252DFBF19600A39314 /* OmiseError+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36EF242DFBF19600A39314 /* OmiseError+Helpers.swift */; };
 		2F4D99AE2E867DAC0054D148 /* OmiseFlutterSPM in Frameworks */ = {isa = PBXBuildFile; productRef = 2F4D99AD2E867DAC0054D148 /* OmiseFlutterSPM */; };
@@ -252,6 +253,7 @@
 		22D480AB1D0EB29C00544CE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F142F7B2E2FA6FC00ECA0C3 /* MockFlutterEngineManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFlutterEngineManager.swift; sourceTree = "<group>"; };
+		2F181F7E2EA8D094009EB897 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2F36EF202DFBF16300A39314 /* NumberFormatter+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Helpers.swift"; sourceTree = "<group>"; };
 		2F36EF242DFBF19600A39314 /* OmiseError+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OmiseError+Helpers.swift"; sourceTree = "<group>"; };
 		2F5985F92DB0B6AD00E81646 /* ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
@@ -512,6 +514,7 @@
 				75DAD8922A0BC9540098AF96 /* Config.local.plist */,
 				22D480AB1D0EB29C00544CE1 /* Info.plist */,
 				229E14541D0EBAB5000511DE /* AppDelegate.swift */,
+				2F181F7E2EA8D094009EB897 /* SceneDelegate.swift */,
 				7588011D2BAAB37C00F02934 /* AppDeeplink.swift */,
 				8A723A672164D80200D902F5 /* Views */,
 				8AB3B85F216DCF5C006497B5 /* Models */,
@@ -1500,6 +1503,7 @@
 				229E14581D0EBAB5000511DE /* AppDelegate.swift in Sources */,
 				8A40DA2B216B53E900749F45 /* Tools.swift in Sources */,
 				2F92D9092EA61DDE007A1E42 /* PaymentSettingsStore.swift in Sources */,
+				2F181F7F2EA8D094009EB897 /* SceneDelegate.swift in Sources */,
 				2F92D90A2EA61DDE007A1E42 /* PaymentPreset.swift in Sources */,
 				2F92D90B2EA61DDE007A1E42 /* PaymentMethodCatalog.swift in Sources */,
 				2F92D90C2EA61DDE007A1E42 /* PaymentSettings.swift in Sources */,

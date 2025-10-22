@@ -4,11 +4,10 @@ import OmiseSDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow?
 
-    private lazy var config = LocalConfig.default
-    private lazy var settingsStore = InMemoryPaymentSettingsStore(initial: .default(config: config))
-    private lazy var dependencies = ExampleAppDependencies(settingsStore: settingsStore, config: config)
+    lazy var config = LocalConfig.default
+    lazy var settingsStore = InMemoryPaymentSettingsStore(initial: .default(config: config))
+    lazy var dependencies = ExampleAppDependencies(settingsStore: settingsStore, config: config)
     private var sdkSettingsCancellable: AnyCancellable?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -18,25 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self?.configureSDK(with: settings)
             }
 
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        let viewModel = MainViewModel(
-            settingsStore: dependencies.settingsStore,
-            config: dependencies.config
-        )
-        let rootViewController = MainViewController(
-            viewModel: viewModel,
-            dependencies: dependencies
-        )
-        let navigationController = UINavigationController(rootViewController: rootViewController)
-        navigationController.navigationBar.prefersLargeTitles = false
-
-        window.rootViewController = navigationController
-        window.tintColor = UIColor(named: "App Tint") ?? UIColor.systemBlue
-        window.makeKeyAndVisible()
-
-        self.window = window
-
         return true
+    }
+
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        let configuration = UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+        configuration.delegateClass = SceneDelegate.self
+        return configuration
+    }
+
+    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+        // No resources to clean up when scenes are discarded.
     }
 
     private func configureSDK(with settings: PaymentSettings) {
@@ -50,6 +41,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        handleIncomingURL(url, options: options)
+    }
+
+    @discardableResult
+    func handleIncomingURL(_ url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         // Determine who sent the URL.
         print("App open url '\(url)'")
 
