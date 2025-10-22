@@ -422,6 +422,11 @@ client.observeChargeStatus(observeTokenChargeStatusHandler)
 Some request methods allow the user to authorize the payment with an external app, for example Alipay. When a user needs to authorize the payment with an external app, `OmiseSDK` will automatically open an external app. However, merchant developers must handle the `AuthorizingPaymentDelegate` callback themselves.
 
 
+### Security
+
+Call `setupSecurePayment(isEnabled:)` on your `OmiseSDK` instance to disable screenshots while the SDK UI is onscreen. Pass `true` to enable the protection (default is `false`).
+
+
 ### Passkey authentication
 
 The SDK now supports PASSKEY alongside 3DS so users get the fastest available checkout flow. When you call your existing authorization code, the SDK inspects the authorize URL and picks the correct experience between 3DS vs PASSKEY automatically.
@@ -443,7 +448,7 @@ omiseSDK.presentChoosePaymentMethod(
 )
 ```
 
-If you need to present card form only, you can pass the same parameter to `presentCreditCardPayment` and supply the new `collect3DSData` like mentioned in the above. The SDK handles both PASSKEY and 3DS completion callbacks through `AuthorizingPaymentDelegate` exactly as described above.
+If you need to present card form only, supply the new `collect3DSData` like mentioned above. The SDK handles both PASSKEY and 3DS completion callbacks through `AuthorizingPaymentDelegate` exactly as described above. See the **Security** section if you need to disable screenshots before presenting.
 
 
 ## Objective-C compatibility

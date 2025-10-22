@@ -10,7 +10,7 @@ public class OmiseSDK {
     
     /// OmiseSDK version
     public let version: String = "6.0.0-alpha.1"
-
+    
     /// Public Key associated with this instance of OmiseSDK
     public private(set) var publicKey: String
     
@@ -32,6 +32,7 @@ public class OmiseSDK {
     private var expectedReturnURLStrings: [String] = []
     private var netceteraThreeDSController: NetceteraThreeDSController?
     private var passkeyHandler: PasskeyAuthenticationProtocol
+    private var securePaymentEnabled: Bool = false
     
     internal var flutterEngineManager: FlutterEngineManager
     /// Creates a new instance of Omise SDK that provides interface to functionallity that SDK provides
@@ -301,6 +302,12 @@ public class OmiseSDK {
         return containsURL
     }
     
+    /// Enables or disables secure payment presentation behavior such as preventing screenshots in supported flows.
+    /// - Parameter isEnabled: Pass `true` to enable secure payment mode for subsequent presentation calls.
+    public func setupSecurePayment(isEnabled: Bool) {
+        securePaymentEnabled = isEnabled
+    }
+    
     public func setupApplePay(for merchantId: String, requiredBillingAddress: Bool = false) {
         self.applePayInfo = ApplePayInfo(merchantIdentifier: merchantId,
                                          requestBillingAddress: requiredBillingAddress)
@@ -405,8 +412,14 @@ extension OmiseSDK {
         return arguments
     }
     
-    func buildBasicArgument(with pkey: String, collect3DSData: Required3DSData) -> [String: Any] {
-        var arguments: [String: Any] = ["pkey": pkey]
+    func buildBasicArgument(
+        with pkey: String,
+        collect3DSData: Required3DSData
+    ) -> [String: Any] {
+        var arguments: [String: Any] = [
+            "pkey": pkey,
+            "securePaymentFlag": securePaymentEnabled
+        ]
         if let cardHolderData = collect3DSData.parsedArgument {
             arguments["cardHolderData"] = cardHolderData
         }

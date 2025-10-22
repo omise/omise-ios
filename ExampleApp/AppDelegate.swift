@@ -45,6 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !config.merchantId.isEmpty {
             sdk.setupApplePay(for: config.merchantId, requiredBillingAddress: true)
         }
+        sdk.setupSecurePayment(isEnabled: false) // true to disable screenshots
         OmiseSDK.shared = sdk
     }
 

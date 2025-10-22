@@ -64,9 +64,10 @@ class OmiseSDKTests: XCTestCase {
             merchantId: merchantId,
             requestBillingAddress: requestBillingAddress
         )
-        
+
         // Assert
         XCTAssertEqual(result["pkey"] as? String, publicKey)
+        XCTAssertEqual(result["securePaymentFlag"] as? Bool, false)
         XCTAssertEqual(result["amount"] as? Int64, amount)
         XCTAssertEqual(result["currency"] as? String, currency)
         XCTAssertEqual(result["selectedPaymentMethods"] as? [String], paymentMethods)
@@ -88,9 +89,23 @@ class OmiseSDKTests: XCTestCase {
             requestBillingAddress: false,
             collect3DSData: .all
         )
-        
+
         let payload = result["cardHolderData"] as? [String]
         XCTAssertEqual(payload, ["email", "phoneNumber"])
+        XCTAssertEqual(result["securePaymentFlag"] as? Bool, false)
+    }
+
+    func test_BuildPaymentArgument_IncludesSecureFlagWhenEnabled() {
+        sut.setupSecurePayment(isEnabled: true)
+        let result = sut.buildPaymentArguments(
+            publicKey: "pk_test",
+            amount: 100,
+            currency: "THB",
+            requestBillingAddress: false,
+            collect3DSData: .none
+        )
+
+        XCTAssertEqual(result["securePaymentFlag"] as? Bool, true)
     }
     
     func test_versionIsNotEmpty() {
@@ -145,6 +160,7 @@ class OmiseSDKTests: XCTestCase {
         
         let args = call.arguments
         XCTAssertEqual(args["pkey"] as? String, "pkey_my_key")
+        XCTAssertEqual(args["securePaymentFlag"] as? Bool, false)
         XCTAssertEqual(args["amount"] as? Int64, 5000)
         XCTAssertEqual(args["currency"] as? String, "USD")
         
@@ -157,6 +173,24 @@ class OmiseSDKTests: XCTestCase {
         let tokenMethods = args["selectedTokenizationMethods"] as? [String] ?? []
         XCTAssertEqual(tokenMethods, [SourceType.applePay.rawValue])
         XCTAssertNil(args["cardHolderData"])
+    }
+
+    func testPresentChoosePaymentMethod_forwardsSecureFlag() throws {
+        sut.setupSecurePayment(isEnabled: true)
+        sut.presentChoosePaymentMethod(
+            from: dummyVC,
+            animated: false,
+            amount: 5000,
+            currency: "USD",
+            allowedPaymentMethods: [.atome, .applePay],
+            skipCapabilityValidation: false,
+            isCardPaymentAllowed: true,
+            handleErrors: true,
+            delegate: mockDelegate
+        )
+
+        let call = try XCTUnwrap(mockFlutterEngineManager.presentCalls.first)
+        XCTAssertEqual(call.arguments["securePaymentFlag"] as? Bool, true)
     }
     
     func testPresentChoosePaymentMethod_forwardsCollect3DSData() throws {
@@ -202,7 +236,23 @@ class OmiseSDKTests: XCTestCase {
         let args = call.arguments
         XCTAssertEqual(args["pkey"] as? String, "pkey_my_key")
         XCTAssertEqual(args["cardHolderData"] as? [String], ["email"])
-        XCTAssertEqual(args.count, 2)
+        XCTAssertEqual(args["securePaymentFlag"] as? Bool, false)
+        XCTAssertEqual(args.count, 3)
+    }
+
+    func testPresentCreditCardPayment_forwardsSecureFlag() throws {
+        sut.setupSecurePayment(isEnabled: true)
+        sut.presentCreditCardPayment(
+            from: dummyVC,
+            animated: true,
+            countryCode: "TH",
+            handleErrors: true,
+            collect3DSData: .none,
+            delegate: mockDelegate
+        )
+
+        let call = try XCTUnwrap(mockFlutterEngineManager.presentCalls.first)
+        XCTAssertEqual(call.arguments["securePaymentFlag"] as? Bool, true)
     }
     
     func testUpdatePublicKey() {
