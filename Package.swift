@@ -17,7 +17,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/ios-3ds-sdk/SPM", .exact("2.4.0")),
-        .package(url: "https://github.com/omise/omise-flutter-wrapper-ios", from: "0.3.1")
+        .package(url: "https://github.com/omise/omise-flutter-wrapper-ios", from: "0.4.1")
     ],
     targets: [
         .target(
