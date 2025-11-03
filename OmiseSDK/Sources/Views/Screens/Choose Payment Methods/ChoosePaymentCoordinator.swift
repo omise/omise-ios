@@ -202,7 +202,6 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
         return viewController
     }
     
-    @available(iOS 11.0, *)
     func createApplePayController(info: ApplePayInfo) -> ApplePayViewController {
         let viewModel = ApplePayViewModel(applePayInfo: info,
                                           amount: amount,

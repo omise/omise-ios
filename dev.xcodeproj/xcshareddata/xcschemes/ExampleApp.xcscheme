@@ -39,8 +39,7 @@
       </MacroExpansion>
       <Testables>
          <TestableReference
-            skipped = "YES"
-            parallelizable = "YES">
+            skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "987A02C81CE35D5E0035417A"
@@ -52,6 +51,16 @@
                identifier = "com.apple.dt.IDEFoundation.CurrentLocationScenarioIdentifier"
                referenceType = "1">
             </LocationScenarioReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2FF24C8C2EB8CF6E00B15380"
+               BuildableName = "UITests.xctest"
+               BlueprintName = "UITests"
+               ReferencedContainer = "container:dev.xcodeproj">
+            </BuildableReference>
          </TestableReference>
       </Testables>
    </TestAction>

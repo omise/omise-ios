@@ -39,6 +39,7 @@ final class MainViewController: ViewModelViewController<MainViewModel> {
         view.backgroundColor = .systemBackground
         configureLayout()
         bindViewModel()
+        setupAccessibilityIdentifiers()
         navigationItem.rightBarButtonItem = makeSetupButton()
     }
     
@@ -143,11 +144,23 @@ final class MainViewController: ViewModelViewController<MainViewModel> {
     
     private func presentChoosePayment() {
         let parameters = viewModel.paymentParameters()
+        let isUITesting = SimpleTestHarness.isUITesting
+        let isMockMode = SimpleTestHarness.isMockMode
+
+        // Skip capability validation only when both UI testing and mock mode are enabled
+        let skipCapabilityValidation = isUITesting && isMockMode
+
+        // In UI testing mode with mock enabled, use comprehensive payment methods to showcase all available options
+        // This ensures we have access to all payment methods for testing regardless of capability restrictions
+        let allowedMethods: [SourceType]? = skipCapabilityValidation ?
+            Array(SourceType.allAvailablePaymentMethods) : parameters.allowedMethods
+
         OmiseSDK.shared.presentChoosePaymentMethod(
             from: self,
             amount: parameters.amount,
             currency: parameters.currencyCode,
-            allowedPaymentMethods: parameters.allowedMethods,
+            allowedPaymentMethods: allowedMethods,
+            skipCapabilityValidation: skipCapabilityValidation,
             isCardPaymentAllowed: true,
             handleErrors: true,
             collect3DSData: .all,
@@ -206,6 +219,28 @@ final class MainViewController: ViewModelViewController<MainViewModel> {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+
+    // MARK: - UI Testing Support
+
+    private func setupAccessibilityIdentifiers() {
+        guard SimpleTestHarness.isUITesting else { return }
+
+        // Main view identifier
+        view.accessibilityIdentifier = "mainView"
+
+        // Button identifiers
+        choosePaymentButton.accessibilityIdentifier = "choosePaymentButton"
+        creditCardButton.accessibilityIdentifier = "creditCardPaymentButton"
+        authorizeButton.accessibilityIdentifier = "authorizeButton"
+
+        // Summary view identifiers
+        amountLabel.accessibilityIdentifier = "amountLabel"
+        currencyLabel.accessibilityIdentifier = "currencyLabel"
+        paymentMethodsLabel.accessibilityIdentifier = "paymentMethodsLabel"
+        capabilityLabel.accessibilityIdentifier = "capabilityLabel"
+        publicKeyLabel.accessibilityIdentifier = "publicKeyLabel"
+
     }
 }
 

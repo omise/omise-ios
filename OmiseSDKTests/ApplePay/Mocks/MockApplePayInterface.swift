@@ -3,7 +3,6 @@ import PassKit
 @testable import OmiseSDK
 
 // MARK: - PKPayment
-@available(iOS 11.0, *)
 class MockPKPayment: PKPayment {
     override var token: PKPaymentToken {
         return MockPKPaymentToken()
@@ -33,7 +32,6 @@ class MockPKPayment: PKPayment {
 }
 
 // MARK: - PKPaymentToken
-@available(iOS 11.0, *)
 class MockPKPaymentToken: PKPaymentToken {
     
     // Provide a dummy paymentData
@@ -51,7 +49,6 @@ class MockPKPaymentToken: PKPaymentToken {
 }
 
 // MARK: - PKPaymentMethod
-@available(iOS 11.0, *)
 class MockPKPaymentMethod: PKPaymentMethod {
     override var network: PKPaymentNetwork? {
         return .visa

@@ -3,7 +3,6 @@ import PassKit
 @testable import OmiseSDK
 
 // MARK: - ApplePayViewController Tests
-@available(iOS 11.0, *)
 @MainActor
 class ApplePayViewControllerTests: XCTestCase {
     var mockViewModel: MockApplePayViewModel!
