@@ -1,7 +1,6 @@
 import UIKit
 import PassKit
 
-@available(iOS 11.0, *)
 extension PKPaymentAuthorizationController: PaymentAuthorizationControllerProtocol {
     
     /// Presents the Apple Pay sheet using Apple’s built-in API.
@@ -21,7 +20,6 @@ extension PKPaymentAuthorizationController: PaymentAuthorizationControllerProtoc
 
 /// A handler that manages the Apple Pay payment flow—including presenting the payment sheet and processing the authorization result.
 /// Conforms to `ApplePaymentHandlerType` to allow dependency injection and easy testing.
-@available(iOS 11.0, *)
 class ApplePaymentHandler: NSObject, ApplePaymentHandlerType {
     
     /// The payment authorization controller conforming to `PaymentAuthorizationControllerProtocol`.
@@ -112,7 +110,6 @@ class ApplePaymentHandler: NSObject, ApplePaymentHandlerType {
 
 // MARK: - PKPaymentAuthorizationControllerDelegate
 
-@available(iOS 11.0, *)
 extension ApplePaymentHandler: PKPaymentAuthorizationControllerDelegate {
     
     /// Called when the user authorizes a payment.

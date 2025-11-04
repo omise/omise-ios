@@ -108,6 +108,11 @@ final class AuthorizeViewController: ViewModelViewController<AuthorizeViewModel>
         view.backgroundColor = .systemBackground
         configureLayout()
         bindViewModel()
+
+        // Set accessibility identifier for UI testing
+        if SimpleTestHarness.isUITesting {
+            view.accessibilityIdentifier = "authorizationView"
+        }
     }
     
     private func configureLayout() {

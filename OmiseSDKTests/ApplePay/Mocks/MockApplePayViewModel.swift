@@ -2,7 +2,6 @@ import PassKit
 @testable import OmiseSDK
 
 /// A mock implementation of ApplePayViewModelType to use in unit tests.
-@available(iOS 11.0, *)
 class MockApplePayViewModel: ApplePayViewModelType, ApplePayViewModelInput, ApplePayViewModelOutput {
     
     // MARK: - ApplePayViewModelType

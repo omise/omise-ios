@@ -32,7 +32,6 @@ extension UIStackView {
         return self
     }
 
-    @available(iOS 11.0, *)
     @discardableResult
     func directionalLayoutMargins(_ directionalLayoutMargins: NSDirectionalEdgeInsets) -> Self {
         self.directionalLayoutMargins = directionalLayoutMargins

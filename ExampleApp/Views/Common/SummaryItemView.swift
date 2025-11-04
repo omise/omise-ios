@@ -7,7 +7,25 @@ final class SummaryItemView: UIView {
     
     var value: String {
         get { valueLabel.text ?? "" }
-        set { valueLabel.text = newValue }
+        set {
+            valueLabel.text = newValue
+            updateAccessibility()
+        }
+    }
+
+    override var accessibilityIdentifier: String? {
+        get { valueLabel.accessibilityIdentifier }
+        set {
+            valueLabel.accessibilityIdentifier = newValue
+            updateAccessibility()
+        }
+    }
+
+    private func updateAccessibility() {
+        // for UI testing
+        if let identifier = valueLabel.accessibilityIdentifier, !value.isEmpty {
+            valueLabel.accessibilityLabel = "\(identifier): \(value)"
+        }
     }
     
     init(title: String) {

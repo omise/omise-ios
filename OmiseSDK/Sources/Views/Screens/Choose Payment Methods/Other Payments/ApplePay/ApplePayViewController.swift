@@ -1,7 +1,6 @@
 import UIKit
 import PassKit
 
-@available(iOS 11.0, *)
 class ApplePayViewController: UIViewController {
     
     /// A button configured to initiate Apple Pay payments.
@@ -63,8 +62,6 @@ class ApplePayViewController: UIViewController {
 }
 
 // MARK: - UI Setup
-
-@available(iOS 11.0, *)
 extension ApplePayViewController {
     
     /// Configures the base user interface.
