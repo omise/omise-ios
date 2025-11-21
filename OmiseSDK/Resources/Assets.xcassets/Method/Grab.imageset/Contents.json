@@ -1,17 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Grab.pdf",
-      "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "filename" : "GrabDark.pdf",
+      "filename" : "grabpay.svg",
       "idiom" : "universal"
     }
   ],

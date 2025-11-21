@@ -55,7 +55,7 @@
 "SourceType.mobile_banking_ocbc" = "OCBC Digital";
 "SourceType.mobile_banking_scb" = "SCB EASY";
 "SourceType.paypay" = "PayPay";
-"SourceType.rabbit_linepay" = "Rabbit LINE Pay";
+"SourceType.rabbit_linepay" = "LINE Pay";
 "SourceType.shopeepay" = "ShopeePay";
 "SourceType.shopeepay_jumpapp" = "ShopeePay";
 "SourceType.touch_n_go" = "ทัชแอนด์โก";

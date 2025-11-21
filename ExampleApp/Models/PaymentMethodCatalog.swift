@@ -62,7 +62,7 @@ enum PaymentMethodCatalog {
         Entry(sourceType: .gcash, displayName: "GCash", group: .digitalWallets),
         Entry(sourceType: .kakaoPay, displayName: "Kakao Pay", group: .digitalWallets),
         Entry(sourceType: .touchNGo, displayName: "Touch 'n Go", group: .digitalWallets),
-        Entry(sourceType: .rabbitLinepay, displayName: "Rabbit LINE Pay", group: .digitalWallets),
+        Entry(sourceType: .rabbitLinepay, displayName: "LINE Pay", group: .digitalWallets),
         Entry(sourceType: .grabPay, displayName: "GrabPay", group: .digitalWallets),
         Entry(sourceType: .boost, displayName: "Boost", group: .digitalWallets),
         Entry(sourceType: .shopeePay, displayName: "ShopeePay", group: .digitalWallets),
