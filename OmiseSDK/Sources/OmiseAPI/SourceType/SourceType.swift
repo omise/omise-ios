@@ -91,7 +91,7 @@ public enum SourceType: String, Codable, CaseIterable {
     case payPay = "paypay"
     /// PromptPay   https://docs.omise.co/promptpay
     case promptPay = "promptpay"
-    /// Rabbit LINE Pay https://docs.omise.co/rabbit-linepay
+    /// LINE Pay https://docs.omise.co/rabbit-linepay
     case rabbitLinepay = "rabbit_linepay"
     /// ShopeePay QR    https://docs.omise.co/shopeepay-qr
     case shopeePay = "shopeepay"

@@ -79,7 +79,7 @@ extension SourceType: ViewPresentable {
         case .mobileBankingKTB:
             return "KTB Next"
         case .mobileBankingSCB:
-            return "SCB"
+            return "SCB_Easy"
         case .ocbcDigital:
             return "ocbc-digital"
         case .payNow:
@@ -89,7 +89,7 @@ extension SourceType: ViewPresentable {
         case .promptPay:
             return "PromptPay"
         case .rabbitLinepay:
-            return "RabbitLinePay"
+            return "LinePay"
         case .shopeePay:
             return "Shopeepay"
         case .shopeePayJumpApp:

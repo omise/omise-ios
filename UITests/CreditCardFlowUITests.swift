@@ -84,7 +84,10 @@ final class CreditCardFlowUITests: BaseUITestCase {
         
         let phoneField = app.textFields[AccessibilityIdentifiers.CreditCardForm.phoneTextField]
         if phoneField.exists {
-            phoneField.tap()
+            // Hide the keyboard and ensure the field is visible before typing to avoid focus failures.
+            dismissKeyboardIfNeeded()
+            scrollIntoView(phoneField)
+            tapWhenHittable(phoneField, timeout: 3)
             phoneField.replaceText(with: TestDataHelper.PersonalInfo.validPhoneNumber)
         }
         
@@ -122,6 +125,14 @@ final class CreditCardFlowUITests: BaseUITestCase {
         guard element.exists else { return }
         element.tap()
         app.typeText(text)
+    }
+
+    private func scrollIntoView(_ element: XCUIElement, maxSwipes: Int = 3) {
+        guard !element.isHittable else { return }
+        
+        for _ in 0..<maxSwipes where !element.isHittable {
+            app.swipeUp()
+        }
     }
     
     private func dismissKeyboardIfNeeded() {

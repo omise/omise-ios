@@ -88,7 +88,7 @@ enum TestDataHelper {
             "KakaoPay",
             "PayPay",
             "WeChat Pay",
-            "Rabbit LINE Pay",
+            "LINE Pay",
             "DuitNow OBW"
         ]
         
