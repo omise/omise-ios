@@ -24,7 +24,8 @@ class ChoosePaymentCoordinatorTests: XCTestCase {
             currentCountry: nil,
             applePayInfo: ApplePayInfo(merchantIdentifier: "", requestBillingAddress: true),
             handleErrors: true,
-            collect3DSData: .all
+            collect3DSData: .all,
+            zeroInterestInstallments: false
         )
         
         sut.choosePaymentMethodDelegate = mockChoosePaymentMethodDelegate
@@ -333,7 +334,8 @@ class ChoosePaymentCoordinatorTests: XCTestCase {
             currentCountry: nil,
             applePayInfo: ApplePayInfo(merchantIdentifier: "", requestBillingAddress: true),
             handleErrors: false,
-            collect3DSData: .all
+            collect3DSData: .all,
+            zeroInterestInstallments: false
         )
         sut.choosePaymentMethodDelegate = mockChoosePaymentMethodDelegate
         let error = NSError(domain: "TestError",

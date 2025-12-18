@@ -48,6 +48,10 @@ enum AccessibilityIdentifiers {
         static let paymentErrorIndicator = "paymentErrorIndicator"
         static let errorMessage = "errorMessage"
     }
+
+    enum Settings {
+        static let zeroInterestSwitch = "zeroInterestInstallmentsSwitch"
+    }
     
     static func allIdentifiers() -> [String] {
         return [
@@ -82,7 +86,8 @@ enum AccessibilityIdentifiers {
             Authorization.authorizationResultIndicator,
             Results.paymentSuccessIndicator,
             Results.paymentErrorIndicator,
-            Results.errorMessage
+            Results.errorMessage,
+            Settings.zeroInterestSwitch
         ]
     }
 }

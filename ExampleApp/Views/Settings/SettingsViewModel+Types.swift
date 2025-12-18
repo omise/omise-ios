@@ -38,6 +38,13 @@ extension SettingsViewModel {
             }
         }
     }
+
+    struct ToggleOption {
+        let title: String
+        let detail: String?
+        let isOn: Bool
+        let isEnabled: Bool
+    }
     
     struct CurrencyOption: SelectableOption {
         let currency: PaymentCurrency

@@ -8,6 +8,7 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
     let applePayInfo: ApplePayInfo?
     let handleErrors: Bool
     let collect3DSData: Required3DSData
+    let zeroInterestInstallments: Bool
     
     enum ResultState {
         case cancelled
@@ -31,7 +32,8 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
         currentCountry: Country?,
         applePayInfo: ApplePayInfo?,
         handleErrors: Bool,
-        collect3DSData: Required3DSData
+        collect3DSData: Required3DSData,
+        zeroInterestInstallments: Bool
     ) {
         self.client = client
         self.amount = amount
@@ -40,6 +42,7 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
         self.applePayInfo = applePayInfo
         self.handleErrors = handleErrors
         self.collect3DSData = collect3DSData
+        self.zeroInterestInstallments = zeroInterestInstallments
         super.init()
         
         self.setupErrorView()
@@ -134,7 +137,11 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
     
     /// Creates Installement screen and attach current flow object inside created controller to be deallocated together
     func createInstallmentTermsController(sourceType: SourceType) -> SelectPaymentController {
-        let viewModel = SelectInstallmentTermsViewModel(sourceType: sourceType, delegate: self)
+        let viewModel = SelectInstallmentTermsViewModel(
+            sourceType: sourceType,
+            zeroInterestInstallments: zeroInterestInstallments,
+            delegate: self
+        )
         let listController = SelectPaymentController(viewModel: viewModel)
         return listController
     }

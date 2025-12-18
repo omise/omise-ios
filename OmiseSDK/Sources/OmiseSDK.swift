@@ -81,6 +81,7 @@ public class OmiseSDK {
     ///    - handleErrors: If `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
     ///    - collect3DSData: either none, phone, email or all, default is none. this will render email and/or phone fields in credit card form to support 3DS and PASSKEY auth
     ///    - completion: Completion handler triggered when payment completes with Token, Source, Error or was Cancelled
+    ///    - zeroInterestInstallments: Whether merchant or customer absorbs installment interest for installment payments.
     public func presentChoosePaymentMethod(
         from topViewController: UIViewController,
         animated: Bool = true,
@@ -91,6 +92,7 @@ public class OmiseSDK {
         isCardPaymentAllowed: Bool = true,
         handleErrors: Bool = true,
         collect3DSData: Required3DSData = .none,
+        zeroInterestInstallments: Bool = false,
         delegate: ChoosePaymentMethodDelegate
     ) {
         dismiss(animated: false)
@@ -102,7 +104,8 @@ public class OmiseSDK {
             currentCountry: country,
             applePayInfo: self.applePayInfo,
             handleErrors: handleErrors,
-            collect3DSData: collect3DSData
+            collect3DSData: collect3DSData,
+            zeroInterestInstallments: zeroInterestInstallments
         )
 
         let filter = SelectPaymentMethodViewModel.Filter(
@@ -152,7 +155,8 @@ public class OmiseSDK {
             currentCountry: Country(code: countryCode) ?? self.country,
             applePayInfo: applePayInfo,
             handleErrors: handleErrors,
-            collect3DSData: collect3DSData
+            collect3DSData: collect3DSData,
+            zeroInterestInstallments: false
         )
         let viewController = paymentFlow.createCreditCardPaymentController(delegate: delegate)
 

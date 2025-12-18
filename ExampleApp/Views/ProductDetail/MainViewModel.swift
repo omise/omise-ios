@@ -14,6 +14,7 @@ struct PaymentParameters {
     let amount: Int64
     let currencyCode: String
     let allowedMethods: [SourceType]?
+    let zeroInterestInstallments: Bool
 }
 
 struct PaymentResult {
@@ -59,7 +60,8 @@ final class MainViewModel {
         PaymentParameters(
             amount: settings.amount,
             currencyCode: settings.currency.code,
-            allowedMethods: settings.usesCapabilityData ? nil : Array(settings.allowedPaymentMethods)
+            allowedMethods: settings.usesCapabilityData ? nil : Array(settings.allowedPaymentMethods),
+            zeroInterestInstallments: settings.zeroInterestInstallments
         )
     }
 

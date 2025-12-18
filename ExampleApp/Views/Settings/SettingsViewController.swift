@@ -161,6 +161,8 @@ extension SettingsViewController: UITableViewDataSource {
             return paymentCell(at: indexPath, in: tableView)
         case .capability:
             return capabilityCell(at: indexPath, in: tableView)
+        case .installments:
+            return installmentsCell(at: indexPath, in: tableView)
         case .paymentMethods(let index):
             return paymentMethodCell(at: indexPath, sectionIndex: index, in: tableView)
         case .developer:
@@ -214,6 +216,21 @@ extension SettingsViewController: UITableViewDataSource {
         cell.detailTextLabel?.numberOfLines = 0
         cell.accessoryType = option.isSelected ? .checkmark : .none
         cell.selectionStyle = .default
+        return cell
+    }
+
+    private func installmentsCell(at indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
+        let option = viewModel.installmentToggleOption
+        let cell = tableView.dequeueReusableCell(withIdentifier: "installments") ?? UITableViewCell(style: .default, reuseIdentifier: "installments")
+        cell.selectionStyle = .none
+        cell.textLabel?.text = option.title
+
+        let toggle = UISwitch()
+        toggle.isOn = option.isOn
+        toggle.isEnabled = option.isEnabled
+        toggle.accessibilityIdentifier = "zeroInterestInstallmentsSwitch"
+        toggle.addTarget(self, action: #selector(didToggleZeroInterest(_:)), for: .valueChanged)
+        cell.accessoryView = toggle
         return cell
     }
     
@@ -282,6 +299,8 @@ extension SettingsViewController: UITableViewDelegate {
             if indexPath.row < options.count {
                 viewModel.selectCapabilityMode(options[indexPath.row].mode)
             }
+        case .installments:
+            break
         case .paymentMethods(let sectionIndex):
             let option = viewModel.paymentMethodSections[sectionIndex].options[indexPath.row]
             if option.isEnabled {
@@ -324,6 +343,12 @@ extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         guard sectionDescriptor(for: section) == .capability else { return UITableView.automaticDimension }
         return UITableView.automaticDimension
+    }
+}
+
+extension SettingsViewController {
+    @objc private func didToggleZeroInterest(_ sender: UISwitch) {
+        viewModel.toggleZeroInterestInstallments(sender.isOn)
     }
 }
 

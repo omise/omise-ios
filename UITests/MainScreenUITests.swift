@@ -37,4 +37,18 @@ final class MainScreenUITests: BaseUITestCase {
         let creditCardForm = app.textFields[AccessibilityIdentifiers.CreditCardForm.cardNumberTextField]
         XCTAssertTrue(confirmationView.exists || creditCardForm.exists, "Tapping a method should navigate onward")
     }
+
+    func testZeroInterestToggleCanBeSwitched() throws {
+        // Open Settings
+        let setupButton = app.buttons["Setup"]
+        tapWhenHittable(setupButton, timeout: 5)
+
+        let zeroInterestSwitch = app.switches[AccessibilityIdentifiers.Settings.zeroInterestSwitch]
+        waitFor(element: zeroInterestSwitch, timeout: 5)
+
+        let initialValue = zeroInterestSwitch.value as? String
+        zeroInterestSwitch.tap()
+        let toggledValue = zeroInterestSwitch.value as? String
+        XCTAssertNotEqual(initialValue, toggledValue, "Tapping the switch should change its value")
+    }
 }
