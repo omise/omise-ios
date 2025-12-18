@@ -109,6 +109,6 @@ class SelectInstallmentTermsViewModelTests: XCTestCase {
             XCTFail("Expected installment payment")
             return
         }
-        XCTAssertEqual(payment.zeroInterestInstallments, true)
+        XCTAssertTrue((payment.zeroInterestInstallments ?? false))
     }
 }
