@@ -16,8 +16,11 @@ class SelectInstallmentTermsViewModel {
         }
     }
 
-    init(sourceType: SourceType, delegate: SelectSourcePaymentDelegate) {
+    private let zeroInterestInstallments: Bool
+
+    init(sourceType: SourceType, zeroInterestInstallments: Bool, delegate: SelectSourcePaymentDelegate) {
         self.sourceType = sourceType
+        self.zeroInterestInstallments = zeroInterestInstallments
         self.values = Source.Payment.Installment.availableTerms(for: sourceType)
         self.delegate = delegate
     }
@@ -51,7 +54,7 @@ extension SelectInstallmentTermsViewModel: SelectPaymentPresentableProtocol {
         guard let value = values.at(index) else { return }
         let payment = Source.Payment.Installment(
             installmentTerm: value,
-            zeroInterestInstallments: nil,
+            zeroInterestInstallments: zeroInterestInstallments,
             sourceType: sourceType
         )
         delegate?.didSelectSourcePayment(.installment(payment), completion: completion)

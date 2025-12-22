@@ -19,6 +19,7 @@ final class SettingsViewModel {
         case presets
         case payment
         case capability
+        case installments
         case paymentMethods(index: Int)
         case developer
     }
@@ -50,7 +51,7 @@ final class SettingsViewModel {
         case .presets:
             return [.presets]
         case .custom:
-            var sections: [Section] = [.payment, .capability]
+            var sections: [Section] = [.payment, .capability, .installments]
             sections.append(contentsOf: paymentMethodSections.indices.map { Section.paymentMethods(index: $0) })
             sections.append(.developer)
             return sections
@@ -70,6 +71,8 @@ final class SettingsViewModel {
             return 1 + currencyOptions.count
         case .capability:
             return capabilityOptions.count
+        case .installments:
+            return 1
         case .paymentMethods(let index):
             guard paymentMethodSections.indices.contains(index) else { return 0 }
             return paymentMethodSections[index].options.count
@@ -86,6 +89,8 @@ final class SettingsViewModel {
             return "Payment"
         case .capability:
             return "Payment Methods"
+        case .installments:
+            return "Installments"
         case .paymentMethods(let index):
             guard paymentMethodSections.indices.contains(index) else { return nil }
             return paymentMethodSections[index].title
@@ -100,6 +105,8 @@ final class SettingsViewModel {
             return amountHelpText
         case .presets, .capability, .paymentMethods, .developer:
             return nil
+        case .installments:
+            return "Whether merchant absorbs the interest for installment payments."
         }
     }
 
@@ -149,6 +156,15 @@ final class SettingsViewModel {
                 isSelected: isUsingCapabilityData == (mode == .capabilityAPI)
             )
         }
+    }
+
+    var installmentToggleOption: ToggleOption {
+        ToggleOption(
+            title: "Zero interest installments",
+            detail: nil,
+            isOn: settings.zeroInterestInstallments,
+            isEnabled: true
+        )
     }
     
     var capabilityInfoText: String {
@@ -229,6 +245,12 @@ final class SettingsViewModel {
     func selectCapabilityMode(_ mode: CapabilityMode) {
         settingsStore.update { settings in
             settings.usesCapabilityData = (mode == .capabilityAPI)
+        }
+    }
+
+    func toggleZeroInterestInstallments(_ isOn: Bool) {
+        settingsStore.update { settings in
+            settings.zeroInterestInstallments = isOn
         }
     }
     

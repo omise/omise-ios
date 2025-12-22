@@ -7,6 +7,7 @@ struct PaymentSettings {
     var usesCapabilityData: Bool
     var allowedPaymentMethods: Set<SourceType>
     var publicKey: String
+    var zeroInterestInstallments: Bool
     
     var amountDecimal: Decimal {
         Decimal(currency.convert(fromSubunit: amount))
@@ -47,7 +48,8 @@ struct PaymentSettings {
             currency: preset.paymentCurrency,
             usesCapabilityData: true,
             allowedPaymentMethods: Set(preset.allowedPaymentMethods),
-            publicKey: config.publicKey
+            publicKey: config.publicKey,
+            zeroInterestInstallments: false
         )
     }
 }

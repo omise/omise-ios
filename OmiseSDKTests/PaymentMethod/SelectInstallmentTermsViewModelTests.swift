@@ -41,13 +41,13 @@ class SelectInstallmentTermsViewModelTests: XCTestCase {
     }
     
     func test_viewNavigationTitle_returnsSourceLocalizedTitle() {
-        sut = SelectInstallmentTermsViewModel(sourceType: SourceType.installmentBAY, delegate: mockDelegate)
+        sut = SelectInstallmentTermsViewModel(sourceType: SourceType.installmentBAY, zeroInterestInstallments: false, delegate: mockDelegate)
         XCTAssertEqual(sut.viewNavigationTitle, SourceType.installmentBAY.localizedTitle)
     }
     
     func test_allPaymentTerms_viewContexts_and_delegate_calls() {
         for (source, expectedTerms) in expectedTermsDict {
-            sut = SelectInstallmentTermsViewModel(sourceType: source, delegate: mockDelegate)
+            sut = SelectInstallmentTermsViewModel(sourceType: source, zeroInterestInstallments: false, delegate: mockDelegate)
             
             // Verify the number of view contexts equals the count of available terms.
             XCTAssertEqual(sut.numberOfViewContexts, expectedTerms.count)
@@ -82,7 +82,7 @@ class SelectInstallmentTermsViewModelTests: XCTestCase {
     
     func test_viewContext_returnsNil_forInvalidIndex_forAllInstallmentTypes() {
         for (source, _) in expectedTermsDict {
-            sut = SelectInstallmentTermsViewModel(sourceType: source, delegate: mockDelegate)
+            sut = SelectInstallmentTermsViewModel(sourceType: source, zeroInterestInstallments: false, delegate: mockDelegate)
             let invalidIndex = sut.numberOfViewContexts
             XCTAssertNil(sut.viewContext(at: invalidIndex))
         }
@@ -90,12 +90,25 @@ class SelectInstallmentTermsViewModelTests: XCTestCase {
     
     func test_viewOnDataReloadHandler_isCalledImmediately_forAllInstallmentTypes() {
         for (source, _) in expectedTermsDict {
-            sut = SelectInstallmentTermsViewModel(sourceType: source, delegate: mockDelegate)
+            sut = SelectInstallmentTermsViewModel(sourceType: source, zeroInterestInstallments: false, delegate: mockDelegate)
             var callCount = 0
             sut.viewOnDataReloadHandler {
                 callCount += 1
             }
             XCTAssertEqual(callCount, 1)
         }
+    }
+
+    func test_zeroInterestInstallments_isPropagated() {
+        sut = SelectInstallmentTermsViewModel(sourceType: .installmentBAY, zeroInterestInstallments: true, delegate: mockDelegate)
+        let index = 0
+
+        sut.viewDidSelectCell(at: index) { }
+
+        guard case let .installment(payment)? = mockDelegate.selectedPayment else {
+            XCTFail("Expected installment payment")
+            return
+        }
+        XCTAssertTrue((payment.zeroInterestInstallments ?? false))
     }
 }

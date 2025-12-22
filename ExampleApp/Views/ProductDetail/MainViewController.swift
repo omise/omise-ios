@@ -164,6 +164,7 @@ final class MainViewController: ViewModelViewController<MainViewModel> {
             isCardPaymentAllowed: true,
             handleErrors: true,
             collect3DSData: .all,
+            zeroInterestInstallments: parameters.zeroInterestInstallments,
             delegate: self
         )
     }
