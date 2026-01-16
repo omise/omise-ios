@@ -191,9 +191,7 @@ class InvalidCardAPIErrorParsingTestCase: XCTestCase {
                   "object": "error",
                   "location": "https://www.omise.co/api-errors#invalid-card",
                   "code": "invalid_card",
-                  "message": "expiration month is not between 1 and 12, name can't be blank,
-                expiration year is invalid, expiration date is invalid, number is invalid,
-                and brand not supported (unknown)"
+                  "message": "expiration month is not between 1 and 12, name can't be blank, expiration year is invalid, expiration date is invalid, number is invalid, and brand not supported (unknown)"
                 }
                 """
             // swiftlint:enable line_length
