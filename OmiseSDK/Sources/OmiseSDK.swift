@@ -27,7 +27,7 @@ public class OmiseSDK {
     public private(set) weak var presentedViewController: UIViewController?
 
     private var expectedReturnURLStrings: [String] = []
-    private var netceteraThreeDSController: NetceteraThreeDSController?
+    private var threeDSFlowController: ThreeDSFlowController?
     private var passkeyHandler: PasskeyAuthenticationProtocol
     
     /// Creates a new instance of Omise SDK that provides interface to functionallity that SDK provides
@@ -211,36 +211,32 @@ public class OmiseSDK {
             return
         }
 
-        netceteraThreeDSController = NetceteraThreeDSController()
-        netceteraThreeDSController?.processAuthorizedURL(
-            authorizeURL,
-            threeDSRequestorAppURL: threeDSRequestorAppURLString,
+        // New 3DS flow
+        threeDSFlowController = ThreeDSFlowController()
+        threeDSFlowController?.start(
+            authorizeURL: authorizeURL,
+            threeDSRequestorAppURLString: threeDSRequestorAppURLString,
             uiCustomization: threeDSUICustomization,
-            in: topViewController) { [weak self] result in
-                switch result {
-                case .success:
-                    delegate.authorizingPaymentDidComplete(with: nil)
-                case .failure(let error):
-                    typealias NetceteraFlowError = NetceteraThreeDSController.Errors
-                    switch error {
-                    case NetceteraFlowError.incomplete,
-                        NetceteraFlowError.cancelled,
-                        NetceteraFlowError.timedout,
-                        NetceteraFlowError.authResStatusFailed,
-                        NetceteraFlowError.authResStatusUnknown:
-                        delegate.authorizingPaymentDidCancel()
-                    default:
-                        DispatchQueue.main.async {
-                            self?.presentWebViewAuthorizingPayment(
-                                from: topViewController,
-                                animated: animated,
-                                authorizeURL: authorizeURL,
-                                expectedReturnURLStrings: expectedReturnURLStrings,
-                                delegate: delegate
-                            )
-                        }
-                    }
+            from: topViewController
+        ) { [weak self] result in
+            switch result {
+            case .success:
+                delegate.authorizingPaymentDidComplete(with: nil)
+            case .failure(let error):
+                if case ThreeDSFlowControllerError.cancelled = error {
+                    delegate.authorizingPaymentDidCancel()
+                    return
                 }
+                DispatchQueue.main.async {
+                    self?.presentWebViewAuthorizingPayment(
+                        from: topViewController,
+                        animated: animated,
+                        authorizeURL: authorizeURL,
+                        expectedReturnURLStrings: expectedReturnURLStrings,
+                        delegate: delegate
+                    )
+                }
+            }
         }
     }
 
