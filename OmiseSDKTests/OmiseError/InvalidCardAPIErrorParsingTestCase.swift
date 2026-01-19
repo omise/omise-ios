@@ -185,6 +185,7 @@ class InvalidCardAPIErrorParsingTestCase: XCTestCase {
         }
         
         do {
+            // swiftlint:disable line_length
             let errorJSONString = """
                 {
                   "object": "error",
@@ -193,6 +194,7 @@ class InvalidCardAPIErrorParsingTestCase: XCTestCase {
                   "message": "expiration month is not between 1 and 12, name can't be blank, expiration year is invalid, expiration date is invalid, number is invalid, and brand not supported (unknown)"
                 }
                 """
+            // swiftlint:enable line_length
             
             let decoder = JSONDecoder()
             let parsedError = try decoder.decode(OmiseError.self, from: Data(errorJSONString.utf8))

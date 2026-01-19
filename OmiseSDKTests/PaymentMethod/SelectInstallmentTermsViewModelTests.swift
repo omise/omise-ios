@@ -41,7 +41,11 @@ class SelectInstallmentTermsViewModelTests: XCTestCase {
     }
     
     func test_viewNavigationTitle_returnsSourceLocalizedTitle() {
-        sut = SelectInstallmentTermsViewModel(sourceType: SourceType.installmentBAY, zeroInterestInstallments: false, delegate: mockDelegate)
+        sut = SelectInstallmentTermsViewModel(
+            sourceType: SourceType.installmentBAY,
+            zeroInterestInstallments: false,
+            delegate: mockDelegate
+        )
         XCTAssertEqual(sut.viewNavigationTitle, SourceType.installmentBAY.localizedTitle)
     }
     
