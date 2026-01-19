@@ -3,7 +3,11 @@ import UIKit
 extension UIScrollView {
     @discardableResult
     func adjustContentInsetOnKeyboardAppear() -> Self {
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { [weak self] notification in
+        NotificationCenter.default.addObserver(
+            forName: UIResponder.keyboardWillShowNotification,
+            object: nil,
+            queue: nil
+        ) { [weak self] notification in
             guard
                 let self = self,
                 self.window != nil,
@@ -21,7 +25,11 @@ extension UIScrollView {
             self.verticalScrollIndicatorInsets.bottom = bottomScrollIndicatorInset
         }
 
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { [weak self] _ in
+        NotificationCenter.default.addObserver(
+            forName: UIResponder.keyboardWillHideNotification,
+            object: nil,
+            queue: nil
+        ) { [weak self] _ in
             self?.contentInset.bottom = 0
             self?.verticalScrollIndicatorInsets.bottom = 0.0
         }

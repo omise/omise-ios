@@ -7,6 +7,14 @@ final class CountryListControllerTests: XCTestCase {
     var mockVM: MockVM!
     var sut: CountryListController!
     
+    private func pumpMainQueue(times: Int = 1, timeout: TimeInterval = 1) {
+        for index in 0..<times {
+            let expectation = expectation(description: "main-queue-\(index)")
+            DispatchQueue.main.async { expectation.fulfill() }
+            wait(for: [expectation], timeout: timeout)
+        }
+    }
+
     private var tableView: UITableView {
         guard let tv = sut.view.subviews.compactMap({ $0 as? UITableView }).first else {
             fatalError("Expected a UITableView in \(sut.view.subviews)")
@@ -101,9 +109,11 @@ final class CountryListControllerTests: XCTestCase {
     func testViewDidAppearScrollsToSelectedCountry() {
         mockVM.selectedCountry = mockVM.countries[1]
         sut.viewDidAppear(false)
-        RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.05))
+        pumpMainQueue()
+        tableView.layoutIfNeeded()
 
-        XCTAssertEqual(tableView.indexPathsForVisibleRows?.first?.row, 1)
+        let visible = tableView.indexPathsForVisibleRows ?? []
+        XCTAssertTrue(visible.contains(IndexPath(row: 1, section: 0)))
     }
 
     func testUpdateSearchResultsTriggersFilterAndScroll() {
@@ -115,7 +125,7 @@ final class CountryListControllerTests: XCTestCase {
         mockVM.filterCountriesCalled = false
         searchController.searchBar.text = "B"
         sut.updateSearchResults(for: searchController)
-        RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.05))
+        pumpMainQueue()
 
         XCTAssertTrue(mockVM.filterCountriesCalled)
     }

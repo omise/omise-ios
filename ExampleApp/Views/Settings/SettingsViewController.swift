@@ -69,7 +69,10 @@ final class SettingsViewController: ViewModelViewController<SettingsViewModel> {
             modeControl.leadingAnchor.constraint(greaterThanOrEqualTo: headerContainer.leadingAnchor, constant: 16)
         ])
         headerContainer.layoutIfNeeded()
-        let size = headerContainer.systemLayoutSizeFitting(CGSize(width: view.bounds.width, height: UIView.layoutFittingCompressedSize.height))
+        let size = headerContainer.systemLayoutSizeFitting(CGSize(
+            width: view.bounds.width,
+            height: UIView.layoutFittingCompressedSize.height
+        ))
         headerContainer.frame = CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: max(56, size.height)))
         tableView.tableHeaderView = headerContainer
     }
@@ -95,7 +98,11 @@ final class SettingsViewController: ViewModelViewController<SettingsViewModel> {
     
     private func registerKeyboardNotifications() {
         let center = NotificationCenter.default
-        let willChange = center.addObserver(forName: UIResponder.keyboardWillChangeFrameNotification, object: nil, queue: .main) { [weak self] notification in
+        let willChange = center.addObserver(
+            forName: UIResponder.keyboardWillChangeFrameNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] notification in
             self?.handleKeyboard(notification: notification)
         }
         keyboardObservers.append(willChange)
@@ -199,7 +206,8 @@ extension SettingsViewController: UITableViewDataSource {
             return cell
         } else {
             let option = viewModel.currencyOptions[indexPath.row - 1]
-            let cell = tableView.dequeueReusableCell(withIdentifier: "currency") ?? UITableViewCell(style: .default, reuseIdentifier: "currency")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "currency")
+            ?? UITableViewCell(style: .default, reuseIdentifier: "currency")
             cell.textLabel?.text = option.title
             cell.accessoryType = option.isSelected ? .checkmark : .none
             cell.selectionStyle = .default
@@ -210,7 +218,8 @@ extension SettingsViewController: UITableViewDataSource {
     private func capabilityCell(at indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
         let options = viewModel.capabilityOptions
         let option = options[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "capability") ?? UITableViewCell(style: .subtitle, reuseIdentifier: "capability")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "capability")
+        ?? UITableViewCell(style: .subtitle, reuseIdentifier: "capability")
         cell.textLabel?.text = option.title
         cell.detailTextLabel?.text = option.detail
         cell.detailTextLabel?.numberOfLines = 0
@@ -221,7 +230,8 @@ extension SettingsViewController: UITableViewDataSource {
 
     private func installmentsCell(at indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
         let option = viewModel.installmentToggleOption
-        let cell = tableView.dequeueReusableCell(withIdentifier: "installments") ?? UITableViewCell(style: .default, reuseIdentifier: "installments")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "installments")
+        ?? UITableViewCell(style: .default, reuseIdentifier: "installments")
         cell.selectionStyle = .none
         cell.textLabel?.text = option.title
 
@@ -236,7 +246,8 @@ extension SettingsViewController: UITableViewDataSource {
     
     private func paymentMethodCell(at indexPath: IndexPath, sectionIndex: Int, in tableView: UITableView) -> UITableViewCell {
         let option = viewModel.paymentMethodSections[sectionIndex].options[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "paymentMethod") ?? UITableViewCell(style: .default, reuseIdentifier: "paymentMethod")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "paymentMethod")
+        ?? UITableViewCell(style: .default, reuseIdentifier: "paymentMethod")
         cell.textLabel?.text = option.title
         cell.accessoryType = option.isSelected ? .checkmark : .none
         cell.textLabel?.textColor = option.isEnabled ? .label : .tertiaryLabel
