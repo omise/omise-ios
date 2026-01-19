@@ -5,10 +5,10 @@ import CommonCrypto
 
 final class ActiveChallengeState {
     private let queue = DispatchQueue(label: "com.omise.n3ds.challenge-state")
-    private var transaction: Transaction?
+    private var transaction: TransactionPerforming?
     private var receiver: BridgeChallengeStatusReceiver?
 
-    func trySet(transaction: Transaction, receiver: BridgeChallengeStatusReceiver) -> Bool {
+    func trySet(transaction: TransactionPerforming, receiver: BridgeChallengeStatusReceiver) -> Bool {
         var accepted = false
         queue.sync {
             if self.transaction == nil {
@@ -46,6 +46,7 @@ public protocol NetceteraSDKBridgeProtocol {
 }
 
 final class NetceteraSDKBridge: NetceteraSDKBridgeProtocol {
+    typealias ServiceFactory = () -> ThreeDS2ServiceProviding
     typealias SessionCreator = (NetceteraSDKConfig, ThreeDSUICustomization?) throws -> NetceteraSDKSessionContext
     typealias ChallengePerformer = (
         NetceteraSDKSessionContext,
@@ -63,6 +64,7 @@ final class NetceteraSDKBridge: NetceteraSDKBridgeProtocol {
     
     init(
         configProvider: NetceteraSDKConfigProviding = NetceteraSDKConfigProvider(),
+        serviceFactory: @escaping ServiceFactory = { ThreeDS2ServiceAdapter(service: ThreeDS2ServiceSDK()) },
         sessionCreator: SessionCreator? = nil,
         challengePerformer: ChallengePerformer? = nil,
         deepLinkHandler: DeepLinkHandler? = nil
@@ -71,7 +73,8 @@ final class NetceteraSDKBridge: NetceteraSDKBridgeProtocol {
         self.activeState = activeState
         
         self.sessionCreator = sessionCreator ?? NetceteraSDKBridge.makeDefaultSessionCreator(
-            configProvider: configProvider
+            configProvider: configProvider,
+            serviceFactory: serviceFactory
         )
         self.challengePerformer = challengePerformer
         ?? NetceteraSDKBridge.makeDefaultChallengePerformer(activeState: activeState)
@@ -110,13 +113,15 @@ extension NetceteraSDKBridge {
     }
     
     static func makeDefaultSessionCreator(
-        configProvider: NetceteraSDKConfigProviding
+        configProvider: NetceteraSDKConfigProviding,
+        serviceFactory: @escaping ServiceFactory = { ThreeDS2ServiceAdapter(service: ThreeDS2ServiceSDK()) }
     ) -> SessionCreator {
         { config, uiCustomization in
             let threeDS2Service = try NetceteraSDKBridge.newService(
                 configProvider: configProvider,
                 config: config,
-                uiCustomization: uiCustomization
+                uiCustomization: uiCustomization,
+                serviceFactory: serviceFactory
             )
             let transaction = try threeDS2Service.createTransaction(
                 directoryServerId: config.directoryServerId,
@@ -136,7 +141,7 @@ extension NetceteraSDKBridge {
         }
     }
     
-    private static func makeDefaultChallengePerformer(
+    static func makeDefaultChallengePerformer(
         activeState: ActiveChallengeState
     ) -> ChallengePerformer {
         { context, challenge, returnURL, viewController, completion in
@@ -171,7 +176,7 @@ extension NetceteraSDKBridge {
         }
     }
     
-    private static func mapChallengeResult<E: Error>(_ result: Result<Void, E>) -> ThreeDSFlowResult {
+    static func mapChallengeResult<E: Error>(_ result: Result<Void, E>) -> ThreeDSFlowResult {
         switch result {
         case .success:
             return .completed
@@ -195,9 +200,10 @@ extension NetceteraSDKBridge {
     static func newService(
         configProvider: NetceteraSDKConfigProviding,
         config: NetceteraSDKConfig,
-        uiCustomization: ThreeDSUICustomization?
-    ) throws -> ThreeDS2ServiceSDK {
-        let threeDS2Service = ThreeDS2ServiceSDK()
+        uiCustomization: ThreeDSUICustomization?,
+        serviceFactory: ServiceFactory = { ThreeDS2ServiceAdapter(service: ThreeDS2ServiceSDK()) }
+    ) throws -> ThreeDS2ServiceProviding {
+        let threeDS2Service = serviceFactory()
         let configBuilder = ConfigurationBuilder()
         
         if let scheme = configProvider.makeScheme(for: config) {
@@ -252,7 +258,11 @@ extension NetceteraSDKBridge {
     }
     
     static func updateAppURLString(_ urlString: String?, transactionID: String) -> String? {
-        guard let urlString = urlString, let url = URL(string: urlString) else {
+        guard
+            let urlString = urlString,
+            let url = URL(string: urlString),
+            url.scheme != nil
+        else {
             return nil
         }
         

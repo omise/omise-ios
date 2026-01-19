@@ -392,18 +392,19 @@ final class NetceteraThreeDSSDKServiceTests: XCTestCase {
         _ = try service.beginSession(config: sampleConfig(), uiCustomization: nil)
         XCTAssertTrue(bridge.createSessionCalled)
     }
-
+    
     func test_bridgeCreateSessionThrowsWithInvalidConfig() {
-        let bridge = NetceteraSDKBridge(configProvider: StubNetceteraConfigProvider()) { _, _ in
-            throw DummyError.defaultError
-        }
+        let bridge = NetceteraSDKBridge(
+            configProvider: StubNetceteraConfigProvider(),
+            sessionCreator: { _, _ in throw DummyError.defaultError } // swiftlint:disable:this trailing_closure
+        )
         XCTAssertThrowsError(try bridge.createSession(config: sampleConfig(), uiCustomization: nil)) { _ in }
     }
 }
 
 private func makeContext() -> NetceteraSDKSessionContext {
     NetceteraSDKSessionContext(
-        transaction: unsafeBitCast(NSObject(), to: Transaction.self),
+        transaction: MinimalTransaction(),
         sdkTransactionId: "trans-id",
         sdkAppId: "app-id",
         sdkEphemeralPublicKey: "{}",
@@ -465,4 +466,19 @@ private final class StubNetceteraConfigProvider: NetceteraSDKConfigProviding {
     func makeScheme(for config: NetceteraSDKConfig) -> Scheme? {
         NetceteraSDKBridge.newScheme(config: config)
     }
+}
+
+private final class MinimalTransaction: TransactionPerforming {
+    func doChallenge(challengeParameters: ChallengeParameters, challengeStatusReceiver: ChallengeStatusReceiver, timeOut: Int, inViewController: UIViewController) throws {}
+
+    func getAuthenticationRequestParameters() throws -> AuthParametersProviding {
+        MinimalAuthParameters()
+    }
+}
+
+private struct MinimalAuthParameters: AuthParametersProviding {
+    func getDeviceData() -> String { "device" }
+    func getSDKTransactionId() -> String { "trans" }
+    func getSDKAppID() -> String { "app" }
+    func getSDKEphemeralPublicKey() -> String { "{}" }
 }

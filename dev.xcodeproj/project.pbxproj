@@ -59,6 +59,8 @@
 		2F818B202F1A4D6400C6B0F5 /* NetceteraSDKConfigProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F818B1F2F1A4D6300C6B0F5 /* NetceteraSDKConfigProvider.swift */; };
 		2F818B232F1A556A00C6B0F5 /* NetceteraSDKBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F818B212F1A556A00C6B0F5 /* NetceteraSDKBridgeTests.swift */; };
 		2F818B242F1A556A00C6B0F5 /* NetceteraSDKConfigProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F818B222F1A556A00C6B0F5 /* NetceteraSDKConfigProviderTests.swift */; };
+		2F818B262F1DD3DF00C6B0F5 /* NetceteraSDKErrorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F818B252F1DD3DF00C6B0F5 /* NetceteraSDKErrorsTests.swift */; };
+		2F818B282F1DD99A00C6B0F5 /* NetceteraSDKAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F818B272F1DD99400C6B0F5 /* NetceteraSDKAdapter.swift */; };
 		2F8241C82E5C44CD006B9B3F /* CountryCodePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8241C72E5C44CD006B9B3F /* CountryCodePickerController.swift */; };
 		2F8241CA2E5C45F0006B9B3F /* CountryCodePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8241C92E5C45EA006B9B3F /* CountryCodePickerViewModel.swift */; };
 		2F8241CC2E5C4631006B9B3F /* CountryCodePickerControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8241CB2E5C4621006B9B3F /* CountryCodePickerControllerTest.swift */; };
@@ -459,6 +461,8 @@
 		2F818B1F2F1A4D6300C6B0F5 /* NetceteraSDKConfigProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetceteraSDKConfigProvider.swift; sourceTree = "<group>"; };
 		2F818B212F1A556A00C6B0F5 /* NetceteraSDKBridgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetceteraSDKBridgeTests.swift; sourceTree = "<group>"; };
 		2F818B222F1A556A00C6B0F5 /* NetceteraSDKConfigProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetceteraSDKConfigProviderTests.swift; sourceTree = "<group>"; };
+		2F818B252F1DD3DF00C6B0F5 /* NetceteraSDKErrorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetceteraSDKErrorsTests.swift; sourceTree = "<group>"; };
+		2F818B272F1DD99400C6B0F5 /* NetceteraSDKAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetceteraSDKAdapter.swift; sourceTree = "<group>"; };
 		2F8241C72E5C44CD006B9B3F /* CountryCodePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodePickerController.swift; sourceTree = "<group>"; };
 		2F8241C92E5C45EA006B9B3F /* CountryCodePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodePickerViewModel.swift; sourceTree = "<group>"; };
 		2F8241CB2E5C4621006B9B3F /* CountryCodePickerControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodePickerControllerTest.swift; sourceTree = "<group>"; };
@@ -998,6 +1002,7 @@
 		2F818B1C2F1A4CF600C6B0F5 /* Netcetera */ = {
 			isa = PBXGroup;
 			children = (
+				2F818B272F1DD99400C6B0F5 /* NetceteraSDKAdapter.swift */,
 				2F818B012F19EA1700C6B0F5 /* NetceteraSDKBridge.swift */,
 				2F818B1F2F1A4D6300C6B0F5 /* NetceteraSDKConfigProvider.swift */,
 				2F818B1D2F1A4D0900C6B0F5 /* NetceteraSDKErrors.swift */,
@@ -1314,6 +1319,7 @@
 		758A4E872BE38AE8005E7B5A /* 3DS */ = {
 			isa = PBXGroup;
 			children = (
+				2F818B252F1DD3DF00C6B0F5 /* NetceteraSDKErrorsTests.swift */,
 				2F818B212F1A556A00C6B0F5 /* NetceteraSDKBridgeTests.swift */,
 				2F818B222F1A556A00C6B0F5 /* NetceteraSDKConfigProviderTests.swift */,
 				2F818B142F19EA2500C6B0F5 /* ThreeDSFlowControllerTests.swift */,
@@ -2193,6 +2199,7 @@
 				750126742B8A580500ED5E14 /* SelectDuitNowOBWBankViewModel.swift in Sources */,
 				4B04F7172DA91D06005A7B19 /* BaseFormViewController.swift in Sources */,
 				7501265D2B87CB6500ED5E14 /* PaymentInputsFormController.swift in Sources */,
+				2F818B282F1DD99A00C6B0F5 /* NetceteraSDKAdapter.swift in Sources */,
 				75D13DCD2B8536B10073A831 /* SelectInstallmentTermsViewModel.swift in Sources */,
 				4B54813C2DCCB0E200BD10AE /* OmiseBannerView.swift in Sources */,
 				75D13DB02B83B58B0073A831 /* Source.Payment.Address.swift in Sources */,
@@ -2307,6 +2314,7 @@
 				4B7F2C4C2DA7B70B00A23CEF /* SelectSourceTypePaymentViewModelTests.swift in Sources */,
 				2F818B232F1A556A00C6B0F5 /* NetceteraSDKBridgeTests.swift in Sources */,
 				2F818B242F1A556A00C6B0F5 /* NetceteraSDKConfigProviderTests.swift in Sources */,
+				2F818B262F1DD3DF00C6B0F5 /* NetceteraSDKErrorsTests.swift in Sources */,
 				2F5985F42DB09EDB00E81646 /* EContextPaymentFormVCTests.swift in Sources */,
 				7509D4E02A1AA1450050AB38 /* AtomeFormViewControllerTests.swift in Sources */,
 				2F0267572D8D538F00BA8D3E /* CardExpiryDateTextFieldTests.swift in Sources */,

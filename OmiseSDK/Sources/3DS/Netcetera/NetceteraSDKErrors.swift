@@ -48,7 +48,7 @@ extension NetceteraSDKBridgeError {
 }
 
 public struct NetceteraSDKSessionContext {
-    public let transaction: Transaction
+    public let transaction: TransactionPerforming
     public let sdkTransactionId: String
     public let sdkAppId: String
     public let sdkEphemeralPublicKey: String
