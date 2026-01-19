@@ -66,7 +66,7 @@ class AuthorizingPaymentWebViewController: UIViewController {
         startAuthorizingPaymentProcess()
     }
     
-    @objc func cancelAuthorizingPaymentProcess(_ sender: UIBarButtonItem) {
+    @objc func cancelAuthorizingPaymentProcess(_: UIBarButtonItem) {
         os_log("Authorization process was cancelled, trying to notify the delegate", log: uiLogObject, type: .info)
         if let completion = completion {
             completion(.cancel)
@@ -101,7 +101,7 @@ class AuthorizingPaymentWebViewController: UIViewController {
 
 @available(iOSApplicationExtension, unavailable)
 extension AuthorizingPaymentWebViewController: WKNavigationDelegate {
-    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
+    public func webView(_: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         if let url = navigationAction.request.url, verifyPaymentURL(url) {
             os_log("Redirected to expected %{private}@ URL, trying to notify the delegate",
                    log: uiLogObject,
@@ -135,7 +135,7 @@ extension AuthorizingPaymentWebViewController: WKNavigationDelegate {
 
 @available(iOSApplicationExtension, unavailable)
 extension AuthorizingPaymentWebViewController: WKUIDelegate {
-    public func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
+    public func webView(_: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame _: WKFrameInfo, completionHandler: @escaping () -> Void) {
 
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: okButtonTitle, style: .default) { _ in
@@ -149,7 +149,7 @@ extension AuthorizingPaymentWebViewController: WKUIDelegate {
         self.present(alertController, animated: true)
     }
     
-    public func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
+    public func webView(_: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame _: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
                 
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: confirmButtonTitle, style: .default) { _ in
@@ -166,7 +166,7 @@ extension AuthorizingPaymentWebViewController: WKUIDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    public func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
+    public func webView(_: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame _: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
         let alertController = UIAlertController(title: nil, message: prompt, preferredStyle: .alert)
         alertController.addTextField { (textField) in
             textField.text = defaultText

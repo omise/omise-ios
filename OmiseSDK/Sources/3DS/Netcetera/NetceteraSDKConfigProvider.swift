@@ -2,8 +2,8 @@ import ThreeDS_SDK
 import CommonCrypto
 
 public protocol NetceteraSDKConfigProviding {
-    var logLevel: LogLevel { get }
-    var locale: Locale? { get }
+    var logLevel: LogLevel { get } // NOSONAR: simple accessor required by protocol
+    var locale: Locale? { get } // NOSONAR: simple accessor required by protocol
     func apiKey(for config: NetceteraSDKConfig) throws -> String
     func makeScheme(for config: NetceteraSDKConfig) -> Scheme?
 }

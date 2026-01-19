@@ -145,37 +145,23 @@ extension NetceteraSDKBridge {
         activeState: ActiveChallengeState
     ) -> ChallengePerformer {
         { context, challenge, returnURL, viewController, completion in
-            let receiver = BridgeChallengeStatusReceiver()
+            let receiver = makeReceiver(activeState: activeState, completion: completion)
             guard activeState.trySet(transaction: context.transaction, receiver: receiver) else {
                 completion(.failed("Another challenge is already in progress"))
                 return
             }
 
-            receiver.onComplete = { result in
-                activeState.clear()
-                DispatchQueue.main.async {
-                    completion(mapChallengeResult(result))
-                }
-            }
-
             let parameters = NetceteraSDKBridge.prepareChallengeParameters(challenge, returnURL: returnURL)
-            
-            DispatchQueue.main.async {
-                do {
-                    try context.transaction.doChallenge(
-                        challengeParameters: parameters,
-                        challengeStatusReceiver: receiver,
-                        timeOut: 5,
-                        inViewController: viewController
-                    )
-                } catch {
-                    activeState.clear()
-                    completion(.failed(error.localizedDescription))
-                }
-            }
+            let execution = ChallengeExecution(
+                context: context,
+                parameters: parameters,
+                receiver: receiver,
+                viewController: viewController
+            )
+            runChallenge(execution: execution, activeState: activeState, completion: completion)
         }
     }
-    
+
     static func mapChallengeResult<E: Error>(_ result: Result<Void, E>) -> ThreeDSFlowResult {
         switch result {
         case .success:
@@ -295,5 +281,50 @@ final class BridgeChallengeStatusReceiver: ChallengeStatusReceiver {
     
     func runtimeError(runtimeErrorEvent: RuntimeErrorEvent) {
         onComplete?(.failure(.runtimeError(event: runtimeErrorEvent)))
+    }
+}
+
+// MARK: - Helpers
+
+extension NetceteraSDKBridge {
+    static func makeReceiver(
+        activeState: ActiveChallengeState,
+        completion: @escaping (ThreeDSFlowResult) -> Void
+    ) -> BridgeChallengeStatusReceiver {
+        let receiver = BridgeChallengeStatusReceiver()
+        receiver.onComplete = { result in
+            activeState.clear()
+            DispatchQueue.main.async {
+                completion(mapChallengeResult(result))
+            }
+        }
+        return receiver
+    }
+
+    struct ChallengeExecution {
+        let context: NetceteraSDKSessionContext
+        let parameters: ChallengeParameters
+        let receiver: BridgeChallengeStatusReceiver
+        let viewController: UIViewController
+    }
+
+    static func runChallenge(
+        execution: ChallengeExecution,
+        activeState: ActiveChallengeState,
+        completion: @escaping (ThreeDSFlowResult) -> Void
+    ) {
+        DispatchQueue.main.async {
+            do {
+                try execution.context.transaction.doChallenge(
+                    challengeParameters: execution.parameters,
+                    challengeStatusReceiver: execution.receiver,
+                    timeOut: 5,
+                    inViewController: execution.viewController
+                )
+            } catch {
+                activeState.clear()
+                completion(.failed(error.localizedDescription))
+            }
+        }
     }
 }

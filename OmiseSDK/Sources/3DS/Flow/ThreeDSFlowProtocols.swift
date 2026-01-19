@@ -110,7 +110,7 @@ public protocol ThreeDSFlowCoordinatorProtocol: AnyObject {
 }
 
 public protocol ThreeDSFlowViewModelProtocol: AnyObject {
-    var state: ThreeDSFlowState { get }
+    var state: ThreeDSFlowState { get } // NOSONAR: protocol exposure intentional
     var onStateChange: ((ThreeDSFlowState) -> Void)? { get set }
     
     func start(

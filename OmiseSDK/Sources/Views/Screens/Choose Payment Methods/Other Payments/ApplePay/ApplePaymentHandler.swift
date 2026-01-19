@@ -123,7 +123,7 @@ extension ApplePaymentHandler: PKPaymentAuthorizationControllerDelegate {
     ///   - payment: The authorized payment object.
     ///   - completion: A closure used to return the authorization result.
     func paymentAuthorizationController(
-        _ controller: PKPaymentAuthorizationController,
+        _: PKPaymentAuthorizationController,
         didAuthorizePayment payment: PKPayment,
         handler completion: @escaping (PKPaymentAuthorizationResult) -> Void
     ) {
@@ -140,7 +140,7 @@ extension ApplePaymentHandler: PKPaymentAuthorizationControllerDelegate {
     /// This method dismisses the payment sheet and calls the stored completion handler with nil values if it hasn't been called already.
     ///
     /// - Parameter controller: The payment authorization controller.
-    func paymentAuthorizationControllerDidFinish(_ controller: PKPaymentAuthorizationController) {
+    func paymentAuthorizationControllerDidFinish(_: PKPaymentAuthorizationController) {
         paymentController?.dismissSheet { [weak self] in
             guard let self = self else { return }
             self.completionHandler?(nil, nil)

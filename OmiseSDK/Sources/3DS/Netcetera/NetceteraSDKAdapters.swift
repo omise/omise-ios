@@ -35,9 +35,6 @@ struct AuthParametersAdapter: AuthParametersProviding {
     func getSDKEphemeralPublicKey() -> String { parameters.getSDKEphemeralPublicKey() }
 }
 
-extension AuthenticationRequestParameters: AuthParametersProviding {}
-
-// MARK: - Adapters for production and testing
 final class ThreeDS2ServiceAdapter: ThreeDS2ServiceProviding {
     private let service: ThreeDS2ServiceSDK
     
