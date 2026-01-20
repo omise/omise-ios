@@ -1,6 +1,6 @@
 import Foundation
 
-public struct NetceteraConfig {
+public struct NetceteraSDKConfig {
     public let id: String
     public let deviceInfoEncryptionAlg: String
     public let deviceInfoEncryptionEnc: String
@@ -10,7 +10,7 @@ public struct NetceteraConfig {
     public let messageVersion: String
 }
 
-extension NetceteraConfig: Decodable {
+extension NetceteraSDKConfig: Decodable {
     /// Mapping keys to encode/decode JSON string
     private enum CodingKeys: String, CodingKey {
         case id = "identifier"

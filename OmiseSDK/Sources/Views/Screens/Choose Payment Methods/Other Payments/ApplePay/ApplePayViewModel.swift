@@ -7,9 +7,9 @@ import PassKit
 /// It converts the Apple Pay payment into a token payload and returns the result via its delegate.
 class ApplePayViewModel: NSObject, ApplePayViewModelType {
     /// The input interface of the view model.
-    var input: ApplePayViewModelInput { self }
+    var input: ApplePayViewModelInput { self } // NOSONAR: exposes self as input facade
     /// The output interface of the view model.
-    var output: ApplePayViewModelOutput { self }
+    var output: ApplePayViewModelOutput { self } // NOSONAR: exposes self as output facade
     
     // MARK: - Properties
     

@@ -223,7 +223,7 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
 
 // MARK: - Delegates
 extension ChoosePaymentCoordinator: FPXPaymentFormControllerDelegate {
-    func fpxDidCompleteWith(email: String?, completion: @escaping () -> Void) {
+    func fpxDidCompleteWith(email: String?, completion _: @escaping () -> Void) {
         navigate(to: createFPXBanksController(email: email))
     }
 }
