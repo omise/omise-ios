@@ -1,5 +1,6 @@
 import XCTest
 import UIKit
+import QuartzCore
 @testable import OmiseSDK
 
 // swiftlint:disable:next type_body_length
@@ -24,7 +25,8 @@ class ChoosePaymentCoordinatorTests: XCTestCase {
             currentCountry: nil,
             applePayInfo: ApplePayInfo(merchantIdentifier: "", requestBillingAddress: true),
             handleErrors: true,
-            collect3DSData: .all
+            collect3DSData: .all,
+            zeroInterestInstallments: false
         )
         
         sut.choosePaymentMethodDelegate = mockChoosePaymentMethodDelegate
@@ -145,12 +147,6 @@ class ChoosePaymentCoordinatorTests: XCTestCase {
         let vc = sut.createMobileBankingController()
         XCTAssertNotNil(vc)
         XCTAssertEqual(vc.viewModel.viewNavigationTitle, PaymentMethod.mobileBanking.localizedTitle)
-    }
-    
-    func test_createInternetBankingController() {
-        let vc = sut.createInternetBankingController()
-        XCTAssertNotNil(vc)
-        XCTAssertEqual(vc.viewModel.viewNavigationTitle, PaymentMethod.internetBanking.localizedTitle)
     }
     
     func test_createInstallmentController() {
@@ -339,7 +335,8 @@ class ChoosePaymentCoordinatorTests: XCTestCase {
             currentCountry: nil,
             applePayInfo: ApplePayInfo(merchantIdentifier: "", requestBillingAddress: true),
             handleErrors: false,
-            collect3DSData: .all
+            collect3DSData: .all,
+            zeroInterestInstallments: false
         )
         sut.choosePaymentMethodDelegate = mockChoosePaymentMethodDelegate
         let error = NSError(domain: "TestError",
@@ -369,17 +366,22 @@ class ChoosePaymentCoordinatorTests: XCTestCase {
     }
     
     func test_navigationController_Animated() {
-        let duration = TimeInterval(UINavigationController.hideShowBarDuration)
-
         let error = NSError(domain: "TestError",
                             code: 123,
                             userInfo: [NSLocalizedDescriptionKey: "Test error"])
         sut.processError(error)
 
         let vc = UIViewController()
-        sut.navigationController(mockNavigationController, willShow: vc, animated: true)
+        let expectation = expectation(description: "error view dismissed")
 
-        RunLoop.current.run(until: Date().addingTimeInterval(duration + 0.5))
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            expectation.fulfill()
+        }
+        sut.navigationController(mockNavigationController, willShow: vc, animated: true)
+        CATransaction.commit()
+
+        wait(for: [expectation], timeout: 1.5)
 
         XCTAssertNil(sut.errorView.superview)
         XCTAssertFalse(mockNavigationController.view.subviews.contains(sut.errorView))

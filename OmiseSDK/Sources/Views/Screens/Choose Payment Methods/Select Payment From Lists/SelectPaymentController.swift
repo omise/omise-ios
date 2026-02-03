@@ -13,7 +13,7 @@ class SelectPaymentController: UITableViewController {
         super.init(style: .plain)
     }
     
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -33,7 +33,7 @@ class SelectPaymentController: UITableViewController {
         viewModel.viewDidTapClose()
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection _: Int) -> Int {
         viewModel.numberOfViewContexts
     }
 
@@ -107,6 +107,7 @@ private extension SelectPaymentController {
         tableView.separatorColor = UIColor.omiseSecondary
         tableView.rowHeight = 64
         tableView.backgroundColor = .background
+        tableView.accessibilityIdentifier = "paymentMethodList"
     }
 
     func setupNavigationItems() {

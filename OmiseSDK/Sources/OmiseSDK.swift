@@ -6,7 +6,7 @@ public class OmiseSDK {
     public static var shared = OmiseSDK(publicKey: "pkey_")
 
     /// OmiseSDK version
-    public let version: String = "5.6.0"
+    public let version: String = "5.6.1"
 
     /// Public Key associated with this instance of OmiseSDK
     public let publicKey: String
@@ -27,7 +27,7 @@ public class OmiseSDK {
     public private(set) weak var presentedViewController: UIViewController?
 
     private var expectedReturnURLStrings: [String] = []
-    private var netceteraThreeDSController: NetceteraThreeDSController?
+    private var threeDSFlowController: ThreeDSFlowController?
     private var passkeyHandler: PasskeyAuthenticationProtocol
     
     /// Creates a new instance of Omise SDK that provides interface to functionallity that SDK provides
@@ -81,6 +81,7 @@ public class OmiseSDK {
     ///    - handleErrors: If `true` the controller will show an error alerts in the UI, if `false` the controller will notify delegate
     ///    - collect3DSData: either none, phone, email or all, default is none. this will render email and/or phone fields in credit card form to support 3DS and PASSKEY auth
     ///    - completion: Completion handler triggered when payment completes with Token, Source, Error or was Cancelled
+    ///    - zeroInterestInstallments: Whether merchant or customer absorbs installment interest for installment payments.
     public func presentChoosePaymentMethod(
         from topViewController: UIViewController,
         animated: Bool = true,
@@ -91,6 +92,7 @@ public class OmiseSDK {
         isCardPaymentAllowed: Bool = true,
         handleErrors: Bool = true,
         collect3DSData: Required3DSData = .none,
+        zeroInterestInstallments: Bool = false,
         delegate: ChoosePaymentMethodDelegate
     ) {
         dismiss(animated: false)
@@ -102,7 +104,8 @@ public class OmiseSDK {
             currentCountry: country,
             applePayInfo: self.applePayInfo,
             handleErrors: handleErrors,
-            collect3DSData: collect3DSData
+            collect3DSData: collect3DSData,
+            zeroInterestInstallments: zeroInterestInstallments
         )
 
         let filter = SelectPaymentMethodViewModel.Filter(
@@ -152,7 +155,8 @@ public class OmiseSDK {
             currentCountry: Country(code: countryCode) ?? self.country,
             applePayInfo: applePayInfo,
             handleErrors: handleErrors,
-            collect3DSData: collect3DSData
+            collect3DSData: collect3DSData,
+            zeroInterestInstallments: false
         )
         let viewController = paymentFlow.createCreditCardPaymentController(delegate: delegate)
 
@@ -207,36 +211,32 @@ public class OmiseSDK {
             return
         }
 
-        netceteraThreeDSController = NetceteraThreeDSController()
-        netceteraThreeDSController?.processAuthorizedURL(
-            authorizeURL,
-            threeDSRequestorAppURL: threeDSRequestorAppURLString,
+        // New 3DS flow
+        threeDSFlowController = ThreeDSFlowController()
+        threeDSFlowController?.start(
+            authorizeURL: authorizeURL,
+            threeDSRequestorAppURLString: threeDSRequestorAppURLString,
             uiCustomization: threeDSUICustomization,
-            in: topViewController) { [weak self] result in
-                switch result {
-                case .success:
-                    delegate.authorizingPaymentDidComplete(with: nil)
-                case .failure(let error):
-                    typealias NetceteraFlowError = NetceteraThreeDSController.Errors
-                    switch error {
-                    case NetceteraFlowError.incomplete,
-                        NetceteraFlowError.cancelled,
-                        NetceteraFlowError.timedout,
-                        NetceteraFlowError.authResStatusFailed,
-                        NetceteraFlowError.authResStatusUnknown:
-                        delegate.authorizingPaymentDidCancel()
-                    default:
-                        DispatchQueue.main.async {
-                            self?.presentWebViewAuthorizingPayment(
-                                from: topViewController,
-                                animated: animated,
-                                authorizeURL: authorizeURL,
-                                expectedReturnURLStrings: expectedReturnURLStrings,
-                                delegate: delegate
-                            )
-                        }
-                    }
+            from: topViewController
+        ) { [weak self] result in
+            switch result {
+            case .success:
+                delegate.authorizingPaymentDidComplete(with: nil)
+            case .failure(let error):
+                if case ThreeDSFlowControllerError.cancelled = error {
+                    delegate.authorizingPaymentDidCancel()
+                    return
                 }
+                DispatchQueue.main.async {
+                    self?.presentWebViewAuthorizingPayment(
+                        from: topViewController,
+                        animated: animated,
+                        authorizeURL: authorizeURL,
+                        expectedReturnURLStrings: expectedReturnURLStrings,
+                        delegate: delegate
+                    )
+                }
+            }
         }
     }
 

@@ -3,8 +3,6 @@ import Foundation
 extension SourceType {
     public static let availableByDefaultInThailand: [SourceType] =
     [
-        .internetBankingBAY,
-        .internetBankingBBL,
         .mobileBankingSCB,
         .mobileBankingKBank,
         .mobileBankingBAY,

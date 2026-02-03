@@ -121,6 +121,15 @@ class CountryCodePickerControllerTest: XCTestCase {
     
     var sut: SpyCountryCodePickerController!
     var mockViewModel: MockCountryCodePickerViewModel!
+    private func pumpMainQueue(times: Int = 1, timeout: TimeInterval = 1) {
+        for index in 0..<times {
+            let expectation = expectation(description: "main-queue-\(index)")
+            DispatchQueue.main.async {
+                expectation.fulfill()
+            }
+            wait(for: [expectation], timeout: timeout)
+        }
+    }
     
     override func setUp() {
         super.setUp()
@@ -257,11 +266,12 @@ class CountryCodePickerControllerTest: XCTestCase {
         mockViewModel.mockSelectedCountry = mockViewModel.mockCountries[2]
 
         mockViewModel.onDataUpdated()
-        RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.05))
+        pumpMainQueue(times: 2) // reload + scroll callbacks on main queue
 
         guard let tableView = extractTableView(from: sut) else {
             return XCTFail("Expected embedded table view")
         }
+        tableView.layoutIfNeeded()
         XCTAssertEqual(tableView.numberOfRows(inSection: 0), mockViewModel.mockCountries.count)
         let visibleRows = tableView.indexPathsForVisibleRows ?? []
         XCTAssertTrue(visibleRows.contains(IndexPath(row: 2, section: 0)))

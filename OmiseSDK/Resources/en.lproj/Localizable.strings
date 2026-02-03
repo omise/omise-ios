@@ -2,7 +2,6 @@
 "PaymentMethods.title" = "Payment Methods";
 "PaymentMethod.creditCard" = "Credit Card";
 "PaymentMethod.installments" = "Installments";
-"PaymentMethod.internetBanking" = "Internet Banking";
 "PaymentMethod.mobileBanking" = "Mobile Banking";
 "PaymentMethod.eContext.conbini" = "Konbini";
 "PaymentMethod.eContext.payEasy" = "Pay-easy";
@@ -29,8 +28,6 @@
 "SourceType.installment_wlb_first_choice" = "Krungsri First Choice";
 "SourceType.installment_wlb_ttb" = "TMBThanachart Bank";
 "SourceType.installment_wlb_uob" = "United Overseas Bank";
-"SourceType.internet_banking_bay" = "Bank of Ayudhya";
-"SourceType.internet_banking_bbl" = "Bangkok Bank";
 "SourceType.paynow" = "PayNow";
 "SourceType.points_citi" = "Pay with Citi Rewards Points";
 "SourceType.promptpay" = "PromptPay";
@@ -61,7 +58,7 @@
 "SourceType.mobile_banking_ocbc" = "OCBC Digital";
 "SourceType.mobile_banking_scb" = "SCB EASY";
 "SourceType.paypay" = "PayPay";
-"SourceType.rabbit_linepay" = "Rabbit LINE Pay";
+"SourceType.rabbit_linepay" = "LINE Pay";
 "SourceType.shopeepay" = "ShopeePay";
 "SourceType.shopeepay_jumpapp" = "ShopeePay";
 "SourceType.touch_n_go" = "Touch ’n Go";

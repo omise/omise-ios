@@ -2,7 +2,6 @@ import PassKit
 @testable import OmiseSDK
 
 /// A mock implementation of ApplePayViewModelType to use in unit tests.
-@available(iOS 11.0, *)
 class MockApplePayViewModel: ApplePayViewModelType, ApplePayViewModelInput, ApplePayViewModelOutput {
     
     // MARK: - ApplePayViewModelType
@@ -14,6 +13,12 @@ class MockApplePayViewModel: ApplePayViewModelType, ApplePayViewModelInput, Appl
     
     /// Records if startPayment was called.
     var startPaymentCalled = false
+    /// Scheduler used to invoke the completion; overridable in tests to avoid fixed delays.
+    var completionScheduler: (@escaping () -> Void) -> Void = { completion in
+        DispatchQueue.main.async {
+            completion()
+        }
+    }
     
     init() {
         canMakeApplePayPayment = true
@@ -26,9 +31,6 @@ class MockApplePayViewModel: ApplePayViewModelType, ApplePayViewModelInput, Appl
     /// Simulated asynchronous payment start.
     func startPayment(completion: @escaping () -> Void) {
         startPaymentCalled = true
-        // Simulate asynchronous completion after 0.1 seconds.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            completion()
-        }
+        completionScheduler(completion)
     }
 }

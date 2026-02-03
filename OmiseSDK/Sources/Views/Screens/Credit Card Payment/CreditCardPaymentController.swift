@@ -51,7 +51,7 @@ class CreditCardPaymentController: BaseFormViewController {
     
     private lazy var nameTextField: CardNameTextField = {
         let tf = CardNameTextField()
-        tf.validator = try? NSRegularExpression(pattern: "\\A[\\w\\s]{1,10}\\s?\\z", options: [])
+        tf.validator = try? NSRegularExpression(pattern: "\\A[\\w\\s]{1,50}\\s?\\z", options: [])
         tf.setAccessibilityID("CreditCardForm.nameTextField")
         configure(tf)
         return tf

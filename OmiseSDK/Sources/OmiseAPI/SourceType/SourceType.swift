@@ -68,10 +68,6 @@ public enum SourceType: String, Codable, CaseIterable {
     case installmentWhiteLabelUOB = "installment_wlb_uob"
     /// TMBThanachart Bank https://docs.omise.co/installment-white-label-payments
     case installmentWhiteLabelTTB = "installment_wlb_ttb"
-    /// Bank of Ayudhya (Krungsri)   https://docs.omise.co/internet-banking
-    case internetBankingBAY = "internet_banking_bay"
-    /// Bangkok Bank   https://docs.omise.co/internet-banking
-    case internetBankingBBL = "internet_banking_bbl"
     /// KakaoPay    https://docs.omise.co/kakaopay
     case kakaoPay = "kakaopay"
     /// Maybank QR  https://docs.omise.co/maybank-qr
@@ -95,7 +91,7 @@ public enum SourceType: String, Codable, CaseIterable {
     case payPay = "paypay"
     /// PromptPay   https://docs.omise.co/promptpay
     case promptPay = "promptpay"
-    /// Rabbit LINE Pay https://docs.omise.co/rabbit-linepay
+    /// LINE Pay https://docs.omise.co/rabbit-linepay
     case rabbitLinepay = "rabbit_linepay"
     /// ShopeePay QR    https://docs.omise.co/shopeepay-qr
     case shopeePay = "shopeepay"

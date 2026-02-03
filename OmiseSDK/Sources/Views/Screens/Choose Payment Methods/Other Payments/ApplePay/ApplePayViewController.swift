@@ -1,7 +1,6 @@
 import UIKit
 import PassKit
 
-@available(iOS 11.0, *)
 class ApplePayViewController: UIViewController {
     
     /// A button configured to initiate Apple Pay payments.
@@ -32,7 +31,7 @@ class ApplePayViewController: UIViewController {
     }
     
     /// This initializer is not implemented.
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -63,8 +62,6 @@ class ApplePayViewController: UIViewController {
 }
 
 // MARK: - UI Setup
-
-@available(iOS 11.0, *)
 extension ApplePayViewController {
     
     /// Configures the base user interface.

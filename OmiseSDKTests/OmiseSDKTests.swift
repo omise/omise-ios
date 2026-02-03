@@ -71,6 +71,7 @@ class OmiseSDKTests: XCTestCase {
         sut.presentChoosePaymentMethod(from: mockVC,
                                        amount: 1000,
                                        currency: "THB",
+                                       zeroInterestInstallments: true,
                                        delegate: mockDelegate)
         
         let navController = sut.presentedViewController as? UINavigationController
@@ -81,6 +82,7 @@ class OmiseSDKTests: XCTestCase {
         XCTAssertEqual(coordinator?.applePayInfo?.requestBillingAddress, true)
         XCTAssertEqual(coordinator?.currency, "THB")
         XCTAssertEqual(coordinator?.handleErrors, true)
+        XCTAssertEqual(coordinator?.zeroInterestInstallments, true)
     }
     
     func test_presentCreditCardPayment() {

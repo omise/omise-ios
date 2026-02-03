@@ -1,7 +1,6 @@
 import UIKit
 import PassKit
 
-@available(iOS 11.0, *)
 extension PKPaymentAuthorizationController: PaymentAuthorizationControllerProtocol {
     
     /// Presents the Apple Pay sheet using Apple’s built-in API.
@@ -21,7 +20,6 @@ extension PKPaymentAuthorizationController: PaymentAuthorizationControllerProtoc
 
 /// A handler that manages the Apple Pay payment flow—including presenting the payment sheet and processing the authorization result.
 /// Conforms to `ApplePaymentHandlerType` to allow dependency injection and easy testing.
-@available(iOS 11.0, *)
 class ApplePaymentHandler: NSObject, ApplePaymentHandlerType {
     
     /// The payment authorization controller conforming to `PaymentAuthorizationControllerProtocol`.
@@ -112,7 +110,6 @@ class ApplePaymentHandler: NSObject, ApplePaymentHandlerType {
 
 // MARK: - PKPaymentAuthorizationControllerDelegate
 
-@available(iOS 11.0, *)
 extension ApplePaymentHandler: PKPaymentAuthorizationControllerDelegate {
     
     /// Called when the user authorizes a payment.
@@ -126,7 +123,7 @@ extension ApplePaymentHandler: PKPaymentAuthorizationControllerDelegate {
     ///   - payment: The authorized payment object.
     ///   - completion: A closure used to return the authorization result.
     func paymentAuthorizationController(
-        _ controller: PKPaymentAuthorizationController,
+        _: PKPaymentAuthorizationController,
         didAuthorizePayment payment: PKPayment,
         handler completion: @escaping (PKPaymentAuthorizationResult) -> Void
     ) {
@@ -143,7 +140,7 @@ extension ApplePaymentHandler: PKPaymentAuthorizationControllerDelegate {
     /// This method dismisses the payment sheet and calls the stored completion handler with nil values if it hasn't been called already.
     ///
     /// - Parameter controller: The payment authorization controller.
-    func paymentAuthorizationControllerDidFinish(_ controller: PKPaymentAuthorizationController) {
+    func paymentAuthorizationControllerDidFinish(_: PKPaymentAuthorizationController) {
         paymentController?.dismissSheet { [weak self] in
             guard let self = self else { return }
             self.completionHandler?(nil, nil)

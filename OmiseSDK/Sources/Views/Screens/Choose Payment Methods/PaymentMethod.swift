@@ -4,7 +4,6 @@ import UIKit
 enum PaymentMethod: CaseIterable, Equatable, Hashable {
     case creditCard
     case installment
-    case internetBanking
     case mobileBanking
     case eContextConbini
     case eContextNetBanking
@@ -30,7 +29,6 @@ enum PaymentMethod: CaseIterable, Equatable, Hashable {
         .sourceType(.trueMoneyWallet),
         .sourceType(.trueMoneyJumpApp),
         .mobileBanking,
-        .internetBanking,
         .sourceType(.alipay),
         .installment,
         .sourceType(.ocbcDigital),
@@ -45,7 +43,6 @@ enum PaymentMethod: CaseIterable, Equatable, Hashable {
         switch self {
         case .creditCard,
                 .installment,
-                .internetBanking,
                 .mobileBanking,
                 .eContextConbini,
                 .eContextPayEasy,
@@ -79,8 +76,6 @@ extension PaymentMethod {
         switch sourceType {
         case _ where sourceType.isInstallment:
             return [.installment]
-        case _ where sourceType.isInternetBanking:
-            return [.internetBanking]
         case _ where sourceType.isMobileBanking:
             return [.mobileBanking]
         case .eContext:

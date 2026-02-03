@@ -2,7 +2,6 @@ import Foundation
 import PassKit
 @testable import OmiseSDK
 
-@available(iOS 11.0, *)
 class MockApplePaymentHandler: ApplePaymentHandlerType {
     // Simulated values
     var mockPayment: PKPayment?

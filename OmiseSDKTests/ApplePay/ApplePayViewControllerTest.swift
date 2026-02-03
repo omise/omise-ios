@@ -3,11 +3,17 @@ import PassKit
 @testable import OmiseSDK
 
 // MARK: - ApplePayViewController Tests
-@available(iOS 11.0, *)
 @MainActor
 class ApplePayViewControllerTests: XCTestCase {
     var mockViewModel: MockApplePayViewModel!
     var viewController: ApplePayViewController!
+    private func pumpMainQueue(times: Int = 1, timeout: TimeInterval = 1) {
+        for index in 0..<times {
+            let expectation = expectation(description: "main-queue-\(index)")
+            DispatchQueue.main.async { expectation.fulfill() }
+            wait(for: [expectation], timeout: timeout)
+        }
+    }
     
     override func setUp() {
         super.setUp()
@@ -59,13 +65,9 @@ class ApplePayViewControllerTests: XCTestCase {
         // Immediately after tapping, the button should be disabled.
         XCTAssertFalse(viewController.applePayButton.isEnabled, "Button should be disabled immediately after tap")
         
-        // Wait for the asynchronous completion to re-enable the button.
-        let expectation = self.expectation(description: "Button re-enabled after payment completion")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            XCTAssertTrue(self.viewController.applePayButton.isEnabled, "Button should be re-enabled after payment completion")
-            expectation.fulfill()
-        }
-        
-        waitForExpectations(timeout: 1.0, handler: nil)
+        // Drain the main queue to allow the completion path to re-enable the button.
+        pumpMainQueue(times: 2)
+        XCTAssertTrue(viewController.applePayButton.isEnabled, "Button should be re-enabled after payment completion")
+        XCTAssertTrue(mockViewModel.startPaymentCalled, "startPayment should be invoked")
     }
 }

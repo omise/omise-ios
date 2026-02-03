@@ -3,8 +3,6 @@ import XCTest
 
 class PaymentChooserViewControllerTests: XCTestCase {
     let allSourceTypes: [SourceType] = [
-        .internetBankingBAY,
-        .internetBankingBBL,
         .mobileBankingSCB,
         .ocbcDigital,
         .mobileBankingBAY,
@@ -127,7 +125,6 @@ class PaymentChooserViewControllerTests: XCTestCase {
             .grabPay,
             .grabPayRms,
             .installment,
-            .internetBanking,
             .kakaoPay,
             .maybankQRPay,
             .mobileBanking,
@@ -158,7 +155,6 @@ class PaymentChooserViewControllerTests: XCTestCase {
             .promptpay,
             .truemoneyJumpApp, // TrueMoney
             .mobileBanking,
-            .internetBanking,
             .alipay,
             .installment,
             .ocbcDigital,

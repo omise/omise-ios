@@ -8,6 +8,7 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
     let applePayInfo: ApplePayInfo?
     let handleErrors: Bool
     let collect3DSData: Required3DSData
+    let zeroInterestInstallments: Bool
     
     enum ResultState {
         case cancelled
@@ -31,7 +32,8 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
         currentCountry: Country?,
         applePayInfo: ApplePayInfo?,
         handleErrors: Bool,
-        collect3DSData: Required3DSData
+        collect3DSData: Required3DSData,
+        zeroInterestInstallments: Bool
     ) {
         self.client = client
         self.amount = amount
@@ -40,6 +42,7 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
         self.applePayInfo = applePayInfo
         self.handleErrors = handleErrors
         self.collect3DSData = collect3DSData
+        self.zeroInterestInstallments = zeroInterestInstallments
         super.init()
         
         self.setupErrorView()
@@ -102,19 +105,6 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
         return listController
     }
     
-    /// Creates Mobile Banking screen and attach current flow object inside created controller to be deallocated together
-    func createInternetBankingController() -> SelectPaymentController {
-        let sourceTypes = client.latestLoadedCapability?.availableSourceTypes(SourceType.internetBanking)
-        let viewModel = SelectSourceTypePaymentViewModel(
-            title: PaymentMethod.internetBanking.localizedTitle,
-            sourceTypes: sourceTypes ?? [],
-            delegate: self
-        )
-        
-        let listController = SelectPaymentController(viewModel: viewModel)
-        return listController
-    }
-    
     /// Creates Installement screen and attach current flow object inside created controller to be deallocated together
     func createInstallmentController() -> SelectPaymentController {
         var sourceTypes = client.latestLoadedCapability?.availableSourceTypes(SourceType.installments) ?? []
@@ -147,7 +137,11 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
     
     /// Creates Installement screen and attach current flow object inside created controller to be deallocated together
     func createInstallmentTermsController(sourceType: SourceType) -> SelectPaymentController {
-        let viewModel = SelectInstallmentTermsViewModel(sourceType: sourceType, delegate: self)
+        let viewModel = SelectInstallmentTermsViewModel(
+            sourceType: sourceType,
+            zeroInterestInstallments: zeroInterestInstallments,
+            delegate: self
+        )
         let listController = SelectPaymentController(viewModel: viewModel)
         return listController
     }
@@ -215,7 +209,6 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
         return viewController
     }
     
-    @available(iOS 11.0, *)
     func createApplePayController(info: ApplePayInfo) -> ApplePayViewController {
         let viewModel = ApplePayViewModel(applePayInfo: info,
                                           amount: amount,
@@ -230,7 +223,7 @@ class ChoosePaymentCoordinator: NSObject, ViewAttachable {
 
 // MARK: - Delegates
 extension ChoosePaymentCoordinator: FPXPaymentFormControllerDelegate {
-    func fpxDidCompleteWith(email: String?, completion: @escaping () -> Void) {
+    func fpxDidCompleteWith(email: String?, completion _: @escaping () -> Void) {
         navigate(to: createFPXBanksController(email: email))
     }
 }
@@ -260,8 +253,6 @@ extension ChoosePaymentCoordinator: SelectPaymentMethodDelegate {
             switch paymentMethod {
             case .mobileBanking:
                 navigate(to: createMobileBankingController())
-            case .internetBanking:
-                navigate(to: createInternetBankingController())
             case .installment:
                 navigate(to: createInstallmentController())
             case .creditCard:
