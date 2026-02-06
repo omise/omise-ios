@@ -16,13 +16,13 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/ios-3ds-sdk/SPM", .exact("2.4.0"))
+        .package(url: "https://github.com/netceteragroup/ios-3ds-sdk-spm", .exact("2.4.0"))
     ],
     targets: [
         .target(
             name: "OmiseSDK",
             dependencies: [
-                .product(name: "ThreeDS_SDK", package: "SPM")
+                .product(name: "ThreeDS_SDK", package: "ios-3ds-sdk-spm")
             ],
             path: "OmiseSDK",
             exclude: ["Info.plist"],
