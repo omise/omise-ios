@@ -1952,7 +1952,7 @@
 			);
 			mainGroup = 2259310E1CE3210700841B86;
 			packageReferences = (
-				758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */,
+				758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "ios-3ds-sdk-spm" */,
 			);
 			productRefGroup = 225931191CE3210700841B86 /* Products */;
 			projectDirPath = "";
@@ -2966,9 +2966,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */ = {
+		758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "ios-3ds-sdk-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ios-3ds-sdk/SPM.git";
+			repositoryURL = "https://github.com/netceteragroup/ios-3ds-sdk-spm";
 			requirement = {
 				kind = exactVersion;
 				version = 2.4.0;
@@ -2979,7 +2979,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		2F9F58D72D6E28D600240952 /* ThreeDS_SDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */;
+			package = 758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "ios-3ds-sdk-spm" */;
 			productName = ThreeDS_SDK;
 		};
 		7509D4ED2A1D1F9F0050AB38 /* OmiseTestSDK */ = {
@@ -2992,12 +2992,12 @@
 		};
 		758A4E832BE38AC3005E7B5A /* ThreeDS_SDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */;
+			package = 758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "ios-3ds-sdk-spm" */;
 			productName = ThreeDS_SDK;
 		};
 		758A4E852BE38AD0005E7B5A /* ThreeDS_SDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */;
+			package = 758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "ios-3ds-sdk-spm" */;
 			productName = ThreeDS_SDK;
 		};
 		75D13E0E2B8678530073A831 /* OmiseSwiftUIKit */ = {
