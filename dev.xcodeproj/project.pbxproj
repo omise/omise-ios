@@ -44,6 +44,7 @@
 		2F5D98F92D6EBAA000B5ECB4 /* MockNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D98F82D6EBA9600B5ECB4 /* MockNavigationController.swift */; };
 		2F5D98FB2D6EC26400B5ECB4 /* MockChoosePaymentMethodDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D98FA2D6EC26100B5ECB4 /* MockChoosePaymentMethodDelegate.swift */; };
 		2F5D99022D6ECA4300B5ECB4 /* SelectPaymentMethodViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D99012D6ECA4100B5ECB4 /* SelectPaymentMethodViewModelTest.swift */; };
+		2F6FF8F52FACB8530023AC0B /* ThreeDS_SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2F6FF8F42FACB8530023AC0B /* ThreeDS_SDK */; };
 		2F818B0C2F19EA1700C6B0F5 /* ThreeDSSDKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F818B092F19EA1700C6B0F5 /* ThreeDSSDKService.swift */; };
 		2F818B0D2F19EA1700C6B0F5 /* NetceteraSDKBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F818B012F19EA1700C6B0F5 /* NetceteraSDKBridge.swift */; };
 		2FADADAE2F1F000100C6B0F5 /* NetceteraSDKAdapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FADADAD2F1F000100C6B0F5 /* NetceteraSDKAdapters.swift */; };
@@ -734,6 +735,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75D13E0F2B8678530073A831 /* OmiseSwiftUIKit in Frameworks */,
+				2F6FF8F52FACB8530023AC0B /* ThreeDS_SDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1830,6 +1832,7 @@
 			name = ExampleApp;
 			packageProductDependencies = (
 				75D13E0E2B8678530073A831 /* OmiseSwiftUIKit */,
+				2F6FF8F42FACB8530023AC0B /* ThreeDS_SDK */,
 			);
 			productName = ExampleApp;
 			productReference = 22D4809D1D0EB29C00544CE1 /* ExampleApp.app */;
@@ -2972,6 +2975,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		2F2175062FAB43BA00DCD390 /* ThreeDS_SDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F2175052FAB43BA00DCD390 /* XCRemoteSwiftPackageReference "omise-ios-3ds" */;
+			productName = ThreeDS_SDK;
+		};
+		2F6FF8F42FACB8530023AC0B /* ThreeDS_SDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2F2175052FAB43BA00DCD390 /* XCRemoteSwiftPackageReference "omise-ios-3ds" */;
 			productName = ThreeDS_SDK;
