@@ -11,6 +11,7 @@
 		22445FFC1CF41DD300801D0F /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22445FFB1CF41DD300801D0F /* Globals.swift */; };
 		229E14581D0EBAB5000511DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E14541D0EBAB5000511DE /* AppDelegate.swift */; };
 		22E0DBD71D0EBE2E00472C74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E0DBD61D0EBE2E00472C74 /* Assets.xcassets */; };
+		2F071A032FB1D5BB00090DC2 /* OmiseSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225931181CE3210700841B86 /* OmiseSDK.framework */; };
 		2F142F7C2E2FA6FC00ECA0C3 /* MockFlutterEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F142F7B2E2FA6FC00ECA0C3 /* MockFlutterEngineManager.swift */; };
 		2F181F7F2EA8D094009EB897 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F181F7E2EA8D094009EB897 /* SceneDelegate.swift */; };
 		2F36EF212DFBF16300A39314 /* NumberFormatter+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36EF202DFBF16300A39314 /* NumberFormatter+Helpers.swift */; };
@@ -440,6 +441,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F071A032FB1D5BB00090DC2 /* OmiseSDK.framework in Frameworks */,
 				2F8C3D102EA761820037194A /* OmiseFlutterSPM in Frameworks */,
 				2F9F58D82D6E28D600240952 /* ThreeDS_SDK in Frameworks */,
 			);
@@ -1289,7 +1291,7 @@
 			);
 			mainGroup = 2259310E1CE3210700841B86;
 			packageReferences = (
-				758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */,
+				758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "omise-ios-3ds" */,
 				2F4D99B12E868F5F0054D148 /* XCRemoteSwiftPackageReference "omise-flutter-wrapper-ios" */,
 			);
 			productRefGroup = 225931191CE3210700841B86 /* Products */;
@@ -2076,9 +2078,9 @@
 				version = 0.4.1;
 			};
 		};
-		758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */ = {
+		758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "omise-ios-3ds" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ios-3ds-sdk/SPM.git";
+			repositoryURL = "https://github.com/omise/omise-ios-3ds.git";
 			requirement = {
 				kind = exactVersion;
 				version = 2.4.0;
@@ -2098,7 +2100,7 @@
 		};
 		2F9F58D72D6E28D600240952 /* ThreeDS_SDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */;
+			package = 758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "omise-ios-3ds" */;
 			productName = ThreeDS_SDK;
 		};
 		7509D4ED2A1D1F9F0050AB38 /* OmiseTestSDK */ = {
@@ -2111,12 +2113,12 @@
 		};
 		758A4E832BE38AC3005E7B5A /* ThreeDS_SDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */;
+			package = 758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "omise-ios-3ds" */;
 			productName = ThreeDS_SDK;
 		};
 		758A4E852BE38AD0005E7B5A /* ThreeDS_SDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "SPM" */;
+			package = 758A4E822BE38AC3005E7B5A /* XCRemoteSwiftPackageReference "omise-ios-3ds" */;
 			productName = ThreeDS_SDK;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -12,10 +12,10 @@
       },
       {
         "package": "ThreeDS_SDK",
-        "repositoryURL": "https://github.com/ios-3ds-sdk/SPM",
+        "repositoryURL": "https://github.com/omise/omise-ios-3ds.git",
         "state": {
           "branch": null,
-          "revision": "a4e55d7f10294ea81abd1db393ae05606a5efa46",
+          "revision": "ae77e32b5dd1cc92661b90d5e34c21891fd05b24",
           "version": "2.4.0"
         }
       }
