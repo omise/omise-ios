@@ -16,14 +16,14 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/ios-3ds-sdk/SPM", .exact("2.4.0")),
+        .package(url: "https://github.com/omise/omise-ios-3ds.git", .exact("2.4.0")),
         .package(url: "https://github.com/omise/omise-flutter-wrapper-ios", from: "0.4.1")
     ],
     targets: [
         .target(
             name: "OmiseSDK",
             dependencies: [
-                .product(name: "ThreeDS_SDK", package: "SPM"),
+                .product(name: "ThreeDS_SDK", package: "omise-ios-3ds"),
                 .product(name: "OmiseFlutterSPM", package: "omise-flutter-wrapper-ios")
             ],
             path: "OmiseSDK",
